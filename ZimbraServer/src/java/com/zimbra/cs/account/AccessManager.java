@@ -377,7 +377,8 @@ public abstract class AccessManager {
     
     // for access manager internal use and unittest only, do not call this API, use the canDo API instead.
     public boolean canPerform(AuthToken credentials, Entry target, 
-            Right rightNeeded, boolean canDelegate, 
+            Right rightNeeded, 
+            boolean canDelegate, 
             Map<String, Object> attrs, boolean asAdmin, ViaGrant viaGrant) 
     throws ServiceException {
         throw ServiceException.FAILURE("not supported", null);

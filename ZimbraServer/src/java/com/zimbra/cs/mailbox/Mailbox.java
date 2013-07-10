@@ -1473,7 +1473,7 @@ public class Mailbox {
         beginTransaction(caller, System.currentTimeMillis(), octxt, null, null);
     }
 
-    protected void beginTransaction(String caller, OperationContext octxt, RedoableOp recorder) throws ServiceException {
+    public void beginTransaction(String caller, OperationContext octxt, RedoableOp recorder) throws ServiceException {
         long timestamp = octxt == null ? System.currentTimeMillis() : octxt.getTimestamp();
         beginTransaction(caller, timestamp, octxt, recorder, null);
     }
@@ -2705,10 +2705,12 @@ public class Mailbox {
                         if (items[i] == null)
                             uncached.add(item.getParentId());
                     }
-                } else {
+                } /* else {
                     if ((items[i] = getCachedItem(ids[i])) == null)
                         throw MailItem.noSuchItem(ids[i], type);
-                }
+                } */
+                items[i] = getCachedItem(ids[i]);
+                // We assume they are null item in the items if doesn't exists 
             }
         }
 
@@ -8421,7 +8423,7 @@ public class Mailbox {
      * @param success true to commit the transaction, false to rollback
      * @throws ServiceException error
      */
-    protected void endTransaction(boolean success) throws ServiceException {
+    public void endTransaction(boolean success) throws ServiceException {
         assert !Thread.holdsLock(this) : "Use MailboxLock";
         if (!lock.isLocked()) {
             ZimbraLog.mailbox.warn("transaction canceled because of lock failure");

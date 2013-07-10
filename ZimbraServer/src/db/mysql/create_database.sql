@@ -2,12 +2,12 @@
 -- ***** BEGIN LICENSE BLOCK *****
 -- Zimbra Collaboration Suite Server
 -- Copyright (C) 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012 VMware, Inc.
--- 
+--
 -- The contents of this file are subject to the Zimbra Public License
 -- Version 1.3 ("License"); you may not use this file except in
 -- compliance with the License.  You may obtain a copy of the License at
 -- http://www.zimbra.com/license.
--- 
+--
 -- Software distributed under the License is distributed on an "AS IS"
 -- basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
 -- ***** END LICENSE BLOCK *****
@@ -48,13 +48,26 @@ CREATE TABLE IF NOT EXISTS ${DATABASE_NAME}.mail_item (
    INDEX i_index_id (mailbox_id, index_id),  -- for looking up based on search results
    INDEX i_date (mailbox_id, date),          -- fallback index in case other constraints are not specified
    INDEX i_mod_metadata (mailbox_id, mod_metadata),      -- used by the sync code
-   INDEX i_uuid (mailbox_id, uuid),          -- for looking up by uuid 
+   INDEX i_uuid (mailbox_id, uuid),          -- for looking up by uuid
 
    UNIQUE INDEX i_name_folder_id (mailbox_id, folder_id, name),   -- for namespace uniqueness
 
    CONSTRAINT fk_mail_item_mailbox_id FOREIGN KEY (mailbox_id) REFERENCES zimbra.mailbox(id),
    CONSTRAINT fk_mail_item_parent_id FOREIGN KEY (mailbox_id, parent_id) REFERENCES ${DATABASE_NAME}.mail_item(mailbox_id, id),
    CONSTRAINT fk_mail_item_folder_id FOREIGN KEY (mailbox_id, folder_id) REFERENCES ${DATABASE_NAME}.mail_item(mailbox_id, id)
+) ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS ${DATABASE_NAME}.journal (
+   journal_id    INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+   mailbox_id    INTEGER UNSIGNED NOT NULL,
+   item_id       INTEGER UNSIGNED NOT NULL,
+   type          TINYINT NOT NULL,
+   date          TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+   event         TINYINT NOT NULL,
+   more          INTEGER UNSIGNED,
+
+   PRIMARY KEY (journal_id),
+   INDEX i_mailbox (mailbox_id)
 ) ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS ${DATABASE_NAME}.mail_item_dumpster (
@@ -90,7 +103,7 @@ CREATE TABLE IF NOT EXISTS ${DATABASE_NAME}.mail_item_dumpster (
    INDEX i_index_id (mailbox_id, index_id),  -- for looking up based on search results
    INDEX i_date (mailbox_id, date),          -- fallback index in case other constraints are not specified
    INDEX i_mod_metadata (mailbox_id, mod_metadata),      -- used by the sync code
-   INDEX i_uuid (mailbox_id, uuid),          -- for looking up by uuid 
+   INDEX i_uuid (mailbox_id, uuid),          -- for looking up by uuid
 
    -- Must not enforce unique index on (mailbox_id, folder_id, name) for the dumpster version!
 

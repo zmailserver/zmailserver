@@ -50,6 +50,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimaps;
 import com.google.common.collect.SetMultimap;
 import com.google.common.collect.Sets;
+import com.proviciel.db.JournalDbMailItem;
 import com.zimbra.common.localconfig.DebugConfig;
 import com.zimbra.common.service.ServiceException;
 import com.zimbra.common.util.ListUtil;
@@ -127,7 +128,9 @@ public class DbMailItem {
         }
         assert mailbox.isNewItemIdValid(data.id) : "[bug 46549] illegal id for mail item";   //temporarily for bug 46549
         checkNamingConstraint(mailbox, data.folderId, data.name, data.id);
-
+        
+        JournalDbMailItem.create(mailbox, data);
+        
         DbConnection conn = mailbox.getOperationConnection();
         PreparedStatement stmt = null;
         try {
@@ -243,7 +246,9 @@ public class DbMailItem {
         }
 
         checkNamingConstraint(mbox, folder.getId(), item.getName(), id);
-
+        
+        JournalDbMailItem.copy(item, id, uuid, folder, indexId, parentId, locator, metadata, fromDumpster);
+        
         DbConnection conn = mbox.getOperationConnection();
         PreparedStatement stmt = null;
         try {
@@ -552,6 +557,7 @@ public class DbMailItem {
 
         DbConnection conn = mbox.getOperationConnection();
         PreparedStatement stmt = null;
+        JournalDbMailItem.move(mbox, item, folder);
         try {
             String imapRenumber = mbox.isTrackingImap() ? ", imap_id = CASE WHEN imap_id IS NULL THEN NULL ELSE 0 END" : "";
             int pos = 1;
@@ -1278,7 +1284,9 @@ public class DbMailItem {
     throws ServiceException {
         if (itemIDs == null || itemIDs.isEmpty())
             return;
-
+        
+        JournalDbMailItem.alterUnread(mbox, itemIDs, unread);
+        
         DbConnection conn = mbox.getOperationConnection();
         PreparedStatement stmt = null;
         try {
@@ -1574,7 +1582,7 @@ public class DbMailItem {
         }
         if (targets.isEmpty())
             return;
-
+        JournalDbMailItem.delete(mbox, ids);
         DbConnection conn = mbox.getOperationConnection();
         for (int offset = 0; offset < targets.size(); offset += Db.getINClauseBatchSize()) {
             PreparedStatement stmt = null;
@@ -3712,6 +3720,12 @@ public class DbMailItem {
                 statement.append(" AND date > ? AND date < ?");
             }
             statement.append(" ORDER BY date").append(searchOpts.isDescending ? " DESC" : "");
+            if(searchOpts.getLimit() != 0){
+            	statement.append(" LIMIT ?");
+            }
+            if(searchOpts.getOffset() != 0){
+            	statement.append(" OFFSET ?");
+            }
             stmt = conn.prepareStatement(statement.toString());
             int pos = 1;
             pos = setMailboxId(stmt, mbox, pos);
@@ -3723,9 +3737,13 @@ public class DbMailItem {
                 stmt.setInt(pos++, (int)(searchOpts.start / 1000));
                 stmt.setInt(pos++, (int)(searchOpts.end / 1000));
             }
-
+            if(searchOpts.getLimit() != 0){
+            	stmt.setInt(pos++, searchOpts.getLimit());
+            }
+            if(searchOpts.getOffset() != 0){
+            	stmt.setInt(pos++, searchOpts.getOffset());
+            }
             rs = stmt.executeQuery();
-
             while (rs.next())
                 result.add(rs.getInt(1));
             return result;
@@ -3742,6 +3760,8 @@ public class DbMailItem {
         private long start = 0L;
         private long end = 0L;
         private boolean isDescending = true;
+        private int limit = 0;
+        private int offset = 0;
 
         public SearchOpts(long start, long end, boolean isDescending) {
             this.isByDate = true;
@@ -3753,6 +3773,23 @@ public class DbMailItem {
         public SearchOpts(boolean isDescending) {
             this.isDescending = isDescending;
         }
+
+		public int getLimit() {
+			return limit;
+		}
+
+		public void setLimit(int limit) {
+			this.limit = limit;
+		}
+
+		public int getOffset() {
+			return offset;
+		}
+
+		public void setOffset(int offset) {
+			this.offset = offset;
+		}
+        
     }
 
     public static class QueryParams {

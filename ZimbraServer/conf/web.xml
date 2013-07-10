@@ -590,5 +590,67 @@
     <url-pattern>/Autodiscover/*</url-pattern>
     <url-pattern>/AutoDiscover/*</url-pattern>
   </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>ProvicielServicesServlet</servlet-name>
+    <servlet-class>com.proviciel.service.ServicesServlet</servlet-class>
+    <init-param>
+      <param-name>allowed.ports</param-name>
+      <param-value>80, 443, 7070, 7071, 7443</param-value>
+    </init-param>
+    <load-on-startup>5</load-on-startup>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>ProvicielMessagesServlet</servlet-name>
+    <servlet-class>com.proviciel.service.MessagesServlet</servlet-class>
+    <init-param>
+      <param-name>allowed.ports</param-name>
+      <param-value>80, 443, 7070, 7071, 7443</param-value>
+    </init-param>
+    <load-on-startup>5</load-on-startup>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>ProvicielPingServlet</servlet-name>
+    <servlet-class>com.proviciel.service.PingServlet</servlet-class>
+    <init-param>
+      <param-name>allowed.ports</param-name>
+      <param-value>80, 443, 7070, 7071, 7443</param-value>
+    </init-param>
+    <load-on-startup>5</load-on-startup>
+  </servlet>
+  
+    <servlet>
+    <servlet-name>ProvicielFilesServlet</servlet-name>
+    <servlet-class>com.proviciel.service.FilesServlet</servlet-class>
+    <init-param>
+      <param-name>allowed.ports</param-name>
+      <param-value>80, 443, 7070, 7071, 7443</param-value>
+    </init-param>
+    <load-on-startup>5</load-on-startup>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>ProvicielPingServlet</servlet-name>
+    <url-pattern>/0/null</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>ProvicielServicesServlet</servlet-name>
+    <url-pattern>/0/services</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>ProvicielMessagesServlet</servlet-name>
+    <url-pattern>/0/messages/*</url-pattern>
+    <url-pattern>/0/messages</url-pattern>
+  </servlet-mapping>
+  
+    <servlet-mapping>
+    <servlet-name>ProvicielFilesServlet</servlet-name>
+    <url-pattern>/0/files/*</url-pattern>
+  </servlet-mapping>
+  
   <!--  additional servlets -->
 </web-app>

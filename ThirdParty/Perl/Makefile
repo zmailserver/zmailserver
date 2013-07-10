@@ -317,6 +317,8 @@ build:
 		if [ $$? -ne 0 ]; then  echo "FAILED.";  else  echo "done.";  fi \
 	done
 
+	export PERL5LIB=$(DEST_LIB_DIR)	
+
 	@for lib in $(NET_SSLeay); do \
 		echo -n "Compiling perl lib $$lib ..."; \
 		cp $(PERL_ROOT)/$$lib.tar.gz $(TMPDIR); \
