@@ -1,0 +1,47 @@
+ array (
+        "macos"=>array (//platform
+          "shortversion"=>"7.1.4",
+          "version"=>"7.1.4_release",
+          "buildnum"=>11273,
+          "description"=>" ",
+          "platform"=>"MACOSXx86",
+          "buildtype"=>"GA",
+          "download_url_prefix"=> "http://files2.zimbra.com/downloads/zdesktop",
+          "details_url"=>"http://www.zimbra.com/support/documentation/zd-documentation.html",
+          "license_url"=>"http://www.zimbra.com/license/zimbra-public-eula-2-3.html",
+		  "size"=> 76599981,
+		  "hash"=> "22dfcf99e9928eaf58862b5bb5efbbd8",
+          "file_media" => "zdesktop_7_1_4_ga_b11273_macos_intel.dmg",
+          "extension_version" => "2.0.1"
+        ),
+        "win32"=>array (//platform
+          "shortversion"=>"7.1.4",
+          "version"=>"7.1.4_release",
+          "buildnum"=>11273,
+          "description"=>" ",
+          "platform"=>"WIN32",
+          "buildtype"=>"GA",
+          "download_url_prefix"=> "http://files2.zimbra.com/downloads/zdesktop",
+          "details_url"=>"http://www.zimbra.com/support/documentation/zd-documentation.html",
+          "license_url"=>"http://www.zimbra.com/license/zimbra-public-eula-2-3.html",
+          "size"=> 96880128,
+          "hash"=> "92f0884414c1f046cb2de26de9e67c38",
+          "file_media" => "zdesktop_7_1_4_ga_b11273_win32.msi",
+          "extension_version" => "2.0.1"
+        ),
+        "linux"=>array (//platform
+          "shortversion"=>"7.1.4",
+          "version"=>"7.1.4_release",
+          "buildnum"=>11273,
+          "description"=>" ",
+          "platform"=>"LINUX",
+          "buildtype"=>"GA",
+          "download_url_prefix"=> "http://files2.zimbra.com/downloads/zdesktop",
+          "details_url"=>"http://www.zimbra.com/support/documentation/zd-documentation.html",
+          "license_url"=>"http://www.zimbra.com/license/zimbra-public-eula-2-3.html",
+          "size"=> 148872612,
+          "hash"=> "76ad0c6ea4af706d033030c5820eab61",
+          "file_media" => "zdesktop_7_1_4_ga_b11273_linux_i686.tgz",
+          "extension_version" => "2.0.1"
+        )
+      )

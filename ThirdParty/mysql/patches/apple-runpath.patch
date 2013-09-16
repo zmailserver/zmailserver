@@ -1,0 +1,13 @@
+--- mysql-5.5.13/libmysql/CMakeLists.txt.orig	2011-06-29 13:24:53.000000000 -0700
++++ mysql-5.5.13/libmysql/CMakeLists.txt	2011-06-29 13:25:48.000000000 -0700
+@@ -24,6 +24,10 @@
+   ${ZLIB_INCLUDE_DIR})
+ ADD_DEFINITIONS(${SSL_DEFINES})
+ 
++IF (APPLE)
++   SET(CMAKE_INSTALL_NAME_DIR "${CMAKE_INSTALL_PREFIX}/lib")
++ENDIF()
++
+ SET(CLIENT_API_FUNCTIONS
+ load_defaults
+ mysql_thread_end

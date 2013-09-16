@@ -1,0 +1,33 @@
+﻿<?xml version='1.0' encoding='utf-8' ?>
+<!--
+ * ***** BEGIN LICENSE BLOCK *****
+ * 
+ * Zimbra Collaboration Suite Web Client
+ * Copyright (C) 2009, 2010, 2012 VMware, Inc.
+ * 
+ * The contents of this file are subject to the Zimbra Public License
+ * Version 1.3 ("License"); you may not use this file except in
+ * compliance with the License.  You may obtain a copy of the License at
+ * http://www.zimbra.com/license.
+ * 
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
+ * 
+ * ***** END LICENSE BLOCK *****
+-->
+<tocdata>
+<item name="Een map maken" url="zwc_help_files/5_organize_account/create_a_folder.htm" />
+<item name="De naam van een map wijzigen" url="zwc_help_files/5_organize_account/rename_a_folder.htm" />
+<item name="Een map verwijderen" url="zwc_help_files/5_organize_account/delete_a_folder.htm" />
+<item name="Een label maken" url="zwc_help_files/5_organize_account/create_a_tag.htm" />
+<item name="Een label aan een item toewijzen" url="zwc_help_files/5_organize_account/assign_a_tag_to_an_item.htm" />
+<item name="De kleur van een label wijzigen" url="zwc_help_files/5_organize_account/change_a_tag_color.htm" />
+<item name="De naam van een label wijzigen" url="zwc_help_files/5_organize_account/rename_a_tag.htm" />
+<item name="Naar items zoeken op label" url="zwc_help_files/5_organize_account/search_for_items_by_tag.htm" />
+<item name="Berichten met een specifiek label weergeven" url="zwc_help_files/5_organize_account/display_messages_with_a_specific_tag.htm" />
+<item name="Een label verwijderen" url="zwc_help_files/5_organize_account/remove_a_tag.htm" />
+<item name="Een label wissen" url="zwc_help_files/5_organize_account/delete_a_tag.htm" />
+<item name="Een bericht of conversatie van een vlag voorzien" url="zwc_help_files/5_organize_account/flag_a_message_or_conversation.htm" />
+<item name="Een vlag bij een bericht of conversatie verwijderen" url="zwc_help_files/5_organize_account/remove_a_flag_from_a_message_or_conversation.htm" />
+
+</tocdata>

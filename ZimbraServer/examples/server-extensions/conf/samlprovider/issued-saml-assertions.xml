@@ -1,0 +1,35 @@
+<IssuedAssertions>
+<!--
+ * ***** BEGIN LICENSE BLOCK *****
+ * 
+ * Zimbra Collaboration Suite Server
+ * Copyright (C) 2010, 2012 VMware, Inc.
+ * 
+ * The contents of this file are subject to the Zimbra Public License
+ * Version 1.3 ("License"); you may not use this file except in
+ * compliance with the License.  You may obtain a copy of the License at
+ * http://www.zimbra.com/license.
+ * 
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
+ * 
+ * ***** END LICENSE BLOCK *****
+-->
+    <saml:Assertion xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" ID="b07b804c-7c29-ea16-7300-4f3d6f7928ac" Version="2.0" IssueInstant="2010-03-09T09:22:05Z">
+       <saml:Issuer>http://localhost:7070/service/extension/samlAuthority</saml:Issuer>
+       <saml:Subject>
+         <saml:NameID>user1@domain.com</saml:NameID>
+         <saml:SubjectConfirmation Method="urn:oasis:names:tc:SAML:2.0:cm:sender-vouches"/>
+       </saml:Subject>
+       <saml:Conditions NotBefore="2010-03-09T09:22:05Z" NotOnOrAfter="2020-12-05T09:27:05Z">
+         <saml:AudienceRestriction>
+           <saml:Audience>http://localhost:7070/service/soap</saml:Audience>
+         </saml:AudienceRestriction>
+       </saml:Conditions>
+       <saml:AuthnStatement AuthnInstant="2004-03-09T09:22:00Z">
+         <saml:AuthnContext>
+           <saml:AuthnContextClassRef>urn:oasis:names:tc:SAML:2.0:ac:classes:Password</saml:AuthnContextClassRef>
+         </saml:AuthnContext>
+       </saml:AuthnStatement>
+     </saml:Assertion>
+</IssuedAssertions>

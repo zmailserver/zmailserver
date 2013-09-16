@@ -1,0 +1,189 @@
+#
+# Server configuration
+#
+[server]
+
+# Protocols to load
+protocols=<<EOT
+Postfix
+Bizanga
+EOT
+
+# Modules to load
+modules=<<EOT
+Core
+AccessControl
+Accounting
+Amavis
+CheckHelo
+CheckSPF
+Greylisting
+Quotas
+EOT
+
+# User to run this daemon as
+user=@@zimbra_user@@
+group=@@zimbra_user@@
+
+# Filename to store pid of parent process
+pid_file=@@cbpolicyd_pid_file@@
+
+# Cache file
+cache_file=@@cbpolicyd_cache_file@@
+
+# Uncommenting the below option will prevent cbpolicyd going into the background
+background=yes
+
+# Preforking configuration
+#
+# min_server		- Minimum servers to keep around
+# min_spare_servers	- Minimum spare servers to keep around ready to 
+# 			  handle requests
+# max_spare_servers	- Maximum spare servers to have around doing nothing
+# max_servers		- Maximum servers alltogether
+# max_requests		- Maximum number of requests each child will serve
+#
+# One may want to use the following as a rough guideline...
+# Small mailserver:  2, 2, 4, 10, 1000
+# Medium mailserver: 4, 4, 12, 25, 1000
+# Large mailserver: 8, 8, 16, 64, 1000
+#
+#min_servers=4
+#min_spare_servers=4
+#max_spare_servers=12
+#max_servers=25
+#max_requests=1000
+
+# Log level:
+# 0 - Errors only
+# 1 - Warnings and errors
+# 2 - Notices, warnings, errors
+# 3 - Info, notices, warnings, errors
+# 4 - Debugging 
+log_level=@@cbpolicyd_log_level@@
+
+# File to log to instead of stdout
+log_file=@@cbpolicyd_log_file@@
+
+# Log destination for mail logs...
+# main		- Default. Log to policyd's main log mechanism, accepts NO args
+# syslog	- log mail via syslog
+#			format: log_mail=facility@method,args
+#
+# Valid methods for syslog:
+# native	- Let Sys::Syslog decide
+# unix		- Unix socket
+# udp		- UDP socket
+# stream	- Stream (for Solaris)
+#
+# Example: unix native
+#log_mail=mail@syslog:native
+#
+# Example: unix socket 
+#log_mail=mail@syslog:unix
+#
+# Example: udp
+#log_mail=mail@syslog:udp,127.0.0.1
+#
+# Example: Solaris 
+#log_mail=local0@syslog:stream,/dev/log
+log_mail=@@cbpolicyd_log_mail@@
+
+# Things to log in extreme detail
+# modules 	- Log detailed module running information
+# tracking 	- Log detailed tracking information
+# policies 	- Log policy resolution
+# protocols 	- Log general protocol info, but detailed
+# bizanga 	- Log the bizanga protocol
+# cache		- Log cache usage on client shutdown
+#
+# There is no default for this configuration option. Options can be
+# separated by commas. ie. protocols,modules
+#
+log_detail=@@cbpolicyd_log_detail@@
+
+# Protocol to use "tcp" or "unix", defaults to "tcp"
+#proto=tcp
+
+# IP to listen on, * for all. Blank for unix sockets
+host=localhost
+
+# Port to run on, in the case of a unix socket it would be the path
+# eg. 10031
+# eg. /var/run/cbpolicyd/policyd.sock
+port=@@cbpolicyd_bind_port@@
+
+# Timeout in communication with clients
+# Idle timeout in postfix defaults to 1015s (active connection)
+timeout_idle=@@cbpolicyd_timeout_idle@@
+# Busy sockets in postfix defaults to 100s
+timeout_busy=@@cbpolicyd_timeout_busy@@
+
+# cidr_allow/cidr_deny
+# Comma, whitespace or semi-colon separated. Contains a CIDR block to 
+# compare the clients IP to.  If cidr_allow or cidr_deny options are 
+# given, the incoming client must match a cidr_allow and not match a 
+# cidr_deny or the client connection will be closed.
+#cidr_allow=0.0.0.0/0
+#cidr_deny=
+
+
+
+[database]
+#DSN=DBI:SQLite:dbname=policyd.sqlite
+DSN=DBI:SQLite:dbname=@@cbpolicyd_db_file@@
+#Username=root
+#Password=
+#
+
+# What do we do when we have a database connection problem
+# tempfail	- Return temporary failure
+# pass		- Return success
+bypass_mode=@@cbpolicyd_bypass_mode@@
+
+# How many seconds before we retry a DB connection
+bypass_timeout=@@cbpolicyd_bypass_timeout@@
+
+# Table prefix to use, be sure to generate the schema with the table 
+# prefix aswell!
+#table_prefix=
+
+
+# Access Control module
+[AccessControl]
+enable=@@cbpolicyd_module_accesscontrol@@
+
+
+# Accounting module
+[Accounting]
+enable=@@cbpolicyd_module_accounting@@
+
+
+# Amavis module
+[Amavis]
+enable=@@cbpolicyd_module_amavis@@ # Disabled by default
+
+
+# CheckHelo module
+[CheckHelo]
+enable=@@cbpolicyd_module_checkhelo@@
+
+
+# CheckSPF module
+[CheckSPF]
+enable=@@cbpolicyd_module_checkspf@@
+
+
+# Greylisting module
+[Greylisting]
+enable=@@cbpolicyd_module_greylisting@@
+training_mode=@@cbpolicyd_module_greylisting_training@@
+defer_message=@@cbpolicyd_module_greylisting_defer_msg@@
+blacklist_message=@@cbpolicyd_module_greylisting_blacklist_msg@@
+
+
+# Quotas module
+[Quotas]
+enable=@@cbpolicyd_module_quotas@@
+
+

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ * ***** BEGIN LICENSE BLOCK *****
+ * 
+ * Zimbra Collaboration Suite Server
+ * Copyright (C) 2011, 2012 VMware, Inc.
+ * 
+ * The contents of this file are subject to the Zimbra Public License
+ * Version 1.3 ("License"); you may not use this file except in
+ * compliance with the License.  You may obtain a copy of the License at
+ * http://www.zimbra.com/license.
+ * 
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
+ * 
+ * ***** END LICENSE BLOCK *****
+-->
+<contactsync rev="1">
+    <contacts>
+        <op>add</op>
+        <fields>
+            <op>add</op>
+            <type>nickname</type>
+            <value>dummy1</value>
+        </fields>
+        <fields>
+            <op>add</op>
+            <type>email</type>
+            <value>dummy1@dot.com</value>
+        </fields>
+        <fields>
+            <op>add</op>
+            <type>phone</type>
+            <value>123-456</value>
+            <flags>MOBILE</flags>
+        </fields>
+        <fields>
+            <op>add</op>
+            <type>phone</type>
+            <value>789-101</value>
+            <flags>MOBILE</flags>
+        </fields>
+        <fields>
+            <op>add</op>
+            <type>jobTitle</type>
+            <value>mts</value>
+        </fields>
+        <fields>
+            <op>add</op>
+            <type>birthday</type>
+            <value>
+                <day>5</day>
+                <month>2</month>
+                <year>1988</year>
+            </value>
+        </fields>
+        <fields>
+            <op>add</op>
+            <type>name</type>
+            <value>
+                <givenName>Harry</givenName>
+                <middleName></middleName>
+                <familyName>Potter</familyName>
+                <prefix></prefix>
+                <suffix></suffix>
+                <givenNameSound></givenNameSound>
+                <familyNameSound></familyNameSound>
+            </value>
+        </fields>
+        <fields>
+            <op>add</op>
+            <type>address</type>
+            <value>
+                <street>141 del ave.</street>
+                <city>palo alto</city>
+                <stateOrProvince>ca</stateOrProvince>
+                <postalCode>94304</postalCode>
+                <country>United States</country>
+                <countryCode>US</countryCode>
+            </value>
+            <flags>HOME</flags>
+        </fields>
+    </contacts>
+</contactsync>

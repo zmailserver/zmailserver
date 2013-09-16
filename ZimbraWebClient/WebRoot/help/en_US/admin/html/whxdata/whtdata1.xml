@@ -1,0 +1,28 @@
+﻿<?xml version='1.0' encoding='utf-8' ?>
+<!--
+ * ***** BEGIN LICENSE BLOCK *****
+ * 
+ * Zimbra Collaboration Suite Web Client
+ * Copyright (C) 2009, 2010, 2011, 2012 VMware, Inc.
+ * 
+ * The contents of this file are subject to the Zimbra Public License
+ * Version 1.3 ("License"); you may not use this file except in
+ * compliance with the License.  You may obtain a copy of the License at
+ * http://www.zimbra.com/license.
+ * 
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
+ * 
+ * ***** END LICENSE BLOCK *****
+-->
+<!-- saved from url=(0014)about:internet -->
+<tocdata>
+<item name="Customizing UI Themes" url="cos/customizing_ui_themes.htm" />
+<item name="Flushing the Server Cache" url="managing_servers/flushing_the_server_cache.htm" />
+<item name="Quick Custom Color" url="ui_themes/how_to_customize_theme_colors_and_logos.htm" />
+<item name="How to Customize Themes from Admin Console" url="ui_themes/customizing_themes_and_logos.htm" />
+<item name="Restricting User Interface Theme Choice" url="ui_themes/restricting_user_interface_theme_choice.htm" />
+<item name="Making UI Themes Available by COS" url="ui_themes/defining_theme_for_the_zimbra_web_client_ui.htm" />
+<item name="Making UI Themes Available by Account" url="ui_themes/making_ui_themes_available_by_account.htm" />
+
+</tocdata>

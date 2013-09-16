@@ -1,0 +1,84 @@
+
+<!--
+ * ***** BEGIN LICENSE BLOCK *****
+ * 
+ * Zimbra Collaboration Suite Server
+ * Copyright (C) 2010, 2012 VMware, Inc.
+ * 
+ * The contents of this file are subject to the Zimbra Public License
+ * Version 1.3 ("License"); you may not use this file except in
+ * compliance with the License.  You may obtain a copy of the License at
+ * http://www.zimbra.com/license.
+ * 
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
+ * 
+ * ***** END LICENSE BLOCK *****
+-->
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name='SelNG'>
+  <test verbose="10" name="General" >
+    <classes>
+      <class name="projects.zcs.tests.compose.ComposeReplyFwdInHTMLTest" />
+      <class name="projects.zcs.tests.compose.ComposeReplyFwdInPlainText" />
+      <class name="projects.zcs.tests.compose.SendBtnNegativeTest" />
+      <class name="projects.zcs.tests.folders.FolderTests" />
+    </classes>
+  </test>
+   
+   <test verbose="10" name="Calendar">
+   <classes>
+      <class name="projects.zcs.tests.calendar.CalendarFolderTests"/>
+      <class name="projects.zcs.tests.calendar.CreateApptTests"/>
+      <class name="projects.zcs.tests.calendar.ApptInviteTests"/>
+	</classes>
+	</test>
+   
+   <test verbose="10" name="Document" >
+    <classes>
+      <class name="projects.zcs.tests.document.DocumentTest"/>
+    </classes>
+  </test>
+  
+  <test verbose="10" name="AddressBook" >
+    <classes>
+      <class name="projects.zcs.tests.addressbook.AddressBookTest"/>
+      <class name="projects.zcs.tests.addressbook.ABPreferences"/>
+    </classes>
+  </test>
+  
+  <test verbose="10" name="Sharing" >
+    <classes>
+      <class name="projects.zcs.tests.sharing.BasicSharingTests" />
+      <class name="projects.zcs.tests.sharing.ViewerManagerAdminRevokeSharingTests" />
+      <class name="projects.zcs.tests.sharing.ChangingSharedFoldertoDiffRole" />
+      <class name="projects.zcs.tests.sharing.SharingFoldertoMultipleUsers" />
+      <class name="projects.zcs.tests.sharing.ExternalGuestsAndPublicSharing" />
+      <class name="projects.zcs.tests.sharing.CalendarFolderSharingTests" />
+    </classes>
+  </test>
+
+  <test verbose="10" name="Briefcase" >
+    <classes>
+      <class name="projects.zcs.tests.briefcase.BriefcaseTests" />
+      <class name="projects.zcs.tests.briefcase.BriefcaseSharingTests" />
+    </classes>
+  </test>
+
+  <test verbose="10" name="Tasks" >
+    <classes>
+      <class name="projects.zcs.tests.tasks.Tasks"/>
+    </classes>
+  </test>
+  
+   <test verbose="10" name="DraftsTests" >
+    <classes>
+      <class name="projects.zcs.tests.compose.DraftsTest"  />
+    </classes>
+  </test>
+  <test verbose="10" name="AttachmentsTests" >
+    <classes>
+      <class name="projects.zcs.tests.compose.AttachmentsTest"  />
+    </classes>
+  </test>    
+</suite>

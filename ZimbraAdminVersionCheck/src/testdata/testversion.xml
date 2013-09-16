@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+ * ***** BEGIN LICENSE BLOCK *****
+ * 
+ * Zimbra Collaboration Suite Server
+ * Copyright (C) 2009, 2012 VMware, Inc.
+ * 
+ * The contents of this file are subject to the Zimbra Public License
+ * Version 1.3 ("License"); you may not use this file except in
+ * compliance with the License.  You may obtain a copy of the License at
+ * http://www.zimbra.com/license.
+ * 
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
+ * 
+ * ***** END LICENSE BLOCK *****
+-->
+<versionCheck status="1">
+<updates>
+<update type="major" shortversion="%FUTURE_MAJOR_VERSION%.0.0" version="%FUTURE_MAJOR_VERSION%.0.0_GA" platform="%PLATFORM%" buildtype="%TYPE%" release="1234567890" critical="0" updateURL="http://www.zimbra.com/community/downloads.html" description="blah"/>
+<update type="minor" shortversion="%MAJOR_VERSION%.%FUTURE_MINOR_VERSION%.0" version="%MAJOR_VERSION%.%FUTURE_MINOR_VERSION%.0_GA_1234" buildnum="1234" platform="%PLATFORM%" buildtype="%TYPE%" release="1234567890" critical="0" updateURL="http://www.zimbra.com/community/downloads.html" description="blah"/>	
+<update type="micro" shortversion="%MAJOR_VERSION%.%MINOR_VERSION%.%FUTURE_MICRO_VERSION%" version="%MAJOR_VERSION%.%MINOR_VERSION%.%FUTURE_MICRO_VERSION%_GA_1234" buildnum="1234" platform="%PLATFORM%" buildtype="%TYPE%" release="1234567890" critical="0" updateURL="http://www.zimbra.com/community/downloads.html" description="blah"/>
+<update type="build" shortversion="%MAJOR_VERSION%.%MINOR_VERSION%.%FUTURE_MICRO_VERSION%" version="%MAJOR_VERSION%.%MINOR_VERSION%.%FUTURE_MICRO_VERSION%_%RELCLASS%%FUTURE_RELNUM%_%FUTURE_BUILD_NUM%" buildnum="%FUTURE_BUILD_NUM%" platform="%PLATFORM%" buildtype="%TYPE%" release="1234567890" critical="1" updateURL="http://www.zimbra.com/community/downloads.html" description="blah"/>
+</updates>
+</versionCheck>
