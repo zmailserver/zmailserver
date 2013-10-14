@@ -7,4 +7,7 @@ ZMailServer is an open source fork of Zimbra.
 
 ### [How to build](https://github.com/zmailserver/zmailserver/wiki/Building-ZMailServer)
 
+### Information
 
+ZMailServer is licensed for most parts under its original [Zimbra Public License version 1.3](https://raw.github.com/zmailserver/zmailserver/master/ZPL.txt).
+All new contributions are released under the more liberal [MIT license](https://raw.github.com/zmailserver/zmailserver/master/MIT.txt).
