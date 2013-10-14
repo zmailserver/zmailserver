@@ -439,7 +439,6 @@ if (application.getInitParameter("offlineMode") != null)  {
 		</div>
 
 		<div class="${smallScreen?'Footer-small':'Footer'}">
-			<div id="ZLoginNotice" class="legalNotice-small"><fmt:message key="clientLoginNotice"/></div>
 			<div class="copyright">
             <c:choose>
                 <c:when test="${useMobile}">
