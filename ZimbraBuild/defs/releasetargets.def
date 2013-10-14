@@ -34,9 +34,9 @@ $(ARCH)/zcs.mpkg/Contents/Resources: $(ARCH)/zcs.mpkg/Contents/Resources/English
 	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/VolumeCheck $@/VolumeCheck
 	chmod 755 $@/VolumeCheck
 
-$(ARCH)/zcs.mpkg/Contents/Resources/English.lproj: 
+$(ARCH)/zcs.mpkg/Contents/Resources/English.lproj:
 	mkdir -p $@
-	cp $(LICENSE_DIR)/zimbra/zcl.txt $@/License.txt 
+	cp $(LICENSE_DIR)/zimbra/zcl.txt $@/License.txt
 	echo "Welcome to the ZCS installer" > $@/Welcome.txt
 	echo "ZCS Installation complete" > $@/Conclusion.txt
 	echo "Run /opt/zimbra/libexec/zmsetup.pl AS ROOT" >> $@/Conclusion.txt
@@ -74,6 +74,7 @@ zcs_stage: $(SOAP_DIR)/package-soap-api-doc $(SOAP_DIR)/package-soap-api-changel
 	mkdir -p zcs-$(RELEASE_VERSION_TAG).$(RELEASE)/data
 	mkdir -p zcs-$(RELEASE_VERSION_TAG).$(RELEASE)/docs
 	mkdir -p zcs-$(RELEASE_VERSION_TAG).$(RELEASE)/util/modules
+	cp -f $(LICENSE_DIR)/zimbra/mit.txt zcs-$(RELEASE_VERSION_TAG).$(RELEASE)/docs/MIT.txt
 	cp -f $(LICENSE_DIR)/zimbra/ypl-full.txt zcs-$(RELEASE_VERSION_TAG).$(RELEASE)/docs/YPL.txt
 	cp -f $(LICENSE_DIR)/zimbra/zcl.txt zcs-$(RELEASE_VERSION_TAG).$(RELEASE)/docs/zcl.txt
 	cp -f $(LICENSE_DIR)/zimbra/zimbra_public_eula_2.1.txt zcs-$(RELEASE_VERSION_TAG).$(RELEASE)/docs/zimbra_public_eula_2.1.txt

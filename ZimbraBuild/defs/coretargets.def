@@ -139,6 +139,7 @@ $(CORE_DEST_DIR):
 $(CORE_DEST_DIR)/docs:
 	mkdir -p $@
 	cp $(LICENSE_DIR)/zimbra/zpl-full.txt $@/ZPL.txt
+	cp $(LICENSE_DIR)/zimbra/mit.txt $@/MIT.txt
 	cp $(LICENSE_DIR)/zimbra/ypl-full.txt $@/YPL.txt
 	cp $(LICENSE_DIR)/zimbra/zimbra_public_eula_2.1.txt $@/zimbra_public_eula_2.1.txt
 	cp $(LICENSE_DIR)/thirdparty/oracle_jdk_eula.txt $@/oracle_jdk_eula.txt
@@ -174,7 +175,7 @@ $(CORE_DEST_DIR)/docs:
 	echo "Rsync version: $(RSYNC_VERSION)" >> $@/zimbra-software-versions.txt
 	echo "Tcmalloc version: $(TCMALLOC_VERSION)" >> $@/zimbra-software-versions.txt
 
-$(CORE_DEST_DIR)/zimbramon: $(CORE_DEST_DIR)/zimbramon/bin $(CORE_DEST_DIR)/zimbramon/lib $(CORE_DEST_DIR)/zimbramon/pylibs $(CORE_DEST_DIR)/zimbramon/crontabs $(CORE_DEST_DIR) 
+$(CORE_DEST_DIR)/zimbramon: $(CORE_DEST_DIR)/zimbramon/bin $(CORE_DEST_DIR)/zimbramon/lib $(CORE_DEST_DIR)/zimbramon/pylibs $(CORE_DEST_DIR)/zimbramon/crontabs $(CORE_DEST_DIR)
 	@echo "*** Creating zimbramon"
 	mkdir -p $@
 	(cd $(CORE_DEST_DIR)/zimbramon; tar xzf $(RRD_SOURCE).tar.gz)
@@ -267,7 +268,7 @@ $(CORE_DEST_DIR)/conf: $(WEBAPP_DIR)/service.war
 	cp $(SERVICE_DIR)/conf/nginx/* $@/nginx/templates/
 	cp $(SERVICE_DIR)/conf/stats.conf.in $@
 	cp $(SERVICE_DIR)/conf/salocal.cf.in $@
-	cp $(SERVICE_DIR)/conf/saslauthd.conf.in $@ 
+	cp $(SERVICE_DIR)/conf/saslauthd.conf.in $@
 	mkdir -p $@/sasl2
 	cp $(SERVICE_DIR)/conf/postfix_sasl_smtpd.conf $@/sasl2/smtpd.conf.in
 	cp $(SERVICE_DIR)/conf/zmconfigd.cf $@/zmconfigd.cf
