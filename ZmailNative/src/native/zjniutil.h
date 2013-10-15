@@ -22,19 +22,19 @@ extern "C" {
 #endif
 
 void
-ZimbraThrowNPE(JNIEnv *env, const char *msg);
+ZmailThrowNPE(JNIEnv *env, const char *msg);
 
 void
-ZimbraThrowIAE(JNIEnv *env, const char *msg);
+ZmailThrowIAE(JNIEnv *env, const char *msg);
 
 void
-ZimbraThrowIOE(JNIEnv *env, const char *msg);
+ZmailThrowIOE(JNIEnv *env, const char *msg);
 
 void
-ZimbraThrowFNFE(JNIEnv *env, const char *msg);
+ZmailThrowFNFE(JNIEnv *env, const char *msg);
 
 void
-ZimbraThrowOFE(JNIEnv *env, const char *msg);
+ZmailThrowOFE(JNIEnv *env, const char *msg);
 
 #ifdef __cplusplus
 }

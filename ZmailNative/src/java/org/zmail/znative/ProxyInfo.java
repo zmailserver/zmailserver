@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.znative;
+package org.zmail.znative;
 
 import java.util.List;
 

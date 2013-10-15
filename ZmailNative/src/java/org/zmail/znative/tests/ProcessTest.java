@@ -12,13 +12,13 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.znative.tests;
+package org.zmail.znative.tests;
 
 import java.io.File;
 import java.io.IOException;
 
-import com.zimbra.znative.Process;
-import com.zimbra.znative.OperationFailedException;
+import org.zmail.znative.Process;
+import org.zmail.znative.OperationFailedException;
 
 public class ProcessTest {
 

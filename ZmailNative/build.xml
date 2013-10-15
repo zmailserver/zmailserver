@@ -1,8 +1,8 @@
-<project name="ZimbraNative" default="jar">
+<project name="ZmailNative" default="jar">
 
     <import file="../ant-global.xml" />
     
-	<property name="jar.file" value="zimbra-native.jar" />
+	<property name="jar.file" value="zmail-native.jar" />
 
 	<path id="all.java.path">
 		<pathelement location="${src.java.dir}" />
@@ -16,17 +16,17 @@
 		<javac destdir="${build.classes.dir}" debug="true" target="${javac.target}">
 			<src refid="all.java.path" />
 		</javac>
-		<javah class="com.zimbra.znative.IO" outputfile="${build.dir}/IO.h" classpath="${build.dir}/classes" />
-		<javah class="com.zimbra.znative.Process" outputfile="${build.dir}/Process.h" classpath="${build.dir}/classes" />
-		<javah class="com.zimbra.znative.ProcessorUsage" outputfile="${build.dir}/ProcessorUsage.h" classpath="${build.dir}/classes" />
-		<javah class="com.zimbra.znative.ResourceUsage" outputfile="${build.dir}/ResourceUsage.h" classpath="${build.dir}/classes" />
-		<javah class="com.zimbra.znative.Util" outputfile="${build.dir}/Util.h" classpath="${build.dir}/classes" />
-		<javah class="com.zimbra.znative.ProxyInfo" outputfile="${build.dir}/ProxyInfo.h" classpath="${build.dir}/classes" />
+		<javah class="org.zmail.znative.IO" outputfile="${build.dir}/IO.h" classpath="${build.dir}/classes" />
+		<javah class="org.zmail.znative.Process" outputfile="${build.dir}/Process.h" classpath="${build.dir}/classes" />
+		<javah class="org.zmail.znative.ProcessorUsage" outputfile="${build.dir}/ProcessorUsage.h" classpath="${build.dir}/classes" />
+		<javah class="org.zmail.znative.ResourceUsage" outputfile="${build.dir}/ResourceUsage.h" classpath="${build.dir}/classes" />
+		<javah class="org.zmail.znative.Util" outputfile="${build.dir}/Util.h" classpath="${build.dir}/classes" />
+		<javah class="org.zmail.znative.ProxyInfo" outputfile="${build.dir}/ProxyInfo.h" classpath="${build.dir}/classes" />
 	</target>
 
     <target name="jar" depends="compile" description="Creates the jar file">
-        <antcall target="zimbra-jar">
-            <param name="implementation.title" value="Zimbra Native"/>
+        <antcall target="zmail-jar">
+            <param name="implementation.title" value="Zmail Native"/>
         </antcall>
     </target>
 

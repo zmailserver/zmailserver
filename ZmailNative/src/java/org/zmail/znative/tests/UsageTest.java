@@ -13,12 +13,12 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.znative.tests;
+package org.zmail.znative.tests;
 
 import java.util.Arrays;
 
-import com.zimbra.znative.ProcessorUsage;
-import com.zimbra.znative.ResourceUsage;
+import org.zmail.znative.ProcessorUsage;
+import org.zmail.znative.ResourceUsage;
 
 public class UsageTest {
     public static void main(String[] args) {

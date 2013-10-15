@@ -23,24 +23,24 @@
 #include "zjniutil.h"
 
 JNIEXPORT void JNICALL
-Java_com_zimbra_znative_ProcessorUsage_getProcessorUsage0(JNIEnv *env, jclass clz, jlongArray jdata)
+Java_org_zmail_znative_ProcessorUsage_getProcessorUsage0(JNIEnv *env, jclass clz, jlongArray jdata)
 {
   struct tms tms;
   clock_t wall;
-  jlong data[com_zimbra_znative_ProcessorUsage_OFFSET_MAX];
+  jlong data[org_zmail_znative_ProcessorUsage_OFFSET_MAX];
 
   if ((wall = times(&tms)) == ((clock_t)-1)) {
     char msg[256];
     snprintf(msg, sizeof(msg), "times(): %s", strerror(errno));
-    ZimbraThrowOFE(env, msg);
+    ZmailThrowOFE(env, msg);
     return;
   }
   
-  data[com_zimbra_znative_ProcessorUsage_OFFSET_UTICKS] = tms.tms_utime;
-  data[com_zimbra_znative_ProcessorUsage_OFFSET_STICKS] = tms.tms_stime;
-  data[com_zimbra_znative_ProcessorUsage_OFFSET_CUTICKS] = tms.tms_cutime;
-  data[com_zimbra_znative_ProcessorUsage_OFFSET_CSTICKS] = tms.tms_cstime;
-  data[com_zimbra_znative_ProcessorUsage_OFFSET_WTICKS] = wall;
+  data[org_zmail_znative_ProcessorUsage_OFFSET_UTICKS] = tms.tms_utime;
+  data[org_zmail_znative_ProcessorUsage_OFFSET_STICKS] = tms.tms_stime;
+  data[org_zmail_znative_ProcessorUsage_OFFSET_CUTICKS] = tms.tms_cutime;
+  data[org_zmail_znative_ProcessorUsage_OFFSET_CSTICKS] = tms.tms_cstime;
+  data[org_zmail_znative_ProcessorUsage_OFFSET_WTICKS] = wall;
 
-  (*env)->SetLongArrayRegion(env, jdata, 0, com_zimbra_znative_ProcessorUsage_OFFSET_MAX, data);
+  (*env)->SetLongArrayRegion(env, jdata, 0, org_zmail_znative_ProcessorUsage_OFFSET_MAX, data);
 }

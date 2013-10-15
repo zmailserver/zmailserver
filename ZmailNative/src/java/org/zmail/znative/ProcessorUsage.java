@@ -15,7 +15,7 @@
 /**
  * 
  */
-package com.zimbra.znative;
+package org.zmail.znative;
 
 public final class ProcessorUsage {
     private static final int OFFSET_UTICKS = 0;

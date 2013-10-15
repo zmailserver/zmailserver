@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.znative;
+package org.zmail.znative;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -35,14 +35,14 @@ public final class Util {
             return false;
         } else {
             try {
-                System.loadLibrary("zimbra-native");
+                System.loadLibrary("zmail-native");
                 return true;
             } catch (UnsatisfiedLinkError ule) {
                 //this lets unit tests run from command line (i.e. 'ant test') without setting up native
-                String skipNative = System.getProperty("zimbra.native.required");
+                String skipNative = System.getProperty("zmail.native.required");
                 if (skipNative != null && skipNative.equalsIgnoreCase("false")) {
                     System.err.println("WARNING: native libraries not available, " +
-                        "however zimbra.native.required is false." +
+                        "however zmail.native.required is false." +
                         "You are probably running unit tests; " +
                         "if you are not testing this is a problem. " +
                         "DO NOT run production with this warning");
@@ -53,7 +53,7 @@ public final class Util {
                      * and (b) if tomcat is started as root, and the
                      * shared library did not load for some reason, drop
                      * privileges would not work. */
-                    halt("Failed to loadLibrary(zimbra-native)", ule);
+                    halt("Failed to loadLibrary(zmail-native)", ule);
                 }
             }
             return false;
@@ -78,7 +78,7 @@ public final class Util {
     /**
      * Logs the given message and shuts down the server.  This method
      * is for use during the early life of the server, where Log4j has
-     * not been initialized and/or we are unable to call Zimbra.halt.
+     * not been initialized and/or we are unable to call Zmail.halt.
      * There is no native code involved here.
      *
      * @param message the message to log before shutting down
@@ -95,7 +95,7 @@ public final class Util {
     /**
      * Logs the given message and shuts down the server.  This method
      * is for use during the early life of the server, where Log4j has
-     * not been initialized and/or we are unable to call Zimbra.halt.
+     * not been initialized and/or we are unable to call Zmail.halt.
      * There is no native code involved here.
      *
      * @param message the message to log before shutting down

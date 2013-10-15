@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.znative;
+package org.zmail.znative;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

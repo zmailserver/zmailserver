@@ -12,11 +12,11 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.znative.tests;
+package org.zmail.znative.tests;
 
 import java.io.IOException;
 
-import com.zimbra.znative.IO;
+import org.zmail.znative.IO;
 
 public class LinkCountTest {
 

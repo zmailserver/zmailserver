@@ -38,7 +38,7 @@ static jmethodID pi_ctrID;
 static void check_initialized(JNIEnv *env) {
     static int initialized;
     if (!initialized) {
-        pi_cls = (*env)->FindClass(env, "com/zimbra/znative/ProxyInfo");
+        pi_cls = (*env)->FindClass(env, "org/zmail/znative/ProxyInfo");
         pi_cls = (*env)->NewGlobalRef(env, pi_cls);
         pi_ctrID = (*env)->GetMethodID(env, pi_cls, "<init>", "(I" JLS "I" JLS JLS ")V");
     }
@@ -98,7 +98,7 @@ static jobject getProxyInfo(JNIEnv *env, CFDictionaryRef proxy) {
 }
 
 JNIEXPORT jobjectArray JNICALL
-Java_com_zimbra_znative_ProxyInfo_getProxyInfo(JNIEnv *env, jclass cls, jstring jurl) {
+Java_org_zmail_znative_ProxyInfo_getProxyInfo(JNIEnv *env, jclass cls, jstring jurl) {
     check_initialized(env);
     CFStringRef urlstr = getCFString(env, jurl);
     CFURLRef url = CFURLCreateWithString(NULL, urlstr, NULL);
@@ -119,6 +119,6 @@ Java_com_zimbra_znative_ProxyInfo_getProxyInfo(JNIEnv *env, jclass cls, jstring 
 }
 
 JNIEXPORT jboolean JNICALL
-Java_com_zimbra_znative_ProxyInfo_isSupported(JNIEnv *env, jclass cls) {
+Java_org_zmail_znative_ProxyInfo_isSupported(JNIEnv *env, jclass cls) {
     return JNI_TRUE;
 }

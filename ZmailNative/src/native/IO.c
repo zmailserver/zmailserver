@@ -26,7 +26,7 @@
 #include "zjniutil.h"
 
 JNIEXPORT void JNICALL 
-Java_com_zimbra_znative_IO_link0(JNIEnv *env, 
+Java_org_zmail_znative_IO_link0(JNIEnv *env, 
                                jclass clz,
                                jbyteArray joldpath, 
                                jbyteArray jnewpath)
@@ -37,24 +37,24 @@ Java_com_zimbra_znative_IO_link0(JNIEnv *env,
     char *newpath;
 
     if (joldpath == NULL) {
-	ZimbraThrowNPE(env, "IO.link0 oldpath");
+	ZmailThrowNPE(env, "IO.link0 oldpath");
 	return;
     }
 
     if (jnewpath == NULL) {
-	ZimbraThrowNPE(env, "IO.link0 newpath");
+	ZmailThrowNPE(env, "IO.link0 newpath");
 	return;
     }
 
     oldlen = (*env)->GetArrayLength(env, joldpath);
     if (oldlen <= 0) {
-	ZimbraThrowIAE(env, "IO.link0 oldpath length <= 0");
+	ZmailThrowIAE(env, "IO.link0 oldpath length <= 0");
 	return;
     }
 
     newlen = (*env)->GetArrayLength(env, jnewpath);
     if (newlen <= 0) {
-	ZimbraThrowIAE(env, "IO.link0 newpath length <= 0");
+	ZmailThrowIAE(env, "IO.link0 newpath length <= 0");
 	return;
     }
 
@@ -73,14 +73,14 @@ Java_com_zimbra_znative_IO_link0(JNIEnv *env,
         snprintf(msg, sizeof(msg), "link(%s, %s): %s", oldpath, newpath, 
                  strerror(errno));
         if (errno == ENOENT) {
-            ZimbraThrowFNFE(env, msg);
+            ZmailThrowFNFE(env, msg);
         } else {
-            ZimbraThrowIOE(env, msg);
+            ZmailThrowIOE(env, msg);
         }
     }
 }
 
-JNIEXPORT jobject JNICALL Java_com_zimbra_znative_IO_fileInfo0
+JNIEXPORT jobject JNICALL Java_org_zmail_znative_IO_fileInfo0
 (JNIEnv *env, jclass clz, jbyteArray jpath)
 {
     struct stat sb;
@@ -88,13 +88,13 @@ JNIEXPORT jobject JNICALL Java_com_zimbra_znative_IO_fileInfo0
     char *path;
 	
     if (jpath == NULL) {
-        ZimbraThrowNPE(env, "IO.fileInfo0 path");
+        ZmailThrowNPE(env, "IO.fileInfo0 path");
         return NULL; /* retval ignored by on exception */
     }
 	
     len = (*env)->GetArrayLength(env, jpath);
     if (len <= 0) {
-        ZimbraThrowIAE(env, "IO.fileInfo0 path length <= 0");
+        ZmailThrowIAE(env, "IO.fileInfo0 path length <= 0");
         return NULL;
     }
 	
@@ -106,7 +106,7 @@ JNIEXPORT jobject JNICALL Java_com_zimbra_znative_IO_fileInfo0
 		jclass cls;
 		jmethodID constructor;
 		jobject object;
-		cls = (*env)->FindClass(env, "com/zimbra/znative/IO$FileInfo");
+		cls = (*env)->FindClass(env, "org/zmail/znative/IO$FileInfo");
 		constructor = (*env)->GetMethodID(env, cls, "<init>", "(JJI)V");
 		object = (*env)->NewObject(env, cls, constructor, (jlong)sb.st_ino, (jlong)sb.st_size, (jint)sb.st_nlink);
 		return object;
@@ -114,15 +114,15 @@ JNIEXPORT jobject JNICALL Java_com_zimbra_znative_IO_fileInfo0
         char msg[2048];
         snprintf(msg, sizeof(msg), "stat(%s): %s", path, strerror(errno));
         if (errno == ENOENT) {
-            ZimbraThrowFNFE(env, msg);
+            ZmailThrowFNFE(env, msg);
         } else {
-            ZimbraThrowIOE(env, msg);
+            ZmailThrowIOE(env, msg);
         }
         return NULL;
     }
 }
 
-JNIEXPORT void JNICALL Java_com_zimbra_znative_IO_setStdoutStderrTo0
+JNIEXPORT void JNICALL Java_org_zmail_znative_IO_setStdoutStderrTo0
 (JNIEnv *env, jclass clz, jbyteArray jpath)
 {
     FILE *fp;
@@ -130,13 +130,13 @@ JNIEXPORT void JNICALL Java_com_zimbra_znative_IO_setStdoutStderrTo0
     char *path;
 
     if (jpath == NULL) {
-        ZimbraThrowNPE(env, "IO.setStdoutStderr0 path");
+        ZmailThrowNPE(env, "IO.setStdoutStderr0 path");
         return;
     }
 
     len = (*env)->GetArrayLength(env, jpath);
     if (len <= 0) {
-        ZimbraThrowIAE(env, "IO.setStdoutStderr0 path length <= 0");
+        ZmailThrowIAE(env, "IO.setStdoutStderr0 path length <= 0");
         return;
     }
 
@@ -152,25 +152,25 @@ JNIEXPORT void JNICALL Java_com_zimbra_znative_IO_setStdoutStderrTo0
     } else {
 	char msg[2048];
 	snprintf(msg, sizeof(msg), "IO.setStdoutStderr0 fopen %s: %s", path, strerror(errno));
-        ZimbraThrowIOE(env, msg);
+        ZmailThrowIOE(env, msg);
         return;
     }
 }
 
-JNIEXPORT void JNICALL Java_com_zimbra_znative_IO_chmod0
+JNIEXPORT void JNICALL Java_org_zmail_znative_IO_chmod0
 (JNIEnv *env, jclass clz, jbyteArray jpath, jlong mode)
 {
     int len;
     char *path;
 
     if (jpath == NULL) {
-        ZimbraThrowNPE(env, "IO.chmod0 path");
+        ZmailThrowNPE(env, "IO.chmod0 path");
         return;
     }
 
     len = (*env)->GetArrayLength(env, jpath);
     if (len <= 0) {
-        ZimbraThrowIAE(env, "IO.chmod0 path length <= 0");
+        ZmailThrowIAE(env, "IO.chmod0 path length <= 0");
         return;
     }
 
@@ -182,22 +182,22 @@ JNIEXPORT void JNICALL Java_com_zimbra_znative_IO_chmod0
         char msg[2048];
         snprintf(msg, sizeof(msg), "chmod(%s): %s", path, strerror(errno));
         if (errno == ENOENT) {
-            ZimbraThrowFNFE(env, msg);
+            ZmailThrowFNFE(env, msg);
         } else {
-            ZimbraThrowIOE(env, msg);
+            ZmailThrowIOE(env, msg);
         }
     }
 } 
 
-JNIEXPORT jint JNICALL Java_com_zimbra_znative_IO_S_1IRUSR(JNIEnv *e, jclass c) { return S_IRUSR; }
-JNIEXPORT jint JNICALL Java_com_zimbra_znative_IO_S_1IWUSR(JNIEnv *e, jclass c) { return S_IWUSR; }
-JNIEXPORT jint JNICALL Java_com_zimbra_znative_IO_S_1IXUSR(JNIEnv *e, jclass c) { return S_IXUSR; }
-JNIEXPORT jint JNICALL Java_com_zimbra_znative_IO_S_1IRGRP(JNIEnv *e, jclass c) { return S_IRGRP; }
-JNIEXPORT jint JNICALL Java_com_zimbra_znative_IO_S_1IWGRP(JNIEnv *e, jclass c) { return S_IWGRP; }
-JNIEXPORT jint JNICALL Java_com_zimbra_znative_IO_S_1IXGRP(JNIEnv *e, jclass c) { return S_IXGRP; }
-JNIEXPORT jint JNICALL Java_com_zimbra_znative_IO_S_1IROTH(JNIEnv *e, jclass c) { return S_IROTH; }
-JNIEXPORT jint JNICALL Java_com_zimbra_znative_IO_S_1IWOTH(JNIEnv *e, jclass c) { return S_IWOTH; }
-JNIEXPORT jint JNICALL Java_com_zimbra_znative_IO_S_1IXOTH(JNIEnv *e, jclass c) { return S_IXOTH; }
-JNIEXPORT jint JNICALL Java_com_zimbra_znative_IO_S_1ISUID(JNIEnv *e, jclass c) { return S_ISUID; }
-JNIEXPORT jint JNICALL Java_com_zimbra_znative_IO_S_1ISGID(JNIEnv *e, jclass c) { return S_ISGID; }
-JNIEXPORT jint JNICALL Java_com_zimbra_znative_IO_S_1ISVTX(JNIEnv *e, jclass c) { return S_ISVTX; }
+JNIEXPORT jint JNICALL Java_org_zmail_znative_IO_S_1IRUSR(JNIEnv *e, jclass c) { return S_IRUSR; }
+JNIEXPORT jint JNICALL Java_org_zmail_znative_IO_S_1IWUSR(JNIEnv *e, jclass c) { return S_IWUSR; }
+JNIEXPORT jint JNICALL Java_org_zmail_znative_IO_S_1IXUSR(JNIEnv *e, jclass c) { return S_IXUSR; }
+JNIEXPORT jint JNICALL Java_org_zmail_znative_IO_S_1IRGRP(JNIEnv *e, jclass c) { return S_IRGRP; }
+JNIEXPORT jint JNICALL Java_org_zmail_znative_IO_S_1IWGRP(JNIEnv *e, jclass c) { return S_IWGRP; }
+JNIEXPORT jint JNICALL Java_org_zmail_znative_IO_S_1IXGRP(JNIEnv *e, jclass c) { return S_IXGRP; }
+JNIEXPORT jint JNICALL Java_org_zmail_znative_IO_S_1IROTH(JNIEnv *e, jclass c) { return S_IROTH; }
+JNIEXPORT jint JNICALL Java_org_zmail_znative_IO_S_1IWOTH(JNIEnv *e, jclass c) { return S_IWOTH; }
+JNIEXPORT jint JNICALL Java_org_zmail_znative_IO_S_1IXOTH(JNIEnv *e, jclass c) { return S_IXOTH; }
+JNIEXPORT jint JNICALL Java_org_zmail_znative_IO_S_1ISUID(JNIEnv *e, jclass c) { return S_ISUID; }
+JNIEXPORT jint JNICALL Java_org_zmail_znative_IO_S_1ISGID(JNIEnv *e, jclass c) { return S_ISGID; }
+JNIEXPORT jint JNICALL Java_org_zmail_znative_IO_S_1ISVTX(JNIEnv *e, jclass c) { return S_ISVTX; }

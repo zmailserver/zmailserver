@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.znative;
+package org.zmail.znative;
 
 public class OperationFailedException extends Exception {
     public OperationFailedException(String msg) {

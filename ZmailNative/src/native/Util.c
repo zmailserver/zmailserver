@@ -24,13 +24,13 @@
 #include "zjniutil.h"
 
 JNIEXPORT jlong JNICALL
-Java_com_zimbra_znative_Util_getTicksPerSecond0(JNIEnv *env, jclass clz)
+Java_org_zmail_znative_Util_getTicksPerSecond0(JNIEnv *env, jclass clz)
 {
   long tps = sysconf(_SC_CLK_TCK);
   if (tps == -1) {
     char msg[256];
     snprintf(msg, sizeof(msg), "times(): %s", strerror(errno));
-    ZimbraThrowOFE(env, msg);
+    ZmailThrowOFE(env, msg);
     return -1;
   }
   return tps;

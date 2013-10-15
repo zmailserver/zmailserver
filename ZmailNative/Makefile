@@ -3,7 +3,7 @@ SRC     = src
 BUILD   = build
 
 BUILD_ROOT := $(shell pwd)
-BUILD_PLATFORM := $(shell sh $(BUILD_ROOT)/../ZimbraBuild/rpmconf/Build/get_plat_tag.sh)
+BUILD_PLATFORM := $(shell sh $(BUILD_ROOT)/../ZmailBuild/rpmconf/Build/get_plat_tag.sh)
 
 SHARED := -shared
 JAVAINC := -I/usr/local/java/include -I/usr/local/java/include/linux
@@ -20,8 +20,8 @@ SHARED := -dynamiclib
 MACDEF := -DDARWIN
 SHARED_EXT := jnilib
 CF := -fPIC -g -O2 -force_cpusubtype_ALL -mmacosx-version-min=10.4 -arch i386 -arch ppc -arch ppc64 -arch x86_64
-LIB_OPTS := -install_name /opt/zimbra/lib/libzimbra-native.$(SHARED_EXT) -framework JavaVM -framework CoreServices
-LIB_OPTS_SETUID := -install_name /opt/zimbra/lib/libsetuid.$(SHARED_EXT) -framework JavaVM
+LIB_OPTS := -install_name /opt/zmail/lib/libzmail-native.$(SHARED_EXT) -framework JavaVM -framework CoreServices
+LIB_OPTS_SETUID := -install_name /opt/zmail/lib/libsetuid.$(SHARED_EXT) -framework JavaVM
 JAVA_BINARY = /usr/bin/java
 PUSHED_EXT := jnilib.MacOSX
 PROXY_INFO := DefaultProxyInfo
@@ -34,8 +34,8 @@ SHARED := -dynamiclib
 MACDEF := -DDARWIN
 CF := -fPIC -g -O2 -force_cpusubtype_ALL -mmacosx-version-min=10.5 -arch i386 -arch ppc -arch x86_64
 SHARED_EXT := jnilib
-LIB_OPTS := -install_name /opt/zimbra/lib/libzimbra-native.$(SHARED_EXT) -framework JavaVM -framework CoreServices
-LIB_OPTS_SETUID := -install_name /opt/zimbra/lib/libsetuid.$(SHARED_EXT) -framework JavaVM
+LIB_OPTS := -install_name /opt/zmail/lib/libzmail-native.$(SHARED_EXT) -framework JavaVM -framework CoreServices
+LIB_OPTS_SETUID := -install_name /opt/zmail/lib/libsetuid.$(SHARED_EXT) -framework JavaVM
 JAVA_BINARY = /usr/bin/java
 PUSHED_EXT := jnilib.MacOSX
 PROXY_INFO := MacProxyInfo
@@ -59,8 +59,8 @@ SHARED := -dynamiclib
 MACDEF := -DDARWIN
 CF := -fPIC -g -O2 -force_cpusubtype_ALL -mmacosx-version-min=10.7 -arch x86_64
 SHARED_EXT := jnilib
-LIB_OPTS := -install_name /opt/zimbra/lib/libzimbra-native.$(SHARED_EXT) -framework JavaVM -framework CoreServices
-LIB_OPTS_SETUID := -install_name /opt/zimbra/lib/libsetuid.$(SHARED_EXT) -framework JavaVM
+LIB_OPTS := -install_name /opt/zmail/lib/libzmail-native.$(SHARED_EXT) -framework JavaVM -framework CoreServices
+LIB_OPTS_SETUID := -install_name /opt/zmail/lib/libsetuid.$(SHARED_EXT) -framework JavaVM
 JAVA_BINARY = /usr/bin/java
 PUSHED_EXT := jnilib.MacOSX
 PROXY_INFO := MacProxyInfo
@@ -68,12 +68,12 @@ endif
 
 all: FORCE
 	ant
-	$(MAKE) $(BUILD)/libzimbra-native.$(SHARED_EXT)
+	$(MAKE) $(BUILD)/libzmail-native.$(SHARED_EXT)
 	$(MAKE) $(BUILD)/libsetuid.$(SHARED_EXT)
 
 FORCE: ;
 
-$(BUILD)/libzimbra-native.$(SHARED_EXT): $(BUILD)/IO.o $(BUILD)/Process.o $(BUILD)/ProcessorUsage.o $(BUILD)/ResourceUsage.o $(BUILD)/Util.o $(BUILD)/zjniutil.o $(BUILD)/$(PROXY_INFO).o
+$(BUILD)/libzmail-native.$(SHARED_EXT): $(BUILD)/IO.o $(BUILD)/Process.o $(BUILD)/ProcessorUsage.o $(BUILD)/ResourceUsage.o $(BUILD)/Util.o $(BUILD)/zjniutil.o $(BUILD)/$(PROXY_INFO).o
 	$(CC) $(CF) $(LIB_OPTS) $(SHARED) -o $@ $^
 
 $(BUILD)/libsetuid.$(SHARED_EXT): $(BUILD)/org_mortbay_setuid_SetUID.o
@@ -105,10 +105,10 @@ $(BUILD)/$(PROXY_INFO).o: $(SRC)/native/$(PROXY_INFO).c $(BUILD)/ProxyInfo.h $(S
 # Hack to copy to destination for use on incremental builds on linux / mac dev environments.
 #
 push: all
-	p4 edit ../ZimbraCommon/jars/zimbra-native.jar
-	cp $(BUILD)/zimbra-native.jar ../ZimbraCommon/jars/zimbra-native.jar
-	p4 edit ../ZimbraServer/lib/libzimbra-native.$(PUSHED_EXT)
-	cp $(BUILD)/libzimbra-native.$(SHARED_EXT) ../ZimbraServer/lib/libzimbra-native.$(PUSHED_EXT)
+	p4 edit ../ZmailCommon/jars/zmail-native.jar
+	cp $(BUILD)/zmail-native.jar ../ZmailCommon/jars/zmail-native.jar
+	p4 edit ../ZmailServer/lib/libzmail-native.$(PUSHED_EXT)
+	cp $(BUILD)/libzmail-native.$(SHARED_EXT) ../ZmailServer/lib/libzmail-native.$(PUSHED_EXT)
 
 #
 # Clean

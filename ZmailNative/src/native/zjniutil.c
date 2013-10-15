@@ -18,7 +18,7 @@
 #include "zjniutil.h"
 
 void
-ZimbraThrowNPE(JNIEnv *env, const char *msg)
+ZmailThrowNPE(JNIEnv *env, const char *msg)
 {
     jclass cls = (*env)->FindClass(env, "java/lang/NullPointerException");
 
@@ -27,7 +27,7 @@ ZimbraThrowNPE(JNIEnv *env, const char *msg)
 }
 
 void
-ZimbraThrowIAE(JNIEnv *env, const char *msg)
+ZmailThrowIAE(JNIEnv *env, const char *msg)
 {
     jclass cls = (*env)->FindClass(env, "java/lang/IllegalArgumentException");
 
@@ -36,7 +36,7 @@ ZimbraThrowIAE(JNIEnv *env, const char *msg)
 }
 
 void
-ZimbraThrowIOE(JNIEnv *env, const char *msg)
+ZmailThrowIOE(JNIEnv *env, const char *msg)
 {
     jclass cls = (*env)->FindClass(env, "java/io/IOException");
     if (cls != 0) /* Otherwise an exception has already been thrown */
@@ -44,7 +44,7 @@ ZimbraThrowIOE(JNIEnv *env, const char *msg)
 }
 
 void
-ZimbraThrowFNFE(JNIEnv *env, const char *msg)
+ZmailThrowFNFE(JNIEnv *env, const char *msg)
 {
     jclass cls = (*env)->FindClass(env, "java/io/FileNotFoundException");
     if (cls != 0) /* Otherwise an exception has already been thrown */
@@ -52,9 +52,9 @@ ZimbraThrowFNFE(JNIEnv *env, const char *msg)
 }
 
 void
-ZimbraThrowOFE(JNIEnv *env, const char  *msg)
+ZmailThrowOFE(JNIEnv *env, const char  *msg)
 {
-    jclass cls = (*env)->FindClass(env, "com/zimbra/znative/OperationFailedException");
+    jclass cls = (*env)->FindClass(env, "org/zmail/znative/OperationFailedException");
     if (cls != 0) /* Otherwise an exception has already been thrown */
         (*env)->ThrowNew(env, cls, msg);
 }

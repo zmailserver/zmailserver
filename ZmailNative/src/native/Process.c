@@ -25,25 +25,25 @@
 #include "zjniutil.h"
 
 JNIEXPORT jint JNICALL
-Java_com_zimbra_znative_Process_getuid0(JNIEnv *env, jclass clz)
+Java_org_zmail_znative_Process_getuid0(JNIEnv *env, jclass clz)
 {
     return getuid();
 }
 
 JNIEXPORT jint JNICALL
-Java_com_zimbra_znative_Process_geteuid0(JNIEnv *env, jclass clz)
+Java_org_zmail_znative_Process_geteuid0(JNIEnv *env, jclass clz)
 {
     return geteuid();
 }
 
 JNIEXPORT jint JNICALL
-Java_com_zimbra_znative_Process_getgid0(JNIEnv *env, jclass clz)
+Java_org_zmail_znative_Process_getgid0(JNIEnv *env, jclass clz)
 {
     return getgid();
 }
 
 JNIEXPORT jint JNICALL
-Java_com_zimbra_znative_Process_getegid0(JNIEnv *env, jclass clz)
+Java_org_zmail_znative_Process_getegid0(JNIEnv *env, jclass clz)
 {
     return getegid();
 }
@@ -59,7 +59,7 @@ SetPrivileges(JNIEnv *env, const char *username, uid_t uid, gid_t gid)
     if (setgid(gid) == -1) {
         char msg[256];
         snprintf(msg, sizeof(msg), "setgid(%d): %s", gid, strerror(errno));
-        ZimbraThrowOFE(env, msg);
+        ZmailThrowOFE(env, msg);
         return;
     }
     
@@ -67,20 +67,20 @@ SetPrivileges(JNIEnv *env, const char *username, uid_t uid, gid_t gid)
         char msg[256];
         snprintf(msg, sizeof(msg), "initgroups(%s, %d): %s", username, gid, 
                  strerror(errno));
-        ZimbraThrowOFE(env, msg);
+        ZmailThrowOFE(env, msg);
         return;
     }
 
     if (setuid(uid) == -1) {
         char msg[256];
         snprintf(msg, sizeof(msg), "setuid(%d): %s", uid, strerror(errno));
-        ZimbraThrowOFE(env, msg);
+        ZmailThrowOFE(env, msg);
         return;
     }
 }
 
 JNIEXPORT void JNICALL
-Java_com_zimbra_znative_Process_setPrivileges0(JNIEnv *env, jclass clz,
+Java_org_zmail_znative_Process_setPrivileges0(JNIEnv *env, jclass clz,
                                                jbyteArray jusername,
                                                jint uid,
                                                jint gid)
@@ -89,19 +89,19 @@ Java_com_zimbra_znative_Process_setPrivileges0(JNIEnv *env, jclass clz,
     char *username;
 
     if (jusername == NULL) {
-        ZimbraThrowNPE(env, "Process.setPrivileges0 username");
+        ZmailThrowNPE(env, "Process.setPrivileges0 username");
         return;
     }
     
     length = (*env)->GetArrayLength(env, jusername);
     if (length <= 0) {
-        ZimbraThrowIAE(env, "Process.setPrivileges0 username length <= 0");
+        ZmailThrowIAE(env, "Process.setPrivileges0 username length <= 0");
         return;
     }
     
     username = (char *)calloc(length + 1, 1);   /* +1 for \0 */
     if (username == NULL) {
-        ZimbraThrowIAE(env, "Process.setPrivileges0 username malloc failed");
+        ZmailThrowIAE(env, "Process.setPrivileges0 username malloc failed");
         return;
     } 
     (*env)->GetByteArrayRegion(env, jusername, 0, length, (jbyte *)username);

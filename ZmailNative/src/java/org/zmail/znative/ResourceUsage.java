@@ -15,7 +15,7 @@
 /**
  * 
  */
-package com.zimbra.znative;
+package org.zmail.znative;
 
 public final class ResourceUsage {
     public static final int TYPE_SELF = 0;
