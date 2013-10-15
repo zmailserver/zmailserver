@@ -12,16 +12,16 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.client;
+package org.zmail.client;
 
 import org.json.JSONException;
 
-import com.zimbra.soap.admin.type.DataSourceType;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.SystemUtil;
-import com.zimbra.soap.type.CalDataSource;
-import com.zimbra.soap.type.DataSources;
+import org.zmail.soap.admin.type.DataSourceType;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.SystemUtil;
+import org.zmail.soap.type.CalDataSource;
+import org.zmail.soap.type.DataSources;
 
 public class ZCalDataSource implements ZDataSource, ToZJSONObject {
 

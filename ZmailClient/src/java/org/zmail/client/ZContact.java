@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.client;
+package org.zmail.client;
 
 import java.io.InputStream;
 import java.util.Collections;
@@ -24,12 +24,12 @@ import java.util.Set;
 
 import org.json.JSONException;
 
-import com.zimbra.client.event.ZModifyContactEvent;
-import com.zimbra.client.event.ZModifyEvent;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.zclient.ZClientException;
+import org.zmail.client.event.ZModifyContactEvent;
+import org.zmail.client.event.ZModifyEvent;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.zclient.ZClientException;
 
 public class ZContact implements ZItem, ToZJSONObject {
 

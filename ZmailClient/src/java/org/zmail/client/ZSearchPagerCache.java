@@ -13,22 +13,22 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.client;
+package org.zmail.client;
 
 import java.util.Iterator;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.MapUtil;
-import com.zimbra.client.event.ZCreateEvent;
-import com.zimbra.client.event.ZCreateItemEvent;
-import com.zimbra.client.event.ZCreateMessageEvent;
-import com.zimbra.client.event.ZDeleteEvent;
-import com.zimbra.client.event.ZEventHandler;
-import com.zimbra.client.event.ZModifyEvent;
-import com.zimbra.client.event.ZModifyItemEvent;
-import com.zimbra.client.event.ZModifyItemFolderEvent;
-import com.zimbra.client.event.ZRefreshEvent;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.MapUtil;
+import org.zmail.client.event.ZCreateEvent;
+import org.zmail.client.event.ZCreateItemEvent;
+import org.zmail.client.event.ZCreateMessageEvent;
+import org.zmail.client.event.ZDeleteEvent;
+import org.zmail.client.event.ZEventHandler;
+import org.zmail.client.event.ZModifyEvent;
+import org.zmail.client.event.ZModifyItemEvent;
+import org.zmail.client.event.ZModifyItemFolderEvent;
+import org.zmail.client.event.ZRefreshEvent;
 
 class ZSearchPagerCache extends ZEventHandler {
 

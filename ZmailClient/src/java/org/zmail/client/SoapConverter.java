@@ -13,20 +13,20 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.client;
+package org.zmail.client;
 
 import com.google.common.base.Function;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.EnumBiMap;
-import com.zimbra.common.account.Key;
-import com.zimbra.soap.account.type.Identity;
-import com.zimbra.soap.account.type.Signature;
-import com.zimbra.soap.mail.type.Folder;
-import com.zimbra.soap.type.AccountBy;
+import org.zmail.common.account.Key;
+import org.zmail.soap.account.type.Identity;
+import org.zmail.soap.account.type.Signature;
+import org.zmail.soap.mail.type.Folder;
+import org.zmail.soap.type.AccountBy;
 
 
 /**
- * Converts between {@code com.zimbra.soap} objects and {@code com.zimbra.client} objects.
+ * Converts between {@code org.zmail.soap} objects and {@code org.zmail.client} objects.
  */
 public class SoapConverter {
     

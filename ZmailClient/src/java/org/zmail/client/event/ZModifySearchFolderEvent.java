@@ -13,14 +13,14 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.client.event;
+package org.zmail.client.event;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.client.ToZJSONObject;
-import com.zimbra.client.ZJSONObject;
-import com.zimbra.soap.type.SearchSortBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.client.ToZJSONObject;
+import org.zmail.client.ZJSONObject;
+import org.zmail.soap.type.SearchSortBy;
 import org.json.JSONException;
 
 public class ZModifySearchFolderEvent extends ZModifyFolderEvent implements ToZJSONObject {

@@ -13,19 +13,19 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.client;
+package org.zmail.client;
 
-import com.zimbra.client.ZMailbox.ZApptSummaryResult;
-import com.zimbra.client.event.ZEventHandler;
-import com.zimbra.client.event.ZRefreshEvent;
-import com.zimbra.client.event.ZCreateEvent;
-import com.zimbra.client.event.ZModifyEvent;
-import com.zimbra.client.event.ZDeleteEvent;
-import com.zimbra.client.event.ZCreateAppointmentEvent;
-import com.zimbra.client.event.ZModifyAppointmentEvent;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.Element;
+import org.zmail.client.ZMailbox.ZApptSummaryResult;
+import org.zmail.client.event.ZEventHandler;
+import org.zmail.client.event.ZRefreshEvent;
+import org.zmail.client.event.ZCreateEvent;
+import org.zmail.client.event.ZModifyEvent;
+import org.zmail.client.event.ZDeleteEvent;
+import org.zmail.client.event.ZCreateAppointmentEvent;
+import org.zmail.client.event.ZModifyAppointmentEvent;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.Element;
 
 import java.util.HashMap;
 import java.util.Map;

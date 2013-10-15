@@ -13,19 +13,19 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.client;
+package org.zmail.client;
 
 import org.json.JSONException;
 
-import com.zimbra.soap.admin.type.DataSourceType;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.SystemUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.soap.account.type.AccountPop3DataSource;
-import com.zimbra.soap.type.DataSource.ConnectionType;
-import com.zimbra.soap.type.DataSources;
-import com.zimbra.soap.type.Pop3DataSource;
+import org.zmail.soap.admin.type.DataSourceType;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.SystemUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.soap.account.type.AccountPop3DataSource;
+import org.zmail.soap.type.DataSource.ConnectionType;
+import org.zmail.soap.type.DataSources;
+import org.zmail.soap.type.Pop3DataSource;
 
 public class ZPop3DataSource implements ZDataSource, ToZJSONObject {
 
@@ -62,7 +62,7 @@ public class ZPop3DataSource implements ZDataSource, ToZJSONObject {
         src.addAttribute(MailConstants.A_FOLDER, data.getFolderId());
         src.addAttribute(MailConstants.A_DS_CONNECTION_TYPE, data.getConnectionType().name());
         src.addAttribute(MailConstants.A_DS_LEAVE_ON_SERVER, data.isLeaveOnServer());
-        ZimbraLog.test.info("XXX bburtin: " + src.prettyPrint());
+        ZmailLog.test.info("XXX bburtin: " + src.prettyPrint());
         return src;
     }
 

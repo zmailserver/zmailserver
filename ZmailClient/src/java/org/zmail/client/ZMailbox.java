@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.client;
+package org.zmail.client;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -54,103 +54,103 @@ import org.json.JSONException;
 
 import com.google.common.base.CharMatcher;
 import com.google.common.base.Strings;
-import com.zimbra.client.ZFolder.Color;
-import com.zimbra.client.ZGrant.GranteeType;
-import com.zimbra.client.ZInvite.ZTimeZone;
-import com.zimbra.client.ZMailbox.ZOutgoingMessage.AttachedMessagePart;
-import com.zimbra.client.ZSearchParams.Cursor;
-import com.zimbra.client.event.ZCreateAppointmentEvent;
-import com.zimbra.client.event.ZCreateContactEvent;
-import com.zimbra.client.event.ZCreateConversationEvent;
-import com.zimbra.client.event.ZCreateEvent;
-import com.zimbra.client.event.ZCreateFolderEvent;
-import com.zimbra.client.event.ZCreateMessageEvent;
-import com.zimbra.client.event.ZCreateMountpointEvent;
-import com.zimbra.client.event.ZCreateSearchFolderEvent;
-import com.zimbra.client.event.ZCreateTagEvent;
-import com.zimbra.client.event.ZCreateTaskEvent;
-import com.zimbra.client.event.ZDeleteEvent;
-import com.zimbra.client.event.ZEventHandler;
-import com.zimbra.client.event.ZModifyAppointmentEvent;
-import com.zimbra.client.event.ZModifyContactEvent;
-import com.zimbra.client.event.ZModifyConversationEvent;
-import com.zimbra.client.event.ZModifyEvent;
-import com.zimbra.client.event.ZModifyFolderEvent;
-import com.zimbra.client.event.ZModifyMailboxEvent;
-import com.zimbra.client.event.ZModifyMessageEvent;
-import com.zimbra.client.event.ZModifyMountpointEvent;
-import com.zimbra.client.event.ZModifySearchFolderEvent;
-import com.zimbra.client.event.ZModifyTagEvent;
-import com.zimbra.client.event.ZModifyTaskEvent;
-import com.zimbra.client.event.ZModifyVoiceMailItemEvent;
-import com.zimbra.client.event.ZModifyVoiceMailItemFolderEvent;
-import com.zimbra.client.event.ZRefreshEvent;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.httpclient.HttpClientUtil;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.net.SocketFactories;
-import com.zimbra.common.service.RemoteServiceException;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.Element.JSONElement;
-import com.zimbra.common.soap.Element.XMLElement;
-import com.zimbra.common.soap.HeaderConstants;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.SoapFaultException;
-import com.zimbra.common.soap.SoapHttpTransport;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.common.soap.SoapTransport;
-import com.zimbra.common.soap.VoiceConstants;
-import com.zimbra.common.soap.ZimbraNamespace;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.ListUtil;
-import com.zimbra.common.util.MapUtil;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.SystemUtil;
-import com.zimbra.common.util.ZimbraHttpConnectionManager;
-import com.zimbra.common.zclient.ZClientException;
-import com.zimbra.soap.JaxbUtil;
-import com.zimbra.soap.account.message.AuthRequest;
-import com.zimbra.soap.account.message.AuthResponse;
-import com.zimbra.soap.account.message.ChangePasswordRequest;
-import com.zimbra.soap.account.message.ChangePasswordResponse;
-import com.zimbra.soap.account.message.GetIdentitiesRequest;
-import com.zimbra.soap.account.message.GetIdentitiesResponse;
-import com.zimbra.soap.account.message.GetInfoRequest;
-import com.zimbra.soap.account.message.GetInfoResponse;
-import com.zimbra.soap.account.message.GetSignaturesRequest;
-import com.zimbra.soap.account.message.GetSignaturesResponse;
-import com.zimbra.soap.account.type.AuthToken;
-import com.zimbra.soap.account.type.InfoSection;
-import com.zimbra.soap.mail.message.CheckSpellingRequest;
-import com.zimbra.soap.mail.message.CheckSpellingResponse;
-import com.zimbra.soap.mail.message.GetDataSourcesRequest;
-import com.zimbra.soap.mail.message.GetDataSourcesResponse;
-import com.zimbra.soap.mail.message.GetFilterRulesRequest;
-import com.zimbra.soap.mail.message.GetFilterRulesResponse;
-import com.zimbra.soap.mail.message.GetFolderRequest;
-import com.zimbra.soap.mail.message.GetFolderResponse;
-import com.zimbra.soap.mail.message.GetOutgoingFilterRulesRequest;
-import com.zimbra.soap.mail.message.GetOutgoingFilterRulesResponse;
-import com.zimbra.soap.mail.message.ImportContactsRequest;
-import com.zimbra.soap.mail.message.ImportContactsResponse;
-import com.zimbra.soap.mail.message.ModifyFilterRulesRequest;
-import com.zimbra.soap.mail.message.ModifyOutgoingFilterRulesRequest;
-import com.zimbra.soap.mail.type.Content;
-import com.zimbra.soap.mail.type.Folder;
-import com.zimbra.soap.mail.type.ImportContact;
-import com.zimbra.soap.type.AccountSelector;
-import com.zimbra.soap.type.CalDataSource;
-import com.zimbra.soap.type.DataSource;
-import com.zimbra.soap.type.ImapDataSource;
-import com.zimbra.soap.type.Pop3DataSource;
-import com.zimbra.soap.type.RssDataSource;
-import com.zimbra.soap.type.SearchSortBy;
+import org.zmail.client.ZFolder.Color;
+import org.zmail.client.ZGrant.GranteeType;
+import org.zmail.client.ZInvite.ZTimeZone;
+import org.zmail.client.ZMailbox.ZOutgoingMessage.AttachedMessagePart;
+import org.zmail.client.ZSearchParams.Cursor;
+import org.zmail.client.event.ZCreateAppointmentEvent;
+import org.zmail.client.event.ZCreateContactEvent;
+import org.zmail.client.event.ZCreateConversationEvent;
+import org.zmail.client.event.ZCreateEvent;
+import org.zmail.client.event.ZCreateFolderEvent;
+import org.zmail.client.event.ZCreateMessageEvent;
+import org.zmail.client.event.ZCreateMountpointEvent;
+import org.zmail.client.event.ZCreateSearchFolderEvent;
+import org.zmail.client.event.ZCreateTagEvent;
+import org.zmail.client.event.ZCreateTaskEvent;
+import org.zmail.client.event.ZDeleteEvent;
+import org.zmail.client.event.ZEventHandler;
+import org.zmail.client.event.ZModifyAppointmentEvent;
+import org.zmail.client.event.ZModifyContactEvent;
+import org.zmail.client.event.ZModifyConversationEvent;
+import org.zmail.client.event.ZModifyEvent;
+import org.zmail.client.event.ZModifyFolderEvent;
+import org.zmail.client.event.ZModifyMailboxEvent;
+import org.zmail.client.event.ZModifyMessageEvent;
+import org.zmail.client.event.ZModifyMountpointEvent;
+import org.zmail.client.event.ZModifySearchFolderEvent;
+import org.zmail.client.event.ZModifyTagEvent;
+import org.zmail.client.event.ZModifyTaskEvent;
+import org.zmail.client.event.ZModifyVoiceMailItemEvent;
+import org.zmail.client.event.ZModifyVoiceMailItemFolderEvent;
+import org.zmail.client.event.ZRefreshEvent;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.httpclient.HttpClientUtil;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.net.SocketFactories;
+import org.zmail.common.service.RemoteServiceException;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.Element.JSONElement;
+import org.zmail.common.soap.Element.XMLElement;
+import org.zmail.common.soap.HeaderConstants;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.SoapFaultException;
+import org.zmail.common.soap.SoapHttpTransport;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.common.soap.SoapTransport;
+import org.zmail.common.soap.VoiceConstants;
+import org.zmail.common.soap.ZmailNamespace;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.ListUtil;
+import org.zmail.common.util.MapUtil;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.SystemUtil;
+import org.zmail.common.util.ZmailHttpConnectionManager;
+import org.zmail.common.zclient.ZClientException;
+import org.zmail.soap.JaxbUtil;
+import org.zmail.soap.account.message.AuthRequest;
+import org.zmail.soap.account.message.AuthResponse;
+import org.zmail.soap.account.message.ChangePasswordRequest;
+import org.zmail.soap.account.message.ChangePasswordResponse;
+import org.zmail.soap.account.message.GetIdentitiesRequest;
+import org.zmail.soap.account.message.GetIdentitiesResponse;
+import org.zmail.soap.account.message.GetInfoRequest;
+import org.zmail.soap.account.message.GetInfoResponse;
+import org.zmail.soap.account.message.GetSignaturesRequest;
+import org.zmail.soap.account.message.GetSignaturesResponse;
+import org.zmail.soap.account.type.AuthToken;
+import org.zmail.soap.account.type.InfoSection;
+import org.zmail.soap.mail.message.CheckSpellingRequest;
+import org.zmail.soap.mail.message.CheckSpellingResponse;
+import org.zmail.soap.mail.message.GetDataSourcesRequest;
+import org.zmail.soap.mail.message.GetDataSourcesResponse;
+import org.zmail.soap.mail.message.GetFilterRulesRequest;
+import org.zmail.soap.mail.message.GetFilterRulesResponse;
+import org.zmail.soap.mail.message.GetFolderRequest;
+import org.zmail.soap.mail.message.GetFolderResponse;
+import org.zmail.soap.mail.message.GetOutgoingFilterRulesRequest;
+import org.zmail.soap.mail.message.GetOutgoingFilterRulesResponse;
+import org.zmail.soap.mail.message.ImportContactsRequest;
+import org.zmail.soap.mail.message.ImportContactsResponse;
+import org.zmail.soap.mail.message.ModifyFilterRulesRequest;
+import org.zmail.soap.mail.message.ModifyOutgoingFilterRulesRequest;
+import org.zmail.soap.mail.type.Content;
+import org.zmail.soap.mail.type.Folder;
+import org.zmail.soap.mail.type.ImportContact;
+import org.zmail.soap.type.AccountSelector;
+import org.zmail.soap.type.CalDataSource;
+import org.zmail.soap.type.DataSource;
+import org.zmail.soap.type.ImapDataSource;
+import org.zmail.soap.type.Pop3DataSource;
+import org.zmail.soap.type.RssDataSource;
+import org.zmail.soap.type.SearchSortBy;
 
 public class ZMailbox implements ToZJSONObject {
     public final static int MAX_NUM_CACHED_SEARCH_PAGERS = 5;
@@ -536,7 +536,7 @@ public class ZMailbox implements ToZJSONObject {
     private ZAuthResult authByPassword(Options options, String password) throws ServiceException {
         if (mTransport == null) throw ZClientException.CLIENT_ERROR("must call setURI before calling authenticate", null);
 
-        AccountSelector account = new AccountSelector(com.zimbra.soap.type.AccountBy.name, options.getAccount());
+        AccountSelector account = new AccountSelector(org.zmail.soap.type.AccountBy.name, options.getAccount());
         AuthRequest auth = new AuthRequest(account, password);
         auth.setPassword(password);
         auth.setVirtualHost(options.getVirtualHost());
@@ -622,8 +622,8 @@ public class ZMailbox implements ToZJSONObject {
                 throw ZClientException.IO_ERROR(e.getMessage(), e);
             throw ServiceException.FAILURE(e.getMessage(), e);
         } finally {
-            Element context = mTransport.getZimbraContext();
-            mTransport.clearZimbraContext();
+            Element context = mTransport.getZmailContext();
+            mTransport.clearZmailContext();
             handleResponseContext(context);
         }
     }
@@ -631,18 +631,18 @@ public class ZMailbox implements ToZJSONObject {
     private void handleResponseContext(Element context) throws ServiceException {
         if (context == null) return;
         // handle refresh blocks
-        Element refresh = context.getOptionalElement(ZimbraNamespace.E_REFRESH);
+        Element refresh = context.getOptionalElement(ZmailNamespace.E_REFRESH);
         if (refresh != null)
             handleRefresh(refresh);
 
-        for (Element notify : context.listElements(ZimbraNamespace.E_NOTIFY)) {
+        for (Element notify : context.listElements(ZmailNamespace.E_NOTIFY)) {
             mTransport.setMaxNotifySeq(
                     Math.max(mTransport.getMaxNotifySeq(),
                              notify.getAttributeLong(HeaderConstants.A_SEQNO, 0)));
             // MUST DO IN THIS ORDER!
-            handleDeleted(notify.getOptionalElement(ZimbraNamespace.E_DELETED));
-            handleCreated(notify.getOptionalElement(ZimbraNamespace.E_CREATED));
-            handleModified(notify.getOptionalElement(ZimbraNamespace.E_MODIFIED));
+            handleDeleted(notify.getOptionalElement(ZmailNamespace.E_DELETED));
+            handleCreated(notify.getOptionalElement(ZmailNamespace.E_CREATED));
+            handleModified(notify.getOptionalElement(ZmailNamespace.E_MODIFIED));
         }
     }
 
@@ -653,7 +653,7 @@ public class ZMailbox implements ToZJSONObject {
                 mSize = mbx.getAttributeLong(MailConstants.A_SIZE);
         }
 
-        Element tags = refresh.getOptionalElement(ZimbraNamespace.E_TAGS);
+        Element tags = refresh.getOptionalElement(ZmailNamespace.E_TAGS);
         List<ZTag> tagList = new ArrayList<ZTag>();
         if (tags != null) {
             for (Element t : tags.listElements(MailConstants.E_TAG)) {
@@ -961,7 +961,7 @@ public class ZMailbox implements ToZJSONObject {
 
     /**
      * @return current size of mailbox in bytes
-     * @throws com.zimbra.common.service.ServiceException on error
+     * @throws org.zmail.common.service.ServiceException on error
      */
     public long getSize() throws ServiceException {
         populateFolderCache();
@@ -970,7 +970,7 @@ public class ZMailbox implements ToZJSONObject {
 
     /**
      * @return account name of mailbox
-     * @throws com.zimbra.common.service.ServiceException on error
+     * @throws org.zmail.common.service.ServiceException on error
      */
     public String getName() throws ServiceException {
         return getAccountInfo(false).getName();
@@ -1048,7 +1048,7 @@ public class ZMailbox implements ToZJSONObject {
 
     /**
      * @return current List of all tags in the mailbox
-     * @throws com.zimbra.common.service.ServiceException on error
+     * @throws org.zmail.common.service.ServiceException on error
      */
     public List<ZTag> getAllTags() throws ServiceException {
         populateTagCache();
@@ -1069,7 +1069,7 @@ public class ZMailbox implements ToZJSONObject {
 
     /**
      * @return current list of all tags names in the mailbox, sorted
-     * @throws com.zimbra.common.service.ServiceException on error
+     * @throws org.zmail.common.service.ServiceException on error
      */
     public List<String> getAllTagNames() throws ServiceException {
         populateTagCache();
@@ -1084,7 +1084,7 @@ public class ZMailbox implements ToZJSONObject {
      *
      * @param name tag name
      * @return the tag, or null if tag not found
-     * @throws com.zimbra.common.service.ServiceException on error
+     * @throws org.zmail.common.service.ServiceException on error
      */
     public ZTag getTag(String nameOrId) throws ServiceException {
         ZTag result = getTagByName(nameOrId);
@@ -1096,7 +1096,7 @@ public class ZMailbox implements ToZJSONObject {
      *
      * @param name tag name
      * @return the tag, or null if tag not found
-     * @throws com.zimbra.common.service.ServiceException on error
+     * @throws org.zmail.common.service.ServiceException on error
      */
     public ZTag getTagByName(String name) throws ServiceException {
         populateTagCache();
@@ -1108,7 +1108,7 @@ public class ZMailbox implements ToZJSONObject {
      *
      * @param id the tag id
      * @return tag with given id, or null
-     * @throws com.zimbra.common.service.ServiceException on error
+     * @throws org.zmail.common.service.ServiceException on error
      */
     public ZTag getTagById(String id) throws ServiceException {
         populateTagCache();
@@ -1127,7 +1127,7 @@ public class ZMailbox implements ToZJSONObject {
      *
      * @param ids the tag ids
      * @return the tag list, or an empty list if no ids match
-     * @throws com.zimbra.common.service.ServiceException on error
+     * @throws org.zmail.common.service.ServiceException on error
      */
     public List<ZTag> getTags(String ids) throws ServiceException {
         List<ZTag> tags = new ArrayList<ZTag>();
@@ -1147,7 +1147,7 @@ public class ZMailbox implements ToZJSONObject {
      * @return newly created tag
      * @param name name of the tag
      * @param color optional color of the tag
-     * @throws com.zimbra.common.service.ServiceException if an error occurs
+     * @throws org.zmail.common.service.ServiceException if an error occurs
      *
      */
     public ZTag createTag(String name, ZTag.Color color) throws ServiceException {
@@ -1172,7 +1172,7 @@ public class ZMailbox implements ToZJSONObject {
      * @param id id of tag to update
      * @param name new name of tag
      * @param color color of tag to modify
-     * @throws com.zimbra.common.service.ServiceException on error
+     * @throws org.zmail.common.service.ServiceException on error
      */
     public ZActionResult updateTag(String id, String name, ZTag.Color color) throws ServiceException {
         Element action = tagAction("update", id);
@@ -1193,7 +1193,7 @@ public class ZMailbox implements ToZJSONObject {
      * @return action result
      * @param id id of tag to modify
      * @param color color of tag to modify
-     * @throws com.zimbra.common.service.ServiceException on error
+     * @throws org.zmail.common.service.ServiceException on error
      */
     public ZActionResult modifyTagColor(String id, ZTag.Color color) throws ServiceException {
         if (color == ZTag.Color.rgbColor) {
@@ -2089,9 +2089,9 @@ public class ZMailbox implements ToZJSONObject {
     }
 
     public HttpClient getHttpClient(URI uri) {
-        boolean isAdmin = uri.getPort() == LC.zimbra_admin_service_port.intValue();
+        boolean isAdmin = uri.getPort() == LC.zmail_admin_service_port.intValue();
         HttpState initialState = HttpClientUtil.newHttpState(getAuthToken(), uri.getHost(), isAdmin);
-        HttpClient client = ZimbraHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
+        HttpClient client = ZmailHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
         client.setState(initialState);
         client.getParams().setCookiePolicy(CookiePolicy.BROWSER_COMPATIBILITY);
         return client;
@@ -2107,7 +2107,7 @@ public class ZMailbox implements ToZJSONObject {
      * @param content message content
      * @param noICal if TRUE, then don't process iCal attachments.
      * @return ID of newly created message
-     * @throws com.zimbra.common.service.ServiceException on error
+     * @throws org.zmail.common.service.ServiceException on error
      */
     public String addMessage(String folderId, String flags, String tags, long receivedDate, String content, boolean noICal)
             throws ServiceException {
@@ -2125,7 +2125,7 @@ public class ZMailbox implements ToZJSONObject {
      * @param noICal if TRUE, then don't process iCal attachments.
      * @param filterSent if TRUE, then do outgoing message filtering
      * @return ID of newly created message
-     * @throws com.zimbra.common.service.ServiceException on error
+     * @throws org.zmail.common.service.ServiceException on error
      */
     public String addMessage(
             String folderId, String flags, String tags, long receivedDate, String content, boolean noICal, boolean filterSent)
@@ -2291,7 +2291,7 @@ public class ZMailbox implements ToZJSONObject {
      * @return action result
      * @param ids of messages to flag
      * @param flag flag on /off
-     * @throws com.zimbra.common.service.ServiceException on error
+     * @throws org.zmail.common.service.ServiceException on error
      */
     public ZActionResult flagMessage(String ids, boolean flag) throws ServiceException {
         return doAction(messageAction(flag ? "flag" : "!flag", ids));
@@ -2340,7 +2340,7 @@ public class ZMailbox implements ToZJSONObject {
     /**
      * return the root user folder
      * @return user root folder
-     * @throws com.zimbra.common.service.ServiceException on error
+     * @throws org.zmail.common.service.ServiceException on error
      */
     public ZFolder getUserRoot() throws ServiceException {
         populateFolderCache();
@@ -2351,7 +2351,7 @@ public class ZMailbox implements ToZJSONObject {
      * find the folder with the specified path, starting from the user root.
      * @param path path of folder. Must start with {@link #PATH_SEPARATOR}.
      * @return ZFolder if found, null otherwise.
-     * @throws com.zimbra.common.service.ServiceException on error
+     * @throws org.zmail.common.service.ServiceException on error
      */
     public ZFolder getFolderByPath(String path) throws ServiceException {
         populateFolderCache();
@@ -2380,7 +2380,7 @@ public class ZMailbox implements ToZJSONObject {
      * find the folder with the specified id.
      * @param id id of  folder
      * @return ZFolder if found, null otherwise.
-     * @throws com.zimbra.common.service.ServiceException on error
+     * @throws org.zmail.common.service.ServiceException on error
      */
     public ZFolder getFolderById(String id) throws ServiceException {
         populateFolderCache();
@@ -2394,7 +2394,7 @@ public class ZMailbox implements ToZJSONObject {
      * find the folder with the specified UUID.
      * @param uuid UUID of folder
      * @return ZFolder if found, null otherwise.
-     * @throws com.zimbra.common.service.ServiceException on error
+     * @throws org.zmail.common.service.ServiceException on error
      */
     public ZFolder getFolderByUuid(String uuid) throws ServiceException {
         populateFolderCache();
@@ -2408,7 +2408,7 @@ public class ZMailbox implements ToZJSONObject {
      * find the folder with the specified path/id. Look up by path first, then id if path not found.
      * @param pathOrId path or id of  folder
      * @return ZFolder if found, null otherwise.
-     * @throws com.zimbra.common.service.ServiceException on error
+     * @throws org.zmail.common.service.ServiceException on error
      */
     public ZFolder getFolder(String pathOrId) throws ServiceException {
         ZFolder result = getFolderByPath(pathOrId);
@@ -2677,7 +2677,7 @@ public class ZMailbox implements ToZJSONObject {
      * find the search folder with the specified id.
      * @param id id of  folder
      * @return ZSearchFolder if found, null otherwise.
-     * @throws com.zimbra.common.service.ServiceException on error
+     * @throws org.zmail.common.service.ServiceException on error
      */
     public ZSearchFolder getSearchFolderById(String id) throws ServiceException {
         populateFolderCache();
@@ -2692,7 +2692,7 @@ public class ZMailbox implements ToZJSONObject {
      * find the mountpoint with the specified id.
      * @param id id of mountpoint
      * @return ZMountpoint if found, null otherwise.
-     * @throws com.zimbra.common.service.ServiceException on error
+     * @throws org.zmail.common.service.ServiceException on error
      */
     public ZMountpoint getMountpointById(String id) throws ServiceException {
         populateFolderCache();
@@ -3020,7 +3020,7 @@ public class ZMailbox implements ToZJSONObject {
     /**
      * revoke a grant
      * @param folderId folder id to modify
-     * @param grantreeId zimbra ID
+     * @param grantreeId zmail ID
      * @return action result
      * @throws ServiceException on error
      */
@@ -4235,7 +4235,7 @@ public class ZMailbox implements ToZJSONObject {
 
         //2. Send a batch request GetFolderRequest with sbRemote as input
         try {
-            Element batch = newRequestElement(ZimbraNamespace.E_BATCH_REQUEST);
+            Element batch = newRequestElement(ZmailNamespace.E_BATCH_REQUEST);
             //Element resp;
             for (String id : mountpointIds) {
                 Element folderrequest = batch.addElement(MailConstants.GET_FOLDER_REQUEST);
@@ -5055,7 +5055,7 @@ public class ZMailbox implements ToZJSONObject {
         return new ZSearchContext(new ZSearchParams(query), this);
     }
 
-    private static final int ADMIN_PORT = LC.zimbra_admin_service_port.intValue();
+    private static final int ADMIN_PORT = LC.zmail_admin_service_port.intValue();
 
     public static String resolveUrl(String url, boolean isAdmin) throws ZClientException {
         try {

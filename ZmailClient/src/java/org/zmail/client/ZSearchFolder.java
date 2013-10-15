@@ -13,17 +13,17 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.client;
+package org.zmail.client;
 
 import com.google.common.base.Joiner;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.SystemUtil;
-import com.zimbra.client.event.ZModifyEvent;
-import com.zimbra.client.event.ZModifySearchFolderEvent;
-import com.zimbra.soap.mail.type.SearchFolder;
-import com.zimbra.soap.type.SearchSortBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.SystemUtil;
+import org.zmail.client.event.ZModifyEvent;
+import org.zmail.client.event.ZModifySearchFolderEvent;
+import org.zmail.soap.mail.type.SearchFolder;
+import org.zmail.soap.type.SearchSortBy;
 
 import org.json.JSONException;
 

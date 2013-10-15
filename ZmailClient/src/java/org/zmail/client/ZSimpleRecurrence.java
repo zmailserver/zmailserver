@@ -13,17 +13,17 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.client;
+package org.zmail.client;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.zclient.ZClientException;
-import com.zimbra.client.ZInvite.ZByDayWeekDay;
-import com.zimbra.client.ZInvite.ZByRule;
-import com.zimbra.client.ZInvite.ZByType;
-import com.zimbra.client.ZInvite.ZFrequency;
-import com.zimbra.client.ZInvite.ZRecurrence;
-import com.zimbra.client.ZInvite.ZRecurrenceRule;
-import com.zimbra.client.ZInvite.ZWeekDay;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.zclient.ZClientException;
+import org.zmail.client.ZInvite.ZByDayWeekDay;
+import org.zmail.client.ZInvite.ZByRule;
+import org.zmail.client.ZInvite.ZByType;
+import org.zmail.client.ZInvite.ZFrequency;
+import org.zmail.client.ZInvite.ZRecurrence;
+import org.zmail.client.ZInvite.ZRecurrenceRule;
+import org.zmail.client.ZInvite.ZWeekDay;
 
 import java.util.ArrayList;
 import java.util.Arrays;

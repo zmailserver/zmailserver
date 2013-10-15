@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.client;
+package org.zmail.client;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -24,10 +24,10 @@ import javax.mail.internet.InternetAddress;
 
 import org.json.JSONException;
 
-import com.zimbra.common.mime.shim.JavaMailInternetAddress;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
+import org.zmail.common.mime.shim.JavaMailInternetAddress;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
 
 public class ZEmailAddress implements ToZJSONObject {
 
@@ -158,7 +158,7 @@ public class ZEmailAddress implements ToZJSONObject {
     /**
     *
     * @param type type of addresses to create in the returned list.
-    * @see com.zimbra.client.ZEmailAddress EMAIL_TYPE_TO, etc.
+    * @see org.zmail.client.ZEmailAddress EMAIL_TYPE_TO, etc.
     * @return list of ZEMailAddress obejcts.
     * @throws ServiceException
     */

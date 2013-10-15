@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.client;
+package org.zmail.client;
 
 import org.json.JSONException;
 
@@ -27,20 +27,20 @@ import java.util.Set;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
-import com.zimbra.common.account.ZAttrProvisioning;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.Element.KeyValuePair;
-import com.zimbra.common.util.ListUtil;
-import com.zimbra.common.util.MapUtil;
-import com.zimbra.common.util.SystemUtil;
-import com.zimbra.soap.account.message.GetInfoResponse;
-import com.zimbra.soap.account.type.Signature;
-import com.zimbra.soap.type.CalDataSource;
-import com.zimbra.soap.type.DataSource;
-import com.zimbra.soap.type.ImapDataSource;
-import com.zimbra.soap.type.Pop3DataSource;
-import com.zimbra.soap.type.RssDataSource;
+import org.zmail.common.account.ZAttrProvisioning;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.Element.KeyValuePair;
+import org.zmail.common.util.ListUtil;
+import org.zmail.common.util.MapUtil;
+import org.zmail.common.util.SystemUtil;
+import org.zmail.soap.account.message.GetInfoResponse;
+import org.zmail.soap.account.type.Signature;
+import org.zmail.soap.type.CalDataSource;
+import org.zmail.soap.type.DataSource;
+import org.zmail.soap.type.ImapDataSource;
+import org.zmail.soap.type.Pop3DataSource;
+import org.zmail.soap.type.RssDataSource;
 
 public class ZGetInfoResult implements ToZJSONObject {
 
@@ -114,7 +114,7 @@ public class ZGetInfoResult implements ToZJSONObject {
     }
 
     public Map<String, List<String>> getZimletProps() {
-        return MapUtil.multimapToMapOfLists(data.getPropsMultimap(ZAttrProvisioning.A_zimbraZimletUserProperties));
+        return MapUtil.multimapToMapOfLists(data.getPropsMultimap(ZAttrProvisioning.A_zmailZimletUserProperties));
     }
 
     /***
@@ -125,10 +125,10 @@ public class ZGetInfoResult implements ToZJSONObject {
         Multimap<String, String> attrs = data.getAttrsMultimap();
         Set<String> addresses = new HashSet<String>();
         addresses.add(getName().toLowerCase());
-        for (String alias : attrs.get(ZAttrProvisioning.A_zimbraMailAlias)) {
+        for (String alias : attrs.get(ZAttrProvisioning.A_zmailMailAlias)) {
             addresses.add(alias.toLowerCase());
         }
-        for (String allowFrom : attrs.get(ZAttrProvisioning.A_zimbraAllowFromAddress)) {
+        for (String allowFrom : attrs.get(ZAttrProvisioning.A_zmailAllowFromAddress)) {
             addresses.add(allowFrom.toLowerCase());
         }
         return addresses;

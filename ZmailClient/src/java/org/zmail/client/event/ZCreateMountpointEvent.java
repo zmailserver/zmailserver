@@ -13,11 +13,11 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.client.event;
+package org.zmail.client.event;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.client.ZItem;
-import com.zimbra.client.ZMountpoint;
+import org.zmail.common.service.ServiceException;
+import org.zmail.client.ZItem;
+import org.zmail.client.ZMountpoint;
 
 public class ZCreateMountpointEvent implements ZCreateItemEvent {
 
@@ -29,7 +29,7 @@ public class ZCreateMountpointEvent implements ZCreateItemEvent {
 
     /**
      * @return id of created mountpoint
-     * @throws com.zimbra.common.service.ServiceException
+     * @throws org.zmail.common.service.ServiceException
      */
     public String getId() throws ServiceException {
         return mMountpoint.getId();

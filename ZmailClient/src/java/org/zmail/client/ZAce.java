@@ -12,12 +12,12 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.client;
+package org.zmail.client;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.zclient.ZClientException;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.zclient.ZClientException;
 
 import org.json.JSONException;
 
@@ -60,11 +60,11 @@ public class ZAce implements ToZJSONObject {
          */
         all, 
         /**
-         * access is granted to a non-Zimbra email address and a password 
+         * access is granted to a non-Zmail email address and a password 
          */
         gst,
         /**
-         * access is granted to a non-Zimbra name and an access key
+         * access is granted to a non-Zmail name and an access key
          */
         key;
 
@@ -127,7 +127,7 @@ public class ZAce implements ToZJSONObject {
      * "usr", 
      * "grp",
      * "all" (all authenticated users),
-     * "guest" (non-Zimbra email address and password)
+     * "guest" (non-Zmail email address and password)
      * "pub" (public authenticated and unauthenticated access), 
      */
     public ZAce.GranteeType getGranteeType() {
@@ -135,7 +135,7 @@ public class ZAce implements ToZJSONObject {
     }
     
     /***
-     * the display name (*not* the zimbra id) of the principal being granted rights;
+     * the display name (*not* the zmail id) of the principal being granted rights;
      * optional if {grantee-type} is "all"
      */
     public String getGranteeName() {
@@ -146,7 +146,7 @@ public class ZAce implements ToZJSONObject {
     }
 
     /***
-     * the zimbraId of the granteee
+     * the zmailId of the granteee
      */
     public String getGranteeId() {
         return mGranteeId;                                                                          

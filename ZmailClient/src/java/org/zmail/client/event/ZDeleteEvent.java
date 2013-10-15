@@ -13,10 +13,10 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.client.event;
+package org.zmail.client.event;
 
-import com.zimbra.client.ToZJSONObject;
-import com.zimbra.client.ZJSONObject;
+import org.zmail.client.ToZJSONObject;
+import org.zmail.client.ZJSONObject;
 import org.json.JSONException;
 
 import java.util.ArrayList;

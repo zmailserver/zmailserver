@@ -13,10 +13,10 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.client;
+package org.zmail.client;
 
-import com.zimbra.soap.admin.type.DataSourceType;
-import com.zimbra.common.soap.Element;
+import org.zmail.soap.admin.type.DataSourceType;
+import org.zmail.common.soap.Element;
 
 public interface ZDataSource  {
     

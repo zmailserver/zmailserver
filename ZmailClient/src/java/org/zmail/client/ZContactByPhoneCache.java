@@ -12,11 +12,11 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.client;
+package org.zmail.client;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.mailbox.ContactConstants;
-import com.zimbra.client.event.*;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.mailbox.ContactConstants;
+import org.zmail.client.event.*;
 
 import java.util.Arrays;
 import java.util.HashMap;

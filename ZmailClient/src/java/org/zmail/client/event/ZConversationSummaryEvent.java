@@ -13,14 +13,14 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.client.event;
+package org.zmail.client.event;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.client.ToZJSONObject;
-import com.zimbra.client.ZEmailAddress;
-import com.zimbra.client.ZJSONObject;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.client.ToZJSONObject;
+import org.zmail.client.ZEmailAddress;
+import org.zmail.client.ZJSONObject;
 import org.json.JSONException;
 
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ public class ZConversationSummaryEvent implements ToZJSONObject {
 
     /**
      * @return conversation id
-     * @throws com.zimbra.common.service.ServiceException on error
+     * @throws org.zmail.common.service.ServiceException on error
      */
     public String getId() throws ServiceException {
         return mConvEl.getAttribute(MailConstants.A_ID);
@@ -61,7 +61,7 @@ public class ZConversationSummaryEvent implements ToZJSONObject {
     /**
      * @param defaultValue value to return if unchanged
      * @return new message count, or defaultValue if unchanged
-     * @throws com.zimbra.common.service.ServiceException on error
+     * @throws org.zmail.common.service.ServiceException on error
      */
     public int getMessageCount(int defaultValue) throws ServiceException {
         return (int) mConvEl.getAttributeLong(MailConstants.A_NUM, defaultValue);
@@ -88,7 +88,7 @@ public class ZConversationSummaryEvent implements ToZJSONObject {
     /**
      * @param defaultValue value to return if unchanged
      * @return new date or defaultValue if unchanged
-     * @throws com.zimbra.common.service.ServiceException on error
+     * @throws org.zmail.common.service.ServiceException on error
      */
     public long getDate(long defaultValue) throws ServiceException {
         return mConvEl.getAttributeLong(MailConstants.A_DATE, defaultValue);
@@ -97,7 +97,7 @@ public class ZConversationSummaryEvent implements ToZJSONObject {
     /**
      * @param defaultValue value to return if unchanged
      * @return grants or defaultValue if unchanged
-     * @throws com.zimbra.common.service.ServiceException on error
+     * @throws org.zmail.common.service.ServiceException on error
      */
     public List<ZEmailAddress> getRecipients(List<ZEmailAddress> defaultValue) throws ServiceException {
         List<ZEmailAddress> result  = null;

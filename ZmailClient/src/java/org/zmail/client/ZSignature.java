@@ -12,19 +12,19 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.client;
+package org.zmail.client;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.json.JSONException;
 
-import com.zimbra.common.account.ZAttrProvisioning;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.SystemUtil;
-import com.zimbra.soap.account.type.Signature;
-import com.zimbra.soap.account.type.SignatureContent;
+import org.zmail.common.account.ZAttrProvisioning;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.SystemUtil;
+import org.zmail.soap.account.type.Signature;
+import org.zmail.soap.account.type.SignatureContent;
 
 public class ZSignature implements Comparable<ZSignature>, ToZJSONObject {
 
@@ -94,8 +94,8 @@ public class ZSignature implements Comparable<ZSignature>, ToZJSONObject {
     
     public Map<String, Object> getAttrs() {
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(ZAttrProvisioning.A_zimbraSignatureId, data.getId());
-        attrs.put(ZAttrProvisioning.A_zimbraSignatureName, data.getName());
+        attrs.put(ZAttrProvisioning.A_zmailSignatureId, data.getId());
+        attrs.put(ZAttrProvisioning.A_zmailSignatureName, data.getName());
         
         String type = null;
         String value = null;
@@ -103,7 +103,7 @@ public class ZSignature implements Comparable<ZSignature>, ToZJSONObject {
         if (content != null) {
             type = content.getContentType();
             value = content.getContent();
-            attrs.put(com.zimbra.common.account.SignatureUtil.mimeTypeToAttrName(type), value);
+            attrs.put(org.zmail.common.account.SignatureUtil.mimeTypeToAttrName(type), value);
         }
         return attrs;
     }

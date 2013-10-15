@@ -12,17 +12,17 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.client;
+package org.zmail.client;
 
-import com.zimbra.common.calendar.Geo;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.client.ZInvite.ZComponent;
-import com.zimbra.client.ZInvite.ZStatus;
-import com.zimbra.client.ZMailbox.ZFreeBusyTimeSlot;
-import com.zimbra.client.event.ZModifyAppointmentEvent;
-import com.zimbra.client.event.ZModifyEvent;
+import org.zmail.common.calendar.Geo;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.client.ZInvite.ZComponent;
+import org.zmail.client.ZInvite.ZStatus;
+import org.zmail.client.ZMailbox.ZFreeBusyTimeSlot;
+import org.zmail.client.event.ZModifyAppointmentEvent;
+import org.zmail.client.event.ZModifyEvent;
 import org.json.JSONException;
 
 import java.util.ArrayList;

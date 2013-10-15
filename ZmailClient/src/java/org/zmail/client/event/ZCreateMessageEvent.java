@@ -13,15 +13,15 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.client.event;
+package org.zmail.client.event;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.client.ToZJSONObject;
-import com.zimbra.client.ZEmailAddress;
-import com.zimbra.client.ZItem;
-import com.zimbra.client.ZJSONObject;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.client.ToZJSONObject;
+import org.zmail.client.ZEmailAddress;
+import org.zmail.client.ZItem;
+import org.zmail.client.ZJSONObject;
 import org.json.JSONException;
 
 import java.util.ArrayList;
@@ -37,7 +37,7 @@ public class ZCreateMessageEvent implements ZCreateItemEvent, ToZJSONObject {
 
     /**
      * @return id
-     * @throws com.zimbra.common.service.ServiceException on error
+     * @throws org.zmail.common.service.ServiceException on error
      */
     public String getId() throws ServiceException {
         return mMessageEl.getAttribute(MailConstants.A_ID);
@@ -62,7 +62,7 @@ public class ZCreateMessageEvent implements ZCreateItemEvent, ToZJSONObject {
     /**
      * @param defaultValue value to return if unchanged
      * @return new message count, or defaultValue if unchanged
-     * @throws com.zimbra.common.service.ServiceException on error
+     * @throws org.zmail.common.service.ServiceException on error
      */
     public int getSize(int defaultValue) throws ServiceException {
         return (int) mMessageEl.getAttributeLong(MailConstants.A_SIZE, defaultValue);
@@ -103,7 +103,7 @@ public class ZCreateMessageEvent implements ZCreateItemEvent, ToZJSONObject {
     /**
      * @param defaultValue value to return if unchanged
      * @return new date or defaultValue if unchanged
-     * @throws com.zimbra.common.service.ServiceException on error
+     * @throws org.zmail.common.service.ServiceException on error
      */
     public long getReceivedDate(long defaultValue) throws ServiceException {
         return mMessageEl.getAttributeLong(MailConstants.A_DATE, defaultValue);
@@ -112,7 +112,7 @@ public class ZCreateMessageEvent implements ZCreateItemEvent, ToZJSONObject {
     /**
      * @param defaultValue value to return if unchanged
      * @return new date or defaultValue if unchanged
-     * @throws com.zimbra.common.service.ServiceException on error
+     * @throws org.zmail.common.service.ServiceException on error
      */
     public long getSentDate(long defaultValue) throws ServiceException {
         return mMessageEl.getAttributeLong(MailConstants.A_SENT_DATE, defaultValue);
@@ -121,7 +121,7 @@ public class ZCreateMessageEvent implements ZCreateItemEvent, ToZJSONObject {
     /**
      * @param defaultValue value to return if unchanged
      * @return grants or defaultValue if unchanged
-     * @throws com.zimbra.common.service.ServiceException on error
+     * @throws org.zmail.common.service.ServiceException on error
      */
     public List<ZEmailAddress> getEmailAddresses(List<ZEmailAddress> defaultValue) throws ServiceException {
         List<ZEmailAddress> result  = null;

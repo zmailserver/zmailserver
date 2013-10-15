@@ -13,10 +13,10 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.client.event;
+package org.zmail.client.event;
 
-import com.zimbra.client.ZMailbox;
-import com.zimbra.common.service.ServiceException;
+import org.zmail.client.ZMailbox;
+import org.zmail.common.service.ServiceException;
 
 public class ZEventHandler {
 

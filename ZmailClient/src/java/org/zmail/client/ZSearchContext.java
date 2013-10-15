@@ -13,10 +13,10 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.client;
+package org.zmail.client;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.client.ZSearchParams.Cursor;
+import org.zmail.common.service.ServiceException;
+import org.zmail.client.ZSearchParams.Cursor;
 import org.json.JSONException;
 
 import java.util.List;
@@ -41,7 +41,7 @@ public class ZSearchContext implements ToZJSONObject {
     /**
      *
      * @return next search hit in the results, or null.
-     * @throws com.zimbra.common.service.ServiceException
+     * @throws org.zmail.common.service.ServiceException
      */
     public ZSearchHit getNextHit() throws ServiceException {
          if (mCount <mMaxHits) {

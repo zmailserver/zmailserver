@@ -12,9 +12,9 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.client;
+package org.zmail.client;
 
-import com.zimbra.common.util.ExceptionToString;
+import org.zmail.common.util.ExceptionToString;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

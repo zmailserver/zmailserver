@@ -13,11 +13,11 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.client.event;
+package org.zmail.client.event;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.client.ZItem;
-import com.zimbra.client.ZSearchFolder;
+import org.zmail.common.service.ServiceException;
+import org.zmail.client.ZItem;
+import org.zmail.client.ZSearchFolder;
 
 public class ZCreateSearchFolderEvent implements ZCreateItemEvent {
 
@@ -29,7 +29,7 @@ public class ZCreateSearchFolderEvent implements ZCreateItemEvent {
 
     /**
      * @return id of created search folder.
-     * @throws com.zimbra.common.service.ServiceException
+     * @throws org.zmail.common.service.ServiceException
      */
     public String getId() throws ServiceException {
         return mSearchFolder.getId();

@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.client;
+package org.zmail.client;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.VoiceConstants;
-import com.zimbra.client.event.ZModifyEvent;
-import com.zimbra.client.event.ZModifyVoiceMailItemEvent;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.VoiceConstants;
+import org.zmail.client.event.ZModifyEvent;
+import org.zmail.client.event.ZModifyVoiceMailItemEvent;
 import org.json.JSONException;
 
 public class ZVoiceMailItemHit implements ZSearchHit {

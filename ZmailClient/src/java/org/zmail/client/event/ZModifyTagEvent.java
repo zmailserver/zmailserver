@@ -13,15 +13,15 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.client.event;
+package org.zmail.client.event;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.client.ToZJSONObject;
-import com.zimbra.client.ZJSONObject;
-import com.zimbra.client.ZTag.Color;
-import com.zimbra.soap.mail.type.RetentionPolicy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.client.ToZJSONObject;
+import org.zmail.client.ZJSONObject;
+import org.zmail.client.ZTag.Color;
+import org.zmail.soap.mail.type.RetentionPolicy;
 
 import org.json.JSONException;
 
@@ -35,7 +35,7 @@ public class ZModifyTagEvent implements ZModifyItemEvent, ToZJSONObject {
 
     /**
      * @return folder id of modified tag
-     * @throws com.zimbra.common.service.ServiceException
+     * @throws org.zmail.common.service.ServiceException
      */
     public String getId() throws ServiceException {
         return mTagEl.getAttribute(MailConstants.A_ID);
@@ -85,7 +85,7 @@ public class ZModifyTagEvent implements ZModifyItemEvent, ToZJSONObject {
     /**
      * @param defaultValue value to return if unchanged
      * @return new unread count, or defaultVslue if unchanged
-     * @throws com.zimbra.common.service.ServiceException on error
+     * @throws org.zmail.common.service.ServiceException on error
      */
     public int getUnreadCount(int defaultValue) throws ServiceException {
         return (int) mTagEl.getAttributeLong(MailConstants.A_UNREAD, defaultValue);

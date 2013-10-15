@@ -13,13 +13,13 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.client;
+package org.zmail.client;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.zclient.ZClientException;
-import com.zimbra.soap.mail.type.Grant;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.zclient.ZClientException;
+import org.zmail.soap.mail.type.Grant;
 
 import org.json.JSONException;
 
@@ -76,43 +76,43 @@ public class ZGrant implements ToZJSONObject {
     }
 
     public enum GranteeType {
-        // Need to keep JAXB class com.zimbra.soap.type.GrantGranteeType in sync with this class
+        // Need to keep JAXB class org.zmail.soap.type.GrantGranteeType in sync with this class
         /**
          * access is granted to an authenticated user
          */
-        usr(com.zimbra.soap.type.GrantGranteeType.usr),
+        usr(org.zmail.soap.type.GrantGranteeType.usr),
         /**
          * access is granted to a group of users
          */
-        grp(com.zimbra.soap.type.GrantGranteeType.grp),
+        grp(org.zmail.soap.type.GrantGranteeType.grp),
         /**
          * access is granted to users on a cos
          */
-        cos(com.zimbra.soap.type.GrantGranteeType.cos),
+        cos(org.zmail.soap.type.GrantGranteeType.cos),
         /**
          * access is granted to public. no authentication needed.
          */
-        pub(com.zimbra.soap.type.GrantGranteeType.pub),
+        pub(org.zmail.soap.type.GrantGranteeType.pub),
         /**
          * access is granted to all authenticated users
          */
-        all(com.zimbra.soap.type.GrantGranteeType.all),
+        all(org.zmail.soap.type.GrantGranteeType.all),
         /**
          * access is granted to all users in a domain
          */
-        dom(com.zimbra.soap.type.GrantGranteeType.dom),
+        dom(org.zmail.soap.type.GrantGranteeType.dom),
         /**
-         * access is granted to a non-Zimbra email address and a password 
+         * access is granted to a non-Zmail email address and a password 
          */
-        guest(com.zimbra.soap.type.GrantGranteeType.guest),
+        guest(org.zmail.soap.type.GrantGranteeType.guest),
         /**
-         * access is granted to a non-Zimbra email address and an accesskey
+         * access is granted to a non-Zmail email address and an accesskey
          */
-        key(com.zimbra.soap.type.GrantGranteeType.key);
+        key(org.zmail.soap.type.GrantGranteeType.key);
 
-        private com.zimbra.soap.type.GrantGranteeType jaxbGranteeType;
+        private org.zmail.soap.type.GrantGranteeType jaxbGranteeType;
 
-        GranteeType(com.zimbra.soap.type.GrantGranteeType jaxbGT) {
+        GranteeType(org.zmail.soap.type.GrantGranteeType jaxbGT) {
             jaxbGranteeType = jaxbGT;
         }
 
@@ -125,11 +125,11 @@ public class ZGrant implements ToZJSONObject {
         }
 
         /* return equivalent JAXB enum */
-        public com.zimbra.soap.type.GrantGranteeType toJaxb() {
+        public org.zmail.soap.type.GrantGranteeType toJaxb() {
             return jaxbGranteeType;
         }
 
-        public static GranteeType fromJaxb(com.zimbra.soap.type.GrantGranteeType jaxbGT) {
+        public static GranteeType fromJaxb(org.zmail.soap.type.GrantGranteeType jaxbGT) {
             for (GranteeType gt :GranteeType.values()) {
                 if (gt.toJaxb() == jaxbGT) {
                     return gt;
@@ -226,7 +226,7 @@ public class ZGrant implements ToZJSONObject {
     /**
      * the type of grantee: "usr", "grp", "dom" (domain),
      * "all" (all authenticated users), "pub" (public authenticated and unauthenticated access), 
-     * "guest" (non-Zimbra email address and password)
+     * "guest" (non-Zmail email address and password)
      * "key" (access key)
      */
     public GranteeType getGranteeType() {
@@ -234,7 +234,7 @@ public class ZGrant implements ToZJSONObject {
     }
 
     /***
-     * the display name (*not* the zimbra id) of the principal being granted rights;
+     * the display name (*not* the zmail id) of the principal being granted rights;
      * optional if {grantee-type} is "all"
      */
     public String getGranteeName() {
@@ -242,7 +242,7 @@ public class ZGrant implements ToZJSONObject {
     }
 
     /***
-     * the zimbraId of the granteee
+     * the zmailId of the granteee
      */
     public String getGranteeId() {
         return mGranteeId;                                                                          

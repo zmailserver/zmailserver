@@ -13,15 +13,15 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.client;
+package org.zmail.client;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.client.event.ZModifyItemEvent;
-import com.zimbra.client.event.ZModifyConversationEvent;
-import com.zimbra.client.event.ZCreateItemEvent;
-import com.zimbra.client.event.ZCreateMessageEvent;
-import com.zimbra.client.ZSearchResult.ZConversationSummary;
-import com.zimbra.client.ZSearchParams.Cursor;
+import org.zmail.common.service.ServiceException;
+import org.zmail.client.event.ZModifyItemEvent;
+import org.zmail.client.event.ZModifyConversationEvent;
+import org.zmail.client.event.ZCreateItemEvent;
+import org.zmail.client.event.ZCreateMessageEvent;
+import org.zmail.client.ZSearchResult.ZConversationSummary;
+import org.zmail.client.ZSearchParams.Cursor;
 
 import java.util.List;
 import java.util.Map;
@@ -112,7 +112,7 @@ public class ZSearchCache {
     
     /**
      * @param event modify event
-     * @throws com.zimbra.common.service.ServiceException on error
+     * @throws org.zmail.common.service.ServiceException on error
      */
     void modifyNotification(ZModifyItemEvent event) throws ServiceException {
         if (mConvId != null && event instanceof ZModifyConversationEvent) {
@@ -131,7 +131,7 @@ public class ZSearchCache {
 
     /**
      * @param event create item event
-     * @throws com.zimbra.common.service.ServiceException on error
+     * @throws org.zmail.common.service.ServiceException on error
      */
     void createNotification(ZCreateItemEvent event) throws ServiceException {
         if (mConvId != null && event instanceof ZCreateMessageEvent) {

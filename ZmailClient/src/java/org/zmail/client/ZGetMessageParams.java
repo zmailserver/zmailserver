@@ -13,9 +13,9 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.client;
+package org.zmail.client;
 
-import com.zimbra.common.util.StringUtil;
+import org.zmail.common.util.StringUtil;
 
 public class ZGetMessageParams {
 

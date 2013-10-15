@@ -13,10 +13,10 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.client;
+package org.zmail.client;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
 
 public class ZAppointment extends ZCalendarItem {
     

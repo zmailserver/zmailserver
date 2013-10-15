@@ -13,18 +13,18 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.client.event;
+package org.zmail.client.event;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.client.ToZJSONObject;
-import com.zimbra.client.ZFolder;
-import com.zimbra.client.ZFolder.Color;
-import com.zimbra.client.ZFolder.View;
-import com.zimbra.client.ZGrant;
-import com.zimbra.client.ZJSONObject;
-import com.zimbra.soap.mail.type.RetentionPolicy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.client.ToZJSONObject;
+import org.zmail.client.ZFolder;
+import org.zmail.client.ZFolder.Color;
+import org.zmail.client.ZFolder.View;
+import org.zmail.client.ZGrant;
+import org.zmail.client.ZJSONObject;
+import org.zmail.soap.mail.type.RetentionPolicy;
 
 import org.json.JSONException;
 
@@ -201,7 +201,7 @@ public class ZModifyFolderEvent implements ZModifyItemEvent, ToZJSONObject {
     /**
      * @param defaultValue value to return if unchanged
      * @return grants or defaultValue if unchanged
-     * @throws com.zimbra.common.service.ServiceException on error
+     * @throws org.zmail.common.service.ServiceException on error
      */
     public List<ZGrant> getGrants(List<ZGrant> defaultValue) throws ServiceException {
         Element aclEl = mFolderEl.getOptionalElement(MailConstants.E_ACL);

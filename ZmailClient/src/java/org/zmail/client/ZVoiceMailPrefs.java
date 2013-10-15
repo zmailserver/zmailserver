@@ -12,12 +12,12 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.client;
+package org.zmail.client;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.VoiceConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.VoiceConstants;
 
 import java.util.HashMap;
 import java.util.Set;
@@ -122,11 +122,11 @@ public class ZVoiceMailPrefs extends ZCallFeature {
     }
 
     public int getVoiceItemsPerPage() {
-        return this.getInt(VoiceConstants.A_zimbraPrefVoiceItemsPerPage);
+        return this.getInt(VoiceConstants.A_zmailPrefVoiceItemsPerPage);
     }
     
     public void setVoiceItemsPerPage(int value) {
-        this.set(VoiceConstants.A_zimbraPrefVoiceItemsPerPage, value);
+        this.set(VoiceConstants.A_zmailPrefVoiceItemsPerPage, value);
     }
 
     public boolean getEmailNotifTrans() {

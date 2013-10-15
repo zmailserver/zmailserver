@@ -12,10 +12,10 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.client.event;
+package org.zmail.client.event;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
 
 public class ZModifyTaskEvent extends ZModifyAppointmentEvent {
 

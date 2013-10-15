@@ -13,14 +13,14 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.client;
+package org.zmail.client;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 import com.google.common.base.Strings;
-import com.zimbra.client.ZDocument;
-import com.zimbra.common.soap.Element;
+import org.zmail.client.ZDocument;
+import org.zmail.common.soap.Element;
 
 public class ZDocumentTest {
 

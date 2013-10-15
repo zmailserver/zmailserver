@@ -12,19 +12,19 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.client;
+package org.zmail.client;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.json.JSONException;
 
-import com.zimbra.client.event.ZModifyEvent;
-import com.zimbra.client.event.ZModifyTagEvent;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.mail.type.RetentionPolicy;
+import org.zmail.client.event.ZModifyEvent;
+import org.zmail.client.event.ZModifyTagEvent;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.mail.type.RetentionPolicy;
 
 public class ZTag implements Comparable<ZTag>, ZItem, ToZJSONObject {
 
@@ -66,16 +66,16 @@ public class ZTag implements Comparable<ZTag>, ZItem, ToZJSONObject {
                     return colorMap.get(s);
                 }
             }
-            return Color.values()[com.zimbra.common.mailbox.Color.getMappedColor(s)];
+            return Color.values()[org.zmail.common.mailbox.Color.getMappedColor(s)];
         }
 
         public Color setRgbColor(String s) {
-            mValue = new com.zimbra.common.mailbox.Color(s).getValue();
+            mValue = new org.zmail.common.mailbox.Color(s).getValue();
             return this;
         }
 
         public String getRgbColor() {
-            return new com.zimbra.common.mailbox.Color(mValue).toString();
+            return new org.zmail.common.mailbox.Color(mValue).toString();
         }
 
         Color(long value) { mValue = value; }

@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.client.event;
+package org.zmail.client.event;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.client.ToZJSONObject;
-import com.zimbra.client.ZItem;
-import com.zimbra.client.ZJSONObject;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.client.ToZJSONObject;
+import org.zmail.client.ZItem;
+import org.zmail.client.ZJSONObject;
 import org.json.JSONException;
 
 public class ZCreateAppointmentEvent implements ZCreateItemEvent, ToZJSONObject {
@@ -32,7 +32,7 @@ public class ZCreateAppointmentEvent implements ZCreateItemEvent, ToZJSONObject 
 
     /**
      * @return id
-     * @throws com.zimbra.common.service.ServiceException on error
+     * @throws org.zmail.common.service.ServiceException on error
      */
     public String getId() throws ServiceException {
         return mApptEl.getAttribute(MailConstants.A_ID);

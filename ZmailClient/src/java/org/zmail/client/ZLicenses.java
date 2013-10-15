@@ -13,11 +13,11 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.client;
+package org.zmail.client;
 
-import com.zimbra.common.account.ProvisioningConstants;
-import com.zimbra.soap.account.type.LicenseAttr;
-import com.zimbra.soap.account.type.LicenseInfo;
+import org.zmail.common.account.ProvisioningConstants;
+import org.zmail.soap.account.type.LicenseAttr;
+import org.zmail.soap.account.type.LicenseInfo;
 
 import java.util.HashMap;
 

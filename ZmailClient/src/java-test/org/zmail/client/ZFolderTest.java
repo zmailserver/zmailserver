@@ -12,13 +12,13 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.client;
+package org.zmail.client;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.zimbra.client.ZFolder;
-import com.zimbra.common.soap.Element;
+import org.zmail.client.ZFolder;
+import org.zmail.common.soap.Element;
 
 /**
  * Unit test for {@link ZFolder}.

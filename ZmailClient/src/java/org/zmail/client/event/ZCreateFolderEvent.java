@@ -13,11 +13,11 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.client.event;
+package org.zmail.client.event;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.client.ZFolder;
-import com.zimbra.client.ZItem;
+import org.zmail.common.service.ServiceException;
+import org.zmail.client.ZFolder;
+import org.zmail.client.ZItem;
 
 public class ZCreateFolderEvent implements ZCreateItemEvent {
 
@@ -29,7 +29,7 @@ public class ZCreateFolderEvent implements ZCreateItemEvent {
 
     /**
      * @return id of created folder
-     * @throws com.zimbra.common.service.ServiceException
+     * @throws org.zmail.common.service.ServiceException
      */
     public String getId() throws ServiceException {
         return mFolder.getId();

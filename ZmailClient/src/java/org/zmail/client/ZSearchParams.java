@@ -13,13 +13,13 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.client;
+package org.zmail.client;
 
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.zclient.ZClientException;
-import com.zimbra.soap.type.SearchSortBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.zclient.ZClientException;
+import org.zmail.soap.type.SearchSortBy;
 import org.json.JSONException;
 
 import java.util.TimeZone;

@@ -13,16 +13,16 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.client;
+package org.zmail.client;
 
 import java.util.Collection;
 import java.util.Map;
 import java.util.TimeZone;
 
 import com.google.common.collect.Iterables;
-import com.zimbra.common.account.ProvisioningConstants;
-import com.zimbra.common.account.ZAttrProvisioning;
-import com.zimbra.common.calendar.TZIDMapper;
+import org.zmail.common.account.ProvisioningConstants;
+import org.zmail.common.account.ZAttrProvisioning;
+import org.zmail.common.calendar.TZIDMapper;
 
 public class ZPrefs {
 
@@ -59,63 +59,63 @@ public class ZPrefs {
 
     public Map<String, Collection<String>> getPrefs() { return mPrefs; }
 
-    public String getAppleiCalDelegationEnabled() { return get(ZAttrProvisioning.A_zimbraPrefAppleIcalDelegationEnabled); }
+    public String getAppleiCalDelegationEnabled() { return get(ZAttrProvisioning.A_zmailPrefAppleIcalDelegationEnabled); }
     
-    public String getComposeFormat() { return get(ZAttrProvisioning.A_zimbraPrefComposeFormat); }
+    public String getComposeFormat() { return get(ZAttrProvisioning.A_zmailPrefComposeFormat); }
 
-    public String getHtmlEditorDefaultFontFamily() { return get(ZAttrProvisioning.A_zimbraPrefHtmlEditorDefaultFontFamily); }
+    public String getHtmlEditorDefaultFontFamily() { return get(ZAttrProvisioning.A_zmailPrefHtmlEditorDefaultFontFamily); }
 
-    public String getHtmlEditorDefaultFontSize() { return get(ZAttrProvisioning.A_zimbraPrefHtmlEditorDefaultFontSize); }
+    public String getHtmlEditorDefaultFontSize() { return get(ZAttrProvisioning.A_zmailPrefHtmlEditorDefaultFontSize); }
 
-    public String getHtmlEditorDefaultFontColor() { return get(ZAttrProvisioning.A_zimbraPrefHtmlEditorDefaultFontColor); }
+    public String getHtmlEditorDefaultFontColor() { return get(ZAttrProvisioning.A_zmailPrefHtmlEditorDefaultFontColor); }
 
-    public String getLocale() { return get(ZAttrProvisioning.A_zimbraPrefLocale); }
+    public String getLocale() { return get(ZAttrProvisioning.A_zmailPrefLocale); }
 
-    public String getYintl() { return get(ZAttrProvisioning.A_zimbraPrefLocale); }
+    public String getYintl() { return get(ZAttrProvisioning.A_zmailPrefLocale); }
 
-    public boolean getUseTimeZoneListInCalendar() { return getBool(ZAttrProvisioning.A_zimbraPrefUseTimeZoneListInCalendar); }
+    public boolean getUseTimeZoneListInCalendar() { return getBool(ZAttrProvisioning.A_zmailPrefUseTimeZoneListInCalendar); }
 
-    public boolean getReadingPaneEnabled() { return getBool(ZAttrProvisioning.A_zimbraPrefReadingPaneEnabled); }
+    public boolean getReadingPaneEnabled() { return getBool(ZAttrProvisioning.A_zmailPrefReadingPaneEnabled); }
 
-    public String getReadingPaneLocation() { return get(ZAttrProvisioning.A_zimbraPrefReadingPaneLocation); }
+    public String getReadingPaneLocation() { return get(ZAttrProvisioning.A_zmailPrefReadingPaneLocation); }
 
-    public boolean getMailSignatureEnabled() { return getBool(ZAttrProvisioning.A_zimbraPrefMailSignatureEnabled); }
+    public boolean getMailSignatureEnabled() { return getBool(ZAttrProvisioning.A_zmailPrefMailSignatureEnabled); }
 
-    public boolean getIncludeSpamInSearch() { return getBool(ZAttrProvisioning.A_zimbraPrefIncludeSpamInSearch); }
+    public boolean getIncludeSpamInSearch() { return getBool(ZAttrProvisioning.A_zmailPrefIncludeSpamInSearch); }
 
-    public boolean getIncludeTrashInSearch() { return getBool(ZAttrProvisioning.A_zimbraPrefIncludeTrashInSearch); }
+    public boolean getIncludeTrashInSearch() { return getBool(ZAttrProvisioning.A_zmailPrefIncludeTrashInSearch); }
 
-    public boolean getShowSearchString() { return getBool(ZAttrProvisioning.A_zimbraPrefShowSearchString); }
+    public boolean getShowSearchString() { return getBool(ZAttrProvisioning.A_zmailPrefShowSearchString); }
 
-    public boolean getShowFragments() { return getBool(ZAttrProvisioning.A_zimbraPrefShowFragments); }
+    public boolean getShowFragments() { return getBool(ZAttrProvisioning.A_zmailPrefShowFragments); }
 
-    public boolean getSaveToSent() { return getBool(ZAttrProvisioning.A_zimbraPrefSaveToSent); }
+    public boolean getSaveToSent() { return getBool(ZAttrProvisioning.A_zmailPrefSaveToSent); }
 
-    public boolean getOutOfOfficeReplyEnabled() { return getBool(ZAttrProvisioning.A_zimbraPrefOutOfOfficeReplyEnabled); }
+    public boolean getOutOfOfficeReplyEnabled() { return getBool(ZAttrProvisioning.A_zmailPrefOutOfOfficeReplyEnabled); }
 
-    public boolean getNewMailNotificationsEnabled() { return getBool(ZAttrProvisioning.A_zimbraPrefNewMailNotificationEnabled); }
+    public boolean getNewMailNotificationsEnabled() { return getBool(ZAttrProvisioning.A_zmailPrefNewMailNotificationEnabled); }
 
-    public boolean getMailLocalDeliveryDisabled() { return getBool(ZAttrProvisioning.A_zimbraPrefMailLocalDeliveryDisabled); }
+    public boolean getMailLocalDeliveryDisabled() { return getBool(ZAttrProvisioning.A_zmailPrefMailLocalDeliveryDisabled); }
 
-    public boolean getMessageViewHtmlPreferred() { return getBool(ZAttrProvisioning.A_zimbraPrefMessageViewHtmlPreferred); }
+    public boolean getMessageViewHtmlPreferred() { return getBool(ZAttrProvisioning.A_zmailPrefMessageViewHtmlPreferred); }
 
-    public boolean getAutoAddAddressEnabled() { return getBool(ZAttrProvisioning.A_zimbraPrefAutoAddAddressEnabled); }
+    public boolean getAutoAddAddressEnabled() { return getBool(ZAttrProvisioning.A_zmailPrefAutoAddAddressEnabled); }
 
-    public String getShortcuts() { return get(ZAttrProvisioning.A_zimbraPrefShortcuts); }
+    public String getShortcuts() { return get(ZAttrProvisioning.A_zmailPrefShortcuts); }
 
-    public boolean getUseKeyboardShortcuts() { return getBool(ZAttrProvisioning.A_zimbraPrefUseKeyboardShortcuts); }
+    public boolean getUseKeyboardShortcuts() { return getBool(ZAttrProvisioning.A_zmailPrefUseKeyboardShortcuts); }
 
-    public boolean getSignatureEnabled() { return getBool(ZAttrProvisioning.A_zimbraPrefMailSignatureEnabled); }
+    public boolean getSignatureEnabled() { return getBool(ZAttrProvisioning.A_zmailPrefMailSignatureEnabled); }
 
-    public String getClientType() { return get(ZAttrProvisioning.A_zimbraPrefClientType); }
+    public String getClientType() { return get(ZAttrProvisioning.A_zmailPrefClientType); }
     public boolean getIsAdvancedClient() { return "advanced".equals(getClientType()); }
     public boolean getIsStandardClient() { return "standard".equals(getClientType()); }
     
-    public String getSignatureStyle() { return get(ZAttrProvisioning.A_zimbraPrefMailSignatureStyle); }
+    public String getSignatureStyle() { return get(ZAttrProvisioning.A_zmailPrefMailSignatureStyle); }
     public boolean getSignatureStyleTop() { return "outlook".equals(getSignatureStyle()); }
     public boolean getSignatureStyleBottom() { return "internet".equals(getSignatureStyle()); }
 
-    public String getGroupMailBy() { return get(ZAttrProvisioning.A_zimbraPrefGroupMailBy); }
+    public String getGroupMailBy() { return get(ZAttrProvisioning.A_zmailPrefGroupMailBy); }
 
     public boolean getGroupByConversation() {
         String gb = getGroupMailBy();
@@ -128,69 +128,69 @@ public class ZPrefs {
     }
 
 
-    public String getSkin() { return get(ZAttrProvisioning.A_zimbraPrefSkin); }
+    public String getSkin() { return get(ZAttrProvisioning.A_zmailPrefSkin); }
     
-    public String getDedupeMessagesSentToSelf() { return get(ZAttrProvisioning.A_zimbraPrefDedupeMessagesSentToSelf); }
+    public String getDedupeMessagesSentToSelf() { return get(ZAttrProvisioning.A_zmailPrefDedupeMessagesSentToSelf); }
 
-    public String getMailInitialSearch() { return get(ZAttrProvisioning.A_zimbraPrefMailInitialSearch); }
+    public String getMailInitialSearch() { return get(ZAttrProvisioning.A_zmailPrefMailInitialSearch); }
 
-    public String getNewMailNotificationAddress() { return get(ZAttrProvisioning.A_zimbraPrefNewMailNotificationAddress); }
+    public String getNewMailNotificationAddress() { return get(ZAttrProvisioning.A_zmailPrefNewMailNotificationAddress); }
 
-    public String getMailForwardingAddress() { return get(ZAttrProvisioning.A_zimbraPrefMailForwardingAddress); }
+    public String getMailForwardingAddress() { return get(ZAttrProvisioning.A_zmailPrefMailForwardingAddress); }
 
-    public String getOutOfOfficeReply() { return get(ZAttrProvisioning.A_zimbraPrefOutOfOfficeReply); }
+    public String getOutOfOfficeReply() { return get(ZAttrProvisioning.A_zmailPrefOutOfOfficeReply); }
 
-	public String getOutOfOfficeFromDate() { return get(ZAttrProvisioning.A_zimbraPrefOutOfOfficeFromDate); }
+	public String getOutOfOfficeFromDate() { return get(ZAttrProvisioning.A_zmailPrefOutOfOfficeFromDate); }
 
-	public String getOutOfOfficeUntilDate() { return get(ZAttrProvisioning.A_zimbraPrefOutOfOfficeUntilDate); }
+	public String getOutOfOfficeUntilDate() { return get(ZAttrProvisioning.A_zmailPrefOutOfOfficeUntilDate); }
 
-    public String getMailSignature() { return get(ZAttrProvisioning.A_zimbraPrefMailSignature); }
+    public String getMailSignature() { return get(ZAttrProvisioning.A_zmailPrefMailSignature); }
 
-    public long getMailItemsPerPage() { return getLong(ZAttrProvisioning.A_zimbraPrefMailItemsPerPage); }
+    public long getMailItemsPerPage() { return getLong(ZAttrProvisioning.A_zmailPrefMailItemsPerPage); }
 
-    public long getContactsPerPage() { return getLong(ZAttrProvisioning.A_zimbraPrefContactsPerPage); }
+    public long getContactsPerPage() { return getLong(ZAttrProvisioning.A_zmailPrefContactsPerPage); }
 
-	public long getVoiceItemsPerPage() { return getLong(ZAttrProvisioning.A_zimbraPrefVoiceItemsPerPage); }
+	public long getVoiceItemsPerPage() { return getLong(ZAttrProvisioning.A_zmailPrefVoiceItemsPerPage); }
 
-    public long getCalendarFirstDayOfWeek() { return getLong(ZAttrProvisioning.A_zimbraPrefCalendarFirstDayOfWeek); }
+    public long getCalendarFirstDayOfWeek() { return getLong(ZAttrProvisioning.A_zmailPrefCalendarFirstDayOfWeek); }
 
-    public String getCalendarWorkingHours() { return get(ZAttrProvisioning.A_zimbraPrefCalendarWorkingHours);}
+    public String getCalendarWorkingHours() { return get(ZAttrProvisioning.A_zmailPrefCalendarWorkingHours);}
 
-    public String getInboxUnreadLifetime() { return get(ZAttrProvisioning.A_zimbraPrefInboxUnreadLifetime); }
+    public String getInboxUnreadLifetime() { return get(ZAttrProvisioning.A_zmailPrefInboxUnreadLifetime); }
 
-    public String getInboxReadLifetime() { return get(ZAttrProvisioning.A_zimbraPrefInboxReadLifetime); }
+    public String getInboxReadLifetime() { return get(ZAttrProvisioning.A_zmailPrefInboxReadLifetime); }
 
-    public String getSentLifetime() { return get(ZAttrProvisioning.A_zimbraPrefSentLifetime); }
+    public String getSentLifetime() { return get(ZAttrProvisioning.A_zmailPrefSentLifetime); }
 
-    public String getJunkLifetime() { return get(ZAttrProvisioning.A_zimbraPrefJunkLifetime); }
+    public String getJunkLifetime() { return get(ZAttrProvisioning.A_zmailPrefJunkLifetime); }
 
-    public String getTrashLifetime() { return get(ZAttrProvisioning.A_zimbraPrefTrashLifetime); }
+    public String getTrashLifetime() { return get(ZAttrProvisioning.A_zmailPrefTrashLifetime); }
 
-    public boolean getDisplayExternalImages() { return getBool(ZAttrProvisioning.A_zimbraPrefDisplayExternalImages); }
+    public boolean getDisplayExternalImages() { return getBool(ZAttrProvisioning.A_zmailPrefDisplayExternalImages); }
 
     public long getCalendarDayHourStart() {
-        long hour = getLong(ZAttrProvisioning.A_zimbraPrefCalendarDayHourStart);
+        long hour = getLong(ZAttrProvisioning.A_zmailPrefCalendarDayHourStart);
         return hour == -1 ? 8 : hour;
     }
 
     public long getCalendarDayHourEnd() {
-         long hour = getLong(ZAttrProvisioning.A_zimbraPrefCalendarDayHourEnd);
+         long hour = getLong(ZAttrProvisioning.A_zmailPrefCalendarDayHourEnd);
         return hour == -1 ? 18 : hour;
     }
 
-    public String getCalendarInitialView() { return get(ZAttrProvisioning.A_zimbraPrefCalendarInitialView); }
+    public String getCalendarInitialView() { return get(ZAttrProvisioning.A_zmailPrefCalendarInitialView); }
 
-    public String getTimeZoneId() { return get(ZAttrProvisioning.A_zimbraPrefTimeZoneId); }
+    public String getTimeZoneId() { return get(ZAttrProvisioning.A_zmailPrefTimeZoneId); }
 
-    public String getTimeZoneCanonicalId() { return TZIDMapper.canonicalize(get(ZAttrProvisioning.A_zimbraPrefTimeZoneId)); }
+    public String getTimeZoneCanonicalId() { return TZIDMapper.canonicalize(get(ZAttrProvisioning.A_zmailPrefTimeZoneId)); }
 
-    public String getDefaultPrintFontSize() {return get(ZAttrProvisioning.A_zimbraPrefDefaultPrintFontSize);}
+    public String getDefaultPrintFontSize() {return get(ZAttrProvisioning.A_zmailPrefDefaultPrintFontSize);}
 
-    public String getFolderTreeOpen() {return get(ZAttrProvisioning.A_zimbraPrefFolderTreeOpen);}
+    public String getFolderTreeOpen() {return get(ZAttrProvisioning.A_zmailPrefFolderTreeOpen);}
 
-    public String getSearchTreeOpen() {return get(ZAttrProvisioning.A_zimbraPrefSearchTreeOpen);}
+    public String getSearchTreeOpen() {return get(ZAttrProvisioning.A_zmailPrefSearchTreeOpen);}
 
-    public String getTagTreeOpen() {return get(ZAttrProvisioning.A_zimbraPrefTagTreeOpen);}
+    public String getTagTreeOpen() {return get(ZAttrProvisioning.A_zmailPrefTagTreeOpen);}
 
     private TimeZone mCachedTimeZone;
     private String mCachedTimeZoneId;
@@ -206,7 +206,7 @@ public class ZPrefs {
         return mCachedTimeZone;
     }
 
-    public String getReplyIncludeOriginalText() { return get(ZAttrProvisioning.A_zimbraPrefReplyIncludeOriginalText); }
+    public String getReplyIncludeOriginalText() { return get(ZAttrProvisioning.A_zmailPrefReplyIncludeOriginalText); }
 
     public boolean getReplyIncludeAsAttachment() { return "includeAsAttachment".equals(getReplyIncludeOriginalText()); }
     public boolean getReplyIncludeBody() { return "includeBody".equals(getReplyIncludeOriginalText()) || "includeBodyAndHeaders".equals(getReplyIncludeOriginalText()); }
@@ -214,28 +214,28 @@ public class ZPrefs {
     public boolean getReplyIncludeNone() { return "includeNone".equals(getReplyIncludeOriginalText()); }
     public boolean getReplyIncludeSmart() { return "includeSmart".equals(getReplyIncludeOriginalText()); }
     
-    public String getForwardIncludeOriginalText() { return get(ZAttrProvisioning.A_zimbraPrefForwardIncludeOriginalText); }
+    public String getForwardIncludeOriginalText() { return get(ZAttrProvisioning.A_zmailPrefForwardIncludeOriginalText); }
     public boolean getForwardIncludeAsAttachment() { return "includeAsAttachment".equals(getForwardIncludeOriginalText()); }
     public boolean getForwardIncludeBody() { return "includeBody".equals(getForwardIncludeOriginalText()) || "includeBodyAndHeaders".equals(getForwardIncludeOriginalText()); }
     public boolean getForwardIncludeBodyWithPrefx() { return "includeBodyWithPrefix".equals(getForwardIncludeOriginalText()) || "includeBodyAndHeadersWithPrefix".equals(getForwardIncludeOriginalText()); }
     
-    public String getForwardReplyFormat() { return get(ZAttrProvisioning.A_zimbraPrefForwardReplyFormat); }
+    public String getForwardReplyFormat() { return get(ZAttrProvisioning.A_zmailPrefForwardReplyFormat); }
     public boolean getForwardReplyTextFormat() { return "text".equals(getForwardReplyFormat()); }
     public boolean getForwardReplyHtmlFormat() { return "html".equals(getForwardReplyFormat()); }
     public boolean getForwardReplySameFormat() { return "same".equals(getForwardReplyFormat()); }
-    public boolean getForwardReplyInOriginalFormat() { return getBool(ZAttrProvisioning.A_zimbraPrefForwardReplyInOriginalFormat); }
+    public boolean getForwardReplyInOriginalFormat() { return getBool(ZAttrProvisioning.A_zmailPrefForwardReplyInOriginalFormat); }
 
 
-    public String getForwardReplyPrefixChar() { return get(ZAttrProvisioning.A_zimbraPrefForwardReplyPrefixChar); }
+    public String getForwardReplyPrefixChar() { return get(ZAttrProvisioning.A_zmailPrefForwardReplyPrefixChar); }
 
-    public String getCalendarReminderDuration1() { return get(ZAttrProvisioning.A_zimbraPrefCalendarReminderDuration1); }
-    public String getCalendarReminderDuration2() { return get(ZAttrProvisioning.A_zimbraPrefCalendarReminderDuration2); }
-    public String getCalendarReminderEmail() { return get(ZAttrProvisioning.A_zimbraPrefCalendarReminderEmail); }
-    public boolean getCalendarReminderSendEmail() { return getBool(ZAttrProvisioning.A_zimbraPrefCalendarReminderSendEmail); }
-    public boolean getCalendarReminderMobile() { return getBool(ZAttrProvisioning.A_zimbraPrefCalendarReminderMobile); }
-    public boolean getCalendarReminderYMessenger() { return getBool(ZAttrProvisioning.A_zimbraPrefCalendarReminderYMessenger); }
-    public boolean getCalendarShowDeclinedMeetings() { return getBool(ZAttrProvisioning.A_zimbraPrefCalendarShowDeclinedMeetings); }
+    public String getCalendarReminderDuration1() { return get(ZAttrProvisioning.A_zmailPrefCalendarReminderDuration1); }
+    public String getCalendarReminderDuration2() { return get(ZAttrProvisioning.A_zmailPrefCalendarReminderDuration2); }
+    public String getCalendarReminderEmail() { return get(ZAttrProvisioning.A_zmailPrefCalendarReminderEmail); }
+    public boolean getCalendarReminderSendEmail() { return getBool(ZAttrProvisioning.A_zmailPrefCalendarReminderSendEmail); }
+    public boolean getCalendarReminderMobile() { return getBool(ZAttrProvisioning.A_zmailPrefCalendarReminderMobile); }
+    public boolean getCalendarReminderYMessenger() { return getBool(ZAttrProvisioning.A_zmailPrefCalendarReminderYMessenger); }
+    public boolean getCalendarShowDeclinedMeetings() { return getBool(ZAttrProvisioning.A_zmailPrefCalendarShowDeclinedMeetings); }
 
 
-	public String getPop3DownloadSince() { return get(ZAttrProvisioning.A_zimbraPrefPop3DownloadSince); }
+	public String getPop3DownloadSince() { return get(ZAttrProvisioning.A_zmailPrefPop3DownloadSince); }
 }

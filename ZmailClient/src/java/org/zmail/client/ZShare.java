@@ -13,19 +13,19 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.client;
+package org.zmail.client;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.XmlParseException;
-import com.zimbra.common.zclient.ZClientException;
-import com.zimbra.client.ZFolder.View;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.XmlParseException;
+import org.zmail.common.zclient.ZClientException;
+import org.zmail.client.ZFolder.View;
 import org.json.JSONException;
 
 public class ZShare implements ToZJSONObject {
 
     /*
-    <share xmlns="urn:zimbraShare" version="0.1" action="new" >
+    <share xmlns="urn:zmailShare" version="0.1" action="new" >
       <grantee id="4a4894bc-6d63-4589-afe8-b19352ffa779" email="user1@macpro.local" name="user1@macpro.local" />
       <grantor id="84ad414f-baef-43c1-938d-9f1ecf2a2489" email="user3@macpro.local" name="Demo User Three" />
       <link id="10" name="Calendar" view="appointment" perm="r" />

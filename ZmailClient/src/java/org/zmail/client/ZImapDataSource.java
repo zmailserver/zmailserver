@@ -12,18 +12,18 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.client;
+package org.zmail.client;
 
 import org.json.JSONException;
 
-import com.zimbra.soap.admin.type.DataSourceType;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.SystemUtil;
-import com.zimbra.soap.type.DataSource.ConnectionType;
-import com.zimbra.soap.type.DataSources;
-import com.zimbra.soap.type.ImapDataSource;
+import org.zmail.soap.admin.type.DataSourceType;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.SystemUtil;
+import org.zmail.soap.type.DataSource.ConnectionType;
+import org.zmail.soap.type.DataSources;
+import org.zmail.soap.type.ImapDataSource;
 
 public class ZImapDataSource implements ZDataSource, ToZJSONObject {
 

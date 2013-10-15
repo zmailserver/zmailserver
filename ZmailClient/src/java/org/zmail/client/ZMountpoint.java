@@ -13,15 +13,15 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.client;
+package org.zmail.client;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.client.event.ZModifyEvent;
-import com.zimbra.client.event.ZModifyFolderEvent;
-import com.zimbra.client.event.ZModifyMountpointEvent;
-import com.zimbra.soap.mail.type.Mountpoint;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.client.event.ZModifyEvent;
+import org.zmail.client.event.ZModifyFolderEvent;
+import org.zmail.client.event.ZModifyMountpointEvent;
+import org.zmail.soap.mail.type.Mountpoint;
 
 import org.json.JSONException;
 
@@ -80,7 +80,7 @@ public class ZMountpoint extends ZFolder {
     }
 
     /**
-     * @return zimbra id of the owner of the mounted resource
+     * @return zmail id of the owner of the mounted resource
      */
     public String getOwnerId() {
         return mOwnerId;

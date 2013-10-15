@@ -13,10 +13,10 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.client.event;
+package org.zmail.client.event;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
 
 public class ZModifyConversationEvent extends ZConversationSummaryEvent implements ZModifyItemEvent {
 

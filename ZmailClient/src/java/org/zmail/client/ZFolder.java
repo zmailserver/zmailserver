@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.client;
+package org.zmail.client;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -24,22 +24,22 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.zimbra.soap.mail.type.Acl;
+import org.zmail.soap.mail.type.Acl;
 import org.json.JSONException;
 
-import com.zimbra.client.event.ZModifyEvent;
-import com.zimbra.client.event.ZModifyFolderEvent;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.SystemUtil;
-import com.zimbra.common.zclient.ZClientException;
-import com.zimbra.soap.mail.type.Folder;
-import com.zimbra.soap.mail.type.Grant;
-import com.zimbra.soap.mail.type.Mountpoint;
-import com.zimbra.soap.mail.type.RetentionPolicy;
-import com.zimbra.soap.mail.type.SearchFolder;
+import org.zmail.client.event.ZModifyEvent;
+import org.zmail.client.event.ZModifyFolderEvent;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.SystemUtil;
+import org.zmail.common.zclient.ZClientException;
+import org.zmail.soap.mail.type.Folder;
+import org.zmail.soap.mail.type.Grant;
+import org.zmail.soap.mail.type.Mountpoint;
+import org.zmail.soap.mail.type.RetentionPolicy;
+import org.zmail.soap.mail.type.SearchFolder;
 
 public class ZFolder implements ZItem, Comparable<Object>, ToZJSONObject {
 
@@ -189,11 +189,11 @@ public class ZFolder implements ZItem, Comparable<Object>, ToZJSONObject {
         }
 
         public static Color getRgbColorObj(String s) {
-            return new Color (RGBCOLOR, new com.zimbra.common.mailbox.Color(s).getValue());
+            return new Color (RGBCOLOR, new org.zmail.common.mailbox.Color(s).getValue());
         }
 
         public String getRgbColorValue() {
-            return new com.zimbra.common.mailbox.Color(mValue).toString();
+            return new org.zmail.common.mailbox.Color(mValue).toString();
         }
 
         public static Color fromInt(int value) throws ServiceException {

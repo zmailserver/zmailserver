@@ -13,16 +13,16 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.client;
+package org.zmail.client;
 
-import com.zimbra.common.calendar.CalendarUtil;
-import com.zimbra.common.calendar.Geo;
-import com.zimbra.common.calendar.ZCalendar.ZParameter;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.ListUtil;
-import com.zimbra.common.zclient.ZClientException;
+import org.zmail.common.calendar.CalendarUtil;
+import org.zmail.common.calendar.Geo;
+import org.zmail.common.calendar.ZCalendar.ZParameter;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.ListUtil;
+import org.zmail.common.zclient.ZClientException;
 import org.json.JSONException;
 
 import java.util.ArrayList;

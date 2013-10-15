@@ -12,13 +12,13 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.client;
+package org.zmail.client;
 
 import com.google.common.base.Joiner;
-import com.zimbra.common.filter.Sieve;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.zclient.ZClientException;
-import com.zimbra.soap.mail.type.FilterTest;
+import org.zmail.common.filter.Sieve;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.zclient.ZClientException;
+import org.zmail.soap.mail.type.FilterTest;
 
 import org.json.JSONException;
 

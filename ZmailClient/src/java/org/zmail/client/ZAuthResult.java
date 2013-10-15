@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.client;
+package org.zmail.client;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -21,10 +21,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.util.MapUtil;
-import com.zimbra.soap.account.message.AuthResponse;
-import com.zimbra.soap.account.type.Session;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.util.MapUtil;
+import org.zmail.soap.account.message.AuthResponse;
+import org.zmail.soap.account.type.Session;
 
 public class ZAuthResult {
     

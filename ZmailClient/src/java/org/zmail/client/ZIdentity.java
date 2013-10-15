@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.client;
+package org.zmail.client;
 
 import java.util.Collection;
 import java.util.Map;
@@ -21,13 +21,13 @@ import java.util.Map;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.zimbra.common.account.ProvisioningConstants;
-import com.zimbra.common.account.ZAttrProvisioning;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.soap.account.type.Attr;
-import com.zimbra.soap.account.type.Identity;
+import org.zmail.common.account.ProvisioningConstants;
+import org.zmail.common.account.ZAttrProvisioning;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.StringUtil;
+import org.zmail.soap.account.type.Attr;
+import org.zmail.soap.account.type.Identity;
 
 public class ZIdentity  implements ToZJSONObject {
 
@@ -41,7 +41,7 @@ public class ZIdentity  implements ToZJSONObject {
     public ZIdentity(String name, Map<String, Object> attrs) {
         data = Identity.fromName(name);
         data.setAttrs(Attr.fromMultimap(StringUtil.toNewMultimap(attrs)));
-        data.setId(data.getFirstMatchingAttr(ZAttrProvisioning.A_zimbraPrefIdentityId));
+        data.setId(data.getFirstMatchingAttr(ZAttrProvisioning.A_zmailPrefIdentityId));
     }
     
     public Identity getData() {
@@ -53,7 +53,7 @@ public class ZIdentity  implements ToZJSONObject {
     }
 
     public String getName() {
-        return get(ZAttrProvisioning.A_zimbraPrefIdentityName);
+        return get(ZAttrProvisioning.A_zmailPrefIdentityName);
     }
 
     public String getId() {
@@ -78,25 +78,25 @@ public class ZIdentity  implements ToZJSONObject {
 
     public boolean isDefault() { return ProvisioningConstants.DEFAULT_IDENTITY_NAME.equals(getRawName()); }
     
-    public String getFromAddress() { return get(ZAttrProvisioning.A_zimbraPrefFromAddress); }
+    public String getFromAddress() { return get(ZAttrProvisioning.A_zmailPrefFromAddress); }
 
-    public String getFromDisplay() { return get(ZAttrProvisioning.A_zimbraPrefFromDisplay); }
+    public String getFromDisplay() { return get(ZAttrProvisioning.A_zmailPrefFromDisplay); }
 
     public ZEmailAddress getFromEmailAddress() {
         return new ZEmailAddress(getFromAddress(), null, getFromDisplay(), ZEmailAddress.EMAIL_TYPE_FROM);
     }
 
-    public String getSignatureId() { return get(ZAttrProvisioning.A_zimbraPrefDefaultSignatureId); }
+    public String getSignatureId() { return get(ZAttrProvisioning.A_zmailPrefDefaultSignatureId); }
 
-    public String getReplyToAddress() { return get(ZAttrProvisioning.A_zimbraPrefReplyToAddress); }
+    public String getReplyToAddress() { return get(ZAttrProvisioning.A_zmailPrefReplyToAddress); }
 
-    public String getReplyToDisplay() { return get(ZAttrProvisioning.A_zimbraPrefReplyToDisplay); }
+    public String getReplyToDisplay() { return get(ZAttrProvisioning.A_zmailPrefReplyToDisplay); }
 
     public ZEmailAddress getReplyToEmailAddress() {
         return new ZEmailAddress(getReplyToAddress(), null, getReplyToDisplay(), ZEmailAddress.EMAIL_TYPE_REPLY_TO);
     }
 
-    public boolean getReplyToEnabled() { return getBool(ZAttrProvisioning.A_zimbraPrefReplyToEnabled); }
+    public boolean getReplyToEnabled() { return getBool(ZAttrProvisioning.A_zmailPrefReplyToEnabled); }
 
     public String[] getMulti(String name) {
         Collection<String> values = data.getAttrsMultimap().get(name);
@@ -106,10 +106,10 @@ public class ZIdentity  implements ToZJSONObject {
     }
     
     public String[] getWhenInFolderIds() {
-        return getMulti(ZAttrProvisioning.A_zimbraPrefWhenInFolderIds);
+        return getMulti(ZAttrProvisioning.A_zmailPrefWhenInFolderIds);
     }
 
-    public boolean getWhenInFoldersEnabled() { return getBool(ZAttrProvisioning.A_zimbraPrefWhenInFoldersEnabled); }
+    public boolean getWhenInFoldersEnabled() { return getBool(ZAttrProvisioning.A_zmailPrefWhenInFoldersEnabled); }
 
     public boolean containsFolderId(String folderId) {
         for (String id : getWhenInFolderIds()) {

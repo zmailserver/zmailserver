@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.client;
+package org.zmail.client;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,12 +22,12 @@ import java.util.Map;
 
 import org.json.JSONException;
 
-import com.zimbra.client.event.ZModifyEvent;
-import com.zimbra.client.event.ZModifyMessageEvent;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.zclient.ZClientException;
+import org.zmail.client.event.ZModifyEvent;
+import org.zmail.client.event.ZModifyMessageEvent;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.zclient.ZClientException;
 
 public class ZMessage implements ZItem, ToZJSONObject {
 
@@ -144,7 +144,7 @@ public class ZMessage implements ZItem, ToZJSONObject {
 
     /**
      *
-     * @return Zimbra id of message we are replying to if this is a draft.
+     * @return Zmail id of message we are replying to if this is a draft.
      */
     public String getOriginalId() {
         return mOrigId;
