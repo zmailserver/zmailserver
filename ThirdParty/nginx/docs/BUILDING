@@ -1,4 +1,4 @@
-                     Instructions for building nginx-zimbra
+                     Instructions for building nginx-zmail
                      --------------------------------------
 
     [*]  Check out //depot/main/ThirdParty/nginx/
@@ -10,9 +10,9 @@
          the development patch has been tested. See the `docs/SUPPORTED'
          document for details about the current revision
 
-         $ cd nginx-<NNN>-zimbra/
+         $ cd nginx-<NNN>-zmail/
          $ ./configure \
-             --prefix=/opt/zimbra/nginx/ \
+             --prefix=/opt/zmail/nginx/ \
              --with-debug \
              --without-http  \
              --with-mail \
@@ -21,13 +21,13 @@
          $ sudo make install
 
          This will install nginx onto your system under the directory
-         /opt/zimbra/nginx/
+         /opt/zmail/nginx/
 
          Alternatively, nginx can be configured with
-            --prefix=/opt/zimbra/nginx-<NNN>/
+            --prefix=/opt/zmail/nginx-<NNN>/
 
          and the symlink
-         /opt/zimbra/nginx/ -> /opt/zimbra/nginx-<NNN>/
+         /opt/zmail/nginx/ -> /opt/zmail/nginx-<NNN>/
          
          can be created
 

@@ -641,7 +641,7 @@ found:
     rc = uscf->peer.init(r, uscf);
     if (rc != NGX_OK) {
 
-        if (rc == NGX_AGAIN) return; /* added by zimbra to support async peer init */
+        if (rc == NGX_AGAIN) return; /* added by zmail to support async peer init */
 
         ngx_http_upstream_finalize_request(r, u,
                                            NGX_HTTP_INTERNAL_SERVER_ERROR);
@@ -4189,7 +4189,7 @@ ngx_http_upstream(ngx_conf_t *cf, ngx_command_t *cmd, void *dummy)
         return NGX_CONF_ERROR;
     }
 
-    /* add by zimbra to support async upstream peer choose */
+    /* add by zmail to support async upstream peer choose */
     uscf->connect = ngx_http_upstream_connect;
 
     return rv;

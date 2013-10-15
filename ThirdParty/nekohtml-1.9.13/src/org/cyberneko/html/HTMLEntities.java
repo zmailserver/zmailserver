@@ -49,7 +49,7 @@ public class HTMLEntities {
         load0("res/HTMLspecial.properties");
         load0("res/HTMLsymbol.properties");
         load0("res/XMLbuiltin.properties");
-	load0("res/Zimbra.properties");
+	load0("res/Zmail.properties");
 
         // store reverse mappings
         Enumeration keys = ENTITIES.propertyNames();

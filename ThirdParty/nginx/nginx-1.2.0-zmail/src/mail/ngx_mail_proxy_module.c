@@ -185,7 +185,7 @@ ngx_module_t  ngx_mail_proxy_module = {
 
 
 static u_char  pop3_authplain[] = "AUTH PLAIN" CRLF;
-static u_char  pop3_authxzimbra[] = "AUTH X-ZIMBRA" CRLF;
+static u_char  pop3_authxzmail[] = "AUTH X-ZIMBRA" CRLF;
 static u_char  smtp_auth_ok[] = "235 2.0.0 OK" CRLF;
 static u_char  imap_login_no[] = "NO LOGIN failed" CRLF;
 static u_char  imap_auth_no[] = "NO AUTHENTICATE failed" CRLF;
@@ -381,7 +381,7 @@ ngx_mail_proxy_pop3_handler(ngx_event_t *rev)
             "sending POP3 XOIP command to upstream";
 
         /* Bug 13325 - The upstream server needs to record the IP address of
-           the downstream client that connected. For this, the Zimbra server
+           the downstream client that connected. For this, the Zmail server
            has been modified to support the XOIP command that will allow 
            the proxy to pass the IP address of the downstream client. Both
            ipv4 and ipv6 (bug 56383) has been supported
@@ -486,8 +486,8 @@ ngx_mail_proxy_pop3_handler(ngx_event_t *rev)
             if (s->auth_method == NGX_MAIL_AUTH_GSSAPI)
             {
                 s->connection->log->action = "sending AUTH X-ZIMBRA to upstream";
-                line.len = sizeof(pop3_authxzimbra) -1;
-                line.data = pop3_authxzimbra;
+                line.len = sizeof(pop3_authxzmail) -1;
+                line.data = pop3_authxzmail;
             }
             else
             {
@@ -846,7 +846,7 @@ ngx_mail_proxy_imap_handler(ngx_event_t *rev)
             }
             else
             {
-                /* merge back zimbra extensions (/tb|/wm|/ni), if any */
+                /* merge back zmail extensions (/tb|/wm|/ni), if any */
 
                 login.data = ngx_palloc(c->pool, s->qlogin.len + s->zlogin.len);
                 if (login.data == NULL) {
@@ -1328,7 +1328,7 @@ ngx_mail_proxy_read_response(ngx_mail_session_t *s, ngx_uint_t state)
 
     /* if (b->last - b->pos < 5) {
         return NGX_AGAIN;
-    } */ /* -- This won't work with zimbra */
+    } */ /* -- This won't work with zmail */
 
     if ((b->last - b->pos < 5) && (b->pos) && (*b->pos != '+'))
     {

@@ -3,9 +3,9 @@ P4_ROOT ?= $(shell cd $(HTTPD_ROOT)/../..; pwd)
 MAKE ?= make
 MAKEARGS ?= -j2
 
-BUILD_PLATFORM ?= $(shell sh $(P4_ROOT)/ZimbraBuild/rpmconf/Build/get_plat_tag.sh)
+BUILD_PLATFORM ?= $(shell sh $(P4_ROOT)/ZmailBuild/rpmconf/Build/get_plat_tag.sh)
 
-ZIMBRA_HOME ?= /opt/zimbra
+ZIMBRA_HOME ?= /opt/zmail
 ifdef BETA
 	include $(HTTPD_ROOT)/../beta_versions.def
 else
@@ -19,9 +19,9 @@ files	:= $(wildcard src/httpd-$(HTTPD_VERSION).tar.bz2)
 aprsrc	:= $(wildcard src/apr-$(APR_VERSION).tar.bz2)
 aprutilsrc	:= $(wildcard src/apr-util-$(APR_UTIL_VERSION).tar.bz2)
 
-LDFLAGS	:=	LDFLAGS="-L/opt/zimbra/convertd/lib -R/opt/zimbra/convertd/lib -L/opt/zimbra/openssl-$(OPENSSL_VERSION)/lib -R/opt/zimbra/openssl-$(OPENSSL_VERSION)/lib"
+LDFLAGS	:=	LDFLAGS="-L/opt/zmail/convertd/lib -R/opt/zmail/convertd/lib -L/opt/zmail/openssl-$(OPENSSL_VERSION)/lib -R/opt/zmail/openssl-$(OPENSSL_VERSION)/lib"
 ifeq ($(BUILD_PLATFORM), UBUNTU12_64)
-LDFLAGS	:=	LDFLAGS="-L/opt/zimbra/convertd/lib -Wl,-rpath,/opt/zimbra/convertd/lib -L/opt/zimbra/openssl-$(OPENSSL_VERSION)/lib -Wl,-rpath,/opt/zimbra/openssl-$(OPENSSL_VERSION)/lib"
+LDFLAGS	:=	LDFLAGS="-L/opt/zmail/convertd/lib -Wl,-rpath,/opt/zmail/convertd/lib -L/opt/zmail/openssl-$(OPENSSL_VERSION)/lib -Wl,-rpath,/opt/zmail/openssl-$(OPENSSL_VERSION)/lib"
 endif
 
 all: checksrc allclean build check
@@ -41,7 +41,7 @@ build:
 	mv apr-$(APR_VERSION) apr;)
 	(cd httpd-$(HTTPD_VERSION)/srclib; tar xfj ../../src/apr-util-$(APR_UTIL_VERSION).tar.bz2; \
 	mv apr-util-$(APR_UTIL_VERSION) apr-util;)
-	(cd httpd-$(HTTPD_VERSION); $(ENVMOD) $(LDFLAGS) CFLAGS="-g -O2" ./configure --prefix=/opt/zimbra/httpd-$(HTTPD_VERSION) --enable-so --with-included-apr -with-mpm=event --enable-mpms-shared="all" --enable-ssl --with-ssl=/opt/zimbra/openssl-$(OPENSSL_VERSION); $(MAKE) $(MAKEARGS); $(MAKE) install)
+	(cd httpd-$(HTTPD_VERSION); $(ENVMOD) $(LDFLAGS) CFLAGS="-g -O2" ./configure --prefix=/opt/zmail/httpd-$(HTTPD_VERSION) --enable-so --with-included-apr -with-mpm=event --enable-mpms-shared="all" --enable-ssl --with-ssl=/opt/zmail/openssl-$(OPENSSL_VERSION); $(MAKE) $(MAKEARGS); $(MAKE) install)
 
 tar:
 	mkdir -p $(P4_ROOT)/ThirdPartyBuilds/$(BUILD_PLATFORM)/apache-httpd

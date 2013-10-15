@@ -3,8 +3,8 @@ P4_ROOT ?= $(shell cd $(RRDTOOL_ROOT)/../..; pwd)
 MAKE ?= make
 MAKEARGS ?= -j2
 
-BUILD_PLATFORM ?= $(shell sh $(P4_ROOT)/ZimbraBuild/rpmconf/Build/get_plat_tag.sh)
-ZIMBRA_HOME ?= /opt/zimbra
+BUILD_PLATFORM ?= $(shell sh $(P4_ROOT)/ZmailBuild/rpmconf/Build/get_plat_tag.sh)
+ZIMBRA_HOME ?= /opt/zmail
 
 ifdef BETA
 	include $(RRDTOOL_ROOT)/../beta_versions.def
@@ -18,10 +18,10 @@ LIBART_NAME	:= libart_lgpl
 RRDTOOL_NAME	:= rrdtool
 
 RRDTOOL_TGZ_TARGET := $(P4_ROOT)/ThirdPartyBuilds/$(BUILD_PLATFORM)/rrdtool/$(RRDTOOL_NAME)-$(RRDTOOL_VERSION).tar.gz
-INSTALL_PREFIX := $(ZIMBRA_HOME)/zimbramon/$(RRDTOOL_NAME)-$(RRDTOOL_VERSION)
+INSTALL_PREFIX := $(ZIMBRA_HOME)/zmailmon/$(RRDTOOL_NAME)-$(RRDTOOL_VERSION)
 
-PERL_DIR	:= $(ZIMBRA_HOME)/zimbramon
-PERL_LIB_DIR	:= $(ZIMBRA_HOME)/zimbramon/lib
+PERL_DIR	:= $(ZIMBRA_HOME)/zmailmon
+PERL_LIB_DIR	:= $(ZIMBRA_HOME)/zmailmon/lib
 
 ifeq ($(BUILD_PLATFORM), )
 	BUILD_PLATFORM := "UNKNOWN"
@@ -130,7 +130,7 @@ clean:
 	/bin/rm -rf $(LIBART_NAME)-$(LIBART_VERSION)
 
 allclean: clean
-	/bin/rm -rf $(ZIMBRA_HOME)/zimbramon/$(RRDTOOL_NAME)-$(RRDTOOL_VERSION)
-	/bin/rm -rf $(ZIMBRA_HOME)/zimbramon/$(RRDTOOL_NAME)
+	/bin/rm -rf $(ZIMBRA_HOME)/zmailmon/$(RRDTOOL_NAME)-$(RRDTOOL_VERSION)
+	/bin/rm -rf $(ZIMBRA_HOME)/zmailmon/$(RRDTOOL_NAME)
 	/bin/rm -rf $(PERL_DIR)/lib
 	rm -rf $(RRDTOOL_TGZ_TARGET)

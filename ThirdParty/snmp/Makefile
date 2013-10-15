@@ -3,8 +3,8 @@ P4_ROOT ?= $(shell cd $(SNMP_ROOT)/../..; pwd)
 MAKE ?= make
 MAKEARGS ?= -j2
 
-BUILD_PLATFORM ?= $(shell sh $(P4_ROOT)/ZimbraBuild/rpmconf/Build/get_plat_tag.sh)
-ZIMBRA_HOME ?= /opt/zimbra
+BUILD_PLATFORM ?= $(shell sh $(P4_ROOT)/ZmailBuild/rpmconf/Build/get_plat_tag.sh)
+ZIMBRA_HOME ?= /opt/zmail
 
 ifdef BETA
 	include $(SNMP_ROOT)/../beta_versions.def
@@ -17,7 +17,7 @@ SNMP_VERSION ?= 5.5
 APP_TGZ_TARGET := $(P4_ROOT)/ThirdPartyBuilds/$(BUILD_PLATFORM)/snmp/$(SNMP_NAME)-$(SNMP_VERSION).tgz
 INSTALL_PREFIX := $(ZIMBRA_HOME)/$(SNMP_NAME)-$(SNMP_VERSION)
 
-PERL_DEST_DIR=$(SNMP_ROOT)/../Perl/zimbramon
+PERL_DEST_DIR=$(SNMP_ROOT)/../Perl/zmailmon
 PERL_DEST_LIB_DIR=$(PERL_DEST_DIR)/lib
 
 PATCH	:=

@@ -4,13 +4,13 @@ P4_ROOT ?= $(shell cd $(ASPELL_ROOT)/../..; pwd)
 MAKE ?= make
 MAKEARGS ?= -j2
 
-BUILD_PLATFORM ?= $(shell sh $(P4_ROOT)/ZimbraBuild/rpmconf/Build/get_plat_tag.sh)
+BUILD_PLATFORM ?= $(shell sh $(P4_ROOT)/ZmailBuild/rpmconf/Build/get_plat_tag.sh)
 
 ifeq ($(BUILD_PLATFORM), )
         BUILD_PLATFORM := "UNKNOWN"
 endif
 
-ZIMBRA_HOME ?= /opt/zimbra
+ZIMBRA_HOME ?= /opt/zmail
 
 ifdef BETA
 	include $(ASPELL_ROOT)/../beta_versions.def
@@ -47,7 +47,7 @@ checksrc:
 build:
 	tar xzf src/aspell-$(ASPELL_VERSION).tar.gz
 	(cd aspell-$(ASPELL_VERSION); \
-	./configure --prefix=/opt/zimbra/aspell-$(ASPELL_VERSION); $(MAKE) $(MAKEARGS))
+	./configure --prefix=/opt/zmail/aspell-$(ASPELL_VERSION); $(MAKE) $(MAKEARGS))
 
 install:
 	(cd aspell-$(ASPELL_VERSION); $(MAKE) $(MAKEARGS) install)
@@ -61,8 +61,8 @@ dict-install:
 		PATH=$(ZIMBRA_HOME)/aspell-$(ASPELL_VERSION)/bin:$$PATH $(MAKE) $(MAKEARGS); \
 		PATH=$(ZIMBRA_HOME)/aspell-$(ASPELL_VERSION)/bin:$$PATH $(MAKE) $(MAKEARGS) install) \
 	done
-	echo "add zimbra.rws" >> $(ZIMBRA_HOME)/aspell-$(ASPELL_VERSION)/lib/aspell-0.60/en.multi
-	echo "add zimbra.rws" >> $(ZIMBRA_HOME)/aspell-$(ASPELL_VERSION)/lib/aspell-0.60/en_US.multi
+	echo "add zmail.rws" >> $(ZIMBRA_HOME)/aspell-$(ASPELL_VERSION)/lib/aspell-0.60/en.multi
+	echo "add zmail.rws" >> $(ZIMBRA_HOME)/aspell-$(ASPELL_VERSION)/lib/aspell-0.60/en_US.multi
 
 tar: $(P4_ROOT)/ThirdPartyBuilds/$(BUILD_PLATFORM)/aspell
 	(cd $(ZIMBRA_HOME); tar czf \

@@ -2886,7 +2886,7 @@ NEW FEATURES
 
 - added an LDAP attribute amavisArchiveQuarantineTo to code and to
   LDAP.schema;  a patch was provided by Anand Palaniswamy (back in
-  October 2006); prompted by Quanah Gibson-Mount, both of zimbra.com.
+  October 2006); prompted by Quanah Gibson-Mount, both of zmail.com.
 
 - new file in the package: LDAP.ldif, same schema as in LDAP.schema, but
   in ldif format; contributed by Quanah Gibson-Mount and independently

@@ -8,7 +8,7 @@
    But in some cases, the login name may not be fully qualified, (eg "john").
    This usually happens when there is only a single domain
 
-   But Zimbra may[?] allow a user to log in even if there are multiple domains
+   But Zmail may[?] allow a user to log in even if there are multiple domains
    in the setup. In this case, one specific domain is designated as the 
    default domain, and this domain is automatically appended to the login name
    in the absence of the fully qualified domain name

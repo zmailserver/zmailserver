@@ -2,14 +2,14 @@ LIBMEMCACHED_ROOT := $(shell pwd)
 P4_ROOT ?= $(shell cd $(LIBMEMCACHED_ROOT)/../..; pwd)
 MAKE ?= make
 
-BUILD_PLATFORM ?= $(shell sh $(P4_ROOT)/ZimbraBuild/rpmconf/Build/get_plat_tag.sh)
+BUILD_PLATFORM ?= $(shell sh $(P4_ROOT)/ZmailBuild/rpmconf/Build/get_plat_tag.sh)
 
 ifeq ($(BUILD_PLATFORM), )
 	BUILD_PLATFORM := "UNKNOWN"
 endif
 
 MAKEARGS ?= -j2
-ZIMBRA_HOME ?= /opt/zimbra
+ZIMBRA_HOME ?= /opt/zmail
 
 PATCH	:=
 
@@ -37,7 +37,7 @@ build:
 	LIBEVENT_CPPFLAGS="-I$(ZIMBRA_HOME)/memcached/include" \
 	LIBEVENT_LDFLAGS="-L$(ZIMBRA_HOME)/memcached/lib" \
 	./configure --prefix=$(ZIMBRA_HOME)/libmemcached-$(LIBMCD_VERSION) \
-	--with-memcached=/opt/zimbra/memcached; \
+	--with-memcached=/opt/zmail/memcached; \
 	$(MAKE) $(MAKEARGS); \
 	$(MAKE) install STRIP="")
 	(cd $(ZIMBRA_HOME); ln -s libmemcached-$(LIBMCD_VERSION) libmemcached)

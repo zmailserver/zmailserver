@@ -1,25 +1,25 @@
-           Scaling Zimbra NGINX POP/IMAP Proxy For Large Deployments
+           Scaling Zmail NGINX POP/IMAP Proxy For Large Deployments
 
                                December 12, 2007
-                   Md. Mansoor Peerbhoy <mansoor@zimbra.com>
+                   Md. Mansoor Peerbhoy <mansoor@zmail.com>
   ---------------------------------------------------------------------------
 
                                   Introduction
                                   ------------
 
   This document describes some factors that need to be taken into account 
-  when deploying the zimbra nginx POP/IMAP Proxy on large systems where 
+  when deploying the zmail nginx POP/IMAP Proxy on large systems where 
   there are expected to be many simultaneous connections and a sustained
   work-load on the proxy
 
-  Throughout this document, the terms "nginx zimbra" or "zimbra nginx" or
-  equivalents should be considered as meaning "Zimbra NGINX POP/IMAP Proxy"
+  Throughout this document, the terms "nginx zmail" or "zmail nginx" or
+  equivalents should be considered as meaning "Zmail NGINX POP/IMAP Proxy"
 
 
                                    Components
                                    ----------
 
-  * nginx-zimbra
+  * nginx-zmail
   
     This is the POP/IMAP proxy service, which listens for incoming
     POP/IMAP requests -- The end-clients (using MS Outlook, Thunderbird, or
@@ -27,34 +27,34 @@
     the protocols POP3 (Port 110), IMAP (Port 143), POP3S (Secure POP3), or
     IMAPS (Secure IMAP)
 
-    nginx-zimbra is started/stopped by the `zmproxyctl' command line
+    nginx-zmail is started/stopped by the `zmproxyctl' command line
 
   * nginx route lookup handler 
 
-    Since nginx-zimbra is an e-mail proxy for POP and IMAP, when a new 
-    connection arrives, nginx-zimbra needs to locate the "real" server and the
+    Since nginx-zmail is an e-mail proxy for POP and IMAP, when a new 
+    connection arrives, nginx-zmail needs to locate the "real" server and the
     port where the mail service for the end user can be reached
 
     In multi-node installs, email accounts will be spread across different 
-    mailbox servers, therefore, nginx-zimbra will need to locate the mailbox
+    mailbox servers, therefore, nginx-zmail will need to locate the mailbox
     server where the user's account resides 
 
     Add to this the port number of the desired service (POP=7110,IMAP=7143),
     and you have the "route information" for an account
 
-    This route information needs to be discovered by nginx-zimbra dynamically,
-    when an end-user logs in to nginx-zimbra using POP3(S) or IMAP(S)
+    This route information needs to be discovered by nginx-zmail dynamically,
+    when an end-user logs in to nginx-zmail using POP3(S) or IMAP(S)
 
-    To facilitate this, each Zimbra mailbox server has a servlet that can 
+    To facilitate this, each Zmail mailbox server has a servlet that can 
     be accessed on port 7072, at "/service/extension/nginx-lookup" - this 
     servlet is referred to in this document as the "route lookup handler", or
     "lookup handler", or simply "lookup servlet"
 
-    This lookup servlet URL is specified in the nginx-zimbra configuration
+    This lookup servlet URL is specified in the nginx-zmail configuration
     file using the "auth_http" directive -- see the RUNNING document for details
 
-    In single-node installs, nginx-zimbra typically would run on the same host
-    as the zimbra mailbox server, so the auth_http directive in nginx.conf may
+    In single-node installs, nginx-zmail typically would run on the same host
+    as the zmail mailbox server, so the auth_http directive in nginx.conf may
     look like -
 
     mail {
@@ -77,25 +77,25 @@
     ... where mbox1, 2, and 3 are the names of the mailbox servers
 
     This helps in sharing the load on the lookup servlets, because every time
-    an e-mail route needs to be discovered, nginx-zimbra will round-robin 
+    an e-mail route needs to be discovered, nginx-zmail will round-robin 
     between these servers. If any of the servlets specified is not reachable
-    when its turn arrives via round-robin, then nginx-zimbra will fail over 
+    when its turn arrives via round-robin, then nginx-zmail will fail over 
     to the next url in the list
 
   * cache servers
 
-    The route information is discovered by nginx-zimbra using the lookup 
+    The route information is discovered by nginx-zmail using the lookup 
     servlets as described above. It is beneficial to cache this route 
     information for further use for speed reasons, so that repeated round
     trips to the http route lookup handlers can be avoided for a period of 
     time
 
-    nginx-zimbra uses memcached (http://www.danga.com/memcached/), which is
+    nginx-zmail uses memcached (http://www.danga.com/memcached/), which is
     a high-performance, distributed memory object caching system
 
-    nginx-zimbra makes use of the `memcache_servers' directive to learn the 
+    nginx-zmail makes use of the `memcache_servers' directive to learn the 
     name(s) of the memcached servers. In the example below, the memcached 
-    service is running on the same host as nginx-zimbra, port 11211 -
+    service is running on the same host as nginx-zmail, port 11211 -
 
     mail {
         ...
@@ -129,13 +129,13 @@
     NOTE - note that in case multiple memcached servers are specified (as 
     above), then in this case, the cache server that is elected to cache 
     a particular user's route information is not elected via round-robin, 
-    rather nginx-zimbra uses an internal hashing algorithm, which operates
+    rather nginx-zmail uses an internal hashing algorithm, which operates
     on the user's login name, to elect one of the available memcached servers 
     to be used for caching that user's route information
 
     It is essential to use a hashing algorithm in order to ensure maximum hit
     rate for the cached route. A "cache hit" is defined as the situation when
-    nginx-zimbra finds an account's route information already present when 
+    nginx-zmail finds an account's route information already present when 
     it queries a cache server
 
     In the case when there are more than one memcached servers, there should
@@ -143,10 +143,10 @@
     for looking up a route information. If no such deterministic algorithm is
     present (eg round-robin), then in this case, it may be that one cache 
     server already has the route information for an account cached previously, 
-    but nginx-zimbra ends up querying another cache server because it was 
+    but nginx-zmail ends up querying another cache server because it was 
     elected by round-robin
 
-    Therefore, nginx-zimbra uses a hashing algorithm that operates on the 
+    Therefore, nginx-zmail uses a hashing algorithm that operates on the 
     account's login name, so that in cases of multiple memcached servers, the
     same one out of the set is chosen each time, whenever the same user, say
     john@example.com logs in
@@ -159,7 +159,7 @@
     information contains the server IP instead of the server name, an IP change
     could also cause cached route invalidation
 
-    Therefore, nginx-zimbra makes use of a directive called `memcache_entry_ttl'
+    Therefore, nginx-zmail makes use of a directive called `memcache_entry_ttl'
     to control the amount of time that route information may reside in a 
     cache server before being invalidated
 
@@ -186,13 +186,13 @@
     However, in the unlikely case that there is considerable latency on the
     network between the proxy and the cache server, then in this case a cache
     operation may take longer than expected, and it may be beneficial for 
-    nginx-zimbra to time out the cache operation, and instead seek the route
+    nginx-zmail to time out the cache operation, and instead seek the route
     from the servlet instead. A servlet lookup is always more expensive than
     a cache lookup, but if the cache server does not respond within an 
     acceptable time frame (as described above), then it is useful to fall back
     to the lookup servlet
 
-    To facilitate this timeout, nginx-zimbra makes use of the "memcache_timeout"
+    To facilitate this timeout, nginx-zmail makes use of the "memcache_timeout"
     directive -
 
     mail {
@@ -208,18 +208,18 @@
     }
 
     Lower this value if the cache servers are on the same network segment as 
-    the nginx-zimbra proxy. Increase this value if there is network latency 
+    the nginx-zmail proxy. Increase this value if there is network latency 
     between the proxy and the cache server(s)
 
   * cache server reconnection
 
     To optimize the connection(s) between proxy and cache server, each 
-    nginx-zimbra worker process only ever establishes a connection to each 
+    nginx-zmail worker process only ever establishes a connection to each 
     memcached server *once*, and then holds on to that connection for its 
     lifetime
 
     However, if one of the memcached servers goes bad, then in this case, 
-    nginx-zimbra internally marks that memcached server as *bad*, and does
+    nginx-zmail internally marks that memcached server as *bad*, and does
     not attempt to contact that server for a configurable period of time.
 
     This configurable period of time is learned from the
@@ -258,8 +258,8 @@
     mc2:11211 until mc1:11211 comes back up
 
     Decreasing the reconnect interval implies more aggressive attempts by
-    nginx-zimbra to reconnect to a memcached server if it goes down, whereas 
-    an increase in this value implies that nginx-zimbra will continue to 
+    nginx-zmail to reconnect to a memcached server if it goes down, whereas 
+    an increase in this value implies that nginx-zmail will continue to 
     fall back to the next available memcached server for that much longer
 
     Decrease this value if you expect that, in case memcached servers go down,
@@ -273,7 +273,7 @@
 
   * worker processes
 
-    nginx-zimbra, like many other servers, starts off with one master process
+    nginx-zmail, like many other servers, starts off with one master process
     and a configurable number of worker processes. The "worker_processes" 
     directive controls this value -
 
@@ -288,7 +288,7 @@
 
   * worker connections
 
-    Each nginx-zimbra worker process is able to handle upto a certain amount
+    Each nginx-zmail worker process is able to handle upto a certain amount
     of simultaneous connections. This value is governed by the 
     "worker_connections" directive, and 1024 is a usual value. Increase this 
     value correspondingly if more simultaneous connections are expected.
@@ -298,7 +298,7 @@
     }
 
     In general, the maximum number of clients that can be simultaneously 
-    connected to nginx-zimbra proxy can be calculated as follows: 
+    connected to nginx-zmail proxy can be calculated as follows: 
 
     maxclients = (worker_processes * worker_connections) / (2 * N)
 
@@ -328,7 +328,7 @@
                           IPv4 Addressing Limitations
                           ---------------------------
 
-  nginx-zimbra presently only works with IPv4 addresses. A limitation of the
+  nginx-zmail presently only works with IPv4 addresses. A limitation of the
   IPv4 addressing scheme is that port numbers are just 16-bit. This means that
   the port range is only 0 to 65535. This means that on a node with just a 
   single IP address, there can at most be 65535 sockets active on that network
@@ -362,7 +362,7 @@
     of the load balancer
 
     proxy1, proxy2, ... proxyN .isp.net are the names of the individual 
-    proxy servers, on each of which is running an instance of nginx-zimbra
+    proxy servers, on each of which is running an instance of nginx-zmail
 
     (An example of a Layer 4 Load balancer is an Alteon switch)
 
@@ -370,7 +370,7 @@
     corresponding to the proxy1, proxy2, ... proxyN .isp.net proxy servers
     onto the same network interface of a single proxy server.
 
-    In this case, nginx-zimbra running on the proxy server will respond to 
+    In this case, nginx-zmail running on the proxy server will respond to 
     connection requests from each of the `N' IP addresses aliased to its node's
     network interface
 
@@ -382,7 +382,7 @@
                                    ----------
 
   * A judicious deployment of proxy servers, memcached servers, and mailbox 
-    servers can increase the capacity of nginx-zimbra to serve many more 
+    servers can increase the capacity of nginx-zmail to serve many more 
     simultaneous connections
 
   * `N' proxy servers, `C' cache servers, and `M' mailbox servers can be 
@@ -391,13 +391,13 @@
                                     Remarks
                                     -------
 
-  Most of the nginx-zimbra directives mentioned above (with a brief description
+  Most of the nginx-zmail directives mentioned above (with a brief description
   of each) can be found in //depot/main/ThirdParty/nginx/extras/sample.conf
 
   Also refer to http://wiki.codemongers.com/NginxModules for a more detailed 
   syntax on the configuration options described above
 
   Lastly, please check the configuration file syntax with 
-  /opt/zimbra/nginx/sbin/nginx -c /opt/zimbra/conf/nginx.conf -t
+  /opt/zmail/nginx/sbin/nginx -c /opt/zmail/conf/nginx.conf -t
 
                                       ***

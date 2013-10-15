@@ -3,13 +3,13 @@ P4_ROOT ?= $(shell cd $(CLAMAV_ROOT)/../..; pwd)
 MAKE ?= make
 MAKEARGS ?= -j2
 
-BUILD_PLATFORM ?= $(shell sh $(P4_ROOT)/ZimbraBuild/rpmconf/Build/get_plat_tag.sh)
+BUILD_PLATFORM ?= $(shell sh $(P4_ROOT)/ZmailBuild/rpmconf/Build/get_plat_tag.sh)
 
 ifeq ($(BUILD_PLATFORM), )
 	BUILD_PLATFORM := "UNKNOWN"
 endif
 
-ZIMBRA_HOME ?= /opt/zimbra
+ZIMBRA_HOME ?= /opt/zmail
 
 PATCH	:= patch -N -g0 -p1 < ../patches/fix-configure-963.patch
 CONFIG_OPT	:=
@@ -22,8 +22,8 @@ else
 	include $(CLAMAV_ROOT)/../versions.def
 endif
 
-CPPFLAGS	:= CPPFLAGS="-I/opt/zimbra/sendmail-$(SENDMAIL_VERSION)/include"
-LDFLAGS	:= LDFLAGS="-L/opt/zimbra/sendmail-$(SENDMAIL_VERSION)/lib"
+CPPFLAGS	:= CPPFLAGS="-I/opt/zmail/sendmail-$(SENDMAIL_VERSION)/include"
+LDFLAGS	:= LDFLAGS="-L/opt/zmail/sendmail-$(SENDMAIL_VERSION)/lib"
 CONFIG_OPT	:= --enable-milter
 CLAMAV_TGZ_TARGET := \
 $(P4_ROOT)/ThirdPartyBuilds/$(BUILD_PLATFORM)/clamav/clamav-$(CLAMAV_VERSION).tgz
@@ -47,8 +47,8 @@ build:
 	CFLAGS="-g -O2" \
 	$(CPPFLAGS) \
 	$(LDFLAGS) \
-	./configure --prefix=/opt/zimbra/clamav-$(CLAMAV_VERSION) --mandir=/opt/zimbra/clamav-$(CLAMAV_VERSION)/man \
-	--with-user=zimbra --with-group=zimbra --disable-zlib-vcheck --disable-gcc-vcheck --disable-clamav $(CONFIG_OPT); \
+	./configure --prefix=/opt/zmail/clamav-$(CLAMAV_VERSION) --mandir=/opt/zmail/clamav-$(CLAMAV_VERSION)/man \
+	--with-user=zmail --with-group=zmail --disable-zlib-vcheck --disable-gcc-vcheck --disable-clamav $(CONFIG_OPT); \
 	$(MAKE) $(MAKEARGS); $(MAKE) install)
 	-(cd $(ZIMBRA_HOME); ln -s clamav-$(CLAMAV_VERSION) clamav)
 

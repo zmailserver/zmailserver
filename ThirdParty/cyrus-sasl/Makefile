@@ -3,13 +3,13 @@ P4_ROOT ?= $(shell cd $(CYRUS_ROOT)/../..; pwd)
 MAKE ?= make
 MAKEARGS ?= -j2
 
-BUILD_PLATFORM ?= $(shell sh $(P4_ROOT)/ZimbraBuild/rpmconf/Build/get_plat_tag.sh)
+BUILD_PLATFORM ?= $(shell sh $(P4_ROOT)/ZmailBuild/rpmconf/Build/get_plat_tag.sh)
 
 ifeq ($(BUILD_PLATFORM), )
 	BUILD_PLATFORM := "UNKNOWN"
 endif
 
-ZIMBRA_HOME ?= /opt/zimbra
+ZIMBRA_HOME ?= /opt/zmail
 
 PATCH	:=
 
@@ -40,11 +40,11 @@ build:
 	(tar xfz src/cyrus-sasl-$(CYRUS_RELEASE).tar.gz; \
 	mv cyrus-sasl-$(CYRUS_RELEASE) cyrus-sasl-$(CYRUS_VERSION); \
 	cd cyrus-sasl-$(CYRUS_VERSION); \
-	patch -g0 -p1 < ../patches/sasl-auth-zimbra-2.1.25.patch; \
+	patch -g0 -p1 < ../patches/sasl-auth-zmail-2.1.25.patch; \
 	patch -g0 -p1 < ../patches/saslauthd-conf.patch; \
 	patch -g0 -p1 < ../patches/auxprop.patch; \
 	$(PATCH))
-	_S_='~' ./zimbra-cyrus-sasl-build.sh ${BSTR}
+	_S_='~' ./zmail-cyrus-sasl-build.sh ${BSTR}
 	(cd cyrus-sasl-$(CYRUS_VERSION); $(MAKE) install)
 	(cd $(ZIMBRA_HOME); ln -s cyrus-sasl-$(CYRUS_VERSION) cyrus-sasl; \
 	tar czf $(CYRUS_TGZ_TARGET) \

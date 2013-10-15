@@ -4,11 +4,11 @@
 SHELL	:= /bin/bash
 PERL_ROOT ?= $(shell pwd)
 P4_ROOT ?= $(shell cd $(PERL_ROOT)/../..; pwd)
-ZIMBRA_HOME ?= /opt/zimbra
+ZIMBRA_HOME ?= /opt/zmail
 JAVA_HOME		:= /usr/local/java
 export JAVA_HOME
 TMPDIR	:= tmp
-BUILD_PLATFORM ?= $(shell sh $(P4_ROOT)/ZimbraBuild/rpmconf/Build/get_plat_tag.sh)
+BUILD_PLATFORM ?= $(shell sh $(P4_ROOT)/ZmailBuild/rpmconf/Build/get_plat_tag.sh)
 PERL_TGZ_DEST_DIR := $(P4_ROOT)/ThirdPartyBuilds/$(BUILD_PLATFORM)/perl
 PERL_BIN_TGZ_DEST := $(PERL_TGZ_DEST_DIR)/perlbin.tgz
 PERL_TGZ_DEST	:= $(PERL_TGZ_DEST_DIR)/perllib.tgz
@@ -17,7 +17,7 @@ ifeq ($(BUILD_PLATFORM), )
         BUILD_PLATFORM := "UNKNOWN"
 endif
 
-DEST_DIR		:= $(PERL_ROOT)/zimbramon
+DEST_DIR		:= $(PERL_ROOT)/zmailmon
 DEST_LIB_DIR	:= $(DEST_DIR)/lib
 DEST_BIN_DIR	:= $(DEST_DIR)/bin
 
@@ -412,7 +412,7 @@ build:
 		cp $(PERL_ROOT)/$$lib.tar.gz $(TMPDIR); \
 		(cd $(TMPDIR); tar xfz $$lib.tar.gz; cd $$lib; \
 		$(PERL) -I$(DEST_LIB_DIR) Makefile.PL PREFIX=$(DEST_DIR) LIB=$(DEST_LIB_DIR) --ssl --nocatchstderr \
-			--libs="-L$(ZIMBRA_HOME)/mysql/lib -L/opt/zimbra/openssl/lib -lmysqlclient -lpthread -lz -lm -lrt -lssl -lcrypto -ldl" \
+			--libs="-L$(ZIMBRA_HOME)/mysql/lib -L/opt/zmail/openssl/lib -lmysqlclient -lpthread -lz -lm -lrt -lssl -lcrypto -ldl" \
 			--mysql_config="$(ZIMBRA_HOME)/mysql/bin/mysql_config"; \
 		$(SED) -i .bak -e 's#-arch x86_64 -arch i386 -arch ppc -bundle -undefined dynamic_lookup -L/usr/local/lib#-arch x86_64 -bundle -undefined dynamic_lookup#' Makefile; \
 		$(SED) -i .bak -e 's#-arch x86_64 -arch i386 -arch ppc -L/usr/local/lib#-arch x86_64#' Makefile; \
@@ -420,7 +420,7 @@ build:
 		$(SED) -i .bak -e 's#-arch x86_64 -arch i386 -bundle -undefined dynamic_lookup -L/usr/local/lib -fstack-protector#-arch x86_64 -bundle -undefined dynamic_lookup -fstack-protector#' Makefile; \
 		$(SED) -i .bak -e 's#-arch x86_64 -arch i386 -fstack-protector -L/usr/local/lib#-arch x86_64 -fstack-protector#' Makefile; \
 		$(SED) -i .bak -e 's#-arch x86_64 -arch i386 -g -pipe -fno-common -DPERL_DARWIN -fno-strict-aliasing -fstack-protector -I/usr/local/include#-arch x86_64 -g -pipe -fno-common -DPERL_DARWIN -fno-strict-aliasing -fstack-protector#' Makefile; \
-		LD_RUN_PATH=/opt/zimbra/lib:/opt/zimbra/mysql/lib:/opt/zimbra/openssl/lib $(MAKE); $(MAKE) install;) >> $(LOGFILE) 2>&1; \
+		LD_RUN_PATH=/opt/zmail/lib:/opt/zmail/mysql/lib:/opt/zmail/openssl/lib $(MAKE); $(MAKE) install;) >> $(LOGFILE) 2>&1; \
 		if [ $$? -ne 0 ]; then  echo "FAILED.";  else  echo "done.";  fi \
 	done
 
@@ -438,9 +438,9 @@ build:
 		echo -n "Compiling perl lib $$lib" ...; \
 		cp $(PERL_ROOT)/$$lib.tar.gz $(TMPDIR); \
 		(cd $(TMPDIR); tar xzf $$lib.tar.gz; cd $$lib; \
-			$(PERL) -I$(DEST_LIB_DIR) Makefile.PL PREFIX=$(ZIMBRA_HOME)/zimbramon LIB=$(ZIMBRA_HOME)/zimbramon/lib DATADIR=$(ZIMBRA_HOME)/conf/spamassassin CONFDIR=/opt/zimbra/conf/spamassassin LOCALSTATEDIR=$(ZIMBRA_HOME)/data/spamassassin; \
+			$(PERL) -I$(DEST_LIB_DIR) Makefile.PL PREFIX=$(ZIMBRA_HOME)/zmailmon LIB=$(ZIMBRA_HOME)/zmailmon/lib DATADIR=$(ZIMBRA_HOME)/conf/spamassassin CONFDIR=/opt/zmail/conf/spamassassin LOCALSTATEDIR=$(ZIMBRA_HOME)/data/spamassassin; \
 			$(MAKE); $(MAKE) install DESTDIR=$(DEST_DIR); \
-			cp -R $(DEST_DIR)/opt/zimbra/zimbramon/* $(DEST_DIR); \
+			cp -R $(DEST_DIR)/opt/zmail/zmailmon/* $(DEST_DIR); \
 			rm -rf $(DEST_DIR)/opt;) >> $(LOGFILE) 2>&1; \
 		if [ $$? -ne 0 ]; then  echo "FAILED.";  else  echo "done.";  fi \
 	done
@@ -449,7 +449,7 @@ build:
 		echo -n "Compiling perl lib $$lib ..."; \
 		cp $(PERL_ROOT)/$$lib.tar.gz $(TMPDIR); \
 		(cd $(TMPDIR); tar xzf $$lib.tar.gz; cd $$lib; \
-			$(SED) -i .bak -e 's#/usr/lib/sendmail /usr/sbin/sendmail#/usr/lib/sendmail /usr/sbin/sendmail /opt/zimbra/postfix/sbin/sendmail#' lib/Swatch/Actions.pm; \
+			$(SED) -i .bak -e 's#/usr/lib/sendmail /usr/sbin/sendmail#/usr/lib/sendmail /usr/sbin/sendmail /opt/zmail/postfix/sbin/sendmail#' lib/Swatch/Actions.pm; \
 			rm -f lib/Swatch/Actions.pm.bak; \
 			$(PERL) -I$(DEST_LIB_DIR) Makefile.PL PREFIX=$(DEST_DIR) LIB=$(DEST_LIB_DIR); \
 			$(MAKE); $(MAKE) install;) >> $(LOGFILE) 2>&1; \

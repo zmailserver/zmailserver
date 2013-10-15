@@ -12,11 +12,11 @@
 # basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
 # ***** END LICENSE BLOCK *****
 #
-diff -Naur cyrus-sasl-2.1.22/saslauthd/auth_zimbra.c cyrus-sasl-2.1.22-zimbra/saslauthd/auth_zimbra.c
---- cyrus-sasl-2.1.22/saslauthd/auth_zimbra.c	1970-01-01 05:30:00.000000000 +0530
-+++ cyrus-sasl-2.1.22-zimbra/saslauthd/auth_zimbra.c	2007-09-10 22:43:37.000000000 +0530
+diff -Naur cyrus-sasl-2.1.22/saslauthd/auth_zmail.c cyrus-sasl-2.1.22-zmail/saslauthd/auth_zmail.c
+--- cyrus-sasl-2.1.22/saslauthd/auth_zmail.c	1970-01-01 05:30:00.000000000 +0530
++++ cyrus-sasl-2.1.22-zmail/saslauthd/auth_zmail.c	2007-09-10 22:43:37.000000000 +0530
 @@ -0,0 +1,156 @@
-+/* MODULE: auth_zimbra */
++/* MODULE: auth_zmail */
 +
 +#include "mechanisms.h"
 +#include "globals.h" /* mech_option */
@@ -26,7 +26,7 @@ diff -Naur cyrus-sasl-2.1.22/saslauthd/auth_zimbra.c cyrus-sasl-2.1.22-zimbra/sa
 +#ifdef AUTH_ZIMBRA
 +
 +#include <syslog.h>
-+#include "auth_zimbra.h"
++#include "auth_zmail.h"
 +#include "zmclient.h"
 +
 +static cfile config = 0;
@@ -35,7 +35,7 @@ diff -Naur cyrus-sasl-2.1.22/saslauthd/auth_zimbra.c cyrus-sasl-2.1.22-zimbra/sa
 +static zmurl_roundrobin_t zmrr;
 +
 +int					/* R: -1 on failure, else 0 */
-+auth_zimbra_init(
++auth_zmail_init(
 +    /* PARAMETERS */
 +    void			        /* no parameters */
 +    /* END PARAMETERS */
@@ -53,59 +53,59 @@ diff -Naur cyrus-sasl-2.1.22/saslauthd/auth_zimbra.c cyrus-sasl-2.1.22-zimbra/sa
 +
 +    if (configname == NULL) {
 +        syslog(LOG_ERR, 
-+        "auth_zimbra_init: no config file specificied and %s is not accessible",
++        "auth_zmail_init: no config file specificied and %s is not accessible",
 +        SASLAUTHD_CONF_FILE_DEFAULT);
 +        return -1;
 +    }
 +
 +        
 +    if (!(config = cfile_read(configname, hti.error, sizeof(hti.error)))) {
-+        syslog(LOG_ERR, "auth_zimbra_init: %s", hti.error);
++        syslog(LOG_ERR, "auth_zmail_init: %s", hti.error);
 +        return -1;
 +    }
 +
 +    /* url has to be set */
-+    hti.url = cfile_getstring(config, "zimbra_url", NULL);
++    hti.url = cfile_getstring(config, "zmail_url", NULL);
 +    if (hti.url == NULL) {
-+        syslog(LOG_ERR, "auth_zimbra_init: zimbra_url not set in %s", 
++        syslog(LOG_ERR, "auth_zmail_init: zmail_url not set in %s", 
 +               configname);
 +        return 0;
 +    }
 +
 +    /* highly recommended that verifypeer is set */
-+    hti.certcheck = cfile_getswitch(config, "zimbra_cert_check", 1);
++    hti.certcheck = cfile_getswitch(config, "zmail_cert_check", 1);
 +    if (hti.certcheck == 0) {
-+        syslog(LOG_WARNING, "auth_zimbra_init: zimbra_cert_check is off!");
++        syslog(LOG_WARNING, "auth_zmail_init: zmail_cert_check is off!");
 +    } else {
-+        hti.certfile = cfile_getstring(config, "zimbra_cert_file", NULL);
++        hti.certfile = cfile_getstring(config, "zmail_cert_file", NULL);
 +        if (hti.certfile == NULL) {
-+            syslog(LOG_ERR, "auth_zimbra_init: zimbra_cert_file not set");
++            syslog(LOG_ERR, "auth_zmail_init: zmail_cert_file not set");
 +            return -1;
 +        }
 +    }
 +
-+    hti.proxy = cfile_getstring(config, "zimbra_proxy", NULL);
++    hti.proxy = cfile_getstring(config, "zmail_proxy", NULL);
 +
-+    hti.ctimeout = cfile_getint(config, "zimbra_connect_timeout", 15);
++    hti.ctimeout = cfile_getint(config, "zmail_connect_timeout", 15);
 +    if (hti.ctimeout < 0) {
-+        syslog(LOG_ERR, "auth_zimbra_init: invalid zimbra_connect_timeout %d",
++        syslog(LOG_ERR, "auth_zmail_init: invalid zmail_connect_timeout %d",
 +               hti.ctimeout);
 +        return -1;
 +    }
 +
-+    hti.timeout = cfile_getint(config, "zimbra_timeout", 45);
++    hti.timeout = cfile_getint(config, "zmail_timeout", 45);
 +    if (hti.timeout < 0) {
-+        syslog(LOG_ERR, "auth_zimbra_init: invalid zimbra_timeout %d",
++        syslog(LOG_ERR, "auth_zmail_init: invalid zmail_timeout %d",
 +               hti.timeout);
 +        return -1;
 +    }
 +
-+    hti.dump = cfile_getswitch(config, "zimbra_dump_xml", 0);
++    hti.dump = cfile_getswitch(config, "zmail_dump_xml", 0);
 +
-+    retry_interval = cfile_getint(config, "zimbra_retry_interval", 600);
++    retry_interval = cfile_getint(config, "zmail_retry_interval", 600);
 +
 +    if (retry_interval < 0) {
-+        syslog(LOG_ERR, "auth_zimbra_init: invalid zimbra_retry_interval %d",
++        syslog(LOG_ERR, "auth_zmail_init: invalid zmail_retry_interval %d",
 +            retry_interval);
 +        return -1;
 +    }
@@ -113,12 +113,12 @@ diff -Naur cyrus-sasl-2.1.22/saslauthd/auth_zimbra.c cyrus-sasl-2.1.22-zimbra/sa
 +    zmrr.retry_interval = (unsigned int) retry_interval;
 +
 +    if ((nurls = initialize_zmurls (hti.url, &zmrr)) == 0) {
-+        syslog(LOG_ERR, "auth_zimbra_init: zimbra_url='%s' contains no urls",
++        syslog(LOG_ERR, "auth_zmail_init: zmail_url='%s' contains no urls",
 +            hti.url);
 +        return -1;
 +    } else {
 +        syslog(LOG_INFO, 
-+            "auth_zimbra_init: %d auth urls initialized for round-robin",
++            "auth_zmail_init: %d auth urls initialized for round-robin",
 +            nurls);
 +    }
 +
@@ -127,7 +127,7 @@ diff -Naur cyrus-sasl-2.1.22/saslauthd/auth_zimbra.c cyrus-sasl-2.1.22-zimbra/sa
 +}
 +
 +char *					/* R: allocated response string */
-+auth_zimbra(
++auth_zmail(
 +    /* PARAMETERS */
 +    const char *user,			/* I: plaintext authenticator */
 +    const char *password,		/* I: plaintext password */
@@ -137,20 +137,20 @@ diff -Naur cyrus-sasl-2.1.22/saslauthd/auth_zimbra.c cyrus-sasl-2.1.22-zimbra/sa
 +    )
 +{
 +    if (!initialized) {
-+        syslog(LOG_ERR, "auth_zimbra: not initialized");
-+        return strdup("NO auth_zimbra not initiailzed");
++        syslog(LOG_ERR, "auth_zmail: not initialized");
++        return strdup("NO auth_zmail not initiailzed");
 +    }
 +
 +    if (!user || !password) {
-+	syslog(LOG_ERR, "auth_zimbra: NULL password or username?");
++	syslog(LOG_ERR, "auth_zmail: NULL password or username?");
 +	return strdup("NO saslauthd internal NULL password or username");
 +    }
 +
 +    if (zmauth(&zmrr, &hti, user, password)) {
-+        syslog(LOG_INFO, "auth_zimbra: %s auth OK", user);
++        syslog(LOG_INFO, "auth_zmail: %s auth OK", user);
 +        return strdup("OK");
 +    } else {
-+        syslog(LOG_INFO, "auth_zimbra: %s auth failed: %s", user, hti.error);
++        syslog(LOG_INFO, "auth_zmail: %s auth failed: %s", user, hti.error);
 +        return strdup("NO");
 +    }
 +}
@@ -162,7 +162,7 @@ diff -Naur cyrus-sasl-2.1.22/saslauthd/auth_zimbra.c cyrus-sasl-2.1.22-zimbra/sa
 +   so we write a free method in the hope that when the functionality becomes
 +   available, we are ready for it
 + */
-+void auth_zimbra_free ()
++void auth_zmail_free ()
 +{
 +    /* first free up the resources used by the round-robin structure */
 +    free_zmurls (&zmrr);
@@ -172,23 +172,23 @@ diff -Naur cyrus-sasl-2.1.22/saslauthd/auth_zimbra.c cyrus-sasl-2.1.22-zimbra/sa
 +}
 +
 +#endif /* AUTH_ZIMBRA */
-diff -Naur cyrus-sasl-2.1.22/saslauthd/auth_zimbra.h cyrus-sasl-2.1.22-zimbra/saslauthd/auth_zimbra.h
---- cyrus-sasl-2.1.22/saslauthd/auth_zimbra.h	1970-01-01 05:30:00.000000000 +0530
-+++ cyrus-sasl-2.1.22-zimbra/saslauthd/auth_zimbra.h	2007-09-05 05:06:55.000000000 +0530
+diff -Naur cyrus-sasl-2.1.22/saslauthd/auth_zmail.h cyrus-sasl-2.1.22-zmail/saslauthd/auth_zmail.h
+--- cyrus-sasl-2.1.22/saslauthd/auth_zmail.h	1970-01-01 05:30:00.000000000 +0530
++++ cyrus-sasl-2.1.22-zmail/saslauthd/auth_zmail.h	2007-09-05 05:06:55.000000000 +0530
 @@ -0,0 +1,10 @@
 +#ifndef _AUTH_ZIMBRA_H_
 +#define _AUTH_ZIMBRA_H_
 +
 +extern char *
-+auth_zimbra(const char *, const char *, const char *, const char *);
++auth_zmail(const char *, const char *, const char *, const char *);
 +
 +extern int
-+auth_zimbra_init(void);
++auth_zmail_init(void);
 +
 +#endif /* _AUTH_ZIMBRA_H_ */
-diff -Naur cyrus-sasl-2.1.22/saslauthd/configure.in cyrus-sasl-2.1.22-zimbra/saslauthd/configure.in
+diff -Naur cyrus-sasl-2.1.22/saslauthd/configure.in cyrus-sasl-2.1.22-zmail/saslauthd/configure.in
 --- cyrus-sasl-2.1.22/saslauthd/configure.in	2006-05-17 22:16:17.000000000 +0530
-+++ cyrus-sasl-2.1.22-zimbra/saslauthd/configure.in	2007-09-05 05:06:55.000000000 +0530
++++ cyrus-sasl-2.1.22-zmail/saslauthd/configure.in	2007-09-05 05:06:55.000000000 +0530
 @@ -87,6 +87,27 @@
    AC_DEFINE(HAVE_HTTPFORM,[],[Include HTTP form Support])
  fi
@@ -199,17 +199,17 @@ diff -Naur cyrus-sasl-2.1.22/saslauthd/configure.in cyrus-sasl-2.1.22-zimbra/sas
 +AC_ARG_WITH(libcurl, [  --with-libcurl=PROG     script for curl library config [curl-config] ],
 +        with_libcurl=$withval,
 +        with_libcurl=curl-config)
-+AC_ARG_ENABLE(zimbra, [  --enable-zimbra        enable Zimbra authentication module [yes] ],
-+  authzimbra=$enableval,
-+  authzimbra=yes)
-+if test "$authzimbra" != no; then
++AC_ARG_ENABLE(zmail, [  --enable-zmail        enable Zmail authentication module [yes] ],
++  authzmail=$enableval,
++  authzmail=yes)
++if test "$authzmail" != no; then
 +  if test -z "$with_libxml2"; then
-+     AC_ERROR([Zimbra authentication requires libxml2])
++     AC_ERROR([Zmail authentication requires libxml2])
 +  fi
 +  if test -z "$with_libcurl"; then
-+     AC_ERROR([Zimbra authentication requires libcurl])
++     AC_ERROR([Zmail authentication requires libcurl])
 +  fi
-+  AC_DEFINE(AUTH_ZIMBRA,[],[Include Zimbra Authentication Support])
++  AC_DEFINE(AUTH_ZIMBRA,[],[Include Zmail Authentication Support])
 +  LDFLAGS="$LDFLAGS `$with_libxml2 --libs` `$with_libcurl --libs`"
 +  CPPFLAGS="$CPPFLAGS `$with_libxml2 --cflags` `$with_libcurl --cflags`"
 +fi
@@ -217,9 +217,9 @@ diff -Naur cyrus-sasl-2.1.22/saslauthd/configure.in cyrus-sasl-2.1.22-zimbra/sas
  AC_ARG_WITH(pam, [  --with-pam=DIR          use PAM (rooted in DIR) [yes] ],
  	with_pam=$withval,
  	with_pam=yes)
-diff -Naur cyrus-sasl-2.1.22/saslauthd/configure.in.orig cyrus-sasl-2.1.22-zimbra/saslauthd/configure.in.orig
+diff -Naur cyrus-sasl-2.1.22/saslauthd/configure.in.orig cyrus-sasl-2.1.22-zmail/saslauthd/configure.in.orig
 --- cyrus-sasl-2.1.22/saslauthd/configure.in.orig	1970-01-01 05:30:00.000000000 +0530
-+++ cyrus-sasl-2.1.22-zimbra/saslauthd/configure.in.orig	2006-05-17 22:16:17.000000000 +0530
++++ cyrus-sasl-2.1.22-zmail/saslauthd/configure.in.orig	2006-05-17 22:16:17.000000000 +0530
 @@ -0,0 +1,336 @@
 +AC_INIT(mechanisms.h)
 +AC_PREREQ([2.54])
@@ -557,29 +557,29 @@ diff -Naur cyrus-sasl-2.1.22/saslauthd/configure.in.orig cyrus-sasl-2.1.22-zimbr
 +AC_CONFIG_HEADERS(saslauthd.h)
 +
 +AC_OUTPUT(Makefile)
-diff -Naur cyrus-sasl-2.1.22/saslauthd/Makefile.am cyrus-sasl-2.1.22-zimbra/saslauthd/Makefile.am
+diff -Naur cyrus-sasl-2.1.22/saslauthd/Makefile.am cyrus-sasl-2.1.22-zmail/saslauthd/Makefile.am
 --- cyrus-sasl-2.1.22/saslauthd/Makefile.am	2006-05-17 22:16:17.000000000 +0530
-+++ cyrus-sasl-2.1.22-zimbra/saslauthd/Makefile.am	2007-09-06 04:42:17.000000000 +0530
++++ cyrus-sasl-2.1.22-zmail/saslauthd/Makefile.am	2007-09-06 04:42:17.000000000 +0530
 @@ -11,7 +11,9 @@
  		    auth_ldap.c auth_ldap.h cache.c cache.h cfile.c cfile.h \
  		    krbtf.c krbtf.h utils.c utils.h \
                      ipc_unix.c ipc_doors.c saslauthd-main.c saslauthd-main.h \
 -		    md5.c saslauthd_md5.h md5global.h 
 +		    md5.c saslauthd_md5.h md5global.h \
-+		    auth_zimbra.h auth_zimbra.c zmpost.c zmclient.h zmauth.c \
++		    auth_zmail.h auth_zmail.c zmpost.c zmclient.h zmauth.c \
 +		    zmurl.h zmurl.c
  EXTRA_saslauthd_sources = getaddrinfo.c getnameinfo.c
  saslauthd_DEPENDENCIES = saslauthd-main.o @LTLIBOBJS@
  saslauthd_LDADD	= @SASL_KRB_LIB@ \
-diff -Naur cyrus-sasl-2.1.22/saslauthd/mechanisms.c cyrus-sasl-2.1.22-zimbra/saslauthd/mechanisms.c
+diff -Naur cyrus-sasl-2.1.22/saslauthd/mechanisms.c cyrus-sasl-2.1.22-zmail/saslauthd/mechanisms.c
 --- cyrus-sasl-2.1.22/saslauthd/mechanisms.c	2006-03-14 01:47:09.000000000 +0530
-+++ cyrus-sasl-2.1.22-zimbra/saslauthd/mechanisms.c	2007-09-05 05:06:55.000000000 +0530
++++ cyrus-sasl-2.1.22-zmail/saslauthd/mechanisms.c	2007-09-05 05:06:55.000000000 +0530
 @@ -60,6 +60,10 @@
  #ifdef AUTH_HTTPFORM
  #include "auth_httpform.h"
  #endif
 +#ifdef AUTH_ZIMBRA
-+#include "auth_zimbra.h"
++#include "auth_zmail.h"
 +#endif
 +
  /* END PUBLIC DEPENDENCIES */
@@ -590,14 +590,14 @@ diff -Naur cyrus-sasl-2.1.22/saslauthd/mechanisms.c cyrus-sasl-2.1.22-zimbra/sas
      {   "httpform",     auth_httpform_init,     auth_httpform },
  #endif /* AUTH_LDAP */
 +#ifdef AUTH_ZIMBRA
-+    {   "zimbra",       auth_zimbra_init,       auth_zimbra },
++    {   "zmail",       auth_zmail_init,       auth_zmail },
 +#endif /* AUTH_ZIMBRA */
      {	0,		0,			0 }
  };
  
-diff -Naur cyrus-sasl-2.1.22/saslauthd/mechanisms.c.orig cyrus-sasl-2.1.22-zimbra/saslauthd/mechanisms.c.orig
+diff -Naur cyrus-sasl-2.1.22/saslauthd/mechanisms.c.orig cyrus-sasl-2.1.22-zmail/saslauthd/mechanisms.c.orig
 --- cyrus-sasl-2.1.22/saslauthd/mechanisms.c.orig	1970-01-01 05:30:00.000000000 +0530
-+++ cyrus-sasl-2.1.22-zimbra/saslauthd/mechanisms.c.orig	2006-03-14 01:47:09.000000000 +0530
++++ cyrus-sasl-2.1.22-zmail/saslauthd/mechanisms.c.orig	2006-03-14 01:47:09.000000000 +0530
 @@ -0,0 +1,98 @@
 +/* COPYRIGHT
 + * Copyright (c) 1997-2000 Messaging Direct Ltd.
@@ -697,12 +697,12 @@ diff -Naur cyrus-sasl-2.1.22/saslauthd/mechanisms.c.orig cyrus-sasl-2.1.22-zimbr
 +    {	0,		0,			0 }
 +};
 +
-diff -Naur cyrus-sasl-2.1.22/saslauthd/zmauth.c cyrus-sasl-2.1.22-zimbra/saslauthd/zmauth.c
+diff -Naur cyrus-sasl-2.1.22/saslauthd/zmauth.c cyrus-sasl-2.1.22-zmail/saslauthd/zmauth.c
 --- cyrus-sasl-2.1.22/saslauthd/zmauth.c	1970-01-01 05:30:00.000000000 +0530
-+++ cyrus-sasl-2.1.22-zimbra/saslauthd/zmauth.c	2007-09-10 23:01:49.000000000 +0530
++++ cyrus-sasl-2.1.22-zmail/saslauthd/zmauth.c	2007-09-10 23:01:49.000000000 +0530
 @@ -0,0 +1,348 @@
 +/*
-+ * Do an auth (SOAP) request against a zimbra server.
++ * Do an auth (SOAP) request against a zmail server.
 + */
 +#include <string.h>
 +#include <stdlib.h>
@@ -725,7 +725,7 @@ diff -Naur cyrus-sasl-2.1.22/saslauthd/zmauth.c cyrus-sasl-2.1.22-zimbra/saslaut
 +#include "zmurl.h"
 +
 +#define ZIMBRA_ACCOUNT_PREFIX "la"
-+#define ZIMBRA_ACCOUNT_HREF "urn:zimbraAccount"
++#define ZIMBRA_ACCOUNT_HREF "urn:zmailAccount"
 +#define EXPR_AUTH_TOKEN "//la:AuthResponse/la:authToken"
 +
 +#define SOAP_PREFIX "soap"
@@ -852,7 +852,7 @@ diff -Naur cyrus-sasl-2.1.22/saslauthd/zmauth.c cyrus-sasl-2.1.22-zimbra/saslaut
 +
 +  NULLCHK(header = xmlNewChild(envelope, NULL, "soap:Header", NULL));
 +  NULLCHK(context = xmlNewChild(header, NULL, "context", NULL));
-+  NULLCHK(xmlNewProp(context, "xmlns", "urn:zimbra"));
++  NULLCHK(xmlNewProp(context, "xmlns", "urn:zmail"));
 +  NULLCHK(xmlNewChild(context, NULL, "nosession", NULL));
 +  
 +  NULLCHK(body = xmlNewChild(envelope, NULL, "soap:Body", NULL));
@@ -939,7 +939,7 @@ diff -Naur cyrus-sasl-2.1.22/saslauthd/zmauth.c cyrus-sasl-2.1.22-zimbra/saslaut
 +
 +  u = elect_zmurl (zmrr);
 +
-+  /* zimbra round-robin loop begins here */
++  /* zmail round-robin loop begins here */
 +  while ((u != NULL) && (buffer == NULL))
 +  {
 +      if (u == s) {
@@ -1049,9 +1049,9 @@ diff -Naur cyrus-sasl-2.1.22/saslauthd/zmauth.c cyrus-sasl-2.1.22-zimbra/saslaut
 +  return 0;
 +}
 +#endif /* ZMAUTH_TEST_MAIN */
-diff -Naur cyrus-sasl-2.1.22/saslauthd/zmclient.h cyrus-sasl-2.1.22-zimbra/saslauthd/zmclient.h
+diff -Naur cyrus-sasl-2.1.22/saslauthd/zmclient.h cyrus-sasl-2.1.22-zmail/saslauthd/zmclient.h
 --- cyrus-sasl-2.1.22/saslauthd/zmclient.h	1970-01-01 05:30:00.000000000 +0530
-+++ cyrus-sasl-2.1.22-zimbra/saslauthd/zmclient.h	2007-09-06 23:45:17.000000000 +0530
++++ cyrus-sasl-2.1.22-zmail/saslauthd/zmclient.h	2007-09-06 23:45:17.000000000 +0530
 @@ -0,0 +1,63 @@
 +#ifndef _ZMCLIENT_H_
 +#define _ZMCLIENT_H_
@@ -1116,9 +1116,9 @@ diff -Naur cyrus-sasl-2.1.22/saslauthd/zmclient.h cyrus-sasl-2.1.22-zimbra/sasla
 +zmauth(zmurl_roundrobin_t *zmrr, zmpostinfo *hti, const char *user, const char *password);
 +
 +#endif /* _ZMCLIENT_H_ */
-diff -Naur cyrus-sasl-2.1.22/saslauthd/zmpost.c cyrus-sasl-2.1.22-zimbra/saslauthd/zmpost.c
+diff -Naur cyrus-sasl-2.1.22/saslauthd/zmpost.c cyrus-sasl-2.1.22-zmail/saslauthd/zmpost.c
 --- cyrus-sasl-2.1.22/saslauthd/zmpost.c	1970-01-01 05:30:00.000000000 +0530
-+++ cyrus-sasl-2.1.22-zimbra/saslauthd/zmpost.c	2007-09-10 21:10:31.000000000 +0530
++++ cyrus-sasl-2.1.22-zmail/saslauthd/zmpost.c	2007-09-10 21:10:31.000000000 +0530
 @@ -0,0 +1,233 @@
 +#include <curl/curl.h>
 +#include <curl/easy.h>
@@ -1353,9 +1353,9 @@ diff -Naur cyrus-sasl-2.1.22/saslauthd/zmpost.c cyrus-sasl-2.1.22-zimbra/saslaut
 +}
 +
 +#endif /* ZMPOST_TEST_MAIN */
-diff -Naur cyrus-sasl-2.1.22/saslauthd/zmurl.c cyrus-sasl-2.1.22-zimbra/saslauthd/zmurl.c
+diff -Naur cyrus-sasl-2.1.22/saslauthd/zmurl.c cyrus-sasl-2.1.22-zmail/saslauthd/zmurl.c
 --- cyrus-sasl-2.1.22/saslauthd/zmurl.c	1970-01-01 05:30:00.000000000 +0530
-+++ cyrus-sasl-2.1.22-zimbra/saslauthd/zmurl.c	2007-09-10 21:54:02.000000000 +0530
++++ cyrus-sasl-2.1.22-zmail/saslauthd/zmurl.c	2007-09-10 21:54:02.000000000 +0530
 @@ -0,0 +1,305 @@
 +#include "zmurl.h"
 +#include <stdlib.h>
@@ -1627,7 +1627,7 @@ diff -Naur cyrus-sasl-2.1.22/saslauthd/zmurl.c cyrus-sasl-2.1.22-zimbra/saslauth
 +    return;
 +}
 +
-+/* free the memory used by the zimbra url round-robin structure 
++/* free the memory used by the zmail url round-robin structure 
 +   this function first breaks the circular lists headed by the `good' and the
 +   `bad' data members, and then recursively frees the lists
 +
@@ -1662,9 +1662,9 @@ diff -Naur cyrus-sasl-2.1.22/saslauthd/zmurl.c cyrus-sasl-2.1.22-zimbra/saslauth
 +    }
 +}
 +
-diff -Naur cyrus-sasl-2.1.22/saslauthd/zmurl.h cyrus-sasl-2.1.22-zimbra/saslauthd/zmurl.h
+diff -Naur cyrus-sasl-2.1.22/saslauthd/zmurl.h cyrus-sasl-2.1.22-zmail/saslauthd/zmurl.h
 --- cyrus-sasl-2.1.22/saslauthd/zmurl.h	1970-01-01 05:30:00.000000000 +0530
-+++ cyrus-sasl-2.1.22-zimbra/saslauthd/zmurl.h	2007-09-10 21:54:27.000000000 +0530
++++ cyrus-sasl-2.1.22-zmail/saslauthd/zmurl.h	2007-09-10 21:54:27.000000000 +0530
 @@ -0,0 +1,30 @@
 +#if !defined(_ZMURL_H)
 +#define _ZMURL_H

@@ -4,9 +4,9 @@ MAKE ?= make
 MAKEARGS ?= -j2
 SED ?= sed
 
-BUILD_PLATFORM ?= $(shell sh $(P4_ROOT)/ZimbraBuild/rpmconf/Build/get_plat_tag.sh)
+BUILD_PLATFORM ?= $(shell sh $(P4_ROOT)/ZmailBuild/rpmconf/Build/get_plat_tag.sh)
 
-ZIMBRA_HOME ?= /opt/zimbra
+ZIMBRA_HOME ?= /opt/zmail
 
 ifdef BETA
 	include $(CURL_ROOT)/../beta_versions.def
@@ -60,10 +60,10 @@ build:
 	$(LDFLAGS) \
 	CFLAGS="-g -O2" \
 	./configure --prefix=$(ZIMBRA_HOME)/curl-$(CURL_VERSION) --disable-ldap --disable-ldaps \
-		--with-gssapi=/opt/zimbra/heimdal-$(HEIMDAL_VERSION) \
-		--with-ssl=/opt/zimbra/openssl-$(OPENSSL_VERSION) \
+		--with-gssapi=/opt/zmail/heimdal-$(HEIMDAL_VERSION) \
+		--with-ssl=/opt/zmail/openssl-$(OPENSSL_VERSION) \
 		--without-gnutls \
-		--with-ca-bundle=/opt/zimbra/curl-$(CURL_VERSION)/share/curl/ca-bundle.crt \
+		--with-ca-bundle=/opt/zmail/curl-$(CURL_VERSION)/share/curl/ca-bundle.crt \
 		--enable-ipv6 \
 		--with-zlib=$(LIB_DIR) \
 		--with-libidn=$(LIB_DIR))

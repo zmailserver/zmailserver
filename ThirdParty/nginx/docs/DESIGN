@@ -2,12 +2,12 @@
                       Memory Caching for NGINX Email Proxy
 
                                   June 6, 2007
-                   Md. Mansoor Peerbhoy <mansoor@zimbra.com>
+                   Md. Mansoor Peerbhoy <mansoor@zmail.com>
     --------------------------------------------------------------------------
 
                                   Introduction
 
-    As per PR #9251, Zimbra Server requires a more scaleable POP3/IMAP proxy.
+    As per PR #9251, Zmail Server requires a more scaleable POP3/IMAP proxy.
     NGINX (http://www.nginx.net/) has been chosen to replace Perdition
     (http://www.vergenet.net/linux/perdition/)
 

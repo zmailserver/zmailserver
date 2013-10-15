@@ -1,13 +1,13 @@
 SENDMAIL_ROOT := $(shell pwd)
 P4_ROOT ?= $(shell cd $(SENDMAIL_ROOT)/../..; pwd)
 
-BUILD_PLATFORM ?= $(shell sh $(P4_ROOT)/ZimbraBuild/rpmconf/Build/get_plat_tag.sh)
+BUILD_PLATFORM ?= $(shell sh $(P4_ROOT)/ZmailBuild/rpmconf/Build/get_plat_tag.sh)
 
 ifeq ($(BUILD_PLATFORM), )
 	BUILD_PLATFORM := "UNKNOWN"
 endif
 
-ZIMBRA_HOME ?= /opt/zimbra
+ZIMBRA_HOME ?= /opt/zmail
 
 PATCH   := patch -g0 -N -p1 < ../patches/ipv6.patch;
 

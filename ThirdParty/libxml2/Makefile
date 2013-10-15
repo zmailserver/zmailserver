@@ -3,8 +3,8 @@ P4_ROOT ?= $(shell cd $(XML_ROOT)/../..; pwd)
 MAKE ?= make
 MAKEARGS ?= -j2
 
-BUILD_PLATFORM ?= $(shell sh $(P4_ROOT)/ZimbraBuild/rpmconf/Build/get_plat_tag.sh)
-ZIMBRA_HOME ?= /opt/zimbra
+BUILD_PLATFORM ?= $(shell sh $(P4_ROOT)/ZmailBuild/rpmconf/Build/get_plat_tag.sh)
+ZIMBRA_HOME ?= /opt/zmail
 
 ifdef BETA
 	include $(XML_ROOT)/../beta_versions.def

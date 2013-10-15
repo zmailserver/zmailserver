@@ -389,7 +389,7 @@ ngx_mail_choke_session(throttle_callback_t *cb)
             bye.len = p - bye.data;
         }
     } else {
-        /* TODO SMTP is not (yet) relevant for zimbra, but how do we reject it ? */
+        /* TODO SMTP is not (yet) relevant for zmail, but how do we reject it ? */
         ngx_str_set(&bye, "");
     }
 
@@ -514,7 +514,7 @@ ngx_mail_choke_userauth(throttle_callback_t *cb)
     }
     else
     {
-        /* TODO SMTP is not (yet) relevant for zimbra, but how do we reject it ? */
+        /* TODO SMTP is not (yet) relevant for zmail, but how do we reject it ? */
         ngx_str_set(&bye, "");
         s->out = bye;
         s->quit = 1;
@@ -1660,12 +1660,12 @@ ngx_mail_do_auth(ngx_mail_session_t *s, ngx_connection_t *c)
     }
 
     /* all auth mechanisms for all protocols pass through ngx_mail_do_auth()
-       here. Therefore, it is best to just look at the zimbra extensions 
+       here. Therefore, it is best to just look at the zmail extensions 
        *once* at this point, rather than peppering that code all across 
      */
 
-    if (has_zimbra_extensions(s->login)) {
-        s->zlogin = get_zimbra_extension(s->login);
+    if (has_zmail_extensions(s->login)) {
+        s->zlogin = get_zmail_extension(s->login);
         s->login.len -= s->zlogin.len;
     } else {
         s->zlogin.data = (u_char *)"";
@@ -1674,8 +1674,8 @@ ngx_mail_do_auth(ngx_mail_session_t *s, ngx_connection_t *c)
 
     if (s->usedauth)
     {
-        if (has_zimbra_extensions(s->dusr)) {
-            s->zusr = get_zimbra_extension(s->dusr);
+        if (has_zmail_extensions(s->dusr)) {
+            s->zusr = get_zmail_extension(s->dusr);
             s->dusr.len -= s->zusr.len;
         } else {
             s->zusr.data = (u_char *)"";
@@ -1684,7 +1684,7 @@ ngx_mail_do_auth(ngx_mail_session_t *s, ngx_connection_t *c)
     }
 
     if (s->usedauth) {
-        /* technically, zimbra extensions are not allowed in authc
+        /* technically, zmail extensions are not allowed in authc
            but it is too troublesome to reject the login appropriately
            at this point (with the correct message), therefore it is 
            less bother to just pass the authc + {wm,ni,tb} to upstream

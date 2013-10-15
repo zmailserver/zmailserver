@@ -8,7 +8,7 @@ openssl_version=1.0.1e
 curl_version=7.30.0
 xml2_version=2.7.8
 
-openssl_lib_dir=/opt/zimbra/openssl-${openssl_version}/lib
-heimdal_lib_dir=/opt/zimbra/heimdal-${heimdal_version}/lib
-cyrus_lib_dir=/opt/zimbra/cyrus-sasl-${cyrus_version}/lib
-curl_lib_dir=/opt/zimbra/curl-${curl_version}/lib
+openssl_lib_dir=/opt/zmail/openssl-${openssl_version}/lib
+heimdal_lib_dir=/opt/zmail/heimdal-${heimdal_version}/lib
+cyrus_lib_dir=/opt/zmail/cyrus-sasl-${cyrus_version}/lib
+curl_lib_dir=/opt/zmail/curl-${curl_version}/lib

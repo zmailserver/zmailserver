@@ -1,13 +1,13 @@
 MEMCACHED_ROOT := $(shell pwd)
 P4_ROOT ?= $(shell cd $(MEMCACHED_ROOT)/../..; pwd)
 
-BUILD_PLATFORM ?= $(shell sh $(P4_ROOT)/ZimbraBuild/rpmconf/Build/get_plat_tag.sh)
+BUILD_PLATFORM ?= $(shell sh $(P4_ROOT)/ZmailBuild/rpmconf/Build/get_plat_tag.sh)
 
 ifeq ($(BUILD_PLATFORM), )
 	BUILD_PLATFORM := "UNKNOWN"
 endif
 
-ZIMBRA_HOME ?= /opt/zimbra
+ZIMBRA_HOME ?= /opt/zmail
 
 PATCH	:=
 
@@ -43,7 +43,7 @@ build:
 	$(PATCH) \
 	CFLAGS="-g -O2" ./configure --prefix=$(ZIMBRA_HOME)/memcached-$(MEMCACHED_VERSION) \
 	--with-libevent=$(ZIMBRA_HOME)/memcached-$(MEMCACHED_VERSION); \
-	LD_RUN_PATH=/opt/zimbra/memcached/lib make; make install)
+	LD_RUN_PATH=/opt/zmail/memcached/lib make; make install)
 	ln -s $(MEMCACHED_INSTALL) $(ZIMBRA_HOME)/memcached
 
 tar:

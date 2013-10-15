@@ -235,8 +235,8 @@ diff -r drop/Prism.app/Contents/Resources/chrome/webrunner/branding/brand.dtd pa
 < <!ENTITY  brandShortName  "Prism">
 < <!ENTITY  brandFullName   "Prism">
 ---
-> <!ENTITY  brandShortName  "Zimbra Desktop">
-> <!ENTITY  brandFullName   "Zimbra Desktop">
+> <!ENTITY  brandShortName  "Zmail Desktop">
+> <!ENTITY  brandFullName   "Zmail Desktop">
 diff -r drop/Prism.app/Contents/Resources/chrome/webrunner/branding/brand.properties patches/Prism.app/Contents/Resources/chrome/webrunner/branding/brand.properties
 1,3c1,3
 < brandShortName=Prism
@@ -244,8 +244,8 @@ diff -r drop/Prism.app/Contents/Resources/chrome/webrunner/branding/brand.proper
 < vendorShortName=Prism
 \ No newline at end of file
 ---
-> brandShortName=Zimbra Desktop
-> brandFullName=Zimbra Desktop
+> brandShortName=Zmail Desktop
+> brandFullName=Zmail Desktop
 > vendorShortName=VMware
 Only in drop/Prism.app/Contents/Resources/chrome/webrunner/branding: icon128.png
 diff -r drop/Prism.app/Contents/Resources/chrome/webrunner/content/about.js patches/Prism.app/Contents/Resources/chrome/webrunner/content/about.js
@@ -584,9 +584,9 @@ diff -r drop/Prism.app/Contents/Resources/defaults/preferences/preferences.js pa
 > pref("app.update.nagTimer.download", 86400); //the number of seconds after user dismissal to wait before prompting to download (if no background download); default=86400
 > pref("app.update.nagTimer.restart", 86400); //the number of seconds after user dismissal to wait before prompting to restart (if background download); default=86400
 > 
-> pref("app.update.url", "https://www.zimbra.com/aus/zdesktop2/update.php?chn=@channel@&ver=@version@&bid=@buildid@&bos=@buildos@");
-> pref("app.update.url.manual", "http://www.zimbra.com/products/desktop.html");
-> pref("app.update.url.details", "http://www.zimbra.com/products/desktop.html");
+> pref("app.update.url", "https://www.zmail.com/aus/zdesktop2/update.php?chn=@channel@&ver=@version@&bid=@buildid@&bos=@buildos@");
+> pref("app.update.url.manual", "http://www.zmail.com/products/desktop.html");
+> pref("app.update.url.details", "http://www.zmail.com/products/desktop.html");
 > pref("app.update.log.all", true);
 Only in drop/Prism.app/Contents/Resources: en.lproj
 Only in drop/Prism.app/Contents/Resources: extensions

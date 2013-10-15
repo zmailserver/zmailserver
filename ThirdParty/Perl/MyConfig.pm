@@ -6,7 +6,7 @@
 
 #
 # Replace occurences of BUILD_ROOT with
-# the location of the zimbra source:
+# the location of the zmail source:
 # ThirdParty/Perl
 #
 
@@ -32,7 +32,7 @@ $CPAN::Config = {
   'make' => q[/usr/bin/make],
   'make_arg' => q[],
   'make_install_arg' => q[],
-  'makepl_arg' => q[PREFIX=BUILD_ROOT/zimbramon LIB=BUILD_ROOT/zimbramon/lib EXPATLIBPATH=/opt/local/lib EXPATINCPATH=/opt/local/include],
+  'makepl_arg' => q[PREFIX=BUILD_ROOT/zmailmon LIB=BUILD_ROOT/zmailmon/lib EXPATLIBPATH=/opt/local/lib EXPATINCPATH=/opt/local/include],
   'ncftp' => q[],
   'ncftpget' => q[],
   'no_proxy' => q[],

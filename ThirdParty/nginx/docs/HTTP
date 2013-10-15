@@ -9,7 +9,7 @@ There are different types of packets that flow through NGINX, the routing decisi
         http://proxy.server/home/user2/{folder-path}
         http://proxy.server/home/~user3/{folder-path}
         http://proxy.server/service/home/~user4/{folder-path}
-       See ZimbraServer/docs/rest.txt for details
+       See ZmailServer/docs/rest.txt for details
 
     b) CALDAV - For example:
         http://proxy.server/dav/userN/...
@@ -22,7 +22,7 @@ There are different types of packets that flow through NGINX, the routing decisi
        If present, this takes precedence over the User= query-string argument
 
    For all cases above, the mailhost of the user is discovered using the HTTP lookup servlet
-   (port 7072, //depot/main/ZimbraNginxLookup/), and the request is proxied to that mailhost
+   (port 7072, //depot/main/ZmailNginxLookup/), and the request is proxied to that mailhost
 
 2. If the request URI or query-string or http-headers to not contain any information about any user
     In this case, the ZM_AUTH_TOKEN is examined, either in the ZM_AUTH_TOKEN HTTP request cookie,
@@ -36,7 +36,7 @@ There are different types of packets that flow through NGINX, the routing decisi
     The third portion is examined by NGINX (in the above case, 69643d33363a37343764396363382d326435372d346633662d613162362d3839393434613532616230373b6578703d31333a313230383239333739383337383b747970653d363a7a696d6272613b6d61696c686f73743d32303a3139322e3136382e3135392e3132383a373037303b)  
 
     And this 3rd part is hex-decoded (in this case) to:
-    id=36:747d9cc8-2d57-4f3f-a1b6-89944a52ab07;exp=13:1208293798378;type=6:zimbra;mailhost=20:192.168.159.128:7070;
+    id=36:747d9cc8-2d57-4f3f-a1b6-89944a52ab07;exp=13:1208293798378;type=6:zmail;mailhost=20:192.168.159.128:7070;
 
     The format of the decoded portion is:
     <field>=<value-len>:<value>;<field>=<value-len>:<value>;...
@@ -56,7 +56,7 @@ There are different types of packets that flow through NGINX, the routing decisi
 
     When the login credentials are posted by the client (usually in the form of an HTTP POST),
     then this HTTP post is usually the last packet that will be elected by IPHASH.
-    The current zimbra architecture is such that any of the backend mailhost servers can authenticate any user,
+    The current zmail architecture is such that any of the backend mailhost servers can authenticate any user,
     even if that user resides on a different mailhost within the same setup.
 
     However, once the user is authenticated successfully, he must be redirected to his own mailhost, so that he can access his mailbox.

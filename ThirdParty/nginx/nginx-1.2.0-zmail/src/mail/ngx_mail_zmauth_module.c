@@ -500,7 +500,7 @@ ngx_mail_zmauth_block_read(ngx_event_t *ev)
     }
 }
 
-/* Utility function to check if a (login) name has the zimbra
+/* Utility function to check if a (login) name has the zmail
    supported `special' extensions
    The test is to see if the name ends with /tb, /wm, or /ni
    tb = thunderbird
@@ -508,7 +508,7 @@ ngx_mail_zmauth_block_read(ngx_event_t *ev)
    ni = no idle
  */
 ngx_flag_t
-has_zimbra_extensions (ngx_str_t login)
+has_zmail_extensions (ngx_str_t login)
 {
     ngx_flag_t  f = 0;
 
@@ -524,16 +524,16 @@ has_zimbra_extensions (ngx_str_t login)
     return f;
 }
 
-/* Strip off any zimbra `special' extensions from a (login) name
+/* Strip off any zmail `special' extensions from a (login) name
    Returns a shallow copy of the original name, with the length
    shortened by 3 to strip off the trailing characters
  */
 /* Never use this ngx_str_t
-strip_zimbra_extensions (ngx_str_t login)
+strip_zmail_extensions (ngx_str_t login)
 {
     ngx_str_t   t = login;
 
-    if (has_zimbra_extensions (login)) {
+    if (has_zmail_extensions (login)) {
         t.len -= 3;
     }
 
@@ -541,11 +541,11 @@ strip_zimbra_extensions (ngx_str_t login)
 } */
 
 ngx_str_t
-get_zimbra_extension (ngx_str_t login)
+get_zmail_extension (ngx_str_t login)
 {
     ngx_str_t   e = ngx_string("");
 
-    if (has_zimbra_extensions(login)) {
+    if (has_zmail_extensions(login)) {
         e.data = login.data + (login.len - 3);
         e.len = 3;
     }

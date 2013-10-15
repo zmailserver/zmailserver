@@ -3,7 +3,7 @@
 # ***** BEGIN LICENSE BLOCK *****
 # 
 # Zimbra Collaboration Suite Server
-# Copyright (C) 2006 Zimbra, Inc.
+# Copyright (C) 2006 Zmail, Inc.
 # 
 # The contents of this file are subject to the Yahoo! Public License
 # Version 1.0 ("License"); you may not use this file except in
@@ -31,7 +31,7 @@ usage() {
 	echo ""
 	echo "Usage: "`basename $0`" [-b] -c [-p] [-s]" >&2
 	echo "-b: Use beta software versions"
-	echo "-c: Remove contents of /opt/zimbra (clean)"
+	echo "-c: Remove contents of /opt/zmail (clean)"
 	echo "-p: Use private CPAN mirror"
 	echo "-s: Re-sync source before building"
 	exit 2;
@@ -135,7 +135,7 @@ while [ $# -gt 0 ]; do
 			SYNC=yes
 			shift;
 			;;
-		-z|--zimbra)
+		-z|--zmail)
 			ZIMBRA=yes
 			shift;
 			;;
@@ -151,7 +151,7 @@ RELEASE=${RELEASE##*/}
 
 if [ x$CLEAN = x"no" ]; then
 	echo "WARNING: You must supply the clean option -c"
-	echo "WARNING: This will completely remove the contents of /opt/zimbra from the system"
+	echo "WARNING: This will completely remove the contents of /opt/zmail from the system"
 	exit 1;
 fi
 
@@ -163,7 +163,7 @@ if [ x$SYNC = x"yes" ]; then
 	P4=`which p4`;
 fi
 
-PLAT=`$PATHDIR/../ZimbraBuild/rpmconf/Build/get_plat_tag.sh`;
+PLAT=`$PATHDIR/../ZmailBuild/rpmconf/Build/get_plat_tag.sh`;
 
 if [ x$PLAT = "x" ]; then
 	echo "Unknown platform, exiting."
@@ -171,7 +171,7 @@ if [ x$PLAT = "x" ]; then
 fi
 
 if [ x$OVERRIDE = x"no" ]; then
-	askYN "Proceeding will remove /opt/zimbra.  Do you wish to continue?: " "N"
+	askYN "Proceeding will remove /opt/zmail.  Do you wish to continue?: " "N"
 	if [ $response = "no" ]; then
 		echo "Exiting"
 		exit 1;
@@ -179,7 +179,7 @@ if [ x$OVERRIDE = x"no" ]; then
 fi
 
 eval `/usr/bin/perl -V:archname`
-export PERLLIB="${PATHDIR}/Perl/zimbramon/lib:${PATHDIR}/Perl/zimbramon/lib/$archname"
+export PERLLIB="${PATHDIR}/Perl/zmailmon/lib:${PATHDIR}/Perl/zmailmon/lib/$archname"
 export PERL5LIB=${PERLLIB}
 
 if [ x$PLAT = "xSLES11_64" -o x$PLAT = "xRHEL6_64" ]; then
@@ -198,7 +198,7 @@ if [ x$SYNC = "xyes" ]; then
 fi
 
 if [ x$SYNC = "xyes" ]; then
-	cd ${PATHDIR}/../ZimbraBuild
+	cd ${PATHDIR}/../ZmailBuild
 	$P4 sync ... > /dev/null 
 fi
 
@@ -294,11 +294,11 @@ if [[ $PLAT != "MACOSX"* ]]; then
 fi
 
 if [ x"$ZIMBRA" = x"no" ]; then
-	echo "Cleaning contents of /opt/zimbra"
-	if [ -d "/opt/zimbra" ]; then
-		rm -rf /opt/zimbra/* 2>/dev/null
-		rm -rf /opt/zimbra/.* 2>/dev/null
-		mkdir -p /opt/zimbra
+	echo "Cleaning contents of /opt/zmail"
+	if [ -d "/opt/zmail" ]; then
+		rm -rf /opt/zmail/* 2>/dev/null
+		rm -rf /opt/zmail/.* 2>/dev/null
+		mkdir -p /opt/zmail
 	fi
 else
 	if [ -x "/home/build/scripts/setup-build.sh" ]; then
@@ -309,14 +309,14 @@ else
 	fi
 fi
 
-touch /opt/zimbra/blah 2>/dev/null
+touch /opt/zmail/blah 2>/dev/null
 RC=$?
 
 if [ $RC -eq 1 ]; then
-	echo "Error: Unable to write to /opt/zimbra"
+	echo "Error: Unable to write to /opt/zmail"
 	exit 1;
 else
-	rm -f /opt/zimbra/blah
+	rm -f /opt/zmail/blah
 fi
 
 if [ x$PUBLIC = x"yes" ]; then

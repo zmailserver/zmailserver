@@ -1,7 +1,7 @@
 MYSQL_ROOT := $(shell pwd)
 P4_ROOT ?= $(shell cd $(MYSQL_ROOT)/../..; pwd)
 
-BUILD_PLATFORM ?= $(shell sh $(P4_ROOT)/ZimbraBuild/rpmconf/Build/get_plat_tag.sh)
+BUILD_PLATFORM ?= $(shell sh $(P4_ROOT)/ZmailBuild/rpmconf/Build/get_plat_tag.sh)
 
 MAKE ?= make
 MAKEARGS ?= -j2
@@ -10,7 +10,7 @@ ifeq ($(BUILD_PLATFORM), )
 	BUILD_PLATFORM := "UNKNOWN"
 endif
 
-ZIMBRA_HOME ?= /opt/zimbra
+ZIMBRA_HOME ?= /opt/zmail
 
 ifdef BETA
 	include $(MYSQL_ROOT)/../beta_versions.def
@@ -52,8 +52,8 @@ build:
 	$(PATCH) \
 	$(MAC_TARGET) CFLAGS="-g -O3 $(PLAT_CFLAGS)" CXXFLAGS="-g -O3 $(PLAT_CXX_FLAGS) -felide-constructors -fno-exceptions -fno-rtti" \
 	$(LDFLAGS) \
-	CPPFLAGS="-I/opt/zimbra/openssl-$(OPENSSL_VERSION)/include" \
-	/usr/bin/cmake . -DCMAKE_SKIP_BUILD_RPATH=FALSE -DCMAKE_BUILD_WITH_INSTALL_RPATH=FALSE -DCMAKE_INSTALL_RPATH="/opt/zimbra/openssl-$(OPENSSL_VERSION)/lib" -DCMAKE_PREFIX_PATH=/opt/zimbra/openssl-$(OPENSSL_VERSION) -DWITH_SSL=system -DCMAKE_INSTALL_PREFIX=/opt/zimbra/mysql-$(MYSQL_VERSION) -DENABLED_PROFILING=on -DWITH_READLINE=TRUE; \
+	CPPFLAGS="-I/opt/zmail/openssl-$(OPENSSL_VERSION)/include" \
+	/usr/bin/cmake . -DCMAKE_SKIP_BUILD_RPATH=FALSE -DCMAKE_BUILD_WITH_INSTALL_RPATH=FALSE -DCMAKE_INSTALL_RPATH="/opt/zmail/openssl-$(OPENSSL_VERSION)/lib" -DCMAKE_PREFIX_PATH=/opt/zmail/openssl-$(OPENSSL_VERSION) -DWITH_SSL=system -DCMAKE_INSTALL_PREFIX=/opt/zmail/mysql-$(MYSQL_VERSION) -DENABLED_PROFILING=on -DWITH_READLINE=TRUE; \
 	LD_RUN_PATH=$(OPENSSL_LIB_DIR) $(MAKE) $(MAKEARGS); \
 	$(MAKE) install)
 	(cd $(ZIMBRA_HOME); rm -f mysql; ln -s mysql-$(MYSQL_VERSION) mysql)

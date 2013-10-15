@@ -1,10 +1,10 @@
-                  Instructions for testing nginx-zimbra proxy
+                  Instructions for testing nginx-zmail proxy
                   -------------------------------------------
 
-    As of this writing, NGINX zimbra has only been tested as a proxy for POP3
+    As of this writing, NGINX zmail has only been tested as a proxy for POP3
     and IMAP. SMTP proxying is also supported but has not been tested (yet).
 
-    The two main feature additions in NGINX zimbra are the support for multiple
+    The two main feature additions in NGINX zmail are the support for multiple
     HTTP routing lookup handlers, and support for caching the route information
     into one or more memcache servers.
 
@@ -28,19 +28,19 @@
 
         (+) Set up the http routing handlers to point to the correct locations.
 
-            If you have a single zimbra mailbox server running on the server
+            If you have a single zmail mailbox server running on the server
             `zs', then the URL against `auth_http' should look like 
 
                      zs:7072/service/extension/nginx-lookup
 
             If you have a multi-server install, enter all the URLs separated by
-            whitespace. Refer to zimbra documents for the actual port number
+            whitespace. Refer to zmail documents for the actual port number
             used in production (7072 is used in dev)
 
         (+) Start up a few instances of memcached, either on the same machine
             that will run nginx, or on different machines:
 
-            $ /opt/zimbra/memcached/bin/memcached -p $port -vv
+            $ /opt/zmail/memcached/bin/memcached -p $port -vv
 
             Make sure that each server:port that's running memcached is 
             mentioned against the `memcache_servers' directive in the conf file
@@ -100,7 +100,7 @@
         NGINX will then contact one of the HTTP routing lookup handlers, and
         fetch the routing information, after which it will initiate the proxy
         session. You can see that the proxy session is initiated when the
-        capability string that is returned from the upstream Zimbra server is
+        capability string that is returned from the upstream Zmail server is
         returned to you in your telnet (netcat) session:
 
         * CAPABILITY IMAP4rev1 ACL BINARY CATENATE CHILDREN CONDSTORE ESEARCH
@@ -159,7 +159,7 @@
          servers are down. 
 
          (note) You can stop the HTTP handler by executing `zmcontrol stop' on
-         the Zimbra server that's hosting the handler.
+         the Zmail server that's hosting the handler.
 
      (*) Restart all the memcached servers again, and notice that after the 
          reconnect interval, each nginx worker will connect back to each 

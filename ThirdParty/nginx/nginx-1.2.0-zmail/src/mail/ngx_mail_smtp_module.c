@@ -46,7 +46,7 @@ static ngx_mail_protocol_t  ngx_mail_smtp_protocol = {
     ngx_mail_smtp_auth_state,
 
     ngx_string("451 4.3.2 Internal server error" CRLF),
-    ngx_string("") /* zimbra add a quite_msg field in mail protocol */
+    ngx_string("") /* zmail add a quite_msg field in mail protocol */
 };
 
 

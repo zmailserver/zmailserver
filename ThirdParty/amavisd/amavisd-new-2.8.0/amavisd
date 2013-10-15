@@ -1,7 +1,7 @@
 #!/usr/bin/perl -T
 #!/usr/bin/perl -d:NYTProf
 
-use lib $ENV{PERL5LIB} =~ /([^:]+)/g; # Untaint PERL5LIB so Zimbra's modules can be used
+use lib $ENV{PERL5LIB} =~ /([^:]+)/g; # Untaint PERL5LIB so Zmail's modules can be used
 
 #------------------------------------------------------------------------------
 # This is amavisd-new.

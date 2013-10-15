@@ -39,7 +39,7 @@ static ngx_conf_bitmask_t ngx_mail_imap_auth_methods[] = {
     { ngx_null_string, 0 }
 };
 
-/* zimbra's merge_conf method doesn't use this
+/* zmail's merge_conf method doesn't use this
 static ngx_str_t  ngx_mail_imap_auth_methods_names[] = {
     ngx_string("AUTH=PLAIN"),
     ngx_string("AUTH=LOGIN"),
@@ -61,7 +61,7 @@ static ngx_mail_protocol_t  ngx_mail_imap_protocol = {
     ngx_mail_imap_auth_state,
 
     ngx_string("* BAD internal server error" CRLF),
-    ngx_string("* BYE Zimbra IMAP server terminating connection" CRLF)
+    ngx_string("* BYE Zmail IMAP server terminating connection" CRLF)
 };
 
 

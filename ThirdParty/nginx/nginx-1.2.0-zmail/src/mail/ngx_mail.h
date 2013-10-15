@@ -375,7 +375,7 @@ typedef struct {
 #define NGX_MAIL_AUTH_APOP              3
 #define NGX_MAIL_AUTH_CRAM_MD5          4
 #define NGX_MAIL_AUTH_NONE              5
-/* zimbra extension definition */
+/* zmail extension definition */
 #define NGX_MAIL_AUTH_PASSWD            6
 #define NGX_MAIL_AUTH_PLAIN_IR          7
 #define NGX_MAIL_AUTH_GSSAPI            8
@@ -489,7 +489,7 @@ void ngx_mail_set_pop3_parse_state_argument(ngx_mail_session_t * s);
 void ngx_mail_set_smtp_parse_state_argument(ngx_mail_session_t * s);
 void ngx_mail_reset_parse_buffer(ngx_mail_session_t * s);
 void ngx_mail_auth(ngx_mail_session_t *s, ngx_connection_t *c);
-void ngx_mail_do_auth(ngx_mail_session_t *s, ngx_connection_t *c); /* Zimbra mail auth portal */
+void ngx_mail_do_auth(ngx_mail_session_t *s, ngx_connection_t *c); /* Zmail mail auth portal */
 void ngx_mail_close_connection(ngx_connection_t *c);
 void ngx_mail_session_internal_server_error(ngx_mail_session_t *s);
 void ngx_mail_end_session(ngx_mail_session_t *s);

@@ -153,7 +153,7 @@ static const ngx_str_t ZM_PROTO[] = {
 static const ngx_str_t ZM_AUTHMETH[] = {
         ngx_string("username"),
         ngx_string("gssapi"),
-        ngx_string("zimbraId"),
+        ngx_string("zmailId"),
         ngx_string("certauth")
 };
 
@@ -329,7 +329,7 @@ ngx_zm_lookup_handlers(ngx_conf_t *cf, ngx_command_t *cmd, void *conf)
         handler->failure_time = 0;
 
         ngx_conf_log_error(NGX_LOG_INFO, cf, 0,
-                    "add zimbra route lookup handler %V", &u.url);
+                    "add zmail route lookup handler %V", &u.url);
     }
 
     if (zlcf->handlers.nelts == 0) {
@@ -519,7 +519,7 @@ ngx_zm_lookup_account_from_cache_failure_handler(mc_work_t *work)
     ngx_zm_lookup_route_from_cache(ctx);
 }
 
-/* lookup route by zimbra id/account name in memcache */
+/* lookup route by zmail id/account name in memcache */
 static void
 ngx_zm_lookup_route_from_cache (ngx_zm_lookup_ctx_t *ctx)
 {
@@ -855,7 +855,7 @@ ngx_zm_lookup_create_request(ngx_zm_lookup_ctx_t *ctx)
         + sizeof ("Client-IP: ") - 1 + work->connection->addr_text.len + sizeof(CRLF) - 1;
 
     if (work->isAdmin) {
-        len += sizeof ("Auth-Zimbra-Admin: True" CRLF) - 1;
+        len += sizeof ("Auth-Zmail-Admin: True" CRLF) - 1;
     }
 
     if (IS_PROTO_WEB(work->protocol)) {
@@ -893,7 +893,7 @@ ngx_zm_lookup_create_request(ngx_zm_lookup_ctx_t *ctx)
     b->last = ngx_sprintf(b->last, "X-Proxy-IP: %V" CRLF, &proxy_ip);
     b->last = ngx_sprintf(b->last, "Client-IP: %V" CRLF, &work->connection->addr_text);
     if (work->isAdmin) {
-       b->last = ngx_cpymem(b->last, "Auth-Zimbra-Admin: True" CRLF, sizeof("Auth-Zimbra-Admin: True" CRLF) - 1);
+       b->last = ngx_cpymem(b->last, "Auth-Zmail-Admin: True" CRLF, sizeof("Auth-Zmail-Admin: True" CRLF) - 1);
    }
 
     if (IS_PROTO_WEB(work->protocol)) {
@@ -1535,7 +1535,7 @@ ngx_zm_lookup_process_response_headers(ngx_zm_lookup_ctx_t *ctx)
             if (work->err.len) {
                 /* Login failed */
                 ngx_log_error(NGX_LOG_ERR, ctx->log, 0, "zm lookup: an error is "
-                                       "returned by zimbra lookup handler: %V", &work->err);
+                                       "returned by zmail lookup handler: %V", &work->err);
                 work->result = ZM_LOOKUP_LOGIN_FAILED;
                 work->on_failure(work);
                 return;
@@ -1815,7 +1815,7 @@ ngx_zm_lookup_cache_alias(ngx_zm_lookup_ctx_t *ctx, ngx_str_t alias,
 
 /*
  * make the cache account-->route/id-->route
- * user: account_name/zimbra id
+ * user: account_name/zmail id
  */
 static void
 ngx_zm_lookup_cache_route(ngx_zm_lookup_ctx_t *ctx, ngx_str_t user, ngx_str_t route)

@@ -3,13 +3,13 @@ P4_ROOT ?= $(shell cd $(PHP_ROOT)/../..; pwd)
 MAKE ?= make
 MAKEARGS ?= -j2
 
-BUILD_PLATFORM ?= $(shell sh $(P4_ROOT)/ZimbraBuild/rpmconf/Build/get_plat_tag.sh)
+BUILD_PLATFORM ?= $(shell sh $(P4_ROOT)/ZmailBuild/rpmconf/Build/get_plat_tag.sh)
 
 ifeq ($(BUILD_PLATFORM), )
 	BUILD_PLATFORM := "UNKNOWN"
 endif
 
-ZIMBRA_HOME ?= /opt/zimbra
+ZIMBRA_HOME ?= /opt/zmail
 
 PATCH	:=
 ifdef BETA
@@ -20,7 +20,7 @@ else
 	PATCH	:= 
 endif
 
-SED := sed -i .bak -e 's/-lxml2/\/opt\/zimbra\/libxml2-$(XML_VERSION)\/lib\/libxml2.a/g' Makefile
+SED := sed -i .bak -e 's/-lxml2/\/opt\/zmail\/libxml2-$(XML_VERSION)\/lib\/libxml2.a/g' Makefile
 
 PHP_TGZ_TARGET := \
 	$(P4_ROOT)/ThirdPartyBuilds/$(BUILD_PLATFORM)/php/php-$(PHP_VERSION).tgz
@@ -36,7 +36,7 @@ build:
 	tar xfj src/php-$(PHP_VERSION).tar.bz2
 	(cd php-$(PHP_VERSION); \
 	$(PATCH) $(ACEXE) CFLAGS="-g -O2" \
-	./configure --prefix=/opt/zimbra/php-$(PHP_VERSION) --with-apxs2=/opt/zimbra/httpd-$(HTTPD_VERSION)/bin/apxs --with-config-file-path=/opt/zimbra/conf --with-pspell=/opt/zimbra/aspell-$(ASPELL_VERSION) --with-libxml-dir=/opt/zimbra/libxml2-$(XML_VERSION); \
+	./configure --prefix=/opt/zmail/php-$(PHP_VERSION) --with-apxs2=/opt/zmail/httpd-$(HTTPD_VERSION)/bin/apxs --with-config-file-path=/opt/zmail/conf --with-pspell=/opt/zmail/aspell-$(ASPELL_VERSION) --with-libxml-dir=/opt/zmail/libxml2-$(XML_VERSION); \
 	$(SED); \
 	$(MAKE) $(MAKEARGS); \
 	$(MAKE) install)
@@ -45,7 +45,7 @@ clean:
 	rm -rf php-$(PHP_VERSION)
 
 allclean: clean
-	rm -rf /opt/zimbra/php-$(PHP_VERSION)
+	rm -rf /opt/zmail/php-$(PHP_VERSION)
 	rm -f $(PHP_TGZ_TARGET)
 
 tar: $(P4_ROOT)/ThirdPartyBuilds/$(BUILD_PLATFORM)/php

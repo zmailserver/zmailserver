@@ -10,7 +10,7 @@
 
 
 #define nginx_version      1002000
-#define NGINX_VERSION      "1.2.0-zimbra"
+#define NGINX_VERSION      "1.2.0-zmail"
 #define NGINX_VER          "nginx/" NGINX_VERSION
 
 #define NGINX_VAR          "NGINX"

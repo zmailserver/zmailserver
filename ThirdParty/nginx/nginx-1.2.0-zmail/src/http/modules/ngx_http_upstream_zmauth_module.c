@@ -579,7 +579,7 @@ static ngx_flag_t ngx_http_upstream_zmserver_from_cookie
              X_YYY_ZZZZZZZZZZ
              the X and Y parts must be ignored, and the Z part is hex-encoded
              after decoding the Z part, we can get a string like:
-             id=36:cc00ce85-8c0b-49eb-8e08-a8aab43ce836;exp=13:1196504658160;type=6:zimbra;mailhost=14:127.0.0.1:7070;
+             id=36:cc00ce85-8c0b-49eb-8e08-a8aab43ce836;exp=13:1196504658160;type=6:zmail;mailhost=14:127.0.0.1:7070;
              */
 
             p = p + ZMLEN;
@@ -656,7 +656,7 @@ static ngx_flag_t ngx_http_upstream_zmserver_from_cookie
 
                          id=36:cc00ce85-8c0b-49eb-8e08-a8aab43ce836;
                          exp=13:1196504658160;
-                         type=6:zimbra;
+                         type=6:zmail;
                          mailhost=14:127.0.0.1:7070;
 
                          semicolon separated list of strings of the form
@@ -977,7 +977,7 @@ ngx_http_upstream_zmauth_merge_srv_conf(ngx_conf_t *cf, void *parent,
     return NGX_CONF_OK;
 }
 
-/* examine the request uri for zimbra REST patterns
+/* examine the request uri for zmail REST patterns
  currently supported patterns -
 
  /home/user/content
@@ -991,7 +991,7 @@ ngx_http_upstream_zmauth_merge_srv_conf(ngx_conf_t *cf, void *parent,
  also fill in usr with the correct usr if so
 
  usr is blanked out before processing begins
- refer ZimbraServer/docs/rest.txt for details
+ refer ZmailServer/docs/rest.txt for details
  */
 static ngx_flag_t
 zmauth_check_rest(ngx_http_request_t *r, void **extra) {
@@ -1409,7 +1409,7 @@ zmauth_check_admin_uri(ngx_http_request_t *r, void **extra) {
     return rtype;
 }
 
-/* translate an activesync user rep to zimbra user rep
+/* translate an activesync user rep to zmail user rep
  domain\user becomes user@domain
  others remain identical
  */

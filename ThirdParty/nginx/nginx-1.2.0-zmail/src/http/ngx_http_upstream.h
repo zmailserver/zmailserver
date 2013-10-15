@@ -117,7 +117,7 @@ struct ngx_http_upstream_srv_conf_s {
     in_port_t                        port;
     in_port_t                        default_port;
 
-    // added by zimbra to support async upstream peer init
+    // added by zmail to support async upstream peer init
     void (* connect)(ngx_http_request_t *r, ngx_http_upstream_t *u);
 };
 

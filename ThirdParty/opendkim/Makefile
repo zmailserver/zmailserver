@@ -2,14 +2,14 @@ OPENDKIM_ROOT := $(shell pwd)
 P4_ROOT ?= $(shell cd $(OPENDKIM_ROOT)/../..; pwd)
 MAKE ?= make
 
-BUILD_PLATFORM ?= $(shell sh $(P4_ROOT)/ZimbraBuild/rpmconf/Build/get_plat_tag.sh)
+BUILD_PLATFORM ?= $(shell sh $(P4_ROOT)/ZmailBuild/rpmconf/Build/get_plat_tag.sh)
 
 ifeq ($(BUILD_PLATFORM), )
 	BUILD_PLATFORM := "UNKNOWN"
 endif
 
 MAKEARGS ?= -j2
-ZIMBRA_HOME ?= /opt/zimbra
+ZIMBRA_HOME ?= /opt/zmail
 
 PATCH	:=
 
@@ -37,7 +37,7 @@ build:
 	$(PATCH) \
 	$(LDFLAGS) \
 	LD_LIBRARY_PATH=$(OPENSSL_LIB_DIR):$(CYRUS_LIB_DIR):$(LIBTOOL_LIB_DIR) \
-	ac_cv_path_SENDMAIL_PATH=/opt/zimbra/postfix/sbin/sendmail \
+	ac_cv_path_SENDMAIL_PATH=/opt/zmail/postfix/sbin/sendmail \
 	CPPFLAGS="-I$(ZIMBRA_HOME)/libxml2/include/libxml2 -I$(ZIMBRA_HOME)/cyrus-sasl-$(CYRUS_VERSION)/include -I$(ZIMBRA_HOME)/libxml2/include -I$(ZIMBRA_HOME)/curl/include \
 		  -I$(ZIMBRA_HOME)/openssl-$(OPENSSL_VERSION)/include -I$(ZIMBRA_HOME)/libtool-$(LIBTOOL_VERSION)/include $(CPPFLAG)" \
 	CFLAGS="-g -O0" \
@@ -55,15 +55,15 @@ build:
 	--enable-default_sender \
 	--enable-rpath \
 	--enable-arlib \
-	--with-openssl=/opt/zimbra/openssl \
-	--with-milter=/opt/zimbra/sendmail \
-	--with-libmemcached=/opt/zimbra/libmemcached \
-	--with-openldap=/opt/zimbra/openldap \
-	--with-sasl=/opt/zimbra/cyrus-sasl \
-	--with-libcurl=/opt/zimbra/curl \
-	--with-mdb=/opt/zimbra/openldap \
+	--with-openssl=/opt/zmail/openssl \
+	--with-milter=/opt/zmail/sendmail \
+	--with-libmemcached=/opt/zmail/libmemcached \
+	--with-openldap=/opt/zmail/openldap \
+	--with-sasl=/opt/zmail/cyrus-sasl \
+	--with-libcurl=/opt/zmail/curl \
+	--with-mdb=/opt/zmail/openldap \
 	--without-db \
-	--with-libxml2=/opt/zimbra/libxml2; \
+	--with-libxml2=/opt/zmail/libxml2; \
 	LD_RUN_PATH=$(OPENSSL_LIB_DIR):$(CYRUS_LIB_DIR):$(LIBTOOL_LIB_DIR) $(MAKE) $(MAKEARGS); \
 	LD_RUN_PATH=$(OPENSSL_LIB_DIR):$(CYRUS_LIB_DIR):$(LIBTOOL_LIB_DIR) $(MAKE) install STRIP="";)
 	(cd $(ZIMBRA_HOME); ln -s opendkim-$(DKIM_VERSION) opendkim)

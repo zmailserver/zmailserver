@@ -3,8 +3,8 @@ P4_ROOT ?= $(shell cd $(RSYNC_ROOT)/../..; pwd)
 MAKE ?= make
 MAKEARGS ?= -j2
 
-BUILD_PLATFORM ?= $(shell sh $(P4_ROOT)/ZimbraBuild/rpmconf/Build/get_plat_tag.sh)
-ZIMBRA_HOME ?= /opt/zimbra
+BUILD_PLATFORM ?= $(shell sh $(P4_ROOT)/ZmailBuild/rpmconf/Build/get_plat_tag.sh)
+ZIMBRA_HOME ?= /opt/zmail
 
 ifdef BETA
 	include $(RSYNC_ROOT)/../beta_versions.def
@@ -27,8 +27,8 @@ POPT_INCLUDE	:=
 POPT_LDFLAGS	:=
 
 ifeq (MACOSXx86,$(findstring MACOSXx86,$(BUILD_PLATFORM)))
-	POPT_INCLUDE := CPPFLAGS="-I/opt/zimbra/include"
-	POPT_LDFLAGS := LDFLAGS="-L/opt/zimbra/lib"
+	POPT_INCLUDE := CPPFLAGS="-I/opt/zmail/include"
+	POPT_LDFLAGS := LDFLAGS="-L/opt/zmail/lib"
 endif
 
 build: $(RSYNC_NAME)-$(RSYNC_VERSION)

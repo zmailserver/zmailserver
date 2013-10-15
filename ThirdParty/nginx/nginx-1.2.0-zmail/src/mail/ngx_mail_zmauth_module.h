@@ -18,9 +18,9 @@ typedef struct {
 void ngx_mail_zmauth_init(ngx_mail_session_t *s);
 
 /* utility */
-ngx_flag_t has_zimbra_extensions (ngx_str_t login);
-ngx_str_t strip_zimbra_extensions (ngx_str_t login);
-ngx_str_t get_zimbra_extension (ngx_str_t login);
+ngx_flag_t has_zmail_extensions (ngx_str_t login);
+ngx_str_t strip_zmail_extensions (ngx_str_t login);
+ngx_str_t get_zmail_extension (ngx_str_t login);
 
 extern ngx_module_t ngx_mail_zmauth_module;
 

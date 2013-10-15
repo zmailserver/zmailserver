@@ -142,7 +142,7 @@ ngx_master_process_cycle(ngx_cycle_t *cycle)
     ngx_start_worker_processes(cycle, ccf->worker_processes,
                                NGX_PROCESS_RESPAWN);
     /* The directives such as "user", "rlimit_core", etc. should also be
-     * effective on master process. Changed by Zimbra
+     * effective on master process. Changed by Zmail
      */
     if (ccf->rlimit_nofile != NGX_CONF_UNSET) {
         rlmt.rlim_cur = (rlim_t) ccf->rlimit_nofile;
@@ -200,7 +200,7 @@ ngx_master_process_cycle(ngx_cycle_t *cycle)
             exit(2);
         }
     }
-    /* end change by Zimbra */
+    /* end change by Zmail */
     ngx_start_cache_manager_processes(cycle, 0);
 
     ngx_new_binary = 0;

@@ -1018,7 +1018,7 @@ Changes with nginx 0.8.37                                        17 May 2010
        Thanks to Yichun Zhang.
 
     *) Bugfix: IMAP connections may hang until they timed out while talking
-       to Zimbra server.
+       to Zmail server.
        Thanks to Alan Batie.
 
 

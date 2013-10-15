@@ -3,13 +3,13 @@ P4_ROOT ?= $(shell cd $(OPENSSL_ROOT)/../..; pwd)
 MAKE ?= make
 MAKEARGS := -j3
 
-BUILD_PLATFORM ?= $(shell sh $(P4_ROOT)/ZimbraBuild/rpmconf/Build/get_plat_tag.sh)
+BUILD_PLATFORM ?= $(shell sh $(P4_ROOT)/ZmailBuild/rpmconf/Build/get_plat_tag.sh)
 
 ifeq ($(BUILD_PLATFORM), )
 	BUILD_PLATFORM := "UNKNOWN"
 endif
 
-ZIMBRA_HOME ?= /opt/zimbra
+ZIMBRA_HOME ?= /opt/zmail
 
 ifdef BETA
 	include $(OPENSSL_ROOT)/../beta_versions.def

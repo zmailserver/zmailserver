@@ -2,7 +2,7 @@ OPENLDAP_ROOT := $(shell pwd)
 P4_ROOT ?= $(shell cd $(OPENLDAP_ROOT)/../..; pwd)
 MAKE ?= make
 
-BUILD_PLATFORM ?= $(shell sh $(P4_ROOT)/ZimbraBuild/rpmconf/Build/get_plat_tag.sh)
+BUILD_PLATFORM ?= $(shell sh $(P4_ROOT)/ZmailBuild/rpmconf/Build/get_plat_tag.sh)
 
 ifeq ($(BUILD_PLATFORM), )
 	BUILD_PLATFORM := "UNKNOWN"
@@ -10,7 +10,7 @@ endif
 
 #MAKEARGS ?= -j2 DEFINES="-DCHECK_CSN -DSLAP_SCHEMA_EXPOSE -DMDB_DEBUG=3"
 MAKEARGS ?= -j2 DEFINES="-DCHECK_CSN -DSLAP_SCHEMA_EXPOSE"
-ZIMBRA_HOME ?= /opt/zimbra
+ZIMBRA_HOME ?= /opt/zmail
 
 PATCH	:= patch -g0 -N -p1 < ../patches/ITS7604.patch;
 

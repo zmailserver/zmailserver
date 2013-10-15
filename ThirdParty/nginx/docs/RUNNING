@@ -1,13 +1,13 @@
-          Instructions for running nginx-zimbra as an IMAP/POP3 proxy
+          Instructions for running nginx-zmail as an IMAP/POP3 proxy
           -----------------------------------------------------------
 
     This document describes how to set up nginx to act as an IMAP/POP3 proxy
-    in front of a Zimbra Mail Server. This document assumes that nginx-zimbra
-    has already been built and installed on your system at /opt/zimbra/nginx/
+    in front of a Zmail Mail Server. This document assumes that nginx-zmail
+    has already been built and installed on your system at /opt/zmail/nginx/
     and that memcached has been built and installed on your system at
-    /opt/zimbra/memcached/
+    /opt/zmail/memcached/
 
-    See the BUILDING document for details on building nginx-zimbra and 
+    See the BUILDING document for details on building nginx-zmail and 
     memcached. 
 
 
@@ -26,17 +26,17 @@
                  (Section II) - Configure the memcached servers
                  ----------------------------------------------
 
-    nginx-zimbra can make use of one or more memcached servers to cache 
+    nginx-zmail can make use of one or more memcached servers to cache 
     upstream server information for clients logging in via imap/pop3/smtp
 
     Depending upon the expected number of clients logging in and the available
     system memory, start one or more instances of memcached on local or 
     remote servers. 
 
-    Assuming that memcached is installed under /opt/zimbra/memcached on all 
+    Assuming that memcached is installed under /opt/zmail/memcached on all 
     systems, you can start memcached on any system using the command:
 
-        $ /opt/zimbra/memcached/bin/memcached -p 11211 -vv
+        $ /opt/zmail/memcached/bin/memcached -p 11211 -vv
 
     The -vv switch causes memcached to be verbose, and the -p switch indicates
     the port on which memcached should accept connections (11211 in this case).
@@ -59,12 +59,12 @@
            ----------------------------------------------------------
 
     nginx requires HTTP routing lookup handlers to determine the upstream 
-    server information for a particular client login. Zimbra Server exposes
+    server information for a particular client login. Zmail Server exposes
     an nginx routing handler on port 7072 (*on dev builds) at the URI:
     /service/extension/nginx-lookup
 
-    If nginx is proxying for a single local zimbra server, enter the location of
-    the zimbra routing handler against the `auth_http' directive in nginx.conf:
+    If nginx is proxying for a single local zmail server, enter the location of
+    the zmail routing handler against the `auth_http' directive in nginx.conf:
 
     mail {
         ...
@@ -72,7 +72,7 @@
         ...
     }
 
-    If nginx is proxying for more than one zimbra server, then enter the URLs
+    If nginx is proxying for more than one zmail server, then enter the URLs
     for each HTTP routing handler as follows:
 
     mail {
@@ -83,9 +83,9 @@
     }
 
     where zs1, zs2, etc. are the fqdn, canonical names, or IP addresses of the
-    zimbra servers.
+    zmail servers.
 
-    It is not necessary to put one entry against `auth_http' for each zimbra
+    It is not necessary to put one entry against `auth_http' for each zmail
     server that nginx is proxying for. Any one of the entries will suffice, 
     but more than one entry will ensure that the HTTP routing lookup requests
     will be sent to each server in turn using round-robin, so that the load
@@ -149,13 +149,13 @@
               ---------------------------------------------------
 
     Test the configuration file syntax:
-        $ sudo /opt/zimbra/nginx/sbin/nginx -c /path/to/nginx.conf -t
+        $ sudo /opt/zmail/nginx/sbin/nginx -c /path/to/nginx.conf -t
 
     Correct syntax errors, if any, and start nginx:
-        $ sudo /opt/zimbra/nginx/sbin/nginx -c /path/to/nginx.conf
+        $ sudo /opt/zmail/nginx/sbin/nginx -c /path/to/nginx.conf
 
     Watch out for errors in the error.log:
-        $ sudo tail -f /opt/zimbra/nginx/logs/error.log
+        $ sudo tail -f /opt/zmail/nginx/logs/error.log
 
     Stop NGINX once you're done:
         $ sudo killall nginx

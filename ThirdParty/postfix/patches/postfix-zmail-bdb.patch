@@ -5,9 +5,9 @@
  		case "$CCARGS" in
  		 *-DNO_DB*) ;;
 -		 *) if [ -f /usr/include/db.h ]
-+		 *) if [ -f /opt/zimbra/bdb/include/db.h ]
++		 *) if [ -f /opt/zmail/bdb/include/db.h ]
 +                    then
-+                        CCARGS="$CCARGS -I/opt/zimbra/bdb/include"
++                        CCARGS="$CCARGS -I/opt/zmail/bdb/include"
 +                    elif [ -f /usr/include/db.h ]
  		    then
  			: we are all set
@@ -17,9 +17,9 @@
  		case "$CCARGS" in
  		 *-DNO_DB*) ;;
 -		 *) if [ -f /usr/include/db.h ]
-+		 *) if [ -f /opt/zimbra/bdb/include/db.h ]
++		 *) if [ -f /opt/zmail/bdb/include/db.h ]
 +                    then
-+                        CCARGS="$CCARGS -I/opt/zimbra/bdb/include"
++                        CCARGS="$CCARGS -I/opt/zmail/bdb/include"
 +                    elif [ -f /usr/include/db.h ]
  		    then
  			: we are all set

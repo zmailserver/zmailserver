@@ -162,7 +162,7 @@ typedef struct ngx_zm_lookup_ctx_s ngx_zm_lookup_ctx_t;
 /* the auth method supported */
 #define ZM_AUTHMETH_USERNAME 0  /* get route by user name                  */
 #define ZM_AUTHMETH_GSSAPI   1  /* get route and account id by kerberos v5 */
-#define ZM_AUTHMETH_ZIMBRAID 2  /* get route by zimbra account id          */
+#define ZM_AUTHMETH_ZIMBRAID 2  /* get route by zmail account id          */
 #define ZM_AUTHMETH_CERTAUTH 3  /* get account id by client certificate    */
 
 #define IS_LOOKUP_ROUTE(auth_meth) (!(auth_meth == ZM_AUTHMETH_CERTAUTH))

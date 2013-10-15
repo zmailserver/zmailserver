@@ -2,7 +2,7 @@ SHELL	:= /bin/bash
 THIRDPARTY_ROOT := $(shell pwd)
 P4_ROOT ?= $(shell cd $(THIRDPARTY_ROOT)/..; pwd)
 
-BUILD_PLATFORM ?= $(shell sh $(P4_ROOT)/ZimbraBuild/rpmconf/Build/get_plat_tag.sh)
+BUILD_PLATFORM ?= $(shell sh $(P4_ROOT)/ZmailBuild/rpmconf/Build/get_plat_tag.sh)
 ifeq ($(BUILD_PLATFORM), )
 	BUILD_PLATFORM := "UNKNOWN"
 endif
@@ -19,7 +19,7 @@ MAKE := make
 ECHO := /bin/echo
 MAKEARGS ?= -j5
 
-ZIMBRA_HOME ?= /opt/zimbra
+ZIMBRA_HOME ?= /opt/zmail
 
 ifeq (MACOSX,$(findstring MACOSX,$(BUILD_PLATFORM)))
 DIRS	:= openssl \
@@ -94,7 +94,7 @@ allclean:
 	rm -f $(LOGFILE)
 	rm -rf $(ZIMBRA_HOME)/conf
 	rm -rf $(ZIMBRA_HOME)/log
-	rm -rf $(ZIMBRA_HOME)/zimbramon
+	rm -rf $(ZIMBRA_HOME)/zmailmon
 	rm -rf $(ZIMBRA_HOME)/data
 
 mysql: force

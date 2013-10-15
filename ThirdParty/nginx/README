@@ -1,20 +1,20 @@
                                     Contents
                                     --------
   ./docs/
-    contains instructions for building, configuring, and running nginx-zimbra
+    contains instructions for building, configuring, and running nginx-zmail
 
   ./extras/
-    contains a sample nginx configuration file suitable for use with zimbra
+    contains a sample nginx configuration file suitable for use with zmail
 
   ./sources/
     contains the pristine nginx source releases from http://nginx.net/
 
-  ./nginx-<nnn>-zimbra/
-    contains the source tree which will be used to build nginx for zimbra
+  ./nginx-<nnn>-zmail/
+    contains the source tree which will be used to build nginx for zmail
 
   ./maintenance/
     should contain one patch for each version <nnn> of nginx, which describes
-    the changes made by zimbra to pristine nginx version <nnn>.
-    these patches can be used in the future to port zimbra versions to future
+    the changes made by zmail to pristine nginx version <nnn>.
+    these patches can be used in the future to port zmail versions to future
     versions of nginx
 

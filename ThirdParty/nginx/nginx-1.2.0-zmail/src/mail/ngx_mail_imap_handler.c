@@ -28,7 +28,7 @@ static ngx_int_t ngx_mail_imap_id(ngx_mail_session_t *s,
     ngx_connection_t *c);
 
 
-/*static u_char  imap_greeting[] = "* OK IMAP4 ready" CRLF; zimbra uses the greeting specified by the directive */
+/*static u_char  imap_greeting[] = "* OK IMAP4 ready" CRLF; zmail uses the greeting specified by the directive */
 static u_char  imap_star[] = "*";
 static u_char  imap_ok[] = "OK completed" CRLF;
 static u_char  imap_next[] = "+ " CRLF;
@@ -36,7 +36,7 @@ static u_char  imap_plain_next[] = "+ " CRLF;
 static u_char  imap_gssapi_next[] = "+ " CRLF;
 static u_char  imap_username[] = "+ VXNlcm5hbWU6" CRLF;
 static u_char  imap_password[] = "+ UGFzc3dvcmQ6" CRLF;
-static u_char  imap_bye[] = "* BYE Zimbra IMAP server terminating connection" CRLF;
+static u_char  imap_bye[] = "* BYE Zmail IMAP server terminating connection" CRLF;
 static u_char  imap_invalid_command[] = "BAD invalid command" CRLF;
 static u_char  imap_unsupported_mech[] = "NO mechanism not supported" CRLF;
 static u_char  imap_nocleartext[] = "NO cleartext logins disabled" CRLF;

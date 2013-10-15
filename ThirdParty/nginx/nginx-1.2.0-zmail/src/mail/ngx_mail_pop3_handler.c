@@ -25,7 +25,7 @@ static ngx_int_t ngx_mail_pop3_apop(ngx_mail_session_t *s, ngx_connection_t *c);
 static ngx_int_t ngx_mail_pop3_auth(ngx_mail_session_t *s, ngx_connection_t *c);
 
 
-/*static u_char  pop3_greeting[] = "+OK POP3 ready" CRLF; zimbra uses the greeting specified by the directive */
+/*static u_char  pop3_greeting[] = "+OK POP3 ready" CRLF; zmail uses the greeting specified by the directive */
 static u_char  pop3_ok[] = "+OK" CRLF;
 static u_char  pop3_next[] = "+ " CRLF;
 static u_char  pop3_gssapi_next[] = "+ " CRLF;

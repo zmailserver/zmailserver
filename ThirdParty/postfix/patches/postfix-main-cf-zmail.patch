@@ -5,7 +5,7 @@
  # For details, see "man header_checks".
  #
 -#header_checks = regexp:/etc/postfix/header_checks
-+header_checks = pcre:/opt/zimbra/conf/postfix_header_checks
++header_checks = pcre:/opt/zmail/conf/postfix_header_checks
  
  # FAST ETRN SERVICE
  #
@@ -15,22 +15,22 @@
  inet_protocols = ipv4
 +
 +#
-+# Zimbra changes.
++# Zmail changes.
 +#
 +
-+virtual_mailbox_maps = proxy:ldap:/opt/zimbra/conf/ldap-vmm.cf
++virtual_mailbox_maps = proxy:ldap:/opt/zmail/conf/ldap-vmm.cf
 +
-+virtual_mailbox_domains = proxy:ldap:/opt/zimbra/conf/ldap-vmd.cf
++virtual_mailbox_domains = proxy:ldap:/opt/zmail/conf/ldap-vmd.cf
 +
-+virtual_alias_maps = proxy:ldap:/opt/zimbra/conf/ldap-vam.cf
++virtual_alias_maps = proxy:ldap:/opt/zmail/conf/ldap-vam.cf
 +
-+virtual_alias_domains = proxy:ldap:/opt/zimbra/conf/ldap-vad.cf
++virtual_alias_domains = proxy:ldap:/opt/zmail/conf/ldap-vad.cf
 +
 +virtual_transport = error
 +
-+sender_canonical_maps = proxy:ldap:/opt/zimbra/conf/ldap-scm.cf
++sender_canonical_maps = proxy:ldap:/opt/zmail/conf/ldap-scm.cf
 +
-+transport_maps = proxy:ldap:/opt/zimbra/conf/ldap-transport.cf
++transport_maps = proxy:ldap:/opt/zmail/conf/ldap-transport.cf
 +
 +# If (email domain name == host name), we don't want $myhostname in
 +# mydestination for testing purposes.
@@ -58,7 +58,7 @@
 +broken_sasl_auth_clients = yes
 +
 +smtpd_use_tls = yes
-+smtpd_tls_cert_file = /opt/zimbra/conf/smtpd.crt
-+smtpd_tls_key_file = /opt/zimbra/conf/smtpd.key
++smtpd_tls_cert_file = /opt/zmail/conf/smtpd.crt
++smtpd_tls_key_file = /opt/zmail/conf/smtpd.key
 +smtpd_tls_loglevel = 3
 +
