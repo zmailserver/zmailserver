@@ -1,6 +1,6 @@
 <project name="ant-global">
     <!-- Set properties that can be used in all projects. -->
-    <dirname property="zimbra.root.dir" file="${ant.file.ant-global}"/>
+    <dirname property="zmail.root.dir" file="${ant.file.ant-global}"/>
 
     <!-- Java -->
     <property name="javac.target" value="1.7"/>
@@ -32,42 +32,42 @@
     </path>
 
     <!-- Standard install paths -->
-    <property name="zimbra.home.dir" location="/opt/zimbra" />
+    <property name="zmail.home.dir" location="/opt/zmail" />
 
-    <!-- ZimbraCommon -->
-    <property name="common.dir" location="${zimbra.root.dir}/ZimbraCommon"/>
-    <property name="common.src.java.dir" location="${zimbra.root.dir}/ZimbraCommon/src/java"/>
+    <!-- ZmailCommon -->
+    <property name="common.dir" location="${zmail.root.dir}/ZmailCommon"/>
+    <property name="common.src.java.dir" location="${zmail.root.dir}/ZmailCommon/src/java"/>
     <property name="common.classes.dir" location="${common.dir}/build/classes"/>
-    <property name="common.jarfile" location="${common.dir}/build/zimbracommon.jar"/>
+    <property name="common.jarfile" location="${common.dir}/build/zmailcommon.jar"/>
     <property name="common.jars.dir" location="${common.dir}/jars"/>
 
-    <!-- ZimbraNative -->
-    <property name="native.dir" location="${zimbra.root.dir}/ZimbraNative" />
+    <!-- ZmailNative -->
+    <property name="native.dir" location="${zmail.root.dir}/ZmailNative" />
     <property name="native.classes.dir" location="${native.dir}/build/classes" />
-    <property name="native.jarfile" location="${native.dir}/build/zimbra-native.jar" />
+    <property name="native.jarfile" location="${native.dir}/build/zmail-native.jar" />
 
-    <!-- ZimbraServer -->
-    <property name="server.dir" location="${zimbra.root.dir}/ZimbraServer"/>
+    <!-- ZmailServer -->
+    <property name="server.dir" location="${zmail.root.dir}/ZmailServer"/>
     <property name="server.classes.dir" location="${server.dir}/build/classes"/>
     <property name="server.test.classes.dir" location="${server.dir}/build/test-classes"/>
-    <property name="server.jarfile" location="${server.dir}/build/zimbrastore.jar"/>
+    <property name="server.jarfile" location="${server.dir}/build/zmailstore.jar"/>
     <property name="server.jars.dir" location="${server.dir}/jars"/>
     <property name="server.conf.dir" location="${server.dir}/conf"/>
 
-    <!-- ZimbraSoap -->
-    <property name="soap.dir" location="${zimbra.root.dir}/ZimbraSoap"/>
+    <!-- ZmailSoap -->
+    <property name="soap.dir" location="${zmail.root.dir}/ZmailSoap"/>
     <property name="soap.classes.dir" location="${soap.dir}/build/classes"/>
-    <property name="soap.jarfile" location="${soap.dir}/build/zimbrasoap.jar"/>
+    <property name="soap.jarfile" location="${soap.dir}/build/zmailsoap.jar"/>
 
-    <!-- ZimbraClient -->
-    <property name="client.dir" location="${zimbra.root.dir}/ZimbraClient"/>
+    <!-- ZmailClient -->
+    <property name="client.dir" location="${zmail.root.dir}/ZmailClient"/>
     <property name="client.classes.dir" location="${client.dir}/build/classes"/>
-    <property name="client.jarfile" location="${client.dir}/build/zimbraclient.jar"/>
+    <property name="client.jarfile" location="${client.dir}/build/zmailclient.jar"/>
 
-    <!-- ZimbraTagLib -->
-    <property name="taglib.dir" location="${zimbra.root.dir}/ZimbraTagLib"/>
+    <!-- ZmailTagLib -->
+    <property name="taglib.dir" location="${zmail.root.dir}/ZmailTagLib"/>
     <property name="taglib.classes.dir" location="${taglib.dir}/build/classes"/>
-    <property name="taglib.jarfile" location="${taglib.dir}/build/zimbrataglib.jar"/>
+    <property name="taglib.jarfile" location="${taglib.dir}/build/zmailtaglib.jar"/>
     <property name="taglib.jars.dir" location="${taglib.dir}/jars"/>
 
     <!-- Emma -->
@@ -121,66 +121,66 @@
     </taskdef>
     <tstamp/>
 
-    <condition property="zimbra.buildinfo.platform" value="${native.os}">
-        <not><isset property="${zimbra.buildinfo.platform}"/></not>
+    <condition property="zmail.buildinfo.platform" value="${native.os}">
+        <not><isset property="${zmail.buildinfo.platform}"/></not>
     </condition>
-    <condition property="zimbra.buildinfo.version" value="8.0.0_BETA1_1111">
-        <not><isset property="${zimbra.buildinfo.version}"/></not>
+    <condition property="zmail.buildinfo.version" value="8.0.0_BETA1_1111">
+        <not><isset property="${zmail.buildinfo.version}"/></not>
     </condition>
 
-    <propertyregex property="zimbra.buildinfo.majorversion"
-                   input="${zimbra.buildinfo.version}"
+    <propertyregex property="zmail.buildinfo.majorversion"
+                   input="${zmail.buildinfo.version}"
                    regexp="([0-9]+)\.([0-9]+)\.([0-9]+)"
                    select="\1"
                    casesensitive="false" />
 
-    <propertyregex property="zimbra.buildinfo.minorversion"
-                   input="${zimbra.buildinfo.version}"
+    <propertyregex property="zmail.buildinfo.minorversion"
+                   input="${zmail.buildinfo.version}"
                    regexp="([0-9]+)\.([0-9]+)\.([0-9]+)"
                    select="\2"
                    casesensitive="false" />
 
-    <propertyregex property="zimbra.buildinfo.microversion"
-                   input="${zimbra.buildinfo.version}"
+    <propertyregex property="zmail.buildinfo.microversion"
+                   input="${zmail.buildinfo.version}"
                    regexp="([0-9]+)\.([0-9]+)\.([0-9]+)"
                    select="\3"
                    casesensitive="false" />
 
-    <propertyregex property="zimbra.buildinfo.relclass"
-                   input="${zimbra.buildinfo.version}"
+    <propertyregex property="zmail.buildinfo.relclass"
+                   input="${zmail.buildinfo.version}"
                    regexp="([0-9]+)\.([0-9]+)\.([0-9]+)_([A-Z]+)"
                    select="\4"
                    casesensitive="false" />
-    <propertyregex property="zimbra.buildinfo.relnum"
-                   input="${zimbra.buildinfo.version}"
+    <propertyregex property="zmail.buildinfo.relnum"
+                   input="${zmail.buildinfo.version}"
                    regexp="([0-9]+)\.([0-9]+)\.([0-9]+)_([A-Z]+)([0-9]+)(\.|_)?"
                    select="\5"
                    casesensitive="false" />
 
-    <propertyregex property="zimbra.buildinfo.buildnum"
-                   input="${zimbra.buildinfo.version}"
+    <propertyregex property="zmail.buildinfo.buildnum"
+                   input="${zmail.buildinfo.version}"
                    regexp="([0-9]+)\.([0-9]+)\.([0-9]+)_([A-Z0-9]+)(\.|_)?([0-9]+)?"
                    select="\6"
                    casesensitive="false" />
 
-    <condition property="zimbra.buildinfo.relnum" value="0">
-        <not><isset property="${zimbra.buildinfo.relnum}"/></not>
+    <condition property="zmail.buildinfo.relnum" value="0">
+        <not><isset property="${zmail.buildinfo.relnum}"/></not>
     </condition>
 
-    <condition property="zimbra.buildinfo.type" value="">
-        <not><isset property="${zimbra.buildinfo.type}"/></not>
+    <condition property="zmail.buildinfo.type" value="">
+        <not><isset property="${zmail.buildinfo.type}"/></not>
     </condition>
-    <condition property="zimbra.buildinfo.release" value="${user.name}">
-        <not><isset property="${zimbra.buildinfo.release}"/></not>
+    <condition property="zmail.buildinfo.release" value="${user.name}">
+        <not><isset property="${zmail.buildinfo.release}"/></not>
     </condition>
-    <condition property="zimbra.buildinfo.date" value="${DSTAMP}-${TSTAMP}">
-        <not><isset property="${zimbra.buildinfo.date}"/></not>
+    <condition property="zmail.buildinfo.date" value="${DSTAMP}-${TSTAMP}">
+        <not><isset property="${zmail.buildinfo.date}"/></not>
     </condition>
-    <condition property="zimbra.buildinfo.host" value="${zimbra.server.hostname}">
-        <not><isset property="${zimbra.buildinfo.host}"/></not>
+    <condition property="zmail.buildinfo.host" value="${zmail.server.hostname}">
+        <not><isset property="${zmail.buildinfo.host}"/></not>
     </condition>
-    <property name="zimbra.buildinfo.all"
-              value="Version: ${zimbra.buildinfo.version}; Type: ${zimbra.buildinfo.type}; Release: ${zimbra.buildinfo.release}; Built: ${zimbra.buildinfo.date}; Host: ${zimbra.buildinfo.host}"/>
+    <property name="zmail.buildinfo.all"
+              value="Version: ${zmail.buildinfo.version}; Type: ${zmail.buildinfo.type}; Release: ${zmail.buildinfo.release}; Built: ${zmail.buildinfo.date}; Host: ${zmail.buildinfo.host}"/>
 
     <target name="clean">
         <delete dir="${build.dir}"/>
@@ -344,11 +344,11 @@
         <fail unless="build.classes.dir" />
 
         <if>
-            <not><available file="${build.dir}/buildinfo/com/zimbra/buildinfo/Version.java"/></not>
+            <not><available file="${build.dir}/buildinfo/org.zmail/buildinfo/Version.java"/></not>
             <then>
-                <mkdir dir="${build.dir}/buildinfo/com/zimbra/buildinfo"/>
-                <echo file="${build.dir}/buildinfo/com/zimbra/buildinfo/Version.java">
-                    package com.zimbra.buildinfo;
+                <mkdir dir="${build.dir}/buildinfo/org.zmail/buildinfo"/>
+                <echo file="${build.dir}/buildinfo/org.zmail/buildinfo/Version.java">
+                    package org.zmail.buildinfo;
 
                     public class Version {
 
@@ -365,36 +365,36 @@
         <javac destdir="${build.classes.dir}" debug="true" target="${javac.target}" srcdir="${build.dir}/buildinfo" />
     </target>
 
-    <target name="zimbra-jar" depends="generate-jar-version" description="Builds a standard jar file that prints its version info when executed.  Optionally sets the Zimbra-Extension-Class attribute in the manifest if the zimbra.extension.class property is set.">
+    <target name="zmail-jar" depends="generate-jar-version" description="Builds a standard jar file that prints its version info when executed.  Optionally sets the Zmail-Extension-Class attribute in the manifest if the zmail.extension.class property is set.">
         <fail unless="jar.file"/>
         <fail unless="implementation.title"/>
 
         <if>
-            <isset property="zimbra.extension.class"/>
+            <isset property="zmail.extension.class"/>
             <then>
 	        <jar destfile="${build.dir}/${jar.file}" basedir="${build.classes.dir}">
 	            <manifest>
-	                <attribute name="Main-Class" value="com.zimbra.buildinfo.Version" />
+	                <attribute name="Main-Class" value="org.zmail.buildinfo.Version" />
 	                <attribute name="Implementation-Vendor" value="VMware, Inc."/>
 	                <attribute name="Implementation-Title" value="${implementation.title}"/>
-	                <attribute name="Implementation-Version" value="${zimbra.buildinfo.version}"/>
+	                <attribute name="Implementation-Version" value="${zmail.buildinfo.version}"/>
 	                <attribute name="Specification-Vendor" value="VMware, Inc."/>
-	                <attribute name="Specification-Title" value="Zimbra Collaboration Suite"/>
-	                <attribute name="Specification-Version" value="${zimbra.buildinfo.majorversion}.${zimbra.buildinfo.minorversion}.${zimbra.buildinfo.microversion}"/>
-	                <attribute name="Zimbra-Extension-Class" value="${zimbra.extension.class}"/>
+	                <attribute name="Specification-Title" value="Zmail Collaboration Suite"/>
+	                <attribute name="Specification-Version" value="${zmail.buildinfo.majorversion}.${zmail.buildinfo.minorversion}.${zmail.buildinfo.microversion}"/>
+	                <attribute name="Zmail-Extension-Class" value="${zmail.extension.class}"/>
 	            </manifest>
 	        </jar>
             </then>
             <else>
 	        <jar destfile="${build.dir}/${jar.file}" basedir="${build.classes.dir}">
 	            <manifest>
-	                <attribute name="Main-Class" value="com.zimbra.buildinfo.Version" />
+	                <attribute name="Main-Class" value="org.zmail.buildinfo.Version" />
 	                <attribute name="Implementation-Vendor" value="VMware, Inc."/>
 	                <attribute name="Implementation-Title" value="${implementation.title}"/>
-	                <attribute name="Implementation-Version" value="${zimbra.buildinfo.version}"/>
+	                <attribute name="Implementation-Version" value="${zmail.buildinfo.version}"/>
 	                <attribute name="Specification-Vendor" value="VMware, Inc."/>
-	                <attribute name="Specification-Title" value="Zimbra Collaboration Suite"/>
-	                <attribute name="Specification-Version" value="${zimbra.buildinfo.majorversion}.${zimbra.buildinfo.minorversion}.${zimbra.buildinfo.microversion}"/>
+	                <attribute name="Specification-Title" value="Zmail Collaboration Suite"/>
+	                <attribute name="Specification-Version" value="${zmail.buildinfo.majorversion}.${zmail.buildinfo.minorversion}.${zmail.buildinfo.microversion}"/>
 	            </manifest>
 	        </jar>
             </else>
@@ -402,7 +402,7 @@
     </target>
     <target name="zmlocalconfig">
       <echo>Running localconfig with with argument: ${localconfig-args}</echo>
-      <java classname="com.zimbra.cs.localconfig.LocalConfigCLI" fork="true" classpathref="class.path" failonerror="true">
+      <java classname="org.zmail.cs.localconfig.LocalConfigCLI" fork="true" classpathref="class.path" failonerror="true">
         <arg line="${localconfig-args}"/>
       </java>
     </target>
