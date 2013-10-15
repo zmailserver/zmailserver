@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.offline;
+package org.zmail.cs.account.offline;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -48,14 +48,14 @@ public class OfflineAccountTest {
         }
     }
 
-    private String zimbraId = "3ed11feb-4d65-47c3-9fb3-45da9b80fcfa";
-    private OfflineAccount galAccount = new MockOfflineAccount(true, "offline_gal@zimbra.com__OFFLINE_GAL__", zimbraId);
-    private OfflineAccount nonGalAccount = new MockOfflineAccount(false, "dogfood-test@zimbra.com", zimbraId);
+    private String zmailId = "3ed11feb-4d65-47c3-9fb3-45da9b80fcfa";
+    private OfflineAccount galAccount = new MockOfflineAccount(true, "offline_gal@zmail.com__OFFLINE_GAL__", zmailId);
+    private OfflineAccount nonGalAccount = new MockOfflineAccount(false, "dogfood-test@zmail.com", zmailId);
 
     @Test
     public void testGetDomain() {
-        Assert.assertEquals("zimbra.com", galAccount.getDomain());
-        Assert.assertEquals("zimbra.com", nonGalAccount.getDomain());
+        Assert.assertEquals("zmail.com", galAccount.getDomain());
+        Assert.assertEquals("zmail.com", nonGalAccount.getDomain());
         Assert.assertEquals(galAccount, nonGalAccount);
     }
 }

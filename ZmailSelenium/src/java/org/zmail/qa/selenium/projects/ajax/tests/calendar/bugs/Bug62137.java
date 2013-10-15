@@ -14,23 +14,23 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.calendar.bugs;
+package org.zmail.qa.selenium.projects.ajax.tests.calendar.bugs;
 
 import java.util.Calendar;
 import java.util.List;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.items.AppointmentItem;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZDate;
-import com.zimbra.qa.selenium.framework.util.ZTimeZone;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.framework.util.ZimbraURI;
-import com.zimbra.qa.selenium.projects.ajax.core.CalendarWorkWeekTest;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.items.AppointmentItem;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZDate;
+import org.zmail.qa.selenium.framework.util.ZTimeZone;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.framework.util.ZmailURI;
+import org.zmail.qa.selenium.projects.ajax.core.CalendarWorkWeekTest;
 
 public class Bug62137 extends CalendarWorkWeekTest {
 
@@ -49,9 +49,9 @@ public class Bug62137 extends CalendarWorkWeekTest {
 		// Creating object for appointment data
 		String tz, apptSubject, apptBody, apptAttendee;
 		tz = ZTimeZone.TimeZoneEST.getID();
-		apptSubject = ZimbraSeleniumProperties.getUniqueString();
-		apptBody = ZimbraSeleniumProperties.getUniqueString();
-		apptAttendee = ZimbraAccount.AccountA().EmailAddress;
+		apptSubject = ZmailSeleniumProperties.getUniqueString();
+		apptBody = ZmailSeleniumProperties.getUniqueString();
+		apptAttendee = ZmailAccount.AccountA().EmailAddress;
 		
 		// Absolute dates in UTC zone
 		Calendar now = this.calendarWeekDayUTC;
@@ -59,7 +59,7 @@ public class Bug62137 extends CalendarWorkWeekTest {
 		ZDate endUTC   = new ZDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH) + 1, now.get(Calendar.DAY_OF_MONTH), 14, 0, 0);
 		
         app.zGetActiveAccount().soapSend(
-                          "<CreateAppointmentRequest xmlns='urn:zimbraMail'>" +
+                          "<CreateAppointmentRequest xmlns='urn:zmailMail'>" +
                                "<m>"+
                                "<inv method='REQUEST' type='event' fb='B' transp='O' allDay='0' name='"+ apptSubject +"'>"+
                                "<s d='"+ startUTC.toTimeZone(tz).toYYYYMMDDTHHMMSS() +"' tz='"+ tz +"'/>" +
@@ -79,7 +79,7 @@ public class Bug62137 extends CalendarWorkWeekTest {
 
         
         // Reload the application, with app=calendar query parameter
-        ZimbraURI uri = new ZimbraURI(ZimbraURI.getBaseURI());
+        ZmailURI uri = new ZmailURI(ZmailURI.getBaseURI());
         uri.addQuery("app", "calendar");
         app.zPageCalendar.sOpen(uri.toString());
         

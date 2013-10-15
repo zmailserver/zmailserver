@@ -160,7 +160,7 @@ function() {
 		this._button[DwtWizardDialog.PREV_BUTTON].setEnabled(true);
 
 		//check if account exists
-		var params = { 	query: ["(|(uid=",this._containedObject[ZaResource.A_name],")(cn=",this._containedObject[ZaResource.A_name],")(sn=",this._containedObject[ZaResource.A_name],")(gn=",this._containedObject[ZaResource.A_name],")(mail=",this._containedObject[ZaResource.A_name],")(zimbraMailDeliveryAddress=",this._containedObject[ZaResource.A_name],"))"].join(""),
+		var params = { 	query: ["(|(uid=",this._containedObject[ZaResource.A_name],")(cn=",this._containedObject[ZaResource.A_name],")(sn=",this._containedObject[ZaResource.A_name],")(gn=",this._containedObject[ZaResource.A_name],")(mail=",this._containedObject[ZaResource.A_name],")(zmailMailDeliveryAddress=",this._containedObject[ZaResource.A_name],"))"].join(""),
 						limit : 2,
 						applyCos: 0,
 						controller: ZaApp.getInstance().getCurrentController(),
@@ -235,7 +235,7 @@ function(entry) {
         this._containedObject._uuid = entry._uuid;
     }
 	//set the default value of resource type and schedule policy
-	this._containedObject.attrs[ZaResource.A_zimbraCalResType] = entry.attrs[ZaResource.A_zimbraCalResType] || ZaResource.RESOURCE_TYPE_LOCATION;
+	this._containedObject.attrs[ZaResource.A_zmailCalResType] = entry.attrs[ZaResource.A_zmailCalResType] || ZaResource.RESOURCE_TYPE_LOCATION;
 	this._containedObject[ZaResource.A2_schedulePolicy] = entry[ZaResource.A2_schedulePolicy] || ZaResource.SCHEDULE_POLICY_TT;
 	this._containedObject.attrs[ZaResource.A_accountStatus] = entry.attrs[ZaResource.A_accountStatus] || ZaResource.ACCOUNT_STATUS_ACTIVE;
 	this._containedObject[ZaResource.A2_autodisplayname] = entry[ZaResource.A2_autodisplayname] || "TRUE";
@@ -253,7 +253,7 @@ function(entry) {
 	if(!domainName) {
 		//find out what is the default domain
 		try {
-			domainName = ZaApp.getInstance().getGlobalConfig().attrs[ZaGlobalConfig.A_zimbraDefaultDomainName];
+			domainName = ZaApp.getInstance().getGlobalConfig().attrs[ZaGlobalConfig.A_zmailDefaultDomainName];
 		} catch (ex) {
 			if(ex.code != ZmCsfeException.SVC_PERM_DENIED) {
 				throw (ex);
@@ -336,7 +336,7 @@ ZaNewResourceXWizard.myXFormModifier = function(xFormObject) {
 					this.getForm().itemChanged(this, elementValue, event);
 				}
 			},			
-/*			{ref:ZaResource.A_zimbraCalResType, type:_OSELECT1_, msgName:ZaMsg.NAD_ResType,label:ZaMsg.NAD_ResType, 
+/*			{ref:ZaResource.A_zmailCalResType, type:_OSELECT1_, msgName:ZaMsg.NAD_ResType,label:ZaMsg.NAD_ResType, 
 				labelLocation:_LEFT_, choices:ZaResource.resTypeChoices
 			},	*/	
 			{ref:ZaResource.A_name, type:_EMAILADDR_, msgName:ZaMsg.NAD_ResAccountName,label:ZaMsg.NAD_ResAccountName, 
@@ -352,7 +352,7 @@ ZaNewResourceXWizard.myXFormModifier = function(xFormObject) {
 	
 	var setupGroup = {type:_ZAWIZ_TOP_GROUPER_, label:ZaMsg.NAD_ResourceSetupGrouper, id:"resource_wiz_name_group",numCols:2,
 		items:[
-			{ref:ZaResource.A_zimbraCalResType, type:_OSELECT1_, msgName:ZaMsg.NAD_ResType,label:ZaMsg.NAD_ResType, 
+			{ref:ZaResource.A_zmailCalResType, type:_OSELECT1_, msgName:ZaMsg.NAD_ResType,label:ZaMsg.NAD_ResType, 
 				labelLocation:_LEFT_, choices:ZaResource.resTypeChoices,visibilityChecks:[],enableDisableChecks:[]
 			}		
 		]
@@ -411,26 +411,26 @@ ZaNewResourceXWizard.myXFormModifier = function(xFormObject) {
 					  enableDisableChecks:[]
 					  });
 		
-	setupGroup.items.push({ref:ZaResource.A_zimbraCalResAutoDeclineRecurring, type:_WIZ_CHECKBOX_,
+	setupGroup.items.push({ref:ZaResource.A_zmailCalResAutoDeclineRecurring, type:_WIZ_CHECKBOX_,
 						msgName:ZaMsg.NAD_DeclineRecurring,label:ZaMsg.NAD_DeclineRecurring, 
 						labelCssClass:"xform_label", align:_LEFT_,labelLocation:_LEFT_,trueValue:"TRUE", falseValue:"FALSE"});
 
 	setupGroup.items.push({ref:ZaResource.A2_schedulePolicy, type:_OSELECT1_, msgName:ZaMsg.NAD_ResType,
-						visibilityChecks:[[ZaItem.hasWritePermission,ZaResource.A_zimbraCalResAutoAcceptDecline],[ZaItem.hasWritePermission,ZaResource.A_zimbraCalResAutoDeclineIfBusy]],
+						visibilityChecks:[[ZaItem.hasWritePermission,ZaResource.A_zmailCalResAutoAcceptDecline],[ZaItem.hasWritePermission,ZaResource.A_zmailCalResAutoDeclineIfBusy]],
 						enableDisableChecks:[],
 						label:ZaMsg.NAD_SchedulePolicy, labelLocation:_LEFT_, width: "500px", 
 						choices:ZaResource.schedulePolicyChoices});	
 						
-	setupGroup.items.push({ref:ZaResource.A_zimbraCalResMaxNumConflictsAllowed, type:_TEXTFIELD_,
-		msgName:ZaMsg.zimbraCalResMaxNumConflictsAllowed, label:ZaMsg.zimbraCalResMaxNumConflictsAllowed,
-		enableDisableChecks:[ZaResource.isAutoDeclineEnabled,[XForm.checkInstanceValueNot,ZaResource.A_zimbraCalResAutoDeclineRecurring,"TRUE"]],
-		enableDisableChangeEventSources:[ZaResource.A_zimbraCalResAutoDeclineRecurring,ZaResource.A2_schedulePolicy],			
+	setupGroup.items.push({ref:ZaResource.A_zmailCalResMaxNumConflictsAllowed, type:_TEXTFIELD_,
+		msgName:ZaMsg.zmailCalResMaxNumConflictsAllowed, label:ZaMsg.zmailCalResMaxNumConflictsAllowed,
+		enableDisableChecks:[ZaResource.isAutoDeclineEnabled,[XForm.checkInstanceValueNot,ZaResource.A_zmailCalResAutoDeclineRecurring,"TRUE"]],
+		enableDisableChangeEventSources:[ZaResource.A_zmailCalResAutoDeclineRecurring,ZaResource.A2_schedulePolicy],			
 		labelLocation:_LEFT_, cssClass:"admin_xform_number_input"});		
 		
-	setupGroup.items.push({ref:ZaResource.A_zimbraCalResMaxPercentConflictsAllowed, type:_TEXTFIELD_,
-		msgName:ZaMsg.zimbraCalResMaxPercentConflictsAllowed, label:ZaMsg.zimbraCalResMaxPercentConflictsAllowed,
-		enableDisableChecks:[ZaResource.isAutoDeclineEnabled,[XForm.checkInstanceValueNot,ZaResource.A_zimbraCalResAutoDeclineRecurring,"TRUE"]],
-		enableDisableChangeEventSources:[ZaResource.A_zimbraCalResAutoDeclineRecurring,ZaResource.A2_schedulePolicy],			
+	setupGroup.items.push({ref:ZaResource.A_zmailCalResMaxPercentConflictsAllowed, type:_TEXTFIELD_,
+		msgName:ZaMsg.zmailCalResMaxPercentConflictsAllowed, label:ZaMsg.zmailCalResMaxPercentConflictsAllowed,
+		enableDisableChecks:[ZaResource.isAutoDeclineEnabled,[XForm.checkInstanceValueNot,ZaResource.A_zmailCalResAutoDeclineRecurring,"TRUE"]],
+		enableDisableChangeEventSources:[ZaResource.A_zmailCalResAutoDeclineRecurring,ZaResource.A2_schedulePolicy],			
 		labelLocation:_LEFT_, cssClass:"admin_xform_number_input"});	
 								
 	setupGroup.items.push({type:_GROUP_, numCols:3, nowrap:true, label:ZaMsg.NAD_MailServer, labelLocation:_LEFT_,
@@ -448,8 +448,8 @@ ZaNewResourceXWizard.myXFormModifier = function(xFormObject) {
 						]
 					}); 
 
-	setupGroup.items.push({ref:ZaResource.A_zimbraPrefCalendarForwardInvitesTo, type:_REPEAT_,
-							label:ZaMsg.zimbraPrefCalendarForwardInvitesTo, labelLocation:_LEFT_,labelCssClass:"xform_label",
+	setupGroup.items.push({ref:ZaResource.A_zmailPrefCalendarForwardInvitesTo, type:_REPEAT_,
+							label:ZaMsg.zmailPrefCalendarForwardInvitesTo, labelLocation:_LEFT_,labelCssClass:"xform_label",
 							repeatInstance:emptyAlias, 
 							showAddButton:true, showRemoveButton:true, 
 							addButtonLabel:ZaMsg.NAD_AddAddress, 
@@ -491,17 +491,17 @@ ZaNewResourceXWizard.myXFormModifier = function(xFormObject) {
 					items: [
 					   {type:_ZAWIZGROUP_,  colSizes:["200px","275px"],
 							items:[
-								{ref:ZaResource.A_zimbraCalResContactName, type:_TEXTFIELD_, msgName:ZaMsg.NAD_ContactName,
+								{ref:ZaResource.A_zmailCalResContactName, type:_TEXTFIELD_, msgName:ZaMsg.NAD_ContactName,
 									label:ZaMsg.NAD_ContactName, labelLocation:_LEFT_, width:defaultWidth},
-								{ref:ZaResource.A_zimbraCalResContactEmail, type:_TEXTFIELD_, msgName:ZaMsg.NAD_ContactEmail,
+								{ref:ZaResource.A_zmailCalResContactEmail, type:_TEXTFIELD_, msgName:ZaMsg.NAD_ContactEmail,
 									label:ZaMsg.NAD_ContactEmail, labelLocation:_LEFT_, width:defaultWidth},
-								{ref:ZaResource.A_zimbraCalResContactPhone, type:_TEXTFIELD_, msgName:ZaMsg.NAD_ContactPhone,
+								{ref:ZaResource.A_zmailCalResContactPhone, type:_TEXTFIELD_, msgName:ZaMsg.NAD_ContactPhone,
 									label:ZaMsg.NAD_ContactPhone, labelLocation:_LEFT_, width:defaultWidth},
 								{ref:ZaResource.A_contactInfoAutoComplete, type: _AUTO_COMPLETE_LIST_,
                         						matchValue:ZaContactList.matchValue, matchText: ZaContactList.matchText,
                         						dataLoaderClass: ZaContactList , dataLoaderMethod: ZaContactList.prototype.getContactList ,
                         						compCallback: ZaContactList.prototype._autocompleteCallback,
-                        						inputFieldElementId: ZaResource.A_zimbraCalResContactName
+                        						inputFieldElementId: ZaResource.A_zmailCalResContactName
                     						}
 							]
 						},
@@ -519,18 +519,18 @@ ZaNewResourceXWizard.myXFormModifier = function(xFormObject) {
 										}
 									]
 								},								
-								{ref:ZaResource.A_zimbraCalResSite, type:_TEXTFIELD_, msgName:ZaMsg.NAD_Site,label:ZaMsg.NAD_Site, 
+								{ref:ZaResource.A_zmailCalResSite, type:_TEXTFIELD_, msgName:ZaMsg.NAD_Site,label:ZaMsg.NAD_Site, 
 										labelLocation:_LEFT_, width:defaultWidth, elementChanged: ZaResource.setAutoLocationName},
-								{ref:ZaResource.A_zimbraCalResBuilding, type:_TEXTFIELD_, msgName:ZaMsg.NAD_Building,label:ZaMsg.NAD_Building, 
+								{ref:ZaResource.A_zmailCalResBuilding, type:_TEXTFIELD_, msgName:ZaMsg.NAD_Building,label:ZaMsg.NAD_Building, 
 										labelLocation:_LEFT_, width:defaultWidth, elementChanged: ZaResource.setAutoLocationName},						
-								{ref:ZaResource.A_zimbraCalResFloor, type:_TEXTFIELD_, msgName:ZaMsg.NAD_Floor,label:ZaMsg.NAD_Floor, 
+								{ref:ZaResource.A_zmailCalResFloor, type:_TEXTFIELD_, msgName:ZaMsg.NAD_Floor,label:ZaMsg.NAD_Floor, 
 										labelLocation:_LEFT_, width:defaultWidth, elementChanged: ZaResource.setAutoLocationName},						
-								{ref:ZaResource.A_zimbraCalResRoom, type:_TEXTFIELD_, msgName:ZaMsg.NAD_Room,label:ZaMsg.NAD_Room, 
+								{ref:ZaResource.A_zmailCalResRoom, type:_TEXTFIELD_, msgName:ZaMsg.NAD_Room,label:ZaMsg.NAD_Room, 
 										labelLocation:_LEFT_, width:defaultWidth, elementChanged: ZaResource.setAutoLocationName},
-								{ref:ZaResource.A_zimbraCalResCapacity, type:_TEXTFIELD_, msgName:ZaMsg.NAD_Capacity,label:ZaMsg.NAD_Capacity, 
+								{ref:ZaResource.A_zmailCalResCapacity, type:_TEXTFIELD_, msgName:ZaMsg.NAD_Capacity,label:ZaMsg.NAD_Capacity, 
 									labelLocation:_LEFT_, width:defaultWidth,
 									visibilityChecks:[ZaResourceXFormView.isLocation],
-									visibilityChangeEventSources:[ZaResource.A_zimbraCalResType]
+									visibilityChangeEventSources:[ZaResource.A_zmailCalResType]
 								}
 							]
 						},
@@ -563,30 +563,30 @@ ZaNewResourceXWizard.myXFormModifier = function(xFormObject) {
                     return value;
                 }
             },
-            {ref:ZaResource.A_zimbraPrefCalendarAutoAcceptSignatureId, type:_OSELECT1_,
-                msgName:ZaMsg.NAD_zimbraPrefCalendarAutoAcceptSignatureId,
+            {ref:ZaResource.A_zmailPrefCalendarAutoAcceptSignatureId, type:_OSELECT1_,
+                msgName:ZaMsg.NAD_zmailPrefCalendarAutoAcceptSignatureId,
                 width: "280px",
-                label:ZaMsg.NAD_zimbraPrefCalendarAutoAcceptSignatureId, labelLocation:_LEFT_,
+                label:ZaMsg.NAD_zmailPrefCalendarAutoAcceptSignatureId, labelLocation:_LEFT_,
                 visibilityChecks:[],
                 enableDisableChecks:[ZaResourceXFormView.isSignatureSelectionEnabled],
                 enableDisableChangeEventSources:[ZaResource.A2_signatureList],
                 valueChangeEventSources:[ZaResource.A2_signatureList],
                 choices:this.signatureChoices
             },
-            {ref:ZaResource.A_zimbraPrefCalendarAutoDeclineSignatureId, type:_OSELECT1_,
-                msgName:ZaMsg.NAD_zimbraPrefCalendarAutoDeclineSignatureId,
+            {ref:ZaResource.A_zmailPrefCalendarAutoDeclineSignatureId, type:_OSELECT1_,
+                msgName:ZaMsg.NAD_zmailPrefCalendarAutoDeclineSignatureId,
                 width: "280px",
-                label:ZaMsg.NAD_zimbraPrefCalendarAutoDeclineSignatureId, labelLocation:_LEFT_,
+                label:ZaMsg.NAD_zmailPrefCalendarAutoDeclineSignatureId, labelLocation:_LEFT_,
                 visibilityChecks:[],
                 enableDisableChecks:[ZaResourceXFormView.isSignatureSelectionEnabled],
                 enableDisableChangeEventSources:[ZaResource.A2_signatureList],
                 valueChangeEventSources:[ZaResource.A2_signatureList],
                 choices:this.signatureChoices
             },
-            {ref:ZaResource.A_zimbraPrefCalendarAutoDenySignatureId, type:_OSELECT1_,
-                msgName:ZaMsg.NAD_zimbraPrefCalendarAutoDenySignatureId,
+            {ref:ZaResource.A_zmailPrefCalendarAutoDenySignatureId, type:_OSELECT1_,
+                msgName:ZaMsg.NAD_zmailPrefCalendarAutoDenySignatureId,
                 width: "280px",
-                label:ZaMsg.NAD_zimbraPrefCalendarAutoDenySignatureId, labelLocation:_LEFT_,
+                label:ZaMsg.NAD_zmailPrefCalendarAutoDenySignatureId, labelLocation:_LEFT_,
                 visibilityChecks:[],
                 enableDisableChecks:[ZaResourceXFormView.isSignatureSelectionEnabled],
                 enableDisableChangeEventSources:[ZaResource.A2_signatureList],

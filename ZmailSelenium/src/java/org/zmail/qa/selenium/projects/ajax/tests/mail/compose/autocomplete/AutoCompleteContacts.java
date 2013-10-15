@@ -14,20 +14,20 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.compose.autocomplete;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.compose.autocomplete;
 
 import java.util.List;
 
 import org.testng.annotations.*;
 
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew.Field;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.*;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew.Field;
 
 
 public class AutoCompleteContacts extends PrefGroupMailByMessageTest {
@@ -38,7 +38,7 @@ public class AutoCompleteContacts extends PrefGroupMailByMessageTest {
 	public AutoCompleteContacts() {
 		logger.info("New "+ AutoCompleteContacts.class.getCanonicalName());
 		
-		super.startingAccountPreferences.put("zimbraPrefComposeFormat", "text");
+		super.startingAccountPreferences.put("zmailPrefComposeFormat", "text");
 	
 	}
 	
@@ -47,15 +47,15 @@ public class AutoCompleteContacts extends PrefGroupMailByMessageTest {
 	public void AutoCompleteContacts_01() throws HarnessException {
 		
 		// Create a contact
-		ZimbraAccount contact = new ZimbraAccount();
+		ZmailAccount contact = new ZmailAccount();
 		contact.provision();
 		contact.authenticate();
 
-		String firstname = "Michael" + ZimbraSeleniumProperties.getUniqueString();
-		String lastname = "Williams" + ZimbraSeleniumProperties.getUniqueString();
+		String firstname = "Michael" + ZmailSeleniumProperties.getUniqueString();
+		String lastname = "Williams" + ZmailSeleniumProperties.getUniqueString();
 		
 		app.zGetActiveAccount().soapSend(
-					"<CreateContactRequest xmlns='urn:zimbraMail'>"
+					"<CreateContactRequest xmlns='urn:zmailMail'>"
 				+		"<cn>"
 				+			"<a n='firstName'>"+ firstname +"</a>"
 				+			"<a n='lastName'>"+ lastname +"</a>"
@@ -66,8 +66,8 @@ public class AutoCompleteContacts extends PrefGroupMailByMessageTest {
 		app.zPageMain.zToolbarPressButton(Button.B_REFRESH);
 		
 		// Message properties
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String body = "body" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String body = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		// Open the new mail form
 		FormMailNew mailform = (FormMailNew) app.zPageMail.zToolbarPressButton(Button.B_NEW);
@@ -104,15 +104,15 @@ public class AutoCompleteContacts extends PrefGroupMailByMessageTest {
 	public void AutoCompleteContacts_02() throws HarnessException {
 		
 		// Create a contact
-		ZimbraAccount contact = new ZimbraAccount();
+		ZmailAccount contact = new ZmailAccount();
 		contact.provision();
 		contact.authenticate();
 
-		String firstname = "Michael" + ZimbraSeleniumProperties.getUniqueString();
-		String lastname = "Williams" + ZimbraSeleniumProperties.getUniqueString();
+		String firstname = "Michael" + ZmailSeleniumProperties.getUniqueString();
+		String lastname = "Williams" + ZmailSeleniumProperties.getUniqueString();
 		
 		app.zGetActiveAccount().soapSend(
-					"<CreateContactRequest xmlns='urn:zimbraMail'>"
+					"<CreateContactRequest xmlns='urn:zmailMail'>"
 				+		"<cn>"
 				+			"<a n='firstName'>"+ firstname +"</a>"
 				+			"<a n='lastName'>"+ lastname +"</a>"
@@ -124,8 +124,8 @@ public class AutoCompleteContacts extends PrefGroupMailByMessageTest {
 
 		
 		// Message properties
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String body = "body" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String body = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		
@@ -164,15 +164,15 @@ public class AutoCompleteContacts extends PrefGroupMailByMessageTest {
 	public void AutoCompleteContacts_03() throws HarnessException {
 		
 		// Create a contact
-		ZimbraAccount contact = new ZimbraAccount();
+		ZmailAccount contact = new ZmailAccount();
 		contact.provision();
 		contact.authenticate();
 
-		String firstname = "Michael" + ZimbraSeleniumProperties.getUniqueString();
-		String lastname = "Williams" + ZimbraSeleniumProperties.getUniqueString();
+		String firstname = "Michael" + ZmailSeleniumProperties.getUniqueString();
+		String lastname = "Williams" + ZmailSeleniumProperties.getUniqueString();
 		
 		app.zGetActiveAccount().soapSend(
-					"<CreateContactRequest xmlns='urn:zimbraMail'>"
+					"<CreateContactRequest xmlns='urn:zmailMail'>"
 				+		"<cn>"
 				+			"<a n='firstName'>"+ firstname +"</a>"
 				+			"<a n='lastName'>"+ lastname +"</a>"
@@ -184,8 +184,8 @@ public class AutoCompleteContacts extends PrefGroupMailByMessageTest {
 
 		
 		// Message properties
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String body = "body" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String body = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		
@@ -224,15 +224,15 @@ public class AutoCompleteContacts extends PrefGroupMailByMessageTest {
 	public void AutoCompleteContacts_04() throws HarnessException {
 		
 		// Create a contact
-		ZimbraAccount contact = new ZimbraAccount();
+		ZmailAccount contact = new ZmailAccount();
 		contact.provision();
 		contact.authenticate();
 
-		String firstname = "Michael" + ZimbraSeleniumProperties.getUniqueString();
-		String lastname = "Williams" + ZimbraSeleniumProperties.getUniqueString();
+		String firstname = "Michael" + ZmailSeleniumProperties.getUniqueString();
+		String lastname = "Williams" + ZmailSeleniumProperties.getUniqueString();
 		
 		app.zGetActiveAccount().soapSend(
-					"<CreateContactRequest xmlns='urn:zimbraMail'>"
+					"<CreateContactRequest xmlns='urn:zmailMail'>"
 				+		"<cn>"
 				+			"<a n='firstName'>"+ firstname +"</a>"
 				+			"<a n='lastName'>"+ lastname +"</a>"
@@ -244,8 +244,8 @@ public class AutoCompleteContacts extends PrefGroupMailByMessageTest {
 
 		
 		// Message properties
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String body = "body" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String body = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		
@@ -284,15 +284,15 @@ public class AutoCompleteContacts extends PrefGroupMailByMessageTest {
 	public void AutoCompleteContacts_05() throws HarnessException {
 		
 		// Create a contact
-		ZimbraAccount contact = new ZimbraAccount();
+		ZmailAccount contact = new ZmailAccount();
 		contact.provision();
 		contact.authenticate();
 
-		String firstname = "Michael" + ZimbraSeleniumProperties.getUniqueString();
-		String lastname = "Williams" + ZimbraSeleniumProperties.getUniqueString();
+		String firstname = "Michael" + ZmailSeleniumProperties.getUniqueString();
+		String lastname = "Williams" + ZmailSeleniumProperties.getUniqueString();
 		
 		app.zGetActiveAccount().soapSend(
-					"<CreateContactRequest xmlns='urn:zimbraMail'>"
+					"<CreateContactRequest xmlns='urn:zmailMail'>"
 				+		"<cn>"
 				+			"<a n='firstName'>"+ firstname +"</a>"
 				+			"<a n='lastName'>"+ lastname +"</a>"
@@ -304,8 +304,8 @@ public class AutoCompleteContacts extends PrefGroupMailByMessageTest {
 
 		
 		// Message properties
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String body = "body" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String body = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		
@@ -344,15 +344,15 @@ public class AutoCompleteContacts extends PrefGroupMailByMessageTest {
 	public void AutoCompleteContacts_07() throws HarnessException {
 		
 		// Create a contact
-		ZimbraAccount contact = new ZimbraAccount();
+		ZmailAccount contact = new ZmailAccount();
 		contact.provision();
 		contact.authenticate();
 
-		String firstname = "Michael" + ZimbraSeleniumProperties.getUniqueString();
-		String lastname = "Williams" + ZimbraSeleniumProperties.getUniqueString();
+		String firstname = "Michael" + ZmailSeleniumProperties.getUniqueString();
+		String lastname = "Williams" + ZmailSeleniumProperties.getUniqueString();
 		
 		app.zGetActiveAccount().soapSend(
-					"<CreateContactRequest xmlns='urn:zimbraMail'>"
+					"<CreateContactRequest xmlns='urn:zmailMail'>"
 				+		"<cn>"
 				+			"<a n='firstName'>"+ firstname +"</a>"
 				+			"<a n='lastName'>"+ lastname +"</a>"
@@ -364,8 +364,8 @@ public class AutoCompleteContacts extends PrefGroupMailByMessageTest {
 
 		
 		// Message properties
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String body = "body" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String body = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		
@@ -406,21 +406,21 @@ public class AutoCompleteContacts extends PrefGroupMailByMessageTest {
 		int count = 3;
 		
 		// Message properties
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String body = "body" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String body = "body" + ZmailSeleniumProperties.getUniqueString();
 		
-		String firstname = "Jayden" + ZimbraSeleniumProperties.getUniqueString();
+		String firstname = "Jayden" + ZmailSeleniumProperties.getUniqueString();
 		for (int i = 0; i < count; i++) {
 			
 			// Create a contact
-			ZimbraAccount contact = new ZimbraAccount();
+			ZmailAccount contact = new ZmailAccount();
 			contact.provision();
 			contact.authenticate();
 
-			String lastname = "Jones" + ZimbraSeleniumProperties.getUniqueString();
+			String lastname = "Jones" + ZmailSeleniumProperties.getUniqueString();
 			
 			app.zGetActiveAccount().soapSend(
-						"<CreateContactRequest xmlns='urn:zimbraMail'>"
+						"<CreateContactRequest xmlns='urn:zmailMail'>"
 					+		"<cn>"
 					+			"<a n='firstName'>"+ firstname +"</a>"
 					+			"<a n='lastName'>"+ lastname +"</a>"
@@ -459,15 +459,15 @@ public class AutoCompleteContacts extends PrefGroupMailByMessageTest {
 	public void AutoCompleteContacts_09() throws HarnessException {
 		
 		// Create a contact
-		ZimbraAccount contact = new ZimbraAccount();
+		ZmailAccount contact = new ZmailAccount();
 		contact.provision();
 		contact.authenticate();
 
-		String firstname = "Michael" + ZimbraSeleniumProperties.getUniqueString();
-		String lastname = "Williams" + ZimbraSeleniumProperties.getUniqueString();
+		String firstname = "Michael" + ZmailSeleniumProperties.getUniqueString();
+		String lastname = "Williams" + ZmailSeleniumProperties.getUniqueString();
 		
 		app.zGetActiveAccount().soapSend(
-					"<CreateContactRequest xmlns='urn:zimbraMail'>"
+					"<CreateContactRequest xmlns='urn:zmailMail'>"
 				+		"<cn>"
 				+			"<a n='firstName'>"+ firstname +"</a>"
 				+			"<a n='lastName'>"+ lastname +"</a>"
@@ -479,8 +479,8 @@ public class AutoCompleteContacts extends PrefGroupMailByMessageTest {
 
 		
 		// Message properties
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String body = "body" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String body = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		// Open the new mail form
 		FormMailNew mailform = (FormMailNew) app.zPageMail.zToolbarPressButton(Button.B_NEW);
@@ -508,15 +508,15 @@ public class AutoCompleteContacts extends PrefGroupMailByMessageTest {
 	public void AutoCompleteContactsBug47045A() throws HarnessException {
 		
 		// Create a contact
-		ZimbraAccount contact = new ZimbraAccount();
+		ZmailAccount contact = new ZmailAccount();
 		contact.provision();
 		contact.authenticate();
 
-		String firstname = "Michael" + ZimbraSeleniumProperties.getUniqueString();
-		String lastname = "Williams" + ZimbraSeleniumProperties.getUniqueString();
+		String firstname = "Michael" + ZmailSeleniumProperties.getUniqueString();
+		String lastname = "Williams" + ZmailSeleniumProperties.getUniqueString();
 		
 		app.zGetActiveAccount().soapSend(
-					"<CreateContactRequest xmlns='urn:zimbraMail'>"
+					"<CreateContactRequest xmlns='urn:zmailMail'>"
 				+		"<cn>"
 				+			"<a n='firstName'>"+ firstname +"</a>"
 				+			"<a n='lastName'>"+ lastname +"</a>"
@@ -528,8 +528,8 @@ public class AutoCompleteContacts extends PrefGroupMailByMessageTest {
 
 		
 		// Message properties
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String body = "body" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String body = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		// Open the new mail form
 		FormMailNew mailform = (FormMailNew) app.zPageMail.zToolbarPressButton(Button.B_NEW);
@@ -568,15 +568,15 @@ public class AutoCompleteContacts extends PrefGroupMailByMessageTest {
 	public void AutoCompleteContactsBug47045B() throws HarnessException {
 		
 		// Create a contact
-		ZimbraAccount contact = new ZimbraAccount();
+		ZmailAccount contact = new ZmailAccount();
 		contact.provision();
 		contact.authenticate();
 
-		String firstname = "Michael" + ZimbraSeleniumProperties.getUniqueString();
-		String lastname = "Williams" + ZimbraSeleniumProperties.getUniqueString();
+		String firstname = "Michael" + ZmailSeleniumProperties.getUniqueString();
+		String lastname = "Williams" + ZmailSeleniumProperties.getUniqueString();
 		
 		app.zGetActiveAccount().soapSend(
-					"<CreateContactRequest xmlns='urn:zimbraMail'>"
+					"<CreateContactRequest xmlns='urn:zmailMail'>"
 				+		"<cn>"
 				+			"<a n='firstName'>"+ firstname +"</a>"
 				+			"<a n='lastName'>"+ lastname +"</a>"
@@ -588,8 +588,8 @@ public class AutoCompleteContacts extends PrefGroupMailByMessageTest {
 
 		
 		// Message properties
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String body = "body" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String body = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		// Open the new mail form
 		FormMailNew mailform = (FormMailNew) app.zPageMail.zToolbarPressButton(Button.B_NEW);
@@ -627,16 +627,16 @@ public class AutoCompleteContacts extends PrefGroupMailByMessageTest {
 	public void AutoCompleteContacts_Bug47044A() throws HarnessException {
 		
 		// Create a contact
-		ZimbraAccount contact = new ZimbraAccount();
+		ZmailAccount contact = new ZmailAccount();
 		contact.provision();
 		contact.authenticate();
 
-		String firstname = "Richard" + ZimbraSeleniumProperties.getUniqueString();
-		String lastname = "Moore" + ZimbraSeleniumProperties.getUniqueString();
+		String firstname = "Richard" + ZmailSeleniumProperties.getUniqueString();
+		String lastname = "Moore" + ZmailSeleniumProperties.getUniqueString();
 		
 		// Create a contact
 		app.zGetActiveAccount().soapSend(
-					"<CreateContactRequest xmlns='urn:zimbraMail'>"
+					"<CreateContactRequest xmlns='urn:zmailMail'>"
 				+		"<cn>"
 				+			"<a n='firstName'>"+ firstname +"</a>"
 				+			"<a n='lastName'>"+ lastname +"</a>"
@@ -647,7 +647,7 @@ public class AutoCompleteContacts extends PrefGroupMailByMessageTest {
 		
 		// Move to trash
 		app.zGetActiveAccount().soapSend(
-					"<ItemActionRequest xmlns='urn:zimbraMail'>"
+					"<ItemActionRequest xmlns='urn:zmailMail'>"
 				+		"<action op='move' l='"+ FolderItem.importFromSOAP(app.zGetActiveAccount(), FolderItem.SystemFolder.Trash).getId() +"' id='"+ contactID + "'/>"
 				+	"</ItemActionRequest>");
 
@@ -657,8 +657,8 @@ public class AutoCompleteContacts extends PrefGroupMailByMessageTest {
 
 		
 		// Message properties
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String body = "body" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String body = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		// Open the new mail form
 		FormMailNew mailform = (FormMailNew) app.zPageMail.zToolbarPressButton(Button.B_NEW);
@@ -692,16 +692,16 @@ public class AutoCompleteContacts extends PrefGroupMailByMessageTest {
 	public void AutoCompleteContacts_Bug47044B() throws HarnessException {
 		
 		// Create a contact
-		ZimbraAccount contact = new ZimbraAccount();
+		ZmailAccount contact = new ZmailAccount();
 		contact.provision();
 		contact.authenticate();
 
-		String firstname = "Richard" + ZimbraSeleniumProperties.getUniqueString();
-		String lastname = "Moore" + ZimbraSeleniumProperties.getUniqueString();
+		String firstname = "Richard" + ZmailSeleniumProperties.getUniqueString();
+		String lastname = "Moore" + ZmailSeleniumProperties.getUniqueString();
 		
 		// Create a contact
 		app.zGetActiveAccount().soapSend(
-					"<CreateContactRequest xmlns='urn:zimbraMail'>"
+					"<CreateContactRequest xmlns='urn:zmailMail'>"
 				+		"<cn>"
 				+			"<a n='firstName'>"+ firstname +"</a>"
 				+			"<a n='lastName'>"+ lastname +"</a>"
@@ -712,7 +712,7 @@ public class AutoCompleteContacts extends PrefGroupMailByMessageTest {
 		
 		// Move to trash
 		app.zGetActiveAccount().soapSend(
-					"<ItemActionRequest xmlns='urn:zimbraMail'>"
+					"<ItemActionRequest xmlns='urn:zmailMail'>"
 				+		"<action op='delete' id='"+ contactID + "'/>"
 				+	"</ItemActionRequest>");
 
@@ -722,8 +722,8 @@ public class AutoCompleteContacts extends PrefGroupMailByMessageTest {
 
 		
 		// Message properties
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String body = "body" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String body = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		// Open the new mail form
 		FormMailNew mailform = (FormMailNew) app.zPageMail.zToolbarPressButton(Button.B_NEW);
@@ -759,25 +759,25 @@ public class AutoCompleteContacts extends PrefGroupMailByMessageTest {
 		
 		
 		// Create a contact
-		ZimbraAccount contact = new ZimbraAccount();
+		ZmailAccount contact = new ZmailAccount();
 		contact.provision();
 		contact.authenticate();
 
-		String firstname = "Richard" + ZimbraSeleniumProperties.getUniqueString();
-		String lastname = "Moore" + ZimbraSeleniumProperties.getUniqueString();
+		String firstname = "Richard" + ZmailSeleniumProperties.getUniqueString();
+		String lastname = "Moore" + ZmailSeleniumProperties.getUniqueString();
 		
-		String foldername = "addressbook" + ZimbraSeleniumProperties.getUniqueString();
+		String foldername = "addressbook" + ZmailSeleniumProperties.getUniqueString();
 		
 		// Create an addressbook
 		app.zGetActiveAccount().soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>"
+					"<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+		"<folder name='"+ foldername +"' l='"+ FolderItem.importFromSOAP(app.zGetActiveAccount(), FolderItem.SystemFolder.Contacts).getId() +"' view='contact'/>"
 				+	"</CreateFolderRequest>");
 		String folderID = app.zGetActiveAccount().soapSelectValue("//mail:folder", "id");
 
 		// Create a contact
 		app.zGetActiveAccount().soapSend(
-					"<CreateContactRequest xmlns='urn:zimbraMail'>"
+					"<CreateContactRequest xmlns='urn:zmailMail'>"
 				+		"<cn l='"+ folderID +"'>"
 				+			"<a n='firstName'>"+ firstname +"</a>"
 				+			"<a n='lastName'>"+ lastname +"</a>"
@@ -787,7 +787,7 @@ public class AutoCompleteContacts extends PrefGroupMailByMessageTest {
 		
 		// Move the addressbook to trash
 		app.zGetActiveAccount().soapSend(
-					"<ItemActionRequest xmlns='urn:zimbraMail'>"
+					"<ItemActionRequest xmlns='urn:zmailMail'>"
 				+		"<action op='move' id='"+ folderID + "' l='"+ FolderItem.importFromSOAP(app.zGetActiveAccount(), FolderItem.SystemFolder.Trash).getId() +"'/>"
 				+	"</ItemActionRequest>");
 
@@ -797,8 +797,8 @@ public class AutoCompleteContacts extends PrefGroupMailByMessageTest {
 
 		
 		// Message properties
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String body = "body" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String body = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		// Open the new mail form
 		FormMailNew mailform = (FormMailNew) app.zPageMail.zToolbarPressButton(Button.B_NEW);
@@ -835,23 +835,23 @@ public class AutoCompleteContacts extends PrefGroupMailByMessageTest {
 		
 		
 		// Create a contact in a addressbook
-		ZimbraAccount contact1 = new ZimbraAccount();
+		ZmailAccount contact1 = new ZmailAccount();
 		contact1.provision();
 		contact1.authenticate();
 
-		String firstname = "Charles" + ZimbraSeleniumProperties.getUniqueString();
-		String lastname = "Anderson" + ZimbraSeleniumProperties.getUniqueString();
+		String firstname = "Charles" + ZmailSeleniumProperties.getUniqueString();
+		String lastname = "Anderson" + ZmailSeleniumProperties.getUniqueString();
 				
 		// Create an addressbook
 		app.zGetActiveAccount().soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>"
-				+		"<folder name='addressbook" + ZimbraSeleniumProperties.getUniqueString() +"' l='"+ FolderItem.importFromSOAP(app.zGetActiveAccount(), FolderItem.SystemFolder.Contacts).getId() +"' view='contact'/>"
+					"<CreateFolderRequest xmlns='urn:zmailMail'>"
+				+		"<folder name='addressbook" + ZmailSeleniumProperties.getUniqueString() +"' l='"+ FolderItem.importFromSOAP(app.zGetActiveAccount(), FolderItem.SystemFolder.Contacts).getId() +"' view='contact'/>"
 				+	"</CreateFolderRequest>");
 		String folderID = app.zGetActiveAccount().soapSelectValue("//mail:folder", "id");
 
 		// Create a contact
 		app.zGetActiveAccount().soapSend(
-					"<CreateContactRequest xmlns='urn:zimbraMail'>"
+					"<CreateContactRequest xmlns='urn:zmailMail'>"
 				+		"<cn l='"+ folderID +"'>"
 				+			"<a n='firstName'>"+ firstname +"</a>"
 				+			"<a n='lastName'>"+ lastname +"</a>"
@@ -860,23 +860,23 @@ public class AutoCompleteContacts extends PrefGroupMailByMessageTest {
 				+	"</CreateContactRequest>");
 		
 		// Create a contact in a addressbook
-		ZimbraAccount contact2 = new ZimbraAccount();
+		ZmailAccount contact2 = new ZmailAccount();
 		contact2.provision();
 		contact2.authenticate();
 
-		firstname = "Charles" + ZimbraSeleniumProperties.getUniqueString();
-		lastname = "Thomas" + ZimbraSeleniumProperties.getUniqueString();
+		firstname = "Charles" + ZmailSeleniumProperties.getUniqueString();
+		lastname = "Thomas" + ZmailSeleniumProperties.getUniqueString();
 				
 		// Create an addressbook
 		app.zGetActiveAccount().soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>"
-				+		"<folder name='subaddressbook" + ZimbraSeleniumProperties.getUniqueString() +"' l='"+ folderID +"' view='contact'/>"
+					"<CreateFolderRequest xmlns='urn:zmailMail'>"
+				+		"<folder name='subaddressbook" + ZmailSeleniumProperties.getUniqueString() +"' l='"+ folderID +"' view='contact'/>"
 				+	"</CreateFolderRequest>");
 		String subfolderID = app.zGetActiveAccount().soapSelectValue("//mail:folder", "id");
 
 		// Create a contact
 		app.zGetActiveAccount().soapSend(
-					"<CreateContactRequest xmlns='urn:zimbraMail'>"
+					"<CreateContactRequest xmlns='urn:zmailMail'>"
 				+		"<cn l='"+ subfolderID +"'>"
 				+			"<a n='firstName'>"+ firstname +"</a>"
 				+			"<a n='lastName'>"+ lastname +"</a>"
@@ -890,8 +890,8 @@ public class AutoCompleteContacts extends PrefGroupMailByMessageTest {
 
 		
 		// Message properties
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String body = "body" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String body = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		// Open the new mail form
 		FormMailNew mailform = (FormMailNew) app.zPageMail.zToolbarPressButton(Button.B_NEW);

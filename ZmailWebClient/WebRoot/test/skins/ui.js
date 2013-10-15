@@ -222,7 +222,7 @@ function createMain(parent) {
             "</tr>",
         "</table>",
 
-        "<h3>Zimbra Controls</h3>",
+        "<h3>Zmail Controls</h3>",
 
         "<table border=0 cellspacing=4 cellpadding=0>",
             "<tr valign=top>",
@@ -241,7 +241,7 @@ function createMain(parent) {
     createTabs(main, DwtTabView, "main-tabbar");
     createSelects(main, DwtSelect, "main-select");
 
-    // create zimbra controls
+    // create zmail controls
     createToolbar(main, ZmToolBar, DwtToolBarButton, "main-zmtoolbar");
 
     return main;

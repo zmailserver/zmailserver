@@ -12,24 +12,24 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.offline;
+package org.zmail.cs.service.offline;
 
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.offline.DirectorySync;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.SyncMailbox;
-import com.zimbra.cs.mailbox.OfflineMailboxManager;
-import com.zimbra.cs.mailbox.OfflineServiceException;
-import com.zimbra.cs.mailbox.ZcsMailbox;
-import com.zimbra.cs.offline.OfflineLog;
-import com.zimbra.cs.offline.OfflineSyncManager;
-import com.zimbra.cs.offline.common.OfflineConstants;
-import com.zimbra.soap.DocumentHandler;
-import com.zimbra.common.soap.Element;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.offline.DirectorySync;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.SyncMailbox;
+import org.zmail.cs.mailbox.OfflineMailboxManager;
+import org.zmail.cs.mailbox.OfflineServiceException;
+import org.zmail.cs.mailbox.ZcsMailbox;
+import org.zmail.cs.offline.OfflineLog;
+import org.zmail.cs.offline.OfflineSyncManager;
+import org.zmail.cs.offline.common.OfflineConstants;
+import org.zmail.soap.DocumentHandler;
+import org.zmail.common.soap.Element;
+import org.zmail.soap.ZmailSoapContext;
 
 public class OfflineSync extends DocumentHandler {
 
@@ -39,7 +39,7 @@ public class OfflineSync extends DocumentHandler {
         if (!(mmgr instanceof OfflineMailboxManager))
             throw OfflineServiceException.MISCONFIGURED("incorrect mailbox manager class: " + mmgr.getClass().getSimpleName());
 
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Mailbox mbox = getRequestedMailbox(zsc);
         
         boolean isDebugTraceOn = request.getAttributeBool("debug", false);

@@ -25,7 +25,7 @@ are shown a login page to enter their credentials. A single login page
 is used for all of the clients (except for the admin console) -- the
 user can select which client to use from the login page.
 
-SEE: //depot/{branch}/ZimbraWebClient/WebRoot/public/login.jsp
+SEE: //depot/{branch}/ZmailWebClient/WebRoot/public/login.jsp
 
 Once the user successfully logs into the system, they are directed
 to the client's primary page for the selected client:
@@ -101,7 +101,7 @@ client=1
 
 	Forces the client to load a specific client. This is only used
 	when a user is already authenticated and is accessing the top
-	level app URL (e.g. http://{host}/zimbra/) or is being redirected
+	level app URL (e.g. http://{host}/zmail/) or is being redirected
 	to the top level app URL.
 
 skin={skin}
@@ -135,16 +135,16 @@ application.
 
 Here is the general layout of the Ajax source tree:
 
-//depot/{branch}/ZimbraWebClient/WebRoot/js/ajax/
+//depot/{branch}/ZmailWebClient/WebRoot/js/ajax/
 	boot/       - bootstrap code (e.g. loading source, callbacks, etc)
 	dwt/        - DWT framework (widgets/, etc)
 	package/    - package manifests for combining files
 	util/       - utility code (e.g. text formatting, etc)
 	...
 
-Here is the general layout of the Zimbra advanced client source tree:
+Here is the general layout of the Zmail advanced client source tree:
 
-//depot/{branch}/ZimbraWebClient/WebRoot/js/zimbraMail/
+//depot/{branch}/ZmailWebClient/WebRoot/js/zmailMail/
 	abook/      - Address Book app
 	briefcase/  - Briefcase app
 	calendar/   - Calendar app
@@ -170,7 +170,7 @@ NOTE: Not all of the source directories are listed here.
 
 ARCHITECTURE
 
-The Zimbra advanced client contains a lot of functionality and
+The Zmail advanced client contains a lot of functionality and
 therefore is a large and complex software application. This section
 describes the general architecture of the the client.
 
@@ -183,7 +183,7 @@ directory.
 
 For example, the root level of the mail application is:
 
-	//depot/{branch}/ZimbraWebClient/WebRoot/js/zimbraMail/mail/
+	//depot/{branch}/ZmailWebClient/WebRoot/js/zmailMail/mail/
 
 and the important classes for this application are:
 
@@ -209,7 +209,7 @@ CORE ZIMBRA MAIL CLASSES
 * ZmOverviewController : ZmController
 * ZmTreeController : ZmController
 
-* ZmZimbraMail : ZmController
+* ZmZmailMail : ZmController
 
 * ZmAppCtxt
 * ZmApp

@@ -12,16 +12,16 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.tag.calendar;
+package org.zmail.cs.taglib.tag.calendar;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.taglib.bean.ZApptSummariesBean;
-import com.zimbra.cs.taglib.bean.ZMailboxBean;
-import com.zimbra.cs.taglib.tag.ZimbraSimpleTag;
-import com.zimbra.client.ZAppointmentHit;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZMailbox.ZApptSummaryResult;
-import com.zimbra.client.ZSearchParams;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.taglib.bean.ZApptSummariesBean;
+import org.zmail.cs.taglib.bean.ZMailboxBean;
+import org.zmail.cs.taglib.tag.ZmailSimpleTag;
+import org.zmail.client.ZAppointmentHit;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZMailbox.ZApptSummaryResult;
+import org.zmail.client.ZSearchParams;
 
 import javax.servlet.jsp.JspContext;
 import javax.servlet.jsp.JspException;
@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TimeZone;
 
-public class GetAppointmentSummariesTag extends ZimbraSimpleTag {
+public class GetAppointmentSummariesTag extends ZmailSimpleTag {
 
     private String mVar;
     private String mVarException;

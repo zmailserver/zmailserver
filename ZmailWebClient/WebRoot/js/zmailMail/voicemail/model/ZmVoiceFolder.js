@@ -27,7 +27,7 @@
 * @param color
 * @param url		[string]*		URL for this organizer's feed
 * @param owner
-* @param zid		[string]*		Zimbra id of owner, if remote share
+* @param zid		[string]*		Zmail id of owner, if remote share
 * @param rid		[string]*		Remote id of organizer, if remote share
 * @param restUrl	[string]*		The REST URL of this organizer.
 */
@@ -214,7 +214,7 @@ ZmVoiceFolder.prototype.empty =
 function(){
 	DBG.println(AjxDebug.DBG1, "emptying: " + this.name + ", ID: " + this.id);
 
-	var soapDoc = AjxSoapDoc.create("VoiceMsgActionRequest", "urn:zimbraVoice");
+	var soapDoc = AjxSoapDoc.create("VoiceMsgActionRequest", "urn:zmailVoice");
 	var node = soapDoc.set("action");
 	node.setAttribute("op", "empty");
 	node.setAttribute("id", this.id);

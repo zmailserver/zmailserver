@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cert;
+package org.zmail.cert;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -23,8 +23,8 @@ import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
 
 
 public class OutputParser {
@@ -50,7 +50,7 @@ public class OutputParser {
            }else if (line.startsWith(ERROR_PREFIX)) {
                throw ServiceException.FAILURE(line, null);
            }else {
-               ZimbraLog.security.debug("DEBUG: Current Line = " + line) ;
+               ZmailLog.security.debug("DEBUG: Current Line = " + line) ;
                
                //line = line.replaceFirst(OUTPUT_PREFIX, "").trim(); //remove the OUTPUT_PREFIX
                //for GetCert               
@@ -72,7 +72,7 @@ public class OutputParser {
    // public 
     
     //Example:
-    //subject=/C=US/ST=CA/L=San Mateo/O=Zimbra/OU=Zimbra Collaboration Suite/CN=admindev.zimbra.com
+    //subject=/C=US/ST=CA/L=San Mateo/O=Zmail/OU=Zmail Collaboration Suite/CN=admindev.zmail.com
 
     public static HashMap<String, String> parseSubject (String subject) {
         HashMap <String, String> hash = new HashMap<String, String> () ;
@@ -108,9 +108,9 @@ public class OutputParser {
         return hash ;
     }
     
-    //SubjectAltNames=DNS:admindev.zimbra.com, DNS:test1.zimbra.com, DNS:test2.zimbra.com
+    //SubjectAltNames=DNS:admindev.zmail.com, DNS:test1.zmail.com, DNS:test2.zmail.com
     public static Vector<String> parseSubjectAltName (String subjectAltNames) {
-        //ZimbraLog.security.info(subjectAltNames);
+        //ZmailLog.security.info(subjectAltNames);
         Vector<String> vec = new Vector<String> () ;
         String [] dns = subjectAltNames.split(",") ;
         for (int i=0; i < dns.length; i++) {
@@ -123,7 +123,7 @@ public class OutputParser {
             matcher = GET_SUBJECT_ALT_NAME_PATTERN.matcher(dns[i]) ;
             if (matcher.matches()) {
                 value = matcher.group(1) ;
-                //ZimbraLog.security.info("Host " + i + " = " + value);
+                //ZmailLog.security.info("Host " + i + " = " + value);
                 vec.add(value);
             }
         }*/
@@ -136,10 +136,10 @@ public class OutputParser {
                                                  new ByteArrayInputStream(in))) ;
             String line ;
             while ((line = br.readLine())!=null) {
-                ZimbraLog.security.debug(line) ;
+                ZmailLog.security.debug(line) ;
             }
         }catch (IOException e) {
-            ZimbraLog.security.error(e) ;
+            ZmailLog.security.error(e) ;
         }
         
     }
@@ -166,7 +166,7 @@ public class OutputParser {
     /*
    
     public static void main (String [] args) {
-        String sub = "/C=US/ST=N/A/L=San Mateo/O=/OU=Zimbra Collaboration Suite/CN=admindev.zimbra.com" ;
+        String sub = "/C=US/ST=N/A/L=San Mateo/O=/OU=Zmail Collaboration Suite/CN=admindev.zmail.com" ;
         System.out.println (sub) ;
         parseSubject(sub) ;
     }*/

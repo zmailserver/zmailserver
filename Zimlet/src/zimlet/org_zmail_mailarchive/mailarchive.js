@@ -34,7 +34,7 @@ ZmArchiveZimlet.prototype.init =
 		};
 
 /**
- * (Implemented w/in com_zimbra_archive Zimlet)
+ * (Implemented w/in org_zmail_archive Zimlet)
  * Add a new function to ZmListController that basically moves selected items to archive folder
  * @param archiveFolder ZmMailFolder Folder where mail items should be moved to Archive
  */
@@ -48,7 +48,7 @@ ZmListController.prototype._doArchiveViaZimlet =
 		};
 
 /**
- * Listens to Archive Button  (Implemented w/in com_zimbra_archive Zimlet)
+ * Listens to Archive Button  (Implemented w/in org_zmail_archive Zimlet)
  * @param zimlet ZmZimlet This Zimlet or any Zimlet that implements getArchiveFolder method
  *							 getArchiveFolder function must return folder where we should Archive
  * @param ev
@@ -64,10 +64,10 @@ ZmListController.prototype._archiveViaZimletListener =
 //subfolder of "Archive" folder. This is mainly useful in ZD But, currently ZD doesnot support cross-account
 //folder-move, so commenting until its supported.
 /**
- * (Implemented w/in com_zimbra_archive Zimlet)
+ * (Implemented w/in org_zmail_archive Zimlet)
  * Add a new function to ZmTreeController that basically moves selected folder under archive folder
  * called "Archived" folder
- * Note: "Archived" is under Local account in Zimbra Desktop
+ * Note: "Archived" is under Local account in Zmail Desktop
 
  ZmTreeController.prototype._doArchiveFolderViaZimlet =
  function(archiveFolder) {
@@ -79,7 +79,7 @@ ZmListController.prototype._archiveViaZimletListener =
  };
 
  /**
- * (Implemented w/in com_zimbra_archive Zimlet)
+ * (Implemented w/in org_zmail_archive Zimlet)
  * Listens to "Archive" menu item
  * @param zimlet ZmZimlet This Zimlet or any Zimlet that implements getArchiveFolder method
  *							 getArchiveFolder function must return folder where we should Archive
@@ -110,7 +110,7 @@ ZmArchiveZimlet.prototype.onParticipantActionMenuInitialized =
 			this.onActionMenuInitialized(controller, menu);
 		};
 
-//called by zimbra-core when menu is initialized
+//called by zmail-core when menu is initialized
 ZmArchiveZimlet.prototype.onActionMenuInitialized =
 		function(controller, menu) {
 			this._hideMenuBtn(controller, menu);
@@ -172,7 +172,7 @@ ZmArchiveZimlet.prototype.getArchiveFolder =
 				}
 				return;
 			}
-			var soapDoc = AjxSoapDoc.create("GetFolderRequest", "urn:zimbraMail");
+			var soapDoc = AjxSoapDoc.create("GetFolderRequest", "urn:zmailMail");
 			var folderNode = soapDoc.set("folder");
 			folderNode.setAttribute("l", "1");
 
@@ -227,7 +227,7 @@ ZmArchiveZimlet.prototype.createFolder =
 
 ZmArchiveZimlet.prototype._createFolder =
 		function(params) {
-			var jsonObj = {CreateFolderRequest:{_jsns:"urn:zimbraMail"}};
+			var jsonObj = {CreateFolderRequest:{_jsns:"urn:zmailMail"}};
 			var folder = jsonObj.CreateFolderRequest.folder = {};
 			for (var i in params) {
 				if (i == "callback" || i == "errorCallback" || i == "postCallback") {

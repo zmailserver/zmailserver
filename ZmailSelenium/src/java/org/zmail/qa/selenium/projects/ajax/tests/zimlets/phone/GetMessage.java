@@ -14,18 +14,18 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.zimlets.phone;
+package org.zmail.qa.selenium.projects.ajax.tests.zimlets.phone;
 
 import java.io.File;
 import java.util.*;
 
 import org.testng.annotations.*;
 
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.DisplayMail;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.DisplayMail.Field;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.DisplayMail;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.DisplayMail.Field;
 
 
 public class GetMessage extends AjaxCommonTest {
@@ -40,7 +40,7 @@ public class GetMessage extends AjaxCommonTest {
 
 		// Basic settings
 		super.startingAccountPreferences = new HashMap<String, String>() {{
-		    put("zimbraPrefGroupMailBy", "message");
+		    put("zmailPrefGroupMailBy", "message");
 		}};
 
 
@@ -52,13 +52,13 @@ public class GetMessage extends AjaxCommonTest {
 	public void GetMessage_01() throws HarnessException {
 		
 		// Create the message data to be sent
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
 		String phonenumber = "1-877-486-9273";
-		String body = "text " + System.getProperty("line.separator") + phonenumber + System.getProperty("line.separator") + "text"+ ZimbraSeleniumProperties.getUniqueString() + System.getProperty("line.separator") ;
+		String body = "text " + System.getProperty("line.separator") + phonenumber + System.getProperty("line.separator") + "text"+ ZmailSeleniumProperties.getUniqueString() + System.getProperty("line.separator") ;
 		
 		// Send the message from AccountA to the ZWC user
-		ZimbraAccount.AccountA().soapSend(
-					"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+		ZmailAccount.AccountA().soapSend(
+					"<SendMsgRequest xmlns='urn:zmailMail'>" +
 						"<m>" +
 							"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 							"<su>"+ subject +"</su>" +
@@ -81,9 +81,9 @@ public class GetMessage extends AjaxCommonTest {
 		HtmlElement bodyElement = display.zGetMailPropertyAsHtml(Field.Body);
 		
 		// Verify that the phone zimlet has been applied
-		// <a href="callto:1-877-486-9273" onclick="window.top.Com_Zimbra_Phone.unsetOnbeforeunload()">1-877-486-9273</a>
+		// <a href="callto:1-877-486-9273" onclick="window.top.Com_Zmail_Phone.unsetOnbeforeunload()">1-877-486-9273</a>
 		HtmlElement.evaluate(bodyElement, "//a[@href='callto:1-877-486-9273']", null, (String)null, 1);
-		HtmlElement.evaluate(bodyElement, "//a[@href='callto:1-877-486-9273']", "onclick", "window.top.Com_Zimbra_Phone.unsetOnbeforeunload()", 1);
+		HtmlElement.evaluate(bodyElement, "//a[@href='callto:1-877-486-9273']", "onclick", "window.top.Com_Zmail_Phone.unsetOnbeforeunload()", 1);
 		HtmlElement.evaluate(bodyElement, "//a[@href='callto:1-877-486-9273']", null, "1-877-486-9273", 1);
 
 	}
@@ -94,14 +94,14 @@ public class GetMessage extends AjaxCommonTest {
 	public void GetMessage_02() throws HarnessException {
 		
 		// Create the message data to be sent
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
 		String phonenumber1 = "1-877-486-9273";
 		String phonenumber2 = "1-877-555-9273";
 		String body = "phone1: " + phonenumber1 + " phone2: "+ phonenumber2;
 		
 		// Send the message from AccountA to the ZWC user
-		ZimbraAccount.AccountA().soapSend(
-					"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+		ZmailAccount.AccountA().soapSend(
+					"<SendMsgRequest xmlns='urn:zmailMail'>" +
 						"<m>" +
 							"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 							"<su>"+ subject +"</su>" +
@@ -124,12 +124,12 @@ public class GetMessage extends AjaxCommonTest {
 		HtmlElement bodyElement = display.zGetMailPropertyAsHtml(Field.Body);
 		
 		// Verify that the phone zimlet has been applied
-		// <a href="callto:1-877-486-9273" onclick="window.top.Com_Zimbra_Phone.unsetOnbeforeunload()">1-877-486-9273</a>
+		// <a href="callto:1-877-486-9273" onclick="window.top.Com_Zmail_Phone.unsetOnbeforeunload()">1-877-486-9273</a>
 		HtmlElement.evaluate(bodyElement, "//a[@href='callto:"+ phonenumber1 +"']", null, (String)null, 1);
-		HtmlElement.evaluate(bodyElement, "//a[@href='callto:"+ phonenumber1 +"']", "onclick", "window.top.Com_Zimbra_Phone.unsetOnbeforeunload()", 1);
+		HtmlElement.evaluate(bodyElement, "//a[@href='callto:"+ phonenumber1 +"']", "onclick", "window.top.Com_Zmail_Phone.unsetOnbeforeunload()", 1);
 		HtmlElement.evaluate(bodyElement, "//a[@href='callto:"+ phonenumber1 +"']", null, phonenumber1, 1);
 		HtmlElement.evaluate(bodyElement, "//a[@href='callto:"+ phonenumber2 +"']", null, (String)null, 1);
-		HtmlElement.evaluate(bodyElement, "//a[@href='callto:"+ phonenumber2+"']", "onclick", "window.top.Com_Zimbra_Phone.unsetOnbeforeunload()", 1);
+		HtmlElement.evaluate(bodyElement, "//a[@href='callto:"+ phonenumber2+"']", "onclick", "window.top.Com_Zmail_Phone.unsetOnbeforeunload()", 1);
 		HtmlElement.evaluate(bodyElement, "//a[@href='callto:"+ phonenumber2 +"']", null, phonenumber2, 1);
 
 	}
@@ -141,7 +141,7 @@ public class GetMessage extends AjaxCommonTest {
 	public void GetMessage_03() throws HarnessException {
 
 		final String subject = "subject12977323015009";
-		final String mime = ZimbraSeleniumProperties.getBaseDirectory() + "/data/public/mime/email01/en_us_valid_phone.txt";
+		final String mime = ZmailSeleniumProperties.getBaseDirectory() + "/data/public/mime/email01/en_us_valid_phone.txt";
 		
 		// Inject the example message
 		LmtpInject.injectFile(app.zGetActiveAccount().EmailAddress, new File(mime));
@@ -165,12 +165,12 @@ public class GetMessage extends AjaxCommonTest {
 		{
 			put("//a[@href='callto:1-877-486-9273']",				"1-877-486-9273");
 			put("//a[@href='callto:877-486-9273']",					"877-486-9273");
-			put("//a[@href='callto:%28877%29%20456-7890']",			"(877) 456-7890");		// http://bugzilla.zimbra.com/show_bug.cgi?id=67424
+			put("//a[@href='callto:%28877%29%20456-7890']",			"(877) 456-7890");		// http://bugzilla.zmail.com/show_bug.cgi?id=67424
 			put("//a[@href='callto:6503501010']",					"6503501010");
-			put("//a[@href='callto:+1%20650%20350%201010']",		"+1 650 350 1010");		// http://bugzilla.zimbra.com/show_bug.cgi?id=52337#c15
+			put("//a[@href='callto:+1%20650%20350%201010']",		"+1 650 350 1010");		// http://bugzilla.zmail.com/show_bug.cgi?id=52337#c15
 			put("//a[@href='callto:650.350.1010']",					"650.350.1010");
-			put("//a[@href='callto:%28650%29%20350%201010']",		"(650) 350 1010");		// http://bugzilla.zimbra.com/show_bug.cgi?id=67424
-			put("//a[@href='callto:+1%20%28650%29%20350%201010']",	"+1 (650) 350 1010");	// http://bugzilla.zimbra.com/show_bug.cgi?id=52337#c15
+			put("//a[@href='callto:%28650%29%20350%201010']",		"(650) 350 1010");		// http://bugzilla.zmail.com/show_bug.cgi?id=67424
+			put("//a[@href='callto:+1%20%28650%29%20350%201010']",	"+1 (650) 350 1010");	// http://bugzilla.zmail.com/show_bug.cgi?id=52337#c15
 			put("//a[@href='callto:1-650-350-1010']",				"1-650-350-1010");
 		}};
 
@@ -179,10 +179,10 @@ public class GetMessage extends AjaxCommonTest {
 			String value = entry.getValue();
 			
 			// Verify that the phone zimlet has been applied
-			// <a href="callto:1-877-486-9273" onclick="window.top.Com_Zimbra_Phone.unsetOnbeforeunload()">1-877-486-9273</a>
+			// <a href="callto:1-877-486-9273" onclick="window.top.Com_Zmail_Phone.unsetOnbeforeunload()">1-877-486-9273</a>
 			
 			HtmlElement.evaluate(bodyElement, xpath, null, (String)null, 1);
-			HtmlElement.evaluate(bodyElement, xpath, "onclick", "window.top.Com_Zimbra_Phone.unsetOnbeforeunload()", 1);
+			HtmlElement.evaluate(bodyElement, xpath, "onclick", "window.top.Com_Zmail_Phone.unsetOnbeforeunload()", 1);
 			HtmlElement.evaluate(bodyElement, xpath, null, value, 1);
 		}
 
@@ -194,7 +194,7 @@ public class GetMessage extends AjaxCommonTest {
 	public void GetMessage_04() throws HarnessException {
 
 		final String subject = "subject12977323025009";
-		final String mime = ZimbraSeleniumProperties.getBaseDirectory() + "/data/public/mime/email01/en_us_invalid_phone.txt";
+		final String mime = ZmailSeleniumProperties.getBaseDirectory() + "/data/public/mime/email01/en_us_invalid_phone.txt";
 		
 		// Inject the example message
 		LmtpInject.injectFile(app.zGetActiveAccount().EmailAddress, new File(mime));
@@ -227,12 +227,12 @@ public class GetMessage extends AjaxCommonTest {
 		
 
 		// Verify that the phone zimlet is NOT applied
-		// <a href="callto:1-877-486-9273" onclick="window.top.Com_Zimbra_Phone.unsetOnbeforeunload()">1-877-486-9273</a>
+		// <a href="callto:1-877-486-9273" onclick="window.top.Com_Zmail_Phone.unsetOnbeforeunload()">1-877-486-9273</a>
 		for (Map.Entry<String, String> entry : phonenumbers.entrySet()) {
 			String xpath = entry.getKey();
 			
 			// Verify that the phone zimlet has been applied
-			// <a href="callto:1-877-486-9273" onclick="window.top.Com_Zimbra_Phone.unsetOnbeforeunload()">1-877-486-9273</a>
+			// <a href="callto:1-877-486-9273" onclick="window.top.Com_Zmail_Phone.unsetOnbeforeunload()">1-877-486-9273</a>
 			HtmlElement.evaluate(bodyElement, xpath, null, (String)null, 0);
 		}
 
@@ -248,13 +248,13 @@ public class GetMessage extends AjaxCommonTest {
 		String subject = "subject " + phonenumber;
 		
 		// Send the message from AccountA to the ZWC user
-		ZimbraAccount.AccountA().soapSend(
-					"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+		ZmailAccount.AccountA().soapSend(
+					"<SendMsgRequest xmlns='urn:zmailMail'>" +
 						"<m>" +
 							"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 							"<su>"+ subject +"</su>" +
 							"<mp ct='text/plain'>" +
-								"<content>content"+ ZimbraSeleniumProperties.getUniqueString() +"</content>" +
+								"<content>content"+ ZmailSeleniumProperties.getUniqueString() +"</content>" +
 							"</mp>" +
 						"</m>" +
 					"</SendMsgRequest>");
@@ -269,7 +269,7 @@ public class GetMessage extends AjaxCommonTest {
 		SleepUtil.sleep(5000);
 		
 		// Find the subject and the phone span
-		String locator = "css=span[id$='_com_zimbra_phone']";
+		String locator = "css=span[id$='_org_zmail_phone']";
 		
 		ZAssert.assertTrue(display.sIsElementPresent(locator), "Verify the phone zimlet applies to the subject");
 		ZAssert.assertEquals(display.sGetText(locator), phonenumber, "Verify the phone zimlet highlights the phone number");

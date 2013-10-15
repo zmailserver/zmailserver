@@ -12,16 +12,16 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.ldaputils;
+package org.zmail.ldaputils;
 
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.service.admin.AdminDocumentHandler;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.LDAPUtilsConstants;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.service.admin.AdminDocumentHandler;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.LDAPUtilsConstants;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.soap.ZmailSoapContext;
 
 /**
  * @author Greg Solovyev
@@ -30,12 +30,12 @@ public class DeleteLDAPEntry extends AdminDocumentHandler {
 
     public Element handle(Element request, Map<String, Object> context)
     throws ServiceException {
-        ZimbraSoapContext lc = getZimbraSoapContext(context);
+        ZmailSoapContext lc = getZmailSoapContext(context);
         String dn = request.getAttribute(LDAPUtilsConstants.E_DN);
 
         LDAPUtilsHelper.getInstance().deleteLDAPEntry(dn);
 
-        ZimbraLog.security.info(ZimbraLog.encodeAttrs(
+        ZmailLog.security.info(ZmailLog.encodeAttrs(
                 new String[] {"cmd", "DeleteLDAPEntry","dn", dn}));
 
         Element response = lc.createElement(LDAPUtilsConstants.DELETE_LDAP_ENTRY_RESPONSE);

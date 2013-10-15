@@ -22,7 +22,7 @@ ZmSurveyZimlet.INITIAL_WAIT_DAYS = "ZmSurveyZimlet_InitialWaitDays";
 ZmSurveyZimlet.REMIND_ME_IN_DAYS = "ZmSurveyZimlet_RemindMeInDays";
 ZmSurveyZimlet.IS_DONT_ASK_ME_AGAIN_SET = "ZmSurveyZimlet_IsDontAskMeAgainSet";
 ZmSurveyZimlet.SURVEY_TAKEN = "ZmSurveyZimlet_SurveyTaken";
-ZmSurveyZimlet.SURVEY_FOR_ZIMBRA_VERSION = "ZmSurveyZimlet_SurveyForZimbraVersion";
+ZmSurveyZimlet.SURVEY_FOR_ZIMBRA_VERSION = "ZmSurveyZimlet_SurveyForZmailVersion";
 
 ZmSurveyZimlet.SURVEY_URL = "ZmSurveyZimlet_SurveyURL";
 
@@ -51,7 +51,7 @@ function() {
 };
 
 /**
- * Invalidate all the settings if its a new Zimbra version
+ * Invalidate all the settings if its a new Zmail version
  * 
  */
 ZmSurveyZimlet.prototype._resetZimletOnNewVersion = function() {

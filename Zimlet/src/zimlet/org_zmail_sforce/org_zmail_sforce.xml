@@ -14,9 +14,9 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_sforce"
+<zimlet name="org_zmail_sforce"
         version="3.4"
-        description="Connects Zimbra to Salesforce">
+        description="Connects Zmail to Salesforce">
     <contentObject>
         <matchOn>
             <regex attrs="ig">(?:(?:\bCase(?:)?:?\s*#?))(\d+)\b</regex>
@@ -34,7 +34,7 @@
     <include>model/sforceObject.js</include>
     <include>widgets/sforceSearchDlg.js</include>
     <includeCSS>sforce.css</includeCSS>
-    <handlerObject>Com_Zimbra_SForce</handlerObject>
+    <handlerObject>Com_Zmail_SForce</handlerObject>
 
     <zimletPanelItem label="Salesforce" icon="SFORCE-panelIcon">
         <contextMenu>
@@ -45,7 +45,7 @@
     </zimletPanelItem>
 
     <userProperties>
-        <property type="string" name="sforce_ignoreDomainsList" value="zimbra.com,vmware.com"/>
+        <property type="string" name="sforce_ignoreDomainsList" value="zmail.com,vmware.com"/>
         <property type="string" name="sforce_logindlg_sbarShowOnlyOnResult" value= "false" />
         <property type="string" name="sforce_logindlg_showSendAndAddBtn" value= "true" />
         <property type="string" name="sforce_linkNamesInSalesForceStartsWith" value= "Link_to_" />

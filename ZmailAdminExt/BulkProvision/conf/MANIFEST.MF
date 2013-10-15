@@ -1,4 +1,4 @@
-Zimbra-Extension-Class: com.zimbra.bp.ZimbraBulkProvisionExt
+Zmail-Extension-Class: org.zmail.bp.ZmailBulkProvisionExt
 
 
 

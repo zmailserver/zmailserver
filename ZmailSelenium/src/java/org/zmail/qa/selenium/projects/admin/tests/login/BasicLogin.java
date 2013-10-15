@@ -14,15 +14,15 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.admin.tests.login;
+package org.zmail.qa.selenium.projects.admin.tests.login;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAdminAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.admin.core.AdminCommonTest;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAdminAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.admin.core.AdminCommonTest;
 
 
 public class BasicLogin extends AdminCommonTest {
@@ -53,7 +53,7 @@ public class BasicLogin extends AdminCommonTest {
 	public void BasicLogin02() throws HarnessException {
 		
 		// Create a new AdminAccount
-		ZimbraAdminAccount account = new ZimbraAdminAccount("admin"+ ZimbraSeleniumProperties.getUniqueString() + "@" + ZimbraSeleniumProperties.getStringProperty("testdomain"));
+		ZmailAdminAccount account = new ZmailAdminAccount("admin"+ ZmailSeleniumProperties.getUniqueString() + "@" + ZmailSeleniumProperties.getStringProperty("testdomain"));
 		account.provision();
 		account.authenticate();
 		

@@ -16,7 +16,7 @@
 /**
  * 
  */
-com_zimbra_example_dynamictab_EditTabsDialog = function(shell,zimletBase) {
+org_zmail_example_dynamictab_EditTabsDialog = function(shell,zimletBase) {
 	
 	this._tabManager = zimletBase.getTabManager();
 	
@@ -66,14 +66,14 @@ com_zimbra_example_dynamictab_EditTabsDialog = function(shell,zimletBase) {
 
 };
 
-com_zimbra_example_dynamictab_EditTabsDialog.prototype = new ZmDialog;
-com_zimbra_example_dynamictab_EditTabsDialog.prototype.constructor = com_zimbra_example_dynamictab_EditTabsDialog;
+org_zmail_example_dynamictab_EditTabsDialog.prototype = new ZmDialog;
+org_zmail_example_dynamictab_EditTabsDialog.prototype.constructor = org_zmail_example_dynamictab_EditTabsDialog;
 
 /**
  * Creates the dialog view.
  * 
  */
-com_zimbra_example_dynamictab_EditTabsDialog.prototype._createDialogView =
+org_zmail_example_dynamictab_EditTabsDialog.prototype._createDialogView =
 function() {
 
 	var elId = this.getHTMLElId();
@@ -96,13 +96,13 @@ function() {
 			editForm_action: this.elementId_editForm_action
 		};
 
-	return	AjxTemplate.expand("com_zimbra_example_dynamictab.templates.Dialogs#EditTabs-Main", subs);
+	return	AjxTemplate.expand("org_zmail_example_dynamictab.templates.Dialogs#EditTabs-Main", subs);
 };
 
 /**
  * 
  */
-com_zimbra_example_dynamictab_EditTabsDialog.prototype._addTabButton =
+org_zmail_example_dynamictab_EditTabsDialog.prototype._addTabButton =
 function() {
 
 	var row = this.editForm_dynamicTabButtonTable.insertRow(-1);
@@ -118,10 +118,10 @@ function() {
 /**
  * 
  */
-com_zimbra_example_dynamictab_EditTabsDialog.prototype._addTabListener =
+org_zmail_example_dynamictab_EditTabsDialog.prototype._addTabListener =
 function(params) {
 
-	var tabId = com_zimbra_example_dynamictab_Util.generateUniqueID(10);
+	var tabId = org_zmail_example_dynamictab_Util.generateUniqueID(10);
 	var tabLabel_value = "";
 	var tabToolTip_value = "";
 	var tabUrl_value = "";
@@ -156,7 +156,7 @@ function(params) {
 		tabUrl_value: tabUrl_value
 	};
 	
-	cell.innerHTML = AjxTemplate.expand("com_zimbra_example_dynamictab.templates.Dialogs#EditTabs-AddTab", subs);
+	cell.innerHTML = AjxTemplate.expand("org_zmail_example_dynamictab.templates.Dialogs#EditTabs-AddTab", subs);
 
 	var removeEl = document.getElementById(removeLinkId);
 	removeEl.onclick = AjxCallback.simpleClosure(this._removeTabListener, this, row, tabId);
@@ -171,7 +171,7 @@ function(params) {
  * @param	{String}	input	the input field name
  * @return	{String}	the element id
  */
-com_zimbra_example_dynamictab_EditTabsDialog.prototype._createTabElementId =
+org_zmail_example_dynamictab_EditTabsDialog.prototype._createTabElementId =
 function(tabId,parentId,input) {
 	var elementId = new Array();
 	var i=0;
@@ -190,7 +190,7 @@ function(tabId,parentId,input) {
  * @param	{Object}	row		the row to remove
  * @param	{String}	tabId	the id of the tab to remove
  */
-com_zimbra_example_dynamictab_EditTabsDialog.prototype._removeTabListener =
+org_zmail_example_dynamictab_EditTabsDialog.prototype._removeTabListener =
 function(row,tabId) {
 
 	this._removeTabIdToTabIdList(tabId);
@@ -202,7 +202,7 @@ function(row,tabId) {
  * Cancel button listener.
  * 
  */
-com_zimbra_example_dynamictab_EditTabsDialog.prototype._cancelButtonListener =
+org_zmail_example_dynamictab_EditTabsDialog.prototype._cancelButtonListener =
 function() {
 	this.popdown();
 	this.dispose();
@@ -211,7 +211,7 @@ function() {
 /**
  * OK button listener.
  */
-com_zimbra_example_dynamictab_EditTabsDialog.prototype._okButtonListener =
+org_zmail_example_dynamictab_EditTabsDialog.prototype._okButtonListener =
 function() {
 
 	var tabIdArray = this._getTabIdListArray();
@@ -251,13 +251,13 @@ function() {
  * @param	{String}	tabId		the tab id to add
  * @return	{Array}		the resulting tab id list array
  */
-com_zimbra_example_dynamictab_EditTabsDialog.prototype._addTabIdToTabIdList =
+org_zmail_example_dynamictab_EditTabsDialog.prototype._addTabIdToTabIdList =
 function(tabId) {
 	var tabIdArray = this._getTabIdListArray();
 	tabIdArray.push(tabId);
 
 	var tabIdListElement = document.getElementById(this.elementId_editForm_tabIdList_input);
-	tabIdListElement.value = tabIdArray.join(com_zimbra_example_dynamictab_HandlerObject.TAB_ID_LIST_SEPARATOR);
+	tabIdListElement.value = tabIdArray.join(org_zmail_example_dynamictab_HandlerObject.TAB_ID_LIST_SEPARATOR);
 
 	return	tabIdArray;
 }
@@ -268,7 +268,7 @@ function(tabId) {
  * @param	{String}	tabId		the tab id to add
  * @return	{Array}		the resulting tab id list array
  */
-com_zimbra_example_dynamictab_EditTabsDialog.prototype._removeTabIdToTabIdList =
+org_zmail_example_dynamictab_EditTabsDialog.prototype._removeTabIdToTabIdList =
 function(tabId) {
 	var tabIdArray = this._getTabIdListArray();
 	
@@ -282,7 +282,7 @@ function(tabId) {
 	}
 
 	var tabIdListElement = document.getElementById(this.elementId_editForm_tabIdList_input);
-	tabIdListElement.value = tabIdArray.join(com_zimbra_example_dynamictab_HandlerObject.TAB_ID_LIST_SEPARATOR);
+	tabIdListElement.value = tabIdArray.join(org_zmail_example_dynamictab_HandlerObject.TAB_ID_LIST_SEPARATOR);
 
 	return	tabIdArray;
 }
@@ -292,11 +292,11 @@ function(tabId) {
  * 
  * @return	{Array}		an array
  */
-com_zimbra_example_dynamictab_EditTabsDialog.prototype._getTabIdListArray =
+org_zmail_example_dynamictab_EditTabsDialog.prototype._getTabIdListArray =
 function() {
 	var tabIdListElement = document.getElementById(this.elementId_editForm_tabIdList_input);
 	if (tabIdListElement.value == null || tabIdListElement.value.length <= 0)
 		return	new Array();
 	
-	return	tabIdListElement.value.split(com_zimbra_example_dynamictab_TabManager.TAB_ID_LIST_SEPARATOR);
+	return	tabIdListElement.value.split(org_zmail_example_dynamictab_TabManager.TAB_ID_LIST_SEPARATOR);
 }

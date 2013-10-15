@@ -14,13 +14,13 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_ycurrency"
+<zimlet name="org_zmail_ycurrency"
         version="1.6"
         label="${msg.label}"
         description="${msg.description}">
     <include>ycurrency.js</include>
     <includeCSS>ycurrency.css</includeCSS>
-    <handlerObject>Com_Zimbra_YCurrency_HandlerObject</handlerObject>
+    <handlerObject>Com_Zmail_YCurrency_HandlerObject</handlerObject>
     <contentObject>
         <contextMenu>
             <menuItem label="${msg.YCurrencyZimlet_convert}" id="CONVERT"/>

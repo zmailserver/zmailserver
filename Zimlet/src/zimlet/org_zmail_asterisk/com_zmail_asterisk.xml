@@ -14,14 +14,14 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_asterisk" version="1.0" description="Place a telephone call using Asterisk">
+<zimlet name="org_zmail_asterisk" version="1.0" description="Place a telephone call using Asterisk">
 	<summary>
 		This zimlet provides an interface to an Asterisk PBX.
 	</summary>
 	<include>asterisk.js</include>
 	<includeCSS>asterisk.css</includeCSS>
 	<resource>asterisk.gif</resource>
-	<handlerObject>Com_Zimbra_Asterisk</handlerObject>
+	<handlerObject>Com_Zmail_Asterisk</handlerObject>
 	<contentObject type="Asterisk">
 		<matchOn>
 			<regex attrs="ig">(^|\W)(?:(?:\(\d{3}\)[-_.\s]?|\d-?\d{3}[-_.\s]?))?\d{3}[-_.\s]\d{4}(\W|$)</regex>

@@ -12,8 +12,8 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
 -->
-<%@ page import="java.io.*,java.util.*,javax.naming.*,com.zimbra.cs.taglib.bean.BeanUtils"
-%><%@ taglib prefix="zm" uri="com.zimbra.zm" %><%!
+<%@ page import="java.io.*,java.util.*,javax.naming.*,org.zmail.cs.taglib.bean.BeanUtils"
+%><%@ taglib prefix="zm" uri="org.zmail.zm" %><%!
 	//
 	// Constants
 	//
@@ -126,8 +126,8 @@ else {
 //			data =
 //				"<soap:Envelope xmlns:soap=\"http://www.w3.org/2003/05/soap-envelope\">"+
 //					"<soap:Header>"+
-//						"<context xmlns=\"urn:zimbra\">"+
-//							"<userAgent xmlns=\"\" name=\"ZimbraWebClient - FF3.0 (Mac)\" version=\"0.0\"/>"+
+//						"<context xmlns=\"urn:zmail\">"+
+//							"<userAgent xmlns=\"\" name=\"ZmailWebClient - FF3.0 (Mac)\" version=\"0.0\"/>"+
 //							"<sessionId xmlns=\"\" id=\"113\"/>"+
 //							"<account xmlns=\"\" by=\"name\">user1@localhost</account>"+
 //							"<format xmlns=\"\" type=\"js\"/>"+
@@ -138,7 +138,7 @@ else {
 //						"</context>"+
 //					"</soap:Header>"+
 //					"<soap:Body>"+
-//						"<NoOpRequest xmlns=\"urn:zimbraMail\"/>" +
+//						"<NoOpRequest xmlns=\"urn:zmailMail\"/>" +
 //					"</soap:Body>" +
 //				"</soap:Envelope>"
 //			;

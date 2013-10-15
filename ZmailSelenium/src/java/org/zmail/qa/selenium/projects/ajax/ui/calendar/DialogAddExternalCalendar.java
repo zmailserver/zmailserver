@@ -14,14 +14,14 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.ui.calendar;
+package org.zmail.qa.selenium.projects.ajax.ui.calendar;
 /**
  * 
  */
 
 
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
 
 /**
  * Represents a "Confirmation" dialog box
@@ -125,7 +125,7 @@ public class DialogAddExternalCalendar extends AbsDialog {
 	public boolean zIsActive() throws HarnessException {
 		logger.info(myPageName() + " zIsActive()");
 
-		// See https://bugzilla.zimbra.com/show_bug.cgi?id=66576 
+		// See https://bugzilla.zmail.com/show_bug.cgi?id=66576 
 		String locator = Locators.DialogDivCss;
 
 		if (!this.sIsElementPresent(locator)) {

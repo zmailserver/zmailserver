@@ -13,20 +13,20 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.taglib.tag.voice;
+package org.zmail.cs.taglib.tag.voice;
 
-import com.zimbra.cs.taglib.tag.ZimbraSimpleTag;
-import com.zimbra.cs.taglib.bean.ZActionResultBean;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.VoiceConstants;
+import org.zmail.cs.taglib.tag.ZmailSimpleTag;
+import org.zmail.cs.taglib.bean.ZActionResultBean;
+import org.zmail.client.ZMailbox;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.VoiceConstants;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 import java.io.IOException;
 
-public class UntrashVoiceMailTag extends ZimbraSimpleTag {
+public class UntrashVoiceMailTag extends ZmailSimpleTag {
 
     private String mId;
     private String mPhone;

@@ -14,15 +14,15 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.addressbook.folders;
+package org.zmail.qa.selenium.projects.ajax.tests.addressbook.folders;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.addressbook.DialogCreateFolder;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.addressbook.DialogCreateFolder;
 
 public class CreateFolder extends AjaxCommonTest {
 
@@ -46,7 +46,7 @@ public class CreateFolder extends AjaxCommonTest {
 		//-- Data
 		
 		// Folder name 
-		String folderName = "folder" + ZimbraSeleniumProperties.getUniqueString();
+		String folderName = "folder" + ZmailSeleniumProperties.getUniqueString();
 
 		
 		//-- GUI
@@ -83,7 +83,7 @@ public class CreateFolder extends AjaxCommonTest {
 		FolderItem folderItem = FolderItem.importFromSOAP(app.zGetActiveAccount(), FolderItem.SystemFolder.UserRoot);
 
 		// Folder name 
-		String folderName = "folder" + ZimbraSeleniumProperties.getUniqueString();
+		String folderName = "folder" + ZmailSeleniumProperties.getUniqueString();
 
 		
 		//-- GUI
@@ -119,7 +119,7 @@ public class CreateFolder extends AjaxCommonTest {
 		FolderItem folderItem = FolderItem.importFromSOAP(app.zGetActiveAccount(), FolderItem.SystemFolder.Contacts);
 
 		// Folder name 
-		String folderName = "folder" + ZimbraSeleniumProperties.getUniqueString();
+		String folderName = "folder" + ZmailSeleniumProperties.getUniqueString();
 
 		
 		//-- GUI
@@ -152,7 +152,7 @@ public class CreateFolder extends AjaxCommonTest {
 		//-- Data
 		
 		// Folder name 
-		String folderName = "folder" + ZimbraSeleniumProperties.getUniqueString();
+		String folderName = "folder" + ZmailSeleniumProperties.getUniqueString();
 
 		
 		//-- GUI

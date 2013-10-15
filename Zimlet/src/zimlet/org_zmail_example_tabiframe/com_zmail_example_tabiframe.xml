@@ -14,9 +14,9 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_example_tabiframe"
+<zimlet name="org_zmail_example_tabiframe"
         version="1.0"
         description="Demos a tab that loads an iframe">
-	<include>com_zimbra_example_tabiframe.js</include>
-	<handlerObject>com_zimbra_example_tabiframe_HandlerObject</handlerObject>
+	<include>org_zmail_example_tabiframe.js</include>
+	<handlerObject>org_zmail_example_tabiframe_HandlerObject</handlerObject>
 </zimlet>

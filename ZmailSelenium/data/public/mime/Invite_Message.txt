@@ -31,13 +31,13 @@ Received: from zqa-062.eng.vmware.com (zqa-062.eng.vmware.com [10.137.244.62])
 Date: Mon, 8 Apr 2013 01:24:01 -0700 (PDT)
 From: admin@zqa-062.eng.vmware.com
 To: girish1 <girish1@zqa-062.eng.vmware.com>
-Message-ID: <158081883.13.1365409441378.JavaMail.zimbra@zqa-062.eng.vmware.com>
+Message-ID: <158081883.13.1365409441378.JavaMail.zmail@zqa-062.eng.vmware.com>
 Subject: Test Edit Reply
 MIME-Version: 1.0
 Content-Type: multipart/alternative; 
 	boundary="----=_Part_12_1014145046.1365409441376"
 X-Originating-IP: [10.112.205.146]
-X-Mailer: Zimbra 9.0.0_BETA1_1691 (ZimbraWebClient - IE9 (Win)/9.0.0_BETA1_1691)
+X-Mailer: Zmail 9.0.0_BETA1_1691 (ZmailWebClient - IE9 (Win)/9.0.0_BETA1_1691)
 Thread-Topic: Test Edit Reply
 Thread-Index: OKCmshICVaCZNqwK7EJGhbw68ZPtqA==
 
@@ -63,7 +63,7 @@ Content-Type: text/calendar; charset=utf-8; method=REQUEST; name=meeting.ics
 Content-Transfer-Encoding: 7bit
 
 BEGIN:VCALENDAR
-PRODID:Zimbra-Calendar-Provider
+PRODID:Zmail-Calendar-Provider
 VERSION:2.0
 METHOD:REQUEST
 BEGIN:VTIMEZONE

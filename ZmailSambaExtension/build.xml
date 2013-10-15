@@ -1,33 +1,33 @@
-<project name="ZimbraSamba" default="deploy">
+<project name="ZmailSamba" default="deploy">
 	<property environment="env"/>
 	
-	<!-- set up dependency on ZimbraServer -->
-	<condition property="zimbraServer.dir" value="${env.ZIMBRASERVER_DIR}">
+	<!-- set up dependency on ZmailServer -->
+	<condition property="zmailServer.dir" value="${env.ZIMBRASERVER_DIR}">
 	    <isset property="env.ZIMBRASERVER_DIR" />
 	</condition>	
-	<condition property="zimbraServer.dir" value="../ZimbraServer">
+	<condition property="zmailServer.dir" value="../ZmailServer">
 	    <not><isset property="env.ZIMBRASERVER_DIR"/></not>
 	</condition>
 		
-	<property name="jar.file" value="zimbrasamba.jar" />
+	<property name="jar.file" value="zmailsamba.jar" />
 	<property name="config.dir" location="conf" />	
 	<property name="src.dir" location="src" />
 	<property name="src.java.dir" location="${src.dir}/java" />
 	<property name="src.schema.dir" location="${src.dir}/schema" />	
-	<property name="src.zimlet.dir" location="${src.dir}/admin_extension/zimbra_samba" />
+	<property name="src.zimlet.dir" location="${src.dir}/admin_extension/zmail_samba" />
 	
 	<property name="build.dir" location="build" />
 	<property name="build.classes.dir" location="${build.dir}/classes" />
 	<property name="build.zimlet.dir" location="${build.dir}/zimlet" />
 
-	<property name="common.dir" location="../ZimbraCommon" />
+	<property name="common.dir" location="../ZmailCommon" />
 	<property name="common.classes.dir" location="${common.dir}/build/classes" />
 	<property name="common.jars.dir" location="${common.dir}/jars" />
 
 
-	<property name="zimbra.home.dir" location="/opt/zimbra" />	
+	<property name="zmail.home.dir" location="/opt/zmail" />	
 		
-	<property name="zimbrasamba.deploy.dir" location="${zimbra.home.dir}/lib/ext/zimbrasamba"/>
+	<property name="zmailsamba.deploy.dir" location="${zmail.home.dir}/lib/ext/zmailsamba"/>
 	
 	
 	<condition property="is-windows"><os family="windows"/></condition>
@@ -59,18 +59,18 @@
 
 	<property environment="env"/>
 	
-	<!-- set up dependency on ZimbraServer -->
-	<condition property="zimbraServer.dir" value="${env.ZIMBRASERVER_DIR}">
+	<!-- set up dependency on ZmailServer -->
+	<condition property="zmailServer.dir" value="${env.ZIMBRASERVER_DIR}">
 	    <isset property="env.ZIMBRASERVER_DIR" />
 	</condition>	
-	<condition property="zimbraServer.dir" value="../ZimbraServer">
+	<condition property="zmailServer.dir" value="../ZmailServer">
 	    <not><isset property="env.ZIMBRASERVER_DIR"/></not>
 	</condition>	
 
 	<path id="class.path">
 		<pathelement location="${common.classes.dir}" />
 		<pathelement location="${build.classes.dir}" />
-		<pathelement location="${zimbraServer.dir}/build/classes"/>
+		<pathelement location="${zmailServer.dir}/build/classes"/>
 		<fileset dir="${common.dir}/jars">
 			<include name="**/*.jar"/>
 		</fileset>
@@ -82,60 +82,60 @@
 
 	<target name="package-zimlet" depends='build-init' description="put zimlet files into zip archive for deployment">
 		<mkdir dir="${build.zimlet.dir}" />
-		<zip destfile="${build.zimlet.dir}/zimbra_samba.zip" update="true">
+		<zip destfile="${build.zimlet.dir}/zmail_samba.zip" update="true">
 			<fileset dir="${src.zimlet.dir}" includes="*"/>
 		</zip>
 	</target>
 	
 	<target name="deploy-zimlet" depends='package-zimlet,deploy-posix-zimlet' description="install UI files, deploy zimlet to LDAP">
-		<echo>Deploying zimlet: zimbra_samba</echo>
+		<echo>Deploying zimlet: zmail_samba</echo>
 		<mkdir dir="${build.zimlet.dir}" />
-		<java classname="com.zimbra.cs.zimlet.ZimletUtil" fork="true" classpathref="class.path" failonerror="true">
+		<java classname="org.zmail.cs.zimlet.ZimletUtil" fork="true" classpathref="class.path" failonerror="true">
 			<arg line="-q" />
 			<arg line="deploy" />
-			<arg file="${build.zimlet.dir}/zimbra_samba.zip" />
+			<arg file="${build.zimlet.dir}/zmail_samba.zip" />
 		</java>
 	</target>	
 	
 	<target name="undeploy-zimlet" description="undeploy zimlet">
-		<echo>Undeploying zimlet: zimbra_samba</echo>
+		<echo>Undeploying zimlet: zmail_samba</echo>
 		<mkdir dir="${build.zimlet.dir}" />
-		<java classname="com.zimbra.cs.zimlet.ZimletUtil" fork="true" classpathref="class.path" failonerror="true">
-			<arg line="undeploy zimbra_samba" />
+		<java classname="org.zmail.cs.zimlet.ZimletUtil" fork="true" classpathref="class.path" failonerror="true">
+			<arg line="undeploy zmail_samba" />
 		</java>
 	</target>	
 	
 	<target name="deploy-posix-zimlet">
-	    <ant dir="../ZimbraPosixAccountsExtension" target="deploy-zimlet" inheritAll="false"/>
+	    <ant dir="../ZmailPosixAccountsExtension" target="deploy-zimlet" inheritAll="false"/>
 	 </target>
 	
 	 <target name="deploy-posix-schema">
-	    <ant dir="../ZimbraPosixAccountsExtension" target="deploy-schema" inheritAll="false"/>
+	    <ant dir="../ZmailPosixAccountsExtension" target="deploy-schema" inheritAll="false"/>
 	 </target>
 
 	 <target name="add-posix-objectclass">
-	    <ant dir="../ZimbraPosixAccountsExtension" target="add-required-objectclass" inheritAll="false"/>
+	    <ant dir="../ZmailPosixAccountsExtension" target="add-required-objectclass" inheritAll="false"/>
 	 </target>
 	
 	 <target name="deploy-ldaputils">
-	    <ant dir="../ZimbraLDAPUtilsExtension" target="deploy" inheritAll="false"/>
+	    <ant dir="../ZmailLDAPUtilsExtension" target="deploy" inheritAll="false"/>
 	 </target>
 	    	
 	<target name="add-required-objectclass">
-		<echo>add sambaSamAccount to zimbraAccountExtraObjectClass </echo>
-		<java classname="com.zimbra.cs.account.ProvUtil" fork="true" classpathref="class.path" failonerror="true">
-			<arg line="mcf +zimbraAccountExtraObjectClass sambaSamAccount" />
+		<echo>add sambaSamAccount to zmailAccountExtraObjectClass </echo>
+		<java classname="org.zmail.cs.account.ProvUtil" fork="true" classpathref="class.path" failonerror="true">
+			<arg line="mcf +zmailAccountExtraObjectClass sambaSamAccount" />
 		</java>
 	</target>
 
 	<target name="modify-ldap-config" depends='deploy-schema'>
-		<ant dir="../ZimbraServer" target="stop-ldap" inheritAll="false"/>	
-		<copy tofile="${zimbra.home.dir}/${slapd.conf.dir}/slapd.conf" file="${slapd.conf.src}" overwrite="true"/>
- 	    <ant dir="../ZimbraServer" target="start-ldap" inheritAll="false"/>
+		<ant dir="../ZmailServer" target="stop-ldap" inheritAll="false"/>	
+		<copy tofile="${zmail.home.dir}/${slapd.conf.dir}/slapd.conf" file="${slapd.conf.src}" overwrite="true"/>
+ 	    <ant dir="../ZmailServer" target="start-ldap" inheritAll="false"/>
 	</target>
 		
 	<target name="deploy-schema" depends='deploy-posix-schema'>
-		<copy todir="${zimbra.home.dir}/${slapd.etc.dir}/schema" overwrite="true">
+		<copy todir="${zmail.home.dir}/${slapd.etc.dir}/schema" overwrite="true">
 			<fileset dir="${src.schema.dir}" includes="*.schema"/>
 		</copy>
 	</target>	

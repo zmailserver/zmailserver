@@ -1,17 +1,17 @@
-How to Write a Hello World Application for the Zimbra Web Client
+How to Write a Hello World Application for the Zmail Web Client
 by Jeremy Osborne
 Written 16 February 2011
 
 ==== Table of Contents ====
 1. Why?
-2. What is an 'app' in Zimbra lingo?
+2. What is an 'app' in Zmail lingo?
 3. How?
 4. Deploy
 
 
 ==== Why? ====
-Because I'm new and I figure if I can figure out how to write a Zimbra App,
-even if it is an empty shell inside of a deployed Zimbra Web Client than the
+Because I'm new and I figure if I can figure out how to write a Zmail App,
+even if it is an empty shell inside of a deployed Zmail Web Client than the
 rest of the application is just code. Figuring out how to get the Application
 framework correct seems like the hardest part (famous last words).
 
@@ -21,8 +21,8 @@ a different framework.
 
 
 
-==== What is an 'app' in Zimbra lingo? ====
-Log into dogfood or catfood at zimbra. An app lives inside of a single tabbed
+==== What is an 'app' in Zmail lingo? ====
+Log into dogfood or catfood at zmail. An app lives inside of a single tabbed
 view: mail, address book, calendar, briefcase, they're all apps.
 
 
@@ -31,33 +31,33 @@ view: mail, address book, calendar, briefcase, they're all apps.
 
 Copy the "helloworld/" folder located and paste into the following directory:
 
-ZimbraWebClient/WebRoot/js/zimbraMail/
+ZmailWebClient/WebRoot/js/zmailMail/
 
 All applications have their application code bundled and loaded at various
 stages of the app lifecycle. To define our HelloWorld application package code
 copy any file located inside of the local package folder into:
 
-ZimbraWebClient/WebRoot/js/zimbraMail/package
+ZmailWebClient/WebRoot/js/zmailMail/package
 
 The "helloworld/" folder contains a our HelloWorld application. The code has
 rudimentary comments about what each of the basic required items does.
 
 Copying the "helloworld/" folder and the package information is not enough to
-register the application with the Zimbra Web Client.
+register the application with the Zmail Web Client.
 
 To complete the registration of the application, please do the following.
 Ignore lines that begin with the double slash comment (//) mark.
 
 
-////////////// Edit: ZimbraWebClient/WebRoot/js/zimbraMail/package/Startup1_2.js
+////////////// Edit: ZmailWebClient/WebRoot/js/zmailMail/package/Startup1_2.js
 // We need to make sure our App gets loaded in the initial package load,
 // as it is the entry point for everything else we do.
 // The following can be created at the bottom of file:
-AjxPackage.require("zimbraMail.helloworld.ZmHelloWorldApp");
+AjxPackage.require("zmailMail.helloworld.ZmHelloWorldApp");
 
 
 
-//////////////////////// Edit: ZimbraWebClient/WebRoot/messages/ZmMsg.properties
+//////////////////////// Edit: ZmailWebClient/WebRoot/messages/ZmMsg.properties
 // Edit localization strings for our application.
 // To make the label be displayed in our application tab
 // locate the line that looks something like the following:
@@ -69,7 +69,7 @@ gotoHelloWorld = Go to Hello World
 
 
 
-//////////////////////// Edit ZimbraWebClient/WebRoot/js/zimbraMail/core/ZmId.js
+//////////////////////// Edit ZmailWebClient/WebRoot/js/zmailMail/core/ZmId.js
 // NOTE: Due to file load order, the following setting should not
 // need to be made within the ZmSetting.js file. The setting should
 // be done at the end of the application file.
@@ -92,7 +92,7 @@ gotoHelloWorld = Go to Hello World
 
 
 
-//////////// Edit ZimbraWebClient/WebRoot/js/zimbraMail/share/model/ZmSetting.js
+//////////// Edit ZmailWebClient/WebRoot/js/zmailMail/share/model/ZmSetting.js
 // NOTE: Due to file load order, the following setting should not
 // need to be made within the ZmSetting.js file. The setting should
 // be done at the end of the application file.
@@ -107,17 +107,17 @@ gotoHelloWorld = Go to Hello World
 
 
 
-////////// Edit: ZimbraWebClient/WebRoot/js/zimbraMail/share/model/ZmSettings.js
+////////// Edit: ZmailWebClient/WebRoot/js/zmailMail/share/model/ZmSettings.js
 // NOTE: The below settings can now be handled via the new registerSettings
 // class method, if the application class implements the registerSettings
 // function. See the ZmHelloWorldApp.js code for an example, and use that
 // procedure for registering settings.
 //////// Old method below
 // Now that we have a name for our setting (see the change in ZmSetting.js)
-// we need to create a setting object that tells the Zimbra Web Client what
+// we need to create a setting object that tells the Zmail Web Client what
 // is the default setup for our app.
 // Find the line:
-// this.registerSetting("ASSISTANT_ENABLED",				{name:"zimbraFeatureZimbraAssistantEnabled", type:ZmSetting.T_COS, dataType:ZmSetting.D_BOOLEAN, defaultValue:false});
+// this.registerSetting("ASSISTANT_ENABLED",				{name:"zmailFeatureZmailAssistantEnabled", type:ZmSetting.T_COS, dataType:ZmSetting.D_BOOLEAN, defaultValue:false});
 // and right above it, add the definition for "HELLOWORLD_ENABLED".
 // Notice we leave the "name" field off of the object literal. It is not needed
 // for our application as our application will not have an equivalent LDAP
@@ -130,8 +130,8 @@ gotoHelloWorld = Go to Hello World
 
 ==== Deploy ====
 Once all of the files are changed, because we changed the package requirements
-we need to go to the base of ZimbraWebClient and run:
+we need to go to the base of ZmailWebClient and run:
 
 ant deploy
 
-This assumes we have a Zimbra Server running in the background.
+This assumes we have a Zmail Server running in the background.

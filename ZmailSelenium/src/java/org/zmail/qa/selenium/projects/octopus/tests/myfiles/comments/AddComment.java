@@ -14,27 +14,27 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.octopus.tests.myfiles.comments;
+package org.zmail.qa.selenium.projects.octopus.tests.myfiles.comments;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.FileItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.OctopusAccount;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.octopus.core.OctopusCommonTest;
-import com.zimbra.qa.selenium.projects.octopus.ui.DialogFileShare;
-import com.zimbra.qa.selenium.projects.octopus.ui.DisplayFileComments;
-import com.zimbra.qa.selenium.projects.octopus.ui.DisplayFilePreview;
-import com.zimbra.qa.selenium.projects.octopus.ui.PageMyFiles;
+import org.zmail.qa.selenium.framework.items.FileItem;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.OctopusAccount;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.octopus.core.OctopusCommonTest;
+import org.zmail.qa.selenium.projects.octopus.ui.DialogFileShare;
+import org.zmail.qa.selenium.projects.octopus.ui.DisplayFileComments;
+import org.zmail.qa.selenium.projects.octopus.ui.DisplayFilePreview;
+import org.zmail.qa.selenium.projects.octopus.ui.PageMyFiles;
 
 public class AddComment extends OctopusCommonTest {
 
@@ -42,7 +42,7 @@ public class AddComment extends OctopusCommonTest {
 	private String _folderName = null;
 	private boolean _fileAttached = false;
 	private String _fileId = null;
-	private ZimbraAccount grantee=null;
+	private ZmailAccount grantee=null;
 
 	@BeforeMethod(groups = { "always" })
 	public void testReset() {
@@ -66,13 +66,13 @@ public class AddComment extends OctopusCommonTest {
 
 	@Test(description = "Add file comments - verify comments text in the file Comments through SOAP", groups = { "functional" })
 	public void AddComment_01() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem rootFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
 
 		// Create file item
-		String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+		String filePath = ZmailSeleniumProperties.getBaseDirectory()
 				+ "/data/public/other/testbitmapfile.bmp";
 
 		FileItem fileItem = new FileItem(filePath);
@@ -83,7 +83,7 @@ public class AddComment extends OctopusCommonTest {
 		String attachmentId = account.uploadFile(filePath);
 
 		// Save uploaded file to My Files through SOAP
-		account.soapSend("<SaveDocumentRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<SaveDocumentRequest xmlns='urn:zmailMail'>"
 				+ "<doc l='" + rootFolder.getId() + "'><upload id='"
 				+ attachmentId + "'/></doc></SaveDocumentRequest>");
 
@@ -97,14 +97,14 @@ public class AddComment extends OctopusCommonTest {
 		// verify the file is uploaded
 		ZAssert.assertEquals(fileName, name, "Verify file is uploaded");
 
-		String comment = "Comment" + ZimbraSeleniumProperties.getUniqueString();
+		String comment = "Comment" + ZmailSeleniumProperties.getUniqueString();
 
 		// Add comments to the file using SOAP
-		account.soapSend("<AddCommentRequest xmlns='urn:zimbraMail'> <comment parentId='"
+		account.soapSend("<AddCommentRequest xmlns='urn:zmailMail'> <comment parentId='"
 				+ _fileId + "' text='" + comment + "'/></AddCommentRequest>");
 
 		// Get file comments through SOAP
-		account.soapSend("<GetCommentsRequest  xmlns='urn:zimbraMail'> <comment parentId='"
+		account.soapSend("<GetCommentsRequest  xmlns='urn:zmailMail'> <comment parentId='"
 				+ _fileId + "'/></GetCommentsRequest>");
 
 		// Verify file comments through SOAP
@@ -115,13 +115,13 @@ public class AddComment extends OctopusCommonTest {
 
 	@Test(description = "Add file comments - verify account user name in the file Comments window", groups = { "smoke" })
 	public void AddComment_02() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseRootFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
 
 		// Create file item
-		String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+		String filePath = ZmailSeleniumProperties.getBaseDirectory()
 				+ "/data/public/other/putty.log";
 
 		FileItem file = new FileItem(filePath);
@@ -132,7 +132,7 @@ public class AddComment extends OctopusCommonTest {
 		String attachmentId = account.uploadFile(filePath);
 
 		// Save uploaded file to the root folder through SOAP
-		account.soapSend("<SaveDocumentRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<SaveDocumentRequest xmlns='urn:zmailMail'>"
 				+ "<doc l='" + briefcaseRootFolder.getId() + "'>"
 				+ "<upload id='" + attachmentId + "'/>"
 				+ "</doc></SaveDocumentRequest>");
@@ -143,10 +143,10 @@ public class AddComment extends OctopusCommonTest {
 		_fileId = account.soapSelectValue(
 				"//mail:SaveDocumentResponse//mail:doc", "id");
 
-		String comment = "Comment" + ZimbraSeleniumProperties.getUniqueString();
+		String comment = "Comment" + ZmailSeleniumProperties.getUniqueString();
 
 		// Add comments to the file using SOAP
-		account.soapSend("<AddCommentRequest xmlns='urn:zimbraMail'> <comment parentId='"
+		account.soapSend("<AddCommentRequest xmlns='urn:zmailMail'> <comment parentId='"
 				+ _fileId + "' text='" + comment + "'/></AddCommentRequest>");
 
 		// Click on My Files tab
@@ -191,7 +191,7 @@ public class AddComment extends OctopusCommonTest {
 	@Test(description = "User should able to add comments on publicly shared file", groups = { "smoke" })
 	public void AddComment_PubliclyShareFile() throws HarnessException
 	{
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 		String fileName=TEXT_FILE;
 
 		_fileAttached = true;
@@ -212,7 +212,7 @@ public class AddComment extends OctopusCommonTest {
 		dialogFileShare.zClickButton(Button.B_CLOSE);
 
 		//make comment via soap
-		String comment = "Comment" + ZimbraSeleniumProperties.getUniqueString();
+		String comment = "Comment" + ZmailSeleniumProperties.getUniqueString();
 		makeCommentViaSoap(app.zGetActiveAccount(), _fileId, comment);
 
 		// Verify comments text appears in the file Comments view
@@ -226,7 +226,7 @@ public class AddComment extends OctopusCommonTest {
 	public void AddCommentOnFileUnderSharedMountpoint() throws HarnessException
 	{
 		//Create current account
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 		String fileName=TEXT_FILE;
 
 		//Create a folder
@@ -256,7 +256,7 @@ public class AddComment extends OctopusCommonTest {
 		DisplayFilePreview filePreview = (DisplayFilePreview) app.zPageMyFiles.zListItem(Action.A_LEFTCLICK, fileName);
 
 		//Create comment.
-		String comment = "GranteeComment" + ZimbraSeleniumProperties.getUniqueString();
+		String comment = "GranteeComment" + ZmailSeleniumProperties.getUniqueString();
 
 		//Click on Comments button
 		DisplayFileComments fileComments = (DisplayFileComments) filePreview
@@ -276,7 +276,7 @@ public class AddComment extends OctopusCommonTest {
 	@Test(description = "Commentor pic should be displayed", groups = { "smoke" })
 	public void VerifyCommentorPic() throws HarnessException
 	{
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 		String fileName=TEXT_FILE;
 
 		_fileAttached = true;
@@ -292,7 +292,7 @@ public class AddComment extends OctopusCommonTest {
 		DisplayFilePreview filePreview = (DisplayFilePreview) app.zPageMyFiles.zListItem(Action.A_LEFTCLICK, fileName);
 
 		//make comment via soap
-		String comment = "Comment" + ZimbraSeleniumProperties.getUniqueString();
+		String comment = "Comment" + ZmailSeleniumProperties.getUniqueString();
 		makeCommentViaSoap(app.zGetActiveAccount(), _fileId, comment);
 
 		// Click on Comments button
@@ -341,14 +341,14 @@ public class AddComment extends OctopusCommonTest {
 		}
 		try {
 			// Refresh view
-			// ZimbraAccount account = app.zGetActiveAccount();
+			// ZmailAccount account = app.zGetActiveAccount();
 			// FolderItem item =
 			// FolderItem.importFromSOAP(account,SystemFolder.Briefcase);
-			// account.soapSend("<GetFolderRequest xmlns='urn:zimbraMail'><folder l='1' recursive='0'/>"
+			// account.soapSend("<GetFolderRequest xmlns='urn:zmailMail'><folder l='1' recursive='0'/>"
 			// + "</GetFolderRequest>");
-			// account.soapSend("<GetFolderRequest xmlns='urn:zimbraMail' requestId='folders' depth='1' tr='true' view='document'><folder l='"
+			// account.soapSend("<GetFolderRequest xmlns='urn:zmailMail' requestId='folders' depth='1' tr='true' view='document'><folder l='"
 			// + item.getId() + "'/></GetFolderRequest>");
-			// account.soapSend("<GetActivityStreamRequest xmlns='urn:zimbraMail' id='16'/>");
+			// account.soapSend("<GetActivityStreamRequest xmlns='urn:zmailMail' id='16'/>");
 			// app.zGetActiveAccount().accountIsDirty = true;
 			// app.zPageOctopus.sRefresh();
 

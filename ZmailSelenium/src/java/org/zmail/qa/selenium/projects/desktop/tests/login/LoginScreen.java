@@ -14,19 +14,19 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.login;
+package org.zmail.qa.selenium.projects.desktop.tests.login;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.PageLogin;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.PageLogin;
 
 
 public class LoginScreen extends AjaxCommonTest {
@@ -58,7 +58,7 @@ public class LoginScreen extends AjaxCommonTest {
 
 		ZAssert.assertEquals(accountName, defaultAccountName,
 		      "Verify the displayed label 'Account Name'");
-      ZAssert.assertEquals(emailAddress, ZimbraAccount.AccountZDC().EmailAddress,
+      ZAssert.assertEquals(emailAddress, ZmailAccount.AccountZDC().EmailAddress,
             "Verify the displayed label 'Email Address'");
 
 	}
@@ -109,7 +109,7 @@ public class LoginScreen extends AjaxCommonTest {
 		app.zPageLogin.zNavigateTo();
 		
 		// Type a unique string into the browser
-		String value = "foo" + ZimbraSeleniumProperties.getUniqueString();
+		String value = "foo" + ZmailSeleniumProperties.getUniqueString();
 		app.zPageLogin.zKeyboardTypeString(value);
 		
 		// Get the value of the username field

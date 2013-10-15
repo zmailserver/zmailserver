@@ -28,28 +28,28 @@
 AjxPackage.require("ajax.dwt.events.DwtIdleTimer");
 
 // for creating and handling invites
-AjxPackage.require("zimbraMail.mail.model.ZmMimePart");
-AjxPackage.require("zimbraMail.mail.model.ZmMailItem");
-AjxPackage.require("zimbraMail.mail.model.ZmMailMsg");
-AjxPackage.require("zimbraMail.mail.controller.ZmMailListController");
-AjxPackage.require("zimbraMail.mail.controller.ZmMsgController");
+AjxPackage.require("zmailMail.mail.model.ZmMimePart");
+AjxPackage.require("zmailMail.mail.model.ZmMailItem");
+AjxPackage.require("zmailMail.mail.model.ZmMailMsg");
+AjxPackage.require("zmailMail.mail.controller.ZmMailListController");
+AjxPackage.require("zmailMail.mail.controller.ZmMsgController");
 // base class for ZmApptView
-AjxPackage.require("zimbraMail.mail.view.ZmMailItemView");
-AjxPackage.require("zimbraMail.mail.view.ZmMailMsgView");
+AjxPackage.require("zmailMail.mail.view.ZmMailItemView");
+AjxPackage.require("zmailMail.mail.view.ZmMailMsgView");
 
-AjxPackage.require("zimbraMail.calendar.view.ZmApptListView");
-AjxPackage.require("zimbraMail.calendar.view.ZmCalViewMgr");
-AjxPackage.require("zimbraMail.calendar.view.ZmCalBaseView");
-AjxPackage.require("zimbraMail.calendar.view.ZmCalColView");
-AjxPackage.require("zimbraMail.calendar.view.ZmCalDayView");
-AjxPackage.require("zimbraMail.calendar.view.ZmCalWorkWeekView");
-AjxPackage.require("zimbraMail.calendar.view.ZmCalWeekView");
-AjxPackage.require("zimbraMail.calendar.view.ZmCalMonthView");
-AjxPackage.require("zimbraMail.calendar.view.ZmCalScheduleView");
-AjxPackage.require("zimbraMail.calendar.view.ZmCalListView");
-AjxPackage.require("zimbraMail.calendar.view.ZmApptDeleteNotifyDialog");
+AjxPackage.require("zmailMail.calendar.view.ZmApptListView");
+AjxPackage.require("zmailMail.calendar.view.ZmCalViewMgr");
+AjxPackage.require("zmailMail.calendar.view.ZmCalBaseView");
+AjxPackage.require("zmailMail.calendar.view.ZmCalColView");
+AjxPackage.require("zmailMail.calendar.view.ZmCalDayView");
+AjxPackage.require("zmailMail.calendar.view.ZmCalWorkWeekView");
+AjxPackage.require("zmailMail.calendar.view.ZmCalWeekView");
+AjxPackage.require("zmailMail.calendar.view.ZmCalMonthView");
+AjxPackage.require("zmailMail.calendar.view.ZmCalScheduleView");
+AjxPackage.require("zmailMail.calendar.view.ZmCalListView");
+AjxPackage.require("zmailMail.calendar.view.ZmApptDeleteNotifyDialog");
 
-AjxPackage.require("zimbraMail.calendar.view.ZmCalPrintDialog");
+AjxPackage.require("zmailMail.calendar.view.ZmCalPrintDialog");
 
-AjxPackage.require("zimbraMail.calendar.view.ZmCalItemView");
-AjxPackage.require("zimbraMail.calendar.controller.ZmCalendarTreeController");
+AjxPackage.require("zmailMail.calendar.view.ZmCalItemView");
+AjxPackage.require("zmailMail.calendar.controller.ZmCalendarTreeController");

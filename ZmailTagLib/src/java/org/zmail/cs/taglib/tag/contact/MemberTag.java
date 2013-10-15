@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.tag.contact;
+package org.zmail.cs.taglib.tag.contact;
 
-import com.zimbra.cs.taglib.tag.ZimbraSimpleTag;
+import org.zmail.cs.taglib.tag.ZmailSimpleTag;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 
-public class MemberTag extends ZimbraSimpleTag {
+public class MemberTag extends ZmailSimpleTag {
 
     private String mType;
     private String mId;

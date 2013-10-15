@@ -12,10 +12,10 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
 -->
-<%@ taglib uri="/WEB-INF/zimbra.tld" prefix="z" %>
+<%@ taglib uri="/WEB-INF/zmail.tld" prefix="z" %>
 <html>
   <head>
-    <title>Zimbra Tag Library</title>
+    <title>Zmail Tag Library</title>
   </head>
   <body bgcolor="#ffffff">
     <hr /> 
@@ -157,16 +157,16 @@
 %>
         <tr>
           <td><%= key %></td>
-          <td><z:property zimlet="com_zimbra_sforce" name='<%= key %>'/></td>
+          <td><z:property zimlet="org_zmail_sforce" name='<%= key %>'/></td>
         </tr>
 <%
 	}
 %>
       </table>
 
-    <z:property zimlet="com_zimbra_sforce" name="passwd" action="set" value="foobar"/>
+    <z:property zimlet="org_zmail_sforce" name="passwd" action="set" value="foobar"/>
 
-    <hr /> <z:property zimlet="com_zimbra_sforce" action="list" var="prop"/>
+    <hr /> <z:property zimlet="org_zmail_sforce" action="list" var="prop"/>
       <h3>ListProperty</h3>
       <table border="1">
         <tr>
@@ -202,21 +202,21 @@
         <tr>
           <td>global</td>
           <td>url</td>
-          <td><z:zimletconfig zimlet="com_zimbra_bugz" name="url" scope="global"/></td>
+          <td><z:zimletconfig zimlet="org_zmail_bugz" name="url" scope="global"/></td>
         </tr>
         <tr>
           <td>local</td>
           <td>url</td>
-          <td><z:zimletconfig zimlet="com_zimbra_bugz" name="url" scope="local"/></td>
+          <td><z:zimletconfig zimlet="org_zmail_bugz" name="url" scope="local"/></td>
         </tr>
         <tr>
           <td></td>
           <td>url</td>
-          <td><z:zimletconfig zimlet="com_zimbra_bugz" name="url"/></td>
+          <td><z:zimletconfig zimlet="org_zmail_bugz" name="url"/></td>
         </tr>
       </table>
 
-    <hr /> <z:zimletconfig zimlet="com_zimbra_bugz" action="list" var="conf"/>
+    <hr /> <z:zimletconfig zimlet="org_zmail_bugz" action="list" var="conf"/>
       <h3>ListConfig</h3>
       <table border="1">
         <tr>

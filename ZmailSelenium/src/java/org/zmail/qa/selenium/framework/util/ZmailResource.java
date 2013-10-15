@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.util;
+package org.zmail.qa.selenium.framework.util;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,12 +22,12 @@ import java.util.Map;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import com.zimbra.common.soap.Element;
+import org.zmail.common.soap.Element;
 
 
 
-public class ZimbraResource extends ZimbraAccount {
-	private static Logger logger = LogManager.getLogger(ZimbraResource.class);
+public class ZmailResource extends ZmailAccount {
+	private static Logger logger = LogManager.getLogger(ZmailResource.class);
 
 	public static enum Type {
 		LOCATION,
@@ -36,11 +36,11 @@ public class ZimbraResource extends ZimbraAccount {
 	
 	public Type ResourceType;
 
-	public ZimbraResource(Type type) {
+	public ZmailResource(Type type) {
 		this(type, null, null);
 	}
 	
-	public ZimbraResource(Type type, String email, String password) {
+	public ZmailResource(Type type, String email, String password) {
 		super(email, password);
 		
 		ResourceType = type;
@@ -54,29 +54,29 @@ public class ZimbraResource extends ZimbraAccount {
 	// Set the default Equipment settings
 	@SuppressWarnings("serial")
 	private static final Map<String, String> equipmentAttrs = new HashMap<String, String>() {{
-		put("zimbraPrefLocale", ZimbraSeleniumProperties.getStringProperty("locale"));
-		put("zimbraCalResAutoAcceptDecline", "TRUE");
-		put("zimbraCalResAutoDeclineIfBusy", "TRUE");
+		put("zmailPrefLocale", ZmailSeleniumProperties.getStringProperty("locale"));
+		put("zmailCalResAutoAcceptDecline", "TRUE");
+		put("zmailCalResAutoDeclineIfBusy", "TRUE");
 	}};
 
 	// Set the default Location settings
 	@SuppressWarnings("serial")
 	private static final Map<String, String> locationAttrs = new HashMap<String, String>() {{
-		put("zimbraPrefLocale", ZimbraSeleniumProperties.getStringProperty("locale"));
-		put("zimbraCalResAutoAcceptDecline", "TRUE");
-		put("zimbraCalResAutoDeclineIfBusy", "TRUE");
+		put("zmailPrefLocale", ZmailSeleniumProperties.getStringProperty("locale"));
+		put("zmailCalResAutoAcceptDecline", "TRUE");
+		put("zmailCalResAutoDeclineIfBusy", "TRUE");
 	}};
 
 
 	public boolean exists() throws HarnessException {
 		
 		// Check if the account exists
-		ZimbraAdminAccount.GlobalAdmin().soapSend(
-				"<GetCalendarResourceRequest xmlns='urn:zimbraAdmin'>" +
+		ZmailAdminAccount.GlobalAdmin().soapSend(
+				"<GetCalendarResourceRequest xmlns='urn:zmailAdmin'>" +
 					"<calresource by='name'>"+ EmailAddress +"</calresource>" +
 				"</GetCalendarResourceRequest>");
 		
-		Element[] getCalendarResourceResponse = ZimbraAdminAccount.GlobalAdmin().soapSelectNodes("//admin:GetCalendarResourceResponse");
+		Element[] getCalendarResourceResponse = ZmailAdminAccount.GlobalAdmin().soapSelectNodes("//admin:GetCalendarResourceResponse");
 		
 		if ( (getCalendarResourceResponse == null) || (getCalendarResourceResponse.length == 0) ) {
 			
@@ -86,19 +86,19 @@ public class ZimbraResource extends ZimbraAccount {
 		}
 		
 		// Reset the account settings based on the response
-		ZimbraId = ZimbraAdminAccount.GlobalAdmin().soapSelectValue("//admin:calresource", "id");
-		ZimbraMailHost = ZimbraAdminAccount.GlobalAdmin().soapSelectValue("//admin:calresource/admin:a[@n='zimbraMailHost']", null);
+		ZmailId = ZmailAdminAccount.GlobalAdmin().soapSelectValue("//admin:calresource", "id");
+		ZmailMailHost = ZmailAdminAccount.GlobalAdmin().soapSelectValue("//admin:calresource/admin:a[@n='zmailMailHost']", null);
 
-		// If the adminHost value is set, use that value for the ZimbraMailHost
-		String adminHost = ZimbraSeleniumProperties.getStringProperty("adminHost", null);
+		// If the adminHost value is set, use that value for the ZmailMailHost
+		String adminHost = ZmailSeleniumProperties.getStringProperty("adminHost", null);
 		if ( adminHost != null ) {
-			ZimbraMailHost = adminHost;
+			ZmailMailHost = adminHost;
 		}
 
 		return (true);
 	}
 
-	public ZimbraAccount provision() {
+	public ZmailAccount provision() {
 		try {
 			
 			// Check if the account already exists
@@ -111,7 +111,7 @@ public class ZimbraResource extends ZimbraAccount {
 
 			
 			// Make sure the domain exists
-			ZimbraDomain domain = new ZimbraDomain(EmailAddress.split("@")[1]);
+			ZmailDomain domain = new ZmailDomain(EmailAddress.split("@")[1]);
 			domain.provision();
 			
 			
@@ -119,10 +119,10 @@ public class ZimbraResource extends ZimbraAccount {
 			Map<String, String> attrs = null;
 			StringBuilder prefs = null;
 			if ( ResourceType == Type.EQUIPMENT ) {
-				prefs = new StringBuilder("<a n='zimbraCalResType'>Equipment</a>");
+				prefs = new StringBuilder("<a n='zmailCalResType'>Equipment</a>");
 				attrs = equipmentAttrs;
 			} else if ( ResourceType == Type.LOCATION ) {
-				prefs = new StringBuilder("<a n='zimbraCalResType'>Location</a>");
+				prefs = new StringBuilder("<a n='zmailCalResType'>Location</a>");
 				attrs = locationAttrs;
 			} else {
 				throw new HarnessException("Unknown resource type "+ ResourceType);
@@ -133,22 +133,22 @@ public class ZimbraResource extends ZimbraAccount {
     			prefs.append(String.format("<a n='%s'>%s</a>", entry.getKey(), entry.getValue()));
     		}
 
-			ZimbraAdminAccount.GlobalAdmin().soapSend(
-					"<CreateCalendarResourceRequest xmlns='urn:zimbraAdmin'>" +
+			ZmailAdminAccount.GlobalAdmin().soapSend(
+					"<CreateCalendarResourceRequest xmlns='urn:zmailAdmin'>" +
 						"<name>" + EmailAddress + "</name>" +
 						"<password>" + Password + "</password>" +
 						"<a n='displayName'>"+ EmailAddress +"</a>" +
 						prefs.toString() +
 					"</CreateCalendarResourceRequest>");
 			
-			Element[] createCalendarResourceResponse = ZimbraAdminAccount.GlobalAdmin().soapSelectNodes("//admin:CreateCalendarResourceResponse");
+			Element[] createCalendarResourceResponse = ZmailAdminAccount.GlobalAdmin().soapSelectNodes("//admin:CreateCalendarResourceResponse");
 			
 			if ( (createCalendarResourceResponse == null) || (createCalendarResourceResponse.length == 0)) {
 
-				Element[] soapFault = ZimbraAdminAccount.GlobalAdmin().soapSelectNodes("//soap:Fault");
+				Element[] soapFault = ZmailAdminAccount.GlobalAdmin().soapSelectNodes("//soap:Fault");
 				if ( soapFault != null && soapFault.length > 0 ) {
 				
-					String error = ZimbraAdminAccount.GlobalAdmin().soapSelectValue("//zimbra:Code", null);
+					String error = ZmailAdminAccount.GlobalAdmin().soapSelectValue("//zmail:Code", null);
 					throw new HarnessException("Unable to create account: "+ error);
 					
 				}
@@ -159,13 +159,13 @@ public class ZimbraResource extends ZimbraAccount {
 
 
 			// Set the account settings based on the response
-			ZimbraId = ZimbraAdminAccount.GlobalAdmin().soapSelectValue("//admin:calresource", "id");
-			ZimbraMailHost = ZimbraAdminAccount.GlobalAdmin().soapSelectValue("//admin:calresource/admin:a[@n='zimbraMailHost']", null);
+			ZmailId = ZmailAdminAccount.GlobalAdmin().soapSelectValue("//admin:calresource", "id");
+			ZmailMailHost = ZmailAdminAccount.GlobalAdmin().soapSelectValue("//admin:calresource/admin:a[@n='zmailMailHost']", null);
 
-			// If the adminHost value is set, use that value for the ZimbraMailHost
-			String adminHost = ZimbraSeleniumProperties.getStringProperty("adminHost", null);
+			// If the adminHost value is set, use that value for the ZmailMailHost
+			String adminHost = ZmailSeleniumProperties.getStringProperty("adminHost", null);
 			if ( adminHost != null ) {
-				ZimbraMailHost = adminHost;
+				ZmailMailHost = adminHost;
 			}
 
 
@@ -175,8 +175,8 @@ public class ZimbraResource extends ZimbraAccount {
 			
 		} catch (HarnessException e) {
 			logger.error("Unable to provision account: "+ EmailAddress, e);
-			ZimbraId = null;
-			ZimbraMailHost = null;
+			ZmailId = null;
+			ZmailMailHost = null;
 		}
 		return (this);
 	}

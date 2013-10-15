@@ -17,15 +17,15 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.desktop.ui;
+package org.zmail.qa.selenium.projects.desktop.ui;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.SleepUtil;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount.SOAP_DESTINATION_HOST_TYPE;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties.AppType;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.SleepUtil;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.framework.util.ZmailAccount.SOAP_DESTINATION_HOST_TYPE;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties.AppType;
 
 
 
@@ -39,7 +39,7 @@ public class DialogTag extends AbsDialog {
 
 	public static class Locators {
 	
-		// TODO:  See https://bugzilla.zimbra.com/show_bug.cgi?id=54173
+		// TODO:  See https://bugzilla.zmail.com/show_bug.cgi?id=54173
 		public static final String zTagDialogId		= "CreateTagDialog";
 		
 		public static final String zTitleId	 		= "CreateTagDialog_title";
@@ -127,7 +127,7 @@ public class DialogTag extends AbsDialog {
 	   zClickButton(Button.B_OK);
 
 	   SOAP_DESTINATION_HOST_TYPE destType = null;
-	   if (ZimbraSeleniumProperties.getAppType() == AppType.DESKTOP) {
+	   if (ZmailSeleniumProperties.getAppType() == AppType.DESKTOP) {
 	      destType = SOAP_DESTINATION_HOST_TYPE.CLIENT;
 	   } else {
 	      destType = SOAP_DESTINATION_HOST_TYPE.SERVER;
@@ -139,7 +139,7 @@ public class DialogTag extends AbsDialog {
 
 	   while (retry < maxRetry && !found) {
 	      SleepUtil.sleep(1000);
-	      MyApplication.zGetActiveAccount().soapSend("<GetTagRequest xmlns='urn:zimbraMail'/>",
+	      MyApplication.zGetActiveAccount().soapSend("<GetTagRequest xmlns='urn:zmailMail'/>",
 	            destType, MyApplication.zGetActiveAccount().EmailAddress);
 	      Element[] results = MyApplication.zGetActiveAccount().soapSelectNodes(
 	            "//mail:GetTagResponse//mail:tag[@name='" + tagName +"']");

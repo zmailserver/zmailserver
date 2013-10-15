@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common;
+package org.zmail.common;
 
 public class ZCSProvParams 
 {
@@ -38,7 +38,7 @@ public class ZCSProvParams
     public String yisport;
     public String yisfarm;
     public String default_cos;
-    public String zimbraAuthMech;
+    public String zmailAuthMech;
     public String sbsNotifyUrl;
     public long csvrec_numbers;
     public long csvoffset;
@@ -56,7 +56,7 @@ public class ZCSProvParams
     public String testpasswd; //for test purpose without UDB auth
     public String defaultpassword;
     public int threadcount;
-    public boolean customrun;// no zimbraAuthMech & with default a/c pwd
+    public boolean customrun;// no zmailAuthMech & with default a/c pwd
     public String IMAPSyncUrl;
     public boolean excludeargs;
     public String DNSUrl;

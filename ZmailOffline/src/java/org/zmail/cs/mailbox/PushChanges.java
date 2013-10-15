@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -35,44 +35,44 @@ import javax.mail.internet.MimeMessage;
 import org.dom4j.QName;
 
 import com.google.common.collect.ImmutableSet;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.common.mailbox.Color;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.mime.shim.JavaMailInternetAddress;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.SoapFaultException;
-import com.zimbra.common.util.BigByteBuffer;
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.zclient.ZClientException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.offline.OfflineAccount;
-import com.zimbra.cs.account.offline.OfflineProvisioning;
-import com.zimbra.cs.mailbox.ChangeTrackingMailbox.TracelessContext;
-import com.zimbra.cs.mailbox.Contact.Attachment;
-import com.zimbra.cs.mailbox.InitialSync.InviteMimeLocator;
-import com.zimbra.cs.mailbox.MailServiceException.NoSuchItemException;
-import com.zimbra.cs.mailbox.calendar.Invite;
-import com.zimbra.cs.mailbox.util.TagUtil;
-import com.zimbra.cs.mailbox.util.TypedIdList;
-import com.zimbra.cs.mime.Mime;
-import com.zimbra.cs.mime.ParsedContact;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.offline.OfflineLC;
-import com.zimbra.cs.offline.OfflineLog;
-import com.zimbra.cs.offline.OfflineSyncManager;
-import com.zimbra.cs.offline.util.OfflineErrorUtil;
-import com.zimbra.cs.service.mail.ItemAction;
-import com.zimbra.cs.service.mail.Sync;
-import com.zimbra.cs.service.mail.ToXML;
-import com.zimbra.cs.service.util.ItemIdFormatter;
-import com.zimbra.cs.session.PendingModifications.Change;
-import com.zimbra.cs.util.JMSession;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.client.ZMailbox;
+import org.zmail.common.mailbox.Color;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.mime.shim.JavaMailInternetAddress;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.SoapFaultException;
+import org.zmail.common.util.BigByteBuffer;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.zclient.ZClientException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.offline.OfflineAccount;
+import org.zmail.cs.account.offline.OfflineProvisioning;
+import org.zmail.cs.mailbox.ChangeTrackingMailbox.TracelessContext;
+import org.zmail.cs.mailbox.Contact.Attachment;
+import org.zmail.cs.mailbox.InitialSync.InviteMimeLocator;
+import org.zmail.cs.mailbox.MailServiceException.NoSuchItemException;
+import org.zmail.cs.mailbox.calendar.Invite;
+import org.zmail.cs.mailbox.util.TagUtil;
+import org.zmail.cs.mailbox.util.TypedIdList;
+import org.zmail.cs.mime.Mime;
+import org.zmail.cs.mime.ParsedContact;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.offline.OfflineLC;
+import org.zmail.cs.offline.OfflineLog;
+import org.zmail.cs.offline.OfflineSyncManager;
+import org.zmail.cs.offline.util.OfflineErrorUtil;
+import org.zmail.cs.service.mail.ItemAction;
+import org.zmail.cs.service.mail.Sync;
+import org.zmail.cs.service.mail.ToXML;
+import org.zmail.cs.service.util.ItemIdFormatter;
+import org.zmail.cs.session.PendingModifications.Change;
+import org.zmail.cs.util.JMSession;
+import org.zmail.soap.ZmailSoapContext;
 
 public class PushChanges {
 
@@ -176,7 +176,7 @@ public class PushChanges {
         return new PushChanges(ombx).sync(isOnRequest);
     }
 
-    public static boolean syncFolder(ZcsMailbox ombx, int id, boolean suppressRssFailure, ZimbraSoapContext zsc) throws ServiceException {
+    public static boolean syncFolder(ZcsMailbox ombx, int id, boolean suppressRssFailure, ZmailSoapContext zsc) throws ServiceException {
         return new PushChanges(ombx).syncFolder(id, suppressRssFailure, zsc);
     }
 
@@ -379,7 +379,7 @@ public class PushChanges {
                     Element m = request.addElement(MailConstants.E_MSG).addAttribute(MailConstants.A_ATTACHMENT_ID, uploadId);
                     if (!msg.getDraftOrigId().equals(""))
                         m.addAttribute(MailConstants.A_ORIG_ID, msg.getDraftOrigId()).addAttribute(MailConstants.A_REPLY_TYPE, msg.getDraftReplyType());
-                    String saveToSent = OfflineProvisioning.getOfflineInstance().getLocalAccount().getAttr(Provisioning.A_zimbraPrefSaveToSent);
+                    String saveToSent = OfflineProvisioning.getOfflineInstance().getLocalAccount().getAttr(Provisioning.A_zmailPrefSaveToSent);
                     if (!Boolean.valueOf(saveToSent)) {
                         request.addAttribute(MailConstants.A_NO_SAVE_TO_SENT,1);
                     }
@@ -698,7 +698,7 @@ public class PushChanges {
         }
     }
 
-    private boolean syncFolder(int id, boolean suppressRssFailure, ZimbraSoapContext zsc) throws ServiceException {
+    private boolean syncFolder(int id, boolean suppressRssFailure, ZmailSoapContext zsc) throws ServiceException {
         QName elementName = MailConstants.FOLDER_ACTION_REQUEST;
         Element request = zsc != null ? zsc.createElement(elementName) : new Element.XMLElement(elementName);
         Element action = request.addElement(MailConstants.E_ACTION).addAttribute(MailConstants.A_OPERATION, ItemAction.OP_UPDATE).addAttribute(MailConstants.A_ID, id);

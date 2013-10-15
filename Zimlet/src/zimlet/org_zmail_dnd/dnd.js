@@ -13,13 +13,13 @@
  * ***** END LICENSE BLOCK *****
  */
 
-function Com_Zimbra_DnD() {
+function Com_Zmail_DnD() {
 }
 
-Com_Zimbra_DnD.prototype = new ZmZimletBase();
-Com_Zimbra_DnD.prototype.constructor = Com_Zimbra_DnD;
+Com_Zmail_DnD.prototype = new ZmZimletBase();
+Com_Zmail_DnD.prototype.constructor = Com_Zmail_DnD;
 
-Com_Zimbra_DnD.prototype.init = function () {
+Com_Zmail_DnD.prototype.init = function () {
 
     this.isHTML5 = false;
     this.checkHTML5Dnd();
@@ -32,7 +32,7 @@ Com_Zimbra_DnD.prototype.init = function () {
     this.attachment_ids = [];
 };
 
-Com_Zimbra_DnD.prototype.isDndSupported = function (evntname) {
+Com_Zmail_DnD.prototype.isDndSupported = function (evntname) {
 
     var element = document.createElement('div');
     evntname = 'on' + evntname;
@@ -49,7 +49,7 @@ Com_Zimbra_DnD.prototype.isDndSupported = function (evntname) {
     return isSupported;
 };
 
-Com_Zimbra_DnD.prototype.checkHTML5Dnd = function () {
+Com_Zmail_DnD.prototype.checkHTML5Dnd = function () {
 
     if(!this.isHTML5) {
         this.isHTML5 = this.isDndSupported('drag')
@@ -63,7 +63,7 @@ Com_Zimbra_DnD.prototype.checkHTML5Dnd = function () {
 
 };
 
-Com_Zimbra_DnD.prototype._initNonHTM5 = function () {
+Com_Zmail_DnD.prototype._initNonHTM5 = function () {
 
     var outerEl = document.getElementById("skin_outer");
 	var filesEl = document.getElementById("zdnd_files");
@@ -104,7 +104,7 @@ Com_Zimbra_DnD.prototype._initNonHTM5 = function () {
                 }
                 if(cmd == 'compose' || cmd == 'composeDetach') {
                     var ev = document.createEvent("Events");
-                    ev.initEvent("ZimbraDnD", true, false);
+                    ev.initEvent("ZmailDnD", true, false);
                     curView._resetBodySize();
                     el.dispatchEvent(ev);
                 }
@@ -113,7 +113,7 @@ Com_Zimbra_DnD.prototype._initNonHTM5 = function () {
     
 };
 
-Com_Zimbra_DnD.prototype._initHTML5 = function () {
+Com_Zmail_DnD.prototype._initHTML5 = function () {
 
     /*var cmd = window.newWindowCommand;
     if(cmd == 'compose' || cmd == 'msgViewDetach') {
@@ -130,7 +130,7 @@ Com_Zimbra_DnD.prototype._initHTML5 = function () {
     
 };
 
-Com_Zimbra_DnD.prototype._setToolTip =
+Com_Zmail_DnD.prototype._setToolTip =
 function(){
     if (!this.dndTooltipEl && !this.dndTooltipEl.style){
         return;
@@ -148,7 +148,7 @@ function(){
     }
 };
 
-Com_Zimbra_DnD.prototype.onShowView =
+Com_Zmail_DnD.prototype.onShowView =
 function(viewId, isNewView) {
     var isWindowsSafari = (AjxEnv.isWindows && !AjxEnv.isChrome && !AjxEnv.isFirefox);
     if(AjxEnv.isDesktop) {    //bug:
@@ -171,7 +171,7 @@ function(viewId, isNewView) {
 			viewType == ZmId.VIEW_BRIEFCASE_DETAIL) {
 
 			var ev = document.createEvent("Events");
-			ev.initEvent("ZimbraDnD", true, false);
+			ev.initEvent("ZmailDnD", true, false);
 
 			var curView = appCtxt.getAppViewMgr().getCurrentView();
 
@@ -184,7 +184,7 @@ function(viewId, isNewView) {
 	}
 };
 
-Com_Zimbra_DnD.uploadDnDFiles =
+Com_Zmail_DnD.uploadDnDFiles =
 function() {
 	var viewType = appCtxt.getCurrentViewType();
 	if (viewType == ZmId.VIEW_COMPOSE ||
@@ -202,13 +202,13 @@ function() {
 	}
 };
 
-Com_Zimbra_DnD.prototype._addHandlers = function(el) {
+Com_Zmail_DnD.prototype._addHandlers = function(el) {
     Dwt.setHandler(el,"ondragenter",this._onDragEnter);
     Dwt.setHandler(el,"ondragover",this._onDragOver);
     Dwt.setHandler(el,"ondrop", AjxCallback.simpleClosure(this._onDrop, this));
 };
 
-Com_Zimbra_DnD.prototype._onDragEnter = function(ev) {
+Com_Zmail_DnD.prototype._onDragEnter = function(ev) {
     ev.stopPropagation();
     ev.preventDefault();
     if(ev.dataTransfer && ev.dataTransfer.types) {
@@ -225,11 +225,11 @@ Com_Zimbra_DnD.prototype._onDragEnter = function(ev) {
     }
 };
 
-Com_Zimbra_DnD.prototype._onDragOver = function(ev) {
+Com_Zmail_DnD.prototype._onDragOver = function(ev) {
     return false;
 };
 
-Com_Zimbra_DnD.prototype._onDrop = function(ev) {
+Com_Zmail_DnD.prototype._onDrop = function(ev) {
     ev.stopPropagation();
     ev.preventDefault();
 
@@ -270,7 +270,7 @@ Com_Zimbra_DnD.prototype._onDrop = function(ev) {
 };
 
 /* Convert non-ASCII characters to valid HTML UNICODE entities */
-Com_Zimbra_DnD.prototype.convertToEntities = function (astr){
+Com_Zmail_DnD.prototype.convertToEntities = function (astr){
 	var bstr = '', cstr, i = 0;
 	for(i; i < astr.length; ++i){
 		if(astr.charCodeAt(i) > 127){
@@ -286,7 +286,7 @@ Com_Zimbra_DnD.prototype.convertToEntities = function (astr){
 	return bstr;
 };
 
-Com_Zimbra_DnD.prototype._uploadFiles = function(file, controller) {
+Com_Zmail_DnD.prototype._uploadFiles = function(file, controller) {
 
     try {
 
@@ -315,7 +315,7 @@ Com_Zimbra_DnD.prototype._uploadFiles = function(file, controller) {
 };
 
 
-Com_Zimbra_DnD.prototype._handleErrorResponse = function(respCode) {
+Com_Zmail_DnD.prototype._handleErrorResponse = function(respCode) {
 
     var warngDlg = appCtxt.getMsgDialog();
     var style = DwtMessageDialog.CRITICAL_STYLE;
@@ -331,7 +331,7 @@ Com_Zimbra_DnD.prototype._handleErrorResponse = function(respCode) {
     warngDlg.popup();
 };
 
-Com_Zimbra_DnD.prototype._handleResponse = function(req, controller) {
+Com_Zmail_DnD.prototype._handleResponse = function(req, controller) {
     if(req) {
         if(req.readyState == 4 && req.status == 200) {
             var resp = eval("["+req.responseText+"]");

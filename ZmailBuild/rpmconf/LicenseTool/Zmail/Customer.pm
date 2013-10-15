@@ -1,4 +1,4 @@
-package Zimbra::Customer;
+package Zmail::Customer;
 
 sub new {
 	my $class = shift;

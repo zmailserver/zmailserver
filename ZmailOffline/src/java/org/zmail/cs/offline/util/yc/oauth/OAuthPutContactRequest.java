@@ -12,15 +12,15 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.util.yc.oauth;
+package org.zmail.cs.offline.util.yc.oauth;
 
 import java.io.InputStream;
 
 import org.apache.commons.httpclient.methods.PutMethod;
 
 import com.google.gdata.client.authn.oauth.OAuthUtil;
-import com.zimbra.common.httpclient.HttpClientUtil;
-import com.zimbra.cs.offline.OfflineLog;
+import org.zmail.common.httpclient.HttpClientUtil;
+import org.zmail.cs.offline.OfflineLog;
 
 public class OAuthPutContactRequest extends OAuthRequest {
 

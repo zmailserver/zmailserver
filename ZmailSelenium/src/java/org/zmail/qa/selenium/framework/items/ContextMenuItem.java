@@ -14,13 +14,13 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.items;
+package org.zmail.qa.selenium.framework.items;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import com.zimbra.qa.selenium.framework.ui.I18N;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.ui.I18N;
+import org.zmail.qa.selenium.framework.util.HarnessException;
 
 public class ContextMenuItem {
 	protected static Logger logger = LogManager.getLogger(IItem.class);

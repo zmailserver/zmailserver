@@ -12,15 +12,15 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.tag.filter;
+package org.zmail.cs.taglib.tag.filter;
 
-import com.zimbra.cs.taglib.tag.ZimbraSimpleTag;
-import com.zimbra.client.ZFilterAction.ZRedirectAction;
+import org.zmail.cs.taglib.tag.ZmailSimpleTag;
+import org.zmail.client.ZFilterAction.ZRedirectAction;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 
-public class RedirectActionTag extends ZimbraSimpleTag {
+public class RedirectActionTag extends ZmailSimpleTag {
 
     private String mAddress;
 

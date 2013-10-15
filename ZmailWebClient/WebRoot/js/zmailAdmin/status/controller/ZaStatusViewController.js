@@ -24,7 +24,7 @@
 **/
 ZaStatusViewController = function(appCtxt, container) {
 	ZaController.call(this, appCtxt, container,"ZaStatusViewController");
-	this._helpURL = location.pathname + ZaUtil.HELP_URL + "managing_servers/monitoring_zimbra_collaboration_suite.htm?locid="+AjxEnv.DEFAULT_LOCALE;
+	this._helpURL = location.pathname + ZaUtil.HELP_URL + "managing_servers/monitoring_zmail_collaboration_suite.htm?locid="+AjxEnv.DEFAULT_LOCALE;
 	this._helpButtonText = ZaMsg.helpEditDomains;
    	this._popupOperations = new Array();
 	this._UICreated = false;	
@@ -75,7 +75,7 @@ ZaStatusViewController.prototype._createUI = function (openInNewTab) {
 			this._acctionMenu =  new ZaPopupMenu(this._contentView, "ActionMenu", null, this._popupOperations, ZaId.VIEW_STATUSLIST, ZaId.MENU_POP);
 		}
 		elements[ZaAppViewMgr.C_APP_CONTENT] = this._contentView;
-		//ZaApp.getInstance().createView(ZaZimbraAdmin._STATUS, elements);
+		//ZaApp.getInstance().createView(ZaZmailAdmin._STATUS, elements);
 		ZaApp.getInstance().getAppViewMgr().createView(this.getContentViewId(), elements);
 		this._UICreated = true;
 		ZaApp.getInstance()._controllers[this.getContentViewId ()] = this ;

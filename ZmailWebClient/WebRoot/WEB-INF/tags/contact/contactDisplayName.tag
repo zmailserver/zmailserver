@@ -14,12 +14,12 @@
 --%>
 <%@ tag body-content="empty" %>
 <%@ tag import="java.util.*" %>
-<%@ tag import="com.zimbra.cs.taglib.bean.BeanUtils,com.zimbra.cs.taglib.bean.ZContactBean" %>
-<%@ attribute name="contact" rtexprvalue="true" required="true" type="com.zimbra.cs.taglib.bean.ZContactBean" %>
+<%@ tag import="org.zmail.cs.taglib.bean.BeanUtils,org.zmail.cs.taglib.bean.ZContactBean" %>
+<%@ attribute name="contact" rtexprvalue="true" required="true" type="org.zmail.cs.taglib.bean.ZContactBean" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
-<%@ taglib prefix="app" uri="com.zimbra.htmlclient" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
+<%@ taglib prefix="app" uri="org.zmail.htmlclient" %>
 <%-- NOTE: Keep in sync with mo:contactDisplayName --%>
 <c:choose>
     <c:when test="${contact.isGroup}">

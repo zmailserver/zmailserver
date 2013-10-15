@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.util;
+package org.zmail.qa.selenium.framework.util;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -37,9 +37,9 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.xml.sax.SAXException;
 
-import com.zimbra.qa.selenium.framework.util.OperatingSystem;
-import com.zimbra.qa.selenium.framework.util.OperatingSystem.OsType;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties.AppType;
+import org.zmail.qa.selenium.framework.util.OperatingSystem;
+import org.zmail.qa.selenium.framework.util.OperatingSystem.OsType;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties.AppType;
 
 public class BuildUtility {
    private static final StringBuilder _buildBaseUrl = new StringBuilder("http://zre-matrix.eng.vmware.com");
@@ -153,7 +153,7 @@ public class BuildUtility {
       logger.debug("Build query result is: " + results);
 
       return results;
-      // For example: wget -m -nd -P C:\Jeff_Test\ http://zre-matrix.eng.vmware.com/links/WINDOWS/HELIX/20110110070101_ZDESKTOP/ZimbraBuild/i386/zdesktop_7_0_dev-helix_b10684_win32.msi
+      // For example: wget -m -nd -P C:\Jeff_Test\ http://zre-matrix.eng.vmware.com/links/WINDOWS/HELIX/20110110070101_ZDESKTOP/ZmailBuild/i386/zdesktop_7_0_dev-helix_b10684_win32.msi
    }
 
    /**
@@ -234,7 +234,7 @@ public class BuildUtility {
             String fileExtension = null;
             String productName = null;
 
-            AppType appType = ZimbraSeleniumProperties.getAppType();
+            AppType appType = ZmailSeleniumProperties.getAppType();
 
             switch (appType) {
             case DESKTOP:

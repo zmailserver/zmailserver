@@ -12,9 +12,9 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.clientuploader;
+package org.zmail.clientuploader;
 
-import com.zimbra.common.localconfig.KnownKey;
+import org.zmail.common.localconfig.KnownKey;
 
 /**
  * <code>ClientUploaderLC</code> holds the user configurations for Client Upload extension.
@@ -24,9 +24,9 @@ import com.zimbra.common.localconfig.KnownKey;
  */
 public final class ClientUploaderLC {
     /**
-     * A directory for client repository, default: /opt/zimbra/jetty/webapps/zimbra/downloads
+     * A directory for client repository, default: /opt/zmail/jetty/webapps/zmail/downloads
      */
-    public static final KnownKey client_repository_location = new KnownKey("client_repository_location", "/opt/zimbra/jetty/webapps/zimbra/downloads");
+    public static final KnownKey client_repository_location = new KnownKey("client_repository_location", "/opt/zmail/jetty/webapps/zmail/downloads");
 
     /**
      * Max size of the uploaded file, default: 2G

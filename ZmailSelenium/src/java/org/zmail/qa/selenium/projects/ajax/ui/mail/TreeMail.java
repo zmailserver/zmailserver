@@ -17,38 +17,38 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.ajax.ui.mail;
+package org.zmail.qa.selenium.projects.ajax.ui.mail;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.IItem;
-import com.zimbra.qa.selenium.framework.items.SavedSearchFolderItem;
-import com.zimbra.qa.selenium.framework.items.TagItem;
-import com.zimbra.qa.selenium.framework.items.ZimletItem;
-import com.zimbra.qa.selenium.framework.ui.AbsApplication;
-import com.zimbra.qa.selenium.framework.ui.AbsPage;
-import com.zimbra.qa.selenium.framework.ui.AbsTree;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties.AppType;
-import com.zimbra.qa.selenium.projects.ajax.ui.AppAjaxClient;
-import com.zimbra.qa.selenium.projects.ajax.ui.ContextMenu;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogMove;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogRenameFolder;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogRenameTag;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogShare;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogShareFind;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogTag;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogWarning;
-import com.zimbra.qa.selenium.projects.ajax.ui.FormRecoverDeletedItems;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.IItem;
+import org.zmail.qa.selenium.framework.items.SavedSearchFolderItem;
+import org.zmail.qa.selenium.framework.items.TagItem;
+import org.zmail.qa.selenium.framework.items.ZimletItem;
+import org.zmail.qa.selenium.framework.ui.AbsApplication;
+import org.zmail.qa.selenium.framework.ui.AbsPage;
+import org.zmail.qa.selenium.framework.ui.AbsTree;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties.AppType;
+import org.zmail.qa.selenium.projects.ajax.ui.AppAjaxClient;
+import org.zmail.qa.selenium.projects.ajax.ui.ContextMenu;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogMove;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogRenameFolder;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogRenameTag;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogShare;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogShareFind;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogTag;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogWarning;
+import org.zmail.qa.selenium.projects.ajax.ui.FormRecoverDeletedItems;
 
 
 
 /**
- * @author zimbra
+ * @author zmail
  *
  */
 public class TreeMail extends AbsTree {
@@ -139,7 +139,7 @@ public class TreeMail extends AbsTree {
 
 			} else if (option == Button.B_DELETE) {
 
-				// See http://bugzilla.zimbra.com/show_bug.cgi?id=64023
+				// See http://bugzilla.zmail.com/show_bug.cgi?id=64023
 				optionLocator += " div[id^='DELETE_WITHOUT_SHORTCUT'] td[id$='_title']";
 				page= null;
 
@@ -285,7 +285,7 @@ public class TreeMail extends AbsTree {
 		
 		if (option == Button.B_DELETE) {
 
-			// See http://bugzilla.zimbra.com/show_bug.cgi?id=64023
+			// See http://bugzilla.zmail.com/show_bug.cgi?id=64023
 			optionLocator += " div[id^='DELETE_WITHOUT_SHORTCUT'] td[id$='_title']";
 			page= null;
 
@@ -362,7 +362,7 @@ public class TreeMail extends AbsTree {
 			page = new DialogTag(MyApplication,
 					((AppAjaxClient) MyApplication).zPageMail);
 			
-			// REF: http://bugzilla.zimbra.com/show_bug.cgi?id=64616#c9
+			// REF: http://bugzilla.zmail.com/show_bug.cgi?id=64616#c9
 			// 
 			// The context menu has 4 forms:
 			//
@@ -663,7 +663,7 @@ public class TreeMail extends AbsTree {
 
 	}
 	/* (non-Javadoc)
-	 * @see com.zimbra.qa.selenium.framework.ui.AbsTree#zPressButton(com.zimbra.qa.selenium.framework.ui.Button)
+	 * @see org.zmail.qa.selenium.framework.ui.AbsTree#zPressButton(org.zmail.qa.selenium.framework.ui.Button)
 	 */
 	@Override
 	public AbsPage zPressButton(Button button) throws HarnessException {
@@ -1022,7 +1022,7 @@ public class TreeMail extends AbsTree {
 		// Create a list of items to return
 		List<ZimletItem> items = new ArrayList<ZimletItem>();
 
-		String treeLocator = ZimbraSeleniumProperties.getAppType() == AppType.DESKTOP ?
+		String treeLocator = ZmailSeleniumProperties.getAppType() == AppType.DESKTOP ?
 				Locators.ztih__main_Mail__ZIMLET_ID_Desktop :
 					Locators.ztih__main_Mail__ZIMLET_ID;
 
@@ -1036,7 +1036,7 @@ public class TreeMail extends AbsTree {
 			String zimletLocator = null;
 			String imageLocator = null;
 			String nameLocator = null;
-			if (ZimbraSeleniumProperties.getAppType() == AppType.DESKTOP) {
+			if (ZmailSeleniumProperties.getAppType() == AppType.DESKTOP) {
 				zimletLocator = "zti__main_Mail_zimlets__" + zimletNum +"_z_div";
 				imageLocator = "xpath=(//*[@id='zti__main_Mail_zimlets__"+ zimletNum +"_z_imageCell']/div)@class";
 				nameLocator = "zti__main_Mail_zimlets__"+ zimletNum +"_z_textCell";
@@ -1101,7 +1101,7 @@ public class TreeMail extends AbsTree {
 		if ( section == FolderSection.Zimlets ) {
 
 			// What is the current state of the section?
-			if (ZimbraSeleniumProperties.getAppType() == AppType.DESKTOP) {
+			if (ZmailSeleniumProperties.getAppType() == AppType.DESKTOP) {
 				locator = "css=div[class*='ZmOverviewZimletHeader'] div[class^='ImgNode']@class";
 			} else {
 				locator = "xpath=(//td[@id='"+ Locators.ztih__main_Mail__ZIMLET_nodeCell_ID +"']/div)@class"; 
@@ -1118,7 +1118,7 @@ public class TreeMail extends AbsTree {
 					return (page);
 				}
 
-				if (ZimbraSeleniumProperties.getAppType() == AppType.DESKTOP) {
+				if (ZmailSeleniumProperties.getAppType() == AppType.DESKTOP) {
 					locator = "css=div[class*='ZmOverviewZimletHeader'] div[class^='ImgNode']";
 				} else {
 					locator = "css=td[id="+ Locators.ztih__main_Mail__ZIMLET_nodeCell_ID +"] div";
@@ -1165,7 +1165,7 @@ public class TreeMail extends AbsTree {
 
 		// Zimlets seem to be loaded last
 		// So, wait for the zimlet div to load
-		String locator = ZimbraSeleniumProperties.getAppType() == AppType.DESKTOP ?
+		String locator = ZmailSeleniumProperties.getAppType() == AppType.DESKTOP ?
 				Locators.ztih__main_Mail__ZIMLET_ID_Desktop :
 					Locators.ztih__main_Mail__ZIMLET_ID;
 

@@ -14,12 +14,12 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.ui;
+package org.zmail.qa.selenium.framework.ui;
 
 import org.apache.log4j.*;
 
 import com.thoughtworks.selenium.SeleniumException;
-import com.zimbra.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.*;
 
 /**
  * The <code>AbsSeparateWindow</code> class is a base class that all 
@@ -70,7 +70,7 @@ public abstract class AbsSeparateWindow extends AbsPage {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.zimbra.qa.selenium.framework.ui.AbsSeleniumObject#sClick(java.lang.String)
+	 * @see org.zmail.qa.selenium.framework.ui.AbsSeleniumObject#sClick(java.lang.String)
 	 */
 	public void sClick(String locator) throws HarnessException {
 		logger.info(myPageName() + " sClick("+ locator +")");
@@ -105,7 +105,7 @@ public abstract class AbsSeparateWindow extends AbsPage {
 	}
 	
 	/* (non-Javadoc)
-	 * @see com.zimbra.qa.selenium.framework.ui.AbsSeleniumObject#sType(java.lang.String, java.lang.String)
+	 * @see org.zmail.qa.selenium.framework.ui.AbsSeleniumObject#sType(java.lang.String, java.lang.String)
 	 */
 	public void sType(String locator, String value) throws HarnessException {
 		logger.info(myPageName() + " sType("+ locator +", " + value +")");
@@ -125,7 +125,7 @@ public abstract class AbsSeparateWindow extends AbsPage {
 	}
 	
 	/* (non-Javadoc)
-	 * @see com.zimbra.qa.selenium.framework.ui.AbsSeleniumObject#sGetText(java.lang.String)
+	 * @see org.zmail.qa.selenium.framework.ui.AbsSeleniumObject#sGetText(java.lang.String)
 	 */
 	public String sGetText(String locator) throws HarnessException {
 		logger.info(myPageName() + " sGetText("+ locator +")");
@@ -147,7 +147,7 @@ public abstract class AbsSeparateWindow extends AbsPage {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.zimbra.qa.selenium.framework.ui.AbsSeleniumObject#sGetBodyText()
+	 * @see org.zmail.qa.selenium.framework.ui.AbsSeleniumObject#sGetBodyText()
 	 */
 	public String sGetBodyText() throws HarnessException {
 		logger.info(myPageName() + " sGetBodyText()");
@@ -283,7 +283,7 @@ public abstract class AbsSeparateWindow extends AbsPage {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.zimbra.qa.selenium.framework.ui.AbsSeleniumObject#sIsElementPresent(java.lang.String)
+	 * @see org.zmail.qa.selenium.framework.ui.AbsSeleniumObject#sIsElementPresent(java.lang.String)
 	 */
 	public boolean sIsElementPresent(String locator) throws HarnessException {
 		logger.info(myPageName() + " sIsElementPresent("+ locator +")");
@@ -305,7 +305,7 @@ public abstract class AbsSeparateWindow extends AbsPage {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.zimbra.qa.selenium.framework.ui.AbsSeleniumObject#zIsVisiblePerPosition(java.lang.String, int, int)
+	 * @see org.zmail.qa.selenium.framework.ui.AbsSeleniumObject#zIsVisiblePerPosition(java.lang.String, int, int)
 	 */
 	public boolean zIsVisiblePerPosition(String locator, int leftLimit, int topLimit)
 	throws HarnessException 
@@ -329,7 +329,7 @@ public abstract class AbsSeparateWindow extends AbsPage {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.zimbra.qa.selenium.framework.ui.AbsSeleniumObject#sGetElementPositionLeft(java.lang.String)
+	 * @see org.zmail.qa.selenium.framework.ui.AbsSeleniumObject#sGetElementPositionLeft(java.lang.String)
 	 */
 	public int sGetElementPositionLeft(String locator)
 	throws HarnessException 
@@ -352,7 +352,7 @@ public abstract class AbsSeparateWindow extends AbsPage {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.zimbra.qa.selenium.framework.ui.AbsSeleniumObject#sGetElementPositionTop(java.lang.String)
+	 * @see org.zmail.qa.selenium.framework.ui.AbsSeleniumObject#sGetElementPositionTop(java.lang.String)
 	 */
 	public int sGetElementPositionTop(String locator)
 	throws HarnessException 
@@ -375,7 +375,7 @@ public abstract class AbsSeparateWindow extends AbsPage {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.zimbra.qa.selenium.framework.ui.AbsSeleniumObject#sFocus(java.lang.String)
+	 * @see org.zmail.qa.selenium.framework.ui.AbsSeleniumObject#sFocus(java.lang.String)
 	 */
 	public void sFocus(String locator) throws HarnessException {
 		logger.info(myPageName() + " sFocus("+ locator +")");
@@ -394,7 +394,7 @@ public abstract class AbsSeparateWindow extends AbsPage {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.zimbra.qa.selenium.framework.ui.AbsSeleniumObject#sMouseDown(java.lang.String)
+	 * @see org.zmail.qa.selenium.framework.ui.AbsSeleniumObject#sMouseDown(java.lang.String)
 	 */
 	public void sMouseDown(String locator) throws HarnessException {
 		logger.info(myPageName() + " sMouseDown("+ locator +")");
@@ -413,7 +413,7 @@ public abstract class AbsSeparateWindow extends AbsPage {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.zimbra.qa.selenium.framework.ui.AbsSeleniumObject#sMouseUp(java.lang.String)
+	 * @see org.zmail.qa.selenium.framework.ui.AbsSeleniumObject#sMouseUp(java.lang.String)
 	 */
 	public void sMouseUp(String locator) throws HarnessException {
 		logger.info(myPageName() + " sMouseUp("+ locator +")");
@@ -432,7 +432,7 @@ public abstract class AbsSeparateWindow extends AbsPage {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.zimbra.qa.selenium.framework.ui.AbsSeleniumObject#zClickAt(java.lang.String, java.lang.String)
+	 * @see org.zmail.qa.selenium.framework.ui.AbsSeleniumObject#zClickAt(java.lang.String, java.lang.String)
 	 */
 	public void zClickAt(String locator, String coord) throws HarnessException {
 		logger.info(myPageName() + " zClickAt("+ locator +", "+ coord +")");
@@ -554,7 +554,7 @@ public abstract class AbsSeparateWindow extends AbsPage {
 	}
 
 	/**
-	 * Used to locate the window.  Window title is "Zimbra: <subject>"
+	 * Used to locate the window.  Window title is "Zmail: <subject>"
 	 * @param title A partial string that must be contained in the window title
 	 */
 	public void zSetWindowTitle(String title) throws HarnessException {

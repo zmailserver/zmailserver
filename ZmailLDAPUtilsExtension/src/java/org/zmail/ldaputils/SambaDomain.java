@@ -12,13 +12,13 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.ldaputils;
+package org.zmail.ldaputils;
 
 import java.util.Map;
 
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.ldap.LdapException;
-import com.zimbra.cs.ldap.ZAttributes;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.ldap.LdapException;
+import org.zmail.cs.ldap.ZAttributes;
 /**
  * @author Greg Solovyev
  */

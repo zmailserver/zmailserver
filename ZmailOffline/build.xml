@@ -1,7 +1,7 @@
-<project name="ZimbraOffline" default="offline-jar">
+<project name="ZmailOffline" default="offline-jar">
 
-  <property name="zd.home.dir" value="/opt/zimbra/zdesktop dev"/>
-  <property name="zimbra.home.dir" value="${zd.home.dir}"/>
+  <property name="zd.home.dir" value="/opt/zmail/zdesktop dev"/>
+  <property name="zmail.home.dir" value="${zd.home.dir}"/>
 
   <import file="../ant-global.xml" />
   
@@ -9,7 +9,7 @@
   <property file="build.properties"/>
   <property environment="env" />
   <property name="offline.appid" value="4062-5711-9195-4050"/>
-  <property name="offline.name" value="Zimbra Desktop"/>
+  <property name="offline.name" value="Zmail Desktop"/>
   <condition property="offline.relabel" value="ALPHA">
     <not><isset property="offline.relabel"/></not>
   </condition>
@@ -22,7 +22,7 @@
 
   <!-- Properties -->
 
-  <property name="jarfile" value="zimbraoffline.jar" />
+  <property name="jarfile" value="zmailoffline.jar" />
   <property name="config.dir" value="conf" />
   <property name='web.dir' value='WebRoot'/>
   <property name="build.src.java.dir" location="${build.dir}/src/java" />
@@ -33,24 +33,24 @@
   <property name="jetty.dir" location="${dist.dir}/jetty" />
   <property name="zimlet.dir" location="../Zimlet/build/dist" />
 
-  <property name="server.src.dir" location="../ZimbraServer/src" />
-  <property name="server.build.dir" location="../ZimbraServer/build" />
+  <property name="server.src.dir" location="../ZmailServer/src" />
+  <property name="server.build.dir" location="../ZmailServer/build" />
   <property name="server.build.lib.dir" location="${server.build.dir}/dist/lib" />
-  <property name="server.lib.dir" location="../ZimbraServer/lib" />
+  <property name="server.lib.dir" location="../ZmailServer/lib" />
 
-  <property name="webclient.dir" location="../ZimbraWebClient" />
+  <property name="webclient.dir" location="../ZmailWebClient" />
   <property name="webclient.build.dir" location="${webclient.dir}/build" />
   <property name="webclient.jars.dir" location="${webclient.dir}/jars" />
   <property name="webclient.web.dir" location="${webclient.dir}/WebRoot" />
 
-  <property name="zsync.common.dir" location="../ZimbraSyncCommon" />
+  <property name="zsync.common.dir" location="../ZmailSyncCommon" />
   <property name="zsync.common.build.dir" location="${zsync.common.dir}/build" />
   <property name="zsync.common.classes.dir" location="${zsync.common.build.dir}/classes" />
-  <property name="zsync.client.dir" location="../ZimbraSyncClient" />
+  <property name="zsync.client.dir" location="../ZmailSyncClient" />
   <property name="zsync.client.build.dir" location="${zsync.client.dir}/build" />
   <property name="zsync.client.classes.dir" location="${zsync.client.build.dir}/classes" />
 
-  <property name="zdext.dir" location="../ZimbraOfflineExt"/>
+  <property name="zdext.dir" location="../ZmailOfflineExt"/>
   <property name="zdext.build.dir" location="${zdext.dir}/build"/>
 
   <condition property="is-windows">
@@ -75,13 +75,13 @@
   </condition>
 
 
-  <property name="zimbra.offline.app.dir" location="${zimbra.home.dir}/app" />
-  <property name="zimbra.offline.data.dir" location="${zimbra.home.dir}/data" />
+  <property name="zmail.offline.app.dir" location="${zmail.home.dir}/app" />
+  <property name="zmail.offline.data.dir" location="${zmail.home.dir}/data" />
 
-  <property name="zimbra.index.dir" location="${zimbra.offline.data.dir}/index"/>
-  <property name="zimbra.store.dir" location="${zimbra.offline.data.dir}/store"/>
-  <property name="zimbra.sqlite.dir" location="${zimbra.offline.data.dir}/sqlite"/>
-  <property name="zimbra.heapdump.dir" location="${zimbra.offline.data.dir}/heapdump"/>
+  <property name="zmail.index.dir" location="${zmail.offline.data.dir}/index"/>
+  <property name="zmail.store.dir" location="${zmail.offline.data.dir}/store"/>
+  <property name="zmail.sqlite.dir" location="${zmail.offline.data.dir}/sqlite"/>
+  <property name="zmail.heapdump.dir" location="${zmail.offline.data.dir}/heapdump"/>
 
   <property name="build.zmprov" location="${build.dir}/data/zmprov.txt" />
 
@@ -92,10 +92,10 @@
 
   <property name="ical4j.jar" value="ical4j-0.9.16-patched.jar" />
 
-  <property name="jetty.home.dir" location="${zimbra.offline.app.dir}/jetty" />
-  <property name="jetty.data.dir" location="${zimbra.offline.data.dir}/jetty"/>
+  <property name="jetty.home.dir" location="${zmail.offline.app.dir}/jetty" />
+  <property name="jetty.data.dir" location="${zmail.offline.data.dir}/jetty"/>
 
-  <property name="zimbra.warfile" location="${webclient.build.dir}/dist/jetty/webapps/zimbra.war" />
+  <property name="zmail.warfile" location="${webclient.build.dir}/dist/jetty/webapps/zmail.war" />
 
   <property name="jetty.src.dir" location="../ThirdParty/jetty" />
   <property name="prism.src.dir" location="../ThirdParty/prism" />
@@ -186,13 +186,13 @@
 
   <target name="offline-compile" depends="offline-build-init" description="Compiles the source code">
     <ant dir="${client.dir}" target="jar" inheritAll="false" >
-      <property name="zimbra.home.dir" value="${zd.home.dir}"/>
+      <property name="zmail.home.dir" value="${zd.home.dir}"/>
     </ant>
-    <ant dir="../ZimbraServer" target="dev-dist" inheritAll="false">
-      <property name="zimbra.home.dir" value="${zd.home.dir}"/>
-      <property name="zimbra.buildinfo.version" value="${offline.version}"/>
-      <property name="zimbra.buildinfo.type" value="${offline.appid}"/>
-      <property name="zimbra.buildinfo.release" value="${offline.name}"/>
+    <ant dir="../ZmailServer" target="dev-dist" inheritAll="false">
+      <property name="zmail.home.dir" value="${zd.home.dir}"/>
+      <property name="zmail.buildinfo.version" value="${offline.version}"/>
+      <property name="zmail.buildinfo.type" value="${offline.appid}"/>
+      <property name="zmail.buildinfo.release" value="${offline.name}"/>
     </ant>
     <javac destdir="${build.classes.dir}" debug="true" classpathref="offline.class.path" target="1.6">
       <src refid="all.java.path" />
@@ -210,53 +210,53 @@
 
   <target name="offline-ext-jars">
     <ant dir="${zsync.common.dir}" target="jar" inheritAll="false" >
-      <property name="zimbra.home.dir" value="${zd.home.dir}"/>
+      <property name="zmail.home.dir" value="${zd.home.dir}"/>
   	</ant>
     <ant dir="${zsync.client.dir}" target="jar" inheritAll="false">
-	  <property name="zimbra.home.dir" value="${zd.home.dir}"/>
+	  <property name="zmail.home.dir" value="${zd.home.dir}"/>
     </ant>
     <ant dir="${zdext.dir}" target="jar" inheritAll="false" >
-	  <property name="zimbra.home.dir" value="${zd.home.dir}"/>
+	  <property name="zmail.home.dir" value="${zd.home.dir}"/>
     </ant>
   </target>
 
   <target name="offline-jar" depends="offline-compile" description="Creates the jar file">
-    <jar destfile="${build.dir}/${jarfile}" basedir="${build.classes.dir}" excludes="com/zimbra/cs/offline/jsp/**,com/zimbra/cs/offline/OfflineLC.class"/>
-    <jar destfile="${build.dir}/offlinejsp.jar" basedir="${build.classes.dir}" includes="com/zimbra/cs/offline/jsp/*.class"/>
-  	<jar destfile="${build.dir}/offlinelc.jar" basedir="${build.classes.dir}" includes="com/zimbra/cs/offline/OfflineLC.class"/>
-    <jar destfile="${build.dir}/zdesktop.jar" basedir="${build.classes.dir}" includes="com/zimbra/cs/offline/start/Main.class,com/zimbra/cs/offline/wrapper/WrapperUtil.class" />
-    <jar destfile="${build.dir}/offlinecfgtool.jar" basedir="${build.classes.dir}" includes="com/zimbra/cs/offline/OfflineConfigTool.class" />
+    <jar destfile="${build.dir}/${jarfile}" basedir="${build.classes.dir}" excludes="org/zmail/cs/offline/jsp/**,org/zmail/cs/offline/OfflineLC.class"/>
+    <jar destfile="${build.dir}/offlinejsp.jar" basedir="${build.classes.dir}" includes="org/zmail/cs/offline/jsp/*.class"/>
+  	<jar destfile="${build.dir}/offlinelc.jar" basedir="${build.classes.dir}" includes="org/zmail/cs/offline/OfflineLC.class"/>
+    <jar destfile="${build.dir}/zdesktop.jar" basedir="${build.classes.dir}" includes="org/zmail/cs/offline/start/Main.class,org/zmail/cs/offline/wrapper/WrapperUtil.class" />
+    <jar destfile="${build.dir}/offlinecfgtool.jar" basedir="${build.classes.dir}" includes="org/zmail/cs/offline/OfflineConfigTool.class" />
   </target>
 
   <target name="offline-clean" description="Removes build files and undeploys extension">
     <delete dir="${build.dir}" />
     <if><isset property="build.exchange.ext" /><then>
-      <ant dir="../ZimbraSyncCommon" target="clean" inheritAll="false" >
-        <property name="zimbra.home.dir" value="${zd.home.dir}"/>
+      <ant dir="../ZmailSyncCommon" target="clean" inheritAll="false" >
+        <property name="zmail.home.dir" value="${zd.home.dir}"/>
       </ant>
-      <ant dir="../ZimbraSyncClient" target="clean" inheritAll="false" >
-        <property name="zimbra.home.dir" value="${zd.home.dir}"/>
+      <ant dir="../ZmailSyncClient" target="clean" inheritAll="false" >
+        <property name="zmail.home.dir" value="${zd.home.dir}"/>
       </ant>
     </then></if>
-    <ant dir="../ZimbraCommon" target="clean" inheritAll="false" >
-	  <property name="zimbra.home.dir" value="${zd.home.dir}"/>
+    <ant dir="../ZmailCommon" target="clean" inheritAll="false" >
+	  <property name="zmail.home.dir" value="${zd.home.dir}"/>
     </ant>
-    <ant dir="../ZimbraClient" target="clean" inheritAll="false" >
-      <property name="zimbra.home.dir" value="${zd.home.dir}"/>
+    <ant dir="../ZmailClient" target="clean" inheritAll="false" >
+      <property name="zmail.home.dir" value="${zd.home.dir}"/>
     </ant>
-    <ant dir="../ZimbraServer" target="clean" inheritAll="false" >
-      <property name="zimbra.home.dir" value="${zd.home.dir}"/>
+    <ant dir="../ZmailServer" target="clean" inheritAll="false" >
+      <property name="zmail.home.dir" value="${zd.home.dir}"/>
     </ant>
-    <ant dir="../ZimbraWebClient" target="clean" inheritAll="false" >
-      <property name="zimbra.home.dir" value="${zd.home.dir}"/>
+    <ant dir="../ZmailWebClient" target="clean" inheritAll="false" >
+      <property name="zmail.home.dir" value="${zd.home.dir}"/>
     </ant>
   </target>
 
   <target name="offline-webroot">
-    <copy todir="${param.jetty.dir}/webapps/zimbra" overwrite="true">
+    <copy todir="${param.jetty.dir}/webapps/zmail" overwrite="true">
       <fileset dir="${web.dir}" includes="**/*" excludes="WEB-INF/classes/desktop/*"/>
     </copy>
-    <copy todir="${param.jetty.dir}/webapps/zimbra/WEB-INF/classes/messages" overwrite="true">
+    <copy todir="${param.jetty.dir}/webapps/zmail/WEB-INF/classes/messages" overwrite="true">
       <fileset dir="${web.dir}/WEB-INF/classes/desktop" includes="**/*"/>
     </copy>
   </target>
@@ -269,17 +269,17 @@
     </copy>
   </target>
 
-  <target name="offline-zimbra-war">
-    <ant dir="../ZimbraWebClient" target="war" inheritAll="false" >
-      <property name="zimbra.buildinfo.version" value="${offline.version} ${offline.relabel}"/>
-      <property name="zimbra.buildinfo.release" value="${offline.buildid}"/>
-      <property name="zimbra.home.dir" value="${zd.home.dir}"/>
+  <target name="offline-zmail-war">
+    <ant dir="../ZmailWebClient" target="war" inheritAll="false" >
+      <property name="zmail.buildinfo.version" value="${offline.version} ${offline.relabel}"/>
+      <property name="zmail.buildinfo.release" value="${offline.buildid}"/>
+      <property name="zmail.home.dir" value="${zd.home.dir}"/>
     </ant>
-    <unzip src="${zimbra.warfile}" dest="${dist.dir}/jetty/webapps/zimbra" overwrite="true"/>
-    <delete dir="${dist.dir}/jetty/webapps/zimbra/help"/>
-  	<delete file="${dist.dir}/jetty/webapps/zimbra/WEB-INF/jetty-env.xml"/>
+    <unzip src="${zmail.warfile}" dest="${dist.dir}/jetty/webapps/zmail" overwrite="true"/>
+    <delete dir="${dist.dir}/jetty/webapps/zmail/help"/>
+  	<delete file="${dist.dir}/jetty/webapps/zmail/WEB-INF/jetty-env.xml"/>
     <tstamp><format property="build.simpleDate" pattern="yyMMddHHmmss" /></tstamp>
-    <copy file="${config.dir}/web_zimbra.xml" tofile="${dist.dir}/jetty/webapps/zimbra/WEB-INF/web.xml" overwrite="true">
+    <copy file="${config.dir}/web_zmail.xml" tofile="${dist.dir}/jetty/webapps/zmail/WEB-INF/web.xml" overwrite="true">
       <filterset>
         <filter token="jsVersion" value="${build.simpleDate}"/>
         <filter token="production" value="${param.production}"/>
@@ -290,51 +290,51 @@
       <param name="param.jetty.dir" value="${dist.dir}/jetty" />
     </antcall>
 
-    <copy todir="${dist.dir}/jetty/webapps/zimbra/WEB-INF/lib">
+    <copy todir="${dist.dir}/jetty/webapps/zmail/WEB-INF/lib">
       <fileset dir="${build.dir}" includes="offlinejsp.jar,${jarfile}"/>
     </copy>
 
-    <!--<unzip src="${webclient.web.dir}/help/WebHelp.zip" dest="${dist.dir}/jetty/webapps/zimbra" overwrite="true"/>-->
-    <!--<move file="${dist.dir}/jetty/webapps/zimbra/WebHelp" tofile="${dist.dir}/jetty/webapps/zimbra/help" />-->
-    <copy file="src/installer/resources/launcher_16x16.ico" tofile="${dist.dir}/jetty/webapps/zimbra/favicon.ico"/>
-    <copy file="${dist.dir}/jetty/webapps/zimbra/favicon.ico" tofile="${dist.dir}/jetty/webapps/zimbra/img/logo/favicon.ico"/>
+    <!--<unzip src="${webclient.web.dir}/help/WebHelp.zip" dest="${dist.dir}/jetty/webapps/zmail" overwrite="true"/>-->
+    <!--<move file="${dist.dir}/jetty/webapps/zmail/WebHelp" tofile="${dist.dir}/jetty/webapps/zmail/help" />-->
+    <copy file="src/installer/resources/launcher_16x16.ico" tofile="${dist.dir}/jetty/webapps/zmail/favicon.ico"/>
+    <copy file="${dist.dir}/jetty/webapps/zmail/favicon.ico" tofile="${dist.dir}/jetty/webapps/zmail/img/logo/favicon.ico"/>
 
-    <replace file="${dist.dir}/jetty/webapps/zimbra/js/zimbraMail/share/model/ZmSettings.js" token="@buildVersion@" value="${offline.version} ${offline.relabel}"/>
-    <replace file="${dist.dir}/jetty/webapps/zimbra/js/zimbraMail/share/model/ZmSettings.js" token="@buildRelease@" value="${offline.buildid}"/>
-    <replace file="${dist.dir}/jetty/webapps/zimbra/js/zimbraMail/share/model/ZmSettings.js" token="@buildDateTime@" value="${DSTAMP}-${TSTAMP}"/>
+    <replace file="${dist.dir}/jetty/webapps/zmail/js/zmailMail/share/model/ZmSettings.js" token="@buildVersion@" value="${offline.version} ${offline.relabel}"/>
+    <replace file="${dist.dir}/jetty/webapps/zmail/js/zmailMail/share/model/ZmSettings.js" token="@buildRelease@" value="${offline.buildid}"/>
+    <replace file="${dist.dir}/jetty/webapps/zmail/js/zmailMail/share/model/ZmSettings.js" token="@buildDateTime@" value="${DSTAMP}-${TSTAMP}"/>
 
-    <replace file="${dist.dir}/jetty/webapps/zimbra/skins/_base/base2/splash.html" token="&lt;div id='ZLoginAppName'&gt;&lt;script&gt;document.write(ZmMsg.splashScreenAppName)&lt;/script&gt;&lt;/div&gt;" value="&lt;div id='ZLoginAppName'&gt;&lt;script&gt;document.write(ZmMsg.splashScreenOfflineName)&lt;/script&gt;&lt;/div&gt;"/>
-    <replace file="${dist.dir}/jetty/webapps/zimbra/skins/_base/base2/splash.html" token="&lt;td id='ZLoginSwitchMsg'&gt;&lt;script&gt;document.write(ZmMsg.splashScreenSwitch)&lt;/script&gt;&lt;/td&gt;" value=""/>
-    <!--replace file="${dist.dir}/jetty/webapps/zimbra/skins/_base/base2/splash.html" token="ZmMsg.splashScreenAppName" value="ZmMsg.splashScreenOfflineName"/-->
-    <replace file="${dist.dir}/jetty/webapps/zimbra/skins/_base/base/skin.html" token="&lt;div id='ZLoginAppName'&gt;&lt;script&gt;document.write(ZmMsg.splashScreenAppName)&lt;/script&gt;&lt;/div&gt;" value=""/>
-    <replace file="${dist.dir}/jetty/webapps/zimbra/skins/_base/base/skin.html" token="&lt;a href='javascript:switchToStandardClient()'&gt;&lt;script&gt;document.write(ZmMsg.switchToStandardClient)&lt;/script&gt;&lt;/a&gt;" value=""/>
-    <!--replace file="${dist.dir}/jetty/webapps/zimbra/skins/_base/base/skin.html" token="ZmMsg.splashScreenAppName" value="ZmMsg.splashScreenOfflineName"/-->
+    <replace file="${dist.dir}/jetty/webapps/zmail/skins/_base/base2/splash.html" token="&lt;div id='ZLoginAppName'&gt;&lt;script&gt;document.write(ZmMsg.splashScreenAppName)&lt;/script&gt;&lt;/div&gt;" value="&lt;div id='ZLoginAppName'&gt;&lt;script&gt;document.write(ZmMsg.splashScreenOfflineName)&lt;/script&gt;&lt;/div&gt;"/>
+    <replace file="${dist.dir}/jetty/webapps/zmail/skins/_base/base2/splash.html" token="&lt;td id='ZLoginSwitchMsg'&gt;&lt;script&gt;document.write(ZmMsg.splashScreenSwitch)&lt;/script&gt;&lt;/td&gt;" value=""/>
+    <!--replace file="${dist.dir}/jetty/webapps/zmail/skins/_base/base2/splash.html" token="ZmMsg.splashScreenAppName" value="ZmMsg.splashScreenOfflineName"/-->
+    <replace file="${dist.dir}/jetty/webapps/zmail/skins/_base/base/skin.html" token="&lt;div id='ZLoginAppName'&gt;&lt;script&gt;document.write(ZmMsg.splashScreenAppName)&lt;/script&gt;&lt;/div&gt;" value=""/>
+    <replace file="${dist.dir}/jetty/webapps/zmail/skins/_base/base/skin.html" token="&lt;a href='javascript:switchToStandardClient()'&gt;&lt;script&gt;document.write(ZmMsg.switchToStandardClient)&lt;/script&gt;&lt;/a&gt;" value=""/>
+    <!--replace file="${dist.dir}/jetty/webapps/zmail/skins/_base/base/skin.html" token="ZmMsg.splashScreenAppName" value="ZmMsg.splashScreenOfflineName"/-->
 
-    <delete dir="${dist.dir}/jetty/webapps/zimbra/WEB-INF/tags/mobile"/>
-    <delete dir="${dist.dir}/jetty/webapps/zimbra/h" excludes="imessage,message,print*,rest,viewimages"/>
-    <delete dir="${dist.dir}/jetty/webapps/zimbra/img/admin"/>
-    <delete dir="${dist.dir}/jetty/webapps/zimbra/img/htmlEdit"/>
-    <delete dir="${dist.dir}/jetty/webapps/zimbra/img/mobile"/>
-    <delete dir="${dist.dir}/jetty/webapps/zimbra/img/voicemail"/>
-    <delete dir="${dist.dir}/jetty/webapps/zimbra/m"/>
-    <delete dir="${dist.dir}/jetty/webapps/zimbra/portals"/>
-    <delete dir="${dist.dir}/jetty/webapps/zimbra/public/tmp"/>
-    <delete dir="${dist.dir}/jetty/webapps/zimbra/skins/_sample"/>
-    <delete dir="${dist.dir}/jetty/webapps/zimbra/skins/bare"/>
-    <delete dir="${dist.dir}/jetty/webapps/zimbra/skins/beach"/>
-    <delete dir="${dist.dir}/jetty/webapps/zimbra/skins/bones"/>
-    <delete dir="${dist.dir}/jetty/webapps/zimbra/skins/goldrush"/>
-    <delete dir="${dist.dir}/jetty/webapps/zimbra/skins/hotrod"/>
-    <delete dir="${dist.dir}/jetty/webapps/zimbra/skins/lavender"/>
-    <delete dir="${dist.dir}/jetty/webapps/zimbra/skins/lemongrass"/>
-    <delete dir="${dist.dir}/jetty/webapps/zimbra/skins/sand"/>
-    <delete dir="${dist.dir}/jetty/webapps/zimbra/skins/sky"/>
-    <delete dir="${dist.dir}/jetty/webapps/zimbra/skins/steel"/>
-    <delete dir="${dist.dir}/jetty/webapps/zimbra/skins/waves"/>
-    <delete dir="${dist.dir}/jetty/webapps/zimbra/skins/yahoo"/>
-    <delete dir="${dist.dir}/jetty/webapps/zimbra/skins/zmail"/>
-    <delete dir="${dist.dir}/jetty/webapps/zimbra/test"/>
-    <delete dir="${dist.dir}/jetty/webapps/zimbra/yui"/>
+    <delete dir="${dist.dir}/jetty/webapps/zmail/WEB-INF/tags/mobile"/>
+    <delete dir="${dist.dir}/jetty/webapps/zmail/h" excludes="imessage,message,print*,rest,viewimages"/>
+    <delete dir="${dist.dir}/jetty/webapps/zmail/img/admin"/>
+    <delete dir="${dist.dir}/jetty/webapps/zmail/img/htmlEdit"/>
+    <delete dir="${dist.dir}/jetty/webapps/zmail/img/mobile"/>
+    <delete dir="${dist.dir}/jetty/webapps/zmail/img/voicemail"/>
+    <delete dir="${dist.dir}/jetty/webapps/zmail/m"/>
+    <delete dir="${dist.dir}/jetty/webapps/zmail/portals"/>
+    <delete dir="${dist.dir}/jetty/webapps/zmail/public/tmp"/>
+    <delete dir="${dist.dir}/jetty/webapps/zmail/skins/_sample"/>
+    <delete dir="${dist.dir}/jetty/webapps/zmail/skins/bare"/>
+    <delete dir="${dist.dir}/jetty/webapps/zmail/skins/beach"/>
+    <delete dir="${dist.dir}/jetty/webapps/zmail/skins/bones"/>
+    <delete dir="${dist.dir}/jetty/webapps/zmail/skins/goldrush"/>
+    <delete dir="${dist.dir}/jetty/webapps/zmail/skins/hotrod"/>
+    <delete dir="${dist.dir}/jetty/webapps/zmail/skins/lavender"/>
+    <delete dir="${dist.dir}/jetty/webapps/zmail/skins/lemongrass"/>
+    <delete dir="${dist.dir}/jetty/webapps/zmail/skins/sand"/>
+    <delete dir="${dist.dir}/jetty/webapps/zmail/skins/sky"/>
+    <delete dir="${dist.dir}/jetty/webapps/zmail/skins/steel"/>
+    <delete dir="${dist.dir}/jetty/webapps/zmail/skins/waves"/>
+    <delete dir="${dist.dir}/jetty/webapps/zmail/skins/yahoo"/>
+    <delete dir="${dist.dir}/jetty/webapps/zmail/skins/zmail"/>
+    <delete dir="${dist.dir}/jetty/webapps/zmail/test"/>
+    <delete dir="${dist.dir}/jetty/webapps/zmail/yui"/>
   </target>
 
   <target name="offline-zimlet-war">
@@ -343,7 +343,7 @@
 
   <!-- to skip compress, run: ant -Dnocompress=true {target} -->
   <target name='offline-compress' unless="nocompress">
-    <fileset id="js-includes" dir="${dist.dir}/app/jetty/webapps/zimbra">
+    <fileset id="js-includes" dir="${dist.dir}/app/jetty/webapps/zmail">
       <include name="js/ajax/**/*.js" />
       <include name="templates/**/*.js" />
       <include name="tiny_mce/**/*.css" />
@@ -352,7 +352,7 @@
     </fileset>
 
     <taskdef name="try"
-       classname="com.zimbra.webClient.build.TryTask"
+       classname="org.zmail.webClient.build.TryTask"
        classpath="${webclient.build.dir}/classes"
     />
 
@@ -370,7 +370,7 @@
         </replaceregexp>
         <try>
           <block>
-            <java jar="${common.jars.dir}/yuicompressor-2.4.2-zimbra.jar"
+            <java jar="${common.jars.dir}/yuicompressor-2.4.2-zmail.jar"
               fork="true" failonerror="true" output="${build.dir}/yui-compress.out">
               <arg value="--charset"/>
               <arg value="utf-8"/>
@@ -389,7 +389,7 @@
         </try>
         <concat destfile="@{var}" fixlastline="true">
           <header filtering="no" trimleading="yes">
-/* Copyright (C) 2005-2009 Zimbra Inc. http://www.zimbra.com/ */
+/* Copyright (C) 2005-2009 Zmail Inc. http://www.zmail.com/ */
           </header>
           <fileset file='@{var}.tmp'/>
         </concat>
@@ -402,17 +402,17 @@
 
   <target name="offline-sqlite-init">
       <!-- SQLite JDBC driver doesn't support Statement.setEscapeProcessing, which breaks the <sql/> task. -->
-    <delete dir="${zimbra.sqlite.dir}"/>
-    <mkdir dir="${zimbra.sqlite.dir}"/>
+    <delete dir="${zmail.sqlite.dir}"/>
+    <mkdir dir="${zmail.sqlite.dir}"/>
 
-    <exec executable="sqlite3" dir="${zimbra.sqlite.dir}"
-      failonerror="true" failifexecutionfails="true" input="${zimbra.offline.app.dir}/db/init.sql">
-      <arg line="zimbra.db"/>
+    <exec executable="sqlite3" dir="${zmail.sqlite.dir}"
+      failonerror="true" failifexecutionfails="true" input="${zmail.offline.app.dir}/db/init.sql">
+      <arg line="zmail.db"/>
     </exec>
   </target>
 
   <target name="sqlite-versions-init">
-    <java classname="com.zimbra.cs.db.SQLite" fork="true" classpathref="offline.class.path" failonerror="true">
+    <java classname="org.zmail.cs.db.SQLite" fork="true" classpathref="offline.class.path" failonerror="true">
       <arg line="-o ${build.dir}"/>
     </java>
   </target>
@@ -421,7 +421,7 @@
 
   <target name="offline-dev-dist">
     <antcall target="offline-war" />
-    <antcall target="offline-zimbra-war">
+    <antcall target="offline-zmail-war">
       <param name="param.development" value="${param.development}" />
       <param name="param.production" value="${param.production}" />
     </antcall>
@@ -432,9 +432,9 @@
         <copy tofile="${dist.dir}/conf/zdesktop.conf" file="${config.dir}/zdesktop.conf" overwrite="true" />
     <copy tofile="${dist.dir}/conf/timezones.ics" file="${server.conf.dir}/timezones.ics" overwrite="true" />
     <if><isset property="is-windows" /><then>
-      <win-copy-binary dst="${dist.dir}/conf/zimbra-contact-fields.xml" src="${server.conf.dir}/contacts/zimbra-contact-fields.xml" />
+      <win-copy-binary dst="${dist.dir}/conf/zmail-contact-fields.xml" src="${server.conf.dir}/contacts/zmail-contact-fields.xml" />
     </then><else>
-      <copy tofile="${dist.dir}/conf/zimbra-contact-fields.xml" file="${server.conf.dir}/contacts/zimbra-contact-fields.xml" overwrite="true" />
+      <copy tofile="${dist.dir}/conf/zmail-contact-fields.xml" file="${server.conf.dir}/contacts/zmail-contact-fields.xml" overwrite="true" />
     </else></if>
     <copy todir="${dist.dir}/conf/msgs" overwrite="true">
       <fileset dir="${server.conf.dir}/msgs" />
@@ -449,7 +449,7 @@
       <fileset dir="${server.conf.dir}/rights" excludes="*admin*" />
     </copy>
     <if><isset property="is-windows" /><then>
-      <fixcrlf srcdir="${dist.dir}/conf" eol="unix" includes="**" excludes="zimbra-contact-fields.xml" />
+      <fixcrlf srcdir="${dist.dir}/conf" eol="unix" includes="**" excludes="zmail-contact-fields.xml" />
     </then><else>
       <fixcrlf srcdir="${dist.dir}/conf" eol="unix" includes="**" />
     </else></if>
@@ -490,21 +490,21 @@
       <fileset dir="${build.dir}" includes="*.sql"/>
       <filterset>
         <filter token="ZIMBRA_HOME" value=""/>
-        <filter token="ZIMBRA_INSTALL" value="${zimbra.offline.app.dir}/"/>
+        <filter token="ZIMBRA_INSTALL" value="${zmail.offline.app.dir}/"/>
       </filterset>
     </copy>
 
     <copy todir="${dist.dir}/jetty/common/lib" overwrite="true">
       <fileset file="${common.jars.dir}/sqlite*.jar"/>
     </copy>
-    <java classname="com.zimbra.cs.localconfig.LocalConfigCLI" fork="true" classpathref="offline.class.path" failonerror="true">
+    <java classname="org.zmail.cs.localconfig.LocalConfigCLI" fork="true" classpathref="offline.class.path" failonerror="true">
       <jvmarg value="-Djava.library.path=${server.build.lib.dir}"/>
-      <sysproperty key="zimbra.config" value="${dist.dir}/conf/localconfig.xml"/>
-      <arg line="-e zimbra_class_database=com.zimbra.cs.db.SQLite -f"/>
+      <sysproperty key="zmail.config" value="${dist.dir}/conf/localconfig.xml"/>
+      <arg line="-e zmail_class_database=org.zmail.cs.db.SQLite -f"/>
     </java>
-    <java classname="com.zimbra.cs.localconfig.LocalConfigCLI" fork="true" classpathref="offline.class.path" failonerror="true">
+    <java classname="org.zmail.cs.localconfig.LocalConfigCLI" fork="true" classpathref="offline.class.path" failonerror="true">
       <jvmarg value="-Djava.library.path=${server.build.lib.dir}"/>
-      <sysproperty key="zimbra.config" value="${dist.dir}/conf/localconfig.xml" />
+      <sysproperty key="zmail.config" value="${dist.dir}/conf/localconfig.xml" />
       <arg line="-e debug_disable_mailbox_group=true -f"/>
     </java>
 
@@ -515,7 +515,7 @@
 
   <target name="offline-redeploy-zimlets">
     <antcall target="offline-build-zimlets"/>
-      <copy todir="${zimbra.home.dir}/zimlets" overwrite="true">
+      <copy todir="${zmail.home.dir}/zimlets" overwrite="true">
         <fileset dir="${dist.data.dir}/zimlets" includes="*.zip" />
       </copy>
     <antcall target="offline-deploy-zimlets"/>
@@ -524,7 +524,7 @@
   <target name="offline-deploy-zimlets">
     <foreach target="offline-install-zimlet" param="zimlet">
       <path>
-        <fileset dir="${zimbra.offline.data.dir}/zimlets" includes="*.zip" />
+        <fileset dir="${zmail.offline.data.dir}/zimlets" includes="*.zip" />
       </path>
       <param name="action" value="deploy" />
     </foreach>
@@ -532,8 +532,8 @@
 
   <target name="offline-install-zimlet">
     <echo>${action} ${zimlet}</echo>
-    <java classname="com.zimbra.cs.zimlet.ZimletUtil" fork="true" classpathref="deploy.class.path" failonerror="true">
-      <sysproperty key="zimbra.config" value="${zimbra.offline.data.dir}/conf/localconfig.xml" />
+    <java classname="org.zmail.cs.zimlet.ZimletUtil" fork="true" classpathref="deploy.class.path" failonerror="true">
+      <sysproperty key="zmail.config" value="${zmail.offline.data.dir}/conf/localconfig.xml" />
       <arg line="-a http://localhost:7733/service/admin/soap/" />
       <arg line="-u http://localhost:7733/service/upload?fmt=raw" />
       <arg line="${action}" />
@@ -542,10 +542,10 @@
   </target>
 
   <target name="offline-add-sync-targets" depends="offline-build-init">
-    <!-- insert only account-creation commands here, of the form "ca foo@zimbra.com my-p455w0rd offlineRemoteServerUri 'https://dogfood.zimbra.com'" -->
+    <!-- insert only account-creation commands here, of the form "ca foo@zmail.com my-p455w0rd offlineRemoteServerUri 'https://dogfood.zmail.com'" -->
     <echo file="${build.zmprov}" />
 
-    <java classname="com.zimbra.cs.account.ProvUtil" fork="true" classpathref="offline.class.path" failonerror="true">
+    <java classname="org.zmail.cs.account.ProvUtil" fork="true" classpathref="offline.class.path" failonerror="true">
       <arg line="-f ${build.zmprov} -v" />
     </java>
   </target>
@@ -589,9 +589,9 @@
   </target>
 
     <target name="start-jetty-unix" if="is-unix">
-        <exec executable="${zimbra.offline.data.dir}/bin/zdesktop">
+        <exec executable="${zmail.offline.data.dir}/bin/zdesktop">
             <arg value="start"/>
-            <env key="ZIMBRA_HOME" value="${zimbra.offline.data.dir}"/>
+            <env key="ZIMBRA_HOME" value="${zmail.offline.data.dir}"/>
         </exec>
     </target>
 
@@ -603,11 +603,11 @@
 
     <target name="stop-jetty-unix" if="is-unix">
         <if>
-            <available file="${zimbra.offline.data.dir}/bin/zdesktop" type="file"/>
+            <available file="${zmail.offline.data.dir}/bin/zdesktop" type="file"/>
             <then>
-                <exec executable="${zimbra.offline.data.dir}/bin/zdesktop">
+                <exec executable="${zmail.offline.data.dir}/bin/zdesktop">
                     <arg value="stop"/>
-                    <env key="ZIMBRA_HOME" value="${zimbra.offline.data.dir}"/>
+                    <env key="ZIMBRA_HOME" value="${zmail.offline.data.dir}"/>
                 </exec>
             </then>
             <else>
@@ -620,14 +620,14 @@
 
   <target name="start-jetty-java">
     <java dir="${jetty.home.dir}" jar="${jetty.home.dir}/start.jar" fork="true" spawn="true">
-      <sysproperty key="java.library.path" value="${zimbra.offline.app.dir}/lib" />
+      <sysproperty key="java.library.path" value="${zmail.offline.app.dir}/lib" />
       <sysproperty key="java.awt.headless" value="true" />
       <sysproperty key="START" value="${jetty.home.dir}/etc/start.config" />
       <sysproperty key="STOP.PORT" value="7678" />
       <sysproperty key="STOP.KEY" value="stop" />
-      <sysproperty key="zimbra.config" value="${zimbra.offline.data.dir}/conf/localconfig.xml" />
-      <sysproperty key="jetty.home" value="${zimbra.offline.app.dir}/jetty" />
-      <arg value="${zimbra.offline.data.dir}/jetty/etc/jetty.xml" />
+      <sysproperty key="zmail.config" value="${zmail.offline.data.dir}/conf/localconfig.xml" />
+      <sysproperty key="jetty.home" value="${zmail.offline.app.dir}/jetty" />
+      <arg value="${zmail.offline.data.dir}/jetty/etc/jetty.xml" />
     </java>
   </target>
 
@@ -652,34 +652,34 @@
         <antcall target="offline-server-stop" />
       </then>
     </if>
-    <delete dir="${zimbra.home.dir}" />
+    <delete dir="${zmail.home.dir}" />
 
     <antcall target="offline-make-dist">
-      <param name="param.app.dir" value="${zimbra.home.dir}/app" />
-      <param name="param.data.dir" value="${zimbra.home.dir}/data" />
+      <param name="param.app.dir" value="${zmail.home.dir}/app" />
+      <param name="param.data.dir" value="${zmail.home.dir}/data" />
       <param name="param.development" value="true" />
       <param name="param.port" value="7733" />
       <param name="param.production" value="false" />
     </antcall>
-    <copy todir="${zimbra.home.dir}" overwrite="true">
+    <copy todir="${zmail.home.dir}" overwrite="true">
       <fileset dir="${dist.dir}" includes="app/**,data/**"/>
     </copy>
-    <unzip src="${dist.dir}/ext/exchange.zip" dest="${zimbra.home.dir}/app/lib/ext" overwrite="true"/>
-    <unzip src="${dist.dir}/ext/offlineext.zip" dest="${zimbra.home.dir}/app/lib/ext" overwrite="true"/>
+    <unzip src="${dist.dir}/ext/exchange.zip" dest="${zmail.home.dir}/app/lib/ext" overwrite="true"/>
+    <unzip src="${dist.dir}/ext/offlineext.zip" dest="${zmail.home.dir}/app/lib/ext" overwrite="true"/>
 
-    <mkdir dir="${zimbra.sqlite.dir}" />
+    <mkdir dir="${zmail.sqlite.dir}" />
     <if>
       <isset property="is-unix" />
       <then>
-        <copy tofile="${zimbra.offline.data.dir}/bin/zmjava" file="src/bin/zmjava" overwrite="true"/>
+        <copy tofile="${zmail.offline.data.dir}/bin/zmjava" file="src/bin/zmjava" overwrite="true"/>
         <chmod perm="a+rx">
-          <fileset dir="${zimbra.offline.data.dir}/bin"/>
+          <fileset dir="${zmail.offline.data.dir}/bin"/>
         </chmod>
-        <copy tofile="${zimbra.offline.app.dir}/lib/libzimbra-native.jnilib" file="../ZimbraServer/lib/libzimbra-native.jnilib.MacOSX" overwrite="true"/>
-        <copy tofile="${zimbra.offline.app.dir}/lib/libzimbra-native.so" file="../ZimbraServer/lib/libzimbra-native.so.Linux.i386" overwrite="true"/>
+        <copy tofile="${zmail.offline.app.dir}/lib/libzmail-native.jnilib" file="../ZmailServer/lib/libzmail-native.jnilib.MacOSX" overwrite="true"/>
+        <copy tofile="${zmail.offline.app.dir}/lib/libzmail-native.so" file="../ZmailServer/lib/libzmail-native.so.Linux.i386" overwrite="true"/>
       </then>
     </if>
-    <mkdir dir="${zimbra.heapdump.dir}" />
+    <mkdir dir="${zmail.heapdump.dir}" />
   </target>
 
   <target name="offline-reset-the-world-part-2">
@@ -710,16 +710,16 @@
   <target name="offline-build-zimlets">
     <antcall target="offline-build-zd-zimlets" />
     <ant dir="../Zimlet" target="clean" inheritAll="false" >
-      <property name="zimbra.home.dir" value="${zd.home.dir}"/>
+      <property name="zmail.home.dir" value="${zd.home.dir}"/>
     </ant>
     <ant dir="../Zimlet" target="package-zimlets" inheritAll="false" >
-      <property name="zimbra.home.dir" value="${zd.home.dir}"/>
+      <property name="zmail.home.dir" value="${zd.home.dir}"/>
     </ant>
     <ant dir="../Zimlet" target="package-zimlets-offline" inheritAll="false" >
-      <property name="zimbra.home.dir" value="${zd.home.dir}"/>
+      <property name="zmail.home.dir" value="${zd.home.dir}"/>
     </ant>
     <copy todir="${dist.data.dir}/zimlets" overwrite="true">
-      <fileset dir="../Zimlet/build/dist/zimlets" includes="*.zip" excludes="com_zimbra_local.zip,com_zimbra_ymemoticons.zip"/>
+      <fileset dir="../Zimlet/build/dist/zimlets" includes="*.zip" excludes="org_zmail_local.zip,org_zmail_ymemoticons.zip"/>
       <fileset dir="../Zimlet/build/dist/zimlets-offline" includes="*.zip" />
     </copy>
   </target>
@@ -746,69 +746,69 @@
 
     <antcall target="db-versions-init" />
 
-    <java classname="com.zimbra.cs.localconfig.LocalConfigCLI" fork="true" classpathref="offline.class.path" failonerror="true">
+    <java classname="org.zmail.cs.localconfig.LocalConfigCLI" fork="true" classpathref="offline.class.path" failonerror="true">
       <jvmarg value="-Djava.library.path=${server.build.lib.dir}"/>
-      <sysproperty key="zimbra.config" value="${dist.dir}/conf/localconfig.xml" />
-      <arg line="-e zimbra_home='${param.data.dir}' -f" />
+      <sysproperty key="zmail.config" value="${dist.dir}/conf/localconfig.xml" />
+      <arg line="-e zmail_home='${param.data.dir}' -f" />
     </java>
-    <java classname="com.zimbra.cs.localconfig.LocalConfigCLI" fork="true" classpathref="offline.class.path" failonerror="true">
+    <java classname="org.zmail.cs.localconfig.LocalConfigCLI" fork="true" classpathref="offline.class.path" failonerror="true">
       <jvmarg value="-Djava.library.path=${server.build.lib.dir}"/>
-      <sysproperty key="zimbra.config" value="${dist.dir}/conf/localconfig.xml" />
-      <arg line="-e zimbra_extension_directory='${param.app.dir}/lib/ext'" />
+      <sysproperty key="zmail.config" value="${dist.dir}/conf/localconfig.xml" />
+      <arg line="-e zmail_extension_directory='${param.app.dir}/lib/ext'" />
     </java>
-    <java classname="com.zimbra.cs.localconfig.LocalConfigCLI" fork="true" classpathref="offline.class.path" failonerror="true">
+    <java classname="org.zmail.cs.localconfig.LocalConfigCLI" fork="true" classpathref="offline.class.path" failonerror="true">
       <jvmarg value="-Djava.library.path=${server.build.lib.dir}"/>
-      <sysproperty key="zimbra.config" value="${dist.dir}/conf/localconfig.xml" />
+      <sysproperty key="zmail.config" value="${dist.dir}/conf/localconfig.xml" />
       <arg line="-e mailboxd_directory='${param.app.dir}/jetty'" />
     </java>
-    <java classname="com.zimbra.cs.localconfig.LocalConfigCLI" fork="true" classpathref="offline.class.path" failonerror="true">
+    <java classname="org.zmail.cs.localconfig.LocalConfigCLI" fork="true" classpathref="offline.class.path" failonerror="true">
       <jvmarg value="-Djava.library.path=${server.build.lib.dir}"/>
-      <sysproperty key="zimbra.config" value="${dist.dir}/conf/localconfig.xml" />
-      <arg line="-e zimlet_directory='$${zimbra_home}/zimlets-deployed'" />
+      <sysproperty key="zmail.config" value="${dist.dir}/conf/localconfig.xml" />
+      <arg line="-e zimlet_directory='$${zmail_home}/zimlets-deployed'" />
     </java>
-    <java classname="com.zimbra.cs.localconfig.LocalConfigCLI" fork="true" classpathref="offline.class.path" failonerror="true">
+    <java classname="org.zmail.cs.localconfig.LocalConfigCLI" fork="true" classpathref="offline.class.path" failonerror="true">
       <jvmarg value="-Djava.library.path=${server.build.lib.dir}"/>
-      <sysproperty key="zimbra.config" value="${dist.dir}/conf/localconfig.xml" />
-      <arg line="-e mailboxd_keystore='$${zimbra_home}/conf/keystore'" />
+      <sysproperty key="zmail.config" value="${dist.dir}/conf/localconfig.xml" />
+      <arg line="-e mailboxd_keystore='$${zmail_home}/conf/keystore'" />
     </java>
-    <java classname="com.zimbra.cs.localconfig.LocalConfigCLI" fork="true" classpathref="offline.class.path" failonerror="true">
+    <java classname="org.zmail.cs.localconfig.LocalConfigCLI" fork="true" classpathref="offline.class.path" failonerror="true">
       <jvmarg value="-Djava.library.path=${server.build.lib.dir}"/>
-      <sysproperty key="zimbra.config" value="${dist.dir}/conf/localconfig.xml" />
-      <arg line="-e mailboxd_truststore='$${zimbra_home}/conf/cacerts'" />
+      <sysproperty key="zmail.config" value="${dist.dir}/conf/localconfig.xml" />
+      <arg line="-e mailboxd_truststore='$${zmail_home}/conf/cacerts'" />
     </java>
-    <java classname="com.zimbra.cs.localconfig.LocalConfigCLI" fork="true" classpathref="offline.class.path" failonerror="true">
+    <java classname="org.zmail.cs.localconfig.LocalConfigCLI" fork="true" classpathref="offline.class.path" failonerror="true">
       <jvmarg value="-Djava.library.path=${server.build.lib.dir}"/>
-      <sysproperty key="zimbra.config" value="${dist.dir}/conf/localconfig.xml" />
+      <sysproperty key="zmail.config" value="${dist.dir}/conf/localconfig.xml" />
       <arg line="-e zdesktop_relabel=${offline.relabel}" />
     </java>
-    <java classname="com.zimbra.cs.localconfig.LocalConfigCLI" fork="true" classpathref="offline.class.path" failonerror="true">
+    <java classname="org.zmail.cs.localconfig.LocalConfigCLI" fork="true" classpathref="offline.class.path" failonerror="true">
       <jvmarg value="-Djava.library.path=${server.build.lib.dir}"/>
-      <sysproperty key="zimbra.config" value="${dist.dir}/conf/localconfig.xml" />
+      <sysproperty key="zmail.config" value="${dist.dir}/conf/localconfig.xml" />
       <arg line="-e zdesktop_version=${offline.version}" />
     </java>
-    <java classname="com.zimbra.cs.localconfig.LocalConfigCLI" fork="true" classpathref="offline.class.path" failonerror="true">
+    <java classname="org.zmail.cs.localconfig.LocalConfigCLI" fork="true" classpathref="offline.class.path" failonerror="true">
       <jvmarg value="-Djava.library.path=${server.build.lib.dir}"/>
-      <sysproperty key="zimbra.config" value="${dist.dir}/conf/localconfig.xml" />
+      <sysproperty key="zmail.config" value="${dist.dir}/conf/localconfig.xml" />
       <arg line="-e zdesktop_buildid=${offline.buildid}" />
     </java>
-    <java classname="com.zimbra.cs.localconfig.LocalConfigCLI" fork="true" classpathref="offline.class.path" failonerror="true">
+    <java classname="org.zmail.cs.localconfig.LocalConfigCLI" fork="true" classpathref="offline.class.path" failonerror="true">
       <jvmarg value="-Djava.library.path=${server.build.lib.dir}"/>
-      <sysproperty key="zimbra.config" value="${dist.dir}/conf/localconfig.xml" />
+      <sysproperty key="zmail.config" value="${dist.dir}/conf/localconfig.xml" />
       <arg line="-e javamail_imap_debug=false" />
     </java>
-    <java classname="com.zimbra.cs.localconfig.LocalConfigCLI" fork="true" classpathref="offline.class.path" failonerror="true">
+    <java classname="org.zmail.cs.localconfig.LocalConfigCLI" fork="true" classpathref="offline.class.path" failonerror="true">
       <jvmarg value="-Djava.library.path=${server.build.lib.dir}"/>
-      <sysproperty key="zimbra.config" value="${dist.dir}/conf/localconfig.xml" />
+      <sysproperty key="zmail.config" value="${dist.dir}/conf/localconfig.xml" />
       <arg line="-e javamail_pop3_debug=false" />
     </java>
-    <java classname="com.zimbra.cs.localconfig.LocalConfigCLI" fork="true" classpathref="offline.class.path" failonerror="true">
+    <java classname="org.zmail.cs.localconfig.LocalConfigCLI" fork="true" classpathref="offline.class.path" failonerror="true">
       <jvmarg value="-Djava.library.path=${server.build.lib.dir}"/>
-      <sysproperty key="zimbra.config" value="${dist.dir}/conf/localconfig.xml" />
+      <sysproperty key="zmail.config" value="${dist.dir}/conf/localconfig.xml" />
       <arg line="-e javamail_smtp_debug=false" />
     </java>
 
-    <replace file="${dist.dir}/conf/log4j.properties" token="log4j.logger.zimbra.offline.request=INFO" value="log4j.logger.zimbra.offline.request=DEBUG"/>
-    <replace file="${dist.dir}/conf/log4j.properties" token="log4j.logger.zimbra.offline.response=INFO" value="log4j.logger.zimbra.offline.response=DEBUG"/>
+    <replace file="${dist.dir}/conf/log4j.properties" token="log4j.logger.zmail.offline.request=INFO" value="log4j.logger.zmail.offline.request=DEBUG"/>
+    <replace file="${dist.dir}/conf/log4j.properties" token="log4j.logger.zmail.offline.response=INFO" value="log4j.logger.zmail.offline.response=DEBUG"/>
 
     <!-- separate app dir and data dir  -->
     <move file="${dist.dir}/db" tofile="${dist.app.dir}/db"/>
@@ -831,7 +831,7 @@
 
     <mkdir dir="${dist.data.dir}/data/tmp/jetty"/>
     <mkdir dir="${dist.data.dir}/data/tmp/jetty/service"/>
-    <mkdir dir="${dist.data.dir}/data/tmp/jetty/zimbra"/>
+    <mkdir dir="${dist.data.dir}/data/tmp/jetty/zmail"/>
     <mkdir dir="${dist.data.dir}/jetty/etc"/>
 
     <mkdir dir="${dist.data.dir}/heapdump" />
@@ -882,7 +882,7 @@
       <fileset dir="${dist.dir}" includes="**/junit*.jar"/>
       <fileset dir="${dist.dir}" includes="**/xpp3*.jar"/>
       <fileset dir="${dist.dir}" includes="**/whack*.jar"/>
-      <fileset dir="${dist.dir}" includes="**/zimbraim*.jar"/>
+      <fileset dir="${dist.dir}" includes="**/zmailim*.jar"/>
       <fileset dir="${dist.dir}" includes="**/cassandra-*.jar"/>
       <fileset dir="${dist.dir}" includes="**/apache-cassandra-*.jar"/>
       <fileset dir="${dist.dir}" includes="**/hector-*.jar"/>
@@ -925,15 +925,15 @@
     <mkdir dir="${dist.dir}/ext/offline"/>
     <jar destfile="${offlineext.dist.dir}/${offlineext.jar.file}" >
       <manifest>
-        <attribute name="Zimbra-Extension-Class" value="com.zimbra.cs.offline.extension.OfflineExtension"/>
+        <attribute name="Zmail-Extension-Class" value="org.zmail.cs.offline.extension.OfflineExtension"/>
       </manifest>
     </jar>
     <zip destfile="${dist.dir}/ext/offlineext.zip" basedir="${dist.dir}/ext" includes="offline/*.jar"/>
   </target>
 
   <target name="offline-prep-launcher">
-    <copy tofile="${dist.app.dir}/lib/libzimbra-native.jnilib" file="../ZimbraServer/lib/libzimbra-native.jnilib.MacOSX" overwrite="true"/>
-    <copy tofile="${dist.app.dir}/lib/libzimbra-native.so" file="../ZimbraServer/lib/libzimbra-native.so.Linux.i386" overwrite="true"/>
+    <copy tofile="${dist.app.dir}/lib/libzmail-native.jnilib" file="../ZmailServer/lib/libzmail-native.jnilib.MacOSX" overwrite="true"/>
+    <copy tofile="${dist.app.dir}/lib/libzmail-native.so" file="../ZmailServer/lib/libzmail-native.so.Linux.i386" overwrite="true"/>
 
     <copy todir="${dist.app.dir}" overwrite="true">
       <fileset dir="src/installer" includes="README.txt" />
@@ -963,13 +963,13 @@
       <fileset dir="src/installer/resources" includes="launcher_128x128.icns" />
     </copy>
     <chmod file="${dist.app.dir}/macos/svckill.msh" perm="ugo+x"/>
-    <copy todir="${dist.app.dir}/macos/Zimbra Desktop.app" overwrite="true">
+    <copy todir="${dist.app.dir}/macos/Zmail Desktop.app" overwrite="true">
       <fileset dir="src/installer/macos.app" includes="*/**" />
     </copy>
-    <copy todir="${dist.app.dir}/macos/Zimbra Desktop.app/Contents/MacOS/" file="${dist.app.dir}/macos/prism/Prism.app/Contents/MacOS/prism"/>
-    <chmod file="${dist.app.dir}/macos/Zimbra Desktop.app/Contents/MacOS/prism" perm="ugo+x"/>
-    <chmod file="${dist.app.dir}/macos/Zimbra Desktop.app/Contents/MacOS/zdrun" perm="ugo+x"/>
-    <replace file="${dist.app.dir}/macos/Zimbra Desktop.app/Contents/Info.plist" token="@version@" value="${offline.version}"/>
+    <copy todir="${dist.app.dir}/macos/Zmail Desktop.app/Contents/MacOS/" file="${dist.app.dir}/macos/prism/Prism.app/Contents/MacOS/prism"/>
+    <chmod file="${dist.app.dir}/macos/Zmail Desktop.app/Contents/MacOS/prism" perm="ugo+x"/>
+    <chmod file="${dist.app.dir}/macos/Zmail Desktop.app/Contents/MacOS/zdrun" perm="ugo+x"/>
+    <replace file="${dist.app.dir}/macos/Zmail Desktop.app/Contents/Info.plist" token="@version@" value="${offline.version}"/>
 
     <copy todir="${dist.app.dir}/linux" overwrite="true">
       <fileset dir="src/installer/linux" includes="zd.desktop user-install.pl" />
@@ -1109,16 +1109,16 @@
     <copy tofile="${dist.app.dir}/win32/prism/chrome/webrunner/content/icon128.png" file="src/installer/resources/launcher_128x128.png" overwrite="true"/>
     <copy tofile="${dist.app.dir}/linux/prism/chrome/webrunner/content/icon128.png" file="src/installer/resources/launcher_128x128.png" overwrite="true"/>
 
-    <!-- unzip zimbra drag and drop extension -->
-    <ant dir="../ZimbraWebClient" target="ffext-reset-the-world" inheritAll="false">
-      <property name="zimbra.home.dir" value="${zd.home.dir}"/>
+    <!-- unzip zmail drag and drop extension -->
+    <ant dir="../ZmailWebClient" target="ffext-reset-the-world" inheritAll="false">
+      <property name="zmail.home.dir" value="${zd.home.dir}"/>
   	</ant>
-    <mkdir dir="${dist.data.dir}/profile/extensions/zimbradnd@zimbra.com"/>
-    <unzip src="../ZimbraWebClient/ffext/build/ZimbraDnD.xpi" dest="${dist.data.dir}/profile/extensions/zimbradnd@zimbra.com" overwrite="true"/>
+    <mkdir dir="${dist.data.dir}/profile/extensions/zmaildnd@zmail.com"/>
+    <unzip src="../ZmailWebClient/ffext/build/ZmailDnD.xpi" dest="${dist.data.dir}/profile/extensions/zmaildnd@zmail.com" overwrite="true"/>
 
-    <!-- unzip zimbra mapi extension for windows -->
+    <!-- unzip zmail mapi extension for windows -->
     <if><isset property="is-windows" /><then>
-        <unzip src="src/installer/extensions/zimbramapi-0.6.xpi" dest="${dist.app.dir}/win32/prism/extensions/mapi@zimbra.com" overwrite="true"/>
+        <unzip src="src/installer/extensions/zmailmapi-0.6.xpi" dest="${dist.app.dir}/win32/prism/extensions/mapi@zmail.com" overwrite="true"/>
     </then></if>
 
     <!-- unzip inquisitor extension
@@ -1134,14 +1134,14 @@
   </target>
 
   <target name="test-launcher-mac">
-    <replace file="${dist.app.dir}/macos/Zimbra Desktop.app/Contents/Resources/application.ini" token="@install@" value="${dist.dir}"/>
-    <replace file="${dist.app.dir}/macos/Zimbra Desktop.app/Contents/Resources/extensions/prism-runtime@developer.mozilla.org" token="@install@" value="${dist.dir}"/>
+    <replace file="${dist.app.dir}/macos/Zmail Desktop.app/Contents/Resources/application.ini" token="@install@" value="${dist.dir}"/>
+    <replace file="${dist.app.dir}/macos/Zmail Desktop.app/Contents/Resources/extensions/prism-runtime@developer.mozilla.org" token="@install@" value="${dist.dir}"/>
   </target>
 
   <target name="offline-install-misc">
     <replace file="${dist.data.dir}/conf/log4j.properties" token="@install.data.root@/log/" value=""/>
     <replace file="${dist.data.dir}/conf/log4j.properties" token="log4j.rootLogger=INFO,CONSOLE,LOGFILE" value="log4j.rootLogger=INFO,LOGFILE"/>
-    <replace file="${dist.app.dir}/jetty/resources/log4j.properties" token="/opt/zimbra/log/" value=""/>
+    <replace file="${dist.app.dir}/jetty/resources/log4j.properties" token="/opt/zmail/log/" value=""/>
     <copy todir="${dist.app.dir}" file="src/installer/License.rtf" overwrite="true" />
   </target>
 
@@ -1198,20 +1198,20 @@
   </target>
 
   <target name="offline-dev-sync">
-    <ant dir="../ZimbraWebClient" target="dev-sync" inheritAll="false">
-      <property name="zimbra.home.dir" value="${zd.home.dir}"/>
-      <property name="webapp.dir" value="${jetty.home.dir}/webapps/zimbra/"/>
+    <ant dir="../ZmailWebClient" target="dev-sync" inheritAll="false">
+      <property name="zmail.home.dir" value="${zd.home.dir}"/>
+      <property name="webapp.dir" value="${jetty.home.dir}/webapps/zmail/"/>
     </ant>
     <antcall target="offline-sync-jsp-opt"/>
-    <copy file="${config.dir}/web_zimbra.xml" tofile="${jetty.home.dir}/webapps/zimbra/WEB-INF/web.xml" overwrite="true"/>
+    <copy file="${config.dir}/web_zmail.xml" tofile="${jetty.home.dir}/webapps/zmail/WEB-INF/web.xml" overwrite="true"/>
     <tstamp><format property="build.simpleDate" pattern="yyMMddHHmmss" /></tstamp>
-    <replace file="${jetty.home.dir}/webapps/zimbra/WEB-INF/web.xml" token="@jsVersion@" value="${build.simpleDate}"/>
-    <replace file="${jetty.home.dir}/webapps/zimbra/WEB-INF/web.xml" token="@port@" value="7733"/>
+    <replace file="${jetty.home.dir}/webapps/zmail/WEB-INF/web.xml" token="@jsVersion@" value="${build.simpleDate}"/>
+    <replace file="${jetty.home.dir}/webapps/zmail/WEB-INF/web.xml" token="@port@" value="7733"/>
   </target>
 
   <!-- JSP PRECOMPILE STUFF -->
   <property name="jspc.src.dir" value="${build.web.dir}" />
-  <property name="jspc.build.dir" value="${dist.dir}/jetty/work/zimbra/jsp" />
+  <property name="jspc.build.dir" value="${dist.dir}/jetty/work/zmail/jsp" />
 
   <path id='jspc.class.path'>
     <pathelement path="${webclient.build.dir}/classes" />
@@ -1284,15 +1284,15 @@
   </target>
 
   <target name="offline-jspc.build" depends="offline-jspc.precompile,offline-jspc.compile">
-    <copy todir="${dist.data.dir}/data/tmp/jetty/zimbra/jsp">
-      <fileset dir="${dist.dir}/jetty/work/zimbra/jsp">
+    <copy todir="${dist.data.dir}/data/tmp/jetty/zmail/jsp">
+      <fileset dir="${dist.dir}/jetty/work/zmail/jsp">
         <include name="**/*.class"/>
       </fileset>
     </copy>
   </target>
 
   <target name="offline-jspc.deploy" depends="offline-jspc.build">
-    <copy todir="${zimbra.offline.data.dir}/data/tmp/jetty/zimbra/jsp">
+    <copy todir="${zmail.offline.data.dir}/data/tmp/jetty/zmail/jsp">
       <fileset dir="${jspc.build.dir}">
         <include name="**/*.class"/>
       </fileset>

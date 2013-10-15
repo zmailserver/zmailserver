@@ -14,16 +14,16 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.mountpoints.viewer;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.mountpoints.viewer;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogError;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogError;
 
 
 public class MarkSpamMessage extends PrefGroupMailByMessageTest {
@@ -40,31 +40,31 @@ public class MarkSpamMessage extends PrefGroupMailByMessageTest {
 	@Test(	description = "Verify Permission Denied on Spam a shared mail (read-only share)",
 			groups = { "functional" })
 	public void MarkSpamMessage_01() throws HarnessException {
-		String foldername = "folder" + ZimbraSeleniumProperties.getUniqueString();
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String mountpointname = "mountpoint" + ZimbraSeleniumProperties.getUniqueString();
+		String foldername = "folder" + ZmailSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String mountpointname = "mountpoint" + ZmailSeleniumProperties.getUniqueString();
 		
-		FolderItem inbox = FolderItem.importFromSOAP(ZimbraAccount.AccountA(), FolderItem.SystemFolder.Inbox);
+		FolderItem inbox = FolderItem.importFromSOAP(ZmailAccount.AccountA(), FolderItem.SystemFolder.Inbox);
 		
 		// Create a folder to share
-		ZimbraAccount.AccountA().soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>"
+		ZmailAccount.AccountA().soapSend(
+					"<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+		"<folder name='" + foldername + "' l='" + inbox.getId() + "'/>"
 				+	"</CreateFolderRequest>");
 		
-		FolderItem folder = FolderItem.importFromSOAP(ZimbraAccount.AccountA(), foldername);
+		FolderItem folder = FolderItem.importFromSOAP(ZmailAccount.AccountA(), foldername);
 		
 		// Share it
-		ZimbraAccount.AccountA().soapSend(
-					"<FolderActionRequest xmlns='urn:zimbraMail'>"
+		ZmailAccount.AccountA().soapSend(
+					"<FolderActionRequest xmlns='urn:zmailMail'>"
 				+		"<action id='"+ folder.getId() +"' op='grant'>"
 				+			"<grant d='"+ app.zGetActiveAccount().EmailAddress +"' gt='usr' perm='r'/>"
 				+		"</action>"
 				+	"</FolderActionRequest>");
 		
 		// Add a message to it
-		ZimbraAccount.AccountA().soapSend(
-					"<AddMsgRequest xmlns='urn:zimbraMail'>"
+		ZmailAccount.AccountA().soapSend(
+					"<AddMsgRequest xmlns='urn:zmailMail'>"
         		+		"<m l='"+ folder.getId() +"' >"
             	+			"<content>From: foo@foo.com\n"
             	+				"To: foo@foo.com \n"
@@ -78,13 +78,13 @@ public class MarkSpamMessage extends PrefGroupMailByMessageTest {
             	+		"</m>"
 				+	"</AddMsgRequest>");
 		
-		MailItem mail = MailItem.importFromSOAP(ZimbraAccount.AccountA(), "subject:("+ subject +")");
+		MailItem mail = MailItem.importFromSOAP(ZmailAccount.AccountA(), "subject:("+ subject +")");
 
 		
 		// Mount it
 		app.zGetActiveAccount().soapSend(
-					"<CreateMountpointRequest xmlns='urn:zimbraMail'>"
-				+		"<link l='1' name='"+ mountpointname +"'  rid='"+ folder.getId() +"' zid='"+ ZimbraAccount.AccountA().ZimbraId +"'/>"
+					"<CreateMountpointRequest xmlns='urn:zmailMail'>"
+				+		"<link l='1' name='"+ mountpointname +"'  rid='"+ folder.getId() +"' zid='"+ ZmailAccount.AccountA().ZmailId +"'/>"
 				+	"</CreateMountpointRequest>");
 		
 		FolderMountpointItem mountpoint = FolderMountpointItem.importFromSOAP(app.zGetActiveAccount(), mountpointname);
@@ -119,31 +119,31 @@ public class MarkSpamMessage extends PrefGroupMailByMessageTest {
 	@Test(	description = "Verify Permission Denied on Spam (keyboard='ms') a shared mail (read-only share)",
 			groups = { "functional" })
 	public void MarkSpamMessage_02() throws HarnessException {
-		String foldername = "folder" + ZimbraSeleniumProperties.getUniqueString();
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String mountpointname = "mountpoint" + ZimbraSeleniumProperties.getUniqueString();
+		String foldername = "folder" + ZmailSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String mountpointname = "mountpoint" + ZmailSeleniumProperties.getUniqueString();
 		
-		FolderItem inbox = FolderItem.importFromSOAP(ZimbraAccount.AccountA(), FolderItem.SystemFolder.Inbox);
+		FolderItem inbox = FolderItem.importFromSOAP(ZmailAccount.AccountA(), FolderItem.SystemFolder.Inbox);
 		
 		// Create a folder to share
-		ZimbraAccount.AccountA().soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>"
+		ZmailAccount.AccountA().soapSend(
+					"<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+		"<folder name='" + foldername + "' l='" + inbox.getId() + "'/>"
 				+	"</CreateFolderRequest>");
 		
-		FolderItem folder = FolderItem.importFromSOAP(ZimbraAccount.AccountA(), foldername);
+		FolderItem folder = FolderItem.importFromSOAP(ZmailAccount.AccountA(), foldername);
 		
 		// Share it
-		ZimbraAccount.AccountA().soapSend(
-					"<FolderActionRequest xmlns='urn:zimbraMail'>"
+		ZmailAccount.AccountA().soapSend(
+					"<FolderActionRequest xmlns='urn:zmailMail'>"
 				+		"<action id='"+ folder.getId() +"' op='grant'>"
 				+			"<grant d='"+ app.zGetActiveAccount().EmailAddress +"' gt='usr' perm='r'/>"
 				+		"</action>"
 				+	"</FolderActionRequest>");
 		
 		// Add a message to it
-		ZimbraAccount.AccountA().soapSend(
-					"<AddMsgRequest xmlns='urn:zimbraMail'>"
+		ZmailAccount.AccountA().soapSend(
+					"<AddMsgRequest xmlns='urn:zmailMail'>"
         		+		"<m l='"+ folder.getId() +"' >"
             	+			"<content>From: foo@foo.com\n"
             	+				"To: foo@foo.com \n"
@@ -157,12 +157,12 @@ public class MarkSpamMessage extends PrefGroupMailByMessageTest {
             	+		"</m>"
 				+	"</AddMsgRequest>");
 		
-		MailItem mail = MailItem.importFromSOAP(ZimbraAccount.AccountA(), "subject:("+ subject +")");
+		MailItem mail = MailItem.importFromSOAP(ZmailAccount.AccountA(), "subject:("+ subject +")");
 
 		// Mount it
 		app.zGetActiveAccount().soapSend(
-					"<CreateMountpointRequest xmlns='urn:zimbraMail'>"
-				+		"<link l='1' name='"+ mountpointname +"'  rid='"+ folder.getId() +"' zid='"+ ZimbraAccount.AccountA().ZimbraId +"'/>"
+					"<CreateMountpointRequest xmlns='urn:zmailMail'>"
+				+		"<link l='1' name='"+ mountpointname +"'  rid='"+ folder.getId() +"' zid='"+ ZmailAccount.AccountA().ZmailId +"'/>"
 				+	"</CreateMountpointRequest>");
 		
 		FolderMountpointItem mountpoint = FolderMountpointItem.importFromSOAP(app.zGetActiveAccount(), mountpointname);
@@ -182,15 +182,15 @@ public class MarkSpamMessage extends PrefGroupMailByMessageTest {
 		// Spam the item
 		app.zPageMail.zKeyboardShortcut(Shortcut.S_MAIL_MARKSPAM);
 		
-		// http://bugzilla.zimbra.com/show_bug.cgi?id=63796
+		// http://bugzilla.zmail.com/show_bug.cgi?id=63796
 		// A "Permission Denied" error popup should not occur
-		DialogError dialog = app.zPageMain.zGetErrorDialog(DialogError.DialogErrorID.Zimbra);
+		DialogError dialog = app.zPageMain.zGetErrorDialog(DialogError.DialogErrorID.Zmail);
 		ZAssert.assertNotNull(dialog, "Verify the PERM DENIED Error Dialog is created");
 		ZAssert.assertFalse(dialog.zIsActive(), "Verify the PERM DENIED Error Dialog is not active");
 		
 
 		// Verify the message is still in the owner's folder
-		mail = MailItem.importFromSOAP(ZimbraAccount.AccountA(), "subject:("+ subject +")");
+		mail = MailItem.importFromSOAP(ZmailAccount.AccountA(), "subject:("+ subject +")");
 		ZAssert.assertEquals(mail.dFolderId, folder.getId(), "Verify the message is still in the owner's folder");
 		
 	}

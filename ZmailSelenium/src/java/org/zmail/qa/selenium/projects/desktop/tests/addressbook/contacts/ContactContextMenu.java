@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.addressbook.contacts;
+package org.zmail.qa.selenium.projects.desktop.tests.addressbook.contacts;
 
 
 import java.util.*;
@@ -22,15 +22,15 @@ import java.util.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.*;
-import com.zimbra.qa.selenium.projects.desktop.ui.addressbook.*;
-import com.zimbra.qa.selenium.projects.desktop.ui.mail.FormMailNew;
-import com.zimbra.qa.selenium.projects.desktop.ui.search.PageAdvancedSearch;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.*;
+import org.zmail.qa.selenium.projects.desktop.ui.addressbook.*;
+import org.zmail.qa.selenium.projects.desktop.ui.mail.FormMailNew;
+import org.zmail.qa.selenium.projects.desktop.ui.search.PageAdvancedSearch;
 
 public class ContactContextMenu extends AjaxCommonTest  {
 	@SuppressWarnings("serial")
@@ -41,8 +41,8 @@ public class ContactContextMenu extends AjaxCommonTest  {
 		super.startingPage = app.zPageAddressbook;
 
 		super.startingAccountPreferences = new HashMap<String, String>() {{
-         put("zimbraPrefGroupMailBy", "conversation");
-         put("zimbraPrefReadingPaneLocation", "bottom");
+         put("zmailPrefGroupMailBy", "conversation");
+         put("zmailPrefReadingPaneLocation", "bottom");
      }};		
 		
 	}
@@ -56,7 +56,7 @@ public class ContactContextMenu extends AjaxCommonTest  {
 			tagParam = " t='" + tagIdArray[0] + "'";
 		}
         app.zGetActiveAccount().soapSend(
-                "<CreateContactRequest xmlns='urn:zimbraMail'>" +
+                "<CreateContactRequest xmlns='urn:zmailMail'>" +
                 "<cn " + tagParam + " fileAsStr='" + fileAs + "' >" +
                 "<a n='firstName'>" + firstName +"</a>" +
                 "<a n='lastName'>" + lastName +"</a>" +
@@ -78,9 +78,9 @@ public class ContactContextMenu extends AjaxCommonTest  {
 
 	private ContactItem createSelectARandomContactItem(String ... tagIdArray) throws HarnessException {
 
-		String firstName = "first" + ZimbraSeleniumProperties.getUniqueString();		
-		String lastName = "last" + ZimbraSeleniumProperties.getUniqueString();
-	    String email = "email" +  ZimbraSeleniumProperties.getUniqueString() + "@zimbra.com";
+		String firstName = "first" + ZmailSeleniumProperties.getUniqueString();		
+		String lastName = "last" + ZmailSeleniumProperties.getUniqueString();
+	    String email = "email" +  ZmailSeleniumProperties.getUniqueString() + "@zmail.com";
 	
 	    return createSelectAContactItem(firstName, lastName, email, tagIdArray );
 	}
@@ -345,7 +345,7 @@ public class ContactContextMenu extends AjaxCommonTest  {
 		ContactItem contactItem = createSelectARandomContactItem();
 		GeneralUtility.syncDesktopToZcsWithSoap(app.zGetActiveAccount());
 
-		String tagName = "tag"+ ZimbraSeleniumProperties.getUniqueString();
+		String tagName = "tag"+ ZmailSeleniumProperties.getUniqueString();
 			
 		//click Tag Contact->New Tag	
         DialogTag dialogTag = (DialogTag) app.zPageAddressbook.zListItem(Action.A_RIGHTCLICK, Button.B_TAG, Button.O_TAG_NEWTAG , contactItem.fileAs);        
@@ -353,12 +353,12 @@ public class ContactContextMenu extends AjaxCommonTest  {
 		dialogTag.zClickButton(Button.B_OK);		
 
 		// Make sure the tag was created on the server (get the tag ID)
-		app.zGetActiveAccount().soapSend("<GetTagRequest xmlns='urn:zimbraMail'/>");;
+		app.zGetActiveAccount().soapSend("<GetTagRequest xmlns='urn:zmailMail'/>");;
 		String tagID = app.zGetActiveAccount().soapSelectValue("//mail:GetTagResponse//mail:tag[@name='"+ tagName +"']", "id");
 
 		// Make sure the tag was applied to the contact
 		app.zGetActiveAccount().soapSend(
-					"<GetContactsRequest xmlns='urn:zimbraMail'>" +
+					"<GetContactsRequest xmlns='urn:zmailMail'>" +
 						"<cn id='"+ contactItem.getId() +"'/>" +
 					"</GetContactsRequest>");
 		
@@ -378,11 +378,11 @@ public class ContactContextMenu extends AjaxCommonTest  {
 			groups = { "smoke" })	
 	public void ClickTagContactRemoveTag() throws HarnessException {
 		
-		String tagName = "tag"+ ZimbraSeleniumProperties.getUniqueString();
+		String tagName = "tag"+ ZmailSeleniumProperties.getUniqueString();
 			
 			// Create a tag via soap
 		app.zGetActiveAccount().soapSend(
-				"<CreateTagRequest xmlns='urn:zimbraMail'>" +
+				"<CreateTagRequest xmlns='urn:zmailMail'>" +
              	"<tag name='"+ tagName +"' color='1' />" +
              "</CreateTagRequest>");
 		String tagid = app.zGetActiveAccount().soapSelectValue("//mail:CreateTagResponse/mail:tag", "id");
@@ -403,7 +403,7 @@ public class ContactContextMenu extends AjaxCommonTest  {
       //GeneralUtility.syncDesktopToZcsWithSoap(app.zGetActiveAccount());
      	
 		app.zGetActiveAccount().soapSend(
-				"<GetContactsRequest xmlns='urn:zimbraMail'>" +
+				"<GetContactsRequest xmlns='urn:zmailMail'>" +
 		        "<a n='t'/>"+
 		 		"<cn id='"+ contactItem.getId() +"'/>" +
 				"</GetContactsRequest>");
@@ -429,17 +429,17 @@ public class ContactContextMenu extends AjaxCommonTest  {
 
 			
 	    //Create  email sent to this contacts	
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String lastName = "lastname " + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String lastName = "lastname " + ZmailSeleniumProperties.getUniqueString();
 		
 		// Send the message from AccountA to the ZWC user
-		ZimbraAccount.AccountA().soapSend(
-					"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+		ZmailAccount.AccountA().soapSend(
+					"<SendMsgRequest xmlns='urn:zmailMail'>" +
 						"<m>" +
 							"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 							"<su>"+ subject +"</su>" +
 							"<mp ct='text/plain'>" +
-								"<content>"+ "body" + ZimbraSeleniumProperties.getUniqueString() +"</content>" +
+								"<content>"+ "body" + ZmailSeleniumProperties.getUniqueString() +"</content>" +
 							"</mp>" +
 						"</m>" +
 					"</SendMsgRequest>");
@@ -466,24 +466,24 @@ public class ContactContextMenu extends AjaxCommonTest  {
 	public void FindEmailsReceivedFromContact() throws HarnessException {
 
 	    //Create  email sent to this contacts	
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String lastName = "lastname " + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String lastName = "lastname " + ZmailSeleniumProperties.getUniqueString();
 
 		// Send the message from AccountB to the ZWC user
-		ZimbraAccount.AccountB().soapSend(
-					"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+		ZmailAccount.AccountB().soapSend(
+					"<SendMsgRequest xmlns='urn:zmailMail'>" +
 						"<m>" +
 							"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 							"<su>"+ subject +"</su>" +
 							"<mp ct='text/plain'>" +
-								"<content>"+ "body" + ZimbraSeleniumProperties.getUniqueString() +"</content>" +
+								"<content>"+ "body" + ZmailSeleniumProperties.getUniqueString() +"</content>" +
 							"</mp>" +
 						"</m>" +
 					"</SendMsgRequest>");
 
-		MailItem.importFromSOAP(ZimbraAccount.AccountB(), "subject:("+ subject +")");
+		MailItem.importFromSOAP(ZmailAccount.AccountB(), "subject:("+ subject +")");
 
-		ContactItem contactItem = createSelectAContactItem(app.zGetActiveAccount().getPref("displayName"),lastName, ZimbraAccount.AccountB().EmailAddress);
+		ContactItem contactItem = createSelectAContactItem(app.zGetActiveAccount().getPref("displayName"),lastName, ZmailAccount.AccountB().EmailAddress);
 		GeneralUtility.syncDesktopToZcsWithSoap(app.zGetActiveAccount());
 		app.zPageAddressbook.zWaitForDesktopLoadingSpinner(5000);
 

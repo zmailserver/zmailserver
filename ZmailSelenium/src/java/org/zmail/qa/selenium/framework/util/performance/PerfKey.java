@@ -14,13 +14,13 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.util.performance;
+package org.zmail.qa.selenium.framework.util.performance;
 
 
 /**
  * A list of perf metrics that can be measured.
- * See http://bugzilla.zimbra.com/show_bug.cgi?id=61972
- * See http://bugzilla.zimbra.com/attachment.cgi?id=33941
+ * See http://bugzilla.zmail.com/show_bug.cgi?id=61972
+ * See http://bugzilla.zmail.com/attachment.cgi?id=33941
  * @author Matt Rhoades
  *
  */

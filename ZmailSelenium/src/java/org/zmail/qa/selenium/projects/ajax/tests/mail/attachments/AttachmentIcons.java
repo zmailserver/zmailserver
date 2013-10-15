@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.attachments;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.attachments;
 
 import java.io.File;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.AttachmentItem;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.DisplayMail;
+import org.zmail.qa.selenium.framework.items.AttachmentItem;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.DisplayMail;
 
 
 public class AttachmentIcons extends PrefGroupMailByMessageTest {
@@ -41,7 +41,7 @@ public class AttachmentIcons extends PrefGroupMailByMessageTest {
 	public void ImgGenericDoc_01() throws HarnessException {
 		
 		// This mime contains an attachment that should map to ImgGenericDoc
-		final String mimeFile = ZimbraSeleniumProperties.getBaseDirectory() + "/data/public/mime/email05/mime01.txt";
+		final String mimeFile = ZmailSeleniumProperties.getBaseDirectory() + "/data/public/mime/email05/mime01.txt";
 		final String subject = "subject151615738";
 		
 		LmtpInject.injectFile(app.zGetActiveAccount().EmailAddress, new File(mimeFile));
@@ -76,7 +76,7 @@ public class AttachmentIcons extends PrefGroupMailByMessageTest {
 	public void ImgImageDoc_01() throws HarnessException {
 		
 		// This mime contains an attachment that should map to ImgGenericDoc
-		final String mimeFile = ZimbraSeleniumProperties.getBaseDirectory() + "/data/public/mime/email05/mime03.txt";
+		final String mimeFile = ZmailSeleniumProperties.getBaseDirectory() + "/data/public/mime/email05/mime03.txt";
 		final String subject = "subject13330659993903";
 		
 		LmtpInject.injectFile(app.zGetActiveAccount().EmailAddress, new File(mimeFile));

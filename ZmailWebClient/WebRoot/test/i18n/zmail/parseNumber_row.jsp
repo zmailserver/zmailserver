@@ -14,7 +14,7 @@
 -->
 <%@ page import="java.text.*,java.util.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
 <%
 	String type = request.getParameter("type");
 	Locale locale = (Locale)pageContext.getAttribute("locale", PageContext.REQUEST_SCOPE);

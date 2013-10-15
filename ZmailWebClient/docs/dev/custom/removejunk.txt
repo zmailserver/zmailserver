@@ -8,7 +8,7 @@ The spam/junk features in the application appear in several places:
 To hide the presence of the spam functionality in the client, you
 need to add app listeners for the mail and preferences app. The best
 place to put this code is within the skin's source code because this
-will be processed before the Zimbra client runs.
+will be processed before the Zmail client runs.
 
 EXAMPLE
 
@@ -25,7 +25,7 @@ EXAMPLE
 		}
 	};
 	var listener = new AjxListener(skin, skin._mailAppPreLaunch);
-	ZmZimbraMail.addAppListener(ZmApp.MAIL, ZmAppEvent.PRE_LAUNCH, listener);
+	ZmZmailMail.addAppListener(ZmApp.MAIL, ZmAppEvent.PRE_LAUNCH, listener);
 
 	// hook into preferences app
 	skin._prefsAppPreLaunch = function(appId) {
@@ -35,7 +35,7 @@ EXAMPLE
 		}
 	};
 	var listener = new AjxListener(skin, skin._prefsAppPreLaunch);
-	ZmZimbraMail.addAppListener(ZmApp.PREFERENCES, ZmAppEvent.PRE_LAUNCH, listener);
+	ZmZmailMail.addAppListener(ZmApp.PREFERENCES, ZmAppEvent.PRE_LAUNCH, listener);
 
 In the example code, I set the precondition variable to true so that
 it will always remove the spam feature from the user interface. But

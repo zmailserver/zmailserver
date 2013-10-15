@@ -14,18 +14,18 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.tasks.showoriginal;
+package org.zmail.qa.selenium.projects.ajax.tests.tasks.showoriginal;
 
 import java.util.*;
 import org.testng.annotations.*;
 
-import com.zimbra.qa.selenium.framework.core.*;
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.items.FolderItem.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.*;
+import org.zmail.qa.selenium.framework.core.*;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.items.FolderItem.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.*;
+import org.zmail.qa.selenium.projects.ajax.ui.*;
 
 public class ShowOriginal extends AjaxCommonTest {
 
@@ -38,8 +38,8 @@ public class ShowOriginal extends AjaxCommonTest {
 
 		super.startingAccountPreferences = new HashMap<String, String>() {
 			{
-				put("zimbraPrefTasksReadingPaneLocation", "bottom");
-				put("zimbraPrefShowSelectionCheckbox", "TRUE");
+				put("zmailPrefTasksReadingPaneLocation", "bottom");
+				put("zmailPrefShowSelectionCheckbox", "TRUE");
 			}
 		};
 
@@ -52,15 +52,15 @@ public class ShowOriginal extends AjaxCommonTest {
 		FolderItem taskFolder = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Tasks);
 
 		// Create a basic task
-		String subject = "task" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "task" + ZmailSeleniumProperties.getUniqueString();
 
 		app.zGetActiveAccount().soapSend(
-				"<CreateTaskRequest xmlns='urn:zimbraMail'>" + "<m >" + "<inv>"
+				"<CreateTaskRequest xmlns='urn:zmailMail'>" + "<m >" + "<inv>"
 				+ "<comp name='" + subject + "'>" + "<or a='"
 				+ app.zGetActiveAccount().EmailAddress + "'/>"
 				+ "</comp>" + "</inv>" + "<su>" + subject + "</su>"
 				+ "<mp ct='text/plain'>" + "<content>content"
-				+ ZimbraSeleniumProperties.getUniqueString()
+				+ ZmailSeleniumProperties.getUniqueString()
 				+ "</content>" + "</mp>" + "</m>"
 				+ "</CreateTaskRequest>");
 

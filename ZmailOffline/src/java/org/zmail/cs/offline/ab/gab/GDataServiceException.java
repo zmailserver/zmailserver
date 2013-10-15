@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.ab.gab;
+package org.zmail.cs.offline.ab.gab;
 
 import com.google.gdata.client.GoogleService.AccountDeletedException;
 import com.google.gdata.client.GoogleService.AccountDisabledException;
@@ -22,7 +22,7 @@ import com.google.gdata.client.GoogleService.NotVerifiedException;
 import com.google.gdata.client.GoogleService.ServiceUnavailableException;
 import com.google.gdata.client.GoogleService.SessionExpiredException;
 import com.google.gdata.client.GoogleService.TermsNotAgreedException;
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
 @SuppressWarnings("serial")
 public class GDataServiceException extends ServiceException {

@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.tasks.assistant;
+package org.zmail.qa.selenium.projects.ajax.tests.tasks.assistant;
 
 
 
@@ -22,15 +22,15 @@ import java.util.HashMap;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.items.TaskItem;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.ui.Shortcut;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogAssistant;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.items.TaskItem;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.ui.Shortcut;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogAssistant;
 
 
 public class CreateTask extends AjaxCommonTest {
@@ -41,7 +41,7 @@ public class CreateTask extends AjaxCommonTest {
 		
 		super.startingPage = app.zPageTasks;
 		super.startingAccountPreferences = new HashMap<String , String>() {{
-			put("zimbraPrefTasksReadingPaneLocation", "bottom");
+			put("zmailPrefTasksReadingPaneLocation", "bottom");
 		}};
 
 	}
@@ -49,7 +49,7 @@ public class CreateTask extends AjaxCommonTest {
  * Test case: Create Task using assistant
  * 1.Go to Tasks
  * 2.Press '`' or backquote
- * 3.Zimbra Assistant dialog should get open
+ * 3.Zmail Assistant dialog should get open
  * 4.Put Task related commands like subject and body
  * 5.Press OK.
  * 6.Task should get created
@@ -57,7 +57,7 @@ public class CreateTask extends AjaxCommonTest {
  */
 	@Test(description = "Create Task using assistant", groups = { "deprecated" })
 	public void CreateTask_01() throws HarnessException {
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
 		String command = "task \"" + subject + "\" Notes(hello)";
 		// Click Get Mail button
 		app.zPageTasks.zToolbarPressButton(Button.B_REFRESH);
@@ -77,7 +77,7 @@ public class CreateTask extends AjaxCommonTest {
 	 * Test case: Create Task using assistant and save it
 	 * 1.Go to Tasks
 	 * 2.Press '`' or backquote
-	 * 3.Zimbra Assistant dialog should get open
+	 * 3.Zmail Assistant dialog should get open
 	 * 4.Put Task related commands like subject and body
 	 * 5.Press More Details.
 	 * 6.Press save button
@@ -87,7 +87,7 @@ public class CreateTask extends AjaxCommonTest {
 		@Bugs(ids="63199")
 		@Test(description = "Create Task using assistant and save it", groups = { "deprecated" })
 		public void CreateTask_02() throws HarnessException {
-			String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
+			String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
 			String command = "task \"" + subject + "\" Notes(hello)";
 			// Click Get Mail button
 			app.zPageTasks.zToolbarPressButton(Button.B_REFRESH);

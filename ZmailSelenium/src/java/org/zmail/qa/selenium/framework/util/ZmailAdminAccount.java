@@ -14,33 +14,33 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.util;
+package org.zmail.qa.selenium.framework.util;
 
 import org.apache.log4j.*;
 
-import com.zimbra.common.soap.Element;
+import org.zmail.common.soap.Element;
 
 
 
-public class ZimbraAdminAccount extends ZimbraAccount {
-	private static Logger logger = LogManager.getLogger(ZimbraAccount.class);
+public class ZmailAdminAccount extends ZmailAccount {
+	private static Logger logger = LogManager.getLogger(ZmailAccount.class);
 
-	public ZimbraAdminAccount(String email) {
+	public ZmailAdminAccount(String email) {
 		EmailAddress = email;
-		Password = ZimbraSeleniumProperties.getStringProperty("adminPwd", "test123");
+		Password = ZmailSeleniumProperties.getStringProperty("adminPwd", "test123");
 		
 		// In the dev environment, they may need a config value to override
 		// the default, so use that value here
-		ZimbraMailHost = ZimbraSeleniumProperties.getStringProperty("adminHost", EmailAddress.split("@")[1]);
+		ZmailMailHost = ZmailSeleniumProperties.getStringProperty("adminHost", EmailAddress.split("@")[1]);
 
 	}
 
 
 	/**
 	 * Creates the account on the ZCS using CreateAccountRequest
-	 * zimbraIsAdminAccount is set to TRUE
+	 * zmailIsAdminAccount is set to TRUE
 	 */
-	public ZimbraAccount provision() {
+	public ZmailAccount provision() {
 		
 		try {
 			
@@ -53,27 +53,27 @@ public class ZimbraAdminAccount extends ZimbraAccount {
 			}
 
 			// Make sure domain exists
-			ZimbraDomain domain = new ZimbraDomain( EmailAddress.split("@")[1]);
+			ZmailDomain domain = new ZmailDomain( EmailAddress.split("@")[1]);
 			domain.provision();
 			
 				
 			// Account does not exist.  Create it now.
-			ZimbraAdminAccount.GlobalAdmin().soapSend(
-					"<CreateAccountRequest xmlns='urn:zimbraAdmin'>" +
+			ZmailAdminAccount.GlobalAdmin().soapSend(
+					"<CreateAccountRequest xmlns='urn:zmailAdmin'>" +
 						"<name>"+ EmailAddress +"</name>" +
 						"<password>"+ Password +"</password>" +
-						"<a n='zimbraIsAdminAccount'>TRUE</a>" +
+						"<a n='zmailIsAdminAccount'>TRUE</a>" +
 					"</CreateAccountRequest>");
 			
-			Element[] createAccountResponse = ZimbraAdminAccount.GlobalAdmin().soapSelectNodes("//admin:CreateAccountResponse");
+			Element[] createAccountResponse = ZmailAdminAccount.GlobalAdmin().soapSelectNodes("//admin:CreateAccountResponse");
 
 
 			if ( (createAccountResponse == null) || (createAccountResponse.length == 0)) {
 
-				Element[] soapFault = ZimbraAdminAccount.GlobalAdmin().soapSelectNodes("//soap:Fault");
+				Element[] soapFault = ZmailAdminAccount.GlobalAdmin().soapSelectNodes("//soap:Fault");
 				if ( soapFault != null && soapFault.length > 0 ) {
 				
-					String error = ZimbraAdminAccount.GlobalAdmin().soapSelectValue("//zimbra:Code", null);
+					String error = ZmailAdminAccount.GlobalAdmin().soapSelectValue("//zmail:Code", null);
 					throw new HarnessException("Unable to create account: "+ error);
 					
 				}
@@ -83,22 +83,22 @@ public class ZimbraAdminAccount extends ZimbraAccount {
 			}
 
 			// Set the account settings based on the response
-			ZimbraId = ZimbraAdminAccount.GlobalAdmin().soapSelectValue("//admin:account", "id");
-			ZimbraMailHost = ZimbraAdminAccount.GlobalAdmin().soapSelectValue("//admin:account/admin:a[@n='zimbraMailHost']", null);
+			ZmailId = ZmailAdminAccount.GlobalAdmin().soapSelectValue("//admin:account", "id");
+			ZmailMailHost = ZmailAdminAccount.GlobalAdmin().soapSelectValue("//admin:account/admin:a[@n='zmailMailHost']", null);
 
-			// If the adminHost value is set, use that value for the ZimbraMailHost
-			String adminHost = ZimbraSeleniumProperties.getStringProperty("adminHost", null);
+			// If the adminHost value is set, use that value for the ZmailMailHost
+			String adminHost = ZmailSeleniumProperties.getStringProperty("adminHost", null);
 			if ( adminHost != null ) {
-				ZimbraMailHost = adminHost;
+				ZmailMailHost = adminHost;
 			}
 
 			// If SOAP trace logging is specified, turn it on
-			if ( ZimbraSeleniumProperties.getStringProperty("soap.trace.enabled", "false").toLowerCase().equals("true") ) {
+			if ( ZmailSeleniumProperties.getStringProperty("soap.trace.enabled", "false").toLowerCase().equals("true") ) {
 				
-				ZimbraAdminAccount.GlobalAdmin().soapSend(
-							"<AddAccountLoggerRequest xmlns='urn:zimbraAdmin'>"
+				ZmailAdminAccount.GlobalAdmin().soapSend(
+							"<AddAccountLoggerRequest xmlns='urn:zmailAdmin'>"
 						+		"<account by='name'>"+ EmailAddress + "</account>"
-						+		"<logger category='zimbra.soap' level='trace'/>"
+						+		"<logger category='zmail.soap' level='trace'/>"
 						+	"</AddAccountLoggerRequest>");
 
 			}
@@ -109,8 +109,8 @@ public class ZimbraAdminAccount extends ZimbraAccount {
 
 		} catch (HarnessException e) {
 			logger.error("Unable to provision account: "+ EmailAddress);
-			ZimbraId = null;
-			ZimbraMailHost = null;
+			ZmailId = null;
+			ZmailMailHost = null;
 		}
 		
 		return (this);
@@ -120,10 +120,10 @@ public class ZimbraAdminAccount extends ZimbraAccount {
 	 * Authenticates the admin account (using SOAP admin AuthRequest)
 	 * Sets the authToken
 	 */
-	public ZimbraAccount authenticate() {
+	public ZmailAccount authenticate() {
 		try {
 			soapSend(
-					"<AuthRequest xmlns='urn:zimbraAdmin'>" +
+					"<AuthRequest xmlns='urn:zmailAdmin'>" +
 					"<name>"+ EmailAddress +"</name>" +
 					"<password>"+ Password +"</password>" +
 			"</AuthRequest>");
@@ -138,20 +138,20 @@ public class ZimbraAdminAccount extends ZimbraAccount {
 
 	/**
 	 * Get the global admin account used for Admin Console testing
-	 * This global admin has the zimbraPrefAdminConsoleWarnOnExit set to false
+	 * This global admin has the zmailPrefAdminConsoleWarnOnExit set to false
 	 */
-	public static synchronized ZimbraAdminAccount AdminConsoleAdmin() {
+	public static synchronized ZmailAdminAccount AdminConsoleAdmin() {
 		if ( _AdminConsoleAdmin == null ) {
 			try {
-				String name = "globaladmin"+ ZimbraSeleniumProperties.getUniqueString();
-				String domain = ZimbraSeleniumProperties.getStringProperty("server.host","qa60.lab.zimbra.com");
-				_AdminConsoleAdmin = new ZimbraAdminAccount(name +"@"+ domain);
+				String name = "globaladmin"+ ZmailSeleniumProperties.getUniqueString();
+				String domain = ZmailSeleniumProperties.getStringProperty("server.host","qa60.lab.zmail.com");
+				_AdminConsoleAdmin = new ZmailAdminAccount(name +"@"+ domain);
 				_AdminConsoleAdmin.provision();
 				_AdminConsoleAdmin.authenticate();
 				_AdminConsoleAdmin.soapSend(
-							"<ModifyAccountRequest xmlns='urn:zimbraAdmin'>"
-						+		"<id>"+ _AdminConsoleAdmin.ZimbraId +"</id>"
-						+		"<a n='zimbraPrefAdminConsoleWarnOnExit'>FALSE</a>"
+							"<ModifyAccountRequest xmlns='urn:zmailAdmin'>"
+						+		"<id>"+ _AdminConsoleAdmin.ZmailId +"</id>"
+						+		"<a n='zmailPrefAdminConsoleWarnOnExit'>FALSE</a>"
 						+	"</ModifyAccountRequest>");
 			} catch (HarnessException e) {
 				logger.error("Unable to fully provision admin account", e);
@@ -163,7 +163,7 @@ public class ZimbraAdminAccount extends ZimbraAccount {
 		logger.warn("AdminConsoleAdmin is being reset");
 		_AdminConsoleAdmin = null;
 	}
-	private static ZimbraAdminAccount _AdminConsoleAdmin = null;
+	private static ZmailAdminAccount _AdminConsoleAdmin = null;
 
 	/**
 	 * Reset all static accounts.  This method should be used before/after
@@ -173,8 +173,8 @@ public class ZimbraAdminAccount extends ZimbraAccount {
 	 * the second request will have references to server1.
 	 */
 	public static void reset() {
-		ZimbraAdminAccount._AdminConsoleAdmin = null;
-		ZimbraAdminAccount._GlobalAdmin = null;		
+		ZmailAdminAccount._AdminConsoleAdmin = null;
+		ZmailAdminAccount._GlobalAdmin = null;		
 	}
 
 	/**
@@ -182,15 +182,15 @@ public class ZimbraAdminAccount extends ZimbraAccount {
 	 * This account is defined in config.properties as <adminName>@<server>
 	 * @return The global admin account
 	 */
-	public static synchronized ZimbraAdminAccount GlobalAdmin() {
+	public static synchronized ZmailAdminAccount GlobalAdmin() {
 		if ( _GlobalAdmin == null ) {
-			String name = ZimbraSeleniumProperties.getStringProperty("adminName", "admin@zqa-062.eng.vmware.com");
-			_GlobalAdmin = new ZimbraAdminAccount(name);
+			String name = ZmailSeleniumProperties.getStringProperty("adminName", "admin@zqa-062.eng.vmware.com");
+			_GlobalAdmin = new ZmailAdminAccount(name);
 			_GlobalAdmin.authenticate();
 		}
 		return (_GlobalAdmin);
 	}
-	private static ZimbraAdminAccount _GlobalAdmin = null;
+	private static ZmailAdminAccount _GlobalAdmin = null;
 
 
 	/**
@@ -205,20 +205,20 @@ public class ZimbraAdminAccount extends ZimbraAccount {
 
 
 		// Use the pre-provisioned global admin account to send a basic request
-		ZimbraAdminAccount.GlobalAdmin().soapSend("<GetVersionInfoRequest xmlns='urn:zimbraAdmin'/>");
-		if ( !ZimbraAdminAccount.GlobalAdmin().soapMatch("//admin:GetVersionInfoResponse", null, null) )
+		ZmailAdminAccount.GlobalAdmin().soapSend("<GetVersionInfoRequest xmlns='urn:zmailAdmin'/>");
+		if ( !ZmailAdminAccount.GlobalAdmin().soapMatch("//admin:GetVersionInfoResponse", null, null) )
 			throw new HarnessException("GetVersionInfoRequest did not return GetVersionInfoResponse");
 
 
 
 		// Create a new global admin account
-		String domain = ZimbraSeleniumProperties.getStringProperty("server.host","qa60.lab.zimbra.com");
-		ZimbraAdminAccount admin = new ZimbraAdminAccount("admin"+ System.currentTimeMillis() +"@"+ domain);
+		String domain = ZmailSeleniumProperties.getStringProperty("server.host","qa60.lab.zmail.com");
+		ZmailAdminAccount admin = new ZmailAdminAccount("admin"+ System.currentTimeMillis() +"@"+ domain);
 		admin.provision();	// Create the account (CreateAccountRequest)
 		admin.authenticate();		// Authenticate the account (AuthRequest)
 
 		// Send a basic request as the new admin account
-		admin.soapSend("<GetServiceStatusRequest xmlns='urn:zimbraAdmin'/>");
+		admin.soapSend("<GetServiceStatusRequest xmlns='urn:zmailAdmin'/>");
 		if ( !admin.soapMatch("//admin:GetServiceStatusResponse", null, null) )
 			throw new HarnessException("GetServiceStatusRequest did not return GetServiceStatusResponse");
 

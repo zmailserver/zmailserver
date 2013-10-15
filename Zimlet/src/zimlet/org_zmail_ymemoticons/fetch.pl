@@ -76,5 +76,5 @@ foreach my $i (@emoticons) {
 }
 
 my $full_regexp = '(' . join('|', @re_array) . ')';
-print "Com_Zimbra_YMEmoticons.REGEXP = /$full_regexp/ig;\n\n";
-print 'Com_Zimbra_YMEmoticons.SMILEYS = ' . $json->objToJson(\%result) . ";\n";
+print "Com_Zmail_YMEmoticons.REGEXP = /$full_regexp/ig;\n\n";
+print 'Com_Zmail_YMEmoticons.SMILEYS = ' . $json->objToJson(\%result) . ";\n";

@@ -14,16 +14,16 @@
 --%>
 <%@ tag body-content="empty" dynamic-attributes="dynattrs" %>
 <%@ attribute name="urlTarget" rtexprvalue="true" required="true" %>
-<%@ attribute name="mailbox" rtexprvalue="true" required="true" type="com.zimbra.cs.taglib.bean.ZMailboxBean"%>
-<%@ attribute name="context" rtexprvalue="true" required="true" type="com.zimbra.cs.taglib.tag.SearchContext" %>
-<%@ attribute name="contact" rtexprvalue="true" required="true" type="com.zimbra.cs.taglib.bean.ZContactBean" %>
+<%@ attribute name="mailbox" rtexprvalue="true" required="true" type="org.zmail.cs.taglib.bean.ZMailboxBean"%>
+<%@ attribute name="context" rtexprvalue="true" required="true" type="org.zmail.cs.taglib.tag.SearchContext" %>
+<%@ attribute name="contact" rtexprvalue="true" required="true" type="org.zmail.cs.taglib.bean.ZContactBean" %>
 <%@ attribute name="isTop" rtexprvalue="true" required="false" %>
 <%@ attribute name="keys" rtexprvalue="true" required="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
-<%@ taglib prefix="app" uri="com.zimbra.htmlclient" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
+<%@ taglib prefix="app" uri="org.zmail.htmlclient" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
 <zm:currentResultUrl var="closeUrl" value="${urlTarget}" context="${context}"/>
 <mo:handleError>
 <zm:getUserAgent var="ua" session="true"/>

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.filter;
+package org.zmail.cs.filter;
 
 public class OfflineRuleRewriterFactory extends RuleRewriterFactory {
 

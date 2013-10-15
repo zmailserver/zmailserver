@@ -123,7 +123,7 @@
   <topic name="高度な検索を実行する" url="zwc_help_files/12_search/performing_an_advanced_search.htm" />
 </key>
 <key name="概要ペイン" >
-  <topic name="Zimbraウェブクライアント内を移動する" url="zwc_help_files/1_setting_up/navigating_the_zimbra_web_client.htm" />
+  <topic name="Zmailウェブクライアント内を移動する" url="zwc_help_files/1_setting_up/navigating_the_zmail_web_client.htm" />
 </key>
 <key name="標準のウェブクライアント" >
   <topic name="アドバンストクライアントおよび標準のクライアントを使用する" url="zwc_help_files/1_setting_up/using_advanced_and_standard_clients.htm" />
@@ -142,7 +142,7 @@
   </key>
 </key>
 <key name="画面" >
-  <topic name="Zimbraウェブクライアント内を移動する" url="zwc_help_files/1_setting_up/navigating_the_zimbra_web_client.htm" />
+  <topic name="Zmailウェブクライアント内を移動する" url="zwc_help_files/1_setting_up/navigating_the_zmail_web_client.htm" />
 </key>
 <key name="管理する" >
   <topic name="携帯デバイスを管理する" url="zwc_help_files/11_mobile/managing_your_mobile_devices.htm" />

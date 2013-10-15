@@ -14,7 +14,7 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_salesdemo"
+<zimlet name="org_zmail_salesdemo"
         version="1.0"
         description="Sales Demo Zimlet">
     <include>ZmSalesDemoZimlet.js</include>

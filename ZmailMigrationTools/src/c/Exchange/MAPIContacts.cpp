@@ -38,8 +38,8 @@ MAPIContactException::MAPIContactException(HRESULT hrErrCode, LPCWSTR lpszDescri
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 // MAPIContact
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-MAPIContact::MAPIContact(Zimbra::MAPI::MAPISession &session,
-    Zimbra::MAPI::MAPIMessage &mMessage)
+MAPIContact::MAPIContact(Zmail::MAPI::MAPISession &session,
+    Zmail::MAPI::MAPIMessage &mMessage)
 {
     m_bPersonalDL = false;
     m_session = &session;
@@ -151,7 +151,7 @@ MAPIContact::~MAPIContact()
 HRESULT MAPIContact::Init()
 {
     HRESULT hr = S_OK;
-    Zimbra::Util::ScopedBuffer<SPropValue> pPropValMsgClass;
+    Zmail::Util::ScopedBuffer<SPropValue> pPropValMsgClass;
 
     if (FAILED(hr = HrGetOneProp(m_pMessage, PR_MESSAGE_CLASS, pPropValMsgClass.getptr())))
         throw MAPIContactException(hr, L"Init(): HrGetOneProp Failed.", 
@@ -254,11 +254,11 @@ HRESULT MAPIContact::Init()
 
 
     // see if there is a file-as id
-    LONG zimbraFileAsId = 0;
+    LONG zmailFileAsId = 0;
 
     if (m_bPersonalDL)                          // PDL's always have a custom file-as
     {
-        zimbraFileAsId = 8;
+        zmailFileAsId = 8;
         Type(L"group");
     }
     else if (m_pPropVals[C_FILEASID].ulPropTag == contactProps.aulPropTag[C_FILEASID])
@@ -266,22 +266,22 @@ HRESULT MAPIContact::Init()
         switch (m_pPropVals[C_FILEASID].Value.l)
         {
         case OFA_LAST_C_FIRST:
-            zimbraFileAsId = 1;
+            zmailFileAsId = 1;
             break;
         case OFA_FIRST_LAST:
-            zimbraFileAsId = 2;
+            zmailFileAsId = 2;
             break;
         case OFA_COMPANY:
-            zimbraFileAsId = 3;
+            zmailFileAsId = 3;
             break;
         case OFA_LAST_C_FIRST_COMPANY:
-            zimbraFileAsId = 4;
+            zmailFileAsId = 4;
             break;
         case OFA_COMPANY_LAST_C_FIRST:
-            zimbraFileAsId = 6;
+            zmailFileAsId = 6;
             break;
         case OFA_CUSTOM:
-            zimbraFileAsId = 8;
+            zmailFileAsId = 8;
             break;
         }
     }
@@ -296,7 +296,7 @@ HRESULT MAPIContact::Init()
         Company(m_pPropVals[C_COMPANY_NAME].Value.lpszW);
     if (m_pPropVals[C_FILEAS].ulPropTag == contactProps.aulPropTag[C_FILEAS])
     {
-        if (zimbraFileAsId == 8)
+        if (zmailFileAsId == 8)
         {
             LPWSTR pwszFileAsValue = m_pPropVals[C_FILEAS].Value.lpszW;
 
@@ -330,11 +330,11 @@ HRESULT MAPIContact::Init()
                 delete[] pwszNONAME;
             }
         }
-        else if (zimbraFileAsId)
+        else if (zmailFileAsId)
         {
             WCHAR pwszTemp[3];
 
-            _ltow(zimbraFileAsId, pwszTemp, 10);
+            _ltow(zmailFileAsId, pwszTemp, 10);
             FileAs(pwszTemp);
         }
     }
@@ -492,7 +492,7 @@ HRESULT MAPIContact::Init()
             tempRecip.pEid = (LPENTRYID)(m_pPropVals[C_MAIL1EID].Value.bin.lpb);
 
             wstring strSenderEmail(_TEXT(""));
-            HRESULT hr = Zimbra::MAPI::Util::HrMAPIGetSMTPAddress(*m_session, tempRecip,
+            HRESULT hr = Zmail::MAPI::Util::HrMAPIGetSMTPAddress(*m_session, tempRecip,
                 strSenderEmail);
 
             if (hr != S_OK)
@@ -518,7 +518,7 @@ HRESULT MAPIContact::Init()
             tempRecip.pEid = (LPENTRYID)(m_pPropVals[C_MAIL2EID].Value.bin.lpb);
 
             wstring strSenderEmail(_TEXT(""));
-            HRESULT hr = Zimbra::MAPI::Util::HrMAPIGetSMTPAddress(*m_session, tempRecip,
+            HRESULT hr = Zmail::MAPI::Util::HrMAPIGetSMTPAddress(*m_session, tempRecip,
                 strSenderEmail);
 
             if (hr != S_OK)
@@ -544,7 +544,7 @@ HRESULT MAPIContact::Init()
             tempRecip.pEid = (LPENTRYID)(m_pPropVals[C_MAIL3EID].Value.bin.lpb);
 
             wstring strSenderEmail(_TEXT(""));
-            HRESULT hr = Zimbra::MAPI::Util::HrMAPIGetSMTPAddress(*m_session, tempRecip,
+            HRESULT hr = Zmail::MAPI::Util::HrMAPIGetSMTPAddress(*m_session, tempRecip,
                 strSenderEmail);
 
             if (hr != S_OK)
@@ -688,7 +688,7 @@ HRESULT MAPIContact::Init()
 			if (SUCCEEDED(hr))
 			{
 				WCHAR wszProps2GUID[40] = { 0 };
-				Zimbra::Util::Guid nameProps2Guid(OUTLOOK_NAME_PROPS_GUID_2);
+				Zmail::Util::Guid nameProps2Guid(OUTLOOK_NAME_PROPS_GUID_2);
 
 				nameProps2Guid.toString(wszProps2GUID);
 
@@ -697,14 +697,14 @@ HRESULT MAPIContact::Init()
 
 				for (ULONG i = 0; i < lCount; i++)
 				{
-					Zimbra::Util::ScopedBuffer<SPropValue> pPropVal=NULL;
+					Zmail::Util::ScopedBuffer<SPropValue> pPropVal=NULL;
 
 					hr = HrGetOneProp(m_pMessage, tagArray->aulPropTag[i], pPropVal.getptr());
 					if ((lppPropNames[i] != NULL) &&(hr==S_OK) &&(pPropVal.getptr()!=NULL))   // FBS bug 71786 -- 3/20/12
                     {
 					    if (lppPropNames[i]->ulKind == MNID_STRING)
 					    {
-						    Zimbra::Util::Guid propGuid(*lppPropNames[i]->lpguid);
+						    Zmail::Util::Guid propGuid(*lppPropNames[i]->lpguid);
 
 						    propGuid.toString(wszContactPropGUID);
 						    if (lstrcmpiW(wszContactPropGUID, wszProps2GUID) == 0)
@@ -747,7 +747,7 @@ HRESULT MAPIContact::Init()
 
 								    _gcvt(pPropVal->Value.dbl, 6, tmp);
 
-								    LPWSTR wszTmp = Zimbra::Util::AnsiiToUnicode(tmp);
+								    LPWSTR wszTmp = Zmail::Util::AnsiiToUnicode(tmp);
 
 								    wcscpy(wszVal, wszTmp);
 								    break;
@@ -813,10 +813,10 @@ HRESULT MAPIContact::GetContactImage(wstring &wstrImagePath,wstring &wstrContent
 {
     HRESULT hr = S_OK;
 	LPSTR strExtension=".jpg";
-    Zimbra::Util::ScopedInterface<IStream> pSrcStream;
+    Zmail::Util::ScopedInterface<IStream> pSrcStream;
     {
-        Zimbra::Util::ScopedRowSet pAttachRows;
-        Zimbra::Util::ScopedInterface<IMAPITable> pAttachTable;
+        Zmail::Util::ScopedRowSet pAttachRows;
+        Zmail::Util::ScopedInterface<IMAPITable> pAttachTable;
 
         SizedSPropTagArray(4, attachProps) = {
             4, { PR_ATTACH_NUM, PR_ATTACH_SIZE, PR_ATTACH_LONG_FILENAME,PR_ATTACH_EXTENSION }
@@ -845,7 +845,7 @@ HRESULT MAPIContact::GetContactImage(wstring &wstrImagePath,wstring &wstrContent
                     if (_tcscmp(pAttachRows->aRow[i].lpProps[2].Value.LPSZ, _T(
                         "ContactPicture.jpg")))
                         continue;
-                    Zimbra::Util::ScopedInterface<IAttach> pAttach;
+                    Zmail::Util::ScopedInterface<IAttach> pAttach;
 
                     if (FAILED(hr = m_pMessage->OpenAttach(
                             pAttachRows->aRow[i].lpProps[0].Value.l, NULL, 0,
@@ -867,7 +867,7 @@ HRESULT MAPIContact::GetContactImage(wstring &wstrImagePath,wstring &wstrContent
         // add a custom header for content location to support rfc2557
 		LPSTR pContentType = NULL;
 		   strExtension = pAttachRows->aRow[i].lpProps[3].Value.lpszA;
-            Zimbra::MAPI::Util::GetContentTypeFromExtension(pAttachRows->aRow[i].lpProps[3].Value.lpszA, pContentType);
+            Zmail::MAPI::Util::GetContentTypeFromExtension(pAttachRows->aRow[i].lpProps[3].Value.lpszA, pContentType);
 	LPWSTR lpwstrContentType = NULL;
 
     AtoW((LPSTR)pContentType, lpwstrContentType);
@@ -890,15 +890,15 @@ HRESULT MAPIContact::GetContactImage(wstring &wstrImagePath,wstring &wstrContent
     wstring wstrTempAppDirPath;
     char *lpszDirName = NULL;
     char *lpszUniqueName = NULL;
-    Zimbra::Util::ScopedInterface<IStream> pDestStream;
+    Zmail::Util::ScopedInterface<IStream> pDestStream;
 
-    if (!Zimbra::MAPI::Util::GetAppTemporaryDirectory(wstrTempAppDirPath))
+    if (!Zmail::MAPI::Util::GetAppTemporaryDirectory(wstrTempAppDirPath))
         return MAPI_E_ACCESS_DENIED;
     WtoA((LPWSTR)wstrTempAppDirPath.c_str(), lpszDirName);
 
     string strFQFileName = lpszDirName;
 
-    WtoA((LPWSTR)Zimbra::MAPI::Util::GetUniqueName().c_str(), lpszUniqueName);
+    WtoA((LPWSTR)Zmail::MAPI::Util::GetUniqueName().c_str(), lpszUniqueName);
     strFQFileName += "\\ZmContact_";
     strFQFileName += lpszUniqueName;
     //strFQFileName += ".jpg";
@@ -936,7 +936,7 @@ HRESULT MAPIContact::GetContactImage(wstring &wstrImagePath,wstring &wstrContent
     const char *pFinal = theCD.c_str();
 
 	
-    Zimbra::Util::CopyString(ppszCD, (LPSTR)pFinal);
+    Zmail::Util::CopyString(ppszCD, (LPSTR)pFinal);
 
 
 	LPWSTR lpwstrContentDisp = NULL;
@@ -945,7 +945,7 @@ HRESULT MAPIContact::GetContactImage(wstring &wstrImagePath,wstring &wstrContent
 	wstrContentDisposition = lpwstrContentDisp;
 
 	/* LPSTR pContentType = NULL;
-	Zimbra::MAPI::Util::GetContentTypeFromExtension(".jpg", pContentType);
+	Zmail::MAPI::Util::GetContentTypeFromExtension(".jpg", pContentType);
 
 	LPWSTR lpwstrContentType = NULL;
 

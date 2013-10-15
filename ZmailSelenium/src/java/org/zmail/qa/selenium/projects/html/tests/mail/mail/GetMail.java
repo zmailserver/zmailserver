@@ -14,16 +14,16 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.html.tests.mail.mail;
+package org.zmail.qa.selenium.projects.html.tests.mail.mail;
 
 import java.util.*;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.MailItem;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.html.core.HtmlCommonTest;
+import org.zmail.qa.selenium.framework.items.MailItem;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.html.core.HtmlCommonTest;
 
 
 public class GetMail extends HtmlCommonTest {
@@ -40,10 +40,10 @@ public class GetMail extends HtmlCommonTest {
 		super.startingAccountPreferences = new HashMap<String, String>() {
 			private static final long serialVersionUID = -3743597574275515006L;
 		{
-		    		put("zimbraPrefGroupMailBy", "message");
-		    		put("zimbraPrefReadingPaneLocation", "bottom");
-				    put("zimbraPrefMessageViewHtmlPreferred", "TRUE");
-				    put("zimbraPrefMailPollingInterval", "" + pollIntervalSeconds);
+		    		put("zmailPrefGroupMailBy", "message");
+		    		put("zmailPrefReadingPaneLocation", "bottom");
+				    put("zmailPrefMessageViewHtmlPreferred", "TRUE");
+				    put("zmailPrefMailPollingInterval", "" + pollIntervalSeconds);
 				}};
 
 
@@ -54,16 +54,16 @@ public class GetMail extends HtmlCommonTest {
 	public void GetMail_01() throws HarnessException {
 		
 		// Create the message data to be sent
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
 		
 		// Send the message from AccountA to the ZWC user
-		ZimbraAccount.AccountA().soapSend(
-					"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+		ZmailAccount.AccountA().soapSend(
+					"<SendMsgRequest xmlns='urn:zmailMail'>" +
 						"<m>" +
 							"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 							"<su>"+ subject +"</su>" +
 							"<mp ct='text/plain'>" +
-								"<content>"+ "body" + ZimbraSeleniumProperties.getUniqueString() +"</content>" +
+								"<content>"+ "body" + ZmailSeleniumProperties.getUniqueString() +"</content>" +
 							"</mp>" +
 						"</m>" +
 					"</SendMsgRequest>");

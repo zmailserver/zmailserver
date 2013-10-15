@@ -27,7 +27,7 @@
   <topic name="Setting Up an Out of Office Message" url="zwc_help_files/2_manage_email/setting_up_an_out_of_office_message.htm" />
 </key>
 <key name="overview pane" >
-  <topic name="Navigating the Zimbra Web Client" url="zwc_help_files/1_setting_up/navigating_the_zimbra_web_client.htm" />
+  <topic name="Navigating the Zmail Web Client" url="zwc_help_files/1_setting_up/navigating_the_zmail_web_client.htm" />
 </key>
 <key name="password" >
   <topic name="Changing Your Password" url="zwc_help_files/1_setting_up/changing_your_password.htm" />
@@ -146,7 +146,7 @@
   </key>
 </key>
 <key name="screen view" >
-  <topic name="Navigating the Zimbra Web Client" url="zwc_help_files/1_setting_up/navigating_the_zimbra_web_client.htm" />
+  <topic name="Navigating the Zmail Web Client" url="zwc_help_files/1_setting_up/navigating_the_zmail_web_client.htm" />
 </key>
 <key name="search query" >
   <topic name="Saving a Search Query" url="zwc_help_files/12_search/saving_a_search_query.htm" />

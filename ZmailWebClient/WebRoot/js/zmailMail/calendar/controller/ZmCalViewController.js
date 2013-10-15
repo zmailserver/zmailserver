@@ -1350,7 +1350,7 @@ function(date, duration, roll) {
 		var viewId = this._viewMgr.getCurrentViewName();
 		var currentView = this._viewMgr.getCurrentView();
 		var title = currentView.getCalTitle();
-		Dwt.setTitle([ZmMsg.zimbraTitle, ": ", title].join(""));
+		Dwt.setTitle([ZmMsg.zmailTitle, ": ", title].join(""));
 		if (!roll &&
 			this._currentViewType == ZmId.VIEW_CAL_WORK_WEEK &&
 			!currentView.workingHours[date.getDay()].isWorkingDay &&
@@ -4140,7 +4140,7 @@ function(invite, callback) {
 
 	var apptId = invite.getAppointmentId();
 	if(apptId) {
-		var jsonObj = {GetAppointmentRequest:{_jsns:"urn:zimbraMail"}};
+		var jsonObj = {GetAppointmentRequest:{_jsns:"urn:zmailMail"}};
 		var request = jsonObj.GetAppointmentRequest;
 		request.id = apptId;
 		request.includeContent = "1";
@@ -4262,7 +4262,7 @@ function (appt) {
 
 ZmCalViewController.prototype.getFreeBusyInfo =
 function(startTime, endTime, emailList, callback, errorCallback, noBusyOverlay) {
-	var soapDoc = AjxSoapDoc.create("GetFreeBusyRequest", "urn:zimbraMail");
+	var soapDoc = AjxSoapDoc.create("GetFreeBusyRequest", "urn:zmailMail");
 	soapDoc.setMethodAttribute("s", startTime);
 	soapDoc.setMethodAttribute("e", endTime);
 	soapDoc.setMethodAttribute("uid", emailList);
@@ -4282,7 +4282,7 @@ function(startTime, endTime, emailList, callback, errorCallback, noBusyOverlay) 
 
 ZmCalViewController.prototype.getWorkingInfo =
 function(startTime, endTime, emailList, callback, errorCallback, noBusyOverlay) {
-   var soapDoc = AjxSoapDoc.create("GetWorkingHoursRequest", "urn:zimbraMail");
+   var soapDoc = AjxSoapDoc.create("GetWorkingHoursRequest", "urn:zmailMail");
    soapDoc.setMethodAttribute("s", startTime);
    soapDoc.setMethodAttribute("e", endTime);
    soapDoc.setMethodAttribute("name", emailList);

@@ -14,43 +14,43 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.preferences.mail.signatures;
+package org.zmail.qa.selenium.projects.desktop.tests.preferences.mail.signatures;
 
 import java.util.HashMap;
 import org.testng.annotations.Test;
-import com.zimbra.qa.selenium.framework.items.MailItem;
-import com.zimbra.qa.selenium.framework.items.SignatureItem;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.GeneralUtility;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount.SOAP_DESTINATION_HOST_TYPE;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.mail.FormMailNew;
-import com.zimbra.qa.selenium.projects.desktop.ui.mail.FormMailNew.Field;
+import org.zmail.qa.selenium.framework.items.MailItem;
+import org.zmail.qa.selenium.framework.items.SignatureItem;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.GeneralUtility;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.framework.util.ZmailAccount.SOAP_DESTINATION_HOST_TYPE;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.mail.FormMailNew;
+import org.zmail.qa.selenium.projects.desktop.ui.mail.FormMailNew.Field;
 
 public class ForwardMsgWithTextSignature extends AjaxCommonTest {
-   String sigName = "signame" + ZimbraSeleniumProperties.getUniqueString();
-   String sigBody = "sigbody" + ZimbraSeleniumProperties.getUniqueString();
+   String sigName = "signame" + ZmailSeleniumProperties.getUniqueString();
+   String sigBody = "sigbody" + ZmailSeleniumProperties.getUniqueString();
 
    @SuppressWarnings("serial")
    public ForwardMsgWithTextSignature() {
       super.startingPage = app.zPageMail;
       super.startingAccountPreferences = new HashMap<String, String>() {
          {
-            put("zimbraPrefComposeFormat", "text");
-            // put("zimbraPrefGroupMailBy", "message");
+            put("zmailPrefComposeFormat", "text");
+            // put("zmailPrefGroupMailBy", "message");
          }
       };
    }
 
-   private void _createSignature(ZimbraAccount account) throws HarnessException {
+   private void _createSignature(ZmailAccount account) throws HarnessException {
       account.authenticate(SOAP_DESTINATION_HOST_TYPE.SERVER);
       account.soapSend(
-            "<CreateSignatureRequest xmlns='urn:zimbraAccount'>"
+            "<CreateSignatureRequest xmlns='urn:zmailAccount'>"
             + "<signature name='" + this.sigName + "' >"
             + "<content type='text/plain'>" + this.sigBody
             + "</content>" + "</signature>"
@@ -81,16 +81,16 @@ public class ForwardMsgWithTextSignature extends AjaxCommonTest {
       SignatureItem signature = SignatureItem.importFromSOAP(app.zGetActiveAccount(), this.sigName);
       ZAssert.assertEquals(signature.getName(), this.sigName,"verified Text Signature is created");
 
-      String subject = "subject"+ ZimbraSeleniumProperties.getUniqueString();
+      String subject = "subject"+ ZmailSeleniumProperties.getUniqueString();
 
       // Send a message to the account(self)
       app.zGetActiveAccount().soapSend(
-            "<SendMsgRequest xmlns='urn:zimbraMail'>" +
+            "<SendMsgRequest xmlns='urn:zmailMail'>" +
             "<m>" +
             "<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
             "<su>"+ subject +"</su>" +
             "<mp ct='text/plain'>" +
-            "<content>content"+ ZimbraSeleniumProperties.getUniqueString() + "\n\n"+signature.dBodyText+"\n</content>" +
+            "<content>content"+ ZmailSeleniumProperties.getUniqueString() + "\n\n"+signature.dBodyText+"\n</content>" +
             "</mp>" +
             "</m>" +
       "</SendMsgRequest>");
@@ -111,21 +111,21 @@ public class ForwardMsgWithTextSignature extends AjaxCommonTest {
       ZAssert.assertNotNull(mailform, "Verify the new form opened");
 
       // Fill out the form with the data
-      mailform.zFillField(Field.To, ZimbraAccount.AccountB().EmailAddress);
+      mailform.zFillField(Field.To, ZmailAccount.AccountB().EmailAddress);
 
       // Send the message
       mailform.zSubmit();
       GeneralUtility.syncDesktopToZcsWithSoap(app.zGetActiveAccount());
       app.zPageMail.zWaitForDesktopLoadingSpinner(5000);
 
-      MailItem received = MailItem.importFromSOAP(ZimbraAccount.AccountB(), "subject:("+ mail.dSubject +")");
+      MailItem received = MailItem.importFromSOAP(ZmailAccount.AccountB(), "subject:("+ mail.dSubject +")");
       logger.debug("===========received is: " + received);
       logger.debug("===========app is: " + app);
 
       //Verify TO, Subject, Body,Signature
       ZAssert.assertStringContains(received.dSubject, "Fwd", "Verify the subject field contains the 'Fwd' prefix");
       ZAssert.assertEquals(received.dFromRecipient.dEmailAddress, app.zGetActiveAccount().EmailAddress,"Verify the from field is correct");
-      ZAssert.assertEquals(received.dToRecipients.get(0).dEmailAddress,ZimbraAccount.AccountB().EmailAddress,"Verify the to field is correct");
+      ZAssert.assertEquals(received.dToRecipients.get(0).dEmailAddress,ZmailAccount.AccountB().EmailAddress,"Verify the to field is correct");
       ZAssert.assertStringContains(received.dBodyText, mail.dBodyText,"Verify the body content is correct");
       ZAssert.assertStringContains(received.dBodyText, this.sigBody,"Verify the signature is correct");
 

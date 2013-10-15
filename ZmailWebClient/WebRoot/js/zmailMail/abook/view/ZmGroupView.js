@@ -525,7 +525,7 @@ function() {
 
 ZmGroupView.prototype.getTitle =
 function() {
-	return [ZmMsg.zimbraTitle, this.isDistributionList() ? ZmMsg.distributionList : ZmMsg.group].join(": ");
+	return [ZmMsg.zmailTitle, this.isDistributionList() ? ZmMsg.distributionList : ZmMsg.group].join(": ");
 };
 
 ZmGroupView.prototype.setSize =
@@ -567,7 +567,7 @@ function() {
 
 ZmGroupView.prototype._setFields =
 function() {
-	// bug fix #35059 - always reset search-in select since non-zimbra accounts don't support GAL
+	// bug fix #35059 - always reset search-in select since non-zmail accounts don't support GAL
 	if (appCtxt.isOffline && appCtxt.accountList.size() > 1 && this._searchInSelect) {
 		this._searchInSelect.clearOptions();
 		this._resetSearchInSelect();
@@ -1060,7 +1060,7 @@ function() {
 	if (appCtxt.get(ZmSetting.SHARING_ENABLED)) {
 		this._searchInSelect.addOption(ZmMsg.searchPersonalSharedContacts, false, ZmContactsApp.SEARCHFOR_PAS);
 	}
-	if (appCtxt.get(ZmSetting.GAL_ENABLED) && appCtxt.getActiveAccount().isZimbraAccount) {
+	if (appCtxt.get(ZmSetting.GAL_ENABLED) && appCtxt.getActiveAccount().isZmailAccount) {
 		this._searchInSelect.addOption(ZmMsg.GAL, true, ZmContactsApp.SEARCHFOR_GAL);
 	}
 	if (!appCtxt.get(ZmSetting.INITIALLY_SEARCH_GAL) || !appCtxt.get(ZmSetting.GAL_ENABLED)) {

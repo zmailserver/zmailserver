@@ -14,16 +14,16 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.briefcase.folders;
+package org.zmail.qa.selenium.projects.desktop.tests.briefcase.folders;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount.SOAP_DESTINATION_HOST_TYPE;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.ZmailAccount.SOAP_DESTINATION_HOST_TYPE;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
 
 public class DeleteFolder extends AjaxCommonTest {
 
@@ -38,15 +38,15 @@ public class DeleteFolder extends AjaxCommonTest {
 
 	@Test(description = "Delete a briefcase sub-folder - Right click, Delete", groups = { "smoke" })
 	public void DeleteFolder_01() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 		FolderItem briefcaseRootFolder = FolderItem.importFromSOAP(account, SystemFolder.Briefcase);
 		ZAssert.assertNotNull(briefcaseRootFolder, "Verify the Briefcase root folder is available");
 		FolderItem trash = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Trash);
 		ZAssert.assertNotNull(trash, "Verify the trash is available");
 
 		// Create the sub-folder
-		String briefcaseSubFolderName = "folder" + ZimbraSeleniumProperties.getUniqueString();
-		account.soapSend("<CreateFolderRequest xmlns='urn:zimbraMail'>"
+		String briefcaseSubFolderName = "folder" + ZmailSeleniumProperties.getUniqueString();
+		account.soapSend("<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+ "<folder name='" + briefcaseSubFolderName + "' l='"
 				+ briefcaseRootFolder.getId() + "'/>"
 				+ "</CreateFolderRequest>");
@@ -70,7 +70,7 @@ public class DeleteFolder extends AjaxCommonTest {
 
 	@Test(description = "Delete a a top level briefcase folder - Right click, Delete", groups = { "smoke" })
 	public void DeleteFolder_02() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 		FolderItem briefcaseRootFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
 		FolderItem userRootFolder = FolderItem.importFromSOAP(account,
@@ -83,8 +83,8 @@ public class DeleteFolder extends AjaxCommonTest {
 
 		// Create a top level briefcase folder
 		String briefcaseTopLevelFolderName = "folder"
-				 + ZimbraSeleniumProperties.getUniqueString();
-		account.soapSend("<CreateFolderRequest xmlns='urn:zimbraMail'>"
+				 + ZmailSeleniumProperties.getUniqueString();
+		account.soapSend("<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+ "<folder name='" + briefcaseTopLevelFolderName + "' l='"
 				+ userRootFolder.getId() + "' view='document'/>"
 				+ "</CreateFolderRequest>");
@@ -116,12 +116,12 @@ public class DeleteFolder extends AjaxCommonTest {
 
    @Test(description = "Delete a local briefcase sub-folder - Right click, Delete", groups = { "smoke" })
    public void DeleteLocalSubfolderThroughContextMenu() throws HarnessException {
-      ZimbraAccount account = app.zGetActiveAccount();
+      ZmailAccount account = app.zGetActiveAccount();
       FolderItem briefcaseRootFolder = FolderItem.importFromSOAP(
             account,
             SystemFolder.Briefcase,
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
 
       ZAssert.assertNotNull(
             briefcaseRootFolder,
@@ -131,26 +131,26 @@ public class DeleteFolder extends AjaxCommonTest {
             app.zGetActiveAccount(),
             SystemFolder.Trash,
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
 
       ZAssert.assertNotNull(
             trash,
             "Verify the trash is available");
 
       // Create the sub-folder
-      String briefcaseSubFolderName = "folder" + ZimbraSeleniumProperties.getUniqueString();
-      account.soapSend("<CreateFolderRequest xmlns='urn:zimbraMail'>"
+      String briefcaseSubFolderName = "folder" + ZmailSeleniumProperties.getUniqueString();
+      account.soapSend("<CreateFolderRequest xmlns='urn:zmailMail'>"
             + "<folder name='" + briefcaseSubFolderName + "' l='"
             + briefcaseRootFolder.getId() + "'/>"
             + "</CreateFolderRequest>",
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
 
       FolderItem briefcaseSubFolder = FolderItem.importFromSOAP(
             account,
             briefcaseSubFolderName,
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
       ZAssert.assertNotNull(briefcaseSubFolder, "Verify the subfolder is available");
 
       // refresh the Briefcase tree folder list
@@ -165,7 +165,7 @@ public class DeleteFolder extends AjaxCommonTest {
             app.zGetActiveAccount(),
             briefcaseSubFolderName,
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
  
       ZAssert.assertNotNull(briefcaseSubFolder, "Verify the subfolder is again available");
       ZAssert.assertEquals(trash.getId(), briefcaseSubFolder.getParentId(), "Verify the subfolder's parent is now the trash folder ID");
@@ -173,13 +173,13 @@ public class DeleteFolder extends AjaxCommonTest {
 
    @Test(description = "Delete a local top level briefcase folder - Right click, Delete", groups = { "smoke" })
    public void DeleteLocalTopFolderThroughContextMenu() throws HarnessException {
-      ZimbraAccount account = app.zGetActiveAccount();
+      ZmailAccount account = app.zGetActiveAccount();
 
       FolderItem userRootFolder = FolderItem.importFromSOAP(
             account,
             SystemFolder.UserRoot,
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
       ZAssert.assertNotNull(userRootFolder,
             "Verify the user root folder is available");
 
@@ -187,26 +187,26 @@ public class DeleteFolder extends AjaxCommonTest {
             app.zGetActiveAccount(),
             SystemFolder.Trash,
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
 
       ZAssert.assertNotNull(trash, "Verify the trash is available");
 
       // Create a top level briefcase folder
       String briefcaseTopLevelFolderName = "folder"
-             + ZimbraSeleniumProperties.getUniqueString();
+             + ZmailSeleniumProperties.getUniqueString();
 
-      account.soapSend("<CreateFolderRequest xmlns='urn:zimbraMail'>"
+      account.soapSend("<CreateFolderRequest xmlns='urn:zmailMail'>"
             + "<folder name='" + briefcaseTopLevelFolderName + "' l='"
             + userRootFolder.getId() + "' view='document'/>"
             + "</CreateFolderRequest>",
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
 
       FolderItem briefcaseTopLevelFolder = FolderItem.importFromSOAP(
             account,
             briefcaseTopLevelFolderName,
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
       ZAssert.assertNotNull(briefcaseTopLevelFolder,
             "Verify the briefcase top level folder is available");
 
@@ -223,7 +223,7 @@ public class DeleteFolder extends AjaxCommonTest {
             app.zGetActiveAccount(),
             briefcaseTopLevelFolderName,
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
 
       ZAssert.assertNotNull(briefcaseTopLevelFolder,
             "Verify the briefcase top level folder is still available in ZD Client");

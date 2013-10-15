@@ -14,11 +14,11 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_example_menuitemsjs"
+<zimlet name="org_zmail_example_menuitemsjs"
         version="1.0"
         description="Demos menu item with actions in JS">
-    <include>com_zimbra_example_menuitemsjs.js</include>
-    <handlerObject>com_zimbra_example_menuitemsjs_HandlerObject</handlerObject>
+    <include>org_zmail_example_menuitemsjs.js</include>
+    <handlerObject>org_zmail_example_menuitemsjs_HandlerObject</handlerObject>
     <contentObject>
         <matchOn>
             <regex attrs="ig">lab|user|remodel</regex> <!-- matches lab or user or remodel -->

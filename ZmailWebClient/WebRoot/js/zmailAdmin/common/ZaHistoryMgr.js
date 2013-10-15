@@ -236,7 +236,7 @@ function(refresh) {
 }
 
 ZaHistory.prototype.defaultGoToView = function(refresh) {
-    var tree = ZaZimbraAdmin.getInstance().getOverviewPanelController().getOverviewPanel().getFolderTree();
+    var tree = ZaZmailAdmin.getInstance().getOverviewPanelController().getOverviewPanel().getFolderTree();
     tree.setSelectionByPath(this.path, false, undefined, undefined, undefined, refresh);
 }
 

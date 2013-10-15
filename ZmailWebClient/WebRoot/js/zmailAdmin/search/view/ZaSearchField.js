@@ -236,7 +236,7 @@ function(evt) {
 	}
 
     fieldObj.setCurrentSavedSearch({});
-    var overviewController =  ZaZimbraAdmin.getInstance().getOverviewPanelController();
+    var overviewController =  ZaZmailAdmin.getInstance().getOverviewPanelController();
     var tree = overviewController.getOverviewPanel().getFolderTree();
     /*
     It will introduce many issues when renaming for this items.
@@ -262,7 +262,7 @@ ZaSearchField.helpSrchButtonHndlr =
 function (evt) {
 	var helpQuery = this.getForm().getItemsById(ZaSearch.A_query)[0].getElement().value ;
 	if (helpQuery && helpQuery.length > 0){
-			var url = "http://support.zimbra.com/help/index.php"
+			var url = "http://support.zmail.com/help/index.php"
 			var args = [];
 			args.push("query=" + helpQuery) ;
 			if (typeof (ZaLicense) == typeof (_UNDEFINED_)) { //FOSS version
@@ -762,13 +762,13 @@ ZaSearchField.prototype._getMyXForm = function() {
 };
 
 ZaSearchField.canSaveSearch = function () {
-    return ZaItem.hasWritePermission ("zimbraAdminSavedSearches", 
-            ZaZimbraAdmin.currentAdminAccount) ;
+    return ZaItem.hasWritePermission ("zmailAdminSavedSearches", 
+            ZaZmailAdmin.currentAdminAccount) ;
 }
 
 ZaSearchField.canViewSavedSearch = function () {
-    return ZaItem.hasReadPermission ("zimbraAdminSavedSearches",
-                ZaZimbraAdmin.currentAdminAccount) ;
+    return ZaItem.hasReadPermission ("zmailAdminSavedSearches",
+                ZaZmailAdmin.currentAdminAccount) ;
 }
 
 ZaSearchField.prototype.setCurrentSavedSearch = function (currentSavedSearch) {

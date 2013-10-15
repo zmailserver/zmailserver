@@ -17,31 +17,31 @@
  * The test modules will be run in the order they are listed below. The unit test files are loaded via
  * script tags so that the debugger has access to their source.
  */
-AjxPackage.require({name:"zimbraMail.unittest.UtZWCUtils",			method:AjxPackage.METHOD_SCRIPT_TAG});
+AjxPackage.require({name:"zmailMail.unittest.UtZWCUtils",			method:AjxPackage.METHOD_SCRIPT_TAG});
 
-AjxPackage.require({name:"zimbraMail.unittest.UtMailMsgView_data",			method:AjxPackage.METHOD_SCRIPT_TAG});
-AjxPackage.require({name:"zimbraMail.unittest.UtGetOriginalContent_data",	method:AjxPackage.METHOD_SCRIPT_TAG});
+AjxPackage.require({name:"zmailMail.unittest.UtMailMsgView_data",			method:AjxPackage.METHOD_SCRIPT_TAG});
+AjxPackage.require({name:"zmailMail.unittest.UtGetOriginalContent_data",	method:AjxPackage.METHOD_SCRIPT_TAG});
 
-AjxPackage.require({name:"zimbraMail.unittest.UtAjxUtil",		    method:AjxPackage.METHOD_SCRIPT_TAG});
-AjxPackage.require({name:"zimbraMail.unittest.UtAjxStringUtil",		method:AjxPackage.METHOD_SCRIPT_TAG});
-AjxPackage.require({name:"zimbraMail.unittest.UtAjxXslt",			method:AjxPackage.METHOD_SCRIPT_TAG});
-AjxPackage.require({name:"zimbraMail.unittest.UtAjxTimezone",		method:AjxPackage.METHOD_SCRIPT_TAG});
-AjxPackage.require({name:"zimbraMail.unittest.UtBubbles",			method:AjxPackage.METHOD_SCRIPT_TAG});
-AjxPackage.require({name:"zimbraMail.unittest.UtCompose",			method:AjxPackage.METHOD_SCRIPT_TAG});
-AjxPackage.require({name:"zimbraMail.unittest.UtContactGroup",		method:AjxPackage.METHOD_SCRIPT_TAG});
-AjxPackage.require({name:"zimbraMail.unittest.UtMailListGroups",	method:AjxPackage.METHOD_SCRIPT_TAG});
-AjxPackage.require({name:"zimbraMail.unittest.UtYouTube",			method:AjxPackage.METHOD_SCRIPT_TAG});
-//AjxPackage.require({name:"zimbraMail.unittest.UtSpeed",				method:AjxPackage.METHOD_SCRIPT_TAG});
+AjxPackage.require({name:"zmailMail.unittest.UtAjxUtil",		    method:AjxPackage.METHOD_SCRIPT_TAG});
+AjxPackage.require({name:"zmailMail.unittest.UtAjxStringUtil",		method:AjxPackage.METHOD_SCRIPT_TAG});
+AjxPackage.require({name:"zmailMail.unittest.UtAjxXslt",			method:AjxPackage.METHOD_SCRIPT_TAG});
+AjxPackage.require({name:"zmailMail.unittest.UtAjxTimezone",		method:AjxPackage.METHOD_SCRIPT_TAG});
+AjxPackage.require({name:"zmailMail.unittest.UtBubbles",			method:AjxPackage.METHOD_SCRIPT_TAG});
+AjxPackage.require({name:"zmailMail.unittest.UtCompose",			method:AjxPackage.METHOD_SCRIPT_TAG});
+AjxPackage.require({name:"zmailMail.unittest.UtContactGroup",		method:AjxPackage.METHOD_SCRIPT_TAG});
+AjxPackage.require({name:"zmailMail.unittest.UtMailListGroups",	method:AjxPackage.METHOD_SCRIPT_TAG});
+AjxPackage.require({name:"zmailMail.unittest.UtYouTube",			method:AjxPackage.METHOD_SCRIPT_TAG});
+//AjxPackage.require({name:"zmailMail.unittest.UtSpeed",				method:AjxPackage.METHOD_SCRIPT_TAG});
 
-AjxPackage.require({name:"zimbraMail.unittest.UtPreferences",		method:AjxPackage.METHOD_SCRIPT_TAG});
-AjxPackage.require({name:"zimbraMail.unittest.UtCalendar",			method:AjxPackage.METHOD_SCRIPT_TAG});
-AjxPackage.require({name:"zimbraMail.unittest.UtContacts",			method:AjxPackage.METHOD_SCRIPT_TAG});
-AjxPackage.require({name:"zimbraMail.unittest.UtMail",				method:AjxPackage.METHOD_SCRIPT_TAG});
-AjxPackage.require({name:"zimbraMail.unittest.UtMailMsg",			method:AjxPackage.METHOD_SCRIPT_TAG});
-AjxPackage.require({name:"zimbraMail.unittest.UtShare",				method:AjxPackage.METHOD_SCRIPT_TAG});
-AjxPackage.require({name:"zimbraMail.unittest.UtSearch",			method:AjxPackage.METHOD_SCRIPT_TAG});
-AjxPackage.require({name:"zimbraMail.unittest.UtPriorityInbox",     method:AjxPackage.METHOD_SCRIPT_TAG});
-AjxPackage.require({name:"zimbraMail.unittest.UtMailMsgView",       method:AjxPackage.METHOD_SCRIPT_TAG});
-AjxPackage.require({name:"zimbraMail.unittest.UtGetOriginalContent", method:AjxPackage.METHOD_SCRIPT_TAG});
+AjxPackage.require({name:"zmailMail.unittest.UtPreferences",		method:AjxPackage.METHOD_SCRIPT_TAG});
+AjxPackage.require({name:"zmailMail.unittest.UtCalendar",			method:AjxPackage.METHOD_SCRIPT_TAG});
+AjxPackage.require({name:"zmailMail.unittest.UtContacts",			method:AjxPackage.METHOD_SCRIPT_TAG});
+AjxPackage.require({name:"zmailMail.unittest.UtMail",				method:AjxPackage.METHOD_SCRIPT_TAG});
+AjxPackage.require({name:"zmailMail.unittest.UtMailMsg",			method:AjxPackage.METHOD_SCRIPT_TAG});
+AjxPackage.require({name:"zmailMail.unittest.UtShare",				method:AjxPackage.METHOD_SCRIPT_TAG});
+AjxPackage.require({name:"zmailMail.unittest.UtSearch",			method:AjxPackage.METHOD_SCRIPT_TAG});
+AjxPackage.require({name:"zmailMail.unittest.UtPriorityInbox",     method:AjxPackage.METHOD_SCRIPT_TAG});
+AjxPackage.require({name:"zmailMail.unittest.UtMailMsgView",       method:AjxPackage.METHOD_SCRIPT_TAG});
+AjxPackage.require({name:"zmailMail.unittest.UtGetOriginalContent", method:AjxPackage.METHOD_SCRIPT_TAG});
 
-AjxPackage.require({name:"zimbraMail.unittest.UtGeneral", method:AjxPackage.METHOD_SCRIPT_TAG});
+AjxPackage.require({name:"zmailMail.unittest.UtGeneral", method:AjxPackage.METHOD_SCRIPT_TAG});

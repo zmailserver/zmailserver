@@ -13,17 +13,17 @@
  * ***** END LICENSE BLOCK *****
  */
 
-function com_zimbra_rssfeeds_HandlerObject() {
+function org_zmail_rssfeeds_HandlerObject() {
 }
 
-com_zimbra_rssfeeds_HandlerObject.prototype = new ZmZimletBase();
-com_zimbra_rssfeeds_HandlerObject.prototype.constructor = com_zimbra_rssfeeds_HandlerObject;
+org_zmail_rssfeeds_HandlerObject.prototype = new ZmZimletBase();
+org_zmail_rssfeeds_HandlerObject.prototype.constructor = org_zmail_rssfeeds_HandlerObject;
 
 /**
  * Simplify handler object
  *
  */
-var RssFeedsZimlet = com_zimbra_rssfeeds_HandlerObject;
+var RssFeedsZimlet = org_zmail_rssfeeds_HandlerObject;
 
 RssFeedsZimlet.VIEW = "message";
 
@@ -307,7 +307,7 @@ RssFeedsZimlet.prototype._initializeMainRSSFeedsFolderId =
 function(callback) {
 	if(this.mainRssFeedFldrId)
 		return;
-	var soapDoc = AjxSoapDoc.create("GetFolderRequest", "urn:zimbraMail");
+	var soapDoc = AjxSoapDoc.create("GetFolderRequest", "urn:zmailMail");
 	var folderNode = soapDoc.set("folder");
 	folderNode.setAttribute("l", appCtxt.getFolderTree().root.id);
 
@@ -387,7 +387,7 @@ function() {
 RssFeedsZimlet.prototype._createFolder =
 function(params) {
 
-	var jsonObj = {CreateFolderRequest:{_jsns:"urn:zimbraMail"}};
+	var jsonObj = {CreateFolderRequest:{_jsns:"urn:zmailMail"}};
 	var folder = jsonObj.CreateFolderRequest.folder = {};
 	for (var i in params) {
 		if (i == "callback" || i == "errorCallback" || i == "postCallback") { 

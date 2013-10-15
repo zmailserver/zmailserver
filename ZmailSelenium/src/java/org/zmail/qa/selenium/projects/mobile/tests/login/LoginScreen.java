@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.mobile.tests.login;
+package org.zmail.qa.selenium.projects.mobile.tests.login;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.projects.mobile.core.MobileCommonTest;
-import com.zimbra.qa.selenium.projects.mobile.ui.PageLogin;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.projects.mobile.core.MobileCommonTest;
+import org.zmail.qa.selenium.projects.mobile.ui.PageLogin;
 
 
 public class LoginScreen extends MobileCommonTest {

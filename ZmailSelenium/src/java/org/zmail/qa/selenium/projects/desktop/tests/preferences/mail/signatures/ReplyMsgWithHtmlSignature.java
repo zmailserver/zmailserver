@@ -14,30 +14,30 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.preferences.mail.signatures;
+package org.zmail.qa.selenium.projects.desktop.tests.preferences.mail.signatures;
 
 import java.util.HashMap;
 import org.testng.annotations.Test;
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.items.MailItem;
-import com.zimbra.qa.selenium.framework.items.SignatureItem;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.GeneralUtility;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.SleepUtil;
-import com.zimbra.qa.selenium.framework.util.XmlStringUtil;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount.SOAP_DESTINATION_HOST_TYPE;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.mail.FormMailNew;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.items.MailItem;
+import org.zmail.qa.selenium.framework.items.SignatureItem;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.GeneralUtility;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.SleepUtil;
+import org.zmail.qa.selenium.framework.util.XmlStringUtil;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.framework.util.ZmailAccount.SOAP_DESTINATION_HOST_TYPE;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.mail.FormMailNew;
 
 
 public class ReplyMsgWithHtmlSignature extends AjaxCommonTest {
-   String sigName = "signame" + ZimbraSeleniumProperties.getUniqueString();
-   String sigBody = "Signature<strong>bold"+ ZimbraSeleniumProperties.getUniqueString() + "</strong>Signature";
+   String sigName = "signame" + ZmailSeleniumProperties.getUniqueString();
+   String sigBody = "Signature<strong>bold"+ ZmailSeleniumProperties.getUniqueString() + "</strong>Signature";
    String contentHTMLSig = XmlStringUtil.escapeXml("<html>" + "<head></head>"
          + "<body>" + sigBody + "</body>" + "</html>");
 
@@ -46,15 +46,15 @@ public class ReplyMsgWithHtmlSignature extends AjaxCommonTest {
       super.startingPage = app.zPageMail;
       super.startingAccountPreferences = new HashMap<String, String>() {
          {
-            put("zimbraPrefComposeFormat", "html");
+            put("zmailPrefComposeFormat", "html");
          }
       };
    }
 
-   private void _createSignature(ZimbraAccount account) throws HarnessException {
+   private void _createSignature(ZmailAccount account) throws HarnessException {
       account.authenticate(SOAP_DESTINATION_HOST_TYPE.SERVER);
       account.soapSend(
-            "<CreateSignatureRequest xmlns='urn:zimbraAccount'>"
+            "<CreateSignatureRequest xmlns='urn:zmailAccount'>"
             + "<signature name='" + this.sigName + "' >"
             + "<content type='text/html'>'" + this.contentHTMLSig
             + "'</content>" + "</signature>"
@@ -85,10 +85,10 @@ public class ReplyMsgWithHtmlSignature extends AjaxCommonTest {
       SignatureItem signature = SignatureItem.importFromSOAP(app.zGetActiveAccount(), this.sigName);
       ZAssert.assertEquals(signature.getName(), this.sigName,"verified Text Signature is created");
 
-      String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-      String bodyText = "text" + ZimbraSeleniumProperties.getUniqueString();
+      String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+      String bodyText = "text" + ZmailSeleniumProperties.getUniqueString();
       String bodyHTML = "text <strong>bold"
-         + ZimbraSeleniumProperties.getUniqueString() + "</strong> text";
+         + ZmailSeleniumProperties.getUniqueString() + "</strong> text";
       String contentHTML = XmlStringUtil.escapeXml("<html>" + "<head></head>"
             + "<body>" + bodyHTML + "<br></br>" + "</body>" + "</html>");
       String signatureContent = XmlStringUtil.escapeXml("<html>"
@@ -99,7 +99,7 @@ public class ReplyMsgWithHtmlSignature extends AjaxCommonTest {
 
       // Send a message to the account
       app.zGetActiveAccount().soapSend(
-            "<SendMsgRequest xmlns='urn:zimbraMail'>" +
+            "<SendMsgRequest xmlns='urn:zmailMail'>" +
             "<m>" +
             "<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
             "<su>"+ subject +"</su>" +
@@ -137,13 +137,13 @@ public class ReplyMsgWithHtmlSignature extends AjaxCommonTest {
       app.zPageMail.zWaitForDesktopLoadingSpinner(5000);
 
       app.zGetActiveAccount().soapSend(
-            "<SearchRequest xmlns='urn:zimbraMail' types='message'>"
+            "<SearchRequest xmlns='urn:zmailMail' types='message'>"
             + "<query>in:inbox subject:(" +mail.dSubject+ ")</query>" + "</SearchRequest>");
 
       String id = app.zGetActiveAccount().soapSelectValue("//mail:SearchResponse/mail:m", "id");
 
       app.zGetActiveAccount().soapSend(
-            "<GetMsgRequest xmlns='urn:zimbraMail'>" + "<m id='" + id
+            "<GetMsgRequest xmlns='urn:zmailMail'>" + "<m id='" + id
             + "' html='1'/>" + "</GetMsgRequest>");
       Element getMsgResponse = app.zGetActiveAccount().soapSelectNode("//mail:GetMsgResponse", 1);
       MailItem received = MailItem.importFromSOAP(getMsgResponse);

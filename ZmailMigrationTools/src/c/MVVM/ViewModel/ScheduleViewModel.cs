@@ -90,7 +90,7 @@ public class ScheduleViewModel: BaseViewModel
 
         if ((m_configFile.Length == 0) || (m_usermapFile.Length == 0))
         {
-            MessageBox.Show("There must be a config file and usermap file", "Zimbra Migration",
+            MessageBox.Show("There must be a config file and usermap file", "Zmail Migration",
                 MessageBoxButton.OK, MessageBoxImage.Error);
             return;
         }
@@ -143,7 +143,7 @@ public class ScheduleViewModel: BaseViewModel
         DateTime nowDT = DateTime.Now;
         if (DateTime.Compare(userDT, nowDT) < 0)
         {
-            MessageBox.Show("You can't schedule a task in the past", "Zimbra Migration",
+            MessageBox.Show("You can't schedule a task in the past", "Zmail Migration",
                 MessageBoxButton.OK, MessageBoxImage.Error);
             return;
         }
@@ -156,7 +156,7 @@ public class ScheduleViewModel: BaseViewModel
         proc.StartInfo.Arguments +=
             ((IntroViewModel)ViewModelPtrs[(int)ViewType.INTRO]).InstallDir;
         proc.StartInfo.Arguments += @"\";
-        proc.StartInfo.Arguments += "ZimbraMigrationConsole.exe";
+        proc.StartInfo.Arguments += "ZmailMigrationConsole.exe";
         proc.StartInfo.Arguments += @"\";
         proc.StartInfo.Arguments += @"""";
         proc.StartInfo.Arguments += " ";
@@ -171,7 +171,7 @@ public class ScheduleViewModel: BaseViewModel
         if (trLen > TR_MAX_SIZE)
         {
             MessageBox.Show("Taskrun argument string exceeds 261 characters.  Please use config files with smaller path sizes.",
-                "Zimbra Migration", MessageBoxButton.OK, MessageBoxImage.Error);
+                "Zmail Migration", MessageBoxButton.OK, MessageBoxImage.Error);
             return;
         }
 
@@ -237,9 +237,9 @@ public class ScheduleViewModel: BaseViewModel
             UsersViewModel usersViewModel =
                 ((UsersViewModel)ViewModelPtrs[(int)ViewType.USERS]);
 
-            if (ZimbraValues.zimbraValues.AuthToken.Length == 0)
+            if (ZmailValues.zmailValues.AuthToken.Length == 0)
             {
-                MessageBox.Show("You must log on to the Zimbra server", "Zimbra Migration",
+                MessageBox.Show("You must log on to the Zmail server", "Zmail Migration",
                     MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
@@ -249,12 +249,12 @@ public class ScheduleViewModel: BaseViewModel
 
             if (!sourceModel.IsMailServerInitialized)
             {
-                MessageBox.Show("You must log on to Exchange", "Zimbra Migration",
+                MessageBox.Show("You must log on to Exchange", "Zmail Migration",
                     MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            string domainName = usersViewModel.ZimbraDomain;
+            string domainName = usersViewModel.ZmailDomain;
             string defaultPWD = DefaultPWD;
             string tempMessage = "";
             bool bProvision = false;
@@ -275,13 +275,13 @@ public class ScheduleViewModel: BaseViewModel
                         if (defaultPWD.Length == 0)
                         {
                             MessageBox.Show("Please provide an initial password",
-                                "Zimbra Migration", MessageBoxButton.OK,
+                                "Zmail Migration", MessageBoxButton.OK,
                                 MessageBoxImage.Exclamation);
                             return;
                         }
 
                         string cosID = CosList[CurrentCOSSelection].CosID;
-                        ZimbraAPI zimbraAPI = new ZimbraAPI(isServer);
+                        ZmailAPI zmailAPI = new ZmailAPI(isServer);
 
                         // FBS bug 71646 -- 3/26/12
                         string displayName = "";
@@ -327,16 +327,16 @@ public class ScheduleViewModel: BaseViewModel
                         }
 
                         bool mustChangePW = usersViewModel.UsersList[i].MustChangePassword;
-                        if (zimbraAPI.CreateAccount(accountName, displayName, givenName, sn, zfp, defaultPWD, mustChangePW, cosID) == 0)
+                        if (zmailAPI.CreateAccount(accountName, displayName, givenName, sn, zfp, defaultPWD, mustChangePW, cosID) == 0)
                         {
                             tempMessage += string.Format("{0} Provisioned", userName) + "\n";
-                            // MessageBox.Show(string.Format("{0} Provisioned", userName), "Zimbra Migration", MessageBoxButton.OK, MessageBoxImage.Information);
+                            // MessageBox.Show(string.Format("{0} Provisioned", userName), "Zmail Migration", MessageBoxButton.OK, MessageBoxImage.Information);
                         }
                         else
                         {
-                            // MessageBox.Show(string.Format("Provision unsuccessful for {0}: {1}", userName, zimbraAPI.LastError), "Zimbra Migration", MessageBoxButton.OK, MessageBoxImage.Error);
+                            // MessageBox.Show(string.Format("Provision unsuccessful for {0}: {1}", userName, zmailAPI.LastError), "Zmail Migration", MessageBoxButton.OK, MessageBoxImage.Error);
                             tempMessage += string.Format("Provision unsuccessful for {0}: {1}",
-                                userName, zimbraAPI.LastError) + "\n";
+                                userName, zmailAPI.LastError) + "\n";
                             mbi = MessageBoxImage.Error;
                         }
                     }
@@ -344,7 +344,7 @@ public class ScheduleViewModel: BaseViewModel
             }
             if (bProvision)
             {
-                MessageBox.Show(tempMessage, "Zimbra Migration", MessageBoxButton.OK, mbi);
+                MessageBox.Show(tempMessage, "Zmail Migration", MessageBoxButton.OK, mbi);
             }
             if (mbi == MessageBoxImage.Error)
             {
@@ -534,7 +534,7 @@ public class ScheduleViewModel: BaseViewModel
             }
             catch (Exception)
             {
-                MessageBox.Show("Please enter a valid date in the indicated format", "Zimbra Migration", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Please enter a valid date in the indicated format", "Zmail Migration", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -779,12 +779,12 @@ public class ScheduleViewModel: BaseViewModel
 
         if (isServer)
         {
-            accountname = accountname + "@" + usersViewModel.ZimbraDomain;
+            accountname = accountname + "@" + usersViewModel.ZmailDomain;
             accountid = usersViewModel.UsersList[num].Username;
 
             int idx = accountid.IndexOf("@");
 
-            if (idx != -1)                      // domain would be Exchange domain, not Zimbra domain
+            if (idx != -1)                      // domain would be Exchange domain, not Zmail domain
                 accountid = accountid.Substring(0, idx);
         }
         else
@@ -794,7 +794,7 @@ public class ScheduleViewModel: BaseViewModel
             ConfigViewModelUDest destModel =
                 ((ConfigViewModelUDest)ViewModelPtrs[(int)ViewType.USRDEST]);
 
-            accountname = ZimbraValues.GetZimbraValues().AccountName;//accountname + "@" + destModel.ZimbraServerHostName;
+            accountname = ZmailValues.GetZmailValues().AccountName;//accountname + "@" + destModel.ZmailServerHostName;
             accountid = (sourceModel.IspST) ? sourceModel.PSTFile :
                 sourceModel.ProfileList[sourceModel.CurrentProfileSelection];
         }

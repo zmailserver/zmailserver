@@ -14,14 +14,14 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.admin.tests.topmenu.links;
+package org.zmail.qa.selenium.projects.admin.tests.topmenu.links;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.projects.admin.core.AdminCommonTest;
-import com.zimbra.qa.selenium.projects.admin.ui.PageMain;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.projects.admin.core.AdminCommonTest;
+import org.zmail.qa.selenium.projects.admin.ui.PageMain;
 
 
 public class LoggedInUsername extends AdminCommonTest {
@@ -39,7 +39,7 @@ public class LoggedInUsername extends AdminCommonTest {
 		// The displayed name is part of the full email address.  
 		// For Example: 
 		// Displayed:    globaladmin1284592683
-		// Actual Email: globaladmin12845926837811@qa62.lab.zimbra.com
+		// Actual Email: globaladmin12845926837811@qa62.lab.zmail.com
 		//
 
 		// Check that the displayed name is contained in the email

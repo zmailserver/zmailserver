@@ -41,7 +41,7 @@ ZmDomainList.DOMAIN_RE = new RegExp("\\.\\w{2,3}$");
 ZmDomainList.prototype.search =
 function(str, limit, callback) {
 
-	var jsonObj = {BrowseRequest:{_jsns:"urn:zimbraMail"}};
+	var jsonObj = {BrowseRequest:{_jsns:"urn:zmailMail"}};
 	var request = jsonObj.BrowseRequest;
 	request.browseBy = "domains";
 	if (str && (/[a-z]/i.test(str))) {

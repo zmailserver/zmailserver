@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.db;
+package org.zmail.cs.db;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,7 +20,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.zimbra.cs.db.DbPool.DbConnection;
+import org.zmail.cs.db.DbPool.DbConnection;
 
 public class DbOfflineMigration {
 
@@ -164,7 +164,7 @@ public class DbOfflineMigration {
         List<Integer> groupIds = new ArrayList<Integer>();
         try {
             //get groupId
-            stmt = conn.prepareStatement("select id from zimbra.mailbox");
+            stmt = conn.prepareStatement("select id from zmail.mailbox");
             rs = stmt.executeQuery();
             while (rs.next()) {
                 int num = Integer.parseInt(rs.getString(1));
@@ -180,7 +180,7 @@ public class DbOfflineMigration {
                 alterMailItemTable(conn, stmt, id);
             }
 
-            stmt = conn.prepareStatement("UPDATE zimbra.config set value='69' where name='db.version'");
+            stmt = conn.prepareStatement("UPDATE zmail.config set value='69' where name='db.version'");
             stmt.executeUpdate();
             stmt.close();
 
@@ -223,7 +223,7 @@ public class DbOfflineMigration {
         stmt.close();
 
         stmt = conn.prepareStatement("UPDATE directory_attrs set value = ?" +
-                " WHERE name='zimbraPrefSkin' AND entry_id = ?");
+                " WHERE name='zmailPrefSkin' AND entry_id = ?");
         stmt.setString(1, skin);
         stmt.setInt(2, entId);
         stmt.executeUpdate();
@@ -296,8 +296,8 @@ public class DbOfflineMigration {
     }
 
     public static void main(String[] args) throws Exception {
-        System.setProperty("zimbra.config",
-            "/Users/jjzhuang/Library/Zimbra Desktop/conf/localconfig.xml");
+        System.setProperty("zmail.config",
+            "/Users/jjzhuang/Library/Zmail Desktop/conf/localconfig.xml");
 
         new DbOfflineMigration().testRun();
         new DbOfflineMigration().testRun();

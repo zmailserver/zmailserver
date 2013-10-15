@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.zcsprov;
+package org.zmail.zcsprov;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -30,8 +30,8 @@ import javax.xml.soap.SOAPPart;
 import javax.xml.soap.SOAPBody;
 import javax.xml.soap.SOAPElement;
 import javax.xml.soap.Name;
-import com.zimbra.common.user_info;
-import com.zimbra.utils.*;
+import org.zmail.common.user_info;
+import org.zmail.utils.*;
 import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.NameValuePair;
 
@@ -64,7 +64,7 @@ public class ZCSAccounts
             SOAPBody body = se.getBody();
             
             //create SOAP Body
-            Name bodyName = se.createName("CreateAccountRequest", "","urn:zimbraAdmin");
+            Name bodyName = se.createName("CreateAccountRequest", "","urn:zmailAdmin");
             SOAPElement bodyElement = body.addBodyElement(bodyName);
             
             //add <name>username@mydomain.com</name>
@@ -84,11 +84,11 @@ public class ZCSAccounts
             }
 
             //account status
-            attrs.put("zimbraAccountStatus", iuinfo.ZimbraAcctStatus);            
-            //<a n="zimbraCOSId">de7df32b-38c1-451a-a990-59904c7cc0b7</a>   
-            if(iuinfo.zimbraCOSId.compareTo("")!=0)
+            attrs.put("zmailAccountStatus", iuinfo.ZmailAcctStatus);            
+            //<a n="zmailCOSId">de7df32b-38c1-451a-a990-59904c7cc0b7</a>   
+            if(iuinfo.zmailCOSId.compareTo("")!=0)
             {
-                attrs.put("zimbraCOSId", iuinfo.zimbraCOSId);
+                attrs.put("zmailCOSId", iuinfo.zmailCOSId);
             }
             //<a n="description">description here</a> 
             attrs.put("description", iuinfo.description);
@@ -96,15 +96,15 @@ public class ZCSAccounts
 /*          admin=FALSE,
             domainAdmin=TRUE.*/
             //is domain admin account?
-            attrs.put("zimbraIsDomainAdminAccount", iuinfo.zimbraDomainAdmin);
+            attrs.put("zmailIsDomainAdminAccount", iuinfo.zmailDomainAdmin);
             //is account admin?
-            attrs.put("zimbraIsAdminAccount", "FALSE");//MUST BE FALSE, ALWAYS!
+            attrs.put("zmailIsAdminAccount", "FALSE");//MUST BE FALSE, ALWAYS!
             //pref mail forwarding address
-            attrs.put("zimbraPrefMailForwardingAddress", iuinfo.zimbraPrefMailForwardingAddress);
+            attrs.put("zmailPrefMailForwardingAddress", iuinfo.zmailPrefMailForwardingAddress);
             //display name
             attrs.put("displayName", iuinfo.displayname);
-            //add<zimbraYahooID>abcde-12345-qwer</zimbraYahooID>
-            attrs.put("zimbraYahooID", iuinfo.zimbraYahooID);
+            //add<zmailYahooID>abcde-12345-qwer</zmailYahooID>
+            attrs.put("zmailYahooID", iuinfo.zmailYahooID);
             zmcusession.AddAttributes(se, bodyElement, attrs);
             //Save the message
             request.saveChanges();
@@ -147,7 +147,7 @@ public class ZCSAccounts
             SOAPBody body = se.getBody();
             
             //create SOAP Body
-            Name bodyName = se.createName("GetAccountRequest", "","urn:zimbraAdmin");
+            Name bodyName = se.createName("GetAccountRequest", "","urn:zmailAdmin");
             Name ne = se.createName("applyCos");
             SOAPElement bodyElement = body.addBodyElement(bodyName);
             bodyElement.addAttribute(ne, "0");
@@ -172,9 +172,9 @@ public class ZCSAccounts
                 }
                 else
                 {
-                    String zimbraId=zmcusession.FindAttributeValue("account","id");
-                    cu_logger.log(Level.INFO,"ZIMBRA-ID: "+zimbraId); 
-                    retval= zimbraId;
+                    String zmailId=zmcusession.FindAttributeValue("account","id");
+                    cu_logger.log(Level.INFO,"ZIMBRA-ID: "+zmailId); 
+                    retval= zmailId;
                 }
             }
             else
@@ -268,8 +268,8 @@ public class ZCSAccounts
             //create SOAP Body
             /*<SearchDirectoryRequest types="accounts" domain="test.iam.com" limit="5"
             sortBy="name" sortAscending="1" applyConfig="false" applyCos="false" offset="0"
-            attrs="name" xmlns="urn:zimbraAdmin">*/
-            Name bodyName = se.createName("SearchDirectoryRequest", "","urn:zimbraAdmin");
+            attrs="name" xmlns="urn:zmailAdmin">*/
+            Name bodyName = se.createName("SearchDirectoryRequest", "","urn:zmailAdmin");
             SOAPElement bodyElement = body.addBodyElement(bodyName);
 
             Name netypes = se.createName("types");
@@ -299,7 +299,7 @@ public class ZCSAccounts
             //add <account by="id">3a4f022a-3f86-4b77-be25-dce1cdad7213</account>
             Name naquery = se.createName("query");
             SOAPElement seacct = bodyElement.addChildElement(naquery);
-            seacct.addTextNode("(objectclass=zimbraAccount)");
+            seacct.addTextNode("(objectclass=zmailAccount)");
 
              //Save the message
             request.saveChanges();
@@ -329,7 +329,7 @@ public class ZCSAccounts
         }
         return iAccountList;
     }
-    public boolean ModifyAccount(String Request,String zimbraid,HashMap<String, String> attrs)
+    public boolean ModifyAccount(String Request,String zmailid,HashMap<String, String> attrs)
     {
         boolean retval =false;
         try
@@ -340,12 +340,12 @@ public class ZCSAccounts
             SOAPBody body = se.getBody();
             
             //create SOAP Body
-            Name bodyName = se.createName(Request, "","urn:zimbraAdmin");
+            Name bodyName = se.createName(Request, "","urn:zmailAdmin");
             SOAPElement bodyElement = body.addBodyElement(bodyName);
             
             //add <id>3a4f022a-3f86-4b77-be25-dce1cdad7213</id>
             SOAPElement seid = bodyElement.addChildElement("id");
-            seid.addTextNode(zimbraid);      
+            seid.addTextNode(zmailid);      
             
             if((attrs.size()==1)&&(Request.compareTo("SetPasswordRequest")==0))
             {
@@ -388,32 +388,32 @@ public class ZCSAccounts
         return retval;
     }
     
-    public boolean ModifyAccountStatus(String zimbraid, String status)
+    public boolean ModifyAccountStatus(String zmailid, String status)
     {
         HashMap<String,String> attrs= new HashMap<String, String>();
-        attrs.put("zimbraAccountStatus", status);
-        return ModifyAccount("ModifyAccountRequest",zimbraid,attrs);
+        attrs.put("zmailAccountStatus", status);
+        return ModifyAccount("ModifyAccountRequest",zmailid,attrs);
     }
     
-    public boolean ModifyAccountMailTransport(String zimbraid, String MailTransport)
+    public boolean ModifyAccountMailTransport(String zmailid, String MailTransport)
     {
         HashMap<String,String> attrs= new HashMap<String, String>();
-        attrs.put("zimbraMailTransport", MailTransport);
-        return ModifyAccount("ModifyAccountRequest",zimbraid,attrs);
+        attrs.put("zmailMailTransport", MailTransport);
+        return ModifyAccount("ModifyAccountRequest",zmailid,attrs);
     }
 
-    public boolean AddAccountAliasRequest(String zimbraid, String alias)
+    public boolean AddAccountAliasRequest(String zmailid, String alias)
     {
         HashMap<String,String> attrs= new HashMap<String, String>();
         attrs.put("alias", alias);
-        return ModifyAccount("AddAccountAliasRequest",zimbraid,attrs);
+        return ModifyAccount("AddAccountAliasRequest",zmailid,attrs);
     }
     
-    public boolean SetPassword(String zimbraid,String pwd) //pwd empty to remove it
+    public boolean SetPassword(String zmailid,String pwd) //pwd empty to remove it
     {
         HashMap<String,String> attrs= new HashMap<String, String>();
         attrs.put("newPassword", pwd);
-        return ModifyAccount("SetPasswordRequest",zimbraid,attrs);
+        return ModifyAccount("SetPasswordRequest",zmailid,attrs);
     }
     
 }

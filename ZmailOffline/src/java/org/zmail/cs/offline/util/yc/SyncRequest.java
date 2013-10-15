@@ -12,12 +12,12 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.util.yc;
+package org.zmail.cs.offline.util.yc;
 
-import com.zimbra.cs.offline.OfflineLog;
-import com.zimbra.cs.offline.util.yc.oauth.OAuthGetContactsRequest;
-import com.zimbra.cs.offline.util.yc.oauth.OAuthRequest;
-import com.zimbra.cs.offline.util.yc.oauth.OAuthToken;
+import org.zmail.cs.offline.OfflineLog;
+import org.zmail.cs.offline.util.yc.oauth.OAuthGetContactsRequest;
+import org.zmail.cs.offline.util.yc.oauth.OAuthRequest;
+import org.zmail.cs.offline.util.yc.oauth.OAuthToken;
 
 public class SyncRequest extends Request {
 

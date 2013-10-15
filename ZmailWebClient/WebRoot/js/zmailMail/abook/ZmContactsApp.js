@@ -106,19 +106,19 @@ function() {
 ZmContactsApp.prototype._registerSettings =
 function(settings) {
 	var settings = settings || appCtxt.getSettings();
-	settings.registerSetting("AUTO_ADD_ADDRESS",				{name: "zimbraPrefAutoAddAddressEnabled", type: ZmSetting.T_PREF, dataType: ZmSetting.D_BOOLEAN, defaultValue: false, isGlobal: true});
-	settings.registerSetting("AUTOCOMPLETE_LIMIT",				{name: "zimbraContactAutoCompleteMaxResults", type:ZmSetting.T_COS, dataType: ZmSetting.D_INT, defaultValue: 20});
-	settings.registerSetting("AUTOCOMPLETE_ON_COMMA",			{name: "zimbraPrefAutoCompleteQuickCompletionOnComma", type: ZmSetting.T_PREF, dataType:ZmSetting.D_BOOLEAN, defaultValue: true});
-	settings.registerSetting("AUTOCOMPLETE_SHARE",				{name: "zimbraPrefShareContactsInAutoComplete", type: ZmSetting.T_PREF, dataType: ZmSetting.D_BOOLEAN, defaultValue: false});
-	settings.registerSetting("AUTOCOMPLETE_SHARED_ADDR_BOOKS",	{name: "zimbraPrefSharedAddrBookAutoCompleteEnabled", type: ZmSetting.T_PREF, dataType: ZmSetting.D_BOOLEAN, defaultValue: false});
+	settings.registerSetting("AUTO_ADD_ADDRESS",				{name: "zmailPrefAutoAddAddressEnabled", type: ZmSetting.T_PREF, dataType: ZmSetting.D_BOOLEAN, defaultValue: false, isGlobal: true});
+	settings.registerSetting("AUTOCOMPLETE_LIMIT",				{name: "zmailContactAutoCompleteMaxResults", type:ZmSetting.T_COS, dataType: ZmSetting.D_INT, defaultValue: 20});
+	settings.registerSetting("AUTOCOMPLETE_ON_COMMA",			{name: "zmailPrefAutoCompleteQuickCompletionOnComma", type: ZmSetting.T_PREF, dataType:ZmSetting.D_BOOLEAN, defaultValue: true});
+	settings.registerSetting("AUTOCOMPLETE_SHARE",				{name: "zmailPrefShareContactsInAutoComplete", type: ZmSetting.T_PREF, dataType: ZmSetting.D_BOOLEAN, defaultValue: false});
+	settings.registerSetting("AUTOCOMPLETE_SHARED_ADDR_BOOKS",	{name: "zmailPrefSharedAddrBookAutoCompleteEnabled", type: ZmSetting.T_PREF, dataType: ZmSetting.D_BOOLEAN, defaultValue: false});
 	settings.registerSetting("EXPORT",							{type: ZmSetting.T_PREF, dataType: ZmSetting.D_NONE});
-	settings.registerSetting("GAL_AUTOCOMPLETE",				{name: "zimbraPrefGalAutoCompleteEnabled", type: ZmSetting.T_PREF, dataType: ZmSetting.D_BOOLEAN, defaultValue: false});
+	settings.registerSetting("GAL_AUTOCOMPLETE",				{name: "zmailPrefGalAutoCompleteEnabled", type: ZmSetting.T_PREF, dataType: ZmSetting.D_BOOLEAN, defaultValue: false});
 	settings.registerSetting("IMPORT",							{type: ZmSetting.T_PREF, dataType: ZmSetting.D_NONE});
-	settings.registerSetting("MAX_CONTACTS",					{name: "zimbraContactMaxNumEntries", type: ZmSetting.T_COS, dataType: ZmSetting.D_INT, defaultValue: 0});
-	settings.registerSetting("NEW_ADDR_BOOK_ENABLED",			{name: "zimbraFeatureNewAddrBookEnabled", type:ZmSetting.T_COS, dataType: ZmSetting.D_BOOLEAN, defaultValue: true});
+	settings.registerSetting("MAX_CONTACTS",					{name: "zmailContactMaxNumEntries", type: ZmSetting.T_COS, dataType: ZmSetting.D_INT, defaultValue: 0});
+	settings.registerSetting("NEW_ADDR_BOOK_ENABLED",			{name: "zmailFeatureNewAddrBookEnabled", type:ZmSetting.T_COS, dataType: ZmSetting.D_BOOLEAN, defaultValue: true});
     // TODO: Make real COS setting? 
 	settings.registerSetting("PHONETIC_CONTACT_FIELDS",         {type: ZmSetting.T_COS, dataType: ZmSetting.D_BOOLEAN, defaultValue: /^ja/.test(AjxEnv.DEFAULT_LOCALE)});
-	settings.registerSetting("DETAILED_CONTACT_SEARCH_ENABLED",	{name: "zimbraFeatureContactsDetailedSearchEnabled", type: ZmSetting.T_COS, dataType: ZmSetting.D_BOOLEAN, defaultValue: false});
+	settings.registerSetting("DETAILED_CONTACT_SEARCH_ENABLED",	{name: "zmailFeatureContactsDetailedSearchEnabled", type: ZmSetting.T_COS, dataType: ZmSetting.D_BOOLEAN, defaultValue: false});
 };
 
 /**
@@ -195,7 +195,7 @@ function() {
 		precondition:
 			function() {
 				return appCtxt.get(ZmSetting.GAL_ENABLED) &&
-					   appCtxt.getActiveAccount().isZimbraAccount;
+					   appCtxt.getActiveAccount().isZmailAccount;
 			}
 	});
 };
@@ -1004,7 +1004,7 @@ function(accounts) {
  * 
  * @param {AjxCallback}	callback			the callback to trigger after contact list loaded
  * @param {AjxCallback}	errorCallback		the callback to trigger in the event of an error
- * @param {ZmZimbraAccount}	account		the account to fetch contacts for
+ * @param {ZmZmailAccount}	account		the account to fetch contacts for
  * @return	{ZmContactList}	the contact list
  */
 ZmContactsApp.prototype.getContactList =

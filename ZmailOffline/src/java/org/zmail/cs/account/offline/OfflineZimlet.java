@@ -12,17 +12,17 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.offline;
+package org.zmail.cs.account.offline;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Zimlet;
-import com.zimbra.cs.account.offline.OfflineProvisioning.EntryType;
-import com.zimbra.cs.db.DbOfflineDirectory;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Zimlet;
+import org.zmail.cs.account.offline.OfflineProvisioning.EntryType;
+import org.zmail.cs.db.DbOfflineDirectory;
 
 class OfflineZimlet extends Zimlet {
     OfflineZimlet(String name, String id, Map<String, Object> attrs, Provisioning prov) {
@@ -34,7 +34,7 @@ class OfflineZimlet extends Zimlet {
         try {
             List<String> ids = DbOfflineDirectory.listAllDirectoryEntries(OfflineProvisioning.EntryType.ZIMLET);
             for (String id : ids) {
-                Map<String, Object> attrs = DbOfflineDirectory.readDirectoryEntry(OfflineProvisioning.EntryType.ZIMLET, Provisioning.A_zimbraId, id);
+                Map<String, Object> attrs = DbOfflineDirectory.readDirectoryEntry(OfflineProvisioning.EntryType.ZIMLET, Provisioning.A_zmailId, id);
                 if (attrs == null)
                     continue;
                 String name = (String) attrs.get(Provisioning.A_cn);

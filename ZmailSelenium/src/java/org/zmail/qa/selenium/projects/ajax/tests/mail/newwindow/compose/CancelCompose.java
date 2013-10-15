@@ -14,14 +14,14 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.newwindow.compose;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.newwindow.compose;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.SeparateWindowFormMailNew;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.SeparateWindowFormMailNew;
 
 
 public class CancelCompose extends PrefGroupMailByMessageTest {
@@ -29,8 +29,8 @@ public class CancelCompose extends PrefGroupMailByMessageTest {
 	public CancelCompose() {
 		logger.info("New "+ CancelCompose.class.getCanonicalName());
 		
-		super.startingAccountPreferences.put("zimbraPrefComposeFormat", "text");
-		super.startingAccountPreferences.put("zimbraPrefComposeInNewWindow", "TRUE");
+		super.startingAccountPreferences.put("zmailPrefComposeFormat", "text");
+		super.startingAccountPreferences.put("zmailPrefComposeInNewWindow", "TRUE");
 		
 	}
 	
@@ -58,7 +58,7 @@ public class CancelCompose extends PrefGroupMailByMessageTest {
 			//ZAssert.assertFalse(window.zIsActive(), "Verify the window is closed");
 			// get title by calling getTitle() method once it's implemented, 
 			// for now just hardcoding window title name
-			boolean status = window.zIsClosed("Zimbra: Compose");
+			boolean status = window.zIsClosed("Zmail: Compose");
 			ZAssert.assertTrue(status, "Verify the window is closed");
 			
 			window = null;

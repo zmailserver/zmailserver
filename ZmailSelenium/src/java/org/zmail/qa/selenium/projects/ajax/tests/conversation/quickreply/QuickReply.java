@@ -14,22 +14,22 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.conversation.quickreply;
+package org.zmail.qa.selenium.projects.ajax.tests.conversation.quickreply;
 
 import java.util.List;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.MailItem;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByConversationTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.DisplayMail.Field;
+import org.zmail.qa.selenium.framework.items.MailItem;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByConversationTest;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.*;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.DisplayMail.Field;
 
 
 public class QuickReply extends PrefGroupMailByConversationTest {
@@ -43,18 +43,18 @@ public class QuickReply extends PrefGroupMailByConversationTest {
 			groups = { "smoke" })
 	public void QuickReply_01() throws HarnessException {
 		
-		ZimbraAccount account1 = new ZimbraAccount();
+		ZmailAccount account1 = new ZmailAccount();
 		account1.provision();
 		account1.authenticate();
 		
 		
 		// Create the message data to be sent
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String content = "content" + ZimbraSeleniumProperties.getUniqueString();
-		String reply = "quickreply" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String content = "content" + ZmailSeleniumProperties.getUniqueString();
+		String reply = "quickreply" + ZmailSeleniumProperties.getUniqueString();
 		
 		account1.soapSend(
-					"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+					"<SendMsgRequest xmlns='urn:zmailMail'>" +
 						"<m>" +
 							"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 							"<su>"+ subject +"</su>" +
@@ -93,23 +93,23 @@ public class QuickReply extends PrefGroupMailByConversationTest {
 			groups = { "functional" })
 	public void QuickReply_02() throws HarnessException {
 		
-		ZimbraAccount account1 = new ZimbraAccount();
+		ZmailAccount account1 = new ZmailAccount();
 		account1.provision();
 		account1.authenticate();
 		
-		ZimbraAccount account2 = new ZimbraAccount();
+		ZmailAccount account2 = new ZmailAccount();
 		account2.provision();
 		account2.authenticate();
 
 
 		
 		// Create the message data to be sent
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String content = "content" + ZimbraSeleniumProperties.getUniqueString();
-		String reply = "quickreply" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String content = "content" + ZmailSeleniumProperties.getUniqueString();
+		String reply = "quickreply" + ZmailSeleniumProperties.getUniqueString();
 		
 		account1.soapSend(
-					"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+					"<SendMsgRequest xmlns='urn:zmailMail'>" +
 						"<m>" +
 							"<e t='t' a='"+ account2.EmailAddress +"'/>" +
 							"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
@@ -157,30 +157,30 @@ public class QuickReply extends PrefGroupMailByConversationTest {
 			groups = { "functional" })
 	public void QuickReply_03() throws HarnessException {
 		
-		ZimbraAccount account1 = new ZimbraAccount();
+		ZmailAccount account1 = new ZmailAccount();
 		account1.provision();
 		account1.authenticate();
 		
-		ZimbraAccount account2 = new ZimbraAccount();
+		ZmailAccount account2 = new ZmailAccount();
 		account2.provision();
 		account2.authenticate();
 
-		ZimbraAccount account3 = new ZimbraAccount();
+		ZmailAccount account3 = new ZmailAccount();
 		account3.provision();
 		account3.authenticate();
 
-		ZimbraAccount account4 = new ZimbraAccount();
+		ZmailAccount account4 = new ZmailAccount();
 		account4.provision();
 		account4.authenticate();
 
 		
 		// Create the message data to be sent
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String content = "content" + ZimbraSeleniumProperties.getUniqueString();
-		String reply = "quickreply" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String content = "content" + ZmailSeleniumProperties.getUniqueString();
+		String reply = "quickreply" + ZmailSeleniumProperties.getUniqueString();
 		
 		account1.soapSend(
-					"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+					"<SendMsgRequest xmlns='urn:zmailMail'>" +
 						"<m>" +
 							"<e t='t' a='"+ account2.EmailAddress +"'/>" +
 							"<e t='c' a='"+ account3.EmailAddress +"'/>" +
@@ -235,28 +235,28 @@ public class QuickReply extends PrefGroupMailByConversationTest {
 			groups = { "functional" })
 	public void QuickReply_10() throws HarnessException {
 		
-		ZimbraAccount account1 = new ZimbraAccount();
+		ZmailAccount account1 = new ZmailAccount();
 		account1.provision();
 		account1.authenticate();
 		
-		ZimbraAccount account2 = new ZimbraAccount();
+		ZmailAccount account2 = new ZmailAccount();
 		account2.provision();
 		account2.authenticate();
 		
-		ZimbraAccount account3 = new ZimbraAccount();
+		ZmailAccount account3 = new ZmailAccount();
 		account3.provision();
 		account3.authenticate();
 		
 
 		// Create the message data to be sent
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String content1 = "onecontent" + ZimbraSeleniumProperties.getUniqueString();
-		String content2 = "twocontent" + ZimbraSeleniumProperties.getUniqueString();
-		String content3 = "threecontent" + ZimbraSeleniumProperties.getUniqueString();
-		String reply = "quickreply" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String content1 = "onecontent" + ZmailSeleniumProperties.getUniqueString();
+		String content2 = "twocontent" + ZmailSeleniumProperties.getUniqueString();
+		String content3 = "threecontent" + ZmailSeleniumProperties.getUniqueString();
+		String reply = "quickreply" + ZmailSeleniumProperties.getUniqueString();
 		
 		account1.soapSend(
-				"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+				"<SendMsgRequest xmlns='urn:zmailMail'>" +
 					"<m>" +
 						"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 						"<su>RE: "+ subject +"</su>" +
@@ -267,7 +267,7 @@ public class QuickReply extends PrefGroupMailByConversationTest {
 				"</SendMsgRequest>");
 
 		account2.soapSend(
-				"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+				"<SendMsgRequest xmlns='urn:zmailMail'>" +
 					"<m>" +
 						"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 						"<su>RE: "+ subject +"</su>" +
@@ -278,7 +278,7 @@ public class QuickReply extends PrefGroupMailByConversationTest {
 				"</SendMsgRequest>");
 
 		account3.soapSend(
-				"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+				"<SendMsgRequest xmlns='urn:zmailMail'>" +
 					"<m>" +
 						"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 						"<su>RE: "+ subject +"</su>" +
@@ -322,28 +322,28 @@ public class QuickReply extends PrefGroupMailByConversationTest {
 			groups = { "functional" })
 	public void QuickReply_11() throws HarnessException {
 		
-		ZimbraAccount account1 = new ZimbraAccount();
+		ZmailAccount account1 = new ZmailAccount();
 		account1.provision();
 		account1.authenticate();
 		
-		ZimbraAccount account2 = new ZimbraAccount();
+		ZmailAccount account2 = new ZmailAccount();
 		account2.provision();
 		account2.authenticate();
 		
-		ZimbraAccount account3 = new ZimbraAccount();
+		ZmailAccount account3 = new ZmailAccount();
 		account3.provision();
 		account3.authenticate();
 		
 
 		// Create the message data to be sent
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String content1 = "onecontent" + ZimbraSeleniumProperties.getUniqueString();
-		String content2 = "twocontent" + ZimbraSeleniumProperties.getUniqueString();
-		String content3 = "threecontent" + ZimbraSeleniumProperties.getUniqueString();
-		String reply = "quickreply" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String content1 = "onecontent" + ZmailSeleniumProperties.getUniqueString();
+		String content2 = "twocontent" + ZmailSeleniumProperties.getUniqueString();
+		String content3 = "threecontent" + ZmailSeleniumProperties.getUniqueString();
+		String reply = "quickreply" + ZmailSeleniumProperties.getUniqueString();
 		
 		account1.soapSend(
-				"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+				"<SendMsgRequest xmlns='urn:zmailMail'>" +
 					"<m>" +
 						"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 						"<su>RE: "+ subject +"</su>" +
@@ -354,7 +354,7 @@ public class QuickReply extends PrefGroupMailByConversationTest {
 				"</SendMsgRequest>");
 
 		account2.soapSend(
-				"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+				"<SendMsgRequest xmlns='urn:zmailMail'>" +
 					"<m>" +
 						"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 						"<su>RE: "+ subject +"</su>" +
@@ -365,7 +365,7 @@ public class QuickReply extends PrefGroupMailByConversationTest {
 				"</SendMsgRequest>");
 
 		account3.soapSend(
-				"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+				"<SendMsgRequest xmlns='urn:zmailMail'>" +
 					"<m>" +
 						"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 						"<su>RE: "+ subject +"</su>" +
@@ -409,28 +409,28 @@ public class QuickReply extends PrefGroupMailByConversationTest {
 			groups = { "functional" })
 	public void QuickReply_12() throws HarnessException {
 		
-		ZimbraAccount account1 = new ZimbraAccount();
+		ZmailAccount account1 = new ZmailAccount();
 		account1.provision();
 		account1.authenticate();
 		
-		ZimbraAccount account2 = new ZimbraAccount();
+		ZmailAccount account2 = new ZmailAccount();
 		account2.provision();
 		account2.authenticate();
 		
-		ZimbraAccount account3 = new ZimbraAccount();
+		ZmailAccount account3 = new ZmailAccount();
 		account3.provision();
 		account3.authenticate();
 		
 
 		// Create the message data to be sent
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String content1 = "onecontent" + ZimbraSeleniumProperties.getUniqueString();
-		String content2 = "twocontent" + ZimbraSeleniumProperties.getUniqueString();
-		String content3 = "threecontent" + ZimbraSeleniumProperties.getUniqueString();
-		String reply = "quickreply" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String content1 = "onecontent" + ZmailSeleniumProperties.getUniqueString();
+		String content2 = "twocontent" + ZmailSeleniumProperties.getUniqueString();
+		String content3 = "threecontent" + ZmailSeleniumProperties.getUniqueString();
+		String reply = "quickreply" + ZmailSeleniumProperties.getUniqueString();
 		
 		account1.soapSend(
-				"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+				"<SendMsgRequest xmlns='urn:zmailMail'>" +
 					"<m>" +
 						"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 						"<su>RE: "+ subject +"</su>" +
@@ -441,7 +441,7 @@ public class QuickReply extends PrefGroupMailByConversationTest {
 				"</SendMsgRequest>");
 
 		account2.soapSend(
-				"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+				"<SendMsgRequest xmlns='urn:zmailMail'>" +
 					"<m>" +
 						"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 						"<su>RE: "+ subject +"</su>" +
@@ -452,7 +452,7 @@ public class QuickReply extends PrefGroupMailByConversationTest {
 				"</SendMsgRequest>");
 
 		account3.soapSend(
-				"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+				"<SendMsgRequest xmlns='urn:zmailMail'>" +
 					"<m>" +
 						"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 						"<su>RE: "+ subject +"</su>" +

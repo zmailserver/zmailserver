@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-function Com_Zimbra_SForceObject(zimlet) {
+function Com_Zmail_SForceObject(zimlet) {
 	this.zimlet = zimlet;
 	this.props = {};
 	this.objName_intNameExtNameMap = [];	
@@ -23,7 +23,7 @@ function Com_Zimbra_SForceObject(zimlet) {
 	this.loaded =  false;
 }
 
-Com_Zimbra_SForceObject.prototype.getFieldMap =
+Com_Zmail_SForceObject.prototype.getFieldMap =
 function(queryName, objName) {
 	if(this.objName_intNameExtNameMap[objName]) {
 		return this.objName_intNameExtNameMap[objName];
@@ -32,7 +32,7 @@ function(queryName, objName) {
 	return this.objName_intNameExtNameMap[objName];
 };
 
-Com_Zimbra_SForceObject.prototype.getObjDesc =
+Com_Zmail_SForceObject.prototype.getObjDesc =
 function(queryName, objName) {
 	if(this.sForceObjectDescMap[objName]) {
 		return this.sForceObjectDescMap[objName];
@@ -44,7 +44,7 @@ function(queryName, objName) {
 
 
 
-Com_Zimbra_SForceObject.prototype.load =
+Com_Zmail_SForceObject.prototype.load =
 function(queryName, objName, callback) {
 	this.loaded = false;
 	var soap = this.zimlet._makeEnvelope(queryName);
@@ -78,7 +78,7 @@ function(queryName, objName, callback) {
 };
 
 
-Com_Zimbra_SForceObject.prototype.getLayoutMap =
+Com_Zmail_SForceObject.prototype.getLayoutMap =
 function(objName, recordTypeId) {
 	this.loaded = false;
 	var soap = this.zimlet._makeEnvelope("describeLayout");
@@ -96,7 +96,7 @@ function(objName, recordTypeId) {
 	}
 };
 
-Com_Zimbra_SForceObject.prototype._createNamesHash =
+Com_Zmail_SForceObject.prototype._createNamesHash =
 function(objName, objDesc) {
 	var fields = objDesc.fields;
 	var map = [];
@@ -130,7 +130,7 @@ function(objName, objDesc) {
 };
 
 
-Com_Zimbra_SForceObject.prototype._constructListItemAsJSON =
+Com_Zmail_SForceObject.prototype._constructListItemAsJSON =
 function(item) {
 	var html = new Array();
 	var i = 0;

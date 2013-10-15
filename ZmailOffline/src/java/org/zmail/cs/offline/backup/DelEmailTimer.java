@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.backup;
+package org.zmail.cs.offline.backup;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -20,22 +20,22 @@ import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.DateUtil;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.offline.OfflineAccount;
-import com.zimbra.cs.account.offline.OfflineProvisioning;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.InitialSync;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.SyncMailbox;
-import com.zimbra.cs.offline.OfflineLog;
-import com.zimbra.cs.offline.common.OfflineConstants;
-import com.zimbra.cs.offline.common.OfflineConstants.SyncMsgOptions;
-import com.zimbra.cs.util.ZimbraApplication;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.DateUtil;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.offline.OfflineAccount;
+import org.zmail.cs.account.offline.OfflineProvisioning;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.InitialSync;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.SyncMailbox;
+import org.zmail.cs.offline.OfflineLog;
+import org.zmail.cs.offline.common.OfflineConstants;
+import org.zmail.cs.offline.common.OfflineConstants.SyncMsgOptions;
+import org.zmail.cs.util.ZmailApplication;
 
 public class DelEmailTimer extends TimerTask {
 
@@ -63,7 +63,7 @@ public class DelEmailTimer extends TimerTask {
     }
 
     public void run() {
-        if (ZimbraApplication.getInstance().isShutdown()) {
+        if (ZmailApplication.getInstance().isShutdown()) {
             shutdown();
             return;
         }

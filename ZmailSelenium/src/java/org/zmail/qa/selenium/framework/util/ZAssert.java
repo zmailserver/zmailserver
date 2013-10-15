@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.util;
+package org.zmail.qa.selenium.framework.util;
 
 import java.util.Collection;
 import java.util.regex.*;
@@ -22,8 +22,8 @@ import java.util.regex.*;
 import org.apache.log4j.*;
 import org.testng.Assert;
 
-import com.zimbra.qa.selenium.framework.core.ExecuteHarnessMain;
-import com.zimbra.qa.selenium.framework.core.Repository;
+import org.zmail.qa.selenium.framework.core.ExecuteHarnessMain;
+import org.zmail.qa.selenium.framework.core.Repository;
 
 
 public class ZAssert {

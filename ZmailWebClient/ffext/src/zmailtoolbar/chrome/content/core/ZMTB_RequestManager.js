@@ -27,9 +27,9 @@ var ZMTB_RequestManager = function(zmtb)
 	this._serverVersion = "";
 }
 
-ZMTB_RequestManager.NS_ACCOUNT = "urn:zimbraAccount";
-ZMTB_RequestManager.NS_MAIL = "urn:zimbraMail";
-ZMTB_RequestManager.NS_ZIMBRA = "urn:zimbra";
+ZMTB_RequestManager.NS_ACCOUNT = "urn:zmailAccount";
+ZMTB_RequestManager.NS_MAIL = "urn:zmailMail";
+ZMTB_RequestManager.NS_ZIMBRA = "urn:zmail";
 
 ZMTB_RequestManager.prototype.getNewRqId = function()
 {
@@ -162,7 +162,7 @@ ZMTB_RequestManager.prototype.goToPath = function(path, callback, callObj)
 			var win = enumerator.getNext();
 			tabBrowser = win.getBrowser()
 			for (var i=0; i < tabBrowser.browsers.length; i++) {
-				if(tabBrowser.browsers[i].contentWindow.wrappedJSObject.ZmZimbraMail)
+				if(tabBrowser.browsers[i].contentWindow.wrappedJSObject.ZmZmailMail)
 				{
 					tabBrowser.selectedTab = tabBrowser.mTabs[i]
 					tabBrowser.browsers[i].loadURI(url);
@@ -178,7 +178,7 @@ ZMTB_RequestManager.prototype.goToPath = function(path, callback, callObj)
 	else if(this.getTabPreference() == "New Tab")
 	{
 		for (var i=0; i < gBrowser.browsers.length; i++) {
-			if(gBrowser.browsers[i].contentWindow.wrappedJSObject.ZmZimbraMail)
+			if(gBrowser.browsers[i].contentWindow.wrappedJSObject.ZmZmailMail)
 			{
 				gBrowser.selectedTab = gBrowser.mTabs[i]
 				gBrowser.browsers[i].loadURI(url);

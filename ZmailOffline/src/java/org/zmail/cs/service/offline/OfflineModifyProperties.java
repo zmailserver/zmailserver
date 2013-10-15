@@ -12,32 +12,32 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.offline;
+package org.zmail.cs.service.offline;
 
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.offline.OfflineProvisioning;
-import com.zimbra.cs.service.account.ModifyProperties;
-import com.zimbra.cs.zimlet.ZimletUserProperties;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.offline.OfflineProvisioning;
+import org.zmail.cs.service.account.ModifyProperties;
+import org.zmail.cs.zimlet.ZimletUserProperties;
+import org.zmail.soap.ZmailSoapContext;
 
 public class OfflineModifyProperties extends ModifyProperties {
 
     private static final Set<String> PROP_UNDER_LOCAL_ACCT_ZIMLETS = new HashSet<String>(3);//change number if more zimlets are added
     static {
-        PROP_UNDER_LOCAL_ACCT_ZIMLETS.add("com_zimbra_apptsummary");
-        PROP_UNDER_LOCAL_ACCT_ZIMLETS.add("com_zimbra_social");
+        PROP_UNDER_LOCAL_ACCT_ZIMLETS.add("org_zmail_apptsummary");
+        PROP_UNDER_LOCAL_ACCT_ZIMLETS.add("org_zmail_social");
         PROP_UNDER_LOCAL_ACCT_ZIMLETS.add("com_zdesktop_survey");
     }
 
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Account account = getRequestedAccount(zsc);
 
         if (!canModifyOptions(zsc, account))

@@ -14,18 +14,18 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.addressbook.bugs;
+package org.zmail.qa.selenium.projects.ajax.tests.addressbook.bugs;
 
 
 import java.util.HashMap;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.addressbook.DialogNewContactGroup;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.addressbook.DialogNewContactGroup;
 
 public class Bug44132_ManipulateContactGroupFromContactContextMenu extends AjaxCommonTest  {
 
@@ -40,7 +40,7 @@ public class Bug44132_ManipulateContactGroupFromContactContextMenu extends AjaxC
 			private static final long serialVersionUID = 8504391696323008278L;
 		{
 			   
-		    	put("zimbraPrefShowSelectionCheckbox", "TRUE");		         
+		    	put("zmailPrefShowSelectionCheckbox", "TRUE");		         
 		   }};			
 		
 	}
@@ -55,7 +55,7 @@ public class Bug44132_ManipulateContactGroupFromContactContextMenu extends AjaxC
 		ContactItem contact = ContactItem.createContactItem(app.zGetActiveAccount());
 		
 		// The contact group name
-		String groupname = "group" + ZimbraSeleniumProperties.getUniqueString();
+		String groupname = "group" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		//-- GUI
@@ -213,7 +213,7 @@ public class Bug44132_ManipulateContactGroupFromContactContextMenu extends AjaxC
 		ContactItem contact3 = ContactItem.createContactItem(app.zGetActiveAccount());
 		
 		// Create a contact group
-		String groupname = "group"+ ZimbraSeleniumProperties.getUniqueString();
+		String groupname = "group"+ ZmailSeleniumProperties.getUniqueString();
 		
 		
 
@@ -280,7 +280,7 @@ public class Bug44132_ManipulateContactGroupFromContactContextMenu extends AjaxC
 		// Create a contact group
 		ContactGroupItem group = ContactGroupItem.createContactGroupItem(app.zGetActiveAccount());
 		
-		String groupname = "group" + ZimbraSeleniumProperties.getUniqueString();
+		String groupname = "group" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		//-- GUI

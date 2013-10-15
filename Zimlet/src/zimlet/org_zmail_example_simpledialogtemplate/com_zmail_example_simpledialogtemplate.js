@@ -13,15 +13,15 @@
  * ***** END LICENSE BLOCK *****
  */
 
-com_zimbra_example_simpledialogtemplate_HandlerObject = function() {
+org_zmail_example_simpledialogtemplate_HandlerObject = function() {
 };
-com_zimbra_example_simpledialogtemplate_HandlerObject.prototype = new ZmZimletBase;
-com_zimbra_example_simpledialogtemplate_HandlerObject.prototype.constructor = com_zimbra_example_simpledialogtemplate_HandlerObject;
+org_zmail_example_simpledialogtemplate_HandlerObject.prototype = new ZmZimletBase;
+org_zmail_example_simpledialogtemplate_HandlerObject.prototype.constructor = org_zmail_example_simpledialogtemplate_HandlerObject;
 
 /**
  * Double clicked.
  */
-com_zimbra_example_simpledialogtemplate_HandlerObject.prototype.doubleClicked =
+org_zmail_example_simpledialogtemplate_HandlerObject.prototype.doubleClicked =
 function() {
 	this.singleClicked();
 };
@@ -29,7 +29,7 @@ function() {
 /**
  * Single clicked.
  */
-com_zimbra_example_simpledialogtemplate_HandlerObject.prototype.singleClicked =
+org_zmail_example_simpledialogtemplate_HandlerObject.prototype.singleClicked =
 function() {
 	this._displayDialog();
 };
@@ -38,7 +38,7 @@ function() {
  * Displays the dialog.
  * 
  */
-com_zimbra_example_simpledialogtemplate_HandlerObject.prototype._displayDialog = 
+org_zmail_example_simpledialogtemplate_HandlerObject.prototype._displayDialog = 
 function() {
 	if (this.pbDialog) { //if zimlet dialog already exists...
 		this.pbDialog.popup(); //simply popup the dialog
@@ -67,9 +67,9 @@ function() {
  * Creates the dialog view.
  * 
  */
-com_zimbra_example_simpledialogtemplate_HandlerObject.prototype._createDialogView =
+org_zmail_example_simpledialogtemplate_HandlerObject.prototype._createDialogView =
 function() {
-	var html = AjxTemplate.expand("com_zimbra_example_simpledialogtemplate.templates.Simple#Main");		
+	var html = AjxTemplate.expand("org_zmail_example_simpledialogtemplate.templates.Simple#Main");		
 	return html;
 	};
 
@@ -77,7 +77,7 @@ function() {
  * The "DISMISS" button listener.
  * 
  */
-	com_zimbra_example_simpledialogtemplate_HandlerObject.prototype._dismissBtnListener =
+	org_zmail_example_simpledialogtemplate_HandlerObject.prototype._dismissBtnListener =
 function() {
 		
 	this.pbDialog.popdown(); //hide the dialog

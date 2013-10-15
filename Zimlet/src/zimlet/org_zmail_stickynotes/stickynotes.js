@@ -16,27 +16,27 @@
 //////////////////////////////////////////////////////////////////////////////
 // Add Stickynotes to *individual* emails. Also automatically attaches a tag "Emails with StickyNotes" so user
 // can search for such mails.
-// @author Zimlet author: Raja Rao DV(rrao@zimbra.com)
+// @author Zimlet author: Raja Rao DV(rrao@zmail.com)
 //////////////////////////////////////////////////////////////////////////////
 
-function com_zimbra_stickyNotes_HandlerObject() {
+function org_zmail_stickyNotes_HandlerObject() {
 }
 
-com_zimbra_stickyNotes_HandlerObject.prototype = new ZmZimletBase();
-com_zimbra_stickyNotes_HandlerObject.prototype.constructor = com_zimbra_stickyNotes_HandlerObject;
+org_zmail_stickyNotes_HandlerObject.prototype = new ZmZimletBase();
+org_zmail_stickyNotes_HandlerObject.prototype.constructor = org_zmail_stickyNotes_HandlerObject;
 
 
 /**
  * Simplify handler object
  *
  */
-var StickyNotesZimlet = com_zimbra_stickyNotes_HandlerObject;
+var StickyNotesZimlet = org_zmail_stickyNotes_HandlerObject;
 
 
 StickyNotesZimlet.stickyNotes = "STICKYNOTES";
 
 /**
- * Called by Zimbra upon login
+ * Called by Zmail upon login
  */
 StickyNotesZimlet.prototype.init =
 function() {
@@ -95,7 +95,7 @@ function() {
  */
 StickyNotesZimlet.prototype._createTag =
 function(params) {
-	var soapDoc = AjxSoapDoc.create("CreateTagRequest", "urn:zimbraMail");
+	var soapDoc = AjxSoapDoc.create("CreateTagRequest", "urn:zmailMail");
 	var tagNode = soapDoc.set("tag");
 	tagNode.setAttribute("name", params.name);
 	var color = ZmOrganizer.checkColor(params.color);
@@ -229,7 +229,7 @@ function (trueOrFalse) {
 
 	var soapCmd = ZmItem.SOAP_CMD[this.srcMsgObj.type] + "Request";
 	var itemActionRequest = {};
-	itemActionRequest[soapCmd] = {_jsns:"urn:zimbraMail"};
+	itemActionRequest[soapCmd] = {_jsns:"urn:zmailMail"};
 	var request = itemActionRequest[soapCmd];
 	var action = request.action = {};
 	action.id = this.srcMsgObj.id;
@@ -425,7 +425,7 @@ function(obj) {
 };
 
 /**
- * Called by Zimbra when an email is opened
+ * Called by Zmail when an email is opened
  * @param ZmMailMsg mail
  */
 StickyNotesZimlet.prototype.onMsgView =
@@ -603,5 +603,5 @@ StickyNotesZimlet.prototype._refreshBrowser =
 function() {
 	window.onbeforeunload = null;
 	var url = AjxUtil.formatUrl({});
-	ZmZimbraMail.sendRedirect(url);
+	ZmZmailMail.sendRedirect(url);
 };

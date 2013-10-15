@@ -146,7 +146,7 @@ Zmeditor_template.getFontSize = function(value){
 
         _nodeChanged : function(ed, cm, n, co, ob) {
             var t = this, p, de = 0, v, c, s = t.settings, cl, fz, fn, fc, bc, formatNames, matches,
-            DOM = tinymce.DOM, each = tinymce.each, doc = ed.getDoc(), body = doc.body; //Zimbra code
+            DOM = tinymce.DOM, each = tinymce.each, doc = ed.getDoc(), body = doc.body; //Zmail code
 
             tinymce.each(t.stateControls, function(c) {
                 cm.setActive(c, ed.queryCommandState(t.controls[c][1]));
@@ -528,7 +528,7 @@ Zmeditor_template.getFontSize = function(value){
         }
     });
     // Register plugin
-    tinymce.PluginManager.add('zimbraplugin', tinymce.plugins.onEditorEvent);
+    tinymce.PluginManager.add('zmailplugin', tinymce.plugins.onEditorEvent);
 
     /*
      *    Modifying tinymce's default showMenu and HideMenu methods of dropmenu and colorsplitbutton as defaultShowMenu and defaultHideMenu

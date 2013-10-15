@@ -14,15 +14,15 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.mail;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.mail;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
 
 
 public class DragAndDropMessage extends PrefGroupMailByMessageTest {
@@ -41,15 +41,15 @@ public class DragAndDropMessage extends PrefGroupMailByMessageTest {
 			groups = { "smoke" })
 	public void DragAndDropMessage_01() throws HarnessException {
 
-		String subject = "subject"+ ZimbraSeleniumProperties.getUniqueString();
-		String foldername = "folder"+ ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject"+ ZmailSeleniumProperties.getUniqueString();
+		String foldername = "folder"+ ZmailSeleniumProperties.getUniqueString();
 
 		// Create a subfolder to move the message into
 		// i.e. Inbox/subfolder
 		//
 		FolderItem inbox = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Inbox);
 		app.zGetActiveAccount().soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+					"<CreateFolderRequest xmlns='urn:zmailMail'>" +
 						"<folder name='" + foldername +"' l='"+ inbox.getId() +"'/>" +
 					"</CreateFolderRequest>");
 		
@@ -60,13 +60,13 @@ public class DragAndDropMessage extends PrefGroupMailByMessageTest {
 		FolderItem subfolder = FolderItem.importFromSOAP(app.zGetActiveAccount(), foldername);
 
 		// Send a message to the account
-		ZimbraAccount.AccountA().soapSend(
-					"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+		ZmailAccount.AccountA().soapSend(
+					"<SendMsgRequest xmlns='urn:zmailMail'>" +
 						"<m>" +
 							"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 							"<su>"+ subject +"</su>" +
 							"<mp ct='text/plain'>" +
-								"<content>content"+ ZimbraSeleniumProperties.getUniqueString() +"</content>" +
+								"<content>content"+ ZmailSeleniumProperties.getUniqueString() +"</content>" +
 							"</mp>" +
 						"</m>" +
 					"</SendMsgRequest>");
@@ -93,7 +93,7 @@ public class DragAndDropMessage extends PrefGroupMailByMessageTest {
 
 		// Get the message, make sure it is in the correct folder
 		app.zGetActiveAccount().soapSend(
-				"<GetMsgRequest xmlns='urn:zimbraMail'>" +
+				"<GetMsgRequest xmlns='urn:zmailMail'>" +
 					"<m id='" + mail.getId() +"'/>" +
 				"</GetMsgRequest>");
 		String folderId = app.zGetActiveAccount().soapSelectValue("//mail:m", "l");

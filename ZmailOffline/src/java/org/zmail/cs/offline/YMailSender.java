@@ -12,15 +12,15 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline;
+package org.zmail.cs.offline;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.offline.OfflineDataSource;
-import com.zimbra.cs.mailbox.MailSender;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.offline.util.OfflineYAuth;
-import com.zimbra.cs.offline.util.ymail.YMailClient;
-import com.zimbra.cs.offline.util.ymail.YMailException;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.offline.OfflineDataSource;
+import org.zmail.cs.mailbox.MailSender;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.offline.util.OfflineYAuth;
+import org.zmail.cs.offline.util.ymail.YMailClient;
+import org.zmail.cs.offline.util.ymail.YMailException;
 
 import javax.mail.Address;
 import javax.mail.MessagingException;

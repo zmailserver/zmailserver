@@ -14,19 +14,19 @@
 --%>
 <%@ tag body-content="empty" dynamic-attributes="dynattrs" %>
 <%@ attribute name="urlTarget" rtexprvalue="true" required="true" %>
-<%@ attribute name="mailbox" rtexprvalue="true" required="true" type="com.zimbra.cs.taglib.bean.ZMailboxBean"%>
-<%@ attribute name="context" rtexprvalue="true" required="true" type="com.zimbra.cs.taglib.tag.SearchContext" %>
+<%@ attribute name="mailbox" rtexprvalue="true" required="true" type="org.zmail.cs.taglib.bean.ZMailboxBean"%>
+<%@ attribute name="context" rtexprvalue="true" required="true" type="org.zmail.cs.taglib.tag.SearchContext" %>
 <%@ attribute name="isConv" rtexprvalue="true" required="false" %>
 <%@ attribute name="cid" rtexprvalue="true" required="false" %>
 <%@ attribute name="isTop" rtexprvalue="true" required="false" %>
 <%@ attribute name="singleMessage" rtexprvalue="true" required="false" %>
-<%@ attribute name="message" rtexprvalue="true" required="false" type="com.zimbra.cs.taglib.bean.ZMessageBean" %>
+<%@ attribute name="message" rtexprvalue="true" required="false" type="org.zmail.cs.taglib.bean.ZMessageBean" %>
 <%@ attribute name="keys" rtexprvalue="true" required="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
-<%@ taglib prefix="app" uri="com.zimbra.htmlclient" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
+<%@ taglib prefix="app" uri="org.zmail.htmlclient" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
 <c:if test="${isConv != null && isConv}">
     <zm:searchConv var="convSearchResult" id="${not empty param.cid ? param.cid : context.currentItem.id}" limit="100"
                    context="${context}" fetch="none" markread="false" sort="${param.css}"/>

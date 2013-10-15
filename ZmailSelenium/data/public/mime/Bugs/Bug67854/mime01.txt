@@ -5,4 +5,4 @@ Subject: subject13218526621403
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 MIME-Version: 1.0
-X-Mailer: Zimbra 7.1.4_GA_2527 (ZimbraWebClient - FF3.0 (Win)/7.1.4_GA_2527)
+X-Mailer: Zmail 7.1.4_GA_2527 (ZmailWebClient - FF3.0 (Win)/7.1.4_GA_2527)

@@ -13,13 +13,13 @@
  * ***** END LICENSE BLOCK *****
  */
 
-//Author: Raja Rao DV (rrao@zimbra.com)
+//Author: Raja Rao DV (rrao@zmail.com)
 
-function com_zimbra_socialDigg(zimlet) {
+function org_zmail_socialDigg(zimlet) {
 	this.zimlet = zimlet;
 }
 
-com_zimbra_socialDigg.prototype.getDiggCategories =
+org_zmail_socialDigg.prototype.getDiggCategories =
 function() {
 	this.allDiggCats = new Array();
 	this.allDiggCats.push({query:"Popular in 24hours", name:this.zimlet.getMessage("popularIn24Hours")});
@@ -38,7 +38,7 @@ function() {
 	this.zimlet._updateAllWidgetItems({updateDiggTree:true});
 };
 
-com_zimbra_socialDigg.prototype._getQueryFromHeaderName =
+org_zmail_socialDigg.prototype._getQueryFromHeaderName =
 function(headerName) {
 	for(var i =0; i < this.allDiggCats.length; i++) {
 		var cat = this.allDiggCats[i];
@@ -49,14 +49,14 @@ function(headerName) {
 	return "Popular in 24hours";
 };
 
-com_zimbra_socialDigg.prototype.diggSearch =
+org_zmail_socialDigg.prototype.diggSearch =
 function(params) {
 	var headerName = params.headerName;
 	var query = this._getQueryFromHeaderName(headerName);
 	var url = "";
 	var tmp = new Date();
 	var time = ((new Date(tmp.getFullYear(), tmp.getMonth(), tmp.getDate())).getTime() - 3600 * 24 * 1000) / 1000;
-	var args = "min_promote_date=" + time + "&sort=digg_count-desc&appkey=http%3A%2F%2Fwww.zimbra.com&count=20&type=json";
+	var args = "min_promote_date=" + time + "&sort=digg_count-desc&appkey=http%3A%2F%2Fwww.zmail.com&count=20&type=json";
 	if (query == "Popular in 24hours")
 		url = "http://services.digg.com/stories/popular?" + args;
 	else
@@ -66,7 +66,7 @@ function(params) {
 	AjxRpc.invoke(null, entireurl, null, new AjxCallback(this, this._DiggSearchCallback, params), true);
 };
 
-com_zimbra_socialDigg.prototype._DiggSearchCallback =
+org_zmail_socialDigg.prototype._DiggSearchCallback =
 function(params, response) {
 	var jsonObj = this.zimlet._extractJSONResponse(params.tableId, this.zimlet.getMessage("diggError"), response);
 	if(jsonObj.stories) {

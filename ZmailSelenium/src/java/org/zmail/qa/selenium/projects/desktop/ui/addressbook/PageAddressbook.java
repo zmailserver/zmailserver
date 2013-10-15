@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package  com.zimbra.qa.selenium.projects.desktop.ui.addressbook;
+package  org.zmail.qa.selenium.projects.desktop.ui.addressbook;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -23,18 +23,18 @@ import java.util.List;
 import org.apache.log4j.LogManager;
 
 
-import com.zimbra.qa.selenium.framework.core.ClientSessionFactory;
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount.SOAP_DESTINATION_HOST_TYPE;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties.AppType;
-import com.zimbra.qa.selenium.projects.desktop.ui.DialogWarning;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.*;
-import com.zimbra.qa.selenium.projects.desktop.ui.mail.FormMailNew;
-import com.zimbra.qa.selenium.projects.desktop.ui.mail.TreeMail;
-import com.zimbra.qa.selenium.projects.desktop.ui.search.PageAdvancedSearch;
+import org.zmail.qa.selenium.framework.core.ClientSessionFactory;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.ZmailAccount.SOAP_DESTINATION_HOST_TYPE;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties.AppType;
+import org.zmail.qa.selenium.projects.desktop.ui.DialogWarning;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.*;
+import org.zmail.qa.selenium.projects.desktop.ui.mail.FormMailNew;
+import org.zmail.qa.selenium.projects.desktop.ui.mail.TreeMail;
+import org.zmail.qa.selenium.projects.desktop.ui.search.PageAdvancedSearch;
 
 public class PageAddressbook extends AbsTab {
 
@@ -92,9 +92,9 @@ public class PageAddressbook extends AbsTab {
 		boolean active=attrs.contains("ZSelected");
 
 		String locator = null;
-		// On Zimbra Desktop, there is no Address book folder, but there is only
+		// On Zmail Desktop, there is no Address book folder, but there is only
 		// account root folder
-      if(ZimbraSeleniumProperties.getAppType() == AppType.DESKTOP) {
+      if(ZmailSeleniumProperties.getAppType() == AppType.DESKTOP) {
 	      locator = TreeMail.Locators.zTreeItems.replace(TreeMail.stringToReplace,
 	            AjaxCommonTest.defaultAccountName);
 	   } else {
@@ -380,7 +380,7 @@ public class PageAddressbook extends AbsTab {
    public ContactGroupItem createUsingSOAPSelectLocalContactGroup(AppAjaxClient app,
          Action action,
          String ... tagIDArray)  throws HarnessException { 
-      return  createUsingSOAPSelectLocalContactGroup(app, action, ZimbraAccount.clientAccountName, tagIDArray);
+      return  createUsingSOAPSelectLocalContactGroup(app, action, ZmailAccount.clientAccountName, tagIDArray);
    }
 
    public ContactGroupItem createUsingSOAPSelectLocalContactGroup(AppAjaxClient app,
@@ -415,7 +415,7 @@ public class PageAddressbook extends AbsTab {
    public ContactItem createUsingSOAPSelectLocalContact(AppAjaxClient app,
          Action action,
          String ... tagIDArray)  throws HarnessException {
-      return createUsingSOAPSelectLocalContact(app, action, ZimbraAccount.clientAccountName, tagIDArray);
+      return createUsingSOAPSelectLocalContact(app, action, ZmailAccount.clientAccountName, tagIDArray);
    }
  
    public ContactItem createUsingSOAPSelectLocalContact(AppAjaxClient app,
@@ -431,7 +431,7 @@ public class PageAddressbook extends AbsTab {
             app.zGetActiveAccount(),
             "Contacts",
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
       GeneralUtility.syncDesktopToZcsWithSoap(app.zGetActiveAccount());
       zWaitForDesktopLoadingSpinner(5000);
       app.zTreeContacts.zTreeItem(Action.A_LEFTCLICK, contactFolder);
@@ -479,7 +479,7 @@ public class PageAddressbook extends AbsTab {
 			    pulldownLocator = "css=div[id='zb__CNS__NEW_MENU'] td[id='zb__CNS__NEW_MENU_dropdown']";
 
 			    // TODO: Bug 58365 for Desktop
-			    if (ZimbraSeleniumProperties.getAppType() == AppType.DESKTOP) {
+			    if (ZmailSeleniumProperties.getAppType() == AppType.DESKTOP) {
                    optionLocator="css=div[class='ActionMenu ZHasIcon'] div[class*='ZMenuItem ZWidget ZHasLeftIcon ZHasText'] table[class*='ZWidgetTable ZMenuItemTable']:contains('Contact')";                
 			    } else {
                   optionLocator="css=tr[id='POPUP_NEW_CONTACT']";
@@ -489,7 +489,7 @@ public class PageAddressbook extends AbsTab {
 			    pulldownLocator = "css=div[id='zb__CNS__NEW_MENU'] td[id='zb__CNS__NEW_MENU_dropdown']";
 
 			    // TODO: Bug 58365 for Desktop
-			    if (ZimbraSeleniumProperties.getAppType() == AppType.DESKTOP) {
+			    if (ZmailSeleniumProperties.getAppType() == AppType.DESKTOP) {
 			       optionLocator="css=div[class='ActionMenu ZHasIcon'] div[class*='ZMenuItem ZWidget ZHasLeftIcon ZHasText'] table[class*='ZWidgetTable ZMenuItemTable']:contains('Contact Group')";
 			    } else {
 			       optionLocator="css=tr[id='POPUP_NEW_GROUP']";

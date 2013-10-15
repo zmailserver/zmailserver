@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.versioncheck;
+package org.zmail.cs.versioncheck;
 /**
  * @author Greg Solovyev
  */

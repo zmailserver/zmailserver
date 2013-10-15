@@ -17,7 +17,7 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.framework.items;
+package org.zmail.qa.selenium.framework.items;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -27,11 +27,11 @@ import java.util.List;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.XmlStringUtil;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount.SOAP_DESTINATION_HOST_TYPE;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.XmlStringUtil;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailAccount.SOAP_DESTINATION_HOST_TYPE;
 
 
 /**
@@ -184,7 +184,7 @@ public class MailItem implements IItem {
 		return (dSubject);
 	}
 	
-	// TODO: eventually, replace this with the com.zimbra.soap.types.Contact method
+	// TODO: eventually, replace this with the org.zmail.soap.types.Contact method
 	private String myId;
 	public String getId() {
 		return (myId);
@@ -242,10 +242,10 @@ public class MailItem implements IItem {
 
 
 	/* (non-Javadoc)
-	 * @see framework.items.IItem#CreateSOAP(framework.util.ZimbraAccount)
+	 * @see framework.items.IItem#CreateSOAP(framework.util.ZmailAccount)
 	 */
 	@Override
-	public void createUsingSOAP(ZimbraAccount account) throws HarnessException {
+	public void createUsingSOAP(ZmailAccount account) throws HarnessException {
 		throw new HarnessException("implement me");
 	}
 
@@ -258,11 +258,11 @@ public class MailItem implements IItem {
 		try {
 
 			// Make sure we only have the GetMsgResponse part
-			Element getMsgResponse = ZimbraAccount.SoapClient.selectNode(GetMsgResponse, "//mail:GetMsgResponse");
+			Element getMsgResponse = ZmailAccount.SoapClient.selectNode(GetMsgResponse, "//mail:GetMsgResponse");
 			if ( getMsgResponse == null )
 				throw new HarnessException("Element does not contain GetMsgResponse");
 	
-			Element m = ZimbraAccount.SoapClient.selectNode(getMsgResponse, "//mail:m");
+			Element m = ZmailAccount.SoapClient.selectNode(getMsgResponse, "//mail:m");
 			if ( m == null )
 				throw new HarnessException("Element does not contain an m element");
 			
@@ -277,12 +277,12 @@ public class MailItem implements IItem {
 			mail.dFolderId = m.getAttribute("l", null);
 			
 			// If there is a subject, save it
-			Element sElement = ZimbraAccount.SoapClient.selectNode(m, "//mail:su");
+			Element sElement = ZmailAccount.SoapClient.selectNode(m, "//mail:su");
 			if ( sElement != null )
 				mail.dSubject = sElement.getText().trim();
 			
 			// Parse the recipients
-			Element[] eElements = ZimbraAccount.SoapClient.selectNodes(m, "mail:e");
+			Element[] eElements = ZmailAccount.SoapClient.selectNodes(m, "mail:e");
 			for (Element eElement : eElements) {
 				
 				RecipientItem r = new RecipientItem();
@@ -310,8 +310,8 @@ public class MailItem implements IItem {
 				
 			} 
 			
-			Element contentTextPlain = ZimbraAccount.SoapClient.selectNode(m, "//mail:mp[@ct='text/plain']//mail:content");
-			Element contentBodyHtml = ZimbraAccount.SoapClient.selectNode(m, "//mail:mp[@ct='text/html']//mail:content");
+			Element contentTextPlain = ZmailAccount.SoapClient.selectNode(m, "//mail:mp[@ct='text/plain']//mail:content");
+			Element contentBodyHtml = ZmailAccount.SoapClient.selectNode(m, "//mail:mp[@ct='text/html']//mail:content");
 			if ( contentTextPlain != null ) {
 				mail.dBodyText = contentTextPlain.getText().trim();
 			}
@@ -330,19 +330,19 @@ public class MailItem implements IItem {
 	}
 
 
-	public static MailItem importFromSOAP(ZimbraAccount account, String query) throws HarnessException {
+	public static MailItem importFromSOAP(ZmailAccount account, String query) throws HarnessException {
 		
 		return importFromSOAP(account, query, SOAP_DESTINATION_HOST_TYPE.SERVER, null);
 
 	}
 
-	public static MailItem importFromSOAP(ZimbraAccount account, String query,
+	public static MailItem importFromSOAP(ZmailAccount account, String query,
 	      SOAP_DESTINATION_HOST_TYPE destType, String accountName) throws HarnessException {
 
 	   try {
 
          account.soapSend(
-               "<SearchRequest xmlns='urn:zimbraMail' types='message'>" +
+               "<SearchRequest xmlns='urn:zmailMail' types='message'>" +
                   "<query>"+ query +"</query>" +
                "</SearchRequest>",
                destType,
@@ -356,7 +356,7 @@ public class MailItem implements IItem {
          String id = account.soapSelectValue("//mail:SearchResponse/mail:m", "id");
          
          account.soapSend(
-               "<GetMsgRequest xmlns='urn:zimbraMail'>" +
+               "<GetMsgRequest xmlns='urn:zmailMail'>" +
                      "<m id='"+ id +"' />" +
                    "</GetMsgRequest>",
                    destType,

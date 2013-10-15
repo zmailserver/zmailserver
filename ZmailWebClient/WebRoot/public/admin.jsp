@@ -1,7 +1,7 @@
 <%@ page session="false" %>
 <%@ page session="false" language="java" import="java.util.*,javax.naming.*"%>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%!
 	static String getParameter(HttpServletRequest request, String pname, String defValue) {
@@ -28,7 +28,7 @@
 	}
 	
 	if (adminUrl == null) {
-		adminUrl = "/zimbraAdmin";
+		adminUrl = "/zmailAdmin";
     }
 
 
@@ -114,7 +114,7 @@
     
     String skin = (String)request.getAttribute("skin");
 	if (skin == null) {
-		skin = application.getInitParameter("zimbraDefaultAdminSkin");
+		skin = application.getInitParameter("zmailDefaultAdminSkin");
 	}
 
     if (isNewUI) { //only save new skin in cookie "ZA_SKIN"
@@ -137,7 +137,7 @@
 %>
 <%
 	Cookie testCookie = new Cookie("ZA_TEST", "true");
-	testCookie.setSecure(com.zimbra.cs.taglib.ZJspSession.secureAuthTokenCookie(request));
+	testCookie.setSecure(org.zmail.cs.taglib.ZJspSession.secureAuthTokenCookie(request));
 	response.addCookie(testCookie);
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -159,7 +159,7 @@
 -->
 	<fmt:setLocale value='${pageContext.request.locale}' scope='request' />
 	<fmt:setBundle basename="/messages/ZabMsg" scope='request' />
-    <title><fmt:message key="zimbraAdminTitle"/></title>
+    <title><fmt:message key="zmailAdminTitle"/></title>
 	<zm:getFavIcon request="${pageContext.request}" var="favIconUrl" />
 	<c:if test="${empty favIconUrl}">
 	    <fmt:message key="favIconUrl" var="favIconUrl"/>
@@ -198,7 +198,7 @@
 <jsp:include page="/js/ajax/util/AjxTimezoneData.js" />
 </script>
 <%
-    String packages = "Ajax,XForms,Zimbra,Admin";
+    String packages = "Ajax,XForms,Zmail,Admin";
 
     String extraPackages = request.getParameter("packages");
     if (extraPackages != null) packages += ","+extraPackages;
@@ -238,7 +238,7 @@ AjxEnv.DEFAULT_LOCALE = "${zm:javaLocaleId(pageContext.request.locale)}";
 				}
 			}
             try {
-                ZaZimbraAdmin.run(document.domain);
+                ZaZmailAdmin.run(document.domain);
             }catch (ex) {
                 if (window.console && window.console.error) console.error ("Exception in launch(): " + ex.msg ) ;
             }

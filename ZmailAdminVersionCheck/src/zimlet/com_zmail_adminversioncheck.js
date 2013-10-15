@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-if(ZaSettings && ZaSettings.EnabledZimlet["com_zimbra_adminversioncheck"]){
-if(window.console && window.console.log) console.log("Start loading com_zimbra_adminversioncheck.js");
+if(ZaSettings && ZaSettings.EnabledZimlet["org_zmail_adminversioncheck"]){
+if(window.console && window.console.log) console.log("Start loading org_zmail_adminversioncheck.js");
 function ZaVersionCheck() {
 	ZaItem.call(this,"ZaVersionCheck");
 	this.attrs = new Object();
-	this.attrsToGet = [ZaVersionCheck.A_zimbraVersionCheckLastAttempt,
-		ZaVersionCheck.A_zimbraVersionCheckLastSuccess,
-		ZaVersionCheck.A_zimbraVersionCheckNotificationEmail,
-		ZaVersionCheck.A_zimbraVersionCheckInterval,
-		ZaVersionCheck.A_zimbraVersionCheckServer,
-		ZaVersionCheck.A_zimbraVersionCheckURL]
+	this.attrsToGet = [ZaVersionCheck.A_zmailVersionCheckLastAttempt,
+		ZaVersionCheck.A_zmailVersionCheckLastSuccess,
+		ZaVersionCheck.A_zmailVersionCheckNotificationEmail,
+		ZaVersionCheck.A_zmailVersionCheckInterval,
+		ZaVersionCheck.A_zmailVersionCheckServer,
+		ZaVersionCheck.A_zmailVersionCheckURL]
 };
 ZaVersionCheck.prototype = new ZaItem;
 ZaVersionCheck.prototype.constructor = ZaVersionCheck;
@@ -32,8 +32,8 @@ ZaVersionCheck.prototype.errorMsg = "";
 ZaVersionCheck.prototype.isAvailable = false;
 // URL to direct to downloads
 // TODO: Figure out if this can be moved to a properties file
-// OLD: ZaVersionCheck.downloadUrl = "http://www.zimbra.com/community/downloads.html";
-ZaVersionCheck.downloadUrl = "http://www.zimbra.com/downloads/ne-downloads.html";
+// OLD: ZaVersionCheck.downloadUrl = "http://www.zmail.com/community/downloads.html";
+ZaVersionCheck.downloadUrl = "http://www.zmail.com/downloads/ne-downloads.html";
 
 ZaItem.loadMethods["ZaVersionCheck"] = new Array();
 ZaItem.modifyMethods["ZaVersionCheck"] = new Array();
@@ -41,54 +41,54 @@ ZaItem.modifyMethods["ZaVersionCheck"] = new Array();
 ZaOperation.VERSION_CHECK = ++ZA_OP_INDEX;
 ZaVersionCheck.INVALID_VC_RESPONSE = "versioncheck.INVALID_VC_RESPONSE";
 //constants
-ZaVersionCheck.A_zimbraVersionCheckLastAttempt = "zimbraVersionCheckLastAttempt";
-ZaVersionCheck.A_zimbraVersionCheckLastSuccess = "zimbraVersionCheckLastSuccess";
-//ZaVersionCheck.A_zimbraVersionCheckLastResponse = "zimbraVersionCheckLastResponse";
-ZaVersionCheck.A_zimbraVersionCheckNotificationEmail = "zimbraVersionCheckNotificationEmail";
-ZaVersionCheck.A_zimbraVersionCheckSendNotifications = "zimbraVersionCheckSendNotifications";
-ZaVersionCheck.A_zimbraVersionCheckNotificationEmailFrom = "zimbraVersionCheckNotificationEmailFrom";
-ZaVersionCheck.A_zimbraVersionCheckNotificationSubject = "zimbraVersionCheckNotificationSubject";
-ZaVersionCheck.A_zimbraVersionCheckNotificationBody = "zimbraVersionCheckNotificationBody";
-ZaVersionCheck.A_zimbraVersionCheckInterval = "zimbraVersionCheckInterval";
-ZaVersionCheck.A_zimbraVersionCheckServer = "zimbraVersionCheckServer";
-ZaVersionCheck.A_zimbraVersionCheckURL = "zimbraVersionCheckURL";
-ZaVersionCheck.A_zimbraVersionCheckUpdates = "updates";
-ZaVersionCheck.A_zimbraVersionCheckUpdateType = "type";
-ZaVersionCheck.A_zimbraVersionCheckUpdateCritical = "critical";
-ZaVersionCheck.A_zimbraVersionCheckUpdateVersion = "version";
-ZaVersionCheck.A_zimbraVersionCheckUpdateBuildtype = "buildtype";
-ZaVersionCheck.A_zimbraVersionCheckUpdateUpdateURL = "updateURL";
-ZaVersionCheck.A_zimbraVersionCheckUpdateDescription = "description";
-ZaVersionCheck.A_zimbraVersionCheckUpdateShortversion = "shortversion";
+ZaVersionCheck.A_zmailVersionCheckLastAttempt = "zmailVersionCheckLastAttempt";
+ZaVersionCheck.A_zmailVersionCheckLastSuccess = "zmailVersionCheckLastSuccess";
+//ZaVersionCheck.A_zmailVersionCheckLastResponse = "zmailVersionCheckLastResponse";
+ZaVersionCheck.A_zmailVersionCheckNotificationEmail = "zmailVersionCheckNotificationEmail";
+ZaVersionCheck.A_zmailVersionCheckSendNotifications = "zmailVersionCheckSendNotifications";
+ZaVersionCheck.A_zmailVersionCheckNotificationEmailFrom = "zmailVersionCheckNotificationEmailFrom";
+ZaVersionCheck.A_zmailVersionCheckNotificationSubject = "zmailVersionCheckNotificationSubject";
+ZaVersionCheck.A_zmailVersionCheckNotificationBody = "zmailVersionCheckNotificationBody";
+ZaVersionCheck.A_zmailVersionCheckInterval = "zmailVersionCheckInterval";
+ZaVersionCheck.A_zmailVersionCheckServer = "zmailVersionCheckServer";
+ZaVersionCheck.A_zmailVersionCheckURL = "zmailVersionCheckURL";
+ZaVersionCheck.A_zmailVersionCheckUpdates = "updates";
+ZaVersionCheck.A_zmailVersionCheckUpdateType = "type";
+ZaVersionCheck.A_zmailVersionCheckUpdateCritical = "critical";
+ZaVersionCheck.A_zmailVersionCheckUpdateVersion = "version";
+ZaVersionCheck.A_zmailVersionCheckUpdateBuildtype = "buildtype";
+ZaVersionCheck.A_zmailVersionCheckUpdateUpdateURL = "updateURL";
+ZaVersionCheck.A_zmailVersionCheckUpdateDescription = "description";
+ZaVersionCheck.A_zmailVersionCheckUpdateShortversion = "shortversion";
 
 if(ZaSettings) {
 	ZaSettings.SOFTWARE_UPDATES_VIEW = "softwareUpdatesView";
-	ZaSettings.ALL_UI_COMPONENTS.push({ value: ZaSettings.SOFTWARE_UPDATES_VIEW, label: com_zimbra_adminversioncheck.UI_Comp_versionCheck });
+	ZaSettings.ALL_UI_COMPONENTS.push({ value: ZaSettings.SOFTWARE_UPDATES_VIEW, label: org_zmail_adminversioncheck.UI_Comp_versionCheck });
 	ZaSettings.OVERVIEW_TOOLS_ITEMS.push(ZaSettings.SOFTWARE_UPDATES_VIEW);
 	ZaSettings.VIEW_RIGHTS [ZaSettings.SOFTWARE_UPDATES_VIEW] = "adminConsoleSoftwareUpdatesRights";
 }
 
 ZaVersionCheck.myXModel = {	items:[
-	{id:ZaVersionCheck.A_zimbraVersionCheckLastAttempt, ref:"attrs/" + ZaVersionCheck.A_zimbraVersionCheckLastAttempt, type: _DATETIME_},
-    {id:ZaVersionCheck.A_zimbraVersionCheckLastSuccess, ref:"attrs/" + ZaVersionCheck.A_zimbraVersionCheckLastSuccess, type: _DATETIME_},
-    {id:ZaVersionCheck.A_zimbraVersionCheckNotificationEmail, ref:"attrs/" + ZaVersionCheck.A_zimbraVersionCheckNotificationEmail, type: _STRING_},
-    {id:ZaVersionCheck.A_zimbraVersionCheckNotificationEmailFrom, ref:"attrs/" + ZaVersionCheck.A_zimbraVersionCheckNotificationEmailFrom, type: _STRING_},
-    {id:ZaVersionCheck.A_zimbraVersionCheckNotificationSubject, ref:"attrs/" + ZaVersionCheck.A_zimbraVersionCheckNotificationSubject, type: _STRING_},
-    {id:ZaVersionCheck.A_zimbraVersionCheckNotificationBody, ref:"attrs/" + ZaVersionCheck.A_zimbraVersionCheckNotificationBody, type: _STRING_},
-    {id:ZaVersionCheck.A_zimbraVersionCheckSendNotifications, ref:"attrs/" +  ZaVersionCheck.A_zimbraVersionCheckSendNotifications,  type:_ENUM_, choices: ZaModel.BOOLEAN_CHOICES},        
-    {id:ZaVersionCheck.A_zimbraVersionCheckServer, ref:"attrs/" + ZaVersionCheck.A_zimbraVersionCheckServer, type: _STRING_},
-	{id:ZaVersionCheck.A_zimbraVersionCheckURL, ref:"attrs/" + ZaVersionCheck.A_zimbraVersionCheckURL, type: _STRING_},
-	{id:ZaVersionCheck.A_zimbraVersionCheckInterval, type:_MLIFETIME_, ref:"attrs/"+ZaVersionCheck.A_zimbraVersionCheckInterval},
-	{id:ZaVersionCheck.A_zimbraVersionCheckUpdates, type:_LIST_, listItem:
+	{id:ZaVersionCheck.A_zmailVersionCheckLastAttempt, ref:"attrs/" + ZaVersionCheck.A_zmailVersionCheckLastAttempt, type: _DATETIME_},
+    {id:ZaVersionCheck.A_zmailVersionCheckLastSuccess, ref:"attrs/" + ZaVersionCheck.A_zmailVersionCheckLastSuccess, type: _DATETIME_},
+    {id:ZaVersionCheck.A_zmailVersionCheckNotificationEmail, ref:"attrs/" + ZaVersionCheck.A_zmailVersionCheckNotificationEmail, type: _STRING_},
+    {id:ZaVersionCheck.A_zmailVersionCheckNotificationEmailFrom, ref:"attrs/" + ZaVersionCheck.A_zmailVersionCheckNotificationEmailFrom, type: _STRING_},
+    {id:ZaVersionCheck.A_zmailVersionCheckNotificationSubject, ref:"attrs/" + ZaVersionCheck.A_zmailVersionCheckNotificationSubject, type: _STRING_},
+    {id:ZaVersionCheck.A_zmailVersionCheckNotificationBody, ref:"attrs/" + ZaVersionCheck.A_zmailVersionCheckNotificationBody, type: _STRING_},
+    {id:ZaVersionCheck.A_zmailVersionCheckSendNotifications, ref:"attrs/" +  ZaVersionCheck.A_zmailVersionCheckSendNotifications,  type:_ENUM_, choices: ZaModel.BOOLEAN_CHOICES},        
+    {id:ZaVersionCheck.A_zmailVersionCheckServer, ref:"attrs/" + ZaVersionCheck.A_zmailVersionCheckServer, type: _STRING_},
+	{id:ZaVersionCheck.A_zmailVersionCheckURL, ref:"attrs/" + ZaVersionCheck.A_zmailVersionCheckURL, type: _STRING_},
+	{id:ZaVersionCheck.A_zmailVersionCheckInterval, type:_MLIFETIME_, ref:"attrs/"+ZaVersionCheck.A_zmailVersionCheckInterval},
+	{id:ZaVersionCheck.A_zmailVersionCheckUpdates, type:_LIST_, listItem:
 		{type:_OBJECT_, 
 			items: [
-				{id:ZaVersionCheck.A_zimbraVersionCheckUpdateType, type:_STRING_},
-				{id:ZaVersionCheck.A_zimbraVersionCheckUpdateCritical, type:_ENUM_, choices: ZaModel.BOOLEAN_CHOICES2},
-				{id:ZaVersionCheck.A_zimbraVersionCheckUpdateVersion, type:_STRING_},
-				{id:ZaVersionCheck.A_zimbraVersionCheckUpdateBuildtype, type:_STRING_},
-				{id:ZaVersionCheck.A_zimbraVersionCheckUpdateUpdateURL, type:_STRING_},
-				{id:ZaVersionCheck.A_zimbraVersionCheckUpdateDescription, type:_STRING_},
-				{id:ZaVersionCheck.A_zimbraVersionCheckUpdateShortversion, type:_STRING_}
+				{id:ZaVersionCheck.A_zmailVersionCheckUpdateType, type:_STRING_},
+				{id:ZaVersionCheck.A_zmailVersionCheckUpdateCritical, type:_ENUM_, choices: ZaModel.BOOLEAN_CHOICES2},
+				{id:ZaVersionCheck.A_zmailVersionCheckUpdateVersion, type:_STRING_},
+				{id:ZaVersionCheck.A_zmailVersionCheckUpdateBuildtype, type:_STRING_},
+				{id:ZaVersionCheck.A_zmailVersionCheckUpdateUpdateURL, type:_STRING_},
+				{id:ZaVersionCheck.A_zmailVersionCheckUpdateDescription, type:_STRING_},
+				{id:ZaVersionCheck.A_zmailVersionCheckUpdateShortversion, type:_STRING_}
 			]
 		}
 	}
@@ -99,16 +99,16 @@ function (serverStr) {
 	if (serverStr) {
 		return ZaItem.formatServerTime(serverStr);
 	}else{
-		return com_zimbra_adminversioncheck.Never;
+		return org_zmail_adminversioncheck.Never;
 	}
 }
 
 ZaVersionCheck.checkNow = function() {
 	var params, soapDoc;
-	soapDoc = AjxSoapDoc.create("BatchRequest", "urn:zimbra");
+	soapDoc = AjxSoapDoc.create("BatchRequest", "urn:zmail");
     soapDoc.setMethodAttribute("onerror", "continue");
 	
-	var versionCheck = soapDoc.set("VersionCheckRequest", null, null, ZaZimbraAdmin.URN);
+	var versionCheck = soapDoc.set("VersionCheckRequest", null, null, ZaZmailAdmin.URN);
 	versionCheck.setAttribute("action","check");
 
 	try {
@@ -143,14 +143,14 @@ ZaVersionCheck.checkNow = function() {
 ZaVersionCheck.loadMethod = 
 function(by, val) {
 	var params, soapDoc;
-	soapDoc = AjxSoapDoc.create("BatchRequest", "urn:zimbra");
+	soapDoc = AjxSoapDoc.create("BatchRequest", "urn:zmail");
     soapDoc.setMethodAttribute("onerror", "continue");
-    var getConfigDoc = soapDoc.set("GetAllConfigRequest", null, null, ZaZimbraAdmin.URN);	
+    var getConfigDoc = soapDoc.set("GetAllConfigRequest", null, null, ZaZmailAdmin.URN);	
 	if(!this.getAttrs.all && !AjxUtil.isEmpty(this.attrsToGet)) {
 		getConfigDoc.setAttribute("attrs", this.attrsToGet.join(","));
 	}	
 
-	var versionCheck = soapDoc.set("VersionCheckRequest", null, null, ZaZimbraAdmin.URN);
+	var versionCheck = soapDoc.set("VersionCheckRequest", null, null, ZaZmailAdmin.URN);
 	versionCheck.setAttribute("action","status");
 	this.errorMsg = "";
 	this.isAvailable = false;
@@ -188,13 +188,13 @@ function(by, val) {
 
 		if(batchResp.VersionCheckResponse) {
 			var resp = batchResp.VersionCheckResponse[0];
-			this[ZaVersionCheck.A_zimbraVersionCheckUpdates] = [];
+			this[ZaVersionCheck.A_zmailVersionCheckUpdates] = [];
 			if(resp && resp.versionCheck && resp.versionCheck[0] && resp.versionCheck[0].updates) {
 				if(resp.versionCheck[0].updates instanceof Array && resp.versionCheck[0].updates.length>0 && 
 				resp.versionCheck[0].updates[0].update && resp.versionCheck[0].updates[0].update.length>0) {
 					var cnt = resp.versionCheck[0].updates[0].update.length;
 					for(var i = 0; i< cnt; i++) {
-						this[ZaVersionCheck.A_zimbraVersionCheckUpdates].push(resp.versionCheck[0].updates[0].update[i]);
+						this[ZaVersionCheck.A_zmailVersionCheckUpdates].push(resp.versionCheck[0].updates[0].update[i]);
 					}
 					this.isAvailable = true;
 				}
@@ -212,7 +212,7 @@ function(by, val) {
 ZaItem.loadMethods["ZaVersionCheck"].push(ZaVersionCheck.loadMethod);
 
 ZaVersionCheck.modifyMethod = function (mods) {
-	var soapDoc = AjxSoapDoc.create("ModifyConfigRequest", ZaZimbraAdmin.URN, null);
+	var soapDoc = AjxSoapDoc.create("ModifyConfigRequest", ZaZmailAdmin.URN, null);
 	for (var aname in mods) {
 		//multy value attribute
 		if(mods[aname] instanceof Array) {
@@ -246,13 +246,13 @@ ZaVersionCheck.modifyMethod = function (mods) {
 }
 ZaItem.modifyMethods["ZaVersionCheck"].push(ZaVersionCheck.modifyMethod);
 
-ZaZimbraAdmin._VERSION_CHECK_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
+ZaZmailAdmin._VERSION_CHECK_VIEW = ZaZmailAdmin.VIEW_INDEX++;
 
 ZaApp.prototype.getVersionCheckViewController =
 function() {
-	if (this._controllers[ZaZimbraAdmin._VERSION_CHECK_VIEW] == null)
-		this._controllers[ZaZimbraAdmin._VERSION_CHECK_VIEW] = new ZaVersionCheckViewController(this._appCtxt, this._container);
-	return this._controllers[ZaZimbraAdmin._VERSION_CHECK_VIEW];
+	if (this._controllers[ZaZmailAdmin._VERSION_CHECK_VIEW] == null)
+		this._controllers[ZaZmailAdmin._VERSION_CHECK_VIEW] = new ZaVersionCheckViewController(this._appCtxt, this._container);
+	return this._controllers[ZaZmailAdmin._VERSION_CHECK_VIEW];
 }
 
 ZaVersionCheck.versionCheckTreeListener = function (ev) {
@@ -274,25 +274,25 @@ ZaVersionCheck.versionCheckTreeModifier = function (tree) {
                 this._toolsTi = new DwtTreeItem(tree, null, null, null, null, "overviewHeader");
                 this._toolsTi.enableSelection(false);
                 this._toolsTi.setText(ZaMsg.OVP_tools);
-                this._toolsTi.setData(ZaOverviewPanelController._TID, ZaZimbraAdmin._TOOLS);
+                this._toolsTi.setData(ZaOverviewPanelController._TID, ZaZmailAdmin._TOOLS);
             }
 
             this._versionCheckTi = new DwtTreeItem({parent:this._toolsTi,className:"AdminTreeItem"});
-            this._versionCheckTi.setText(com_zimbra_adminversioncheck.OVP_versionCheck);
+            this._versionCheckTi.setText(org_zmail_adminversioncheck.OVP_versionCheck);
             this._versionCheckTi.setImage("AdminRefresh");
-            this._versionCheckTi.setData(ZaOverviewPanelController._TID, ZaZimbraAdmin._VERSION_CHECK_VIEW);
+            this._versionCheckTi.setData(ZaOverviewPanelController._TID, ZaZmailAdmin._VERSION_CHECK_VIEW);
         } else {
             var parentPath = ZaTree.getPathByArray([ZaMsg.OVP_home, ZaMsg.OVP_toolMig]);
 
             var ti = new ZaTreeItemData({
                                     parent:parentPath,
                                     id:ZaId.getTreeItemId(ZaId.PANEL_APP,"magHV",null, "VersionCheckHV"),
-                                    text: com_zimbra_adminversioncheck.OVP_versionCheck,
-                                    mappingId: ZaZimbraAdmin._VERSION_CHECK_VIEW});
+                                    text: org_zmail_adminversioncheck.OVP_versionCheck,
+                                    mappingId: ZaZmailAdmin._VERSION_CHECK_VIEW});
             tree.addTreeItemData(ti);
         }
 		if(ZaOverviewPanelController.overviewTreeListeners) {
-			ZaOverviewPanelController.overviewTreeListeners[ZaZimbraAdmin._VERSION_CHECK_VIEW] = ZaVersionCheck.versionCheckTreeListener;
+			ZaOverviewPanelController.overviewTreeListeners[ZaZmailAdmin._VERSION_CHECK_VIEW] = ZaVersionCheck.versionCheckTreeListener;
 		}
 	}
 }
@@ -314,7 +314,7 @@ if (ZaHome && ZaHome.myXModel) {
 
         this.attrs[ZaHome.A2_versionUpdateAvailable] = false;
         // TODO: should use the load method to get version information
-        this.attrs[ZaHome.A2_updateMessage] = "Zimbra 8.1 is available";
+        this.attrs[ZaHome.A2_updateMessage] = "Zmail 8.1 is available";
     }
     ZaItem.loadMethods["ZaHome"].push(ZaHome.loadVersionMethod);
 }
@@ -322,8 +322,8 @@ if (ZaHome && ZaHome.myXModel) {
 if(ZaTabView.XFormModifiers["ZaHomeXFormView"]) {
 
     ZaHomeXFormView.onViewVersionUpdate = function(ev) {
-        var tree = ZaZimbraAdmin.getInstance().getOverviewPanelController().getOverviewPanel().getFolderTree();
-        var path = ZaTree.getPathByArray([ZaMsg.OVP_home, ZaMsg.OVP_toolMig, com_zimbra_adminversioncheck.OVP_versionCheck]);
+        var tree = ZaZmailAdmin.getInstance().getOverviewPanelController().getOverviewPanel().getFolderTree();
+        var path = ZaTree.getPathByArray([ZaMsg.OVP_home, ZaMsg.OVP_toolMig, org_zmail_adminversioncheck.OVP_versionCheck]);
         tree.setSelectionByPath(path, false);
     }
 
@@ -342,7 +342,7 @@ if(ZaTabView.XFormModifiers["ZaHomeXFormView"]) {
                         }
                     },
                     {type:_OUTPUT_, ref: ZaHome.A2_updateMessage},
-                    {type:_OUTPUT_, value:com_zimbra_adminversioncheck.LBL_ViewUpdate, containerCssStyle:"cursor:pointer;color:white",onClick: ZaHomeXFormView.onViewVersionUpdate}
+                    {type:_OUTPUT_, value:org_zmail_adminversioncheck.LBL_ViewUpdate, containerCssStyle:"cursor:pointer;color:white",onClick: ZaHomeXFormView.onViewVersionUpdate}
                 ]});
         }
     }
@@ -401,13 +401,13 @@ if (ZaTask && ZaTask.myXModel){
 									cssStyle:"padding-left:5px;", bmolsnr: true
 								}]
 						},
-						{type:_OUTPUT_, align:_RIGHT_, value:com_zimbra_adminversioncheck.LBL_ViewUpdate,
+						{type:_OUTPUT_, align:_RIGHT_, value:org_zmail_adminversioncheck.LBL_ViewUpdate,
 							visibilityChecks:[[XForm.checkInstanceValue, ZaTask.A2_versionHasError, true]],
 							visibilityChangeEventSources:[ZaTask.A2_versionHasError],
 							containerCssClass: "ZaLinkedItem",
 							onClick: ZaHomeXFormView.onViewVersionUpdate
 						},
-						{type:_OUTPUT_, align:_RIGHT_, value:com_zimbra_adminversioncheck.LBL_GO_TO_DOWNLOAD_URL,
+						{type:_OUTPUT_, align:_RIGHT_, value:org_zmail_adminversioncheck.LBL_GO_TO_DOWNLOAD_URL,
 							visibilityChecks:[[XForm.checkInstanceValue, ZaTask.A2_versionHasError, false], [XForm.checkInstanceValue, ZaTask.A2_versionUpdateAvailable, true]],
 							visibilityChangeEventSources:[ZaTask.A2_versionHasError, ZaTask.A2_versionUpdateAvailable],
 							containerCssClass: "ZaLinkedItem",
@@ -441,15 +441,15 @@ if (ZaTask && ZaTask.myXModel){
 			var isAvailable = this._versionCheck.isAvailable;
 			if (hasError) {
 				canShow = true;
-				msg = com_zimbra_adminversioncheck.WARNING_CURRENT_ATTEMPT_FAILED;
+				msg = org_zmail_adminversioncheck.WARNING_CURRENT_ATTEMPT_FAILED;
 				//TODO: let user can see the this._versionCheck.errorMsg as detail, after he clicking the msg;
 			} else if (isAvailable) {
 				canShow = true;
-				msg = com_zimbra_adminversioncheck.UpdatesAreAvailable;
-				//msg = "Zimbra 8.1 is available"; //test
+				msg = org_zmail_adminversioncheck.UpdatesAreAvailable;
+				//msg = "Zmail 8.1 is available"; //test
 			}
 
-			var taskController = ZaZimbraAdmin.getInstance().getTaskController();
+			var taskController = ZaZmailAdmin.getInstance().getTaskController();
 			taskController.setInstanceValue(msg, ZaTask.A2_versionUpdateMessage);
 			taskController.setInstanceValue(canShow, ZaTask.A2_versionCanBeShown);
 			taskController.setInstanceValue(isAvailable, ZaTask.A2_versionUpdateAvailable);

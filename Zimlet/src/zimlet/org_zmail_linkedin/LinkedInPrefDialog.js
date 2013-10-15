@@ -45,7 +45,7 @@ function() {
 
 LinkedInPrefDialog.prototype._createPreferenceView =
 function() {
-	return AjxTemplate.expand("com_zimbra_linkedin.templates.LinkedIn#PreferenceView");
+	return AjxTemplate.expand("org_zmail_linkedin.templates.LinkedIn#PreferenceView");
 };
 
 LinkedInPrefDialog.prototype._makeOAuthCall =

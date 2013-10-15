@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.versioncheck;
+package org.zmail.cs.versioncheck;
 
 import java.io.IOException;
 import java.util.Iterator;
@@ -24,24 +24,24 @@ import java.util.Date;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.ServerBy;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.SoapFaultException;
-import com.zimbra.common.soap.SoapTransport;
-import com.zimbra.common.util.CliUtil;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.client.LmcSession;
-import com.zimbra.cs.client.soap.LmcSoapClientException;
-import com.zimbra.cs.client.soap.LmcVersionCheckRequest;
-import com.zimbra.cs.client.soap.LmcVersionCheckResponse;
-import com.zimbra.cs.util.BuildInfo;
-import com.zimbra.cs.util.SoapCLI;
-import com.zimbra.common.util.DateUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.ServerBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.SoapFaultException;
+import org.zmail.common.soap.SoapTransport;
+import org.zmail.common.util.CliUtil;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.client.LmcSession;
+import org.zmail.cs.client.soap.LmcSoapClientException;
+import org.zmail.cs.client.soap.LmcVersionCheckRequest;
+import org.zmail.cs.client.soap.LmcVersionCheckResponse;
+import org.zmail.cs.util.BuildInfo;
+import org.zmail.cs.util.SoapCLI;
+import org.zmail.common.util.DateUtil;
 /**
  * @author Greg Solovyev
  */
@@ -85,7 +85,7 @@ public class VersionCheckUtil extends SoapCLI {
         		Provisioning prov = Provisioning.getInstance();
         		Config config;
         		config = prov.getConfig();
-            	String updaterServerId = config.getAttr(Provisioning.A_zimbraVersionCheckServer);
+            	String updaterServerId = config.getAttr(Provisioning.A_zmailVersionCheckServer);
             	
                 if (updaterServerId != null) {
                     Server server = prov.get(Key.ServerBy.id, updaterServerId);
@@ -99,15 +99,15 @@ public class VersionCheckUtil extends SoapCLI {
                     	}
                     }
                 }        		
-        		String versionInterval = config.getAttr(Provisioning.A_zimbraVersionCheckInterval);
+        		String versionInterval = config.getAttr(Provisioning.A_zmailVersionCheckInterval);
         		if(versionInterval == null || versionInterval.length()==0 || versionInterval.equalsIgnoreCase("0")) {
         			System.out.println("Automatic updates are disabled");
         			System.exit(0);
         		} else {
         			long checkInterval = DateUtil.getTimeIntervalSecs(versionInterval,0);
-        			String lastAttempt = config.getAttr(Provisioning.A_zimbraVersionCheckLastAttempt);
+        			String lastAttempt = config.getAttr(Provisioning.A_zmailVersionCheckLastAttempt);
         			if(lastAttempt != null) {
-        				Date lastChecked = DateUtil.parseGeneralizedTime(config.getAttr(Provisioning.A_zimbraVersionCheckLastAttempt));
+        				Date lastChecked = DateUtil.parseGeneralizedTime(config.getAttr(Provisioning.A_zmailVersionCheckLastAttempt));
         				Date now = new Date();
         				if	(now.getTime()/1000- lastChecked.getTime()/1000 >= checkInterval) {
         					util.doVersionCheck();
@@ -130,7 +130,7 @@ public class VersionCheckUtil extends SoapCLI {
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            ZimbraLog.extensions.error("Error in versioncheck util", e);
+            ZmailLog.extensions.error("Error in versioncheck util", e);
             util.usage(null);
             System.exit(1);
         }
@@ -189,7 +189,7 @@ public class VersionCheckUtil extends SoapCLI {
        // super.setupCommandLineOptions();
         Options options = getOptions();
         Options hiddenOptions = getHiddenOptions();
-        hiddenOptions.addOption(OPT_CHECK_VERSION, "autocheck", false, "Initiate version check request (exits if zimbraVersionCheckInterval==0)");        
+        hiddenOptions.addOption(OPT_CHECK_VERSION, "autocheck", false, "Initiate version check request (exits if zmailVersionCheckInterval==0)");        
         options.addOption(SHOW_LAST_STATUS, "result", false, "Show results of last version check.");
         options.addOption(OPT_MANUAL_CHECK_VERSION, "manual", false, "Initiate version check request.");
     }

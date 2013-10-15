@@ -144,7 +144,7 @@
   <topic name="Managing Domain Authentication Settings" url="managing_domains/managing_domain_authentication_settings.htm" />
 </key>
 <key name="Lotus Domino, migration" >
-  <topic name="Zimbra Migration Wizard for Lotus Domino" url="migration_wizard/zimbra_migration_wizard_for_lotus_domino.htm" />
+  <topic name="Zmail Migration Wizard for Lotus Domino" url="migration_wizard/zmail_migration_wizard_for_lotus_domino.htm" />
 </key>
 <key name="mail filters" >
   <topic name="User Interface Features" url="managing_accounts/user_interface_features.htm" />
@@ -153,7 +153,7 @@
   <topic name="User Interface Features" url="managing_accounts/user_interface_features.htm" />
 </key>
 <key name="mail queues" >
-  <topic name="Monitoring Zimbra MTA Mail Queues" url="monitoring/monitoring_zimbra_mta_mail_queues.htm" />
+  <topic name="Monitoring Zmail MTA Mail Queues" url="monitoring/monitoring_zmail_mta_mail_queues.htm" />
 </key>
 <key name="mail report" >
   <topic name="Daily Mail Reports" url="monitoring/daily_mail_reports.htm" />
@@ -201,7 +201,7 @@
   <topic name="Using the Migration Wizard" url="migration_wizard/mw_using_the_migration_wizard.htm" />
 </key>
 <key name="migration from Lotus Domino" >
-  <topic name="Zimbra Migration Wizard for Lotus Domino" url="migration_wizard/zimbra_migration_wizard_for_lotus_domino.htm" />
+  <topic name="Zmail Migration Wizard for Lotus Domino" url="migration_wizard/zmail_migration_wizard_for_lotus_domino.htm" />
 </key>
 <key name="migration wizard, outlook types imported" >
   <topic name="Import Options" url="migration_wizard/mw_import_options.htm" />
@@ -210,16 +210,16 @@
   <topic name="View Server Status" url="monitoring/view_server_status.htm" />
 </key>
 <key name="monitoring queues" >
-  <topic name="Monitoring Zimbra MTA Mail Queues" url="monitoring/monitoring_zimbra_mta_mail_queues.htm" />
+  <topic name="Monitoring Zmail MTA Mail Queues" url="monitoring/monitoring_zmail_mta_mail_queues.htm" />
 </key>
 <key name="monitoring the server" >
-  <topic name="Monitoring Zimbra Collaboration Suite" url="managing_servers/monitoring_zimbra_collaboration_suite.htm" />
+  <topic name="Monitoring Zmail Collaboration Suite" url="managing_servers/monitoring_zmail_collaboration_suite.htm" />
 </key>
 <key name="moving aliases" >
   <topic name="Creating a Mail Aliases" url="managing_accounts/creating_a_mail_aliases.htm" />
 </key>
 <key name="MTA queues" >
-  <topic name="Monitoring Zimbra MTA Mail Queues" url="monitoring/monitoring_zimbra_mta_mail_queues.htm" />
+  <topic name="Monitoring Zmail MTA Mail Queues" url="monitoring/monitoring_zmail_mta_mail_queues.htm" />
 </key>
 <key name="MTA, configuring for servers" >
   <topic name="Configuring the MTA Tab for Servers" url="managing_servers/configuring_the_mta_tab_for_servers.htm" />
@@ -321,7 +321,7 @@
   <topic name="About MTA Queues" url="monitoring/about_mta_queues.htm" />
 </key>
 <key name="queues, MTA" >
-  <topic name="Monitoring Zimbra MTA Mail Queues" url="monitoring/monitoring_zimbra_mta_mail_queues.htm" />
+  <topic name="Monitoring Zmail MTA Mail Queues" url="monitoring/monitoring_zmail_mta_mail_queues.htm" />
 </key>
 <key name="quota" >
   <topic name="Account Advanced Features" url="managing_accounts/account_advanced_features.htm" />

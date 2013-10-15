@@ -14,12 +14,12 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_gplaces"
+<zimlet name="org_zmail_gplaces"
         version="0.1"
         label="${msg.label}"
         description="${msg.description}"
         target="main compose-window">
     <include>gplaces.js</include>
     <includeCSS>gplaces.css</includeCSS>
-    <handlerObject>Com_Zimbra_Gplaces</handlerObject>
+    <handlerObject>Com_Zmail_Gplaces</handlerObject>
 </zimlet>

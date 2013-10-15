@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
-<!DOCTYPE window SYSTEM "chrome://zimbratb/locale/zimbratb.dtd">
+<!DOCTYPE window SYSTEM "chrome://zmailtb/locale/zmailtb.dtd">
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
-<?xml-stylesheet href="chrome://zimbratb/skin/messagecomposer/messagecomposer.css" type="text/css"?>
+<?xml-stylesheet href="chrome://zmailtb/skin/messagecomposer/messagecomposer.css" type="text/css"?>
 <window xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" xmlns:html="http://www.w3.org/1999/xhtml" id="zmtb-compose-window" title="&zmtb.messagecomposer.windowtitle;" style="padding:0px; margin:0px; border:none; background-color:#333333;">
 	<script type="application/x-javascript" src="ZMTB_MessageComposer.js"/>
 	<vbox id="ZMTB-MessageComposer-Container" >
 		<browser id="ZMTB-MessageComposer-AttachBrowser" height="0" />
 		<hbox style="margin:10px; margin-bottom:5px" align="center" id="ZMTB-MessageComposer-Header" >
-			<image  src="chrome://zimbratb/skin/messagecomposer/zimbra_c.png" style="margin-bottom:10px; margin-right:20px" />
+			<image  src="chrome://zmailtb/skin/messagecomposer/zmail_c.png" style="margin-bottom:10px; margin-right:20px" />
 			<label id="ZMTB-MessageComposer-Title" value="&zmtb.messagecomposer.title;"/>
 			<spacer flex="100" />
-			<image id="ZMTB-MessageComposer-LoadingIcon" hidden="true" src="chrome://zimbratb/skin/messagecomposer/loading.gif" />
+			<image id="ZMTB-MessageComposer-LoadingIcon" hidden="true" src="chrome://zmailtb/skin/messagecomposer/loading.gif" />
 		</hbox>
 		<vbox id="ZMTB-MessageComposer-FormBox" >
 			<hbox align="center">

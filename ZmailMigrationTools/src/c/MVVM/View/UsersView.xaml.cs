@@ -38,7 +38,7 @@ public partial class UsersView
         }
         catch (Exception e)
         {
-            MessageBox.Show(e.Message, "Zimbra Migration", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show(e.Message, "Zmail Migration", MessageBoxButton.OK, MessageBoxImage.Error);
             LDB.Visibility = Visibility.Collapsed;
             UsersGrid.Visibility = Visibility.Visible;
             return;

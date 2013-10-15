@@ -17,7 +17,7 @@
 * @class ZaDataSource
 * @contructor ZaDataSource
 * @param ZaApp app
-* this class is a model for zimbraDataSource and zimbraGalDataSource ldap objects
+* this class is a model for zmailDataSource and zmailGalDataSource ldap objects
 * @author Greg Solovyev
 **/
 ZaDataSource = function(noInit) {
@@ -31,40 +31,40 @@ ZaDataSource.prototype = new ZaItem;
 ZaDataSource.prototype.constructor = ZaDataSource;
 
 ZaDataSource.DS_TYPE_GAL = "gal";
-ZaDataSource.GAL_TYPE_ZIMBRA = "zimbra";
+ZaDataSource.GAL_TYPE_ZIMBRA = "zmail";
 ZaDataSource.GAL_TYPE_LDAP = "ldap";
 
-ZaDataSource.A_zimbraGalLdapAttrMap = "zimbraGalLdapAttrMap";
-ZaDataSource.A_zimbraGalSyncLdapURL = "zimbraGalSyncLdapURL";
-ZaDataSource.A_zimbraGalSyncLdapSearchBase = "zimbraGalSyncLdapSearchBase";
-ZaDataSource.A_zimbraGalSyncLdapFilter = "zimbraGalSyncLdapFilter";
-ZaDataSource.A_zimbraGalSyncLdapAuthMech = "zimbraGalSyncLdapAuthMech";
-ZaDataSource.A_zimbraGalSyncLdapBindDn = "zimbraGalSyncLdapBindDn";
-ZaDataSource.A_zimbraGalSyncLdapBindPassword = "zimbraGalSyncLdapBindPassword";
-ZaDataSource.A_zimbraGalSyncLdapKerberos5Principal = "zimbraGalSyncLdapKerberos5Principal";
-ZaDataSource.A_zimbraGalSyncLdapKerberos5Keytab = "zimbraGalSyncLdapKerberos5Keytab";
-ZaDataSource.A_zimbraGalSyncLdapPageSize = "zimbraGalSyncLdapPageSize";
-ZaDataSource.A_zimbraGalSyncInternalSearchBase = "zimbraGalSyncInternalSearchBase";
-ZaDataSource.A_zimbraGalSyncLdapStartTlsEnabled = "zimbraGalSyncLdapStartTlsEnabled";
-ZaDataSource.A_zimbraGalLastSuccessfulSyncTimestamp = "zimbraGalLastSuccessfulSyncTimestamp";
-ZaDataSource.A_zimbraGalLastFailedSyncTimestamp = "zimbraGalLastFailedSyncTimestamp";
-ZaDataSource.A_zimbraGalStatus = "zimbraGalStatus";
-ZaDataSource.A_zimbraGalType = "zimbraGalType";
-ZaDataSource.A_zimbraGalSyncTimestampFormat = "zimbraGalSyncTimestampFormat";
-ZaDataSource.A_zimbraDataSourceType = "zimbraDataSourceType";
-ZaDataSource.A_zimbraDataSourcePollingInterval = "zimbraDataSourcePollingInterval";
+ZaDataSource.A_zmailGalLdapAttrMap = "zmailGalLdapAttrMap";
+ZaDataSource.A_zmailGalSyncLdapURL = "zmailGalSyncLdapURL";
+ZaDataSource.A_zmailGalSyncLdapSearchBase = "zmailGalSyncLdapSearchBase";
+ZaDataSource.A_zmailGalSyncLdapFilter = "zmailGalSyncLdapFilter";
+ZaDataSource.A_zmailGalSyncLdapAuthMech = "zmailGalSyncLdapAuthMech";
+ZaDataSource.A_zmailGalSyncLdapBindDn = "zmailGalSyncLdapBindDn";
+ZaDataSource.A_zmailGalSyncLdapBindPassword = "zmailGalSyncLdapBindPassword";
+ZaDataSource.A_zmailGalSyncLdapKerberos5Principal = "zmailGalSyncLdapKerberos5Principal";
+ZaDataSource.A_zmailGalSyncLdapKerberos5Keytab = "zmailGalSyncLdapKerberos5Keytab";
+ZaDataSource.A_zmailGalSyncLdapPageSize = "zmailGalSyncLdapPageSize";
+ZaDataSource.A_zmailGalSyncInternalSearchBase = "zmailGalSyncInternalSearchBase";
+ZaDataSource.A_zmailGalSyncLdapStartTlsEnabled = "zmailGalSyncLdapStartTlsEnabled";
+ZaDataSource.A_zmailGalLastSuccessfulSyncTimestamp = "zmailGalLastSuccessfulSyncTimestamp";
+ZaDataSource.A_zmailGalLastFailedSyncTimestamp = "zmailGalLastFailedSyncTimestamp";
+ZaDataSource.A_zmailGalStatus = "zmailGalStatus";
+ZaDataSource.A_zmailGalType = "zmailGalType";
+ZaDataSource.A_zmailGalSyncTimestampFormat = "zmailGalSyncTimestampFormat";
+ZaDataSource.A_zmailDataSourceType = "zmailDataSourceType";
+ZaDataSource.A_zmailDataSourcePollingInterval = "zmailDataSourcePollingInterval";
 
 ZaDataSource.myXModel = {
     items: [
-    	{id:ZaDataSource.A_zimbraDataSourceType, type:_STRING_, ref:"attrs/" + ZaDataSource.A_zimbraDataSourceType},
-    	{id:ZaDataSource.A_zimbraGalType, type:_STRING_, ref:"attrs/" + ZaDataSource.A_zimbraGalType},
-    	{id:ZaDataSource.A_zimbraGalSyncLdapURL, type:_LIST_,  listItem:{type:_SHORT_URL_},  ref:"attrs/" + ZaDataSource.A_zimbraGalSyncLdapURL},
-    	{id:ZaDataSource.A_zimbraGalSyncLdapFilter, type:_STRING_, ref:"attrs/" + ZaDataSource.A_zimbraGalSyncLdapFilter,required:true},
-    	{id:ZaDataSource.A_zimbraGalSyncInternalSearchBase, type:_STRING_, ref:"attrs/" + ZaDataSource.A_zimbraGalSyncInternalSearchBase},
-		{id:ZaDataSource.A_zimbraGalSyncLdapBindDn, type:_ENUM_, choices:ZaModel.BOOLEAN_CHOICES, ref:"attrs/" + ZaDataSource.A_zimbraGalSyncLdapBindDn},
-		{id:ZaDataSource.A_zimbraGalSyncLdapBindPassword, type:_STRING_, ref:"attrs/" + ZaDataSource.A_zimbraGalSyncLdapBindPassword},
-    	{id:ZaDataSource.A_zimbraGalSyncLdapStartTlsEnabled, type:_ENUM_, choices:ZaModel.BOOLEAN_CHOICES, ref:"attrs/" + ZaDataSource.A_zimbraGalSyncLdapStartTlsEnabled},
-    	{id:ZaDataSource.A_zimbraGalSyncLdapAuthMech, type:_STRING_, ref:"attrs/" + ZaDataSource.A_zimbraGalSyncLdapAuthMech},
-    	{id:ZaDataSource.A_zimbraDataSourcePollingInterval,type:_MLIFETIME_, ref:"attrs/" + ZaDataSource.A_zimbraDataSourcePollingInterval}
+    	{id:ZaDataSource.A_zmailDataSourceType, type:_STRING_, ref:"attrs/" + ZaDataSource.A_zmailDataSourceType},
+    	{id:ZaDataSource.A_zmailGalType, type:_STRING_, ref:"attrs/" + ZaDataSource.A_zmailGalType},
+    	{id:ZaDataSource.A_zmailGalSyncLdapURL, type:_LIST_,  listItem:{type:_SHORT_URL_},  ref:"attrs/" + ZaDataSource.A_zmailGalSyncLdapURL},
+    	{id:ZaDataSource.A_zmailGalSyncLdapFilter, type:_STRING_, ref:"attrs/" + ZaDataSource.A_zmailGalSyncLdapFilter,required:true},
+    	{id:ZaDataSource.A_zmailGalSyncInternalSearchBase, type:_STRING_, ref:"attrs/" + ZaDataSource.A_zmailGalSyncInternalSearchBase},
+		{id:ZaDataSource.A_zmailGalSyncLdapBindDn, type:_ENUM_, choices:ZaModel.BOOLEAN_CHOICES, ref:"attrs/" + ZaDataSource.A_zmailGalSyncLdapBindDn},
+		{id:ZaDataSource.A_zmailGalSyncLdapBindPassword, type:_STRING_, ref:"attrs/" + ZaDataSource.A_zmailGalSyncLdapBindPassword},
+    	{id:ZaDataSource.A_zmailGalSyncLdapStartTlsEnabled, type:_ENUM_, choices:ZaModel.BOOLEAN_CHOICES, ref:"attrs/" + ZaDataSource.A_zmailGalSyncLdapStartTlsEnabled},
+    	{id:ZaDataSource.A_zmailGalSyncLdapAuthMech, type:_STRING_, ref:"attrs/" + ZaDataSource.A_zmailGalSyncLdapAuthMech},
+    	{id:ZaDataSource.A_zmailDataSourcePollingInterval,type:_MLIFETIME_, ref:"attrs/" + ZaDataSource.A_zmailDataSourcePollingInterval}
     ]
 };

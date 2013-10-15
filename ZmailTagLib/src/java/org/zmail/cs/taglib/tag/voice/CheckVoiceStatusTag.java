@@ -13,12 +13,12 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.taglib.tag.voice;
+package org.zmail.cs.taglib.tag.voice;
 
-import com.zimbra.cs.taglib.tag.ZimbraSimpleTag;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZPhoneAccount;
-import com.zimbra.common.service.ServiceException;
+import org.zmail.cs.taglib.tag.ZmailSimpleTag;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZPhoneAccount;
+import org.zmail.common.service.ServiceException;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
@@ -26,7 +26,7 @@ import javax.servlet.jsp.JspTagException;
 import java.io.IOException;
 import java.util.List;
 
-public class CheckVoiceStatusTag extends ZimbraSimpleTag {
+public class CheckVoiceStatusTag extends ZmailSimpleTag {
 	private String mVar;
 
 	public void setVar(String var) { mVar = var; }

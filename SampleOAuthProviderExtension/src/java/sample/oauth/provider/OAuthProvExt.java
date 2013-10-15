@@ -32,14 +32,14 @@
 
 package sample.oauth.provider;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.extension.ExtensionDispatcherServlet;
-import com.zimbra.cs.extension.ZimbraExtension;
-import com.zimbra.cs.service.AuthProvider;
-import com.zimbra.soap.SoapServlet;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.extension.ExtensionDispatcherServlet;
+import org.zmail.cs.extension.ZmailExtension;
+import org.zmail.cs.service.AuthProvider;
+import org.zmail.soap.SoapServlet;
 import sample.oauth.provider.soap.OAuthProviderService;
 
-public class OAuthProvExt implements ZimbraExtension {
+public class OAuthProvExt implements ZmailExtension {
 
 	static {
     }
@@ -49,7 +49,7 @@ public class OAuthProvExt implements ZimbraExtension {
     	ExtensionDispatcherServlet.register(this, new AuthorizationHandler());
     	ExtensionDispatcherServlet.register(this, new AccessTokenHandler());
     	
-    	AuthProvider.register(new ZimbraAuthProviderForOAuth());
+    	AuthProvider.register(new ZmailAuthProviderForOAuth());
     	AuthProvider.refresh();
 
         SoapServlet.addService("SoapServlet", new OAuthProviderService());

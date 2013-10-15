@@ -15,7 +15,7 @@
 
 /**
  * SpreadSheet formulae parser & interpreter.
- * @author Mihai Bazon, <mihai@zimbra.com>
+ * @author Mihai Bazon, <mihai@zmail.com>
  *
  * @param model - A ZmSpreadSheetModel to pick cell values from
  * @param formula - the formula string, without the preceding equal sign
@@ -408,7 +408,7 @@ ZmSpreadSheetFormulae.DEF = function(name, n_args, callback, help) {
 
         // easter egg
         ZmSpreadSheetFormulae.DEF("WHO_are_YOU?", 0, function() {
-                return "http://www.zimbra.com/";
+                return "http://www.zmail.com/";
         });
 }
 

@@ -12,11 +12,11 @@
 # basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
 # ***** END LICENSE BLOCK *****
 # 
-package Zimbra::SOAP::XmlDoc;
+package Zmail::SOAP::XmlDoc;
 
 use strict;
 use warnings;
-use Zimbra::SOAP::XmlElement;
+use Zmail::SOAP::XmlElement;
 
 BEGIN {
     use Exporter   ();
@@ -51,7 +51,7 @@ sub start {
     my $self = shift;
     my $name = shift;
     my $ns = shift;
-    my $element = new Zimbra::SOAP::XmlElement($name, $ns);
+    my $element = new Zmail::SOAP::XmlElement($name, $ns);
     if (@_) {
 	my $attrs = shift;
 	$element->attrs($attrs) if defined($attrs);

@@ -13,18 +13,18 @@
  * ***** END LICENSE BLOCK *****
  */
 
-Com_Zimbra_Ysearch = function() {
+Com_Zmail_Ysearch = function() {
 
 };
-Com_Zimbra_Ysearch.prototype = new ZmZimletBase;
-Com_Zimbra_Ysearch.prototype.constructor = Com_Zimbra_Ysearch;
+Com_Zmail_Ysearch.prototype = new ZmZimletBase;
+Com_Zmail_Ysearch.prototype.constructor = Com_Zmail_Ysearch;
 
-Com_Zimbra_Ysearch.prototype.toString =
+Com_Zmail_Ysearch.prototype.toString =
 function() {
-	return "Com_Zimbra_Ysearch";
+	return "Com_Zmail_Ysearch";
 };
 
-Com_Zimbra_Ysearch.prototype.init =
+Com_Zmail_Ysearch.prototype.init =
 function() {
 	if (!appCtxt.get(ZmSetting.WEB_SEARCH_ENABLED)) {
 		return;
@@ -122,7 +122,7 @@ function() {
 		
 		//create the autocomplete for Yahoo search
 		window.skin.searchWebAutocomplete = new function() {
-		    this.oACDS = new YAHOO.widget.DS_ScriptNode("http://search.yahooapis.com/WebSearchService/V1/webSearch?appid=zimbra&output=json&results=10&fr=zim-maila", ["ResultSet.Result", "Title", "Url", "ClickUrl"]);
+		    this.oACDS = new YAHOO.widget.DS_ScriptNode("http://search.yahooapis.com/WebSearchService/V1/webSearch?appid=zmail&output=json&results=10&fr=zim-maila", ["ResultSet.Result", "Title", "Url", "ClickUrl"]);
 		
 			this.oAutoComp = new YAHOO.widget.AutoComplete("skin_search_web_input","search_web_autocomplete_container", this.oACDS);
 			this.oAutoComp.animVert = false;
@@ -161,13 +161,13 @@ function() {
 	}
 };
 
-// Called by the Zimbra framework when the panel item was double clicked
-Com_Zimbra_Ysearch.prototype.doubleClicked = function() {
+// Called by the Zmail framework when the panel item was double clicked
+Com_Zmail_Ysearch.prototype.doubleClicked = function() {
 	this.singleClicked();
 };
 
-// Called by the Zimbra framework when the panel item was clicked
-Com_Zimbra_Ysearch.prototype.singleClicked = function() {
+// Called by the Zmail framework when the panel item was clicked
+Com_Zmail_Ysearch.prototype.singleClicked = function() {
 	//open a new window with the search if web searching is disabled or the search pane is disabled
 	if (!appCtxt.get(ZmSetting.WEB_SEARCH_ENABLED) || !this._settingPane) {
 		var searchUrl = ZmMsg["ysearchURL"];
@@ -199,7 +199,7 @@ Com_Zimbra_Ysearch.prototype.singleClicked = function() {
 	}
 };
 
-Com_Zimbra_Ysearch.prototype.menuItemSelected =
+Com_Zmail_Ysearch.prototype.menuItemSelected =
 function(itemId) {
 	if (itemId == "prefs") {
 		this.createPropertyEditor();
@@ -207,7 +207,7 @@ function(itemId) {
 };
 
 //Finds x,y position of the object on the page
-Com_Zimbra_Ysearch.prototype._findPos =
+Com_Zmail_Ysearch.prototype._findPos =
 function(obj) {
 	var curleft = curtop = 0;
 	if (obj.offsetParent) {
@@ -219,7 +219,7 @@ function(obj) {
 	}
 };
 
-Com_Zimbra_Ysearch.prototype._loadObject = function(file){
+Com_Zmail_Ysearch.prototype._loadObject = function(file){
 	var fileref;
 	if (file.indexOf(".js")!=-1){ //If object is a js file
 		fileref=document.createElement('script');

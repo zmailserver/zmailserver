@@ -103,10 +103,10 @@ function onSetStartPage()
 <p>GAL is configured on a per-domain basis. &#160;The GAL Configuration Wizard is used to configure the GAL attributes. Select one of the following GAL mode configurations:</p>
 <ul style="list-style: disc;">
 <li class="p">
-<p><span class="attribute">Internal</span>. The Zimbra LDAP server is used for GAL directory lookups.</p>
+<p><span class="attribute">Internal</span>. The Zmail LDAP server is used for GAL directory lookups.</p>
 </li>
 <li class="p">
-<p><span class="attribute">External</span>. External directory servers are used for GAL directory lookups. &#160;You can configure multiple external LDAP hosts for GAL. All other directory services use the Zimbra LDAP service (configuration, mail routing, etc.) &#160;&#160;When you configure the external GAL mode, you can configure GAL search and GAL sync separately, to configure different search settings and sync settings.</p>
+<p><span class="attribute">External</span>. External directory servers are used for GAL directory lookups. &#160;You can configure multiple external LDAP hosts for GAL. All other directory services use the Zmail LDAP service (configuration, mail routing, etc.) &#160;&#160;When you configure the external GAL mode, you can configure GAL search and GAL sync separately, to configure different search settings and sync settings.</p>
 </li>
 <li class="p">
 <p><span class="attribute">Both</span>. Internal and external directory servers are used for GAL lookups.</p>
@@ -137,10 +137,10 @@ function onSetStartPage()
 </li>
 </ul>
 <p style="margin-left: 40px;">The following is an example of the filter string. Syntax "%s" represents the string the user types.</p>
-<p style="margin-left: 40px;"><span class="code" style="font-size: 11pt;"><font size="3" style="font-size:11pt;">(&amp;(|( cn=*%s*)( sn=*%s*)( gn=*%s*)( mail=*%s*)( zimbraMailDeliveryAddress=*%s*)<br />
-( zimbraMailAlias=*%s*)( zimbraMailAddress=*%s*))<br />
-(|( objectclass=zimbraAccount)( objectclass=zimbraDistributionList)))</font></span> &#160;&#160;</p>
-<p style="margin-left: 40px;">This filter example, combines the basic search filters using the Boolean operation <span style="font-weight: bold;">OR</span> to first search the various attributes ( cn, gn, etc.), and then verifies that the entry matched is either a Zimbra account or distribution list.</p>
+<p style="margin-left: 40px;"><span class="code" style="font-size: 11pt;"><font size="3" style="font-size:11pt;">(&amp;(|( cn=*%s*)( sn=*%s*)( gn=*%s*)( mail=*%s*)( zmailMailDeliveryAddress=*%s*)<br />
+( zmailMailAlias=*%s*)( zmailMailAddress=*%s*))<br />
+(|( objectclass=zmailAccount)( objectclass=zmailDistributionList)))</font></span> &#160;&#160;</p>
+<p style="margin-left: 40px;">This filter example, combines the basic search filters using the Boolean operation <span style="font-weight: bold;">OR</span> to first search the various attributes ( cn, gn, etc.), and then verifies that the entry matched is either a Zmail account or distribution list.</p>
 
 <table style="vertical-align: top; margin-left: 60px; border-bottom-style: Solid; border-top-style: Solid; border-top-width: 3px; border-bottom-width: 3px;" cellspacing="0" width="82.842%">
 <col style="width: 36.214%;" />
@@ -187,42 +187,42 @@ function onSetStartPage()
 </tr>
 <tr style="vertical-align: top;">
 <td style="width: 36.214%; padding-right: 10px; padding-left: 10px; border-bottom-style: Solid; border-bottom-width: 1px;">
-<p>zimbraMailDeliveryAddress=*%s*</p>
+<p>zmailMailDeliveryAddress=*%s*</p>
 </td>
 <td style="width: 63.786%; padding-right: 10px; padding-left: 10px; border-bottom-style: Solid; border-bottom-width: 1px;">
-<p>Entries with a Zimbra email address</p>
+<p>Entries with a Zmail email address</p>
 </td>
 </tr>
 <tr style="vertical-align: top;">
 <td style="width: 36.214%; padding-right: 10px; padding-left: 10px; border-bottom-style: Solid; border-bottom-width: 1px;">
-<p>zimbraMailAlias=*%s*</p>
+<p>zmailMailAlias=*%s*</p>
 </td>
 <td style="width: 63.786%; padding-right: 10px; padding-left: 10px; border-bottom-style: Solid; border-bottom-width: 1px;">
-<p>Entry is a Zimbra alias</p>
+<p>Entry is a Zmail alias</p>
 </td>
 </tr>
 <tr style="vertical-align: top;">
 <td style="width: 36.214%; padding-right: 10px; padding-left: 10px; border-bottom-style: Solid; border-bottom-width: 1px;">
-<p>zimbraMailAddress=*%s*</p>
+<p>zmailMailAddress=*%s*</p>
 </td>
 <td style="width: 63.786%; padding-right: 10px; padding-left: 10px; border-bottom-style: Solid; border-bottom-width: 1px;">
-<p>Entries with a Zimbra distribution list address</p>
+<p>Entries with a Zmail distribution list address</p>
 </td>
 </tr>
 <tr style="vertical-align: top;">
 <td style="width: 36.214%; padding-right: 10px; padding-left: 10px; border-bottom-style: Solid; border-bottom-width: 1px;">
-<p>objectclass=zimbraAccount</p>
+<p>objectclass=zmailAccount</p>
 </td>
 <td style="width: 63.786%; padding-right: 10px; padding-left: 10px; border-bottom-style: Solid; border-bottom-width: 1px;">
-<p>The matches found exist as a Zimbra account.</p>
+<p>The matches found exist as a Zmail account.</p>
 </td>
 </tr>
 <tr style="vertical-align: top;">
 <td style="width: 36.214%; padding-right: 10px; padding-left: 10px;">
-<p>objectclass=zimbraDistributionList</p>
+<p>objectclass=zmailDistributionList</p>
 </td>
 <td style="width: 63.786%; padding-right: 10px; padding-left: 10px;">
-<p>The matches found exist as a Zimbra distribution list.</p>
+<p>The matches found exist as a Zmail distribution list.</p>
 </td>
 </tr>
 </table>

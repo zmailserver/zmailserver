@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.ui;
+package org.zmail.qa.selenium.framework.ui;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import com.zimbra.qa.selenium.framework.items.IItem;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.items.IItem;
+import org.zmail.qa.selenium.framework.util.HarnessException;
 
 
 /**
- * This class defines an abstract Zimbra Admin Console Application "Wizard"
+ * This class defines an abstract Zmail Admin Console Application "Wizard"
  * 
  * Examples: "New Account" Wizard, "New COS" Wizard
  * 
@@ -40,7 +40,7 @@ import com.zimbra.qa.selenium.framework.util.HarnessException;
  * to create an object.
  * <p>
  * 
- * @see <a href="http://wiki.zimbra.com/wiki/Testing:_Selenium:_ZimbraSelenium_Overview#Folder_Page">Create a new folder</a>
+ * @see <a href="http://wiki.zmail.com/wiki/Testing:_Selenium:_ZmailSelenium_Overview#Folder_Page">Create a new folder</a>
  * @author Matt Rhoades
  *
  */

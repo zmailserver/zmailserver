@@ -18,19 +18,19 @@
  * @class
  * Performs book search and shows "hover" information for ISBN numbers in mail and appointments.
  *
- * @author Raja Rao DV (rrao@zimbra.com) - Rewrote most of the Zimlet
+ * @author Raja Rao DV (rrao@zmail.com) - Rewrote most of the Zimlet
  * @author Kevin Henrikson - Original Author
  */
-function Com_Zimbra_Amazon_HandlerObject() {
+function Com_Zmail_Amazon_HandlerObject() {
 }
 
-Com_Zimbra_Amazon_HandlerObject.prototype = new ZmZimletBase();
-Com_Zimbra_Amazon_HandlerObject.prototype.constructor = Com_Zimbra_Amazon_HandlerObject;
+Com_Zmail_Amazon_HandlerObject.prototype = new ZmZimletBase();
+Com_Zmail_Amazon_HandlerObject.prototype.constructor = Com_Zmail_Amazon_HandlerObject;
 
 /**
  * Simplify Zimlet handler name
  */
-var AmazonZimlet = Com_Zimbra_Amazon_HandlerObject;
+var AmazonZimlet = Com_Zmail_Amazon_HandlerObject;
 
 /**
  * Defines the "alert on checkbox" element.
@@ -38,7 +38,7 @@ var AmazonZimlet = Com_Zimbra_Amazon_HandlerObject;
 AmazonZimlet.ELEMENT_RESULTS_DIV_ID = "amznZimlet_bookSearchResultsDiv";
 
 /**
- * This method is called by Zimbra Framework when the tool tip is popped-up.
+ * This method is called by Zmail Framework when the tool tip is popped-up.
  *
  * For more details see {@link ZmZimletBase}
  */

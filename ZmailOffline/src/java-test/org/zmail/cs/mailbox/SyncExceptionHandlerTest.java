@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -24,9 +24,9 @@ import junit.framework.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.offline.OfflineLC;
-import com.zimbra.cs.offline.util.RecoverableException;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.offline.OfflineLC;
+import org.zmail.cs.offline.util.RecoverableException;
 
 
 public class SyncExceptionHandlerTest {
@@ -34,8 +34,8 @@ public class SyncExceptionHandlerTest {
     @BeforeClass
     public static void init() throws Exception {
 //        MockProvisioning prov = new MockProvisioning();
-//        prov.createAccount("test@zimbra.com", "secret",
-//                Collections.<String, Object>singletonMap(Provisioning.A_zimbraId, "0-0-0"));
+//        prov.createAccount("test@zmail.com", "secret",
+//                Collections.<String, Object>singletonMap(Provisioning.A_zmailId, "0-0-0"));
 //        Provisioning.setInstance(prov);
 //        MailboxManager.setInstance(new MockOfflineMailboxManager());
         //TODO: eventually uncomment once we have hsqldb setup correctly for offline

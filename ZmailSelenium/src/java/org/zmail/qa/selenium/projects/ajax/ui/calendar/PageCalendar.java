@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.ui.calendar;
+package org.zmail.qa.selenium.projects.ajax.ui.calendar;
 
 import java.awt.event.KeyEvent;
 import java.util.*;
@@ -22,13 +22,13 @@ import java.util.*;
 import org.apache.commons.lang.StringUtils;
 import org.seleniumhq.jetty7.util.log.Log;
 
-import com.zimbra.qa.selenium.framework.core.ClientSessionFactory;
-import com.zimbra.qa.selenium.framework.items.AppointmentItem;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.framework.util.staf.Stafpostqueue;
-import com.zimbra.qa.selenium.projects.ajax.ui.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.DialogCreateFolder;
+import org.zmail.qa.selenium.framework.core.ClientSessionFactory;
+import org.zmail.qa.selenium.framework.items.AppointmentItem;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.staf.Stafpostqueue;
+import org.zmail.qa.selenium.projects.ajax.ui.*;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.DialogCreateFolder;
 
 
 @SuppressWarnings("unused")
@@ -1977,7 +1977,7 @@ public class PageCalendar extends AbsTab {
 	public void zCreateTag(AppAjaxClient app, String tagName, int tagColor) throws HarnessException {
 		
 		app.zGetActiveAccount().soapSend(
-				"<CreateTagRequest xmlns='urn:zimbraMail'>" + 
+				"<CreateTagRequest xmlns='urn:zmailMail'>" + 
 					"<tag name='" + tagName + "' color='" + tagColor + "'/>" + 
 				"</CreateTagRequest>");
 	}

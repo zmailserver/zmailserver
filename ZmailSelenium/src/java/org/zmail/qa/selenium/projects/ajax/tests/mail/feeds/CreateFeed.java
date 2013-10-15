@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.feeds;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.feeds;
 
 import java.net.*;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.DialogCreateFolder;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.DialogCreateFolder;
 
 public class CreateFeed extends PrefGroupMailByMessageTest {
 
@@ -40,10 +40,10 @@ public class CreateFeed extends PrefGroupMailByMessageTest {
 			groups = { "functional" })
 			public void CreateFeed_01() throws HarnessException, MalformedURLException {
 
-		String foldername = "folder" + ZimbraSeleniumProperties.getUniqueString();
+		String foldername = "folder" + ZmailSeleniumProperties.getUniqueString();
 
 		// feed.rss=http://zqa-tms.eng.vmware.com/files/Service/RSS/Basic/basic.xml
-		String feed = ZimbraSeleniumProperties.getStringProperty("feed.rss");
+		String feed = ZmailSeleniumProperties.getStringProperty("feed.rss");
 
 
 		// Click on the "new folder" button

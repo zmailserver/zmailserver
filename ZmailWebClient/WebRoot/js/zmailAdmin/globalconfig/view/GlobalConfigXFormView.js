@@ -85,7 +85,7 @@ GlobalConfigXFormView.commonExtSelectionListener = function () {
 }
 
 GlobalConfigXFormView.shouldEnableRemoveAllButton = function () {
-	return (!AjxUtil.isEmpty(this.getInstanceValue(ZaGlobalConfig.A_zimbraMtaBlockedExtension)));
+	return (!AjxUtil.isEmpty(this.getInstanceValue(ZaGlobalConfig.A_zmailMtaBlockedExtension)));
 }
 
 GlobalConfigXFormView.shouldEnableRemoveButton = function () {
@@ -97,54 +97,54 @@ GlobalConfigXFormView.shouldEnableAddButton = function () {
 }
 
 GlobalConfigXFormView.shouldEnableAddAllButton = function () {
-	return (!AjxUtil.isEmpty(this.getInstanceValue(ZaGlobalConfig.A_zimbraMtaCommonBlockedExtension)));
+	return (!AjxUtil.isEmpty(this.getInstanceValue(ZaGlobalConfig.A_zmailMtaCommonBlockedExtension)));
 }
 
 GlobalConfigXFormView.removeExt = function () {
-	var blockedExtArray = this.getInstanceValue(ZaGlobalConfig.A_zimbraMtaBlockedExtension);
+	var blockedExtArray = this.getInstanceValue(ZaGlobalConfig.A_zmailMtaBlockedExtension);
 	var selectedExtArray = this.getInstanceValue(ZaGlobalConfig.A2_blocked_extension_selection);
 	var newBlockedExtArray = AjxUtil.arraySubstract(blockedExtArray,selectedExtArray);
-	this.setInstanceValue(newBlockedExtArray,ZaGlobalConfig.A_zimbraMtaBlockedExtension);
+	this.setInstanceValue(newBlockedExtArray,ZaGlobalConfig.A_zmailMtaBlockedExtension);
 	this.getForm().parent.setDirty(true);	
 }
 
 GlobalConfigXFormView.removeAllExt = function () {
-	this.setInstanceValue([],ZaGlobalConfig.A_zimbraMtaBlockedExtension);
+	this.setInstanceValue([],ZaGlobalConfig.A_zmailMtaBlockedExtension);
 	this.setInstanceValue([],ZaGlobalConfig.A2_blocked_extension_selection);
 	this.getForm().parent.setDirty(true);	
 }
 
 GlobalConfigXFormView.addCommonExt = function () {
-	var commonExtArr = this.getInstanceValue(ZaGlobalConfig.A_zimbraMtaBlockedExtension);
+	var commonExtArr = this.getInstanceValue(ZaGlobalConfig.A_zmailMtaBlockedExtension);
 	var newExtArr = this.getInstanceValue(ZaGlobalConfig.A2_common_extension_selection);
 	commonExtArr = AjxUtil.isEmpty(commonExtArr) ? [] : commonExtArr;
 	newExtArr = AjxUtil.isEmpty(newExtArr) ? [] : newExtArr;	
-	this.setInstanceValue(AjxUtil.mergeArrays(commonExtArr,newExtArr),ZaGlobalConfig.A_zimbraMtaBlockedExtension);	
+	this.setInstanceValue(AjxUtil.mergeArrays(commonExtArr,newExtArr),ZaGlobalConfig.A_zmailMtaBlockedExtension);	
 	this.getForm().parent.setDirty(true);	
 }
 
 GlobalConfigXFormView.addAllCommonExt = function () {
-	var commonExtArr = this.getInstanceValue(ZaGlobalConfig.A_zimbraMtaBlockedExtension);
-	var newExtArr = this.getInstanceValue(ZaGlobalConfig.A_zimbraMtaCommonBlockedExtension);
+	var commonExtArr = this.getInstanceValue(ZaGlobalConfig.A_zmailMtaBlockedExtension);
+	var newExtArr = this.getInstanceValue(ZaGlobalConfig.A_zmailMtaCommonBlockedExtension);
 	commonExtArr = AjxUtil.isEmpty(commonExtArr) ? [] : commonExtArr;
 	newExtArr = AjxUtil.isEmpty(newExtArr) ? [] : newExtArr;
-	this.setInstanceValue(AjxUtil.mergeArrays(commonExtArr,newExtArr),ZaGlobalConfig.A_zimbraMtaBlockedExtension);
+	this.setInstanceValue(AjxUtil.mergeArrays(commonExtArr,newExtArr),ZaGlobalConfig.A_zmailMtaBlockedExtension);
 	this.getForm().parent.setDirty(true);			
 }
 
 GlobalConfigXFormView.addNewExt = function() {
-	var extStr = this.getInstanceValue(ZaGlobalConfig.A_zimbraNewExtension);
+	var extStr = this.getInstanceValue(ZaGlobalConfig.A_zmailNewExtension);
 	if(AjxUtil.isEmpty(extStr))
 		return;
 		
-	var commonExtArr = this.getInstanceValue(ZaGlobalConfig.A_zimbraMtaBlockedExtension);
+	var commonExtArr = this.getInstanceValue(ZaGlobalConfig.A_zmailMtaBlockedExtension);
 	commonExtArr = AjxUtil.isEmpty(commonExtArr) ? [] : commonExtArr;	
 	var newExtArr = extStr.split(/[\s,;]+/);
 	if(AjxUtil.isEmpty(newExtArr))
 		return;
 	
-	this.setInstanceValue(AjxUtil.mergeArrays(commonExtArr,newExtArr),ZaGlobalConfig.A_zimbraMtaBlockedExtension);
-	this.setInstanceValue(null,ZaGlobalConfig.A_zimbraNewExtension);
+	this.setInstanceValue(AjxUtil.mergeArrays(commonExtArr,newExtArr),ZaGlobalConfig.A_zmailMtaBlockedExtension);
+	this.setInstanceValue(null,ZaGlobalConfig.A_zmailNewExtension);
 	this.getForm().parent.setDirty(true);
 }
 
@@ -317,66 +317,66 @@ GlobalConfigXFormView.updateRetentionPolicy = function (form) {
     }
 }
 
-GlobalConfigXFormView.GENERAL_TAB_ATTRS = [ZaGlobalConfig.A_zimbraMailPurgeSleepInterval, ZaGlobalConfig.A_zimbraFileUploadMaxSize, ZaGlobalConfig.A_zimbraGalMaxResults, ZaGlobalConfig.A_zimbraDefaultDomainName,ZaGlobalConfig.A_zimbraScheduledTaskNumThreads];
+GlobalConfigXFormView.GENERAL_TAB_ATTRS = [ZaGlobalConfig.A_zmailMailPurgeSleepInterval, ZaGlobalConfig.A_zmailFileUploadMaxSize, ZaGlobalConfig.A_zmailGalMaxResults, ZaGlobalConfig.A_zmailDefaultDomainName,ZaGlobalConfig.A_zmailScheduledTaskNumThreads];
 GlobalConfigXFormView.GENERAL_TAB_RIGHTS = [];
 
-GlobalConfigXFormView.ATTACHMENTS_TAB_ATTRS = [ZaGlobalConfig.A_zimbraMtaBlockedExtensionWarnRecipient, ZaGlobalConfig.A_zimbraMtaBlockedExtension,ZaGlobalConfig.A_zimbraMtaCommonBlockedExtension];
+GlobalConfigXFormView.ATTACHMENTS_TAB_ATTRS = [ZaGlobalConfig.A_zmailMtaBlockedExtensionWarnRecipient, ZaGlobalConfig.A_zmailMtaBlockedExtension,ZaGlobalConfig.A_zmailMtaCommonBlockedExtension];
 GlobalConfigXFormView.ATTACHMENTS_TAB_RIGHTS = [];
 
 GlobalConfigXFormView.MTA_TAB_ATTRS = [
-    ZaGlobalConfig.A_zimbraMtaSaslAuthEnable,
-    ZaGlobalConfig.A_zimbraMtaTlsAuthOnly,
-    ZaGlobalConfig.A_zimbraSmtpHostname,
-    ZaGlobalConfig.A_zimbraSmtpPort,
-    ZaGlobalConfig.A_zimbraMtaRelayHost,
-    ZaGlobalConfig.A_zimbraMtaFallbackRelayHost,
-    ZaGlobalConfig.A_zimbraMtaMyNetworks,
-    ZaGlobalConfig.A_zimbraMtaDnsLookupsEnabled,
-    ZaGlobalConfig.A_zimbraMilterServerEnabled,
-    ZaGlobalConfig.A_zimbraMilterBindPort
+    ZaGlobalConfig.A_zmailMtaSaslAuthEnable,
+    ZaGlobalConfig.A_zmailMtaTlsAuthOnly,
+    ZaGlobalConfig.A_zmailSmtpHostname,
+    ZaGlobalConfig.A_zmailSmtpPort,
+    ZaGlobalConfig.A_zmailMtaRelayHost,
+    ZaGlobalConfig.A_zmailMtaFallbackRelayHost,
+    ZaGlobalConfig.A_zmailMtaMyNetworks,
+    ZaGlobalConfig.A_zmailMtaDnsLookupsEnabled,
+    ZaGlobalConfig.A_zmailMilterServerEnabled,
+    ZaGlobalConfig.A_zmailMilterBindPort
 ];
 GlobalConfigXFormView.MTA_TAB_RIGHTS = [];
 
-GlobalConfigXFormView.IMAP_TAB_ATTRS = [ZaGlobalConfig.A_zimbraImapServerEnabled, ZaGlobalConfig.A_zimbraImapSSLServerEnabled, ZaGlobalConfig.A_zimbraImapCleartextLoginEnabled,
-	ZaGlobalConfig.A_zimbraImapNumThreads];
+GlobalConfigXFormView.IMAP_TAB_ATTRS = [ZaGlobalConfig.A_zmailImapServerEnabled, ZaGlobalConfig.A_zmailImapSSLServerEnabled, ZaGlobalConfig.A_zmailImapCleartextLoginEnabled,
+	ZaGlobalConfig.A_zmailImapNumThreads];
 GlobalConfigXFormView.IMAP_TAB_RIGHTS = [];
 
-GlobalConfigXFormView.POP_TAB_ATTRS = [ZaGlobalConfig.A_zimbraPop3ServerEnabled, ZaGlobalConfig.A_zimbraPop3SSLServerEnabled, ZaGlobalConfig.A_zimbraPop3CleartextLoginEnabled,
-	ZaGlobalConfig.A_zimbraPop3NumThreads];
+GlobalConfigXFormView.POP_TAB_ATTRS = [ZaGlobalConfig.A_zmailPop3ServerEnabled, ZaGlobalConfig.A_zmailPop3SSLServerEnabled, ZaGlobalConfig.A_zmailPop3CleartextLoginEnabled,
+	ZaGlobalConfig.A_zmailPop3NumThreads];
 GlobalConfigXFormView.POP_TAB_RIGHTS = [];
 
-GlobalConfigXFormView.ASAV_TAB_ATTRS = [ZaGlobalConfig.A_zimbraSpamKillPercent, ZaGlobalConfig.A_zimbraSpamTagPercent, ZaGlobalConfig.A_zimbraSpamSubjectTag,
-	ZaGlobalConfig.A_zimbraVirusDefinitionsUpdateFrequency, ZaGlobalConfig.A_zimbraVirusBlockEncryptedArchive, ZaGlobalConfig.A_zimbraVirusWarnRecipient];
+GlobalConfigXFormView.ASAV_TAB_ATTRS = [ZaGlobalConfig.A_zmailSpamKillPercent, ZaGlobalConfig.A_zmailSpamTagPercent, ZaGlobalConfig.A_zmailSpamSubjectTag,
+	ZaGlobalConfig.A_zmailVirusDefinitionsUpdateFrequency, ZaGlobalConfig.A_zmailVirusBlockEncryptedArchive, ZaGlobalConfig.A_zmailVirusWarnRecipient];
 GlobalConfigXFormView.ASAV_TAB_RIGHTS = [];
 
-GlobalConfigXFormView.INTEROP_TAB_ATTRS = [ZaGlobalConfig.A_zimbraFreebusyExchangeURL, ZaGlobalConfig.A_zimbraFreebusyExchangeAuthScheme, 
-	ZaGlobalConfig.A_zimbraFreebusyExchangeServerType, ZaGlobalConfig.A_zimbraFreebusyExchangeAuthUsername,
-	ZaGlobalConfig.A_zimbraFreebusyExchangeAuthPassword, ZaGlobalConfig.A_zimbraFreebusyExchangeUserOrg];
+GlobalConfigXFormView.INTEROP_TAB_ATTRS = [ZaGlobalConfig.A_zmailFreebusyExchangeURL, ZaGlobalConfig.A_zmailFreebusyExchangeAuthScheme, 
+	ZaGlobalConfig.A_zmailFreebusyExchangeServerType, ZaGlobalConfig.A_zmailFreebusyExchangeAuthUsername,
+	ZaGlobalConfig.A_zmailFreebusyExchangeAuthPassword, ZaGlobalConfig.A_zmailFreebusyExchangeUserOrg];
 GlobalConfigXFormView.INTEROP_TAB_RIGHTS = [ZaGlobalConfig.CHECK_EXCHANGE_AUTH_CONFIG_RIGHT];
 
 GlobalConfigXFormView.AUTH_TAB_ATTRS = [
-    ZaGlobalConfig.A_zimbraSpnegoAuthEnabled,
-    ZaGlobalConfig.A_zimbraSpnegoAuthRealm,
-    ZaGlobalConfig.A_zimbraSpnegoAuthErrorURL,
-    ZaGlobalConfig.A_zimbraWebClientLoginURL,
-    ZaGlobalConfig.A_zimbraWebClientLogoutURL,
-    ZaGlobalConfig.A_zimbraWebClientLoginURLAllowedUA,
-    ZaGlobalConfig.A_zimbraWebClientLogoutURLAllowedUA,
-    ZaGlobalConfig.A_zimbraWebClientLoginURLAllowedIP,
-    ZaGlobalConfig.A_zimbraWebClientLogoutURLAllowedIP,
-    ZaGlobalConfig.A_zimbraForceClearCookies
+    ZaGlobalConfig.A_zmailSpnegoAuthEnabled,
+    ZaGlobalConfig.A_zmailSpnegoAuthRealm,
+    ZaGlobalConfig.A_zmailSpnegoAuthErrorURL,
+    ZaGlobalConfig.A_zmailWebClientLoginURL,
+    ZaGlobalConfig.A_zmailWebClientLogoutURL,
+    ZaGlobalConfig.A_zmailWebClientLoginURLAllowedUA,
+    ZaGlobalConfig.A_zmailWebClientLogoutURLAllowedUA,
+    ZaGlobalConfig.A_zmailWebClientLoginURLAllowedIP,
+    ZaGlobalConfig.A_zmailWebClientLogoutURLAllowedIP,
+    ZaGlobalConfig.A_zmailForceClearCookies
 ];
 GlobalConfigXFormView.AUTH_TAB_RIGHTS = [];
 
-GlobalConfigXFormView.SKIN_TAB_ATTRS = [ZaGlobalConfig.A_zimbraSkinForegroundColor, ZaGlobalConfig.A_zimbraSkinBackgroundColor,ZaGlobalConfig.A_zimbraSkinSecondaryColor,
-	ZaGlobalConfig.A_zimbraSkinSelectionColor, ZaGlobalConfig.A_zimbraSkinLogoURL, ZaGlobalConfig.A_zimbraSkinLogoLoginBanner, ZaGlobalConfig.A_zimbraSkinLogoAppBanner ];
+GlobalConfigXFormView.SKIN_TAB_ATTRS = [ZaGlobalConfig.A_zmailSkinForegroundColor, ZaGlobalConfig.A_zmailSkinBackgroundColor,ZaGlobalConfig.A_zmailSkinSecondaryColor,
+	ZaGlobalConfig.A_zmailSkinSelectionColor, ZaGlobalConfig.A_zmailSkinLogoURL, ZaGlobalConfig.A_zmailSkinLogoLoginBanner, ZaGlobalConfig.A_zmailSkinLogoAppBanner ];
 
 GlobalConfigXFormView.SKIN_TAB_RIGHTS = [];
 
-GlobalConfigXFormView.BC_TAB_ATTRS = [ZaGlobalConfig.A_zimbraBasicAuthRealm,ZaGlobalConfig.A_zimbraMailAddressValidationRegex];
+GlobalConfigXFormView.BC_TAB_ATTRS = [ZaGlobalConfig.A_zmailBasicAuthRealm,ZaGlobalConfig.A_zmailMailAddressValidationRegex];
 GlobalConfigXFormView.BC_TAB_RIGHTS = [];
 
-GlobalConfigXFormView.AUTO_PROV_TAB_ATTRS = [ZaGlobalConfig.A_zimbraAutoProvNotificationBody, ZaGlobalConfig.A_zimbraAutoProvNotificationSubject];
+GlobalConfigXFormView.AUTO_PROV_TAB_ATTRS = [ZaGlobalConfig.A_zmailAutoProvNotificationBody, ZaGlobalConfig.A_zmailAutoProvNotificationSubject];
 GlobalConfigXFormView.AUTO_PROV_TAB_RIGHTS = [];
 
 GlobalConfigXFormView.RETENTION_POLICY_TAB_ATTRS = [];
@@ -440,32 +440,32 @@ GlobalConfigXFormView.myXFormModifier = function(xFormObject, entry) {
 					{type:_ZA_TOP_GROUPER_,numCols:2,colSizes: ["275px","auto"],
                         label:ZaMsg.TABT_GeneralPage ,
 						items:[
-							{ref: ZaGlobalConfig.A_zimbraGalMaxResults, type:_TEXTFIELD_,
-							  label: ZaMsg.LBL_zimbraGalMaxResults, msgName:ZaMsg.MSG_zimbraGalMaxResults, 
+							{ref: ZaGlobalConfig.A_zmailGalMaxResults, type:_TEXTFIELD_,
+							  label: ZaMsg.LBL_zmailGalMaxResults, msgName:ZaMsg.MSG_zmailGalMaxResults, 
 							  labelLocation:_LEFT_, cssClass:"admin_xform_number_input"
 							},
-						{ref:ZaGlobalConfig.A_zimbraDefaultDomainName, type:_DYNSELECT_,
+						{ref:ZaGlobalConfig.A_zmailDefaultDomainName, type:_DYNSELECT_,
 								label: ZaMsg.NAD_DefaultDomainName,
 								toolTipContent:ZaMsg.tt_StartTypingDomainName,
 								dataFetcherMethod:ZaSearch.prototype.dynSelectSearchDomains,
 								dataFetcherClass:ZaSearch,editable:true
 							},
-							{ref: ZaGlobalConfig.A_zimbraScheduledTaskNumThreads, type:_TEXTFIELD_,
-							  label: ZaMsg.NAD_zimbraScheduledTaskNumThreads, labelLocation:_LEFT_, cssClass:"admin_xform_number_input"
+							{ref: ZaGlobalConfig.A_zmailScheduledTaskNumThreads, type:_TEXTFIELD_,
+							  label: ZaMsg.NAD_zmailScheduledTaskNumThreads, labelLocation:_LEFT_, cssClass:"admin_xform_number_input"
 							},
-							{ref: ZaGlobalConfig.A_zimbraMailPurgeSleepInterval, type:_LIFETIME_,
-							  label: ZaMsg.LBL_zimbraMailPurgeSleepInterval, width: "5em"
+							{ref: ZaGlobalConfig.A_zmailMailPurgeSleepInterval, type:_LIFETIME_,
+							  label: ZaMsg.LBL_zmailMailPurgeSleepInterval, width: "5em"
 							} ,
-                          { ref: ZaGlobalConfig.A_zimbraFileUploadMaxSize, type: _TEXTFIELD_,
+                          { ref: ZaGlobalConfig.A_zmailFileUploadMaxSize, type: _TEXTFIELD_,
 								  label: ZaMsg.NAD_DOC_MaxUploadSize, labelLocation:_LEFT_, cssClass:"admin_xform_number_input"
 	  						},
 							// help URL
 							//{type: _SPACER_, height: 10},
-							{ ref: ZaGlobalConfig.A_zimbraHelpAdminURL, type: _TEXTFIELD_,
-                                                                  label: ZaMsg.Domain_zimbraHelpAdminURL, labelLocation:_LEFT_, width:200
+							{ ref: ZaGlobalConfig.A_zmailHelpAdminURL, type: _TEXTFIELD_,
+                                                                  label: ZaMsg.Domain_zmailHelpAdminURL, labelLocation:_LEFT_, width:200
                                                         },
-							{ ref: ZaGlobalConfig.A_zimbraHelpDelegatedURL, type: _TEXTFIELD_,
-                                                                  label: ZaMsg.Domain_zimbraHelpDelegatedURL, labelLocation:_LEFT_, width: 200
+							{ ref: ZaGlobalConfig.A_zmailHelpDelegatedURL, type: _TEXTFIELD_,
+                                                                  label: ZaMsg.Domain_zmailHelpDelegatedURL, labelLocation:_LEFT_, width: 200
                                                         }
                         ]
 					}
@@ -481,12 +481,12 @@ GlobalConfigXFormView.myXFormModifier = function(xFormObject, entry) {
         var case2 = 	
         {type:_ZATABCASE_, caseKey:_tab2, id:"gs_form_attachment_tab",     paddingStyle:"padding-left:15px;", width:"98%", cellpadding:2, numCols:2, colSizes: ["40%","60%"], items:[
  				{type: _GROUP_,  id:"attachment_settings", width: "98%", numCols: 2, colSpan:2, colSizes:[250, "*"], items: [
-					{ref:ZaGlobalConfig.A_zimbraAttachmentsBlocked, type: _CHECKBOX_,
+					{ref:ZaGlobalConfig.A_zmailAttachmentsBlocked, type: _CHECKBOX_,
 				  		label: ZaMsg.NAD_GlobalRemoveAllAttachments,
 				  		trueValue: "TRUE", falseValue: "FALSE"
 					},
-					{ ref: ZaGlobalConfig.A_zimbraMtaBlockedExtensionWarnRecipient, type: _CHECKBOX_,
-				  		label: ZaMsg.LBL_zimbraMtaBlockedExtensionWarnRecipient,
+					{ ref: ZaGlobalConfig.A_zmailMtaBlockedExtensionWarnRecipient, type: _CHECKBOX_,
+				  		label: ZaMsg.LBL_zmailMtaBlockedExtensionWarnRecipient,
 				  		trueValue:"TRUE", falseValue:"FALSE"
 					}					
 				]},
@@ -495,7 +495,7 @@ GlobalConfigXFormView.myXFormModifier = function(xFormObject, entry) {
 					    {type:_SPACER_, height:"10"},
         				 {type:_ZACENTER_GROUPER_, numCols:1, width: "100%", label:ZaMsg.NAD_GlobalBlockedExtensions,
 							items:[
-								{ref:ZaGlobalConfig.A_zimbraMtaBlockedExtension, type:_DWT_LIST_, height:"200", width:"98%",
+								{ref:ZaGlobalConfig.A_zmailMtaBlockedExtension, type:_DWT_LIST_, height:"200", width:"98%",
 									cssClass: "DLTarget", cssStyle:"margin-left: 5px; ",
 									onSelection:GlobalConfigXFormView.blockedExtSelectionListener
 								},
@@ -504,14 +504,14 @@ GlobalConfigXFormView.myXFormModifier = function(xFormObject, entry) {
 									items:[
 										{type:_DWT_BUTTON_, label:ZaMsg.DLXV_ButtonRemoveAll, width:120,
 											onActivate:"GlobalConfigXFormView.removeAllExt.call(this)",
-										   	enableDisableChecks:[GlobalConfigXFormView.shouldEnableRemoveAllButton,[ZaItem.hasWritePermission,ZaGlobalConfig.A_zimbraMtaBlockedExtension]],
-									   		enableDisableChangeEventSources:[ZaGlobalConfig.A_zimbraMtaBlockedExtension,ZaGlobalConfig.A_zimbraMtaBlockedExtension]
+										   	enableDisableChecks:[GlobalConfigXFormView.shouldEnableRemoveAllButton,[ZaItem.hasWritePermission,ZaGlobalConfig.A_zmailMtaBlockedExtension]],
+									   		enableDisableChangeEventSources:[ZaGlobalConfig.A_zmailMtaBlockedExtension,ZaGlobalConfig.A_zmailMtaBlockedExtension]
 										},
 										{type:_CELLSPACER_},
 										{type:_DWT_BUTTON_, label:ZaMsg.DLXV_ButtonRemove, width:120,
 										   	onActivate:"GlobalConfigXFormView.removeExt.call(this)",
-										   	enableDisableChecks:[GlobalConfigXFormView.shouldEnableRemoveButton,[ZaItem.hasWritePermission,ZaGlobalConfig.A_zimbraMtaBlockedExtension]],
-									   		enableDisableChangeEventSources:[ZaGlobalConfig.A2_blocked_extension_selection,ZaGlobalConfig.A_zimbraMtaBlockedExtension]
+										   	enableDisableChecks:[GlobalConfigXFormView.shouldEnableRemoveButton,[ZaItem.hasWritePermission,ZaGlobalConfig.A_zmailMtaBlockedExtension]],
+									   		enableDisableChangeEventSources:[ZaGlobalConfig.A2_blocked_extension_selection,ZaGlobalConfig.A_zmailMtaBlockedExtension]
 									    },
 										{type:_CELLSPACER_}
 									]
@@ -525,7 +525,7 @@ GlobalConfigXFormView.myXFormModifier = function(xFormObject, entry) {
 					    {type:_SPACER_, height:"10"},
 						{type:_ZACENTER_GROUPER_, numCols:1, width: "100%", label:ZaMsg.NAD_GlobalCommonExtensions,
 							items:[
-								{ref:ZaGlobalConfig.A_zimbraMtaCommonBlockedExtension, type:_DWT_LIST_, height:"200", width:"98%", cssClass: "DLSource",
+								{ref:ZaGlobalConfig.A_zmailMtaCommonBlockedExtension, type:_DWT_LIST_, height:"200", width:"98%", cssClass: "DLSource",
 									onSelection:GlobalConfigXFormView.commonExtSelectionListener
 								},
 							    {type:_SPACER_, height:"5"},
@@ -533,26 +533,26 @@ GlobalConfigXFormView.myXFormModifier = function(xFormObject, entry) {
 									items: [
 									   	{type:_DWT_BUTTON_, label:ZaMsg.DLXV_ButtonAddSelected, width:95,
 											onActivate:"GlobalConfigXFormView.addCommonExt.call(this)",
-											enableDisableChecks:[GlobalConfigXFormView.shouldEnableAddButton,[ZaItem.hasWritePermission,ZaGlobalConfig.A_zimbraMtaBlockedExtension]],
-											enableDisableChangeEventSources:[ZaGlobalConfig.A2_common_extension_selection,ZaGlobalConfig.A_zimbraMtaBlockedExtension]
+											enableDisableChecks:[GlobalConfigXFormView.shouldEnableAddButton,[ZaItem.hasWritePermission,ZaGlobalConfig.A_zmailMtaBlockedExtension]],
+											enableDisableChangeEventSources:[ZaGlobalConfig.A2_common_extension_selection,ZaGlobalConfig.A_zmailMtaBlockedExtension]
 										},
 									    {type:_CELLSPACER_},
 									    {type:_DWT_BUTTON_, label:ZaMsg.DLXV_ButtonAddAll, width:70,
 											onActivate:"GlobalConfigXFormView.addAllCommonExt.call(this)",
-											enableDisableChecks:[GlobalConfigXFormView.shouldEnableAddAllButton,[ZaItem.hasWritePermission,ZaGlobalConfig.A_zimbraMtaBlockedExtension]],
-											enableDisableChangeEventSources:[ZaGlobalConfig.A_zimbraMtaCommonBlockedExtension,ZaGlobalConfig.A_zimbraMtaBlockedExtension]
+											enableDisableChecks:[GlobalConfigXFormView.shouldEnableAddAllButton,[ZaItem.hasWritePermission,ZaGlobalConfig.A_zmailMtaBlockedExtension]],
+											enableDisableChangeEventSources:[ZaGlobalConfig.A_zmailMtaCommonBlockedExtension,ZaGlobalConfig.A_zmailMtaBlockedExtension]
 										},
 										{type:_CELLSPACER_},
-										{type:_TEXTFIELD_, cssStyle:"width:60px;", ref:ZaGlobalConfig.A_zimbraNewExtension,
+										{type:_TEXTFIELD_, cssStyle:"width:60px;", ref:ZaGlobalConfig.A_zmailNewExtension,
 											label:ZaMsg.NAD_Attach_NewExtension,
 											visibilityChecks:[],
-											enableDisableChecks:[[ZaItem.hasWritePermission,ZaGlobalConfig.A_zimbraMtaBlockedExtension]],
-											enableDisableChangeEventSources:[ZaGlobalConfig.A_zimbraMtaBlockedExtension]
+											enableDisableChecks:[[ZaItem.hasWritePermission,ZaGlobalConfig.A_zmailMtaBlockedExtension]],
+											enableDisableChangeEventSources:[ZaGlobalConfig.A_zmailMtaBlockedExtension]
 										},
 										{type:_DWT_BUTTON_, label:ZaMsg.NAD_Attach_AddExtension, width:70,
 											onActivate:"GlobalConfigXFormView.addNewExt.call(this)",
-											enableDisableChecks:[[XForm.checkInstanceValueNotEmty,ZaGlobalConfig.A_zimbraNewExtension],[ZaItem.hasWritePermission,ZaGlobalConfig.A_zimbraMtaBlockedExtension]],
-											enableDisableChangeEventSources:[ZaGlobalConfig.A_zimbraNewExtension,ZaGlobalConfig.A_zimbraMtaBlockedExtension]
+											enableDisableChecks:[[XForm.checkInstanceValueNotEmty,ZaGlobalConfig.A_zmailNewExtension],[ZaItem.hasWritePermission,ZaGlobalConfig.A_zmailMtaBlockedExtension]],
+											enableDisableChangeEventSources:[ZaGlobalConfig.A_zmailNewExtension,ZaGlobalConfig.A_zmailMtaBlockedExtension]
 										}
 								  	]
 							    }
@@ -573,18 +573,18 @@ GlobalConfigXFormView.myXFormModifier = function(xFormObject, entry) {
 					items: [
 						{type:_ZA_TOP_GROUPER_,label:ZaMsg.Global_MTA_AuthenticationGrp,
 							visibilityChecks:[[ZATopGrouper_XFormItem.isGroupVisible,
-								[ZaGlobalConfig.A_zimbraMtaSaslAuthEnable,
-								ZaGlobalConfig.A_zimbraMtaTlsAuthOnly]]],
-							visibilityChangeEventSources:[ZaGlobalConfig.A_zimbraMtaSaslAuthEnable,
-								ZaGlobalConfig.A_zimbraMtaTlsAuthOnly],
+								[ZaGlobalConfig.A_zmailMtaSaslAuthEnable,
+								ZaGlobalConfig.A_zmailMtaTlsAuthOnly]]],
+							visibilityChangeEventSources:[ZaGlobalConfig.A_zmailMtaSaslAuthEnable,
+								ZaGlobalConfig.A_zmailMtaTlsAuthOnly],
 							items:[
-							  	{ ref: ZaGlobalConfig.A_zimbraMtaSaslAuthEnable, type: _CHECKBOX_,
+							  	{ ref: ZaGlobalConfig.A_zmailMtaSaslAuthEnable, type: _CHECKBOX_,
 							   	  label:ZaMsg.NAD_MTA_Authentication,
 							   	  trueValue: "yes", falseValue: "no"
 						   	    },
-						   	    { ref: ZaGlobalConfig.A_zimbraMtaTlsAuthOnly, type: _CHECKBOX_,
-						  	  		enableDisableChangeEventSources:[ZaGlobalConfig.A_zimbraMtaSaslAuthEnable,ZaGlobalConfig.A_zimbraMtaTlsAuthOnly],
-						  	  		enableDisableChecks:[[ZaItem.hasWritePermission,ZaGlobalConfig.A_zimbraMtaTlsAuthOnly],[XForm.checkInstanceValue,ZaGlobalConfig.A_zimbraMtaSaslAuthEnable,"yes"]],
+						   	    { ref: ZaGlobalConfig.A_zmailMtaTlsAuthOnly, type: _CHECKBOX_,
+						  	  		enableDisableChangeEventSources:[ZaGlobalConfig.A_zmailMtaSaslAuthEnable,ZaGlobalConfig.A_zmailMtaTlsAuthOnly],
+						  	  		enableDisableChecks:[[ZaItem.hasWritePermission,ZaGlobalConfig.A_zmailMtaTlsAuthOnly],[XForm.checkInstanceValue,ZaGlobalConfig.A_zmailMtaSaslAuthEnable,"yes"]],
 
 				   	    		  label: ZaMsg.NAD_MTA_TlsAuthenticationOnly,
 						   	      trueValue: "TRUE", falseValue: "FALSE"
@@ -600,51 +600,51 @@ GlobalConfigXFormView.myXFormModifier = function(xFormObject, entry) {
                                 [
                                     ZATopGrouper_XFormItem.isGroupVisible,
                                     [
-                                        ZaGlobalConfig.A_zimbraSmtpHostname,
-                                        ZaGlobalConfig.A_zimbraSmtpPort,
-                                        ZaGlobalConfig.A_zimbraMtaRelayHost,
-                                        ZaGlobalConfig.A_zimbraMtaFallbackRelayHost,
-                                        ZaGlobalConfig.A_zimbraDNSCheckHostname,
-                                        ZaGlobalConfig.A_zimbraMtaMyNetworks,
-                                        ZaGlobalConfig.A_zimbraMtaDnsLookupsEnabled
+                                        ZaGlobalConfig.A_zmailSmtpHostname,
+                                        ZaGlobalConfig.A_zmailSmtpPort,
+                                        ZaGlobalConfig.A_zmailMtaRelayHost,
+                                        ZaGlobalConfig.A_zmailMtaFallbackRelayHost,
+                                        ZaGlobalConfig.A_zmailDNSCheckHostname,
+                                        ZaGlobalConfig.A_zmailMtaMyNetworks,
+                                        ZaGlobalConfig.A_zmailMtaDnsLookupsEnabled
                                     ]
                                 ]
                             ],
                             visibilityChangeEventSources: [
-                                ZaGlobalConfig.A_zimbraSmtpHostname,
-                                ZaGlobalConfig.A_zimbraSmtpPort,
-                                ZaGlobalConfig.A_zimbraMtaRelayHost,
-                                ZaGlobalConfig.A_zimbraMtaFallbackRelayHost,
-                                ZaGlobalConfig.A_zimbraDNSCheckHostname,
-                                ZaGlobalConfig.A_zimbraMtaMyNetworks,
-                                ZaGlobalConfig.A_zimbraMtaDnsLookupsEnabled
+                                ZaGlobalConfig.A_zmailSmtpHostname,
+                                ZaGlobalConfig.A_zmailSmtpPort,
+                                ZaGlobalConfig.A_zmailMtaRelayHost,
+                                ZaGlobalConfig.A_zmailMtaFallbackRelayHost,
+                                ZaGlobalConfig.A_zmailDNSCheckHostname,
+                                ZaGlobalConfig.A_zmailMtaMyNetworks,
+                                ZaGlobalConfig.A_zmailMtaDnsLookupsEnabled
                             ],
 							items:[
-								{ ref: ZaGlobalConfig.A_zimbraSmtpHostname, type: _REPEAT_,
-						  	  		label: ZaMsg.LBL_zimbraSmtpHostname,
+								{ ref: ZaGlobalConfig.A_zmailSmtpHostname, type: _REPEAT_,
+						  	  		label: ZaMsg.LBL_zmailSmtpHostname,
 							  		labelLocation:_LEFT_,
 							  		align:_LEFT_,
 							  		repeatInstance:"",
 									showAddButton:true, 
 									showRemoveButton:true, 
 									showAddOnNextRow:true,
-									addButtonLabel:ZaMsg.Add_zimbraSmtpHostname, 
-									removeButtonLabel:ZaMsg.Remove_zimbraSmtpHostname,
+									addButtonLabel:ZaMsg.Add_zmailSmtpHostname, 
+									removeButtonLabel:ZaMsg.Remove_zmailSmtpHostname,
 									removeButtonCSSStyle: "margin-left: 50px",
                                     visibilityChecks:[ZaItem.hasReadPermission],
 							  		items: [
 										{ ref:".", type: _TEXTFIELD_, label:null,labelLocation:_NONE_,
-								  			toolTipContent: ZaMsg.tt_zimbraSmtpHostname,
+								  			toolTipContent: ZaMsg.tt_zmailSmtpHostname,
                                             visibilityChecks:[ZaItem.hasReadPermission]
 										}
 							  		]
 						  		},
-								{ ref: ZaGlobalConfig.A_zimbraSmtpPort, type: _OUTPUT_,
+								{ ref: ZaGlobalConfig.A_zmailSmtpPort, type: _OUTPUT_,
 								  label: ZaMsg.NAD_MTA_WebMailPort,
                                   visibilityChecks:[ZaItem.hasReadPermission]
 							    },
 								{
-                                    ref: ZaGlobalConfig.A_zimbraMtaRelayHost,
+                                    ref: ZaGlobalConfig.A_zmailMtaRelayHost,
                                     label: ZaMsg.NAD_MTA_RelayMTA,
                                     labelLocation: _LEFT_,
                                     type: _HOSTPORT_,
@@ -654,7 +654,7 @@ GlobalConfigXFormView.myXFormModifier = function(xFormObject, entry) {
                                     onMouseout: "ZaController.hideTooltip"
                                 },
                                 {
-                                    ref: ZaGlobalConfig.A_zimbraMtaFallbackRelayHost,
+                                    ref: ZaGlobalConfig.A_zmailMtaFallbackRelayHost,
                                     label: ZaMsg.NAD_MTA_FallbackRelay,
                                     labelLocation: _LEFT_,
                                     type: _HOSTPORT_,
@@ -670,17 +670,17 @@ GlobalConfigXFormView.myXFormModifier = function(xFormObject, entry) {
 									content: ZaMsg.Domain_InboundSMTPNote,
 									colSpan:"*"
 								},
-								{ ref: ZaGlobalConfig.A_zimbraDNSCheckHostname, type: _TEXTFIELD_,
-								  label:ZaMsg.Domain_zimbraDNSCheckHostname,
-								  toolTipContent: ZaMsg.Domain_zimbraDNSCheckHostname
+								{ ref: ZaGlobalConfig.A_zmailDNSCheckHostname, type: _TEXTFIELD_,
+								  label:ZaMsg.Domain_zmailDNSCheckHostname,
+								  toolTipContent: ZaMsg.Domain_zmailDNSCheckHostname
 								},
-							  	                                                                							      { ref: ZaGlobalConfig.A_zimbraMtaMyNetworks, type: _TEXTAREA_,
+							  	                                                                							      { ref: ZaGlobalConfig.A_zmailMtaMyNetworks, type: _TEXTAREA_,
                                                                   label:ZaMsg.NAD_MTA_MyNetworks,
 								  msgName:ZaMsg.NAD_MTA_MyNetworks,
                                                                   width:250
                                                                 },
 
-								{ ref: ZaGlobalConfig.A_zimbraMtaDnsLookupsEnabled, type: _CHECKBOX_,
+								{ ref: ZaGlobalConfig.A_zmailMtaDnsLookupsEnabled, type: _CHECKBOX_,
 							  	  label: ZaMsg.NAD_MTA_DnsLookups,
 							  	  trueValue: "TRUE", falseValue: "FALSE"
 							  	}
@@ -689,16 +689,16 @@ GlobalConfigXFormView.myXFormModifier = function(xFormObject, entry) {
 					       
 					 	{type:_ZA_TOP_GROUPER_,label:ZaMsg.Global_MTA_MilterServer,
                                                         visibilityChecks:[[ZATopGrouper_XFormItem.isGroupVisible,
-                                                                [ZaGlobalConfig.A_zimbraMilterBindPort,
-                                                                ZaGlobalConfig.A_zimbraMilterServerEnabled]]],
-                                                        visibilityChangeEventSources:[ZaGlobalConfig.A_zimbraMilterBindPort,
-                                                                ZaGlobalConfig.A_zimbraMilterServerEnabled
+                                                                [ZaGlobalConfig.A_zmailMilterBindPort,
+                                                                ZaGlobalConfig.A_zmailMilterServerEnabled]]],
+                                                        visibilityChangeEventSources:[ZaGlobalConfig.A_zmailMilterBindPort,
+                                                                ZaGlobalConfig.A_zmailMilterServerEnabled
                                                         ],
                                                         items:[
-                                                                { ref: ZaGlobalConfig.A_zimbraMilterBindPort, type: _OUTPUT_,
+                                                                { ref: ZaGlobalConfig.A_zmailMilterBindPort, type: _OUTPUT_,
                                                                   label: ZaMsg.NAD_MTA_MilterBindPort
                                                             	},
-                                                                { ref: ZaGlobalConfig.A_zimbraMilterServerEnabled, type: _CHECKBOX_,
+                                                                { ref: ZaGlobalConfig.A_zmailMilterServerEnabled, type: _CHECKBOX_,
                                                                         label: ZaMsg.NAD_MTA_MilterServerEnabled, trueValue: "TRUE", falseValue: "FALSE"
                     						}
                                                         ]
@@ -706,16 +706,16 @@ GlobalConfigXFormView.myXFormModifier = function(xFormObject, entry) {
 
 						{type:_ZA_TOP_GROUPER_,label:ZaMsg.Global_MTA_Messages,
                                                         visibilityChecks:[[ZATopGrouper_XFormItem.isGroupVisible,
-                                                                [ZaGlobalConfig.A_zimbraMtaMaxMessageSize,
-                                                                ZaGlobalConfig.A_zimbraSmtpSendAddOriginatingIP]]],
-                                                        visibilityChangeEventSources:[ZaGlobalConfig.A_zimbraMtaMaxMessageSize,
-								ZaGlobalConfig.A_zimbraSmtpSendAddOriginatingIP
+                                                                [ZaGlobalConfig.A_zmailMtaMaxMessageSize,
+                                                                ZaGlobalConfig.A_zmailSmtpSendAddOriginatingIP]]],
+                                                        visibilityChangeEventSources:[ZaGlobalConfig.A_zmailMtaMaxMessageSize,
+								ZaGlobalConfig.A_zmailSmtpSendAddOriginatingIP
                                                         ],
 							items:[
-								{ ref: ZaGlobalConfig.A_zimbraMtaMaxMessageSize, type: _TEXTFIELD_,
+								{ ref: ZaGlobalConfig.A_zmailMtaMaxMessageSize, type: _TEXTFIELD_,
 								  label: ZaMsg.NAD_MTA_MaxMsgSize, width: "6em"
 		  						},
-	  							{ ref: ZaGlobalConfig.A_zimbraSmtpSendAddOriginatingIP, type: _CHECKBOX_,
+	  							{ ref: ZaGlobalConfig.A_zmailSmtpSendAddOriginatingIP, type: _CHECKBOX_,
 									label: ZaMsg.NAD_add_x_orginate_IP, trueValue: "TRUE", falseValue: "FALSE"
 								}
 							]
@@ -723,10 +723,10 @@ GlobalConfigXFormView.myXFormModifier = function(xFormObject, entry) {
 
                         {type:_ZA_TOP_GROUPER_,label: ZaMsg.NAD_MTA_PolicyServiceChecks,
                                 visibilityChecks:[[ZATopGrouper_XFormItem.isGroupVisible,
-                                        [ZaGlobalConfig.A_zimbraMtaPolicyService]]
+                                        [ZaGlobalConfig.A_zmailMtaPolicyService]]
                                 ],
                                 items:[
-                                    { ref: ZaGlobalConfig.A_zimbraMtaPolicyService, type: _REPEAT_,
+                                    { ref: ZaGlobalConfig.A_zmailMtaPolicyService, type: _REPEAT_,
                                       label: ZaMsg.NAD_MTA_policy_service,
                                       labelLocation:_LEFT_,
                                       align:_LEFT_,
@@ -743,45 +743,45 @@ GlobalConfigXFormView.myXFormModifier = function(xFormObject, entry) {
 
 						{type:_ZA_TOP_GROUPER_,label: ZaMsg.NAD_MTA_ProtocolChecks,
                             visibilityChecks:[[ZATopGrouper_XFormItem.isGroupVisible,
-                                    [ZaGlobalConfig.A_zimbraMtaRejectInvalidHostname,
-                                    ZaGlobalConfig.A_zimbraMtaRejectNonFqdnHostname,
-                                    ZaGlobalConfig.A_zimbraMtaRejectNonFqdnSender]]],
-                            visibilityChangeEventSources:[ZaGlobalConfig.A_zimbraMtaRejectUnknownClient,
-                                    ZaGlobalConfig.A_zimbraMtaRejectUnknownHostname,
-                                    ZaGlobalConfig.A_zimbraMtaRejectUnknownSenderDomain
+                                    [ZaGlobalConfig.A_zmailMtaRejectInvalidHostname,
+                                    ZaGlobalConfig.A_zmailMtaRejectNonFqdnHostname,
+                                    ZaGlobalConfig.A_zmailMtaRejectNonFqdnSender]]],
+                            visibilityChangeEventSources:[ZaGlobalConfig.A_zmailMtaRejectUnknownClient,
+                                    ZaGlobalConfig.A_zmailMtaRejectUnknownHostname,
+                                    ZaGlobalConfig.A_zmailMtaRejectUnknownSenderDomain
                             ],
 							items:[
-						  	{ ref: ZaGlobalConfig.A_zimbraMtaRejectInvalidHostname, type: _CHECKBOX_,
+						  	{ ref: ZaGlobalConfig.A_zmailMtaRejectInvalidHostname, type: _CHECKBOX_,
 						  	  label: ZaMsg.NAD_MTA_reject_invalid_hostname
 
 						  	},
-						  	{ ref: ZaGlobalConfig.A_zimbraMtaRejectNonFqdnHostname, type: _CHECKBOX_,
+						  	{ ref: ZaGlobalConfig.A_zmailMtaRejectNonFqdnHostname, type: _CHECKBOX_,
 						  	  label: ZaMsg.NAD_MTA_reject_non_fqdn_hostname
 						  	},
-						  	{ ref: ZaGlobalConfig.A_zimbraMtaRejectNonFqdnSender, type: _CHECKBOX_,
+						  	{ ref: ZaGlobalConfig.A_zmailMtaRejectNonFqdnSender, type: _CHECKBOX_,
 						  	  label: ZaMsg.NAD_MTA_reject_non_fqdn_sender
 						  	}
 						]},
 						{ type: _ZA_TOP_GROUPER_, label: ZaMsg.NAD_MTA_DnsChecks,
                         				visibilityChecks:[[ZATopGrouper_XFormItem.isGroupVisible,
-                                                		[ZaGlobalConfig.A_zimbraMtaRejectUnknownClient,
-                                                		ZaGlobalConfig.A_zimbraMtaRejectUnknownHostname,
-                                                		ZaGlobalConfig.A_zimbraMtaRejectUnknownSenderDomain]]],
-							visibilityChangeEventSources:[ZaGlobalConfig.A_zimbraMtaRejectUnknownClient,
-								ZaGlobalConfig.A_zimbraMtaRejectUnknownHostname,
-								ZaGlobalConfig.A_zimbraMtaRejectUnknownSenderDomain
+                                                		[ZaGlobalConfig.A_zmailMtaRejectUnknownClient,
+                                                		ZaGlobalConfig.A_zmailMtaRejectUnknownHostname,
+                                                		ZaGlobalConfig.A_zmailMtaRejectUnknownSenderDomain]]],
+							visibilityChangeEventSources:[ZaGlobalConfig.A_zmailMtaRejectUnknownClient,
+								ZaGlobalConfig.A_zmailMtaRejectUnknownHostname,
+								ZaGlobalConfig.A_zmailMtaRejectUnknownSenderDomain
 						],
 						  items: [
-						  	{ ref: ZaGlobalConfig.A_zimbraMtaRejectUnknownClient, type: _CHECKBOX_,
+						  	{ ref: ZaGlobalConfig.A_zmailMtaRejectUnknownClient, type: _CHECKBOX_,
 						  	  label: ZaMsg.NAD_MTA_reject_unknown_client
 						  	},
-						  	{ ref: ZaGlobalConfig.A_zimbraMtaRejectUnknownHostname, type: _CHECKBOX_,
+						  	{ ref: ZaGlobalConfig.A_zmailMtaRejectUnknownHostname, type: _CHECKBOX_,
 						  	  label: ZaMsg.NAD_MTA_reject_unknown_hostname
 						  	},
-						  	{ ref: ZaGlobalConfig.A_zimbraMtaRejectUnknownSenderDomain, type: _CHECKBOX_,
+						  	{ ref: ZaGlobalConfig.A_zmailMtaRejectUnknownSenderDomain, type: _CHECKBOX_,
 						  	  label: ZaMsg.NAD_MTA_reject_unknown_sender_domain
 						  	},
-                            { ref: ZaGlobalConfig.A_zimbraMtaRejectRblClient, type: _REPEAT_,
+                            { ref: ZaGlobalConfig.A_zmailMtaRejectRblClient, type: _REPEAT_,
 						  	  label: ZaMsg.NAD_MTA_reject_rbl_client,
 							  labelLocation:_LEFT_,
 							  align:_LEFT_,
@@ -797,16 +797,16 @@ GlobalConfigXFormView.myXFormModifier = function(xFormObject, entry) {
 						]},/*
                         { type:_ZA_TOP_GROUPER_, label:ZaMsg.NAD_AutoProvision_Setting, colSizes:["275px","100%"],
                             visibilityChecks:[[ZATopGrouper_XFormItem.isGroupVisible,
-								[ZaGlobalConfig.A_zimbraAutoProvBatchSize,
-								 ZaGlobalConfig.A_zimbraAutoProvPollingInterval]]],
+								[ZaGlobalConfig.A_zmailAutoProvBatchSize,
+								 ZaGlobalConfig.A_zmailAutoProvPollingInterval]]],
                         items :[
-                            {ref:ZaGlobalConfig.A_zimbraAutoProvBatchSize, type:_TEXTFIELD_, label:ZaMsg.LBL_zimbraAutoProvBatchSize,
+                            {ref:ZaGlobalConfig.A_zmailAutoProvBatchSize, type:_TEXTFIELD_, label:ZaMsg.LBL_zmailAutoProvBatchSize,
                                 autoSaveValue:true, labelLocation:_LEFT_,
                                 cssClass:"admin_xform_number_input"
                             },
-                            {ref:ZaGlobalConfig.A_zimbraAutoProvPollingInterval, type:_LIFETIME_,
+                            {ref:ZaGlobalConfig.A_zmailAutoProvPollingInterval, type:_LIFETIME_,
                                 colSizes:["70px","70px","*"],
-                                label:ZaMsg.LBL_zimbraAutoProvPollingInterval,
+                                label:ZaMsg.LBL_zmailAutoProvPollingInterval,
                                 colSpan:2,nowrap:false,labelWrap:true
                             }
                         ]
@@ -832,19 +832,19 @@ GlobalConfigXFormView.myXFormModifier = function(xFormObject, entry) {
 						},
 						{type: _ZA_TOP_GROUPER_, label:ZaMsg.Global_IMAP_ServiceGrp,
 						  items: [
-							{ ref: ZaGlobalConfig.A_zimbraImapServerEnabled, type:_CHECKBOX_,
+							{ ref: ZaGlobalConfig.A_zmailImapServerEnabled, type:_CHECKBOX_,
 							  label: ZaMsg.IMAP_Service,
 							  trueValue:"TRUE", falseValue:"FALSE"
 	  						},
-						  	{ ref: ZaGlobalConfig.A_zimbraImapSSLServerEnabled, type:_CHECKBOX_,
+						  	{ ref: ZaGlobalConfig.A_zmailImapSSLServerEnabled, type:_CHECKBOX_,
 						  	  label: ZaMsg.IMAP_SSLService,
 						  	  trueValue:"TRUE", falseValue:"FALSE"
 					  	  	},
-							{ ref: ZaGlobalConfig.A_zimbraImapCleartextLoginEnabled, type:_CHECKBOX_,
+							{ ref: ZaGlobalConfig.A_zmailImapCleartextLoginEnabled, type:_CHECKBOX_,
 							  label: ZaMsg.IMAP_CleartextLoginEnabled,
 							  trueValue:"TRUE", falseValue:"FALSE"
 						  	},
-							{ ref: ZaGlobalConfig.A_zimbraImapNumThreads, type:_TEXTFIELD_,
+							{ ref: ZaGlobalConfig.A_zmailImapNumThreads, type:_TEXTFIELD_,
 							  label: ZaMsg.IMAP_NumThreads,
 							  width: "5em"
 						  	}
@@ -852,19 +852,19 @@ GlobalConfigXFormView.myXFormModifier = function(xFormObject, entry) {
 						}/*,
 						{type:_ZA_TOP_GROUPER_, label:ZaMsg.Global_IMAP_NetworkGrp,
 						  items: [
-							{ ref: ZaGlobalConfig.A_zimbraImapBindPort, type:_TEXTFIELD_,
+							{ ref: ZaGlobalConfig.A_zmailImapBindPort, type:_TEXTFIELD_,
 							  label: ZaMsg.LBL_IMAP_Port,
 							  width: "5em"
 						  	},
-							{ ref: ZaGlobalConfig.A_zimbraImapSSLBindPort, type:_TEXTFIELD_,
+							{ ref: ZaGlobalConfig.A_zmailImapSSLBindPort, type:_TEXTFIELD_,
 							  label: ZaMsg.LBL_IMAP_SSLPort,
 							  width: "5em"
 						  	},
-							{ ref: ZaGlobalConfig.A_zimbraImapProxyBindPort, type:_TEXTFIELD_,
+							{ ref: ZaGlobalConfig.A_zmailImapProxyBindPort, type:_TEXTFIELD_,
 							  label: ZaMsg.LBL_IMAP_Proxy_Port,
 							  width: "5em"
 						  	},
-							{ ref: ZaGlobalConfig.A_zimbraImapSSLProxyBindPort, type:_TEXTFIELD_,
+							{ ref: ZaGlobalConfig.A_zmailImapSSLProxyBindPort, type:_TEXTFIELD_,
 							  label: ZaMsg.LBL_IMAP_SSL_Proxy_Port,
 							  width: "5em"
 						  	}
@@ -890,37 +890,37 @@ GlobalConfigXFormView.myXFormModifier = function(xFormObject, entry) {
 						},
 						{type: _ZA_TOP_GROUPER_, label:ZaMsg.Global_POP_ServiceGrp,
 						  items: [
-							{ ref: ZaGlobalConfig.A_zimbraPop3ServerEnabled, type: _CHECKBOX_,
+							{ ref: ZaGlobalConfig.A_zmailPop3ServerEnabled, type: _CHECKBOX_,
 							  label: ZaMsg.NAD_POP_Service,
 							  trueValue: "TRUE", falseValue: "FALSE"
 						  	},
-						  	{ ref: ZaGlobalConfig.A_zimbraPop3SSLServerEnabled, type: _CHECKBOX_,
+						  	{ ref: ZaGlobalConfig.A_zmailPop3SSLServerEnabled, type: _CHECKBOX_,
 							  label: ZaMsg.NAD_POP_SSL,
 							  trueValue: "TRUE", falseValue: "FALSE"
 						  	},
-						  	{ ref: ZaGlobalConfig.A_zimbraPop3CleartextLoginEnabled, type: _CHECKBOX_,
+						  	{ ref: ZaGlobalConfig.A_zmailPop3CleartextLoginEnabled, type: _CHECKBOX_,
 						  	  label: ZaMsg.NAD_POP_CleartextLoginEnabled,
 						  	  trueValue: "TRUE", falseValue: "FALSE"
 					  	  	},
-					  	  	{ ref: ZaGlobalConfig.A_zimbraPop3NumThreads, type:_TEXTFIELD_,
+					  	  	{ ref: ZaGlobalConfig.A_zmailPop3NumThreads, type:_TEXTFIELD_,
 							  label: ZaMsg.NAD_POP_NumThreads, width: "5em"
 							}
 						]}/*,
 						{type:_ZA_TOP_GROUPER_, label:ZaMsg.Global_POP_NetworkGrp,
 						  items: [
-							{ ref: ZaGlobalConfig.A_zimbraPop3BindPort, type:_TEXTFIELD_,
+							{ ref: ZaGlobalConfig.A_zmailPop3BindPort, type:_TEXTFIELD_,
 							  label: ZaMsg.LBL_POP_Port+":",
 							  width: "5em"
 						  	},
-							{ ref: ZaGlobalConfig.A_zimbraPop3SSLBindPort, type:_TEXTFIELD_,
+							{ ref: ZaGlobalConfig.A_zmailPop3SSLBindPort, type:_TEXTFIELD_,
 							  label: ZaMsg.LBL_POP_SSL_Port,
 							 width: "5em"
 						  	},
-							{ ref: ZaGlobalConfig.A_zimbraPop3ProxyBindPort, type:_TEXTFIELD_,
+							{ ref: ZaGlobalConfig.A_zmailPop3ProxyBindPort, type:_TEXTFIELD_,
 							  label: ZaMsg.LBL_POP_proxy_Port,
 							  width: "5em"
 						  	},
-							{ ref: ZaGlobalConfig.A_zimbraPop3SSLProxyBindPort, type:_TEXTFIELD_,
+							{ ref: ZaGlobalConfig.A_zmailPop3SSLProxyBindPort, type:_TEXTFIELD_,
 							  label: ZaMsg.LBL_POP_SSL_proxy_Port,
 							 width: "5em"
 						  	}
@@ -946,20 +946,20 @@ GlobalConfigXFormView.myXFormModifier = function(xFormObject, entry) {
                               iconVisible: true,
                               content: ZaMsg.Alert_AmavisdRestart
                             },
-						  	{ ref: ZaGlobalConfig.A_zimbraSpamKillPercent, type: _INPUT_,
+						  	{ ref: ZaGlobalConfig.A_zmailSpamKillPercent, type: _INPUT_,
 						  	  label: ZaMsg.NAD_Spam_KillPercent, width: "4em"
 						  	},
-						  	{ ref: ZaGlobalConfig.A_zimbraSpamTagPercent, type: _INPUT_,
+						  	{ ref: ZaGlobalConfig.A_zmailSpamTagPercent, type: _INPUT_,
 						  	  label: ZaMsg.NAD_Spam_TagPercent, width: "4em"
 						  	},
-						  	{ ref: ZaGlobalConfig.A_zimbraSpamSubjectTag, type: _INPUT_,
+						  	{ ref: ZaGlobalConfig.A_zmailSpamSubjectTag, type: _INPUT_,
 						  	  label: ZaMsg.NAD_Spam_SubjectPrefix, width: "20em"
 						  	}
 						  ]
 						},
 						{type:_ZA_TOP_GROUPER_, label:ZaMsg.NAD_AV_Settings,
 						  items: [
-					  	    {ref: ZaGlobalConfig.A_zimbraVirusDefinitionsUpdateFrequency, type: _INPUT_,
+					  	    {ref: ZaGlobalConfig.A_zmailVirusDefinitionsUpdateFrequency, type: _INPUT_,
 					  	     label: ZaMsg.NAD_Virus_DefUpdateFreq, width: "3em",
 					  	     getDisplayValue: function(value) { return parseInt(value); },
 					  	     elementChanged: function(elementValue, instanceValue, event) {
@@ -967,11 +967,11 @@ GlobalConfigXFormView.myXFormModifier = function(xFormObject, entry) {
 							   	this.getForm().itemChanged(this, instanceValue, event);
 							 }
 					  	    },
-				  	    	{ ref: ZaGlobalConfig.A_zimbraVirusBlockEncryptedArchive, type: _CHECKBOX_,
+				  	    	{ ref: ZaGlobalConfig.A_zmailVirusBlockEncryptedArchive, type: _CHECKBOX_,
 					   	      label: ZaMsg.NAD_Virus_BlockEncrypted,
 							  trueValue:"TRUE", falseValue:"FALSE"
 					  	    },
-						  	{ ref: ZaGlobalConfig.A_zimbraVirusWarnRecipient, type: _CHECKBOX_,
+						  	{ ref: ZaGlobalConfig.A_zmailVirusWarnRecipient, type: _CHECKBOX_,
 						  	  label: ZaMsg.NAD_Virus_NotifyRecipient,
 							  trueValue:"TRUE", falseValue:"FALSE"
 						  	}
@@ -993,35 +993,35 @@ GlobalConfigXFormView.myXFormModifier = function(xFormObject, entry) {
 				 	items: [
 						{type:_ZA_TOP_GROUPER_, label:ZaMsg.NAD_Exchange_Settings,
 						  items: [
-						  	{ ref: ZaGlobalConfig.A_zimbraFreebusyExchangeURL, type: _TEXTFIELD_,
+						  	{ ref: ZaGlobalConfig.A_zmailFreebusyExchangeURL, type: _TEXTFIELD_,
 						  	  label: ZaMsg.NAD_Exchange_URL, width: "30em"
 						  	},
-                            { ref: ZaGlobalConfig.A_zimbraFreebusyExchangeAuthScheme, type: _OSELECT1_,
+                            { ref: ZaGlobalConfig.A_zmailFreebusyExchangeAuthScheme, type: _OSELECT1_,
 						  	  label: ZaMsg.NAD_Exchange_Auth_Schema
 						  	},
-			      { ref: ZaGlobalConfig.A_zimbraFreebusyExchangeServerType, type: _OSELECT1_,
+			      { ref: ZaGlobalConfig.A_zmailFreebusyExchangeServerType, type: _OSELECT1_,
                                                           label: ZaMsg.NAD_Exchange_Server_Type
                                                         },
-                              { ref: ZaGlobalConfig.A_zimbraFreebusyExchangeAuthUsername, type: _TEXTFIELD_,
+                              { ref: ZaGlobalConfig.A_zmailFreebusyExchangeAuthUsername, type: _TEXTFIELD_,
 						  	  label: ZaMsg.NAD_Exchange_Auth_User, width: "20em"
 						  	},
-						  	{ ref: ZaGlobalConfig.A_zimbraFreebusyExchangeAuthPassword, type: _PASSWORD_,
+						  	{ ref: ZaGlobalConfig.A_zmailFreebusyExchangeAuthPassword, type: _PASSWORD_,
 						  	  label: ZaMsg.NAD_Exchange_Auth_Password, width: "20em"
 						  	},
-                            { ref: ZaGlobalConfig.A_zimbraFreebusyExchangeUserOrg, type: _TEXTFIELD_,
-						  	  label: ZaMsg.LBL_zimbraFreebusyExchangeUserOrg, width: "20em"
+                            { ref: ZaGlobalConfig.A_zmailFreebusyExchangeUserOrg, type: _TEXTFIELD_,
+						  	  label: ZaMsg.LBL_zmailFreebusyExchangeUserOrg, width: "20em"
 						  	},
                               {type: _GROUP_, colSpan:2, numCols:5, colSizes: ["120px", "10px", "170px", "20px", "160px" ], items :[
                                   {   type:_CELLSPACER_ },
                                   {
                                       type: _DWT_BUTTON_ , colSpan: 2, label: ZaMsg.Check_Settings, autoPadding: false,
-                                      onActivate: ZaItem.checkInteropSettings, enableDisableChecks:[[ZaItem.hasRight,ZaGlobalConfig.CHECK_EXCHANGE_AUTH_CONFIG_RIGHT,ZaZimbraAdmin.currentAdminAccount]]
+                                      onActivate: ZaItem.checkInteropSettings, enableDisableChecks:[[ZaItem.hasRight,ZaGlobalConfig.CHECK_EXCHANGE_AUTH_CONFIG_RIGHT,ZaZmailAdmin.currentAdminAccount]]
                                   } ,
                                   {   type:_CELLSPACER_ } ,
                                   {
                                       type: _DWT_BUTTON_ , colSpan: 2, label: ZaMsg.Clear_Settings,autoPadding: false,
                                       onActivate: ZaItem.clearInteropSettings,
-                                      enableDisableChecks:[[ZaItem.hasRight,ZaGlobalConfig.CHECK_EXCHANGE_AUTH_CONFIG_RIGHT,ZaZimbraAdmin.currentAdminAccount]]
+                                      enableDisableChecks:[[ZaItem.hasRight,ZaGlobalConfig.CHECK_EXCHANGE_AUTH_CONFIG_RIGHT,ZaZmailAdmin.currentAdminAccount]]
                                   },
                                   {   type:_CELLSPACER_ }
                                  ]
@@ -1051,27 +1051,27 @@ GlobalConfigXFormView.myXFormModifier = function(xFormObject, entry) {
 									colSpan:2,
 									visibilityChecks:[],ref:null
 								},                            
-                                {ref:ZaGlobalConfig.A_zimbraSkinForegroundColor,
+                                {ref:ZaGlobalConfig.A_zmailSkinForegroundColor,
                                     type:_DWT_COLORPICKER_,
-                                    label:ZaMsg.NAD_zimbraSkinForegroundColor,
+                                    label:ZaMsg.NAD_zmailSkinForegroundColor,
                                     labelLocation:_LEFT_,
                                     buttonImage: "Color", width: "50px"
                                 }  ,
-                                {ref:ZaGlobalConfig.A_zimbraSkinBackgroundColor,
+                                {ref:ZaGlobalConfig.A_zmailSkinBackgroundColor,
                                     type:_DWT_COLORPICKER_,
-                                    label:ZaMsg.NAD_zimbraSkinBackgroundColor,
+                                    label:ZaMsg.NAD_zmailSkinBackgroundColor,
                                     labelLocation:_LEFT_,
                                     buttonImage: "Color", width: "50px"
                                 }  ,
-                                {ref:ZaGlobalConfig.A_zimbraSkinSecondaryColor,
+                                {ref:ZaGlobalConfig.A_zmailSkinSecondaryColor,
                                     type:_DWT_COLORPICKER_,
-                                    label:ZaMsg.NAD_zimbraSkinSecondaryColor,
+                                    label:ZaMsg.NAD_zmailSkinSecondaryColor,
                                     labelLocation:_LEFT_,
                                     buttonImage: "Color", width: "50px"
                                 },
-                                {ref:ZaGlobalConfig.A_zimbraSkinSelectionColor,
+                                {ref:ZaGlobalConfig.A_zmailSkinSelectionColor,
                                     type:_DWT_COLORPICKER_,
-                                    label:ZaMsg.NAD_zimbraSkinSelectionColor,
+                                    label:ZaMsg.NAD_zmailSkinSelectionColor,
                                     buttonImage: "Color", width: "50px" ,
                                     labelLocation:_LEFT_
                                 },
@@ -1097,17 +1097,17 @@ GlobalConfigXFormView.myXFormModifier = function(xFormObject, entry) {
 		            items: 	[
                         { type:_ZA_TOP_GROUPER_, label:ZaMsg.Domain_BC_ShareConf,
                         items :[
-                            { ref: ZaGlobalConfig.A_zimbraBasicAuthRealm,
+                            { ref: ZaGlobalConfig.A_zmailBasicAuthRealm,
                                 type: _TEXTFIELD_,
-                                label: ZaMsg.Domain_zimbraBasicAuthRealm
+                                label: ZaMsg.Domain_zmailBasicAuthRealm
                             }
                         ]
                         },
                         { type:_ZA_TOP_GROUPER_, label:ZaMsg.Domain_AD_EmailValidate,
-                        	visibilityChecks:[[ZaItem.hasReadPermission,ZaGlobalConfig.A_zimbraMailAddressValidationRegex]],
-                        	visibilityChangeEventSources:[ZaGlobalConfig.A_zimbraMailAddressValidationRegex],
+                        	visibilityChecks:[[ZaItem.hasReadPermission,ZaGlobalConfig.A_zmailMailAddressValidationRegex]],
+                        	visibilityChangeEventSources:[ZaGlobalConfig.A_zmailMailAddressValidationRegex],
                             items :[
-					        { ref: ZaGlobalConfig.A_zimbraMailAddressValidationRegex, type: _REPEAT_,
+					        { ref: ZaGlobalConfig.A_zmailMailAddressValidationRegex, type: _REPEAT_,
                                 nowrap:false,labelWrap:true,
                                 label: ZaMsg.LBL_EmailValidate,
                                 labelLocation:_LEFT_,
@@ -1141,63 +1141,63 @@ GlobalConfigXFormView.myXFormModifier = function(xFormObject, entry) {
                         	/* bug 71234, remove SPNEGO from UI 
                         	{ type:_ZA_TOP_GROUPER_, label:ZaMsg.NAD_SPNEGO_Configure,
                                   items:[
-							  	          { ref: ZaGlobalConfig.A_zimbraSpnegoAuthEnabled, type: _CHECKBOX_,
+							  	          { ref: ZaGlobalConfig.A_zmailSpnegoAuthEnabled, type: _CHECKBOX_,
 							   	            label:ZaMsg.NAD_Enable_spnego, width: "200px",
 							   	            trueValue: "TRUE", falseValue: "FALSE"
 						   	              },
-                                          { ref: ZaGlobalConfig.A_zimbraSpnegoAuthRealm,
+                                          { ref: ZaGlobalConfig.A_zmailSpnegoAuthRealm,
                                             type: _TEXTFIELD_, width: "200px",
-                                            label: ZaMsg.LBL_zimbraSpnegoAuthRealm,
-                                            enableDisableChangeEventSources:[ZaGlobalConfig.A_zimbraSpnegoAuthEnabled],
-                                            enableDisableChecks:[[XForm.checkInstanceValue,ZaGlobalConfig.A_zimbraSpnegoAuthEnabled,'TRUE']]
+                                            label: ZaMsg.LBL_zmailSpnegoAuthRealm,
+                                            enableDisableChangeEventSources:[ZaGlobalConfig.A_zmailSpnegoAuthEnabled],
+                                            enableDisableChecks:[[XForm.checkInstanceValue,ZaGlobalConfig.A_zmailSpnegoAuthEnabled,'TRUE']]
                                           },
-                                          { ref: ZaGlobalConfig.A_zimbraSpnegoAuthErrorURL,
+                                          { ref: ZaGlobalConfig.A_zmailSpnegoAuthErrorURL,
                                             type: _TEXTFIELD_, width: "200px",
-                                            label: ZaMsg.LBL_zimbraSpnegoAuthErrorURL,
-                                            enableDisableChangeEventSources:[ZaGlobalConfig.A_zimbraSpnegoAuthEnabled],
-                                            enableDisableChecks:[[XForm.checkInstanceValue,ZaGlobalConfig.A_zimbraSpnegoAuthEnabled,'TRUE']]
+                                            label: ZaMsg.LBL_zmailSpnegoAuthErrorURL,
+                                            enableDisableChangeEventSources:[ZaGlobalConfig.A_zmailSpnegoAuthEnabled],
+                                            enableDisableChecks:[[XForm.checkInstanceValue,ZaGlobalConfig.A_zmailSpnegoAuthEnabled,'TRUE']]
                                           }
                                   ]
                             }, */
                         	/* bug 71233, remove 2-way SSL auth
                             { type:_ZA_TOP_GROUPER_, label: ZaMsg.NAD_AUTH_ClientConfigure,
                                   items:[
-                                        {ref:ZaGlobalConfig.A_zimbraMailSSLClientCertMode, type:_SELECT1_,
+                                        {ref:ZaGlobalConfig.A_zmailMailSSLClientCertMode, type:_SELECT1_,
                                           colSizes:["275px","*"],
-                                          label:ZaMsg.NAD_zimbraMailSSLClientCertMode,
+                                          label:ZaMsg.NAD_zmailMailSSLClientCertMode,
                                           labelLocation:_LEFT_
                                         },
-                                        { ref: ZaGlobalConfig.A_zimbraMailSSLClientCertPort, type:_TEXTFIELD_,
-                                          label: ZaMsg.NAD_zimbraMailSSLClientCertPort
+                                        { ref: ZaGlobalConfig.A_zmailMailSSLClientCertPort, type:_TEXTFIELD_,
+                                          label: ZaMsg.NAD_zmailMailSSLClientCertPort
                                         },
-                                        { ref: ZaGlobalConfig.A_zimbraMailSSLClientCertPrincipalMap, type:_TEXTAREA_,
-                                            label:ZaMsg.NAD_zimbraMailSSLClientCertPrincipalMap, labelCssStyle:"vertical-align:top", width:250
+                                        { ref: ZaGlobalConfig.A_zmailMailSSLClientCertPrincipalMap, type:_TEXTAREA_,
+                                            label:ZaMsg.NAD_zmailMailSSLClientCertPrincipalMap, labelCssStyle:"vertical-align:top", width:250
                                         },
                                         {type: _DWT_ALERT_, cssClass: "DwtTabTable", containerCssStyle: "padding-bottom:0px",
                                           style: DwtAlert.WARNING, iconVisible: false, content: ZaMsg.Alert_Ngnix,
                                           id:"xform_header_ngnix"
                                         },
-                                        {ref:ZaGlobalConfig.A_zimbraReverseProxyClientCertMode, type:_SELECT1_,
+                                        {ref:ZaGlobalConfig.A_zmailReverseProxyClientCertMode, type:_SELECT1_,
                                           colSizes:["275px","*"],
-                                          label:ZaMsg.NAD_zimbraReverseProxyClientCertMode,
+                                          label:ZaMsg.NAD_zmailReverseProxyClientCertMode,
                                           labelLocation:_LEFT_
                                         },
-                                        {ref:ZaGlobalConfig.A_zimbraReverseProxyMailMode, type:_SELECT1_,
+                                        {ref:ZaGlobalConfig.A_zmailReverseProxyMailMode, type:_SELECT1_,
                                           colSizes:["275px","*"],
-                                          label:ZaMsg.NAD_zimbraReverseProxyMailMode,
+                                          label:ZaMsg.NAD_zmailReverseProxyMailMode,
                                           labelLocation:_LEFT_
                                         },
-                                        { ref: ZaGlobalConfig.A_zimbraMailSSLProxyClientCertPort, type:_TEXTFIELD_,
-                                          label: ZaMsg.NAD_zimbraMailSSLProxyClientCertPort
+                                        { ref: ZaGlobalConfig.A_zmailMailSSLProxyClientCertPort, type:_TEXTFIELD_,
+                                          label: ZaMsg.NAD_zmailMailSSLProxyClientCertPort
                                         },
-                                        {ref: ZaGlobalConfig.A_zimbraReverseProxyClientCertCA, type:_TEXTAREA_,
-                                            label:ZaMsg.NAD_zimbraReverseProxyClientCertCA, width: 400
+                                        {ref: ZaGlobalConfig.A_zmailReverseProxyClientCertCA, type:_TEXTAREA_,
+                                            label:ZaMsg.NAD_zmailReverseProxyClientCertCA, width: 400
                                         },
-                                        { ref: ZaGlobalConfig.A_zimbraReverseProxyAdminIPAddress,
+                                        { ref: ZaGlobalConfig.A_zmailReverseProxyAdminIPAddress,
                                             type:_REPEAT_,
                                             nowrap:false,labelWrap:true,
-                                            label:ZaMsg.LBL_zimbraReverseProxyAdminIPAddress,
-                                            msgName:ZaMsg.MSG_zimbraReverseProxyAdminIPAddress,
+                                            label:ZaMsg.LBL_zmailReverseProxyAdminIPAddress,
+                                            msgName:ZaMsg.MSG_zmailReverseProxyAdminIPAddress,
                                             labelLocation:_LEFT_,
                                             addButtonLabel:ZaMsg.NAD_Add,
                                             align:_LEFT_,
@@ -1215,19 +1215,19 @@ GlobalConfigXFormView.myXFormModifier = function(xFormObject, entry) {
                             }, */
                             { type:_ZA_TOP_GROUPER_, label: ZaMsg.NAD_WEBCLIENT_Configure,
                                   items:[
-                                          { ref: ZaGlobalConfig.A_zimbraWebClientLoginURL,
+                                          { ref: ZaGlobalConfig.A_zmailWebClientLoginURL,
                                             type:_TEXTFIELD_, width:"200px",
-                                            label: ZaMsg.LBL_zimbraWebClientLoginURL
+                                            label: ZaMsg.LBL_zmailWebClientLoginURL
                                           },
-                                          { ref: ZaGlobalConfig.A_zimbraWebClientLogoutURL,
+                                          { ref: ZaGlobalConfig.A_zmailWebClientLogoutURL,
                                             type:_TEXTFIELD_, width:"200px",
-                                            label: ZaMsg.LBL_zimbraWebClientLogoutURL
+                                            label: ZaMsg.LBL_zmailWebClientLogoutURL
                                           },
-                                          { ref: ZaGlobalConfig.A_zimbraWebClientLoginURLAllowedUA,
+                                          { ref: ZaGlobalConfig.A_zmailWebClientLoginURLAllowedUA,
 									        type:_REPEAT_,
                                             nowrap:false,labelWrap:true,
-                                            label:ZaMsg.LBL_zimbraWebClientLoginURLAllowedUA,
-                                            msgName:ZaMsg.MSG_zimbraWebClientLoginURLAllowedUA,
+                                            label:ZaMsg.LBL_zmailWebClientLoginURLAllowedUA,
+                                            msgName:ZaMsg.MSG_zmailWebClientLoginURLAllowedUA,
                                             labelLocation:_LEFT_,
                                             addButtonLabel:ZaMsg.NAD_Add,
                                             align:_LEFT_,
@@ -1241,11 +1241,11 @@ GlobalConfigXFormView.myXFormModifier = function(xFormObject, entry) {
                                                 }
                                             ]
                                           },
-                                          { ref: ZaGlobalConfig.A_zimbraWebClientLogoutURLAllowedUA,
+                                          { ref: ZaGlobalConfig.A_zmailWebClientLogoutURLAllowedUA,
 									        type:_REPEAT_,
                                             nowrap:false,labelWrap:true,
-                                            label:ZaMsg.LBL_zimbraWebClientLogoutURLAllowedUA,
-                                            msgName:ZaMsg.MSG_zimbraWebClientLogoutURLAllowedUA,
+                                            label:ZaMsg.LBL_zmailWebClientLogoutURLAllowedUA,
+                                            msgName:ZaMsg.MSG_zmailWebClientLogoutURLAllowedUA,
                                             labelLocation:_LEFT_,
                                             addButtonLabel:ZaMsg.NAD_Add,
                                             align:_LEFT_,
@@ -1259,11 +1259,11 @@ GlobalConfigXFormView.myXFormModifier = function(xFormObject, entry) {
                                                 }
                                             ]
                                           },
-                                          { ref: ZaGlobalConfig.A_zimbraWebClientLoginURLAllowedIP,
+                                          { ref: ZaGlobalConfig.A_zmailWebClientLoginURLAllowedIP,
                                               type:_REPEAT_,
                                               nowrap:false,labelWrap:true,
-                                              label:ZaMsg.LBL_zimbraWebClientLoginURLAllowedIP,
-                                              msgName:ZaMsg.MSG_zimbraWebClientLoginURLAllowedIP,
+                                              label:ZaMsg.LBL_zmailWebClientLoginURLAllowedIP,
+                                              msgName:ZaMsg.MSG_zmailWebClientLoginURLAllowedIP,
                                               labelLocation:_LEFT_,
                                               addButtonLabel:ZaMsg.NAD_Add,
                                               align:_LEFT_,
@@ -1277,11 +1277,11 @@ GlobalConfigXFormView.myXFormModifier = function(xFormObject, entry) {
                                                   }
                                               ]
                                             },
-                                            { ref: ZaGlobalConfig.A_zimbraWebClientLogoutURLAllowedIP,
+                                            { ref: ZaGlobalConfig.A_zmailWebClientLogoutURLAllowedIP,
                                               type:_REPEAT_,
                                               nowrap:false,labelWrap:true,
-                                              label:ZaMsg.LBL_zimbraWebClientLogoutURLAllowedIP,
-                                              msgName:ZaMsg.MSG_zimbraWebClientLogoutURLAllowedIP,
+                                              label:ZaMsg.LBL_zmailWebClientLogoutURLAllowedIP,
+                                              msgName:ZaMsg.MSG_zmailWebClientLogoutURLAllowedIP,
                                               labelLocation:_LEFT_,
                                               addButtonLabel:ZaMsg.NAD_Add,
                                               align:_LEFT_,
@@ -1296,12 +1296,12 @@ GlobalConfigXFormView.myXFormModifier = function(xFormObject, entry) {
                                               ]
                                             },
                                       {
-                                          ref: ZaGlobalConfig.A_zimbraForceClearCookies,
+                                          ref: ZaGlobalConfig.A_zmailForceClearCookies,
                                           type: _CHECKBOX_,
                                           trueValue: "TRUE",
                                           falseValue: "FALSE",
-                                          label: ZaMsg.LBL_zimbraForceClearCookies,
-                                          msgName: ZaMsg.MSG_zimbraForceClearCookies,
+                                          label: ZaMsg.LBL_zmailForceClearCookies,
+                                          msgName: ZaMsg.MSG_zmailForceClearCookies,
                                           labelLocation: _LEFT_
                                       }
                                   ]
@@ -1411,15 +1411,15 @@ GlobalConfigXFormView.myXFormModifier = function(xFormObject, entry) {
                 {type: _ZATABCASE_, caseKey:_tab11,         paddingStyle:"padding-left:15px;", width:"98%", cellpadding:2,
 		            colSizes:["auto"],numCols:1,id:"global_auto_prov_tab",
 		            items: 	[
-                        { type:_ZA_TOP_GROUPER_, label:ZaMsg.TTL_zimbraAutoProvEmailSetting,
+                        { type:_ZA_TOP_GROUPER_, label:ZaMsg.TTL_zmailAutoProvEmailSetting,
                         items :[
-                            { ref: ZaGlobalConfig.A_zimbraAutoProvNotificationSubject,
+                            { ref: ZaGlobalConfig.A_zmailAutoProvNotificationSubject,
                                 type: _TEXTFIELD_,width: "400",
-                                label: ZaMsg.LBL_zimbraAutoProvEmailSubject
+                                label: ZaMsg.LBL_zmailAutoProvEmailSubject
                             },
-                            { ref: ZaGlobalConfig.A_zimbraAutoProvNotificationBody,
+                            { ref: ZaGlobalConfig.A_zmailAutoProvNotificationBody,
                                 type: _TEXTAREA_, width: 400,
-                                label: ZaMsg.LBL_zimbraAutoProvEmailBody
+                                label: ZaMsg.LBL_zmailAutoProvEmailBody
                             }
                         ]
                         }

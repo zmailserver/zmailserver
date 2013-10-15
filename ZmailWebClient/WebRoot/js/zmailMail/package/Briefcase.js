@@ -21,13 +21,13 @@
  * 	- When the user goes to the Briefcase application
  * 	- When the user creates a new briefcase or uploaded file
  */
-AjxPackage.require("zimbraMail.briefcase.view.ZmBriefcaseBaseView");
-AjxPackage.require("zimbraMail.briefcase.view.ZmBriefcaseIconView");
-AjxPackage.require("zimbraMail.briefcase.view.ZmDetailListView");
-AjxPackage.require("zimbraMail.briefcase.view.ZmPreviewPaneView");
-AjxPackage.require("zimbraMail.briefcase.view.ZmNewBriefcaseDialog");
-AjxPackage.require("zimbraMail.briefcase.view.dialog.ZmBriefcaseTabView");
-AjxPackage.require("zimbraMail.briefcase.view.dialog.ZmCheckinDialog");
-AjxPackage.require("zimbraMail.briefcase.controller.ZmBriefcaseController");
-AjxPackage.require("zimbraMail.briefcase.controller.ZmBriefcaseTreeController");
+AjxPackage.require("zmailMail.briefcase.view.ZmBriefcaseBaseView");
+AjxPackage.require("zmailMail.briefcase.view.ZmBriefcaseIconView");
+AjxPackage.require("zmailMail.briefcase.view.ZmDetailListView");
+AjxPackage.require("zmailMail.briefcase.view.ZmPreviewPaneView");
+AjxPackage.require("zmailMail.briefcase.view.ZmNewBriefcaseDialog");
+AjxPackage.require("zmailMail.briefcase.view.dialog.ZmBriefcaseTabView");
+AjxPackage.require("zmailMail.briefcase.view.dialog.ZmCheckinDialog");
+AjxPackage.require("zmailMail.briefcase.controller.ZmBriefcaseController");
+AjxPackage.require("zmailMail.briefcase.controller.ZmBriefcaseTreeController");
 AjxPackage.require("ajax.util.AjxPluginDetector");

@@ -15,15 +15,15 @@
 using System;
 
 
-namespace Zimbra.Client.Account
+namespace Zmail.Client.Account
 {
-	public class AccountService : IZimbraService
+	public class AccountService : IZmailService
 	{
 		public static String SERVICE_PATH	= "/service/soap";
 
 		//this services namespace uri
 		public static String NS_PREFIX		= "account";
-		public static String NAMESPACE_URI	= "urn:zimbraAccount";
+		public static String NAMESPACE_URI	= "urn:zmailAccount";
 		
 		//requests
 		public static String AUTH_REQUEST	= "AuthRequest";

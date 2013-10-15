@@ -12,18 +12,18 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.analyzersample;
+package org.zmail.analyzersample;
 
 import java.io.Reader;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenStream;
 
-import com.zimbra.cs.index.LuceneFields;
-import com.zimbra.cs.index.ZimbraAnalyzer;
+import org.zmail.cs.index.LuceneFields;
+import org.zmail.cs.index.ZmailAnalyzer;
 
 /**
- * Our sample "customized" Analyzer: all we do is pass all requests on do the default Zimbra analyzer.
+ * Our sample "customized" Analyzer: all we do is pass all requests on do the default Zmail analyzer.
  *
  * The Analyzer-API in Lucene is based on the decorator pattern. Therefore all non-abstract subclasses must be final or
  * their tokenStream() and reusableTokenStream() implementations must be final! This is checked when Java assertions are
@@ -41,18 +41,18 @@ public final class SampleAnalyzer extends Analyzer {
     @Override
     public TokenStream tokenStream(String field, Reader reader) {
         if (field.equals(LuceneFields.L_FILENAME)) {
-            return ZimbraAnalyzer.getTokenStream(field, reader);
+            return ZmailAnalyzer.getTokenStream(field, reader);
         } else if (field.equals(LuceneFields.L_CONTENT)) {
             // L_CONTENT field means all the text in the document.
             // We probably want to plug our custom analyzer in here
-            return ZimbraAnalyzer.getTokenStream(field, reader);
+            return ZmailAnalyzer.getTokenStream(field, reader);
         } else if (field.equals(LuceneFields.L_H_SUBJECT)) {
             // L_H_SUBJECT field means the subject of the document.
             // We probably want to plug our custom analyzer in here
-            return ZimbraAnalyzer.getTokenStream(field, reader);
+            return ZmailAnalyzer.getTokenStream(field, reader);
         } else {
-            // Catch-All: probably want to pass this up to the standard Zimbra Analyzer
-            return ZimbraAnalyzer.getTokenStream(field, reader);
+            // Catch-All: probably want to pass this up to the standard Zmail Analyzer
+            return ZmailAnalyzer.getTokenStream(field, reader);
         }
     }
 

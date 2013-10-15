@@ -14,21 +14,21 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.bugs;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.bugs;
 
 import java.io.File;
 import java.util.HashMap;
 import org.testng.annotations.Test;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.LmtpInject;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.DisplayMail;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.DisplayMail.Field;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.LmtpInject;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.DisplayMail;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.DisplayMail.Field;
 
 
 public class Bug16213 extends AjaxCommonTest {
@@ -45,8 +45,8 @@ public class Bug16213 extends AjaxCommonTest {
 
 		// Make sure we are using an account with message view
 		super.startingAccountPreferences = new HashMap<String, String>() {{
-			put("zimbraPrefGroupMailBy", "message");
-			put("zimbraPrefMessageViewHtmlPreferred", "TRUE");
+			put("zmailPrefGroupMailBy", "message");
+			put("zmailPrefMessageViewHtmlPreferred", "TRUE");
 		}};
 
 
@@ -59,8 +59,8 @@ public class Bug16213 extends AjaxCommonTest {
 		String subject = "Encoding test";
 		String from = "Unknown";
 
-		String MimeFolder = ZimbraSeleniumProperties.getBaseDirectory() + "/data/private/mime/Bugs/Bug16213";
-		LmtpInject.injectFile(ZimbraAccount.AccountZWC().EmailAddress, new File(MimeFolder));
+		String MimeFolder = ZmailSeleniumProperties.getBaseDirectory() + "/data/private/mime/Bugs/Bug16213";
+		LmtpInject.injectFile(ZmailAccount.AccountZWC().EmailAddress, new File(MimeFolder));
 
 		
 		// Click Get Mail button

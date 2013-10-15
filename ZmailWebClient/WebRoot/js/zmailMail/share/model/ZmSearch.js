@@ -190,7 +190,7 @@ function(params) {
 	if (!this.response) {
 		if (this.isGalSearch) {
 			// DEPRECATED: Use JSON version
-			soapDoc = AjxSoapDoc.create("SearchGalRequest", "urn:zimbraAccount");
+			soapDoc = AjxSoapDoc.create("SearchGalRequest", "urn:zmailAccount");
 			var method = soapDoc.getMethod();
 			if (this.galType) {
 				method.setAttribute("type", this.galType);
@@ -202,14 +202,14 @@ function(params) {
 				this._applySoapCond(this.conds, soapDoc, condsEl);
 			}
 		} else if (this.isAutocompleteSearch) {
-			soapDoc = AjxSoapDoc.create("AutoCompleteRequest", "urn:zimbraMail");
+			soapDoc = AjxSoapDoc.create("AutoCompleteRequest", "urn:zmailMail");
 			var method = soapDoc.getMethod();
 			if (this.limit) {
 				method.setAttribute("limit", this.limit);
 			}
 			soapDoc.set("name", this.query);
 		} else if (this.isGalAutocompleteSearch) {
-			soapDoc = AjxSoapDoc.create("AutoCompleteGalRequest", "urn:zimbraAccount");
+			soapDoc = AjxSoapDoc.create("AutoCompleteGalRequest", "urn:zmailAccount");
 			var method = soapDoc.getMethod();
 			method.setAttribute("limit", this._getLimit());
 			if (this.galType) {
@@ -217,7 +217,7 @@ function(params) {
 			}
 			soapDoc.set("name", this.query);
 		} else if (this.isCalResSearch) {
-			soapDoc = AjxSoapDoc.create("SearchCalendarResourcesRequest", "urn:zimbraAccount");
+			soapDoc = AjxSoapDoc.create("SearchCalendarResourcesRequest", "urn:zmailAccount");
 			var method = soapDoc.getMethod();
 			if (this.attrs) {
 				var attrs = [].concat(this.attrs);
@@ -241,7 +241,7 @@ function(params) {
 					}
 				}
 			} else {
-				soapDoc = AjxSoapDoc.create("SearchRequest", "urn:zimbraMail");
+				soapDoc = AjxSoapDoc.create("SearchRequest", "urn:zmailMail");
 			}
 			var method = this._getStandardMethod(soapDoc);
 			if (this.types) {
@@ -321,7 +321,7 @@ function(params) {
 	if (!this.response) {
 		if (this.isGalSearch) {
 			request = {
-				_jsns:"urn:zimbraAccount",
+				_jsns:"urn:zmailAccount",
 				needIsOwner: "1",
 				needIsMember: "directOnly"
 			};
@@ -349,14 +349,14 @@ function(params) {
 				request.searchFilter.conds = ZmSearch.prototype._applyJsonCond(this.conds, request);
 			}
 		} else if (this.isAutocompleteSearch) {
-			jsonObj = {AutoCompleteRequest:{_jsns:"urn:zimbraMail"}};
+			jsonObj = {AutoCompleteRequest:{_jsns:"urn:zmailMail"}};
 			request = jsonObj.AutoCompleteRequest;
 			if (this.limit) {
 				request.limit = this.limit;
 			}
 			request.name = {_content:this.query};
 		} else if (this.isGalAutocompleteSearch) {
-			jsonObj = {AutoCompleteGalRequest:{_jsns:"urn:zimbraAccount"}};
+			jsonObj = {AutoCompleteGalRequest:{_jsns:"urn:zmailAccount"}};
 			request = jsonObj.AutoCompleteGalRequest;
 			request.limit = this._getLimit();
 			request.name = this.query;
@@ -364,7 +364,7 @@ function(params) {
 				request.type = this.galType;
 			}
 		} else if (this.isCalResSearch) {
-			jsonObj = {SearchCalendarResourcesRequest:{_jsns:"urn:zimbraAccount"}};
+			jsonObj = {SearchCalendarResourcesRequest:{_jsns:"urn:zmailAccount"}};
 			request = jsonObj.SearchCalendarResourcesRequest;
 			if (this.attrs) {
 				var attrs = [].concat(this.attrs);
@@ -388,7 +388,7 @@ function(params) {
 					}
 				}
 			} else {
-				jsonObj = {SearchRequest:{_jsns:"urn:zimbraMail"}};
+				jsonObj = {SearchRequest:{_jsns:"urn:zmailMail"}};
 				request = jsonObj.SearchRequest;
 			}
 			this._getStandardMethodJson(request);
@@ -527,7 +527,7 @@ function(callback, result) {
 		else									{ response = response.SearchResponse; }
 	}
 	else {
-		response = { _jsns: "urn:zimbraMail", more: false };
+		response = { _jsns: "urn:zmailMail", more: false };
 	}
 	var searchResult = new ZmSearchResult(this);
 	searchResult.set(response);
@@ -554,7 +554,7 @@ ZmSearch.prototype.getConv =
 function(params) {
 	if ((!this.query && !this.queryHint) || !params.cid) { return; }
 
-	var jsonObj = {SearchConvRequest:{_jsns:"urn:zimbraMail"}};
+	var jsonObj = {SearchConvRequest:{_jsns:"urn:zmailMail"}};
 	var request = jsonObj.SearchConvRequest;
 	this._getStandardMethodJson(request);
 	request.cid = params.cid;
@@ -627,7 +627,7 @@ function() {
 			where = org.getName(true, ZmOrganizer.MAX_DISPLAY_NAME_LENGTH, true);
 		}
 	}
-	return where ? ([ZmMsg.zimbraTitle, where].join(": ")) : ([ZmMsg.zimbraTitle, ZmMsg.searchResults].join(": "));
+	return where ? ([ZmMsg.zmailTitle, where].join(": ")) : ([ZmMsg.zmailTitle, ZmMsg.searchResults].join(": "));
 };
 
 /**

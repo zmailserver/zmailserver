@@ -12,16 +12,16 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.util.yc;
+package org.zmail.cs.offline.util.yc;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import com.google.common.base.Objects;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.offline.util.Xml;
-import com.zimbra.cs.offline.util.yc.DateField.AnniversaryField;
-import com.zimbra.cs.offline.util.yc.DateField.BirthdayField;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.offline.util.Xml;
+import org.zmail.cs.offline.util.yc.DateField.AnniversaryField;
+import org.zmail.cs.offline.util.yc.DateField.BirthdayField;
 
 public class Fields extends Entity {
 

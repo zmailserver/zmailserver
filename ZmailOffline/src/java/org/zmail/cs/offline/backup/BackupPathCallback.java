@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.backup;
+package org.zmail.cs.offline.backup;
 
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.AttributeCallback;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.callback.CallbackContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.AttributeCallback;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.callback.CallbackContext;
 
 /**
  * Backup Attribute callback. Validates that the specified directory is readable and writable 

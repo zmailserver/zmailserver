@@ -92,7 +92,7 @@ ZaController.initToolbarMethods["ZaDLController"].push(ZaDLController.initToolba
 ZaDLController.initPopupMenuMethod =
 function () {
 	var showNewDL = false;
-	if(ZaSettings.HAVE_MORE_DOMAINS || ZaZimbraAdmin.currentAdminAccount.attrs[ZaAccount.A_zimbraIsAdminAccount] == 'TRUE') {
+	if(ZaSettings.HAVE_MORE_DOMAINS || ZaZmailAdmin.currentAdminAccount.attrs[ZaAccount.A_zmailIsAdminAccount] == 'TRUE') {
 		showNewDL = true;
 	} else {
 		var domainList = ZaApp.getInstance().getDomainList().getArray();

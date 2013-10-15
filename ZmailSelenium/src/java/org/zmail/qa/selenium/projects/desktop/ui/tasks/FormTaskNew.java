@@ -14,25 +14,25 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.ui.tasks;
+package org.zmail.qa.selenium.projects.desktop.ui.tasks;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties.AppType;
-import com.zimbra.qa.selenium.projects.desktop.ui.*;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties.AppType;
+import org.zmail.qa.selenium.projects.desktop.ui.*;
 
 
 /**
  * The <code>FormMailNew<code> object defines a compose new message view
- * in the Zimbra Ajax client.
+ * in the Zmail Ajax client.
  * <p>
  * This class can be used to compose a new message.
  * <p>
  * 
  * @author Matt Rhoades
- * @see http://wiki.zimbra.com/wiki/Testing:_Selenium:_ZimbraSelenium_Overview#Mail_Page
+ * @see http://wiki.zmail.com/wiki/Testing:_Selenium:_ZmailSelenium_Overview#Mail_Page
  */
 public class FormTaskNew extends AbsForm {
 	
@@ -289,7 +289,7 @@ public class FormTaskNew extends AbsForm {
 
 		if (field == Field.Subject) {
 
-		   if (ZimbraSeleniumProperties.getAppType() == AppType.DESKTOP) {
+		   if (ZmailSeleniumProperties.getAppType() == AppType.DESKTOP) {
 		      locator = Locators.zTasksubjFieldDesktop;
 		   } else {
 		      locator = Locators.zTasksubjField;
@@ -303,7 +303,7 @@ public class FormTaskNew extends AbsForm {
 			   this.zClick(locator);
 			   zKeyboard.zTypeCharacters(value);
 			} finally {
-			   sSelectWindow("Zimbra: Tasks");
+			   sSelectWindow("Zmail: Tasks");
 			}
 			return;
 
@@ -332,7 +332,7 @@ public class FormTaskNew extends AbsForm {
 	
 	@Override
 	public void zFill(IItem item) throws HarnessException {
-	/*	logger.info(myPageName() + ".zFill(ZimbraItem)");
+	/*	logger.info(myPageName() + ".zFill(ZmailItem)");
 		logger.info(item.prettyPrint());
 
 		// Make sure the item is a MailItem

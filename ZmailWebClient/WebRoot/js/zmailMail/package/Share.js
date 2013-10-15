@@ -23,18 +23,18 @@
  * 	- When share or mountpoint data arrives in a <refresh> block
  * 	- When user creates a share
  */
-AjxPackage.require("zimbraMail.share.model.ZmShare");
-AjxPackage.require("zimbraMail.share.model.ZmShareProxy");
-AjxPackage.require("zimbraMail.share.model.ZmMountpoint");
+AjxPackage.require("zmailMail.share.model.ZmShare");
+AjxPackage.require("zmailMail.share.model.ZmShareProxy");
+AjxPackage.require("zmailMail.share.model.ZmMountpoint");
 
-AjxPackage.require("zimbraMail.share.view.ZmShareReply");
-AjxPackage.require("zimbraMail.share.view.ZmShareTreeView");
+AjxPackage.require("zmailMail.share.view.ZmShareReply");
+AjxPackage.require("zmailMail.share.view.ZmShareTreeView");
 
-AjxPackage.require("zimbraMail.share.view.dialog.ZmAcceptShareDialog");
-AjxPackage.require("zimbraMail.share.view.dialog.ZmDeclineShareDialog");
-AjxPackage.require("zimbraMail.share.view.dialog.ZmSharePropsDialog");
-AjxPackage.require("zimbraMail.share.view.dialog.ZmShareSearchDialog");
-AjxPackage.require("zimbraMail.share.view.dialog.ZmRevokeShareDialog");
-AjxPackage.require("zimbraMail.share.view.dialog.ZmFindnReplaceDialog");
-AjxPackage.require("zimbraMail.share.view.dialog.ZmFolderNotifyDialog");
-AjxPackage.require("zimbraMail.share.view.dialog.ZmTimezonePicker");
+AjxPackage.require("zmailMail.share.view.dialog.ZmAcceptShareDialog");
+AjxPackage.require("zmailMail.share.view.dialog.ZmDeclineShareDialog");
+AjxPackage.require("zmailMail.share.view.dialog.ZmSharePropsDialog");
+AjxPackage.require("zmailMail.share.view.dialog.ZmShareSearchDialog");
+AjxPackage.require("zmailMail.share.view.dialog.ZmRevokeShareDialog");
+AjxPackage.require("zmailMail.share.view.dialog.ZmFindnReplaceDialog");
+AjxPackage.require("zmailMail.share.view.dialog.ZmFolderNotifyDialog");
+AjxPackage.require("zmailMail.share.view.dialog.ZmTimezonePicker");

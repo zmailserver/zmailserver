@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.util.yab;
+package org.zmail.cs.offline.util.yab;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -21,11 +21,11 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
-import com.zimbra.common.httpclient.HttpClientUtil;
-import com.zimbra.cs.offline.util.Xml;
-import com.zimbra.cs.util.yauth.Auth;
-import com.zimbra.cs.util.yauth.AuthenticationException;
-import com.zimbra.cs.util.yauth.Authenticator;
+import org.zmail.common.httpclient.HttpClientUtil;
+import org.zmail.cs.offline.util.Xml;
+import org.zmail.cs.util.yauth.Auth;
+import org.zmail.cs.util.yauth.AuthenticationException;
+import org.zmail.cs.util.yauth.Authenticator;
 
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.HttpException;

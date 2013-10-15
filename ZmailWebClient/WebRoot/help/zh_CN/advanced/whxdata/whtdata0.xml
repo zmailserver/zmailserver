@@ -24,7 +24,7 @@
   <item name="使用快捷键" url="zwc_help_files/1_setting_up/using_keyboard_shortcuts.htm" />
 </book>
 <book name="整理帐户" >
-  <item name="浏览帐户 " url="zwc_help_files/1_setting_up/navigating_the_zimbra_web_client.htm" />
+  <item name="浏览帐户 " url="zwc_help_files/1_setting_up/navigating_the_zmail_web_client.htm" />
   <item name="整理帐户" url="zwc_help_files/5_organize_account/organizing_your_account.htm" />
   <item name="自定义邮箱初始视图" url="zwc_help_files/2_manage_email/customizing_your_mailbox_initial_view.htm" />
   <item name="个性化帐户视图" url="zwc_help_files/1_setting_up/personalizing_the_view_of_your_account.htm" />

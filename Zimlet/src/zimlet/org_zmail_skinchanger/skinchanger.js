@@ -16,17 +16,17 @@
 /**
  * Constructor.
  */
-function com_zimbra_skinchanger_HandlerObject() {
+function org_zmail_skinchanger_HandlerObject() {
 }
 
-com_zimbra_skinchanger_HandlerObject.prototype = new ZmZimletBase();
-com_zimbra_skinchanger_HandlerObject.prototype.constructor = com_zimbra_skinchanger_HandlerObject;
+org_zmail_skinchanger_HandlerObject.prototype = new ZmZimletBase();
+org_zmail_skinchanger_HandlerObject.prototype.constructor = org_zmail_skinchanger_HandlerObject;
 
 /**
  * Simplify handler object
  *
  */
-var SkinChangerZimlet = com_zimbra_skinchanger_HandlerObject;
+var SkinChangerZimlet = org_zmail_skinchanger_HandlerObject;
 
 /**
  * Defines the "enable zimlet" user property.
@@ -114,7 +114,7 @@ SkinChangerZimlet.prototype.singleClicked = function() {
  */
 SkinChangerZimlet.prototype._loadAndUpdateSkin =
 function() {
-	var soapDoc = AjxSoapDoc.create("GetAvailableSkinsRequest", "urn:zimbraAccount");
+	var soapDoc = AjxSoapDoc.create("GetAvailableSkinsRequest", "urn:zmailAccount");
 	
 	var loadAndUpdateCallback = new AjxCallback(this, this._handleResponseLoadAndUpdateSkin);
 	
@@ -144,9 +144,9 @@ function(response) {
 	}
 
 	var randomnumber = Math.floor(Math.random() * this._availableSkins.length);
-	var soapDoc = AjxSoapDoc.create("ModifyPrefsRequest", "urn:zimbraAccount");
+	var soapDoc = AjxSoapDoc.create("ModifyPrefsRequest", "urn:zmailAccount");
 	var node = soapDoc.set("pref", this._availableSkins[randomnumber]);
-	node.setAttribute("name", "zimbraPrefSkin");
+	node.setAttribute("name", "zmailPrefSkin");
 
 	var respCallback = new AjxCallback(this, this._handleSkinUpdateResponse);
 	appCtxt.getAppController().sendRequest({soapDoc:soapDoc, asyncMode:true, callback:respCallback});
@@ -304,5 +304,5 @@ SkinChangerZimlet.prototype._refreshBrowser =
 function() {
 	window.onbeforeunload = null;
 	var url = AjxUtil.formatUrl({});
-	ZmZimbraMail.sendRedirect(url);
+	ZmZmailMail.sendRedirect(url);
 };

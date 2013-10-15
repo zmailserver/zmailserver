@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.zcsprov;
+package org.zmail.zcsprov;
 
 import java.util.logging.*;
 import java.util.HashMap;
@@ -21,8 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.xml.soap.*;
 
-import com.zimbra.auth.*;
-import com.zimbra.utils.*;
+import org.zmail.auth.*;
+import org.zmail.utils.*;
 
 import java.io.*;
 import java.io.BufferedReader;
@@ -195,8 +195,8 @@ public class ZMSoapSession
             se.addNamespaceDeclaration("soap", "http://schemas.xmlsoap.org/soap/envelope/");   
 
             //create SAOP header
-            SOAPElement hdContext=sh.addChildElement("context", "", "urn:zimbra");
-            hdContext.addChildElement("userAgent", "","ZimbraProvisioningTool");
+            SOAPElement hdContext=sh.addChildElement("context", "", "urn:zmail");
+            hdContext.addChildElement("userAgent", "","ZmailProvisioningTool");
             hdContext.addChildElement("format", "type","xml"); 
             //<sessionId id="1234"/>
             SOAPElement sensid = hdContext.addChildElement("sessionId");
@@ -463,7 +463,7 @@ public class ZMSoapSession
                 SOAPBody body = se.getBody();
 
                 //create SOAP Body
-                Name bodyName = se.createName("DelegateAuthRequest", "","urn:zimbraAdmin");
+                Name bodyName = se.createName("DelegateAuthRequest", "","urn:zmailAdmin");
                 SOAPElement bodyElement = body.addBodyElement(bodyName);
 
                 Name nacct = se.createName("account");

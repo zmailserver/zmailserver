@@ -12,21 +12,21 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.ab.yab;
+package org.zmail.cs.offline.ab.yab;
 
-import com.zimbra.cs.offline.util.yab.NameField;
-import com.zimbra.cs.offline.util.yab.AddressField;
-import com.zimbra.cs.offline.util.yab.DateField;
-import com.zimbra.cs.offline.util.yab.SimpleField;
-import com.zimbra.cs.offline.util.yab.Flag;
-import com.zimbra.cs.offline.util.yab.Contact;
-import com.zimbra.cs.offline.util.yab.Field;
-import com.zimbra.cs.offline.util.yab.ContactChange;
-import com.zimbra.cs.offline.util.yab.FieldChange;
-import com.zimbra.cs.offline.ab.Ab;
-import com.zimbra.cs.offline.OfflineLog;
-import com.zimbra.cs.mime.ParsedContact;
-import com.zimbra.common.service.ServiceException;
+import org.zmail.cs.offline.util.yab.NameField;
+import org.zmail.cs.offline.util.yab.AddressField;
+import org.zmail.cs.offline.util.yab.DateField;
+import org.zmail.cs.offline.util.yab.SimpleField;
+import org.zmail.cs.offline.util.yab.Flag;
+import org.zmail.cs.offline.util.yab.Contact;
+import org.zmail.cs.offline.util.yab.Field;
+import org.zmail.cs.offline.util.yab.ContactChange;
+import org.zmail.cs.offline.util.yab.FieldChange;
+import org.zmail.cs.offline.ab.Ab;
+import org.zmail.cs.offline.OfflineLog;
+import org.zmail.cs.mime.ParsedContact;
+import org.zmail.common.service.ServiceException;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -38,7 +38,7 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
 
-import static com.zimbra.common.mailbox.ContactConstants.*;
+import static org.zmail.common.mailbox.ContactConstants.*;
 
 public class ContactData implements Serializable {
     private final Map<String, Field> fields = new HashMap<String, Field>();
@@ -54,7 +54,7 @@ public class ContactData implements Serializable {
     private static final Map<String, String> MULTI_VALUE_ATTR_NAMES = new HashMap<String, String>();
     private static final String IM_PREFIX = "imAddress";
 
-    // All Zimbra fields that are synchronized with Yahoo address book
+    // All Zmail fields that are synchronized with Yahoo address book
     private static final List<String> ALL_FIELDS = new ArrayList<String>();
     static {
         ALL_FIELDS.addAll(Ab.NAME_FIELDS);
@@ -72,7 +72,7 @@ public class ContactData implements Serializable {
         MULTI_VALUE_ATTR_NAMES.put(A_homeFax, A_homeFax);
     }
 
-    // Zimbra IM service names
+    // Zmail IM service names
     private static final String SERVICE_ZIMBRA = "local";
     private static final String SERVICE_YAHOO = "yahoo";
     private static final String SERVICE_AOL = "aol";
@@ -85,7 +85,7 @@ public class ContactData implements Serializable {
         }
     }
 
-    public ContactData(com.zimbra.cs.mailbox.Contact contact) 
+    public ContactData(org.zmail.cs.mailbox.Contact contact) 
         throws ServiceException {
         Map<String, String> zfields = contact.getFields();
         importField(A_firstName, getName(zfields));
@@ -443,7 +443,7 @@ public class ContactData implements Serializable {
         return s1.equals(s2);
     }
 
-    private static final String ZIM_PREFIX = "zimbra:";
+    private static final String ZIM_PREFIX = "zmail:";
     
     private static String getLocalImAddress(SimpleField field) {
         String value = field.getValue();

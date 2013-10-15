@@ -14,15 +14,15 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.search.savedsearch;
+package org.zmail.qa.selenium.projects.desktop.tests.search.savedsearch;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.SavedSearchFolderItem;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.*;
+import org.zmail.qa.selenium.framework.items.SavedSearchFolderItem;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.*;
 
 
 //TODO: add more in ContactItem.java
@@ -47,20 +47,20 @@ public class MoveSavedSearch extends AjaxCommonTest  {
 				
 			
 		// Create the message data to be moved
-		String name1 = "search" + ZimbraSeleniumProperties.getUniqueString();
-		String name2 = "search" + ZimbraSeleniumProperties.getUniqueString();
-		String query1 = "subject:(" + ZimbraSeleniumProperties.getUniqueString() + ")";
-		String query2 = "subject:(" + ZimbraSeleniumProperties.getUniqueString() + ")";
+		String name1 = "search" + ZmailSeleniumProperties.getUniqueString();
+		String name2 = "search" + ZmailSeleniumProperties.getUniqueString();
+		String query1 = "subject:(" + ZmailSeleniumProperties.getUniqueString() + ")";
+		String query2 = "subject:(" + ZmailSeleniumProperties.getUniqueString() + ")";
 		
 
 		app.zGetActiveAccount().soapSend(
-				"<CreateSearchFolderRequest xmlns='urn:zimbraMail'>" +
+				"<CreateSearchFolderRequest xmlns='urn:zmailMail'>" +
 					"<search name='"+ name1 +"' query='"+ query1 +"' l='1'/>" +
 				"</CreateSearchFolderRequest>");
 		SavedSearchFolderItem item1 = SavedSearchFolderItem.importFromSOAP(app.zGetActiveAccount(), name1);
 
 		app.zGetActiveAccount().soapSend(
-				"<CreateSearchFolderRequest xmlns='urn:zimbraMail'>" +
+				"<CreateSearchFolderRequest xmlns='urn:zmailMail'>" +
 					"<search name='"+ name2 +"' query='"+ query2 +"' l='1'/>" +
 				"</CreateSearchFolderRequest>");
 		SavedSearchFolderItem item2 = SavedSearchFolderItem.importFromSOAP(app.zGetActiveAccount(), name2);

@@ -14,12 +14,12 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.ui;
+package org.zmail.qa.selenium.framework.ui;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import com.zimbra.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.*;
 
 /**
  * A <code>AbsTooltip</code> object represents a popup tooltip

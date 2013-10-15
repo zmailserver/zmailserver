@@ -14,22 +14,22 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.mail.folders;
+package org.zmail.qa.selenium.projects.desktop.tests.mail.folders;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.ContextMenuItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.ContextMenuItem.CONTEXT_MENU_ITEM_NAME;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount.SOAP_DESTINATION_HOST_TYPE;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties.AppType;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.framework.items.ContextMenuItem;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.ContextMenuItem.CONTEXT_MENU_ITEM_NAME;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.framework.util.ZmailAccount.SOAP_DESTINATION_HOST_TYPE;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties.AppType;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
 
 public class ShowContextMenu extends AjaxCommonTest{
 
@@ -43,7 +43,7 @@ public class ShowContextMenu extends AjaxCommonTest{
 
    @BeforeMethod(alwaysRun = true)
    public void setParameters() {
-      _soapDestination = ZimbraSeleniumProperties.getAppType() == AppType.DESKTOP ? SOAP_DESTINATION_HOST_TYPE.CLIENT
+      _soapDestination = ZmailSeleniumProperties.getAppType() == AppType.DESKTOP ? SOAP_DESTINATION_HOST_TYPE.CLIENT
             : SOAP_DESTINATION_HOST_TYPE.SERVER;
    }
 
@@ -80,13 +80,13 @@ public class ShowContextMenu extends AjaxCommonTest{
          groups = { "smoke" })
    public void showZcsInboxContextMenu() throws HarnessException {
       // Brand new account, so erase and add brand new account
-      ZimbraAccount.ResetAccountZDC();
+      ZmailAccount.ResetAccountZDC();
       app.zPageLogin.zNavigateTo();
       app.zPageLogin.zRemoveAccount();
 
       addDefaultAccount();
-      ZimbraAccount.AccountZDC().authenticate();
-      ZimbraAccount.AccountZDC().authenticateToMailClientHost();
+      ZmailAccount.AccountZDC().authenticate();
+      ZmailAccount.AccountZDC().authenticateToMailClientHost();
       super.startingPage.zNavigateTo();
 
       FolderItem folderItem = FolderItem.importFromSOAP(app

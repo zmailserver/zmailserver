@@ -12,17 +12,17 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.tag.folder;
+package org.zmail.cs.taglib.tag.folder;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.taglib.tag.ZimbraSimpleTag;
-import com.zimbra.client.ZFolder;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.taglib.tag.ZmailSimpleTag;
+import org.zmail.client.ZFolder;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import java.io.IOException;
 
-public class ModifyFolderColorTag extends ZimbraSimpleTag {
+public class ModifyFolderColorTag extends ZmailSimpleTag {
 
     private String mId;
     private ZFolder.Color mColor;

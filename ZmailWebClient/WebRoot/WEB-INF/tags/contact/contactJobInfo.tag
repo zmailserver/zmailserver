@@ -13,12 +13,12 @@
  * ***** END LICENSE BLOCK *****
 --%>
 <%@ tag body-content="empty" %>
-<%@ attribute name="contact" rtexprvalue="true" required="true" type="com.zimbra.cs.taglib.bean.ZContactBean" %>
+<%@ attribute name="contact" rtexprvalue="true" required="true" type="org.zmail.cs.taglib.bean.ZContactBean" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
-<%@ taglib prefix="app" uri="com.zimbra.htmlclient" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
+<%@ taglib prefix="app" uri="org.zmail.htmlclient" %>
 <c:set var="company" value="${contact.company}" />
 <c:set var="phoneticCompany" value="${contact.phoneticCompany}" />
 <c:set var="hasCompany" value="${not empty company or not empty phoneticCompany}" />

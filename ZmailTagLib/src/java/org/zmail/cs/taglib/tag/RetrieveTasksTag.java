@@ -13,19 +13,19 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.taglib.tag;
+package org.zmail.cs.taglib.tag;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 import java.io.IOException;
 
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZFolder;
-import com.zimbra.client.ZSearchParams;
-import com.zimbra.cs.taglib.bean.ZFolderBean;
-import com.zimbra.soap.type.SearchSortBy;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZFolder;
+import org.zmail.client.ZSearchParams;
+import org.zmail.cs.taglib.bean.ZFolderBean;
+import org.zmail.soap.type.SearchSortBy;
 
-public class RetrieveTasksTag extends ZimbraSimpleTag {
+public class RetrieveTasksTag extends ZmailSimpleTag {
     private static final int DEFAULT_TASKS_LIMIT = 50;
 
     private String mVar;

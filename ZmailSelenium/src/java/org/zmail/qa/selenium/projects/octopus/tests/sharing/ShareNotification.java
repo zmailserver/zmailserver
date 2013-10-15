@@ -14,26 +14,26 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.octopus.tests.sharing;
+package org.zmail.qa.selenium.projects.octopus.tests.sharing;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.octopus.tests.history.HistoryCommonTest;
-import com.zimbra.qa.selenium.projects.octopus.ui.PageHistory.GetText;
-import com.zimbra.qa.selenium.projects.octopus.ui.PageMyFiles;
-import com.zimbra.qa.selenium.projects.octopus.ui.PageSharing.Locators;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.octopus.tests.history.HistoryCommonTest;
+import org.zmail.qa.selenium.projects.octopus.ui.PageHistory.GetText;
+import org.zmail.qa.selenium.projects.octopus.ui.PageMyFiles;
+import org.zmail.qa.selenium.projects.octopus.ui.PageSharing.Locators;
 
 public class ShareNotification extends HistoryCommonTest
 {
-	private ZimbraAccount granteeAccount = null;
+	private ZmailAccount granteeAccount = null;
 
 	public ShareNotification(){
 		logger.info("New " + ShareNotification.class.getCanonicalName());
@@ -41,7 +41,7 @@ public class ShareNotification extends HistoryCommonTest
 		// Test starts at the Octopus page
 		super.startingPage = app.zPageMyFiles;
 		super.startingAccountPreferences = null;
-		granteeAccount = new ZimbraAccount();
+		granteeAccount = new ZmailAccount();
 		granteeAccount.provision();
 		granteeAccount.authenticate();
 	}
@@ -49,7 +49,7 @@ public class ShareNotification extends HistoryCommonTest
 	@Test(description = "Accept the share by clicking on 'Add to My files' button.Verify the shared folder and files.", groups = { "smoke" })
 	public void AcceptShareByNotification() throws HarnessException
 	{
-		String ownerFolderName = "ownerFolder"+ ZimbraSeleniumProperties.getUniqueString();
+		String ownerFolderName = "ownerFolder"+ ZmailSeleniumProperties.getUniqueString();
 		shareFolder(ownerFolderName,PPT_FILE);
 
 		// Login with grantee's Credential's.
@@ -84,7 +84,7 @@ public class ShareNotification extends HistoryCommonTest
 	@Test(description = "Verify Share invitation has 'Add to my files' and 'Ignore' button.", groups = { "smoke" })
 	public void VerifyShareNotificationMenu() throws HarnessException
 	{
-		String ownerFolderName = "ownerFolder"+ ZimbraSeleniumProperties.getUniqueString();
+		String ownerFolderName = "ownerFolder"+ ZmailSeleniumProperties.getUniqueString();
 		shareFolder(ownerFolderName,PPT_FILE);
 
 		// Login with grantee's Credential's.
@@ -112,7 +112,7 @@ public class ShareNotification extends HistoryCommonTest
 	@Test(description = "Ignore the share by clicking on 'Ignore' button.Verify the shared folder is not visible under My Files directory.", groups = { "smoke" })
 	public void IgnoreShareUsingNotification() throws HarnessException
 	{
-		String ownerFolderName = "ownerFolder"+ ZimbraSeleniumProperties.getUniqueString();
+		String ownerFolderName = "ownerFolder"+ ZmailSeleniumProperties.getUniqueString();
 		shareFolder(ownerFolderName,PPT_FILE);
 
 		// Login with grantee's Credential's.
@@ -150,10 +150,10 @@ public class ShareNotification extends HistoryCommonTest
 		FolderItem granteeBrifcase = FolderItem.importFromSOAP(granteeAccount, SystemFolder.Briefcase);
 		// Create a mount point of shared folder in grantee's account
 		granteeAccount.soapSend(
-				"<CreateMountpointRequest xmlns='urn:zimbraMail'>"
+				"<CreateMountpointRequest xmlns='urn:zmailMail'>"
 						+ "<link l='" + granteeBrifcase.getId()+"' name='" + mountPointFolderName
 						+ "' view='document' rid='" + folder.getId()
-						+ "' zid='" + app.zGetActiveAccount().ZimbraId + "'/>"
+						+ "' zid='" + app.zGetActiveAccount().ZmailId + "'/>"
 						+"</CreateMountpointRequest>");
 
 		// revoke folder via soap
@@ -187,7 +187,7 @@ public class ShareNotification extends HistoryCommonTest
 	@Test(description = "After leaving the share ,shared mount point folder should not be visible.", groups = { "smoke" })
 	public void FolderNotVisibleAfterLeaveShare() throws HarnessException
 	{
-		String ownerFolderName = "ownerFolder"+ ZimbraSeleniumProperties.getUniqueString();
+		String ownerFolderName = "ownerFolder"+ ZmailSeleniumProperties.getUniqueString();
 		shareFolder(ownerFolderName,JPG_FILE);
 
 		// Login with grantee's Credential's.
@@ -220,14 +220,14 @@ public class ShareNotification extends HistoryCommonTest
 	public void shareFolder(String ownerFolderName,String fileInFolder) throws HarnessException
 	{
 		// Get current active account as owner
-		ZimbraAccount owner = app.zGetActiveAccount();
+		ZmailAccount owner = app.zGetActiveAccount();
 
 		// Get the root folder of Owner
 		FolderItem ownerBriefcase = FolderItem.importFromSOAP(owner, SystemFolder.Briefcase);
 
 		//Create folder Using SOAP under Owner root folder.
 		owner.soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>"
+				"<CreateFolderRequest xmlns='urn:zmailMail'>"
 						+"<folder name='" + ownerFolderName + "' l='" + ownerBriefcase.getId() + "' view='document'/>"
 						+"</CreateFolderRequest>");
 

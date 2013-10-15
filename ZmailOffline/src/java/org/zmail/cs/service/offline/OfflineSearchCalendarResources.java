@@ -12,27 +12,27 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.offline;
+package org.zmail.cs.service.offline;
 
 import java.util.Iterator;
 import java.util.Map;
 
-import com.zimbra.common.mailbox.ContactConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.offline.OfflineAccount;
-import com.zimbra.cs.index.LuceneFields;
-import com.zimbra.cs.service.account.SearchCalendarResources;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.mailbox.ContactConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.offline.OfflineAccount;
+import org.zmail.cs.index.LuceneFields;
+import org.zmail.cs.service.account.SearchCalendarResources;
+import org.zmail.soap.ZmailSoapContext;
 
 public class OfflineSearchCalendarResources extends SearchCalendarResources {
 
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext ctxt = getZimbraSoapContext(context);
+        ZmailSoapContext ctxt = getZmailSoapContext(context);
         Account acct = getRequestedAccount(ctxt);
         boolean needFullName = false;
         boolean needEmail = false;

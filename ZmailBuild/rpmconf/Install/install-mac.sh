@@ -16,7 +16,7 @@
 
 ID=`id -u`
 
-PATH="/bin:/usr/bin:/sbin:/usr/sbin:/opt/zimbra/bin"
+PATH="/bin:/usr/bin:/sbin:/usr/sbin:/opt/zmail/bin"
 export PATH
 
 if [ "x$ID" != "x0" ]; then
@@ -29,8 +29,8 @@ nireport=/usr/bin/nireport
 nifind=/usr/bin/nifind
 dscl=/usr/bin/dscl
 
-if [ -x "/opt/zimbra/libexec/get_plat_tag.sh" ]; then
-  platform=$(/opt/zimbra/libexec/get_plat_tag.sh)
+if [ -x "/opt/zmail/libexec/get_plat_tag.sh" ]; then
+  platform=$(/opt/zmail/libexec/get_plat_tag.sh)
 else
   platform=unknown
 fi
@@ -140,7 +140,7 @@ usage() {
 
   echo "$0 [-u] [-c config] [-m zcs.mpkg | -d zcs.dmg] [-l ZCSLicense.xml] [-s] [-h]"
   echo ""
-  echo " -u          Uninstall Zimbra Collaboration Server"
+  echo " -u          Uninstall Zmail Collaboration Server"
   echo " -d zcs.dmg  Install ZCS from contents of specified disk image"
   echo " -m zcs.mpkg Install ZCS with specified package"
   echo " -l license  ZCSLicense.xml file"
@@ -153,7 +153,7 @@ MYDIR=`dirname $0`
 
 SOFTWAREONLY="no"
 UNINSTALL="no"
-ZIMBRA_USER="zimbra"
+ZIMBRA_USER="zmail"
 if [ $# == 0 ]; then
   usage
   exit
@@ -196,9 +196,9 @@ fi
 if [ x$UNINSTALL == "xyes" ]; then
 
   # unload and remove launchd
-  echo -n "Unloading and removing zimbra from launchd..."
-  launchctl unload -w /System/Library/LaunchDaemons/com.zimbra.zcs.plist 2> /dev/null
-  rm /System/Library/LaunchDaemons/com.zimbra.zcs.plist 2> /dev/null
+  echo -n "Unloading and removing zmail from launchd..."
+  launchctl unload -w /System/Library/LaunchDaemons/org.zmail.zcs.plist 2> /dev/null
+  rm /System/Library/LaunchDaemons/org.zmail.zcs.plist 2> /dev/null
   echo "done."
 
   tmp="$(id $ZIMBRA_USER 2> /dev/null)"
@@ -206,8 +206,8 @@ if [ x$UNINSTALL == "xyes" ]; then
 
 
     # stop the processes nicely?
-    echo -n "Stopping all zimbra processes..."
-    su $ZIMBRA_USER -c '/opt/zimbra/bin/zmcontrol stop > /dev/null 2>&1'
+    echo -n "Stopping all zmail processes..."
+    su $ZIMBRA_USER -c '/opt/zmail/bin/zmcontrol stop > /dev/null 2>&1'
     # make sure all processes are really stopped
     $PS  |grep $ZIMBRA_USER | egrep -v "install|grep" | awk '{print $2}' | xargs kill 2> /dev/null
     echo "done."
@@ -221,32 +221,32 @@ if [ x$UNINSTALL == "xyes" ]; then
 
   # clean up syslog
   echo -n "Cleaning up syslog.conf..."
-  if [ ! -e "/etc/syslog.conf.zimbra" ]; then
-    cp -f /etc/syslog.conf /etc/syslog.conf.zimbra
+  if [ ! -e "/etc/syslog.conf.zmail" ]; then
+    cp -f /etc/syslog.conf /etc/syslog.conf.zmail
   fi
-  sed -i .zimbra -e '/zimbra.*.log/d' /etc/syslog.conf
+  sed -i .zmail -e '/zmail.*.log/d' /etc/syslog.conf
   if [ $? != 0 ]; then
     echo "failed."
-    mv /etc/syslog.conf.zimbra /etc/syslog.conf
+    mv /etc/syslog.conf.zmail /etc/syslog.conf
   else 
-    sed -i .zimbra -e 's:\(.*slapd\.log.*\):#\1:' /etc/syslog.conf
+    sed -i .zmail -e 's:\(.*slapd\.log.*\):#\1:' /etc/syslog.conf
     if [ $? != 0 ]; then
       echo "failed."
-      mv /etc/syslog.conf.zimbra /etc/syslog.conf
+      mv /etc/syslog.conf.zmail /etc/syslog.conf
     else 
       echo "done."
     fi
   fi
 
   # remove log rotation
-  if [ -f "/etc/periodic/daily/600.zimbra" ]; then
-    rm /etc/periodic/daily/600.zimbra
+  if [ -f "/etc/periodic/daily/600.zmail" ]; then
+    rm /etc/periodic/daily/600.zmail
   fi
 
   # clean up sudoers
   echo -n "Cleaning up /etc/sudoers..."
   SUDOMODE=`perl -e 'my $mode=(stat("/etc/sudoers"))[2];printf("%04o\n",$mode & 07777);'`
-  egrep -v '^%zimbra' /etc/sudoers > /tmp/sudoers.$$
+  egrep -v '^%zmail' /etc/sudoers > /tmp/sudoers.$$
   mv -f /tmp/sudoers.$$ /etc/sudoers 2> /dev/null
   rm -f /tmp/sudoers.$$ 2> /dev/null
   chmod $SUDOMODE /etc/sudoers
@@ -254,7 +254,7 @@ if [ x$UNINSTALL == "xyes" ]; then
 
   # clean up Receipts
   echo -n "Removing packaging receipts from /Library/Receipts..."
-  rm -rf /Library/Receipts/zimbra-* 2> /dev/null
+  rm -rf /Library/Receipts/zmail-* 2> /dev/null
   if [ $? = 0 ]; then
     echo "done."
   else
@@ -262,7 +262,7 @@ if [ x$UNINSTALL == "xyes" ]; then
   fi
 
   if [ -x /usr/sbin/pkgutil ]; then
-    for pkg in `/usr/sbin/pkgutil --pkgs='com.zimbra.zcs.*'`; do
+    for pkg in `/usr/sbin/pkgutil --pkgs='org.zmail.zcs.*'`; do
       echo -n "Removing package history for $pkg..."
       /usr/sbin/pkgutil --forget $pkg > /dev/null 2>&1
       if [ $? = 0 ]; then
@@ -274,7 +274,7 @@ if [ x$UNINSTALL == "xyes" ]; then
   fi
   if [ -d /private/var/db/receipts ]; then
     echo -n "Removing packaging receipts from /private/var/db/receipts..."
-    rm -rf /private/var/db/receipts/com.zimbra.zcs.*
+    rm -rf /private/var/db/receipts/org.zmail.zcs.*
     if [ $? = 0 ]; then
       echo "done."
     else
@@ -282,8 +282,8 @@ if [ x$UNINSTALL == "xyes" ]; then
     fi
   fi
 
-  echo -n "Removing /opt/zimbra..."
-  rm -rf /opt/zimbra 2> /dev/null
+  echo -n "Removing /opt/zmail..."
+  rm -rf /opt/zmail 2> /dev/null
   if [ $? = 0 ]; then
     echo "done."
   else
@@ -312,9 +312,9 @@ if [ x$UNINSTALL == "xyes" ]; then
     echo "done."
   fi
 
-  if [ -e "/opt/zimbra" ]; then
-    echo -n "Deleting /opt/zimbra..."
-    rm -rf /opt/zimbra > /dev/null 2>&1
+  if [ -e "/opt/zmail" ]; then
+    echo -n "Deleting /opt/zmail..."
+    rm -rf /opt/zmail > /dev/null 2>&1
     if [ $? = 0 ]; then
       echo "done."
     else 
@@ -346,19 +346,19 @@ fi
 
 # Install the license file
 if [ x"$LICENSE" != "x" -a -r "$LICENSE" ]; then
-  cp $LICENSE /opt/zimbra/conf/ZCSLicense.xml
-  chown zimbra:zimbra /opt/zimbra/conf/ZCSLicense.xml
-  chmod 444 /opt/zimbra/conf/ZCSLicense.xml
+  cp $LICENSE /opt/zmail/conf/ZCSLicense.xml
+  chown zmail:zmail /opt/zmail/conf/ZCSLicense.xml
+  chmod 444 /opt/zmail/conf/ZCSLicense.xml
 fi
 
 # Configure the installation
 if [ x$SOFTWAREONLY == "xno" ] && [ x$DMG != "x" -o x$PKG != "x"  ]; then
   if [ x$DEFAULTSFILE == "x" ]; then
-    /opt/zimbra/libexec/zmsetup.pl
+    /opt/zmail/libexec/zmsetup.pl
   else 
-    /opt/zimbra/libexec/zmsetup.pl -c $DEFAULTSFILE
+    /opt/zmail/libexec/zmsetup.pl -c $DEFAULTSFILE
   fi
 elif [ x$UNINSTALL != "xyes" ]; then
-  echo "You will need to execute /opt/zimbra/libexec/zmsetup.pl"
+  echo "You will need to execute /opt/zmail/libexec/zmsetup.pl"
   echo "to complete your installation."
 fi

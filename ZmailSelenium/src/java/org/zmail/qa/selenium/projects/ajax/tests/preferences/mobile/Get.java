@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.preferences.mobile;
+package org.zmail.qa.selenium.projects.ajax.tests.preferences.mobile;
 
 import java.util.HashMap;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
 
 
 public class Get extends AjaxCommonTest {
@@ -34,7 +34,7 @@ public class Get extends AjaxCommonTest {
 		
 		super.startingPage = app.zPagePreferences;
 		super.startingAccountPreferences = new HashMap<String , String>() {{
-		    put("zimbraFeatureMobileSyncEnabled", "TRUE");
+		    put("zmailFeatureMobileSyncEnabled", "TRUE");
 		}};
 	}
 

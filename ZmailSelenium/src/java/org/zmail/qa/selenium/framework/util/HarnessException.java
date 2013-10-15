@@ -14,13 +14,13 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.util;
+package org.zmail.qa.selenium.framework.util;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import com.zimbra.qa.selenium.framework.core.ClientSessionFactory;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties.AppType;
+import org.zmail.qa.selenium.framework.core.ClientSessionFactory;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties.AppType;
 
 public class HarnessException extends Exception {
 	Logger logger = LogManager.getLogger(HarnessException.class);
@@ -29,12 +29,12 @@ public class HarnessException extends Exception {
 
 	protected void resetAccounts() {
 		logger.error("Reset AccountZWC due to exception");
-		ZimbraAccount.ResetAccountZWC();
-		ZimbraAccount.ResetAccountHTML();
-		ZimbraAccount.ResetAccountZMC();
-		ZimbraAccount.ResetAccountZDC();
-		ZimbraAdminAccount.ResetAccountAdminConsoleAdmin();
-		if (ZimbraSeleniumProperties.getAppType() == AppType.ADMIN) {
+		ZmailAccount.ResetAccountZWC();
+		ZmailAccount.ResetAccountHTML();
+		ZmailAccount.ResetAccountZMC();
+		ZmailAccount.ResetAccountZDC();
+		ZmailAdminAccount.ResetAccountAdminConsoleAdmin();
+		if (ZmailSeleniumProperties.getAppType() == AppType.ADMIN) {
 			// WORKAROUND for all the dialogs that need to be dismissed
 			// Reload the app
 			ClientSessionFactory.session().selenium().refresh();

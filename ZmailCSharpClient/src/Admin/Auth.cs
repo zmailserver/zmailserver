@@ -15,9 +15,9 @@
 using System;
 using System.Xml;
 
-using Zimbra.Client.Util;
+using Zmail.Client.Util;
 
-namespace Zimbra.Client.Admin
+namespace Zmail.Client.Admin
 {
 	/// <summary>
 	/// Summary description for Auth.

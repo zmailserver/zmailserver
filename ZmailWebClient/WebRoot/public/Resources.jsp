@@ -56,7 +56,7 @@ basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
 
 	String skin = request.getParameter("skin");
 	if (skin == null) {
-		skin = application.getInitParameter("zimbraDefaultSkin");
+		skin = application.getInitParameter("zmailDefaultSkin");
 	}
 	skin = skin.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll("\"", "&quot;");
 

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.ab;
+package org.zmail.cs.offline.ab;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -21,23 +21,23 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Log;
-import com.zimbra.cs.account.offline.OfflineDataSource;
-import com.zimbra.cs.datasource.DataSourceManager;
-import com.zimbra.cs.db.DbDataSource;
-import com.zimbra.cs.db.DbDataSource.DataSourceItem;
-import com.zimbra.cs.mailbox.ChangeTrackingMailbox;
-import com.zimbra.cs.mailbox.Contact;
-import com.zimbra.cs.mailbox.DesktopMailbox;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Metadata;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.SyncExceptionHandler;
-import com.zimbra.cs.mime.ParsedContact;
-import com.zimbra.cs.offline.OfflineLog;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Log;
+import org.zmail.cs.account.offline.OfflineDataSource;
+import org.zmail.cs.datasource.DataSourceManager;
+import org.zmail.cs.db.DbDataSource;
+import org.zmail.cs.db.DbDataSource.DataSourceItem;
+import org.zmail.cs.mailbox.ChangeTrackingMailbox;
+import org.zmail.cs.mailbox.Contact;
+import org.zmail.cs.mailbox.DesktopMailbox;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Metadata;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.SyncExceptionHandler;
+import org.zmail.cs.mime.ParsedContact;
+import org.zmail.cs.offline.OfflineLog;
 
 public final class LocalData {
     private final OfflineDataSource ds;

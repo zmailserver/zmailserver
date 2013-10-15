@@ -19,7 +19,7 @@ postInstallConfig() {
 	echo "Post installation configuration"
 	echo ""
 
-	chmod 755 /opt/zimbra
+	chmod 755 /opt/zmail
 
 	if [ $UPGRADE = "yes" ]; then
 		#restore old config, then overwrite...
@@ -28,47 +28,47 @@ postInstallConfig() {
 
 	if [ $UPGRADE = "no" -a $STORE_HERE = "yes" ]; then
 		echo -n "Creating db..."
-		runAsZimbra "/opt/zimbra/libexec/zmmyinit"
+		runAsZmail "/opt/zmail/libexec/zmmyinit"
 		echo "done"
 	fi
 
 	if [ $LOGGER_HERE = "yes" ]; then
-		if [ ! -d "/opt/zimbra/logger/db/data" ]; then
+		if [ ! -d "/opt/zmail/logger/db/data" ]; then
 			echo -n "Creating logger db..."
-			runAsZimbra "/opt/zimbra/libexec/zmloggerinit"
+			runAsZmail "/opt/zmail/libexec/zmloggerinit"
 			echo "done"
 		fi
 	fi
 
 	echo -n "Setting the hostname to $HOSTNAME..."
-	runAsZimbra "zmlocalconfig -e zimbra_server_hostname=${HOSTNAME}"
+	runAsZmail "zmlocalconfig -e zmail_server_hostname=${HOSTNAME}"
 	echo "done"
 
 	echo -n "Setting the LDAP host to $LDAPHOST..."
-	runAsZimbra "zmlocalconfig -e ldap_host=$LDAPHOST"
-	runAsZimbra "zmlocalconfig -e ldap_port=$LDAPPORT"
+	runAsZmail "zmlocalconfig -e ldap_host=$LDAPHOST"
+	runAsZmail "zmlocalconfig -e ldap_port=$LDAPPORT"
 	echo "done"
 
 	SERVERCREATED="no"
 	if [ $UPGRADE = "no" ]; then
 		if [ $LDAP_HERE = "yes" ]; then
 			echo -n "Initializing ldap..."
-			runAsZimbra "/opt/zimbra/libexec/zmldapinit $LDAPROOTPW $LDAPZIMBRAPW"
+			runAsZmail "/opt/zmail/libexec/zmldapinit $LDAPROOTPW $LDAPZIMBRAPW"
 			echo "done"
 		else
 			# set the ldap password in localconfig only
 			echo -n "Setting the ldap passwords..."
-			runAsZimbra "zmlocalconfig -f -e ldap_root_password=$LDAPROOTPW"
-			runAsZimbra "zmlocalconfig -f -e zimbra_ldap_password=$LDAPZIMBRAPW"
-			runAsZimbra "zmlocalconfig -f -e ldap_postfix_password=$LDAPPOSTPW"
-			runAsZimbra "zmlocalconfig -f -e ldap_replication_password=$LDAPREPPW"
-			runAsZimbra "zmlocalconfig -f -e ldap_amavis_password=$LDAPAMAVISPW"
-			runAsZimbra "zmlocalconfig -f -e ldap_nginx_password=$LDAPNGINXPW"
+			runAsZmail "zmlocalconfig -f -e ldap_root_password=$LDAPROOTPW"
+			runAsZmail "zmlocalconfig -f -e zmail_ldap_password=$LDAPZIMBRAPW"
+			runAsZmail "zmlocalconfig -f -e ldap_postfix_password=$LDAPPOSTPW"
+			runAsZmail "zmlocalconfig -f -e ldap_replication_password=$LDAPREPPW"
+			runAsZmail "zmlocalconfig -f -e ldap_amavis_password=$LDAPAMAVISPW"
+			runAsZmail "zmlocalconfig -f -e ldap_nginx_password=$LDAPNGINXPW"
 			echo "done"
 		fi
 
 		echo -n "Creating server $HOSTNAME..."
-		runAsZimbra "zmprov cs $HOSTNAME"
+		runAsZmail "zmprov cs $HOSTNAME"
 		if [ $? = 0 ]; then
 			SERVERCREATED="yes"
 		fi
@@ -76,15 +76,15 @@ postInstallConfig() {
 
 		if [ x$CREATEDOMAIN != "x" ]; then
 			echo -n "Creating domain $CREATEDOMAIN..."
-			runAsZimbra "zmprov cd $CREATEDOMAIN"
-			runAsZimbra "zmprov mcf zimbraDefaultDomainName $CREATEDOMAIN"
+			runAsZmail "zmprov cd $CREATEDOMAIN"
+			runAsZmail "zmprov mcf zmailDefaultDomainName $CREATEDOMAIN"
 			echo "done"
 			if [ x$CREATEADMIN != "x" ]; then
 				echo -n "Creating admin account $CREATEADMIN..."
-				runAsZimbra "zmprov ca $CREATEADMIN $CREATEADMINPASS zimbraIsAdminAccount TRUE"
+				runAsZmail "zmprov ca $CREATEADMIN $CREATEADMINPASS zmailIsAdminAccount TRUE"
 				LOCALHOSTNAME=`hostname --fqdn`
 				if [ $LOCALHOSTNAME = $CREATEDOMAIN ]; then
-					runAsZimbra "zmprov aaa $CREATEADMIN postmaster@$HOSTNAME"
+					runAsZmail "zmprov aaa $CREATEADMIN postmaster@$HOSTNAME"
 				fi
 				echo "done"
 			fi
@@ -92,90 +92,90 @@ postInstallConfig() {
 	else
 		if [ $LDAP_HERE = "yes" ]; then
 			echo -n "Starting ldap..."
-			runAsZimbra "ldap start"
-			runAsZimbra "zmldapapplyldif"
+			runAsZmail "ldap start"
+			runAsZmail "zmldapapplyldif"
 			echo "done"
 		fi
 	fi
 
 	if [ $LDAP_HERE = "yes" ]; then
-		SERVICES="zimbraServiceInstalled ldap"
+		SERVICES="zmailServiceInstalled ldap"
 	fi
 
 	if [ $LOGGER_HERE = "yes" ]; then
-		SERVICES="$SERVICES zimbraServiceInstalled logger"
-		runAsZimbra "zmprov mcf zimbraLogHostname $HOSTNAME"
+		SERVICES="$SERVICES zmailServiceInstalled logger"
+		runAsZmail "zmprov mcf zmailLogHostname $HOSTNAME"
 	fi
 
 	if [ $STORE_HERE = "yes" ]; then
 		if [ $SERVERCREATED = "yes" ]; then
 			echo -n "Setting smtp host to $SMTPHOST..."
-			runAsZimbra "zmprov ms $HOSTNAME zimbraSmtpHostname $SMTPHOST"
+			runAsZmail "zmprov ms $HOSTNAME zmailSmtpHostname $SMTPHOST"
 			echo "done"
 		fi
 
-		echo -n "Adding $HOSTNAME to zimbraMailHostPool in default COS..."
-		runAsZimbra "id=\`zmprov gs $HOSTNAME | grep zimbraId | awk '{print \$2}'\`; for i in \`zmprov gc default | grep zimbraMailHostPool | sed 's/zimbraMailHostPool: //'\`; do host=\"\$host zimbraMailHostPool \$i\"; done; zmprov mc default \$host zimbraMailHostPool \$id"
+		echo -n "Adding $HOSTNAME to zmailMailHostPool in default COS..."
+		runAsZmail "id=\`zmprov gs $HOSTNAME | grep zmailId | awk '{print \$2}'\`; for i in \`zmprov gc default | grep zmailMailHostPool | sed 's/zmailMailHostPool: //'\`; do host=\"\$host zmailMailHostPool \$i\"; done; zmprov mc default \$host zmailMailHostPool \$id"
 		echo "done"
 
-		SERVICES="$SERVICES zimbraServiceInstalled mailbox"
+		SERVICES="$SERVICES zmailServiceInstalled mailbox"
 	fi
 
 	if [ $POSTFIX_HERE = "yes" ]; then
 		echo -n "Initializing mta config..."
-		runAsZimbra "/opt/zimbra/libexec/zmmtainit $LDAPHOST"
+		runAsZmail "/opt/zmail/libexec/zmmtainit $LDAPHOST"
 		echo "done"
 
 		# zmprov isn't very friendly
 
-		SERVICES="$SERVICES zimbraServiceInstalled mta"
+		SERVICES="$SERVICES zmailServiceInstalled mta"
 
 		if [ $RUNAV = "yes" ]; then
-			SERVICES="$SERVICES zimbraServiceInstalled antivirus"
-			runAsZimbra "zmlocalconfig -e av_notify_user=$AVUSER"
-			runAsZimbra "zmlocalconfig -e av_notify_domain=$AVDOMAIN"
+			SERVICES="$SERVICES zmailServiceInstalled antivirus"
+			runAsZmail "zmlocalconfig -e av_notify_user=$AVUSER"
+			runAsZmail "zmlocalconfig -e av_notify_domain=$AVDOMAIN"
 		fi
 		if [ $RUNSA = "yes" ]; then
-			SERVICES="$SERVICES zimbraServiceInstalled antispam"
+			SERVICES="$SERVICES zmailServiceInstalled antispam"
 		fi
 	fi
 
 	if [ $SNMP_HERE = "yes" ]; then
 		echo -n "Configuring SNMP..."
-		runAsZimbra "zmlocalconfig -e snmp_notify=$SNMPNOTIFY"
-		runAsZimbra "zmlocalconfig -e smtp_notify=$SMTPNOTIFY"
-		runAsZimbra \
+		runAsZmail "zmlocalconfig -e snmp_notify=$SNMPNOTIFY"
+		runAsZmail "zmlocalconfig -e smtp_notify=$SMTPNOTIFY"
+		runAsZmail \
 			"zmlocalconfig -e snmp_trap_host=$SNMPTRAPHOST"
-		runAsZimbra "zmlocalconfig -e smtp_source=$SMTPSOURCE"
-		runAsZimbra \
+		runAsZmail "zmlocalconfig -e smtp_source=$SMTPSOURCE"
+		runAsZmail \
 			"zmlocalconfig -e smtp_destination=$SMTPDEST"
-		runAsZimbra "zmsnmpinit"
+		runAsZmail "zmsnmpinit"
 		echo "done"
-		SERVICES="$SERVICES zimbraServiceInstalled snmp"
+		SERVICES="$SERVICES zmailServiceInstalled snmp"
 	fi
 
 	echo -n "Setting services on $HOSTNAME..."
-	runAsZimbra "zmprov -r ms $HOSTNAME $SERVICES"
+	runAsZmail "zmprov -r ms $HOSTNAME $SERVICES"
 
-	ENABLEDSERVICES=`echo $SERVICES | sed -e 's/zimbraServiceInstalled/zimbraServiceEnabled/g'`
-	runAsZimbra "zmprov -r ms $HOSTNAME $ENABLEDSERVICES"
+	ENABLEDSERVICES=`echo $SERVICES | sed -e 's/zmailServiceInstalled/zmailServiceEnabled/g'`
+	runAsZmail "zmprov -r ms $HOSTNAME $ENABLEDSERVICES"
 
-	LOCALSERVICES=`echo $SERVICES | sed -e 's/zimbraServiceInstalled //g'`
-	runAsZimbra "zmlocalconfig -e zimbra_services=\"$LOCALSERVICES\""
+	LOCALSERVICES=`echo $SERVICES | sed -e 's/zmailServiceInstalled //g'`
+	runAsZmail "zmlocalconfig -e zmail_services=\"$LOCALSERVICES\""
 	echo "done"
 
 	if [ $STORE_HERE = "yes" -o $POSTFIX_HERE = "yes" ]; then
 		echo -n "Setting up SSL..."
-		runAsZimbra "zmcreatecert"
+		runAsZmail "zmcreatecert"
 		if [ $STORE_HERE = "yes" ]; then
-			runAsZimbra "zmcertinstall mailbox"
-			runAsZimbra "zmtlsctl $MODE"
+			runAsZmail "zmcertinstall mailbox"
+			runAsZmail "zmtlsctl $MODE"
 		fi
 		if [ $POSTFIX_HERE = "yes" ]; then
-			runAsZimbra "zmcertinstall mta /opt/zimbra/ssl/ssl/server/smtpd.crt /opt/zimbra/ssl/ssl/ca/ca.key"
+			runAsZmail "zmcertinstall mta /opt/zmail/ssl/ssl/server/smtpd.crt /opt/zmail/ssl/ssl/ca/ca.key"
 		fi
 
-		runAsZimbra "zmlocalconfig -e ssl_allow_untrusted_certs=$ALLOWSELFSIGNED"
+		runAsZmail "zmlocalconfig -e ssl_allow_untrusted_certs=$ALLOWSELFSIGNED"
 		echo "done"
 		if [ $UPGRADE = "yes" ]; then
 			restoreCerts

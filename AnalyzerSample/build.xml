@@ -16,18 +16,18 @@
 
 	<property environment="env"/>
 	
-	<!-- set up dependency on ZimbraServer -->
-	<condition property="zimbraServer.dir" value="${env.ZIMBRASERVER_DIR}">
+	<!-- set up dependency on ZmailServer -->
+	<condition property="zmailServer.dir" value="${env.ZIMBRASERVER_DIR}">
 	    <isset property="env.ZIMBRASERVER_DIR" />
 	</condition>	
-	<condition property="zimbraServer.dir" value="../ZimbraServer">
+	<condition property="zmailServer.dir" value="../ZmailServer">
 	    <not><isset property="env.ZIMBRASERVER_DIR"/></not>
 	</condition>	
 
 	<path id="class.path">
 		<pathelement location="${build.classes.dir}" />
-		<pathelement location="${zimbraServer.dir}/build/classes"/>
-		<fileset dir="${zimbraServer.dir}/jars">
+		<pathelement location="${zmailServer.dir}/build/classes"/>
+		<fileset dir="${zmailServer.dir}/jars">
 			<include name="**/*.jar"/>
 		</fileset>
 	</path>

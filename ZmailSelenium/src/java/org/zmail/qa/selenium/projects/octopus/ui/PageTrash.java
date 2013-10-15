@@ -17,17 +17,17 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.octopus.ui;
+package org.zmail.qa.selenium.projects.octopus.ui;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.IItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.octopus.ui.DialogError;
-import com.zimbra.qa.selenium.projects.octopus.ui.DialogError.DialogErrorID;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.IItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.octopus.ui.DialogError;
+import org.zmail.qa.selenium.projects.octopus.ui.DialogError.DialogErrorID;
 
 public class PageTrash extends AbsTab {
 
@@ -63,8 +63,8 @@ public class PageTrash extends AbsTab {
 		return (new Toaster(this.MyApplication));
 	}
 
-	public DialogError zGetErrorDialog(DialogErrorID zimbra) {
-		return (new DialogError(zimbra, this.MyApplication, this));
+	public DialogError zGetErrorDialog(DialogErrorID zmail) {
+		return (new DialogError(zmail, this.MyApplication, this));
 	}
 
 	@Override
@@ -280,18 +280,18 @@ public class PageTrash extends AbsTab {
 		return items;
 	}
 
-	public void deleteItemUsingSOAP(String itemId, ZimbraAccount account)
+	public void deleteItemUsingSOAP(String itemId, ZmailAccount account)
 			throws HarnessException {
-		account.soapSend("<ItemActionRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<ItemActionRequest xmlns='urn:zmailMail'>"
 				+ "<action id='" + itemId + "' op='trash'/>"
 				+ "</ItemActionRequest>");
 	}
 	
-	public void emptyTrashUsingSOAP(ZimbraAccount account)
+	public void emptyTrashUsingSOAP(ZmailAccount account)
 			throws HarnessException {
 		FolderItem trash = FolderItem.importFromSOAP(account,
 				SystemFolder.Trash);
-		account.soapSend("<FolderActionRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<FolderActionRequest xmlns='urn:zmailMail'>"
 				+ "<action id='" + trash.getId() + "' op='empty' recursive='true'/>"
 				+ "</FolderActionRequest>");
 	}

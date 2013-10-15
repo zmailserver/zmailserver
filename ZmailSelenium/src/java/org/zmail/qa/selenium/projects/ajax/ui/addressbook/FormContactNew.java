@@ -14,20 +14,20 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.ui.addressbook;
+package org.zmail.qa.selenium.projects.ajax.ui.addressbook;
 
 import java.util.*;
 import java.util.Map.Entry;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.*;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.ui.*;
 
 
 
 /**
- * @author zimbra
+ * @author zmail
  *
  */
 public class FormContactNew extends AbsForm {
@@ -238,7 +238,7 @@ public class FormContactNew extends AbsForm {
 	 * Determine the z-shell <div/> that contains the Search Contacts, GAL, Personal and Shared
 	 * menu.
 	 * 
-	 * See https://bugzilla.zimbra.com/show_bug.cgi?id=77791
+	 * See https://bugzilla.zmail.com/show_bug.cgi?id=77791
 	 * @return The z_shell Child ID
 	 * @throws HarnessException 
 	 */
@@ -268,7 +268,7 @@ public class FormContactNew extends AbsForm {
 	/**
 	 * Determine the z-shell <div/> that contains the hidden name menu.
 	 * 
-	 * See https://bugzilla.zimbra.com/show_bug.cgi?id=77791
+	 * See https://bugzilla.zmail.com/show_bug.cgi?id=77791
 	 * @return The z_shell Child ID
 	 * @throws HarnessException 
 	 */
@@ -298,7 +298,7 @@ public class FormContactNew extends AbsForm {
 	/**
 	 * Determine the z-shell <div/> that contains the hidden FileAs menu.
 	 * 
-	 * See https://bugzilla.zimbra.com/show_bug.cgi?id=77791
+	 * See https://bugzilla.zmail.com/show_bug.cgi?id=77791
 	 * @return The z_shell Child ID
 	 * @throws HarnessException 
 	 */

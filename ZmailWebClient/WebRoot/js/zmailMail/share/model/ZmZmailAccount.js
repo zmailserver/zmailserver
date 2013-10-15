@@ -15,7 +15,7 @@
 
 /**
  * @overview
- * This file contains the zimbra account class.
+ * This file contains the zmail account class.
  */
 
 /**
@@ -32,7 +32,7 @@
  *
  * @extends	ZmAccount
  */
-ZmZimbraAccount = function(id, name, visible) {
+ZmZmailAccount = function(id, name, visible) {
 
 	ZmAccount.call(this, null, id, name);
 
@@ -52,11 +52,11 @@ ZmZimbraAccount = function(id, name, visible) {
 	this.metaData = new ZmMetaData(this);
 };
 
-ZmZimbraAccount.prototype = new ZmAccount;
-ZmZimbraAccount.prototype.constructor = ZmZimbraAccount;
+ZmZmailAccount.prototype = new ZmAccount;
+ZmZmailAccount.prototype.constructor = ZmZmailAccount;
 
-ZmZimbraAccount.prototype.isZmZimbraAccount;
-ZmZimbraAccount.prototype.toString = function() { return "ZmZimbraAccount"; };
+ZmZmailAccount.prototype.isZmZmailAccount;
+ZmZmailAccount.prototype.toString = function() { return "ZmZmailAccount"; };
 
 
 //
@@ -66,27 +66,27 @@ ZmZimbraAccount.prototype.toString = function() { return "ZmZimbraAccount"; };
 /**
  * Defines the "unknown" status.
  */
-ZmZimbraAccount.STATUS_UNKNOWN	= "unknown";
+ZmZmailAccount.STATUS_UNKNOWN	= "unknown";
 /**
  * Defines the "offline" status.
  */
-ZmZimbraAccount.STATUS_OFFLINE	= "offline";
+ZmZmailAccount.STATUS_OFFLINE	= "offline";
 /**
  * Defines the "online" status.
  */
-ZmZimbraAccount.STATUS_ONLINE	= "online";
+ZmZmailAccount.STATUS_ONLINE	= "online";
 /**
  * Defines the "running" status.
  */
-ZmZimbraAccount.STATUS_RUNNING	= "running";
+ZmZmailAccount.STATUS_RUNNING	= "running";
 /**
  * Defines the "authentication fail" status.
  */
-ZmZimbraAccount.STATUS_AUTHFAIL	= "authfail";
+ZmZmailAccount.STATUS_AUTHFAIL	= "authfail";
 /**
  * Defines the "error" status.
  */
-ZmZimbraAccount.STATUS_ERROR	= "error";
+ZmZmailAccount.STATUS_ERROR	= "error";
 
 //
 // Public methods
@@ -97,7 +97,7 @@ ZmZimbraAccount.STATUS_ERROR	= "error";
  * 
  * @param		{String}	name	the account name
  */
-ZmZimbraAccount.prototype.setName =
+ZmZmailAccount.prototype.setName =
 function(name) {
 	var identity = this.getIdentity();
 	// TODO: If no identity and name is set, should create one!
@@ -110,7 +110,7 @@ function(name) {
  * 
  * @return		{String}		the account name
  */
-ZmZimbraAccount.prototype.getName =
+ZmZmailAccount.prototype.getName =
 function() {
 	var identity = this.getIdentity();
 	var name = (!identity)
@@ -129,7 +129,7 @@ function() {
  * 
  * @param	{String}	email 	the email address (ignored)
  */
-ZmZimbraAccount.prototype.setEmail =
+ZmZmailAccount.prototype.setEmail =
 function(email) {}; // IGNORE
 
 /**
@@ -137,7 +137,7 @@ function(email) {}; // IGNORE
  * 
  * @return	{String}	the email address
  */
-ZmZimbraAccount.prototype.getEmail =
+ZmZmailAccount.prototype.getEmail =
 function() {
 	return this.name;
 };
@@ -147,7 +147,7 @@ function() {
  * 
  * @return	{String}	the display name
  */
-ZmZimbraAccount.prototype.getDisplayName =
+ZmZmailAccount.prototype.getDisplayName =
 function() {
 	if (!this.displayName) {
 		var dispName = this.isMain
@@ -163,7 +163,7 @@ function() {
  * 
  * @return	{ZmIdentity}	the identity
  */
-ZmZimbraAccount.prototype.getIdentity =
+ZmZmailAccount.prototype.getIdentity =
 function() {
 	var defaultIdentity = appCtxt.getIdentityCollection(this).defaultIdentity;
 	if (!appCtxt.isFamilyMbox || this.isMain) {
@@ -183,7 +183,7 @@ function() {
  * 
  * @return	{String}		the tool tip
  */
-ZmZimbraAccount.prototype.getToolTip =
+ZmZmailAccount.prototype.getToolTip =
 function() {
 	if (this.status || this.lastSync || this.isMain) {
 		var lastSyncDate = (this.lastSync && this.lastSync != 0)
@@ -207,7 +207,7 @@ function() {
 			quota: AjxUtil.formatSize(quota, false, 1)
 		};
 
-		return AjxTemplate.expand("share.App#ZimbraAccountTooltip", params);
+		return AjxTemplate.expand("share.App#ZmailAccountTooltip", params);
 	}
 	return "";
 };
@@ -218,7 +218,7 @@ function() {
  * @return	{String}		the default color
  * @see		ZmOrganizer
  */
-ZmZimbraAccount.prototype.getDefaultColor =
+ZmZmailAccount.prototype.getDefaultColor =
 function() {
 	if (this.isMain) {
 		return ZmOrganizer.C_GRAY;
@@ -239,10 +239,10 @@ function() {
  * 
  * @return	{Boolean}	if <code>true</code>, this account has never been sync'd
  */
-ZmZimbraAccount.prototype.hasNotSynced =
+ZmZmailAccount.prototype.hasNotSynced =
 function() {
 	return (this.isOfflineInitialSync() && 
-			this.status == ZmZimbraAccount.STATUS_UNKNOWN &&
+			this.status == ZmZmailAccount.STATUS_UNKNOWN &&
 			appCtxt.get(ZmSetting.QUOTA_USED, null, this) == 0);
 };
 
@@ -251,7 +251,7 @@ function() {
  * 
  * @return	{Boolean}	if <code>true</code>, this account is currently sync'ing for the first time
  */
-ZmZimbraAccount.prototype.isOfflineInitialSync =
+ZmZmailAccount.prototype.isOfflineInitialSync =
 function() {
 	return (appCtxt.isOffline && (!this.lastSync || (this.lastSync && this.lastSync == 0)));
 };
@@ -261,7 +261,7 @@ function() {
  * 
  * @return	{Boolean}	if <code>true</code>, account is CalDAV based
  */
-ZmZimbraAccount.prototype.isCalDavBased =
+ZmZmailAccount.prototype.isCalDavBased =
 function() {
 	return (this.type == ZmAccount.TYPE_GMAIL ||
 			this.type == ZmAccount.TYPE_YMP);
@@ -272,9 +272,9 @@ function() {
  * therefore, this method returns the first non-default calendar.
  * 
  * @return	{Object}		the calendar
- * @see		ZmZimbraAccount.isCalDavBased
+ * @see		ZmZmailAccount.isCalDavBased
  */
-ZmZimbraAccount.prototype.getDefaultCalendar =
+ZmZmailAccount.prototype.getDefaultCalendar =
 function() {
 	var tree = appCtxt.getFolderTree(this);
 	if (this.isCalDavBased()) {
@@ -292,7 +292,7 @@ function() {
  * 
  * @private
  */
-ZmZimbraAccount.prototype.updateState =
+ZmZmailAccount.prototype.updateState =
 function(acctInfo) {
 	if (this.isMain) { return; } // main account doesn't sync
 
@@ -340,19 +340,19 @@ function(acctInfo) {
  * 
  * @return	{String}	the status icon
  */
-ZmZimbraAccount.prototype.getStatusIcon =
+ZmZmailAccount.prototype.getStatusIcon =
 function() {
 	if (this.inNewMailMode) {
 		return "NewMailAlert";
 	}
 
 	switch (this.status) {
-//		case ZmZimbraAccount.STATUS_UNKNOWN:	return "Offline"; 				// bug: 42403 - remove
-		case ZmZimbraAccount.STATUS_OFFLINE:	return "ImAway";
-//		case ZmZimbraAccount.STATUS_ONLINE:		return "";						// no icon for "online"
-//		case ZmZimbraAccount.STATUS_RUNNING:	// animated, so cannot be set using AjxImg
-		case ZmZimbraAccount.STATUS_AUTHFAIL:	return "ImDnd";
-		case ZmZimbraAccount.STATUS_ERROR:		return "Critical";
+//		case ZmZmailAccount.STATUS_UNKNOWN:	return "Offline"; 				// bug: 42403 - remove
+		case ZmZmailAccount.STATUS_OFFLINE:	return "ImAway";
+//		case ZmZmailAccount.STATUS_ONLINE:		return "";						// no icon for "online"
+//		case ZmZmailAccount.STATUS_RUNNING:	// animated, so cannot be set using AjxImg
+		case ZmZmailAccount.STATUS_AUTHFAIL:	return "ImDnd";
+		case ZmZmailAccount.STATUS_ERROR:		return "Critical";
 	}
 	return null;
 };
@@ -362,10 +362,10 @@ function() {
  * 
  * @return	{Boolean}	if <code>true</code>, the account is in error status
  */
-ZmZimbraAccount.prototype.isError =
+ZmZmailAccount.prototype.isError =
 function() {
-	return (this.status == ZmZimbraAccount.STATUS_AUTHFAIL ||
-			this.status == ZmZimbraAccount.STATUS_ERROR);
+	return (this.status == ZmZmailAccount.STATUS_AUTHFAIL ||
+			this.status == ZmZmailAccount.STATUS_ERROR);
 };
 
 /**
@@ -373,7 +373,7 @@ function() {
  * 
  * @return	{String}	the icon
  */
-ZmZimbraAccount.prototype.getIcon =
+ZmZmailAccount.prototype.getIcon =
 function() {
 	return (this.isMain && appCtxt.isOffline) ? "LocalFolders" : this.icon;
 };
@@ -383,7 +383,7 @@ function() {
  * 
  * @private
  */
-ZmZimbraAccount.prototype.getZdMsg =
+ZmZmailAccount.prototype.getZdMsg =
 function(code) {
 	var msg = ((ZdMsg["client." + code]) || (ZdMsg["exception." + code]));
 	if (!msg && code) {
@@ -397,19 +397,19 @@ function(code) {
  * 
  * @return	{String}		the status message
  */
-ZmZimbraAccount.prototype.getStatusMessage =
+ZmZmailAccount.prototype.getStatusMessage =
 function() {
 	if (this.inNewMailMode) {
 		return AjxMessageFormat.format(ZmMsg.unreadCount, this.unread);
 	}
 
 	switch (this.status) {
-//		case ZmZimbraAccount.STATUS_UNKNOWN:	return ZmMsg.unknown;
-		case ZmZimbraAccount.STATUS_OFFLINE:	return ZmMsg.imStatusOffline;
-		case ZmZimbraAccount.STATUS_ONLINE:		return ZmMsg.imStatusOnline;
-		case ZmZimbraAccount.STATUS_RUNNING:	return ZmMsg.running;
-		case ZmZimbraAccount.STATUS_AUTHFAIL:	return this.code ? this.getZdMsg(this.code) : AjxMessageFormat.format(ZmMsg.authFailure, this.getEmail());
-		case ZmZimbraAccount.STATUS_ERROR:		return this.code ? this.getZdMsg(this.code) : ZmMsg.error;
+//		case ZmZmailAccount.STATUS_UNKNOWN:	return ZmMsg.unknown;
+		case ZmZmailAccount.STATUS_OFFLINE:	return ZmMsg.imStatusOffline;
+		case ZmZmailAccount.STATUS_ONLINE:		return ZmMsg.imStatusOnline;
+		case ZmZmailAccount.STATUS_RUNNING:	return ZmMsg.running;
+		case ZmZmailAccount.STATUS_AUTHFAIL:	return this.code ? this.getZdMsg(this.code) : AjxMessageFormat.format(ZmMsg.authFailure, this.getEmail());
+		case ZmZmailAccount.STATUS_ERROR:		return this.code ? this.getZdMsg(this.code) : ZmMsg.error;
 	}
 	return "";
 };
@@ -421,11 +421,11 @@ function() {
  * 
  * @private
  */
-ZmZimbraAccount.prototype.showErrorMessage =
+ZmZmailAccount.prototype.showErrorMessage =
 function() {
 	if (!this.isError()) { return; }
 
-	var dialog = (this.status == ZmZimbraAccount.STATUS_ERROR)
+	var dialog = (this.status == ZmZmailAccount.STATUS_ERROR)
 		? appCtxt.getErrorDialog() : appCtxt.getMsgDialog();
 
 	// short message
@@ -435,7 +435,7 @@ function() {
 	}
 	dialog.setMessage(msg);
 
-	if (this.status == ZmZimbraAccount.STATUS_ERROR) {
+	if (this.status == ZmZmailAccount.STATUS_ERROR) {
 		// detailed message
 		var html = [];
 		var i = 0;
@@ -468,9 +468,9 @@ function() {
 /**
  * @private
  */
-ZmZimbraAccount.createFromDom =
+ZmZmailAccount.createFromDom =
 function(node) {
-	var acct = new ZmZimbraAccount();
+	var acct = new ZmZmailAccount();
 	acct._loadFromDom(node);
 	return acct;
 };
@@ -480,7 +480,7 @@ function(node) {
  * 
  * @param	{AjxCallback}	callback		the callback
  */
-ZmZimbraAccount.prototype.load =
+ZmZmailAccount.prototype.load =
 function(callback) {
 	if (!this.loaded) {
 		// create new ZmSetting for this account
@@ -508,7 +508,7 @@ function(callback) {
 		this.settings.loadUserSettings(loadCallback, null, this.name, null, command);
 
 		// get tag info for this account *FIRST* - otherwise, root ID get overridden
-		var tagDoc = AjxSoapDoc.create("GetTagRequest", "urn:zimbraMail");
+		var tagDoc = AjxSoapDoc.create("GetTagRequest", "urn:zmailMail");
 		var tagCallback = new AjxCallback(this, this._handleLoadTags);
 		command.addNewRequestParams(tagDoc, tagCallback);
 
@@ -516,7 +516,7 @@ function(callback) {
 		this.loadMetaData(null, command);
 
 		// get folder info for this account
-		var folderDoc = AjxSoapDoc.create("GetFolderRequest", "urn:zimbraMail");
+		var folderDoc = AjxSoapDoc.create("GetFolderRequest", "urn:zmailMail");
 		folderDoc.getMethod().setAttribute("visible", "1");
 		var folderCallback = new AjxCallback(this, this._handleLoadFolders);
 		command.addNewRequestParams(folderDoc, folderCallback);
@@ -530,7 +530,7 @@ function(callback) {
 	}
 };
 
-ZmZimbraAccount.prototype.loadMetaData =
+ZmZmailAccount.prototype.loadMetaData =
 function(callback, batchCommand) {
 	var metaDataCallback = new AjxCallback(this, this._handleLoadMetaData, [callback]);
 	var sections = [ZmSetting.M_IMPLICIT, ZmSetting.M_OFFLINE];
@@ -541,7 +541,7 @@ function(callback, batchCommand) {
  * Unloads the account and removes any account-specific data stored globally.
  * 
  */
-ZmZimbraAccount.prototype.unload =
+ZmZmailAccount.prototype.unload =
 function() {
 	if (!appCtxt.inStartup) {
 		// unset account-specific shortcuts
@@ -554,9 +554,9 @@ function() {
  * 
  * @param	{AjxCallback}	callback		the callback
  */
-ZmZimbraAccount.prototype.sync =
+ZmZmailAccount.prototype.sync =
 function(callback) {
-	var soapDoc = AjxSoapDoc.create("SyncRequest", "urn:zimbraOffline");
+	var soapDoc = AjxSoapDoc.create("SyncRequest", "urn:zmailOffline");
 	if (appCtxt.get(ZmSetting.OFFLINE_DEBUG_TRACE)) {
 		var method = soapDoc.getMethod();
 		method.setAttribute("debug", 1);
@@ -577,7 +577,7 @@ function(callback) {
  * @param	{AjxCallback}	errorCallback		the error callback
  * @param	{Object}	batchCmd		the batch command
  */
-ZmZimbraAccount.prototype.save =
+ZmZmailAccount.prototype.save =
 function(callback, errorCallback, batchCmd) {
 	return (this.getIdentity().save(callback, errorCallback, batchCmd));
 };
@@ -587,7 +587,7 @@ function(callback, errorCallback, batchCmd) {
  * 
  * @private
  */
-ZmZimbraAccount.prototype.saveImplicitPrefs =
+ZmZmailAccount.prototype.saveImplicitPrefs =
 function() {
     var isExternal = this.settings ? this.settings.get(ZmSetting.IS_EXTERNAL) : false;
     if (isExternal) {
@@ -613,7 +613,7 @@ function() {
  * @param {String}		appName		the name of the application
  * @return	{Boolean}	<code>true</code> if account supports the application
  */
-ZmZimbraAccount.prototype.isAppEnabled =
+ZmZmailAccount.prototype.isAppEnabled =
 function(appName) {
 	switch (appName) {
 		case ZmApp.BRIEFCASE: 	return appCtxt.get(ZmSetting.BRIEFCASE_ENABLED, null, this);
@@ -635,7 +635,7 @@ function(appName) {
 /**
  * @private
  */
-ZmZimbraAccount.prototype._handleLoadSettings =
+ZmZmailAccount.prototype._handleLoadSettings =
 function(result) {
 	DBG.println(AjxDebug.DBG1, "Account settings successfully loaded for " + this.name);
 
@@ -644,7 +644,7 @@ function(result) {
 		? appCtxt.get(ZmSetting.OFFLINE_ACCOUNT_FLAVOR, null, this)
 		: ZmAccount.TYPE_ZIMBRA;
 
-	this.isZimbraAccount = this.type == ZmAccount.TYPE_ZIMBRA;
+	this.isZmailAccount = this.type == ZmAccount.TYPE_ZIMBRA;
 
 	// set icon now that we know the type
 	switch (this.type) {
@@ -656,7 +656,7 @@ function(result) {
 		case ZmAccount.TYPE_EXCHANGE:	this.icon = "AccountExchange"; break;
 		case ZmAccount.TYPE_POP:		this.icon = "AccountPOP"; break;
 		case ZmAccount.TYPE_YMP:		this.icon = "AccountYahoo"; break;
-		case ZmAccount.TYPE_ZIMBRA:		this.icon = "AccountZimbra"; break;
+		case ZmAccount.TYPE_ZIMBRA:		this.icon = "AccountZmail"; break;
 	}
 
 	// initialize identities/data-sources/signatures for this account
@@ -670,7 +670,7 @@ function(result) {
 /**
  * @private
  */
-ZmZimbraAccount.prototype._handleLoadFolders =
+ZmZmailAccount.prototype._handleLoadFolders =
 function(result) {
 	var resp = result.getResponse().GetFolderResponse;
 	var folders = resp ? resp.folder[0] : null;
@@ -682,7 +682,7 @@ function(result) {
 /**
  * @private
  */
-ZmZimbraAccount.prototype._handleLoadTags =
+ZmZmailAccount.prototype._handleLoadTags =
 function(result) {
 	var resp = result.getResponse().GetTagResponse;
 	appCtxt.getRequestMgr()._loadTree(ZmOrganizer.TAG, null, resp, null, this);
@@ -691,7 +691,7 @@ function(result) {
 /**
  * @private
  */
-ZmZimbraAccount.prototype._handleLoadUserInfo =
+ZmZmailAccount.prototype._handleLoadUserInfo =
 function(callback) {
 	this.loaded = true;
 
@@ -709,7 +709,7 @@ function(callback) {
 /**
  * @private
  */
-ZmZimbraAccount.prototype._handleLoadMetaData =
+ZmZmailAccount.prototype._handleLoadMetaData =
 function(callback, sections) {
 	for (var i in sections) {
 		this.settings.createFromJs(sections[i]);
@@ -723,7 +723,7 @@ function(callback, sections) {
 /**
  * @private
  */
-ZmZimbraAccount.prototype._handleErrorLoad =
+ZmZmailAccount.prototype._handleErrorLoad =
 function(callback, ev) {
 	DBG.println(AjxDebug.DBG1, "------- ERROR loading account settings for " + this.name);
 	if (callback) {
@@ -734,7 +734,7 @@ function(callback, ev) {
 /**
  * @private
  */
-ZmZimbraAccount.prototype._loadFromDom =
+ZmZmailAccount.prototype._loadFromDom =
 function(node) {
 	this.id = node.id;
 	this.name = node.name;
@@ -743,5 +743,5 @@ function(node) {
 
 	var data = node.attrs && node.attrs._attrs;
 	this._displayName = data ? data.displayName : this.email;
-	this._accountName = data && data.zimbraPrefLabel;
+	this._accountName = data && data.zmailPrefLabel;
 };

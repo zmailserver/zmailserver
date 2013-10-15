@@ -1,9 +1,9 @@
 <%@ page import='java.util.Locale' %>
 <%@ page import="java.util.regex.Pattern" %>
 <%@ page import="java.util.regex.Matcher" %>
-<%@ page import="com.zimbra.cs.taglib.bean.BeanUtils" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
+<%@ page import="org.zmail.cs.taglib.bean.BeanUtils" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%
@@ -59,7 +59,7 @@
 
     String skin = request.getParameter("skin");
     if (skin == null || !mailbox.getAvailableSkins().contains(skin)) {
-        skin = application.getInitParameter("zimbraDefaultSkin");
+        skin = application.getInitParameter("zmailDefaultSkin");
 	}
 	skin = skin.replaceAll("['\"<>&]", "");
 
@@ -123,7 +123,7 @@
     pageContext.setAttribute("isCoverage", isCoverage);
 %>
 <fmt:setLocale value='${pageContext.request.locale}' scope='request' />
-<title><fmt:setBundle basename="/messages/ZmMsg"/><fmt:message key="zimbraTitle"/></title>
+<title><fmt:setBundle basename="/messages/ZmMsg"/><fmt:message key="zmailTitle"/></title>
 <jsp:include page="Resources.jsp">
 	<jsp:param name="res" value="I18nMsg,AjxMsg,ZMsg,ZmMsg,AjxKeys,ZmKeys,AjxTemplateMsg" />
 	<jsp:param name="skin" value="${skin}" />

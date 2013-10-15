@@ -14,12 +14,12 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.ui.addressbook;
+package org.zmail.qa.selenium.projects.ajax.ui.addressbook;
 
 import java.util.ArrayList;
 
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
 
 
 public class DisplayContact extends  AbsDisplay {

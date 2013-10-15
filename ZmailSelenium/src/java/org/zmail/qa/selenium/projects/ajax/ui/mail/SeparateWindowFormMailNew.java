@@ -17,26 +17,26 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.ajax.ui.mail;
+package org.zmail.qa.selenium.projects.ajax.ui.mail;
 
 import java.util.List;
 
-import com.zimbra.qa.selenium.framework.core.SeleniumService;
-import com.zimbra.qa.selenium.framework.items.MailItem;
-import com.zimbra.qa.selenium.framework.items.RecipientItem;
-import com.zimbra.qa.selenium.framework.items.RecipientItem.RecipientType;
-import com.zimbra.qa.selenium.framework.ui.AbsApplication;
-import com.zimbra.qa.selenium.framework.ui.AbsPage;
-import com.zimbra.qa.selenium.framework.ui.AbsSeparateWindow;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.ui.Shortcut;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.SleepUtil;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.framework.util.staf.Stafpostqueue;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogWarning;
-import com.zimbra.qa.selenium.projects.ajax.ui.SeparateWindowDialog;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew.Field;
+import org.zmail.qa.selenium.framework.core.SeleniumService;
+import org.zmail.qa.selenium.framework.items.MailItem;
+import org.zmail.qa.selenium.framework.items.RecipientItem;
+import org.zmail.qa.selenium.framework.items.RecipientItem.RecipientType;
+import org.zmail.qa.selenium.framework.ui.AbsApplication;
+import org.zmail.qa.selenium.framework.ui.AbsPage;
+import org.zmail.qa.selenium.framework.ui.AbsSeparateWindow;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.ui.Shortcut;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.SleepUtil;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.framework.util.staf.Stafpostqueue;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogWarning;
+import org.zmail.qa.selenium.projects.ajax.ui.SeparateWindowDialog;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew.Field;
 
 
 
@@ -89,7 +89,7 @@ public class SeparateWindowFormMailNew extends AbsSeparateWindow {
 			
 		}
 		if ( mail.dBodyHtml != null ) {
-		    if(ZimbraSeleniumProperties.isWebDriver()){
+		    if(ZmailSeleniumProperties.isWebDriver()){
 			sSelectWindow(this.DialogWindowID);
 			String locator = "css=iframe[id*=ifr]";
 			sClickAt(locator,"");
@@ -521,8 +521,8 @@ public class SeparateWindowFormMailNew extends AbsSeparateWindow {
 	
 	/* TODO: ... debugging to be removed */
 	public boolean waitForComposeWindow() throws HarnessException {
-	    	String pageTitle = "Zimbra: Compose";
-	    	if (ZimbraSeleniumProperties.isWebDriver()){
+	    	String pageTitle = "Zmail: Compose";
+	    	if (ZmailSeleniumProperties.isWebDriver()){
 	    	    sWaitForPopUp(pageTitle,"60000");
 	    	}else{
 	    	    sWaitForCondition("var x; for(var windowName in selenium.browserbot.openedWindows)"

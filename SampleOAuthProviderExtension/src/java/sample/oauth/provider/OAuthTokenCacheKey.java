@@ -15,8 +15,8 @@
 
 package sample.oauth.provider;
 
-import com.zimbra.common.util.memcached.MemcachedKey;
-import com.zimbra.cs.memcached.MemcachedKeyPrefix;
+import org.zmail.common.util.memcached.MemcachedKey;
+import org.zmail.cs.memcached.MemcachedKeyPrefix;
 
 import net.oauth.OAuthAccessor;
 

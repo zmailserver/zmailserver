@@ -22,7 +22,7 @@
 #include "GenericException.h"
 
 #include "resource.h"
-#include "Zimbra/Zimbra.h"
+#include "Zmail/Zmail.h"
 #include "Exchange_i.h"
 
 #include "MAPISession.h"
@@ -46,11 +46,11 @@
 #include <IADS.h>
 #include <sddl.h>
 
-#include "Zimbra/mso.tlh"
-#include "Zimbra/msoutl.tlh"
+#include "Zmail/mso.tlh"
+#include "Zmail/msoutl.tlh"
 
-using namespace Zimbra::Util;
-using namespace Zimbra::MAPI;
+using namespace Zmail::Util;
+using namespace Zmail::MAPI;
 
 class CExchangeModule: public CAtlDllModuleT<CExchangeModule>
 {

@@ -1,6 +1,6 @@
 [App]
-Vendor=Zimbra
-Name=Zimbra Desktop
+Vendor=Zmail
+Name=Zmail Desktop
 
 [Environment]
 PRISM_HOME=@install.app.root@\win32\prism

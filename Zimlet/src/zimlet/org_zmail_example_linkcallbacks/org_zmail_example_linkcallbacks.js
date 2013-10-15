@@ -17,21 +17,21 @@
  * Defines the Zimlet handler class.
  *   
  */
-function com_zimbra_example_linkcallbacks_HandlerObject() {
+function org_zmail_example_linkcallbacks_HandlerObject() {
 };
 
 /**
  * Makes the Zimlet class a subclass of ZmZimletBase.
  *
  */
-com_zimbra_example_linkcallbacks_HandlerObject.prototype = new ZmZimletBase();
-com_zimbra_example_linkcallbacks_HandlerObject.prototype.constructor = com_zimbra_example_linkcallbacks_HandlerObject;
+org_zmail_example_linkcallbacks_HandlerObject.prototype = new ZmZimletBase();
+org_zmail_example_linkcallbacks_HandlerObject.prototype.constructor = org_zmail_example_linkcallbacks_HandlerObject;
 
 /**
  * This method gets called by the Zimlet framework when the zimlet loads.
  *  
  */
-com_zimbra_example_linkcallbacks_HandlerObject.prototype.init =
+org_zmail_example_linkcallbacks_HandlerObject.prototype.init =
 function() {
 
 };
@@ -40,7 +40,7 @@ function() {
  * This method gets called when the zimlet is double-clicked.
  *  
  */
-com_zimbra_example_linkcallbacks_HandlerObject.prototype.doubleClicked =
+org_zmail_example_linkcallbacks_HandlerObject.prototype.doubleClicked =
 function() {
 	this.singleClicked();
 };
@@ -49,7 +49,7 @@ function() {
  * This method gets called when the zimlet is single-clicked.
  *  
  */
-com_zimbra_example_linkcallbacks_HandlerObject.prototype.singleClicked =
+org_zmail_example_linkcallbacks_HandlerObject.prototype.singleClicked =
 function() {
 	this._displayDialog();
 };
@@ -58,7 +58,7 @@ function() {
  * Displays the dialog.
  * 
  */
-com_zimbra_example_linkcallbacks_HandlerObject.prototype._displayDialog = 
+org_zmail_example_linkcallbacks_HandlerObject.prototype._displayDialog = 
 function() {
 	if (this._dialog) { //if zimlet dialog already exists...
 		this._dialog.popup(); // simply popup the dialog
@@ -99,7 +99,7 @@ function() {
  * Creates the dialog view.
  * 
  */
-com_zimbra_example_linkcallbacks_HandlerObject.prototype._createDialogView =
+org_zmail_example_linkcallbacks_HandlerObject.prototype._createDialogView =
 function() {
 	var html = new Array();
 	var i = 0;
@@ -136,7 +136,7 @@ function() {
  * This method is called when the dialog "OK" button is clicked.
  * 
  */
-com_zimbra_example_linkcallbacks_HandlerObject.prototype._okBtnListener =
+org_zmail_example_linkcallbacks_HandlerObject.prototype._okBtnListener =
 function() {
 
 	var field1El = document.getElementById("simpledlg_someField1");
@@ -151,7 +151,7 @@ function() {
  * This method is called when the LINK #1 link is clicked.
  * 
  */
-com_zimbra_example_linkcallbacks_HandlerObject.prototype._link1Listener =
+org_zmail_example_linkcallbacks_HandlerObject.prototype._link1Listener =
 function() {
 	appCtxt.getAppController().setStatusMsg("LINK #1 clicked with no args");
 };
@@ -160,7 +160,7 @@ function() {
  * This method is called when the LINK #2 link is clicked.
  * 
  */
-com_zimbra_example_linkcallbacks_HandlerObject.prototype._link2Listener =
+org_zmail_example_linkcallbacks_HandlerObject.prototype._link2Listener =
 function(arg1, arg2) {
 
 	var html = new Array();

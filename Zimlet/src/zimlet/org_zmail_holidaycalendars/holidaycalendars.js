@@ -18,17 +18,17 @@
  * 
  * @author Raja Rao DV
  */
-function com_zimbra_holidaycalendars_HandlerObject() {
+function org_zmail_holidaycalendars_HandlerObject() {
 }
 
-com_zimbra_holidaycalendars_HandlerObject.prototype = new ZmZimletBase();
-com_zimbra_holidaycalendars_HandlerObject.prototype.constructor = com_zimbra_holidaycalendars_HandlerObject;
+org_zmail_holidaycalendars_HandlerObject.prototype = new ZmZimletBase();
+org_zmail_holidaycalendars_HandlerObject.prototype.constructor = org_zmail_holidaycalendars_HandlerObject;
 
 /**
  * Simplify handler object
  *
  */
-var HolidayCalendarsZimlet = com_zimbra_holidaycalendars_HandlerObject;
+var HolidayCalendarsZimlet = org_zmail_holidaycalendars_HandlerObject;
 
 /**
  * Defines the "appointment" view.
@@ -99,7 +99,7 @@ function() {
  */
 HolidayCalendarsZimlet.prototype._createFolder =
 function(params) {
-	var jsonObj = {CreateFolderRequest:{_jsns:"urn:zimbraMail"}};
+	var jsonObj = {CreateFolderRequest:{_jsns:"urn:zmailMail"}};
 	var folder = jsonObj.CreateFolderRequest.folder = {};
 	for (var i in params) {
 		if (i == "callback" || i == "errorCallback" || i == "postCallback") {

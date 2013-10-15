@@ -14,14 +14,14 @@
  */
 using System;
 
-namespace Zimbra.Client.Mail
+namespace Zmail.Client.Mail
 {
-	public class MailService : IZimbraService
+	public class MailService : IZmailService
 	{
 		public static String SERVICE_PATH					= "/service/soap";
 
 		public static String NS_PREFIX						= "mail";
-		public static String NAMESPACE_URI					= "urn:zimbraMail";
+		public static String NAMESPACE_URI					= "urn:zmailMail";
 
 		//requests
 		public static String GET_FOLDER_REQUEST				= "GetFolderRequest";
@@ -91,7 +91,7 @@ namespace Zimbra.Client.Mail
 			new MsgActionResponse()
         };
 
-		//IZimbraService
+		//IZmailService
 		public String NamespacePrefix{ get{ return NS_PREFIX;} } 
 		public String NamepsaceUri{ get{ return NAMESPACE_URI; } }
 		public Response[] Responses{get{ return responses;} }

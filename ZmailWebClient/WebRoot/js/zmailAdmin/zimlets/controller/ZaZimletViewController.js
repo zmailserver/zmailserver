@@ -59,7 +59,7 @@ function(entry) {
 	if(!this._UICreated) {
 		this._createUI();
 	} 
-//	ZaApp.getInstance().pushView(ZaZimbraAdmin._ZIMLET_VIEW);
+//	ZaApp.getInstance().pushView(ZaZmailAdmin._ZIMLET_VIEW);
 	ZaApp.getInstance().pushView(this.getContentViewId());
 	this._view.setDirty(false);
     entry[ZaModel.currentTab] = "1";

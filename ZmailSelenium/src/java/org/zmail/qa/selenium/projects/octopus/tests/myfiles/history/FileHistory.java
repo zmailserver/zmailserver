@@ -14,20 +14,20 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.octopus.tests.myfiles.history;
+package org.zmail.qa.selenium.projects.octopus.tests.myfiles.history;
 
 import org.testng.annotations.*;
 
-import com.zimbra.qa.selenium.framework.items.FileItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.octopus.core.OctopusCommonTest;
-import com.zimbra.qa.selenium.projects.octopus.ui.DialogFileHistory;
-import com.zimbra.qa.selenium.projects.octopus.ui.DisplayFilePreview;
-import com.zimbra.qa.selenium.projects.octopus.ui.PageMyFiles;
+import org.zmail.qa.selenium.framework.items.FileItem;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.octopus.core.OctopusCommonTest;
+import org.zmail.qa.selenium.projects.octopus.ui.DialogFileHistory;
+import org.zmail.qa.selenium.projects.octopus.ui.DisplayFilePreview;
+import org.zmail.qa.selenium.projects.octopus.ui.PageMyFiles;
 
 public class FileHistory extends OctopusCommonTest {
 
@@ -54,13 +54,13 @@ public class FileHistory extends OctopusCommonTest {
 
 	@Test(description = "Upload file through RestUtil - verify file name in the history through SOAP", groups = { "functional" })
 	public void FileHistory_01() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem rootFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
 
 		// Create file item
-		String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+		String filePath = ZmailSeleniumProperties.getBaseDirectory()
 				+ "/data/public/other/testpptfile.ppt";
 
 		FileItem fileItem = new FileItem(filePath);
@@ -71,7 +71,7 @@ public class FileHistory extends OctopusCommonTest {
 		String attachmentId = account.uploadFile(filePath);
 
 		// Save uploaded file to My Files through SOAP
-		account.soapSend("<SaveDocumentRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<SaveDocumentRequest xmlns='urn:zmailMail'>"
 				+ "<doc l='" + rootFolder.getId() + "'><upload id='"
 				+ attachmentId + "'/></doc></SaveDocumentRequest>");
 
@@ -85,7 +85,7 @@ public class FileHistory extends OctopusCommonTest {
 		ZAssert.assertEquals(fileName, name, "Verify file is uploaded");
 
 		// Verify file activity appears in the History
-		account.soapSend("<GetActivityStreamRequest xmlns='urn:zimbraMail' offset='0' limit='250' id='"
+		account.soapSend("<GetActivityStreamRequest xmlns='urn:zmailMail' offset='0' limit='250' id='"
 				+ rootFolder.getId() + "'/>");
 
 		// Verify file name appears in the activity history
@@ -96,13 +96,13 @@ public class FileHistory extends OctopusCommonTest {
 
 	@Test(description = "Upload file through RestUtil - verify file history in the History dialog", groups = { "smoke" })
 	public void FileHistory_02() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseRootFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
 
 		// Create file item
-		String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+		String filePath = ZmailSeleniumProperties.getBaseDirectory()
 				+ "/data/public/other/samplejpg.jpg";
 
 		FileItem file = new FileItem(filePath);
@@ -115,7 +115,7 @@ public class FileHistory extends OctopusCommonTest {
 		// Save uploaded file to the root folder through SOAP
 		account.soapSend(
 
-		"<SaveDocumentRequest xmlns='urn:zimbraMail'>" + "<doc l='"
+		"<SaveDocumentRequest xmlns='urn:zmailMail'>" + "<doc l='"
 				+ briefcaseRootFolder.getId() + "'>" + "<upload id='"
 				+ attachmentId + "'/>" + "</doc></SaveDocumentRequest>");
 
@@ -184,14 +184,14 @@ public class FileHistory extends OctopusCommonTest {
 		}
 		try {
 			// Refresh view
-			// ZimbraAccount account = app.zGetActiveAccount();
+			// ZmailAccount account = app.zGetActiveAccount();
 			// FolderItem item =
 			// FolderItem.importFromSOAP(account,SystemFolder.Briefcase);
-			// account.soapSend("<GetFolderRequest xmlns='urn:zimbraMail'><folder l='1' recursive='0'/>"
+			// account.soapSend("<GetFolderRequest xmlns='urn:zmailMail'><folder l='1' recursive='0'/>"
 			// + "</GetFolderRequest>");
-			// account.soapSend("<GetFolderRequest xmlns='urn:zimbraMail' requestId='folders' depth='1' tr='true' view='document'><folder l='"
+			// account.soapSend("<GetFolderRequest xmlns='urn:zmailMail' requestId='folders' depth='1' tr='true' view='document'><folder l='"
 			// + item.getId() + "'/></GetFolderRequest>");
-			// account.soapSend("<GetActivityStreamRequest xmlns='urn:zimbraMail' id='16'/>");
+			// account.soapSend("<GetActivityStreamRequest xmlns='urn:zmailMail' id='16'/>");
 			// app.zGetActiveAccount().accountIsDirty = true;
 			// app.zPageOctopus.sRefresh();
 

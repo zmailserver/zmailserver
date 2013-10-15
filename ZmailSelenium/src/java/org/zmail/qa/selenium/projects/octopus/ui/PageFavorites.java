@@ -17,13 +17,13 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.octopus.ui;
+package org.zmail.qa.selenium.projects.octopus.ui;
 
-import com.zimbra.qa.selenium.framework.items.IItem;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.octopus.ui.DialogError;
-import com.zimbra.qa.selenium.projects.octopus.ui.DialogError.DialogErrorID;
+import org.zmail.qa.selenium.framework.items.IItem;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.octopus.ui.DialogError;
+import org.zmail.qa.selenium.projects.octopus.ui.DialogError.DialogErrorID;
 
 public class PageFavorites extends AbsTab {
 
@@ -67,8 +67,8 @@ public class PageFavorites extends AbsTab {
 		return (new Toaster(this.MyApplication));
 	}
 
-	public DialogError zGetErrorDialog(DialogErrorID zimbra) {
-		return (new DialogError(zimbra, this.MyApplication, this));
+	public DialogError zGetErrorDialog(DialogErrorID zmail) {
+		return (new DialogError(zmail, this.MyApplication, this));
 	}
 
 	@Override

@@ -19,13 +19,13 @@ basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <title>Zimbra Mail</title>
+    <title>Zmail Mail</title>
     <style type="text/css">
       <!--
-        @import url(/zimbra/img/imgs.css);
+        @import url(/zmail/img/imgs.css);
 
-        @import url(/zimbra/js/dwt/config/style/dwt.css);
-        @import url(/zimbra/js/zimbraMail/config/style/zm.css);
+        @import url(/zmail/js/dwt/config/style/dwt.css);
+        @import url(/zmail/js/zmailMail/config/style/zm.css);
 
       -->
 .DwtSelect{
@@ -68,8 +68,8 @@ basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
     <jsp:include page="../../public/Messages.jsp"/>
     <jsp:include page="../../public/Boot.jsp"/>
     <jsp:include page="../../public/Ajax.jsp"/>
-    <jsp:include page="../../public/jsp/Zimbra.jsp"/>
-    <jsp:include page="../../public/jsp/ZimbraCore.jsp"/>
+    <jsp:include page="../../public/jsp/Zmail.jsp"/>
+    <jsp:include page="../../public/jsp/ZmailCore.jsp"/>
     <script language="JavaScript">   	
 var _TIME_OF_DAY_CHOICES = [ 
 	{ label:'12:00 AM', value:'0:00' }, { label:'12:30 AM', value: '0:30' },
@@ -109,7 +109,7 @@ var _TIME_OF_DAY_CHOICES = [
 			value += location.search;
 		ZmCsfeCommand.setServerUri(value);
 
-		var soapDoc = AjxSoapDoc.create("GetFreeBusyRequest", "urn:zimbraMail");
+		var soapDoc = AjxSoapDoc.create("GetFreeBusyRequest", "urn:zmailMail");
 		var now = new Date();
 		now.setHours(0);
 		now.setMinutes(0);
@@ -124,10 +124,10 @@ var _TIME_OF_DAY_CHOICES = [
 		// TODO: Not sure what the period should be here
 		end.setDate(now.getDate() + 1);
 		soapDoc.setMethodAttribute("e", end.getTime());
-		soapDoc.setMethodAttribute("uid", "user1@db682461.zimbra.com");
+		soapDoc.setMethodAttribute("uid", "user1@db682461.zmail.com");
 		// This is erroring out
 		var resp = ZmCsfeCommand.invoke(soapDoc, null, null, null, false);
-		//var resp = ZmZimbraMail.prototype.sendRequest(soapDoc).firstChild;
+		//var resp = ZmZmailMail.prototype.sendRequest(soapDoc).firstChild;
 		var userSchedules = ZmUserSchedule.loadFromDom(resp.Body);
 		var dummyAppt = new ZmAppt();
 		dummyAppt.startDate = new Date();

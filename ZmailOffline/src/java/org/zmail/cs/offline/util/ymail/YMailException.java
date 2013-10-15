@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.util.ymail;
+package org.zmail.cs.offline.util.ymail;
 
 import java.io.IOException;
 

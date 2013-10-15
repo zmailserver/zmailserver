@@ -1,7 +1,7 @@
-Package: evolution-zimbra
+Package: evolution-zmail
 Version: @@VERSION@@
-Description: Zimbra Connector for Evolution MUA 
-Maintainer: build@zimbra.com
+Description: Zmail Connector for Evolution MUA 
+Maintainer: build@zmail.com
 Section: Mail
 Priority: optional
 Architecture: @@ARCH@@

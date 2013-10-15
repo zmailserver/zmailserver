@@ -51,7 +51,7 @@ var ZMTB_Toolbar = function()
 	var password;
   	var passwordManager = Components.classes["@mozilla.org/login-manager;1"].getService(Components.interfaces.nsILoginManager);
 	var pm = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
-	var logins = passwordManager.findLogins({}, 'chrome://zimbratb', null, 'Zimbra Login');
+	var logins = passwordManager.findLogins({}, 'chrome://zmailtb', null, 'Zmail Login');
 	for (var i = 0; i < logins.length; i++)
 	{
 		if (logins[i].username == pm.getCharPref("extensions.zmtb.username"))
@@ -124,7 +124,7 @@ ZMTB_Toolbar.prototype.notify = function(message, image, type)
 	else if(type == "failure")
 		type=document.getElementById("ZMTB-Notifications").PRIORITY_CRITICAL_MEDIUM;
 	if(!image)
-		image = "chrome://zimbratb/skin/default_images/zimbra_z_small.png";
+		image = "chrome://zmailtb/skin/default_images/zmail_z_small.png";
 	clearTimeout(window.zmtb_noteTimeout);
 	this.clearNotifications();
 	var note = document.getElementById("ZMTB-Notifications").appendNotification(message, 1, image, type);

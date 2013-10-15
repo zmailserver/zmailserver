@@ -14,15 +14,15 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.ui.tasks;
+package org.zmail.qa.selenium.projects.ajax.ui.tasks;
 
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.HarnessException;
 
 
 /**
  * The <code>DisplayMail<code> object defines a read-only view of a message
- * in the Zimbra Ajax client.
+ * in the Zmail Ajax client.
  * <p>
  * This class can be used to extract data from the message, such as To,
  * From, Subject, Received Date, message body.  Additionally, it can
@@ -32,8 +32,8 @@ import com.zimbra.qa.selenium.framework.util.HarnessException;
  * Hover over objects, such as email or URL hover over, are encapsulated.
  * <p>
  * 
- * @author zimbra
- * @see http://wiki.zimbra.com/wiki/Testing:_Selenium:_ZimbraSelenium_Overview#Mail_Page
+ * @author zmail
+ * @see http://wiki.zmail.com/wiki/Testing:_Selenium:_ZmailSelenium_Overview#Mail_Page
  */
 public class DisplayTask extends AbsDisplay {
 
@@ -101,7 +101,7 @@ public class DisplayTask extends AbsDisplay {
 		logger.info(myPageName() + ".zGetTaskProperty(" + field + ")");
 
 		//**
-		// See https://bugzilla.zimbra.com/show_bug.cgi?id=56657 - "Need unique id for "view task" pane"
+		// See https://bugzilla.zmail.com/show_bug.cgi?id=56657 - "Need unique id for "view task" pane"
 		//**
 		
 		String locator = "css=div[id='zv__TKL-main'] div[class='ZmMailMsgView']";

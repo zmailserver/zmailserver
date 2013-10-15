@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,34 +28,34 @@ import java.util.TimerTask;
 import org.dom4j.ElementHandler;
 
 import com.google.common.collect.Sets;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.account.ProvisioningConstants;
-import com.zimbra.common.account.ZAttrProvisioning;
-import com.zimbra.common.mailbox.ContactConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.Element.XMLElement;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.offline.OfflineAccount;
-import com.zimbra.cs.account.offline.OfflineDomainGal;
-import com.zimbra.cs.account.offline.OfflineGal;
-import com.zimbra.cs.account.offline.OfflineProvisioning;
-import com.zimbra.cs.mime.ParsedContact;
-import com.zimbra.cs.offline.OfflineLC;
-import com.zimbra.cs.offline.OfflineLog;
-import com.zimbra.cs.offline.OfflineSyncManager;
-import com.zimbra.cs.offline.common.OfflineConstants;
-import com.zimbra.cs.offline.common.OfflineConstants.SyncStatus;
-import com.zimbra.cs.util.Zimbra;
-import com.zimbra.cs.util.ZimbraApplication;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.account.ProvisioningConstants;
+import org.zmail.common.account.ZAttrProvisioning;
+import org.zmail.common.mailbox.ContactConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.Element.XMLElement;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.offline.OfflineAccount;
+import org.zmail.cs.account.offline.OfflineDomainGal;
+import org.zmail.cs.account.offline.OfflineGal;
+import org.zmail.cs.account.offline.OfflineProvisioning;
+import org.zmail.cs.mime.ParsedContact;
+import org.zmail.cs.offline.OfflineLC;
+import org.zmail.cs.offline.OfflineLog;
+import org.zmail.cs.offline.OfflineSyncManager;
+import org.zmail.cs.offline.common.OfflineConstants;
+import org.zmail.cs.offline.common.OfflineConstants.SyncStatus;
+import org.zmail.cs.util.Zmail;
+import org.zmail.cs.util.ZmailApplication;
 
 public class GalSync {
     private static GalSync instance = new GalSync();
@@ -86,7 +86,7 @@ public class GalSync {
 
             @Override
             public void run() {
-                if (ZimbraApplication.getInstance().isShutdown()) {
+                if (ZmailApplication.getInstance().isShutdown()) {
                     currentTask.cancel();
                     return;
                 }
@@ -121,7 +121,7 @@ public class GalSync {
                     }
                 } catch (Throwable e) { // don't let exceptions kill the timer
                     if (e instanceof OutOfMemoryError)
-                        Zimbra.halt("caught out of memory error", e);
+                        Zmail.halt("caught out of memory error", e);
                     else if (OfflineSyncManager.getInstance().isServiceActive(false))
                         OfflineLog.offline.warn("caught exception in timer ", e);
                 }

@@ -17,16 +17,16 @@
 /**
  *
  */
-package com.zimbra.qa.selenium.projects.ajax.ui.social;
+package org.zmail.qa.selenium.projects.ajax.ui.social;
 
-import com.zimbra.qa.selenium.framework.ui.AbsApplication;
-import com.zimbra.qa.selenium.framework.ui.AbsPage;
-import com.zimbra.qa.selenium.framework.ui.AbsTab;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.projects.ajax.ui.AppAjaxClient;
-import com.zimbra.qa.selenium.projects.ajax.ui.PageMain;
+import org.zmail.qa.selenium.framework.ui.AbsApplication;
+import org.zmail.qa.selenium.framework.ui.AbsPage;
+import org.zmail.qa.selenium.framework.ui.AbsTab;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.projects.ajax.ui.AppAjaxClient;
+import org.zmail.qa.selenium.projects.ajax.ui.PageMain;
 
 
 
@@ -54,7 +54,7 @@ public class PageSocial extends AbsTab {
 	 * @throws HarnessException 
 	 */
 	private boolean zDismissWelcomeDialog() throws HarnessException {
-		// TODO: see https://bugzilla.zimbra.com/show_bug.cgi?id=61984
+		// TODO: see https://bugzilla.zmail.com/show_bug.cgi?id=61984
 		DialogSocialZimletWelcome dialog = new DialogSocialZimletWelcome(MyApplication, ((AppAjaxClient) MyApplication).zPageSocial);
 		if ( dialog.zIsActive() ) {
 			dialog.zClickButton(Button.B_OK);

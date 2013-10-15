@@ -13,17 +13,17 @@
  * ***** END LICENSE BLOCK *****
  */
 
-com_zimbra_example_httpgetpost_HandlerObject = function() {
+org_zmail_example_httpgetpost_HandlerObject = function() {
 };
-com_zimbra_example_httpgetpost_HandlerObject.prototype = new ZmZimletBase;
-com_zimbra_example_httpgetpost_HandlerObject.prototype.constructor = com_zimbra_example_httpgetpost_HandlerObject;
+org_zmail_example_httpgetpost_HandlerObject.prototype = new ZmZimletBase;
+org_zmail_example_httpgetpost_HandlerObject.prototype.constructor = org_zmail_example_httpgetpost_HandlerObject;
 
 /**
  * This method gets called by the Zimlet framework when a context menu item is selected.
  * 
  * @param	{String}	itemId		the Id of selected menu item
  */
-com_zimbra_example_httpgetpost_HandlerObject.prototype.menuItemSelected =
+org_zmail_example_httpgetpost_HandlerObject.prototype.menuItemSelected =
 function(itemId) {
 	switch (itemId) {
 	case "CALL_VIA_HTTP_GET":
@@ -46,7 +46,7 @@ function(itemId) {
  * Performs a "GET" against the zimlet jsp page.
  * 
  */
-com_zimbra_example_httpgetpost_HandlerObject.prototype._executeHttpGet = 
+org_zmail_example_httpgetpost_HandlerObject.prototype._executeHttpGet = 
 function() {
 	
 	var jspUrl = this.getResource("jspfile.jsp");
@@ -63,7 +63,7 @@ function() {
  * Performs a "POST" against the zimlet jsp page.
  * 
  */
-com_zimbra_example_httpgetpost_HandlerObject.prototype._executeHttpPost = 
+org_zmail_example_httpgetpost_HandlerObject.prototype._executeHttpPost = 
 function() {
 	
 	var jspUrl = this.getResource("jspfile.jsp");
@@ -80,7 +80,7 @@ function() {
  * Performs a "GET" against an external server using the Proxy Servlet.
  * 
  */
-com_zimbra_example_httpgetpost_HandlerObject.prototype._executeExternalHttpGet = 
+org_zmail_example_httpgetpost_HandlerObject.prototype._executeExternalHttpGet = 
 function() {
 	
 	var extServer = "http://search.twitter.com/search.json";
@@ -107,9 +107,9 @@ function() {
  * Handles the callback from the external http GET AjxRpc.invoke().
  * 
  * 
- * @see		com_zimbra_example_httpgetpost_HandlerObject._executeExternalHttpGet
+ * @see		org_zmail_example_httpgetpost_HandlerObject._executeExternalHttpGet
  */
-com_zimbra_example_httpgetpost_HandlerObject.prototype._httpExternalGetCallback =
+org_zmail_example_httpgetpost_HandlerObject.prototype._httpExternalGetCallback =
 function(response) {
 
 	if (response.success == false) {

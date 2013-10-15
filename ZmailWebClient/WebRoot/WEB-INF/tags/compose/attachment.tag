@@ -21,11 +21,11 @@
 <%@ attribute name="displaySize" rtexprvalue="true" required="false" type="java.lang.String" %>
 <%@ attribute name="value" rtexprvalue="true" required="true" type="java.lang.String" %>
 <%@ attribute name="name" rtexprvalue="true" required="true" type="java.lang.String" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
-<%@ taglib prefix="app" uri="com.zimbra.htmlclient" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
+<%@ taglib prefix="app" uri="org.zmail.htmlclient" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
 <fmt:setBundle basename="/messages/ZhMsg" scope='request' />
 
 <tr class="CompOrigAtt" valign="middle">
@@ -49,10 +49,10 @@
                 </td>
                 <td>&nbsp;</td>
                 <td>
-                    <c:if test="${not zm:isProvOrAttr(pageContext, 'zimbraAttachmentsBlocked')}">
+                    <c:if test="${not zm:isProvOrAttr(pageContext, 'zmailAttachmentsBlocked')}">
                     <a target="_blank" title="${fn:escapeXml(displayName)}" href="${fn:escapeXml(url)}&amp;disp=i">${zm:truncate(fn:escapeXml(displayName),80,true)}</a>&nbsp;<c:if test="${not empty displaySize}">(${fn:trim(displaySize)})</c:if>
                     </c:if>
-                    <c:if test="${zm:isProvOrAttr(pageContext, 'zimbraAttachmentsBlocked')}">
+                    <c:if test="${zm:isProvOrAttr(pageContext, 'zmailAttachmentsBlocked')}">
                     ${zm:truncate(fn:escapeXml(displayName),80,true)}&nbsp;<c:if test="${not empty displaySize}">(${fn:trim(displaySize)})</c:if>
                     </c:if>
                 </td>

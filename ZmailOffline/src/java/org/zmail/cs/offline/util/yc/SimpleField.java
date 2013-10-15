@@ -12,11 +12,11 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.util.yc;
+package org.zmail.cs.offline.util.yc;
 
 import org.w3c.dom.Element;
 
-import com.zimbra.cs.offline.util.yc.Fields.Type;
+import org.zmail.cs.offline.util.yc.Fields.Type;
 
 public class SimpleField extends FieldValue {
     private String value;

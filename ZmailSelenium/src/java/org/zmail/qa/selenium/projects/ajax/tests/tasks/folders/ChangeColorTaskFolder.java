@@ -14,22 +14,22 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.tasks.folders;
+package org.zmail.qa.selenium.projects.ajax.tests.tasks.folders;
 
 import java.util.HashMap;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.DialogEditFolder;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.DialogEditFolder.FolderColor;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.DialogEditFolder;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.DialogEditFolder.FolderColor;
 
 
 public class ChangeColorTaskFolder extends AjaxCommonTest {
@@ -40,8 +40,8 @@ public class ChangeColorTaskFolder extends AjaxCommonTest {
 		// test starts at the task tab
 		super.startingPage = app.zPageTasks;
 		super.startingAccountPreferences = new HashMap<String , String>() {{
-			put("zimbraPrefTasksReadingPaneLocation", "bottom");
-			put("zimbraPrefShowSelectionCheckbox", "TRUE");
+			put("zmailPrefTasksReadingPaneLocation", "bottom");
+			put("zmailPrefShowSelectionCheckbox", "TRUE");
 		}};
 	}	
 
@@ -53,10 +53,10 @@ public class ChangeColorTaskFolder extends AjaxCommonTest {
 		ZAssert.assertNotNull(taskFolder, "Verify the task is available");
 		
 		// Create the subTaskList
-		String name = "taskList" + ZimbraSeleniumProperties.getUniqueString();
+		String name = "taskList" + ZmailSeleniumProperties.getUniqueString();
 		
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+				"<CreateFolderRequest xmlns='urn:zmailMail'>" +
                 	"<folder name='"+ name +"' l='"+ taskFolder.getId() +"'/>" +
                 "</CreateFolderRequest>");
 
@@ -77,7 +77,7 @@ public class ChangeColorTaskFolder extends AjaxCommonTest {
 
 		// Check the color
 		app.zGetActiveAccount().soapSend(
-				"<GetFolderRequest xmlns='urn:zimbraMail'>"
+				"<GetFolderRequest xmlns='urn:zmailMail'>"
 			+		"<folder id='" + subTaskList.getId() + "'/>"
 			+	"</GetFolderRequest>");
 

@@ -14,8 +14,8 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.client.soap;
-import com.zimbra.cs.versioncheck.VersionUpdate;
+package org.zmail.cs.client.soap;
+import org.zmail.cs.versioncheck.VersionUpdate;
 import java.util.List;
 import java.util.ArrayList;
 /**

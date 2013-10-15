@@ -1,1 +1,1 @@
-gXMLBuffer="<?xml version=\"1.0\" encoding=\"UTF-8\"?><cki><ck fm=\"Enhancing the Zimbra Admin Console User Interface\" to=\"Import Destination\" num=\"95\"/><ck fm=\"Import in Progress\" to=\"Setting Up Zimlets\" num=\"40\"/></cki>";
+gXMLBuffer="<?xml version=\"1.0\" encoding=\"UTF-8\"?><cki><ck fm=\"Enhancing the Zmail Admin Console User Interface\" to=\"Import Destination\" num=\"95\"/><ck fm=\"Import in Progress\" to=\"Setting Up Zimlets\" num=\"40\"/></cki>";

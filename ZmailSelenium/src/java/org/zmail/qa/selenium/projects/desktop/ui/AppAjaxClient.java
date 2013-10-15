@@ -17,32 +17,32 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.desktop.ui;
+package org.zmail.qa.selenium.projects.desktop.ui;
 
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.GeneralUtility;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraDesktopProperties;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.accounts.PageAddNewAccount;
-import com.zimbra.qa.selenium.projects.desktop.ui.addressbook.PageAddressbook;
-import com.zimbra.qa.selenium.projects.desktop.ui.addressbook.TreeContacts;
-import com.zimbra.qa.selenium.projects.desktop.ui.briefcase.PageBriefcase;
-import com.zimbra.qa.selenium.projects.desktop.ui.briefcase.TreeBriefcase;
-import com.zimbra.qa.selenium.projects.desktop.ui.calendar.PageCalendar;
-import com.zimbra.qa.selenium.projects.desktop.ui.mail.*;
-import com.zimbra.qa.selenium.projects.desktop.ui.preferences.PagePreferences;
-import com.zimbra.qa.selenium.projects.desktop.ui.preferences.TreePreferences;
-import com.zimbra.qa.selenium.projects.desktop.ui.preferences.signature.PageSignature;
-import com.zimbra.qa.selenium.projects.desktop.ui.search.PageAdvancedSearch;
-import com.zimbra.qa.selenium.projects.desktop.ui.search.PageSearch;
-import com.zimbra.qa.selenium.projects.desktop.ui.tasks.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.GeneralUtility;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailDesktopProperties;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.accounts.PageAddNewAccount;
+import org.zmail.qa.selenium.projects.desktop.ui.addressbook.PageAddressbook;
+import org.zmail.qa.selenium.projects.desktop.ui.addressbook.TreeContacts;
+import org.zmail.qa.selenium.projects.desktop.ui.briefcase.PageBriefcase;
+import org.zmail.qa.selenium.projects.desktop.ui.briefcase.TreeBriefcase;
+import org.zmail.qa.selenium.projects.desktop.ui.calendar.PageCalendar;
+import org.zmail.qa.selenium.projects.desktop.ui.mail.*;
+import org.zmail.qa.selenium.projects.desktop.ui.preferences.PagePreferences;
+import org.zmail.qa.selenium.projects.desktop.ui.preferences.TreePreferences;
+import org.zmail.qa.selenium.projects.desktop.ui.preferences.signature.PageSignature;
+import org.zmail.qa.selenium.projects.desktop.ui.search.PageAdvancedSearch;
+import org.zmail.qa.selenium.projects.desktop.ui.search.PageSearch;
+import org.zmail.qa.selenium.projects.desktop.ui.tasks.*;
 
 
 /**
- * The <code>AppAjaxClient</code> class defines the Zimbra Ajax client.
+ * The <code>AppAjaxClient</code> class defines the Zmail Ajax client.
  * <p>
  * The <code>AppAjaxClient</code> contains all pages, folder trees,
  * dialog boxes, forms, menus for the Ajax client.
@@ -196,7 +196,7 @@ public class AppAjaxClient extends AbsApplication {
 	 * in the middle of the tests
 	 */
 	@Override
-	public ZimbraAccount zSetActiveAcount(ZimbraAccount account) throws HarnessException {
+	public ZmailAccount zSetActiveAcount(ZmailAccount account) throws HarnessException {
 		return (super.zSetActiveAcount(account));
 	}
 
@@ -204,8 +204,8 @@ public class AppAjaxClient extends AbsApplication {
     * Delete Desktop account through HTTP Post with last account variable defaulted to false
     * @param accountName Account Name to be deleted
     * @param accountId Account ID to be deleted
-    * @param accountType Account Type (usually: zimbra)
-    * @param accountFlavor Account Flavor (usually: Zimbra)
+    * @param accountType Account Type (usually: zmail)
+    * @param accountFlavor Account Flavor (usually: Zmail)
     * @throws HarnessException
     */
 	public void zDeleteDesktopAccount(String accountName, String accountId,
@@ -217,21 +217,21 @@ public class AppAjaxClient extends AbsApplication {
     * Delete Desktop account through HTTP Post
     * @param accountName Account Name to be deleted
     * @param accountId Account ID to be deleted
-    * @param accountType Account Type (usually: zimbra)
-    * @param accountFlavor Account Flavor (usually: Zimbra)
+    * @param accountType Account Type (usually: zmail)
+    * @param accountFlavor Account Flavor (usually: Zmail)
     * @param lastAccount Is this last account (for wait purpose)
     * @throws HarnessException
     */
    public void zDeleteDesktopAccount(String accountName, String accountId,
          String accountType, String accountFlavor, boolean lastAccount) throws HarnessException {
-      String serverScheme = ZimbraSeleniumProperties.getStringProperty("server.scheme", "http");
-      String serverName = ZimbraSeleniumProperties.getStringProperty("desktop.server.host", "localhost");
-      ZimbraDesktopProperties zdp = ZimbraDesktopProperties.getInstance();
+      String serverScheme = ZmailSeleniumProperties.getStringProperty("server.scheme", "http");
+      String serverName = ZmailSeleniumProperties.getStringProperty("desktop.server.host", "localhost");
+      ZmailDesktopProperties zdp = ZmailDesktopProperties.getInstance();
       String connectionPort = zdp.getConnectionPort();
       String accountDeleteUrl = new StringBuilder(serverScheme).append("://")
             .append(serverName). append(":")
             .append(connectionPort).append("/")
-            .append("zimbra/desktop/accsetup.jsp?at=")
+            .append("zmail/desktop/accsetup.jsp?at=")
             .append(zdp.getSerialNumber()).append("&accountId=")
             .append(accountId).append("&verb=del&accountFlavor=")
             .append(accountFlavor).append("&accountName=")
@@ -245,7 +245,7 @@ public class AppAjaxClient extends AbsApplication {
       GeneralUtility.waitForElementPresent(zPageLogin,
             PageLogin.Locators.zAddNewAccountButton);
       if (lastAccount || !zPageLogin.sIsElementPresent(PageLogin.Locators.zDeleteButton)) {
-         ZimbraAccount.ResetAccountZDC();
+         ZmailAccount.ResetAccountZDC();
       }
    }
 }

@@ -14,20 +14,20 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.calendar.appointments.views.day.recurring;
+package org.zmail.qa.selenium.projects.ajax.tests.calendar.appointments.views.day.recurring;
 
 import java.awt.event.KeyEvent;
 import java.util.Calendar;
 import java.util.HashMap;
 import org.testng.annotations.*;
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.calendar.*;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.*;
+import org.zmail.qa.selenium.projects.ajax.ui.calendar.*;
 
 @SuppressWarnings("unused")
 public class DeleteSeries extends AjaxCommonTest {
@@ -42,7 +42,7 @@ public class DeleteSeries extends AjaxCommonTest {
 		super.startingAccountPreferences = new HashMap<String, String>() {
 			private static final long serialVersionUID = -2913827779459595178L;
 		{
-		    put("zimbraPrefCalendarInitialView", "day");
+		    put("zmailPrefCalendarInitialView", "day");
 		}};
 	}
 	
@@ -59,8 +59,8 @@ public class DeleteSeries extends AjaxCommonTest {
 		// Appointment data
 		String tz, apptSubject, apptBody;
 		tz = ZTimeZone.TimeZoneEST.getID();
-		apptSubject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		apptBody = "body" + ZimbraSeleniumProperties.getUniqueString();
+		apptSubject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		apptBody = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		// Absolute dates in UTC zone
 		Calendar now = Calendar.getInstance();
@@ -68,7 +68,7 @@ public class DeleteSeries extends AjaxCommonTest {
 		ZDate endTime   = new ZDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH) + 1, now.get(Calendar.DAY_OF_MONTH), 14, 0, 0);
 		
 		app.zGetActiveAccount().soapSend(
-				"<CreateAppointmentRequest xmlns='urn:zimbraMail'>" +
+				"<CreateAppointmentRequest xmlns='urn:zmailMail'>" +
 					"<m>"+
 						"<inv method='REQUEST' type='event' fb='B' transp='O' allDay='0' name='"+ apptSubject +"'>"+
 							"<s d='"+ startTime.toTimeZone(tz).toYYYYMMDDTHHMMSS() +"' tz='"+ tz +"'/>" +
@@ -122,7 +122,7 @@ public class DeleteSeries extends AjaxCommonTest {
         
         // On the server, verify the appointment is in the trash
         app.zGetActiveAccount().soapSend(
-        			"<SearchRequest xmlns='urn:zimbraMail' types='appointment' calExpandInstStart='"+ startTime.addDays(-7).toMillis() +"' calExpandInstEnd='"+ endTime.addDays(7).toMillis() +"'>"
+        			"<SearchRequest xmlns='urn:zmailMail' types='appointment' calExpandInstStart='"+ startTime.addDays(-7).toMillis() +"' calExpandInstEnd='"+ endTime.addDays(7).toMillis() +"'>"
         		+		"<query>is:anywhere "+ apptSubject +"</query>"
         		+	"</SearchRequest>");
 
@@ -154,8 +154,8 @@ public class DeleteSeries extends AjaxCommonTest {
 		// Appointment data
 		String tz, apptSubject, apptBody;
 		tz = ZTimeZone.TimeZoneEST.getID();
-		apptSubject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		apptBody = "body" + ZimbraSeleniumProperties.getUniqueString();
+		apptSubject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		apptBody = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		// Absolute dates in UTC zone
 		Calendar now = Calendar.getInstance();
@@ -163,7 +163,7 @@ public class DeleteSeries extends AjaxCommonTest {
 		ZDate endTime   = new ZDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH) + 1, now.get(Calendar.DAY_OF_MONTH), 14, 0, 0);
 		
 		app.zGetActiveAccount().soapSend(
-				"<CreateAppointmentRequest xmlns='urn:zimbraMail'>" +
+				"<CreateAppointmentRequest xmlns='urn:zmailMail'>" +
 					"<m>"+
 						"<inv method='REQUEST' type='event' fb='B' transp='O' allDay='0' name='"+ apptSubject +"'>"+
 							"<s d='"+ startTime.toTimeZone(tz).toYYYYMMDDTHHMMSS() +"' tz='"+ tz +"'/>" +
@@ -212,7 +212,7 @@ public class DeleteSeries extends AjaxCommonTest {
         
         // On the server, verify the appointment is in the trash
         app.zGetActiveAccount().soapSend(
-        			"<SearchRequest xmlns='urn:zimbraMail' types='appointment' calExpandInstStart='"+ startTime.addDays(-7).toMillis() +"' calExpandInstEnd='"+ endTime.addDays(7).toMillis() +"'>"
+        			"<SearchRequest xmlns='urn:zmailMail' types='appointment' calExpandInstStart='"+ startTime.addDays(-7).toMillis() +"' calExpandInstEnd='"+ endTime.addDays(7).toMillis() +"'>"
         		+		"<query>is:anywhere "+ apptSubject +"</query>"
         		+	"</SearchRequest>");
 
@@ -253,8 +253,8 @@ public class DeleteSeries extends AjaxCommonTest {
 		// Appointment data
 		String tz, apptSubject, apptBody;
 		tz = ZTimeZone.TimeZoneEST.getID();
-		apptSubject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		apptBody = "body" + ZimbraSeleniumProperties.getUniqueString();
+		apptSubject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		apptBody = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		// Absolute dates in UTC zone
 		Calendar now = Calendar.getInstance();
@@ -262,7 +262,7 @@ public class DeleteSeries extends AjaxCommonTest {
 		ZDate endTime   = new ZDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH) + 1, now.get(Calendar.DAY_OF_MONTH), 14, 0, 0);
 		
 		app.zGetActiveAccount().soapSend(
-				"<CreateAppointmentRequest xmlns='urn:zimbraMail'>" +
+				"<CreateAppointmentRequest xmlns='urn:zmailMail'>" +
 					"<m>"+
 						"<inv method='REQUEST' type='event' fb='B' transp='O' allDay='0' name='"+ apptSubject +"'>"+
 							"<s d='"+ startTime.toTimeZone(tz).toYYYYMMDDTHHMMSS() +"' tz='"+ tz +"'/>" +
@@ -310,7 +310,7 @@ public class DeleteSeries extends AjaxCommonTest {
         
         // On the server, verify the appointment is in the trash
         app.zGetActiveAccount().soapSend(
-        			"<SearchRequest xmlns='urn:zimbraMail' types='appointment' calExpandInstStart='"+ startTime.addDays(-7).toMillis() +"' calExpandInstEnd='"+ endTime.addDays(7).toMillis() +"'>"
+        			"<SearchRequest xmlns='urn:zmailMail' types='appointment' calExpandInstStart='"+ startTime.addDays(-7).toMillis() +"' calExpandInstEnd='"+ endTime.addDays(7).toMillis() +"'>"
         		+		"<query>is:anywhere "+ apptSubject +"</query>"
         		+	"</SearchRequest>");
 

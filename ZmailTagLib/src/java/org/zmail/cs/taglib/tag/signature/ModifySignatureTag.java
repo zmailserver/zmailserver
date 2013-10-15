@@ -12,17 +12,17 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.tag.signature;
+package org.zmail.cs.taglib.tag.signature;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.taglib.tag.ZimbraSimpleTag;
-import com.zimbra.client.ZSignature;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.taglib.tag.ZmailSimpleTag;
+import org.zmail.client.ZSignature;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import java.io.IOException;
 
-public class ModifySignatureTag extends ZimbraSimpleTag {
+public class ModifySignatureTag extends ZmailSimpleTag {
 
     private String mId;
     private String mName;

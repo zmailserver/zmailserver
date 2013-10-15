@@ -37,8 +37,8 @@ ZaPosixGroup.loadMethod = function(by, val) {
 	if(!val)
 		return;
 		
-	var soapDoc = AjxSoapDoc.create("GetLDAPEntriesRequest", "urn:zimbraAdmin", null);	
-	soapDoc.set("ldapSearchBase", zimbra_posixaccount_ext.ldapSuffix);
+	var soapDoc = AjxSoapDoc.create("GetLDAPEntriesRequest", "urn:zmailAdmin", null);	
+	soapDoc.set("ldapSearchBase", zmail_posixaccount_ext.ldapSuffix);
 	soapDoc.set("query", "(&(objectClass=posixGroup)(" + by + "="+val+"))");	
 
 	var csfeParams = new Object();
@@ -46,7 +46,7 @@ ZaPosixGroup.loadMethod = function(by, val) {
 
 	var reqMgrParams = {} ;
 	reqMgrParams.controller = ZaApp.getInstance().getCurrentController();
-	reqMgrParams.busyMsg = zimbra_posixaccount.BUSY_GETTING_POSIX_GROUP ;
+	reqMgrParams.busyMsg = zmail_posixaccount.BUSY_GETTING_POSIX_GROUP ;
 	var resp = ZaRequestMgr.invoke(csfeParams, reqMgrParams ).Body.GetLDAPEntriesResponse;
 	this.attrs[ZaPosixGroup.A_memberUid] = [];
 	if(resp && resp.LDAPEntry) {	
@@ -66,8 +66,8 @@ if(ZaItem.initMethods["ZaPosixGroup"]) {
 }
 
 ZaPosixGroup.getNextGid = function () {
-	var soapDoc = AjxSoapDoc.create("GetLDAPEntriesRequest", "urn:zimbraAdmin", null);	
-	soapDoc.set("ldapSearchBase", zimbra_posixaccount_ext.ldapSuffix);
+	var soapDoc = AjxSoapDoc.create("GetLDAPEntriesRequest", "urn:zmailAdmin", null);	
+	soapDoc.set("ldapSearchBase", zmail_posixaccount_ext.ldapSuffix);
 	soapDoc.set("query", "(objectClass=posixGroup)");	
 	soapDoc.set("sortBy", ZaPosixGroup.A_gidNumber);	
 	soapDoc.set("sortAscending", "false");		
@@ -75,7 +75,7 @@ ZaPosixGroup.getNextGid = function () {
 	var getPosixGroupsCommand = new ZmCsfeCommand();
 	var params = new Object();
 	params.soapDoc = soapDoc;	
-	var nextId = !isNaN(zimbra_posixaccount_ext.gidBase) ?  parseInt(zimbra_posixaccount_ext.gidBase) + 1 : 10001;
+	var nextId = !isNaN(zmail_posixaccount_ext.gidBase) ?  parseInt(zmail_posixaccount_ext.gidBase) + 1 : 10001;
 	try {
 		var resp = getPosixGroupsCommand.invoke(params).Body.GetLDAPEntriesResponse.LDAPEntry[0];
 		if(resp) {
@@ -114,15 +114,15 @@ ZaPosixGroup.prototype.initFromJS = function(posixGroup) {
 
 ZaPosixGroup.prototype.remove = 
 function(callback) {
-	var soapDoc = AjxSoapDoc.create("DeleteLDAPEntryRequest", "urn:zimbraAdmin", null);
+	var soapDoc = AjxSoapDoc.create("DeleteLDAPEntryRequest", "urn:zmailAdmin", null);
 
 	var dn = [["cn=",this.attrs["cn"]].join("")];
 
-	if(zimbra_posixaccount_ext.ldapGroupSuffix)
-		dn.push(zimbra_posixaccount_ext.ldapGroupSuffix);
+	if(zmail_posixaccount_ext.ldapGroupSuffix)
+		dn.push(zmail_posixaccount_ext.ldapGroupSuffix);
 		
-	if(zimbra_posixaccount_ext.ldapSuffix)
-		dn.push(zimbra_posixaccount_ext.ldapSuffix);
+	if(zmail_posixaccount_ext.ldapSuffix)
+		dn.push(zmail_posixaccount_ext.ldapSuffix);
 		
 
 	soapDoc.set("dn", dn.join(","));	
@@ -139,8 +139,8 @@ function(callback) {
 
 ZaPosixGroup.getAll =
 function() {
-	var soapDoc = AjxSoapDoc.create("GetLDAPEntriesRequest", "urn:zimbraAdmin", null);	
-	soapDoc.set("ldapSearchBase", zimbra_posixaccount_ext.ldapSuffix);
+	var soapDoc = AjxSoapDoc.create("GetLDAPEntriesRequest", "urn:zmailAdmin", null);	
+	soapDoc.set("ldapSearchBase", zmail_posixaccount_ext.ldapSuffix);
 	soapDoc.set("query", "objectClass=posixGroup");	
 	var getSambaDomainsCommand = new ZmCsfeCommand();
 	var params = new Object();
@@ -153,14 +153,14 @@ function() {
 
 ZaPosixGroup.createMethod = function(tmpObj, group) {
 	//test
-	var soapDoc = AjxSoapDoc.create("CreateLDAPEntryRequest", "urn:zimbraAdmin", null);
+	var soapDoc = AjxSoapDoc.create("CreateLDAPEntryRequest", "urn:zmailAdmin", null);
 	var dn = [["cn=",tmpObj.attrs["cn"]].join("")];
 
-	if(zimbra_posixaccount_ext.ldapGroupSuffix)
-		dn.push(zimbra_posixaccount_ext.ldapGroupSuffix);
+	if(zmail_posixaccount_ext.ldapGroupSuffix)
+		dn.push(zmail_posixaccount_ext.ldapGroupSuffix);
 		
-	if(zimbra_posixaccount_ext.ldapSuffix)
-		dn.push(zimbra_posixaccount_ext.ldapSuffix);
+	if(zmail_posixaccount_ext.ldapSuffix)
+		dn.push(zmail_posixaccount_ext.ldapSuffix);
 		
 
 	soapDoc.set("dn", dn.join(","));	
@@ -196,7 +196,7 @@ ZaPosixGroup.createMethod = function(tmpObj, group) {
 	csfeParams.soapDoc = soapDoc;	
 	var reqMgrParams = {} ;
 	reqMgrParams.controller = ZaApp.getInstance().getCurrentController();
-	reqMgrParams.busyMsg = zimbra_posixaccount.BUSY_CREATING_POSIX_GROUP ;
+	reqMgrParams.busyMsg = zmail_posixaccount.BUSY_CREATING_POSIX_GROUP ;
 	resp = ZaRequestMgr.invoke(csfeParams, reqMgrParams ).Body.CreateLDAPEntryResponse;
 	
 	if(resp.LDAPEntry)		
@@ -219,17 +219,17 @@ function(mods) {
 	var cn = this.attrs["cn"];
 	if(mods["cn"]) {
 		cn = mods["cn"];
-		var soapDoc = AjxSoapDoc.create("RenameLDAPEntryRequest", "urn:zimbraAdmin", null);			
+		var soapDoc = AjxSoapDoc.create("RenameLDAPEntryRequest", "urn:zmailAdmin", null);			
 		var dn = [["cn=",this.attrs["cn"]].join("")];		
 		var new_dn = [["cn=",mods["cn"]].join("")];				
 		
-		if(zimbra_posixaccount_ext.ldapGroupSuffix) {
-			dn.push(zimbra_posixaccount_ext.ldapGroupSuffix);
-			new_dn.push(zimbra_posixaccount_ext.ldapGroupSuffix);			
+		if(zmail_posixaccount_ext.ldapGroupSuffix) {
+			dn.push(zmail_posixaccount_ext.ldapGroupSuffix);
+			new_dn.push(zmail_posixaccount_ext.ldapGroupSuffix);			
 		}	
-		if(zimbra_posixaccount_ext.ldapSuffix) {
-			dn.push(zimbra_posixaccount_ext.ldapSuffix);
-			new_dn.push(zimbra_posixaccount_ext.ldapSuffix);		
+		if(zmail_posixaccount_ext.ldapSuffix) {
+			dn.push(zmail_posixaccount_ext.ldapSuffix);
+			new_dn.push(zmail_posixaccount_ext.ldapSuffix);		
 		}
 		soapDoc.set("dn", dn.join(","));
 		soapDoc.set("new_dn", new_dn.join(","));
@@ -254,14 +254,14 @@ function(mods) {
 	if(!needToMidify)
 		return;
 		
-	var soapDoc = AjxSoapDoc.create("ModifyLDAPEntryRequest", "urn:zimbraAdmin", null);	
+	var soapDoc = AjxSoapDoc.create("ModifyLDAPEntryRequest", "urn:zmailAdmin", null);	
 	var dn = [["cn=",this.attrs["cn"]].join("")];
 
-	if(zimbra_posixaccount_ext.ldapGroupSuffix)
-		dn.push(zimbra_posixaccount_ext.ldapGroupSuffix);
+	if(zmail_posixaccount_ext.ldapGroupSuffix)
+		dn.push(zmail_posixaccount_ext.ldapGroupSuffix);
 		
-	if(zimbra_posixaccount_ext.ldapSuffix)
-		dn.push(zimbra_posixaccount_ext.ldapSuffix);
+	if(zmail_posixaccount_ext.ldapSuffix)
+		dn.push(zmail_posixaccount_ext.ldapSuffix);
 		
 
 	soapDoc.set("dn", dn.join(","));	
@@ -303,7 +303,7 @@ function(mods) {
 	csfeParams.soapDoc = soapDoc;	
 	var reqMgrParams = {} ;
 	reqMgrParams.controller = ZaApp.getInstance().getCurrentController();
-	reqMgrParams.busyMsg = zimbra_posixaccount.BUSY_UPDATING_POSIX_GROUP ;
+	reqMgrParams.busyMsg = zmail_posixaccount.BUSY_UPDATING_POSIX_GROUP ;
 	resp = ZaRequestMgr.invoke(csfeParams, reqMgrParams ).Body.ModifyLDAPEntryResponse;
 	
 	if(resp.LDAPEntry[0])	

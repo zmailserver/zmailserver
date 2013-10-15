@@ -37,13 +37,13 @@ basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
 
 <style type="text/css">
 <!--
-        @import url(/zimbra/img/imgs.css?v=<%= vers %>);
-        @import url(/zimbra/img/skins/steel/skin.css?v=<%= vers %>);
-        @import url(/zimbra/js/zimbraMail/config/style/dwt.css?v=<%= vers %>);
-        @import url(/zimbra/js/zimbraMail/config/style/common.css?v=<%= vers %>);
-        @import url(/zimbra/js/zimbraMail/config/style/zm.css?v=<%= vers %>);
-        @import url(/zimbra/js/zimbraMail/config/style/spellcheck.css?v=<%= vers %>);
-        @import url(/zimbra/skins/steel/skin.css?v=<%= vers %>);
+        @import url(/zmail/img/imgs.css?v=<%= vers %>);
+        @import url(/zmail/img/skins/steel/skin.css?v=<%= vers %>);
+        @import url(/zmail/js/zmailMail/config/style/dwt.css?v=<%= vers %>);
+        @import url(/zmail/js/zmailMail/config/style/common.css?v=<%= vers %>);
+        @import url(/zmail/js/zmailMail/config/style/zm.css?v=<%= vers %>);
+        @import url(/zmail/js/zmailMail/config/style/spellcheck.css?v=<%= vers %>);
+        @import url(/zmail/skins/steel/skin.css?v=<%= vers %>);
 -->
 </style>
     <style type="text/css">

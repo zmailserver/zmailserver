@@ -14,119 +14,119 @@
  */
 
 /**
-* Creates a controller to run ZimbraAdmin. Do not call directly, instead use the run()
+* Creates a controller to run ZmailAdmin. Do not call directly, instead use the run()
 * factory method.
-* @constructor ZimbraAdmin
+* @constructor ZmailAdmin
 * @param appCtx
-* @class ZimbraAdmin
-* This class is responsible for bootstrapping the ZimbraAdmin application.
+* @class ZmailAdmin
+* This class is responsible for bootstrapping the ZmailAdmin application.
 */
-ZaZimbraAdmin = function(appCtxt) {
+ZaZmailAdmin = function(appCtxt) {
 	if (arguments.length == 0) return;
-	ZaZimbraAdmin._instance = this;
-	ZaController.call(this, appCtxt, null,"ZaZimbraAdmin");
+	ZaZmailAdmin._instance = this;
+	ZaController.call(this, appCtxt, null,"ZaZmailAdmin");
 
-	ZaZimbraAdmin.showSplash(this._shell);
+	ZaZmailAdmin.showSplash(this._shell);
 	skin.showSkin();
 	appCtxt.setAppController(this);
     
     // handles to various apps
 	this._appFactory = new Object();
-	this._appFactory[ZaZimbraAdmin.ADMIN_APP] = ZaApp;
+	this._appFactory[ZaZmailAdmin.ADMIN_APP] = ZaApp;
     this.startup();
     //this.aboutDialog = new ZaAboutDialog(this._shell,null,ZabMsg.about_title);
 }
 
-ZaZimbraAdmin.prototype = new ZaController;
-ZaZimbraAdmin.prototype.constructor = ZaZimbraAdmin;
-ZaZimbraAdmin._instance = null;
+ZaZmailAdmin.prototype = new ZaController;
+ZaZmailAdmin.prototype.constructor = ZaZmailAdmin;
+ZaZmailAdmin._instance = null;
 
-ZaZimbraAdmin.ADMIN_APP = "admin";
-ZaZimbraAdmin.currentUserName = "" ;
-ZaZimbraAdmin.currentUserLogin = "";
-ZaZimbraAdmin.currentUserId = "";
-ZaZimbraAdmin.URN = "urn:zimbraAdmin";
-ZaZimbraAdmin.VIEW_INDEX = 0;
-ZaZimbraAdmin.FIRST_DAY_OF_WEEK = 0;
-ZaZimbraAdmin.isFirstRequest = false;
+ZaZmailAdmin.ADMIN_APP = "admin";
+ZaZmailAdmin.currentUserName = "" ;
+ZaZmailAdmin.currentUserLogin = "";
+ZaZmailAdmin.currentUserId = "";
+ZaZmailAdmin.URN = "urn:zmailAdmin";
+ZaZmailAdmin.VIEW_INDEX = 0;
+ZaZmailAdmin.FIRST_DAY_OF_WEEK = 0;
+ZaZmailAdmin.isFirstRequest = false;
 
-ZaZimbraAdmin._ADDRESSES = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._SEARCHES = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._ACCOUNTS_LIST_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._ALIASES_LIST_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._DISTRIBUTION_LISTS_LIST_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._SYS_CONFIG = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._GLOBAL_SETTINGS = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._SERVERS_LIST_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._DOMAINS_LIST_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._COS_LIST_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._MONITORING = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._TOOLS = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._STATUS = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._STATISTICS = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._STATISTICS_BY_SERVER = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._SEARCH_LIST_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._SEARCH_BUILDER_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._SEARCH_BUILDER_TOOLBAR_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._ZIMLET_LIST_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._ADMIN_ZIMLET_LIST_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._RESOURCE_LIST_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
+ZaZmailAdmin._ADDRESSES = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._SEARCHES = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._ACCOUNTS_LIST_VIEW = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._ALIASES_LIST_VIEW = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._DISTRIBUTION_LISTS_LIST_VIEW = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._SYS_CONFIG = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._GLOBAL_SETTINGS = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._SERVERS_LIST_VIEW = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._DOMAINS_LIST_VIEW = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._COS_LIST_VIEW = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._MONITORING = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._TOOLS = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._STATUS = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._STATISTICS = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._STATISTICS_BY_SERVER = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._SEARCH_LIST_VIEW = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._SEARCH_BUILDER_VIEW = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._SEARCH_BUILDER_TOOLBAR_VIEW = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._ZIMLET_LIST_VIEW = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._ADMIN_ZIMLET_LIST_VIEW = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._RESOURCE_LIST_VIEW = ZaZmailAdmin.VIEW_INDEX++;
 
-ZaZimbraAdmin._SERVER_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._DOMAIN_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._COS_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._ACCOUNT_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._ALIAS_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._DL_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._HELP_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._MIGRATION_WIZ_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._POSTQ_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._POSTQ_BY_SERVER_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._RESOURCE_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._ZIMLET_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
+ZaZmailAdmin._SERVER_VIEW = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._DOMAIN_VIEW = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._COS_VIEW = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._ACCOUNT_VIEW = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._ALIAS_VIEW = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._DL_VIEW = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._HELP_VIEW = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._MIGRATION_WIZ_VIEW = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._POSTQ_VIEW = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._POSTQ_BY_SERVER_VIEW = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._RESOURCE_VIEW = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._ZIMLET_VIEW = ZaZmailAdmin.VIEW_INDEX++;
 
 // new UI
-ZaZimbraAdmin._HOME_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._MONITOR_HOME_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._MANAGE_ACCOUNT_HOME_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._ADMINISTRATION_HOME_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._MIGRATION_HOME_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._DOWNLOAD_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._SEARCH_HOME_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._SEARCH_RESULT_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._SEARCH_FILTER_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._SERVER_STATUS_VIEW =  ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._SERVER_STATISTICS_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._SERVER_STATISTICS_TAB_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._SERVER_LIST_FOR_STATISTICS_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
+ZaZmailAdmin._HOME_VIEW = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._MONITOR_HOME_VIEW = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._MANAGE_ACCOUNT_HOME_VIEW = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._ADMINISTRATION_HOME_VIEW = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._MIGRATION_HOME_VIEW = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._DOWNLOAD_VIEW = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._SEARCH_HOME_VIEW = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._SEARCH_RESULT_VIEW = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._SEARCH_FILTER_VIEW = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._SERVER_STATUS_VIEW =  ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._SERVER_STATISTICS_VIEW = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._SERVER_STATISTICS_TAB_VIEW = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._SERVER_LIST_FOR_STATISTICS_VIEW = ZaZmailAdmin.VIEW_INDEX++;
 
-ZaZimbraAdmin._HOME_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._XFORM_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._XFORM_TAB_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._ACCOUNT_ALIAS_LIST_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._COS_ACCOUNT_LIST_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._COS_DOMAIN_LIST_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._DOMAIN_ACCOUNT_LIST_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._DOMAIN_ALIAS_LIST_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._DL_ALIAS_LIST_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._DL_MEMBERS_LIST_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
+ZaZmailAdmin._HOME_VIEW = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._XFORM_VIEW = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._XFORM_TAB_VIEW = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._ACCOUNT_ALIAS_LIST_VIEW = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._COS_ACCOUNT_LIST_VIEW = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._COS_DOMAIN_LIST_VIEW = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._DOMAIN_ACCOUNT_LIST_VIEW = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._DOMAIN_ALIAS_LIST_VIEW = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._DL_ALIAS_LIST_VIEW = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._DL_MEMBERS_LIST_VIEW = ZaZmailAdmin.VIEW_INDEX++;
 
 // do not change the name of the cookie! SoapServlet looks for it
-ZaZimbraAdmin._COOKIE_NAME = "ZM_ADMIN_AUTH_TOKEN";
-ZaZimbraAdmin.TEST_COOKIE_NAME = "ZA_TEST";
+ZaZmailAdmin._COOKIE_NAME = "ZM_ADMIN_AUTH_TOKEN";
+ZaZmailAdmin.TEST_COOKIE_NAME = "ZA_TEST";
 	
 // Public methods
 
-ZaZimbraAdmin.prototype.toString = 
+ZaZmailAdmin.prototype.toString = 
 function() {
-	return "ZaZimbraAdmin";
+	return "ZaZmailAdmin";
 }
 
-ZaZimbraAdmin.clearCookie = function () {
+ZaZmailAdmin.clearCookie = function () {
 	try {
-		var soapDoc = AjxSoapDoc.create("ClearCookieRequest", ZaZimbraAdmin.URN, null);
+		var soapDoc = AjxSoapDoc.create("ClearCookieRequest", ZaZmailAdmin.URN, null);
 		var cookieBy = soapDoc.set("cookie");
-		cookieBy.setAttribute("name", ZaZimbraAdmin._COOKIE_NAME);
+		cookieBy.setAttribute("name", ZaZmailAdmin._COOKIE_NAME);
 		var clearCookieCommand = new ZmCsfeCommand();
 		var params = new Object();
 		params.soapDoc = soapDoc;
@@ -135,16 +135,16 @@ ZaZimbraAdmin.clearCookie = function () {
 		params.noAuthToken = true;
 		clearCookieCommand.invoke(params);
 	} catch (ex) {
-		this._handleException(ex, "ZaZimbraAdmin.clearCookie", null, true);
+		this._handleException(ex, "ZaZmailAdmin.clearCookie", null, true);
 	}
 }
 /**
-* Sets up ZimbraMail, and then starts it by calling its constructor. It is assumed that the
+* Sets up ZmailMail, and then starts it by calling its constructor. It is assumed that the
 * CSFE is on the same host.
 *
 * @param domain		the host that we're running on
 */
-ZaZimbraAdmin.run =
+ZaZmailAdmin.run =
 function(domain) {
 	if(window._dwtShellId )
 		return;
@@ -153,16 +153,16 @@ function(domain) {
 	//AjxEnv.hasFirebug = (AjxEnv.isFirefox && (typeof (console) != typeof (_UNDEFINED_)) && DBG && (DBG.getDebugLevel() > 0)) ; 
 		
 	ZmCsfeCommand.setServerUri(location.protocol+"//" + domain + ZaSettings.CSFE_SERVER_URI);
-	ZmCsfeCommand.setCookieName(ZaZimbraAdmin._COOKIE_NAME);
+	ZmCsfeCommand.setCookieName(ZaZmailAdmin._COOKIE_NAME);
 
-	var soapDoc = AjxSoapDoc.create("BatchRequest", "urn:zimbra");
+	var soapDoc = AjxSoapDoc.create("BatchRequest", "urn:zmail");
 	soapDoc.setMethodAttribute("onerror", "continue");
 	
 	if (!ZaServerVersionInfo._loaded){
-		var versionInfoReq = soapDoc.set("GetVersionInfoRequest", null, null, ZaZimbraAdmin.URN);
+		var versionInfoReq = soapDoc.set("GetVersionInfoRequest", null, null, ZaZmailAdmin.URN);
 	}	
 
-	var domainInfoReq = soapDoc.set("GetDomainInfoRequest", null, null, ZaZimbraAdmin.URN);
+	var domainInfoReq = soapDoc.set("GetDomainInfoRequest", null, null, ZaZmailAdmin.URN);
 	var elBy = soapDoc.set("domain", location.hostname, domainInfoReq);
 	elBy.setAttribute("by", "virtualHostname");
 	
@@ -182,7 +182,7 @@ function(domain) {
         }
 	}
     if (isResend) {
-    	ZaZimbraAdmin.clearCookie();
+    	ZaZmailAdmin.clearCookie();
 		params.resend = true;
         resp = command.invoke(params).Body.BatchResponse;
     }
@@ -200,9 +200,9 @@ function(domain) {
 		var domainInfoResponse = resp.GetDomainInfoResponse[0];
     		var obj = {};
     		ZaItem.prototype.initFromJS.call(obj, domainInfoResponse.domain[0]);
-    		ZaZimbraAdmin.zimbraAdminLoginURL = obj.attrs["zimbraAdminConsoleLoginURL"] ;
-		if(obj.attrs["zimbraSkinLogoURL"]){
-			ZaSettings.LOGO_URI = obj.attrs["zimbraSkinLogoURL"];
+    		ZaZmailAdmin.zmailAdminLoginURL = obj.attrs["zmailAdminConsoleLoginURL"] ;
+		if(obj.attrs["zmailSkinLogoURL"]){
+			ZaSettings.LOGO_URI = obj.attrs["zmailSkinLogoURL"];
 		}	
 	}
 	// Create the global app context
@@ -221,9 +221,9 @@ function(domain) {
 	this._kbMgr.registerKeyMap(new ZaKeyMap());
 	this._kbMgr.pushDefaultHandler(this);
     // Go!
-    var lm = new ZaZimbraAdmin(appCtxt);
+    var lm = new ZaZmailAdmin(appCtxt);
 }
-ZaZimbraAdmin.prototype.getKeymapNameToUse = function () {
+ZaZmailAdmin.prototype.getKeymapNameToUse = function () {
 	if (ZaApp.getInstance() && ZaApp.getInstance().getCurrentController()) {
 		var c = ZaApp.getInstance().getCurrentController();
 		if (c && c.handleKeyAction)
@@ -232,7 +232,7 @@ ZaZimbraAdmin.prototype.getKeymapNameToUse = function () {
 	return "ZaGlobal";
 }
 
-ZaZimbraAdmin.prototype.handleKeyAction = function () {
+ZaZmailAdmin.prototype.handleKeyAction = function () {
 	switch (actionCode) {
 		case ZaKeyMap.DBG_NONE:
 			alert("Setting domain search limit to:" + AjxDebug.NONE);
@@ -268,12 +268,12 @@ ZaZimbraAdmin.prototype.handleKeyAction = function () {
 	}
 	return true;
 }
-ZaZimbraAdmin.getInstance = function() {
-	if(ZaZimbraAdmin._instance) {
-		return ZaZimbraAdmin._instance;
+ZaZmailAdmin.getInstance = function() {
+	if(ZaZmailAdmin._instance) {
+		return ZaZmailAdmin._instance;
 	} else {
-		ZaZimbraAdmin.run(document.domain);
-		return ZaZimbraAdmin._instance;
+		ZaZmailAdmin.run(document.domain);
+		return ZaZmailAdmin._instance;
 	}
 }
 
@@ -282,12 +282,12 @@ ZaZimbraAdmin.getInstance = function() {
 *
 * @param appName	an app name
 */
-ZaZimbraAdmin.prototype.getApp =
+ZaZmailAdmin.prototype.getApp =
 function() {
 	return this._app;	
 }
 
-ZaZimbraAdmin.prototype.getAdminApp = 
+ZaZmailAdmin.prototype.getAdminApp = 
 function() {
 	return this._app;
 }
@@ -295,7 +295,7 @@ function() {
 /**
 * Returns a handle to the app view manager.
 */
-ZaZimbraAdmin.prototype.getAppViewMgr =
+ZaZmailAdmin.prototype.getAppViewMgr =
 function() {
 	return this._appViewMgr;
 }
@@ -304,7 +304,7 @@ function() {
 * Returns a handle to the overview panel controller.
 */
 
-ZaZimbraAdmin.prototype.getOverviewPanelController =
+ZaZmailAdmin.prototype.getOverviewPanelController =
 function() {
 	if(ZaSettings.TREE_ENABLED) {
 		if (this._overviewPanelController == null) {
@@ -317,7 +317,7 @@ function() {
 	}
 }
 
-ZaZimbraAdmin.prototype.getTaskController =
+ZaZmailAdmin.prototype.getTaskController =
 function() {
     if (this._taskController == null) {
         this._taskController= new ZaTaskController(this._appCtxt, this._shell);
@@ -331,12 +331,12 @@ function() {
 *
 * @param appName	the app
 */
-ZaZimbraAdmin.prototype.setActiveApp =
+ZaZmailAdmin.prototype.setActiveApp =
 function(appName) {
 //	this._activeApp = appName;
 }
 
-ZaZimbraAdmin.logOff =
+ZaZmailAdmin.logOff =
 function() {
 	ZmCsfeCommand.noAuth = true;
 	window.onbeforeunload = null;
@@ -359,107 +359,107 @@ function() {
 		locationStr = locationStr + "?logoff=1";
 	}
 
-    var act = new AjxTimedAction(null, ZaZimbraAdmin.redir, [locationStr]);
+    var act = new AjxTimedAction(null, ZaZmailAdmin.redir, [locationStr]);
 	AjxTimedAction.scheduleAction(act, 100);
 }
 
-ZaZimbraAdmin.redir =
+ZaZmailAdmin.redir =
 function(locationStr){
 	window.location = locationStr;
 }
-// This function must be called after ZaZimbraAdmin.initInfo() is called.
-ZaZimbraAdmin.isLanguage =
+// This function must be called after ZaZmailAdmin.initInfo() is called.
+ZaZmailAdmin.isLanguage =
 function(lang){
 	var defaultLang = null;
 	//if user have set its pref, just use user's seting
 	//else use brower's setting 
-	if(ZaZimbraAdmin.LOCALE == null){
+	if(ZaZmailAdmin.LOCALE == null){
 		defaultLang = AjxEnv.DEFAULT_LOCALE; 
 	}else{
-		defaultLang = ZaZimbraAdmin.LOCALE; 
+		defaultLang = ZaZmailAdmin.LOCALE; 
 	}
 	
 	return defaultLang == lang;		
 }
-// Start up the ZimbraMail application
-ZaZimbraAdmin.prototype.startup =
+// Start up the ZmailMail application
+ZaZmailAdmin.prototype.startup =
 function() {
 
 	this._appViewMgr = new ZaAppViewMgr(this._shell, this, true);
 								        
 	try {
 		//if we're not logged in we will be thrown out here
-		var soapDoc = AjxSoapDoc.create("GetInfoRequest", "urn:zimbraAccount", null);	
+		var soapDoc = AjxSoapDoc.create("GetInfoRequest", "urn:zmailAccount", null);	
 		var command = new ZmCsfeCommand();
 		var params = new Object();
 		params.soapDoc = soapDoc;	
 		params.noSession = true;
 		params.noAuthToken = true;
-		ZaZimbraAdmin.isFirstRequest = true;
+		ZaZmailAdmin.isFirstRequest = true;
 		var resp = command.invoke(params);
-		ZaZimbraAdmin.isFirstRequest = false;
+		ZaZmailAdmin.isFirstRequest = false;
 		//initialize my rights
-		ZaZimbraAdmin.initInfo (resp);
+		ZaZmailAdmin.initInfo (resp);
 
         //check the user locale settings and reload the message is needed.
-        ZaZimbraAdmin.LOCALE_QS = "" ;
-        if (ZaZimbraAdmin.LOCALE && (ZaZimbraAdmin.LOCALE != AjxEnv.DEFAULT_LOCALE)) {
-            if (ZaZimbraAdmin.LOCALE != null) {
-                var index = ZaZimbraAdmin.LOCALE.indexOf("_");
+        ZaZmailAdmin.LOCALE_QS = "" ;
+        if (ZaZmailAdmin.LOCALE && (ZaZmailAdmin.LOCALE != AjxEnv.DEFAULT_LOCALE)) {
+            if (ZaZmailAdmin.LOCALE != null) {
+                var index = ZaZmailAdmin.LOCALE.indexOf("_");
                 if (index == -1) {
-                    ZaZimbraAdmin.LOCALE_QS = "&language=" + ZaZimbraAdmin.LOCALE;
+                    ZaZmailAdmin.LOCALE_QS = "&language=" + ZaZmailAdmin.LOCALE;
                 } else {
-                    ZaZimbraAdmin.LOCALE_QS = "&language=" + ZaZimbraAdmin.LOCALE.substring(0, index) +
-                               "&country=" + ZaZimbraAdmin.LOCALE.substring(ZaZimbraAdmin.LOCALE.length - 2);
+                    ZaZmailAdmin.LOCALE_QS = "&language=" + ZaZmailAdmin.LOCALE.substring(0, index) +
+                               "&country=" + ZaZmailAdmin.LOCALE.substring(ZaZmailAdmin.LOCALE.length - 2);
                 }
             }
 
-            ZaZimbraAdmin.reload_msg ();
+            ZaZmailAdmin.reload_msg ();
             this.initDialogs(true) ;  //make sure all the precreated dialogs are also recreated.
         }
 
-	if(ZaZimbraAdmin.isLanguage("ja")){
+	if(ZaZmailAdmin.isLanguage("ja")){
 		if(ZaAccountXFormView.CONTACT_TAB_ATTRS)
-        		ZaAccountXFormView.CONTACT_TAB_ATTRS.push(ZaAccount.A_zimbraPhoneticCompany);
+        		ZaAccountXFormView.CONTACT_TAB_ATTRS.push(ZaAccount.A_zmailPhoneticCompany);
 
 		if(ZaAccountXFormView.ACCOUNT_NAME_GROUP_ATTRS)
-        		ZaAccountXFormView.ACCOUNT_NAME_GROUP_ATTRS.push(ZaAccount.A_zimbraPhoneticFirstName, 
-				ZaAccount.A_zimbraPhoneticLastName);
+        		ZaAccountXFormView.ACCOUNT_NAME_GROUP_ATTRS.push(ZaAccount.A_zmailPhoneticFirstName, 
+				ZaAccount.A_zmailPhoneticLastName);
 	}
 	
         if(!ZaSettings.initialized)
 			ZaSettings.init();
 		else
-			ZaZimbraAdmin._killSplash();
+			ZaZmailAdmin._killSplash();
 
 	} catch (ex) {
 		if(ex && ex.code != ZmCsfeException.NO_AUTH_TOKEN && ex.code != ZmCsfeException.SVC_AUTH_EXPIRED && ex.code != ZmCsfeException.SVC_AUTH_REQUIRED) {
 			if(!ZaSettings.initialized)
 				ZaSettings.init();
 			else
-				ZaZimbraAdmin._killSplash();
+				ZaZmailAdmin._killSplash();
 		}					
-		this._handleException(ex, "ZaZimbraAdmin.prototype.startup", null, true);
+		this._handleException(ex, "ZaZmailAdmin.prototype.startup", null, true);
 	}
 }
 
-ZaZimbraAdmin.reload_msg = function () {
+ZaZmailAdmin.reload_msg = function () {
     //if(window.console && window.console.log) console.log("Reloading the message ...") ;
     var includes = [] ;
     includes.push ( [appContextPath , "/res/" , "I18nMsg,AjxMsg,ZMsg,ZaMsg,ZabMsg,AjxKeys" , ".js?v=" ,
-                        appVers , ZaZimbraAdmin.LOCALE_QS].join("") );
+                        appVers , ZaZmailAdmin.LOCALE_QS].join("") );
 
     //the dynamic script load is asynchronous, may need a callback to make sure all the messages are actually loaded
     //if(window.console && window.console.log) console.log("Reload the message file: " + includes.toString()) ;
 
     //reinitialize the AjxFormat after the message files are loaded
-    var callback = new AjxCallback (ZaZimbraAdmin.reinit_func); 
+    var callback = new AjxCallback (ZaZmailAdmin.reinit_func); 
 
     AjxInclude(includes, null, callback);
-    ZaZimbraAdmin._LOCALE_MSG_RELOADED = true ;
+    ZaZmailAdmin._LOCALE_MSG_RELOADED = true ;
 }
 
-ZaZimbraAdmin.reinit_func = function() {
+ZaZmailAdmin.reinit_func = function() {
     AjxFormat.initialize();
     ZaItem.initDescriptionItem(); 
     ZaSettings.initConst();
@@ -467,11 +467,11 @@ ZaZimbraAdmin.reinit_func = function() {
     Dwt_Datetime_XFormItem.initialize();
 }
 
-ZaZimbraAdmin.initInfo =
+ZaZmailAdmin.initInfo =
 function (resp) {
 	if(resp && resp.Body && resp.Body.GetInfoResponse) {
-		ZaZimbraAdmin.currentUserLogin = resp.Body.GetInfoResponse.name;
-		ZaZimbraAdmin.currentUserId = resp.Body.GetInfoResponse.id;
+		ZaZmailAdmin.currentUserLogin = resp.Body.GetInfoResponse.name;
+		ZaZmailAdmin.currentUserId = resp.Body.GetInfoResponse.id;
 		var adminName = resp.Body.GetInfoResponse.name;
 
         if(adminName) {
@@ -481,7 +481,7 @@ function (resp) {
             }
         }
         
-        ZaZimbraAdmin.currentAdminId = resp.Body.GetInfoResponse.id;
+        ZaZmailAdmin.currentAdminId = resp.Body.GetInfoResponse.id;
         
 		if (resp.Body.GetInfoResponse.attrs){
 			if(resp.Body.GetInfoResponse.attrs.attr && resp.Body.GetInfoResponse.attrs.attr instanceof Array) {
@@ -490,67 +490,67 @@ function (resp) {
 					if (attrsArr[i].name == "displayName") {
 						var v = attrsArr[i]._content ;
 						if (v != null && v.length > 0) {
-							ZaZimbraAdmin.currentUserName = v ;
+							ZaZmailAdmin.currentUserName = v ;
 						}
 					}
 				}
 			} else if (resp.Body.GetInfoResponse.attrs._attrs && typeof(resp.Body.GetInfoResponse.attrs._attrs) == "object") {
 				var attrsArr = resp.Body.GetInfoResponse.attrs._attrs;
 				if(attrsArr["displayName"] && attrsArr["displayName"].length) 
-					ZaZimbraAdmin.currentUserName = attrsArr["displayName"];
+					ZaZmailAdmin.currentUserName = attrsArr["displayName"];
 	
 	        }
 			//fallback to email address	
-			if (!ZaZimbraAdmin.currentUserName || ZaZimbraAdmin.currentUserName.length <=0){
-				ZaZimbraAdmin.currentUserName = ZaZimbraAdmin.currentUserLogin;
+			if (!ZaZmailAdmin.currentUserName || ZaZmailAdmin.currentUserName.length <=0){
+				ZaZmailAdmin.currentUserName = ZaZmailAdmin.currentUserLogin;
 			}
 	
 	        if (resp && resp.Body && resp.Body.GetInfoResponse && resp.Body.GetInfoResponse.prefs) {
 	            var prefs = resp.Body.GetInfoResponse.prefs._attrs ;
-	            if (prefs && prefs["zimbraPrefLocale"]) {
-	                //get the zimbraPrefLocale
-	                ZaZimbraAdmin.LOCALE = prefs["zimbraPrefLocale"] ;
+	            if (prefs && prefs["zmailPrefLocale"]) {
+	                //get the zmailPrefLocale
+	                ZaZmailAdmin.LOCALE = prefs["zmailPrefLocale"] ;
 	            }
 
-                if (prefs && prefs[ZaAccount.A_zimbraPrefAdminConsoleWarnOnExit]) {
-                    ZaZimbraAdmin.isWarnOnExit = (prefs[ZaAccount.A_zimbraPrefAdminConsoleWarnOnExit] == "TRUE") ;
+                if (prefs && prefs[ZaAccount.A_zmailPrefAdminConsoleWarnOnExit]) {
+                    ZaZmailAdmin.isWarnOnExit = (prefs[ZaAccount.A_zmailPrefAdminConsoleWarnOnExit] == "TRUE") ;
                 }
                
-				if (prefs && !AjxUtil.isEmpty(prefs[ZaAccount.A_zimbraPrefCalendarFirstDayOfWeek])) {
-                    ZaZimbraAdmin.FIRST_DAY_OF_WEEK = prefs[ZaAccount.A_zimbraPrefCalendarFirstDayOfWeek];
+				if (prefs && !AjxUtil.isEmpty(prefs[ZaAccount.A_zmailPrefCalendarFirstDayOfWeek])) {
+                    ZaZmailAdmin.FIRST_DAY_OF_WEEK = prefs[ZaAccount.A_zmailPrefCalendarFirstDayOfWeek];
                 }
 	        }
 		}
     }
 }
 
-ZaZimbraAdmin.prototype._setLicenseStatusMessage = function () {
+ZaZmailAdmin.prototype._setLicenseStatusMessage = function () {
 	if ((typeof ZaLicense == "function") && (ZaSettings.LICENSE_ENABLED)){
 		ZaLicense.setLicenseStatus(this);
 	} 
 }
 
-ZaZimbraAdmin.prototype.setStatusMsg = 
+ZaZmailAdmin.prototype.setStatusMsg = 
 function(msg, clear) {
 	if(!ZaSettings.STATUS_ENABLED) {
 		return;
 	}
 }
 
-ZaZimbraAdmin.prototype.clearStatus = 
+ZaZmailAdmin.prototype.clearStatus = 
 function() {
 	if(!ZaSettings.STATUS_ENABLED) {
 		return;
 	}
 }
 
-ZaZimbraAdmin.prototype._createAppTabs =
+ZaZmailAdmin.prototype._createAppTabs =
 function () {
 	var appTabGroup = new ZaAppTabGroup(this._shell);
 	return appTabGroup ;
 }
 
-ZaZimbraAdmin.prototype._createRefreshLink =
+ZaZmailAdmin.prototype._createRefreshLink =
 function() {
 	var refreshContainer = document.getElementById(ZaSettings.SKIN_REFRESH_DOM_ID);
 	if(!refreshContainer) {
@@ -559,13 +559,13 @@ function() {
     var refreshLabel = new DwtComposite (this._shell, "RefreshContainer", Dwt.RELATIVE_STYLE);
     var refreshEl = refreshLabel.getHtmlElement();
     refreshLabel.setCursor ("pointer");
-    refreshEl.onclick = function () { ZaZimbraAdmin.prototype._refreshListener.call(ZaZimbraAdmin.getInstance());};
+    refreshEl.onclick = function () { ZaZmailAdmin.prototype._refreshListener.call(ZaZmailAdmin.getInstance());};
     refreshEl.innerHTML = this._getAppLink(null, "SearchRefreshWhite");
     refreshLabel.reparentHtmlElement (ZaSettings.SKIN_REFRESH_DOM_ID) ;
 }
 
 
-ZaZimbraAdmin.prototype._createPreviousLink =
+ZaZmailAdmin.prototype._createPreviousLink =
 function() {
 	var previousContainer = document.getElementById(ZaSettings.SKIN_PREVIOUS_DOM_ID);
 	if(!previousContainer) {
@@ -574,12 +574,12 @@ function() {
     var previousLabel = this._previousContainer = new DwtComposite (this._shell, "PreviousContainer", Dwt.RELATIVE_STYLE);
     var previousEl = previousLabel.getHtmlElement();
     previousLabel.setCursor ("pointer");
-    previousEl.onclick = function () { ZaZimbraAdmin.prototype._goPrevListener.call(ZaZimbraAdmin.getInstance());};
+    previousEl.onclick = function () { ZaZmailAdmin.prototype._goPrevListener.call(ZaZmailAdmin.getInstance());};
     previousEl.innerHTML =  AjxImg.getImageSpanHtml("LeftArrowNormal");
     previousLabel.reparentHtmlElement (ZaSettings.SKIN_PREVIOUS_DOM_ID) ;
 }
 
-ZaZimbraAdmin.prototype._createNextLink =
+ZaZmailAdmin.prototype._createNextLink =
 function() {
 	var nextContainer = document.getElementById(ZaSettings.SKIN_NEXT_DOM_ID);
 	if(!nextContainer) {
@@ -588,12 +588,12 @@ function() {
     var nextLabel = this._nextContainer = new DwtComposite (this._shell, "NextContainer", Dwt.RELATIVE_STYLE);
     var nextEl = nextLabel.getHtmlElement();
     nextLabel.setCursor ("pointer");
-    nextEl.onclick = function () { ZaZimbraAdmin.prototype._goNextListener.call(ZaZimbraAdmin.getInstance());};
+    nextEl.onclick = function () { ZaZmailAdmin.prototype._goNextListener.call(ZaZmailAdmin.getInstance());};
     nextEl.innerHTML = AjxImg.getImageSpanHtml("RightArrowNormal");
     nextLabel.reparentHtmlElement (ZaSettings.SKIN_NEXT_DOM_ID) ;
 }
 
-ZaZimbraAdmin.prototype.updatePreNext =
+ZaZmailAdmin.prototype.updatePreNext =
 function () {
     var isPrevious = this._historyMgr.isPrevious();
     var isNext = this._historyMgr.isNext();
@@ -602,14 +602,14 @@ function () {
     this._nextContainer.setEnabled(isNext);
 
 }
-ZaZimbraAdmin.prototype._refreshListener =
+ZaZmailAdmin.prototype._refreshListener =
 function(ev) {
 	var curController = ZaApp.getInstance().getCurrentController();
 	if (AjxUtil.isInstance(curController, ZaHelpViewController)){
 		return; //don't refresh help
 	}
 
-	var tree = ZaZimbraAdmin.getInstance().getOverviewPanelController().getOverviewPanel().getFolderTree();
+	var tree = ZaZmailAdmin.getInstance().getOverviewPanelController().getOverviewPanel().getFolderTree();
 	if(AjxUtil.isEmpty(tree)){
 		return;
 	}
@@ -628,7 +628,7 @@ function(ev) {
 	tree.setSelectionByPath(curPath, false, undefined, undefined, undefined, true);
 }
 
-ZaZimbraAdmin.prototype._goPrevListener =
+ZaZmailAdmin.prototype._goPrevListener =
 function(ev) {
     var currentObject = this._historyMgr.getPrevious();
     if (currentObject) {
@@ -637,7 +637,7 @@ function(ev) {
     }
 }
 
-ZaZimbraAdmin.prototype._goNextListener =
+ZaZmailAdmin.prototype._goNextListener =
 function(ev) {
     var currentObject = this._historyMgr.getNext();
     if (currentObject) {
@@ -646,7 +646,7 @@ function(ev) {
     }
 }
 
-ZaZimbraAdmin.prototype._createHelpLink =
+ZaZmailAdmin.prototype._createHelpLink =
 function() {
     var helpSkinContainer = document.getElementById(ZaSettings.SKIN_HELP_DOM_ID);
     if(!helpSkinContainer) {
@@ -659,21 +659,21 @@ function() {
 	helpSkinContainer.innerHTML = "";
 	dwButton.reparentHtmlElement (ZaSettings.SKIN_HELP_DOM_ID);
 
-    // Add Zimbra Help Desk Menu
+    // Add Zmail Help Desk Menu
     var helpMenuOpList = new Array();
     var menu = new ZaPopupMenu(dwButton, "ZaHelpDropdown",null, helpMenuOpList, "ZA_HELP");
 
     var mItem =  new DwtMenuItem ({parent:menu, id: "zaHelpHomepage", className:"ZaHelpDropdownFirstItem"});
-    mItem.setText(ZabMsg.zimbraHomePage);
+    mItem.setText(ZabMsg.zmailHomePage);
     mItem.addSelectionListener(new AjxListener(this, this._contextHelpListener));
 
     mItem =  new DwtMenuItem ({parent:menu, id: "zaHelpCenter", className:"ZaHelpDropdownItem"});
-    mItem.setText(ZaMsg.zimbraHelpCenter);
+    mItem.setText(ZaMsg.zmailHelpCenter);
     mItem.addSelectionListener(new AjxListener(this, this._helpListener));
 
-    mItem =  new DwtMenuItem ({parent:menu, id: "aboutZimbra", className:"ZaHelpDropdownLastItem"});
-    mItem.setText(ZabMsg.zimbraAbout);
-    mItem.addSelectionListener(new AjxListener(this, this._aboutZimbraListener));
+    mItem =  new DwtMenuItem ({parent:menu, id: "aboutZmail", className:"ZaHelpDropdownLastItem"});
+    mItem.setText(ZabMsg.zmailAbout);
+    mItem.addSelectionListener(new AjxListener(this, this._aboutZmailListener));
 
     menu.addChild(this._createHelpSearch(), 0);
     menu.addPopupListener(new AjxListener(this, this._helpMenuPopupListener, menu));
@@ -681,7 +681,7 @@ function() {
     dwButton.setMenu(menu,true);
 }
 
-ZaZimbraAdmin.prototype._createHelpSearch =
+ZaZmailAdmin.prototype._createHelpSearch =
 function() {
     var helpSearch = new DwtComposite (this._shell, "ZaHelpDropdownSearch", Dwt.RELATIVE_STYLE);
     var helpSearchBox = new DwtComposite (helpSearch, "SearchPanel", Dwt.RELATIVE_STYLE);
@@ -694,7 +694,7 @@ function() {
     return helpSearch;
 }
 
-ZaZimbraAdmin.prototype._helpMenuPopupListener =
+ZaZmailAdmin.prototype._helpMenuPopupListener =
 function(menu) {
     var helpHomePageItem = menu.getItem(1);
     if (!helpHomePageItem) {
@@ -713,25 +713,25 @@ function(menu) {
     helpHomePageItem.setText(text);
 }
 
-ZaZimbraAdmin.prototype._openSupportSite =
+ZaZmailAdmin.prototype._openSupportSite =
 function() {
     window.open(ZaSettings.ZIMBRA_SUPPORT_URL_QUERY + document.getElementById("ZaHelpSearchInput").value);
 }
 
-ZaZimbraAdmin.prototype._contextHelpListener =
+ZaZmailAdmin.prototype._contextHelpListener =
 function() {
     window.open(ZaApp.getInstance().getCurrentController()._helpURL);
 }
 
-ZaZimbraAdmin.prototype._aboutZimbraListener =
+ZaZmailAdmin.prototype._aboutZmailListener =
 function() {
-    if (!this.aboutZimbraDialog) {
-        this.aboutZimbraDialog = new ZaAboutDialog(this._shell);
+    if (!this.aboutZmailDialog) {
+        this.aboutZmailDialog = new ZaAboutDialog(this._shell);
     }
-    this.aboutZimbraDialog.popup();
+    this.aboutZmailDialog.popup();
 }
 
-ZaZimbraAdmin.prototype._createOldHelpLink =
+ZaZmailAdmin.prototype._createOldHelpLink =
 function() {
 	var helpSkinContainer = document.getElementById(ZaSettings.SKIN_HELP_DOM_ID);
 	if(!helpSkinContainer) {
@@ -748,14 +748,14 @@ function() {
     } else { //this is the help link for the regular admin
         var listener = new AjxListener(this, this._helpListener);
         var adminObj = this ;
-        helpLabel.getHtmlElement().onclick = function () { ZaZimbraAdmin.prototype._helpListener.call(adminObj) ;};
+        helpLabel.getHtmlElement().onclick = function () { ZaZmailAdmin.prototype._helpListener.call(adminObj) ;};
         helpLabel.getHtmlElement().innerHTML =
              this._getAppLink(null, iconName,  ZaMsg.helpDesk, skin.skin_container_help_max_str_length);
     }
     helpLabel.reparentHtmlElement (ZaSettings.SKIN_HELP_DOM_ID) ;
 }
 
-ZaZimbraAdmin.prototype._createDownloadLink =
+ZaZmailAdmin.prototype._createDownloadLink =
 function() {
 	var downloadsContainer = document.getElementById(ZaSettings.SKIN_DW_DOM_ID);
 	if(!downloadsContainer) {
@@ -766,7 +766,7 @@ function() {
 	
 	//AjxTK addListener doesn't seem to work
 	var adminObj = this ;
-	dwLabel.getHtmlElement().onclick = function () { ZaZimbraAdmin.prototype._dwListener.call(adminObj) ;};
+	dwLabel.getHtmlElement().onclick = function () { ZaZmailAdmin.prototype._dwListener.call(adminObj) ;};
 	dwLabel.setCursor ("pointer") ;
 	
 	dwLabel.getHtmlElement().innerHTML = 
@@ -775,21 +775,21 @@ function() {
 	dwLabel.reparentHtmlElement (ZaSettings.SKIN_DW_DOM_ID) ;
 }
 
-ZaZimbraAdmin.prototype._setUserName =
+ZaZmailAdmin.prototype._setUserName =
 function () {
 	var userNameContainer = document.getElementById(ZaSettings.SKIN_USER_NAME_ID) ;
 	if(!userNameContainer) {
 		return;
 	}
 		
-	if(!ZaZimbraAdmin.currentUserName) {
+	if(!ZaZmailAdmin.currentUserName) {
 		return;
 	}
 	
 	var dwLabel = new DwtLabel(this._shell, "", "", Dwt.RELATIVE_STYLE);	
 	var containerWidth = Dwt.getSize(userNameContainer).x;
 	var innerContent = null;
-    var tmpName = AjxStringUtil.htmlEncode(ZaZimbraAdmin.currentUserName);
+    var tmpName = AjxStringUtil.htmlEncode(ZaZmailAdmin.currentUserName);
 	if(containerWidth <= 20) {
 		// if there are not enough space, just follow skin's setting
 		innerContent = ( String(tmpName).length>(skin.maxAdminName+1)) ? String(tmpName).substr(0,skin.maxAdminName) : tmpName;
@@ -805,7 +805,7 @@ function () {
 	}
 
 	dwLabel.setText(innerContent);	
-	if(innerContent != ZaZimbraAdmin.currentUserName){
+	if(innerContent != ZaZmailAdmin.currentUserName){
 		dwLabel._setMouseEvents();
 		dwLabel.setToolTipContent( tmpName );
 	}	
@@ -813,14 +813,14 @@ function () {
 	dwLabel.reparentHtmlElement (ZaSettings.SKIN_USER_NAME_ID) ;
 }
 
-ZaZimbraAdmin.prototype._createUserName =
+ZaZmailAdmin.prototype._createUserName =
 function () {
 	var userNameContainer = document.getElementById(ZaSettings.SKIN_USERNAME_DOM_ID) ;
 	if(!userNameContainer) {
 		return;
 	}
 
-	if(!ZaZimbraAdmin.currentUserName) {
+	if(!ZaZmailAdmin.currentUserName) {
 		return;
 	}
 
@@ -831,7 +831,7 @@ function () {
 		containerWidth -= 12; //substract extra padding+border
 	}
 	var innerContent = null;
-    var tmpName = AjxStringUtil.htmlEncode(ZaZimbraAdmin.currentUserName);
+    var tmpName = AjxStringUtil.htmlEncode(ZaZmailAdmin.currentUserName);
 	if(containerWidth <= 40) {
 		// if there are not enough space, just follow skin's setting
 		innerContent = ( String(tmpName).length>(skin.maxAdminName+1)) ? String(tmpName).substr(0,skin.maxAdminName) : tmpName;
@@ -848,7 +848,7 @@ function () {
 
 	dwButton.setText(innerContent);
     dwButton.setDropDownImages("NodeExpandedWhite");
-	if(innerContent != ZaZimbraAdmin.currentUserName){
+	if(innerContent != ZaZmailAdmin.currentUserName){
 		dwButton.setToolTipContent( tmpName );
 	}
 	userNameContainer.innerHTML = "";
@@ -856,31 +856,31 @@ function () {
 
     // Add LogOff Menu
     var userNameMenuOpList = new Array();
-	userNameMenuOpList.push(new ZaOperation(ZaOperation.LOGOFF, ZaMsg.logOff, ZaMsg.logOff,  "Logoff", "LogoffDis", new AjxListener(window,ZaZimbraAdmin.logOff)));
+	userNameMenuOpList.push(new ZaOperation(ZaOperation.LOGOFF, ZaMsg.logOff, ZaMsg.logOff,  "Logoff", "LogoffDis", new AjxListener(window,ZaZmailAdmin.logOff)));
 
     var menu = new ZaPopupMenu(dwButton, null,null, userNameMenuOpList, "ZA_LOGOFF");
     dwButton.setMenu(menu,true);
 
 }
 
-ZaZimbraAdmin.prototype._helpListener =
+ZaZmailAdmin.prototype._helpListener =
 function(ev) {
 	//DBG.println(AjxDebug.DBG1, "Help is clicked ...") ;
-    var acctName = ZaZimbraAdmin.currentUserLogin;
+    var acctName = ZaZmailAdmin.currentUserLogin;
     var domainName = acctName.split('@')[1];
     var domain = ZaDomain.getDomainByName(domainName);
-    var curAcct = ZaZimbraAdmin.currentAdminAccount;
+    var curAcct = ZaZmailAdmin.currentAdminAccount;
     if(curAcct && domain) {
         var url = null;
-        if(curAcct.attrs[ZaAccount.A_zimbraIsAdminAccount] == "TRUE")
-            url = domain.attrs[ZaDomain.A_zimbraHelpAdminURL];
-        else url = domain.attrs[ZaDomain.A_zimbraHelpDelegatedURL];
+        if(curAcct.attrs[ZaAccount.A_zmailIsAdminAccount] == "TRUE")
+            url = domain.attrs[ZaDomain.A_zmailHelpAdminURL];
+        else url = domain.attrs[ZaDomain.A_zmailHelpDelegatedURL];
         if(url) {
                 window.open(url);
                 return;
         }
     }
-    //skin takes the zimbraHelpAdminURL and put it into the skin hints
+    //skin takes the zmailHelpAdminURL and put it into the skin hints
     var helpButton = skin && skin.hints && skin.hints.helpButton;	  
     if (helpButton && helpButton.url) {
 		var sep = helpButton.url.match(/\?/) ? "&" : "?";
@@ -899,7 +899,7 @@ function(ev) {
     this._historyMgr.addHistory(historyObject);
 }
 
-ZaZimbraAdmin.prototype._dwListener = 
+ZaZmailAdmin.prototype._dwListener = 
 function (ev) {
 	//DBG.println(AjxDebug.DBG1, "Download is clicked ...") ;
 	if(ZaApp.getInstance().getCurrentController()) {
@@ -909,7 +909,7 @@ function (ev) {
 	}
 }
 
-ZaZimbraAdmin.prototype._createBanner =
+ZaZmailAdmin.prototype._createBanner =
 function() {
 	var logoContainer = document.getElementById(ZaSettings.SKIN_LOGO_DOM_ID);
 	if(!logoContainer) {
@@ -926,13 +926,13 @@ function() {
 	return banner;
 }
 
-ZaZimbraAdmin.prototype._createLogOff =
+ZaZmailAdmin.prototype._createLogOff =
 function () {
     var logoffMethod ;
     if (ZaSettings.isYahooSmbPADomainAdmin)   {
         logoffMethod = "SMBAccount.logOff();"
     }   else {
-        logoffMethod = "ZaZimbraAdmin.logOff();" ;
+        logoffMethod = "ZaZmailAdmin.logOff();" ;
     }
     
     var logoff = document.getElementById(ZaSettings.SKIN_LOGOFF_DOM_ID);
@@ -943,7 +943,7 @@ function () {
 }
 
 
-ZaZimbraAdmin.prototype._getLoginMsgPanel = function () {
+ZaZmailAdmin.prototype._getLoginMsgPanel = function () {
     if (!this._loginMsgPanel) {
         this._loginMsgPanel = new DwtComposite (this._shell, null, Dwt.ABSOLUTE_STYLE);
 
@@ -951,7 +951,7 @@ ZaZimbraAdmin.prototype._getLoginMsgPanel = function () {
         try {
             loginMsg = ZaDomain.getLoginMessage() ;
         }catch (ex) {
-            this._handleException(ex, "ZaZimbraAdmin.prototype._getLoginMsgPanel", null, true);
+            this._handleException(ex, "ZaZmailAdmin.prototype._getLoginMsgPanel", null, true);
         }
         if (loginMsg) {
             var loginMsgEl = new DwtAlert (this._loginMsgPanel, null, Dwt.ABSOLUTE_STYLE) ;
@@ -971,7 +971,7 @@ ZaZimbraAdmin.prototype._getLoginMsgPanel = function () {
     return this._loginMsgPanel ;
 }
 
-ZaZimbraAdmin.prototype.closeLoginMsg = function () {
+ZaZmailAdmin.prototype.closeLoginMsg = function () {
     //hide the login msg skin component
 //    this._loginMsgPanel.setVisible(false)  ;
     var loginMsgPanelId = this._loginMsgPanel.getHTMLElId() ;
@@ -994,7 +994,7 @@ ZaZimbraAdmin.prototype.closeLoginMsg = function () {
 //set the html content for logoff, help and download
 //max_lbl_length is used to constrict the maximum length of the label
 //which is different in different languages.
-ZaZimbraAdmin.prototype._getAppLink =
+ZaZmailAdmin.prototype._getAppLink =
 function(staticFunc, icon, lbl, max_lbl_length) {
 	var html = [];
 	var i = 0;
@@ -1038,7 +1038,7 @@ function(staticFunc, icon, lbl, max_lbl_length) {
 /**
 * Creates an action status view
 **/
-ZaZimbraAdmin.prototype._createActionStatus =
+ZaZmailAdmin.prototype._createActionStatus =
 function() {
 	this.actionStatusView = new ZaActionStatusView(this._shell, "ZaStatus", Dwt.ABSOLUTE_STYLE);
 }
@@ -1056,7 +1056,7 @@ function() {
  * @param {AjxCallback}    [dismissCallback]    callback to run when the toast is dismissed (by another message using [force], or explicitly calling ZmStatusView.prototype.dismiss())
  * @param {AjxCallback}    [finishCallback]     callback to run when the toast finishes its transitions by itself (not when dismissed)
  */
-ZaZimbraAdmin.prototype.setActionStatusMsg =
+ZaZmailAdmin.prototype.setActionStatusMsg =
 function(params) {
     if(this.actionStatusView) {
 	    params = Dwt.getParams(arguments, ZaActionStatusView.MSG_PARAMS);
@@ -1065,20 +1065,20 @@ function(params) {
 };
 // Private methods
 
-ZaZimbraAdmin._killSplash =
+ZaZmailAdmin._killSplash =
 function() {
     //if(window.console && window.console.log) console.log("Killing splash window now ...") ;
-    if(ZaZimbraAdmin._splashScreen)
-		ZaZimbraAdmin._splashScreen.setVisible(false);
+    if(ZaZmailAdmin._splashScreen)
+		ZaZmailAdmin._splashScreen.setVisible(false);
 }
 
-ZaZimbraAdmin.showSplash =
+ZaZmailAdmin.showSplash =
 function(shell) {
-	if(ZaZimbraAdmin._splashScreen)
-		ZaZimbraAdmin._splashScreen.setVisible(true);
+	if(ZaZmailAdmin._splashScreen)
+		ZaZmailAdmin._splashScreen.setVisible(true);
 	else {
-		ZaZimbraAdmin._splashScreen = new ZaSplashScreen(shell);
-		ZaZimbraAdmin._splashScreen.setVisible(true);
+		ZaZmailAdmin._splashScreen = new ZaSplashScreen(shell);
+		ZaZmailAdmin._splashScreen.setVisible(true);
 	}
 }
 
@@ -1087,18 +1087,18 @@ function(shell) {
 /**
 * Creates an app object, which doesn't necessarily do anything just yet.
 **/
-ZaZimbraAdmin.prototype._createApp =
+ZaZmailAdmin.prototype._createApp =
 function() {
 	this._app = ZaApp.getInstance(this._appCtxt, this._shell);
 		
 }
 
-ZaZimbraAdmin.prototype.getHisotryMgr =
+ZaZmailAdmin.prototype.getHisotryMgr =
 function() {
 	return this._historyMgr;
 }
 
-ZaZimbraAdmin.prototype._createHistoryMgr =
+ZaZmailAdmin.prototype._createHistoryMgr =
 function() {
     if (!this._historyMgr)
         this._historyMgr = new ZaHistoryMgr();
@@ -1108,7 +1108,7 @@ function() {
 * Since most apps schedule an action as part of their launch, a call to this function should not be
 * followed by any code that depends on it (ie, it should be a leaf action).
 **/
-ZaZimbraAdmin.prototype._launchApp =
+ZaZmailAdmin.prototype._launchApp =
 function() {
 	ZaSettings.TREE_ENABLED = (document.getElementById(ZaSettings.SKIN_TREE_ID)!=null);
 	ZaSettings.CURRENT_APP_ENABLED = (document.getElementById(ZaSettings.SKIN_CURRENT_APP_ID)!=null);
@@ -1116,13 +1116,13 @@ function() {
 	ZaSettings.STATUS_ENABLED = (document.getElementById(ZaSettings.SKIN_STATUS_ID)!=null);
 	ZaSettings.SEARCH_PANEL_ENABLED = (document.getElementById(ZaSettings.SKIN_SEARCH_PANEL_ID)!=null);
 	
-    //console.log("Launching ZimbraAdmin Application ....") ;
+    //console.log("Launching ZmailAdmin Application ....") ;
     if (!this._app)
 		this._createApp();
 
     //recreate the error/msg dialogs
     ZaApp.getInstance().initDialogs();
-   // if (ZaZimbraAdmin._LOCALE_MSG_RELOADED) this.initDialogs(true) ;
+   // if (ZaZmailAdmin._LOCALE_MSG_RELOADED) this.initDialogs(true) ;
 
     this._appCtxt.setClientCmdHdlr(new ZaClientCmdHandler());
     //draw stuff
@@ -1183,10 +1183,10 @@ function() {
 	
     ZaApp.getInstance().launch();
 
- 	ZaZimbraAdmin._killSplash();
+ 	ZaZmailAdmin._killSplash();
 };
 
-ZaZimbraAdmin.prototype.updateHistory =
+ZaZmailAdmin.prototype.updateHistory =
 function(historyObject, isAddHistory) {
     if(isAddHistory)
         this._historyMgr.addHistory(historyObject);
@@ -1199,7 +1199,7 @@ function(historyObject, isAddHistory) {
 
 }
 
-ZaZimbraAdmin.prototype.refreshHistoryTreeByDelete = function(items) {
+ZaZmailAdmin.prototype.refreshHistoryTreeByDelete = function(items) {
     var itemArray = AjxUtil.toArray(items);
     var refresh = false;
     for(var i = 0 ; i <  itemArray.length; i++){
@@ -1216,7 +1216,7 @@ ZaZimbraAdmin.prototype.refreshHistoryTreeByDelete = function(items) {
         this._historyMgr.refreshHistory();
 }
 
-ZaZimbraAdmin.prototype.getSettingMenu =
+ZaZmailAdmin.prototype.getSettingMenu =
 function(popupOperation, popupOrder) {
     if (!this._currentAppBar)
         return "";
@@ -1224,18 +1224,18 @@ function(popupOperation, popupOrder) {
     return this._currentAppBar.getMenu();
 }
 
-ZaZimbraAdmin.prototype.getCurrentAppBar =
+ZaZmailAdmin.prototype.getCurrentAppBar =
 function () {
     return this._currentAppBar;
 }
 
-ZaZimbraAdmin.prototype._lauchNewApp =
+ZaZmailAdmin.prototype._lauchNewApp =
 function() {
 	ZaSettings.TREE_ENABLED = (document.getElementById(ZaSettings.SKIN_TREE_DOM_ID)!=null);
 	ZaSettings.BANNER_ENABLED = (document.getElementById(ZaSettings.SKIN_LOGO_DOM_ID)!=null);
     ZaSettings.TOASTER_ENABLED = (document.getElementById(ZaSettings.SKIN_TOASTER_DOM_ID)!=null);
 
-    //console.log("Launching ZimbraAdmin Application ....") ;
+    //console.log("Launching ZmailAdmin Application ....") ;
     if (!this._app)
 		this._createApp();
 
@@ -1243,7 +1243,7 @@ function() {
     this._createHistoryMgr();
     //recreate the error/msg dialogs
     ZaApp.getInstance().initDialogs();
-   // if (ZaZimbraAdmin._LOCALE_MSG_RELOADED) this.initDialogs(true) ;
+   // if (ZaZmailAdmin._LOCALE_MSG_RELOADED) this.initDialogs(true) ;
 
     this._appCtxt.setClientCmdHdlr(new ZaClientCmdHandler());
     //draw stuff
@@ -1289,30 +1289,30 @@ function() {
 	this._appViewMgr.addComponents(elements, true);
     ZaApp.getInstance().launch();
 
- 	ZaZimbraAdmin._killSplash();
+ 	ZaZmailAdmin._killSplash();
 };
 
-ZaZimbraAdmin.noOpAction = null;
-ZaZimbraAdmin.noOpHandler = null;
-ZaZimbraAdmin.noOpInterval = 120000;
+ZaZmailAdmin.noOpAction = null;
+ZaZmailAdmin.noOpHandler = null;
+ZaZmailAdmin.noOpInterval = 120000;
 
-ZaZimbraAdmin.prototype.cancelNoOp = function() {
-	if(ZaZimbraAdmin.noOpHandler) {
+ZaZmailAdmin.prototype.cancelNoOp = function() {
+	if(ZaZmailAdmin.noOpHandler) {
 		AjxTimedAction.cancelAction(this.noOpHandler);
-		ZaZimbraAdmin.noOpHandler = null;
+		ZaZmailAdmin.noOpHandler = null;
 	}	
 }
 
-ZaZimbraAdmin.prototype.scheduleNoOp = function() {
-	if(!ZaZimbraAdmin.noOpAction) {
-		ZaZimbraAdmin.noOpAction = new AjxTimedAction(this, this.sendNoOp);
+ZaZmailAdmin.prototype.scheduleNoOp = function() {
+	if(!ZaZmailAdmin.noOpAction) {
+		ZaZmailAdmin.noOpAction = new AjxTimedAction(this, this.sendNoOp);
 	}
-	ZaZimbraAdmin.noOpHandler = AjxTimedAction.scheduleAction(ZaZimbraAdmin.noOpAction, 120000);
+	ZaZmailAdmin.noOpHandler = AjxTimedAction.scheduleAction(ZaZmailAdmin.noOpAction, 120000);
 };
 
-ZaZimbraAdmin.prototype.sendNoOp = function () {
+ZaZmailAdmin.prototype.sendNoOp = function () {
 	try {
-		var soapDoc = AjxSoapDoc.create("NoOpRequest", ZaZimbraAdmin.URN, null);
+		var soapDoc = AjxSoapDoc.create("NoOpRequest", ZaZmailAdmin.URN, null);
 		var noOpCommand = new ZmCsfeCommand();
 		var params = new Object();
 		params.soapDoc = soapDoc;	
@@ -1321,7 +1321,7 @@ ZaZimbraAdmin.prototype.sendNoOp = function () {
 		noOpCommand.invoke(params);
 		this.scheduleNoOp();
 	} catch (ex) {
-		this._handleException(ex, "ZaZimbraAdmin.prototype.sendNoOp", null, true);
+		this._handleException(ex, "ZaZmailAdmin.prototype.sendNoOp", null, true);
 		this.cancelNoOp();
 	}
 }
@@ -1329,14 +1329,14 @@ ZaZimbraAdmin.prototype.sendNoOp = function () {
 // Listeners
 
 // Banner button mouseover/mouseout handlers
-ZaZimbraAdmin._bannerBarMouseHdlr =
+ZaZmailAdmin._bannerBarMouseHdlr =
 function(ev) {
 	window.status = ZaMsg.done;
 	return true;
 }
 
 // This method is called by the window.onbeforeunload method.
-ZaZimbraAdmin._confirmExitMethod =
+ZaZmailAdmin._confirmExitMethod =
 function() {
 	//check whether all the tabs are clean by close them
 	var msg = ZaMsg.appExitWarning ;
@@ -1347,14 +1347,14 @@ function() {
 	return msg;
 }
 
-ZaZimbraAdmin._confirmAuthInvalidExitMethod =
+ZaZmailAdmin._confirmAuthInvalidExitMethod =
 function () {
     var msg = ZaMsg.authInvalidExitWarning ;
     return msg ;
 }
 
 
-ZaZimbraAdmin.setOnbeforeunload = 
+ZaZmailAdmin.setOnbeforeunload = 
 function(msg) {
 	if (msg){
 		window.onbeforeunload = msg;
@@ -1364,28 +1364,28 @@ function(msg) {
 };
 
 /** This method is used for the download link hack to avoid the exit warning message **/
-ZaZimbraAdmin.unloadHackCallback =
+ZaZmailAdmin.unloadHackCallback =
 function() {
-    if (ZaZimbraAdmin.isWarnOnExit) { //hack is only needed when we are set to warn on exit
-        ZaZimbraAdmin.setOnbeforeunload (null) ;
-        var f = function() { ZaZimbraAdmin.setOnbeforeunload(ZaZimbraAdmin._confirmExitMethod); };
+    if (ZaZmailAdmin.isWarnOnExit) { //hack is only needed when we are set to warn on exit
+        ZaZmailAdmin.setOnbeforeunload (null) ;
+        var f = function() { ZaZmailAdmin.setOnbeforeunload(ZaZmailAdmin._confirmExitMethod); };
         var t = new AjxTimedAction(null, f);
         AjxTimedAction.scheduleAction(t, 3000);
     }
 };
 
-ZaZimbraAdmin.isGlobalAdmin = function () {
-    return (ZaZimbraAdmin.currentAdminAccount 
-            && ZaZimbraAdmin.currentAdminAccount.attrs
-            && (ZaZimbraAdmin.currentAdminAccount.attrs[ZaAccount.A_zimbraIsAdminAccount] == 'TRUE'));
+ZaZmailAdmin.isGlobalAdmin = function () {
+    return (ZaZmailAdmin.currentAdminAccount 
+            && ZaZmailAdmin.currentAdminAccount.attrs
+            && (ZaZmailAdmin.currentAdminAccount.attrs[ZaAccount.A_zmailIsAdminAccount] == 'TRUE'));
 }
 
-ZaZimbraAdmin.hasGlobalDomainListAccess = function () {
-    return (ZaZimbraAdmin.isGlobalAdmin() || ZaDomain.globalRights[ZaDomain.RIGHT_LIST_DOMAIN]);
+ZaZmailAdmin.hasGlobalDomainListAccess = function () {
+    return (ZaZmailAdmin.isGlobalAdmin() || ZaDomain.globalRights[ZaDomain.RIGHT_LIST_DOMAIN]);
 }
 
-ZaZimbraAdmin.hasGlobalCOSSListAccess = function () {
-	return (ZaZimbraAdmin.isGlobalAdmin() || ZaCos.globalRights[ZaCos.RIGHT_LIST_COS]);
+ZaZmailAdmin.hasGlobalCOSSListAccess = function () {
+	return (ZaZmailAdmin.isGlobalAdmin() || ZaCos.globalRights[ZaCos.RIGHT_LIST_COS]);
 }
 
 

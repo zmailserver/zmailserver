@@ -65,7 +65,7 @@ die("Error: unable to get user home directory") unless ($home_dir);
 
 my $app_root = "@INSTALL.APP.ROOT@";
 my $app_timestamp = "@INSTALL.APP.TIMESTAMP@";
-my $data_root = "$home_dir/Library/Zimbra Desktop";
+my $data_root = "$home_dir/Library/Zmail Desktop";
 my $is_upgrade = 0;
 my $tmpdir = "$home_dir/Library/.zdtmp";
 my $lockfile = "$home_dir/Library/.zdrun.lock";
@@ -75,7 +75,7 @@ my @user_files = ("index", "store", "sqlite", "log", "zimlets-properties", "ziml
 	"conf/keystore", "profile/prefs.js", "profile/persdict.dat", "profile/localstore.json");
 
 sub launch_prism() {
-	exec("\"$app_root/Zimbra Desktop.app/Contents/MacOS/prism\"");
+	exec("\"$app_root/Zmail Desktop.app/Contents/MacOS/prism\"");
 }
 
 # ensure single running instance of this script per user
@@ -126,7 +126,7 @@ if (is_leopard()) { # Leopard's JDK 1.6 does not support 32-bit mode. So we forc
 
 # fix data files
 my $override_file = "$data_root/zdesktop.webapp/override.ini";
-my $override_dir = "$home_dir/.prism/Zimbra/Zimbra Desktop";
+my $override_dir = "$home_dir/.prism/Zmail/Zmail Desktop";
 find_and_replace("$data_root/conf/localconfig.xml", $tokens);
 find_and_replace("$data_root/jetty/etc/jetty.xml", $tokens);
 find_and_replace("$data_root/bin/zdesktop", $tokens);
@@ -134,12 +134,12 @@ find_and_replace("$data_root/zdesktop.webapp/webapp.ini", $tokens);
 find_and_replace($override_file, $tokens);
 find_and_replace("$data_root/profile/user.js", $tokens);
 mkdir("$home_dir/.prism");
-mkdir("$home_dir/.prism/Zimbra");
+mkdir("$home_dir/.prism/Zmail");
 mkdir($override_dir);
 system("cp -f \"$override_file\" \"$override_dir\"");
 
 # install zdesktop service
-my $plist = "$home_dir/Library/LaunchAgents/com.zimbra.desktop.plist";
+my $plist = "$home_dir/Library/LaunchAgents/org.zmail.desktop.plist";
 mkdir("$home_dir/Library/LaunchAgents");
 system("cp -f \"$app_root/macos/launchd.plist\" \"$plist\"");
 find_and_replace($plist, $tokens);

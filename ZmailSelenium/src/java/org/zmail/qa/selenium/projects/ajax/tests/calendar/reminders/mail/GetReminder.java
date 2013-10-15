@@ -14,18 +14,18 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.calendar.reminders.mail;
+package org.zmail.qa.selenium.projects.ajax.tests.calendar.reminders.mail;
 
 import java.util.Calendar;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZDate;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZDate;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
 
 
 public class GetReminder extends AjaxCommonTest {
@@ -49,7 +49,7 @@ public class GetReminder extends AjaxCommonTest {
 		
 		// Create the appointment on the server
 		// Create the message data to be sent
-		String subject = "appointment" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "appointment" + ZmailSeleniumProperties.getUniqueString();
 		
 		// Absolute dates in UTC zone
 		Calendar now = Calendar.getInstance();
@@ -58,7 +58,7 @@ public class GetReminder extends AjaxCommonTest {
 		
 		// Create a meeting request from AccountA to the test account
 		app.zGetActiveAccount().soapSend(
-					"<CreateAppointmentRequest xmlns='urn:zimbraMail'>"
+					"<CreateAppointmentRequest xmlns='urn:zmailMail'>"
 				+		"<m>"
 				+			"<inv>"
 				+				"<comp status='CONF' fb='B' class='PUB' transp='O' allDay='0' name='"+ subject +"'>"

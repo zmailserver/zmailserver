@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline;
+package org.zmail.cs.offline;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,32 +24,32 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.FileUtil;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.account.offline.OfflineProvisioning;
-import com.zimbra.cs.db.Db;
-import com.zimbra.cs.db.DbPool;
-import com.zimbra.cs.db.DbUtil;
-import com.zimbra.cs.db.OfflineDbPool;
-import com.zimbra.cs.db.OfflineVersions;
-import com.zimbra.cs.offline.backup.BackupTimer;
-import com.zimbra.cs.offline.backup.DelEmailTimer;
-import com.zimbra.cs.service.AuthProvider;
-import com.zimbra.cs.service.offline.OfflineZimbraAuthProvider;
-import com.zimbra.cs.util.ZimbraApplication;
-import com.zimbra.cs.volume.Volume;
-import com.zimbra.cs.volume.VolumeManager;
-import com.zimbra.cs.zimlet.ZimletFile;
-import com.zimbra.cs.zimlet.ZimletUtil;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.FileUtil;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.account.offline.OfflineProvisioning;
+import org.zmail.cs.db.Db;
+import org.zmail.cs.db.DbPool;
+import org.zmail.cs.db.DbUtil;
+import org.zmail.cs.db.OfflineDbPool;
+import org.zmail.cs.db.OfflineVersions;
+import org.zmail.cs.offline.backup.BackupTimer;
+import org.zmail.cs.offline.backup.DelEmailTimer;
+import org.zmail.cs.service.AuthProvider;
+import org.zmail.cs.service.offline.OfflineZmailAuthProvider;
+import org.zmail.cs.util.ZmailApplication;
+import org.zmail.cs.volume.Volume;
+import org.zmail.cs.volume.VolumeManager;
+import org.zmail.cs.zimlet.ZimletFile;
+import org.zmail.cs.zimlet.ZimletUtil;
 
-public final class OfflineApplication extends ZimbraApplication {
+public final class OfflineApplication extends ZmailApplication {
     private static String[] sqlScripts = {
         "db", "directory", "versions-init", "default-volumes"
     };
-    private static String ZIMBRA_DB_NAME = "zimbra";
+    private static String ZIMBRA_DB_NAME = "zmail";
 
     private List<String> extensionNames;
 
@@ -87,7 +87,7 @@ public final class OfflineApplication extends ZimbraApplication {
     @Override
     public void initialize(boolean forMailboxd) {
         deployZimlets();
-        AuthProvider.register(new OfflineZimbraAuthProvider());
+        AuthProvider.register(new OfflineZmailAuthProvider());
         AuthProvider.refresh();
         try {
             if (!forMailboxd)
@@ -112,7 +112,7 @@ public final class OfflineApplication extends ZimbraApplication {
     }
 
     @Override
-    public void initializeZimbraDb(boolean forMailboxd) throws ServiceException {
+    public void initializeZmailDb(boolean forMailboxd) throws ServiceException {
         if (!forMailboxd)
             return;
 
@@ -120,9 +120,9 @@ public final class OfflineApplication extends ZimbraApplication {
         try {
             if (Db.getInstance().databaseExists(conn, ZIMBRA_DB_NAME)) {
                 migrateDb(conn);
-                OfflineLog.offline.debug("zimbra db optimize started...");
+                OfflineLog.offline.debug("zmail db optimize started...");
                 Db.getInstance().optimize(conn, ZIMBRA_DB_NAME, 0);
-                OfflineLog.offline.debug("zimbra db optimize done");
+                OfflineLog.offline.debug("zmail db optimize done");
             } else {
                 File file = null;
                 PreparedStatement stmt = null;
@@ -136,8 +136,8 @@ public final class OfflineApplication extends ZimbraApplication {
                         String template = new String(ByteUtil.getContent(file));
                         Map<String, String> vars = new HashMap<String, String>();
 
-                        vars.put("ZIMBRA_HOME", LC.zimbra_home.value() + '/');
-                        vars.put("ZIMBRA_INSTALL", LC.zimbra_home.value() + '/');
+                        vars.put("ZIMBRA_HOME", LC.zmail_home.value() + '/');
+                        vars.put("ZIMBRA_INSTALL", LC.zmail_home.value() + '/');
                         script = StringUtil.fillTemplate(template, vars, StringUtil.atPattern);
                         DbUtil.executeScript(conn, new StringReader(script));
                     } catch (IOException e) {
@@ -181,7 +181,7 @@ public final class OfflineApplication extends ZimbraApplication {
     private void migrateDb(DbPool.DbConnection conn) {
         try {
             OfflineLog.offline.debug("DB migration check started...");
-            new com.zimbra.cs.db.DbOfflineMigration().run(conn);
+            new org.zmail.cs.db.DbOfflineMigration().run(conn);
             OfflineLog.offline.debug("DB migration done");
         } catch (SQLException e) {
             OfflineLog.offline.error("DB migration sql error: " + e.getMessage());
@@ -193,7 +193,7 @@ public final class OfflineApplication extends ZimbraApplication {
     private void deployZimlets() {
         OfflineLog.offline.debug("Deploying new zimlets...");
 
-        File zimletDir = new File(LC.zimbra_home.value() + File.separator + "zimlets");
+        File zimletDir = new File(LC.zmail_home.value() + File.separator + "zimlets");
         if (!zimletDir.exists() || !zimletDir.isDirectory()) {
             OfflineLog.offline.debug("Invalid zimlets directory: " + zimletDir.getPath());
             return;

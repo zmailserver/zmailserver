@@ -18,9 +18,9 @@
 <%@ attribute name="iframeUrl" rtexprvalue="true" required="true" type="java.lang.String" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
-<%@ taglib prefix="app" uri="com.zimbra.htmlclient" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
+<%@ taglib prefix="app" uri="org.zmail.htmlclient" %>
 
 <noscript>
 	<iframe style="width:100%; height:600px" scrolling="auto" marginWidth="0" marginHeight="0" frameBorder="0" src="${fn:escapeXml(iframeUrl)}"></iframe>
@@ -66,9 +66,9 @@
 		doc.write("${zm:jsEncode(theBody)}");
 		doc.close();
 		try {
-			if (window.YAHOO && window.zimbraKeydownHandler && window.zimbraKeypressHandler) {
-				YAHOO.util.Event.addListener(doc, "keydown", zimbraKeydownHandler);
-				YAHOO.util.Event.addListener(doc, "keypress", zimbraKeypressHandler);
+			if (window.YAHOO && window.zmailKeydownHandler && window.zmailKeypressHandler) {
+				YAHOO.util.Event.addListener(doc, "keydown", zmailKeydownHandler);
+				YAHOO.util.Event.addListener(doc, "keypress", zmailKeypressHandler);
 			}
 		} catch (error) {
 			// ignore

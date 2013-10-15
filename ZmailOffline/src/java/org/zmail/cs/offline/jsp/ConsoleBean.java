@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.jsp;
+package org.zmail.cs.offline.jsp;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,12 +20,12 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.offline.common.OfflineConstants;
-import com.zimbra.cs.offline.common.OfflineConstants.SyncStatus;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.offline.common.OfflineConstants;
+import org.zmail.cs.offline.common.OfflineConstants.SyncStatus;
 
 public class ConsoleBean extends PageBean {
     public class AccountSummary {
@@ -155,11 +155,11 @@ public class ConsoleBean extends PageBean {
         for (Account account : accounts) {
             AccountSummary sum = new AccountSummary();
             sum.id = account.getId();
-	    sum.type = "zimbra";
+	    sum.type = "zmail";
             sum.flavor = account.getAttr(OfflineConstants.A_offlineAccountFlavor);
 	    if (sum.flavor == null)
-		sum.flavor = "Zimbra";
-            sum.name = account.getAttr(Provisioning.A_zimbraPrefLabel);
+		sum.flavor = "Zmail";
+            sum.name = account.getAttr(Provisioning.A_zmailPrefLabel);
             sum.name = sum.name != null ? sum.name :
                 account.getAttr(OfflineConstants.A_offlineAccountName);
             sum.email = account.getName();
@@ -179,7 +179,7 @@ public class ConsoleBean extends PageBean {
 	    sum.type = ds.getType().toString();
             sum.flavor = ds.getAttr(OfflineConstants.A_offlineAccountFlavor);
 	    if (sum.flavor == null) {
-		String domain = ds.getAttr(Provisioning.A_zimbraDataSourceDomain, null);
+		String domain = ds.getAttr(Provisioning.A_zmailDataSourceDomain, null);
 		if (sum.type.equals("pop3"))
 		    sum.flavor = "Pop";
 		else if (GmailBean.Domain.equals(domain))
@@ -191,14 +191,14 @@ public class ConsoleBean extends PageBean {
 		else
 		    sum.flavor = "Imap";
 	    }
-	        sum.name = account.getAttr(Provisioning.A_zimbraPrefLabel);
+	        sum.name = account.getAttr(Provisioning.A_zmailPrefLabel);
 	        if (sum.name == null)
 	            sum.name = ds.getName();
             sum.email = ds.getEmailAddress();
-            sum.lastSync = ds.getLongAttr(OfflineConstants.A_zimbraDataSourceLastSync, 0);
-            String status = ds.getAttr(OfflineConstants.A_zimbraDataSourceSyncStatus);
+            sum.lastSync = ds.getLongAttr(OfflineConstants.A_zmailDataSourceLastSync, 0);
+            String status = ds.getAttr(OfflineConstants.A_zmailDataSourceSyncStatus);
             sum.status = status == null ? SyncStatus.unknown : SyncStatus.valueOf(status);
-            sum.errorCode = ds.getAttr(OfflineConstants.A_zimbraDataSourceSyncStatusErrorCode);
+            sum.errorCode = ds.getAttr(OfflineConstants.A_zmailDataSourceSyncStatusErrorCode);
             sums.add(sum);
         }
 

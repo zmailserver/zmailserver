@@ -14,14 +14,14 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_example_simplejspaction"
+<zimlet name="org_zmail_example_simplejspaction"
         version="1.0"
         description="An example zimlet using a JSP file.">
-    <zimletPanelItem label="JSP Example (via Action)" icon="zimbraIcon">
+    <zimletPanelItem label="JSP Example (via Action)" icon="zmailIcon">
         <toolTipText>Click to launch the JSP Example</toolTipText>
         <onClick>
             <canvas type="window" width="500" height="250" />
-            <actionUrl method="get" target="/service/zimlet/com_zimbra_example_simplejspaction/jspfile.jsp" />
+            <actionUrl method="get" target="/service/zimlet/org_zmail_example_simplejspaction/jspfile.jsp" />
         </onClick>
     </zimletPanelItem>
 </zimlet>

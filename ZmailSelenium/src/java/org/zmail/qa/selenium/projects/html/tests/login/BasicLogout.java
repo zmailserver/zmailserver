@@ -14,12 +14,12 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.html.tests.login;
+package org.zmail.qa.selenium.projects.html.tests.login;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.html.core.HtmlCommonTest;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.html.core.HtmlCommonTest;
 
 
 

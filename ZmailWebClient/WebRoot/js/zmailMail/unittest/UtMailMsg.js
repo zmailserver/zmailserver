@@ -32,9 +32,9 @@ UT.test("Get List-ID header", {
 		id = mailMsg.getListIdHeader();
 		UT.equal(id, "user.ant.apache.org", "Apache Ant List-ID");
 		
-		mailMsg.attrs["List-ID"] = "<mylist@zimbra.com>";
+		mailMsg.attrs["List-ID"] = "<mylist@zmail.com>";
 		id = mailMsg.getListIdHeader();
-		UT.equal(id, "mylist@zimbra.com", "Zimbra List-ID");
+		UT.equal(id, "mylist@zmail.com", "Zmail List-ID");
 		
 		mailMsg.attrs["List-ID"] = "This is the less than list (<). <test.legal.list>";
 		id = mailMsg.getListIdHeader();
@@ -42,36 +42,36 @@ UT.test("Get List-ID header", {
 	}
 );
 
-//X-Zimbra-DL header
-UT.test("Get X-Zimbra-DL header",
+//X-Zmail-DL header
+UT.test("Get X-Zmail-DL header",
 	function() {
 		UT.expect(7);
 		var mailMsg = new ZmMailMsg();
-		var xId = mailMsg.getXZimbraDLHeader();
-		UT.equal(xId, null, "no X-Zimbra-DL header");
+		var xId = mailMsg.getXZmailDLHeader();
+		UT.equal(xId, null, "no X-Zmail-DL header");
 		
 		mailMsg.attrs = {};
-		mailMsg.attrs["X-Zimbra-DL"] = "Server Team <server-team@example.zimbra.com>";
-		xId = mailMsg.getXZimbraDLHeader();
+		mailMsg.attrs["X-Zmail-DL"] = "Server Team <server-team@example.zmail.com>";
+		xId = mailMsg.getXZmailDLHeader();
 		var good = xId.good.getArray();
-		UT.equal(good.length, 1, "Mail message should have 1 X-Zimbra-DL value");
-		UT.equal(good[0].address, "server-team@example.zimbra.com", "mail message X-Zimbra-DL header should be server-team@example.zimbra.com");
+		UT.equal(good.length, 1, "Mail message should have 1 X-Zmail-DL value");
+		UT.equal(good[0].address, "server-team@example.zmail.com", "mail message X-Zmail-DL header should be server-team@example.zmail.com");
 		
 		mailMsg = new ZmMailMsg();
 		mailMsg.attrs = {};
-		mailMsg.attrs["X-Zimbra-DL"] = "Server Team <server-team@example.zimbra.com>, ui-team@example.zimbra.com";
-		xId = mailMsg.getXZimbraDLHeader();
+		mailMsg.attrs["X-Zmail-DL"] = "Server Team <server-team@example.zmail.com>, ui-team@example.zmail.com";
+		xId = mailMsg.getXZmailDLHeader();
 		good = xId.good.getArray();
-		UT.equal(good.length, 2, "Mail message should have 2 X-Zimbra-DL values");
-		UT.equal(good[0].address, "server-team@example.zimbra.com", "mail mesage X-Zimbra-DL header should have have server-team@example.zimbra.com");
-		UT.equal(good[1].address, "ui-team@example.zimbra.com", "mail message X-Zimbra-DL header should have ui-team@example.zimbrea.com");
+		UT.equal(good.length, 2, "Mail message should have 2 X-Zmail-DL values");
+		UT.equal(good[0].address, "server-team@example.zmail.com", "mail mesage X-Zmail-DL header should have have server-team@example.zmail.com");
+		UT.equal(good[1].address, "ui-team@example.zmail.com", "mail message X-Zmail-DL header should have ui-team@example.zimbrea.com");
 		
 		mailMsg = new ZmMailMsg();
 		mailMsg.attrs = {};
-		mailMsg.attrs["X-Zimbra-DL"] = "badaddress";
-		xId = mailMsg.getXZimbraDLHeader();
+		mailMsg.attrs["X-Zmail-DL"] = "badaddress";
+		xId = mailMsg.getXZmailDLHeader();
 		good = xId.good.getArray();
-		UT.equal(good.length, 0, "Mail message should not have any good X-Zimbra-DL values");
+		UT.equal(good.length, 0, "Mail message should not have any good X-Zmail-DL values");
 	}		
 );
 
@@ -117,14 +117,14 @@ UT.test("Unfang Internal Test: Copy/Paste Inline Image", {
 								mp: [
 								 {
 									body: true,
-									content: "<html><head><style>p { margin: 0; }</style></head><body><div style=\"font-family: Times New Roman; font-size: 12pt; color: #000000\"><div><img src=\"cid:2eaca8a7d2cd054b66ea5be106299b74bd313773@zimbra\" alt=\"\"></div></div></body></html>",
+									content: "<html><head><style>p { margin: 0; }</style></head><body><div style=\"font-family: Times New Roman; font-size: 12pt; color: #000000\"><div><img src=\"cid:2eaca8a7d2cd054b66ea5be106299b74bd313773@zmail\" alt=\"\"></div></div></body></html>",
 									ct: "text/html",
 									part: "2.1",
 									s: 249
 								   },
 								   {
 									cd: "attachment",
-									ci: "<2eaca8a7d2cd054b66ea5be106299b74bd313773@zimbra>",
+									ci: "<2eaca8a7d2cd054b66ea5be106299b74bd313773@zmail>",
 									ct: "image/png",
 									filename: "1316619883060",
 									part: "2.2",
@@ -277,14 +277,14 @@ UT.test("Unfang Internal Test: Inline Attachment", {
                 mp: [
                   {
                     body: true,
-                    content: '<html><head><style>p { margin: 0; }</style></head><body><div style="font-family: Times New Roman; font-size: 12pt; color: #000000"><div><img src="cid:29e427a6ce209cef3387c9a3aa5a4e689ab50d9c@zimbra"><br></div></div></body></html>',
+                    content: '<html><head><style>p { margin: 0; }</style></head><body><div style="font-family: Times New Roman; font-size: 12pt; color: #000000"><div><img src="cid:29e427a6ce209cef3387c9a3aa5a4e689ab50d9c@zmail"><br></div></div></body></html>',
                     ct: "text/html",
                     part: "2.1",
                     s: 308
                    },
                   {
                     cd: "attachment",
-                    ci: "<29e427a6ce209cef3387c9a3aa5a4e689ab50d9c@zimbra>",
+                    ci: "<29e427a6ce209cef3387c9a3aa5a4e689ab50d9c@zmail>",
                     ct: "image/png",
                     filename: "Tag Icons.png",
                     part: "2.2",
@@ -370,7 +370,7 @@ UT.test("Unfang Internal Test: Inline Attachment (Content-Location)", {
                   {
                     cd: "attachment",
 					cl: "image001.png",
-                    ci: "<29e427a6ce209cef3387c9a3aa5a4e689ab50d9c@zimbra>",
+                    ci: "<29e427a6ce209cef3387c9a3aa5a4e689ab50d9c@zmail>",
                     ct: "image/png",
                     filename: "Tag Icons.png",
                     part: "2.2",

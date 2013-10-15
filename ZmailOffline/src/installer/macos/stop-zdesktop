@@ -14,6 +14,6 @@
 # ***** END LICENSE BLOCK *****
 # 
 
-# Run this script to stop zimbra desktop service
+# Run this script to stop zmail desktop service
 
-launchctl stop com.zimbra.desktop
+launchctl stop org.zmail.desktop

@@ -1,17 +1,17 @@
 function ZmCloudChatApp(zimlet) {
 	this.zimlet = zimlet;
 	var soapURL =   appCtxt.getSettings().getInfoResponse.soapURL;
-	if(soapURL.indexOf("localhost") >= 0 || soapURL.indexOf("rr.zimbra.com") >= 0) {
+	if(soapURL.indexOf("localhost") >= 0 || soapURL.indexOf("rr.zmail.com") >= 0) {
 		this._zmAuthToken =  ZmCsfeCommand.getAuthToken();
-		this._zimbraServerUrl =  soapURL + "GetInfoRequest";
+		this._zmailServerUrl =  soapURL + "GetInfoRequest";
 		this._nodeUrl = "http://localhost:3000";
 	} else {
 		//this._zmAuthToken = "enter hardcoded auth-token for dogfood";
-		//this._zimbraServerUrl = "https://dogfood.zimbra.com:443/service/soap/GetInfoRequest";
+		//this._zmailServerUrl = "https://dogfood.zmail.com:443/service/soap/GetInfoRequest";
 		//this._nodeUrl = "https://cloudchat.cloudfoundry.com:443/";
 		this._zmAuthToken =  ZmCsfeCommand.getAuthToken();
-		this._zimbraServerUrl = soapURL + "GetInfoRequest";
-		this._zimbraServerUrl = this._zimbraServerUrl.replace("http://", "https://");
+		this._zmailServerUrl = soapURL + "GetInfoRequest";
+		this._zmailServerUrl = this._zmailServerUrl.replace("http://", "https://");
 		this._nodeUrl = this.zimlet.getConfig("cloudChatServer");
 	}
 
@@ -104,7 +104,7 @@ ZmCloudChatApp.prototype.login = function() {
     var loginParams = {
         action: "LOGIN_USING_ZIMBRA_CREDENTIALS",
         zmAuthToken: this._zmAuthToken,
-        zimbraServerUrl:this._zimbraServerUrl,
+        zmailServerUrl:this._zmailServerUrl,
         socketType: "CHAT_CLIENT",
         exchangeName: "ChatExchange",
 		loginAsOffline: this.loginAsOffline
@@ -549,7 +549,7 @@ ZmCloudChatApp.prototype._loadCurrentUsersEmails = function() {
 	var infoResp = appCtxt.getSettings().getInfoResponse;
 	this.currentUserEmails.push(infoResp.name);
 	try {
-		var allowFromAddress = infoResp.attrs._attrs.zimbraAllowFromAddress;
+		var allowFromAddress = infoResp.attrs._attrs.zmailAllowFromAddress;
 		if(allowFromAddress) {
 			this.currentUserEmails = (allowFromAddress instanceof Array) ? this.currentUserEmails.concat(allowFromAddress) : this.currentUserEmails.concat([allowFromAddress]);
 		}
@@ -558,9 +558,9 @@ ZmCloudChatApp.prototype._loadCurrentUsersEmails = function() {
 	}
 	//add aliases
 	try {
-		var zimbraMailAlias = infoResp.attrs._attrs.zimbraMailAlias;
-		if(zimbraMailAlias) {
-			this.currentUserEmails = (zimbraMailAlias instanceof Array) ? this.currentUserEmails.concat(zimbraMailAlias) : this.currentUserEmails.concat([zimbraMailAlias]);
+		var zmailMailAlias = infoResp.attrs._attrs.zmailMailAlias;
+		if(zmailMailAlias) {
+			this.currentUserEmails = (zmailMailAlias instanceof Array) ? this.currentUserEmails.concat(zmailMailAlias) : this.currentUserEmails.concat([zmailMailAlias]);
 		}
 	} catch(e){
 		//ignore, this guy doesnt have aliases

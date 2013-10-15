@@ -14,18 +14,18 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.addressbook.contactgroups;
+package org.zmail.qa.selenium.projects.ajax.tests.addressbook.contactgroups;
 
 
 import org.testng.annotations.Test;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.addressbook.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.addressbook.FormContactGroupNew.Field;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.addressbook.*;
+import org.zmail.qa.selenium.projects.ajax.ui.addressbook.FormContactGroupNew.Field;
 
 
 public class CreateContactGroup extends AjaxCommonTest  {
@@ -50,9 +50,9 @@ public class CreateContactGroup extends AjaxCommonTest  {
 		
 		//-- Data
 		
-		String groupName = "group" + ZimbraSeleniumProperties.getUniqueString();
-		String member1 = "m" + ZimbraSeleniumProperties.getUniqueString() + "@example.com";
-		String member2 = "m" + ZimbraSeleniumProperties.getUniqueString() + "@example.com";
+		String groupName = "group" + ZmailSeleniumProperties.getUniqueString();
+		String member1 = "m" + ZmailSeleniumProperties.getUniqueString() + "@example.com";
+		String member2 = "m" + ZmailSeleniumProperties.getUniqueString() + "@example.com";
 		
 		
 		//-- GUI
@@ -74,7 +74,7 @@ public class CreateContactGroup extends AjaxCommonTest  {
 		//-- Data Verification
 		
 		app.zGetActiveAccount().soapSend(
-					"<SearchRequest xmlns='urn:zimbraMail' types='contact'>"
+					"<SearchRequest xmlns='urn:zmailMail' types='contact'>"
 				+		"<query>#nickname:"+ groupName +"</query>"
 				+	"</SearchRequest>");
 		String contactId = app.zGetActiveAccount().soapSelectValue("//mail:cn", "id");
@@ -82,7 +82,7 @@ public class CreateContactGroup extends AjaxCommonTest  {
 		ZAssert.assertNotNull(contactId, "Verify the contact is returned in the search");
 		
 		app.zGetActiveAccount().soapSend(
-				"<GetContactsRequest xmlns='urn:zimbraMail'>"
+				"<GetContactsRequest xmlns='urn:zmailMail'>"
 			+		"<cn id='"+ contactId +"'/>"
 			+	"</GetContactsRequest>");
 	
@@ -118,7 +118,7 @@ public class CreateContactGroup extends AjaxCommonTest  {
 		
 		//-- Data
 		
-		String groupName = "group" + ZimbraSeleniumProperties.getUniqueString();
+		String groupName = "group" + ZmailSeleniumProperties.getUniqueString();
 
 		
 		//-- GUI
@@ -135,12 +135,12 @@ public class CreateContactGroup extends AjaxCommonTest  {
 
 	    // Select GAL search
 		form.zToolbarPressPulldown(Button.B_CONTACTGROUP_SEARCH_TYPE, Button.O_CONTACTGROUP_SEARCH_GAL);
-		form.zFillField(Field.SearchField, ZimbraAccount.AccountA().EmailAddress);
+		form.zFillField(Field.SearchField, ZmailAccount.AccountA().EmailAddress);
 		form.zToolbarPressButton(Button.B_SEARCH);
 		form.zToolbarPressButton(Button.B_CONTACTGROUP_ADD_SEARCH_RESULT);
 		
 		form.zToolbarPressPulldown(Button.B_CONTACTGROUP_SEARCH_TYPE, Button.O_CONTACTGROUP_SEARCH_GAL);
-		form.zFillField(Field.SearchField, ZimbraAccount.AccountB().EmailAddress);
+		form.zFillField(Field.SearchField, ZmailAccount.AccountB().EmailAddress);
 		form.zToolbarPressButton(Button.B_SEARCH);
 		form.zToolbarPressButton(Button.B_CONTACTGROUP_ADD_SEARCH_RESULT);
 		
@@ -154,8 +154,8 @@ public class CreateContactGroup extends AjaxCommonTest  {
 		ContactGroupItem actual = ContactGroupItem.importFromSOAP(app.zGetActiveAccount(), "#nickname:"+ groupName);
 		ZAssert.assertNotNull(actual, "Verify the contact group exists in the mailbox");
 		
-		ZAssert.assertContains(actual.getMemberList(), new ContactGroupItem.MemberItemGAL(ZimbraAccount.AccountA()), "Verify member 1 is in the group");
-		ZAssert.assertContains(actual.getMemberList(), new ContactGroupItem.MemberItemGAL(ZimbraAccount.AccountB()), "Verify member 1 is in the group");
+		ZAssert.assertContains(actual.getMemberList(), new ContactGroupItem.MemberItemGAL(ZmailAccount.AccountA()), "Verify member 1 is in the group");
+		ZAssert.assertContains(actual.getMemberList(), new ContactGroupItem.MemberItemGAL(ZmailAccount.AccountB()), "Verify member 1 is in the group");
 
 	}
 
@@ -167,7 +167,7 @@ public class CreateContactGroup extends AjaxCommonTest  {
 		//-- Data
 		
 		// The contact group name
-		String groupName = "group" + ZimbraSeleniumProperties.getUniqueString();
+		String groupName = "group" + ZmailSeleniumProperties.getUniqueString();
 		
 		// Create two contacts
 		ContactItem contact1 = ContactItem.createContactItem(app.zGetActiveAccount());
@@ -220,13 +220,13 @@ public class CreateContactGroup extends AjaxCommonTest  {
 		//-- Data
 		
 		// The contact group name
-		String groupName = "group" + ZimbraSeleniumProperties.getUniqueString();
+		String groupName = "group" + ZmailSeleniumProperties.getUniqueString();
 		
 		// Create a contact
 		ContactItem contact1 = ContactItem.createContactItem(app.zGetActiveAccount());
 
 		// A general email address
-		String member1 = "m" + ZimbraSeleniumProperties.getUniqueString() + "@example.com";
+		String member1 = "m" + ZmailSeleniumProperties.getUniqueString() + "@example.com";
 
 		
 		//-- GUI
@@ -248,7 +248,7 @@ public class CreateContactGroup extends AjaxCommonTest  {
 		
 	    // Select GAL search
 		form.zToolbarPressPulldown(Button.B_CONTACTGROUP_SEARCH_TYPE, Button.O_CONTACTGROUP_SEARCH_GAL);
-		form.zFillField(Field.SearchField, ZimbraAccount.AccountA().EmailAddress);
+		form.zFillField(Field.SearchField, ZmailAccount.AccountA().EmailAddress);
 		form.zToolbarPressButton(Button.B_SEARCH);
 		form.zToolbarPressButton(Button.B_CONTACTGROUP_ADD_SEARCH_RESULT);
 		
@@ -267,7 +267,7 @@ public class CreateContactGroup extends AjaxCommonTest  {
 		ZAssert.assertNotNull(actual, "Verify the contact group exists in the mailbox");
 		
 		ZAssert.assertContains(actual.getMemberList(), new ContactGroupItem.MemberItemContact(contact1), "Verify contact 1 is in the group");
-		ZAssert.assertContains(actual.getMemberList(), new ContactGroupItem.MemberItemGAL(ZimbraAccount.AccountA()), "Verify GAL 1 is in the group");
+		ZAssert.assertContains(actual.getMemberList(), new ContactGroupItem.MemberItemGAL(ZmailAccount.AccountA()), "Verify GAL 1 is in the group");
 		ZAssert.assertContains(actual.getMemberList(), new ContactGroupItem.MemberItemAddress(member1), "Verify GAL 1 is in the group");
 
 	}

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
 -->
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
 <h3>Locale: "${requestScope.locale}"</h3>
 <fmt:setLocale value="${requestScope.locale}" /> 
 <table border="1" cellspacing=0 cellpadding=3>

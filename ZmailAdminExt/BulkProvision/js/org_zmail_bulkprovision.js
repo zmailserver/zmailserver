@@ -1,16 +1,16 @@
-if(ZaSettings && ZaSettings.EnabledZimlet["com_zimbra_bulkprovision"]){
+if(ZaSettings && ZaSettings.EnabledZimlet["org_zmail_bulkprovision"]){
 function bulkprovision() {
 	
 }
 
 if(ZaSettings) {
 	ZaSettings.BULK_PROVISION_TASKS_VIEW = "bulkProvisionTasksView";
-	ZaSettings.ALL_UI_COMPONENTS.push({ value: ZaSettings.BULK_PROVISION_TASKS_VIEW, label: com_zimbra_bulkprovision.UI_Comp_bulkProvisioning});
+	ZaSettings.ALL_UI_COMPONENTS.push({ value: ZaSettings.BULK_PROVISION_TASKS_VIEW, label: org_zmail_bulkprovision.UI_Comp_bulkProvisioning});
 	ZaSettings.OVERVIEW_TOOLS_ITEMS.push(ZaSettings.BULK_PROVISION_TASKS_VIEW);
     ZaSettings.VIEW_RIGHTS [ZaSettings.BULK_PROVISION_TASKS_VIEW] = "adminConsoleMigrationRights" ;
 }
 ZaEvent.S_BULK_PROVISION_TASK = ZaEvent.EVENT_SOURCE_INDEX++;
-ZaZimbraAdmin._BULK_PROVISION_TASKS_LIST = ZaZimbraAdmin.VIEW_INDEX++;
+ZaZmailAdmin._BULK_PROVISION_TASKS_LIST = ZaZmailAdmin.VIEW_INDEX++;
 
 
 ZaApp.prototype.getBulkProvisionTasksController =
@@ -38,25 +38,25 @@ bulkprovision.bulkprovOvTreeModifier = function (tree) {
                 this._toolsTi = new DwtTreeItem(tree, null, null, null, null, "overviewHeader");
                 this._toolsTi.enableSelection(false);
                 this._toolsTi.setText(ZaMsg.OVP_tools);
-                this._toolsTi.setData(ZaOverviewPanelController._TID, ZaZimbraAdmin._TOOLS);
+                this._toolsTi.setData(ZaOverviewPanelController._TID, ZaZmailAdmin._TOOLS);
             }
 
             this._bulkprovTi = new DwtTreeItem({parent:this._toolsTi,className:"AdminTreeItem"});
-            this._bulkprovTi.setText(com_zimbra_bulkprovision.OVP_bulkProvisioning);
+            this._bulkprovTi.setText(org_zmail_bulkprovision.OVP_bulkProvisioning);
             this._bulkprovTi.setImage("BulkProvision");
-            this._bulkprovTi.setData(ZaOverviewPanelController._TID, ZaZimbraAdmin._BULK_PROVISION_TASKS_LIST);
+            this._bulkprovTi.setData(ZaOverviewPanelController._TID, ZaZmailAdmin._BULK_PROVISION_TASKS_LIST);
         } else {
             var parentPath = ZaTree.getPathByArray([ZaMsg.OVP_home, ZaMsg.OVP_toolMig]);
 
             var ti = new ZaTreeItemData({
                                     parent:parentPath,
                                     id:ZaId.getTreeItemId(ZaId.PANEL_APP,"magHV",null, "bpHV"),
-                                    text: com_zimbra_bulkprovision.OVP_bulkProvisioning,
-                                    mappingId: ZaZimbraAdmin._BULK_PROVISION_TASKS_LIST});
+                                    text: org_zmail_bulkprovision.OVP_bulkProvisioning,
+                                    mappingId: ZaZmailAdmin._BULK_PROVISION_TASKS_LIST});
             tree.addTreeItemData(ti);
         }
 		if(ZaOverviewPanelController.overviewTreeListeners) {
-			ZaOverviewPanelController.overviewTreeListeners[ZaZimbraAdmin._BULK_PROVISION_TASKS_LIST] = bulkprovision.bulkprovOvTreeListener;
+			ZaOverviewPanelController.overviewTreeListeners[ZaZmailAdmin._BULK_PROVISION_TASKS_LIST] = bulkprovision.bulkprovOvTreeListener;
 		}
 	}
 }
@@ -69,7 +69,7 @@ if(ZaOverviewPanelController.treeModifiers)
     ZaOperation.BULK_PROVISION = ++ ZA_OP_INDEX;
     ZaAccountListController.initExtraToolbarMethod = function () {
 		var showBulkProvision = false;
-		if(ZaSettings.HAVE_MORE_DOMAINS || ZaZimbraAdmin.currentAdminAccount.attrs[ZaAccount.A_zimbraIsAdminAccount] == 'TRUE') {
+		if(ZaSettings.HAVE_MORE_DOMAINS || ZaZmailAdmin.currentAdminAccount.attrs[ZaAccount.A_zmailIsAdminAccount] == 'TRUE') {
 			showBulkProvision = true;
 		} else {
 			var domainList = ZaApp.getInstance().getDomainList().getArray();
@@ -83,8 +83,8 @@ if(ZaOverviewPanelController.treeModifiers)
 		}	
 		if(showBulkProvision) {    	
 	        this._toolbarOperations [ZaOperation.BULK_PROVISION] = 
-	                new ZaOperation(ZaOperation.BULK_PROVISION, com_zimbra_bulkprovision.ACTBB_BulkProvision,
-	                        com_zimbra_bulkprovision.ACTBB_BulkProvision_tt, "BulkProvision", "BulkProvisionDis", 
+	                new ZaOperation(ZaOperation.BULK_PROVISION, org_zmail_bulkprovision.ACTBB_BulkProvision,
+	                        org_zmail_bulkprovision.ACTBB_BulkProvision_tt, "BulkProvision", "BulkProvisionDis", 
 	                        new AjxListener(this, ZaAccountListController.prototype._bulkProvisionListener)
 	                        );
 	        // only add the bulk provision for account list view.
@@ -145,8 +145,8 @@ if(ZaOverviewPanelController.treeModifiers)
 
     ZaSearchListController.initExtraToolbarMethod = function () {
         this._toolbarOperations [ZaOperation.DOWNLOAD_ACCOUNTS] =
-                new ZaOperation(ZaOperation.DOWNLOAD_ACCOUNTS, com_zimbra_bulkprovision.ACTBB_DownloadAccounts,
-                        com_zimbra_bulkprovision.ACTBB_DownloadAccounts_tt, "DownloadGlobalConfig", "DownloadGlobalConfigDis",
+                new ZaOperation(ZaOperation.DOWNLOAD_ACCOUNTS, org_zmail_bulkprovision.ACTBB_DownloadAccounts,
+                        org_zmail_bulkprovision.ACTBB_DownloadAccounts_tt, "DownloadGlobalConfig", "DownloadGlobalConfigDis",
                         new AjxListener(this, ZaSearchListController.prototype._downloadAccountsListener)
                         );
 
@@ -170,8 +170,8 @@ if(ZaOverviewPanelController.treeModifiers)
     ZaSearchListController.initExtraAppBarMenuMethod = function () {
 
         this._popupOperationsOnAppBar [ZaOperation.DOWNLOAD_ACCOUNTS] =
-                new ZaOperation(ZaOperation.DOWNLOAD_ACCOUNTS, com_zimbra_bulkprovision.ACTBB_DownloadAccounts,
-                        com_zimbra_bulkprovision.ACTBB_DownloadAccounts_tt, "DownloadGlobalConfig", "DownloadGlobalConfigDis",
+                new ZaOperation(ZaOperation.DOWNLOAD_ACCOUNTS, org_zmail_bulkprovision.ACTBB_DownloadAccounts,
+                        org_zmail_bulkprovision.ACTBB_DownloadAccounts_tt, "DownloadGlobalConfig", "DownloadGlobalConfigDis",
                         new AjxListener(this, ZaSearchListController.prototype._downloadAccountsListener)
                         );
 

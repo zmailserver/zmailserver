@@ -17,7 +17,7 @@
  * Creates an exception.
  * @constructor
  * @class
- * This is the base class for all exceptions in the Zimbra Ajax Toolkit.
+ * This is the base class for all exceptions in the Zmail Ajax Toolkit.
  * 
  * @author Ross Dargahi
  * 

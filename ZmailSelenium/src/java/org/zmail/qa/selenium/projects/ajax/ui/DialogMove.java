@@ -14,23 +14,23 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.ui;
+package org.zmail.qa.selenium.projects.ajax.ui;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties.AppType;
-import com.zimbra.qa.selenium.projects.ajax.ui.addressbook.PageAddressbook;
-import com.zimbra.qa.selenium.projects.ajax.ui.briefcase.PageBriefcase;
-import com.zimbra.qa.selenium.projects.ajax.ui.calendar.PageCalendar;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.PageMail;
-import com.zimbra.qa.selenium.projects.ajax.ui.tasks.PageTasks;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties.AppType;
+import org.zmail.qa.selenium.projects.ajax.ui.addressbook.PageAddressbook;
+import org.zmail.qa.selenium.projects.ajax.ui.briefcase.PageBriefcase;
+import org.zmail.qa.selenium.projects.ajax.ui.calendar.PageCalendar;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.PageMail;
+import org.zmail.qa.selenium.projects.ajax.ui.tasks.PageTasks;
 
 public class DialogMove extends AbsDialog {
 	public static class Locators {
 
-		// TODO:  See https://bugzilla.zimbra.com/show_bug.cgi?id=54173
+		// TODO:  See https://bugzilla.zmail.com/show_bug.cgi?id=54173
 		public static final String zDialogId			= "ChooseFolderDialog";
 		public static final String zTitleId	 			= "ChooseFolderDialog_title";
 		public static final String zDialogContentId		= "ChooseFolderDialog_content";
@@ -153,7 +153,7 @@ public class DialogMove extends AbsDialog {
 
 		if (MyTab instanceof PageMail) {
 
-		   if (ZimbraSeleniumProperties.getAppType() == AppType.DESKTOP) {
+		   if (ZmailSeleniumProperties.getAppType() == AppType.DESKTOP) {
 		      locator = "css=div[id='" + Locators.zDialogId+ "'] td[id^='zti__" +
 		            MyApplication.zGetActiveAccount().EmailAddress +
 		            ":ZmChooseFolderDialog_Mail__'][id$=':" +
@@ -165,7 +165,7 @@ public class DialogMove extends AbsDialog {
 
 		} else if (MyTab instanceof PageAddressbook) {
 
-			   if (ZimbraSeleniumProperties.getAppType() == AppType.DESKTOP) {
+			   if (ZmailSeleniumProperties.getAppType() == AppType.DESKTOP) {
 			      locator = "css=div[id='" + Locators.zDialogId
 	            + "'] td[id^='zti__" + MyApplication.zGetActiveAccount().EmailAddress +
 	            ":ZmChooseFolderDialog_Contacts__'][id$=':"
@@ -184,7 +184,7 @@ public class DialogMove extends AbsDialog {
 					folder.getId());
 
 		}else if (MyTab instanceof PageTasks){
-			if (ZimbraSeleniumProperties.getAppType() == AppType.DESKTOP) {
+			if (ZmailSeleniumProperties.getAppType() == AppType.DESKTOP) {
 			   locator = "css=div[id='" + Locators.zDialogId + "'] td[id^='zti__" +
 			         MyApplication.zGetActiveAccount().EmailAddress +
 			         ":ZmChooseFolderDialog_Tasks__'][id$='" +
@@ -195,7 +195,7 @@ public class DialogMove extends AbsDialog {
 			}
 
 		}else if (MyTab instanceof PageBriefcase ) {
-			if (ZimbraSeleniumProperties.getAppType() == AppType.DESKTOP) {
+			if (ZmailSeleniumProperties.getAppType() == AppType.DESKTOP) {
 			   locator = "css=div[id='" + Locators.zDialogId + "'] td[id='zti__"+
 			         MyApplication.zGetActiveAccount().EmailAddress +
 			         ":ZmChooseFolderDialog_Briefcase__'][id$='" +

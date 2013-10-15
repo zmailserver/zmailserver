@@ -16,16 +16,16 @@
 /**
  * Constructor.
  */
-function Com_Zimbra_Evite_HandlerObject() {
+function Com_Zmail_Evite_HandlerObject() {
 }
 
-Com_Zimbra_Evite_HandlerObject.prototype = new ZmZimletBase();
-Com_Zimbra_Evite_HandlerObject.prototype.constructor = Com_Zimbra_Evite_HandlerObject;
+Com_Zmail_Evite_HandlerObject.prototype = new ZmZimletBase();
+Com_Zmail_Evite_HandlerObject.prototype.constructor = Com_Zmail_Evite_HandlerObject;
 
 /**
  *Shorten Zimlet Handler class name
  */
-var EviteZimlet = Com_Zimbra_Evite_HandlerObject;
+var EviteZimlet = Com_Zmail_Evite_HandlerObject;
 
 EviteZimlet.CALENDAR_VIEW = "appointment";
 
@@ -87,7 +87,7 @@ function(callback, init) {
 };
 
 /**
- * Called by Zimbra framework when a menu item was selected
+ * Called by Zmail framework when a menu item was selected
  *
  * @param {string} itemId 		the id of the menu item
  */
@@ -123,7 +123,7 @@ function() {
  */
 EviteZimlet.prototype._eviteAuth =
 function(user, passwd, callback, init) {
-	var authUrl = [this.getConfig(EviteZimlet.CONFIG_PROP_AUTH_URL),'?email=',user,'&pass=',passwd,'&src=zimbra&rndm=',this._getRandomNumber()].join("");
+	var authUrl = [this.getConfig(EviteZimlet.CONFIG_PROP_AUTH_URL),'?email=',user,'&pass=',passwd,'&src=zmail&rndm=',this._getRandomNumber()].join("");
 	var url = ZmZimletBase.PROXY + AjxStringUtil.urlComponentEncode(authUrl);
 	AjxRpc.invoke(null, url, null, new AjxCallback(this, this._authCallbackHandler, [ init, callback ]), true);
 };
@@ -138,7 +138,7 @@ function() {
 		this._login(new AjxCallback(this, this._getCalendarInvites), false);
 		return;
 	}
-	var myUrl = [this.getConfig(EviteZimlet.CONFIG_PROP_MY_URL),'?userID=',this.userID,'&src=zimbra&rndm=',this._getRandomNumber()].join("");
+	var myUrl = [this.getConfig(EviteZimlet.CONFIG_PROP_MY_URL),'?userID=',this.userID,'&src=zmail&rndm=',this._getRandomNumber()].join("");
 	var url = ZmZimletBase.PROXY + AjxStringUtil.urlComponentEncode(myUrl);
 	AjxRpc.invoke(null, url, null, new AjxCallback(this, this._getCalInvitesCallback), true);
 };
@@ -259,7 +259,7 @@ function(result) {
 };
 
 /**
- * Gets the Zimbra username.
+ * Gets the Zmail username.
  */
 EviteZimlet.prototype._getUsername =
 function() {
@@ -280,7 +280,7 @@ function(title, url, date, time) {
 		appCtxt.getAppController().setStatusMsg(this.getMessage("EviteZimlet_NotInitialized"), ZmStatusView.LEVEL_CRITICAL);
 		return;
 	}
-	var soapDoc = AjxSoapDoc.create("CreateAppointmentRequest", "urn:zimbraMail");
+	var soapDoc = AjxSoapDoc.create("CreateAppointmentRequest", "urn:zmailMail");
 	var m = soapDoc.set("m");
 	m.setAttribute("l", this.eviteFolderID);
 	var node = soapDoc.set("inv", null, m);
@@ -315,7 +315,7 @@ function(title, url, date, time) {
  */
 EviteZimlet.prototype._listFolders =
 function() {
-	var soapDoc = AjxSoapDoc.create("GetFolderRequest", "urn:zimbraMail");
+	var soapDoc = AjxSoapDoc.create("GetFolderRequest", "urn:zmailMail");
 	var command = new ZmCsfeCommand();
 	var top = command.invoke({soapDoc: soapDoc, noAuthToken: true}).Body.GetFolderResponse.folder[0];
 
@@ -339,7 +339,7 @@ function() {
  */
 EviteZimlet.prototype._createEviteFolder =
 function(parent) {
-	var soapDoc = AjxSoapDoc.create("CreateFolderRequest", "urn:zimbraMail");
+	var soapDoc = AjxSoapDoc.create("CreateFolderRequest", "urn:zmailMail");
 	var folderNode = soapDoc.set("folder");
 	folderNode.setAttribute("name", "evite");
 	folderNode.setAttribute("l", parent);
@@ -352,7 +352,7 @@ function(parent) {
 	}
 	this.eviteFolderID = id;
 
-	soapDoc = AjxSoapDoc.create("FolderActionRequest", "urn:zimbraMail");
+	soapDoc = AjxSoapDoc.create("FolderActionRequest", "urn:zmailMail");
 	var actionNode = soapDoc.set("action");
 	actionNode.setAttribute("op", "color");
 	actionNode.setAttribute("id", id);

@@ -13,9 +13,9 @@
  * ***** END LICENSE BLOCK *****
 --%>
 <%@ tag body-content="empty" %>
-<%@ attribute name="message" rtexprvalue="true" required="true" type="com.zimbra.cs.taglib.bean.ZMessageBean" %>
-<%@ attribute name="invite" rtexprvalue="true" required="true" type="com.zimbra.client.ZInvite" %>
-<%@ attribute name="mailbox" rtexprvalue="true" required="true" type="com.zimbra.cs.taglib.bean.ZMailboxBean" %>
+<%@ attribute name="message" rtexprvalue="true" required="true" type="org.zmail.cs.taglib.bean.ZMessageBean" %>
+<%@ attribute name="invite" rtexprvalue="true" required="true" type="org.zmail.client.ZInvite" %>
+<%@ attribute name="mailbox" rtexprvalue="true" required="true" type="org.zmail.cs.taglib.bean.ZMailboxBean" %>
 <%@ attribute name="hideops" rtexprvalue="true" required="false" %>
 <%@ attribute name="showInviteReply" rtexprvalue="true" required="false" %>
 <%@ attribute name="externalImageUrl" rtexprvalue="true" required="false" type="java.lang.String" %>
@@ -23,9 +23,9 @@
 <%@ attribute name="newWindowUrl" rtexprvalue="true" required="false" type="java.lang.String" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
-<%@ taglib prefix="mo" uri="com.zimbra.mobileclient" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
+<%@ taglib prefix="mo" uri="org.zmail.mobileclient" %>
 
 <%--compute body up front, so attachments refereneced in multipart/related don't show up --%>
 <c:set var="body" value="${message.body}"/>
@@ -100,21 +100,21 @@
                                 <c:set var="keyOffset" value="${3}"/>
                                 <td style='padding: 0 2px 0 2px'>
                                     <a <c:if test="${not isPart}"></c:if> href="${fn:escapeXml(composeUrl)}&amp;op=accept">
-                                        <img alt="check" title="check" src="/img/zimbra/ImgCheck.png">
+                                        <img alt="check" title="check" src="/img/zmail/ImgCheck.png">
                                         <span><fmt:message key="replyAccept"/></span>
                                     </a>
                                 </td>
                                 <td><div class='vertSep'></div></td>
                                 <td style='padding: 0 2px 0 2px'>
                                     <a <c:if test="${not isPart}"></c:if> href="${fn:escapeXml(composeUrl)}&amp;op=tentative">
-                                        <img alt="quesetionmark" title="quesetionmark" src="/img/zimbra/ImgQuestionMark.png">
+                                        <img alt="quesetionmark" title="quesetionmark" src="/img/zmail/ImgQuestionMark.png">
                                         <span><fmt:message key="replyTentative"/></span>
                                     </a>
                                 </td>
                                 <td><div class='vertSep'></div></td>
                                 <td style='padding: 0 2px 0 2px'>
                                     <a <c:if test="${not isPart}"></c:if> href="${fn:escapeXml(composeUrl)}&amp;op=decline">
-                                        <img alt="cancel" title="cancel" src="/img/zimbra/ImgCancel.png">
+                                        <img alt="cancel" title="cancel" src="/img/zmail/ImgCancel.png">
                                         <span><fmt:message key="replyDecline"/></span>
                                     </a>
                                 </td>

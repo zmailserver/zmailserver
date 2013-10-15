@@ -14,46 +14,46 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.preferences.calendar;
+package org.zmail.qa.selenium.projects.ajax.tests.preferences.calendar;
 
 import java.util.HashMap;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
 
 
-public class ZimbraPrefCalendarAlwaysShowMiniCalFALSE extends AjaxCommonTest {
+public class ZmailPrefCalendarAlwaysShowMiniCalFALSE extends AjaxCommonTest {
 
 	@SuppressWarnings("serial")
-	public ZimbraPrefCalendarAlwaysShowMiniCalFALSE() {
+	public ZmailPrefCalendarAlwaysShowMiniCalFALSE() {
 		
 		super.startingPage = app.zPagePreferences;
 		super.startingAccountPreferences = new HashMap<String, String>() {
 			{
-				put("zimbraPrefCalendarAlwaysShowMiniCal", "TRUE");
+				put("zmailPrefCalendarAlwaysShowMiniCal", "TRUE");
 			}
 		};
 	}
 
 	@Bugs(ids = "78547")
 	@Test(
-			description = "Set zimbraPrefCalendarAlwaysShowMiniCal to 'FALSE'",
+			description = "Set zmailPrefCalendarAlwaysShowMiniCal to 'FALSE'",
 			groups = { "functional" }
 			)
-	public void ZimbraPrefCalendarAlwaysShowMiniCalFALSE_01() throws HarnessException {
+	public void ZmailPrefCalendarAlwaysShowMiniCalFALSE_01() throws HarnessException {
 		
 		// Navigate to preferences -> calendar
 		app.zTreePreferences.zTreeItem(Action.A_LEFTCLICK, TreeItem.Calendar);
 
 		
-		// Click checkbox for zimbraPrefCalendarAlwaysShowMiniCal
-		logger.info("Click checkbox for zimbraPrefCalendarAlwaysShowMiniCal");
+		// Click checkbox for zmailPrefCalendarAlwaysShowMiniCal
+		logger.info("Click checkbox for zmailPrefCalendarAlwaysShowMiniCal");
 		app.zPagePreferences.zCheckboxSet("css=input[id$='_CAL_ALWAYS_SHOW_MINI_CAL']", false);
 		
 		// Not sure why, but sleep is required here
@@ -65,12 +65,12 @@ public class ZimbraPrefCalendarAlwaysShowMiniCalFALSE extends AjaxCommonTest {
 		
 		// Verify the preference is set to false
 		app.zGetActiveAccount().soapSend(
-						"<GetPrefsRequest xmlns='urn:zimbraAccount'>"
-				+			"<pref name='zimbraPrefCalendarAlwaysShowMiniCal'/>"
+						"<GetPrefsRequest xmlns='urn:zmailAccount'>"
+				+			"<pref name='zmailPrefCalendarAlwaysShowMiniCal'/>"
 				+		"</GetPrefsRequest>");
 		
-		String value = app.zGetActiveAccount().soapSelectValue("//acct:pref[@name='zimbraPrefCalendarAlwaysShowMiniCal']", null);
-		ZAssert.assertEquals(value, "FALSE", "Verify zimbraPrefCalendarAlwaysShowMiniCal was changed to 'FALSE'");
+		String value = app.zGetActiveAccount().soapSelectValue("//acct:pref[@name='zmailPrefCalendarAlwaysShowMiniCal']", null);
+		ZAssert.assertEquals(value, "FALSE", "Verify zmailPrefCalendarAlwaysShowMiniCal was changed to 'FALSE'");
 		
 	}
 }

@@ -12,9 +12,9 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.util.yc.oauth;
+package org.zmail.cs.offline.util.yc.oauth;
 
-import com.zimbra.cs.offline.OfflineLC;
+import org.zmail.cs.offline.OfflineLC;
 
 public class OAuthConstants {
 

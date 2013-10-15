@@ -14,20 +14,20 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.accounts;
+package org.zmail.qa.selenium.projects.desktop.tests.accounts;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.PageLogin;
-import com.zimbra.qa.selenium.projects.desktop.ui.accounts.FormAddGmailAccount;
-import com.zimbra.qa.selenium.projects.desktop.ui.accounts.FormAddImapAccount;
-import com.zimbra.qa.selenium.projects.desktop.ui.accounts.FormAddPopAccount;
-import com.zimbra.qa.selenium.projects.desktop.ui.accounts.FormAddYahooAccount;
-import com.zimbra.qa.selenium.projects.desktop.ui.accounts.FormAddZimbraAccount;
-import com.zimbra.qa.selenium.projects.desktop.ui.accounts.PageAddNewAccount.DROP_DOWN_OPTION;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.PageLogin;
+import org.zmail.qa.selenium.projects.desktop.ui.accounts.FormAddGmailAccount;
+import org.zmail.qa.selenium.projects.desktop.ui.accounts.FormAddImapAccount;
+import org.zmail.qa.selenium.projects.desktop.ui.accounts.FormAddPopAccount;
+import org.zmail.qa.selenium.projects.desktop.ui.accounts.FormAddYahooAccount;
+import org.zmail.qa.selenium.projects.desktop.ui.accounts.FormAddZmailAccount;
+import org.zmail.qa.selenium.projects.desktop.ui.accounts.PageAddNewAccount.DROP_DOWN_OPTION;
 
 public class CancelAccount extends AjaxCommonTest {
    public CancelAccount() {
@@ -36,17 +36,17 @@ public class CancelAccount extends AjaxCommonTest {
       super.startingAccountPreferences = null;
    }
 
-   @Test(description="Cancel Zimbra Account Creation", groups = { "functional" })
-   public void cancelZimbraAccountCreation() throws HarnessException {
+   @Test(description="Cancel Zmail Account Creation", groups = { "functional" })
+   public void cancelZmailAccountCreation() throws HarnessException {
 
-      FormAddZimbraAccount accountForm =
-         (FormAddZimbraAccount)app.zPageAddNewAccount.zDropDownListSelect(
+      FormAddZmailAccount accountForm =
+         (FormAddZmailAccount)app.zPageAddNewAccount.zDropDownListSelect(
                DROP_DOWN_OPTION.ZIMBRA);
       accountForm.zCancel();
  
       String welcomeMessage = app.zPageLogin.zGetWelcomeMessage();
       ZAssert.assertStringContains(welcomeMessage,
-            "Zimbra Desktop allows you to access email while you are disconnected from the internet.",
+            "Zmail Desktop allows you to access email while you are disconnected from the internet.",
             "Verify welcome message is displayed");
 
       ZAssert.assertEquals(false,
@@ -64,7 +64,7 @@ public class CancelAccount extends AjaxCommonTest {
  
       String welcomeMessage = app.zPageLogin.zGetWelcomeMessage();
       ZAssert.assertStringContains(welcomeMessage,
-            "Zimbra Desktop allows you to access email while you are disconnected from the internet.",
+            "Zmail Desktop allows you to access email while you are disconnected from the internet.",
             "Verify welcome message is displayed");
 
       ZAssert.assertEquals(false,
@@ -82,7 +82,7 @@ public class CancelAccount extends AjaxCommonTest {
  
       String welcomeMessage = app.zPageLogin.zGetWelcomeMessage();
       ZAssert.assertStringContains(welcomeMessage,
-            "Zimbra Desktop allows you to access email while you are disconnected from the internet.",
+            "Zmail Desktop allows you to access email while you are disconnected from the internet.",
             "Verify welcome message is displayed");
 
       ZAssert.assertEquals(false,
@@ -100,7 +100,7 @@ public class CancelAccount extends AjaxCommonTest {
  
       String welcomeMessage = app.zPageLogin.zGetWelcomeMessage();
       ZAssert.assertStringContains(welcomeMessage,
-            "Zimbra Desktop allows you to access email while you are disconnected from the internet.",
+            "Zmail Desktop allows you to access email while you are disconnected from the internet.",
             "Verify welcome message is displayed");
 
       ZAssert.assertEquals(false,
@@ -118,7 +118,7 @@ public class CancelAccount extends AjaxCommonTest {
  
       String welcomeMessage = app.zPageLogin.zGetWelcomeMessage();
       ZAssert.assertStringContains(welcomeMessage,
-            "Zimbra Desktop allows you to access email while you are disconnected from the internet.",
+            "Zmail Desktop allows you to access email while you are disconnected from the internet.",
             "Verify welcome message is displayed");
 
       ZAssert.assertEquals(false,
@@ -136,7 +136,7 @@ public class CancelAccount extends AjaxCommonTest {
  
       String welcomeMessage = app.zPageLogin.zGetWelcomeMessage();
       ZAssert.assertStringContains(welcomeMessage,
-            "Zimbra Desktop allows you to access email while you are disconnected from the internet.",
+            "Zmail Desktop allows you to access email while you are disconnected from the internet.",
             "Verify welcome message is displayed");
 
       ZAssert.assertEquals(false,

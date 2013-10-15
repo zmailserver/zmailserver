@@ -17,20 +17,20 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.desktop.ui.mail;
+package org.zmail.qa.selenium.projects.desktop.ui.mail;
 
 import java.net.URL;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.staf.Stafpostqueue;
-import com.zimbra.qa.selenium.projects.desktop.ui.AppAjaxClient;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.staf.Stafpostqueue;
+import org.zmail.qa.selenium.projects.desktop.ui.AppAjaxClient;
 
 /**
  * Represents a "Create New Folder" dialog box
  * 
- * Lots of methods not yet implemented.  See https://bugzilla.zimbra.com/show_bug.cgi?id=55923
+ * Lots of methods not yet implemented.  See https://bugzilla.zmail.com/show_bug.cgi?id=55923
  * <p>
  * @author Matt Rhoades
  *

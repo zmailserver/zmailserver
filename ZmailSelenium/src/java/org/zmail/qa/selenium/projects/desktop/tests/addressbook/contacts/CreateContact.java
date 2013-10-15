@@ -14,20 +14,20 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.addressbook.contacts;
+package org.zmail.qa.selenium.projects.desktop.tests.addressbook.contacts;
 
 import java.util.List;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount.SOAP_DESTINATION_HOST_TYPE;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.*;
-import com.zimbra.qa.selenium.projects.desktop.ui.addressbook.FormContactNew;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.ZmailAccount.SOAP_DESTINATION_HOST_TYPE;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.*;
+import org.zmail.qa.selenium.projects.desktop.ui.addressbook.FormContactNew;
 
 
 //TODO: add more in ContactItem.java
@@ -320,7 +320,7 @@ public class CreateContact extends AjaxCommonTest  {
 	            app.zGetActiveAccount(),
 	            SystemFolder.Contacts,
 	            SOAP_DESTINATION_HOST_TYPE.CLIENT,
-	            ZimbraAccount.clientAccountName);
+	            ZmailAccount.clientAccountName);
 	      app.zTreeContacts.zTreeItem(Action.A_LEFTCLICK, localAddressBook);
 	      FormContactNew formContactNew = (FormContactNew)app.zPageAddressbook.zToolbarPressButton(Button.B_NEW);
 	      ContactItem contactItem = createBasicContact(app, formContactNew);
@@ -329,7 +329,7 @@ public class CreateContact extends AjaxCommonTest  {
                app.zGetActiveAccount(),
                contactItem.fileAs,
                SOAP_DESTINATION_HOST_TYPE.CLIENT,
-               ZimbraAccount.clientAccountName);
+               ZmailAccount.clientAccountName);
 
          ZAssert.assertEquals(contactItem.firstName, contact.firstName,
                "Verifying first name");
@@ -346,7 +346,7 @@ public class CreateContact extends AjaxCommonTest  {
                app.zGetActiveAccount(),
                SystemFolder.Contacts,
                SOAP_DESTINATION_HOST_TYPE.CLIENT,
-               ZimbraAccount.clientAccountName);
+               ZmailAccount.clientAccountName);
          app.zTreeContacts.zTreeItem(Action.A_LEFTCLICK, localAddressBook);
          FormContactNew formContactNew = (FormContactNew)app.zPageAddressbook.zToolbarPressPulldown(Button.B_NEW, Button.O_NEW_CONTACT);
          ContactItem contactItem = createBasicContact(app, formContactNew);
@@ -355,7 +355,7 @@ public class CreateContact extends AjaxCommonTest  {
                app.zGetActiveAccount(),
                contactItem.fileAs,
                SOAP_DESTINATION_HOST_TYPE.CLIENT,
-               ZimbraAccount.clientAccountName);
+               ZmailAccount.clientAccountName);
 
          ZAssert.assertEquals(contactItem.firstName, contact.firstName,
                "Verifying first name");
@@ -372,7 +372,7 @@ public class CreateContact extends AjaxCommonTest  {
                app.zGetActiveAccount(),
                SystemFolder.Contacts,
                SOAP_DESTINATION_HOST_TYPE.CLIENT,
-               ZimbraAccount.clientAccountName);
+               ZmailAccount.clientAccountName);
          app.zTreeContacts.zTreeItem(Action.A_LEFTCLICK, localAddressBook);
          FormContactNew formContactNew = (FormContactNew)app.zPageAddressbook.zToolbarPressButton(Button.B_NEW);
 
@@ -409,7 +409,7 @@ public class CreateContact extends AjaxCommonTest  {
                app.zGetActiveAccount(),
                contactItem.fileAs,
                SOAP_DESTINATION_HOST_TYPE.CLIENT,
-               ZimbraAccount.clientAccountName);
+               ZmailAccount.clientAccountName);
 
 //         ZAssert.assertEquals(contactItem.firstName, contact.firstName,
 //               "Verifying first name");

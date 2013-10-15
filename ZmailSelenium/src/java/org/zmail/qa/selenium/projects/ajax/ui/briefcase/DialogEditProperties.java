@@ -17,14 +17,14 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.ajax.ui.briefcase;
+package org.zmail.qa.selenium.projects.ajax.ui.briefcase;
 
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.ajax.ui.AppAjaxClient;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogShare;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogShareRevoke;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.ajax.ui.AppAjaxClient;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogShare;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogShareRevoke;
 
 
 public class DialogEditProperties extends AbsDialog {
@@ -182,7 +182,7 @@ public class DialogEditProperties extends AbsDialog {
 		this.sFocus(locator);
 		this.zClick(locator);
 		
-		if (ZimbraSeleniumProperties.isWebDriver()) {
+		if (ZmailSeleniumProperties.isWebDriver()) {
 			this.clearField(locator);
 		}
 		

@@ -17,31 +17,31 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.ajax.ui.calendar;
+package org.zmail.qa.selenium.projects.ajax.ui.calendar;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.IItem;
-import com.zimbra.qa.selenium.framework.items.SavedSearchFolderItem;
-import com.zimbra.qa.selenium.framework.items.TagItem;
-import com.zimbra.qa.selenium.framework.items.ZimletItem;
-import com.zimbra.qa.selenium.framework.ui.AbsApplication;
-import com.zimbra.qa.selenium.framework.ui.AbsPage;
-import com.zimbra.qa.selenium.framework.ui.AbsTree;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.GeneralUtility;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.projects.ajax.ui.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.DialogCreateFolder;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.DialogEditFolder;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.IItem;
+import org.zmail.qa.selenium.framework.items.SavedSearchFolderItem;
+import org.zmail.qa.selenium.framework.items.TagItem;
+import org.zmail.qa.selenium.framework.items.ZimletItem;
+import org.zmail.qa.selenium.framework.ui.AbsApplication;
+import org.zmail.qa.selenium.framework.ui.AbsPage;
+import org.zmail.qa.selenium.framework.ui.AbsTree;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.GeneralUtility;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.projects.ajax.ui.*;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.DialogCreateFolder;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.DialogEditFolder;
 
 
 
 /**
- * @author zimbra
+ * @author zmail
  *
  */
 public class TreeCalendar extends AbsTree {
@@ -103,7 +103,7 @@ public class TreeCalendar extends AbsTree {
 		if ( (action == Action.A_RIGHTCLICK) && (option == Button.B_DELETE) ) {
 
 			// Use default actionLocator
-			// See http://bugzilla.zimbra.com/show_bug.cgi?id=64023 ... POPUP_ needs to be updated
+			// See http://bugzilla.zmail.com/show_bug.cgi?id=64023 ... POPUP_ needs to be updated
 			optionLocator += " div[id^='DELETE_WITHOUT_SHORTCUT'] td[id$='_title']";
 			page = null;
 
@@ -419,7 +419,7 @@ public class TreeCalendar extends AbsTree {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.zimbra.qa.selenium.framework.ui.AbsTree#zPressButton(com.zimbra.qa.selenium.framework.ui.Button)
+	 * @see org.zmail.qa.selenium.framework.ui.AbsTree#zPressButton(org.zmail.qa.selenium.framework.ui.Button)
 	 */
 	@Override
 	public AbsPage zPressButton(Button button) throws HarnessException {

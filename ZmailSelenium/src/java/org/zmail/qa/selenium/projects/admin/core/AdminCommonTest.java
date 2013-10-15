@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.admin.core;
+package org.zmail.qa.selenium.projects.admin.core;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -26,12 +26,12 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
 import com.thoughtworks.selenium.SeleniumException;
-import com.zimbra.qa.selenium.framework.core.ClientSessionFactory;
-import com.zimbra.qa.selenium.framework.ui.AbsTab;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZimbraAdminAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.admin.ui.AppAdminConsole;
+import org.zmail.qa.selenium.framework.core.ClientSessionFactory;
+import org.zmail.qa.selenium.framework.ui.AbsTab;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZmailAdminAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.admin.ui.AppAdminConsole;
 
 
 /**
@@ -43,9 +43,9 @@ public class AdminCommonTest {
 	protected static Logger logger = LogManager.getLogger(AdminCommonTest.class);
 	
 	/**
-	 * Helper field.  admin = ZimbraAdminAccount.GlobalAdmin()
+	 * Helper field.  admin = ZmailAdminAccount.GlobalAdmin()
 	 */
-	protected final ZimbraAdminAccount gAdmin = ZimbraAdminAccount.AdminConsoleAdmin();
+	protected final ZmailAdminAccount gAdmin = ZmailAdminAccount.AdminConsoleAdmin();
 	
 
 	/**
@@ -59,7 +59,7 @@ public class AdminCommonTest {
 	 * startingAccount = the account to log in as
 	 */
 	protected AbsTab startingPage = null;
-	protected ZimbraAdminAccount startingAccount = null;
+	protected ZmailAdminAccount startingAccount = null;
 	
 	protected AdminCommonTest() {
 		logger.info("New "+ AdminCommonTest.class.getCanonicalName());
@@ -85,17 +85,17 @@ public class AdminCommonTest {
 				
 		try
 		{
-			ZimbraSeleniumProperties.setAppType(ZimbraSeleniumProperties.AppType.ADMIN);
+			ZmailSeleniumProperties.setAppType(ZmailSeleniumProperties.AppType.ADMIN);
 
 			// Use 30 second timeout for opening the browser
-			String timeout = ZimbraSeleniumProperties.getStringProperty("selenium.maxpageload.msec", "30000");
+			String timeout = ZmailSeleniumProperties.getStringProperty("selenium.maxpageload.msec", "30000");
 
 			ClientSessionFactory.session().selenium().start();
 			ClientSessionFactory.session().selenium().windowMaximize();
 			ClientSessionFactory.session().selenium().windowFocus();
 			ClientSessionFactory.session().selenium().allowNativeXpath("true");
 			ClientSessionFactory.session().selenium().setTimeout("30000");
-			ClientSessionFactory.session().selenium().open(ZimbraSeleniumProperties.getBaseURL());
+			ClientSessionFactory.session().selenium().open(ZmailSeleniumProperties.getBaseURL());
 			
 		} catch (SeleniumException e) {
 			logger.error("Unable to open admin app.  Is a valid cert installed?", e);

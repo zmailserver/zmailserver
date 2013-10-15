@@ -47,7 +47,7 @@ function _initGoogle() {
 			return {"url":ctxt.getConfig("googUrl"), "req":reqmsg.join("")}
 		};
 		
-	Com_Zimbra_Xslt.registerService(goog);
+	Com_Zmail_Xslt.registerService(goog);
 };
 
 _initGoogle();

@@ -7,7 +7,7 @@
 <displayName>Greg Solovyev</displayName>
 <RemoteEmailAddress>greg@example.com</RemoteEmailAddress>
 <password>test123</password>
-<zimbraPasswordMustChange>TRUE</zimbraPasswordMustChange>
+<zmailPasswordMustChange>TRUE</zmailPasswordMustChange>
 </User>
 <User>
 <sn>Peterson</sn>
@@ -15,7 +15,7 @@
 <displayName>Brian Peterson</displayName>
 <RemoteEmailAddress>brian@example.com</RemoteEmailAddress>
 <password>test123</password>
-<zimbraPasswordMustChange>TRUE</zimbraPasswordMustChange>
+<zmailPasswordMustChange>TRUE</zmailPasswordMustChange>
 </User>
 </ImportUsers>
 </ZCSImport>

@@ -14,7 +14,7 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimletConfig name="com_zimbra_phonelookup" version="0.1">
+<zimletConfig name="org_zmail_phonelookup" version="0.1">
     <global>
         <property name="allowedDomains">*.whitepages.com</property>
     </global>

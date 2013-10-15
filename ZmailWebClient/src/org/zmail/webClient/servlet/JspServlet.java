@@ -12,11 +12,11 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.webClient.servlet;
+package org.zmail.webClient.servlet;
 
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.taglib.ZJspSession;
-import com.zimbra.client.ZMailbox;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.taglib.ZJspSession;
+import org.zmail.client.ZMailbox;
 
 import java.io.*;
 import java.util.*;

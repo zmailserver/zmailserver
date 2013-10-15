@@ -12,9 +12,9 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.ab.yc;
+package org.zmail.cs.offline.ab.yc;
 
-import static com.zimbra.common.mailbox.ContactConstants.*;
+import static org.zmail.common.mailbox.ContactConstants.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,31 +26,31 @@ import java.util.Map;
 import java.util.Set;
 
 import com.google.common.base.Strings;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.mime.ParsedContact;
-import com.zimbra.cs.offline.OfflineLog;
-import com.zimbra.cs.offline.ab.Ab;
-import com.zimbra.cs.offline.util.yc.Action;
-import com.zimbra.cs.offline.util.yc.AddressField;
-import com.zimbra.cs.offline.util.yc.Contact;
-import com.zimbra.cs.offline.util.yc.DateField.AnniversaryField;
-import com.zimbra.cs.offline.util.yc.DateField.BirthdayField;
-import com.zimbra.cs.offline.util.yc.Fields;
-import com.zimbra.cs.offline.util.yc.Fields.Flag;
-import com.zimbra.cs.offline.util.yc.Fields.Type;
-import com.zimbra.cs.offline.util.yc.NameField;
-import com.zimbra.cs.offline.util.yc.SimpleField;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.mime.ParsedContact;
+import org.zmail.cs.offline.OfflineLog;
+import org.zmail.cs.offline.ab.Ab;
+import org.zmail.cs.offline.util.yc.Action;
+import org.zmail.cs.offline.util.yc.AddressField;
+import org.zmail.cs.offline.util.yc.Contact;
+import org.zmail.cs.offline.util.yc.DateField.AnniversaryField;
+import org.zmail.cs.offline.util.yc.DateField.BirthdayField;
+import org.zmail.cs.offline.util.yc.Fields;
+import org.zmail.cs.offline.util.yc.Fields.Flag;
+import org.zmail.cs.offline.util.yc.Fields.Type;
+import org.zmail.cs.offline.util.yc.NameField;
+import org.zmail.cs.offline.util.yc.SimpleField;
 
 /**
  * 
- * class that translate fields from yahoo into zimbra contact fields and vice
+ * class that translate fields from yahoo into zmail contact fields and vice
  * versa
  * 
  */
 public class ContactData {
 
-    // All Zimbra fields that are synchronized with Yahoo address book
+    // All Zmail fields that are synchronized with Yahoo address book
     private static final List<String> ALL_FIELDS = new ArrayList<String>();
 
     private static final String PREFIX_PHONE = "phone";
@@ -90,7 +90,7 @@ public class ContactData {
     private ContactData() {
     }
 
-    public static Contact getYContactFromZcsContact(com.zimbra.cs.mailbox.Contact mboxContact, Action op) {
+    public static Contact getYContactFromZcsContact(org.zmail.cs.mailbox.Contact mboxContact, Action op) {
         ContactData cd = new ContactData();
         cd.fields.putAll(mboxContact.getFields());
 
@@ -125,7 +125,7 @@ public class ContactData {
      *            old value
      * @return
      */
-    public static List<Fields> delta(com.zimbra.cs.mailbox.Contact mboxContact, Contact oldContact) {
+    public static List<Fields> delta(org.zmail.cs.mailbox.Contact mboxContact, Contact oldContact) {
         List<Fields> fieldsChangeList = new ArrayList<Fields>();
         ContactData newContactData = new ContactData();
         newContactData.fields.putAll(mboxContact.getFields());

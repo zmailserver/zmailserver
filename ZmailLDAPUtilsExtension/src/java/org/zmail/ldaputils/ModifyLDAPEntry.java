@@ -12,18 +12,18 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.ldaputils;
+package org.zmail.ldaputils;
 
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.service.admin.AdminDocumentHandler;
-import com.zimbra.cs.service.admin.AdminService;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.LDAPUtilsConstants;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.service.admin.AdminDocumentHandler;
+import org.zmail.cs.service.admin.AdminService;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.LDAPUtilsConstants;
+import org.zmail.soap.ZmailSoapContext;
 /**
  * @author Greg Solovyev
  */
@@ -32,7 +32,7 @@ public class ModifyLDAPEntry extends AdminDocumentHandler {
     public Element handle(Element request, Map<String, Object> context)
             throws ServiceException {
 
-        ZimbraSoapContext lc = getZimbraSoapContext(context);
+        ZmailSoapContext lc = getZmailSoapContext(context);
         String dn = request.getAttribute(LDAPUtilsConstants.E_DN);
         if(dn==null)
             throw ServiceException.INVALID_REQUEST("Missing request parameter: "+LDAPUtilsConstants.E_DN, null);
@@ -41,11 +41,11 @@ public class ModifyLDAPEntry extends AdminDocumentHandler {
 
         NamedEntry newNe = LDAPUtilsHelper.getInstance().modifyLDAPEntry(dn,  attrs);
 
-        ZimbraLog.security.info(ZimbraLog.encodeAttrs(new String[] { "cmd",
+        ZmailLog.security.info(ZmailLog.encodeAttrs(new String[] { "cmd",
                     "SaveLDAPEntry", "dn", dn }, attrs));
 
         Element response = lc.createElement(LDAPUtilsConstants.MODIFY_LDAP_ENTRY_RESPONSE);
-        ZimbraLDAPUtilsService.encodeLDAPEntry(response, newNe);
+        ZmailLDAPUtilsService.encodeLDAPEntry(response, newNe);
 
         return response;
 

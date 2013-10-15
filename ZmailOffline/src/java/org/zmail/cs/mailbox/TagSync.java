@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,19 +24,19 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import com.google.common.annotations.VisibleForTesting;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.LruMap;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.offline.OfflineAccount;
-import com.zimbra.cs.account.offline.OfflineProvisioning;
-import com.zimbra.cs.datasource.DataSourceDbMapping;
-import com.zimbra.cs.datasource.DataSourceMapping;
-import com.zimbra.cs.db.DbDataSource.DataSourceItem;
-import com.zimbra.cs.mailbox.MailServiceException.NoSuchItemException;
-import com.zimbra.cs.offline.OfflineLog;
-import com.zimbra.soap.admin.type.DataSourceType;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.LruMap;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.offline.OfflineAccount;
+import org.zmail.cs.account.offline.OfflineProvisioning;
+import org.zmail.cs.datasource.DataSourceDbMapping;
+import org.zmail.cs.datasource.DataSourceMapping;
+import org.zmail.cs.db.DbDataSource.DataSourceItem;
+import org.zmail.cs.mailbox.MailServiceException.NoSuchItemException;
+import org.zmail.cs.offline.OfflineLog;
+import org.zmail.soap.admin.type.DataSourceType;
 
 public class TagSync {
 
@@ -135,10 +135,10 @@ public class TagSync {
      */
     public String localTagsFromHeader(Map<String, String> headers) throws ServiceException {
         if (mappingRequired) {
-            String names = headers.get("X-Zimbra-TagNames");
+            String names = headers.get("X-Zmail-TagNames");
             return localTagsFromNames(names, ",", ",");
         } else {
-            return headers.get("X-Zimbra-Tags");
+            return headers.get("X-Zmail-Tags");
         }
     }
 

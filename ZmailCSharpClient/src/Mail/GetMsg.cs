@@ -14,7 +14,7 @@
  */
 using System;
 using System.Xml;
-namespace Zimbra.Client.Mail
+namespace Zmail.Client.Mail
 {
 
 	public class GetMsgRequest : MailServiceRequest

@@ -14,9 +14,9 @@
  */
 using System;
 
-namespace Zimbra.Client
+namespace Zmail.Client
 {
-	public interface IZimbraService
+	public interface IZmailService
 	{
 		String NamespacePrefix{ get; }
 		String NamepsaceUri{ get; }
@@ -24,11 +24,11 @@ namespace Zimbra.Client
 	}
 
 
-	public class ZimbraService : IZimbraService
+	public class ZmailService : IZmailService
 	{
 		//this services namespace uri
-		public static String NS_PREFIX				= "zimbra";
-		public static String NAMESPACE_URI			= "urn:zimbra";
+		public static String NS_PREFIX				= "zmail";
+		public static String NAMESPACE_URI			= "urn:zmail";
 
 //		public static String E_SESSIONID			= "sessionId";
 		public static String E_CONTEXT				= "context";

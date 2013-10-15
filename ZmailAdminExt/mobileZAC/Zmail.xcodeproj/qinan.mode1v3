@@ -318,7 +318,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>ZimbraAppDelegate.m</string>
+								<string>ZmailAppDelegate.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -326,7 +326,7 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>ZimbraAppDelegate.m</string>
+										<string>ZmailAppDelegate.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
@@ -616,7 +616,7 @@
 		<string>1C78EAAD065D492600B07095</string>
 		<string>F5CD8E3F12AFE95D00163F38</string>
 		<string>1CD10A99069EF8BA00B06720</string>
-		<string>/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/Zimbra.xcodeproj</string>
+		<string>/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/Zmail.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
 	<string>5 55 1437 823 0 0 1440 878 </string>

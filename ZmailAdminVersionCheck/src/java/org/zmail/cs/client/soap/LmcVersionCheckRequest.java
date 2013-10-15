@@ -14,16 +14,16 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.client.soap;
+package org.zmail.cs.client.soap;
 
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import java.util.Iterator;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.DomUtil;
-import com.zimbra.cs.versioncheck.VersionUpdate;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.DomUtil;
+import org.zmail.cs.versioncheck.VersionUpdate;
 public class LmcVersionCheckRequest extends LmcSoapRequest {
 	private String mAction;
     protected Element getRequestXML() {

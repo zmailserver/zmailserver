@@ -14,18 +14,18 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.bugs;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.bugs;
 
 import java.io.File;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.DisplayMail;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.DisplayMail.Field;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.DisplayMail;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.DisplayMail.Field;
 
 
 public class Bug39246 extends PrefGroupMailByMessageTest {
@@ -45,7 +45,7 @@ public class Bug39246 extends PrefGroupMailByMessageTest {
 					
 			
 		final String subject = "Bug39246";
-		final String mime = ZimbraSeleniumProperties.getBaseDirectory() + "/data/private/mime/viewEntireMessage_Bug39246.txt";
+		final String mime = ZmailSeleniumProperties.getBaseDirectory() + "/data/private/mime/viewEntireMessage_Bug39246.txt";
 		
 		
 		// Inject the example message
@@ -63,7 +63,7 @@ public class Bug39246 extends PrefGroupMailByMessageTest {
 		// 7.X behavior opened a new window
 		// 8.X behavior seems to open the entire message in the preview pane
 		
-//		String windowTitle = "Zimbra: "+ subject;
+//		String windowTitle = "Zmail: "+ subject;
 //
 //		try {
 //			

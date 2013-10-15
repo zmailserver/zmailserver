@@ -14,7 +14,7 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_gmaps"
+<zimlet name="org_zmail_gmaps"
         version="0.2"
         label="${msg.label}"
         description="${msg.description}">

@@ -17,7 +17,7 @@ ZaLoginDialog = function(parent, zIndex, className, appCtxt) {
     className = className || "LoginScreen";
     DwtComposite.call(this, {parent:parent, className:className, posStyle:DwtControl.ABSOLUTE_STYLE});
 
-    this._zimbraAdminLoginURL = ZaZimbraAdmin.zimbraAdminLoginURL;
+    this._zmailAdminLoginURL = ZaZmailAdmin.zmailAdminLoginURL;
 
     this._origClassName = className;
     this._xparentClassName = className + "-Transparent";
@@ -28,7 +28,7 @@ ZaLoginDialog = function(parent, zIndex, className, appCtxt) {
     this.setVisible(false);
     
     //license expiration warning won't show before login.
-	//var licenseStatus = ZaZimbraAdmin.getLicenseStatus();
+	//var licenseStatus = ZaZmailAdmin.getLicenseStatus();
 	var params = ZLoginFactory.copyDefaultParams(ZaMsg);
 	params.showPanelBorder = true;
 	params.showForm = true;
@@ -56,7 +56,7 @@ function() {
 }
 
 ZaLoginDialog.prototype.getLoginURL = function () {
-    var soapDoc = AjxSoapDoc.create("GetDomainInfoRequest", ZaZimbraAdmin.URN, null);
+    var soapDoc = AjxSoapDoc.create("GetDomainInfoRequest", ZaZmailAdmin.URN, null);
 	var elBy = soapDoc.set("domain", location.hostname);
 	elBy.setAttribute("by", "virtualHostname");
 
@@ -69,7 +69,7 @@ ZaLoginDialog.prototype.getLoginURL = function () {
 	var resp = ZaRequestMgr.invoke(params, reqMgrParams).Body.GetDomainInfoResponse;
     var obj = {};
     ZaItem.prototype.initFromJS.call(obj, resp.domain[0]);
-    return obj.attrs["zimbraAdminConsoleLoginURL"] ;
+    return obj.attrs["zmailAdminConsoleLoginURL"] ;
 }
 
 ZaLoginDialog.prototype.registerCallback =
@@ -125,13 +125,13 @@ function(username) {
 ZaLoginDialog.prototype.setVisible = 
 function(visible, transparentBg) {
 	DwtComposite.prototype.setVisible.call(this, visible);
-    //redirect to zimbraAdminConsoleLoginURL
-    if (visible && this._zimbraAdminLoginURL != null && this._zimbraAdminLoginURL.length > 0) {
+    //redirect to zmailAdminConsoleLoginURL
+    if (visible && this._zmailAdminLoginURL != null && this._zmailAdminLoginURL.length > 0) {
         if (window.onbeforeunload != null) {
-            ZaZimbraAdmin.setOnbeforeunload(ZaZimbraAdmin._confirmAuthInvalidExitMethod);
+            ZaZmailAdmin.setOnbeforeunload(ZaZmailAdmin._confirmAuthInvalidExitMethod);
         }
         
-        location.replace(this._zimbraAdminLoginURL);
+        location.replace(this._zmailAdminLoginURL);
         return ;
     }
 
@@ -209,6 +209,6 @@ function(target) {
 
 ZaLoginDialog._loginDiffListener =
 function(ev) {
-	ZmZimbraMail.logOff();
+	ZmZmailMail.logOff();
 };
 

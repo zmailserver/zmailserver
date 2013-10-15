@@ -14,18 +14,18 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.preferences.sharing;
+package org.zmail.qa.selenium.projects.ajax.tests.preferences.sharing;
 
 import java.util.List;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.preferences.PagePreferences.ShareItem;
-import com.zimbra.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.preferences.PagePreferences.ShareItem;
+import org.zmail.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
 
 
 public class FindSharesUnaccepted extends AjaxCommonTest {
@@ -46,16 +46,16 @@ public class FindSharesUnaccepted extends AjaxCommonTest {
 			)
 	public void FindSharesUnaccepted_01() throws HarnessException {
 
-		ZimbraAccount Owner = (new ZimbraAccount()).provision().authenticate();
+		ZmailAccount Owner = (new ZmailAccount()).provision().authenticate();
 
 		//*** Test Data
-		String ownerFoldername = "ownerfolder"+ ZimbraSeleniumProperties.getUniqueString();
+		String ownerFoldername = "ownerfolder"+ ZmailSeleniumProperties.getUniqueString();
 		
 		FolderItem ownerInbox = FolderItem.importFromSOAP(Owner, FolderItem.SystemFolder.Inbox);
 		ZAssert.assertNotNull(ownerInbox, "Verify the new owner folder exists");
 
 		Owner.soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>"
+					"<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+		"<folder name='" + ownerFoldername +"' l='" + ownerInbox.getId() +"'/>"
 				+	"</CreateFolderRequest>");
 		
@@ -63,7 +63,7 @@ public class FindSharesUnaccepted extends AjaxCommonTest {
 		ZAssert.assertNotNull(ownerFolder, "Verify the new owner folder exists");
 		
 		Owner.soapSend(
-					"<FolderActionRequest xmlns='urn:zimbraMail'>"
+					"<FolderActionRequest xmlns='urn:zmailMail'>"
 				+		"<action id='"+ ownerFolder.getId() +"' op='grant'>"
 				+			"<grant d='" + app.zGetActiveAccount().EmailAddress + "' gt='usr' perm='r'/>"
 				+		"</action>"

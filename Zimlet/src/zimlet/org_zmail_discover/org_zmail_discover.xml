@@ -14,13 +14,13 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_discover"
+<zimlet name="org_zmail_discover"
         version="0.6"
         label="${msg.label}"
         description="${msg.description}">
     <include>discover.js</include>
     <includeCSS>discover.css</includeCSS>
-    <handlerObject>com_zimbra_discover_HandlerObject</handlerObject>
+    <handlerObject>org_zmail_discover_HandlerObject</handlerObject>
     <zimletPanelItem label="${msg.DiscoverZimlet_panel_label}" icon="dy-panelIcon">
         <toolTipText>${msg.DiscoverZimlet_panel_tooltip}</toolTipText>
     </zimletPanelItem>

@@ -12,18 +12,18 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.tag.task;
+package org.zmail.cs.taglib.tag.task;
 
-import com.zimbra.cs.taglib.tag.ZimbraSimpleTag;
-import com.zimbra.cs.taglib.bean.ZMessageComposeBean;
-import com.zimbra.cs.taglib.bean.ZMessageBean;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZInvite;
-import com.zimbra.client.ZDateTime;
-import com.zimbra.client.ZMailbox.ZOutgoingMessage;
-import com.zimbra.client.ZMailbox.ZOutgoingMessage.MessagePart;
-import com.zimbra.client.ZInvite.ZComponent;
-import com.zimbra.common.service.ServiceException;
+import org.zmail.cs.taglib.tag.ZmailSimpleTag;
+import org.zmail.cs.taglib.bean.ZMessageComposeBean;
+import org.zmail.cs.taglib.bean.ZMessageBean;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZInvite;
+import org.zmail.client.ZDateTime;
+import org.zmail.client.ZMailbox.ZOutgoingMessage;
+import org.zmail.client.ZMailbox.ZOutgoingMessage.MessagePart;
+import org.zmail.client.ZInvite.ZComponent;
+import org.zmail.common.service.ServiceException;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspContext;
@@ -31,7 +31,7 @@ import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.JspTagException;
 import java.io.IOException;
 
-public class CancelTaskTag extends ZimbraSimpleTag {
+public class CancelTaskTag extends ZmailSimpleTag {
 
     private ZMessageComposeBean mCompose;
     private ZMessageBean mMessage;

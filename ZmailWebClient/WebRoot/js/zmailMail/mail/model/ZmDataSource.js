@@ -153,7 +153,7 @@ function() {
 
 ZmDataSource.prototype.create =
 function(callback, errorCallback, batchCommand) {
-	var soapDoc = AjxSoapDoc.create("CreateDataSourceRequest", "urn:zimbraMail");
+	var soapDoc = AjxSoapDoc.create("CreateDataSourceRequest", "urn:zmailMail");
 	var dsrc = soapDoc.set(this.ELEMENT_NAME);
 	for (var aname in ZmDataSource.DATASOURCE_ATTRS) {
 		var pname = ZmDataSource.DATASOURCE_ATTRS[aname];
@@ -194,7 +194,7 @@ function(callback, errorCallback, batchCommand) {
 
 ZmDataSource.prototype.save =
 function(callback, errorCallback, batchCommand) {
-	var soapDoc = AjxSoapDoc.create("ModifyDataSourceRequest", "urn:zimbraMail");
+	var soapDoc = AjxSoapDoc.create("ModifyDataSourceRequest", "urn:zmailMail");
 	var dsrc = soapDoc.set(this.ELEMENT_NAME);
 	// NOTE: If this object is a proxy, we guarantee that the
 	//       the id attribute is *always* set.
@@ -238,7 +238,7 @@ function(callback, errorCallback, batchCommand) {
 
 ZmDataSource.prototype.doDelete =
 function(callback, errorCallback, batchCommand) {
-	var soapDoc = AjxSoapDoc.create("DeleteDataSourceRequest", "urn:zimbraMail");
+	var soapDoc = AjxSoapDoc.create("DeleteDataSourceRequest", "urn:zmailMail");
 	var dsrc = soapDoc.set(this.ELEMENT_NAME);
 	dsrc.setAttribute("id", this.id);
 
@@ -268,7 +268,7 @@ function(callback, errorCallback, batchCommand) {
  */
 ZmDataSource.prototype.testConnection =
 function(callback, errorCallback, batchCommand, noBusyOverlay) {
-	var soapDoc = AjxSoapDoc.create("TestDataSourceRequest", "urn:zimbraMail");
+	var soapDoc = AjxSoapDoc.create("TestDataSourceRequest", "urn:zmailMail");
 	var dsrc = soapDoc.set(this.ELEMENT_NAME);
 
 	var attrs = ["host", "port", "username", "password", "connectionType", "leaveOnServer"];

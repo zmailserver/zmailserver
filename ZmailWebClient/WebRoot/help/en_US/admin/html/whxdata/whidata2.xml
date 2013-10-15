@@ -86,7 +86,7 @@
   <topic name="Assigning Accounts to Different Servers" url="cos/assigning_accounts_to_different_servers.htm" />
 </key>
 <key name="server, monitoring" >
-  <topic name="Monitoring Zimbra Collaboration Suite" url="managing_servers/monitoring_zimbra_collaboration_suite.htm" />
+  <topic name="Monitoring Zmail Collaboration Suite" url="managing_servers/monitoring_zmail_collaboration_suite.htm" />
 </key>
 <key name="server, search" >
   <topic name="Advanced Search" url="search/advanced_search.htm" />
@@ -143,7 +143,7 @@
   <topic name="Customizing UI Themes" url="cos/customizing_ui_themes.htm" />
 </key>
 <key name="skins, defining for user interface" >
-  <topic name="Defining Theme for the Zimbra Web Client UI" url="ui_themes/defining_theme_for_the_zimbra_web_client_ui.htm" />
+  <topic name="Defining Theme for the Zmail Web Client UI" url="ui_themes/defining_theme_for_the_zmail_web_client_ui.htm" />
 </key>
 <key name="SMTP restrictions" >
   <topic name="MTA SMTP Restrictions" url="managing_global_settings/mta_smtp_restrictions.htm" />
@@ -200,7 +200,7 @@
   <topic name="Customizing UI Themes" url="cos/customizing_ui_themes.htm" />
 </key>
 <key name="themes defining" >
-  <topic name="Defining Theme for the Zimbra Web Client UI" url="ui_themes/defining_theme_for_the_zimbra_web_client_ui.htm" />
+  <topic name="Defining Theme for the Zmail Web Client UI" url="ui_themes/defining_theme_for_the_zmail_web_client_ui.htm" />
 </key>
 <key name="themes, flush cache" >
   <topic name="Flushing the Server Cache" url="managing_servers/flushing_the_server_cache.htm" />
@@ -256,7 +256,7 @@
 <key name="viruse account" >
   <topic name="Viewing System Accounts" url="managing_global_settings/viewing_system_accounts.htm" />
 </key>
-<key name="Zimbra Web Client Versions" >
+<key name="Zmail Web Client Versions" >
   <topic name="Setting the Default ZWC Login Version" url="managing_accounts/setting_the_devault_zwc_login_version.htm" />
 </key>
 <key name="Zimlets, adding to COS" >

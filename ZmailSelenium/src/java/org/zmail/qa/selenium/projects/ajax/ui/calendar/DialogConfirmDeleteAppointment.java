@@ -14,14 +14,14 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.ui.calendar;
+package org.zmail.qa.selenium.projects.ajax.ui.calendar;
 /**
  * 
  */
 
 
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogWarning;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogWarning;
 
 /**
  * Represents a "Delete Appointment" dialog box,

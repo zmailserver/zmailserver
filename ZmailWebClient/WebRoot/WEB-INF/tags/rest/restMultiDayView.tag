@@ -16,19 +16,19 @@
 <%@ attribute name="date" rtexprvalue="true" required="true" type="java.util.Calendar" %>
 <%@ attribute name="numdays" rtexprvalue="true" required="true" %>
 <%@ attribute name="view" rtexprvalue="true" required="true" %>
-<%@ attribute name="mailbox" rtexprvalue="true" required="true" type="com.zimbra.cs.taglib.bean.ZMailboxBean" %>
+<%@ attribute name="mailbox" rtexprvalue="true" required="true" type="org.zmail.cs.taglib.bean.ZMailboxBean" %>
 <%@ attribute name="timezone" rtexprvalue="true" required="true" type="java.util.TimeZone"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
-<%@ taglib prefix="rest" uri="com.zimbra.restclient" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
+<%@ taglib prefix="rest" uri="org.zmail.restclient" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
 <rest:handleError>
 
     <fmt:setTimeZone value="${timezone}"/>
     <c:set var="context" value="${null}"/>
     <fmt:message var="yearTitleFormat" key="CAL_DAY_TITLE_YEAR_FORMAT"/>
-    <c:set var="firstDOW" value="${requestScope.zimbra_target_account_prefCalendarFirstDayOfWeek}"/>
+    <c:set var="firstDOW" value="${requestScope.zmail_target_account_prefCalendarFirstDayOfWeek}"/>
     <c:set var="currentDay" value="${zm:getFirstDayOfMultiDayView(date, firstDOW, view)}"/>
     <c:set var="scheduleView" value="${view eq 'schedule'}"/>
     <c:choose>
@@ -60,7 +60,7 @@
     <c:set var="nextDate" value="${zm:addDay(date,  dayIncr)}"/>
 
     <c:set var="rangeEnd" value="${zm:addDay(currentDay,numdays).timeInMillis}"/>
-    <c:set var="checkedCalendars" value="${requestScope.zimbra_target_item_id}"/>
+    <c:set var="checkedCalendars" value="${requestScope.zmail_target_item_id}"/>
 
     <%-- fetch mini cal appts first, so they are in cache, as well as any data neded by this view --%>
     <c:set var="multiDay">
@@ -69,7 +69,7 @@
 
 </rest:handleError>
 
-<rest:view title="${not empty requestScope.zimbra_target_item_name ? requestScope.zimbra_target_item_name : requestScope.zimbra_target_account_name}: ${pageTitle}" rssfeed="${true}">
+<rest:view title="${not empty requestScope.zmail_target_item_name ? requestScope.zmail_target_item_name : requestScope.zmail_target_account_name}: ${pageTitle}" rssfeed="${true}">
     <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
             <td style='padding:20px'>

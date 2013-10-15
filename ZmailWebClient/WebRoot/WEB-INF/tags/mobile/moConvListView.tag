@@ -13,12 +13,12 @@
  * ***** END LICENSE BLOCK *****
 --%>
 <%@ tag body-content="empty" %>
-<%@ attribute name="context" rtexprvalue="true" required="true" type="com.zimbra.cs.taglib.tag.SearchContext" %>
+<%@ attribute name="context" rtexprvalue="true" required="true" type="org.zmail.cs.taglib.tag.SearchContext" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
-<%@ taglib prefix="mo" uri="com.zimbra.mobileclient" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
+<%@ taglib prefix="mo" uri="org.zmail.mobileclient" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
 <mo:handleError>
     <zm:getMailbox var="mailbox"/>
     <mo:searchTitle var="title" context="${context}"/>
@@ -135,7 +135,7 @@
                     <a id="more-a" accesskey="${requestScope.next_accesskey}" class='zo_button next_button' href="${fn:escapeXml(url)}&show=more">More</a>
                 </div>
                 <br>
-                &copy; Vmware and Zimbra. All rights reserved. 
+                &copy; Vmware and Zmail. All rights reserved. 
                 </span>
                 
                 <input type="hidden" name="ipadcoffset" value="${empty requestScope.lmt ? context.searchResult.nextOffset : requestScope.lmt}"/>

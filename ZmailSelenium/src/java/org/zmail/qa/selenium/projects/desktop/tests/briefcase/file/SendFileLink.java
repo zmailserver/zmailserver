@@ -14,26 +14,26 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.briefcase.file;
+package org.zmail.qa.selenium.projects.desktop.tests.briefcase.file;
 
 import java.util.HashMap;
 
 import org.testng.annotations.Test;
-import com.zimbra.qa.selenium.framework.items.FileItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.GeneralUtility;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.SleepUtil;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.briefcase.DialogConfirm;
-import com.zimbra.qa.selenium.projects.desktop.ui.DialogWarning;
-import com.zimbra.qa.selenium.projects.desktop.ui.mail.FormMailNew;
+import org.zmail.qa.selenium.framework.items.FileItem;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.GeneralUtility;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.SleepUtil;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.briefcase.DialogConfirm;
+import org.zmail.qa.selenium.projects.desktop.ui.DialogWarning;
+import org.zmail.qa.selenium.projects.desktop.ui.mail.FormMailNew;
 
 public class SendFileLink extends AjaxCommonTest {
 
@@ -44,19 +44,19 @@ public class SendFileLink extends AjaxCommonTest {
 		super.startingPage = app.zPageBriefcase;
 
 		super.startingAccountPreferences = new HashMap<String , String>() {{
-         put("zimbraPrefComposeFormat", "html");
+         put("zmailPrefComposeFormat", "html");
      }};
 	}
 
 	@Test(description = "Upload file through RestUtil - click Send Link, Cancel & verify through GUI", groups = { "functional" })
 	public void SendFileLink_01() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
 
 		// Create file item
-		String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+		String filePath = ZmailSeleniumProperties.getBaseDirectory()
 		+ "/data/public/other/testexcelfile.xls";
 		
 		FileItem fileItem = new FileItem(filePath);
@@ -67,7 +67,7 @@ public class SendFileLink extends AjaxCommonTest {
 		String attachmentId = account.uploadFile(filePath);
 
 		// Save uploaded file to briefcase through SOAP
-		account.soapSend("<SaveDocumentRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<SaveDocumentRequest xmlns='urn:zmailMail'>"
 				+ "<doc l='" + briefcaseFolder.getId() + "'><upload id='"
 				+ attachmentId + "'/></doc></SaveDocumentRequest>");
 
@@ -118,13 +118,13 @@ public class SendFileLink extends AjaxCommonTest {
 
 	@Test(description = "Send File link using Right Click Context Menu & verify through GUI", groups = { "functional" })
 	public void SendFileLink_02() throws HarnessException {
-	   ZimbraAccount account = app.zGetActiveAccount();
+	   ZmailAccount account = app.zGetActiveAccount();
 
 	   FolderItem briefcaseFolder = FolderItem.importFromSOAP(account,
 	         SystemFolder.Briefcase);
 
 	   // Create file item
-	   String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+	   String filePath = ZmailSeleniumProperties.getBaseDirectory()
 	         + "/data/public/other/testexcelfile.xls";
 
 	   FileItem fileItem = new FileItem(filePath);
@@ -135,7 +135,7 @@ public class SendFileLink extends AjaxCommonTest {
 	   String attachmentId = account.uploadFile(filePath);
 
 	   // Save uploaded file to briefcase through SOAP
-	   account.soapSend("<SaveDocumentRequest xmlns='urn:zimbraMail'>"
+	   account.soapSend("<SaveDocumentRequest xmlns='urn:zmailMail'>"
 	         + "<doc l='" + briefcaseFolder.getId() + "'><upload id='"
 	         + attachmentId + "'/></doc></SaveDocumentRequest>");
 

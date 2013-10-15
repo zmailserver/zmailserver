@@ -14,12 +14,12 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.ui;
+package org.zmail.qa.selenium.projects.ajax.ui;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import com.zimbra.qa.selenium.framework.ui.AbsTab;
+import org.zmail.qa.selenium.framework.ui.AbsTab;
 
 public class TooltipContact extends Tooltip {
 	protected static Logger logger = LogManager.getLogger(TooltipContact.class);

@@ -14,37 +14,37 @@
 # ***** END LICENSE BLOCK *****
 # 
 
-mkdir -p /opt/zimbra/log
-chown zimbra:zimbra /opt/zimbra/log
+mkdir -p /opt/zmail/log
+chown zmail:zmail /opt/zmail/log
 
-mkdir -p /opt/zimbra/ssl
-chown zimbra:zimbra /opt/zimbra/ssl
-mkdir -p /opt/zimbra/.ssh
-chown zimbra:zimbra /opt/zimbra/.ssh
+mkdir -p /opt/zmail/ssl
+chown zmail:zmail /opt/zmail/ssl
+mkdir -p /opt/zmail/.ssh
+chown zmail:zmail /opt/zmail/.ssh
 
-rm -f /opt/zimbra/java
-ln -s /Library/Java/Home /opt/zimbra/java
+rm -f /opt/zmail/java
+ln -s /Library/Java/Home /opt/zmail/java
 
-mkdir -p /opt/zimbra/zmstat/pid
-chown zimbra:zimbra /opt/zimbra/zmstat
-chown zimbra:zimbra /opt/zimbra/zmstat/pid
+mkdir -p /opt/zmail/zmstat/pid
+chown zmail:zmail /opt/zmail/zmstat
+chown zmail:zmail /opt/zmail/zmstat/pid
 
 # Bug 6645
-PLAT=`/opt/zimbra/libexec/get_plat_tag.sh`
+PLAT=`/opt/zmail/libexec/get_plat_tag.sh`
 
-if [ -x "/opt/zimbra/libexec/zmfixperms" ]; then
-  /opt/zimbra/libexec/zmfixperms
+if [ -x "/opt/zmail/libexec/zmfixperms" ]; then
+  /opt/zmail/libexec/zmfixperms
 fi
 
 
-if [ -d /Users/zimbra ]; then
-  rm -rf /Users/zimbra
-  ln -s /opt/zimbra /Users/zimbra
+if [ -d /Users/zmail ]; then
+  rm -rf /Users/zmail
+  ln -s /opt/zmail /Users/zmail
 fi
 
 D=$(date +%s)
-echo "${D}: INSTALL SESSION COMPLETE" >> /opt/zimbra/.install_history
+echo "${D}: INSTALL SESSION COMPLETE" >> /opt/zmail/.install_history
 
 # Fix dspam.conf dylib/so for mac
-sed -i .bak -e 's/\.so$/.dylib/' /opt/zimbra/conf/dspam.conf.in
+sed -i .bak -e 's/\.so$/.dylib/' /opt/zmail/conf/dspam.conf.in
 

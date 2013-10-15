@@ -13,23 +13,23 @@
  * ***** END LICENSE BLOCK *****
  */
 
-function Com_Zimbra_Xslt() {
+function Com_Zmail_Xslt() {
 }
 
-Com_Zimbra_Xslt.prototype = new ZmZimletBase;
-Com_Zimbra_Xslt.prototype.constructor = Com_Zimbra_Xslt;
+Com_Zmail_Xslt.prototype = new ZmZimletBase;
+Com_Zmail_Xslt.prototype.constructor = Com_Zmail_Xslt;
 
-Com_Zimbra_Xslt.registerService =
+Com_Zmail_Xslt.registerService =
 function(service) {
 	if (service && service.xsl && service.getRequest && service.id) {
-		if (!Com_Zimbra_Xslt.prototype.services) {
-			Com_Zimbra_Xslt.prototype.services = new Object();
+		if (!Com_Zmail_Xslt.prototype.services) {
+			Com_Zmail_Xslt.prototype.services = new Object();
 		}
-		Com_Zimbra_Xslt.prototype.services[service.id] = service;
+		Com_Zmail_Xslt.prototype.services[service.id] = service;
 	}
 };
 
-Com_Zimbra_Xslt.prototype.init =
+Com_Zmail_Xslt.prototype.init =
 function() {
 	var ctxt = this.xmlObj();
 	if (!ctxt._panelActionMenu) {
@@ -37,7 +37,7 @@ function() {
 	}
 };
 
-Com_Zimbra_Xslt.prototype._createMenu =
+Com_Zmail_Xslt.prototype._createMenu =
 function(ev) {
 	var menu = new ZmPopupMenu(DwtShell.getShell(window));
 	var ctxt = this.xmlObj();
@@ -57,7 +57,7 @@ function(ev) {
 	return menu;
 };
 
-Com_Zimbra_Xslt.prototype.buttonListener =
+Com_Zmail_Xslt.prototype.buttonListener =
 function(ev) {
 	var el = document.getElementById(this._subjectId);
 	var q = el.value;
@@ -76,7 +76,7 @@ function(ev) {
 	}
 };
 
-Com_Zimbra_Xslt.prototype.menuItemSelected =
+Com_Zmail_Xslt.prototype.menuItemSelected =
 function(contextMenu, menuItemId, spanElement, contentObjText, canvas) {
 	this._query = menuItemId.id;
 	var view = new DwtComposite(this.getShell());
@@ -124,14 +124,14 @@ function(contextMenu, menuItemId, spanElement, contentObjText, canvas) {
 		      }));
 };
 
-Com_Zimbra_Xslt.prototype.getSanitizedDocFromHtml =
+Com_Zmail_Xslt.prototype.getSanitizedDocFromHtml =
 function(text) {
 	text = text ? text.replace(/&nbsp;/g," ").replace(/&reg;/g,"(R)") : "";
 	var doc = AjxXmlDoc.createFromXml(text);
 	return doc.getDoc();
 };
 
-Com_Zimbra_Xslt.prototype.callback =
+Com_Zmail_Xslt.prototype.callback =
 function(canvas, service, result) {
 	var html, resp;
 	var processor = service.processor;

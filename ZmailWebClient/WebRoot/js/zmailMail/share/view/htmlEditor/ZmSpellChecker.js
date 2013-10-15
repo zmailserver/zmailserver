@@ -48,7 +48,7 @@ function() {
 ZmSpellChecker.prototype.check =
 function(textOrParams, callback, errCallback) {
 	var params = typeof textOrParams == "string" ? { text: textOrParams } : textOrParams;
-	var soapDoc = AjxSoapDoc.create("CheckSpellingRequest", "urn:zimbraMail");
+	var soapDoc = AjxSoapDoc.create("CheckSpellingRequest", "urn:zmailMail");
 	soapDoc.getMethod().appendChild(soapDoc.getDoc().createTextNode(params.text));
 	if (params.ignore) {
 		soapDoc.getMethod().setAttribute("ignore", params.ignore);

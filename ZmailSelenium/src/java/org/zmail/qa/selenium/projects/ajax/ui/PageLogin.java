@@ -14,13 +14,13 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.ui;
+package org.zmail.qa.selenium.projects.ajax.ui;
 
 import java.util.Date;
 
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties.*;
 
 
 public class PageLogin extends AbsTab {
@@ -62,7 +62,7 @@ public class PageLogin extends AbsTab {
 
 	@Override
 	public boolean zIsActive() throws HarnessException {
-		AppType appType = ZimbraSeleniumProperties.getAppType();
+		AppType appType = ZmailSeleniumProperties.getAppType();
 		String locator = null;
 
 		switch (appType) {
@@ -123,8 +123,8 @@ public class PageLogin extends AbsTab {
 	 * @param account
 	 * @throws HarnessException
 	 */
-	public void zLogin(ZimbraAccount account) throws HarnessException {
-		logger.debug("login(ZimbraAccount account)" + account.EmailAddress);
+	public void zLogin(ZmailAccount account) throws HarnessException {
+		logger.debug("login(ZmailAccount account)" + account.EmailAddress);
 
 		tracer.trace("Login to the "+ MyApplication.myApplicationName() +" using user/password "+ account.EmailAddress +"/"+ account.Password);
 
@@ -170,7 +170,7 @@ public class PageLogin extends AbsTab {
 		if ( !this.sIsElementPresent(locator) ) {
 			throw new HarnessException("Login field does not exist "+ locator);
 		}
-		if (ZimbraSeleniumProperties.isWebDriver()){
+		if (ZmailSeleniumProperties.isWebDriver()){
 		    clearField(locator);
 		}
 		sType(locator, name);
@@ -189,7 +189,7 @@ public class PageLogin extends AbsTab {
 		if ( !this.sIsElementPresent(locator) ) {
 			throw new HarnessException("Password field does not exist "+ locator);
 		}
-		if (ZimbraSeleniumProperties.isWebDriver()){
+		if (ZmailSeleniumProperties.isWebDriver()){
 		    clearField(locator);
 		}
 		sType(locator, password);

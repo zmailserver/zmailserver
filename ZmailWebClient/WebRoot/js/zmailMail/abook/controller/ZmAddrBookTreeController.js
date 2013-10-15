@@ -134,7 +134,7 @@ function(parent, type, id) {
 			}
 			if (appCtxt.isOffline) {
 				var acct = addrBook.getAccount();
-				parent.enable([ZmOperation.SHARE_ADDRBOOK], !acct.isMain && acct.isZimbraAccount);
+				parent.enable([ZmOperation.SHARE_ADDRBOOK], !acct.isMain && acct.isZmailAccount);
 			}
 		}
 	}
@@ -243,9 +243,9 @@ function(ev) {
 ZmAddrBookTreeController.dlFolderClicked =
 function() {
 	var request = {
-		_jsns: "urn:zimbraAccount",
+		_jsns: "urn:zmailAccount",
 		"ownerOf": 1,
-		attrs: "zimbraDistributionListUnsubscriptionPolicy,zimbraDistributionListSubscriptionPolicy,zimbraHideInGal"
+		attrs: "zmailDistributionListUnsubscriptionPolicy,zmailDistributionListSubscriptionPolicy,zmailHideInGal"
 	};
 
 	var jsonObj = {GetAccountDistributionListsRequest: request};

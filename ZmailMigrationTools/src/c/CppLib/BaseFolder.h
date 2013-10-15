@@ -25,7 +25,7 @@ protected:
     LONG LngID;
     BSTR folderPath;
     BSTR containerClass;
-    SHORT ZimbraID;
+    SHORT ZmailID;
 
 public:
     BaseFolder(void) {}

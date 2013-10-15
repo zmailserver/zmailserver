@@ -85,7 +85,7 @@ function() {
 
 ZmMobileDevicesController.prototype.loadDeviceInfo =
 function() {
-	var soapDoc = AjxSoapDoc.create("GetDeviceStatusRequest", "urn:zimbraSync");
+	var soapDoc = AjxSoapDoc.create("GetDeviceStatusRequest", "urn:zmailSync");
 	var respCallback = new AjxCallback(this, this._handleResponseLoadDevices);
 	appCtxt.getAppController().sendRequest({soapDoc:soapDoc, asyncMode:true, callback:respCallback});
 };

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.webClient.servlet;
+package org.zmail.webClient.servlet;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -25,8 +25,8 @@ import java.net.URL;
 
 import javax.naming.*;
 
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.util.ZimbraCookie;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.util.ZmailCookie;
 
 @SuppressWarnings("serial")
 public class SetCookieServlet extends ZCServlet
@@ -35,7 +35,7 @@ public class SetCookieServlet extends ZCServlet
     private static final String PARAM_AUTH_TOKEN = "authToken";
     private static final String PARAM_REMEMBER_ME = "rememberMe";
     private static final String PARAM_AUTH_TOKEN_LIFETIME = "atl";
-    private static final String DEFAULT_MAIL_URL = "/zimbra/mail";
+    private static final String DEFAULT_MAIL_URL = "/zmail/mail";
     
     private static final String HEADER_HOST = "host";
     private static final String HEADER_REFERER = "referer";
@@ -52,10 +52,10 @@ public class SetCookieServlet extends ZCServlet
 	}
         if (redirectLocation == null) {
             redirectLocation = DEFAULT_MAIL_URL;
-	    // ZimbraLog.webclient.debug("Default redirectLocation ..." + redirectLocation);
+	    // ZmailLog.webclient.debug("Default redirectLocation ..." + redirectLocation);
         } else {
 	    redirectLocation = redirectLocation + "/mail";
-	    //ZimbraLog.webclient.debug("Setting redirectLocation to specified " + redirectLocation);
+	    //ZmailLog.webclient.debug("Setting redirectLocation to specified " + redirectLocation);
 	}
     }
 
@@ -113,16 +113,16 @@ public class SetCookieServlet extends ZCServlet
                 secureCookie = req.isSecure();
             }
 
-            String authCookieVal = getCookieValue(req, ZimbraCookie.COOKIE_ZM_AUTH_TOKEN);
+            String authCookieVal = getCookieValue(req, ZmailCookie.COOKIE_ZM_AUTH_TOKEN);
             if (!(authToken.equals(authCookieVal))) {
                 Integer maxAge = null;
                 if (lifetime != -1) {
                     maxAge = Integer.valueOf(lifetime);
                 }
                 
-                ZimbraCookie.addHttpOnlyCookie(resp, 
-                        ZimbraCookie.COOKIE_ZM_AUTH_TOKEN, authToken, 
-                        ZimbraCookie.PATH_ROOT, maxAge, secureCookie);
+                ZmailCookie.addHttpOnlyCookie(resp, 
+                        ZmailCookie.COOKIE_ZM_AUTH_TOKEN, authToken, 
+                        ZmailCookie.PATH_ROOT, maxAge, secureCookie);
             }
             
             resp.sendRedirect(redirectTo);
@@ -131,7 +131,7 @@ public class SetCookieServlet extends ZCServlet
         } catch (IllegalStateException is){
 	    // do nothing
         } catch (Exception ex) {
-        	ZimbraLog.webclient.warn("exception setting cookie", ex);
+        	ZmailLog.webclient.warn("exception setting cookie", ex);
             if (!resp.isCommitted())
             	resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }

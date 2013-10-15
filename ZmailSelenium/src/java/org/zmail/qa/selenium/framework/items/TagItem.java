@@ -17,15 +17,15 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.framework.items;
+package org.zmail.qa.selenium.framework.items;
 
 import org.apache.log4j.*;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.ui.AbsApplication;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.AppAjaxClient;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.ui.AbsApplication;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.ui.AppAjaxClient;
 
 
 
@@ -106,16 +106,16 @@ public class TagItem implements IItem {
 
 	//Create a new tag via soap
 	//return TagItem object
-	public static TagItem CreateUsingSoap(ZimbraAccount account) throws HarnessException {
+	public static TagItem CreateUsingSoap(ZmailAccount account) throws HarnessException {
 		
 		
-		String tagName = "tag"+ ZimbraSeleniumProperties.getUniqueString();	
+		String tagName = "tag"+ ZmailSeleniumProperties.getUniqueString();	
 		
 		
 		//TODO color attribute 
 	   // Create a tag via soap
 		account.soapSend(
-				"<CreateTagRequest xmlns='urn:zimbraMail'>" +
+				"<CreateTagRequest xmlns='urn:zmailMail'>" +
 						"<tag name='"+ tagName +"' color='1' />" +
 				"</CreateTagRequest>");
 
@@ -128,16 +128,16 @@ public class TagItem implements IItem {
 	//Create a new tag via soap
 	//return TagItem object
 	@Deprecated()
-	public static TagItem CreateTagViaSoap(ZimbraAccount account) throws HarnessException{
+	public static TagItem CreateTagViaSoap(ZmailAccount account) throws HarnessException{
 		throw new HarnessException("deprecated - using CreateUsingSoap instead");		  
 	}
 	
 	/* (non-Javadoc)
-	 * @see framework.items.IItem#CreateSOAP(framework.util.ZimbraAccount)
+	 * @see framework.items.IItem#CreateSOAP(framework.util.ZmailAccount)
 	 */
 	//TODO: ~ CreateViaSoap?
 	@Override
-	public void createUsingSOAP(ZimbraAccount account) throws HarnessException {
+	public void createUsingSOAP(ZmailAccount account) throws HarnessException {
 		throw new HarnessException("implement me");
 	}
 
@@ -151,7 +151,7 @@ public class TagItem implements IItem {
 		try {
 
 			// Make sure we only have the <tag/> part
-			Element t = ZimbraAccount.SoapClient.selectNode(tag, "//mail:tag");
+			Element t = ZmailAccount.SoapClient.selectNode(tag, "//mail:tag");
 			if ( t == null )
 				throw new HarnessException("Element does not contain an <tag/> element");
 
@@ -176,7 +176,7 @@ public class TagItem implements IItem {
 
 
 
-	public static TagItem importFromSOAP(ZimbraAccount account, String name) throws HarnessException {
+	public static TagItem importFromSOAP(ZmailAccount account, String name) throws HarnessException {
 		
 		if ( account == null )
 			throw new HarnessException("account cannot be null");
@@ -187,7 +187,7 @@ public class TagItem implements IItem {
 
 		try {
 			
-			account.soapSend("<GetTagRequest xmlns='urn:zimbraMail'/>");
+			account.soapSend("<GetTagRequest xmlns='urn:zmailMail'/>");
 			
 			Element[] results = account.soapSelectNodes("//mail:GetTagResponse//mail:tag[@name='"+name+"']");
 			

@@ -27,7 +27,7 @@ Content-Type: multipart/alternative;
  boundary="=_32bbf761-05c7-4906-addb-d192adb12f68"
 MIME-Version: 1.0
 X-Originating-IP: [10.117.82.27]
-X-Mailer: Zimbra 7.1.1_GA_3145 (ZimbraWebClient - FF3.0 (Win)/7.1.1_GA_3145)
+X-Mailer: Zmail 7.1.1_GA_3145 (ZmailWebClient - FF3.0 (Win)/7.1.1_GA_3145)
 
 --=_32bbf761-05c7-4906-addb-d192adb12f68
 Content-Type: text/plain; charset=utf-8

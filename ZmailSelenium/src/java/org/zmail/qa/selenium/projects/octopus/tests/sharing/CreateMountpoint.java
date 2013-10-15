@@ -14,27 +14,27 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.octopus.tests.sharing;
+package org.zmail.qa.selenium.projects.octopus.tests.sharing;
 
 import java.util.List;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.items.FolderMountpointItem;
-import com.zimbra.qa.selenium.framework.items.IOctListViewItem;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.OctopusAccount;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.octopus.core.OctopusCommonTest;
-import com.zimbra.qa.selenium.projects.octopus.ui.PageMyFiles;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.items.FolderMountpointItem;
+import org.zmail.qa.selenium.framework.items.IOctListViewItem;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.OctopusAccount;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.octopus.core.OctopusCommonTest;
+import org.zmail.qa.selenium.projects.octopus.ui.PageMyFiles;
 public class CreateMountpoint extends OctopusCommonTest {
 
-	private ZimbraAccount ownerAccount = null;
+	private ZmailAccount ownerAccount = null;
 
 	public CreateMountpoint() {
 		logger.info("New " + CreateMountpoint.class.getCanonicalName());
@@ -58,21 +58,21 @@ public class CreateMountpoint extends OctopusCommonTest {
 
 		// Owner creates a folder, shares it with current user
 		String ownerFoldername = "ownerFolder"
-				+ ZimbraSeleniumProperties.getUniqueString();
+				+ ZmailSeleniumProperties.getUniqueString();
 
 		// Verify the share folder exists on the server
 		FolderItem ownerFolderItem = createFolderViaSoap(ownerAccount, ownerFoldername,ownerBriefcaseRootFolder);
 
 		ZAssert.assertNotNull(ownerFolderItem,"Verify the owner share folder exists");
 
-		ZimbraAccount granteeAccount = app.zGetActiveAccount();
+		ZmailAccount granteeAccount = app.zGetActiveAccount();
 
 		// Current user creates the mountpoint that points to the share
 		FolderItem currentAccountRootFolder = FolderItem.importFromSOAP(
 				granteeAccount, SystemFolder.Briefcase);
 
 		String folderMountpointName = "mountpoint"
-				+ ZimbraSeleniumProperties.getUniqueString();
+				+ ZmailSeleniumProperties.getUniqueString();
 
 		mountFolderViaSoap(ownerAccount, granteeAccount, ownerFolderItem, SHARE_AS_READ, currentAccountRootFolder, folderMountpointName);
 

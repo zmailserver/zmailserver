@@ -14,35 +14,35 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.compose.autocomplete;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.compose.autocomplete;
 
 import java.util.List;
 
 import org.testng.annotations.*;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew.Field;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.*;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew.Field;
 
 
 public class AutoCompleteSharedContacts extends PrefGroupMailByMessageTest {
 
 
-	private ZimbraAccount Owner = null;
+	private ZmailAccount Owner = null;
 	private FolderItem OwnerFolder = null;
-	private ZimbraAccount Contact = null;
+	private ZmailAccount Contact = null;
 	private String ContactFirstName = null;
 	private String ContactLastName = null;
 	
 	public AutoCompleteSharedContacts() {
 		logger.info("New "+ AutoCompleteSharedContacts.class.getCanonicalName());
 		
-		super.startingAccountPreferences.put("zimbraPrefComposeFormat", "text");
-		super.startingAccountPreferences.put("zimbraPrefSharedAddrBookAutoCompleteEnabled", "TRUE");
+		super.startingAccountPreferences.put("zmailPrefComposeFormat", "text");
+		super.startingAccountPreferences.put("zmailPrefSharedAddrBookAutoCompleteEnabled", "TRUE");
 	
 	}
 	
@@ -52,24 +52,24 @@ public class AutoCompleteSharedContacts extends PrefGroupMailByMessageTest {
 	 */
 	public void CreateSharedContacts() throws HarnessException {
 		
-		Contact = new ZimbraAccount();
+		Contact = new ZmailAccount();
 		Contact.provision();
 		Contact.authenticate();
 		
-		Owner = new ZimbraAccount();
+		Owner = new ZmailAccount();
 		Owner.provision();
 		Owner.authenticate();
 		
 		
-		ContactFirstName = "Jayden" + ZimbraSeleniumProperties.getUniqueString();
-		ContactLastName = "Brown" + ZimbraSeleniumProperties.getUniqueString();
-		String ownerFolderName = "folder" + ZimbraSeleniumProperties.getUniqueString();
-		String mountpointName = "mountpoint" + ZimbraSeleniumProperties.getUniqueString();
+		ContactFirstName = "Jayden" + ZmailSeleniumProperties.getUniqueString();
+		ContactLastName = "Brown" + ZmailSeleniumProperties.getUniqueString();
+		String ownerFolderName = "folder" + ZmailSeleniumProperties.getUniqueString();
+		String mountpointName = "mountpoint" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		// Create a folder to share
 		Owner.soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>"
+					"<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+		"<folder name='" + ownerFolderName + "' view='contact' l='" + FolderItem.importFromSOAP(Owner, FolderItem.SystemFolder.Contacts).getId() + "'/>"
 				+	"</CreateFolderRequest>");
 		
@@ -77,7 +77,7 @@ public class AutoCompleteSharedContacts extends PrefGroupMailByMessageTest {
 		
 		// Share it
 		Owner.soapSend(
-					"<FolderActionRequest xmlns='urn:zimbraMail'>"
+					"<FolderActionRequest xmlns='urn:zmailMail'>"
 				+		"<action id='"+ OwnerFolder.getId() +"' op='grant'>"
 				+			"<grant d='"+ app.zGetActiveAccount().EmailAddress +"' gt='usr' perm='r'/>"
 				+		"</action>"
@@ -85,7 +85,7 @@ public class AutoCompleteSharedContacts extends PrefGroupMailByMessageTest {
 		
 		// Add a contact to it
 		Owner.soapSend(
-				"<CreateContactRequest xmlns='urn:zimbraMail'>"
+				"<CreateContactRequest xmlns='urn:zmailMail'>"
 			+		"<cn l='"+ OwnerFolder.getId() +"'>"
 			+			"<a n='firstName'>"+ ContactFirstName +"</a>"
 			+			"<a n='lastName'>"+ ContactLastName +"</a>"
@@ -96,8 +96,8 @@ public class AutoCompleteSharedContacts extends PrefGroupMailByMessageTest {
 		
 		// Mount it
 		app.zGetActiveAccount().soapSend(
-					"<CreateMountpointRequest xmlns='urn:zimbraMail'>"
-				+		"<link l='1' name='"+ mountpointName +"'  rid='"+ OwnerFolder.getId() +"' zid='"+ Owner.ZimbraId +"'/>"
+					"<CreateMountpointRequest xmlns='urn:zmailMail'>"
+				+		"<link l='1' name='"+ mountpointName +"'  rid='"+ OwnerFolder.getId() +"' zid='"+ Owner.ZmailId +"'/>"
 				+	"</CreateMountpointRequest>");
 		
 		FolderMountpointItem mountpoint = FolderMountpointItem.importFromSOAP(app.zGetActiveAccount(), mountpointName);
@@ -116,8 +116,8 @@ public class AutoCompleteSharedContacts extends PrefGroupMailByMessageTest {
 		app.zPageMain.zToolbarPressButton(Button.B_REFRESH);
 		
 		// Message properties
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String body = "body" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String body = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		// Open the new mail form
 		FormMailNew mailform = (FormMailNew) app.zPageMail.zToolbarPressButton(Button.B_NEW);
@@ -156,8 +156,8 @@ public class AutoCompleteSharedContacts extends PrefGroupMailByMessageTest {
 		app.zPageMain.zToolbarPressButton(Button.B_REFRESH);
 		
 		// Message properties
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String body = "body" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String body = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		
@@ -199,8 +199,8 @@ public class AutoCompleteSharedContacts extends PrefGroupMailByMessageTest {
 
 		
 		// Message properties
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String body = "body" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String body = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		
@@ -242,8 +242,8 @@ public class AutoCompleteSharedContacts extends PrefGroupMailByMessageTest {
 
 		
 		// Message properties
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String body = "body" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String body = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		
@@ -285,8 +285,8 @@ public class AutoCompleteSharedContacts extends PrefGroupMailByMessageTest {
 
 		
 		// Message properties
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String body = "body" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String body = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		
@@ -328,8 +328,8 @@ public class AutoCompleteSharedContacts extends PrefGroupMailByMessageTest {
 
 		
 		// Message properties
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String body = "body" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String body = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		
@@ -369,18 +369,18 @@ public class AutoCompleteSharedContacts extends PrefGroupMailByMessageTest {
 	public void AutoCompleteSharedContacts_08() throws HarnessException {
 		int count = 3;
 		
-		String firstname = "William" + ZimbraSeleniumProperties.getUniqueString();
+		String firstname = "William" + ZmailSeleniumProperties.getUniqueString();
 		for (int i = 0; i < count; i++) {
 			
 			// Create a contact
-			ZimbraAccount contact = new ZimbraAccount();
+			ZmailAccount contact = new ZmailAccount();
 			contact.provision();
 			contact.authenticate();
 
-			String lastname = "Jones" + ZimbraSeleniumProperties.getUniqueString();
+			String lastname = "Jones" + ZmailSeleniumProperties.getUniqueString();
 			
 			Owner.soapSend(
-						"<CreateContactRequest xmlns='urn:zimbraMail'>"
+						"<CreateContactRequest xmlns='urn:zmailMail'>"
 					+		"<cn l='"+ OwnerFolder.getId() +"'>"
 					+			"<a n='firstName'>"+ firstname +"</a>"
 					+			"<a n='lastName'>"+ lastname +"</a>"
@@ -393,8 +393,8 @@ public class AutoCompleteSharedContacts extends PrefGroupMailByMessageTest {
 		app.zPageMain.zToolbarPressButton(Button.B_REFRESH);
 
 		// Message properties
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String body = "body" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String body = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 
 		// Open the new mail form
@@ -426,8 +426,8 @@ public class AutoCompleteSharedContacts extends PrefGroupMailByMessageTest {
 
 		
 		// Message properties
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String body = "body" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String body = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		// Open the new mail form
 		FormMailNew mailform = (FormMailNew) app.zPageMail.zToolbarPressButton(Button.B_NEW);

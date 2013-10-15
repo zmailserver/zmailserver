@@ -16,7 +16,7 @@
  */
 #pragma once
 
-namespace Zimbra
+namespace Zmail
 {
 namespace MAPI
 {

@@ -126,11 +126,11 @@ function(preParams, paramsArr) {
 	}
 	
 	cnt = paramList.length;
-	soapDoc = AjxSoapDoc.create("BatchRequest", "urn:zimbra");
+	soapDoc = AjxSoapDoc.create("BatchRequest", "urn:zmail");
 	soapDoc.setMethodAttribute("onerror", "continue");
 	
 	for(var i = 0; i < cnt; i++) {
-		var getSearchDirDoc = soapDoc.set("SearchDirectoryRequest", null, null, ZaZimbraAdmin.URN);
+		var getSearchDirDoc = soapDoc.set("SearchDirectoryRequest", null, null, ZaZmailAdmin.URN);
 		var squery = soapDoc.set("query", paramList[i].query, getSearchDirDoc);	
 
                 sortBy = (paramList[i].sortBy != undefined)? paramList[i].sortBy: ZaAccount.A_name;
@@ -222,7 +222,7 @@ function(preParams, paramsArr) {
 				this._searchTotal += resp.searchTotal;
                 resultStats = this.getSearchResultStats(resp, resultStats);
 			}
-		        if(ZaZimbraAdmin.currentAdminAccount.attrs[ZaAccount.A_zimbraIsAdminAccount] != 'TRUE') {
+		        if(ZaZmailAdmin.currentAdminAccount.attrs[ZaAccount.A_zmailIsAdminAccount] != 'TRUE') {
 		                var act = new AjxTimedAction(this._list, ZaItemList.prototype.loadEffectiveRights, null);
 		                AjxTimedAction.scheduleAction(act, 150)
 		        }
@@ -237,7 +237,7 @@ function(preParams, paramsArr) {
 
 		}
 	}
-    ZaZimbraAdmin.getInstance().getOverviewPanelController().fireSearchEvent(resultStats);
+    ZaZmailAdmin.getInstance().getOverviewPanelController().fireSearchEvent(resultStats);
 }
 
 ZaListViewController.prototype.getAppBarAction =
@@ -310,7 +310,7 @@ function(params, resp) {
                     }
                 } else  this._list = tempList;
 
-				if(ZaZimbraAdmin.currentAdminAccount.attrs[ZaAccount.A_zimbraIsAdminAccount] != 'TRUE') {
+				if(ZaZmailAdmin.currentAdminAccount.attrs[ZaAccount.A_zmailIsAdminAccount] != 'TRUE') {
 					var act = new AjxTimedAction(this._list, ZaItemList.prototype.loadEffectiveRights, null);
 					AjxTimedAction.scheduleAction(act, 150)
 				}
@@ -325,7 +325,7 @@ function(params, resp) {
 			else
 				this._updateUI(this._list, params.openInNewTab, params.openInSearchTab,response.more);
 		}
-        ZaZimbraAdmin.getInstance().getOverviewPanelController().fireSearchEvent(resultStats);
+        ZaZmailAdmin.getInstance().getOverviewPanelController().fireSearchEvent(resultStats);
 	} catch (ex) {
 		if (ex.code != ZmCsfeException.MAIL_QUERY_PARSE_ERROR) {
 			this._handleException(ex, "ZaListViewController.prototype.searchCallback");	
@@ -373,7 +373,7 @@ function (ev) {
 			this.show(false);			
 		}
 	}
-	ZaZimbraAdmin.getInstance().getOverviewPanelController().refreshRelatedTreeByEdit (ev.getDetails())
+	ZaZmailAdmin.getInstance().getOverviewPanelController().refreshRelatedTreeByEdit (ev.getDetails())
 }
 
 /**
@@ -387,7 +387,7 @@ function (ev) {
 			this.show(false);			
 		}
 	}
-    ZaZimbraAdmin.getInstance().getOverviewPanelController().refreshRelatedTree (ev.getDetails());
+    ZaZmailAdmin.getInstance().getOverviewPanelController().refreshRelatedTree (ev.getDetails());
 }
 
 /**
@@ -401,7 +401,7 @@ function (ev) {
 			this._currentPageNum = 1 ; //due to bug 12091, always go back to the first page after the deleting of items.
 			this.show(false);			
 		}
-		ZaZimbraAdmin.getInstance().refreshHistoryTreeByDelete(ev.getDetails());
+		ZaZmailAdmin.getInstance().refreshHistoryTreeByDelete(ev.getDetails());
 	}
 }
 

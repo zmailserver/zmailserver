@@ -14,18 +14,18 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.octopus.tests.myfiles.files;
+package org.zmail.qa.selenium.projects.octopus.tests.myfiles.files;
 
 import org.testng.annotations.*;
-import com.zimbra.qa.selenium.framework.items.FileItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.octopus.core.OctopusCommonTest;
-import com.zimbra.qa.selenium.projects.octopus.ui.DisplayFilePreview;
-import com.zimbra.qa.selenium.projects.octopus.ui.PageMyFiles;
+import org.zmail.qa.selenium.framework.items.FileItem;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.octopus.core.OctopusCommonTest;
+import org.zmail.qa.selenium.projects.octopus.ui.DisplayFilePreview;
+import org.zmail.qa.selenium.projects.octopus.ui.PageMyFiles;
 
 public class MarkAsFavorite extends OctopusCommonTest {
 
@@ -52,13 +52,13 @@ public class MarkAsFavorite extends OctopusCommonTest {
 
 	@Test(description = "Mark file as Favorite using Context menu - verify favorite icon becomes enabled in the preview panel", groups = { "smoke" })
 	public void MarkAsFavorite_01() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseRootFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
 
 		// Create file item
-		String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+		String filePath = ZmailSeleniumProperties.getBaseDirectory()
 				+ "/data/public/other/putty.log";
 
 		FileItem file = new FileItem(filePath);
@@ -68,7 +68,7 @@ public class MarkAsFavorite extends OctopusCommonTest {
 		String attachmentId = account.uploadFile(filePath);
 
 		// Save uploaded file to briefcase through SOAP
-		account.soapSend("<SaveDocumentRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<SaveDocumentRequest xmlns='urn:zmailMail'>"
 				+ "<doc l='" + briefcaseRootFolder.getId() + "'><upload id='"
 				+ attachmentId + "'/></doc></SaveDocumentRequest>");
 
@@ -96,7 +96,7 @@ public class MarkAsFavorite extends OctopusCommonTest {
 				"Verify the favorite icon becomes enabled in the preview panel");
 
 		// Verify the file was added to the Favorites using SOAP
-		account.soapSend("<GetWatchingItemsRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<GetWatchingItemsRequest xmlns='urn:zmailMail'>"
 				+ "</GetWatchingItemsRequest>");
 
 		ZAssert.assertTrue(account.soapMatch(
@@ -106,13 +106,13 @@ public class MarkAsFavorite extends OctopusCommonTest {
 
 	@Test(description = "Mark file as Favorite / Not Favorite using Context menu - verify watch icon becomes enabled / disabled in the preview panel", groups = { "functional" })
 	public void MarkAsFavorite_02() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseRootFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
 
 		// Create file item
-		String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+		String filePath = ZmailSeleniumProperties.getBaseDirectory()
 				+ "/data/public/other/testtextfile.txt";
 
 		FileItem file = new FileItem(filePath);
@@ -122,7 +122,7 @@ public class MarkAsFavorite extends OctopusCommonTest {
 		String attachmentId = account.uploadFile(filePath);
 
 		// Save uploaded file to briefcase through SOAP
-		account.soapSend("<SaveDocumentRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<SaveDocumentRequest xmlns='urn:zmailMail'>"
 				+ "<doc l='" + briefcaseRootFolder.getId() + "'><upload id='"
 				+ attachmentId + "'/></doc></SaveDocumentRequest>");
 
@@ -144,7 +144,7 @@ public class MarkAsFavorite extends OctopusCommonTest {
 				"Verify the favorite icon becomes enabled in the preview panel");
 
 		// Verify the file was added to the Favorites using SOAP
-		account.soapSend("<GetWatchingItemsRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<GetWatchingItemsRequest xmlns='urn:zmailMail'>"
 				+ "</GetWatchingItemsRequest>");
 
 		ZAssert.assertTrue(account.soapMatch(
@@ -164,13 +164,13 @@ public class MarkAsFavorite extends OctopusCommonTest {
 
 	@Test(description = "Mark file as Favorite / Not Favorite clicking on watch icon - verify watch icon becomes enabled / disabled in the preview panel", groups = { "functional" })
 	public void MarkAsFavorite_03() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseRootFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
 
 		// Create file item
-		String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+		String filePath = ZmailSeleniumProperties.getBaseDirectory()
 				+ "/data/public/other/testtextfile.txt";
 
 		FileItem file = new FileItem(filePath);
@@ -180,7 +180,7 @@ public class MarkAsFavorite extends OctopusCommonTest {
 		String attachmentId = account.uploadFile(filePath);
 
 		// Save uploaded file to My Files through SOAP
-		account.soapSend("<SaveDocumentRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<SaveDocumentRequest xmlns='urn:zmailMail'>"
 				+ "<doc l='" + briefcaseRootFolder.getId() + "'><upload id='"
 				+ attachmentId + "'/></doc></SaveDocumentRequest>");
 
@@ -216,7 +216,7 @@ public class MarkAsFavorite extends OctopusCommonTest {
 				"Verify the favorite icon becomes enabled in the preview panel");
 
 		// Verify the file was added to the Favorites using SOAP
-		account.soapSend("<GetWatchingItemsRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<GetWatchingItemsRequest xmlns='urn:zmailMail'>"
 				+ "</GetWatchingItemsRequest>");
 
 		ZAssert.assertTrue(account.soapMatch(
@@ -270,14 +270,14 @@ public class MarkAsFavorite extends OctopusCommonTest {
 		}
 		try {
 			// Refresh view
-			// ZimbraAccount account = app.zGetActiveAccount();
+			// ZmailAccount account = app.zGetActiveAccount();
 			// FolderItem item =
 			// FolderItem.importFromSOAP(account,SystemFolder.Briefcase);
-			// account.soapSend("<GetFolderRequest xmlns='urn:zimbraMail'><folder l='1' recursive='0'/>"
+			// account.soapSend("<GetFolderRequest xmlns='urn:zmailMail'><folder l='1' recursive='0'/>"
 			// + "</GetFolderRequest>");
-			// account.soapSend("<GetFolderRequest xmlns='urn:zimbraMail' requestId='folders' depth='1' tr='true' view='document'><folder l='"
+			// account.soapSend("<GetFolderRequest xmlns='urn:zmailMail' requestId='folders' depth='1' tr='true' view='document'><folder l='"
 			// + item.getId() + "'/></GetFolderRequest>");
-			// account.soapSend("<GetActivityStreamRequest xmlns='urn:zimbraMail' id='16'/>");
+			// account.soapSend("<GetActivityStreamRequest xmlns='urn:zmailMail' id='16'/>");
 			// app.zGetActiveAccount().accountIsDirty = true;
 			// app.zPageOctopus.sRefresh();
 

@@ -12,18 +12,18 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.offline;
+package org.zmail.cs.account.offline;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Cos;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.offline.OfflineProvisioning.EntryType;
-import com.zimbra.cs.db.DbOfflineDirectory;
-import com.zimbra.cs.offline.OfflineLC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Cos;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.offline.OfflineProvisioning.EntryType;
+import org.zmail.cs.db.DbOfflineDirectory;
+import org.zmail.cs.offline.OfflineLC;
 
 class OfflineCos extends Cos {
     OfflineCos(String name, String id, Map<String, Object> attrs, Provisioning prov) {
@@ -36,19 +36,19 @@ class OfflineCos extends Cos {
             if (attrs == null) {
                 attrs = new HashMap<String, Object>(3);
                 attrs.put(Provisioning.A_cn, "default");
-                attrs.put(Provisioning.A_objectClass, "zimbraCOS");
-                attrs.put(Provisioning.A_zimbraId, UUID.randomUUID().toString());
+                attrs.put(Provisioning.A_objectClass, "zmailCOS");
+                attrs.put(Provisioning.A_zmailId, UUID.randomUUID().toString());
                 DbOfflineDirectory.createDirectoryEntry(OfflineProvisioning.EntryType.COS, "default", attrs, false);
             }
             
             //make sure auth token doesn't expire too soon
-            attrs.put(Provisioning.A_zimbraAuthTokenLifetime, OfflineLC.auth_token_lifetime.value());
-            attrs.put(Provisioning.A_zimbraAdminAuthTokenLifetime, OfflineLC.auth_token_lifetime.value());
+            attrs.put(Provisioning.A_zmailAuthTokenLifetime, OfflineLC.auth_token_lifetime.value());
+            attrs.put(Provisioning.A_zmailAdminAuthTokenLifetime, OfflineLC.auth_token_lifetime.value());
             
             //allow proxy to any domains
-            attrs.put(Provisioning.A_zimbraProxyAllowedDomains, "*");
+            attrs.put(Provisioning.A_zmailProxyAllowedDomains, "*");
             
-            return new OfflineCos("default", (String) attrs.get(Provisioning.A_zimbraId), attrs, prov);
+            return new OfflineCos("default", (String) attrs.get(Provisioning.A_zmailId), attrs, prov);
         } catch (ServiceException e) {
             // throw RuntimeException because we're being called at startup...
             throw new RuntimeException("failure instantiating default cos", e);

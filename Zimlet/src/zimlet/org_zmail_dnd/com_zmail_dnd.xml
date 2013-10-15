@@ -14,11 +14,11 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_dnd"
+<zimlet name="org_zmail_dnd"
         version="1.2"
         label="${msg.zimletLabel}"
         target="main compose-window view-window"
         description="${msg.description}">
     <include>dnd.js</include>
-    <handlerObject>Com_Zimbra_DnD</handlerObject>
+    <handlerObject>Com_Zmail_DnD</handlerObject>
 </zimlet>

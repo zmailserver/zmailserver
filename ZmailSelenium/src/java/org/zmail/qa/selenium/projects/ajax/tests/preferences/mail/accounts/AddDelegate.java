@@ -14,15 +14,15 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.preferences.mail.accounts;
+package org.zmail.qa.selenium.projects.ajax.tests.preferences.mail.accounts;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogDelegate;
-import com.zimbra.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogDelegate;
+import org.zmail.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
 
 
 public class AddDelegate extends AjaxCommonTest {
@@ -45,7 +45,7 @@ public class AddDelegate extends AjaxCommonTest {
 		//-- Data Setup
 		
 		// Create an account to delegate to
-		ZimbraAccount delegate = new ZimbraAccount();
+		ZmailAccount delegate = new ZmailAccount();
 		delegate.provision();
 		delegate.authenticate();
 		
@@ -55,7 +55,7 @@ public class AddDelegate extends AjaxCommonTest {
 		// Navigate to preferences -> notifications
 		app.zTreePreferences.zTreeItem(Action.A_LEFTCLICK, TreeItem.MailAccounts);
 
-		// See http://bugzilla.zimbra.com/show_bug.cgi?id=74282
+		// See http://bugzilla.zmail.com/show_bug.cgi?id=74282
 		// TODO: Maybe this button should be abstracted?
 		String buttonLocator = "css=div[id$='_PRIMARY'] td[id$='_title']:contains('Add Delegate')"; // TODO: I18N
 		ZAssert.assertTrue(app.zPagePreferences.sIsElementPresent(buttonLocator), "Verify the add delegate button is present");
@@ -72,7 +72,7 @@ public class AddDelegate extends AjaxCommonTest {
 		
 		//-- Verification
 		app.zGetActiveAccount().soapSend(
-					"<GetRightsRequest xmlns='urn:zimbraAccount' >"
+					"<GetRightsRequest xmlns='urn:zmailAccount' >"
 				+		"<ace right='sendAs'/>"
 				+		"<ace right='sendOnBehalfOf'/>"
 				+	"</GetRightsRequest>");
@@ -94,7 +94,7 @@ public class AddDelegate extends AjaxCommonTest {
 		//-- Data Setup
 		
 		// Create an account to delegate to
-		ZimbraAccount delegate = new ZimbraAccount();
+		ZmailAccount delegate = new ZmailAccount();
 		delegate.provision();
 		delegate.authenticate();
 		
@@ -104,7 +104,7 @@ public class AddDelegate extends AjaxCommonTest {
 		// Navigate to preferences -> notifications
 		app.zTreePreferences.zTreeItem(Action.A_LEFTCLICK, TreeItem.MailAccounts);
 
-		// See http://bugzilla.zimbra.com/show_bug.cgi?id=74282
+		// See http://bugzilla.zmail.com/show_bug.cgi?id=74282
 		// TODO: Maybe this button should be abstracted?
 		String buttonLocator = "css=div[id$='_PRIMARY'] td[id$='_title']:contains('Add Delegate')"; // TODO: I18N
 		ZAssert.assertTrue(app.zPagePreferences.sIsElementPresent(buttonLocator), "Verify the add delegate button is present");
@@ -121,7 +121,7 @@ public class AddDelegate extends AjaxCommonTest {
 		
 		//-- Verification
 		app.zGetActiveAccount().soapSend(
-					"<GetRightsRequest xmlns='urn:zimbraAccount' >"
+					"<GetRightsRequest xmlns='urn:zmailAccount' >"
 				+		"<ace right='sendAs'/>"
 				+		"<ace right='sendOnBehalfOf'/>"
 				+	"</GetRightsRequest>");

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
 -->
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %><%
+<%@ taglib prefix="zm" uri="org.zmail.zm" %><%
 	// no cache
 	response.addHeader("Vary", "User-Agent");
 	response.setHeader("Expires", "Tue, 24 Jan 2000 17:46:50 GMT");

@@ -14,15 +14,15 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.octopus.tests.login;
+package org.zmail.qa.selenium.projects.octopus.tests.login;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.projects.octopus.core.OctopusCommonTest;
-import com.zimbra.qa.selenium.projects.octopus.ui.PageOctopus;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.projects.octopus.core.OctopusCommonTest;
+import org.zmail.qa.selenium.projects.octopus.ui.PageOctopus;
 
 public class BasicLogout extends OctopusCommonTest {
 

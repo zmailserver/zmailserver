@@ -14,19 +14,19 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.search.savedsearch;
+package org.zmail.qa.selenium.projects.ajax.tests.search.savedsearch;
 
 import java.util.List;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.SavedSearchFolderItem;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.search.DialogSaveSearch;
+import org.zmail.qa.selenium.framework.items.SavedSearchFolderItem;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.search.DialogSaveSearch;
 
 
 //TODO: add more in ContactItem.java
@@ -51,8 +51,8 @@ public class CreateSavedSearch extends AjaxCommonTest  {
 				
 			
 		// Create the message data to be sent
-		String name = "search" + ZimbraSeleniumProperties.getUniqueString();
-		String query = "subject:(" + ZimbraSeleniumProperties.getUniqueString() + ")";
+		String name = "search" + ZmailSeleniumProperties.getUniqueString();
+		String query = "subject:(" + ZmailSeleniumProperties.getUniqueString() + ")";
 
 		// Remember to close the search window after saving
 		try {

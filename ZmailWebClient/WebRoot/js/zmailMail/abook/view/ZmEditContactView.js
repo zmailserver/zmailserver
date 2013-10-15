@@ -747,7 +747,7 @@ ZmEditContactView.prototype.getSelectionCount = function() {
  * @return	{String}	the title
  */
 ZmEditContactView.prototype.getTitle = function() {
-	return [ZmMsg.zimbraTitle, ZmMsg.contact].join(": ");
+	return [ZmMsg.zmailTitle, ZmMsg.contact].join(": ");
 };
 
 //

@@ -15,7 +15,7 @@
  
 /**
  * @overview
- * This file defines a Zimbra calendar item.
+ * This file defines a Zmail calendar item.
  *
  */
 
@@ -1025,7 +1025,7 @@ function(mode, callback, errorCallback, ex) {
         var jsonObj = {},
             requestName = this._getRequestNameForMode(ZmCalItem.MODE_GET),
             request = jsonObj[requestName] = {
-                _jsns : "urn:zimbraMail"
+                _jsns : "urn:zmailMail"
             },
             respCallback = new AjxCallback(this, this._handleErrorGetDetails2, [mode, callback, errorCallback]),
             params;
@@ -1425,7 +1425,7 @@ function(attachmentId, callback, errorCallback, notifyList) {
         jsonObj = {},
         requestName = this._getRequestNameForMode(this.viewMode, this.isException),
         request = jsonObj[requestName] = {
-            _jsns : "urn:zimbraMail"
+            _jsns : "urn:zmailMail"
         },
         accountName,
         invAndMsg,
@@ -1728,7 +1728,7 @@ function(mode, callback, msg, batchCmd, result) {
 		mode = ZmCalItem.MODE_PURGE;
         requestName = this._getRequestNameForMode(mode);
         request = jsonObj[requestName] = {
-            _jsns : "urn:zimbraMail"
+            _jsns : "urn:zmailMail"
         };
         action = request.action = {};
 		action.op = "delete";
@@ -1759,7 +1759,7 @@ function(mode, callback, msg, batchCmd, result) {
 		{
             requestName = this._getRequestNameForMode(mode);
             request = jsonObj[requestName] = {
-                _jsns : "urn:zimbraMail"
+                _jsns : "urn:zmailMail"
             };
 
 			this._addInviteAndCompNum(request);

@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cert;
+package org.zmail.cert;
 
-import com.zimbra.common.soap.CertMgrConstants;
-import com.zimbra.soap.DocumentDispatcher;
-import com.zimbra.soap.DocumentService;
+import org.zmail.common.soap.CertMgrConstants;
+import org.zmail.soap.DocumentDispatcher;
+import org.zmail.soap.DocumentService;
 
 
-public class ZimbraCertMgrService implements DocumentService {
+public class ZmailCertMgrService implements DocumentService {
 
     public void registerHandlers(DocumentDispatcher dispatcher) {
         dispatcher.registerHandler(CertMgrConstants.INSTALL_CERT_REQUEST, new InstallCert());

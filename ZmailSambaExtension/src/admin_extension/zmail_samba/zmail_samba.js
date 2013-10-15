@@ -1,7 +1,7 @@
-ZaZimbraAdmin._SAMBA_DOMAIN_LIST = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._SAMBA_DOMAIN_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
+ZaZmailAdmin._SAMBA_DOMAIN_LIST = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._SAMBA_DOMAIN_VIEW = ZaZmailAdmin.VIEW_INDEX++;
 if(ZaMsg) {
-	ZaMsg.SMBDomains_view_title = zimbra_samba.SambaDomainsListViewTitle;
+	ZaMsg.SMBDomains_view_title = zmail_samba.SambaDomainsListViewTitle;
 }
 function Zambra() {
 	
@@ -11,11 +11,11 @@ Zambra.ldapGroupSuffix = "ou=group";
 Zambra.ldapMachineSuffix = "ou=machines";
 
 ZaSettings.SAMBA_DOMAINS_LIST_VIEW = "sambaDomainsListView";
-ZaSettings.ALL_UI_COMPONENTS.push({ value: ZaSettings.SAMBA_DOMAINS_LIST_VIEW, label: zimbra_samba.SambaDomainsListViewTitle });
+ZaSettings.ALL_UI_COMPONENTS.push({ value: ZaSettings.SAMBA_DOMAINS_LIST_VIEW, label: zmail_samba.SambaDomainsListViewTitle });
 
 Zambra.initSettings= function () {
 	try {
-		var soapDoc = AjxSoapDoc.create("GetAdminExtensionZimletsRequest", "urn:zimbraAdmin", null);	
+		var soapDoc = AjxSoapDoc.create("GetAdminExtensionZimletsRequest", "urn:zmailAdmin", null);	
 		var command = new ZmCsfeCommand();
 		var params = new Object();
 		params.soapDoc = soapDoc;	
@@ -33,7 +33,7 @@ Zambra.initSettings= function () {
 			for(var ix = 0; ix < cnt; ix++) {
 				if(zimlets[ix] && zimlets[ix].zimlet && zimlets[ix].zimlet[0] && zimlets[ix].zimletConfig && zimlets[ix].zimletConfig[0]) {
 					var zimletConfig = zimlets[ix].zimletConfig[0];					
-					if(zimletConfig.name=="zimbra_samba") {
+					if(zimletConfig.name=="zmail_samba") {
 						var global = zimletConfig.global[0];
 						if(global) {
 							var properties = global.property;
@@ -60,7 +60,7 @@ if(ZaSettings.initMethods)
 	
 Zambra.initOUs = function () {
 	//check groups OU
-	var soapDoc = AjxSoapDoc.create("GetLDAPEntriesRequest", "urn:zimbraAdmin", null);	
+	var soapDoc = AjxSoapDoc.create("GetLDAPEntriesRequest", "urn:zmailAdmin", null);	
 	soapDoc.set("ldapSearchBase", Zambra.ldapSuffix);
 	soapDoc.set("query", Zambra.ldapGroupSuffix);	
 	var getSambaDomainsCommand = new ZmCsfeCommand();
@@ -72,7 +72,7 @@ Zambra.initOUs = function () {
 	} else {
 		try {
 			//ou does not exist - create it
-			var soapDoc = AjxSoapDoc.create("CreateLDAPEntryRequest", "urn:zimbraAdmin", null);		
+			var soapDoc = AjxSoapDoc.create("CreateLDAPEntryRequest", "urn:zmailAdmin", null);		
 			var dn = [Zambra.ldapGroupSuffix,Zambra.ldapSuffix];
 			soapDoc.set("dn", dn.join(","));	
 			var testCommand = new ZmCsfeCommand();
@@ -91,7 +91,7 @@ Zambra.initOUs = function () {
 	}
 
 	//check machines OU
-	soapDoc = AjxSoapDoc.create("GetLDAPEntriesRequest", "urn:zimbraAdmin", null);	
+	soapDoc = AjxSoapDoc.create("GetLDAPEntriesRequest", "urn:zmailAdmin", null);	
 	soapDoc.set("ldapSearchBase", Zambra.ldapSuffix);
 	soapDoc.set("query", Zambra.ldapMachineSuffix);	
 	getSambaDomainsCommand = new ZmCsfeCommand();
@@ -103,7 +103,7 @@ Zambra.initOUs = function () {
 	} else {
 		try {
 			//ou does not exist - create it
-			var soapDoc = AjxSoapDoc.create("CreateLDAPEntryRequest", "urn:zimbraAdmin", null);		
+			var soapDoc = AjxSoapDoc.create("CreateLDAPEntryRequest", "urn:zmailAdmin", null);		
 			var dn = [Zambra.ldapMachineSuffix,Zambra.ldapSuffix];
 			soapDoc.set("dn", dn.join(","));	
 			var testCommand = new ZmCsfeCommand();
@@ -138,10 +138,10 @@ function(refresh) {
 
 ZaApp.prototype.getSambaDomainListController =
 function() {
-	if (this._controllers[ZaZimbraAdmin._SAMBA_DOMAIN_LIST] == null) {
-		this._controllers[ZaZimbraAdmin._SAMBA_DOMAIN_LIST] = new ZaSambaDomainListController(this._appCtxt, this._container, this);
+	if (this._controllers[ZaZmailAdmin._SAMBA_DOMAIN_LIST] == null) {
+		this._controllers[ZaZmailAdmin._SAMBA_DOMAIN_LIST] = new ZaSambaDomainListController(this._appCtxt, this._container, this);
 	}
-	return this._controllers[ZaZimbraAdmin._SAMBA_DOMAIN_LIST];
+	return this._controllers[ZaZmailAdmin._SAMBA_DOMAIN_LIST];
 }
 
 ZaApp.prototype.getSambaDomainController =
@@ -177,12 +177,12 @@ Zambra.ovTreeModifier = function (tree) {
 			this._configTi = new DwtTreeItem(tree, null, null, null, null, "overviewHeader");
 			this._configTi.enableSelection(false);
 			this._configTi.setText(ZaMsg.OVP_configuration);
-			this._configTi.setData(ZaOverviewPanelController._TID, ZaZimbraAdmin._SYS_CONFIG);		
+			this._configTi.setData(ZaOverviewPanelController._TID, ZaZmailAdmin._SYS_CONFIG);		
 		}
 		this._sambaTi = new DwtTreeItem({parent:this._configTi,className:"AdminTreeItem"});
-		this._sambaTi.setText(zimbra_samba.SambaDomainsListViewTitle);
+		this._sambaTi.setText(zmail_samba.SambaDomainsListViewTitle);
 		this._sambaTi.setImage("Zimlet");
-		this._sambaTi.setData(ZaOverviewPanelController._TID, ZaZimbraAdmin._SAMBA_DOMAIN_LIST);	
+		this._sambaTi.setData(ZaOverviewPanelController._TID, ZaZmailAdmin._SAMBA_DOMAIN_LIST);	
 		
 		try {
 			//add server statistics nodes
@@ -193,7 +193,7 @@ Zambra.ovTreeModifier = function (tree) {
 					var ti1 = new DwtTreeItem({parent:this._sambaTi,className:"AdminTreeItem"});			
 					ti1.setText(sambaDomainList[ix].name);	
 					ti1.setImage("Domain");
-					ti1.setData(ZaOverviewPanelController._TID, ZaZimbraAdmin._SAMBA_DOMAIN_VIEW);
+					ti1.setData(ZaOverviewPanelController._TID, ZaZmailAdmin._SAMBA_DOMAIN_VIEW);
 					ti1.setData(ZaOverviewPanelController._OBJ_ID, sambaDomainList[ix].id);
 				}
 			}
@@ -203,8 +203,8 @@ Zambra.ovTreeModifier = function (tree) {
 		
 
 		if(ZaOverviewPanelController.overviewTreeListeners) {
-			ZaOverviewPanelController.overviewTreeListeners[ZaZimbraAdmin._SAMBA_DOMAIN_LIST] = Zambra.sambaDomainListTreeListener;
-			ZaOverviewPanelController.overviewTreeListeners[ZaZimbraAdmin._SAMBA_DOMAIN_VIEW] = Zambra.sambaDomainTreeListener;							
+			ZaOverviewPanelController.overviewTreeListeners[ZaZmailAdmin._SAMBA_DOMAIN_LIST] = Zambra.sambaDomainListTreeListener;
+			ZaOverviewPanelController.overviewTreeListeners[ZaZmailAdmin._SAMBA_DOMAIN_VIEW] = Zambra.sambaDomainTreeListener;							
 		}
 	}
 }

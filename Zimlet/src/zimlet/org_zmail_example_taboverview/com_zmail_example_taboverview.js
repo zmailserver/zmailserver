@@ -17,25 +17,25 @@
  * Defines the Zimlet handler class.
  *   
  */
-function com_zimbra_example_taboverview_HandlerObject() {
+function org_zmail_example_taboverview_HandlerObject() {
 };
 
 /**
  * Makes the Zimlet class a subclass of ZmZimletBase.
  *
  */
-com_zimbra_example_taboverview_HandlerObject.prototype = new ZmZimletBase();
-com_zimbra_example_taboverview_HandlerObject.prototype.constructor = com_zimbra_example_taboverview_HandlerObject;
+org_zmail_example_taboverview_HandlerObject.prototype = new ZmZimletBase();
+org_zmail_example_taboverview_HandlerObject.prototype.constructor = org_zmail_example_taboverview_HandlerObject;
 
 /**
  * This method gets called by the Zimlet framework when the zimlet loads.
  *  
  */
-com_zimbra_example_taboverview_HandlerObject.prototype.init =
+org_zmail_example_taboverview_HandlerObject.prototype.init =
 function() {
 	
 	// create the tab application
-	this._tabAppName = this.createApp("Tab Label", "zimbraIcon", "Tab Tool Tip");
+	this._tabAppName = this.createApp("Tab Label", "zmailIcon", "Tab Tool Tip");
 	
 };
 
@@ -45,7 +45,7 @@ function() {
  * @param	{String}	appName		the application name
  * @param	{Boolean}	active		if <code>true</code>, the application status is open; otherwise, <code>false</code>
  */
-com_zimbra_example_taboverview_HandlerObject.prototype.appActive =
+org_zmail_example_taboverview_HandlerObject.prototype.appActive =
 function(appName, active) {
 	switch(appName) {
 		case this._tabAppName: {			
@@ -79,7 +79,7 @@ function(appName, active) {
  *  
  * @param	{String}	appName		the application name		
  */
-com_zimbra_example_taboverview_HandlerObject.prototype.appLaunch =
+org_zmail_example_taboverview_HandlerObject.prototype.appLaunch =
 function(appName) {
 	switch(appName) {
 		case this._tabAppName: {

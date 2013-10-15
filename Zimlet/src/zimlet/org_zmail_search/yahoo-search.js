@@ -13,13 +13,13 @@
  * ***** END LICENSE BLOCK *****
  */
 
-function Com_Zimbra_Search_Yahoo(zimlet) {
+function Com_Zmail_Search_Yahoo(zimlet) {
 	this.zimlet = zimlet;
 	this.icon = "Yahoo-Icon";
-	this.label = this.zimlet.getMessage("com_zimbra_search_yahoo");
+	this.label = this.zimlet.getMessage("org_zmail_search_yahoo");
 };
 
-Com_Zimbra_Search_Yahoo.prototype.getSearchFormHTML =
+Com_Zmail_Search_Yahoo.prototype.getSearchFormHTML =
 function(query) {
 	var zimlet = this.zimlet;
 	var props = {
@@ -30,4 +30,4 @@ function(query) {
 	return code;
 };
 
-Com_Zimbra_Search.registerHandler(Com_Zimbra_Search_Yahoo);
+Com_Zmail_Search.registerHandler(Com_Zmail_Search_Yahoo);

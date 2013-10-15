@@ -14,15 +14,15 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.octopus.tests.history;
+package org.zmail.qa.selenium.projects.octopus.tests.history;
 
 import org.testng.annotations.*;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.util.*;
 
-import static com.zimbra.qa.selenium.projects.octopus.ui.PageHistory.CONSTANTS.*;
-import com.zimbra.qa.selenium.projects.octopus.ui.PageHistory.*;
+import static org.zmail.qa.selenium.projects.octopus.ui.PageHistory.CONSTANTS.*;
+import org.zmail.qa.selenium.projects.octopus.ui.PageHistory.*;
 
 
 public class RefineHistory extends HistoryCommonTest {
@@ -71,17 +71,17 @@ public class RefineHistory extends HistoryCommonTest {
 		unMarkFileFavoriteViaSoap(app.zGetActiveAccount(), fileId);
 		
 		// share|revoke folder via soap
-		ZimbraAccount readWriteGrantee = getNewAccount();
+		ZmailAccount readWriteGrantee = getNewAccount();
         FolderItem folder = createFolderViaSoap(app.zGetActiveAccount());		  
 		shareFolderViaSoap(app.zGetActiveAccount(), readWriteGrantee, folder,SHARE_AS_READWRITE);
 		revokeShareFolderViaSoap(app.zGetActiveAccount(), readWriteGrantee, folder);
 		
 		//make comment via soap
-		String comment = "Comment" + ZimbraSeleniumProperties.getUniqueString();
+		String comment = "Comment" + ZmailSeleniumProperties.getUniqueString();
 		makeCommentViaSoap(app.zGetActiveAccount(), fileId, comment);
 	
 		//rename via soap
-		String newName = "New Name " + ZimbraSeleniumProperties.getUniqueString() +
+		String newName = "New Name " + ZmailSeleniumProperties.getUniqueString() +
         fileName.substring(fileName.indexOf("."),fileName.length());
 		renameViaSoap(app.zGetActiveAccount(), fileId, newName);
 

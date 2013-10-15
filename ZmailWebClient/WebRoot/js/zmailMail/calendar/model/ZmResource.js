@@ -32,12 +32,12 @@ ZmResource = function(id, list, resType) {
 	this.resType = resType;
 };
 
-ZmResource.F_capacity			= "zimbraCalResCapacity";
-ZmResource.F_contactMail		= "zimbraCalResContactEmail";
-ZmResource.F_locationName		= "zimbraCalResLocationDisplayName";
+ZmResource.F_capacity			= "zmailCalResCapacity";
+ZmResource.F_contactMail		= "zmailCalResContactEmail";
+ZmResource.F_locationName		= "zmailCalResLocationDisplayName";
 ZmResource.F_mail			= "email";
 ZmResource.F_name			= "fullName";
-ZmResource.F_type			= "zimbraCalResType";
+ZmResource.F_type			= "zmailCalResType";
 ZmResource.F_description		= "description";
 
 ZmResource.ATTR_LOCATION	= "Location";

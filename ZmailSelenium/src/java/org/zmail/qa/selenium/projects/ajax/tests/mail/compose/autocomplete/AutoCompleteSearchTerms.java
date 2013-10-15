@@ -14,20 +14,20 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.compose.autocomplete;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.compose.autocomplete;
 
 import java.util.List;
 
 import org.testng.annotations.*;
 
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew.Field;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.*;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew.Field;
 
 
 public class AutoCompleteSearchTerms extends PrefGroupMailByMessageTest {
@@ -37,8 +37,8 @@ public class AutoCompleteSearchTerms extends PrefGroupMailByMessageTest {
 	public AutoCompleteSearchTerms() throws HarnessException {
 		logger.info("New "+ AutoCompleteGAL.class.getCanonicalName());
 		
-		super.startingAccountPreferences.put("zimbraPrefComposeFormat", "text");
-		super.startingAccountPreferences.put("zimbraPrefGalAutoCompleteEnabled", "TRUE");
+		super.startingAccountPreferences.put("zmailPrefComposeFormat", "text");
+		super.startingAccountPreferences.put("zmailPrefGalAutoCompleteEnabled", "TRUE");
 	
 	}
 	
@@ -48,11 +48,11 @@ public class AutoCompleteSearchTerms extends PrefGroupMailByMessageTest {
 	public void AutCompleteSearchTerms_01() throws HarnessException {
 		
 		// See bug 46718
-		String StopWordsFirstName = "It" + ZimbraSeleniumProperties.getUniqueString();
-		String StopWordsLastName = "Be" + ZimbraSeleniumProperties.getUniqueString();
+		String StopWordsFirstName = "It" + ZmailSeleniumProperties.getUniqueString();
+		String StopWordsLastName = "Be" + ZmailSeleniumProperties.getUniqueString();
 
 
-		ZimbraAccount StopWordsAccount = new ZimbraAccount();
+		ZmailAccount StopWordsAccount = new ZmailAccount();
 		StopWordsAccount.setPref("givenName", StopWordsFirstName);
 		StopWordsAccount.setPref("sn", StopWordsLastName);
 		StopWordsAccount.setPref("displayName", StopWordsFirstName + " " + StopWordsLastName);
@@ -61,8 +61,8 @@ public class AutoCompleteSearchTerms extends PrefGroupMailByMessageTest {
 
 
 		// Message properties
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String body = "body" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String body = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		
@@ -103,10 +103,10 @@ public class AutoCompleteSearchTerms extends PrefGroupMailByMessageTest {
 	public void AutCompleteSearchTerms_02() throws HarnessException {
 		
 		// See bug 46950
-		String QueryWordsFirstName = "Andrew" + ZimbraSeleniumProperties.getUniqueString();
-		String QueryWordsLastName = "Subject" + ZimbraSeleniumProperties.getUniqueString();
+		String QueryWordsFirstName = "Andrew" + ZmailSeleniumProperties.getUniqueString();
+		String QueryWordsLastName = "Subject" + ZmailSeleniumProperties.getUniqueString();
 
-		ZimbraAccount QueryWordsAccount = new ZimbraAccount();
+		ZmailAccount QueryWordsAccount = new ZmailAccount();
 		QueryWordsAccount.setPref("givenName", QueryWordsFirstName);
 		QueryWordsAccount.setPref("sn", QueryWordsLastName);
 		QueryWordsAccount.setPref("displayName", QueryWordsFirstName + " " + QueryWordsLastName);
@@ -115,8 +115,8 @@ public class AutoCompleteSearchTerms extends PrefGroupMailByMessageTest {
 
 
 		// Message properties
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String body = "body" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String body = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		

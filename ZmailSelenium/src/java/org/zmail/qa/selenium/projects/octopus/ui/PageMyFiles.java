@@ -17,20 +17,20 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.octopus.ui;
+package org.zmail.qa.selenium.projects.octopus.ui;
 
 import java.io.File;
 import java.util.ArrayList;
 
-import com.zimbra.qa.selenium.framework.items.UploadProgressItem;
-import com.zimbra.qa.selenium.framework.ui.AbsApplication;
-import com.zimbra.qa.selenium.framework.ui.AbsPage;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.SleepUtil;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.octopus.ui.DialogError.DialogErrorID;
+import org.zmail.qa.selenium.framework.items.UploadProgressItem;
+import org.zmail.qa.selenium.framework.ui.AbsApplication;
+import org.zmail.qa.selenium.framework.ui.AbsPage;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.SleepUtil;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.octopus.ui.DialogError.DialogErrorID;
 
 public class PageMyFiles extends PageOctopus {
 
@@ -87,8 +87,8 @@ public class PageMyFiles extends PageOctopus {
 	}
 
 	@Override
-	public DialogError zGetErrorDialog(DialogErrorID zimbra) {
-		return (new DialogError(zimbra, this.MyApplication, this));
+	public DialogError zGetErrorDialog(DialogErrorID zmail) {
+		return (new DialogError(zmail, this.MyApplication, this));
 	}
 
 	@Override
@@ -435,7 +435,7 @@ public class PageMyFiles extends PageOctopus {
 	//Method for uploading a file using Dialog box. Needs fileName as parameter.
 	public void uploadFileUsingDialogBox(String fileName) throws HarnessException
 	{
-		String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+		String filePath = ZmailSeleniumProperties.getBaseDirectory()
 		+ "/data/public/other/" +fileName;
 
 		File fileTobeUploaded = new File(filePath);

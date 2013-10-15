@@ -1,4 +1,4 @@
-AjxTemplate.register("com_zimbra_example_tabtemplate.templates.Tab#Main", 
+AjxTemplate.register("org_zmail_example_tabtemplate.templates.Tab#Main", 
 function(name, params, data, buffer) {
 	var _hasBuffer = Boolean(buffer);
 	data = (typeof data == "string" ? { id: data } : data) || {};
@@ -20,5 +20,5 @@ function(name, params, data, buffer) {
 {
 	"id": "Main"
 }, false);
-AjxTemplate.register("com_zimbra_example_tabtemplate.templates.Tab", AjxTemplate.getTemplate("com_zimbra_example_tabtemplate.templates.Tab#Main"), AjxTemplate.getParams("com_zimbra_example_tabtemplate.templates.Tab#Main"));
+AjxTemplate.register("org_zmail_example_tabtemplate.templates.Tab", AjxTemplate.getTemplate("org_zmail_example_tabtemplate.templates.Tab#Main"), AjxTemplate.getParams("org_zmail_example_tabtemplate.templates.Tab#Main"));
 

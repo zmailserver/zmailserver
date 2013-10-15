@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
 --%>
 <%@ tag body-content="scriptless" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -67,7 +67,7 @@
             return "";
         }
     };
-    var myDataSource = new YAHOO.widget.DS_XHR("/zimbra/h/ac", ["Result","m","e","f","l","g"]);
+    var myDataSource = new YAHOO.widget.DS_XHR("/zmail/h/ac", ["Result","m","e","f","l","g"]);
     var initAuto = function(field,container) {
         var ac = new YAHOO.widget.AutoComplete(field, container, myDataSource);
         ac.delimChar = [",",";"];

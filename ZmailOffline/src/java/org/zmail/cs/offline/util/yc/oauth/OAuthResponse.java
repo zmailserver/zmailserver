@@ -12,12 +12,12 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.util.yc.oauth;
+package org.zmail.cs.offline.util.yc.oauth;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.zimbra.cs.offline.util.yc.YContactException;
+import org.zmail.cs.offline.util.yc.YContactException;
 
 public abstract class OAuthResponse {
 

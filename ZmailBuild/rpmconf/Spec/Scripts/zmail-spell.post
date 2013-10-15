@@ -14,9 +14,9 @@
 # ***** END LICENSE BLOCK *****
 # 
 
-rm -f /opt/zimbra/aspell
-ln -s /opt/zimbra/aspell-0.60.6.1 /opt/zimbra/aspell
+rm -f /opt/zmail/aspell
+ln -s /opt/zmail/aspell-0.60.6.1 /opt/zmail/aspell
 
-if [ -x "/opt/zimbra/libexec/zmfixperms" ]; then
-  /opt/zimbra/libexec/zmfixperms
+if [ -x "/opt/zmail/libexec/zmfixperms" ]; then
+  /opt/zmail/libexec/zmfixperms
 fi

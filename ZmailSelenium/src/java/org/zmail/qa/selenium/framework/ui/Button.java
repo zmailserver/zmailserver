@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.ui;
+package org.zmail.qa.selenium.framework.ui;
 
 
 
@@ -108,7 +108,7 @@ public class Button {
 	public static final Button B_EDITMESSAGE = new Button("B_EDITMESSAGE");
 	public static final Button B_CANCEL_CONFIRMDELETE = new Button("B_CANCEL_CONFIRMDELETE");
 
-	// Zimbra Desktop's Accounts page
+	// Zmail Desktop's Accounts page
 	public static final Button B_VALIDATE_AND_SAVE = new Button("B_VALIDATE_AND_SAVE");
 
 	// MailPage buttons and pulldown options

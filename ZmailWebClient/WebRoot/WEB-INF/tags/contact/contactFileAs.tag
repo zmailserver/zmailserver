@@ -14,10 +14,10 @@
 --%>
 <%@ tag body-content="empty" %>
 <%@ tag import="java.text.*,java.util.*" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
-<%@ tag import="com.zimbra.cs.taglib.bean.BeanUtils,com.zimbra.cs.taglib.bean.ZContactBean" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
+<%@ tag import="org.zmail.cs.taglib.bean.BeanUtils,org.zmail.cs.taglib.bean.ZContactBean" %>
 <%@ attribute name="ruby" rtexprvalue="true" required="false" type="java.lang.Boolean" %>
-<%@ attribute name="contact" rtexprvalue="true" required="false" type="com.zimbra.cs.taglib.bean.ZContactBean" %>
+<%@ attribute name="contact" rtexprvalue="true" required="false" type="org.zmail.cs.taglib.bean.ZContactBean" %>
 <%@ attribute name="fileAs" rtexprvalue="true" required="false" %>
 <%@ attribute name="firstName" rtexprvalue="true" required="false" %>
 <%@ attribute name="lastName" rtexprvalue="true" required="false" %>
@@ -29,8 +29,8 @@
 <%@ attribute name="phoneticCompany" rtexprvalue="true" required="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
-<%@ taglib prefix="app" uri="com.zimbra.htmlclient" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
+<%@ taglib prefix="app" uri="org.zmail.htmlclient" %>
 <c:set var="fileAs" value="${not empty contact ? contact.fileAs : fileAs}" />
 <c:set var="firstName" value="${not empty contact ? contact.firstName : firstName}" />
 <c:set var="lastName" value="${not empty contact ? contact.lastName : lastName}" />

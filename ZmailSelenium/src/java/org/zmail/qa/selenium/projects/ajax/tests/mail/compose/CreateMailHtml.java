@@ -14,15 +14,15 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.compose;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.compose;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew;
 
 public class CreateMailHtml extends PrefGroupMailByMessageTest {
 
@@ -31,7 +31,7 @@ public class CreateMailHtml extends PrefGroupMailByMessageTest {
 		
 		
 		
-		super.startingAccountPreferences.put("zimbraPrefComposeFormat", "html");
+		super.startingAccountPreferences.put("zmailPrefComposeFormat", "html");
 		
 	}
 	
@@ -42,9 +42,9 @@ public class CreateMailHtml extends PrefGroupMailByMessageTest {
 		
 		// Create the message data to be sent
 		MailItem mail = new MailItem();
-		mail.dToRecipients.add(new RecipientItem(ZimbraAccount.AccountA()));
-		mail.dSubject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		mail.dBodyHtml = "body" + ZimbraSeleniumProperties.getUniqueString();
+		mail.dToRecipients.add(new RecipientItem(ZmailAccount.AccountA()));
+		mail.dSubject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		mail.dBodyHtml = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		// Open the new mail form
@@ -58,26 +58,26 @@ public class CreateMailHtml extends PrefGroupMailByMessageTest {
 		mailform.zSubmit();
 				
 		// Can't use importFromSOAP, since that only parses the text part
-		// MailItem received = MailItem.importFromSOAP(ZimbraAccount.AccountA(), "subject:("+ mail.dSubject +")");
+		// MailItem received = MailItem.importFromSOAP(ZmailAccount.AccountA(), "subject:("+ mail.dSubject +")");
 
-		ZimbraAccount.AccountA().soapSend(
-						"<SearchRequest types='message' xmlns='urn:zimbraMail'>"
+		ZmailAccount.AccountA().soapSend(
+						"<SearchRequest types='message' xmlns='urn:zmailMail'>"
 				+			"<query>subject:("+ mail.dSubject +")</query>"
 				+		"</SearchRequest>");
-		String id = ZimbraAccount.AccountA().soapSelectValue("//mail:m", "id");
+		String id = ZmailAccount.AccountA().soapSelectValue("//mail:m", "id");
 		
-		ZimbraAccount.AccountA().soapSend(
-						"<GetMsgRequest xmlns='urn:zimbraMail'>"
+		ZmailAccount.AccountA().soapSend(
+						"<GetMsgRequest xmlns='urn:zmailMail'>"
 				+			"<m id='"+ id +"' html='1'/>"
 				+		"</GetMsgRequest>");
 
-		String from = ZimbraAccount.AccountA().soapSelectValue("//mail:e[@t='f']", "a");
-		String to = ZimbraAccount.AccountA().soapSelectValue("//mail:e[@t='t']", "a");
-		String subject = ZimbraAccount.AccountA().soapSelectValue("//mail:su", null);
-		String html = ZimbraAccount.AccountA().soapSelectValue("//mail:mp[@ct='text/html']//mail:content", null);
+		String from = ZmailAccount.AccountA().soapSelectValue("//mail:e[@t='f']", "a");
+		String to = ZmailAccount.AccountA().soapSelectValue("//mail:e[@t='t']", "a");
+		String subject = ZmailAccount.AccountA().soapSelectValue("//mail:su", null);
+		String html = ZmailAccount.AccountA().soapSelectValue("//mail:mp[@ct='text/html']//mail:content", null);
 		
 		ZAssert.assertEquals(from, app.zGetActiveAccount().EmailAddress, "Verify the from field is correct");
-		ZAssert.assertEquals(to, ZimbraAccount.AccountA().EmailAddress, "Verify the to field is correct");
+		ZAssert.assertEquals(to, ZmailAccount.AccountA().EmailAddress, "Verify the to field is correct");
 		ZAssert.assertEquals(subject, mail.dSubject, "Verify the subject field is correct");
 		ZAssert.assertStringContains(html, mail.dBodyHtml, "Verify the html content");
 

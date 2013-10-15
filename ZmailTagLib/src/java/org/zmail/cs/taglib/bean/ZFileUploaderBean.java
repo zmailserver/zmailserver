@@ -12,10 +12,10 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.bean;
+package org.zmail.cs.taglib.bean;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.client.ZMailbox;
+import org.zmail.common.service.ServiceException;
+import org.zmail.client.ZMailbox;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadBase;
 import org.apache.commons.fileupload.FileUploadException;

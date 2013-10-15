@@ -17,17 +17,17 @@
 /**
  * Constructor.
  */
-function com_zimbra_discover_HandlerObject() {
+function org_zmail_discover_HandlerObject() {
 }
 
-com_zimbra_discover_HandlerObject.prototype = new ZmZimletBase();
-com_zimbra_discover_HandlerObject.prototype.constructor = com_zimbra_discover_HandlerObject;
+org_zmail_discover_HandlerObject.prototype = new ZmZimletBase();
+org_zmail_discover_HandlerObject.prototype.constructor = org_zmail_discover_HandlerObject;
 
 /**
  * Simplify handler object
  *
  */
-var DiscoverZimlet = com_zimbra_discover_HandlerObject;
+var DiscoverZimlet = org_zmail_discover_HandlerObject;
 
 
 DiscoverZimlet.discover = "DISCOVER";
@@ -615,5 +615,5 @@ DiscoverZimlet.prototype._refreshBrowser =
 function() {
 	window.onbeforeunload = null;
 	var url = AjxUtil.formatUrl({});
-	ZmZimbraMail.sendRedirect(url);
+	ZmZmailMail.sendRedirect(url);
 };

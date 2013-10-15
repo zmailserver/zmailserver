@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.db;
+package org.zmail.cs.db;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,16 +23,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Pair;
-import com.zimbra.cs.db.DbPool.DbConnection;
-import com.zimbra.cs.mailbox.ChangeTrackingMailbox;
-import com.zimbra.cs.mailbox.Flag;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.util.TypedIdList;
-import com.zimbra.cs.session.PendingModifications.Change;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Pair;
+import org.zmail.cs.db.DbPool.DbConnection;
+import org.zmail.cs.mailbox.ChangeTrackingMailbox;
+import org.zmail.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.util.TypedIdList;
+import org.zmail.cs.session.PendingModifications.Change;
 
 public class DbOfflineMailbox {
 

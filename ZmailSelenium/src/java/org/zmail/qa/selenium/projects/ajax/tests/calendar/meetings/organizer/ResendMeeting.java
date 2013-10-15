@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.calendar.meetings.organizer;
+package org.zmail.qa.selenium.projects.ajax.tests.calendar.meetings.organizer;
 
 import java.util.Calendar;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.items.AppointmentItem;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.CalendarWorkWeekTest;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.items.AppointmentItem;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.CalendarWorkWeekTest;
 
 public class ResendMeeting extends CalendarWorkWeekTest {	
 	
@@ -48,7 +48,7 @@ public class ResendMeeting extends CalendarWorkWeekTest {
 		
 		// Creating a meeting
 		String tz = ZTimeZone.TimeZoneEST.getID();
-		String subject = ZimbraSeleniumProperties.getUniqueString();
+		String subject = ZmailSeleniumProperties.getUniqueString();
 		
 		// Absolute dates in UTC zone
 		Calendar now = this.calendarWeekDayUTC;
@@ -56,31 +56,31 @@ public class ResendMeeting extends CalendarWorkWeekTest {
 		ZDate endUTC   = new ZDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH) + 1, now.get(Calendar.DAY_OF_MONTH), 14, 0, 0);
 		
 		app.zGetActiveAccount().soapSend(
-                "<CreateAppointmentRequest xmlns='urn:zimbraMail'>" +
+                "<CreateAppointmentRequest xmlns='urn:zmailMail'>" +
                      "<m>"+
                      	"<inv method='REQUEST' type='event' status='CONF' draft='0' class='PUB' fb='B' transp='O' allDay='0' name='"+ subject +"'>"+
                      		"<s d='"+ startUTC.toTimeZone(tz).toYYYYMMDDTHHMMSS() +"' tz='"+ tz +"'/>" +
                      		"<e d='"+ endUTC.toTimeZone(tz).toYYYYMMDDTHHMMSS() +"' tz='"+ tz +"'/>" +
                      		"<or a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
-                     		"<at role='REQ' ptst='NE' rsvp='1' a='" + ZimbraAccount.AccountA().EmailAddress + "' d='2'/>" + 
+                     		"<at role='REQ' ptst='NE' rsvp='1' a='" + ZmailAccount.AccountA().EmailAddress + "' d='2'/>" + 
                      	"</inv>" +
-                     	"<e a='"+ ZimbraAccount.AccountA().EmailAddress +"' t='t'/>" +
+                     	"<e a='"+ ZmailAccount.AccountA().EmailAddress +"' t='t'/>" +
                      	"<mp content-type='text/plain'>" +
-                     		"<content>"+ ZimbraSeleniumProperties.getUniqueString() +"</content>" +
+                     		"<content>"+ ZmailSeleniumProperties.getUniqueString() +"</content>" +
                      	"</mp>" +
                      "<su>"+ subject +"</su>" +
                      "</m>" +
                "</CreateAppointmentRequest>");
         
 		// Delete the invite from the attendee
-		ZimbraAccount.AccountA().soapSend(
-				"<SearchRequest xmlns='urn:zimbraMail' types='message'>"
+		ZmailAccount.AccountA().soapSend(
+				"<SearchRequest xmlns='urn:zmailMail' types='message'>"
 			+		"<query>subject:("+ subject +")</query>"
 			+	"</SearchRequest>");
-		String id = ZimbraAccount.AccountA().soapSelectValue("//mail:m", "id");
+		String id = ZmailAccount.AccountA().soapSelectValue("//mail:m", "id");
 		
-		ZimbraAccount.AccountA().soapSend(
-				"<ItemActionRequest  xmlns='urn:zimbraMail'>"
+		ZmailAccount.AccountA().soapSend(
+				"<ItemActionRequest  xmlns='urn:zmailMail'>"
 			+		"<action id='"+ id +"' op='delete'/>"
 			+	"</ItemActionRequest>");
 
@@ -103,20 +103,20 @@ public class ResendMeeting extends CalendarWorkWeekTest {
 		
 		
 		// Verify the new invitation appears in the inbox
-		ZimbraAccount.AccountA().soapSend(
-				"<SearchRequest xmlns='urn:zimbraMail' types='message'>"
+		ZmailAccount.AccountA().soapSend(
+				"<SearchRequest xmlns='urn:zmailMail' types='message'>"
 			+		"<query>subject:("+ subject +")</query>"
 			+	"</SearchRequest>");
-		id = ZimbraAccount.AccountA().soapSelectValue("//mail:m", "id");
+		id = ZmailAccount.AccountA().soapSelectValue("//mail:m", "id");
 		ZAssert.assertNotNull(id, "Verify the new invitation appears in the attendee's inbox");
 		
-		ZimbraAccount.AccountA().soapSend(
-				"<GetMsgRequest  xmlns='urn:zimbraMail'>"
+		ZmailAccount.AccountA().soapSend(
+				"<GetMsgRequest  xmlns='urn:zmailMail'>"
 			+		"<m id='"+ id +"'/>"
 			+	"</GetMsgRequest>");
 
 		// Verify only one appointment is in the calendar
-		AppointmentItem a = AppointmentItem.importFromSOAP(ZimbraAccount.AccountA(), "subject:("+ subject + ")");
+		AppointmentItem a = AppointmentItem.importFromSOAP(ZmailAccount.AccountA(), "subject:("+ subject + ")");
 		ZAssert.assertNotNull(a, "Verify only one appointment matches in the calendar");
 
 

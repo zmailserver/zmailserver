@@ -14,18 +14,18 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.calendar.appointments.views.week.singleday;
+package org.zmail.qa.selenium.projects.ajax.tests.calendar.appointments.views.week.singleday;
 
 import java.util.Calendar;
 import java.util.HashMap;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.*;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.*;
 
 
 public class DragAndDropAppointment extends CalendarWorkWeekTest {
@@ -41,7 +41,7 @@ public class DragAndDropAppointment extends CalendarWorkWeekTest {
 		super.startingAccountPreferences = new HashMap<String, String>() {
 			private static final long serialVersionUID = -2913827779459595178L;
 		{
-		    put("zimbraPrefCalendarInitialView", "week");
+		    put("zmailPrefCalendarInitialView", "week");
 		}};
 	}
 	
@@ -49,14 +49,14 @@ public class DragAndDropAppointment extends CalendarWorkWeekTest {
 			groups = { "smoke" })
 	public void DragAndDropAppointment_01() throws HarnessException {
 
-		String foldername = "folder"+ ZimbraSeleniumProperties.getUniqueString();
+		String foldername = "folder"+ ZmailSeleniumProperties.getUniqueString();
 
 		// Create a calendar to move the appointment into
 		//
 		FolderItem rootFolder = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.UserRoot);
 		
 		app.zGetActiveAccount().soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+					"<CreateFolderRequest xmlns='urn:zmailMail'>" +
 						"<folder name='" + foldername +"' l='"+ rootFolder.getId() +"' view='appointment'/>" +
 					"</CreateFolderRequest>");
 		FolderItem subcalendarFolder = FolderItem.importFromSOAP(app.zGetActiveAccount(), foldername);
@@ -66,8 +66,8 @@ public class DragAndDropAppointment extends CalendarWorkWeekTest {
 
 		// Creating objects for appointment data
 		String tz = ZTimeZone.TimeZoneEST.getID();
-		String apptSubject = ZimbraSeleniumProperties.getUniqueString();
-		String apptBody = ZimbraSeleniumProperties.getUniqueString();
+		String apptSubject = ZmailSeleniumProperties.getUniqueString();
+		String apptBody = ZmailSeleniumProperties.getUniqueString();
 		
 		// Absolute dates in UTC zone
 		Calendar now = this.calendarWeekDayUTC;
@@ -75,7 +75,7 @@ public class DragAndDropAppointment extends CalendarWorkWeekTest {
 		ZDate endUTC   = new ZDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH) + 1, now.get(Calendar.DAY_OF_MONTH), 14, 0, 0);
 		
         app.zGetActiveAccount().soapSend(
-    			"<CreateAppointmentRequest xmlns='urn:zimbraMail'>"
+    			"<CreateAppointmentRequest xmlns='urn:zmailMail'>"
     		+		"<m>"
     		+			"<inv method='REQUEST' type='event' fb='B' transp='O' allDay='0' name='"+ apptSubject +"'>"
     		+				"<s d='"+ startUTC.toTimeZone(tz).toYYYYMMDDTHHMMSS() +"' tz='"+ tz +"'/>"
@@ -127,8 +127,8 @@ public class DragAndDropAppointment extends CalendarWorkWeekTest {
 		
 		// Creating objects for appointment data
 		String tz = ZTimeZone.TimeZoneEST.getID();
-		String apptSubject = ZimbraSeleniumProperties.getUniqueString();
-		String apptBody = ZimbraSeleniumProperties.getUniqueString();
+		String apptSubject = ZmailSeleniumProperties.getUniqueString();
+		String apptBody = ZmailSeleniumProperties.getUniqueString();
 		
 		// Absolute dates in UTC zone
 		Calendar now = this.calendarWeekDayUTC;
@@ -136,7 +136,7 @@ public class DragAndDropAppointment extends CalendarWorkWeekTest {
 		ZDate endUTC   = new ZDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH) + 1, now.get(Calendar.DAY_OF_MONTH), 13, 0, 0);
 		
         app.zGetActiveAccount().soapSend(
-    			"<CreateAppointmentRequest xmlns='urn:zimbraMail'>"
+    			"<CreateAppointmentRequest xmlns='urn:zmailMail'>"
     		+		"<m>"
     		+			"<inv method='REQUEST' type='event' fb='B' transp='O' allDay='0' name='"+ apptSubject +"'>"
     		+				"<s d='"+ startUTC.toTimeZone(tz).toYYYYMMDDTHHMMSS() +"' tz='"+ tz +"'/>"
@@ -152,18 +152,18 @@ public class DragAndDropAppointment extends CalendarWorkWeekTest {
         String apptId = app.zGetActiveAccount().soapSelectValue("//mail:CreateAppointmentResponse", "apptId");
         
         app.zGetActiveAccount().soapSend(
-        		"<GetAppointmentRequest id='"+ apptId + "' xmlns='urn:zimbraMail'/>");
+        		"<GetAppointmentRequest id='"+ apptId + "' xmlns='urn:zmailMail'/>");
         String s = app.zGetActiveAccount().soapSelectValue("//mail:s", "d");
         String e = app.zGetActiveAccount().soapSelectValue("//mail:e", "d");
 
         //Refresh view after Appointment creation
         app.zPageCalendar.zToolbarPressButton(Button.B_REFRESH);
 
-		String otherSubject = ZimbraSeleniumProperties.getUniqueString();
+		String otherSubject = ZmailSeleniumProperties.getUniqueString();
 		ZDate otherStartUTC = new ZDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH) + 1, now.get(Calendar.DAY_OF_MONTH), 14, 0, 0);
 		ZDate otherEndUTC   = new ZDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH) + 1, now.get(Calendar.DAY_OF_MONTH), 15, 0, 0);
         app.zGetActiveAccount().soapSend(
-    			"<CreateAppointmentRequest xmlns='urn:zimbraMail'>"
+    			"<CreateAppointmentRequest xmlns='urn:zmailMail'>"
     		+		"<m>"
     		+			"<inv method='REQUEST' type='event' fb='B' transp='O' allDay='0' name='"+ otherSubject +"'>"
     		+				"<s d='"+ otherStartUTC.toTimeZone(tz).toYYYYMMDDTHHMMSS() +"' tz='"+ tz +"'/>"
@@ -171,7 +171,7 @@ public class DragAndDropAppointment extends CalendarWorkWeekTest {
     		+				"<or a='"+ app.zGetActiveAccount().EmailAddress +"'/>" 
     		+			"</inv>" 
     		+			"<mp content-type='text/plain'>" 
-    		+				"<content>" + ZimbraSeleniumProperties.getUniqueString() + "</content>" 
+    		+				"<content>" + ZmailSeleniumProperties.getUniqueString() + "</content>" 
     		+			"</mp>"
     		+			"<su>" + otherSubject + "</su>" 
     		+		"</m>" 
@@ -197,7 +197,7 @@ public class DragAndDropAppointment extends CalendarWorkWeekTest {
 		// (It is difficult to know for certain what time is correct.  For
 		// now, just make sure it was moved somewhere.)
         app.zGetActiveAccount().soapSend(
-        		"<GetAppointmentRequest id='"+ apptId + "' xmlns='urn:zimbraMail'/>");
+        		"<GetAppointmentRequest id='"+ apptId + "' xmlns='urn:zmailMail'/>");
         String s1 = app.zGetActiveAccount().soapSelectValue("//mail:s", "d");
         String e2 = app.zGetActiveAccount().soapSelectValue("//mail:e", "d");
 

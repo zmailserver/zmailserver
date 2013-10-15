@@ -14,4 +14,4 @@
 # ***** END LICENSE BLOCK *****
 #
 
-exec zmjava com.zimbra.tarformatter.tarFormatter "$@"
+exec zmjava org.zmail.tarformatter.tarFormatter "$@"

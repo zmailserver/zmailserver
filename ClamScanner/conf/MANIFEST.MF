@@ -1,1 +1,1 @@
-Zimbra-Extension-Class: com.zimbra.clam.ClamScanner
+Zmail-Extension-Class: org.zmail.clam.ClamScanner

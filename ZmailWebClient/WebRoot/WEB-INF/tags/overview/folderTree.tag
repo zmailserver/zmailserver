@@ -14,11 +14,11 @@
 --%>
 <%@ tag body-content="empty" %>
 <%@ attribute name="editmode" rtexprvalue="true" required="false" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
-<%@ taglib prefix="app" uri="com.zimbra.htmlclient" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
+<%@ taglib prefix="app" uri="org.zmail.htmlclient" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
 <%@ attribute name="keys" rtexprvalue="true" required="true" %>
 
 <app:handleError>
@@ -34,12 +34,12 @@
     </c:choose>
     <c:if test="${expanded}">
          <zm:modifyPrefs var="updated">
-            <zm:pref name="zimbraPrefFolderTreeOpen" value="TRUE"/>
+            <zm:pref name="zmailPrefFolderTreeOpen" value="TRUE"/>
          </zm:modifyPrefs>
     </c:if>
     <c:if test="${not expanded}">
          <zm:modifyPrefs var="updated">
-            <zm:pref name="zimbraPrefFolderTreeOpen" value="FALSE"/>
+            <zm:pref name="zmailPrefFolderTreeOpen" value="FALSE"/>
          </zm:modifyPrefs>
     </c:if>
     <c:if test="${updated}">

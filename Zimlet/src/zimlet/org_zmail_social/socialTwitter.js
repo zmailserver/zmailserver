@@ -13,9 +13,9 @@
  * ***** END LICENSE BLOCK *****
  */
 
-//Author: Raja Rao DV (rrao@zimbra.com)
+//Author: Raja Rao DV (rrao@zmail.com)
 
-function com_zimbra_socialTwitter(zimlet, preferences) {
+function org_zmail_socialTwitter(zimlet, preferences) {
 	this.zimlet = zimlet;
 	this.preferences = preferences;
 	this.allSearches = new Array();
@@ -33,24 +33,24 @@ function com_zimbra_socialTwitter(zimlet, preferences) {
 		//ignore
 	}
 }
-com_zimbra_socialTwitter.FRIENDS_TIMELINE_URL = "https://api.twitter.com/1/statuses/friends_timeline.json";
-com_zimbra_socialTwitter.MENTIONS_URL = "https://api.twitter.com/1/statuses/mentions.json";
-com_zimbra_socialTwitter.DM_URL = "https://api.twitter.com/1/direct_messages.json";
-com_zimbra_socialTwitter.DM_URL_POST = "https://api.twitter.com/1/direct_messages/new.json";
-com_zimbra_socialTwitter.UPDATE_URL = "http://api.twitter.com/1/statuses/update.json";
-com_zimbra_socialTwitter.PROFILE_BASE_URL = "https://twitter.com/statuses/user_timeline/";
-com_zimbra_socialTwitter.DELETE_POST_BASE_URL = "https://api.twitter.com/1/statuses/destroy/";
-com_zimbra_socialTwitter.SEARCH_BASE_URL = "http://search.twitter.com/search.json";
-com_zimbra_socialTwitter.FRIENDSHIP_BASE_URL = "https://twitter.com/friendships/show.json";
+org_zmail_socialTwitter.FRIENDS_TIMELINE_URL = "https://api.twitter.com/1/statuses/friends_timeline.json";
+org_zmail_socialTwitter.MENTIONS_URL = "https://api.twitter.com/1/statuses/mentions.json";
+org_zmail_socialTwitter.DM_URL = "https://api.twitter.com/1/direct_messages.json";
+org_zmail_socialTwitter.DM_URL_POST = "https://api.twitter.com/1/direct_messages/new.json";
+org_zmail_socialTwitter.UPDATE_URL = "http://api.twitter.com/1/statuses/update.json";
+org_zmail_socialTwitter.PROFILE_BASE_URL = "https://twitter.com/statuses/user_timeline/";
+org_zmail_socialTwitter.DELETE_POST_BASE_URL = "https://api.twitter.com/1/statuses/destroy/";
+org_zmail_socialTwitter.SEARCH_BASE_URL = "http://search.twitter.com/search.json";
+org_zmail_socialTwitter.FRIENDSHIP_BASE_URL = "https://twitter.com/friendships/show.json";
 
 
-com_zimbra_socialTwitter.prototype._getTodayStr = function() {
+org_zmail_socialTwitter.prototype._getTodayStr = function() {
 	var todayDate = new Date();
 	var todayStart = new Date(todayDate.getFullYear(), todayDate.getMonth(), todayDate.getDate());
 	return this._normalizeDate(todayStart.getMonth() + 1, todayStart.getDate(), todayStart.getFullYear());
 };
 
-com_zimbra_socialTwitter.prototype._normalizeDate =
+org_zmail_socialTwitter.prototype._normalizeDate =
 function(month, day, year) {
 	var fString = [];
 	var ds = I18nMsg.formatDateShort.toLowerCase();
@@ -78,14 +78,14 @@ function social_sortTimeObjs(a, b) {
 	return ((x > y) ? 1 : ((x < y) ? -1 : 0));
 }
 
-com_zimbra_socialTwitter.prototype.getTwitterTrends =
+org_zmail_socialTwitter.prototype.getTwitterTrends =
 function() {
 	//23424977 is woeid for USA
 	var entireurl = ZmZimletBase.PROXY + AjxStringUtil.urlComponentEncode("https://api.twitter.com/1/trends/23424977.json");
 	AjxRpc.invoke(null, entireurl, null, new AjxCallback(this, this._trendsCallback), true);
 };
 
-com_zimbra_socialTwitter.prototype._trendsCallback =
+org_zmail_socialTwitter.prototype._trendsCallback =
 function(response) {
 	var jsonObj = this.zimlet._extractJSONResponse(null, this.zimlet.getMessage("twitterError"), response);
 	var trends = [];
@@ -110,18 +110,18 @@ function(response) {
 	}
 };
 
-com_zimbra_socialTwitter.prototype.twitterSearch =
+org_zmail_socialTwitter.prototype.twitterSearch =
 function(params) {
 	var components = new Array();
 	components["rpp"] = this.preferences.social_pref_numberofTweetsSearchesToReturn;
 	components["q"] = params.query;
 	this._addSinceAndMaxIds(params.tableId, components);
 	var callback = new AjxCallback(this, this._twitterSearchCallback, params);
-	this.zimlet.socialOAuth.makeSimpleHTTPGet({url: com_zimbra_socialTwitter.SEARCH_BASE_URL, components: components, callback: callback});
+	this.zimlet.socialOAuth.makeSimpleHTTPGet({url: org_zmail_socialTwitter.SEARCH_BASE_URL, components: components, callback: callback});
 
 };
 
-com_zimbra_socialTwitter.prototype._twitterSearchCallback =
+org_zmail_socialTwitter.prototype._twitterSearchCallback =
 function(params, response) {
 	var jsonObj = this.zimlet._extractJSONResponse(params.tableId, this.zimlet.getMessage("twitterError"), response);
 	if (jsonObj.results) {
@@ -130,7 +130,7 @@ function(params, response) {
 	this.zimlet.createCardView({tableId:params.tableId, items:jsonObj, type:params.type, additionalParams:params});
 };
 
-com_zimbra_socialTwitter.prototype.getTwitterFeeds =
+org_zmail_socialTwitter.prototype.getTwitterFeeds =
 function(params) {
 	var account = params.account;
 	var callback = params.callback;
@@ -144,17 +144,17 @@ function(params) {
 	var url = "";
 	var useSimpleHttpGet = false;
 	if (type == "ACCOUNT") {
-		url = com_zimbra_socialTwitter.FRIENDS_TIMELINE_URL;
+		url = org_zmail_socialTwitter.FRIENDS_TIMELINE_URL;
 	} else if (type == "DIRECT_MSGS") {
-		url = com_zimbra_socialTwitter.DM_URL;
+		url = org_zmail_socialTwitter.DM_URL;
 	} else if (type == "MENTIONS") {
-		url = com_zimbra_socialTwitter.MENTIONS_URL;
+		url = org_zmail_socialTwitter.MENTIONS_URL;
 	} else if (type == "SENT_MSGS") {
 		useSimpleHttpGet = true;
-		url = [com_zimbra_socialTwitter.PROFILE_BASE_URL, params.account.screen_name, ".json"].join("");
+		url = [org_zmail_socialTwitter.PROFILE_BASE_URL, params.account.screen_name, ".json"].join("");
 	} else if (type == "PROFILE_MSGS") {
 		useSimpleHttpGet = true;
-		url = [com_zimbra_socialTwitter.PROFILE_BASE_URL, params.screen_name, ".json"].join("");
+		url = [org_zmail_socialTwitter.PROFILE_BASE_URL, params.screen_name, ".json"].join("");
 	}
 	if(useSimpleHttpGet) {
 		this.zimlet.socialOAuth.makeSimpleHTTPGet({url: url, components: components, callback: callback});
@@ -163,7 +163,7 @@ function(params) {
 	}
 };
 
-com_zimbra_socialTwitter.prototype._twitterItemsHandler =
+org_zmail_socialTwitter.prototype._twitterItemsHandler =
 function(params, response) {
 	var jsonObj = this.zimlet._extractJSONResponse(params.tableId, this.zimlet.getMessage("twitterError"), response);
 	if (jsonObj.results) {
@@ -172,15 +172,15 @@ function(params, response) {
 	this.zimlet.createCardView({tableId:params.tableId, items:jsonObj, type:params.type, additionalParams:params});
 };
 
-com_zimbra_socialTwitter.prototype._checkIfFollowing = function(params) {
+org_zmail_socialTwitter.prototype._checkIfFollowing = function(params) {
 	var components = new Array();
 	components["source_screen_name"] = params.account.name;
 	components["target_screen_name"] = params.profileAccnt.screen_name;
 	var callback = new AjxCallback(this, this._checkIfFollowingCallback, params);
-	this.zimlet.socialOAuth.makeSimpleHTTPGet({url: com_zimbra_socialTwitter.FRIENDSHIP_BASE_URL, components: components, callback: callback});
+	this.zimlet.socialOAuth.makeSimpleHTTPGet({url: org_zmail_socialTwitter.FRIENDSHIP_BASE_URL, components: components, callback: callback});
 };
 
-com_zimbra_socialTwitter.prototype._checkIfFollowingCallback = function(params, response) {
+org_zmail_socialTwitter.prototype._checkIfFollowingCallback = function(params, response) {
 	var text = response.text;
 	var jsonObj = eval("(" + text + ")");
 	params["following"] = false;
@@ -190,7 +190,7 @@ com_zimbra_socialTwitter.prototype._checkIfFollowingCallback = function(params, 
 	this._addFollowUnFollowBtn(params);
 };
 
-com_zimbra_socialTwitter.prototype._addFollowUnFollowBtn = function(params) {
+org_zmail_socialTwitter.prototype._addFollowUnFollowBtn = function(params) {
 	var btn = new DwtButton({parent:this.zimlet.getShell()});
 	if (params.following) {
 		btn.setText(this.zimlet.getMessage("unFollow"));
@@ -205,7 +205,7 @@ com_zimbra_socialTwitter.prototype._addFollowUnFollowBtn = function(params) {
 	}
 };
 
-com_zimbra_socialTwitter.prototype._twitterFollowMe =
+org_zmail_socialTwitter.prototype._twitterFollowMe =
 function(origParams) {
 	var profileAccnt = origParams.profileAccnt;
 	var profileId = profileAccnt.id ? profileAccnt.id : profileAccnt.from_user_id;
@@ -219,14 +219,14 @@ function(origParams) {
 	this._makeHTTPPost(params);
 };
 
-com_zimbra_socialTwitter.prototype._makeHTTPPost =
+org_zmail_socialTwitter.prototype._makeHTTPPost =
 function(params) {
 	var account = params.account;
 	this.zimlet.socialOAuth.setAuthTokens({oauth_token: account.oauth_token, oauth_token_secret: account.oauth_token_secret});
 	this.zimlet.socialOAuth.makeHTTPPost(params);
 };
 
-com_zimbra_socialTwitter.prototype._twitterFollowMeCallback =
+org_zmail_socialTwitter.prototype._twitterFollowMeCallback =
 function(origParams, response) {
 	var text = response.text;
 	var jsonObj = eval("(" + text + ")");
@@ -239,7 +239,7 @@ function(origParams, response) {
 	setTimeout(AjxCallback.simpleClosure(this._setUserProfileView, this, origParams.tableId, origParams.profileAccnt), 4000);//refresh table after 4 secs
 };
 
-com_zimbra_socialTwitter.prototype.postToTwitter =
+org_zmail_socialTwitter.prototype.postToTwitter =
 function(account, message) {
 	var url = "";
 	if (account.__on != "true") {
@@ -251,9 +251,9 @@ function(account, message) {
 	if (msgParts.isDM) {
 		components["screen_name"] = msgParts.screen_name;
 		components["text"] = msgParts.data;
-		url = com_zimbra_socialTwitter.DM_URL_POST;
+		url = org_zmail_socialTwitter.DM_URL_POST;
 	} else {
-		url = com_zimbra_socialTwitter.UPDATE_URL;
+		url = org_zmail_socialTwitter.UPDATE_URL;
 		components["status"] = msgParts.data;
 	}
 	var callback = new AjxCallback(this, this._postToTweetCallback, account);
@@ -261,7 +261,7 @@ function(account, message) {
 	this._makeHTTPPost(params);
 };
 
-com_zimbra_socialTwitter.prototype.getUpdateUrl =
+org_zmail_socialTwitter.prototype.getUpdateUrl =
 function(account) {
 	var data = this.zimlet.updateField.value;
 	var additionalParams = new Array();
@@ -270,15 +270,15 @@ function(account) {
 	return this.getTwitterUrl(params);
 };
 
-com_zimbra_socialTwitter.prototype.deletePost =
+org_zmail_socialTwitter.prototype.deletePost =
 function(origParams) {
-	var url = [com_zimbra_socialTwitter.DELETE_POST_BASE_URL, origParams.postId, ".json"].join("");
+	var url = [org_zmail_socialTwitter.DELETE_POST_BASE_URL, origParams.postId, ".json"].join("");
 	var callback = new AjxCallback(this, this._deletePostCallback, origParams);
 	var params = {account:origParams.account, url:url, postBody:"", components:[], contentType: "application/x-www-form-urlencoded", callback:callback};
 	this._makeHTTPPost(params);
 };
 
-com_zimbra_socialTwitter.prototype._deletePostCallback =
+org_zmail_socialTwitter.prototype._deletePostCallback =
 function(origParams, response) {
 	if (!response.success) {
 		appCtxt.getAppController().setStatusMsg(this.zimlet.getMessage("twitterError") + response.status, ZmStatusView.LEVEL_WARNING);
@@ -288,7 +288,7 @@ function(origParams, response) {
 	setTimeout(AjxCallback.simpleClosure(this.getTwitterFeeds, this, params), 3000);//refresh table after 3 secs
 };
 
-com_zimbra_socialTwitter.prototype._getPostMsgParts =
+org_zmail_socialTwitter.prototype._getPostMsgParts =
 function() {
 	var returnParams = {screen_name:"", isDM: false, text:""};
 	var val = this.zimlet.updateField.value;
@@ -313,7 +313,7 @@ function() {
 };
 
 
-com_zimbra_socialTwitter.prototype._encodeNormalizedStr =
+org_zmail_socialTwitter.prototype._encodeNormalizedStr =
 function(normalizedStr, ignoreEncodingArray) {
 	if (!ignoreEncodingArray)
 		ignoreEncodingArray = new Array();
@@ -340,7 +340,7 @@ function(normalizedStr, ignoreEncodingArray) {
 	return encodStr;
 };
 
-com_zimbra_socialTwitter.prototype._postToTweetCallback =
+org_zmail_socialTwitter.prototype._postToTweetCallback =
 function(account, response) {
 	if (!response.success) {
 		var text = response.text;
@@ -369,7 +369,7 @@ function(account, response) {
 	}
 };
 
-com_zimbra_socialTwitter.prototype.handleTwitterCallback =
+org_zmail_socialTwitter.prototype.handleTwitterCallback =
 function(params, response) {
 	var _p = "";
 	var unReadCount = 0;
@@ -431,7 +431,7 @@ function(params, response) {
 	}
 };
 
-com_zimbra_socialTwitter.prototype._showAlert =
+org_zmail_socialTwitter.prototype._showAlert =
 function(showAlertObj) {
 	var html = new Array();
 	var i = 0;
@@ -491,17 +491,17 @@ function(showAlertObj) {
 	appCtxt.getAppController().setStatusMsg(hdr.join("") + html.join(""), ZmStatusView.LEVEL_INFO, null, transitions);
 };
 
-com_zimbra_socialTwitter.prototype._constructMime =
+org_zmail_socialTwitter.prototype._constructMime =
 function(emailContentObj) {
 	var html = new Array();
 	var i = 0;
-	html[i++] = "Return-Path: social@example.zimbra.com\n";
-	html[i++] = "Received: from localhost (LHLO rr.zimbra.com) (127.0.0.1) by rr.zimbra.com\n";
+	html[i++] = "Return-Path: social@example.zmail.com\n";
+	html[i++] = "Received: from localhost (LHLO rr.zmail.com) (127.0.0.1) by rr.zmail.com\n";
 	html[i++] = "with LMTP; " + (new Date()).toString() + "\n";
 	html[i++] = "Received: by mail02.prod.aol.net (1.38.193.5/16.2) id AA10153;\n";
 	html[i++] = (new Date()).toString() + "\n";
-	html[i++] = "From: " + this.zimlet.getMessage("zimbraSocial") + " <social@zimbra.zimlet.com>\n";
-	html[i++] = "Original-Sender: Zimbra social <social@zimbra.zimlet.com>\n";
+	html[i++] = "From: " + this.zimlet.getMessage("zmailSocial") + " <social@zmail.zimlet.com>\n";
+	html[i++] = "Original-Sender: Zmail social <social@zmail.zimlet.com>\n";
 	html[i++] = "To: " + appCtxt.getActiveAccount().name + "\n";
 	html[i++] = "Date: " + (new Date()).toString() + "\n";
 	var subject = new Array();
@@ -555,22 +555,22 @@ function(emailContentObj) {
 
 };
 
-com_zimbra_socialTwitter.prototype._addMessage =
+org_zmail_socialTwitter.prototype._addMessage =
 function(mime) {
-	var soapDoc = AjxSoapDoc.create("AddMsgRequest", "urn:zimbraMail");
+	var soapDoc = AjxSoapDoc.create("AddMsgRequest", "urn:zmailMail");
 	var m = soapDoc.set("m");
 	m.setAttribute("l", "2");
-	soapDoc.set("content", mime, m, "urn:zimbraMail");
+	soapDoc.set("content", mime, m, "urn:zmailMail");
 	var callback = new AjxCallback(this, this._handleAddMessage);
 	appCtxt.getAppController().sendRequest({soapDoc:soapDoc, asyncMode:true, callback:callback});
 };
 
-com_zimbra_socialTwitter.prototype._handleAddMessage =
+org_zmail_socialTwitter.prototype._handleAddMessage =
 function(response) {
 
 };
 
-com_zimbra_socialTwitter.prototype._getAdditionalParams =
+org_zmail_socialTwitter.prototype._getAdditionalParams =
 function(tableId) {
 	var additionalParams = new Array();
 	additionalParams["count"] = this.preferences.social_pref_numberofTweetsToReturn;
@@ -578,7 +578,7 @@ function(tableId) {
 	return additionalParams;
 };
 
-com_zimbra_socialTwitter.prototype._addSinceAndMaxIds =
+org_zmail_socialTwitter.prototype._addSinceAndMaxIds =
 function(tableId, additionalParams) {
 
 	var id;
@@ -603,7 +603,7 @@ function(tableId, additionalParams) {
 	}
 };
 
-com_zimbra_socialTwitter.prototype.performOAuth =
+org_zmail_socialTwitter.prototype.performOAuth =
 function() {
 	var oauthResultCallback = new AjxCallback(this, this._handleOAuthResult);
 	var params = {requestTokenUrl: "https://twitter.com/oauth/request_token",
@@ -617,14 +617,14 @@ function() {
 	this.zimlet.socialOAuth.showOAuthDialog("Twitter");
 };
 
-com_zimbra_socialTwitter.prototype._handleOAuthResult =
+org_zmail_socialTwitter.prototype._handleOAuthResult =
 function(result) {
 	if (!result.success) {
 		var errorDialog = appCtxt.getErrorDialog();
 		errorDialog.reset();
 		var msg = result.httpResponse && result.httpResponse.status ? "HTTP ERROR "+ result.httpResponse.status : this.zimlet.getMessage("unknownError");
 		var detailStr = result.httpResponse && result.httpResponse.text ? result.httpResponse.text : this.zimlet.getMessage("unknownError");
-		errorDialog.setMessage(msg, detailStr, DwtMessageDialog.CRITICAL_STYLE, ZmMsg.zimbraTitle);
+		errorDialog.setMessage(msg, detailStr, DwtMessageDialog.CRITICAL_STYLE, ZmMsg.zmailTitle);
 		errorDialog.popup();
 		return;
 	}
@@ -636,13 +636,13 @@ function(result) {
 	this._twitterAccessTokenCallbackHandler(result.httpResponse);
 };
 
-com_zimbra_socialTwitter.prototype._twitterAccessTokenCallbackHandler =
+org_zmail_socialTwitter.prototype._twitterAccessTokenCallbackHandler =
 function(response) {
 	this.manageTwitterAccounts(response.text);
 	this.zimlet.preferences._updateAccountsTable();
 };
 
-com_zimbra_socialTwitter.prototype.manageTwitterAccounts = function(text) {
+org_zmail_socialTwitter.prototype.manageTwitterAccounts = function(text) {
 	var nv = text.split("&");
 	var tObj = {};
 	for (var i = 0; i < nv.length; i++) {
@@ -677,7 +677,7 @@ com_zimbra_socialTwitter.prototype.manageTwitterAccounts = function(text) {
 	}
 };
 
-com_zimbra_socialTwitter.prototype.getAllSearchesAsString = function() {
+org_zmail_socialTwitter.prototype.getAllSearchesAsString = function() {
 	var str = "";
 	for (var i = 0; i < this.allSearches.length; i++) {
 		var search = this.allSearches[i];
@@ -690,7 +690,7 @@ com_zimbra_socialTwitter.prototype.getAllSearchesAsString = function() {
 	return str;
 };
 
-com_zimbra_socialTwitter.prototype.loadAllSearchesFromDB = function() {
+org_zmail_socialTwitter.prototype.loadAllSearchesFromDB = function() {
 	var allSearches = this.zimlet.getUserProperty("social_AllTwitterSearches");
 	if (allSearches == "" || allSearches == undefined) {
 		return;
@@ -698,7 +698,7 @@ com_zimbra_socialTwitter.prototype.loadAllSearchesFromDB = function() {
 	this.allSearches = eval("(" + allSearches + ")");
 };
 
-com_zimbra_socialTwitter.prototype._updateAllSearches =
+org_zmail_socialTwitter.prototype._updateAllSearches =
 function(searchName, action, _p) {
 	if (_p == undefined)
 		_p = "";
@@ -729,7 +729,7 @@ function(searchName, action, _p) {
 	}
 };
 
-com_zimbra_socialTwitter.prototype.updateSearchPositions =
+org_zmail_socialTwitter.prototype.updateSearchPositions =
 function() {
 
 	if (needToUpdate && hasSearches) {
@@ -739,7 +739,7 @@ function() {
 	}
 };
 
-com_zimbra_socialTwitter.prototype.getAllSearchesAsJSON =
+org_zmail_socialTwitter.prototype.getAllSearchesAsJSON =
 function() {
 	var html = new Array();
 	var i = 0;
@@ -767,12 +767,12 @@ function() {
 	return html.join("");
 };
 
-com_zimbra_socialTwitter.prototype.getProfileMessages =
+org_zmail_socialTwitter.prototype.getProfileMessages =
 function(params) {
 	this.getMessages(params.tableId, params.account, params.callback, this.getProfileMessagesUrl(params.tableId, params.account, params.screen_name), "ACCOUNT");
 };
 
-com_zimbra_socialTwitter.prototype.showUserProfile =
+org_zmail_socialTwitter.prototype.showUserProfile =
 function(screen_name, tweetTableId) {
 	var tableId = this.zimlet._showCard({headerName:screen_name, type:"PROFILE", tweetTableId:tweetTableId, autoScroll:true});
 	var actionUrl = "https://twitter.com/users/show/" + screen_name + ".json";
@@ -780,14 +780,14 @@ function(screen_name, tweetTableId) {
 	AjxRpc.invoke(null, entireurl, null, new AjxCallback(this, this.showUserProfileHandler, tableId), true);
 };
 
-com_zimbra_socialTwitter.prototype.showUserProfileHandler =
+org_zmail_socialTwitter.prototype.showUserProfileHandler =
 function(tableId, response) {
 	var text = response.text;
 	var jsonObj = eval("(" + text + ")");
 	this._setUserProfileView(tableId, jsonObj);
 };
 
-com_zimbra_socialTwitter.prototype._setUserProfileView =
+org_zmail_socialTwitter.prototype._setUserProfileView =
 function(tableId, profileAccnt) {
 	var html = [];
 	var i = 0;
@@ -835,7 +835,7 @@ function(tableId, profileAccnt) {
 	this.getTwitterFeeds({tableId: msgsTableId, account: account, screen_name: profileAccnt.screen_name, type:"PROFILE_MSGS"});
 };
 
-com_zimbra_socialTwitter.prototype.scanForUpdates =
+org_zmail_socialTwitter.prototype.scanForUpdates =
 function(action) {
 	var account = "";
 	var accountList = new Array();

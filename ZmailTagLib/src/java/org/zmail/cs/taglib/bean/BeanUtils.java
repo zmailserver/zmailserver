@@ -12,40 +12,40 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.bean;
+package org.zmail.cs.taglib.bean;
 
-import com.zimbra.common.account.ProvisioningConstants;
-import com.zimbra.common.calendar.TZIDMapper;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.HttpUtil;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.soap.VoiceConstants;
-import com.zimbra.common.mailbox.ContactConstants;
-import com.zimbra.common.mime.shim.JavaMailInternetAddress;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.taglib.ZJspSession;
-import com.zimbra.client.ZFilterAction.ZDiscardAction;
-import com.zimbra.client.ZFilterAction.ZFileIntoAction;
-import com.zimbra.client.ZFilterAction.ZKeepAction;
-import com.zimbra.client.ZFilterAction.ZMarkAction;
-import com.zimbra.client.ZFilterAction.ZRedirectAction;
-import com.zimbra.client.ZFilterAction.ZStopAction;
-import com.zimbra.client.ZFilterAction.ZTagAction;
-import com.zimbra.client.ZFilterCondition.ZAddressBookCondition;
-import com.zimbra.client.ZFilterCondition.ZAttachmentExistsCondition;
-import com.zimbra.client.ZFilterCondition.ZBodyCondition;
-import com.zimbra.client.ZFilterCondition.ZDateCondition;
-import com.zimbra.client.ZFilterCondition.ZHeaderCondition;
-import com.zimbra.client.ZFilterCondition.ZHeaderExistsCondition;
-import com.zimbra.client.ZFilterCondition.ZSizeCondition;
-import com.zimbra.client.ZFilterCondition.ZAddressCondition;
-import com.zimbra.client.ZFolder.Color;
-import com.zimbra.client.ZFolder.View;
-import com.zimbra.client.ZInvite.ZAttendee;
-import com.zimbra.client.ZInvite.ZComponent;
-import com.zimbra.client.ZInvite.ZWeekDay;
-import com.zimbra.client.ZSimpleRecurrence.ZSimpleRecurrenceType;
-import com.zimbra.client.*;
+import org.zmail.common.account.ProvisioningConstants;
+import org.zmail.common.calendar.TZIDMapper;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.HttpUtil;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.soap.VoiceConstants;
+import org.zmail.common.mailbox.ContactConstants;
+import org.zmail.common.mime.shim.JavaMailInternetAddress;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.taglib.ZJspSession;
+import org.zmail.client.ZFilterAction.ZDiscardAction;
+import org.zmail.client.ZFilterAction.ZFileIntoAction;
+import org.zmail.client.ZFilterAction.ZKeepAction;
+import org.zmail.client.ZFilterAction.ZMarkAction;
+import org.zmail.client.ZFilterAction.ZRedirectAction;
+import org.zmail.client.ZFilterAction.ZStopAction;
+import org.zmail.client.ZFilterAction.ZTagAction;
+import org.zmail.client.ZFilterCondition.ZAddressBookCondition;
+import org.zmail.client.ZFilterCondition.ZAttachmentExistsCondition;
+import org.zmail.client.ZFilterCondition.ZBodyCondition;
+import org.zmail.client.ZFilterCondition.ZDateCondition;
+import org.zmail.client.ZFilterCondition.ZHeaderCondition;
+import org.zmail.client.ZFilterCondition.ZHeaderExistsCondition;
+import org.zmail.client.ZFilterCondition.ZSizeCondition;
+import org.zmail.client.ZFilterCondition.ZAddressCondition;
+import org.zmail.client.ZFolder.Color;
+import org.zmail.client.ZFolder.View;
+import org.zmail.client.ZInvite.ZAttendee;
+import org.zmail.client.ZInvite.ZComponent;
+import org.zmail.client.ZInvite.ZWeekDay;
+import org.zmail.client.ZSimpleRecurrence.ZSimpleRecurrenceType;
+import org.zmail.client.*;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -54,10 +54,10 @@ import javax.servlet.ServletException;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
-import com.zimbra.cs.taglib.tag.i18n.I18nUtil;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.Contact;
+import org.zmail.cs.taglib.tag.i18n.I18nUtil;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.Contact;
 import com.yahoo.platform.yui.compressor.JavaScriptCompressor;
 import com.yahoo.platform.yui.compressor.CssCompressor;
 
@@ -552,7 +552,7 @@ public class BeanUtils {
         try {
             return Provisioning.getInstance().getLocalServer().getMailURL();
         } catch (ServiceException e) {
-            return "/zimbra";
+            return "/zmail";
         }
     }
 
@@ -926,7 +926,7 @@ public class BeanUtils {
      * false otherwise
      */
     public static boolean isDiscardFilter(ZFilterRule rule) {
-        List<com.zimbra.client.ZFilterAction> actions = rule.getActions();
+        List<org.zmail.client.ZFilterAction> actions = rule.getActions();
         for (ZFilterAction action: actions) {
             if (!isDiscard(action) && !isStop(action)) {
                 return false;
@@ -1123,11 +1123,11 @@ public class BeanUtils {
     }
 
     /**
-     * Change the zimbraPrefCalendarWorkingHours preference as per the work days selected.
+     * Change the zmailPrefCalendarWorkingHours preference as per the work days selected.
      *
-     * @param  workWeekPref - zimbraPrefCalendarWorkingHours preference (1:Y/N:start hour:end hour)
+     * @param  workWeekPref - zmailPrefCalendarWorkingHours preference (1:Y/N:start hour:end hour)
      * @param  days - work days selected in terms of Y/N (0-6 starting Sunday, e.g N,Y,Y,N,Y,Y,N)
-     * @return modified zimbraPrefCalendarWorkingHours as per the work days selected, do not change
+     * @return modified zmailPrefCalendarWorkingHours as per the work days selected, do not change
      * the start and end hours.
      */
     public static java.lang.String generateWorkWeek(java.lang.String workWeekPref, java.lang.String days) {
@@ -1149,7 +1149,7 @@ public class BeanUtils {
      * Given the working hours pref, extract only the working days info from the preference since
      * HTML client only lets the user change the working days. Work hours remain intact.
      *
-     * @param workWeekPref - zimbraPrefCalendarWorkingHours preference
+     * @param workWeekPref - zmailPrefCalendarWorkingHours preference
      * @return working days string in terms of Y/N (0-6 starting Sunday, e.g N,Y,Y,N,Y,Y,N)
      */
     public static java.lang.String convertCalWorkHours(java.lang.String workWeekPref) {
@@ -1661,12 +1661,12 @@ public class BeanUtils {
 
     /**
      * Checks if the user's UA matches the allowed user agents for honoring
-     * zimbraWebClientLogoutURL.
+     * zmailWebClientLogoutURL.
      * Returns true if the regex matches or if the
-     * zimbraWebClientLogoutURLAllowedUA is not set(implies all UAs are allowed),
+     * zmailWebClientLogoutURLAllowedUA is not set(implies all UAs are allowed),
      * false otherwise.
      */
-    public static boolean isAllowedUA(com.zimbra.cs.taglib.bean.ZUserAgentBean ua, String[] allowedUA) {
+    public static boolean isAllowedUA(org.zmail.cs.taglib.bean.ZUserAgentBean ua, String[] allowedUA) {
         if (allowedUA == null || allowedUA.length == 0) return true;
         Pattern pattern;
         Matcher m;
@@ -1682,10 +1682,10 @@ public class BeanUtils {
 
     /**
      * Checks whether email features and tabs are enabled for a user or for a delegated admin access.
-     * Returns true if mail feature is enabled for a user or if zimbraFeatureAdminMailEnabled is set to
+     * Returns true if mail feature is enabled for a user or if zmailFeatureAdminMailEnabled is set to
      * true in case of delegated admin login, false otherwise.
      */
-    public static boolean isMailEnabled(com.zimbra.cs.taglib.bean.ZMailboxBean mailbox) throws ServiceException{
+    public static boolean isMailEnabled(org.zmail.cs.taglib.bean.ZMailboxBean mailbox) throws ServiceException{
         ZFeatures features = mailbox.getFeatures();
         if (features.getMail() && (!mailbox.getAdminDelegated() || (mailbox.getAdminDelegated() && features.getAdminMail()))) {
             return true;
@@ -1745,7 +1745,7 @@ public class BeanUtils {
     /* End Yahoo! code */
 
 	public static String getImagePath(PageContext pc, String relativePath) {
-		final String ZIMBRA_IMAGE_SERVERS = "zimbraImageServers";
+		final String ZIMBRA_IMAGE_SERVERS = "zmailImageServers";
 		String[] servers = (String[]) pc.getAttribute(ZIMBRA_IMAGE_SERVERS, PageContext.APPLICATION_SCOPE);
 		if (servers == null) {
 			String serverList = pc.getServletContext().getInitParameter(ZIMBRA_IMAGE_SERVERS);

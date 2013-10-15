@@ -12,18 +12,18 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib;
+package org.zmail.cs.taglib;
 
 import com.google.common.base.Charsets;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.RemoteIP;
-import com.zimbra.cs.taglib.bean.BeanUtils;
-import com.zimbra.client.ZAuthResult;
-import com.zimbra.client.ZFolder;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.common.localconfig.LC;
+import org.zmail.common.account.Key;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.RemoteIP;
+import org.zmail.cs.taglib.bean.BeanUtils;
+import org.zmail.client.ZAuthResult;
+import org.zmail.client.ZFolder;
+import org.zmail.client.ZMailbox;
+import org.zmail.common.localconfig.LC;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -51,9 +51,9 @@ public class ZJspSession {
     public static final String ZM_LAST_SERVER_COOKIE_NAME = "ZM_LAST_SERVER";
 
 
-    private static final String CONFIG_ZIMBRA_SOAP_URL = "zimbra.soap.url";
-    private static final String CONFIG_ZIMBRA_JSP_SESSION_TIMEOUT = "zimbra.jsp.session.timeout";
-    private static final String CONFIG_ZIMBRA_SEARCH_USE_OFFSET = "zimbra.search.useoffset";
+    private static final String CONFIG_ZIMBRA_SOAP_URL = "zmail.soap.url";
+    private static final String CONFIG_ZIMBRA_JSP_SESSION_TIMEOUT = "zmail.jsp.session.timeout";
+    private static final String CONFIG_ZIMBRA_SEARCH_USE_OFFSET = "zmail.search.useoffset";
 
     public static final String Q_ZAUTHTOKEN = "zauthtoken";
     public static final String Q_ZINITMODE = "zinitmode";
@@ -189,7 +189,7 @@ public class ZJspSession {
             port = (sHttpsPort != null && sHttpsPort.equals(DEFAULT_HTTPS_PORT)) ? "" : ":" + sHttpsPort;
         } else if (proto.equals(PROTO_HTTP)) {
             if (sHttpPort.equals(RANDOM_HTTP_PORT))
-                port = ":" + LC.zimbra_admin_service_port.value();
+                port = ":" + LC.zmail_admin_service_port.value();
             else
                 port = sHttpPort.equals(DEFAULT_HTTP_PORT) ? "" : ":" + sHttpPort;
         } else {
@@ -372,7 +372,7 @@ public class ZJspSession {
                 } else {
                     String httpPort;
                     if (sHttpPort.equals(RANDOM_HTTP_PORT)) // offline uses random http port
-                        httpPort = ":" + LC.zimbra_admin_service_port.value();
+                        httpPort = ":" + LC.zmail_admin_service_port.value();
                     else
                         httpPort = sHttpPort.equals(DEFAULT_HTTP_PORT) ? "" : ":" + sHttpPort;
                     sSoapUrl = "http://" + sLocalHost + httpPort +"/service/soap";

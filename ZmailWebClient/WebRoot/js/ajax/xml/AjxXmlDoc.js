@@ -64,7 +64,7 @@ function() {
 		newDoc.async = true; // Force Async loading
 		if (AjxXmlDoc._msxmlVers == "MSXML2.DOMDocument.4.0") {
 			newDoc.setProperty("SelectionLanguage", "XPath");
-			newDoc.setProperty("SelectionNamespaces", "xmlns:zimbra='urn:zimbra' xmlns:mail='urn:zimbraMail' xmlns:account='urn:zimbraAccount'");
+			newDoc.setProperty("SelectionNamespaces", "xmlns:zmail='urn:zmail' xmlns:mail='urn:zmailMail' xmlns:account='urn:zmailAccount'");
 		}
 	} else if (document.implementation && document.implementation.createDocument) {
 		newDoc = document.implementation.createDocument("", "", null);

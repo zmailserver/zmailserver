@@ -17,17 +17,17 @@
  * Constructor.
  * 
  */
-function com_zimbra_bugz_HandlerObject() {
+function org_zmail_bugz_HandlerObject() {
 }
 
-com_zimbra_bugz_HandlerObject.prototype = new ZmZimletBase();
-com_zimbra_bugz_HandlerObject.prototype.constructor = com_zimbra_bugz_HandlerObject;
+org_zmail_bugz_HandlerObject.prototype = new ZmZimletBase();
+org_zmail_bugz_HandlerObject.prototype.constructor = org_zmail_bugz_HandlerObject;
 
 /**
  * Called by the framework when generating the span for in-context link.
  * 
  */
-com_zimbra_bugz_HandlerObject.prototype.generateSpan =
+org_zmail_bugz_HandlerObject.prototype.generateSpan =
 function(html, idx, obj, spanId, context) {
 	// Create an <a> element that links to the bugzilla entry that was matched.
 	var c = this.xmlObj("contentObject");
@@ -42,7 +42,7 @@ function(html, idx, obj, spanId, context) {
 			href: this._zimletContext.makeURL(actionUrl, contentObj),
 			text: textHtml
 		};
-		html[idx++] = AjxTemplate.expand("com_zimbra_bugz.templates.Bugz#Bugz_link", subs);
+		html[idx++] = AjxTemplate.expand("org_zmail_bugz.templates.Bugz#Bugz_link", subs);
 	}
 	return idx;
 };
@@ -51,7 +51,7 @@ function(html, idx, obj, spanId, context) {
  * Called when the in-context link is clicked.
  * 
  */
-com_zimbra_bugz_HandlerObject.prototype.clicked =
+org_zmail_bugz_HandlerObject.prototype.clicked =
 function(spanElement, contentObjText, matchContext, event) {
 	// Just let the browser handle the click.
 	event._stopPropagation = false;
@@ -61,7 +61,7 @@ function(spanElement, contentObjText, matchContext, event) {
  * Handle tooltip generation
  *
  */
-com_zimbra_bugz_HandlerObject.prototype.toolTipPoppedUp =
+org_zmail_bugz_HandlerObject.prototype.toolTipPoppedUp =
 function(spanElement, obj, context, canvas) {
 	canvas.innerHTML = ["<div id='",this._currentTooltipId,"'>",ZmMsg.loading,"</div>"].join("");
 	var url = [this.getConfig("url"), "?&ctype=xml&id=", context[1]].join("");
@@ -69,7 +69,7 @@ function(spanElement, obj, context, canvas) {
 	AjxRpc.invoke(null, completeUrl, null, new AjxCallback(this, this._handleBugzillaResponse, canvas), true);
 };
 
-com_zimbra_bugz_HandlerObject.prototype._handleBugzillaResponse =
+org_zmail_bugz_HandlerObject.prototype._handleBugzillaResponse =
 function(canvas, response) {
 	if(response && response.success) {
         var xml = response.text.replace(/<!DOCTYPE.*>/,'');  
@@ -90,7 +90,7 @@ function(canvas, response) {
 				short_desc: obj.short_desc ? obj.short_desc.toString() : ""
 			};
 
-			canvas.innerHTML = AjxTemplate.expand("com_zimbra_bugz.templates.Bugz#bugDetails", subs);
+			canvas.innerHTML = AjxTemplate.expand("org_zmail_bugz.templates.Bugz#bugDetails", subs);
 		}
 	} else {
 		canvas.innerHTML = this.getMessage("generalError");

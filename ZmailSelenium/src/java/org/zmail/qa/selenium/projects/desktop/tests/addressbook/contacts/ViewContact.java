@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.addressbook.contacts;
+package org.zmail.qa.selenium.projects.desktop.tests.addressbook.contacts;
 
 
 
@@ -22,12 +22,12 @@ import java.util.List;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount.SOAP_DESTINATION_HOST_TYPE;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.addressbook.DisplayContact;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.ZmailAccount.SOAP_DESTINATION_HOST_TYPE;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.addressbook.DisplayContact;
 
 
 public class ViewContact extends AjaxCommonTest  {
@@ -56,7 +56,7 @@ public class ViewContact extends AjaxCommonTest  {
 	   String fileAs = firstName + " " + contact.lastName;
 
        app.zGetActiveAccount().soapSend(
-    		   "<ModifyContactRequest xmlns = 'urn:zimbraMail' replace = '0' force = '1'>" +
+    		   "<ModifyContactRequest xmlns = 'urn:zmailMail' replace = '0' force = '1'>" +
                 "<cn id = '"+ contact.getId() +"'>" +
    	         "<a n='firstName'>" + firstName +"</a>" +
 	         "<a n='fileAs'>2</a>" +
@@ -272,13 +272,13 @@ public class ViewContact extends AjaxCommonTest  {
        // Create  contacts  
       ContactItem contact1 = createContact("B",
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
       ContactItem contact2 = createContact("5",
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
       ContactItem contact3 = createContact("b",
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
       
           
       // Refresh the view, to pick up the new contact
@@ -286,7 +286,7 @@ public class ViewContact extends AjaxCommonTest  {
             app.zGetActiveAccount(),
             "Contacts",
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
 
       app.zTreeContacts.zTreeItem(Action.A_LEFTCLICK, contactFolder);
 
@@ -315,20 +315,20 @@ public class ViewContact extends AjaxCommonTest  {
        // Create  contacts  
       ContactItem contact1 = createContact("B",
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
       ContactItem contact2 = createContact("5",
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
       ContactItem contact3 = createContact("b",
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
         
       // Refresh the view, to pick up the new contact
       FolderItem contactFolder = FolderItem.importFromSOAP(
             app.zGetActiveAccount(),
             "Contacts",
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
 
       app.zTreeContacts.zTreeItem(Action.A_LEFTCLICK, contactFolder);
 
@@ -360,23 +360,23 @@ public class ViewContact extends AjaxCommonTest  {
        // Create  contacts  
       ContactItem contact1 = createContact("B",
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
       ContactItem contact2 = createContact("5",
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
       ContactItem contact3 = createContact("V",
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
       ContactItem contact4 = createContact("b",
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
 
       // Refresh the view, to pick up the new contact
       FolderItem contactFolder = FolderItem.importFromSOAP(
             app.zGetActiveAccount(),
             "Contacts",
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
 
       app.zTreeContacts.zTreeItem(Action.A_LEFTCLICK, contactFolder);
 
@@ -415,7 +415,7 @@ public class ViewContact extends AjaxCommonTest  {
       for (int i = 0; i < 26; i++) {
          cgiArray[i] =  createContact(Character.toString((char)((int)'a' + i)),
                SOAP_DESTINATION_HOST_TYPE.CLIENT,
-               ZimbraAccount.clientAccountName);
+               ZmailAccount.clientAccountName);
       }
 
       // Refresh the view, to pick up the new contact
@@ -423,7 +423,7 @@ public class ViewContact extends AjaxCommonTest  {
             app.zGetActiveAccount(),
             "Contacts",
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
 
       app.zTreeContacts.zTreeItem(Action.A_LEFTCLICK, contactFolder);
 

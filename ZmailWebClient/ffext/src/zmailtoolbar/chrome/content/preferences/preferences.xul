@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
-<!DOCTYPE window SYSTEM "chrome://zimbratb/locale/zimbratb.dtd">
+<!DOCTYPE window SYSTEM "chrome://zmailtb/locale/zmailtb.dtd">
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
-<?xml-stylesheet href="chrome://zimbratb/skin/zimbratb.css" type="text/css"?>
+<?xml-stylesheet href="chrome://zmailtb/skin/zmailtb.css" type="text/css"?>
 <prefwindow xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" title="&zmtb.preferences.prefwintitle;">
 	<script type="application/x-javascript" src="ZMTB_Prefs.js"/>
 	<prefpane label="&zmtb.preferences.prefpanetitle;">

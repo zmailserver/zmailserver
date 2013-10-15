@@ -12,20 +12,20 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.tag.filter;
+package org.zmail.cs.taglib.tag.filter;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.taglib.tag.ZimbraSimpleTag;
-import com.zimbra.cs.taglib.bean.ZTagLibException;
-import com.zimbra.client.ZFilterCondition.DateOp;
-import com.zimbra.client.ZFilterCondition.ZDateCondition;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.taglib.tag.ZmailSimpleTag;
+import org.zmail.cs.taglib.bean.ZTagLibException;
+import org.zmail.client.ZFilterCondition.DateOp;
+import org.zmail.client.ZFilterCondition.ZDateCondition;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class DateConditionTag extends ZimbraSimpleTag {
+public class DateConditionTag extends ZmailSimpleTag {
 
     private DateOp mOp;
     private String mValue;

@@ -14,15 +14,15 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.briefcase.file;
+package org.zmail.qa.selenium.projects.desktop.tests.briefcase.file;
 
 import org.testng.annotations.Test;
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.DialogTag;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.DialogTag;
 
 public class TagFile extends AjaxCommonTest {
 
@@ -37,13 +37,13 @@ public class TagFile extends AjaxCommonTest {
 
 	@Test(description = "Tag a File using Toolbar -> Tag -> New Tag", groups = { "smoke" })
 	public void TagFile_01() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
 
 		// Create file item
-		String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+		String filePath = ZmailSeleniumProperties.getBaseDirectory()
 		+ "/data/public/other/testpptfile.ppt";
 		
 		FileItem fileItem = new FileItem(filePath);
@@ -54,7 +54,7 @@ public class TagFile extends AjaxCommonTest {
 		String attachmentId = account.uploadFile(filePath);
 
 		// Save uploaded file to briefcase through SOAP
-		account.soapSend("<SaveDocumentRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<SaveDocumentRequest xmlns='urn:zmailMail'>"
 				+ "<doc l='" + briefcaseFolder.getId() + "'><upload id='"
 				+ attachmentId + "'/></doc></SaveDocumentRequest>");
 
@@ -68,7 +68,7 @@ public class TagFile extends AjaxCommonTest {
 		app.zPageBriefcase.zListItem(Action.A_LEFTCLICK, fileItem);
 
 		// Create a tag using GUI
-		String tagName = "tag" + ZimbraSeleniumProperties.getUniqueString();
+		String tagName = "tag" + ZmailSeleniumProperties.getUniqueString();
 
 		// Click on New Tag
 		DialogTag dialogTag = (DialogTag) app.zPageBriefcase
@@ -81,7 +81,7 @@ public class TagFile extends AjaxCommonTest {
       app.zPageBriefcase.zWaitForDesktopLoadingSpinner(5000);
 
 		// Make sure the tag was created on the server (get the tag ID)
-		account.soapSend("<GetTagRequest xmlns='urn:zimbraMail'/>");
+		account.soapSend("<GetTagRequest xmlns='urn:zmailMail'/>");
 
 		String tagId = account.soapSelectValue(
 				"//mail:GetTagResponse//mail:tag[@name='" + tagName + "']",
@@ -89,7 +89,7 @@ public class TagFile extends AjaxCommonTest {
 
 		// Verify tagged document name
 		account
-				.soapSend("<SearchRequest xmlns='urn:zimbraMail' types='document'>"
+				.soapSend("<SearchRequest xmlns='urn:zmailMail' types='document'>"
 						+ "<query>tag:"
 						+ tagName
 						+ "</query>"
@@ -101,14 +101,14 @@ public class TagFile extends AjaxCommonTest {
 		ZAssert.assertEquals(name, fileName, "Verify tagged document name");
 
 		// Make sure the tag was applied to the document
-		// account.soapSend("<SearchRequest xmlns='urn:zimbraMail' types='document'>"
+		// account.soapSend("<SearchRequest xmlns='urn:zmailMail' types='document'>"
 		// + "<query>in:briefcase</query></SearchRequest>");
 
 		// String id = account.soapSelectValue(
 		// "//mail:SearchResponse//mail:doc[@name='" + docName + "']", "t");
 
 		account
-				.soapSend("<SearchRequest xmlns='urn:zimbraMail' types='document'>"
+				.soapSend("<SearchRequest xmlns='urn:zmailMail' types='document'>"
 						+ "<query>"
 						+ fileName
 						+ "</query>"
@@ -128,13 +128,13 @@ public class TagFile extends AjaxCommonTest {
 
 	@Test(description = "Tag uploaded File using pre-existing Tag", groups = { "functional" })
 	public void TagFile_02() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
 
 		// Create file item
-		String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+		String filePath = ZmailSeleniumProperties.getBaseDirectory()
 		+ "/data/public/other/testpptfile.ppt";
 		
 		FileItem fileItem = new FileItem(filePath);
@@ -145,14 +145,14 @@ public class TagFile extends AjaxCommonTest {
 		String attachmentId = account.uploadFile(filePath);
 
 		// Save uploaded file to briefcase through SOAP
-		account.soapSend("<SaveDocumentRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<SaveDocumentRequest xmlns='urn:zmailMail'>"
 				+ "<doc l='" + briefcaseFolder.getId() + "'><upload id='"
 				+ attachmentId + "'/></doc></SaveDocumentRequest>");
 
 		// Create a tag
-		String tagName = "tag" + ZimbraSeleniumProperties.getUniqueString();
+		String tagName = "tag" + ZmailSeleniumProperties.getUniqueString();
 
-		account.soapSend("<CreateTagRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<CreateTagRequest xmlns='urn:zmailMail'>"
 				+ "<tag name='" + tagName + "' color='1' />"
 				+ "</CreateTagRequest>");
 
@@ -177,7 +177,7 @@ public class TagFile extends AjaxCommonTest {
 
       // Make sure the tag was applied to the document
 		account
-				.soapSend("<SearchRequest xmlns='urn:zimbraMail' types='document'>"
+				.soapSend("<SearchRequest xmlns='urn:zmailMail' types='document'>"
 						+ "<query>" + fileName + "</query>" + "</SearchRequest>");
 
 		String id = account.soapSelectValue("//mail:SearchResponse//mail:doc",
@@ -195,13 +195,13 @@ public class TagFile extends AjaxCommonTest {
 
 	@Test(description = "Tag uploaded File using Right Click context menu", groups = { "functional" })
 	public void TagFile_03() throws HarnessException {
-	   ZimbraAccount account = app.zGetActiveAccount();
+	   ZmailAccount account = app.zGetActiveAccount();
 
 	   FolderItem briefcaseFolder = FolderItem.importFromSOAP(account,
 	         SystemFolder.Briefcase);
 
 	   // Create file item
-	   String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+	   String filePath = ZmailSeleniumProperties.getBaseDirectory()
 	         + "/data/public/other/testpptfile.ppt";
 
 	   FileItem fileItem = new FileItem(filePath);
@@ -212,14 +212,14 @@ public class TagFile extends AjaxCommonTest {
 	   String attachmentId = account.uploadFile(filePath);
 
 	   // Save uploaded file to briefcase through SOAP
-	   account.soapSend("<SaveDocumentRequest xmlns='urn:zimbraMail'>"
+	   account.soapSend("<SaveDocumentRequest xmlns='urn:zmailMail'>"
 	         + "<doc l='" + briefcaseFolder.getId() + "'><upload id='"
 	         + attachmentId + "'/></doc></SaveDocumentRequest>");
 
 	   // Create a tag
-	   String tagName = "tag" + ZimbraSeleniumProperties.getUniqueString();
+	   String tagName = "tag" + ZmailSeleniumProperties.getUniqueString();
 
-	   account.soapSend("<CreateTagRequest xmlns='urn:zimbraMail'>"
+	   account.soapSend("<CreateTagRequest xmlns='urn:zmailMail'>"
 	         + "<tag name='" + tagName + "' color='1' />"
 	         + "</CreateTagRequest>");
 
@@ -252,7 +252,7 @@ public class TagFile extends AjaxCommonTest {
 
       // Make sure the tag was applied to the File
 	   account
-	         .soapSend("<SearchRequest xmlns='urn:zimbraMail' types='document'>"
+	         .soapSend("<SearchRequest xmlns='urn:zmailMail' types='document'>"
 	               + "<query>"
 	               + fileName
 	               + "</query>"

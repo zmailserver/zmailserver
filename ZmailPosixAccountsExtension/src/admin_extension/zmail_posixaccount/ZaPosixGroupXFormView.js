@@ -72,7 +72,7 @@ ZaPosixGroupXFormView.myXFormModifier = function(xFormObject,entry) {
 	var _tab1;
 	
 	_tab1 = ++this.TAB_INDEX;
-	this.tabChoices.push({value:_tab1, label:zimbra_posixaccount.PosixGroupTabGeneral});
+	this.tabChoices.push({value:_tab1, label:zmail_posixaccount.PosixGroupTabGeneral});
 		
 	xFormObject.items = [
 		{type:_GROUP_, cssClass:"ZmSelectedHeaderBg", colSpan: "*", id:"xform_header", 
@@ -97,7 +97,7 @@ ZaPosixGroupXFormView.myXFormModifier = function(xFormObject,entry) {
 					colSizes:["250px","*"],
 					items:[
 						{ ref: ZaPosixGroup.A_cn, type:_TEXTFIELD_, 
-						  label:zimbra_posixaccount.GroupName,onChange:ZaTabView.onFormFieldChanged
+						  label:zmail_posixaccount.GroupName,onChange:ZaTabView.onFormFieldChanged
 						},
 						{ref: ZaPosixGroup.A_gidNumber, type:_TEXTFIELD_, 
 						  	label:"gidNumber", cssClass:"admin_xform_number_input",
@@ -111,8 +111,8 @@ ZaPosixGroupXFormView.myXFormModifier = function(xFormObject,entry) {
 								return val;
 							}						  
 					  	},
-						{ref:ZaPosixGroup.A_description, type:_TEXTFIELD_, msgName:zimbra_posixaccount.NAD_DescriptionMsg,
-							label:zimbra_posixaccount.NAD_DescriptionLbl, labelLocation:_LEFT_,
+						{ref:ZaPosixGroup.A_description, type:_TEXTFIELD_, msgName:zmail_posixaccount.NAD_DescriptionMsg,
+							label:zmail_posixaccount.NAD_DescriptionLbl, labelLocation:_LEFT_,
 							cssClass:"admin_xform_name_input", 
 							onChange:ZaTabView.onFormFieldChanged
 						},

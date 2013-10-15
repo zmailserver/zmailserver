@@ -14,14 +14,14 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.items;
+package org.zmail.qa.selenium.framework.items;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
 
 
 public class RecipientItem implements IItem {
@@ -41,11 +41,11 @@ public class RecipientItem implements IItem {
 		return (dEmailAddress);
 	}
 	
-	public RecipientItem(ZimbraAccount account) {
+	public RecipientItem(ZmailAccount account) {
 		this(account.EmailAddress);
 	}
 	
-	public RecipientItem(ZimbraAccount account, RecipientType type) {
+	public RecipientItem(ZmailAccount account, RecipientType type) {
 		this(account.EmailAddress, type);
 	}
 	
@@ -68,7 +68,7 @@ public class RecipientItem implements IItem {
 	}
 
 	@Override
-	public void createUsingSOAP(ZimbraAccount account) throws HarnessException {
+	public void createUsingSOAP(ZmailAccount account) throws HarnessException {
 		throw new HarnessException("not supported");
 		
 	}
@@ -82,7 +82,7 @@ public class RecipientItem implements IItem {
 		try {
 
 	
-			Element element = ZimbraAccount.SoapClient.selectNode(eElement, "//mail:e");
+			Element element = ZmailAccount.SoapClient.selectNode(eElement, "//mail:e");
 			if ( element == null )
 				throw new HarnessException("Element does not contain an e element");
 			
@@ -123,7 +123,7 @@ public class RecipientItem implements IItem {
 		}
 	}
 
-	public static RecipientItem importFromSOAP(ZimbraAccount account, String query) throws HarnessException {
+	public static RecipientItem importFromSOAP(ZmailAccount account, String query) throws HarnessException {
 		throw new HarnessException("not supported");
 	}
 

@@ -17,18 +17,18 @@
  * Constructor.
  *
  */
-function Com_Zimbra_YCurrency_HandlerObject() {
+function Com_Zmail_YCurrency_HandlerObject() {
 }
 ;
 
-Com_Zimbra_YCurrency_HandlerObject.prototype = new ZmZimletBase();
-Com_Zimbra_YCurrency_HandlerObject.prototype.constructor = Com_Zimbra_YCurrency_HandlerObject;
+Com_Zmail_YCurrency_HandlerObject.prototype = new ZmZimletBase();
+Com_Zmail_YCurrency_HandlerObject.prototype.constructor = Com_Zmail_YCurrency_HandlerObject;
 
 /**
  * Simplify handler object
  *
  */
-var YCurrencyZimlet = Com_Zimbra_YCurrency_HandlerObject;
+var YCurrencyZimlet = Com_Zmail_YCurrency_HandlerObject;
 
 /**
  * Defines the "home currency" user property.
@@ -129,7 +129,7 @@ YCurrencyZimlet.prototype._getMatchRegex = function() {
 
 
 /**
- * Called by Zimbra framework to see if a line of text matches anything
+ * Called by Zmail framework to see if a line of text matches anything
  *
  * @see		ZmZimletBase
  */

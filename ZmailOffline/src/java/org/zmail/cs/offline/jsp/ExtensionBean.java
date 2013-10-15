@@ -12,12 +12,12 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.jsp;
+package org.zmail.cs.offline.jsp;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.SoapHttpTransport;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.cs.offline.common.OfflineConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.SoapHttpTransport;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.cs.offline.common.OfflineConstants;
 
 public class ExtensionBean extends PageBean {
     

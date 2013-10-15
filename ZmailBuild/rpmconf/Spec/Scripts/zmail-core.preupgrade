@@ -14,12 +14,12 @@
 # ***** END LICENSE BLOCK *****
 # 
 
-SAVEDIR=/opt/zimbra/.saveconfig
-PLAT=$(/opt/zimbra/libexec/get_plat_tag.sh)
+SAVEDIR=/opt/zmail/.saveconfig
+PLAT=$(/opt/zmail/libexec/get_plat_tag.sh)
 if [ x"$PLAT" = "xMACOSXx86_10.5" -o x"$PLAT" = "xMACOSXx86_10.6" -o x"$PLAT" = "xMACOSXx86_10.7" ]; then
-  SU="su - zimbra -c -l "
+  SU="su - zmail -c -l "
 else
-  SU="su - zimbra -c "
+  SU="su - zmail -c "
 fi
 
 if [ ! -d "$SAVEDIR" ]; then
@@ -36,64 +36,64 @@ for f in localconfig.xml config.save keystore cacerts perdition.pem smtpd.key sm
     done
   fi
 done
-chown zimbra:zimbra $SAVEDIR
+chown zmail:zmail $SAVEDIR
 chmod 750 $SAVEDIR
 
-$SU "/opt/zimbra/bin/zmcontrol stop"
-#$SU "/opt/zimbra/bin/zmlocalconfig -m shell > $SAVEDIR/config.save"
+$SU "/opt/zmail/bin/zmcontrol stop"
+#$SU "/opt/zmail/bin/zmlocalconfig -m shell > $SAVEDIR/config.save"
 
-if [ -f "/opt/zimbra/conf/localconfig.xml" ]; then
-  cp -f /opt/zimbra/conf/localconfig.xml $SAVEDIR
+if [ -f "/opt/zmail/conf/localconfig.xml" ]; then
+  cp -f /opt/zmail/conf/localconfig.xml $SAVEDIR
 fi
-if [ -f "/opt/zimbra/java/jre/lib/security/cacerts" ]; then
-  cp -f /opt/zimbra/java/jre/lib/security/cacerts $SAVEDIR
+if [ -f "/opt/zmail/java/jre/lib/security/cacerts" ]; then
+  cp -f /opt/zmail/java/jre/lib/security/cacerts $SAVEDIR
 fi
-if [ -f "/opt/zimbra/tomcat/conf/keystore" ]; then
-	cp -f /opt/zimbra/tomcat/conf/keystore $SAVEDIR
+if [ -f "/opt/zmail/tomcat/conf/keystore" ]; then
+	cp -f /opt/zmail/tomcat/conf/keystore $SAVEDIR
 fi 
-if [ -f "/opt/zimbra/jetty/etc/keystore" ]; then
-  echo "Saving backup copy of /opt/zimbra/jetty/etc/keystore"
-	cp -f /opt/zimbra/jetty/etc/keystore $SAVEDIR
+if [ -f "/opt/zmail/jetty/etc/keystore" ]; then
+  echo "Saving backup copy of /opt/zmail/jetty/etc/keystore"
+	cp -f /opt/zmail/jetty/etc/keystore $SAVEDIR
 else 
-  echo "Keystore didn't exist in /opt/zimbra/jetty/etc/keystore"
-  ls -ld /opt/zimbra/jetty
-  ls -ld /opt/zimbra/jetty/etc
-  ls -ld /opt/zimbra/jetty/etc/keystore
+  echo "Keystore didn't exist in /opt/zmail/jetty/etc/keystore"
+  ls -ld /opt/zmail/jetty
+  ls -ld /opt/zmail/jetty/etc
+  ls -ld /opt/zmail/jetty/etc/keystore
 fi 
-if [ -f "/opt/zimbra/conf/smtpd.key" ]; then
-	cp -f /opt/zimbra/conf/smtpd.key $SAVEDIR
+if [ -f "/opt/zmail/conf/smtpd.key" ]; then
+	cp -f /opt/zmail/conf/smtpd.key $SAVEDIR
 fi 
-if [ -f "/opt/zimbra/conf/smtpd.crt" ]; then
-	cp -f /opt/zimbra/conf/smtpd.crt $SAVEDIR
+if [ -f "/opt/zmail/conf/smtpd.crt" ]; then
+	cp -f /opt/zmail/conf/smtpd.crt $SAVEDIR
 fi 
-if [ -f "/opt/zimbra/conf/slapd.key" ]; then
-  cp -f /opt/zimbra/conf/slapd.key $SAVEDIR
+if [ -f "/opt/zmail/conf/slapd.key" ]; then
+  cp -f /opt/zmail/conf/slapd.key $SAVEDIR
 fi
-if [ -f "/opt/zimbra/conf/slapd.crt" ]; then
-  cp -f /opt/zimbra/conf/slapd.crt $SAVEDIR
+if [ -f "/opt/zmail/conf/slapd.crt" ]; then
+  cp -f /opt/zmail/conf/slapd.crt $SAVEDIR
 fi
-if [ -f "/opt/zimbra/conf/ca/ca.key" ]; then
-  cp -f /opt/zimbra/conf/ca/ca.key $SAVEDIR
+if [ -f "/opt/zmail/conf/ca/ca.key" ]; then
+  cp -f /opt/zmail/conf/ca/ca.key $SAVEDIR
 fi
-if [ -f "/opt/zimbra/conf/ca/ca.pem" ]; then
-  cp -f /opt/zimbra/conf/ca/ca.pem $SAVEDIR
+if [ -f "/opt/zmail/conf/ca/ca.pem" ]; then
+  cp -f /opt/zmail/conf/ca/ca.pem $SAVEDIR
 fi
 if [ -d "$SAVEDIR/zimlet" ]; then
   rm -rf $SAVEDIR/zimlet
 fi
-if [ -d "/opt/zimbra/tomcat/webapps/service/zimlet" ]; then
-  cp -rf /opt/zimbra/tomcat/webapps/service/zimlet $SAVEDIR
-elif [ -d "/opt/zimbra/mailboxd/webapps/service/zimlet" ]; then
-  cp -rf /opt/zimbra/mailboxd/webapps/service/zimlet $SAVEDIR
+if [ -d "/opt/zmail/tomcat/webapps/service/zimlet" ]; then
+  cp -rf /opt/zmail/tomcat/webapps/service/zimlet $SAVEDIR
+elif [ -d "/opt/zmail/mailboxd/webapps/service/zimlet" ]; then
+  cp -rf /opt/zmail/mailboxd/webapps/service/zimlet $SAVEDIR
 fi
-if [ -x "/opt/zimbra/bin/zmschedulebackup" ]; then
-	$SU "/opt/zimbra/bin/zmschedulebackup -s > $SAVEDIR/backup.save"
+if [ -x "/opt/zmail/bin/zmschedulebackup" ]; then
+	$SU "/opt/zmail/bin/zmschedulebackup -s > $SAVEDIR/backup.save"
 fi
-if [ -x "/opt/zimbra/openldap/sbin/slapcat" ]; then
-	mkdir -p /opt/zimbra/data/ldap
-	chown -R zimbra:zimbra /opt/zimbra/data/ldap
-	$SU "/opt/zimbra/libexec/zmslapcat /opt/zimbra/data/ldap"
-	chown zimbra:zimbra /opt/zimbra/data/ldap/ldap.bak
-	chmod 640 /opt/zimbra/data/ldap/ldap.bak
+if [ -x "/opt/zmail/openldap/sbin/slapcat" ]; then
+	mkdir -p /opt/zmail/data/ldap
+	chown -R zmail:zmail /opt/zmail/data/ldap
+	$SU "/opt/zmail/libexec/zmslapcat /opt/zmail/data/ldap"
+	chown zmail:zmail /opt/zmail/data/ldap/ldap.bak
+	chmod 640 /opt/zmail/data/ldap/ldap.bak
 fi
 

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.util.ymail;
+package org.zmail.cs.offline.util.ymail;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -49,23 +49,23 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.common.mime.shim.JavaMailInternetAddress;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.zmime.ZMimeMessage;
-import com.zimbra.common.zmime.ZSharedFileInputStream;
-import com.zimbra.cs.mailclient.imap.Body;
-import com.zimbra.cs.mailclient.imap.IDInfo;
-import com.zimbra.cs.mailclient.imap.ImapConfig;
-import com.zimbra.cs.mailclient.imap.ImapConnection;
-import com.zimbra.cs.mailclient.imap.MailboxInfo;
-import com.zimbra.cs.mailclient.imap.MessageData;
-import com.zimbra.cs.offline.OfflineLC;
-import com.zimbra.cs.offline.OfflineLog;
-import com.zimbra.cs.util.ZimbraApplication;
-import com.zimbra.cs.util.yauth.Auth;
-import com.zimbra.cs.util.yauth.FileTokenStore;
-import com.zimbra.cs.util.yauth.RawAuthManager;
-import com.zimbra.cs.util.yauth.XYMEAuthenticator;
+import org.zmail.common.mime.shim.JavaMailInternetAddress;
+import org.zmail.common.util.Log;
+import org.zmail.common.zmime.ZMimeMessage;
+import org.zmail.common.zmime.ZSharedFileInputStream;
+import org.zmail.cs.mailclient.imap.Body;
+import org.zmail.cs.mailclient.imap.IDInfo;
+import org.zmail.cs.mailclient.imap.ImapConfig;
+import org.zmail.cs.mailclient.imap.ImapConnection;
+import org.zmail.cs.mailclient.imap.MailboxInfo;
+import org.zmail.cs.mailclient.imap.MessageData;
+import org.zmail.cs.offline.OfflineLC;
+import org.zmail.cs.offline.OfflineLog;
+import org.zmail.cs.util.ZmailApplication;
+import org.zmail.cs.util.yauth.Auth;
+import org.zmail.cs.util.yauth.FileTokenStore;
+import org.zmail.cs.util.yauth.RawAuthManager;
+import org.zmail.cs.util.yauth.XYMEAuthenticator;
 
 public class TestYMailClient {
     private static RawAuthManager ram;
@@ -94,7 +94,7 @@ public class TestYMailClient {
     private static final String SENT = "Sent";
 
     private static final File DATA_DIR =
-        new File("/Users/dac/src/zimbra/FRANKLIN/ZimbraServer/data/TestMailRaw");
+        new File("/Users/dac/src/zmail/FRANKLIN/ZmailServer/data/TestMailRaw");
 
     private static final File MSG_MULTIPART = new File("/Users/dac/mail.txt");
     // new File(DATA_DIR, "15");
@@ -133,10 +133,10 @@ public class TestYMailClient {
         connection.connect();
         if (connection.hasMechanism(XYMEAuthenticator.MECHANISM)) {
             // no ID info necessary for XYMECOOKIE authentication
-            connection.authenticate(new XYMEAuthenticator(auth, "zimbra"));
+            connection.authenticate(new XYMEAuthenticator(auth, "zmail"));
         } else {
             IDInfo id = new IDInfo();
-            id.put("guid", ZimbraApplication.getInstance().getId());
+            id.put("guid", ZmailApplication.getInstance().getId());
             connection.id(id);
             connection.login(PASS);
         }
@@ -148,7 +148,7 @@ public class TestYMailClient {
         imc.select("INBOX");
     }
 
-    private static final String BIZ_USER = "jjzhuang@vivazimbra.com";
+    private static final String BIZ_USER = "jjzhuang@vivazmail.com";
     private static final String BIZ_PASS = "test1234";
 
     @Test

@@ -18,7 +18,7 @@
             <!-- One targetApplication for each application the add-on is compatible with -->
             <em:targetApplication>
               <RDF:Description>
-                <em:id>zimbratb@zimbra.com</em:id>
+                <em:id>zmailtb@zmail.com</em:id>
                 <em:minVersion>3.0</em:minVersion>
                 <em:maxVersion>3.*</em:maxVersion>
 

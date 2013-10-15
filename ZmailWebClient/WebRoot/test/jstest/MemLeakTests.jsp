@@ -25,8 +25,8 @@ basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
 		<jsp:include page="../../public/Messages.jsp"/>
         <jsp:include page="../../public/Boot.jsp"/>
 		<jsp:include page="../../public/Ajax.jsp"/>
-		<jsp:include page="../../public/jsp/Zimbra.jsp"/>
-		<jsp:include page="../../public/jsp/ZimbraCore.jsp"/>
+		<jsp:include page="../../public/jsp/Zmail.jsp"/>
+		<jsp:include page="../../public/jsp/ZmailCore.jsp"/>
 
 		<script type="text/javascript" src="MemLeakTests.js"></script>
 

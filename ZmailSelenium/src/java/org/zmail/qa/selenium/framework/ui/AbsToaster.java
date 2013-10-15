@@ -14,11 +14,11 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.ui;
+package org.zmail.qa.selenium.framework.ui;
 
 import java.awt.event.KeyEvent;
 
-import com.zimbra.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.*;
 
 
 /**

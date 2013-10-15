@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>ZimbraNginxLookup</name>
+	<name>ZmailNginxLookup</name>
 	<comment></comment>
 	<projects>
-		<project>ZimbraServer</project>
+		<project>ZmailServer</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

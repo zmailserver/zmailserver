@@ -17,7 +17,7 @@
 * @class ZaResource
 * @contructor ZaResource
 * @param ZaApp app
-* this class is a model for zimbra calendar resource account 
+* this class is a model for zmail calendar resource account 
 * @author Charles Cao
 **/
 ZaResource = function() {
@@ -54,30 +54,30 @@ ZaResource.A_accountStatus = ZaAccount.A_accountStatus;
 ZaResource.A_notes = ZaAccount.A_notes;
 ZaResource.A_mailHost = ZaAccount.A_mailHost;
 ZaResource.A_COSId = ZaAccount.A_COSId;
-ZaResource.A_zimbraMinPwdLength = ZaAccount.A_zimbraMinPwdLength;
-ZaResource.A_zimbraMaxPwdLength = ZaAccount.A_zimbraMaxPwdLength;
+ZaResource.A_zmailMinPwdLength = ZaAccount.A_zmailMinPwdLength;
+ZaResource.A_zmailMaxPwdLength = ZaAccount.A_zmailMaxPwdLength;
 
-ZaResource.A_zimbraPrefCalendarForwardInvitesTo = "zimbraPrefCalendarForwardInvitesTo";
-ZaResource.A_zimbraCalResMaxNumConflictsAllowed = "zimbraCalResMaxNumConflictsAllowed";
-ZaResource.A_zimbraCalResMaxPercentConflictsAllowed = "zimbraCalResMaxPercentConflictsAllowed";
-ZaResource.A_locationDisplayName = "zimbraCalResLocationDisplayName";
-ZaResource.A_zimbraAccountCalendarUserType = "zimbraAccountCalendarUserType";
-ZaResource.A_zimbraCalResAlwaysFree = "zimbraCalResAlwaysFree";
-ZaResource.A_zimbraCalResAutoAcceptDecline = "zimbraCalResAutoAcceptDecline";
-ZaResource.A_zimbraCalResAutoDeclineIfBusy = "zimbraCalResAutoDeclineIfBusy";
-ZaResource.A_zimbraCalResAutoDeclineRecurring = "zimbraCalResAutoDeclineRecurring";
-ZaResource.A_zimbraCalResBuilding = "zimbraCalResBuilding";
-ZaResource.A_zimbraCalResCapacity = "zimbraCalResCapacity";
-ZaResource.A_zimbraCalResContactEmail = "zimbraCalResContactEmail";
-ZaResource.A_zimbraCalResContactName = "zimbraCalResContactName";
-ZaResource.A_zimbraCalResContactPhone = "zimbraCalResContactPhone";
-ZaResource.A_zimbraCalResFloor = "zimbraCalResFloor";
-ZaResource.A_zimbraCalResRoom = "zimbraCalResRoom";
-ZaResource.A_zimbraCalResSite = "zimbraCalResSite";
-ZaResource.A_zimbraCalResType = "zimbraCalResType";
+ZaResource.A_zmailPrefCalendarForwardInvitesTo = "zmailPrefCalendarForwardInvitesTo";
+ZaResource.A_zmailCalResMaxNumConflictsAllowed = "zmailCalResMaxNumConflictsAllowed";
+ZaResource.A_zmailCalResMaxPercentConflictsAllowed = "zmailCalResMaxPercentConflictsAllowed";
+ZaResource.A_locationDisplayName = "zmailCalResLocationDisplayName";
+ZaResource.A_zmailAccountCalendarUserType = "zmailAccountCalendarUserType";
+ZaResource.A_zmailCalResAlwaysFree = "zmailCalResAlwaysFree";
+ZaResource.A_zmailCalResAutoAcceptDecline = "zmailCalResAutoAcceptDecline";
+ZaResource.A_zmailCalResAutoDeclineIfBusy = "zmailCalResAutoDeclineIfBusy";
+ZaResource.A_zmailCalResAutoDeclineRecurring = "zmailCalResAutoDeclineRecurring";
+ZaResource.A_zmailCalResBuilding = "zmailCalResBuilding";
+ZaResource.A_zmailCalResCapacity = "zmailCalResCapacity";
+ZaResource.A_zmailCalResContactEmail = "zmailCalResContactEmail";
+ZaResource.A_zmailCalResContactName = "zmailCalResContactName";
+ZaResource.A_zmailCalResContactPhone = "zmailCalResContactPhone";
+ZaResource.A_zmailCalResFloor = "zmailCalResFloor";
+ZaResource.A_zmailCalResRoom = "zmailCalResRoom";
+ZaResource.A_zmailCalResSite = "zmailCalResSite";
+ZaResource.A_zmailCalResType = "zmailCalResType";
 ZaResource.A_contactInfoAutoComplete = "contactInfoAutoComplete";
-ZaResource.A_zimbraMailForwardingAddressMaxLength = "zimbraMailForwardingAddressMaxLength";
-ZaResource.A_zimbraMailForwardingAddressMaxNumAddrs = "zimbraMailForwardingAddressMaxNumAddrs";
+ZaResource.A_zmailMailForwardingAddressMaxLength = "zmailMailForwardingAddressMaxLength";
+ZaResource.A_zmailMailForwardingAddressMaxNumAddrs = "zmailMailForwardingAddressMaxNumAddrs";
 
 ZaResource.ACCOUNT_STATUS_ACTIVE = "active";
 ZaResource.ACCOUNT_STATUS_MAINTENANCE = "maintenance";
@@ -92,9 +92,9 @@ ZaResource.SCHEDULE_POLICY_FT = "scheduleFT";
 ZaResource.SCHEDULE_POLICY_TF = "scheduleTF";
 ZaResource.SCHEDULE_POLICY_FF = "scheduleFF";
 
-ZaResource.A_zimbraPrefCalendarAutoAcceptSignatureId = "zimbraPrefCalendarAutoAcceptSignatureId";
-ZaResource.A_zimbraPrefCalendarAutoDeclineSignatureId = "zimbraPrefCalendarAutoDeclineSignatureId";
-ZaResource.A_zimbraPrefCalendarAutoDenySignatureId = "zimbraPrefCalendarAutoDenySignatureId";
+ZaResource.A_zmailPrefCalendarAutoAcceptSignatureId = "zmailPrefCalendarAutoAcceptSignatureId";
+ZaResource.A_zmailPrefCalendarAutoDeclineSignatureId = "zmailPrefCalendarAutoDeclineSignatureId";
+ZaResource.A_zmailPrefCalendarAutoDenySignatureId = "zmailPrefCalendarAutoDenySignatureId";
 ZaResource.A2_signatureList = "signatureList";
 ZaResource.A2_signature_selection_cache = "signatureSelectionCache";
 
@@ -111,12 +111,12 @@ ZaResource.MAXSEARCHRESULTS = ZaSettings.MAXSEARCHRESULTS;
 ZaResource.RESULTSPERPAGE = ZaSettings.RESULTSPERPAGE;
 
 ZaResource.searchAttributes = AjxBuffer.concat(ZaResource.A_displayname,",",
-											   ZaItem.A_zimbraId,  "," , 
+											   ZaItem.A_zmailId,  "," , 
 											   ZaResource.A_mailHost , "," , 
 											   ZaResource.A_uid ,"," , 
 											   ZaResource.A_accountStatus , "," , 
 											   ZaResource.A_description, ",",
-											   ZaResource.A_zimbraCalResType);
+											   ZaResource.A_zmailCalResType);
 
 ZaResource.VIEW_RESOURCE_MAIL_RIGHT = "adminLoginCalendarResourceAs";
 ZaResource.SET_CALRES_PASSWORD_RIGHT = "setCalendarResourcePassword";
@@ -151,18 +151,18 @@ function(tmpObj) {
 
 	var maxPwdLen = Number.POSITIVE_INFINITY;
 	var minPwdLen = 1;	
-	if(ZaItem.hasWritePermission(ZaAccount.A_zimbraMinPwdLength,tmpObj) && ZaItem.hasWritePermission(ZaAccount.A_zimbraMaxPwdLength,tmpObj)) {
+	if(ZaItem.hasWritePermission(ZaAccount.A_zmailMinPwdLength,tmpObj) && ZaItem.hasWritePermission(ZaAccount.A_zmailMaxPwdLength,tmpObj)) {
 		//validate password length against this account's COS setting
-		if(tmpObj.attrs[ZaResource.A_zimbraMinPwdLength] != null) {
-			minPwdLen = tmpObj.attrs[ZaResource.A_zimbraMinPwdLength];
+		if(tmpObj.attrs[ZaResource.A_zmailMinPwdLength] != null) {
+			minPwdLen = tmpObj.attrs[ZaResource.A_zmailMinPwdLength];
 		} else  {
-			minPwdLen = tmpObj._defaultValues.attrs[ZaResource.A_zimbraMinPwdLength];
+			minPwdLen = tmpObj._defaultValues.attrs[ZaResource.A_zmailMinPwdLength];
 		}
 		
-		if(tmpObj.attrs[ZaResource.A_zimbraMaxPwdLength] != null) {
-			maxPwdLen = tmpObj.attrs[ZaResource.A_zimbraMaxPwdLength];
+		if(tmpObj.attrs[ZaResource.A_zmailMaxPwdLength] != null) {
+			maxPwdLen = tmpObj.attrs[ZaResource.A_zmailMaxPwdLength];
 		} else  {
-			maxPwdLen = tmpObj._defaultValues.attrs[ZaResource.A_zimbraMaxPwdLength];
+			maxPwdLen = tmpObj._defaultValues.attrs[ZaResource.A_zmailMaxPwdLength];
 		}
 	}
 	if(ZaItem.hasAnyRight([ZaResource.SET_CALRES_PASSWORD_RIGHT, ZaResource.CHANGE_CALRES_PASSWORD_RIGHT],tmpObj)) {
@@ -213,7 +213,7 @@ function (tmpObj, resource) {
 	tmpObj.attrs[ZaResource.A_mail] = tmpObj.name;	
 	var resp;	
 	//create SOAP request
-	var soapDoc = AjxSoapDoc.create("CreateCalendarResourceRequest", ZaZimbraAdmin.URN, null);
+	var soapDoc = AjxSoapDoc.create("CreateCalendarResourceRequest", ZaZmailAdmin.URN, null);
 	soapDoc.set(ZaResource.A_name, tmpObj.name);
 	
 	if(tmpObj.attrs[ZaResource.A_password] && tmpObj.attrs[ZaResource.A_password].length > 0)
@@ -235,9 +235,9 @@ function (tmpObj, resource) {
 	//set all the other attrs automatically
 	for (var aname in tmpObj.attrs) {
 		if(aname == ZaResource.A_password || aname == ZaItem.A_objectClass || aname == ZaResource.A_mail ||
-           aname == ZaResource.A_zimbraPrefCalendarAutoAcceptSignatureId ||
-           aname == ZaResource.A_zimbraPrefCalendarAutoDenySignatureId ||
-           aname == ZaResource.A_zimbraPrefCalendarAutoDeclineSignatureId     ) {
+           aname == ZaResource.A_zmailPrefCalendarAutoAcceptSignatureId ||
+           aname == ZaResource.A_zmailPrefCalendarAutoDenySignatureId ||
+           aname == ZaResource.A_zmailPrefCalendarAutoDeclineSignatureId     ) {
 			continue;
 		}	
 		
@@ -285,7 +285,7 @@ ZaResource.modifyMethod =
 function(mods) {
 	var hasSomething = false;
 	//update the object
-	var soapDoc = AjxSoapDoc.create("ModifyCalendarResourceRequest", ZaZimbraAdmin.URN, null);
+	var soapDoc = AjxSoapDoc.create("ModifyCalendarResourceRequest", ZaZmailAdmin.URN, null);
 	soapDoc.set("id", this.id);
 	for (var aname in mods) {
 		hasSomething = true;
@@ -348,7 +348,7 @@ ZaItem.modifyMethods["ZaResource"].push(ZaResource.modifyMethod);
 
 ZaResource.prototype.remove = 
 function(callback) {
-	var soapDoc = AjxSoapDoc.create("DeleteCalendarResourceRequest", ZaZimbraAdmin.URN, null);
+	var soapDoc = AjxSoapDoc.create("DeleteCalendarResourceRequest", ZaZmailAdmin.URN, null);
 	soapDoc.set("id", this.id);
 	this.deleteCommand = new ZmCsfeCommand();
 	var params = new Object();
@@ -370,7 +370,7 @@ function (resource) {
 	this.attrs = new Object();			
 	this.name = resource.name;
 	this.id = resource.id;
-	this.attrs[ZaResource.A_zimbraPrefCalendarForwardInvitesTo] = new Array();
+	this.attrs[ZaResource.A_zmailPrefCalendarForwardInvitesTo] = new Array();
 	var len = (resource.a ? resource.a.length : 0);
 	for(var ix = 0; ix < len; ix++) {
 		if(!this.attrs[[resource.a[ix].n]]) {
@@ -394,17 +394,17 @@ function (resource) {
 }
 
 //set the ldap attributes according to the schedule policy values
-//the ldap attrs are "zimbraCalResAutoAcceptDecline" & "zimbraCalResAutoDeclineIfBusy";
+//the ldap attrs are "zmailCalResAutoAcceptDecline" & "zmailCalResAutoDeclineIfBusy";
 
 ZaResource.prototype.setSchedulePolicyFromLdapAttrs =
 function () {
-	if (this.attrs[ZaResource.A_zimbraCalResAutoAcceptDecline] == "TRUE" && this.attrs[ZaResource.A_zimbraCalResAutoDeclineIfBusy] == "TRUE"){
+	if (this.attrs[ZaResource.A_zmailCalResAutoAcceptDecline] == "TRUE" && this.attrs[ZaResource.A_zmailCalResAutoDeclineIfBusy] == "TRUE"){
 		this[ZaResource.A2_schedulePolicy] = ZaResource.SCHEDULE_POLICY_TT ;
-	} else if (this.attrs[ZaResource.A_zimbraCalResAutoAcceptDecline] == "TRUE" && this.attrs[ZaResource.A_zimbraCalResAutoDeclineIfBusy] == "FALSE") {
+	} else if (this.attrs[ZaResource.A_zmailCalResAutoAcceptDecline] == "TRUE" && this.attrs[ZaResource.A_zmailCalResAutoDeclineIfBusy] == "FALSE") {
 		this[ZaResource.A2_schedulePolicy] = ZaResource.SCHEDULE_POLICY_TF;
-	} else if (this.attrs[ZaResource.A_zimbraCalResAutoAcceptDecline] == "FALSE" && this.attrs[ZaResource.A_zimbraCalResAutoDeclineIfBusy] == "FALSE") {
+	} else if (this.attrs[ZaResource.A_zmailCalResAutoAcceptDecline] == "FALSE" && this.attrs[ZaResource.A_zmailCalResAutoDeclineIfBusy] == "FALSE") {
 		this[ZaResource.A2_schedulePolicy] = ZaResource.SCHEDULE_POLICY_FF;
-	}  else if (this.attrs[ZaResource.A_zimbraCalResAutoAcceptDecline] == "FALSE" && this.attrs[ZaResource.A_zimbraCalResAutoDeclineIfBusy] == "TRUE") {
+	}  else if (this.attrs[ZaResource.A_zmailCalResAutoAcceptDecline] == "FALSE" && this.attrs[ZaResource.A_zmailCalResAutoDeclineIfBusy] == "TRUE") {
 		this[ZaResource.A2_schedulePolicy] = ZaResource.SCHEDULE_POLICY_FT;
 	}
 	
@@ -414,17 +414,17 @@ function () {
 ZaResource.prototype.setLdapAttrsFromSchedulePolicy =
 function (){
 	if (this[ZaResource.A2_schedulePolicy] == ZaResource.SCHEDULE_POLICY_TT ){
-		this.attrs[ZaResource.A_zimbraCalResAutoAcceptDecline] = "TRUE";
-		this.attrs[ZaResource.A_zimbraCalResAutoDeclineIfBusy] = "TRUE";		
+		this.attrs[ZaResource.A_zmailCalResAutoAcceptDecline] = "TRUE";
+		this.attrs[ZaResource.A_zmailCalResAutoDeclineIfBusy] = "TRUE";		
 	} else if (this[ZaResource.A2_schedulePolicy] == ZaResource.SCHEDULE_POLICY_TF){
-		this.attrs[ZaResource.A_zimbraCalResAutoAcceptDecline] = "TRUE";
-		this.attrs[ZaResource.A_zimbraCalResAutoDeclineIfBusy] = "FALSE";
+		this.attrs[ZaResource.A_zmailCalResAutoAcceptDecline] = "TRUE";
+		this.attrs[ZaResource.A_zmailCalResAutoDeclineIfBusy] = "FALSE";
 	} else if (this[ZaResource.A2_schedulePolicy] == ZaResource.SCHEDULE_POLICY_FT) {
-		this.attrs[ZaResource.A_zimbraCalResAutoAcceptDecline] = "FALSE";
-		this.attrs[ZaResource.A_zimbraCalResAutoDeclineIfBusy] = "TRUE";		
+		this.attrs[ZaResource.A_zmailCalResAutoAcceptDecline] = "FALSE";
+		this.attrs[ZaResource.A_zmailCalResAutoDeclineIfBusy] = "TRUE";		
 	} else if (this[ZaResource.A2_schedulePolicy] == ZaResource.SCHEDULE_POLICY_FF) {
-		this.attrs[ZaResource.A_zimbraCalResAutoAcceptDecline] = "FALSE";
-		this.attrs[ZaResource.A_zimbraCalResAutoDeclineIfBusy] = "FALSE";		
+		this.attrs[ZaResource.A_zmailCalResAutoAcceptDecline] = "FALSE";
+		this.attrs[ZaResource.A_zmailCalResAutoDeclineIfBusy] = "FALSE";		
 	}
 };
 
@@ -445,7 +445,7 @@ function() {
 		html[idx++] = "<td><b>" + AjxStringUtil.htmlEncode(this.name) + "</b></td>";
 		html[idx++] = "<td align='right'>";
 		//display the image
-		if (this.attrs[ZaResource.A_zimbraCalResType] == ZaResource.RESOURCE_TYPE_LOCATION){
+		if (this.attrs[ZaResource.A_zmailCalResType] == ZaResource.RESOURCE_TYPE_LOCATION){
 			html[idx++] = AjxImg.getImageHtml("Location");	
 		}else {//equipment or other resource types
 			html[idx++] = AjxImg.getImageHtml("Resource");	
@@ -458,11 +458,11 @@ function() {
 		
 		idx = this._addRow(ZaMsg.NAD_ResourceName, this.attrs[ZaResource.A_displayname], html, idx);
 		idx = this._addRow(ZaMsg.NAD_ResType, 
-						ZaResource.getResTypeLabel(this.attrs[ZaResource.A_zimbraCalResType]), html, idx);
+						ZaResource.getResTypeLabel(this.attrs[ZaResource.A_zmailCalResType]), html, idx);
 		if(this.getAttrs && this.getAttrs[ZaResource.A_mailHost]) {
 			idx = this._addRow(ZaMsg.NAD_MailServer, this.attrs[ZaResource.A_mailHost], html, idx);
 		}
-		idx = this._addAttrRow(ZaItem.A_zimbraId, html, idx);
+		idx = this._addAttrRow(ZaItem.A_zmailId, html, idx);
 		html[idx++] = "</table>";
 		this._toolTip = html.join("");
 	}
@@ -471,7 +471,7 @@ function() {
 
 ZaResource.loadMethod = 
 function(by, val, withCos) {
-	var soapDoc = AjxSoapDoc.create("GetCalendarResourceRequest", ZaZimbraAdmin.URN, null);
+	var soapDoc = AjxSoapDoc.create("GetCalendarResourceRequest", ZaZmailAdmin.URN, null);
 	if(withCos) {
 		soapDoc.getMethod().setAttribute("applyCos", "1");	
 	} else {
@@ -514,7 +514,7 @@ function(by, val, withCos) {
 	if(!ZaItem.hasRight(ZaResource.GET_CALRES_INFO_RIGHT,this))
 		return;
 	
-	var soapDoc = AjxSoapDoc.create("GetAccountInfoRequest", ZaZimbraAdmin.URN, null);
+	var soapDoc = AjxSoapDoc.create("GetAccountInfoRequest", ZaZmailAdmin.URN, null);
 
 	var elBy = soapDoc.set("account", val);
 	elBy.setAttribute("by", by);
@@ -542,17 +542,17 @@ ZaItem.loadMethods["ZaResource"].push(ZaResource.loadInfoMethod);
 ZaResource.prototype.getAutoLocationName = 
 function (){
 	var autoLocName = "";
-	if(this.attrs[ZaResource.A_zimbraCalResSite])
-		autoLocName += ZaMsg.NAD_Site + " " + this.attrs[ZaResource.A_zimbraCalResSite] ;
+	if(this.attrs[ZaResource.A_zmailCalResSite])
+		autoLocName += ZaMsg.NAD_Site + " " + this.attrs[ZaResource.A_zmailCalResSite] ;
 	
-	if(this.attrs[ZaResource.A_zimbraCalResBuilding])
-		autoLocName += ", " + ZaMsg.NAD_Building + " " + this.attrs[ZaResource.A_zimbraCalResBuilding];
+	if(this.attrs[ZaResource.A_zmailCalResBuilding])
+		autoLocName += ", " + ZaMsg.NAD_Building + " " + this.attrs[ZaResource.A_zmailCalResBuilding];
 	
-	if(this.attrs[ZaResource.A_zimbraCalResFloor])
-		autoLocName += ", " + ZaMsg.NAD_Floor + " " + this.attrs[ZaResource.A_zimbraCalResFloor];
+	if(this.attrs[ZaResource.A_zmailCalResFloor])
+		autoLocName += ", " + ZaMsg.NAD_Floor + " " + this.attrs[ZaResource.A_zmailCalResFloor];
 	
-	if(this.attrs[ZaResource.A_zimbraCalResRoom])
-		autoLocName += ", " + ZaMsg.NAD_Room + " " + this.attrs[ZaResource.A_zimbraCalResRoom];
+	if(this.attrs[ZaResource.A_zmailCalResRoom])
+		autoLocName += ", " + ZaMsg.NAD_Room + " " + this.attrs[ZaResource.A_zmailCalResRoom];
 	
 	//remove the last ',' or spaces
 	var regEx = /^\,\s*/;
@@ -571,7 +571,7 @@ function(withCos) {
 **/
 ZaResource.prototype.rename = 
 function (newName) {
-	var soapDoc = AjxSoapDoc.create("RenameCalendarResourceRequest", ZaZimbraAdmin.URN, null);
+	var soapDoc = AjxSoapDoc.create("RenameCalendarResourceRequest", ZaZmailAdmin.URN, null);
 	soapDoc.set("id", this.id);
 	soapDoc.set("newName", newName);	
 	//var command = new ZmCsfeCommand();
@@ -602,8 +602,8 @@ ZaResource.myXModel = {
 			   }
 			}
 		},
-		{id:ZaItem.A_zimbraId, type:_STRING_, ref:"attrs/" + ZaItem.A_zimbraId},
-		{id:ZaItem.A_zimbraCreateTimestamp, ref:"attrs/" + ZaItem.A_zimbraCreateTimestamp}, 	
+		{id:ZaItem.A_zmailId, type:_STRING_, ref:"attrs/" + ZaItem.A_zmailId},
+		{id:ZaItem.A_zmailCreateTimestamp, ref:"attrs/" + ZaItem.A_zmailCreateTimestamp}, 	
 		{id:ZaResource.A_mail, type:_STRING_, ref:"attrs/"+ZaResource.A_mail,
 			constraints: {type:"method", value:
 			   function (value, form, formItem, instance) {				   
@@ -622,30 +622,30 @@ ZaResource.myXModel = {
 		{id:ZaResource.A2_confirmPassword, type:_STRING_},						 		
 		//resource properties
 		{id:ZaResource.A_displayname, type:_STRING_, ref:"attrs/"+ZaResource.A_displayname, required:true}, //resource name
-		{id:ZaResource.A_zimbraCalResType, type:_STRING_, ref:"attrs/"+ZaResource.A_zimbraCalResType},//type
+		{id:ZaResource.A_zmailCalResType, type:_STRING_, ref:"attrs/"+ZaResource.A_zmailCalResType},//type
 		{id:ZaResource.A_uid, type:_STRING_, ref:"attrs/"+ZaResource.A_uid}, //email address field of the account name
 		{id:ZaResource.A_mailHost, type:_STRING_, ref:"attrs/"+ZaResource.A_mailHost}, //domain dropdown of the account name
 		{id:ZaResource.A_COSId, type:_STRING_, ref:"attrs/" + ZaResource.A_COSId},
 		{id:ZaResource.A_accountStatus, type:_STRING_, ref:"attrs/"+ZaResource.A_accountStatus},		
-		{id:ZaResource.A_zimbraCalResAutoDeclineIfBusy, type:_STRING_, ref:"attrs/"+ZaResource.A_zimbraCalResAutoDeclineIfBusy}, //scheduling pocily
-		{id:ZaResource.A_zimbraCalResAlwaysFree, type:_STRING_, ref:"attrs/"+ZaResource.A_zimbraCalResAlwaysFree}, //scheduling pocily
-		{id:ZaResource.A_zimbraCalResAutoDeclineRecurring, type:_STRING_, ref:"attrs/"+ZaResource.A_zimbraCalResAutoDeclineRecurring},
-		{id:ZaResource.A_zimbraCalResMaxNumConflictsAllowed, type:_NUMBER_, ref:"attrs/"+ZaResource.A_zimbraCalResMaxNumConflictsAllowed,defaultValue:0,minInclusive:0},
-		{id:ZaResource.A_zimbraCalResMaxPercentConflictsAllowed, type:_NUMBER_, ref:"attrs/"+ZaResource.A_zimbraCalResMaxPercentConflictsAllowed,minInclusive:0,maxInclusive:100,defaultValue:0},
+		{id:ZaResource.A_zmailCalResAutoDeclineIfBusy, type:_STRING_, ref:"attrs/"+ZaResource.A_zmailCalResAutoDeclineIfBusy}, //scheduling pocily
+		{id:ZaResource.A_zmailCalResAlwaysFree, type:_STRING_, ref:"attrs/"+ZaResource.A_zmailCalResAlwaysFree}, //scheduling pocily
+		{id:ZaResource.A_zmailCalResAutoDeclineRecurring, type:_STRING_, ref:"attrs/"+ZaResource.A_zmailCalResAutoDeclineRecurring},
+		{id:ZaResource.A_zmailCalResMaxNumConflictsAllowed, type:_NUMBER_, ref:"attrs/"+ZaResource.A_zmailCalResMaxNumConflictsAllowed,defaultValue:0,minInclusive:0},
+		{id:ZaResource.A_zmailCalResMaxPercentConflictsAllowed, type:_NUMBER_, ref:"attrs/"+ZaResource.A_zmailCalResMaxPercentConflictsAllowed,minInclusive:0,maxInclusive:100,defaultValue:0},
 //		{id:ZaResource.A_description, type:_STRING_, ref:"attrs/"+ZaResource.A_description},
 		ZaItem.descriptionModelItem ,
           {id:ZaResource.A_notes, type:_STRING_, ref:"attrs/"+ZaResource.A_notes},
 
         //Signature
-        {id:ZaResource.A_zimbraPrefCalendarAutoAcceptSignatureId, type:_STRING_, ref:"attrs/"+ZaResource.A_zimbraPrefCalendarAutoAcceptSignatureId},
-        {id:ZaResource.A_zimbraPrefCalendarAutoDenySignatureId, type:_STRING_, ref:"attrs/"+ZaResource.A_zimbraPrefCalendarAutoDenySignatureId},
-        {id:ZaResource.A_zimbraPrefCalendarAutoDeclineSignatureId, type:_STRING_, ref:"attrs/"+ZaResource.A_zimbraPrefCalendarAutoDeclineSignatureId},
+        {id:ZaResource.A_zmailPrefCalendarAutoAcceptSignatureId, type:_STRING_, ref:"attrs/"+ZaResource.A_zmailPrefCalendarAutoAcceptSignatureId},
+        {id:ZaResource.A_zmailPrefCalendarAutoDenySignatureId, type:_STRING_, ref:"attrs/"+ZaResource.A_zmailPrefCalendarAutoDenySignatureId},
+        {id:ZaResource.A_zmailPrefCalendarAutoDeclineSignatureId, type:_STRING_, ref:"attrs/"+ZaResource.A_zmailPrefCalendarAutoDeclineSignatureId},
 		//Resource Location
-		{id:ZaResource.A_zimbraCalResSite, type:_STRING_, ref:"attrs/"+ZaResource.A_zimbraCalResSite},
-		{id:ZaResource.A_zimbraCalResBuilding, type:_STRING_, ref:"attrs/"+ZaResource.A_zimbraCalResBuilding},
-		{id:ZaResource.A_zimbraCalResFloor, type:_STRING_, ref:"attrs/"+ZaResource.A_zimbraCalResFloor},
-		{id:ZaResource.A_zimbraCalResRoom, type:_STRING_, ref:"attrs/"+ZaResource.A_zimbraCalResRoom},
-		{id:ZaResource.A_zimbraCalResCapacity, type:_NUMBER_, ref:"attrs/"+ZaResource.A_zimbraCalResCapacity},		
+		{id:ZaResource.A_zmailCalResSite, type:_STRING_, ref:"attrs/"+ZaResource.A_zmailCalResSite},
+		{id:ZaResource.A_zmailCalResBuilding, type:_STRING_, ref:"attrs/"+ZaResource.A_zmailCalResBuilding},
+		{id:ZaResource.A_zmailCalResFloor, type:_STRING_, ref:"attrs/"+ZaResource.A_zmailCalResFloor},
+		{id:ZaResource.A_zmailCalResRoom, type:_STRING_, ref:"attrs/"+ZaResource.A_zmailCalResRoom},
+		{id:ZaResource.A_zmailCalResCapacity, type:_NUMBER_, ref:"attrs/"+ZaResource.A_zmailCalResCapacity},		
 		{id:ZaResource.A_locationDisplayName, type:_STRING_, ref:"attrs/"+ZaResource.A_locationDisplayName},
 		{id:ZaResource.A_street, type:_STRING_, ref:"attrs/"+ZaResource.A_street},	
 		{id:ZaResource.A_city, type:_STRING_, ref:"attrs/"+ZaResource.A_city},		
@@ -654,8 +654,8 @@ ZaResource.myXModel = {
 		{id:ZaResource.A_zip, type:_STRING_, ref:"attrs/"+ZaResource.A_zip},						
 		
 		//Resource 	Contact					
-		{id:ZaResource.A_zimbraCalResContactName, type:_STRING_, ref:"attrs/"+ZaResource.A_zimbraCalResContactName},
-		{id:ZaResource.A_zimbraCalResContactEmail, type:_STRING_, ref:"attrs/"+ZaResource.A_zimbraCalResContactEmail,
+		{id:ZaResource.A_zmailCalResContactName, type:_STRING_, ref:"attrs/"+ZaResource.A_zmailCalResContactName},
+		{id:ZaResource.A_zmailCalResContactEmail, type:_STRING_, ref:"attrs/"+ZaResource.A_zmailCalResContactEmail,
 			constraints: {type:"method", value:
 			   function (value, form, formItem, instance) {				   
 				   if (value){
@@ -668,9 +668,9 @@ ZaResource.myXModel = {
 			   }
 			}		
 		},
-		{id:ZaResource.A_zimbraCalResContactPhone, type:_STRING_, ref:"attrs/"+ZaResource.A_zimbraCalResContactPhone}, 
+		{id:ZaResource.A_zmailCalResContactPhone, type:_STRING_, ref:"attrs/"+ZaResource.A_zmailCalResContactPhone}, 
 		{id:ZaResource.A_contactInfoAutoComplete, type:_LIST_, ref:"attrs/"+ZaResource.A_contactInfoAutoComplete},
-		{id:ZaResource.A_zimbraPrefCalendarForwardInvitesTo, type:_LIST_, ref:"attrs/"+ZaResource.A_zimbraPrefCalendarForwardInvitesTo, listItem:{type:_EMAIL_ADDRESS_}},
+		{id:ZaResource.A_zmailPrefCalendarForwardInvitesTo, type:_LIST_, ref:"attrs/"+ZaResource.A_zmailPrefCalendarForwardInvitesTo, listItem:{type:_EMAIL_ADDRESS_}},
 		{id:ZaResource.A2_autodisplayname, type:_ENUM_, choices:ZaModel.BOOLEAN_CHOICES},
 		{id:ZaResource.A2_autoMailServer, type:_ENUM_, choices:ZaModel.BOOLEAN_CHOICES},
 		{id:ZaResource.A2_autoCos, type:_ENUM_, choices:ZaModel.BOOLEAN_CHOICES},
@@ -703,7 +703,7 @@ ZaResource.initMethod = function () {
 	this.attrs = new Object();
 	this.id = "";
 	this.name="";
-	//this.attrs[ZaResource.A_zimbraMailAlias] = new Array();
+	//this.attrs[ZaResource.A_zmailMailAlias] = new Array();
 }
 ZaItem.initMethods["ZaResource"].push(ZaResource.initMethod);
 
@@ -718,7 +718,7 @@ function (elementValue,instanceValue, event){
 }
 
 ZaResource.isLocation = function () {
-	return (this.getInstanceValue(ZaResource.A_zimbraCalResType).toLowerCase() ==  ZaResource.RESOURCE_TYPE_LOCATION.toLowerCase());
+	return (this.getInstanceValue(ZaResource.A_zmailCalResType).toLowerCase() ==  ZaResource.RESOURCE_TYPE_LOCATION.toLowerCase());
 }
 
 ZaResource.isAutoDeclineEnabled = function () {

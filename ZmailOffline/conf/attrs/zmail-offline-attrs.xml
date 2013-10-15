@@ -43,7 +43,7 @@
 </attr>
 
 <attr name="offlineRemoteServerUri" type="string" cardinality="single" requiredIn="account" flags="accountInfo">
-  <desc>base URI of the remote Zimbra server</desc>
+  <desc>base URI of the remote Zmail server</desc>
 </attr>
 
 <attr name="offlineWebappUri" type="string" cardinality="single" optionalIn="account" flags="accountInfo">
@@ -51,19 +51,19 @@
 </attr>
 
 <attr name="offlineRemoteHost" type="string" cardinality="single" requiredIn="account">
-  <desc>host of the remote Zimbra server</desc>
+  <desc>host of the remote Zmail server</desc>
 </attr>
 
 <attr name="offlineRemotePort" type="port" cardinality="single" requiredIn="account">
-  <desc>port of the remote Zimbra server</desc>
+  <desc>port of the remote Zmail server</desc>
 </attr>
 
 <attr name="offlineRemoteSsl" type="boolean" cardinality="single" requiredIn="account">
-  <desc>whether use ssl to access remote Zimbra server</desc>
+  <desc>whether use ssl to access remote Zmail server</desc>
 </attr>
 
 <attr name="offlineRemoteServerVersion" type="string" cardinality="single" optionalIn="account">
-  <desc>version number of remote Zimbra server</desc>
+  <desc>version number of remote Zmail server</desc>
 </attr>
 
 <attr name="offlineProxyHost" type="string" cardinality="single" optionalIn="account">
@@ -83,11 +83,11 @@
 </attr>
 
 <attr name="offlineAccountFlavor" type="string" cardinality="single" optionalIn="account" flags="accountInfo">
-  <desc>Flavor of account type (i.e. Ymail, Gmail, Live, MobileMe, Zimbra, Pop, Imap...)</desc>
+  <desc>Flavor of account type (i.e. Ymail, Gmail, Live, MobileMe, Zmail, Pop, Imap...)</desc>
 </attr>
 
 <attr name="offlineAccountName" type="string" cardinality="single" optionalIn="account">
-  <desc>A user given name for a Zimbra account</desc>
+  <desc>A user given name for a Zmail account</desc>
 </attr>
 
 <attr name="offlineFeatureSmtpEnabled" type="boolean" cardinality="single" optionalIn="account" flags="accountInfo">
@@ -95,7 +95,7 @@
 </attr>
 
 <attr name="offlineSyncFreq" type="integer" cardinality="single" optionalIn="account">
-  <desc>Zimbra account sync frequency in seconds, where -1 means manually and 0 means push</desc>
+  <desc>Zmail account sync frequency in seconds, where -1 means manually and 0 means push</desc>
 </attr>
 
 <attr name="offlineSyncStatus" type="enum" value="unknown,offline,online,running,authfail,error" cardinality="single" optionalIn="account">
@@ -103,7 +103,7 @@
 </attr>
 
 <attr name="offlineLastSync" type="long" cardinality="single" optionalIn="account">
-  <desc>the last time (milli since epoch) this Zimbra account was successfully synced</desc>
+  <desc>the last time (milli since epoch) this Zmail account was successfully synced</desc>
 </attr>
 
 <attr name="offlineEnableTrace" type="boolean" cardinality="single" optionalIn="account">
@@ -130,7 +130,7 @@
   <desc>data source id for gal sync account</desc>
 </attr>
 
-<attr name="zimbraPrefShareContactsInAutoComplete" type="string" cardinality="single" optionalIn="account">
+<attr name="zmailPrefShareContactsInAutoComplete" type="string" cardinality="single" optionalIn="account">
   <desc>if true, include all contacts of this account in address auto-completion, in other accounts compose window</desc>
 </attr>
 
@@ -150,67 +150,67 @@
   <desc>id of the offline acount through which access to mountpoints is proxied</desc>
 </attr>
 
-<attr name="zimbraDataSourceContactSyncEnabled" type="boolean" cardinality="single" optionalIn="dataSource">
+<attr name="zmailDataSourceContactSyncEnabled" type="boolean" cardinality="single" optionalIn="dataSource">
   <desc>whether contact synchronization is enabled</desc>
 </attr>
 
-<attr name="zimbraDataSourceCalendarSyncEnabled" type="boolean" cardinality="single" optionalIn="dataSource">
+<attr name="zmailDataSourceCalendarSyncEnabled" type="boolean" cardinality="single" optionalIn="dataSource">
   <desc>whether calendar synchronization is enabled</desc>
 </attr>
 
-<attr name="zimbraDataSourceSmtpEnabled" type="boolean" cardinality="single" optionalIn="dataSource">
+<attr name="zmailDataSourceSmtpEnabled" type="boolean" cardinality="single" optionalIn="dataSource">
   <desc>whether oubound mail sending is allowed in this data source</desc>
 </attr>
 
-<attr name="zimbraDataSourceSmtpHost" type="string" cardinality="single" optionalIn="dataSource">
+<attr name="zmailDataSourceSmtpHost" type="string" cardinality="single" optionalIn="dataSource">
   <desc>host of smtp associated with this data source</desc>
 </attr>
 
-<attr name="zimbraDataSourceSmtpPort" type="port" cardinality="single" optionalIn="dataSource">
+<attr name="zmailDataSourceSmtpPort" type="port" cardinality="single" optionalIn="dataSource">
   <desc>port number of smtp associated with this data source</desc>
 </attr>
 
-<attr name="zimbraDataSourceSmtpConnectionType" type="enum"  value="cleartext,ssl" cardinality="single" optionalIn="dataSource">
+<attr name="zmailDataSourceSmtpConnectionType" type="enum"  value="cleartext,ssl" cardinality="single" optionalIn="dataSource">
   <desc>security layer for smtp connection</desc>
 </attr>
 
-<attr name="zimbraDataSourceSmtpAuthRequired" type="boolean" cardinality="single" optionalIn="dataSource">
+<attr name="zmailDataSourceSmtpAuthRequired" type="boolean" cardinality="single" optionalIn="dataSource">
   <desc>whether smtp associated with this data source requires authentication</desc>
 </attr>
 
-<attr name="zimbraDataSourceSmtpAuthUsername" type="string" cardinality="single" optionalIn="dataSource">
+<attr name="zmailDataSourceSmtpAuthUsername" type="string" cardinality="single" optionalIn="dataSource">
   <desc>smtp authentication username</desc>
 </attr>
 
-<attr name="zimbraDataSourceSmtpAuthPassword" type="string" cardinality="single" optionalIn="dataSource">
+<attr name="zmailDataSourceSmtpAuthPassword" type="string" cardinality="single" optionalIn="dataSource">
   <desc>smtp authentication password</desc>
 </attr>
 
-<attr name="zimbraDataSourceSyncFreq" type="integer" cardinality="single" optionalIn="dataSource">
+<attr name="zmailDataSourceSyncFreq" type="integer" cardinality="single" optionalIn="dataSource">
   <desc>data source sync frequency in seconds, where -1 means manually and 0 means push</desc>
 </attr>
 
-<attr name="zimbraDataSourceSyncStatus" type="enum" value="unknown,offline,online,running,authfail,error" cardinality="single" optionalIn="dataSource">
+<attr name="zmailDataSourceSyncStatus" type="enum" value="unknown,offline,online,running,authfail,error" cardinality="single" optionalIn="dataSource">
   <desc>status of the last attempt to sync this data source, unknown means never attempted since server start</desc>
 </attr>
 
-<attr name="zimbraDataSourceLastSync" type="long" cardinality="single" optionalIn="dataSource">
+<attr name="zmailDataSourceLastSync" type="long" cardinality="single" optionalIn="dataSource">
   <desc>the last time (milli since epoch) this data source was successfully synced</desc>
 </attr>
 
-<attr name="zimbraDataSourceSyncAllServerFolders" type="boolean" cardinality="single" optionalIn="dataSource">
+<attr name="zmailDataSourceSyncAllServerFolders" type="boolean" cardinality="single" optionalIn="dataSource">
   <desc>whether to auto-enable sync on all server folders</desc>
 </attr>
 
-<attr name="zimbraDataSourceCalendarFolderId" type="string" cardinality="single" optionalIn="dataSource">
+<attr name="zmailDataSourceCalendarFolderId" type="string" cardinality="single" optionalIn="dataSource">
   <desc>root folder for for calendar</desc>
 </attr>
 
-<attr name="zimbraPrefMailtoHandlerEnabled" type="boolean" cardinality="single" optionalIn="account" flags="accountInfo">
+<attr name="zmailPrefMailtoHandlerEnabled" type="boolean" cardinality="single" optionalIn="account" flags="accountInfo">
   <desc>whether to register as mailto link handler</desc>
 </attr>
 
-<attr name="zimbraPrefMailtoAccountId" type="string" cardinality="single" optionalIn="account" flags="accountInfo">
+<attr name="zmailPrefMailtoAccountId" type="string" cardinality="single" optionalIn="account" flags="accountInfo">
   <desc>the account ID of the account for mailto handling</desc>
 </attr>
 
@@ -218,19 +218,19 @@
   <desc>a unique ID of this client</desc>
 </attr>
 
-<attr name="zimbraPrefOfflineBackupInterval" type="long" cardinality="single" optionalIn="account" callback="com.zimbra.cs.offline.backup.BackupIntervalCallback">
+<attr name="zmailPrefOfflineBackupInterval" type="long" cardinality="single" optionalIn="account" callback="org.zmail.cs.offline.backup.BackupIntervalCallback">
   <desc>interval to run account backup</desc>
 </attr>
 
-<attr name="zimbraPrefOfflineBackupAccountId" type="string" cardinality="multi" optionalIn="account">
+<attr name="zmailPrefOfflineBackupAccountId" type="string" cardinality="multi" optionalIn="account">
   <desc>account ID(s) to backup</desc>
 </attr>
 
-<attr name="zimbraPrefOfflineBackupPath" type="string" cardinality="single" optionalIn="account" callback="com.zimbra.cs.offline.backup.BackupPathCallback">
+<attr name="zmailPrefOfflineBackupPath" type="string" cardinality="single" optionalIn="account" callback="org.zmail.cs.offline.backup.BackupPathCallback">
   <desc>path for backup output</desc>
 </attr>
 
-<attr name="zimbraPrefOfflineBackupKeep" type="integer" cardinality="single" optionalIn="account">
+<attr name="zmailPrefOfflineBackupKeep" type="integer" cardinality="single" optionalIn="account">
   <desc>number of backups to keep for each acct</desc>
 </attr>
 
@@ -238,43 +238,43 @@
   <desc>timestamp of last backup success</desc>
 </attr>
 
-<attr name="zimbraPrefOfflineZimletSyncAccountId" type="string" cardinality="single" optionalIn="account">
+<attr name="zmailPrefOfflineZimletSyncAccountId" type="string" cardinality="single" optionalIn="account">
   <desc>account ID to sync zimlets with</desc>
 </attr>
 
-<attr name="zimbraPrefOfflineAttrProxyMode" type="string" cardinality="single" optionalIn="account">
+<attr name="zmailPrefOfflineAttrProxyMode" type="string" cardinality="single" optionalIn="account">
   <desc>Proxy config mode; one of MANUAL, NONE, or SYSTEM</desc>
 </attr>
 
-<attr name="zimbraPrefOfflineHttpProxyHost" type="string" cardinality="single" optionalIn="account">
+<attr name="zmailPrefOfflineHttpProxyHost" type="string" cardinality="single" optionalIn="account">
   <desc>HTTP/S Proxy hostname; used if mode set to Manual</desc>
 </attr>
 
-<attr name="zimbraPrefOfflineHttpProxyPort" type="long" cardinality="single" optionalIn="account">
+<attr name="zmailPrefOfflineHttpProxyPort" type="long" cardinality="single" optionalIn="account">
   <desc>HTTP/S Proxy port; used if mode set to Manual</desc>
 </attr>
 
-<attr name="zimbraPrefOfflineHttpProxyUsername" type="string" cardinality="single" optionalIn="account">
+<attr name="zmailPrefOfflineHttpProxyUsername" type="string" cardinality="single" optionalIn="account">
   <desc>HTTP/S Proxy username; used if mode set to Manual</desc>
 </attr>
 
-<attr name="zimbraPrefOfflineHttpProxyPassword" type="string" cardinality="single" optionalIn="account">
+<attr name="zmailPrefOfflineHttpProxyPassword" type="string" cardinality="single" optionalIn="account">
   <desc>HTTP/S Proxy password; used if mode set to Manual</desc>
 </attr>
 
-<attr name="zimbraPrefOfflineSocksProxyHost" type="string" cardinality="single" optionalIn="account">
+<attr name="zmailPrefOfflineSocksProxyHost" type="string" cardinality="single" optionalIn="account">
   <desc>SOCKS Proxy hostname; used if mode set to Manual</desc>
 </attr>
 
-<attr name="zimbraPrefOfflineSocksProxyPort" type="long" cardinality="single" optionalIn="account">
+<attr name="zmailPrefOfflineSocksProxyPort" type="long" cardinality="single" optionalIn="account">
   <desc>SOCKS Proxy port; used if mode set to Manual</desc>
 </attr>
 
-<attr name="zimbraPrefOfflineSocksProxyUsername" type="string" cardinality="single" optionalIn="account">
+<attr name="zmailPrefOfflineSocksProxyUsername" type="string" cardinality="single" optionalIn="account">
   <desc>SOCKS Proxy username; used if mode set to Manual</desc>
 </attr>
 
-<attr name="zimbraPrefOfflineSocksProxyPassword" type="string" cardinality="single" optionalIn="account">
+<attr name="zmailPrefOfflineSocksProxyPassword" type="string" cardinality="single" optionalIn="account">
   <desc>SOCKS Proxy password; used if mode set to Manual</desc>
 </attr>
 

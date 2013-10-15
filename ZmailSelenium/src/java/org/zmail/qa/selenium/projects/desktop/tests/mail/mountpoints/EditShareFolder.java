@@ -14,23 +14,23 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.mail.mountpoints;
+package org.zmail.qa.selenium.projects.desktop.tests.mail.mountpoints;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.GeneralUtility;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount.SOAP_DESTINATION_HOST_TYPE;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.DialogShare;
-import com.zimbra.qa.selenium.projects.desktop.ui.DialogShare.ShareRole;
-import com.zimbra.qa.selenium.projects.desktop.ui.mail.DialogEditFolder;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.GeneralUtility;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.framework.util.ZmailAccount.SOAP_DESTINATION_HOST_TYPE;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.DialogShare;
+import org.zmail.qa.selenium.projects.desktop.ui.DialogShare.ShareRole;
+import org.zmail.qa.selenium.projects.desktop.ui.mail.DialogEditFolder;
 
 public class EditShareFolder extends AjaxCommonTest{
 	public EditShareFolder() {
@@ -48,12 +48,12 @@ public class EditShareFolder extends AjaxCommonTest{
 			public void EditShareFolder_01() throws HarnessException {
 
 		FolderItem inbox = FolderItem.importFromSOAP(app.zGetActiveAccount(), FolderItem.SystemFolder.Inbox);
-		String foldername = "folder" + ZimbraSeleniumProperties.getUniqueString();
+		String foldername = "folder" + ZmailSeleniumProperties.getUniqueString();
 
 
 		// Create a subfolder in Inbox
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>"
+				"<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+		"<folder name='" + foldername +"' l='" + inbox.getId() +"'/>"
 				+	"</CreateFolderRequest>");
 
@@ -74,7 +74,7 @@ public class EditShareFolder extends AjaxCommonTest{
 		ZAssert.assertNotNull(sharedialog, "Verify the sharing dialog pops up");
 
 		// Use defaults for all options
-		sharedialog.zSetEmailAddress(ZimbraAccount.AccountA().EmailAddress);
+		sharedialog.zSetEmailAddress(ZmailAccount.AccountA().EmailAddress);
 
 		// Send it
 		sharedialog.zClickButton(Button.B_OK);
@@ -83,19 +83,19 @@ public class EditShareFolder extends AjaxCommonTest{
 		app.zPageMain.zWaitForDesktopLoadingSpinner(5000);
 
 		// Make sure that AccountA now has the share
-		ZimbraAccount.AccountA().soapSend(
-				"<GetShareInfoRequest xmlns='urn:zimbraAccount'>"
+		ZmailAccount.AccountA().soapSend(
+				"<GetShareInfoRequest xmlns='urn:zmailAccount'>"
 				+		"<grantee type='usr'/>"
 				+		"<owner by='name'>"+ app.zGetActiveAccount().EmailAddress +"</owner>"
 				+	"</GetShareInfoRequest>");
 
-		String ownerEmail = ZimbraAccount.AccountA().soapSelectValue("//acct:GetShareInfoResponse//acct:share[@folderPath='/Inbox/"+ foldername +"']", "ownerEmail");
+		String ownerEmail = ZmailAccount.AccountA().soapSelectValue("//acct:GetShareInfoResponse//acct:share[@folderPath='/Inbox/"+ foldername +"']", "ownerEmail");
 		ZAssert.assertEquals(ownerEmail, app.zGetActiveAccount().EmailAddress, "Verify the owner of the shared folder");
 
-		String rights = ZimbraAccount.AccountA().soapSelectValue("//acct:GetShareInfoResponse//acct:share[@folderPath='/Inbox/"+ foldername +"']", "rights");
+		String rights = ZmailAccount.AccountA().soapSelectValue("//acct:GetShareInfoResponse//acct:share[@folderPath='/Inbox/"+ foldername +"']", "rights");
 		ZAssert.assertEquals(rights, "r", "Verify the rights are 'read only'");
 
-		String granteeType = ZimbraAccount.AccountA().soapSelectValue("//acct:GetShareInfoResponse//acct:share[@folderPath='/Inbox/"+ foldername +"']", "granteeType");
+		String granteeType = ZmailAccount.AccountA().soapSelectValue("//acct:GetShareInfoResponse//acct:share[@folderPath='/Inbox/"+ foldername +"']", "granteeType");
 		ZAssert.assertEquals(granteeType, "usr", "Verify the grantee type is 'user'");
 
 
@@ -125,13 +125,13 @@ public class EditShareFolder extends AjaxCommonTest{
 		GeneralUtility.syncDesktopToZcsWithSoap(app.zGetActiveAccount());
       app.zPageMain.zWaitForDesktopLoadingSpinner(5000);
 
-      ZimbraAccount.AccountA().soapSend(
-				"<GetShareInfoRequest xmlns='urn:zimbraAccount'>"
+      ZmailAccount.AccountA().soapSend(
+				"<GetShareInfoRequest xmlns='urn:zmailAccount'>"
 				+		"<grantee type='usr'/>"
 				+		"<owner by='name'>"+ app.zGetActiveAccount().EmailAddress +"</owner>"
 				+	"</GetShareInfoRequest>");
 
-		String adminrights = ZimbraAccount.AccountA().soapSelectValue("//acct:GetShareInfoResponse//acct:share[@folderPath='/Inbox/"+ foldername +"']", "rights");
+		String adminrights = ZmailAccount.AccountA().soapSelectValue("//acct:GetShareInfoResponse//acct:share[@folderPath='/Inbox/"+ foldername +"']", "rights");
 
 		//verify admin rights 	
 		ZAssert.assertEquals(adminrights, "rwidxa", "Verify the rights are admin");

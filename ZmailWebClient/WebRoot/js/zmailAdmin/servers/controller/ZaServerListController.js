@@ -82,7 +82,7 @@ ZaServerListController.prototype._createUI = function () {
 		this._initPopupMenu();
 		this._actionMenu =  new ZaPopupMenu(this._contentView, "ActionMenu", null, this._popupOperations, ZaId.VIEW_SERLIST, ZaId.MENU_POP);
 		elements[ZaAppViewMgr.C_APP_CONTENT] = this._contentView;
-		//ZaApp.getInstance().createView(ZaZimbraAdmin._SERVERS_LIST_VIEW, elements);
+		//ZaApp.getInstance().createView(ZaZmailAdmin._SERVERS_LIST_VIEW, elements);
         ZaApp.getInstance().getAppViewMgr().createView(this.getContentViewId(), elements);
 		this._contentView.addSelectionListener(new AjxListener(this, this._listSelectionListener));
 		this._contentView.addActionListener(new AjxListener(this, this._listActionListener));								
@@ -168,7 +168,7 @@ function(ev) {
 			this._selectedItem = ev.item;
 			ZaApp.getInstance().getServerController().show(ev.item);
             var parentPath = ZaTree.getPathByArray([ZaMsg.OVP_home, ZaMsg.OVP_configure, ZaMsg.OVP_servers]);
-            ZaZimbraAdmin.getInstance().getOverviewPanelController().addObjectItem(parentPath, ev.item.name, null, false, false, ev.item, undefined, true);
+            ZaZmailAdmin.getInstance().getOverviewPanelController().addObjectItem(parentPath, ev.item.name, null, false, false, ev.item, undefined, true);
 		}
 	} else {
 		this.changeActionsState();	
@@ -191,7 +191,7 @@ function(ev) {
 		var item = this._contentView.getSelection()[0];
 		ZaApp.getInstance().getServerController().show(item);
         var parentPath = ZaTree.getPathByArray([ZaMsg.OVP_home, ZaMsg.OVP_configure, ZaMsg.OVP_servers]);
-        ZaZimbraAdmin.getInstance().getOverviewPanelController().addObjectItem(parentPath, item.name, null, false, false, item);
+        ZaZmailAdmin.getInstance().getOverviewPanelController().addObjectItem(parentPath, item.name, null, false, false, item);
 	}
 }
 
@@ -209,7 +209,7 @@ function () {
 		if(servers) {
 			var cnt = servers.length;
 			for(var i=0; i<cnt; i++) {
-				if(!ZaItem.hasRight(ZaServer.FLUSH_CACHE_RIGHT,servers[i]) || !servers[i].attrs[ZaServer.A_zimbraMailboxServiceEnabled] || !servers[i].attrs[ZaServer.A_zimbraMailboxServiceInstalled]) {
+				if(!ZaItem.hasRight(ZaServer.FLUSH_CACHE_RIGHT,servers[i]) || !servers[i].attrs[ZaServer.A_zmailMailboxServiceEnabled] || !servers[i].attrs[ZaServer.A_zmailMailboxServiceInstalled]) {
 					enableFlush = false;
 					break;
 				} 

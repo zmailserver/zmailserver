@@ -21,7 +21,7 @@
 <%@ attribute name="trailingcolon" rtexprvalue="true" required="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
 <c:if test="${bundle}">
     <fmt:setBundle basename="/messages/I18nMsg" var="i18n"/>
 </c:if>

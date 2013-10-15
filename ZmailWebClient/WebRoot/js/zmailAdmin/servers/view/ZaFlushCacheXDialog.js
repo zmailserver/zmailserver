@@ -39,12 +39,12 @@ ZaFlushCacheXDialog.prototype.constructor = ZaFlushCacheXDialog;
 ZaFlushCacheXDialog.flushingServerModel = {
 	type:_OBJECT_,
 	items:[
-		{id:ZaItem.A_zimbraId, type:_STRING_, ref:"attrs/"+ZaItem.A_zimbraId},
+		{id:ZaItem.A_zmailId, type:_STRING_, ref:"attrs/"+ZaItem.A_zmailId},
 		{id:"status", type:_NUMBER_,ref:"status"},
 		{id:ZaServer.A_name, ref:"attrs/" + ZaServer.A_name, type:_STRING_},
 		{id:ZaServer.A_ServiceHostname, ref:"attrs/"+ZaServer.A_ServiceHostname, type:_HOSTNAME_OR_IP_, maxLength:256},
-		{id:ZaServer.A_zimbraMailProxyServiceEnabled, ref:"attrs/"+ZaServer.A_zimbraMailProxyServiceEnabled, type:_ENUM_, choices:[false,true]},
-		{id:ZaServer.A_zimbraMailboxServiceInstalled, ref:"attrs/"+ZaServer.A_zimbraMailboxServiceInstalled, type:_ENUM_, choices:[false,true]}
+		{id:ZaServer.A_zmailMailProxyServiceEnabled, ref:"attrs/"+ZaServer.A_zmailMailProxyServiceEnabled, type:_ENUM_, choices:[false,true]},
+		{id:ZaServer.A_zmailMailboxServiceInstalled, ref:"attrs/"+ZaServer.A_zmailMailboxServiceInstalled, type:_ENUM_, choices:[false,true]}
 	]
 };
 

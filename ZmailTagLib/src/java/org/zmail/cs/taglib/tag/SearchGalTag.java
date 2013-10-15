@@ -12,13 +12,13 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.tag;
+package org.zmail.cs.taglib.tag;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.cs.taglib.bean.ZSearchGalResultBean;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZMailbox.GalEntryType;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.cs.taglib.bean.ZSearchGalResultBean;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZMailbox.GalEntryType;
 
 import javax.servlet.jsp.JspContext;
 import javax.servlet.jsp.JspException;
@@ -27,7 +27,7 @@ import javax.servlet.jsp.PageContext;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class SearchGalTag extends ZimbraSimpleTag {
+public class SearchGalTag extends ZmailSimpleTag {
 
     private String mVar;
     private GalEntryType mType = null;

@@ -1,5 +1,5 @@
 if (window.console && window.console.log) window.console.log("Loaded ZaCert.js");
-if(ZaSettings && ZaSettings.EnabledZimlet["com_zimbra_cert_manager"]){
+if(ZaSettings && ZaSettings.EnabledZimlet["org_zmail_cert_manager"]){
 function ZaCert () {
 	ZaItem.call(this,  "ZaCert");
 	this._init();
@@ -34,11 +34,11 @@ ZaCert.A_use_wildcard_server_name = "user_wildcard_server_name";
 ZaCert.ALL_SERVERS = "--- All Servers ---" ; //Don't modify it, it need to be consistent with server side value
 
 ZaCert.TARGET_SERVER_CHOICES =  [
-		{label:com_zimbra_cert_manager.lb_ALL_SERVERS, value: ZaCert.ALL_SERVERS }
+		{label:org_zmail_cert_manager.lb_ALL_SERVERS, value: ZaCert.ALL_SERVERS }
 		/*,
-		{label: "test1.zimbra.com", value: "test1.zimbra.com" },
-		{label: "test2.zimbra.com", value: "test2.zimbra.com" },
-		{label: "admindev2.zimbra.com", value: "admindev2.zimbra.com" }*/
+		{label: "test1.zmail.com", value: "test1.zmail.com" },
+		{label: "test2.zmail.com", value: "test2.zmail.com" },
+		{label: "admindev2.zmail.com", value: "admindev2.zmail.com" }*/
 	];
 
 ZaCert.KEY_SIZE_CHOICES = [ {label: "1024", value: "1024"},
@@ -46,7 +46,7 @@ ZaCert.KEY_SIZE_CHOICES = [ {label: "1024", value: "1024"},
 
 if(ZaSettings) {
 	ZaSettings.CERTS_VIEW = "certsView";
-	ZaSettings.ALL_UI_COMPONENTS.push({ value: ZaSettings.CERTS_VIEW, label: com_zimbra_cert_manager.UI_Comp_certsView });
+	ZaSettings.ALL_UI_COMPONENTS.push({ value: ZaSettings.CERTS_VIEW, label: org_zmail_cert_manager.UI_Comp_certsView });
 	ZaSettings.OVERVIEW_TOOLS_ITEMS.push(ZaSettings.CERTS_VIEW);
 	ZaSettings.VIEW_RIGHTS [ZaSettings.CERTS_VIEW] = "adminConsoleCertificateRights";
 }
@@ -162,71 +162,71 @@ ZaCert.certOvTreeModifier = function (tree) {
                     var certTi = new ZaTreeItemData({
                                         parent:parentPath,
                                         id:ZaId.getTreeItemId(ZaId.PANEL_APP,ZaId.PANEL_CONFIGURATION,null, "CertHV"),
-                                        text: com_zimbra_cert_manager.OVP_certs,
+                                        text: org_zmail_cert_manager.OVP_certs,
                                         canShowOnRoot: false,
                                         forceNode: false,
-                                        mappingId: ZaZimbraAdmin._CERTS_SERVER_LIST_VIEW});
+                                        mappingId: ZaZmailAdmin._CERTS_SERVER_LIST_VIEW});
                     tree.addTreeItemData(certTi);
 					//add the server nodes
-                    var subParentPath = ZaTree.getPathByArray([ZaMsg.OVP_home, ZaMsg.OVP_configure, com_zimbra_cert_manager.OVP_certs]);
+                    var subParentPath = ZaTree.getPathByArray([ZaMsg.OVP_home, ZaMsg.OVP_configure, org_zmail_cert_manager.OVP_certs]);
 					for(var ix=0; ix< cnt; ix++) {
                         var ti1 = new ZaTreeItemData({
                                 parent:subParentPath,
                                 id:DwtId._makeId(certTi.id, ix + 1),
                                 text: serverList[ix].name,
                                 defaultSelectedItem: 1,
-                                mappingId: ZaZimbraAdmin._CERTS});
+                                mappingId: ZaZmailAdmin._CERTS});
                         ti1.setData(ZaOverviewPanelController._OBJ_ID, serverList[ix].id);
                         tree.addTreeItemData(ti1);
 						ZaCert.TARGET_SERVER_CHOICES.push (
 							{label: serverList[ix].name, value: serverList[ix].id }
 						);
 					}
-					ZaOverviewPanelController.overviewTreeListeners[ZaZimbraAdmin._CERTS_SERVER_LIST_VIEW] = ZaCert.certsServerListTreeListener;
+					ZaOverviewPanelController.overviewTreeListeners[ZaZmailAdmin._CERTS_SERVER_LIST_VIEW] = ZaCert.certsServerListTreeListener;
 				} else {
                     var certTi = new ZaTreeItemData({
                                         parent:parentPath,
                                         id:ZaId.getTreeItemId(ZaId.PANEL_APP,ZaId.PANEL_CONFIGURATION,null, "CertHV"),
-                                        text: com_zimbra_cert_manager.OVP_certs,
-                                        mappingId: ZaZimbraAdmin._CERTS});
+                                        text: org_zmail_cert_manager.OVP_certs,
+                                        mappingId: ZaZmailAdmin._CERTS});
 					certTi.setData(ZaOverviewPanelController._OBJ_ID, serverList[0].id);
                     tree.addTreeItemData(certTi);
 					ZaCert.TARGET_SERVER_CHOICES.push (
 							{label: serverList[0].name, value: serverList[0].id }
 						);
 				}
-				ZaOverviewPanelController.overviewTreeListeners[ZaZimbraAdmin._CERTS] = ZaCert.certsServerNodeTreeListener;
+				ZaOverviewPanelController.overviewTreeListeners[ZaZmailAdmin._CERTS] = ZaCert.certsServerNodeTreeListener;
 			}
             } else {
 			overviewPanelController._certTi = new DwtTreeItem({parent:overviewPanelController._toolsTi,className:"AdminTreeItem"});
-			overviewPanelController._certTi.setText(com_zimbra_cert_manager.OVP_certs);
+			overviewPanelController._certTi.setText(org_zmail_cert_manager.OVP_certs);
 			overviewPanelController._certTi.setImage("OverviewCertificate"); //TODO: Use Cert icons
 
 			var serverList = overviewPanelController._app.getServerList().getArray();
 			if(serverList && serverList.length) {
 				var cnt = serverList.length;
 				if(cnt>1) {
-					overviewPanelController._certTi.setData(ZaOverviewPanelController._TID, ZaZimbraAdmin._CERTS_SERVER_LIST_VIEW);
+					overviewPanelController._certTi.setData(ZaOverviewPanelController._TID, ZaZmailAdmin._CERTS_SERVER_LIST_VIEW);
 					//add the server nodes
 					for(var ix=0; ix< cnt; ix++) {
 						var ti1 = new DwtTreeItem({parent:overviewPanelController._certTi,className:"AdminTreeItem"});
 						ti1.setText(serverList[ix].name);
 						ti1.setImage("Server");
-						ti1.setData(ZaOverviewPanelController._TID, ZaZimbraAdmin._CERTS);
+						ti1.setData(ZaOverviewPanelController._TID, ZaZmailAdmin._CERTS);
 						ti1.setData(ZaOverviewPanelController._OBJ_ID, serverList[ix].id);
 						ZaCert.TARGET_SERVER_CHOICES.push (
 							{label: serverList[ix].name, value: serverList[ix].id }
 						);
 					}
-					ZaOverviewPanelController.overviewTreeListeners[ZaZimbraAdmin._CERTS_SERVER_LIST_VIEW] = ZaCert.certsServerListTreeListener;
+					ZaOverviewPanelController.overviewTreeListeners[ZaZmailAdmin._CERTS_SERVER_LIST_VIEW] = ZaCert.certsServerListTreeListener;
 				} else {
-					overviewPanelController._certTi.setData(ZaOverviewPanelController._TID, ZaZimbraAdmin._CERTS);
+					overviewPanelController._certTi.setData(ZaOverviewPanelController._TID, ZaZmailAdmin._CERTS);
 					overviewPanelController._certTi.setData(ZaOverviewPanelController._OBJ_ID, serverList[0].id);
 					ZaCert.TARGET_SERVER_CHOICES.push (
 							{label: serverList[0].name, value: serverList[0].id }
 						);
 				}
-				ZaOverviewPanelController.overviewTreeListeners[ZaZimbraAdmin._CERTS] = ZaCert.certsServerNodeTreeListener;
+				ZaOverviewPanelController.overviewTreeListeners[ZaZmailAdmin._CERTS] = ZaCert.certsServerNodeTreeListener;
 			}
             }
 		} catch (ex) {
@@ -339,7 +339,7 @@ if (ZaTask && ZaTask.myXModel){
 							}
 						]
 					},
-					{type:_OUTPUT_, align:_RIGHT_, value: com_zimbra_cert_manager.ManageCert,
+					{type:_OUTPUT_, align:_RIGHT_, value: org_zmail_cert_manager.ManageCert,
 					 containerCssClass:"ZaLinkedItem",
 					 onClick: ZaCert.onManageCert
 					},
@@ -360,7 +360,7 @@ if (ZaTask && ZaTask.myXModel){
 							}
 						]
 					},
-					{type:_OUTPUT_, align:_RIGHT_, value: com_zimbra_cert_manager.ManageCert,
+					{type:_OUTPUT_, align:_RIGHT_, value: org_zmail_cert_manager.ManageCert,
 					 containerCssClass:"ZaLinkedItem",
 					 onClick: ZaCert.onManageCert
 					},
@@ -372,8 +372,8 @@ if (ZaTask && ZaTask.myXModel){
 		ZaTabView.XFormModifiers["ZaTaskContentView"].push(ZaCert.taskContentViewXFormModifier);
 		
 	    ZaCert.onManageCert = function(ev) {
-	        var tree = ZaZimbraAdmin.getInstance().getOverviewPanelController().getOverviewPanel().getFolderTree();
-	        var path = ZaTree.getPathByArray([ZaMsg.OVP_home, ZaMsg.OVP_configure, com_zimbra_cert_manager.OVP_certs]);
+	        var tree = ZaZmailAdmin.getInstance().getOverviewPanelController().getOverviewPanel().getFolderTree();
+	        var path = ZaTree.getPathByArray([ZaMsg.OVP_home, ZaMsg.OVP_configure, org_zmail_cert_manager.OVP_certs]);
 	        tree.setSelectionByPath(path, false);
 	    }		
 	}
@@ -416,13 +416,13 @@ ZaCert.doLoadCertExpireStatus = function(resp) {
 	}
 	
 	var formatter = AjxDateFormat.getDateInstance(AjxDateFormat.LONG);
-	var taskController = ZaZimbraAdmin.getInstance().getTaskController();
+	var taskController = ZaZmailAdmin.getInstance().getTaskController();
 	if (expiredCerts.length > 0) {
-		var message = AjxMessageFormat.format(com_zimbra_cert_manager.ExpiredCertMsg, [expiredCerts.length]);
+		var message = AjxMessageFormat.format(org_zmail_cert_manager.ExpiredCertMsg, [expiredCerts.length]);
 		
 		var expMsg = (expiredCerts.length > 1)?  
-				AjxMessageFormat.format(com_zimbra_cert_manager.MultiExpDate, formatter.format(minExpDateForExpiredCerts)):
-				AjxMessageFormat.format(com_zimbra_cert_manager.SingleExpDate, formatter.format(minExpDateForExpiredCerts));
+				AjxMessageFormat.format(org_zmail_cert_manager.MultiExpDate, formatter.format(minExpDateForExpiredCerts)):
+				AjxMessageFormat.format(org_zmail_cert_manager.SingleExpDate, formatter.format(minExpDateForExpiredCerts));
 
 		taskController.setInstanceValue(message + " " + expMsg, ZaTask.A2_expiredCertMsg);
 		taskController.increaseNotificationCount(ZaTask.A2_expiredCertMsg);
@@ -433,11 +433,11 @@ ZaCert.doLoadCertExpireStatus = function(resp) {
 
 	
 	if (expiringCerts.length > 0) {
-		var message = AjxMessageFormat.format(com_zimbra_cert_manager.ExpiringCertMsg, [expiringCerts.length]);
+		var message = AjxMessageFormat.format(org_zmail_cert_manager.ExpiringCertMsg, [expiringCerts.length]);
 		
 		var expMsg = (expiringCerts.length > 1)?  
-				AjxMessageFormat.format(com_zimbra_cert_manager.MultiExpDate, formatter.format(minExpDateForExpiringCerts)):
-				AjxMessageFormat.format(com_zimbra_cert_manager.SingleExpDate, formatter.format(minExpDateForExpiringCerts));
+				AjxMessageFormat.format(org_zmail_cert_manager.MultiExpDate, formatter.format(minExpDateForExpiringCerts)):
+				AjxMessageFormat.format(org_zmail_cert_manager.SingleExpDate, formatter.format(minExpDateForExpiringCerts));
 
 		taskController.setInstanceValue(message + " " + expMsg, ZaTask.A2_expiringCertMsg);
 		taskController.increaseNotificationCount(ZaTask.A2_expiringCertMsg);
@@ -450,7 +450,7 @@ ZaCert.doLoadCertExpireStatus = function(resp) {
 ZaCert.getCerts = function (app, serverId, isAsync, callback) {
 	if(window.console && window.console.log) console.log("Getting certificates for server " + serverId) ;
 	
-	var soapDoc = AjxSoapDoc.create("GetCertRequest", "urn:zimbraAdmin", null);
+	var soapDoc = AjxSoapDoc.create("GetCertRequest", "urn:zmailAdmin", null);
 	soapDoc.getMethod().setAttribute("type", "all");
 	var csfeParams = new Object();
 	csfeParams.soapDoc = soapDoc;
@@ -467,7 +467,7 @@ ZaCert.getCerts = function (app, serverId, isAsync, callback) {
 	try {
 		var reqMgrParams = {} ;
 		reqMgrParams.controller = app.getCurrentController();
-		reqMgrParams.busyMsg = com_zimbra_cert_manager.BUSY_RETRIEVE_CERT;
+		reqMgrParams.busyMsg = org_zmail_cert_manager.BUSY_RETRIEVE_CERT;
 		if (!isAsync) {
 			resp = ZaRequestMgr.invoke(csfeParams, reqMgrParams).Body.GetCertResponse;
 			return resp;
@@ -483,7 +483,7 @@ ZaCert.getCerts = function (app, serverId, isAsync, callback) {
 ZaCert.getCSR = function (app, serverId, type) {
 	if(window.console && window.console.log) console.log("ZaCert.getCSR: Getting CSR for server: " + serverId) ;
 	
-	var soapDoc = AjxSoapDoc.create("GetCSRRequest", "urn:zimbraAdmin", null);
+	var soapDoc = AjxSoapDoc.create("GetCSRRequest", "urn:zmailAdmin", null);
 	soapDoc.getMethod().setAttribute("type", type);
 	var csfeParams = new Object();
 	csfeParams.soapDoc = soapDoc;	
@@ -498,7 +498,7 @@ ZaCert.getCSR = function (app, serverId, type) {
 	try {
 		var reqMgrParams = {} ;
 		reqMgrParams.controller = app.getCurrentController();
-		reqMgrParams.busyMsg = com_zimbra_cert_manager.BUSY_GET_CSR ;
+		reqMgrParams.busyMsg = org_zmail_cert_manager.BUSY_GET_CSR ;
 		resp = ZaRequestMgr.invoke(csfeParams, reqMgrParams ).Body.GetCSRResponse;
 		return resp;	
 	}catch (ex) {
@@ -508,7 +508,7 @@ ZaCert.getCSR = function (app, serverId, type) {
 
 ZaCert.genCSR = function (app, subject_attrs,  type, newCSR, serverId, keysize) {
 	if(window.console && window.console.log) console.log("Generating certificates") ;
-	var soapDoc = AjxSoapDoc.create("GenCSRRequest", "urn:zimbraAdmin", null);
+	var soapDoc = AjxSoapDoc.create("GenCSRRequest", "urn:zmailAdmin", null);
 	soapDoc.getMethod().setAttribute("type", type);
 	soapDoc.getMethod().setAttribute("keysize", keysize) ;
     if (newCSR) {
@@ -541,7 +541,7 @@ ZaCert.genCSR = function (app, subject_attrs,  type, newCSR, serverId, keysize) 
 	try {
 		var reqMgrParams = {} ;
 		reqMgrParams.controller = app.getCurrentController();
-		reqMgrParams.busyMsg = com_zimbra_cert_manager.BUSY_GENERATE_CSR ;
+		reqMgrParams.busyMsg = org_zmail_cert_manager.BUSY_GENERATE_CSR ;
 		resp = ZaRequestMgr.invoke(csfeParams, reqMgrParams ).Body.GenCSRResponse;
 		return resp;
 	}catch (ex) {
@@ -564,10 +564,10 @@ ZaCert.installCert = function (app, params, serverId) {
 	
 	var certView = controller._contentView ;
 	certView._certInstallStatus.setStyle (DwtAlert.INFORMATION) ;
-	certView._certInstallStatus.setContent(com_zimbra_cert_manager.CERT_INSTALLING );
+	certView._certInstallStatus.setContent(org_zmail_cert_manager.CERT_INSTALLING );
 	certView._certInstallStatus.setDisplay(Dwt.DISPLAY_BLOCK) ;
 	
-	var soapDoc = AjxSoapDoc.create("InstallCertRequest", "urn:zimbraAdmin", null);
+	var soapDoc = AjxSoapDoc.create("InstallCertRequest", "urn:zmailAdmin", null);
 	soapDoc.getMethod().setAttribute("type", type);
 	if (serverId != null) {
 		soapDoc.getMethod().setAttribute("server", serverId);
@@ -603,14 +603,14 @@ ZaCert.installCert = function (app, params, serverId) {
             soapDoc.set("subject", subject_attrs);
         }
     }else {
-		throw new AjxException (com_zimbra_cert_manager.UNKNOW_INSTALL_TYPE_ERROR, "ZaCert.installCert") ;		
+		throw new AjxException (org_zmail_cert_manager.UNKNOW_INSTALL_TYPE_ERROR, "ZaCert.installCert") ;		
 	}
 	
 	var csfeParams = new Object();
 	csfeParams.soapDoc = soapDoc;	
 	var reqMgrParams = {} ;
 	reqMgrParams.controller = app.getCurrentController();
-	reqMgrParams.busyMsg = com_zimbra_cert_manager.BUSY_INSTALL_CERT ;
+	reqMgrParams.busyMsg = org_zmail_cert_manager.BUSY_INSTALL_CERT ;
 	if (callback) {
 		csfeParams.callback = callback;
 		csfeParams.asyncMode = true ;	
@@ -626,7 +626,7 @@ ZaCert.verifyCertKey = function (app, params) {
 	var callback = params.callback;
 	var type = params.type;
 
-	var soapDoc = AjxSoapDoc.create("VerifyCertKeyRequest", "urn:zimbraAdmin", null);
+	var soapDoc = AjxSoapDoc.create("VerifyCertKeyRequest", "urn:zmailAdmin", null);
         soapDoc.getMethod().setAttribute("type", type);
         soapDoc.getMethod().setAttribute("cert", cert);
         soapDoc.getMethod().setAttribute("privkey", prvkey);
@@ -636,7 +636,7 @@ ZaCert.verifyCertKey = function (app, params) {
         try {
                 var reqMgrParams = {} ;
                 reqMgrParams.controller = controller;
-                reqMgrParams.busyMsg = com_zimbra_cert_manager.BUSY_VERIFY_CERTKEY;
+                reqMgrParams.busyMsg = org_zmail_cert_manager.BUSY_VERIFY_CERTKEY;
                 resp = ZaRequestMgr.invoke(csfeParams, reqMgrParams ).Body.VerifyCertKeyResponse;
                 return resp;
         }catch (ex) {

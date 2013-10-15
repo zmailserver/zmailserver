@@ -14,16 +14,16 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.addressbook.folders;
+package org.zmail.qa.selenium.projects.ajax.tests.addressbook.folders;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogWarning;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogWarning;
 
 
 public class EmptyTrashFolder extends AjaxCommonTest {
@@ -54,7 +54,7 @@ public class EmptyTrashFolder extends AjaxCommonTest {
 		
 		// Move to trash
 		app.zGetActiveAccount().soapSend(
-				"<ItemActionRequest xmlns='urn:zimbraMail'>" +
+				"<ItemActionRequest xmlns='urn:zmailMail'>" +
 						"<action op='move' id='"+ group.getId() +"' l='"+ trash.getId() +"'/>" +
 				"</ItemActionRequest>");
 		  
@@ -64,15 +64,15 @@ public class EmptyTrashFolder extends AjaxCommonTest {
 	    
 	    // Move to trash
 		app.zGetActiveAccount().soapSend(
-				"<ItemActionRequest xmlns='urn:zimbraMail'>" +
+				"<ItemActionRequest xmlns='urn:zmailMail'>" +
 						"<action op='move' id='"+ contact.getId() +"' l='"+ trash.getId() +"'/>" +
 				"</ItemActionRequest>");
 
 		
 		// Create a new folder in trash
-		String name = "ab"+ ZimbraSeleniumProperties.getUniqueString();
+		String name = "ab"+ ZmailSeleniumProperties.getUniqueString();
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+				"<CreateFolderRequest xmlns='urn:zmailMail'>" +
 						"<folder name='"+ name + "' view='contact' l='"+ trash.getId() +"'/>" +
 				"</CreateFolderRequest>");
 
@@ -127,7 +127,7 @@ public class EmptyTrashFolder extends AjaxCommonTest {
 		
 		// Move to trash
 		app.zGetActiveAccount().soapSend(
-				"<ItemActionRequest xmlns='urn:zimbraMail'>" +
+				"<ItemActionRequest xmlns='urn:zmailMail'>" +
 						"<action op='move' id='"+ group.getId() +"' l='"+ trash.getId() +"'/>" +
 				"</ItemActionRequest>");
 		  
@@ -137,15 +137,15 @@ public class EmptyTrashFolder extends AjaxCommonTest {
 	    
 	    // Move to trash
 		app.zGetActiveAccount().soapSend(
-				"<ItemActionRequest xmlns='urn:zimbraMail'>" +
+				"<ItemActionRequest xmlns='urn:zmailMail'>" +
 						"<action op='move' id='"+ contact.getId() +"' l='"+ trash.getId() +"'/>" +
 				"</ItemActionRequest>");
 
 		
 		// Create a new folder in trash
-		String name = "ab"+ ZimbraSeleniumProperties.getUniqueString();
+		String name = "ab"+ ZmailSeleniumProperties.getUniqueString();
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+				"<CreateFolderRequest xmlns='urn:zmailMail'>" +
 						"<folder name='"+ name + "' view='contact' l='"+ trash.getId() +"'/>" +
 				"</CreateFolderRequest>");
 

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.util;
+package org.zmail.cs.offline.util;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -27,19 +27,19 @@ import org.apache.commons.httpclient.methods.GetMethod;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.common.httpclient.HttpClientUtil;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.XmlParseException;
-import com.zimbra.common.util.ZimbraHttpConnectionManager;
-import com.zimbra.cs.offline.OfflineLog;
+import org.zmail.common.httpclient.HttpClientUtil;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.XmlParseException;
+import org.zmail.common.util.ZmailHttpConnectionManager;
+import org.zmail.cs.offline.OfflineLog;
 
 public class AutoUpdateTest {
 
 //    static final String BASE_UPDATE_URL = "http://localhost/update-new.php"; //for local testing
-    static final String BASE_UPDATE_URL = "https://www.zimbra.com/aus/zdesktop2/update.php"; //real update site; only updated once build is RTM
+    static final String BASE_UPDATE_URL = "https://www.zmail.com/aus/zdesktop2/update.php"; //real update site; only updated once build is RTM
 
-    static HttpClient httpClient = ZimbraHttpConnectionManager.getExternalHttpConnMgr().newHttpClient();
+    static HttpClient httpClient = ZmailHttpConnectionManager.getExternalHttpConnMgr().newHttpClient();
 
     static final String MEDIA_MAC = "_macos_intel.dmg";
     static final String MEDIA_WIN = "_win32.msi";

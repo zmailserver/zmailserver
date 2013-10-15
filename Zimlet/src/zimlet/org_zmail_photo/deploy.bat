@@ -1,3 +1,3 @@
-rm com_zimbra_photo.zip
-zip com_zimbra_photo.zip *
-zmzimletctl deploy com_zimbra_photo.zip
+rm org_zmail_photo.zip
+zip org_zmail_photo.zip *
+zmzimletctl deploy org_zmail_photo.zip

@@ -14,12 +14,12 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.ui;
+package org.zmail.qa.selenium.projects.desktop.ui;
 
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.framework.util.GeneralUtility.WAIT_FOR_OPERAND;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties.AppType;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.GeneralUtility.WAIT_FOR_OPERAND;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties.AppType;
 
 
 public class PageLogin extends AbsTab {
@@ -65,7 +65,7 @@ public class PageLogin extends AbsTab {
 
 	@Override
 	public boolean zIsActive() throws HarnessException {
-	   AppType appType = ZimbraSeleniumProperties.getAppType();
+	   AppType appType = ZmailSeleniumProperties.getAppType();
 	   String locator = null;
 
 	   switch (appType) {
@@ -129,14 +129,14 @@ public class PageLogin extends AbsTab {
 	 * @param account
 	 * @throws HarnessException
 	 */
-	public void zLogin(ZimbraAccount account) throws HarnessException {
-	   logger.debug("login(ZimbraAccount account)" + account.EmailAddress);
+	public void zLogin(ZmailAccount account) throws HarnessException {
+	   logger.debug("login(ZmailAccount account)" + account.EmailAddress);
 	   
 	   tracer.trace("Login to the "+ MyApplication.myApplicationName() +" using user/password "+ account.EmailAddress +"/"+ account.Password);
 
 	   zNavigateTo();
 
-	   AppType appType = ZimbraSeleniumProperties.getAppType();
+	   AppType appType = ZmailSeleniumProperties.getAppType();
 	   switch (appType) {
 	   case AJAX:
 	      // Fill out the form

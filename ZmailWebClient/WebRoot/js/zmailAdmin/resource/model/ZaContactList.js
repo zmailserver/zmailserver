@@ -68,8 +68,8 @@ function (str) {
 ZaContactList.prototype._autocompleteCallback =
 function(match, inputFieldXFormItem) {
 	var xform = inputFieldXFormItem.getForm();
-	var contact_email = xform.getItemsById(ZaResource.A_zimbraCalResContactEmail) [0];
-	var contact_phone = xform.getItemsById(ZaResource.A_zimbraCalResContactPhone) [0];
+	var contact_email = xform.getItemsById(ZaResource.A_zmailCalResContactEmail) [0];
+	var contact_phone = xform.getItemsById(ZaResource.A_zmailCalResContactPhone) [0];
 	contact_email.setInstanceValue (match["contact"][ZaAccount.A_name]);
 	contact_phone.setInstanceValue (match["contact"][ZaAccount.A_telephoneNumber]);
 	xform.refresh();

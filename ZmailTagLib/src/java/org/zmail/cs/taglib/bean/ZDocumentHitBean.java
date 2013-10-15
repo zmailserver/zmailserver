@@ -12,10 +12,10 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.bean;
+package org.zmail.cs.taglib.bean;
 
-import com.zimbra.client.ZDocumentHit;
-import com.zimbra.client.ZDocument;
+import org.zmail.client.ZDocumentHit;
+import org.zmail.client.ZDocument;
 import java.util.Date;
 
 public class ZDocumentHitBean extends ZSearchHitBean {

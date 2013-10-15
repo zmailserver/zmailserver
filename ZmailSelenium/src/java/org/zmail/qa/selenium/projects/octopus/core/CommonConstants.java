@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.octopus.core;
+package org.zmail.qa.selenium.projects.octopus.core;
 
 public interface CommonConstants {
 	String JPG_FILE = "samplejpg.jpg";
@@ -26,7 +26,7 @@ public interface CommonConstants {
 	String TEXT_FILE= "testtextfile.txt";
 	String WORD_FILE= "testwordfile.doc";
 	String XML_FILE ="testxmlfile.xml";
-	String ZIP_FILE = "com_zimbra_ymaps.zip";
+	String ZIP_FILE = "org_zmail_ymaps.zip";
 	
 	String SHARE_AS_READ = "r";
 	String SHARE_AS_READWRITE = "rwidx";

@@ -1,10 +1,10 @@
 <%@ page buffer="8kb" autoFlush="true" %>
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
-<%@ taglib prefix="mo" uri="com.zimbra.mobileclient" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
+<%@ taglib prefix="mo" uri="org.zmail.mobileclient" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
 <mo:handleError>
     <zm:getMailbox var="mailbox"/>
     <c:choose>
@@ -33,7 +33,7 @@
                     <fmt:message key="back"/>
                 </a>
             </span>
-            <c:if test="${mailbox.accountInfo.attrs.zimbraFeatureNewAddrBookEnabled[0]=='TRUE'}">
+            <c:if test="${mailbox.accountInfo.attrs.zmailFeatureNewAddrBookEnabled[0]=='TRUE'}">
             <span class="buttonRight button" onclick="return zClickLink('createAB')" >
                     <a class="zo_button1" id="createAB" href="?st=ab${empty param.showABCreate?'&showABCreate=1':''}${empty param.ajax ? '#folders' : ''}">
                         <fmt:message key="${empty param.showABCreate ? 'create' : 'close'}"/></a>
@@ -49,7 +49,7 @@
                 <span class="Title left">
                     <fmt:message key="addressBooks"/>
                 </span>
-                <c:if test="${mailbox.accountInfo.attrs.zimbraFeatureNewAddrBookEnabled[0]=='TRUE'}">
+                <c:if test="${mailbox.accountInfo.attrs.zmailFeatureNewAddrBookEnabled[0]=='TRUE'}">
                 <span class="right">
                         <a onclick="return toggleElem('nfldrfrm',this,'<fmt:message key="close"/>','<fmt:message key="create"/>');" class="zo_button1"
                            href="?st=ab${empty param.showABCreate?'&showABCreate=1':''}${empty param.ajax ? '#folders' : ''}"><fmt:message key="${empty param.showABCreate ? 'create' : 'close'}"/></a>
@@ -60,7 +60,7 @@
         </div>
     </c:otherwise>
 </c:choose>
-<c:if test="${(mailbox.accountInfo.attrs.zimbraFeatureNewAddrBookEnabled[0]=='TRUE') and ((empty param.showTagCreate and empty param.showSearchCreate and not empty param.showABCreate) or ua.isiPad eq false)}">
+<c:if test="${(mailbox.accountInfo.attrs.zmailFeatureNewAddrBookEnabled[0]=='TRUE') and ((empty param.showTagCreate and empty param.showSearchCreate and not empty param.showABCreate) or ua.isiPad eq false)}">
     <mo:folderForm type="ab" id="${param.id}" hide="${empty param.showABCreate}" url="${currentUrl}" st="${zm:cook(param.st)}"/>
 </c:if>
 <div class="wrap-dlist" id="wrap-dlist-view">

@@ -1,6 +1,6 @@
 ABOUT
 
-Many URLs to the Zimbra web application are handled by filters and
+Many URLs to the Zmail web application are handled by filters and
 servlets to provide customizations, etc. This section lists some of
 these mappings and their purpose.
 
@@ -17,14 +17,14 @@ SERVICE WEB APPLICATION - http://{host}/service/*
 	request parameter can be used to prevent the servlet using the
 	cached output.
 
-	SEE: com.zimbra.cs.zimlet.ZimletResources
-	SEE: /opt/zimbra/jetty/work/resource-cache/zimletres/
+	SEE: org.zmail.cs.zimlet.ZimletResources
+	SEE: /opt/zmail/jetty/work/resource-cache/zimletres/
 
 NOTE: There are a lot more URL mappings in the service web application
       but they are not of general use for the user client.
 
 
-WEB CLIENT WEB APPLICATION - http://{host}/zimbra/*
+WEB CLIENT WEB APPLICATION - http://{host}/zmail/*
 
 *.jsp
 
@@ -36,7 +36,7 @@ WEB CLIENT WEB APPLICATION - http://{host}/zimbra/*
 	messages in JSP pages without having to care about how the
 	skin messages are overloaded.
 
-	SEE: com.zimbra.webClient.servlet.JspServlet
+	SEE: org.zmail.webClient.servlet.JspServlet
 
 /adminhelp/*
 /bhelp/*
@@ -47,14 +47,14 @@ WEB CLIENT WEB APPLICATION - http://{host}/zimbra/*
 	not exist in the requested locale, the default help file is
 	returned (i.e. en_US).
 
-	SEE: com.zimbra.webClient.filters.RedirectHelp
+	SEE: org.zmail.webClient.filters.RedirectHelp
 
 /js/ajax/util/AjxTimezoneData.js
 
 	Returns generated timezone data in JavaScript form.
 
-	SEE: com.zimbra.webClient.filters.TimezoneFilter
-	SEE: /opt/zimbra/conf/timezones.ics
+	SEE: org.zmail.webClient.filters.TimezoneFilter
+	SEE: /opt/zmail/conf/timezones.ics
 
 /css/*
 /html/*
@@ -68,9 +68,9 @@ WEB CLIENT WEB APPLICATION - http://{host}/zimbra/*
 	NOTE: The CSS resources can be a combination of skin CSS files
 	      and files in the css/ directory.
 
-	SEE: com.zimbra.webClient.servlet.SkinResources
+	SEE: org.zmail.webClient.servlet.SkinResources
 	SEE: /skins/{skin}/manifest.xml
-	SEE: /opt/zimbra/jetty/work/resource-cache/skinres/
+	SEE: /opt/zmail/jetty/work/resource-cache/skinres/
 	SEE: /css/*
 
 /keys/*
@@ -82,13 +82,13 @@ WEB CLIENT WEB APPLICATION - http://{host}/zimbra/*
 	parameter can be used to prevent the servlet using the cached
 	output.
 
-	SEE: com.zimbra.webClient.servlet.Props2JsServlet
+	SEE: org.zmail.webClient.servlet.Props2JsServlet
 	SEE: /WEB-INF/classes/messages/*
 	SEE: /WEB-INF/classes/keys/*
-	SEE: /opt/zimbra/jetty/work/resource-cache/skinres/
+	SEE: /opt/zmail/jetty/work/resource-cache/skinres/
 
 /adminres
 
 	Admin resources.
 
-	SEE: com.zimbra.webClient.servlet.AdminServlet
+	SEE: org.zmail.webClient.servlet.AdminServlet

@@ -14,15 +14,15 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.ui.briefcase;
+package org.zmail.qa.selenium.projects.desktop.ui.briefcase;
 
-import com.zimbra.qa.selenium.framework.items.DocumentItem;
-import com.zimbra.qa.selenium.framework.items.IItem;
-import com.zimbra.qa.selenium.framework.ui.AbsApplication;
-import com.zimbra.qa.selenium.framework.ui.AbsForm;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.SleepUtil;
-import com.zimbra.qa.selenium.projects.desktop.ui.AppAjaxClient;
+import org.zmail.qa.selenium.framework.items.DocumentItem;
+import org.zmail.qa.selenium.framework.items.IItem;
+import org.zmail.qa.selenium.framework.ui.AbsApplication;
+import org.zmail.qa.selenium.framework.ui.AbsForm;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.SleepUtil;
+import org.zmail.qa.selenium.projects.desktop.ui.AppAjaxClient;
 
 public class DocumentBriefcaseNew extends AbsForm {
 
@@ -46,7 +46,7 @@ public class DocumentBriefcaseNew extends AbsForm {
 		}
 	}
 
-	public static final String pageTitle = "Zimbra Docs";
+	public static final String pageTitle = "Zmail Docs";
 
 	public DocumentBriefcaseNew(AbsApplication application) {
 		super(application);
@@ -67,7 +67,7 @@ public class DocumentBriefcaseNew extends AbsForm {
 	}
 
 	public void typeDocumentName(String text) throws HarnessException {
-		this.zSelectWindow("Zimbra Docs");
+		this.zSelectWindow("Zmail Docs");
 
 		sType(Locators.zNameField, text);
 	}

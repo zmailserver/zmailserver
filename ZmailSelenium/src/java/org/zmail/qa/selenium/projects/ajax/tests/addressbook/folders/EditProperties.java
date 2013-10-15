@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.addressbook.folders;
+package org.zmail.qa.selenium.projects.ajax.tests.addressbook.folders;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.addressbook.DialogEditFolder;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.DialogEditFolder.FolderColor;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.addressbook.DialogEditFolder;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.DialogEditFolder.FolderColor;
 
 
 public class EditProperties extends AjaxCommonTest {
@@ -50,9 +50,9 @@ public class EditProperties extends AjaxCommonTest {
 		FolderItem userRoot= FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.UserRoot);
 
 		// Create a folder
-		String name = "ab"+ ZimbraSeleniumProperties.getUniqueString();
+		String name = "ab"+ ZmailSeleniumProperties.getUniqueString();
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+				"<CreateFolderRequest xmlns='urn:zmailMail'>" +
 						"<folder name='"+ name + "' view='contact' l='"+ userRoot.getId() +"'/>" +
 				"</CreateFolderRequest>");
 		FolderItem folderItem = FolderItem.importFromSOAP(app.zGetActiveAccount(), name);
@@ -126,9 +126,9 @@ public class EditProperties extends AjaxCommonTest {
 		FolderItem contacts= FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Contacts);
 
 		// Create a folder
-		String name = "ab"+ ZimbraSeleniumProperties.getUniqueString();
+		String name = "ab"+ ZmailSeleniumProperties.getUniqueString();
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+				"<CreateFolderRequest xmlns='urn:zmailMail'>" +
 						"<folder name='"+ name + "' view='contact' l='"+ contacts.getId() +"'/>" +
 				"</CreateFolderRequest>");
 		FolderItem folderItem = FolderItem.importFromSOAP(app.zGetActiveAccount(), name);
@@ -168,11 +168,11 @@ public class EditProperties extends AjaxCommonTest {
 		FolderItem userRoot= FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.UserRoot);
 
 		// Create a folder
-		String name = "ab"+ ZimbraSeleniumProperties.getUniqueString();
-		String newname = "ab"+ ZimbraSeleniumProperties.getUniqueString();
+		String name = "ab"+ ZmailSeleniumProperties.getUniqueString();
+		String newname = "ab"+ ZmailSeleniumProperties.getUniqueString();
 
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+				"<CreateFolderRequest xmlns='urn:zmailMail'>" +
 						"<folder name='"+ name + "' view='contact' l='"+ userRoot.getId() +"'/>" +
 				"</CreateFolderRequest>");
 		FolderItem folderItem = FolderItem.importFromSOAP(app.zGetActiveAccount(), name);
@@ -217,11 +217,11 @@ public class EditProperties extends AjaxCommonTest {
 		FolderItem contacts= FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Contacts);
 
 		// Create a folder
-		String name = "ab"+ ZimbraSeleniumProperties.getUniqueString();
-		String newname = "ab"+ ZimbraSeleniumProperties.getUniqueString();
+		String name = "ab"+ ZmailSeleniumProperties.getUniqueString();
+		String newname = "ab"+ ZmailSeleniumProperties.getUniqueString();
 
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+				"<CreateFolderRequest xmlns='urn:zmailMail'>" +
 						"<folder name='"+ name + "' view='contact' l='"+ contacts.getId() +"'/>" +
 				"</CreateFolderRequest>");
 		FolderItem folderItem = FolderItem.importFromSOAP(app.zGetActiveAccount(), name);
@@ -267,11 +267,11 @@ public class EditProperties extends AjaxCommonTest {
 		FolderItem userRoot = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.UserRoot);
 
 		// Create a folder
-		String name = "ab"+ ZimbraSeleniumProperties.getUniqueString();
-		String newname = "ab"+ ZimbraSeleniumProperties.getUniqueString();
+		String name = "ab"+ ZmailSeleniumProperties.getUniqueString();
+		String newname = "ab"+ ZmailSeleniumProperties.getUniqueString();
 
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+				"<CreateFolderRequest xmlns='urn:zmailMail'>" +
 						"<folder name='"+ name + "' view='contact' l='"+ userRoot.getId() +"'/>" +
 				"</CreateFolderRequest>");
 		FolderItem folderItem = FolderItem.importFromSOAP(app.zGetActiveAccount(), name);
@@ -316,11 +316,11 @@ public class EditProperties extends AjaxCommonTest {
 		FolderItem contacts= FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Contacts);
 
 		// Create a folder
-		String name = "ab"+ ZimbraSeleniumProperties.getUniqueString();
-		String newname = "ab"+ ZimbraSeleniumProperties.getUniqueString();
+		String name = "ab"+ ZmailSeleniumProperties.getUniqueString();
+		String newname = "ab"+ ZmailSeleniumProperties.getUniqueString();
 
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+				"<CreateFolderRequest xmlns='urn:zmailMail'>" +
 						"<folder name='"+ name + "' view='contact' l='"+ contacts.getId() +"'/>" +
 				"</CreateFolderRequest>");
 		FolderItem folderItem = FolderItem.importFromSOAP(app.zGetActiveAccount(), name);

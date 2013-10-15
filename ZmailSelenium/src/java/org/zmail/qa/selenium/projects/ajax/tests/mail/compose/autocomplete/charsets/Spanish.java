@@ -14,20 +14,20 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.compose.autocomplete.charsets;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.compose.autocomplete.charsets;
 
 import java.util.List;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.items.MailItem;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.AutocompleteEntry;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew.Field;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.items.MailItem;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.AutocompleteEntry;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew.Field;
 
 
 public class Spanish extends PrefGroupMailByMessageTest {
@@ -38,8 +38,8 @@ public class Spanish extends PrefGroupMailByMessageTest {
 	public Spanish() {
 		logger.info("New "+ Spanish.class.getCanonicalName());
 		
-		super.startingAccountPreferences.put("zimbraPrefComposeFormat", "text");
-		super.startingAccountPreferences.put("zimbraPrefGalAutoCompleteEnabled", "TRUE");
+		super.startingAccountPreferences.put("zmailPrefComposeFormat", "text");
+		super.startingAccountPreferences.put("zmailPrefGalAutoCompleteEnabled", "TRUE");
 	
 	}
 	
@@ -49,7 +49,7 @@ public class Spanish extends PrefGroupMailByMessageTest {
 	public void AutoComplete_01() throws HarnessException {
 		
 		// Create a contact
-		ZimbraAccount contact = new ZimbraAccount();
+		ZmailAccount contact = new ZmailAccount();
 		contact.provision();
 		contact.authenticate();
 
@@ -58,7 +58,7 @@ public class Spanish extends PrefGroupMailByMessageTest {
 		String lastname = "Wilson";
 				
 		app.zGetActiveAccount().soapSend(
-					"<CreateContactRequest xmlns='urn:zimbraMail'>"
+					"<CreateContactRequest xmlns='urn:zmailMail'>"
 				+		"<cn>"
 				+			"<a n='firstName'>"+ firstname +"</a>"
 				+			"<a n='lastName'>"+ lastname +"</a>"
@@ -69,8 +69,8 @@ public class Spanish extends PrefGroupMailByMessageTest {
 		app.zPageMain.zToolbarPressButton(Button.B_REFRESH);
 		
 		// Message properties
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String body = "body" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String body = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		// Open the new mail form
 		FormMailNew mailform = (FormMailNew) app.zPageMail.zToolbarPressButton(Button.B_NEW);
@@ -108,9 +108,9 @@ public class Spanish extends PrefGroupMailByMessageTest {
 	public void AutoComplete_02() throws HarnessException {
 		
 		// Create a contact
-		ZimbraAccount contact = new ZimbraAccount();
-		contact.setPref("givenName", "Ñáéíóúñ" + ZimbraSeleniumProperties.getUniqueString());
-		contact.setPref("sn", "Wilson" + ZimbraSeleniumProperties.getUniqueString());
+		ZmailAccount contact = new ZmailAccount();
+		contact.setPref("givenName", "Ñáéíóúñ" + ZmailSeleniumProperties.getUniqueString());
+		contact.setPref("sn", "Wilson" + ZmailSeleniumProperties.getUniqueString());
 		contact.setPref("displayName", contact.getPref("givenName") + " " + contact.getPref("sn"));
 		contact.provision();
 		contact.authenticate();
@@ -118,8 +118,8 @@ public class Spanish extends PrefGroupMailByMessageTest {
 		app.zPageMain.zToolbarPressButton(Button.B_REFRESH);
 		
 		// Message properties
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String body = "body" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String body = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		// Open the new mail form
 		FormMailNew mailform = (FormMailNew) app.zPageMail.zToolbarPressButton(Button.B_NEW);
@@ -158,7 +158,7 @@ public class Spanish extends PrefGroupMailByMessageTest {
 	public void AutoComplete_03() throws HarnessException {
 		
 		// Create a contact
-		ZimbraAccount contact = new ZimbraAccount();
+		ZmailAccount contact = new ZmailAccount();
 		contact.provision();
 		contact.authenticate();
 
@@ -167,7 +167,7 @@ public class Spanish extends PrefGroupMailByMessageTest {
 		String lastname = "Wilson";
 				
 		app.zGetActiveAccount().soapSend(
-					"<CreateContactRequest xmlns='urn:zimbraMail'>"
+					"<CreateContactRequest xmlns='urn:zmailMail'>"
 				+		"<cn>"
 				+			"<a n='firstName'>"+ firstname +"</a>"
 				+			"<a n='lastName'>"+ lastname +"</a>"
@@ -178,8 +178,8 @@ public class Spanish extends PrefGroupMailByMessageTest {
 		app.zPageMain.zToolbarPressButton(Button.B_REFRESH);
 		
 		// Message properties
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String body = "body" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String body = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		// Open the new mail form
 		FormMailNew mailform = (FormMailNew) app.zPageMail.zToolbarPressButton(Button.B_NEW);

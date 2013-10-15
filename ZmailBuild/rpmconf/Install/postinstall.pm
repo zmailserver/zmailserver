@@ -18,16 +18,16 @@ package postinstall;
 
 sub configure {
 
-	if (main::isEnabled("zimbra-ldap")) {
-		main::runAsZimbra ("${main::ZMPROV} mcf zimbraComponentAvailable ''");
-		main::runAsZimbra ("zmlocalconfig -u trial_expiration_date");
+	if (main::isEnabled("zmail-ldap")) {
+		main::runAsZmail ("${main::ZMPROV} mcf zmailComponentAvailable ''");
+		main::runAsZmail ("zmlocalconfig -u trial_expiration_date");
 	}
 
   # we temporary set this to true during the install/upgrade
   main::setLocalConfig("ssl_allow_untrusted_certs", "false")
     if $main::newinstall;
 
-  if (main::isEnabled("zimbra-mta") && $main::newinstall) {
+  if (main::isEnabled("zmail-mta") && $main::newinstall) {
     my @mtalist = main::getAllServers("mta");
     if (scalar(@mtalist) gt 1) { 
       main::setLocalConfig("zmtrainsa_cleanup_host", "false")
@@ -36,25 +36,25 @@ sub configure {
     }
   }
 
-  # enable zimbra on startup
+  # enable zmail on startup
   if ($main::platform =~ /RPL1/) {
-    system("/sbin/chkconfig --add zimbra");
-    system("/sbin/chkconfig zimbra on");
+    system("/sbin/chkconfig --add zmail");
+    system("/sbin/chkconfig zmail on");
   } elsif ($main::platform =~ /MACOSX/) {
     if (-d "/System/Library/LaunchDaemons") {
-      system("cp -f /opt/zimbra/conf/com.zimbra.zcs.plist /System/Library/LaunchDaemons");
-      #system("launchctl load /System/Library/LaunchDaemons/com.zimbra.zcs.plist 2> /dev/null");
-      #system("launchctl stop com.zimbra.zcs")
+      system("cp -f /opt/zmail/conf/org.zmail.zcs.plist /System/Library/LaunchDaemons");
+      #system("launchctl load /System/Library/LaunchDaemons/org.zmail.zcs.plist 2> /dev/null");
+      #system("launchctl stop org.zmail.zcs")
       #  if ($main::config{STARTSERVERS} eq "no");
     }
   }
 }
 
 
-sub notifyZimbra {
+sub notifyZmail {
   if (!defined ($main::options{c}) && 1) {
-    if (main::askYN("\nYou have the option of notifying Zimbra of your installation.\nThis helps us to track the uptake of the Zimbra Collaboration Server.\nThe only information that will be transmitted is:\n\tThe VERSION of zcs installed (${main::curVersion}_${main::platform})\n\tThe ADMIN EMAIL ADDRESS created ($main::config{CREATEADMIN})\n\nNotify Zimbra of your installation?", "Yes") eq "yes") {
-      if (open NOTIFY, "/opt/zimbra/libexec/zmnotifyinstall ${main::curVersion}_${main::platform} $main::config{CREATEADMIN} |") {
+    if (main::askYN("\nYou have the option of notifying Zmail of your installation.\nThis helps us to track the uptake of the Zmail Collaboration Server.\nThe only information that will be transmitted is:\n\tThe VERSION of zcs installed (${main::curVersion}_${main::platform})\n\tThe ADMIN EMAIL ADDRESS created ($main::config{CREATEADMIN})\n\nNotify Zmail of your installation?", "Yes") eq "yes") {
+      if (open NOTIFY, "/opt/zmail/libexec/zmnotifyinstall ${main::curVersion}_${main::platform} $main::config{CREATEADMIN} |") {
         while (<NOTIFY>) {
           main::progress ("$_");
         }

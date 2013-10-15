@@ -13,14 +13,14 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.util.HashMap;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.Mailbox.MailboxData;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.Mailbox.MailboxData;
 
 public class MockOfflineMailboxManager extends MailboxManager {
 

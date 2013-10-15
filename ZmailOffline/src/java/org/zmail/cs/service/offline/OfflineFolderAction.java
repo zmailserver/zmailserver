@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.offline;
+package org.zmail.cs.service.offline;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -24,39 +24,39 @@ import java.util.Set;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.NameValuePair;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.service.ServiceException.Argument;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.SoapFaultException;
-import com.zimbra.common.util.FileUtil;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.offline.OfflineProvisioning;
-import com.zimbra.cs.db.DbMailItem;
-import com.zimbra.cs.db.DbMailItem.QueryParams;
-import com.zimbra.cs.db.DbPool;
-import com.zimbra.cs.db.DbPool.DbConnection;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.OfflineMailboxManager;
-import com.zimbra.cs.mailbox.OfflineServiceException;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.SearchFolder;
-import com.zimbra.cs.mailbox.ZcsMailbox;
-import com.zimbra.cs.offline.OfflineLog;
-import com.zimbra.cs.offline.OfflineSyncManager;
-import com.zimbra.cs.offline.archive.OfflineArchiveUtil;
-import com.zimbra.cs.offline.common.OfflineConstants;
-import com.zimbra.cs.service.UserServlet;
-import com.zimbra.cs.service.mail.FolderAction;
-import com.zimbra.cs.service.mail.ItemActionHelper;
-import com.zimbra.cs.service.mail.ItemActionHelper.Op;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.service.ServiceException.Argument;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.SoapFaultException;
+import org.zmail.common.util.FileUtil;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.offline.OfflineProvisioning;
+import org.zmail.cs.db.DbMailItem;
+import org.zmail.cs.db.DbMailItem.QueryParams;
+import org.zmail.cs.db.DbPool;
+import org.zmail.cs.db.DbPool.DbConnection;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.OfflineMailboxManager;
+import org.zmail.cs.mailbox.OfflineServiceException;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.SearchFolder;
+import org.zmail.cs.mailbox.ZcsMailbox;
+import org.zmail.cs.offline.OfflineLog;
+import org.zmail.cs.offline.OfflineSyncManager;
+import org.zmail.cs.offline.archive.OfflineArchiveUtil;
+import org.zmail.cs.offline.common.OfflineConstants;
+import org.zmail.cs.service.UserServlet;
+import org.zmail.cs.service.mail.FolderAction;
+import org.zmail.cs.service.mail.ItemActionHelper;
+import org.zmail.cs.service.mail.ItemActionHelper.Op;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.soap.ZmailSoapContext;
 
 public class OfflineFolderAction extends FolderAction {
 
@@ -72,9 +72,9 @@ public class OfflineFolderAction extends FolderAction {
         if (StringUtil.equal(Op.MOVE.toString(), operation)) {
             String target = action.getAttribute(MailConstants.A_FOLDER);
             if (!StringUtil.isNullOrEmpty(target)) {
-                ItemId targetItemId = new ItemId(target, getZimbraSoapContext(context).getRequestedAccountId());
+                ItemId targetItemId = new ItemId(target, getZmailSoapContext(context).getRequestedAccountId());
                 String source = action.getAttribute(MailConstants.A_ID);
-                ItemId sourceItemId = new ItemId(source, getZimbraSoapContext(context).getRequestedAccountId());
+                ItemId sourceItemId = new ItemId(source, getZmailSoapContext(context).getRequestedAccountId());
                 // cross account move is not supported
                 if (!StringUtil.equal(targetItemId.getAccountId(), sourceItemId.getAccountId())
                         && !OfflineConstants.LOCAL_ACCOUNT_ID.equals(sourceItemId.getAccountId())
@@ -87,12 +87,12 @@ public class OfflineFolderAction extends FolderAction {
                         && OfflineConstants.LOCAL_ACCOUNT_ID.equals(targetItemId.getAccountId())) {
                     Mailbox mbox = OfflineMailboxManager.getOfflineInstance().getMailboxByAccountId(
                             sourceItemId.getAccountId());
-                    ZimbraSoapContext zsc = getZimbraSoapContext(context);
+                    ZmailSoapContext zsc = getZmailSoapContext(context);
                     OperationContext octxt = getOperationContext(zsc, context);
 
                     moveToLocalFolder(source, target, mbox, zsc, octxt);
 
-                    Element resp = getZimbraSoapContext(context).createElement(MailConstants.FOLDER_ACTION_RESPONSE);
+                    Element resp = getZmailSoapContext(context).createElement(MailConstants.FOLDER_ACTION_RESPONSE);
                     return resp;
                 }
             }
@@ -102,7 +102,7 @@ public class OfflineFolderAction extends FolderAction {
             return super.handle(request, context);
         }
 
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Mailbox mbox = getRequestedMailbox(zsc);
         OperationContext octxt = getOperationContext(zsc, context);
         String zid = "";
@@ -116,7 +116,7 @@ public class OfflineFolderAction extends FolderAction {
         Folder folder = mbox.getFolderById(octxt, id);
 
         if (!(mbox instanceof ZcsMailbox)) {
-            // load rss feed locally for non-zimbra accounts
+            // load rss feed locally for non-zmail accounts
             if ((operation.equals(OP_REFRESH) || operation.equals(OP_IMPORT)) && !folder.getUrl().equals(""))
                 return super.handle(request, context);
             else
@@ -162,7 +162,7 @@ public class OfflineFolderAction extends FolderAction {
      * @throws ServiceException
      */
     private void moveToLocalFolder(final String source, final String target, final Mailbox mbox,
-            final ZimbraSoapContext zsc, final OperationContext octxt) throws ServiceException {
+            final ZmailSoapContext zsc, final OperationContext octxt) throws ServiceException {
 
         final String sourceAccount = source.split(":")[0];
         final int sourceFolderId = Integer.parseInt(source.split(":")[1]);

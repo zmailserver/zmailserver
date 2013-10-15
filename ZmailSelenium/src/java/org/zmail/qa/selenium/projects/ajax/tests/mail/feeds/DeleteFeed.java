@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.feeds;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.feeds;
 
 import java.net.*;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
 
 public class DeleteFeed extends PrefGroupMailByMessageTest {
 
@@ -44,11 +44,11 @@ public class DeleteFeed extends PrefGroupMailByMessageTest {
 		FolderItem trash = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Trash);
 		FolderItem root = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.UserRoot);
 
-		String feedname = "feed" + ZimbraSeleniumProperties.getUniqueString();
+		String feedname = "feed" + ZmailSeleniumProperties.getUniqueString();
 		URL feedurl = new URL("http", "rss.news.yahoo.com", 80, "/rss/topstories");
 
 		app.zGetActiveAccount().soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>"
+					"<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+		"<folder name='"+ feedname +"' l='"+ root.getId() +"' url='"+ feedurl.toString() +"'/>"
 				+	"</CreateFolderRequest>");
 

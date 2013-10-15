@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.folders;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.folders;
 
 import org.testng.annotations.*;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.items.FolderItem.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.framework.util.ZimbraCharsets.*;
-import com.zimbra.qa.selenium.projects.ajax.core.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.*;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.items.FolderItem.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.ZmailCharsets.*;
+import org.zmail.qa.selenium.projects.ajax.core.*;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.*;
 
 public class CreateFolder extends PrefGroupMailByMessageTest {
 
@@ -45,7 +45,7 @@ public class CreateFolder extends PrefGroupMailByMessageTest {
 	public void CreateFolder_01() 
 	throws HarnessException 
 	{
-		_folderName = "folder" + ZimbraSeleniumProperties.getUniqueString();
+		_folderName = "folder" + ZmailSeleniumProperties.getUniqueString();
 
 		
 		DialogCreateFolder createFolderDialog = (DialogCreateFolder) app.zTreeMail.zPressButton(Button.B_TREE_NEWFOLDER);
@@ -71,7 +71,7 @@ public class CreateFolder extends PrefGroupMailByMessageTest {
 		Shortcut shortcut = Shortcut.S_NEWFOLDER;
 
 		// Set the new folder name
-		String name = "folder" + ZimbraSeleniumProperties.getUniqueString();
+		String name = "folder" + ZmailSeleniumProperties.getUniqueString();
 
 		DialogCreateFolder dialog = (DialogCreateFolder) app.zPageMail.zKeyboardShortcut(shortcut);
 		ZAssert.assertNotNull(dialog, "Verify the new dialog opened");
@@ -94,7 +94,7 @@ public class CreateFolder extends PrefGroupMailByMessageTest {
 	public void CreateFolder_03() 
 	throws HarnessException 
 	{
-		_folderName = "folder" + ZimbraSeleniumProperties.getUniqueString();
+		_folderName = "folder" + ZmailSeleniumProperties.getUniqueString();
 
 		// get the root folder to create a subfolder in
 		FolderItem root = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.UserRoot);
@@ -122,7 +122,7 @@ public class CreateFolder extends PrefGroupMailByMessageTest {
 	{
 
 		// Set the new folder name
-		String name = "folder" + ZimbraSeleniumProperties.getUniqueString();
+		String name = "folder" + ZmailSeleniumProperties.getUniqueString();
 
 		// Create a new folder in the inbox
 		// using the context menu + New Folder
@@ -145,7 +145,7 @@ public class CreateFolder extends PrefGroupMailByMessageTest {
 
 	@DataProvider(name = "DataProviderFilenames")
 	public Object[][] DataProviderDeleteKeys() throws HarnessException {
-		return (ZimbraCharsets.getInstance().getSampleTable());
+		return (ZmailCharsets.getInstance().getSampleTable());
 	}
 
 	@Test(

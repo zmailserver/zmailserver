@@ -14,15 +14,15 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_yflickr"
+<zimlet name="org_zmail_yflickr"
         version="0.2"
         label="Flickr"
         description="Flickr">
-    <include>com_zimbra_yflickr.js</include>
+    <include>org_zmail_yflickr.js</include>
     <include>photoset.js</include>
     <include>flickr.js</include>
-    <includeCSS>com_zimbra_yflickr.css</includeCSS>
-    <handlerObject>Com_Zimbra_Yflickr_handlerObj</handlerObject>
+    <includeCSS>org_zmail_yflickr.css</includeCSS>
+    <handlerObject>Com_Zmail_Yflickr_handlerObj</handlerObject>
 
     <zimletPanelItem label="Flickr" icon="FLICKR-panelIcon">
         <toolTipText>Quick link to Flickr.</toolTipText>

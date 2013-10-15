@@ -35,17 +35,17 @@ function(certs, targetServerId) {
 //2. Edit Wizards
 ZaCertViewController.initToolbarMethod =
 function () {
-	this._toolbarOperations.push(new ZaOperation(ZaOperation.REFRESH, com_zimbra_cert_manager.TBB_Refresh, com_zimbra_cert_manager.TBB_Refresh_tt, "Refresh", "Refresh", new AjxListener(this, ZaCertViewController.prototype.refreshListener)));	
-   	this._toolbarOperations.push(new ZaOperation(ZaOperation.NEW, com_zimbra_cert_manager.TBB_launch_cert_wizard, com_zimbra_cert_manager.TBB_launch_cert_wizard_tt, "InstallCertificate", "InstallCertificate", new AjxListener(this, ZaCertViewController.prototype._newCertListener)));				
+	this._toolbarOperations.push(new ZaOperation(ZaOperation.REFRESH, org_zmail_cert_manager.TBB_Refresh, org_zmail_cert_manager.TBB_Refresh_tt, "Refresh", "Refresh", new AjxListener(this, ZaCertViewController.prototype.refreshListener)));	
+   	this._toolbarOperations.push(new ZaOperation(ZaOperation.NEW, org_zmail_cert_manager.TBB_launch_cert_wizard, org_zmail_cert_manager.TBB_launch_cert_wizard_tt, "InstallCertificate", "InstallCertificate", new AjxListener(this, ZaCertViewController.prototype._newCertListener)));				
 	this._toolbarOperations.push(new ZaOperation(ZaOperation.NONE));
-	this._toolbarOperations.push(new ZaOperation(ZaOperation.HELP, com_zimbra_cert_manager.TBB_Help, com_zimbra_cert_manager.TBB_Help_tt, "Help", "Help", new AjxListener(this, this._helpButtonListener)));				
+	this._toolbarOperations.push(new ZaOperation(ZaOperation.HELP, org_zmail_cert_manager.TBB_Help, org_zmail_cert_manager.TBB_Help_tt, "Help", "Help", new AjxListener(this, this._helpButtonListener)));				
 }
 
 ZaController.initToolbarMethods["ZaCertViewController"].push(ZaCertViewController.initToolbarMethod);
 
 ZaCertViewController.initPopupMenuMethod =
 function () {
-    this._popupOperations.push(new ZaOperation(ZaOperation.VIEW, com_zimbra_cert_manager.TBB_View, com_zimbra_cert_manager.PQTBB_View_tt, "Properties", "PropertiesDis", new AjxListener(this, ZaCertViewController.prototype._viewButtonListener)));
+    this._popupOperations.push(new ZaOperation(ZaOperation.VIEW, org_zmail_cert_manager.TBB_View, org_zmail_cert_manager.PQTBB_View_tt, "Properties", "PropertiesDis", new AjxListener(this, ZaCertViewController.prototype._viewButtonListener)));
 }
 ZaController.initPopupMenuMethods["ZaCertViewController"].push(ZaCertViewController.initPopupMenuMethod);
 

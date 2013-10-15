@@ -21,8 +21,8 @@
 
 <head>
     <title>
-        <c:if test="${empty title}"><fmt:message key="zimbraTitle"/></c:if>
-        <c:if test="${!empty title}"><fmt:message key="zimbraTitle"/>: ${fn:escapeXml(title)}</c:if>
+        <c:if test="${empty title}"><fmt:message key="zmailTitle"/></c:if>
+        <c:if test="${!empty title}"><fmt:message key="zmailTitle"/>: ${fn:escapeXml(title)}</c:if>
     </title>
     <style type="text/css">
 		@import url( "<c:url value="/style/nifty.css"/>" );

@@ -17,14 +17,14 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.framework.items;
+package org.zmail.qa.selenium.framework.items;
 
 import java.util.Locale;
 
 import org.apache.log4j.*;
 
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
 
 
 /**
@@ -173,17 +173,17 @@ public class ZimletItem  {
 	public static class CoreZimletItem extends ZimletItem {
 
 		public enum CoreZimletName {
-			com_zimbra_attachcontacts,
-			com_zimbra_attachmail,
-			com_zimbra_date,
-			com_zimbra_dnd,
-			com_zimbra_email,
-			com_zimbra_linkedin,
-			com_zimbra_phone,
-			com_zimbra_social,
-			com_zimbra_srchhighlighter,
-			com_zimbra_url,
-			com_zimbra_webex
+			org_zmail_attachcontacts,
+			org_zmail_attachmail,
+			org_zmail_date,
+			org_zmail_dnd,
+			org_zmail_email,
+			org_zmail_linkedin,
+			org_zmail_phone,
+			org_zmail_social,
+			org_zmail_srchhighlighter,
+			org_zmail_url,
+			org_zmail_webex
 		}
 		
 		
@@ -200,7 +200,7 @@ public class ZimletItem  {
 		}
 
 		/**
-		 * The zimlet name, such as com_zimbra_email
+		 * The zimlet name, such as org_zmail_email
 		 */
 		protected CoreZimletName zName = null;
 		
@@ -223,7 +223,7 @@ public class ZimletItem  {
 			L10N.setLocale(locale);
 		}
 		
-		protected void setLocale(ZimbraAccount account) {
+		protected void setLocale(ZmailAccount account) {
 			logger.info("Zimlet: setLocale("+ account.EmailAddress +")");
 			setLocale(account.getLocalePreference());
 		}
@@ -244,7 +244,7 @@ public class ZimletItem  {
 		public String getFolderTreeName() {
 			String key = "label";
 			
-			if ( zName.equals(CoreZimletName.com_zimbra_webex) )
+			if ( zName.equals(CoreZimletName.org_zmail_webex) )
 				key = "WebExZimlet_label"; // Special case for the webex zimlet
 			
 			return (L10N.zGetString(key));

@@ -30,7 +30,7 @@ ZaDomainCertUpload.myXFormModifier = function(xFormObject) {
     {type:_GROUP_,  colSpan: "*", numCols: 2, colSizes: AjxEnv.isIE?["60%", "40%"]:["75%","25%"],
         cssStyle: "margin-top: 10px; margin-left: 12px", items: [
         {type:_OUTPUT_, value: ZaDomainCertUpload.getUploadFormHtml() },
-        {type: _DWT_BUTTON_ , colSpan: "*", label: com_zimbra_cert_manager.CERT_UploadButton, width: "10em",
+        {type: _DWT_BUTTON_ , colSpan: "*", label: org_zmail_cert_manager.CERT_UploadButton, width: "10em",
            onActivate: ZaDomainCertUpload.uploadCertKeyFile
         }
     ]};
@@ -96,7 +96,7 @@ ZaDomainCertUpload.uploadCertKeyFile = function() {
             if (v != null && v.length != 0) {
                 if (ZaUtil.findValueInArray(filenameArr, v) != -1) {
                     ZaApp.getInstance().getCurrentController().popupErrorDialog (
-                        com_zimbra_cert_manager.dupFileNameError + v
+                        org_zmail_cert_manager.dupFileNameError + v
                     );
                     return ;
                 }
@@ -105,14 +105,14 @@ ZaDomainCertUpload.uploadCertKeyFile = function() {
 
             if ( n == "certFile") {
                 if (v == null ||  v.length == 0) {
-                    ZaApp.getInstance().getCurrentController().popupErrorDialog(com_zimbra_cert_manager.noCertFileError);
+                    ZaApp.getInstance().getCurrentController().popupErrorDialog(org_zmail_cert_manager.noCertFileError);
                     return ;
                 }else{
                     ZaDomainCertUpload.uploadInputs["certFile"] = v ;
                 }
             }else if (n == "keyFile") {
                 if (v == null || v.length == 0 ) {
-                    ZaApp.getInstance().getCurrentController().popupErrorDialog(com_zimbra_cert_manager.noKeyFileError);
+                    ZaApp.getInstance().getCurrentController().popupErrorDialog(org_zmail_cert_manager.noKeyFileError);
                     return ;
                 }else{
                     ZaDomainCertUpload.uploadInputs["keyFile"] = v ;
@@ -128,7 +128,7 @@ ZaDomainCertUpload.uploadCertKeyFile = function() {
         um.execute(certUploadCallback, document.getElementById (ZaDomainCertUpload.uploadCertFormId));
         return ;
     }catch (err) {
-        ZaApp.getInstance().getCurrentController().popupErrorDialog(com_zimbra_cert_manager.certFileNameError) ;
+        ZaApp.getInstance().getCurrentController().popupErrorDialog(org_zmail_cert_manager.certFileNameError) ;
         return ;
     }
 }
@@ -173,7 +173,7 @@ function (status, uploadResults) {
 				}
 			}
         }
-	    var soapDoc = AjxSoapDoc.create("UploadDomCertRequest", "urn:zimbraAdmin", null);
+	    var soapDoc = AjxSoapDoc.create("UploadDomCertRequest", "urn:zmailAdmin", null);
         if(uploadFiles.cert.aid)
             soapDoc.set("cert.aid", uploadFiles.cert.aid);
         if(uploadFiles.cert.filename)
@@ -188,15 +188,15 @@ function (status, uploadResults) {
         try {
                 var reqMgrParams = {} ;
                 reqMgrParams.controller = ZaApp.getInstance().getCurrentController();
-                reqMgrParams.busyMsg = com_zimbra_cert_manager.BUSY_UPLOAD_CERTKEY;
+                reqMgrParams.busyMsg = org_zmail_cert_manager.BUSY_UPLOAD_CERTKEY;
                 var resp = ZaRequestMgr.invoke(csfeParams, reqMgrParams ).Body.UploadDomCertResponse;
                 if(resp && resp.cert_content) {
-                    form.getModel().setInstanceValue(instance, ZaDomain.A_zimbraSSLCertificate, resp.cert_content);
+                    form.getModel().setInstanceValue(instance, ZaDomain.A_zmailSSLCertificate, resp.cert_content);
                     form.parent.setDirty(true);
                     form.refresh () ;
                 }
                 if (resp && resp.key_content) {
-                    form.setInstanceValue(resp.key_content, ZaDomain.A_zimbraSSLPrivateKey);
+                    form.setInstanceValue(resp.key_content, ZaDomain.A_zmailSSLPrivateKey);
                     form.parent.setDirty(true);
                     form.refresh () ;
                 }
@@ -219,8 +219,8 @@ ZaDomainCertUpload.postDomainChange =
 function (ev) {
 	if (ev) {
 		var mods = ev.getDetails()["mods"];
-		if(mods["zimbraSSLCertificate"] || mods["zimbraSSLPrivateKey"]) {
-			ZaApp.getInstance().getCurrentController().popupMsgDialog(com_zimbra_cert_manager.Cert_Uploaded_Info);
+		if(mods["zmailSSLCertificate"] || mods["zmailSSLPrivateKey"]) {
+			ZaApp.getInstance().getCurrentController().popupMsgDialog(org_zmail_cert_manager.Cert_Uploaded_Info);
 		}
 	}
 }

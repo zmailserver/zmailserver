@@ -148,7 +148,7 @@ ZaHomeXFormView.onConfigDefaultCos = function() {
         if (i != vector.size()) {
             ZaApp.getInstance().getCosController().show(cos);
             var parentPath = ZaTree.getPathByArray([ZaMsg.OVP_home, ZaMsg.OVP_configure, ZaMsg.OVP_cos]);
-            ZaZimbraAdmin.getInstance().getOverviewPanelController().addObjectItem(parentPath, cos.name, null, true, false, cos);
+            ZaZmailAdmin.getInstance().getOverviewPanelController().addObjectItem(parentPath, cos.name, null, true, false, cos);
         }
     }
 }
@@ -158,28 +158,28 @@ ZaHomeXFormView.onCreateAccount = function(ev) {
 }
 
 ZaHomeXFormView.onManageAccount = function(ev) {
-    var tree = ZaZimbraAdmin.getInstance().getOverviewPanelController().getOverviewPanel().getFolderTree();
+    var tree = ZaZmailAdmin.getInstance().getOverviewPanelController().getOverviewPanel().getFolderTree();
     var path = ZaTree.getPathByArray([ZaMsg.OVP_home, ZaMsg.OVP_manageAccounts]);
     tree.setSelectionByPath(path, false);
 }
 
 ZaHomeXFormView.onViewService = function(ev) {
-    var tree = ZaZimbraAdmin.getInstance().getOverviewPanelController().getOverviewPanel().getFolderTree();
+    var tree = ZaZmailAdmin.getInstance().getOverviewPanelController().getOverviewPanel().getFolderTree();
     var path = ZaTree.getPathByArray([ZaMsg.OVP_home, ZaMsg.OVP_monitor, ZaMsg.OVP_status]);
     tree.setSelectionByPath(path, false);
 }
 
-ZaHomeXFormView.onSearchZimbraHelp = function(ev) {
-    var url = "http://support.zimbra.com/help/index.php";
+ZaHomeXFormView.onSearchZmailHelp = function(ev) {
+    var url = "http://support.zmail.com/help/index.php";
     window.open(url, "_blank");
 }
 
 ZaHomeXFormView.onDownloadGuide = function(ev) {
-    ZaZimbraAdmin.prototype._dwListener.call(ZaZimbraAdmin.getInstance());
+    ZaZmailAdmin.prototype._dwListener.call(ZaZmailAdmin.getInstance());
 }
 
 ZaHomeXFormView.onHelpLink = function (ev) {
-    ZaZimbraAdmin.prototype._helpListener.call(ZaZimbraAdmin.getInstance());
+    ZaZmailAdmin.prototype._helpListener.call(ZaZmailAdmin.getInstance());
 }
 
 ZaHomeXFormView.onCloseSetup = function(ev) {
@@ -241,7 +241,7 @@ ZaHomeXFormView.myXFormModifier = function(xFormObject, entry) {
 
     if (ZaSettings.ENABLED_UI_COMPONENTS[ZaSettings.DOMAIN_LIST_VIEW] || ZaSettings.ENABLED_UI_COMPONENTS[ZaSettings.CARTE_BLANCHE_UI]) {
         var domainContentChoices = [];
-	    if(ZaItem.hasRight(ZaDomain.RIGHT_CREATE_TOP_DOMAIN, ZaZimbraAdmin.currentAdminAccount)) {
+	    if(ZaItem.hasRight(ZaDomain.RIGHT_CREATE_TOP_DOMAIN, ZaZmailAdmin.currentAdminAccount)) {
             domainContentChoices.push({value:ZaMsg.LBL_HomeCreateDomain, onClick: ZaHomeXFormView.onCreateDomain});
         }
 
@@ -302,7 +302,7 @@ ZaHomeXFormView.myXFormModifier = function(xFormObject, entry) {
                 containerCssClass:"ZaHomeInfoPanel",items:[
                 {type:_GROUP_, containerCssClass:"ZaHomePanelPage", cssStyle:"overflow:hidden", colSizes:["auto"], items:[
                     {type:_OUTPUT_, colSpan:"2", value:ZaMsg.LBL_HomeSummary, cssClass:"ZaHomeInfoTitle"},
-                    {type:_OUTPUT_, label:ZabMsg.LBL_HomeZimbraVersion, cssStyle:"word-wrap:break-word;word-break:break-all;",ref: ZaHome.A2_version},
+                    {type:_OUTPUT_, label:ZabMsg.LBL_HomeZmailVersion, cssStyle:"word-wrap:break-word;word-break:break-all;",ref: ZaHome.A2_version},
                     {type:_OUTPUT_, label:ZaMsg.LBL_HomeServerNum, ref: ZaHome.A2_serverNum, bmolsnr: true,
                          visibilityChecks:["(ZaSettings.ENABLED_UI_COMPONENTS[ZaSettings.SERVER_LIST_VIEW] || ZaSettings.ENABLED_UI_COMPONENTS[ZaSettings.CARTE_BLANCHE_UI]);"]
                     },

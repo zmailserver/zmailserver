@@ -18,20 +18,20 @@
  * 
  * @author Raja Rao DV
  */
-function Com_Zimbra_EmailTemplates() {
+function Com_Zmail_EmailTemplates() {
 }
-Com_Zimbra_EmailTemplates.prototype = new ZmZimletBase();
-Com_Zimbra_EmailTemplates.prototype.constructor = Com_Zimbra_EmailTemplates;
+Com_Zmail_EmailTemplates.prototype = new ZmZimletBase();
+Com_Zmail_EmailTemplates.prototype.constructor = Com_Zmail_EmailTemplates;
 
 //--------------------------------------------------------------------------------------------------
 // INIT AND INITIALIZE TOOLBAR MENU BUTTON
 //--------------------------------------------------------------------------------------------------
-Com_Zimbra_EmailTemplates.prototype.init =
+Com_Zmail_EmailTemplates.prototype.init =
 function() {
 	this._folderPath = this.getUserProperty("etemplates_sourcefolderPath");
 };
 
-Com_Zimbra_EmailTemplates.prototype.initializeToolbar =
+Com_Zmail_EmailTemplates.prototype.initializeToolbar =
 function(app, toolbar, controller, viewId) {
 	this._currentViewId = viewId;
 	if (!this._viewIdAndMenuMap) {
@@ -51,7 +51,7 @@ function(app, toolbar, controller, viewId) {
 			text	: "Templates",
 			tooltip: this.getMessage("EmailTemplatesZimlet_tooltip"),
 			index: buttonIndex, //position of the button
-			image: "zimbraicon" //icon
+			image: "zmailicon" //icon
 		};
 
 
@@ -68,7 +68,7 @@ function(app, toolbar, controller, viewId) {
 	}
 };
 
-Com_Zimbra_EmailTemplates.prototype._addMenuItems =
+Com_Zmail_EmailTemplates.prototype._addMenuItems =
 function(button, menu) {
 	if (!menu._loaded) {
 		this._getRecentEmails(false);
@@ -83,7 +83,7 @@ function(button, menu) {
 //--------------------------------------------------------------------------------------------------
 // TEST TEMPLATE FOR GENERIC WORDS AND THEN INSERT
 //--------------------------------------------------------------------------------------------------
-Com_Zimbra_EmailTemplates.prototype._getRecentEmails =
+Com_Zmail_EmailTemplates.prototype._getRecentEmails =
 function(removeChildren) {
 	if (this._folderPath == "") {
 		this._getRecentEmailsHdlr(removeChildren);
@@ -98,7 +98,7 @@ function(removeChildren) {
 		offset:0, types:_types, noRender:true, getHtml: getHtml, callback:callbck, errorCallback:callbck});
 };
 
-Com_Zimbra_EmailTemplates.prototype._getRecentEmailsHdlr =
+Com_Zmail_EmailTemplates.prototype._getRecentEmailsHdlr =
 function(removeChildren, result) {
 	var menu = this._viewIdAndMenuMap[this._currentViewId].menu;
 	if (removeChildren) {
@@ -114,7 +114,7 @@ function(removeChildren, result) {
 		for (var i = 0; i < array.length; i++) {
 			var msg = array[i];
 			var id = msg.id;
-			var mi = menu.createMenuItem(id, {image:"zimbraIcon", text:msg.subject, style:DwtMenuItem.CASCADE_STYLE});
+			var mi = menu.createMenuItem(id, {image:"zmailIcon", text:msg.subject, style:DwtMenuItem.CASCADE_STYLE});
 			var submenu = new ZmPopupMenu(mi); //create submenu
 			mi.setMenu(submenu);//add submenu to menuitem
 
@@ -137,7 +137,7 @@ function(removeChildren, result) {
 	menu.popup(0, bounds.x, bounds.y + bounds.height, false);
 };
 
-Com_Zimbra_EmailTemplates.prototype._addStandardMenuItems =
+Com_Zmail_EmailTemplates.prototype._addStandardMenuItems =
 function(menu) {
 	var mi = menu.createMenuItem("reloadTemplates", {image:"Refresh", text:this.getMessage("EmailTemplatesZimlet_reloadTemplates")});
 	mi.addSelectionListener(new AjxListener(this, this._getRecentEmails, true));
@@ -149,13 +149,13 @@ function(menu) {
 //--------------------------------------------------------------------------------------------------
 // LOAD SELECTED MESSAGE/TEMPLATE
 //--------------------------------------------------------------------------------------------------
-Com_Zimbra_EmailTemplates.prototype._insertMsg =
+Com_Zmail_EmailTemplates.prototype._insertMsg =
 function(params) {
 	this.msg = params.msg;
 	this.msg.load({callback: new AjxCallback(this, this._handleLoadedMsg, params.insertMode)});
 };
 
-Com_Zimbra_EmailTemplates.prototype._handleLoadedMsg =
+Com_Zmail_EmailTemplates.prototype._handleLoadedMsg =
 function(insertMode) {
 	this.viewId = appCtxt.getCurrentViewId(); // make sure we use proper viewId to support multiple-compose views
 	var controller = this._viewIdAndMenuMap[this._currentViewId].controller;
@@ -171,7 +171,7 @@ function(insertMode) {
 // TEST TEMPLATE FOR GENERIC WORDS AND THEN INSERT
 //--------------------------------------------------------------------------------------------------
 
-Com_Zimbra_EmailTemplates.prototype._testTemplateContentForKeys = function(params) {
+Com_Zmail_EmailTemplates.prototype._testTemplateContentForKeys = function(params) {
 	//var regex = new RegExp("\\breplace__[a-z0-9A-Z]*", "ig");
 	var regex = new RegExp("\\$\\{[-a-zA-Z._0-9]+\\}", "ig");
 	
@@ -191,7 +191,7 @@ Com_Zimbra_EmailTemplates.prototype._testTemplateContentForKeys = function(param
 	}
 };
 
-Com_Zimbra_EmailTemplates.prototype._showReplaceStringsDlg =
+Com_Zmail_EmailTemplates.prototype._showReplaceStringsDlg =
 function(params) {
 	if (this.replaceDlg) {
 		this.replaceDlg.params = params;
@@ -211,7 +211,7 @@ function(params) {
 
 };
 
-Com_Zimbra_EmailTemplates.prototype._createReplaceView =
+Com_Zmail_EmailTemplates.prototype._createReplaceView =
 function(params) {
 	var bodyArry = params.bodyArry;
 	var subjectArry = params.subjectArry;
@@ -247,7 +247,7 @@ function(params) {
 /**
  * Adds tab control for Account Preferences' fields
  */
-Com_Zimbra_EmailTemplates.prototype._addTabControl =
+Com_Zmail_EmailTemplates.prototype._addTabControl =
 function() {
 	this.replaceDlg._tabGroup.removeAllMembers();
 	for (var i = 0; i < this._replaceFieldIds.length; i++) {
@@ -262,7 +262,7 @@ function() {
 	document.getElementById(this._replaceFieldIds[0]).focus();
 };
 
-Com_Zimbra_EmailTemplates.prototype._replaceOKBtnListener =
+Com_Zmail_EmailTemplates.prototype._replaceOKBtnListener =
 function() {
 	var params = this.replaceDlg.params;
 	var insertMode = params.insertMode;
@@ -287,7 +287,7 @@ function() {
 	this._doInsert(params.controller, params.composeView, templateSubject, templateBody, currentBodyContent, insertMode);
 };
 
-Com_Zimbra_EmailTemplates.prototype._doInsert =
+Com_Zmail_EmailTemplates.prototype._doInsert =
 function(controller, composeView, templateSubject, templateBody, currentBodyContent, insertMode) {
 	//insert subject
 	if (insertMode == "bodyAndSubject" || insertMode == "all") {
@@ -351,7 +351,7 @@ function(controller, composeView, templateSubject, templateBody, currentBodyCont
 	}
 };
 
-Com_Zimbra_EmailTemplates.prototype.addExtraMsgParts =
+Com_Zmail_EmailTemplates.prototype.addExtraMsgParts =
 function(request, isDraft) {
 	if(!isDraft || !this._isDrafInitiatedByThisZimlet) {
 		return;
@@ -373,7 +373,7 @@ function(request, isDraft) {
 	this._isDrafInitiatedByThisZimlet = false;
 };
 
-Com_Zimbra_EmailTemplates.arrayContainsElement =
+Com_Zmail_EmailTemplates.arrayContainsElement =
 function(array, val) {
 	for (var i = 0; i < array.length; i++) {
 		if (array[i] == val) {
@@ -386,14 +386,14 @@ function(array, val) {
 function emailtemplates_unique(b) {
 	var a = [], i, l = b.length;
 	for (i = 0; i < l; i++) {
-		if (!Com_Zimbra_EmailTemplates.arrayContainsElement(a, b[i])) {
+		if (!Com_Zmail_EmailTemplates.arrayContainsElement(a, b[i])) {
 			a.push(b[i]);
 		}
 	}
 	return a;
 }
 
-Com_Zimbra_EmailTemplates.prototype.getTemplateContent = function(note, mode) {
+Com_Zmail_EmailTemplates.prototype.getTemplateContent = function(note, mode) {
 	var body = "";
 	var body = note.getBodyContent();
 	if (note.isHtmlMail() && mode == ZmMimeTable.TEXT_PLAIN) {
@@ -410,7 +410,7 @@ Com_Zimbra_EmailTemplates.prototype.getTemplateContent = function(note, mode) {
 //--------------------------------------------------------------------------------------------------
 // SHOW PREFERENCE DIALOG
 //--------------------------------------------------------------------------------------------------
-Com_Zimbra_EmailTemplates.prototype._displayPrefDialog =
+Com_Zmail_EmailTemplates.prototype._displayPrefDialog =
 function() {
 	if (this.prefDlg) {
 		this.prefDlg.popup();
@@ -426,7 +426,7 @@ function() {
 	this.prefDlg.popup();
 };
 
-Com_Zimbra_EmailTemplates.prototype._createPreferenceView =
+Com_Zmail_EmailTemplates.prototype._createPreferenceView =
 function() {
 	var str = "Templates folder not set";
 	if (this._folderPath != "") {
@@ -449,7 +449,7 @@ function() {
 	return html.join("");
 };
 
-Com_Zimbra_EmailTemplates.prototype._initializePrefDialog =
+Com_Zmail_EmailTemplates.prototype._initializePrefDialog =
 function() {
 	var btn = new DwtButton({parent:this.getShell()});
 	btn.setText(this.getMessage("EmailTemplatesZimlet_setTemplatesFolder"));
@@ -460,7 +460,7 @@ function() {
 };
 
 
-Com_Zimbra_EmailTemplates.prototype._prefOKBtnListener =
+Com_Zmail_EmailTemplates.prototype._prefOKBtnListener =
 function() {
 	if (this.needRefresh) {
 		this.setUserProperty("etemplates_sourcefolderPath", this._folderPath);
@@ -470,7 +470,7 @@ function() {
 	this.prefDlg.popdown();
 };
 
-Com_Zimbra_EmailTemplates.prototype._setFolderBtnListener =
+Com_Zmail_EmailTemplates.prototype._setFolderBtnListener =
 function() {
 	if (!this._chooseFolderDialog) {
 		AjxDispatcher.require("Extras");
@@ -492,7 +492,7 @@ function() {
 	this._chooseFolderDialog.popup(params);
 };
 
-Com_Zimbra_EmailTemplates.prototype._chooseFolderOkBtnListener =
+Com_Zmail_EmailTemplates.prototype._chooseFolderOkBtnListener =
 function(dlg, folder) {
 	dlg.popdown();
 	var fp = folder.getPath();
@@ -504,7 +504,7 @@ function(dlg, folder) {
 	document.getElementById("emailtemplates_folderInfo").innerHTML = this._folderPath;
 };
 
-Com_Zimbra_EmailTemplates.prototype._handleSaveProperties =
+Com_Zmail_EmailTemplates.prototype._handleSaveProperties =
 function(needRefresh) {
 	appCtxt.setStatusMsg("Preferences Saved", ZmStatusView.LEVEL_INFO);
 	if (needRefresh) {
@@ -515,7 +515,7 @@ function(needRefresh) {
 //--------------------------------------------------------------------------------------------------
 // SHOW YES NO DIALOG TO REFRESH BROWSER
 //--------------------------------------------------------------------------------------------------
-Com_Zimbra_EmailTemplates.prototype.showYesNoDialog =
+Com_Zmail_EmailTemplates.prototype.showYesNoDialog =
 function() {
 	var dlg = appCtxt.getYesNoMsgDialog();
 	dlg.registerCallback(DwtDialog.YES_BUTTON, this._yesButtonClicked, this, dlg);
@@ -524,20 +524,20 @@ function() {
 	dlg.popup();
 };
 
-Com_Zimbra_EmailTemplates.prototype._yesButtonClicked =
+Com_Zmail_EmailTemplates.prototype._yesButtonClicked =
 function(dlg) {
 	dlg.popdown();
 	this._refreshBrowser();
 };
 
-Com_Zimbra_EmailTemplates.prototype._NoButtonClicked =
+Com_Zmail_EmailTemplates.prototype._NoButtonClicked =
 function(dlg) {
 	dlg.popdown();
 };
 
-Com_Zimbra_EmailTemplates.prototype._refreshBrowser =
+Com_Zmail_EmailTemplates.prototype._refreshBrowser =
 function() {
 	window.onbeforeunload = null;
 	var url = AjxUtil.formatUrl({});
-	ZmZimbraMail.sendRedirect(url);
+	ZmZmailMail.sendRedirect(url);
 };

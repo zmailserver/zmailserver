@@ -1,14 +1,14 @@
-SERVICE mailbox "Zimbra Mail Console" tomcat,mysql
+SERVICE mailbox "Zmail Mail Console" tomcat,mysql
 
 APPLICATION tomcat test_server "9999" normal "tomcat server"
 
-CONTROL_SYNTAX zimbrasyntax tomcat_start "/opt/zimbra/bin/tomcat start"
-CONTROL_SYNTAX zimbrasyntax tomcat_stop "/opt/zimbra/bin/tomcat stop"
-CONTROL_SYNTAX zimbrasyntax tomcat_kill "/opt/zimbra/bin/tomcat kill"
-CONTROL_SYNTAX zimbrasyntax tomcat_status "/opt/zimbra/bin/tomcat status"
+CONTROL_SYNTAX zmailsyntax tomcat_start "/opt/zmail/bin/tomcat start"
+CONTROL_SYNTAX zmailsyntax tomcat_stop "/opt/zmail/bin/tomcat stop"
+CONTROL_SYNTAX zmailsyntax tomcat_kill "/opt/zmail/bin/tomcat kill"
+CONTROL_SYNTAX zmailsyntax tomcat_status "/opt/zmail/bin/tomcat status"
 
 APPLICATION mysql test_server "9999" normal "mysql server"
 
-CONTROL_SYNTAX zimbrasyntax mysql_start "/opt/zimbra/bin/mysql.server start"
-CONTROL_SYNTAX zimbrasyntax mysql_stop "/opt/zimbra/bin/mysql.server stop"
-CONTROL_SYNTAX zimbrasyntax mysql_status "/opt/zimbra/bin/mysqladmin status"
+CONTROL_SYNTAX zmailsyntax mysql_start "/opt/zmail/bin/mysql.server start"
+CONTROL_SYNTAX zmailsyntax mysql_stop "/opt/zmail/bin/mysql.server stop"
+CONTROL_SYNTAX zmailsyntax mysql_status "/opt/zmail/bin/mysqladmin status"

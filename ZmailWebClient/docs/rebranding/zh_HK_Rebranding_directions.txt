@@ -1,24 +1,24 @@
 ﻿ZWC說明主題品牌變更－如何更改變量
 
-Zimbra網絡用戶端說明可進行品牌變更，將對Zimbra及Zimbra產品名稱的提述更換為貴公司名稱及產品名稱。
+Zmail網絡用戶端說明可進行品牌變更，將對Zmail及Zmail產品名稱的提述更換為貴公司名稱及產品名稱。
 
 檔案ZbMsg.properties中的預設變量如下：
 
-「網絡用戶端全稱」－ClientNameLong = Zimbra Web Client
+「網絡用戶端全稱」－ClientNameLong = Zmail Web Client
 「網絡用戶端簡稱」－ClientNameShort = ZWC
-「貴公司名稱」－CompanyName = Zimbra
-「此變量不相關，請勿更改。」－DesktopName = Zimbra Desktop
-「產品全稱」－CollaborationProductFullName = Zimbra Collaboration Suite
+「貴公司名稱」－CompanyName = Zmail
+「此變量不相關，請勿更改。」－DesktopName = Zmail Desktop
+「產品全稱」－CollaborationProductFullName = Zmail Collaboration Suite
 「產品簡稱」－CollaborationProductShortName = ZCS
 
 如要更改上述變量：
 
-1. SSH至Zimbra伺服器
+1. SSH至Zmail伺服器
 
-2. 根據Zimbra，將目錄更改為以下目錄
-/opt/zimbra/jetty/webapps/zimbra/WEB-INF/classes/messages/
+2. 根據Zmail，將目錄更改為以下目錄
+/opt/zmail/jetty/webapps/zmail/WEB-INF/classes/messages/
 
-3. 若需更改數值，編輯ZbMsg.properties。將Zimbra名稱替換為貴公司名稱。請勿更改或移除變量描述元。
+3. 若需更改數值，編輯ZbMsg.properties。將Zmail名稱替換為貴公司名稱。請勿更改或移除變量描述元。
 
 4. 重新啟動伺服器。輸入zmcontrol restart。
 

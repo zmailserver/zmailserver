@@ -28,7 +28,7 @@ MIME-Version: 1.0
 Content-Type: multipart/mixed; 
 	boundary="----=_Part_2192_18888264.1275978611953"
 X-Originating-IP: [10.117.81.52]
-X-Mailer: Zimbra 6.0.7_GA_2465.RHEL4 (ZimbraWebClient - FF3.0 (Win)/6.0.7_GA_2465.RHEL4)
+X-Mailer: Zmail 6.0.7_GA_2465.RHEL4 (ZmailWebClient - FF3.0 (Win)/6.0.7_GA_2465.RHEL4)
 
 ------=_Part_2192_18888264.1275978611953
 Content-Type: multipart/alternative; 

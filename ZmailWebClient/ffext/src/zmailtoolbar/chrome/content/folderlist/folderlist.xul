@@ -3,7 +3,7 @@
 	<script type="application/x-javascript" src="ZMTB_FolderList.js"/>
 	<script>
 		window.addEventListener("load", function(){
-			new ZMTB_FolderList(com_zimbra_tb);
+			new ZMTB_FolderList(org_zmail_tb);
 		}, false);
 	</script>
 	<toolbar id="ZimTB-Toolbar">

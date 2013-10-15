@@ -33,7 +33,7 @@ function CalcEngine(parent) {
 CalcEngine.prototype.constructor = CalcEngine;
 
 CalcEngine.prototype.getXmlString = function(subs) {
-	var xmlStr = AjxTemplate.expand("com_zimbra_yfinance.templates.YFinance#CalcXmlRequest", subs);
+	var xmlStr = AjxTemplate.expand("org_zmail_yfinance.templates.YFinance#CalcXmlRequest", subs);
 	return xmlStr;
 };
 
@@ -53,7 +53,7 @@ function(resultText) {
 CalcEngine.prototype.showCalc = 
 function(calcId) {
 	this._updateInfo = null;
-	var calStr = AjxTemplate.expand("com_zimbra_yfinance.templates.YFinance#"+calcId);
+	var calStr = AjxTemplate.expand("org_zmail_yfinance.templates.YFinance#"+calcId);
 	this._loadCalc(calStr, calcId);
 };
 
@@ -189,7 +189,7 @@ function(calcInput, resultCells) {
 		calcInput: calcInput
 	};
 
-	var r = AjxTemplate.expand("com_zimbra_yfinance.templates.YFinance#CalcXmlRequest", subs);
+	var r = AjxTemplate.expand("org_zmail_yfinance.templates.YFinance#CalcXmlRequest", subs);
 	DBG.println("Calcxml Request...");
 	DBG.dumpObj(r);
 	
@@ -234,7 +234,7 @@ function(response) {
 		imgHTML: imgHTML,
 		content: content
 	};
-	var printContent = AjxTemplate.expand("com_zimbra_yfinance.templates.YFinance#ResultView", data);
+	var printContent = AjxTemplate.expand("org_zmail_yfinance.templates.YFinance#ResultView", data);
 	DBG.dumpObj(content);
 	this._calcData = {chartUrl : chartUrl, content: content};
 	this.showResults(printContent);
@@ -279,7 +279,7 @@ function() {
 	if(this._updateInfo){
 		var updateInfo = this._updateInfo;
 		var content = this._resultView ? this._resultView.getHtmlElement().firstChild.innerHTML : "" ;	
-		content = [content , "<span class='ZimbraCalculatorData' calcId='", this._calcId, "'><!--ACE[ZmSpreadSheet]:",this._sheetData, "--></span><br>"].join("");
+		content = [content , "<span class='ZmailCalculatorData' calcId='", this._calcId, "'><!--ACE[ZmSpreadSheet]:",this._sheetData, "--></span><br>"].join("");
 		updateInfo.containerElement.innerHTML = content;
 		this._appViewMgr.pushView(ZmId.VIEW_NOTEBOOK_PAGE_EDIT);	
 	}else{	
@@ -323,7 +323,7 @@ function(content, folder) {
 CalcEngine.prototype._importContent = 
 function() {		
 	var content = this._resultView ? this._resultView.getHtmlElement().innerHTML : "" ;	
-	content = [content , "<span class='ZimbraCalculatorData' calcId='", this._calcId, "'><!--ACE[ZmSpreadSheet]:", this._sheetData, "--></span><br>"].join("");
+	content = [content , "<span class='ZmailCalculatorData' calcId='", this._calcId, "'><!--ACE[ZmSpreadSheet]:", this._sheetData, "--></span><br>"].join("");
 	this._parent.importResultAsPage(this._importFolder, content);	
 	this._copyToDialog.popdown();
 	
@@ -342,7 +342,7 @@ function(ev) {
 	{
 			var calcId = ev.item.getData(ZmOperation.MENUITEM_ID);
 			this._calcId = calcId;
-			var calStr = AjxTemplate.expand("com_zimbra_yfinance.templates.YFinance#"+calcId);
+			var calStr = AjxTemplate.expand("org_zmail_yfinance.templates.YFinance#"+calcId);
 			this._pendingData = calStr;
 			CalcEngine._iframeOnLoad(this._iframe);
 	}

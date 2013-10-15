@@ -7,8 +7,8 @@
     <description>A tag library for rest-related pages.</description>
     <tlib-version>1.0</tlib-version>
 
-    <short-name>ZimbraRestMailTagLibrary</short-name>
-    <uri>com.zimbra.restclient</uri>
+    <short-name>ZmailRestMailTagLibrary</short-name>
+    <uri>org.zmail.restclient</uri>
 
    <tag-file>
        <name>head</name>

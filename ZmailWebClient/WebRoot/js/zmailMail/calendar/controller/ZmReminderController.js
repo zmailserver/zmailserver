@@ -384,7 +384,7 @@ function(list) {
 
 ZmReminderController.prototype.dismissApptRequest = 
 function(list, callback) {
-	var soapDoc = AjxSoapDoc.create("DismissCalendarItemAlarmRequest", "urn:zimbraMail");
+	var soapDoc = AjxSoapDoc.create("DismissCalendarItemAlarmRequest", "urn:zmailMail");
 
 	var dismissedAt = (new Date()).getTime();
 	for (var i = 0; i < list.size(); i++) {
@@ -474,7 +474,7 @@ function(apptList, snoozeMinutes, beforeAppt) {
     var chosenSnoozeMilliseconds = snoozeMinutes*60*1000;
     var added = false;
 
-    var soapDoc = AjxSoapDoc.create("SnoozeCalendarItemAlarmRequest", "urn:zimbraMail");
+    var soapDoc = AjxSoapDoc.create("SnoozeCalendarItemAlarmRequest", "urn:zmailMail");
     if (beforeAppt) {
         // Using a before time, relative to the start of each appointment
         if (!this._beforeProcessor) {

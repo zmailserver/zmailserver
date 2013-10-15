@@ -13,12 +13,12 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.clam;
+package org.zmail.clam;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
 
 public class ClamScannerConfig {
 
@@ -32,10 +32,10 @@ public class ClamScannerConfig {
     
     public void reload() throws ServiceException {
         Config globalConfig = Provisioning.getInstance().getConfig();
-        mEnabled = globalConfig.getBooleanAttr(Provisioning.A_zimbraAttachmentsScanEnabled, false);
+        mEnabled = globalConfig.getBooleanAttr(Provisioning.A_zmailAttachmentsScanEnabled, false);
         
         Server serverConfig = Provisioning.getInstance().getLocalServer();
-        mURL = serverConfig.getAttr(Provisioning.A_zimbraAttachmentsScanURL);
+        mURL = serverConfig.getAttr(Provisioning.A_zmailAttachmentsScanURL);
     }
 
     public boolean getEnabled() {

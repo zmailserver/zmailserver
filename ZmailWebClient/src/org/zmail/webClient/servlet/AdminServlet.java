@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.webClient.servlet;
+package org.zmail.webClient.servlet;
 
-import com.zimbra.cs.servlet.ZimbraServlet;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.service.FileUploadServlet;
-import com.zimbra.cs.extension.ExtensionUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.service.ServiceException;
+import org.zmail.cs.servlet.ZmailServlet;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.service.FileUploadServlet;
+import org.zmail.cs.extension.ExtensionUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.service.ServiceException;
 
 import java.io.*;
 import java.lang.reflect.Method;
@@ -33,7 +33,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-public class AdminServlet extends ZimbraServlet {
+public class AdminServlet extends ZmailServlet {
 
     private static final String ACTION_GETCSR = "getCSR" ;
 //    private static final String ACTION_GETBP = "getBP" ;
@@ -85,7 +85,7 @@ public class AdminServlet extends ZimbraServlet {
 
             }
         }catch (Exception e){
-            ZimbraLog.webclient.error(e) ;
+            ZmailLog.webclient.error(e) ;
             resp.sendError(resp.SC_NOT_FOUND) ;
         }
     }

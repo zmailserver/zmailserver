@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.offline;
+package org.zmail.cs.account.offline;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,15 +22,15 @@ import java.util.Map;
 import java.util.Set;
 
 import com.google.common.base.Objects;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.offline.OfflineLC;
-import com.zimbra.cs.offline.OfflineLog;
-import com.zimbra.cs.offline.common.OfflineConstants;
-import com.zimbra.cs.offline.jsp.JspConstants;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.offline.OfflineLC;
+import org.zmail.cs.offline.OfflineLog;
+import org.zmail.cs.offline.common.OfflineConstants;
+import org.zmail.cs.offline.jsp.JspConstants;
 
 public class OfflineAccount extends Account {
 
@@ -120,9 +120,9 @@ public class OfflineAccount extends Account {
         this.localAccount = localAccount;
     }
 
-    private static final String[] sDisabledFeatures = new String[] { Provisioning.A_zimbraFeatureIMEnabled,
-            Provisioning.A_zimbraFeatureViewInHtmlEnabled, Provisioning.A_zimbraFeatureNotebookEnabled,
-            Provisioning.A_zimbraDumpsterEnabled };
+    private static final String[] sDisabledFeatures = new String[] { Provisioning.A_zmailFeatureIMEnabled,
+            Provisioning.A_zmailFeatureViewInHtmlEnabled, Provisioning.A_zmailFeatureNotebookEnabled,
+            Provisioning.A_zmailDumpsterEnabled };
 
     private static final Set<String> sDisabledFeaturesSet = new HashSet<String>();
 
@@ -131,8 +131,8 @@ public class OfflineAccount extends Account {
             sDisabledFeaturesSet.add(feature.toLowerCase());
     }
 
-    private static final String[] sGlobalAttributes = new String[] { Provisioning.A_zimbraPrefIncludeTrashInSearch,
-            Provisioning.A_zimbraPrefIncludeSpamInSearch };
+    private static final String[] sGlobalAttributes = new String[] { Provisioning.A_zmailPrefIncludeTrashInSearch,
+            Provisioning.A_zmailPrefIncludeSpamInSearch };
 
     private static final Set<String> sGlobalAttributesSet = new HashSet<String>();
 
@@ -150,7 +150,7 @@ public class OfflineAccount extends Account {
         if (localAccount != null && sGlobalAttributesSet.contains(name.toLowerCase()))
             return localAccount.getAttr(name, applyDefaults);
 
-        if (name.equals(Provisioning.A_zimbraPrefMailPollingInterval))
+        if (name.equals(Provisioning.A_zmailPrefMailPollingInterval))
             return OfflineLC.zdesktop_client_poll_interval.value();
 
         return super.getAttr(name, applyDefaults);
@@ -166,7 +166,7 @@ public class OfflineAccount extends Account {
             for (String attr : sGlobalAttributes)
                 attrs.put(attr, localAccount.getAttr(attr));
 
-        attrs.put(Provisioning.A_zimbraPrefMailPollingInterval, OfflineLC.zdesktop_client_poll_interval.value());
+        attrs.put(Provisioning.A_zmailPrefMailPollingInterval, OfflineLC.zdesktop_client_poll_interval.value());
         return attrs;
     }
 
@@ -180,15 +180,15 @@ public class OfflineAccount extends Account {
             for (String attr : sGlobalAttributes)
                 attrs.put(attr, localAccount.getAttr(attr));
 
-        attrs.put(Provisioning.A_zimbraPrefMailPollingInterval, OfflineLC.zdesktop_client_poll_interval.value());
+        attrs.put(Provisioning.A_zmailPrefMailPollingInterval, OfflineLC.zdesktop_client_poll_interval.value());
         return attrs;
     }
 
     @Override
     public String[] getMultiAttr(String name) {
         if (isLocalAccount()
-                && (name.equals(Provisioning.A_zimbraChildAccount) || name
-                        .equals(Provisioning.A_zimbraPrefChildVisibleAccount))) {
+                && (name.equals(Provisioning.A_zmailChildAccount) || name
+                        .equals(Provisioning.A_zmailPrefChildVisibleAccount))) {
             try {
                 OfflineProvisioning prov = OfflineProvisioning.getOfflineInstance();
                 List<String> accountIds = prov.getAllAccountIds();
@@ -215,7 +215,7 @@ public class OfflineAccount extends Account {
             }
         }
         // no need to return this multi-attr for any child accounts
-        if (!isLocalAccount() && name.equals(Provisioning.A_zimbraZimletAvailableZimlets))
+        if (!isLocalAccount() && name.equals(Provisioning.A_zmailZimletAvailableZimlets))
             return new String[0];
 
         return super.getMultiAttr(name);
@@ -265,7 +265,7 @@ public class OfflineAccount extends Account {
         } else if (isDataSourceAccount()) {
             DataSource ds = OfflineProvisioning.getOfflineInstance().getDataSource(this);
             OfflineProvisioning.getOfflineInstance().setDataSourceAttribute(ds,
-                    OfflineConstants.A_zimbraDataSourceLastSync, Long.toString(time));
+                    OfflineConstants.A_zmailDataSourceLastSync, Long.toString(time));
         }
     }
 

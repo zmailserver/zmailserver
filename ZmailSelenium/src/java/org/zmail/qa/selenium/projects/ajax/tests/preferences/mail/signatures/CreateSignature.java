@@ -14,23 +14,23 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.preferences.mail.signatures;
+package org.zmail.qa.selenium.projects.ajax.tests.preferences.mail.signatures;
 
 import org.testng.annotations.Test;
 
 
-import com.zimbra.qa.selenium.framework.core.ClientSessionFactory;
-import com.zimbra.qa.selenium.framework.items.SignatureItem;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.SleepUtil;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
-import com.zimbra.qa.selenium.projects.ajax.ui.preferences.signature.FormSignatureNew;
-import com.zimbra.qa.selenium.projects.ajax.ui.preferences.signature.FormSignatureNew.Field;
+import org.zmail.qa.selenium.framework.core.ClientSessionFactory;
+import org.zmail.qa.selenium.framework.items.SignatureItem;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.SleepUtil;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
+import org.zmail.qa.selenium.projects.ajax.ui.preferences.signature.FormSignatureNew;
+import org.zmail.qa.selenium.projects.ajax.ui.preferences.signature.FormSignatureNew.Field;
 
 
 public class CreateSignature extends AjaxCommonTest {
@@ -42,8 +42,8 @@ public class CreateSignature extends AjaxCommonTest {
 	@Test(description = "Create Simple text signature through GUI", groups = { "sanity" })
 	public void CreateBasicTextSignature() throws HarnessException {
 
-		String sigName = "signame" + ZimbraSeleniumProperties.getUniqueString();
-		String sigBody = "sigbody" + ZimbraSeleniumProperties.getUniqueString();
+		String sigName = "signame" + ZmailSeleniumProperties.getUniqueString();
+		String sigBody = "sigbody" + ZmailSeleniumProperties.getUniqueString();
 
 		// click on signature from left pane
 		app.zTreePreferences.zTreeItem(Action.A_LEFTCLICK,TreeItem.MailSignatures);
@@ -67,8 +67,8 @@ public class CreateSignature extends AjaxCommonTest {
 	@Test(description = "Create Simple Html signature through GUI", groups = { "sanity" })
 	public void CreateBasicHtmlSignature() throws HarnessException {
 
-		String sigName = "signame" + ZimbraSeleniumProperties.getUniqueString();
-		String sigBody = "sigbody" + ZimbraSeleniumProperties.getUniqueString();
+		String sigName = "signame" + ZmailSeleniumProperties.getUniqueString();
+		String sigBody = "sigbody" + ZmailSeleniumProperties.getUniqueString();
 
 		// click on signature from left pane
 		app.zTreePreferences.zTreeItem(Action.A_LEFTCLICK,TreeItem.MailSignatures);

@@ -14,24 +14,24 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.briefcase.document;
+package org.zmail.qa.selenium.projects.desktop.tests.briefcase.document;
 
 import org.testng.annotations.Test;
-import com.zimbra.qa.selenium.framework.items.DocumentItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.GeneralUtility;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.XmlStringUtil;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.briefcase.DocumentBriefcaseEdit;
-import com.zimbra.qa.selenium.projects.desktop.ui.briefcase.DocumentBriefcaseOpen;
-import com.zimbra.qa.selenium.projects.desktop.ui.briefcase.PageBriefcase;
+import org.zmail.qa.selenium.framework.items.DocumentItem;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.GeneralUtility;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.XmlStringUtil;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.briefcase.DocumentBriefcaseEdit;
+import org.zmail.qa.selenium.projects.desktop.ui.briefcase.DocumentBriefcaseOpen;
+import org.zmail.qa.selenium.projects.desktop.ui.briefcase.PageBriefcase;
 
 public class EditDocument extends AjaxCommonTest {
 
@@ -45,7 +45,7 @@ public class EditDocument extends AjaxCommonTest {
 
 	@Test(description = "Create document through SOAP - edit name & verify through GUI", groups = { "smoke" })
 	public void EditDocument_01() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
@@ -59,12 +59,12 @@ public class EditDocument extends AjaxCommonTest {
 				+ docItem1.getDocText() + "</body>" + "</html>");
 
 		account
-				.soapSend("<SaveDocumentRequest requestId='0' xmlns='urn:zimbraMail'>"
+				.soapSend("<SaveDocumentRequest requestId='0' xmlns='urn:zmailMail'>"
 						+ "<doc name='"
 						+ docItem1.getName()
 						+ "' l='"
 						+ briefcaseFolder.getId()
-						+ "' ct='application/x-zimbra-doc'>"
+						+ "' ct='application/x-zmail-doc'>"
 						+ "<content>"
 						+ contentHTML
 						+ "</content>"
@@ -128,7 +128,7 @@ public class EditDocument extends AjaxCommonTest {
 
 	@Test(description = "Create document through SOAP - edit text & name & verify through GUI", groups = { "smoke" })
 	public void EditDocument_02() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
@@ -142,12 +142,12 @@ public class EditDocument extends AjaxCommonTest {
 				+ docItem1.getDocText() + "</body>" + "</html>");
 
 		account
-				.soapSend("<SaveDocumentRequest requestId='0' xmlns='urn:zimbraMail'>"
+				.soapSend("<SaveDocumentRequest requestId='0' xmlns='urn:zmailMail'>"
 						+ "<doc name='"
 						+ docItem1.getName()
 						+ "' l='"
 						+ briefcaseFolder.getId()
-						+ "' ct='application/x-zimbra-doc'>"
+						+ "' ct='application/x-zmail-doc'>"
 						+ "<content>"
 						+ contentHTML
 						+ "</content>"
@@ -227,7 +227,7 @@ public class EditDocument extends AjaxCommonTest {
 
 	@Test(description = "Create document & edit text through SOAP & verify through GUI", groups = { "smoke" })
 	public void EditDocument_03() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
@@ -240,12 +240,12 @@ public class EditDocument extends AjaxCommonTest {
 				+ docItem.getDocText() + "</body>" + "</html>");
 
 		account
-				.soapSend("<SaveDocumentRequest requestId='0' xmlns='urn:zimbraMail'>"
+				.soapSend("<SaveDocumentRequest requestId='0' xmlns='urn:zmailMail'>"
 						+ "<doc name='"
 						+ docItem.getName()
 						+ "' l='"
 						+ briefcaseFolder.getId()
-						+ "' ct='application/x-zimbra-doc'>"
+						+ "' ct='application/x-zmail-doc'>"
 						+ "<content>"
 						+ contentHTML
 						+ "</content>"
@@ -255,17 +255,17 @@ public class EditDocument extends AjaxCommonTest {
 		// TODO: Bug 59439
 		// Search for created document
 		//account
-		//		.soapSend("<SearchRequest xmlns='urn:zimbraMail' types='document'>"
+		//		.soapSend("<SearchRequest xmlns='urn:zmailMail' types='document'>"
 		//				+ "<query>" + docItem.getName() + "</query>" + "</SearchRequest>");
 
 		String docId = account.soapSelectValue("//mail:doc", "id");
 		String version = account.soapSelectValue("//mail:doc", "ver");
 		
-		docItem.setDocText("editText" + ZimbraSeleniumProperties.getUniqueString());
+		docItem.setDocText("editText" + ZmailSeleniumProperties.getUniqueString());
 
 		// Edit document through SOAP
 		account
-				.soapSend("<SaveDocumentRequest requestId='0' xmlns='urn:zimbraMail'>"
+				.soapSend("<SaveDocumentRequest requestId='0' xmlns='urn:zmailMail'>"
 						+ "<doc name='"
 						+ docItem.getName()
 						+ "' l='"
@@ -274,7 +274,7 @@ public class EditDocument extends AjaxCommonTest {
 						+ version
 						+ "' id='"
 						+ docId
-						+ "' ct='application/x-zimbra-doc'>"
+						+ "' ct='application/x-zmail-doc'>"
 						+ "<content>&lt;html>&lt;body>"
 						+ docItem.getDocText()
 						+ "&lt;/body>&lt;/html></content>"
@@ -320,7 +320,7 @@ public class EditDocument extends AjaxCommonTest {
 
 	@Test(description = "Create document through SOAP - edit text & verify through GUI", groups = { "smoke" })
 	public void EditDocument_04() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
@@ -333,12 +333,12 @@ public class EditDocument extends AjaxCommonTest {
 				+ docItem.getDocText() + "</body>" + "</html>");
 
 		account
-				.soapSend("<SaveDocumentRequest requestId='0' xmlns='urn:zimbraMail'>"
+				.soapSend("<SaveDocumentRequest requestId='0' xmlns='urn:zmailMail'>"
 						+ "<doc name='"
 						+ docItem.getName()
 						+ "' l='"
 						+ briefcaseFolder.getId()
-						+ "' ct='application/x-zimbra-doc'>"
+						+ "' ct='application/x-zmail-doc'>"
 						+ "<content>"
 						+ contentHTML
 						+ "</content>"
@@ -364,7 +364,7 @@ public class EditDocument extends AjaxCommonTest {
 		try {
 			app.zPageBriefcase.zSelectWindow(docItem.getName());
 
-			editText = "editText" + ZimbraSeleniumProperties.getUniqueString();
+			editText = "editText" + ZmailSeleniumProperties.getUniqueString();
 			
 			// Fill out the document with the new data
 			documentBriefcaseEdit.typeDocumentText(editText);
@@ -417,7 +417,7 @@ public class EditDocument extends AjaxCommonTest {
 
 	@Test(description = "Create document through SOAP - Edit Document using Right Click Context Menu & verify through GUI", groups = { "functional" })
 	public void EditDocument_05() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
@@ -430,12 +430,12 @@ public class EditDocument extends AjaxCommonTest {
 				+ docItem.getDocText() + "</body>" + "</html>");
 
 		account
-				.soapSend("<SaveDocumentRequest requestId='0' xmlns='urn:zimbraMail'>"
+				.soapSend("<SaveDocumentRequest requestId='0' xmlns='urn:zmailMail'>"
 						+ "<doc name='"
 						+ docItem.getName()
 						+ "' l='"
 						+ briefcaseFolder.getId()
-						+ "' ct='application/x-zimbra-doc'>"
+						+ "' ct='application/x-zmail-doc'>"
 						+ "<content>"
 						+ contentHTML
 						+ "</content>"
@@ -464,7 +464,7 @@ public class EditDocument extends AjaxCommonTest {
 			app.zPageBriefcase.zSelectWindow(docItem.getName());
 
 			// Fill out the document with the new data
-			editDocName = "editDocName" + ZimbraSeleniumProperties.getUniqueString();
+			editDocName = "editDocName" + ZmailSeleniumProperties.getUniqueString();
 			
 			documentBriefcaseEdit.typeDocumentName(editDocName);
 

@@ -16,13 +16,13 @@
  */
 package sample.oauth.provider.soap;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Metadata;
-import com.zimbra.soap.DocumentHandler;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Metadata;
+import org.zmail.soap.DocumentHandler;
+import org.zmail.soap.ZmailSoapContext;
 import net.oauth.OAuthConsumer;
 import org.dom4j.QName;
 import sample.oauth.provider.core.SampleZmOAuthProvider;
@@ -41,7 +41,7 @@ public class GetOAuthConsumers extends DocumentHandler {
 
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Mailbox mailbox = getRequestedMailbox(zsc);
         Set<String> authzedConsumerKeys = null;
         Metadata oAuthConfig = mailbox.getConfig(null, "zwc:oauth");

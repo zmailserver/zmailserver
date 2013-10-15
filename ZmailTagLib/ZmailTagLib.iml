@@ -8,8 +8,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="ZimbraCommon" />
-    <orderEntry type="module" module-name="ZimbraServer" />
+    <orderEntry type="module" module-name="ZmailCommon" />
+    <orderEntry type="module" module-name="ZmailServer" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
@@ -58,7 +58,7 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/build/zimbrataglib.jar!/" />
+          <root url="jar://$MODULE_DIR$/build/zmailtaglib.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

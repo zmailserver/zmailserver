@@ -82,7 +82,7 @@
   <topic name="Mehrere Kalender anzeigen" url="zwc_help_files/7_calendars/view_multiple_calendars.htm" />
 </key>
 <key name="Mini-Kalender" >
-  <topic name="Im Zimbra-Webclient navigieren" url="zwc_help_files/1_setting_up/navigating_the_zimbra_web_client.htm" />
+  <topic name="Im Zmail-Webclient navigieren" url="zwc_help_files/1_setting_up/navigating_the_zmail_web_client.htm" />
 </key>
 <key name="Mobilgerät" >
   <topic name="Mobilgerät mit der Wipe-Funktion löschen" url="zwc_help_files/11_mobile/wipe_your_mobile_device.htm" />
@@ -241,7 +241,7 @@
   <topic name="Tastenkürzel verwenden" url="zwc_help_files/1_setting_up/using_keyboard_shortcuts.htm" />
 </key>
 <key name="Übersichtsfenster" >
-  <topic name="Im Zimbra-Webclient navigieren" url="zwc_help_files/1_setting_up/navigating_the_zimbra_web_client.htm" />
+  <topic name="Im Zmail-Webclient navigieren" url="zwc_help_files/1_setting_up/navigating_the_zmail_web_client.htm" />
 </key>
 <key name="Umgeleitete Mail" >
   <topic name="Mail als umgeleitete Mail weiterleiten" url="zwc_help_files/3_compose/forward_a_message_as_a_redirected_message.htm" />

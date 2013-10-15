@@ -213,8 +213,8 @@ ZaSkin.prototype = {
 	},
 	
 	_reflowApp : function() {
-		if (ZaZimbraAdmin.getInstance && ZaZimbraAdmin.getInstance()) {
-			ZaZimbraAdmin.getInstance().getAppViewMgr().fitAll();
+		if (ZaZmailAdmin.getInstance && ZaZmailAdmin.getInstance()) {
+			ZaZmailAdmin.getInstance().getAppViewMgr().fitAll();
 		}
 	}
 	

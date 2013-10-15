@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.StringUtil;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.StringUtil;
 
 /**
  * A checkpoint consists of two parts, GalSyncToken and lastSyncedItemId.

@@ -98,23 +98,23 @@ function onSetStartPage()
 
 
 <h1>Source and Destination Mailboxes</h1>
-<p>In this dialog, list the users who should be migrated to the Zimbra mailbox server.</p>
+<p>In this dialog, list the users who should be migrated to the Zmail mailbox server.</p>
 <p>You can select users with either of the following applications:</p>
 <ul style="list-style: disc;">
 <li class="p">
-<p style="font-weight: bold;">Object Picker<span style="font-weight: normal;">, to select individual accounts to migrate to Zimbra.</span></p>
+<p style="font-weight: bold;">Object Picker<span style="font-weight: normal;">, to select individual accounts to migrate to Zmail.</span></p>
 </li>
 <li class="p">
-<p><span style="font-weight: bold;">Query Builder</span><span>, to select groups of accounts to migrate to Zimbra.</span></p>
+<p><span style="font-weight: bold;">Query Builder</span><span>, to select groups of accounts to migrate to Zmail.</span></p>
 </li>
 </ul>
 <p>When importing accounts, the migration wizard assumes that:</p>
 <ul style="list-style: disc;">
 <li class="p">
-<p>Imports are by a single domain. For example, you might import users from marketing.domain.com on your Exchange server to zimbra.domain.com on your Zimbra server.</p>
+<p>Imports are by a single domain. For example, you might import users from marketing.domain.com on your Exchange server to zmail.domain.com on your Zmail server.</p>
 </li>
 <li class="p">
-<p>The user’s Common Name ( CN) in Exchange will be the first portion of the email address on the Zimbra server. To continue the above example, a user who has an account for joe@marketing.zimbra.com on Exchange would become joe@marketing.zimbra.example.com, on your Zimbra server.</p>
+<p>The user’s Common Name ( CN) in Exchange will be the first portion of the email address on the Zmail server. To continue the above example, a user who has an account for joe@marketing.zmail.com on Exchange would become joe@marketing.zmail.example.com, on your Zmail server.</p>
 </li>
 </ul>
 <p>Click <span class="attribute">Object Picker</span> to select specific accounts to migrate.</p>
@@ -152,7 +152,7 @@ function onSetStartPage()
 </ol>
 </li>
 </ol>
-<p style="margin-left: 80px;">The Wizard now checks to see if the accounts selected exists on the Zimbra server.</p>
+<p style="margin-left: 80px;">The Wizard now checks to see if the accounts selected exists on the Zmail server.</p>
 <p>Click <span class="attribute">Query Builder</span> to select groups of accounts to migrate.</p>
 <ol style="list-style: disc;">
 <li style="list-style: none; display: inline;">
@@ -175,7 +175,7 @@ function onSetStartPage()
 <li style="list-style: none; display: inline;">
 <ol start="4" style="list-style: decimal;">
 <li class="p">
-<p>Click <span style="font-weight: bold;">OK</span>. The Source &amp; Destination Mailboxes dialog now displays the Zimbra account names, the Exchange Store DN information and the Exchange server DN information. Review the information.</p>
+<p>Click <span style="font-weight: bold;">OK</span>. The Source &amp; Destination Mailboxes dialog now displays the Zmail account names, the Exchange Store DN information and the Exchange server DN information. Review the information.</p>
 </li>
 <li class="p">
 <p>To remove accounts that should not be migrated, click <span style="font-weight: bold;">Remove</span>. Click <span style="font-weight: bold;">Next</span>, to continue.</p>
@@ -183,7 +183,7 @@ function onSetStartPage()
 </ol>
 </li>
 </ol>
-<p style="margin-left: 80px;">The Wizard now checks to see if the accounts selected exists on the Zimbra server.</p>
+<p style="margin-left: 80px;">The Wizard now checks to see if the accounts selected exists on the Zmail server.</p>
 <ul>
 <li class="p-note">
 <p class="note">The steps above are for the Exchange 6.0 Query Builder dialog. If you are migrating from Exchange 5.5, the Query Builder dialog is different. You must enter the search base for the LDAP query and you must construct the filter to identify which mailboxes to import.</p>

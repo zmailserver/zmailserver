@@ -14,15 +14,15 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.conversation.conversations;
+package org.zmail.qa.selenium.projects.ajax.tests.conversation.conversations;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByConversationTest;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByConversationTest;
 
 
 public class MarkSpamConversation extends PrefGroupMailByConversationTest {
@@ -31,7 +31,7 @@ public class MarkSpamConversation extends PrefGroupMailByConversationTest {
 	public MarkSpamConversation() {
 		logger.info("New "+ MarkSpamConversation.class.getCanonicalName());
 
-		super.startingAccountPreferences.put("zimbraPrefShowSelectionCheckbox", "TRUE");
+		super.startingAccountPreferences.put("zmailPrefShowSelectionCheckbox", "TRUE");
 
 	}
 	
@@ -39,20 +39,20 @@ public class MarkSpamConversation extends PrefGroupMailByConversationTest {
 			groups = { "smoke" })
 	public void MarkSpamConversation_01() throws HarnessException {
 		
-		String subject = "subject"+ ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject"+ ZmailSeleniumProperties.getUniqueString();
 		
 		// Get the junk folder
 		FolderItem junk = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Junk);
 
 
 		// Send a message to the account
-		ZimbraAccount.AccountA().soapSend(
-					"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+		ZmailAccount.AccountA().soapSend(
+					"<SendMsgRequest xmlns='urn:zmailMail'>" +
 						"<m>" +
 							"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 							"<su>"+ subject +"</su>" +
 							"<mp ct='text/plain'>" +
-								"<content>content"+ ZimbraSeleniumProperties.getUniqueString() +"</content>" +
+								"<content>content"+ ZmailSeleniumProperties.getUniqueString() +"</content>" +
 							"</mp>" +
 						"</m>" +
 					"</SendMsgRequest>");
@@ -86,20 +86,20 @@ public class MarkSpamConversation extends PrefGroupMailByConversationTest {
 			groups = { "smoke" })
 	public void MarkSpamConversation_02() throws HarnessException {
 		
-		String subject = "subject"+ ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject"+ ZmailSeleniumProperties.getUniqueString();
 		
 		// Get the junk folder
 		FolderItem junk = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Junk);
 
 
 		// Send a message to the account
-		ZimbraAccount.AccountA().soapSend(
-					"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+		ZmailAccount.AccountA().soapSend(
+					"<SendMsgRequest xmlns='urn:zmailMail'>" +
 						"<m>" +
 							"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 							"<su>"+ subject +"</su>" +
 							"<mp ct='text/plain'>" +
-								"<content>content"+ ZimbraSeleniumProperties.getUniqueString() +"</content>" +
+								"<content>content"+ ZmailSeleniumProperties.getUniqueString() +"</content>" +
 							"</mp>" +
 						"</m>" +
 					"</SendMsgRequest>");
@@ -135,39 +135,39 @@ public class MarkSpamConversation extends PrefGroupMailByConversationTest {
 		FolderItem junk = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Junk);
 
 		// Create the message data to be sent
-		String subject1 = "subject"+ ZimbraSeleniumProperties.getUniqueString();
-		String subject2 = "subject"+ ZimbraSeleniumProperties.getUniqueString();
-		String subject3 = "subject"+ ZimbraSeleniumProperties.getUniqueString();
+		String subject1 = "subject"+ ZmailSeleniumProperties.getUniqueString();
+		String subject2 = "subject"+ ZmailSeleniumProperties.getUniqueString();
+		String subject3 = "subject"+ ZmailSeleniumProperties.getUniqueString();
 				
-		ZimbraAccount.AccountA().soapSend(
-				"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+		ZmailAccount.AccountA().soapSend(
+				"<SendMsgRequest xmlns='urn:zmailMail'>" +
 					"<m>" +
 						"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 						"<su>"+ subject1 +"</su>" +
 						"<mp ct='text/plain'>" +
-							"<content>content"+ ZimbraSeleniumProperties.getUniqueString() +"</content>" +
+							"<content>content"+ ZmailSeleniumProperties.getUniqueString() +"</content>" +
 						"</mp>" +
 					"</m>" +
 				"</SendMsgRequest>");
 
-		ZimbraAccount.AccountA().soapSend(
-				"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+		ZmailAccount.AccountA().soapSend(
+				"<SendMsgRequest xmlns='urn:zmailMail'>" +
 					"<m>" +
 						"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 						"<su>"+ subject2 +"</su>" +
 						"<mp ct='text/plain'>" +
-							"<content>content"+ ZimbraSeleniumProperties.getUniqueString() +"</content>" +
+							"<content>content"+ ZmailSeleniumProperties.getUniqueString() +"</content>" +
 						"</mp>" +
 					"</m>" +
 				"</SendMsgRequest>");
 
-		ZimbraAccount.AccountA().soapSend(
-				"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+		ZmailAccount.AccountA().soapSend(
+				"<SendMsgRequest xmlns='urn:zmailMail'>" +
 					"<m>" +
 						"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 						"<su>"+ subject3 +"</su>" +
 						"<mp ct='text/plain'>" +
-							"<content>content"+ ZimbraSeleniumProperties.getUniqueString() +"</content>" +
+							"<content>content"+ ZmailSeleniumProperties.getUniqueString() +"</content>" +
 						"</mp>" +
 					"</m>" +
 				"</SendMsgRequest>");

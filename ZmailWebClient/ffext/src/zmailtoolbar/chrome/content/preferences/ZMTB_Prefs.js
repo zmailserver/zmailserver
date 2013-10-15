@@ -23,9 +23,9 @@ var ZMTB_Prefs = function()
 	while(enumerator.hasMoreElements())
 	{
 		var win = enumerator.getNext();
-		if(win.com_zimbra_tb)
+		if(win.org_zmail_tb)
 		{
-			this._zmtb = win.com_zimbra_tb;
+			this._zmtb = win.org_zmail_tb;
 			this._zmtb.getRequestManager().addUpdateListener(this);
 			this._zmtb.getFolderManager().registerListener(this);
 			window.addEventListener("unload", function(){This._zmtb.getFolderManager().removeListener(This)}, false);
@@ -38,7 +38,7 @@ var ZMTB_Prefs = function()
 	var password;
   	var myLoginManager = Components.classes["@mozilla.org/login-manager;1"].getService(Components.interfaces.nsILoginManager);
 	var pm = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
-	var logins = myLoginManager.findLogins({}, 'chrome://zimbratb', null, 'Zimbra Login');
+	var logins = myLoginManager.findLogins({}, 'chrome://zmailtb', null, 'Zmail Login');
 	for (var i = 0; i < logins.length; i++)
 	{
 		if (logins[i].username == pm.getCharPref("extensions.zmtb.username"))
@@ -172,8 +172,8 @@ ZMTB_Prefs.prototype.connect = function()
 		return;
 	}
 
-	var loginInfo = new nsLoginInfo('chrome://zimbratb', null, 'Zimbra Login', document.getElementById(ZMTB_Prefs.USERNAMEFIELD).value, document.getElementById(ZMTB_Prefs.PASSFIELD).value, "", "");
-	var logins = passwordManager.findLogins({}, 'chrome://zimbratb', null, 'Zimbra Login');
+	var loginInfo = new nsLoginInfo('chrome://zmailtb', null, 'Zmail Login', document.getElementById(ZMTB_Prefs.USERNAMEFIELD).value, document.getElementById(ZMTB_Prefs.PASSFIELD).value, "", "");
+	var logins = passwordManager.findLogins({}, 'chrome://zmailtb', null, 'Zmail Login');
 	for (var i = 0; i < logins.length; i++)
 	{
 		if (logins[i].username == document.getElementById(ZMTB_Prefs.USERNAMEFIELD).value)
@@ -194,8 +194,8 @@ ZMTB_Prefs.prototype.connect = function()
 	while(enumerator.hasMoreElements())
 	{
 	  var win = enumerator.getNext();
-		if(win.com_zimbra_tb && win.com_zimbra_tb.getRequestManager())
-			win.com_zimbra_tb.getRequestManager().newServer(document.getElementById(ZMTB_Prefs.HOSTFIELD).value, document.getElementById(ZMTB_Prefs.USERNAMEFIELD).value, document.getElementById(ZMTB_Prefs.PASSFIELD).value);
+		if(win.org_zmail_tb && win.org_zmail_tb.getRequestManager())
+			win.org_zmail_tb.getRequestManager().newServer(document.getElementById(ZMTB_Prefs.HOSTFIELD).value, document.getElementById(ZMTB_Prefs.USERNAMEFIELD).value, document.getElementById(ZMTB_Prefs.PASSFIELD).value);
 	}
 	this._statusLabel.value = "";
 	var This=this;

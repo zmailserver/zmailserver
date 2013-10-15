@@ -15,11 +15,11 @@
 <%@ tag body-content="scriptless" %>
 <%@ attribute name="title" rtexprvalue="true" required="false" %>
 <%@ attribute name="scale" rtexprvalue="true" required="false" %>
-<%@ attribute name="mailbox" rtexprvalue="true" required="true" type="com.zimbra.cs.taglib.bean.ZMailboxBean"%>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
+<%@ attribute name="mailbox" rtexprvalue="true" required="true" type="org.zmail.cs.taglib.bean.ZMailboxBean"%>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
 <c:set var="iconPath" value="/img" scope="request"/>
 <c:if test="${not empty param.ui}">
     <c:set var="uiv" value="${param.ui}" scope="session"/>
@@ -31,8 +31,8 @@
     <meta http-equiv="cache-control" content="no-cache"/>
     <meta http-equiv="Pragma" content="no-cache"/>
     <title>
-        <c:if test="${empty title}"><fmt:message key="zimbraTitle"/></c:if>
-        <c:if test="${!empty title}"><fmt:message key="zimbraTitleLabel"/> ${fn:escapeXml(title)}</c:if>
+        <c:if test="${empty title}"><fmt:message key="zmailTitle"/></c:if>
+        <c:if test="${!empty title}"><fmt:message key="zmailTitleLabel"/> ${fn:escapeXml(title)}</c:if>
     </title>
     <c:choose>
         <c:when test="${scale}">
@@ -44,7 +44,7 @@
     </c:choose>
     <link href="<c:url value='/css/zmobile${uiv!="0"?zm:cook(uiv):""}${param.st!=null && param.st=="cal"?",zmobilecal":""}.css?v=${version}'/>"  type="text/css" rel="stylesheet" /> 
     <style type="text/css" media="screen">
-    <c:set var="version" value="${initParam.zimbraCacheBusterVersion}"/>
+    <c:set var="version" value="${initParam.zmailCacheBusterVersion}"/>
        #action{padding:0px;margin:0px;border:0px;}
     </style>
     <jsp:doBody/>

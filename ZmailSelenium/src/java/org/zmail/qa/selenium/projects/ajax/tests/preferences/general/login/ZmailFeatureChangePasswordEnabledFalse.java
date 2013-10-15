@@ -14,24 +14,24 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.preferences.general.login;
+package org.zmail.qa.selenium.projects.ajax.tests.preferences.general.login;
 
 import java.util.HashMap;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
 
-public class ZimbraFeatureChangePasswordEnabledFalse extends AjaxCommonTest {
+public class ZmailFeatureChangePasswordEnabledFalse extends AjaxCommonTest {
 
 	@SuppressWarnings("serial")
-	public ZimbraFeatureChangePasswordEnabledFalse() {
-		logger.info("New "+ ZimbraFeatureChangePasswordEnabledFalse.class.getCanonicalName());
+	public ZmailFeatureChangePasswordEnabledFalse() {
+		logger.info("New "+ ZmailFeatureChangePasswordEnabledFalse.class.getCanonicalName());
 
 		// All tests start at the login page
 		super.startingPage = app.zPagePreferences;
@@ -40,7 +40,7 @@ public class ZimbraFeatureChangePasswordEnabledFalse extends AjaxCommonTest {
 			{
 
 				// Options/Preferences is disabled
-				put("zimbraFeatureChangePasswordEnabled", "FALSE");
+				put("zmailFeatureChangePasswordEnabled", "FALSE");
 
 			}
 		};
@@ -55,7 +55,7 @@ public class ZimbraFeatureChangePasswordEnabledFalse extends AjaxCommonTest {
 			description = "Verify the 'Change Password' option is not present in preferences", 
 			groups = { "functional" }
 			)
-	public void ZimbraFeatureChangePasswordEnabledFalse_01() throws HarnessException {
+	public void ZmailFeatureChangePasswordEnabledFalse_01() throws HarnessException {
 				
 		// Go to "General"
 		app.zTreePreferences.zTreeItem(Action.A_LEFTCLICK, TreeItem.General);

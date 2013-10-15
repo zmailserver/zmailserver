@@ -1,1 +1,1 @@
-Zimbra-Extension-Class: com.zimbra.cert.ZimbraCertMgrExt
+Zmail-Extension-Class: org.zmail.cert.ZmailCertMgrExt

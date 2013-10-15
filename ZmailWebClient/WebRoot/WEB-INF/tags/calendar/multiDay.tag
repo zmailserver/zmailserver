@@ -27,9 +27,9 @@
 <%@ attribute name="print" rtexprvalue="true" required="false" type="java.lang.Boolean" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
-<%@ taglib prefix="app" uri="com.zimbra.htmlclient" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
+<%@ taglib prefix="app" uri="org.zmail.htmlclient" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
 <app:handleError>
     <zm:getMailbox var="mailbox"/>
     <fmt:setTimeZone value="${timezone}"/>
@@ -178,7 +178,7 @@
                             <app:img src="calendar/ImgApptRecur.png"  altkey="recurrence"/>
                         </c:when>
                         <c:when test="${appt.exception}">
-                            <app:img src="zimbra/ImgApptException.png"  altkey="recurrence"/>
+                            <app:img src="zmail/ImgApptException.png"  altkey="recurrence"/>
                         </c:when>
                     </c:choose>
                 </td>

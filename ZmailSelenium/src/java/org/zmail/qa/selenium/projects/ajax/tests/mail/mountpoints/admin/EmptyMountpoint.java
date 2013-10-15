@@ -14,16 +14,16 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.mountpoints.admin;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.mountpoints.admin;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogWarning;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogWarning;
 
 
 public class EmptyMountpoint extends PrefGroupMailByMessageTest {
@@ -44,31 +44,31 @@ public class EmptyMountpoint extends PrefGroupMailByMessageTest {
 	@Test(	description = "Empty a mountpoint folder (context menu)",
 			groups = { "functional" })
 	public void EmptyMountpoint_01() throws HarnessException {
-		String foldername = "folder" + ZimbraSeleniumProperties.getUniqueString();
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String mountpointname = "mountpoint" + ZimbraSeleniumProperties.getUniqueString();
+		String foldername = "folder" + ZmailSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String mountpointname = "mountpoint" + ZmailSeleniumProperties.getUniqueString();
 		
-		FolderItem inbox = FolderItem.importFromSOAP(ZimbraAccount.AccountA(), FolderItem.SystemFolder.Inbox);
+		FolderItem inbox = FolderItem.importFromSOAP(ZmailAccount.AccountA(), FolderItem.SystemFolder.Inbox);
 		
 		// Create a folder to share
-		ZimbraAccount.AccountA().soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>"
+		ZmailAccount.AccountA().soapSend(
+					"<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+		"<folder name='" + foldername + "' l='" + inbox.getId() + "'/>"
 				+	"</CreateFolderRequest>");
 		
-		FolderItem folder = FolderItem.importFromSOAP(ZimbraAccount.AccountA(), foldername);
+		FolderItem folder = FolderItem.importFromSOAP(ZmailAccount.AccountA(), foldername);
 		
 		// Share it
-		ZimbraAccount.AccountA().soapSend(
-					"<FolderActionRequest xmlns='urn:zimbraMail'>"
+		ZmailAccount.AccountA().soapSend(
+					"<FolderActionRequest xmlns='urn:zmailMail'>"
 				+		"<action id='"+ folder.getId() +"' op='grant'>"
 				+			"<grant d='"+ app.zGetActiveAccount().EmailAddress +"' gt='usr' perm='rwidxa'/>"
 				+		"</action>"
 				+	"</FolderActionRequest>");
 		
 		// Add a message to it
-		ZimbraAccount.AccountA().soapSend(
-					"<AddMsgRequest xmlns='urn:zimbraMail'>"
+		ZmailAccount.AccountA().soapSend(
+					"<AddMsgRequest xmlns='urn:zmailMail'>"
         		+		"<m l='"+ folder.getId() +"' f='u'>"
             	+			"<content>From: foo@foo.com\n"
             	+				"To: foo@foo.com \n"
@@ -81,12 +81,12 @@ public class EmptyMountpoint extends PrefGroupMailByMessageTest {
             	+			"</content>"
             	+		"</m>"
 				+	"</AddMsgRequest>");
-		String messageId = ZimbraAccount.AccountA().soapSelectValue("//mail:m", "id");
+		String messageId = ZmailAccount.AccountA().soapSelectValue("//mail:m", "id");
 		
 		// Mount it
 		app.zGetActiveAccount().soapSend(
-					"<CreateMountpointRequest xmlns='urn:zimbraMail'>"
-				+		"<link l='1' name='"+ mountpointname +"'  rid='"+ folder.getId() +"' zid='"+ ZimbraAccount.AccountA().ZimbraId +"'/>"
+					"<CreateMountpointRequest xmlns='urn:zmailMail'>"
+				+		"<link l='1' name='"+ mountpointname +"'  rid='"+ folder.getId() +"' zid='"+ ZmailAccount.AccountA().ZmailId +"'/>"
 				+	"</CreateMountpointRequest>");
 		
 		FolderMountpointItem mountpoint = FolderMountpointItem.importFromSOAP(app.zGetActiveAccount(), mountpointname);
@@ -103,11 +103,11 @@ public class EmptyMountpoint extends PrefGroupMailByMessageTest {
 		dialog.zClickButton(Button.B_OK);
 
 		// Verify the message no longer appears in accountA's mailbox
-		ZimbraAccount.AccountA().soapSend(
-				"<GetMsgRequest xmlns='urn:zimbraMail'>"
+		ZmailAccount.AccountA().soapSend(
+				"<GetMsgRequest xmlns='urn:zmailMail'>"
 			+		"<m id='" + messageId + "'/>"
 			+	"</GetMsgRequest>");
-		Element[] elements = ZimbraAccount.AccountA().soapSelectNodes("//mail:m");
+		Element[] elements = ZmailAccount.AccountA().soapSelectNodes("//mail:m");
 		ZAssert.assertEquals(elements.length, 0, "Verify the message no longer appears");
 		
 

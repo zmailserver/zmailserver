@@ -13,15 +13,15 @@
  * ***** END LICENSE BLOCK *****
 --%>
 <%@ tag body-content="empty" %>
-<%@ attribute name="contact" rtexprvalue="true" required="true" type="com.zimbra.cs.taglib.bean.ZContactBean" %>
+<%@ attribute name="contact" rtexprvalue="true" required="true" type="org.zmail.cs.taglib.bean.ZContactBean" %>
 <%@ attribute name="prefix" rtexprvalue="true" required="true" %>
 <%@ attribute name="label" rtexprvalue="true" required="false" %>
 <%@ attribute name="phoneFields" rtexprvalue="true" required="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
-<%@ taglib prefix="app" uri="com.zimbra.htmlclient" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
+<%@ taglib prefix="app" uri="org.zmail.htmlclient" %>
 <c:set var="label" value="${empty label ? prefix : label}" />
 <%-- NOTE: Not allowed to reference a field like contact[prefix+"URL"]. Oh well. --%>
 <c:set var="url" value="${prefix}URL" />

@@ -12,17 +12,17 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.ldaputils;
+package org.zmail.ldaputils;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.soap.SoapServlet;
-import com.zimbra.cs.extension.ZimbraExtension;
-import com.zimbra.cs.account.AttributeManager;
+import org.zmail.common.service.ServiceException;
+import org.zmail.soap.SoapServlet;
+import org.zmail.cs.extension.ZmailExtension;
+import org.zmail.cs.account.AttributeManager;
 /**
  * @author Greg Solovyev
  */
-public class ZimbraLDAPUtilsExtension implements ZimbraExtension {
-    public static final String EXTENSION_NAME_ZIMBRASAMBA = "zimbrasamba";
+public class ZmailLDAPUtilsExtension implements ZmailExtension {
+    public static final String EXTENSION_NAME_ZIMBRASAMBA = "zmailsamba";
     
     public void init() throws ServiceException {
     	AttributeManager.getInstance().makeDomainAdminModifiable("isSpecialNTAccount");
@@ -57,7 +57,7 @@ public class ZimbraLDAPUtilsExtension implements ZimbraExtension {
     	AttributeManager.getInstance().makeDomainAdminModifiable("loginShell");
     	AttributeManager.getInstance().makeDomainAdminModifiable("userPassword");   	
     	
-        SoapServlet.addService("AdminServlet", new ZimbraLDAPUtilsService());
+        SoapServlet.addService("AdminServlet", new ZmailLDAPUtilsService());
     }
 
     public void destroy() {

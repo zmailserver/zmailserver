@@ -14,15 +14,15 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.addressbook.contacts;
+package org.zmail.qa.selenium.projects.ajax.tests.addressbook.contacts;
 
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
 
 
 public class DragAndDropContact extends AjaxCommonTest  {
@@ -51,21 +51,21 @@ public class DragAndDropContact extends AjaxCommonTest  {
 		FolderItem root = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.UserRoot);
 
 		// The addressbook
-		String foldername = "ab"+ ZimbraSeleniumProperties.getUniqueString();
+		String foldername = "ab"+ ZmailSeleniumProperties.getUniqueString();
 		
 		app.zGetActiveAccount().soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+					"<CreateFolderRequest xmlns='urn:zmailMail'>" +
 						"<folder name='" + foldername +"' l='"+ root.getId() +"' view='contact'/>" +
 					"</CreateFolderRequest>");
 		FolderItem folder = FolderItem.importFromSOAP(app.zGetActiveAccount(), foldername);
 
 		// Create a contact item
-		String firstName = "First" + ZimbraSeleniumProperties.getUniqueString();
-		String lastName = "Last" + ZimbraSeleniumProperties.getUniqueString();
-		String email = "email" + ZimbraSeleniumProperties.getUniqueString() + "@domain.com";
+		String firstName = "First" + ZmailSeleniumProperties.getUniqueString();
+		String lastName = "Last" + ZmailSeleniumProperties.getUniqueString();
+		String email = "email" + ZmailSeleniumProperties.getUniqueString() + "@domain.com";
 
 		app.zGetActiveAccount().soapSend(
-	                "<CreateContactRequest xmlns='urn:zimbraMail'>" +
+	                "<CreateContactRequest xmlns='urn:zmailMail'>" +
 	                		"<cn >" +
 	                			"<a n='firstName'>" + firstName +"</a>" +
 	                			"<a n='lastName'>" + lastName +"</a>" +
@@ -113,12 +113,12 @@ public class DragAndDropContact extends AjaxCommonTest  {
 
 
 		// Create a contact item
-		String firstName = "First" + ZimbraSeleniumProperties.getUniqueString();
-		String lastName = "Last" + ZimbraSeleniumProperties.getUniqueString();
-		String email = "email" + ZimbraSeleniumProperties.getUniqueString() + "@domain.com";
+		String firstName = "First" + ZmailSeleniumProperties.getUniqueString();
+		String lastName = "Last" + ZmailSeleniumProperties.getUniqueString();
+		String email = "email" + ZmailSeleniumProperties.getUniqueString() + "@domain.com";
 
 		app.zGetActiveAccount().soapSend(
-	                "<CreateContactRequest xmlns='urn:zimbraMail'>" +
+	                "<CreateContactRequest xmlns='urn:zmailMail'>" +
 	                		"<cn >" +
 	                			"<a n='firstName'>" + firstName +"</a>" +
 	                			"<a n='lastName'>" + lastName +"</a>" +

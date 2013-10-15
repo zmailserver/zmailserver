@@ -13,15 +13,15 @@
  * ***** END LICENSE BLOCK *****
 --%>
 <%@ tag body-content="empty" %>
-<%@ attribute name="message" rtexprvalue="true" required="true" type="com.zimbra.cs.taglib.bean.ZMessageBean" %>
-<%@ attribute name="mailbox" rtexprvalue="true" required="true" type="com.zimbra.cs.taglib.bean.ZMailboxBean" %>
+<%@ attribute name="message" rtexprvalue="true" required="true" type="org.zmail.cs.taglib.bean.ZMessageBean" %>
+<%@ attribute name="mailbox" rtexprvalue="true" required="true" type="org.zmail.cs.taglib.bean.ZMailboxBean" %>
 <%@ attribute name="composeUrl" rtexprvalue="true" required="true" type="java.lang.String" %>
 <%@ attribute name="print" rtexprvalue="true" required="false" type="java.lang.Boolean" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
-<%@ taglib prefix="app" uri="com.zimbra.htmlclient" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
+<%@ taglib prefix="app" uri="org.zmail.htmlclient" %>
 
 <c:forEach var="part" items="${message.attachments}" varStatus="partStatus">
 <c:if test="${part.isMssage}">
@@ -47,13 +47,13 @@
                             </a>
                         </c:when>
                         <c:when test="${part.isImage and print}">
-                            <c:if test="${not zm:isProvOrAttr(pageContext, 'zimbraAttachmentsBlocked')}" >
+                            <c:if test="${not zm:isProvOrAttr(pageContext, 'zmailAttachmentsBlocked')}" >
                                 <a target="_blank" href="${url}&amp;disp=i">
                                     <img class='AttachmentImage' src="${url}" alt="${fn:escapeXml(part.displayName)}" width="120" height="80" border="0"/>
                                 </a>
                             </c:if>
                         </c:when>
-                        <c:when test="${part.isImage and not print and not zm:isProvOrAttr(pageContext, 'zimbraAttachmentsBlocked')}">
+                        <c:when test="${part.isImage and not print and not zm:isProvOrAttr(pageContext, 'zmailAttachmentsBlocked')}">
                             <a target="_blank" href="${url}&amp;disp=i">
                                 <img class='AttachmentImage' src="${url}" alt="${fn:escapeXml(part.displayName)}"/>
                             </a>
@@ -66,7 +66,7 @@
                 <td><b>${fn:escapeXml(pname)}</b><br />
                         ${zm:displaySize(pageContext,part.size)}&nbsp;
                     <c:if test="${not print}" >
-                        <c:if test="${not zm:isProvOrAttr(pageContext, 'zimbraAttachmentsBlocked')}">
+                        <c:if test="${not zm:isProvOrAttr(pageContext, 'zmailAttachmentsBlocked')}">
                             <a target="_blank" href="${url}&amp;disp=i"><fmt:message key="view"/></a>&nbsp;
                             <c:if test="${mailbox.features.viewInHtml and part.isViewAsHtmlTarget}">
                                 <a target="_blank" href="${url}&amp;view=html"><fmt:message key="viewAsHtml"/></a>
@@ -82,12 +82,12 @@
 </c:forEach>
 
 <c:if test="${message.numberOfAttachments gt 1 and not print}" >
-    <c:if test="${not zm:isProvOrAttr(pageContext, 'zimbraAttachmentsBlocked')}">
+    <c:if test="${not zm:isProvOrAttr(pageContext, 'zmailAttachmentsBlocked')}">
         <c:set var="url" value="/service/home/~/?id=${message.id}&part=${message.attachmentIds}&amp;auth=co&amp;disp=a&amp;fmt=zip"/>
         <table cellspacing="8">
             <tr>
                 <td>
-                    <app:img src="zimbra/ImgZipDoc.png" alt="zip" title="zip"/>
+                    <app:img src="zmail/ImgZipDoc.png" alt="zip" title="zip"/>
                 </td>
                 <td>
                     <a href="${url}"><fmt:message key="downloadAllAttachments"/></a>

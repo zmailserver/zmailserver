@@ -14,11 +14,11 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_tooltip" version="7.0"
+<zimlet name="org_zmail_tooltip" version="7.0"
 	label="${msg.label}"
 	description="${msg.description}"
 	extension="true">
-    <include>com_zimbra_tooltip.js</include>
+    <include>org_zmail_tooltip.js</include>
     <include>ZaHelpToolTip.js</include>
     <include>ZaHelpToolTipView.js</include>
     <disableUIUndeploy>FALSE</disableUIUndeploy>

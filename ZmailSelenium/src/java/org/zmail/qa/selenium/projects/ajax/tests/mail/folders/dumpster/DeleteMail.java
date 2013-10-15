@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.folders.dumpster;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.folders.dumpster;
 
 import java.util.List;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
 
 
 public class DeleteMail extends PrefGroupMailByMessageTest {
@@ -32,25 +32,25 @@ public class DeleteMail extends PrefGroupMailByMessageTest {
 	public DeleteMail() {
 		logger.info("New "+ DeleteMail.class.getCanonicalName());
 		
-		super.startingAccountPreferences.put("zimbraDumpsterEnabled", "TRUE");
+		super.startingAccountPreferences.put("zmailDumpsterEnabled", "TRUE");
 	
 	}
 	
 	@Bugs( ids = "65915")
-	@Test(	description = "Delete a mail with zimbraDumpsterEnabled=TRUE",
+	@Test(	description = "Delete a mail with zmailDumpsterEnabled=TRUE",
 			groups = { "smoke" })
 	public void DeleteMail_01() throws HarnessException {
 		
 		// Create the message data to be sent
-		String subject = "subject"+ ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject"+ ZmailSeleniumProperties.getUniqueString();
 				
-		ZimbraAccount.AccountA().soapSend(
-					"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+		ZmailAccount.AccountA().soapSend(
+					"<SendMsgRequest xmlns='urn:zmailMail'>" +
 						"<m>" +
 							"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 							"<su>"+ subject +"</su>" +
 							"<mp ct='text/plain'>" +
-								"<content>content"+ ZimbraSeleniumProperties.getUniqueString() +"</content>" +
+								"<content>content"+ ZmailSeleniumProperties.getUniqueString() +"</content>" +
 							"</mp>" +
 						"</m>" +
 					"</SendMsgRequest>");

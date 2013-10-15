@@ -17,7 +17,7 @@
 <%@page import="java.util.*" %>
 <%
 String skin = request.getParameter("skin");
-if (skin == null) skin = application.getInitParameter("zimbraDefaultSkin");
+if (skin == null) skin = application.getInitParameter("zmailDefaultSkin");
 
 String contextPath = request.getContextPath();
 %>
@@ -31,11 +31,11 @@ String contextPath = request.getContextPath();
 <!-- source code -->
 <jsp:include page="../../public/Boot.jsp" />
 <jsp:include page="../../public/jsp/Ajax.jsp" />
-<jsp:include page="../../public/jsp/Zimbra.jsp" />
+<jsp:include page="../../public/jsp/Zmail.jsp" />
 <script>
 var appContextPath = "<%=request.getContextPath()%>";
 </script>
-<jsp:include page="../../public/jsp/ZimbraCore.jsp" />
+<jsp:include page="../../public/jsp/ZmailCore.jsp" />
 <!-- skin changer source -->
 <script src='util.js'></script>
 <script src='ui.js'></script>

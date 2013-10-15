@@ -14,18 +14,18 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.octopus.tests.myfiles.files;
+package org.zmail.qa.selenium.projects.octopus.tests.myfiles.files;
 
 import org.testng.annotations.*;
 
-import com.zimbra.qa.selenium.framework.items.FileItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.octopus.core.OctopusCommonTest;
-import com.zimbra.qa.selenium.projects.octopus.ui.PageMyFiles;
-import com.zimbra.qa.selenium.projects.octopus.ui.PageTrash;
+import org.zmail.qa.selenium.framework.items.FileItem;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.octopus.core.OctopusCommonTest;
+import org.zmail.qa.selenium.projects.octopus.ui.PageMyFiles;
+import org.zmail.qa.selenium.projects.octopus.ui.PageTrash;
 
 public class DeleteFile extends OctopusCommonTest {
 
@@ -52,7 +52,7 @@ public class DeleteFile extends OctopusCommonTest {
 
 	@Test(description = "Delete file through SOAP - verify deleted file in the Trash tab", groups = { "functional" })
 	public void DeleteFile_01() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseRootFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
@@ -62,7 +62,7 @@ public class DeleteFile extends OctopusCommonTest {
 		ZAssert.assertNotNull(trash, "Verify the trash is available");
 
 		// Create file item
-		String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+		String filePath = ZmailSeleniumProperties.getBaseDirectory()
 				+ "/data/public/other/testtextfile.txt";
 
 		FileItem file = new FileItem(filePath);
@@ -75,7 +75,7 @@ public class DeleteFile extends OctopusCommonTest {
 		// Save uploaded file to the root folder through SOAP
 		account.soapSend(
 
-		"<SaveDocumentRequest xmlns='urn:zimbraMail'>" +
+		"<SaveDocumentRequest xmlns='urn:zmailMail'>" +
 
 		"<doc l='" + briefcaseRootFolder.getId() + "'>" +
 
@@ -105,7 +105,7 @@ public class DeleteFile extends OctopusCommonTest {
 
 	@Test(description = "Delete file using drop down menu - - verify deleted file in the Trash tab", groups = { "sanity" })
 	public void DeleteFile_02() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 	
 		FolderItem briefcaseRootFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
@@ -115,7 +115,7 @@ public class DeleteFile extends OctopusCommonTest {
 		ZAssert.assertNotNull(trash, "Verify the trash is available");
 
 		// Create file item
-		String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+		String filePath = ZmailSeleniumProperties.getBaseDirectory()
 				+ "/data/public/other/testwordfile.doc";
 
 		FileItem file = new FileItem(filePath);
@@ -127,7 +127,7 @@ public class DeleteFile extends OctopusCommonTest {
 		// Save uploaded file to the root folder through SOAP
 		account.soapSend(
 
-		"<SaveDocumentRequest xmlns='urn:zimbraMail'>" + "<doc l='"
+		"<SaveDocumentRequest xmlns='urn:zmailMail'>" + "<doc l='"
 				+ briefcaseRootFolder.getId() + "'>" + "<upload id='"
 				+ attachmentId + "'/></doc>" + "</SaveDocumentRequest>");
 

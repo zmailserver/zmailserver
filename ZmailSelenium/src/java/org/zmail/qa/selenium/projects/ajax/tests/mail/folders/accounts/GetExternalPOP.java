@@ -14,18 +14,18 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.folders.accounts;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.folders.accounts;
 
 import java.util.List;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.Toaster;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.Toaster;
 
 
 public class GetExternalPOP extends PrefGroupMailByMessageTest {
@@ -54,15 +54,15 @@ public class GetExternalPOP extends PrefGroupMailByMessageTest {
 		
 		
 		// Create the external data source on the same server
-		ZimbraAccount external = new ZimbraAccount();
+		ZmailAccount external = new ZmailAccount();
 		external.provision();
 		external.authenticate();
 		
 		// Add a message to the inbox
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
 
 		external.soapSend(
-				"<AddMsgRequest xmlns='urn:zimbraMail'>"
+				"<AddMsgRequest xmlns='urn:zmailMail'>"
     		+		"<m l='"+ FolderItem.importFromSOAP(external, SystemFolder.Inbox).getId() +"' f='u'>"
         	+			"<content>From: foo@foo.com\n"
         	+				"To: foo@foo.com \n"
@@ -77,10 +77,10 @@ public class GetExternalPOP extends PrefGroupMailByMessageTest {
 			+	"</AddMsgRequest>");
 
 		// Create the folder to put the data source
-		String foldername = "external" + ZimbraSeleniumProperties.getUniqueString();
+		String foldername = "external" + ZmailSeleniumProperties.getUniqueString();
 		
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+				"<CreateFolderRequest xmlns='urn:zmailMail'>" +
                 	"<folder name='"+ foldername +"' l='1'/>" +
                 "</CreateFolderRequest>");
 
@@ -88,13 +88,13 @@ public class GetExternalPOP extends PrefGroupMailByMessageTest {
 		ZAssert.assertNotNull(folder, "Verify the subfolder is available");
 		
 		// Create the data source
-		String datasourcename = "datasource" + ZimbraSeleniumProperties.getUniqueString();
-		String datasourceHost = ZimbraSeleniumProperties.getStringProperty("server.host");
-		String datasourcePopPort = ZimbraSeleniumProperties.getStringProperty("server.pop.port");
-		String datasourcePopType = ZimbraSeleniumProperties.getStringProperty("server.pop.type");
+		String datasourcename = "datasource" + ZmailSeleniumProperties.getUniqueString();
+		String datasourceHost = ZmailSeleniumProperties.getStringProperty("server.host");
+		String datasourcePopPort = ZmailSeleniumProperties.getStringProperty("server.pop.port");
+		String datasourcePopType = ZmailSeleniumProperties.getStringProperty("server.pop.type");
 		
 		app.zGetActiveAccount().soapSend(
-				"<CreateDataSourceRequest xmlns='urn:zimbraMail'>"
+				"<CreateDataSourceRequest xmlns='urn:zmailMail'>"
 			+		"<pop3 name='"+ datasourcename +"' l='"+ folder.getId() +"' isEnabled='true' "
 			+			"port='"+ datasourcePopPort +"' host='"+ datasourceHost +"' connectionType='"+ datasourcePopType +"' leaveOnServer='true' "
 			+			"username='"+ external.EmailAddress +"' password='"+ external.Password +"' "
@@ -105,7 +105,7 @@ public class GetExternalPOP extends PrefGroupMailByMessageTest {
 		
 		
 		// Need to logout/login to get the new folder
-		ZimbraAccount active = app.zGetActiveAccount();
+		ZmailAccount active = app.zGetActiveAccount();
 		if ( app.zPageMain.zIsActive() )
 			app.zPageMain.zLogout();
 		app.zPageLogin.zLogin(active);
@@ -150,7 +150,7 @@ public class GetExternalPOP extends PrefGroupMailByMessageTest {
 	 * 3. Login to ajax
 	 * 4. Create a folder
 	 * 5. Add a data source to the account from step 1, associate with the folder in step 4
-	 * 6. Select the folder (http://bugzilla.zimbra.com/show_bug.cgi?id=66528#c5)
+	 * 6. Select the folder (http://bugzilla.zmail.com/show_bug.cgi?id=66528#c5)
 	 * 7. Click "Refresh"
 	 * 7. Verify the message from step 2 appears
 	 * 
@@ -162,15 +162,15 @@ public class GetExternalPOP extends PrefGroupMailByMessageTest {
 		
 		
 		// Create the external data source on the same server
-		ZimbraAccount external = new ZimbraAccount();
+		ZmailAccount external = new ZmailAccount();
 		external.provision();
 		external.authenticate();
 		
 		// Add a message to the inbox
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
 
 		external.soapSend(
-				"<AddMsgRequest xmlns='urn:zimbraMail'>"
+				"<AddMsgRequest xmlns='urn:zmailMail'>"
     		+		"<m l='"+ FolderItem.importFromSOAP(external, SystemFolder.Inbox).getId() +"' f='u'>"
         	+			"<content>From: foo@foo.com\n"
         	+				"To: foo@foo.com \n"
@@ -185,10 +185,10 @@ public class GetExternalPOP extends PrefGroupMailByMessageTest {
 			+	"</AddMsgRequest>");
 
 		// Create the folder to put the data source
-		String foldername = "external" + ZimbraSeleniumProperties.getUniqueString();
+		String foldername = "external" + ZmailSeleniumProperties.getUniqueString();
 		
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+				"<CreateFolderRequest xmlns='urn:zmailMail'>" +
                 	"<folder name='"+ foldername +"' l='1'/>" +
                 "</CreateFolderRequest>");
 
@@ -196,13 +196,13 @@ public class GetExternalPOP extends PrefGroupMailByMessageTest {
 		ZAssert.assertNotNull(folder, "Verify the subfolder is available");
 		
 		// Create the data source
-		String datasourcename = "datasource" + ZimbraSeleniumProperties.getUniqueString();
-		String datasourceHost = ZimbraSeleniumProperties.getStringProperty("server.host");
-		String datasourcePopPort = ZimbraSeleniumProperties.getStringProperty("server.pop.port");
-		String datasourcePopType = ZimbraSeleniumProperties.getStringProperty("server.pop.type");
+		String datasourcename = "datasource" + ZmailSeleniumProperties.getUniqueString();
+		String datasourceHost = ZmailSeleniumProperties.getStringProperty("server.host");
+		String datasourcePopPort = ZmailSeleniumProperties.getStringProperty("server.pop.port");
+		String datasourcePopType = ZmailSeleniumProperties.getStringProperty("server.pop.type");
 		
 		app.zGetActiveAccount().soapSend(
-				"<CreateDataSourceRequest xmlns='urn:zimbraMail'>"
+				"<CreateDataSourceRequest xmlns='urn:zmailMail'>"
 			+		"<pop3 name='"+ datasourcename +"' l='"+ folder.getId() +"' isEnabled='true' "
 			+			"port='"+ datasourcePopPort +"' host='"+ datasourceHost +"' connectionType='"+ datasourcePopType +"' leaveOnServer='true' "
 			+			"username='"+ external.EmailAddress +"' password='"+ external.Password +"' "
@@ -213,7 +213,7 @@ public class GetExternalPOP extends PrefGroupMailByMessageTest {
 		
 		
 		// Need to logout/login to get the new folder
-		ZimbraAccount active = app.zGetActiveAccount();
+		ZmailAccount active = app.zGetActiveAccount();
 		if ( app.zPageMain.zIsActive() )
 			app.zPageMain.zLogout();
 		app.zPageLogin.zLogin(active);
@@ -230,9 +230,9 @@ public class GetExternalPOP extends PrefGroupMailByMessageTest {
 		toaster.zWaitForClose();
 		
 		// Add another message
-		String subject2 = "subject" + ZimbraSeleniumProperties.getUniqueString();
+		String subject2 = "subject" + ZmailSeleniumProperties.getUniqueString();
 		external.soapSend(
-				"<AddMsgRequest xmlns='urn:zimbraMail'>"
+				"<AddMsgRequest xmlns='urn:zmailMail'>"
     		+		"<m l='"+ FolderItem.importFromSOAP(external, SystemFolder.Inbox).getId() +"' f='u'>"
         	+			"<content>From: foo@foo.com\n"
         	+				"To: foo@foo.com \n"
@@ -249,7 +249,7 @@ public class GetExternalPOP extends PrefGroupMailByMessageTest {
 		
 		// Click on the folder to change focus
 		// 
-		// Required step, as per http://bugzilla.zimbra.com/show_bug.cgi?id=66528#c5
+		// Required step, as per http://bugzilla.zmail.com/show_bug.cgi?id=66528#c5
 		//
 		app.zTreeMail.zTreeItem(Action.A_LEFTCLICK, folder);
 
@@ -289,15 +289,15 @@ public class GetExternalPOP extends PrefGroupMailByMessageTest {
 		
 		
 		// Create the external data source on the same server
-		ZimbraAccount external = new ZimbraAccount();
+		ZmailAccount external = new ZmailAccount();
 		external.provision();
 		external.authenticate();
 		
 		// Add a message to the inbox
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
 
 		external.soapSend(
-				"<AddMsgRequest xmlns='urn:zimbraMail'>"
+				"<AddMsgRequest xmlns='urn:zmailMail'>"
     		+		"<m l='"+ FolderItem.importFromSOAP(external, SystemFolder.Inbox).getId() +"' f='u'>"
         	+			"<content>From: foo@foo.com\n"
         	+				"To: foo@foo.com \n"
@@ -312,10 +312,10 @@ public class GetExternalPOP extends PrefGroupMailByMessageTest {
 			+	"</AddMsgRequest>");
 
 		// Create the folder to put the data source
-		String foldername = "external" + ZimbraSeleniumProperties.getUniqueString();
+		String foldername = "external" + ZmailSeleniumProperties.getUniqueString();
 		
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+				"<CreateFolderRequest xmlns='urn:zmailMail'>" +
                 	"<folder name='"+ foldername +"' l='1'/>" +
                 "</CreateFolderRequest>");
 
@@ -323,13 +323,13 @@ public class GetExternalPOP extends PrefGroupMailByMessageTest {
 		ZAssert.assertNotNull(folder, "Verify the subfolder is available");
 		
 		// Create the data source
-		String datasourcename = "datasource" + ZimbraSeleniumProperties.getUniqueString();
-		String datasourceHost = ZimbraSeleniumProperties.getStringProperty("server.host");
-		String datasourcePopPort = ZimbraSeleniumProperties.getStringProperty("server.pop.port");
-		String datasourcePopType = ZimbraSeleniumProperties.getStringProperty("server.pop.type");
+		String datasourcename = "datasource" + ZmailSeleniumProperties.getUniqueString();
+		String datasourceHost = ZmailSeleniumProperties.getStringProperty("server.host");
+		String datasourcePopPort = ZmailSeleniumProperties.getStringProperty("server.pop.port");
+		String datasourcePopType = ZmailSeleniumProperties.getStringProperty("server.pop.type");
 		
 		app.zGetActiveAccount().soapSend(
-				"<CreateDataSourceRequest xmlns='urn:zimbraMail'>"
+				"<CreateDataSourceRequest xmlns='urn:zmailMail'>"
 			+		"<pop3 name='"+ datasourcename +"' l='"+ folder.getId() +"' isEnabled='true' "
 			+			"port='"+ datasourcePopPort +"' host='"+ datasourceHost +"' connectionType='"+ datasourcePopType +"' leaveOnServer='true' "
 			+			"username='"+ external.EmailAddress +"' password='"+ external.Password +"' "
@@ -340,7 +340,7 @@ public class GetExternalPOP extends PrefGroupMailByMessageTest {
 		
 		
 		// Need to logout/login to get the new folder
-		ZimbraAccount active = app.zGetActiveAccount();
+		ZmailAccount active = app.zGetActiveAccount();
 		if ( app.zPageMain.zIsActive() )
 			app.zPageMain.zLogout();
 		app.zPageLogin.zLogin(active);
@@ -358,9 +358,9 @@ public class GetExternalPOP extends PrefGroupMailByMessageTest {
 
 		
 		// Add another message
-		String subject2 = "subject" + ZimbraSeleniumProperties.getUniqueString();
+		String subject2 = "subject" + ZmailSeleniumProperties.getUniqueString();
 		external.soapSend(
-				"<AddMsgRequest xmlns='urn:zimbraMail'>"
+				"<AddMsgRequest xmlns='urn:zmailMail'>"
     		+		"<m l='"+ FolderItem.importFromSOAP(external, SystemFolder.Inbox).getId() +"' f='u'>"
         	+			"<content>From: foo@foo.com\n"
         	+				"To: foo@foo.com \n"

@@ -14,21 +14,21 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.admin.tests.resources;
+package org.zmail.qa.selenium.projects.admin.tests.resources;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAdminAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.admin.core.AdminCommonTest;
-import com.zimbra.qa.selenium.projects.admin.items.ResourceItem;
-import com.zimbra.qa.selenium.projects.admin.ui.FormEditResource;
-import com.zimbra.qa.selenium.projects.admin.ui.PageMain;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAdminAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.admin.core.AdminCommonTest;
+import org.zmail.qa.selenium.projects.admin.items.ResourceItem;
+import org.zmail.qa.selenium.projects.admin.ui.FormEditResource;
+import org.zmail.qa.selenium.projects.admin.ui.PageMain;
 
 public class EditResource extends AdminCommonTest {
 	public EditResource() {
@@ -55,11 +55,11 @@ public class EditResource extends AdminCommonTest {
 
 		// Create a new Resource in the Admin Console using SOAP
 		ResourceItem resource = new ResourceItem();
-		ZimbraAdminAccount.AdminConsoleAdmin().soapSend(
-				"<CreateCalendarResourceRequest xmlns='urn:zimbraAdmin'>"
+		ZmailAdminAccount.AdminConsoleAdmin().soapSend(
+				"<CreateCalendarResourceRequest xmlns='urn:zmailAdmin'>"
 		 		+ "<name>" + resource.getEmailAddress() + "</name>"
 		 		+ "<a n=\"displayName\">" + resource.getName() + "</a>"
-		 		+ "<a n=\"zimbraCalResType\">" + "Location" + "</a>"
+		 		+ "<a n=\"zmailCalResType\">" + "Location" + "</a>"
 		 		+ "<password>test123</password>"
 		 		+ "</CreateCalendarResourceRequest>");
 
@@ -76,19 +76,19 @@ public class EditResource extends AdminCommonTest {
 		form.zClickTreeItem(FormEditResource.TreeItem.PROPERTIES);
 
 		//Edit the name.
-		String editedName = "editedResource_" + ZimbraSeleniumProperties.getUniqueString();
+		String editedName = "editedResource_" + ZmailSeleniumProperties.getUniqueString();
 		form.setName(editedName);
 		
 		//Submit the form.
 		form.zSubmit();
 		
 		// Verify the Resource exists in the ZCS
-		ZimbraAdminAccount.AdminConsoleAdmin().soapSend(
-				"<GetCalendarResourceRequest xmlns='urn:zimbraAdmin'>"
+		ZmailAdminAccount.AdminConsoleAdmin().soapSend(
+				"<GetCalendarResourceRequest xmlns='urn:zmailAdmin'>"
 				+ 		"<calresource by='name'>" +  editedName+"@"+resource.getDomainName() + "</calresource>"  
 				+		"</GetCalendarResourceRequest>");
 		
-		Element response = ZimbraAdminAccount.AdminConsoleAdmin().soapSelectNode("//admin:GetCalendarResourceResponse/admin:calresource", 1); 
+		Element response = ZmailAdminAccount.AdminConsoleAdmin().soapSelectNode("//admin:GetCalendarResourceResponse/admin:calresource", 1); 
 		ZAssert.assertNotNull(response, "Verify the Resource is edited successfully");
 	}
 	
@@ -108,11 +108,11 @@ public class EditResource extends AdminCommonTest {
 
 		// Create a new Resource in the Admin Console using SOAP
 		ResourceItem resource = new ResourceItem();
-		ZimbraAdminAccount.AdminConsoleAdmin().soapSend(
-				"<CreateCalendarResourceRequest xmlns='urn:zimbraAdmin'>"
+		ZmailAdminAccount.AdminConsoleAdmin().soapSend(
+				"<CreateCalendarResourceRequest xmlns='urn:zmailAdmin'>"
 		 		+ "<name>" + resource.getEmailAddress() + "</name>"
 		 		+ "<a n=\"displayName\">" + resource.getName() + "</a>"
-		 		+ "<a n=\"zimbraCalResType\">" + "Equipment" + "</a>"
+		 		+ "<a n=\"zmailCalResType\">" + "Equipment" + "</a>"
 		 		+ "<password>test123</password>"
 		 		+ "</CreateCalendarResourceRequest>");
 
@@ -129,19 +129,19 @@ public class EditResource extends AdminCommonTest {
 		form.zClickTreeItem(FormEditResource.TreeItem.PROPERTIES);
 
 		//Edit the name.
-		String editedName = "editedResource_" + ZimbraSeleniumProperties.getUniqueString();
+		String editedName = "editedResource_" + ZmailSeleniumProperties.getUniqueString();
 		form.setName(editedName);
 		
 		//Submit the form.
 		form.zSubmit();
 		
 		// Verify the Resource exists in the ZCS
-		ZimbraAdminAccount.AdminConsoleAdmin().soapSend(
-				"<GetCalendarResourceRequest xmlns='urn:zimbraAdmin'>"
+		ZmailAdminAccount.AdminConsoleAdmin().soapSend(
+				"<GetCalendarResourceRequest xmlns='urn:zmailAdmin'>"
 				+ 		"<calresource by='name'>" +  editedName+"@"+resource.getDomainName() + "</calresource>"  
 				+		"</GetCalendarResourceRequest>");
 		
-		Element response = ZimbraAdminAccount.AdminConsoleAdmin().soapSelectNode("//admin:GetCalendarResourceResponse/admin:calresource", 1); 
+		Element response = ZmailAdminAccount.AdminConsoleAdmin().soapSelectNode("//admin:GetCalendarResourceResponse/admin:calresource", 1); 
 		ZAssert.assertNotNull(response, "Verify the Resource is edited successfully");
 	}
 
@@ -162,11 +162,11 @@ public class EditResource extends AdminCommonTest {
 
 		// Create a new Resource in the Admin Console using SOAP
 		ResourceItem resource = new ResourceItem();
-		ZimbraAdminAccount.AdminConsoleAdmin().soapSend(
-				"<CreateCalendarResourceRequest xmlns='urn:zimbraAdmin'>"
+		ZmailAdminAccount.AdminConsoleAdmin().soapSend(
+				"<CreateCalendarResourceRequest xmlns='urn:zmailAdmin'>"
 		 		+ "<name>" + resource.getEmailAddress() + "</name>"
 		 		+ "<a n=\"displayName\">" + resource.getName() + "</a>"
-		 		+ "<a n=\"zimbraCalResType\">" + "Location" + "</a>"
+		 		+ "<a n=\"zmailCalResType\">" + "Location" + "</a>"
 		 		+ "<password>test123</password>"
 		 		+ "</CreateCalendarResourceRequest>");
 
@@ -183,19 +183,19 @@ public class EditResource extends AdminCommonTest {
 		form.zClickTreeItem(FormEditResource.TreeItem.PROPERTIES);
 
 		//Edit the name.
-		String editedName = "editedResource_" + ZimbraSeleniumProperties.getUniqueString();
+		String editedName = "editedResource_" + ZmailSeleniumProperties.getUniqueString();
 		form.setName(editedName);
 		
 		//Submit the form.
 		form.zSubmit();
 		
 		// Verify the Resource exists in the ZCS
-		ZimbraAdminAccount.AdminConsoleAdmin().soapSend(
-				"<GetCalendarResourceRequest xmlns='urn:zimbraAdmin'>"
+		ZmailAdminAccount.AdminConsoleAdmin().soapSend(
+				"<GetCalendarResourceRequest xmlns='urn:zmailAdmin'>"
 				+ 		"<calresource by='name'>" +  editedName+"@"+resource.getDomainName() + "</calresource>"  
 				+		"</GetCalendarResourceRequest>");
 		
-		Element response = ZimbraAdminAccount.AdminConsoleAdmin().soapSelectNode("//admin:GetCalendarResourceResponse/admin:calresource", 1); 
+		Element response = ZmailAdminAccount.AdminConsoleAdmin().soapSelectNode("//admin:GetCalendarResourceResponse/admin:calresource", 1); 
 		ZAssert.assertNotNull(response, "Verify the Resource is edited successfully");
 	}
 	
@@ -215,11 +215,11 @@ public class EditResource extends AdminCommonTest {
 
 		// Create a new Resource in the Admin Console using SOAP
 		ResourceItem resource = new ResourceItem();
-		ZimbraAdminAccount.AdminConsoleAdmin().soapSend(
-				"<CreateCalendarResourceRequest xmlns='urn:zimbraAdmin'>"
+		ZmailAdminAccount.AdminConsoleAdmin().soapSend(
+				"<CreateCalendarResourceRequest xmlns='urn:zmailAdmin'>"
 		 		+ "<name>" + resource.getEmailAddress() + "</name>"
 		 		+ "<a n=\"displayName\">" + resource.getName() + "</a>"
-		 		+ "<a n=\"zimbraCalResType\">" + "Equipment" + "</a>"
+		 		+ "<a n=\"zmailCalResType\">" + "Equipment" + "</a>"
 		 		+ "<password>test123</password>"
 		 		+ "</CreateCalendarResourceRequest>");
 
@@ -236,19 +236,19 @@ public class EditResource extends AdminCommonTest {
 		form.zClickTreeItem(FormEditResource.TreeItem.PROPERTIES);
 
 		//Edit the name.
-		String editedName = "editedResource_" + ZimbraSeleniumProperties.getUniqueString();
+		String editedName = "editedResource_" + ZmailSeleniumProperties.getUniqueString();
 		form.setName(editedName);
 		
 		//Submit the form.
 		form.zSubmit();
 		
 		// Verify the Resource exists in the ZCS
-		ZimbraAdminAccount.AdminConsoleAdmin().soapSend(
-				"<GetCalendarResourceRequest xmlns='urn:zimbraAdmin'>"
+		ZmailAdminAccount.AdminConsoleAdmin().soapSend(
+				"<GetCalendarResourceRequest xmlns='urn:zmailAdmin'>"
 				+ 		"<calresource by='name'>" +  editedName+"@"+resource.getDomainName() + "</calresource>"  
 				+		"</GetCalendarResourceRequest>");
 		
-		Element response = ZimbraAdminAccount.AdminConsoleAdmin().soapSelectNode("//admin:GetCalendarResourceResponse/admin:calresource", 1); 
+		Element response = ZmailAdminAccount.AdminConsoleAdmin().soapSelectNode("//admin:GetCalendarResourceResponse/admin:calresource", 1); 
 		ZAssert.assertNotNull(response, "Verify the Resource is edited successfully");
 	}
 

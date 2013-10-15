@@ -14,15 +14,15 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.folders;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.folders;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
 
 public class DeleteFolder extends PrefGroupMailByMessageTest {
 
@@ -46,10 +46,10 @@ public class DeleteFolder extends PrefGroupMailByMessageTest {
 		ZAssert.assertNotNull(trash, "Verify the trash is available");
 
 		// Create the subfolder
-		String name = "folder" + ZimbraSeleniumProperties.getUniqueString();
+		String name = "folder" + ZmailSeleniumProperties.getUniqueString();
 
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+				"<CreateFolderRequest xmlns='urn:zmailMail'>" +
                 	"<folder name='"+ name +"' l='"+ inbox.getId() +"'/>" +
                 "</CreateFolderRequest>");
 
@@ -80,10 +80,10 @@ public class DeleteFolder extends PrefGroupMailByMessageTest {
 	   ZAssert.assertNotNull(trash, "Verify the trash is available");
 
 	   // Create the subfolder
-	   String name = "folder" + ZimbraSeleniumProperties.getUniqueString();
+	   String name = "folder" + ZmailSeleniumProperties.getUniqueString();
 
 	   app.zGetActiveAccount().soapSend(
-	         "<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+	         "<CreateFolderRequest xmlns='urn:zmailMail'>" +
 	         "<folder name='"+ name +"' l='"+ inbox.getId() +"'/>" +
 	         "</CreateFolderRequest>");
 
@@ -100,7 +100,7 @@ public class DeleteFolder extends PrefGroupMailByMessageTest {
 
 	   // Create the same subfolder again under the same parent
 	   app.zGetActiveAccount().soapSend(
-            "<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+            "<CreateFolderRequest xmlns='urn:zmailMail'>" +
             "<folder name='"+ name +"' l='"+ inbox.getId() +"'/>" +
             "</CreateFolderRequest>");
 

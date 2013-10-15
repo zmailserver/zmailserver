@@ -14,14 +14,14 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.ui.addressbook;
+package org.zmail.qa.selenium.projects.ajax.ui.addressbook;
 
-import com.zimbra.qa.selenium.framework.items.ContactGroupItem;
-import com.zimbra.qa.selenium.framework.items.IItem;
-import com.zimbra.qa.selenium.framework.ui.AbsApplication;
-import com.zimbra.qa.selenium.framework.ui.AbsForm;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.projects.ajax.ui.addressbook.FormContactGroupNew.Locators;
+import org.zmail.qa.selenium.framework.items.ContactGroupItem;
+import org.zmail.qa.selenium.framework.items.IItem;
+import org.zmail.qa.selenium.framework.ui.AbsApplication;
+import org.zmail.qa.selenium.framework.ui.AbsForm;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.projects.ajax.ui.addressbook.FormContactGroupNew.Locators;
 
 
 public class SimpleFormContactGroupNew extends AbsForm {

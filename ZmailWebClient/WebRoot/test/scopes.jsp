@@ -59,10 +59,10 @@
 	Enumeration e = pageContext.getAttributeNamesInScope(scope);
 	while (e.hasMoreElements()) {
 		String aname = (String)e.nextElement();
-		com.zimbra.common.util.ZimbraLog.webclient.debug("+++ aname: "+aname);
+		org.zmail.common.util.ZmailLog.webclient.debug("+++ aname: "+aname);
 		try {
 			Object avalue = pageContext.getAttribute(aname, scope);
-			com.zimbra.common.util.ZimbraLog.webclient.debug("   avalue: "+avalue);
+			org.zmail.common.util.ZmailLog.webclient.debug("   avalue: "+avalue);
 			%><li><%=escape(aname)%> = <%=escape(avalue)%></li><%
 		}
 		catch (Exception ex) {

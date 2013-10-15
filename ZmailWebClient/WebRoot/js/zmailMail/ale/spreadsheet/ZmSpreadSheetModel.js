@@ -15,7 +15,7 @@
 
 /**
  * The SpreadSheet Widget data model.
- * @author Mihai Bazon, <mihai@zimbra.com>
+ * @author Mihai Bazon, <mihai@zmail.com>
  *
  * This class should embed functionality related to (re)compute cell values
  * (based on ZmSpreadSheetFormulae), set cell types, set cell data, display

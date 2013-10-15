@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.items;
+package org.zmail.qa.selenium.framework.items;
 
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
 
 /**
- * Used to define a Zimbra All Item Types Search Results
+ * Used to define a Zmail All Item Types Search Results
  * 
  * @author Matt Rhoades
  *
@@ -61,7 +61,7 @@ public class AllItemTypesItem implements IItem {
     }
 	
 	@Override
-	public void createUsingSOAP(ZimbraAccount account) throws HarnessException {
+	public void createUsingSOAP(ZmailAccount account) throws HarnessException {
 		// TODO Auto-generated method stub
 
 	}

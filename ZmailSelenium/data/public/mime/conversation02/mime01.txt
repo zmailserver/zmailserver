@@ -6,7 +6,7 @@ Subject: Conversation13155016716714
 Content-Type: multipart/alternative;
  boundary="=_8b4ca532-ca02-4f09-9eaf-a977ac68af6c"
 MIME-Version: 1.0
-X-Mailer: Zimbra 8.0.0_BETA3_4528 (ZimbraWebClient - FF8 (Win)/8.0.0_BETA3_4528)
+X-Mailer: Zmail 8.0.0_BETA3_4528 (ZmailWebClient - FF8 (Win)/8.0.0_BETA3_4528)
 
 --=_8b4ca532-ca02-4f09-9eaf-a977ac68af6c
 Content-Type: text/plain; charset=utf-8

@@ -13,13 +13,13 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.util.memcached;
+package org.zmail.common.util.memcached;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
 /**
  * A key/value lookup map backed by memcached.  This class does not implement java.util.Map
@@ -41,7 +41,7 @@ import com.zimbra.common.service.ServiceException;
  *         public MyValue deserialize(Object obj) { return new MyValue(obj); }
  *     }
  * 
- *     ZimbraMemcachedClient mcdClient = new ZimbraMemcachedClient(...);
+ *     ZmailMemcachedClient mcdClient = new ZmailMemcachedClient(...);
  *     MySerializer serializer = new MySerializer();
  *     MemcachedMap<MyKey, MyValue> mcdMap = new MemcachedMap(mcdClient, serializer);
  * 
@@ -63,7 +63,7 @@ import com.zimbra.common.service.ServiceException;
  */
 public class MemcachedMapPlusPutWithExtraParam<K extends MemcachedKey, V> {
 
-    private ZimbraMemcachedClient mClient;
+    private ZmailMemcachedClient mClient;
     private MemcachedSerializer<V> mSerializer;
     private boolean mAckWrites;
 
@@ -74,13 +74,13 @@ public class MemcachedMapPlusPutWithExtraParam<K extends MemcachedKey, V> {
      * @param ackWrites if false, put and remove operations return immediately, without waiting for an ack
      *                  if true, put and remove operations block until ack or timeout
      */
-    public MemcachedMapPlusPutWithExtraParam(ZimbraMemcachedClient client, MemcachedSerializer<V> serializer, boolean ackWrites) {
+    public MemcachedMapPlusPutWithExtraParam(ZmailMemcachedClient client, MemcachedSerializer<V> serializer, boolean ackWrites) {
         mClient = client;
         mSerializer = serializer;
         mAckWrites = ackWrites;
     }
 
-    public MemcachedMapPlusPutWithExtraParam(ZimbraMemcachedClient client, MemcachedSerializer<V> serializer) {
+    public MemcachedMapPlusPutWithExtraParam(ZmailMemcachedClient client, MemcachedSerializer<V> serializer) {
         this(client, serializer, true);
     }
 

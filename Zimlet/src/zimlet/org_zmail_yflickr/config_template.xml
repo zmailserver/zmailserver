@@ -14,7 +14,7 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimletConfig name="com_zimbra_yflickr" version="0.3">
+<zimletConfig name="org_zmail_yflickr" version="0.3">
     <global>
         <property name="allowedDomains">*.flickr.com</property>
     </global>

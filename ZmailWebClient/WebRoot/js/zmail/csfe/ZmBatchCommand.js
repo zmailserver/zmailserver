@@ -173,7 +173,7 @@ function(callback, errorCallback) {
 
 	// Create the BatchRequest
 	if (this._useJson) {
-		var jsonObj = {BatchRequest:{_jsns:"urn:zimbra", onerror:this._onError}};
+		var jsonObj = {BatchRequest:{_jsns:"urn:zmail", onerror:this._onError}};
 		var batchRequest = jsonObj.BatchRequest;
 		var size = this.size();
 		if (size && this._requests.length) {
@@ -191,7 +191,7 @@ function(callback, errorCallback) {
 		}
 	}
 	else {
-		var batchSoapDoc = AjxSoapDoc.create("BatchRequest", "urn:zimbra");
+		var batchSoapDoc = AjxSoapDoc.create("BatchRequest", "urn:zmail");
 		batchSoapDoc.setMethodAttribute("onerror", this._onError);
 		// Add each command's request element to the BatchRequest, and set its ID
 		var size = this.size();

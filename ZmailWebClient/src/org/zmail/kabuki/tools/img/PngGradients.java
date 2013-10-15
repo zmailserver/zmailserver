@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.kabuki.tools.img;
+package org.zmail.kabuki.tools.img;
 
 import java.awt.*;
 import java.awt.image.*;
@@ -23,7 +23,7 @@ import java.util.regex.*;
 import javax.imageio.*;
 import javax.imageio.stream.*;
 
-import com.zimbra.kabuki.util.Colors;
+import org.zmail.kabuki.util.Colors;
 
 public class PngGradients {
 

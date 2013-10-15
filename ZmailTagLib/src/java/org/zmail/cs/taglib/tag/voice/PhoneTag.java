@@ -12,21 +12,21 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.tag.voice;
+package org.zmail.cs.taglib.tag.voice;
 
-import com.zimbra.cs.taglib.tag.ZimbraSimpleTag;
+import org.zmail.cs.taglib.tag.ZmailSimpleTag;
 
-import com.zimbra.common.service.ServiceException;
-//import com.zimbra.cs.account.Provisioning;
+import org.zmail.common.service.ServiceException;
+//import org.zmail.cs.account.Provisioning;
 
-import com.zimbra.cs.taglib.bean.ZPhoneBean;
+import org.zmail.cs.taglib.bean.ZPhoneBean;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 import java.io.IOException;
 
-public class PhoneTag extends ZimbraSimpleTag {
+public class PhoneTag extends ZmailSimpleTag {
 
     protected String mVar;
     protected String mName;

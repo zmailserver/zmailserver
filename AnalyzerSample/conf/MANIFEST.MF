@@ -1,1 +1,1 @@
-Zimbra-Extension-Class: com.zimbra.analyzersample.SampleAnalyzerExtension
+Zmail-Extension-Class: org.zmail.analyzersample.SampleAnalyzerExtension

@@ -14,15 +14,15 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.calendar.appointments.views.workweek.allday;
+package org.zmail.qa.selenium.projects.ajax.tests.calendar.appointments.views.workweek.allday;
 
 import org.testng.annotations.Test;
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.items.AppointmentItem;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.CalendarWorkWeekTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.calendar.FormApptNew;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.items.AppointmentItem;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.CalendarWorkWeekTest;
+import org.zmail.qa.selenium.projects.ajax.ui.calendar.FormApptNew;
 
 public class CreateAppointment extends CalendarWorkWeekTest {
 	
@@ -39,14 +39,14 @@ public class CreateAppointment extends CalendarWorkWeekTest {
 		   
 		// Create appointment
 		String apptSubject;
-		apptSubject = "appointment" + ZimbraSeleniumProperties.getUniqueString();
+		apptSubject = "appointment" + ZmailSeleniumProperties.getUniqueString();
 		AppointmentItem appt = new AppointmentItem();
 		
 		appt.setSubject(apptSubject);
 		appt.setStartTime(new ZDate(this.calendarWeekDayUTC));
 		appt.setEndTime(new ZDate(this.calendarWeekDayUTC));
-		appt.setContent("content" + ZimbraSeleniumProperties.getUniqueString());
-		appt.setAttendees(ZimbraAccount.AccountA().EmailAddress);
+		appt.setContent("content" + ZmailSeleniumProperties.getUniqueString());
+		appt.setAttendees(ZmailAccount.AccountA().EmailAddress);
 		appt.setIsAllDay(true);
 	
 		// Open the new mail form

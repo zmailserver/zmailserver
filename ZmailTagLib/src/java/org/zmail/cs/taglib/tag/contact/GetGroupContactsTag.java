@@ -12,12 +12,12 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.tag.contact;
+package org.zmail.cs.taglib.tag.contact;
 
-import com.zimbra.client.ZContact;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.taglib.tag.ZimbraSimpleTag;
+import org.zmail.client.ZContact;
+import org.zmail.client.ZMailbox;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.taglib.tag.ZmailSimpleTag;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,7 +28,7 @@ import javax.servlet.jsp.JspTagException;
 import java.io.IOException;
 import java.util.Map;
 
-public class GetGroupContactsTag extends ZimbraSimpleTag {
+public class GetGroupContactsTag extends ZmailSimpleTag {
 
     private String var;
     private String id;

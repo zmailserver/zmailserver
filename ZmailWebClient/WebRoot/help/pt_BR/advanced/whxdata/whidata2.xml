@@ -118,7 +118,7 @@
   </key>
 </key>
 <key name="mini agenda" >
-  <topic name="Navegando no Cliente Zimbra para Web" url="zwc_help_files/1_setting_up/navigating_the_zimbra_web_client.htm" />
+  <topic name="Navegando no Cliente Zmail para Web" url="zwc_help_files/1_setting_up/navigating_the_zmail_web_client.htm" />
 </key>
 <key name="mostrar original" >
   <topic name="Localizando a origem de uma mensagem de e-mail" url="zwc_help_files/2_manage_email/finding_the_origin_of_an_email_message.htm" />
@@ -155,7 +155,7 @@
   <topic name="Compartilhar uma pasta a partir da página de compartilhamento de preferências" url="zwc_help_files/13_sharing/share_a_folder_from_the_preferences_sharing_page.htm" />
 </key>
 <key name="painel de conteúdo" >
-  <topic name="Navegando no Cliente Zimbra para Web" url="zwc_help_files/1_setting_up/navigating_the_zimbra_web_client.htm" />
+  <topic name="Navegando no Cliente Zmail para Web" url="zwc_help_files/1_setting_up/navigating_the_zmail_web_client.htm" />
 </key>
 <key name="painel de leitura ativado ou desativado" >
   <topic name="Usando um painel de leitura" url="zwc_help_files/2_manage_email/using_a_reading_pane.htm" />
@@ -167,7 +167,7 @@
   <topic name="Usando um painel de leitura" url="zwc_help_files/2_manage_email/using_a_reading_pane.htm" />
 </key>
 <key name="painel Visão Geral" >
-  <topic name="Navegando no Cliente Zimbra para Web" url="zwc_help_files/1_setting_up/navigating_the_zimbra_web_client.htm" />
+  <topic name="Navegando no Cliente Zmail para Web" url="zwc_help_files/1_setting_up/navigating_the_zmail_web_client.htm" />
 </key>
 <key name="papel" >
   <topic name="Compartilhar uma pasta a partir da página de compartilhamento de preferências" url="zwc_help_files/13_sharing/share_a_folder_from_the_preferences_sharing_page.htm" />

@@ -57,10 +57,10 @@ ZaStatus.prototype.load = function (by, val) {
 ZaStatus.loadMethod = 
 function() {
 	try {
-		var logHost = ZaApp.getInstance().getGlobalConfig().attrs[ZaServer.A_zimbraLogHostname];		
-		//if zimbraLogHostname is set
+		var logHost = ZaApp.getInstance().getGlobalConfig().attrs[ZaServer.A_zmailLogHostname];		
+		//if zmailLogHostname is set
 		if (logHost) {
-			var soapDoc = AjxSoapDoc.create("GetServiceStatusRequest", ZaZimbraAdmin.URN, null);
+			var soapDoc = AjxSoapDoc.create("GetServiceStatusRequest", ZaZmailAdmin.URN, null);
 			var command = new ZmCsfeCommand();
 			var params = new Object();
 			params.noAuthToken = true;

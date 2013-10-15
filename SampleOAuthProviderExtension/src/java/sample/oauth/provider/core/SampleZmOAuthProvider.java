@@ -31,7 +31,7 @@
  */
 
 // Original is from example in OAuth Java library(http://oauth.googlecode.com/svn/code/java/)
-// and modified for integratin with Zimbra
+// and modified for integratin with Zmail
 
 // Original's copyright and license terms
 /*
@@ -52,9 +52,9 @@
 
 package sample.oauth.provider.core;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Provisioning;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Provisioning;
 import net.oauth.OAuth;
 import net.oauth.OAuthAccessor;
 import net.oauth.OAuthConsumer;
@@ -103,7 +103,7 @@ public class SampleZmOAuthProvider {
         String[] registeredConsumers;
         try {
             // TODO - need to lookup the domain first
-            registeredConsumers = Provisioning.getInstance().getConfig().getMultiAttr(Provisioning.A_zimbraOAuthConsumerCredentials);
+            registeredConsumers = Provisioning.getInstance().getConfig().getMultiAttr(Provisioning.A_zmailOAuthConsumerCredentials);
         } catch (ServiceException e) {
             throw new OAuthProblemException("token_rejected");
         }
@@ -266,7 +266,7 @@ public class SampleZmOAuthProvider {
         String verifier_data = consumer_key + System.nanoTime() + accessor.requestToken;
         String verifier = DigestUtils.md5Hex(verifier_data);
         
-        ZimbraLog.extensions.debug("generated verifier:"+verifier);
+        ZmailLog.extensions.debug("generated verifier:"+verifier);
         accessor.setProperty(OAuth.OAUTH_VERIFIER, verifier);
         
         // add to the local cache

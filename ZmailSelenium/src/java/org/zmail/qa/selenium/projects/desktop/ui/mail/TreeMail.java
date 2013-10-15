@@ -17,40 +17,40 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.desktop.ui.mail;
+package org.zmail.qa.selenium.projects.desktop.ui.mail;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.IItem;
-import com.zimbra.qa.selenium.framework.items.SavedSearchFolderItem;
-import com.zimbra.qa.selenium.framework.items.TagItem;
-import com.zimbra.qa.selenium.framework.items.ZimletItem;
-import com.zimbra.qa.selenium.framework.ui.AbsApplication;
-import com.zimbra.qa.selenium.framework.ui.AbsPage;
-import com.zimbra.qa.selenium.framework.ui.AbsTree;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.GeneralUtility;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties.AppType;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.AppAjaxClient;
-import com.zimbra.qa.selenium.projects.desktop.ui.ContextMenu;
-import com.zimbra.qa.selenium.projects.desktop.ui.DialogMove;
-import com.zimbra.qa.selenium.projects.desktop.ui.DialogRenameFolder;
-import com.zimbra.qa.selenium.projects.desktop.ui.DialogRenameTag;
-import com.zimbra.qa.selenium.projects.desktop.ui.DialogShare;
-import com.zimbra.qa.selenium.projects.desktop.ui.DialogTag;
-import com.zimbra.qa.selenium.projects.desktop.ui.DialogWarning;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.IItem;
+import org.zmail.qa.selenium.framework.items.SavedSearchFolderItem;
+import org.zmail.qa.selenium.framework.items.TagItem;
+import org.zmail.qa.selenium.framework.items.ZimletItem;
+import org.zmail.qa.selenium.framework.ui.AbsApplication;
+import org.zmail.qa.selenium.framework.ui.AbsPage;
+import org.zmail.qa.selenium.framework.ui.AbsTree;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.GeneralUtility;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties.AppType;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.AppAjaxClient;
+import org.zmail.qa.selenium.projects.desktop.ui.ContextMenu;
+import org.zmail.qa.selenium.projects.desktop.ui.DialogMove;
+import org.zmail.qa.selenium.projects.desktop.ui.DialogRenameFolder;
+import org.zmail.qa.selenium.projects.desktop.ui.DialogRenameTag;
+import org.zmail.qa.selenium.projects.desktop.ui.DialogShare;
+import org.zmail.qa.selenium.projects.desktop.ui.DialogTag;
+import org.zmail.qa.selenium.projects.desktop.ui.DialogWarning;
 
 
 
 /**
- * @author zimbra
+ * @author zmail
  *
  */
 public class TreeMail extends AbsTree {
@@ -315,7 +315,7 @@ public class TreeMail extends AbsTree {
 		String locator = null;
 
 		if ( action == Action.A_LEFTCLICK ) {
-			if (ZimbraSeleniumProperties.getAppType() == AppType.DESKTOP) {
+			if (ZmailSeleniumProperties.getAppType() == AppType.DESKTOP) {
 				locator = new StringBuffer("css=td[id^='zti__").
 				append(MyApplication.zGetActiveAccount().EmailAddress).
 				append(":main_Mail__']").append("[id$='").
@@ -537,7 +537,7 @@ public class TreeMail extends AbsTree {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.zimbra.qa.selenium.framework.ui.AbsTree#zPressButton(com.zimbra.qa.selenium.framework.ui.Button)
+	 * @see org.zmail.qa.selenium.framework.ui.AbsTree#zPressButton(org.zmail.qa.selenium.framework.ui.Button)
 	 */
 	@Override
 	public AbsPage zPressButton(Button button) throws HarnessException {
@@ -836,7 +836,7 @@ public class TreeMail extends AbsTree {
 		// Create a list of items to return
 		List<ZimletItem> items = new ArrayList<ZimletItem>();
 
-		String treeLocator = ZimbraSeleniumProperties.getAppType() == AppType.DESKTOP ?
+		String treeLocator = ZmailSeleniumProperties.getAppType() == AppType.DESKTOP ?
 				Locators.ztih__main_Mail__ZIMLET_ID_Desktop :
 					Locators.ztih__main_Mail__ZIMLET_ID;
 
@@ -850,7 +850,7 @@ public class TreeMail extends AbsTree {
 			String zimletLocator = null;
 			String imageLocator = null;
 			String nameLocator = null;
-			if (ZimbraSeleniumProperties.getAppType() == AppType.DESKTOP) {
+			if (ZmailSeleniumProperties.getAppType() == AppType.DESKTOP) {
 				zimletLocator = "zti__main_Mail_zimlets__" + zimletNum +"_z_div";
 				imageLocator = "xpath=(//*[@id='zti__main_Mail_zimlets__"+ zimletNum +"_z_imageCell']/div)@class";
 				nameLocator = "zti__main_Mail_zimlets__"+ zimletNum +"_z_textCell";
@@ -915,7 +915,7 @@ public class TreeMail extends AbsTree {
 		if ( section == FolderSection.Zimlets ) {
 
 			// What is the current state of the section?
-			if (ZimbraSeleniumProperties.getAppType() == AppType.DESKTOP) {
+			if (ZmailSeleniumProperties.getAppType() == AppType.DESKTOP) {
 				locator = "css=div[class*='ZmOverviewZimletHeader'] div[class^='ImgNode']@class";
 			} else {
 				locator = "xpath=(//td[@id='"+ Locators.ztih__main_Mail__ZIMLET_nodeCell_ID +"']/div)@class"; 
@@ -932,7 +932,7 @@ public class TreeMail extends AbsTree {
 					return (page);
 				}
 
-				if (ZimbraSeleniumProperties.getAppType() == AppType.DESKTOP) {
+				if (ZmailSeleniumProperties.getAppType() == AppType.DESKTOP) {
 					locator = "css=div[class*='ZmOverviewZimletHeader'] div[class^='ImgNode']";
 				} else {
 					locator = "css=td[id="+ Locators.ztih__main_Mail__ZIMLET_nodeCell_ID +"] div";
@@ -979,7 +979,7 @@ public class TreeMail extends AbsTree {
 
 		// Zimlets seem to be loaded last
 		// So, wait for the zimlet div to load
-		String locator = ZimbraSeleniumProperties.getAppType() == AppType.DESKTOP ?
+		String locator = ZmailSeleniumProperties.getAppType() == AppType.DESKTOP ?
 				Locators.ztih__main_Mail__ZIMLET_ID_Desktop :
 					Locators.ztih__main_Mail__ZIMLET_ID;
 
@@ -1010,7 +1010,7 @@ public class TreeMail extends AbsTree {
       } else {
          if (accountName == null) {
             if (folder.isDesktopClientLocalFolder()) {
-               accountName = ZimbraAccount.clientAccountName;
+               accountName = ZmailAccount.clientAccountName;
             } else {
                accountName = ((AppAjaxClient)MyApplication).zGetActiveAccount().EmailAddress;
             }

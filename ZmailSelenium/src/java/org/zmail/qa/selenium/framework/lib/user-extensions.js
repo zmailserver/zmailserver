@@ -95,7 +95,7 @@ Selenium.prototype.isZMenuItemDisabled = function(locator, param1, param2) {
 
 Selenium.prototype.doShiftClickZButton = function(locator, verifyParam) {
 	/**
-	 * Shift Clicks zimbra button
+	 * Shift Clicks zmail button
 	 *
 	 * @param locator button label
 	 * @param verifyParam verify_text verify_btn verify_tab verify_dlg verify_view verify_menu verify_tbl verify_fldr
@@ -109,7 +109,7 @@ Selenium.prototype.doShiftClickZButton = function(locator, verifyParam) {
 
 Selenium.prototype.doCtrlClickZButton = function(locator, verifyParam) {
 	/**
-	 *  Clicks zimbra button with control-btn down
+	 *  Clicks zmail button with control-btn down
 	 *
 	 * @param locator button label
 	 * @param verifyParam verify_text verify_btn verify_tab verify_dlg verify_view verify_menu verify_tbl verify_fldr
@@ -123,7 +123,7 @@ Selenium.prototype.doCtrlClickZButton = function(locator, verifyParam) {
 
 Selenium.prototype.doClickZMail = function(mailSubject, verifyParam) {
 	/**
-	 * Clicks zimbra mail
+	 * Clicks zmail mail
 	 *
 	 * @param mailSubject subject of the mail
 	 * @param verifyParam verify_msgBdyInHyb
@@ -137,7 +137,7 @@ Selenium.prototype.doClickZMail = function(mailSubject, verifyParam) {
 
 Selenium.prototype.doDblClickZMail = function(mailSubject, verifyParam) {
 	/**
-	 * Double clicks zimbra mail
+	 * Double clicks zmail mail
 	 *
 	 * @param mailSubject subject of the mail
 	 * @param verifyParam verify_msgBdyInConv
@@ -151,7 +151,7 @@ Selenium.prototype.doDblClickZMail = function(mailSubject, verifyParam) {
 
 Selenium.prototype.doClickZHTMLButton = function(locator, verifyParam) {
 	/**
-	 * Clicks zimbra(HTML) button
+	 * Clicks zmail(HTML) button
 	 *
 	 * @param locator button label
 	 * @param verifyParam verify_text verify_btn verify_tab verify_dlg verify_view verify_menu verify_tbl verify_fldr
@@ -165,7 +165,7 @@ Selenium.prototype.doClickZHTMLButton = function(locator, verifyParam) {
 
 Selenium.prototype.doZTextAreaSet = function(name, value) {
 	/**
-	 * Clicks zimbra button
+	 * Clicks zmail button
 	 *
 	 * @param name Textarea field label(text near the field)
 	 * @param value Textarea field value
@@ -176,7 +176,7 @@ Selenium.prototype.doZTextAreaSet = function(name, value) {
 
 Selenium.prototype.doZCheckboxSet = function(name) {
 	/**
-	 * Clicks zimbra button
+	 * Clicks zmail button
 	 *
 	 * @param name Textarea field label(text near the field)
 	 */
@@ -187,7 +187,7 @@ Selenium.prototype.doZCheckboxSet = function(name) {
 
 Selenium.prototype.doZEditSet = function(name, value) {
 	/**
-	 * Clicks zimbra button
+	 * Clicks zmail button
 	 *
 	 * @param name field label(text near the field)
 	 * @param value field value
@@ -198,7 +198,7 @@ Selenium.prototype.doZEditSet = function(name, value) {
 
 Selenium.prototype.doZPasswordEditSet = function(name, value) {
 	/**
-	 * Clicks zimbra button
+	 * Clicks zmail button
 	 *
 	 * @param name field label(text near the field)
 	 * @param value field value
@@ -216,7 +216,7 @@ Selenium.prototype._setText = function(name, value, tag, type) {
 
 Selenium.prototype.doClickZIconButton = function(locator, verifyParam) {
 	/**
-	 * Clicks Zimbra Icon button
+	 * Clicks Zmail Icon button
 	 *
 	 * @param locator button virtual name.
 	 * @param verifyParam verify_text verify_btn verify_tab verify_dlg verify_view verify_menu verify_tbl verify_fldr
@@ -259,7 +259,7 @@ Selenium.prototype.doOpenMailOrComposeInNewWindow = function(locator, verifyPara
 
 Selenium.prototype.doOpenZmAjaxClient = function() {
 	/**
-	 * Opens Zimbra if senium is deployed within Zimbra Server(only for Selenium CORE)
+	 * Opens Zmail if senium is deployed within Zmail Server(only for Selenium CORE)
 	 *
 	 */
 	var loc = this.browserbot.getCurrentWindow().document.location;
@@ -288,7 +288,7 @@ Selenium.prototype.doZVerifyTitle = function(locator) {
 
 Selenium.prototype.doCloseDlgIfExists = function(dlgNameCommaBtnName) {
 	/**
-	 * Closes zimbra Dialog by clicking on a button iff dialog exists. timeout 3Seconds
+	 * Closes zmail Dialog by clicking on a button iff dialog exists. timeout 3Seconds
 	 *
 	 * @param dlgNameCommaBtnName dialog name comma button name
 	 */
@@ -303,7 +303,7 @@ Selenium.prototype.doCloseDlgIfExists = function(dlgNameCommaBtnName) {
 }
 Selenium.prototype.doClickZButtonInDlg = function(btnNameCommaDlgName, verifyParam) {
 	/**
-	 * Clicks Zimbra button in a dialog
+	 * Clicks Zmail button in a dialog
 	 *
 	 * @param btnNameCommaDlgName button name comma dialog name
 	 * @param verifyParam verify_text verify_btn verify_tab verify_dlg verify_view verify_menu verify_tbl verify_fldr
@@ -358,7 +358,7 @@ Selenium.prototype._addWaitDecorator = function(verifyParam) {
 
 Selenium.prototype.doClickZTab = function(locator, verifyParam) {
 	/**
-	 * Waits for Zimbra Tab
+	 * Waits for Zmail Tab
 	 *
 	 * @param locator tab label
 	 * @param verifyParam verify_text verify_btn verify_tab verify_dlg verify_view verify_menu verify_tbl verify_fldr
@@ -619,7 +619,7 @@ Selenium.prototype.doOpen = function(url) {
    *
    * @param url the URL to open; may be relative or absolute
    */
-	if (url == "http://zimbraAjax") {
+	if (url == "http://zmailAjax") {
 		var loc = this.browserbot.getCurrentWindow().document.location;
 		url = loc.protocol + "//" + loc.host;
 	}
@@ -890,7 +890,7 @@ Selenium.prototype.findZFormObject = function(objName, objTag, objType, panel, o
 	    // Loop through all elements, looking for ones that have 
 	// a value === our expected value
 	//var divElements = inDocument.getElementsByTagName("DIV");
-	if(inDocument.getElementById("z_shell") != undefined) { //zimbraajax
+	if(inDocument.getElementById("z_shell") != undefined) { //zmailajax
 		var divElements = inDocument.getElementById("z_shell").childNodes;
 	} else if (inDocument.getElementById("ZloginPanel") != undefined) {//login page non-carbon theme
 				 mainDiv = inDocument.getElementById("ZloginPanel");
@@ -1205,7 +1205,7 @@ Selenium.prototype.actOnZElement = function(element, action, locator, useXY,para
 	if(locator != undefined) {
 		if("td div".indexOf(tagName) == -1){
 			isZObjHTMLObj = true;
-		}else{//zimbra obj but has id=DWT123 locator
+		}else{//zmail obj but has id=DWT123 locator
 			isZObjButWithid = true;
 		}
 	}
@@ -1266,7 +1266,7 @@ Selenium.prototype.actOnZElement = function(element, action, locator, useXY,para
 	} else if (action == "notexists") {
 		if(!isZObjHTMLObj && !isZObjButWithid)
 			return false;
-		else//if we are dealing with zimbraObj, then verify zindex etc b4 saying anything
+		else//if we are dealing with zmailObj, then verify zindex etc b4 saying anything
 			return !this.isZObjVisible(element);
 
 	} else if(action == "wait") {
@@ -1378,7 +1378,7 @@ Selenium.prototype.rightClickZElement = function(element) {
 Selenium.prototype.getShellChildNodes = function() {
 		var win = this.browserbot.getCurrentWindow();
 	var inDocument = win.document;
-	if(inDocument.getElementById("z_shell") != undefined) //zimbraajax
+	if(inDocument.getElementById("z_shell") != undefined) //zmailajax
 		return inDocument.getElementById("z_shell").childNodes;
 	else if(inDocument.getElementById("DWT1") != undefined){//compose new window
 		var newwindowelement = inDocument.getElementById("DWT1");
@@ -3056,7 +3056,7 @@ Selenium.prototype.findZMenuItem = function(menuItem, panel, param1) {
 Selenium.prototype.zGetBrowserUserAgent = function()  {
 	return navigator.userAgent;
 }
-Selenium.prototype.zGetZimbraVersion = function(param1, param2, param3, param4, param5, param6)  {
+Selenium.prototype.zGetZmailVersion = function(param1, param2, param3, param4, param5, param6)  {
 	var win = this.browserbot.getCurrentWindow();
 	 return win.appCtxt.getSettings().getSetting("SERVER_VERSION").value;
 }
@@ -3609,7 +3609,7 @@ Selenium.prototype.verifyZText = function(text) {
 };
 
 // We are copying Selenium's fireEvent functions as we
-// need to send button = 2 to them. Once Zimbra's devs
+// need to send button = 2 to them. Once Zmail's devs
 // get to fix selenium native right click, we'll be able
 // to remove all this stuff
 custom_IE_fireEventOnElement = function(eventType, element, clientX, clientY, button) {

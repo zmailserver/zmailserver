@@ -12,13 +12,13 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.tag;
+package org.zmail.cs.taglib.tag;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.taglib.bean.ZFolderBean;
-import com.zimbra.client.ZFolder;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZSearchFolder;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.taglib.bean.ZFolderBean;
+import org.zmail.client.ZFolder;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZSearchFolder;
 
 import javax.servlet.jsp.JspContext;
 import javax.servlet.jsp.JspException;
@@ -29,7 +29,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-public class ForEachFolderTag extends ZimbraSimpleTag {
+public class ForEachFolderTag extends ZmailSimpleTag {
     
     private String mVar;
     private Map mExpanded = null;

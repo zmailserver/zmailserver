@@ -17,14 +17,14 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.ajax.ui.tasks;
+package org.zmail.qa.selenium.projects.ajax.ui.tasks;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties.AppType;
-import com.zimbra.qa.selenium.projects.ajax.ui.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.DialogEditFolder;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties.AppType;
+import org.zmail.qa.selenium.projects.ajax.ui.*;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.DialogEditFolder;
 
 
 
@@ -61,7 +61,7 @@ public class TreeTasks extends AbsTree {
 
 
 	/* (non-Javadoc)
-	 * @see com.zimbra.qa.selenium.framework.ui.AbsTree#zPressButton(com.zimbra.qa.selenium.framework.ui.Button)
+	 * @see org.zmail.qa.selenium.framework.ui.AbsTree#zPressButton(org.zmail.qa.selenium.framework.ui.Button)
 	 */
 	@Override
 	public AbsPage zPressButton(Button button) throws HarnessException {
@@ -240,7 +240,7 @@ public class TreeTasks extends AbsTree {
 		FolderItem f = (FolderItem) tasklist;
 		
 		if ( action == Action.A_LEFTCLICK ) {
-			if (ZimbraSeleniumProperties.getAppType() == AppType.DESKTOP) {
+			if (ZmailSeleniumProperties.getAppType() == AppType.DESKTOP) {
 			   locator = "css=[id^='zti__" + MyApplication.zGetActiveAccount().EmailAddress +
 			         ":main_Tasks__'][id$=':" + f.getId() + "_textCell']";
 			} else {
@@ -251,7 +251,7 @@ public class TreeTasks extends AbsTree {
 
 		} else if ( action == Action.A_RIGHTCLICK ) {
 			
-		   if (ZimbraSeleniumProperties.getAppType() == AppType.DESKTOP) {
+		   if (ZmailSeleniumProperties.getAppType() == AppType.DESKTOP) {
             locator = "css=[id^='zti__" + MyApplication.zGetActiveAccount().EmailAddress +
                   ":main_Tasks__'][id$=':" + f.getId() + "_textCell']";
          } else {
@@ -400,7 +400,7 @@ public class TreeTasks extends AbsTree {
 		// String locator = null;
 
 		if (action == Action.A_LEFTCLICK) {
-			if (ZimbraSeleniumProperties.getAppType() == AppType.DESKTOP) {
+			if (ZmailSeleniumProperties.getAppType() == AppType.DESKTOP) {
 				actionLocator = "css=[id^='zti__"
 						+ MyApplication.zGetActiveAccount().EmailAddress
 						+ ":main_Tasks__'][id$=':" + folderItem.getId() + "_textCell']";
@@ -412,7 +412,7 @@ public class TreeTasks extends AbsTree {
 
 		} else if (action == Action.A_RIGHTCLICK) {
 
-			if (ZimbraSeleniumProperties.getAppType() == AppType.DESKTOP) {
+			if (ZmailSeleniumProperties.getAppType() == AppType.DESKTOP) {
 				actionLocator = "css=[id^='zti__"
 						+ MyApplication.zGetActiveAccount().EmailAddress
 						+ ":main_Tasks__'][id$=':" + folderItem.getId() + "_textCell']";

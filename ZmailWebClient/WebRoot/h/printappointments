@@ -1,10 +1,10 @@
 <%@ page buffer="8kb" autoFlush="true" %>
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
-<%@ taglib prefix="app" uri="com.zimbra.htmlclient" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
+<%@ taglib prefix="app" uri="org.zmail.htmlclient" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
 
 <app:handleError>
 
@@ -57,7 +57,7 @@
 <c:set var="zd" value="${not empty param.zd}" />
 <table width="90%" align="center">
     <tr>
-        <td class='ZhZimbraTitle'><fmt:message key="zimbraTitle"/></td>
+        <td class='ZhZmailTitle'><fmt:message key="zmailTitle"/></td>
         <c:set var="mailboxName" value="${(not empty param.acct ? param.acct : mailbox.name)}" />
         <td nowrap width='1%'><c:if test="${mailboxName ne 'local@host.local'}"><b>${fn:escapeXml(mailboxName)}</b></c:if></td>
     </tr>

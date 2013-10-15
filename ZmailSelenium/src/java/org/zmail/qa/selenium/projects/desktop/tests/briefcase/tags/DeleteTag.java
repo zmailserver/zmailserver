@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.briefcase.tags;
+package org.zmail.qa.selenium.projects.desktop.tests.briefcase.tags;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.TagItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.DialogWarning;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.TagItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.DialogWarning;
 
 public class DeleteTag extends AjaxCommonTest {
 
@@ -39,15 +39,15 @@ public class DeleteTag extends AjaxCommonTest {
 
 	@Test(description = "Delete a tag - Right click, Delete", groups = { "functional" })
 	public void DeleteTag_01() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
 
 		// Create the tag to delete
-		String name = "tag" + ZimbraSeleniumProperties.getUniqueString();
+		String name = "tag" + ZmailSeleniumProperties.getUniqueString();
 
-		account.soapSend("<CreateTagRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<CreateTagRequest xmlns='urn:zmailMail'>"
 				+ "<tag name='" + name + "' color='1' />"
 				+ "</CreateTagRequest>");
 
@@ -78,7 +78,7 @@ public class DeleteTag extends AjaxCommonTest {
 				.zTreeItem(Action.A_LEFTCLICK, briefcaseFolder, false);
 
 		// Verify the tag is deleted
-		account.soapSend("<GetTagRequest xmlns='urn:zimbraMail'/>");
+		account.soapSend("<GetTagRequest xmlns='urn:zmailMail'/>");
 
 		String tagname = account
 				.soapSelectValue("//mail:GetTagResponse//mail:tag[@name='"

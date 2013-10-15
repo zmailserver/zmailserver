@@ -12,21 +12,21 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.offline;
+package org.zmail.cs.account.offline;
 
 import java.util.Map;
 
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Signature;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Signature;
 
 class OfflineSignature extends Signature {
     OfflineSignature(Account acct, String name, Map<String,Object> attrs, Provisioning prov) {
-        super(acct, name, (String)attrs.get(Provisioning.A_zimbraSignatureId), attrs, prov);
+        super(acct, name, (String)attrs.get(Provisioning.A_zmailSignatureId), attrs, prov);
     }
     
     OfflineSignature(Account acct, Map<String,Object> attrs, Provisioning prov) {
-        super(acct, (String)attrs.get(Provisioning.A_zimbraSignatureName), (String)attrs.get(Provisioning.A_zimbraSignatureId), attrs, prov);
+        super(acct, (String)attrs.get(Provisioning.A_zmailSignatureName), (String)attrs.get(Provisioning.A_zmailSignatureId), attrs, prov);
     }
 
     void setName(String name) {

@@ -1181,7 +1181,7 @@ function(callback, errorCallback, mode) {
     var jsonObj = {},
         requestName = this._getRequestNameForMode(ZmCalItem.MODE_FORWARD_INVITE, this.isException),
         request = jsonObj[requestName] = {
-            _jsns : "urn:zimbraMail"
+            _jsns : "urn:zmailMail"
         },
         m = request.m = {},
         accountName = this.getRemoteFolderOwner(),
@@ -1253,7 +1253,7 @@ function(callback, errorCallback, viewMode) {
         jsonObj = {},
         requestName = this._getRequestNameForMode(mode, this.isException),
         request = jsonObj[requestName] = {
-            _jsns : "urn:zimbraMail"
+            _jsns : "urn:zmailMail"
         },
         m = request.m = {},
         e = m.e = [],
@@ -1363,7 +1363,7 @@ function(callback, errorCallback) {
     var jsonObj = {},
         requestName = this._getRequestNameForMode(mode, this.isException),
         request = jsonObj[requestName] = {
-            _jsns : "urn:zimbraMail"
+            _jsns : "urn:zmailMail"
         },
         exceptId,
         message,
@@ -1525,7 +1525,7 @@ ZmAppt.loadByUid = function(uid, callback, errorCallback) {
 };
 
 ZmAppt.__load = function(id, uid, callback, errorCallback) {
-    var req = { _jsns: "urn:zimbraMail", includeContent: 1 };
+    var req = { _jsns: "urn:zmailMail", includeContent: 1 };
     if (id) req.id = id;
     else if (uid) req.uid = uid;
     var params = {

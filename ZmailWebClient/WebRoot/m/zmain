@@ -12,17 +12,17 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
 --%>
-<%@ page import="com.zimbra.common.mime.MimeCompoundHeader" %>
-<%@ page import="com.zimbra.cs.httpclient.URLUtil" %>
+<%@ page import="org.zmail.common.mime.MimeCompoundHeader" %>
+<%@ page import="org.zmail.cs.httpclient.URLUtil" %>
 <%@ page import="java.util.regex.*" %>
 <%@ page buffer="8kb" autoFlush="true" %>
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
-<%@ taglib prefix="mo" uri="com.zimbra.mobileclient" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
+<%@ taglib prefix="mo" uri="org.zmail.mobileclient" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
-<%@ taglib prefix="app" uri="com.zimbra.htmlclient" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
+<%@ taglib prefix="app" uri="org.zmail.htmlclient" %>
 
 <%!
 
@@ -65,7 +65,7 @@
     </c:url>
 <%--</c:if>--%>
 <c:if test="${not empty param.djs}"><c:set var="djs" value="${fn:escapeXml(param.djs)}" scope="session" /></c:if>
-<c:set var="version" value="${initParam.zimbraCacheBusterVersion}"/>
+<c:set var="version" value="${initParam.zmailCacheBusterVersion}"/>
 <c:set var="uiv" value="1" scope="session"/>
 <mo:handleError>
     <zm:getMailbox var="mailbox"/>
@@ -84,18 +84,18 @@
     <c:choose>
         <c:when test="${not empty param.doPrefsAction}">
             <zm:modifyPrefs var="updated">
-                <zm:pref name="zimbraPrefTimeZoneId" value="${param.zimbraPrefTimeZoneId}"/>
+                <zm:pref name="zmailPrefTimeZoneId" value="${param.zmailPrefTimeZoneId}"/>
                 <c:if test="${mailbox.features.conversations}">
-                    <zm:pref name="zimbraPrefGroupMailBy" value="${param.zimbraPrefGroupMailBy}"/>
+                    <zm:pref name="zmailPrefGroupMailBy" value="${param.zmailPrefGroupMailBy}"/>
                 </c:if>
                 <c:if test="${mailbox.features.initialSearchPreference}">
-                    <zm:pref name="zimbraPrefMailInitialSearch" value="${param.zimbraPrefMailInitialSearch}"/>
+                    <zm:pref name="zmailPrefMailInitialSearch" value="${param.zmailPrefMailInitialSearch}"/>
                 </c:if>
-                <zm:pref name="zimbraPrefAutoAddAddressEnabled" value="${param.zimbraPrefAutoAddAddressEnabled eq 'TRUE' ? 'TRUE' : 'FALSE'}"/>
-                <zm:pref name="zimbraPrefContactsPerPage" value="${param.zimbraPrefContactsPerPage}"/>
-                <zm:pref name="zimbraPrefMailItemsPerPage" value="${param.zimbraPrefMailItemsPerPage}"/>
-                <zm:pref name="zimbraPrefCalendarFirstdayOfWeek" value="${param.zimbraPrefCalendarFirstdayOfWeek}"/>
-                <zm:pref name="zimbraPrefUseTimeZoneListInCalendar" value="${param.zimbraPrefUseTimeZoneListInCalendar eq 'TRUE' ? 'TRUE' : 'FALSE'}"/>
+                <zm:pref name="zmailPrefAutoAddAddressEnabled" value="${param.zmailPrefAutoAddAddressEnabled eq 'TRUE' ? 'TRUE' : 'FALSE'}"/>
+                <zm:pref name="zmailPrefContactsPerPage" value="${param.zmailPrefContactsPerPage}"/>
+                <zm:pref name="zmailPrefMailItemsPerPage" value="${param.zmailPrefMailItemsPerPage}"/>
+                <zm:pref name="zmailPrefCalendarFirstdayOfWeek" value="${param.zmailPrefCalendarFirstdayOfWeek}"/>
+                <zm:pref name="zmailPrefUseTimeZoneListInCalendar" value="${param.zmailPrefUseTimeZoneListInCalendar eq 'TRUE' ? 'TRUE' : 'FALSE'}"/>
             </zm:modifyPrefs>
             <c:set var="flimit" value="${zm:cook(param.F_LIMIT)}"/>
             <c:choose>
@@ -161,7 +161,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black" />    
-<title><fmt:message key="zimbraTitle"/></title>
+<title><fmt:message key="zmailTitle"/></title>
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;"/>
 <script type="text/javascript">window.onerror=function(m,u,l){if(window.console){window.console.log("An error occured in: "+u+"\n{\n\tmsg: "+m+",\n\tline: "+l+"\n}");}return false;};</script>
 <c:if test="${empty djs or not djs}"><script type="text/javascript">window.currentUrl='<c:url value="${zm:cook(currentUrl)}"><c:param name="ajax" value="true"/></c:url>';
@@ -288,7 +288,7 @@ if(window != parent){
     }
 }
 <c:if test="${not empty requestScope.title}">
-document.title = "<fmt:message key="zimbraTitleLabel"/>"+" "+"${fn:escapeXml(requestScope.title)}";</c:if>
+document.title = "<fmt:message key="zmailTitleLabel"/>"+" "+"${fn:escapeXml(requestScope.title)}";</c:if>
 <c:if test="${not empty requestScope.curId}">window.currentDate = '${requestScope.curId}';</c:if>
 <c:if test="${not empty requestScope._today}">window._today = '${requestScope._today}';</c:if>
 <c:if test="${ua.isiPhone or ua.isiPod or ua.isOsAndroid}">if(dId && dV[dId]){hideDelete(dId);}</c:if>
@@ -300,7 +300,7 @@ document.title = "<fmt:message key="zimbraTitleLabel"/>"+" "+"${fn:escapeXml(req
     <div class="tbl"><div class="tr">
         <div class="container td" id="userinfo"><c:url var="logoutUrl" value="${context_url}"><c:param name="loginOp" value="logout"/><c:param name="client" value="mobile"/></c:url>
             <span class="logout-span"><a href="${logoutUrl}" id="_logout" noajax='true'><fmt:message key="logOut"/> </a> (${mailbox.accountInfo.attrs["uid"][0]}) </span>
-            <span class="quota-span"><fmt:message key="MO_quotaLabel"/>&nbsp;<c:set var="max" value="${mailbox.attrs.zimbraMailQuota[0]}"/><fmt:message var="unlimited" key="unlimited"/><fmt:message key="MO_quotaUsage"><fmt:param value="${zm:displaySizeFractions(pageContext, mailbox.size,2)}"/><fmt:param value="${max==0 ? unlimited : zm:displaySizeFractions(pageContext, max,2)}"/></fmt:message></span>
+            <span class="quota-span"><fmt:message key="MO_quotaLabel"/>&nbsp;<c:set var="max" value="${mailbox.attrs.zmailMailQuota[0]}"/><fmt:message var="unlimited" key="unlimited"/><fmt:message key="MO_quotaUsage"><fmt:param value="${zm:displaySizeFractions(pageContext, mailbox.size,2)}"/><fmt:param value="${max==0 ? unlimited : zm:displaySizeFractions(pageContext, max,2)}"/></fmt:message></span>
         </div>
     </div></div>
     <div class="tbl container" style="height:32px;"><div class="tr"><div class="td fw list-row"><a href="?st=prefs"><fmt:message key="options"/></a></div></div></div>

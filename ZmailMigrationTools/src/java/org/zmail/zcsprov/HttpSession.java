@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.zcsprov;
+package org.zmail.zcsprov;
 
 import java.util.List;
 import java.io.*;
@@ -56,7 +56,7 @@ public class HttpSession
         //default time out 5 minutes
         httpclient.setTimeout(5*60*1000);
         Security.setProperty( "ssl.SocketFactory.provider", 
-                                "com.zimbra.utils.ZMSSLSocketFactory");
+                                "org.zmail.utils.ZMSSLSocketFactory");
         
     }
     
@@ -213,9 +213,9 @@ public class HttpSession
 
     public void UploadFile()
     {
-        String url="https://10.66.118.107:7071/home/test2@zcs1.zmexch.in.zimbra.com?fmt=tgz";
-        String fPath="C:\\Zimbra_Work\\YZYMigration\\ZCSProvisioning\\zcsprov\\mailboxdumps\\test2.tgz";
-        //"C:\\Zimbra_Work\\YZYMigration\\ZCSProvisioning\\zcsprov\\mailboxdumps\\test2.tgz"
+        String url="https://10.66.118.107:7071/home/test2@zcs1.zmexch.in.zmail.com?fmt=tgz";
+        String fPath="C:\\Zmail_Work\\YZYMigration\\ZCSProvisioning\\zcsprov\\mailboxdumps\\test2.tgz";
+        //"C:\\Zmail_Work\\YZYMigration\\ZCSProvisioning\\zcsprov\\mailboxdumps\\test2.tgz"
         PostMethod postMethod = new PostMethod(url);
         httpclient.setConnectionTimeout(0);
         //Cookie mycookie = new Cookie()

@@ -1,4 +1,4 @@
-<zimlet name="com_zimbra_adminversioncheck" version="5.0.6" label="${msg.label}" description="${msg.description}" extension="true">
+<zimlet name="org_zmail_adminversioncheck" version="5.0.6" label="${msg.label}" description="${msg.description}" extension="true">
 <!--
  * ***** BEGIN LICENSE BLOCK *****
  * 
@@ -15,7 +15,7 @@
  * 
  * ***** END LICENSE BLOCK *****
 -->
-<include>com_zimbra_adminversioncheck.js</include>
+<include>org_zmail_adminversioncheck.js</include>
 <include>ZaVersionCheckViewController.js</include>
 <include>ZaVersionCheckXFormView.js</include>
 <disableUIUndeploy>FALSE</disableUIUndeploy>

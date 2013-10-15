@@ -125,7 +125,7 @@ done
 
 getPlatformVars
 
-isInstalled zimbra-cluster
+isInstalled zmail-cluster
 if [ x$PKGINSTALLED != "x" ]; then
   echo "Cluster is not supported"
   exit 0
@@ -143,7 +143,7 @@ if [ x"$CLUSTERTYPE" != "x" ]; then
 fi
 
 mkdir -p $SAVEDIR
-chown zimbra:zimbra $SAVEDIR 2> /dev/null
+chown zmail:zmail $SAVEDIR 2> /dev/null
 chmod 750 $SAVEDIR
 
 echo ""
@@ -154,21 +154,21 @@ if [ x$DEFAULTFILE != "x" ]; then
 fi
 
 if [ x"$LICENSE" != "x" ] && [ -e $LICENSE ]; then
-  if [ ! -d "/opt/zimbra/conf" ]; then
-    mkdir -p /opt/zimbra/conf
+  if [ ! -d "/opt/zmail/conf" ]; then
+    mkdir -p /opt/zmail/conf
   fi
-  cp $LICENSE /opt/zimbra/conf/ZCSLicense.xml
-  chown zimbra:zimbra /opt/zimbra/conf/ZCSLicense.xml 2> /dev/null
-  chmod 444 /opt/zimbra/conf/ZCSLicense.xml
+  cp $LICENSE /opt/zmail/conf/ZCSLicense.xml
+  chown zmail:zmail /opt/zmail/conf/ZCSLicense.xml 2> /dev/null
+  chmod 444 /opt/zmail/conf/ZCSLicense.xml
 fi
 
 if [ x"$ACTIVATION" != "x" ] && [ -e $ACTIVATION ]; then
-  if [ ! -d "/opt/zimbra/conf" ]; then
-    mkdir -p /opt/zimbra/conf
+  if [ ! -d "/opt/zmail/conf" ]; then
+    mkdir -p /opt/zmail/conf
   fi
-  cp $ACTIVATION /opt/zimbra/conf/ZCSLicense-activated.xml
-  chown zimbra:zimbra /opt/zimbra/conf/ZCSLicense-activated.xml 2> /dev/null
-  chmod 444 /opt/zimbra/conf/ZCSLicense-activated.xml
+  cp $ACTIVATION /opt/zmail/conf/ZCSLicense-activated.xml
+  chown zmail:zmail /opt/zmail/conf/ZCSLicense-activated.xml 2> /dev/null
+  chmod 444 /opt/zmail/conf/ZCSLicense-activated.xml
 fi
 
 checkExistingInstall
@@ -207,7 +207,7 @@ if [ $AUTOINSTALL = "no" ]; then
 
   getInstallPackages
 
-  findLatestPackage zimbra-core
+  findLatestPackage zmail-core
 	p=`bin/get_plat_tag.sh`
 	if [ x"$p" != x"$installable_platform" ]; then
     echo ""
@@ -266,12 +266,12 @@ removeExistingInstall
 echo "Installing packages"
 echo ""
 D=`date +%s`
-echo "${D}: INSTALL SESSION START" >> /opt/zimbra/.install_history
+echo "${D}: INSTALL SESSION START" >> /opt/zmail/.install_history
 for i in $INSTALL_PACKAGES; do
 	installPackage "$i"
 done
 D=`date +%s`
-echo "${D}: INSTALL SESSION COMPLETE" >> /opt/zimbra/.install_history
+echo "${D}: INSTALL SESSION COMPLETE" >> /opt/zmail/.install_history
 
 if [ x$RESTORECONFIG != "x" ]; then
 	SAVEDIR=$RESTORECONFIG
@@ -287,28 +287,28 @@ if [ $UPGRADE = "yes" ]; then
 
 	restoreCerts
 
-  # deprecated by move of zimlets to /opt/zimbra/zimlets-deployed which isn't removed on upgrade
+  # deprecated by move of zimlets to /opt/zmail/zimlets-deployed which isn't removed on upgrade
   #restoreZimlets
 
 fi
 
 if [ "x$LICENSE" != "x" ] && [ -f "$LICENSE" ]; then
-  echo "Installing /opt/zimbra/conf/ZCSLicense.xml"
-  if [ ! -d "/opt/zimbra/conf" ]; then
-    mkdir -p /opt/zimbra/conf
+  echo "Installing /opt/zmail/conf/ZCSLicense.xml"
+  if [ ! -d "/opt/zmail/conf" ]; then
+    mkdir -p /opt/zmail/conf
   fi
-  cp -f $LICENSE /opt/zimbra/conf/ZCSLicense.xml
-  chown zimbra:zimbra /opt/zimbra/conf/ZCSLicense.xml
-  chmod 644 /opt/zimbra/conf/ZCSLicense.xml
+  cp -f $LICENSE /opt/zmail/conf/ZCSLicense.xml
+  chown zmail:zmail /opt/zmail/conf/ZCSLicense.xml
+  chmod 644 /opt/zmail/conf/ZCSLicense.xml
 fi
 if [ "x$ACTIVATION" != "x" ] && [ -f "$ACTIVATION" ]; then
-  echo "Installing /opt/zimbra/conf/ZCSLicense.xml"
-  if [ ! -d "/opt/zimbra/conf" ]; then
-    mkdir -p /opt/zimbra/conf
+  echo "Installing /opt/zmail/conf/ZCSLicense.xml"
+  if [ ! -d "/opt/zmail/conf" ]; then
+    mkdir -p /opt/zmail/conf
   fi
-  cp -f $ACTIVATION /opt/zimbra/conf/ZCSLicense-activated.xml
-  chown zimbra:zimbra /opt/zimbra/conf/ZCSLicense-activated.xml
-  chmod 644 /opt/zimbra/conf/ZCSLicense-activated.xml
+  cp -f $ACTIVATION /opt/zmail/conf/ZCSLicense-activated.xml
+  chown zmail:zmail /opt/zmail/conf/ZCSLicense-activated.xml
+  chmod 644 /opt/zmail/conf/ZCSLicense-activated.xml
 fi
 
 
@@ -323,7 +323,7 @@ if [ $SOFTWAREONLY = "yes" ]; then
   if [ x"$CLUSTERTYPE" = "xstandby" ]; then
     clusterStandbyPostInstall
   else
-	  echo "Run /opt/zimbra/libexec/zmsetup.pl to configure the system"
+	  echo "Run /opt/zmail/libexec/zmsetup.pl to configure the system"
 	  echo ""
   fi
 
@@ -334,9 +334,9 @@ fi
 # Installation complete, now configure
 #
 if [ "x$DEFAULTFILE" != "x" ]; then
-	/opt/zimbra/libexec/zmsetup.pl -c $DEFAULTFILE
+	/opt/zmail/libexec/zmsetup.pl -c $DEFAULTFILE
 else
-	/opt/zimbra/libexec/zmsetup.pl
+	/opt/zmail/libexec/zmsetup.pl
 fi
 RC=$?
 if [ $RC -ne 0 ]; then

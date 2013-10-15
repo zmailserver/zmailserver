@@ -1,12 +1,12 @@
 <%@ page buffer="8kb" autoFlush="true" %>
-<%@ page import="java.util.*,javax.naming.*,com.zimbra.client.ZAuthResult" %>
+<%@ page import="java.util.*,javax.naming.*,org.zmail.client.ZAuthResult" %>
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
 <%@ page session="false" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
-<%@ taglib prefix="app" uri="com.zimbra.htmlclient" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
+<%@ taglib prefix="app" uri="org.zmail.htmlclient" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <fmt:setLocale value='${pageContext.request.locale}' scope='request' />
 <fmt:setBundle basename="/messages/ZmMsg" scope="request"/>
@@ -14,8 +14,8 @@
 
 <%-- query params to ignore when constructing form port url or redirect url --%>
 <c:set var="ignoredQueryParams" value="loginOp,loginNewPassword,loginConfirmNewPassword,loginErrorCode,username,password,zrememberme,zlastserver,client,customerDomain"/>
-<c:set var="prefsToFetch" value="zimbraPrefSkin,zimbraPrefClientType,zimbraPrefLocale,zimbraPrefMailItemsPerPage,zimbraPrefGroupMailBy,zimbraPrefAdvancedClientEnforceMinDisplay"/>
-<c:set var="attrsToFetch" value="zimbraFeatureMailEnabled,zimbraFeatureCalendarEnabled,zimbraFeatureContactsEnabled,zimbraFeatureIMEnabled,zimbraFeatureOptionsEnabled,zimbraFeaturePortalEnabled,zimbraFeatureTasksEnabled,zimbraFeatureVoiceEnabled,zimbraFeatureBriefcasesEnabled,zimbraFeatureMailUpsellEnabled,zimbraFeatureContactsUpsellEnabled,zimbraFeatureCalendarUpsellEnabled,zimbraFeatureVoiceUpsellEnabled,zimbraFeatureConversationsEnabled"/>
+<c:set var="prefsToFetch" value="zmailPrefSkin,zmailPrefClientType,zmailPrefLocale,zmailPrefMailItemsPerPage,zmailPrefGroupMailBy,zmailPrefAdvancedClientEnforceMinDisplay"/>
+<c:set var="attrsToFetch" value="zmailFeatureMailEnabled,zmailFeatureCalendarEnabled,zmailFeatureContactsEnabled,zmailFeatureIMEnabled,zmailFeatureOptionsEnabled,zmailFeaturePortalEnabled,zmailFeatureTasksEnabled,zmailFeatureVoiceEnabled,zmailFeatureBriefcasesEnabled,zmailFeatureMailUpsellEnabled,zmailFeatureContactsUpsellEnabled,zmailFeatureCalendarUpsellEnabled,zmailFeatureVoiceUpsellEnabled,zmailFeatureConversationsEnabled"/>
 
 <%-- this checks and redirects to admin if need be --%>
 <zm:adminRedirect/>
@@ -76,31 +76,31 @@
     </c:choose>
 </c:catch>
 <zm:getDomainInfo var="domainInfo" by="virtualHostname" value="${zm:getServerName(pageContext)}"/>
-<c:set var="mailServiceURL" value="${protocolMode}:\/\/${domainInfo.attrs.zimbraPublicServiceHostname}"/>
+<c:set var="mailServiceURL" value="${protocolMode}:\/\/${domainInfo.attrs.zmailPublicServiceHostname}"/>
 <c:choose>
-	<c:when  test="${empty domainInfo.attrs.zimbraPublicServiceHostname}">
+	<c:when  test="${empty domainInfo.attrs.zmailPublicServiceHostname}">
 		<c:set var="preauthHost" value="${zm:getServerName(pageContext)}"/>
 	</c:when>
 	<c:otherwise>
-		<c:set var="preauthHost" value="${domainInfo.attrs.zimbraPublicServiceHostname}"/>
+		<c:set var="preauthHost" value="${domainInfo.attrs.zmailPublicServiceHostname}"/>
 	</c:otherwise>
 </c:choose>
 
 <c:choose>
-	<c:when  test="${empty domainInfo.attrs.zimbraPublicServiceProtocol}">
+	<c:when  test="${empty domainInfo.attrs.zmailPublicServiceProtocol}">
 		<c:set var="preauthProtocol" value="http"/>
 	</c:when>
 	<c:otherwise>
-		<c:set var="preauthProtocol" value="${domainInfo.attrs.zimbraPublicServiceProtocol}"/>
+		<c:set var="preauthProtocol" value="${domainInfo.attrs.zmailPublicServiceProtocol}"/>
 	</c:otherwise>
 </c:choose>
 
 <c:choose>
-	<c:when  test="${empty domainInfo.attrs.zimbraPublicServicePort}">
+	<c:when  test="${empty domainInfo.attrs.zmailPublicServicePort}">
 		<c:set var="preauthPort" value=""/>
 	</c:when>
 	<c:otherwise>
-		<c:set var="preauthPort" value=":${domainInfo.attrs.zimbraPublicServicePort}"/>
+		<c:set var="preauthPort" value=":${domainInfo.attrs.zmailPublicServicePort}"/>
 	</c:otherwise>
 </c:choose>
 <c:if test="${not empty requestScope.authResult.authToken.value}">
@@ -118,7 +118,7 @@ if (application.getInitParameter("offlineMode") != null)  {
     request.getRequestDispatcher("/").forward(request, response);
 }
 %>
-<c:url var="formActionUrl" value="${domainInfo.attrs.zimbraWebClientLoginURL}">
+<c:url var="formActionUrl" value="${domainInfo.attrs.zmailWebClientLoginURL}">
     <c:forEach var="p" items="${paramValues}">
         <c:forEach var='value' items='${p.value}'>
             <c:if test="${not fn:contains(ignoredQueryParams, p.key)}">
@@ -130,7 +130,7 @@ if (application.getInitParameter("offlineMode") != null)  {
 
 <%
 	Cookie testCookie = new Cookie("ZM_TEST", "true");
-	testCookie.setSecure(com.zimbra.cs.taglib.ZJspSession.secureAuthTokenCookie(request));
+	testCookie.setSecure(org.zmail.cs.taglib.ZJspSession.secureAuthTokenCookie(request));
 	response.addCookie(testCookie);
 %>
 
@@ -153,10 +153,10 @@ if (application.getInitParameter("offlineMode") != null)  {
  * ***** END LICENSE BLOCK *****
 -->
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <title><fmt:message key="zimbraLoginTitle"/></title>
-    <c:set var="version" value="${initParam.zimbraCacheBusterVersion}"/>
+    <title><fmt:message key="zmailLoginTitle"/></title>
+    <c:set var="version" value="${initParam.zmailCacheBusterVersion}"/>
     <meta name="viewport" content="width=320; initial-scale=1.0; maximum-scale=8.0; user-scalable=1;">
-    <meta name="description" content="<fmt:message key="zimbraLoginMetaDesc"/>">
+    <meta name="description" content="<fmt:message key="zmailLoginMetaDesc"/>">
     <link  rel="stylesheet" type="text/css" href="<c:url value='/css/common,login,zhtml,skin.css'>
 		<c:param name="skin"	value="${skin}" />
 		<c:param name="v"		value="${version}" />
@@ -182,7 +182,7 @@ if (application.getInitParameter("offlineMode") != null)  {
                             <table width="100%">
                                 <tr>
                                     <td align="center" valign="middle">
-                                        <a href="http://www.zimbra.com/" id="bannerLink" target="_new"><span style="cursor:pointer;display:block;" class="ImgLoginBanner"></span></a>
+                                        <a href="http://www.zmail.com/" id="bannerLink" target="_new"><span style="cursor:pointer;display:block;" class="ImgLoginBanner"></span></a>
                                     </td>
                                 </tr>
                                 <tr>

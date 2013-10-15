@@ -16,19 +16,19 @@
  */
 // !$*UTF8*$!
 {
-	1D6058900D05DD3D006BFB54 /* Zimbra */ = {
+	1D6058900D05DD3D006BFB54 /* Zmail */ = {
 		activeExec = 0;
 		executables = (
-			F5CD8E3112AFE95100163F38 /* Zimbra */,
+			F5CD8E3112AFE95100163F38 /* Zmail */,
 		);
 	};
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
 		activeBuildConfigurationName = Debug;
-		activeExecutable = F5CD8E3112AFE95100163F38 /* Zimbra */;
-		activeTarget = 1D6058900D05DD3D006BFB54 /* Zimbra */;
+		activeExecutable = F5CD8E3112AFE95100163F38 /* Zmail */;
+		activeTarget = 1D6058900D05DD3D006BFB54 /* Zmail */;
 		addToTargets = (
-			F5B6443F12D2E822007ABCFF /* ZimbraSimulator */,
-			1D6058900D05DD3D006BFB54 /* Zimbra */,
+			F5B6443F12D2E822007ABCFF /* ZmailSimulator */,
+			1D6058900D05DD3D006BFB54 /* Zmail */,
 		);
 		breakpoints = (
 			F520996412C20AD8006DD3F1 /* StatisticsController.m:232 */,
@@ -46,8 +46,8 @@
 		);
 		codeSenseManager = F5CD8E4912AFE95D00163F38 /* Code sense */;
 		executables = (
-			F5CD8E3112AFE95100163F38 /* Zimbra */,
-			F5B6447912D2E822007ABCFF /* ZimbraSimulator */,
+			F5CD8E3112AFE95100163F38 /* Zmail */,
+			F5B6447912D2E822007ABCFF /* ZmailSimulator */,
 		);
 		perUserDictionary = {
 			"PBXConfiguration.PBXBreakpointsDataSource.v1:1CA1AED706398EBD00589147" = {
@@ -772,8 +772,8 @@
 	};
 	F50CE58812D449AF0025352F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = F5C4EBC312BB25900081ABDF /* ZimbraAppDelegate.h */;
-		name = "ZimbraAppDelegate.h: 30";
+		fRef = F5C4EBC312BB25900081ABDF /* ZmailAppDelegate.h */;
+		name = "ZmailAppDelegate.h: 30";
 		rLen = 0;
 		rLoc = 958;
 		rType = 0;
@@ -782,8 +782,8 @@
 	};
 	F50CE58912D449AF0025352F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = F5C4EBC412BB25900081ABDF /* ZimbraAppDelegate.m */;
-		name = "ZimbraAppDelegate.m: 66";
+		fRef = F5C4EBC412BB25900081ABDF /* ZmailAppDelegate.m */;
+		name = "ZmailAppDelegate.m: 66";
 		rLen = 0;
 		rLoc = 2557;
 		rType = 0;
@@ -818,8 +818,8 @@
 	};
 	F50CE58E12D449E00025352F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = F5C4EBC412BB25900081ABDF /* ZimbraAppDelegate.m */;
-		name = "ZimbraAppDelegate.m: 66";
+		fRef = F5C4EBC412BB25900081ABDF /* ZmailAppDelegate.m */;
+		name = "ZmailAppDelegate.m: 66";
 		rLen = 0;
 		rLoc = 2557;
 		rType = 0;
@@ -969,8 +969,8 @@
 	};
 	F50CE5BB12D44C030025352F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = F5C4EBC312BB25900081ABDF /* ZimbraAppDelegate.h */;
-		name = "ZimbraAppDelegate.h: 30";
+		fRef = F5C4EBC312BB25900081ABDF /* ZmailAppDelegate.h */;
+		name = "ZmailAppDelegate.h: 30";
 		rLen = 0;
 		rLoc = 958;
 		rType = 0;
@@ -979,8 +979,8 @@
 	};
 	F50CE5BC12D44C030025352F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = F5C4EBC412BB25900081ABDF /* ZimbraAppDelegate.m */;
-		name = "ZimbraAppDelegate.m: 70";
+		fRef = F5C4EBC412BB25900081ABDF /* ZmailAppDelegate.m */;
+		name = "ZmailAppDelegate.m: 70";
 		rLen = 0;
 		rLoc = 2684;
 		rType = 0;
@@ -989,8 +989,8 @@
 	};
 	F50CE5BD12D44C030025352F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = F5C4EBC412BB25900081ABDF /* ZimbraAppDelegate.m */;
-		name = "ZimbraAppDelegate.m: 21";
+		fRef = F5C4EBC412BB25900081ABDF /* ZmailAppDelegate.m */;
+		name = "ZmailAppDelegate.m: 21";
 		rLen = 0;
 		rLoc = 510;
 		rType = 0;
@@ -999,8 +999,8 @@
 	};
 	F50CE5C012D44C2D0025352F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = F5C4EBC412BB25900081ABDF /* ZimbraAppDelegate.m */;
-		name = "ZimbraAppDelegate.m: 21";
+		fRef = F5C4EBC412BB25900081ABDF /* ZmailAppDelegate.m */;
+		name = "ZmailAppDelegate.m: 21";
 		rLen = 0;
 		rLoc = 510;
 		rType = 0;
@@ -1039,8 +1039,8 @@
 	};
 	F50CE5C412D44CC40025352F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = F5C4EBC412BB25900081ABDF /* ZimbraAppDelegate.m */;
-		name = "ZimbraAppDelegate.m: 21";
+		fRef = F5C4EBC412BB25900081ABDF /* ZmailAppDelegate.m */;
+		name = "ZmailAppDelegate.m: 21";
 		rLen = 0;
 		rLoc = 510;
 		rType = 0;
@@ -1049,8 +1049,8 @@
 	};
 	F50CE5C512D44CC40025352F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = F5C4EBC412BB25900081ABDF /* ZimbraAppDelegate.m */;
-		name = "ZimbraAppDelegate.m: 68";
+		fRef = F5C4EBC412BB25900081ABDF /* ZmailAppDelegate.m */;
+		name = "ZmailAppDelegate.m: 68";
 		rLen = 0;
 		rLoc = 2557;
 		rType = 0;
@@ -1073,8 +1073,8 @@
 	};
 	F50CE5CB12D44D450025352F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = F5C4EBC412BB25900081ABDF /* ZimbraAppDelegate.m */;
-		name = "ZimbraAppDelegate.m: 68";
+		fRef = F5C4EBC412BB25900081ABDF /* ZmailAppDelegate.m */;
+		name = "ZmailAppDelegate.m: 68";
 		rLen = 0;
 		rLoc = 2557;
 		rType = 0;
@@ -1124,7 +1124,7 @@
 	F50CE5D212D44E790025352F /* XCBuildMessageTextBookmark */ = {
 		isa = PBXTextBookmark;
 		comments = "Redefinition of 'nav'";
-		fRef = F5C4EBC412BB25900081ABDF /* ZimbraAppDelegate.m */;
+		fRef = F5C4EBC412BB25900081ABDF /* ZmailAppDelegate.m */;
 		fallbackIsa = XCBuildMessageTextBookmark;
 		rLen = 1;
 		rLoc = 82;
@@ -1132,8 +1132,8 @@
 	};
 	F50CE5D312D44E790025352F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = F5C4EBC412BB25900081ABDF /* ZimbraAppDelegate.m */;
-		name = "ZimbraAppDelegate.m: 72";
+		fRef = F5C4EBC412BB25900081ABDF /* ZmailAppDelegate.m */;
+		name = "ZmailAppDelegate.m: 72";
 		rLen = 0;
 		rLoc = 2683;
 		rType = 0;
@@ -1162,8 +1162,8 @@
 	};
 	F50CE5D912D44EAB0025352F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = F5C4EBC412BB25900081ABDF /* ZimbraAppDelegate.m */;
-		name = "ZimbraAppDelegate.m: 77";
+		fRef = F5C4EBC412BB25900081ABDF /* ZmailAppDelegate.m */;
+		name = "ZmailAppDelegate.m: 77";
 		rLen = 0;
 		rLoc = 3522;
 		rType = 0;
@@ -1272,8 +1272,8 @@
 	};
 	F50CE5F612D44FF40025352F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = F5C4EBC412BB25900081ABDF /* ZimbraAppDelegate.m */;
-		name = "ZimbraAppDelegate.m: 72";
+		fRef = F5C4EBC412BB25900081ABDF /* ZmailAppDelegate.m */;
+		name = "ZmailAppDelegate.m: 72";
 		rLen = 0;
 		rLoc = 2683;
 		rType = 0;
@@ -1282,8 +1282,8 @@
 	};
 	F50CE5FD12D450E70025352F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = F5C4EBC412BB25900081ABDF /* ZimbraAppDelegate.m */;
-		name = "ZimbraAppDelegate.m: 25";
+		fRef = F5C4EBC412BB25900081ABDF /* ZmailAppDelegate.m */;
+		name = "ZmailAppDelegate.m: 25";
 		rLen = 0;
 		rLoc = 719;
 		rType = 0;
@@ -1323,7 +1323,7 @@
 	F50CE60312D451300025352F /* XCBuildMessageTextBookmark */ = {
 		isa = PBXTextBookmark;
 		comments = "Format not a string literal and no format arguments";
-		fRef = F5C4EBC412BB25900081ABDF /* ZimbraAppDelegate.m */;
+		fRef = F5C4EBC412BB25900081ABDF /* ZmailAppDelegate.m */;
 		fallbackIsa = XCBuildMessageTextBookmark;
 		rLen = 1;
 		rLoc = 201;
@@ -1331,8 +1331,8 @@
 	};
 	F50CE60412D451300025352F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = F5C4EBC412BB25900081ABDF /* ZimbraAppDelegate.m */;
-		name = "ZimbraAppDelegate.m: 165";
+		fRef = F5C4EBC412BB25900081ABDF /* ZmailAppDelegate.m */;
+		name = "ZmailAppDelegate.m: 165";
 		rLen = 0;
 		rLoc = 7012;
 		rType = 0;
@@ -1351,8 +1351,8 @@
 	};
 	F50CE60812D4515E0025352F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = F5C4EBC412BB25900081ABDF /* ZimbraAppDelegate.m */;
-		name = "ZimbraAppDelegate.m: 165";
+		fRef = F5C4EBC412BB25900081ABDF /* ZmailAppDelegate.m */;
+		name = "ZmailAppDelegate.m: 165";
 		rLen = 0;
 		rLoc = 7012;
 		rType = 0;
@@ -1441,8 +1441,8 @@
 	};
 	F50CE61D12D452920025352F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = F5C4EBC412BB25900081ABDF /* ZimbraAppDelegate.m */;
-		name = "ZimbraAppDelegate.m: 65";
+		fRef = F5C4EBC412BB25900081ABDF /* ZmailAppDelegate.m */;
+		name = "ZmailAppDelegate.m: 65";
 		rLen = 0;
 		rLoc = 2518;
 		rType = 0;
@@ -1451,8 +1451,8 @@
 	};
 	F50CE61E12D452920025352F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = F5C4EBC412BB25900081ABDF /* ZimbraAppDelegate.m */;
-		name = "ZimbraAppDelegate.m: 71";
+		fRef = F5C4EBC412BB25900081ABDF /* ZmailAppDelegate.m */;
+		name = "ZmailAppDelegate.m: 71";
 		rLen = 0;
 		rLoc = 2649;
 		rType = 0;
@@ -1461,8 +1461,8 @@
 	};
 	F50CE62412D452F50025352F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = F5C4EBC412BB25900081ABDF /* ZimbraAppDelegate.m */;
-		name = "ZimbraAppDelegate.m: 71";
+		fRef = F5C4EBC412BB25900081ABDF /* ZmailAppDelegate.m */;
+		name = "ZmailAppDelegate.m: 71";
 		rLen = 0;
 		rLoc = 2649;
 		rType = 0;
@@ -1883,7 +1883,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 61;
-		location = Zimbra;
+		location = Zmail;
 		modificationTime = 315975701.648652;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
@@ -1920,8 +1920,8 @@
 	};
 	F50CE67912D472D00025352F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = F5C4EBC412BB25900081ABDF /* ZimbraAppDelegate.m */;
-		name = "ZimbraAppDelegate.m: 165";
+		fRef = F5C4EBC412BB25900081ABDF /* ZmailAppDelegate.m */;
+		name = "ZmailAppDelegate.m: 165";
 		rLen = 0;
 		rLoc = 7012;
 		rType = 0;
@@ -2000,7 +2000,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 89;
-		location = Zimbra;
+		location = Zmail;
 		modificationTime = 315975701.648748;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
@@ -2191,8 +2191,8 @@
 	};
 	F50CE6A412D482BB0025352F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = F5C4EBC412BB25900081ABDF /* ZimbraAppDelegate.m */;
-		name = "ZimbraAppDelegate.m: 84";
+		fRef = F5C4EBC412BB25900081ABDF /* ZmailAppDelegate.m */;
+		name = "ZmailAppDelegate.m: 84";
 		rLen = 0;
 		rLoc = 3173;
 		rType = 0;
@@ -2415,8 +2415,8 @@
 	};
 	F50CE6C712D489360025352F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = F5C4EBC412BB25900081ABDF /* ZimbraAppDelegate.m */;
-		name = "ZimbraAppDelegate.m: 84";
+		fRef = F5C4EBC412BB25900081ABDF /* ZmailAppDelegate.m */;
+		name = "ZmailAppDelegate.m: 84";
 		rLen = 0;
 		rLoc = 3173;
 		rType = 0;
@@ -2425,8 +2425,8 @@
 	};
 	F50CE6C812D489360025352F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = F5C4EBC412BB25900081ABDF /* ZimbraAppDelegate.m */;
-		name = "ZimbraAppDelegate.m: 93";
+		fRef = F5C4EBC412BB25900081ABDF /* ZmailAppDelegate.m */;
+		name = "ZmailAppDelegate.m: 93";
 		rLen = 0;
 		rLoc = 3496;
 		rType = 0;
@@ -2435,8 +2435,8 @@
 	};
 	F50CE6CD12D489B60025352F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = F5C4EBC412BB25900081ABDF /* ZimbraAppDelegate.m */;
-		name = "ZimbraAppDelegate.m: 91";
+		fRef = F5C4EBC412BB25900081ABDF /* ZmailAppDelegate.m */;
+		name = "ZmailAppDelegate.m: 91";
 		rLen = 52;
 		rLoc = 3401;
 		rType = 0;
@@ -2534,8 +2534,8 @@
 	};
 	F50CE6DD12D48AD50025352F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = F5C4EBC412BB25900081ABDF /* ZimbraAppDelegate.m */;
-		name = "ZimbraAppDelegate.m: 91";
+		fRef = F5C4EBC412BB25900081ABDF /* ZmailAppDelegate.m */;
+		name = "ZmailAppDelegate.m: 91";
 		rLen = 52;
 		rLoc = 3401;
 		rType = 0;
@@ -2544,8 +2544,8 @@
 	};
 	F50CE6DE12D48AD50025352F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = F5C4EBC412BB25900081ABDF /* ZimbraAppDelegate.m */;
-		name = "ZimbraAppDelegate.m: 137";
+		fRef = F5C4EBC412BB25900081ABDF /* ZmailAppDelegate.m */;
+		name = "ZmailAppDelegate.m: 137";
 		rLen = 0;
 		rLoc = 5548;
 		rType = 0;
@@ -2554,8 +2554,8 @@
 	};
 	F50CE6DF12D48B220025352F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = F5C4EBC412BB25900081ABDF /* ZimbraAppDelegate.m */;
-		name = "ZimbraAppDelegate.m: 137";
+		fRef = F5C4EBC412BB25900081ABDF /* ZmailAppDelegate.m */;
+		name = "ZmailAppDelegate.m: 137";
 		rLen = 0;
 		rLoc = 5548;
 		rType = 0;
@@ -2564,8 +2564,8 @@
 	};
 	F50CE6E012D48C220025352F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = F5C4EBC412BB25900081ABDF /* ZimbraAppDelegate.m */;
-		name = "ZimbraAppDelegate.m: 137";
+		fRef = F5C4EBC412BB25900081ABDF /* ZmailAppDelegate.m */;
+		name = "ZmailAppDelegate.m: 137";
 		rLen = 0;
 		rLoc = 5548;
 		rType = 0;
@@ -2581,8 +2581,8 @@
 	};
 	F50CE6E912D48F7A0025352F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = F5C4EBC412BB25900081ABDF /* ZimbraAppDelegate.m */;
-		name = "ZimbraAppDelegate.m: 137";
+		fRef = F5C4EBC412BB25900081ABDF /* ZmailAppDelegate.m */;
+		name = "ZmailAppDelegate.m: 137";
 		rLen = 0;
 		rLoc = 5548;
 		rType = 0;
@@ -3382,8 +3382,8 @@
 	};
 	F50CE7E212D4C8FE0025352F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = F5C4EBC412BB25900081ABDF /* ZimbraAppDelegate.m */;
-		name = "ZimbraAppDelegate.m: 145";
+		fRef = F5C4EBC412BB25900081ABDF /* ZmailAppDelegate.m */;
+		name = "ZmailAppDelegate.m: 145";
 		rLen = 0;
 		rLoc = 5520;
 		rType = 0;
@@ -3392,8 +3392,8 @@
 	};
 	F50CE7E312D4C95A0025352F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = F5C4EBC412BB25900081ABDF /* ZimbraAppDelegate.m */;
-		name = "ZimbraAppDelegate.m: 145";
+		fRef = F5C4EBC412BB25900081ABDF /* ZmailAppDelegate.m */;
+		name = "ZmailAppDelegate.m: 145";
 		rLen = 0;
 		rLoc = 5520;
 		rType = 0;
@@ -4219,7 +4219,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 249;
-		location = Zimbra;
+		location = Zmail;
 		modificationTime = 315975701.648781;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
@@ -4297,7 +4297,7 @@
 		hitCount = 1;
 		ignoreCount = 0;
 		lineNumber = 264;
-		location = Zimbra;
+		location = Zmail;
 		modificationTime = 315975709.152373;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
@@ -4554,8 +4554,8 @@
 	};
 	F50CE8AD12D591960025352F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = F5C4EBC412BB25900081ABDF /* ZimbraAppDelegate.m */;
-		name = "ZimbraAppDelegate.m: 211";
+		fRef = F5C4EBC412BB25900081ABDF /* ZmailAppDelegate.m */;
+		name = "ZmailAppDelegate.m: 211";
 		rLen = 0;
 		rLoc = 7667;
 		rType = 0;
@@ -4564,8 +4564,8 @@
 	};
 	F50CE8AE12D591960025352F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = F5C4EBC412BB25900081ABDF /* ZimbraAppDelegate.m */;
-		name = "ZimbraAppDelegate.m: 216";
+		fRef = F5C4EBC412BB25900081ABDF /* ZmailAppDelegate.m */;
+		name = "ZmailAppDelegate.m: 216";
 		rLen = 0;
 		rLoc = 7780;
 		rType = 0;
@@ -4574,8 +4574,8 @@
 	};
 	F50CE8AF12D5929F0025352F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = F5C4EBC312BB25900081ABDF /* ZimbraAppDelegate.h */;
-		name = "ZimbraAppDelegate.h: 18";
+		fRef = F5C4EBC312BB25900081ABDF /* ZmailAppDelegate.h */;
+		name = "ZmailAppDelegate.h: 18";
 		rLen = 0;
 		rLoc = 477;
 		rType = 0;
@@ -4584,8 +4584,8 @@
 	};
 	F50CE8B012D5929F0025352F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = F5C4EBC412BB25900081ABDF /* ZimbraAppDelegate.m */;
-		name = "ZimbraAppDelegate.m: 216";
+		fRef = F5C4EBC412BB25900081ABDF /* ZmailAppDelegate.m */;
+		name = "ZmailAppDelegate.m: 216";
 		rLen = 0;
 		rLoc = 7780;
 		rType = 0;
@@ -4594,8 +4594,8 @@
 	};
 	F50CE8B112D5929F0025352F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = F5C4EBC412BB25900081ABDF /* ZimbraAppDelegate.m */;
-		name = "ZimbraAppDelegate.m: 208";
+		fRef = F5C4EBC412BB25900081ABDF /* ZmailAppDelegate.m */;
+		name = "ZmailAppDelegate.m: 208";
 		rLen = 28;
 		rLoc = 7285;
 		rType = 0;
@@ -4604,8 +4604,8 @@
 	};
 	F50CE8C212D59E770025352F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = F5C4EBC312BB25900081ABDF /* ZimbraAppDelegate.h */;
-		name = "ZimbraAppDelegate.h: 26";
+		fRef = F5C4EBC312BB25900081ABDF /* ZmailAppDelegate.h */;
+		name = "ZmailAppDelegate.h: 26";
 		rLen = 11;
 		rLoc = 681;
 		rType = 0;
@@ -4614,8 +4614,8 @@
 	};
 	F50CE8C312D59E770025352F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = F5C4EBC412BB25900081ABDF /* ZimbraAppDelegate.m */;
-		name = "ZimbraAppDelegate.m: 57";
+		fRef = F5C4EBC412BB25900081ABDF /* ZmailAppDelegate.m */;
+		name = "ZmailAppDelegate.m: 57";
 		rLen = 11;
 		rLoc = 1766;
 		rType = 0;
@@ -4624,8 +4624,8 @@
 	};
 	F50CE8C412D59E770025352F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = F5C4EBC412BB25900081ABDF /* ZimbraAppDelegate.m */;
-		name = "ZimbraAppDelegate.m: 223";
+		fRef = F5C4EBC412BB25900081ABDF /* ZmailAppDelegate.m */;
+		name = "ZmailAppDelegate.m: 223";
 		rLen = 0;
 		rLoc = 7902;
 		rType = 0;
@@ -4654,8 +4654,8 @@
 	};
 	F50CE8DB12D5A5FD0025352F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = F5C4EBC412BB25900081ABDF /* ZimbraAppDelegate.m */;
-		name = "ZimbraAppDelegate.m: 72";
+		fRef = F5C4EBC412BB25900081ABDF /* ZmailAppDelegate.m */;
+		name = "ZmailAppDelegate.m: 72";
 		rLen = 0;
 		rLoc = 2245;
 		rType = 0;
@@ -4664,8 +4664,8 @@
 	};
 	F50CE8DC12D5A5FD0025352F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = F5C4EBC412BB25900081ABDF /* ZimbraAppDelegate.m */;
-		name = "ZimbraAppDelegate.m: 174";
+		fRef = F5C4EBC412BB25900081ABDF /* ZmailAppDelegate.m */;
+		name = "ZmailAppDelegate.m: 174";
 		rLen = 0;
 		rLoc = 6296;
 		rType = 0;
@@ -4694,8 +4694,8 @@
 	};
 	F50CE8E412D5A7470025352F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = F5C4EBC412BB25900081ABDF /* ZimbraAppDelegate.m */;
-		name = "ZimbraAppDelegate.m: 186";
+		fRef = F5C4EBC412BB25900081ABDF /* ZmailAppDelegate.m */;
+		name = "ZmailAppDelegate.m: 186";
 		rLen = 0;
 		rLoc = 6602;
 		rType = 0;
@@ -4863,7 +4863,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 232;
-		location = Zimbra;
+		location = Zmail;
 		modificationTime = 315975701.648193;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
@@ -4881,7 +4881,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 288;
-		location = Zimbra;
+		location = Zmail;
 		modificationTime = 315975701.648294;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
@@ -4899,7 +4899,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 318;
-		location = Zimbra;
+		location = Zmail;
 		modificationTime = 315975701.648325;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
@@ -4917,7 +4917,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 298;
-		location = Zimbra;
+		location = Zmail;
 		modificationTime = 315975701.648404;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
@@ -4955,7 +4955,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 283;
-		location = Zimbra;
+		location = Zmail;
 		modificationTime = 315975701.648472;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
@@ -4973,7 +4973,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 73;
-		location = Zimbra;
+		location = Zmail;
 		modificationTime = 315975701.648529;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
@@ -5125,7 +5125,7 @@
 			sepNavVisRange = "{131, 952}";
 		};
 	};
-	F53A144212B3E0AA00BC6D41 /* Zimbra_Prefix.pch */ = {
+	F53A144212B3E0AA00BC6D41 /* Zmail_Prefix.pch */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1158, 459}}";
 			sepNavSelRange = "{78, 0}";
@@ -5258,13 +5258,13 @@
 		isa = PBXBookmark;
 		fRef = 8E31439F0D8EFC7900101D4D /* Default.png */;
 	};
-	F5B6443F12D2E822007ABCFF /* ZimbraSimulator */ = {
+	F5B6443F12D2E822007ABCFF /* ZmailSimulator */ = {
 		activeExec = 0;
 		executables = (
-			F5B6447912D2E822007ABCFF /* ZimbraSimulator */,
+			F5B6447912D2E822007ABCFF /* ZmailSimulator */,
 		);
 	};
-	F5B6447912D2E822007ABCFF /* ZimbraSimulator */ = {
+	F5B6447912D2E822007ABCFF /* ZmailSimulator */ = {
 		isa = PBXExecutable;
 		activeArgIndices = (
 		);
@@ -5287,7 +5287,7 @@
 		executableSystemSymbolLevel = 0;
 		executableUserSymbolLevel = 0;
 		libgmallocEnabled = 0;
-		name = ZimbraSimulator;
+		name = ZmailSimulator;
 		savedGlobals = {
 		};
 		showTypeColumn = 0;
@@ -5350,7 +5350,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 207;
-		location = Zimbra;
+		location = Zmail;
 		modificationTime = 315975701.648559;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
@@ -5368,7 +5368,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 238;
-		location = Zimbra;
+		location = Zmail;
 		modificationTime = 315975701.648609;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
@@ -5451,8 +5451,8 @@
 	};
 	F5B6488D12D4439E007ABCFF /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = F5C4EBC312BB25900081ABDF /* ZimbraAppDelegate.h */;
-		name = "ZimbraAppDelegate.h: 30";
+		fRef = F5C4EBC312BB25900081ABDF /* ZmailAppDelegate.h */;
+		name = "ZmailAppDelegate.h: 30";
 		rLen = 0;
 		rLoc = 958;
 		rType = 0;
@@ -5461,8 +5461,8 @@
 	};
 	F5B648C512D44696007ABCFF /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = F5C4EBC412BB25900081ABDF /* ZimbraAppDelegate.m */;
-		name = "ZimbraAppDelegate.m: 69";
+		fRef = F5C4EBC412BB25900081ABDF /* ZmailAppDelegate.m */;
+		name = "ZmailAppDelegate.m: 69";
 		rLen = 0;
 		rLoc = 2557;
 		rType = 0;
@@ -5745,14 +5745,14 @@
 			sepNavVisRange = "{595, 1508}";
 		};
 	};
-	F5C4EBC312BB25900081ABDF /* ZimbraAppDelegate.h */ = {
+	F5C4EBC312BB25900081ABDF /* ZmailAppDelegate.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1056, 555}}";
 			sepNavSelRange = "{681, 11}";
 			sepNavVisRange = "{0, 964}";
 		};
 	};
-	F5C4EBC412BB25900081ABDF /* ZimbraAppDelegate.m */ = {
+	F5C4EBC412BB25900081ABDF /* ZmailAppDelegate.m */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1056, 3380}}";
 			sepNavSelRange = "{6602, 0}";
@@ -5761,8 +5761,8 @@
 	};
 	F5C4EBE012BB31A00081ABDF /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = F53A144212B3E0AA00BC6D41 /* Zimbra_Prefix.pch */;
-		name = "Zimbra_Prefix.pch: 2";
+		fRef = F53A144212B3E0AA00BC6D41 /* Zmail_Prefix.pch */;
+		name = "Zmail_Prefix.pch: 2";
 		rLen = 0;
 		rLoc = 78;
 		rType = 0;
@@ -5773,7 +5773,7 @@
 		isa = PBXBookmark;
 		fRef = F5C4E77D12B90E8E0081ABDF /* account.png */;
 	};
-	F5CD8E3112AFE95100163F38 /* Zimbra */ = {
+	F5CD8E3112AFE95100163F38 /* Zmail */ = {
 		isa = PBXExecutable;
 		activeArgIndices = (
 		);
@@ -5796,7 +5796,7 @@
 		executableSystemSymbolLevel = 0;
 		executableUserSymbolLevel = 0;
 		libgmallocEnabled = 0;
-		name = Zimbra;
+		name = Zmail;
 		savedGlobals = {
 		};
 		showTypeColumn = 0;

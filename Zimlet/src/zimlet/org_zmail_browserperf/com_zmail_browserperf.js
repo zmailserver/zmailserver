@@ -18,13 +18,13 @@
 //  @author Kevin Henrikson                                 //
 //////////////////////////////////////////////////////////////
 
-function com_zimbra_browserperf() {
+function org_zmail_browserperf() {
 }
 
-com_zimbra_browserperf.prototype = new ZmZimletBase();
-com_zimbra_browserperf.prototype.constructor = com_zimbra_browserperf;
+org_zmail_browserperf.prototype = new ZmZimletBase();
+org_zmail_browserperf.prototype.constructor = org_zmail_browserperf;
 
-com_zimbra_browserperf.prototype.init =
+org_zmail_browserperf.prototype.init =
 function() {
 
 };

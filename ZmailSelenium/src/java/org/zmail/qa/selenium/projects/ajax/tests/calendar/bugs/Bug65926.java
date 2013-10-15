@@ -14,36 +14,36 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.calendar.bugs;
+package org.zmail.qa.selenium.projects.ajax.tests.calendar.bugs;
 
 import java.util.Calendar;
 import org.testng.annotations.Test;
-import com.zimbra.qa.selenium.framework.items.AppointmentItem;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.CalendarWorkWeekTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.calendar.FormApptNew;
+import org.zmail.qa.selenium.framework.items.AppointmentItem;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.CalendarWorkWeekTest;
+import org.zmail.qa.selenium.projects.ajax.ui.calendar.FormApptNew;
 
 public class Bug65926 extends CalendarWorkWeekTest {
 
 	public Bug65926() {
 		logger.info("New "+ Bug65926.class.getCanonicalName());
 		super.startingPage = app.zPageCalendar;
-		this.startingAccountPreferences.put("zimbraFeatureGalEnabled", "FALSE");
+		this.startingAccountPreferences.put("zmailFeatureGalEnabled", "FALSE");
 	}
 
 	
 	@Test(	
-			description = "Create a basic appointment this zimbraFeatureGalEnabled=FALSE",
+			description = "Create a basic appointment this zmailFeatureGalEnabled=FALSE",
 			groups = { "functional" }	
 		)
 	public void Bug65926_01() throws HarnessException {
 		
 		// Modify the test account to disable GAL
-		ZimbraAdminAccount.GlobalAdmin().soapSend(
-				"<ModifyAccountRequest xmlns='urn:zimbraAdmin'>"
-			+		"<id>"+ app.zGetActiveAccount().ZimbraId +"</id>"
-			+		"<a n='zimbraFeatureGalEnabled'>FALSE</a>"
+		ZmailAdminAccount.GlobalAdmin().soapSend(
+				"<ModifyAccountRequest xmlns='urn:zmailAdmin'>"
+			+		"<id>"+ app.zGetActiveAccount().ZmailId +"</id>"
+			+		"<a n='zmailFeatureGalEnabled'>FALSE</a>"
 			+	"</ModifyAccountRequest>");
 
 		// Logout and login to pick up the changes
@@ -53,8 +53,8 @@ public class Bug65926 extends CalendarWorkWeekTest {
 		// Create appointment
 		AppointmentItem appt = new AppointmentItem();
 		Calendar now = this.calendarWeekDayUTC;
-		appt.setSubject("appointment" + ZimbraSeleniumProperties.getUniqueString());
-		appt.setContent("content" + ZimbraSeleniumProperties.getUniqueString());
+		appt.setSubject("appointment" + ZmailSeleniumProperties.getUniqueString());
+		appt.setContent("content" + ZmailSeleniumProperties.getUniqueString());
 		appt.setStartTime(new ZDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH) + 1, now.get(Calendar.DAY_OF_MONTH), 12, 0, 0));
 		appt.setEndTime(new ZDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH) + 1, now.get(Calendar.DAY_OF_MONTH), 14, 0, 0));
 	
@@ -82,12 +82,12 @@ public class Bug65926 extends CalendarWorkWeekTest {
 	public void Bug65926_02() throws HarnessException {
 		
 		// Modify the test account to disable GAL
-		ZimbraAdminAccount.GlobalAdmin().soapSend(
-				"<ModifyAccountRequest xmlns='urn:zimbraAdmin'>"
-			+		"<id>"+ app.zGetActiveAccount().ZimbraId +"</id>"
-			+		"<a n='zimbraFeatureGalAutoCompleteEnabled'>FALSE</a>"
-			+		"<a n='zimbraFeatureGalEnabled'>FALSE</a>"
-			+		"<a n='zimbraFeatureGalSyncEnabled'>FALSE</a>"
+		ZmailAdminAccount.GlobalAdmin().soapSend(
+				"<ModifyAccountRequest xmlns='urn:zmailAdmin'>"
+			+		"<id>"+ app.zGetActiveAccount().ZmailId +"</id>"
+			+		"<a n='zmailFeatureGalAutoCompleteEnabled'>FALSE</a>"
+			+		"<a n='zmailFeatureGalEnabled'>FALSE</a>"
+			+		"<a n='zmailFeatureGalSyncEnabled'>FALSE</a>"
 			+	"</ModifyAccountRequest>");
 
 		// Logout and login to pick up the changes
@@ -97,8 +97,8 @@ public class Bug65926 extends CalendarWorkWeekTest {
 		// Create appointment
 		AppointmentItem appt = new AppointmentItem();
 		Calendar now = this.calendarWeekDayUTC;
-		appt.setSubject("appointment" + ZimbraSeleniumProperties.getUniqueString());
-		appt.setContent("content" + ZimbraSeleniumProperties.getUniqueString());
+		appt.setSubject("appointment" + ZmailSeleniumProperties.getUniqueString());
+		appt.setContent("content" + ZmailSeleniumProperties.getUniqueString());
 		appt.setStartTime(new ZDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH) + 1, now.get(Calendar.DAY_OF_MONTH), 12, 0, 0));
 		appt.setEndTime(new ZDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH) + 1, now.get(Calendar.DAY_OF_MONTH), 14, 0, 0));
 	

@@ -345,7 +345,7 @@ function(files, status, guids) {
 		foundOne = true;
 
         var  SaveDocumentRequest = {
-            _jsns: "urn:zimbraMail",
+            _jsns: "urn:zmailMail",
             requestId: i,
             doc: {}
         }
@@ -369,7 +369,7 @@ function(files, status, guids) {
     if (foundOne) {
         var json = {
             BatchRequest: {
-                _jsns: "urn:zimbra",
+                _jsns: "urn:zmail",
                 onerror: "continue",
                 SaveDocumentRequest: ( (request.length == 1) ? request[0] : request )
             }

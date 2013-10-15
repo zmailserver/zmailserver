@@ -14,21 +14,21 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.mountpoints;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.mountpoints;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogShare;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogShare.ShareRole;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.DialogEditFolder;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogShare;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogShare.ShareRole;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.DialogEditFolder;
 
 public class EditShare extends PrefGroupMailByMessageTest {
 	
@@ -44,12 +44,12 @@ public class EditShare extends PrefGroupMailByMessageTest {
 	public void EditShare_01() throws HarnessException {
 
 		FolderItem inbox = FolderItem.importFromSOAP(app.zGetActiveAccount(), FolderItem.SystemFolder.Inbox);
-		String foldername = "folder" + ZimbraSeleniumProperties.getUniqueString();
+		String foldername = "folder" + ZmailSeleniumProperties.getUniqueString();
 
 
 		// Create a subfolder in Inbox
 		app.zGetActiveAccount().soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>"
+					"<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+		"<folder name='" + foldername +"' l='" + inbox.getId() +"'/>"
 				+	"</CreateFolderRequest>");
 
@@ -57,27 +57,27 @@ public class EditShare extends PrefGroupMailByMessageTest {
 		ZAssert.assertNotNull(subfolder, "Verify the new owner folder exists");
 		
 		app.zGetActiveAccount().soapSend(
-					"<FolderActionRequest xmlns='urn:zimbraMail'>"
+					"<FolderActionRequest xmlns='urn:zmailMail'>"
 				+		"<action id='"+ subfolder.getId() +"' op='grant'>"
-				+			"<grant d='" + ZimbraAccount.AccountA().EmailAddress + "' gt='usr' perm='r'/>"
+				+			"<grant d='" + ZmailAccount.AccountA().EmailAddress + "' gt='usr' perm='r'/>"
 				+		"</action>"
 				+	"</FolderActionRequest>");
 
 
 		// Make sure that AccountA now has the share
-		ZimbraAccount.AccountA().soapSend(
-				"<GetShareInfoRequest xmlns='urn:zimbraAccount'>"
+		ZmailAccount.AccountA().soapSend(
+				"<GetShareInfoRequest xmlns='urn:zmailAccount'>"
 				+		"<grantee type='usr'/>"
 				+		"<owner by='name'>"+ app.zGetActiveAccount().EmailAddress +"</owner>"
 				+	"</GetShareInfoRequest>");
 
-		String ownerEmail = ZimbraAccount.AccountA().soapSelectValue("//acct:GetShareInfoResponse//acct:share[@folderPath='/Inbox/"+ foldername +"']", "ownerEmail");
+		String ownerEmail = ZmailAccount.AccountA().soapSelectValue("//acct:GetShareInfoResponse//acct:share[@folderPath='/Inbox/"+ foldername +"']", "ownerEmail");
 		ZAssert.assertEquals(ownerEmail, app.zGetActiveAccount().EmailAddress, "Verify the owner of the shared folder");
 
-		String rights = ZimbraAccount.AccountA().soapSelectValue("//acct:GetShareInfoResponse//acct:share[@folderPath='/Inbox/"+ foldername +"']", "rights");
+		String rights = ZmailAccount.AccountA().soapSelectValue("//acct:GetShareInfoResponse//acct:share[@folderPath='/Inbox/"+ foldername +"']", "rights");
 		ZAssert.assertEquals(rights, "r", "Verify the rights are 'read only'");
 
-		String granteeType = ZimbraAccount.AccountA().soapSelectValue("//acct:GetShareInfoResponse//acct:share[@folderPath='/Inbox/"+ foldername +"']", "granteeType");
+		String granteeType = ZmailAccount.AccountA().soapSelectValue("//acct:GetShareInfoResponse//acct:share[@folderPath='/Inbox/"+ foldername +"']", "granteeType");
 		ZAssert.assertEquals(granteeType, "usr", "Verify the grantee type is 'user'");
 
 		
@@ -110,13 +110,13 @@ public class EditShare extends PrefGroupMailByMessageTest {
 
 		
 		
-		ZimbraAccount.AccountA().soapSend(
-				"<GetShareInfoRequest xmlns='urn:zimbraAccount'>"
+		ZmailAccount.AccountA().soapSend(
+				"<GetShareInfoRequest xmlns='urn:zmailAccount'>"
 				+		"<grantee type='usr'/>"
 				+		"<owner by='name'>"+ app.zGetActiveAccount().EmailAddress +"</owner>"
 				+	"</GetShareInfoRequest>");
 
-		String adminrights = ZimbraAccount.AccountA().soapSelectValue("//acct:GetShareInfoResponse//acct:share[@folderPath='/Inbox/"+ foldername +"']", "rights");
+		String adminrights = ZmailAccount.AccountA().soapSelectValue("//acct:GetShareInfoResponse//acct:share[@folderPath='/Inbox/"+ foldername +"']", "rights");
 
 		//verify admin rights 	
 		ZAssert.assertEquals(adminrights, "rwidxa", "Verify the rights are admin");

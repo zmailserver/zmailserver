@@ -14,38 +14,38 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.octopus.tests.myfiles.comments;
+package org.zmail.qa.selenium.projects.octopus.tests.myfiles.comments;
 
 import java.util.List;
 
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.CommentItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.OctopusAccount;
-import com.zimbra.qa.selenium.framework.util.XmlStringUtil;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraCharsets;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.framework.util.ZimbraCharsets.ZCharset;
-import com.zimbra.qa.selenium.projects.octopus.core.OctopusCommonTest;
-import com.zimbra.qa.selenium.projects.octopus.ui.DisplayFileComments;
-import com.zimbra.qa.selenium.projects.octopus.ui.DisplayFilePreview;
-import com.zimbra.qa.selenium.projects.octopus.ui.PageMyFiles;
+import org.zmail.qa.selenium.framework.items.CommentItem;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.OctopusAccount;
+import org.zmail.qa.selenium.framework.util.XmlStringUtil;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailCharsets;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.framework.util.ZmailCharsets.ZCharset;
+import org.zmail.qa.selenium.projects.octopus.core.OctopusCommonTest;
+import org.zmail.qa.selenium.projects.octopus.ui.DisplayFileComments;
+import org.zmail.qa.selenium.projects.octopus.ui.DisplayFilePreview;
+import org.zmail.qa.selenium.projects.octopus.ui.PageMyFiles;
 
 /**
- * @author zimbra
+ * @author zmail
  *
  */
 public class ViewSharedComment extends OctopusCommonTest {
 
-	private ZimbraAccount destination = null;
+	private ZmailAccount destination = null;
 	
 	public ViewSharedComment() throws HarnessException {
 		logger.info("New " + ViewSharedComment.class.getCanonicalName());
@@ -55,7 +55,7 @@ public class ViewSharedComment extends OctopusCommonTest {
 		super.startingAccountPreferences = null;
 		
 		destination = new OctopusAccount();		
-		destination.setPref("displayName", "DisplayName"+ ZimbraSeleniumProperties.getUniqueString());
+		destination.setPref("displayName", "DisplayName"+ ZmailSeleniumProperties.getUniqueString());
 		destination.provision();
 		destination.authenticate();
 		
@@ -66,13 +66,13 @@ public class ViewSharedComment extends OctopusCommonTest {
 			groups = { "smoke" })
 	public void ViewSharedComment_01() throws HarnessException {
 
-		String filename = "filename"+ ZimbraSeleniumProperties.getUniqueString() +".txt";
-		String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+		String filename = "filename"+ ZmailSeleniumProperties.getUniqueString() +".txt";
+		String filePath = ZmailSeleniumProperties.getBaseDirectory()
 				+ "/data/public/documents/doc01/plaintext.txt";
-		String subFolderName = "subFolder" + ZimbraSeleniumProperties.getUniqueString();
+		String subFolderName = "subFolder" + ZmailSeleniumProperties.getUniqueString();
 
 		
-		String commentText = "Comment" + ZimbraSeleniumProperties.getUniqueString();
+		String commentText = "Comment" + ZmailSeleniumProperties.getUniqueString();
 
 
 
@@ -81,14 +81,14 @@ public class ViewSharedComment extends OctopusCommonTest {
 
 		// Create a shared folder
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>"
+				"<CreateFolderRequest xmlns='urn:zmailMail'>"
 			+		"<folder name='" + subFolderName + "' l='" + briefcaseRootFolder.getId() + "' view='document'/>"
 			+	"</CreateFolderRequest>");
 		FolderItem subFolderItem = FolderItem.importFromSOAP(app.zGetActiveAccount(), subFolderName);
 		ZAssert.assertNotNull(subFolderItem, "Verify the subfolder is available");
 
 		app.zGetActiveAccount().soapSend(
-				"<FolderActionRequest xmlns='urn:zimbraMail'>"
+				"<FolderActionRequest xmlns='urn:zmailMail'>"
 			+		"<action op='grant' id='" + subFolderItem.getId() + "'>"
 			+			"<grant gt='guest' perm='rwidxa' d='"+ destination.EmailAddress +"'/>"
 			+		"</action>"
@@ -99,7 +99,7 @@ public class ViewSharedComment extends OctopusCommonTest {
 		String attachmentId = app.zGetActiveAccount().uploadFile(filePath);
 
 		app.zGetActiveAccount().soapSend(
-					"<SaveDocumentRequest xmlns='urn:zimbraMail'>"
+					"<SaveDocumentRequest xmlns='urn:zmailMail'>"
 				+		"<doc name='"+ filename +"' l='" + subFolderItem.getId() + "'>"
 				+			"<upload id='" + attachmentId + "'/>"
 				+		"</doc>"
@@ -111,14 +111,14 @@ public class ViewSharedComment extends OctopusCommonTest {
 
 		// Add comments to the file using SOAP
 		destination.soapSend(
-					"<AddCommentRequest xmlns='urn:zimbraMail'>"
-				+		"<comment parentId='"+ app.zGetActiveAccount().ZimbraId + ":" + documentId + "' text='" + commentText + "'/>"
+					"<AddCommentRequest xmlns='urn:zmailMail'>"
+				+		"<comment parentId='"+ app.zGetActiveAccount().ZmailId + ":" + documentId + "' text='" + commentText + "'/>"
 				+	"</AddCommentRequest>");
 
 		// Get file comments through SOAP
 		destination.soapSend(
-					"<GetCommentsRequest  xmlns='urn:zimbraMail'>"
-				+		"<comment parentId='"+ app.zGetActiveAccount().ZimbraId + ":" + documentId + "'/>"
+					"<GetCommentsRequest  xmlns='urn:zmailMail'>"
+				+		"<comment parentId='"+ app.zGetActiveAccount().ZmailId + ":" + documentId + "'/>"
 				+	"</GetCommentsRequest>");
 
 
@@ -201,12 +201,12 @@ public class ViewSharedComment extends OctopusCommonTest {
 	 * @param comment the comment text
 	 * @throws HarnessException
 	 */
-	private void verifyCommentDetails(ZimbraAccount commentor, String comment) throws HarnessException {
+	private void verifyCommentDetails(ZmailAccount commentor, String comment) throws HarnessException {
 			
-		String filename = "filename"+ ZimbraSeleniumProperties.getUniqueString() +".txt";
-		String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+		String filename = "filename"+ ZmailSeleniumProperties.getUniqueString() +".txt";
+		String filePath = ZmailSeleniumProperties.getBaseDirectory()
 				+ "/data/public/documents/doc01/plaintext.txt";
-		String subFolderName = "subFolder" + ZimbraSeleniumProperties.getUniqueString();
+		String subFolderName = "subFolder" + ZmailSeleniumProperties.getUniqueString();
 
 		
 
@@ -217,14 +217,14 @@ public class ViewSharedComment extends OctopusCommonTest {
 
 		// Create a shared folder
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>"
+				"<CreateFolderRequest xmlns='urn:zmailMail'>"
 			+		"<folder name='" + subFolderName + "' l='" + briefcaseRootFolder.getId() + "' view='document'/>"
 			+	"</CreateFolderRequest>");
 		FolderItem subFolderItem = FolderItem.importFromSOAP(app.zGetActiveAccount(), subFolderName);
 		ZAssert.assertNotNull(subFolderItem, "Verify the subfolder is available");
 
 		app.zGetActiveAccount().soapSend(
-				"<FolderActionRequest xmlns='urn:zimbraMail'>"
+				"<FolderActionRequest xmlns='urn:zmailMail'>"
 			+		"<action op='grant' id='" + subFolderItem.getId() + "'>"
 			+			"<grant gt='guest' perm='rwidxa' d='"+ commentor.EmailAddress +"'/>"
 			+		"</action>"
@@ -235,7 +235,7 @@ public class ViewSharedComment extends OctopusCommonTest {
 		String attachmentId = app.zGetActiveAccount().uploadFile(filePath);
 
 		app.zGetActiveAccount().soapSend(
-					"<SaveDocumentRequest xmlns='urn:zimbraMail'>"
+					"<SaveDocumentRequest xmlns='urn:zmailMail'>"
 				+		"<doc name='"+ filename +"' l='" + subFolderItem.getId() + "'>"
 				+			"<upload id='" + attachmentId + "'/>"
 				+		"</doc>"
@@ -247,14 +247,14 @@ public class ViewSharedComment extends OctopusCommonTest {
 
 		// Add comments to the file using SOAP
 		commentor.soapSend(
-					"<AddCommentRequest xmlns='urn:zimbraMail'>"
-				+		"<comment parentId='"+ app.zGetActiveAccount().ZimbraId + ":" + documentId + "' text='" + XmlStringUtil.escapeXml(comment) + "'/>"
+					"<AddCommentRequest xmlns='urn:zmailMail'>"
+				+		"<comment parentId='"+ app.zGetActiveAccount().ZmailId + ":" + documentId + "' text='" + XmlStringUtil.escapeXml(comment) + "'/>"
 				+	"</AddCommentRequest>");
 
 		// Get file comments through SOAP
 		commentor.soapSend(
-					"<GetCommentsRequest  xmlns='urn:zimbraMail'>"
-				+		"<comment parentId='"+ app.zGetActiveAccount().ZimbraId + ":" + documentId + "'/>"
+					"<GetCommentsRequest  xmlns='urn:zmailMail'>"
+				+		"<comment parentId='"+ app.zGetActiveAccount().ZmailId + ":" + documentId + "'/>"
 				+	"</GetCommentsRequest>");
 
 
@@ -339,12 +339,12 @@ public class ViewSharedComment extends OctopusCommonTest {
 			groups = { "functional" })
 	public void ViewSharedComment_DisplayName_01() throws HarnessException {
 
-		ZimbraAccount commentor = new ZimbraAccount();
+		ZmailAccount commentor = new ZmailAccount();
 		commentor.clearPref("displayName"); // unset the displayName
 		commentor.provision();
 		commentor.authenticate();
 		
-		String comment = "Comment"+ ZimbraSeleniumProperties.getUniqueString();
+		String comment = "Comment"+ ZmailSeleniumProperties.getUniqueString();
 		
 		verifyCommentDetails(commentor, comment);
 
@@ -353,7 +353,7 @@ public class ViewSharedComment extends OctopusCommonTest {
 	
 	@DataProvider(name = "DataProviderDisplayNames")
 	public Object[][] DataProviderDeleteKeys() throws HarnessException {
-		return (ZimbraCharsets.getInstance().getSampleTable());
+		return (ZmailCharsets.getInstance().getSampleTable());
 	}
 
 	@Test(
@@ -362,12 +362,12 @@ public class ViewSharedComment extends OctopusCommonTest {
 			dataProvider = "DataProviderDisplayNames")
 	public void ViewSharedComment_DisplayName_02(ZCharset charset, String displayName) throws HarnessException {
 
-		ZimbraAccount commentor = new ZimbraAccount();
+		ZmailAccount commentor = new ZmailAccount();
 		commentor.setPref("displayName", displayName);
 		commentor.provision();
 		commentor.authenticate();
 		
-		String comment = "Comment"+ ZimbraSeleniumProperties.getUniqueString();
+		String comment = "Comment"+ ZmailSeleniumProperties.getUniqueString();
 		
 		verifyCommentDetails(commentor, comment);
 	}

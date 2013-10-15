@@ -1,4 +1,4 @@
-AjxTemplate.register("com_zimbra_cloudchat.templates.ZmCloudChat#BuddyListWidget", 
+AjxTemplate.register("org_zmail_cloudchat.templates.ZmCloudChat#BuddyListWidget", 
 function(name, params, data, buffer) {
 	var _hasBuffer = Boolean(buffer);
 	data = (typeof data == "string" ? { id: data } : data) || {};
@@ -20,6 +20,6 @@ function(name, params, data, buffer) {
 {
 	"id": "BuddyListWidget"
 }, true);
-AjxPackage.define("com_zimbra_cloudchat.templates.ZmCloudChat");
-AjxTemplate.register("com_zimbra_cloudchat.templates.ZmCloudChat", AjxTemplate.getTemplate("com_zimbra_cloudchat.templates.ZmCloudChat#BuddyListWidget"), AjxTemplate.getParams("com_zimbra_cloudchat.templates.ZmCloudChat#BuddyListWidget"));
+AjxPackage.define("org_zmail_cloudchat.templates.ZmCloudChat");
+AjxTemplate.register("org_zmail_cloudchat.templates.ZmCloudChat", AjxTemplate.getTemplate("org_zmail_cloudchat.templates.ZmCloudChat#BuddyListWidget"), AjxTemplate.getParams("org_zmail_cloudchat.templates.ZmCloudChat#BuddyListWidget"));
 

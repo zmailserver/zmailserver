@@ -1917,9 +1917,9 @@ function(ev) {
 		case "add":
 			val = orig;
 			// add word to user's personal dictionary
-			var soapDoc = AjxSoapDoc.create("ModifyPrefsRequest", "urn:zimbraAccount");
+			var soapDoc = AjxSoapDoc.create("ModifyPrefsRequest", "urn:zmailAccount");
 			var prefEl = soapDoc.set("pref", val);
-			prefEl.setAttribute("name", "+zimbraPrefSpellIgnoreWord");
+			prefEl.setAttribute("name", "+zmailPrefSpellIgnoreWord");
 			var params = {
 				soapDoc: soapDoc,
 				asyncMode: true,

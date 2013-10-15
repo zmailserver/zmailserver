@@ -14,16 +14,16 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.admin.ui;
+package org.zmail.qa.selenium.projects.admin.ui;
 
-import com.zimbra.qa.selenium.framework.ui.AbsApplication;
-import com.zimbra.qa.selenium.framework.ui.AbsPage;
-import com.zimbra.qa.selenium.framework.ui.AbsTab;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.SleepUtil;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
+import org.zmail.qa.selenium.framework.ui.AbsApplication;
+import org.zmail.qa.selenium.framework.ui.AbsPage;
+import org.zmail.qa.selenium.framework.ui.AbsTab;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.SleepUtil;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
 
 /**
  * This class defines the Downloads page (click on "Downloads" in the header)
@@ -123,14 +123,14 @@ public class PageDownloads extends AbsTab {
 
 	
 	/**
-	 * Open http://server.com/zimbra/downloads/index.html
+	 * Open http://server.org/zmail/downloads/index.html
 	 * @throws HarnessException 
 	 */
 	public void zOpenIndexHTML() throws HarnessException {
 
-		String base = ZimbraSeleniumProperties.getBaseURL();
-		String path = "/zimbra/downloads/index.html";
-		String id = ZimbraSeleniumProperties.getUniqueString();
+		String base = ZmailSeleniumProperties.getBaseURL();
+		String path = "/zmail/downloads/index.html";
+		String id = ZmailSeleniumProperties.getUniqueString();
 		
 		this.sOpenWindow(base + path, id);
 		this.zSelectWindow(id);

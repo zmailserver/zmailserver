@@ -22,7 +22,7 @@ echo "Performing installation check"
 for i in core mta store ldap snmp logger apache spell; do
 	echo -n "Looking for $i..."
   if [ -x /usr/sbin/pkgutil ]; then
-    pkgs=$(/usr/sbin/pkgutil --pkgs='com.zimbra.zcs.$i' 2> /dev/null)
+    pkgs=$(/usr/sbin/pkgutil --pkgs='org.zmail.zcs.$i' 2> /dev/null)
     first=1
     if [ x"$pkg" = "x" ]; then
       echo "not found."
@@ -44,7 +44,7 @@ for i in core mta store ldap snmp logger apache spell; do
       first=2
     done
   else
-	  pkgs=`find /Library/Receipts/zimbra-${i}* -type d -maxdepth 0 | sort -r`
+	  pkgs=`find /Library/Receipts/zmail-${i}* -type d -maxdepth 0 | sort -r`
 	  first=1
     if [ x"$pkg" = "x" ]; then
       echo "not found."
@@ -72,7 +72,7 @@ if [ "x$VER" != "x" ]; then
   fi
   if [ $MAJOR -gt 3 -a "x$REL" != "x3.2.0_M2" ]; then
     #check for a license file
-    if [ ! -e "/opt/zimbra/conf/ZCSLicense.xml" -a ! -e "/opt/zimbra/conf/ZCSLicense-Trial.xml" ]; then
+    if [ ! -e "/opt/zmail/conf/ZCSLicense.xml" -a ! -e "/opt/zmail/conf/ZCSLicense-Trial.xml" ]; then
       exit 112
     fi
   fi

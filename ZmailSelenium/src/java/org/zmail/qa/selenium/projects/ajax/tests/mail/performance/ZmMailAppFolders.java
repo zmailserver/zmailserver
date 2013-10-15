@@ -14,21 +14,21 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.performance;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.performance;
 
 import java.util.HashMap;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.framework.util.performance.PerfKey;
-import com.zimbra.qa.selenium.framework.util.performance.PerfMetrics;
-import com.zimbra.qa.selenium.framework.util.performance.PerfToken;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.PageLogin.Locators;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.framework.util.performance.PerfKey;
+import org.zmail.qa.selenium.framework.util.performance.PerfMetrics;
+import org.zmail.qa.selenium.framework.util.performance.PerfToken;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.PageLogin.Locators;
 
 
 
@@ -42,8 +42,8 @@ public class ZmMailAppFolders extends AjaxCommonTest {
 		super.startingAccountPreferences = new HashMap<String, String>() {
 			private static final long serialVersionUID = 7525760124523255182L;
 		{
-			put("zimbraPrefGroupMailBy", "message");
-			put("zimbraPrefMessageViewHtmlPreferred", "TRUE");
+			put("zmailPrefGroupMailBy", "message");
+			put("zmailPrefMessageViewHtmlPreferred", "TRUE");
 		}};
 		
 	}
@@ -53,16 +53,16 @@ public class ZmMailAppFolders extends AjaxCommonTest {
 	public void ZmMailAppFolder_01() throws HarnessException {
 
 		// Create a folder
-		FolderItem root = FolderItem.importFromSOAP(ZimbraAccount.AccountZWC(), FolderItem.SystemFolder.UserRoot);
-		ZimbraAccount.AccountZWC().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
-	                	"<folder name='folder"+ ZimbraSeleniumProperties.getUniqueString() + "' view='message' l='"+ root.getId() +"'/>" +
+		FolderItem root = FolderItem.importFromSOAP(ZmailAccount.AccountZWC(), FolderItem.SystemFolder.UserRoot);
+		ZmailAccount.AccountZWC().soapSend(
+				"<CreateFolderRequest xmlns='urn:zmailMail'>" +
+	                	"<folder name='folder"+ ZmailSeleniumProperties.getUniqueString() + "' view='message' l='"+ root.getId() +"'/>" +
 	                "</CreateFolderRequest>");
 
 
 		// Fill out the login page
-		app.zPageLogin.zSetLoginName(ZimbraAccount.AccountZWC().EmailAddress);
-		app.zPageLogin.zSetLoginPassword(ZimbraAccount.AccountZWC().Password);
+		app.zPageLogin.zSetLoginName(ZmailAccount.AccountZWC().EmailAddress);
+		app.zPageLogin.zSetLoginPassword(ZmailAccount.AccountZWC().Password);
 
 		PerfToken token = PerfMetrics.startTimestamp(PerfKey.ZmMailAppOverviewPanel, "Load the mail app, message view, 1 folder");
 
@@ -82,18 +82,18 @@ public class ZmMailAppFolders extends AjaxCommonTest {
 	public void ZmMailAppFolder_02() throws HarnessException {
 
 		// Create 100 folders
-		FolderItem root = FolderItem.importFromSOAP(ZimbraAccount.AccountZWC(), FolderItem.SystemFolder.UserRoot);
+		FolderItem root = FolderItem.importFromSOAP(ZmailAccount.AccountZWC(), FolderItem.SystemFolder.UserRoot);
 		for (int i = 0; i < 100; i++) {
-			ZimbraAccount.AccountZWC().soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
-							"<folder name='folder"+ ZimbraSeleniumProperties.getUniqueString() + "' view='message' l='"+ root.getId() +"'/>" +
+			ZmailAccount.AccountZWC().soapSend(
+					"<CreateFolderRequest xmlns='urn:zmailMail'>" +
+							"<folder name='folder"+ ZmailSeleniumProperties.getUniqueString() + "' view='message' l='"+ root.getId() +"'/>" +
 					"</CreateFolderRequest>");
 		}
 
 
 		// Fill out the login page
-		app.zPageLogin.zSetLoginName(ZimbraAccount.AccountZWC().EmailAddress);
-		app.zPageLogin.zSetLoginPassword(ZimbraAccount.AccountZWC().Password);
+		app.zPageLogin.zSetLoginName(ZmailAccount.AccountZWC().EmailAddress);
+		app.zPageLogin.zSetLoginPassword(ZmailAccount.AccountZWC().Password);
 
 		PerfToken token = PerfMetrics.startTimestamp(PerfKey.ZmMailAppOverviewPanel, "Load the mail app, message view, 100 folders");
 

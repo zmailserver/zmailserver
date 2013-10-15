@@ -12,15 +12,15 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.extension;
+package org.zmail.cs.offline.extension;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.convert.OfflineConvertHandler;
-import com.zimbra.cs.extension.ExtensionDispatcherServlet;
-import com.zimbra.cs.extension.ExtensionException;
-import com.zimbra.cs.extension.ZimbraExtension;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.convert.OfflineConvertHandler;
+import org.zmail.cs.extension.ExtensionDispatcherServlet;
+import org.zmail.cs.extension.ExtensionException;
+import org.zmail.cs.extension.ZmailExtension;
 
-public class OfflineExtension implements ZimbraExtension {
+public class OfflineExtension implements ZmailExtension {
 
     @Override
     public String getName() {

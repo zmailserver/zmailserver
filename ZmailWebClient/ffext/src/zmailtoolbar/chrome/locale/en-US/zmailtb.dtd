@@ -6,13 +6,13 @@
 <!ENTITY zmtb.snoozemenu.45 "45 Minutes">
 <!ENTITY zmtb.snoozemenu.60 "60 Minutes">
 
-<!ENTITY zmtb.zimbraactions.openadvanced "Open Zimbra Mail(Advanced)">
-<!ENTITY zmtb.zimbraactions.openadvanced.accesskey "A">
-<!ENTITY zmtb.zimbraactions.openlite "Open Zimbra Mail(Lite)">
-<!ENTITY zmtb.zimbraactions.openlite.accesskey "S">
-<!ENTITY zmtb.zimbraactions.preferences "Preferences...">
-<!ENTITY zmtb.zimbraactions.preferences.accesskey "P">
-<!ENTITY zmtb.zimbraactions.refresh "Refresh">
+<!ENTITY zmtb.zmailactions.openadvanced "Open Zmail Mail(Advanced)">
+<!ENTITY zmtb.zmailactions.openadvanced.accesskey "A">
+<!ENTITY zmtb.zmailactions.openlite "Open Zmail Mail(Lite)">
+<!ENTITY zmtb.zmailactions.openlite.accesskey "S">
+<!ENTITY zmtb.zmailactions.preferences "Preferences...">
+<!ENTITY zmtb.zmailactions.preferences.accesskey "P">
+<!ENTITY zmtb.zmailactions.refresh "Refresh">
 
 <!ENTITY zmtb.searchlist.savedsearches "Saved Searches">
 <!ENTITY zmtb.searchlist.tags "Tags">
@@ -203,10 +203,10 @@
 <!ENTITY zmtb.taskactions.linktolist.create "Link to Calendar">
 
 <!-- Preferences -->
-<!ENTITY zmtb.preferences.prefwintitle "Zimbra Toolbar Preferences">
+<!ENTITY zmtb.preferences.prefwintitle "Zmail Toolbar Preferences">
 <!ENTITY zmtb.preferences.prefpanetitle "">
 <!ENTITY zmtb.preferences.connectionsettings "Connection Settings:">
-<!ENTITY zmtb.preferences.serverurl "URL of Zimbra Server:">
+<!ENTITY zmtb.preferences.serverurl "URL of Zmail Server:">
 <!ENTITY zmtb.preferences.serverex "Ex: https://mail.example.com">
 <!ENTITY zmtb.preferences.username "Username:">
 <!ENTITY zmtb.preferences.emailex "Ex: user@example.com">

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.webClient.servlet;
+package org.zmail.webClient.servlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

@@ -13,12 +13,12 @@
  * ***** END LICENSE BLOCK *****
 --%>
 <%@ tag body-content="empty" %>
-<%@ attribute name="mailbox" rtexprvalue="true" required="true" type="com.zimbra.cs.taglib.bean.ZMailboxBean" %>
+<%@ attribute name="mailbox" rtexprvalue="true" required="true" type="org.zmail.cs.taglib.bean.ZMailboxBean" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
-<%@ taglib prefix="app" uri="com.zimbra.htmlclient" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
+<%@ taglib prefix="app" uri="org.zmail.htmlclient" %>
 
 <table width="100%">
     <tr>
@@ -86,7 +86,7 @@
                     <label><fmt:message key="optionsAccountName"/>:</label>
                 </td>
                 <td>
-                    <input id="zimbraPrefIdentityName" size="40" type="text" name='zimbraPrefIdentityName' 
+                    <input id="zmailPrefIdentityName" size="40" type="text" name='zmailPrefIdentityName' 
 						value="${fn:escapeXml(mailbox.defaultIdentity.name)}">
                 </td>
             </tr>
@@ -105,11 +105,11 @@
                     <table>
                         <tr>
                             <td>
-                                <input id="mailFrom" size="30" type="text" name='zimbraPrefFromDisplay' 
+                                <input id="mailFrom" size="30" type="text" name='zmailPrefFromDisplay' 
 									value="${fn:escapeXml(mailbox.defaultIdentity.fromDisplay)}">
                             </td>
                             <td style='padding-left:10px'>
-                                <select name="zimbraPrefFromAddress">
+                                <select name="zmailPrefFromAddress">
                                     <c:set var="fromAddr" value="${fn:toLowerCase(mailbox.defaultIdentity.fromAddress)}"/>
                                     <c:forEach var="address" items="${mailbox.accountInfo.emailAddresses}">
                                         <option value="${fn:escapeXml(address)}"
@@ -139,7 +139,7 @@
                     <table>
                         <tr>
                             <td>
-								<input type="checkbox" id="REPLYCHECKED" name='zimbraPrefReplyToEnabled' value="TRUE" 
+								<input type="checkbox" id="REPLYCHECKED" name='zmailPrefReplyToEnabled' value="TRUE" 
 									<c:if test="${mailbox.defaultIdentity.replyToEnabled}">checked</c:if>>
 							</td>
                             <td style='padding-left:5px' nowrap align=right>
@@ -155,11 +155,11 @@
                     <table>
                         <tr>
                             <td>
-                                <input id="replyToDisplay" size="30" type="text" name='zimbraPrefReplyToDisplay' 
+                                <input id="replyToDisplay" size="30" type="text" name='zmailPrefReplyToDisplay' 
 									value="${fn:escapeXml(mailbox.defaultIdentity.replyToDisplay)}">
                             </td>
                             <td style='padding-left:10px'>
-                                <input id="replyToAddress" size="30" type="text" name='zimbraPrefReplyToAddress' 
+                                <input id="replyToAddress" size="30" type="text" name='zmailPrefReplyToAddress' 
 									value="${fn:escapeXml(mailbox.defaultIdentity.replyToAddress)}">
                             </td>
                         </tr>
@@ -174,7 +174,7 @@
                     </table>
                 </td>
             </tr>
-            <c:set var="maxSigs" value="${mailbox.accountInfo.attrs.zimbraSignatureMaxNumEntries[0]}"/>
+            <c:set var="maxSigs" value="${mailbox.accountInfo.attrs.zmailSignatureMaxNumEntries[0]}"/>
             <c:if test="${maxSigs ne 0}">
                 <tr><td colspan="2"><hr></td></tr>
                 <tr>
@@ -182,7 +182,7 @@
                         <label for="signatureSelect"><fmt:message key="optionsAccountSignature"/>:</label>
                     </td>
                     <td>
-                        <select name="zimbraPrefDefaultSignatureId" id="signatureSelect">
+                        <select name="zmailPrefDefaultSignatureId" id="signatureSelect">
                             <c:set var="signatureId" value="${mailbox.defaultIdentity.signatureId}"/>
                             <option value="">
                                 <fmt:message key="optionsAccountNoSignature"/>

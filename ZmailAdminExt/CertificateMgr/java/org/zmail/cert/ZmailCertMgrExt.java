@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cert;
+package org.zmail.cert;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -24,18 +24,18 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.extension.ZimbraExtension;
-import com.zimbra.soap.SoapServlet;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.extension.ZmailExtension;
+import org.zmail.soap.SoapServlet;
 
 
-public class ZimbraCertMgrExt implements ZimbraExtension {
-    public static final String EXTENSION_NAME_CERTMGR = "com_zimbra_cert_manager";
+public class ZmailCertMgrExt implements ZmailExtension {
+    public static final String EXTENSION_NAME_CERTMGR = "org_zmail_cert_manager";
     
     //Remote commands
     public static final String GET_STAGED_CERT_CMD = "zmcertmgr viewstagedcrt" ;
@@ -47,20 +47,20 @@ public class ZimbraCertMgrExt implements ZimbraExtension {
     public static final String VERIFY_CRTKEY_CMD = "zmcertmgr verifycrtkey" ;
     public static final String VERIFY_COMM_CRTKEY_CMD = "zmcertmgr verifycrt" ;
     public static final String VERIFY_CRTCHAIN_CMD = "zmcertmgr verifycrtchain" ;
-    public static final String UPLOADED_CRT_FILE = LC.mailboxd_directory.value() + "/webapps/zimbraAdmin/tmp/current.crt" ;
-    public static final String UPLOADED_CRT_CHAIN_FILE = LC.mailboxd_directory.value() + "/webapps/zimbraAdmin/tmp/current_chain.crt" ;
-    public static final String SAVED_COMM_KEY_FROM_LDAP = LC.mailboxd_directory.value() + "/webapps/zimbraAdmin/tmp/current_comm.key" ;
-    //public static final String COMM_CRT_KEY_FILE = LC.zimbra_home.value() + "/ssl/zimbra/commercial/commercial.key" ;
+    public static final String UPLOADED_CRT_FILE = LC.mailboxd_directory.value() + "/webapps/zmailAdmin/tmp/current.crt" ;
+    public static final String UPLOADED_CRT_CHAIN_FILE = LC.mailboxd_directory.value() + "/webapps/zmailAdmin/tmp/current_chain.crt" ;
+    public static final String SAVED_COMM_KEY_FROM_LDAP = LC.mailboxd_directory.value() + "/webapps/zmailAdmin/tmp/current_comm.key" ;
+    //public static final String COMM_CRT_KEY_FILE = LC.zmail_home.value() + "/ssl/zmail/commercial/commercial.key" ;
     // put vefified certificate and key to tempoaray dir
-    public static final String COMM_CRT_KEY_DIR = LC.mailboxd_directory.value() + "/webapps/zimbraAdmin/tmp";
+    public static final String COMM_CRT_KEY_DIR = LC.mailboxd_directory.value() + "/webapps/zmailAdmin/tmp";
     public static final String COMM_CRT_KEY_FILE_NAME = "commercial.key";
     public static final String COMM_CRT_FILE_NAME = "commercial.crt";
     public static final String COMM_CRT_CA_FILE_NAME = "commercial_ca.crt";
 
 
     public static final String ALL_SERVERS = "--- All Servers ---" ;
-    public static final String A_zimbraSSLPrivateKey = "zimbraSSLPrivateKey" ;
-    public static final String A_zimbraSSLCertificate = "zimbraSSLCertificate" ;
+    public static final String A_zmailSSLPrivateKey = "zmailSSLPrivateKey" ;
+    public static final String A_zmailSSLCertificate = "zmailSSLCertificate" ;
     public void destroy() {
     }
 
@@ -69,7 +69,7 @@ public class ZimbraCertMgrExt implements ZimbraExtension {
     }
 
     public void init() throws ServiceException {
-        SoapServlet.addService("AdminServlet", new ZimbraCertMgrService());
+        SoapServlet.addService("AdminServlet", new ZmailCertMgrService());
     }
 
 }

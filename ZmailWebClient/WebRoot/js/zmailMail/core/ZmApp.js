@@ -16,14 +16,14 @@
 /**
  * @overview
  *
- * This file defines a Zimbra Application class.
+ * This file defines a Zmail Application class.
  *
  */
 
 /**
  * Creates the application.
  * @class
- * This object represents a Zimbra Application. This class is a base class for application classes.
+ * This object represents a Zmail Application. This class is a base class for application classes.
  * "App" is a useful abstraction for a set of related functionality, such as mail,
  * address book, or calendar. Looked at another way, an app is a collection of one or more controllers.
  * 
@@ -574,7 +574,7 @@ function(overviewId) {
 /**
  * Gets the overview id of the current {@link ZmOverview}, if any.
  *
- * @param	{ZmZimbraAccount}	account		the account
+ * @param	{ZmZmailAccount}	account		the account
  * @return	{String}	the id
  */
 ZmApp.prototype.getOverviewId =

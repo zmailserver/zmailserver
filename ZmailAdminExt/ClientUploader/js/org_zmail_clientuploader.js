@@ -1,5 +1,5 @@
-if(appNewUI && ZaSettings && ZaSettings.EnabledZimlet["com_zimbra_clientuploader"]){
-    if(window.console && window.console.log) console.log("Start loading com_zimbra_clientuploader.js");
+if(appNewUI && ZaSettings && ZaSettings.EnabledZimlet["org_zmail_clientuploader"]){
+    if(window.console && window.console.log) console.log("Start loading org_zmail_clientuploader.js");
     function ZaClientUploader() {
         ZaItem.call(this,"ZaClientUpload");
         this._init();
@@ -25,8 +25,8 @@ if(appNewUI && ZaSettings && ZaSettings.EnabledZimlet["com_zimbra_clientuploader
     ZaClientUploader.STATUS_FAILED = 3;
 
     if(ZaSettings) {
-        ZaSettings.Client_UPLOAD_VIEW = "zimbraClientUploadView";
-        ZaSettings.ALL_UI_COMPONENTS.push({ value: ZaSettings.Client_UPLOAD_VIEW, label: com_zimbra_clientuploader.UI_Comp_clientUpload });
+        ZaSettings.Client_UPLOAD_VIEW = "zmailClientUploadView";
+        ZaSettings.ALL_UI_COMPONENTS.push({ value: ZaSettings.Client_UPLOAD_VIEW, label: org_zmail_clientuploader.UI_Comp_clientUpload });
         ZaSettings.OVERVIEW_TOOLS_ITEMS.push(ZaSettings.Client_UPLOAD_VIEW);
         ZaSettings.VIEW_RIGHTS [ZaSettings.Client_UPLOAD_VIEW] = "adminConsoleClientUploadRights";
     }
@@ -47,13 +47,13 @@ if(appNewUI && ZaSettings && ZaSettings.EnabledZimlet["com_zimbra_clientuploader
     ZaItem.initMethods["ZaClientUploader"].push(ZaClientUploader.initMethod);
 
 
-    ZaZimbraAdmin._CLIENT_UPLOADER_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
+    ZaZmailAdmin._CLIENT_UPLOADER_VIEW = ZaZmailAdmin.VIEW_INDEX++;
 
     ZaApp.prototype.getClientUploadViewController =
         function() {
-            if (this._controllers[ZaZimbraAdmin._CLIENT_UPLOADER_VIEW] == null)
-                this._controllers[ZaZimbraAdmin._CLIENT_UPLOADER_VIEW] = new ZaClientUploadController(this._appCtxt, this._container);
-            return this._controllers[ZaZimbraAdmin._CLIENT_UPLOADER_VIEW];
+            if (this._controllers[ZaZmailAdmin._CLIENT_UPLOADER_VIEW] == null)
+                this._controllers[ZaZmailAdmin._CLIENT_UPLOADER_VIEW] = new ZaClientUploadController(this._appCtxt, this._container);
+            return this._controllers[ZaZmailAdmin._CLIENT_UPLOADER_VIEW];
         }
 
     ZaClientUploader.versionCheckTreeListener = function (ev) {
@@ -75,12 +75,12 @@ if(appNewUI && ZaSettings && ZaSettings.EnabledZimlet["com_zimbra_clientuploader
             var ti = new ZaTreeItemData({
                 parent:parentPath,
                 id:ZaId.getTreeItemId(ZaId.PANEL_APP,"magHV",null, "ClientUploadHV"),
-                text: com_zimbra_clientuploader.OVP_clientUpload,
-                mappingId: ZaZimbraAdmin._CLIENT_UPLOADER_VIEW});
+                text: org_zmail_clientuploader.OVP_clientUpload,
+                mappingId: ZaZmailAdmin._CLIENT_UPLOADER_VIEW});
             tree.addTreeItemData(ti);
 
             if(ZaOverviewPanelController.overviewTreeListeners) {
-                ZaOverviewPanelController.overviewTreeListeners[ZaZimbraAdmin._CLIENT_UPLOADER_VIEW] = ZaClientUploader.versionCheckTreeListener;
+                ZaOverviewPanelController.overviewTreeListeners[ZaZmailAdmin._CLIENT_UPLOADER_VIEW] = ZaClientUploader.versionCheckTreeListener;
             }
         }
     }

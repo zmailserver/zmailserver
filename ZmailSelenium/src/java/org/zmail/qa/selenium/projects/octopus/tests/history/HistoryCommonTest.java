@@ -14,18 +14,18 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.octopus.tests.history;
+package org.zmail.qa.selenium.projects.octopus.tests.history;
 
 import org.testng.annotations.*;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.octopus.core.OctopusCommonTest;
-import com.zimbra.qa.selenium.projects.octopus.ui.PageHistory;
-import static com.zimbra.qa.selenium.projects.octopus.ui.PageHistory.*;
-import static com.zimbra.qa.selenium.projects.octopus.ui.PageHistory.CONSTANTS.*;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.octopus.core.OctopusCommonTest;
+import org.zmail.qa.selenium.projects.octopus.ui.PageHistory;
+import static org.zmail.qa.selenium.projects.octopus.ui.PageHistory.*;
+import static org.zmail.qa.selenium.projects.octopus.ui.PageHistory.CONSTANTS.*;
 
 import java.util.ArrayList;
 
@@ -64,14 +64,14 @@ public class HistoryCommonTest extends OctopusCommonTest {
 	protected static String mountAdminFolderName = null;
 	    
     
-	protected static ZimbraAccount readGrantee = null;
-	protected static ZimbraAccount readWriteGrantee = null;
-	protected static ZimbraAccount adminGrantee = null;
+	protected static ZmailAccount readGrantee = null;
+	protected static ZmailAccount readWriteGrantee = null;
+	protected static ZmailAccount adminGrantee = null;
 	   
 
-	protected static ZimbraAccount readGranter = null;
-	protected static ZimbraAccount readWriteGranter = null;
-	protected static ZimbraAccount adminGranter = null;
+	protected static ZmailAccount readGranter = null;
+	protected static ZmailAccount readWriteGranter = null;
+	protected static ZmailAccount adminGranter = null;
 
 	public HistoryCommonTest() {
 		// test starts at the History tab
@@ -117,7 +117,7 @@ public class HistoryCommonTest extends OctopusCommonTest {
         		   app.zGetActiveAccount(), SystemFolder.Briefcase);
            
            SleepUtil.sleepSmall();
-    	   comment = "Comment " + ZimbraSeleniumProperties.getUniqueString();    	   
+    	   comment = "Comment " + ZmailSeleniumProperties.getUniqueString();    	   
     	   newName = "New Name " + app.zGetActiveAccount().getPref("displayName") 
            		   + fileName.substring(fileName.indexOf("."),fileName.length());
 
@@ -198,9 +198,9 @@ public class HistoryCommonTest extends OctopusCommonTest {
        readWriteFolder = createFolderViaSoap(readWriteGranter);	 	  	            		
        adminFolder = createFolderViaSoap(adminGranter);	 	  	            		
 
-	   mountReadFolderName = "Mount Read " + ZimbraSeleniumProperties.getUniqueString();
-	   mountReadWriteFolderName = "Mount Read Write " + ZimbraSeleniumProperties.getUniqueString();
-	   mountAdminFolderName = "Mount Admin " + ZimbraSeleniumProperties.getUniqueString();
+	   mountReadFolderName = "Mount Read " + ZmailSeleniumProperties.getUniqueString();
+	   mountReadWriteFolderName = "Mount Read Write " + ZmailSeleniumProperties.getUniqueString();
+	   mountAdminFolderName = "Mount Admin " + ZmailSeleniumProperties.getUniqueString();
 
 	   mountFolderViaSoap(readGranter, app.zGetActiveAccount(), readFolder, SHARE_AS_READ, mainFolder, mountReadFolderName);
 	   SleepUtil.sleepSmall();

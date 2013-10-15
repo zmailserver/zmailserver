@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.mail;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.mail;
 
 import org.testng.annotations.*;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.DialogCreateFolder;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.*;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.DialogCreateFolder;
 
 
 public class MoveMessage extends PrefGroupMailByMessageTest {
@@ -55,27 +55,27 @@ public class MoveMessage extends PrefGroupMailByMessageTest {
 			groups = { "smoke" })
 	public void MoveMail_01() throws HarnessException {
 
-		String subject = "subject"+ ZimbraSeleniumProperties.getUniqueString();
-		String foldername = "folder"+ ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject"+ ZmailSeleniumProperties.getUniqueString();
+		String foldername = "folder"+ ZmailSeleniumProperties.getUniqueString();
 
 		// Create a subfolder to move the message into
 		// i.e. Inbox/subfolder
 		//
 		FolderItem inbox = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Inbox);
 		app.zGetActiveAccount().soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+					"<CreateFolderRequest xmlns='urn:zmailMail'>" +
 						"<folder name='" + foldername +"' l='"+ inbox.getId() +"'/>" +
 					"</CreateFolderRequest>");
 		FolderItem subfolder = FolderItem.importFromSOAP(app.zGetActiveAccount(), foldername);
 
 		// Send a message to the account
-		ZimbraAccount.AccountA().soapSend(
-					"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+		ZmailAccount.AccountA().soapSend(
+					"<SendMsgRequest xmlns='urn:zmailMail'>" +
 						"<m>" +
 							"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 							"<su>"+ subject +"</su>" +
 							"<mp ct='text/plain'>" +
-								"<content>content"+ ZimbraSeleniumProperties.getUniqueString() +"</content>" +
+								"<content>content"+ ZmailSeleniumProperties.getUniqueString() +"</content>" +
 							"</mp>" +
 						"</m>" +
 					"</SendMsgRequest>");
@@ -95,7 +95,7 @@ public class MoveMessage extends PrefGroupMailByMessageTest {
 
 		// Get the message, make sure it is in the correct folder
 		app.zGetActiveAccount().soapSend(
-				"<GetMsgRequest xmlns='urn:zimbraMail'>" +
+				"<GetMsgRequest xmlns='urn:zmailMail'>" +
 					"<m id='" + mail.getId() +"'/>" +
 				"</GetMsgRequest>");
 		String folderId = app.zGetActiveAccount().soapSelectValue("//mail:m", "l");
@@ -108,27 +108,27 @@ public class MoveMessage extends PrefGroupMailByMessageTest {
 			groups = { "functional" })
 	public void MoveMail_02() throws HarnessException {
 		
-		String subject = "subject"+ ZimbraSeleniumProperties.getUniqueString();
-		String foldername = "folder"+ ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject"+ ZmailSeleniumProperties.getUniqueString();
+		String foldername = "folder"+ ZmailSeleniumProperties.getUniqueString();
 		
 		// Create a subfolder to move the message into
 		// i.e. Inbox/subfolder
 		//
 		FolderItem inbox = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Inbox);
 		app.zGetActiveAccount().soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+					"<CreateFolderRequest xmlns='urn:zmailMail'>" +
 						"<folder name='" + foldername +"' l='"+ inbox.getId() +"'/>" +
 					"</CreateFolderRequest>");
 		FolderItem subfolder = FolderItem.importFromSOAP(app.zGetActiveAccount(), foldername);
 
 		// Send a message to the account
-		ZimbraAccount.AccountA().soapSend(
-					"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+		ZmailAccount.AccountA().soapSend(
+					"<SendMsgRequest xmlns='urn:zmailMail'>" +
 						"<m>" +
 							"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 							"<su>"+ subject +"</su>" +
 							"<mp ct='text/plain'>" +
-								"<content>content"+ ZimbraSeleniumProperties.getUniqueString() +"</content>" +
+								"<content>content"+ ZmailSeleniumProperties.getUniqueString() +"</content>" +
 							"</mp>" +
 						"</m>" +
 					"</SendMsgRequest>");
@@ -154,7 +154,7 @@ public class MoveMessage extends PrefGroupMailByMessageTest {
 
 		// Get the message, make sure it is in the correct folder
 		app.zGetActiveAccount().soapSend(
-				"<GetMsgRequest xmlns='urn:zimbraMail'>" +
+				"<GetMsgRequest xmlns='urn:zmailMail'>" +
 					"<m id='" + mail.getId() +"'/>" +
 				"</GetMsgRequest>");
 		String folderId = app.zGetActiveAccount().soapSelectValue("//mail:m", "l");
@@ -168,16 +168,16 @@ public class MoveMessage extends PrefGroupMailByMessageTest {
 			groups = { "functional" })
 	public void MoveMail_03() throws HarnessException {
 		
-		String subject = "subject"+ ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject"+ ZmailSeleniumProperties.getUniqueString();
 		
 		// Send a message to the account
-		ZimbraAccount.AccountA().soapSend(
-					"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+		ZmailAccount.AccountA().soapSend(
+					"<SendMsgRequest xmlns='urn:zmailMail'>" +
 						"<m>" +
 							"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 							"<su>"+ subject +"</su>" +
 							"<mp ct='text/plain'>" +
-								"<content>content"+ ZimbraSeleniumProperties.getUniqueString() +"</content>" +
+								"<content>content"+ ZmailSeleniumProperties.getUniqueString() +"</content>" +
 							"</mp>" +
 						"</m>" +
 					"</SendMsgRequest>");
@@ -198,7 +198,7 @@ public class MoveMessage extends PrefGroupMailByMessageTest {
 
 		// Get the message, make sure it is in the correct folder
 		app.zGetActiveAccount().soapSend(
-				"<GetMsgRequest xmlns='urn:zimbraMail'>" +
+				"<GetMsgRequest xmlns='urn:zmailMail'>" +
 					"<m id='" + mail.getId() +"'/>" +
 				"</GetMsgRequest>");
 		String folderId = app.zGetActiveAccount().soapSelectValue("//mail:m", "l");
@@ -213,15 +213,15 @@ public class MoveMessage extends PrefGroupMailByMessageTest {
 			groups = { "functional" })
 	public void MoveMail_04() throws HarnessException {
 		
-		String subject = "subject"+ ZimbraSeleniumProperties.getUniqueString();
-		String foldername = "folder"+ ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject"+ ZmailSeleniumProperties.getUniqueString();
+		String foldername = "folder"+ ZmailSeleniumProperties.getUniqueString();
 		
 		// Create a subfolder to move the message into
 		// i.e. Inbox/subfolder
 		//
 		FolderItem inbox = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Inbox);
 		app.zGetActiveAccount().soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+					"<CreateFolderRequest xmlns='urn:zmailMail'>" +
 						"<folder name='" + foldername +"' l='"+ inbox.getId() +"'/>" +
 					"</CreateFolderRequest>");
 
@@ -229,7 +229,7 @@ public class MoveMessage extends PrefGroupMailByMessageTest {
 
 		// Send a message to the account
 		app.zGetActiveAccount().soapSend(
-				"<AddMsgRequest xmlns='urn:zimbraMail'>" +
+				"<AddMsgRequest xmlns='urn:zmailMail'>" +
             		"<m l='"+ subfolder.getId() +"'>" +
                 		"<content>From: foo@foo.com\n" +
 "To: foo@foo.com \n" +
@@ -263,7 +263,7 @@ public class MoveMessage extends PrefGroupMailByMessageTest {
 
 		// Get the message, make sure it is in the correct folder
 		app.zGetActiveAccount().soapSend(
-				"<GetMsgRequest xmlns='urn:zimbraMail'>" +
+				"<GetMsgRequest xmlns='urn:zmailMail'>" +
 					"<m id='" + mail.getId() +"'/>" +
 				"</GetMsgRequest>");
 		String folderId = app.zGetActiveAccount().soapSelectValue("//mail:m", "l");
@@ -276,20 +276,20 @@ public class MoveMessage extends PrefGroupMailByMessageTest {
 			groups = { "functional" })
 	public void MoveMail_05() throws HarnessException {
 		
-		String subject = "subject"+ ZimbraSeleniumProperties.getUniqueString();
-		String foldername = "folder"+ ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject"+ ZmailSeleniumProperties.getUniqueString();
+		String foldername = "folder"+ ZmailSeleniumProperties.getUniqueString();
 		
 		FolderItem inbox = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Inbox);
 
 
 		// Send a message to the account
-		ZimbraAccount.AccountA().soapSend(
-					"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+		ZmailAccount.AccountA().soapSend(
+					"<SendMsgRequest xmlns='urn:zmailMail'>" +
 						"<m>" +
 							"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 							"<su>"+ subject +"</su>" +
 							"<mp ct='text/plain'>" +
-								"<content>content"+ ZimbraSeleniumProperties.getUniqueString() +"</content>" +
+								"<content>content"+ ZmailSeleniumProperties.getUniqueString() +"</content>" +
 							"</mp>" +
 						"</m>" +
 					"</SendMsgRequest>");
@@ -321,7 +321,7 @@ public class MoveMessage extends PrefGroupMailByMessageTest {
 
 		// Get the message, make sure it is in the correct folder
 		app.zGetActiveAccount().soapSend(
-				"<GetMsgRequest xmlns='urn:zimbraMail'>" +
+				"<GetMsgRequest xmlns='urn:zmailMail'>" +
 					"<m id='" + mail.getId() +"'/>" +
 				"</GetMsgRequest>");
 		String folderId = app.zGetActiveAccount().soapSelectValue("//mail:m", "l");

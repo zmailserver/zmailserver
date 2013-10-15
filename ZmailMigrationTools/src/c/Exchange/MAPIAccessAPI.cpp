@@ -19,8 +19,8 @@
 #include "MAPIAccessAPI.h"
 #include "Logger.h"
 
-Zimbra::MAPI::MAPISession *MAPIAccessAPI::m_zmmapisession = NULL;
-Zimbra::MAPI::MAPIStore *MAPIAccessAPI::m_defaultStore = NULL;
+Zmail::MAPI::MAPISession *MAPIAccessAPI::m_zmmapisession = NULL;
+Zmail::MAPI::MAPIStore *MAPIAccessAPI::m_defaultStore = NULL;
 std::wstring MAPIAccessAPI::m_strTargetProfileName = L"";
 std::wstring MAPIAccessAPI::m_strExchangeHostName = L"";
 bool MAPIAccessAPI::m_bSingleMailBoxMigration = false;
@@ -36,7 +36,7 @@ MAPIAccessAPI::MAPIAccessAPI(wstring strUserName, wstring strUserAccount): m_use
         m_strUserName = strUserName;
     m_strUserAccount = strUserAccount;
 
-    Zimbra::Mapi::Memory::SetMemAllocRoutines(NULL, MAPIAllocateBuffer, MAPIAllocateMore,
+    Zmail::Mapi::Memory::SetMemAllocRoutines(NULL, MAPIAllocateBuffer, MAPIAllocateMore,
         MAPIFreeBuffer);
 	
     InitFoldersToSkip();
@@ -79,7 +79,7 @@ bool MAPIAccessAPI::SkipFolder(ExchangeSpecialFolderId exfid)
 LONG WINAPI MAPIAccessAPI::UnhandledExceptionFilter(LPEXCEPTION_POINTERS pExPtrs)
 {
 	LPWSTR strOutMessage=NULL;
-	LONG lRetVal = Zimbra::Util::MiniDumpGenerator::GenerateCoreDump(pExPtrs,strOutMessage);
+	LONG lRetVal = Zmail::Util::MiniDumpGenerator::GenerateCoreDump(pExPtrs,strOutMessage);
 	WCHAR pwszTempPath[MAX_PATH];
 	GetTempPath(MAX_PATH, pwszTempPath);
     wstring strMsg;
@@ -88,19 +88,19 @@ LONG WINAPI MAPIAccessAPI::UnhandledExceptionFilter(LPEXCEPTION_POINTERS pExPtrs
        pwszTempPath);
 	//MessageBox(NULL, strbuf, _T("Runtime Error"), MB_OK);
 	dloge(strbuf);
-	Zimbra::Util::FreeString(strOutMessage);
+	Zmail::Util::FreeString(strOutMessage);
     return lRetVal;
 }
 
 void MAPIAccessAPI::internalInit()
 {
 	//Get App dir
-	wstring appdir= Zimbra::Util::GetAppDir();
+	wstring appdir= Zmail::Util::GetAppDir();
 	//instantiate dump generator
 	LPWSTR pwszTempPath = new WCHAR[MAX_PATH];
 	wcscpy(pwszTempPath,appdir.c_str());
-	Zimbra::Util::AppendString(pwszTempPath,L"dbghelp.dll");
-   Zimbra::Util::MiniDumpGenerator::Initialize(pwszTempPath);
+	Zmail::Util::AppendString(pwszTempPath,L"dbghelp.dll");
+   Zmail::Util::MiniDumpGenerator::Initialize(pwszTempPath);
 
 	SetUnhandledExceptionFilter(UnhandledExceptionFilter);
 	delete []pwszTempPath;
@@ -114,10 +114,10 @@ LPCWSTR MAPIAccessAPI::InitGlobalSessionAndStore(LPCWSTR lpcwstrMigTarget)
 	{
 		return _InitGlobalSessionAndStore(lpcwstrMigTarget);
 	}
-	__except(Zimbra::Util::MiniDumpGenerator::GenerateCoreDump(GetExceptionInformation(),exceptionmsg))
+	__except(Zmail::Util::MiniDumpGenerator::GenerateCoreDump(GetExceptionInformation(),exceptionmsg))
 	{
 		dloge(exceptionmsg);
-		Zimbra::Util::FreeString(exceptionmsg);
+		Zmail::Util::FreeString(exceptionmsg);
 	}
 	return NULL;
 }
@@ -127,11 +127,11 @@ LPCWSTR MAPIAccessAPI::_InitGlobalSessionAndStore(LPCWSTR lpcwstrMigTarget)
     LPWSTR lpwstrStatus = NULL;
 	LPWSTR lpwstrRetVal= NULL;
 	// If part of domain, get domain name
-    m_bHasJoinedDomain = Zimbra::MAPI::Util::GetDomainName(m_strExchangeHostName);
+    m_bHasJoinedDomain = Zmail::MAPI::Util::GetDomainName(m_strExchangeHostName);
 	try
     {
         // Logon into target profile
-        m_zmmapisession = new Zimbra::MAPI::MAPISession();
+        m_zmmapisession = new Zmail::MAPI::MAPISession();
 
         // Detreming if its a profile or PST by extension
         wstring strMigTarget = lpcwstrMigTarget;
@@ -146,9 +146,9 @@ LPCWSTR MAPIAccessAPI::_InitGlobalSessionAndStore(LPCWSTR lpcwstrMigTarget)
             WtoA((LPWSTR)lpcwstrMigTarget, lpstrMigTarget);
 
             // delete any left over profiles from previous migration
-            Zimbra::MAPI::Util::DeleteAlikeProfiles(
-                Zimbra::MAPI::Util::PSTMIG_PROFILE_PREFIX.c_str());
-            string strPSTProfileName = Zimbra::MAPI::Util::PSTMIG_PROFILE_PREFIX;
+            Zmail::MAPI::Util::DeleteAlikeProfiles(
+                Zmail::MAPI::Util::PSTMIG_PROFILE_PREFIX.c_str());
+            string strPSTProfileName = Zmail::MAPI::Util::PSTMIG_PROFILE_PREFIX;
 
             // Add timestamp to profile to make it unique
             char timeStr[9];
@@ -160,14 +160,14 @@ LPCWSTR MAPIAccessAPI::_InitGlobalSessionAndStore(LPCWSTR lpcwstrMigTarget)
             replace(strTmpProfile.begin(), strTmpProfile.end(), ':', '_');
             strPSTProfileName += strTmpProfile;
             // create PST profile
-            if (!Zimbra::MAPI::Util::CreatePSTProfile((LPSTR)strPSTProfileName.c_str(),
+            if (!Zmail::MAPI::Util::CreatePSTProfile((LPSTR)strPSTProfileName.c_str(),
                 lpstrMigTarget))
             {
                 SafeDelete(lpstrMigTarget);
                 lpwstrStatus = FormatExceptionInfo(E_FAIL, ERR_CREATE_PSTPROFILE,
                     __FILE__, __LINE__);
 				dloge(lpwstrStatus);
-				Zimbra::Util::CopyString(lpwstrRetVal,(LPWSTR)ERR_CREATE_PSTPROFILE);
+				Zmail::Util::CopyString(lpwstrRetVal,(LPWSTR)ERR_CREATE_PSTPROFILE);
                 goto CLEAN_UP;
             }
             SafeDelete(lpstrMigTarget);
@@ -187,7 +187,7 @@ LPCWSTR MAPIAccessAPI::_InitGlobalSessionAndStore(LPCWSTR lpcwstrMigTarget)
 
         if (hr != S_OK)
             goto CLEAN_UP;
-        m_defaultStore = new Zimbra::MAPI::MAPIStore();
+        m_defaultStore = new Zmail::MAPI::MAPIStore();
 
         // Open target default store
         hr = m_zmmapisession->OpenDefaultStore(*m_defaultStore);
@@ -199,25 +199,25 @@ LPCWSTR MAPIAccessAPI::_InitGlobalSessionAndStore(LPCWSTR lpcwstrMigTarget)
         lpwstrStatus = FormatExceptionInfo(msse.ErrCode(), (LPWSTR)msse.Description().c_str(),
             (LPSTR)msse.SrcFile().c_str(), msse.SrcLine());
 		dloge(lpwstrStatus);
-		Zimbra::Util::CopyString(lpwstrRetVal,msse.ShortDescription().c_str());
+		Zmail::Util::CopyString(lpwstrRetVal,msse.ShortDescription().c_str());
     }
     catch (MAPIStoreException &mste)
     {
         lpwstrStatus = FormatExceptionInfo(mste.ErrCode(), (LPWSTR)mste.Description().c_str(),
             (LPSTR)mste.SrcFile().c_str(), mste.SrcLine());
 		dloge(lpwstrStatus);
-		Zimbra::Util::CopyString(lpwstrRetVal,mste.ShortDescription().c_str());
+		Zmail::Util::CopyString(lpwstrRetVal,mste.ShortDescription().c_str());
     }
     catch (Util::MapiUtilsException &muex)
     {
         lpwstrStatus = FormatExceptionInfo(muex.ErrCode(), (LPWSTR)muex.Description().c_str(),
             (LPSTR)muex.SrcFile().c_str(), muex.SrcLine());
 		dloge(lpwstrStatus);
-		Zimbra::Util::CopyString(lpwstrRetVal,muex.ShortDescription().c_str());
+		Zmail::Util::CopyString(lpwstrRetVal,muex.ShortDescription().c_str());
     }
 	
     // Create Temporary dir for temp files
-    Zimbra::MAPI::Util::CreateAppTemporaryDirectory();
+    Zmail::MAPI::Util::CreateAppTemporaryDirectory();
 
 CLEAN_UP: if (lpwstrStatus)
     {
@@ -227,16 +227,16 @@ CLEAN_UP: if (lpwstrStatus)
         if (m_defaultStore)
             delete m_defaultStore;
         m_defaultStore = NULL;
-		Zimbra::Util::FreeString(lpwstrStatus);
+		Zmail::Util::FreeString(lpwstrStatus);
     }
 	return lpwstrRetVal;
 }
 
 void MAPIAccessAPI::UnInitGlobalSessionAndStore()
 {
-	Zimbra::Util::MiniDumpGenerator::UnInit();
+	Zmail::Util::MiniDumpGenerator::UnInit();
     // Delete any PST migration profiles
-    Zimbra::MAPI::Util::DeleteAlikeProfiles(Zimbra::MAPI::Util::PSTMIG_PROFILE_PREFIX.c_str());
+    Zmail::MAPI::Util::DeleteAlikeProfiles(Zmail::MAPI::Util::PSTMIG_PROFILE_PREFIX.c_str());
 
     if (m_defaultStore)
         delete m_defaultStore;
@@ -282,9 +282,9 @@ LPCWSTR MAPIAccessAPI::OpenUserStore()
     try
     {
         // user store
-        m_userStore = new Zimbra::MAPI::MAPIStore();
+        m_userStore = new Zmail::MAPI::MAPIStore();
         // Get Exchange Server DN
-        hr = Zimbra::MAPI::Util::GetUserDnAndServerDnFromProfile(
+        hr = Zmail::MAPI::Util::GetUserDnAndServerDnFromProfile(
             m_zmmapisession->GetMAPISessionObject(), ExchangeServerDN, ExchangeUserDN, ExchangeHostName);
         if (hr != S_OK)
             goto CLEAN_UP;
@@ -315,7 +315,7 @@ LPCWSTR MAPIAccessAPI::OpenUserStore()
 			}
 				
 			// Get DN of user to be migrated
-			Zimbra::MAPI::Util::GetUserDNAndLegacyName(m_strExchangeHostName.c_str(),
+			Zmail::MAPI::Util::GetUserDNAndLegacyName(m_strExchangeHostName.c_str(),
 				m_strUserName.c_str(), NULL, wstruserdn, legacyName);
 			hr = m_zmmapisession->OpenOtherStore(m_defaultStore->GetInternalMAPIStore(),
 				pwstrExchangeServerDN, (LPWSTR)legacyName.c_str(), *m_userStore);
@@ -329,21 +329,21 @@ LPCWSTR MAPIAccessAPI::OpenUserStore()
         lpwstrStatus = FormatExceptionInfo(msse.ErrCode(), (LPWSTR)msse.Description().c_str(),
             (LPSTR)msse.SrcFile().c_str(), msse.SrcLine());
 		dloge(lpwstrStatus);
-		Zimbra::Util::CopyString(lpwstrRetVal, msse.ShortDescription().c_str());
+		Zmail::Util::CopyString(lpwstrRetVal, msse.ShortDescription().c_str());
     }
     catch (MAPIStoreException &mste)
     {
         lpwstrStatus = FormatExceptionInfo(mste.ErrCode(), (LPWSTR)mste.Description().c_str(),
             (LPSTR)mste.SrcFile().c_str(), mste.SrcLine());
 		dloge(lpwstrStatus);
-		Zimbra::Util::CopyString(lpwstrRetVal, mste.ShortDescription().c_str());
+		Zmail::Util::CopyString(lpwstrRetVal, mste.ShortDescription().c_str());
     }
     catch (Util::MapiUtilsException &muex)
     {
         lpwstrStatus = FormatExceptionInfo(muex.ErrCode(), (LPWSTR)muex.Description().c_str(),
             (LPSTR)muex.SrcFile().c_str(), muex.SrcLine());
 		dloge(lpwstrStatus);
-		Zimbra::Util::CopyString(lpwstrRetVal, muex.ShortDescription().c_str());
+		Zmail::Util::CopyString(lpwstrRetVal, muex.ShortDescription().c_str());
     }
 CLEAN_UP: SafeDelete(ExchangeServerDN);
     SafeDelete(ExchangeUserDN);
@@ -355,10 +355,10 @@ CLEAN_UP: SafeDelete(ExchangeServerDN);
         lpwstrStatus = FormatExceptionInfo(hr, L"MAPIAccessAPI::OpenSessionAndStore() Failed",
             __FILE__, __LINE__);
 		dloge(lpwstrStatus);
-		Zimbra::Util::CopyString(lpwstrRetVal,  L"MAPIAccessAPI::OpenSessionAndStore() Failed");
+		Zmail::Util::CopyString(lpwstrRetVal,  L"MAPIAccessAPI::OpenSessionAndStore() Failed");
 	}
 	if(lpwstrStatus)
-		Zimbra::Util::FreeString(lpwstrStatus);
+		Zmail::Util::FreeString(lpwstrStatus);
     return lpwstrRetVal;
 }
 
@@ -369,7 +369,7 @@ LPCWSTR MAPIAccessAPI::InitializeUser()
 	{
 		return _InitializeUser();
 	}
-	__except(Zimbra::Util::MiniDumpGenerator::GenerateCoreDump(GetExceptionInformation(),exceptionmsg))
+	__except(Zmail::Util::MiniDumpGenerator::GenerateCoreDump(GetExceptionInformation(),exceptionmsg))
 	{
 		dloge(exceptionmsg);		
 	}
@@ -397,24 +397,24 @@ LPCWSTR MAPIAccessAPI::_InitializeUser()
             m_userStore = m_defaultStore;
         }
         // Get root folder from user store
-        m_rootFolder = new Zimbra::MAPI::MAPIFolder(*m_zmmapisession, *m_userStore);
+        m_rootFolder = new Zmail::MAPI::MAPIFolder(*m_zmmapisession, *m_userStore);
         if (FAILED(hr = m_userStore->GetRootFolder(*m_rootFolder)))
 		{
             lpwstrStatus = FormatExceptionInfo(hr, L"MAPIAccessAPI::Initialize() Failed",
                 __FILE__, __LINE__);
-			Zimbra::Util::CopyString(lpwstrRetVal, L"MAPIAccessAPI::Initialize() Failed");
+			Zmail::Util::CopyString(lpwstrRetVal, L"MAPIAccessAPI::Initialize() Failed");
 		}
-		Zimbra::Mapi::NamedPropsManager::SetNamedProps(m_userStore->GetInternalMAPIStore());
+		Zmail::Mapi::NamedPropsManager::SetNamedProps(m_userStore->GetInternalMAPIStore());
     }
     catch (GenericException &ge)
     {
         lpwstrStatus = FormatExceptionInfo(ge.ErrCode(), (LPWSTR)ge.Description().c_str(),
             (LPSTR)ge.SrcFile().c_str(), ge.SrcLine());
 		dloge(lpwstrStatus);
-		Zimbra::Util::CopyString(lpwstrRetVal,ge.ShortDescription().c_str());
+		Zmail::Util::CopyString(lpwstrRetVal,ge.ShortDescription().c_str());
     }
 	if(lpwstrStatus)
-		Zimbra::Util::FreeString(lpwstrStatus);
+		Zmail::Util::FreeString(lpwstrStatus);
     return lpwstrRetVal;
 }
 
@@ -426,7 +426,7 @@ LPCWSTR MAPIAccessAPI::GetRootFolderHierarchy(vector<Folder_Data> &vfolderlist)
 	{
 		return _GetRootFolderHierarchy(vfolderlist);
 	}
-	__except(Zimbra::Util::MiniDumpGenerator::GenerateCoreDump(GetExceptionInformation(),exceptionmsg))
+	__except(Zmail::Util::MiniDumpGenerator::GenerateCoreDump(GetExceptionInformation(),exceptionmsg))
 	{
 		dloge(exceptionmsg);		
 	}
@@ -447,16 +447,16 @@ LPCWSTR MAPIAccessAPI::_GetRootFolderHierarchy(vector<Folder_Data> &vfolderlist)
         lpwstrStatus = FormatExceptionInfo(ge.ErrCode(), (LPWSTR)ge.Description().c_str(),
             (LPSTR)ge.SrcFile().c_str(), ge.SrcLine());
 		dloge(lpwstrStatus);
-		Zimbra::Util::FreeString(lpwstrStatus);
-		Zimbra::Util::CopyString(lpwstrStatus, ge.ShortDescription().c_str());
+		Zmail::Util::FreeString(lpwstrStatus);
+		Zmail::Util::CopyString(lpwstrStatus, ge.ShortDescription().c_str());
     }
     return lpwstrStatus;
 }
 
-HRESULT MAPIAccessAPI::Iterate_folders(Zimbra::MAPI::MAPIFolder &folder,
+HRESULT MAPIAccessAPI::Iterate_folders(Zmail::MAPI::MAPIFolder &folder,
     vector<Folder_Data> &fd)
 {
-    Zimbra::MAPI::FolderIterator *folderIter = new Zimbra::MAPI::FolderIterator;
+    Zmail::MAPI::FolderIterator *folderIter = new Zmail::MAPI::FolderIterator;
 
     folder.GetFolderIterator(*folderIter);
 
@@ -467,7 +467,7 @@ HRESULT MAPIAccessAPI::Iterate_folders(Zimbra::MAPI::MAPIFolder &folder,
         ULONG itemCount = 0;
 
         // delete them while clearing the tree nodes
-        Zimbra::MAPI::MAPIFolder *childFolder = new Zimbra::MAPI::MAPIFolder(*m_zmmapisession,
+        Zmail::MAPI::MAPIFolder *childFolder = new Zmail::MAPI::MAPIFolder(*m_zmmapisession,
             *m_userStore);
 
         bMore = folderIter->GetNext(*childFolder);
@@ -509,7 +509,7 @@ HRESULT MAPIAccessAPI::Iterate_folders(Zimbra::MAPI::MAPIFolder &folder,
             flderdata.containerclass = wstrContainerClass;
 
             // ExchangeFolderID
-            flderdata.zimbraid = (long)childFolder->GetZimbraFolderId();
+            flderdata.zmailid = (long)childFolder->GetZmailFolderId();
 
             // append
             fd.push_back(flderdata);
@@ -535,7 +535,7 @@ HRESULT MAPIAccessAPI::GetInternalFolder(SBinary sbFolderEID, MAPIFolder &folder
         throw GenericException(hr, L"MAPIAccessAPI::GetInternalFolder OpenEntry Failed.", ERR_OPEN_ENTRYID, 
 		__LINE__, __FILE__);
 
-    Zimbra::Util::ScopedBuffer<SPropValue> pPropValues;
+    Zmail::Util::ScopedBuffer<SPropValue> pPropValues;
 
     // Get PR_DISPLAY_NAME
     if (FAILED(hr = HrGetOneProp(pFolder, PR_DISPLAY_NAME, pPropValues.getptr())))
@@ -553,7 +553,7 @@ LPCWSTR MAPIAccessAPI::GetFolderItemsList(SBinary sbFolderEID, vector<Item_Data>
 	{
 		_GetFolderItemsList(sbFolderEID,ItemList);
 	}
-	__except(Zimbra::Util::MiniDumpGenerator::GenerateCoreDump(GetExceptionInformation(),exceptionmsg))
+	__except(Zmail::Util::MiniDumpGenerator::GenerateCoreDump(GetExceptionInformation(),exceptionmsg))
 	{
 		dloge(exceptionmsg);		
 	}
@@ -573,11 +573,11 @@ LPCWSTR MAPIAccessAPI::_GetFolderItemsList(SBinary sbFolderEID, vector<Item_Data
         {
             lpwstrStatus = FormatExceptionInfo(hr,
                 L"MAPIAccessAPI::GetFolderItemsList() Failed", __FILE__, __LINE__);
-			Zimbra::Util::CopyString(lpwstrRetVal,L"MAPIAccessAPI::GetFolderItemsList() Failed");
+			Zmail::Util::CopyString(lpwstrRetVal,L"MAPIAccessAPI::GetFolderItemsList() Failed");
             goto ZM_EXIT;
         }
 
-        Zimbra::MAPI::MessageIterator *msgIter = new Zimbra::MAPI::MessageIterator();
+        Zmail::MAPI::MessageIterator *msgIter = new Zmail::MAPI::MessageIterator();
 
         folder.GetMessageIterator(*msgIter);
 
@@ -587,7 +587,7 @@ LPCWSTR MAPIAccessAPI::_GetFolderItemsList(SBinary sbFolderEID, vector<Item_Data
         while (bContinue)
         {
 			skip = false;
-            Zimbra::MAPI::MAPIMessage *msg = new Zimbra::MAPI::MAPIMessage();
+            Zmail::MAPI::MAPIMessage *msg = new Zmail::MAPI::MAPIMessage();
 
 			try
 			{
@@ -598,7 +598,7 @@ LPCWSTR MAPIAccessAPI::_GetFolderItemsList(SBinary sbFolderEID, vector<Item_Data
 				lpwstrStatus = FormatExceptionInfo(msgex.ErrCode(), (LPWSTR)msgex.Description().c_str(),
 					(LPSTR)msgex.SrcFile().c_str(), msgex.SrcLine());
 				dloge(lpwstrStatus);
-				Zimbra::Util::CopyString(lpwstrRetVal, msgex.ShortDescription().c_str());
+				Zmail::Util::CopyString(lpwstrRetVal, msgex.ShortDescription().c_str());
 				bContinue = true;
 				skip = true;
 			}
@@ -614,10 +614,10 @@ LPCWSTR MAPIAccessAPI::_GetFolderItemsList(SBinary sbFolderEID, vector<Item_Data
                 CopyEntryID(sbin, itemdata.sbMessageID);
                 //Add eid in string format
                 itemdata.strMsgEntryId = "";
-                Zimbra::Util::ScopedArray<CHAR> spUid(new CHAR[(sbin.cb * 2) + 1]);
+                Zmail::Util::ScopedArray<CHAR> spUid(new CHAR[(sbin.cb * 2) + 1]);
                 if (spUid.get() != NULL)
                 {
-	            Zimbra::Util::HexFromBin(sbin.lpb, sbin.cb, spUid.get());
+	            Zmail::Util::HexFromBin(sbin.lpb, sbin.cb, spUid.get());
                     itemdata.strMsgEntryId = spUid.getref();
                 }
                 itemdata.MessageDate = msg->Date();
@@ -632,21 +632,21 @@ LPCWSTR MAPIAccessAPI::_GetFolderItemsList(SBinary sbFolderEID, vector<Item_Data
         lpwstrStatus = FormatExceptionInfo(mssex.ErrCode(), (LPWSTR)mssex.Description().c_str(),
             (LPSTR)mssex.SrcFile().c_str(), mssex.SrcLine());
 		dloge(lpwstrStatus);
-		Zimbra::Util::CopyString(lpwstrRetVal, mssex.ShortDescription().c_str());
+		Zmail::Util::CopyString(lpwstrRetVal, mssex.ShortDescription().c_str());
     }
     catch (MAPIFolderException &mfex)
     {
         lpwstrStatus = FormatExceptionInfo(mfex.ErrCode(), (LPWSTR)mfex.Description().c_str(),
             (LPSTR)mfex.SrcFile().c_str(), mfex.SrcLine());
 		dloge(lpwstrStatus);
-		Zimbra::Util::CopyString(lpwstrRetVal, mfex.ShortDescription().c_str());
+		Zmail::Util::CopyString(lpwstrRetVal, mfex.ShortDescription().c_str());
     }
     catch (MAPIMessageException &msgex)
     {
         lpwstrStatus = FormatExceptionInfo(msgex.ErrCode(), (LPWSTR)msgex.Description().c_str(),
             (LPSTR)msgex.SrcFile().c_str(), msgex.SrcLine());
 		dloge(lpwstrStatus);
-		Zimbra::Util::CopyString(lpwstrRetVal, msgex.ShortDescription().c_str());
+		Zmail::Util::CopyString(lpwstrRetVal, msgex.ShortDescription().c_str());
 	
     }
     catch (GenericException &genex)
@@ -654,10 +654,10 @@ LPCWSTR MAPIAccessAPI::_GetFolderItemsList(SBinary sbFolderEID, vector<Item_Data
         lpwstrStatus = FormatExceptionInfo(genex.ErrCode(), (LPWSTR)genex.Description().c_str(),
             (LPSTR)genex.SrcFile().c_str(), genex.SrcLine());
 		dloge(lpwstrStatus);
-		Zimbra::Util::CopyString(lpwstrRetVal, genex.ShortDescription().c_str());
+		Zmail::Util::CopyString(lpwstrRetVal, genex.ShortDescription().c_str());
     }
 	if(lpwstrStatus)
-		Zimbra::Util::FreeString(lpwstrStatus);
+		Zmail::Util::FreeString(lpwstrStatus);
 ZM_EXIT: return lpwstrRetVal;
 }
 
@@ -668,7 +668,7 @@ LPCWSTR MAPIAccessAPI::GetItem(SBinary sbItemEID, BaseItemData &itemData)
 	{
 		exceptionmsg=(LPWSTR)_GetItem(sbItemEID,itemData);
 	}
-	__except(Zimbra::Util::MiniDumpGenerator::GenerateCoreDump(GetExceptionInformation(),exceptionmsg))
+	__except(Zmail::Util::MiniDumpGenerator::GenerateCoreDump(GetExceptionInformation(),exceptionmsg))
 	{
 		dloge(exceptionmsg);		
 	}
@@ -690,7 +690,7 @@ LPCWSTR MAPIAccessAPI::_GetItem(SBinary sbItemEID, BaseItemData &itemData)
             __LINE__);
 		dloge("MAPIAccessAPI -- User Store OpenEntry failed");
 		dloge(lpwstrStatus);
-		Zimbra::Util::CopyString(lpwstrRetVal, ERR_OPEN_ENTRYID);
+		Zmail::Util::CopyString(lpwstrRetVal, ERR_OPEN_ENTRYID);
         goto ZM_EXIT;
     }
 
@@ -811,7 +811,7 @@ LPCWSTR MAPIAccessAPI::_GetItem(SBinary sbItemEID, BaseItemData &itemData)
                     __FILE__, __LINE__);
 				dloge("MAPIAccessAPI -- exception");
 				dloge(lpwstrStatus);
-				Zimbra::Util::CopyString(lpwstrRetVal,L"MimePP conversion Failed.");
+				Zmail::Util::CopyString(lpwstrRetVal,L"MimePP conversion Failed.");
                 goto ZM_EXIT;
 			}
 
@@ -823,11 +823,11 @@ LPCWSTR MAPIAccessAPI::_GetItem(SBinary sbItemEID, BaseItemData &itemData)
             wstring wstrTempAppDirPath;
             char *lpszDirName = NULL;
             char *lpszUniqueName = NULL;
-            Zimbra::Util::ScopedInterface<IStream> pStream;
+            Zmail::Util::ScopedInterface<IStream> pStream;
             LPCSTR pDes = mimeMsg.getString().c_str();
             int nBytesToBeWritten = (int)(mimeMsg.getString().size());
 
-            if (!Zimbra::MAPI::Util::GetAppTemporaryDirectory(wstrTempAppDirPath))
+            if (!Zmail::MAPI::Util::GetAppTemporaryDirectory(wstrTempAppDirPath))
             {
                 lpwstrStatus = FormatExceptionInfo(hr, L"GetAppTemporaryDirectory Failed",
                     __FILE__, __LINE__);
@@ -837,7 +837,7 @@ LPCWSTR MAPIAccessAPI::_GetItem(SBinary sbItemEID, BaseItemData &itemData)
 
             string strFQFileName = lpszDirName;
 
-            WtoA((LPWSTR)Zimbra::MAPI::Util::GetUniqueName().c_str(), lpszUniqueName);
+            WtoA((LPWSTR)Zmail::MAPI::Util::GetUniqueName().c_str(), lpszUniqueName);
             strFQFileName += "\\";
             strFQFileName += lpszUniqueName;
             SafeDelete(lpszDirName);
@@ -1081,7 +1081,7 @@ LPCWSTR MAPIAccessAPI::_GetItem(SBinary sbItemEID, BaseItemData &itemData)
             (LPSTR)mex.SrcFile().c_str(), mex.SrcLine());
 		dloge("MAPIAccessAPI -- MAPIMessageException");
 		dloge(lpwstrStatus);
-		Zimbra::Util::CopyString(lpwstrRetVal,mex.ShortDescription().c_str());
+		Zmail::Util::CopyString(lpwstrRetVal,mex.ShortDescription().c_str());
     }
     catch (MAPIContactException &cex)
     {
@@ -1089,7 +1089,7 @@ LPCWSTR MAPIAccessAPI::_GetItem(SBinary sbItemEID, BaseItemData &itemData)
             (LPSTR)cex.SrcFile().c_str(), cex.SrcLine());
 		dloge("MAPIAccessAPI -- MAPIMessageException");
 		dloge(lpwstrStatus);
-		Zimbra::Util::CopyString(lpwstrRetVal,cex.ShortDescription().c_str());
+		Zmail::Util::CopyString(lpwstrRetVal,cex.ShortDescription().c_str());
     }
 	catch (MAPIAppointmentException &aex)
     {
@@ -1097,11 +1097,11 @@ LPCWSTR MAPIAccessAPI::_GetItem(SBinary sbItemEID, BaseItemData &itemData)
             (LPSTR)aex.SrcFile().c_str(), aex.SrcLine());
 		dloge("MAPIAccessAPI -- MAPIAppointmentException");
 		dloge(lpwstrStatus);
-		Zimbra::Util::CopyString(lpwstrRetVal,aex.ShortDescription().c_str());
+		Zmail::Util::CopyString(lpwstrRetVal,aex.ShortDescription().c_str());
     }
 ZM_EXIT: 
 	if(lpwstrStatus)
-		Zimbra::Util::FreeString(lpwstrStatus);
+		Zmail::Util::FreeString(lpwstrStatus);
 	return lpwstrRetVal;
 }
 
@@ -1109,21 +1109,21 @@ LPWSTR MAPIAccessAPI::GetOOOStateAndMsg()
 {
     HRESULT hr;
     BOOL bIsOOO = FALSE;
-    Zimbra::Util::ScopedInterface<IMAPIFolder> spInbox;
+    Zmail::Util::ScopedInterface<IMAPIFolder> spInbox;
     ULONG objtype;
 
     LPWSTR lpwstrOOOInfo = new WCHAR[3];
     lstrcpy(lpwstrOOOInfo, L"0:");
 
     // first get the OOO state -- if TRUE, put a 1: in the return val, else put 0:
-    Zimbra::Util::ScopedBuffer<SPropValue> pPropValues;
+    Zmail::Util::ScopedBuffer<SPropValue> pPropValues;
     hr = HrGetOneProp(m_userStore->GetInternalMAPIStore(), PR_OOF_STATE, pPropValues.getptr());
     if (SUCCEEDED(hr))
     {
         bIsOOO = pPropValues->Value.b;
     }
 
-    Zimbra::Util::ScopedInterface<IMAPITable> pContents;
+    Zmail::Util::ScopedInterface<IMAPITable> pContents;
     SBinaryArray specialFolderIds = m_userStore->GetSpecialFolderIds();
     SBinary sbin = specialFolderIds.lpbin[INBOX];
     hr = m_userStore->OpenEntry(sbin.cb, (LPENTRYID)sbin.lpb, NULL, MAPI_BEST_ACCESS,
@@ -1170,7 +1170,7 @@ LPWSTR MAPIAccessAPI::GetOOOStateAndMsg()
         return lpwstrOOOInfo;
     }
 
-    Zimbra::Util::ScopedRowSet pRows;
+    Zmail::Util::ScopedRowSet pRows;
 
     pContents->QueryRows(ulRows, 0, pRows.getptr());
     for (unsigned int i = 0; i < pRows->cRows; i++)
@@ -1201,9 +1201,9 @@ LPCWSTR MAPIAccessAPI::GetExchangeRules(vector<CRule> &vRuleList)
     LPCWSTR lpwstrStatus = NULL;
     HRESULT hr;
     ULONG objtype;
-    Zimbra::Util::ScopedInterface<IMAPIFolder> spInbox;
+    Zmail::Util::ScopedInterface<IMAPIFolder> spInbox;
     LPEXCHANGEMODIFYTABLE lpExchangeTable;
-    Zimbra::Util::ScopedInterface<IMAPITable> spMAPIRulesTable;
+    Zmail::Util::ScopedInterface<IMAPITable> spMAPIRulesTable;
     ULONG lpulCount = NULL;
     LPSRowSet lppRows = NULL;
 
@@ -1287,7 +1287,7 @@ LPCWSTR MAPIAccessAPI::GetExchangeRules(vector<CRule> &vRuleList)
             rule.GetConditions(listRuleConditions);
             if (listRuleConditions.size() == 0)
             {
-                dlogw(L"Rule", rulename.c_str(), L"has no conditions supported by Zimbra -- skipping");
+                dlogw(L"Rule", rulename.c_str(), L"has no conditions supported by Zmail -- skipping");
                 bRes = false;
             }
 
@@ -1306,7 +1306,7 @@ LPCWSTR MAPIAccessAPI::GetExchangeRules(vector<CRule> &vRuleList)
             rule.GetActions(listRuleActions);
             if (listRuleActions.size() == 0)
             {
-                dlogw(L"Rule", rulename.c_str(), L"has no actions supported by Zimbra -- skipping");
+                dlogw(L"Rule", rulename.c_str(), L"has no actions supported by Zmail -- skipping");
                 bAct = false;
             }
             if (bRes && bAct)
@@ -1334,9 +1334,9 @@ LPCWSTR MAPIAccessAPI::GetExchangeRules(vector<CRule> &vRuleList)
 }
 
 // Access MAPI folder items
-void MAPIAccessAPI::traverse_folder(Zimbra::MAPI::MAPIFolder &folder)
+void MAPIAccessAPI::traverse_folder(Zmail::MAPI::MAPIFolder &folder)
 {
-    Zimbra::MAPI::MessageIterator *msgIter = new Zimbra::MAPI::MessageIterator();
+    Zmail::MAPI::MessageIterator *msgIter = new Zmail::MAPI::MessageIterator();
 
     folder.GetMessageIterator(*msgIter);
 
@@ -1344,12 +1344,12 @@ void MAPIAccessAPI::traverse_folder(Zimbra::MAPI::MAPIFolder &folder)
 
     while (bContinue)
     {
-        Zimbra::MAPI::MAPIMessage *msg = new Zimbra::MAPI::MAPIMessage();
+        Zmail::MAPI::MAPIMessage *msg = new Zmail::MAPI::MAPIMessage();
 
         bContinue = msgIter->GetNext(*msg);
         if (bContinue)
         {
-            Zimbra::Util::ScopedBuffer<WCHAR> subject;
+            Zmail::Util::ScopedBuffer<WCHAR> subject;
 
             if (msg->Subject(subject.getptr()))
                 printf("\tsubject--%S\n", subject.get());

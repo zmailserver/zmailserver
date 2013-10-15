@@ -12,19 +12,19 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.jsp;
+package org.zmail.cs.offline.jsp;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.offline.common.OfflineConstants;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZFolder;
-import com.zimbra.soap.type.DataSource.ConnectionType;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.DataSource;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.offline.common.OfflineConstants;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZFolder;
+import org.zmail.soap.type.DataSource.ConnectionType;
 
 public class MailBean extends FormBean {
     public MailBean() {}

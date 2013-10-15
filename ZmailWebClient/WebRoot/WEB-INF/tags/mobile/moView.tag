@@ -15,15 +15,15 @@
 <%@ tag body-content="scriptless" %>
 <%@ attribute name="title" rtexprvalue="true" required="true" %>
 <%@ attribute name="scale" rtexprvalue="true" required="false" %>
-<%@ attribute name="context" rtexprvalue="true" required="true" type="com.zimbra.cs.taglib.tag.SearchContext" %>
-<%@ attribute name="mailbox" rtexprvalue="true" required="true" type="com.zimbra.cs.taglib.bean.ZMailboxBean" %>
+<%@ attribute name="context" rtexprvalue="true" required="true" type="org.zmail.cs.taglib.tag.SearchContext" %>
+<%@ attribute name="mailbox" rtexprvalue="true" required="true" type="org.zmail.cs.taglib.bean.ZMailboxBean" %>
 <%@ attribute name="onload" rtexprvalue="true" required="false" %>
 <%@ attribute name="clazz" rtexprvalue="true" required="false" %>
-<%@ taglib prefix="mo" uri="com.zimbra.mobileclient" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
+<%@ taglib prefix="mo" uri="org.zmail.mobileclient" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
 <c:if test="${requestScope.headIncluded == null}">
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

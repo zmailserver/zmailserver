@@ -12,12 +12,12 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.offline;
+package org.zmail.cs.service.offline;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.offline.OfflineProvisioning;
-import com.zimbra.cs.service.mail.SendInviteReply;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.offline.OfflineProvisioning;
+import org.zmail.cs.service.mail.SendInviteReply;
 
 /**
  * @author vmahajan

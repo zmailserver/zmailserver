@@ -14,24 +14,24 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.mail.compose;
+package org.zmail.qa.selenium.projects.desktop.tests.mail.compose;
 
 import java.util.HashMap;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.MailItem;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.GeneralUtility;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.XmlStringUtil;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.mail.FormMailNew;
-import com.zimbra.qa.selenium.projects.desktop.ui.mail.FormMailNew.Field;
+import org.zmail.qa.selenium.framework.items.MailItem;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.GeneralUtility;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.XmlStringUtil;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.mail.FormMailNew;
+import org.zmail.qa.selenium.projects.desktop.ui.mail.FormMailNew.Field;
 
 
 public class ForwardMailHtml extends AjaxCommonTest {
@@ -43,7 +43,7 @@ public class ForwardMailHtml extends AjaxCommonTest {
 		// All tests start at the login page
 		super.startingPage = app.zPageMail;
 		super.startingAccountPreferences = new HashMap<String, String>() {{
-				    put("zimbraPrefComposeFormat", "html");
+				    put("zmailPrefComposeFormat", "html");
 				}};
 
 	}
@@ -52,9 +52,9 @@ public class ForwardMailHtml extends AjaxCommonTest {
 			groups = { "smoke" })
 	public void forwardHtmlMail() throws HarnessException {
 		
-		String subject = "subject"+ ZimbraSeleniumProperties.getUniqueString();
-		String bodyText = "text" + ZimbraSeleniumProperties.getUniqueString();
-		String bodyHTML = "text <strong>bold"+ ZimbraSeleniumProperties.getUniqueString() +"</strong> text";
+		String subject = "subject"+ ZmailSeleniumProperties.getUniqueString();
+		String bodyText = "text" + ZmailSeleniumProperties.getUniqueString();
+		String bodyHTML = "text <strong>bold"+ ZmailSeleniumProperties.getUniqueString() +"</strong> text";
 		String contentHTML = XmlStringUtil.escapeXml(
 				"<html>" +
 					"<head></head>" +
@@ -63,8 +63,8 @@ public class ForwardMailHtml extends AjaxCommonTest {
 
 
 		// Send a message to the account
-		ZimbraAccount.AccountA().soapSend(
-					"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+		ZmailAccount.AccountA().soapSend(
+					"<SendMsgRequest xmlns='urn:zmailMail'>" +
 						"<m>" +
 							"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 							"<su>"+ subject +"</su>" +
@@ -94,7 +94,7 @@ public class ForwardMailHtml extends AjaxCommonTest {
 		ZAssert.assertNotNull(mailform, "Verify the new form opened");
 		
 		// Fill out the form with the data
-		mailform.zFillField(Field.To, ZimbraAccount.AccountB().EmailAddress);
+		mailform.zFillField(Field.To, ZmailAccount.AccountB().EmailAddress);
 		
 		// Send the message
 		mailform.zSubmit();
@@ -102,10 +102,10 @@ public class ForwardMailHtml extends AjaxCommonTest {
 		GeneralUtility.syncDesktopToZcsWithSoap(app.zGetActiveAccount());
 
 		// From the receiving end, verify the message details
-      MailItem received = MailItem.importFromSOAP(ZimbraAccount.AccountB(), "subject:("+ mail.dSubject +")");
+      MailItem received = MailItem.importFromSOAP(ZmailAccount.AccountB(), "subject:("+ mail.dSubject +")");
 
 		ZAssert.assertEquals(received.dFromRecipient.dEmailAddress, app.zGetActiveAccount().EmailAddress, "Verify the from field is correct");
-		ZAssert.assertEquals(received.dToRecipients.get(0).dEmailAddress, ZimbraAccount.AccountB().EmailAddress, "Verify the to field is correct");
+		ZAssert.assertEquals(received.dToRecipients.get(0).dEmailAddress, ZmailAccount.AccountB().EmailAddress, "Verify the to field is correct");
 		ZAssert.assertStringContains(received.dSubject, mail.dSubject, "Verify the subject field is correct");
 		ZAssert.assertStringContains(received.dSubject, "Fwd", "Verify the subject field contains the 'Fwd' prefix");
 		

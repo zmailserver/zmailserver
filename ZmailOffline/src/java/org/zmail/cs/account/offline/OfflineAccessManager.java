@@ -12,20 +12,20 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.offline;
+package org.zmail.cs.account.offline;
 
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.AccessManager;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.Cos;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.accesscontrol.Right;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.AccessManager;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.Cos;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.accesscontrol.Right;
 
 public class OfflineAccessManager extends AccessManager {
 

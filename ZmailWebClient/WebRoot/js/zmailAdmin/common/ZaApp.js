@@ -22,7 +22,7 @@
 **/
 ZaApp = function(appCtxt, container) {
 	if (arguments.length == 0) return;
-	this._name = ZaZimbraAdmin.ADMIN_APP;
+	this._name = ZaZmailAdmin.ADMIN_APP;
 	this._appCtxt = appCtxt;
 	this._appViewMgr = appCtxt.getAppViewMgr();
 	this._container = container;
@@ -57,8 +57,8 @@ function() {
 }
 
 ZaApp.checkMyRight = function(targetType,targetBy,targetVal,right,attrs) {
-	var soapDoc = AjxSoapDoc.create("CheckRightRequest", ZaZimbraAdmin.URN, null);
-	var elGrantee = soapDoc.set("grantee", ZaZimbraAdmin.currentUserId);
+	var soapDoc = AjxSoapDoc.create("CheckRightRequest", ZaZmailAdmin.URN, null);
+	var elGrantee = soapDoc.set("grantee", ZaZmailAdmin.currentUserId);
 	elGrantee.setAttribute("by","id");
 	var elTarget = soapDoc.set("target", targetVal);
 	elTarget.setAttribute("type", targetType);
@@ -120,7 +120,7 @@ function(appCtxt) {
         var homePath = ZaTree.getPathByArray([ZaMsg.OVP_home]);
 		ctl.getOverviewPanel().getFolderTree().setSelectionByPath(homePath);
         var historyObject = new ZaHistory(homePath, ZaMsg.OVP_home);
-        ZaZimbraAdmin.getInstance().updateHistory(historyObject, true);
+        ZaZmailAdmin.getInstance().updateHistory(historyObject, true);
     }
 }
 
@@ -146,7 +146,7 @@ function (id) {
 ZaApp.prototype.getStatusViewController =
 function(viewId) {
 	if(!viewId)
-		viewId = ZaZimbraAdmin._STATUS;
+		viewId = ZaZmailAdmin._STATUS;
 			
 	if (viewId && this._controllers[viewId] != null) {
 		return this._controllers[viewId];
@@ -170,7 +170,7 @@ function(viewId) {
 ZaApp.prototype.getGlobalStatsController =
 function(viewId) {
 	if(!viewId)
-		viewId = ZaZimbraAdmin._STATISTICS;
+		viewId = ZaZmailAdmin._STATISTICS;
 		
 	if (viewId && this._controllers[viewId] != null) {
 		return this._controllers[viewId];
@@ -183,7 +183,7 @@ function(viewId) {
 ZaApp.prototype.getServerStatsListController =
 function(viewId) {
 	if(!viewId)
-		viewId = ZaZimbraAdmin._SERVER_LIST_FOR_STATISTICS_VIEW;
+		viewId = ZaZmailAdmin._SERVER_LIST_FOR_STATISTICS_VIEW;
 
 	if (viewId && this._controllers[viewId] != null) {
 		return this._controllers[viewId];
@@ -196,7 +196,7 @@ function(viewId) {
 ZaApp.prototype.getGlobalConfigViewController =
 function(viewId) {
 	if(!viewId)
-		viewId = ZaZimbraAdmin._GLOBAL_SETTINGS;
+		viewId = ZaZmailAdmin._GLOBAL_SETTINGS;
 	
 	if (viewId && this._controllers[viewId] != null) {
 		return this._controllers[viewId];
@@ -209,20 +209,20 @@ function(viewId) {
 
 ZaApp.prototype.getSearchListController =
 function() {
-	if (this._controllers[ZaZimbraAdmin._SEARCH_LIST_VIEW] == null) {
-		this._controllers[ZaZimbraAdmin._SEARCH_LIST_VIEW] = new ZaSearchListController(this._appCtxt, this._container);
-		this._controllers[ZaZimbraAdmin._SEARCH_LIST_VIEW].addRemovalListener(new AjxListener(this.getSearchListController(), this.getSearchListController().handleRemoval));							
+	if (this._controllers[ZaZmailAdmin._SEARCH_LIST_VIEW] == null) {
+		this._controllers[ZaZmailAdmin._SEARCH_LIST_VIEW] = new ZaSearchListController(this._appCtxt, this._container);
+		this._controllers[ZaZmailAdmin._SEARCH_LIST_VIEW].addRemovalListener(new AjxListener(this.getSearchListController(), this.getSearchListController().handleRemoval));							
 	}
-	return this._controllers[ZaZimbraAdmin._SEARCH_LIST_VIEW] ;
+	return this._controllers[ZaZmailAdmin._SEARCH_LIST_VIEW] ;
 }
 
 ZaApp.prototype.getSearchBuilderController =
 function() {
-	if (this._controllers[ZaZimbraAdmin._SEARCH_BUILDER_VIEW] == null) {
-		this._controllers[ZaZimbraAdmin._SEARCH_BUILDER_VIEW] = new ZaSearchBuilderController(this._appCtxt, this._container);
-		this._controllers[ZaZimbraAdmin._SEARCH_BUILDER_VIEW].addRemovalListener(new AjxListener(this.getSearchBuilderController(), this.getSearchBuilderController().handleRemoval));							
+	if (this._controllers[ZaZmailAdmin._SEARCH_BUILDER_VIEW] == null) {
+		this._controllers[ZaZmailAdmin._SEARCH_BUILDER_VIEW] = new ZaSearchBuilderController(this._appCtxt, this._container);
+		this._controllers[ZaZmailAdmin._SEARCH_BUILDER_VIEW].addRemovalListener(new AjxListener(this.getSearchBuilderController(), this.getSearchBuilderController().handleRemoval));							
 	}
-	return this._controllers[ZaZimbraAdmin._SEARCH_BUILDER_VIEW] ;
+	return this._controllers[ZaZmailAdmin._SEARCH_BUILDER_VIEW] ;
 }
 
 ZaApp.prototype.getSearchBuilderToolbarController = ZaApp.prototype.getSearchBuilderController ;
@@ -231,7 +231,7 @@ ZaApp.prototype.getSearchBuilderToolbarController = ZaApp.prototype.getSearchBui
 ZaApp.prototype.getAccountListController =
 function(viewId, newController) {
 	if(!viewId)
-		viewId = ZaZimbraAdmin._ACCOUNTS_LIST_VIEW;
+		viewId = ZaZmailAdmin._ACCOUNTS_LIST_VIEW;
 			
 	//this is used by SearchListController to associate its view with a new 
 	//account list controller
@@ -249,9 +249,9 @@ function(viewId, newController) {
 ZaApp.prototype.getAccountViewController =
 function(isAlias) {
 	var c = new ZaAccountViewController(this._appCtxt, this._container, this);
-	var viewId = ZaZimbraAdmin._ACCOUNTS_LIST_VIEW ;
+	var viewId = ZaZmailAdmin._ACCOUNTS_LIST_VIEW ;
 	if (isAlias) {
-		viewId = ZaZimbraAdmin._ALIASES_LIST_VIEW ;
+		viewId = ZaZmailAdmin._ALIASES_LIST_VIEW ;
 	}
 	c.addChangeListener(new AjxListener(this.getAccountListController(viewId), ZaAccountListController.prototype.handleChange));
 	c.addCreationListener(new AjxListener(this.getAccountListController(viewId), ZaAccountListController.prototype.handleCreation));	
@@ -261,26 +261,26 @@ function(isAlias) {
 
 ZaApp.prototype.getAdminExtListController = 
 function() {
-	if (this._controllers[ZaZimbraAdmin._ADMIN_ZIMLET_LIST_VIEW] == null) {
-		this._controllers[ZaZimbraAdmin._ADMIN_ZIMLET_LIST_VIEW] = new ZaAdminExtListController(this._appCtxt, this._container, this);
-		this._controllers[ZaZimbraAdmin._ADMIN_ZIMLET_LIST_VIEW].addRemovalListener(new AjxListener(this._controllers[ZaZimbraAdmin._ADMIN_ZIMLET_LIST_VIEW], this._controllers[ZaZimbraAdmin._ADMIN_ZIMLET_LIST_VIEW].handleRemoval));							
-		this._controllers[ZaZimbraAdmin._ADMIN_ZIMLET_LIST_VIEW].addCreationListener(new AjxListener(this._controllers[ZaZimbraAdmin._ADMIN_ZIMLET_LIST_VIEW], this._controllers[ZaZimbraAdmin._ADMIN_ZIMLET_LIST_VIEW].handleCreation));			
-		this._controllers[ZaZimbraAdmin._ADMIN_ZIMLET_LIST_VIEW].addChangeListener(new AjxListener(this._controllers[ZaZimbraAdmin._ADMIN_ZIMLET_LIST_VIEW], this._controllers[ZaZimbraAdmin._ADMIN_ZIMLET_LIST_VIEW].handleChange));
+	if (this._controllers[ZaZmailAdmin._ADMIN_ZIMLET_LIST_VIEW] == null) {
+		this._controllers[ZaZmailAdmin._ADMIN_ZIMLET_LIST_VIEW] = new ZaAdminExtListController(this._appCtxt, this._container, this);
+		this._controllers[ZaZmailAdmin._ADMIN_ZIMLET_LIST_VIEW].addRemovalListener(new AjxListener(this._controllers[ZaZmailAdmin._ADMIN_ZIMLET_LIST_VIEW], this._controllers[ZaZmailAdmin._ADMIN_ZIMLET_LIST_VIEW].handleRemoval));							
+		this._controllers[ZaZmailAdmin._ADMIN_ZIMLET_LIST_VIEW].addCreationListener(new AjxListener(this._controllers[ZaZmailAdmin._ADMIN_ZIMLET_LIST_VIEW], this._controllers[ZaZmailAdmin._ADMIN_ZIMLET_LIST_VIEW].handleCreation));			
+		this._controllers[ZaZmailAdmin._ADMIN_ZIMLET_LIST_VIEW].addChangeListener(new AjxListener(this._controllers[ZaZmailAdmin._ADMIN_ZIMLET_LIST_VIEW], this._controllers[ZaZmailAdmin._ADMIN_ZIMLET_LIST_VIEW].handleChange));
 	}
 	
-	return this._controllers[ZaZimbraAdmin._ADMIN_ZIMLET_LIST_VIEW] ;
+	return this._controllers[ZaZmailAdmin._ADMIN_ZIMLET_LIST_VIEW] ;
 }
 
 ZaApp.prototype.getZimletListController =
 function() {
-	if (this._controllers[ZaZimbraAdmin._ZIMLET_LIST_VIEW] == null) {
-		this._controllers[ZaZimbraAdmin._ZIMLET_LIST_VIEW] = new ZaZimletListController(this._appCtxt, this._container, this);
-		this._controllers[ZaZimbraAdmin._ZIMLET_LIST_VIEW].addRemovalListener(new AjxListener(this._controllers[ZaZimbraAdmin._ZIMLET_LIST_VIEW], this._controllers[ZaZimbraAdmin._ZIMLET_LIST_VIEW].handleRemoval));							
-		this._controllers[ZaZimbraAdmin._ZIMLET_LIST_VIEW].addCreationListener(new AjxListener(this._controllers[ZaZimbraAdmin._ZIMLET_LIST_VIEW], this._controllers[ZaZimbraAdmin._ZIMLET_LIST_VIEW].handleCreation));			
-		this._controllers[ZaZimbraAdmin._ZIMLET_LIST_VIEW].addChangeListener(new AjxListener(this._controllers[ZaZimbraAdmin._ZIMLET_LIST_VIEW], this._controllers[ZaZimbraAdmin._ZIMLET_LIST_VIEW].handleChange));
+	if (this._controllers[ZaZmailAdmin._ZIMLET_LIST_VIEW] == null) {
+		this._controllers[ZaZmailAdmin._ZIMLET_LIST_VIEW] = new ZaZimletListController(this._appCtxt, this._container, this);
+		this._controllers[ZaZmailAdmin._ZIMLET_LIST_VIEW].addRemovalListener(new AjxListener(this._controllers[ZaZmailAdmin._ZIMLET_LIST_VIEW], this._controllers[ZaZmailAdmin._ZIMLET_LIST_VIEW].handleRemoval));							
+		this._controllers[ZaZmailAdmin._ZIMLET_LIST_VIEW].addCreationListener(new AjxListener(this._controllers[ZaZmailAdmin._ZIMLET_LIST_VIEW], this._controllers[ZaZmailAdmin._ZIMLET_LIST_VIEW].handleCreation));			
+		this._controllers[ZaZmailAdmin._ZIMLET_LIST_VIEW].addChangeListener(new AjxListener(this._controllers[ZaZmailAdmin._ZIMLET_LIST_VIEW], this._controllers[ZaZmailAdmin._ZIMLET_LIST_VIEW].handleChange));
 	}
 	
-	return this._controllers[ZaZimbraAdmin._ZIMLET_LIST_VIEW] ;
+	return this._controllers[ZaZmailAdmin._ZIMLET_LIST_VIEW] ;
 }
 
 ZaApp.prototype.getZimletController =
@@ -299,9 +299,9 @@ function (viewId) {
 		return this._controllers[viewId];
 	}else{
 		var c = new ZaDLController(this._appCtxt, this._container, this);
-		c.addCreationListener(new AjxListener(this.getAccountListController(ZaZimbraAdmin._DISTRIBUTION_LISTS_LIST_VIEW), ZaAccountListController.prototype.handleCreation));			
-		c.addRemovalListener(new AjxListener(this.getAccountListController(ZaZimbraAdmin._DISTRIBUTION_LISTS_LIST_VIEW), ZaAccountListController.prototype.handleRemoval));			
-		c.addChangeListener(new AjxListener(this.getAccountListController(ZaZimbraAdmin._DISTRIBUTION_LISTS_LIST_VIEW), ZaAccountListController.prototype.handleChange));
+		c.addCreationListener(new AjxListener(this.getAccountListController(ZaZmailAdmin._DISTRIBUTION_LISTS_LIST_VIEW), ZaAccountListController.prototype.handleCreation));			
+		c.addRemovalListener(new AjxListener(this.getAccountListController(ZaZmailAdmin._DISTRIBUTION_LISTS_LIST_VIEW), ZaAccountListController.prototype.handleRemoval));			
+		c.addChangeListener(new AjxListener(this.getAccountListController(ZaZmailAdmin._DISTRIBUTION_LISTS_LIST_VIEW), ZaAccountListController.prototype.handleChange));
 		return c ;
 	}
 	
@@ -313,9 +313,9 @@ function (viewId) {
 		return this._controllers[viewId];
 	}else{
 		var c = new ZaResourceController(this._appCtxt, this._container, this);
-		c.addCreationListener(new AjxListener(this.getAccountListController(ZaZimbraAdmin._RESOURCE_LIST_VIEW), ZaAccountListController.prototype.handleCreation));			
-		c.addRemovalListener(new AjxListener(this.getAccountListController(ZaZimbraAdmin._RESOURCE_LIST_VIEW), ZaAccountListController.prototype.handleRemoval));			
-		c.addChangeListener(new AjxListener(this.getAccountListController(ZaZimbraAdmin._RESOURCE_LIST_VIEW), ZaAccountListController.prototype.handleChange));
+		c.addCreationListener(new AjxListener(this.getAccountListController(ZaZmailAdmin._RESOURCE_LIST_VIEW), ZaAccountListController.prototype.handleCreation));			
+		c.addRemovalListener(new AjxListener(this.getAccountListController(ZaZmailAdmin._RESOURCE_LIST_VIEW), ZaAccountListController.prototype.handleRemoval));			
+		c.addChangeListener(new AjxListener(this.getAccountListController(ZaZmailAdmin._RESOURCE_LIST_VIEW), ZaAccountListController.prototype.handleChange));
 		return c ;
 	}
 };
@@ -323,7 +323,7 @@ function (viewId) {
 ZaApp.prototype.getDomainListController =
 function(viewId, newController) {
 	if(!viewId)
-		viewId = ZaZimbraAdmin._DOMAINS_LIST_VIEW;
+		viewId = ZaZmailAdmin._DOMAINS_LIST_VIEW;
 			
 	//this is used by SearchListController to associate its view with a new 
 	//domain list controller
@@ -359,10 +359,10 @@ function(viewId) {
 
 ZaApp.prototype.getMTAListController =
 function () {
-	if (this._controllers[ZaZimbraAdmin._POSTQ_VIEW] == null) {
-		this._controllers[ZaZimbraAdmin._POSTQ_VIEW] = new ZaMTAListController(this._appCtxt, this._container, this);
+	if (this._controllers[ZaZmailAdmin._POSTQ_VIEW] == null) {
+		this._controllers[ZaZmailAdmin._POSTQ_VIEW] = new ZaMTAListController(this._appCtxt, this._container, this);
 	}
-	return this._controllers[ZaZimbraAdmin._POSTQ_VIEW];
+	return this._controllers[ZaZmailAdmin._POSTQ_VIEW];
 }
 
 ZaApp.prototype.getMTAController =
@@ -380,10 +380,10 @@ function (viewId) {
 
 ZaApp.prototype.getServerListController =
 function() {
-	if (this._controllers[ZaZimbraAdmin._SERVERS_LIST_VIEW] == null) {
-		this._controllers[ZaZimbraAdmin._SERVERS_LIST_VIEW] = new ZaServerListController(this._appCtxt, this._container, this);								
+	if (this._controllers[ZaZmailAdmin._SERVERS_LIST_VIEW] == null) {
+		this._controllers[ZaZmailAdmin._SERVERS_LIST_VIEW] = new ZaServerListController(this._appCtxt, this._container, this);								
 	}
-	return this._controllers[ZaZimbraAdmin._SERVERS_LIST_VIEW];
+	return this._controllers[ZaZmailAdmin._SERVERS_LIST_VIEW];
 }
 
 ZaApp.prototype.getServerController =
@@ -405,14 +405,14 @@ function(viewId) {
 
 ZaApp.prototype.getCosListController =
 function() {
-	if (this._controllers[ZaZimbraAdmin._COS_LIST_VIEW] == null) {
-		this._controllers[ZaZimbraAdmin._COS_LIST_VIEW] = new ZaCosListController(this._appCtxt, this._container, this);
-		this._controllers[ZaZimbraAdmin._COS_LIST_VIEW].addRemovalListener(new AjxListener(this, ZaApp.prototype.handleCosRemoval));
+	if (this._controllers[ZaZmailAdmin._COS_LIST_VIEW] == null) {
+		this._controllers[ZaZmailAdmin._COS_LIST_VIEW] = new ZaCosListController(this._appCtxt, this._container, this);
+		this._controllers[ZaZmailAdmin._COS_LIST_VIEW].addRemovalListener(new AjxListener(this, ZaApp.prototype.handleCosRemoval));
 		if(ZaSettings.TREE_ENABLED) {
-			this._controllers[ZaZimbraAdmin._COS_LIST_VIEW].addRemovalListener(new AjxListener(this._appCtxt.getAppController().getOverviewPanelController(), ZaOverviewPanelController.prototype.handleCosRemoval));
+			this._controllers[ZaZmailAdmin._COS_LIST_VIEW].addRemovalListener(new AjxListener(this._appCtxt.getAppController().getOverviewPanelController(), ZaOverviewPanelController.prototype.handleCosRemoval));
 		}
 	}
-	return this._controllers[ZaZimbraAdmin._COS_LIST_VIEW];
+	return this._controllers[ZaZmailAdmin._COS_LIST_VIEW];
 }
 
 
@@ -475,7 +475,7 @@ ZaApp.prototype.searchDomains = function(query) {
 			busyId:busyId,
 			busyMsg:ZaMsg.BUSY_SEARCHING_DOMAINS,
 			skipCallbackIfCancelled:false,
-			attrs:[ZaDomain.A_description, ZaDomain.A_domainName,ZaDomain.A_zimbraDomainStatus,ZaItem.A_zimbraId, ZaDomain.A_domainType]			
+			attrs:[ZaDomain.A_description, ZaDomain.A_domainName,ZaDomain.A_zmailDomainStatus,ZaItem.A_zmailId, ZaDomain.A_domainType]			
 	}
 	ZaSearch.searchDirectory(searchParams);
 }
@@ -496,7 +496,7 @@ ZaApp.prototype.scheduledSearchDomains = function(domainItem) {
 			busyId:busyId,
 			busyMsg:ZaMsg.BUSY_SEARCHING_DOMAINS,
 			skipCallbackIfCancelled:false,
-			attrs:[ZaDomain.A_domainName, ZaItem.A_zimbraId]			
+			attrs:[ZaDomain.A_domainName, ZaItem.A_zmailId]			
 	}
 	ZaSearch.searchDirectory(searchParams);
 //	DBG.println(AjxDebug.DBG1, "Searching for domains "+ ev.keyCode +" char code " + (new Date()).getTime());
@@ -589,7 +589,7 @@ function(refresh) {
 				var resArray = new Array();
 				var cnt = tmpArray.length;
 				for(var i=0;i>cnt;i++) {
-					if(tmpArray[i].attrs[ZaServer.A_zimbraMailboxServiceInstalled]) {
+					if(tmpArray[i].attrs[ZaServer.A_zmailMailboxServiceInstalled]) {
 						this._mbsList.add(tmpArray[i]);
 					}
 				}
@@ -618,14 +618,14 @@ function (refresh) {
 ZaApp.prototype.getMailServers =
 function(refresh) {
 	if (refresh || this._mbsList == null) {
-		this._mbsList = ZaServer.getAllMBSs([ZaServer.A_ServiceHostname, ZaServer.A_description, ZaServer.A_zimbraServiceEnabled, ZaServer.A_zimbraServiceInstalled, ZaItem.A_zimbraId]);
-		//this._serverList = ZaServer.getAll([ZaServer.A_ServiceHostname, ZaServer.A_description, ZaServer.A_zimbraServiceEnabled, ZaServer.A_zimbraServiceInstalled, ZaItem.A_zimbraId]);
+		this._mbsList = ZaServer.getAllMBSs([ZaServer.A_ServiceHostname, ZaServer.A_description, ZaServer.A_zmailServiceEnabled, ZaServer.A_zmailServiceInstalled, ZaItem.A_zmailId]);
+		//this._serverList = ZaServer.getAll([ZaServer.A_ServiceHostname, ZaServer.A_description, ZaServer.A_zmailServiceEnabled, ZaServer.A_zmailServiceInstalled, ZaItem.A_zmailId]);
 	}
 	var resArray = new Array();
 	var tmpArray = this._mbsList.getArray();
 	var cnt = tmpArray.length;
 	for(var i = 0; i < cnt; i++) {
-		if(tmpArray[i].attrs[ZaServer.A_zimbraMailboxServiceEnabled]) {
+		if(tmpArray[i].attrs[ZaServer.A_zmailMailboxServiceEnabled]) {
 			resArray.push(tmpArray[i]);
 		}
 	}
@@ -641,7 +641,7 @@ function(refresh) {
 		var hashMap = this._serverList.getIdHash();
 		var mailServerArr = [];
 		for (var i in hashMap) {
-			if (hashMap[i].attrs[ZaServer.A_zimbraMailboxServiceEnabled]){
+			if (hashMap[i].attrs[ZaServer.A_zmailMailboxServiceEnabled]){
 				mailServerArr.push(hashMap[i]);
 			}
 		}
@@ -664,7 +664,7 @@ function(refresh) {
 		var hashMap = this._serverList.getIdHash();
 		var mailServerArr = [];
 		for (var i in hashMap) {
-			if (hashMap[i].attrs[ZaServer.A_zimbraMailboxServiceEnabled]){
+			if (hashMap[i].attrs[ZaServer.A_zmailMailboxServiceEnabled]){
 				var obj = new Object();
 				obj[ZaServer.A_ServiceHostname] = hashMap[i].attrs[ZaServer.A_ServiceHostname];
 				obj.id = hashMap[i].id;
@@ -701,10 +701,10 @@ ZaApp.prototype.getCosList =
 function(refresh) {
 	if (refresh || !this._cosList) {
 		var query = "";
-		if(!ZaZimbraAdmin.hasGlobalCOSSListAccess()) {
+		if(!ZaZmailAdmin.hasGlobalCOSSListAccess()) {
 			var cosNameList = ZaApp.getInstance()._cosNameList;
 			if(AjxUtil.isEmpty(cosNameList)) {
-				ZaApp.getInstance()._cosNameList = cosNameList = ZaCos.getEffectiveCosList(ZaZimbraAdmin.currentAdminAccount.id);
+				ZaApp.getInstance()._cosNameList = cosNameList = ZaCos.getEffectiveCosList(ZaZmailAdmin.currentAdminAccount.id);
 			}
 			if(cosNameList.length == 0) {
 				this._cosList = new ZaItemList(ZaCos);
@@ -789,7 +789,7 @@ ZaApp.prototype.getInstalledSkins =
 function(refresh) {
     try {
         if (refresh || this._installedSkins == null) {
-            var soapDoc = AjxSoapDoc.create("GetAllSkinsRequest", ZaZimbraAdmin.URN, null);
+            var soapDoc = AjxSoapDoc.create("GetAllSkinsRequest", ZaZmailAdmin.URN, null);
 
 	        var csfeParams = new Object();
 	        csfeParams.soapDoc = soapDoc;
@@ -832,8 +832,8 @@ function (skins) {
 ZaApp.prototype.handleDomainCreation = 
 function (ev) {
 	if(ev) {
-        if (!ZaZimbraAdmin.hasGlobalDomainListAccess()) {
-            ZaApp.getInstance()._domainNameList = ZaDomain.getEffectiveDomainList(ZaZimbraAdmin.currentAdminAccount.id);
+        if (!ZaZmailAdmin.hasGlobalDomainListAccess()) {
+            ZaApp.getInstance()._domainNameList = ZaDomain.getEffectiveDomainList(ZaZmailAdmin.currentAdminAccount.id);
         }
 		//update the overpanel
         this.searchDomains();
@@ -841,7 +841,7 @@ function (ev) {
         // result, but the overpanel will show more results. It could potentially be combined into one search.
         this.getDomainListController().show ();
 
-        ZaZimbraAdmin.getInstance().getOverviewPanelController().refreshRelatedTree (ev.getDetails());
+        ZaZmailAdmin.getInstance().getOverviewPanelController().refreshRelatedTree (ev.getDetails());
 	}
 }
 
@@ -865,7 +865,7 @@ function (ev) {
 				this._cosList.remove(ev.getDetails());
 			}
 
-            ZaZimbraAdmin.getInstance().refreshHistoryTreeByDelete(ev.getDetails());
+            ZaZmailAdmin.getInstance().refreshHistoryTreeByDelete(ev.getDetails());
 		}
 		if(this._cosListChoices == null) {
 			this._cosListChoices = new XFormChoices(this._cosList.getArray(), XFormChoices.OBJECT_LIST, "id", "name");	

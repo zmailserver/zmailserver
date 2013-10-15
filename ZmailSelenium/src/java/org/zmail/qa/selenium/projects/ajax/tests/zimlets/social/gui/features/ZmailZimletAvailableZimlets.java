@@ -14,24 +14,24 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.zimlets.social.gui.features;
+package org.zmail.qa.selenium.projects.ajax.tests.zimlets.social.gui.features;
 
 import java.util.HashMap;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
 
 
-public class ZimbraZimletAvailableZimlets extends AjaxCommonTest {
+public class ZmailZimletAvailableZimlets extends AjaxCommonTest {
 
 	
 	@SuppressWarnings("serial")
-	public ZimbraZimletAvailableZimlets() {
-		logger.info("New "+ ZimbraZimletAvailableZimlets.class.getCanonicalName());
+	public ZmailZimletAvailableZimlets() {
+		logger.info("New "+ ZmailZimletAvailableZimlets.class.getCanonicalName());
 		
 		// All tests start at the login page
 		super.startingPage = app.zPageSocial;
@@ -40,16 +40,16 @@ public class ZimbraZimletAvailableZimlets extends AjaxCommonTest {
 		super.startingAccountPreferences = new HashMap<String, String>() {{
 				    				    
 					// Only mail is enabled
-				    put("zimbraFeatureMailEnabled", "FALSE");
-				    put("zimbraFeatureContactsEnabled", "FALSE");
-				    put("zimbraFeatureCalendarEnabled", "FALSE");
-				    put("zimbraFeatureTasksEnabled", "FALSE");
-				    put("zimbraFeatureBriefcasesEnabled", "FALSE");
+				    put("zmailFeatureMailEnabled", "FALSE");
+				    put("zmailFeatureContactsEnabled", "FALSE");
+				    put("zmailFeatureCalendarEnabled", "FALSE");
+				    put("zmailFeatureTasksEnabled", "FALSE");
+				    put("zmailFeatureBriefcasesEnabled", "FALSE");
 
-				    // https://bugzilla.zimbra.com/show_bug.cgi?id=62161#c3
-				    // put("zimbraFeatureOptionsEnabled", "FALSE");
+				    // https://bugzilla.zmail.com/show_bug.cgi?id=62161#c3
+				    // put("zmailFeatureOptionsEnabled", "FALSE");
 				    
-				    put("zimbraZimletAvailableZimlets", "+com_zimbra_social");
+				    put("zmailZimletAvailableZimlets", "+org_zmail_social");
 
 				}};
 
@@ -58,13 +58,13 @@ public class ZimbraZimletAvailableZimlets extends AjaxCommonTest {
 	
 
 	/**
-	 * See http://bugzilla.zimbra.com/show_bug.cgi?id=61982 - WONTFIX
+	 * See http://bugzilla.zmail.com/show_bug.cgi?id=61982 - WONTFIX
 	 * @throws HarnessException
 	 */
 	@Bugs(ids = "50123")
 	@Test(	description = "Load the client with just Social enabled",
 			groups = { "deprecated" })
-	public void ZimbraZimletAvailableZimlets_01() throws HarnessException {
+	public void ZmailZimletAvailableZimlets_01() throws HarnessException {
 		
 		ZAssert.assertTrue(app.zPageSocial.zIsActive(), "Verify the social page is active");
 

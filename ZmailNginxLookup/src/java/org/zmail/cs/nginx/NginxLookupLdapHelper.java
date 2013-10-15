@@ -12,33 +12,33 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.nginx;
+package org.zmail.cs.nginx;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.ldap.LdapProv;
-import com.zimbra.cs.ldap.ILdapContext;
-import com.zimbra.cs.ldap.LdapClient;
-import com.zimbra.cs.ldap.LdapConstants;
-import com.zimbra.cs.ldap.LdapException;
-import com.zimbra.cs.ldap.LdapUsage;
-import com.zimbra.cs.ldap.ZAttributes;
-import com.zimbra.cs.ldap.ZLdapContext;
-import com.zimbra.cs.ldap.ZLdapFilter;
-import com.zimbra.cs.ldap.ZLdapFilterFactory;
-import com.zimbra.cs.ldap.ZSearchControls;
-import com.zimbra.cs.ldap.ZSearchResultEntry;
-import com.zimbra.cs.ldap.ZSearchResultEnumeration;
-import com.zimbra.cs.ldap.ZSearchScope;
-import com.zimbra.cs.ldap.ZLdapFilterFactory.FilterId;
-import com.zimbra.cs.nginx.NginxLookupExtension.EntryNotFoundException;
-import com.zimbra.cs.nginx.NginxLookupExtension.NginxLookupException;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.ldap.LdapProv;
+import org.zmail.cs.ldap.ILdapContext;
+import org.zmail.cs.ldap.LdapClient;
+import org.zmail.cs.ldap.LdapConstants;
+import org.zmail.cs.ldap.LdapException;
+import org.zmail.cs.ldap.LdapUsage;
+import org.zmail.cs.ldap.ZAttributes;
+import org.zmail.cs.ldap.ZLdapContext;
+import org.zmail.cs.ldap.ZLdapFilter;
+import org.zmail.cs.ldap.ZLdapFilterFactory;
+import org.zmail.cs.ldap.ZSearchControls;
+import org.zmail.cs.ldap.ZSearchResultEntry;
+import org.zmail.cs.ldap.ZSearchResultEnumeration;
+import org.zmail.cs.ldap.ZSearchScope;
+import org.zmail.cs.ldap.ZLdapFilterFactory.FilterId;
+import org.zmail.cs.nginx.NginxLookupExtension.EntryNotFoundException;
+import org.zmail.cs.nginx.NginxLookupExtension.NginxLookupException;
 
 public class NginxLookupLdapHelper extends AbstractNginxLookupLdapHelper {
 
@@ -112,9 +112,9 @@ public class NginxLookupLdapHelper extends AbstractNginxLookupLdapHelper {
         if (query == null)
             throw new NginxLookupException("empty attribute: "+queryTemplate);
         
-        ZimbraLog.nginxlookup.debug("query template attr=" + queryTemplate + ", query template=" + query);
+        ZmailLog.nginxlookup.debug("query template attr=" + queryTemplate + ", query template=" + query);
         query = StringUtil.fillTemplate(query, kv);
-        ZimbraLog.nginxlookup.debug("query=" + query);
+        ZmailLog.nginxlookup.debug("query=" + query);
         
         if (base == null) {
             base = LdapConstants.DN_ROOT_DSE;

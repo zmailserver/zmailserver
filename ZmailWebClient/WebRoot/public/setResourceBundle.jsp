@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
 -->
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
 <%--
 Note: We are loading resource bundle in a separate jsp file so that octopus can override this easily
 to load different resource bundle without any need to duplicate the entire jsp code.

@@ -17,22 +17,22 @@
 -->
 <tocdata>
 <book name="Informações básicas" >
-  <item name="Sobre o Zimbra Desktop" url="Getting_Started/Zimbra_User_Help.htm" />
-  <item name="Visão geral dos recursos do Zimbra Desktop" url="Zdesktop/Overview_of_Zimbra_Desktop_Features.htm" />
+  <item name="Sobre o Zmail Desktop" url="Getting_Started/Zmail_User_Help.htm" />
+  <item name="Visão geral dos recursos do Zmail Desktop" url="Zdesktop/Overview_of_Zmail_Desktop_Features.htm" />
   <item name="Trabalhando offline" url="Zdesktop/z-Working_Offline.htm" />
   <item name="Teclas de atalho do teclado" url="Navigation_folders_and_tips/Keyboard_Shortcut_Keys.htm" />
 </book>
-<book name="Configurando o Zimbra Desktop" >
-  <item name="Configurando uma conta do Cliente Zimbra para Web" url="Zdesktop/Z-Setting_up_your_Zimbra_Web_Client_account.htm" />
+<book name="Configurando o Zmail Desktop" >
+  <item name="Configurando uma conta do Cliente Zmail para Web" url="Zdesktop/Z-Setting_up_your_Zmail_Web_Client_account.htm" />
   <item name="Configurando contas do Yahoo! Contas de e-mail e do Gmail" url="Zdesktop/z-Setting_up_Yahoo!_Mail_Plus,_Gmail,_AOL_account_setup.htm" />
   <item name="Configurando contas POP/IMAP" url="Zdesktop/z-Setting_up_POP_IMAP_accounts.htm" />
-  <item name="Sincronizando suas contas" url="Zdesktop/Synchronize_your_account_to_Zimbra_Desktop.htm" />
+  <item name="Sincronizando suas contas" url="Zdesktop/Synchronize_your_account_to_Zmail_Desktop.htm" />
   <item name="Desativando a sincronização automática" url="Zdesktop/Turning_Off_Automatic_Sync.htm" />
   <item name="Organizando a visualização do Desktop" url="Zdesktop/z-Changing_account_order_on_Desktop.htm" />
   <item name="Excluindo uma conta do Desktop" url="Zdesktop/z-Deleting_an_account_from_Desktop.htm" />
 </book>
 <book name="Navegando em sua caixa de entrada do Desktop" >
-  <item name="Navegando no Zimbra Desktop" url="Navigation_folders_and_tips/z-Navigating_Zimbra_Desktop.htm" />
+  <item name="Navegando no Zmail Desktop" url="Navigation_folders_and_tips/z-Navigating_Zmail_Desktop.htm" />
   <item name="Recursos e atalhos da interface de usuário" url="Getting_Started/user_interface_features_and_shortcuts.htm" />
   <item name="Menus de botão direito do mouse" url="Navigation_folders_and_tips/right-click_menus.htm" />
   <item name="Pastas do sistema" url="Navigation_folders_and_tips/inbox_folder.htm" />
@@ -123,7 +123,7 @@
   <item name="Configurando alertas de desktop" url="Userspecific/Setting_up_desktop_alerts.htm" />
   <item name="Notificação por e-mail para outro endereço" url="Userspecific/New_mail_notifications.htm" />
   <item name="Mensagem de férias" url="Userspecific/vacation_message.htm" />
-  <item name="Fazendo do Zimbra Desktop o cliente de e-mail padrão" url="managing_your_account/Making_Zimbra_Desktop_Default_Mail_Client.htm" />
+  <item name="Fazendo do Zmail Desktop o cliente de e-mail padrão" url="managing_your_account/Making_Zmail_Desktop_Default_Mail_Client.htm" />
 </book>
 <book name="Organizando suas contas" >
   <item name="Categorizando suas mensagens de e-mail" url="Navigation_folders_and_tips/categorizing_your_mail_messages.htm#bc-1" />
@@ -144,8 +144,8 @@
   <item name="Movendo tarefas" url="Tasks/Moving_tasks.htm" />
   <item name="Classificando tarefas" url="Tasks/Sorting_tasks_.htm" />
 </book>
-<book name="Compartilhamento de pastas (Apenas para contas do Zimbra)" >
-<chunk name="Compartilhamento de pastas (Apenas para contas do Zimbra)" ref="whtdata1.xml" />
+<book name="Compartilhamento de pastas (Apenas para contas do Zmail)" >
+<chunk name="Compartilhamento de pastas (Apenas para contas do Zmail)" ref="whtdata1.xml" />
 </book>
 <book name="Usando o porta-arquivos" >
 <chunk name="Usando o porta-arquivos" ref="whtdata2.xml" />

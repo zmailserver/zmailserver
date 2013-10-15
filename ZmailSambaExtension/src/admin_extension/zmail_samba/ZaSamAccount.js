@@ -74,7 +74,7 @@ if(ZaTabView.XFormModifiers["ZaAccountXFormView"]) {
 		var sambaTabIx = ++this.TAB_INDEX;
 		
 		var tabBar = xFormObject.items[1] ;
-		tabBar.choices.push({value:sambaTabIx, label:zimbra_samba.SambaAccount});		
+		tabBar.choices.push({value:sambaTabIx, label:zmail_samba.SambaAccount});		
 		var sambaAccountTab={type:_ZATABCASE_, numCols:1, caseKey:sambaTabIx,
 					items: [
 						{type:_ZAGROUP_, 
@@ -145,7 +145,7 @@ if(ZaXDialog.XFormModifiers["ZaNewAccountXWizard"]) {
 			
 		ZaNewAccountXWizard.SAMBA_ACC_STEP = ++this.TAB_INDEX;			
 	
-		this.stepChoices.push({value:ZaNewAccountXWizard.SAMBA_ACC_STEP, label:zimbra_samba.SambaAccount});
+		this.stepChoices.push({value:ZaNewAccountXWizard.SAMBA_ACC_STEP, label:zmail_samba.SambaAccount});
 		this._lastStep = this.stepChoices.length;
 
 
@@ -183,7 +183,7 @@ if(ZaItem.loadMethods["ZaAccount"]) {
 ZaSamAccount.createMethod =
 function(tmpObj, account) {
 	if(tmpObj.attrs[ZaAccount.A_password] && tmpObj.attrs[ZaAccount.A_password].length > 0) {
-		var soapDoc = AjxSoapDoc.create("ModifyAccountRequest", "urn:zimbraAdmin", null);
+		var soapDoc = AjxSoapDoc.create("ModifyAccountRequest", "urn:zmailAdmin", null);
 		soapDoc.set("id", account.id);
 
 		var attr = soapDoc.set("a", ZaSambaUtil.hex_md4(tmpObj.attrs[ZaAccount.A_password]));
@@ -210,7 +210,7 @@ if(ZaItem.createMethods["ZaAccount"]) {
 
 ZaSamAccount.changePasswordMethod =
 function(newPassword) {
-	var soapDoc = AjxSoapDoc.create("ModifyAccountRequest", "urn:zimbraAdmin", null);
+	var soapDoc = AjxSoapDoc.create("ModifyAccountRequest", "urn:zmailAdmin", null);
 	soapDoc.set("id", this.id);
 
 	var attr = soapDoc.set("a", ZaSambaUtil.hex_md4(newPassword));
@@ -219,7 +219,7 @@ function(newPassword) {
 	params.soapDoc = soapDoc;	
 	var reqMgrParams = {
 		controller:ZaApp.getInstance().getCurrentController(),
-		busyMsg: zimbra_samba.BUSY_CHANGING_NT_PASSWORD 
+		busyMsg: zmail_samba.BUSY_CHANGING_NT_PASSWORD 
 	};
 	var resp = ZaRequestMgr.invoke(params, reqMgrParams).Body.ModifyAccountResponse;
 }
@@ -232,7 +232,7 @@ if(ZaAccount.changePasswordMethods) {
 ZaSamAccount.ACC_WIZ_GROUP = 
 	{type:_ZAWIZGROUP_, 
 			items:[
-				{ref:ZaSamAccount.A_sambaDomainSID, type:_OSELECT1_, editable:false,choices:ZaApp.SambaDomainSIDChoices, msgName:zimbra_samba.MSG_SambaDomain,label:zimbra_samba.LBL_SambaDomain, labelLocation:_LEFT_,
+				{ref:ZaSamAccount.A_sambaDomainSID, type:_OSELECT1_, editable:false,choices:ZaApp.SambaDomainSIDChoices, msgName:zmail_samba.MSG_SambaDomain,label:zmail_samba.LBL_SambaDomain, labelLocation:_LEFT_,
 					elementChanged:function(val,instanceValue, event) {
 						var v = val;
 						var instance = this.getInstance();

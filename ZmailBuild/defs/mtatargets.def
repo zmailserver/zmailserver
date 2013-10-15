@@ -2,26 +2,26 @@
 # __MTA
 
 mta: CUR_DEST_ROOT := $(MTA_DEST_ROOT)
-mta: CUR_PACKAGE_SPEC := $(BUILD_ROOT)/zimbra-mta.spec
-mta: CUR_PACKAGE_NAME := zimbra-mta
+mta: CUR_PACKAGE_SPEC := $(BUILD_ROOT)/zmail-mta.spec
+mta: CUR_PACKAGE_NAME := zmail-mta
 mta: $(PACKAGE_DIR) mta_stage mta_pkg_spec_$(PACKAGE_EXT)
 	(cd $(CUR_DEST_ROOT); \
 		$(PACKAGING_COMMAND) $(PACKAGING_OPTIONS) )
 
 mta_pkg_spec_ccs:
 
-mta_pkg_spec_pkg: $(BUILD_ROOT)/resources/zimbra-mta $(BUILD_ROOT)/zimbra-mta.Info.plist $(BUILD_ROOT)/zimbra-mta.Description.plist
+mta_pkg_spec_pkg: $(BUILD_ROOT)/resources/zmail-mta $(BUILD_ROOT)/zmail-mta.Info.plist $(BUILD_ROOT)/zmail-mta.Description.plist
 
-$(BUILD_ROOT)/zimbra-mta.Description.plist:
-	cat $(PACKAGE_CONF_DIR)/Spec/zimbra-mta.Description.plist | \
+$(BUILD_ROOT)/zmail-mta.Description.plist:
+	cat $(PACKAGE_CONF_DIR)/Spec/zmail-mta.Description.plist | \
 	sed -e 's/@@VERSION@@/$(VERSION_TAG)/' \
 	-e 's/@@RELEASE@@/$(RELEASE)/' \
 	-e 's/@@MAJOR@@/$(MAJOR)/' \
 	-e 's/@@MICRO@@/$(MICRO)/' \
 	-e 's/@@MINOR@@/$(MINOR)/' > $@
 
-$(BUILD_ROOT)/zimbra-mta.Info.plist:
-	cat $(PACKAGE_CONF_DIR)/Spec/zimbra-mta.Info.plist | \
+$(BUILD_ROOT)/zmail-mta.Info.plist:
+	cat $(PACKAGE_CONF_DIR)/Spec/zmail-mta.Info.plist | \
 	sed -e 's/@@VERSION@@/$(VERSION_TAG)/' \
 	-e 's/@@RELEASE@@/$(RELEASE)/' \
 	-e 's/@@MAJOR@@/$(MAJOR)/' \
@@ -29,70 +29,70 @@ $(BUILD_ROOT)/zimbra-mta.Info.plist:
 	-e 's/@@BUILDNUM@@/$(BUILDNUM)/' \
 	-e 's/@@MINOR@@/$(MINOR)/' > $@
 
-$(BUILD_ROOT)/resources/zimbra-mta:
+$(BUILD_ROOT)/resources/zmail-mta:
 	mkdir -p $@
-	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zimbra-mta.postinstall $@/postinstall
+	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zmail-mta.postinstall $@/postinstall
 	chmod 755 $@/postinstall
-	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zimbra-mta.postupgrade $@/postupgrade
+	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zmail-mta.postupgrade $@/postupgrade
 	chmod 755 $@/postupgrade
 
 mta_pkg_spec_deb: $(MTA_DEST_ROOT)/DEBIAN/control
 
 $(MTA_DEST_ROOT)/DEBIAN: force
 	mkdir -p $@
-	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zimbra-mta.pre $@/preinst
-	cat $(PACKAGE_CONF_DIR)/Spec/Scripts/zimbra-mta.post >> $@/postinst
+	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zmail-mta.pre $@/preinst
+	cat $(PACKAGE_CONF_DIR)/Spec/Scripts/zmail-mta.post >> $@/postinst
 	chmod 555 $@/*
 
 $(MTA_DEST_ROOT)/DEBIAN/control: $(MTA_DEST_ROOT)/DEBIAN force
-	cat $(PACKAGE_CONF_DIR)/Spec/zimbra-mta.deb | \
+	cat $(PACKAGE_CONF_DIR)/Spec/zmail-mta.deb | \
 	sed -e 's/@@VERSION@@/$(VERSION_TAG)/' \
 	-e 's/@@RELEASE@@/$(RELEASE)/' \
 	-e 's/@@ARCH@@/$(ARCH)/' \
 	-e 's/^Copyright:/$(RPMCOPYRIGHTSTR):/' \
-	-e '/^%pre$$/ r zimbra-mta.pre' \
-	-e '/^%post$$/ r zimbra-mta.post' > $@
+	-e '/^%pre$$/ r zmail-mta.pre' \
+	-e '/^%post$$/ r zmail-mta.post' > $@
 
-mta_pkg_spec_rpm: $(BUILD_ROOT)/zimbra-mta.spec
+mta_pkg_spec_rpm: $(BUILD_ROOT)/zmail-mta.spec
 
-$(BUILD_ROOT)/zimbra-mta.spec:
-	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zimbra-mta.pre $(BUILD_ROOT)
-	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zimbra-mta.post $(BUILD_ROOT)
-	cat $(PACKAGE_CONF_DIR)/Spec/zimbra-mta.spec | \
+$(BUILD_ROOT)/zmail-mta.spec:
+	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zmail-mta.pre $(BUILD_ROOT)
+	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zmail-mta.post $(BUILD_ROOT)
+	cat $(PACKAGE_CONF_DIR)/Spec/zmail-mta.spec | \
 		sed -e 's/@@VERSION@@/$(VERSION_TAG)/' \
 		-e 's/@@RELEASE@@/$(RELEASE)/' \
 		-e 's/@@MTA_PROVIDES@@/$(MTA_PROVIDES)/' \
 		-e 's/^Copyright:/$(RPMCOPYRIGHTSTR):/' \
-		-e '/^%pre$$/ r zimbra-mta.pre' \
-		-e '/^%post$$/ r zimbra-mta.post' > $(BUILD_ROOT)/zimbra-mta.spec
-	rm -f zimbra-mta.pre
-	rm -f zimbra-mta.post
+		-e '/^%pre$$/ r zmail-mta.pre' \
+		-e '/^%post$$/ r zmail-mta.post' > $(BUILD_ROOT)/zmail-mta.spec
+	rm -f zmail-mta.pre
+	rm -f zmail-mta.post
 	(cd $(MTA_DEST_ROOT); find opt -type f -o -type l -maxdepth 2 \
-		| sed -e 's|^|%attr(-, zimbra, zimbra) /|' >> \
-		$(BUILD_ROOT)/zimbra-mta.spec )
-	echo "%attr(-, zimbra, zimbra) /opt/zimbra/amavisd-new-$(AMAVISD_VERSION)" >> \
-		$(BUILD_ROOT)/zimbra-mta.spec
-	echo "%attr(-, zimbra, zimbra) /opt/zimbra/altermime-$(ALTERMIME_VERSION)" >> \
-		$(BUILD_ROOT)/zimbra-mta.spec
-	echo "%attr(-, zimbra, zimbra) /opt/zimbra/dspam-$(DSPAM_VERSION)" >> \
-		$(BUILD_ROOT)/zimbra-mta.spec
-	echo "%attr(555, zimbra, zimbra) /opt/zimbra/clamav-$(CLAMAV_VERSION)" >> \
-		$(BUILD_ROOT)/zimbra-mta.spec
-	echo "%attr(-, zimbra, zimbra) /opt/zimbra/postfix-$(POSTFIX_VERSION)" >> \
-		$(BUILD_ROOT)/zimbra-mta.spec
-	echo "%attr(-, zimbra, zimbra) /opt/zimbra/libmemcached-$(LIBMCD_VERSION)" >> \
-		$(BUILD_ROOT)/zimbra-mta.spec
-	echo "%attr(-, zimbra, zimbra) /opt/zimbra/opendkim-$(DKIM_VERSION)" >> \
-		$(BUILD_ROOT)/zimbra-mta.spec
-	echo "%attr(-, zimbra, zimbra) /opt/zimbra/zeromq-$(ZMQ_VERSION)" >> \
-		$(BUILD_ROOT)/zimbra-mta.spec
-	echo "%attr(-, zimbra, zimbra) /opt/zimbra/mta" >> \
-		$(BUILD_ROOT)/zimbra-mta.spec
-	echo "%attr(-, zimbra, zimbra) /opt/zimbra/data/amavisd" >> \
-		$(BUILD_ROOT)/zimbra-mta.spec
+		| sed -e 's|^|%attr(-, zmail, zmail) /|' >> \
+		$(BUILD_ROOT)/zmail-mta.spec )
+	echo "%attr(-, zmail, zmail) /opt/zmail/amavisd-new-$(AMAVISD_VERSION)" >> \
+		$(BUILD_ROOT)/zmail-mta.spec
+	echo "%attr(-, zmail, zmail) /opt/zmail/altermime-$(ALTERMIME_VERSION)" >> \
+		$(BUILD_ROOT)/zmail-mta.spec
+	echo "%attr(-, zmail, zmail) /opt/zmail/dspam-$(DSPAM_VERSION)" >> \
+		$(BUILD_ROOT)/zmail-mta.spec
+	echo "%attr(555, zmail, zmail) /opt/zmail/clamav-$(CLAMAV_VERSION)" >> \
+		$(BUILD_ROOT)/zmail-mta.spec
+	echo "%attr(-, zmail, zmail) /opt/zmail/postfix-$(POSTFIX_VERSION)" >> \
+		$(BUILD_ROOT)/zmail-mta.spec
+	echo "%attr(-, zmail, zmail) /opt/zmail/libmemcached-$(LIBMCD_VERSION)" >> \
+		$(BUILD_ROOT)/zmail-mta.spec
+	echo "%attr(-, zmail, zmail) /opt/zmail/opendkim-$(DKIM_VERSION)" >> \
+		$(BUILD_ROOT)/zmail-mta.spec
+	echo "%attr(-, zmail, zmail) /opt/zmail/zeromq-$(ZMQ_VERSION)" >> \
+		$(BUILD_ROOT)/zmail-mta.spec
+	echo "%attr(-, zmail, zmail) /opt/zmail/mta" >> \
+		$(BUILD_ROOT)/zmail-mta.spec
+	echo "%attr(-, zmail, zmail) /opt/zmail/data/amavisd" >> \
+		$(BUILD_ROOT)/zmail-mta.spec
 ifeq ($(ZIMBRA_USE_CBPOLICYD), 1)
-	echo "%attr(-, zimbra, zimbra) /opt/zimbra/$(CBPOLICYD_DIR)" >> \
-		$(BUILD_ROOT)/zimbra-mta.spec
+	echo "%attr(-, zmail, zmail) /opt/zmail/$(CBPOLICYD_DIR)" >> \
+		$(BUILD_ROOT)/zmail-mta.spec
 endif
 
 mta_stage: $(MTA_COMPONENTS)
@@ -170,7 +170,7 @@ $(MTA_DEST_DIR)/$(AMAVISD_DIR)-new-$(AMAVISD_VERSION): $(MTA_DEST_DIR)
 	@echo "*** Creating amavisd"
 	mkdir -p $@/sbin
 	cp -f $(AMAVISD_SOURCE)/amavisd $@/sbin
-	sed -e 's!/var/amavis/db!/opt/zimbra/data/amavisd/db!' $(AMAVISD_SOURCE)/amavisd-nanny > $@/sbin/amavisd-nanny
+	sed -e 's!/var/amavis/db!/opt/zmail/data/amavisd/db!' $(AMAVISD_SOURCE)/amavisd-nanny > $@/sbin/amavisd-nanny
 	chmod 555 $@/sbin/amavisd-nanny
 	mkdir -p $@/.spamassassin/init
 	cp -f $(PACKAGE_CONF_DIR)/SpamAssassin/bayes* $@/.spamassassin/init

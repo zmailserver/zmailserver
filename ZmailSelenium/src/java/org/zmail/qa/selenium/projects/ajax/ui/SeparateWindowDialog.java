@@ -14,15 +14,15 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.ui;
+package org.zmail.qa.selenium.projects.ajax.ui;
 
-import com.zimbra.qa.selenium.framework.ui.AbsApplication;
-import com.zimbra.qa.selenium.framework.ui.AbsPage;
-import com.zimbra.qa.selenium.framework.ui.AbsSeparateWindow;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogWarning.DialogWarningID;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew;
+import org.zmail.qa.selenium.framework.ui.AbsApplication;
+import org.zmail.qa.selenium.framework.ui.AbsPage;
+import org.zmail.qa.selenium.framework.ui.AbsSeparateWindow;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogWarning.DialogWarningID;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew;
 
 public class SeparateWindowDialog extends AbsSeparateWindow {
 
@@ -71,7 +71,7 @@ public class SeparateWindowDialog extends AbsSeparateWindow {
 		String locator = null;
 		AbsPage page = null; 		// Does this ever result in a page being returned?
 
-		// See http://bugzilla.zimbra.com/show_bug.cgi?id=54560
+		// See http://bugzilla.zmail.com/show_bug.cgi?id=54560
 		// Need unique id's for the buttons
 		String buttonsTableLocator = "css=div[id='"+ MyDivId +"'] div[id$='_buttons']";
 

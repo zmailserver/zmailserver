@@ -15,17 +15,17 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.desktop.ui.tasks;
+package org.zmail.qa.selenium.projects.desktop.ui.tasks;
 
 import java.util.*;
 
 import com.thoughtworks.selenium.SeleniumException;
-import com.zimbra.qa.selenium.framework.core.ClientSessionFactory;
-import com.zimbra.qa.selenium.framework.items.TaskItem;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.framework.util.GeneralUtility.WAIT_FOR_OPERAND;
-import com.zimbra.qa.selenium.projects.desktop.ui.*;
+import org.zmail.qa.selenium.framework.core.ClientSessionFactory;
+import org.zmail.qa.selenium.framework.items.TaskItem;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.GeneralUtility.WAIT_FOR_OPERAND;
+import org.zmail.qa.selenium.projects.desktop.ui.*;
 
 
 /**
@@ -814,7 +814,7 @@ public class PageTasks extends AbsTab {
 					// TODO - handle other attachment types
 				}
 
-				// See http://bugzilla.zimbra.com/show_bug.cgi?id=56452
+				// See http://bugzilla.zmail.com/show_bug.cgi?id=56452
 
 				// Get the subject
 				locator = itemLocator + "//td[5]";
@@ -909,8 +909,8 @@ public class PageTasks extends AbsTab {
 	public String  GetShowOrigBodyText(String EmailAddress, String calItemId) throws HarnessException{
 
 		try{
-		    String port = ZimbraDesktopProperties.getInstance().getConnectionPort();
-		    String host = ZimbraSeleniumProperties.getStringProperty("desktop.server.host", "localhost");
+		    String port = ZmailDesktopProperties.getInstance().getConnectionPort();
+		    String host = ZmailSeleniumProperties.getStringProperty("desktop.server.host", "localhost");
 			String ShowOriURL = "http://" + host + ":" + port + "/home/" + EmailAddress + "/Tasks/?id=" + calItemId + "&mime=text/plain&noAttach=1";
 			sOpenWindow(ShowOriURL, "ShowOrignal");
 			sWaitForPopUp("ShowOrignal", "3000");

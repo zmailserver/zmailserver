@@ -14,19 +14,19 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.util;
+package org.zmail.qa.selenium.framework.util;
 
 import org.apache.log4j.*;
 
-public class ZimbraDistributionList {
-	private static Logger logger = LogManager.getLogger(ZimbraDistributionList.class);
+public class ZmailDistributionList {
+	private static Logger logger = LogManager.getLogger(ZmailDistributionList.class);
 
-	public String ZimbraId = null;
+	public String ZmailId = null;
 	public String DisplayName = null;
 	public String EmailAddress = null;
 	public String Password = null;
 
-	public ZimbraDistributionList() {
+	public ZmailDistributionList() {
 		this(null, null);
 	}
 	
@@ -34,23 +34,23 @@ public class ZimbraDistributionList {
 	 * Create an account with the email address <name>@<domain>
 	 * The password is set to config property "adminPwd"
 	 */
-	public ZimbraDistributionList(String email, String password) {
+	public ZmailDistributionList(String email, String password) {
 
 		EmailAddress = email;
 		if ( (email == null) || (email.trim().length() == 0) ) {
-			EmailAddress = "dl" + ZimbraSeleniumProperties.getUniqueString() + "@" + ZimbraSeleniumProperties.getStringProperty("testdomain", "testdomain.com");
+			EmailAddress = "dl" + ZmailSeleniumProperties.getUniqueString() + "@" + ZmailSeleniumProperties.getStringProperty("testdomain", "testdomain.com");
 		}
 
 		Password = password;
 		if ( (password == null) || (password.trim().length() == 0) ) {
-			password = ZimbraSeleniumProperties.getStringProperty("adminPwd", "test123");
+			password = ZmailSeleniumProperties.getStringProperty("adminPwd", "test123");
 		}
 	}
 
 	/**
 	 * Creates the account on the ZCS using CreateAccountRequest
 	 */
-	public ZimbraDistributionList provision() {
+	public ZmailDistributionList provision() {
 		
 		try {
 
@@ -59,8 +59,8 @@ public class ZimbraDistributionList {
 
 
 			// If the domain does not exist, create it
-			ZimbraAdminAccount.GlobalAdmin().soapSend(
-						"<CreateDomainRequest xmlns='urn:zimbraAdmin'>"
+			ZmailAdminAccount.GlobalAdmin().soapSend(
+						"<CreateDomainRequest xmlns='urn:zmailAdmin'>"
 					+		"<name>"+ domain +"</name>"
 					+	"</CreateDomainRequest>");
 
@@ -68,21 +68,21 @@ public class ZimbraDistributionList {
 
 
 			// Create the account
-			ZimbraAdminAccount.GlobalAdmin().soapSend(
-						"<CreateDistributionListRequest xmlns='urn:zimbraAdmin'>"
+			ZmailAdminAccount.GlobalAdmin().soapSend(
+						"<CreateDistributionListRequest xmlns='urn:zmailAdmin'>"
 					+		"<name>"+ this.EmailAddress +"</name>"
-					+		"<a n='description'>description"+ ZimbraSeleniumProperties.getUniqueString() +"</a>"
+					+		"<a n='description'>description"+ ZmailSeleniumProperties.getUniqueString() +"</a>"
 					+	"</CreateDistributionListRequest>");
 
-			ZimbraId = ZimbraAdminAccount.GlobalAdmin().soapSelectValue("//admin:dl", "id");
+			ZmailId = ZmailAdminAccount.GlobalAdmin().soapSelectValue("//admin:dl", "id");
 
 			// You can't add a logger to a DL
-//			if ( ZimbraSeleniumProperties.getStringProperty("soap.trace.enabled", "false").toLowerCase().equals("true") ) {
+//			if ( ZmailSeleniumProperties.getStringProperty("soap.trace.enabled", "false").toLowerCase().equals("true") ) {
 //				
-//				ZimbraAdminAccount.GlobalAdmin().soapSend(
-//							"<AddAccountLoggerRequest xmlns='urn:zimbraAdmin'>"
+//				ZmailAdminAccount.GlobalAdmin().soapSend(
+//							"<AddAccountLoggerRequest xmlns='urn:zmailAdmin'>"
 //						+		"<account by='name'>"+ this.EmailAddress + "</account>"
-//						+		"<logger category='zimbra.soap' level='trace'/>"
+//						+		"<logger category='zmail.soap' level='trace'/>"
 //						+	"</AddAccountLoggerRequest>");
 //
 //			}
@@ -91,7 +91,7 @@ public class ZimbraDistributionList {
 		} catch (HarnessException e) {
 
 			logger.error("Unable to provision DL: "+ EmailAddress, e);
-			ZimbraId = null;
+			ZmailId = null;
 
 		}
 
@@ -100,29 +100,29 @@ public class ZimbraDistributionList {
 	}
 
 	
-	public ZimbraDistributionList addMember(ZimbraAccount account) throws HarnessException {
+	public ZmailDistributionList addMember(ZmailAccount account) throws HarnessException {
 		return(addMember(account.EmailAddress));
 	}
 	
-	public ZimbraDistributionList addMember(ZimbraDistributionList list) throws HarnessException {
+	public ZmailDistributionList addMember(ZmailDistributionList list) throws HarnessException {
 		return (addMember(list.EmailAddress));
 	}
 	
-	protected ZimbraDistributionList addMember(String email) throws HarnessException {
+	protected ZmailDistributionList addMember(String email) throws HarnessException {
 		
-		ZimbraAdminAccount.GlobalAdmin().soapSend(
-					"<AddDistributionListMemberRequest xmlns='urn:zimbraAdmin'>"
-				+		"<id>"+ this.ZimbraId +"</id>"
+		ZmailAdminAccount.GlobalAdmin().soapSend(
+					"<AddDistributionListMemberRequest xmlns='urn:zmailAdmin'>"
+				+		"<id>"+ this.ZmailId +"</id>"
 				+		"<dlm>"+ email +"</dlm>"
 				+	"</AddDistributionListMemberRequest>");
 
 		return (this);
 	}
 	
-	public ZimbraDistributionList grantRight(ZimbraAccount grantee, String right) throws HarnessException {
+	public ZmailDistributionList grantRight(ZmailAccount grantee, String right) throws HarnessException {
 
-		ZimbraAdminAccount.GlobalAdmin().soapSend(
-					"<GrantRightRequest xmlns='urn:zimbraAdmin'>"
+		ZmailAdminAccount.GlobalAdmin().soapSend(
+					"<GrantRightRequest xmlns='urn:zmailAdmin'>"
 				+		"<target by='name' type='dl'>"+ this.EmailAddress +"</target>"
 				+		"<grantee by='name' type='usr'>"+ grantee.EmailAddress +"</grantee>"
 				+		"<right>"+ right +"</right>"

@@ -14,7 +14,7 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimletConfig name="com_zimbra_usagetracker" version="1.0">
+<zimletConfig name="org_zmail_usagetracker" version="1.0">
     <global>
     </global>
 </zimletConfig>

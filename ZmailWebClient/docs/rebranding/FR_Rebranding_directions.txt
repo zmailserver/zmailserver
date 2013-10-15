@@ -1,24 +1,24 @@
 REDÉFINIR LES SUJETS D'AIDE DE ZWC - COMMENT CHANGER LES VARIABLES 
 
-L'aide du client Web de Zimbra peut être redéfinie pour remplacer la référence à Zimbra et le nom de produit de Zimbra par nos noms de société et de produit.
+L'aide du client Web de Zmail peut être redéfinie pour remplacer la référence à Zmail et le nom de produit de Zmail par nos noms de société et de produit.
 
 Les variables par défaut dans le ficher ZbMsg.properties sont les suivantes :
 
-"nom long du client web" - ClientNameLong = Zimbra Web Client
+"nom long du client web" - ClientNameLong = Zmail Web Client
 "nom court du client web" - ClientNameShort = ZWC
-"Le nom de votre société" - CompanyName = Zimbra
-"Cette variable n'est pas pertinente.  Ne pas changer" - DesktopName = Zimbra Desktop
-"nom complet du produit" - CollaborationProductFullName = Zimbra Collaboration Suite
+"Le nom de votre société" - CompanyName = Zmail
+"Cette variable n'est pas pertinente.  Ne pas changer" - DesktopName = Zmail Desktop
+"nom complet du produit" - CollaborationProductFullName = Zmail Collaboration Suite
 "nom court du produit" - CollaborationProductShortName = ZCS
 
 Changer ces variables
 
-1. SSH sur le serveur Zimbra
+1. SSH sur le serveur Zmail
 
-2. Lorsque Zimbra change le dossier pour le dossier suivant
-/opt/zimbra/jetty/webapps/zimbra/WEB-INF/classes/messages/
+2. Lorsque Zmail change le dossier pour le dossier suivant
+/opt/zmail/jetty/webapps/zmail/WEB-INF/classes/messages/
 
-3. Changer les valeurs, modifier ZbMsg.properties.  Remplacez le nom Zimbra par le nom de votre société. NE PAS CHANGER OU SUPPRIMER LE DESCRIPTEUR DES VARIABLES.
+3. Changer les valeurs, modifier ZbMsg.properties.  Remplacez le nom Zmail par le nom de votre société. NE PAS CHANGER OU SUPPRIMER LE DESCRIPTEUR DES VARIABLES.
 
 4. Relancez le serveur.  Saisissez zmcontrol restart.
 

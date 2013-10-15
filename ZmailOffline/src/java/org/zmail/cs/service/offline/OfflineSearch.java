@@ -13,29 +13,29 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service.offline;
+package org.zmail.cs.service.offline;
 
 import java.util.List;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.account.offline.OfflineProvisioning;
-import com.zimbra.cs.index.SearchParams;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.Mountpoint;
-import com.zimbra.cs.service.mail.Search;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.account.offline.OfflineProvisioning;
+import org.zmail.cs.index.SearchParams;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.Mountpoint;
+import org.zmail.cs.service.mail.Search;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.soap.ZmailSoapContext;
 
 public class OfflineSearch extends Search {
 
     
     @Override
     protected List<String> getFolderIdListIfSimpleAppointmentsQuery(
-                    SearchParams params, ZimbraSoapContext zsc) throws ServiceException {
+                    SearchParams params, ZmailSoapContext zsc) throws ServiceException {
         List<String> folderIds = super.getFolderIdListIfSimpleAppointmentsQuery(params, zsc);
         if (folderIds != null) {
             Account authAcct = getAuthenticatedAccount(zsc);

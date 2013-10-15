@@ -14,16 +14,16 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.search.savedsearch;
+package org.zmail.qa.selenium.projects.ajax.tests.search.savedsearch;
 
 import java.util.*;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
 
 
 //TODO: add more in ContactItem.java
@@ -39,7 +39,7 @@ public class RunSavedSearch extends AjaxCommonTest  {
 
 		// Make sure we are using an account with conversation view
 		super.startingAccountPreferences = new HashMap<String, String>() {{
-			put("zimbraPrefGroupMailBy", "message");
+			put("zmailPrefGroupMailBy", "message");
 		}};
 		
 	}
@@ -51,31 +51,31 @@ public class RunSavedSearch extends AjaxCommonTest  {
 				
 			
 		// Create the message data to be sent
-		String name = "search" + ZimbraSeleniumProperties.getUniqueString();
-		String subject1 = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String subject2 = "subject" + ZimbraSeleniumProperties.getUniqueString();
+		String name = "search" + ZmailSeleniumProperties.getUniqueString();
+		String subject1 = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String subject2 = "subject" + ZmailSeleniumProperties.getUniqueString();
 		String query = "subject:(" + subject1 + ")";
 		
 
 		// Send two messages with different subjects to the account
-		ZimbraAccount.AccountA().soapSend(
-				"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+		ZmailAccount.AccountA().soapSend(
+				"<SendMsgRequest xmlns='urn:zmailMail'>" +
 					"<m>" +
 						"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 						"<su>"+ subject1 +"</su>" +
 						"<mp ct='text/plain'>" +
-							"<content>content1"+ ZimbraSeleniumProperties.getUniqueString() +"</content>" +
+							"<content>content1"+ ZmailSeleniumProperties.getUniqueString() +"</content>" +
 						"</mp>" +
 					"</m>" +
 				"</SendMsgRequest>");
 		
-		ZimbraAccount.AccountA().soapSend(
-				"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+		ZmailAccount.AccountA().soapSend(
+				"<SendMsgRequest xmlns='urn:zmailMail'>" +
 					"<m>" +
 						"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 						"<su>"+ subject2 +"</su>" +
 						"<mp ct='text/plain'>" +
-							"<content>content1"+ ZimbraSeleniumProperties.getUniqueString() +"</content>" +
+							"<content>content1"+ ZmailSeleniumProperties.getUniqueString() +"</content>" +
 						"</mp>" +
 					"</m>" +
 				"</SendMsgRequest>");
@@ -83,7 +83,7 @@ public class RunSavedSearch extends AjaxCommonTest  {
 
 		// Create the saved search
 		app.zGetActiveAccount().soapSend(
-				"<CreateSearchFolderRequest xmlns='urn:zimbraMail'>" +
+				"<CreateSearchFolderRequest xmlns='urn:zmailMail'>" +
 					"<search name='"+ name +"' query='"+ query +"' l='1'/>" +
 				"</CreateSearchFolderRequest>");
 		

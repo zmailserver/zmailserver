@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.backup;
+package org.zmail.cs.offline.backup;
 
 import java.util.Date;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Constants;
-import com.zimbra.cs.offline.OfflineLog;
-import com.zimbra.cs.offline.OfflineSyncManager;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Constants;
+import org.zmail.cs.offline.OfflineLog;
+import org.zmail.cs.offline.OfflineSyncManager;
 
 public class BackupTimer extends Thread {
 

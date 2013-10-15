@@ -31,10 +31,10 @@ ZmAppCtxt = function() {
 
 	this.accountList = new ZmAccountList();
 	// create dummy account for startup
-	this.accountList.add(new ZmZimbraAccount(ZmAccountList.DEFAULT_ID, null, false));
+	this.accountList.add(new ZmZmailAccount(ZmAccountList.DEFAULT_ID, null, false));
 
 	// public properties
-	this.inStartup = false;				// true if we are starting app (set in ZmZimbraMail)
+	this.inStartup = false;				// true if we are starting app (set in ZmZmailMail)
 	this.currentRequestParams = null;	// params of current SOAP request (set in ZmRequestMgr)
 	this.rememberMe = null;
 	this.userDomain = "";
@@ -195,7 +195,7 @@ function(all) {
 /**
  * Gets the settings for the given account.
  * 
- * @param	{ZmZimbraAccount}	account		the account
+ * @param	{ZmZmailAccount}	account		the account
  * @return	{ZmSettings}	the settings
  */
 ZmAppCtxt.prototype.getSettings =
@@ -212,7 +212,7 @@ function(account) {
  * Sets the settings for the given account.
  * 
  * @param	{ZmSettings}	settings		the settings
- * @param	{ZmZimbraAccount}		account			the account
+ * @param	{ZmZmailAccount}		account			the account
  */
 ZmAppCtxt.prototype.setSettings = 
 function(settings, account) {
@@ -232,7 +232,7 @@ function(settings, account) {
  *
  * @param {constant}	id		the setting id
  * @param {String}	key			the setting key (for settings that are of the hash type)
- * @param {ZmZimbraAccount}	account		the account
+ * @param {ZmZmailAccount}	account		the account
  * @return	{Object}		the setting value
  */
 ZmAppCtxt.prototype.get =
@@ -260,7 +260,7 @@ function(id, key, account) {
  * @param {String}	key					the setting key (for settings that are of the hash type)
  * @param {Boolean}	setDefault			if <code>true</code>, also replace setting default value
  * @param {Boolean}	skipNotify			if <code>true</code>, do not notify setting listeners
- * @param {ZmZimbraAccount}	account		if set, use this account setting instead of the currently active account
+ * @param {ZmZmailAccount}	account		if set, use this account setting instead of the currently active account
  * @param {Boolean}	skipImplicit		if <code>true</code>, do not check for change to implicit pref
  */
 ZmAppCtxt.prototype.set =
@@ -1072,7 +1072,7 @@ function(shell) {
 /**
  * Gets the active account.
  *
- * @return	{ZmZimbraAccount}	the active account
+ * @return	{ZmZmailAccount}	the active account
  */
 ZmAppCtxt.prototype.getActiveAccount =
 function() {
@@ -1084,7 +1084,7 @@ function() {
 /**
  * Gets the active account.
  *
- * @return	{ZmZimbraAccount}	the active account
+ * @return	{ZmZmailAccount}	the active account
  */
 ZmAppCtxt.prototype.isExternalAccount =
 function() {
@@ -1094,7 +1094,7 @@ function() {
 /**
  * Gets the identity collection.
  * 
- * @param	{ZmZimbraAccount}	account		the account
+ * @param	{ZmZmailAccount}	account		the account
  * @return	{ZmIdentityCollection}	the identity collection
  */
 ZmAppCtxt.prototype.getIdentityCollection =
@@ -1106,7 +1106,7 @@ function(account) {
 /**
  * Gets the data source collection.
  * 
- * @param	{ZmZimbraAccount}	account		the account
+ * @param	{ZmZmailAccount}	account		the account
  * @return	{ZmModel}	the data source collection
  */
 ZmAppCtxt.prototype.getDataSourceCollection =
@@ -1118,7 +1118,7 @@ function(account) {
 /**
  * Gets the signature collection.
  * 
- * @param	{ZmZimbraAccount}	account		the account
+ * @param	{ZmZmailAccount}	account		the account
  * @return	{ZmSignatureCollection}	the signature collection
  */
 ZmAppCtxt.prototype.getSignatureCollection =
@@ -1131,7 +1131,7 @@ function(account) {
  * Gets the organizer tree.
  * 
  * @param	{ZmOrganizer.FOLDER|ZmOrganizer.TAG|ZmOrganizer.ZIMLET}	type	the type
- * @param	{ZmZimbraAccount}	account		the account
+ * @param	{ZmZmailAccount}	account		the account
  * @return	{ZmTree}		the tree
  * @see		#getFolderTree
  * @see		#getTagTree
@@ -1157,7 +1157,7 @@ function(type, account) {
  * 
  * @param	{ZmOrganizer.FOLDER|ZmOrganizer.TAG|ZmOrganizer.ZIMLET}	type	the type
  * @param	{ZmTree}	tree		the tree
- * @param	{ZmZimbraAccount}	account		the account
+ * @param	{ZmZmailAccount}	account		the account
  * @see		#getTree
  */
 ZmAppCtxt.prototype.setTree =
@@ -1177,7 +1177,7 @@ function(type, tree, account) {
 /**
  * Gets the folder organizer tree.
  * 
- * @param	{ZmZimbraAccount}	account		the account
+ * @param	{ZmZmailAccount}	account		the account
  * @return	{ZmFolderTree}		the tree
  * @see		#getTree
  */
@@ -1189,7 +1189,7 @@ function(account) {
 /**
  * Gets the tag organizer tree.
  * 
- * @param	{ZmZimbraAccount}	account		the account
+ * @param	{ZmZmailAccount}	account		the account
  * @return	{ZmTagTree}		the tree
  * @see		#getTree
  */
@@ -1215,7 +1215,7 @@ function(item) {
 /**
  * Gets the zimlet organizer tree.
  * 
- * @param	{ZmZimbraAccount}	account		the account
+ * @param	{ZmZmailAccount}	account		the account
  * @return	{ZmFolderTree}		the tree
  * @see		#getTree
  */
@@ -1227,7 +1227,7 @@ function(account) {
 /**
  * Gets the username (which is an email address).
  * 
- * @param	{ZmZimbraAccount}	account		the account
+ * @param	{ZmZmailAccount}	account		the account
  * @return	{String}		the username
  */
 ZmAppCtxt.prototype.getUsername =
@@ -1238,7 +1238,7 @@ function(account) {
 /**
  * Gets the user domain.
  * 
- * @param	{ZmZimbraAccount}	account		the account
+ * @param	{ZmZmailAccount}	account		the account
  * @return	{String}		the user domain
  */
 ZmAppCtxt.prototype.getUserDomain =
@@ -1833,7 +1833,7 @@ function() {
  * 
  * @param {String}		addr			            the address
  * @param {Boolean}		allowLocal		            if <code>true</code>, domain is not required
- * @param {Boolean}		excludeAllowFromAddress		if <code>true</code>, addresses in zimbraAllowFromAddresses are ignored
+ * @param {Boolean}		excludeAllowFromAddress		if <code>true</code>, addresses in zmailAllowFromAddresses are ignored
  * @return	{Boolean}		<code>true</code> if the given address belongs to the current user; <code>false</code> otherwise
  */
 ZmAppCtxt.prototype.isMyAddress =

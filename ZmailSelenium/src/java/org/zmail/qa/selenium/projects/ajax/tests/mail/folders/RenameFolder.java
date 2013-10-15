@@ -14,20 +14,20 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.folders;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.folders;
 
 import org.testng.annotations.*;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.framework.util.ZimbraCharsets.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogError;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogRenameFolder;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogError.DialogErrorID;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.ZmailCharsets.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogError;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogRenameFolder;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogError.DialogErrorID;
 
 
 public class RenameFolder extends PrefGroupMailByMessageTest {
@@ -49,10 +49,10 @@ public class RenameFolder extends PrefGroupMailByMessageTest {
 		ZAssert.assertNotNull(inbox, "Verify the inbox is available");
 				
 		// Create the subfolder
-		String name1 = "folder" + ZimbraSeleniumProperties.getUniqueString();
+		String name1 = "folder" + ZmailSeleniumProperties.getUniqueString();
 		
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+				"<CreateFolderRequest xmlns='urn:zmailMail'>" +
                 	"<folder name='"+ name1 +"' l='"+ inbox.getId() +"'/>" +
                 "</CreateFolderRequest>");
 
@@ -68,13 +68,13 @@ public class RenameFolder extends PrefGroupMailByMessageTest {
 		ZAssert.assertNotNull(dialog, "Verify the dialog opened");
 		
 		// Set the name, click OK
-		String name2 = "folder" + ZimbraSeleniumProperties.getUniqueString();
+		String name2 = "folder" + ZmailSeleniumProperties.getUniqueString();
 		dialog.zSetNewName(name2);
 		dialog.zClickButton(Button.B_OK);
 
 		
 		// Get all the folders and verify the new name appears and the old name disappears
-		app.zGetActiveAccount().soapSend("<GetFolderRequest xmlns = 'urn:zimbraMail'/>");
+		app.zGetActiveAccount().soapSend("<GetFolderRequest xmlns = 'urn:zmailMail'/>");
 		
 		Element[] eFolder1 = app.zGetActiveAccount().soapSelectNodes("//mail:folder[@name='"+ name1 +"']");
 		ZAssert.assertEquals(eFolder1.length, 0, "Verify the old folder name no longer exists");
@@ -94,10 +94,10 @@ public class RenameFolder extends PrefGroupMailByMessageTest {
 		ZAssert.assertNotNull(inbox, "Verify the inbox is available");
 				
 		// Create the subfolder
-		String name1 = "folder" + ZimbraSeleniumProperties.getUniqueString();
+		String name1 = "folder" + ZmailSeleniumProperties.getUniqueString();
 		
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+				"<CreateFolderRequest xmlns='urn:zmailMail'>" +
                 	"<folder name='"+ name1 +"' l='"+ inbox.getId() +"'/>" +
                 "</CreateFolderRequest>");
 
@@ -113,7 +113,7 @@ public class RenameFolder extends PrefGroupMailByMessageTest {
 		ZAssert.assertNotNull(dialog, "Verify the dialog opened");
 		
 		// Set the name, click OK
-		String name2 = "folder:folder" + ZimbraSeleniumProperties.getUniqueString();
+		String name2 = "folder:folder" + ZmailSeleniumProperties.getUniqueString();
 		dialog.zSetNewName(name2);
 		dialog.zClickButton(Button.B_OK);
 
@@ -127,7 +127,7 @@ public class RenameFolder extends PrefGroupMailByMessageTest {
 
 	@DataProvider(name = "DataProviderFilenames")
 	public Object[][] DataProviderDeleteKeys() throws HarnessException {
-		return (ZimbraCharsets.getInstance().getSampleTable());
+		return (ZmailCharsets.getInstance().getSampleTable());
 	}
 
 	@Test(
@@ -140,10 +140,10 @@ public class RenameFolder extends PrefGroupMailByMessageTest {
 		ZAssert.assertNotNull(inbox, "Verify the inbox is available");
 				
 		// Create the subfolder
-		String name1 = "folder" + ZimbraSeleniumProperties.getUniqueString();
+		String name1 = "folder" + ZmailSeleniumProperties.getUniqueString();
 		
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+				"<CreateFolderRequest xmlns='urn:zmailMail'>" +
                 	"<folder name='"+ name1 +"' l='"+ inbox.getId() +"'/>" +
                 "</CreateFolderRequest>");
 
@@ -164,7 +164,7 @@ public class RenameFolder extends PrefGroupMailByMessageTest {
 
 		
 		// Get all the folders and verify the new name appears and the old name disappears
-		app.zGetActiveAccount().soapSend("<GetFolderRequest xmlns = 'urn:zimbraMail'/>");
+		app.zGetActiveAccount().soapSend("<GetFolderRequest xmlns = 'urn:zmailMail'/>");
 		
 		Element[] eFolder1 = app.zGetActiveAccount().soapSelectNodes("//mail:folder[@name='"+ name1 +"']");
 		ZAssert.assertEquals(eFolder1.length, 0, "Verify the old folder name no longer exists");

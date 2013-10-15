@@ -12,25 +12,25 @@
 # basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
 # ***** END LICENSE BLOCK *****
 # 
-package Zimbra::DB::DB;
+package Zmail::DB::DB;
 
 use strict;
 
 #############
 
 my $MYSQL = "mysql";
-my $DB_USER = "zimbra";
-my $DB_PASSWORD = "zimbra";
-my $database = "zimbra";
-my $ZIMBRA_HOME = $ENV{ZIMBRA_HOME} || '/opt/zimbra';
+my $DB_USER = "zmail";
+my $DB_PASSWORD = "zmail";
+my $database = "zmail";
+my $ZIMBRA_HOME = $ENV{ZIMBRA_HOME} || '/opt/zmail';
 my $ZMLOCALCONFIG = "$ZIMBRA_HOME/bin/zmlocalconfig";
 
 if ($^O !~ /MSWin/i) {
-    $DB_PASSWORD = `$ZMLOCALCONFIG -s -m nokey zimbra_mysql_password`;
+    $DB_PASSWORD = `$ZMLOCALCONFIG -s -m nokey zmail_mysql_password`;
     chomp $DB_PASSWORD;
-    $DB_USER = `$ZMLOCALCONFIG -m nokey zimbra_mysql_user`;
+    $DB_USER = `$ZMLOCALCONFIG -m nokey zmail_mysql_user`;
     chomp $DB_USER;
-    $MYSQL = "/opt/zimbra/bin/mysql";
+    $MYSQL = "/opt/zmail/bin/mysql";
 }
 
 sub getDatabase() {
@@ -58,7 +58,7 @@ sub runSql(@) {
     # close(LASTSCRIPT);
 
     if ($logSql) {
-	Zimbra::DB::DB::log($script);
+	Zmail::DB::DB::log($script);
     }
 
     # Run the mysql command and redirect output to a temp file

@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.util;
+package org.zmail.qa.selenium.framework.util;
 
 import java.io.IOException;
 import java.util.regex.*;
@@ -26,7 +26,7 @@ import org.htmlcleaner.*;
 /**
  * An object representing an HTML document
  * <p>
- * It would be great to use com.zimbra.soap.Element, rather than defining
+ * It would be great to use org.zmail.soap.Element, rather than defining
  * a class in the Selenium Harness.  However, Element does not allow
  * content + tags within elements:  "cannot set text on element with children".
  * <p>

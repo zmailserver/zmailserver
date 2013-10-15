@@ -14,13 +14,13 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_example_simpledialogtemplate"
+<zimlet name="org_zmail_example_simpledialogtemplate"
         version="1.0"
         description="Create a custom dialog using a template.">
-    <include>com_zimbra_example_simpledialogtemplate.js</include>
+    <include>org_zmail_example_simpledialogtemplate.js</include>
     <include>templates/Simple.template.js</include>
-    <handlerObject>com_zimbra_example_simpledialogtemplate_HandlerObject</handlerObject>
-    <zimletPanelItem label="Simple Dialog Template Example" icon="zimbraIcon">
+    <handlerObject>org_zmail_example_simpledialogtemplate_HandlerObject</handlerObject>
+    <zimletPanelItem label="Simple Dialog Template Example" icon="zmailIcon">
         <toolTipText>${msg.simpledialog_tooltip}</toolTipText>
     </zimletPanelItem>
 </zimlet>

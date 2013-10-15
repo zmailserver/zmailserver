@@ -12,32 +12,32 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.preferences.attributes;
+package org.zmail.qa.selenium.projects.ajax.tests.preferences.attributes;
 
 import java.util.HashMap;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
 
 
 
-public class ZimbraFeaturePortalEnabled extends AjaxCommonTest {
+public class ZmailFeaturePortalEnabled extends AjaxCommonTest {
 	
-	public ZimbraFeaturePortalEnabled() {
-		logger.info("New "+ ZimbraFeaturePortalEnabled.class.getCanonicalName());
+	public ZmailFeaturePortalEnabled() {
+		logger.info("New "+ ZmailFeaturePortalEnabled.class.getCanonicalName());
 		
 		// All tests start at the login page
 		super.startingPage = app.zPageLogin;
 		super.startingAccountPreferences = new HashMap<String , String>() {
 			private static final long serialVersionUID = -3123410183252792255L;
 		{
-		    put("zimbraFeaturePortalEnabled", "TRUE");
-		    put("zimbraPortalName", "example");
+		    put("zmailFeaturePortalEnabled", "TRUE");
+		    put("zmailPortalName", "example");
 		}};
 		
 	}
@@ -48,7 +48,7 @@ public class ZimbraFeaturePortalEnabled extends AjaxCommonTest {
 	public void BasicLogin01() throws HarnessException {
 		
 		// Login
-		app.zPageLogin.zLogin(ZimbraAccount.AccountZWC());
+		app.zPageLogin.zLogin(ZmailAccount.AccountZWC());
 		
 		// Verify main page becomes active
 		ZAssert.assertTrue(app.zPageMain.zIsActive(), "Verify that the account is logged in");

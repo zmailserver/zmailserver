@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.util.staf;
+package org.zmail.qa.selenium.framework.util.staf;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -23,7 +23,7 @@ import com.ibm.staf.STAFException;
 import com.ibm.staf.STAFHandle;
 import com.ibm.staf.STAFMarshallingContext;
 import com.ibm.staf.STAFResult;
-import com.zimbra.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.*;
 
 /**
  * A wrapper class to create STAF classes from
@@ -46,7 +46,7 @@ public class StafAbstract {
 	public StafAbstract() {
 		logger.info("new "+ StafAbstract.class.getCanonicalName());
 		
-		StafServer = ZimbraSeleniumProperties.getStringProperty("server.host", "local");
+		StafServer = ZmailSeleniumProperties.getStringProperty("server.host", "local");
 		StafService = "PING";
 		StafParms = "PING";
 		

@@ -14,14 +14,14 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.ui.mail;
+package org.zmail.qa.selenium.projects.ajax.ui.mail;
 
-import com.zimbra.qa.selenium.framework.items.IItem;
-import com.zimbra.qa.selenium.framework.ui.AbsApplication;
-import com.zimbra.qa.selenium.framework.ui.AbsForm;
-import com.zimbra.qa.selenium.framework.ui.AbsPage;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.items.IItem;
+import org.zmail.qa.selenium.framework.ui.AbsApplication;
+import org.zmail.qa.selenium.framework.ui.AbsForm;
+import org.zmail.qa.selenium.framework.ui.AbsPage;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
 
 
 
@@ -31,7 +31,7 @@ import com.zimbra.qa.selenium.framework.util.HarnessException;
  * <p>
  * 
  * @author Matt Rhoades
- * @see http://wiki.zimbra.com/wiki/File:ZimbraSeleniumScreenshotAjaxMail6.JPG
+ * @see http://wiki.zmail.com/wiki/File:ZmailSeleniumScreenshotAjaxMail6.JPG
  * 
  */
 public class FormAddressPicker extends AbsForm {
@@ -338,7 +338,7 @@ public class FormAddressPicker extends AbsForm {
 	public boolean zIsActive() throws HarnessException {
 		logger.info(myPageName() + " zIsActive()");
 		
-		// https://bugzilla.zimbra.com/show_bug.cgi?id=62021
+		// https://bugzilla.zmail.com/show_bug.cgi?id=62021
 
 		String locator = Locators.ZmContactPickerLocatorCSS;
 		

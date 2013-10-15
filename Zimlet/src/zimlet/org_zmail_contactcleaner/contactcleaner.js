@@ -17,34 +17,34 @@
  * Zimlet that scans and deletes duplicate contacts
  * 
  */
-function com_zimbra_contactcleaner() {
+function org_zmail_contactcleaner() {
 }
 
-com_zimbra_contactcleaner.prototype = new ZmZimletBase();
-com_zimbra_contactcleaner.prototype.constructor = com_zimbra_contactcleaner;
+org_zmail_contactcleaner.prototype = new ZmZimletBase();
+org_zmail_contactcleaner.prototype.constructor = org_zmail_contactcleaner;
 
-com_zimbra_contactcleaner.AddressBookOnlyMsg = "You can use this Zimlet from <b>within Address Book application</b> only";
-com_zimbra_contactcleaner.prototype.BEGIN_AT = 0;
-com_zimbra_contactcleaner.prototype.END_AT = 59;
-com_zimbra_contactcleaner.prototype.PROCESS_AT_ONCE = 60;
+org_zmail_contactcleaner.AddressBookOnlyMsg = "You can use this Zimlet from <b>within Address Book application</b> only";
+org_zmail_contactcleaner.prototype.BEGIN_AT = 0;
+org_zmail_contactcleaner.prototype.END_AT = 59;
+org_zmail_contactcleaner.prototype.PROCESS_AT_ONCE = 60;
 
 /**
  * Called on a double-click.
  */
-com_zimbra_contactcleaner.prototype.doubleClicked = function() {
+org_zmail_contactcleaner.prototype.doubleClicked = function() {
 	this.singleClicked();
 };
 
 /**
  * Called on a single-click.
  */
-com_zimbra_contactcleaner.prototype.singleClicked =
+org_zmail_contactcleaner.prototype.singleClicked =
 function() {
 
 	if (appCtxt.getAppController().getActiveApp() != "Contacts") {
 		var dlg = appCtxt.getMsgDialog();
 		dlg.reset();//reset dialog since we could be using it
-		dlg.setMessage(com_zimbra_contactcleaner.AddressBookOnlyMsg, DwtMessageDialog.WARNING_STYLE);
+		dlg.setMessage(org_zmail_contactcleaner.AddressBookOnlyMsg, DwtMessageDialog.WARNING_STYLE);
 		dlg.popup();
 		return;
 	}
@@ -88,14 +88,14 @@ function() {
 };
 
 //-------------------------------- INITIALIZE UI (START) ----------------------------------------
-com_zimbra_contactcleaner.prototype._initializeEmptyDlg =
+org_zmail_contactcleaner.prototype._initializeEmptyDlg =
 function() {
 	this._parentView = new DwtComposite(this.getShell());
 	this._parentView.setSize("700", "450");
 	this._parentView.getHtmlElement().style.overflow = "auto";
 };
 
-com_zimbra_contactcleaner.prototype._resetStaleDialog =
+org_zmail_contactcleaner.prototype._resetStaleDialog =
 function() {
 
 	document.getElementById("cc_expandCollapseAllDiv_id").className = "cc_hidden";
@@ -113,7 +113,7 @@ function() {
 };
 
 
-com_zimbra_contactcleaner.prototype._initializeProgressbarDlg =
+org_zmail_contactcleaner.prototype._initializeProgressbarDlg =
 function() {
 	this.pbView = new DwtComposite(this.getShell());
 	this.pbView.setSize("600", "50");
@@ -131,7 +131,7 @@ function() {
 
 	this.pbDialog.runInBackground = false;
 };
-com_zimbra_contactcleaner.prototype.addContactManagerButtons =
+org_zmail_contactcleaner.prototype.addContactManagerButtons =
 function() {
 	if (this.conOrgDialog) return;
 
@@ -149,7 +149,7 @@ function() {
 //-------------------------------- INITIALIZE UI (END) --------------------------------------------------------
 
 //-------------------------------- SCAN AB FOR DUPLICATES (START) ----------------------------------------
-com_zimbra_contactcleaner.prototype.scanAddressBook =
+org_zmail_contactcleaner.prototype.scanAddressBook =
 function() {
 	this.normalizeContacts();
 	//handle 0 contacts
@@ -187,7 +187,7 @@ function() {
 	//construct dupes display View
 };
 
-com_zimbra_contactcleaner.prototype.findDupes =
+org_zmail_contactcleaner.prototype.findDupes =
 function(array) {
 	var _arry;
 	this.resetIsOriginal = true;
@@ -216,7 +216,7 @@ function(array) {
 	this.mergeVectorsWithMaster(this.vec_E33, "_email3", "_email3");
 }
 
-com_zimbra_contactcleaner.prototype.mergeVectorsWithMaster =
+org_zmail_contactcleaner.prototype.mergeVectorsWithMaster =
 function(_vector, currentField, masterField) {
 	var y1, y2, matchfoundFlg;
 
@@ -277,7 +277,7 @@ function(_vector, currentField, masterField) {
 	}
 
 }
-com_zimbra_contactcleaner.prototype.getDupesVector =
+org_zmail_contactcleaner.prototype.getDupesVector =
 function(_arry, fld1, fld2) {
 	var nxt_fld1, nxt_fld2, matchfound, x_fld1, x_fld2;
 
@@ -351,7 +351,7 @@ function(_arry, fld1, fld2) {
 	}
 	return _vector;
 }
-com_zimbra_contactcleaner.prototype.normalizeContacts =
+org_zmail_contactcleaner.prototype.normalizeContacts =
 function() {
 
 	this.parseSelection();
@@ -389,9 +389,9 @@ function() {
 
 
 //-------------------------------- DISPLAY ZIMLET UI AND DUPLICATE-SET UI (START) ----------------------------------------
-com_zimbra_contactcleaner.prototype.constructContactManagerView =
+org_zmail_contactcleaner.prototype.constructContactManagerView =
 function() {
-	//todo -	return AjxTemplate.expand("com_zimbra_contactcleaner.templates.contactcleaner#ccProcessChoicesTmplt", null);
+	//todo -	return AjxTemplate.expand("org_zmail_contactcleaner.templates.contactcleaner#ccProcessChoicesTmplt", null);
 	var m;
 	var html = new Array();
 	var i = 0;
@@ -452,7 +452,7 @@ function() {
 	return html.join("");
 };
 
-com_zimbra_contactcleaner.prototype._constructdupeResultsDiv =
+org_zmail_contactcleaner.prototype._constructdupeResultsDiv =
 function(indx) {
 	var html = new Array();
 	var i = 0;
@@ -516,7 +516,7 @@ function(indx) {
 		document.getElementById("dupeResultsDiv").className = "cc_shown";
 	}
 }
-com_zimbra_contactcleaner.prototype._setCounterVals = function(indx, noOfDupesInCurrentContactVctr, dupeId) {
+org_zmail_contactcleaner.prototype._setCounterVals = function(indx, noOfDupesInCurrentContactVctr, dupeId) {
 	if (!this._currentDupeListHasConflict && !this._currentDupeListHasPartialMatch) {
 		this.vector.get(indx)._dupesSetFlag = "Perfect_Match";
 		this.totalPerfectMatchCount_dup = this.totalPerfectMatchCount_dup + noOfDupesInCurrentContactVctr;
@@ -540,7 +540,7 @@ com_zimbra_contactcleaner.prototype._setCounterVals = function(indx, noOfDupesIn
 	document.getElementById("cc_totalDupes_id").innerHTML = this.totaldupes;
 }
 
-com_zimbra_contactcleaner.prototype._constructTable =
+org_zmail_contactcleaner.prototype._constructTable =
 function(dupeArry, dupeId) {
 
 	var elem, origelem, matchedflg, elementflg, tmpArry, confElemArry, allElemArry, elemHasConflict, elemHasNoConflict;
@@ -597,10 +597,10 @@ function(dupeArry, dupeId) {
 			//check if the element/field has conflicts..
 			if (elementflg == "Field_Found") {
 				//if (elemHasNoConflict.indexOf(origelem) != -1)
-				if (com_zimbra_contactcleaner.arrayContainsKey(elemHasNoConflict, origelem))
+				if (org_zmail_contactcleaner.arrayContainsKey(elemHasNoConflict, origelem))
 					elementflg = "Field_Found_No_Conflict";
 				//else if (elemHasConflict.indexOf(origelem) != -1)
-				else if (com_zimbra_contactcleaner.arrayContainsKey(elemHasConflict, origelem))
+				else if (org_zmail_contactcleaner.arrayContainsKey(elemHasConflict, origelem))
 					elementflg = "Field_Found_Has_Conflict";
 				//else if ((elemHasConflict.indexOf(origelem) == -1) && (elemHasNoConflict.indexOf(origelem) == -1)) {
 				else {
@@ -634,11 +634,11 @@ function(dupeArry, dupeId) {
 			if (elementflg == "Field_Found_No_Conflict") { //when field was found but not matched
 				currentRow = this.getdupeContactRowsHTML(origelem, eval("attr." + origelem), elementflg, false, dupeId);
 				html[i++] = currentRow;
-				if (! com_zimbra_contactcleaner.arrayContainsKey(mgrdRowsArry, origelem))
+				if (! org_zmail_contactcleaner.arrayContainsKey(mgrdRowsArry, origelem))
 					mgrdRowsArry[origelem] = currentRow;
 			} else if (elementflg == "Field_Found_Has_Conflict") { //when field was found but not matched
 				html[i++] = this.getdupeContactRowsHTML(origelem, eval("attr." + origelem), elementflg, false, dupeId);
-				if (! com_zimbra_contactcleaner.arrayContainsKey(mgrdRowsArry, origelem))
+				if (! org_zmail_contactcleaner.arrayContainsKey(mgrdRowsArry, origelem))
 					mgrdRowsArry[origelem] = this.getdupeContactRowsHTML(origelem, eval("attr." + origelem), elementflg, true, dupeId);
 				this._currentDupeListHasConflict = true;
 			} else if (elementflg == "Field_Not_Found") {//when field itself not found(but exists on other dupe)
@@ -654,7 +654,7 @@ function(dupeArry, dupeId) {
 	return  this.getcoverTblStartStr(dupeId, dupeArry.length + 1) + mrgdCntct + internalTbls + coverTblEndStr;
 };
 
-com_zimbra_contactcleaner.prototype.getdupeContactRowsHTML =
+org_zmail_contactcleaner.prototype.getdupeContactRowsHTML =
 function(elem, val, elementflg, isMerged, dupeId) {
 	var valCell, foreCol, rowbgCol;
 
@@ -689,7 +689,7 @@ function(elem, val, elementflg, isMerged, dupeId) {
 		name = elem;
 	return "<tr " + rowbgCol + foreCol + " ><td><b>" + name + ":</b></td><td " + foreCol + " >" + val + "</td>";
 }
-com_zimbra_contactcleaner.prototype.createMergedContact =
+org_zmail_contactcleaner.prototype.createMergedContact =
 function(mrgdRowsArry, individualTblStartStr, indvidualTblEndStr) {
 	var rows = "";
 	mrgdRowsArry = mrgdRowsArry.sort();
@@ -699,11 +699,11 @@ function(mrgdRowsArry, individualTblStartStr, indvidualTblEndStr) {
 
 	return  individualTblStartStr + this.getTopRow("MERGED") + rows + indvidualTblEndStr;
 }
-com_zimbra_contactcleaner.prototype.getTopRow =
+org_zmail_contactcleaner.prototype.getTopRow =
 function(rowVal) {
 	return "<tr><td colspan=2 class='cc_topRow' align=center>" + rowVal + "</td></tr>";
 }
-com_zimbra_contactcleaner.prototype.getcoverTblStartStr =
+org_zmail_contactcleaner.prototype.getcoverTblStartStr =
 function(dupeId, colspan) {
 	var html = new Array();
 	var i = 0;
@@ -732,7 +732,7 @@ function(dupeId, colspan) {
 	html[i++] = "<tr VALIGN=\"top\">";
 	return   html.join("");
 }
-com_zimbra_contactcleaner.prototype._setAllValues =
+org_zmail_contactcleaner.prototype._setAllValues =
 function(busyOr0) {
 	var val;
 	if (busyOr0 == "BUSY") {
@@ -755,7 +755,7 @@ function(busyOr0) {
 
 
 //-------------------------------- PROCESS DUPLICATE CONTACTS (START) ----------------------------------------
-com_zimbra_contactcleaner.prototype.cleanerProcessBtnListner =
+org_zmail_contactcleaner.prototype.cleanerProcessBtnListner =
 function(ev) {
 
 	this.parseSelection();
@@ -787,7 +787,7 @@ function(ev) {
 
 };
 
-com_zimbra_contactcleaner.prototype.concleanerDlgDeleteListner =
+org_zmail_contactcleaner.prototype.concleanerDlgDeleteListner =
 function(ev) {
 	var soapDoc = null;
 	var dupesVector = this.vector;
@@ -835,14 +835,14 @@ function(ev) {
 		//set _matchfound to true, indicating soap call will be made
 		this.dupeContactNextCnt = this.dupeContactNextCnt + dupesArry.length - 1;
 		if (!soapDoc) {
-			soapDoc = AjxSoapDoc.create("BatchRequest", "urn:zimbra");
+			soapDoc = AjxSoapDoc.create("BatchRequest", "urn:zmail");
 			soapDoc.setMethodAttribute("onerror", "continue");
 		}
 
 		//======================================================================
 		//Delete duplicates...
 		//======================================================================
-		var contactActionReq = soapDoc.set("ContactActionRequest", null, null, "urn:zimbraMail");
+		var contactActionReq = soapDoc.set("ContactActionRequest", null, null, "urn:zmailMail");
 		var doc1 = soapDoc.getDoc();
 		var action = soapDoc.set("action");
 		action.setAttribute("op", "move");
@@ -949,7 +949,7 @@ function(ev) {
 		}
 		//----------------------------------------------------------------------------------------------------
 
-		var modifyContactReq = soapDoc.set("ModifyContactRequest", null, null, "urn:zimbraMail");
+		var modifyContactReq = soapDoc.set("ModifyContactRequest", null, null, "urn:zmailMail");
 		modifyContactReq.setAttribute("replace", "0");
 		modifyContactReq.setAttribute("force", "1");
 		var doc = soapDoc.getDoc();
@@ -971,7 +971,7 @@ function(ev) {
 			tagsArry = cc_unique(tagsArry);
 
 		for (var n = 0; n < tagsArry.length; n++) {
-			var contactActionReq2 = soapDoc.set("ContactActionRequest", null, null, "urn:zimbraMail");
+			var contactActionReq2 = soapDoc.set("ContactActionRequest", null, null, "urn:zmailMail");
 			var doc2 = soapDoc.getDoc();
 			var action2 = soapDoc.set("action");
 			action2.setAttribute("op", "tag");
@@ -1009,7 +1009,7 @@ function(ev) {
 
 
 // Callbacks.....
-com_zimbra_contactcleaner.prototype._handleResponseDeleteDuplicates =
+org_zmail_contactcleaner.prototype._handleResponseDeleteDuplicates =
 function(result) {	
 	if (this.abortProcess) {
 		var msg = "Process was aborted! " + (this.endAt + 1)  + " contacts were processed! ";
@@ -1028,7 +1028,7 @@ function(result) {
 	}
 };
 
-com_zimbra_contactcleaner.prototype._showNotesDlg =
+org_zmail_contactcleaner.prototype._showNotesDlg =
 function(mainMsg) {
 	var notes =["<b>",mainMsg,"</b><br/><br/><b>Notes:</b>",
 		" <br/>1. Please log out and log back in.",
@@ -1051,7 +1051,7 @@ function cc_createClosure(object, method) {
 	return shim;
 }
 
-com_zimbra_contactcleaner.arrayContainsElement =
+org_zmail_contactcleaner.arrayContainsElement =
 function(array, val) {
 	for (var i = 0; i < array.length; i++) {
 		if (array[i] == val) {
@@ -1060,7 +1060,7 @@ function(array, val) {
 	}
 	return false;
 }
-com_zimbra_contactcleaner.arrayContainsKey =
+org_zmail_contactcleaner.arrayContainsKey =
 function(array, key) {
 	for (var currentKey in array) {
 		if (currentKey == key) {
@@ -1073,7 +1073,7 @@ function(array, key) {
 function cc_unique(b) {
 	var a = [], i, l = b.length;
 	for (i = 0; i < l; i++) {
-		if (!com_zimbra_contactcleaner.arrayContainsElement(a, b[i])) {
+		if (!org_zmail_contactcleaner.arrayContainsElement(a, b[i])) {
 			a.push(b[i]);
 		}
 	}
@@ -1089,7 +1089,7 @@ function cc_expandcollapse(postid) {
 		whichpost.className = "cc_shown";
 	}
 }
-com_zimbra_contactcleaner.prototype.expandcollapse_all = function() {
+org_zmail_contactcleaner.prototype.expandcollapse_all = function() {
 	if (this.dupesSetIdArray) {
 		for (var i = 0; i < this.dupesSetIdArray.length; i++) {
 			if (this._AllContactsArecc_shown) {
@@ -1159,7 +1159,7 @@ function sortContactsBy_FN(a, b) {
 }
 
 
-com_zimbra_contactcleaner.prototype.handleMergeChkbox =
+org_zmail_contactcleaner.prototype.handleMergeChkbox =
 function() {
 
 	if (document.getElementById("cc_dupesWithConflictsChkbox_id").checked) {
@@ -1169,7 +1169,7 @@ function() {
 		document.getElementById("cc_reviewConflctInfo").className = "cc_hidden";
 	}
 };
-com_zimbra_contactcleaner.prototype.handleMergePartialChkbox =
+org_zmail_contactcleaner.prototype.handleMergePartialChkbox =
 function() {
 
 	if (document.getElementById("cc_dupesWithPartialMatchChkbox_id").checked) {
@@ -1180,7 +1180,7 @@ function() {
 	}
 };
 
-com_zimbra_contactcleaner.prototype.parseSelection =
+org_zmail_contactcleaner.prototype.parseSelection =
 function() {
 	this._mergePerfectMatchedChk = document.getElementById("cc_dupesWithPerfectMatchChkbox_id").checked;
 	this._mergePartiallyMatchedChk = document.getElementById("cc_dupesWithPartialMatchChkbox_id").checked;
@@ -1193,7 +1193,7 @@ function() {
 
 //-------------------------------------- PROGRESS BAR RELATED(START) ----------------------------------------------
 //Progressbar related listners...
-com_zimbra_contactcleaner.prototype.constructContactProgressbarView =
+org_zmail_contactcleaner.prototype.constructContactProgressbarView =
 function() {
 	var html = new Array();
 	var i = 0;
@@ -1205,18 +1205,18 @@ function() {
 	return html.join("");
 };
 
-com_zimbra_contactcleaner.prototype.getProgressbarLen =
+org_zmail_contactcleaner.prototype.getProgressbarLen =
 function() {
 	return this.pblen;
 };
 
-com_zimbra_contactcleaner.prototype.setProgressbarMsg =
+org_zmail_contactcleaner.prototype.setProgressbarMsg =
 function(msg) {
 	document.getElementById("cc_pbMsgDiv").innerHTML = msg;
 };
 
 
-com_zimbra_contactcleaner.prototype.setProgressbarComplete =
+org_zmail_contactcleaner.prototype.setProgressbarComplete =
 function(msg, notes) {
 	this.pbDialog.getButton("pbAbortBtn").setEnabled(false);
 	//disable Abort btn
@@ -1231,13 +1231,13 @@ function(msg, notes) {
 	this.pbDialog.runInBackground = false;
 };
 
-com_zimbra_contactcleaner.prototype.setProgressbarAbortMsg =
+org_zmail_contactcleaner.prototype.setProgressbarAbortMsg =
 function(msg) {
 	document.getElementById("cc_processBusy").className = "cc_hidden";
 	document.getElementById("cc_pbMsgDiv").innerHTML = this.formatMsg(msg);
 };
 
-com_zimbra_contactcleaner.prototype.setProgressbarBegin =
+org_zmail_contactcleaner.prototype.setProgressbarBegin =
 function() {
 	document.getElementById("cc_processbarForeground").style.width = "0px";
 	document.getElementById("cc_processBusy").className = "cc_shown";
@@ -1245,7 +1245,7 @@ function() {
 };
 
 
-com_zimbra_contactcleaner.prototype.pbDialogAbortListner =
+org_zmail_contactcleaner.prototype.pbDialogAbortListner =
 function(ev) {
 	var msg = "Aborting...";
 	this.abortProcess = true;
@@ -1258,13 +1258,13 @@ function(ev) {
 
 }
 
-com_zimbra_contactcleaner.prototype.pbRunBackgroundAbortListner =
+org_zmail_contactcleaner.prototype.pbRunBackgroundAbortListner =
 function(ev) {
 	this.pbDialog.runInBackground = true;
 	this.pbDialog.popdown();
 
 }
-com_zimbra_contactcleaner.prototype.formatMsg =
+org_zmail_contactcleaner.prototype.formatMsg =
 function(msg) {
 	return  msg;
 	//currently no formatting is done.

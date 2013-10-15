@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.tasks.assistant;
+package org.zmail.qa.selenium.projects.ajax.tests.tasks.assistant;
 
 import java.util.HashMap;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.ui.Shortcut;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogAssistant;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.ui.Shortcut;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogAssistant;
 
 public class OpenAssistant extends AjaxCommonTest {
 
@@ -34,7 +34,7 @@ public class OpenAssistant extends AjaxCommonTest {
 		
 		super.startingPage = app.zPageTasks;
 		super.startingAccountPreferences = new HashMap<String , String>() {{
-			put("zimbraPrefTasksReadingPaneLocation", "bottom");
+			put("zmailPrefTasksReadingPaneLocation", "bottom");
 		}};
 
 	}
@@ -42,7 +42,7 @@ public class OpenAssistant extends AjaxCommonTest {
  * Test case: Open the assistant
  * 1.Go to Tasks
  * 2.Press '`' or backquote
- * Result:- Zimbra Assistant dialog should get open
+ * Result:- Zmail Assistant dialog should get open
  * @throws HarnessException
  */
 	@Test(description = "Open the assistant", groups = { "deprecated" })

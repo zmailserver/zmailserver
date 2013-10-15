@@ -13,6 +13,6 @@
  * ***** END LICENSE BLOCK *****
  */
 
-AjxPackage.require("zimbraMail.share.controller.ZmZimletAppController");
-AjxPackage.require("zimbraMail.share.view.ZmZimletAppView");
-AjxPackage.require("zimbraMail.share.view.ZmZimletApp");
+AjxPackage.require("zmailMail.share.controller.ZmZimletAppController");
+AjxPackage.require("zmailMail.share.view.ZmZimletAppView");
+AjxPackage.require("zmailMail.share.view.ZmZimletApp");

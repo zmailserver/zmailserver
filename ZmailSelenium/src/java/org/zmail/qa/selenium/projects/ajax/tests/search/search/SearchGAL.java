@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.search.search;
+package org.zmail.qa.selenium.projects.ajax.tests.search.search;
 
 
 import java.util.List;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.ContactItem;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.framework.items.ContactItem;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
 
 public class SearchGAL extends AjaxCommonTest {
 	
@@ -48,9 +48,9 @@ public class SearchGAL extends AjaxCommonTest {
 		//-- Data
 		
 		// Create a GAL Account
-		String first = "first"+ ZimbraSeleniumProperties.getUniqueString();
-		String last = "last"+ ZimbraSeleniumProperties.getUniqueString();
-		ZimbraAccount accountGAL = new ZimbraAccount();
+		String first = "first"+ ZmailSeleniumProperties.getUniqueString();
+		String last = "last"+ ZmailSeleniumProperties.getUniqueString();
+		ZmailAccount accountGAL = new ZmailAccount();
 		accountGAL.setPref("givenName", first);
 		accountGAL.setPref("sn", last);
 		accountGAL.setPref("displayName", first + " " + last);
@@ -91,7 +91,7 @@ public class SearchGAL extends AjaxCommonTest {
 		
 		//-- Data
 		
-		String doesnotexist = "contact" + ZimbraSeleniumProperties.getUniqueString();
+		String doesnotexist = "contact" + ZmailSeleniumProperties.getUniqueString();
 		
 		//-- GUI
 		

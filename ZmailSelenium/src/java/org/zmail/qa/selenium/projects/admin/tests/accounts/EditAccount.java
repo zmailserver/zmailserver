@@ -14,21 +14,21 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.admin.tests.accounts;
+package org.zmail.qa.selenium.projects.admin.tests.accounts;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAdminAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.admin.core.AdminCommonTest;
-import com.zimbra.qa.selenium.projects.admin.items.AccountItem;
-import com.zimbra.qa.selenium.projects.admin.ui.FormEditAccount;
-import com.zimbra.qa.selenium.projects.admin.ui.PageMain;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAdminAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.admin.core.AdminCommonTest;
+import org.zmail.qa.selenium.projects.admin.items.AccountItem;
+import org.zmail.qa.selenium.projects.admin.ui.FormEditAccount;
+import org.zmail.qa.selenium.projects.admin.ui.PageMain;
 
 public class EditAccount extends AdminCommonTest {
 	public EditAccount() {
@@ -54,9 +54,9 @@ public class EditAccount extends AdminCommonTest {
 			public void EditAccount_01() throws HarnessException {
 
 		// Create a new account in the Admin Console using SOAP
-		AccountItem account = new AccountItem("email" + ZimbraSeleniumProperties.getUniqueString(),ZimbraSeleniumProperties.getStringProperty("testdomain"));
-		ZimbraAdminAccount.AdminConsoleAdmin().soapSend(
-				"<CreateAccountRequest xmlns='urn:zimbraAdmin'>"
+		AccountItem account = new AccountItem("email" + ZmailSeleniumProperties.getUniqueString(),ZmailSeleniumProperties.getStringProperty("testdomain"));
+		ZmailAdminAccount.AdminConsoleAdmin().soapSend(
+				"<CreateAccountRequest xmlns='urn:zmailAdmin'>"
 				+			"<name>" + account.getEmailAddress() + "</name>"
 				+			"<password>test123</password>"
 				+		"</CreateAccountRequest>");
@@ -74,18 +74,18 @@ public class EditAccount extends AdminCommonTest {
 		form.zClickTreeItem(FormEditAccount.TreeItem.GENERAL_INFORMATION);
 
 		//Edit the name.
-		String editedName = "editedAccount_" + ZimbraSeleniumProperties.getUniqueString();
+		String editedName = "editedAccount_" + ZmailSeleniumProperties.getUniqueString();
 		form.setName(editedName);
 		
 		//Submit the form.
 		form.zSubmit();
 		
 		// Verify the account exists in the ZCS
-		ZimbraAdminAccount.AdminConsoleAdmin().soapSend(
-				"<GetAccountRequest xmlns='urn:zimbraAdmin'>"
+		ZmailAdminAccount.AdminConsoleAdmin().soapSend(
+				"<GetAccountRequest xmlns='urn:zmailAdmin'>"
 				+			"<account by='name'>"+ editedName+"@"+account.getDomainName() +"</account>"
 				+		"</GetAccountRequest>");
-		Element response = ZimbraAdminAccount.AdminConsoleAdmin().soapSelectNode("//admin:GetAccountResponse/admin:account", 1);
+		Element response = ZmailAdminAccount.AdminConsoleAdmin().soapSelectNode("//admin:GetAccountResponse/admin:account", 1);
 		ZAssert.assertNotNull(response, "Verify the account is edited successfully");
 	}
 	
@@ -102,9 +102,9 @@ public class EditAccount extends AdminCommonTest {
 			public void EditAccount_02() throws HarnessException {
 
 		// Create a new account in the Admin Console using SOAP
-		AccountItem account = new AccountItem("email" + ZimbraSeleniumProperties.getUniqueString(),ZimbraSeleniumProperties.getStringProperty("testdomain"));
-		ZimbraAdminAccount.AdminConsoleAdmin().soapSend(
-				"<CreateAccountRequest xmlns='urn:zimbraAdmin'>"
+		AccountItem account = new AccountItem("email" + ZmailSeleniumProperties.getUniqueString(),ZmailSeleniumProperties.getStringProperty("testdomain"));
+		ZmailAdminAccount.AdminConsoleAdmin().soapSend(
+				"<CreateAccountRequest xmlns='urn:zmailAdmin'>"
 				+			"<name>" + account.getEmailAddress() + "</name>"
 				+			"<password>test123</password>"
 				+		"</CreateAccountRequest>");
@@ -122,18 +122,18 @@ public class EditAccount extends AdminCommonTest {
 		form.zClickTreeItem(FormEditAccount.TreeItem.GENERAL_INFORMATION);
 
 		//Edit the name.
-		String editedName = "editedAccount_" + ZimbraSeleniumProperties.getUniqueString();
+		String editedName = "editedAccount_" + ZmailSeleniumProperties.getUniqueString();
 		form.setName(editedName);
 		
 		//Submit the form.
 		form.zSubmit();
 		
 		// Verify the account exists in the ZCS
-		ZimbraAdminAccount.AdminConsoleAdmin().soapSend(
-				"<GetAccountRequest xmlns='urn:zimbraAdmin'>"
+		ZmailAdminAccount.AdminConsoleAdmin().soapSend(
+				"<GetAccountRequest xmlns='urn:zmailAdmin'>"
 				+			"<account by='name'>"+ editedName+"@"+account.getDomainName() +"</account>"
 				+		"</GetAccountRequest>");
-		Element response = ZimbraAdminAccount.AdminConsoleAdmin().soapSelectNode("//admin:GetAccountResponse/admin:account", 1);
+		Element response = ZmailAdminAccount.AdminConsoleAdmin().soapSelectNode("//admin:GetAccountResponse/admin:account", 1);
 		ZAssert.assertNotNull(response, "Verify the account is edited successfully");
 	}
 

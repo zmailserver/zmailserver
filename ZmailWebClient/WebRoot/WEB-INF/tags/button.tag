@@ -24,8 +24,8 @@
 <%@ attribute name="extra" rtexprvalue="true" required="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
-<%@ taglib prefix="app" uri="com.zimbra.htmlclient" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
+<%@ taglib prefix="app" uri="org.zmail.htmlclient" %>
 <c:if test="${not empty text}"><fmt:message key="${text}" var="text"/></c:if>
 <c:if test="${not empty tooltip}"><fmt:message key="${tooltip}" var="tooltip"/></c:if>
 <c:choose>

@@ -12,15 +12,15 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.tag.briefcase;
+package org.zmail.cs.taglib.tag.briefcase;
 
-import com.zimbra.common.mime.MimeCompoundHeader;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.taglib.bean.ZFolderBean;
-import com.zimbra.cs.taglib.bean.ZMailboxBean;
-import com.zimbra.cs.taglib.tag.ZimbraSimpleTag;
-import com.zimbra.client.ZDocument;
-import com.zimbra.client.ZMailbox;
+import org.zmail.common.mime.MimeCompoundHeader;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.taglib.bean.ZFolderBean;
+import org.zmail.cs.taglib.bean.ZMailboxBean;
+import org.zmail.cs.taglib.tag.ZmailSimpleTag;
+import org.zmail.client.ZDocument;
+import org.zmail.client.ZMailbox;
 
 import javax.servlet.jsp.JspContext;
 import javax.servlet.jsp.JspException;
@@ -30,7 +30,7 @@ import java.net.URLEncoder;
 import java.io.*;
 import java.nio.CharBuffer;
 
-public class GetDocumentContentTag extends ZimbraSimpleTag {
+public class GetDocumentContentTag extends ZmailSimpleTag {
 
     private String mVar;
     private String mId;

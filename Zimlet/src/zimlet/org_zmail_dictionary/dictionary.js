@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-function Com_Zimbra_Dictionary() {
+function Com_Zmail_Dictionary() {
 	this._dictionaries = [
 		{ value: "*", label: "Any" },
 		{ value: "!", label: "First match" },
@@ -97,10 +97,10 @@ function Com_Zimbra_Dictionary() {
 	];
 }
 
-Com_Zimbra_Dictionary.prototype = new ZmZimletBase();
-Com_Zimbra_Dictionary.prototype.constructor = Com_Zimbra_Dictionary;
+Com_Zmail_Dictionary.prototype = new ZmZimletBase();
+Com_Zmail_Dictionary.prototype.constructor = Com_Zmail_Dictionary;
 
-Com_Zimbra_Dictionary.prototype.init =
+Com_Zmail_Dictionary.prototype.init =
 function() {
 /*
 //
@@ -129,12 +129,12 @@ function() {
 */
 	this._time = (new Date()).getTime();
 	
-	Com_Zimbra_Dictionary.prototype._dictDatabase = this.getUserProperty("dict");
-	Com_Zimbra_Dictionary.prototype._dictionaryServer = this.getConfig("dictionaryServer");
-	Com_Zimbra_Dictionary.prototype._dictionaryServerTop = this.getConfig("dictionaryServerTop");
+	Com_Zmail_Dictionary.prototype._dictDatabase = this.getUserProperty("dict");
+	Com_Zmail_Dictionary.prototype._dictionaryServer = this.getConfig("dictionaryServer");
+	Com_Zmail_Dictionary.prototype._dictionaryServerTop = this.getConfig("dictionaryServerTop");
 };
 
-Com_Zimbra_Dictionary.prototype.lookup =
+Com_Zmail_Dictionary.prototype.lookup =
 function() {
 	// Safari calls this twice, so don't run more than once per second (also to
 	// avoid overloading the dictionary server):
@@ -178,8 +178,8 @@ function() {
 		selectedText = userSelection.text;
 	}
 
-	Com_Zimbra_Dictionary.prototype._dictionaryWord = new String(selectedText);
-	if (Com_Zimbra_Dictionary.prototype._dictionaryWord == "") {
+	Com_Zmail_Dictionary.prototype._dictionaryWord = new String(selectedText);
+	if (Com_Zmail_Dictionary.prototype._dictionaryWord == "") {
 		return;
 	}
 
@@ -201,7 +201,7 @@ function() {
 		lookupNode.id = "dictionaryLookup";
 		rangeObject.insertNode(lookupNode);
 	} catch (e) {
-		Com_Zimbra_Dictionary.prototype._createDictionaryDefinitionDialog();
+		Com_Zmail_Dictionary.prototype._createDictionaryDefinitionDialog();
 		return;
 	}
 	
@@ -224,18 +224,18 @@ function() {
 	var tooltip = DwtShell.getShell(window).getToolTip();
 	tooltip.setContent('<div style="width: 550px; height: 250px;" id="dictionaryTooltip">Loading...</div>');
 	tooltip.popup(curleft,curtop);
-	Com_Zimbra_Dictionary.prototype._findDictionaryDefinition();
+	Com_Zmail_Dictionary.prototype._findDictionaryDefinition();
 
 	thisIframe.contentWindow.document.getElementById("dictionaryLookup").parentNode.removeChild(thisIframe.contentWindow.document.getElementById("dictionaryLookup"));
 };
 
-Com_Zimbra_Dictionary.prototype._createDictionaryDefinitionDialog =
+Com_Zmail_Dictionary.prototype._createDictionaryDefinitionDialog =
 function() {
 	var view = new DwtComposite(DwtShell.getShell(window));
 	view.getHtmlElement().innerHTML = '<div style="width: 550px; height: 250px;" id="dictionaryDialog">Loading...</div>';
 
 	var dialog_args = {
-		title : "Definition of "+Com_Zimbra_Dictionary.prototype._dictionaryWord,
+		title : "Definition of "+Com_Zmail_Dictionary.prototype._dictionaryWord,
 		view  : view,
 		parent: DwtShell.getShell(window),
 		standardButtons: [DwtDialog.OK_BUTTON]
@@ -244,7 +244,7 @@ function() {
 	var dlg = new ZmDialog(dialog_args);
 	dlg.popup();
 
-	Com_Zimbra_Dictionary.prototype._findDictionaryDefinition();
+	Com_Zmail_Dictionary.prototype._findDictionaryDefinition();
 
 	dlg.popdown = function () {
 		document.getElementById("dictionaryDialog").parentNode.removeChild(document.getElementById("dictionaryDialog"));
@@ -258,13 +258,13 @@ function() {
 		}));
 };
 
-Com_Zimbra_Dictionary.prototype._findDictionaryDefinition =
+Com_Zmail_Dictionary.prototype._findDictionaryDefinition =
 function() {
-	var dictUrl = ZmZimletBase.PROXY + AjxStringUtil.urlComponentEncode(Com_Zimbra_Dictionary.prototype._dictionaryServer+"?Database="+Com_Zimbra_Dictionary.prototype._dictDatabase+"&Form=Dict1&Strategy=*&submit=Submit+query&Query="+Com_Zimbra_Dictionary.prototype._dictionaryWord.replace(/\ /g, "+"));
-	AjxRpc.invoke(null, dictUrl, { "User-Agent": navigator.userAgent, "Referer": Com_Zimbra_Dictionary.prototype._dictionaryServer }, new AjxCallback(Com_Zimbra_Dictionary.prototype, Com_Zimbra_Dictionary.prototype._updateDictionaryDefinition), true);
+	var dictUrl = ZmZimletBase.PROXY + AjxStringUtil.urlComponentEncode(Com_Zmail_Dictionary.prototype._dictionaryServer+"?Database="+Com_Zmail_Dictionary.prototype._dictDatabase+"&Form=Dict1&Strategy=*&submit=Submit+query&Query="+Com_Zmail_Dictionary.prototype._dictionaryWord.replace(/\ /g, "+"));
+	AjxRpc.invoke(null, dictUrl, { "User-Agent": navigator.userAgent, "Referer": Com_Zmail_Dictionary.prototype._dictionaryServer }, new AjxCallback(Com_Zmail_Dictionary.prototype, Com_Zmail_Dictionary.prototype._updateDictionaryDefinition), true);
 };
 
-Com_Zimbra_Dictionary.prototype._updateDictionaryDefinition =
+Com_Zmail_Dictionary.prototype._updateDictionaryDefinition =
 function(result) {
 	if (!result.success) {
 		result = "Error connecting to dictionary server.";
@@ -278,7 +278,7 @@ function(result) {
 		} else if (beginIndex) {
 			result = result.substring(beginIndex);
 		}
-		result = result.replace(/href="\//g, 'target="_blank" href="'+Com_Zimbra_Dictionary.prototype._dictionaryServerTop);
+		result = result.replace(/href="\//g, 'target="_blank" href="'+Com_Zmail_Dictionary.prototype._dictionaryServerTop);
 	}
 	
 	result = '<div style="width: 550px; height: 250px; overflow: auto;">'+result+'</div>';
@@ -293,12 +293,12 @@ function(result) {
 	}
 };
 
-Com_Zimbra_Dictionary.prototype.doubleClicked =
+Com_Zmail_Dictionary.prototype.doubleClicked =
 function() {
 	this.singleClicked();
 };
 
-Com_Zimbra_Dictionary.prototype.singleClicked =
+Com_Zmail_Dictionary.prototype.singleClicked =
 function() {
 	var editorProps = [
 		{ label 		 : "Word",
@@ -331,16 +331,16 @@ function() {
 	this._dlg_propertyEditor.popup();
 };
 
-Com_Zimbra_Dictionary.prototype._doSearch =
+Com_Zmail_Dictionary.prototype._doSearch =
 function() {
 	this._dlg_propertyEditor.popdown();
-	Com_Zimbra_Dictionary.prototype._dictionaryWord = this._propertyEditor.getProperties().word;
+	Com_Zmail_Dictionary.prototype._dictionaryWord = this._propertyEditor.getProperties().word;
 	this._dlg_propertyEditor.dispose();
 	this._dlg_propertyEditor = null;
 	this._createDictionaryDefinitionDialog();
 };
 
-Com_Zimbra_Dictionary.prototype.menuItemSelected = 
+Com_Zmail_Dictionary.prototype.menuItemSelected = 
 function(itemId) {
 	switch (itemId) {
 		case "prefs":
@@ -349,7 +349,7 @@ function(itemId) {
 	}
 };
 
-Com_Zimbra_Dictionary.prototype._showPrefs =
+Com_Zmail_Dictionary.prototype._showPrefs =
 function() {
 	if(!this._prefsDialog) {
 		this._prefsDialog = new DictionaryPrefsDialog(appCtxt._shell, null, this);

@@ -24,7 +24,7 @@ function _initWiki() {
 			return {"url":ctxt.getConfig("wikipediaUrl") + AjxStringUtil.urlEncode(q), "req":null}
 		};
 		
-	Com_Zimbra_Xslt.registerService(wiki);
+	Com_Zmail_Xslt.registerService(wiki);
 
 	wiki = new Object();
 	wiki.label = "Wiktionary";
@@ -36,7 +36,7 @@ function _initWiki() {
 			return {"url":ctxt.getConfig("wiktionaryUrl") + AjxStringUtil.urlEncode(q), "req":null}
 		};
 		
-	Com_Zimbra_Xslt.registerService(wiki);
+	Com_Zmail_Xslt.registerService(wiki);
 };
 
 _initWiki();

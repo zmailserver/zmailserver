@@ -1,17 +1,17 @@
-package com.zimbra.cs.taglib.tag.folder;
+package org.zmail.cs.taglib.tag.folder;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.taglib.bean.ZGrantBean;
-import com.zimbra.cs.taglib.bean.ZMimePartBean;
-import com.zimbra.cs.taglib.tag.ZimbraSimpleTag;
-import com.zimbra.client.ZEmailAddress;
-import com.zimbra.client.ZGrant;
-import com.zimbra.client.ZMailbox;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.taglib.bean.ZGrantBean;
+import org.zmail.cs.taglib.bean.ZMimePartBean;
+import org.zmail.cs.taglib.tag.ZmailSimpleTag;
+import org.zmail.client.ZEmailAddress;
+import org.zmail.client.ZGrant;
+import org.zmail.client.ZMailbox;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
-import com.zimbra.cs.taglib.tag.i18n.I18nUtil;
+import org.zmail.cs.taglib.tag.i18n.I18nUtil;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +31,7 @@ import java.util.List;
  * ***** END LICENSE BLOCK *****
  */
 
-public class UpdateFolderGrantTag extends ZimbraSimpleTag {
+public class UpdateFolderGrantTag extends ZmailSimpleTag {
 
     private String mFolderId;
     private String mFolderName;
@@ -132,7 +132,7 @@ public class UpdateFolderGrantTag extends ZimbraSimpleTag {
         String subject =
             I18nUtil.getLocalizedMessage((PageContext)getJspContext(),
                                          subjectKey, mGrantorName);
-        String acceptShareLink = "/zimbra/y/mcalendars?action=acceptShare" +
+        String acceptShareLink = "/zmail/y/mcalendars?action=acceptShare" +
                                  "&oc=" + mFolderName +
                                  "&oe=" + mbox.getAccountInfo(false).getName() +
                                  "&od=" + mFolderId;

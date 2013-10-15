@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.tasks.folders;
+package org.zmail.qa.selenium.projects.ajax.tests.tasks.folders;
 
 import java.util.HashMap;
 
 import org.testng.annotations.*;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.tasks.DialogCreateTaskFolder;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.tasks.DialogCreateTaskFolder;
 
 
 public class CreateTaskFolder extends AjaxCommonTest {
@@ -40,18 +40,18 @@ public class CreateTaskFolder extends AjaxCommonTest {
 		// test starts at the task tab
 		super.startingPage = app.zPageTasks;
 		super.startingAccountPreferences = new HashMap<String , String>() {{
-			put("zimbraPrefTasksReadingPaneLocation", "bottom");
-			put("zimbraPrefShowSelectionCheckbox", "TRUE");
+			put("zmailPrefTasksReadingPaneLocation", "bottom");
+			put("zmailPrefShowSelectionCheckbox", "TRUE");
 		}};
 	}	
 
 	@Test(description = "Create a new tasklist by clicking 'Create a new task' on task folders tree", groups = { "sanity" })
 	public void CreateTaskFolder_01() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem taskFolder = FolderItem.importFromSOAP(account,SystemFolder.Tasks);
 		
-		_folderName = "taskfolder" + ZimbraSeleniumProperties.getUniqueString();
+		_folderName = "taskfolder" + ZmailSeleniumProperties.getUniqueString();
 		
 		//Create folder
 		//DialogCreateTaskFolder createTaskFolderDialog =(DialogCreateTaskFolder)app.zTreeTasks.zPressButton(Button.B_TREE_NEWTASKLIST);
@@ -75,11 +75,11 @@ public class CreateTaskFolder extends AjaxCommonTest {
 	
 	@Test(description = "Create a new tasklist using tasks app New -> New Task Folder", groups = { "functional" })
 	public void CreateTaskFolder_02() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem taskFolder = FolderItem.importFromSOAP(account,SystemFolder.Tasks);
 		
-		_folderName = "taskfolder" + ZimbraSeleniumProperties.getUniqueString();
+		_folderName = "taskfolder" + ZmailSeleniumProperties.getUniqueString();
 		
 		//Create folder
 		DialogCreateTaskFolder createTaskFolderDialog =(DialogCreateTaskFolder)app.zPageTasks.zToolbarPressPulldown(Button.B_NEW, Button.O_NEW_TASKFOLDER);

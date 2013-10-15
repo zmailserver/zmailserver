@@ -369,7 +369,7 @@ function(str) {
  * Returns a string representation of this object.
  * 
  * @param {boolean}		shortForm	if true, return a brief version (name if available, otherwise email)
- * @param {boolean}		forceUnescape	if true, name will not be in quotes and any quotes inside the name will be unescaped (e.g. "John \"JD\" Doe" <jd@zimbra.com> becomes John "JD" Doe <jd@zimbra.com>
+ * @param {boolean}		forceUnescape	if true, name will not be in quotes and any quotes inside the name will be unescaped (e.g. "John \"JD\" Doe" <jd@zmail.com> becomes John "JD" Doe <jd@zmail.com>
  * 
  * @return	{string}		a string representation of this object
  */

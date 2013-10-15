@@ -14,18 +14,18 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.octopus.tests.login;
+package org.zmail.qa.selenium.projects.octopus.tests.login;
 
 import java.util.ArrayList;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.projects.octopus.core.OctopusCommonTest;
-import com.zimbra.qa.selenium.projects.octopus.ui.PageLogin;
-import com.zimbra.qa.selenium.projects.octopus.ui.PageLogin.Locators;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.projects.octopus.core.OctopusCommonTest;
+import org.zmail.qa.selenium.projects.octopus.ui.PageLogin;
+import org.zmail.qa.selenium.projects.octopus.ui.PageLogin.Locators;
 
 public class LoginPolicy extends OctopusCommonTest
 {
@@ -40,10 +40,10 @@ public class LoginPolicy extends OctopusCommonTest
 	public void VerifyForceChangePassword() throws HarnessException
 	{
 		//Create new account
-		ZimbraAccount acct = new ZimbraAccount();
+		ZmailAccount acct = new ZmailAccount();
 
 		//Set preferences for password must change policy
-		acct.setPref("zimbraPasswordMustChange", "TRUE");
+		acct.setPref("zmailPasswordMustChange", "TRUE");
 		acct.provision();
 
 		//Enter login details and click login button
@@ -67,10 +67,10 @@ public class LoginPolicy extends OctopusCommonTest
 
 
 			//Create new account
-			ZimbraAccount acct = new ZimbraAccount();
+			ZmailAccount acct = new ZmailAccount();
 
 			//Set account status
-			acct.setPref("zimbraAccountStatus", status);
+			acct.setPref("zmailAccountStatus", status);
 			acct.provision();
 
 			//Enter login details and click login button

@@ -116,10 +116,10 @@ function(params) {
 	var soapDoc = params.soapDoc;
 	// Add the SOAP header and context
 	var hdr = soapDoc.createHeaderElement();
-	var context = soapDoc.set("context", null, hdr, "urn:zimbra");
+	var context = soapDoc.set("context", null, hdr, "urn:zmail");
 
 	var ua = soapDoc.set("userAgent", null, context);
-	var name = ["ZimbraToolbar - ", ZMTB_AjxEnv.browser, " (", ZMTB_AjxEnv.platform, ")"].join("");
+	var name = ["ZmailToolbar - ", ZMTB_AjxEnv.browser, " (", ZMTB_AjxEnv.platform, ")"].join("");
 	ua.setAttribute("name", name);
 	ua.setAttribute("version", ZMTBCsfeCommand.clientVersion);
 
@@ -128,7 +128,7 @@ function(params) {
 	}
 	var sessionId = ZMTBCsfeCommand.getSessionId();
 	
-	//Zimbra 6 requires that an empty session element be included in order to receive a refresh block
+	//Zmail 6 requires that an empty session element be included in order to receive a refresh block
 	var si2 = soapDoc.set("session", null, context);
 	if (sessionId)
 	{
@@ -375,7 +375,7 @@ function() {
 ZMTBCsfeCommand.invoke =
 function(soapDoc, noAuthTokenRequired, serverUri, targetServer, useXml, noSession, changeToken) {
 	var hdr = soapDoc.createHeaderElement();
-	var context = soapDoc.set("context", null, hdr, "urn:zimbra");
+	var context = soapDoc.set("context", null, hdr, "urn:zmail");
 
 	if (noSession)
 		soapDoc.set("nosession", null, context);

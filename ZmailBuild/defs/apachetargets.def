@@ -2,26 +2,26 @@
 # __APACHE
 
 apache: CUR_DEST_ROOT := $(APACHE_DEST_ROOT)
-apache: CUR_PACKAGE_SPEC := $(BUILD_ROOT)/zimbra-apache.spec
-apache: CUR_PACKAGE_NAME := zimbra-apache
+apache: CUR_PACKAGE_SPEC := $(BUILD_ROOT)/zmail-apache.spec
+apache: CUR_PACKAGE_NAME := zmail-apache
 apache: $(PACKAGE_DIR) apache_stage apache_pkg_spec_$(PACKAGE_EXT) 
 	(cd $(CUR_DEST_ROOT); \
 		$(PACKAGING_COMMAND) $(PACKAGING_OPTIONS) )
 
 apache_pkg_spec_ccs:
 
-apache_pkg_spec_pkg: $(BUILD_ROOT)/resources/zimbra-apache $(BUILD_ROOT)/zimbra-apache.Info.plist $(BUILD_ROOT)/zimbra-apache.Description.plist
+apache_pkg_spec_pkg: $(BUILD_ROOT)/resources/zmail-apache $(BUILD_ROOT)/zmail-apache.Info.plist $(BUILD_ROOT)/zmail-apache.Description.plist
 
-$(BUILD_ROOT)/zimbra-apache.Description.plist:
-	cat $(PACKAGE_CONF_DIR)/Spec/zimbra-apache.Description.plist | \
+$(BUILD_ROOT)/zmail-apache.Description.plist:
+	cat $(PACKAGE_CONF_DIR)/Spec/zmail-apache.Description.plist | \
 	sed -e 's/@@VERSION@@/$(VERSION_TAG)/' \
 	-e 's/@@RELEASE@@/$(RELEASE)/' \
 	-e 's/@@MAJOR@@/$(MAJOR)/' \
 	-e 's/@@MICRO@@/$(MICRO)/' \
 	-e 's/@@MINOR@@/$(MINOR)/' > $@
 
-$(BUILD_ROOT)/zimbra-apache.Info.plist:
-	cat $(PACKAGE_CONF_DIR)/Spec/zimbra-apache.Info.plist | \
+$(BUILD_ROOT)/zmail-apache.Info.plist:
+	cat $(PACKAGE_CONF_DIR)/Spec/zmail-apache.Info.plist | \
 	sed -e 's/@@VERSION@@/$(VERSION_TAG)/' \
 	-e 's/@@RELEASE@@/$(RELEASE)/' \
 	-e 's/@@MAJOR@@/$(MAJOR)/' \
@@ -29,10 +29,10 @@ $(BUILD_ROOT)/zimbra-apache.Info.plist:
 	-e 's/@@BUILDNUM@@/$(BUILDNUM)/' \
 	-e 's/@@MINOR@@/$(MINOR)/' > $@
 
-$(BUILD_ROOT)/resources/zimbra-apache:
+$(BUILD_ROOT)/resources/zmail-apache:
 	mkdir -p $@
-	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zimbra-apache.postinstall $@/postinstall
-	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zimbra-apache.postupgrade $@/postupgrade
+	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zmail-apache.postinstall $@/postinstall
+	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zmail-apache.postupgrade $@/postupgrade
 	chmod 755 $@/postinstall
 	chmod 755 $@/postupgrade
 
@@ -40,35 +40,35 @@ apache_pkg_spec_deb: $(APACHE_DEST_ROOT)/DEBIAN/control
 
 $(APACHE_DEST_ROOT)/DEBIAN: force
 	mkdir -p $@
-	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zimbra-apache.pre $@/preinst
-	cat $(PACKAGE_CONF_DIR)/Spec/Scripts/zimbra-apache.post >> $@/postinst
+	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zmail-apache.pre $@/preinst
+	cat $(PACKAGE_CONF_DIR)/Spec/Scripts/zmail-apache.post >> $@/postinst
 	chmod 555 $@/*
 
 $(APACHE_DEST_ROOT)/DEBIAN/control: $(APACHE_DEST_ROOT)/DEBIAN force
-	cat $(PACKAGE_CONF_DIR)/Spec/zimbra-apache.deb | \
+	cat $(PACKAGE_CONF_DIR)/Spec/zmail-apache.deb | \
 	sed -e 's/@@VERSION@@/$(VERSION_TAG)/' \
 	-e 's/@@RELEASE@@/$(RELEASE)/' \
 	-e 's/@@ARCH@@/$(ARCH)/' > $@
 
-apache_pkg_spec_rpm: $(BUILD_ROOT)/zimbra-apache.spec
+apache_pkg_spec_rpm: $(BUILD_ROOT)/zmail-apache.spec
 
-$(BUILD_ROOT)/zimbra-apache.spec:
-	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zimbra-apache.pre $(BUILD_ROOT)
-	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zimbra-apache.post $(BUILD_ROOT)
-	cat $(PACKAGE_CONF_DIR)/Spec/zimbra-apache.spec | \
+$(BUILD_ROOT)/zmail-apache.spec:
+	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zmail-apache.pre $(BUILD_ROOT)
+	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zmail-apache.post $(BUILD_ROOT)
+	cat $(PACKAGE_CONF_DIR)/Spec/zmail-apache.spec | \
 		sed -e 's/@@VERSION@@/$(VERSION_TAG)/' \
 		-e 's/@@RELEASE@@/$(RELEASE)/' \
 		-e 's/^Copyright:/$(RPMCOPYRIGHTSTR):/' \
-		-e '/^%pre$$/ r zimbra-apache.pre' \
-		-e '/^%post$$/ r zimbra-apache.post' > $(BUILD_ROOT)/zimbra-apache.spec
-	rm -f zimbra-apache.pre
-	rm -f zimbra-apache.post
-	echo "%attr(-, zimbra, zimbra) /opt/zimbra/conf" >> \
-		$(BUILD_ROOT)/zimbra-apache.spec
-	echo "%attr(-, zimbra, zimbra) /opt/zimbra/httpd-$(APACHE_VERSION)" >> \
-		$(BUILD_ROOT)/zimbra-apache.spec
-	echo "" >> $(BUILD_ROOT)/zimbra-apache.spec
-	echo "%clean" >> $(BUILD_ROOT)/zimbra-apache.spec
+		-e '/^%pre$$/ r zmail-apache.pre' \
+		-e '/^%post$$/ r zmail-apache.post' > $(BUILD_ROOT)/zmail-apache.spec
+	rm -f zmail-apache.pre
+	rm -f zmail-apache.post
+	echo "%attr(-, zmail, zmail) /opt/zmail/conf" >> \
+		$(BUILD_ROOT)/zmail-apache.spec
+	echo "%attr(-, zmail, zmail) /opt/zmail/httpd-$(APACHE_VERSION)" >> \
+		$(BUILD_ROOT)/zmail-apache.spec
+	echo "" >> $(BUILD_ROOT)/zmail-apache.spec
+	echo "%clean" >> $(BUILD_ROOT)/zmail-apache.spec
 
 apache_stage: $(APACHE_COMPONENTS)
 

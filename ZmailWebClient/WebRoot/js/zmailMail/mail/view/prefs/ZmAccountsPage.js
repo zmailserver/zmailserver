@@ -313,7 +313,7 @@ function(user, ex){
 ZmAccountsPage.prototype._handleDelegateRights =
 function(user,sendAs,sendObo,isGrant,refresh) {
    var request = (isGrant) ? ZmSetting.GRANT_RIGHTS_REQUEST : ZmSetting.REVOKE_RIGHTS_REQUEST;
-   var soapDoc = AjxSoapDoc.create(request, "urn:zimbraAccount");
+   var soapDoc = AjxSoapDoc.create(request, "urn:zmailAccount");
    var batchCmd = new ZmBatchCommand(null, appCtxt.accountList.mainAccount.name);
    var callback = this._handleDelegateRightsCallback.bind(this,user,sendAs,sendObo,isGrant,refresh);
    var errCallback = this._errRightsCommand.bind(this, user);
@@ -505,7 +505,7 @@ function(granter, grantee, sendAs,sendObo,isGrant) {
 ZmAccountsPage.prototype._getGrants =
 function() {
     var jsonObj = {GetRightsRequest:{
-        _jsns:"urn:zimbraAccount",
+        _jsns:"urn:zmailAccount",
         "ace":[
             {right:ZmSetting.SEND_AS},
             {right:ZmSetting.SEND_ON_BEHALF_OF}
@@ -612,7 +612,7 @@ function(account, skipUpdate, ignoreProvider) {
                 this._setPersona(account, this._currentSection);
             } else {
                 this._currentSection = ZmAccountsPage.SECTIONS["PRIMARY"];
-                this._setZimbraAccount(account, this._currentSection);
+                this._setZmailAccount(account, this._currentSection);
             }
         } else {
             switch (account.type) {
@@ -639,7 +639,7 @@ function(account, skipUpdate, ignoreProvider) {
                 }
                 default: {
                     this._currentSection = ZmAccountsPage.SECTIONS["PRIMARY"];
-                    this._setZimbraAccount(account, this._currentSection);
+                    this._setZmailAccount(account, this._currentSection);
                     break;
                 }
             }
@@ -691,7 +691,7 @@ function(useDefaults) {
 
 	var usedIdentities = {};
 
-	// add zimbra accounts (i.e. family mboxes)
+	// add zmail accounts (i.e. family mboxes)
 	var mboxes = appCtxt.accountList.getAccounts();
 	var active = appCtxt.getActiveAccount();
 	for (var j in mboxes) {
@@ -914,7 +914,7 @@ function(batchCmd) {
 	}
 
 	// refresh display after all is done
-	var soapDoc = AjxSoapDoc.create("NoOpRequest", "urn:zimbraMail");
+	var soapDoc = AjxSoapDoc.create("NoOpRequest", "urn:zmailMail");
 	var callback = new AjxCallback(this, this.reset);
 	batchCmd.addNewRequestParams(soapDoc, callback);
 };
@@ -930,7 +930,7 @@ function(accounts, okCallback, cancelCallback) {
 
 // set controls based on account
 
-ZmAccountsPage.prototype._setZimbraAccount =
+ZmAccountsPage.prototype._setZmailAccount =
 function(account, section) {
 	this._setGenericFields(account, section);
 	this._setIdentityFields(account, section);
@@ -1075,7 +1075,7 @@ function(batchCmd) {
 
 	// collect *all* visible accounts for ModifyPrefsRequest and add to batchCmd
 	if (visibilityChanged) {
-		var soapDoc = AjxSoapDoc.create("ModifyPrefsRequest", "urn:zimbraAccount");
+		var soapDoc = AjxSoapDoc.create("ModifyPrefsRequest", "urn:zmailAccount");
 		var setting = appCtxt.getSettings().getSetting(ZmSetting.CHILD_ACCTS_VISIBLE);
 		var foundVisible = false;
 		for (var j = 0; j < accounts.length; j++) {
@@ -1540,8 +1540,8 @@ function(id, setup, value) {
 };
 
 ZmAccountsPage.__BY_PROVIDER_NAME = function(a, b) {
-	if (a.name.match(/^zimbra/i)) return -1;
-	if (b.name.match(/^zimbra/i)) return  1;
+	if (a.name.match(/^zmail/i)) return -1;
+	if (b.name.match(/^zmail/i)) return  1;
 	if (a.name.match(/^yahoo/i)) return -1;
 	if (b.name.match(/^yahoo/i)) return  1;
 	return a.name.localeCompare(b.name);
@@ -2204,7 +2204,7 @@ function(continueCallback) {
 				folder = account._object_ && appCtxt.getById(account._object_.folderId);
 				if (folder && Number(folder.id) >= 256) {
 					if (folder.name != name) {
-						var soapDoc = AjxSoapDoc.create("FolderActionRequest", "urn:zimbraMail");
+						var soapDoc = AjxSoapDoc.create("FolderActionRequest", "urn:zmailMail");
 						var actionNode = soapDoc.set("action");
 						actionNode.setAttribute("op", "rename");
 						actionNode.setAttribute("id", folder.id);
@@ -2217,7 +2217,7 @@ function(continueCallback) {
 						account.folderId = folder.id;
 					}
 				} else {
-					var soapDoc = AjxSoapDoc.create("CreateFolderRequest", "urn:zimbraMail");
+					var soapDoc = AjxSoapDoc.create("CreateFolderRequest", "urn:zmailMail");
 					var folderEl = soapDoc.set("folder");
 					folderEl.setAttribute("l", ZmOrganizer.ID_ROOT);
 					folderEl.setAttribute("name", name);

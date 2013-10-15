@@ -12,24 +12,24 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.jsp;
+package org.zmail.cs.offline.jsp;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.SoapFaultException;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.account.ProvisioningConstants;
-import com.zimbra.soap.admin.type.DataSourceType;
-import com.zimbra.cs.offline.common.OfflineConstants;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZFolder;
-import com.zimbra.soap.type.DataSource.ConnectionType;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.SoapFaultException;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.account.ProvisioningConstants;
+import org.zmail.soap.admin.type.DataSourceType;
+import org.zmail.cs.offline.common.OfflineConstants;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZFolder;
+import org.zmail.soap.type.DataSource.ConnectionType;
 
 
 public class CalDavBean extends FormBean {
@@ -246,7 +246,7 @@ public class CalDavBean extends FormBean {
 		host = ds.getHost();
 		port = ds.getPort().toString();
 		isSsl = ds.getConnectionType() == ConnectionType.ssl;
-    	String attrs[] = ds.getMultiAttr(Provisioning.A_zimbraDataSourceAttribute);
+    	String attrs[] = ds.getMultiAttr(Provisioning.A_zmailDataSourceAttribute);
     	for (String a : attrs) {
     		if (a.startsWith("p:")) {
     			principalPath = a.substring(2);
@@ -254,7 +254,7 @@ public class CalDavBean extends FormBean {
     		}
     	}
 		isDebugTraceEnabled = ds.isDebugTraceEnabled();
-		syncFreqSecs = ds.getTimeIntervalSecs(OfflineConstants.A_zimbraDataSourceSyncFreq, OfflineConstants.DEFAULT_SYNC_FREQ / 1000);
+		syncFreqSecs = ds.getTimeIntervalSecs(OfflineConstants.A_zmailDataSourceSyncFreq, OfflineConstants.DEFAULT_SYNC_FREQ / 1000);
 		isLoaded = true;
 	}
 
@@ -320,22 +320,22 @@ public class CalDavBean extends FormBean {
 			addInvalid("url");
 		
 	    if (isAllOK()) {
-	        dsAttrs.put(Provisioning.A_zimbraDataSourceEnabled, ProvisioningConstants.TRUE);
-	        dsAttrs.put(Provisioning.A_zimbraDataSourceName, name);
-	        dsAttrs.put(Provisioning.A_zimbraDataSourceUsername, email);
-	        dsAttrs.put(Provisioning.A_zimbraPrefFromDisplay, displayName);
+	        dsAttrs.put(Provisioning.A_zmailDataSourceEnabled, ProvisioningConstants.TRUE);
+	        dsAttrs.put(Provisioning.A_zmailDataSourceName, name);
+	        dsAttrs.put(Provisioning.A_zmailDataSourceUsername, email);
+	        dsAttrs.put(Provisioning.A_zmailPrefFromDisplay, displayName);
 	        if (!password.equals(JspConstants.MASKED_PASSWORD)) {
-	            dsAttrs.put(Provisioning.A_zimbraDataSourcePassword, password);
+	            dsAttrs.put(Provisioning.A_zmailDataSourcePassword, password);
 	        }
 	        
-	        dsAttrs.put(Provisioning.A_zimbraDataSourceHost, host);
-	        dsAttrs.put(Provisioning.A_zimbraDataSourcePort, port);
-	        dsAttrs.put(Provisioning.A_zimbraDataSourceAttribute, "p:"+principalPath);
-	        dsAttrs.put(Provisioning.A_zimbraDataSourceConnectionType, (isSsl ? ConnectionType.ssl : ConnectionType.cleartext).toString());
-	        dsAttrs.put(Provisioning.A_zimbraDataSourceEnableTrace, isDebugTraceEnabled ? ProvisioningConstants.TRUE : ProvisioningConstants.FALSE);
+	        dsAttrs.put(Provisioning.A_zmailDataSourceHost, host);
+	        dsAttrs.put(Provisioning.A_zmailDataSourcePort, port);
+	        dsAttrs.put(Provisioning.A_zmailDataSourceAttribute, "p:"+principalPath);
+	        dsAttrs.put(Provisioning.A_zmailDataSourceConnectionType, (isSsl ? ConnectionType.ssl : ConnectionType.cleartext).toString());
+	        dsAttrs.put(Provisioning.A_zmailDataSourceEnableTrace, isDebugTraceEnabled ? ProvisioningConstants.TRUE : ProvisioningConstants.FALSE);
 	        
-	        dsAttrs.put(OfflineConstants.A_zimbraDataSourceSyncFreq, Long.toString(syncFreqSecs));
-            dsAttrs.put(Provisioning.A_zimbraDataSourceFolderId, ZFolder.ID_USER_ROOT);
+	        dsAttrs.put(OfflineConstants.A_zmailDataSourceSyncFreq, Long.toString(syncFreqSecs));
+            dsAttrs.put(Provisioning.A_zmailDataSourceFolderId, ZFolder.ID_USER_ROOT);
 
 			try {
 				JspProvStub stub = JspProvStub.getInstance();

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.offline;
+package org.zmail.cs.account.offline;
 
 import java.util.Arrays;
 import java.util.EnumSet;
@@ -25,33 +25,33 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 import com.google.common.io.Closeables;
-import com.zimbra.common.mailbox.ContactConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.index.ContactHit;
-import com.zimbra.cs.index.ResultsPager;
-import com.zimbra.cs.index.SearchParams;
-import com.zimbra.cs.index.SortBy;
-import com.zimbra.cs.index.ZimbraHit;
-import com.zimbra.cs.index.ZimbraQueryResults;
-import com.zimbra.cs.mailbox.Contact;
-import com.zimbra.cs.mailbox.ContactAutoComplete;
-import com.zimbra.cs.mailbox.ContactAutoComplete.AutoCompleteResult;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.OfflineGalContactAutoComplete;
-import com.zimbra.cs.mailbox.OfflineServiceException;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.offline.OfflineLog;
-import com.zimbra.cs.offline.common.OfflineConstants;
-import com.zimbra.cs.service.util.ItemId;
+import org.zmail.common.mailbox.ContactConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.index.ContactHit;
+import org.zmail.cs.index.ResultsPager;
+import org.zmail.cs.index.SearchParams;
+import org.zmail.cs.index.SortBy;
+import org.zmail.cs.index.ZmailHit;
+import org.zmail.cs.index.ZmailQueryResults;
+import org.zmail.cs.mailbox.Contact;
+import org.zmail.cs.mailbox.ContactAutoComplete;
+import org.zmail.cs.mailbox.ContactAutoComplete.AutoCompleteResult;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.OfflineGalContactAutoComplete;
+import org.zmail.cs.mailbox.OfflineServiceException;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.offline.OfflineLog;
+import org.zmail.cs.offline.common.OfflineConstants;
+import org.zmail.cs.service.util.ItemId;
 
 public class OfflineGal {
 
@@ -63,8 +63,8 @@ public class OfflineGal {
     public static final String CRTYPE_LOCATION = "Location";
     public static final String CRTYPE_EQUIPMENT = "Equipment";
 
-    public static final String A_zimbraCalResType = "zimbraCalResType";
-    public static final String A_zimbraCalResLocationDisplayName = "zimbraCalResLocationDisplayName";
+    public static final String A_zmailCalResType = "zmailCalResType";
+    public static final String A_zmailCalResLocationDisplayName = "zmailCalResLocationDisplayName";
 
     public static final String SECOND_GAL_FOLDER = "Contacts2";
 
@@ -106,14 +106,14 @@ public class OfflineGal {
         return mOpContext;
     }
 
-    public ZimbraQueryResults search(String name, String type, SortBy sortBy, int offset, int limit, Element cursor)
+    public ZmailQueryResults search(String name, String type, SortBy sortBy, int offset, int limit, Element cursor)
             throws ServiceException {
         Set<String> names = new HashSet<String>();
         names.add(name);
         return search(names, type, sortBy, offset, limit, cursor);
     }
 
-    public ZimbraQueryResults search(Set<String> names, String type, SortBy sortBy, int offset, int limit,
+    public ZmailQueryResults search(Set<String> names, String type, SortBy sortBy, int offset, int limit,
             Element cursor) throws ServiceException {
         String galAcctId = mAccount.getId();
         mGalMbox = null;
@@ -171,11 +171,11 @@ public class OfflineGal {
 
     public void search(Element response, String name, String type, SortBy sortBy, int offset, int limit, Element cursor)
             throws ServiceException {
-        limit = limit == 0 ? mAccount.getIntAttr(Provisioning.A_zimbraGalMaxResults, 100) : limit;
+        limit = limit == 0 ? mAccount.getIntAttr(Provisioning.A_zmailGalMaxResults, 100) : limit;
         if (sortBy == null) {
             sortBy = SortBy.NAME_ASC;
         }
-        ZimbraQueryResults zqr = search(name, type, sortBy, offset, limit + 1, cursor); // use limit + 1 so that we know when to set "had more"
+        ZmailQueryResults zqr = search(name, type, sortBy, offset, limit + 1, cursor); // use limit + 1 so that we know when to set "had more"
         if (zqr == null) {
             response.addAttribute(AccountConstants.A_MORE, false);
             return;
@@ -184,7 +184,7 @@ public class OfflineGal {
         int num = 0;
         try {
             while (pager.hasNext()) {
-                ZimbraHit hit = pager.getNextHit();
+                ZmailHit hit = pager.getNextHit();
                 if (hit instanceof ContactHit) {
                     int id = hit.getItemId();
                     Contact contact = (Contact) mGalMbox.getItemById(mOpContext, id, MailItem.Type.CONTACT);
@@ -220,7 +220,7 @@ public class OfflineGal {
     }
 
     public void search(AutoCompleteResult result, String name, int limit, String type) throws ServiceException {
-        ZimbraQueryResults zqr = search(name, type, SortBy.NAME_ASC, 0, limit, null);
+        ZmailQueryResults zqr = search(name, type, SortBy.NAME_ASC, 0, limit, null);
         if (zqr == null) {
             return;
         }

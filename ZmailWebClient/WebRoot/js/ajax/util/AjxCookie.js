@@ -66,7 +66,7 @@ function (doc, name, path, domain) {
 AjxCookie.areCookiesEnabled = 
 function (doc) {
 	var name = "ZM_COOKIE_TEST";
-	var value = "Zimbra";
+	var value = "Zmail";
 	AjxCookie.setCookie(doc, name, value);
 	var cookie = AjxCookie.getCookie(doc, name);
 	AjxCookie.deleteCookie(doc, name);

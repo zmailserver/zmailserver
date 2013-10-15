@@ -14,25 +14,25 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.octopus.tests.sharing;
+package org.zmail.qa.selenium.projects.octopus.tests.sharing;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.OctopusAccount;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.octopus.core.OctopusCommonTest;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.OctopusAccount;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.octopus.core.OctopusCommonTest;
 
 public class VerifySharingContextMenu extends OctopusCommonTest
 {
-	ZimbraAccount grantee =null;
+	ZmailAccount grantee =null;
 	public VerifySharingContextMenu()
 	{
 		super.startingPage = app.zPageMyFiles;
@@ -48,7 +48,7 @@ public class VerifySharingContextMenu extends OctopusCommonTest
 	public void VerifySharingContextMenuForChild()throws HarnessException
 	{
 		// Get current active account as owner
-		ZimbraAccount ownerAccount = app.zGetActiveAccount();
+		ZmailAccount ownerAccount = app.zGetActiveAccount();
 
 		FolderItem ownerBriefcaseRootFolder = FolderItem.importFromSOAP(
 				ownerAccount, SystemFolder.Briefcase);
@@ -58,14 +58,14 @@ public class VerifySharingContextMenu extends OctopusCommonTest
 
 		// Owner creates a folder, shares it with current user
 		String ownerFoldername = "ownerFolder"
-				+ ZimbraSeleniumProperties.getUniqueString();
+				+ ZmailSeleniumProperties.getUniqueString();
 
 		// Verify the share folder exists on the server
 		FolderItem ownerFolderItem = createFolderViaSoap(ownerAccount, ownerFoldername,ownerBriefcaseRootFolder);
 
 		ZAssert.assertNotNull(ownerFolderItem,"Verify the owner share folder exists");
 
-		String subFolderName = "subFolder"+ZimbraSeleniumProperties.getUniqueString();
+		String subFolderName = "subFolder"+ZmailSeleniumProperties.getUniqueString();
 
 		createFolderViaSoap(ownerAccount, subFolderName,ownerFolderItem);
 
@@ -96,12 +96,12 @@ public class VerifySharingContextMenu extends OctopusCommonTest
 	public void VerifyLeaveThisSharedFolderMenuForViewRights() throws HarnessException
 	{
 		// Get current active account as owner
-		ZimbraAccount owner = app.zGetActiveAccount();
+		ZmailAccount owner = app.zGetActiveAccount();
 
 		// Get the root folder of Owner
 		FolderItem ownerBriefcase = FolderItem.importFromSOAP(owner, SystemFolder.Briefcase);
 
-		String ownerFolderName = "ownerFolder"+ ZimbraSeleniumProperties.getUniqueString();
+		String ownerFolderName = "ownerFolder"+ ZmailSeleniumProperties.getUniqueString();
 		//Create folder Using SOAP under Owner root folder.
 		FolderItem ownerFolderItem = createFolderViaSoap(owner, ownerFolderName,ownerBriefcase);
 
@@ -128,12 +128,12 @@ public class VerifySharingContextMenu extends OctopusCommonTest
 	public void VerifyLeaveThisSharedFolderOption_Edit() throws HarnessException
 	{
 		// Get current active account as owner
-		ZimbraAccount owner = app.zGetActiveAccount();
+		ZmailAccount owner = app.zGetActiveAccount();
 
 		// Get the root folder of Owner
 		FolderItem ownerBriefcase = FolderItem.importFromSOAP(owner, SystemFolder.Briefcase);
 
-		String ownerFolderName = "ownerFolder"+ ZimbraSeleniumProperties.getUniqueString();
+		String ownerFolderName = "ownerFolder"+ ZmailSeleniumProperties.getUniqueString();
 		//Create folder Using SOAP under Owner root folder.
 		FolderItem ownerFolder =createFolderViaSoap(owner, ownerFolderName,ownerBriefcase);
 

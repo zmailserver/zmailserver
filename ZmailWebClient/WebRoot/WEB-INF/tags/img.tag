@@ -22,16 +22,16 @@
 <%@ attribute name="rawtitle" rtexprvalue="true" required="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="app" uri="com.zimbra.htmlclient" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
+<%@ taglib prefix="app" uri="org.zmail.htmlclient" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
 <c:if test="${not empty altkey}"><fmt:message key="${altkey}" var="alt"/></c:if>
 <c:if test="${not empty title and not rawtitle}"><fmt:message key="${title}" var="title"/></c:if> 
 <c:if test="${disabled}"><c:set var="clazz" value="${clazz} ImgDisabled"/></c:if>
 <app:imginfo var="info" value="${src}" />
 <zm:getUserAgent var="ua" session="false" /><img <c:choose>
         <c:when test="${fn:endsWith(fn:toLowerCase(src),'.png') and ua.isIE and not ua.isIE7up}"> 
-            src="<c:url value='/img/zimbra/ImgBlank_1.gif' />"
+            src="<c:url value='/img/zmail/ImgBlank_1.gif' />"
             style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='${info.src}',sizingMethod='crop')"
             width="${info.width}" height="${info.height}"
         </c:when>

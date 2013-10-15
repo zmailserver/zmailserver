@@ -14,7 +14,7 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimletConfig name="com_zimbra_travelagent" version="2.05">
+<zimletConfig name="org_zmail_travelagent" version="2.05">
     <global>
         <property name="allowedDomains">sidestep.com,*.sidestep.com,*.airnav.com,airnav.com,myplanner.org,*.myplanner.org</property>
     </global>

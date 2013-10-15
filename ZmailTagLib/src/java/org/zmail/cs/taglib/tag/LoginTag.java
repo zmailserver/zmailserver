@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.tag;
+package org.zmail.cs.taglib.tag;
 
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.HttpUtil;
-import com.zimbra.common.util.ZimbraCookie;
-import com.zimbra.cs.taglib.ZJspSession;
-import com.zimbra.client.ZMailbox;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.HttpUtil;
+import org.zmail.common.util.ZmailCookie;
+import org.zmail.cs.taglib.ZJspSession;
+import org.zmail.client.ZMailbox;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,7 +32,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Map;
 
-public class LoginTag extends ZimbraSimpleTag {
+public class LoginTag extends ZmailSimpleTag {
     
     private String mUsername;
     private String mPassword;
@@ -158,7 +158,7 @@ public class LoginTag extends ZimbraSimpleTag {
                 jctxt.setAttribute(mVarAuthResult, mbox.getAuthResult(), PageContext.REQUEST_SCOPE);
             }
 
-            //bug: 75754 invoking import data request only when zimbraDataSourceImportOnLogin is set
+            //bug: 75754 invoking import data request only when zmailDataSourceImportOnLogin is set
             boolean importDataOnLoginAttr = mbox.getFeatures().getDataSourceImportOnLogin();
             if (mImportData && !mAdminPreAuth && importDataOnLoginAttr) {
                 mbox.importData(mbox.getAllDataSources());
@@ -183,8 +183,8 @@ public class LoginTag extends ZimbraSimpleTag {
         }
         
         for (Map.Entry<String, String> ck : cookieMap.entrySet()) {
-            ZimbraCookie.addHttpOnlyCookie(response, ck.getKey(), ck.getValue(),
-                    ZimbraCookie.PATH_ROOT, maxAge, secure);
+            ZmailCookie.addHttpOnlyCookie(response, ck.getKey(), ck.getValue(),
+                    ZmailCookie.PATH_ROOT, maxAge, secure);
         }
     }
 }

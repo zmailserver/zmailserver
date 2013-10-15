@@ -14,10 +14,10 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.ui.addressbook;
+package org.zmail.qa.selenium.projects.ajax.ui.addressbook;
 
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
 import java.util.*;
 
 
@@ -133,7 +133,7 @@ public class DisplayDList extends AbsDisplay {
   	   int count= this.sGetCssCount(css);
 
     	   for (int i=2; i<=count; i++) {
-    		   String tdLocator=  css + ":nth-of-type(" + i + ")" + " span[id^='OBJ_PREFIX_DWT'][id$='_com_zimbra_emai']";
+    		   String tdLocator=  css + ":nth-of-type(" + i + ")" + " span[id^='OBJ_PREFIX_DWT'][id$='_org_zmail_emai']";
     		   if (sIsElementPresent(tdLocator)) {
     			   logger.info(tdLocator + " has text " + sGetText(tdLocator).trim());
     			   array.add(tdLocator);	    	 

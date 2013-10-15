@@ -75,7 +75,7 @@
   <topic name="ボイスメールメッセージを聴く" url="zwc_help_files/voiceservice/listening_to_a_voice_mail_message.htm" />
 </key>
 <key name="ミニカレンダー" >
-  <topic name="Zimbraウェブクライアント内を移動する" url="zwc_help_files/1_setting_up/navigating_the_zimbra_web_client.htm" />
+  <topic name="Zmailウェブクライアント内を移動する" url="zwc_help_files/1_setting_up/navigating_the_zmail_web_client.htm" />
 </key>
 <key name="メッセージの到着の通知" >
   <topic name="新着メールメッセージのデスクトップアラートを設定する" url="zwc_help_files/2_manage_email/setting_desktop_alerts_for_new_email_messages.htm" />
@@ -263,7 +263,7 @@
   <topic name="共有フォルダへのユーザーアクセスを削除する" url="zwc_help_files/13_sharing/removing_user_access_to_a_shared_folder.htm" />
 </key>
 <key name="内容ペイン" >
-  <topic name="Zimbraウェブクライアント内を移動する" url="zwc_help_files/1_setting_up/navigating_the_zimbra_web_client.htm" />
+  <topic name="Zmailウェブクライアント内を移動する" url="zwc_help_files/1_setting_up/navigating_the_zmail_web_client.htm" />
 </key>
 <key name="出張時の返信メッセージ" >
   <topic name="外出中のメッセージを設定する" url="zwc_help_files/2_manage_email/setting_up_an_out_of_office_message.htm" />

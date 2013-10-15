@@ -94,7 +94,7 @@ function() {
                 {type:_DYNSELECT_, ref:ZaAlias.A_targetAccount, dataFetcherClass:ZaSearch,
                     dataFetcherMethod:ZaSearch.prototype.dynSelectSearch,
                     dataFetcherTypes:[ZaSearch.ACCOUNTS, ZaSearch.RESOURCES, ZaSearch.DLS],
-                    dataFetcherAttrs:[ZaItem.A_zimbraId, ZaItem.A_cn, ZaAccount.A_name, ZaAccount.A_displayname, ZaAccount.A_mail],
+                    dataFetcherAttrs:[ZaItem.A_zmailId, ZaItem.A_cn, ZaAccount.A_name, ZaAccount.A_displayname, ZaAccount.A_mail],
                     label:ZaMsg.Alias_Dlg_label_target_acct,labelLocation:_LEFT_,
                     width:"100%", inputWidth:"100%", editable:true, forceUpdate:true,
                     choices:new XFormChoices([], XFormChoices.OBJECT_REFERENCE_LIST, "name", "name"),

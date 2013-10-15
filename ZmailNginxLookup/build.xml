@@ -1,7 +1,7 @@
-<project name="ZimbraNginxLookup" default="jar">
+<project name="ZmailNginxLookup" default="jar">
     <import file="../ant-global.xml" />
     
-	<property name="prod.lib.ext.dir" location="/opt/zimbra/lib/ext/nginx-lookup" />
+	<property name="prod.lib.ext.dir" location="/opt/zmail/lib/ext/nginx-lookup" />
 	<property name="jar.file" value="nginx-lookup.jar" />
 
 	<path id="class.path">
@@ -14,9 +14,9 @@
 	</path>
 
     <target name="jar" depends="compile" description="Creates the jar file">
-        <antcall target="zimbra-jar">
-            <param name="implementation.title" value="Zimbra Nginx Lookup"/>
-            <param name="zimbra.extension.class" value="com.zimbra.cs.nginx.NginxLookupExtension"/>
+        <antcall target="zmail-jar">
+            <param name="implementation.title" value="Zmail Nginx Lookup"/>
+            <param name="zmail.extension.class" value="org.zmail.cs.nginx.NginxLookupExtension"/>
         </antcall>
     </target>
 

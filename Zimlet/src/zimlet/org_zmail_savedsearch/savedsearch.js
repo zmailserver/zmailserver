@@ -14,26 +14,26 @@
  *@Author Raja Rao DV
  * Automatically saves a search after certain repeated search for the same query.
  */
-com_zimbra_savedsearch.maxHistoryItems = 300;//max unique search items to store
+org_zmail_savedsearch.maxHistoryItems = 300;//max unique search items to store
 
-function com_zimbra_savedsearch() {
+function org_zmail_savedsearch() {
 }
 
-com_zimbra_savedsearch.prototype = new ZmZimletBase();
-com_zimbra_savedsearch.prototype.constructor = com_zimbra_savedsearch;
+org_zmail_savedsearch.prototype = new ZmZimletBase();
+org_zmail_savedsearch.prototype.constructor = org_zmail_savedsearch;
 
-com_zimbra_savedsearch.prototype.init =
+org_zmail_savedsearch.prototype.init =
 function() {
 	this.savedsearchCompleteON = this.getUserProperty("turnONAutoSavedSearch") == "true";
 };
 
-com_zimbra_savedsearch.prototype.onSearchButtonClick =
+org_zmail_savedsearch.prototype.onSearchButtonClick =
 function(val) {
 	this._mouseOrKeySelection = false;
 	this.onKeyPressSearchField(val);
 };
 
-com_zimbra_savedsearch.prototype.onKeyPressSearchField =
+org_zmail_savedsearch.prototype.onKeyPressSearchField =
 function(val) {
 	if (!this.savedsearchCompleteON)
 		return;
@@ -68,7 +68,7 @@ function(val) {
 	}
 };
 
-com_zimbra_savedsearch.prototype._nameAlreadyExists =
+org_zmail_savedsearch.prototype._nameAlreadyExists =
 function(name) {
 	var arry = appCtxt.getFolderTree().root.getByType("SEARCH");
 	for (var i = 0; i < arry.length; i++) {
@@ -78,12 +78,12 @@ function(name) {
 	return false;
 };
 
-com_zimbra_savedsearch.prototype._fixName =
+org_zmail_savedsearch.prototype._fixName =
 function(oldName) {
 	return oldName.replace(/\*/g, "").replace(/\[/g, "").replace(/\]/g, "").replace(/\</g, "").replace(/\>/g, "").replace(/\=/g, "").replace(/\+/g, "").replace(/\'/g, "").replace(/\"/g, "").replace(/\\/g, "").replace(/\//g, "").replace(/\,/g, "").replace(/\./g, "").replace(/\:/g, "").replace(/\;/g, "").replace(/ /g, "").replace(/!/g, "");
 };
 
-com_zimbra_savedsearch.prototype._replaceCount =
+org_zmail_savedsearch.prototype._replaceCount =
 function(currHistory, val, newCount) {
 	var items = currHistory.split("::");
 	for (var j = 0; j < items.length; j++) {
@@ -96,12 +96,12 @@ function(currHistory, val, newCount) {
 };
 
 //if history count goes >1000, this restores it back to 800(i.e. 200 new space)
-com_zimbra_savedsearch.prototype._manageHistory =
+org_zmail_savedsearch.prototype._manageHistory =
 function() {
 	var tmp = this.getUserProperty("savedsearch_searchhistory").split("::");
-	if (tmp.length > com_zimbra_savedsearch.maxHistoryItems) {//store a max of 1000 unique items
+	if (tmp.length > org_zmail_savedsearch.maxHistoryItems) {//store a max of 1000 unique items
 		var newHistory = "";
-		for (var i = 0; i < (com_zimbra_savedsearch.maxHistoryItems - 200); i++) {
+		for (var i = 0; i < (org_zmail_savedsearch.maxHistoryItems - 200); i++) {
 			newHistory = newHistory + "::" + tmp[i];
 		}
 		this.setUserProperty("savedsearch_searchhistory", newHistory, true);
@@ -113,15 +113,15 @@ function() {
 //			SHOW PREFERENCES DIALOG
 //------------------------------------------------------------------------------------------
 
-com_zimbra_savedsearch.prototype.doubleClicked = function() {
+org_zmail_savedsearch.prototype.doubleClicked = function() {
 	this.singleClicked();
 };
 
-com_zimbra_savedsearch.prototype.singleClicked = function() {
+org_zmail_savedsearch.prototype.singleClicked = function() {
 	this.showPrefDialog();
 };
 
-com_zimbra_savedsearch.prototype.showPrefDialog =
+org_zmail_savedsearch.prototype.showPrefDialog =
 function() {
 	//if zimlet dialog already exists...
 	if (this.pbDialog) {
@@ -142,12 +142,12 @@ function() {
 	this.pbDialog.popup();
 };
 
-com_zimbra_savedsearch.prototype._clrHisBtnListner =
+org_zmail_savedsearch.prototype._clrHisBtnListner =
 function() {
 	this.setUserProperty("savedsearch_searchhistory", "", true);
 };
 
-com_zimbra_savedsearch.prototype._okBtnListner =
+org_zmail_savedsearch.prototype._okBtnListner =
 function() {
 	this._reloadRequired = false;
 	if (document.getElementById("turnONAutoSavedSearchId").checked) {
@@ -176,7 +176,7 @@ function() {
 	}
 };
 
-com_zimbra_savedsearch.prototype.createPrefView =
+org_zmail_savedsearch.prototype.createPrefView =
 function() {
 	var html = new Array();
 	var i = 0;
@@ -190,9 +190,9 @@ function() {
 	return html.join("");
 };
 
-com_zimbra_savedsearch.prototype._refreshBrowser =
+org_zmail_savedsearch.prototype._refreshBrowser =
 function() {
 	window.onbeforeunload = null;
 	var url = AjxUtil.formatUrl({});
-	ZmZimbraMail.sendRedirect(url);
+	ZmZmailMail.sendRedirect(url);
 };

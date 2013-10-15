@@ -14,24 +14,24 @@
  */
 
 /*
-* @Author Raja Rao DV (rrao@zimbra.com)
+* @Author Raja Rao DV (rrao@zmail.com)
 * Highlights search texts within an email
 */
 
-function com_zimbra_srchhltr_HandlerObject() {
+function org_zmail_srchhltr_HandlerObject() {
 }
 
-com_zimbra_srchhltr_HandlerObject.prototype = new ZmZimletBase();
-com_zimbra_srchhltr_HandlerObject.prototype.constructor = com_zimbra_srchhltr_HandlerObject;
+org_zmail_srchhltr_HandlerObject.prototype = new ZmZimletBase();
+org_zmail_srchhltr_HandlerObject.prototype.constructor = org_zmail_srchhltr_HandlerObject;
 
 /**
  * Simplify Handler object's name
  *
  */
- var SearchHighlighterZimlet = com_zimbra_srchhltr_HandlerObject;
+ var SearchHighlighterZimlet = org_zmail_srchhltr_HandlerObject;
 
 /**
- * Called by the framework when Zimbra loads
+ * Called by the framework when Zmail loads
  *
  */
 SearchHighlighterZimlet.prototype.init =

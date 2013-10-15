@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.briefcase.document;
+package org.zmail.qa.selenium.projects.desktop.tests.briefcase.document;
 
 import java.util.EnumMap;
 import java.util.HashMap;
@@ -23,22 +23,22 @@ import java.util.regex.Pattern;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
-import com.zimbra.qa.selenium.framework.util.HtmlElement;
-import com.zimbra.qa.selenium.framework.items.DocumentItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.ui.Shortcut;
-import com.zimbra.qa.selenium.framework.util.GeneralUtility;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount.SOAP_DESTINATION_HOST_TYPE;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.briefcase.DocumentBriefcaseNew;
-import com.zimbra.qa.selenium.projects.desktop.ui.briefcase.DocumentBriefcaseOpen;
-import com.zimbra.qa.selenium.projects.desktop.ui.briefcase.PageBriefcase;
+import org.zmail.qa.selenium.framework.util.HtmlElement;
+import org.zmail.qa.selenium.framework.items.DocumentItem;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.ui.Shortcut;
+import org.zmail.qa.selenium.framework.util.GeneralUtility;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailAccount.SOAP_DESTINATION_HOST_TYPE;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.briefcase.DocumentBriefcaseNew;
+import org.zmail.qa.selenium.projects.desktop.ui.briefcase.DocumentBriefcaseOpen;
+import org.zmail.qa.selenium.projects.desktop.ui.briefcase.PageBriefcase;
 
 public class CreateDocument extends AjaxCommonTest {
 
@@ -49,13 +49,13 @@ public class CreateDocument extends AjaxCommonTest {
 		super.startingPage = app.zPageBriefcase;
 
 		super.startingAccountPreferences = new HashMap<String , String>() {{
-         put("zimbraPrefBriefcaseReadingPaneLocation", "bottom");
+         put("zmailPrefBriefcaseReadingPaneLocation", "bottom");
 		}};
 	}
 
 	@Test(description = "Create document through GUI - verify through GUI", groups = { "sanity" })
 	public void CreateDocument_01() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
@@ -130,7 +130,7 @@ public class CreateDocument extends AjaxCommonTest {
 
 	@Test(description = "Create document using New menu pulldown menu - verify through SOAP & RestUtil", groups = { "functional" })
 	public void CreateDocument_02() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		// Create document item
 		DocumentItem document = new DocumentItem();
@@ -175,7 +175,7 @@ public class CreateDocument extends AjaxCommonTest {
 
 		// Search for created document
 		account
-				.soapSend("<SearchRequest xmlns='urn:zimbraMail' types='document'>"
+				.soapSend("<SearchRequest xmlns='urn:zmailMail' types='document'>"
 						+ "<query>" + docName + "</query>" + "</SearchRequest>");
 
 		String name = account.soapSelectValue("//mail:doc", "name");
@@ -198,7 +198,7 @@ public class CreateDocument extends AjaxCommonTest {
 
 	@Test(description = "Create document using keyboard shortcut - verify through SOAP & RestUtil", groups = { "functional" })
 	public void CreateDocument_03() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		// Create document item
 		DocumentItem document = new DocumentItem();
@@ -246,7 +246,7 @@ public class CreateDocument extends AjaxCommonTest {
 
 		// Search for created document
 		account
-				.soapSend("<SearchRequest xmlns='urn:zimbraMail' types='document'>"
+				.soapSend("<SearchRequest xmlns='urn:zmailMail' types='document'>"
 						+ "<query>" + docName + "</query>" + "</SearchRequest>");
 
 		ZAssert.assertStringContains(account.soapSelectValue("//mail:doc",
@@ -267,7 +267,7 @@ public class CreateDocument extends AjaxCommonTest {
 
    @Test(description = "Create local document using New menu pulldown menu - verify through SOAP & RestUtil", groups = { "smoke" })
    public void createLocalDocument() throws HarnessException {
-      ZimbraAccount account = app.zGetActiveAccount();
+      ZmailAccount account = app.zGetActiveAccount();
 
       // Create document item
       DocumentItem document = new DocumentItem();
@@ -279,7 +279,7 @@ public class CreateDocument extends AjaxCommonTest {
             app.zGetActiveAccount(),
             SystemFolder.Briefcase,
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
 
       app.zTreeBriefcase.zTreeItem(Action.A_LEFTCLICK, localBriefcaseFolder);
 
@@ -319,10 +319,10 @@ public class CreateDocument extends AjaxCommonTest {
 
       // Search for created document
       account.soapSend(
-            "<SearchRequest xmlns='urn:zimbraMail' types='document'>"
+            "<SearchRequest xmlns='urn:zmailMail' types='document'>"
                   + "<query>" + docName + "</query>" + "</SearchRequest>",
              SOAP_DESTINATION_HOST_TYPE.CLIENT,
-             ZimbraAccount.clientAccountName);
+             ZmailAccount.clientAccountName);
 
       String name = account.soapSelectValue("//mail:doc", "name");
 
@@ -341,7 +341,7 @@ public class CreateDocument extends AjaxCommonTest {
       // delete file upon test completion
       app.zPageBriefcase.deleteFileByName(docName,
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
    }
 
    @AfterMethod(alwaysRun=true)

@@ -137,7 +137,7 @@ function(parent, op, isSupported) {
 	if (button) {
 		if (isSupported) {
 			button.setVisible(true);
-			if (appCtxt.isOffline && !appCtxt.getActiveAccount().isZimbraAccount) {
+			if (appCtxt.isOffline && !appCtxt.getActiveAccount().isZmailAccount) {
 				button.setEnabled(false);
 			}
 		} else {
@@ -270,7 +270,7 @@ function() {
 /**
  * Gets the data tree.
  * 
- * @param	{ZmZimbraAccount}	account		the account
+ * @param	{ZmZmailAccount}	account		the account
  * @return	{Object}	the data tree
  */
 ZmTreeController.prototype.getDataTree =
@@ -381,7 +381,7 @@ function(overviewId) {
  * and shown.
  *
  * @param {constant}	overviewId		the overview ID
- * @param {ZmZimbraAccount}	account			the current account
+ * @param {ZmZmailAccount}	account			the current account
  * 
  * @private
  */
@@ -1120,7 +1120,7 @@ function(treeView, parentNode, organizer, idx) {
  * Pops up the appropriate "New ..." dialog.
  *
  * @param {DwtUiEvent}	ev		the UI event
- * @param {ZmZimbraAccount}	account	used by multi-account mailbox (optional)
+ * @param {ZmZmailAccount}	account	used by multi-account mailbox (optional)
  * 
  * @private
  */

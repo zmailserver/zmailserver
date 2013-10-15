@@ -2,26 +2,26 @@
 #
 # Log pruning
 #
-30 2 * * * find /opt/zimbra/log/ -type f -name \*.log\* -mtime +8 -exec rm {} \; > /dev/null 2>&1
-35 2 * * * find /opt/zimbra/log/ -type f -name \*.out.???????????? -mtime +8 -exec rm {} \; > /dev/null 2>&1
+30 2 * * * find /opt/zmail/log/ -type f -name \*.log\* -mtime +8 -exec rm {} \; > /dev/null 2>&1
+35 2 * * * find /opt/zmail/log/ -type f -name \*.out.???????????? -mtime +8 -exec rm {} \; > /dev/null 2>&1
 #
 # compress logs manually to avoid application pauses when 
 # handled through the log4j thread
 #
-50 2 * * * /opt/zimbra/libexec/zmcompresslogs > /dev/null 2>&1
+50 2 * * * /opt/zmail/libexec/zmcompresslogs > /dev/null 2>&1
 #
 # tmp dir cleaning
 #
-40 2 * * * /opt/zimbra/libexec/zmcleantmp
+40 2 * * * /opt/zmail/libexec/zmcleantmp
 #
 # Status logging
 #
-*/2 * * * * /opt/zimbra/libexec/zmstatuslog > /dev/null 2>&1
-#*/10 * * * * /opt/zimbra/libexec/zmdisklog > /dev/null 2>&1
+*/2 * * * * /opt/zmail/libexec/zmstatuslog > /dev/null 2>&1
+#*/10 * * * * /opt/zmail/libexec/zmdisklog > /dev/null 2>&1
 #
 # SSL Certificate Expiration Checks
 #
-0 0 1 * * /opt/zimbra/libexec/zmcheckexpiredcerts -days 30 -email
+0 0 1 * * /opt/zmail/libexec/zmcheckexpiredcerts -days 30 -email
 #
 # Backups
 #

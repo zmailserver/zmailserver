@@ -23,7 +23,7 @@ ZaAdminExtListController = function(appCtxt, container) {
 	ZaListViewController.call(this, appCtxt, container,"ZaAdminExtListController");
    	this._popupOperations = new Array();			
 	this.objType = ZaEvent.S_ZIMLET;
-	this._helpURL = location.pathname + ZaUtil.HELP_URL + "admin_console_misc/enhancing_the_zimbra_admin_console_user_interface.htm?locid="+AjxEnv.DEFAULT_LOCALE;
+	this._helpURL = location.pathname + ZaUtil.HELP_URL + "admin_console_misc/enhancing_the_zmail_admin_console_user_interface.htm?locid="+AjxEnv.DEFAULT_LOCALE;
 	this._helpButtonText = ZaMsg.helpAdminExtensions;
 }
 
@@ -50,7 +50,7 @@ function(list, openInNewTab) {
 	}	
 
 	this._contentView.set(this._list.getVector());
-	//ZaApp.getInstance().pushView(ZaZimbraAdmin._ADMIN_ZIMLET_LIST_VIEW);					
+	//ZaApp.getInstance().pushView(ZaZmailAdmin._ADMIN_ZIMLET_LIST_VIEW);					
 	ZaApp.getInstance().pushView(this.getContentViewId());
 	this._removeList = new Array();
 		
@@ -95,7 +95,7 @@ ZaAdminExtListController.prototype._createUI = function () {
 		this._actionMenu =  new ZaPopupMenu(this._contentView, "ActionMenu", null, this._popupOperations, ZaId.VIEW_AELIST, ZaId.MENU_POP);
 
 		elements[ZaAppViewMgr.C_APP_CONTENT] = this._contentView;
-		//ZaApp.getInstance().createView(ZaZimbraAdmin._ZIMLET_LIST_VIEW, elements);
+		//ZaApp.getInstance().createView(ZaZmailAdmin._ZIMLET_LIST_VIEW, elements);
         
         ZaApp.getInstance().getAppViewMgr().createView(this.getContentViewId(), elements);
 		this._contentView.addSelectionListener(new AjxListener(this, this._listSelectionListener));
@@ -128,7 +128,7 @@ function(ev) {
 			ZaApp.getInstance().getZimletController().show(ev.item);
 
             var parentPath = ZaTree.getPathByArray([ZaMsg.OVP_home, ZaMsg.OVP_configure, ZaMsg.OVP_adminZimlets]);
-            ZaZimbraAdmin.getInstance().getOverviewPanelController().addObjectItem(parentPath, ev.item.name, null, false, false, ev.item);
+            ZaZmailAdmin.getInstance().getOverviewPanelController().addObjectItem(parentPath, ev.item.name, null, false, false, ev.item);
 		}
 	} else {
 		this.changeActionsState();	
@@ -238,7 +238,7 @@ function () {
 	var cnt = this._contentView.getSelectionCount();
 	if(cnt == 1) {
 		var arrItems = this._contentView.getSelection();
-		if(arrItems[0].attrs[ZaZimlet.A_zimbraAdminExtDisableUIUndeploy] && arrItems[0].attrs[ZaZimlet.A_zimbraAdminExtDisableUIUndeploy]=="TRUE") {
+		if(arrItems[0].attrs[ZaZimlet.A_zmailAdminExtDisableUIUndeploy] && arrItems[0].attrs[ZaZimlet.A_zmailAdminExtDisableUIUndeploy]=="TRUE") {
 				
 			if(this._popupOperations[ZaOperation.DELETE])	
 				this._popupOperations[ZaOperation.DELETE].enabled = false;				
@@ -250,7 +250,7 @@ function () {
 		var gotInternal = false;	
 		for(var i=0;i<cnt;i++) {
 			if(!gotInternal) {
-				if(arrItems[i].attrs[ZaZimlet.A_zimbraAdminExtDisableUIUndeploy] && arrItems[i].attrs[ZaZimlet.A_zimbraAdminExtDisableUIUndeploy]=="TRUE") {
+				if(arrItems[i].attrs[ZaZimlet.A_zmailAdminExtDisableUIUndeploy] && arrItems[i].attrs[ZaZimlet.A_zmailAdminExtDisableUIUndeploy]=="TRUE") {
 					gotInternal = true;
 				} 		
 			}

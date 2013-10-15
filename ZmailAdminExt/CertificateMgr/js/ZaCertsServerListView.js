@@ -34,7 +34,7 @@ function() {
 
 ZaCertsServerListView.prototype.getTitle = 
 function () {
-	return com_zimbra_cert_manager.manage_certs_title ;
+	return org_zmail_cert_manager.manage_certs_title ;
 }
 
 ZaCertsServerListView.prototype.getTabIcon =

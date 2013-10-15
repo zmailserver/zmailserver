@@ -14,9 +14,9 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_apptsummary" version="0.8" label="${msg.label}" description="${msg.description}">
+<zimlet name="org_zmail_apptsummary" version="0.8" label="${msg.label}" description="${msg.description}">
 	<include>apptsummary.js</include>
-	<handlerObject>com_zimbra_apptsummary_HandlerObject</handlerObject>
+	<handlerObject>org_zmail_apptsummary_HandlerObject</handlerObject>
 	<zimletPanelItem label="${msg.ApptSummary_panel_label}" icon="CalendarApp">
 	</zimletPanelItem>
 	<userProperties>

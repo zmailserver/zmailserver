@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.util;
+package org.zmail.qa.selenium.framework.util;
 
 import java.io.*;
 import java.net.*;
@@ -27,9 +27,9 @@ import org.dom4j.*;
 import org.dom4j.io.*;
 
 import com.ibm.staf.STAFResult;
-import com.zimbra.qa.selenium.framework.core.*;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties.AppType;
-import com.zimbra.qa.selenium.framework.util.staf.*;
+import org.zmail.qa.selenium.framework.core.*;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties.AppType;
+import org.zmail.qa.selenium.framework.util.staf.*;
 
 public class CodeCoverage {
 	protected static Logger logger = LogManager.getLogger(CodeCoverage.class);
@@ -523,7 +523,7 @@ public class CodeCoverage {
 
 		try {
 			
-			URL url = new URL("http://" + ZimbraSeleniumProperties.getStringProperty("server.host","qa60.lab.zimbra.com") +"/zimbra/"+ jsFilename);
+			URL url = new URL("http://" + ZmailSeleniumProperties.getStringProperty("server.host","qa60.lab.zmail.com") +"/zmail/"+ jsFilename);
 			URLConnection uc = url.openConnection();
 			BufferedReader reader = null;
 			
@@ -599,9 +599,9 @@ public class CodeCoverage {
 	
     private String COVERAGE_SCRIPT = "";
 
-	private static final String WebappsZimbra = "/opt/zimbra/jetty/webapps/zimbra";
-	private static final String WebappsZimbraAdmin = "/opt/zimbra/jetty/webapps/zimbraAdmin";
-	private static final String WebappsOctopus = "/opt/zimbra/jetty/webapps/zimbra";
+	private static final String WebappsZmail = "/opt/zmail/jetty/webapps/zmail";
+	private static final String WebappsZmailAdmin = "/opt/zmail/jetty/webapps/zmailAdmin";
+	private static final String WebappsOctopus = "/opt/zmail/jetty/webapps/zmail";
 	private String WebappsOriginal = null;
 	private String WebappsInstrumented = null;
 	
@@ -629,7 +629,7 @@ public class CodeCoverage {
 	}
 	
 	/**
-	 * Instrument the code on the Zimbra server
+	 * Instrument the code on the Zmail server
 	 * <p>
 	 * STAF must be installed on the client and server.  Code will be instrumented and the server restarted.
 	 * @throws HarnessException 
@@ -652,11 +652,11 @@ public class CodeCoverage {
 			}
 
 			
-			if ( ZimbraSeleniumProperties.getAppType().equals(AppType.AJAX) ) {
-				instrumentServer(WebappsZimbra);
-			} else if ( ZimbraSeleniumProperties.getAppType().equals(AppType.ADMIN) ) {
-				instrumentServer(WebappsZimbraAdmin);
-			} else if ( ZimbraSeleniumProperties.getAppType().equals(AppType.OCTOPUS) ) {
+			if ( ZmailSeleniumProperties.getAppType().equals(AppType.AJAX) ) {
+				instrumentServer(WebappsZmail);
+			} else if ( ZmailSeleniumProperties.getAppType().equals(AppType.ADMIN) ) {
+				instrumentServer(WebappsZmailAdmin);
+			} else if ( ZmailSeleniumProperties.getAppType().equals(AppType.OCTOPUS) ) {
 				instrumentServer(WebappsOctopus);
 			}
 		
@@ -674,8 +674,8 @@ public class CodeCoverage {
 		// Check that JScoverage is installed correctly
 		instrumentServerCheck();
 
-		WebappsOriginal		= appfolder + ZimbraSeleniumProperties.getUniqueString();
-		WebappsInstrumented	= "/opt/zimbra/jetty/webapps/instrumented" + ZimbraSeleniumProperties.getUniqueString();
+		WebappsOriginal		= appfolder + ZmailSeleniumProperties.getUniqueString();
+		WebappsInstrumented	= "/opt/zmail/jetty/webapps/instrumented" + ZmailSeleniumProperties.getUniqueString();
 
 		try {
 			StafServicePROCESS staf = new StafServicePROCESS();
@@ -689,7 +689,7 @@ public class CodeCoverage {
 			staf.execute(Tool +" --no-instrument=help/ "+ appfolder +" "+ WebappsInstrumented);
 			staf.resetTimeout();
 			
-			// Move the zimbra folder out of the way
+			// Move the zmail folder out of the way
 			staf.execute("mv "+ appfolder +" "+ WebappsOriginal);
 			
 			// Move the instrumented code into place
@@ -729,11 +729,11 @@ public class CodeCoverage {
 				return;
 			}
 
-			if ( ZimbraSeleniumProperties.getAppType().equals(AppType.AJAX) ) {
-				instrumentServerUndo(WebappsZimbra);
-			} else if ( ZimbraSeleniumProperties.getAppType().equals(AppType.ADMIN) ) {
-				instrumentServerUndo(WebappsZimbraAdmin);
-			} else if ( ZimbraSeleniumProperties.getAppType().equals(AppType.OCTOPUS) ) {
+			if ( ZmailSeleniumProperties.getAppType().equals(AppType.AJAX) ) {
+				instrumentServerUndo(WebappsZmail);
+			} else if ( ZmailSeleniumProperties.getAppType().equals(AppType.ADMIN) ) {
+				instrumentServerUndo(WebappsZmailAdmin);
+			} else if ( ZmailSeleniumProperties.getAppType().equals(AppType.OCTOPUS) ) {
 				instrumentServerUndo(WebappsOctopus);
 			}
 
@@ -748,7 +748,7 @@ public class CodeCoverage {
 
 	private void instrumentServerUndo(String appfolder) throws HarnessException {
 
-		WebappsInstrumented	= "/opt/zimbra/jetty/webapps/instrumented" + ZimbraSeleniumProperties.getUniqueString();
+		WebappsInstrumented	= "/opt/zmail/jetty/webapps/instrumented" + ZmailSeleniumProperties.getUniqueString();
 
 		try {
 
@@ -786,7 +786,7 @@ public class CodeCoverage {
 	protected boolean InstrumentServer = true;
 	
 	/**
-	 * Return a map of URL query parameters, required to enable code coverage from the Zimbra ajax app
+	 * Return a map of URL query parameters, required to enable code coverage from the Zmail ajax app
 	 * @return
 	 */
 	public Map<String, String> getQueryMap() {
@@ -797,9 +797,9 @@ public class CodeCoverage {
 		// But, if not specified, default to the non-specific property
 		// i.e. "coverage.query"
 		//
-		String property = ZimbraSeleniumProperties.getStringProperty("coverage.query", "");
-		String appPoperty = ZimbraSeleniumProperties.getStringProperty(
-				"coverage.query."+ ZimbraSeleniumProperties.getAppType(), null );
+		String property = ZmailSeleniumProperties.getStringProperty("coverage.query", "");
+		String appPoperty = ZmailSeleniumProperties.getStringProperty(
+				"coverage.query."+ ZmailSeleniumProperties.getAppType(), null );
 		if ( appPoperty != null ) {
 			property = appPoperty; // Override the default
 		}
@@ -823,8 +823,8 @@ public class CodeCoverage {
 	private CodeCoverage() {
 		logger.info("new "+ CodeCoverage.class.getCanonicalName());
 		
-		if ( !supportedAppTypes.contains(ZimbraSeleniumProperties.getAppType())) {
-			logger.info("CodeCoverage(): code coverage does not support type "+ ZimbraSeleniumProperties.getAppType() +".  Disabling.");
+		if ( !supportedAppTypes.contains(ZmailSeleniumProperties.getAppType())) {
+			logger.info("CodeCoverage(): code coverage does not support type "+ ZmailSeleniumProperties.getAppType() +".  Disabling.");
 			isDisabled = true;
 			return;
 		}
@@ -839,7 +839,7 @@ public class CodeCoverage {
 				if ( this.getClass().getResource("/coverageScript.js") != null ) {
 					stream = this.getClass().getResourceAsStream("/coverageScript.js");
 				} else {
-					stream = this.getClass().getResourceAsStream("/com/zimbra/qa/selenium/framework/util/coverage/coverageScript.js");
+					stream = this.getClass().getResourceAsStream("/org/zmail/qa/selenium/framework/util/coverage/coverageScript.js");
 				}
 
 				if ( stream == null ) {
@@ -872,11 +872,11 @@ public class CodeCoverage {
 
 		// Get the settings form config.properties
 		//
-		Tool = ZimbraSeleniumProperties.getStringProperty("coverage.tool", "/usr/local/bin/jscoverage");
-		EnableSourceCodeReport = ZimbraSeleniumProperties.getStringProperty("coverage.reportsource", "false").equalsIgnoreCase("true");
-		String timeout = ZimbraSeleniumProperties.getStringProperty("coverage.maxpageload.msec", "10000");
-		ZimbraSeleniumProperties.setStringProperty("selenium.maxpageload.msec", timeout);
-		InstrumentServer = ZimbraSeleniumProperties.getStringProperty("coverage.instrument", "true").equalsIgnoreCase("true");
+		Tool = ZmailSeleniumProperties.getStringProperty("coverage.tool", "/usr/local/bin/jscoverage");
+		EnableSourceCodeReport = ZmailSeleniumProperties.getStringProperty("coverage.reportsource", "false").equalsIgnoreCase("true");
+		String timeout = ZmailSeleniumProperties.getStringProperty("coverage.maxpageload.msec", "10000");
+		ZmailSeleniumProperties.setStringProperty("selenium.maxpageload.msec", timeout);
+		InstrumentServer = ZmailSeleniumProperties.getStringProperty("coverage.instrument", "true").equalsIgnoreCase("true");
 
 
 	}
@@ -887,7 +887,7 @@ public class CodeCoverage {
 	private boolean isDisabled = false;
 		
 	public boolean isEnabled() {
-		String v = ZimbraSeleniumProperties.getStringProperty("coverage.enabled", "false");
+		String v = ZmailSeleniumProperties.getStringProperty("coverage.enabled", "false");
 		logger.info("coverage.enabled="+v);
 		if ( isDisabled ) {
 			logger.info("isDiabled is true, therefore Code Coverage is disabled");
@@ -944,7 +944,7 @@ public class CodeCoverage {
 						if ( this.getClass().getResource("/" + filename) != null ) {
 							stream = this.getClass().getResourceAsStream("/" +filename);
 						} else {
-							stream = this.getClass().getResourceAsStream("/com/zimbra/qa/selenium/framework/util/coverage/" + filename);
+							stream = this.getClass().getResourceAsStream("/org/zmail/qa/selenium/framework/util/coverage/" + filename);
 						}
 						if ( stream == null )
 							throw new HarnessException("unable to find resource: "+ filename);

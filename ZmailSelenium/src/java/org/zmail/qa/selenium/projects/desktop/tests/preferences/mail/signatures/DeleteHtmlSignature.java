@@ -14,29 +14,29 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.preferences.mail.signatures;
+package org.zmail.qa.selenium.projects.desktop.tests.preferences.mail.signatures;
 
 import org.testng.annotations.Test;
-import com.zimbra.qa.selenium.framework.items.SignatureItem;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.GeneralUtility;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.XmlStringUtil;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount.SOAP_DESTINATION_HOST_TYPE;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.preferences.TreePreferences.TreeItem;
-import com.zimbra.qa.selenium.projects.desktop.ui.preferences.signature.FormSignatureNew;
-import com.zimbra.qa.selenium.projects.desktop.ui.preferences.signature.PageSignature;
-import com.zimbra.qa.selenium.projects.desktop.ui.preferences.signature.PageSignature.Locators;
+import org.zmail.qa.selenium.framework.items.SignatureItem;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.GeneralUtility;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.XmlStringUtil;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.framework.util.ZmailAccount.SOAP_DESTINATION_HOST_TYPE;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.preferences.TreePreferences.TreeItem;
+import org.zmail.qa.selenium.projects.desktop.ui.preferences.signature.FormSignatureNew;
+import org.zmail.qa.selenium.projects.desktop.ui.preferences.signature.PageSignature;
+import org.zmail.qa.selenium.projects.desktop.ui.preferences.signature.PageSignature.Locators;
 
 public class DeleteHtmlSignature extends AjaxCommonTest {
 
-   String sigHtmlName = "signame" + ZimbraSeleniumProperties.getUniqueString();
-   String bodyHTML = "text<strong>bold"+ ZimbraSeleniumProperties.getUniqueString() + "</strong>text";
+   String sigHtmlName = "signame" + ZmailSeleniumProperties.getUniqueString();
+   String bodyHTML = "text<strong>bold"+ ZmailSeleniumProperties.getUniqueString() + "</strong>text";
    String contentHTML = XmlStringUtil.escapeXml("<html>" + "<head></head>"
          + "<body>" + bodyHTML + "</body>" + "</html>");
 
@@ -45,11 +45,11 @@ public class DeleteHtmlSignature extends AjaxCommonTest {
       super.startingAccountPreferences = null;
    }
 
-   public void _createHtmlSignature(ZimbraAccount account) throws HarnessException {
+   public void _createHtmlSignature(ZmailAccount account) throws HarnessException {
 
       account.authenticate(SOAP_DESTINATION_HOST_TYPE.SERVER);
       account.soapSend(
-            "<CreateSignatureRequest xmlns='urn:zimbraAccount'>"
+            "<CreateSignatureRequest xmlns='urn:zmailAccount'>"
             + "<signature name='" + this.sigHtmlName + "' >"
             + "<content type='text/html'>'" + this.contentHTML
             + "'</content>" + "</signature>"
@@ -100,7 +100,7 @@ public class DeleteHtmlSignature extends AjaxCommonTest {
       app.zPageMail.zWaitForDesktopLoadingSpinner(5000);
 
       // To check whether deleted signature is exist
-      app.zGetActiveAccount().soapSend("<GetSignaturesRequest xmlns='urn:zimbraAccount'/>");
+      app.zGetActiveAccount().soapSend("<GetSignaturesRequest xmlns='urn:zmailAccount'/>");
 
       String signame = app.zGetActiveAccount().soapSelectValue("//acct:signature[@name='" + this.sigHtmlName + "']","name");
       ZAssert.assertNull(signame, "Verify  signature is deleted");

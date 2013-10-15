@@ -15,11 +15,11 @@
 using System;
 using System.Xml;
 using System.Collections;
-using Zimbra.Client.Account;
-using Zimbra.Client.Soap;
-using Zimbra.Client.Util;
+using Zmail.Client.Account;
+using Zmail.Client.Soap;
+using Zmail.Client.Util;
 
-namespace Zimbra.Client
+namespace Zmail.Client
 {
 
 	public class MessageSummary
@@ -50,11 +50,11 @@ namespace Zimbra.Client
 		{
 			sequenceToken = XmlUtil.AttributeValue( 
 				notifyNode.Attributes, 
-				ZimbraService.A_NOTIFY_SEQUENCE );
+				ZmailService.A_NOTIFY_SEQUENCE );
 
 			XmlNodeList newMsgNodes = notifyNode.SelectNodes( 
-				ZimbraService.NS_PREFIX + ":" + ZimbraService.E_CREATED + "/" + 
-				ZimbraService.NS_PREFIX + ":" + ZimbraService.E_MSG,
+				ZmailService.NS_PREFIX + ":" + ZmailService.E_CREATED + "/" + 
+				ZmailService.NS_PREFIX + ":" + ZmailService.E_MSG,
 				XmlUtil.NamespaceManager );
 
 			createdMessages = new MessageSummary[ newMsgNodes.Count ];
@@ -63,24 +63,24 @@ namespace Zimbra.Client
 				MessageSummary s = new MessageSummary();
 				
 				XmlNode msgNode = newMsgNodes[i];
-				s.itemId = XmlUtil.AttributeValue( msgNode.Attributes, ZimbraService.A_ID );
-				s.parentFolderId = XmlUtil.AttributeValue( msgNode.Attributes, ZimbraService.A_PARENT_FOLDER_ID );
+				s.itemId = XmlUtil.AttributeValue( msgNode.Attributes, ZmailService.A_ID );
+				s.parentFolderId = XmlUtil.AttributeValue( msgNode.Attributes, ZmailService.A_PARENT_FOLDER_ID );
 			
-				XmlNode emailNode = msgNode.SelectSingleNode( ZimbraService.NS_PREFIX + ":" + ZimbraService.E_EMAIL, XmlUtil.NamespaceManager );
+				XmlNode emailNode = msgNode.SelectSingleNode( ZmailService.NS_PREFIX + ":" + ZmailService.E_EMAIL, XmlUtil.NamespaceManager );
 				if( emailNode != null ) 
 				{
-					s.email_display = XmlUtil.AttributeValue( emailNode.Attributes, ZimbraService.A_EMAIL_DISPLAY );
-					s.email_address = XmlUtil.AttributeValue( emailNode.Attributes, ZimbraService.A_EMAIL_ADDRESS );
-					s.email_personal_name = XmlUtil.AttributeValue( emailNode.Attributes, ZimbraService.A_EMAIL_PERSONAL_NAME );
+					s.email_display = XmlUtil.AttributeValue( emailNode.Attributes, ZmailService.A_EMAIL_DISPLAY );
+					s.email_address = XmlUtil.AttributeValue( emailNode.Attributes, ZmailService.A_EMAIL_ADDRESS );
+					s.email_personal_name = XmlUtil.AttributeValue( emailNode.Attributes, ZmailService.A_EMAIL_PERSONAL_NAME );
 				}
 
-				XmlNode subjectNode = msgNode.SelectSingleNode( ZimbraService.NS_PREFIX + ":" + ZimbraService.E_SUBJECT, XmlUtil.NamespaceManager );
+				XmlNode subjectNode = msgNode.SelectSingleNode( ZmailService.NS_PREFIX + ":" + ZmailService.E_SUBJECT, XmlUtil.NamespaceManager );
 				if( subjectNode != null )
 				{
 					s.subject = subjectNode.InnerText;
 				}
 
-				XmlNode fragmentNode = msgNode.SelectSingleNode( ZimbraService.NS_PREFIX + ":" + ZimbraService.E_FRAGMENT, XmlUtil.NamespaceManager );
+				XmlNode fragmentNode = msgNode.SelectSingleNode( ZmailService.NS_PREFIX + ":" + ZmailService.E_FRAGMENT, XmlUtil.NamespaceManager );
 				if( fragmentNode != null )
 				{
 					s.fragment = fragmentNode.InnerText;
@@ -144,12 +144,12 @@ namespace Zimbra.Client
 	public class ResponseManager
 	{
 		//an instance of all available response types.
-		private static IZimbraService[] services = { 
-			new Zimbra.Client.ZimbraService(),
-			new Zimbra.Client.Soap.SoapService(),
-			new Zimbra.Client.Account.AccountService(),
-			new Zimbra.Client.Admin.AdminService(),
-			new Zimbra.Client.Mail.MailService()
+		private static IZmailService[] services = { 
+			new Zmail.Client.ZmailService(),
+			new Zmail.Client.Soap.SoapService(),
+			new Zmail.Client.Account.AccountService(),
+			new Zmail.Client.Admin.AdminService(),
+			new Zmail.Client.Mail.MailService()
 		};
 
 		private static Hashtable classFactories;
@@ -160,7 +160,7 @@ namespace Zimbra.Client
 		private static String contextSelector = 
 				"/" + SoapService.NS_PREFIX		+ ":" + SoapService.E_ENVELOPE + 
 				"/" + SoapService.NS_PREFIX		+ ":" + SoapService.E_HEADER + 
-				"/" + ZimbraService.NS_PREFIX	+ ":" + ZimbraService.E_CONTEXT;
+				"/" + ZmailService.NS_PREFIX	+ ":" + ZmailService.E_CONTEXT;
 		
 		static ResponseManager()
 		{

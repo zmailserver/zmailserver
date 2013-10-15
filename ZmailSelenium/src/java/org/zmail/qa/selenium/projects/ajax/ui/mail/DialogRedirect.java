@@ -17,21 +17,21 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.ajax.ui.mail;
+package org.zmail.qa.selenium.projects.ajax.ui.mail;
 
-import com.zimbra.qa.selenium.framework.ui.AbsApplication;
-import com.zimbra.qa.selenium.framework.ui.AbsDialog;
-import com.zimbra.qa.selenium.framework.ui.AbsPage;
-import com.zimbra.qa.selenium.framework.ui.AbsTab;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.staf.Stafpostqueue;
+import org.zmail.qa.selenium.framework.ui.AbsApplication;
+import org.zmail.qa.selenium.framework.ui.AbsDialog;
+import org.zmail.qa.selenium.framework.ui.AbsPage;
+import org.zmail.qa.selenium.framework.ui.AbsTab;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.staf.Stafpostqueue;
 
 /**
  * Represents a "Specify Message Send Time" dialog box (Send Later)
  * 
- * See https://bugzilla.zimbra.com/show_bug.cgi?id=7524
- * See https://bugzilla.zimbra.com/show_bug.cgi?id=61935
+ * See https://bugzilla.zmail.com/show_bug.cgi?id=7524
+ * See https://bugzilla.zmail.com/show_bug.cgi?id=61935
  * 
  * <p>
  * @author Matt Rhoades
@@ -44,7 +44,7 @@ public class DialogRedirect extends AbsDialog {
 	public static class Locators {
 		
 		// Main dialog locator
-		// TODO: need to update this locator https://bugzilla.zimbra.com/show_bug.cgi?id=61935
+		// TODO: need to update this locator https://bugzilla.zmail.com/show_bug.cgi?id=61935
 		public static final String RedirectDialogLocator		= "css=div#RedirectDialog";
 
 		// Fields

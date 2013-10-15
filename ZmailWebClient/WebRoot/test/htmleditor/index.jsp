@@ -27,7 +27,7 @@ basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <title>Zimbra HTML Editor Test</title>
+    <title>Zmail HTML Editor Test</title>
 	<style type="text/css">
 	<!--
     @import url(<%=contextPath %>/img/imgs.css?v=<%=vers%>);
@@ -48,8 +48,8 @@ basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
     <script type="text/javascript" src="EditorTest.js"></script>
     <jsp:include page="../../public/Boot.jsp"/>
     <jsp:include page="../../public/Ajax.jsp"/>
-    <jsp:include page="../../public/jsp/Zimbra.jsp"/>
-    <jsp:include page="../../public/jsp/ZimbraCore.jsp"/>
+    <jsp:include page="../../public/jsp/Zmail.jsp"/>
+    <jsp:include page="../../public/jsp/ZmailCore.jsp"/>
     <jsp:include page="../../public/jsp/Mail.jsp"/>
   </head>
     <body>

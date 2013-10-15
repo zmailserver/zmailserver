@@ -14,21 +14,21 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_bugz"
+<zimlet name="org_zmail_bugz"
         version="1.5"
-        label="Zimbra Bugzilla"
+        label="Zmail Bugzilla"
         target="main view-window"
-        description="Highlights, previews and links Zimbra bugzilla entries to http://bugzilla.zimbra.com">
+        description="Highlights, previews and links Zmail bugzilla entries to http://bugzilla.zmail.com">
     <include>bugz.js</include>
 	<include>templates/Bugz.template.js</include>	
-	<handlerObject>com_zimbra_bugz_HandlerObject</handlerObject>
+	<handlerObject>org_zmail_bugz_HandlerObject</handlerObject>
 	<contentObject>
 		<matchOn>
 			<regex attrs="ig">(?:(?:\bbug(?:zilla)?:?\s*#?))(\d+)\b</regex>
 		</matchOn>
 		<onClick>
 			<canvas type="window" props=""/>
-			<actionUrl target="http://bugzilla.zimbra.com/show_bug.cgi">
+			<actionUrl target="http://bugzilla.zmail.com/show_bug.cgi">
 				<param name="id">${src.$1}</param>
 			</actionUrl>
 		</onClick>

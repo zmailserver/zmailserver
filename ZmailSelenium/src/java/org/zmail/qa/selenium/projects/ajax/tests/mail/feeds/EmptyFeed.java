@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.feeds;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.feeds;
 
 import java.net.*;
 
 import org.testng.annotations.*;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.*;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.*;
+import org.zmail.qa.selenium.projects.ajax.ui.*;
 
 
 public class EmptyFeed extends PrefGroupMailByMessageTest {
@@ -43,11 +43,11 @@ public class EmptyFeed extends PrefGroupMailByMessageTest {
 				FolderItem.SystemFolder.Inbox);
 
 		// Create a subfolder in Inbox
-		String feedname = "feed" + ZimbraSeleniumProperties.getUniqueString();
+		String feedname = "feed" + ZmailSeleniumProperties.getUniqueString();
 		URL feedurl = new URL("http", "rss.news.yahoo.com", 80, "/rss/topstories");
 
 		app.zGetActiveAccount().soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>"
+					"<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+		"<folder name='"+ feedname +"' l='"+ inbox.getId() +"' url='"+ feedurl.toString() +"'/>"
 				+	"</CreateFolderRequest>");
 

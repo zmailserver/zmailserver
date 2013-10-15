@@ -17,17 +17,17 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.ajax.ui.preferences;
+package org.zmail.qa.selenium.projects.ajax.ui.preferences;
 
 import java.util.*;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties.AppType;
-import com.zimbra.qa.selenium.projects.ajax.ui.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogWarning.DialogWarningID;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties.AppType;
+import org.zmail.qa.selenium.projects.ajax.ui.*;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogWarning.DialogWarningID;
 
 
 /**
@@ -84,7 +84,7 @@ public class PagePreferences extends AbsTab {
 		
 		// If the "folders" tree is visible, then mail is active
 		String locator = null;
-		if (ZimbraSeleniumProperties.getAppType() == AppType.DESKTOP) {
+		if (ZmailSeleniumProperties.getAppType() == AppType.DESKTOP) {
 		   locator = "css=div[id='zov__local@host.local:main_Options']";
 		} else {
 			locator = "css=div#"+ Locators.zPreferencesMainID;
@@ -200,23 +200,23 @@ public class PagePreferences extends AbsTab {
 
 		String locator = null;
 		
-		if ( preference.equals("zimbraPrefIncludeSpamInSearch")) {
+		if ( preference.equals("zmailPrefIncludeSpamInSearch")) {
 			
 			locator = "css=input[id$=_SEARCH_INCLUDES_SPAM]";
 
-		} else if (preference.equals("zimbraPrefIncludeTrashInSearch")) {
+		} else if (preference.equals("zmailPrefIncludeTrashInSearch")) {
 			
 			locator = "css=input[id$=_SEARCH_INCLUDES_TRASH]";
 
-		} else if (preference.equals("zimbraPrefShowSearchString")) {
+		} else if (preference.equals("zmailPrefShowSearchString")) {
 
 			locator = "css=input[id$=_SHOW_SEARCH_STRING]";
 
-		} else if (preference.equals("zimbraPrefAutoAddAddressEnabled")) {
+		} else if (preference.equals("zmailPrefAutoAddAddressEnabled")) {
 
 			locator = "css=input[id$=_AUTO_ADD_ADDRESS]";
 			
-		}  else if (preference.equals("zimbraPrefAutocompleteAddressBubblesEnabled")) {
+		}  else if (preference.equals("zmailPrefAutocompleteAddressBubblesEnabled")) {
 
 			locator = "css=input[id$=_USE_ADDR_BUBBLES]";
 			
@@ -363,7 +363,7 @@ public class PagePreferences extends AbsTab {
 		
 	}
 	
-	// See https://bugzilla.zimbra.com/show_bug.cgi?id=65919
+	// See https://bugzilla.zmail.com/show_bug.cgi?id=65919
 	// parseUnacceptedShareItem and parseAcceptedShareItem can
 	// likely be combined once unique ID's are added to the DOM
 	//

@@ -65,7 +65,7 @@ function(useDefaults) {
 ZmCalendarPrefsPage.prototype.showMe =
 function() {
 	var active = appCtxt.getActiveAccount();
-	this._isAclSupported = !appCtxt.multiAccounts || appCtxt.isFamilyMbox || (!active.isMain && active.isZimbraAccount);
+	this._isAclSupported = !appCtxt.multiAccounts || appCtxt.isFamilyMbox || (!active.isMain && active.isZmailAccount);
 	ZmPreferencesPage.prototype.showMe.call(this);
     //this._getWorkHoursHtml();
 
@@ -380,10 +380,10 @@ function(batchCmd) {
     if(this._workHoursControl) {
         if(this._workHoursControl.isValid()) {
             var value = this._workHoursControl.getValue(),
-                    soapDoc = AjxSoapDoc.create("ModifyPrefsRequest", "urn:zimbraAccount"),
+                    soapDoc = AjxSoapDoc.create("ModifyPrefsRequest", "urn:zmailAccount"),
                     node = soapDoc.set("pref", value),
                     respCallback = new AjxCallback(this, this._postSaveBatchCmd, [value]);
-            node.setAttribute("name", "zimbraPrefCalendarWorkingHours");
+            node.setAttribute("name", "zmailPrefCalendarWorkingHours");
             batchCmd.addNewRequestParams(soapDoc, respCallback);
         }
         else {
@@ -413,7 +413,7 @@ function(skin, dialog) {
 	window.onbeforeunload = null;
 	var url = AjxUtil.formatUrl();
 	DBG.println(AjxDebug.DBG1, "Working days change, redirect to: " + url);
-	ZmZimbraMail.sendRedirect(url); // redirect to self to force reload
+	ZmZmailMail.sendRedirect(url); // redirect to self to force reload
 };
 
 ZmCalendarPrefsPage.prototype._handleResponseACLChange =

@@ -214,12 +214,12 @@ typedef std::list<CComPtr<IXMLDOMNode> > CListNodes;
 class CRuleProcessor
 {
 public:
-    CRuleProcessor(Zimbra::MAPI::MAPISession* session, Zimbra::MAPI::MAPIStore* store, std::wstring account);
+    CRuleProcessor(Zmail::MAPI::MAPISession* session, Zmail::MAPI::MAPIStore* store, std::wstring account);
     ~CRuleProcessor();
 
 private:
-     Zimbra::MAPI::MAPISession* m_session;
-     Zimbra::MAPI::MAPIStore* m_userStore;
+     Zmail::MAPI::MAPISession* m_session;
+     Zmail::MAPI::MAPIStore* m_userStore;
      std::wstring m_account;
 
 public:

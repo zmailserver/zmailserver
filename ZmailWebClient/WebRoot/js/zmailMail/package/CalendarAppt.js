@@ -26,31 +26,31 @@
 
 // for creating and handling invites
 
-AjxPackage.require("zimbraMail.calendar.view.ZmApptRecurDialog");
-AjxPackage.require("zimbraMail.calendar.view.ZmCalItemEditView");
+AjxPackage.require("zmailMail.calendar.view.ZmApptRecurDialog");
+AjxPackage.require("zmailMail.calendar.view.ZmCalItemEditView");
 
-AjxPackage.require("zimbraMail.calendar.view.ZmCalItemTypeDialog");
-AjxPackage.require("zimbraMail.calendar.view.ZmApptComposeView");
-AjxPackage.require("zimbraMail.calendar.view.ZmApptEditView");
-AjxPackage.require("zimbraMail.calendar.view.ZmApptNotifyDialog");
-AjxPackage.require("zimbraMail.calendar.view.ZmResourceConflictDialog");
+AjxPackage.require("zmailMail.calendar.view.ZmCalItemTypeDialog");
+AjxPackage.require("zmailMail.calendar.view.ZmApptComposeView");
+AjxPackage.require("zmailMail.calendar.view.ZmApptEditView");
+AjxPackage.require("zmailMail.calendar.view.ZmApptNotifyDialog");
+AjxPackage.require("zmailMail.calendar.view.ZmResourceConflictDialog");
 
-AjxPackage.require("zimbraMail.calendar.view.ZmApptQuickAddDialog");
-AjxPackage.require("zimbraMail.calendar.view.ZmFreeBusySchedulerView");
-AjxPackage.require("zimbraMail.calendar.view.ZmNewCalendarDialog");
-AjxPackage.require("zimbraMail.calendar.view.ZmExternalCalendarDialog");
-AjxPackage.require("zimbraMail.calendar.view.ZmApptAssistantView");
-AjxPackage.require("zimbraMail.calendar.view.ZmScheduleAssistantView");
-AjxPackage.require("zimbraMail.calendar.view.ZmLocationAssistantView");
-AjxPackage.require("zimbraMail.calendar.view.ZmSuggestionsView");
-AjxPackage.require("zimbraMail.calendar.view.ZmTimeSuggestionView");
-AjxPackage.require("zimbraMail.calendar.view.ZmLocationSuggestionView");
-AjxPackage.require("zimbraMail.calendar.view.ZmTimeSuggestionPrefDialog");
-AjxPackage.require("zimbraMail.calendar.view.ZmResolveLocationConflictDialog");
-AjxPackage.require("zimbraMail.calendar.view.ZmResolveLocationView");
-AjxPackage.require("zimbraMail.calendar.view.ZmAttendeePicker");
-AjxPackage.require("zimbraMail.calendar.view.ZmMiniCalendar");
+AjxPackage.require("zmailMail.calendar.view.ZmApptQuickAddDialog");
+AjxPackage.require("zmailMail.calendar.view.ZmFreeBusySchedulerView");
+AjxPackage.require("zmailMail.calendar.view.ZmNewCalendarDialog");
+AjxPackage.require("zmailMail.calendar.view.ZmExternalCalendarDialog");
+AjxPackage.require("zmailMail.calendar.view.ZmApptAssistantView");
+AjxPackage.require("zmailMail.calendar.view.ZmScheduleAssistantView");
+AjxPackage.require("zmailMail.calendar.view.ZmLocationAssistantView");
+AjxPackage.require("zmailMail.calendar.view.ZmSuggestionsView");
+AjxPackage.require("zmailMail.calendar.view.ZmTimeSuggestionView");
+AjxPackage.require("zmailMail.calendar.view.ZmLocationSuggestionView");
+AjxPackage.require("zmailMail.calendar.view.ZmTimeSuggestionPrefDialog");
+AjxPackage.require("zmailMail.calendar.view.ZmResolveLocationConflictDialog");
+AjxPackage.require("zmailMail.calendar.view.ZmResolveLocationView");
+AjxPackage.require("zmailMail.calendar.view.ZmAttendeePicker");
+AjxPackage.require("zmailMail.calendar.view.ZmMiniCalendar");
 
-AjxPackage.require("zimbraMail.calendar.controller.ZmCalItemComposeController");
-AjxPackage.require("zimbraMail.calendar.controller.ZmApptComposeController");
-AjxPackage.require("zimbraMail.calendar.controller.ZmApptController");
+AjxPackage.require("zmailMail.calendar.controller.ZmCalItemComposeController");
+AjxPackage.require("zmailMail.calendar.controller.ZmApptComposeController");
+AjxPackage.require("zmailMail.calendar.controller.ZmApptController");

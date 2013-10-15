@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,32 +20,32 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.mailbox.ContactConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.offline.common.OfflineConstants;
-import com.zimbra.cs.offline.jsp.ConfigServlet;
-import com.zimbra.cs.offline.jsp.JspProvStub;
-import com.zimbra.cs.offline.jsp.ZmailBean;
-import com.zimbra.client.ZAppointment;
-import com.zimbra.client.ZContact;
-import com.zimbra.client.ZEmailAddress;
-import com.zimbra.client.ZFolder;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZMessage;
-import com.zimbra.client.ZSearchFolder;
-import com.zimbra.client.ZSearchParams;
-import com.zimbra.client.ZTag;
-import com.zimbra.client.ZMailbox.ZAppointmentResult;
-import com.zimbra.client.ZMailbox.ZAttachmentInfo;
-import com.zimbra.client.ZMailbox.ZOutgoingMessage;
-import com.zimbra.client.ZMailbox.ZOutgoingMessage.MessagePart;
-import com.zimbra.soap.type.SearchSortBy;
+import org.zmail.common.mailbox.ContactConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.offline.common.OfflineConstants;
+import org.zmail.cs.offline.jsp.ConfigServlet;
+import org.zmail.cs.offline.jsp.JspProvStub;
+import org.zmail.cs.offline.jsp.ZmailBean;
+import org.zmail.client.ZAppointment;
+import org.zmail.client.ZContact;
+import org.zmail.client.ZEmailAddress;
+import org.zmail.client.ZFolder;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZMessage;
+import org.zmail.client.ZSearchFolder;
+import org.zmail.client.ZSearchParams;
+import org.zmail.client.ZTag;
+import org.zmail.client.ZMailbox.ZAppointmentResult;
+import org.zmail.client.ZMailbox.ZAttachmentInfo;
+import org.zmail.client.ZMailbox.ZOutgoingMessage;
+import org.zmail.client.ZMailbox.ZOutgoingMessage.MessagePart;
+import org.zmail.soap.type.SearchSortBy;
 
 import junit.framework.TestCase;
 
@@ -75,13 +75,13 @@ public class TestXsync extends TestCase {
             syncSearchFolder();
             syncCalender();
         } catch (Exception x) {
-            ZimbraLog.test.warn("test xsync", x);
+            ZmailLog.test.warn("test xsync", x);
         }
     }
 
     private void syncTag() throws Exception {
         //create remote tag "cool" and add MSG1 to cool
-        ZimbraLog.test.info("syncTag TEST 1");
+        ZmailLog.test.info("syncTag TEST 1");
         ZTag rcoolTag = remoteMailbox.createTag("cool", ZTag.Color.defaultColor);
         String rawmessage = TestUtil.getTestMessage("MSG1");
         String msgId = TestUtil.addRawMessage(remoteMailbox, rawmessage);
@@ -94,7 +94,7 @@ public class TestXsync extends TestCase {
         checkMsgCount(localMailbox, "tag:cool is:unread", 1);
 
         //change the color of tag "cool" to regular color and unread the MSG1
-        ZimbraLog.test.info("syncTag TEST 2");
+        ZmailLog.test.info("syncTag TEST 2");
         remoteMailbox.modifyTagColor(rcoolTag.getId(), ZTag.Color.red);
         remoteMailbox.markMessageRead(msgId, true);
         sync();
@@ -104,7 +104,7 @@ public class TestXsync extends TestCase {
         checkMsgCount(localMailbox, "tag:cool", 1);
 
         //change the color of tag "cool" to custom color and remove MSG1
-        ZimbraLog.test.info("syncTag TEST 3");
+        ZmailLog.test.info("syncTag TEST 3");
         remoteMailbox.modifyTagColor(rcoolTag.getId(), ZTag.Color.rgbColor.setRgbColor("#006600"));
         remoteMailbox.deleteMessage(msgId);
         sync();
@@ -113,7 +113,7 @@ public class TestXsync extends TestCase {
         checkMsgCount(localMailbox, "tag:cool", 0);
 
         //rename the tag "cool" to "boston" and check the name and color
-        ZimbraLog.test.info("syncTag TEST 4");
+        ZmailLog.test.info("syncTag TEST 4");
         remoteMailbox.renameTag(rcoolTag.getId(), "boston");
         localMailbox.modifyTagColor(lcoolTag.getId(), ZTag.Color.rgbColor.setRgbColor("#CC0000"));
         sync();
@@ -125,7 +125,7 @@ public class TestXsync extends TestCase {
         assertEquals("lbostonTag name", "boston", lbostonTag.getName());
 
         //update the tags name and color
-        ZimbraLog.test.info("syncTag TEST 5");
+        ZmailLog.test.info("syncTag TEST 5");
         remoteMailbox.updateTag(rbostonTag.getId(), "Costello", ZTag.Color.rgbColor.setRgbColor("#EDEDED"));
         sync();
         ZTag lcostelloTag = localMailbox.getTagByName("Costello");
@@ -133,7 +133,7 @@ public class TestXsync extends TestCase {
         assertEquals("lcostelloTag color", "#EDEDED", lcostelloTag.getColor().getRgbColor());
 
         //change color at remote as well as local
-        ZimbraLog.test.info("syncTag TEST 6");
+        ZmailLog.test.info("syncTag TEST 6");
         localMailbox.modifyTagColor(lcostelloTag.getId(), ZTag.Color.rgbColor.setRgbColor("#00CCCC"));
         remoteMailbox.modifyTagColor(rbostonTag.getId(), ZTag.Color.rgbColor.setRgbColor("#1A1A1A"));
         sync();
@@ -141,7 +141,7 @@ public class TestXsync extends TestCase {
         assertEquals("lcostelloTag color", "#00CCCC", rcostelloTag.getColor().getRgbColor());
 
         //double tag a message and check the tag color at the inbox
-        ZimbraLog.test.info("syncTag TEST 7");
+        ZmailLog.test.info("syncTag TEST 7");
         ZTag umassTag = localMailbox.createTag("Umass", ZTag.Color.blue);
         msgId = TestUtil.addRawMessage(localMailbox, rawmessage);
         localMailbox.markMessageRead(msgId, false);
@@ -155,7 +155,7 @@ public class TestXsync extends TestCase {
         assertEquals(2, recv.getMailbox().getTags(umassTag.getId() + "," + lcostelloTag.getId()).size());
 
         //remove the message and check the tag count
-        ZimbraLog.test.info("syncTag TEST 8");
+        ZmailLog.test.info("syncTag TEST 8");
         localMailbox.deleteMessage(msgId);
         sync();
         checkMsgCount(remoteMailbox, "tag:Umass", 0);
@@ -163,7 +163,7 @@ public class TestXsync extends TestCase {
 
     private void syncSearchFolder() throws Exception {
         //create remote F1 and add raw MSG1 to remote inbox and then check the searchfolder for the MSG1
-        ZimbraLog.test.info("syncSearchFolder TEST 1");
+        ZmailLog.test.info("syncSearchFolder TEST 1");
         String rawmessage = TestUtil.getTestMessage("MSGSRCH1");
         String msgId = TestUtil.addRawMessage(remoteMailbox, rawmessage);
         remoteMailbox.markMessageRead(msgId, false);
@@ -175,20 +175,20 @@ public class TestXsync extends TestCase {
         assertEquals(1, TestUtil.search(cf1.getMailbox(), "is:unread").size());
 
         //change the search query and check the searchfolder for unread message
-        ZimbraLog.test.info("syncSearchFolder TEST 2");
+        ZmailLog.test.info("syncSearchFolder TEST 2");
         localMailbox.modifySearchFolder(cf1.getId(), "is:read", null, SearchSortBy.dateDesc);
         remoteMailbox.markMessageRead(msgId, true);
         sync();
         assertEquals(0, TestUtil.search(cf1.getMailbox(), "is:unread").size());
 
         //conflict resolution - make changes in both local & remote accounts
-        ZimbraLog.test.info("syncSearchFolder TEST 3");
+        ZmailLog.test.info("syncSearchFolder TEST 3");
         localMailbox.modifySearchFolder(cf1.getId(), "is:unread", null, SearchSortBy.dateDesc);
         remoteMailbox.modifySearchFolder(sf1.getId(), "is:read", null, SearchSortBy.dateDesc);
         sync();
         assertEquals(0, TestUtil.search(cf1.getMailbox(), "is:unread").size());
 
-        ZimbraLog.test.info("syncSearchFolder TEST 4");
+        ZmailLog.test.info("syncSearchFolder TEST 4");
         localMailbox.deleteFolder(cf1.getId());
         remoteMailbox.modifySearchFolder(sf1.getId(), "is:read", null, SearchSortBy.dateDesc);
         sync();
@@ -197,7 +197,7 @@ public class TestXsync extends TestCase {
     }
 
     private void syncCalender() throws Exception {
-        ZimbraLog.test.info("syncCalender TEST 1");
+        ZmailLog.test.info("syncCalender TEST 1");
         ZMailbox invite = TestUtil.getZMailbox(USER1);
         String subject = "syncCalender testInvite request 1";
         Date startDate = new Date(System.currentTimeMillis() + Constants.MILLIS_PER_DAY);
@@ -208,7 +208,7 @@ public class TestXsync extends TestCase {
         assertNotNull("local Appointment", localAppointment);
         assertEquals("calAppointment name", subject, localAppointment.getInvites().get(0).getComponent().getName());
 
-        ZimbraLog.test.info("syncCalender TEST 2");
+        ZmailLog.test.info("syncCalender TEST 2");
         ZMessage msg = TestUtil.search(invite, "in:inbox subject:\"" + subject + "\"").get(0);
         TestUtil.sendInviteReply(invite, msg.getId(), remoteMailbox.getName(), subject, ZMailbox.ReplyVerb.ACCEPT);
         sync();
@@ -217,7 +217,7 @@ public class TestXsync extends TestCase {
 
     private void syncEmail() throws Exception {
         //send message to self
-        ZimbraLog.test.info("syncEmail TEST 1");
+        ZmailLog.test.info("syncEmail TEST 1");
         ZOutgoingMessage msg = new ZOutgoingMessage();
         List<ZEmailAddress> addresses = new ArrayList<ZEmailAddress>();
         addresses.add(new ZEmailAddress(EMAIL, null, null, ZEmailAddress.EMAIL_TYPE_TO));
@@ -233,7 +233,7 @@ public class TestXsync extends TestCase {
         assertNotNull(sent);
 
         //delete both sent and recv
-        ZimbraLog.test.info("syncEmail TEST 2");
+        ZmailLog.test.info("syncEmail TEST 2");
         remoteMailbox.deleteMessage(recv.getId());
         localMailbox.deleteMessage(sent.getId());
         sync();
@@ -241,7 +241,7 @@ public class TestXsync extends TestCase {
         checkMsgCount(remoteMailbox, "in:sent", 0);
 
         //create remote F1 and add MSG1 to F1
-        ZimbraLog.test.info("syncEmail TEST 3");
+        ZmailLog.test.info("syncEmail TEST 3");
         ZFolder sf1 = TestUtil.createFolder(remoteMailbox, "" + Mailbox.ID_FOLDER_USER_ROOT,  "F1");
         String sm1Id = TestUtil.addMessage(remoteMailbox, "MSG1", sf1.getId(), "u");
         sync();
@@ -250,7 +250,7 @@ public class TestXsync extends TestCase {
         checkMsgCount(localMailbox, "in:F1 is:unread", 1);
 
         //create remote F2, move MSG1 to F2, and mark MSG1 read
-        ZimbraLog.test.info("syncEmail TEST 4");
+        ZmailLog.test.info("syncEmail TEST 4");
         ZFolder sf2 = remoteMailbox.createFolder(sf1.getId(), "F2", null, ZFolder.Color.getRgbColorObj("#00CCCC"), null, null);
         remoteMailbox.moveMessage(sm1Id, sf2.getId());
         remoteMailbox.markMessageRead(sm1Id, true);
@@ -264,7 +264,7 @@ public class TestXsync extends TestCase {
         assertFalse("MSG1 unread", cm1.isUnread());
 
         //create local F3 and move MSG1 into it, and mark MSG1 unread
-        ZimbraLog.test.info("syncEmail TEST 5");
+        ZmailLog.test.info("syncEmail TEST 5");
         ZFolder cf3 = localMailbox.createFolder(cf2.getId(), "F3", null, ZFolder.Color.getRgbColorObj("#1A1A1A"), null, null);
         localMailbox.moveMessage(cm1.getId(), cf3.getId());
         localMailbox.markMessageRead(cm1.getId(), false);
@@ -278,7 +278,7 @@ public class TestXsync extends TestCase {
         assertTrue("MSG1 read", sm1.isUnread()); //need to preserv local changes when moving a message
 
         //create local F4 and move F3 into it
-        ZimbraLog.test.info("syncEmail TEST 6");
+        ZmailLog.test.info("syncEmail TEST 6");
         ZFolder cf4 = TestUtil.createFolder(localMailbox, "" + Mailbox.ID_FOLDER_USER_ROOT, "F4");
         localMailbox.moveFolder(cf3.getId(), cf4.getId());
         localMailbox.modifyFolderColor(cf3.getId(), ZFolder.Color.RED);
@@ -292,7 +292,7 @@ public class TestXsync extends TestCase {
         assertNotNull("remote /F4/F3", sf3);
 
         //add remote F5 into F2, but delete local F2. F5 should be /F5 on both local and remote
-        ZimbraLog.test.info("syncEmail TEST 7");
+        ZmailLog.test.info("syncEmail TEST 7");
         ZFolder sf5 = TestUtil.createFolder(remoteMailbox, sf2.getId(),  "F5");
         localMailbox.deleteFolder(cf2.getId());
         sync();
@@ -302,7 +302,7 @@ public class TestXsync extends TestCase {
         assertNotNull("remote /F5", sf5);
 
         //add /F5/F6 on both local and remote, remote F6 should be merged with local F6.
-        ZimbraLog.test.info("syncEmail TEST 8");
+        ZmailLog.test.info("syncEmail TEST 8");
         ZFolder cf6 = TestUtil.createFolder(localMailbox, cf5.getId(), "F6");
         ZFolder sf6 = TestUtil.createFolder(remoteMailbox, sf5.getId(), "F6");
         sync();
@@ -312,7 +312,7 @@ public class TestXsync extends TestCase {
         assertNotNull("remote /F5/F6", sf6);
 
         //add /F5/F6/F5 on remote, but delete /F5/F6 local, new F5 should be relocated to /F5 and renamed
-        ZimbraLog.test.info("syncEmail TEST 9");
+        ZmailLog.test.info("syncEmail TEST 9");
         ZFolder sf5_ = TestUtil.createFolder(remoteMailbox, sf6.getId(), "F5");
         localMailbox.deleteFolder(cf6.getId());
         sync();
@@ -321,7 +321,7 @@ public class TestXsync extends TestCase {
         ZFolder cf5_ = localMailbox.getFolderByPath("/" + sf5_.getName());
         assertNotNull("local /F5...", cf5_);
 
-        ZimbraLog.test.info("syncEmail TEST 10");
+        ZmailLog.test.info("syncEmail TEST 10");
         //move remote /F5 to /F4/F3/F5 and rename that to /F4/F3/F1, but delete /F4 locally, expect renamed F1 get moved to /F1 and renamed again
         remoteMailbox.moveFolder(sf5.getId(), sf3.getId());
         remoteMailbox.renameFolder(sf5.getId(), "F1", sf3.getId());
@@ -334,7 +334,7 @@ public class TestXsync extends TestCase {
         assertNotNull("local /F1...", cf1_);
 
         //delete remote F1, but move local F1... into F1. remote F1 should get recreated. 
-        ZimbraLog.test.info("syncEmail TEST 11");
+        ZmailLog.test.info("syncEmail TEST 11");
         remoteMailbox.deleteFolder(sf1_.getId());
         localMailbox.moveFolder(cf1.getId(), cf1_.getId());
         sync();
@@ -344,7 +344,7 @@ public class TestXsync extends TestCase {
         assertNotNull("remote /F1", sf1);
 
         //move /F5_ under /F1 and create /F1/F1_/F7. now we have /F1/F1_/F7 and /F1/F5_
-        ZimbraLog.test.info("syncEmail TEST 12");
+        ZmailLog.test.info("syncEmail TEST 12");
         localMailbox.moveFolder(cf5_.getId(), sf1.getId());
         ZFolder cf7 = TestUtil.createFolder(localMailbox, cf1_.getId(), "F7");
         sync();
@@ -357,7 +357,7 @@ public class TestXsync extends TestCase {
         //the expected result is: 1) /F1 and /F1/F1... gets recreated on remote
         //                        2) /F1/F1.../F8 gets created on remote
         //                        3) local /F1/F7 is deleted, and local /F5_ is deleted
-        ZimbraLog.test.info("syncEmail TEST 13");
+        ZmailLog.test.info("syncEmail TEST 13");
         remoteMailbox.deleteFolder(sf1.getId());
         localMailbox.moveFolder(cf5_.getId(), "" + Mailbox.ID_FOLDER_USER_ROOT);
         localMailbox.moveFolder(cf7.getId(), sf1.getId());
@@ -372,7 +372,7 @@ public class TestXsync extends TestCase {
         cf7 = localMailbox.getFolderById(cf7.getId());
         assertNull("local /F1/F7", cf7);
 
-        ZimbraLog.test.info("syncEmail TEST 14");
+        ZmailLog.test.info("syncEmail TEST 14");
         TestUtil.addMessage(remoteMailbox, "MSG2", sf1.getId(), "u");
         TestUtil.addMessage(remoteMailbox, "MSG3", sf8.getId(), "u");
         String sm4Id = TestUtil.addMessage(remoteMailbox, "MSG4", "" + Mailbox.ID_FOLDER_INBOX, "u");
@@ -381,7 +381,7 @@ public class TestXsync extends TestCase {
         ZMessage cm3 = TestUtil.search(localMailbox, "subject:MSG3").get(0);
         ZMessage cm4 = TestUtil.search(localMailbox, "in:inbox").get(0);
 
-        ZimbraLog.test.info("syncEmail TEST 15");
+        ZmailLog.test.info("syncEmail TEST 15");
         remoteMailbox.deleteFolder(sf1.getId());
         localMailbox.moveMessage(cm4.getId(), cf1_.getId()); //remote /F1 and /F1/F1... should be recreated
         localMailbox.moveMessage(cm3.getId(), "" + Mailbox.ID_FOLDER_INBOX); //cm3 should be deleted
@@ -395,7 +395,7 @@ public class TestXsync extends TestCase {
         assertEquals("remote MSG4", sm4.getFolderId(), sf1_.getId());
 
         //move MSG4 to Inbox and delete local /F1/F1...
-        ZimbraLog.test.info("syncEmail TEST 16");
+        ZmailLog.test.info("syncEmail TEST 16");
         localMailbox.moveMessage(cm4.getId(), "" + Mailbox.ID_FOLDER_INBOX);
         localMailbox.deleteFolder(sf1_.getId());
         sync();
@@ -403,7 +403,7 @@ public class TestXsync extends TestCase {
         sm4 = remoteMailbox.getMessageById(sm4Id);
         assertEquals("remote MSG4", sm4.getFolderId(), "" + Mailbox.ID_FOLDER_INBOX);
 
-        ZimbraLog.test.info("syncEmail TEST 17");
+        ZmailLog.test.info("syncEmail TEST 17");
         localMailbox.moveMessage(cm4.getId(), sf1.getId());
         localMailbox.deleteFolder(sf1.getId());
         sync();
@@ -490,7 +490,7 @@ public class TestXsync extends TestCase {
     @Override
     protected void setUp() throws Exception {
         TestUtil.cliSetup();
-        ZimbraLog.toolSetupLog4j("INFO", null, false);
+        ZmailLog.toolSetupLog4j("INFO", null, false);
         ConfigServlet.LOCALHOST_ADMIN_URL = LOCAL_ADMIN_URL;
 
         cleanUp();
@@ -512,7 +512,7 @@ public class TestXsync extends TestCase {
             deleteLocalAccount();
             deleteRemoteAccount();
         } catch (Exception x) {
-            ZimbraLog.test.warn("deleting accounts", x);
+            ZmailLog.test.warn("deleting accounts", x);
         }
     }
 

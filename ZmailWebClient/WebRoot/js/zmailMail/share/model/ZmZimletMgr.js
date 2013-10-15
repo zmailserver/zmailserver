@@ -52,14 +52,14 @@ ZmZimletMgr._RE_REMOTE = /^((https?|ftps?):\x2f\x2f|\x2f)/;
 
 /**
 * List of Core Zimlets.
-* com_zimbra_apptsummary|com_zimbra_date|com_zimbra_dnd|com_zimbra_email|com_zimbra_linkedin|com_zimbra_phone|com_zimbra_webex|com_zimbra_social|com_zimbra_srchhighlighter|com_zimbra_url
+* org_zmail_apptsummary|org_zmail_date|org_zmail_dnd|org_zmail_email|org_zmail_linkedin|org_zmail_phone|org_zmail_webex|org_zmail_social|org_zmail_srchhighlighter|org_zmail_url
 */
-ZmZimletMgr.CORE_ZIMLETS = /com_zimbra_apptsummary|com_zimbra_date|com_zimbra_dnd|com_zimbra_email|com_zimbra_linkedin|com_zimbra_phone|com_zimbra_webex|com_zimbra_social|com_zimbra_srchhighlighter|com_zimbra_url/;
+ZmZimletMgr.CORE_ZIMLETS = /org_zmail_apptsummary|org_zmail_date|org_zmail_dnd|org_zmail_email|org_zmail_linkedin|org_zmail_phone|org_zmail_webex|org_zmail_social|org_zmail_srchhighlighter|org_zmail_url/;
 
 /**
  * If the Zimlet's config_template has  hasSensitiveData = true, it will be considered as sensitive Zimlet
  * and such zimlets are disabled (by-default) in mixed-mode.
- * System admin can set: mcf zimbraZimletDataSensitiveInMixedModeDisabled FALSE (instead of TRUE), to enable
+ * System admin can set: mcf zmailZimletDataSensitiveInMixedModeDisabled FALSE (instead of TRUE), to enable
  */
 ZmZimletMgr.HAS_SENSITIVE_DATA_CONFIG_NAME = "hasSensitiveData";
 

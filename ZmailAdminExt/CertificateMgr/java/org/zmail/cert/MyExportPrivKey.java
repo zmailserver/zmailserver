@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cert;
+package org.zmail.cert;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -75,7 +75,7 @@ public class MyExportPrivKey {
          * java -jar ExportPrivateKey.zip {keystore_path} JKS {keystore_password} {alias} {target_file}
          * This would export the key to PKCS #8 PEM format.
          * Then you need to run "openssl pkcs8 -inform PEM -nocrypt -in exported-pkcs8.key -out exported.key" afterwards
-         * to convert it to the format of zimbra server.key (it is also apache modssl expects)
+         * to convert it to the format of zmail server.key (it is also apache modssl expects)
          * @param args
          * @throws Exception
          * 

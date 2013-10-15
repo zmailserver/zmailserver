@@ -14,15 +14,15 @@
  */
 using System;
 
-namespace Zimbra.Client.Admin
+namespace Zmail.Client.Admin
 {
-	public class AdminService : IZimbraService
+	public class AdminService : IZmailService
 	{
 		public static String SERVICE_PATH			= "/service/admin/soap";
 
 		//this services namespace uri
 		public static String NS_PREFIX				= "admin";
-		public static String NAMESPACE_URI			= "urn:zimbraAdmin";
+		public static String NAMESPACE_URI			= "urn:zmailAdmin";
 		
 		//requests
 		public static String AUTH_REQUEST			= "AuthRequest";
@@ -58,7 +58,7 @@ namespace Zimbra.Client.Admin
 			new GetAccountResponse()
 		};
 
-		//IZimbraService
+		//IZmailService
 		public String NamespacePrefix{ get{return NS_PREFIX; }}
 		public String NamepsaceUri{ get{return NAMESPACE_URI; }}
 		public Response[] Responses{ get{return responses; }}

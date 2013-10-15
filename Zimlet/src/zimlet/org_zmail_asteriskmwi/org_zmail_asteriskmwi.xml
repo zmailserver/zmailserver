@@ -14,14 +14,14 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_asteriskmwi" version="3.0" description="Access Asterisk voicemail (MWI)">
+<zimlet name="org_zmail_asteriskmwi" version="3.0" description="Access Asterisk voicemail (MWI)">
 	<summary>
 		This zimlet provides an interface to an Asterisk PBX voicemail.
 	</summary>
 	<include>asteriskmwi.js</include>
 	<includeCSS>asteriskmwi.css</includeCSS>
 	<resource>asteriskmwi.gif</resource>
-	<handlerObject>Com_Zimbra_AsteriskMWI</handlerObject>
+	<handlerObject>Com_Zmail_AsteriskMWI</handlerObject>
 
 	<zimletPanelItem label="Voicemail" icon="AMWI-panelIcon">
 		<toolTipText>Click to access your Asterisk voicemail</toolTipText>

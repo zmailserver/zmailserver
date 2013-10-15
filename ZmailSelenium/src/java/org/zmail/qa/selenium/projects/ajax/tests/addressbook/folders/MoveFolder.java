@@ -14,14 +14,14 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.addressbook.folders;
+package org.zmail.qa.selenium.projects.ajax.tests.addressbook.folders;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
 
 
 public class MoveFolder extends AjaxCommonTest {
@@ -44,16 +44,16 @@ public class MoveFolder extends AjaxCommonTest {
 		FolderItem userRoot= FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.UserRoot);
 		
 		// Subfolders in root
-		String name1 = "ab"+ ZimbraSeleniumProperties.getUniqueString();
+		String name1 = "ab"+ ZmailSeleniumProperties.getUniqueString();
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+				"<CreateFolderRequest xmlns='urn:zmailMail'>" +
 						"<folder name='"+ name1 + "' view='contact' l='"+ userRoot.getId() +"'/>" +
 				"</CreateFolderRequest>");
 		FolderItem addressbook1 = FolderItem.importFromSOAP(app.zGetActiveAccount(), name1);
 
-		String name2 = "ab"+ ZimbraSeleniumProperties.getUniqueString();
+		String name2 = "ab"+ ZmailSeleniumProperties.getUniqueString();
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+				"<CreateFolderRequest xmlns='urn:zmailMail'>" +
 						"<folder name='"+ name2 + "' view='contact' l='"+ userRoot.getId() +"'/>" +
 				"</CreateFolderRequest>");
 		FolderItem addressbook2 = FolderItem.importFromSOAP(app.zGetActiveAccount(), name2);

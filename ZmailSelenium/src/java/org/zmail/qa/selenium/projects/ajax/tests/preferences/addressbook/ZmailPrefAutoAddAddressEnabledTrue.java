@@ -14,31 +14,31 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.preferences.addressbook;
+package org.zmail.qa.selenium.projects.ajax.tests.preferences.addressbook;
 
 import java.util.HashMap;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.MailItem;
-import com.zimbra.qa.selenium.framework.items.RecipientItem;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.MailItem;
+import org.zmail.qa.selenium.framework.items.RecipientItem;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew;
 
-public class ZimbraPrefAutoAddAddressEnabledTrue extends AjaxCommonTest {
+public class ZmailPrefAutoAddAddressEnabledTrue extends AjaxCommonTest {
 
 	@SuppressWarnings("serial")
-	public ZimbraPrefAutoAddAddressEnabledTrue() {
+	public ZmailPrefAutoAddAddressEnabledTrue() {
 		super.startingPage = app.zPageMail;
 		super.startingAccountPreferences = new HashMap<String, String>() {
 			{				
-		 		put("zimbraPrefAutoAddAddressEnabled", "TRUE");
+		 		put("zmailPrefAutoAddAddressEnabled", "TRUE");
 			}
 		};
 	}
@@ -55,15 +55,15 @@ public class ZimbraPrefAutoAddAddressEnabledTrue extends AjaxCommonTest {
 		
 		FolderItem emailedContacts = FolderItem.importFromSOAP(app.zGetActiveAccount(), FolderItem.SystemFolder.EmailedContacts);
 
-		ZimbraAccount receiver = new ZimbraAccount();
+		ZmailAccount receiver = new ZmailAccount();
 		receiver.provision();
 		receiver.authenticate();
 		
 		// Create the message data to be sent
 		MailItem mail = new MailItem();
 		mail.dToRecipients.add(new RecipientItem(receiver));
-		mail.dSubject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		mail.dBodyText = "body" + ZimbraSeleniumProperties.getUniqueString();
+		mail.dSubject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		mail.dBodyText = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		// Open the new mail form
@@ -77,7 +77,7 @@ public class ZimbraPrefAutoAddAddressEnabledTrue extends AjaxCommonTest {
 		mailform.zSubmit();
 
 		app.zGetActiveAccount().soapSend(
-					"<SearchRequest xmlns='urn:zimbraMail' types='contact'>"
+					"<SearchRequest xmlns='urn:zmailMail' types='contact'>"
 				+		"<query>"+ receiver.EmailAddress +"</query>"
 				+	"</SearchRequest>");
 
@@ -102,11 +102,11 @@ public class ZimbraPrefAutoAddAddressEnabledTrue extends AjaxCommonTest {
 
 		FolderItem emailedContacts = FolderItem.importFromSOAP(app.zGetActiveAccount(), FolderItem.SystemFolder.EmailedContacts);
 		
-		ZimbraAccount receiver1 = new ZimbraAccount();
+		ZmailAccount receiver1 = new ZmailAccount();
 		receiver1.provision();
 		receiver1.authenticate();
 		
-		ZimbraAccount receiver2 = new ZimbraAccount();
+		ZmailAccount receiver2 = new ZmailAccount();
 		receiver2.provision();
 		receiver2.authenticate();
 		
@@ -114,8 +114,8 @@ public class ZimbraPrefAutoAddAddressEnabledTrue extends AjaxCommonTest {
 		MailItem mail = new MailItem();
 		mail.dToRecipients.add(new RecipientItem(receiver1));
 		mail.dToRecipients.add(new RecipientItem(receiver2));
-		mail.dSubject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		mail.dBodyText = "body" + ZimbraSeleniumProperties.getUniqueString();
+		mail.dSubject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		mail.dBodyText = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		// Open the new mail form
@@ -129,7 +129,7 @@ public class ZimbraPrefAutoAddAddressEnabledTrue extends AjaxCommonTest {
 		mailform.zSubmit();
 
 		app.zGetActiveAccount().soapSend(
-				"<SearchRequest xmlns='urn:zimbraMail' types='contact'>"
+				"<SearchRequest xmlns='urn:zmailMail' types='contact'>"
 			+		"<query>"+ receiver1.EmailAddress +"</query>"
 			+	"</SearchRequest>");
 		
@@ -140,7 +140,7 @@ public class ZimbraPrefAutoAddAddressEnabledTrue extends AjaxCommonTest {
 		ZAssert.assertEquals(folder1, emailedContacts.getId(), "Verify the recipient is in the Emailed Contacts folder");
 
 		app.zGetActiveAccount().soapSend(
-				"<SearchRequest xmlns='urn:zimbraMail' types='contact'>"
+				"<SearchRequest xmlns='urn:zmailMail' types='contact'>"
 			+		"<query>"+ receiver2.EmailAddress +"</query>"
 			+	"</SearchRequest>");
 

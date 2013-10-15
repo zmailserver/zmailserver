@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleGetInfoString</key>
-	<string>@@VERSION@@, Zimbra, Inc.</string>
+	<string>@@VERSION@@, Zmail, Inc.</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.zimbra.zcs.spell</string>
+	<string>org.zmail.zcs.spell</string>
 	<key>CFBundleName</key>
-	<string>zimbra-spell</string>
+	<string>zmail-spell</string>
 	<key>CFBundleShortVersionString</key>
 	<string>@@MAJOR@@.@@MINOR@@</string>
 	<key>BuildVersion</key>

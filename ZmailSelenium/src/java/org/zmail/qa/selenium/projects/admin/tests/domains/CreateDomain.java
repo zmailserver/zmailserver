@@ -14,18 +14,18 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.admin.tests.domains;
+package org.zmail.qa.selenium.projects.admin.tests.domains;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAdminAccount;
-import com.zimbra.qa.selenium.projects.admin.core.AdminCommonTest;
-import com.zimbra.qa.selenium.projects.admin.items.DomainItem;
-import com.zimbra.qa.selenium.projects.admin.ui.WizardCreateDomain;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAdminAccount;
+import org.zmail.qa.selenium.projects.admin.core.AdminCommonTest;
+import org.zmail.qa.selenium.projects.admin.items.DomainItem;
+import org.zmail.qa.selenium.projects.admin.ui.WizardCreateDomain;
 
 public class CreateDomain extends AdminCommonTest {
 	
@@ -60,13 +60,13 @@ public class CreateDomain extends AdminCommonTest {
 		wizard.zCompleteWizard(domain);
 
 		// Verify the domain exists in the ZCS
-		ZimbraAdminAccount.AdminConsoleAdmin().soapSend(
-				"<GetDomainRequest xmlns='urn:zimbraAdmin'>"
+		ZmailAdminAccount.AdminConsoleAdmin().soapSend(
+				"<GetDomainRequest xmlns='urn:zmailAdmin'>"
 			+	"<domain by='name'>" + domain.getName() + "</domain>"
 			+	"</GetDomainRequest>");
 
 
-		Element response = ZimbraAdminAccount.AdminConsoleAdmin().soapSelectNode("//admin:GetDomainResponse/admin:domain", 1);
+		Element response = ZmailAdminAccount.AdminConsoleAdmin().soapSelectNode("//admin:GetDomainResponse/admin:domain", 1);
 		ZAssert.assertNotNull(response, "Verify the domain is created successfully");
 	}
 }

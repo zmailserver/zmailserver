@@ -22,7 +22,7 @@ basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
     <title>NewImageTest</title>
     <style type="text/css">
       <!--
-       @import url(/zimbra/js/img/imgs.css);
+       @import url(/zmail/js/img/imgs.css);
        -->
     </style>
     <jsp:include page="../../public/Messages.jsp"/>

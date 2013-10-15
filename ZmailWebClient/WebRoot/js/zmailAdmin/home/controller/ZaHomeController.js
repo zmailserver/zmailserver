@@ -44,7 +44,7 @@ ZaHomeController.prototype.toString = function () {
 ZaApp.prototype.getHomeViewController =
 function(viewId) {
 	if(!viewId)
-		viewId = ZaZimbraAdmin._HOME_VIEW;
+		viewId = ZaZmailAdmin._HOME_VIEW;
 
 	if (viewId && this._controllers[viewId] != null) {
 		return this._controllers[viewId];

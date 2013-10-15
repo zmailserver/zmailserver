@@ -14,24 +14,24 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.mail.bugs;
+package org.zmail.qa.selenium.projects.desktop.tests.mail.bugs;
 
 import java.util.List;
 
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.GeneralUtility;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.tests.mail.mail.GetMail;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.GeneralUtility;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.tests.mail.mail.GetMail;
 
 public class Bug57468 extends AjaxCommonTest {
 
@@ -44,7 +44,7 @@ public class Bug57468 extends AjaxCommonTest {
 		
 		// Since we collapsed the folder tree, it may cause problems for other tests
 		// Rest the ZWC user
-		ZimbraAccount.ResetAccountZDC();
+		ZmailAccount.ResetAccountZDC();
 		
 		logger.info("bug57468AfterClass: finish");
 	}
@@ -69,9 +69,9 @@ public class Bug57468 extends AjaxCommonTest {
 		FolderItem inbox = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Inbox);
 		ZAssert.assertNotNull(inbox, "Verify the inbox is available");
 
-		String foldername = "folder" + ZimbraSeleniumProperties.getUniqueString();
+		String foldername = "folder" + ZmailSeleniumProperties.getUniqueString();
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+				"<CreateFolderRequest xmlns='urn:zmailMail'>" +
                 	"<folder name='"+ foldername +"' l='"+ inbox.getId() +"'/>" +
                 "</CreateFolderRequest>");
 
@@ -82,13 +82,13 @@ public class Bug57468 extends AjaxCommonTest {
 		app.zTreeMail.zCollapseAll();
 
 		// Send a message to the test account
-		ZimbraAccount.AccountA().soapSend(
-					"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+		ZmailAccount.AccountA().soapSend(
+					"<SendMsgRequest xmlns='urn:zmailMail'>" +
 						"<m>" +
 							"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
-							"<su>"+ "subject" + ZimbraSeleniumProperties.getUniqueString() +"</su>" +
+							"<su>"+ "subject" + ZmailSeleniumProperties.getUniqueString() +"</su>" +
 							"<mp ct='text/plain'>" +
-								"<content>content" + ZimbraSeleniumProperties.getUniqueString() +"</content>" +
+								"<content>content" + ZmailSeleniumProperties.getUniqueString() +"</content>" +
 							"</mp>" +
 						"</m>" +
 					"</SendMsgRequest>");

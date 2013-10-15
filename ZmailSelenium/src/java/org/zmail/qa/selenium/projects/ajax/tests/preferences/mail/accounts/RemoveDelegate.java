@@ -14,18 +14,18 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.preferences.mail.accounts;
+package org.zmail.qa.selenium.projects.ajax.tests.preferences.mail.accounts;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.ui.AbsDialog;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogError.DialogErrorID;
-import com.zimbra.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.ui.AbsDialog;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogError.DialogErrorID;
+import org.zmail.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
 
 
 public class RemoveDelegate extends AjaxCommonTest {
@@ -48,13 +48,13 @@ public class RemoveDelegate extends AjaxCommonTest {
 		//-- Data Setup
 		
 		// Create an account to delegate to
-		ZimbraAccount delegate = new ZimbraAccount();
+		ZmailAccount delegate = new ZmailAccount();
 		delegate.provision();
 		delegate.authenticate();
 		
 		// Grant Send-As
 		app.zGetActiveAccount().soapSend(
-					"<GrantRightsRequest xmlns='urn:zimbraAccount'>"
+					"<GrantRightsRequest xmlns='urn:zmailAccount'>"
 				+		"<ace gt='usr' d='"+ delegate.EmailAddress +"' right='sendAs'/>"
 				+	"</GrantRightsRequest>");
 		
@@ -66,7 +66,7 @@ public class RemoveDelegate extends AjaxCommonTest {
 		app.zPageLogin.zNavigateTo();
 		this.startingPage.zNavigateTo();
 
-		AbsDialog errorDialog = app.zPageMain.zGetErrorDialog(DialogErrorID.Zimbra);
+		AbsDialog errorDialog = app.zPageMain.zGetErrorDialog(DialogErrorID.Zmail);
 		if ( (errorDialog != null) && (errorDialog.zIsActive()) ) {
 
 		    // Dismiss the dialog and carry on
@@ -81,7 +81,7 @@ public class RemoveDelegate extends AjaxCommonTest {
 		ZAssert.assertTrue(app.zPagePreferences.sIsElementPresent(itemLocator), "Verify the delegate item is present in the list");
 		app.zPagePreferences.zClickAt(itemLocator, "");
 
-		// See http://bugzilla.zimbra.com/show_bug.cgi?id=74282
+		// See http://bugzilla.zmail.com/show_bug.cgi?id=74282
 		// TODO: Maybe this button should be abstracted?
 		String buttonLocator = "css=div[id$='_PRIMARY'] td[id$='_title']:contains('Remove')"; // TODO: I18N
 		ZAssert.assertTrue(app.zPagePreferences.sIsElementPresent(buttonLocator), "Verify the add delegate button is present");
@@ -96,7 +96,7 @@ public class RemoveDelegate extends AjaxCommonTest {
 		
 		//-- Verification
 		app.zGetActiveAccount().soapSend(
-					"<GetRightsRequest xmlns='urn:zimbraAccount' >"
+					"<GetRightsRequest xmlns='urn:zmailAccount' >"
 				+		"<ace right='sendAs'/>"
 				+		"<ace right='sendOnBehalfOf'/>"
 				+	"</GetRightsRequest>");

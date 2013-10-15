@@ -14,28 +14,28 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.core;
+package org.zmail.qa.selenium.framework.core;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import com.thoughtworks.selenium.DefaultSelenium;
 import com.thoughtworks.selenium.SeleniumException;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.SleepUtil;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.SleepUtil;
 
 
 /**
  * @deprecated As of version 7.0
- * @author zimbra
+ * @author zmail
  *
  */
-public class ZimbraSelenium extends DefaultSelenium {
-	private static Logger logger = LogManager.getLogger(ZimbraSelenium.class);
+public class ZmailSelenium extends DefaultSelenium {
+	private static Logger logger = LogManager.getLogger(ZmailSelenium.class);
 
 	public String doubleQuote = "\"";
 
-	public ZimbraSelenium(String serverHost, int serverPort,
+	public ZmailSelenium(String serverHost, int serverPort,
 			String browserStartCommand, String browserURL) {
 		super(serverHost, serverPort, browserStartCommand, browserURL);
 	}

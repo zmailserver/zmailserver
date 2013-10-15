@@ -12,9 +12,9 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.ab;
+package org.zmail.cs.offline.ab;
 
-import static com.zimbra.common.mailbox.ContactConstants.*;
+import static org.zmail.common.mailbox.ContactConstants.*;
 
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;

@@ -20,10 +20,10 @@
   <topic name="编写和发送电子邮件" url="zwc_help_files/3_compose/composing_and_sending_email.htm" />
 </key>
 <key name="小行事历" >
-  <topic name="浏览 Zimbra 网络客户端" url="zwc_help_files/1_setting_up/navigating_the_zimbra_web_client.htm" />
+  <topic name="浏览 Zmail 网络客户端" url="zwc_help_files/1_setting_up/navigating_the_zmail_web_client.htm" />
 </key>
 <key name="屏幕视图" >
-  <topic name="浏览 Zimbra 网络客户端" url="zwc_help_files/1_setting_up/navigating_the_zimbra_web_client.htm" />
+  <topic name="浏览 Zmail 网络客户端" url="zwc_help_files/1_setting_up/navigating_the_zmail_web_client.htm" />
 </key>
 <key name="工作周视图" >
   <topic name="使用行事历" url="zwc_help_files/7_calendars/working_with_calendars.htm" />
@@ -181,7 +181,7 @@
   <topic name="更改帐户检查新邮件的频率" url="zwc_help_files/2_manage_email/changing_how_often_your_account_checks_for_new_mail.htm" />
 </key>
 <key name="概述窗格" >
-  <topic name="浏览 Zimbra 网络客户端" url="zwc_help_files/1_setting_up/navigating_the_zimbra_web_client.htm" />
+  <topic name="浏览 Zmail 网络客户端" url="zwc_help_files/1_setting_up/navigating_the_zmail_web_client.htm" />
 </key>
 <key name="活动串流" >
   <topic name="将不太重要的邮件移出收件箱" url="zwc_help_files/2_manage_email/moving_less_important_mail_out_of_the_inbox.htm" />

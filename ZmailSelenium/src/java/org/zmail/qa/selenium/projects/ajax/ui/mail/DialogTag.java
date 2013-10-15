@@ -17,10 +17,10 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.ajax.ui.mail;
+package org.zmail.qa.selenium.projects.ajax.ui.mail;
 
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.HarnessException;
 
 
 /**
@@ -33,7 +33,7 @@ public class DialogTag extends AbsDialog {
 
 	public static class Locators {
 	
-		// TODO:  See https://bugzilla.zimbra.com/show_bug.cgi?id=54173
+		// TODO:  See https://bugzilla.zmail.com/show_bug.cgi?id=54173
 		public static final String zTagDialogId			= "CreateTagDialog";
 		
 		public static final String zTitleId	 			= "CreateTagDialog_title";

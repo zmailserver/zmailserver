@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cert;
+package org.zmail.cert;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,16 +20,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.CertMgrConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.rmgmt.RemoteManager;
-import com.zimbra.cs.rmgmt.RemoteResult;
-import com.zimbra.cs.service.admin.AdminDocumentHandler;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.CertMgrConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.rmgmt.RemoteManager;
+import org.zmail.cs.rmgmt.RemoteResult;
+import org.zmail.cs.service.admin.AdminDocumentHandler;
+import org.zmail.soap.ZmailSoapContext;
 
 public class VerifyCertKey extends AdminDocumentHandler {
         final static String CERT_TYPE_SELF= "self" ;
@@ -39,17 +39,17 @@ public class VerifyCertKey extends AdminDocumentHandler {
 
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-   		ZimbraSoapContext lc = getZimbraSoapContext(context);
+   		ZmailSoapContext lc = getZmailSoapContext(context);
    		prov = Provisioning.getInstance();
    		String certBuffer = request.getAttribute(CertMgrConstants.E_cert) ;
    		String prvkeyBuffer = request.getAttribute(CertMgrConstants.A_privkey) ;
    		Element response = lc.createElement(CertMgrConstants.VERIFY_CERTKEY_RESPONSE);
 
 		String timeStamp = getCurrentTimeStamp();
-		String storedPath = ZimbraCertMgrExt.COMM_CRT_KEY_DIR + "." + timeStamp + "/";
-		String keyFile = storedPath + ZimbraCertMgrExt.COMM_CRT_KEY_FILE_NAME;
-		String certFile = storedPath + ZimbraCertMgrExt.COMM_CRT_FILE_NAME;
-		String caFile = storedPath + ZimbraCertMgrExt.COMM_CRT_CA_FILE_NAME;
+		String storedPath = ZmailCertMgrExt.COMM_CRT_KEY_DIR + "." + timeStamp + "/";
+		String keyFile = storedPath + ZmailCertMgrExt.COMM_CRT_KEY_FILE_NAME;
+		String certFile = storedPath + ZmailCertMgrExt.COMM_CRT_FILE_NAME;
+		String caFile = storedPath + ZmailCertMgrExt.COMM_CRT_CA_FILE_NAME;
 
 		try {
    			if(certBuffer == null) {
@@ -59,8 +59,8 @@ public class VerifyCertKey extends AdminDocumentHandler {
    				throw ServiceException.INVALID_REQUEST("Input PrivateKey is null",null);
    			}
    			
-			//String serverPrvKey = prov.getLocalServer().getAttr(ZimbraCertMgrExt.A_zimbraSSLPrivateKey);
-			//ZimbraLog.security.debug(" server prvkey = " + serverPrvKey);
+			//String serverPrvKey = prov.getLocalServer().getAttr(ZmailCertMgrExt.A_zmailSSLPrivateKey);
+			//ZmailLog.security.debug(" server prvkey = " + serverPrvKey);
 
 			RemoteManager rmgr = RemoteManager.getRemoteManager(prov.getLocalServer());
 			
@@ -86,7 +86,7 @@ public class VerifyCertKey extends AdminDocumentHandler {
             } else if (!comm_path.isDirectory()) {
                 throw ServiceException
                         .FAILURE("IOException occurred: Now exist directory '"
-                                + ZimbraCertMgrExt.COMM_CRT_KEY_DIR + "'", null);
+                                + ZmailCertMgrExt.COMM_CRT_KEY_DIR + "'", null);
             }
 			ByteUtil.putContent(certFile, certByte);
 			ByteUtil.putContent(caFile, certByte);
@@ -95,12 +95,12 @@ public class VerifyCertKey extends AdminDocumentHandler {
 			ByteUtil.putContent(keyFile, prvkeyByte) ;
 		
 		
-			String cmd = ZimbraCertMgrExt.VERIFY_COMM_CRTKEY_CMD + " comm "
+			String cmd = ZmailCertMgrExt.VERIFY_COMM_CRTKEY_CMD + " comm "
 				+ " " + keyFile + " " + certFile + " " + caFile;
 			
 			RemoteResult rr = rmgr.execute(cmd);
 			verifyResult = OutputParser.parseVerifyResult(rr.getMStdout());
-			ZimbraLog.security.info(" GetVerifyCertResponse:" + verifyResult);
+			ZmailLog.security.info(" GetVerifyCertResponse:" + verifyResult);
 		}catch (IOException ioe) {
 			throw ServiceException.FAILURE("IOException occurred while running cert verification command", ioe);
 		}
@@ -126,7 +126,7 @@ public class VerifyCertKey extends AdminDocumentHandler {
 			}
 
  	        }catch (SecurityException se) {
-        	        ZimbraLog.security.error ("File(s) of commercial certificates/prvkey was not deleted", se ) ;
+        	        ZmailLog.security.error ("File(s) of commercial certificates/prvkey was not deleted", se ) ;
             	}
 
 		if(verifyResult)

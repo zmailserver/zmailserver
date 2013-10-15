@@ -34,7 +34,7 @@ function delayReload()
 var gsToolbarOrder = "toc|fts|blankblock|banner";
 var gsMinibarOrder = "blankblock|hide2|";
 
-var gsTopic = "Getting_Started/Zimbra_User_Help.htm";
+var gsTopic = "Getting_Started/Zmail_User_Help.htm";
 var PANE_OPT_SEARCH = 1;
 var PANE_OPT_BROWSESEQ = 2;
 var gnOpts=-1;

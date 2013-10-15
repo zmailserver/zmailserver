@@ -111,7 +111,7 @@ function(entry) {
 		this._createUI();
 	} 
 	ZaApp.getInstance().pushView(this.getContentViewId());
-//	ZaApp.getInstance().pushView(ZaZimbraAdmin._POSIX_GROUP_VIEW);
+//	ZaApp.getInstance().pushView(ZaZmailAdmin._POSIX_GROUP_VIEW);
 	this._contentView.setDirty(false);
 	this._contentView.setObject(entry); 	//setObject is delayed to be called after pushView in order to avoid jumping of the view	
 	this._currentObject = entry;
@@ -134,7 +134,7 @@ function () {
 	var elements = new Object();
 	elements[ZaAppViewMgr.C_APP_CONTENT] = this._contentView;
 	elements[ZaAppViewMgr.C_TOOLBAR_TOP] = this._toolbar;		
-//    ZaApp.getInstance().createView(ZaZimbraAdmin._POSIX_GROUP_VIEW, elements);
+//    ZaApp.getInstance().createView(ZaZmailAdmin._POSIX_GROUP_VIEW, elements);
     var tabParams = {
 		openInNewTab: true,
 		tabId: this.getContentViewId()

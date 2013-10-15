@@ -14,18 +14,18 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.octopus.tests.history;
+package org.zmail.qa.selenium.projects.octopus.tests.history;
 
 import java.util.ArrayList;
 
 import org.testng.annotations.*;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.octopus.core.OctopusCommonTest;
-import com.zimbra.qa.selenium.projects.octopus.ui.PageHistory;
-import com.zimbra.qa.selenium.projects.octopus.ui.PageHistory.*;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.octopus.core.OctopusCommonTest;
+import org.zmail.qa.selenium.projects.octopus.ui.PageHistory;
+import org.zmail.qa.selenium.projects.octopus.ui.PageHistory.*;
 
 
 public class RefineHistoryShareFolder extends OctopusCommonTest {
@@ -52,10 +52,10 @@ public class RefineHistoryShareFolder extends OctopusCommonTest {
     
     
     //created 3 new accounts
-    ZimbraAccount granter = getNewAccount();
-    ZimbraAccount readGrantee = getNewAccount();
-    ZimbraAccount readWriteGrantee = getNewAccount();
-    ZimbraAccount adminGrantee = getNewAccount();
+    ZmailAccount granter = getNewAccount();
+    ZmailAccount readGrantee = getNewAccount();
+    ZmailAccount readWriteGrantee = getNewAccount();
+    ZmailAccount adminGrantee = getNewAccount();
     
     FolderItem folder = null;	 
     
@@ -269,7 +269,7 @@ private void verifyUnCheckAction(String locator, String historyText, String... r
 	
 	@Test(description = "Verify check/uncheck 'comment' checkbox", groups = { "skip" })
 	public void RefineComment() throws HarnessException {
-	   String comment = "Comment" + ZimbraSeleniumProperties.getUniqueString();
+	   String comment = "Comment" + ZmailSeleniumProperties.getUniqueString();
 
        makeCommentViaSoap(app.zGetActiveAccount(), fileId, comment);
        refresh();
@@ -282,7 +282,7 @@ private void verifyUnCheckAction(String locator, String historyText, String... r
 
 	@Test(description = "Verify check/uncheck 'rename' checkbox", groups = { "skip" })
 	public void RefineRename() throws HarnessException {
-	   String newName = "New Name " + ZimbraSeleniumProperties.getUniqueString() +
+	   String newName = "New Name " + ZmailSeleniumProperties.getUniqueString() +
 	                    fileName.substring(fileName.indexOf("."),fileName.length());
 
        renameViaSoap(app.zGetActiveAccount(), fileId, newName);
@@ -351,11 +351,11 @@ private void verifyUnCheckAction(String locator, String historyText, String... r
 		unMarkFileFavoriteViaSoap(app.zGetActiveAccount(), fileId);
 				
 		//make comment via soap
-		String comment = "Comment" + ZimbraSeleniumProperties.getUniqueString();
+		String comment = "Comment" + ZmailSeleniumProperties.getUniqueString();
 		makeCommentViaSoap(app.zGetActiveAccount(), fileId, comment);
 	
 		//rename via soap
-		String newName = "New Name " + ZimbraSeleniumProperties.getUniqueString() +
+		String newName = "New Name " + ZmailSeleniumProperties.getUniqueString() +
         fileName.substring(fileName.indexOf("."),fileName.length());
 		renameViaSoap(app.zGetActiveAccount(), fileId, newName);
 

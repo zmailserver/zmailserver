@@ -17,16 +17,16 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.desktop.ui;
+package org.zmail.qa.selenium.projects.desktop.ui;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.projects.desktop.ui.mail.DialogCreateFolder;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.projects.desktop.ui.mail.DialogCreateFolder;
 
 /*
  * Right-click menu

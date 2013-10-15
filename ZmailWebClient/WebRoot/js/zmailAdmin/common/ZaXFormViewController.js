@@ -53,7 +53,7 @@ function(entry) {
 
 ZaXFormViewController.prototype.handleXFormChange = function (ev) {
 	if(ev && ev.form.hasErrors() && this._toolbar) { 
-        ZaZimbraAdmin.getInstance().getCurrentAppBar().enableButton(ZaOperation.SAVE, false);
+        ZaZmailAdmin.getInstance().getCurrentAppBar().enableButton(ZaOperation.SAVE, false);
 	}
 }
 /**
@@ -136,7 +136,7 @@ function(ev, noPopView, func, obj, params, newPath) {
 
 ZaXFormViewController.prototype._setSelectionAfterCloseView =
 function(newPath) {
-    var tree = ZaZimbraAdmin.getInstance().getOverviewPanelController().getOverviewPanel().getFolderTree();
+    var tree = ZaZmailAdmin.getInstance().getOverviewPanelController().getOverviewPanel().getFolderTree();
     if (!newPath) {
         var rootItem = tree.getCurrentRootItem();
         var rootPath = tree.getABPath(rootItem.getData("dataItem"));
@@ -232,7 +232,7 @@ function () {
 		}
 		this.closeCnfrmDlg();	
 		ZaApp.getInstance().popView();		
-        var tree = ZaZimbraAdmin.getInstance().getOverviewPanelController().getOverviewPanel().getFolderTree();
+        var tree = ZaZmailAdmin.getInstance().getOverviewPanelController().getOverviewPanel().getFolderTree();
         var rootItem = tree.getCurrentRootItem();
         var rootPath = tree.getABPath(rootItem.getData("dataItem"));
         var topPath = "";
@@ -303,7 +303,7 @@ function (params) {
 	try {
 		if(this._saveChanges()) {
 			this._view.setDirty(false);
-            ZaZimbraAdmin.getInstance().getCurrentAppBar().enableButton(ZaOperation.SAVE, false);
+            ZaZmailAdmin.getInstance().getCurrentAppBar().enableButton(ZaOperation.SAVE, false);
 		
 			this.closeCnfrmDlg();
 
@@ -334,7 +334,7 @@ function (params) {
 **/
 ZaXFormViewController.prototype.setDirty = 
 function (isD) {
-    var settingMenu = ZaZimbraAdmin.getInstance().getSettingMenu();
+    var settingMenu = ZaZmailAdmin.getInstance().getSettingMenu();
     if (!settingMenu ||
         !this._popupOperations ||
         !this._popupOperations[ZaOperation.SAVE] ||
@@ -357,9 +357,9 @@ function (isD) {
         saveItem.setEnabled(false);
 
     if(isD)
-        ZaZimbraAdmin.getInstance().getCurrentAppBar().enableButton(ZaOperation.SAVE, true);
+        ZaZmailAdmin.getInstance().getCurrentAppBar().enableButton(ZaOperation.SAVE, true);
     else
-        ZaZimbraAdmin.getInstance().getCurrentAppBar().enableButton(ZaOperation.SAVE, false);
+        ZaZmailAdmin.getInstance().getCurrentAppBar().enableButton(ZaOperation.SAVE, false);
 }
 
 /**

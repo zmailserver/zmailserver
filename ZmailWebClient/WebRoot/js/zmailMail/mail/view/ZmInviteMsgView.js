@@ -180,7 +180,7 @@ ZmInviteMsgView.prototype.showMoreInfo =
 function(callback, dayViewCallback) {
 	var apptId = this._invite && this._invite.hasAttendeeResponse() && this._invite.getAppointmentId();
 	if (apptId) {
-		var jsonObj = {GetAppointmentRequest:{_jsns:"urn:zimbraMail"}};
+		var jsonObj = {GetAppointmentRequest:{_jsns:"urn:zmailMail"}};
 		var request = jsonObj.GetAppointmentRequest;
 		request.id = apptId;
 

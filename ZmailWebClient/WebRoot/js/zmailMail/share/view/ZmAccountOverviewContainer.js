@@ -330,7 +330,7 @@ function(folder) {
  * This only applies to app-based overview containers (i.e. not dialogs). Also resets the
  * tooltip for the account header tree item.
  *
- * @param {ZmZimbraAccount}	account		the account to update status icon for
+ * @param {ZmZmailAccount}	account		the account to update status icon for
  * @param	{Boolean}	updateStatus	if <code>true</code>, update the status
  * @param	{Boolean}	updateTooltip	if <code>true</code>, update the tool tip
  */
@@ -340,14 +340,14 @@ function(account, updateStatus, updateTooltip) {
 	var hi = appCtxt.getApp(this._appName) && this.getHeaderItem(account);
 	if (hi) {
 		if (updateStatus) {
-			var html = (account.status == ZmZimbraAccount.STATUS_RUNNING)
+			var html = (account.status == ZmZmailAccount.STATUS_RUNNING)
 				? ("<img src='/img/animated/ImgSpinner.gif' width=16 height=16 border=0>")
 				: (AjxImg.getImageHtml(account.getStatusIcon()));
 
 			if (hi._extraCell) {
 				hi._extraCell.innerHTML = (html || "");
 			}
-            if (appCtxt.isOffline && account.status == ZmZimbraAccount.STATUS_AUTHFAIL) {
+            if (appCtxt.isOffline && account.status == ZmZmailAccount.STATUS_AUTHFAIL) {
                 var dialog = appCtxt.getPasswordChangeDialog();
                 dialog.popup(account);
             }
@@ -957,7 +957,7 @@ function(account, ev) {
 
     if(!account.isError()) {
         return;
-    } else if (appCtxt.isOffline && (account.status == ZmZimbraAccount.STATUS_AUTHFAIL)) {
+    } else if (appCtxt.isOffline && (account.status == ZmZmailAccount.STATUS_AUTHFAIL)) {
         var dialog = appCtxt.getPasswordChangeDialog();
         dialog.popup(account);
     } else {

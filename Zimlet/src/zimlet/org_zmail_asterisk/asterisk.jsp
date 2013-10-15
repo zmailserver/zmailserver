@@ -14,8 +14,8 @@
 -->
 <%@ page language="java"
          import="java.util.*,javax.sip.*,javax.sip.address.*,javax.sip.header.*,javax.sip.message.*,java.security.MessageDigest,java.security.NoSuchAlgorithmException" %>
-<%@ taglib prefix="z" uri="/WEB-INF/zimbra.tld" %>
-<z:zimletconfig var="config" action="list" zimlet="com_zimbra_asterisk"/>
+<%@ taglib prefix="z" uri="/WEB-INF/zmail.tld" %>
+<z:zimletconfig var="config" action="list" zimlet="org_zmail_asterisk"/>
 <%
 
 	final class Invite implements SipListener {
@@ -373,7 +373,7 @@
 		private String getRandomTag() {
 			//System.out.println ("Getting random bind port");
 			int r = this.generator.nextInt(60000);
-			String foo = "Zimbra" + r;
+			String foo = "Zmail" + r;
 			//System.out.println (r);
 			return (foo);
 		}

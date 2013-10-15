@@ -461,7 +461,7 @@ function() {
 AttachContactsTabView.prototype.showAttachContactsTreeView =
 function() {
 	var callback = new AjxCallback(this, this._showTreeView);
-	AjxPackage.undefine("zimbraMail.abook.controller.ZmAddrBookTreeController");
+	AjxPackage.undefine("zmailMail.abook.controller.ZmAddrBookTreeController");
 	AjxPackage.require({name:["ContactsCore","Contacts"], forceReload:true, callback:callback});
 };
 
@@ -607,7 +607,7 @@ function(query, forward) {
  */
 AttachContactsTabView.prototype._searchContacts =
 function(params) {
-	var jsonObj = {SearchRequest:{_jsns:"urn:zimbraMail"}};
+	var jsonObj = {SearchRequest:{_jsns:"urn:zmailMail"}};
 	jsonObj.SearchRequest.query = params.query + " not #type:group";
 	jsonObj.SearchRequest.types = "contact";
 	jsonObj.SearchRequest.limit = params.limit;

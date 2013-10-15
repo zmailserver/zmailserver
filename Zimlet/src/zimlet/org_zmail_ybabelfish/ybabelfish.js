@@ -17,7 +17,7 @@
 // Zimlet to translate a message
 //////////////////////////////////////////////////////////////////////////////
 
-function Com_Zimbra_Ybabelfish() {
+function Com_Zmail_Ybabelfish() {
 	this._languages = [
 		{ value: "zh_en",		label: "Chinese-simp to English" },
 		{ value: "zh_zt",		label: "Chinese-simp to Chinese-trad" },
@@ -60,13 +60,13 @@ function Com_Zimbra_Ybabelfish() {
 	];
 }
 
-Com_Zimbra_Ybabelfish.prototype = new ZmZimletBase();
-Com_Zimbra_Ybabelfish.prototype.constructor = Com_Zimbra_Ybabelfish;
+Com_Zmail_Ybabelfish.prototype = new ZmZimletBase();
+Com_Zmail_Ybabelfish.prototype.constructor = Com_Zmail_Ybabelfish;
 
 
 // Consts
 
-Com_Zimbra_Ybabelfish.URL = "http://babelfish.yahoo.com/translate_txt";
+Com_Zmail_Ybabelfish.URL = "http://babelfish.yahoo.com/translate_txt";
 
 
 // Public methods
@@ -77,7 +77,7 @@ Com_Zimbra_Ybabelfish.URL = "http://babelfish.yahoo.com/translate_txt";
 //
 // - zmObject
 // - canvas
-Com_Zimbra_Ybabelfish.prototype.doDrop =
+Com_Zmail_Ybabelfish.prototype.doDrop =
 function(zmObject) {
 	if(zmObject.length > 1) {
         if (!this._inputDialog) {
@@ -119,7 +119,7 @@ function(zmObject) {
 	this._yBabelfishDialog.popup();
 };
 
-Com_Zimbra_Ybabelfish.prototype.doubleClicked =
+Com_Zmail_Ybabelfish.prototype.doubleClicked =
 function(canvas) {
 	this._isUserInput = true;
 
@@ -151,7 +151,7 @@ function(canvas) {
 	this._yBabelfishDialog.popup();
 };
 
-Com_Zimbra_Ybabelfish.prototype.menuItemSelected = 
+Com_Zmail_Ybabelfish.prototype.menuItemSelected = 
 function(itemId) {
 	switch (itemId) {
 		case "prefs":
@@ -160,7 +160,7 @@ function(itemId) {
 	}
 }
 
-Com_Zimbra_Ybabelfish.prototype._showPrefs =
+Com_Zmail_Ybabelfish.prototype._showPrefs =
 function() {
 	if(!this._prefsDialog) {
 		this._prefsDialog = new YBabelfishPrefsDialog(appCtxt._shell, null, this);
@@ -169,18 +169,18 @@ function() {
 };
 
 
-Com_Zimbra_Ybabelfish.prototype._makeRequest =
+Com_Zmail_Ybabelfish.prototype._makeRequest =
 function(lang, text) {
     text = text.replace(/&/g,'&amp;');
     var encodedText = AjxStringUtil.urlEncode(text);
     encodedText = encodedText.replace(/&amp;/g,'%26');
     encodedText = encodedText.replace(/#/g,'%23');
-    var reqHeader = { "User-Agent": navigator.userAgent, "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8", "Referer": Com_Zimbra_Ybabelfish.URL, "Host": "babelfish.yahoo.com" };
+    var reqHeader = { "User-Agent": navigator.userAgent, "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8", "Referer": Com_Zmail_Ybabelfish.URL, "Host": "babelfish.yahoo.com" };
 
 	AjxRpc.invoke(null, this.getResource("ybabelfish.jsp")+"?text="+encodedText+"&lang="+AjxStringUtil.urlEncode(lang || "en_es")+"&userAgent="+AjxStringUtil.urlEncode(navigator.userAgent), reqHeader, new AjxCallback(this, this._resultCallback), true);
 };
 
-Com_Zimbra_Ybabelfish.prototype._initialize =
+Com_Zmail_Ybabelfish.prototype._initialize =
 function() {
 	this._parentView = new DwtComposite(this.getShell());
 	this._parentView.setSize("440", "175");
@@ -241,7 +241,7 @@ function() {
 	this._yBabelfishDialog.setButtonListener(mailId, new AjxListener(this, this._sendListener));
 };
 
-Com_Zimbra_Ybabelfish.prototype._resetDefaultLang = 
+Com_Zmail_Ybabelfish.prototype._resetDefaultLang = 
 function() {
 	this._lang = this.getUserProperty("trans_language");
 	var localeSetting = appCtxt.get(ZmSetting.LOCALE_NAME)?appCtxt.get(ZmSetting.LOCALE_NAME):"en";
@@ -260,7 +260,7 @@ function() {
 	}
 }
 
-Com_Zimbra_Ybabelfish.prototype._populate =
+Com_Zmail_Ybabelfish.prototype._populate =
 function(resp) {
 	var result = resp.success ? resp.text : null;
 	var divIdx = result ? result.indexOf("<div style=\"padding:0.6em;\"") : null;
@@ -281,18 +281,18 @@ function(resp) {
 
 // Listeners
 
-Com_Zimbra_Ybabelfish.prototype._yBabelfishDialogOkListener =
+Com_Zmail_Ybabelfish.prototype._yBabelfishDialogOkListener =
 function(ev) {
 	this._yBabelfishDialog.popdown();
 };
 
-Com_Zimbra_Ybabelfish.prototype._translateListener =
+Com_Zmail_Ybabelfish.prototype._translateListener =
 function(ev) {
 	var value = this._isUserInput ? this._contentTA.value : this._zmObject.body;
 	this._makeRequest(this._langSelect.getValue(), value);
 };
 
-Com_Zimbra_Ybabelfish.prototype._sendListener =
+Com_Zmail_Ybabelfish.prototype._sendListener =
 function(ev) {
 
 	if (this._populated) {
@@ -321,7 +321,7 @@ function(ev) {
 
 // Callbacks
 
-Com_Zimbra_Ybabelfish.prototype._resultCallback =
+Com_Zmail_Ybabelfish.prototype._resultCallback =
 function(obj) {
 	this._populate(obj);
 

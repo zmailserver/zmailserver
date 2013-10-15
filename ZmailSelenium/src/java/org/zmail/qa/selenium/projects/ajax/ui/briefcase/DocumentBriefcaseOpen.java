@@ -14,21 +14,21 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.ui.briefcase;
+package org.zmail.qa.selenium.projects.ajax.ui.briefcase;
 
 import java.util.List;
 
 import org.openqa.selenium.WebElement;
 
-import com.zimbra.qa.selenium.framework.core.ClientSessionFactory;
-import com.zimbra.qa.selenium.framework.items.DocumentItem;
-import com.zimbra.qa.selenium.framework.items.IItem;
-import com.zimbra.qa.selenium.framework.ui.AbsApplication;
-import com.zimbra.qa.selenium.framework.ui.AbsDisplay;
-import com.zimbra.qa.selenium.framework.ui.AbsPage;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
+import org.zmail.qa.selenium.framework.core.ClientSessionFactory;
+import org.zmail.qa.selenium.framework.items.DocumentItem;
+import org.zmail.qa.selenium.framework.items.IItem;
+import org.zmail.qa.selenium.framework.ui.AbsApplication;
+import org.zmail.qa.selenium.framework.ui.AbsDisplay;
+import org.zmail.qa.selenium.framework.ui.AbsPage;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
 
 public class DocumentBriefcaseOpen extends AbsDisplay {
 
@@ -84,12 +84,12 @@ public class DocumentBriefcaseOpen extends AbsDisplay {
 
 	public String retriveDocumentName() throws HarnessException {
 		String text = null;
-		if(ZimbraSeleniumProperties.isWebDriver()) {
+		if(ZmailSeleniumProperties.isWebDriver()) {
 			WebElement we = getElement(Locators.zDocumentNameField);
 			if(we !=null)
 			text = we.getText();
 		}
-		else if(ZimbraSeleniumProperties.isWebDriverBackedSelenium())
+		else if(ZmailSeleniumProperties.isWebDriverBackedSelenium())
 			text = webDriverBackedSelenium().getText(Locators.zDocumentNameField);
 		else
 			text = sGetText(Locators.zDocumentNameField);

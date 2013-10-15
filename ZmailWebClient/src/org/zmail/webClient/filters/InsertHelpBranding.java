@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.webClient.filters;
+package org.zmail.webClient.filters;
 
 import java.io.*;
 import java.util.*;
@@ -22,7 +22,7 @@ import java.util.regex.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.util.ZmailLog;
 
 public class InsertHelpBranding implements Filter {
 

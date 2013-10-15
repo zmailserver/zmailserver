@@ -14,21 +14,21 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.quickcommands;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.quickcommands;
 
 import java.util.HashMap;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.MailItem;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxQuickCommandTest;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.MailItem;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxQuickCommandTest;
 
 
 public class ApplyQuickCommandMessage extends AjaxQuickCommandTest {
@@ -42,7 +42,7 @@ public class ApplyQuickCommandMessage extends AjaxQuickCommandTest {
 
 		
 		super.startingAccountPreferences = new HashMap<String, String>() {{
-			put("zimbraPrefGroupMailBy", "message");
+			put("zmailPrefGroupMailBy", "message");
 		}};
 
 	}
@@ -53,10 +53,10 @@ public class ApplyQuickCommandMessage extends AjaxQuickCommandTest {
 	public void ApplyQuickCommandMessage_01() throws HarnessException {
 
 		// Create the message data to be sent
-		String subject = "subject"+ ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject"+ ZmailSeleniumProperties.getUniqueString();
 
 		app.zGetActiveAccount().soapSend(
-				"<AddMsgRequest xmlns='urn:zimbraMail'>"
+				"<AddMsgRequest xmlns='urn:zmailMail'>"
 				+		"<m l='"+ FolderItem.importFromSOAP(app.zGetActiveAccount(), FolderItem.SystemFolder.Inbox).getId() +"' >"
 				+			"<content>From: foo@foo.com\n"
 				+				"To: foo@foo.com \n"

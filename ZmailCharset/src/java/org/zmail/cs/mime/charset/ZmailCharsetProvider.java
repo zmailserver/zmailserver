@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mime.charset;
+package org.zmail.cs.mime.charset;
 
 import java.nio.charset.Charset;
 import java.nio.charset.spi.CharsetProvider;
@@ -23,7 +23,7 @@ import java.util.List;
 /**
  * @author dkarp
  */
-public class ZimbraCharsetProvider extends CharsetProvider {
+public class ZmailCharsetProvider extends CharsetProvider {
 
     private static final String   UTF7_NAME    = "utf-7";
     private static final String[] UTF7_ALIASES = new String[] { "utf7", "unicode-1-1-utf-7" };

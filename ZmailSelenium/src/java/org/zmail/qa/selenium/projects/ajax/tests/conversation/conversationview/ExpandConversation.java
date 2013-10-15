@@ -14,16 +14,16 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.conversation.conversationview;
+package org.zmail.qa.selenium.projects.ajax.tests.conversation.conversationview;
 
 import java.util.List;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByConversationTest;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByConversationTest;
 
 
 public class ExpandConversation extends PrefGroupMailByConversationTest {
@@ -40,12 +40,12 @@ public class ExpandConversation extends PrefGroupMailByConversationTest {
 		
 		
 		// Create the message data to be sent
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String fragment1 = "fragment" + ZimbraSeleniumProperties.getUniqueString();
-		String fragment2 = "fragment" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String fragment1 = "fragment" + ZmailSeleniumProperties.getUniqueString();
+		String fragment2 = "fragment" + ZmailSeleniumProperties.getUniqueString();
 		
-		ZimbraAccount.AccountA().soapSend(
-				"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+		ZmailAccount.AccountA().soapSend(
+				"<SendMsgRequest xmlns='urn:zmailMail'>" +
 					"<m>" +
 						"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 						"<su>"+ subject +"</su>" +
@@ -55,8 +55,8 @@ public class ExpandConversation extends PrefGroupMailByConversationTest {
 					"</m>" +
 				"</SendMsgRequest>");
 
-		ZimbraAccount.AccountA().soapSend(
-				"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+		ZmailAccount.AccountA().soapSend(
+				"<SendMsgRequest xmlns='urn:zmailMail'>" +
 					"<m>" +
 						"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 						"<su>RE: "+ subject +"</su>" +

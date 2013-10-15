@@ -14,7 +14,7 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_example_menuitemsxml"
+<zimlet name="org_zmail_example_menuitemsxml"
         version="1.0"
         description="Demos menu item with actions in XML">
     <contentObject>

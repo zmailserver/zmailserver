@@ -14,24 +14,24 @@
 # ***** END LICENSE BLOCK *****
 # 
 
-CORE_PACKAGES="zimbra-core"
+CORE_PACKAGES="zmail-core"
 
-PACKAGES="zimbra-ldap \
-zimbra-logger \
-zimbra-mta \
-zimbra-snmp \
-zimbra-store \
-zimbra-apache \
-zimbra-spell \
-zimbra-convertd \
-zimbra-memcached \
-zimbra-proxy \
-zimbra-archiving \
-zimbra-cluster"
+PACKAGES="zmail-ldap \
+zmail-logger \
+zmail-mta \
+zmail-snmp \
+zmail-store \
+zmail-apache \
+zmail-spell \
+zmail-convertd \
+zmail-memcached \
+zmail-proxy \
+zmail-archiving \
+zmail-cluster"
 
 SERVICES=""
 
-OPTIONAL_PACKAGES="zimbra-qatest"
+OPTIONAL_PACKAGES="zmail-qatest"
 
 PACKAGE_DIR=`dirname $0`/packages
 
@@ -40,7 +40,7 @@ LOGFILE="/tmp/install.log.$$"
 touch $LOGFILE
 chmod 600 $LOGFILE
 
-SAVEDIR="/opt/zimbra/.saveconfig"
+SAVEDIR="/opt/zmail/.saveconfig"
 
 if [ x$RESTORECONFIG = "x" ]; then
 	RESTORECONFIG=$SAVEDIR
@@ -72,7 +72,7 @@ SMTPSOURCE="none"
 SMTPDEST="none"
 SNMPNOTIFY="0"
 SMTPNOTIFY="0"
-INSTALL_PACKAGES="zimbra-core"
+INSTALL_PACKAGES="zmail-core"
 STARTSERVERS="yes"
 LDAPROOTPW=""
 LDAPZIMBRAPW=""

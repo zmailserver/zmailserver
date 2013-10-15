@@ -14,20 +14,20 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.zimlets.linkedin;
+package org.zmail.qa.selenium.projects.ajax.tests.zimlets.linkedin;
 
 import java.util.List;
 
 import org.testng.annotations.*;
 
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.items.ZimletItem;
-import com.zimbra.qa.selenium.framework.items.ZimletItem.CoreZimletItem;
-import com.zimbra.qa.selenium.framework.items.ZimletItem.CoreZimletItem.CoreZimletName;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.TreeMail.FolderSection;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.TreeMail.FolderSectionAction;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.items.ZimletItem;
+import org.zmail.qa.selenium.framework.items.ZimletItem.CoreZimletItem;
+import org.zmail.qa.selenium.framework.items.ZimletItem.CoreZimletItem.CoreZimletName;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.TreeMail.FolderSection;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.TreeMail.FolderSectionAction;
 
 
 public class FolderTree extends AjaxCommonTest {
@@ -45,7 +45,7 @@ public class FolderTree extends AjaxCommonTest {
 	@Test(	description = "Verify the LinkedIn zimlet appears in the folder tree",
 			groups = { "deprecated" })
 	public void FolderTree_01() throws HarnessException {
-		ZimletItem linkedin = CoreZimletItem.getCoreZimlet(CoreZimletName.com_zimbra_linkedin, app);
+		ZimletItem linkedin = CoreZimletItem.getCoreZimlet(CoreZimletName.org_zmail_linkedin, app);
 		
 		// Expand the zimlets section
 		app.zTreeMail.zSectionAction(FolderSectionAction.Expand, FolderSection.Zimlets);

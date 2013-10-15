@@ -14,9 +14,9 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_example_customtooltip" version="1.0" description="Demos a custom tool tip">
-	<include>com_zimbra_example_customtooltip.js</include>
- 	<handlerObject>com_zimbra_example_customtooltip_HandlerObject</handlerObject>
+<zimlet name="org_zmail_example_customtooltip" version="1.0" description="Demos a custom tool tip">
+	<include>org_zmail_example_customtooltip.js</include>
+ 	<handlerObject>org_zmail_example_customtooltip_HandlerObject</handlerObject>
      <contentObject>
          <matchOn>
              <regex attrs="ig">lab|user|remodel</regex> <!-- matches lab or user or remodel -->

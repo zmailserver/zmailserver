@@ -14,15 +14,15 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.briefcase.document;
+package org.zmail.qa.selenium.projects.desktop.tests.briefcase.document;
 
 import org.testng.annotations.Test;
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.DialogTag;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.DialogTag;
 
 public class UnTagDocument extends AjaxCommonTest {
 
@@ -37,7 +37,7 @@ public class UnTagDocument extends AjaxCommonTest {
 
 	@Test(description = "Remove a tag from a Document using Toolbar -> Tag -> Remove Tag", groups = { "smoke" })
 	public void UnTagDocument_01() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
@@ -50,12 +50,12 @@ public class UnTagDocument extends AjaxCommonTest {
 				+ docItem.getDocText() + "</body>" + "</html>");
 
 		account
-				.soapSend("<SaveDocumentRequest requestId='0' xmlns='urn:zimbraMail'>"
+				.soapSend("<SaveDocumentRequest requestId='0' xmlns='urn:zmailMail'>"
 						+ "<doc name='"
 						+ docItem.getName()
 						+ "' l='"
 						+ briefcaseFolder.getId()
-						+ "' ct='application/x-zimbra-doc'>"
+						+ "' ct='application/x-zmail-doc'>"
 						+ "<content>"
 						+ contentHTML
 						+ "</content>"
@@ -68,7 +68,7 @@ public class UnTagDocument extends AjaxCommonTest {
 		 * ,"id");
 		 * 
 		 * // Search for created documentaccount.soapSend(
-		 * "<SearchRequest xmlns='urn:zimbraMail' types='document'>" +
+		 * "<SearchRequest xmlns='urn:zmailMail' types='document'>" +
 		 * "<query>in:" + briefcaseFolder.getName() +
 		 * "</query></SearchRequest>");
 		 * 
@@ -78,7 +78,7 @@ public class UnTagDocument extends AjaxCommonTest {
 		 * "//mail:SearchResponse//mail:doc[@name='" + docName + "']", "ver");
 		 * 
 		 * account.soapSend(
-		 * "<SearchRequest xmlns='urn:zimbraMail' types='document'>" + "<query>"
+		 * "<SearchRequest xmlns='urn:zmailMail' types='document'>" + "<query>"
 		 * + docName + "</query>" + "</SearchRequest>");
 		 * 
 		 * docId = account.soapSelectValue("//mail:doc", "id"); version =
@@ -95,17 +95,17 @@ public class UnTagDocument extends AjaxCommonTest {
 		app.zPageBriefcase.zListItem(Action.A_LEFTCLICK, docItem);
 
 		// Create a tag
-		String tagName = "tag" + ZimbraSeleniumProperties.getUniqueString();
+		String tagName = "tag" + ZmailSeleniumProperties.getUniqueString();
 
 		/*
 		 * //this flow needs page reload account.soapSend(
-		 * "<CreateTagRequest xmlns='urn:zimbraMail'>" + "<tag name='"+ tagName
+		 * "<CreateTagRequest xmlns='urn:zmailMail'>" + "<tag name='"+ tagName
 		 * +"' color='1' />" + "</CreateTagRequest>");
 		 * 
 		 * String tagId =
 		 * account.soapSelectValue("//mail:CreateTagResponse/mail:tag", "id");
 		 * 
-		 * account.soapSend( "<ItemActionRequest xmlns='urn:zimbraMail'>" +
+		 * account.soapSend( "<ItemActionRequest xmlns='urn:zmailMail'>" +
 		 * "<action id='"+ docId +"' op='tag' tag='" + tagId + "'/>" +
 		 * "</ItemActionRequest>");
 		 * 
@@ -123,7 +123,7 @@ public class UnTagDocument extends AjaxCommonTest {
       app.zPageBriefcase.zWaitForDesktopLoadingSpinner(5000);
 
       // Make sure the tag was created on the server (get the tag ID)
-		account.soapSend("<GetTagRequest xmlns='urn:zimbraMail'/>");
+		account.soapSend("<GetTagRequest xmlns='urn:zmailMail'/>");
 
 		String tagId = account.soapSelectValue(
 				"//mail:GetTagResponse//mail:tag[@name='" + tagName + "']",
@@ -131,7 +131,7 @@ public class UnTagDocument extends AjaxCommonTest {
 
 		// Make sure the tag was applied to the document
 		account
-				.soapSend("<SearchRequest xmlns='urn:zimbraMail' types='document'>"
+				.soapSend("<SearchRequest xmlns='urn:zmailMail' types='document'>"
 						+ "<query>" + docItem.getName() + "</query>" + "</SearchRequest>");
 
 		String id = account.soapSelectValue("//mail:SearchResponse//mail:doc",
@@ -154,7 +154,7 @@ public class UnTagDocument extends AjaxCommonTest {
       app.zPageBriefcase.zWaitForDesktopLoadingSpinner(5000);
 
 		account
-				.soapSend("<SearchRequest xmlns='urn:zimbraMail' types='document'>"
+				.soapSend("<SearchRequest xmlns='urn:zmailMail' types='document'>"
 						+ "<query>" + docItem.getName() + "</query>" + "</SearchRequest>");
 
 		id = account.soapSelectValue("//mail:SearchResponse//mail:doc", "t");

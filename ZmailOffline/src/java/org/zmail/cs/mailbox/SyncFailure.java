@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 public class SyncFailure {
     private long itemId;

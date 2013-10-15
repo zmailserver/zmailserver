@@ -14,41 +14,41 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.ui.mail;
+package org.zmail.qa.selenium.projects.ajax.ui.mail;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.zimbra.qa.selenium.framework.core.SeleniumService;
-import com.zimbra.qa.selenium.framework.items.IItem;
-import com.zimbra.qa.selenium.framework.items.MailItem;
-import com.zimbra.qa.selenium.framework.items.RecipientItem;
-import com.zimbra.qa.selenium.framework.items.RecipientItem.RecipientType;
-import com.zimbra.qa.selenium.framework.ui.AbsApplication;
-import com.zimbra.qa.selenium.framework.ui.AbsForm;
-import com.zimbra.qa.selenium.framework.ui.AbsPage;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.SleepUtil;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.framework.util.staf.Stafpostqueue;
-import com.zimbra.qa.selenium.projects.ajax.ui.AppAjaxClient;
-import com.zimbra.qa.selenium.projects.ajax.ui.AutocompleteEntry;
-import com.zimbra.qa.selenium.projects.ajax.ui.AutocompleteEntry.Icon;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogWarning;
+import org.zmail.qa.selenium.framework.core.SeleniumService;
+import org.zmail.qa.selenium.framework.items.IItem;
+import org.zmail.qa.selenium.framework.items.MailItem;
+import org.zmail.qa.selenium.framework.items.RecipientItem;
+import org.zmail.qa.selenium.framework.items.RecipientItem.RecipientType;
+import org.zmail.qa.selenium.framework.ui.AbsApplication;
+import org.zmail.qa.selenium.framework.ui.AbsForm;
+import org.zmail.qa.selenium.framework.ui.AbsPage;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.SleepUtil;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.framework.util.staf.Stafpostqueue;
+import org.zmail.qa.selenium.projects.ajax.ui.AppAjaxClient;
+import org.zmail.qa.selenium.projects.ajax.ui.AutocompleteEntry;
+import org.zmail.qa.selenium.projects.ajax.ui.AutocompleteEntry.Icon;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogWarning;
 
 
 
 
 /**
  * The <code>FormMailNew<code> object defines a compose new message view
- * in the Zimbra Ajax client.
+ * in the Zmail Ajax client.
  * <p>
  * This class can be used to compose a new message.
  * <p>
  * 
  * @author Matt Rhoades
- * @see http://wiki.zimbra.com/wiki/Testing:_Selenium:_ZimbraSelenium_Overview#Mail_Page
+ * @see http://wiki.zmail.com/wiki/Testing:_Selenium:_ZmailSelenium_Overview#Mail_Page
  */
 public class FormMailNew extends AbsForm {
 	
@@ -806,7 +806,7 @@ public class FormMailNew extends AbsForm {
 
 	@Override
 	public void zFill(IItem item) throws HarnessException {
-		logger.info(myPageName() + ".zFill(ZimbraItem)");
+		logger.info(myPageName() + ".zFill(ZmailItem)");
 		logger.info(item.prettyPrint());
 
 		// Make sure the item is a MailItem
@@ -828,7 +828,7 @@ public class FormMailNew extends AbsForm {
 		}
 		
 		if ( mail.dBodyText != null ) {
-		    if(ZimbraSeleniumProperties.isWebDriver()){
+		    if(ZmailSeleniumProperties.isWebDriver()){
 			String textBody = "css=textarea[id*=content]";
 			sType(textBody, mail.dBodyText);
 			sFireEvent(textBody, "keyup");
@@ -837,7 +837,7 @@ public class FormMailNew extends AbsForm {
 		    }
 		}
 		if ( mail.dBodyHtml != null ) {
-		    if(ZimbraSeleniumProperties.isWebDriver()){
+		    if(ZmailSeleniumProperties.isWebDriver()){
 			//String bodyLocator = "css=body[id=tinymce]";
 			String bodyLocator = "css=iframe[id*=ifr]";
 			zWaitForElementPresent(bodyLocator, "10000");
@@ -1029,7 +1029,7 @@ public class FormMailNew extends AbsForm {
 		// this.zKeyboard.zTypeCharacters(value);
 		
 		// workaround
-		if(ZimbraSeleniumProperties.isWebDriver()){
+		if(ZmailSeleniumProperties.isWebDriver()){
 		    clearField(locator);
 		    sType(locator, value);
 		}else{

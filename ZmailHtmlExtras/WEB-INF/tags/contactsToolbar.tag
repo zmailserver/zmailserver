@@ -17,8 +17,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="app" uri="com.zimbra.htmlextras" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
+<%@ taglib prefix="app" uri="org.zmail.htmlextras" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
 
 <td class='toolbar unread'><input class="inputSubmit" type="submit" name="actionCompose" value="<fmt:message key="compose"/>"></td>
 <td class='toolbar'><input class="inputSubmit" type="submit" name="actionDelete" value="<fmt:message key="delete"/>"></td>

@@ -12,20 +12,20 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.tag.filter;
+package org.zmail.cs.taglib.tag.filter;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.taglib.bean.ZTagLibException;
-import com.zimbra.cs.taglib.tag.ZimbraSimpleTag;
-import com.zimbra.client.ZFilterRule;
-import com.zimbra.client.ZFilterRules;
-import com.zimbra.client.ZMailbox;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.taglib.bean.ZTagLibException;
+import org.zmail.cs.taglib.tag.ZmailSimpleTag;
+import org.zmail.client.ZFilterRule;
+import org.zmail.client.ZFilterRules;
+import org.zmail.client.ZMailbox;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import java.io.IOException;
 
-public class CreateFilterRuleTag extends ZimbraSimpleTag {
+public class CreateFilterRuleTag extends ZmailSimpleTag {
 
     private ZFilterRule mRule;
 

@@ -174,7 +174,7 @@ function(list) {
 	}
 
 	var now = new Date();
-	var jsonObj = {GetFreeBusyRequest:{_jsns:"urn:zimbraMail"}};
+	var jsonObj = {GetFreeBusyRequest:{_jsns:"urn:zmailMail"}};
 	var request = jsonObj.GetFreeBusyRequest;
 	request.s = now.getTime();
 	request.e = now.getTime() + (5*60*1000); // next 5 mins

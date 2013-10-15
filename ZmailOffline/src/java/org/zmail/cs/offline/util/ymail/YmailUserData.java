@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.util.ymail;
+package org.zmail.cs.offline.util.ymail;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -26,14 +26,14 @@ import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
 
-import com.zimbra.common.httpclient.HttpClientUtil;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.AccountServiceException.AuthFailedServiceException;
-import com.zimbra.cs.offline.OfflineLC;
-import com.zimbra.cs.util.yauth.Auth;
-import com.zimbra.cs.util.yauth.AuthenticationException;
-import com.zimbra.cs.util.yauth.RawAuth;
+import org.zmail.common.httpclient.HttpClientUtil;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.AccountServiceException.AuthFailedServiceException;
+import org.zmail.cs.offline.OfflineLC;
+import org.zmail.cs.util.yauth.Auth;
+import org.zmail.cs.util.yauth.AuthenticationException;
+import org.zmail.cs.util.yauth.RawAuth;
 
 public class YmailUserData {
 

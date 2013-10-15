@@ -42,7 +42,7 @@ function(openInNewTab) {
 		this._UICreated = true;
 		ZaApp.getInstance()._controllers[this.getContentViewId ()] = this ;
 	}
-	//ZaApp.getInstance().pushView(ZaZimbraAdmin._MIGRATION_WIZ_VIEW);
+	//ZaApp.getInstance().pushView(ZaZmailAdmin._MIGRATION_WIZ_VIEW);
 	ZaApp.getInstance().pushView(this.getContentViewId());
 	/*
 	if (openInNewTab) {//when a ctrl shortcut is pressed

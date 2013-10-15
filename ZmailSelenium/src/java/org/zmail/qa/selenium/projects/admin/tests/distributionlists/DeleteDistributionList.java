@@ -14,20 +14,20 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.admin.tests.distributionlists;
+package org.zmail.qa.selenium.projects.admin.tests.distributionlists;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAdminAccount;
-import com.zimbra.qa.selenium.projects.admin.core.AdminCommonTest;
-import com.zimbra.qa.selenium.projects.admin.items.DistributionListItem;
-import com.zimbra.qa.selenium.projects.admin.ui.DialogForDeleteOperation;
-import com.zimbra.qa.selenium.projects.admin.ui.PageMain;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAdminAccount;
+import org.zmail.qa.selenium.projects.admin.core.AdminCommonTest;
+import org.zmail.qa.selenium.projects.admin.items.DistributionListItem;
+import org.zmail.qa.selenium.projects.admin.ui.DialogForDeleteOperation;
+import org.zmail.qa.selenium.projects.admin.ui.PageMain;
 
 public class DeleteDistributionList extends AdminCommonTest {
 
@@ -56,8 +56,8 @@ public class DeleteDistributionList extends AdminCommonTest {
 		DistributionListItem dl = new DistributionListItem();
 		String dlEmailAddress=dl.getEmailAddress();
 
-		ZimbraAdminAccount.AdminConsoleAdmin().soapSend(
-				"<CreateDistributionListRequest xmlns='urn:zimbraAdmin'>"
+		ZmailAdminAccount.AdminConsoleAdmin().soapSend(
+				"<CreateDistributionListRequest xmlns='urn:zmailAdmin'>"
 				+			"<name>" + dlEmailAddress + "</name>"
 				+		"</CreateDistributionListRequest>");
 
@@ -78,12 +78,12 @@ public class DeleteDistributionList extends AdminCommonTest {
 
 
 		// Verify the dl does not exists in the ZCS
-		ZimbraAdminAccount.AdminConsoleAdmin().soapSend(
-				"<GetDistributionListRequest xmlns='urn:zimbraAdmin'>" +
+		ZmailAdminAccount.AdminConsoleAdmin().soapSend(
+				"<GetDistributionListRequest xmlns='urn:zmailAdmin'>" +
 				"<dl by='name'>"+dlEmailAddress+"</dl>"+
 		"</GetDistributionListRequest>");
 
-		Element response = ZimbraAdminAccount.AdminConsoleAdmin().soapSelectNode("//admin:GetDistributionListResponse/admin:dl", 1);
+		Element response = ZmailAdminAccount.AdminConsoleAdmin().soapSelectNode("//admin:GetDistributionListResponse/admin:dl", 1);
 		ZAssert.assertNull(response, "Verify the distribution list is deleted successfully");
 
 	}
@@ -106,8 +106,8 @@ public class DeleteDistributionList extends AdminCommonTest {
 		DistributionListItem dl = new DistributionListItem();
 		String dlEmailAddress=dl.getEmailAddress();
 
-		ZimbraAdminAccount.AdminConsoleAdmin().soapSend(
-				"<CreateDistributionListRequest xmlns='urn:zimbraAdmin'>"
+		ZmailAdminAccount.AdminConsoleAdmin().soapSend(
+				"<CreateDistributionListRequest xmlns='urn:zmailAdmin'>"
 				+			"<name>" + dlEmailAddress + "</name>"
 				+		"</CreateDistributionListRequest>");
 
@@ -128,12 +128,12 @@ public class DeleteDistributionList extends AdminCommonTest {
 
 
 		// Verify the dl does not exists in the ZCS
-		ZimbraAdminAccount.AdminConsoleAdmin().soapSend(
-				"<GetDistributionListRequest xmlns='urn:zimbraAdmin'>" +
+		ZmailAdminAccount.AdminConsoleAdmin().soapSend(
+				"<GetDistributionListRequest xmlns='urn:zmailAdmin'>" +
 				"<dl by='name'>"+dlEmailAddress+"</dl>"+
 		"</GetDistributionListRequest>");
 
-		Element response = ZimbraAdminAccount.AdminConsoleAdmin().soapSelectNode("//admin:GetDistributionListResponse/admin:dl", 1);
+		Element response = ZmailAdminAccount.AdminConsoleAdmin().soapSelectNode("//admin:GetDistributionListResponse/admin:dl", 1);
 		ZAssert.assertNull(response, "Verify the distribution list is deleted successfully");
 
 	}
@@ -157,8 +157,8 @@ public class DeleteDistributionList extends AdminCommonTest {
 		DistributionListItem dl = new DistributionListItem();
 		String dlEmailAddress=dl.getEmailAddress();
 
-		ZimbraAdminAccount.AdminConsoleAdmin().soapSend(
-				"<CreateDistributionListRequest xmlns='urn:zimbraAdmin'>"
+		ZmailAdminAccount.AdminConsoleAdmin().soapSend(
+				"<CreateDistributionListRequest xmlns='urn:zmailAdmin'>"
 				+			"<name>" + dlEmailAddress + "</name>"
 				+		"</CreateDistributionListRequest>");
 
@@ -183,12 +183,12 @@ public class DeleteDistributionList extends AdminCommonTest {
 
 
 		// Verify the dl does not exists in the ZCS
-		ZimbraAdminAccount.AdminConsoleAdmin().soapSend(
-				"<GetDistributionListRequest xmlns='urn:zimbraAdmin'>" +
+		ZmailAdminAccount.AdminConsoleAdmin().soapSend(
+				"<GetDistributionListRequest xmlns='urn:zmailAdmin'>" +
 				"<dl by='name'>"+dlEmailAddress+"</dl>"+
 		"</GetDistributionListRequest>");
 
-		Element response = ZimbraAdminAccount.AdminConsoleAdmin().soapSelectNode("//admin:GetDistributionListResponse/admin:dl", 1);
+		Element response = ZmailAdminAccount.AdminConsoleAdmin().soapSelectNode("//admin:GetDistributionListResponse/admin:dl", 1);
 		ZAssert.assertNull(response, "Verify the distribution list is deleted successfully");
 
 	}
@@ -212,8 +212,8 @@ public class DeleteDistributionList extends AdminCommonTest {
 		DistributionListItem dl = new DistributionListItem();
 		String dlEmailAddress=dl.getEmailAddress();
 
-		ZimbraAdminAccount.AdminConsoleAdmin().soapSend(
-				"<CreateDistributionListRequest xmlns='urn:zimbraAdmin'>"
+		ZmailAdminAccount.AdminConsoleAdmin().soapSend(
+				"<CreateDistributionListRequest xmlns='urn:zmailAdmin'>"
 				+			"<name>" + dlEmailAddress + "</name>"
 				+		"</CreateDistributionListRequest>");
 
@@ -238,12 +238,12 @@ public class DeleteDistributionList extends AdminCommonTest {
 
 
 		// Verify the dl does not exists in the ZCS
-		ZimbraAdminAccount.AdminConsoleAdmin().soapSend(
-				"<GetDistributionListRequest xmlns='urn:zimbraAdmin'>" +
+		ZmailAdminAccount.AdminConsoleAdmin().soapSend(
+				"<GetDistributionListRequest xmlns='urn:zmailAdmin'>" +
 				"<dl by='name'>"+dlEmailAddress+"</dl>"+
 		"</GetDistributionListRequest>");
 
-		Element response = ZimbraAdminAccount.AdminConsoleAdmin().soapSelectNode("//admin:GetDistributionListResponse/admin:dl", 1);
+		Element response = ZmailAdminAccount.AdminConsoleAdmin().soapSelectNode("//admin:GetDistributionListResponse/admin:dl", 1);
 		ZAssert.assertNull(response, "Verify the distribution list is deleted successfully");
 
 	}

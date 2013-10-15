@@ -14,36 +14,36 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.preferences.mail.signatures;
+package org.zmail.qa.selenium.projects.ajax.tests.preferences.mail.signatures;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 
-import com.zimbra.qa.selenium.framework.items.SignatureItem;
+import org.zmail.qa.selenium.framework.items.SignatureItem;
 
-import com.zimbra.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Action;
 
-import com.zimbra.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.HarnessException;
 
-import com.zimbra.qa.selenium.framework.util.SleepUtil;
-import com.zimbra.qa.selenium.framework.util.XmlStringUtil;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount.SOAP_DESTINATION_HOST_TYPE;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
-import com.zimbra.qa.selenium.projects.ajax.ui.preferences.signature.FormSignatureNew;
-import com.zimbra.qa.selenium.projects.ajax.ui.preferences.signature.PageSignature;
-import com.zimbra.qa.selenium.projects.ajax.ui.preferences.signature.FormSignatureNew.Field;
-import com.zimbra.qa.selenium.projects.ajax.ui.preferences.signature.PageSignature.Locators;
+import org.zmail.qa.selenium.framework.util.SleepUtil;
+import org.zmail.qa.selenium.framework.util.XmlStringUtil;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.framework.util.ZmailAccount.SOAP_DESTINATION_HOST_TYPE;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
+import org.zmail.qa.selenium.projects.ajax.ui.preferences.signature.FormSignatureNew;
+import org.zmail.qa.selenium.projects.ajax.ui.preferences.signature.PageSignature;
+import org.zmail.qa.selenium.projects.ajax.ui.preferences.signature.FormSignatureNew.Field;
+import org.zmail.qa.selenium.projects.ajax.ui.preferences.signature.PageSignature.Locators;
 
 
 
 public class EditHtmlSignature extends AjaxCommonTest {
-	String sigName = "signame" + ZimbraSeleniumProperties.getUniqueString();
-	String bodyHTML = "text<strong>bold"+ ZimbraSeleniumProperties.getUniqueString() + "</strong>text";
+	String sigName = "signame" + ZmailSeleniumProperties.getUniqueString();
+	String bodyHTML = "text<strong>bold"+ ZmailSeleniumProperties.getUniqueString() + "</strong>text";
 	String contentHTML = XmlStringUtil.escapeXml("<html>" + "<head></head>"
 			+ "<body>" + bodyHTML + "</body>" + "</html>");
 
@@ -63,9 +63,9 @@ public class EditHtmlSignature extends AjaxCommonTest {
 	@BeforeClass(groups = { "always" })
 	public void CreateHtmlSignature() throws HarnessException {
 		System.out.println(this.sigName);
-		ZimbraAccount.AccountZWC().authenticate(SOAP_DESTINATION_HOST_TYPE.SERVER);
-		ZimbraAccount.AccountZWC().soapSend(
-				"<CreateSignatureRequest xmlns='urn:zimbraAccount'>"
+		ZmailAccount.AccountZWC().authenticate(SOAP_DESTINATION_HOST_TYPE.SERVER);
+		ZmailAccount.AccountZWC().soapSend(
+				"<CreateSignatureRequest xmlns='urn:zmailAccount'>"
 				+ "<signature name='" + this.sigName + "' >"
 				+ "<content type='text/html'>'" + this.contentHTML
 				+ "'</content>" + "</signature>"
@@ -82,8 +82,8 @@ public class EditHtmlSignature extends AjaxCommonTest {
 	@Test(description = "Edit signature through GUI and verify through soap", groups = { "smoke" })
 	public void EditHtmlSignature_01() throws HarnessException {
 
-		String sigEditName = "editsigname"+ ZimbraSeleniumProperties.getUniqueString();
-		String editbodyHTML = "edittextbold"+ ZimbraSeleniumProperties.getUniqueString() + "text";
+		String sigEditName = "editsigname"+ ZmailSeleniumProperties.getUniqueString();
+		String editbodyHTML = "edittextbold"+ ZmailSeleniumProperties.getUniqueString() + "text";
 
 		// HTML Signature is created
 		SignatureItem signature = SignatureItem.importFromSOAP(app.zGetActiveAccount(), this.sigName);

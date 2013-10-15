@@ -32,11 +32,11 @@
 
 package sample.oauth.provider;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.util.memcached.MemcachedMapPlusPutWithExtraParam;
-import com.zimbra.common.util.memcached.ZimbraMemcachedClient;
-import com.zimbra.cs.memcached.MemcachedConnector;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.util.memcached.MemcachedMapPlusPutWithExtraParam;
+import org.zmail.common.util.memcached.ZmailMemcachedClient;
+import org.zmail.cs.memcached.MemcachedConnector;
 import net.oauth.OAuthAccessor;
 
 public class OAuthTokenCache {
@@ -54,7 +54,7 @@ public class OAuthTokenCache {
     
 
     OAuthTokenCache() {
-        ZimbraMemcachedClient memcachedClient = MemcachedConnector.getClient();
+        ZmailMemcachedClient memcachedClient = MemcachedConnector.getClient();
         OAuthAccessorSerializer serializer = new OAuthAccessorSerializer();
         mMemcachedLookup = new MemcachedMapPlusPutWithExtraParam<OAuthTokenCacheKey, OAuthAccessor>(memcachedClient, serializer); 
     }
@@ -64,7 +64,7 @@ public class OAuthTokenCache {
     }
     
     private void put(OAuthTokenCacheKey key, OAuthAccessor accessor) throws ServiceException {
-        mMemcachedLookup.put(key, accessor,OAUTH_TOKEN_EXPIRY,ZimbraMemcachedClient.DEFAULT_TIMEOUT);
+        mMemcachedLookup.put(key, accessor,OAUTH_TOKEN_EXPIRY,ZmailMemcachedClient.DEFAULT_TIMEOUT);
     }
     
     public static OAuthAccessor get(String consumer_token,String token_type) throws ServiceException {
@@ -80,7 +80,7 @@ public class OAuthTokenCache {
         }
     	
     	OAuthTokenCacheKey key = new OAuthTokenCacheKey(consumer_token,key_prefix);
-        ZimbraLog.extensions.debug("get type: "+token_type+" token from memcache with key: "+key.getKeyPrefix()+key.getKeyValue()+".");
+        ZmailLog.extensions.debug("get type: "+token_type+" token from memcache with key: "+key.getKeyPrefix()+key.getKeyValue()+".");
         
         OAuthAccessor cache = sTheInstance.get(key);
         
@@ -108,7 +108,7 @@ public class OAuthTokenCache {
     		//	consumer_token = accessor.requestToken;
     			OAuthTokenCacheKey removable_key = new OAuthTokenCacheKey(accessor.requestToken,OAuthTokenCacheKey.REQUEST_TOKEN_PREFIX);
     	        
-    			ZimbraLog.extensions.debug("remove type: req_token token from memcache with key: "+removable_key.getKeyPrefix()+removable_key.getKeyValue()+".");
+    			ZmailLog.extensions.debug("remove type: req_token token from memcache with key: "+removable_key.getKeyPrefix()+removable_key.getKeyValue()+".");
     	        
     	    	sTheInstance.remove(removable_key);
     		}
@@ -123,7 +123,7 @@ public class OAuthTokenCache {
         
         OAuthTokenCacheKey key = new OAuthTokenCacheKey(consumer_token,key_prefix);
         
-        ZimbraLog.extensions.debug("put type: "+token_type+" token into memcache with key: "+key.getKeyPrefix()+key.getKeyValue()+".");
+        ZmailLog.extensions.debug("put type: "+token_type+" token into memcache with key: "+key.getKeyPrefix()+key.getKeyValue()+".");
         
         
         // if no effective ACL, return an empty ACL
@@ -150,7 +150,7 @@ public class OAuthTokenCache {
     	
     	OAuthTokenCacheKey key = new OAuthTokenCacheKey(consumer_token,key_prefix);
     	
-    	ZimbraLog.extensions.debug("remove type: "+token_type+" token from memcache with key: "+key.getKeyValue()+".");
+    	ZmailLog.extensions.debug("remove type: "+token_type+" token from memcache with key: "+key.getKeyValue()+".");
         
     	sTheInstance.remove(key);
     }

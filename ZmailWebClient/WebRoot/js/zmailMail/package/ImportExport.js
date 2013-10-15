@@ -13,9 +13,9 @@
  * ***** END LICENSE BLOCK *****
  */
 
-AjxPackage.require("zimbraMail.share.controller.ZmImportExportController");
-AjxPackage.require("zimbraMail.share.view.ZmImportExportBaseView");
-AjxPackage.require("zimbraMail.share.view.ZmExportView");
-AjxPackage.require("zimbraMail.share.view.ZmImportView");
-AjxPackage.require("zimbraMail.prefs.view.ZmImportExportPage");
+AjxPackage.require("zmailMail.share.controller.ZmImportExportController");
+AjxPackage.require("zmailMail.share.view.ZmImportExportBaseView");
+AjxPackage.require("zmailMail.share.view.ZmExportView");
+AjxPackage.require("zmailMail.share.view.ZmImportView");
+AjxPackage.require("zmailMail.prefs.view.ZmImportExportPage");
 

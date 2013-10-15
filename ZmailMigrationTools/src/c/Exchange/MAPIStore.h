@@ -16,7 +16,7 @@
  */
 #pragma once
 
-namespace Zimbra
+namespace Zmail
 {
 namespace MAPI
 {
@@ -37,7 +37,7 @@ private:
     LPMDB m_Store;
     LPMAPISESSION m_mapiSession;
     SBinaryArray m_specialFolderIds;
-    Zimbra::Util::CriticalSection cs_store;
+    Zmail::Util::CriticalSection cs_store;
 
 public:
     MAPIStore();

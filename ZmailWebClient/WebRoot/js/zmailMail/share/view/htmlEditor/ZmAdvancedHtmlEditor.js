@@ -613,7 +613,7 @@ function(id, content) {
         // General options
 		mode :  (this._mode == DwtHtmlEditor.HTML)? "exact" : "none",
 		elements:  id,
-        plugins : "advlist,inlinepopups,table,paste,directionality,emotions,-zimbraplugin,-zbreakquote" + (AjxEnv.isIE ? "" : ",autolink"),
+        plugins : "advlist,inlinepopups,table,paste,directionality,emotions,-zmailplugin,-zbreakquote" + (AjxEnv.isIE ? "" : ",autolink"),
 		theme : "advanced",
         theme_advanced_buttons1 : "fontselect,fontsizeselect,forecolor,backcolor,|,bold,italic,underline,strikethrough,|,bullist,numlist,|,outdent,indent,|,justifyleft,justifycenter,justifyright,|,image,link,unlink,emotions,|,ltr,rtl,|,toggle",
         theme_advanced_buttons2 : "formatselect,undo,redo,|,removeformat,|,pastetext,|,tablecontrols,|,blockquote,hr,charmap",
@@ -1161,9 +1161,9 @@ function(ev) {
 		case "add":
 			val = orig;
 			// add word to user's personal dictionary
-			var soapDoc = AjxSoapDoc.create("ModifyPrefsRequest", "urn:zimbraAccount");
+			var soapDoc = AjxSoapDoc.create("ModifyPrefsRequest", "urn:zmailAccount");
 			var prefEl = soapDoc.set("pref", val);
-			prefEl.setAttribute("name", "+zimbraPrefSpellIgnoreWord");
+			prefEl.setAttribute("name", "+zmailPrefSpellIgnoreWord");
 			var params = {
 				soapDoc: soapDoc,
 				asyncMode: true,

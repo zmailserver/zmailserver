@@ -1,21 +1,21 @@
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.performance.compose;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.performance.compose;
 
 import java.io.File;
 import java.util.HashMap;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.LmtpInject;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.framework.util.performance.PerfKey;
-import com.zimbra.qa.selenium.framework.util.performance.PerfMetrics;
-import com.zimbra.qa.selenium.framework.util.performance.PerfToken;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.DisplayMail;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.LmtpInject;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.framework.util.performance.PerfKey;
+import org.zmail.qa.selenium.framework.util.performance.PerfMetrics;
+import org.zmail.qa.selenium.framework.util.performance.PerfToken;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.DisplayMail;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew;
 
 public class ZmMailAppReplyCompose extends AjaxCommonTest {
 
@@ -26,7 +26,7 @@ public class ZmMailAppReplyCompose extends AjaxCommonTest {
 		super.startingAccountPreferences = new HashMap<String, String>() {
 			private static final long serialVersionUID = 7525760124523255182L;
 			{
-				put("zimbraPrefComposeFormat", "text");
+				put("zmailPrefComposeFormat", "text");
 			}
 		};
 
@@ -35,7 +35,7 @@ public class ZmMailAppReplyCompose extends AjaxCommonTest {
 	@Test(description = "Measure the time to load reply-compose  window for simple message", groups = { "performance" })
 	public void ZmMailAppReplyCompose_01() throws HarnessException {
 
-		String mime = ZimbraSeleniumProperties.getBaseDirectory() + "/data/public/mime/email02/mime01.txt";
+		String mime = ZmailSeleniumProperties.getBaseDirectory() + "/data/public/mime/email02/mime01.txt";
 		String subject = "Subject13155016716713";
 
 		LmtpInject.injectFile(app.zGetActiveAccount().EmailAddress, new File(mime));
@@ -59,7 +59,7 @@ public class ZmMailAppReplyCompose extends AjaxCommonTest {
 	@Test(description = "Measure the time to load reply-compose  window for large conversation", groups = { "performance" })
 	public void ZmMailAppReplyCompose_02() throws HarnessException {
 
-		String mime = ZimbraSeleniumProperties.getBaseDirectory() + "/data/public/mime/largeconversation_mime.txt";
+		String mime = ZmailSeleniumProperties.getBaseDirectory() + "/data/public/mime/largeconversation_mime.txt";
 		String subject = "RESOLVED BUGS";
 
 		LmtpInject.injectFile(app.zGetActiveAccount().EmailAddress, new File(mime));
@@ -81,7 +81,7 @@ public class ZmMailAppReplyCompose extends AjaxCommonTest {
 	@Test(description = "Measure the time to load reply-compose window for invite conversation", groups = { "performance" })
 	public void ZmMailAppReplyCompose_03() throws HarnessException {
 
-		String mime = ZimbraSeleniumProperties.getBaseDirectory() + "/data/public/mime/Invite_Message.txt";
+		String mime = ZmailSeleniumProperties.getBaseDirectory() + "/data/public/mime/Invite_Message.txt";
 		String subject = "Test Edit Reply";
 
 		LmtpInject.injectFile(app.zGetActiveAccount().EmailAddress, new File(mime));
@@ -104,7 +104,7 @@ public class ZmMailAppReplyCompose extends AjaxCommonTest {
 	@Test(description = "Measure the time to load reply-compose window for invite conversation with 7mb attachment", groups = { "performance" })
 	public void ZmMailAppReplyCompose_04() throws HarnessException {
 
-		String mime = ZimbraSeleniumProperties.getBaseDirectory() + "/data/public/mime/inviteMessageWith7MBAttachment.txt";
+		String mime = ZmailSeleniumProperties.getBaseDirectory() + "/data/public/mime/inviteMessageWith7MBAttachment.txt";
 		String subject = "Invite Message with 7 MB attachment";
 
 		LmtpInject.injectFile(app.zGetActiveAccount().EmailAddress, new File(mime));

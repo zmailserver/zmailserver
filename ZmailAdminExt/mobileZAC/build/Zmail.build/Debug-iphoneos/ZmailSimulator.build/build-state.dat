@@ -1,14 +1,14 @@
-TZimbraSimulator
+TZmailSimulator
 v7
 r0
 t315810056.668403
 cCheck dependencies
-cCpResource build/Debug-iphoneos/ZimbraSimulator.app/ResourceRules.plist /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/ResourceRules.plist
-cProcessInfoPlistFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZimbraSimulator.app/Info.plist ZimbraSimulator-Info.plist
-cProcessProductPackaging "/Users/qinan/Library/MobileDevice/Provisioning Profiles/E968C65F-C46F-4185-9DCA-A3A486BFB887.mobileprovision" /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZimbraSimulator.app/embedded.mobileprovision
-cTouch /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZimbraSimulator.app
-cProcessProductPackaging /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/Entitlements.plist /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/ZimbraSimulator.xcent
-cCodeSign /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZimbraSimulator.app
+cCpResource build/Debug-iphoneos/ZmailSimulator.app/ResourceRules.plist /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/ResourceRules.plist
+cProcessInfoPlistFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZmailSimulator.app/Info.plist ZmailSimulator-Info.plist
+cProcessProductPackaging "/Users/qinan/Library/MobileDevice/Provisioning Profiles/E968C65F-C46F-4185-9DCA-A3A486BFB887.mobileprovision" /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZmailSimulator.app/embedded.mobileprovision
+cTouch /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZmailSimulator.app
+cProcessProductPackaging /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/Entitlements.plist /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/ZmailSimulator.xcent
+cCodeSign /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZmailSimulator.app
 
 N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk
 c000000004CC7DC9E0000000000000110
@@ -89,7 +89,7 @@ N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/AccountListViewC
 c000000004D19AA1A0000000000002CD6
 t1293527578
 s11478
-i"ZimbraAppDelegate.h"
+i"ZmailAppDelegate.h"
 i"AccountListViewControllerExt.h"
 i"AccountViewControllerExt.h"
 i"GetController.h"
@@ -107,7 +107,7 @@ N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/AccountStatusCon
 c000000004D10366F0000000000002897
 t1292908143
 s10391
-i"ZimbraAppDelegate.h"
+i"ZmailAppDelegate.h"
 i"AccountStatusController.h"
 i"BoxMaker.h"
 i"UICustomSwitch.h"
@@ -175,7 +175,7 @@ N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/ChangePasswordCo
 c000000004D103A230000000000001F20
 t1292909091
 s7968
-i"ZimbraAppDelegate.h"
+i"ZmailAppDelegate.h"
 i"ChangePasswordController.h"
 i"BoxMaker.h"
 i"UICustomSwitch.h"
@@ -232,7 +232,7 @@ N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/NewAccountContro
 c000000004D1B5E9F00000000000036ED
 t1293639327
 s14061
-i"ZimbraAppDelegate.h"
+i"ZmailAppDelegate.h"
 i"NewAccountController.h"
 i"BoxMaker.h"
 i"UICustomSwitch.h"
@@ -320,7 +320,7 @@ N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/StatusListViewCo
 c000000004D11A3770000000000001F5E
 t1293001591
 s8030
-i"ZimbraAppDelegate.h"
+i"ZmailAppDelegate.h"
 i"StatusListViewController.h"
 i"StatusViewController.h"
 i"GetController.h"
@@ -377,17 +377,17 @@ t1292929393
 s8728
 i"ZimGraphView.h"
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/ZimbraAppDelegate.h
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/ZmailAppDelegate.h
 c000000004D103301000000000000032A
 t1292907265
 s810
 i<UIKit/UIKit.h>
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/ZimbraAppDelegate.m
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/ZmailAppDelegate.m
 c000000004D22AA8E0000000000001855
 t1294117518
 s6229
-i"ZimbraAppDelegate.h"
+i"ZmailAppDelegate.h"
 i"math.h"
 i"ServerListViewController.h"
 i"BoxMaker.h"
@@ -401,7 +401,7 @@ i"AccountStatusController.h"
 i"SecurityController.h"
 i"RotatingTabBarController.h"
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/Zimbra_Prefix.pch
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/Zmail_Prefix.pch
 c000000004D03AA1300000000000000B5
 t1292085779
 s181
@@ -418,7 +418,7 @@ N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/ZmprovController
 c000000004D1033FD0000000000001C3C
 t1292907517
 s7228
-i"ZimbraAppDelegate.h"
+i"ZmailAppDelegate.h"
 i"ZmprovController.h"
 i"BoxMaker.h"
 i"GetController.h"
@@ -455,248 +455,248 @@ c0000000047E9896200000000000031C7
 t1206487394
 s12743
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app
 t1294119036
 s1088
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app.dSYM
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app.dSYM
 t1294119035
 s102
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/Default.png
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/Default.png
 t1294119033
 s69168
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/Icon.png
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/Icon.png
 t1294119032
 s3346
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/Info.plist
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/Info.plist
 t1294119032
 s726
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/PkgInfo
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/PkgInfo
 t1294119032
 s8
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/ResourceRules.plist
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/ResourceRules.plist
 t1294119032
 s485
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/Zimbra
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/Zmail
 t1294119035
 s267072
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/account.png
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/account.png
 t1294119033
 s16943
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/account_black.png
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/account_black.png
 t1294119033
 s11560
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/account_blue.png
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/account_blue.png
 t1294119033
 s11995
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/account_red.png
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/account_red.png
 t1294119033
 s12888
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/add.png
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/add.png
 t1294119033
 s8491
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/alert.png
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/alert.png
 t1294119033
 s14053
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/configure.png
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/configure.png
 t1294119033
 s13561
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/edit.png
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/edit.png
 t1294119033
 s4643
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/embedded.mobileprovision
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/embedded.mobileprovision
 t1294119035
 s7254
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/green.png
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/green.png
 t1294119032
 s18986
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/helloworld.png
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/helloworld.png
 t1294119032
 s17258
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/imgserver2.jpg
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/imgserver2.jpg
 t1294119032
 s683
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/lock.png
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/lock.png
 t1294119033
 s7975
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/msg.png
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/msg.png
 t1294119033
 s19753
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/password.png
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/password.png
 t1294119033
 s8954
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/red.png
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/red.png
 t1294119033
 s19281
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/servers.png
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/servers.png
 t1294119033
 s11327
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/switchBlueBg.png
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/switchBlueBg.png
 t1294119033
 s829
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/switchOffPlain.png
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/switchOffPlain.png
 t1294119033
 s681
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/switchThumb.png
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/switchThumb.png
 t1294119033
 s671
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/yellow.png
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/yellow.png
 t1294119033
 s22609
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/zmprov.gif
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/zmprov.gif
 t1294119033
 s1027
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZimbraSimulator.app
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZmailSimulator.app
 t1294117256
 s204
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZimbraSimulator.app/Info.plist
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZmailSimulator.app/Info.plist
 t1294117256
 s712
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZimbraSimulator.app/PkgInfo
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZmailSimulator.app/PkgInfo
 t1294117256
 s8
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZimbraSimulator.app/ResourceRules.plist
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZmailSimulator.app/ResourceRules.plist
 t1294117256
 s485
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZimbraSimulator.app/embedded.mobileprovision
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZmailSimulator.app/embedded.mobileprovision
 t1294117256
 s7254
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/AccountListViewController.o
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/AccountListViewController.o
 t2
 s0
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/AccountListViewControllerExt.o
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/AccountListViewControllerExt.o
 t2
 s0
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/AccountStatusController.o
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/AccountStatusController.o
 t2
 s0
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/AccountViewController.o
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/AccountViewController.o
 t2
 s0
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/AccountViewControllerExt.o
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/AccountViewControllerExt.o
 t2
 s0
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/BoxMaker.o
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/BoxMaker.o
 t2
 s0
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/BrightnessController.o
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/BrightnessController.o
 t2
 s0
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/ChangePasswordController.o
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/ChangePasswordController.o
 t2
 s0
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/GetController.o
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/GetController.o
 t2
 s0
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/NetworkController.o
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/NetworkController.o
 t2
 s0
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/NewAccountController.o
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/NewAccountController.o
 t2
 s0
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/PutController.o
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/PutController.o
 t2
 s0
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/RotatingTabBarController.o
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/RotatingTabBarController.o
 t2
 s0
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/SecurityController.o
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/SecurityController.o
 t2
 s0
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/ServerListViewController.o
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/ServerListViewController.o
 t2
 s0
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/StatisticsController.o
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/StatisticsController.o
 t2
 s0
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/StatusListViewController.o
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/StatusListViewController.o
 t2
 s0
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/StatusViewController.o
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/StatusViewController.o
 t2
 s0
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/UICustomSwitch.o
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/UICustomSwitch.o
 t2
 s0
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/UICustomSwitchExt.o
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/UICustomSwitchExt.o
 t2
 s0
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/ZimGraphView.o
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/ZimGraphView.o
 t2
 s0
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/Zimbra.LinkFileList
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/Zmail.LinkFileList
 c00000000000000000000000000000000
 t2
 s0
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/ZimbraAppDelegate.o
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/ZmailAppDelegate.o
 t2
 s0
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/ZmprovController.o
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/ZmprovController.o
 t2
 s0
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/main.o
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/main.o
 t2
 s0
 
-N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/ZimbraSimulator.xcent
+N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/ZmailSimulator.xcent
 t1294117256
 s490
 
@@ -729,7 +729,7 @@ N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/main.m
 c000000004D0AEF9000000000000000EC
 t1292562320
 s236
-i"ZimbraAppDelegate.h"
+i"ZmailAppDelegate.h"
 
 N/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/msg.png
 c0000000047E9895A00000000000066BD
@@ -776,7 +776,7 @@ c000000004CE49BC80000000000000403
 t1290050504
 s1027
 
-N/var/folders/nD/nDeLngCgGPmq4wvMv+UT3E+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Zimbra_Prefix-grondyktundmqvdesuuzumxlells/Zimbra_Prefix.pch.gch
+N/var/folders/nD/nDeLngCgGPmq4wvMv+UT3E+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Zmail_Prefix-grondyktundmqvdesuuzumxlells/Zmail_Prefix.pch.gch
 t1293611263
 s9983704
 
@@ -785,7 +785,7 @@ c000000004D1B6CD20000000000000315
 t1293642962
 s789
 
-NZimbraSimulator-Info.plist
+NZmailSimulator-Info.plist
 c000000004D22A9BF00000000000002A4
 t1294117311
 s676
@@ -794,224 +794,224 @@ CCheck dependencies
 r0
 lSLF07#2@18"Check dependencies315810056#315810056#0(0"0(0#1#0"8620049504#0"0#
 
-CCodeSign /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app
+CCodeSign /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app
 r0
 
-CCodeSign /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZimbraSimulator.app
+CCodeSign /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZmailSimulator.app
 s315810056.614800
 e315810056.668328
 r0
 xCodeSign
-x/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZimbraSimulator.app
-o/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZimbraSimulator.app: object file format invalid or unsuitable
-lSLF07#2@49"CodeSign build/Debug-iphoneos/ZimbraSimulator.app315810056#315810056#0(196"/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZimbraSimulator.app: object file format invalid or unsuitableCommand /usr/bin/codesign failed with exit code 11(4@49"Command /usr/bin/codesign failed with exit code 1315810056#18446744073709551615#0#0(1@0"0(0#0#103"/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZimbraSimulator.app8618495264#774"    cd /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    setenv _CODESIGN_ALLOCATE_ /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/codesign_allocate    /usr/bin/codesign -f -s "iPhone Developer: HAIRONG CAO (B6328BQBUM)" --resource-rules=/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZimbraSimulator.app/ResourceRules.plist --entitlements /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/ZimbraSimulator.xcent /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZimbraSimulator.app1#
+x/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZmailSimulator.app
+o/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZmailSimulator.app: object file format invalid or unsuitable
+lSLF07#2@49"CodeSign build/Debug-iphoneos/ZmailSimulator.app315810056#315810056#0(196"/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZmailSimulator.app: object file format invalid or unsuitableCommand /usr/bin/codesign failed with exit code 11(4@49"Command /usr/bin/codesign failed with exit code 1315810056#18446744073709551615#0#0(1@0"0(0#0#103"/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZmailSimulator.app8618495264#774"    cd /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    setenv _CODESIGN_ALLOCATE_ /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/codesign_allocate    /usr/bin/codesign -f -s "iPhone Developer: HAIRONG CAO (B6328BQBUM)" --resource-rules=/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZmailSimulator.app/ResourceRules.plist --entitlements /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/ZmailSimulator.xcent /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZmailSimulator.app1#
 
-CCompileC build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/AccountListViewController.o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/AccountListViewController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+CCompileC build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/AccountListViewController.o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/AccountListViewController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
 r0
 
-CCompileC build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/AccountListViewControllerExt.o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/AccountListViewControllerExt.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+CCompileC build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/AccountListViewControllerExt.o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/AccountListViewControllerExt.m normal armv6 objective-c com.apple.compilers.gcc.4_2
 r0
 
-CCompileC build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/AccountStatusController.o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/AccountStatusController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+CCompileC build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/AccountStatusController.o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/AccountStatusController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
 r0
 
-CCompileC build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/AccountViewController.o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/AccountViewController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+CCompileC build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/AccountViewController.o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/AccountViewController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
 r0
 
-CCompileC build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/AccountViewControllerExt.o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/AccountViewControllerExt.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+CCompileC build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/AccountViewControllerExt.o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/AccountViewControllerExt.m normal armv6 objective-c com.apple.compilers.gcc.4_2
 r0
 
-CCompileC build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/BoxMaker.o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/BoxMaker.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+CCompileC build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/BoxMaker.o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/BoxMaker.m normal armv6 objective-c com.apple.compilers.gcc.4_2
 r0
 
-CCompileC build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/BrightnessController.o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/BrightnessController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+CCompileC build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/BrightnessController.o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/BrightnessController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
 r0
 
-CCompileC build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/ChangePasswordController.o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/ChangePasswordController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+CCompileC build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/ChangePasswordController.o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/ChangePasswordController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
 r0
 
-CCompileC build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/GetController.o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/GetController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+CCompileC build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/GetController.o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/GetController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
 r0
 
-CCompileC build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/NetworkController.o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/NetworkController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+CCompileC build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/NetworkController.o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/NetworkController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
 r0
 
-CCompileC build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/NewAccountController.o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/NewAccountController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+CCompileC build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/NewAccountController.o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/NewAccountController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
 r0
 
-CCompileC build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/PutController.o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/PutController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+CCompileC build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/PutController.o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/PutController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
 r0
 
-CCompileC build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/RotatingTabBarController.o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/RotatingTabBarController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+CCompileC build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/RotatingTabBarController.o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/RotatingTabBarController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
 r0
 
-CCompileC build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/SecurityController.o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/SecurityController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+CCompileC build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/SecurityController.o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/SecurityController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
 r0
 
-CCompileC build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/ServerListViewController.o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/ServerListViewController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+CCompileC build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/ServerListViewController.o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/ServerListViewController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
 r0
 
-CCompileC build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/StatisticsController.o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/StatisticsController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+CCompileC build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/StatisticsController.o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/StatisticsController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
 r0
 
-CCompileC build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/StatusListViewController.o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/StatusListViewController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+CCompileC build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/StatusListViewController.o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/StatusListViewController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
 r0
 
-CCompileC build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/StatusViewController.o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/StatusViewController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+CCompileC build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/StatusViewController.o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/StatusViewController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
 r0
 
-CCompileC build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/UICustomSwitch.o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/UICustomSwitch.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+CCompileC build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/UICustomSwitch.o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/UICustomSwitch.m normal armv6 objective-c com.apple.compilers.gcc.4_2
 r0
 
-CCompileC build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/UICustomSwitchExt.o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/UICustomSwitchExt.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+CCompileC build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/UICustomSwitchExt.o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/UICustomSwitchExt.m normal armv6 objective-c com.apple.compilers.gcc.4_2
 r0
 
-CCompileC build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/ZimGraphView.o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/ZimGraphView.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+CCompileC build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/ZimGraphView.o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/ZimGraphView.m normal armv6 objective-c com.apple.compilers.gcc.4_2
 r0
 
-CCompileC build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/ZimbraAppDelegate.o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/ZimbraAppDelegate.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+CCompileC build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/ZmailAppDelegate.o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/ZmailAppDelegate.m normal armv6 objective-c com.apple.compilers.gcc.4_2
 r0
 
-CCompileC build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/ZmprovController.o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/ZmprovController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+CCompileC build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/ZmprovController.o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/ZmprovController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
 r0
 
-CCompileC build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Objects-normal/armv6/main.o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/main.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+CCompileC build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Objects-normal/armv6/main.o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/main.m normal armv6 objective-c com.apple.compilers.gcc.4_2
 r0
 
-CCopyPNGFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/Default.png Default.png
+CCopyPNGFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/Default.png Default.png
 r0
 
-CCopyPNGFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/Icon.png Icon.png
+CCopyPNGFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/Icon.png Icon.png
 r0
 
-CCopyPNGFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/account.png account.png
+CCopyPNGFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/account.png account.png
 r0
 
-CCopyPNGFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/account_black.png account_black.png
+CCopyPNGFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/account_black.png account_black.png
 r0
 
-CCopyPNGFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/account_blue.png account_blue.png
+CCopyPNGFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/account_blue.png account_blue.png
 r0
 
-CCopyPNGFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/account_red.png account_red.png
+CCopyPNGFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/account_red.png account_red.png
 r0
 
-CCopyPNGFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/add.png add.png
+CCopyPNGFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/add.png add.png
 r0
 
-CCopyPNGFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/alert.png alert.png
+CCopyPNGFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/alert.png alert.png
 r0
 
-CCopyPNGFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/configure.png configure.png
+CCopyPNGFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/configure.png configure.png
 r0
 
-CCopyPNGFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/edit.png edit.png
+CCopyPNGFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/edit.png edit.png
 r0
 
-CCopyPNGFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/green.png green.png
+CCopyPNGFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/green.png green.png
 r0
 
-CCopyPNGFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/helloworld.png helloworld.png
+CCopyPNGFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/helloworld.png helloworld.png
 r0
 
-CCopyPNGFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/lock.png lock.png
+CCopyPNGFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/lock.png lock.png
 r0
 
-CCopyPNGFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/msg.png msg.png
+CCopyPNGFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/msg.png msg.png
 r0
 
-CCopyPNGFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/password.png password.png
+CCopyPNGFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/password.png password.png
 r0
 
-CCopyPNGFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/red.png red.png
+CCopyPNGFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/red.png red.png
 r0
 
-CCopyPNGFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/servers.png servers.png
+CCopyPNGFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/servers.png servers.png
 r0
 
-CCopyPNGFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/switchBlueBg.png switchBlueBg.png
+CCopyPNGFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/switchBlueBg.png switchBlueBg.png
 r0
 
-CCopyPNGFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/switchOffPlain.png switchOffPlain.png
+CCopyPNGFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/switchOffPlain.png switchOffPlain.png
 r0
 
-CCopyPNGFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/switchThumb.png switchThumb.png
+CCopyPNGFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/switchThumb.png switchThumb.png
 r0
 
-CCopyPNGFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/yellow.png yellow.png
+CCopyPNGFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/yellow.png yellow.png
 r0
 
-CCpResource build/Debug-iphoneos/Zimbra.app/ResourceRules.plist /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/ResourceRules.plist
+CCpResource build/Debug-iphoneos/Zmail.app/ResourceRules.plist /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/ResourceRules.plist
 r0
 
-CCpResource build/Debug-iphoneos/Zimbra.app/imgserver2.jpg ../../../tmp/imgserver2.jpg
+CCpResource build/Debug-iphoneos/Zmail.app/imgserver2.jpg ../../../tmp/imgserver2.jpg
 r0
 
-CCpResource build/Debug-iphoneos/Zimbra.app/zmprov.gif zmprov.gif
+CCpResource build/Debug-iphoneos/Zmail.app/zmprov.gif zmprov.gif
 r0
 
-CCpResource build/Debug-iphoneos/ZimbraSimulator.app/ResourceRules.plist /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/ResourceRules.plist
+CCpResource build/Debug-iphoneos/ZmailSimulator.app/ResourceRules.plist /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/ResourceRules.plist
 s315810056.542362
 e315810056.609224
 r1
 xCpResource
-xbuild/Debug-iphoneos/ZimbraSimulator.app/ResourceRules.plist
+xbuild/Debug-iphoneos/ZmailSimulator.app/ResourceRules.plist
 x/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/ResourceRules.plist
-lSLF07#2@94"Copy /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/ResourceRules.plist315810056#315810056#0(0"0(0#0#89"/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/ResourceRules.plist8619963040#550"    cd /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -resolve-src-symlinks /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/ResourceRules.plist /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZimbraSimulator.app0#
+lSLF07#2@94"Copy /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/ResourceRules.plist315810056#315810056#0(0"0(0#0#89"/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/ResourceRules.plist8619963040#550"    cd /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -resolve-src-symlinks /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/ResourceRules.plist /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZmailSimulator.app0#
 
-CGenerateDSYMFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app.dSYM /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/Zimbra
+CGenerateDSYMFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app.dSYM /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/Zmail
 r0
 
-CLd /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/Zimbra normal armv6
+CLd /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/Zmail normal armv6
 r0
 
-CProcessInfoPlistFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/Info.plist "Info copy.plist"
+CProcessInfoPlistFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/Info.plist "Info copy.plist"
 r0
 
-CProcessInfoPlistFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZimbraSimulator.app/Info.plist ZimbraSimulator-Info.plist
+CProcessInfoPlistFile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZmailSimulator.app/Info.plist ZmailSimulator-Info.plist
 s315810056.543118
 e315810056.576944
 r1
 xProcessInfoPlistFile
-x/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZimbraSimulator.app/Info.plist
-xZimbraSimulator-Info.plist
-lSLF07#2@34"Process ZimbraSimulator-Info.plist315810056#315810056#0(0"0(0#0#89"/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/ZimbraSimulator-Info.plist8619919136#690"    cd /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    builtin-infoPlistUtility ZimbraSimulator-Info.plist -genpkginfo /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZimbraSimulator.app/PkgInfo -expandbuildsettings -format binary -platform iphoneos -resourcerulesfile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZimbraSimulator.app/ResourceRules.plist -o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZimbraSimulator.app/Info.plist0#
+x/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZmailSimulator.app/Info.plist
+xZmailSimulator-Info.plist
+lSLF07#2@34"Process ZmailSimulator-Info.plist315810056#315810056#0(0"0(0#0#89"/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/ZmailSimulator-Info.plist8619919136#690"    cd /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    builtin-infoPlistUtility ZmailSimulator-Info.plist -genpkginfo /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZmailSimulator.app/PkgInfo -expandbuildsettings -format binary -platform iphoneos -resourcerulesfile /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZmailSimulator.app/ResourceRules.plist -o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZmailSimulator.app/Info.plist0#
 
-CProcessPCH /var/folders/nD/nDeLngCgGPmq4wvMv+UT3E+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Zimbra_Prefix-grondyktundmqvdesuuzumxlells/Zimbra_Prefix.pch.gch Zimbra_Prefix.pch normal armv6 objective-c com.apple.compilers.gcc.4_2
+CProcessPCH /var/folders/nD/nDeLngCgGPmq4wvMv+UT3E+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Zmail_Prefix-grondyktundmqvdesuuzumxlells/Zmail_Prefix.pch.gch Zmail_Prefix.pch normal armv6 objective-c com.apple.compilers.gcc.4_2
 r0
 
-CProcessProductPackaging "/Users/qinan/Library/MobileDevice/Provisioning Profiles/E968C65F-C46F-4185-9DCA-A3A486BFB887.mobileprovision" /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app/embedded.mobileprovision
+CProcessProductPackaging "/Users/qinan/Library/MobileDevice/Provisioning Profiles/E968C65F-C46F-4185-9DCA-A3A486BFB887.mobileprovision" /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app/embedded.mobileprovision
 r0
 
-CProcessProductPackaging "/Users/qinan/Library/MobileDevice/Provisioning Profiles/E968C65F-C46F-4185-9DCA-A3A486BFB887.mobileprovision" /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZimbraSimulator.app/embedded.mobileprovision
+CProcessProductPackaging "/Users/qinan/Library/MobileDevice/Provisioning Profiles/E968C65F-C46F-4185-9DCA-A3A486BFB887.mobileprovision" /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZmailSimulator.app/embedded.mobileprovision
 s315810056.609316
 e315810056.610619
 r1
 xProcessProductPackaging
 x/Users/qinan/Library/MobileDevice/Provisioning Profiles/E968C65F-C46F-4185-9DCA-A3A486BFB887.mobileprovision
-x/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZimbraSimulator.app/embedded.mobileprovision
-lSLF07#2@200"ProcessProductPackaging "/Users/qinan/Library/MobileDevice/Provisioning Profiles/E968C65F-C46F-4185-9DCA-A3A486BFB887.mobileprovision" build/Debug-iphoneos/ZimbraSimulator.app/embedded.mobileprovision315810056#315810056#0(0"0(0#0#128"/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZimbraSimulator.app/embedded.mobileprovision30681223438467168#479"    cd /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    <com.apple.tools.product-pkg-utility> "/Users/qinan/Library/MobileDevice/Provisioning Profiles/E968C65F-C46F-4185-9DCA-A3A486BFB887.mobileprovision" -o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZimbraSimulator.app/embedded.mobileprovision0#
+x/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZmailSimulator.app/embedded.mobileprovision
+lSLF07#2@200"ProcessProductPackaging "/Users/qinan/Library/MobileDevice/Provisioning Profiles/E968C65F-C46F-4185-9DCA-A3A486BFB887.mobileprovision" build/Debug-iphoneos/ZmailSimulator.app/embedded.mobileprovision315810056#315810056#0(0"0(0#0#128"/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZmailSimulator.app/embedded.mobileprovision30681223438467168#479"    cd /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    <com.apple.tools.product-pkg-utility> "/Users/qinan/Library/MobileDevice/Provisioning Profiles/E968C65F-C46F-4185-9DCA-A3A486BFB887.mobileprovision" -o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZmailSimulator.app/embedded.mobileprovision0#
 
-CProcessProductPackaging /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/Entitlements.plist /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/Zimbra.xcent
+CProcessProductPackaging /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/Entitlements.plist /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/Zmail.xcent
 r0
 
-CProcessProductPackaging /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/Entitlements.plist /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/ZimbraSimulator.xcent
+CProcessProductPackaging /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/Entitlements.plist /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/ZmailSimulator.xcent
 s315810056.613117
 e315810056.614719
 r1
 xProcessProductPackaging
 x/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/Entitlements.plist
-x/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/ZimbraSimulator.xcent
-lSLF07#2@190"ProcessProductPackaging /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/Entitlements.plist build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/ZimbraSimulator.xcent315810056#315810056#0(0"0(0#0#140"/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/ZimbraSimulator.xcent8618695264#495"    cd /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    <com.apple.tools.product-pkg-utility> /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/Entitlements.plist -entitlements -format xml -o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zimbra.build/Debug-iphoneos/ZimbraSimulator.build/ZimbraSimulator.xcent0#
+x/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/ZmailSimulator.xcent
+lSLF07#2@190"ProcessProductPackaging /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/Entitlements.plist build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/ZmailSimulator.xcent315810056#315810056#0(0"0(0#0#140"/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/ZmailSimulator.xcent8618695264#495"    cd /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    <com.apple.tools.product-pkg-utility> /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/Entitlements.plist -entitlements -format xml -o /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Zmail.build/Debug-iphoneos/ZmailSimulator.build/ZmailSimulator.xcent0#
 
-CTouch /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zimbra.app
+CTouch /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/Zmail.app
 r0
 
-CTouch /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZimbraSimulator.app
+CTouch /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZmailSimulator.app
 s315810056.610669
 e315810056.613019
 r1
 xTouch
-x/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZimbraSimulator.app
-lSLF07#2@109"Touch /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZimbraSimulator.app315810056#315810056#0(0"0(0#0#0"8618900672#320"    cd /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /usr/bin/touch -c /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZimbraSimulator.app0#
+x/Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZmailSimulator.app
+lSLF07#2@109"Touch /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZmailSimulator.app315810056#315810056#0(0"0(0#0#0"8618900672#320"    cd /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /usr/bin/touch -c /Users/qinan/workspace/mobile/testbed/iPhoneZAC3/mobileZAC3apn/build/Debug-iphoneos/ZmailSimulator.app0#
 

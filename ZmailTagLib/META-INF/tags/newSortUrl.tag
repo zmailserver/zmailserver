@@ -15,13 +15,13 @@
 <%@ tag body-content="empty" dynamic-attributes="dynattrs" %>
 <%@ attribute name="var" rtexprvalue="false" required="true" type="java.lang.String" %>
 <%@ attribute name="value" rtexprvalue="true" required="true" type="java.lang.String" %>
-<%@ attribute name="context" rtexprvalue="true" required="true" type="com.zimbra.cs.taglib.tag.SearchContext" %>
+<%@ attribute name="context" rtexprvalue="true" required="true" type="org.zmail.cs.taglib.tag.SearchContext" %>
 <%@ attribute name="sort" rtexprvalue="true" required="true" type="java.lang.String" %>
 <%@ variable name-from-attribute="var" alias='urlVar' scope="AT_BEGIN" variable-class="java.lang.String" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
 
 <c:url value="${value}" var="urlVar">
     <c:if test="${!empty context.sq}"><c:param name='sq' value='${context.sq}'/></c:if>

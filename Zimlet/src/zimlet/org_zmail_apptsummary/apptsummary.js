@@ -18,16 +18,16 @@
  * Inserts email with current day's appointments on first login.
  * 
  */
-com_zimbra_apptsummary_HandlerObject = function() {
+org_zmail_apptsummary_HandlerObject = function() {
 };
 
-com_zimbra_apptsummary_HandlerObject.prototype = new ZmZimletBase;
-com_zimbra_apptsummary_HandlerObject.prototype.constructor = com_zimbra_apptsummary_HandlerObject;
+org_zmail_apptsummary_HandlerObject.prototype = new ZmZimletBase;
+org_zmail_apptsummary_HandlerObject.prototype.constructor = org_zmail_apptsummary_HandlerObject;
 
 /**
  * Simplify Zimlet handler name
  */
-var ApptSummaryZimlet = com_zimbra_apptsummary_HandlerObject;
+var ApptSummaryZimlet = org_zmail_apptsummary_HandlerObject;
 
 /**
  * Defines the "regular only" type for appointment summary HTML.
@@ -399,7 +399,7 @@ function(bodyHtml, bodyText, hasError) {
 			subject = subject.replace("{1}", this.getMessage("ApptSummary_appointment"));
 		}
 	}
-	var jsonObj = {SendMsgRequest:{_jsns:"urn:zimbraMail"}};
+	var jsonObj = {SendMsgRequest:{_jsns:"urn:zmailMail"}};
 	var request = jsonObj.SendMsgRequest;
 	request.suid = (new Date()).getTime();
 	var msgNode = request.m = {};

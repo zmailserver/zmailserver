@@ -24,12 +24,12 @@ ZaClientUploadXFormView.prototype.getTabIcon =
 
 ZaClientUploadXFormView.prototype.getTabTitle =
     function () {
-        return com_zimbra_clientuploader.Client_upload_title;
+        return org_zmail_clientuploader.Client_upload_title;
     }
 
 ZaClientUploadXFormView.prototype.getTitle =
     function () {
-        return com_zimbra_clientuploader.Client_upload_title;
+        return org_zmail_clientuploader.Client_upload_title;
     }
 
 ZaClientUploadXFormView.prototype.setObject =
@@ -63,8 +63,8 @@ ZaClientUploadXFormView.myXFormModifier = function(xFormObject) {
         {type:_SWITCH_, align:_LEFT_, valign:_TOP_, items:[{type:_ZATABCASE_,id:"client_upload_view_tab",  numCols:1, width:"100%", caseKey:1,
             paddingStyle:(appNewUI? "padding-left:15px;":null), width:(appNewUI? "98%":"100%"), cellpadding:(appNewUI?2:0),
             items: [
-                {type:_OUTPUT_, label:null, value:com_zimbra_clientuploader.Client_upload_title, colSpan:"*", cssStyle:"font-size:12pt;	font-weight: bold;"},
-                {type:_OUTPUT_, label:null, value:com_zimbra_clientuploader.Client_upload_desc, colSpan:"*", cssStyle:"font-size:12px;"},
+                {type:_OUTPUT_, label:null, value:org_zmail_clientuploader.Client_upload_title, colSpan:"*", cssStyle:"font-size:12pt;	font-weight: bold;"},
+                {type:_OUTPUT_, label:null, value:org_zmail_clientuploader.Client_upload_desc, colSpan:"*", cssStyle:"font-size:12px;"},
                 {type: _DWT_ALERT_,style: DwtAlert.INFORMATION,
                     iconVisible: true,
                     content: null,
@@ -85,7 +85,7 @@ ZaClientUploadXFormView.myXFormModifier = function(xFormObject) {
                 },
                 {type: _DWT_ALERT_,style: DwtAlert.WARNING,
                     iconVisible: true,
-                    content: com_zimbra_clientuploader.Client_upload_in_process,
+                    content: org_zmail_clientuploader.Client_upload_in_process,
                     visibilityChecks:[[XForm.checkInstanceValue, ZaClientUploader.A2_uploadStatus, ZaClientUploader.STATUS_PROGRESS]],
                     visibilityChangeEventSources:[ZaClientUploader.A2_uploadStatus],
                     width:"95%",
@@ -98,7 +98,7 @@ ZaClientUploadXFormView.myXFormModifier = function(xFormObject) {
 
                 {type: _SPACER_, height: 10 },
                 {type:_GROUP_, colSpan:"*", items: [
-                    {type:_DWT_BUTTON_, id: "upload_button", label:com_zimbra_clientuploader.BTN_upload,
+                    {type:_DWT_BUTTON_, id: "upload_button", label:org_zmail_clientuploader.BTN_upload,
                         enableDisableChecks:[[XForm.checkInstanceValue,ZaClientUploader.A2_isFileSelected,true]],
                         enableDisableChangeEventSources:[ZaClientUploader.A2_isFileSelected],
                         onActivate:"this.getForm().parent.upload()", width:"100px"}
@@ -204,17 +204,17 @@ ZaClientUploadXFormView.changeUploadBtnState = function (obj, ev, DwtObjId) {
 }
 
 ZaClientUploadXFormView._respMsg = {
-    1:com_zimbra_clientuploader.Client_upload_succeeded,
-    20000006:com_zimbra_clientuploader.Client_upload_too_large,
-    30000001:com_zimbra_clientuploader.Client_upload_update_failed,
-    30000002:com_zimbra_clientuploader.Client_upload_update_failed,
-    40000001:com_zimbra_clientuploader.Client_upload_no_permission
+    1:org_zmail_clientuploader.Client_upload_succeeded,
+    20000006:org_zmail_clientuploader.Client_upload_too_large,
+    30000001:org_zmail_clientuploader.Client_upload_update_failed,
+    30000002:org_zmail_clientuploader.Client_upload_update_failed,
+    40000001:org_zmail_clientuploader.Client_upload_no_permission
 }
 ZaClientUploadXFormView.getResponseMsg = function (status) {
     var msg = ZaClientUploadXFormView._respMsg[status];
 
     if (!msg) {
-        msg = com_zimbra_clientuploader.Client_upload_failed;
+        msg = org_zmail_clientuploader.Client_upload_failed;
     }
     return msg;
 }

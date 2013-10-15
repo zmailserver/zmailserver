@@ -14,7 +14,7 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimletConfig name="com_zimbra_amzn" version="2.0">
+<zimletConfig name="org_zmail_amzn" version="2.0">
     <global>
         <property name="allowedDomains">*.amazon.com</property>
     </global>

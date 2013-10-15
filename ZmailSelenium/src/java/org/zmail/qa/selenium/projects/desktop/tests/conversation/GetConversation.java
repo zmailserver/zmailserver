@@ -14,16 +14,16 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.conversation;
+package org.zmail.qa.selenium.projects.desktop.tests.conversation;
 
 import java.util.*;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.ConversationItem;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.framework.items.ConversationItem;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
 
 
 public class GetConversation extends AjaxCommonTest {
@@ -37,8 +37,8 @@ public class GetConversation extends AjaxCommonTest {
 
 		// Make sure we are using an account with conversation view
 		super.startingAccountPreferences = new HashMap<String, String>() {{
-				    put("zimbraPrefGroupMailBy", "conversation");
-				    put("zimbraPrefReadingPaneLocation", "bottom");
+				    put("zmailPrefGroupMailBy", "conversation");
+				    put("zmailPrefReadingPaneLocation", "bottom");
 				}};
 	
 		
@@ -50,15 +50,15 @@ public class GetConversation extends AjaxCommonTest {
 		
 		
 		// Create the message data to be sent
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
 		
-		ZimbraAccount.AccountA().soapSend(
-					"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+		ZmailAccount.AccountA().soapSend(
+					"<SendMsgRequest xmlns='urn:zmailMail'>" +
 						"<m>" +
 							"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 							"<su>"+ subject +"</su>" +
 							"<mp ct='text/plain'>" +
-								"<content>"+ ZimbraSeleniumProperties.getUniqueString() +"</content>" +
+								"<content>"+ ZmailSeleniumProperties.getUniqueString() +"</content>" +
 							"</mp>" +
 						"</m>" +
 					"</SendMsgRequest>");

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.jsp;
+package org.zmail.cs.offline.jsp;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,19 +20,19 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AttributeManager;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.account.Key.DataSourceBy;
-import com.zimbra.soap.admin.type.DataSourceType;
-import com.zimbra.cs.account.offline.OfflineSoapProvisioning;
-import com.zimbra.cs.datasource.DataSourceManager;
-import com.zimbra.cs.offline.common.OfflineConstants;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AttributeManager;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.account.Key.DataSourceBy;
+import org.zmail.soap.admin.type.DataSourceType;
+import org.zmail.cs.account.offline.OfflineSoapProvisioning;
+import org.zmail.cs.datasource.DataSourceManager;
+import org.zmail.cs.offline.common.OfflineConstants;
 
 public class JspProvStub {
 
@@ -41,7 +41,7 @@ public class JspProvStub {
     private JspProvStub() throws ServiceException {
         prov = new OfflineSoapProvisioning();
         prov.soapSetURI(ConfigServlet.LOCALHOST_ADMIN_URL);
-        prov.soapAdminAuthenticate(LC.zimbra_ldap_user.value(), LC.get("zdesktop_installation_key"));
+        prov.soapAdminAuthenticate(LC.zmail_ldap_user.value(), LC.get("zdesktop_installation_key"));
     }
 
     public static JspProvStub getInstance() throws ServiceException {
@@ -92,7 +92,7 @@ public class JspProvStub {
 
     public Account createOfflineAccount(String accountName, String email, Map<String, Object> attrs)
             throws ServiceException {
-        attrs.put(Provisioning.A_zimbraPrefLabel, accountName);
+        attrs.put(Provisioning.A_zmailPrefLabel, accountName);
         return prov.createAccount(email, JspConstants.DUMMY_PASSWORD, attrs);
     }
 
@@ -124,7 +124,7 @@ public class JspProvStub {
             Map<String, Object> dsAttrs) throws ServiceException {
         dsAttrs.put(OfflineConstants.A_offlineDataSourceName, dsName);
         dsAttrs.put(OfflineConstants.A_offlineDataSourceType, dsType.toString());
-        dsAttrs.put(Provisioning.A_zimbraPrefLabel, dsName);
+        dsAttrs.put(Provisioning.A_zmailPrefLabel, dsName);
         return prov.createAccount(email, JspConstants.DUMMY_PASSWORD, dsAttrs);
     }
 
@@ -132,10 +132,10 @@ public class JspProvStub {
         Account account = prov.get(AccountBy.id, accountId);
         DataSourceType dsType = DataSourceType.caldav;
         String name = account.getAttr(OfflineConstants.A_offlineDataSourceName) + OfflineConstants.CALDAV_DS;
-        dsAttrs.put(Provisioning.A_zimbraDataSourceName, name);
+        dsAttrs.put(Provisioning.A_zmailDataSourceName, name);
         dsAttrs.put(OfflineConstants.A_offlineDataSourceName, name);
         dsAttrs.put(OfflineConstants.A_offlineDataSourceType, dsType.toString());
-        dsAttrs.put(Provisioning.A_zimbraDataSourceImportClassName, DataSourceManager.getDefaultImportClass(dsType));
+        dsAttrs.put(Provisioning.A_zmailDataSourceImportClassName, DataSourceManager.getDefaultImportClass(dsType));
         prov.createDataSource(account, dsType, name, dsAttrs);
     }
 
@@ -145,7 +145,7 @@ public class JspProvStub {
         String dsName = account.getAttr(OfflineConstants.A_offlineDataSourceName);
         DataSource ds = prov.get(account, DataSourceBy.name, dsName);
         Map<String, Object> attrs = new HashMap<String, Object>(1);
-        attrs.put(Provisioning.A_zimbraPrefLabel, acctName);
+        attrs.put(Provisioning.A_zmailPrefLabel, acctName);
         prov.modifyAttrs(account, attrs);
         prov.modifyDataSource(account, ds.getId(), dsAttrs);
     }

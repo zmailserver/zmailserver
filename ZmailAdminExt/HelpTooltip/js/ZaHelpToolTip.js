@@ -49,7 +49,7 @@ ZaHelpTooltip.getDescByName = function(name) {
 
 ZaHelpTooltip.getDescBySoap =
 function(name) {
-    var soapDoc = AjxSoapDoc.create("GetAttributeInfoRequest", ZaZimbraAdmin.URN, null);
+    var soapDoc = AjxSoapDoc.create("GetAttributeInfoRequest", ZaZmailAdmin.URN, null);
     var el = soapDoc.setMethodAttribute("attrs", name);
     var params = new Object();
     params.soapDoc = soapDoc;

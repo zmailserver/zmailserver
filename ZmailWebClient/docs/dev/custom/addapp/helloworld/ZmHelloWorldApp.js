@@ -1,7 +1,7 @@
 /*
  * ***** BEGIN LICENSE BLOCK *****
  * Zimbra Collaboration Suite Web Client
- * Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009, 2010 Zimbra, Inc.
+ * Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009, 2010 Zmail, Inc.
  *
  * The contents of this file are subject to the Zimbra Public License
  * Version 1.3 ("License"); you may not use this file except in
@@ -29,7 +29,7 @@
  *
  * @class
  * The Hello World app demonstrates the bare functionality needed
- * to drop a new application into the Zimbra Web Client.
+ * to drop a new application into the Zmail Web Client.
  *
  * @param container {DwtControl} the container.
  * @param parentController {ZmController} the parent window controller
@@ -61,7 +61,7 @@ ZmHelloWorldApp.registerSettings =
 function(settings) {
     settings.registerSetting(ZmSetting.HELLOWORLD_ENABLED, {
         // @TODO set to the corect name for the HelloWorld server side pref
-        //name:"zimbraFeatureHelloWorldEnabled",
+        //name:"zmailFeatureHelloWorldEnabled",
         type: ZmSetting.T_COS,
         dataType: ZmSetting.D_BOOLEAN,
         defaultValue: true
@@ -105,7 +105,7 @@ ZmHelloWorldApp.prototype._defineAPI =
 function() {
     // Setup callbacks for the package loads.
     // Packages must be defined in:
-    // ZimbraWebClient/WebRoot/js/package/HelloWorldCore.js
+    // ZmailWebClient/WebRoot/js/package/HelloWorldCore.js
     // The Hello world app is so small that we'll load everything in the core.
     // _postLoadCore is inherited from ZmApp and is called automatically
     // when the package is loaded.
@@ -139,7 +139,7 @@ function(settings) {
     // that are found in the Briefcase code. Sample below:
     settings = settings || appCtxt.getSettings();
     settings.registerSetting("SPREADSHEET_ENABLED",	{
-        name:"zimbraFeatureBriefcaseSpreadsheetEnabled",
+        name:"zmailFeatureBriefcaseSpreadsheetEnabled",
         type:ZmSetting.T_COS,
         dataType: ZmSetting.D_BOOLEAN,
         defaultValue:false
@@ -309,7 +309,7 @@ function() {
 };
 
 /**
- * Called during a ZmZimbraMail.prototype.activateApp, which is essentially
+ * Called during a ZmZmailMail.prototype.activateApp, which is essentially
  * when the application tab is clicked on.
  * @param params {object} Appears to be the last search performed before
  * opening this app.
@@ -400,7 +400,7 @@ ZmApp.SETTING[ZmApp.HELLOWORLD]	    = ZmSetting.HELLOWORLD_ENABLED;
 ZmApp.LOAD_SORT[ZmApp.HELLOWORLD]   = 99;
 // According to the notes in ZmApp:
 // arg for 'app' var in URL querystring to jump to app, e.g.:
-// http:localhost:7070/zimbra/?app=helloworld
+// http:localhost:7070/zmail/?app=helloworld
 ZmApp.QS_ARG[ZmApp.HELLOWORLD]      = "helloworld";
 // ID for app button on app chooser toolbar.
 ZmApp.BUTTON_ID[ZmApp.HELLOWORLD]   = ZmApp.HELLOWORLD;

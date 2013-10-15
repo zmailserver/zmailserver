@@ -14,11 +14,11 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_survey"
+<zimlet name="org_zmail_survey"
         version="1.0"
         label="${msg.label}"
         description="${msg.description}">
-    <include>com_zimbra_survey.js</include>
+    <include>org_zmail_survey.js</include>
     <handlerObject>ZmSurveyZimlet</handlerObject>
     <userProperties>
         <!-- Number of days to wait before showing the suvey -->
@@ -28,6 +28,6 @@
         <property type="string" name="ZmSurveyZimlet_RemindMeInDays" value="7"/>
 
         <!-- Survey URL -->
-        <property type="string" name="ZmSurveyZimlet_SurveyURL" value="https://www.surveymonkey.com/s/ZimbraDesktop"/>
+        <property type="string" name="ZmSurveyZimlet_SurveyURL" value="https://www.surveymonkey.com/s/ZmailDesktop"/>
     </userProperties>
 </zimlet>

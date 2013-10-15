@@ -14,7 +14,7 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_cloudchat"
+<zimlet name="org_zmail_cloudchat"
         version="1.0"
         label="${msg.label}"
         description="${msg.description}">

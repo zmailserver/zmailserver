@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.util.yc;
+package org.zmail.cs.offline.util.yc;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -20,7 +20,7 @@ import java.util.Map;
 
 import org.w3c.dom.Element;
 
-import com.zimbra.cs.offline.util.Xml;
+import org.zmail.cs.offline.util.Xml;
 
 public class SyncResult extends Entity implements YContactSyncResult {
 

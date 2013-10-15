@@ -25,7 +25,7 @@
 ZaMTAController = function(appCtxt, container) {
 	ZaXFormViewController.call(this, appCtxt, container,"ZaMTAController");
 	this._UICreated = false;
-	this._helpURL = location.pathname + ZaUtil.HELP_URL + "monitoring/monitoring_zimbra_mta_mail_queues.htm?locid="+AjxEnv.DEFAULT_LOCALE;
+	this._helpURL = location.pathname + ZaUtil.HELP_URL + "monitoring/monitoring_zmail_mta_mail_queues.htm?locid="+AjxEnv.DEFAULT_LOCALE;
 	this._helpButtonText = ZaMsg.helpManageMailQueue;
 	this._toolbarOperations = new Array();
     this._popupOperations = new Array();
@@ -62,7 +62,7 @@ function(entry) {
 	if(!this._UICreated) {
 		this._createUI();
 	} 
-	//ZaApp.getInstance().pushView(ZaZimbraAdmin._POSTQ_BY_SERVER_VIEW);
+	//ZaApp.getInstance().pushView(ZaZmailAdmin._POSTQ_BY_SERVER_VIEW);
 	ZaApp.getInstance().pushView(this.getContentViewId());
 	this._view.setDirty(false);
 	this._view.setObject(entry); 	//setObject is delayed to be called after pushView in order to avoid jumping of the view	
@@ -117,7 +117,7 @@ ZaMTAController.prototype.handleMTAChange =
 function (ev) {
     if(ev && this._view && (this._view.__internalId==ZaApp.getInstance().getAppViewMgr().getCurrentView())) {
         if(ev.getDetail("obj") && (ev.getDetail("obj") instanceof ZaMTA) ) {
-            if(this._currentObject && this._currentObject[ZaItem.A_zimbraId] == ev.getDetail("obj")[ZaItem.A_zimbraId]) {
+            if(this._currentObject && this._currentObject[ZaItem.A_zmailId] == ev.getDetail("obj")[ZaItem.A_zmailId]) {
                 this._currentObject = ev.getDetail("obj");
                 var qName = ev.getDetail("qName");
 

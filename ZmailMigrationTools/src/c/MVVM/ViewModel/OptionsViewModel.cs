@@ -102,7 +102,7 @@ public class OptionsViewModel: BaseViewModel
                 catch (Exception e)
                 {
                     string temp = string.Format("Incorrect configuration file format.\n{0}", e.Message);
-                    MessageBox.Show(temp, "Zimbra Migration", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(temp, "Zmail Migration", MessageBoxButton.OK, MessageBoxImage.Error);
                     fileRead.Close();
                     return;
                 }
@@ -138,7 +138,7 @@ public class OptionsViewModel: BaseViewModel
             {
                 MessageBox.Show(
                     "There is no options configuration stored.  Please enter some options info",
-                    "Zimbra Migration", MessageBoxButton.OK, MessageBoxImage.Error);
+                    "Zmail Migration", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
@@ -189,7 +189,7 @@ public class OptionsViewModel: BaseViewModel
             }
             if (mmsError)
             {
-                MessageBox.Show("Please enter an integer value for maximum message size", "Zimbra Migration", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Please enter an integer value for maximum message size", "Zmail Migration", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
         }
@@ -205,7 +205,7 @@ public class OptionsViewModel: BaseViewModel
                 ((UsersViewModel)ViewModelPtrs[(int)ViewType.USERS]);
             ScheduleViewModel scheduleViewModel =
                 ((ScheduleViewModel)ViewModelPtrs[(int)ViewType.SCHED]);
-            string name = configViewModelUDest.ZimbraUser;
+            string name = configViewModelUDest.ZmailUser;
 
             usersViewModel.UsersList.Add(new UsersViewModel(name, ""));
             scheduleViewModel.DoMigrate(false);
@@ -354,7 +354,7 @@ public class OptionsViewModel: BaseViewModel
             }
             catch (Exception)
             {
-                MessageBox.Show("Please enter a valid date in the indicated format", "Zimbra Migration", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Please enter a valid date in the indicated format", "Zmail Migration", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             OnPropertyChanged(new PropertyChangedEventArgs("MigrateONRAfter"));

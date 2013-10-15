@@ -13,17 +13,17 @@
  * ***** END LICENSE BLOCK *****
  */
 
-com_zimbra_example_soap_HandlerObject = function() {
+org_zmail_example_soap_HandlerObject = function() {
 };
 
-com_zimbra_example_soap_HandlerObject.prototype = new ZmZimletBase;
-com_zimbra_example_soap_HandlerObject.prototype.constructor = com_zimbra_example_soap_HandlerObject;
+org_zmail_example_soap_HandlerObject.prototype = new ZmZimletBase;
+org_zmail_example_soap_HandlerObject.prototype.constructor = org_zmail_example_soap_HandlerObject;
 
 /**
  * This method is called by the Zimlet framework when a context menu item is selected.
  * 
  */
-com_zimbra_example_soap_HandlerObject.prototype.menuItemSelected = 
+org_zmail_example_soap_HandlerObject.prototype.menuItemSelected = 
 function(itemId) {
 	switch (itemId) {
 		case "menuId_soap_request_xml":
@@ -38,16 +38,16 @@ function(itemId) {
 /**
  * Submits a SOAP request in XML format.
  * 
- * <GetAccountInfoRequest xmlns="urn:zimbraAccount">
+ * <GetAccountInfoRequest xmlns="urn:zmailAccount">
  *     <account by="name">user1</account>
  * </GetAccountInfoRequest>
  *
  * @private
  */
-com_zimbra_example_soap_HandlerObject.prototype._submitSOAPRequestXML =
+org_zmail_example_soap_HandlerObject.prototype._submitSOAPRequestXML =
 function() {
 		
-	var soapDoc = AjxSoapDoc.create("GetAccountInfoRequest", "urn:zimbraAccount");
+	var soapDoc = AjxSoapDoc.create("GetAccountInfoRequest", "urn:zmailAccount");
 
 	var accountNode = soapDoc.set("account", appCtxt.getUsername());
 	accountNode.setAttribute("by", "name");
@@ -68,7 +68,7 @@ function() {
  * @param	{ZmCsfeResult}		result		the result
  * @private
  */
-com_zimbra_example_soap_HandlerObject.prototype._handleSOAPResponseXML =
+org_zmail_example_soap_HandlerObject.prototype._handleSOAPResponseXML =
 function(result) {
 
 	if (result.isException()) {
@@ -84,8 +84,8 @@ function(result) {
 	var name = response.name;
 	var soapURL = response.publicURL;
 	var soapURL = response.soapURL;
-	var zimbraId = result.getResponse().GetAccountInfoResponse._attrs.zimbraId;
-	var zimbraMailHost = result.getResponse().GetAccountInfoResponse._attrs.zimbraMailHost;
+	var zmailId = result.getResponse().GetAccountInfoResponse._attrs.zmailId;
+	var zmailMailHost = result.getResponse().GetAccountInfoResponse._attrs.zmailMailHost;
 	
 	appCtxt.setStatusMsg("GetAccountInfoResponse (XML) success - "+name);	
 };
@@ -96,7 +96,7 @@ function(result) {
  * @param	{ZmCsfeException}		ex		the exception
  * @private
  */
-com_zimbra_example_soap_HandlerObject.prototype._handleSOAPErrorResponseXML =
+org_zmail_example_soap_HandlerObject.prototype._handleSOAPErrorResponseXML =
 function(ex) {
 
 	var errorMsg = ex.getErrorMsg(); // the error message
@@ -109,7 +109,7 @@ function(ex) {
  * 
  * 
  * GetAccountInfoRequest: {
- *   _jsns: "urn:zimbraAccount",
+ *   _jsns: "urn:zmailAccount",
  *   account: {
  *     _content: "user1",
  *     by: "name"
@@ -118,10 +118,10 @@ function(ex) {
  *
  * @private
  */
-com_zimbra_example_soap_HandlerObject.prototype._submitSOAPRequestJSON =
+org_zmail_example_soap_HandlerObject.prototype._submitSOAPRequestJSON =
 function() {
 
-	var jsonObj = {GetAccountInfoRequest:{_jsns:"urn:zimbraAccount"}};
+	var jsonObj = {GetAccountInfoRequest:{_jsns:"urn:zmailAccount"}};
 	var	request = jsonObj.GetAccountInfoRequest;
 	request.account = {_content: appCtxt.getUsername(), by: "name"};
 	
@@ -142,7 +142,7 @@ function() {
  * @param	{ZmCsfeResult}		result		the result
  * @private
  */
-com_zimbra_example_soap_HandlerObject.prototype._handleSOAPResponseJSON =
+org_zmail_example_soap_HandlerObject.prototype._handleSOAPResponseJSON =
 function(result) {
 
 	if (result.isException()) {
@@ -158,8 +158,8 @@ function(result) {
 	var name = response.name;
 	var soapURL = response.publicURL;
 	var soapURL = response.soapURL;
-	var zimbraId = result.getResponse().GetAccountInfoResponse._attrs.zimbraId;
-	var zimbraMailHost = result.getResponse().GetAccountInfoResponse._attrs.zimbraMailHost;
+	var zmailId = result.getResponse().GetAccountInfoResponse._attrs.zmailId;
+	var zmailMailHost = result.getResponse().GetAccountInfoResponse._attrs.zmailMailHost;
 	
 	appCtxt.setStatusMsg("GetAccountInfoResponse (JSON) success - "+name);	
 };
@@ -170,7 +170,7 @@ function(result) {
  * @param	{ZmCsfeException}		ex		the exception
  * @private
  */
-com_zimbra_example_soap_HandlerObject.prototype._handleSOAPErrorResponseJSON =
+org_zmail_example_soap_HandlerObject.prototype._handleSOAPErrorResponseJSON =
 function(ex) {
 
 	var errorMsg = ex.getErrorMsg(); // the error message

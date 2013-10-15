@@ -12,7 +12,7 @@
 # basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
 # ***** END LICENSE BLOCK *****
 # 
-package Zimbra::Mon::LoggerSchema;
+package Zmail::Mon::LoggerSchema;
 use strict;
 
 require Exporter;

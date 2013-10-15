@@ -6,10 +6,10 @@ public class Config
 {
     public Config() {}
     public Config(string mailserver, string srcAdminId, string srcAdminPwd, string
-        outlookProfile, string pstFile, string zimbraserverhostname, string zimbraport,
-        string zimbraAdmin, string zimbrapasswd, string zimbradomain, string pstfile)
+        outlookProfile, string pstFile, string zmailserverhostname, string zmailport,
+        string zmailAdmin, string zmailpasswd, string zmaildomain, string pstfile)
     {
-        this.ZimbraServer = new ZimbraServer();
+        this.ZmailServer = new ZmailServer();
         this.SourceServer = new SourceServer();
         this.ImportOptions = new ImportOptions();
         this.UserProvision = new UserProvision();
@@ -17,11 +17,11 @@ public class Config
         //this.LoggingOptions = new LoggingOptions();
         this.AdvancedImportOptions.FoldersToSkip = null;
 
-        this.ZimbraServer.Hostname = zimbraserverhostname;
-        this.ZimbraServer.Port = zimbraport;
-        this.ZimbraServer.AdminID = zimbraAdmin;
-        this.ZimbraServer.AdminPwd = zimbrapasswd;
-        // this.zimbraServer.Domain = zimbradomain;
+        this.ZmailServer.Hostname = zmailserverhostname;
+        this.ZmailServer.Port = zmailport;
+        this.ZmailServer.AdminID = zmailAdmin;
+        this.ZmailServer.AdminPwd = zmailpasswd;
+        // this.zmailServer.Domain = zmaildomain;
         this.SourceServer.Hostname = mailserver;
         this.SourceServer.AdminID = srcAdminId;
         this.SourceServer.AdminPwd = srcAdminPwd;
@@ -35,7 +35,7 @@ public class Config
     }
 
     public SourceServer SourceServer;
-    public ZimbraServer ZimbraServer;
+    public ZmailServer ZmailServer;
     public ImportOptions ImportOptions;
     public UserProvision UserProvision;
     public AdvancedImportOptions AdvancedImportOptions;
@@ -79,12 +79,12 @@ public class SourceServer
     }
 }
 
-public class ZimbraServer
+public class ZmailServer
 {
-    private string m_ZimbraHostname;
+    private string m_ZmailHostname;
     public string Hostname {
-        get { return m_ZimbraHostname; }
-        set { m_ZimbraHostname = value; }
+        get { return m_ZmailHostname; }
+        set { m_ZmailHostname = value; }
     }
     private string m_Port;
     public string Port {
@@ -96,15 +96,15 @@ public class ZimbraServer
         get { return m_UseSSL; }
         set { m_UseSSL = value; }
     }
-    private string m_ZimbraAdminID;
+    private string m_ZmailAdminID;
     public string AdminID {
-        get { return m_ZimbraAdminID; }
-        set { m_ZimbraAdminID = value; }
+        get { return m_ZmailAdminID; }
+        set { m_ZmailAdminID = value; }
     }
-    private string m_ZimbraAdminPwd;
+    private string m_ZmailAdminPwd;
     public string AdminPwd {
-        get { return m_ZimbraAdminPwd; }
-        set { m_ZimbraAdminPwd = value; }
+        get { return m_ZmailAdminPwd; }
+        set { m_ZmailAdminPwd = value; }
     }
     private string m_UserAccount;
     public string UserAccount {

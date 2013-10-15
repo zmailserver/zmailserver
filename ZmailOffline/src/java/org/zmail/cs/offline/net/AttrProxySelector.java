@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.net;
+package org.zmail.cs.offline.net;
 
 import java.io.IOException;
 import java.net.Authenticator;
@@ -23,15 +23,15 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.zimbra.common.net.AuthProxy;
-import com.zimbra.common.net.ProxyAuthenticator;
-import com.zimbra.common.net.UsernamePassword;
-import com.zimbra.common.net.ProxySelectors.CustomProxySelector;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.offline.OfflineProvisioning;
-import com.zimbra.cs.offline.OfflineLog;
+import org.zmail.common.net.AuthProxy;
+import org.zmail.common.net.ProxyAuthenticator;
+import org.zmail.common.net.UsernamePassword;
+import org.zmail.common.net.ProxySelectors.CustomProxySelector;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.offline.OfflineProvisioning;
+import org.zmail.cs.offline.OfflineLog;
 
 /**
  * ProxySelector implementation which reads configuration from offline attributes
@@ -46,7 +46,7 @@ public class AttrProxySelector extends CustomProxySelector {
     
     @Override
     public void connectFailed(URI uri, SocketAddress sa, IOException ioe) {
-        ZimbraLog.net.error("Unable to connect to proxy %s",uri,ioe);
+        ZmailLog.net.error("Unable to connect to proxy %s",uri,ioe);
     }
     
     private void addProxy(Proxy.Type type, String proxyHost, int proxyPort, String proxyUsername, String proxyPassword, List<Proxy> proxies, ProxyAuthenticator proxyAuth) {
@@ -66,24 +66,24 @@ public class AttrProxySelector extends CustomProxySelector {
         OfflineProvisioning prov = OfflineProvisioning.getOfflineInstance();
         List<Proxy> proxies = new ArrayList<Proxy>();
         try {
-            String mode = prov.getLocalAccount().getAttr(OfflineProvisioning.A_zimbraPrefOfflineAttrProxyMode);
+            String mode = prov.getLocalAccount().getAttr(OfflineProvisioning.A_zmailPrefOfflineAttrProxyMode);
             if (Mode.MANUAL.toString().equals(mode)) {
                 if (uri.getHost().indexOf("localhost") < 0 && uri.getHost().indexOf("127.0.0.1") < 0) {
                     Account localAcct = prov.getLocalAccount();
                     ProxyAuthenticator proxyAuth = new ProxyAuthenticator();
                     //HTTP
                     if (uri.getScheme().indexOf("http") == 0) {
-                        String proxyHost = localAcct.getAttr(OfflineProvisioning.A_zimbraPrefOfflineHttpProxyHost);
-                        int proxyPort = localAcct.getIntAttr(OfflineProvisioning.A_zimbraPrefOfflineHttpProxyPort, -1);
-                        String proxyUsername = localAcct.getAttr(OfflineProvisioning.A_zimbraPrefOfflineHttpProxyUsername);
-                        String proxyPassword = localAcct.getAttr(OfflineProvisioning.A_zimbraPrefOfflineHttpProxyPassword);
+                        String proxyHost = localAcct.getAttr(OfflineProvisioning.A_zmailPrefOfflineHttpProxyHost);
+                        int proxyPort = localAcct.getIntAttr(OfflineProvisioning.A_zmailPrefOfflineHttpProxyPort, -1);
+                        String proxyUsername = localAcct.getAttr(OfflineProvisioning.A_zmailPrefOfflineHttpProxyUsername);
+                        String proxyPassword = localAcct.getAttr(OfflineProvisioning.A_zmailPrefOfflineHttpProxyPassword);
                         addProxy(Proxy.Type.HTTP, proxyHost, proxyPort, proxyUsername, proxyPassword, proxies, proxyAuth);
                     }
                     //SOCKS
-                    String proxyHost = localAcct.getAttr(OfflineProvisioning.A_zimbraPrefOfflineSocksProxyHost);
-                    int proxyPort = localAcct.getIntAttr(OfflineProvisioning.A_zimbraPrefOfflineSocksProxyPort, -1);
-                    String proxyUsername = localAcct.getAttr(OfflineProvisioning.A_zimbraPrefOfflineSocksProxyUsername);
-                    String proxyPassword = localAcct.getAttr(OfflineProvisioning.A_zimbraPrefOfflineSocksProxyPassword);
+                    String proxyHost = localAcct.getAttr(OfflineProvisioning.A_zmailPrefOfflineSocksProxyHost);
+                    int proxyPort = localAcct.getIntAttr(OfflineProvisioning.A_zmailPrefOfflineSocksProxyPort, -1);
+                    String proxyUsername = localAcct.getAttr(OfflineProvisioning.A_zmailPrefOfflineSocksProxyUsername);
+                    String proxyPassword = localAcct.getAttr(OfflineProvisioning.A_zmailPrefOfflineSocksProxyPassword);
                     addProxy(Proxy.Type.SOCKS, proxyHost, proxyPort, proxyUsername, proxyPassword, proxies, proxyAuth);
                     //configure authentication for 3rd party libraries (like gdata) that use HttpUrlConnection
                     Authenticator.setDefault(proxyAuth);

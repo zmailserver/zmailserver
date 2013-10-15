@@ -14,7 +14,7 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_email"
+<zimlet name="org_zmail_email"
         version="11.10"
         target="main view-window"
         label="${msg.zimletLabel}"
@@ -27,7 +27,7 @@
 	<include>SeriesAnimation.js</include>
 	<include>UnknownPersonSlide.js</include>
 	<includeCSS>email.css</includeCSS>
-	<handlerObject>com_zimbra_email_handlerObject</handlerObject>
+	<handlerObject>org_zmail_email_handlerObject</handlerObject>
 	<contentObject type="email">
 		<matchOn>
 			<regex attrs="ig">\b(mailto:[ ]*)?([0-9a-zA-Z]+[.&amp;#!$%'*+-/=?^_`{}|~])*[0-9a-zA-Z_-]+@([-0-9a-zA-Z]+[.])+[a-zA-Z]{2,6}([\w/_\.]*(\?\S+)?)\b</regex>

@@ -12,12 +12,12 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.filter;
+package org.zmail.cs.filter;
 
 import java.util.Iterator;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
 
 class OfflineRuleRewriter extends RuleRewriter {
 

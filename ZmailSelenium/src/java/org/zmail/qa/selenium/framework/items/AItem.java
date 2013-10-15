@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.items;
+package org.zmail.qa.selenium.framework.items;
 
 public abstract class AItem {
 
@@ -24,7 +24,7 @@ public abstract class AItem {
 	}
 
 	/**
-	 * Get the Zimbra ID of this item
+	 * Get the Zmail ID of this item
 	 * @return
 	 */
 	public void setId(String id) {
@@ -32,7 +32,7 @@ public abstract class AItem {
 	}
 
 	/**
-	 * Set the Zimbra ID of this item
+	 * Set the Zmail ID of this item
 	 * @return
 	 */
 	public String getId() {

@@ -14,7 +14,7 @@
  */
 
 /*---Enable Proxy Wizard Model---*/
-if(ZaSettings && ZaSettings.EnabledZimlet["com_zimbra_proxy_config"]) {
+if(ZaSettings && ZaSettings.EnabledZimlet["org_zmail_proxy_config"]) {
 function ZaEnableProxy () {
 	ZaItem.call(this, "ZaEnableProxy");
 	this._init();
@@ -28,36 +28,36 @@ ZaEnableProxy.prototype.constructor = ZaEnableProxy;
 ZaEnableProxy.myXModel = {
 	items: [
 		// web proxy
-		{id: ZaProxyConfig.A_zimbraReverseProxyHttpEnabled, type: _ENUM_, ref: "attrs/" + ZaProxyConfig.A_zimbraReverseProxyHttpEnabled, choices: ZaModel.BOOLEAN_CHOICES},
-		{id: ZaProxyConfig.A_zimbraReverseProxyMailMode, type: _ENUM_, ref: "attrs/" + ZaProxyConfig.A_zimbraReverseProxyMailMode, choices: ZaProxyConfig.MAIL_MODE_CHOICES},
-		{id: ZaProxyConfig.A_zimbraMailPort, type: _PORT_, ref: "attrs/" + ZaProxyConfig.A_zimbraMailPort},
-		{id: ZaProxyConfig.A_zimbraMailProxyPort, type: _PORT_, ref: "attrs/" + ZaProxyConfig.A_zimbraMailProxyPort},
-		{id: ZaProxyConfig.A_zimbraMailSSLPort, type: _PORT_, ref: "attrs/" + ZaProxyConfig.A_zimbraMailSSLPort},
-		{id: ZaProxyConfig.A_zimbraMailSSLProxyPort, type: _PORT_, ref: "attrs/" + ZaProxyConfig.A_zimbraMailSSLProxyPort},
-		{id: ZaProxyConfig.A_zimbraReverseProxyAdminEnabled, type: _ENUM_, ref: "attrs/" + ZaProxyConfig.A_zimbraReverseProxyAdminEnabled, choices: ZaModel.BOOLEAN_CHOICES},
-		{id: ZaProxyConfig.A_zimbraAdminPort, type: _PORT_, ref: "attrs/" + ZaProxyConfig.A_zimbraAdminPort},
-		{id: ZaProxyConfig.A_zimbraAdminProxyPort, type: _PORT_, ref: "attrs/" + ZaProxyConfig.A_zimbraAdminProxyPort},
-		{id: ZaProxyConfig.A_zimbraReverseProxySSLToUpstreamEnabled, type: _ENUM_, ref: "attrs/" + ZaProxyConfig.A_zimbraReverseProxySSLToUpstreamEnabled, choices: ZaModel.BOOLEAN_CHOICES},
+		{id: ZaProxyConfig.A_zmailReverseProxyHttpEnabled, type: _ENUM_, ref: "attrs/" + ZaProxyConfig.A_zmailReverseProxyHttpEnabled, choices: ZaModel.BOOLEAN_CHOICES},
+		{id: ZaProxyConfig.A_zmailReverseProxyMailMode, type: _ENUM_, ref: "attrs/" + ZaProxyConfig.A_zmailReverseProxyMailMode, choices: ZaProxyConfig.MAIL_MODE_CHOICES},
+		{id: ZaProxyConfig.A_zmailMailPort, type: _PORT_, ref: "attrs/" + ZaProxyConfig.A_zmailMailPort},
+		{id: ZaProxyConfig.A_zmailMailProxyPort, type: _PORT_, ref: "attrs/" + ZaProxyConfig.A_zmailMailProxyPort},
+		{id: ZaProxyConfig.A_zmailMailSSLPort, type: _PORT_, ref: "attrs/" + ZaProxyConfig.A_zmailMailSSLPort},
+		{id: ZaProxyConfig.A_zmailMailSSLProxyPort, type: _PORT_, ref: "attrs/" + ZaProxyConfig.A_zmailMailSSLProxyPort},
+		{id: ZaProxyConfig.A_zmailReverseProxyAdminEnabled, type: _ENUM_, ref: "attrs/" + ZaProxyConfig.A_zmailReverseProxyAdminEnabled, choices: ZaModel.BOOLEAN_CHOICES},
+		{id: ZaProxyConfig.A_zmailAdminPort, type: _PORT_, ref: "attrs/" + ZaProxyConfig.A_zmailAdminPort},
+		{id: ZaProxyConfig.A_zmailAdminProxyPort, type: _PORT_, ref: "attrs/" + ZaProxyConfig.A_zmailAdminProxyPort},
+		{id: ZaProxyConfig.A_zmailReverseProxySSLToUpstreamEnabled, type: _ENUM_, ref: "attrs/" + ZaProxyConfig.A_zmailReverseProxySSLToUpstreamEnabled, choices: ZaModel.BOOLEAN_CHOICES},
 		
 		// mail proxy
-		{id: ZaProxyConfig.A_zimbraReverseProxyMailEnabled, type: _ENUM_, ref: "attrs/" + ZaProxyConfig.A_zimbraReverseProxyMailEnabled, choices: ZaModel.BOOLEAN_CHOICES},
-		{id: ZaProxyConfig.A_zimbraImapBindPort, type: _PORT_, ref: "attrs/" + ZaProxyConfig.A_zimbraImapBindPort},
-		{id: ZaProxyConfig.A_zimbraImapProxyBindPort, type: _PORT_, ref: "attrs/" + ZaProxyConfig.A_zimbraImapProxyBindPort},
-		{id: ZaProxyConfig.A_zimbraImapSSLProxyBindPort, type: _PORT_, ref: "attrs/" + ZaProxyConfig.A_zimbraImapSSLProxyBindPort},
-		{id: ZaProxyConfig.A_zimbraImapSSLBindPort, type: _PORT_, ref: "attrs/" + ZaProxyConfig.A_zimbraImapSSLBindPort},
-		{id: ZaProxyConfig.A_zimbraPop3BindPort, type: _PORT_, ref: "attrs/" + ZaProxyConfig.A_zimbraPop3BindPort},
-		{id: ZaProxyConfig.A_zimbraPop3ProxyBindPort, type: _PORT_, ref: "attrs/" + ZaProxyConfig.A_zimbraPop3ProxyBindPort},
-		{id: ZaProxyConfig.A_zimbraPop3SSLProxyBindPort, type: _PORT_, ref: "attrs/" + ZaProxyConfig.A_zimbraPop3SSLProxyBindPort},
-		{id: ZaProxyConfig.A_zimbraPop3SSLBindPort, type: _PORT_, ref: "attrs/" + ZaProxyConfig.A_zimbraPop3SSLBindPort},
-		{id: ZaProxyConfig.A_zimbraReverseProxyImapStartTlsMode, type: _ENUM_, ref: "attrs/" + ZaProxyConfig.A_zimbraReverseProxyImapStartTlsMode, choices: ZaProxyConfig.STARTTLS_MODE_CHOICES},
-		{id: ZaProxyConfig.A_zimbraReverseProxyPop3StartTlsMode, type: _ENUM_, ref: "attrs/" + ZaProxyConfig.A_zimbraReverseProxyPop3StartTlsMode, choices: ZaProxyConfig.STARTTLS_MODE_CHOICES},
+		{id: ZaProxyConfig.A_zmailReverseProxyMailEnabled, type: _ENUM_, ref: "attrs/" + ZaProxyConfig.A_zmailReverseProxyMailEnabled, choices: ZaModel.BOOLEAN_CHOICES},
+		{id: ZaProxyConfig.A_zmailImapBindPort, type: _PORT_, ref: "attrs/" + ZaProxyConfig.A_zmailImapBindPort},
+		{id: ZaProxyConfig.A_zmailImapProxyBindPort, type: _PORT_, ref: "attrs/" + ZaProxyConfig.A_zmailImapProxyBindPort},
+		{id: ZaProxyConfig.A_zmailImapSSLProxyBindPort, type: _PORT_, ref: "attrs/" + ZaProxyConfig.A_zmailImapSSLProxyBindPort},
+		{id: ZaProxyConfig.A_zmailImapSSLBindPort, type: _PORT_, ref: "attrs/" + ZaProxyConfig.A_zmailImapSSLBindPort},
+		{id: ZaProxyConfig.A_zmailPop3BindPort, type: _PORT_, ref: "attrs/" + ZaProxyConfig.A_zmailPop3BindPort},
+		{id: ZaProxyConfig.A_zmailPop3ProxyBindPort, type: _PORT_, ref: "attrs/" + ZaProxyConfig.A_zmailPop3ProxyBindPort},
+		{id: ZaProxyConfig.A_zmailPop3SSLProxyBindPort, type: _PORT_, ref: "attrs/" + ZaProxyConfig.A_zmailPop3SSLProxyBindPort},
+		{id: ZaProxyConfig.A_zmailPop3SSLBindPort, type: _PORT_, ref: "attrs/" + ZaProxyConfig.A_zmailPop3SSLBindPort},
+		{id: ZaProxyConfig.A_zmailReverseProxyImapStartTlsMode, type: _ENUM_, ref: "attrs/" + ZaProxyConfig.A_zmailReverseProxyImapStartTlsMode, choices: ZaProxyConfig.STARTTLS_MODE_CHOICES},
+		{id: ZaProxyConfig.A_zmailReverseProxyPop3StartTlsMode, type: _ENUM_, ref: "attrs/" + ZaProxyConfig.A_zmailReverseProxyPop3StartTlsMode, choices: ZaProxyConfig.STARTTLS_MODE_CHOICES},
 		
 		// advanced
-		{id: ZaProxyConfig.A_zimbraReverseProxyWorkerProcesses, type: _INT_, ref: "attrs/" + ZaProxyConfig.A_zimbraReverseProxyWorkerProcesses, minInclusive: "1", maxInclusive: "16"},
-		{id: ZaProxyConfig.A_zimbraReverseProxyWorkerConnections, type: _INT_, ref: "attrs/" + ZaProxyConfig.A_zimbraReverseProxyWorkerConnections, minInclusive: "1"},
-		{id: ZaProxyConfig.A_zimbraReverseProxyGenConfigPerVirtualHostname, type: _ENUM_, ref: "attrs/" + ZaProxyConfig.A_zimbraReverseProxyGenConfigPerVirtualHostname, choices: ZaModel.BOOLEAN_CHOICES},
-		{id: ZaProxyConfig.A_zimbraReverseProxyDnsLookupInServerEnabled, type: _ENUM_, ref: "attrs/" + ZaProxyConfig.A_zimbraReverseProxyDnsLookupInServerEnabled, choices: ZaModel.BOOLEAN_CHOICES},
-		{id: ZaProxyConfig.A_zimbraReverseProxyLogLevel, type: _ENUM_, ref: "attrs/" + ZaProxyConfig.A_zimbraReverseProxyLogLevel, choices: ZaProxyConfig.PROXY_LOG_LEVEL_CHOICES},
+		{id: ZaProxyConfig.A_zmailReverseProxyWorkerProcesses, type: _INT_, ref: "attrs/" + ZaProxyConfig.A_zmailReverseProxyWorkerProcesses, minInclusive: "1", maxInclusive: "16"},
+		{id: ZaProxyConfig.A_zmailReverseProxyWorkerConnections, type: _INT_, ref: "attrs/" + ZaProxyConfig.A_zmailReverseProxyWorkerConnections, minInclusive: "1"},
+		{id: ZaProxyConfig.A_zmailReverseProxyGenConfigPerVirtualHostname, type: _ENUM_, ref: "attrs/" + ZaProxyConfig.A_zmailReverseProxyGenConfigPerVirtualHostname, choices: ZaModel.BOOLEAN_CHOICES},
+		{id: ZaProxyConfig.A_zmailReverseProxyDnsLookupInServerEnabled, type: _ENUM_, ref: "attrs/" + ZaProxyConfig.A_zmailReverseProxyDnsLookupInServerEnabled, choices: ZaModel.BOOLEAN_CHOICES},
+		{id: ZaProxyConfig.A_zmailReverseProxyLogLevel, type: _ENUM_, ref: "attrs/" + ZaProxyConfig.A_zmailReverseProxyLogLevel, choices: ZaProxyConfig.PROXY_LOG_LEVEL_CHOICES},
 
 		// utility
 		{id: ZaProxyConfig.A2_mbx_name_array, type: _LIST_, itemType: _STRING_},
@@ -73,34 +73,34 @@ ZaEnableProxy.myXModel = {
 ZaEnableProxy.init = function () {
 	this.attrs = {};
 	
-	this.attrs[ZaProxyConfig.A_zimbraReverseProxyHttpEnabled] = "TRUE";
-	this.attrs[ZaProxyConfig.A_zimbraReverseProxyMailMode] = ZaProxyConfig.DEFAULT_MAIL_MODE;
-	this.attrs[ZaProxyConfig.A_zimbraMailPort] = ZaProxyConfig.DEFAULT_MAIL_PORT_ZCS;
-	this.attrs[ZaProxyConfig.A_zimbraMailProxyPort] = ZaProxyConfig.DEFAULT_MAIL_PORT;
-	this.attrs[ZaProxyConfig.A_zimbraMailSSLPort] = ZaProxyConfig.DEFAULT_MAIL_SSL_PORT_ZCS;
-	this.attrs[ZaProxyConfig.A_zimbraMailSSLProxyPort] = ZaProxyConfig.DEFAULT_MAIL_SSL_PORT;
-	this.attrs[ZaProxyConfig.A_zimbraReverseProxyAdminEnabled] = "FALSE";
-	this.attrs[ZaProxyConfig.A_zimbraAdminPort] = ZaProxyConfig.DEFAULT_ADMIN_CONSOLE_PORT_ZCS;
-	this.attrs[ZaProxyConfig.A_zimbraAdminProxyPort] = ZaProxyConfig.DEFAULT_ADMIN_CONSOLE_PORT;
-	this.attrs[ZaProxyConfig.A_zimbraReverseProxySSLToUpstreamEnabled] = "TRUE";
+	this.attrs[ZaProxyConfig.A_zmailReverseProxyHttpEnabled] = "TRUE";
+	this.attrs[ZaProxyConfig.A_zmailReverseProxyMailMode] = ZaProxyConfig.DEFAULT_MAIL_MODE;
+	this.attrs[ZaProxyConfig.A_zmailMailPort] = ZaProxyConfig.DEFAULT_MAIL_PORT_ZCS;
+	this.attrs[ZaProxyConfig.A_zmailMailProxyPort] = ZaProxyConfig.DEFAULT_MAIL_PORT;
+	this.attrs[ZaProxyConfig.A_zmailMailSSLPort] = ZaProxyConfig.DEFAULT_MAIL_SSL_PORT_ZCS;
+	this.attrs[ZaProxyConfig.A_zmailMailSSLProxyPort] = ZaProxyConfig.DEFAULT_MAIL_SSL_PORT;
+	this.attrs[ZaProxyConfig.A_zmailReverseProxyAdminEnabled] = "FALSE";
+	this.attrs[ZaProxyConfig.A_zmailAdminPort] = ZaProxyConfig.DEFAULT_ADMIN_CONSOLE_PORT_ZCS;
+	this.attrs[ZaProxyConfig.A_zmailAdminProxyPort] = ZaProxyConfig.DEFAULT_ADMIN_CONSOLE_PORT;
+	this.attrs[ZaProxyConfig.A_zmailReverseProxySSLToUpstreamEnabled] = "TRUE";
 	
-	this.attrs[ZaProxyConfig.A_zimbraReverseProxyMailEnabled] = "TRUE";
-	this.attrs[ZaProxyConfig.A_zimbraImapBindPort] = ZaProxyConfig.DEFAULT_IMAP_PORT_ZCS;
-	this.attrs[ZaProxyConfig.A_zimbraImapProxyBindPort] = ZaProxyConfig.DEFAULT_IMAP_PORT;
-	this.attrs[ZaProxyConfig.A_zimbraImapSSLBindPort] = ZaProxyConfig.DEFAULT_IMAP_SSL_PORT_ZCS;
-	this.attrs[ZaProxyConfig.A_zimbraImapSSLProxyBindPort] = ZaProxyConfig.DEFAULT_IMAP_SSL_PORT;
-	this.attrs[ZaProxyConfig.A_zimbraPop3BindPort] = ZaProxyConfig.DEFAULT_POP3_PORT_ZCS;
-	this.attrs[ZaProxyConfig.A_zimbraPop3ProxyBindPort] = ZaProxyConfig.DEFAULT_POP3_PORT;
-	this.attrs[ZaProxyConfig.A_zimbraPop3SSLBindPort] = ZaProxyConfig.DEFAULT_POP3_SSL_PORT_ZCS;
-	this.attrs[ZaProxyConfig.A_zimbraPop3SSLProxyBindPort] = ZaProxyConfig.DEFAULT_POP3_SSL_PORT;
-	this.attrs[ZaProxyConfig.A_zimbraReverseProxyImapStartTlsMode] = "only";
-	this.attrs[ZaProxyConfig.A_zimbraReverseProxyPop3StartTlsMode] = "only";
+	this.attrs[ZaProxyConfig.A_zmailReverseProxyMailEnabled] = "TRUE";
+	this.attrs[ZaProxyConfig.A_zmailImapBindPort] = ZaProxyConfig.DEFAULT_IMAP_PORT_ZCS;
+	this.attrs[ZaProxyConfig.A_zmailImapProxyBindPort] = ZaProxyConfig.DEFAULT_IMAP_PORT;
+	this.attrs[ZaProxyConfig.A_zmailImapSSLBindPort] = ZaProxyConfig.DEFAULT_IMAP_SSL_PORT_ZCS;
+	this.attrs[ZaProxyConfig.A_zmailImapSSLProxyBindPort] = ZaProxyConfig.DEFAULT_IMAP_SSL_PORT;
+	this.attrs[ZaProxyConfig.A_zmailPop3BindPort] = ZaProxyConfig.DEFAULT_POP3_PORT_ZCS;
+	this.attrs[ZaProxyConfig.A_zmailPop3ProxyBindPort] = ZaProxyConfig.DEFAULT_POP3_PORT;
+	this.attrs[ZaProxyConfig.A_zmailPop3SSLBindPort] = ZaProxyConfig.DEFAULT_POP3_SSL_PORT_ZCS;
+	this.attrs[ZaProxyConfig.A_zmailPop3SSLProxyBindPort] = ZaProxyConfig.DEFAULT_POP3_SSL_PORT;
+	this.attrs[ZaProxyConfig.A_zmailReverseProxyImapStartTlsMode] = "only";
+	this.attrs[ZaProxyConfig.A_zmailReverseProxyPop3StartTlsMode] = "only";
 	
-	this.attrs[ZaProxyConfig.A_zimbraReverseProxyWorkerProcesses] = 4;
-	this.attrs[ZaProxyConfig.A_zimbraReverseProxyWorkerConnections] = 10240;
-	this.attrs[ZaProxyConfig.A_zimbraReverseProxyLogLevel] = "info";
-	this.attrs[ZaProxyConfig.A_zimbraReverseProxyGenConfigPerVirtualHostname] = "TRUE";
-	this.attrs[ZaProxyConfig.A_zimbraReverseProxyDnsLookupInServerEnabled] = "TRUE";
+	this.attrs[ZaProxyConfig.A_zmailReverseProxyWorkerProcesses] = 4;
+	this.attrs[ZaProxyConfig.A_zmailReverseProxyWorkerConnections] = 10240;
+	this.attrs[ZaProxyConfig.A_zmailReverseProxyLogLevel] = "info";
+	this.attrs[ZaProxyConfig.A_zmailReverseProxyGenConfigPerVirtualHostname] = "TRUE";
+	this.attrs[ZaProxyConfig.A_zmailReverseProxyDnsLookupInServerEnabled] = "TRUE";
 	
 	this[ZaProxyConfig.A2_all_mailbox_as_upstream] = "TRUE";
 	this[ZaProxyConfig.A2_all_mailbox_as_lookuptarget] = "TRUE";
@@ -116,12 +116,12 @@ ZaEnableProxy.prototype.initServerList = function() {
 	var servers = ZaServer.getAll().getArray();
 	for(var i = 0; i < servers.length; i++) {
 		var s = servers[i];
-		if (s.attrs[ZaServer.A_zimbraMailProxyServiceInstalled]) {
-			this[ZaProxyConfig.A2_proxy_name_array].push(s["zimbraServiceHostname"]);
+		if (s.attrs[ZaServer.A_zmailMailProxyServiceInstalled]) {
+			this[ZaProxyConfig.A2_proxy_name_array].push(s["zmailServiceHostname"]);
 		}
 		
-		if (s.attrs[ZaServer.A_zimbraMailboxServiceEnabled]) {
-			this[ZaProxyConfig.A2_mbx_name_array].push(s["zimbraServiceHostname"]);
+		if (s.attrs[ZaServer.A_zmailMailboxServiceEnabled]) {
+			this[ZaProxyConfig.A2_mbx_name_array].push(s["zmailServiceHostname"]);
 		}
 	}
 	
@@ -148,7 +148,7 @@ ZaEnableProxy.prototype.initServerList = function() {
 	var allServers = {};
 	for(var i = 0; i < servers.length; i++) {
 		var s = servers[i];
-		allServers[s["zimbraServiceHostname"]] = s;
+		allServers[s["zmailServiceHostname"]] = s;
 	}
 	this[ZaProxyConfig.A2_all_servers] = allServers;
 }
@@ -159,14 +159,14 @@ function ZaEnableProxyWizard (parent) {
 	if (AjxEnv.isIE) {
 		w = "550px" ;
 	}
-	ZaXWizardDialog.call(this, parent, null, com_zimbra_proxy_config.LBL_EnableProxyWizTitle, w, "330px", "ZaEnableProxyWizard");
+	ZaXWizardDialog.call(this, parent, null, org_zmail_proxy_config.LBL_EnableProxyWizTitle, w, "330px", "ZaEnableProxyWizard");
 
 	this.stepChoices = [
-		{label: com_zimbra_proxy_config.LBL_ProxyWizardStepSelectServer, value: ZaEnableProxyWizard.STEP_SELECT_SERVER},
-		{label: com_zimbra_proxy_config.LBL_ProxyWizardStepWebProxy,     value: ZaEnableProxyWizard.STEP_CONFIG_WEBPROXY},
-		{label: com_zimbra_proxy_config.LBL_ProxyWizardStepMailProxy,    value: ZaEnableProxyWizard.STEP_CONFIG_MAILPROXY},
-		{label: com_zimbra_proxy_config.LBL_ProxyWizardStepAdvanced,     value: ZaEnableProxyWizard.STEP_CONFIG_ADVANCED},
-		{label: com_zimbra_proxy_config.LBL_ProxyWizardStepFinish,       value: ZaEnableProxyWizard.STEP_FINISH}
+		{label: org_zmail_proxy_config.LBL_ProxyWizardStepSelectServer, value: ZaEnableProxyWizard.STEP_SELECT_SERVER},
+		{label: org_zmail_proxy_config.LBL_ProxyWizardStepWebProxy,     value: ZaEnableProxyWizard.STEP_CONFIG_WEBPROXY},
+		{label: org_zmail_proxy_config.LBL_ProxyWizardStepMailProxy,    value: ZaEnableProxyWizard.STEP_CONFIG_MAILPROXY},
+		{label: org_zmail_proxy_config.LBL_ProxyWizardStepAdvanced,     value: ZaEnableProxyWizard.STEP_CONFIG_ADVANCED},
+		{label: org_zmail_proxy_config.LBL_ProxyWizardStepFinish,       value: ZaEnableProxyWizard.STEP_FINISH}
 	];
 	
 	this.initForm(ZaEnableProxy.myXModel, this.getMyXForm());
@@ -305,40 +305,40 @@ ZaEnableProxyWizard.prototype.applyProxyConfig = function() {
 		}
 	}
 	
-	var batchDoc = AjxSoapDoc.create("BatchRequest", "urn:zimbra");
+	var batchDoc = AjxSoapDoc.create("BatchRequest", "urn:zmail");
 	batchDoc.setMethodAttribute("onerror", "stop");
 	for (var s in flags) {
-		var md = batchDoc.set("ModifyServerRequest", null, null, ZaZimbraAdmin.URN);
+		var md = batchDoc.set("ModifyServerRequest", null, null, ZaZmailAdmin.URN);
 		var id = allServers[s].id;
 		batchDoc.set("id", id, md);
 		
-		ZaEnableProxyWizard.setAttr(batchDoc, ZaProxyConfig.A_zimbraReverseProxyLookupTarget, "TRUE", md);
+		ZaEnableProxyWizard.setAttr(batchDoc, ZaProxyConfig.A_zmailReverseProxyLookupTarget, "TRUE", md);
 		
 		if (flags[s].isUpstream) {
 			// apply web proxy in upstream
-			if (instance.attrs[ZaProxyConfig.A_zimbraReverseProxyHttpEnabled] == "TRUE") {
-				ZaEnableProxyWizard.setAttr(batchDoc, ZaProxyConfig.A_zimbraMailSSLPort, instance.attrs[ZaProxyConfig.A_zimbraMailSSLPort], md);
-				ZaEnableProxyWizard.setAttr(batchDoc, ZaProxyConfig.A_zimbraMailPort, instance.attrs[ZaProxyConfig.A_zimbraMailPort], md);
-				if (instance.attrs[ZaProxyConfig.A_zimbraReverseProxySSLToUpstreamEnabled] == "TRUE") {
-					ZaEnableProxyWizard.setAttr(batchDoc, ZaProxyConfig.A_zimbraMailMode, "https", md);
+			if (instance.attrs[ZaProxyConfig.A_zmailReverseProxyHttpEnabled] == "TRUE") {
+				ZaEnableProxyWizard.setAttr(batchDoc, ZaProxyConfig.A_zmailMailSSLPort, instance.attrs[ZaProxyConfig.A_zmailMailSSLPort], md);
+				ZaEnableProxyWizard.setAttr(batchDoc, ZaProxyConfig.A_zmailMailPort, instance.attrs[ZaProxyConfig.A_zmailMailPort], md);
+				if (instance.attrs[ZaProxyConfig.A_zmailReverseProxySSLToUpstreamEnabled] == "TRUE") {
+					ZaEnableProxyWizard.setAttr(batchDoc, ZaProxyConfig.A_zmailMailMode, "https", md);
 				} else {
-					ZaEnableProxyWizard.setAttr(batchDoc, ZaProxyConfig.A_zimbraMailMode, "http", md);
+					ZaEnableProxyWizard.setAttr(batchDoc, ZaProxyConfig.A_zmailMailMode, "http", md);
 				}
 				
-				if (instance.attrs[ZaProxyConfig.A_zimbraReverseProxyAdminEnabled] == "TRUE") {
-					ZaEnableProxyWizard.setAttr(batchDoc, ZaProxyConfig.A_zimbraAdminPort, instance.attrs[ZaProxyConfig.A_zimbraAdminPort], md);
+				if (instance.attrs[ZaProxyConfig.A_zmailReverseProxyAdminEnabled] == "TRUE") {
+					ZaEnableProxyWizard.setAttr(batchDoc, ZaProxyConfig.A_zmailAdminPort, instance.attrs[ZaProxyConfig.A_zmailAdminPort], md);
 				}
 			}
 			
 			// apply mail proxy in upstream
-			if (instance.attrs[ZaProxyConfig.A_zimbraReverseProxyMailEnabled] == "TRUE") {
-				ZaEnableProxyWizard.setAttr(batchDoc, ZaProxyConfig.A_zimbraImapBindPort, instance.attrs[ZaProxyConfig.A_zimbraImapBindPort], md);
-				ZaEnableProxyWizard.setAttr(batchDoc, ZaProxyConfig.A_zimbraPop3BindPort, instance.attrs[ZaProxyConfig.A_zimbraPop3BindPort], md);
-				ZaEnableProxyWizard.setAttr(batchDoc, ZaProxyConfig.A_zimbraImapSSLBindPort, instance.attrs[ZaProxyConfig.A_zimbraImapSSLBindPort], md);
-				ZaEnableProxyWizard.setAttr(batchDoc, ZaProxyConfig.A_zimbraPop3SSLBindPort, instance.attrs[ZaProxyConfig.A_zimbraPop3SSLBindPort], md);
-				if (instance.attrs[ZaProxyConfig.A_zimbraReverseProxySSLToUpstreamEnabled] != "TRUE") {
-					ZaEnableProxyWizard.setAttr(batchDoc, ZaProxyConfig.A_zimbraImapCleartextLoginEnabled, "TRUE", md);
-					ZaEnableProxyWizard.setAttr(batchDoc, ZaProxyConfig.A_zimbraPop3CleartextLoginEnabled, "TRUE", md);
+			if (instance.attrs[ZaProxyConfig.A_zmailReverseProxyMailEnabled] == "TRUE") {
+				ZaEnableProxyWizard.setAttr(batchDoc, ZaProxyConfig.A_zmailImapBindPort, instance.attrs[ZaProxyConfig.A_zmailImapBindPort], md);
+				ZaEnableProxyWizard.setAttr(batchDoc, ZaProxyConfig.A_zmailPop3BindPort, instance.attrs[ZaProxyConfig.A_zmailPop3BindPort], md);
+				ZaEnableProxyWizard.setAttr(batchDoc, ZaProxyConfig.A_zmailImapSSLBindPort, instance.attrs[ZaProxyConfig.A_zmailImapSSLBindPort], md);
+				ZaEnableProxyWizard.setAttr(batchDoc, ZaProxyConfig.A_zmailPop3SSLBindPort, instance.attrs[ZaProxyConfig.A_zmailPop3SSLBindPort], md);
+				if (instance.attrs[ZaProxyConfig.A_zmailReverseProxySSLToUpstreamEnabled] != "TRUE") {
+					ZaEnableProxyWizard.setAttr(batchDoc, ZaProxyConfig.A_zmailImapCleartextLoginEnabled, "TRUE", md);
+					ZaEnableProxyWizard.setAttr(batchDoc, ZaProxyConfig.A_zmailPop3CleartextLoginEnabled, "TRUE", md);
 				}
 			}
 		}
@@ -356,63 +356,63 @@ ZaEnableProxyWizard.prototype.applyProxyConfig = function() {
 	// 2) modify proxy server
 	var proxyServer = allServers[instance[ZaProxyConfig.A2_target_server]];
 	
-	var proxyDoc = AjxSoapDoc.create("ModifyServerRequest", ZaZimbraAdmin.URN);
+	var proxyDoc = AjxSoapDoc.create("ModifyServerRequest", ZaZmailAdmin.URN);
 	proxyDoc.set("id", proxyServer.id);
-	if (instance.attrs[ZaProxyConfig.A_zimbraReverseProxyHttpEnabled] == "TRUE") {
+	if (instance.attrs[ZaProxyConfig.A_zmailReverseProxyHttpEnabled] == "TRUE") {
 		// apply web proxy config
-		ZaEnableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zimbraReverseProxyHttpEnabled, instance.attrs[ZaProxyConfig.A_zimbraReverseProxyHttpEnabled]);
-		ZaEnableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zimbraReverseProxyMailMode, instance.attrs[ZaProxyConfig.A_zimbraReverseProxyMailMode]);
-		var mailmode = instance.attrs[ZaProxyConfig.A_zimbraReverseProxyMailMode];
+		ZaEnableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zmailReverseProxyHttpEnabled, instance.attrs[ZaProxyConfig.A_zmailReverseProxyHttpEnabled]);
+		ZaEnableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zmailReverseProxyMailMode, instance.attrs[ZaProxyConfig.A_zmailReverseProxyMailMode]);
+		var mailmode = instance.attrs[ZaProxyConfig.A_zmailReverseProxyMailMode];
 		if (mailmode != "https") {
-			ZaEnableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zimbraMailProxyPort, instance.attrs[ZaProxyConfig.A_zimbraMailProxyPort]);
+			ZaEnableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zmailMailProxyPort, instance.attrs[ZaProxyConfig.A_zmailMailProxyPort]);
 		}
 		if (mailmode != "http") {
-			ZaEnableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zimbraMailSSLProxyPort, instance.attrs[ZaProxyConfig.A_zimbraMailSSLProxyPort]);
+			ZaEnableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zmailMailSSLProxyPort, instance.attrs[ZaProxyConfig.A_zmailMailSSLProxyPort]);
 		}
-		if (instance.attrs[ZaProxyConfig.A_zimbraReverseProxyAdminEnabled] == "TRUE") {
-			ZaEnableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zimbraReverseProxyAdminEnabled, instance.attrs[ZaProxyConfig.A_zimbraReverseProxyAdminEnabled]);
-			ZaEnableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zimbraAdminProxyPort, instance.attrs[ZaProxyConfig.A_zimbraAdminProxyPort]);
+		if (instance.attrs[ZaProxyConfig.A_zmailReverseProxyAdminEnabled] == "TRUE") {
+			ZaEnableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zmailReverseProxyAdminEnabled, instance.attrs[ZaProxyConfig.A_zmailReverseProxyAdminEnabled]);
+			ZaEnableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zmailAdminProxyPort, instance.attrs[ZaProxyConfig.A_zmailAdminProxyPort]);
 		}
 	}
 	
-	if (instance.attrs[ZaProxyConfig.A_zimbraReverseProxyMailEnabled] == "TRUE") {
+	if (instance.attrs[ZaProxyConfig.A_zmailReverseProxyMailEnabled] == "TRUE") {
 		// apply mail proxy config
-		ZaEnableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zimbraReverseProxyMailEnabled, instance.attrs[ZaProxyConfig.A_zimbraReverseProxyMailEnabled]);
-		ZaEnableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zimbraImapProxyBindPort, instance.attrs[ZaProxyConfig.A_zimbraImapProxyBindPort]);
-		ZaEnableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zimbraImapSSLProxyBindPort, instance.attrs[ZaProxyConfig.A_zimbraImapSSLProxyBindPort]);
-		ZaEnableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zimbraReverseProxyImapStartTlsMode, instance.attrs[ZaProxyConfig.A_zimbraReverseProxyImapStartTlsMode]);
-		ZaEnableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zimbraPop3ProxyBindPort, instance.attrs[ZaProxyConfig.A_zimbraPop3ProxyBindPort]);
-		ZaEnableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zimbraPop3SSLProxyBindPort, instance.attrs[ZaProxyConfig.A_zimbraPop3SSLProxyBindPort]);
-		ZaEnableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zimbraReverseProxyPop3StartTlsMode, instance.attrs[ZaProxyConfig.A_zimbraReverseProxyPop3StartTlsMode]);
+		ZaEnableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zmailReverseProxyMailEnabled, instance.attrs[ZaProxyConfig.A_zmailReverseProxyMailEnabled]);
+		ZaEnableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zmailImapProxyBindPort, instance.attrs[ZaProxyConfig.A_zmailImapProxyBindPort]);
+		ZaEnableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zmailImapSSLProxyBindPort, instance.attrs[ZaProxyConfig.A_zmailImapSSLProxyBindPort]);
+		ZaEnableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zmailReverseProxyImapStartTlsMode, instance.attrs[ZaProxyConfig.A_zmailReverseProxyImapStartTlsMode]);
+		ZaEnableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zmailPop3ProxyBindPort, instance.attrs[ZaProxyConfig.A_zmailPop3ProxyBindPort]);
+		ZaEnableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zmailPop3SSLProxyBindPort, instance.attrs[ZaProxyConfig.A_zmailPop3SSLProxyBindPort]);
+		ZaEnableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zmailReverseProxyPop3StartTlsMode, instance.attrs[ZaProxyConfig.A_zmailReverseProxyPop3StartTlsMode]);
 	}
 	
 	// apply advanced proxy config
-	ZaEnableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zimbraReverseProxyWorkerProcesses, instance.attrs[ZaProxyConfig.A_zimbraReverseProxyWorkerProcesses]);
-	ZaEnableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zimbraReverseProxyWorkerConnections, instance.attrs[ZaProxyConfig.A_zimbraReverseProxyWorkerConnections]);
-	ZaEnableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zimbraReverseProxyDnsLookupInServerEnabled, instance.attrs[ZaProxyConfig.A_zimbraReverseProxyDnsLookupInServerEnabled]);
-	ZaEnableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zimbraReverseProxyLogLevel, instance.attrs[ZaProxyConfig.A_zimbraReverseProxyLogLevel]);
-	ZaEnableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zimbraReverseProxySSLToUpstreamEnabled, instance.attrs[ZaProxyConfig.A_zimbraReverseProxySSLToUpstreamEnabled]);
+	ZaEnableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zmailReverseProxyWorkerProcesses, instance.attrs[ZaProxyConfig.A_zmailReverseProxyWorkerProcesses]);
+	ZaEnableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zmailReverseProxyWorkerConnections, instance.attrs[ZaProxyConfig.A_zmailReverseProxyWorkerConnections]);
+	ZaEnableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zmailReverseProxyDnsLookupInServerEnabled, instance.attrs[ZaProxyConfig.A_zmailReverseProxyDnsLookupInServerEnabled]);
+	ZaEnableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zmailReverseProxyLogLevel, instance.attrs[ZaProxyConfig.A_zmailReverseProxyLogLevel]);
+	ZaEnableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zmailReverseProxySSLToUpstreamEnabled, instance.attrs[ZaProxyConfig.A_zmailReverseProxySSLToUpstreamEnabled]);
 	
 	// apply upstream settings
 	if (instance[ZaProxyConfig.A2_all_mailbox_as_upstream]) {
-		ZaEnableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zimbraReverseProxyUpstreamServers, "");
+		ZaEnableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zmailReverseProxyUpstreamServers, "");
 	} else {
 		var upArr = instance[ZaProxyConfig.A2_target_up_servers];
 		for (var i = 0; i < upArr.length; i++) {
-			ZaEnableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zimbraReverseProxyUpstreamServers, upArr[i]);
+			ZaEnableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zmailReverseProxyUpstreamServers, upArr[i]);
 		}
 	}
 	
 	if (instance[ZaProxyConfig.A2_all_mailbox_as_lookuptarget]) {
-		ZaEnableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zimbraReverseProxyAvailableLookupTargets, "");
+		ZaEnableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zmailReverseProxyAvailableLookupTargets, "");
 	} else {
 		var ltArr = instance[ZaProxyConfig.A2_target_lt_servers];
 		for (var i = 0; i < ltArr.length; i++) {
-			ZaEnableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zimbraReverseProxyAvailableLookupTargets, ltArr[i]);
+			ZaEnableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zmailReverseProxyAvailableLookupTargets, ltArr[i]);
 		}
 	}
 	
-    ZaEnableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zimbraServiceEnabled, "proxy", null, "+");
+    ZaEnableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zmailServiceEnabled, "proxy", null, "+");
     
 	// 3) send request and renew server with the response
 	var params2 = new Object();
@@ -467,32 +467,32 @@ function(obj) {
 }
 
 ZaEnableProxyWizard.isWebProxyEnabled = function() {
-	var webProxyEnabled = this.getInstanceValue(ZaProxyConfig.A_zimbraReverseProxyHttpEnabled);
+	var webProxyEnabled = this.getInstanceValue(ZaProxyConfig.A_zmailReverseProxyHttpEnabled);
 	return (webProxyEnabled == "TRUE");
 }
 
 ZaEnableProxyWizard.isAdminProxyEnabled = function() {
-	var adminProxyEnabled = this.getInstanceValue(ZaProxyConfig.A_zimbraReverseProxyAdminEnabled);
+	var adminProxyEnabled = this.getInstanceValue(ZaProxyConfig.A_zmailReverseProxyAdminEnabled);
 	return (adminProxyEnabled == "TRUE");
 }
 
 ZaEnableProxyWizard.isMailProxyEnabled = function() {
-	var mailProxyEnabled = this.getInstanceValue(ZaProxyConfig.A_zimbraReverseProxyMailEnabled);
+	var mailProxyEnabled = this.getInstanceValue(ZaProxyConfig.A_zmailReverseProxyMailEnabled);
 	return (mailProxyEnabled == "TRUE");
 }
 
 ZaEnableProxyWizard.isProxyMailModeNotHTTP = function() {
-	var mailmode = this.getInstanceValue(ZaProxyConfig.A_zimbraReverseProxyMailMode);
+	var mailmode = this.getInstanceValue(ZaProxyConfig.A_zmailReverseProxyMailMode);
 	return (mailmode != "http");
 }
 
 ZaEnableProxyWizard.isProxyMailModeNotHTTPS = function() {
-	var mailmode = this.getInstanceValue(ZaProxyConfig.A_zimbraReverseProxyMailMode);
+	var mailmode = this.getInstanceValue(ZaProxyConfig.A_zmailReverseProxyMailMode);
 	return (mailmode != "https");
 }
 
 ZaEnableProxyWizard.isSSLToUpstreamEnabled = function() {
-	var uptossl = this.getInstanceValue(ZaProxyConfig.A_zimbraReverseProxySSLToUpstreamEnabled);
+	var uptossl = this.getInstanceValue(ZaProxyConfig.A_zmailReverseProxySSLToUpstreamEnabled);
 	return (uptossl == "TRUE");
 }
 
@@ -522,12 +522,12 @@ ZaEnableProxyWizard.myXFormModifier = function(xFormObject) {
 	
 	case_select_server.items = [
 		{type: _SPACER_, height: 10},
-		{type: _OUTPUT_, colSpan: 2, value: com_zimbra_proxy_config.LBL_ProxySelectProxyServer},
+		{type: _OUTPUT_, colSpan: 2, value: org_zmail_proxy_config.LBL_ProxySelectProxyServer},
 		{type: _SPACER_, height: 10},
 		{type: _GROUP_, colSpan: "*", colSizes: ["260px", "*"],
 		 items:[
 			{type: _OSELECT1_, ref: ZaProxyConfig.A2_target_server, 
-			 label: com_zimbra_proxy_config.LBL_ProxySelectProxyServerToEnableInDetail, 
+			 label: org_zmail_proxy_config.LBL_ProxySelectProxyServerToEnableInDetail, 
 			 labelLocation:_LEFT_, labelCssStyle: "text-align:left",
 			 choices: ZaEnableProxyWizard.proxyServerChoices,
 			 editable: false
@@ -537,15 +537,15 @@ ZaEnableProxyWizard.myXFormModifier = function(xFormObject) {
 		{type: _SPACER_, height: 20},
 		{type: _GROUP_, colSpan: "*", colSizes: ["15px", "*"],
 		 items:[
-			{type: _OUTPUT_, colSpan: 2, value: com_zimbra_proxy_config.LBL_ProxySelectUpServer},
+			{type: _OUTPUT_, colSpan: 2, value: org_zmail_proxy_config.LBL_ProxySelectUpServer},
 			{type: _SPACER_, height: 10},
 			{type: _CHECKBOX_, ref: ZaProxyConfig.A2_all_mailbox_as_upstream,
-			 label: com_zimbra_proxy_config.LBL_ProxyAllMailboxAsUp,
+			 label: org_zmail_proxy_config.LBL_ProxyAllMailboxAsUp,
 			 trueValue: "TRUE", falseValue: "FALSE", labelLocation: _RIGHT_
 			},
 			{type: _SPACER_, height: "10px"},
 			{type: _OUTPUT_, colSpan: "*", label: "", labelCssSytle: "padding-left:10px",
-			 value: com_zimbra_proxy_config.LBL_ProxyLimitUp,
+			 value: org_zmail_proxy_config.LBL_ProxyLimitUp,
 			 visibilityChecks: [ZaEnableProxyWizard.isNotAllMbxAsUp],
 			 visibilityChangeEventSources: [ZaProxyConfig.A2_all_mailbox_as_upstream]
 			},
@@ -560,15 +560,15 @@ ZaEnableProxyWizard.myXFormModifier = function(xFormObject) {
 		{type: _SPACER_, height: 20},
 		{type: _GROUP_,  colSpan: "*", colSizes: ["15px", "*"],
 		 items:[
-			{type: _OUTPUT_, colSpan: 2, value: com_zimbra_proxy_config.LBL_ProxySelectLTServer},
+			{type: _OUTPUT_, colSpan: 2, value: org_zmail_proxy_config.LBL_ProxySelectLTServer},
 			{type: _SPACER_, height: 10},
 			{type: _CHECKBOX_, ref: ZaProxyConfig.A2_all_mailbox_as_lookuptarget,
-			 label: com_zimbra_proxy_config.LBL_ProxyAllMailboxAsLT,
+			 label: org_zmail_proxy_config.LBL_ProxyAllMailboxAsLT,
 			 trueValue: "TRUE", falseValue: "FALSE", labelLocation: _RIGHT_
 			},
 			{type: _SPACER_, height: "10px"},
 			{type: _OUTPUT_, colSpan: "*", label: "", labelCssSytle: "padding-left:10px",
-			 value: com_zimbra_proxy_config.LBL_ProxyLimitLT,
+			 value: org_zmail_proxy_config.LBL_ProxyLimitLT,
 			 visibilityChecks: [ZaEnableProxyWizard.isNotAllMbxAsLT],
 			 visibilityChangeEventSources: [ZaProxyConfig.A2_all_mailbox_as_lookuptarget]
 			},
@@ -593,67 +593,67 @@ ZaEnableProxyWizard.myXFormModifier = function(xFormObject) {
 	case_config_webproxy.items = [
 		{type: _GROUP_, numCols:2, colSpan: "*", colSizes:["100px","*"],
 		 items: [
-			{ type:_OUTPUT_, colSpan: "*", value: com_zimbra_proxy_config.LBL_ProxyWebProxyConfig, cssStyle: "font-weight:bold"},
+			{ type:_OUTPUT_, colSpan: "*", value: org_zmail_proxy_config.LBL_ProxyWebProxyConfig, cssStyle: "font-weight:bold"},
 			{ type:_OUTPUT_ , ref: ZaProxyConfig.A2_target_server, 
 			  labelLocation:_LEFT_ , labelCssStyle: "text-align: left; font-weight:bold",
-			  label: com_zimbra_proxy_config.LBL_ProxyServerName
+			  label: org_zmail_proxy_config.LBL_ProxyServerName
 			}
 		 ]
 		},
 		{type:_SPACER_, height: 10},
 		{type: _GROUP_, numCols:2, colSizes: ["120px", "auto"],
 		 items: [
-			{type: _CHECKBOX_, label: com_zimbra_proxy_config.LBL_ProxyEnableWebProxy,
-			 ref: ZaProxyConfig.A_zimbraReverseProxyHttpEnabled,
+			{type: _CHECKBOX_, label: org_zmail_proxy_config.LBL_ProxyEnableWebProxy,
+			 ref: ZaProxyConfig.A_zmailReverseProxyHttpEnabled,
 			 trueValue: "TRUE", falseValue: "FALSE", labelCssStyle: "text-align: right"
 			}
 		 ]
 		},
 		{type: _GROUP_, numCols:2, colSizes: ["200px", "auto"],
 		 visibilityChecks: [ZaEnableProxyWizard.isWebProxyEnabled],
-		 visibilityChangeEventSources: [ZaProxyConfig.A_zimbraReverseProxyHttpEnabled],
+		 visibilityChangeEventSources: [ZaProxyConfig.A_zmailReverseProxyHttpEnabled],
 		 items: [
-			{type: _SELECT1_, label: com_zimbra_proxy_config.LBL_ProxyWebProxyMode,
-			 ref: ZaProxyConfig.A_zimbraReverseProxyMailMode,
+			{type: _SELECT1_, label: org_zmail_proxy_config.LBL_ProxyWebProxyMode,
+			 ref: ZaProxyConfig.A_zmailReverseProxyMailMode,
 			 width: "60px"
 			},
-			{type: _TEXTFIELD_, label: com_zimbra_proxy_config.LBL_ProxyHttpProxyPort,
-			 ref: ZaProxyConfig.A_zimbraMailProxyPort,
+			{type: _TEXTFIELD_, label: org_zmail_proxy_config.LBL_ProxyHttpProxyPort,
+			 ref: ZaProxyConfig.A_zmailMailProxyPort,
 			 width: "60px",
 			 visibilityChecks: [ZaEnableProxyWizard.isProxyMailModeNotHTTPS],
-			 visibilityChangeEventSources: [ZaProxyConfig.A_zimbraReverseProxyMailMode]
+			 visibilityChangeEventSources: [ZaProxyConfig.A_zmailReverseProxyMailMode]
 			},
-			{type: _TEXTFIELD_, label: com_zimbra_proxy_config.LBL_ProxyHttpSSLProxyPort,
-			 ref: ZaProxyConfig.A_zimbraMailSSLProxyPort,
+			{type: _TEXTFIELD_, label: org_zmail_proxy_config.LBL_ProxyHttpSSLProxyPort,
+			 ref: ZaProxyConfig.A_zmailMailSSLProxyPort,
 			 width: "60px",
 			 visibilityChecks: [ZaEnableProxyWizard.isProxyMailModeNotHTTP],
-			 visibilityChangeEventSources: [ZaProxyConfig.A_zimbraReverseProxyMailMode]
+			 visibilityChangeEventSources: [ZaProxyConfig.A_zmailReverseProxyMailMode]
 			},
 			{type:_SPACER_, height: 10},
-			{type: _TEXTFIELD_, label: com_zimbra_proxy_config.LBL_ProxyHttpUpPort,
-			 ref: ZaProxyConfig.A_zimbraMailPort,
+			{type: _TEXTFIELD_, label: org_zmail_proxy_config.LBL_ProxyHttpUpPort,
+			 ref: ZaProxyConfig.A_zmailMailPort,
 			 width: "60px"
 			},
-			{type: _TEXTFIELD_, label: com_zimbra_proxy_config.LBL_ProxyHttpSSLUpPort,
-			 ref: ZaProxyConfig.A_zimbraMailSSLPort,
+			{type: _TEXTFIELD_, label: org_zmail_proxy_config.LBL_ProxyHttpSSLUpPort,
+			 ref: ZaProxyConfig.A_zmailMailSSLPort,
 			 width: "60px"
 			},
 			{type: _SPACER_, height: 10},
-			{type: _CHECKBOX_, label: com_zimbra_proxy_config.LBL_ProxyAdminEnabled,
-			 ref: ZaProxyConfig.A_zimbraReverseProxyAdminEnabled,
+			{type: _CHECKBOX_, label: org_zmail_proxy_config.LBL_ProxyAdminEnabled,
+			 ref: ZaProxyConfig.A_zmailReverseProxyAdminEnabled,
 			 trueValue: "TRUE", falseValue: "FALSE", labelCssStyle: "text-align: right"
 			},
-			{type: _TEXTFIELD_, label: com_zimbra_proxy_config.LBL_ProxyAdminProxyPort,
-			 ref: ZaProxyConfig.A_zimbraAdminProxyPort,
+			{type: _TEXTFIELD_, label: org_zmail_proxy_config.LBL_ProxyAdminProxyPort,
+			 ref: ZaProxyConfig.A_zmailAdminProxyPort,
 			 width: "60px",
 			 visibilityChecks: [ZaEnableProxyWizard.isAdminProxyEnabled],
-			 visibilityChangeEventSources: [ZaProxyConfig.A_zimbraReverseProxyAdminEnabled]
+			 visibilityChangeEventSources: [ZaProxyConfig.A_zmailReverseProxyAdminEnabled]
 			},
-			{type: _TEXTFIELD_, label: com_zimbra_proxy_config.LBL_ProxyAdminUpPort,
-			 ref: ZaProxyConfig.A_zimbraAdminPort,
+			{type: _TEXTFIELD_, label: org_zmail_proxy_config.LBL_ProxyAdminUpPort,
+			 ref: ZaProxyConfig.A_zmailAdminPort,
 			 width: "60px",
 			 visibilityChecks: [ZaEnableProxyWizard.isAdminProxyEnabled],
-			 visibilityChangeEventSources: [ZaProxyConfig.A_zimbraReverseProxyAdminEnabled]
+			 visibilityChangeEventSources: [ZaProxyConfig.A_zmailReverseProxyAdminEnabled]
 			},
 		 ]
 		},
@@ -670,64 +670,64 @@ ZaEnableProxyWizard.myXFormModifier = function(xFormObject) {
 	case_config_mailproxy.items = [
 		{type: _GROUP_, numCols:2, colSpan: "*", colSizes:["100px","*"],
 		 items: [
-			{ type:_OUTPUT_, colSpan: "*", value: com_zimbra_proxy_config.LBL_ProxyMailProxyConfig, cssStyle: "font-weight:bold"},
+			{ type:_OUTPUT_, colSpan: "*", value: org_zmail_proxy_config.LBL_ProxyMailProxyConfig, cssStyle: "font-weight:bold"},
 			{ type:_OUTPUT_ , ref: ZaProxyConfig.A2_target_server, 
 			  labelLocation:_LEFT_ , labelCssStyle: "text-align: left; font-weight:bold",
-			  label: com_zimbra_proxy_config.LBL_ProxyServerName
+			  label: org_zmail_proxy_config.LBL_ProxyServerName
 			}
 		 ]
 		},
 		{type:_SPACER_, height: 10},
 		{type: _GROUP_, numCols:2, colSizes: ["120px", "auto"],
 		 items: [
-			{type: _CHECKBOX_, label: com_zimbra_proxy_config.LBL_ProxyEnableMailProxy,
-			 ref: ZaProxyConfig.A_zimbraReverseProxyMailEnabled,
+			{type: _CHECKBOX_, label: org_zmail_proxy_config.LBL_ProxyEnableMailProxy,
+			 ref: ZaProxyConfig.A_zmailReverseProxyMailEnabled,
 			 trueValue: "TRUE", falseValue: "FALSE", labelCssStyle: "text-align: right"
 			}
 		 ]
 		},
 		{type: _GROUP_, numCols:2, colSizes: ["200px", "auto"],
 		 visibilityChecks: [ZaEnableProxyWizard.isMailProxyEnabled],
-		 visibilityChangeEventSources: [ZaProxyConfig.A_zimbraReverseProxyMailEnabled],
+		 visibilityChangeEventSources: [ZaProxyConfig.A_zmailReverseProxyMailEnabled],
 		 items: [
-			{type: _TEXTFIELD_, label: com_zimbra_proxy_config.LBL_ProxyImapProxyPort,
-			 ref: ZaProxyConfig.A_zimbraImapProxyBindPort,
+			{type: _TEXTFIELD_, label: org_zmail_proxy_config.LBL_ProxyImapProxyPort,
+			 ref: ZaProxyConfig.A_zmailImapProxyBindPort,
 			 width: "60px"
 			},
-			{type: _TEXTFIELD_, label: com_zimbra_proxy_config.LBL_ProxyImapSSLProxyPort,
-			 ref: ZaProxyConfig.A_zimbraImapSSLProxyBindPort,
+			{type: _TEXTFIELD_, label: org_zmail_proxy_config.LBL_ProxyImapSSLProxyPort,
+			 ref: ZaProxyConfig.A_zmailImapSSLProxyBindPort,
 			 width: "60px"
 			},
-			{type: _TEXTFIELD_, label: com_zimbra_proxy_config.LBL_ProxyImapUpPort,
-			 ref: ZaProxyConfig.A_zimbraImapBindPort,
+			{type: _TEXTFIELD_, label: org_zmail_proxy_config.LBL_ProxyImapUpPort,
+			 ref: ZaProxyConfig.A_zmailImapBindPort,
 			 width: "60px"
 			},
-			{type: _TEXTFIELD_, label: com_zimbra_proxy_config.LBL_ProxyImapSSLUpPort,
-			 ref: ZaProxyConfig.A_zimbraImapSSLBindPort,
+			{type: _TEXTFIELD_, label: org_zmail_proxy_config.LBL_ProxyImapSSLUpPort,
+			 ref: ZaProxyConfig.A_zmailImapSSLBindPort,
 			 width: "60px"
 			},
-			{type: _SELECT1_, label: com_zimbra_proxy_config.LBL_ProxyImapStartTlsMode,
-			 ref: ZaProxyConfig.A_zimbraReverseProxyImapStartTlsMode
+			{type: _SELECT1_, label: org_zmail_proxy_config.LBL_ProxyImapStartTlsMode,
+			 ref: ZaProxyConfig.A_zmailReverseProxyImapStartTlsMode
 			},
 			{type: _SPACER_, height: 10},
-			{type: _TEXTFIELD_, label: com_zimbra_proxy_config.LBL_ProxyPop3ProxyPort,
-			 ref: ZaProxyConfig.A_zimbraPop3ProxyBindPort,
+			{type: _TEXTFIELD_, label: org_zmail_proxy_config.LBL_ProxyPop3ProxyPort,
+			 ref: ZaProxyConfig.A_zmailPop3ProxyBindPort,
 			 width: "60px"
 			},
-			{type: _TEXTFIELD_, label: com_zimbra_proxy_config.LBL_ProxyPop3SSLProxyPort,
-			 ref: ZaProxyConfig.A_zimbraPop3SSLProxyBindPort,
+			{type: _TEXTFIELD_, label: org_zmail_proxy_config.LBL_ProxyPop3SSLProxyPort,
+			 ref: ZaProxyConfig.A_zmailPop3SSLProxyBindPort,
 			 width: "60px"
 			},
-			{type: _TEXTFIELD_, label: com_zimbra_proxy_config.LBL_ProxyPop3UpPort,
-			 ref: ZaProxyConfig.A_zimbraPop3BindPort,
+			{type: _TEXTFIELD_, label: org_zmail_proxy_config.LBL_ProxyPop3UpPort,
+			 ref: ZaProxyConfig.A_zmailPop3BindPort,
 			 width: "60px"
 			},
-			{type: _TEXTFIELD_, label: com_zimbra_proxy_config.LBL_ProxyPop3SSLUpPort,
-			 ref: ZaProxyConfig.A_zimbraPop3SSLBindPort,
+			{type: _TEXTFIELD_, label: org_zmail_proxy_config.LBL_ProxyPop3SSLUpPort,
+			 ref: ZaProxyConfig.A_zmailPop3SSLBindPort,
 			 width: "60px"
 			},
-			{type: _SELECT1_, label: com_zimbra_proxy_config.LBL_ProxyPop3StartTlsMode,
-			 ref: ZaProxyConfig.A_zimbraReverseProxyPop3StartTlsMode
+			{type: _SELECT1_, label: org_zmail_proxy_config.LBL_ProxyPop3StartTlsMode,
+			 ref: ZaProxyConfig.A_zmailReverseProxyPop3StartTlsMode
 			}
 		 ]
 		}
@@ -742,36 +742,36 @@ ZaEnableProxyWizard.myXFormModifier = function(xFormObject) {
 	case_config_advanced.items = [
 		{type: _GROUP_, numCols:2, colSpan: "*", colSizes:["100px", "*"],
 		 items: [
-			{ type:_OUTPUT_, colSpan: "*", value: com_zimbra_proxy_config.LBL_ProxyGeneralConfig, cssStyle: "font-weight:bold"},
+			{ type:_OUTPUT_, colSpan: "*", value: org_zmail_proxy_config.LBL_ProxyGeneralConfig, cssStyle: "font-weight:bold"},
 			{ type:_OUTPUT_ , ref: ZaProxyConfig.A2_target_server, 
 			  labelLocation:_LEFT_ , labelCssStyle: "text-align: left; font-weight:bold",
-			  label: com_zimbra_proxy_config.LBL_ProxyServerName
+			  label: org_zmail_proxy_config.LBL_ProxyServerName
 			}
 		 ]
 		},
 		{type:_SPACER_, height: 10},
 		{type: _GROUP_, numCols:2, colSizes: ["250px", "auto"],
 		 items: [
-			{type: _TEXTFIELD_, label: com_zimbra_proxy_config.LBL_ProxyWorkerProcessNum,
-			 ref: ZaProxyConfig.A_zimbraReverseProxyWorkerProcesses,
+			{type: _TEXTFIELD_, label: org_zmail_proxy_config.LBL_ProxyWorkerProcessNum,
+			 ref: ZaProxyConfig.A_zmailReverseProxyWorkerProcesses,
 			 width: "60px"
 			},
-			{type: _TEXTFIELD_, label: com_zimbra_proxy_config.LBL_ProxyWorkerConnectionNum,
-			 ref: ZaProxyConfig.A_zimbraReverseProxyWorkerConnections,
+			{type: _TEXTFIELD_, label: org_zmail_proxy_config.LBL_ProxyWorkerConnectionNum,
+			 ref: ZaProxyConfig.A_zmailReverseProxyWorkerConnections,
 			 width: "60px"
 			},
-			{type: _SELECT1_, label: com_zimbra_proxy_config.LBL_ProxyLogLevel,
-			 ref: ZaProxyConfig.A_zimbraReverseProxyLogLevel,
+			{type: _SELECT1_, label: org_zmail_proxy_config.LBL_ProxyLogLevel,
+			 ref: ZaProxyConfig.A_zmailReverseProxyLogLevel,
 			 getDisplayValue: function (val) {
 				 return val;
 			 }
 			},
-			{type: _CHECKBOX_, label: com_zimbra_proxy_config.LBL_ProxyUseSSLToUpstream,
-			 ref: ZaProxyConfig.A_zimbraReverseProxySSLToUpstreamEnabled,
+			{type: _CHECKBOX_, label: org_zmail_proxy_config.LBL_ProxyUseSSLToUpstream,
+			 ref: ZaProxyConfig.A_zmailReverseProxySSLToUpstreamEnabled,
 			 trueValue: "TRUE", falseValue: "FALSE",labelCssStyle: "text-align: right"
 			},
-			{type: _CHECKBOX_, label: com_zimbra_proxy_config.LBL_ProxyAllowServerResolveRoute,
-			 ref: ZaProxyConfig.A_zimbraReverseProxyDnsLookupInServerEnabled,
+			{type: _CHECKBOX_, label: org_zmail_proxy_config.LBL_ProxyAllowServerResolveRoute,
+			 ref: ZaProxyConfig.A_zmailReverseProxyDnsLookupInServerEnabled,
 			 labelCssStyle: "text-align: right",
 			 trueValue: "FALSE", falseValue: "TRUE" // the true and false value are meant to be reversed
 			}
@@ -791,7 +791,7 @@ ZaEnableProxyWizard.myXFormModifier = function(xFormObject) {
 			{ type:_SPACER_, height: 10},
 			{ type:_OUTPUT_, 
 			  labelLocation:_LEFT_ , labelCssStyle: "text-align: left",
-			  label: com_zimbra_proxy_config.MSG_ProxyEnableFinish
+			  label: org_zmail_proxy_config.MSG_ProxyEnableFinish
 			}
 		 ]
 		}

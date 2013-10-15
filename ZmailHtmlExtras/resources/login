@@ -1,7 +1,7 @@
 <%@ page buffer="8kb" autoFlush="true" %>
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
-<%@ taglib prefix="app" uri="com.zimbra.htmlextras" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
+<%@ taglib prefix="app" uri="org.zmail.htmlextras" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -30,7 +30,7 @@
 
 <html>
 <head>
-<title>Zimbra</title>
+<title>Zmail</title>
 <style type="text/css">
 	@import url("<c:url value="/style/nifty.css"/>");
 	@import url("<c:url value="/style/common.css"/>");
@@ -40,7 +40,7 @@
 <div class="contentLogin">
 	<table border=0 width=100%><tr>
 	<td width=175>
-		<center><img src="<c:url value="/images/zimbra_logo.gif"/>" width=150 height=50 alt="Zimbra Logo"></center>
+		<center><img src="<c:url value="/images/zmail_logo.gif"/>" width=150 height=50 alt="Zmail Logo"></center>
 	</td>
 	<td>
 		<table border=0 width=100%><tr><td>
@@ -51,7 +51,7 @@
 				<b class="r3"></b>
 				<b class="r4"></b>
 			</b>
-			<span class='welcome'>&nbsp;<b>Welcome to Zimbra</b></span>
+			<span class='welcome'>&nbsp;<b>Welcome to Zmail</b></span>
 			<b class="rbottomLogin">
 				<b class="r4"></b>
 				<b class="r3"></b>
@@ -72,15 +72,15 @@
 		<img src="<c:url value="/images/talk_bubbles.gif"/>" width=150 height=120 alt="talk bubbles">
 	</td>
 	<td valign=top>
-		<b class="welcome"><font color="#3366CC">About Zimbra</font></b><p>
-		<p>Zimbra Collaboration Suite (ZCS) 4.5 is a truly modern, innovative messaging and collaboration application. Zimbra is the leading open source <a href="http://www.zimbra.com/products/solutions.html">solution</a> for enterprise, service provider, education, and government environments; offering administrators and their end-users unmatched <a href="http://www.zimbra.com/products/benefits.html">benefits</a>. It's no wonder Zimbra is a popular choice for today's growing <a href="http://www.zimbra.com/apple/">Mac</a> and <a href="http://www.zimbra.com/products/zimbra_admin.html">Linux email server</a> base.</p>
-		<p><a href="http://www.zimbra.com/products/collaboration.html">Ajax based web collaboration</a> is at the heart of ZCS 4.5. The powerful web client integrates email, contacts, <a href="http://www.zimbra.com/products/zimbra_calendar.html">shared calendar</a>, VoIP, and online document authoring into a rich browser-based interface. Also, our unique open source <a href="http://www.zimbra.com/products/zimlets.html">Zimlet</a> technology makes it easy for you to include custom 'mash-ups' in the ZCS web client.</p>
+		<b class="welcome"><font color="#3366CC">About Zmail</font></b><p>
+		<p>Zimbra Collaboration Suite (ZCS) 4.5 is a truly modern, innovative messaging and collaboration application. Zmail is the leading open source <a href="http://www.zmail.com/products/solutions.html">solution</a> for enterprise, service provider, education, and government environments; offering administrators and their end-users unmatched <a href="http://www.zmail.com/products/benefits.html">benefits</a>. It's no wonder Zmail is a popular choice for today's growing <a href="http://www.zmail.com/apple/">Mac</a> and <a href="http://www.zmail.com/products/zmail_admin.html">Linux email server</a> base.</p>
+		<p><a href="http://www.zmail.com/products/collaboration.html">Ajax based web collaboration</a> is at the heart of ZCS 4.5. The powerful web client integrates email, contacts, <a href="http://www.zmail.com/products/zmail_calendar.html">shared calendar</a>, VoIP, and online document authoring into a rich browser-based interface. Also, our unique open source <a href="http://www.zmail.com/products/zimlets.html">Zimlet</a> technology makes it easy for you to include custom 'mash-ups' in the ZCS web client.</p>
 
-		<p>ZCS 4.5 also includes an elegant <a href="http://www.zimbra.com/products/zimbra_admin.html">Ajax based Admin Interface</a> plus full scripting tools to manage the ZCS server.  Full support is provided for standards-based APIs (IMAP / POP / iCal / CalDAV) as well as MAPI and iSync, which enable seamless compatibility with other clients like <a href="http://www.zimbra.com/products/desktop_compatibility.html">Microsoft Outlook</a>, <a href="http://www.zimbra.com/products/desktop_compatibility.html">Apple desktop suite</a>, and Mozilla Thunderbird.</p>
-		<p>Zimbra also offers <a href="http://www.zimbra.com/products/zimbra_mobile.html">Zimbra Mobile</a>, which provides over-the-air "push" synchronization to mobile devices without the need for third party software or additional servers for most devices.</p>
-		<p>The Zimbra solution also has a complete <a href="http://www.zimbra.com/products/zimbra_security.html">high security</a> package including built-in anti-spam and anti-virus scanning.</p>
+		<p>ZCS 4.5 also includes an elegant <a href="http://www.zmail.com/products/zmail_admin.html">Ajax based Admin Interface</a> plus full scripting tools to manage the ZCS server.  Full support is provided for standards-based APIs (IMAP / POP / iCal / CalDAV) as well as MAPI and iSync, which enable seamless compatibility with other clients like <a href="http://www.zmail.com/products/desktop_compatibility.html">Microsoft Outlook</a>, <a href="http://www.zmail.com/products/desktop_compatibility.html">Apple desktop suite</a>, and Mozilla Thunderbird.</p>
+		<p>Zmail also offers <a href="http://www.zmail.com/products/zmail_mobile.html">Zmail Mobile</a>, which provides over-the-air "push" synchronization to mobile devices without the need for third party software or additional servers for most devices.</p>
+		<p>The Zmail solution also has a complete <a href="http://www.zmail.com/products/zmail_security.html">high security</a> package including built-in anti-spam and anti-virus scanning.</p>
 
-		<p>Now Zimbra also features <a href="http://www.zimbra.com/products/zimbra_archiving.html">Archiving and Discovery</a>, an optional component to save and search email for various compliance issues.</p>
+		<p>Now Zmail also features <a href="http://www.zmail.com/products/zmail_archiving.html">Archiving and Discovery</a>, an optional component to save and search email for various compliance issues.</p>
 	</td>
 	<td valign=top>
 		<table border=0 cellpadding=1 cellspacing=0 width=225 bgcolor="#e8eefa"><tr>
@@ -96,7 +96,7 @@
 							<center>
 								Sign in to Zmail with your
 								<table border=0 cellpadding=2 cellspacing=2><tr>
-								<td><img src="<c:url value="/images/zimbra_logo_small.gif"/>" width=72 height=18 alt="Zimbra Logo"></td>
+								<td><img src="<c:url value="/images/zmail_logo_small.gif"/>" width=72 height=18 alt="Zmail Logo"></td>
 								<td class="welcome"><b>Account</b></td>
 								</tr></table>
 							</center>
@@ -147,12 +147,12 @@
 					<tr>
 						<td colspan=2>
 							<div class="signup">
-								<a href="javascript:;">Sign up for Zimbra</a>
+								<a href="javascript:;">Sign up for Zmail</a>
 							</div>
 						</td>
 					</tr>
 					<tr>
-						<td><center><a href="javascript:;">About Zimbra</a></center></td>
+						<td><center><a href="javascript:;">About Zmail</a></center></td>
 						<td><center><a href="javascript:;">New features!</a></center></td>
 					</tr>
 					<tr><td><br></td></tr>
@@ -179,11 +179,11 @@
 			</b>
 			<center>
 				<span class="footer">
-					&copy;<a href="http://www.zimbra.com/legal.html#copyright">2007</a> Zimbra Inc. -
-					<a href="http://www.zimbra.com/privacy.html">Privacy Policy</a> -
-					<a href="http://www.zimbra.com/license/">License</a> -
-					<a href="http://www.zimbra.com/legal.html">Trademarks</a> -
-					<a href="http://www.zimbra.com/alerts/index.html">Email Alerts</a>
+					&copy;<a href="http://www.zmail.com/legal.html#copyright">2007</a> Zmail Inc. -
+					<a href="http://www.zmail.com/privacy.html">Privacy Policy</a> -
+					<a href="http://www.zimbra.com/license.">License</a> -
+					<a href="http://www.zmail.com/legal.html">Trademarks</a> -
+					<a href="http://www.zmail.com/alerts/index.html">Email Alerts</a>
 				</span>
 			</center>
 			<b class="rbottomLogin">

@@ -18,16 +18,16 @@
  * Constructor.
  *
  */
-function com_zimbra_birthdayreminder_HandlerObject() {
+function org_zmail_birthdayreminder_HandlerObject() {
 }
 
-com_zimbra_birthdayreminder_HandlerObject.prototype = new ZmZimletBase();
-com_zimbra_birthdayreminder_HandlerObject.prototype.constructor = com_zimbra_birthdayreminder_HandlerObject;
+org_zmail_birthdayreminder_HandlerObject.prototype = new ZmZimletBase();
+org_zmail_birthdayreminder_HandlerObject.prototype.constructor = org_zmail_birthdayreminder_HandlerObject;
 
 /**
  * Simplify Zimlet handler name.
  */
-var BirthdayReminderZimlet = com_zimbra_birthdayreminder_HandlerObject;
+var BirthdayReminderZimlet = org_zmail_birthdayreminder_HandlerObject;
 
 /**
  * Defines the "calendar" view type.
@@ -158,7 +158,7 @@ function(postCallback) {
 	}
 	var jsonObj = {
 		FolderActionRequest: {
-			_jsns:	"urn:zimbraMail",
+			_jsns:	"urn:zmailMail",
 			action:	{
 				op:		"delete",
 				id:		this.birthdayreminderFolderId
@@ -181,7 +181,7 @@ function(postCallback) {
  */
 BirthdayReminderZimlet.prototype._setBirthdayReminderFolderId =
 function(postCallback) {
-	var soapDoc = AjxSoapDoc.create("GetFolderRequest", "urn:zimbraMail");
+	var soapDoc = AjxSoapDoc.create("GetFolderRequest", "urn:zmailMail");
 	var folderNode = soapDoc.set("folder");
 	folderNode.setAttribute("l", appCtxt.getFolderTree().root.id);
 
@@ -219,7 +219,7 @@ function(postCallback) {
  */
 BirthdayReminderZimlet.prototype._createBirthdayCalendar =
 function(params) {
-	var jsonObj = {CreateFolderRequest:{_jsns:"urn:zimbraMail"}};
+	var jsonObj = {CreateFolderRequest:{_jsns:"urn:zmailMail"}};
 	var folder = jsonObj.CreateFolderRequest.folder = {};
 	for (var i in params) {
 		if (i == "callback" || i == "errorCallback" || i == "postCallback") {
@@ -650,7 +650,7 @@ BirthdayReminderZimlet.prototype._refreshBrowser =
 function() {
 	window.onbeforeunload = null;
 	var url = AjxUtil.formatUrl({});
-	ZmZimbraMail.sendRedirect(url);
+	ZmZmailMail.sendRedirect(url);
 };
 
 /**

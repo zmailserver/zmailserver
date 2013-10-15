@@ -14,21 +14,21 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.ui;
+package org.zmail.qa.selenium.projects.ajax.ui;
 
-import com.zimbra.qa.selenium.framework.ui.AbsApplication;
-import com.zimbra.qa.selenium.framework.ui.AbsDialog;
-import com.zimbra.qa.selenium.framework.ui.AbsPage;
-import com.zimbra.qa.selenium.framework.ui.AbsTab;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.staf.Stafpostqueue;
+import org.zmail.qa.selenium.framework.ui.AbsApplication;
+import org.zmail.qa.selenium.framework.ui.AbsDialog;
+import org.zmail.qa.selenium.framework.ui.AbsPage;
+import org.zmail.qa.selenium.framework.ui.AbsTab;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.staf.Stafpostqueue;
 
 /**
  * A <code>DialogError</code> object represents a "Error" dialog, such as "Permission 
  * denied", etc.
  * <p>
- * During construction, the div ID attribute must be specified, such as "Zimbra".
+ * During construction, the div ID attribute must be specified, such as "Zmail".
  * <p>
  * @author Matt Rhoades
  *
@@ -60,7 +60,7 @@ public class DialogAssistant extends AbsDialog {
 		AbsPage page = null; 		// Does this ever result in a page being returned?
 		boolean postqueue = false;	// Does this event result in a postfix queue check
 		
-		// See http://bugzilla.zimbra.com/show_bug.cgi?id=54560
+		// See http://bugzilla.zmail.com/show_bug.cgi?id=54560
 		// Need unique id's for the buttons
 		String buttonsTableLocator = Locators.Locator_Assistant_DIV_css + " div[id$='_buttons']";
 		
@@ -158,13 +158,13 @@ public class DialogAssistant extends AbsDialog {
 		
 		boolean present = this.sIsElementPresent(Locators.Locator_Assistant_DIV_css);
 		if ( !present ) {
-			logger.info("Zimbra Assistant is not present");
+			logger.info("Zmail Assistant is not present");
 			return (false);
 		}
 		
 		boolean visible = this.zIsVisiblePerPosition(Locators.Locator_Assistant_DIV_css, 0, 0);
 		if ( !visible ) {
-			logger.info("Zimbra Assistant is not visible");
+			logger.info("Zmail Assistant is not visible");
 			return (false);
 		}
 		if ( this.sIsElementPresent(Locators.Locator_Assistant_DIV_css) ) {

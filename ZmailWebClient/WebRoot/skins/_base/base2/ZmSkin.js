@@ -256,8 +256,8 @@ ZmSkin.prototype = {
 	},
 	
 	_reflowApp : function() {
-		if (window._zimbraMail) {
-			window._zimbraMail.getAppViewMgr().fitAll();
+		if (window._zmailMail) {
+			window._zmailMail.getAppViewMgr().fitAll();
 		}
 	},
 	

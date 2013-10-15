@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.util.yc.oauth;
+package org.zmail.cs.offline.util.yc.oauth;
 
 import java.io.StringReader;
 
@@ -22,9 +22,9 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.InputSource;
 
-import com.zimbra.cs.offline.OfflineLog;
-import com.zimbra.cs.offline.util.Xml;
-import com.zimbra.cs.offline.util.yc.YContactException;
+import org.zmail.cs.offline.OfflineLog;
+import org.zmail.cs.offline.util.Xml;
+import org.zmail.cs.offline.util.yc.YContactException;
 
 public class OAuthGetContactsResponse extends OAuthResponse {
 

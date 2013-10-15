@@ -104,7 +104,7 @@ body.MsgBody {
 .MsgBody .POObjectApproved {color: green;}
 .MsgBody .POObjectRejected {color: red;}
 
-.MsgBody .zimbraHide {
+.MsgBody .zmailHide {
 	display: none;
 }
 

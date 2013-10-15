@@ -14,25 +14,25 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.newwindow.mountpoints;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.newwindow.mountpoints;
 
 
 import java.util.List;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.XmlStringUtil;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.framework.util.staf.Stafpostqueue;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.SeparateWindowDialog;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.SeparateWindowDisplayMail;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.XmlStringUtil;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.framework.util.staf.Stafpostqueue;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.SeparateWindowDialog;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.SeparateWindowDisplayMail;
 
 
 public class CreateMountpoint extends PrefGroupMailByMessageTest {
@@ -49,16 +49,16 @@ public class CreateMountpoint extends PrefGroupMailByMessageTest {
 			groups = { "smoke" })
 	public void CreateMountpoint_01() throws HarnessException {
 		
-		ZimbraAccount Owner = (new ZimbraAccount()).provision().authenticate();
+		ZmailAccount Owner = (new ZmailAccount()).provision().authenticate();
 
 		// Owner creates a folder, shares it with current user, and sends invitation
-		String ownerFoldername = "ownerfolder"+ ZimbraSeleniumProperties.getUniqueString();
+		String ownerFoldername = "ownerfolder"+ ZmailSeleniumProperties.getUniqueString();
 		
 		FolderItem ownerInbox = FolderItem.importFromSOAP(Owner, FolderItem.SystemFolder.Inbox);
 		ZAssert.assertNotNull(ownerInbox, "Verify the new owner folder exists");
 
 		Owner.soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>"
+					"<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+		"<folder name='" + ownerFoldername +"' l='" + ownerInbox.getId() +"'/>"
 				+	"</CreateFolderRequest>");
 		
@@ -66,27 +66,27 @@ public class CreateMountpoint extends PrefGroupMailByMessageTest {
 		ZAssert.assertNotNull(ownerFolder, "Verify the new owner folder exists");
 		
 		Owner.soapSend(
-					"<FolderActionRequest xmlns='urn:zimbraMail'>"
+					"<FolderActionRequest xmlns='urn:zmailMail'>"
 				+		"<action id='"+ ownerFolder.getId() +"' op='grant'>"
 				+			"<grant d='" + app.zGetActiveAccount().EmailAddress + "' gt='usr' perm='r'/>"
 				+		"</action>"
 				+	"</FolderActionRequest>");
 		
 
-		String shareMessageSubject = "shared"+ ZimbraSeleniumProperties.getUniqueString();
+		String shareMessageSubject = "shared"+ ZmailSeleniumProperties.getUniqueString();
 		String shareElement = String.format(
-					"<share xmlns='urn:zimbraShare' version='0.1' action='new' >"
+					"<share xmlns='urn:zmailShare' version='0.1' action='new' >"
 				+		"<grantee id='%s' email='%s' name='%s' />"
 				+		"<grantor id='%s' email='%s' name='%s' />"
 				+		"<link id='%s' name='%s' view='message' perm='r' />"
 				+		"<notes/>"
 				+	"</share>",
-					app.zGetActiveAccount().ZimbraId, app.zGetActiveAccount().EmailAddress, app.zGetActiveAccount().EmailAddress,
-					Owner.ZimbraId, Owner.EmailAddress, Owner.EmailAddress,
+					app.zGetActiveAccount().ZmailId, app.zGetActiveAccount().EmailAddress, app.zGetActiveAccount().EmailAddress,
+					Owner.ZmailId, Owner.EmailAddress, Owner.EmailAddress,
 					ownerFolder.getId(), ownerFolder.getName());
 					
 		Owner.soapSend(
-					"<SendMsgRequest xmlns='urn:zimbraMail'>"
+					"<SendMsgRequest xmlns='urn:zmailMail'>"
 				+		"<m>"
 				+			"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>"
 				+			"<su>"+ shareMessageSubject +"</su>"
@@ -94,7 +94,7 @@ public class CreateMountpoint extends PrefGroupMailByMessageTest {
 				+				"<mp ct='text/plain'>"
 				+					"<content>shared</content>"
 				+				"</mp>"
-				+				"<mp ct='xml/x-zimbra-share'>"
+				+				"<mp ct='xml/x-zmail-share'>"
 				+					"<content>"+ XmlStringUtil.escapeXml(shareElement) +"</content>"
 				+				"</mp>"
 				+			"</mp>"

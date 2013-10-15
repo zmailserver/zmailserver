@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.tarformatter;
+package org.zmail.tarformatter;
 
 import java.util.HashMap;
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ public class ZtoZImportParams
     public String TrgtAdminUser;
     public String SrcAdminPwd;
     public String TrgtAdminPwd;
-    public String ZimbraMailTransport;
+    public String ZmailMailTransport;
     public String ZMResolve;
     public int Threads;
     public String cfgfile;
@@ -55,7 +55,7 @@ public class ZtoZImportParams
         TrgtAdminUser="";
         SrcAdminPwd="";
         TrgtAdminPwd="";
-        ZimbraMailTransport="";
+        ZmailMailTransport="";
         ZMResolve="";
         Threads=1;
         WorkingDirectory="";

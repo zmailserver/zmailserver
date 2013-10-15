@@ -30,7 +30,7 @@ DEFINE_OLEGUID(PSETID_COMMON, MAKELONG(0x2000 + (8), 0x0006), 0, 0);
 
 #define CONST_FORWDSLASH    L"~~~#^!"
 
-namespace Zimbra
+namespace Zmail
 {
 namespace MAPI
 {
@@ -87,13 +87,13 @@ typedef enum _ExchangeSpecialFolderId
     JUNK_MAIL = 15, TOTAL_NUM_SPECIAL_FOLDERS = 16, SPECIAL_FOLDER_ID_NONE = 1000
 } ExchangeSpecialFolderId;
 
-// Zimbra system folder enumeration
-typedef enum _ZimbraSpecialFolderId
+// Zmail system folder enumeration
+typedef enum _ZmailSpecialFolderId
 {
     ZM_SFID_MIN = 0, ZM_SFID_NONE = 0, ZM_ROOT = 1, ZM_INBOX, ZM_TRASH, ZM_SPAM, ZM_SENT_MAIL,
     ZM_DRAFTS, ZM_CONTACTS, ZM_TAGS, ZM_CONVERSATIONS, ZM_CALENDAR, ZM_MAILBOX_ROOT,
     ZM_WIKI, ZM_EMAILEDCONTACTS, ZM_CHATS, ZM_TASKS, ZM_SFID_MAX
-} ZimbraSpecialFolderId;
+} ZmailSpecialFolderId;
 
 //IPM folders strings if pst doesn't have IPM EntryIDs in Inbox folder
 const int g_MAX_STR_IPM_FOLDERS=7;
@@ -127,7 +127,7 @@ public:
     wstring Name() { return m_displayname; }
     SBinary EntryID() { return m_EntryID; }
     ExchangeSpecialFolderId GetExchangeFolderId();
-    ZimbraSpecialFolderId GetZimbraFolderId();
+    ZmailSpecialFolderId GetZmailFolderId();
     bool HiddenFolder();
     HRESULT ContainerClass(wstring &wstrContainerClass);
 };
@@ -135,4 +135,4 @@ public:
 // global declaration
 static ULONG g_ulIMAPHeaderInfoPropTag = PR_NULL;
 }                                               // namespace MAPI
-}                                               // namespace Zimbra
+}                                               // namespace Zmail

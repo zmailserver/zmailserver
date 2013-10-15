@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.util.yab;
+package org.zmail.cs.offline.util.yab;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.Document;
@@ -22,7 +22,7 @@ import org.w3c.dom.Attr;
 import java.util.Map;
 import java.util.HashMap;
 
-import com.zimbra.cs.offline.util.Xml;
+import org.zmail.cs.offline.util.Xml;
 
 /**
  * YAB field type.

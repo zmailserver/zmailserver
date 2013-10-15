@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.core;
+package org.zmail.qa.selenium.projects.ajax.core;
 
 import java.awt.Toolkit;
 import java.io.IOException;
@@ -32,12 +32,12 @@ import org.testng.*;
 import org.testng.annotations.*;
 import org.xml.sax.SAXException;
 import com.thoughtworks.selenium.*;
-import com.zimbra.qa.selenium.framework.core.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount.SOAP_DESTINATION_HOST_TYPE;
-import com.zimbra.qa.selenium.projects.ajax.ui.AppAjaxClient;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogError.DialogErrorID;
+import org.zmail.qa.selenium.framework.core.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.ZmailAccount.SOAP_DESTINATION_HOST_TYPE;
+import org.zmail.qa.selenium.projects.ajax.ui.AppAjaxClient;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogError.DialogErrorID;
 
 /**
  * The <code>AjaxCommonTest</code> class is the base test case class
@@ -47,7 +47,7 @@ import com.zimbra.qa.selenium.projects.ajax.ui.DialogError.DialogErrorID;
  * <ol>
  * <li>{@link AbsTab} {@link #startingPage} - navigate to this
  * page before each test case method</li>
- * <li>{@link ZimbraAccount} {@link #startingAccountPreferences} - ensure this
+ * <li>{@link ZmailAccount} {@link #startingAccountPreferences} - ensure this
  * account is authenticated before each test case method</li>
  * </ol>
  * <p>
@@ -71,7 +71,7 @@ import com.zimbra.qa.selenium.projects.ajax.ui.DialogError.DialogErrorID;
  *         super.startingPage = app.zPageMail;
  *         
  *         // Create a new account to log into
- *         ZimbraAccount account = new ZimbraAccount();
+ *         ZmailAccount account = new ZmailAccount();
  *         super.startingAccount = account;
  *         
  *         // ...
@@ -145,27 +145,27 @@ public class AjaxCommonTest {
 		logger.info("commonTestBeforeSuite: start");
 
       //Racetrack
-      String DbHostURL = ZimbraSeleniumProperties.getStringProperty("racetrack.dbUrl",
+      String DbHostURL = ZmailSeleniumProperties.getStringProperty("racetrack.dbUrl",
             "racetrack.eng.vmware.com");
-      String buildNumber = ZimbraSeleniumProperties.getStringProperty("racetrack.buildNumber",
+      String buildNumber = ZmailSeleniumProperties.getStringProperty("racetrack.buildNumber",
             "000000");
-      String userName = ZimbraSeleniumProperties.getStringProperty("racetrack.username",
+      String userName = ZmailSeleniumProperties.getStringProperty("racetrack.username",
             "anonymous");
-      String product = ZimbraSeleniumProperties.getStringProperty("racetrack.product",
+      String product = ZmailSeleniumProperties.getStringProperty("racetrack.product",
             "ZCS");
-      String description = ZimbraSeleniumProperties.getStringProperty("racetrack.description",
+      String description = ZmailSeleniumProperties.getStringProperty("racetrack.description",
             "zdesktop description");
-      String branch = ZimbraSeleniumProperties.getStringProperty("racetrack.branch",
+      String branch = ZmailSeleniumProperties.getStringProperty("racetrack.branch",
             "Please specify version");
-      String buildType = ZimbraSeleniumProperties.getStringProperty("racetrack.buildType",
+      String buildType = ZmailSeleniumProperties.getStringProperty("racetrack.buildType",
             "beta");
-      String testType = ZimbraSeleniumProperties.getStringProperty("racetrack.testType",
+      String testType = ZmailSeleniumProperties.getStringProperty("racetrack.testType",
             "functional");
-      String recordToRacetrack = ZimbraSeleniumProperties.getStringProperty("racetrack.recordToRacetrack",
+      String recordToRacetrack = ZmailSeleniumProperties.getStringProperty("racetrack.recordToRacetrack",
             "false");
-      String appendToExisting = ZimbraSeleniumProperties.getStringProperty("racetrack.appendToExisting",
+      String appendToExisting = ZmailSeleniumProperties.getStringProperty("racetrack.appendToExisting",
             "false");
-      String resultId = ZimbraSeleniumProperties.getStringProperty("racetrack.resultId",
+      String resultId = ZmailSeleniumProperties.getStringProperty("racetrack.resultId",
             "");
 
       _repository.connectingToRacetrack(DbHostURL);
@@ -182,16 +182,16 @@ public class AjaxCommonTest {
             resultId);
 
       // Make sure there is a new default account
-		ZimbraAccount.ResetAccountZWC();
+		ZmailAccount.ResetAccountZWC();
 
 
 		try
 		{
 			
-			ZimbraSeleniumProperties.setAppType(ZimbraSeleniumProperties.AppType.AJAX);
+			ZmailSeleniumProperties.setAppType(ZmailSeleniumProperties.AppType.AJAX);
 			DefaultSelenium _selenium = null;
 			
-			if (ZimbraSeleniumProperties.isWebDriver()) {
+			if (ZmailSeleniumProperties.isWebDriver()) {
 				_webDriver = ClientSessionFactory.session().webDriver();
 				
 				/*
@@ -218,7 +218,7 @@ public class AjaxCommonTest {
 					_webDriver.manage().window().setPosition(new Point(0, 0));
 					_webDriver.manage().window().setSize(new Dimension((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(),(int)Toolkit.getDefaultToolkit().getScreenSize().getHeight()));
 				}								
-			} else if (ZimbraSeleniumProperties.isWebDriverBackedSelenium()) {
+			} else if (ZmailSeleniumProperties.isWebDriverBackedSelenium()) {
 				_webDriverBackedSelenium = ClientSessionFactory.session()
 						.webDriverBackedSelenium();
 				_webDriverBackedSelenium.windowMaximize();
@@ -242,14 +242,14 @@ public class AjaxCommonTest {
 					logger.info("Retry #" + retry);
 					retry ++;
 					
-					if (ZimbraSeleniumProperties.isWebDriver()) {
-						//_webDriver.get(ZimbraSeleniumProperties.getBaseURL());
-						_webDriver.navigate().to(ZimbraSeleniumProperties.getBaseURL());
+					if (ZmailSeleniumProperties.isWebDriver()) {
+						//_webDriver.get(ZmailSeleniumProperties.getBaseURL());
+						_webDriver.navigate().to(ZmailSeleniumProperties.getBaseURL());
 					} 
-					else if (ZimbraSeleniumProperties.isWebDriverBackedSelenium()) 
-						_webDriverBackedSelenium.open(ZimbraSeleniumProperties.getBaseURL());
+					else if (ZmailSeleniumProperties.isWebDriverBackedSelenium()) 
+						_webDriverBackedSelenium.open(ZmailSeleniumProperties.getBaseURL());
 					else
-						_selenium.open(ZimbraSeleniumProperties.getBaseURL());
+						_selenium.open(ZmailSeleniumProperties.getBaseURL());
 
 					appIsReady = true;
 				} catch (SeleniumException e) {
@@ -340,15 +340,15 @@ public class AjaxCommonTest {
 			for (Map.Entry<String, String> entry : startingAccountPreferences.entrySet()) {
 				settings.append(String.format("<a n='%s'>%s</a>", entry.getKey(), entry.getValue()));
 			}
-			ZimbraAdminAccount.GlobalAdmin().soapSend(
-					"<ModifyAccountRequest xmlns='urn:zimbraAdmin'>"
-					+		"<id>"+ ZimbraAccount.AccountZWC().ZimbraId +"</id>"
+			ZmailAdminAccount.GlobalAdmin().soapSend(
+					"<ModifyAccountRequest xmlns='urn:zmailAdmin'>"
+					+		"<id>"+ ZmailAccount.AccountZWC().ZmailId +"</id>"
 					+		settings.toString()
 					+	"</ModifyAccountRequest>");
 
 
 			// Set the flag so the account is reset for the next test
-			ZimbraAccount.AccountZWC().accountIsDirty = true;
+			ZmailAccount.AccountZWC().accountIsDirty = true;
 		}
 
 		// If test account zimlet preferences are defined, then make sure the test account
@@ -356,11 +356,11 @@ public class AjaxCommonTest {
 		//
 		if ( (startingAccountZimletPreferences != null) && (!startingAccountZimletPreferences.isEmpty()) ) {
 			logger.debug("commonTestBeforeMethod: startingAccountPreferences are defined");
-			ZimbraAccount.AccountZWC().modifyZimletPreferences(startingAccountZimletPreferences, SOAP_DESTINATION_HOST_TYPE.SERVER);
+			ZmailAccount.AccountZWC().modifyZimletPreferences(startingAccountZimletPreferences, SOAP_DESTINATION_HOST_TYPE.SERVER);
 		}
 
 		// If AccountZWC is not currently logged in, then login now
-		if ( !ZimbraAccount.AccountZWC().equals(app.zGetActiveAccount()) ) {
+		if ( !ZmailAccount.AccountZWC().equals(app.zGetActiveAccount()) ) {
 			logger.debug("commonTestBeforeMethod: AccountZWC is not currently logged in");
 
 			if ( app.zPageMain.zIsActive() )
@@ -371,8 +371,8 @@ public class AjaxCommonTest {
 					if ( !app.zPageLogin.zIsActive()) {
 			            logger.error("Login page is not active ", ex);
 			           
-			            app.zPageLogin.sOpen(ZimbraSeleniumProperties.getLogoutURL());            
-			            app.zPageLogin.sOpen(ZimbraSeleniumProperties.getBaseURL());
+			            app.zPageLogin.sOpen(ZmailSeleniumProperties.getLogoutURL());            
+			            app.zPageLogin.sOpen(ZmailSeleniumProperties.getBaseURL());
 			        }
 				}							
 		}
@@ -394,11 +394,11 @@ public class AjaxCommonTest {
 		}
 
 		// Check for error dialogs
-		boolean check = "true".equals( ZimbraSeleniumProperties.getStringProperty("dialog.error.beforetest.check", "true") );
-		boolean dismiss = "true".equals( ZimbraSeleniumProperties.getStringProperty("dialog.error.beforetest.dismiss", "false") );
+		boolean check = "true".equals( ZmailSeleniumProperties.getStringProperty("dialog.error.beforetest.check", "true") );
+		boolean dismiss = "true".equals( ZmailSeleniumProperties.getStringProperty("dialog.error.beforetest.dismiss", "false") );
 		if ( check ) {
 
-			AbsDialog dialog = app.zPageMain.zGetErrorDialog(DialogErrorID.Zimbra);
+			AbsDialog dialog = app.zPageMain.zGetErrorDialog(DialogErrorID.Zmail);
 			if ( (dialog != null) && (dialog.zIsActive()) ) {
 
 				// Error dialog is visible.
@@ -439,9 +439,9 @@ public class AjaxCommonTest {
 	public void commonTestAfterSuite() throws HarnessException {	
 		logger.info("commonTestAfterSuite: start");
 
-		if (ZimbraSeleniumProperties.isWebDriver()) {
+		if (ZmailSeleniumProperties.isWebDriver()) {
 			_webDriver.quit();
-		} else if (ZimbraSeleniumProperties.isWebDriverBackedSelenium()) {
+		} else if (ZmailSeleniumProperties.isWebDriverBackedSelenium()) {
 			_webDriverBackedSelenium.stop();
 		} else {
 			ClientSessionFactory.session().selenium().stop();
@@ -465,11 +465,11 @@ public class AjaxCommonTest {
 		// For Ajax, if account is considered dirty (modified),
 		// then recreate a new account, but for desktop, the zimlet
 		// preferences has to be reset to default, all core zimlets are enabled
-		ZimbraAccount currentAccount = app.zGetActiveAccount();
+		ZmailAccount currentAccount = app.zGetActiveAccount();
 		if (currentAccount != null && currentAccount.accountIsDirty &&
-				currentAccount == ZimbraAccount.AccountZWC()) {
+				currentAccount == ZmailAccount.AccountZWC()) {
 			// Reset the account
-			ZimbraAccount.ResetAccountZWC();
+			ZmailAccount.ResetAccountZWC();
 
 		}
 
@@ -494,11 +494,11 @@ public class AjaxCommonTest {
 		//
 		// Clear the cookies and reload
 		//
-		if ( ZimbraURI.needsReload() ) {
+		if ( ZmailURI.needsReload() ) {
             logger.error("The URL does not match the base URL.  Reload app.");
             // app.zPageLogin.sDeleteAllVisibleCookies();
-            app.zPageLogin.sOpen(ZimbraSeleniumProperties.getLogoutURL());            
-            app.zPageLogin.sOpen(ZimbraSeleniumProperties.getBaseURL());
+            app.zPageLogin.sOpen(ZmailSeleniumProperties.getLogoutURL());            
+            app.zPageLogin.sOpen(ZmailSeleniumProperties.getBaseURL());
 		}
 
 		// If neither the main page or login page are active, then
@@ -509,8 +509,8 @@ public class AjaxCommonTest {
 		if ( (!app.zPageMain.zIsActive()) && (!app.zPageLogin.zIsActive()) ) {
             logger.error("Neither login page nor main page were active.  Reload app.", new Exception());
             // app.zPageLogin.sDeleteAllVisibleCookies();
-            app.zPageLogin.sOpen(ZimbraSeleniumProperties.getLogoutURL());            
-            app.zPageLogin.sOpen(ZimbraSeleniumProperties.getBaseURL());
+            app.zPageLogin.sOpen(ZmailSeleniumProperties.getLogoutURL());            
+            app.zPageLogin.sOpen(ZmailSeleniumProperties.getBaseURL());
         }
 		
 		logger.info("commonTestAfterMethod: finish");
@@ -525,7 +525,7 @@ public class AjaxCommonTest {
 
        // Resetting the account to flush after each performance test method,
        // so that the next test is running with new account
-       ZimbraAccount.ResetAccountZWC();
+       ZmailAccount.ResetAccountZWC();
 
     }
 	
@@ -534,8 +534,8 @@ public class AjaxCommonTest {
 		for (Map.Entry<String, String> entry : startingAccountPreferences.entrySet()) {
 			settings.append(String.format("<a n='%s'>%s</a>", entry.getKey(), entry.getValue()));
 		}		
-		ZimbraAdminAccount.GlobalAdmin().soapSend(
-				"<ModifyAccountRequest xmlns='urn:zimbraAdmin'>"
+		ZmailAdminAccount.GlobalAdmin().soapSend(
+				"<ModifyAccountRequest xmlns='urn:zmailAdmin'>"
 				+		"<id>"+ string +"</id>"
 				+		settings.toString()
 				+	"</ModifyAccountRequest>");

@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.items;
+package org.zmail.qa.selenium.framework.items;
 
 import java.util.*;
 
@@ -22,11 +22,11 @@ import net.sf.json.*;
 
 import org.apache.log4j.*;
 
-import com.zimbra.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.HarnessException;
 
 /**
  * Helper class to convert QuickCommands to JSON for ModifyPrefsRequest usage
- * @author zimbra
+ * @author zmail
  *
  */
 public class QuickCommand {
@@ -284,9 +284,9 @@ public class QuickCommand {
 		logger.info("QC: "+ qc.toString());
 
 		/**
-		 *     <ModifyPrefsRequest xmlns="urn:zimbraAccount">
-		 *     	<pref name="zimbraPrefQuickCommand">{"id":1,"itemTypeId":"MSG","name":"qcname","description":"qcdescription","isActive":true,"actions":[{"id":1,"typeId":"actionTag","value":"257","isActive":true},{"id":2,"typeId":"actionFlag","value":"unread","isActive":true}]}</pref>
-		 *      <pref name="zimbraPrefQuickCommand">{"id":2,"itemTypeId":"CONTACT","name":"qcname2","description":"qcdescription2","isActive":true,"actions":[{"id":1,"typeId":"actionTag","value":"258","isActive":true},{"id":2,"typeId":"actionFileInto","value":"2","isActive":true}]}</pref>
+		 *     <ModifyPrefsRequest xmlns="urn:zmailAccount">
+		 *     	<pref name="zmailPrefQuickCommand">{"id":1,"itemTypeId":"MSG","name":"qcname","description":"qcdescription","isActive":true,"actions":[{"id":1,"typeId":"actionTag","value":"257","isActive":true},{"id":2,"typeId":"actionFlag","value":"unread","isActive":true}]}</pref>
+		 *      <pref name="zmailPrefQuickCommand">{"id":2,"itemTypeId":"CONTACT","name":"qcname2","description":"qcdescription2","isActive":true,"actions":[{"id":1,"typeId":"actionTag","value":"258","isActive":true},{"id":2,"typeId":"actionFileInto","value":"2","isActive":true}]}</pref>
 		 *     </ModifyPrefsRequest>
 		 */
 		

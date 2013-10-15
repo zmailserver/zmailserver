@@ -39,7 +39,7 @@
  * @param {String}	params.url		the URL for this folder's feed
  * @param {String}	params.owner	the Owner for this organizer
  * @param {String}	params.oname	the Owner's name for this organizer, if remote folder
- * @param {String}	params.zid		the Zimbra ID of owner, if remote folder
+ * @param {String}	params.zid		the Zmail ID of owner, if remote folder
  * @param {String}	params.rid		the Remote ID of organizer, if remote folder
  * @param {String}	params.restUrl	the REST URL of this organizer
  * 
@@ -63,7 +63,7 @@ ZmOrganizer.ORG_CLASS[ZmId.ORG_FOLDER] = "ZmFolder";
 
 ZmFolder.SEP 									= "/";							// path separator
 
-// system folders (see Mailbox.java in ZimbraServer for positive int consts)
+// system folders (see Mailbox.java in ZmailServer for positive int consts)
 ZmFolder.ID_LOAD_FOLDERS						= -3;							// special "Load remaining folders" placeholder
 ZmFolder.ID_OTHER								= -2;							// used for tcon value (see below)
 ZmFolder.ID_SEP									= -1;							// separator
@@ -329,7 +329,7 @@ function(callback, errorCallback) {
 	if (!this.isOfflineSyncable) { return; }
 
 	var op = this.isOfflineSyncing ? "!syncon" : "syncon";
-	var soapDoc = AjxSoapDoc.create("FolderActionRequest", "urn:zimbraMail");
+	var soapDoc = AjxSoapDoc.create("FolderActionRequest", "urn:zmailMail");
 	var actionNode = soapDoc.set("action");
 	actionNode.setAttribute("op", op);
 	actionNode.setAttribute("id", this.id);

@@ -14,18 +14,18 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.conversation.quickreply.personas;
+package org.zmail.qa.selenium.projects.ajax.tests.conversation.quickreply.personas;
 
 import java.util.List;
 
 import org.testng.annotations.*;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.*;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.*;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.*;
 
 
 public class FromAlias extends PrefGroupMailByConversationTest {
@@ -33,7 +33,7 @@ public class FromAlias extends PrefGroupMailByConversationTest {
 	public FromAlias() {
 		logger.info("New "+ FromAlias.class.getCanonicalName());
 		
-		super.startingAccountPreferences.put("zimbraPrefComposeFormat", "text");
+		super.startingAccountPreferences.put("zmailPrefComposeFormat", "text");
 		
 	}
 	
@@ -45,43 +45,43 @@ public class FromAlias extends PrefGroupMailByConversationTest {
 		
 		//-- Data setup
 		
-		String aliasFromDisplay = "alias" + ZimbraSeleniumProperties.getUniqueString();
+		String aliasFromDisplay = "alias" + ZmailSeleniumProperties.getUniqueString();
 		String aliasEmailAddress = aliasFromDisplay + 
 					"@" +
-					ZimbraSeleniumProperties.getStringProperty("testdomain", "testdomain.com");
+					ZmailSeleniumProperties.getStringProperty("testdomain", "testdomain.com");
 		
 		
-		ZimbraAdminAccount.GlobalAdmin().soapSend(
-				"<AddAccountAliasRequest xmlns='urn:zimbraAdmin'>"
-			+		"<id>"+ app.zGetActiveAccount().ZimbraId +"</id>"
+		ZmailAdminAccount.GlobalAdmin().soapSend(
+				"<AddAccountAliasRequest xmlns='urn:zmailAdmin'>"
+			+		"<id>"+ app.zGetActiveAccount().ZmailId +"</id>"
 			+		"<alias>"+ aliasEmailAddress +"</alias>"
 			+	"</AddAccountAliasRequest>");
 		
 		// Modify the from address in the primary identity
-		app.zGetActiveAccount().soapSend("<GetIdentitiesRequest xmlns='urn:zimbraAccount' />");
+		app.zGetActiveAccount().soapSend("<GetIdentitiesRequest xmlns='urn:zmailAccount' />");
 		String identity = app.zGetActiveAccount().soapSelectValue("//acct:identity", "id");
 		
 		app.zGetActiveAccount().soapSend(
-				" <ModifyIdentityRequest  xmlns='urn:zimbraAccount'>"
+				" <ModifyIdentityRequest  xmlns='urn:zmailAccount'>"
 			+		"<identity id='"+ identity +"'>"
-			+			"<a name='zimbraPrefFromDisplay'>"+ aliasFromDisplay +"</a>"
-			+			"<a name='zimbraPrefFromAddress'>"+ aliasEmailAddress +"</a>"
+			+			"<a name='zmailPrefFromDisplay'>"+ aliasFromDisplay +"</a>"
+			+			"<a name='zmailPrefFromAddress'>"+ aliasEmailAddress +"</a>"
 			+		"</identity>"
 			+	"</ModifyIdentityRequest >");
 		
 		// Send a message to the account to create the conversation
-		ZimbraAccount account1 = new ZimbraAccount();
+		ZmailAccount account1 = new ZmailAccount();
 		account1.provision();
 		account1.authenticate();
 		
 		
 		// Create the message data to be sent
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String content = "content" + ZimbraSeleniumProperties.getUniqueString();
-		String reply = "quickreply" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String content = "content" + ZmailSeleniumProperties.getUniqueString();
+		String reply = "quickreply" + ZmailSeleniumProperties.getUniqueString();
 		
 		account1.soapSend(
-					"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+					"<SendMsgRequest xmlns='urn:zmailMail'>" +
 						"<m>" +
 							"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 							"<su>"+ subject +"</su>" +
@@ -121,13 +121,13 @@ public class FromAlias extends PrefGroupMailByConversationTest {
 		
 		// Verify the message shows as from the alias
 		account1.soapSend(
-					"<SearchRequest types='message' xmlns='urn:zimbraMail'>"
+					"<SearchRequest types='message' xmlns='urn:zmailMail'>"
 			+			"<query>subject:("+ subject +")</query>"
 			+		"</SearchRequest>");
 		String id = account1.soapSelectValue("//mail:m", "id");
 
 		account1.soapSend(
-					"<GetMsgRequest xmlns='urn:zimbraMail'>"
+					"<GetMsgRequest xmlns='urn:zmailMail'>"
 			+			"<m id='"+ id +"' html='1'/>"
 			+		"</GetMsgRequest>");
 

@@ -31,7 +31,7 @@ DictionaryPrefsDialog.prototype._createSearchHtml = function() {
 
 	for (i = 0; i < this._zimlet._dictionaries.length; i++) {
 		var option = this._zimlet._dictionaries[i];
-		this._dictSelect.addOption(option.label, option.value == Com_Zimbra_Dictionary.prototype._dictDatabase, option.value);
+		this._dictSelect.addOption(option.label, option.value == Com_Zmail_Dictionary.prototype._dictDatabase, option.value);
 	}
 
 	var table = document.createElement("TABLE");
@@ -41,7 +41,7 @@ DictionaryPrefsDialog.prototype._createSearchHtml = function() {
 
 	row = table.insertRow(-1);
 	cell = row.insertCell(-1);
-	cell.innerHTML = "Dictionary Search Results from <a target=\"_blank\" href=\""+Com_Zimbra_Dictionary.prototype._dictionaryServerTop+"\">"+Com_Zimbra_Dictionary.prototype._dictionaryServerTop+"</a><br/><br/>Set Default Dictionary:";
+	cell.innerHTML = "Dictionary Search Results from <a target=\"_blank\" href=\""+Com_Zmail_Dictionary.prototype._dictionaryServerTop+"\">"+Com_Zmail_Dictionary.prototype._dictionaryServerTop+"</a><br/><br/>Set Default Dictionary:";
 	cell.appendChild(this._dictSelect.getHtmlElement());
 
 	var element = this._getContentDiv();
@@ -51,7 +51,7 @@ DictionaryPrefsDialog.prototype._createSearchHtml = function() {
 DictionaryPrefsDialog.prototype.popup = function(name, callback) {
 	
 	this.setTitle("Dictionary Preferences");
-	this._dictSelect.setSelected(Com_Zimbra_Dictionary.prototype._dictDatabase);
+	this._dictSelect.setSelected(Com_Zmail_Dictionary.prototype._dictDatabase);
 	
 	// enable buttons
 	this.setButtonEnabled(DwtDialog.OK_BUTTON, true);
@@ -69,7 +69,7 @@ function() {
 DictionaryPrefsDialog.prototype._prefSelected =
 function(){
 	this._zimlet.setUserProperty("dict", this._dictSelect.getValue(), true);
-	Com_Zimbra_Dictionary.prototype._dictDatabase = this._dictSelect.getValue();
+	Com_Zmail_Dictionary.prototype._dictDatabase = this._dictSelect.getValue();
 	this.popdown();
 };
 

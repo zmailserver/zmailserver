@@ -1,11 +1,11 @@
-function zimbra_posixaccount_ext () {
+function zmail_posixaccount_ext () {
 	
 }
 
-ZaZimbraAdmin._POSIX_GROUP_LIST = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._POSIX_GROUP_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
+ZaZmailAdmin._POSIX_GROUP_LIST = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._POSIX_GROUP_VIEW = ZaZmailAdmin.VIEW_INDEX++;
 if(ZaMsg) {
-	ZaMsg.PSXGroups_view_title = zimbra_posixaccount.PosixGroupsListViewTitle;
+	ZaMsg.PSXGroups_view_title = zmail_posixaccount.PosixGroupsListViewTitle;
 }
 
 if(ZaItem) {
@@ -13,7 +13,7 @@ if(ZaItem) {
 }
 
 ZaSettings.POSIX_GROUPS_LIST_VIEW = "posixGroupsListView";
-ZaSettings.ALL_UI_COMPONENTS.push({ value: ZaSettings.POSIX_GROUPS_LIST_VIEW, label: zimbra_posixaccount.PosixGroups });
+ZaSettings.ALL_UI_COMPONENTS.push({ value: ZaSettings.POSIX_GROUPS_LIST_VIEW, label: zmail_posixaccount.PosixGroups });
 
 function ZaPosixAccount() {	
 	ZaItem.call(this, "ZaPosixAccount");
@@ -42,8 +42,8 @@ if(ZaAccount.myXModel && ZaAccount.myXModel.items) {
 }
 
 ZaPosixAccount.getNextUid = function () {
-	var soapDoc = AjxSoapDoc.create("GetLDAPEntriesRequest", "urn:zimbraAdmin", null);	
-	soapDoc.set("ldapSearchBase", zimbra_posixaccount_ext.ldapSuffix);
+	var soapDoc = AjxSoapDoc.create("GetLDAPEntriesRequest", "urn:zmailAdmin", null);	
+	soapDoc.set("ldapSearchBase", zmail_posixaccount_ext.ldapSuffix);
 	soapDoc.set("query", "(objectClass=posixAccount)");	
 	soapDoc.set("sortBy", ZaPosixAccount.A_uidNumber);	
 	soapDoc.set("sortAscending", "false");		
@@ -51,7 +51,7 @@ ZaPosixAccount.getNextUid = function () {
 	var getPosixAccountsCommand = new ZmCsfeCommand();
 	var params = new Object();
 	params.soapDoc = soapDoc;	
-	var nextId = !isNaN(zimbra_posixaccount_ext.uidBase) ?  parseInt(zimbra_posixaccount_ext.uidBase) + 1 : 10001;
+	var nextId = !isNaN(zmail_posixaccount_ext.uidBase) ?  parseInt(zmail_posixaccount_ext.uidBase) + 1 : 10001;
 	try {
 		var resp = getPosixAccountsCommand.invoke(params).Body.GetLDAPEntriesResponse.LDAPEntry[0];
 		if(resp) {
@@ -73,7 +73,7 @@ ZaAccountXFormView.POSIXACCOUNT_TAB_ATTRS = [ZaPosixAccount.A_gidNumber,
 ZaAccountXFormView.POSIXACCOUNT_TAB_RIGHTS = [];
 
 if(ZaTabView.XFormModifiers["ZaAccountXFormView"]) {
-	zimbra_posixaccount_ext.AccountXFormModifier= function (xFormObject,entry) {
+	zmail_posixaccount_ext.AccountXFormModifier= function (xFormObject,entry) {
 		if(ZaTabView.isTAB_ENABLED(entry,ZaAccountXFormView.POSIXACCOUNT_TAB_ATTRS, ZaAccountXFormView.POSIXACCOUNT_TAB_RIGHTS)) {
 			var cnt = xFormObject.items.length;
 			var i = 0;
@@ -83,12 +83,12 @@ if(ZaTabView.XFormModifiers["ZaAccountXFormView"]) {
 			}
 			var tabBar = xFormObject.items[1] ;
 			var posixTabIx = ++this.TAB_INDEX;
-			tabBar.choices.push({value:posixTabIx, label:zimbra_posixaccount.PosixAccount});
+			tabBar.choices.push({value:posixTabIx, label:zmail_posixaccount.PosixAccount});
 			var posixAccountTab={type:_ZATABCASE_, numCols:1, caseKey:posixTabIx,
 					items: [
 						{type:_ZAGROUP_, 
 							items:[
-								{ref:ZaPosixAccount.A_gidNumber, type:_OSELECT1_, editable:false,choices:ZaApp.getInstance().getPosixGroupIdListChoices(true), msgName:zimbra_posixaccount.PosixGroup,label:zimbra_posixaccount.PosixGroup, labelLocation:_LEFT_, onChange:ZaTabView.onFormFieldChanged},														
+								{ref:ZaPosixAccount.A_gidNumber, type:_OSELECT1_, editable:false,choices:ZaApp.getInstance().getPosixGroupIdListChoices(true), msgName:zmail_posixaccount.PosixGroup,label:zmail_posixaccount.PosixGroup, labelLocation:_LEFT_, onChange:ZaTabView.onFormFieldChanged},														
 								{ref:ZaPosixAccount.A_gidNumber, type:_TEXTFIELD_, msgName:ZaPosixAccount.A_gidNumber,label:ZaPosixAccount.A_gidNumber, labelLocation:_LEFT_, onChange:ZaTabView.onFormFieldChanged, cssClass:"admin_xform_number_input",bmolsnr:true},
 								{ref:ZaPosixAccount.A_uidNumber, type:_TEXTFIELD_, msgName:ZaPosixAccount.A_uidNumber,label:ZaPosixAccount.A_uidNumber, labelLocation:_LEFT_, onChange:ZaTabView.onFormFieldChanged, cssClass:"admin_xform_number_input"},
 								{ref:ZaPosixAccount.A_homeDirectory, type:_TEXTFIELD_, msgName:ZaPosixAccount.A_homeDirectory,label:ZaPosixAccount.A_homeDirectory, labelLocation:_LEFT_, onChange:ZaTabView.onFormFieldChanged, width:250},
@@ -99,15 +99,15 @@ if(ZaTabView.XFormModifiers["ZaAccountXFormView"]) {
 			xFormObject.items[i].items.push(posixAccountTab);
 		}
 	}
-	ZaTabView.XFormModifiers["ZaAccountXFormView"].push(zimbra_posixaccount_ext.AccountXFormModifier);	
+	ZaTabView.XFormModifiers["ZaAccountXFormView"].push(zmail_posixaccount_ext.AccountXFormModifier);	
 }
 if(!ZaApp.PosixGroupIdChoices) {
 	ZaApp.PosixGroupIdChoices = new XFormChoices([], XFormChoices.OBJECT_LIST, "id", "name");
 }
-zimbra_posixaccount_ext.ACC_WIZ_GROUP = 
+zmail_posixaccount_ext.ACC_WIZ_GROUP = 
 	{type:_ZAWIZGROUP_, 
 		items:[
-			{ref:ZaPosixAccount.A_gidNumber, type:_OSELECT1_, editable:false,choices:ZaApp.PosixGroupIdChoices, msgName:zimbra_posixaccount.PosixGroup,label:zimbra_posixaccount.PosixGroup, labelLocation:_LEFT_},							
+			{ref:ZaPosixAccount.A_gidNumber, type:_OSELECT1_, editable:false,choices:ZaApp.PosixGroupIdChoices, msgName:zmail_posixaccount.PosixGroup,label:zmail_posixaccount.PosixGroup, labelLocation:_LEFT_},							
 			{ref:ZaPosixAccount.A_gidNumber, type:_TEXTFIELD_, msgName:ZaPosixAccount.A_gidNumber,label:ZaPosixAccount.A_gidNumber, labelLocation:_LEFT_, cssClass:"admin_xform_number_input",bmolsnr:true},
 			{ref:ZaPosixAccount.A_uidNumber, type:_TEXTFIELD_, msgName:ZaPosixAccount.A_uidNumber,label:ZaPosixAccount.A_uidNumber, labelLocation:_LEFT_, width:250,
 				getDisplayValue:function () {
@@ -123,12 +123,12 @@ zimbra_posixaccount_ext.ACC_WIZ_GROUP =
 					getDisplayValue:function() {
 						var val = this.getInstanceValue();
 						var instance = this.getInstance();
-						if((val === null || val === undefined) && zimbra_posixaccount_ext.homePath && instance && instance.name) {
+						if((val === null || val === undefined) && zmail_posixaccount_ext.homePath && instance && instance.name) {
 							var chunks = instance.name.split("@");
 							if(chunks) {
 								var uname = chunks[0];
 								if(uname) {
-									val = String(zimbra_posixaccount_ext.homePath).replace("%u",uname);
+									val = String(zmail_posixaccount_ext.homePath).replace("%u",uname);
 									this.setInstanceValue(val);
 								}
 							}
@@ -136,12 +136,12 @@ zimbra_posixaccount_ext.ACC_WIZ_GROUP =
 						return val;
 					}
 				},								
-				{ref:ZaPosixAccount.A_loginShell, type:_OSELECT1_, editable:true, msgName:ZaPosixAccount.A_loginShell,label:ZaPosixAccount.A_loginShell, labelLocation:_LEFT_, choices:zimbra_posixaccount_ext.shells}
+				{ref:ZaPosixAccount.A_loginShell, type:_OSELECT1_, editable:true, msgName:ZaPosixAccount.A_loginShell,label:ZaPosixAccount.A_loginShell, labelLocation:_LEFT_, choices:zmail_posixaccount_ext.shells}
 			]
 	};
 if(ZaXDialog.XFormModifiers["ZaNewAccountXWizard"]) {
 	
-	zimbra_posixaccount_ext.AccountXWizModifier= function (xFormObject, entry) {
+	zmail_posixaccount_ext.AccountXWizModifier= function (xFormObject, entry) {
 		if(ZaTabView.isTAB_ENABLED(entry,ZaAccountXFormView.POSIXACCOUNT_TAB_ATTRS, ZaAccountXFormView.POSIXACCOUNT_TAB_RIGHTS)) {
 			ZaNewAccountXWizard.POSIX_ACC_STEP = ++this.TAB_INDEX;		
 			this.stepChoices.push({value:ZaNewAccountXWizard.POSIX_ACC_STEP, label:"Posix Account"});
@@ -158,21 +158,21 @@ if(ZaXDialog.XFormModifiers["ZaNewAccountXWizard"]) {
 			var j = 0;
 			var gotAdvanced = false;
 			var gotFeatures = false;		
-			zimbra_posixaccount_ext.ACC_WIZ_GROUP.items[0].choices = ZaApp.getInstance().getPosixGroupIdListChoices(true);	
+			zmail_posixaccount_ext.ACC_WIZ_GROUP.items[0].choices = ZaApp.getInstance().getPosixGroupIdListChoices(true);	
 			var posixAccountStep={type:_CASE_, numCols:1, caseKey:ZaNewAccountXWizard.POSIX_ACC_STEP, tabGroupKey:ZaNewAccountXWizard.POSIX_ACC_STEP,
-				items: [zimbra_posixaccount_ext.ACC_WIZ_GROUP]
+				items: [zmail_posixaccount_ext.ACC_WIZ_GROUP]
 			};
 			xFormObject.items[i].items.push(posixAccountStep);
 		}
 	}
-	ZaXDialog.XFormModifiers["ZaNewAccountXWizard"].push(zimbra_posixaccount_ext.AccountXWizModifier);	
+	ZaXDialog.XFormModifiers["ZaNewAccountXWizard"].push(zmail_posixaccount_ext.AccountXWizModifier);	
 }
 
 
-zimbra_posixaccount_ext.initSettings= function () {
+zmail_posixaccount_ext.initSettings= function () {
 	if(ZaSettings.ENABLED_UI_COMPONENTS[ZaSettings.POSIX_GROUPS_LIST_VIEW] || ZaSettings.ENABLED_UI_COMPONENTS[ZaSettings.CARTE_BLANCHE_UI]) {	
 		try {
-			var soapDoc = AjxSoapDoc.create("GetAdminExtensionZimletsRequest", "urn:zimbraAdmin", null);	
+			var soapDoc = AjxSoapDoc.create("GetAdminExtensionZimletsRequest", "urn:zmailAdmin", null);	
 			var command = new ZmCsfeCommand();
 			var params = new Object();
 			params.soapDoc = soapDoc;	
@@ -190,13 +190,13 @@ zimbra_posixaccount_ext.initSettings= function () {
 				for(var ix = 0; ix < cnt; ix++) {
 					if(zimlets[ix] && zimlets[ix].zimlet && zimlets[ix].zimlet[0] && zimlets[ix].zimletConfig && zimlets[ix].zimletConfig[0]) { 
 						var zimletConfig = zimlets[ix].zimletConfig[0];					
-						if(zimletConfig.name=="zimbra_posixaccount") {
+						if(zimletConfig.name=="zmail_posixaccount") {
 							var global = zimletConfig.global[0];
 							if(global) {
 								var properties = global.property;
 								var cnt2 = properties.length;							
 								for (var j=0;j<cnt2;j++) {
-									zimbra_posixaccount_ext[properties[j].name] = properties[j]._content;
+									zmail_posixaccount_ext[properties[j].name] = properties[j]._content;
 								}
 							}
 							break;
@@ -213,14 +213,14 @@ zimbra_posixaccount_ext.initSettings= function () {
 }
 
 if(ZaSettings.initMethods)
-	ZaSettings.initMethods.push(zimbra_posixaccount_ext.initSettings);
+	ZaSettings.initMethods.push(zmail_posixaccount_ext.initSettings);
 
-zimbra_posixaccount_ext.initOUs = function () {
+zmail_posixaccount_ext.initOUs = function () {
 	if(ZaSettings.ENABLED_UI_COMPONENTS[ZaSettings.POSIX_GROUPS_LIST_VIEW] || ZaSettings.ENABLED_UI_COMPONENTS[ZaSettings.CARTE_BLANCHE_UI]) {
 		try {
-			var soapDoc = AjxSoapDoc.create("GetLDAPEntriesRequest", "urn:zimbraAdmin", null);	
-			soapDoc.set("ldapSearchBase", zimbra_posixaccount_ext.ldapSuffix);
-			soapDoc.set("query", zimbra_posixaccount_ext.ldapGroupSuffix);	
+			var soapDoc = AjxSoapDoc.create("GetLDAPEntriesRequest", "urn:zmailAdmin", null);	
+			soapDoc.set("ldapSearchBase", zmail_posixaccount_ext.ldapSuffix);
+			soapDoc.set("query", zmail_posixaccount_ext.ldapGroupSuffix);	
 			var getSambaDomainsCommand = new ZmCsfeCommand();
 			var params = new Object();
 			params.soapDoc = soapDoc;	
@@ -230,8 +230,8 @@ zimbra_posixaccount_ext.initOUs = function () {
 			} else {
 				try {
 					//ou does not exist - create it
-					var soapDoc = AjxSoapDoc.create("CreateLDAPEntryRequest", "urn:zimbraAdmin", null);		
-					var dn = [zimbra_posixaccount_ext.ldapGroupSuffix,zimbra_posixaccount_ext.ldapSuffix];
+					var soapDoc = AjxSoapDoc.create("CreateLDAPEntryRequest", "urn:zmailAdmin", null);		
+					var dn = [zmail_posixaccount_ext.ldapGroupSuffix,zmail_posixaccount_ext.ldapSuffix];
 					soapDoc.set("dn", dn.join(","));	
 					var testCommand = new ZmCsfeCommand();
 					var params = new Object();
@@ -248,30 +248,30 @@ zimbra_posixaccount_ext.initOUs = function () {
 				}
 			}
 		} catch (e) {
-			alert("Warning! Failed to initialize zimbra_posixaccount extension!");
+			alert("Warning! Failed to initialize zmail_posixaccount extension!");
 		}
 	}
 }
 
 if(ZaSettings.initMethods)
-	ZaSettings.initMethods.push(zimbra_posixaccount_ext.initOUs);
+	ZaSettings.initMethods.push(zmail_posixaccount_ext.initOUs);
 
-zimbra_posixaccount_ext.initDefaults = function () {
+zmail_posixaccount_ext.initDefaults = function () {
 	if(ZaSettings.ENABLED_UI_COMPONENTS[ZaSettings.POSIX_GROUPS_LIST_VIEW] || ZaSettings.ENABLED_UI_COMPONENTS[ZaSettings.CARTE_BLANCHE_UI]) {	
-		zimbra_posixaccount_ext.shells = ["/bin/bash"];
-		if(zimbra_posixaccount_ext.loginShells) {
-			var chunks = zimbra_posixaccount_ext.loginShells.split(",");
+		zmail_posixaccount_ext.shells = ["/bin/bash"];
+		if(zmail_posixaccount_ext.loginShells) {
+			var chunks = zmail_posixaccount_ext.loginShells.split(",");
 			if(chunks && chunks.length) {
-				zimbra_posixaccount_ext.shells = chunks;
+				zmail_posixaccount_ext.shells = chunks;
 			} else {
-				zimbra_posixaccount_ext.shells = [zimbra_posixaccount_ext.loginShells];
+				zmail_posixaccount_ext.shells = [zmail_posixaccount_ext.loginShells];
 			}
 		}
 	}
 }
 
 if(ZaSettings.initMethods)
-	ZaSettings.initMethods.push(zimbra_posixaccount_ext.initDefaults);
+	ZaSettings.initMethods.push(zmail_posixaccount_ext.initDefaults);
 	
 if(ZmCsfeException)	 {
 	ZmCsfeException.DN_EXISTS =  "zimblraldaputils.DN_EXISTS";
@@ -288,7 +288,7 @@ function(refresh) {
 ZaApp.prototype.getPosixGroupListController =
 function(viewId, newController) {
 	if(!viewId)
-		viewId = ZaZimbraAdmin._POSIX_GROUP_LIST;
+		viewId = ZaZmailAdmin._POSIX_GROUP_LIST;
 			
 	if (viewId && this._controllers[viewId] != null) {
 		return this._controllers[viewId];
@@ -315,7 +315,7 @@ function(viewId) {
 }
 	
 
-zimbra_posixaccount_ext.posixGroupListTreeListener = function (ev) {
+zmail_posixaccount_ext.posixGroupListTreeListener = function (ev) {
 	if(ZaApp.getInstance().getCurrentController()) {
 		ZaApp.getInstance().getCurrentController().switchToNextView(ZaApp.getInstance().getPosixGroupListController(),ZaPosixGroupListController.prototype.show, ZaPosixGroup.getAll());
 	} else {					
@@ -323,7 +323,7 @@ zimbra_posixaccount_ext.posixGroupListTreeListener = function (ev) {
 	}
 }
 
-zimbra_posixaccount_ext.posixGroupTreeListener = function (ev) {
+zmail_posixaccount_ext.posixGroupTreeListener = function (ev) {
 	var currentPosixGroup = ZaApp.getInstance().getPosixGroupList(true).getItemById(ev.item.getData(ZaOverviewPanelController._OBJ_ID));	
 	if(ZaApp.getInstance().getCurrentController()) {
 		ZaApp.getInstance().getCurrentController().switchToNextView(ZaApp.getInstance().getPosixGroupController(),ZaPosixGroupController.prototype.show, currentPosixGroup);
@@ -332,19 +332,19 @@ zimbra_posixaccount_ext.posixGroupTreeListener = function (ev) {
 	}
 }
 	
-zimbra_posixaccount_ext.ovTreeModifier = function (tree) {
+zmail_posixaccount_ext.ovTreeModifier = function (tree) {
 	if(ZaSettings.ENABLED_UI_COMPONENTS[ZaSettings.POSIX_GROUPS_LIST_VIEW] || ZaSettings.ENABLED_UI_COMPONENTS[ZaSettings.CARTE_BLANCHE_UI]) {
 		if(!this._configTi) {
 			this._configTi = new DwtTreeItem(tree, null, null, null, null, "overviewHeader");
 			this._configTi.enableSelection(false);
 			this._configTi.setText(ZaMsg.OVP_configuration);
-			this._configTi.setData(ZaOverviewPanelController._TID, ZaZimbraAdmin._SYS_CONFIG);		
+			this._configTi.setData(ZaOverviewPanelController._TID, ZaZmailAdmin._SYS_CONFIG);		
 		}
 		
 		this._posixGroupTi = new DwtTreeItem({parent:this._configTi,className:"AdminTreeItem"});
-		this._posixGroupTi.setText(zimbra_posixaccount.PosixGroups);
+		this._posixGroupTi.setText(zmail_posixaccount.PosixGroups);
 		this._posixGroupTi.setImage("Zimlet");
-		this._posixGroupTi.setData(ZaOverviewPanelController._TID, ZaZimbraAdmin._POSIX_GROUP_LIST);	
+		this._posixGroupTi.setData(ZaOverviewPanelController._TID, ZaZmailAdmin._POSIX_GROUP_LIST);	
 		
 		try {
 			//add server statistics nodes
@@ -355,7 +355,7 @@ zimbra_posixaccount_ext.ovTreeModifier = function (tree) {
 					var ti1 = new DwtTreeItem({parent:this._posixGroupTi,className:"AdminTreeItem"});			
 					ti1.setText(posixGroupList[ix].name);	
 					ti1.setImage("Domain");
-					ti1.setData(ZaOverviewPanelController._TID, ZaZimbraAdmin._POSIX_GROUP_VIEW);
+					ti1.setData(ZaOverviewPanelController._TID, ZaZmailAdmin._POSIX_GROUP_VIEW);
 					ti1.setData(ZaOverviewPanelController._OBJ_ID, posixGroupList[ix].id);
 				}
 			}
@@ -365,12 +365,12 @@ zimbra_posixaccount_ext.ovTreeModifier = function (tree) {
 		
 
 		if(ZaOverviewPanelController.overviewTreeListeners) {
-			ZaOverviewPanelController.overviewTreeListeners[ZaZimbraAdmin._POSIX_GROUP_LIST] = zimbra_posixaccount_ext.posixGroupListTreeListener;
-			ZaOverviewPanelController.overviewTreeListeners[ZaZimbraAdmin._POSIX_GROUP_VIEW] = zimbra_posixaccount_ext.posixGroupTreeListener;							
+			ZaOverviewPanelController.overviewTreeListeners[ZaZmailAdmin._POSIX_GROUP_LIST] = zmail_posixaccount_ext.posixGroupListTreeListener;
+			ZaOverviewPanelController.overviewTreeListeners[ZaZmailAdmin._POSIX_GROUP_VIEW] = zmail_posixaccount_ext.posixGroupTreeListener;							
 		}
 	}
 }
 
 if(ZaOverviewPanelController.treeModifiers)
-	ZaOverviewPanelController.treeModifiers.push(zimbra_posixaccount_ext.ovTreeModifier);
+	ZaOverviewPanelController.treeModifiers.push(zmail_posixaccount_ext.ovTreeModifier);
 	

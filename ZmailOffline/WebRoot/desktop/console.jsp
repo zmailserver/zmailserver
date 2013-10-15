@@ -14,14 +14,14 @@
 -->
 <%@ page contentType="text/html;charset=UTF-8" language="java" session="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="zd" tagdir="/WEB-INF/tags/desktop" %>
-<%@ taglib prefix="zdf" uri="com.zimbra.cs.offline.jsp" %>
+<%@ taglib prefix="zdf" uri="org.zmail.cs.offline.jsp" %>
 
 <fmt:setBundle basename="/messages/ZdMsg" scope="request"/>
 
-<jsp:useBean id="bean" class="com.zimbra.cs.offline.jsp.ConsoleBean"/>
+<jsp:useBean id="bean" class="org.zmail.cs.offline.jsp.ConsoleBean"/>
 <jsp:setProperty name="bean" property="*"/>
 <jsp:setProperty name="bean" property="locale" value="${pageContext.request.locale}"/>
 
@@ -38,7 +38,7 @@
 <html>
 <head>
 <meta http-equiv="CACHE-CONTROL" content="NO-CACHE">
-<title><fmt:message key="ZimbraDesktop"/></title>
+<title><fmt:message key="ZmailDesktop"/></title>
 
 <link rel="stylesheet" type="text/css" href="<c:url value="/skins/_base/base2/desktop.css"></c:url>">
 <link rel="stylesheet" type="text/css" href="<c:url value="/skins/${bean.skin}/desktop.css"></c:url>">
@@ -244,7 +244,7 @@ function submit(id, name, type, flavor, verb) {
                                                                                     <a href="javascript:OnDelete('${account.id}', '${fn:replace(account.name, "'", "\\'")}', '${account.type}', '${account.flavor}')"><fmt:message key="Delete"/></a>&nbsp;
                                                                                     <a href="javascript:OnReset('${account.id}', '${fn:replace(account.name, "'", "\\'")}', '${account.type}', '${account.flavor}')"><fmt:message key="ResetData"/></a>&nbsp;
                                                                                     <a href="javascript:OnReindex('${account.id}', '${fn:replace(account.name, "'", "\\'")}', '${account.type}', '${account.flavor}')"><fmt:message key="Reindex"/></a>
-                                                                                    <c:if test="${account.flavor eq 'Zimbra'}">
+                                                                                    <c:if test="${account.flavor eq 'Zmail'}">
                                                                                         &nbsp;
                                                                                         <a href="javascript:OnResetGal('${account.id}', '${fn:replace(account.name, "'", "\\'")}', '${account.type}', '${account.flavor}')"><fmt:message key="ResetGal"/></a>
                                                                                     </c:if>
@@ -278,13 +278,13 @@ function submit(id, name, type, flavor, verb) {
                                                                                                         <img src="/img/imgOnline.gif" align="absmiddle">&nbsp;<fmt:message key='StatusOnline'/>
                                                                                                     </c:when>
                                                                                                     <c:when test="${account.statusRunning}">
-                                                                                                        <img src="/zimbra/img/animated/ImgSpinner.gif" align="absmiddle">&nbsp;<fmt:message key='StatusInProg'/>
+                                                                                                        <img src="/zmail/img/animated/ImgSpinner.gif" align="absmiddle">&nbsp;<fmt:message key='StatusInProg'/>
                                                                                                     </c:when>
                                                                                                     <c:when test="${account.statusAuthFailed}">
                                                                                                         <img src="/img/imgCantLogin.gif" align="absmiddle">&nbsp;<fmt:message key='StatusCantLogin'/>
                                                                                                     </c:when>
                                                                                                     <c:when test="${account.statusError}">
-                                                                                                        <img height="14" width="14" src="/zimbra/img/dwt/ImgCritical.gif" align="absmiddle">&nbsp;<fmt:message key='StatusErr'/>
+                                                                                                        <img height="14" width="14" src="/zmail/img/dwt/ImgCritical.gif" align="absmiddle">&nbsp;<fmt:message key='StatusErr'/>
                                                                                                     </c:when>
                                                                                                 </c:choose>
                                                                                             </td>

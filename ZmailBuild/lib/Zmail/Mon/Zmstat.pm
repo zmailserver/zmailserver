@@ -13,12 +13,12 @@
 # ***** END LICENSE BLOCK *****
 # 
 
-package Zimbra::Mon::Zmstat;
+package Zmail::Mon::Zmstat;
 
 use Exporter;
 @ISA = qw(Exporter);
 @EXPORT = qw(
-    zmstatInit getZimbraHome getZimbraUser getZimbraServerHostname
+    zmstatInit getZmailHome getZmailUser getZmailServerHostname
     getZmstatRoot getZmstatInterval
     isLinux isMac
     percent getTstamp getDate waitUntilNiceRoundSecond
@@ -36,7 +36,7 @@ our %LC;
 sub getLocalConfig(;@) {
     my @vars = @_;
     my $dir = dirname($0);
-    my $cmd = "/opt/zimbra/bin/zmlocalconfig -q -x";
+    my $cmd = "/opt/zmail/bin/zmlocalconfig -q -x";
     if (scalar(@vars) > 0) {
         $cmd .= ' ' . join(' ', @vars);
     }
@@ -53,7 +53,7 @@ sub getLocalConfig(;@) {
 sub userCheck() {
     my $loggedIn = `id -un`;
     chomp($loggedIn) if (defined($loggedIn));
-    my $expected = $LC{zimbra_user};
+    my $expected = $LC{zmail_user};
     if ($loggedIn ne $expected) {
         print STDERR "Must be user $expected to run this command\n";
         exit(1);
@@ -77,22 +77,22 @@ sub osCheck() {
 
 sub zmstatInit() {
     osCheck();
-    getLocalConfig('zimbra_home', 'zimbra_user', 'zimbra_server_hostname',
+    getLocalConfig('zmail_home', 'zmail_user', 'zmail_server_hostname',
                    'zmstat_log_directory', 'zmstat_interval',
                    'zmstat_disk_interval');
     userCheck();
 }
 
-sub getZimbraHome() {
-    return $LC{'zimbra_home'};
+sub getZmailHome() {
+    return $LC{'zmail_home'};
 }
 
-sub getZimbraUser() {
-    return $LC{'zimbra_user'};
+sub getZmailUser() {
+    return $LC{'zmail_user'};
 }
 
-sub getZimbraServerHostname() {
-    return $LC{'zimbra_server_hostname'};
+sub getZmailServerHostname() {
+    return $LC{'zmail_server_hostname'};
 }
 
 sub getZmstatRoot() {
@@ -197,7 +197,7 @@ sub openLogFile($;$) {
         my $dir = File::Basename::dirname($logfile);
         if (! -e $dir) {
             mkdir($dir, 0755) || die "Unable to create log directory $dir: $!";
-            my (undef,undef,$uid,$gid) = getpwnam('zimbra');
+            my (undef,undef,$uid,$gid) = getpwnam('zmail');
             chown $uid,$gid,$dir;
         }
         if (-f $logfile) { # check for stale data
@@ -240,7 +240,7 @@ sub rotateLogFile($$;$$) {
     if (! -d $rotatedir) {
         die "Unable to create log rotation directory $rotatedir";
     }
-    my (undef,undef,$uid,$gid) = getpwnam('zimbra');
+    my (undef,undef,$uid,$gid) = getpwnam('zmail');
     chown $uid,$gid,$rotatedir;
     $fh->close() if defined $fh;
 

@@ -14,21 +14,21 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.octopus.tests.myfiles.folders;
+package org.zmail.qa.selenium.projects.octopus.tests.myfiles.folders;
 
 import java.util.List;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.IOctListViewItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.SleepUtil;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.octopus.core.OctopusCommonTest;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.IOctListViewItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.SleepUtil;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.octopus.core.OctopusCommonTest;
 
 public class GetFolder extends OctopusCommonTest {
 
@@ -46,7 +46,7 @@ public class GetFolder extends OctopusCommonTest {
 			groups = { "smoke" } )
 	public void GetFolder_01() throws HarnessException {
 
-		String foldername = "folder" + ZimbraSeleniumProperties.getUniqueString();
+		String foldername = "folder" + ZmailSeleniumProperties.getUniqueString();
 
 		
 		FolderItem briefcaseRootFolder = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Briefcase);
@@ -56,7 +56,7 @@ public class GetFolder extends OctopusCommonTest {
 		// Create the sub-folder
 
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+				"<CreateFolderRequest xmlns='urn:zmailMail'>" +
 					"<folder name='" + foldername + "' l='" + briefcaseRootFolder.getId() + "' view='document'/>" +
 				"</CreateFolderRequest>");
 		
@@ -99,10 +99,10 @@ public class GetFolder extends OctopusCommonTest {
 		
 		for (int i = 0; i < 100; i++) {
 			
-			foldername = "folder" + ZimbraSeleniumProperties.getUniqueString();
+			foldername = "folder" + ZmailSeleniumProperties.getUniqueString();
 			
 			app.zGetActiveAccount().soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+					"<CreateFolderRequest xmlns='urn:zmailMail'>" +
 						"<folder name='" + foldername + "' l='" + briefcaseRootFolder.getId() + "' view='document'/>" +
 					"</CreateFolderRequest>");
 		}

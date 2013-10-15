@@ -15,10 +15,10 @@
 <%@ tag body-content="empty" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
-<%@ taglib prefix="app" uri="com.zimbra.htmlclient" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
-<%@ attribute name="context" rtexprvalue="true" required="false" type="com.zimbra.cs.taglib.tag.SearchContext"%>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
+<%@ taglib prefix="app" uri="org.zmail.htmlclient" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
+<%@ attribute name="context" rtexprvalue="true" required="false" type="org.zmail.cs.taglib.tag.SearchContext"%>
 
 <app:handleError>
 <zm:requirePost/>
@@ -147,7 +147,7 @@
 	<c:choose>
 		<c:when test="${viewOp eq 'byConv'}">
 				<zm:modifyPrefs var="updated">
-					<zm:pref name="zimbraPrefGroupMailBy" value="conversation"/>
+					<zm:pref name="zmailPrefGroupMailBy" value="conversation"/>
 				</zm:modifyPrefs>
 				<c:url var="redirectUrl" value="search?st=conversation">
 					<c:if test="${not empty param.sfi}">
@@ -163,7 +163,7 @@
 			</c:when>
 			<c:when test="${viewOp eq 'byMsg'}">
 				<zm:modifyPrefs var="updated">
-					<zm:pref name="zimbraPrefGroupMailBy" value="message"/>
+					<zm:pref name="zmailPrefGroupMailBy" value="message"/>
 				</zm:modifyPrefs>
 				<c:url var="redirectUrl" value="search?st=message">
 					<c:if test="${not empty param.sfi}">
@@ -188,7 +188,7 @@
     <c:choose>
         <c:when test="${readingPaneOp eq 'bottom'}">
             <zm:modifyPrefs var="updated">
-                  <zm:pref name="zimbraPrefReadingPaneLocation" value="bottom"/>
+                  <zm:pref name="zmailPrefReadingPaneLocation" value="bottom"/>
             </zm:modifyPrefs>
             <c:url var="redirectUrl" value="search?st=conversation">
 					<c:if test="${not empty param.sfi}">
@@ -205,7 +205,7 @@
         </c:when>
         <c:when test="${readingPaneOp eq 'right'}">
             <zm:modifyPrefs var="updated">
-                  <zm:pref name="zimbraPrefReadingPaneLocation" value="right"/>
+                  <zm:pref name="zmailPrefReadingPaneLocation" value="right"/>
             </zm:modifyPrefs>
             <c:url var="redirectUrl" value="search?st=conversation">
 					<c:if test="${not empty param.sfi}">
@@ -222,7 +222,7 @@
         </c:when>
         <c:when test="${readingPaneOp eq 'off'}">
             <zm:modifyPrefs var="updated">
-                  <zm:pref name="zimbraPrefReadingPaneLocation" value="off"/>
+                  <zm:pref name="zmailPrefReadingPaneLocation" value="off"/>
             </zm:modifyPrefs>
             <c:url var="redirectUrl" value="search?st=conversation">
 					<c:if test="${not empty param.sfi}">

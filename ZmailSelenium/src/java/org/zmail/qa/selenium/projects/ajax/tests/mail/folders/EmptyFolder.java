@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.folders;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.folders;
 
 import java.util.List;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogWarning;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogWarning;
 
 
 public class EmptyFolder extends PrefGroupMailByMessageTest {
@@ -40,15 +40,15 @@ public class EmptyFolder extends PrefGroupMailByMessageTest {
 	public void EmptyFolder_01() throws HarnessException {
 
 		String foldername = "folder"
-				+ ZimbraSeleniumProperties.getUniqueString();
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
+				+ ZmailSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
 
 		FolderItem inbox = FolderItem.importFromSOAP(app.zGetActiveAccount(),
 				FolderItem.SystemFolder.Inbox);
 
 		// Create a subfolder in Inbox
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>"
+				"<CreateFolderRequest xmlns='urn:zmailMail'>"
 						+ "<folder name='" + foldername + "' l='"
 						+ inbox.getId() + "'/>" + "</CreateFolderRequest>");
 
@@ -60,7 +60,7 @@ public class EmptyFolder extends PrefGroupMailByMessageTest {
 
 		// Add an message to the new subfolder
 		app.zGetActiveAccount().soapSend(
-				"<AddMsgRequest xmlns='urn:zimbraMail'>" + "<m l='"
+				"<AddMsgRequest xmlns='urn:zmailMail'>" + "<m l='"
 						+ subfolder.getId() + "'>"
 						+ "<content>From: foo@foo.com\n" + "To: foo@foo.com \n"
 						+ "Subject: " + subject + "\n" + "MIME-Version: 1.0 \n"

@@ -14,16 +14,16 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.bp;
+package org.zmail.bp;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
 /**
  * @author Greg Solovyev
  */
@@ -105,7 +105,7 @@ public class BulkProvisioningThread extends Thread {
 		mFailCounter = 0;
 		if(sourceAccounts == null) {
 			mStatus = iSTATUS_ERROR;
-			ZimbraLog.extensions.error("sourceAccounts map is empty", BulkProvisionException.BP_IMPORT_THREAD_NOT_INITIALIZED());
+			ZmailLog.extensions.error("sourceAccounts map is empty", BulkProvisionException.BP_IMPORT_THREAD_NOT_INITIALIZED());
 			return;
 		}
 		Provisioning prov = Provisioning.getInstance();
@@ -113,7 +113,7 @@ public class BulkProvisioningThread extends Thread {
 		for (Map<String, Object> entry : sourceAccounts) {
 			String accName = "";
 			if(mStatus == iSTATUS_ABORT) {
-				ZimbraLog.extensions.warn("Warning! Aborting bulk provisioning import thread.");
+				ZmailLog.extensions.warn("Warning! Aborting bulk provisioning import thread.");
 				mStatus = iSTATUS_ABORTED;
 				return;
 			}
@@ -144,9 +144,9 @@ public class BulkProvisioningThread extends Thread {
 				mFailCounter++;
 				mWithErrors = true;
 				failedAccounts.put(accName, e);
-				ZimbraLog.extensions.error("Failed to import account", e);
+				ZmailLog.extensions.error("Failed to import account", e);
 				if(mFailCounter >= MAX_PROVISIONING_FAILURES) {
-					ZimbraLog.extensions.error("Failed to import account",BulkProvisionException.BP_IMPORT_TOO_MANY_FAILURES(mFailCounter));
+					ZmailLog.extensions.error("Failed to import account",BulkProvisionException.BP_IMPORT_TOO_MANY_FAILURES(mFailCounter));
 					mStatus = iSTATUS_ERROR;
 					return;
 				} else {

@@ -17,17 +17,17 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.html.ui;
+package org.zmail.qa.selenium.projects.html.ui;
 
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.projects.html.ui.mail.PageMail;
-import com.zimbra.qa.selenium.projects.html.ui.mail.TreeMail;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.projects.html.ui.mail.PageMail;
+import org.zmail.qa.selenium.projects.html.ui.mail.TreeMail;
 
 
 /**
- * The <code>AppHtmlClient</code> class defines the Zimbra Ajax client.
+ * The <code>AppHtmlClient</code> class defines the Zmail Ajax client.
  * <p>
  * The <code>AppHtmlClient</code> contains all pages, folder trees,
  * dialog boxes, forms, menus for the Ajax client.
@@ -119,7 +119,7 @@ public class AppHtmlClient extends AbsApplication {
 	 * @see projects.admin.ui.AbsApplication#myApplicationName()
 	 */
 	@Override
-	protected ZimbraAccount zSetActiveAcount(ZimbraAccount account) throws HarnessException {
+	protected ZmailAccount zSetActiveAcount(ZmailAccount account) throws HarnessException {
 		return (super.zSetActiveAcount(account));
 	}
 

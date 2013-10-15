@@ -14,15 +14,15 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.octopus.tests.myfiles.files;
+package org.zmail.qa.selenium.projects.octopus.tests.myfiles.files;
 
 import org.testng.annotations.*;
-import com.zimbra.qa.selenium.framework.items.FileItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.octopus.core.OctopusCommonTest;
+import org.zmail.qa.selenium.framework.items.FileItem;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.octopus.core.OctopusCommonTest;
 
 public class UploadFile extends OctopusCommonTest {
 
@@ -49,13 +49,13 @@ public class UploadFile extends OctopusCommonTest {
 
 	@Test(description = "Upload file through RestUtil - verify file through SOAP", groups = { "sanity" })
 	public void UploadFile_01() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseRootFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
 
 		// Create file item
-		String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+		String filePath = ZmailSeleniumProperties.getBaseDirectory()
 				+ "/data/public/other/testpptfile.ppt";
 
 		FileItem fileItem = new FileItem(filePath);
@@ -66,7 +66,7 @@ public class UploadFile extends OctopusCommonTest {
 		String attachmentId = account.uploadFile(filePath);
 
 		// Save uploaded file to briefcase through SOAP
-		account.soapSend("<SaveDocumentRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<SaveDocumentRequest xmlns='urn:zmailMail'>"
 				+ "<doc l='" + briefcaseRootFolder.getId() + "'><upload id='"
 				+ attachmentId + "'/></doc></SaveDocumentRequest>");
 
@@ -82,13 +82,13 @@ public class UploadFile extends OctopusCommonTest {
 
 	@Test(description = "Upload file through RestUtil - verify file in My Files List view", groups = { "smoke" })
 	public void UploadFile_02() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseRootFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
 
 		// Create file item
-		String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+		String filePath = ZmailSeleniumProperties.getBaseDirectory()
 				+ "/data/public/other/samplejpg.jpg";
 
 		FileItem file = new FileItem(filePath);
@@ -101,7 +101,7 @@ public class UploadFile extends OctopusCommonTest {
 		// Save uploaded file to the root folder through SOAP
 		account.soapSend(
 
-		"<SaveDocumentRequest xmlns='urn:zimbraMail'>" + "<doc l='"
+		"<SaveDocumentRequest xmlns='urn:zmailMail'>" + "<doc l='"
 				+ briefcaseRootFolder.getId() + "'>" + "<upload id='"
 				+ attachmentId + "'/>" + "</doc></SaveDocumentRequest>");
 
@@ -147,11 +147,11 @@ public class UploadFile extends OctopusCommonTest {
 		}
 		try {
 			// Refresh view 
-			//ZimbraAccount account = app.zGetActiveAccount();
+			//ZmailAccount account = app.zGetActiveAccount();
 			//FolderItem item = FolderItem.importFromSOAP(account,SystemFolder.Briefcase);
-			//account.soapSend("<GetFolderRequest xmlns='urn:zimbraMail'><folder l='1' recursive='0'/>" + "</GetFolderRequest>");
-			//account.soapSend("<GetFolderRequest xmlns='urn:zimbraMail' requestId='folders' depth='1' tr='true' view='document'><folder l='" + item.getId() + "'/></GetFolderRequest>");
-			//account.soapSend("<GetActivityStreamRequest xmlns='urn:zimbraMail' id='16'/>");
+			//account.soapSend("<GetFolderRequest xmlns='urn:zmailMail'><folder l='1' recursive='0'/>" + "</GetFolderRequest>");
+			//account.soapSend("<GetFolderRequest xmlns='urn:zmailMail' requestId='folders' depth='1' tr='true' view='document'><folder l='" + item.getId() + "'/></GetFolderRequest>");
+			//account.soapSend("<GetActivityStreamRequest xmlns='urn:zmailMail' id='16'/>");
 			//app.zGetActiveAccount().accountIsDirty = true;
 			//app.zPageOctopus.sRefresh();
 												

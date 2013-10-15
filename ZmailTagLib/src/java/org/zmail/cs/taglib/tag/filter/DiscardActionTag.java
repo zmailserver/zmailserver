@@ -12,15 +12,15 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.tag.filter;
+package org.zmail.cs.taglib.tag.filter;
 
-import com.zimbra.cs.taglib.tag.ZimbraSimpleTag;
-import com.zimbra.client.ZFilterAction.ZDiscardAction;
+import org.zmail.cs.taglib.tag.ZmailSimpleTag;
+import org.zmail.client.ZFilterAction.ZDiscardAction;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 
-public class DiscardActionTag extends ZimbraSimpleTag {
+public class DiscardActionTag extends ZmailSimpleTag {
 
     public void doTag() throws JspException {
         FilterRuleTag rule = (FilterRuleTag) findAncestorWithClass(this, FilterRuleTag.class);

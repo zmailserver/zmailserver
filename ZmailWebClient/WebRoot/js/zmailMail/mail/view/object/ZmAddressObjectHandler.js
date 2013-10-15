@@ -28,7 +28,7 @@ ZmAddressObjectHandler.TYPE = "address";
 ZmAddressObjectHandler.ADDRESS_RE = /[\w]{3,}([A-Za-z]\.)?([ \w]*\#\d+)?(\r\n| )[ \w]{3,}\x20[A-Za-z]{2}\x20\d{5}(-\d{4})?\b/ig;
 
 // Y! maps geocoder, since Google doesn't have one.
-ZmAddressObjectHandler.URL = "http://api.local.yahoo.com/MapsService/V1/geocode?appid=ZimbraMail&location=";
+ZmAddressObjectHandler.URL = "http://api.local.yahoo.com/MapsService/V1/geocode?appid=ZmailMail&location=";
 
 // Make DOM safe id's
 ZmAddressObjectHandler.encodeId = function(s) {

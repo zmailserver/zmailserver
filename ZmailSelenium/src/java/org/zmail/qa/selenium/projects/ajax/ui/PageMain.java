@@ -17,14 +17,14 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.ajax.ui;
+package org.zmail.qa.selenium.projects.ajax.ui;
 
 import org.openqa.selenium.JavascriptExecutor;
-import com.zimbra.qa.selenium.framework.core.ClientSessionFactory;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogError.DialogErrorID;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogWarning.DialogWarningID;
+import org.zmail.qa.selenium.framework.core.ClientSessionFactory;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogError.DialogErrorID;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogWarning.DialogWarningID;
 
 
 /**
@@ -45,7 +45,7 @@ public class PageMain extends AbsTab {
 		public static final String zAppbarBriefcase		= "css=td[id=zb__App__Briefcase_title]";
 		public static final String zAppbarPreferences	= "id=zb__App__Options_title";
 
-		public static final String zAppbarSocialLocator	= 		"css=div[id^='zb__App__com_zimbra_social_'] td[id$='_title']";
+		public static final String zAppbarSocialLocator	= 		"css=div[id^='zb__App__org_zmail_social_'] td[id$='_title']";
 		
 		// 8.0 D1: public static final String ButtonRefreshLocatorCSS = "css=div[id='CHECK_MAIL'] td[id='CHECK_MAIL_left_icon'] div[class='ImgRefresh']";
 		// 8.0 D2: public static final String ButtonRefreshLocatorCSS = "css=div[id='CHECK_MAIL'] td[id='CHECK_MAIL_left_icon'] div[class='ImgRefreshAll']";
@@ -67,20 +67,20 @@ public class PageMain extends AbsTab {
 		return (toaster);
 	}
 	
-	public DialogWarning zGetWarningDialog(DialogWarningID zimbra) {
-		return (new DialogWarning(zimbra, this.MyApplication, this));
+	public DialogWarning zGetWarningDialog(DialogWarningID zmail) {
+		return (new DialogWarning(zmail, this.MyApplication, this));
 	}
 	
-	public DialogError zGetErrorDialog(DialogErrorID zimbra) {
-		return (new DialogError(zimbra, this.MyApplication, this));
+	public DialogError zGetErrorDialog(DialogErrorID zmail) {
+		return (new DialogError(zmail, this.MyApplication, this));
 	}
 
 
 
 	public boolean zIsZimletLoaded() throws HarnessException {
-		if (ZimbraSeleniumProperties.isWebDriver())
+		if (ZmailSeleniumProperties.isWebDriver())
 			return ("true".equals(sGetEval("return top.appCtxt.getZimletMgr().loaded")));
-		else if (ZimbraSeleniumProperties.isWebDriverBackedSelenium())
+		else if (ZmailSeleniumProperties.isWebDriverBackedSelenium())
 			return ("true".equals(sGetEval("selenium.browserbot.getCurrentWindow().top.appCtxt.getZimletMgr().loaded")));
 		else
 			return ("true".equals(sGetEval("this.browserbot.getUserWindow().top.appCtxt.getZimletMgr().loaded")));
@@ -146,7 +146,7 @@ public class PageMain extends AbsTab {
 		if ( !((AppAjaxClient)MyApplication).zPageLogin.zIsActive() ) {
 			((AppAjaxClient)MyApplication).zPageLogin.zNavigateTo();
 		}
-		((AppAjaxClient)MyApplication).zPageLogin.zLogin(ZimbraAccount.AccountZWC());
+		((AppAjaxClient)MyApplication).zPageLogin.zLogin(ZmailAccount.AccountZWC());
 		zWaitForActive();
 		
 	}
@@ -162,7 +162,7 @@ public class PageMain extends AbsTab {
 
 		zNavigateTo();
 
-		if (ZimbraSeleniumProperties.isWebDriver()) {
+		if (ZmailSeleniumProperties.isWebDriver()) {
 			// Click on logout pulldown
 			getElement("css=div[class=DwtLinkButtonDropDownArrow]").click();			
 		}else{
@@ -177,7 +177,7 @@ public class PageMain extends AbsTab {
 		
 		this.zWaitForBusyOverlay();
 		
-		if (ZimbraSeleniumProperties.isWebDriver()) {
+		if (ZmailSeleniumProperties.isWebDriver()) {
 			// Click on logout pulldown
 			getElement("css=tr[id=POPUP_logOff]>td[id=logOff_title]").click();			
 		}else{

@@ -1703,7 +1703,7 @@ function(iFrameDoc) {
 	try {
 		Dwt.enableDesignMode(iFrameDoc, true);
 		// Probably a regression of FF 1.5.0.1/Linux requires us to
-		// reset event handlers here (Zimbra bug: 6545).
+		// reset event handlers here (Zmail bug: 6545).
  		if (AjxEnv.isGeckoBased && (AjxEnv.isLinux || AjxEnv.isMac)) {
  			this._registerEditorEventHandlers(document.getElementById(this._iFrameId), iFrameDoc);
 		}

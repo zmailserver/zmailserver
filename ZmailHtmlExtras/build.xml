@@ -1,4 +1,4 @@
-<project name="ZimbraHtmlExtras" default="war">
+<project name="ZmailHtmlExtras" default="war">
 
     <import file="../ant-global.xml"/>
 
@@ -10,7 +10,7 @@
         <isset property="env.DEPLOY_DIR"/>
     </condition>
 
-    <condition property="deploy.dir" value="/opt/zimbra/tomcat/webapps">
+    <condition property="deploy.dir" value="/opt/zmail/tomcat/webapps">
         <not>
             <isset property="env.DEPLOY_DIR"/>
         </not>
@@ -26,8 +26,8 @@
     </condition>
 
     <property name="deploy.war" value="${warfile}"/>
-    <property name="deploy.user" value="zimbra"/>
-    <property name="deploy.password" value="zimbra"/>
+    <property name="deploy.user" value="zmail"/>
+    <property name="deploy.password" value="zmail"/>
     <property name="deploy.path" value="/zmail"/>
 
     <path id="class.path">
@@ -64,7 +64,7 @@
     <!--
     This target is meant only to be run after a full deploy has
     been done once. It does not deal with the java code used by the
-    ZimbraWebClient webapp, so if there are any java changes, another
+    ZmailWebClient webapp, so if there are any java changes, another
     deploy will have to be run.
     -->
     <target name="dev-sync" description="Quick Copy HTML Web Client">
@@ -77,7 +77,7 @@
     </target>
 
     <property name="war.exclude"
-              value="jsp-api.jar,mail.jar,zimbra-native.jar,KeyView.jar"/>
+              value="jsp-api.jar,mail.jar,zmail-native.jar,KeyView.jar"/>
     
     <target name="war" depends="build-init">
         <war warfile="${warfile}" webxml="WEB-INF/web.xml">

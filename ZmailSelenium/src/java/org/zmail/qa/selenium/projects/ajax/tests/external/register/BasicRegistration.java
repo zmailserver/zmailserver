@@ -14,14 +14,14 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.external.register;
+package org.zmail.qa.selenium.projects.ajax.tests.external.register;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
 
 
 
@@ -45,30 +45,30 @@ public class BasicRegistration extends AjaxCommonTest {
 		//-- Data Setup
 		
 		
-		ZimbraExternalAccount external = new ZimbraExternalAccount();
-		external.setEmailAddress("external" + ZimbraSeleniumProperties.getUniqueString() + "@example.com");
+		ZmailExternalAccount external = new ZmailExternalAccount();
+		external.setEmailAddress("external" + ZmailSeleniumProperties.getUniqueString() + "@example.com");
 		
-		FolderItem inbox = FolderItem.importFromSOAP(ZimbraAccount.AccountZWC(), FolderItem.SystemFolder.Inbox);
-		String foldername = "folder" + ZimbraSeleniumProperties.getUniqueString();
+		FolderItem inbox = FolderItem.importFromSOAP(ZmailAccount.AccountZWC(), FolderItem.SystemFolder.Inbox);
+		String foldername = "folder" + ZmailSeleniumProperties.getUniqueString();
 
 		// Create a subfolder in Inbox
-		ZimbraAccount.AccountZWC().soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>"
+		ZmailAccount.AccountZWC().soapSend(
+					"<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+		"<folder name='" + foldername +"' l='" + inbox.getId() +"' view='message'/>"
 				+	"</CreateFolderRequest>");
-		String folderid = ZimbraAccount.AccountZWC().soapSelectValue("//mail:folder", "id");
+		String folderid = ZmailAccount.AccountZWC().soapSelectValue("//mail:folder", "id");
 
 		// Share the subfolder
-		ZimbraAccount.AccountZWC().soapSend(
-					"<FolderActionRequest xmlns='urn:zimbraMail'>"
+		ZmailAccount.AccountZWC().soapSend(
+					"<FolderActionRequest xmlns='urn:zmailMail'>"
 				+		"<action id='"+ folderid +"' op='grant'>"
 				+			"<grant d='"+ external.EmailAddress +"' inh='1' gt='guest' pw='' perm='r'/>"
 				+		"</action>"
 				+	"</FolderActionRequest>");
 
 		// Send the notification
-		ZimbraAccount.AccountZWC().soapSend(
-					"<SendShareNotificationRequest xmlns='urn:zimbraMail'>"
+		ZmailAccount.AccountZWC().soapSend(
+					"<SendShareNotificationRequest xmlns='urn:zmailMail'>"
 				+		"<item id='"+ folderid +"'/>"
 				+		"<e a='"+ external.EmailAddress +"'/>"
 				+		"<notes/>"
@@ -76,19 +76,19 @@ public class BasicRegistration extends AjaxCommonTest {
 
 
 		// Parse the URL From the sent message
-		ZimbraAccount.AccountZWC().soapSend(
-					"<SearchRequest xmlns='urn:zimbraMail' types='message'>"
+		ZmailAccount.AccountZWC().soapSend(
+					"<SearchRequest xmlns='urn:zmailMail' types='message'>"
 				+		"<query>in:sent "+ external.EmailAddress +"</query>"
 				+	"</SearchRequest>");
-		String messageid = ZimbraAccount.AccountZWC().soapSelectValue("//mail:m", "id");
+		String messageid = ZmailAccount.AccountZWC().soapSelectValue("//mail:m", "id");
 		
-		ZimbraAccount.AccountZWC().soapSend(
-					"<GetMsgRequest xmlns='urn:zimbraMail'>"
+		ZmailAccount.AccountZWC().soapSend(
+					"<GetMsgRequest xmlns='urn:zmailMail'>"
 				+		"<m id='"+ messageid +"' html='1'/>"
 				+	"</GetMsgRequest>");
 		
 		// Based on the content of the sent message, the URL's can be determined
-		Element response = ZimbraAccount.AccountZWC().soapSelectNode("//mail:GetMsgResponse", 1);
+		Element response = ZmailAccount.AccountZWC().soapSelectNode("//mail:GetMsgResponse", 1);
 		external.setURL(response);
 		
 		

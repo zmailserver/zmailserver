@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.util;
+package org.zmail.cs.offline.util;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -32,18 +32,18 @@ import javax.mail.Message.RecipientType;
 import javax.mail.internet.MimeMessage;
 
 import com.google.common.base.Strings;
-import com.zimbra.common.mime.shim.JavaMailInternetAddress;
-import com.zimbra.common.util.FileUtil;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.offline.OfflineAccount;
-import com.zimbra.cs.account.offline.OfflineProvisioning;
-import com.zimbra.cs.mailbox.MailSender;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mime.Mime;
-import com.zimbra.cs.offline.OfflineLC;
-import com.zimbra.cs.offline.OfflineLog;
-import com.zimbra.cs.util.JMSession;
+import org.zmail.common.mime.shim.JavaMailInternetAddress;
+import org.zmail.common.util.FileUtil;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.offline.OfflineAccount;
+import org.zmail.cs.account.offline.OfflineProvisioning;
+import org.zmail.cs.mailbox.MailSender;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mime.Mime;
+import org.zmail.cs.offline.OfflineLC;
+import org.zmail.cs.offline.OfflineLog;
+import org.zmail.cs.util.JMSession;
 
 public class HeapDumpScanner {
 

@@ -1,19 +1,19 @@
-Return-Path: <smith@example.zimbra.com>
-Received: from kenny.example.zimbra.com ([unix socket]) by kenny.example.zimbra.com
+Return-Path: <smith@example.zmail.com>
+Received: from kenny.example.zmail.com ([unix socket]) by kenny.example.zmail.com
 	(Cyrus v2.1.16) with LMTP; Tue, 27 Apr 2004 17:42:40 -0700
 X-Sieve: CMU Sieve 2.2
 Received: from [10.10.130.109] (unknown [10.10.130.109]) by
-	kenny.example.zimbra.com (Postfix) with ESMTP id 559A040069E for
-	<smith@example.zimbra.com>; Tue, 27 Apr 2004 17:42:40 -0700 (PDT)
+	kenny.example.zmail.com (Postfix) with ESMTP id 559A040069E for
+	<smith@example.zmail.com>; Tue, 27 Apr 2004 17:42:40 -0700 (PDT)
 Subject: AdminGuide...
-From: Roland Smith <smith@example.zimbra.com>
-To: smith@example.zimbra.com
+From: Roland Smith <smith@example.zmail.com>
+To: smith@example.zmail.com
 Content-Type: multipart/mixed; boundary="=-rSmOyociNcb+yWQQX9jC"
 Message-Id: <1083113270.16292.0.camel@localhost.localdomain>
 Mime-Version: 1.0
 X-Mailer: Ximian Evolution 1.4.5 (1.4.5-7) 
 Date: Tue, 27 Apr 2004 17:47:50 -0700
-X-Zimbra-Received: Tue, 27 Apr 2004 17:47:50 -0700
+X-Zmail-Received: Tue, 27 Apr 2004 17:47:50 -0700
 X-Evolution-Source: imap://smith@10.10.130.30/
 X-Evolution: 00000014-0130
 

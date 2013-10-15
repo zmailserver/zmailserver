@@ -13,15 +13,15 @@
  * ***** END LICENSE BLOCK *****
  */
 
-//Author: Raja Rao DV (rrao@zimbra.com)
+//Author: Raja Rao DV (rrao@zmail.com)
 
-function com_zimbra_socialcast(zimlet) {
+function org_zmail_socialcast(zimlet) {
 	this.zimlet = zimlet;
 	this._accountEmailAndMenuMap = [];
 	this.accountEmailAndSelectedGroupIdMap = [];
 }
 
-com_zimbra_socialcast.prototype._insertMoreComments = function(params) {
+org_zmail_socialcast.prototype._insertMoreComments = function(params) {
 	var hDivs = this.zimlet._scCommentDivAndHiddenDivsMap[params.divId];
 	for (var i = 0; i < hDivs.length; i++) {
 		var hDiv = document.getElementById(hDivs[i]);
@@ -35,7 +35,7 @@ com_zimbra_socialcast.prototype._insertMoreComments = function(params) {
 	}
 };
 
-com_zimbra_socialcast.prototype.authenticate = function(account, postCallback) {
+org_zmail_socialcast.prototype.authenticate = function(account, postCallback) {
 	var hdrs = new Array();
 	var data = ["email=", AjxStringUtil.urlEncode(account.e),"&password=", AjxStringUtil.urlEncode(account.p)].join("");
 	hdrs["content-type"] = "application/x-www-form-urlencoded";
@@ -47,7 +47,7 @@ com_zimbra_socialcast.prototype.authenticate = function(account, postCallback) {
 
 };
 
-com_zimbra_socialcast.prototype._handleAuthenticate = function(account, postCallback, response) {
+org_zmail_socialcast.prototype._handleAuthenticate = function(account, postCallback, response) {
 	if(response.success) {
 		account.isValid = true;
 	} else {
@@ -58,7 +58,7 @@ com_zimbra_socialcast.prototype._handleAuthenticate = function(account, postCall
 	}
 };
 
-com_zimbra_socialcast.prototype.getMessages = function(tableId, account, streamId) {
+org_zmail_socialcast.prototype.getMessages = function(tableId, account, streamId) {
 	var authHeader = this.make_basic_auth(account.e, account.p);
 	var pageNumber = this.zimlet.tableIdAndPageNumberMap[tableId];
 	if (!pageNumber || pageNumber < 0) {
@@ -77,7 +77,7 @@ com_zimbra_socialcast.prototype.getMessages = function(tableId, account, streamI
 			this._handleGetMessages, tableId), true);
 };
 
-com_zimbra_socialcast.prototype.showUserProfile = function (params) {
+org_zmail_socialcast.prototype.showUserProfile = function (params) {
 	var tweetTableId = params.tableId;
 	var account = this.zimlet.tableIdAndAccountMap[tweetTableId];
 	var userId = params.userId;
@@ -94,7 +94,7 @@ com_zimbra_socialcast.prototype.showUserProfile = function (params) {
 			this._handleShowUserProfile, params), true);
 };
 
-com_zimbra_socialcast.prototype._handleShowUserProfile = function(params, response) {
+org_zmail_socialcast.prototype._handleShowUserProfile = function(params, response) {
 	var jsonObj = this.zimlet._extractJSONResponse(params.tableId, this.zimlet.getMessage("errorTryRefreshing"), response);
 	if (jsonObj.error) {
 		if (appCtxt.getCurrentAppName().indexOf("social") == -1) {//dont show error unless in social tab
@@ -106,7 +106,7 @@ com_zimbra_socialcast.prototype._handleShowUserProfile = function(params, respon
 };
 
 
-com_zimbra_socialcast.prototype.setSocialcastStreams = function(params) {
+org_zmail_socialcast.prototype.setSocialcastStreams = function(params) {
 	var account = params.account;
 	var authHeader = this.make_basic_auth(account.e, account.p);
 	var url = [ "https://", account.s, "/api/streams.json"].join("");
@@ -117,7 +117,7 @@ com_zimbra_socialcast.prototype.setSocialcastStreams = function(params) {
 			this._handleSetSocialcastStreams, params), true);
 };
 
-com_zimbra_socialcast.prototype._handleSetSocialcastStreams = function(params, response) {
+org_zmail_socialcast.prototype._handleSetSocialcastStreams = function(params, response) {
 	var jsonObj = this.zimlet._extractJSONResponse(params.tableId, this.zimlet.getMessage("errorTryRefreshing"), response);
 	if (jsonObj.error) {
 		if (appCtxt.getCurrentAppName().indexOf("social") == -1) {//dont show error unless in social tab
@@ -141,7 +141,7 @@ com_zimbra_socialcast.prototype._handleSetSocialcastStreams = function(params, r
 	}
 };
 
-com_zimbra_socialcast.prototype.setGroupMemberships = function(params) {
+org_zmail_socialcast.prototype.setGroupMemberships = function(params) {
 	var account = params.account;
 	var authHeader = this.make_basic_auth(account.e, account.p);
 	var url = [ "https://", account.s, "/api/group_memberships.json"].join("");
@@ -152,7 +152,7 @@ com_zimbra_socialcast.prototype.setGroupMemberships = function(params) {
 			this._handleGetGroupMemberships, params), true);
 };
 
-com_zimbra_socialcast.prototype._handleGetGroupMemberships = function(params, response) {
+org_zmail_socialcast.prototype._handleGetGroupMemberships = function(params, response) {
 	var jsonObj = this.zimlet._extractJSONResponse(params.tableId, this.zimlet.getMessage("errorTryRefreshing"), response);
 	if (jsonObj.error) {
 		if (appCtxt.getCurrentAppName().indexOf("social") == -1) {//dont show error unless in social tab
@@ -177,25 +177,25 @@ com_zimbra_socialcast.prototype._handleGetGroupMemberships = function(params, re
 	}
 };
 
-com_zimbra_socialcast.prototype._handleGetMessages = function(tableId, response) {
+org_zmail_socialcast.prototype._handleGetMessages = function(tableId, response) {
 	var jsonObj = this.zimlet._extractJSONResponse(tableId, this.zimlet.getMessage("errorTryRefreshing"), response);
 	this.zimlet.createCardView({tableId:tableId, items:(jsonObj.messages || jsonObj),  type:"SOCIALCAST"});
 };
 
-com_zimbra_socialcast.prototype.make_basic_auth = function(user, password) {
+org_zmail_socialcast.prototype.make_basic_auth = function(user, password) {
 	var tok = user + ':' + password;
 	var hash = Base64.encode(tok);
 	return "Basic " + hash;
 };
 
-com_zimbra_socialcast.prototype._addScComment = function(params) {
+org_zmail_socialcast.prototype._addScComment = function(params) {
 	var url = "https://api.facebook.com/restserver.php";
 	var account = this.zimlet.tableIdAndAccountMap[params.tableId];
 	var comment = document.getElementById(params.commentFieldId).value;
 	var url = [ "https://", account.s, "/api/messages/",params.postId,"/comments.json"].join("");
 	var paramsArray = [
 		["comment[text]", comment]
-		//["message[from]", "VMware Zimbra"]
+		//["message[from]", "VMware Zmail"]
 	];
 
 	//if (params.targetUser != undefined) {
@@ -205,7 +205,7 @@ com_zimbra_socialcast.prototype._addScComment = function(params) {
 	this._doPOST(url, urlParams, new AjxCallback(this, this._addSCCommentCallback, params), account);
 };
 
-com_zimbra_socialcast.prototype._addSCCommentCallback =
+org_zmail_socialcast.prototype._addSCCommentCallback =
 		function (params, response) {
 			if (response.success) {
 				var account = this.zimlet.tableIdAndAccountMap[params.tableId];
@@ -228,7 +228,7 @@ com_zimbra_socialcast.prototype._addSCCommentCallback =
 			}
 		};
 
-com_zimbra_socialcast.prototype._publishToSocialcast =
+org_zmail_socialcast.prototype._publishToSocialcast =
 		function (params) {
 			//var url = "https://api.facebook.com/restserver.php";
 			var account = params.account;
@@ -249,7 +249,7 @@ com_zimbra_socialcast.prototype._publishToSocialcast =
 			this._doPOST(url, urlParams, new AjxCallback(this, this._publishToSocialcastCallback, params), account);
 		};
 
-com_zimbra_socialcast.prototype._publishToSocialcastCallback =
+org_zmail_socialcast.prototype._publishToSocialcastCallback =
 		function (params, response) {
 			var jsonObj = this.zimlet._extractJSONResponse(null, this.zimlet.getMessage("tryRefreshingFBCard"), response);
 			if (jsonObj.error) {
@@ -271,7 +271,7 @@ com_zimbra_socialcast.prototype._publishToSocialcastCallback =
 			}
 		};
 
-com_zimbra_socialcast.prototype._getExtendedPermissionCallback =
+org_zmail_socialcast.prototype._getExtendedPermissionCallback =
 		function (params, response) {
 			var permission = params.permission;
 			var account = params.account;
@@ -284,7 +284,7 @@ com_zimbra_socialcast.prototype._getExtendedPermissionCallback =
 				params.callback.run(this);
 		};
 
-com_zimbra_socialcast.prototype._getSinceOrUntilParams =
+org_zmail_socialcast.prototype._getSinceOrUntilParams =
 		function (tableId) {
 			var refreshType = this.zimlet.tableIdAndRefreshType[tableId];
 			var id;
@@ -308,7 +308,7 @@ com_zimbra_socialcast.prototype._getSinceOrUntilParams =
 			}
 		};
 
-com_zimbra_socialcast.prototype.postLike =
+org_zmail_socialcast.prototype.postLike =
 		function (params) {
 			var account = params.account;
 			//https://demo.socialcast.com/api/messages/399/likes.json
@@ -316,7 +316,7 @@ com_zimbra_socialcast.prototype.postLike =
 			this._doPOST(url, "", new AjxCallback(this, this._publishToSocialcastCallback, params), account);
 		};
 
-com_zimbra_socialcast.prototype._getSignatureFromJSP =
+org_zmail_socialcast.prototype._getSignatureFromJSP =
 		function (args) {
 			var params = new Array;
 			for (var i = 0; i < args.length; i++) {
@@ -330,7 +330,7 @@ com_zimbra_socialcast.prototype._getSignatureFromJSP =
 			return obj.signature;
 		};
 
-com_zimbra_socialcast.prototype._doPOST =
+org_zmail_socialcast.prototype._doPOST =
 		function (url, params, callback, account) {
 			var hdrs = new Array();
 			hdrs["Content-type"] = "application/x-www-form-urlencoded";
@@ -341,7 +341,7 @@ com_zimbra_socialcast.prototype._doPOST =
 			AjxRpc.invoke(params, entireurl, hdrs, callback, false);
 		};
 
-com_zimbra_socialcast.prototype._getSCParams =
+org_zmail_socialcast.prototype._getSCParams =
 		function(paramsArray) {
 			var arry = new Array();
 			for (var i = 0; i < paramsArray.length; i++) {
@@ -350,7 +350,7 @@ com_zimbra_socialcast.prototype._getSCParams =
 			return arry.join("&");
 		};
 
-com_zimbra_socialcast.prototype.manageFacebookAccounts = function(text) {
+org_zmail_socialcast.prototype.manageFacebookAccounts = function(text) {
 	var nv = text.split("&");
 	var tObj = {};
 	for (var i = 0; i < nv.length; i++) {
@@ -376,13 +376,13 @@ com_zimbra_socialcast.prototype.manageFacebookAccounts = function(text) {
 	this.zimlet.allAccounts[tObj.name + tObj.uid] = tObj;
 };
 
-com_zimbra_socialcast.prototype._updateFacebookStream =
+org_zmail_socialcast.prototype._updateFacebookStream =
 		function(tableId, account) {
 			this._fbGetStream(tableId, account);
 		};
 
 
-com_zimbra_socialcast.prototype.showGroupsMenu = function(account, ev) {
+org_zmail_socialcast.prototype.showGroupsMenu = function(account, ev) {
 	if (AjxEnv.isIE) {
 		ev = window.event;
 	}
@@ -452,7 +452,7 @@ com_zimbra_socialcast.prototype.showGroupsMenu = function(account, ev) {
 };
 
 
-com_zimbra_socialcast.prototype._saveSelectedGroupIdForAccount = function(accEmail, groupId) {
+org_zmail_socialcast.prototype._saveSelectedGroupIdForAccount = function(accEmail, groupId) {
 	this.accountEmailAndSelectedGroupIdMap[accEmail] = groupId;
 	this.zimlet.setUserProperty(accEmail + "_selectedGroupId", groupId, true);
 };

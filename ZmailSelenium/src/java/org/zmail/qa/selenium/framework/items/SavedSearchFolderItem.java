@@ -17,16 +17,16 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.framework.items;
+package org.zmail.qa.selenium.framework.items;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
 
 
 /**
@@ -45,18 +45,18 @@ public class SavedSearchFolderItem extends AItem implements IItem {
 	 * Create a new SavedSearchFolderItem object
 	 */
 	public SavedSearchFolderItem() {
-		setName(ZimbraSeleniumProperties.getUniqueString());
+		setName(ZmailSeleniumProperties.getUniqueString());
 	}
 
 	
-	public void createUsingSOAP(ZimbraAccount account) throws HarnessException {
+	public void createUsingSOAP(ZmailAccount account) throws HarnessException {
 		
 		// TODO: handle all folder properties, not just name and parent
 		
 		// TODO: Maybe use JaxbUtil to create it?
 		
 		account.soapSend(
-				"<CreateSearchFolderRequest xmlns='urn:zimbraMail'>" +
+				"<CreateSearchFolderRequest xmlns='urn:zmailMail'>" +
 					"<search name='"+ getName() +"' query='"+ getQuery() +"' types='"+ getTypes() +"' sortBy='dateDesc' l='1'/>" +
 				"</CreateSearchFolderRequest>");
 		
@@ -80,10 +80,10 @@ public class SavedSearchFolderItem extends AItem implements IItem {
 
 		logger.debug("importFromSOAP("+ search.prettyPrint() +")");
 
-		// TODO: can the ZimbraSOAP methods be used to convert this response to item?
+		// TODO: can the ZmailSOAP methods be used to convert this response to item?
 		
 		// Example response:
-		//	    <GetSearchFolderResponse xmlns="urn:zimbraMail">
+		//	    <GetSearchFolderResponse xmlns="urn:zmailMail">
 		//			<search id="..." name="..." query="..." [types="..."] [sortBy="..."] l="{folder}"/>+
 		//		</GetSearchFolderResponse>
 
@@ -118,11 +118,11 @@ public class SavedSearchFolderItem extends AItem implements IItem {
 	 * @return
 	 * @throws HarnessException
 	 */
-	public static SavedSearchFolderItem importFromSOAP(ZimbraAccount account, String name) throws HarnessException {
+	public static SavedSearchFolderItem importFromSOAP(ZmailAccount account, String name) throws HarnessException {
 		logger.debug("importFromSOAP("+ account.EmailAddress +", "+ name +")");
 		
 		// Get all the folders
-		account.soapSend("<GetSearchFolderRequest xmlns='urn:zimbraMail'/>");
+		account.soapSend("<GetSearchFolderRequest xmlns='urn:zmailMail'/>");
 		Element search = account.soapSelectNode("//mail:search[@name='"+ name +"']", 1);
 		
 		return (importFromSOAP(search));

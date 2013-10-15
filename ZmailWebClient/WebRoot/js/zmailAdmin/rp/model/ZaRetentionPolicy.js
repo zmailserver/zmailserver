@@ -86,7 +86,7 @@ ZaRetentionPolicy.myXModel = {
 
 ZaRetentionPolicy.getRetentionPolicies =
 function(by, val) {
-    var soapDoc = AjxSoapDoc.create("GetSystemRetentionPolicyRequest", "urn:zimbraAdmin", null);
+    var soapDoc = AjxSoapDoc.create("GetSystemRetentionPolicyRequest", "urn:zmailAdmin", null);
 
     if (by && val) {
         var el = soapDoc.set("cos", val);
@@ -140,7 +140,7 @@ function(by, val) {
 
 ZaRetentionPolicy.prototype.createPolicy =
 function(by, val) {
-    var soapDoc = AjxSoapDoc.create("CreateSystemRetentionPolicyRequest","urn:zimbraAdmin", null);
+    var soapDoc = AjxSoapDoc.create("CreateSystemRetentionPolicyRequest","urn:zmailAdmin", null);
     if (by && val) {
         var el = soapDoc.set("cos", val);
         el.setAttribute("by", by);
@@ -151,7 +151,7 @@ function(by, val) {
          return;
     }
     var wrapper = soapDoc.set(this[ZaRetentionPolicy.A2_type], null);
-    var policy = soapDoc.set("policy", null, wrapper, "urn:zimbraMail");
+    var policy = soapDoc.set("policy", null, wrapper, "urn:zmailMail");
     policy.setAttribute("name", this[ZaRetentionPolicy.A2_name]);
     policy.setAttribute("lifetime", this.toDays());
 
@@ -222,13 +222,13 @@ ZaRetentionPolicy.checkValues = function (tmpObj, list) {
 
 ZaRetentionPolicy.prototype.modifyPolicy =
 function(by, val) {
-    var soapDoc = AjxSoapDoc.create("ModifySystemRetentionPolicyRequest", "urn:zimbraAdmin", null);
+    var soapDoc = AjxSoapDoc.create("ModifySystemRetentionPolicyRequest", "urn:zmailAdmin", null);
     if (by && val) {
         var el = soapDoc.set("cos", val);
         el.setAttribute("by", by);
     }
 
-    var policy = soapDoc.set("policy", null, null, "urn:zimbraMail");
+    var policy = soapDoc.set("policy", null, null, "urn:zmailMail");
     policy.setAttribute("name", this[ZaRetentionPolicy.A2_name]);
     policy.setAttribute("id", this[ZaRetentionPolicy.A2_id]);
     policy.setAttribute("lifetime", this.toDays());
@@ -255,13 +255,13 @@ function(by, val) {
 
 ZaRetentionPolicy.prototype.deletePolicy =
 function(by, val) {
-    var soapDoc = AjxSoapDoc.create("DeleteSystemRetentionPolicyRequest", "urn:zimbraAdmin", null);
+    var soapDoc = AjxSoapDoc.create("DeleteSystemRetentionPolicyRequest", "urn:zmailAdmin", null);
     if (by && val) {
         var el = soapDoc.set("cos", val);
         el.setAttribute("by", by);
     }
 
-    var policy = soapDoc.set("policy", null, null, "urn:zimbraMail");
+    var policy = soapDoc.set("policy", null, null, "urn:zmailMail");
     policy.setAttribute("id", this.id);
 
     var params = new Object();

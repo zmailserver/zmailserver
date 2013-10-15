@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.taglib.tag;
+package org.zmail.cs.taglib.tag;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspContext;
@@ -21,7 +21,7 @@ import javax.servlet.jsp.PageContext;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class RedirectTag extends ZimbraSimpleTag {
+public class RedirectTag extends ZmailSimpleTag {
     private String mUrl;
 
     public void setUrl(String url) { mUrl = url; }

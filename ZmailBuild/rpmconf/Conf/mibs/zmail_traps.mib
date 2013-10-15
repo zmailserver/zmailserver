@@ -1,7 +1,7 @@
 ZIMBRA-TRAP-MIB DEFINITIONS ::= BEGIN
-        IMPORTS zimbra FROM ZIMBRA-MIB;
+        IMPORTS zmail FROM ZIMBRA-MIB;
 
-zmtraps OBJECT IDENTIFIER ::= { zimbra 0 }
+zmtraps OBJECT IDENTIFIER ::= { zmail 0 }
 
 zmServiceStatusTrap NOTIFICATION-TYPE
         STATUS current

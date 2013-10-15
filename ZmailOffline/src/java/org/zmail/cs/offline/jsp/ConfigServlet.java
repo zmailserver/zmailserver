@@ -12,11 +12,11 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.jsp;
+package org.zmail.cs.offline.jsp;
 
 import javax.servlet.http.HttpServlet;
 
-import com.zimbra.common.localconfig.LC;
+import org.zmail.common.localconfig.LC;
 
 public class ConfigServlet extends HttpServlet {
 
@@ -29,7 +29,7 @@ public class ConfigServlet extends HttpServlet {
 
     @Override
     public void init() {
-        String port = LC.zimbra_admin_service_port.value();
+        String port = LC.zmail_admin_service_port.value();
 
         //setting static variables
         LOCALHOST_SOAP_URL = LOCALHOST_URL_PREFIX + port + "/service/soap/";

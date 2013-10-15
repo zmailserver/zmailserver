@@ -15,11 +15,11 @@
 <%@ tag import="java.io.*" %>
 <%@ tag import="javax.servlet.*" %>
 <%@ tag import="javax.servlet.jsp.*" %>
-<%@ attribute name="mailbox" rtexprvalue="true" required="false" type="com.zimbra.cs.taglib.bean.ZMailboxBean" %>
+<%@ attribute name="mailbox" rtexprvalue="true" required="false" type="org.zmail.cs.taglib.bean.ZMailboxBean" %>
 <%@ attribute name="defaultSkin" rtexprvalue="true" required="false" %>
 <%@ attribute name="uri" rtexprvalue="true" required="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="app" uri="com.zimbra.htmlclient" %>
+<%@ taglib prefix="app" uri="org.zmail.htmlclient" %>
 <c:if test="${empty param.doNotForwardRequest}">
 	<app:skin mailbox="${mailbox}" defaultSkin="${defaultSkin}" />
 	<%

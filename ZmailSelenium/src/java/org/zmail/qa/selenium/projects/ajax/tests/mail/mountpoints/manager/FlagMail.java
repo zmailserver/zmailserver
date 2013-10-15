@@ -14,14 +14,14 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.mountpoints.manager;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.mountpoints.manager;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
 
 
 public class FlagMail extends PrefGroupMailByMessageTest {
@@ -38,31 +38,31 @@ public class FlagMail extends PrefGroupMailByMessageTest {
 	@Test(	description = "Verify success on Flag a shared mail (admin share)",
 			groups = { "functional" })
 	public void FlagMail_01() throws HarnessException {
-		String foldername = "folder" + ZimbraSeleniumProperties.getUniqueString();
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String mountpointname = "mountpoint" + ZimbraSeleniumProperties.getUniqueString();
+		String foldername = "folder" + ZmailSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String mountpointname = "mountpoint" + ZmailSeleniumProperties.getUniqueString();
 		
-		FolderItem inbox = FolderItem.importFromSOAP(ZimbraAccount.AccountA(), FolderItem.SystemFolder.Inbox);
+		FolderItem inbox = FolderItem.importFromSOAP(ZmailAccount.AccountA(), FolderItem.SystemFolder.Inbox);
 		
 		// Create a folder to share
-		ZimbraAccount.AccountA().soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>"
+		ZmailAccount.AccountA().soapSend(
+					"<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+		"<folder name='" + foldername + "' l='" + inbox.getId() + "'/>"
 				+	"</CreateFolderRequest>");
 		
-		FolderItem folder = FolderItem.importFromSOAP(ZimbraAccount.AccountA(), foldername);
+		FolderItem folder = FolderItem.importFromSOAP(ZmailAccount.AccountA(), foldername);
 		
 		// Share it
-		ZimbraAccount.AccountA().soapSend(
-					"<FolderActionRequest xmlns='urn:zimbraMail'>"
+		ZmailAccount.AccountA().soapSend(
+					"<FolderActionRequest xmlns='urn:zmailMail'>"
 				+		"<action id='"+ folder.getId() +"' op='grant'>"
 				+			"<grant d='"+ app.zGetActiveAccount().EmailAddress +"' gt='usr' perm='rwidx'/>"
 				+		"</action>"
 				+	"</FolderActionRequest>");
 		
 		// Add a message to it
-		ZimbraAccount.AccountA().soapSend(
-					"<AddMsgRequest xmlns='urn:zimbraMail'>"
+		ZmailAccount.AccountA().soapSend(
+					"<AddMsgRequest xmlns='urn:zmailMail'>"
         		+		"<m l='"+ folder.getId() +"' >"
             	+			"<content>From: foo@foo.com\n"
             	+				"To: foo@foo.com \n"
@@ -76,13 +76,13 @@ public class FlagMail extends PrefGroupMailByMessageTest {
             	+		"</m>"
 				+	"</AddMsgRequest>");
 		
-		MailItem mail = MailItem.importFromSOAP(ZimbraAccount.AccountA(), "subject:("+ subject +")");
+		MailItem mail = MailItem.importFromSOAP(ZmailAccount.AccountA(), "subject:("+ subject +")");
 
 		
 		// Mount it
 		app.zGetActiveAccount().soapSend(
-					"<CreateMountpointRequest xmlns='urn:zimbraMail'>"
-				+		"<link l='1' name='"+ mountpointname +"'  rid='"+ folder.getId() +"' zid='"+ ZimbraAccount.AccountA().ZimbraId +"'/>"
+					"<CreateMountpointRequest xmlns='urn:zmailMail'>"
+				+		"<link l='1' name='"+ mountpointname +"'  rid='"+ folder.getId() +"' zid='"+ ZmailAccount.AccountA().ZmailId +"'/>"
 				+	"</CreateMountpointRequest>");
 		
 		FolderMountpointItem mountpoint = FolderMountpointItem.importFromSOAP(app.zGetActiveAccount(), mountpointname);
@@ -100,7 +100,7 @@ public class FlagMail extends PrefGroupMailByMessageTest {
 		app.zPageMail.zListItem(Action.A_MAIL_FLAG, mail.dSubject);
 
 		// Verify the message is flagged
-		mail = MailItem.importFromSOAP(ZimbraAccount.AccountA(), "subject:("+ subject +")");
+		mail = MailItem.importFromSOAP(ZmailAccount.AccountA(), "subject:("+ subject +")");
 		ZAssert.assertStringContains(mail.getFlags(), "f", "Verify the message is  flagged in the server");
 		
 	}
@@ -109,31 +109,31 @@ public class FlagMail extends PrefGroupMailByMessageTest {
 	@Test(	description = "Verify Permission Denied on Flag (keyboard='mf') a shared mail (read-only share)",
 			groups = { "functional" })
 	public void FlagMail_02() throws HarnessException {
-		String foldername = "folder" + ZimbraSeleniumProperties.getUniqueString();
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String mountpointname = "mountpoint" + ZimbraSeleniumProperties.getUniqueString();
+		String foldername = "folder" + ZmailSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String mountpointname = "mountpoint" + ZmailSeleniumProperties.getUniqueString();
 		
-		FolderItem inbox = FolderItem.importFromSOAP(ZimbraAccount.AccountA(), FolderItem.SystemFolder.Inbox);
+		FolderItem inbox = FolderItem.importFromSOAP(ZmailAccount.AccountA(), FolderItem.SystemFolder.Inbox);
 		
 		// Create a folder to share
-		ZimbraAccount.AccountA().soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>"
+		ZmailAccount.AccountA().soapSend(
+					"<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+		"<folder name='" + foldername + "' l='" + inbox.getId() + "'/>"
 				+	"</CreateFolderRequest>");
 		
-		FolderItem folder = FolderItem.importFromSOAP(ZimbraAccount.AccountA(), foldername);
+		FolderItem folder = FolderItem.importFromSOAP(ZmailAccount.AccountA(), foldername);
 		
 		// Share it
-		ZimbraAccount.AccountA().soapSend(
-					"<FolderActionRequest xmlns='urn:zimbraMail'>"
+		ZmailAccount.AccountA().soapSend(
+					"<FolderActionRequest xmlns='urn:zmailMail'>"
 				+		"<action id='"+ folder.getId() +"' op='grant'>"
 				+			"<grant d='"+ app.zGetActiveAccount().EmailAddress +"' gt='usr' perm='rwidx'/>"
 				+		"</action>"
 				+	"</FolderActionRequest>");
 		
 		// Add a message to it
-		ZimbraAccount.AccountA().soapSend(
-					"<AddMsgRequest xmlns='urn:zimbraMail'>"
+		ZmailAccount.AccountA().soapSend(
+					"<AddMsgRequest xmlns='urn:zmailMail'>"
         		+		"<m l='"+ folder.getId() +"' >"
             	+			"<content>From: foo@foo.com\n"
             	+				"To: foo@foo.com \n"
@@ -147,12 +147,12 @@ public class FlagMail extends PrefGroupMailByMessageTest {
             	+		"</m>"
 				+	"</AddMsgRequest>");
 		
-		MailItem mail = MailItem.importFromSOAP(ZimbraAccount.AccountA(), "subject:("+ subject +")");
+		MailItem mail = MailItem.importFromSOAP(ZmailAccount.AccountA(), "subject:("+ subject +")");
 
 		// Mount it
 		app.zGetActiveAccount().soapSend(
-					"<CreateMountpointRequest xmlns='urn:zimbraMail'>"
-				+		"<link l='1' name='"+ mountpointname +"'  rid='"+ folder.getId() +"' zid='"+ ZimbraAccount.AccountA().ZimbraId +"'/>"
+					"<CreateMountpointRequest xmlns='urn:zmailMail'>"
+				+		"<link l='1' name='"+ mountpointname +"'  rid='"+ folder.getId() +"' zid='"+ ZmailAccount.AccountA().ZmailId +"'/>"
 				+	"</CreateMountpointRequest>");
 		
 		FolderMountpointItem mountpoint = FolderMountpointItem.importFromSOAP(app.zGetActiveAccount(), mountpointname);
@@ -170,7 +170,7 @@ public class FlagMail extends PrefGroupMailByMessageTest {
 		app.zPageMail.zKeyboardShortcut(Shortcut.S_MAIL_MARKFLAG);
 		
 		// Verify the message is flagged
-		mail = MailItem.importFromSOAP(ZimbraAccount.AccountA(), "subject:("+ subject +")");
+		mail = MailItem.importFromSOAP(ZmailAccount.AccountA(), "subject:("+ subject +")");
 		ZAssert.assertStringContains(mail.getFlags(), "f", "Verify the message is  flagged in the server");
 		
 	}

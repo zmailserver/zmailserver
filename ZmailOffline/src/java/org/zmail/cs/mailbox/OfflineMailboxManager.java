@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 
 import java.util.ArrayList;
@@ -22,18 +22,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.MapUtil;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.offline.OfflineProvisioning;
-import com.zimbra.cs.mailbox.Mailbox.MailboxData;
-import com.zimbra.cs.offline.OfflineLC;
-import com.zimbra.cs.offline.OfflineLog;
-import com.zimbra.cs.offline.common.OfflineConstants;
-import com.zimbra.cs.session.Session;
-import com.zimbra.cs.session.SoapSession;
+import org.zmail.common.account.Key;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.MapUtil;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.offline.OfflineProvisioning;
+import org.zmail.cs.mailbox.Mailbox.MailboxData;
+import org.zmail.cs.offline.OfflineLC;
+import org.zmail.cs.offline.OfflineLog;
+import org.zmail.cs.offline.common.OfflineConstants;
+import org.zmail.cs.session.Session;
+import org.zmail.cs.session.SoapSession;
 
 public class OfflineMailboxManager extends MailboxManager {
 

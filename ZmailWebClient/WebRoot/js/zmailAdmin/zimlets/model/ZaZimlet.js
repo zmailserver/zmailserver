@@ -29,24 +29,24 @@ ZaZimlet.prototype = new ZaItem;
 ZaZimlet.prototype.constructor = ZaZimlet;
 ZaItem.loadMethods["ZaZimlet"] = new Array();
 ZaItem.initMethods["ZaZimlet"] = new Array();
-ZaZimlet.NULL_ZIMLET="com_zimbra_noop";
+ZaZimlet.NULL_ZIMLET="org_zmail_noop";
 ZaZimlet.A_name = "name";
-ZaZimlet.A_zimbraZimletEnabled = "zimbraZimletEnabled";
-ZaZimlet.A_zimbraZimletPriority = "zimbraZimletPriority";
-ZaZimlet.A_zimbraZimletIsExtension = "zimbraZimletIsExtension";
-ZaZimlet.A_zimbraZimletKeyword = "zimbraZimletKeyword";
-ZaZimlet.A_zimbraZimletVersion = "zimbraZimletVersion";
-ZaZimlet.A_zimbraZimletDescription = "zimbraZimletDescription";
-ZaZimlet.A_zimbraZimletIndexingEnabled = "zimbraZimletIndexingEnabled";
-ZaZimlet.A_zimbraZimletStoreMatched = "zimbraZimletStoreMatched";
-ZaZimlet.A_zimbraZimletHandlerClass = "zimbraZimletHandlerClass";
-ZaZimlet.A_zimbraZimletHandlerConfig = "zimbraZimletHandlerConfig";
-ZaZimlet.A_zimbraZimletContentObject = "zimbraZimletContentObject";
-ZaZimlet.A_zimbraZimletPanelItem = "zimbraZimletPanelItem";
-ZaZimlet.A_zimbraCreateTimestamp = "zimbraCreateTimestamp";
-ZaZimlet.A_zimbraZimletScript = "zimbraZimletScript";
-ZaZimlet.A_zimbraZimletServerIndexRegex = "zimbraZimletServerIndexRegex";
-ZaZimlet.A_zimbraAdminExtDisableUIUndeploy = "zimbraAdminExtDisableUIUndeploy";
+ZaZimlet.A_zmailZimletEnabled = "zmailZimletEnabled";
+ZaZimlet.A_zmailZimletPriority = "zmailZimletPriority";
+ZaZimlet.A_zmailZimletIsExtension = "zmailZimletIsExtension";
+ZaZimlet.A_zmailZimletKeyword = "zmailZimletKeyword";
+ZaZimlet.A_zmailZimletVersion = "zmailZimletVersion";
+ZaZimlet.A_zmailZimletDescription = "zmailZimletDescription";
+ZaZimlet.A_zmailZimletIndexingEnabled = "zmailZimletIndexingEnabled";
+ZaZimlet.A_zmailZimletStoreMatched = "zmailZimletStoreMatched";
+ZaZimlet.A_zmailZimletHandlerClass = "zmailZimletHandlerClass";
+ZaZimlet.A_zmailZimletHandlerConfig = "zmailZimletHandlerConfig";
+ZaZimlet.A_zmailZimletContentObject = "zmailZimletContentObject";
+ZaZimlet.A_zmailZimletPanelItem = "zmailZimletPanelItem";
+ZaZimlet.A_zmailCreateTimestamp = "zmailCreateTimestamp";
+ZaZimlet.A_zmailZimletScript = "zmailZimletScript";
+ZaZimlet.A_zmailZimletServerIndexRegex = "zmailZimletServerIndexRegex";
+ZaZimlet.A_zmailAdminExtDisableUIUndeploy = "zmailAdminExtDisableUIUndeploy";
 ZaZimlet.A_attachmentId = "attId";
 ZaZimlet.A_uploadStatus = "uploadStatus";
 ZaZimlet.A_deployStatus = "deployStatus";
@@ -71,7 +71,7 @@ ZaZimlet.prototype.toString = function() {
 ZaZimlet.getAll =
 function(exclude, callback) {
 	var exc = exclude ? exclude : "none";
-	var soapDoc = AjxSoapDoc.create("GetAllZimletsRequest", ZaZimbraAdmin.URN, null);	
+	var soapDoc = AjxSoapDoc.create("GetAllZimletsRequest", ZaZmailAdmin.URN, null);	
 	soapDoc.getMethod().setAttribute("exclude", exc);	
 	//var command = new ZmCsfeCommand();
 	var params = {
@@ -117,8 +117,8 @@ ZaZimlet._handleGetAllResponse = function(callback, resp) {
 			ZaZimlet.zimlets[zimletName] = nz;
 			incList.add(nz);
 		} else {
-			if (nz.attrs[ZaZimlet.A_zimbraCreateTimestamp] !=
-    			oz.attrs[ZaZimlet.A_zimbraCreateTimestamp]) {
+			if (nz.attrs[ZaZimlet.A_zmailCreateTimestamp] !=
+    			oz.attrs[ZaZimlet.A_zmailCreateTimestamp]) {
     			// the zimlet has been updated
 				ZaZimlet.zimlets[zimletName] = nz;
 				incList.add(nz);
@@ -152,7 +152,7 @@ ZaZimlet._handleGetAllResources = function(list, callback) {
         // NOTE: Setting an ID on the includes will replace the old SCRIPT
         // NOTE: tags with the new ones when the resources are requested
         // NOTE: again.
-        includes.push( { src:["/res/",zimlet.name,".js?v=",appVers,ZaZimbraAdmin.LOCALE_QS].join(""),id:"res_"+zimlet.name } );
+        includes.push( { src:["/res/",zimlet.name,".js?v=",appVers,ZaZmailAdmin.LOCALE_QS].join(""),id:"res_"+zimlet.name } );
     }
     var baseurl = appContextPath;
     var proxy = null;
@@ -161,7 +161,7 @@ ZaZimlet._handleGetAllResources = function(list, callback) {
 
 ZaZimlet.prototype.isEnabled =
 function () {
-	var status = this.attrs[ZaZimlet.A_zimbraZimletEnabled];
+	var status = this.attrs[ZaZimlet.A_zmailZimletEnabled];
 	if (status != null && status == "TRUE") {
 		return true;
 	}else {
@@ -174,9 +174,9 @@ ZaZimlet.prototype.getDescription =
 function () {
 	var des = null;
 	var name = null;
-	if(this.attrs && this.attrs[ZaZimlet.A_zimbraZimletDescription]){
+	if(this.attrs && this.attrs[ZaZimlet.A_zmailZimletDescription]){
 		name =this[ZaZimlet.A_name];
-		des = this.attrs[ZaZimlet.A_zimbraZimletDescription];
+		des = this.attrs[ZaZimlet.A_zmailZimletDescription];
 		des = (des ||"").replace(ZaZimlet.__RE_MSG, function($0, $1) {
         		var res = window[name];
         		return (res && res[$1]) || $0;
@@ -207,16 +207,16 @@ function (){
 }
 
 ZaZimlet.prototype.enable = function (enabled, callback) {
-	var soapDoc = AjxSoapDoc.create("ModifyZimletRequest", ZaZimbraAdmin.URN, null);
+	var soapDoc = AjxSoapDoc.create("ModifyZimletRequest", ZaZmailAdmin.URN, null);
 	var zimletEl = soapDoc.set("zimlet", "");
 	zimletEl.setAttribute("name", this.name);
 	var statusEl = soapDoc.set("status", "",zimletEl);	
 	if(enabled)	 {
 		statusEl.setAttribute("value","enabled");
-		this.attrs[ZaZimlet.A_zimbraZimletEnabled] = "TRUE";
+		this.attrs[ZaZimlet.A_zmailZimletEnabled] = "TRUE";
 	} else {
 		statusEl.setAttribute("value","disabled");
-		this.attrs[ZaZimlet.A_zimbraZimletEnabled] = "FALSE";		
+		this.attrs[ZaZimlet.A_zmailZimletEnabled] = "FALSE";		
 	}
 	//var asynCommand = new ZmCsfeCommand();
 	var params = new Object();
@@ -238,7 +238,7 @@ ZaZimlet.prototype.enable = function (enabled, callback) {
 **/
 ZaZimlet.prototype.modify =
 function(mods) {
-	/*var soapDoc = AjxSoapDoc.create("ModifyZimletRequest", ZaZimbraAdmin.URN, null);
+	/*var soapDoc = AjxSoapDoc.create("ModifyZimletRequest", ZaZmailAdmin.URN, null);
 	soapDoc.set("id", this.id);
 	for (var aname in mods) {
 		if (mods[aname] instanceof Array) {
@@ -286,7 +286,7 @@ function() {
 		html[idx++] = "</table></div></td></tr>";
 		html[idx++] = "<tr></tr>";
 		idx = this._addAttrRow(ZaItem.A_description, html, idx);		
-		idx = this._addAttrRow(ZaItem.A_zimbraId, html, idx);
+		idx = this._addAttrRow(ZaItem.A_zmailId, html, idx);
 		html[idx++] = "</table>";
 		this._toolTip = html.join("");
 	}
@@ -295,7 +295,7 @@ function() {
 
 ZaZimlet.prototype.remove = 
 function() {
-	var soapDoc = AjxSoapDoc.create("UndeployZimletRequest", ZaZimbraAdmin.URN, null);
+	var soapDoc = AjxSoapDoc.create("UndeployZimletRequest", ZaZmailAdmin.URN, null);
 	soapDoc.getMethod().setAttribute("name", this.name);	
 	//soapDoc.set("id", this.id);
 	//var command = new ZmCsfeCommand();
@@ -319,7 +319,7 @@ ZaZimlet.deploy = function (params,callback) {
 	var action = params.action ? params.action : ZaZimlet.ACTION_DEPLOY_ALL;
 	var attId = params.attId ? params.attId : null;
 	var flushCache = params.flushCache ? params.flushCache : "0";
-	var soapDoc = AjxSoapDoc.create("DeployZimletRequest", ZaZimbraAdmin.URN, null);
+	var soapDoc = AjxSoapDoc.create("DeployZimletRequest", ZaZmailAdmin.URN, null);
 	soapDoc.getMethod().setAttribute("action", action);	
 	
 	if(action != ZaZimlet.ACTION_DEPLOY_STATUS)	
@@ -348,7 +348,7 @@ ZaZimlet.deploy = function (params,callback) {
 ZaZimlet.loadMethod = 
 function(by, val) {
 	var _val = val ? val : this.name ;
-	var soapDoc = AjxSoapDoc.create("GetZimletRequest", ZaZimbraAdmin.URN, null);
+	var soapDoc = AjxSoapDoc.create("GetZimletRequest", ZaZmailAdmin.URN, null);
 	var elZimlet = soapDoc.set("zimlet", "");
 	elZimlet.setAttribute("name", _val);
 	if(!this.getAttrs.all && !AjxUtil.isEmpty(this.attrsToGet)) {
@@ -369,10 +369,10 @@ ZaItem.loadMethods["ZaZimlet"].push(ZaZimlet.loadMethod);
 ZaZimlet.myXModel = { 
 	items:[
         { id:ZaZimlet.A_name, ref:ZaZimlet.A_name, type: _STRING_ },
-        {id:ZaItem.A_zimbraId, type:_STRING_, ref:"attrs/" + ZaItem.A_zimbraId},
-        {id:ZaItem.A_zimbraCreateTimestamp, ref:"attrs/" + ZaItem.A_zimbraCreateTimestamp},
+        {id:ZaItem.A_zmailId, type:_STRING_, ref:"attrs/" + ZaItem.A_zmailId},
+        {id:ZaItem.A_zmailCreateTimestamp, ref:"attrs/" + ZaItem.A_zmailCreateTimestamp},
         { id:ZaZimlet.A_flushCache,ref:ZaZimlet.A_flushCache,type: _ENUM_, choices:ZaModel.BOOLEAN_CHOICES2},
-        { id:ZaZimlet.A_zimbraZimletDescription, ref:"attrs/" + ZaZimlet.A_zimbraZimletDescription, type: _STRING_ },
-        { id:ZaZimlet.A_zimbraZimletEnabled, ref:"attrs/" + ZaZimlet.A_zimbraZimletEnabled, type: _ENUM_,  choices:ZaModel.BOOLEAN_CHOICES} 
+        { id:ZaZimlet.A_zmailZimletDescription, ref:"attrs/" + ZaZimlet.A_zmailZimletDescription, type: _STRING_ },
+        { id:ZaZimlet.A_zmailZimletEnabled, ref:"attrs/" + ZaZimlet.A_zmailZimletEnabled, type: _ENUM_,  choices:ZaModel.BOOLEAN_CHOICES} 
     ]
 }

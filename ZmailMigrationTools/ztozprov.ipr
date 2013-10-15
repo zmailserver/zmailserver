@@ -72,7 +72,7 @@
               <file url="file://$PROJECT_DIR$/META-INF/application.xml" />
             </files>
           </module>
-          <module name="ZimbraMigrationTools">
+          <module name="ZmailMigrationTools">
             <files>
               <file url="file://$PROJECT_DIR$/META-INF/application.xml" />
             </files>
@@ -250,7 +250,7 @@
   <component name="ProjectFileVersion" converted="true" />
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ZimbraMigrationTools.iml" filepath="$PROJECT_DIR$/ZimbraMigrationTools.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ZmailMigrationTools.iml" filepath="$PROJECT_DIR$/ZmailMigrationTools.iml" />
     </modules>
   </component>
   <component name="ProjectRootManager" version="2" assert-keyword="true" jdk-15="false" project-jdk-name="1.5" project-jdk-type="JavaSDK">
@@ -277,11 +277,11 @@
   <component name="libraryTable">
     <library name="lib">
       <CLASSES>
-        <root url="file://C:/Zimbra_Work/src/FRANKLIN/ZimbraCommon/jars" />
+        <root url="file://C:/Zmail_Work/src/FRANKLIN/ZmailCommon/jars" />
       </CLASSES>
       <JAVADOC />
       <SOURCES />
-      <jarDirectory url="file://C:/Zimbra_Work/src/FRANKLIN/ZimbraCommon/jars" recursive="false" />
+      <jarDirectory url="file://C:/Zmail_Work/src/FRANKLIN/ZmailCommon/jars" recursive="false" />
     </library>
   </component>
 </project>

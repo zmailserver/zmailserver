@@ -14,23 +14,23 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.briefcase.bugs;
+package org.zmail.qa.selenium.projects.ajax.tests.briefcase.bugs;
 
 import java.util.HashMap;
 import java.util.Map;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.items.MailItem;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.SleepUtil;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.ajax.core.FeatureBriefcaseTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.PageMain;
-import com.zimbra.qa.selenium.projects.ajax.ui.briefcase.PageBriefcase;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.PageMail;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.items.MailItem;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.SleepUtil;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.ajax.core.FeatureBriefcaseTest;
+import org.zmail.qa.selenium.projects.ajax.ui.PageMain;
+import org.zmail.qa.selenium.projects.ajax.ui.briefcase.PageBriefcase;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.PageMail;
 
 public class OpenLinkToMessage extends FeatureBriefcaseTest {
 	String url;
@@ -42,24 +42,24 @@ public class OpenLinkToMessage extends FeatureBriefcaseTest {
 		super.startingPage = app.zPageBriefcase;
 
 		// use an account with message view
-		super.startingAccountPreferences.put("zimbraPrefGroupMailBy", "message");
-		super.startingAccountPreferences.put("zimbraPrefMessageViewHtmlPreferred", "TRUE");
+		super.startingAccountPreferences.put("zmailPrefGroupMailBy", "message");
+		super.startingAccountPreferences.put("zmailPrefMessageViewHtmlPreferred", "TRUE");
 	}
 
 	@Bugs(ids = "56802,64833,65939,67059")
 	@Test(description = "Open link to the message - Verify List View Rows are displayed after message closed", groups = { "functional" })
 	public void OpenLinkToMessage_01() throws HarnessException {
 		// Create the message data to be sent
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
 
-		ZimbraAccount.AccountA()
+		ZmailAccount.AccountA()
 				.soapSend(
-						"<SendMsgRequest xmlns='urn:zimbraMail'>" + "<m>"
+						"<SendMsgRequest xmlns='urn:zmailMail'>" + "<m>"
 								+ "<e t='t' a='"
 								+ app.zGetActiveAccount().EmailAddress + "'/>"
 								+ "<su>" + subject + "</su>"
 								+ "<mp ct='text/plain'>" + "<content>content"
-								+ ZimbraSeleniumProperties.getUniqueString()
+								+ ZmailSeleniumProperties.getUniqueString()
 								+ "</content>" + "</mp>" + "</m>"
 								+ "</SendMsgRequest>");
 
@@ -79,7 +79,7 @@ public class OpenLinkToMessage extends FeatureBriefcaseTest {
 				"subject:(" + subject + ")");
 
 		// Store opened url
-		// url = ZimbraSeleniumProperties.getBaseURL();
+		// url = ZmailSeleniumProperties.getBaseURL();
 
 		url = app.zPageBriefcase.getLocation();
 

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.util.HashSet;
 import java.util.List;
@@ -23,33 +23,33 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
 
 import com.google.common.primitives.Ints;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.UUIDUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.offline.OfflineAccount;
-import com.zimbra.cs.account.offline.OfflineProvisioning;
-import com.zimbra.cs.db.DbMailItem;
-import com.zimbra.cs.db.DbMailbox;
-import com.zimbra.cs.db.DbOfflineMailbox;
-import com.zimbra.cs.db.DbPool.DbConnection;
-import com.zimbra.cs.mailbox.MailServiceException.NoSuchItemException;
-import com.zimbra.cs.mailbox.util.TypedIdList;
-import com.zimbra.cs.offline.OfflineLog;
-import com.zimbra.cs.offline.OfflineSyncManager;
-import com.zimbra.cs.offline.util.OfflineYAuth;
-import com.zimbra.cs.redolog.op.DeleteItem;
-import com.zimbra.cs.redolog.op.DeleteMailbox;
-import com.zimbra.cs.session.PendingModifications;
-import com.zimbra.cs.session.PendingModifications.Change;
-import com.zimbra.cs.session.PendingModifications.ModificationKey;
-import com.zimbra.cs.store.MailboxBlob;
-import com.zimbra.cs.store.StoreManager;
-import com.zimbra.cs.store.StoreManager.StoreFeature;
-import com.zimbra.cs.util.SpoolingCache;
-import com.zimbra.cs.util.Zimbra;
-import com.zimbra.cs.util.ZimbraApplication;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.UUIDUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.offline.OfflineAccount;
+import org.zmail.cs.account.offline.OfflineProvisioning;
+import org.zmail.cs.db.DbMailItem;
+import org.zmail.cs.db.DbMailbox;
+import org.zmail.cs.db.DbOfflineMailbox;
+import org.zmail.cs.db.DbPool.DbConnection;
+import org.zmail.cs.mailbox.MailServiceException.NoSuchItemException;
+import org.zmail.cs.mailbox.util.TypedIdList;
+import org.zmail.cs.offline.OfflineLog;
+import org.zmail.cs.offline.OfflineSyncManager;
+import org.zmail.cs.offline.util.OfflineYAuth;
+import org.zmail.cs.redolog.op.DeleteItem;
+import org.zmail.cs.redolog.op.DeleteMailbox;
+import org.zmail.cs.session.PendingModifications;
+import org.zmail.cs.session.PendingModifications.Change;
+import org.zmail.cs.session.PendingModifications.ModificationKey;
+import org.zmail.cs.store.MailboxBlob;
+import org.zmail.cs.store.StoreManager;
+import org.zmail.cs.store.StoreManager.StoreFeature;
+import org.zmail.cs.util.SpoolingCache;
+import org.zmail.cs.util.Zmail;
+import org.zmail.cs.util.ZmailApplication;
 
 public abstract class SyncMailbox extends DesktopMailbox {
     static final String DELETING_MID_SUFFIX = ":delete";
@@ -222,7 +222,7 @@ public abstract class SyncMailbox extends DesktopMailbox {
 
                 success = true;
             } catch (Exception e) {
-                ZimbraLog.store.warn("Unable to delete mailbox data", e);
+                ZmailLog.store.warn("Unable to delete mailbox data", e);
             } finally {
                 endTransaction(success);
             }
@@ -230,14 +230,14 @@ public abstract class SyncMailbox extends DesktopMailbox {
             try {
                 index.deleteIndex();
             } catch (Exception e) {
-                ZimbraLog.store.warn("Unable to delete index data", e);
+                ZmailLog.store.warn("Unable to delete index data", e);
             }
 
             if (deleteStore) {
                 try {
                     sm.deleteStore(this, blobs);
                 } catch (Exception e) {
-                    ZimbraLog.store.warn("Unable to delete message data", e);
+                    ZmailLog.store.warn("Unable to delete message data", e);
                 }
             }
         } finally {
@@ -282,7 +282,7 @@ public abstract class SyncMailbox extends DesktopMailbox {
                     boolean doGC;
                     long now;
 
-                    if (ZimbraApplication.getInstance().isShutdown()) {
+                    if (ZmailApplication.getInstance().isShutdown()) {
                         cancelCurrentTask();
                         return;
                     }
@@ -297,7 +297,7 @@ public abstract class SyncMailbox extends DesktopMailbox {
                         }
                     } catch (Throwable e) { // don't let exceptions kill the timer
                         if (e instanceof OutOfMemoryError) {
-                            Zimbra.halt("caught out of memory error", e);
+                            Zmail.halt("caught out of memory error", e);
                         } else if (OfflineSyncManager.getInstance().isServiceActive(false)) {
                             OfflineLog.offline.warn("caught exception in timer ", e);
                         }

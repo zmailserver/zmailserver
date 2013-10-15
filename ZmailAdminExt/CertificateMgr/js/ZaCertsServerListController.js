@@ -50,8 +50,8 @@ function(list, openInNewTab) {
 
 ZaCertsServerListController.initPopupMenuMethod =
 function () {
-   	this._popupOperations[ZaOperation.VIEW] = new ZaOperation(ZaOperation.VIEW, com_zimbra_cert_manager.TBB_view_cert, com_zimbra_cert_manager.TBB_view_cert_tt, "ViewCertificate", "ViewCertificate", new AjxListener(this, ZaCertsServerListController.prototype.viewCertListener));	
-   	this._popupOperations[ZaOperation.NEW] = new ZaOperation(ZaOperation.NEW, com_zimbra_cert_manager.TBB_launch_cert_wizard, com_zimbra_cert_manager.TBB_launch_cert_wizard_tt, "InstallCertificate", "InstallCertificate", new AjxListener(this, ZaCertsServerListController.prototype._newCertListener));				
+   	this._popupOperations[ZaOperation.VIEW] = new ZaOperation(ZaOperation.VIEW, org_zmail_cert_manager.TBB_view_cert, org_zmail_cert_manager.TBB_view_cert_tt, "ViewCertificate", "ViewCertificate", new AjxListener(this, ZaCertsServerListController.prototype.viewCertListener));	
+   	this._popupOperations[ZaOperation.NEW] = new ZaOperation(ZaOperation.NEW, org_zmail_cert_manager.TBB_launch_cert_wizard, org_zmail_cert_manager.TBB_launch_cert_wizard_tt, "InstallCertificate", "InstallCertificate", new AjxListener(this, ZaCertsServerListController.prototype._newCertListener));				
 }
 ZaController.initPopupMenuMethods["ZaCertsServerListController"].push(ZaCertsServerListController.initPopupMenuMethod);
 
@@ -99,8 +99,8 @@ ZaCertsServerListController.prototype.viewCertListener = function (ev) {
 	if(this._contentView && this._contentView.getSelectionCount()==1) {
 		var item = this._contentView.getSelection()[0];
 		ZaApp.getInstance().getCertViewController().show(ZaCert.getCerts(ZaApp.getInstance(), item.id),item.id);
-	    var parentPath = ZaTree.getPathByArray([ZaMsg.OVP_home, ZaMsg.OVP_configure, com_zimbra_cert_manager.OVP_certs]);
-	    ZaZimbraAdmin.getInstance().getOverviewPanelController().addObjectItem(parentPath, item.name, null, false, false, item);	
+	    var parentPath = ZaTree.getPathByArray([ZaMsg.OVP_home, ZaMsg.OVP_configure, org_zmail_cert_manager.OVP_certs]);
+	    ZaZmailAdmin.getInstance().getOverviewPanelController().addObjectItem(parentPath, item.name, null, false, false, item);	
 	}
 	
 }
@@ -118,8 +118,8 @@ function(ev) {
 			ZaApp.getInstance().getCertViewController().show(
 				ZaCert.getCerts(ZaApp.getInstance(), ev.item.id),
 				ev.item.id);
-            var parentPath = ZaTree.getPathByArray([ZaMsg.OVP_home, ZaMsg.OVP_configure, com_zimbra_cert_manager.OVP_certs]);
-            ZaZimbraAdmin.getInstance().getOverviewPanelController().addObjectItem(parentPath, ev.item.name, null, false, false, ev.item);
+            var parentPath = ZaTree.getPathByArray([ZaMsg.OVP_home, ZaMsg.OVP_configure, org_zmail_cert_manager.OVP_certs]);
+            ZaZmailAdmin.getInstance().getOverviewPanelController().addObjectItem(parentPath, ev.item.name, null, false, false, ev.item);
 	} else {
 		this.changeActionsState();	
 	}

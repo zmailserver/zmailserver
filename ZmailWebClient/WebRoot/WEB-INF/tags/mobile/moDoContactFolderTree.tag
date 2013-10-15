@@ -18,11 +18,11 @@
 <%@ attribute name="skipsystem" rtexprvalue="true" required="true" %>
 <%@ attribute name="skiptopsearch" rtexprvalue="true" required="false" %>
 <%@ attribute name="skiptrash" rtexprvalue="true" required="false" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
-<%@ taglib prefix="mo" uri="com.zimbra.mobileclient" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
+<%@ taglib prefix="mo" uri="org.zmail.mobileclient" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
 <c:set var="context_url" value="${requestScope.baseURL!=null?requestScope.baseURL:'zmain'}"/><c:set var="count" value="${0}"/>
 <zm:forEachFolder var="folder" skiproot="${skiproot}" parentid="${parentid}" skipsystem="${skipsystem}"  skiptopsearch="${skiptopsearch}" skiptrash="${skiptrash}">
     <c:if test="${count lt sessionScope.F_LIMIT and folder.isContactView}">

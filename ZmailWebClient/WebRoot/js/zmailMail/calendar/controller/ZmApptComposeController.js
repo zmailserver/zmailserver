@@ -684,7 +684,7 @@ function(appt, numRecurrence, callback, showAll, displayConflictDialog,
 	var mode = appt.viewMode,
 	    jsonObj = {
             CheckRecurConflictsRequest: {
-                _jsns:"urn:zimbraMail"
+                _jsns:"urn:zmailMail"
             }
         },
 	    request = jsonObj.CheckRecurConflictsRequest,
@@ -817,7 +817,7 @@ function(appt, originalStartDate, numRecurrence) {
  */
 ZmApptComposeController.prototype.getRecurInfo =
 function(appt, recurInfoCallback) {
-	var soapDoc = AjxSoapDoc.create("GetRecurRequest", "urn:zimbraMail");
+	var soapDoc = AjxSoapDoc.create("GetRecurRequest", "urn:zmailMail");
 	soapDoc.setMethodAttribute("id", appt.id);
 
 	return appCtxt.getAppController().sendRequest({
@@ -852,7 +852,7 @@ function(appt, callback, result) {
 ZmApptComposeController.prototype.checkPermissionRequest =
 function(names, appt, attId, notifyList) {
     // CheckPermissions to be retired after IronMaiden.  Replaced with CheckRights
-    var jsonObj = {CheckRightsRequest:{_jsns:"urn:zimbraAccount"}};
+    var jsonObj = {CheckRightsRequest:{_jsns:"urn:zmailAccount"}};
     var request = jsonObj.CheckRightsRequest;
 
     request.target = [];
@@ -959,7 +959,7 @@ function(appt, callback) {
 
 ZmApptComposeController.prototype.getFreeBusyInfo =
 function(startTime, endTime, emailList, callback, errorCallback, noBusyOverlay) {
-	var soapDoc = AjxSoapDoc.create("GetFreeBusyRequest", "urn:zimbraMail");
+	var soapDoc = AjxSoapDoc.create("GetFreeBusyRequest", "urn:zmailMail");
 	soapDoc.setMethodAttribute("s", startTime);
 	soapDoc.setMethodAttribute("e", endTime);
 	soapDoc.setMethodAttribute("uid", emailList);
@@ -1329,7 +1329,7 @@ function(view, force) {
 
 ZmApptComposeController.prototype.getWorkingInfo =
 function(startTime, endTime, emailList, callback, errorCallback, noBusyOverlay) {
-   var soapDoc = AjxSoapDoc.create("GetWorkingHoursRequest", "urn:zimbraMail");
+   var soapDoc = AjxSoapDoc.create("GetWorkingHoursRequest", "urn:zmailMail");
    soapDoc.setMethodAttribute("s", startTime);
    soapDoc.setMethodAttribute("e", endTime);
    soapDoc.setMethodAttribute("name", emailList);

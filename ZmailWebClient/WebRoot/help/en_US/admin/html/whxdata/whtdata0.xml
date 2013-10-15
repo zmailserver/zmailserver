@@ -18,7 +18,7 @@
 <!-- saved from url=(0014)about:internet -->
 <tocdata>
 <book name="Getting Started" >
-  <item name="About Zimbra Collaboration Suite" url="getting_started/about_zcs.htm" />
+  <item name="About Zmail Collaboration Suite" url="getting_started/about_zcs.htm" />
   <item name="Navigating the Administration Console" url="getting_started/about_the_administration_console.htm" />
   <item name="Global Administrator's Tasks from Admin Console" url="getting_started/tasks_performed_from_aministration_console.htm" />
   <item name="Setting Up the Global Admin Account" url="basic_administration_tasks/adminisrator_s_mailbox.htm" />
@@ -37,7 +37,7 @@
   <item name="Anti-Virus Protection" url="managing_global_settings/anti-virus_configuration_options.htm" />
   <item name="Anti-Spam Protection" url="managing_global_settings/anti-spam_protection.htm" />
   <item name="Customizing UI Themes" url="cos/customizing_ui_themes.htm" />
-  <item name="Defining Theme for the Zimbra Web Client UI" url="ui_themes/defining_theme_for_the_zimbra_web_client_ui.htm" />
+  <item name="Defining Theme for the Zmail Web Client UI" url="ui_themes/defining_theme_for_the_zmail_web_client_ui.htm" />
   <item name="Making Free/Busy Available" url="managing_global_settings/making_free_busy_view__available_.htm" />
   <item name="Managing Single Sign On as a Global Setting" url="managing_global_settings/managing_single_sign_on_as_a_global_setting.htm" />
 </book>
@@ -124,13 +124,13 @@
   <item name="Flushing the Server Cache" url="managing_servers/flushing_the_server_cache.htm" />
 </book>
 <book name="Monitoring Tools" >
-  <item name="Monitoring Servers" url="managing_servers/monitoring_zimbra_collaboration_suite.htm" />
+  <item name="Monitoring Servers" url="managing_servers/monitoring_zmail_collaboration_suite.htm" />
   <item name="View Server Status" url="monitoring/view_server_status.htm" />
   <item name="Checking Usage Statistics" url="monitoring/checking_usage_statistics.htm" />
   <item name="Creating Advanced Server Statistics" url="monitoring/creating_advanced_server_statistics.htm" />
   <item name="Daily Mail Reports" url="monitoring/daily_mail_reports.htm" />
   <item name="About MTA Queues" url="monitoring/about_mta_queues.htm" />
-  <item name="Monitoring Zimbra Mail Queues" url="monitoring/monitoring_zimbra_mta_mail_queues.htm" />
+  <item name="Monitoring Zmail Mail Queues" url="monitoring/monitoring_zmail_mta_mail_queues.htm" />
   <item name="Disk Space Availability Alert" url="monitoring/disk_space_avability_alert.htm" />
   <item name="Mailbox usage" url="managing_accounts/mailbox_usage.htm" />
   <item name="Viewing Mailbox Quotas" url="managing_servers/viewing_mailbox_quotas.htm" />
@@ -140,7 +140,7 @@
 </book>
 <book name="Searching from the Admin Console" >
   <item name="Using Search" url="search/search.htm" />
-  <item name="Zimbra Search" url="search/help_search.htm" />
+  <item name="Zmail Search" url="search/help_search.htm" />
   <item name="Advanced Search" url="search/advanced_search.htm" />
   <item name="Saving Search Queries" url="search/saving_search_queries.htm" />
 </book>
@@ -148,7 +148,7 @@
 <chunk name="Working with Themes" ref="whtdata1.xml" />
 </book>
 <book name="Enhancing the Admin Console" >
-  <item name="Enhancing the Zimbra Admin Console User Interface" url="admin_console_misc/enhancing_the_zimbra_admin_console_user_interface.htm" />
+  <item name="Enhancing the Zmail Admin Console User Interface" url="admin_console_misc/enhancing_the_zmail_admin_console_user_interface.htm" />
   <item name="Changing Authentication Required dialog" url="managing_domains/authentication_required_dialog.htm" />
 </book>
 

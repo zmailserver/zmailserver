@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.clientuploader;
+package org.zmail.clientuploader;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;

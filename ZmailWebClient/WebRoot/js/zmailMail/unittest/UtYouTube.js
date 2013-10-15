@@ -24,7 +24,7 @@ UT.test("YouTube link http://www.youtube.com/watch?v=ID", {
 
 	function() {
 		UT.expect(1);
-		var youTubeZimlet = new Com_Zimbra_Url();
+		var youTubeZimlet = new Com_Zmail_Url();
 		var url = "http://www.youtube.com/watch?v=WhwbxEfy7fg";
 		var value = youTubeZimlet.getYouTubeId(url);
 		UT.equal(value, "WhwbxEfy7fg", "YouTube ID is " + value);
@@ -39,7 +39,7 @@ UT.test("YouTube link http://www.youtube.com/v/ID", {
 
 	function() {
 		UT.expect(1);
-		var youTubeZimlet = new Com_Zimbra_Url();
+		var youTubeZimlet = new Com_Zmail_Url();
 		var url = "http://www.youtube.com/v/WhwbxEfy7fg";
 		var value = youTubeZimlet.getYouTubeId(url);
 		UT.equal(value, "WhwbxEfy7fg", "YouTube ID is " + value);
@@ -53,7 +53,7 @@ UT.test("YouTube link http://www.youtube.com/watch?feature=player_embedded&v=ID"
 
 	function() {
 		UT.expect(1);
-		var youTubeZimlet = new Com_Zimbra_Url();
+		var youTubeZimlet = new Com_Zmail_Url();
 		var url = "http://www.youtube.com/watch?feature=player_embedded&v=tVwkUDRVmsA";
 		var value = youTubeZimlet.getYouTubeId(url);
 		UT.equal(value, "tVwkUDRVmsA", "YouTube ID is " + value);
@@ -67,7 +67,7 @@ UT.test("YouTu.be link", {
 
 	function() {
 		UT.expect(1);
-		var youTubeZimlet = new Com_Zimbra_Url();
+		var youTubeZimlet = new Com_Zmail_Url();
 		var url = "http://youtu.be/WhwbxEfy7fg";
 		var value = youTubeZimlet.getYouTubeId(url);
 		UT.equal(value, "WhwbxEfy7fg", "YouTube ID is " + value);
@@ -82,7 +82,7 @@ UT.test("YouTube Plain Text",  {
 
 	function() {
 		UT.expect(4);
-		var youTubeZimlet = new Com_Zimbra_Url();
+		var youTubeZimlet = new Com_Zmail_Url();
 		var txt = "Check out these videos on YouTube: " +
 				   "B in the bath: http://www.youtube.com/watch?v=2vyEnQoG6q8 " +
 				   "B doing the naked dance: http://www.youtube.com/watch?v=7-XYUlfBoFw " +
@@ -131,7 +131,7 @@ UT.test("YouTube HTML Text", {
 '<p><font face="Arial" size="2"><span style="font-size: 10pt; font-family: Arial;">&nbsp;</span></font></p> ' +
 '<p><font face="Arial" size="2"><span style="font-size: 10pt; font-family: Arial;">Also attached is a picture from Sunday when we took a walk. </span></font></p> ' +
 '<p><font face="Arial" size="2"><span style="font-size: 10pt; font-family: Arial;">&nbsp;</span></font></p> ';
-		var youTubeZimlet = new Com_Zimbra_Url();
+		var youTubeZimlet = new Com_Zmail_Url();
 		var expected = ["2vyEnQoG6q8", "7-XYUlfBoFw", "TRRPNB4bgvM"];
 		var hash = youTubeZimlet._getAllYouTubeLinks(txt);
 		UT.notEqual(hash, null, "hash of links should not be null");
@@ -153,7 +153,7 @@ UT.test("YouTube Max Links", {
 
 	function() {
 		UT.expect(6);
-		var youTubeZimlet = new Com_Zimbra_Url();
+		var youTubeZimlet = new Com_Zmail_Url();
 		var txt = "Check out these videos: " +
 				  "JT Put a Ring on It: http://youtu.be/uycrNZEWRsk " +
 				  "Dear Persian: http://www.youtube.com/watch?v=MLyzscHXtWM&feature=grec_index " +
@@ -185,7 +185,7 @@ UT.test("YouTube handle duplicates", {
 
 	function() {
 		UT.expect(2);
-		var youTubeZimlet = new Com_Zimbra_Url();
+		var youTubeZimlet = new Com_Zmail_Url();
 		var txt = "Same video three different ways. " +
 				   "Spongebob: https://www.youtube.com/watch?feature=grec_index&v=NEuJAkTcJ8c " +
 				   "Spongebob: http://youtube.com/v/NEuJAkTcJ8c " +

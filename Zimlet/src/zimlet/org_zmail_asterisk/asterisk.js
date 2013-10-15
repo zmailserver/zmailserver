@@ -13,13 +13,13 @@
  * ***** END LICENSE BLOCK *****
  */
 
-function Com_Zimbra_Asterisk() {
+function Com_Zmail_Asterisk() {
 }
 
-Com_Zimbra_Asterisk.prototype = new ZmZimletBase();
-Com_Zimbra_Asterisk.prototype.constructor = Com_Zimbra_Asterisk;
+Com_Zmail_Asterisk.prototype = new ZmZimletBase();
+Com_Zmail_Asterisk.prototype.constructor = Com_Zmail_Asterisk;
 
-Com_Zimbra_Asterisk.prototype.menuItemSelected = function(itemId) {
+Com_Zmail_Asterisk.prototype.menuItemSelected = function(itemId) {
 	switch (itemId) {
 		case "CALL":
 			this.singleClicked();
@@ -46,7 +46,7 @@ Com_Zimbra_Asterisk.prototype.menuItemSelected = function(itemId) {
 // If it has 10 digits, prepend a "1"
 // If it has < 10 digits, do not modify
 
-Com_Zimbra_Asterisk.prototype.fixNumber = function(myNumber) {
+Com_Zmail_Asterisk.prototype.fixNumber = function(myNumber) {
 	var numStr = String(myNumber);
 	var hasPlus = 0;
 	numStr = numStr.replace(/[\n\r]/g,'');
@@ -60,21 +60,21 @@ Com_Zimbra_Asterisk.prototype.fixNumber = function(myNumber) {
 	return numStr;
 };
 
-// Called by the Zimbra framework when the panel item was double clicked
-Com_Zimbra_Asterisk.prototype.doDrop = function(myobj) {
+// Called by the Zmail framework when the panel item was double clicked
+Com_Zmail_Asterisk.prototype.doDrop = function(myobj) {
 	this.setupCall(myobj);
 };
 
-// Called by the Zimbra framework when the panel item was double clicked
-Com_Zimbra_Asterisk.prototype.doubleClicked = function() {
+// Called by the Zmail framework when the panel item was double clicked
+Com_Zmail_Asterisk.prototype.doubleClicked = function() {
 	this.singleClicked();
 };
 
-Com_Zimbra_Asterisk.prototype.singleClicked = function() {
+Com_Zmail_Asterisk.prototype.singleClicked = function() {
 	this.setupCall();
 };
 
-Com_Zimbra_Asterisk.prototype.clicked = function(myElement, myNumber) {
+Com_Zmail_Asterisk.prototype.clicked = function(myElement, myNumber) {
 
 	if (!this.verifyPrefs()) {
 		this.displayStatusMessage("Please populate preferences"); 
@@ -107,14 +107,14 @@ Com_Zimbra_Asterisk.prototype.clicked = function(myElement, myNumber) {
 	}
 };
 
-Com_Zimbra_Asterisk.prototype.goToServicewebPage = function() {
+Com_Zmail_Asterisk.prototype.goToServicewebPage = function() {
     var serviceUrl = this.getUserProperty("targetipaddress");
     if(!serviceUrl)
         serviceUrl = "http://192.168.1.254";
-    window.open(serviceUrl + "?referrer=www.zimbra.com","Asterisk home page","toolbar=yes,location=yes,status=yes,menubar=yes,scrollbars=yes,resizable=yes,width=800,height=600");
+    window.open(serviceUrl + "?referrer=www.zmail.com","Asterisk home page","toolbar=yes,location=yes,status=yes,menubar=yes,scrollbars=yes,resizable=yes,width=800,height=600");
 };
 
-Com_Zimbra_Asterisk.prototype.verifyPrefs = function() {
+Com_Zmail_Asterisk.prototype.verifyPrefs = function() {
 	if (this.getUserProperty("defaultNum") == null
 		|| (this.getUserProperty("myMobileNum") == null
 		&& this.getUserProperty("myDeskNum") == null
@@ -125,8 +125,8 @@ Com_Zimbra_Asterisk.prototype.verifyPrefs = function() {
 	return 1;
 };
 
-// Called by the Zimbra framework when the panel item was clicked
-Com_Zimbra_Asterisk.prototype.setupCall = function(myobj) {
+// Called by the Zmail framework when the panel item was clicked
+Com_Zmail_Asterisk.prototype.setupCall = function(myobj) {
 	if (!this.verifyPrefs()) {
 		this.displayStatusMessage("Please populate preferences"); 
 		if (this._dlg_propertyEditor) {
@@ -466,7 +466,7 @@ Com_Zimbra_Asterisk.prototype.setupCall = function(myobj) {
 	this._dlg_propertyEditor.popup();
 };
 
-Com_Zimbra_Asterisk.prototype._placeCall = function () {
+Com_Zmail_Asterisk.prototype._placeCall = function () {
 	var properties = this._propertyEditor.getProperties();
 
 	this._dlg_propertyEditor.popdown();
@@ -526,7 +526,7 @@ Com_Zimbra_Asterisk.prototype._placeCall = function () {
 	AjxRpc.invoke(reqParam, url, reqHeader, new AjxCallback(this, this._resultCallback));
 };
 
-Com_Zimbra_Asterisk.prototype._resultCallback = function(result) {
+Com_Zmail_Asterisk.prototype._resultCallback = function(result) {
 	var r = result.text;
 	//DBG.println(AjxDebug.DBG2, "result:" + r);
 	this.displayStatusMessage(r); 

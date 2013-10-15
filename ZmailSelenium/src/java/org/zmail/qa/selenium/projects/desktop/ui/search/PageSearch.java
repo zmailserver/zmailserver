@@ -17,11 +17,11 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.desktop.ui.search;
+package org.zmail.qa.selenium.projects.desktop.ui.search;
 
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.projects.desktop.ui.AppAjaxClient;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.projects.desktop.ui.AppAjaxClient;
 
 
 /**

@@ -14,7 +14,7 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_insertshareurl"
+<zimlet name="org_zmail_insertshareurl"
         version="0.1"
         label="${msg.label}"
         description="${msg.description}">

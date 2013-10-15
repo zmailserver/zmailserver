@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.util.performance;
+package org.zmail.qa.selenium.framework.util.performance;
 
 /**
  * A PerfData object tracks all the client performance data

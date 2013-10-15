@@ -1389,7 +1389,7 @@ function(ev) {
 
 	var jsonObj = {
 		DistributionListActionRequest: {
-			_jsns: "urn:zimbraAccount",
+			_jsns: "urn:zmailAccount",
 			dl: {by: "name",
 				 _content: req.dl.email
 			},
@@ -1612,10 +1612,10 @@ function(msg) {
 			var subjMod = ZmFilterRule.C_ADDRESS_VALUE[ZmFilterRule.C_CC];
 			rule.addCondition(ZmFilterRule.TEST_ADDRESS, ZmFilterRule.OP_CONTAINS, cc.address, subjMod);
 		}
-		var xZimbraDL = msg.getXZimbraDLHeader();
-		if (xZimbraDL && xZimbraDL.good) {
-			var arr = xZimbraDL.good.getArray();
-			var max = arr.length < 5 ? arr.length : 5; //limit number of X-Zimbra-DL ids
+		var xZmailDL = msg.getXZmailDLHeader();
+		if (xZmailDL && xZmailDL.good) {
+			var arr = xZmailDL.good.getArray();
+			var max = arr.length < 5 ? arr.length : 5; //limit number of X-Zmail-DL ids
 			for (var i=0; i < max; i++) {
 				rule.addCondition(ZmFilterRule.TEST_HEADER, ZmFilterRule.OP_CONTAINS, arr[i].address, ZmMailMsg.HDR_XZIMBRADL);
 			}
@@ -2373,13 +2373,13 @@ ZmMailListController.prototype._getNextItemToSelect = function() {};
 
 ZmMailListController.prototype.addTrustedAddr =
 function(value, callback, errorCallback) {
-    var soapDoc = AjxSoapDoc.create("ModifyPrefsRequest", "urn:zimbraAccount"),
+    var soapDoc = AjxSoapDoc.create("ModifyPrefsRequest", "urn:zmailAccount"),
         node,
         i;
 
     for(i=0; i<value.length;i++) {
         node = soapDoc.set("pref", AjxStringUtil.trim(value[i]));
-        node.setAttribute("name", "zimbraPrefMailTrustedSenderList");
+        node.setAttribute("name", "zmailPrefMailTrustedSenderList");
     }
 
     return appCtxt.getAppController().sendRequest({

@@ -70,7 +70,7 @@ function() {
 	AjxDispatcher.require("PreferencesCore");
 	appCtxt.getAppController().runAppFunction("_registerPrefs");
 };
-ZmZimbraMail.addAppListener(ZmApp.PREFERENCES, ZmAppEvent.PRE_LAUNCH, new AjxListener(ZmPreferencesApp._registerAllPrefs));
+ZmZmailMail.addAppListener(ZmApp.PREFERENCES, ZmAppEvent.PRE_LAUNCH, new AjxListener(ZmPreferencesApp._registerAllPrefs));
 
 //
 // Public methods
@@ -248,9 +248,9 @@ function(settings) {
 	settings.registerSetting("EXPORT_FOLDER",				{type:ZmSetting.T_PSEUDO, dataType:ZmSetting.D_NONE});
 	settings.registerSetting("EXPORT_BUTTON",				{type:ZmSetting.T_PSEUDO, dataType:ZmSetting.D_NONE});
 	settings.registerSetting("PREF_SECTIONS",				{type:ZmSetting.T_PSEUDO, dataType:ZmSetting.D_HASH, isGlobal:true});
-	settings.registerSetting("SIGNATURE_MAX_LENGTH",		{name:"zimbraMailSignatureMaxLength", type:ZmSetting.T_COS, dataType:ZmSetting.D_INT, defaultValue:1024});
-	settings.registerSetting("DISCARD_IN_FILTER_ENABLED",	{name:"zimbraFeatureDiscardInFiltersEnabled", type:ZmSetting.T_COS, dataType:ZmSetting.D_BOOLEAN, defaultValue:true});
-    //settings.registerSetting("QUICK_COMMAND_LIST",			{name:"zimbraPrefQuickCommand", type: ZmSetting.T_COS, dataType: ZmSetting.D_LIST});
+	settings.registerSetting("SIGNATURE_MAX_LENGTH",		{name:"zmailMailSignatureMaxLength", type:ZmSetting.T_COS, dataType:ZmSetting.D_INT, defaultValue:1024});
+	settings.registerSetting("DISCARD_IN_FILTER_ENABLED",	{name:"zmailFeatureDiscardInFiltersEnabled", type:ZmSetting.T_COS, dataType:ZmSetting.D_BOOLEAN, defaultValue:true});
+    //settings.registerSetting("QUICK_COMMAND_LIST",			{name:"zmailPrefQuickCommand", type: ZmSetting.T_COS, dataType: ZmSetting.D_LIST});
 };
 
 ZmPreferencesApp.prototype._registerApp =
@@ -562,23 +562,23 @@ function() {
         AjxMessageFormat.format(ZmMsg.pt,"24"), AjxMessageFormat.format(ZmMsg.pt,"36")];
     //Server values are stored with 'pt' to work irrespective of locale, while display options are as per the respective locale 
     var fontSizeValueOptions = ["8pt", "10pt", "12pt", "14pt", "18pt", "24pt", "36pt"];
-    var getZimbraAccountList = function(){
+    var getZmailAccountList = function(){
         var visAccts = appCtxt.accountList.visibleAccounts;
         var accts = [];
         accts.push(ZmMsg.zimletPrefDontSync);
         for (var k=0; k<visAccts.length; k++) {
-            if(visAccts[k].isZimbraAccount && !visAccts[k].isMain) {
+            if(visAccts[k].isZmailAccount && !visAccts[k].isMain) {
                 accts.push([ZmMsg.zimletPrefSyncWith, " ", visAccts[k].name].join(""));
             }
         }
         return accts;
     };
-    var getZimbraAccountIds = function(){
+    var getZmailAccountIds = function(){
         var visAccts = appCtxt.accountList.visibleAccounts;
         var accts = [];
         accts.push("");
         for (var k=0; k<visAccts.length; k++) {
-            if(visAccts[k].isZimbraAccount && !visAccts[k].isMain) {
+            if(visAccts[k].isZmailAccount && !visAccts[k].isMain) {
                 accts.push(visAccts[k].id);
             }
         }
@@ -606,8 +606,8 @@ function() {
     ZmPref.registerPref("OFFLINE_ZIMLET_SYNC_ACCOUNT_ID", {
 		displayName:		ZmMsg.zimletSyncPref,
 		displayContainer:	ZmPref.TYPE_SELECT,
-        displayOptions:     getZimbraAccountList(),
-        options:            getZimbraAccountIds()
+        displayOptions:     getZmailAccountList(),
+        options:            getZmailAccountIds()
 	});
 
     ZmPref.registerPref("DEFAULT_TIMEZONE", {

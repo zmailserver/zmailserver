@@ -14,25 +14,25 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.tasks;
+package org.zmail.qa.selenium.projects.ajax.tests.tasks;
 
 import java.util.HashMap;
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.MailItem;
-import com.zimbra.qa.selenium.framework.items.TaskItem;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.ui.Shortcut;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.SleepUtil;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogWarning;
-import com.zimbra.qa.selenium.projects.ajax.ui.tasks.FormTaskNew;
-import com.zimbra.qa.selenium.projects.ajax.ui.tasks.FormTaskNew.Field;
+import org.zmail.qa.selenium.framework.items.MailItem;
+import org.zmail.qa.selenium.framework.items.TaskItem;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.ui.Shortcut;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.SleepUtil;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogWarning;
+import org.zmail.qa.selenium.projects.ajax.ui.tasks.FormTaskNew;
+import org.zmail.qa.selenium.projects.ajax.ui.tasks.FormTaskNew.Field;
 
 public class CreateTask extends AjaxCommonTest {
 
@@ -41,10 +41,10 @@ public class CreateTask extends AjaxCommonTest {
 		logger.info("New " + CreateTask.class.getCanonicalName());
 		super.startingPage = app.zPageTasks;
 		super.startingAccountPreferences = new HashMap<String , String>() {{
-			put("zimbraPrefShowSelectionCheckbox", "TRUE");
-			put("zimbraPrefComposeFormat", "text");
-			put("zimbraPrefGroupMailBy", "message");
-			put("zimbraPrefTasksReadingPaneLocation", "bottom");
+			put("zmailPrefShowSelectionCheckbox", "TRUE");
+			put("zmailPrefComposeFormat", "text");
+			put("zmailPrefGroupMailBy", "message");
+			put("zmailPrefTasksReadingPaneLocation", "bottom");
 		}};
 	}
 
@@ -52,8 +52,8 @@ public class CreateTask extends AjaxCommonTest {
 			groups = { "sanity" })
 			public void CreateTask_01() throws HarnessException {
 
-		String subject = "task" + ZimbraSeleniumProperties.getUniqueString();
-		String body = "taskbody"+ ZimbraSeleniumProperties.getUniqueString();
+		String subject = "task" + ZmailSeleniumProperties.getUniqueString();
+		String body = "taskbody"+ ZmailSeleniumProperties.getUniqueString();
 
 		// Click NEW button
 		FormTaskNew taskNew = (FormTaskNew) app.zPageTasks.zToolbarPressButton(Button.B_NEW);
@@ -82,8 +82,8 @@ public class CreateTask extends AjaxCommonTest {
 	public void CreateTask_02() throws HarnessException {
 
 		Shortcut shortcut = Shortcut.S_ESCAPE;
-		String subject = "task" + ZimbraSeleniumProperties.getUniqueString();
-		String body = "taskbody" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "task" + ZmailSeleniumProperties.getUniqueString();
+		String body = "taskbody" + ZmailSeleniumProperties.getUniqueString();
 		
 		//Click NEW button
 		FormTaskNew taskNew = (FormTaskNew) app.zPageTasks.zToolbarPressButton(Button.B_NEW);
@@ -108,8 +108,8 @@ public class CreateTask extends AjaxCommonTest {
 	@Test(	description = "Create task using New menu pulldown  - verify through SOAP",	groups = { "smoke" })
 	public void CreateTask_03() throws HarnessException {
 
-		String subject = "task" + ZimbraSeleniumProperties.getUniqueString();
-		String body = "taskbody" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "task" + ZmailSeleniumProperties.getUniqueString();
+		String body = "taskbody" + ZmailSeleniumProperties.getUniqueString();
 
 		// Click NEW drop down and click Task
 		FormTaskNew taskNew = (FormTaskNew) app.zPageTasks
@@ -139,8 +139,8 @@ public class CreateTask extends AjaxCommonTest {
 	public void CreateTask_04() throws HarnessException {
 
 		Shortcut shortcut = Shortcut.S_NEWTASK;
-		String subject = "task" + ZimbraSeleniumProperties.getUniqueString();
-		String body = "taskbody" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "task" + ZmailSeleniumProperties.getUniqueString();
+		String body = "taskbody" + ZmailSeleniumProperties.getUniqueString();
 		
 		//Click NEW Task shortcut "NK"
 		FormTaskNew taskNew = (FormTaskNew) app.zPageTasks.zKeyboardShortcut(shortcut);
@@ -161,16 +161,16 @@ public class CreateTask extends AjaxCommonTest {
 	public void CreateTask_05() throws HarnessException {
 		
 		app.zPageMail.zNavigateTo();
-		String subject = "subject"+ ZimbraSeleniumProperties.getUniqueString();	
+		String subject = "subject"+ ZmailSeleniumProperties.getUniqueString();	
 
 		// Send a message to the account
-		ZimbraAccount.AccountA().soapSend(
-					"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+		ZmailAccount.AccountA().soapSend(
+					"<SendMsgRequest xmlns='urn:zmailMail'>" +
 						"<m>" +
 							"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 							"<su>"+ subject +"</su>" +
 							"<mp ct='text/plain'>" +
-								"<content>content"+ ZimbraSeleniumProperties.getUniqueString() +"</content>" +
+								"<content>content"+ ZmailSeleniumProperties.getUniqueString() +"</content>" +
 							"</mp>" +
 						"</m>" +
 					"</SendMsgRequest>");

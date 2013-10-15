@@ -1,1 +1,1 @@
-Zimbra-Extension-Class: com.zimbra.clientuploader.ZClientUploaderExt
+Zmail-Extension-Class: org.zmail.clientuploader.ZClientUploaderExt

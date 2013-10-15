@@ -12,9 +12,9 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.utils;
+package org.zmail.utils;
 
-import com.zimbra.zcsprov.ZmProvGenericException;
+import org.zmail.zcsprov.ZmProvGenericException;
 
 import java.io.*;
 

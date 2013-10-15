@@ -1,18 +1,18 @@
 #
-# spec file for zimbra.rpm
+# spec file for zmail.rpm
 #
-Summary: Zimbra Spell
-Name: zimbra-spell
+Summary: Zmail Spell
+Name: zmail-spell
 Version: @@VERSION@@
 Release: @@RELEASE@@
 License: Various
 Group: Applications/Messaging
-URL: http://www.zimbra.com
-Vendor: Zimbra, Inc.
-Packager: Zimbra, Inc.
-BuildRoot: /opt/zimbra
+URL: http://www.zmail.com
+Vendor: Zmail, Inc.
+Packager: Zmail, Inc.
+BuildRoot: /opt/zmail
 AutoReqProv: no
-requires: zimbra-apache
+requires: zmail-apache
 
 %description
 Best email money can buy

@@ -1467,7 +1467,7 @@ function(draftType, msg, resp) {
 					if (folder) {
 						var jsonObj = {
 							ItemActionRequest: {
-								_jsns:  "urn:zimbraMail",
+								_jsns:  "urn:zmailMail",
 								action: {
 									id:     resp.m[0].id,
 									op:     "move",
@@ -2055,7 +2055,7 @@ function(ev) {
  * given signature if provided.
  *
  * @param selected	[String]*			ID of the signature to select
- * @param account	[ZmZimbraAccount]*	account for which to load signatures
+ * @param account	[ZmZmailAccount]*	account for which to load signatures
  */
 ZmComposeController.prototype.resetSignatureToolbar =
 function(selected, account) {

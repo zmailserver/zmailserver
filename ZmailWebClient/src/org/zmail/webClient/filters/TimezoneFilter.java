@@ -13,12 +13,12 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.webClient.filters;
+package org.zmail.webClient.filters;
 
 import java.io.*;
 import javax.servlet.*;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.kabuki.tools.tz.GenerateData;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.kabuki.tools.tz.GenerateData;
 
 public class TimezoneFilter implements Filter {
 
@@ -27,7 +27,7 @@ public class TimezoneFilter implements Filter {
 	//
 
 	static final String TIMEZONE_DATA_FILENAME = "/js/ajax/util/AjxTimezoneData.js";
-	static final String TIMEZONE_ICS_FILENAME = "/opt/zimbra/conf/timezones.ics";
+	static final String TIMEZONE_ICS_FILENAME = "/opt/zmail/conf/timezones.ics";
 
 	static final String EXT_BACKUP = ".backup";
 	static final String PRE_TEMP = TimezoneFilter.class.getName();
@@ -45,13 +45,13 @@ public class TimezoneFilter implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response,
 						 FilterChain chain) throws ServletException, IOException {
-		ZimbraLog.webclient.debug("%%% TimezoneFilter#doFilter");
+		ZmailLog.webclient.debug("%%% TimezoneFilter#doFilter");
 		updateTimezoneData();
 		chain.doFilter(request, response);
 	}
 
 	public void init(FilterConfig config) {
-		ZimbraLog.webclient.debug("%%% TimezoneFilter#init");
+		ZmailLog.webclient.debug("%%% TimezoneFilter#init");
 		this.context = config.getServletContext();
 		updateTimezoneData();
 	}
@@ -63,13 +63,13 @@ public class TimezoneFilter implements Filter {
 	//
 
 	protected synchronized void updateTimezoneData() {
-		ZimbraLog.webclient.debug("%%% TimezoneFilter#updateTimezoneData");
+		ZmailLog.webclient.debug("%%% TimezoneFilter#updateTimezoneData");
 		File ftemp = null;
 		try {
 			File fin = new File(TIMEZONE_ICS_FILENAME);
 			File fout = new File(this.context.getRealPath(TIMEZONE_DATA_FILENAME));
-			ZimbraLog.webclient.debug("%%% timezone data in:  "+fin);
-			ZimbraLog.webclient.debug("%%% timezone data out: "+fout);
+			ZmailLog.webclient.debug("%%% timezone data in:  "+fin);
+			ZmailLog.webclient.debug("%%% timezone data out: "+fout);
 
 			// is there anything to do?
 			if (fin.lastModified() - fout.lastModified() <= 0) {
@@ -77,17 +77,17 @@ public class TimezoneFilter implements Filter {
 			}
 
 			// generate new data
-			ZimbraLog.webclient.debug("%%% timezone data out of sync, need to regenerate");
+			ZmailLog.webclient.debug("%%% timezone data out of sync, need to regenerate");
 			ftemp = File.createTempFile(PRE_TEMP, SUF_TEMP);
 			GenerateData.print(fin, ftemp);
 
 			// save backup and move generated file
 			fout.renameTo(new File(this.context.getRealPath(TIMEZONE_DATA_FILENAME+EXT_BACKUP)));
 			ftemp.renameTo(fout);
-			ZimbraLog.webclient.debug("%%% done");
+			ZmailLog.webclient.debug("%%% done");
 		}
 		catch (Exception e) {
-			ZimbraLog.webclient.debug("%%% timezone data error", e);
+			ZmailLog.webclient.debug("%%% timezone data error", e);
 			if (ftemp != null) {
 				ftemp.delete();
 			}

@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.core;
+package org.zmail.qa.selenium.framework.core;
 
 import java.io.BufferedReader;
 import java.io.Closeable;
@@ -32,17 +32,17 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.server.RemoteControlConfiguration;
 import org.openqa.selenium.server.SeleniumServer;
 
-import com.zimbra.qa.selenium.framework.util.CommandLine;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.OperatingSystem;
-import com.zimbra.qa.selenium.framework.util.SleepMetrics;
-import com.zimbra.qa.selenium.framework.util.SleepUtil;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
+import org.zmail.qa.selenium.framework.util.CommandLine;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.OperatingSystem;
+import org.zmail.qa.selenium.framework.util.SleepMetrics;
+import org.zmail.qa.selenium.framework.util.SleepUtil;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
 
 
 /**
  * The <code>SeleniumService</code> class is used to start
- * a Selenium server instance, specifically for the Zimbra Selenium
+ * a Selenium server instance, specifically for the Zmail Selenium
  * Harness implementation.
  * <p>
  * 
@@ -345,18 +345,18 @@ public class SeleniumService {
 	private SeleniumService() {	
 		logger.info("New SeleniumService object");
 		
-		String modeProp = ZimbraSeleniumProperties.getStringProperty("seleniumMode", "local").toLowerCase();
+		String modeProp = ZmailSeleniumProperties.getStringProperty("seleniumMode", "local").toLowerCase();
 		logger.info("New SeleniumService object: "+ modeProp);
 		
 		// Set Defaults
 		mode = SeleniumMode.Local;
-		SeleniumServer = ZimbraSeleniumProperties.getStringProperty("serverName", "localhost");
-		SeleniumPort = ZimbraSeleniumProperties.getIntProperty("serverPort", 4444);
-		SeleniumBrowser = ZimbraSeleniumProperties.getStringProperty(
-				ZimbraSeleniumProperties.getLocalHost() + ".browser",
-				ZimbraSeleniumProperties.getStringProperty("browser")).split(
+		SeleniumServer = ZmailSeleniumProperties.getStringProperty("serverName", "localhost");
+		SeleniumPort = ZmailSeleniumProperties.getIntProperty("serverPort", 4444);
+		SeleniumBrowser = ZmailSeleniumProperties.getStringProperty(
+				ZmailSeleniumProperties.getLocalHost() + ".browser",
+				ZmailSeleniumProperties.getStringProperty("browser")).split(
 				"_")[0];
-		SeleniumBrowserVersion = ZimbraSeleniumProperties.getStringProperty("browserVersion");
+		SeleniumBrowserVersion = ZmailSeleniumProperties.getStringProperty("browserVersion");
 
 		if (modeProp.equals(SeleniumMode.Local.toString().toLowerCase())) {
 			
@@ -369,22 +369,22 @@ public class SeleniumService {
 		} else if (modeProp.equals(SeleniumMode.Grid.toString().toLowerCase())) {
 			
 			mode = SeleniumMode.Grid;
-			SeleniumServer = ZimbraSeleniumProperties.getStringProperty("grid.serverMachineName", "tbd.lab.zimbra.com");
-			SeleniumPort = ZimbraSeleniumProperties.getIntProperty("grid.serverMachinePort", 4444);
+			SeleniumServer = ZmailSeleniumProperties.getStringProperty("grid.serverMachineName", "tbd.lab.zmail.com");
+			SeleniumPort = ZmailSeleniumProperties.getIntProperty("grid.serverMachinePort", 4444);
 		
 		} else if (modeProp.equals(SeleniumMode.SauceLabs.toString().toLowerCase())) {
 			
 			mode = SeleniumMode.SauceLabs;
-			SeleniumServer = ZimbraSeleniumProperties.getStringProperty("sauce.serverMachineName", "ondemand.saucelabs.com");
-			SeleniumPort = ZimbraSeleniumProperties.getIntProperty("sauce.serverMachinePort", 80);
-			SeleniumBrowser = "{\"username\": \"" + ZimbraSeleniumProperties.getStringProperty("sauceUsername") + "\"," +
-	          "\"access-key\": \"" + ZimbraSeleniumProperties.getStringProperty("sauceAccessKey") + "\"," +
-	          "\"os\": \"" + ZimbraSeleniumProperties.getStringProperty("OS", "Windows 2003") + "\"," +
-	          "\"browser\": \"" + ZimbraSeleniumProperties.getStringProperty("browser") + "\"," +
-	          "\"browser-version\": \"" + ZimbraSeleniumProperties.getStringProperty("browserVersion") + "\"," +
+			SeleniumServer = ZmailSeleniumProperties.getStringProperty("sauce.serverMachineName", "ondemand.saucelabs.com");
+			SeleniumPort = ZmailSeleniumProperties.getIntProperty("sauce.serverMachinePort", 80);
+			SeleniumBrowser = "{\"username\": \"" + ZmailSeleniumProperties.getStringProperty("sauceUsername") + "\"," +
+	          "\"access-key\": \"" + ZmailSeleniumProperties.getStringProperty("sauceAccessKey") + "\"," +
+	          "\"os\": \"" + ZmailSeleniumProperties.getStringProperty("OS", "Windows 2003") + "\"," +
+	          "\"browser\": \"" + ZmailSeleniumProperties.getStringProperty("browser") + "\"," +
+	          "\"browser-version\": \"" + ZmailSeleniumProperties.getStringProperty("browserVersion") + "\"," +
 /* TODO: Adding the job name would be useful for finding the test videos in OnDemand
 	          "\"job-name\": \"" + 	Current method or class name + "\"," +  */
-	          "\"user-extensions-url\": \"http://" + ZimbraSeleniumProperties.getStringProperty("server.host") + ":8080/user-extensions.js\"}";
+	          "\"user-extensions-url\": \"http://" + ZmailSeleniumProperties.getStringProperty("server.host") + ":8080/user-extensions.js\"}";
 		
 		} else {
 			

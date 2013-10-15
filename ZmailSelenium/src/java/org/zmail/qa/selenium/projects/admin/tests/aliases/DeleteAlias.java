@@ -14,23 +14,23 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.admin.tests.aliases;
+package org.zmail.qa.selenium.projects.admin.tests.aliases;
 
 import java.util.List;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAdminAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.admin.core.AdminCommonTest;
-import com.zimbra.qa.selenium.projects.admin.items.AccountItem;
-import com.zimbra.qa.selenium.projects.admin.items.AliasItem;
-import com.zimbra.qa.selenium.projects.admin.ui.DialogForDeleteOperation;
-import com.zimbra.qa.selenium.projects.admin.ui.PageMain;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAdminAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.admin.core.AdminCommonTest;
+import org.zmail.qa.selenium.projects.admin.items.AccountItem;
+import org.zmail.qa.selenium.projects.admin.items.AliasItem;
+import org.zmail.qa.selenium.projects.admin.ui.DialogForDeleteOperation;
+import org.zmail.qa.selenium.projects.admin.ui.PageMain;
 
 public class DeleteAlias extends AdminCommonTest {
 
@@ -55,15 +55,15 @@ public class DeleteAlias extends AdminCommonTest {
 			groups = { "smoke" })
 			public void DeleteAlias_01() throws HarnessException {
 
-		AccountItem target = new AccountItem("email" + ZimbraSeleniumProperties.getUniqueString(),ZimbraSeleniumProperties.getStringProperty("testdomain"));
+		AccountItem target = new AccountItem("email" + ZmailSeleniumProperties.getUniqueString(),ZmailSeleniumProperties.getStringProperty("testdomain"));
 		AccountItem.createUsingSOAP(target);
 
 
 		// Create a new account in the Admin Console using SOAP
 		AliasItem alias = new AliasItem();
 		String aliasEmailAddress=alias.getEmailAddress();
-		ZimbraAdminAccount.AdminConsoleAdmin().soapSend(
-				"<AddAccountAliasRequest xmlns='urn:zimbraAdmin'>"
+		ZmailAdminAccount.AdminConsoleAdmin().soapSend(
+				"<AddAccountAliasRequest xmlns='urn:zmailAdmin'>"
 				+			"<id>" + target.getID() + "</id>"
 				+			"<alias>" + aliasEmailAddress + "</alias>"
 				+		"</AddAccountAliasRequest>");
@@ -113,15 +113,15 @@ public class DeleteAlias extends AdminCommonTest {
 			groups = { "functional" })
 			public void DeleteAlias_02() throws HarnessException {
 
-		AccountItem target = new AccountItem("email" + ZimbraSeleniumProperties.getUniqueString(),ZimbraSeleniumProperties.getStringProperty("testdomain"));
+		AccountItem target = new AccountItem("email" + ZmailSeleniumProperties.getUniqueString(),ZmailSeleniumProperties.getStringProperty("testdomain"));
 		AccountItem.createUsingSOAP(target);
 
 
 		// Create a new account in the Admin Console using SOAP
 		AliasItem alias = new AliasItem();
 		String aliasEmailAddress=alias.getEmailAddress();
-		ZimbraAdminAccount.AdminConsoleAdmin().soapSend(
-				"<AddAccountAliasRequest xmlns='urn:zimbraAdmin'>"
+		ZmailAdminAccount.AdminConsoleAdmin().soapSend(
+				"<AddAccountAliasRequest xmlns='urn:zmailAdmin'>"
 				+			"<id>" + target.getID() + "</id>"
 				+			"<alias>" + aliasEmailAddress + "</alias>"
 				+		"</AddAccountAliasRequest>");
@@ -170,15 +170,15 @@ public class DeleteAlias extends AdminCommonTest {
 			groups = { "functional" })
 			public void DeleteAlias_03() throws HarnessException {
 
-		AccountItem target = new AccountItem("email" + ZimbraSeleniumProperties.getUniqueString(),ZimbraSeleniumProperties.getStringProperty("testdomain"));
+		AccountItem target = new AccountItem("email" + ZmailSeleniumProperties.getUniqueString(),ZmailSeleniumProperties.getStringProperty("testdomain"));
 		AccountItem.createUsingSOAP(target);
 
 
 		// Create a new account in the Admin Console using SOAP
 		AliasItem alias = new AliasItem();
 		String aliasEmailAddress=alias.getEmailAddress();
-		ZimbraAdminAccount.AdminConsoleAdmin().soapSend(
-				"<AddAccountAliasRequest xmlns='urn:zimbraAdmin'>"
+		ZmailAdminAccount.AdminConsoleAdmin().soapSend(
+				"<AddAccountAliasRequest xmlns='urn:zmailAdmin'>"
 				+			"<id>" + target.getID() + "</id>"
 				+			"<alias>" + aliasEmailAddress + "</alias>"
 				+		"</AddAccountAliasRequest>");
@@ -230,15 +230,15 @@ public class DeleteAlias extends AdminCommonTest {
 			groups = { "functional" })
 			public void DeleteAlias_04() throws HarnessException {
 
-		AccountItem target = new AccountItem("email" + ZimbraSeleniumProperties.getUniqueString(),ZimbraSeleniumProperties.getStringProperty("testdomain"));
+		AccountItem target = new AccountItem("email" + ZmailSeleniumProperties.getUniqueString(),ZmailSeleniumProperties.getStringProperty("testdomain"));
 		AccountItem.createUsingSOAP(target);
 
 
 		// Create a new account in the Admin Console using SOAP
 		AliasItem alias = new AliasItem();
 		String aliasEmailAddress=alias.getEmailAddress();
-		ZimbraAdminAccount.AdminConsoleAdmin().soapSend(
-				"<AddAccountAliasRequest xmlns='urn:zimbraAdmin'>"
+		ZmailAdminAccount.AdminConsoleAdmin().soapSend(
+				"<AddAccountAliasRequest xmlns='urn:zmailAdmin'>"
 				+			"<id>" + target.getID() + "</id>"
 				+			"<alias>" + aliasEmailAddress + "</alias>"
 				+		"</AddAccountAliasRequest>");

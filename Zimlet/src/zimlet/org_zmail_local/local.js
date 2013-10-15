@@ -13,18 +13,18 @@
  * ***** END LICENSE BLOCK *****
  */
 
-Com_Zimbra_Local = function() {
+Com_Zmail_Local = function() {
 
 };
-Com_Zimbra_Local.prototype = new ZmZimletBase;
-Com_Zimbra_Local.prototype.constructor = Com_Zimbra_Local;
+Com_Zmail_Local.prototype = new ZmZimletBase;
+Com_Zmail_Local.prototype.constructor = Com_Zmail_Local;
 
-Com_Zimbra_Local.prototype.toString =
+Com_Zmail_Local.prototype.toString =
 function() {
-	return "Com_Zimbra_Local";
+	return "Com_Zmail_Local";
 };
 
-Com_Zimbra_Local.prototype.init =
+Com_Zmail_Local.prototype.init =
 function() {
 	this._controller = new YahooLocalController(this);
 	// add convenience function to skin
@@ -48,7 +48,7 @@ function() {
 
 
 // Add "Search Local" button the existing
-Com_Zimbra_Local.prototype.addLocalSearchToolBar =
+Com_Zmail_Local.prototype.addLocalSearchToolBar =
 function(listener) {
 	var searchToolBar = this._searchToolBar = appCtxt.getSearchController().getSearchToolbar();
 	//Add Custom Button to the Search Toolbar
@@ -63,7 +63,7 @@ function(listener) {
 };
 
 
-Com_Zimbra_Local.prototype._localSearchListener =
+Com_Zmail_Local.prototype._localSearchListener =
 function(ev){
 	var query = AjxStringUtil.trim(this._searchToolBar.getSearchFieldValue());
 	if (query && query.length) {
@@ -71,7 +71,7 @@ function(ev){
 	}
 };
 
-Com_Zimbra_Local.prototype.menuItemSelected =
+Com_Zmail_Local.prototype.menuItemSelected =
 function(itemId) {
 	switch (itemId) {
 		case "MY_LOCATION":			this._controller.markMe();				break;
@@ -86,7 +86,7 @@ function(itemId) {
 	}
 };
 
-Com_Zimbra_Local.prototype.singleClicked =
+Com_Zmail_Local.prototype.singleClicked =
 function() {
 	this._controller.searchQuery();
 };

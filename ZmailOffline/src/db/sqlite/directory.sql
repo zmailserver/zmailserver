@@ -21,13 +21,13 @@ CREATE TABLE directory (
    entry_id    INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
    entry_type  CHAR(4) NOT NULL,
    entry_name  VARCHAR(128) NOT NULL,
-   zimbra_id   CHAR(36) UNIQUE,
+   zmail_id   CHAR(36) UNIQUE,
    modified    SMALLINT NOT NULL,
 
    UNIQUE(entry_type, entry_name)
 );
 
-CREATE UNIQUE INDEX ui_directory_zimbra_id ON directory(zimbra_id);
+CREATE UNIQUE INDEX ui_directory_zmail_id ON directory(zmail_id);
 
 CREATE TABLE directory_attrs (
    entry_id    INTEGER NOT NULL,
@@ -45,7 +45,7 @@ CREATE TABLE directory_leaf (
    parent_id   INTEGER NOT NULL,
    entry_type  CHAR(4) NOT NULL,
    entry_name  VARCHAR(128) NOT NULL,
-   zimbra_id   CHAR(36) NOT NULL UNIQUE,
+   zmail_id   CHAR(36) NOT NULL UNIQUE,
 
    UNIQUE (parent_id, entry_type, entry_name),
    CONSTRAINT fk_dleaf_entry_id FOREIGN KEY (parent_id) REFERENCES directory(entry_id) ON DELETE CASCADE

@@ -108,10 +108,10 @@
 	<style>
 		TH { background: silver; }
 	</style>
-	<script src="/zimbra/res/I18nMsg,AjxMsg.js?debug=1&<%=getQueryString(locale)%>"></script>
-	<script src="/zimbra/js/ajax/util/AjxText.js"></script>
-	<script src="/zimbra/js/ajax/util/AjxTimezoneData.js"></script>
-	<script src="/zimbra/js/ajax/util/AjxTimezone.js"></script>
+	<script src="/zmail/res/I18nMsg,AjxMsg.js?debug=1&<%=getQueryString(locale)%>"></script>
+	<script src="/zmail/js/ajax/util/AjxText.js"></script>
+	<script src="/zmail/js/ajax/util/AjxTimezoneData.js"></script>
+	<script src="/zmail/js/ajax/util/AjxTimezone.js"></script>
 	<script>
 		var LOCALE = "<%=locale%>";
 		var NOW = new Date(<%=now.getTime()%>);

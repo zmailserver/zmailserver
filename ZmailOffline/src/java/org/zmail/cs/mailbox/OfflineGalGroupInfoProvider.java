@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.offline.OfflineAccount;
-import com.zimbra.cs.gal.GalGroup.GroupInfo;
-import com.zimbra.cs.gal.GalGroupInfoProvider;
-import com.zimbra.cs.offline.OfflineLog;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.offline.OfflineAccount;
+import org.zmail.cs.gal.GalGroup.GroupInfo;
+import org.zmail.cs.gal.GalGroupInfoProvider;
+import org.zmail.cs.offline.OfflineLog;
 
 /**
  * Provide GroupInfo from entries in OfflineGal

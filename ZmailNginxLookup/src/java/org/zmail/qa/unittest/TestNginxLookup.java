@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,16 +28,16 @@ import org.apache.commons.httpclient.methods.GetMethod;
 import org.junit.*;
 import static org.junit.Assert.*;
 
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.util.CliUtil;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.account.soap.SoapProvisioning;
-import com.zimbra.cs.nginx.NginxLookupExtension;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.util.CliUtil;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.account.soap.SoapProvisioning;
+import org.zmail.cs.nginx.NginxLookupExtension;
 
 public class TestNginxLookup {
     
@@ -67,9 +67,9 @@ public class TestNginxLookup {
     private static final String HTTP_HOST_IP = "127.0.0.1";
     private static final String HTTP_PORT    = "7070";
     
-    private static final String TEST_HOST_DOGFOOD    = "dogfood.zimbra.com";
+    private static final String TEST_HOST_DOGFOOD    = "dogfood.zmail.com";
     private static final String TEST_HOST_IP_DOGFOOD = "10.113.63.59"; // "207.126.229.140";
-    private static final String TEST_HOST_CATFOOD    = "catfood.zimbra.com";
+    private static final String TEST_HOST_CATFOOD    = "catfood.zmail.com";
     private static final String TEST_HOST_IP_CATFOOD = "10.113.63.60"; // "207.126.229.141";
     
     private static final String IMAP_EXTERNAL_HOST = TEST_HOST_DOGFOOD;
@@ -175,7 +175,7 @@ public class TestNginxLookup {
         CliUtil.toolSetup();
         mSoapProv = new SoapProvisioning();
         mSoapProv.soapSetURI("https://localhost:7071" + AdminConstants.ADMIN_SERVICE_URI);
-        mSoapProv.soapZimbraAdminAuthenticate();
+        mSoapProv.soapZmailAdminAuthenticate();
         
         String TEST_ID = TestProvisioningUtil.genTestId();
         String TEST_NAME = "test-nginxlookup";
@@ -185,7 +185,7 @@ public class TestNginxLookup {
         // revert reverse proxy config to defaults
         unsetLookupByForeignPrincipal();
         
-        SYSTEM_DEFAULT_DOMAIN = mSoapProv.getConfig().getAttr(Provisioning.A_zimbraDefaultDomainName);
+        SYSTEM_DEFAULT_DOMAIN = mSoapProv.getConfig().getAttr(Provisioning.A_zmailDefaultDomainName);
         ACCT_EMAIL = ACCT_LOCALPART + "@" + DOMAIN;
         ACCT1_EMAIL = ACCT_LOCALPART + "@" + SYSTEM_DEFAULT_DOMAIN;
         ACCT2_EMAIL = ACCT2_LOCALPART + "@" + SYSTEM_DEFAULT_DOMAIN;
@@ -195,14 +195,14 @@ public class TestNginxLookup {
         // generate a unique IP for this test run so we won't get multiple from search
         SimpleDateFormat fmt =  new SimpleDateFormat("10.HH:mm:ss");
         DOMAIN_VIRTUAL_IP = fmt.format(new Date());
-        domainAttrs.put(Provisioning.A_zimbraVirtualIPAddress, DOMAIN_VIRTUAL_IP);
+        domainAttrs.put(Provisioning.A_zmailVirtualIPAddress, DOMAIN_VIRTUAL_IP);
         Domain domain = mSoapProv.createDomain(DOMAIN, domainAttrs);
         assertNotNull(domain);
         
         // create the test account
         ACCT_FOREIGN_PRINCIPAL = FOREIGN_ID + "@" + DOMAIN;
         Map<String, Object> acctAttrs = new HashMap<String, Object>();
-        acctAttrs.put(Provisioning.A_zimbraForeignPrincipal, ACCT_FOREIGN_PRINCIPAL);
+        acctAttrs.put(Provisioning.A_zmailForeignPrincipal, ACCT_FOREIGN_PRINCIPAL);
         Account acct = mSoapProv.createAccount(ACCT_EMAIL, PASSWORD, acctAttrs);
         assertNotNull(acct);
         
@@ -223,7 +223,7 @@ public class TestNginxLookup {
         // set foreign id for an account in the system default domain
         acctAttrs.clear();
         ACCT2_FOREIGN_PRINCIPAL = FOREIGN_ID + "@" +SYSTEM_DEFAULT_DOMAIN;
-        acctAttrs.put(Provisioning.A_zimbraForeignPrincipal, ACCT2_FOREIGN_PRINCIPAL);
+        acctAttrs.put(Provisioning.A_zmailForeignPrincipal, ACCT2_FOREIGN_PRINCIPAL);
         Account acct2 = mSoapProv.get(AccountBy.name, ACCT2_EMAIL);
         assertNotNull(acct2);
         mSoapProv.modifyAttrs(acct2, acctAttrs);
@@ -232,15 +232,15 @@ public class TestNginxLookup {
     // revert reverse proxy config to defaults
     private static void unsetLookupByForeignPrincipal() throws Exception {
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraReverseProxyUserNameAttribute, "");
-        attrs.put(Provisioning.A_zimbraReverseProxyMailHostQuery, "(|(zimbraMailDeliveryAddress=${USER})(zimbraMailAlias=${USER})(zimbraId=${USER}))");
+        attrs.put(Provisioning.A_zmailReverseProxyUserNameAttribute, "");
+        attrs.put(Provisioning.A_zmailReverseProxyMailHostQuery, "(|(zmailMailDeliveryAddress=${USER})(zmailMailAlias=${USER})(zmailId=${USER}))");
         modifyConfig(attrs);
     }
     
     private void setupLookupByForeignPrincipal() throws Exception {
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraReverseProxyUserNameAttribute, "zimbraMailDeliveryAddress");
-        attrs.put(Provisioning.A_zimbraReverseProxyMailHostQuery, "(zimbraForeignPrincipal=${USER})"); 
+        attrs.put(Provisioning.A_zmailReverseProxyUserNameAttribute, "zmailMailDeliveryAddress");
+        attrs.put(Provisioning.A_zmailReverseProxyMailHostQuery, "(zmailForeignPrincipal=${USER})"); 
         modifyConfig(attrs);
     }
     
@@ -248,7 +248,7 @@ public class TestNginxLookup {
         Account acct = mSoapProv.get(AccountBy.name, acctEmail);
         assertNotNull(acct);
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraReverseProxyUseExternalRoute, "");
+        attrs.put(Provisioning.A_zmailReverseProxyUseExternalRoute, "");
         mSoapProv.modifyAttrs(acct, attrs);
     }
     
@@ -256,7 +256,7 @@ public class TestNginxLookup {
         Account acct = mSoapProv.get(AccountBy.name, acctEmail);
         assertNotNull(acct);
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraReverseProxyUseExternalRoute, "TRUE");
+        attrs.put(Provisioning.A_zmailReverseProxyUseExternalRoute, "TRUE");
         mSoapProv.modifyAttrs(acct, attrs);
     }
     
@@ -264,14 +264,14 @@ public class TestNginxLookup {
         assertNotNull(acct);
         
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraExternalPop3Port, POP3_EXTERNAL_PORT);
-        attrs.put(Provisioning.A_zimbraExternalPop3SSLPort, POP3_SSL_EXTERNAL_PORT);
-        attrs.put(Provisioning.A_zimbraExternalImapPort, IMAP_EXTERNAL_PORT);
-        attrs.put(Provisioning.A_zimbraExternalImapSSLPort, IMAP_SSL_EXTERNAL_PORT);
-        attrs.put(Provisioning.A_zimbraExternalPop3Hostname, POP3_EXTERNAL_HOST);
-        attrs.put(Provisioning.A_zimbraExternalPop3SSLHostname, POP3_SSL_EXTERNAL_HOST);
-        attrs.put(Provisioning.A_zimbraExternalImapHostname, IMAP_EXTERNAL_HOST);
-        attrs.put(Provisioning.A_zimbraExternalImapSSLHostname, IMAP_SSL_EXTERNAL_HOST);
+        attrs.put(Provisioning.A_zmailExternalPop3Port, POP3_EXTERNAL_PORT);
+        attrs.put(Provisioning.A_zmailExternalPop3SSLPort, POP3_SSL_EXTERNAL_PORT);
+        attrs.put(Provisioning.A_zmailExternalImapPort, IMAP_EXTERNAL_PORT);
+        attrs.put(Provisioning.A_zmailExternalImapSSLPort, IMAP_SSL_EXTERNAL_PORT);
+        attrs.put(Provisioning.A_zmailExternalPop3Hostname, POP3_EXTERNAL_HOST);
+        attrs.put(Provisioning.A_zmailExternalPop3SSLHostname, POP3_SSL_EXTERNAL_HOST);
+        attrs.put(Provisioning.A_zmailExternalImapHostname, IMAP_EXTERNAL_HOST);
+        attrs.put(Provisioning.A_zmailExternalImapSSLHostname, IMAP_SSL_EXTERNAL_HOST);
         
         mSoapProv.modifyAttrs(acct, attrs);
     }
@@ -327,14 +327,14 @@ public class TestNginxLookup {
         
         if (domain == null) {
             Map<String, Object> attrs = new HashMap<String, Object>();
-            attrs.put(Provisioning.A_zimbraExternalPop3Port, POP3_EXTERNAL_PORT_ON_DOMAIN);
-            attrs.put(Provisioning.A_zimbraExternalPop3SSLPort, POP3_SSL_EXTERNAL_PORT_ON_DOMAIN);
-            attrs.put(Provisioning.A_zimbraExternalImapPort, IMAP_EXTERNAL_PORT_ON_DOMAIN);
-            attrs.put(Provisioning.A_zimbraExternalImapSSLPort, IMAP_SSL_EXTERNAL_PORT_ON_DOMAIN);
-            attrs.put(Provisioning.A_zimbraExternalPop3Hostname, POP3_EXTERNAL_HOST_ON_DOMAIN);
-            attrs.put(Provisioning.A_zimbraExternalPop3SSLHostname, POP3_SSL_EXTERNAL_HOST_ON_DOMAIN);
-            attrs.put(Provisioning.A_zimbraExternalImapHostname, IMAP_EXTERNAL_HOST_ON_DOMAIN);
-            attrs.put(Provisioning.A_zimbraExternalImapSSLHostname, IMAP_SSL_EXTERNAL_HOST_ON_DOMAIN);
+            attrs.put(Provisioning.A_zmailExternalPop3Port, POP3_EXTERNAL_PORT_ON_DOMAIN);
+            attrs.put(Provisioning.A_zmailExternalPop3SSLPort, POP3_SSL_EXTERNAL_PORT_ON_DOMAIN);
+            attrs.put(Provisioning.A_zmailExternalImapPort, IMAP_EXTERNAL_PORT_ON_DOMAIN);
+            attrs.put(Provisioning.A_zmailExternalImapSSLPort, IMAP_SSL_EXTERNAL_PORT_ON_DOMAIN);
+            attrs.put(Provisioning.A_zmailExternalPop3Hostname, POP3_EXTERNAL_HOST_ON_DOMAIN);
+            attrs.put(Provisioning.A_zmailExternalPop3SSLHostname, POP3_SSL_EXTERNAL_HOST_ON_DOMAIN);
+            attrs.put(Provisioning.A_zmailExternalImapHostname, IMAP_EXTERNAL_HOST_ON_DOMAIN);
+            attrs.put(Provisioning.A_zmailExternalImapSSLHostname, IMAP_SSL_EXTERNAL_HOST_ON_DOMAIN);
             
             domain = mSoapProv.createDomain(domainName, attrs);
         }
@@ -384,10 +384,10 @@ public class TestNginxLookup {
         // set partial external route on account, should still fallback to the domain external route
         // settings, because the setting on account is not complete.
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraExternalPop3Hostname, POP3_EXTERNAL_HOST_ON_DOMAIN);
-        attrs.put(Provisioning.A_zimbraExternalPop3SSLHostname, POP3_SSL_EXTERNAL_HOST_ON_DOMAIN);
-        attrs.put(Provisioning.A_zimbraExternalImapHostname, IMAP_EXTERNAL_HOST_ON_DOMAIN);
-        attrs.put(Provisioning.A_zimbraExternalImapSSLHostname, IMAP_SSL_EXTERNAL_HOST_ON_DOMAIN);
+        attrs.put(Provisioning.A_zmailExternalPop3Hostname, POP3_EXTERNAL_HOST_ON_DOMAIN);
+        attrs.put(Provisioning.A_zmailExternalPop3SSLHostname, POP3_SSL_EXTERNAL_HOST_ON_DOMAIN);
+        attrs.put(Provisioning.A_zmailExternalImapHostname, IMAP_EXTERNAL_HOST_ON_DOMAIN);
+        attrs.put(Provisioning.A_zmailExternalImapSSLHostname, IMAP_SSL_EXTERNAL_HOST_ON_DOMAIN);
         mSoapProv.modifyAttrs(acct, attrs);
         
         doTest(acctEmail, PASSWORD, null, "imap").verify(STATUS_OK, IMAP_EXTERNAL_HOST_IP_ON_DOMAIN, IMAP_EXTERNAL_PORT_ON_DOMAIN, null, null);
@@ -513,8 +513,8 @@ public class TestNginxLookup {
     public void testGssApi() throws Exception {
         
         /*
-        zmprov md phoebe.mac zimbraAuthKerberos5Realm ZIMBRA.COM zimbraVirtualIPAddress 13.12.11.10
-        zmprov mcf zimbraReverseProxyAdminIPAddress 13.12.11.10 
+        zmprov md phoebe.mac zmailAuthKerberos5Realm ZIMBRA.COM zmailVirtualIPAddress 13.12.11.10
+        zmprov mcf zmailReverseProxyAdminIPAddress 13.12.11.10 
         */
         
         // domain
@@ -535,7 +535,7 @@ public class TestNginxLookup {
         
         // admin account
         String adminAcct = "zmnginx";
-        String adminPassword = "zmnginx";  // from ZimbraServer/conf/ldap/zimbra.ldif
+        String adminPassword = "zmnginx";  // from ZmailServer/conf/ldap/zmail.ldif
         
         // simulating nginx server IP and remote client IP.
         // generate a unique IP for this test
@@ -549,14 +549,14 @@ public class TestNginxLookup {
         
         // setup domain
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraAuthKerberos5Realm, krb5Realm);
-        attrs.put(Provisioning.A_zimbraVirtualIPAddress, nginxServerIp);
+        attrs.put(Provisioning.A_zmailAuthKerberos5Realm, krb5Realm);
+        attrs.put(Provisioning.A_zmailVirtualIPAddress, nginxServerIp);
         mSoapProv.modifyAttrs(domain, attrs);
         
         // setup global config
         Config config = mSoapProv.getConfig();
         attrs.clear();
-        attrs.put(Provisioning.A_zimbraReverseProxyAdminIPAddress, nginxServerIp);
+        attrs.put(Provisioning.A_zmailReverseProxyAdminIPAddress, nginxServerIp);
         mSoapProv.modifyAttrs(config, attrs);
         
         // family mailbox
@@ -568,7 +568,7 @@ public class TestNginxLookup {
         String parentEmail = parentLocalPart + "@" + domainName;
         String parentKrb5Principal = parentLocalPart + "@" + krb5Realm;
         attrs.clear();
-        attrs.put(Provisioning.A_zimbraChildAccount, child.getId());
+        attrs.put(Provisioning.A_zmailChildAccount, child.getId());
         Account parent = mSoapProv.createAccount(parentEmail, PASSWORD, attrs);
         
         
@@ -603,7 +603,7 @@ public class TestNginxLookup {
     
         // cleanup setting on global config
         attrs.clear();
-        attrs.put(Provisioning.A_zimbraReverseProxyAdminIPAddress, "");
+        attrs.put(Provisioning.A_zmailReverseProxyAdminIPAddress, "");
         mSoapProv.modifyAttrs(config, attrs);
     }
     
@@ -611,7 +611,7 @@ public class TestNginxLookup {
     public void testCertAuth() throws Exception {
         // admin account
         String adminAcct = "zmnginx";
-        String adminPassword = "zmnginx";  // from ZimbraServer/conf/ldap/zimbra.ldif
+        String adminPassword = "zmnginx";  // from ZmailServer/conf/ldap/zmail.ldif
         
         // simulating nginx server IP and remote client IP.
         // generate a unique IP for this test
@@ -623,7 +623,7 @@ public class TestNginxLookup {
         Map<String, Object> attrs = new HashMap<String, Object>();
         Config config = mSoapProv.getConfig();
         attrs.clear();
-        attrs.put(Provisioning.A_zimbraReverseProxyAdminIPAddress, nginxServerIp);
+        attrs.put(Provisioning.A_zmailReverseProxyAdminIPAddress, nginxServerIp);
         mSoapProv.modifyAttrs(config, attrs);
         
         String acctEmail = "user1@phoebe.mbp";
@@ -634,7 +634,7 @@ public class TestNginxLookup {
 
         // cleanup setting on global config
         attrs.clear();
-        attrs.put(Provisioning.A_zimbraReverseProxyAdminIPAddress, "");
+        attrs.put(Provisioning.A_zmailReverseProxyAdminIPAddress, "");
         mSoapProv.modifyAttrs(config, attrs);
     }
     
@@ -719,7 +719,7 @@ public class TestNginxLookup {
     
     /*
      * bug 51672
-     * Simulate nginx behavior described in http://bugzilla.zimbra.com/show_bug.cgi?id=51672#c4
+     * Simulate nginx behavior described in http://bugzilla.zmail.com/show_bug.cgi?id=51672#c4
      * According to that, nginx encode '%' to '%25', and ' ' to '%20'.
      * 
      * '%25' will be un-escaped to '%' and '%20' will be un-escaped to ' ' in the lookup servlet.

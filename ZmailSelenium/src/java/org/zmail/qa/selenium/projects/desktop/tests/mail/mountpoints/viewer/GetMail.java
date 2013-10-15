@@ -14,18 +14,18 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.mail.mountpoints.viewer;
+package org.zmail.qa.selenium.projects.desktop.tests.mail.mountpoints.viewer;
 
 import java.util.*;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.mail.DisplayMail;
-import com.zimbra.qa.selenium.projects.desktop.ui.mail.DisplayMail.Field;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.mail.DisplayMail;
+import org.zmail.qa.selenium.projects.desktop.ui.mail.DisplayMail.Field;
 
 
 public class GetMail extends AjaxCommonTest {
@@ -40,9 +40,9 @@ public class GetMail extends AjaxCommonTest {
 
 		// Make sure we are using an account with message view
 		super.startingAccountPreferences = new HashMap<String, String>() {{
-				    put("zimbraPrefGroupMailBy", "message");
-				    put("zimbraPrefReadingPaneLocation", "bottom");
-				    put("zimbraPrefMessageViewHtmlPreferred", "TRUE");
+				    put("zmailPrefGroupMailBy", "message");
+				    put("zmailPrefReadingPaneLocation", "bottom");
+				    put("zmailPrefMessageViewHtmlPreferred", "TRUE");
 				}};
 
 	}
@@ -50,31 +50,31 @@ public class GetMail extends AjaxCommonTest {
 	@Test(	description = "View a mail in a mountpoint",
 			groups = { "functional" })
 	public void GetMail_01() throws HarnessException {
-		String foldername = "folder" + ZimbraSeleniumProperties.getUniqueString();
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String mountpointname = "mountpoint" + ZimbraSeleniumProperties.getUniqueString();
+		String foldername = "folder" + ZmailSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String mountpointname = "mountpoint" + ZmailSeleniumProperties.getUniqueString();
 		
-		FolderItem inbox = FolderItem.importFromSOAP(ZimbraAccount.AccountA(), FolderItem.SystemFolder.Inbox);
+		FolderItem inbox = FolderItem.importFromSOAP(ZmailAccount.AccountA(), FolderItem.SystemFolder.Inbox);
 		
 		// Create a folder to share
-		ZimbraAccount.AccountA().soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>"
+		ZmailAccount.AccountA().soapSend(
+					"<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+		"<folder name='" + foldername + "' l='" + inbox.getId() + "'/>"
 				+	"</CreateFolderRequest>");
 		
-		FolderItem folder = FolderItem.importFromSOAP(ZimbraAccount.AccountA(), foldername);
+		FolderItem folder = FolderItem.importFromSOAP(ZmailAccount.AccountA(), foldername);
 		
 		// Share it
-		ZimbraAccount.AccountA().soapSend(
-					"<FolderActionRequest xmlns='urn:zimbraMail'>"
+		ZmailAccount.AccountA().soapSend(
+					"<FolderActionRequest xmlns='urn:zmailMail'>"
 				+		"<action id='"+ folder.getId() +"' op='grant'>"
 				+			"<grant d='"+ app.zGetActiveAccount().EmailAddress +"' gt='usr' perm='r'/>"
 				+		"</action>"
 				+	"</FolderActionRequest>");
 		
 		// Add a message to it
-		ZimbraAccount.AccountA().soapSend(
-					"<AddMsgRequest xmlns='urn:zimbraMail'>"
+		ZmailAccount.AccountA().soapSend(
+					"<AddMsgRequest xmlns='urn:zmailMail'>"
         		+		"<m l='"+ folder.getId() +"' >"
             	+			"<content>From: foo@foo.com\n"
             	+				"To: foo@foo.com \n"
@@ -90,8 +90,8 @@ public class GetMail extends AjaxCommonTest {
 		
 		// Mount it
 		app.zGetActiveAccount().soapSend(
-					"<CreateMountpointRequest xmlns='urn:zimbraMail'>"
-				+		"<link l='1' name='"+ mountpointname +"'  rid='"+ folder.getId() +"' zid='"+ ZimbraAccount.AccountA().ZimbraId +"'/>"
+					"<CreateMountpointRequest xmlns='urn:zmailMail'>"
+				+		"<link l='1' name='"+ mountpointname +"'  rid='"+ folder.getId() +"' zid='"+ ZmailAccount.AccountA().ZmailId +"'/>"
 				+	"</CreateMountpointRequest>");
 		
 		FolderMountpointItem mountpoint = FolderMountpointItem.importFromSOAP(app.zGetActiveAccount(), mountpointname);
@@ -123,50 +123,50 @@ public class GetMail extends AjaxCommonTest {
 	@Test(	description = "View the contents of a mail in a mountpoint",
 			groups = { "functional" })
 	public void GetMail_02() throws HarnessException {
-		String foldername = "folder" + ZimbraSeleniumProperties.getUniqueString();
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String mountpointname = "mountpoint" + ZimbraSeleniumProperties.getUniqueString();
+		String foldername = "folder" + ZmailSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String mountpointname = "mountpoint" + ZmailSeleniumProperties.getUniqueString();
 		
-		FolderItem inbox = FolderItem.importFromSOAP(ZimbraAccount.AccountA(), FolderItem.SystemFolder.Inbox);
+		FolderItem inbox = FolderItem.importFromSOAP(ZmailAccount.AccountA(), FolderItem.SystemFolder.Inbox);
 		
 		// Create a folder to share
-		ZimbraAccount.AccountA().soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>"
+		ZmailAccount.AccountA().soapSend(
+					"<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+		"<folder name='" + foldername + "' l='" + inbox.getId() + "'/>"
 				+	"</CreateFolderRequest>");
 		
-		FolderItem folder = FolderItem.importFromSOAP(ZimbraAccount.AccountA(), foldername);
+		FolderItem folder = FolderItem.importFromSOAP(ZmailAccount.AccountA(), foldername);
 		
 		// Share it
-		ZimbraAccount.AccountA().soapSend(
-					"<FolderActionRequest xmlns='urn:zimbraMail'>"
+		ZmailAccount.AccountA().soapSend(
+					"<FolderActionRequest xmlns='urn:zmailMail'>"
 				+		"<action id='"+ folder.getId() +"' op='grant'>"
 				+			"<grant d='"+ app.zGetActiveAccount().EmailAddress +"' gt='usr' perm='r'/>"
 				+		"</action>"
 				+	"</FolderActionRequest>");
 		
 		// Add a message to it
-		ZimbraAccount.AccountA().soapSend(
-					"<AddMsgRequest xmlns='urn:zimbraMail'>"
+		ZmailAccount.AccountA().soapSend(
+					"<AddMsgRequest xmlns='urn:zmailMail'>"
         		+		"<m l='"+ folder.getId() +"' >"
-            	+			"<content>From: "+ ZimbraAccount.AccountA().EmailAddress +"\n"
+            	+			"<content>From: "+ ZmailAccount.AccountA().EmailAddress +"\n"
             	+				"To: "+ app.zGetActiveAccount().EmailAddress +"\n"
-            	+				"Cc: "+ ZimbraAccount.AccountB().EmailAddress +"\n"
+            	+				"Cc: "+ ZmailAccount.AccountB().EmailAddress +"\n"
             	+				"Subject: "+ subject +"\n"
             	+				"MIME-Version: 1.0 \n"
             	+				"Content-Type: text/plain; charset=utf-8 \n"
             	+				"Content-Transfer-Encoding: 7bit\n"
             	+				"\n"
-            	+				"content"+ ZimbraSeleniumProperties.getUniqueString() +"\n"
+            	+				"content"+ ZmailSeleniumProperties.getUniqueString() +"\n"
             	+			"</content>"
             	+		"</m>"
 				+	"</AddMsgRequest>");
-		MailItem mail = MailItem.importFromSOAP(ZimbraAccount.AccountA(), "subject:("+ subject +")");
+		MailItem mail = MailItem.importFromSOAP(ZmailAccount.AccountA(), "subject:("+ subject +")");
 
 		// Mount it
 		app.zGetActiveAccount().soapSend(
-					"<CreateMountpointRequest xmlns='urn:zimbraMail'>"
-				+		"<link l='1' name='"+ mountpointname +"'  rid='"+ folder.getId() +"' zid='"+ ZimbraAccount.AccountA().ZimbraId +"'/>"
+					"<CreateMountpointRequest xmlns='urn:zmailMail'>"
+				+		"<link l='1' name='"+ mountpointname +"'  rid='"+ folder.getId() +"' zid='"+ ZmailAccount.AccountA().ZmailId +"'/>"
 				+	"</CreateMountpointRequest>");
 		
 		FolderMountpointItem mountpoint = FolderMountpointItem.importFromSOAP(app.zGetActiveAccount(), mountpointname);
@@ -184,8 +184,8 @@ public class GetMail extends AjaxCommonTest {
 		ZAssert.assertEquals(	actual.zGetMailProperty(Field.Subject), mail.dSubject, "Verify the subject matches");
 		ZAssert.assertNotNull(	actual.zGetMailProperty(Field.ReceivedDate), "Verify the date is displayed");
 		ZAssert.assertNotNull(	actual.zGetMailProperty(Field.ReceivedTime), "Verify the time is displayed");
-		ZAssert.assertEquals(	actual.zGetMailProperty(Field.From), ZimbraAccount.AccountA().EmailAddress, "Verify the From matches");
-		ZAssert.assertEquals(	actual.zGetMailProperty(Field.Cc), ZimbraAccount.AccountB().EmailAddress, "Verify the Cc matches");
+		ZAssert.assertEquals(	actual.zGetMailProperty(Field.From), ZmailAccount.AccountA().EmailAddress, "Verify the From matches");
+		ZAssert.assertEquals(	actual.zGetMailProperty(Field.Cc), ZmailAccount.AccountB().EmailAddress, "Verify the Cc matches");
 		ZAssert.assertEquals(	actual.zGetMailProperty(Field.To), app.zGetActiveAccount().EmailAddress, "Verify the To matches");
 		
 		// The body could contain HTML, even though it is only displaying text (e.g. <br> may be present)

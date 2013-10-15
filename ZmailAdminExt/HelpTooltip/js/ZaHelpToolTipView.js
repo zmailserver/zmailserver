@@ -62,7 +62,7 @@ ZaToolTipView.prototype._createView = function(canvas) {
     html[i++] = " style='table-layout:fixed; width:100%'" + ">";
     html[i++] = "<tr><td><div";
     html[i++] = " style='text-align: left; font-weight:bold' ";
-    html[i++] = ">" + com_zimbra_tooltip.llAttributeName +"</div></td></tr>";
+    html[i++] = ">" + org_zmail_tooltip.llAttributeName +"</div></td></tr>";
     html[i++] = "<tr><td><div id=\"" + ZaToolTipView.toolTipArributeId + "\"";
     html[i++] = "></div></td></tr>";
     html[i++] = "</table></div>";
@@ -72,7 +72,7 @@ ZaToolTipView.prototype._createView = function(canvas) {
     html[i++] = "</td></tr>";
     html[i++] = "<tr><td><div id=\"" + ZaToolTipView.toolTipMoreId + "\"";
     html[i++] = " style='white-space:nowrap; text-align: right; font-weight:bold' ";
-    html[i++] = ">" + com_zimbra_tooltip.llMore + "</div></td></tr>";
+    html[i++] = ">" + org_zmail_tooltip.llMore + "</div></td></tr>";
     html[i++] = "</table>";
     canvas.innerHTML = html.join("");
 }
@@ -82,7 +82,7 @@ ZaToolTipView.prototype._getBodyView = function(desc) {
     var i = 0;
     html[i++] = "<table cellspacing='0' cellpadding='0' border='0' ";
     html[i++] = " style='table-layout:fixed;width:100%' " + ">";
-    html[i++] = "<tr><td style='font-weight:bold' >" + com_zimbra_tooltip.llDesc + "</td></tr>";
+    html[i++] = "<tr><td style='font-weight:bold' >" + org_zmail_tooltip.llDesc + "</td></tr>";
     html[i++] = "<tr><td>" + desc + "</td></tr>";
     html[i++] = "</table>";
     return html.join("");
@@ -100,7 +100,7 @@ function(attributeName) {
 ZaToolTipView.prototype.updateDesc =
 function(desc) {
     if(!desc) {
-        this.updateBody(com_zimbra_tooltip.llNoResult);
+        this.updateBody(org_zmail_tooltip.llNoResult);
     } else {
         this._bodyDiv.innerHTML = this._getBodyView(desc);
     }
@@ -120,14 +120,14 @@ function(ev) {
 
     if(this.isMore){
         this.isMore = false;
-        this._moreDiv.innerHTML = com_zimbra_tooltip.llHide;
-        this.updateBody(com_zimbra_tooltip.llLoading);
+        this._moreDiv.innerHTML = org_zmail_tooltip.llHide;
+        this.updateBody(org_zmail_tooltip.llLoading);
         Dwt.setVisible(this._bodyDiv, true);
         var desc = ZaHelpTooltip.getDescByName(this._attributeName);
         this.updateDesc(desc);
     } else {
         this.isMore = true;
-        this._moreDiv.innerHTML = com_zimbra_tooltip.llMore;
+        this._moreDiv.innerHTML = org_zmail_tooltip.llMore;
         Dwt.setVisible(this._bodyDiv, false);
     }
     this.tooltipZimlet.redraw();

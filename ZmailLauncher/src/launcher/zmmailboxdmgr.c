@@ -101,8 +101,8 @@ StripEnv()
 
 #ifndef UNRESTRICTED_JVM_ARGS
 /* Mailbox server JVM starts as root and then drops priveleges to run
- * as the zimbra Unix user.  Zimbra Unix user is allowed to modify JVM
- * options.  We preclude the Zimbra Unix user from specifying certain
+ * as the zmail Unix user.  Zmail Unix user is allowed to modify JVM
+ * options.  We preclude the Zmail Unix user from specifying certain
  * options - code that runs when root must be from files owned by root.
  */
 static const char *DisallowedJVMArgs[] = {
@@ -557,7 +557,7 @@ Start(int nextArg, int argc, char *argv[])
     AddArgFmt("-Djava.io.tmpdir=%s/work", MAILBOXD_HOME); 
     AddArgFmt("-Djava.library.path=%s", ZIMBRA_LIB);
     AddArgFmt("-Djava.endorsed.dirs=%s/common/endorsed", MAILBOXD_HOME);
-    AddArgFmt("-Dzimbra.config=%s", ZIMBRA_CONFIG);
+    AddArgFmt("-Dzmail.config=%s", ZIMBRA_CONFIG);
 
     /* We don't want these things being passed in from command line */
     AddArgFmt("-Djetty.home=%s", MAILBOXD_HOME);

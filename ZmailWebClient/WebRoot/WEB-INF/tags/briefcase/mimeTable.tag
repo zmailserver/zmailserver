@@ -16,9 +16,9 @@
 <%@ attribute name="contenttype" rtexprvalue="true" required="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
-<%@ taglib prefix="app" uri="com.zimbra.htmlclient" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
+<%@ taglib prefix="app" uri="org.zmail.htmlclient" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
 
 <c:choose>
     <c:when test="${contenttype eq 'application'}">
@@ -93,17 +93,17 @@
         <c:set var="mimeImg" value="doctypes/ImgHtmlDoc.png" scope="request"/>
         <c:set var="mimeDesc" value="mimeHtmlDocument" scope="request"/>
     </c:when>
-    <c:when test="${contenttype eq 'application/x-zimbra-doc'}">
+    <c:when test="${contenttype eq 'application/x-zmail-doc'}">
         <c:set var="mimeImg" value="doctypes/ImgGenericDoc.png" scope="request"/>
-        <c:set var="mimeDesc" value="zimbraDocument" scope="request"/>
+        <c:set var="mimeDesc" value="zmailDocument" scope="request"/>
     </c:when>
-    <c:when test="${contenttype eq 'application/x-zimbra-slides'}">
+    <c:when test="${contenttype eq 'application/x-zmail-slides'}">
         <c:set var="mimeImg" value="doctypes/ImgPresentation.png" scope="request"/>
-        <c:set var="mimeDesc" value="zimbraPresentation" scope="request"/>
+        <c:set var="mimeDesc" value="zmailPresentation" scope="request"/>
     </c:when>
-    <c:when test="${contenttype eq 'application/x-zimbra-xls'}">
+    <c:when test="${contenttype eq 'application/x-zmail-xls'}">
         <c:set var="mimeImg" value="doctypes/ImgZSpreadSheet.png" scope="request"/>
-        <c:set var="mimeDesc" value="zimbraSpreadsheet" scope="request"/>
+        <c:set var="mimeDesc" value="zmailSpreadsheet" scope="request"/>
     </c:when>
     <c:otherwise>
         <c:set var="mimeImg" value="doctypes/ImgUnknownDoc.png" scope="request"/>

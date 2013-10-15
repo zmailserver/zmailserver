@@ -37,7 +37,7 @@ basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
   </head>
     <body>
 <p>This test jsp measures how long it takes to load a sample js file. The sample file
-LoadTest.js is a copy of ZimbraMail_all.js, which is 3.1M and 94K lines. A reload
+LoadTest.js is a copy of ZmailMail_all.js, which is 3.1M and 94K lines. A reload
 is needed between tests since the package system recognizes when a resource has
 already been loaded.</p>
 <p>Load time via simple script tag: <span id="sltSpan"></span></p>
@@ -54,7 +54,7 @@ already been loaded.</p>
 		}
 		function loadTestB() {
 			loadStart = (new Date()).getTime();
-			AjxInclude(["/zimbra/test/jstest/LoadTest.js"], null, new AjxCallback(null, loadTestB_done));
+			AjxInclude(["/zmail/test/jstest/LoadTest.js"], null, new AjxCallback(null, loadTestB_done));
 		}
 		function loadTestB_done() {
 			var e = (new Date()).getTime();

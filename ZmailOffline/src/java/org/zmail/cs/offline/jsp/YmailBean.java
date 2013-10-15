@@ -12,15 +12,15 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.jsp;
+package org.zmail.cs.offline.jsp;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.offline.OfflineLog;
-import com.zimbra.cs.offline.util.yc.YContactException;
-import com.zimbra.cs.offline.util.yc.oauth.OAuthManager;
-import com.zimbra.cs.offline.util.yc.oauth.OAuthToken;
-import com.zimbra.soap.type.DataSource.ConnectionType;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.offline.OfflineLog;
+import org.zmail.cs.offline.util.yc.YContactException;
+import org.zmail.cs.offline.util.yc.oauth.OAuthManager;
+import org.zmail.cs.offline.util.yc.oauth.OAuthToken;
+import org.zmail.soap.type.DataSource.ConnectionType;
 
 public class YmailBean extends ImapBean {
 
@@ -45,7 +45,7 @@ public class YmailBean extends ImapBean {
                     username = email;
             }
         }
-        host = email.endsWith("@yahoo.co.jp") ? "zimbra.imap.mail.yahoo.co.jp" : "zimbra.imap.mail.yahoo.com";
+        host = email.endsWith("@yahoo.co.jp") ? "zmail.imap.mail.yahoo.co.jp" : "zmail.imap.mail.yahoo.com";
         connectionType = ConnectionType.ssl;
         port = "993";
         if (this.contactSyncEnabled && (verb.isAdd() || verb.isModify())) {

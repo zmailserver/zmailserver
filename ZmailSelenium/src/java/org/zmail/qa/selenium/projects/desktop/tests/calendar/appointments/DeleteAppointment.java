@@ -14,12 +14,12 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.calendar.appointments;
+package org.zmail.qa.selenium.projects.desktop.tests.calendar.appointments;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
 
 
 public class DeleteAppointment extends AjaxCommonTest {
@@ -42,14 +42,14 @@ public class DeleteAppointment extends AjaxCommonTest {
 	public void DeleteAppointment_01() throws HarnessException {
 		
 		// Create the message data to be sent
-		String subject = "appointment" + ZimbraSeleniumProperties.getUniqueString();
-		String content = "content" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "appointment" + ZmailSeleniumProperties.getUniqueString();
+		String content = "content" + ZmailSeleniumProperties.getUniqueString();
 		ZDate startUTC = new ZDate(2014, 12, 25, 12, 0, 0);
 		ZDate endUTC   = new ZDate(2014, 12, 25, 14, 0, 0);
 
 		// Create an appointment
 		app.zGetActiveAccount().soapSend(
-					"<CreateAppointmentRequest xmlns='urn:zimbraMail'>" +
+					"<CreateAppointmentRequest xmlns='urn:zmailMail'>" +
 						"<m>" +
 							"<inv>" +
 								"<comp status='CONF' fb='B' class='PUB' transp='O' allDay='0' name='"+ subject +"' >" +

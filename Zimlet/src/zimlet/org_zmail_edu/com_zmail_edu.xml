@@ -14,12 +14,12 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_edu"
+<zimlet name="org_zmail_edu"
         version="1.5"
         description="Helps view and manage courses.">
-	<include>com_zimbra_edu.js</include>
+	<include>org_zmail_edu.js</include>
 	<includeCSS>edu.css</includeCSS>
-	<handlerObject>Com_Zimbra_Edu</handlerObject>
+	<handlerObject>Com_Zmail_Edu</handlerObject>
 	<serverExtension hasKeyword="edu" regex="ZEDU\-\w+\-\w+"/>
 
 	<contentObject type="course">
@@ -28,7 +28,7 @@
 		</matchOn>
 		<onClick>
 			<canvas type="window" title="Sample Full Course Description" width="800" height="600"/>
-			<actionUrl target="/service/zimlet/com_zimbra_edu/edu.jsp"/>
+			<actionUrl target="/service/zimlet/org_zmail_edu/edu.jsp"/>
 		</onClick>
 		<contextMenu>
 			<menuItem label="Enroll" id="ENROLL" icon="Check-Icon"/>
@@ -36,7 +36,7 @@
 			<menuItem />
 			<menuItem label="View Details" id="SHOWFULL_ITEM" icon="ViewFull-Icon">
 				<canvas type="window" title="Sample Full Course Description" width="800" height="600"/>
-				<actionUrl target="/service/zimlet/com_zimbra_edu/edu.jsp"/>
+				<actionUrl target="/service/zimlet/org_zmail_edu/edu.jsp"/>
 			</menuItem>
 		</contextMenu>
 	</contentObject>

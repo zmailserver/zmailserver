@@ -1269,7 +1269,7 @@ function(view) {
 	var content = this.getCurrentView();
 	if (content && content.getTitle) {
 		var title = content.getTitle();
-		Dwt.setTitle(title ? title : ZmMsg.zimbraTitle);
+		Dwt.setTitle(title ? title : ZmMsg.zmailTitle);
 	}
 };
 

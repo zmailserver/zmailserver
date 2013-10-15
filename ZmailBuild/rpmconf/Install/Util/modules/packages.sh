@@ -34,7 +34,7 @@ installPackage() {
 	D=`date +%s`
 	if [ $INSTRESULT = 0 ]; then
 		echo "done"
-		echo "${D}: $ST $f" >> /opt/zimbra/.install_history
+		echo "${D}: $ST $f" >> /opt/zmail/.install_history
 	else
 		echo -n "FAILED"
 		echo ""
@@ -167,9 +167,9 @@ checkPackages() {
 		findLatestPackage $i
 		if [ -f "$file" ]; then
 
-      # only make zimbra-cluster available on supported OS's 
+      # only make zmail-cluster available on supported OS's 
       echo $PLATFORM | egrep -q "RHEL|CentOS"
-      if [ $? != 0 -a $i = "zimbra-cluster" ]; then
+      if [ $? != 0 -a $i = "zmail-cluster" ]; then
         continue
       fi
 

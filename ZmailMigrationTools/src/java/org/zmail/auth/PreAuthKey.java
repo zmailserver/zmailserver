@@ -19,7 +19,7 @@
  * TODO To change the template for this generated file go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-package com.zimbra.auth;
+package org.zmail.auth;
 import org.apache.commons.codec.binary.Hex;
 
 import javax.crypto.Mac;

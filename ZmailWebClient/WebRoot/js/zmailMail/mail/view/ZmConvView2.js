@@ -960,7 +960,7 @@ ZmConvReplyView.ADDR_TYPES = [AjxEmailAddress.TO, AjxEmailAddress.CC];
 ZmConvReplyView.prototype.set =
 function(msg, msgView, op) {
 
-	appCtxt.notifyZimlet("com_zimbra_email", "onFindMsgObjects");
+	appCtxt.notifyZimlet("org_zmail_email", "onFindMsgObjects");
 	this.action = op;
 	AjxDispatcher.require("Mail");
 	
@@ -994,7 +994,7 @@ function(msg, msgView, op) {
 
 	// Argghhh - it's very messed up that we have to go through a zimlet to create bubbles
 	// Notify only the email zimlet, since other zimlets either hit an error or do something unneeded
-	appCtxt.notifyZimlet("com_zimbra_email", "onMsgView");
+	appCtxt.notifyZimlet("org_zmail_email", "onMsgView");
 	this.setVisible(true);
 	Dwt.scrollIntoView(this.getHtmlElement(), this._convView._messagesDiv);
 	appCtxt.getKeyboardMgr().grabFocus(this._input);
@@ -1219,7 +1219,7 @@ function() {
 
 /**
  * We override this function to ignore notifying Zimlets as onMsgView is
- * not supported in this view @see http://bugzilla.zimbra.com/show_bug.cgi?id=68170
+ * not supported in this view @see http://bugzilla.zmail.com/show_bug.cgi?id=68170
  * @param msg
  * @param oldMsg
  */

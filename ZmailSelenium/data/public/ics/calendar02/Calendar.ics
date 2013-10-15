@@ -1,7 +1,7 @@
 BEGIN:VCALENDAR
 X-WR-CALNAME:Calendar
 X-WR-CALID:7ccdea09-ac8f-4e59-ba39-be92c36ff6b6:10
-PRODID:Zimbra-Calendar-Provider
+PRODID:Zmail-Calendar-Provider
 VERSION:2.0
 METHOD:PUBLISH
 BEGIN:VTIMEZONE

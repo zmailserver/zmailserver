@@ -18,17 +18,17 @@
  * send the email. The x-mailer is displayed below the message subject when the message is opened.
  * 
  */
-function com_zimbra_xmailer_HandlerObject() {
+function org_zmail_xmailer_HandlerObject() {
 }
 
-com_zimbra_xmailer_HandlerObject.prototype = new ZmZimletBase();
-com_zimbra_xmailer_HandlerObject.prototype.constructor = com_zimbra_xmailer_HandlerObject;
+org_zmail_xmailer_HandlerObject.prototype = new ZmZimletBase();
+org_zmail_xmailer_HandlerObject.prototype.constructor = org_zmail_xmailer_HandlerObject;
 
 /**
  * Simplify handler object
  *
  */
-var XMailerZimlet = com_zimbra_xmailer_HandlerObject;
+var XMailerZimlet = org_zmail_xmailer_HandlerObject;
 
 /**
  *  Defines "enable" user property.
@@ -151,6 +151,6 @@ function() {
 	if(this._reloadRequired) {
 		window.onbeforeunload = null;
 		var url = AjxUtil.formatUrl({});
-		ZmZimbraMail.sendRedirect(url);
+		ZmZmailMail.sendRedirect(url);
 	}
 };

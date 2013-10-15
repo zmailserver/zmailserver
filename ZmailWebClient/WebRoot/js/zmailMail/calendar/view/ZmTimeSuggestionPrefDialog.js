@@ -54,11 +54,11 @@ ZmTimeSuggestionPrefDialog.PREF_FIELDS = ["name", "site", "capacity", "building"
 // corresponding attributes for search command
 ZmTimeSuggestionPrefDialog.SF_ATTR = {};
 ZmTimeSuggestionPrefDialog.SF_ATTR["name"]		  = "fullName";
-ZmTimeSuggestionPrefDialog.SF_ATTR["capacity"]	  = "zimbraCalResCapacity";
+ZmTimeSuggestionPrefDialog.SF_ATTR["capacity"]	  = "zmailCalResCapacity";
 ZmTimeSuggestionPrefDialog.SF_ATTR["desc"]        = "description";
-ZmTimeSuggestionPrefDialog.SF_ATTR["site"]		  = "zimbraCalResSite";
-ZmTimeSuggestionPrefDialog.SF_ATTR["building"]	  = "zimbraCalResBuilding";
-ZmTimeSuggestionPrefDialog.SF_ATTR["floor"]		  = "zimbraCalResFloor";
+ZmTimeSuggestionPrefDialog.SF_ATTR["site"]		  = "zmailCalResSite";
+ZmTimeSuggestionPrefDialog.SF_ATTR["building"]	  = "zmailCalResBuilding";
+ZmTimeSuggestionPrefDialog.SF_ATTR["floor"]		  = "zmailCalResFloor";
 
 // search field compares ops - listed here if not substring ("has")
 ZmTimeSuggestionPrefDialog.SF_OP = {};

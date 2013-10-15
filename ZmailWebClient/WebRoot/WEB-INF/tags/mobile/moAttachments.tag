@@ -13,14 +13,14 @@
  * ***** END LICENSE BLOCK *****
 --%>
 <%@ tag body-content="empty" %>
-<%@ attribute name="message" rtexprvalue="true" required="true" type="com.zimbra.cs.taglib.bean.ZMessageBean" %>
-<%@ attribute name="mailbox" rtexprvalue="true" required="true" type="com.zimbra.cs.taglib.bean.ZMailboxBean" %>
+<%@ attribute name="message" rtexprvalue="true" required="true" type="org.zmail.cs.taglib.bean.ZMessageBean" %>
+<%@ attribute name="mailbox" rtexprvalue="true" required="true" type="org.zmail.cs.taglib.bean.ZMailboxBean" %>
 <%@ attribute name="composeUrl" rtexprvalue="true" required="true" type="java.lang.String" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
-<%@ taglib prefix="mo" uri="com.zimbra.mobileclient" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
+<%@ taglib prefix="mo" uri="org.zmail.mobileclient" %>
 
 <div>
 <c:forEach var="part" items="${message.attachments}" varStatus="partStatus">
@@ -51,7 +51,7 @@
                         </span>
                         <span>
                         <c:choose>
-                            <c:when test="${zm:isProvOrAttr(pageContext, 'zimbraAttachmentsBlocked')}">
+                            <c:when test="${zm:isProvOrAttr(pageContext, 'zmailAttachmentsBlocked')}">
                                 <b>${fn:escapeXml(pname)}</b>(${zm:displaySize(pageContext,part.size)})
                             </c:when>
                             <c:otherwise>

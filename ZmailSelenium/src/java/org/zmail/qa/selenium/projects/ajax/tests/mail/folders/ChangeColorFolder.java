@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.folders;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.folders;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.DialogEditFolder;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.DialogEditFolder.FolderColor;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.DialogEditFolder;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.DialogEditFolder.FolderColor;
 
 public class ChangeColorFolder extends PrefGroupMailByMessageTest {
 
@@ -45,10 +45,10 @@ public class ChangeColorFolder extends PrefGroupMailByMessageTest {
 		ZAssert.assertNotNull(inbox, "Verify the inbox is available");
 
 		// Create the subfolder
-		String name1 = "folder" + ZimbraSeleniumProperties.getUniqueString();
+		String name1 = "folder" + ZmailSeleniumProperties.getUniqueString();
 
 		app.zGetActiveAccount().soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>"
+					"<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+		"<folder name='" + name1 + "' l='" + inbox.getId() + "'/>"
 				+	"</CreateFolderRequest>");
 
@@ -70,7 +70,7 @@ public class ChangeColorFolder extends PrefGroupMailByMessageTest {
 
 		// Check the color
 		app.zGetActiveAccount().soapSend(
-				"<GetFolderRequest xmlns='urn:zimbraMail'>"
+				"<GetFolderRequest xmlns='urn:zmailMail'>"
 			+		"<folder id='" + subfolder1.getId() + "'/>"
 			+	"</GetFolderRequest>");
 

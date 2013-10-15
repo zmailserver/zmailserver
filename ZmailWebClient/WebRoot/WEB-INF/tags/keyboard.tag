@@ -15,17 +15,17 @@
 <%@ tag body-content="scriptless" %>
 <%@ attribute name="globals" rtexprvalue="true" required="false" %>
 <%@ attribute name="passspecial" rtexprvalue="true" required="false" %>
-<%@ attribute name="mailbox" rtexprvalue="true" required="true" type="com.zimbra.cs.taglib.bean.ZMailboxBean" %>
+<%@ attribute name="mailbox" rtexprvalue="true" required="true" type="org.zmail.cs.taglib.bean.ZMailboxBean" %>
 <%@ attribute name="calendars" rtexprvalue="true" required="false" %>
 <%@ attribute name="contacts" rtexprvalue="true" required="false" %>
 <%@ attribute name="folders" rtexprvalue="true" required="false" %>
 <%@ attribute name="tags" rtexprvalue="true" required="false" %>
 <%@ attribute name="cache" rtexprvalue="true" required="true" %>
 
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
 
 <c:if test="${mailbox.prefs.useKeyboardShortcuts}">
 
@@ -53,7 +53,7 @@
                 for (var k in actions) if (k.indexOf(keySeq) == 0) return true;
                 return false;
             }
-            var zimbraKeydownHandler = function(ev, obj) {
+            var zmailKeydownHandler = function(ev, obj) {
                 handled = false;
                 var el = YAHOO.util.Event.getTarget(ev);
                 if (el == null || (el.nodeName == 'INPUT' && el.type != 'checkbox') || el.nodeName == 'TEXTAREA') {
@@ -99,13 +99,13 @@
                 if (ev && handled) YAHOO.util.Event.stopEvent(ev);
                 return handled;
             }
-            var zimbraKeypressHandler = function(ev, obj) {
+            var zmailKeypressHandler = function(ev, obj) {
                 if (handled) YAHOO.util.Event.stopEvent(ev);
                 return !handled;
             }
             var init = function() {
-                YAHOO.util.Event.addListener(document, "keydown", zimbraKeydownHandler);
-                YAHOO.util.Event.addListener(document, "keypress", zimbraKeypressHandler);
+                YAHOO.util.Event.addListener(document, "keydown", zmailKeydownHandler);
+                YAHOO.util.Event.addListener(document, "keypress", zmailKeypressHandler);
             }
             YAHOO.util.Event.addListener(window, "load", init);
 

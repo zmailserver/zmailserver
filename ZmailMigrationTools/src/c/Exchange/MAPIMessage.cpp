@@ -402,7 +402,7 @@ LPSTR MAPIMessage::DeliveryUnixString()
     else if (m_pDeliveryUnixDateTimeStr[0] == '\0')
     {
         __int64 unixTime;
-        Zimbra::Util::FileTimeToUnixTime64(m_pMessagePropVals[DELIVERY_DATE].Value.ft,
+        Zmail::Util::FileTimeToUnixTime64(m_pMessagePropVals[DELIVERY_DATE].Value.ft,
             unixTime);                          // server wants this time format
 
         _i64toa(unixTime, m_pDeliveryUnixDateTimeStr, 10);
@@ -446,7 +446,7 @@ std::vector<LPWSTR>* MAPIMessage::SetKeywords()
 	        LPTSTR pKeyword = pPropVal->Value.MVSZ.LPPSZ[i];
 	        LPWSTR pDest = NULL;
 	        CopyString( pDest, pKeyword );
-                LPWSTR pEscapedKeyword = Zimbra::MAPI::Util::EscapeCategoryName(pDest);
+                LPWSTR pEscapedKeyword = Zmail::MAPI::Util::EscapeCategoryName(pDest);
 	        pKeywords->push_back( pEscapedKeyword );
 	    }
         }
@@ -660,7 +660,7 @@ bool MAPIMessage::UTF8EncBody(LPTSTR *ppBody, unsigned int &nTextChars)
     int rbuf = MultiByteToWideChar(CodePageId(), 0, tBuff, cb, pTempBuff, cbuf);
 
     UNREFERENCED_PARAMETER(rbuf);
-    // Zimbra::Rpc::Connection::LogRawText(tBuff,cb,"HTML");
+    // Zmail::Rpc::Connection::LogRawText(tBuff,cb,"HTML");
     delete[] tBuff;
 
     size_t nLen = 0;
@@ -675,7 +675,7 @@ bool MAPIMessage::UTF8EncBody(LPTSTR *ppBody, unsigned int &nTextChars)
     tBuff = new char[(ctbuf + 5) * sizeof (WCHAR)];
     ZeroMemory(tBuff, (ctbuf + 5) * sizeof (WCHAR));
     WideCharToMultiByte(CodePageId(), 0, (LPCWSTR)*ppBody, (int)nLen, tBuff, ctbuf, NULL, NULL);
-    // Zimbra::Rpc::Connection::LogRawText(tBuff,ctbuf,"EXFROMHTML_");
+    // Zmail::Rpc::Connection::LogRawText(tBuff,ctbuf,"EXFROMHTML_");
     delete[] tBuff;
     MAPIFreeBuffer(pTempBuff);
 
@@ -698,7 +698,7 @@ bool MAPIMessage::IsRTFHTML(const char *buf)
     return !strncmp(pFromPtr, "\\fromhtml", 9);
 }
 
-Zimbra::MAPI::MAPIMessage::EnumRTFElement MAPIMessage::MatchRTFElement(const char *psz)
+Zmail::MAPI::MAPIMessage::EnumRTFElement MAPIMessage::MatchRTFElement(const char *psz)
 {
     for (int i = 0; i < END; i++)
     {
@@ -983,7 +983,7 @@ bool MAPIMessage::HtmlBody(LPVOID *ppBody, unsigned int &nHtmlBodyLen)
     return false;
 }
 
-mimepp::Mailbox *Zimbra::MAPI::MakeMimePPMailbox(LPTSTR pDisplayName, LPTSTR pSmtpAddress)
+mimepp::Mailbox *Zmail::MAPI::MakeMimePPMailbox(LPTSTR pDisplayName, LPTSTR pSmtpAddress)
 {
     // scan the display name and replace any non-displayable characters with a space
     LPTSTR p = pDisplayName;
@@ -1133,7 +1133,7 @@ void MAPIMessage::ToMimePPMessage(mimepp::Message &msg)
         msg.headers().fieldBody("Date").setText(DateString());
     }
     if (DeliveryDate() != -1)
-        msg.headers().fieldBody("X-Zimbra-Received").setText(DeliveryDateString());
+        msg.headers().fieldBody("X-Zmail-Received").setText(DeliveryDateString());
     tempRecip.pAddrType = NULL;
     tempRecip.pEmailAddr = NULL;
     tempRecip.cbEid = 0;
@@ -1204,7 +1204,7 @@ void MAPIMessage::ToMimePPMessage(mimepp::Message &msg)
         m_pMessagePropVals[SENT_ADDRTYPE].ulPropTag) != PT_ERROR)) || ((PROP_TYPE(
         m_pMessagePropVals[SENT_ENTRYID].ulPropTag) != PT_ERROR) && (PROP_TYPE(
         m_pMessagePropVals[SENDER_ENTRYID].ulPropTag) != PT_ERROR)))
-        bSameSenderFrom = Zimbra::MAPI::Util::CompareRecipients(*m_session, tempRecip,
+        bSameSenderFrom = Zmail::MAPI::Util::CompareRecipients(*m_session, tempRecip,
             tempRecip1);
     // only add the sender header if its different from the from header
     if (((PROP_TYPE(m_pMessagePropVals[SENDER_ADDRTYPE].ulPropTag) != PT_ERROR) || (PROP_TYPE(
@@ -1212,7 +1212,7 @@ void MAPIMessage::ToMimePPMessage(mimepp::Message &msg)
     {
         wstring strSenderEmail(_TEXT(""));
 
-        hr = Zimbra::MAPI::Util::HrMAPIGetSMTPAddress(*m_session, tempRecip, strSenderEmail);
+        hr = Zmail::MAPI::Util::HrMAPIGetSMTPAddress(*m_session, tempRecip, strSenderEmail);
 
         mimepp::Mailbox *pMbx = MakeMimePPMailbox(MapInvalid(
             m_pMessagePropVals[SENDER_NAME].Value.LPSZ), (LPTSTR)strSenderEmail.c_str());
@@ -1237,7 +1237,7 @@ void MAPIMessage::ToMimePPMessage(mimepp::Message &msg)
     {
         wstring strSenderEmail(_TEXT(""));
 
-        hr = Zimbra::MAPI::Util::HrMAPIGetSMTPAddress(*m_session, tempRecip1, strSenderEmail);
+        hr = Zmail::MAPI::Util::HrMAPIGetSMTPAddress(*m_session, tempRecip1, strSenderEmail);
 
         mimepp::Mailbox *pMbx = NULL;
 
@@ -1276,7 +1276,7 @@ void MAPIMessage::ToMimePPMessage(mimepp::Message &msg)
                 tempRecip.cbEid = pRow->lpProps[RENTRYID].Value.bin.cb;
                 tempRecip.pEid = (LPENTRYID)(pRow->lpProps[RENTRYID].Value.bin.lpb);
 
-                hr = Zimbra::MAPI::Util::HrMAPIGetSMTPAddress(*m_session, tempRecip,
+                hr = Zmail::MAPI::Util::HrMAPIGetSMTPAddress(*m_session, tempRecip,
                     strRecipEmail);
             }
             else
@@ -1370,7 +1370,7 @@ void MAPIMessage::ToMimePPMessage(mimepp::Message &msg)
 
             wstring strRecipEmail(_TEXT(""));
 
-            hr = Zimbra::MAPI::Util::HrMAPIGetSMTPAddress(*m_session, tempRecip, strRecipEmail);
+            hr = Zmail::MAPI::Util::HrMAPIGetSMTPAddress(*m_session, tempRecip, strRecipEmail);
 
             mimepp::Mailbox *pMbx = MakeMimePPMailbox(MapInvalid(
                 pReplyToPropVals[REPLYTO_DISPLAY_NAME].Value.LPSZ),
@@ -1400,7 +1400,7 @@ void MAPIMessage::ToMimePPMessage(mimepp::Message &msg)
         if (nSubjLen > 0)
         {
             LPSTR pMimeSubject = NULL;
-            Zimbra::MAPI::Util::CreateMimeSubject(pSubject, CodePageId(), &pMimeSubject);
+            Zmail::MAPI::Util::CreateMimeSubject(pSubject, CodePageId(), &pMimeSubject);
             mimepp::String subjStr(pMimeSubject);
 
             msg.headers().subject().setText(subjStr);
@@ -1439,15 +1439,15 @@ void MAPIMessage::ToMimePPMessage(mimepp::Message &msg)
     unsigned int nHtmlLen = 0;
     unsigned int nTextChars = 0;
     LPSTR pCharset = NULL;
-    Zimbra::MAPI::Util::CharsetUtil::CharsetStringFromCodePageId(CodePageId(), &pCharset);
+    Zmail::MAPI::Util::CharsetUtil::CharsetStringFromCodePageId(CodePageId(), &pCharset);
     LPMESSAGE pMsg = InternalMessageObject();
     ULONG nBody = 0;
     bool nunicodemsg = false;
 
     if (pMsg)
     {
-        Zimbra::MAPI::Util::StoreUtils *storeUtils =
-            Zimbra::MAPI::Util::StoreUtils::getInstance();
+        Zmail::MAPI::Util::StoreUtils *storeUtils =
+            Zmail::MAPI::Util::StoreUtils::getInstance();
 
         if (storeUtils->Init())
         {
@@ -1496,7 +1496,7 @@ void MAPIMessage::ToMimePPMessage(mimepp::Message &msg)
         WideCharToMultiByte(CodePageId(), 0, pTextBody, nTextChars, pMBBody, nMBBody, NULL,
             NULL);
 
-        Zimbra::MAPI::Util::AddBodyToPart(pTextPart, pMBBody, nMBBody);
+        Zmail::MAPI::Util::AddBodyToPart(pTextPart, pMBBody, nMBBody);
 
         pTextPart->body().assemble();
         if (pMBBody != NULL)
@@ -1513,7 +1513,7 @@ void MAPIMessage::ToMimePPMessage(mimepp::Message &msg)
         ct += ";";
 
         pHtmlPart->headers().contentType().setString(ct);
-		Zimbra::MAPI::Util::AddBodyToPart(pHtmlPart, (LPSTR)pHtmlBody, nHtmlLen);
+		Zmail::MAPI::Util::AddBodyToPart(pHtmlPart, (LPSTR)pHtmlBody, nHtmlLen);
 
         pHtmlPart->body().assemble();
     }
@@ -1606,7 +1606,7 @@ void MAPIMessage::ToMimePPMessage(mimepp::Message &msg)
  *                      else*/
             try
             {
-                pAttachPart = Zimbra::MAPI::Util::AttachPartFromIAttach(*m_session, pAttach,
+                pAttachPart = Zmail::MAPI::Util::AttachPartFromIAttach(*m_session, pAttach,
                     pCharset, CodePageId());
             }
             catch (...)
@@ -1706,7 +1706,7 @@ BOOL MessageIterator::GetNext(__int64 &date, SBinary &bin)
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 // MessageIterator::MIRestriction
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-Zimbra::MAPI::MIRestriction::MIRestriction()
+Zmail::MAPI::MIRestriction::MIRestriction()
 {
     // Task
     _pTaskClass = new WCHAR[10];

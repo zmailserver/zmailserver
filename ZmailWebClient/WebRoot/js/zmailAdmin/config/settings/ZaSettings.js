@@ -50,8 +50,8 @@ ZaSettings.postInit = function() {
 
     appController._lauchNewApp();
 
-    if (ZaZimbraAdmin.isWarnOnExit) {
-	    ZaZimbraAdmin.setOnbeforeunload(ZaZimbraAdmin._confirmExitMethod);
+    if (ZaZmailAdmin.isWarnOnExit) {
+	    ZaZmailAdmin.setOnbeforeunload(ZaZmailAdmin._confirmExitMethod);
     }
 	ZaSettings.initialized = true;
 	ZaSettings.initializing = false;
@@ -59,39 +59,39 @@ ZaSettings.postInit = function() {
 
 ZaSettings.initRights = function () {
 	ZaSettings.ENABLED_UI_COMPONENTS=[];
-	ZaZimbraAdmin.currentAdminAccount = new ZaAccount();
+	ZaZmailAdmin.currentAdminAccount = new ZaAccount();
 	try {
-		if(ZaZimbraAdmin.currentAdminId) {
-			ZaZimbraAdmin.currentAdminAccount.load("id", ZaZimbraAdmin.currentAdminId,false,true);
+		if(ZaZmailAdmin.currentAdminId) {
+			ZaZmailAdmin.currentAdminAccount.load("id", ZaZmailAdmin.currentAdminId,false,true);
 		} else {
-			ZaZimbraAdmin.currentAdminAccount.load("name", ZaZimbraAdmin.currentUserLogin,false,true);
+			ZaZmailAdmin.currentAdminAccount.load("name", ZaZmailAdmin.currentUserLogin,false,true);
 		}
 	} catch (ex) {
 		//account may fail to load due to failing admin extensions 
 	}
 	//if this is a system admin account - enable access to all UI elements
-	if(ZaZimbraAdmin.currentAdminAccount.attrs[ZaAccount.A_zimbraIsAdminAccount] == 'TRUE') {
+	if(ZaZmailAdmin.currentAdminAccount.attrs[ZaAccount.A_zmailIsAdminAccount] == 'TRUE') {
 		ZaSettings.ENABLED_UI_COMPONENTS[ZaSettings.CARTE_BLANCHE_UI] = true;
 	}	
-	if(AjxUtil.isEmpty(ZaZimbraAdmin.currentAdminAccount.attrs[ZaAccount.A_zimbraAdminConsoleUIComponents])) {
-		ZaZimbraAdmin.currentAdminAccount.attrs[ZaAccount.A_zimbraAdminConsoleUIComponents] = [];
+	if(AjxUtil.isEmpty(ZaZmailAdmin.currentAdminAccount.attrs[ZaAccount.A_zmailAdminConsoleUIComponents])) {
+		ZaZmailAdmin.currentAdminAccount.attrs[ZaAccount.A_zmailAdminConsoleUIComponents] = [];
 	} else {
-		if(typeof(ZaZimbraAdmin.currentAdminAccount.attrs[ZaAccount.A_zimbraAdminConsoleUIComponents])=="string") {
-			ZaZimbraAdmin.currentAdminAccount.attrs[ZaAccount.A_zimbraAdminConsoleUIComponents] = [ZaZimbraAdmin.currentAdminAccount.attrs[ZaAccount.A_zimbraAdminConsoleUIComponents]];
-			//ZaSettings.ENABLED_UI_COMPONENTS[ZaZimbraAdmin.currentAdminAccount.attrs[ZaAccount.A_zimbraAdminConsoleUIComponents]] = true;		
+		if(typeof(ZaZmailAdmin.currentAdminAccount.attrs[ZaAccount.A_zmailAdminConsoleUIComponents])=="string") {
+			ZaZmailAdmin.currentAdminAccount.attrs[ZaAccount.A_zmailAdminConsoleUIComponents] = [ZaZmailAdmin.currentAdminAccount.attrs[ZaAccount.A_zmailAdminConsoleUIComponents]];
+			//ZaSettings.ENABLED_UI_COMPONENTS[ZaZmailAdmin.currentAdminAccount.attrs[ZaAccount.A_zmailAdminConsoleUIComponents]] = true;		
 		}	
-		var cnt = ZaZimbraAdmin.currentAdminAccount.attrs[ZaAccount.A_zimbraAdminConsoleUIComponents].length;
+		var cnt = ZaZmailAdmin.currentAdminAccount.attrs[ZaAccount.A_zmailAdminConsoleUIComponents].length;
 		for(var i=0;i<cnt;i++) {
-			ZaSettings.ENABLED_UI_COMPONENTS[ZaZimbraAdmin.currentAdminAccount.attrs[ZaAccount.A_zimbraAdminConsoleUIComponents][i]] = true;
+			ZaSettings.ENABLED_UI_COMPONENTS[ZaZmailAdmin.currentAdminAccount.attrs[ZaAccount.A_zmailAdminConsoleUIComponents][i]] = true;
 		}
 	}
 	//load global permissions, e.g. createTopDomain, createCos
-	var soapDoc = AjxSoapDoc.create("GetEffectiveRightsRequest", ZaZimbraAdmin.URN, null);
+	var soapDoc = AjxSoapDoc.create("GetEffectiveRightsRequest", ZaZmailAdmin.URN, null);
 	var elTarget = soapDoc.set("target", "");
 	elTarget.setAttribute("type","global");
 
 
-	var elGrantee = soapDoc.set("grantee", ZaZimbraAdmin.currentUserId);
+	var elGrantee = soapDoc.set("grantee", ZaZmailAdmin.currentUserId);
 	elGrantee.setAttribute("by","id");
 	
 	var csfeParams = new Object();
@@ -101,7 +101,7 @@ ZaSettings.initRights = function () {
 	reqMgrParams.busyMsg = ZaMsg.BUSY_REQUESTING_ACCESS_RIGHTS ;
 	try {
 		var resp = ZaRequestMgr.invoke(csfeParams, reqMgrParams ).Body.GetEffectiveRightsResponse;
-		ZaZimbraAdmin.currentAdminAccount.initEffectiveRightsFromJS(resp);
+		ZaZmailAdmin.currentAdminAccount.initEffectiveRightsFromJS(resp);
 	} catch (ex) {
 		//not implemented yet
 	}	
@@ -115,7 +115,7 @@ ZaSettings.initRights = function () {
 ZaSettings.initMethods.push(ZaSettings.initRights);
 
 ZaSettings.getUIComponents = function (item) {
-    soapDoc = AjxSoapDoc.create("GetAdminConsoleUICompRequest", ZaZimbraAdmin.URN, null);
+    soapDoc = AjxSoapDoc.create("GetAdminConsoleUICompRequest", ZaZmailAdmin.URN, null);
 	if (item && item.type && item.id) {
         var el = soapDoc.set(item.type, item.id) ;
         el.setAttribute("by", "id");
@@ -166,7 +166,7 @@ ZaSettings.init = function () {
 	
 
 	try {
-		var soapDoc = AjxSoapDoc.create("GetAdminExtensionZimletsRequest", ZaZimbraAdmin.URN, null);
+		var soapDoc = AjxSoapDoc.create("GetAdminExtensionZimletsRequest", ZaZmailAdmin.URN, null);
                 var command = new ZmCsfeCommand();
                 var params = new Object();
                 params.soapDoc = soapDoc;
@@ -194,7 +194,7 @@ ZaSettings.init = function () {
 						ZaSettings.EnabledZimlet[zimlet.name] = true;
 	                    //if(window.console && window.console.log) console.log("Adding zimlet: " + zimlet.name);
 	                    //load message file first because consequent files may reference it
-	                    			includes.push([appContextPath, "/res/", zimlet.name, ".js?v=",appVers,ZaZimbraAdmin.LOCALE_QS].join(""));
+	                    			includes.push([appContextPath, "/res/", zimlet.name, ".js?v=",appVers,ZaZmailAdmin.LOCALE_QS].join(""));
 						if(zimlet.include && zimlet.include.length>0) {
 							var cnt2 = zimlet.include.length;
 							for (var j=0;j<cnt2;j++) {
@@ -241,7 +241,7 @@ ZaSettings.init = function () {
 					}
 				}
 			}
-			var zimletURL = ["/service/zimlet/res/Zimlets-nodev_all.js.zgz", ".js?v=",appVers,ZaZimbraAdmin.LOCALE_QS].join("");
+			var zimletURL = ["/service/zimlet/res/Zimlets-nodev_all.js.zgz", ".js?v=",appVers,ZaZmailAdmin.LOCALE_QS].join("");
 			AjxInclude([zimletURL], null,new AjxCallback(ZaSettings.postInit ));
 		}
 	} catch (ex) {
@@ -279,18 +279,18 @@ ZaSettings.D_INT			= 2;
 ZaSettings.D_BOOLEAN		= 3;
 ZaSettings.D_LDAP_TIME 	= 4;
 ZaSettings.D_HASH_TABLE 	= 5;
-ZaSettings.LOGO_URI = "http://www.zimbra.com";
+ZaSettings.LOGO_URI = "http://www.zmail.com";
 ZaSettings.CSFE_SERVER_URI = (location.port == "80") ? "/service/admin/soap/" : ":" + location.port + "/service/admin/soap/";
 ZaSettings.CSFE_MSG_FETCHER_URI = (location.port == "80") ? "/service/content/get?" : ":" + location.port + "/service/content/get?";
-ZaSettings.CONFIG_PATH = location.pathname + "js/zimbraAdmin/config";
+ZaSettings.CONFIG_PATH = location.pathname + "js/zmailAdmin/config";
 //ZaSettings.ADMIN_NAME_COOKIE = "ZA_ADMIN_NAME_COOKIE";
 ZaSettings.myDomainName = null;
-ZaSettings.ZIMBRA_SUPPORT_URL = "http://support.zimbra.com/help/index.php";
+ZaSettings.ZIMBRA_SUPPORT_URL = "http://support.zmail.com/help/index.php";
 ZaSettings.ZIMBRA_SUPPORT_URL_QUERY = ZaSettings.ZIMBRA_SUPPORT_URL + "?query=";
 
 //CONSTANTS FOR ROLE-BASED ACCESS
 /**
- * In order for an admin to be able to access a UI component, zimbraAdminConsoleUIComponents attribute of the admin's account should contain the corresponding values listed below
+ * In order for an admin to be able to access a UI component, zmailAdminConsoleUIComponents attribute of the admin's account should contain the corresponding values listed below
  */
 //carte blanche - gives access to any UI element
 ZaSettings.CARTE_BLANCHE_UI = "cartBlancheUI";
@@ -797,8 +797,8 @@ ZaSettings.getLocaleChoices = function () {
 
     if (! ZaSettings.localeChoices) {
        //getAllLocalesRequest
-//        var soapDoc = AjxSoapDoc.create("GetAllLocalesRequest", ZaZimbraAdmin.URN, null);
-        var soapDoc = AjxSoapDoc.create("GetAvailableLocalesRequest", "urn:zimbraAccount", null);
+//        var soapDoc = AjxSoapDoc.create("GetAllLocalesRequest", ZaZmailAdmin.URN, null);
+        var soapDoc = AjxSoapDoc.create("GetAvailableLocalesRequest", "urn:zmailAccount", null);
         var params = {};
         params.soapDoc = soapDoc;
         var reqMgrParams = {

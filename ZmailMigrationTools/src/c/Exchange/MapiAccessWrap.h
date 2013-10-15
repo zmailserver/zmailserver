@@ -69,7 +69,7 @@ END_COM_MAP()
 	}
 
 public:
-    Zimbra::MAPI::MAPIAccessAPI *maapi;
+    Zmail::MAPI::MAPIAccessAPI *maapi;
 
     STDMETHOD(UserInit) (BSTR userName, BSTR userAccount, BSTR *statusMsg);
     STDMETHOD(GetFolderList) (VARIANT * folders);

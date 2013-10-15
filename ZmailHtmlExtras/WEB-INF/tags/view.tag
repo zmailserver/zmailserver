@@ -20,9 +20,9 @@
 <%@ attribute name="calendars" rtexprvalue="true" required="false" %>
 <%@ attribute name="ads" rtexprvalue="true" required="false" %>
 <%@ attribute name="tags" rtexprvalue="true" required="false" %>
-<%@ attribute name="mailbox" rtexprvalue="true" required="true" type="com.zimbra.cs.taglib.bean.ZMailboxBean" %>
-<%@ taglib prefix="app" uri="com.zimbra.htmlextras" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
+<%@ attribute name="mailbox" rtexprvalue="true" required="true" type="org.zmail.cs.taglib.bean.ZMailboxBean" %>
+<%@ taglib prefix="app" uri="org.zmail.htmlextras" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -62,7 +62,7 @@
 	<table border=0 cellpadding=0 cellspacing=0 width=100%>
 	<tr>
 		<td class="leftPane">
-			<a href="http://www.zimbra.com" target="_blank"><app:img src="zimbra_logo.gif" width='150' height='50' border='0'/></a><br><br>
+			<a href="http://www.zmail.com" target="_blank"><app:img src="zmail_logo.gif" width='150' height='50' border='0'/></a><br><br>
 		</td>
 	    <td valign=top colspan=2>
 			<form method="get" action="clv">
@@ -97,18 +97,18 @@
 			<tr>
 				<td class="quota">
 	                <fmt:message var="unlimited" key="unlimited"/>
-	                <c:set var="max" value="${mailbox.attrs.zimbraMailQuota[0]}"/>
+	                <c:set var="max" value="${mailbox.attrs.zmailMailQuota[0]}"/>
 					You are currently using ${zm:displaySize(mailbox.size)}
 					of ${max==0 ? unlimited : zm:displaySize(max)}.
 				</td>
 			</tr>
 			<tr>
 				<td class="footer footer-small">
-					<span class="copyright">&copy;2007 Zimbra Inc.</span>
-					<a href="http://www.zimbra.com/legal.html#copyright" target="_blank"><fmt:message key="copyright"/></a> -
-					<a href="http://www.zimbra.com/privacy.html" target="_blank"><fmt:message key="privacyPolicy"/></a> -
-					<a href="http://www.zimbra.com/license/" target="_blank"><fmt:message key="license"/></a> -
-					<a href="http://www.zimbra.com/legal.html" target="_blank"><fmt:message key="trademarks"/></a>
+					<span class="copyright">&copy;2007 Zmail Inc.</span>
+					<a href="http://www.zmail.com/legal.html#copyright" target="_blank"><fmt:message key="copyright"/></a> -
+					<a href="http://www.zmail.com/privacy.html" target="_blank"><fmt:message key="privacyPolicy"/></a> -
+					<a href="http://www.zimbra.com/license." target="_blank"><fmt:message key="license"/></a> -
+					<a href="http://www.zmail.com/legal.html" target="_blank"><fmt:message key="trademarks"/></a>
 				</td>
 			</tr>
 			</table>

@@ -12,21 +12,21 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.session;
+package org.zmail.cs.session;
 
 import java.util.Iterator;
 import java.util.List;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.offline.OfflineSyncManager;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.service.util.ItemIdFormatter;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.offline.OfflineSyncManager;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.service.util.ItemIdFormatter;
+import org.zmail.soap.ZmailSoapContext;
 
 public class OfflineSoapSession extends SoapSession {
 
-    public OfflineSoapSession(ZimbraSoapContext zsc) {
+    public OfflineSoapSession(ZmailSoapContext zsc) {
         super(zsc);
     }
 

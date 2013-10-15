@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.calendar.appointments.views.month.singleday;
+package org.zmail.qa.selenium.projects.ajax.tests.calendar.appointments.views.month.singleday;
 
 import java.util.*;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.items.AppointmentItem;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.items.AppointmentItem;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
 
 
 public class GetAppointment extends AjaxCommonTest {
@@ -39,7 +39,7 @@ public class GetAppointment extends AjaxCommonTest {
 
 		// Make sure we are using an account with message view
 		super.startingAccountPreferences = new HashMap<String, String>() {{
-		    put("zimbraPrefCalendarInitialView", "month");
+		    put("zmailPrefCalendarInitialView", "month");
 		}};
 
 
@@ -52,7 +52,7 @@ public class GetAppointment extends AjaxCommonTest {
 		
 		// Create the appointment on the server
 		// Create the message data to be sent
-		String subject = "appointment" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "appointment" + ZmailSeleniumProperties.getUniqueString();
 		
 		AppointmentItem.createAppointmentSingleDay(
 				app.zGetActiveAccount(),
@@ -60,8 +60,8 @@ public class GetAppointment extends AjaxCommonTest {
 				120,
 				null,
 				subject,
-				"content" + ZimbraSeleniumProperties.getUniqueString(),
-				"location" + ZimbraSeleniumProperties.getUniqueString(),
+				"content" + ZmailSeleniumProperties.getUniqueString(),
+				"location" + ZmailSeleniumProperties.getUniqueString(),
 				null);
 
 		

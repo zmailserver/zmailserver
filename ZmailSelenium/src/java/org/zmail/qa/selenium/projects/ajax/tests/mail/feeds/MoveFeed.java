@@ -14,18 +14,18 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.feeds;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.feeds;
 
 import java.net.*;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogMove;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogMove;
 
 
 public class MoveFeed extends PrefGroupMailByMessageTest {
@@ -46,11 +46,11 @@ public class MoveFeed extends PrefGroupMailByMessageTest {
 		FolderItem inbox = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Inbox);
 		ZAssert.assertNotNull(inbox, "Verify the inbox is available");
 		
-		String feedname = "feed" + ZimbraSeleniumProperties.getUniqueString();
+		String feedname = "feed" + ZmailSeleniumProperties.getUniqueString();
 		URL feedurl = new URL("http", "rss.news.yahoo.com", 80, "/rss/topstories");
 
 		app.zGetActiveAccount().soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>"
+					"<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+		"<folder name='"+ feedname +"' l='"+ inbox.getId() +"' url='"+ feedurl.toString() +"'/>"
 				+	"</CreateFolderRequest>");
 
@@ -58,10 +58,10 @@ public class MoveFeed extends PrefGroupMailByMessageTest {
 		ZAssert.assertNotNull(feed, "Verify the subfolder is available");
 
 		// Create destination folder
-		String foldername = "folder" + ZimbraSeleniumProperties.getUniqueString();
+		String foldername = "folder" + ZmailSeleniumProperties.getUniqueString();
 		
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+				"<CreateFolderRequest xmlns='urn:zmailMail'>" +
                 	"<folder name='"+ foldername +"' l='"+ inbox.getId() +"'/>" +
                 "</CreateFolderRequest>");
 

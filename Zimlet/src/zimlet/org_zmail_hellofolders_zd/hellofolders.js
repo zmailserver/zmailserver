@@ -14,25 +14,25 @@
  *@Author Raja Rao DV
  */
 
-function com_zimbra_hellofolders_zd() {
+function org_zmail_hellofolders_zd() {
 }
-com_zimbra_hellofolders_zd.prototype = new ZmZimletBase();
-com_zimbra_hellofolders_zd.prototype.constructor = com_zimbra_hellofolders_zd;
+org_zmail_hellofolders_zd.prototype = new ZmZimletBase();
+org_zmail_hellofolders_zd.prototype.constructor = org_zmail_hellofolders_zd;
 
-com_zimbra_hellofolders_zd.prototype._getAccountId =
+org_zmail_hellofolders_zd.prototype._getAccountId =
 function(accountType) {
-	if(accountType == "defaultAccount") {//first non-local account (could be a Zimbra account as well)
+	if(accountType == "defaultAccount") {//first non-local account (could be a Zmail account as well)
 		return appCtxt.accountList.defaultAccount.id;
-	} else if(accountType == "zimbraAccount") {// first Zimbra account
-		if(this._zimbraAccountId) {
-			return this._zimbraAccountId;
+	} else if(accountType == "zmailAccount") {// first Zmail account
+		if(this._zmailAccountId) {
+			return this._zmailAccountId;
 		}
 		var aList = appCtxt.accountList.visibleAccounts;
 	   	for(var i=0; i < aList.length; i++) {
 			   var acc = aList[i];
 			   var accId = acc.id;
-	   		if(acc.isZimbraAccount && accId != "ffffffff-ffff-ffff-ffff-ffffffffffff") {
-	   			this._zimbraAccountId = accId;
+	   		if(acc.isZmailAccount && accId != "ffffffff-ffff-ffff-ffff-ffffffffffff") {
+	   			this._zmailAccountId = accId;
 	   			return accId;
 	   		}
 	   	}
@@ -41,7 +41,7 @@ function(accountType) {
 	}
 };
 
-com_zimbra_hellofolders_zd.prototype.singleClicked =
+org_zmail_hellofolders_zd.prototype.singleClicked =
 function(accountType) {
 	if(!accountType) {
 		accountType = "defaultAccount";
@@ -55,12 +55,12 @@ function(accountType) {
 };
 
 
-com_zimbra_hellofolders_zd.prototype.doubleClicked =
+org_zmail_hellofolders_zd.prototype.doubleClicked =
 function() {
 	this.singleClicked();
 };
 
-com_zimbra_hellofolders_zd.prototype.menuItemSelected = 
+org_zmail_hellofolders_zd.prototype.menuItemSelected = 
 function(itemId) {
 	var msg = "";
 	switch (itemId) {
@@ -70,13 +70,13 @@ function(itemId) {
 		case "hellofolderszd_activeAccount":
 			this.singleClicked("activeAccount");
 			break;
-		case "hellofolderszd_zimbraAccount":
-			this.singleClicked("zimbraAccount");
+		case "hellofolderszd_zmailAccount":
+			this.singleClicked("zmailAccount");
 			break;
 	}
 };
 
-com_zimbra_hellofolders_zd.prototype._createRSSFeed =
+org_zmail_hellofolders_zd.prototype._createRSSFeed =
 function() {
 		var folderName = 'FolderFromZimlet' + (new Date()).getTime();
 		var view = "message";
@@ -85,9 +85,9 @@ function() {
 };
 
 
-com_zimbra_hellofolders_zd.prototype._createFolder =
+org_zmail_hellofolders_zd.prototype._createFolder =
 function(params) {
-	var jsonObj = {CreateFolderRequest:{_jsns:"urn:zimbraMail"}};
+	var jsonObj = {CreateFolderRequest:{_jsns:"urn:zmailMail"}};
 	var folder = jsonObj.CreateFolderRequest.folder = {};
 	//add properties in name=values
 	for (var i in params) {
@@ -105,9 +105,9 @@ function(params) {
 };
 
 
-com_zimbra_hellofolders_zd.prototype._createFldrCallback =
+org_zmail_hellofolders_zd.prototype._createFldrCallback =
 function(params, response) {
-	if(params.name == com_zimbra_hellofolders_zd.hellofoldersFolder) {
+	if(params.name == org_zmail_hellofolders_zd.hellofoldersFolder) {
 		this.mainRssFeedFldrId = response.getResponse().CreateFolderResponse.folder[0].id;
 		if (params.postCallback){
 			params.postCallback.run(this);
@@ -118,7 +118,7 @@ function(params, response) {
 	}
 };
 
-com_zimbra_hellofolders_zd.prototype._createFldrErrCallback =
+org_zmail_hellofolders_zd.prototype._createFldrErrCallback =
 function(params, ex) {
 	if (!params.url && !params.name) {
 		return false; 
@@ -142,7 +142,7 @@ function(params, ex) {
 	return false;
 };
 
-com_zimbra_hellofolders_zd.prototype._showErrorMsg =
+org_zmail_hellofolders_zd.prototype._showErrorMsg =
 function(msg) {
 	var msgDialog = appCtxt.getMsgDialog();
 	msgDialog.reset();

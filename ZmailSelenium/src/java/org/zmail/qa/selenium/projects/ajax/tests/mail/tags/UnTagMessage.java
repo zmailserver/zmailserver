@@ -14,15 +14,15 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.tags;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.tags;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
 
 public class UnTagMessage extends PrefGroupMailByMessageTest {
 
@@ -35,12 +35,12 @@ public class UnTagMessage extends PrefGroupMailByMessageTest {
 	@Test(description = "Remove a tag from a message using Toolbar -> Tag -> New Tag", groups = { "smoke" })
 	public void UnTagMessage_01() throws HarnessException {
 
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String tagname = "tag" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String tagname = "tag" + ZmailSeleniumProperties.getUniqueString();
 
 		// Create a tag
 		app.zGetActiveAccount().soapSend(
-				"<CreateTagRequest xmlns='urn:zimbraMail'>" + "<tag name='"
+				"<CreateTagRequest xmlns='urn:zmailMail'>" + "<tag name='"
 						+ tagname + "' color='1' />" + "</CreateTagRequest>");
 		String tagid = app.zGetActiveAccount().soapSelectValue(
 				"//mail:CreateTagResponse/mail:tag", "id");
@@ -49,7 +49,7 @@ public class UnTagMessage extends PrefGroupMailByMessageTest {
 		FolderItem inboxFolder = FolderItem.importFromSOAP(app
 				.zGetActiveAccount(), SystemFolder.Inbox);
 		app.zGetActiveAccount().soapSend(
-				"<AddMsgRequest xmlns='urn:zimbraMail'>" + "<m l='"
+				"<AddMsgRequest xmlns='urn:zmailMail'>" + "<m l='"
 						+ inboxFolder.getId() + "' t='" + tagid + "'>"
 						+ "<content>From: foo@foo.com\n" + "To: foo@foo.com \n"
 						+ "Subject: " + subject + "\n" + "MIME-Version: 1.0 \n"
@@ -73,7 +73,7 @@ public class UnTagMessage extends PrefGroupMailByMessageTest {
 				Button.O_TAG_REMOVETAG);
 
 		app.zGetActiveAccount().soapSend(
-				"<GetMsgRequest xmlns='urn:zimbraMail'>" + "<m id='"
+				"<GetMsgRequest xmlns='urn:zmailMail'>" + "<m id='"
 						+ mail.getId() + "'/>" + "</GetMsgRequest>");
 		String mailTags = app.zGetActiveAccount().soapSelectValue(
 				"//mail:GetMsggResponse//mail:m", "t");

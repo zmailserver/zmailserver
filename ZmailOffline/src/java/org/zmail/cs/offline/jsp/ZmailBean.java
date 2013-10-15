@@ -12,29 +12,29 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.jsp;
+package org.zmail.cs.offline.jsp;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import com.zimbra.common.account.ProvisioningConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.SoapFaultException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.offline.OfflineLog;
-import com.zimbra.cs.offline.common.OfflineConstants;
-import com.zimbra.cs.offline.common.OfflineConstants.SyncMsgOptions;
-import com.zimbra.cs.offline.jsp.JspConstants.JspVerb;
-import com.zimbra.soap.type.DataSource.ConnectionType;
+import org.zmail.common.account.ProvisioningConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.SoapFaultException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.offline.OfflineLog;
+import org.zmail.cs.offline.common.OfflineConstants;
+import org.zmail.cs.offline.common.OfflineConstants.SyncMsgOptions;
+import org.zmail.cs.offline.jsp.JspConstants.JspVerb;
+import org.zmail.soap.type.DataSource.ConnectionType;
 
 public class ZmailBean extends MailBean {
     public ZmailBean() {
         port = "443";
         connectionType = ConnectionType.ssl;
         syncFreqSecs = 0;
-        type = "zimbra";
+        type = "zmail";
     }
 
     @Override
@@ -47,7 +47,7 @@ public class ZmailBean extends MailBean {
             return;
         }
         accountFlavor = account.getAttr(OfflineConstants.A_offlineAccountFlavor);
-        accountName = account.getAttr(Provisioning.A_zimbraPrefLabel);
+        accountName = account.getAttr(Provisioning.A_zmailPrefLabel);
         accountName = accountName != null ? accountName :
             account.getAttr(OfflineConstants.A_offlineAccountName);
         email = account.getName();
@@ -105,7 +105,7 @@ public class ZmailBean extends MailBean {
                 if (isAllOK()) {
                     attrs.put(OfflineConstants.A_offlineAccountSetup, ProvisioningConstants.TRUE);
 
-                    attrs.put(Provisioning.A_zimbraPrefLabel, accountName);
+                    attrs.put(Provisioning.A_zmailPrefLabel, accountName);
                     attrs.put(OfflineConstants.A_offlineRemoteServerUri,
                         getRemoteServerUri());
                     attrs.put(OfflineConstants.A_offlineSyncFreq,

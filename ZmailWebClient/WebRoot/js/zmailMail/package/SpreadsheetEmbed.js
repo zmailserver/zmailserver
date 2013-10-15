@@ -13,14 +13,14 @@
  * ***** END LICENSE BLOCK *****
  */
 
-AjxPackage.require("zimbraMail.share.view.htmlEditor.ZmSpellChecker");
-AjxPackage.require("zimbraMail.share.view.htmlEditor.ZmHtmlEditor");
+AjxPackage.require("zmailMail.share.view.htmlEditor.ZmSpellChecker");
+AjxPackage.require("zmailMail.share.view.htmlEditor.ZmHtmlEditor");
 
-AjxPackage.require("zimbraMail.ale.spreadsheet.msgs");
+AjxPackage.require("zmailMail.ale.spreadsheet.msgs");
 
-AjxPackage.require("zimbraMail.ale.spreadsheet.ZmSpreadSheet");
-AjxPackage.require("zimbraMail.ale.spreadsheet.ZmSpreadSheetModel");
-AjxPackage.require("zimbraMail.ale.spreadsheet.ZmSpreadSheetFormulae");
-AjxPackage.require("zimbraMail.ale.spreadsheet.ZmSpreadSheetToolbars");
+AjxPackage.require("zmailMail.ale.spreadsheet.ZmSpreadSheet");
+AjxPackage.require("zmailMail.ale.spreadsheet.ZmSpreadSheetModel");
+AjxPackage.require("zmailMail.ale.spreadsheet.ZmSpreadSheetFormulae");
+AjxPackage.require("zmailMail.ale.spreadsheet.ZmSpreadSheetToolbars");
 
-AjxPackage.require("zimbraMail.ale.spreadsheet.test-embed");
+AjxPackage.require("zmailMail.ale.spreadsheet.test-embed");

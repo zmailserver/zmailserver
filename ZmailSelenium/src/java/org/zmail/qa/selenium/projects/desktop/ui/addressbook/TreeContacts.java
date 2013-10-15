@@ -17,18 +17,18 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.desktop.ui.addressbook;
+package org.zmail.qa.selenium.projects.desktop.ui.addressbook;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties.AppType;
-import com.zimbra.qa.selenium.projects.desktop.ui.AppAjaxClient;
-import com.zimbra.qa.selenium.projects.desktop.ui.DialogTag;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties.AppType;
+import org.zmail.qa.selenium.projects.desktop.ui.AppAjaxClient;
+import org.zmail.qa.selenium.projects.desktop.ui.DialogTag;
 
 
 /**
- * @author zimbra
+ * @author zmail
  *
  */
 public class TreeContacts extends AbsTree {
@@ -67,9 +67,9 @@ public class TreeContacts extends AbsTree {
 		
 		if ( action == Action.A_LEFTCLICK ) {
 			
-			if (ZimbraSeleniumProperties.getAppType() == AppType.DESKTOP) {
+			if (ZmailSeleniumProperties.getAppType() == AppType.DESKTOP) {
 			   String emailAddress = folder.isDesktopClientLocalFolder() ? 
-	               ZimbraAccount.clientAccountName :
+	               ZmailAccount.clientAccountName :
 	                  MyApplication.zGetActiveAccount().EmailAddress;
 			   String folderIdSuffix = folder.isDesktopClientLocalFolder() ? 
 			         "_" + folder.getId() :

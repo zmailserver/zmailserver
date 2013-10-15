@@ -14,7 +14,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-//Author: Raja Rao DV (rrao@zimbra.com): modified the below code to jsp format from java
+//Author: Raja Rao DV (rrao@zmail.com): modified the below code to jsp format from java
 --%>
 <%--
 Copyright (c) 2007-2009, Yusuke Yamamoto

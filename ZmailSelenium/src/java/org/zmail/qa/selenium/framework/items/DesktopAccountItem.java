@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.items;
+package org.zmail.qa.selenium.framework.items;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.OperatingSystem;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.framework.util.OperatingSystem.OsType;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.OperatingSystem;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.framework.util.OperatingSystem.OsType;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
 
 public class DesktopAccountItem implements IItem {
    private static final Logger logger = LogManager.getLogger(DesktopAccountItem.class);
@@ -56,22 +56,22 @@ public class DesktopAccountItem implements IItem {
    }
 
    /**
-    * Generate Desktop's Zimbra account Item with specified email address
-    * @param emailAddress Email Address of Zimbra Account
-    * @param password Password of Zimbra Account
-    * @param port Port to access the Zimbra Account
-    * @param incomingServer Zimbra Mail Server, if null, then it will pick the default from config.properties
+    * Generate Desktop's Zmail account Item with specified email address
+    * @param emailAddress Email Address of Zmail Account
+    * @param password Password of Zmail Account
+    * @param port Port to access the Zmail Account
+    * @param incomingServer Zmail Mail Server, if null, then it will pick the default from config.properties
     * @param ssl SSL triggered or not
-    * @return Desktop Zimbra Account Item
+    * @return Desktop Zmail Account Item
     */
-   public static DesktopAccountItem generateDesktopZimbraAccountItem(String emailAddress,
+   public static DesktopAccountItem generateDesktopZmailAccountItem(String emailAddress,
          String password, String port, String incomingServer, boolean ssl) {
       DesktopAccountItem desktopAccountItem = new DesktopAccountItem();
-      desktopAccountItem.accountName = "name" + ZimbraSeleniumProperties.getUniqueString();
+      desktopAccountItem.accountName = "name" + ZmailSeleniumProperties.getUniqueString();
       desktopAccountItem.emailAddress = emailAddress;
       desktopAccountItem.password = password;
       desktopAccountItem.incomingServer = (incomingServer == null) ?
-            ZimbraAccount.AccountZDC().ZimbraMailHost : incomingServer;
+            ZmailAccount.AccountZDC().ZmailMailHost : incomingServer;
       desktopAccountItem.port = port;
       desktopAccountItem.ssl = ssl;
 
@@ -79,17 +79,17 @@ public class DesktopAccountItem implements IItem {
    }
 
    /**
-    * Generate Desktop's Zimbra account Item with specified email address with default incoming server
-    * @param emailAddress Email Address of Zimbra Account
-    * @param password Password of Zimbra Account
-    * @param port Port to access the Zimbra Account
+    * Generate Desktop's Zmail account Item with specified email address with default incoming server
+    * @param emailAddress Email Address of Zmail Account
+    * @param password Password of Zmail Account
+    * @param port Port to access the Zmail Account
     * @param ssl SSL triggered or not
-    * @return Desktop Zimbra Account Item
+    * @return Desktop Zmail Account Item
     */
-   public static DesktopAccountItem generateDesktopZimbraAccountItem(String emailAddress,
+   public static DesktopAccountItem generateDesktopZmailAccountItem(String emailAddress,
          String password, String port, boolean ssl) {
 
-      return generateDesktopZimbraAccountItem(emailAddress, password, port, null, ssl);
+      return generateDesktopZmailAccountItem(emailAddress, password, port, null, ssl);
    }
 
    /**
@@ -107,8 +107,8 @@ public class DesktopAccountItem implements IItem {
                "Fail due to bug 61517, also refers to helpzilla ticket #811085");
       }
       DesktopAccountItem desktopAccountItem = new DesktopAccountItem();
-      desktopAccountItem.accountName = "name" + ZimbraSeleniumProperties.getUniqueString();
-      desktopAccountItem.fullName = "Yahoo" + ZimbraSeleniumProperties.getUniqueString();
+      desktopAccountItem.accountName = "name" + ZmailSeleniumProperties.getUniqueString();
+      desktopAccountItem.fullName = "Yahoo" + ZmailSeleniumProperties.getUniqueString();
       desktopAccountItem.emailAddress = emailAddress;
       desktopAccountItem.password = password;
 
@@ -130,8 +130,8 @@ public class DesktopAccountItem implements IItem {
                "Fail due to bug 61517, also refers to helpzilla ticket #811085");
       }
       DesktopAccountItem desktopAccountItem = new DesktopAccountItem();
-      desktopAccountItem.accountName = "name" + ZimbraSeleniumProperties.getUniqueString();
-      desktopAccountItem.fullName = "Gmail" + ZimbraSeleniumProperties.getUniqueString();
+      desktopAccountItem.accountName = "name" + ZmailSeleniumProperties.getUniqueString();
+      desktopAccountItem.fullName = "Gmail" + ZmailSeleniumProperties.getUniqueString();
       desktopAccountItem.emailAddress = emailAddress;
       desktopAccountItem.password = password;
 
@@ -182,8 +182,8 @@ public class DesktopAccountItem implements IItem {
       }
 
       DesktopAccountItem desktopAccountItem = new DesktopAccountItem();
-      desktopAccountItem.accountName = "name" + ZimbraSeleniumProperties.getUniqueString();
-      desktopAccountItem.fullName = "Imap" + ZimbraSeleniumProperties.getUniqueString();
+      desktopAccountItem.accountName = "name" + ZmailSeleniumProperties.getUniqueString();
+      desktopAccountItem.fullName = "Imap" + ZmailSeleniumProperties.getUniqueString();
       desktopAccountItem.emailAddress = emailAddress;
       desktopAccountItem.receivingUsernname = receivingUsername;
       desktopAccountItem.receivingPassword = receivingPassword;
@@ -228,8 +228,8 @@ public class DesktopAccountItem implements IItem {
          String sendingUserName,
          String sendingPassword) throws HarnessException{
       DesktopAccountItem desktopAccountItem = new DesktopAccountItem();
-      desktopAccountItem.accountName = "name" + ZimbraSeleniumProperties.getUniqueString();
-      desktopAccountItem.fullName = "Imap" + ZimbraSeleniumProperties.getUniqueString();
+      desktopAccountItem.accountName = "name" + ZmailSeleniumProperties.getUniqueString();
+      desktopAccountItem.fullName = "Imap" + ZmailSeleniumProperties.getUniqueString();
       desktopAccountItem.emailAddress = emailAddress;
       desktopAccountItem.receivingUsernname = receivingUsername;
       desktopAccountItem.receivingPassword = receivingPassword;
@@ -246,7 +246,7 @@ public class DesktopAccountItem implements IItem {
    }
 
    @Override
-   public void createUsingSOAP(ZimbraAccount account) throws HarnessException {
+   public void createUsingSOAP(ZmailAccount account) throws HarnessException {
       throw new HarnessException("Can't create desktop account using SOAP!");
    }
 

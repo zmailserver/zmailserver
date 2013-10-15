@@ -177,8 +177,8 @@ function(callback) {
 		pword = "@install.key@";
 	}
 
-	var soapDoc = AjxSoapDoc.create("AuthRequest", "urn:zimbraAdmin");
-	soapDoc.set("name", "zimbra");
+	var soapDoc = AjxSoapDoc.create("AuthRequest", "urn:zmailAdmin");
+	soapDoc.set("name", "zmail");
 	soapDoc.set("password", pword);
 
 	var params = {
@@ -217,7 +217,7 @@ function(aid, action) {
 	dialog.registerCallback(DwtDialog.CANCEL_BUTTON, new AjxCallback(this, this._handleZimletCancel, [dialog]));
 	dialog.popup();
 
-	var soapDoc = AjxSoapDoc.create("DeployZimletRequest", "urn:zimbraAdmin");
+	var soapDoc = AjxSoapDoc.create("DeployZimletRequest", "urn:zmailAdmin");
 	var method = soapDoc.getMethod();
 	method.setAttribute("action", (action || "deployLocal"));
 	method.setAttribute("flush", "1");
@@ -300,7 +300,7 @@ function(zimletName) {
 
 ZmZimletsPage.prototype._handleUndeployZimlet =
 function(zimletName) {
-	var soapDoc = AjxSoapDoc.create("UndeployZimletRequest", "urn:zimbraAdmin");
+	var soapDoc = AjxSoapDoc.create("UndeployZimletRequest", "urn:zmailAdmin");
 	soapDoc.getMethod().setAttribute("name", zimletName);
 
 	var params = {
@@ -345,7 +345,7 @@ function(zimletName, result) {
 
 ZmZimletsPage.prototype.addCommand  =
 function(batchCommand) {
-	var soapDoc = AjxSoapDoc.create("ModifyZimletPrefsRequest", "urn:zimbraAccount");
+	var soapDoc = AjxSoapDoc.create("ModifyZimletPrefsRequest", "urn:zmailAccount");
 	// LDAP supports multi-valued attrs, so don't serialize list
 	var zimlets = this.getZimlets()._vector.getArray();
 	var settingsObj = appCtxt.getSettings();
@@ -462,7 +462,7 @@ function() {
 
 ZmZimletsPage.prototype.validate  =
 function() {
-	var emailZimlet = document.getElementById("com_zimbra_email_zimletCheckbox");
+	var emailZimlet = document.getElementById("org_zmail_email_zimletCheckbox");
 	if (emailZimlet && !emailZimlet.checked) {
 		if (appCtxt.get(ZmSetting.USE_ADDR_BUBBLES)) {
 			return false;

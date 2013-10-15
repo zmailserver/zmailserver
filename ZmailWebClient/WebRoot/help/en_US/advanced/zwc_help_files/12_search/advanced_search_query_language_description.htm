@@ -67,7 +67,7 @@ addButton("show",BTN_TEXT,"Show","","","","",0,0,"","","");
 
 	
 	document.write("<p style=\"text-align:right\"> ");
-AddMasterBreadcrumbs("../../zimbra_user_help.htm", "", "&gt;", "Home", "../../advanced_web_client.htm");
+AddMasterBreadcrumbs("../../zmail_user_help.htm", "", "&gt;", "Home", "../../advanced_web_client.htm");
 document.write("<a href=\"searching_your_account.htm\">Searching for Items<\/a> &gt; Understanding Advanced Search Query Language <\/p>");
 
 }
@@ -79,7 +79,7 @@ onLoadHandler = function()
 {
   if (window.setRelStartPage)
 	{
-	setTimeout("setRelStartPage('../../zimbra_user_help.htm');", 1)
+	setTimeout("setRelStartPage('../../zmail_user_help.htm');", 1)
 
     setTimeout("UpdateBreadCrumbsMarker();", 1);
 	}
@@ -125,7 +125,7 @@ function onSetStartPage()
 <p class="FM_Bulleted1">The following characters are allowed in a search parameter as long as they are not the first character: - + &lt; &gt;</p>
 </li>
 </ul>
-<p class="FM_Notice"><span class="FM_Bold">Note: &#160;&#160;</span>Special characters, such as trademark symbols that are part of a word, are removed when the word is indexed for search. They are ignored in a search. For example, a search for Zimbra™ finds all references to Zimbra, including those without the trademark symbol.</p>
+<p class="FM_Notice"><span class="FM_Bold">Note: &#160;&#160;</span>Special characters, such as trademark symbols that are part of a word, are removed when the word is indexed for search. They are ignored in a search. For example, a search for Zmail™ finds all references to Zmail, including those without the trademark symbol.</p>
 <p class="FM_2Heading">Multiple Search Terms</p>
 <p class="FM_Body">If multiple search terms are entered (separated by spaces), they are " ANDed" together by default. <span style="font-weight: bold;">in:inbox tim</span>&#160;means "return me messages which are in the inbox AND which have the word tim in them". For searches using multiple criteria, you can either find items that match one of the specified criteria or all of them. You can perform both types of searches from the advanced search page.</p>
 <p class="FM_Body">For all search panes other than the Basic search, the rules are:</p>

@@ -23,7 +23,7 @@
  * @class
  * This class represents the tag tree.
  * 
- * @param	{ZmZimbraAccount}	account		the account
+ * @param	{ZmZmailAccount}	account		the account
  * @extends	ZmTree
  */
 ZmTagTree = function(account) {

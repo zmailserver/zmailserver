@@ -14,14 +14,14 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.admin.ui;
+package org.zmail.qa.selenium.projects.admin.ui;
 
-import com.zimbra.qa.selenium.framework.ui.AbsApplication;
-import com.zimbra.qa.selenium.framework.ui.AbsPage;
-import com.zimbra.qa.selenium.framework.ui.AbsTab;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.ui.AbsApplication;
+import org.zmail.qa.selenium.framework.ui.AbsPage;
+import org.zmail.qa.selenium.framework.ui.AbsTab;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
 
 
 /**
@@ -107,7 +107,7 @@ public class PageLogin extends AbsTab {
 	public void login() throws HarnessException {
 		logger.debug("login()");
 
-		login(ZimbraAdminAccount.AdminConsoleAdmin());
+		login(ZmailAdminAccount.AdminConsoleAdmin());
 	}
 	
 	/**
@@ -115,8 +115,8 @@ public class PageLogin extends AbsTab {
 	 * @param account
 	 * @throws HarnessException
 	 */
-	public void login(ZimbraAccount account) throws HarnessException {
-		logger.debug("login(ZimbraAccount account)" + account.EmailAddress);
+	public void login(ZmailAccount account) throws HarnessException {
+		logger.debug("login(ZmailAccount account)" + account.EmailAddress);
 
 		zNavigateTo();
 		
@@ -139,8 +139,8 @@ public class PageLogin extends AbsTab {
 	 * Fill the form with the specified user
 	 * @throws HarnessException
 	 */
-	public void fillLoginFormFields(ZimbraAccount account) throws HarnessException {
-		logger.debug("fillFields(ZimbraAccount account)" + account.EmailAddress);
+	public void fillLoginFormFields(ZmailAccount account) throws HarnessException {
+		logger.debug("fillFields(ZmailAccount account)" + account.EmailAddress);
 		
 		if ( !zIsActive() )
 			throw new HarnessException("LoginPage is not active");

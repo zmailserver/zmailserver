@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-ZmZimbraImServiceController = function(roster) {
+ZmZmailImServiceController = function(roster) {
 	var capabilities = [
 		ZmImServiceController.ACCOUNTS,
 		ZmImServiceController.CONFERENCES,
@@ -22,21 +22,21 @@ ZmZimbraImServiceController = function(roster) {
 	];
 	ZmImServiceController.call(this, roster, capabilities);
 
-	this.service = new ZmZimbraImService(roster);
+	this.service = new ZmZmailImService(roster);
 };
 
-ZmZimbraImServiceController.prototype = new ZmImServiceController;
-ZmZimbraImServiceController.prototype.constructor = ZmZimbraImServiceController;
+ZmZmailImServiceController.prototype = new ZmImServiceController;
+ZmZmailImServiceController.prototype.constructor = ZmZmailImServiceController;
 
 
 // Public methods
 
-ZmZimbraImServiceController.prototype.toString =
+ZmZmailImServiceController.prototype.toString =
 function() {
-	return "ZmZimbraImServiceController";
+	return "ZmZmailImServiceController";
 };
 
-ZmZimbraImServiceController.prototype.login =
+ZmZmailImServiceController.prototype.login =
 function(params) {
 	if (!this._showedJive) {
 		this._chatListChangeListenerObj = new AjxListener(this, this._chatListChangeListener);
@@ -45,13 +45,13 @@ function(params) {
 	this.service.login(params);
 };
 
-ZmZimbraImServiceController.prototype.getMyPresenceTooltip =
+ZmZmailImServiceController.prototype.getMyPresenceTooltip =
 function(showText) {
 	this._presenceTooltipFormat = this._presenceTooltipFormat || new AjxMessageFormat(ZmMsg.presenceTooltip);
 	return this._presenceTooltipFormat.format(showText);
 };
 
-ZmZimbraImServiceController.prototype.defineStatusMenu =
+ZmZmailImServiceController.prototype.defineStatusMenu =
 function() {
 	return {
 		statuses: [
@@ -65,7 +65,7 @@ function() {
 	};
 };
 
-ZmZimbraImServiceController.prototype._chatListChangeListener =
+ZmZmailImServiceController.prototype._chatListChangeListener =
 function(ev) {
 	if (!this._showedJive && (ev.event == ZmEvent.E_CREATE)) {
 		this._showedJive = true;

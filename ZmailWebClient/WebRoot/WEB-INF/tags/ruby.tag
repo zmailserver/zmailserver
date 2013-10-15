@@ -16,8 +16,8 @@
 <%@ attribute name="base" required="true" rtexprvalue="true" type="java.lang.String" %>
 <%@ attribute name="text" required="true" rtexprvalue="true" type="java.lang.String" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
 <%-- NOTE: getLocale is a non-standard tag --%>
 <fmt:getLocale var="locale" />
 <c:choose>

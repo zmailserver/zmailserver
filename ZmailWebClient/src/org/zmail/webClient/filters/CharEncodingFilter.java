@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.webClient.filters;
+package org.zmail.webClient.filters;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterConfig;

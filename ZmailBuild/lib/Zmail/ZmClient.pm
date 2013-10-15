@@ -27,17 +27,17 @@ use HTTP::Request;
 
 $SIG{CHLD} = 'IGNORE'; # PvZ ftw
 
-my $zmprov_exe = '/opt/zimbra/bin/zmprov';
+my $zmprov_exe = '/opt/zmail/bin/zmprov';
 my %zmprov = ();
 my %zmprovl = ();
-my $zmmailbox_exe = '/opt/zimbra/bin/zmmailbox';
+my $zmmailbox_exe = '/opt/zmail/bin/zmmailbox';
 my %zmmailbox = ();
 my %authTokens = ();
 
 sub init() {
-    $zmprov_exe = '/opt/zimbra/bin/zmprov';
+    $zmprov_exe = '/opt/zmail/bin/zmprov';
     %zmprov = ();
-    $zmmailbox_exe = '/opt/zimbra/bin/zmmailbox';
+    $zmmailbox_exe = '/opt/zmail/bin/zmmailbox';
     %zmmailbox = ();
     %authTokens = ();
 }

@@ -14,11 +14,11 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_speak"
+<zimlet name="org_zmail_speak"
         version="0.1"
         description="Converts an email-to-speech.">
     <include>speak.js</include>
-    <handlerObject>com_zimbra_speak</handlerObject>
+    <handlerObject>org_zmail_speak</handlerObject>
 
     <userProperties>
         <property type="string" name="dy_usingFirstTime" value="true"/>

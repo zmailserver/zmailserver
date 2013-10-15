@@ -49,7 +49,7 @@ function(list, openInNewTab) {
 ZaBulkProvisionTasksController.initToolbarMethod =
 function () {
 	var showBulkProvision = false;
-	if(ZaSettings.HAVE_MORE_DOMAINS || ZaZimbraAdmin.currentAdminAccount.attrs[ZaAccount.A_zimbraIsAdminAccount] == 'TRUE') {
+	if(ZaSettings.HAVE_MORE_DOMAINS || ZaZmailAdmin.currentAdminAccount.attrs[ZaAccount.A_zmailIsAdminAccount] == 'TRUE') {
 		showBulkProvision = true;
 	} else {
 		var domainList = ZaApp.getInstance().getDomainList().getArray();
@@ -62,8 +62,8 @@ function () {
 		}
 	}	
 	if(showBulkProvision) {    	
-		this._toolbarOperations[ZaOperation.BULK_DATA_IMPORT]=new ZaOperation(ZaOperation.BULK_DATA_IMPORT,com_zimbra_bulkprovision.TB_IMAP_Import, com_zimbra_bulkprovision.TB_IMAP_Import_tt, "ApplianceMigration", "ApplianceMigration", new AjxListener(this, this.bulkDataImportListener));
-		this._toolbarOperations[ZaOperation.DELETE]=new ZaOperation(ZaOperation.DELETE,com_zimbra_bulkprovision.DeleteTask, com_zimbra_bulkprovision.DeleteTask_tt, "Delete", "Delete", new AjxListener(this, this.deleteButtonListener));
+		this._toolbarOperations[ZaOperation.BULK_DATA_IMPORT]=new ZaOperation(ZaOperation.BULK_DATA_IMPORT,org_zmail_bulkprovision.TB_IMAP_Import, org_zmail_bulkprovision.TB_IMAP_Import_tt, "ApplianceMigration", "ApplianceMigration", new AjxListener(this, this.bulkDataImportListener));
+		this._toolbarOperations[ZaOperation.DELETE]=new ZaOperation(ZaOperation.DELETE,org_zmail_bulkprovision.DeleteTask, org_zmail_bulkprovision.DeleteTask_tt, "Delete", "Delete", new AjxListener(this, this.deleteButtonListener));
 		this._toolbarOperations[ZaOperation.REFRESH]=new ZaOperation(ZaOperation.REFRESH,ZaMsg.TBB_Refresh, ZaMsg.TBB_Refresh_tt, "Refresh", "Refresh", new AjxListener(this, this.refreshButtonListener));
 		this._toolbarOrder.push(ZaOperation.BULK_DATA_IMPORT);
 		this._toolbarOrder.push(ZaOperation.REFRESH);
@@ -81,7 +81,7 @@ ZaController.initToolbarMethods["ZaBulkProvisionTasksController"].push(ZaBulkPro
 ZaBulkProvisionTasksController.initPopupMenuMethod =
 function () {
 	var showBulkProvision = false;
-	if(ZaSettings.HAVE_MORE_DOMAINS || ZaZimbraAdmin.currentAdminAccount.attrs[ZaAccount.A_zimbraIsAdminAccount] == 'TRUE') {
+	if(ZaSettings.HAVE_MORE_DOMAINS || ZaZmailAdmin.currentAdminAccount.attrs[ZaAccount.A_zmailIsAdminAccount] == 'TRUE') {
 		showBulkProvision = true;
 	} else {
 		var domainList = ZaApp.getInstance().getDomainList().getArray();
@@ -94,8 +94,8 @@ function () {
 		}
 	}
 	if(showBulkProvision) {
-		this._popupOperations[ZaOperation.BULK_DATA_IMPORT]=new ZaOperation(ZaOperation.BULK_DATA_IMPORT,com_zimbra_bulkprovision.TB_IMAP_Import, com_zimbra_bulkprovision.TB_IMAP_Import_tt, "ApplianceMigration", "ApplianceMigration", new AjxListener(this, this.bulkDataImportListener));
-		this._popupOperations[ZaOperation.DELETE]=new ZaOperation(ZaOperation.DELETE,com_zimbra_bulkprovision.DeleteTask, com_zimbra_bulkprovision.DeleteTask_tt, "Delete", "Delete", new AjxListener(this, this.deleteButtonListener));
+		this._popupOperations[ZaOperation.BULK_DATA_IMPORT]=new ZaOperation(ZaOperation.BULK_DATA_IMPORT,org_zmail_bulkprovision.TB_IMAP_Import, org_zmail_bulkprovision.TB_IMAP_Import_tt, "ApplianceMigration", "ApplianceMigration", new AjxListener(this, this.bulkDataImportListener));
+		this._popupOperations[ZaOperation.DELETE]=new ZaOperation(ZaOperation.DELETE,org_zmail_bulkprovision.DeleteTask, org_zmail_bulkprovision.DeleteTask_tt, "Delete", "Delete", new AjxListener(this, this.deleteButtonListener));
 		this._popupOperations[ZaOperation.REFRESH]=new ZaOperation(ZaOperation.REFRESH,ZaMsg.TBB_Refresh, ZaMsg.TBB_Refresh_tt, "Refresh", "Refresh", new AjxListener(this, this.refreshButtonListener));
 	}
 }
@@ -110,7 +110,7 @@ ZaBulkProvisionTasksController.prototype.refreshButtonListener = function(ev) {
 }
 
 ZaBulkProvisionTasksController.prototype.deleteButtonListener = function(ev) {
-	ZaApp.getInstance().dialogs["confirmMessageDialog"].setMessage(com_zimbra_bulkprovision.ConfirmDeleteTask, DwtMessageDialog.INFO_STYLE);
+	ZaApp.getInstance().dialogs["confirmMessageDialog"].setMessage(org_zmail_bulkprovision.ConfirmDeleteTask, DwtMessageDialog.INFO_STYLE);
 	ZaApp.getInstance().dialogs["confirmMessageDialog"].registerCallback(DwtDialog.YES_BUTTON, this.deleteAndGoAway, this, null);		
     ZaApp.getInstance().dialogs["confirmMessageDialog"].registerCallback(DwtDialog.NO_BUTTON, this.closeCnfrmDlg, this, null);				
 	ZaApp.getInstance().dialogs["confirmMessageDialog"].popup();
@@ -147,7 +147,7 @@ ZaBulkProvisionTasksController.prototype.openBulkProvisionDialog = function (par
 		obj[ZaBulkProvision.A2_GalLdapFilter] = "(objectClass=organizationalPerson)";
 		obj[ZaBulkProvision.A2_generatePassword] = "TRUE";
 		obj[ZaBulkProvision.A2_genPasswordLength] = 8;
-		obj[ZaBulkProvision.A2_ZimbraAdminLogin] = ZaZimbraAdmin.currentUserLogin;
+		obj[ZaBulkProvision.A2_ZmailAdminLogin] = ZaZmailAdmin.currentUserLogin;
 		obj[ZaBulkProvision.A2_createDomains] = "TRUE";
 		obj[ZaBulkProvision.A2_connectionType] = ZaBulkProvision.CONNECTION_SSL;
 		ZaApp.getInstance().dialogs["importAccountsWizard"] = new ZaBulkImportXWizard(DwtShell.getShell(window),obj);
@@ -200,7 +200,7 @@ ZaBulkProvisionTasksController.prototype.openMigrationWizard = function (params,
 		obj[ZaBulkProvision.A2_importCalendar] = "TRUE";
 		obj[ZaBulkProvision.A2_InvalidSSLOk] = "TRUE";
 		obj[ZaBulkProvision.A2_genPasswordLength] = 8;
-		obj[ZaBulkProvision.A2_ZimbraAdminLogin] = ZaZimbraAdmin.currentUserLogin;
+		obj[ZaBulkProvision.A2_ZmailAdminLogin] = ZaZmailAdmin.currentUserLogin;
 		obj[ZaBulkProvision.A2_createDomains] = "TRUE";
 		obj[ZaBulkProvision.A2_connectionType] = ZaBulkProvision.CONNECTION_SSL;
 		

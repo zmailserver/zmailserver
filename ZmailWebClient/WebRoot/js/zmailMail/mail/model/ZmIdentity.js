@@ -59,21 +59,21 @@ function(id, params) {
 
 // Identity fields. The "name" parameter is used to set a property on this object.
 
-ZmIdentity.addField("NAME",						{ name: "name", soap: "zimbraPrefIdentityName", type: ZmSetting.D_STRING });
-ZmIdentity.addField("SEND_FROM_DISPLAY",		{ name: "sendFromDisplay", soap: "zimbraPrefFromDisplay", type: ZmSetting.D_STRING });
-ZmIdentity.addField("SEND_FROM_ADDRESS",		{ name: "sendFromAddress", soap: "zimbraPrefFromAddress", type: ZmSetting.D_STRING });
-ZmIdentity.addField("SEND_FROM_ADDRESS_TYPE",	{ name: "sendFromAddressType", soap: "zimbraPrefFromAddressType", type: ZmSetting.D_STRING });
-ZmIdentity.addField("SET_REPLY_TO",				{ name: "setReplyTo", soap: "zimbraPrefReplyToEnabled", type: ZmSetting.D_BOOLEAN });
-ZmIdentity.addField("SET_REPLY_TO_DISPLAY",		{ name: "setReplyToDisplay", soap: "zimbraPrefReplyToDisplay", type: ZmSetting.D_STRING });
-ZmIdentity.addField("SET_REPLY_TO_ADDRESS",		{ name: "setReplyToAddress", soap: "zimbraPrefReplyToAddress", type: ZmSetting.D_STRING });
-ZmIdentity.addField("SIGNATURE",				{ name: "signature", soap: "zimbraPrefDefaultSignatureId", type: ZmSetting.D_STRING });
-ZmIdentity.addField("REPLY_SIGNATURE",			{ name: "replySignature", soap: "zimbraPrefForwardReplySignatureId", type: ZmSetting.D_STRING });
+ZmIdentity.addField("NAME",						{ name: "name", soap: "zmailPrefIdentityName", type: ZmSetting.D_STRING });
+ZmIdentity.addField("SEND_FROM_DISPLAY",		{ name: "sendFromDisplay", soap: "zmailPrefFromDisplay", type: ZmSetting.D_STRING });
+ZmIdentity.addField("SEND_FROM_ADDRESS",		{ name: "sendFromAddress", soap: "zmailPrefFromAddress", type: ZmSetting.D_STRING });
+ZmIdentity.addField("SEND_FROM_ADDRESS_TYPE",	{ name: "sendFromAddressType", soap: "zmailPrefFromAddressType", type: ZmSetting.D_STRING });
+ZmIdentity.addField("SET_REPLY_TO",				{ name: "setReplyTo", soap: "zmailPrefReplyToEnabled", type: ZmSetting.D_BOOLEAN });
+ZmIdentity.addField("SET_REPLY_TO_DISPLAY",		{ name: "setReplyToDisplay", soap: "zmailPrefReplyToDisplay", type: ZmSetting.D_STRING });
+ZmIdentity.addField("SET_REPLY_TO_ADDRESS",		{ name: "setReplyToAddress", soap: "zmailPrefReplyToAddress", type: ZmSetting.D_STRING });
+ZmIdentity.addField("SIGNATURE",				{ name: "signature", soap: "zmailPrefDefaultSignatureId", type: ZmSetting.D_STRING });
+ZmIdentity.addField("REPLY_SIGNATURE",			{ name: "replySignature", soap: "zmailPrefForwardReplySignatureId", type: ZmSetting.D_STRING });
 
 // Used only for Persona
-ZmIdentity.addField("USE_WHEN_SENT_TO",			{ name: "useWhenSentTo", soap: "zimbraPrefWhenSentToEnabled", type: ZmSetting.D_BOOLEAN });
-ZmIdentity.addField("WHEN_SENT_TO_ADDRESSES",	{ name: "whenSentToAddresses", soap: "zimbraPrefWhenSentToAddresses", type: ZmSetting.D_LIST });
-ZmIdentity.addField("USE_WHEN_IN_FOLDER",		{ name: "useWhenInFolder", soap: "zimbraPrefWhenInFoldersEnabled", type: ZmSetting.D_BOOLEAN });
-ZmIdentity.addField("WHEN_IN_FOLDERIDS",		{ name: "whenInFolderIds", soap: "zimbraPrefWhenInFolderIds", type: ZmSetting.D_LIST });
+ZmIdentity.addField("USE_WHEN_SENT_TO",			{ name: "useWhenSentTo", soap: "zmailPrefWhenSentToEnabled", type: ZmSetting.D_BOOLEAN });
+ZmIdentity.addField("WHEN_SENT_TO_ADDRESSES",	{ name: "whenSentToAddresses", soap: "zmailPrefWhenSentToAddresses", type: ZmSetting.D_LIST });
+ZmIdentity.addField("USE_WHEN_IN_FOLDER",		{ name: "useWhenInFolder", soap: "zmailPrefWhenInFoldersEnabled", type: ZmSetting.D_BOOLEAN });
+ZmIdentity.addField("WHEN_IN_FOLDERIDS",		{ name: "whenInFolderIds", soap: "zmailPrefWhenInFolderIds", type: ZmSetting.D_LIST });
 
 
 // Public methods
@@ -156,7 +156,7 @@ function() {
 ZmIdentity.prototype._doRequest =
 function(requestType, respFunction, callback, errorCallback, batchCmd) {
 
-	var soapDoc = AjxSoapDoc.create(requestType + "IdentityRequest", "urn:zimbraAccount");
+	var soapDoc = AjxSoapDoc.create(requestType + "IdentityRequest", "urn:zmailAccount");
 	var identityNode = soapDoc.set("identity");
 
 	var name = this.isDefault ? ZmIdentity.DEFAULT_NAME : this.name;

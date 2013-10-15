@@ -163,88 +163,88 @@ ZmImApp.prototype._registerSettings = function(settings) {
 	settings = settings || appCtxt.getSettings();
 
     settings.registerSetting("IM_PREF_NOTIFY_SOUNDS",{
-            name        :   "zimbraPrefIMSoundsEnabled", 
+            name        :   "zmailPrefIMSoundsEnabled", 
             type        :   ZmSetting.T_PREF,
             dataType    :   ZmSetting.D_BOOLEAN,
             defaultValue:   true
     });
 
 	settings.registerSetting("IM_PREF_FLASH_BROWSER",
-			{	name         : "zimbraPrefIMFlashTitle",
+			{	name         : "zmailPrefIMFlashTitle",
 				type         : ZmSetting.T_PREF,
 				dataType     : ZmSetting.D_BOOLEAN,
 				defaultValue : true
 			});
 
 	settings.registerSetting("IM_PREF_DESKTOP_ALERT",
-			{	name         : "zimbraPrefIMToasterEnabled",
+			{	name         : "zmailPrefIMToasterEnabled",
 				type         : ZmSetting.T_PREF,
 				dataType     : ZmSetting.D_BOOLEAN,
 				defaultValue : true
 			});
 
     settings.registerSetting("IM_PREF_INSTANT_NOTIFY",
-				 { name         : "zimbraPrefIMInstantNotify",
+				 { name         : "zmailPrefIMInstantNotify",
 				   type         : ZmSetting.T_PREF,
 				   dataType     : ZmSetting.D_BOOLEAN,
 				   defaultValue : true });
 
         settings.registerSetting("IM_PREF_AUTO_LOGIN",
-				 { name         : "zimbraPrefIMAutoLogin",
+				 { name         : "zmailPrefIMAutoLogin",
                                    type         : ZmSetting.T_PREF,
                                    dataType     : ZmSetting.D_BOOLEAN,
 				   defaultValue : false
 				 });
 
         settings.registerSetting("IM_PREF_NOTIFY_PRESENCE",
-				 { name         : "zimbraPrefIMNotifyPresence",
+				 { name         : "zmailPrefIMNotifyPresence",
                                    type         : ZmSetting.T_PREF,
                                    dataType     : ZmSetting.D_BOOLEAN,
 				   defaultValue : true
 				 });
 
         settings.registerSetting("IM_PREF_NOTIFY_STATUS",
-				 { name         : "zimbraPrefIMNotifyStatus",
+				 { name         : "zmailPrefIMNotifyStatus",
                                    type         : ZmSetting.T_PREF,
                                    dataType     : ZmSetting.D_BOOLEAN,
 				   defaultValue : true
 				 });
 
 	settings.registerSetting("IM_PREF_LOGCHATS_ENABLED",
-			         { name		: "zimbraPrefIMLogChats",
+			         { name		: "zmailPrefIMLogChats",
 				   type		: ZmSetting.T_PREF,
 				   dataType	: ZmSetting.D_BOOLEAN,
 				   defaultValue	: true
 			         });
 
         settings.registerSetting("IM_PREF_REPORT_IDLE",
-                                 { name         : "zimbraPrefIMReportIdle",
+                                 { name         : "zmailPrefIMReportIdle",
                                    type         : ZmSetting.T_PREF,
                                    dataType     : ZmSetting.D_BOOLEAN,
                                    defaultValue : true
                                  });
 
         settings.registerSetting("IM_PREF_IDLE_TIMEOUT",
-                                 { name         : "zimbraPrefIMIdleTimeout",
+                                 { name         : "zmailPrefIMIdleTimeout",
                                    type         : ZmSetting.T_PREF,
                                    dataType     : ZmSetting.D_INT,
                                    defaultValue : 10
                                  });
 
         settings.registerSetting("IM_PREF_IDLE_STATUS",
-                                 { name         : "zimbraPrefIMIdleStatus",
+                                 { name         : "zmailPrefIMIdleStatus",
                                    type         : ZmSetting.T_PREF,
                                    dataType     : ZmSetting.D_STRING,
                                    defaultValue : "xa"
                                  });
 	settings.registerSetting("IM_CUSTOM_STATUS_MRU",
-								 { name			: "zimbraPrefIMCustomStatusMessage",
+								 { name			: "zmailPrefIMCustomStatusMessage",
 								   type			: ZmSetting.T_PREF,
 								   dataType		: ZmSetting.D_LIST
 								 });
 
 	settings.registerSetting("IM_PREF_BUDDY_SORT",
-								 { name			: "zimbraPrefIMBuddyListSort",
+								 { name			: "zmailPrefIMBuddyListSort",
 								   type			: ZmSetting.T_PREF,
 								   dataType		: ZmSetting.D_STRING,
 								   defaultValue : ZmImApp.BUDDY_SORT_NAME,
@@ -252,7 +252,7 @@ ZmImApp.prototype._registerSettings = function(settings) {
 								 });
 
 	settings.registerSetting("IM_PREF_HIDE_OFFLINE",
-								 { name			: "zimbraPrefIMHideOfflineBuddies",
+								 { name			: "zmailPrefIMHideOfflineBuddies",
 								   type			: ZmSetting.T_PREF,
 								   dataType		: ZmSetting.D_BOOLEAN,
 								   defaultValue : false,
@@ -260,14 +260,14 @@ ZmImApp.prototype._registerSettings = function(settings) {
 								 });
 
 	settings.registerSetting("IM_PREF_HIDE_BLOCKED",
-								 { name			: "zimbraPrefIMHideBlockedBuddies",
+								 { name			: "zmailPrefIMHideBlockedBuddies",
 								   type			: ZmSetting.T_PREF,
 								   dataType		: ZmSetting.D_BOOLEAN,
 								   defaultValue : false,
 								   isImplicit	: true
 								 });
 	settings.registerSetting("IM_YAHOO_ID",
-							 { name         : "zimbraPrefIMYahooId",
+							 { name         : "zmailPrefIMYahooId",
 							   type         : ZmSetting.T_PREF,
 							   dataType     : ZmSetting.D_STRING,
 							   defaultValue : ""
@@ -511,7 +511,7 @@ function() {
 	if (!window.ZmImServiceController || !this._serviceController) {
 		AjxDispatcher.require([ "IMCore" ]);
 		var roster = this.getRoster();
-		this._serviceController = new ZmZimbraImServiceController(roster);
+		this._serviceController = new ZmZmailImServiceController(roster);
 	}
 	return this._serviceController;
 };

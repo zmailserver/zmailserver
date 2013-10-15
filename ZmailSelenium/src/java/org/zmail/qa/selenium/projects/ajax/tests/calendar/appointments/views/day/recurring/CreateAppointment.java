@@ -14,16 +14,16 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.calendar.appointments.views.day.recurring;
+package org.zmail.qa.selenium.projects.ajax.tests.calendar.appointments.views.day.recurring;
 
 import java.util.Calendar;
 import java.util.HashMap;
 import org.testng.annotations.Test;
-import com.zimbra.qa.selenium.framework.items.AppointmentItem;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.calendar.FormApptNew;
+import org.zmail.qa.selenium.framework.items.AppointmentItem;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.calendar.FormApptNew;
 
 public class CreateAppointment extends AjaxCommonTest {
 
@@ -38,7 +38,7 @@ public class CreateAppointment extends AjaxCommonTest {
 		super.startingAccountPreferences = new HashMap<String, String>() {
 			private static final long serialVersionUID = -2913827779459595178L;
 		{
-		    put("zimbraPrefCalendarInitialView", "day");
+		    put("zmailPrefCalendarInitialView", "day");
 		}};
 	}
 
@@ -58,9 +58,9 @@ public class CreateAppointment extends AjaxCommonTest {
 		startTime = new ZDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH) + 1, now.get(Calendar.DAY_OF_MONTH), 12, 0, 0);
 		endTime = new ZDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH) + 1, now.get(Calendar.DAY_OF_MONTH), 14, 0, 0);
 		
-		appt.setSubject("appointment" + ZimbraSeleniumProperties.getUniqueString());
-		appt.setAttendees(ZimbraAccount.AccountA().EmailAddress);
-		appt.setContent("content" + ZimbraSeleniumProperties.getUniqueString());
+		appt.setSubject("appointment" + ZmailSeleniumProperties.getUniqueString());
+		appt.setAttendees(ZmailAccount.AccountA().EmailAddress);
+		appt.setContent("content" + ZmailSeleniumProperties.getUniqueString());
 		appt.setStartTime(startTime);
 		appt.setEndTime(endTime);
 		appt.setRecurring("EVERYDAY", "");

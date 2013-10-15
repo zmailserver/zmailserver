@@ -45,11 +45,11 @@
 * @param {String}	params.url		the URL for this organizer's feed
 * @param {String}	params.owner		the owner for this organizer
 * @param {String}	params.oname		the owner's name for this organizer
-* @param {String}	params.zid		the Zimbra ID of owner, if remote folder
+* @param {String}	params.zid		the Zmail ID of owner, if remote folder
 * @param {String}	params.rid		the remote ID of organizer, if remote folder
 * @param {String}	params.restUrl	the REST URL of this organizer.
 * @param {String}	params.newOp		the name of operation run by button in overview header
-* @param {ZmZimbraAccount}	params.account	the account this organizer belongs to
+* @param {ZmZmailAccount}	params.account	the account this organizer belongs to
 */
 ZmOrganizer = function(params) {
 
@@ -120,7 +120,7 @@ ZmOrganizer.SHARE               = ZmEvent.S_SHARE;
 ZmOrganizer.MOUNTPOINT			= ZmEvent.S_MOUNTPOINT;
 ZmOrganizer.ZIMLET				= ZmEvent.S_ZIMLET;
 
-// folder IDs defined in com.zimbra.cs.mailbox.Mailbox
+// folder IDs defined in org.zmail.cs.mailbox.Mailbox
 ZmOrganizer.ID_ROOT				= 1;
 ZmOrganizer.ID_INBOX			= 2;
 ZmOrganizer.ID_TRASH			= 3;
@@ -409,7 +409,7 @@ function(value, type) {
  */
 ZmOrganizer.create =
 function(params) {
-	var jsonObj = {CreateFolderRequest:{_jsns:"urn:zimbraMail"}};
+	var jsonObj = {CreateFolderRequest:{_jsns:"urn:zmailMail"}};
 	var folder = jsonObj.CreateFolderRequest.folder = {};
 	var errorCallback = params.errorCallback || new AjxCallback(null, ZmOrganizer._handleErrorCreate, params);
 	var type = params.type;
@@ -484,7 +484,7 @@ function(msg) {
  */
 ZmOrganizer.getFolder =
 function(id, callback, batchCmd) {
-	var jsonObj = {GetFolderRequest:{_jsns:"urn:zimbraMail"}};
+	var jsonObj = {GetFolderRequest:{_jsns:"urn:zmailMail"}};
 	var request = jsonObj.GetFolderRequest;
 	request.folder = {l:id};
 	var respCallback = new AjxCallback(null, ZmOrganizer._handleResponseGetFolder, [callback]);
@@ -607,7 +607,7 @@ function(color) {
  * accounts, the ID consists of the account ID and the local ID.
  * 
  * @param {int}	id		the ID of a system organizer
- * @param {ZmZimbraAccount}	account	the account
+ * @param {ZmZmailAccount}	account	the account
  * @param {Boolean}		force		<code>true</code> to generate the fully qualified ID even if this is the main account
  * @return	{String}	the ID
  */
@@ -844,7 +844,7 @@ function() {
 /**
  * Gets the account.
  * 
- * @return	{ZmZimbraAccount}	the account
+ * @return	{ZmZmailAccount}	the account
  */
 ZmOrganizer.prototype.getAccount =
 function() {
@@ -1103,7 +1103,7 @@ ZmOrganizer.prototype.setRetentionPolicy = function(newRetentionPolicy, callback
 
 	var cmd = ZmOrganizer.SOAP_CMD[this.type] + "Request";
 	var request = {
-		_jsns: "urn:zimbraMail",
+		_jsns: "urn:zmailMail",
 		action : {
 			op: "retentionpolicy",
 			id: this.id,
@@ -1989,7 +1989,7 @@ ZmOrganizer.prototype._organizerAction =
 function(params) {
 	var cmd = ZmOrganizer.SOAP_CMD[this.type] + "Request";
 	var request = {
-		_jsns: "urn:zimbraMail",
+		_jsns: "urn:zmailMail",
 		action : {
 			op: params.action,
 			id: params.id || this.id

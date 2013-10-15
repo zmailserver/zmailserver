@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,43 +32,43 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.mailbox.Color;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.mime.shim.JavaMailInternetAddress;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.zmime.ZMimeBodyPart;
-import com.zimbra.common.zmime.ZMimeMultipart;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.Identity;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.offline.OfflineAccount;
-import com.zimbra.cs.account.offline.OfflineDataSource;
-import com.zimbra.cs.account.offline.OfflineProvisioning;
-import com.zimbra.cs.datasource.DataSourceManager;
-import com.zimbra.cs.db.DbTag;
-import com.zimbra.cs.mailbox.MailItem.TargetConstraint;
-import com.zimbra.cs.mailbox.MailSender.SafeSendFailedException;
-import com.zimbra.cs.mailbox.MailServiceException.NoSuchItemException;
-import com.zimbra.cs.mime.MailboxBlobDataSource;
-import com.zimbra.cs.mime.Mime;
-import com.zimbra.cs.mime.Mime.FixedMimeMessage;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.offline.LMailSender;
-import com.zimbra.cs.offline.OfflineLC;
-import com.zimbra.cs.offline.OfflineLog;
-import com.zimbra.cs.offline.OfflineSyncManager;
-import com.zimbra.cs.offline.YMailSender;
-import com.zimbra.cs.offline.common.OfflineConstants;
-import com.zimbra.cs.offline.util.ymail.YMailException;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.util.JMSession;
-import com.zimbra.soap.admin.type.DataSourceType;
+import org.zmail.common.account.Key;
+import org.zmail.common.mailbox.Color;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.mime.shim.JavaMailInternetAddress;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.zmime.ZMimeBodyPart;
+import org.zmail.common.zmime.ZMimeMultipart;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.Identity;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.offline.OfflineAccount;
+import org.zmail.cs.account.offline.OfflineDataSource;
+import org.zmail.cs.account.offline.OfflineProvisioning;
+import org.zmail.cs.datasource.DataSourceManager;
+import org.zmail.cs.db.DbTag;
+import org.zmail.cs.mailbox.MailItem.TargetConstraint;
+import org.zmail.cs.mailbox.MailSender.SafeSendFailedException;
+import org.zmail.cs.mailbox.MailServiceException.NoSuchItemException;
+import org.zmail.cs.mime.MailboxBlobDataSource;
+import org.zmail.cs.mime.Mime;
+import org.zmail.cs.mime.Mime.FixedMimeMessage;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.offline.LMailSender;
+import org.zmail.cs.offline.OfflineLC;
+import org.zmail.cs.offline.OfflineLog;
+import org.zmail.cs.offline.OfflineSyncManager;
+import org.zmail.cs.offline.YMailSender;
+import org.zmail.cs.offline.common.OfflineConstants;
+import org.zmail.cs.offline.util.ymail.YMailException;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.util.JMSession;
+import org.zmail.soap.admin.type.DataSourceType;
 
 public class DataSourceMailbox extends SyncMailbox {
     private boolean hasFolders;
@@ -459,7 +459,7 @@ public class DataSourceMailbox extends SyncMailbox {
                 DataSourceManager.importData(ds, isOnRequest);
                 syncMan.syncComplete(ds);
                 OfflineProvisioning.getOfflineInstance().setDataSourceAttribute(
-                    ds, OfflineConstants.A_zimbraDataSourceLastSync,
+                    ds, OfflineConstants.A_zmailDataSourceLastSync,
                     Long.toString(System.currentTimeMillis()));
             } catch (Exception x) {
                 if (isDeleting())

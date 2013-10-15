@@ -14,11 +14,11 @@
 -->
 <%@ page contentType="text/html;charset=UTF-8" language="java" session="false" buffer="32kb"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
 <%@ taglib prefix="zd" tagdir="/WEB-INF/tags/desktop" %>
-<%@ taglib prefix="zdf" uri="com.zimbra.cs.offline.jsp" %>
+<%@ taglib prefix="zdf" uri="org.zmail.cs.offline.jsp" %>
 
-<jsp:useBean id="extBean" class="com.zimbra.cs.offline.jsp.ExtensionBean"/>
+<jsp:useBean id="extBean" class="org.zmail.cs.offline.jsp.ExtensionBean"/>
 
 <fmt:setBundle basename="/messages/ZdMsg" scope="request"/>
 
@@ -31,7 +31,7 @@
 <c:set var='betaLink'>
     <fmt:message key='BetaNoteSupport'>
         <fmt:param>
-            <a href=https://www.zimbra.com/products/desktop_support.html target=_blank><fmt:message key='BetaNoteLink'/></a>
+            <a href=https://www.zmail.com/products/desktop_support.html target=_blank><fmt:message key='BetaNoteLink'/></a>
         </fmt:param>
     </fmt:message>
 </c:set>
@@ -43,7 +43,7 @@
 
 <c:choose>
     <c:when test="${accountFlavor eq 'Gmail'}">
-        <jsp:useBean id="gbean" class="com.zimbra.cs.offline.jsp.GmailBean" scope="request"/>
+        <jsp:useBean id="gbean" class="org.zmail.cs.offline.jsp.GmailBean" scope="request"/>
         <jsp:setProperty name="gbean" property="*"/>
         <jsp:setProperty name="gbean" property="locale" value="${pageContext.request.locale}"/>
         ${zdf:doRequest(gbean)}
@@ -64,7 +64,7 @@
         </c:set>
     </c:when>
     <c:when test="${accountFlavor eq 'Imap'}">
-        <jsp:useBean id="ibean" class="com.zimbra.cs.offline.jsp.ImapBean" scope="request"/>
+        <jsp:useBean id="ibean" class="org.zmail.cs.offline.jsp.ImapBean" scope="request"/>
         <jsp:setProperty name="ibean" property="*"/>
         <jsp:setProperty name="ibean" property="locale" value="${pageContext.request.locale}"/>
         ${zdf:doRequest(ibean)}
@@ -74,7 +74,7 @@
         </c:set>
     </c:when>
     <c:when test="${accountFlavor eq 'MSE'}">
-        <jsp:useBean id="mbean" class="com.zimbra.cs.offline.jsp.MmailBean" scope="request"/>
+        <jsp:useBean id="mbean" class="org.zmail.cs.offline.jsp.MmailBean" scope="request"/>
         <jsp:setProperty name="mbean" property="*"/>
         <jsp:setProperty name="mbean" property="locale" value="${pageContext.request.locale}"/>
         ${zdf:doRequest(mbean)}
@@ -89,7 +89,7 @@
         </c:set>
     </c:when>
     <c:when test="${accountFlavor eq 'Pop'}">
-        <jsp:useBean id="pbean" class="com.zimbra.cs.offline.jsp.PopBean" scope="request"/>
+        <jsp:useBean id="pbean" class="org.zmail.cs.offline.jsp.PopBean" scope="request"/>
         <jsp:setProperty name="pbean" property="*"/>
         <jsp:setProperty name="pbean" property="locale" value="${pageContext.request.locale}"/>
         ${zdf:doRequest(pbean)}
@@ -99,7 +99,7 @@
         </c:set>
     </c:when>
     <c:when test="${accountFlavor eq 'Xsync'}">
-        <jsp:useBean id="xbean" class="com.zimbra.cs.offline.jsp.XsyncBean" scope="request"/>
+        <jsp:useBean id="xbean" class="org.zmail.cs.offline.jsp.XsyncBean" scope="request"/>
         <jsp:setProperty name="xbean" property="*"/>
         <jsp:setProperty name="xbean" property="locale" value="${pageContext.request.locale}"/>
         ${zdf:doRequest(xbean)}
@@ -114,7 +114,7 @@
         </c:set>
     </c:when>
     <c:when test="${accountFlavor eq 'YMP'}">
-        <jsp:useBean id="ybean" class="com.zimbra.cs.offline.jsp.YmailBean" scope="request"/>
+        <jsp:useBean id="ybean" class="org.zmail.cs.offline.jsp.YmailBean" scope="request"/>
         <jsp:setProperty name="ybean" property="*"/>
         <jsp:setProperty name="ybean" property="locale" value="${pageContext.request.locale}"/>
         ${zdf:doRequest(ybean)}
@@ -125,20 +125,20 @@
             </fmt:message>
         </c:set>
     </c:when>
-    <c:when test="${accountFlavor eq 'Zimbra'}">
-        <jsp:useBean id="zbean" class="com.zimbra.cs.offline.jsp.ZmailBean" scope="request"/>
+    <c:when test="${accountFlavor eq 'Zmail'}">
+        <jsp:useBean id="zbean" class="org.zmail.cs.offline.jsp.ZmailBean" scope="request"/>
         <jsp:setProperty name="zbean" property="*"/>
         <jsp:setProperty name="zbean" property="locale" value="${pageContext.request.locale}"/>
         ${zdf:doRequest(zbean)}
         <c:set var="bean" value="${zbean}" scope="request"/>
         <c:set var="help">
         <fmt:message key='ToLearnZCS'>
-            <fmt:param><a href="http://www.zimbra.com" target="_blank">www.zimbra.com</a></fmt:param>
+            <fmt:param><a href="http://www.zmail.com" target="_blank">www.zmail.com</a></fmt:param>
             </fmt:message>
         </c:set>
     </c:when>
     <c:otherwise>
-        <jsp:useBean id="bean" class="com.zimbra.cs.offline.jsp.MailBean"/>
+        <jsp:useBean id="bean" class="org.zmail.cs.offline.jsp.MailBean"/>
         <jsp:setProperty name="bean" property="*"/>
         <jsp:setProperty name="bean" property="locale" value="${pageContext.request.locale}"/>
     </c:otherwise>
@@ -147,7 +147,7 @@
 <html>
 <head>
 <meta http-equiv="CACHE-CONTROL" content="NO-CACHE">
-<title><fmt:message key="ZimbraDesktop"/></title>
+<title><fmt:message key="ZmailDesktop"/></title>
 
 <!--
 <link rel="stylesheet" href="<c:url value="/css/common,desktop.css">
@@ -298,7 +298,7 @@ function changeDateFields(selectObj) {
                 zd.set("port", zd.isChecked("ssl") ? "995" : "110");
             else if (${bean.type eq 'imap'})
                 zd.set("port", zd.isChecked("ssl") ? "993" : "143");
-            else if (${bean.type eq 'zimbra' or bean.type eq 'xsync'})
+            else if (${bean.type eq 'zmail' or bean.type eq 'xsync'})
                 zd.set("port", zd.isChecked("ssl") ? "443" : "80");
         }
     }
@@ -407,7 +407,7 @@ function changeDateFields(selectObj) {
                                               <c:choose>
                                                 <c:when test="${empty bean.accountId}">
 	                                                <option value=""><fmt:message key='AccountSelect'/></option>
-	                                                <option value="Zimbra" <c:if test="${accountFlavor eq 'Zimbra'}">selected</c:if> ><fmt:message key='Zimbra'/></option>
+	                                                <option value="Zmail" <c:if test="${accountFlavor eq 'Zmail'}">selected</c:if> ><fmt:message key='Zmail'/></option>
 	                                                <option value="Gmail" <c:if test="${accountFlavor eq 'Gmail'}">selected</c:if> ><fmt:message key='Gmail'/></option>
 	                                                <option value="YMP" <c:if test="${accountFlavor eq 'YMP'}">selected</c:if> ><fmt:message key='YMP'/></option>
 	                                                <c:if test="${extBean.xsyncEnabled}">
@@ -419,8 +419,8 @@ function changeDateFields(selectObj) {
                                                 </c:when>
                                                 <c:otherwise>
                                                   <c:choose>
-                                                    <c:when test="${accountFlavor eq 'Zimbra'}">
-                                                        <option value="Zimbra" selected><fmt:message key='Zimbra'/></option>
+                                                    <c:when test="${accountFlavor eq 'Zmail'}">
+                                                        <option value="Zmail" selected><fmt:message key='Zmail'/></option>
                                                     </c:when>
                                                     <c:when test="${accountFlavor eq 'Gmail'}">
                                                         <option value="Gmail" selected><fmt:message key='Gmail'/></option>
@@ -451,7 +451,7 @@ function changeDateFields(selectObj) {
                                         <input type="hidden" name="accountFlavor" value="${accountFlavor}">
                                         <input type="hidden" id="verb" name="verb" value="${empty bean.accountId ? 'add' : 'mod'}" >
                                         <input type="hidden" name="verb" value="${verb}">
-                                        <c:if test="${bean.type ne 'zimbra' and bean.type ne 'xsync' and not empty bean.domain}">
+                                        <c:if test="${bean.type ne 'zmail' and bean.type ne 'xsync' and not empty bean.domain}">
                                             <input type="hidden" name="domain" value="${bean.domain}">
                                         </c:if>
                                         <c:if test="${not empty bean.sslCertInfo and bean.sslCertInfo.acceptable}">
@@ -500,7 +500,7 @@ function changeDateFields(selectObj) {
                                                 <input class="ZField" type="text" id="accountName" name="accountName" value="${bean.accountName}">
                                             </td>
                                         </tr>
-                                        <c:if test="${bean.type ne 'zimbra'}">
+                                        <c:if test="${bean.type ne 'zmail'}">
                                             <tr>
                                                 <td>
                                                     <div class="ZFieldLabel"><fmt:message key='FullName'/>:</div>
@@ -609,7 +609,7 @@ function changeDateFields(selectObj) {
                                                                 <label class="ZRadioLabel" for="ssl"><fmt:message key='SecuritySsl'/></label>
                                                             </td>
                                                             <td>&nbsp;&nbsp;</td>
-                                                            <c:if test="${bean.type ne 'zimbra' and bean.type ne 'xsync'}">
+                                                            <c:if test="${bean.type ne 'zmail' and bean.type ne 'xsync'}">
                                                                 <td>
                                                                     <input type="radio" id="tls" name="security" value="tls" ${bean.security == 'tls' ? 'checked' : ''} onclick="SetPort()">
                                                                     <label class="ZRadioLabel" for="tls"><fmt:message key='SecurityTls'/></label>
@@ -758,7 +758,7 @@ function changeDateFields(selectObj) {
                                             <td>
                                                 <select class="ZSelect" id="syncFreqSecs" name="syncFreqSecs">
                                                     <option value="-1" ${bean.syncFreqSecs == -1 ? 'selected' : ''}><fmt:message key='SyncManually'/></option>
-                                                    <c:if test="${bean.type eq 'zimbra' or bean.type eq 'xsync'}">
+                                                    <c:if test="${bean.type eq 'zmail' or bean.type eq 'xsync'}">
                                                         <option value="0" ${bean.syncFreqSecs == 0 ? 'selected' : ''}><fmt:message key='SyncNewArrive'/></option>
                                                     </c:if>
                                                     <option value="60" ${bean.syncFreqSecs == 60 ? 'selected' : ''}><fmt:message key='SyncEveryMin'/></option>
@@ -772,7 +772,7 @@ function changeDateFields(selectObj) {
                                             </td>
                                         </tr>
 
-                                        <c:if test="${bean.type eq 'zimbra' or bean.type eq 'xsync'}">
+                                        <c:if test="${bean.type eq 'zmail' or bean.type eq 'xsync'}">
                                         <tr>
                                             <td>
                                             <c:choose>

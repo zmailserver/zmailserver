@@ -14,14 +14,14 @@
 --%>
 <%@ tag body-content="empty" %>
 <%@ attribute name="label" rtexprvalue="true" required="false" %>
-<%@ attribute name="contact" rtexprvalue="true" required="true" type="com.zimbra.cs.taglib.bean.ZContactBean"%>
+<%@ attribute name="contact" rtexprvalue="true" required="true" type="org.zmail.cs.taglib.bean.ZContactBean"%>
 <%@ attribute name="field" rtexprvalue="true" required="true" %>
 <%@ attribute name="hint" rtexprvalue="true" required="false" %>
 <%@ attribute name="address" rtexprvalue="true" required="false" %>
 <%@ attribute name="tabindex" rtexprvalue="true" required="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
 <c:if test="${empty label}">
     <c:set var="label" value="AB_FIELD_${field}" />
 </c:if>

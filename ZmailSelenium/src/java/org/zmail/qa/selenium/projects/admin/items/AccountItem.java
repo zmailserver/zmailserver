@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.admin.items;
+package org.zmail.qa.selenium.projects.admin.items;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,11 +22,11 @@ import java.util.Map;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import com.zimbra.qa.selenium.framework.items.IItem;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraAdminAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
+import org.zmail.qa.selenium.framework.items.IItem;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailAdminAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
 
 
 public class AccountItem implements IItem {
@@ -47,12 +47,12 @@ public class AccountItem implements IItem {
 		
 		accountAttrs = new HashMap<String, String>();
 		
-		localName = "email" + ZimbraSeleniumProperties.getUniqueString();
-		domainName = ZimbraSeleniumProperties.getStringProperty("testdomain");
+		localName = "email" + ZmailSeleniumProperties.getUniqueString();
+		domainName = ZmailSeleniumProperties.getStringProperty("testdomain");
 		Id = null;
 		
 		// Surname is required in Admin Console
-		accountAttrs.put("sn", "Lastname"+ ZimbraSeleniumProperties.getUniqueString());
+		accountAttrs.put("sn", "Lastname"+ ZmailSeleniumProperties.getUniqueString());
 
 	}
 */	
@@ -65,7 +65,7 @@ public class AccountItem implements IItem {
 			domainName = emailAddress.split("@")[1];
 		} else {
 			localName = emailAddress;
-			domainName = ZimbraSeleniumProperties.getStringProperty("testdomain");
+			domainName = ZmailSeleniumProperties.getStringProperty("testdomain");
 		}
 
 		//Id = null;
@@ -156,22 +156,22 @@ public class AccountItem implements IItem {
 			elementAttrs.append("<a n='").append(entry.getKey()).append("'>").append(entry.getValue()).append("</a>");
 		}
 		
-		ZimbraAdminAccount.AdminConsoleAdmin().soapSend(
-							"<CreateAccountRequest xmlns='urn:zimbraAdmin'>"
+		ZmailAdminAccount.AdminConsoleAdmin().soapSend(
+							"<CreateAccountRequest xmlns='urn:zmailAdmin'>"
 				+				"<name>"+ account.getEmailAddress() +"</name>"
 				+				elementPassword.toString()
 				+				elementAttrs.toString()
 				+			"</CreateAccountRequest>");
 		
 		
-		Id = ZimbraAdminAccount.AdminConsoleAdmin().soapSelectValue("//admin:CreateAccountResponse/admin:account", "id").toString();
+		Id = ZmailAdminAccount.AdminConsoleAdmin().soapSelectValue("//admin:CreateAccountResponse/admin:account", "id").toString();
 		// TODO: Need to create a new AccountItem and set the account values to it, then return the new item
 		
 		return (account);
 	}
 
 	@Override
-	public void createUsingSOAP(ZimbraAccount account) throws HarnessException {
+	public void createUsingSOAP(ZmailAccount account) throws HarnessException {
 		throw new HarnessException("not applicable for this IItem type");
 	}
 

@@ -24,7 +24,7 @@
   <item name="Использование горячих клавиш" url="zwc_help_files/1_setting_up/using_keyboard_shortcuts.htm" />
 </book>
 <book name="Систематизация учетных записей" >
-  <item name="Навигация по учетной записи " url="zwc_help_files/1_setting_up/navigating_the_zimbra_web_client.htm" />
+  <item name="Навигация по учетной записи " url="zwc_help_files/1_setting_up/navigating_the_zmail_web_client.htm" />
   <item name="Систематизация учетных записей" url="zwc_help_files/5_organize_account/organizing_your_account.htm" />
   <item name="Настройка исходного вида почтового ящика" url="zwc_help_files/2_manage_email/customizing_your_mailbox_initial_view.htm" />
   <item name="Персонализация вида учетной записи" url="zwc_help_files/1_setting_up/personalizing_the_view_of_your_account.htm" />

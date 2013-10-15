@@ -53,7 +53,7 @@ function(data, more, total) {
 		//var targetObj = ZaDomain.getTargetDomainByName(data[i]) ;
 		if (data[i] && data[i].attrs [ZaDomain.A_domainType] == ZaDomain.domainTypes.local){
 			withoutAlias.push(data[i]);
-			AjxEmailAddress.customEmailValidateEegex[data[i].name] = data[i].attrs[ZaDomain.A_zimbraMailAddressValidationRegex];
+			AjxEmailAddress.customEmailValidateEegex[data[i].name] = data[i].attrs[ZaDomain.A_zmailMailAddressValidationRegex];
 		}
 	}
 	// call the default callback

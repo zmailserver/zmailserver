@@ -14,15 +14,15 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.core;
+package org.zmail.qa.selenium.projects.ajax.core;
 
 import java.util.HashMap;
 
 /**
  * A base class that sets
  *  1) the starting page to be the mail app,
- *  2) sets zimbraPrefGroupMailBy=message, and
- *  3) sets zimbraPrefMessageViewHtmlPreferred=TRUE
+ *  2) sets zmailPrefGroupMailBy=message, and
+ *  3) sets zmailPrefMessageViewHtmlPreferred=TRUE
  *  
  * @author Matt Rhoades
  *
@@ -36,8 +36,8 @@ public class PrefGroupMailByConversationTest extends AjaxCommonTest {
 		super.startingAccountPreferences = new HashMap<String, String>() {
 			private static final long serialVersionUID = -8033517997031535379L;
 		{
-			put("zimbraPrefGroupMailBy", "conversation");
-			put("zimbraPrefMessageViewHtmlPreferred", "TRUE");
+			put("zmailPrefGroupMailBy", "conversation");
+			put("zmailPrefMessageViewHtmlPreferred", "TRUE");
 		}};
 
 	}

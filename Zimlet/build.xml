@@ -10,11 +10,11 @@
 	-->
 	<property environment="env"/>
 
-    <property name="zimbra.home.dir" location="/opt/zimbra" />
-    <property name="jetty.home.dir" location="${zimbra.home.dir}/jetty" />
+    <property name="zmail.home.dir" location="/opt/zmail" />
+    <property name="jetty.home.dir" location="${zmail.home.dir}/jetty" />
     <property name="zimlet.webinf.dir" location="${jetty.home.dir}/webapps/zimlet/WEB-INF" />
     <property name="webserver.name" value="jetty"/>
-    <property name="webserver.root.dir" location="${zimbra.home.dir}/${webserver.name}"/>
+    <property name="webserver.root.dir" location="${zmail.home.dir}/${webserver.name}"/>
 
 	<property name="deploy.dir" value="${webserver.root.dir}/webapps"/>
 	<property name="deploy.lib.path" value="/zimlet/WEB-INF"/>
@@ -31,18 +31,18 @@
     <property name="dist.zimlet-experimental.dir" location="${dist.dir}/zimlets-experimental" />
     <property name="dist.zimlet-offline.dir" location="${dist.dir}/zimlets-offline" />
 
-	<property name="common.dir" location="../ZimbraCommon" />
+	<property name="common.dir" location="../ZmailCommon" />
 	<property name="common.jars.dir" location="${common.dir}/jars" />
-	<property name="common.classes.dir" location="../ZimbraCommon/build/classes" />
+	<property name="common.classes.dir" location="../ZmailCommon/build/classes" />
 
-    <property name="soap.dir" location="../ZimbraSoap"/>
+    <property name="soap.dir" location="../ZmailSoap"/>
     <property name="soap.classes.dir" location="${soap.dir}/build/classes"/>
 
-    <property name="client.dir" location="../ZimbraClient"/>
+    <property name="client.dir" location="../ZmailClient"/>
     <property name="client.classes.dir" location="${client.dir}/build/classes"/>
 
 	<property name="webinf.dir" location="WebRoot/WEB-INF" />
-	<property name="server.dir" location="../ZimbraServer" />
+	<property name="server.dir" location="../ZmailServer" />
 	<property name="server.classes.dir" location="${server.dir}/build/classes" />
 	<property name="jars.dir" location="jars" />
 	<property name="config.dir" location="conf" />
@@ -54,10 +54,10 @@
 	<property name="generated.dir" location="${build.dir}/generated" />
 	<property name="generated.java.dir" location="${generated.dir}/src/java" />
 
-	<property name="zimlets" value="com_zimbra_phone,com_zimbra_url,com_zimbra_email,com_zimbra_date,com_zimbra_ymemoticons,com_zimbra_attachmail,com_zimbra_attachcontacts,com_zimbra_srchhighlighter,com_zimbra_webex"/>
+	<property name="zimlets" value="org_zmail_phone,org_zmail_url,org_zmail_email,org_zmail_date,org_zmail_ymemoticons,org_zmail_attachmail,org_zmail_attachcontacts,org_zmail_srchhighlighter,org_zmail_webex"/>
 	<property name="zimlets-offline" value=""/>
-	<property name="zimlets-example" value="com_zimbra_example_*"/>
-    <property name="zimlets-experimental" value="com_zimbra_amzn,com_zimbra_asterisk,com_zimbra_asteriskmwi,com_zimbra_blog,com_zimbra_browserperf,com_zimbra_edu,com_zimbra_evite,com_zimbra_html,com_zimbra_jspsample,com_zimbra_photo,com_zimbra_po,com_zimbra_videos,com_zimbra_webex,com_zimbra_wikipedia,com_zimbra_xslt,com_zimbra_ytraffic,com_zimbra_calscheduler,com_zimbra_ybabelfish,com_zimbra_speak"/>
+	<property name="zimlets-example" value="org_zmail_example_*"/>
+    <property name="zimlets-experimental" value="org_zmail_amzn,org_zmail_asterisk,org_zmail_asteriskmwi,org_zmail_blog,org_zmail_browserperf,org_zmail_edu,org_zmail_evite,org_zmail_html,org_zmail_jspsample,org_zmail_photo,org_zmail_po,org_zmail_videos,org_zmail_webex,org_zmail_wikipedia,org_zmail_xslt,org_zmail_ytraffic,org_zmail_calscheduler,org_zmail_ybabelfish,org_zmail_speak"/>
 
     <!-- zimlets-extra is anything not in zimlets, not in zimlets-example, and not in zimlets-experimental -->
 	<dirset id='zimlets-extra.dirset' dir='${src.zimlet.dir}' includes='*' excludes='${zimlets},${zimlets-experimental},${zimlets-example}'/>
@@ -145,7 +145,7 @@
 	</target>
 
 	<target name="jar" depends="compile">
-		<jar destfile="${dist.lib.dir}/zimbrataglib.jar" basedir="${build.classes.dir}" excludes="**/zimlet/**" />
+		<jar destfile="${dist.lib.dir}/zmailtaglib.jar" basedir="${build.classes.dir}" excludes="**/zimlet/**" />
 	</target>
 
 	<target name="reload-zimlets" depends="deploy-zimlets,restart-webserver" description="Reload Zimlets"/>
@@ -159,7 +159,7 @@
             <param name="zimlet.version" value="${zimlet.version}" />
             <param name="TS" value="${TS}" />
 		</foreach>
-		<zip destfile="${dist.zimlet.dir}/com_zimbra_phone.zip" update="true">
+		<zip destfile="${dist.zimlet.dir}/org_zmail_phone.zip" update="true">
 			<fileset dir="${build.classes.dir}" includes="**/NANPHandler.class"/>
 		</zip>
 		<echo message="dist.zimlet.dir=${dist.zimlet.dir}" file="${dist.dir}/build.properties"/>
@@ -171,7 +171,7 @@
             <param name="zimlet.version" value="${zimlet.version}" />
             <param name="TS" value="${TS}" />
         </foreach>
-		<zip destfile="${dist.zimlet-extra.dir}/com_zimbra_tracking.zip" update="true">
+		<zip destfile="${dist.zimlet-extra.dir}/org_zmail_tracking.zip" update="true">
 			<fileset dir="${build.classes.dir}" includes="**/TrackingHandler.class"/>
 		</zip>
 	</target>
@@ -244,7 +244,7 @@
 
     <target name="install-zimlet">
 		<echo>${action} ${zimlet}</echo>
-		<java classname="com.zimbra.cs.zimlet.ZimletUtil" fork="true" classpathref="class.path" failonerror="true">
+		<java classname="org.zmail.cs.zimlet.ZimletUtil" fork="true" classpathref="class.path" failonerror="true">
 			<arg line="-q" />
 			<arg line="${action}" />
 			<arg file="${dir}/${zimlet}.zip" />
@@ -259,11 +259,11 @@
         <tstamp>
         	<format property="TS" pattern="yyyyMMdd.hhmmss" />
         </tstamp>
-        <condition property="zimbra.buildinfo.version" value="6.0.0_test">
-            <not><isset property="${zimbra.buildinfo.version}"/></not>
+        <condition property="zmail.buildinfo.version" value="6.0.0_test">
+            <not><isset property="${zmail.buildinfo.version}"/></not>
         </condition>
     	<propertyregex property="zimlet.version" 
-    	   input="${zimbra.buildinfo.version}"
+    	   input="${zmail.buildinfo.version}"
     	   regexp="([0-9]+\.[0-9]+\.[0-9]+)" select="\1" casesensitive="false" />
     	<echo>Version: ${zimlet.version}.${TS}</echo>
     </target>

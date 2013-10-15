@@ -47,7 +47,7 @@ ZaGlobalStatsView.prototype.getAllServersInfo = function( ){
 
     try {
 
-        var soapDoc = AjxSoapDoc.create("GetAllServersRequest", ZaZimbraAdmin.URN, null);
+        var soapDoc = AjxSoapDoc.create("GetAllServersRequest", ZaZmailAdmin.URN, null);
         soapDoc.getMethod().setAttribute("applyConfig", "false");
         soapDoc.getMethod().setAttribute("service", "mta");
 
@@ -96,11 +96,11 @@ ZaGlobalStatsView.prototype.getAllServersMtaServiceStatus = function( ){
         for ( j = 0, isEnabled = isInstalled = false; j < oneServerDetailInfo.length; j++){
             oneService = oneServerDetailInfo[j];
             if( "mta" == oneService._content ){
-                if( oneService.n == ZaServer.A_zimbraServiceEnabled ){
+                if( oneService.n == ZaServer.A_zmailServiceEnabled ){
 
                     isEnabled = true;
 
-                }else if ( oneService.n == ZaServer.A_zimbraServiceInstalled ){
+                }else if ( oneService.n == ZaServer.A_zmailServiceInstalled ){
 
                     isInstalled = true;
 
@@ -121,7 +121,7 @@ ZaGlobalStatsView.prototype.isAllMtaDisable = function( ){
 
     var allServersMtaServiceEnableStatus = ZaGlobalStatsView.prototype.getAllServersMtaServiceStatus();
     if( !allServersMtaServiceEnableStatus ){
-        return true; //no info means no zimbraServiceEnabled message sending to the admin
+        return true; //no info means no zmailServiceEnabled message sending to the admin
     }
 
     var i = 0;

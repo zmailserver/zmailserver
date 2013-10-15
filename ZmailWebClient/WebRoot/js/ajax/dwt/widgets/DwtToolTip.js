@@ -116,7 +116,7 @@ function(x, y, skipInnerHTML, popdownOnMouseOver, obj, hoverEv) {
 
 /*
 * setSticky allows making the tooltip not to popdown. 
-* IMPORTANT: Tooltip is singleton inside Zimbra i.e. only one instance of tooltip is reused by all objects. 
+* IMPORTANT: Tooltip is singleton inside Zmail i.e. only one instance of tooltip is reused by all objects. 
 * So, it is very important for the code setting tooltip to sticky to have some mechanism to close the tooltip by itself. 
 * Like have a close-button inside tooltip and when clicked, should set the setSticky(false) and then close the tooltip.
 *

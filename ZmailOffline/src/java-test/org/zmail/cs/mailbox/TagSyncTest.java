@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -23,14 +23,14 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.offline.MockOfflineProvisioning;
-import com.zimbra.cs.account.offline.OfflineAccount;
-import com.zimbra.cs.account.offline.OfflineProvisioning;
-import com.zimbra.cs.datasource.DataSourceDbMapping;
-import com.zimbra.cs.datasource.MockDataSourceDbMapping;
-import com.zimbra.cs.mailbox.MockOfflineMailboxManager.Type;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.offline.MockOfflineProvisioning;
+import org.zmail.cs.account.offline.OfflineAccount;
+import org.zmail.cs.account.offline.OfflineProvisioning;
+import org.zmail.cs.datasource.DataSourceDbMapping;
+import org.zmail.cs.datasource.MockDataSourceDbMapping;
+import org.zmail.cs.mailbox.MockOfflineMailboxManager.Type;
 
 public class TagSyncTest {
 
@@ -43,8 +43,8 @@ public class TagSyncTest {
     @BeforeClass
     public static void init() throws ServiceException {
       MockOfflineProvisioning prov = new MockOfflineProvisioning();
-      accountId = prov.createAccount("test@zimbra.com", "secret",
-              Collections.<String, Object>singletonMap(Provisioning.A_zimbraId, "0-0-0")).getId();
+      accountId = prov.createAccount("test@zmail.com", "secret",
+              Collections.<String, Object>singletonMap(Provisioning.A_zmailId, "0-0-0")).getId();
       Provisioning.setInstance(prov);
       MailboxManager.setInstance(new MockOfflineMailboxManager(Type.ZCS));
       DataSourceDbMapping.setInstance(mockMapping);

@@ -15,7 +15,7 @@
 
 /**
  * A SpreadSheet Widget.
- * @author Mihai Bazon, <mihai@zimbra.com>
+ * @author Mihai Bazon, <mihai@zmail.com>
  */
 ZmSpreadSheet = function(parent, className, posStyle, deferred) {
 	if (arguments.length == 0)

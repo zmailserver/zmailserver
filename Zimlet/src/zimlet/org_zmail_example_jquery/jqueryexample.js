@@ -15,26 +15,26 @@
  */
 
 //Zimlet Class
-function com_zimbra_example_jquery() {
+function org_zmail_example_jquery() {
 }
 
 //Make Zimlet class a subclass of ZmZimletBase class - this makes a Zimlet a Zimlet
-com_zimbra_example_jquery.prototype = new ZmZimletBase();
-com_zimbra_example_jquery.prototype.constructor = com_zimbra_example_jquery;
+org_zmail_example_jquery.prototype = new ZmZimletBase();
+org_zmail_example_jquery.prototype.constructor = org_zmail_example_jquery;
 
 //Zimlet framework calls this when the overview panel icon is single clicked
-com_zimbra_example_jquery.prototype.singleClicked =
+org_zmail_example_jquery.prototype.singleClicked =
 function() {
 	this._displayPrefDialog();
 };
 
 //Typically doubleclicked does the same thing as singleclicked
-com_zimbra_example_jquery.prototype.doubleClicked =
+org_zmail_example_jquery.prototype.doubleClicked =
 function() {
 	this.singleClicked();
 };
 
-com_zimbra_example_jquery.prototype._displayPrefDialog =
+org_zmail_example_jquery.prototype._displayPrefDialog =
 function() {
 	//if zimlet dialog already exists...
 	if (this.pbDialog) {
@@ -56,18 +56,18 @@ function() {
 	this.pbDialog.popup();
 };
 
-com_zimbra_example_jquery.prototype._createPreferenceView =
+org_zmail_example_jquery.prototype._createPreferenceView =
 function() {
 	var html = new Array();
 	var i = 0;
 	html[i++] = "<DIV>Click handled by JQeury: <button id='jqueryExampleZimlet_button1'>JQuery</button></div>";
 	html[i++] = "<br/>";
-	html[i++] = "<DIV>Click handled by Zimbra:  <button id='jqueryExampleZimlet_button2'>Zimbra</button></div>";
+	html[i++] = "<DIV>Click handled by Zmail:  <button id='jqueryExampleZimlet_button2'>Zmail</button></div>";
 	html[i++] = "<br/>";
 	return html.join("");
 };
 
-com_zimbra_example_jquery.prototype._addWidgetAndListeners =
+org_zmail_example_jquery.prototype._addWidgetAndListeners =
 function() {
 	//Using JQuery to listen to a button click - Method 1:
 	var self = this;
@@ -82,11 +82,11 @@ function() {
 	//$("#jqueryExampleZimlet_button1").click(callback);
 	
 	//DWT way..
-	var callback = AjxCallback.simpleClosure(this._buttonListener, this, "Zimbra Button");
+	var callback = AjxCallback.simpleClosure(this._buttonListener, this, "Zmail Button");
 	Dwt.setHandler(document.getElementById("jqueryExampleZimlet_button2"), DwtEvent.ONCLICK, callback);
 };
 
-com_zimbra_example_jquery.prototype._buttonListener =
+org_zmail_example_jquery.prototype._buttonListener =
 function(buttonName) {
 	appCtxt.getAppController().setStatusMsg(buttonName + " clicked", ZmStatusView.LEVEL_INFO);
 };

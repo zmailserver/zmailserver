@@ -29,8 +29,8 @@ my $default_data_root = "$home_dir/zdesktop";
 
 my $messages = {
     en_US => {
-        ChooseDataRoot => "Choose the folder where you would like to install Zimbra Desktop's user data files, full path please",
-        ConfirmDataRoot => "Are you sure you would like to install Zimbra Desktop's user data under folder [{0}] ? NOTE: All non-ZD data under this directory will be deleted.",
+        ChooseDataRoot => "Choose the folder where you would like to install Zmail Desktop's user data files, full path please",
+        ConfirmDataRoot => "Are you sure you would like to install Zmail Desktop's user data under folder [{0}] ? NOTE: All non-ZD data under this directory will be deleted.",
         ChooseIconDir => "Choose the folder where you would like to create desktop icon",
         Configuring => "Initializing user data...",
         CreateIcon => "Creating desktop icon...",
@@ -39,10 +39,10 @@ my $messages = {
         InvalidDataRoot2 => "*** Error: User data directory can not be a parent directory of the application directory.",
         InvalidDataRoot3 => "*** Error: User data directory can not be your home directory.",
         Done => "done",
-        RunCommand => "You can start Zimbra Desktop by double-clicking the desktop icon or by running the following command:",
+        RunCommand => "You can start Zmail Desktop by double-clicking the desktop icon or by running the following command:",
 		RunWithAbsPath => '*** Error: You must run user-install.pl with absolute path.',
-        Success => 'Zimbra Desktop has been installed successfully for user {0}.',
-        LaunchZD => 'Press "Enter" to launch Zimbra Desktop; Press "Ctrl-c" to exit: ',
+        Success => 'Zmail Desktop has been installed successfully for user {0}.',
+        LaunchZD => 'Press "Enter" to launch Zmail Desktop; Press "Ctrl-c" to exit: ',
         YesNo => "(Y)es or (N)o"
     }
 };

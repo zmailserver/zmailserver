@@ -12,19 +12,19 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.tag.voice;
+package org.zmail.cs.taglib.tag.voice;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.taglib.bean.ZCallFeaturesBean;
-import com.zimbra.cs.taglib.bean.ZCallFeatureBean;
-import com.zimbra.cs.taglib.bean.ZCallForwardingBean;
-import com.zimbra.cs.taglib.bean.ZSelectiveCallForwardingBean;
-import com.zimbra.cs.taglib.bean.ZSelectiveCallRejectionBean;
-import com.zimbra.cs.taglib.bean.ZVoiceMailPrefsBean;
-import com.zimbra.client.ZCallFeatures;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZPhoneAccount;
-import com.zimbra.cs.account.Provisioning;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.taglib.bean.ZCallFeaturesBean;
+import org.zmail.cs.taglib.bean.ZCallFeatureBean;
+import org.zmail.cs.taglib.bean.ZCallForwardingBean;
+import org.zmail.cs.taglib.bean.ZSelectiveCallForwardingBean;
+import org.zmail.cs.taglib.bean.ZSelectiveCallRejectionBean;
+import org.zmail.cs.taglib.bean.ZVoiceMailPrefsBean;
+import org.zmail.client.ZCallFeatures;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZPhoneAccount;
+import org.zmail.cs.account.Provisioning;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
@@ -157,7 +157,7 @@ public class ModifyCallFeaturesTag extends CallFeaturesTagBase {
 			}
 			if (mNumberPerPage!=null && mailbox.getPrefs().getVoiceItemsPerPage() != mNumberPerPage.longValue()) {
 				Map<String, Object> attrs = new HashMap<String,Object>();
-				attrs.put(Provisioning.A_zimbraPrefVoiceItemsPerPage, Long.toString(mNumberPerPage.longValue()));
+				attrs.put(Provisioning.A_zmailPrefVoiceItemsPerPage, Long.toString(mNumberPerPage.longValue()));
 				mailbox.modifyPrefs(attrs);
 				update = true;
 				mailbox.getPrefs(true);

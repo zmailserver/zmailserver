@@ -12,23 +12,23 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline;
+package org.zmail.cs.offline;
 
 import java.io.IOException;
 import java.util.List;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.SystemUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.offline.OfflineDataSource;
-import com.zimbra.cs.account.DataSourceConfig;
-import com.zimbra.cs.datasource.CalDavDataImport;
-import com.zimbra.cs.datasource.DataSourceManager;
-import com.zimbra.cs.dav.DavException;
-import com.zimbra.cs.dav.client.CalDavClient;
-import com.zimbra.cs.mailbox.OfflineServiceException;
-import com.zimbra.cs.offline.common.OfflineConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.SystemUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.offline.OfflineDataSource;
+import org.zmail.cs.account.DataSourceConfig;
+import org.zmail.cs.datasource.CalDavDataImport;
+import org.zmail.cs.datasource.DataSourceManager;
+import org.zmail.cs.dav.DavException;
+import org.zmail.cs.dav.client.CalDavClient;
+import org.zmail.cs.mailbox.OfflineServiceException;
+import org.zmail.cs.offline.common.OfflineConstants;
 
 public class OfflineCalDavDataImport extends CalDavDataImport {
     private final String serviceName;
@@ -68,7 +68,7 @@ public class OfflineCalDavDataImport extends CalDavDataImport {
         if (!fullSync)
             return;
 
-        ZimbraLog.calendar.info("Importing calendar for account '%s'", dataSource.getName());
+        ZmailLog.calendar.info("Importing calendar for account '%s'", dataSource.getName());
         try {
     		super.importData(folderIds, fullSync);
     	} catch (ServiceException x) {
@@ -77,7 +77,7 @@ public class OfflineCalDavDataImport extends CalDavDataImport {
     			doCalDavFailures(serviceName, (DavException)t);
     		throw x;
     	}
-        ZimbraLog.calendar.info("Finished importing calendar for account '%s'", dataSource.getName());
+        ZmailLog.calendar.info("Finished importing calendar for account '%s'", dataSource.getName());
     }
     
     private static void doCalDavFailures(String serviceName, DavException x) throws ServiceException {
@@ -125,6 +125,6 @@ public class OfflineCalDavDataImport extends CalDavDataImport {
     
     @Override
     protected int getRootFolderId(DataSource ds) throws ServiceException {
-    	return ds.getIntAttr(OfflineConstants.A_zimbraDataSourceCalendarFolderId, ds.getFolderId());
+    	return ds.getIntAttr(OfflineConstants.A_zmailDataSourceCalendarFolderId, ds.getFolderId());
     }
 }

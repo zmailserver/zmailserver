@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.util.yc;
+package org.zmail.cs.offline.util.yc;
 
 import java.io.StringReader;
 import java.util.ArrayList;
@@ -27,10 +27,10 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.InputSource;
 
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.offline.util.Xml;
-import com.zimbra.cs.offline.util.yc.Fields.Flag;
-import com.zimbra.cs.offline.util.yc.Fields.Type;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.offline.util.Xml;
+import org.zmail.cs.offline.util.yc.Fields.Flag;
+import org.zmail.cs.offline.util.yc.Fields.Type;
 
 public class Contact extends Entity {
     private String id = "";

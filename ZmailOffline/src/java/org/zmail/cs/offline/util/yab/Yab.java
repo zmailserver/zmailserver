@@ -12,12 +12,12 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.util.yab;
+package org.zmail.cs.offline.util.yab;
 
-import com.zimbra.cs.util.yauth.Auth;
-import com.zimbra.cs.util.yauth.Authenticator;
-import com.zimbra.cs.offline.OfflineLog;
-import com.zimbra.common.util.Log;
+import org.zmail.cs.util.yauth.Auth;
+import org.zmail.cs.util.yauth.Authenticator;
+import org.zmail.cs.offline.OfflineLog;
+import org.zmail.common.util.Log;
 import org.apache.log4j.Logger;
 import org.apache.log4j.Level;
 

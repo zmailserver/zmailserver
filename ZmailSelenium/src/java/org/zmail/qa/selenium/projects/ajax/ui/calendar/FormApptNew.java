@@ -14,26 +14,26 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.ui.calendar;
+package org.zmail.qa.selenium.projects.ajax.ui.calendar;
 
 import java.awt.event.KeyEvent;
 
-import com.zimbra.qa.selenium.framework.core.SeleniumService;
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.framework.util.staf.Stafpostqueue;
+import org.zmail.qa.selenium.framework.core.SeleniumService;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.staf.Stafpostqueue;
 
 /**
  * The <code>FormMailNew<code> object defines a compose new message view
- * in the Zimbra Ajax client.
+ * in the Zmail Ajax client.
  * <p>
  * This class can be used to compose a new message.
  * <p>
  * 
  * @author Matt Rhoades
  * @see http
- *      ://wiki.zimbra.com/wiki/Testing:_Selenium:_ZimbraSelenium_Overview#Mail_Page
+ *      ://wiki.zmail.com/wiki/Testing:_Selenium:_ZmailSelenium_Overview#Mail_Page
  */
 public class FormApptNew extends AbsForm {
 	public static String locatorValue;
@@ -678,7 +678,7 @@ public class FormApptNew extends AbsForm {
 					if (!this.sIsElementPresent(locator))
 						throw new HarnessException(
 								"Unable to locate compose body");
-					if(ZimbraSeleniumProperties.isWebDriver()){
+					if(ZmailSeleniumProperties.isWebDriver()){
 					    this.sClickAt(locator, "");
 					    this.clearField(locator);
 					    this.sClickAt(locator, "");
@@ -809,7 +809,7 @@ public class FormApptNew extends AbsForm {
 			this.sClickAt(locator, "");
 			zRecurringOptions(locator, value, isRepeat);
 		} else {
-		    if(ZimbraSeleniumProperties.isWebDriver()){
+		    if(ZmailSeleniumProperties.isWebDriver()){
 				this.sClickAt(locator, "");
 				this.clearField(locator);
 				this.sClickAt(locator, "");
@@ -826,7 +826,7 @@ public class FormApptNew extends AbsForm {
 
 	@Override
 	public void zFill(IItem item) throws HarnessException {
-		logger.info(myPageName() + ".zFill(ZimbraItem)");
+		logger.info(myPageName() + ".zFill(ZmailItem)");
 		logger.info(item.prettyPrint());
 
 		// Make sure the item is a MailItem
@@ -917,7 +917,7 @@ public class FormApptNew extends AbsForm {
 		logger.info(myPageName() + " zIsActive()");
 
 		// Look for the div
-		// See https://bugzilla.zimbra.com/show_bug.cgi?id=58477
+		// See https://bugzilla.zmail.com/show_bug.cgi?id=58477
 		// String locator = "css=div[id^='ztb__APPT']";			// 8.0 D2
 		String locator = "css=div[id^='zb__App__tab_APPT-']";	// 8.0 D3
 

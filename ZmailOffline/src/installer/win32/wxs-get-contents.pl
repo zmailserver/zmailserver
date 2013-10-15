@@ -66,7 +66,7 @@ my $build_root_len = length($build_root);
 my $wxs_file = "$build_root\\build\\win_installer.wxs";
 my $dist_dir = "$build_root\\build\\dist";
 my ($xml_app, $xml_refs) = ("", "");
-my $seed_prefix = "zimbra_desktop_";
+my $seed_prefix = "zmail_desktop_";
 my $cid_counter = 20000;
 my $desktop_shortcut = "";
 my $zdrun_dirid = "";
@@ -74,7 +74,7 @@ my $zdrun_dirid = "";
 sub get_shortcut {
 	my ($ind, $scid, $scdir, $iconid, $fileid) = @_;
 
-	return "$ind<Shortcut Id=\"$scid\" Directory=\"$scdir\" Advertise=\"no\" Name=\"Zimbra Desktop\" " .
+	return "$ind<Shortcut Id=\"$scid\" Directory=\"$scdir\" Advertise=\"no\" Name=\"Zmail Desktop\" " .
 		"Show=\"minimized\" Icon=\"$iconid\" Target=\"[SystemFolder]cscript.exe\" " .
 		"Arguments=\'\"[!$fileid]\"\'>\r\n$ind  <Icon Id=\"$iconid\" " .
 		"SourceFile=\"$dist_dir\\app\\data\\zdesktop.webapp\\icons\\default\\launcher.ico\" />\r\n" .
@@ -163,7 +163,7 @@ sub traverse {
 	$$xml .= "$indent</Directory>\r\n";
 }
 
-traverse("$dist_dir\\app", "          ", "APPLICATIONFOLDER", "Zimbra Desktop", \$xml_app);
+traverse("$dist_dir\\app", "          ", "APPLICATIONFOLDER", "Zmail Desktop", \$xml_app);
 
 my $tokens = {
 	'@build.application.folder.contents@' => $xml_app, 

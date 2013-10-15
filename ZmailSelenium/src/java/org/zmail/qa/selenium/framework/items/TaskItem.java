@@ -17,12 +17,12 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.framework.items;
+package org.zmail.qa.selenium.framework.items;
 
 import org.apache.log4j.*;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.util.*;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.util.*;
 
 /**
  * This class represents a mail message
@@ -94,8 +94,8 @@ public class TaskItem implements IItem {
 	}
 	public void populateTaskData() {
 		// TODO Auto-generated method stub
-		//taskSubject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		//taskBody = "Body" + ZimbraSeleniumProperties.getUniqueString();
+		//taskSubject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		//taskBody = "Body" + ZmailSeleniumProperties.getUniqueString();
 	}
 	public String myId;
 	public String getId() {
@@ -115,13 +115,13 @@ public class TaskItem implements IItem {
 		try {
 
 			// Make sure we only have the GetMsgResponse part
-			Element getMsgResponse = ZimbraAccount.SoapClient.selectNode(
+			Element getMsgResponse = ZmailAccount.SoapClient.selectNode(
 					GetMsgResponse, "//mail:GetMsgResponse");
 			
 			if (getMsgResponse == null)
 				throw new HarnessException(
 						"Element does not contain GetMsgResponse");
-			Element m = ZimbraAccount.SoapClient.selectNode(getMsgResponse,"//mail:comp");
+			Element m = ZmailAccount.SoapClient.selectNode(getMsgResponse,"//mail:comp");
 			if (m == null)
 				throw new HarnessException(
 						"Element does not contain an m element");
@@ -149,13 +149,13 @@ public class TaskItem implements IItem {
 
 	}
 
-	public static TaskItem importFromSOAP(ZimbraAccount account, String query)
+	public static TaskItem importFromSOAP(ZmailAccount account, String query)
 			throws HarnessException {
 
 		try {
 
 			account
-					.soapSend("<SearchRequest xmlns='urn:zimbraMail' types='task' >"
+					.soapSend("<SearchRequest xmlns='urn:zmailMail' types='task' >"
 							+ "<query>"
 							+ query
 							+ "</query>"
@@ -170,7 +170,7 @@ public class TaskItem implements IItem {
 			String invId = account.soapSelectValue(
 					"//mail:SearchResponse/mail:task", "invId");
 
-			account.soapSend("<GetMsgRequest xmlns='urn:zimbraMail'>"
+			account.soapSend("<GetMsgRequest xmlns='urn:zmailMail'>"
 					+ "<m id='" + invId + "' />" + "</GetMsgRequest>");
 			Element getMsgResponse = account.soapSelectNode(
 					"//mail:GetMsgResponse", 1);
@@ -184,7 +184,7 @@ public class TaskItem implements IItem {
 		}
 	}
 
-	public void createUsingSOAP(ZimbraAccount account) throws HarnessException {
+	public void createUsingSOAP(ZmailAccount account) throws HarnessException {
 		throw new HarnessException("implement me!");
 	}
 

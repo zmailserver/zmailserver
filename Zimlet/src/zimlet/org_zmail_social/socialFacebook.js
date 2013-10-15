@@ -13,9 +13,9 @@
  * ***** END LICENSE BLOCK *****
  */
 
-//Author: Raja Rao DV (rrao@zimbra.com)
+//Author: Raja Rao DV (rrao@zmail.com)
 
-function com_zimbra_socialFacebook(zimlet) {
+function org_zmail_socialFacebook(zimlet) {
 	this.zimlet = zimlet;
 	this.OAUTH2_SERVER = this.zimlet.getConfig("OAUTH2_SERVER");
 	this.waitingForApproval = false;
@@ -35,7 +35,7 @@ function com_zimbra_socialFacebook(zimlet) {
 	}
 }
 
-com_zimbra_socialFacebook.prototype._addFBComment = function(params) {
+org_zmail_socialFacebook.prototype._addFBComment = function(params) {
 	var url = "https://api.facebook.com/restserver.php";
 	var account = this.zimlet.tableIdAndAccountMap[params.tableId];
 	var paramsArray = [
@@ -50,7 +50,7 @@ com_zimbra_socialFacebook.prototype._addFBComment = function(params) {
 	this._doPOST(url, urlParams, new AjxCallback(this, this._addFBCommentCallback, params));
 };
 
-com_zimbra_socialFacebook.prototype._addFBCommentCallback =
+org_zmail_socialFacebook.prototype._addFBCommentCallback =
 function (params, response) {
 	if (response.success) {
 		var field = document.getElementById(params.commentFieldId);
@@ -69,7 +69,7 @@ function (params, response) {
 	}
 };
 
-com_zimbra_socialFacebook.prototype._publishToFacebook =
+org_zmail_socialFacebook.prototype._publishToFacebook =
 function (params) {
 	var url = "https://api.facebook.com/restserver.php";
 	var account = params.account;
@@ -86,7 +86,7 @@ function (params) {
 	this._doPOST(url, urlParams, new AjxCallback(this, this._publishToFacebookCallback, params));
 };
 
-com_zimbra_socialFacebook.prototype._publishToFacebookCallback =
+org_zmail_socialFacebook.prototype._publishToFacebookCallback =
 function (params, response) {
 	if (response.success) {
 		if (this.zimlet.updateField) {
@@ -107,7 +107,7 @@ function (params, response) {
 	}
 };
 
-com_zimbra_socialFacebook.prototype._getExtendedPermissionInfo =
+org_zmail_socialFacebook.prototype._getExtendedPermissionInfo =
 function (params) {
 	var url = "https://api.facebook.com/restserver.php";
 	var account = params.account;
@@ -122,7 +122,7 @@ function (params) {
 	this._doPOST(url, urlParams, new AjxCallback(this, this._getExtendedPermissionCallback, params));
 };
 
-com_zimbra_socialFacebook.prototype._getExtendedPermissionCallback =
+org_zmail_socialFacebook.prototype._getExtendedPermissionCallback =
 function (params, response) {
 	var permission = params.permission;
 	var account = params.account;
@@ -135,7 +135,7 @@ function (params, response) {
 		params.callback.run(this);
 };
 
-com_zimbra_socialFacebook.prototype.authorizeExtendedPermission =
+org_zmail_socialFacebook.prototype.authorizeExtendedPermission =
 function(params) {
 	var permission = params.permission;
 	var account = params.account;
@@ -145,14 +145,14 @@ function(params) {
 
 };
 
-com_zimbra_socialFacebook.prototype.getExtendedPermForRead =
+org_zmail_socialFacebook.prototype.getExtendedPermForRead =
 function () {
 	var url = "https://www.facebook.com/authorize.php?";
 	var params = "version=1.0&ext_perm=read_stream&api_key=" + this.apiKey;
 	this.zimlet.openCenteredWindow(url + params);
 };
 
-com_zimbra_socialFacebook.prototype._fbGetStream =
+org_zmail_socialFacebook.prototype._fbGetStream =
 function (tableId, account) {
 	var url = "https://api.facebook.com/restserver.php";
 	var paramsArray = [
@@ -174,7 +174,7 @@ function (tableId, account) {
 
 };
 
-com_zimbra_socialFacebook.prototype._getSinceOrUntilParams =
+org_zmail_socialFacebook.prototype._getSinceOrUntilParams =
 function (tableId) {
 	var refreshType = this.zimlet.tableIdAndRefreshType[tableId];
 	var id;
@@ -198,7 +198,7 @@ function (tableId) {
 	}
 };
 
-com_zimbra_socialFacebook.prototype.postLike =
+org_zmail_socialFacebook.prototype.postLike =
 function (obj) {
 	var url = "https://api.facebook.com/restserver.php";
 	var paramsArray = [
@@ -210,7 +210,7 @@ function (obj) {
 	this._doPOST(url, params, new AjxCallback(this, this._postLikeCallback, obj));
 };
 
-com_zimbra_socialFacebook.prototype._postLikeCallback =
+org_zmail_socialFacebook.prototype._postLikeCallback =
 function (params, response) {
 	if (response.success) {
 		setTimeout(AjxCallback.simpleClosure(this._updateFacebookStream, this, params.tableId, params.account), 3000);//refresh table after 3 secs
@@ -221,7 +221,7 @@ function (params, response) {
 	}
 };
 
-com_zimbra_socialFacebook.prototype.insertMoreComments =
+org_zmail_socialFacebook.prototype.insertMoreComments =
 function (obj) {
 	var url = "https://api.facebook.com/restserver.php";
 	var paramsArray = [
@@ -233,7 +233,7 @@ function (obj) {
 	this._doPOST(url, params, new AjxCallback(this, this._getMoreCommentsCallback, obj));
 };
 
-com_zimbra_socialFacebook.prototype._getMoreCommentsCallback =
+org_zmail_socialFacebook.prototype._getMoreCommentsCallback =
 function (obj, response) {
 	var jsonObj = this.zimlet._extractJSONResponse(null, this.zimlet.getMessage("couldNotGetComments"), response);
 	if(jsonObj.error) {
@@ -247,7 +247,7 @@ function (obj, response) {
 	this._getUserInfo(obj);
 };
 
-com_zimbra_socialFacebook.prototype._getUserInfo =
+org_zmail_socialFacebook.prototype._getUserInfo =
 function (obj) {
 	var moreComments = obj.moreComments;
 	var uids = "";
@@ -271,7 +271,7 @@ function (obj) {
 	this._doPOST(url, params, new AjxCallback(this, this._getUsersInfoCallback, obj));
 };
 
-com_zimbra_socialFacebook.prototype._getUsersInfoCallback =
+org_zmail_socialFacebook.prototype._getUsersInfoCallback =
 function (obj, response) {
 	var jsonObj = this.zimlet._extractJSONResponse(null, this.zimlet.getMessage("tryRefreshingFBCard"), response);
 	if(jsonObj.error) {
@@ -294,7 +294,7 @@ function (obj, response) {
 	}
 };
 
-com_zimbra_socialFacebook.prototype._getStreamCallback =
+org_zmail_socialFacebook.prototype._getStreamCallback =
 function (tableId, response) {
 	var jsonObj = this.zimlet._extractJSONResponse(tableId, this.zimlet.getMessage("errorTryRefreshing"), response);
 	var posts = jsonObj.posts;
@@ -315,7 +315,7 @@ function (tableId, response) {
 	}
 };
 
-com_zimbra_socialFacebook.prototype._cacheFBProfiles =
+org_zmail_socialFacebook.prototype._cacheFBProfiles =
 function (tableId, profiles) {
 	var pageNumber = this.zimlet.tableIdAndPageNumberMap[tableId];
 	if(!pageNumber) {
@@ -327,7 +327,7 @@ function (tableId, profiles) {
 	this._tableIdAndFBProfilesCache[tableId][pageNumber] = profiles;
 };
 
-com_zimbra_socialFacebook.prototype._getFBProfiles =
+org_zmail_socialFacebook.prototype._getFBProfiles =
 function (tableId) {
 	var pageNumber = this.zimlet.tableIdAndPageNumberMap[tableId];
 	if(!pageNumber) {
@@ -336,7 +336,7 @@ function (tableId) {
 	return this._tableIdAndFBProfilesCache[tableId][pageNumber];
 };
 
-com_zimbra_socialFacebook.prototype._getSignatureFromJSP =
+org_zmail_socialFacebook.prototype._getSignatureFromJSP =
 function (args) {
 	var params = new Array;
 	for (var i = 0; i < args.length; i++) {
@@ -350,7 +350,7 @@ function (args) {
 	return obj.signature;
 };
 
-com_zimbra_socialFacebook.prototype.fbCreateToken =
+org_zmail_socialFacebook.prototype.fbCreateToken =
 function () {
 	var url = "https://api.facebook.com/restserver.php";
 	var paramsArray = [
@@ -360,21 +360,21 @@ function () {
 	setTimeout(AjxCallback.simpleClosure(this._doFbCreateToken, this, url, paramsArray, signature), 500);//delay calling by .5 secs(otherwise, sometimes breaks in ff)
 };
 
-com_zimbra_socialFacebook.prototype._doFbCreateToken =
+org_zmail_socialFacebook.prototype._doFbCreateToken =
 function (url, paramsArray, signature) {
 	var params = this._getFBParams(paramsArray, null, signature);
 	this._doPOST(url, params, new AjxCallback(this, this._fbCreateTokenCallback));
 	this.zimlet.preferences.showAddFBInfoDlg();
 };
 
-com_zimbra_socialFacebook.prototype._fbCreateTokenCallback =
+org_zmail_socialFacebook.prototype._fbCreateTokenCallback =
 function (response) {
 	var text = response.text;
 	this.fb_auth_token = eval("(" + text + ")");
 	this.loginToFB(this.fb_auth_token);
 };
 
-com_zimbra_socialFacebook.prototype.loginToFB =
+org_zmail_socialFacebook.prototype.loginToFB =
 function (authToken) {
 	var url = "https://www.facebook.com/login.php?";
 	var params = new Array();
@@ -399,7 +399,7 @@ function (authToken) {
 	this.zimlet.openCenteredWindow(url);
 };
 
-com_zimbra_socialFacebook.prototype._getSessionId =
+org_zmail_socialFacebook.prototype._getSessionId =
 function () {
 	var url = "https://api.facebook.com/restserver.php";
 	var paramsArray = [
@@ -411,12 +411,12 @@ function () {
 
 
 };
-com_zimbra_socialFacebook.prototype._doGetSessionId =
+org_zmail_socialFacebook.prototype._doGetSessionId =
 function (url, paramsArray, signature) {
 	var params = this._getFBParams(paramsArray, null, signature);
 	this._doPOST(url, params, new AjxCallback(this, this._sessionIdCallback));
 };
- com_zimbra_socialFacebook.prototype.showFBWindow =
+ org_zmail_socialFacebook.prototype.showFBWindow =
 		 function() {
 			this._facebookState = (new Date()).getTime();
 			this._facebookWindow = this.zimlet.openCenteredWindow(this.OAUTH2_SERVER + "?state=" + this._facebookState);
@@ -425,7 +425,7 @@ function (url, paramsArray, signature) {
 			}
 		 };
 
-com_zimbra_socialFacebook.prototype._showFBOAuth2MsgDlg = function() {
+org_zmail_socialFacebook.prototype._showFBOAuth2MsgDlg = function() {
 	if (!this._fbOauthAuth2Dlg) {
 		this._fbOauthAuth2Dlg = new DwtMessageDialog({parent:this.zimlet.getShell(), buttons:[DwtDialog.OK_BUTTON, DwtDialog.CANCEL_BUTTON]});
 		this._fbOauthAuth2Dlg.setMessage(this.zimlet.getMessage("authorizeFacebookMsg"));
@@ -434,7 +434,7 @@ com_zimbra_socialFacebook.prototype._showFBOAuth2MsgDlg = function() {
 	this._fbOauthAuth2Dlg.popup();
 };
 
- com_zimbra_socialFacebook.prototype._fbOAuth2OKBtnListener =
+ org_zmail_socialFacebook.prototype._fbOAuth2OKBtnListener =
 		 function() {
 			 	this._fbOauthAuth2Dlg.popdown();
 				var callback = new AjxCallback(this, this._getFbAccessTokenHandler);
@@ -443,7 +443,7 @@ com_zimbra_socialFacebook.prototype._showFBOAuth2MsgDlg = function() {
 		 };
 
 
-  com_zimbra_socialFacebook.prototype._getFbAccessTokenHandler =
+  org_zmail_socialFacebook.prototype._getFbAccessTokenHandler =
 		 function(response) {
 			 var text =  response.text;
 			 if(text.indexOf("access_token") == -1) {
@@ -460,7 +460,7 @@ com_zimbra_socialFacebook.prototype._showFBOAuth2MsgDlg = function() {
 			 }
 		 };
 
-com_zimbra_socialFacebook.prototype._handleFBAccountInfo =
+org_zmail_socialFacebook.prototype._handleFBAccountInfo =
 function (accessToken, response) {
 	var text = response.text;
 	if (response.success) {
@@ -473,7 +473,7 @@ function (accessToken, response) {
 	}
 };
 
-com_zimbra_socialFacebook.prototype._sessionIdCallback =
+org_zmail_socialFacebook.prototype._sessionIdCallback =
 function (response) {
 	var text = response.text;
 	if (text.indexOf("session_key") >= 0 && text.indexOf("secret") >= 0) {
@@ -487,7 +487,7 @@ function (response) {
 	this.zimlet.preferences._getFbInfoDialog.popdown();
 };
 
-com_zimbra_socialFacebook.prototype.askForPermissions =
+org_zmail_socialFacebook.prototype.askForPermissions =
 function (fromAuthorizeBtn) {
 	var params = new Array();
 	if (!fromAuthorizeBtn) {
@@ -519,12 +519,12 @@ function (fromAuthorizeBtn) {
 	this.zimlet.openCenteredWindow(url);
 };
 
-com_zimbra_socialFacebook.prototype._convertFB_JsonStrToUrlEncodedStr = function(text) {
+org_zmail_socialFacebook.prototype._convertFB_JsonStrToUrlEncodedStr = function(text) {
 	var jsonObj = eval("(" + text + ")");
 	return ["id=", jsonObj.id,"&at=",accessToken,"&name=",jsonObj.name].join("");
 };
 
-com_zimbra_socialFacebook.prototype._doPOST =
+org_zmail_socialFacebook.prototype._doPOST =
 function (url, params, callback) {
 	var hdrs = new Array();
 	hdrs["Content-type"] = "application/x-www-form-urlencoded";
@@ -534,7 +534,7 @@ function (url, params, callback) {
 	AjxRpc.invoke(params, entireurl, hdrs, callback, false);
 }
 
-com_zimbra_socialFacebook.prototype._getFBParams =
+org_zmail_socialFacebook.prototype._getFBParams =
 function(otherParamsArray, secret, signatureFromJSP) {
 	var paramsArray = [
 		["format", "json"]
@@ -547,7 +547,7 @@ function(otherParamsArray, secret, signatureFromJSP) {
 	return arry.join("&");
 };
 
-com_zimbra_socialFacebook.prototype.manageFacebookAccounts = function(text) {
+org_zmail_socialFacebook.prototype.manageFacebookAccounts = function(text) {
 	var nv = text.split("&");
 	var tObj = {};
 	for (var i = 0; i < nv.length; i++) {
@@ -572,12 +572,12 @@ com_zimbra_socialFacebook.prototype.manageFacebookAccounts = function(text) {
 	this.zimlet.allAccounts[tObj.name + tObj.id] = tObj;
 };
 
-com_zimbra_socialFacebook.prototype._updateFacebookStream =
+org_zmail_socialFacebook.prototype._updateFacebookStream =
 function(tableId, account) {
 	this._fbGetStream(tableId, account);
 };
 
-com_zimbra_socialFacebook.prototype.getFacebookProfile =
+org_zmail_socialFacebook.prototype.getFacebookProfile =
 function(id, tableId) {
 	var fbProfiles = this._getFBProfiles(tableId);
 	for (var i = 0; i < fbProfiles.length; i++) {

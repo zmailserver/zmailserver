@@ -14,9 +14,9 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimletConfig name="com_zimbra_bugz" version="1.5">
+<zimletConfig name="org_zmail_bugz" version="1.5">
     <global>
-        <property name="url">http://bugzilla.zimbra.com/show_bug.cgi</property>
-        <property name="allowedDomains">*.zimbra.com</property>
+        <property name="url">http://bugzilla.zmail.com/show_bug.cgi</property>
+        <property name="allowedDomains">*.zmail.com</property>
     </global>
 </zimletConfig>

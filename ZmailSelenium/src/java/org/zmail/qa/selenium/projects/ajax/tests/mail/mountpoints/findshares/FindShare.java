@@ -14,23 +14,23 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.mountpoints.findshares;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.mountpoints.findshares;
 
 
 import java.util.List;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogShareFind;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogShareFind;
 
 
 public class FindShare extends PrefGroupMailByMessageTest {
@@ -50,18 +50,18 @@ public class FindShare extends PrefGroupMailByMessageTest {
 			groups = { "functional" })
 	public void CreateMountpoint_01() throws HarnessException {
 		
-		ZimbraAccount Owner = new ZimbraAccount();
+		ZmailAccount Owner = new ZmailAccount();
 		Owner.provision();
 		Owner.authenticate();
 
 		// Owner creates a folder, shares it with current user
-		String ownerFoldername = "ownerfolder"+ ZimbraSeleniumProperties.getUniqueString();
+		String ownerFoldername = "ownerfolder"+ ZmailSeleniumProperties.getUniqueString();
 		
 		FolderItem ownerInbox = FolderItem.importFromSOAP(Owner, FolderItem.SystemFolder.Inbox);
 		ZAssert.assertNotNull(ownerInbox, "Verify the new owner folder exists");
 
 		Owner.soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>"
+					"<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+		"<folder name='" + ownerFoldername +"' l='" + ownerInbox.getId() +"' view='message'/>"
 				+	"</CreateFolderRequest>");
 		
@@ -69,7 +69,7 @@ public class FindShare extends PrefGroupMailByMessageTest {
 		ZAssert.assertNotNull(ownerFolder, "Verify the new owner folder exists");
 		
 		Owner.soapSend(
-					"<FolderActionRequest xmlns='urn:zimbraMail'>"
+					"<FolderActionRequest xmlns='urn:zmailMail'>"
 				+		"<action id='"+ ownerFolder.getId() +"' op='grant'>"
 				+			"<grant d='" + app.zGetActiveAccount().EmailAddress + "' gt='usr' perm='r'/>"
 				+		"</action>"
@@ -111,7 +111,7 @@ public class FindShare extends PrefGroupMailByMessageTest {
 		
 		// Verify the mountpoint exists
 		app.zGetActiveAccount().soapSend(
-				"<GetFolderRequest xmlns='urn:zimbraMail'/>");
+				"<GetFolderRequest xmlns='urn:zmailMail'/>");
 		
 		Element[] nodes = app.zGetActiveAccount().soapSelectNodes("//mail:link[@owner='"+ Owner.EmailAddress +"']");
 		ZAssert.assertGreaterThan(nodes.length, 0, "Verify the mountpoint is listed in the folder tree");

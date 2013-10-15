@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.ldaputils;
+package org.zmail.ldaputils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,29 +22,29 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.AttributeManager;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.NamedEntry.Visitor;
-import com.zimbra.cs.account.callback.CallbackContext;
-import com.zimbra.cs.account.ldap.LdapProv;
-import com.zimbra.cs.ldap.IAttributes;
-import com.zimbra.cs.ldap.LdapClient;
-import com.zimbra.cs.ldap.LdapServerType;
-import com.zimbra.cs.ldap.LdapUsage;
-import com.zimbra.cs.ldap.SearchLdapOptions;
-import com.zimbra.cs.ldap.ZAttributes;
-import com.zimbra.cs.ldap.ZLdapContext;
-import com.zimbra.cs.ldap.ZMutableEntry;
-import com.zimbra.cs.ldap.ZSearchScope;
-import com.zimbra.cs.ldap.IAttributes.CheckBinary;
-import com.zimbra.cs.ldap.LdapException.LdapEntryAlreadyExistException;
-import com.zimbra.cs.ldap.LdapException.LdapEntryNotFoundException;
-import com.zimbra.cs.ldap.LdapException.LdapSizeLimitExceededException;
-import com.zimbra.cs.ldap.SearchLdapOptions.SearchLdapVisitor;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.AttributeManager;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.NamedEntry.Visitor;
+import org.zmail.cs.account.callback.CallbackContext;
+import org.zmail.cs.account.ldap.LdapProv;
+import org.zmail.cs.ldap.IAttributes;
+import org.zmail.cs.ldap.LdapClient;
+import org.zmail.cs.ldap.LdapServerType;
+import org.zmail.cs.ldap.LdapUsage;
+import org.zmail.cs.ldap.SearchLdapOptions;
+import org.zmail.cs.ldap.ZAttributes;
+import org.zmail.cs.ldap.ZLdapContext;
+import org.zmail.cs.ldap.ZMutableEntry;
+import org.zmail.cs.ldap.ZSearchScope;
+import org.zmail.cs.ldap.IAttributes.CheckBinary;
+import org.zmail.cs.ldap.LdapException.LdapEntryAlreadyExistException;
+import org.zmail.cs.ldap.LdapException.LdapEntryNotFoundException;
+import org.zmail.cs.ldap.LdapException.LdapSizeLimitExceededException;
+import org.zmail.cs.ldap.SearchLdapOptions.SearchLdapVisitor;
 
 abstract class LDAPUtilsHelper {
     
@@ -128,7 +128,7 @@ abstract class LDAPUtilsHelper {
                 AttributeManager.getInstance().postModify(entryAttrs, namedEntry, callbackContext);
                 return namedEntry;
             } catch (LdapEntryAlreadyExistException nabe) {   
-                throw ZimbraLDAPUtilsServiceException.DN_EXISTS(dn);
+                throw ZmailLDAPUtilsServiceException.DN_EXISTS(dn);
             } finally {
                 LdapClient.closeContext(zlc);
             }
@@ -191,7 +191,7 @@ abstract class LDAPUtilsHelper {
                 NamedEntry ne = getObjectByDN(newDN, zlc);
                 return ne;
             } catch (LdapEntryAlreadyExistException nabe) {
-                throw ZimbraLDAPUtilsServiceException.DN_EXISTS(newDN);         
+                throw ZmailLDAPUtilsServiceException.DN_EXISTS(newDN);         
             } catch (ServiceException e) {
                 throw ServiceException.FAILURE("unable to rename dn: "+dn+ "to " +newDN, e);
             } finally {
@@ -234,7 +234,7 @@ abstract class LDAPUtilsHelper {
                 try {
                     doVisit(dn, ldapAttrs);
                 } catch (ServiceException e) {
-                    ZimbraLog.account.warn("entry skipped, encountered error while processing entry at:" + dn);
+                    ZmailLog.account.warn("entry skipped, encountered error while processing entry at:" + dn);
                 }
             }
             
@@ -243,7 +243,7 @@ abstract class LDAPUtilsHelper {
                         CheckBinary.NOCHECK);
 
                 // skip admin accounts
-                if (dn.endsWith("cn=zimbra")) {
+                if (dn.endsWith("cn=zmail")) {
                     return;
                 }
                 

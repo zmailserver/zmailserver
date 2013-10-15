@@ -14,22 +14,22 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.offline;
+package org.zmail.cs.service.offline;
 
 import java.util.Map;
 
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.offline.OfflineAccount;
-import com.zimbra.cs.account.offline.OfflineProvisioning;
-import com.zimbra.cs.mailbox.GalSync;
-import com.zimbra.cs.offline.OfflineLog;
-import com.zimbra.cs.offline.common.OfflineConstants;
-import com.zimbra.cs.service.admin.AdminDocumentHandler;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.offline.OfflineAccount;
+import org.zmail.cs.account.offline.OfflineProvisioning;
+import org.zmail.cs.mailbox.GalSync;
+import org.zmail.cs.offline.OfflineLog;
+import org.zmail.cs.offline.common.OfflineConstants;
+import org.zmail.cs.service.admin.AdminDocumentHandler;
+import org.zmail.soap.ZmailSoapContext;
 
 public class OfflineResetGal extends AdminDocumentHandler {
 
@@ -55,7 +55,7 @@ public class OfflineResetGal extends AdminDocumentHandler {
             OfflineLog.offline.debug("Offline GAL sync is disabled for %s, resetting skipped.", account.getName());
         }
 
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Element resp = zsc.createElement(OfflineConstants.RESET_GAL_ACCOUNT_RESPONSE);
         return resp;
     }

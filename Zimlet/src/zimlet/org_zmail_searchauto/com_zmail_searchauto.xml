@@ -14,7 +14,7 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_searchauto"
+<zimlet name="org_zmail_searchauto"
         version="2.1"
         label="Search History"
         description="Helps autocomplete prior searches">

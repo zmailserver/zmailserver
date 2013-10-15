@@ -14,7 +14,7 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_gtranslator"
+<zimlet name="org_zmail_gtranslator"
         version="4.1"
         label="${msg.label}"
         description="${msg.description}"
@@ -22,5 +22,5 @@
 	<include>gtranslator.js</include>
 	<includeCSS>gtranslator.css</includeCSS>
 	<resource>google-icon.gif</resource>
-	<handlerObject>com_zimbra_gtranslator_HandlerObject</handlerObject>
+	<handlerObject>org_zmail_gtranslator_HandlerObject</handlerObject>
 </zimlet>

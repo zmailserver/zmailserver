@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package	com.zimbra.jsapi;
+package	org.zmail.jsapi;
 
 import java.io.*;
 import java.text.MessageFormat;

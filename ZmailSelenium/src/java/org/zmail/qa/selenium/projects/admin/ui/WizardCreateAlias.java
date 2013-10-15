@@ -17,13 +17,13 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.admin.ui;
+package org.zmail.qa.selenium.projects.admin.ui;
 
-import com.zimbra.qa.selenium.framework.items.IItem;
-import com.zimbra.qa.selenium.framework.ui.AbsTab;
-import com.zimbra.qa.selenium.framework.ui.AbsWizard;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.projects.admin.items.AliasItem;
+import org.zmail.qa.selenium.framework.items.IItem;
+import org.zmail.qa.selenium.framework.ui.AbsTab;
+import org.zmail.qa.selenium.framework.ui.AbsWizard;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.projects.admin.items.AliasItem;
 
 
 /**

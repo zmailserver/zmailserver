@@ -12,34 +12,34 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.offline;
+package org.zmail.cs.service.offline;
 
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.offline.OfflineAccount;
-import com.zimbra.cs.account.offline.OfflineGal;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.index.SortBy;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.ZcsMailbox;
-import com.zimbra.cs.mailbox.OfflineServiceException;
-import com.zimbra.soap.DocumentHandler;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.offline.OfflineAccount;
+import org.zmail.cs.account.offline.OfflineGal;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.index.SortBy;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.ZcsMailbox;
+import org.zmail.cs.mailbox.OfflineServiceException;
+import org.zmail.soap.DocumentHandler;
+import org.zmail.soap.ZmailSoapContext;
 
 public class OfflineSearchGal extends DocumentHandler {
 
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext ctxt = getZimbraSoapContext(context);
-        Account account = getRequestedAccount(getZimbraSoapContext(context));
+        ZmailSoapContext ctxt = getZmailSoapContext(context);
+        Account account = getRequestedAccount(getZmailSoapContext(context));
         if (!(account instanceof OfflineAccount))
             throw OfflineServiceException.MISCONFIGURED("incorrect account class: " + account.getClass().getSimpleName());
         
-        if (!account.getBooleanAttr(Provisioning.A_zimbraFeatureGalEnabled , false))
+        if (!account.getBooleanAttr(Provisioning.A_zmailFeatureGalEnabled , false))
             throw ServiceException.PERM_DENIED("GAL disabled");
         
         Mailbox mbox = getRequestedMailbox(ctxt);
@@ -47,7 +47,7 @@ public class OfflineSearchGal extends DocumentHandler {
             return getResponseElement(ctxt);
         
         Element response;
-        if (account.getBooleanAttr(Provisioning.A_zimbraFeatureGalSyncEnabled , false)) {
+        if (account.getBooleanAttr(Provisioning.A_zmailFeatureGalSyncEnabled , false)) {
             response = ctxt.createElement(AccountConstants.SEARCH_GAL_RESPONSE);
             
             String name = request.getAttribute(AccountConstants.E_NAME);

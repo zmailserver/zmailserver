@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-//The original is modified for handling OAuth token in Zimbra
+//The original is modified for handling OAuth token in Zmail
 
 // Original's copyright and license terms
 /*
@@ -34,22 +34,22 @@
 
 package sample.oauth.provider;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.AuthTokenException;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.ZimbraAuthToken;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.Metadata;
-import com.zimbra.cs.service.AuthProvider;
-import com.zimbra.cs.service.AuthProviderException;
-import com.zimbra.cs.service.UserServletContext;
-import com.zimbra.soap.SoapServlet;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.AuthTokenException;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.ZmailAuthToken;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.Metadata;
+import org.zmail.cs.service.AuthProvider;
+import org.zmail.cs.service.AuthProviderException;
+import org.zmail.cs.service.UserServletContext;
+import org.zmail.soap.SoapServlet;
 import net.oauth.OAuthAccessor;
 import net.oauth.OAuthMessage;
 import net.oauth.server.OAuthServlet;
@@ -59,37 +59,37 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Map;
 
-public class ZimbraAuthProviderForOAuth extends AuthProvider{
+public class ZmailAuthProviderForOAuth extends AuthProvider{
 
-    ZimbraAuthProviderForOAuth() {
+    ZmailAuthProviderForOAuth() {
         super("oauth");
     }
     
     // AP-TODO-6: dup in ZAuthToken, move to common?
     //public static String cookieName(boolean isAdminReq) {
-    //    return isAdminReq? ZimbraServlet.COOKIE_ZM_ADMIN_AUTH_TOKEN : ZimbraServlet.COOKIE_ZM_AUTH_TOKEN;
+    //    return isAdminReq? ZmailServlet.COOKIE_ZM_ADMIN_AUTH_TOKEN : ZmailServlet.COOKIE_ZM_AUTH_TOKEN;
     //}
     
     protected AuthToken authToken(HttpServletRequest req, boolean isAdminReq) throws AuthProviderException, AuthTokenException {
         
-    	ZimbraLog.extensions.debug("authToken(HttpServletRequest req, boolean isAdminReq) is requested.");
+    	ZmailLog.extensions.debug("authToken(HttpServletRequest req, boolean isAdminReq) is requested.");
     	if(isAdminReq){
-    		ZimbraLog.extensions.debug("isAdminReq"+isAdminReq);
+    		ZmailLog.extensions.debug("isAdminReq"+isAdminReq);
         	return null;
     	}
     	
-        String origUrl = req.getHeader("X-Zimbra-Orig-Url");
+        String origUrl = req.getHeader("X-Zmail-Orig-Url");
         OAuthMessage oAuthMessage =
                 StringUtil.isNullOrEmpty(origUrl) ?
                         OAuthServlet.getMessage(req, null) : OAuthServlet.getMessage(req, origUrl);
 
         try {
             if(oAuthMessage.getToken() == null) {
-                ZimbraLog.extensions.debug("no need for further oauth processing");
+                ZmailLog.extensions.debug("no need for further oauth processing");
                 throw AuthProviderException.NO_AUTH_DATA();
             }
         } catch (IOException e) {
-            ZimbraLog.extensions.debug("Error in getting OAuth token from request", e);
+            ZmailLog.extensions.debug("Error in getting OAuth token from request", e);
             throw AuthProviderException.FAILURE(e.getMessage());
         }
 
@@ -97,7 +97,7 @@ public class ZimbraAuthProviderForOAuth extends AuthProvider{
         try {
             userServletContext = new UserServletContext(req, null, null);
         } catch (Exception e) {
-            ZimbraLog.extensions.debug("Error in creating userServletContext object", e);
+            ZmailLog.extensions.debug("Error in creating userServletContext object", e);
             throw AuthProviderException.FAILURE("Error in creating userServletContext object");
         }
 
@@ -110,7 +110,7 @@ public class ZimbraAuthProviderForOAuth extends AuthProvider{
         try {
             acctOnLocalServer = Provisioning.onLocalServer(account);
         } catch (ServiceException e) {
-            ZimbraLog.extensions.warn("Error in checking whether account on local server or not", e);
+            ZmailLog.extensions.warn("Error in checking whether account on local server or not", e);
             throw AuthProviderException.FAILURE(e.getMessage());
         }
 
@@ -121,7 +121,7 @@ public class ZimbraAuthProviderForOAuth extends AuthProvider{
             try {
                 SampleZmOAuthProvider.VALIDATOR.validateMessage(oAuthMessage, accessor);
             } catch (Exception e) {
-                ZimbraLog.extensions.debug("Exception in validating OAuth token", e);
+                ZmailLog.extensions.debug("Exception in validating OAuth token", e);
                 throw new AuthTokenException("Exception in validating OAuth token", e);
             }
             return AuthProvider.getAuthToken(account);
@@ -142,7 +142,7 @@ public class ZimbraAuthProviderForOAuth extends AuthProvider{
                     try {
                         consumerKey = oAuthMessage.getConsumerKey();
                     } catch (IOException e) {
-                        ZimbraLog.extensions.debug("Error in getting consumer key from OAuth message", e);
+                        ZmailLog.extensions.debug("Error in getting consumer key from OAuth message", e);
                         throw new AuthTokenException("Error in getting consumer key from OAuth message", e);
                     }
                     String serializedAccessor = authzedConsumers.get(consumerKey, null);
@@ -152,7 +152,7 @@ public class ZimbraAuthProviderForOAuth extends AuthProvider{
                 }
             }
         } catch (ServiceException e) {
-            ZimbraLog.extensions.warn("Error in reading mailbox metadata", e);
+            ZmailLog.extensions.warn("Error in reading mailbox metadata", e);
             throw AuthProviderException.FAILURE(e.getMessage());
         }
         return null;
@@ -179,23 +179,23 @@ public class ZimbraAuthProviderForOAuth extends AuthProvider{
         if (StringUtil.isNullOrEmpty(encodedAuthToken))
             throw AuthProviderException.NO_AUTH_DATA();
         
-        return ZimbraAuthToken.getAuthToken(encodedAuthToken);
+        return ZmailAuthToken.getAuthToken(encodedAuthToken);
     }
     
     //protected AuthToken authToken(Account acct) {
-    //    return new ZimbraAuthToken(acct);
+    //    return new ZmailAuthToken(acct);
     //}
     
     //protected AuthToken authToken(Account acct, boolean isAdmin) {
-    //    return new ZimbraAuthToken(acct, isAdmin);
+    //    return new ZmailAuthToken(acct, isAdmin);
     //}
     
     //protected AuthToken authToken(Account acct, long expires) {
-    //    return new ZimbraAuthToken(acct, expires);
+    //    return new ZmailAuthToken(acct, expires);
     //}
     
     //protected AuthToken authToken(Account acct, long expires, boolean isAdmin, Account adminAcct) {
-    //    return new ZimbraAuthToken(acct, expires, isAdmin, adminAcct);
+    //    return new ZmailAuthToken(acct, expires, isAdmin, adminAcct);
     //}
     
 }

@@ -17,11 +17,11 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.framework.items;
+package org.zmail.qa.selenium.framework.items;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
 
 
 /**
@@ -64,7 +64,7 @@ public class ConversationItem extends MailItem {
 		return (gSubject);
 	}
 	
-	public void createUsingSOAP(ZimbraAccount account) throws HarnessException {
+	public void createUsingSOAP(ZmailAccount account) throws HarnessException {
 		throw new HarnessException("implement me");
 	}
 
@@ -75,7 +75,7 @@ public class ConversationItem extends MailItem {
 		throw new HarnessException("implement me");
 	}
 
-	public static ConversationItem importFromSOAP(ZimbraAccount account, String query) throws HarnessException {
+	public static ConversationItem importFromSOAP(ZmailAccount account, String query) throws HarnessException {
 		throw new HarnessException("implement me");
 	}
 	

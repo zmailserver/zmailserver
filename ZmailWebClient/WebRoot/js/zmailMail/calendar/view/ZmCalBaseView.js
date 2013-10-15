@@ -623,7 +623,7 @@ function(ev) {
 
 ZmCalBaseView.prototype.getTitle =
 function() {
-	return [ZmMsg.zimbraTitle, this.getCalTitle()].join(": ");
+	return [ZmMsg.zmailTitle, this.getCalTitle()].join(": ");
 };
 
 ZmCalBaseView.prototype.needsRefresh = 

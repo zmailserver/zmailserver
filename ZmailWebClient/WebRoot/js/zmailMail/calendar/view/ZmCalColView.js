@@ -1901,7 +1901,7 @@ function(startTime, endTime , callback, errorCallback) {
     endTime = endTime || (startTime + AjxDateUtil.MSEC_PER_DAY );
     var email = appCtxt.getActiveAccount().getEmail();
     
-	var soapDoc = AjxSoapDoc.create("GetFreeBusyRequest", "urn:zimbraMail");
+	var soapDoc = AjxSoapDoc.create("GetFreeBusyRequest", "urn:zmailMail");
 	soapDoc.setMethodAttribute("s", startTime);
 	soapDoc.setMethodAttribute("e", endTime);
 	soapDoc.setMethodAttribute("uid", email);

@@ -3,9 +3,9 @@ ZIMBRA-MIB DEFINITIONS ::= BEGIN
 		enterprises
 		FROM SNMPv2-SMI;
 
-zimbra OBJECT IDENTIFIER ::= { enterprises 666 }
+zmail OBJECT IDENTIFIER ::= { enterprises 666 }
 
-zmStatus OBJECT IDENTIFIER ::= { zimbra 1 }
+zmStatus OBJECT IDENTIFIER ::= { zmail 1 }
 
 zmServiceName OBJECT-TYPE
     SYNTAX      OCTET STRING (SIZE(1..32))

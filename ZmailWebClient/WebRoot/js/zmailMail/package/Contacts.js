@@ -23,19 +23,19 @@
  * 	- If the user adds a participant or email address to their address book
  */
 
-AjxPackage.require("zimbraMail.share.view.ZmImAddressEntry");
+AjxPackage.require("zmailMail.share.view.ZmImAddressEntry");
 
-AjxPackage.require("zimbraMail.abook.view.ZmEditContactView");
-AjxPackage.require("zimbraMail.abook.view.ZmGroupView");
-AjxPackage.require("zimbraMail.abook.view.ZmContactsBaseView");
-AjxPackage.require("zimbraMail.abook.view.ZmContactGroupMenu");
-AjxPackage.require("zimbraMail.abook.view.ZmContactSplitView");
-AjxPackage.require("zimbraMail.abook.view.ZmNewAddrBookDialog");
-AjxPackage.require("zimbraMail.abook.view.ZmNewContactGroupDialog");
-AjxPackage.require("zimbraMail.abook.view.ZmContactQuickAddDialog");
+AjxPackage.require("zmailMail.abook.view.ZmEditContactView");
+AjxPackage.require("zmailMail.abook.view.ZmGroupView");
+AjxPackage.require("zmailMail.abook.view.ZmContactsBaseView");
+AjxPackage.require("zmailMail.abook.view.ZmContactGroupMenu");
+AjxPackage.require("zmailMail.abook.view.ZmContactSplitView");
+AjxPackage.require("zmailMail.abook.view.ZmNewAddrBookDialog");
+AjxPackage.require("zmailMail.abook.view.ZmNewContactGroupDialog");
+AjxPackage.require("zmailMail.abook.view.ZmContactQuickAddDialog");
 
-AjxPackage.require("zimbraMail.abook.controller.ZmContactListController");
-AjxPackage.require("zimbraMail.abook.controller.ZmContactController");
-AjxPackage.require("zimbraMail.abook.controller.ZmAddrBookTreeController");
+AjxPackage.require("zmailMail.abook.controller.ZmContactListController");
+AjxPackage.require("zmailMail.abook.controller.ZmContactController");
+AjxPackage.require("zmailMail.abook.controller.ZmAddrBookTreeController");
 
-AjxPackage.require("zimbraMail.abook.view.ZmContactSearch");
+AjxPackage.require("zmailMail.abook.view.ZmContactSearch");

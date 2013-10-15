@@ -17,15 +17,15 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.ajax.ui.tasks;
+package org.zmail.qa.selenium.projects.ajax.ui.tasks;
 
 import java.util.*;
 
 import com.thoughtworks.selenium.*;
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.*;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.ui.*;
 
 
 /**
@@ -825,7 +825,7 @@ public class PageTasks extends AbsTab {
 	 */
 	private TaskItem parseTaskRow(String css) throws HarnessException {
 		logger.info("TASK: " + css);		
-		// See http://bugzilla.zimbra.com/show_bug.cgi?id=56452
+		// See http://bugzilla.zmail.com/show_bug.cgi?id=56452
 
 		if ( !this.sIsElementPresent(css) )
 			throw new HarnessException("Unable to locate task: "+ css);
@@ -1061,7 +1061,7 @@ public class PageTasks extends AbsTab {
 	/*public String  GetShowOrigBodyText(String EmailAddress, String calItemId) throws HarnessException{
 
 		try{
-			sOpenWindow(ZimbraSeleniumProperties.getBaseURL() + "/home/" + EmailAddress + "/Tasks/?id=" + calItemId + "&mime=text/plain&noAttach=1","ShowOrignal");
+			sOpenWindow(ZmailSeleniumProperties.getBaseURL() + "/home/" + EmailAddress + "/Tasks/?id=" + calItemId + "&mime=text/plain&noAttach=1","ShowOrignal");
 			sWaitForPopUp("ShowOrignal", "3000");
 			sSelectWindow("ShowOrignal");
 			String showOrigBody=sGetBodyText().replaceAll("\\n", "").trim().replaceAll(" ", "");

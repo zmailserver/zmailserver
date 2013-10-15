@@ -41,12 +41,12 @@ ZaResourceController.prototype.toString = function () {
 };
 
 ZaResourceController.prototype.setDirty = function (isDirty) {
-    ZaZimbraAdmin.getInstance().getCurrentAppBar().enableButton(ZaOperation.SAVE, isDirty);
+    ZaZmailAdmin.getInstance().getCurrentAppBar().enableButton(ZaOperation.SAVE, isDirty);
 }
 
 ZaResourceController.prototype.handleXFormChange = function (ev) {
 	if(ev && ev.form.hasErrors()) { 
-        ZaZimbraAdmin.getInstance().getCurrentAppBar().enableButton(ZaOperation.SAVE, false);
+        ZaZmailAdmin.getInstance().getCurrentAppBar().enableButton(ZaOperation.SAVE, false);
 	}
 }
 ZaResourceController.prototype.show =
@@ -67,7 +67,7 @@ ZaResourceController.setViewMethod =
 function (entry)	{
 	this._createUI(entry);
 	try {
-		//ZaApp.getInstance().pushView(ZaZimbraAdmin._RESOURCE_VIEW);
+		//ZaApp.getInstance().pushView(ZaZmailAdmin._RESOURCE_VIEW);
 		ZaApp.getInstance().pushView(this.getContentViewId());
 		if(entry.id) {
 			//get the calendar resource by id
@@ -78,7 +78,7 @@ function (entry)	{
 	
 		this._view.setObject(entry);
 		//disable the save button at the beginning of showing the form
-        ZaZimbraAdmin.getInstance().getCurrentAppBar().enableButton(ZaOperation.SAVE, false);
+        ZaZmailAdmin.getInstance().getCurrentAppBar().enableButton(ZaOperation.SAVE, false);
 		this._currentObject = entry;
 	} catch (ex) {
 		this._handleException(ex, "ZaResourceController.prototype.show", null, false);
@@ -89,7 +89,7 @@ ZaController.setViewMethods["ZaResourceController"].push(ZaResourceController.se
 ZaResourceController.initPopupMenuMethod =
 function () {
 	var showNewCalRes = false;
-	if(ZaSettings.HAVE_MORE_DOMAINS || ZaZimbraAdmin.currentAdminAccount.attrs[ZaAccount.A_zimbraIsAdminAccount] == 'TRUE') {
+	if(ZaSettings.HAVE_MORE_DOMAINS || ZaZmailAdmin.currentAdminAccount.attrs[ZaAccount.A_zmailIsAdminAccount] == 'TRUE') {
 		showNewCalRes = true;
 	} else {
 		var domainList = ZaApp.getInstance().getDomainList().getArray();
@@ -305,7 +305,7 @@ function () {
 	//transfer the fields from the tmpObj to the _currentObject
 	for (var a in tmpObj.attrs) {
 		if(a == ZaResource.A_password || a == ZaItem.A_objectClass ||  a==ZaResource.A_mail
-                || a == ZaItem.A_zimbraId || a == ZaItem.A_zimbraACE) {
+                || a == ZaItem.A_zmailId || a == ZaItem.A_zmailACE) {
 			continue;
 		}	
 		if(!ZaItem.hasWritePermission(a,tmpObj)) {

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.taglib.bean;
+package org.zmail.cs.taglib.bean;
 
 import java.util.List;
 

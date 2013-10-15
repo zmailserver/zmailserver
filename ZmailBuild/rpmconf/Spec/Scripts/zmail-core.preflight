@@ -153,41 +153,41 @@ addUser() {
 }
 
 maingroup="postfix"
-homedir="/opt/zimbra/postfix"
+homedir="/opt/zmail/postfix"
 name="postfix"
 addUser
 
-maingroup="zimbra"
+maingroup="zmail"
 auxgroups="postfix,com.apple.access_ssh"
-homedir="/opt/zimbra"
-name="zimbra"
+homedir="/opt/zmail"
+name="zmail"
 addUser
 
-if [ -f "/opt/zimbra/bin/zmcontrol" ]; then
-  su - zimbra -c "/opt/zimbra/bin/zmcontrol stop" > /dev/null 2>&1
+if [ -f "/opt/zmail/bin/zmcontrol" ]; then
+  su - zmail -c "/opt/zmail/bin/zmcontrol stop" > /dev/null 2>&1
 fi
 
-rm -f /opt/zimbra/.enable_replica
-if [ -f /opt/zimbra/conf/slapd.conf ]; then
-  egrep -q '^overlay syncprov' /opt/zimbra/conf/slapd.conf > /dev/null
+rm -f /opt/zmail/.enable_replica
+if [ -f /opt/zmail/conf/slapd.conf ]; then
+  egrep -q '^overlay syncprov' /opt/zmail/conf/slapd.conf > /dev/null
   if [ $? = 0 ]; then
-    touch /opt/zimbra/.enable_replica
+    touch /opt/zmail/.enable_replica
   else
-    egrep -q 'type=refreshAndPersist' /opt/zimbra/conf/slapd.conf > /dev/null
+    egrep -q 'type=refreshAndPersist' /opt/zmail/conf/slapd.conf > /dev/null
     if [ $? = 0 ]; then
-      touch /opt/zimbra/.enable_replica
+      touch /opt/zmail/.enable_replica
     fi
   fi
 fi
 
-if [ -f /opt/zimbra/data/ldap/config/cn\=config.ldif ]; then
-  if [ -f /opt/zimbra/data/ldap/config/cn\=config/olcDatabase\=\{2\}mdb/olcOverlay\=\{0\}syncprov.ldif ]; then
-    touch /opt/zimbra/.enable_replica
+if [ -f /opt/zmail/data/ldap/config/cn\=config.ldif ]; then
+  if [ -f /opt/zmail/data/ldap/config/cn\=config/olcDatabase\=\{2\}mdb/olcOverlay\=\{0\}syncprov.ldif ]; then
+    touch /opt/zmail/.enable_replica
   fi
 fi
 
-if [ ! -d "/opt/zimbra" ]; then
-  mkdir /opt/zimbra
+if [ ! -d "/opt/zmail" ]; then
+  mkdir /opt/zmail
 fi
 
 if [ -f "/etc/sysctl.conf" ]; then
@@ -266,6 +266,6 @@ else
 fi
 
 D=`date +%s`
-echo "${D}: INSTALL SESSION START" >> /opt/zimbra/.install_history
+echo "${D}: INSTALL SESSION START" >> /opt/zmail/.install_history
 
 exit 0

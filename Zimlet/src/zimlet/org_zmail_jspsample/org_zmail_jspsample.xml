@@ -14,7 +14,7 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_jspsample"
+<zimlet name="org_zmail_jspsample"
         version="1.0"
         description="Sends properties to a JSP file">
 
@@ -22,21 +22,21 @@
 		<toolTipText>Drag-and-drop a message or folder to send properties to a JSP file.</toolTipText>
 		<dragSource type="ZmMailMsg">
 			<canvas type="dialog" width="600" height="350"/>
-			<actionUrl target="/service/zimlet/com_zimbra_jspsample/sample.jsp">
+			<actionUrl target="/service/zimlet/org_zmail_jspsample/sample.jsp">
 				<param name="subject">${obj.subject}</param>
 				<param name="id">${obj.id}</param>
 			</actionUrl>
 		</dragSource>
 		<dragSource type="ZmConv">
 			<canvas type="dialog" width="600" height="350"/>
-			<actionUrl target="/service/zimlet/com_zimbra_jspsample/sample.jsp">
+			<actionUrl target="/service/zimlet/org_zmail_jspsample/sample.jsp">
 				<param name="subject">${obj.subject}</param>
 				<param name="id">${obj.id}</param>
 			</actionUrl>
 		</dragSource>
 		<dragSource type="ZmFolder">
 			<canvas type="dialog" width="600" height="350"/>
-			<actionUrl target="/service/zimlet/com_zimbra_jspsample/sample.jsp">
+			<actionUrl target="/service/zimlet/org_zmail_jspsample/sample.jsp">
 				<param name="name">${obj.name}</param>
 				<param name="path">${obj.path}</param>
 			</actionUrl>

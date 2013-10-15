@@ -17,17 +17,17 @@
  * Constructor.
  * 
  */
-function com_zimbra_emailreminder_HandlerObject() {
+function org_zmail_emailreminder_HandlerObject() {
 }
 
-com_zimbra_emailreminder_HandlerObject.prototype = new ZmZimletBase();
-com_zimbra_emailreminder_HandlerObject.prototype.constructor = com_zimbra_emailreminder_HandlerObject;
+org_zmail_emailreminder_HandlerObject.prototype = new ZmZimletBase();
+org_zmail_emailreminder_HandlerObject.prototype.constructor = org_zmail_emailreminder_HandlerObject;
 
 /**
  * Simplify handler object
  *
  */
-var EmailReminderZimlet = com_zimbra_emailreminder_HandlerObject;
+var EmailReminderZimlet = org_zmail_emailreminder_HandlerObject;
 
 /**
  * Defines the "calendar" view.
@@ -77,7 +77,7 @@ function() {
 EmailReminderZimlet.prototype._getEmailFollowupFolderId =
 function() {
 	this._justCreatedCalendarFolder = false;
-	var soapDoc = AjxSoapDoc.create("GetFolderRequest", "urn:zimbraMail");
+	var soapDoc = AjxSoapDoc.create("GetFolderRequest", "urn:zmailMail");
 	var folderNode = soapDoc.set("folder");
 	folderNode.setAttribute("l", appCtxt.getFolderTree().root.id);
 	var command = new ZmCsfeCommand();
@@ -104,7 +104,7 @@ function() {
  */
 EmailReminderZimlet.prototype._createEmailFollowupFolder =
 function() {
-	var soapDoc = AjxSoapDoc.create("CreateFolderRequest", "urn:zimbraMail");
+	var soapDoc = AjxSoapDoc.create("CreateFolderRequest", "urn:zmailMail");
 	var folderNode = soapDoc.set("folder");
 	folderNode.setAttribute("name", EmailReminderZimlet.CALENDAR_EMAIL_REMINDERS);
 	folderNode.setAttribute("l", appCtxt.getFolderTree().root.id);
@@ -118,7 +118,7 @@ function() {
 	}
 	this.emailFollowupFolderId = id;
 
-	soapDoc = AjxSoapDoc.create("FolderActionRequest", "urn:zimbraMail");
+	soapDoc = AjxSoapDoc.create("FolderActionRequest", "urn:zmailMail");
 	var actionNode = soapDoc.set("action");
 	actionNode.setAttribute("op", "color");
 	actionNode.setAttribute("id", id);
@@ -714,5 +714,5 @@ EmailReminderZimlet.prototype._reloadBrowser =
 function() {
 	window.onbeforeunload = null;
 	var url = AjxUtil.formatUrl({});
-	ZmZimbraMail.sendRedirect(url);
+	ZmZmailMail.sendRedirect(url);
 };

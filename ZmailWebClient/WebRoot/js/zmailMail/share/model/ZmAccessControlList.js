@@ -62,7 +62,7 @@ function() {
  */
 ZmAccessControlList.prototype.load =
 function(callback) {
-	var jsonObj = {GetRightsRequest:{_jsns:"urn:zimbraAccount"}};
+	var jsonObj = {GetRightsRequest:{_jsns:"urn:zmailAccount"}};
 	var respCallback = new AjxCallback(this, this._handleResponseLoad, [callback]);
 	appCtxt.getAppController().sendRequest({jsonObj:jsonObj, asyncMode:true, callback:respCallback});
 };
@@ -259,7 +259,7 @@ function(aces, callback, batchCmd) {
 ZmAccessControlList.prototype._setPerms =
 function(aces, revoke, callback, batchCmd) {
 	var reqName = revoke ? "RevokeRightsRequest" : "GrantRightsRequest";
-	var soapDoc = AjxSoapDoc.create(reqName, "urn:zimbraAccount");
+	var soapDoc = AjxSoapDoc.create(reqName, "urn:zmailAccount");
 	for (var i = 0; i < aces.length; i++) {
 		var ace = aces[i];
 		var aceNode = soapDoc.set("ace");

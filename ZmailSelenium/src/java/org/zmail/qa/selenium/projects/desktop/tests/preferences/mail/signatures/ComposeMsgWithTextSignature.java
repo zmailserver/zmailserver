@@ -14,46 +14,46 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.preferences.mail.signatures;
+package org.zmail.qa.selenium.projects.desktop.tests.preferences.mail.signatures;
 
 import java.util.HashMap;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.MailItem;
-import com.zimbra.qa.selenium.framework.items.RecipientItem;
-import com.zimbra.qa.selenium.framework.items.SignatureItem;
+import org.zmail.qa.selenium.framework.items.MailItem;
+import org.zmail.qa.selenium.framework.items.RecipientItem;
+import org.zmail.qa.selenium.framework.items.SignatureItem;
 
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
 
-import com.zimbra.qa.selenium.framework.util.GeneralUtility;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount.SOAP_DESTINATION_HOST_TYPE;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.mail.FormMailNew;
+import org.zmail.qa.selenium.framework.util.GeneralUtility;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.framework.util.ZmailAccount.SOAP_DESTINATION_HOST_TYPE;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.mail.FormMailNew;
 
 public class ComposeMsgWithTextSignature extends AjaxCommonTest {
-   String sigName = "signame" + ZimbraSeleniumProperties.getUniqueString();
-   String sigBody = "sigbody" + ZimbraSeleniumProperties.getUniqueString();
+   String sigName = "signame" + ZmailSeleniumProperties.getUniqueString();
+   String sigBody = "sigbody" + ZmailSeleniumProperties.getUniqueString();
 
    @SuppressWarnings("serial")
    public ComposeMsgWithTextSignature() {
       super.startingPage = app.zPageMail;
       super.startingAccountPreferences = new HashMap<String, String>() {
          {
-            put("zimbraPrefComposeFormat", "text");
+            put("zmailPrefComposeFormat", "text");
          }
       };
    }
 
-   private void _createSignature(ZimbraAccount account) throws HarnessException {
+   private void _createSignature(ZmailAccount account) throws HarnessException {
       account.authenticate(
             SOAP_DESTINATION_HOST_TYPE.SERVER);
       account.soapSend(
-            "<CreateSignatureRequest xmlns='urn:zimbraAccount'>"
+            "<CreateSignatureRequest xmlns='urn:zmailAccount'>"
                   + "<signature name='" + this.sigName + "' >"
                   + "<content type='text/plain'>" + this.sigBody
                   + "</content>" + "</signature>"
@@ -87,8 +87,8 @@ public class ComposeMsgWithTextSignature extends AjaxCommonTest {
       // Create the message data to be sent
       MailItem mail = new MailItem();
       mail.dToRecipients.add(new RecipientItem(app.zGetActiveAccount()));
-      mail.dSubject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-      mail.dBodyText = "body" + ZimbraSeleniumProperties.getUniqueString();
+      mail.dSubject = "subject" + ZmailSeleniumProperties.getUniqueString();
+      mail.dBodyText = "body" + ZmailSeleniumProperties.getUniqueString();
 
       // Open the new mail form
       FormMailNew mailform = (FormMailNew) app.zPageMail.zToolbarPressButton(Button.B_NEW);

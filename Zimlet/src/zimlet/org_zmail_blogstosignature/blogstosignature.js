@@ -11,22 +11,22 @@
  * Software distributed under the License is distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
- * @author Raja Rao DV rrao@zimbra.com
+ * @author Raja Rao DV rrao@zmail.com
  */
 
 /**
  * Constructor
  */
-function com_zimbra_blogstosignature_HandlerObj() {
+function org_zmail_blogstosignature_HandlerObj() {
 }
 
-com_zimbra_blogstosignature_HandlerObj.prototype = new ZmZimletBase();
-com_zimbra_blogstosignature_HandlerObj.prototype.constructor = com_zimbra_blogstosignature_HandlerObj;
+org_zmail_blogstosignature_HandlerObj.prototype = new ZmZimletBase();
+org_zmail_blogstosignature_HandlerObj.prototype.constructor = org_zmail_blogstosignature_HandlerObj;
 
 /**
  * Simplify Zimlet handler name.
  */
-var BlogsToSignatureZimlet = com_zimbra_blogstosignature_HandlerObj;
+var BlogsToSignatureZimlet = org_zmail_blogstosignature_HandlerObj;
 
 BlogsToSignatureZimlet.prototype.init =
 function() {
@@ -68,7 +68,7 @@ BlogsToSignatureZimlet.prototype._getARecentBlogPost =
 function() {
 	var addtoArray = true;
 	if(appCtxt.isChildWindow) {
-		var parentCtxt = parentAppCtxt.getZimletMgr().getZimletByName("com_zimbra_blogstosignature");
+		var parentCtxt = parentAppCtxt.getZimletMgr().getZimletByName("org_zmail_blogstosignature");
 		if(parentCtxt && parentCtxt.blogToSignatureZimletRecentPosts) {
 			this.blogToSignatureZimletRecentPosts = parentCtxt.blogToSignatureZimletRecentPosts;
 		}
@@ -143,7 +143,7 @@ function(longUrl) {
 	var url = "http://api.bit.ly/shorten?"
 			+ "version=" + AjxStringUtil.urlComponentEncode("2.0.1")
 			+ "&longUrl=" + AjxStringUtil.urlComponentEncode(longUrl)
-			+ "&login=" + AjxStringUtil.urlComponentEncode("zimbra")
+			+ "&login=" + AjxStringUtil.urlComponentEncode("zmail")
 			+ "&apiKey=" + AjxStringUtil.urlComponentEncode("R_20927271403ca63a07c25d17edc32a1d");
 
 	var shortUrl = "";
@@ -204,7 +204,7 @@ function(result) {
 BlogsToSignatureZimlet.prototype._cacheBlogsInZimletContext =
 function(list) {
 	if(appCtxt.isChildWindow) {//if compose-in newWindow, store this in parentContext
-		var parentCtxt = parentAppCtxt.getZimletMgr().getZimletByName("com_zimbra_blogstosignature");
+		var parentCtxt = parentAppCtxt.getZimletMgr().getZimletByName("org_zmail_blogstosignature");
 		parentCtxt.blogToSignatureZimletRecentPosts = list;
 	} else {
 		this._zimletContext.blogToSignatureZimletRecentPosts = list;//store this so that we can utilize this for compose-in-newWindow

@@ -16,104 +16,104 @@
 
 #Symlinks
 
-if [ -d "/opt/zimbra/amavisd/tmp" ]; then
-  umount -f /opt/zimbra/amavisd/tmp 2> /dev/null
+if [ -d "/opt/zmail/amavisd/tmp" ]; then
+  umount -f /opt/zmail/amavisd/tmp 2> /dev/null
 fi
 
-rm -f /opt/zimbra/amavisd
-ln -s /opt/zimbra/amavisd-new-2.8.0 /opt/zimbra/amavisd
+rm -f /opt/zmail/amavisd
+ln -s /opt/zmail/amavisd-new-2.8.0 /opt/zmail/amavisd
 
-rm -f /opt/zimbra/cbpolicyd
-if [ -d /opt/zimbra/cbpolicyd-2.1.0-beta ]; then
-  ln -s /opt/zimbra/cbpolicyd-2.1.0-beta /opt/zimbra/cbpolicyd
+rm -f /opt/zmail/cbpolicyd
+if [ -d /opt/zmail/cbpolicyd-2.1.0-beta ]; then
+  ln -s /opt/zmail/cbpolicyd-2.1.0-beta /opt/zmail/cbpolicyd
 fi
 
-rm -f /opt/zimbra/libmemcached
-if [ -d /opt/zimbra/libmemcached-1.0.6 ]; then
-  ln -s /opt/zimbra/libmemcached-1.0.6 /opt/zimbra/libmemcached
+rm -f /opt/zmail/libmemcached
+if [ -d /opt/zmail/libmemcached-1.0.6 ]; then
+  ln -s /opt/zmail/libmemcached-1.0.6 /opt/zmail/libmemcached
 fi
 
-rm -f /opt/zimbra/opendkim
-if [ -d /opt/zimbra/opendkim-2.8.0 ]; then
-  ln -s /opt/zimbra/opendkim-2.8.0 /opt/zimbra/opendkim
+rm -f /opt/zmail/opendkim
+if [ -d /opt/zmail/opendkim-2.8.0 ]; then
+  ln -s /opt/zmail/opendkim-2.8.0 /opt/zmail/opendkim
 fi
 
-rm -f /opt/zimbra/zeromq
-if [ -d /opt/zimbra/zeromq-3.2.2 ]; then
-  ln -s /opt/zimbra/zeromq-3.2.2 /opt/zimbra/zeromq
+rm -f /opt/zmail/zeromq
+if [ -d /opt/zmail/zeromq-3.2.2 ]; then
+  ln -s /opt/zmail/zeromq-3.2.2 /opt/zmail/zeromq
 fi
 
-rm -f /opt/zimbra/dspam
-ln -s /opt/zimbra/dspam-3.10.2 /opt/zimbra/dspam
+rm -f /opt/zmail/dspam
+ln -s /opt/zmail/dspam-3.10.2 /opt/zmail/dspam
 
-rm -f /opt/zimbra/postfix
-ln -s /opt/zimbra/postfix-2.10.0.2z /opt/zimbra/postfix
+rm -f /opt/zmail/postfix
+ln -s /opt/zmail/postfix-2.10.0.2z /opt/zmail/postfix
 
-rm -f /opt/zimbra/clamav
-ln -s /opt/zimbra/clamav-0.97.8 /opt/zimbra/clamav
+rm -f /opt/zmail/clamav
+ln -s /opt/zmail/clamav-0.97.8 /opt/zmail/clamav
 
-rm -f /opt/zimbra/mta/mysql
-ln -s /opt/zimbra/mta/mysql-standard-5.5.30-pc-linux-gnu-i686-glibc23 /opt/zimbra/mta/mysql
+rm -f /opt/zmail/mta/mysql
+ln -s /opt/zmail/mta/mysql-standard-5.5.30-pc-linux-gnu-i686-glibc23 /opt/zmail/mta/mysql
 
-rm -f /opt/zimbra/altermime
-ln -s /opt/zimbra/altermime-0.3.10 /opt/zimbra/altermime
+rm -f /opt/zmail/altermime
+ln -s /opt/zmail/altermime-0.3.10 /opt/zmail/altermime
 
-PLAT=$(/opt/zimbra/libexec/get_plat_tag.sh)
+PLAT=$(/opt/zmail/libexec/get_plat_tag.sh)
 if [[ $PLAT == "UBUNTU"* || $PLAT == "DEBIAN"* ]]; then
   if [ ! -e "/usr/sbin/sendmail" ]; then
-    ln -s /opt/zimbra/postfix/sbin/sendmail /usr/sbin/sendmail
+    ln -s /opt/zmail/postfix/sbin/sendmail /usr/sbin/sendmail
   fi
 fi
 
 SUDOMODE=`perl -e 'my $mode=(stat("/etc/sudoers"))[2];printf("%04o\n",$mode & 07777);'`
-egrep -v '^%zimbra.*postfix' /etc/sudoers > /tmp/sudoers
+egrep -v '^%zmail.*postfix' /etc/sudoers > /tmp/sudoers
 mv -f /tmp/sudoers /etc/sudoers
-echo "%zimbra   ALL=NOPASSWD:/opt/zimbra/postfix/sbin/postfix, /opt/zimbra/postfix/sbin/postalias, /opt/zimbra/postfix/sbin/qshape.pl, /opt/zimbra/postfix/sbin/postconf,/opt/zimbra/postfix/sbin/postsuper" >> /etc/sudoers
+echo "%zmail   ALL=NOPASSWD:/opt/zmail/postfix/sbin/postfix, /opt/zmail/postfix/sbin/postalias, /opt/zmail/postfix/sbin/qshape.pl, /opt/zmail/postfix/sbin/postconf,/opt/zmail/postfix/sbin/postsuper" >> /etc/sudoers
 
-egrep -v '^%zimbra.*zmqstat' /etc/sudoers > /tmp/sudoers
+egrep -v '^%zmail.*zmqstat' /etc/sudoers > /tmp/sudoers
 mv -f /tmp/sudoers /etc/sudoers
-echo "%zimbra   ALL=NOPASSWD:/opt/zimbra/libexec/zmqstat,/opt/zimbra/libexec/zmmtastatus" >> /etc/sudoers
+echo "%zmail   ALL=NOPASSWD:/opt/zmail/libexec/zmqstat,/opt/zmail/libexec/zmmtastatus" >> /etc/sudoers
 chmod $SUDOMODE /etc/sudoers
 
-chown zimbra:zimbra /opt/zimbra/postfix/conf/master.cf.in
-chmod 440 /opt/zimbra/postfix/conf/master.cf.in
+chown zmail:zmail /opt/zmail/postfix/conf/master.cf.in
+chmod 440 /opt/zmail/postfix/conf/master.cf.in
 
-mkdir -p /opt/zimbra/data/amavisd/db
-mkdir -p /opt/zimbra/data/amavisd/tmp
-mkdir -p /opt/zimbra/data/amavisd/var
-mkdir -p /opt/zimbra/data/amavisd/quarantine
-chown -R zimbra:zimbra /opt/zimbra/amavisd/*
-chown -R zimbra:zimbra /opt/zimbra/data/amavisd/*
+mkdir -p /opt/zmail/data/amavisd/db
+mkdir -p /opt/zmail/data/amavisd/tmp
+mkdir -p /opt/zmail/data/amavisd/var
+mkdir -p /opt/zmail/data/amavisd/quarantine
+chown -R zmail:zmail /opt/zmail/amavisd/*
+chown -R zmail:zmail /opt/zmail/data/amavisd/*
 
-mkdir -p /opt/zimbra/data/clamav/db
-chown -R zimbra:zimbra /opt/zimbra/data/clamav/db
+mkdir -p /opt/zmail/data/clamav/db
+chown -R zmail:zmail /opt/zmail/data/clamav/db
 
-mkdir -p /opt/zimbra/data/postfix/spool/pid
-chown postfix:zimbra /opt/zimbra/data/postfix
-chown root:postfix /opt/zimbra/data/postfix/spool
-chown postfix:root /opt/zimbra/data/postfix/spool/pid
+mkdir -p /opt/zmail/data/postfix/spool/pid
+chown postfix:zmail /opt/zmail/data/postfix
+chown root:postfix /opt/zmail/data/postfix/spool
+chown postfix:root /opt/zmail/data/postfix/spool/pid
 
-chown zimbra:zimbra /opt/zimbra/data
+chown zmail:zmail /opt/zmail/data
 
-if [ ! -f /opt/zimbra/postfix/conf/main.cf ]; then
-	touch /opt/zimbra/postfix/conf/main.cf
-	chown zimbra:zimbra /opt/zimbra/postfix/conf/main.cf
+if [ ! -f /opt/zmail/postfix/conf/main.cf ]; then
+	touch /opt/zmail/postfix/conf/main.cf
+	chown zmail:zmail /opt/zmail/postfix/conf/main.cf
 fi
 
 if [ ! -f /etc/aliases ]; then
-  ln -s /opt/zimbra/postfix/conf/aliases /etc/aliases
+  ln -s /opt/zmail/postfix/conf/aliases /etc/aliases
 fi
 
 # bug 8081 remove tmpfs
-#egrep -q '/opt/zimbra/amavisd-new-2.4.1/tmp' /etc/fstab
+#egrep -q '/opt/zmail/amavisd-new-2.4.1/tmp' /etc/fstab
 #if [ $? != 0 ]; then
-	#uid=`id -u zimbra`
-	#gid=`id -g zimbra`
-	#echo "/dev/shm	/opt/zimbra/amavisd-new-2.4.1/tmp	tmpfs	defaults,users,size=150m,mode=777 0 0" >> /etc/fstab
+	#uid=`id -u zmail`
+	#gid=`id -g zmail`
+	#echo "/dev/shm	/opt/zmail/amavisd-new-2.4.1/tmp	tmpfs	defaults,users,size=150m,mode=777 0 0" >> /etc/fstab
 #fi
 
-if [ -x "/opt/zimbra/libexec/zmfixperms" ]; then
-  /opt/zimbra/libexec/zmfixperms
+if [ -x "/opt/zmail/libexec/zmfixperms" ]; then
+  /opt/zmail/libexec/zmfixperms
 fi
 
 ldconfig

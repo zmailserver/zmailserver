@@ -13,14 +13,14 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.taglib.tag.voice;
+package org.zmail.cs.taglib.tag.voice;
 
-import com.zimbra.cs.taglib.tag.ZimbraSimpleTag;
+import org.zmail.cs.taglib.tag.ZmailSimpleTag;
 
 import java.util.List;
 import java.util.ArrayList;
 
-abstract public class CallFeaturesTagBase extends ZimbraSimpleTag {
+abstract public class CallFeaturesTagBase extends ZmailSimpleTag {
 	protected String mVar;
 	protected String mPhone;
 	protected Boolean mEmailNotificationActive;

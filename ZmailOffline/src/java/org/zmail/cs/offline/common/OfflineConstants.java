@@ -12,17 +12,17 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.common;
+package org.zmail.cs.offline.common;
 
 import org.dom4j.Namespace;
 import org.dom4j.QName;
 
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.StringUtil;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.StringUtil;
 
 public interface OfflineConstants {
 
-    public static final String NAMESPACE_STR = "urn:zimbraOffline";
+    public static final String NAMESPACE_STR = "urn:zmailOffline";
     public static final Namespace NAMESPACE = Namespace.get(NAMESPACE_STR);
 
     public static final QName SYNC_REQUEST = QName.get("SyncRequest", NAMESPACE);
@@ -130,33 +130,33 @@ public interface OfflineConstants {
     public static final String A_offlinesyncFixedDate = "offlinesyncFixedDate";
     public static final String A_offlinesyncRelativeDate = "offlinesyncRelativeDate";
     public static final String A_offlinesyncEmailDate = "offlinesyncEmailDate";
-    public static final String A_zimbraDataSourceSmtpEnabled = "zimbraDataSourceSmtpEnabled";
-    public static final String A_zimbraDataSourceSmtpHost = "zimbraDataSourceSmtpHost";
-    public static final String A_zimbraDataSourceSmtpPort = "zimbraDataSourceSmtpPort";
-    public static final String A_zimbraDataSourceSmtpConnectionType = "zimbraDataSourceSmtpConnectionType";
-    public static final String A_zimbraDataSourceSmtpAuthRequired = "zimbraDataSourceSmtpAuthRequired";
-    public static final String A_zimbraDataSourceSmtpAuthUsername = "zimbraDataSourceSmtpAuthUsername";
-    public static final String A_zimbraDataSourceSmtpAuthPassword = "zimbraDataSourceSmtpAuthPassword";
+    public static final String A_zmailDataSourceSmtpEnabled = "zmailDataSourceSmtpEnabled";
+    public static final String A_zmailDataSourceSmtpHost = "zmailDataSourceSmtpHost";
+    public static final String A_zmailDataSourceSmtpPort = "zmailDataSourceSmtpPort";
+    public static final String A_zmailDataSourceSmtpConnectionType = "zmailDataSourceSmtpConnectionType";
+    public static final String A_zmailDataSourceSmtpAuthRequired = "zmailDataSourceSmtpAuthRequired";
+    public static final String A_zmailDataSourceSmtpAuthUsername = "zmailDataSourceSmtpAuthUsername";
+    public static final String A_zmailDataSourceSmtpAuthPassword = "zmailDataSourceSmtpAuthPassword";
 
-    public static final String A_zimbraDataSourceUseProxy = "zimbraDataSourceUseProxy";
-    public static final String A_zimbraDataSourceProxyHost = "zimbraDataSourceProxyHost";
-    public static final String A_zimbraDataSourceProxyPort = "zimbraDataSourceProxyPort";
+    public static final String A_zmailDataSourceUseProxy = "zmailDataSourceUseProxy";
+    public static final String A_zmailDataSourceProxyHost = "zmailDataSourceProxyHost";
+    public static final String A_zmailDataSourceProxyPort = "zmailDataSourceProxyPort";
 
-    public static final String A_zimbraDataSourceSyncFreq = "zimbraDataSourceSyncFreq";
-    public static final String A_zimbraDataSourceSyncStatus = "zimbraDataSourceSyncStatus";
-    public static final String A_zimbraDataSourceSyncStatusErrorCode = "A_zimbraDataSourceSyncStatusErrorCode";
-    public static final String A_zimbraDataSourceLastSync = "zimbraDataSourceLastSync";
+    public static final String A_zmailDataSourceSyncFreq = "zmailDataSourceSyncFreq";
+    public static final String A_zmailDataSourceSyncStatus = "zmailDataSourceSyncStatus";
+    public static final String A_zmailDataSourceSyncStatusErrorCode = "A_zmailDataSourceSyncStatusErrorCode";
+    public static final String A_zmailDataSourceLastSync = "zmailDataSourceLastSync";
 
-    public static final String A_zimbraDataSourceContactSyncEnabled = "zimbraDataSourceContactSyncEnabled";
-    public static final String A_zimbraDataSourceCalendarSyncEnabled = "zimbraDataSourceCalendarSyncEnabled";
-    public static final String A_zimbraDataSourceTaskSyncEnabled = "zimbraDataSourceTaskSyncEnabled";
+    public static final String A_zmailDataSourceContactSyncEnabled = "zmailDataSourceContactSyncEnabled";
+    public static final String A_zmailDataSourceCalendarSyncEnabled = "zmailDataSourceCalendarSyncEnabled";
+    public static final String A_zmailDataSourceTaskSyncEnabled = "zmailDataSourceTaskSyncEnabled";
 
-    public static final String A_zimbraDataSourceCalendarFolderId = "zimbraDataSourceCalendarFolderId";
+    public static final String A_zmailDataSourceCalendarFolderId = "zmailDataSourceCalendarFolderId";
 
-    public static final String A_zimbraDataSourceSyncAllServerFolders = "zimbraDataSourceSyncAllServerFolders";
+    public static final String A_zmailDataSourceSyncAllServerFolders = "zmailDataSourceSyncAllServerFolders";
 
-    public static final String A_zimbraDataSourceSslCertAlias = "zimbraDataSourceSslCertAlias";
-    public static final String A_zimbraDataSourceAccountSetup = "zimbraDataSourceAccountSetup";
+    public static final String A_zmailDataSourceSslCertAlias = "zmailDataSourceSslCertAlias";
+    public static final String A_zmailDataSourceAccountSetup = "zmailDataSourceAccountSetup";
 
     public static final long DEFAULT_SYNC_FREQ = 15 * Constants.MILLIS_PER_MINUTE;
     public static final long MIN_SYNC_FREQ = Constants.MILLIS_PER_MINUTE;
@@ -164,7 +164,7 @@ public interface OfflineConstants {
     public static final String LOCAL_ACCOUNT_ID = "ffffffff-ffff-ffff-ffff-ffffffffffff";
     public static final String GAL_ACCOUNT_SUFFIX = "__OFFLINE_GAL__";
     public static final String GAL_LDAP_DN = "GAL_LDAP_DN";
-    public static final String YMAIL_PARTNER_NAME = "Zimbra";
+    public static final String YMAIL_PARTNER_NAME = "Zmail";
     public static final String CALDAV_DS = "caldav:";
     public static final String YAB_DS = "yab:";
     public static final String SYNC_SERVER_PREFIX = "offline_sync_server_";

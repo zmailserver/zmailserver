@@ -12,18 +12,18 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.nginx;
+package org.zmail.cs.nginx;
 
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.ldap.LdapProv;
-import com.zimbra.cs.ldap.ILdapContext;
-import com.zimbra.cs.ldap.ZLdapFilter;
-import com.zimbra.cs.ldap.ZLdapFilterFactory.FilterId;
-import com.zimbra.cs.nginx.NginxLookupExtension.NginxLookupException;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.ldap.LdapProv;
+import org.zmail.cs.ldap.ILdapContext;
+import org.zmail.cs.ldap.ZLdapFilter;
+import org.zmail.cs.ldap.ZLdapFilterFactory.FilterId;
+import org.zmail.cs.nginx.NginxLookupExtension.NginxLookupException;
 
 abstract class AbstractNginxLookupLdapHelper {
     
@@ -34,8 +34,8 @@ abstract class AbstractNginxLookupLdapHelper {
     }
     
     static class SearchDirResult {
-        // key of the map is one of the zimbraReverseProvyXXXAttribute 
-        // value is the attr value of the attribute stored in the corresponding zimbraReverseProvyXXXAttribute
+        // key of the map is one of the zmailReverseProvyXXXAttribute 
+        // value is the attr value of the attribute stored in the corresponding zmailReverseProvyXXXAttribute
         Map<String, String> configuredAttrs; 
         
         // key of the map the ldap attribute name
@@ -70,7 +70,7 @@ abstract class AbstractNginxLookupLdapHelper {
      * @param searchBase
      * @param templateKey
      * @param templateVal
-     * @param attrs       key of the map is one of the zimbraReverseProvyXXXAttribute
+     * @param attrs       key of the map is one of the zmailReverseProvyXXXAttribute
      *                    value of the map is if this attribute is required
      * @param extraAttrs  set of attribute names to return
      * @return

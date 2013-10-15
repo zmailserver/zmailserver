@@ -14,13 +14,13 @@
  */
 
 /**
- * Creates the Zimbra IM service.
+ * Creates the Zmail IM service.
  * @constructor
  * @class
- * This service communicates with the Zimbra IM server.
+ * This service communicates with the Zmail IM server.
  *
  */
-ZmZimbraImService = function(roster) {
+ZmZmailImService = function(roster) {
 	ZmImService.call(this, roster);
 
 	this._loggedIn = false;
@@ -29,22 +29,22 @@ ZmZimbraImService = function(roster) {
 	this._enteredChatFormatter = new AjxMessageFormat(ZmMsg.imEnteredChat);
 }
 
-ZmZimbraImService.prototype = new ZmImService;
-ZmZimbraImService.prototype.constructor = ZmZimbraImService;
+ZmZmailImService.prototype = new ZmImService;
+ZmZmailImService.prototype.constructor = ZmZmailImService;
 
 // Public methods
 
-ZmZimbraImService.prototype.toString =
+ZmZmailImService.prototype.toString =
 function() {
-	return "ZmZimbraImService";
+	return "ZmZmailImService";
 };
 
-ZmZimbraImService.prototype.isLoggedIn =
+ZmZmailImService.prototype.isLoggedIn =
 function() {
 	return this._loggedIn;
 };
 
-ZmZimbraImService.prototype.login =
+ZmZmailImService.prototype.login =
 function(params) {
 	this._loggedIn = true;
 	this._roster.onServiceLoggedIn(params);
@@ -54,14 +54,14 @@ function(params) {
 	this._delayedInstantNotify();
 };
 
-ZmZimbraImService.prototype.getMyAddress =
+ZmZmailImService.prototype.getMyAddress =
 function() {
     if (this._myAddress == null)
 		this._myAddress = appCtxt.get(ZmSetting.USERNAME);
     return this._myAddress;
 };
 
-ZmZimbraImService.prototype.makeServerAddress =
+ZmZmailImService.prototype.makeServerAddress =
 function(addr, type) {
 	if (type == null || /^(xmpp|local)$/i.test(type))
 		return addr;
@@ -70,14 +70,14 @@ function(addr, type) {
 		return addr + "@" + gw.domain;
 };
 
-ZmZimbraImService.prototype.getGateways =
+ZmZmailImService.prototype.getGateways =
 function(callback, params) {
-	var soapDoc = AjxSoapDoc.create("IMGatewayListRequest", "urn:zimbraIM");
+	var soapDoc = AjxSoapDoc.create("IMGatewayListRequest", "urn:zmailIM");
 	var responseCallback = new AjxCallback(this, this._handleResponseGetGateways, [callback]);
 	return this._send(params, soapDoc, responseCallback);
 };
 
-ZmZimbraImService.prototype._handleResponseGetGateways =
+ZmZmailImService.prototype._handleResponseGetGateways =
 function(callback, response) {
 	var responseJson = response.getResponse();
 	var gateways = responseJson.IMGatewayListResponse.service;
@@ -89,18 +89,18 @@ function(callback, response) {
 	return gateways;
 };
 
-ZmZimbraImService.prototype.reconnectGateway =
+ZmZmailImService.prototype.reconnectGateway =
 function(gw) {
-	var sd = AjxSoapDoc.create("IMGatewayRegisterRequest", "urn:zimbraIM");
+	var sd = AjxSoapDoc.create("IMGatewayRegisterRequest", "urn:zmailIM");
 	var method = sd.getMethod();
 	method.setAttribute("op", "reconnect");
 	method.setAttribute("service", gw.type);
 	appCtxt.getAppController().sendRequest({ soapDoc: sd, asyncMode: true });
 };
 
-ZmZimbraImService.prototype.unregisterGateway =
+ZmZmailImService.prototype.unregisterGateway =
 function(service, batchCmd) {
-	var sd = AjxSoapDoc.create("IMGatewayRegisterRequest", "urn:zimbraIM");
+	var sd = AjxSoapDoc.create("IMGatewayRegisterRequest", "urn:zmailIM");
 	var method = sd.getMethod();
 	method.setAttribute("op", "unreg");
 	method.setAttribute("service", service);
@@ -114,9 +114,9 @@ function(service, batchCmd) {
 	}
 };
 
-ZmZimbraImService.prototype.registerGateway =
+ZmZmailImService.prototype.registerGateway =
 function(service, screenName, password, batchCmd) {
-	var sd = AjxSoapDoc.create("IMGatewayRegisterRequest", "urn:zimbraIM");
+	var sd = AjxSoapDoc.create("IMGatewayRegisterRequest", "urn:zmailIM");
 	var method = sd.getMethod();
 	method.setAttribute("op", "reg");
 	method.setAttribute("service", service);
@@ -134,14 +134,14 @@ function(service, screenName, password, batchCmd) {
 	}
 };
 
-ZmZimbraImService.prototype.getRoster =
+ZmZmailImService.prototype.getRoster =
 function(callback, params) {
-	var soapDoc = AjxSoapDoc.create("IMGetRosterRequest", "urn:zimbraIM");
+	var soapDoc = AjxSoapDoc.create("IMGetRosterRequest", "urn:zmailIM");
 	var responseCallback = new AjxCallback(this, this._handleResponseGetRoster, [callback]);
 	return this._send(params, soapDoc, responseCallback);
 };
 
-ZmZimbraImService.prototype._handleResponseGetRoster =
+ZmZmailImService.prototype._handleResponseGetRoster =
 function(callback, response) {
 	var responseJson = response.getResponse();
 	var roster = responseJson ? responseJson.IMGetRosterResponse : null;
@@ -151,7 +151,7 @@ function(callback, response) {
 	return roster;
 };
 
-ZmZimbraImService.prototype.initializePresence =
+ZmZmailImService.prototype.initializePresence =
 function(presence) {
 	if (presence) {
 		this.setPresence(presence.show, null, presence.customStatusMsg);
@@ -159,9 +159,9 @@ function(presence) {
 	// else initial presence comes back from a notification.
 };
 
-ZmZimbraImService.prototype.setPresence =
+ZmZmailImService.prototype.setPresence =
 function(show, priority, customStatusMsg, batchCommand) {
-	var soapDoc = AjxSoapDoc.create("IMSetPresenceRequest", "urn:zimbraIM");
+	var soapDoc = AjxSoapDoc.create("IMSetPresenceRequest", "urn:zmailIM");
 	var presence = soapDoc.set("presence");
 	if (show) {
 		presence.setAttribute("show", show);
@@ -179,13 +179,13 @@ function(show, priority, customStatusMsg, batchCommand) {
 	}
 };
 
-ZmZimbraImService.prototype.setIdle =
+ZmZmailImService.prototype.setIdle =
 function(idle, idleTime) {
 	this._idlePresenceErrorCallbackObj = this._idlePresenceErrorCallbackObj || new AjxCallback(this, this._idlePresenceErrorCallback);
 	var requestParams = { errorCallback: this._idlePresenceErrorCallbackObj };
 	var jsonObj = {
 		IMSetIdleRequest: {
-			_jsns: "urn:zimbraIM",
+			_jsns: "urn:zmailIM",
 			isIdle: idle ? "1" : "0",
 			idleTime: idleTime / 1000
 		}
@@ -199,16 +199,16 @@ function(idle, idleTime) {
 	appCtxt.getAppController().sendRequest(args);
 };
 
-ZmZimbraImService.prototype._idlePresenceErrorCallback =
+ZmZmailImService.prototype._idlePresenceErrorCallback =
 function(ex) {
 	// Return true (meaning we handled the exception) if the response was empty because we don't want
 	// to display an error message if this idle request happens while the network connection is down.
 	return ex.code == ZmCsfeException.EMPTY_RESPONSE;
 };
 
-ZmZimbraImService.prototype.createRosterItem =
+ZmZmailImService.prototype.createRosterItem =
 function(addr, name, groups, params) {
-	var soapDoc = AjxSoapDoc.create("IMSubscribeRequest", "urn:zimbraIM");
+	var soapDoc = AjxSoapDoc.create("IMSubscribeRequest", "urn:zmailIM");
 	var method = soapDoc.getMethod();
 	method.setAttribute("addr", addr);
 	if (name) {
@@ -221,18 +221,18 @@ function(addr, name, groups, params) {
 	return this._send(params, soapDoc);
 };
 
-ZmZimbraImService.prototype.deleteRosterItem =
+ZmZmailImService.prototype.deleteRosterItem =
 function(rosterItem, params) {
-	var soapDoc = AjxSoapDoc.create("IMSubscribeRequest", "urn:zimbraIM");
+	var soapDoc = AjxSoapDoc.create("IMSubscribeRequest", "urn:zmailIM");
 	var method = soapDoc.getMethod();
 	method.setAttribute("addr", rosterItem.id);
 	method.setAttribute("op", "remove");
 	return this._send(params, soapDoc);
 };
 
-ZmZimbraImService.prototype.sendSubscribeAuthorization =
+ZmZmailImService.prototype.sendSubscribeAuthorization =
 function(accept, add, addr) {
-	var sd = AjxSoapDoc.create("IMAuthorizeSubscribeRequest", "urn:zimbraIM");
+	var sd = AjxSoapDoc.create("IMAuthorizeSubscribeRequest", "urn:zmailIM");
 	var method = sd.getMethod();
 	method.setAttribute("addr", addr);
 	method.setAttribute("authorized", accept ? "true" : "false");
@@ -240,9 +240,9 @@ function(accept, add, addr) {
 	appCtxt.getAppController().sendRequest({ soapDoc: sd, asyncMode: true });
 };
 
-ZmZimbraImService.prototype.sendMessage =
+ZmZmailImService.prototype.sendMessage =
 function(chat, text, html, typing, params) {
-	var soapDoc = AjxSoapDoc.create("IMSendMessageRequest", "urn:zimbraIM");
+	var soapDoc = AjxSoapDoc.create("IMSendMessageRequest", "urn:zmailIM");
 	var message = soapDoc.set("message");
 	if (typing) {
 		soapDoc.set("typing", null, message);
@@ -264,45 +264,45 @@ function(chat, text, html, typing, params) {
 	return this._send(params, soapDoc);
 };
 
-ZmZimbraImService.prototype.closeChat =
+ZmZmailImService.prototype.closeChat =
 function(chat, params) {
-	var soapDoc = AjxSoapDoc.create("IMModifyChatRequest", "urn:zimbraIM");
+	var soapDoc = AjxSoapDoc.create("IMModifyChatRequest", "urn:zmailIM");
 	var method = soapDoc.getMethod();
 	method.setAttribute("thread", chat.getThread());
 	method.setAttribute("op", "close");
 	return this._send(params, soapDoc);
 };
 
-ZmZimbraImService.prototype.getConferenceServices =
+ZmZmailImService.prototype.getConferenceServices =
 function(callback, params) {
-	var soapDoc = AjxSoapDoc.create("IMListConferenceServicesRequest", "urn:zimbraIM");
+	var soapDoc = AjxSoapDoc.create("IMListConferenceServicesRequest", "urn:zmailIM");
 	var respCallback = new AjxCallback(this, this._handleResponseListConferenceServices, [callback]);
 	return this._send(params, soapDoc, respCallback);
 };
 
-ZmZimbraImService.prototype._handleResponseListConferenceServices =
+ZmZmailImService.prototype._handleResponseListConferenceServices =
 function(callback, response) {
 	callback.run(response.getResponse().IMListConferenceServicesResponse.svc);
 };
 
-ZmZimbraImService.prototype.getConferenceRooms =
+ZmZmailImService.prototype.getConferenceRooms =
 function(service, callback, params) {
-	var soapDoc = AjxSoapDoc.create("IMListConferenceRoomsRequest", "urn:zimbraIM");
+	var soapDoc = AjxSoapDoc.create("IMListConferenceRoomsRequest", "urn:zmailIM");
 	var method = soapDoc.getMethod();
 	method.setAttribute("svc", service.getAddress());
 	var respCallback = new AjxCallback(this, this._handleResponseListConferenceRooms, [callback]);
 	return this._send(params, soapDoc, respCallback);
 };
 
-ZmZimbraImService.prototype._handleResponseListConferenceRooms =
+ZmZmailImService.prototype._handleResponseListConferenceRooms =
 function(callback, response) {
 	callback.run(response.getResponse().IMListConferenceRoomsResponse.room || []);
 };
 
-ZmZimbraImService.prototype.createConferenceRoom =
+ZmZmailImService.prototype.createConferenceRoom =
 function(service, name, callback, params) {
 	var addr = [name, service.getAddress()].join("@");
-	var soapDoc = AjxSoapDoc.create("IMJoinConferenceRoomRequest", "urn:zimbraIM");
+	var soapDoc = AjxSoapDoc.create("IMJoinConferenceRoomRequest", "urn:zmailIM");
 	var method = soapDoc.getMethod();
 	method.setAttribute("nickname", appCtxt.get(ZmSetting.USERNAME));
 	method.setAttribute("addr", addr);
@@ -310,7 +310,7 @@ function(service, name, callback, params) {
 	return this._send(params, soapDoc, respCallback);
 };
 
-ZmZimbraImService.prototype._handleResponseCreateConferenceRoom =
+ZmZmailImService.prototype._handleResponseCreateConferenceRoom =
 function(service, addr, name, callback, response) {
 	var responseJson = response.getResponse().IMJoinConferenceRoomResponse;
 	var jsonObj = {
@@ -322,9 +322,9 @@ function(service, addr, name, callback, response) {
 	callback.run(jsonObj);
 };
 
-ZmZimbraImService.prototype.configureConferenceRoom =
+ZmZmailImService.prototype.configureConferenceRoom =
 function(room, config, callback, params) {
-	var soapDoc = AjxSoapDoc.create("IMModifyChatRequest", "urn:zimbraIM");
+	var soapDoc = AjxSoapDoc.create("IMModifyChatRequest", "urn:zmailIM");
 	var method = soapDoc.getMethod();
 	method.setAttribute("thread", room.thread);
 	method.setAttribute("op", "configure");
@@ -343,14 +343,14 @@ function(room, config, callback, params) {
 	return this._send(params, soapDoc, respCallback);
 };
 
-ZmZimbraImService.prototype._handleResponseConfigureConferenceRoom =
+ZmZmailImService.prototype._handleResponseConfigureConferenceRoom =
 function(callback) {
 	callback.run();
 };
 
-ZmZimbraImService.prototype.joinConferenceRoom =
+ZmZmailImService.prototype.joinConferenceRoom =
 function(room, password, callback, params) {
-	var soapDoc = AjxSoapDoc.create("IMJoinConferenceRoomRequest", "urn:zimbraIM");
+	var soapDoc = AjxSoapDoc.create("IMJoinConferenceRoomRequest", "urn:zmailIM");
 	var method = soapDoc.getMethod();
 	method.setAttribute("nickname", appCtxt.get(ZmSetting.USERNAME));
 	method.setAttribute("addr", room.getAddress());
@@ -363,7 +363,7 @@ function(room, password, callback, params) {
 	return this._send(params, soapDoc, respCallback);
 };
 
-ZmZimbraImService.prototype._handleResponseJoinConferenceRoom =
+ZmZmailImService.prototype._handleResponseJoinConferenceRoom =
 function(room, callback, response) {
 	var responseJson = response.getResponse().IMJoinConferenceRoomResponse;
 	var jsonObj = {
@@ -373,7 +373,7 @@ function(room, callback, response) {
 	callback.run(jsonObj);
 };
 
-ZmZimbraImService.prototype.handleNotification =
+ZmZmailImService.prototype.handleNotification =
 function(im) {
 	if (im.n) {
 		var notifications = this.getShowNotify();
@@ -517,19 +517,19 @@ function(im) {
 	}
 };
 
-ZmZimbraImService.prototype._delayedInstantNotify =
+ZmZmailImService.prototype._delayedInstantNotify =
 function() {
 	if (appCtxt.get(ZmSetting.INSTANT_NOTIFY) &&
 		appCtxt.get(ZmSetting.IM_PREF_INSTANT_NOTIFY) &&
 		!appCtxt.getAppController().getInstantNotify())
 	{
-		var zimbraMail = appCtxt.getAppController();
-		var action = new AjxTimedAction(zimbraMail, zimbraMail.setInstantNotify, [true]);
+		var zmailMail = appCtxt.getAppController();
+		var action = new AjxTimedAction(zmailMail, zmailMail.setInstantNotify, [true]);
 		AjxTimedAction.scheduleAction(action, 4000);
 	}
 };
 
-ZmZimbraImService.prototype._send =
+ZmZmailImService.prototype._send =
 function(params, soapDoc, callback) {
 	params = params || { };
 	params.asyncMode = true;

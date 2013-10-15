@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.util.yc;
+package org.zmail.cs.offline.util.yc;
 
 import java.io.InputStream;
 import java.io.StringReader;
@@ -26,16 +26,16 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.InputSource;
 
-import com.zimbra.cs.offline.util.Xml;
-import com.zimbra.cs.offline.util.yc.oauth.OAuthGetRequestTokenRequest;
-import com.zimbra.cs.offline.util.yc.oauth.OAuthGetRequestTokenResponse;
-import com.zimbra.cs.offline.util.yc.oauth.OAuthGetTokenRequest;
-import com.zimbra.cs.offline.util.yc.oauth.OAuthGetTokenResponse;
-import com.zimbra.cs.offline.util.yc.oauth.OAuthHelper;
-import com.zimbra.cs.offline.util.yc.oauth.OAuthPutContactRequest;
-import com.zimbra.cs.offline.util.yc.oauth.OAuthRequest;
-import com.zimbra.cs.offline.util.yc.oauth.OAuthResponse;
-import com.zimbra.cs.offline.util.yc.oauth.OAuthToken;
+import org.zmail.cs.offline.util.Xml;
+import org.zmail.cs.offline.util.yc.oauth.OAuthGetRequestTokenRequest;
+import org.zmail.cs.offline.util.yc.oauth.OAuthGetRequestTokenResponse;
+import org.zmail.cs.offline.util.yc.oauth.OAuthGetTokenRequest;
+import org.zmail.cs.offline.util.yc.oauth.OAuthGetTokenResponse;
+import org.zmail.cs.offline.util.yc.oauth.OAuthHelper;
+import org.zmail.cs.offline.util.yc.oauth.OAuthPutContactRequest;
+import org.zmail.cs.offline.util.yc.oauth.OAuthRequest;
+import org.zmail.cs.offline.util.yc.oauth.OAuthResponse;
+import org.zmail.cs.offline.util.yc.oauth.OAuthToken;
 
 //sorry, right now it only works for my profile as fields ids are unique for each yahoo account
 public class UpdateContactTest {

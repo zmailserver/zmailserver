@@ -14,35 +14,35 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.compose.autocomplete;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.compose.autocomplete;
 
 import java.util.List;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.core.ClientSessionFactory;
-import com.zimbra.qa.selenium.framework.items.MailItem;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.AutocompleteEntry;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew.Field;
+import org.zmail.qa.selenium.framework.core.ClientSessionFactory;
+import org.zmail.qa.selenium.framework.items.MailItem;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.AutocompleteEntry;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew.Field;
 
 
 public class AutoCompleteQuickCompleteKeys extends PrefGroupMailByMessageTest {
 
 
-	private static String FirstName = "James" + ZimbraSeleniumProperties.getUniqueString();
-	private static String LastName = "Smith" + ZimbraSeleniumProperties.getUniqueString();
-	private static ZimbraAccount SampleAccount = null;
+	private static String FirstName = "James" + ZmailSeleniumProperties.getUniqueString();
+	private static String LastName = "Smith" + ZmailSeleniumProperties.getUniqueString();
+	private static ZmailAccount SampleAccount = null;
 	
 	public AutoCompleteQuickCompleteKeys() throws HarnessException {
 		logger.info("New "+ AutoCompleteQuickCompleteKeys.class.getCanonicalName());
 		
-		super.startingAccountPreferences.put("zimbraPrefComposeFormat", "text");
-		super.startingAccountPreferences.put("zimbraPrefGalAutoCompleteEnabled", "TRUE");
-		super.startingAccountPreferences.put("zimbraPrefAutoCompleteQuickCompletionOnComma", "TRUE");
+		super.startingAccountPreferences.put("zmailPrefComposeFormat", "text");
+		super.startingAccountPreferences.put("zmailPrefGalAutoCompleteEnabled", "TRUE");
+		super.startingAccountPreferences.put("zmailPrefAutoCompleteQuickCompletionOnComma", "TRUE");
 
 
 	}
@@ -53,7 +53,7 @@ public class AutoCompleteQuickCompleteKeys extends PrefGroupMailByMessageTest {
 		
 		if ( SampleAccount == null ) {
 			
-			SampleAccount = new ZimbraAccount();
+			SampleAccount = new ZmailAccount();
 			SampleAccount.setPref("displayName", FirstName + " " + LastName);
 			SampleAccount.provision();
 			SampleAccount.authenticate();
@@ -62,8 +62,8 @@ public class AutoCompleteQuickCompleteKeys extends PrefGroupMailByMessageTest {
 
 
 		// Message properties
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String body = "body" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String body = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		
@@ -99,7 +99,7 @@ public class AutoCompleteQuickCompleteKeys extends PrefGroupMailByMessageTest {
 		
 		if ( SampleAccount == null ) {
 			
-			SampleAccount = new ZimbraAccount();
+			SampleAccount = new ZmailAccount();
 			SampleAccount.setPref("displayName", FirstName + " " + LastName);
 			SampleAccount.provision();
 			SampleAccount.authenticate();
@@ -108,8 +108,8 @@ public class AutoCompleteQuickCompleteKeys extends PrefGroupMailByMessageTest {
 
 
 		// Message properties
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String body = "body" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String body = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		
@@ -145,7 +145,7 @@ public class AutoCompleteQuickCompleteKeys extends PrefGroupMailByMessageTest {
 		
 		if ( SampleAccount == null ) {
 			
-			SampleAccount = new ZimbraAccount();
+			SampleAccount = new ZmailAccount();
 			SampleAccount.setPref("displayName", FirstName + " " + LastName);
 			SampleAccount.provision();
 			SampleAccount.authenticate();
@@ -154,8 +154,8 @@ public class AutoCompleteQuickCompleteKeys extends PrefGroupMailByMessageTest {
 
 
 		// Message properties
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String body = "body" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String body = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		

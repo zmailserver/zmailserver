@@ -14,8 +14,8 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimletConfig name="com_zimbra_gdocs" version="0.1">
+<zimletConfig name="org_zmail_gdocs" version="0.1">
     <global>
-        <property name="allowedDomains">*.google.com,*.googleusercontent.com,localhost,ssutar.*,*.zimbra.com</property>
+        <property name="allowedDomains">*.google.com,*.googleusercontent.com,localhost,ssutar.*,*.zmail.com</property>
     </global>
 </zimletConfig>

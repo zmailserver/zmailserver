@@ -29,7 +29,7 @@
   <topic name="Items zoeken die met jou worden gedeeld" url="zwc_help_files/13_sharing/finding_items_shared_with_you.htm" />
 </key>
 <key name="minikalender" >
-  <topic name="Door de Zimbra-webclient navigeren" url="zwc_help_files/1_setting_up/navigating_the_zimbra_web_client.htm" />
+  <topic name="Door de Zmail-webclient navigeren" url="zwc_help_files/1_setting_up/navigating_the_zmail_web_client.htm" />
 </key>
 <key name="mobiele beveiligingsfuncties" >
   <topic name="Mobiele beveiligingsfuncties" url="zwc_help_files/11_mobile/mobile_security_features.htm" />
@@ -64,7 +64,7 @@
   </key>
 </key>
 <key name="Overzicht, deelvenster" >
-  <topic name="Door de Zimbra-webclient navigeren" url="zwc_help_files/1_setting_up/navigating_the_zimbra_web_client.htm" />
+  <topic name="Door de Zmail-webclient navigeren" url="zwc_help_files/1_setting_up/navigating_the_zmail_web_client.htm" />
 </key>
 <key name="pagina met voorkeuren delen" >
   <topic name="Een map delen vanaf de pagina Voorkeuren &gt; Delen" url="zwc_help_files/13_sharing/share_a_folder_from_the_preferences_sharing_page.htm" />
@@ -135,7 +135,7 @@
   <topic name="S/MIME instellen voor het verzenden en ontvangen van ondertekende en gecodeerde e-mailberichten" url="zwc_help_files/15_s_mime/setting_up_smime.htm" />
 </key>
 <key name="schermweergave" >
-  <topic name="Door de Zimbra-webclient navigeren" url="zwc_help_files/1_setting_up/navigating_the_zimbra_web_client.htm" />
+  <topic name="Door de Zmail-webclient navigeren" url="zwc_help_files/1_setting_up/navigating_the_zmail_web_client.htm" />
 </key>
 <key name="schoonvegen" >
   <topic name="Gegevens op mobieltje wissen" url="zwc_help_files/11_mobile/wipe_your_mobile_device.htm" />

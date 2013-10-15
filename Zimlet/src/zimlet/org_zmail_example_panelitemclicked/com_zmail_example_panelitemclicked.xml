@@ -14,11 +14,11 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_example_panelitemclicked"
+<zimlet name="org_zmail_example_panelitemclicked"
         version="1.0"
         description="Demos panel item single and double clicked">
-    <include>com_zimbra_example_panelitemclicked.js</include>
-	<handlerObject>com_zimbra_example_panelitemclicked_HandlerObject</handlerObject>
+    <include>org_zmail_example_panelitemclicked.js</include>
+	<handlerObject>org_zmail_example_panelitemclicked_HandlerObject</handlerObject>
 	<zimletPanelItem label="Panel Item Clicked Zimlet">
 		<toolTipText>Single or Double Click</toolTipText>
 	</zimletPanelItem>

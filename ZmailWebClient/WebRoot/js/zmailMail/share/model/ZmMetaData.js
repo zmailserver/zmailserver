@@ -32,7 +32,7 @@
  * The section data is mapped into {@link ZmSettings} (based on the key name) to allow
  * for easy access. When creating/setting a *new* key/value, naming conventions
  * should be followed as defined by prefs in {@link ZmSettings}. For example, if adding
- * a new key called "foo", the name for the key should be "zimbraPrefFoo" and
+ * a new key called "foo", the name for the key should be "zmailPrefFoo" and
  * should be added to the list of settings in {@link ZmSettings} with type set to
  * ZmSetting.T_METADATA
  *
@@ -82,10 +82,10 @@ ZmMetaData.prototype.set =
 function(section, data, batchCommand, callback, errorCallback, sensitive) {
 	var soapDoc;
 	if (this._itemId) {
-		soapDoc = AjxSoapDoc.create("SetCustomMetadataRequest", "urn:zimbraMail");
+		soapDoc = AjxSoapDoc.create("SetCustomMetadataRequest", "urn:zmailMail");
 		soapDoc.getMethod().setAttribute("id", this._itemId);
 	} else {
-		soapDoc = AjxSoapDoc.create("SetMailboxMetadataRequest", "urn:zimbraMail");
+		soapDoc = AjxSoapDoc.create("SetMailboxMetadataRequest", "urn:zmailMail");
 	}
 	var metaNode = soapDoc.set("meta");
 	metaNode.setAttribute("section", [ZmMetaData.NAMESPACE, section].join(":"));
@@ -138,10 +138,10 @@ function(section, batchCommand, callback, errorCallback) {
 	if (!cachedSection) {
 		var soapDoc;
 		if (this._itemId) {
-			soapDoc = AjxSoapDoc.create("GetCustomMetadataRequest", "urn:zimbraMail");
+			soapDoc = AjxSoapDoc.create("GetCustomMetadataRequest", "urn:zmailMail");
 			soapDoc.getMethod().setAttribute("id", this._itemId);
 		} else {
-			soapDoc = AjxSoapDoc.create("GetMailboxMetadataRequest", "urn:zimbraMail");
+			soapDoc = AjxSoapDoc.create("GetMailboxMetadataRequest", "urn:zmailMail");
 		}
 		var metaNode = soapDoc.set("meta");
 		metaNode.setAttribute("section", sectionName);
@@ -225,7 +225,7 @@ function(callback, result) {
  */
 ZmMetaData.prototype.modify =
 function(section, data, batchCommand, callback, errorCallback) {
-	var soapDoc = AjxSoapDoc.create("ModifyMailboxMetadataRequest", "urn:zimbraMail");
+	var soapDoc = AjxSoapDoc.create("ModifyMailboxMetadataRequest", "urn:zmailMail");
 	var metaNode = soapDoc.set("meta");
 	metaNode.setAttribute("section", [ZmMetaData.NAMESPACE, section].join(":"));
 

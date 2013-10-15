@@ -132,7 +132,7 @@ inline LPTSTR FormatExceptionInfo(HRESULT errCode, LPWSTR errDescription, LPSTR 
     return lpBuffer;
 }
 
-namespace Zimbra
+namespace Zmail
 {
 namespace MAPI
 {
@@ -216,7 +216,7 @@ wstring CommonDateString(FILETIME ft);
 LPWSTR EscapeCategoryName(LPCWSTR pwszOrigCategoryName);
 CString GetGUID();
 void GetContentTypeFromExtension(LPSTR pExt, LPSTR &pContentType);
-HRESULT GetSMTPFromAD(Zimbra::MAPI::MAPISession &session, RECIP_INFO &recipInfo,
+HRESULT GetSMTPFromAD(Zmail::MAPI::MAPISession &session, RECIP_INFO &recipInfo,
     wstring strUser, wstring strPsw, tstring &strSmtpAddress);
 
 namespace CharsetUtil
@@ -276,4 +276,4 @@ bool SetOLProfileRegistryEntries(LPCWSTR strProfileName);
 bool DumpContentsToFile(LPTSTR pBody, string strFilePath,bool isAscii);
 }                                               // end Util
 }                                               // end MAPI
-}                                               // end Zimbra
+}                                               // end Zmail

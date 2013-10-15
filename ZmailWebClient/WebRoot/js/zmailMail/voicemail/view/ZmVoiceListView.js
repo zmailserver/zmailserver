@@ -60,7 +60,7 @@ ZmVoiceListView.F_DURATION = "du";
 ZmVoiceListView.prototype.getTitle =
 function() {
 	var text = this._folder ? this._folder.getName(false, 0, true) : ZmMsg.voice;
-	return [ZmMsg.zimbraTitle, text].join(": ");
+	return [ZmMsg.zmailTitle, text].join(": ");
 };
 
 ZmVoiceListView.prototype.setFolder =

@@ -14,19 +14,19 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.addressbook.contacts;
+package org.zmail.qa.selenium.projects.desktop.tests.addressbook.contacts;
 
 import java.util.List;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount.SOAP_DESTINATION_HOST_TYPE;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.Toaster;
-import com.zimbra.qa.selenium.projects.desktop.ui.addressbook.FormContactNew;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.ZmailAccount.SOAP_DESTINATION_HOST_TYPE;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.Toaster;
+import org.zmail.qa.selenium.projects.desktop.ui.addressbook.FormContactNew;
 
 public class EditContact extends AjaxCommonTest  {
 	public EditContact() {
@@ -50,7 +50,7 @@ public class EditContact extends AjaxCommonTest  {
       ContactItem contactItem = ContactItem.createContactItem(app.zGetActiveAccount());
 
       app.zGetActiveAccount().soapSend(
-            "<CreateContactRequest xmlns='urn:zimbraMail'>" +
+            "<CreateContactRequest xmlns='urn:zmailMail'>" +
             "<cn fileAsStr='" + contactItem.lastName + "," + contactItem.firstName + "' >" +
             "<a n='firstName'>" + contactItem.firstName +"</a>" +
             "<a n='lastName'>" + contactItem.lastName +"</a>" +
@@ -176,7 +176,7 @@ public class EditContact extends AjaxCommonTest  {
    groups = { "smoke"})
    public void ClickToolbarEditLocalContact() throws HarnessException {
       ContactItem contactItem = _createSelectContactItem(SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
 
       //Click Edit contact 
       FormContactNew formContactNew = (FormContactNew) app.zPageAddressbook.zToolbarPressButton(Button.B_EDIT);
@@ -184,14 +184,14 @@ public class EditContact extends AjaxCommonTest  {
       //generate the new contact
       ContactItem newContact = ContactItem.createContactItem(app.zGetActiveAccount());
 
-      _editAndVerify(formContactNew, contactItem, newContact, SOAP_DESTINATION_HOST_TYPE.CLIENT, ZimbraAccount.clientAccountName);     
+      _editAndVerify(formContactNew, contactItem, newContact, SOAP_DESTINATION_HOST_TYPE.CLIENT, ZmailAccount.clientAccountName);     
    }
 
    @Test(   description = "Edit a local contact item, Right click then click Edit",
    groups = { "functional" })
    public void ClickContextMenuEditLocalContact() throws HarnessException {
       ContactItem contactItem = _createSelectContactItem(SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
 
       //Click Edit contact 
       FormContactNew formContactNew = (FormContactNew) app.zPageAddressbook.zListItem(Action.A_RIGHTCLICK, Button.B_EDIT, contactItem.fileAs);        
@@ -199,7 +199,7 @@ public class EditContact extends AjaxCommonTest  {
       //generate the new contact
       ContactItem newContact = ContactItem.createContactItem(app.zGetActiveAccount());
 
-      _editAndVerify(formContactNew, contactItem, newContact, SOAP_DESTINATION_HOST_TYPE.CLIENT, ZimbraAccount.clientAccountName);
+      _editAndVerify(formContactNew, contactItem, newContact, SOAP_DESTINATION_HOST_TYPE.CLIENT, ZmailAccount.clientAccountName);
 
    }
 }

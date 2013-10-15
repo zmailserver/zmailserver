@@ -14,16 +14,16 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.mail.folders;
+package org.zmail.qa.selenium.projects.desktop.tests.mail.folders;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount.SOAP_DESTINATION_HOST_TYPE;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.ZmailAccount.SOAP_DESTINATION_HOST_TYPE;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
 
 
 public class DeleteFolder extends AjaxCommonTest {
@@ -52,10 +52,10 @@ public class DeleteFolder extends AjaxCommonTest {
 		ZAssert.assertNotNull(trash, "Verify the trash is available");
 		
 		// Create the subfolder
-		String name = "folder" + ZimbraSeleniumProperties.getUniqueString();
+		String name = "folder" + ZmailSeleniumProperties.getUniqueString();
 		
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+				"<CreateFolderRequest xmlns='urn:zmailMail'>" +
                 	"<folder name='"+ name +"' l='"+ inbox.getId() +"'/>" +
                 "</CreateFolderRequest>");
 
@@ -114,10 +114,10 @@ public class DeleteFolder extends AjaxCommonTest {
 	   ZAssert.assertNotNull(trash, "Verify the trash is available");
 
 	   // Create the subfolder
-	   String name = "folder" + ZimbraSeleniumProperties.getUniqueString();
+	   String name = "folder" + ZmailSeleniumProperties.getUniqueString();
 
 	   app.zGetActiveAccount().soapSend(
-	         "<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+	         "<CreateFolderRequest xmlns='urn:zmailMail'>" +
 	         "<folder name='"+ name +"' l='"+ inbox.getId() +"'/>" +
 	         "</CreateFolderRequest>");
 
@@ -145,7 +145,7 @@ public class DeleteFolder extends AjaxCommonTest {
 
 	   // Create the same subfolder again under the same parent
 	   app.zGetActiveAccount().soapSend(
-	         "<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+	         "<CreateFolderRequest xmlns='urn:zmailMail'>" +
 	         "<folder name='"+ name +"' l='"+ inbox.getId() +"'/>" +
 	         "</CreateFolderRequest>");
 
@@ -192,24 +192,24 @@ public class DeleteFolder extends AjaxCommonTest {
    @Test(   description = "Delete local mail folder - Right click, Delete",
          groups = { "smoke" })
    public void DeleteLocalMailFolder() throws HarnessException {
-      String folderName = "folder" + ZimbraSeleniumProperties.getUniqueString();
+      String folderName = "folder" + ZmailSeleniumProperties.getUniqueString();
 
       FolderItem folderItem = FolderItem.importFromSOAP(app.zGetActiveAccount(),
             SystemFolder.UserRoot,
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
 
       app.zGetActiveAccount().soapSend(
-            "<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+            "<CreateFolderRequest xmlns='urn:zmailMail'>" +
             "<folder name='" + folderName +"' l='"+ folderItem.getId() +"'/>" +
             "</CreateFolderRequest>",
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
 
       FolderItem desktopFolder = FolderItem.importFromSOAP(app
             .zGetActiveAccount(), folderName,
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
 
       relogin();
 
@@ -220,11 +220,11 @@ public class DeleteFolder extends AjaxCommonTest {
       FolderItem deletedFolder = FolderItem.importFromSOAP(app.zGetActiveAccount(),
             folderName,
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
       FolderItem trashFolder = FolderItem.importFromSOAP(app.zGetActiveAccount(),
             SystemFolder.Trash,
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
 
       ZAssert.assertNotNull(deletedFolder, "Verify the folder is still available");
       ZAssert.assertEquals(trashFolder.getId(), deletedFolder.getParentId(),
@@ -235,37 +235,37 @@ public class DeleteFolder extends AjaxCommonTest {
    @Test(   description = "Delete local mail subfolder - Right click, Delete",
          groups = { "smoke" })
    public void DeleteLocalMailSubfolder() throws HarnessException {
-      String folderName = "folder" + ZimbraSeleniumProperties.getUniqueString();
-      String subfolderName = "subfolder" + ZimbraSeleniumProperties.getUniqueString();
+      String folderName = "folder" + ZmailSeleniumProperties.getUniqueString();
+      String subfolderName = "subfolder" + ZmailSeleniumProperties.getUniqueString();
 
       FolderItem folderItem = FolderItem.importFromSOAP(app.zGetActiveAccount(),
             SystemFolder.UserRoot,
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
 
       app.zGetActiveAccount().soapSend(
-            "<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+            "<CreateFolderRequest xmlns='urn:zmailMail'>" +
             "<folder name='" + folderName +"' l='"+ folderItem.getId() +"'/>" +
             "</CreateFolderRequest>",
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
 
       FolderItem desktopFolder = FolderItem.importFromSOAP(app
             .zGetActiveAccount(), folderName,
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
 
       app.zGetActiveAccount().soapSend(
-            "<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+            "<CreateFolderRequest xmlns='urn:zmailMail'>" +
             "<folder name='" + subfolderName +"' l='"+ desktopFolder.getId() +"'/>" +
             "</CreateFolderRequest>",
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
 
       FolderItem desktopSubfolder = FolderItem.importFromSOAP(app
             .zGetActiveAccount(), subfolderName,
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
 
       relogin();
       app.zTreeMail.zExpandAll();
@@ -277,11 +277,11 @@ public class DeleteFolder extends AjaxCommonTest {
       FolderItem deletedFolder = FolderItem.importFromSOAP(app.zGetActiveAccount(),
             subfolderName,
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
       FolderItem trashFolder = FolderItem.importFromSOAP(app.zGetActiveAccount(),
             SystemFolder.Trash,
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
 
       ZAssert.assertNotNull(deletedFolder, "Verify the folder is still available");
       ZAssert.assertEquals(trashFolder.getId(), deletedFolder.getParentId(),
@@ -291,32 +291,32 @@ public class DeleteFolder extends AjaxCommonTest {
       FolderItem.deleteUsingSOAP(app.zGetActiveAccount(),
             folderName,
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
    }
 
    @Test(   description = "Delete local mail folder where local trash can already" +
    		" has a folder with the same name",
          groups = { "functional" })
    public void DeleteDuplicatedNamedLocalFolder() throws HarnessException {
-      String folderName = "folder" + ZimbraSeleniumProperties.getUniqueString();
+      String folderName = "folder" + ZmailSeleniumProperties.getUniqueString();
 
       FolderItem folderItem = FolderItem.importFromSOAP(app.zGetActiveAccount(),
             SystemFolder.UserRoot,
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
 
       // Create and Delete the 1st folder
       app.zGetActiveAccount().soapSend(
-            "<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+            "<CreateFolderRequest xmlns='urn:zmailMail'>" +
             "<folder name='" + folderName +"' l='"+ folderItem.getId() +"'/>" +
             "</CreateFolderRequest>",
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
 
       FolderItem desktopFolder1 = FolderItem.importFromSOAP(app
             .zGetActiveAccount(), folderName,
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
 
       relogin();
 
@@ -325,16 +325,16 @@ public class DeleteFolder extends AjaxCommonTest {
 
       // Create and Delete the 2nd folder
       app.zGetActiveAccount().soapSend(
-            "<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+            "<CreateFolderRequest xmlns='urn:zmailMail'>" +
             "<folder name='" + folderName +"' l='"+ folderItem.getId() +"'/>" +
             "</CreateFolderRequest>",
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
 
       FolderItem desktopFolder2 = FolderItem.importFromSOAP(app
             .zGetActiveAccount(), folderName,
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
 
       relogin();
 
@@ -345,17 +345,17 @@ public class DeleteFolder extends AjaxCommonTest {
       FolderItem deletedFolder1 = FolderItem.importFromSOAP(app.zGetActiveAccount(),
             folderName,
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
 
       FolderItem deletedFolder2 = FolderItem.importFromSOAP(app.zGetActiveAccount(),
             folderName + "_",
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
 
       FolderItem trashFolder = FolderItem.importFromSOAP(app.zGetActiveAccount(),
             SystemFolder.Trash,
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
 
       ZAssert.assertNotNull(deletedFolder1, "Verify the folder1 is still available");
       ZAssert.assertEquals(trashFolder.getId(), deletedFolder1.getParentId(),

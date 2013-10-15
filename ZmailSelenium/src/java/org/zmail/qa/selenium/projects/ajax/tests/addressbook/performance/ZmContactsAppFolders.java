@@ -14,15 +14,15 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.addressbook.performance;
+package org.zmail.qa.selenium.projects.ajax.tests.addressbook.performance;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.framework.util.performance.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.performance.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
 
 
 
@@ -44,8 +44,8 @@ public class ZmContactsAppFolders extends AjaxCommonTest {
 		// Create a folder
 		FolderItem root = FolderItem.importFromSOAP(app.zGetActiveAccount(), FolderItem.SystemFolder.UserRoot);
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
-					"<folder name='ab"+ ZimbraSeleniumProperties.getUniqueString() + "' view='contact' l='"+ root.getId() +"'/>" +
+				"<CreateFolderRequest xmlns='urn:zmailMail'>" +
+					"<folder name='ab"+ ZmailSeleniumProperties.getUniqueString() + "' view='contact' l='"+ root.getId() +"'/>" +
 				"</CreateFolderRequest>");
 
 
@@ -74,8 +74,8 @@ public class ZmContactsAppFolders extends AjaxCommonTest {
 		FolderItem root = FolderItem.importFromSOAP(app.zGetActiveAccount(), FolderItem.SystemFolder.UserRoot);
 		for (int i = 0; i < 100; i++) {
 			app.zGetActiveAccount().soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
-						"<folder name='ab"+ ZimbraSeleniumProperties.getUniqueString() + "' view='contact' l='"+ root.getId() +"'/>" +
+					"<CreateFolderRequest xmlns='urn:zmailMail'>" +
+						"<folder name='ab"+ ZmailSeleniumProperties.getUniqueString() + "' view='contact' l='"+ root.getId() +"'/>" +
 					"</CreateFolderRequest>");
 		}
 

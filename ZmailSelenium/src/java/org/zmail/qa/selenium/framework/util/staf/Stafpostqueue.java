@@ -14,14 +14,14 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.util.staf;
+package org.zmail.qa.selenium.framework.util.staf;
 
 import java.util.*;
 import java.util.regex.*;
 
 import com.ibm.staf.STAFMarshallingContext;
-import com.zimbra.qa.selenium.framework.core.*;
-import com.zimbra.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.core.*;
+import org.zmail.qa.selenium.framework.util.*;
 
 public class Stafpostqueue extends StafServicePROCESS {
 
@@ -38,9 +38,9 @@ public class Stafpostqueue extends StafServicePROCESS {
 	public void waitForPostqueue() throws HarnessException {
 		
 		// Start: Dev env hack
-		if ( "false".equalsIgnoreCase(ZimbraSeleniumProperties.getStringProperty("postqueue.use.staf", "true")) ) {
+		if ( "false".equalsIgnoreCase(ZmailSeleniumProperties.getStringProperty("postqueue.use.staf", "true")) ) {
 			logger.info("In dev environment, waiting for message to be delivered ...");
-			int delay = Integer.parseInt(ZimbraSeleniumProperties.getStringProperty("postqueue.sleep.nonstaf.msec", "5000"));
+			int delay = Integer.parseInt(ZmailSeleniumProperties.getStringProperty("postqueue.sleep.nonstaf.msec", "5000"));
 			SleepUtil.sleep(delay);
 			return;
 		}
@@ -53,11 +53,11 @@ public class Stafpostqueue extends StafServicePROCESS {
 		// if so, set it to @domain.com
 		if ( (emailaddress == null) || (emailaddress.equals("")) ) {
 			logger.warn("Unable to determien current user account.  Use @testdomain.com instead");
-			emailaddress = "@" + ZimbraSeleniumProperties.getStringProperty("testdomain", "testdomain.com");
+			emailaddress = "@" + ZmailSeleniumProperties.getStringProperty("testdomain", "testdomain.com");
 		}
 
-		int max = Integer.parseInt(ZimbraSeleniumProperties.getStringProperty("postqueue.sleep.max.msec", "30000"));
-		int interval = Integer.parseInt(ZimbraSeleniumProperties.getStringProperty("postqueue.sleep.interval.msec", "1000"));
+		int max = Integer.parseInt(ZmailSeleniumProperties.getStringProperty("postqueue.sleep.max.msec", "30000"));
+		int interval = Integer.parseInt(ZmailSeleniumProperties.getStringProperty("postqueue.sleep.interval.msec", "1000"));
 		for (int i = 0; i < max; i += interval) {
 			
 			// Check the server queue if it is empty
@@ -99,7 +99,7 @@ public class Stafpostqueue extends StafServicePROCESS {
 		/* Example "output":
 
     	-Queue ID- --Size-- ----Arrival Time---- -Sender/Recipient-------
-    	A391E167584     1164 Thu Jun 30 11:23:15  zimbra@zqa-429.eng.vmware.com
+    	A391E167584     1164 Thu Jun 30 11:23:15  zmail@zqa-429.eng.vmware.com
     	(delivery temporarily suspended: connect to zqa-429.eng.vmware.com[10.137.245.174]:7025: Connection refused)
     	                                         admin@zqa-429.eng.vmware.com
 
@@ -107,11 +107,11 @@ public class Stafpostqueue extends StafServicePROCESS {
     	(delivery temporarily suspended: connect to zqa-429.eng.vmware.com[10.137.245.174]:7025: Connection refused)
     	                                         enus130945833860146@testdomain.com
 
-    	48E6016757B     1164 Thu Jun 30 11:21:46  zimbra@zqa-429.eng.vmware.com
+    	48E6016757B     1164 Thu Jun 30 11:21:46  zmail@zqa-429.eng.vmware.com
     	  (connect to zqa-429.eng.vmware.com[10.137.245.174]:7025: Connection refused)
     	                                         admin@zqa-429.eng.vmware.com
 
-    	9A588167581     1164 Thu Jun 30 11:23:15  zimbra@zqa-429.eng.vmware.com
+    	9A588167581     1164 Thu Jun 30 11:23:15  zmail@zqa-429.eng.vmware.com
     	(delivery temporarily suspended: connect to zqa-429.eng.vmware.com[10.137.245.174]:7025: Connection refused)
     	                                         admin@zqa-429.eng.vmware.com
 
@@ -176,7 +176,7 @@ public class Stafpostqueue extends StafServicePROCESS {
 			throws HarnessException {
 		
 		// STAF <SERVER> PROCESS START COMMAND
-		// /opt/zimbra/postfix/sbin/postsuper PARMS -d <queue_id> RETURNSTDOUT
+		// /opt/zmail/postfix/sbin/postsuper PARMS -d <queue_id> RETURNSTDOUT
 		// RETURNSTDERR WAIT 60000
 		
 		for (String id : ids)
@@ -187,10 +187,10 @@ public class Stafpostqueue extends StafServicePROCESS {
 	private void deletePostqueueItem(String id) throws HarnessException {
 
 		// STAF <SERVER> PROCESS START COMMAND
-		// /opt/zimbra/postfix/sbin/postsuper PARMS -d <queue_id> RETURNSTDOUT
+		// /opt/zmail/postfix/sbin/postsuper PARMS -d <queue_id> RETURNSTDOUT
 		// RETURNSTDERR WAIT 60000
 
-		execute("/opt/zimbra/postfix/sbin/postsuper -d " + id);
+		execute("/opt/zmail/postfix/sbin/postsuper -d " + id);
 
 	}
 
@@ -215,10 +215,10 @@ public class Stafpostqueue extends StafServicePROCESS {
 							"START SHELL COMMAND \"su - -c '%s'\" RETURNSTDOUT RETURNSTDERR WAIT %d",
 							command, this.getTimeout());
 		else
-			// Running a command as 'zimbra' user.
+			// Running a command as 'zmail' user.
 			StafParms = String
 					.format(
-							"START SHELL COMMAND \"su - zimbra -c '%s'\" RETURNSTDOUT RETURNSTDERR WAIT %d",
+							"START SHELL COMMAND \"su - zmail -c '%s'\" RETURNSTDOUT RETURNSTDERR WAIT %d",
 							command, this.getTimeout());
 
 		return (getStafCommand());

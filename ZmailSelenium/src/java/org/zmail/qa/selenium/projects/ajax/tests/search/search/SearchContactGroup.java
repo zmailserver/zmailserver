@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.search.search;
+package org.zmail.qa.selenium.projects.ajax.tests.search.search;
 
 
 
@@ -22,12 +22,12 @@ import java.util.List;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.items.ContactGroupItem.MemberItem;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.items.ContactGroupItem.MemberItem;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
 
 public class SearchContactGroup extends AjaxCommonTest {
 	

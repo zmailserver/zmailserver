@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.compose;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.compose;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.MailItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.MailItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew;
 
 
 public class ReplyMailHtml extends PrefGroupMailByMessageTest {
@@ -34,7 +34,7 @@ public class ReplyMailHtml extends PrefGroupMailByMessageTest {
 		
 		
 		
-		super.startingAccountPreferences.put("zimbraPrefComposeFormat", "html");
+		super.startingAccountPreferences.put("zmailPrefComposeFormat", "html");
 		
 	}
 	
@@ -42,9 +42,9 @@ public class ReplyMailHtml extends PrefGroupMailByMessageTest {
 			groups = { "smoke" })
 	public void replyHtmlMail() throws HarnessException {
 		
-		String subject = "subject"+ ZimbraSeleniumProperties.getUniqueString();
-		String bodyText = "text" + ZimbraSeleniumProperties.getUniqueString();
-		String bodyHTML = "text <strong>bold"+ ZimbraSeleniumProperties.getUniqueString() +"</strong> text";
+		String subject = "subject"+ ZmailSeleniumProperties.getUniqueString();
+		String bodyText = "text" + ZmailSeleniumProperties.getUniqueString();
+		String bodyHTML = "text <strong>bold"+ ZmailSeleniumProperties.getUniqueString() +"</strong> text";
 		String contentHTML = XmlStringUtil.escapeXml(
 				"<html>" +
 					"<head></head>" +
@@ -53,8 +53,8 @@ public class ReplyMailHtml extends PrefGroupMailByMessageTest {
 
 
 		// Send a message to the account
-		ZimbraAccount.AccountA().soapSend(
-					"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+		ZmailAccount.AccountA().soapSend(
+					"<SendMsgRequest xmlns='urn:zmailMail'>" +
 						"<m>" +
 							"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 							"<su>"+ subject +"</su>" +
@@ -95,11 +95,11 @@ public class ReplyMailHtml extends PrefGroupMailByMessageTest {
 
 		// From the receiving end, verify the message details
 		// Need 'in:inbox' to seprate the message from the sent message
-      MailItem received = MailItem.importFromSOAP(ZimbraAccount.AccountA(),
+      MailItem received = MailItem.importFromSOAP(ZmailAccount.AccountA(),
             "in:inbox subject:("+ mail.dSubject +")");
 
 		ZAssert.assertEquals(received.dFromRecipient.dEmailAddress, app.zGetActiveAccount().EmailAddress, "Verify the from field is correct");
-		ZAssert.assertEquals(received.dToRecipients.get(0).dEmailAddress, ZimbraAccount.AccountA().EmailAddress, "Verify the to field is correct");
+		ZAssert.assertEquals(received.dToRecipients.get(0).dEmailAddress, ZmailAccount.AccountA().EmailAddress, "Verify the to field is correct");
 		ZAssert.assertStringContains(received.dSubject, mail.dSubject, "Verify the subject field is correct");
 		ZAssert.assertStringContains(received.dSubject, "Re", "Verify the subject field contains the 'Re' prefix");
 		

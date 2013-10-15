@@ -15,14 +15,14 @@
 <%@ tag body-content="empty" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
-<%@ taglib prefix="rest" uri="com.zimbra.restclient" %>
-<%@ taglib prefix="app" uri="com.zimbra.htmlclient" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
+<%@ taglib prefix="rest" uri="org.zmail.restclient" %>
+<%@ taglib prefix="app" uri="org.zmail.htmlclient" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
 <rest:handleError>
     <fmt:getLocale var="locale"/>
-    <fmt:setLocale value="${not empty param.localeId ? param.localeId : (not empty requestScope.zimbra_target_account_prefLocale ? requestScope.zimbra_target_account_prefLocale : locale)}"/>
-    <zm:getDocument var="doc" box="${mailbox}" id="${requestScope.zimbra_target_account_id}:${requestScope.zimbra_target_item_id}"/>
+    <fmt:setLocale value="${not empty param.localeId ? param.localeId : (not empty requestScope.zmail_target_account_prefLocale ? requestScope.zmail_target_account_prefLocale : locale)}"/>
+    <zm:getDocument var="doc" box="${mailbox}" id="${requestScope.zmail_target_account_id}:${requestScope.zmail_target_item_id}"/>
     <fmt:setBundle basename="/messages/ZhMsg" scope='request'/> 
 </rest:handleError>
 <c:set var="isViewOnly" value="${not empty param.viewonly}" scope="request"/>
@@ -36,7 +36,7 @@
             }
 
             final String SKIN_COOKIE_NAME = "ZM_SKIN";
-            String skin = application.getInitParameter("zimbraDefaultSkin");
+            String skin = application.getInitParameter("zmailDefaultSkin");
             Cookie[] cookies = request.getCookies();
             String requestSkin = request.getParameter("skin");
             if (requestSkin != null) {
@@ -52,7 +52,7 @@
             request.setAttribute("skin", skin);
         %>
 
-        <!-- Zimbra Variables -->
+        <!-- Zmail Variables -->
         <c:if test="${not empty param.dev and param.dev eq '1'}">
             <c:set var="mode" value="mjsf" scope="request"/>
             <c:set var="gzip" value="false" scope="request"/>
@@ -66,7 +66,7 @@
         <c:set var="isDevMode" value="${not empty requestScope.mode and requestScope.mode eq 'mjsf'}" scope="request"/>
         <c:set var="isSkinDebugMode" value="${not empty requestScope.mode} and ${requestScope.mode eq 'skindebug'}" scope="request"/>
         <c:set var="ext" value="${requestScope.fileExtension}" scope="page"/>
-        <c:set var="vers" value="${empty requestScope.version ? initParam.zimbraCacheBusterVersion : requestScope.version}" scope="page"/>
+        <c:set var="vers" value="${empty requestScope.version ? initParam.zmailCacheBusterVersion : requestScope.version}" scope="page"/>
         <c:if test="${empty ext or isDevMode}">
             <c:set var="ext" value="" scope="page"/>
         </c:if>
@@ -77,7 +77,7 @@
         <c:url var='cssurl' value='/css/images,common,skin,docs.css'>
             <c:param name="client"	value="standard" />
             <c:param name="skin"	value="${skin}" />
-            <c:param name="v"		value="${initParam.zimbraCacheBusterVersion}" />
+            <c:param name="v"		value="${initParam.zmailCacheBusterVersion}" />
         </c:url>
         <link rel="stylesheet" type="text/css" href="${cssurl}" />
 

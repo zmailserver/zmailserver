@@ -3,7 +3,7 @@
 	<name>ClamScanner</name>
 	<comment></comment>
 	<projects>
-		<project>ZimbraServer</project>
+		<project>ZmailServer</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

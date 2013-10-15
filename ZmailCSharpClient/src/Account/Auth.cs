@@ -14,9 +14,9 @@
  */
 using System;
 using System.Xml;
-using Zimbra.Client.Util;
+using Zmail.Client.Util;
 
-namespace Zimbra.Client.Account
+namespace Zmail.Client.Account
 {
 	
 

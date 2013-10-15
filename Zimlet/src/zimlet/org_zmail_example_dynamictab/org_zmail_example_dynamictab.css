@@ -18,12 +18,12 @@
  *	Edit Tabs dialog
  */
  
-.com_zimbra_example_dynamictab_EditTabsDialog-removeLink {
+.org_zmail_example_dynamictab_EditTabsDialog-removeLink {
 	color: blue;
 	text-decoration: underline;
 }
 
-.com_zimbra_example_dynamictab_EditTabsDialog-dialogContainer {
+.org_zmail_example_dynamictab_EditTabsDialog-dialogContainer {
 	-moz-border-bottom-colors:#A7A194 #D7CFBE;
 	-moz-border-left-colors:#6B675F #B3AD9F;
 	-moz-border-radius-bottomleft:3px;

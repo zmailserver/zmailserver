@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.jsp;
+package org.zmail.cs.offline.jsp;
 
 import java.text.MessageFormat;
 import java.util.HashMap;
@@ -23,10 +23,10 @@ import java.util.ResourceBundle;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.offline.common.OfflineConstants;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.offline.common.OfflineConstants;
 
 public class PageBean {
     private Locale clientLocale = new Locale("en");
@@ -86,7 +86,7 @@ public class PageBean {
     public String getSkin() {
         try {
             return JspProvStub.getInstance().getOfflineAccount(
-                OfflineConstants.LOCAL_ACCOUNT_ID).getAttr(Provisioning.A_zimbraPrefSkin);
+                OfflineConstants.LOCAL_ACCOUNT_ID).getAttr(Provisioning.A_zmailPrefSkin);
         } catch (ServiceException x) {
             return "carbon";
         }
@@ -95,7 +95,7 @@ public class PageBean {
     public static synchronized void updateServerLocale(Locale locale) throws ServiceException {
         if (serverLocale == null || !serverLocale.equals(locale)) { 
             Map<String, Object> attrs = new HashMap<String, Object>();
-            attrs.put(Provisioning.A_zimbraPrefLocale, locale.toString());
+            attrs.put(Provisioning.A_zmailPrefLocale, locale.toString());
             JspProvStub stub = JspProvStub.getInstance();
             stub.modifyOfflineAccount(OfflineConstants.LOCAL_ACCOUNT_ID, attrs);
             serverLocale = (Locale)locale.clone();						
@@ -103,7 +103,7 @@ public class PageBean {
     }
 
     public static String getBaseUri() {
-        return "http://127.0.0.1:" + LC.zimbra_admin_service_port.value();
+        return "http://127.0.0.1:" + LC.zmail_admin_service_port.value();
     }
 
     public static String getLocalConfig(String key) {

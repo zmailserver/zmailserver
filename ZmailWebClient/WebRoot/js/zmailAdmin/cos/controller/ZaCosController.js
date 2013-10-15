@@ -69,7 +69,7 @@ ZaCosController.initPopupMenuMethod =
 function () {
 	this._popupOperations[ZaOperation.SAVE]=new ZaOperation(ZaOperation.SAVE,ZaMsg.TBB_Save, ZaMsg.COSTBB_Save_tt, "Save", "SaveDis", new AjxListener(this, this.saveButtonListener));
 
-	if(ZaItem.hasRight(ZaCos.CREATE_COS_RIGHT, ZaZimbraAdmin.currentAdminAccount)) {
+	if(ZaItem.hasRight(ZaCos.CREATE_COS_RIGHT, ZaZmailAdmin.currentAdminAccount)) {
 		this._popupOperations[ZaOperation.NEW]=new ZaOperation(ZaOperation.NEW,ZaMsg.TBB_New, ZaMsg.COSTBB_New_tt, "NewCOS", "NewCOSDis", new AjxListener(this, ZaCosController.prototype._newButtonListener, [true]));
 	}
 	this._popupOperations[ZaOperation.DELETE]=new ZaOperation(ZaOperation.DELETE,ZaMsg.TBB_Delete, ZaMsg.COSTBB_Delete_tt, "Delete", "DeleteDis", new AjxListener(this, this.deleteButtonListener));
@@ -194,9 +194,9 @@ function () {
 		
 	//transfer the fields from the tmpObj to the _currentObject
 	for (var a in tmpObj.attrs) {
-		if(a == ZaItem.A_objectClass || a == ZaItem.A_zimbraId || a == ZaCos.A_zimbraAvailableSkin
-                || a == ZaCos.A_zimbraZimletAvailableZimlets || a == ZaCos.A_zimbraMailHostPool
-                || a == ZaItem.A_zimbraACE || a== ZaItem.A_zimbraCreateTimestamp) {
+		if(a == ZaItem.A_objectClass || a == ZaItem.A_zmailId || a == ZaCos.A_zmailAvailableSkin
+                || a == ZaCos.A_zmailZimletAvailableZimlets || a == ZaCos.A_zmailMailHostPool
+                || a == ZaItem.A_zmailACE || a== ZaItem.A_zmailCreateTimestamp) {
 			continue;
 		}
 		if(!ZaItem.hasWritePermission(a,tmpObj)) {
@@ -209,90 +209,90 @@ function () {
 	}
 	//check if host pool has been changed
 
-	if(tmpObj.attrs[ZaCos.A_zimbraMailHostPool] != null) {
+	if(tmpObj.attrs[ZaCos.A_zmailMailHostPool] != null) {
 		var tmpMods = [];
-		if(!(tmpObj.attrs[ZaCos.A_zimbraMailHostPool] instanceof Array)) {
-			tmpMods = [tmpObj.attrs[ZaCos.A_zimbraMailHostPool]];
+		if(!(tmpObj.attrs[ZaCos.A_zmailMailHostPool] instanceof Array)) {
+			tmpMods = [tmpObj.attrs[ZaCos.A_zmailMailHostPool]];
 		} else {
-			var cnt = tmpObj.attrs[ZaCos.A_zimbraMailHostPool].length;
+			var cnt = tmpObj.attrs[ZaCos.A_zmailMailHostPool].length;
 			tmpMods = [];
 			for(var i = 0; i < cnt; i++) {
-				tmpMods.push(tmpObj.attrs[ZaCos.A_zimbraMailHostPool][i]);
+				tmpMods.push(tmpObj.attrs[ZaCos.A_zmailMailHostPool][i]);
 			}
 		}
 		//check if changed
-		if(!isNew && this._currentObject.attrs[ZaCos.A_zimbraMailHostPool] != null) {
-			if(this._currentObject.attrs[ZaCos.A_zimbraMailHostPool] instanceof Array) {
-				if(tmpMods.join(",") != this._currentObject.attrs[ZaCos.A_zimbraMailHostPool].join(",")) {
-					mods[ZaCos.A_zimbraMailHostPool] = tmpMods;
+		if(!isNew && this._currentObject.attrs[ZaCos.A_zmailMailHostPool] != null) {
+			if(this._currentObject.attrs[ZaCos.A_zmailMailHostPool] instanceof Array) {
+				if(tmpMods.join(",") != this._currentObject.attrs[ZaCos.A_zmailMailHostPool].join(",")) {
+					mods[ZaCos.A_zmailMailHostPool] = tmpMods;
 				}
-			} else if (tmpMods.join(",") != [this._currentObject.attrs[ZaCos.A_zimbraMailHostPool]].join(",")) {
-				mods[ZaCos.A_zimbraMailHostPool] = tmpMods;
+			} else if (tmpMods.join(",") != [this._currentObject.attrs[ZaCos.A_zmailMailHostPool]].join(",")) {
+				mods[ZaCos.A_zmailMailHostPool] = tmpMods;
 			}
 		} else {
-			mods[ZaCos.A_zimbraMailHostPool] = tmpMods;
+			mods[ZaCos.A_zmailMailHostPool] = tmpMods;
 		}
-	} else if(this._currentObject.attrs[ZaCos.A_zimbraMailHostPool] != null) {
-		mods[ZaCos.A_zimbraMailHostPool] = "";
+	} else if(this._currentObject.attrs[ZaCos.A_zmailMailHostPool] != null) {
+		mods[ZaCos.A_zmailMailHostPool] = "";
 	}
 
-	if(tmpObj.attrs[ZaCos.A_zimbraAvailableSkin] != null) {
+	if(tmpObj.attrs[ZaCos.A_zmailAvailableSkin] != null) {
 		var tmpMods = [];
-		if(!(tmpObj.attrs[ZaCos.A_zimbraAvailableSkin] instanceof Array)) {
-			tmpMods = [tmpObj.attrs[ZaCos.A_zimbraAvailableSkin]];
+		if(!(tmpObj.attrs[ZaCos.A_zmailAvailableSkin] instanceof Array)) {
+			tmpMods = [tmpObj.attrs[ZaCos.A_zmailAvailableSkin]];
 		} else {
-			var cnt = tmpObj.attrs[ZaCos.A_zimbraAvailableSkin].length;
+			var cnt = tmpObj.attrs[ZaCos.A_zmailAvailableSkin].length;
 			tmpMods = [];
 			for(var i = 0; i < cnt; i++) {
-				tmpMods.push(tmpObj.attrs[ZaCos.A_zimbraAvailableSkin][i]);
+				tmpMods.push(tmpObj.attrs[ZaCos.A_zmailAvailableSkin][i]);
 			}
 		}
 			//check if changed
-		if(this._currentObject.attrs[ZaCos.A_zimbraAvailableSkin] != null) {
-			if(this._currentObject.attrs[ZaCos.A_zimbraAvailableSkin] instanceof Array) {
-				if(tmpMods.join(",") != this._currentObject.attrs[ZaCos.A_zimbraAvailableSkin].join(",")) {
-					mods[ZaCos.A_zimbraAvailableSkin] = tmpMods;
+		if(this._currentObject.attrs[ZaCos.A_zmailAvailableSkin] != null) {
+			if(this._currentObject.attrs[ZaCos.A_zmailAvailableSkin] instanceof Array) {
+				if(tmpMods.join(",") != this._currentObject.attrs[ZaCos.A_zmailAvailableSkin].join(",")) {
+					mods[ZaCos.A_zmailAvailableSkin] = tmpMods;
 				}
-			} else if (tmpMods.join(",") != [this._currentObject.attrs[ZaCos.A_zimbraAvailableSkin]].join(",")) {
-				mods[ZaCos.A_zimbraAvailableSkin] = tmpMods;
+			} else if (tmpMods.join(",") != [this._currentObject.attrs[ZaCos.A_zmailAvailableSkin]].join(",")) {
+				mods[ZaCos.A_zmailAvailableSkin] = tmpMods;
 			}
 		} else {
-			mods[ZaCos.A_zimbraAvailableSkin] = tmpMods;
+			mods[ZaCos.A_zmailAvailableSkin] = tmpMods;
 		}
-	} else if(this._currentObject.attrs[ZaCos.A_zimbraAvailableSkin] != null) {
-		mods[ZaCos.A_zimbraAvailableSkin] = "";
+	} else if(this._currentObject.attrs[ZaCos.A_zmailAvailableSkin] != null) {
+		mods[ZaCos.A_zmailAvailableSkin] = "";
 	}
 		
 
-	if(tmpObj.attrs[ZaCos.A_zimbraZimletAvailableZimlets] != null) {
+	if(tmpObj.attrs[ZaCos.A_zmailZimletAvailableZimlets] != null) {
 		var tmpMods = [];
-		if(!(tmpObj.attrs[ZaCos.A_zimbraZimletAvailableZimlets] instanceof Array)) {
-			tmpMods = [tmpObj.attrs[ZaCos.A_zimbraZimletAvailableZimlets]];
+		if(!(tmpObj.attrs[ZaCos.A_zmailZimletAvailableZimlets] instanceof Array)) {
+			tmpMods = [tmpObj.attrs[ZaCos.A_zmailZimletAvailableZimlets]];
 		} else {
-			var cnt = tmpObj.attrs[ZaCos.A_zimbraZimletAvailableZimlets].length;
+			var cnt = tmpObj.attrs[ZaCos.A_zmailZimletAvailableZimlets].length;
 			tmpMods = [];
 			for(var i = 0; i < cnt; i++) {
-				tmpMods.push(tmpObj.attrs[ZaAccount.A_zimbraZimletAvailableZimlets][i]);
+				tmpMods.push(tmpObj.attrs[ZaAccount.A_zmailZimletAvailableZimlets][i]);
 			}
 		}
 		if(isNew) {
-			mods[ZaCos.A_zimbraZimletAvailableZimlets] = tmpMods;
+			mods[ZaCos.A_zmailZimletAvailableZimlets] = tmpMods;
 		} else {
 			//check if changed
-			if(this._currentObject.attrs[ZaCos.A_zimbraZimletAvailableZimlets] != null) {
-				if(this._currentObject.attrs[ZaCos.A_zimbraZimletAvailableZimlets] instanceof Array) {
-					if(tmpMods.join(",") != this._currentObject.attrs[ZaCos.A_zimbraZimletAvailableZimlets].join(",")) {
-						mods[ZaCos.A_zimbraZimletAvailableZimlets] = tmpMods;
+			if(this._currentObject.attrs[ZaCos.A_zmailZimletAvailableZimlets] != null) {
+				if(this._currentObject.attrs[ZaCos.A_zmailZimletAvailableZimlets] instanceof Array) {
+					if(tmpMods.join(",") != this._currentObject.attrs[ZaCos.A_zmailZimletAvailableZimlets].join(",")) {
+						mods[ZaCos.A_zmailZimletAvailableZimlets] = tmpMods;
 					}
-				} else if (tmpMods.join(",") != [this._currentObject.attrs[ZaCos.A_zimbraZimletAvailableZimlets]].join(",")) {
-					mods[ZaCos.A_zimbraZimletAvailableZimlets] = tmpMods;
+				} else if (tmpMods.join(",") != [this._currentObject.attrs[ZaCos.A_zmailZimletAvailableZimlets]].join(",")) {
+					mods[ZaCos.A_zmailZimletAvailableZimlets] = tmpMods;
 				}
 			} else {
-				mods[ZaCos.A_zimbraZimletAvailableZimlets] = tmpMods;
+				mods[ZaCos.A_zmailZimletAvailableZimlets] = tmpMods;
 			}			
 		}
-	} else if(this._currentObject.attrs[ZaCos.A_zimbraZimletAvailableZimlets] != null) {
-		mods[ZaCos.A_zimbraZimletAvailableZimlets] = "";
+	} else if(this._currentObject.attrs[ZaCos.A_zmailZimletAvailableZimlets] != null) {
+		mods[ZaCos.A_zmailZimletAvailableZimlets] = "";
 	}
 	
 		
@@ -300,7 +300,7 @@ function () {
 	if(!isNew) {
 		if(tmpObj.name != this._currentObject.name) {
             if(this._currentObject.name=="default"||this._currentObject.name=="defaultExternal"){
-                this._errorDialog.setMessage( AjxMessageFormat.format(ZaMsg.FAILED_RENAME_COS_DEFAULT,this._currentObject.name), null, DwtMessageDialog.CRITICAL_STYLE, ZabMsg.zimbraAdminTitle);
+                this._errorDialog.setMessage( AjxMessageFormat.format(ZaMsg.FAILED_RENAME_COS_DEFAULT,this._currentObject.name), null, DwtMessageDialog.CRITICAL_STYLE, ZabMsg.zmailAdminTitle);
 				this._errorDialog.popup();
                 return false;
             }
@@ -314,7 +314,7 @@ function () {
 					detailStr = detailStr + prop + " - " + ex[prop] + "\n";				
 				}
 				if(ex.code == ZmCsfeException.COS_EXISTS) {
-					this._errorDialog.setMessage(ZaMsg.FAILED_RENAME_COS_1, detailStr, DwtMessageDialog.CRITICAL_STYLE, ZabMsg.zimbraAdminTitle);
+					this._errorDialog.setMessage(ZaMsg.FAILED_RENAME_COS_1, detailStr, DwtMessageDialog.CRITICAL_STYLE, ZabMsg.zmailAdminTitle);
 					this._errorDialog.popup();
 				} else {
 					this._handleException(ex, "ZaCosController.prototype._saveChanges", null, false);	
@@ -351,7 +351,7 @@ function () {
 			detailStr = detailStr + prop + " - " + ex[prop] + "\n";				
 		}
 		if(ex.code == ZmCsfeException.COS_EXISTS) {
-			this._errorDialog.setMessage(ZaMsg.FAILED_CREATE_COS_1, detailStr, DwtMessageDialog.CRITICAL_STYLE, ZabMsg.zimbraAdminTitle);				
+			this._errorDialog.setMessage(ZaMsg.FAILED_CREATE_COS_1, detailStr, DwtMessageDialog.CRITICAL_STYLE, ZabMsg.zmailAdminTitle);				
 			this._errorDialog.popup();
 		} else {
 			this._handleException(ex, "ZaCosController.prototype._saveChanges", null, false);	
@@ -368,7 +368,7 @@ function () {
 	var defCos = ZaCos.getCosByName("default");
 	//copy values from default cos to the new cos
 	for(var aname in defCos.attrs) {
-		if( (aname == ZaItem.A_objectClass) || (aname == ZaItem.A_zimbraId) || (aname == ZaCos.A_name) || (aname == ZaCos.A_description) || (aname == ZaCos.A_notes) || (aname = ZaItem.A_zimbraCreateTimestamp))
+		if( (aname == ZaItem.A_objectClass) || (aname == ZaItem.A_zmailId) || (aname == ZaCos.A_name) || (aname == ZaCos.A_description) || (aname == ZaCos.A_notes) || (aname = ZaItem.A_zmailCreateTimestamp))
 			continue;			
 		newCos.attrs[aname] = defCos.attrs[aname];
 	}	

@@ -20,7 +20,7 @@ ZaImg.PATH = ZaSettings.CONFIG_PATH + "/img/";
 // Miscellaneous images
 ZaImg.M_BANNER 				= ["Banner", 96, 96];
 ZaImg.M_ABOUT  				= ["ImgAboutScreen", 476, 332];
-ZaImg.I_ABOUT  				= ["Imgzimbra_icon", 27, 16];
+ZaImg.I_ABOUT  				= ["Imgzmail_icon", 27, 16];
 
 // Icons
 ZaImg.I_BACK_ARROW 			= ["LeftArrow", 16, 16];

@@ -17,24 +17,24 @@
  * Defines the Zimlet handler class.
  *   
  */
-function com_zimbra_example_simpletab_HandlerObject() {
+function org_zmail_example_simpletab_HandlerObject() {
 }
 
 /**
  * Makes the Zimlet class a subclass of ZmZimletBase.
  *
  */
-com_zimbra_example_simpletab_HandlerObject.prototype = new ZmZimletBase();
-com_zimbra_example_simpletab_HandlerObject.prototype.constructor = com_zimbra_example_simpletab_HandlerObject;
+org_zmail_example_simpletab_HandlerObject.prototype = new ZmZimletBase();
+org_zmail_example_simpletab_HandlerObject.prototype.constructor = org_zmail_example_simpletab_HandlerObject;
 
 /**
 * This method gets called by the Zimlet framework when the zimlet loads.
 *  
 */
-com_zimbra_example_simpletab_HandlerObject.prototype.init =
+org_zmail_example_simpletab_HandlerObject.prototype.init =
 function() {
 
-	this._simpleAppName = this.createApp("Simple Tab App", "zimbraIcon", "A simple app in a new tab");
+	this._simpleAppName = this.createApp("Simple Tab App", "zmailIcon", "A simple app in a new tab");
 
 };
 
@@ -44,7 +44,7 @@ function() {
  * @param	appName		the application name
  * @param	active		if true, the application status is open; otherwise, false
  */
-com_zimbra_example_simpletab_HandlerObject.prototype.appActive =
+org_zmail_example_simpletab_HandlerObject.prototype.appActive =
 function(appName, active) {
 	
 	switch (appName) {
@@ -64,7 +64,7 @@ function(appName, active) {
  *  
  * @param	appName		the application name		
  */
-com_zimbra_example_simpletab_HandlerObject.prototype.appLaunch =
+org_zmail_example_simpletab_HandlerObject.prototype.appLaunch =
 function(appName) {
 
 	switch (appName) {

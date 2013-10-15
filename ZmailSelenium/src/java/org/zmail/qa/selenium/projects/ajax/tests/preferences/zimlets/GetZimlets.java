@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.preferences.zimlets;
+package org.zmail.qa.selenium.projects.ajax.tests.preferences.zimlets;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
 
 
 public class GetZimlets extends AjaxCommonTest {
@@ -55,9 +55,9 @@ public class GetZimlets extends AjaxCommonTest {
 		// Get how many rows there are
 		int count = app.zPagePreferences.sGetCssCount(locator + ">div[id^='zli__']");
 		
-		// IronMaiden: 5 zimlets - LinkedIn, Phone, Search Highlighter, Webex, Zimbra Social
+		// IronMaiden: 5 zimlets - LinkedIn, Phone, Search Highlighter, Webex, Zmail Social
 		// IronMaiden: Bug 50123: 3 zimlets - Phone, Search Highlighter, Webex, Y-Emoticons
-		if(ZimbraSeleniumProperties.zimbraGetVersionString().contains("FOSS")){
+		if(ZmailSeleniumProperties.zmailGetVersionString().contains("FOSS")){
 		    ZAssert.assertEquals(count, 4, "Verify 4 zimlets are shown in the preferences page");
 		}else{
 		    ZAssert.assertEquals(count, 8, "Verify 8 zimlets are shown in the preferences page");
@@ -78,8 +78,8 @@ public class GetZimlets extends AjaxCommonTest {
 		// The locator to the rows (not including the header)
 		String locator = "css=div[id='ZmPrefZimletListView'] div[id$='__rows']";
 
-		String name = app.zPagePreferences.sGetText(locator + " td[id$='__com_zimbra_linkedin__na']");
-		String description = app.zPagePreferences.sGetText(locator + " td[id$='__com_zimbra_linkedin__ds']");
+		String name = app.zPagePreferences.sGetText(locator + " td[id$='__org_zmail_linkedin__na']");
+		String description = app.zPagePreferences.sGetText(locator + " td[id$='__org_zmail_linkedin__ds']");
 
 		ZAssert.assertEquals(name, "LinkedIn", "Verify the LinkedIn entry name");
 		ZAssert.assertEquals(description, "Hooks on to email Zimlet; shows LinkedIn search result for a given email.", "Verify the LinkedIn description");		
@@ -98,8 +98,8 @@ public class GetZimlets extends AjaxCommonTest {
 		// The locator to the table
 		String locator = "css=div[id='ZmPrefZimletListView'] div[id$='__rows']";
 
-		String name = app.zPagePreferences.sGetText(locator + " td[id$='__com_zimbra_phone__na']");
-		String description = app.zPagePreferences.sGetText(locator + " td[id$='__com_zimbra_phone__ds']");
+		String name = app.zPagePreferences.sGetText(locator + " td[id$='__org_zmail_phone__na']");
+		String description = app.zPagePreferences.sGetText(locator + " td[id$='__org_zmail_phone__ds']");
 		
 		ZAssert.assertEquals(name, "Phone", "Verify the Phone entry exists");
 		ZAssert.assertEquals(description, "Highlights phone numbers to enable Skype calls.", "Verify the Phone description");
@@ -120,8 +120,8 @@ public class GetZimlets extends AjaxCommonTest {
 		// The locator to the table
 		String locator = "css=div[id='ZmPrefZimletListView'] div[id$='__rows']";
 
-		String name = app.zPagePreferences.sGetText(locator + " td[id$='__com_zimbra_srchhighlighter__na']");
-		String description = app.zPagePreferences.sGetText(locator + " td[id$='__com_zimbra_srchhighlighter__ds']");
+		String name = app.zPagePreferences.sGetText(locator + " td[id$='__org_zmail_srchhighlighter__na']");
+		String description = app.zPagePreferences.sGetText(locator + " td[id$='__org_zmail_srchhighlighter__ds']");
 		
 		ZAssert.assertEquals(name, "Search Highlighter", "Verify the Search Highlighter entry exists");
 		ZAssert.assertEquals(description, "After a mail search, this Zimlet highlights Search terms with yellow color.", "Verify the Search Highlighter description");
@@ -142,8 +142,8 @@ public class GetZimlets extends AjaxCommonTest {
 		// The locator to the table
 		String locator = "css=div[id='ZmPrefZimletListView'] div[id$='__rows']";
 
-		String name = app.zPagePreferences.sGetText(locator + " td[id$='__com_zimbra_webex__na']");
-		String description = app.zPagePreferences.sGetText(locator + " td[id$='__com_zimbra_webex__ds']");
+		String name = app.zPagePreferences.sGetText(locator + " td[id$='__org_zmail_webex__na']");
+		String description = app.zPagePreferences.sGetText(locator + " td[id$='__org_zmail_webex__ds']");
 		
 		ZAssert.assertEquals(name, "WebEx", "Verify the WebEx entry exists");
 		ZAssert.assertEquals(description, "Easily schedule, start or join WebEx meetings.", "Verify the WebEx description");
@@ -154,7 +154,7 @@ public class GetZimlets extends AjaxCommonTest {
 	// IronMaiden: Bug 50123: 3 zimlets - Phone, Search Highlighter, Webex
 	@Bugs(ids = "50123")
 	@Test(
-			description = "Verify the Zimbra Social table text",
+			description = "Verify the Zmail Social table text",
 			groups = { "deprecated" }
 			)
 	public void GetZimlets_06() throws HarnessException {
@@ -165,11 +165,11 @@ public class GetZimlets extends AjaxCommonTest {
 		// The locator to the table
 		String locator = "css=div[id='ZmPrefZimletListView'] div[id$='__rows']";
 
-		String name = app.zPagePreferences.sGetText(locator + " td[id$='__com_zimbra_social__na']");
-		String description = app.zPagePreferences.sGetText(locator + " td[id$='__com_zimbra_social__ds']");
+		String name = app.zPagePreferences.sGetText(locator + " td[id$='__org_zmail_social__na']");
+		String description = app.zPagePreferences.sGetText(locator + " td[id$='__org_zmail_social__ds']");
 		
-		ZAssert.assertEquals(name, "Zimbra Social", "Verify the Zimbra Social entry exists");
-		ZAssert.assertEquals(description, "Access social services like Twitter, Facebook, Digg and TweetMeme.", "Verify the Zimbra Social description");
+		ZAssert.assertEquals(name, "Zmail Social", "Verify the Zmail Social entry exists");
+		ZAssert.assertEquals(description, "Access social services like Twitter, Facebook, Digg and TweetMeme.", "Verify the Zmail Social description");
 		
 		
 	}
@@ -186,8 +186,8 @@ public class GetZimlets extends AjaxCommonTest {
 		// The locator to the table
 		String locator = "css=div[id='ZmPrefZimletListView'] div[id$='__rows']";
 
-		String name = app.zPagePreferences.sGetText(locator + " td[id$='__com_zimbra_ymemoticons__na']");
-		String description = app.zPagePreferences.sGetText(locator + " td[id$='__com_zimbra_ymemoticons__ds']");
+		String name = app.zPagePreferences.sGetText(locator + " td[id$='__org_zmail_ymemoticons__na']");
+		String description = app.zPagePreferences.sGetText(locator + " td[id$='__org_zmail_ymemoticons__ds']");
 		
 		ZAssert.assertEquals(name, "Yahoo! Emoticons", "Verify the Y Emoticons entry exists");
 		ZAssert.assertEquals(description, "Displays Yahoo! Emoticons images in email messages.", "Verify the Y Emoticons description");

@@ -13,10 +13,10 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.offline;
+package org.zmail.cs.offline;
 
 import javax.servlet.http.HttpServletRequest;
-import com.zimbra.cs.zimlet.ProxyServlet;
+import org.zmail.cs.zimlet.ProxyServlet;
 
 @SuppressWarnings("serial")
 public class OfflineProxyServlet extends ProxyServlet {

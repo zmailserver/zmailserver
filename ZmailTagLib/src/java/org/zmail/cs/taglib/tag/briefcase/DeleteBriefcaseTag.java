@@ -12,19 +12,19 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.tag.briefcase;
+package org.zmail.cs.taglib.tag.briefcase;
 
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.taglib.tag.ZimbraSimpleTag;
-import com.zimbra.cs.taglib.bean.ZActionResultBean;
-import com.zimbra.client.ZMailbox.ZActionResult;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.taglib.tag.ZmailSimpleTag;
+import org.zmail.cs.taglib.bean.ZActionResultBean;
+import org.zmail.client.ZMailbox.ZActionResult;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.JspTagException;
 
-public class DeleteBriefcaseTag extends ZimbraSimpleTag {
+public class DeleteBriefcaseTag extends ZmailSimpleTag {
 
     private String mId;
     private String mVar;

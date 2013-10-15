@@ -12,9 +12,9 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.tag;
+package org.zmail.cs.taglib.tag;
 
-import com.zimbra.cs.taglib.bean.ZUserAgentBean;
+import org.zmail.cs.taglib.bean.ZUserAgentBean;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspContext;
@@ -22,7 +22,7 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 import java.io.IOException;
 
-public class GetUserAgentTag extends ZimbraSimpleTag {
+public class GetUserAgentTag extends ZmailSimpleTag {
 
     private static final String UA_SESSION = "ZUserAgentBean.SESSION";
     private String mVar;

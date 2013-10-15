@@ -14,20 +14,20 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.newwindow.compose;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.newwindow.compose;
 
 
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.SeparateWindowDialog;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.SeparateWindowFormMailNew;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew.Field;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.SeparateWindowDialog;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.SeparateWindowFormMailNew;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew.Field;
 
 
 public class SaveDraftMail extends PrefGroupMailByMessageTest {
@@ -35,8 +35,8 @@ public class SaveDraftMail extends PrefGroupMailByMessageTest {
 	public SaveDraftMail() {
 		logger.info("New "+ SaveDraftMail.class.getCanonicalName());
 
-		super.startingAccountPreferences.put("zimbraPrefComposeFormat", "text");
-		super.startingAccountPreferences.put("zimbraPrefComposeInNewWindow", "TRUE");
+		super.startingAccountPreferences.put("zmailPrefComposeFormat", "text");
+		super.startingAccountPreferences.put("zmailPrefComposeInNewWindow", "TRUE");
 
 	}
 
@@ -46,7 +46,7 @@ public class SaveDraftMail extends PrefGroupMailByMessageTest {
 
 
 		// Create the message data to be sent
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
 
 
 		// Open the new mail form
@@ -110,8 +110,8 @@ public class SaveDraftMail extends PrefGroupMailByMessageTest {
 	public void SaveDraftMail_02() throws HarnessException {
 
 		// Create the message data to be sent
-		String body = "body" + ZimbraSeleniumProperties.getUniqueString();
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
+		String body = "body" + ZmailSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
 
 		// Open the new mail form
 		// Open the new mail form

@@ -80,11 +80,11 @@ ZmAccount.TYPE_POP		= "Pop";
  */
 ZmAccount.TYPE_YMP		= "YMP";    // Y! mail
 /**
- * Defines the "Zimbra" account type.
+ * Defines the "Zmail" account type.
  */
-ZmAccount.TYPE_ZIMBRA	= "Zimbra";
+ZmAccount.TYPE_ZIMBRA	= "Zmail";
 /**
- * Defines the "Zimbra" account type.
+ * Defines the "Zmail" account type.
  */
 ZmAccount.TYPE_CALDAV	= "CalDAV";
 
@@ -116,7 +116,7 @@ function(type) {
 		case ZmAccount.TYPE_PERSONA:	return ZmMsg.accountTypePersona;
 		case ZmAccount.TYPE_POP:		return ZmMsg.accountTypePop;
 		case ZmAccount.TYPE_YMP:		return ZmMsg.yahooMail;
-		case ZmAccount.TYPE_ZIMBRA:		return ZmMsg.zimbraTitle;
+		case ZmAccount.TYPE_ZIMBRA:		return ZmMsg.zmailTitle;
 	}
 	return ZmMsg.unknown;
 };

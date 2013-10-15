@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.taglib.tag.i18n;
+package org.zmail.cs.taglib.tag.i18n;
 
 import java.io.*;
 import java.text.*;

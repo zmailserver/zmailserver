@@ -14,7 +14,7 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_attachmail"
+<zimlet name="org_zmail_attachmail"
         version="1.2"
         target="main compose-window view-window"
         label="${msg.label}"
@@ -22,5 +22,5 @@
     <include>attachmail.js</include>
     <include>AMZimletNavToolBar.js</include>
     <includeCSS>attachmail.css</includeCSS>
-    <handlerObject>com_zimbra_attachmail_HandlerObject</handlerObject>
+    <handlerObject>org_zmail_attachmail_HandlerObject</handlerObject>
 </zimlet>

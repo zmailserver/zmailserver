@@ -11,10 +11,10 @@
  * Software distributed under the License is distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
- * @Author Raja Rao DV (rrao@zimbra.com)
+ * @Author Raja Rao DV (rrao@zmail.com)
  */
 
-function Com_Zimbra_GrouponCardProps() {
+function Com_Zmail_GrouponCardProps() {
 	this.type = "";
 	this.tableId = "";
 	this.timer = "";

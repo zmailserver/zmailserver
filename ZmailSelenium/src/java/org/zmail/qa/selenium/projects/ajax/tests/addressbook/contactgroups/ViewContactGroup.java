@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.addressbook.contactgroups;
+package org.zmail.qa.selenium.projects.ajax.tests.addressbook.contactgroups;
 
 
 
@@ -22,11 +22,11 @@ package com.zimbra.qa.selenium.projects.ajax.tests.addressbook.contactgroups;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.ContactGroupItem;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.addressbook.DisplayContactGroup;
+import org.zmail.qa.selenium.framework.items.ContactGroupItem;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.addressbook.DisplayContactGroup;
 
 
 public class ViewContactGroup extends AjaxCommonTest  {

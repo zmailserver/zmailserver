@@ -14,15 +14,15 @@
 # ***** END LICENSE BLOCK *****
 # 
 
-SAVEDIR=/opt/zimbra/.saveconfig
-PLAT=$(/opt/zimbra/libexec/get_plat_tag.sh)
+SAVEDIR=/opt/zmail/.saveconfig
+PLAT=$(/opt/zmail/libexec/get_plat_tag.sh)
 OS_ARCH=powerpc
 MYSQL_VERSION=5.5.28
 
 if [ "x$PLAT" = "xMACOSXx86_10.5" -o "x$PLAT" = "xMACOSXx86_10.6" -o "x$PLAT" = "xMACOSXx86_10.7" ]; then
-  SU="su - zimbra -c -l"
+  SU="su - zmail -c -l"
 else
-  SU="su - zimbra -c"
+  SU="su - zmail -c"
 fi
 
 if [ "x$PLAT" = "xMACOSXx86" -o "x$PLAT" = "xMACOSXx86_10.5" ]; then
@@ -36,57 +36,57 @@ elif [ x"$PLAT" = "xMACOSXx86_10.7" ]; then
   OS_REL=11
 fi
 
-mkdir -p /opt/zimbra/zmstat/pid
-chown zimbra:zimbra /opt/zimbra/zmstat
-chown zimbra:zimbra /opt/zimbra/zmstat/pid
+mkdir -p /opt/zmail/zmstat/pid
+chown zmail:zmail /opt/zmail/zmstat
+chown zmail:zmail /opt/zmail/zmstat/pid
 
-if [ -L /opt/zimbra/mysql ]; then
-  rm -f /opt/zimbra/mysql
+if [ -L /opt/zmail/mysql ]; then
+  rm -f /opt/zmail/mysql
 fi
-ln -s /opt/zimbra/mysql-standard-${MYSQL_VERSION}-apple-darwin${OS_REL}-${OS_ARCH} /opt/zimbra/mysql
+ln -s /opt/zmail/mysql-standard-${MYSQL_VERSION}-apple-darwin${OS_REL}-${OS_ARCH} /opt/zmail/mysql
 
-rm -f /opt/zimbra/bdb
-ln -s /opt/zimbra/bdb-5.2.36 /opt/zimbra/bdb
+rm -f /opt/zmail/bdb
+ln -s /opt/zmail/bdb-5.2.36 /opt/zmail/bdb
 
-if [ -L /opt/zimbra/sleepycat ]; then
-	rm -f /opt/zimbra/sleepycat
+if [ -L /opt/zmail/sleepycat ]; then
+	rm -f /opt/zmail/sleepycat
 fi
 
-rm -f /opt/zimbra/openssl
-ln -s /opt/zimbra/openssl-1.0.1d /opt/zimbra/openssl
+rm -f /opt/zmail/openssl
+ln -s /opt/zmail/openssl-1.0.1d /opt/zmail/openssl
 
-rm -f /opt/zimbra/heimdal
-ln -s /opt/zimbra/heimdal-1.5.2 /opt/zimbra/heimdal
+rm -f /opt/zmail/heimdal
+ln -s /opt/zmail/heimdal-1.5.2 /opt/zmail/heimdal
 
-rm -f /opt/zimbra/curl
-ln -s /opt/zimbra/curl-7.25.0 /opt/zimbra/curl
+rm -f /opt/zmail/curl
+ln -s /opt/zmail/curl-7.25.0 /opt/zmail/curl
 
-rm -f /opt/zimbra/cyrus-sasl
-ln -s /opt/zimbra/cyrus-sasl-2.1.25.4z /opt/zimbra/cyrus-sasl
+rm -f /opt/zmail/cyrus-sasl
+ln -s /opt/zmail/cyrus-sasl-2.1.25.4z /opt/zmail/cyrus-sasl
 
-rm -f /opt/zimbra/openldap
-ln -s /opt/zimbra/openldap-2.4.35.2z /opt/zimbra/openldap
+rm -f /opt/zmail/openldap
+ln -s /opt/zmail/openldap-2.4.35.2z /opt/zmail/openldap
 
-rm -f /opt/zimbra/tcmalloc
-ln -s /opt/zimbra/tcmalloc-2.0 /opt/zimbra/tcmalloc
+rm -f /opt/zmail/tcmalloc
+ln -s /opt/zmail/tcmalloc-2.0 /opt/zmail/tcmalloc
 
-rm -f /opt/zimbra/rsync
-ln -s /opt/zimbra/rsync-3.0.9 /opt/zimbra/rsync
+rm -f /opt/zmail/rsync
+ln -s /opt/zmail/rsync-3.0.9 /opt/zmail/rsync
 
-if [ -d "/opt/zimbra/zimbramon/rrdtool" ]; then
-  rm -rf /opt/zimbra/zimbramon/rrdtool
-  ln -s /opt/zimbra/zimbramon/rrdtool-1.2.30 /opt/zimbra/zimbramon/rrdtool
+if [ -d "/opt/zmail/zmailmon/rrdtool" ]; then
+  rm -rf /opt/zmail/zmailmon/rrdtool
+  ln -s /opt/zmail/zmailmon/rrdtool-1.2.30 /opt/zmail/zmailmon/rrdtool
 else
-  rm -f /opt/zimbra/zimbramon/rrdtool
-  ln -s /opt/zimbra/zimbramon/rrdtool-1.2.30 /opt/zimbra/zimbramon/rrdtool
+  rm -f /opt/zmail/zmailmon/rrdtool
+  ln -s /opt/zmail/zmailmon/rrdtool-1.2.30 /opt/zmail/zmailmon/rrdtool
 fi
 
-if [ -f "/opt/zimbra/conf/ca/ca.pem" ]; then
-  ln -f -s ca.pem /opt/zimbra/conf/ca/`openssl x509 -hash -noout -in /opt/zimbra/conf/ca/ca.pem`.0
+if [ -f "/opt/zmail/conf/ca/ca.pem" ]; then
+  ln -f -s ca.pem /opt/zmail/conf/ca/`openssl x509 -hash -noout -in /opt/zmail/conf/ca/ca.pem`.0
 fi
 
-if [ -x "/opt/zimbra/libexec/zmfixperms" ]; then
-  /opt/zimbra/libexec/zmfixperms
+if [ -x "/opt/zmail/libexec/zmfixperms" ]; then
+  /opt/zmail/libexec/zmfixperms
 fi
 
 RF="$SAVEDIR/localconfig.xml"
@@ -94,52 +94,52 @@ RF="$SAVEDIR/localconfig.xml"
 	# echo "Setting $i"
 	#$SU "zmlocalconfig -f -e $i"
 #done < $RF
-cp -f $RF /opt/zimbra/conf/localconfig.xml
+cp -f $RF /opt/zmail/conf/localconfig.xml
 
-#if [ -f "$SAVEDIR/backup.save" -a -x "/opt/zimbra/bin/zmschedulebackup" ]; then
+#if [ -f "$SAVEDIR/backup.save" -a -x "/opt/zmail/bin/zmschedulebackup" ]; then
 #  first=1
 #  while read line; do
 #    if [ $first = 1 ]; then
-#      $SU "/opt/zimbra/bin/zmschedulebackup -R $line"
+#      $SU "/opt/zmail/bin/zmschedulebackup -R $line"
 #      first=0
 #    else
-#      $SU "/opt/zimbra/bin/zmschedulebackup -A $line"
+#      $SU "/opt/zmail/bin/zmschedulebackup -A $line"
 #    fi
 #  done < "$SAVEDIR/backup.save"
 #fi
 
 if [ -f $SAVEDIR/cacerts ]; then
-	cp -f $SAVEDIR/cacerts /opt/zimbra/java/jre/lib/security/cacerts
-	chown zimbra:zimbra /opt/zimbra/java/jre/lib/security/cacerts 
+	cp -f $SAVEDIR/cacerts /opt/zmail/java/jre/lib/security/cacerts
+	chown zmail:zmail /opt/zmail/java/jre/lib/security/cacerts 
 fi
 if [ -f $SAVEDIR/smtpd.key ]; then
-	cp -f $SAVEDIR/smtpd.key /opt/zimbra/conf/smtpd.key
-	chown zimbra:zimbra /opt/zimbra/conf/smtpd.key 
+	cp -f $SAVEDIR/smtpd.key /opt/zmail/conf/smtpd.key
+	chown zmail:zmail /opt/zmail/conf/smtpd.key 
 fi
 if [ -f $SAVEDIR/smtpd.crt ]; then
-	cp -f $SAVEDIR/smtpd.crt /opt/zimbra/conf/smtpd.crt 
-	chown zimbra:zimbra /opt/zimbra/conf/smtpd.crt
+	cp -f $SAVEDIR/smtpd.crt /opt/zmail/conf/smtpd.crt 
+	chown zmail:zmail /opt/zmail/conf/smtpd.crt
 fi
-#if [ -d $SAVEDIR/zimlet -a -d /opt/zimbra/mailboxd/webapps/service ]; then
-#  cp -rf $SAVEDIR/zimlet /opt/zimbra/mailboxd/webapps/service/
+#if [ -d $SAVEDIR/zimlet -a -d /opt/zmail/mailboxd/webapps/service ]; then
+#  cp -rf $SAVEDIR/zimlet /opt/zmail/mailboxd/webapps/service/
 #fi
 
 SUDOMODE=`perl -e 'my $mode=(stat("/etc/sudoers"))[2];printf("%04o\n",$mode & 07777);'`
-egrep -v -e '^%zimbra.*zmcertmgr' /etc/sudoers > /tmp/sudoers
-echo "%zimbra ALL=NOPASSWD:/opt/zimbra/bin/zmcertmgr" >> /tmp/sudoers
+egrep -v -e '^%zmail.*zmcertmgr' /etc/sudoers > /tmp/sudoers
+echo "%zmail ALL=NOPASSWD:/opt/zmail/bin/zmcertmgr" >> /tmp/sudoers
 mv -f /tmp/sudoers /etc/sudoers
 chmod $SUDOMODE /etc/sudoers
 
-egrep -v -e '^%zimbra.*zmstat-fd' /etc/sudoers > /tmp/sudoers
-echo "%zimbra ALL=NOPASSWD:/opt/zimbra/libexec/zmstat-fd *" >> /tmp/sudoers
+egrep -v -e '^%zmail.*zmstat-fd' /etc/sudoers > /tmp/sudoers
+echo "%zmail ALL=NOPASSWD:/opt/zmail/libexec/zmstat-fd *" >> /tmp/sudoers
 mv -f /tmp/sudoers /etc/sudoers
 chmod $SUDOMODE /etc/sudoers
 
 # log rotation
 if [ -d "/etc/periodic/daily" ]; then
-  cp /opt/zimbra/libexec/600.zimbra /etc/periodic/daily/600.zimbra
-  chown root:wheel /etc/periodic/daily/600.zimbra
-  chmod 555 /etc/periodic/daily/600.zimbra
+  cp /opt/zmail/libexec/600.zmail /etc/periodic/daily/600.zmail
+  chown root:wheel /etc/periodic/daily/600.zmail
+  chmod 555 /etc/periodic/daily/600.zmail
 fi
 
 VER="FOO"
@@ -150,9 +150,9 @@ getPkgVersion() {
 }
 
 getPkgVersion
-PKG="zimbra-core-${VER}.pkg"
+PKG="zmail-core-${VER}.pkg"
 
 D=`date +%s`
-echo "${D}: UPGRADED ${PKG}" >> /opt/zimbra/.install_history
+echo "${D}: UPGRADED ${PKG}" >> /opt/zmail/.install_history
 
 exit 0

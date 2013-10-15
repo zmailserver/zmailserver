@@ -21,11 +21,11 @@
  *  - If a task folder arrives in a <refresh> block
  *  - If a search for tasks returns results
  */
-AjxPackage.require("zimbraMail.calendar.model.ZmCalItem");
-AjxPackage.require("zimbraMail.calendar.model.ZmRecurrence");
-AjxPackage.require("zimbraMail.tasks.model.ZmTaskFolder");
-AjxPackage.require("zimbraMail.tasks.model.ZmTask");
+AjxPackage.require("zmailMail.calendar.model.ZmCalItem");
+AjxPackage.require("zmailMail.calendar.model.ZmRecurrence");
+AjxPackage.require("zmailMail.tasks.model.ZmTaskFolder");
+AjxPackage.require("zmailMail.tasks.model.ZmTask");
 
-AjxPackage.require("zimbraMail.tasks.controller.ZmTaskListController");
+AjxPackage.require("zmailMail.tasks.controller.ZmTaskListController");
 
-AjxPackage.require("zimbraMail.tasks.view.ZmTaskListView");
+AjxPackage.require("zmailMail.tasks.view.ZmTaskListView");

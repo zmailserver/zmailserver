@@ -14,18 +14,18 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.calendar.folders;
+package org.zmail.qa.selenium.projects.ajax.tests.calendar.folders;
 
 import java.util.*;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.*;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.*;
 
 
 public class GetCalendar extends CalendarWorkWeekTest {
@@ -43,10 +43,10 @@ public class GetCalendar extends CalendarWorkWeekTest {
 		ZAssert.assertNotNull(root, "Verify the inbox is available");
 		
 		// Create the subfolder
-		String name = "calendar" + ZimbraSeleniumProperties.getUniqueString();
+		String name = "calendar" + ZmailSeleniumProperties.getUniqueString();
 		
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+				"<CreateFolderRequest xmlns='urn:zmailMail'>" +
                 	"<folder name='"+ name +"' l='"+ root.getId() +"' view='appointment'/>" +
                 "</CreateFolderRequest>");
 
@@ -81,10 +81,10 @@ public class GetCalendar extends CalendarWorkWeekTest {
 		ZAssert.assertNotNull(root, "Verify the inbox is available");
 		
 		// Create a subfolder
-		String name1 = "calendar" + ZimbraSeleniumProperties.getUniqueString();
+		String name1 = "calendar" + ZmailSeleniumProperties.getUniqueString();
 		
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+				"<CreateFolderRequest xmlns='urn:zmailMail'>" +
                 	"<folder name='"+ name1 +"' l='"+ root.getId() +"' view='appointment'/>" +
                 "</CreateFolderRequest>");
 
@@ -92,10 +92,10 @@ public class GetCalendar extends CalendarWorkWeekTest {
 		ZAssert.assertNotNull(subfolder1, "Verify the subfolder is available");
 		
 		// Create a subfolder of the subfolder
-		String name2 = "calendar" + ZimbraSeleniumProperties.getUniqueString();
+		String name2 = "calendar" + ZmailSeleniumProperties.getUniqueString();
 		
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+				"<CreateFolderRequest xmlns='urn:zmailMail'>" +
                 	"<folder name='"+ name2 +"' l='"+ subfolder1.getId() +"' view='appointment'/>" +
                 "</CreateFolderRequest>");
 
@@ -135,10 +135,10 @@ public class GetCalendar extends CalendarWorkWeekTest {
 		ZAssert.assertNotNull(root, "Verify the inbox is available");
 		
 		// Create a subfolder
-		String name1 = "calendar" + ZimbraSeleniumProperties.getUniqueString();
+		String name1 = "calendar" + ZmailSeleniumProperties.getUniqueString();
 		
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+				"<CreateFolderRequest xmlns='urn:zmailMail'>" +
                 	"<folder name='"+ name1 +"' l='"+ root.getId() +"' view='appointment'/>" +
                 "</CreateFolderRequest>");
 
@@ -146,15 +146,15 @@ public class GetCalendar extends CalendarWorkWeekTest {
 		ZAssert.assertNotNull(subfolder1, "Verify the subfolder is available");
 		
 		app.zGetActiveAccount().soapSend(
-				"<FolderActionRequest xmlns='urn:zimbraMail'>" +
+				"<FolderActionRequest xmlns='urn:zmailMail'>" +
                 	"<action op='check' id='"+ subfolder1.getId() +"'/>" +
                 "</FolderActionRequest>");
 		
 		// Create a subfolder of the subfolder
-		String name2 = "calendar" + ZimbraSeleniumProperties.getUniqueString();
+		String name2 = "calendar" + ZmailSeleniumProperties.getUniqueString();
 		
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+				"<CreateFolderRequest xmlns='urn:zmailMail'>" +
                 	"<folder name='"+ name2 +"' l='"+ subfolder1.getId() +"' view='appointment'/>" +
                 "</CreateFolderRequest>");
 
@@ -162,15 +162,15 @@ public class GetCalendar extends CalendarWorkWeekTest {
 		ZAssert.assertNotNull(subfolder2, "Verify the subfolder is available");
 		
 		app.zGetActiveAccount().soapSend(
-				"<FolderActionRequest xmlns='urn:zimbraMail'>" +
+				"<FolderActionRequest xmlns='urn:zmailMail'>" +
                 	"<action op='check' id='"+ subfolder2.getId() +"'/>" +
                 "</FolderActionRequest>");
 		
 		
 		// Create the appointment in the subfolder
-		String subject = "appointment" + ZimbraSeleniumProperties.getUniqueString();
-		String location = "location" + ZimbraSeleniumProperties.getUniqueString();
-		String content = "content" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "appointment" + ZmailSeleniumProperties.getUniqueString();
+		String location = "location" + ZmailSeleniumProperties.getUniqueString();
+		String content = "content" + ZmailSeleniumProperties.getUniqueString();
 		
 		// Absolute dates in UTC zone
 		Calendar now = this.calendarWeekDayUTC;
@@ -182,7 +182,7 @@ public class GetCalendar extends CalendarWorkWeekTest {
 
 		// Create an appointment in the subcalendar
 		app.zGetActiveAccount().soapSend(
-					"<CreateAppointmentRequest xmlns='urn:zimbraMail'>"
+					"<CreateAppointmentRequest xmlns='urn:zmailMail'>"
 				+		"<m l='"+ subfolder2.getId() +"'>"
 				+			"<inv>"
 				+				"<comp status='CONF' fb='B' class='PUB' transp='O' allDay='0' name='"+ subject +"' loc='"+ location +"' >"

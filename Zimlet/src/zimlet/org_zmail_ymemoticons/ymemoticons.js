@@ -13,16 +13,16 @@
  * ***** END LICENSE BLOCK *****
  */
 
-function Com_Zimbra_YMEmoticons() {
-	this.re = Com_Zimbra_YMEmoticons.REGEXP;
-	this.hash = Com_Zimbra_YMEmoticons.SMILEYS;
+function Com_Zmail_YMEmoticons() {
+	this.re = Com_Zmail_YMEmoticons.REGEXP;
+	this.hash = Com_Zmail_YMEmoticons.SMILEYS;
 	this._isEnabled = true;
 };
 
-Com_Zimbra_YMEmoticons.prototype = new ZmZimletBase;
-Com_Zimbra_YMEmoticons.prototype.constructor = Com_Zimbra_YMEmoticons;
+Com_Zmail_YMEmoticons.prototype = new ZmZimletBase;
+Com_Zmail_YMEmoticons.prototype.constructor = Com_Zmail_YMEmoticons;
 
-Com_Zimbra_YMEmoticons.prototype.createComposeButton =
+Com_Zmail_YMEmoticons.prototype.createComposeButton =
 function(toolbar) {
 	var htmlEditor = toolbar.parent;
 	var button = new YMEmoticonsPickerButton({parent: toolbar, className: "ZToolbarButton"}, true);
@@ -32,12 +32,12 @@ function(toolbar) {
 	button.addSelectionListener(new AjxListener(this, this._composeToolbarSmileyListener, [htmlEditor]));
 };
 
-Com_Zimbra_YMEmoticons.prototype.on_htmlEditor_createToolbar2 =
+Com_Zmail_YMEmoticons.prototype.on_htmlEditor_createToolbar2 =
 function(app, toolbar) {
 	this.createComposeButton(toolbar);
 };
 
-Com_Zimbra_YMEmoticons.prototype.onFindMsgObjects =
+Com_Zmail_YMEmoticons.prototype.onFindMsgObjects =
 function(msg, manager) {
 	if (!this.enableInMail) {
 		this.enableInMail = Boolean(this.getUserProperty("yemoticons_enableInMail"));
@@ -63,7 +63,7 @@ function(msg, manager) {
 	}
 };
 
-Com_Zimbra_YMEmoticons.prototype.match =
+Com_Zmail_YMEmoticons.prototype.match =
 function(line, startIndex) {
 	this.re.lastIndex = startIndex;
 	var m = this.re.exec(line);
@@ -78,7 +78,7 @@ function(line, startIndex) {
 	return m;
 };
 
-Com_Zimbra_YMEmoticons.prototype.generateSpan =
+Com_Zmail_YMEmoticons.prototype.generateSpan =
 function(html, idx, obj, spanId, context) {
 
 	var h = context.height / 2;
@@ -105,7 +105,7 @@ function(html, idx, obj, spanId, context) {
 	return idx;
 };
 
-Com_Zimbra_YMEmoticons.prototype.onNewChatWidget =
+Com_Zmail_YMEmoticons.prototype.onNewChatWidget =
 function(widget) {
 	var manager = widget.getObjectManager();
 	manager.addHandler(this);
@@ -121,12 +121,12 @@ function(widget) {
 	toolBar.addSeparator(null, 1);
 };
 
-Com_Zimbra_YMEmoticons.prototype._smileyListener =
+Com_Zmail_YMEmoticons.prototype._smileyListener =
 function(widget, ev){
 	this._composeToolbarSmileyListener(widget.getEditor(), ev);
 };
 
-Com_Zimbra_YMEmoticons.prototype._composeToolbarSmileyListener =
+Com_Zmail_YMEmoticons.prototype._composeToolbarSmileyListener =
 function(editor, ev){
 	if (!editor) { return; }
 
@@ -137,7 +137,7 @@ function(editor, ev){
 	}
 };
 
-Com_Zimbra_YMEmoticons.prototype.menuItemSelected =
+Com_Zmail_YMEmoticons.prototype.menuItemSelected =
 function(itemId) {
 	switch (itemId) {
 		case "YE_TEMP_DISABLE":	this.temporarilyDisable(); break;
@@ -145,24 +145,24 @@ function(itemId) {
 	}
 };
 
-Com_Zimbra_YMEmoticons.prototype.doubleClicked =
+Com_Zmail_YMEmoticons.prototype.doubleClicked =
 function() {
 	this.singleClicked();
 };
 
-Com_Zimbra_YMEmoticons.prototype.singleClicked =
+Com_Zmail_YMEmoticons.prototype.singleClicked =
 function() {
 	this._showPreferenceDlg();
 };
 
-Com_Zimbra_YMEmoticons.prototype.temporarilyDisable =
+Com_Zmail_YMEmoticons.prototype.temporarilyDisable =
 function() {
 	this._isEnabled = false;
 	var transitions = [ZmToast.FADE_IN, ZmToast.PAUSE, ZmToast.FADE_OUT];
 	appCtxt.getAppController().setStatusMsg("Emoticons Temporarily Disabled", ZmStatusView.LEVEL_INFO, null, transitions);
 };
 
-Com_Zimbra_YMEmoticons.prototype._showPreferenceDlg =
+Com_Zmail_YMEmoticons.prototype._showPreferenceDlg =
 function() {
 	//if zimlet dialog already exists...
 	if (this._preferenceDialog) {
@@ -183,7 +183,7 @@ function() {
 	this._preferenceDialog.popup();
 };
 
-Com_Zimbra_YMEmoticons.prototype._createPrefView =
+Com_Zmail_YMEmoticons.prototype._createPrefView =
 function() {
 	return [
 		"<div class='ymemoticonsPrefDialog'>",
@@ -192,7 +192,7 @@ function() {
 	].join("");
 };
 
-Com_Zimbra_YMEmoticons.prototype._okPreferenceBtnListener =
+Com_Zmail_YMEmoticons.prototype._okPreferenceBtnListener =
 function() {
 	this._preferenceDialog.popdown();
 	var domVal = document.getElementById("yemoticons_enableInMail_div").checked;

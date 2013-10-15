@@ -14,23 +14,23 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.bugs;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.bugs;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew;
 
 
 public class Bug78632 extends PrefGroupMailByMessageTest {
 
-	ZimbraAccount account1 = null;
-	ZimbraAccount account2 = null;
+	ZmailAccount account1 = null;
+	ZmailAccount account2 = null;
 	
 	public Bug78632() {
 		logger.info("New "+ Bug78632.class.getCanonicalName());
@@ -47,36 +47,36 @@ public class Bug78632 extends PrefGroupMailByMessageTest {
 		//-- DATA
 		
 		if ( account1 == null ) {
-			account1 = (new ZimbraAccount()).provision().authenticate();
-			account2 = (new ZimbraAccount()).provision().authenticate();
+			account1 = (new ZmailAccount()).provision().authenticate();
+			account2 = (new ZmailAccount()).provision().authenticate();
 		}
 		
 		// Set an alias on the account
 		
 		//-- Data setup
 		
-		String aliasFromDisplay = "alias" + ZimbraSeleniumProperties.getUniqueString();
+		String aliasFromDisplay = "alias" + ZmailSeleniumProperties.getUniqueString();
 		String aliasEmailAddress = 
 					aliasFromDisplay + 
 					"@" +
-					ZimbraSeleniumProperties.getStringProperty("testdomain", "testdomain.com");
+					ZmailSeleniumProperties.getStringProperty("testdomain", "testdomain.com");
 		
 		
-		ZimbraAdminAccount.GlobalAdmin().soapSend(
-				"<AddAccountAliasRequest xmlns='urn:zimbraAdmin'>"
-			+		"<id>"+ app.zGetActiveAccount().ZimbraId +"</id>"
+		ZmailAdminAccount.GlobalAdmin().soapSend(
+				"<AddAccountAliasRequest xmlns='urn:zmailAdmin'>"
+			+		"<id>"+ app.zGetActiveAccount().ZmailId +"</id>"
 			+		"<alias>"+ aliasEmailAddress +"</alias>"
 			+	"</AddAccountAliasRequest>");
 		
 		// Modify the from address in the primary identity
-		app.zGetActiveAccount().soapSend("<GetIdentitiesRequest xmlns='urn:zimbraAccount' />");
+		app.zGetActiveAccount().soapSend("<GetIdentitiesRequest xmlns='urn:zmailAccount' />");
 		String identity = app.zGetActiveAccount().soapSelectValue("//acct:identity", "id");
 		
 		app.zGetActiveAccount().soapSend(
-				" <ModifyIdentityRequest  xmlns='urn:zimbraAccount'>"
+				" <ModifyIdentityRequest  xmlns='urn:zmailAccount'>"
 			+		"<identity id='"+ identity +"'>"
-			+			"<a name='zimbraPrefFromDisplay'>"+ aliasFromDisplay +"</a>"
-			+			"<a name='zimbraPrefFromAddress'>"+ aliasEmailAddress +"</a>"
+			+			"<a name='zmailPrefFromDisplay'>"+ aliasFromDisplay +"</a>"
+			+			"<a name='zmailPrefFromAddress'>"+ aliasEmailAddress +"</a>"
 			+		"</identity>"
 			+	"</ModifyIdentityRequest >");
 		
@@ -84,16 +84,16 @@ public class Bug78632 extends PrefGroupMailByMessageTest {
 
 		// Send a message from the account
 		
-		String subject = "subject"+ ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject"+ ZmailSeleniumProperties.getUniqueString();
 		app.zGetActiveAccount().soapSend(
-				"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+				"<SendMsgRequest xmlns='urn:zmailMail'>" +
 					"<m>" +
 						"<e t='t' a='"+ account1.EmailAddress +"'/>" +
 						"<e t='c' a='"+ account2.EmailAddress +"'/>" +
 						"<e t='r' a='"+ aliasEmailAddress +"' p='"+ aliasFromDisplay +"'/>" +
 						"<su>"+ subject +"</su>" +
 						"<mp ct='text/plain'>" +
-							"<content>content" + ZimbraSeleniumProperties.getUniqueString() +"</content>" +
+							"<content>content" + ZmailSeleniumProperties.getUniqueString() +"</content>" +
 						"</mp>" +
 					"</m>" +
 				"</SendMsgRequest>");
@@ -127,7 +127,7 @@ public class Bug78632 extends PrefGroupMailByMessageTest {
 		
 		// All sent messages should not have TO: include the test account
 		app.zGetActiveAccount().soapSend(
-				"<SearchRequest xmlns='urn:zimbraMail' types='message'>"
+				"<SearchRequest xmlns='urn:zmailMail' types='message'>"
 			+		"<query>in:sent subject:("+ subject +")</query>"
 			+	"</SearchRequest>");
 
@@ -144,14 +144,14 @@ public class Bug78632 extends PrefGroupMailByMessageTest {
 			ZAssert.assertNotNull(id, "Verify the sent message ID is not null");
 			
 			app.zGetActiveAccount().soapSend(
-					"<GetMsgRequest xmlns='urn:zimbraMail' >"
+					"<GetMsgRequest xmlns='urn:zmailMail' >"
 				+		"<m id='"+ id +"'/>"
 				+	"</GetMsgRequest>");
 
 			Element[] elements = app.zGetActiveAccount().soapSelectNodes("//mail:e");
 
 			/**
-			 *     <GetMsgResponse xmlns="urn:zimbraMail">
+			 *     <GetMsgResponse xmlns="urn:zmailMail">
 			 *     		<m id="257" f="sr" rev="2" d="1354142553000" s="545" sd="1354142553000" l="5" cid="259">
 			 *             <fr>content135414321527621</fr>
 			 *             <e d="enus135414320622919" t="f" a="enus135414320622919@testdomain.com"/>
@@ -195,28 +195,28 @@ public class Bug78632 extends PrefGroupMailByMessageTest {
 		//-- DATA
 		
 		if ( account1 == null ) {
-			account1 = (new ZimbraAccount()).provision().authenticate();
-			account2 = (new ZimbraAccount()).provision().authenticate();
+			account1 = (new ZmailAccount()).provision().authenticate();
+			account2 = (new ZmailAccount()).provision().authenticate();
 		}
 
 		// Set the primary address on the account
 		
 		//-- Data setup
 		
-		String replyToDisplay = "alias" + ZimbraSeleniumProperties.getUniqueString();
+		String replyToDisplay = "alias" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		// Modify the from address in the primary identity
-		app.zGetActiveAccount().soapSend("<GetIdentitiesRequest xmlns='urn:zimbraAccount' />");
+		app.zGetActiveAccount().soapSend("<GetIdentitiesRequest xmlns='urn:zmailAccount' />");
 		String identity = app.zGetActiveAccount().soapSelectValue("//acct:identity", "id");
 		
 		app.zGetActiveAccount().soapSend(
-				" <ModifyIdentityRequest  xmlns='urn:zimbraAccount'>"
+				" <ModifyIdentityRequest  xmlns='urn:zmailAccount'>"
 			+		"<identity id='"+ identity +"'>"
-			+			"<a name='zimbraPrefFromAddressType'>sendAs</a>"
-			+			"<a name='zimbraPrefReplyToEnabled'>TRUE</a>"
-			+			"<a name='zimbraPrefFromDisplay'>"+ replyToDisplay +"</a>"
-			+			"<a name='zimbraPrefFromAddress'>"+ app.zGetActiveAccount().EmailAddress +"</a>"
+			+			"<a name='zmailPrefFromAddressType'>sendAs</a>"
+			+			"<a name='zmailPrefReplyToEnabled'>TRUE</a>"
+			+			"<a name='zmailPrefFromDisplay'>"+ replyToDisplay +"</a>"
+			+			"<a name='zmailPrefFromAddress'>"+ app.zGetActiveAccount().EmailAddress +"</a>"
 			+		"</identity>"
 			+	"</ModifyIdentityRequest >");
 		
@@ -224,16 +224,16 @@ public class Bug78632 extends PrefGroupMailByMessageTest {
 
 		// Send a message from the account
 		
-		String subject = "subject"+ ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject"+ ZmailSeleniumProperties.getUniqueString();
 		app.zGetActiveAccount().soapSend(
-				"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+				"<SendMsgRequest xmlns='urn:zmailMail'>" +
 					"<m>" +
 						"<e t='t' a='"+ account1.EmailAddress +"'/>" +
 						"<e t='c' a='"+ account2.EmailAddress +"'/>" +
 						"<e t='r' a='"+ app.zGetActiveAccount().EmailAddress +"' p='"+ replyToDisplay +"'/>" +
 						"<su>"+ subject +"</su>" +
 						"<mp ct='text/plain'>" +
-							"<content>content" + ZimbraSeleniumProperties.getUniqueString() +"</content>" +
+							"<content>content" + ZmailSeleniumProperties.getUniqueString() +"</content>" +
 						"</mp>" +
 					"</m>" +
 				"</SendMsgRequest>");
@@ -267,7 +267,7 @@ public class Bug78632 extends PrefGroupMailByMessageTest {
 		
 		// All sent messages should not have TO: include the test account
 		app.zGetActiveAccount().soapSend(
-				"<SearchRequest xmlns='urn:zimbraMail' types='message'>"
+				"<SearchRequest xmlns='urn:zmailMail' types='message'>"
 			+		"<query>in:sent subject:("+ subject +")</query>"
 			+	"</SearchRequest>");
 
@@ -284,14 +284,14 @@ public class Bug78632 extends PrefGroupMailByMessageTest {
 			ZAssert.assertNotNull(id, "Verify the sent message ID is not null");
 			
 			app.zGetActiveAccount().soapSend(
-					"<GetMsgRequest xmlns='urn:zimbraMail' >"
+					"<GetMsgRequest xmlns='urn:zmailMail' >"
 				+		"<m id='"+ id +"'/>"
 				+	"</GetMsgRequest>");
 
 			Element[] elements = app.zGetActiveAccount().soapSelectNodes("//mail:e");
 
 			/**
-			 *     <GetMsgResponse xmlns="urn:zimbraMail">
+			 *     <GetMsgResponse xmlns="urn:zmailMail">
 			 *     		<m id="257" f="sr" rev="2" d="1354142553000" s="545" sd="1354142553000" l="5" cid="259">
 			 *             <fr>content135414321527621</fr>
 			 *             <e d="enus135414320622919" t="f" a="enus135414320622919@testdomain.com"/>

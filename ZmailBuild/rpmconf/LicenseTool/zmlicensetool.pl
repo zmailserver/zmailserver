@@ -1,10 +1,10 @@
 #!/usr/bin/perl
 
 use strict;
-use Zimbra::LicensingDB;
-use Zimbra::License;
-use Zimbra::LicenseKey;
-use Zimbra::Customer;
+use Zmail::LicensingDB;
+use Zmail::License;
+use Zmail::LicenseKey;
+use Zmail::Customer;
 
 use Getopt::Long;
 
@@ -89,7 +89,7 @@ sub displayKey {
 
 sub createKey {
 	my %attrs = ();
-	my $key = new Zimbra::LicenseKey;
+	my $key = new Zmail::LicenseKey;
 	if (!$key->generate()) {
 		exit 1;
 	}
@@ -156,7 +156,7 @@ sub createLicense {
 		usage ("Customer $options{id} not found!");
 	}
 
-	my $license = new Zimbra::License();
+	my $license = new Zmail::License();
 
 	if (!defined ($license)) {
 		usage();
@@ -191,7 +191,7 @@ sub createCustomer {
 	if (!defined($options{'name'})) {
 		usage ("Missing customer name");
 	}
-	my $customer = new Zimbra::Customer();
+	my $customer = new Zmail::Customer();
 	$customer->{name} = $options{'name'};
 	if (defined($customer)) {
 		my $id = putCustomer($customer);
@@ -318,16 +318,16 @@ EOF
 ## Db Access commands
 
 sub getCustomerIds {
-	my $ids = Zimbra::LicensingDB::getCustomerIds();
+	my $ids = Zmail::LicensingDB::getCustomerIds();
 	return $ids;
 }
 
 sub getCustomer {
 	my $id = shift;
 	#print "Fetching customer $id from database...";
-	my $attrs = Zimbra::LicensingDB::getCustomer($id);
+	my $attrs = Zmail::LicensingDB::getCustomer($id);
 	if (defined ($attrs)) {
-		my $customer = new Zimbra::Customer($attrs);
+		my $customer = new Zmail::Customer($attrs);
 		#print "Done\n";
 		return $customer;
 	}
@@ -338,7 +338,7 @@ sub getCustomer {
 sub putCustomer {
 	my $customer = shift;
 	#print "Storing customer $self->{name} in database...";
-	$customer->{id} = Zimbra::LicensingDB::putCustomer($customer);
+	$customer->{id} = Zmail::LicensingDB::putCustomer($customer);
 	if (defined($customer->{id})) {
 		#print "Customer ID $customer->{id}...Done\n";
 		return 1;
@@ -363,16 +363,16 @@ sub getCurrentKey {
 }
 
 sub getKeyIds {
-	my $ids = Zimbra::LicensingDB::getKeyIds();
+	my $ids = Zmail::LicensingDB::getKeyIds();
 	return $ids;
 }
 
 sub getKey {
 	my $keyId = shift;
 	#print "Fetching key $keyId from database...";
-	my $attrs = Zimbra::LicensingDB::getKey($keyId);
+	my $attrs = Zmail::LicensingDB::getKey($keyId);
 	if (defined ($attrs)) {
-		my $key = new Zimbra::LicenseKey($attrs);
+		my $key = new Zmail::LicenseKey($attrs);
 		#print "Done\n";
 		return $key;
 	}
@@ -384,7 +384,7 @@ sub putKey {
 	my $key = shift;
 
 	#print "Storing key in database...";
-	$key->{id} = Zimbra::LicensingDB::putKey($key);
+	$key->{id} = Zmail::LicensingDB::putKey($key);
 	if (defined($key->{id})) {
 		#print "Key ID $key->{id}...Done\n";
 		return 1;
@@ -394,15 +394,15 @@ sub putKey {
 }
 
 sub getLicenseIds {
-	my $ids = Zimbra::LicensingDB::getLicenseIds();
+	my $ids = Zmail::LicensingDB::getLicenseIds();
 	return $ids;
 }
 
 sub getLicense {
 	my $id = shift;
-	my $attrs = Zimbra::LicensingDB::getLicense($id);
+	my $attrs = Zmail::LicensingDB::getLicense($id);
 	if (defined($attrs)) {
-		my $license = new Zimbra::License($attrs);
+		my $license = new Zmail::License($attrs);
 		return $license;
 	}
 	return undef;
@@ -411,7 +411,7 @@ sub getLicense {
 sub putLicense {
 	my $license = shift;
 	#print "Storing license in database...";
-	$license->{id} = Zimbra::LicensingDB::putLicense($license);
+	$license->{id} = Zmail::LicensingDB::putLicense($license);
 	if (defined($license->{id})) {
 		#print "License ID $license->{id}...Done\n";
 		return 1;
@@ -423,7 +423,7 @@ sub putLicense {
 sub updateLicense {
 	my $license = shift;
 	#print "Storing license in database...";
-	if (Zimbra::LicensingDB::updateLicense($license)) {
+	if (Zmail::LicensingDB::updateLicense($license)) {
 		return 1;
 	}
 	#print "FAILED\n";

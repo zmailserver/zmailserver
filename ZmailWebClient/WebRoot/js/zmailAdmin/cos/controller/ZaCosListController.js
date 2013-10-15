@@ -37,7 +37,7 @@ ZaController.changeActionsStateMethods["ZaCosListController"] = new Array();
 
 ZaCosListController.prototype.show = function (doPush,openInNewTab) {
 
-    if(!ZaZimbraAdmin.hasGlobalCOSSListAccess() && this._currentQuery == "") {
+    if(!ZaZmailAdmin.hasGlobalCOSSListAccess() && this._currentQuery == "") {
         var cosNameList = ZaApp.getInstance()._cosNameList;
         if(!cosNameList || !(cosNameList instanceof Array) || cosNameList.length == 0) {
             this._list = new ZaItemList(ZaCos);
@@ -96,7 +96,7 @@ function (list, openInNewTab, openInSearchTab, hasMore) {
 
 ZaCosListController.initPopupMenuMethod =
 function () {
-	if(ZaItem.hasRight(ZaCos.CREATE_COS_RIGHT, ZaZimbraAdmin.currentAdminAccount)) {
+	if(ZaItem.hasRight(ZaCos.CREATE_COS_RIGHT, ZaZmailAdmin.currentAdminAccount)) {
    		this._popupOperations[ZaOperation.NEW]=new ZaOperation(ZaOperation.NEW,ZaMsg.TBB_New, ZaMsg.COSTBB_New_tt, "NewCOS", "NewCOSDis", new AjxListener(this, ZaCosListController.prototype._newButtonListener));
    		this._popupOperations[ZaOperation.DUPLICATE]=new ZaOperation(ZaOperation.DUPLICATE,ZaMsg.TBB_Duplicate, ZaMsg.COSTBB_Duplicate_tt, "DuplicateCOS", "DuplicateCOSDis", new AjxListener(this, ZaCosListController.prototype._duplicateButtonListener));
 	}
@@ -169,7 +169,7 @@ function(ev) {
 
             if ( item.attrs ) {
                 for(var aname in item.attrs) {
-                    if( (aname == ZaItem.A_objectClass) || (aname == ZaItem.A_zimbraId) || (aname == ZaCos.A_name) || (aname == ZaCos.A_description) || (aname == ZaCos.A_zimbraNotes) || (aname == ZaItem.A_zimbraCreateTimestamp) )
+                    if( (aname == ZaItem.A_objectClass) || (aname == ZaItem.A_zmailId) || (aname == ZaCos.A_name) || (aname == ZaCos.A_description) || (aname == ZaCos.A_zmailNotes) || (aname == ZaItem.A_zmailCreateTimestamp) )
                         continue;
 
                     if ( (typeof item.attrs[aname] == "object") || (item.attrs[aname] instanceof Array)) {
@@ -184,7 +184,7 @@ function(ev) {
             }
 
 
-            newCos.attrs[ZaCos.A_zimbraNotes] = AjxMessageFormat.format(ZaMsg.COSTBB_DuplicatingFrom_tt, [item.attrs[ZaCos.A_name]]);
+            newCos.attrs[ZaCos.A_zmailNotes] = AjxMessageFormat.format(ZaMsg.COSTBB_DuplicatingFrom_tt, [item.attrs[ZaCos.A_name]]);
             //explicitly note the user this is duplicated from the one they select,
             //instead of showing nothing at the first page of ZaNewCosXWizard
 
@@ -216,7 +216,7 @@ function(ev) {
 	newCos.rights[ZaCos.CREATE_COS_RIGHT]=true;
 	//copy values from default cos to the new cos
 	for(var aname in defCos.attrs) {
-		if( (aname == ZaItem.A_objectClass) || (aname == ZaItem.A_zimbraId) || (aname == ZaCos.A_name) || (aname == ZaCos.A_description) || (aname == ZaCos.A_notes) || (aname == ZaItem.A_zimbraCreateTimestamp))
+		if( (aname == ZaItem.A_objectClass) || (aname == ZaItem.A_zmailId) || (aname == ZaCos.A_name) || (aname == ZaCos.A_description) || (aname == ZaCos.A_notes) || (aname == ZaItem.A_zmailCreateTimestamp))
 			continue;			
 		newCos.attrs[aname] = defCos.attrs[aname];
 	}
@@ -234,7 +234,7 @@ function(ev) {
 		if(ev.item) {
 			ZaApp.getInstance().getCosController().show(ev.item);
             var parentPath = ZaTree.getPathByArray([ZaMsg.OVP_home, ZaMsg.OVP_configure, ZaMsg.OVP_cos]);
-            ZaZimbraAdmin.getInstance().getOverviewPanelController().addObjectItem(parentPath, ev.item.name, null, false, false, ev.item, undefined, true);
+            ZaZmailAdmin.getInstance().getOverviewPanelController().addObjectItem(parentPath, ev.item.name, null, false, false, ev.item, undefined, true);
 		}
 	} else {
 		this.changeActionsState();	
@@ -265,7 +265,7 @@ ZaCosListController.prototype._editItem =
 function(item) {
     ZaApp.getInstance().getCosController().show(item);
     var parentPath = ZaTree.getPathByArray([ZaMsg.OVP_home, ZaMsg.OVP_configure, ZaMsg.OVP_cos]);
-    ZaZimbraAdmin.getInstance().getOverviewPanelController().addObjectItem(parentPath, item.name, null, false, false, item);
+    ZaZmailAdmin.getInstance().getOverviewPanelController().addObjectItem(parentPath, item.name, null, false, false, item);
 }
 
 /**

@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.search.search;
+package org.zmail.qa.selenium.projects.ajax.tests.search.search;
 
 
 import java.util.List;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.ContactItem;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.framework.items.ContactItem;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
 
 public class SearchContact extends AjaxCommonTest {
 	
@@ -84,7 +84,7 @@ public class SearchContact extends AjaxCommonTest {
 		
 		//-- Data
 		
-		String doesnotexist = "contact" + ZimbraSeleniumProperties.getUniqueString();
+		String doesnotexist = "contact" + ZmailSeleniumProperties.getUniqueString();
 		
 		//-- GUI
 		

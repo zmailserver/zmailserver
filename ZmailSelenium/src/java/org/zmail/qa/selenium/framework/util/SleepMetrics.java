@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.util;
+package org.zmail.qa.selenium.framework.util;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -58,8 +58,8 @@ public class SleepMetrics {
 		
 		for ( StackTraceElement e : stack ) {
 			
-			// Skip any non-zimbra classes
-			if ( !e.getClassName().startsWith("com.zimbra.qa.selenium") ) {
+			// Skip any non-zmail classes
+			if ( !e.getClassName().startsWith("org.zmail.qa.selenium") ) {
 				continue;
 			}
 			
@@ -69,7 +69,7 @@ public class SleepMetrics {
 			}
 			
 			// Skip the SleepUtil class, since all sleep goes through that
-			if ( e.getClassName().startsWith("com.zimbra.qa.selenium.framework.util.SleepUtil") ) {
+			if ( e.getClassName().startsWith("org.zmail.qa.selenium.framework.util.SleepUtil") ) {
 				continue;
 			}
 
@@ -107,8 +107,8 @@ public class SleepMetrics {
 		
 		for ( StackTraceElement e : stack ) {
 			
-			// Skip any non-zimbra classes
-			if ( !e.getClassName().startsWith("com.zimbra.qa.selenium") ) {
+			// Skip any non-zmail classes
+			if ( !e.getClassName().startsWith("org.zmail.qa.selenium") ) {
 				continue;
 			}
 			
@@ -183,7 +183,7 @@ public class SleepMetrics {
 		
 		public String toString() {
 			
-			// "Entry: com.zimbra.qa.selenium.class.method() - 1234 msec"
+			// "Entry: org.zmail.qa.selenium.class.method() - 1234 msec"
 			
 			StringBuilder sb = new StringBuilder("Report: ");
 			sb.append(className).append('.').append(methodName).append("() -");

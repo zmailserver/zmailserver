@@ -17,22 +17,22 @@
 -->
 <tocdata>
 <book name="Introduzione" >
-  <item name="Informazioni su Zimbra Desktop" url="Getting_Started/Zimbra_User_Help.htm" />
-  <item name="Prospetto delle funzioni principali di Zimbra Desktop" url="Zdesktop/Overview_of_Zimbra_Desktop_Features.htm" />
+  <item name="Informazioni su Zmail Desktop" url="Getting_Started/Zmail_User_Help.htm" />
+  <item name="Prospetto delle funzioni principali di Zmail Desktop" url="Zdesktop/Overview_of_Zmail_Desktop_Features.htm" />
   <item name="Lavorare offline" url="Zdesktop/z-Working_Offline.htm" />
   <item name="Tasti di scelta rapida della tastiera" url="Navigation_folders_and_tips/Keyboard_Shortcut_Keys.htm" />
 </book>
-<book name="Impostazione di Zimbra Desktop" >
-  <item name="Impostazione di un account Zimbra Web Client" url="Zdesktop/Z-Setting_up_your_Zimbra_Web_Client_account.htm" />
+<book name="Impostazione di Zmail Desktop" >
+  <item name="Impostazione di un account Zmail Web Client" url="Zdesktop/Z-Setting_up_your_Zmail_Web_Client_account.htm" />
   <item name="Impostazione di un account Yahoo! Account Yahoo! Mail e Gmail" url="Zdesktop/z-Setting_up_Yahoo!_Mail_Plus,_Gmail,_AOL_account_setup.htm" />
   <item name="Impostazione di account POP/IMAP" url="Zdesktop/z-Setting_up_POP_IMAP_accounts.htm" />
-  <item name="Sincronizzazione degli account" url="Zdesktop/Synchronize_your_account_to_Zimbra_Desktop.htm" />
+  <item name="Sincronizzazione degli account" url="Zdesktop/Synchronize_your_account_to_Zmail_Desktop.htm" />
   <item name="Disattivazione della sincronizzazione automatica" url="Zdesktop/Turning_Off_Automatic_Sync.htm" />
   <item name="Organizzazione della visualizzazione di Desktop" url="Zdesktop/z-Changing_account_order_on_Desktop.htm" />
   <item name="Eliminazione di un account da Desktop" url="Zdesktop/z-Deleting_an_account_from_Desktop.htm" />
 </book>
 <book name="Navigazione nella casella di posta Desktop" >
-  <item name="Navigazione in Zimbra Desktop" url="Navigation_folders_and_tips/z-Navigating_Zimbra_Desktop.htm" />
+  <item name="Navigazione in Zmail Desktop" url="Navigation_folders_and_tips/z-Navigating_Zmail_Desktop.htm" />
   <item name="Funzioni dell'interfaccia utente e tasti di scelta rapida" url="Getting_Started/user_interface_features_and_shortcuts.htm" />
   <item name="Menu del tasto destro del mouse" url="Navigation_folders_and_tips/right-click_menus.htm" />
   <item name="Cartelle di sistema" url="Navigation_folders_and_tips/inbox_folder.htm" />
@@ -123,7 +123,7 @@
   <item name="Impostazione di avvisi sul desktop" url="Userspecific/Setting_up_desktop_alerts.htm" />
   <item name="Mail di notifica a un altro indirizzo" url="Userspecific/New_mail_notifications.htm" />
   <item name="Messaggio di assenza" url="Userspecific/vacation_message.htm" />
-  <item name="Utilizzare Zimbra Desktop come programma di posta elettronica predefinito" url="managing_your_account/Making_Zimbra_Desktop_Default_Mail_Client.htm" />
+  <item name="Utilizzare Zmail Desktop come programma di posta elettronica predefinito" url="managing_your_account/Making_Zmail_Desktop_Default_Mail_Client.htm" />
 </book>
 <book name="Organizzazione degli account" >
   <item name="Suddivisione in categorie dei messaggi email" url="Navigation_folders_and_tips/categorizing_your_mail_messages.htm#bc-1" />

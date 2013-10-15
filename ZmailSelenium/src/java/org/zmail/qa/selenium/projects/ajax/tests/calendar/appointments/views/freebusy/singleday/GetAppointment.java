@@ -14,14 +14,14 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.calendar.appointments.views.freebusy.singleday;
+package org.zmail.qa.selenium.projects.ajax.tests.calendar.appointments.views.freebusy.singleday;
 
 import java.util.*;
 import org.testng.annotations.Test;
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
 
 public class GetAppointment extends AjaxCommonTest {
 	
@@ -35,7 +35,7 @@ public class GetAppointment extends AjaxCommonTest {
 		super.startingAccountPreferences = new HashMap<String, String>() {
 			private static final long serialVersionUID = -637186860416861680L;
 		{
-		    put("zimbraFeatureFreeBusyViewEnabled", "TRUE");
+		    put("zmailFeatureFreeBusyViewEnabled", "TRUE");
 		}};
 
 
@@ -48,7 +48,7 @@ public class GetAppointment extends AjaxCommonTest {
 		
 		// Create the appointment on the server
 		// Create the message data to be sent
-		String subject = "appointment" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "appointment" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		// Absolute dates in UTC zone
@@ -61,7 +61,7 @@ public class GetAppointment extends AjaxCommonTest {
 
 		// Create an appointment
 		app.zGetActiveAccount().soapSend(
-					"<CreateAppointmentRequest xmlns='urn:zimbraMail'>"
+					"<CreateAppointmentRequest xmlns='urn:zmailMail'>"
 				+		"<m>"
 				+			"<inv>"
 				+				"<comp status='CONF' fb='B' class='PUB' transp='O' allDay='0' name='"+ subject +"' >"

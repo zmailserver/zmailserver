@@ -12,9 +12,9 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.bean;
+package org.zmail.cs.taglib.bean;
 
-import com.zimbra.common.calendar.TZIDMapper;
+import org.zmail.common.calendar.TZIDMapper;
 
 public class ZTimeZoneBean {
 

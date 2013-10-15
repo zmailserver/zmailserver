@@ -240,7 +240,7 @@ ZmApptView.prototype.toString = function() { return "ZmApptView"; };
 
 ZmApptView.prototype.getTitle =
 function() {
-    return [ZmMsg.zimbraTitle, ZmMsg.appointment].join(": ");
+    return [ZmMsg.zmailTitle, ZmMsg.appointment].join(": ");
 };
 
 ZmApptView.prototype.edit =

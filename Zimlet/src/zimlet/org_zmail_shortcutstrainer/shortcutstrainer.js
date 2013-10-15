@@ -18,21 +18,21 @@
 //Author: Raja Rao D.V.
 //////////////////////////////////////////////////////////////////////////////
 
-function com_zimbra_shortcutstrainer() {
+function org_zmail_shortcutstrainer() {
 }
 
-com_zimbra_shortcutstrainer.prototype = new ZmZimletBase();
-com_zimbra_shortcutstrainer.prototype.constructor = com_zimbra_shortcutstrainer;
+org_zmail_shortcutstrainer.prototype = new ZmZimletBase();
+org_zmail_shortcutstrainer.prototype.constructor = org_zmail_shortcutstrainer;
 
 
 // Public methods
 
-com_zimbra_shortcutstrainer.prototype.toString =
+org_zmail_shortcutstrainer.prototype.toString =
 function() {
-	return "com_zimbra_shortcutstrainer";
+	return "org_zmail_shortcutstrainer";
 };
 
-com_zimbra_shortcutstrainer.prototype.init =
+org_zmail_shortcutstrainer.prototype.init =
 function() {
 	this.turnOnShortcutsTrainer = this.getUserProperty("turnOnShortcutsTrainer") == "true";
 	if (!this.turnOnShortcutsTrainer)
@@ -46,7 +46,7 @@ function() {
 	this._storeKeys();
 };
 
-com_zimbra_shortcutstrainer.prototype._storeKeys =
+org_zmail_shortcutstrainer.prototype._storeKeys =
 function() {
 	this._ZmKeysReverse = new Array();
 	for (var key in ZmKeys) {
@@ -56,7 +56,7 @@ function() {
 	}
 };
 
-com_zimbra_shortcutstrainer.prototype.selectionListener =
+org_zmail_shortcutstrainer.prototype.selectionListener =
 function(ev) {
 	if (ev.detail != undefined && (ev.detail == 1 ||  ev.detail == 3))
 		return;
@@ -98,7 +98,7 @@ function(ev) {
 	}
 };
 
-com_zimbra_shortcutstrainer.prototype.showShortCut =
+org_zmail_shortcutstrainer.prototype.showShortCut =
 function(objType, objName, text) {
 
 	if (text != undefined && text != "") {
@@ -133,7 +133,7 @@ function(objType, objName, text) {
 
 };
 
-com_zimbra_shortcutstrainer.prototype.getShortcutFromOp =
+org_zmail_shortcutstrainer.prototype.getShortcutFromOp =
 function(op) {
 	var scKey = this._ZmKeysReverse[op.text];
 	if (scKey == undefined)
@@ -145,7 +145,7 @@ function(op) {
 	}
 };
 
-com_zimbra_shortcutstrainer.prototype.getShortcutFromShortcutKey =
+org_zmail_shortcutstrainer.prototype.getShortcutFromShortcutKey =
 function(shortcutKey) {
 
 	var text = "";
@@ -169,13 +169,13 @@ function(shortcutKey) {
 
 };
 
-com_zimbra_shortcutstrainer.prototype.getAppShortCutFromId =
+org_zmail_shortcutstrainer.prototype.getAppShortCutFromId =
 function(id) {
 	scKey = [ "global", "GoTo" + id, "display"].join(".");
 	return AjxKeys[scKey] || ZmKeys[scKey];
 };
 
-com_zimbra_shortcutstrainer.prototype.getAppShortCutFromZmTreeItem =
+org_zmail_shortcutstrainer.prototype.getAppShortCutFromZmTreeItem =
 function(zmTreeItem) {
 	if (zmTreeItem == undefined)
 		return null;
@@ -198,7 +198,7 @@ function(zmTreeItem) {
 	}
 };
 
-com_zimbra_shortcutstrainer.prototype.getFolderCustomShortCut =
+org_zmail_shortcutstrainer.prototype.getFolderCustomShortCut =
 function(id, firstKey) {
 	if (this.customShortcuts == undefined) {
 		var kmm = appCtxt.getAppController().getKeyMapMgr();
@@ -213,12 +213,12 @@ function(id, firstKey) {
 	}
 };
 
-com_zimbra_shortcutstrainer.prototype.doubleClicked =
+org_zmail_shortcutstrainer.prototype.doubleClicked =
 function(canvas) {
 	// do nothing
 };
 
-com_zimbra_shortcutstrainer.prototype.onShowView =
+org_zmail_shortcutstrainer.prototype.onShowView =
 function(viewId, isNewView) {
 	this.turnOnShortcutsTrainer = this.getUserProperty("turnOnShortcutsTrainer") == "true";
 	if (!this.turnOnShortcutsTrainer)
@@ -317,15 +317,15 @@ function(viewId, isNewView) {
 //			SHOW PREFERENCES DIALOG
 //------------------------------------------------------------------------------------------
 
-com_zimbra_shortcutstrainer.prototype.doubleClicked = function() {
+org_zmail_shortcutstrainer.prototype.doubleClicked = function() {
 	this.singleClicked();
 };
 
-com_zimbra_shortcutstrainer.prototype.singleClicked = function() {
+org_zmail_shortcutstrainer.prototype.singleClicked = function() {
 	this.showPrefDialog();
 };
 
-com_zimbra_shortcutstrainer.prototype.showPrefDialog =
+org_zmail_shortcutstrainer.prototype.showPrefDialog =
 function() {
 	//if zimlet dialog already exists...
 	if (this.pbDialog) {
@@ -343,7 +343,7 @@ function() {
 
 };
 
-com_zimbra_shortcutstrainer.prototype._okBtnListner =
+org_zmail_shortcutstrainer.prototype._okBtnListner =
 function() {
 	this._reloadRequired = false;
 	if (document.getElementById("sct_turnOnShortcutsTrainer").checked) {
@@ -361,11 +361,11 @@ function() {
 	if (this._reloadRequired) {
 		window.onbeforeunload = null;
 		var url = AjxUtil.formatUrl({});
-		ZmZimbraMail.sendRedirect(url);
+		ZmZmailMail.sendRedirect(url);
 	}
 };
 
-com_zimbra_shortcutstrainer.prototype.createPrefView =
+org_zmail_shortcutstrainer.prototype.createPrefView =
 function() {
 	var html = new Array();
 	var i = 0;

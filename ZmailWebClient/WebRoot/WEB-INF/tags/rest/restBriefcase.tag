@@ -14,22 +14,22 @@
 --%>
 <%@ tag body-content="scriptless" %>
 <%@ attribute name="title" rtexprvalue="true" required="false" %>
-<%@ attribute name="mailbox" rtexprvalue="true" required="true" type="com.zimbra.cs.taglib.bean.ZMailboxBean"%>
+<%@ attribute name="mailbox" rtexprvalue="true" required="true" type="org.zmail.cs.taglib.bean.ZMailboxBean"%>
 <%@ attribute name="timezone" rtexprvalue="true" required="true" type="java.util.TimeZone"%>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
-<%@ taglib prefix="rest" uri="com.zimbra.restclient" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
+<%@ taglib prefix="rest" uri="org.zmail.restclient" %>
 
 <rest:handleError>
-    <zm:getBriefcase varSearch="searchResult" varFolder="folder" box="${mailbox}" id="${requestScope.zimbra_target_item_id}" resttargetaccountid="${requestScope.zimbra_target_account_id}" timezone="${timezone}"/>
+    <zm:getBriefcase varSearch="searchResult" varFolder="folder" box="${mailbox}" id="${requestScope.zmail_target_item_id}" resttargetaccountid="${requestScope.zmail_target_account_id}" timezone="${timezone}"/>
     <fmt:message key="noName" var="noName"/>
 </rest:handleError>
 
-<head><link rel='stylesheet' type='text/css' href='/zimbra/css/wiki.css'></head>
+<head><link rel='stylesheet' type='text/css' href='/zmail/css/wiki.css'></head>
 <body>
-<div id="ZimbraWikiPage">
+<div id="ZmailWikiPage">
     <table cellspacing="0" cellpadding="0" class="zmwiki-chromeTable">
         <tbody>
 	    <tr>
@@ -60,8 +60,8 @@
 				            <tbody>
                             <tr>
 					            <td valign="top" class="zmwiki-pageIcon"><!--wiklet class='ICON' /--></td>
-					            <td><span class="zmwiki-pageName">${zm:cook(requestScope.zimbra_target_item_name)}</span><br>
-					            <span class="zmwiki-author zmwiki-smallGrayLinks"><fmt:message key="by"/>&nbsp;${requestScope.zimbra_target_account_name}</span><br>
+					            <td><span class="zmwiki-pageName">${zm:cook(requestScope.zmail_target_item_name)}</span><br>
+					            <span class="zmwiki-author zmwiki-smallGrayLinks"><fmt:message key="by"/>&nbsp;${requestScope.zmail_target_account_name}</span><br>
             					</td>
 
 			            	</tr>
@@ -112,7 +112,7 @@
                     <tr class="zmwiki-dotLine">
                         <td width="16" class="zmwiki-pageIcon"><div class="ImgSection"></div></td>
                         <td class="zmwiki-pageLink">
-                            <c:set var="subFolderUrl" value="/home/${requestScope.zimbra_target_account_name}${folder.pathURLEncoded}/${subFolder.nameURLEncoded}"/>
+                            <c:set var="subFolderUrl" value="/home/${requestScope.zmail_target_account_name}${folder.pathURLEncoded}/${subFolder.nameURLEncoded}"/>
                             <a href="${fn:escapeXml(subFolderUrl)}">
                                 <c:set var='subFolderName' value="${empty subFolder.name  ? noName : zm:truncate(subFolder.name,100,true)}"/>
                                 <c:out value="${subFolderName}"/>
@@ -126,8 +126,8 @@
                     <tr class="zmwiki-dotLine">
                         <td width="16" class="zmwiki-pageIcon"><div class="ImgSection"></div></td>
                         <td class="zmwiki-pageLink"><%-- allow this column to wrap --%>
-                            <c:set var="briefUrl" value="/home/${requestScope.zimbra_target_account_name}${folder.pathURLEncoded}/${briefHit.document.nameURLEncoded}"/>
-                            <c:if test="${fn:contains(briefHit.document.contentType, 'application/x-zimbra-doc')}">
+                            <c:set var="briefUrl" value="/home/${requestScope.zmail_target_account_name}${folder.pathURLEncoded}/${briefHit.document.nameURLEncoded}"/>
+                            <c:if test="${fn:contains(briefHit.document.contentType, 'application/x-zmail-doc')}">
                                 <c:set var="briefUrl" value="${briefUrl}?fmt=html&preview=1"/>
                             </c:if>
                             <a href="${fn:escapeXml(briefUrl)}">

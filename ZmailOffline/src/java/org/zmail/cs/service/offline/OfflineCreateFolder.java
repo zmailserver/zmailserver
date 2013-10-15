@@ -12,26 +12,26 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.offline;
+package org.zmail.cs.service.offline;
 
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.cs.account.offline.OfflineDataSource;
-import com.zimbra.cs.account.offline.OfflineProvisioning;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.ZcsMailbox;
-import com.zimbra.cs.service.FeedManager;
-import com.zimbra.cs.service.mail.CreateFolder;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.cs.account.offline.OfflineDataSource;
+import org.zmail.cs.account.offline.OfflineProvisioning;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.ZcsMailbox;
+import org.zmail.cs.service.FeedManager;
+import org.zmail.cs.service.mail.CreateFolder;
+import org.zmail.soap.ZmailSoapContext;
 
 public class OfflineCreateFolder extends CreateFolder {
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Mailbox mbox = getRequestedMailbox(zsc);
         Element t = request.getElement(MailConstants.E_FOLDER);
         String viewStr = t.getAttribute(MailConstants.A_DEFAULT_VIEW, null);
@@ -53,7 +53,7 @@ public class OfflineCreateFolder extends CreateFolder {
 
         if (url != null && !url.equals("")) {
             FeedManager.retrieveRemoteDatasource(mbox.getAccount(), url, null);
-            t.addAttribute(MailConstants.A_SYNC, false); // for zimbra accounts don't load rss on folder creation
+            t.addAttribute(MailConstants.A_SYNC, false); // for zmail accounts don't load rss on folder creation
         }
         return super.handle(request, context);
     }

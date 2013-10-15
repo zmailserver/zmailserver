@@ -17,7 +17,7 @@
 //  Zimlet to handle integration with a Yahoo! Finance      //
 //  @author Sathishkumar Sugumaran                          //
 //////////////////////////////////////////////////////////////
-function Com_Zimbra_YFinance() {
+function Com_Zmail_YFinance() {
 this._toolbar = {};
 
 this._listeners = {};
@@ -25,15 +25,15 @@ this._listeners[ZmOperation.CLOSE] = new AjxListener(this, this._closeListener);
 
 }
 
-Com_Zimbra_YFinance.prototype = new ZmZimletBase();
-Com_Zimbra_YFinance.prototype.constructor = Com_Zimbra_YFinance;
+Com_Zmail_YFinance.prototype = new ZmZimletBase();
+Com_Zmail_YFinance.prototype.constructor = Com_Zmail_YFinance;
 
-Com_Zimbra_YFinance.QUOTES_URL = "http://quote.yahoo.com/d/quotes.csv?f=sl1d1t1c1ohgv&e=.csv&s=";
-Com_Zimbra_YFinance.STOCK_INFO_STATUS_FAILURE = "Unable to fetch stock information";
+Com_Zmail_YFinance.QUOTES_URL = "http://quote.yahoo.com/d/quotes.csv?f=sl1d1t1c1ohgv&e=.csv&s=";
+Com_Zmail_YFinance.STOCK_INFO_STATUS_FAILURE = "Unable to fetch stock information";
 
-Com_Zimbra_YFinance.YAHOO_FINANCE = "YAHOO_FINANCE";
+Com_Zmail_YFinance.YAHOO_FINANCE = "YAHOO_FINANCE";
 
-Com_Zimbra_YFinance.STOCK_PARAMS = {
+Com_Zmail_YFinance.STOCK_PARAMS = {
 			"s" : "Symbol",
 			"l1": "Last Trade",
 			"d1": "Last Trade Date",
@@ -53,9 +53,9 @@ Com_Zimbra_YFinance.STOCK_PARAMS = {
 			
 };
 
-Com_Zimbra_YFinance.STOCK_QUERY = ["s", "l1", "d1", "t1", "c1", "p2", "o", "h", "g", "v", "j6", "m4", "r7", "t8", "w", "m5"];
+Com_Zmail_YFinance.STOCK_QUERY = ["s", "l1", "d1", "t1", "c1", "p2", "o", "h", "g", "v", "j6", "m4", "r7", "t8", "w", "m5"];
 
-Com_Zimbra_YFinance.prototype.init =
+Com_Zmail_YFinance.prototype.init =
 function() {
 
 	ZmMsg.calculate = "Calculate";
@@ -80,13 +80,13 @@ function() {
 	var stockSymbols = this.getUserProperty("stockSymbols");
 	
 	if(pollInterval && stockSymbols){		
-		AjxTimedAction.scheduleAction(this._stockStatusPollAction, Com_Zimbra_YFinance.INIT_DELAY);
+		AjxTimedAction.scheduleAction(this._stockStatusPollAction, Com_Zmail_YFinance.INIT_DELAY);
 	}	
 };
 
-Com_Zimbra_YFinance.INIT_DELAY = 15000;
+Com_Zmail_YFinance.INIT_DELAY = 15000;
 
-Com_Zimbra_YFinance.prototype.onShowView = function(viewId, isNewView) {
+Com_Zmail_YFinance.prototype.onShowView = function(viewId, isNewView) {
     //bug: 29933 disabled to avoid confusion on offline client
     //enable it later with polished UI
     /*
@@ -96,7 +96,7 @@ Com_Zimbra_YFinance.prototype.onShowView = function(viewId, isNewView) {
 	*/
 };
 
-Com_Zimbra_YFinance.prototype._initPageEditToolbar =
+Com_Zmail_YFinance.prototype._initPageEditToolbar =
 function() {
 	if(!ZmSetting.NOTEBOOK_ENABLED) return;
 	
@@ -130,13 +130,13 @@ function() {
     this._editorButtonAdded = true;
 };
 
-Com_Zimbra_YFinance.prototype._initSearchToolbar =
+Com_Zmail_YFinance.prototype._initSearchToolbar =
 function() {
 	ZmMsg.yfinanceLabel = "Search Yahoo Finance";
 	this.addSearchDomainItem("YFINANCE-panelIcon", "Search Yahoo Finance", new AjxListener(this, this.yahooFinanceSearchListener));
 };
 
-Com_Zimbra_YFinance.prototype.yahooFinanceSearchListener =
+Com_Zmail_YFinance.prototype.yahooFinanceSearchListener =
 function(ev) {
 	var company = AjxStringUtil.trim(this.getSearchQuery(), true);
 	//var company = this.searchToolbar.getSearchFieldValue();
@@ -147,7 +147,7 @@ function(ev) {
 	this._lookupDialog._lookup(company);
 };
 
-Com_Zimbra_YFinance.prototype._symbolsCallback = 
+Com_Zmail_YFinance.prototype._symbolsCallback = 
 function(symbols) {
 	if(symbols == "" || symbols == null){
 		this.displayErrorMessage("No Search Result Found");
@@ -160,7 +160,7 @@ function(symbols) {
 	this._searchStockInfo(symbol, callback);
 };
 
-Com_Zimbra_YFinance.prototype._searchInfoCallback = 
+Com_Zmail_YFinance.prototype._searchInfoCallback = 
 function(symbol, result) {
 	
 	var appViewMgr = appCtxt.getAppViewMgr();
@@ -194,14 +194,14 @@ function(symbol, result) {
 
 	var el = resultView.getHtmlElement();
 	el.style.overflow = "auto";
-	el.innerHTML = AjxTemplate.expand("com_zimbra_yfinance.templates.YFinance#SearchResult", subs);
+	el.innerHTML = AjxTemplate.expand("org_zmail_yfinance.templates.YFinance#SearchResult", subs);
 
 
 	appViewMgr.pushView(ZmId.VIEW_YF_RESULT);
 	return resultView;
 };
 
-Com_Zimbra_YFinance.prototype._addSelectionListeners =
+Com_Zmail_YFinance.prototype._addSelectionListeners =
 function(toolbar) {
 	
 	var buttons = toolbar.opList;
@@ -215,13 +215,13 @@ function(toolbar) {
 };
 
 
-Com_Zimbra_YFinance.prototype._fetchStockInfo =
+Com_Zmail_YFinance.prototype._fetchStockInfo =
 function(symbols, callback){
-	var url = ZmZimletBase.PROXY + AjxStringUtil.urlComponentEncode(Com_Zimbra_YFinance.QUOTES_URL + AjxStringUtil.urlComponentEncode(symbols));
+	var url = ZmZimletBase.PROXY + AjxStringUtil.urlComponentEncode(Com_Zmail_YFinance.QUOTES_URL + AjxStringUtil.urlComponentEncode(symbols));
 	AjxRpc.invoke(null, url, null, new AjxCallback(this, this._stockStatusCallback, [callback]), true);	
 };
 
-Com_Zimbra_YFinance.prototype._stockStatusCallback =
+Com_Zmail_YFinance.prototype._stockStatusCallback =
 function(callback, result){
 	
 	if(!result.success){
@@ -231,7 +231,7 @@ function(callback, result){
 	
 	var r = result.text;
 	if(!r){
-		DBG.println(Com_Zimbra_YFinance.STOCK_INFO_STATUS_FAILURE);
+		DBG.println(Com_Zmail_YFinance.STOCK_INFO_STATUS_FAILURE);
 		return;
 	}
 	
@@ -244,7 +244,7 @@ function(callback, result){
 		var info = part.split(",");
 		var stockInfo = this._getStockInfoObj(part);
 		if(!stockInfo){
-			DBG.println(Com_Zimbra_YFinance.STOCK_INFO_STATUS_FAILURE);
+			DBG.println(Com_Zmail_YFinance.STOCK_INFO_STATUS_FAILURE);
 			return;
 		}
 		//current new status becomes old since we are pushing new status
@@ -266,7 +266,7 @@ function(callback, result){
 	}
 };
 
-Com_Zimbra_YFinance.prototype._getStockInfoObj = 
+Com_Zmail_YFinance.prototype._getStockInfoObj = 
 function(str) {
 	if(!str) { return {} };
 	var info = str.split(",");
@@ -280,7 +280,7 @@ function(str) {
 	
 };
 
-Com_Zimbra_YFinance.prototype.singleClicked = 
+Com_Zmail_YFinance.prototype.singleClicked = 
 function() {
 	this.showStockSymbolConfigDlg();	
 	//this._calcEngine.showCalc("bud02");	
@@ -289,20 +289,20 @@ function() {
 
 
 
-Com_Zimbra_YFinance.URL = "http://quote.yahoo.com/d/quotes.csv?f=sl1d1t1c1ohgv&e=.csv&s=";
-Com_Zimbra_YFinance.SUGGEST_CALLBACK = "YAHOO.Finance.SymbolSuggest.ssCallback";
-Com_Zimbra_YFinance.LOOKUP_URL = "http://d.yimg.com/autoc.finance.yahoo.com/autoc?callback=" + Com_Zimbra_YFinance.SUGGEST_CALLBACK + "&query=";
+Com_Zmail_YFinance.URL = "http://quote.yahoo.com/d/quotes.csv?f=sl1d1t1c1ohgv&e=.csv&s=";
+Com_Zmail_YFinance.SUGGEST_CALLBACK = "YAHOO.Finance.SymbolSuggest.ssCallback";
+Com_Zmail_YFinance.LOOKUP_URL = "http://d.yimg.com/autoc.finance.yahoo.com/autoc?callback=" + Com_Zmail_YFinance.SUGGEST_CALLBACK + "&query=";
 
-Com_Zimbra_YFinance.CACHE = new Array();
+Com_Zmail_YFinance.CACHE = new Array();
 
 // Panel Zimlet Methods
-// Called by the Zimbra framework when the Ymaps panel item was double clicked
-Com_Zimbra_YFinance.prototype.doubleClicked = 
+// Called by the Zmail framework when the Ymaps panel item was double clicked
+Com_Zmail_YFinance.prototype.doubleClicked = 
 function() {
 	this.singleClicked();
 };
 
-Com_Zimbra_YFinance.prototype.showStockSymbolConfigDlg =
+Com_Zmail_YFinance.prototype.showStockSymbolConfigDlg =
 function() {
 	
 	if(!this._symbolsDialog){
@@ -312,7 +312,7 @@ function() {
 	
 };
 
-Com_Zimbra_YFinance.prototype.menuItemSelected = function(itemId) {
+Com_Zmail_YFinance.prototype.menuItemSelected = function(itemId) {
 	switch (itemId) {
 	    case "PREFERENCES":
 		this.createPropertyEditor();
@@ -332,7 +332,7 @@ Com_Zimbra_YFinance.prototype.menuItemSelected = function(itemId) {
 
 
 //importing calc result as new page
-Com_Zimbra_YFinance.prototype.importResultAsPage =
+Com_Zmail_YFinance.prototype.importResultAsPage =
 function(folder, content) {
 	
 	var nController = AjxDispatcher.run("GetNotebookController");
@@ -350,7 +350,7 @@ function(folder, content) {
 };
 
 
-Com_Zimbra_YFinance.prototype._saveResponseHandler = 
+Com_Zmail_YFinance.prototype._saveResponseHandler = 
 function(nController, page, response) {
 
 	var saveResp = response._data && response._data.SaveWikiResponse;
@@ -368,7 +368,7 @@ function(nController, page, response) {
 };
 
 
-Com_Zimbra_YFinance.prototype._saveErrorResponseHandler = 
+Com_Zmail_YFinance.prototype._saveErrorResponseHandler = 
 function(nController, page, response) {
 
 	var msg = ZmMsg.importFailed + ": " + ZmMsg.unableToSavePage;
@@ -380,12 +380,12 @@ function(nController, page, response) {
 };
 
 
-Com_Zimbra_YFinance.prototype._displayDialogMap = 
+Com_Zmail_YFinance.prototype._displayDialogMap = 
 function(address) {
     //this.toolTipPoppedUp(null, address, null, div);
 };
 
-Com_Zimbra_YFinance.prototype.toolTipPoppedUp =
+Com_Zmail_YFinance.prototype.toolTipPoppedUp =
 function(spanElement, obj, context, canvas) {
 	
 	var subs = {
@@ -416,7 +416,7 @@ function(spanElement, obj, context, canvas) {
 };
 
 
-Com_Zimbra_YFinance.prototype._lookup = function(obj) {
+Com_Zmail_YFinance.prototype._lookup = function(obj) {
 
 	obj = AjxStringUtil.trim(obj);
 	obj = obj.replace(/\s/ig,"+");
@@ -432,7 +432,7 @@ Com_Zimbra_YFinance.prototype._lookup = function(obj) {
 	AjxRpc.invoke(null, url, null, new AjxCallback(this, this._lookupCallback, obj), true);
 };
 
-Com_Zimbra_YFinance.prototype._deserialize = 
+Com_Zmail_YFinance.prototype._deserialize = 
 function(str) {
 	try {
 		var foo;
@@ -445,7 +445,7 @@ function(str) {
 };
 
 
-Com_Zimbra_YFinance.prototype._lookupCallback =
+Com_Zmail_YFinance.prototype._lookupCallback =
 function(obj, result) {
 
 	var r = result.text;
@@ -483,25 +483,25 @@ function(obj, result) {
 	return symbolVal;
 };
 
-Com_Zimbra_YFinance.prototype.displayStockInfo =
+Com_Zmail_YFinance.prototype.displayStockInfo =
 function(obj, symbolVal) {
 	
 	this._symbol = symbolVal;
 	this._displayInfo(symbolVal);
-	var url = ZmZimletBase.PROXY + AjxStringUtil.urlComponentEncode(Com_Zimbra_YFinance.URL + AjxStringUtil.urlComponentEncode(symbolVal));
+	var url = ZmZimletBase.PROXY + AjxStringUtil.urlComponentEncode(Com_Zmail_YFinance.URL + AjxStringUtil.urlComponentEncode(symbolVal));
 	AjxRpc.invoke(null, url, null, new AjxCallback(this, this._callback, [symbolVal]), true);
 	this._stockSymbolCache[obj] = symbolVal;
 	
 };
 
-Com_Zimbra_YFinance.prototype._displayInfo = 
+Com_Zmail_YFinance.prototype._displayInfo = 
 function(symbol) {
 	
 	 this._imgElement.src = "http://chart.finance.yahoo.com/c/6m/y/"+symbol.toLowerCase();
 	
 };
 
-Com_Zimbra_YFinance.prototype._callback = 
+Com_Zmail_YFinance.prototype._callback = 
 function(obj,result) {
 	var r = result.text;
 	var info = r.split(",");
@@ -514,7 +514,7 @@ function(obj,result) {
 	this._infoElement.innerHTML = displayText;
 };
 
-Com_Zimbra_YFinance.prototype.trimStr =
+Com_Zmail_YFinance.prototype.trimStr =
 function(str) {
 	if(!str) return null;
 	str = str.replace(/^\"/,"");
@@ -522,9 +522,9 @@ function(str) {
 	return str;
 };
 
-Com_Zimbra_YFinance.ADD_SYMBOL_BUTTON = ++DwtDialog.LAST_BUTTON;
+Com_Zmail_YFinance.ADD_SYMBOL_BUTTON = ++DwtDialog.LAST_BUTTON;
 
-Com_Zimbra_YFinance.prototype._createDialog =
+Com_Zmail_YFinance.prototype._createDialog =
 function(params) {
 	params.parent = this.getShell();
 	params.extraButtons  = [
@@ -533,7 +533,7 @@ function(params) {
 	return new ZmDialog(params);
 };
 
-Com_Zimbra_YFinance.prototype._checkStockStatus =
+Com_Zmail_YFinance.prototype._checkStockStatus =
 function(ignoreSchedule){
 	
 	if(ignoreSchedule && !this.getUserProperty("stockSymbols")){			
@@ -559,7 +559,7 @@ function(ignoreSchedule){
 	}
 };
 
-Com_Zimbra_YFinance.prototype._displayStockStatus =
+Com_Zmail_YFinance.prototype._displayStockStatus =
 function(ignoreSchedule) {
 	
 	var symbols = this.getUserProperty("stockSymbols");	
@@ -572,14 +572,14 @@ function(ignoreSchedule) {
 };
 
 
-Com_Zimbra_YFinance.prototype.processModifiedList =
+Com_Zmail_YFinance.prototype.processModifiedList =
 function(ignoreSchedule, modifiedList, modified){
 	if(modified || ignoreSchedule){	
 		this._showStockUpdate(modifiedList, true);
 	}
 };
 
-Com_Zimbra_YFinance.prototype._showStockUpdate = function(modifiedList, force){
+Com_Zmail_YFinance.prototype._showStockUpdate = function(modifiedList, force){
 	
 	var minicalDIV = document.getElementById("skin_container_tree_footer");
 	
@@ -600,7 +600,7 @@ Com_Zimbra_YFinance.prototype._showStockUpdate = function(modifiedList, force){
         var subs = {
            	modifiedList: modifiedList
         };
-        newDiv.innerHTML = AjxTemplate.expand("com_zimbra_yfinance.templates.YFinance#StockStatus", subs);
+        newDiv.innerHTML = AjxTemplate.expand("org_zmail_yfinance.templates.YFinance#StockStatus", subs);
 
 		if(ZmSetting.CALENDAR_ENABLED && appCtxt.get(ZmSetting.CAL_ALWAYS_SHOW_MINI_CAL) && !this._miniCal) {
     	    var calMgr = appCtxt.getCalManager();
@@ -627,18 +627,18 @@ Com_Zimbra_YFinance.prototype._showStockUpdate = function(modifiedList, force){
 };
 
 
-Com_Zimbra_YFinance.prototype._searchStockInfo =
+Com_Zmail_YFinance.prototype._searchStockInfo =
 function(symbols, callback){
-	var zUrl = "http://quote.yahoo.com/d/quotes.csv?f="+ Com_Zimbra_YFinance.STOCK_QUERY.join("") +"&e=.csv&s="+AjxStringUtil.urlComponentEncode(symbols);
+	var zUrl = "http://quote.yahoo.com/d/quotes.csv?f="+ Com_Zmail_YFinance.STOCK_QUERY.join("") +"&e=.csv&s="+AjxStringUtil.urlComponentEncode(symbols);
 	var url = ZmZimletBase.PROXY + AjxStringUtil.urlComponentEncode(zUrl);
 	AjxRpc.invoke(null, url, null, new AjxCallback(this, this._searchCallback, [callback]), true);	
 };
 
-Com_Zimbra_YFinance.prototype._searchCallback =
+Com_Zmail_YFinance.prototype._searchCallback =
 function(callback, result){
 	var r = result.text;
 	if(!r){
-		DBG.println(Com_Zimbra_YFinance.STOCK_INFO_STATUS_FAILURE);
+		DBG.println(Com_Zmail_YFinance.STOCK_INFO_STATUS_FAILURE);
 		return;
 	}
 	
@@ -654,9 +654,9 @@ function(callback, result){
 	var part = part;
 	var info = part.split(",");
 
-	for(var i=0;i<Com_Zimbra_YFinance.STOCK_QUERY.length; i++){
-		var val = Com_Zimbra_YFinance.STOCK_QUERY[i];
-		var nameVal = Com_Zimbra_YFinance.STOCK_PARAMS[val];
+	for(var i=0;i<Com_Zmail_YFinance.STOCK_QUERY.length; i++){
+		var val = Com_Zmail_YFinance.STOCK_QUERY[i];
+		var nameVal = Com_Zmail_YFinance.STOCK_PARAMS[val];
 		if(nameVal!=null && val!=null){
 			resultInfo[val] = {name:nameVal, value: info[i] };
 		}	
@@ -667,12 +667,12 @@ function(callback, result){
 	}
 };
 
-Com_Zimbra_YFinance.prototype._closeListener =
+Com_Zmail_YFinance.prototype._closeListener =
 function() {
 	appCtxt.getAppViewMgr().popView(true);
 };
 
-Com_Zimbra_YFinance.prototype._updateReport =
+Com_Zmail_YFinance.prototype._updateReport =
 function() {
 	var composeController = this._composerCtrl;
 	var pageEditor = this._composerCtrl._pageEditView.getPageEditor();
@@ -682,7 +682,7 @@ function() {
 	var resultEl  = null;
 	var divs = doc.getElementsByTagName("div");
 	for(var i in divs){
-		if(divs[i] && divs[i].className == "ZimbraCalculatorDiv"){
+		if(divs[i] && divs[i].className == "ZmailCalculatorDiv"){
 			resultEl = divs[i];
 			break;
 		}
@@ -698,7 +698,7 @@ function() {
 	var calcData = null;
 	var spans = doc.getElementsByTagName("span");
 	for(var i in spans){
-		if(spans[i] && spans[i].className == "ZimbraCalculatorData"){
+		if(spans[i] && spans[i].className == "ZmailCalculatorData"){
 			calcData = spans[i].innerHTML;
 			calcId = spans[i].getAttribute("calcId");
 			break;

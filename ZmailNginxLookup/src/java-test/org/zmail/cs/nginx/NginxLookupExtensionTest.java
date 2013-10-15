@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.nginx;
+package org.zmail.cs.nginx;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,13 +28,13 @@ import org.apache.commons.httpclient.methods.GetMethod;
 import org.junit.AfterClass;
 import org.junit.Test;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.qa.unittest.TestLdap;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.qa.unittest.TestLdap;
 
 /*
  * Note: restart server after each run, the lookup servlet caches things
@@ -61,7 +61,7 @@ public class NginxLookupExtensionTest extends TestLdap {
     private enum AuthMethod {
         plain,
         other,
-        zimbraId,
+        zmailId,
         gssapi
     }
     

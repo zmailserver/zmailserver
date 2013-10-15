@@ -14,12 +14,12 @@
 --%>
 <%@ tag body-content="scriptless" %>
 <%@ attribute name="title" rtexprvalue="true" required="false" %>
-<%@ attribute name="mailbox" rtexprvalue="true" required="true" type="com.zimbra.cs.taglib.bean.ZMailboxBean"%>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
+<%@ attribute name="mailbox" rtexprvalue="true" required="true" type="org.zmail.cs.taglib.bean.ZMailboxBean"%>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
-<%@ taglib prefix="app" uri="com.zimbra.htmlclient" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
+<%@ taglib prefix="app" uri="org.zmail.htmlclient" %>
 
 <app:handleError>
     <zm:getMailbox var="mailbox"/>
@@ -30,10 +30,10 @@
     <meta http-equiv="cache-control" content="no-cache"/>
     <meta http-equiv="Pragma" content="no-cache"/>
     <title>
-        <c:if test="${empty title}"><fmt:message key="zimbraTitle"/></c:if>
-        <c:if test="${!empty title}"><fmt:message key="zimbraTitle"/>: ${fn:escapeXml(title)}</c:if>
+        <c:if test="${empty title}"><fmt:message key="zmailTitle"/></c:if>
+        <c:if test="${!empty title}"><fmt:message key="zmailTitle"/>: ${fn:escapeXml(title)}</c:if>
     </title>
-    <c:set var="version" value="${initParam.zimbraCacheBusterVersion}"/>
+    <c:set var="version" value="${initParam.zmailCacheBusterVersion}"/>
     <!-- skin is ${zm:cook(skin)} -->
     <c:if test="${empty param.print}" >
 		<c:url var='cssurl' value='/css/common,login,images,skin.css'>
@@ -82,7 +82,7 @@
         <app:yuiInclude/>
     </c:if>
     
-	<c:set var="mailidlesessiontimeout" value="${mailbox.attrs.zimbraMailIdleSessionTimeout[0]}"/>
+	<c:set var="mailidlesessiontimeout" value="${mailbox.attrs.zmailMailIdleSessionTimeout[0]}"/>
     <c:set var="timeinmillisec" value=""/>
     <c:if test="${not empty mailidlesessiontimeout}">
         <c:set var="timeoutduration" value="${fn:substring(mailidlesessiontimeout,fn:length(mailidlesessiontimeout)-1, -1)}"/>

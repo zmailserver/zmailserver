@@ -13,15 +13,15 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.taglib.tag.voice;
+package org.zmail.cs.taglib.tag.voice;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.taglib.bean.ZCallFeaturesBean;
-import com.zimbra.cs.taglib.bean.ZCallForwardingBean;
-import com.zimbra.cs.taglib.bean.ZSelectiveCallForwardingBean;
-import com.zimbra.client.ZCallFeatures;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZPhoneAccount;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.taglib.bean.ZCallFeaturesBean;
+import org.zmail.cs.taglib.bean.ZCallForwardingBean;
+import org.zmail.cs.taglib.bean.ZSelectiveCallForwardingBean;
+import org.zmail.client.ZCallFeatures;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZPhoneAccount;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;

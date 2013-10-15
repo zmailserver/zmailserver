@@ -82,8 +82,8 @@ function(setup){
 	setup.displayOptions = formats._displayOptions;
 };
 ZmPref.__BY_CSVFORMAT = function(a, b) {
-	if (a.match(/^zimbra/)) return -1;
-	if (b.match(/^zimbra/)) return  1;
+	if (a.match(/^zmail/)) return -1;
+	if (b.match(/^zmail/)) return  1;
 	if (a.match(/^yahoo/))  return -1;
 	if (b.match(/^yahoo/))  return  1;
 	return a.localeCompare(b);
@@ -661,7 +661,7 @@ function( control ) {
 };
 
 /**
- * Bubbles are currently only available if the com_zimbra_email zimlet is enabled.  Show a warning 
+ * Bubbles are currently only available if the org_zmail_email zimlet is enabled.  Show a warning 
  * to the user if the zimlet is not enabled and they try to enable bubbles.
  * @param useBubbles
  */
@@ -669,14 +669,14 @@ ZmPref.validateBubbles =
 function(useBubbles) {
 	
 	if (useBubbles) {
-		var emailZimlet = appCtxt.getZimletMgr().getZimletByName("com_zimbra_email");
+		var emailZimlet = appCtxt.getZimletMgr().getZimletByName("org_zmail_email");
 		var canUseBubbles = emailZimlet && emailZimlet.handlerObject;
 		if (canUseBubbles && canUseBubbles.getEnabled()) {
 			return true;
 		}
 		else if (!canUseBubbles) {
 			//did user just check on email zimlet?  Check the DOM
-			emailZimlet = document.getElementById("com_zimbra_email_zimletCheckbox");
+			emailZimlet = document.getElementById("org_zmail_email_zimletCheckbox");
 			canUseBubbles = emailZimlet && emailZimlet.checked;
 			if (canUseBubbles) { return true;}
 		}

@@ -14,21 +14,21 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.calendar.appointments.views.day.recurring;
+package org.zmail.qa.selenium.projects.ajax.tests.calendar.appointments.views.day.recurring;
 
 import java.awt.event.KeyEvent;
 import java.util.Calendar;
 import java.util.HashMap;
 import org.testng.annotations.*;
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.calendar.*;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.*;
+import org.zmail.qa.selenium.projects.ajax.ui.calendar.*;
 
 @SuppressWarnings("unused")
 public class DeleteInstance extends AjaxCommonTest {
@@ -43,7 +43,7 @@ public class DeleteInstance extends AjaxCommonTest {
 		super.startingAccountPreferences = new HashMap<String, String>() {
 			private static final long serialVersionUID = -2913827779459595178L;
 		{
-		    put("zimbraPrefCalendarInitialView", "day");
+		    put("zmailPrefCalendarInitialView", "day");
 		}};
 	}
 	
@@ -61,8 +61,8 @@ public class DeleteInstance extends AjaxCommonTest {
 		// Appointment data
 		String tz, apptSubject, apptBody;
 		tz = ZTimeZone.TimeZoneEST.getID();
-		apptSubject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		apptBody = "body" + ZimbraSeleniumProperties.getUniqueString();
+		apptSubject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		apptBody = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		// Absolute dates in UTC zone
 		Calendar now = Calendar.getInstance();
@@ -70,7 +70,7 @@ public class DeleteInstance extends AjaxCommonTest {
 		ZDate endTime   = new ZDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH) + 1, now.get(Calendar.DAY_OF_MONTH), 14, 0, 0);
 		
 		app.zGetActiveAccount().soapSend(
-				"<CreateAppointmentRequest xmlns='urn:zimbraMail'>" +
+				"<CreateAppointmentRequest xmlns='urn:zmailMail'>" +
 					"<m>"+
 						"<inv method='REQUEST' type='event' fb='B' transp='O' allDay='0' name='"+ apptSubject +"'>"+
 							"<s d='"+ startTime.toTimeZone(tz).toYYYYMMDDTHHMMSS() +"' tz='"+ tz +"'/>" +
@@ -111,12 +111,12 @@ public class DeleteInstance extends AjaxCommonTest {
         
 		// On the server, verify the appointment is in the trash
 		app.zGetActiveAccount().soapSend(
-				"<SearchRequest xmlns='urn:zimbraMail' types='appointment' calExpandInstStart='"+ startTime.addDays(-7).toMillis() +"' calExpandInstEnd='"+ endTime.addDays(7).toMillis() +"'>"
+				"<SearchRequest xmlns='urn:zmailMail' types='appointment' calExpandInstStart='"+ startTime.addDays(-7).toMillis() +"' calExpandInstEnd='"+ endTime.addDays(7).toMillis() +"'>"
 			+		"<query>is:anywhere "+ apptSubject +"</query>"
 			+	"</SearchRequest>");
 
-		// http://bugzilla.zimbra.com/show_bug.cgi?id=63412 - "Deleting instance from calendar series does not allow for user restoration from the Trash can"
-		// http://bugzilla.zimbra.com/show_bug.cgi?id=13527#c4 - "Moving an instance from one cal to other, moves complete series"
+		// http://bugzilla.zmail.com/show_bug.cgi?id=63412 - "Deleting instance from calendar series does not allow for user restoration from the Trash can"
+		// http://bugzilla.zmail.com/show_bug.cgi?id=13527#c4 - "Moving an instance from one cal to other, moves complete series"
 		// For now, nothing should be returned in the SearchResponse
 		//		
 		//		String folderID = app.zGetActiveAccount().soapSelectValue("//mail:appt", "l");
@@ -149,8 +149,8 @@ public class DeleteInstance extends AjaxCommonTest {
 		// Appointment data
 		String tz, apptSubject, apptBody;
 		tz = ZTimeZone.TimeZoneEST.getID();
-		apptSubject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		apptBody = "body" + ZimbraSeleniumProperties.getUniqueString();
+		apptSubject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		apptBody = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		// Absolute dates in UTC zone
 		Calendar now = Calendar.getInstance();
@@ -158,7 +158,7 @@ public class DeleteInstance extends AjaxCommonTest {
 		ZDate endTime   = new ZDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH) + 1, now.get(Calendar.DAY_OF_MONTH), 14, 0, 0);
 		
 		app.zGetActiveAccount().soapSend(
-				"<CreateAppointmentRequest xmlns='urn:zimbraMail'>" +
+				"<CreateAppointmentRequest xmlns='urn:zmailMail'>" +
 					"<m>"+
 						"<inv method='REQUEST' type='event' fb='B' transp='O' allDay='0' name='"+ apptSubject +"'>"+
 							"<s d='"+ startTime.toTimeZone(tz).toYYYYMMDDTHHMMSS() +"' tz='"+ tz +"'/>" +
@@ -199,12 +199,12 @@ public class DeleteInstance extends AjaxCommonTest {
         
 		// On the server, verify the appointment is in the trash
 		app.zGetActiveAccount().soapSend(
-				"<SearchRequest xmlns='urn:zimbraMail' types='appointment' calExpandInstStart='"+ startTime.addDays(-7).toMillis() +"' calExpandInstEnd='"+ endTime.addDays(7).toMillis() +"'>"
+				"<SearchRequest xmlns='urn:zmailMail' types='appointment' calExpandInstStart='"+ startTime.addDays(-7).toMillis() +"' calExpandInstEnd='"+ endTime.addDays(7).toMillis() +"'>"
 			+		"<query>is:anywhere "+ apptSubject +"</query>"
 			+	"</SearchRequest>");
 
-		// http://bugzilla.zimbra.com/show_bug.cgi?id=63412 - "Deleting instance from calendar series does not allow for user restoration from the Trash can"
-		// http://bugzilla.zimbra.com/show_bug.cgi?id=13527#c4 - "Moving an instance from one cal to other, moves complete series"
+		// http://bugzilla.zmail.com/show_bug.cgi?id=63412 - "Deleting instance from calendar series does not allow for user restoration from the Trash can"
+		// http://bugzilla.zmail.com/show_bug.cgi?id=13527#c4 - "Moving an instance from one cal to other, moves complete series"
 		// For now, nothing should be returned in the SearchResponse
 		//		
 		//		String folderID = app.zGetActiveAccount().soapSelectValue("//mail:appt", "l");
@@ -246,8 +246,8 @@ public class DeleteInstance extends AjaxCommonTest {
 		// Appointment data
 		String tz, apptSubject, apptBody;
 		tz = ZTimeZone.TimeZoneEST.getID();
-		apptSubject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		apptBody = "body" + ZimbraSeleniumProperties.getUniqueString();
+		apptSubject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		apptBody = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		// Absolute dates in UTC zone
 		Calendar now = Calendar.getInstance();
@@ -255,7 +255,7 @@ public class DeleteInstance extends AjaxCommonTest {
 		ZDate endTime   = new ZDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH) + 1, now.get(Calendar.DAY_OF_MONTH), 14, 0, 0);
 		
 		app.zGetActiveAccount().soapSend(
-				"<CreateAppointmentRequest xmlns='urn:zimbraMail'>" +
+				"<CreateAppointmentRequest xmlns='urn:zmailMail'>" +
 					"<m>"+
 						"<inv method='REQUEST' type='event' fb='B' transp='O' allDay='0' name='"+ apptSubject +"'>"+
 							"<s d='"+ startTime.toTimeZone(tz).toYYYYMMDDTHHMMSS() +"' tz='"+ tz +"'/>" +
@@ -296,12 +296,12 @@ public class DeleteInstance extends AjaxCommonTest {
         
 		// On the server, verify the appointment is in the trash
 		app.zGetActiveAccount().soapSend(
-				"<SearchRequest xmlns='urn:zimbraMail' types='appointment' calExpandInstStart='"+ startTime.addDays(-7).toMillis() +"' calExpandInstEnd='"+ endTime.addDays(7).toMillis() +"'>"
+				"<SearchRequest xmlns='urn:zmailMail' types='appointment' calExpandInstStart='"+ startTime.addDays(-7).toMillis() +"' calExpandInstEnd='"+ endTime.addDays(7).toMillis() +"'>"
 			+		"<query>is:anywhere "+ apptSubject +"</query>"
 			+	"</SearchRequest>");
 
-		// http://bugzilla.zimbra.com/show_bug.cgi?id=63412 - "Deleting instance from calendar series does not allow for user restoration from the Trash can"
-		// http://bugzilla.zimbra.com/show_bug.cgi?id=13527#c4 - "Moving an instance from one cal to other, moves complete series"
+		// http://bugzilla.zmail.com/show_bug.cgi?id=63412 - "Deleting instance from calendar series does not allow for user restoration from the Trash can"
+		// http://bugzilla.zmail.com/show_bug.cgi?id=13527#c4 - "Moving an instance from one cal to other, moves complete series"
 		// For now, nothing should be returned in the SearchResponse
 		//		
 		//		String folderID = app.zGetActiveAccount().soapSelectValue("//mail:appt", "l");

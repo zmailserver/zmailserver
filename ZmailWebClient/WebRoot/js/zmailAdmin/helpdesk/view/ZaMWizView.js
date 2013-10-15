@@ -152,7 +152,7 @@ ZaMigrationWizView.myXFormModifier = function(xFormObject) {
                             },
 							{type:_OUTPUT_, cssStyle:"font-size:12px;", labelLocation:_NONE_, label:null,
 							id:"pst_import_help_link",
-                                value:["(<A target='_blank' onclick='ZaZimbraAdmin.unloadHackCallback();' HREF='",location.pathname,"adminhelp/pdf/User Instructions for ZCS Import Wizard.pdf?locid=",AjxEnv.DEFAULT_LOCALE,"'>",ZaMsg.IMPORT_WIZ_DOWNLOAD_HELP,"</a>)"].join("")}
+                                value:["(<A target='_blank' onclick='ZaZmailAdmin.unloadHackCallback();' HREF='",location.pathname,"adminhelp/pdf/User Instructions for ZCS Import Wizard.pdf?locid=",AjxEnv.DEFAULT_LOCALE,"'>",ZaMsg.IMPORT_WIZ_DOWNLOAD_HELP,"</a>)"].join("")}
 						]
 					},
 					{type:_OUTPUT_, cssClass:"ZaDownloadText", label: null, value:ZaMsg.IMPORT_WIZ_DOWNLOAD_TEXT}/*,
@@ -174,6 +174,6 @@ ZaMigrationWizView.myXFormModifier = function(xFormObject) {
 ZaTabView.XFormModifiers["ZaMigrationWizView"].push(ZaMigrationWizView.myXFormModifier);
 
 ZaMigrationWizView.getDownloadLink =  function (link, msg) {
-    return "<a onclick=\"ZaZimbraAdmin.unloadHackCallback();\" target=\"_blank\" href=\""
+    return "<a onclick=\"ZaZmailAdmin.unloadHackCallback();\" target=\"_blank\" href=\""
             + link  + "\">" + msg + "</a>";
 }

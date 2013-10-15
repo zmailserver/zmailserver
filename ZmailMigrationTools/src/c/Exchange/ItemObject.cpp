@@ -108,8 +108,8 @@ STDMETHODIMP CItemObject::put_Parentfolder(IFolderObject *newVal)
 STDMETHODIMP CItemObject::get_IDasString(BSTR *pVal)
 {
     // TODO: Add your implementation code here
-    /*Zimbra::Util::ScopedArray<CHAR> pszEid(NULL);
-    Zimbra::Util::HexFromBin(ItemID->lpb, ItemID->cb, pszEid.get());
+    /*Zmail::Util::ScopedArray<CHAR> pszEid(NULL);
+    Zmail::Util::HexFromBin(ItemID->lpb, ItemID->cb, pszEid.get());
     LPTSTR pszCount = ULongToString(ItemID.cb);
     LPTSTR pRetVal = NULL;*/
     //LPTSTR pszHexEncoded = HexEncode(ItemID.cb, ItemID.lpb);

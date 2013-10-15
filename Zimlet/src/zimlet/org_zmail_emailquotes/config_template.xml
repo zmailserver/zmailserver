@@ -14,7 +14,7 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimletConfig name="com_zimbra_emailquotes" version="0.7">
+<zimletConfig name="org_zmail_emailquotes" version="0.7">
     <global>
         <property name="allowedDomains">www.quotedb.com</property>
     </global>

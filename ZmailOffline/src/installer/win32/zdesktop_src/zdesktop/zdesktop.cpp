@@ -17,8 +17,8 @@
 #include "jvm.h"
 #include <fstream>
 
-const char *szTitle = "Zimbra Desktop Service";
-const char *szWindowClass = "Zimbra Desktop Service Class";
+const char *szTitle = "Zmail Desktop Service";
+const char *szWindowClass = "Zmail Desktop Service Class";
 
 VirtualMachine *java;
 BOOL shutdown = FALSE;
@@ -113,7 +113,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdL
         cmdline = cmdline.substr(1, len - 2);
     if (!cfg.Load(cmdline)) {
         string err = "Unable to load config file: " + cmdline;
-        MessageBox(NULL, err.c_str(), "Zimbra Desktop Service", MB_ICONERROR | MB_OK);
+        MessageBox(NULL, err.c_str(), "Zmail Desktop Service", MB_ICONERROR | MB_OK);
         return FALSE;
     }
 
@@ -121,7 +121,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdL
     if (!mutexname.empty()) {
         HANDLE mutex = CreateMutex(NULL, TRUE, mutexname.c_str());
         if (mutex != NULL && WaitForSingleObject(mutex, 0) != WAIT_OBJECT_0) {
-            MessageBox(NULL, "Service is already running.", "Zimbra Desktop Service", MB_ICONERROR | MB_OK);         
+            MessageBox(NULL, "Service is already running.", "Zmail Desktop Service", MB_ICONERROR | MB_OK);         
             return FALSE;
         }
     }
@@ -132,7 +132,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdL
 
     ofstream anchor(cfg.Get("anchor.file").c_str(), fstream::out | fstream::trunc);
     if (!anchor.is_open()) {
-        MessageBox(NULL, "Unable to create anchor file", "Zimbra Desktop Service", MB_ICONERROR | MB_OK);
+        MessageBox(NULL, "Unable to create anchor file", "Zmail Desktop Service", MB_ICONERROR | MB_OK);
         return FALSE;
     }
     anchor << GetCurrentProcessId();
@@ -147,14 +147,14 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdL
     java = new VirtualMachine(cfg);
     if (!java->Run()) {
         string err = "Failed to start Java VM: " + java->LastError();
-        MessageBox(NULL, err.c_str(), "Zimbra Desktop Service", MB_ICONERROR | MB_OK);
+        MessageBox(NULL, err.c_str(), "Zmail Desktop Service", MB_ICONERROR | MB_OK);
         return FALSE;
     }
 
     DWORD monthrd_id;
     HANDLE monthrd_handle = CreateThread(NULL, 0, MonitorThread, (void *)&cfg, 0, &monthrd_id);
     if (monthrd_handle == NULL) {
-        MessageBox(NULL, "Unable to start monitor thread", "Zimbra Desktop Service", MB_ICONERROR | MB_OK);
+        MessageBox(NULL, "Unable to start monitor thread", "Zmail Desktop Service", MB_ICONERROR | MB_OK);
         return FALSE;
     }
 

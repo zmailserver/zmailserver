@@ -13,13 +13,13 @@
  * ***** END LICENSE BLOCK *****
  */
 
-function Com_Zimbra_Search_Google(zimlet) {
+function Com_Zmail_Search_Google(zimlet) {
 	this.zimlet = zimlet;
 	this.icon = "Google-Icon";
-	this.label = this.zimlet.getMessage("com_zimbra_search_google");
+	this.label = this.zimlet.getMessage("org_zmail_search_google");
 };
 
-Com_Zimbra_Search_Google.prototype.getSearchFormHTML =
+Com_Zmail_Search_Google.prototype.getSearchFormHTML =
 function(query) {
 	var zimlet = this.zimlet;
 	var props = {
@@ -31,4 +31,4 @@ function(query) {
 	return code;
 };
 
-Com_Zimbra_Search.registerHandler(Com_Zimbra_Search_Google);
+Com_Zmail_Search.registerHandler(Com_Zmail_Search_Google);

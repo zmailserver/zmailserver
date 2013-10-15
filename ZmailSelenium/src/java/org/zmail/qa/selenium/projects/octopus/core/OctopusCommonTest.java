@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.octopus.core;
+package org.zmail.qa.selenium.projects.octopus.core;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -32,20 +32,20 @@ import org.xml.sax.SAXException;
 
 import com.thoughtworks.selenium.DefaultSelenium;
 import com.thoughtworks.selenium.SeleniumException;
-import com.zimbra.qa.selenium.framework.core.ClientSessionFactory;
-import com.zimbra.qa.selenium.framework.ui.AbsTab;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.OctopusAccount;
-import com.zimbra.qa.selenium.framework.util.OperatingSystem;
-import com.zimbra.qa.selenium.framework.util.SleepUtil;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraAdminAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.framework.util.OperatingSystem.OsType;
-import com.zimbra.qa.selenium.projects.octopus.ui.AppOctopusClient;
-import com.zimbra.qa.selenium.projects.octopus.ui.DialogError;
-import com.zimbra.qa.selenium.projects.octopus.ui.DialogError.DialogErrorID;
+import org.zmail.qa.selenium.framework.core.ClientSessionFactory;
+import org.zmail.qa.selenium.framework.ui.AbsTab;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.OctopusAccount;
+import org.zmail.qa.selenium.framework.util.OperatingSystem;
+import org.zmail.qa.selenium.framework.util.SleepUtil;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailAdminAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.framework.util.OperatingSystem.OsType;
+import org.zmail.qa.selenium.projects.octopus.ui.AppOctopusClient;
+import org.zmail.qa.selenium.projects.octopus.ui.DialogError;
+import org.zmail.qa.selenium.projects.octopus.ui.DialogError.DialogErrorID;
 
 public class OctopusCommonTest extends CommonMethods implements CommonConstants{
 	protected static Logger logger = LogManager
@@ -55,7 +55,7 @@ public class OctopusCommonTest extends CommonMethods implements CommonConstants{
 	protected AbsTab startingPage = null;
 	protected Map<String, String> startingAccountPreferences = null;
 	protected Map<String, String> startingAccountZimletPreferences = null;
-	public final static String defaultAccountName = ZimbraSeleniumProperties
+	public final static String defaultAccountName = ZmailSeleniumProperties
 			.getUniqueString();
 	protected AppOctopusClient app;
 
@@ -75,11 +75,11 @@ public class OctopusCommonTest extends CommonMethods implements CommonConstants{
 		logger.info("commonTestBeforeSuite: start");
 
 		// Make sure there is a new default account
-		ZimbraAccount.ResetAccountZWC();
+		ZmailAccount.ResetAccountZWC();
 		osType = OperatingSystem.getOSType();
 		try {
-			ZimbraSeleniumProperties
-					.setAppType(ZimbraSeleniumProperties.AppType.OCTOPUS);
+			ZmailSeleniumProperties
+					.setAppType(ZmailSeleniumProperties.AppType.OCTOPUS);
 			_selenium = ClientSessionFactory.session().selenium();
 			//BrowserConfigurationOptions bco = new BrowserConfigurationOptions();
 			//bco.setCommandLineFlags("--disable-web-security");
@@ -97,7 +97,7 @@ public class OctopusCommonTest extends CommonMethods implements CommonConstants{
 				try {
 					logger.info("Retry #" + retry);
 					retry++;
-					_selenium.open(ZimbraSeleniumProperties.getBaseURL());
+					_selenium.open(ZmailSeleniumProperties.getBaseURL());
 					appIsReady = true;
 				} catch (SeleniumException e) {
 					if (retry == maxRetry) {
@@ -156,13 +156,13 @@ public class OctopusCommonTest extends CommonMethods implements CommonConstants{
 				settings.append(String.format("<a n='%s'>%s</a>", entry
 						.getKey(), entry.getValue()));
 			}
-			ZimbraAdminAccount.GlobalAdmin().soapSend(
-					"<ModifyAccountRequest xmlns='urn:zimbraAdmin'>" + "<id>"
-							+ ZimbraAccount.AccountZWC().ZimbraId + "</id>"
+			ZmailAdminAccount.GlobalAdmin().soapSend(
+					"<ModifyAccountRequest xmlns='urn:zmailAdmin'>" + "<id>"
+							+ ZmailAccount.AccountZWC().ZmailId + "</id>"
 							+ settings.toString() + "</ModifyAccountRequest>");
 
 			// Set the flag so the account is reset for the next test
-			ZimbraAccount.AccountZWC().accountIsDirty = true;
+			ZmailAccount.AccountZWC().accountIsDirty = true;
 		}
 
 		// If AccountZWC is not currently logged in, then login now
@@ -177,8 +177,8 @@ public class OctopusCommonTest extends CommonMethods implements CommonConstants{
 					if ( !app.zPageLogin.zIsActive()) {
 			            logger.error("Login page is not active.  Clear cookies and reload.", ex);
 			            // app.zPageLogin.sDeleteAllVisibleCookies();
-			            app.zPageLogin.sOpen(ZimbraSeleniumProperties.getLogoutURL());            
-			            app.zPageLogin.sOpen(ZimbraSeleniumProperties.getBaseURL());
+			            app.zPageLogin.sOpen(ZmailSeleniumProperties.getLogoutURL());            
+			            app.zPageLogin.sOpen(ZmailSeleniumProperties.getBaseURL());
 			        }
 				}
 			
@@ -196,7 +196,7 @@ public class OctopusCommonTest extends CommonMethods implements CommonConstants{
 				dialog.zClickButton(Button.B_OK);
 			}
 			//
-			// END REF: https://bugzilla.zimbra.com/show_bug.cgi?id=63711
+			// END REF: https://bugzilla.zmail.com/show_bug.cgi?id=63711
 
 		}
 
@@ -249,11 +249,11 @@ public class OctopusCommonTest extends CommonMethods implements CommonConstants{
 		logger.info("commonTestAfterClass: start");
 
 		// if account is considered dirty (modified),
-		ZimbraAccount currentAccount = app.zGetActiveAccount();
+		ZmailAccount currentAccount = app.zGetActiveAccount();
 		if (currentAccount != null && currentAccount.accountIsDirty
-				&& currentAccount == ZimbraAccount.AccountZWC()) {
+				&& currentAccount == ZmailAccount.AccountZWC()) {
 			// Reset the account
-			ZimbraAccount.ResetAccountZWC();
+			ZmailAccount.ResetAccountZWC();
 		}
 		logger.info("commonTestAfterClass: finish");
 	}
@@ -275,8 +275,8 @@ public class OctopusCommonTest extends CommonMethods implements CommonConstants{
 				if ( (!app.zPageOctopus.zIsActive()) && (!app.zPageLogin.zIsActive()) ) {
 		            logger.error("Neither login page nor main page were active.  Clear cookies and reload.", new Exception());
 		            // app.zPageLogin.sDeleteAllVisibleCookies();
-		            app.zPageLogin.sOpen(ZimbraSeleniumProperties.getLogoutURL());            
-		            app.zPageLogin.sOpen(ZimbraSeleniumProperties.getBaseURL());
+		            app.zPageLogin.sOpen(ZmailSeleniumProperties.getLogoutURL());            
+		            app.zPageLogin.sOpen(ZmailSeleniumProperties.getBaseURL());
 		        }
 		
 		logger.info("commonTestAfterMethod: finish");

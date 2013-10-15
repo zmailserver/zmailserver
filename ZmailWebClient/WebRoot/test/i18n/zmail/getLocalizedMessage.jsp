@@ -12,8 +12,8 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
 -->
-<%@ page import="java.io.*,com.zimbra.cs.taglib.tag.i18n.*" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
+<%@ page import="java.io.*,org.zmail.cs.taglib.tag.i18n.*" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
 <%!
 	static final String BASENAME = "/messages/test/i18n/getLocalizedMessage";
 	static final String BASENAME2 = BASENAME+"2";

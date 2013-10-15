@@ -13,14 +13,14 @@
  * ***** END LICENSE BLOCK *****
 --%>
 <%@ tag body-content="empty" %>
-<%@ attribute name="mailbox" rtexprvalue="true" required="true" type="com.zimbra.cs.taglib.bean.ZMailboxBean"%>
+<%@ attribute name="mailbox" rtexprvalue="true" required="true" type="org.zmail.cs.taglib.bean.ZMailboxBean"%>
 <%@ attribute name="selected" rtexprvalue="true" required="true" %>
 <%@ attribute name="prev" rtexprvalue="true" required="true" type="java.lang.String"  %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
-<%@ taglib prefix="app" uri="com.zimbra.htmlclient" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
+<%@ taglib prefix="app" uri="org.zmail.htmlclient" %>
 
 <table>
     <tr class='Tabs'>
@@ -42,7 +42,7 @@
                 <a href="<c:url value="/h/options?selected=composing&prev=${prev}"/>">
                     <span><fmt:message key="optionsComposing"/></span></a>
             </td>
-        <c:set var="maxSigs" value="${mailbox.accountInfo.attrs.zimbraSignatureMaxNumEntries[0]}"/>
+        <c:set var="maxSigs" value="${mailbox.accountInfo.attrs.zmailSignatureMaxNumEntries[0]}"/>
         <c:if test="${maxSigs ne 0}">
             <td class='TabSpacer'/>
             <td class='Tab ${selected=='signatures' ? 'TabSelected' : 'TabNormal'}'>
@@ -93,8 +93,8 @@
                     <span><fmt:message key="shortcuts"/></span></a>
             </td>
         </c:if>
-        <c:if test="${mailbox.attrs.zimbraStandardClientCustomPrefTabsEnabled[0] eq 'TRUE'}">
-            <c:set var="customTabs" value="${mailbox.attrs.zimbraStandardClientCustomPrefTab}"/>
+        <c:if test="${mailbox.attrs.zmailStandardClientCustomPrefTabsEnabled[0] eq 'TRUE'}">
+            <c:set var="customTabs" value="${mailbox.attrs.zmailStandardClientCustomPrefTab}"/>
             <c:forEach var="customTab" items="${customTabs}" varStatus="status">
                 <c:set var="tab" value="${fn:split(customTab,',')}"/>
                 <c:set var="tabNameKey" value="customTab_${fn:toLowerCase(fn:replace(tab[0],' ',''))}"/>

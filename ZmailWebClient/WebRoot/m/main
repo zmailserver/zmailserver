@@ -1,10 +1,10 @@
 <%@ page buffer="8kb" autoFlush="true" %>
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
-<%@ taglib prefix="mo" uri="com.zimbra.mobileclient" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
+<%@ taglib prefix="mo" uri="org.zmail.mobileclient" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
 <c:if test="${param.ui != null && param.ui == '1'}">
     <jsp:forward page="mainx" />
 </c:if>
@@ -135,7 +135,7 @@
                             <fmt:message key="MO_quota"/>:
                         </td>
                         <td class='zo_main_fvalue'>
-                            <c:set var="max" value="${mailbox.attrs.zimbraMailQuota[0]}"/>
+                            <c:set var="max" value="${mailbox.attrs.zmailMailQuota[0]}"/>
                             <fmt:message var="unlimited" key="unlimited"/>
                             <fmt:message key="MO_quotaUsage">
                                 <fmt:param value="${zm:displaySizeFractions(pageContext,mailbox.size,2)}"/>

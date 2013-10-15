@@ -2,42 +2,42 @@
 # DESTINATIONS
 
 MTA_DEST_ROOT		:= $(BUILD_ROOT)/mtabuild
-MTA_DEST_DIR		:= $(MTA_DEST_ROOT)/opt/zimbra
+MTA_DEST_DIR		:= $(MTA_DEST_ROOT)/opt/zmail
 MTA_MYSQL_DEST_DIR	:= $(MTA_DEST_DIR)/mta
 
 LDAP_DEST_ROOT		:= $(BUILD_ROOT)/ldapbuild
-LDAP_DEST_DIR		:= $(LDAP_DEST_ROOT)/opt/zimbra
+LDAP_DEST_DIR		:= $(LDAP_DEST_ROOT)/opt/zmail
 
 CORE_DEST_ROOT		:= $(BUILD_ROOT)/corebuild
-CORE_DEST_DIR		:= $(CORE_DEST_ROOT)/opt/zimbra
+CORE_DEST_DIR		:= $(CORE_DEST_ROOT)/opt/zmail
 
 SNMP_DEST_ROOT		:= $(BUILD_ROOT)/snmpbuild
-SNMP_DEST_DIR		:= $(SNMP_DEST_ROOT)/opt/zimbra
+SNMP_DEST_DIR		:= $(SNMP_DEST_ROOT)/opt/zmail
 
 STORE_DEST_ROOT		:= $(BUILD_ROOT)/storebuild
-STORE_DEST_DIR		:= $(STORE_DEST_ROOT)/opt/zimbra
+STORE_DEST_DIR		:= $(STORE_DEST_ROOT)/opt/zmail
 
 LOGGER_DEST_ROOT		:= $(BUILD_ROOT)/loggerbuild
-LOGGER_DEST_DIR		:= $(LOGGER_DEST_ROOT)/opt/zimbra/logger
+LOGGER_DEST_DIR		:= $(LOGGER_DEST_ROOT)/opt/zmail/logger
 
 APACHE_DEST_ROOT		:= $(BUILD_ROOT)/apachebuild
-APACHE_DEST_DIR		:= $(APACHE_DEST_ROOT)/opt/zimbra
+APACHE_DEST_DIR		:= $(APACHE_DEST_ROOT)/opt/zmail
 
 SPELL_DEST_ROOT		:= $(BUILD_ROOT)/spellbuild
-SPELL_DEST_DIR		:= $(SPELL_DEST_ROOT)/opt/zimbra
+SPELL_DEST_DIR		:= $(SPELL_DEST_ROOT)/opt/zmail
 
 PROXY_DEST_ROOT		:= $(BUILD_ROOT)/proxybuild
-PROXY_DEST_DIR		:= $(PROXY_DEST_ROOT)/opt/zimbra
+PROXY_DEST_DIR		:= $(PROXY_DEST_ROOT)/opt/zmail
 
 MEMCACHED_DEST_ROOT		:= $(BUILD_ROOT)/memcachedbuild
-MEMCACHED_DEST_DIR		:= $(MEMCACHED_DEST_ROOT)/opt/zimbra
+MEMCACHED_DEST_DIR		:= $(MEMCACHED_DEST_ROOT)/opt/zmail
 
-WEBAPP_DIR		:= $(STORE_DEST_ROOT)/opt/zimbra/$(MAILBOXD_DIR)/webapps
+WEBAPP_DIR		:= $(STORE_DEST_ROOT)/opt/zmail/$(MAILBOXD_DIR)/webapps
 WEBAPP_BUILD_DIR := build/dist/$(MAILBOXD_SERVER)/webapps
 WEBAPP_STAGE_DIR := $(BUILD_ROOT)/webappbuild
 
 PACKAGE_DIR			:= $(BUILD_ROOT)/$(ARCH)
-ZIMBRA_BIN_DIR		:= $(BUILD_ROOT)/../ZimbraServer/src/bin
+ZIMBRA_BIN_DIR		:= $(BUILD_ROOT)/../ZmailServer/src/bin
 
 ISYNC_DEST_ROOT := $(BUILD_ROOT)/isyncbuild
 ISYNC_DEST_DIR := $(ISYNC_DEST_ROOT)/root/Library/PreferencePanes

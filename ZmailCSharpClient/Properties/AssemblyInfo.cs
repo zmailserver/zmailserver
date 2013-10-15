@@ -19,10 +19,10 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Zimbra.Client")]
-[assembly: AssemblyDescription(".Net Zimbra Client Library")]
-[assembly: AssemblyCompany("Zimbra")]
-[assembly: AssemblyProduct("Zimbra.Client")]
+[assembly: AssemblyTitle("Zmail.Client")]
+[assembly: AssemblyDescription(".Net Zmail Client Library")]
+[assembly: AssemblyCompany("Zmail")]
+[assembly: AssemblyProduct("Zmail.Client")]
 [assembly: AssemblyCopyright("Copyright ©  2005,2006")]
 
 // Version information for an assembly consists of the following four values:

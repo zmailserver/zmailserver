@@ -14,7 +14,7 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimletConfig name="com_zimbra_ysearch" version="1.0">
+<zimletConfig name="org_zmail_ysearch" version="1.0">
     <global>
         <property name="allowedDomains">*.yahoo.com</property>
     </global>

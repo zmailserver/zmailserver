@@ -14,15 +14,15 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.readreceipt;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.readreceipt;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew;
 
 
 public class RequestReadReceiptText extends PrefGroupMailByMessageTest {
@@ -32,7 +32,7 @@ public class RequestReadReceiptText extends PrefGroupMailByMessageTest {
 		
 		
 		
-		super.startingAccountPreferences.put("zimbraPrefComposeFormat", "text");
+		super.startingAccountPreferences.put("zmailPrefComposeFormat", "text");
 		
 	}
 	
@@ -43,9 +43,9 @@ public class RequestReadReceiptText extends PrefGroupMailByMessageTest {
 		
 		// Create the message data to be sent
 		MailItem mail = new MailItem();
-		mail.dToRecipients.add(new RecipientItem(ZimbraAccount.AccountA()));
-		mail.dSubject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		mail.dBodyText = "body" + ZimbraSeleniumProperties.getUniqueString();
+		mail.dToRecipients.add(new RecipientItem(ZmailAccount.AccountA()));
+		mail.dSubject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		mail.dBodyText = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		// Open the new mail form
@@ -64,13 +64,13 @@ public class RequestReadReceiptText extends PrefGroupMailByMessageTest {
 
 		
 		// Verify the message is received with a read receipt request
-		MailItem received = MailItem.importFromSOAP(ZimbraAccount.AccountA(), "subject:("+ mail.dSubject +")");
+		MailItem received = MailItem.importFromSOAP(ZmailAccount.AccountA(), "subject:("+ mail.dSubject +")");
 
-		ZimbraAccount.AccountA().soapSend(
-					"<GetMsgRequest  xmlns='urn:zimbraMail'>"
+		ZmailAccount.AccountA().soapSend(
+					"<GetMsgRequest  xmlns='urn:zmailMail'>"
 				+		"<m id='"+ received.getId() +"'/>"
 				+	"</GetMsgRequest>");
-		String requestor = ZimbraAccount.AccountA().soapSelectValue("//mail:e[@t='n']", "a");
+		String requestor = ZmailAccount.AccountA().soapSelectValue("//mail:e[@t='n']", "a");
 
 		ZAssert.assertEquals(requestor, app.zGetActiveAccount().EmailAddress, 
 				"Verify the received message requests a read receipt from the test account");

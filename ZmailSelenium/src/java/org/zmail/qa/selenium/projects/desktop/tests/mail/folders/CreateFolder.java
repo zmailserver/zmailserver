@@ -14,23 +14,23 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.mail.folders;
+package org.zmail.qa.selenium.projects.desktop.tests.mail.folders;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.testng.annotations.*;
 
-import com.zimbra.qa.selenium.framework.items.DesktopAccountItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount.SOAP_DESTINATION_HOST_TYPE;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties.AppType;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.PageMain;
-import com.zimbra.qa.selenium.projects.desktop.ui.mail.DialogCreateFolder;
+import org.zmail.qa.selenium.framework.items.DesktopAccountItem;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.ZmailAccount.SOAP_DESTINATION_HOST_TYPE;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties.AppType;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.PageMain;
+import org.zmail.qa.selenium.projects.desktop.ui.mail.DialogCreateFolder;
 
 public class CreateFolder extends AjaxCommonTest {
 
@@ -49,7 +49,7 @@ public class CreateFolder extends AjaxCommonTest {
 
 	@BeforeMethod(alwaysRun = true)
 	public void setParameters() {
-		_soapDestination = ZimbraSeleniumProperties.getAppType() == AppType.DESKTOP ? SOAP_DESTINATION_HOST_TYPE.CLIENT
+		_soapDestination = ZmailSeleniumProperties.getAppType() == AppType.DESKTOP ? SOAP_DESTINATION_HOST_TYPE.CLIENT
 				: SOAP_DESTINATION_HOST_TYPE.SERVER;
 	}
 
@@ -58,7 +58,7 @@ public class CreateFolder extends AjaxCommonTest {
 		Shortcut shortcut = Shortcut.S_NEWFOLDER;
 
 		// Set the new folder name
-		_folderName = "folder" + ZimbraSeleniumProperties.getUniqueString();
+		_folderName = "folder" + ZmailSeleniumProperties.getUniqueString();
 		DialogCreateFolder dialog = (DialogCreateFolder) app.zPageMail
 				.zKeyboardShortcut(shortcut);
 		ZAssert.assertNotNull(dialog, "Verify the new dialog opened");
@@ -91,7 +91,7 @@ public class CreateFolder extends AjaxCommonTest {
 
 	@Test(description = "Create a new folder using context menu from root folder", groups = { "functional" })
 	public void CreateFolder_03() throws HarnessException {
-		_folderName = "folder" + ZimbraSeleniumProperties.getUniqueString();
+		_folderName = "folder" + ZmailSeleniumProperties.getUniqueString();
 		FolderItem folderItem = FolderItem.importFromSOAP(app
 				.zGetActiveAccount(), FolderItem.SystemFolder.UserRoot,
 				_soapDestination, app.zGetActiveAccount().EmailAddress);
@@ -125,7 +125,7 @@ public class CreateFolder extends AjaxCommonTest {
 	@Test(description = "Create a new folder using mail app New -> New Folder", groups = { "sanity" })
 	public void CreateFolder_04() throws HarnessException {
 		// Set the new folder name
-	   _folderName = "folder" + ZimbraSeleniumProperties.getUniqueString();
+	   _folderName = "folder" + ZmailSeleniumProperties.getUniqueString();
 
 		// Create a new folder in the inbox
 		// using the context menu + New Folder
@@ -167,7 +167,7 @@ public class CreateFolder extends AjaxCommonTest {
 	   String rssUrl="http://zqa-099.eng.vmware.com:8080/rssLatest";
 
 	   // Set the new folder name
-	   _folderName = "folderRSS" + ZimbraSeleniumProperties.getUniqueString();
+	   _folderName = "folderRSS" + ZmailSeleniumProperties.getUniqueString();
 	   DialogCreateFolder dialog = (DialogCreateFolder) app.zPageMail.zKeyboardShortcut(shortcut);
 	   ZAssert.assertNotNull(dialog, "Verify the new dialog opened");
 
@@ -203,7 +203,7 @@ public class CreateFolder extends AjaxCommonTest {
 	   ZAssert.assertNotNull(folder, "Verify the new RSS folder was created");
 	   ZAssert.assertEquals(folder.getName(), _folderName, "Verify the server and client RSS folder names match");
 	   app.zGetActiveAccount().soapSend(
-	         "<GetFolderRequest xmlns='urn:zimbraMail'>"
+	         "<GetFolderRequest xmlns='urn:zmailMail'>"
 	         +		"<folder id='" + folder.getId() + "'/>"
 				+	"</GetFolderRequest>");
 	   String url = app.zGetActiveAccount().soapSelectValue("//mail:folder[@name='" + folder.getName() + "']", "url");
@@ -212,7 +212,7 @@ public class CreateFolder extends AjaxCommonTest {
 	   ZAssert.assertEquals(url, rssUrl, "Verify the url of the rss folder correct");
 	}
 
-	private void _nonZimbraAccountSetup(ZimbraAccount account) throws HarnessException {
+	private void _nonZmailAccountSetup(ZmailAccount account) throws HarnessException {
 	   account.authenticateToMailClientHost();
 	   app.zPageLogin.zLogin(account);
       super.startingPage.zNavigateTo();
@@ -222,26 +222,26 @@ public class CreateFolder extends AjaxCommonTest {
 	}
 
 
-	@Test(description = "Create Inbox's subfolder for IMAP Zimbra Account through ZD", groups = { "smoke" })
-	public void CreateInboxSubfolderImapZimbraAccountThroughZD()
+	@Test(description = "Create Inbox's subfolder for IMAP Zmail Account through ZD", groups = { "smoke" })
+	public void CreateInboxSubfolderImapZmailAccountThroughZD()
 	throws HarnessException {
 	   app.zPageLogin.zNavigateTo();
 	   app.zPageLogin.zRemoveAccount();
-	   ZimbraAccount zcsAccount = ZimbraAccount.AccountZDC();
+	   ZmailAccount zcsAccount = ZmailAccount.AccountZDC();
 
-	   DesktopAccountItem accountItem = app.zPageAddNewAccount.zAddZimbraImapAccountThruUI(
+	   DesktopAccountItem accountItem = app.zPageAddNewAccount.zAddZmailImapAccountThruUI(
 	         AjaxCommonTest.defaultAccountName,
-	         ZimbraAccount.AccountZDC().EmailAddress,
-            ZimbraAccount.AccountZDC().Password,
-            ZimbraSeleniumProperties.getStringProperty("server.host", "localhost"),
+	         ZmailAccount.AccountZDC().EmailAddress,
+            ZmailAccount.AccountZDC().Password,
+            ZmailSeleniumProperties.getStringProperty("server.host", "localhost"),
             true,
             "465");
 
-	   ZimbraAccount account = new ZimbraAccount(accountItem.emailAddress,
+	   ZmailAccount account = new ZmailAccount(accountItem.emailAddress,
 	         accountItem.password);
-	   _nonZimbraAccountSetup(account);
+	   _nonZmailAccountSetup(account);
 
-	   _folderName = "folder" + ZimbraSeleniumProperties.getUniqueString();
+	   _folderName = "folder" + ZmailSeleniumProperties.getUniqueString();
 
       FolderItem folderItem = FolderItem.importFromSOAP(app
             .zGetActiveAccount(), FolderItem.SystemFolder.Inbox,
@@ -293,26 +293,26 @@ public class CreateFolder extends AjaxCommonTest {
             "Verify the parent folder on ZCS server matches");
 	}
 
-	@Test(description = "Create Inbox's subfolder for POP Zimbra Account through ZD", groups = { "smoke" })
-	public void CreateInboxSubfolderPopZimbraAccountThroughZD()
+	@Test(description = "Create Inbox's subfolder for POP Zmail Account through ZD", groups = { "smoke" })
+	public void CreateInboxSubfolderPopZmailAccountThroughZD()
 	throws HarnessException {
 	   app.zPageLogin.zNavigateTo();
 	   app.zPageLogin.zRemoveAccount();
-	   ZimbraAccount zcsAccount = ZimbraAccount.AccountZDC();
+	   ZmailAccount zcsAccount = ZmailAccount.AccountZDC();
 
-	   DesktopAccountItem accountItem = app.zPageAddNewAccount.zAddZimbraPopAccountThruUI(
+	   DesktopAccountItem accountItem = app.zPageAddNewAccount.zAddZmailPopAccountThruUI(
 	         AjaxCommonTest.defaultAccountName,
-	         ZimbraAccount.AccountZDC().EmailAddress,
-	         ZimbraAccount.AccountZDC().Password,
-	         ZimbraSeleniumProperties.getStringProperty("server.host", "localhost"),
+	         ZmailAccount.AccountZDC().EmailAddress,
+	         ZmailAccount.AccountZDC().Password,
+	         ZmailSeleniumProperties.getStringProperty("server.host", "localhost"),
 	         true,
 	         "465");
 
-	   ZimbraAccount account = new ZimbraAccount(accountItem.emailAddress,
+	   ZmailAccount account = new ZmailAccount(accountItem.emailAddress,
 	         accountItem.password);
-	   _nonZimbraAccountSetup(account);
+	   _nonZmailAccountSetup(account);
 
-	   _folderName = "folder" + ZimbraSeleniumProperties.getUniqueString();
+	   _folderName = "folder" + ZmailSeleniumProperties.getUniqueString();
 
 	   FolderItem folderItem = FolderItem.importFromSOAP(app
 	         .zGetActiveAccount(), FolderItem.SystemFolder.Inbox,
@@ -357,26 +357,26 @@ public class CreateFolder extends AjaxCommonTest {
 	   ZAssert.assertNull(folder, "Verify the folder in ZCS server is not created");
 	}
 
-	@Test(description = "Create mail folder for IMAP Zimbra Account through ZD", groups = { "smoke" })
-	public void CreateMailFolderImapZimbraAccountThroughZD()
+	@Test(description = "Create mail folder for IMAP Zmail Account through ZD", groups = { "smoke" })
+	public void CreateMailFolderImapZmailAccountThroughZD()
 	throws HarnessException {
 	   app.zPageLogin.zNavigateTo();
 	   app.zPageLogin.zRemoveAccount();
-	   ZimbraAccount zcsAccount = ZimbraAccount.AccountZDC();
+	   ZmailAccount zcsAccount = ZmailAccount.AccountZDC();
 
-	   DesktopAccountItem accountItem = app.zPageAddNewAccount.zAddZimbraImapAccountThruUI(
+	   DesktopAccountItem accountItem = app.zPageAddNewAccount.zAddZmailImapAccountThruUI(
 	         AjaxCommonTest.defaultAccountName,
-	         ZimbraAccount.AccountZDC().EmailAddress,
-	         ZimbraAccount.AccountZDC().Password,
-	         ZimbraSeleniumProperties.getStringProperty("server.host", "localhost"),
+	         ZmailAccount.AccountZDC().EmailAddress,
+	         ZmailAccount.AccountZDC().Password,
+	         ZmailSeleniumProperties.getStringProperty("server.host", "localhost"),
 	         true,
 	         "465");
 
-	   ZimbraAccount account = new ZimbraAccount(accountItem.emailAddress,
+	   ZmailAccount account = new ZmailAccount(accountItem.emailAddress,
 	         accountItem.password);
-	   _nonZimbraAccountSetup(account);
+	   _nonZmailAccountSetup(account);
 
-	   _folderName = "folder" + ZimbraSeleniumProperties.getUniqueString();
+	   _folderName = "folder" + ZmailSeleniumProperties.getUniqueString();
 
 	   FolderItem folderItem = FolderItem.importFromSOAP(app
 	         .zGetActiveAccount(), FolderItem.SystemFolder.UserRoot,
@@ -428,26 +428,26 @@ public class CreateFolder extends AjaxCommonTest {
             "Verify the parent folder on ZCS server matches");
 	}
 
-	@Test(description = "Create mail folder for POP Zimbra Account through ZD", groups = { "smoke" })
-	public void CreateMailFolderPopZimbraAccountThroughZD()
+	@Test(description = "Create mail folder for POP Zmail Account through ZD", groups = { "smoke" })
+	public void CreateMailFolderPopZmailAccountThroughZD()
 	throws HarnessException {
 	   app.zPageLogin.zNavigateTo();
 	   app.zPageLogin.zRemoveAccount();
-	   ZimbraAccount zcsAccount = ZimbraAccount.AccountZDC();
+	   ZmailAccount zcsAccount = ZmailAccount.AccountZDC();
 
-	   DesktopAccountItem accountItem = app.zPageAddNewAccount.zAddZimbraPopAccountThruUI(
+	   DesktopAccountItem accountItem = app.zPageAddNewAccount.zAddZmailPopAccountThruUI(
 	         AjaxCommonTest.defaultAccountName,
-	         ZimbraAccount.AccountZDC().EmailAddress,
-	         ZimbraAccount.AccountZDC().Password,
-	         ZimbraSeleniumProperties.getStringProperty("server.host", "localhost"),
+	         ZmailAccount.AccountZDC().EmailAddress,
+	         ZmailAccount.AccountZDC().Password,
+	         ZmailSeleniumProperties.getStringProperty("server.host", "localhost"),
 	         true,
 	         "465");
 
-	   ZimbraAccount account = new ZimbraAccount(accountItem.emailAddress,
+	   ZmailAccount account = new ZmailAccount(accountItem.emailAddress,
 	         accountItem.password);
-	   _nonZimbraAccountSetup(account);
+	   _nonZmailAccountSetup(account);
 
-	   _folderName = "folder" + ZimbraSeleniumProperties.getUniqueString();
+	   _folderName = "folder" + ZmailSeleniumProperties.getUniqueString();
 
 	   FolderItem folderItem = FolderItem.importFromSOAP(app
 	         .zGetActiveAccount(), FolderItem.SystemFolder.UserRoot,
@@ -492,26 +492,26 @@ public class CreateFolder extends AjaxCommonTest {
 	   ZAssert.assertNull(folder, "Verify the folder in ZCS server is not created");
 	}
 
-	@Test(description = "Create Inbox's subfolder for IMAP Zimbra Account through ZCS", groups = { "smoke" })
-	public void CreateInboxSubfolderImapZimbraAccountThroughZCS()
+	@Test(description = "Create Inbox's subfolder for IMAP Zmail Account through ZCS", groups = { "smoke" })
+	public void CreateInboxSubfolderImapZmailAccountThroughZCS()
 	throws HarnessException {
 	   app.zPageLogin.zNavigateTo();
 	   app.zPageLogin.zRemoveAccount();
-	   ZimbraAccount zcsAccount = ZimbraAccount.AccountZDC();
+	   ZmailAccount zcsAccount = ZmailAccount.AccountZDC();
 
-	   DesktopAccountItem accountItem = app.zPageAddNewAccount.zAddZimbraImapAccountThruUI(
+	   DesktopAccountItem accountItem = app.zPageAddNewAccount.zAddZmailImapAccountThruUI(
 	         AjaxCommonTest.defaultAccountName,
-	         ZimbraAccount.AccountZDC().EmailAddress,
-	         ZimbraAccount.AccountZDC().Password,
-	         ZimbraSeleniumProperties.getStringProperty("server.host", "localhost"),
+	         ZmailAccount.AccountZDC().EmailAddress,
+	         ZmailAccount.AccountZDC().Password,
+	         ZmailSeleniumProperties.getStringProperty("server.host", "localhost"),
 	         true,
 	         "465");
 
-	   ZimbraAccount account = new ZimbraAccount(accountItem.emailAddress,
+	   ZmailAccount account = new ZmailAccount(accountItem.emailAddress,
 	         accountItem.password);
-	   _nonZimbraAccountSetup(account);
+	   _nonZmailAccountSetup(account);
 
-	   _folderName = "folder" + ZimbraSeleniumProperties.getUniqueString();
+	   _folderName = "folder" + ZmailSeleniumProperties.getUniqueString();
 
 	   FolderItem inbox = FolderItem.importFromSOAP(zcsAccount,
 	         SystemFolder.Inbox);
@@ -520,7 +520,7 @@ public class CreateFolder extends AjaxCommonTest {
             _soapDestination, app.zGetActiveAccount().EmailAddress);
 
 	   zcsAccount.soapSend(
-            "<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+            "<CreateFolderRequest xmlns='urn:zmailMail'>" +
             "<folder name='"+ _folderName + "' l='"+ inbox.getId() + "'/>" +
             "</CreateFolderRequest>");
 
@@ -558,32 +558,32 @@ public class CreateFolder extends AjaxCommonTest {
 	         inboxZD.getName(), "Verify the parent folder on ZD server matches");
 	}
 
-	@Test(description = "Create Inbox's subfolder for POP Zimbra Account through ZCS", groups = { "smoke" })
-   public void CreateInboxSubfolderPopZimbraAccountThroughZCS()
+	@Test(description = "Create Inbox's subfolder for POP Zmail Account through ZCS", groups = { "smoke" })
+   public void CreateInboxSubfolderPopZmailAccountThroughZCS()
    throws HarnessException {
       app.zPageLogin.zNavigateTo();
       app.zPageLogin.zRemoveAccount();
-      ZimbraAccount zcsAccount = ZimbraAccount.AccountZDC();
+      ZmailAccount zcsAccount = ZmailAccount.AccountZDC();
 
-      DesktopAccountItem accountItem = app.zPageAddNewAccount.zAddZimbraPopAccountThruUI(
+      DesktopAccountItem accountItem = app.zPageAddNewAccount.zAddZmailPopAccountThruUI(
             AjaxCommonTest.defaultAccountName,
-            ZimbraAccount.AccountZDC().EmailAddress,
-            ZimbraAccount.AccountZDC().Password,
-            ZimbraSeleniumProperties.getStringProperty("server.host", "localhost"),
+            ZmailAccount.AccountZDC().EmailAddress,
+            ZmailAccount.AccountZDC().Password,
+            ZmailSeleniumProperties.getStringProperty("server.host", "localhost"),
             true,
             "465");
 
-      ZimbraAccount account = new ZimbraAccount(accountItem.emailAddress,
+      ZmailAccount account = new ZmailAccount(accountItem.emailAddress,
             accountItem.password);
-      _nonZimbraAccountSetup(account);
+      _nonZmailAccountSetup(account);
 
-      _folderName = "folder" + ZimbraSeleniumProperties.getUniqueString();
+      _folderName = "folder" + ZmailSeleniumProperties.getUniqueString();
 
       FolderItem inbox = FolderItem.importFromSOAP(zcsAccount,
             SystemFolder.Inbox);
 
       zcsAccount.soapSend(
-            "<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+            "<CreateFolderRequest xmlns='urn:zmailMail'>" +
             "<folder name='"+ _folderName + "' l='"+ inbox.getId() + "'/>" +
             "</CreateFolderRequest>");
 
@@ -623,26 +623,26 @@ public class CreateFolder extends AjaxCommonTest {
       ZAssert.assertNull(desktopFolder, "Verify the folder in ZD server is not created");
    }
 
-	@Test(description = "Create mail folder for IMAP Zimbra Account through ZCS", groups = { "smoke" })
-	public void CreateMailFolderImapZimbraAccountThroughZCS()
+	@Test(description = "Create mail folder for IMAP Zmail Account through ZCS", groups = { "smoke" })
+	public void CreateMailFolderImapZmailAccountThroughZCS()
 	throws HarnessException {
 	   app.zPageLogin.zNavigateTo();
 	   app.zPageLogin.zRemoveAccount();
-	   ZimbraAccount zcsAccount = ZimbraAccount.AccountZDC();
+	   ZmailAccount zcsAccount = ZmailAccount.AccountZDC();
 
-	   DesktopAccountItem accountItem = app.zPageAddNewAccount.zAddZimbraImapAccountThruUI(
+	   DesktopAccountItem accountItem = app.zPageAddNewAccount.zAddZmailImapAccountThruUI(
 	         AjaxCommonTest.defaultAccountName,
-	         ZimbraAccount.AccountZDC().EmailAddress,
-	         ZimbraAccount.AccountZDC().Password,
-	         ZimbraSeleniumProperties.getStringProperty("server.host", "localhost"),
+	         ZmailAccount.AccountZDC().EmailAddress,
+	         ZmailAccount.AccountZDC().Password,
+	         ZmailSeleniumProperties.getStringProperty("server.host", "localhost"),
 	         true,
 	         "465");
 
-	   ZimbraAccount account = new ZimbraAccount(accountItem.emailAddress,
+	   ZmailAccount account = new ZmailAccount(accountItem.emailAddress,
 	         accountItem.password);
-	   _nonZimbraAccountSetup(account);
+	   _nonZmailAccountSetup(account);
 
-	   _folderName = "folder" + ZimbraSeleniumProperties.getUniqueString();
+	   _folderName = "folder" + ZmailSeleniumProperties.getUniqueString();
 
 	   FolderItem userRoot = FolderItem.importFromSOAP(zcsAccount,
 	         SystemFolder.UserRoot);
@@ -651,7 +651,7 @@ public class CreateFolder extends AjaxCommonTest {
 	         _soapDestination, app.zGetActiveAccount().EmailAddress);
 
 	   zcsAccount.soapSend(
-	         "<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+	         "<CreateFolderRequest xmlns='urn:zmailMail'>" +
 	         "<folder name='"+ _folderName + "' l='"+ userRoot.getId() + "'/>" +
 	         "</CreateFolderRequest>");
 
@@ -689,32 +689,32 @@ public class CreateFolder extends AjaxCommonTest {
             userRootZD.getName(), "Verify the parent folder on ZD server matches");
 	}
 
-   @Test(description = "Create mail folder for POP Zimbra Account through ZCS", groups = { "smoke" })
-   public void CreateMailFolderPopZimbraAccountThroughZCS()
+   @Test(description = "Create mail folder for POP Zmail Account through ZCS", groups = { "smoke" })
+   public void CreateMailFolderPopZmailAccountThroughZCS()
    throws HarnessException {
       app.zPageLogin.zNavigateTo();
       app.zPageLogin.zRemoveAccount();
-      ZimbraAccount zcsAccount = ZimbraAccount.AccountZDC();
+      ZmailAccount zcsAccount = ZmailAccount.AccountZDC();
 
-      DesktopAccountItem accountItem = app.zPageAddNewAccount.zAddZimbraPopAccountThruUI(
+      DesktopAccountItem accountItem = app.zPageAddNewAccount.zAddZmailPopAccountThruUI(
             AjaxCommonTest.defaultAccountName,
-            ZimbraAccount.AccountZDC().EmailAddress,
-            ZimbraAccount.AccountZDC().Password,
-            ZimbraSeleniumProperties.getStringProperty("server.host", "localhost"),
+            ZmailAccount.AccountZDC().EmailAddress,
+            ZmailAccount.AccountZDC().Password,
+            ZmailSeleniumProperties.getStringProperty("server.host", "localhost"),
             true,
             "465");
 
-      ZimbraAccount account = new ZimbraAccount(accountItem.emailAddress,
+      ZmailAccount account = new ZmailAccount(accountItem.emailAddress,
             accountItem.password);
-      _nonZimbraAccountSetup(account);
+      _nonZmailAccountSetup(account);
 
-      _folderName = "folder" + ZimbraSeleniumProperties.getUniqueString();
+      _folderName = "folder" + ZmailSeleniumProperties.getUniqueString();
 
       FolderItem userRoot = FolderItem.importFromSOAP(zcsAccount,
             SystemFolder.UserRoot);
 
       zcsAccount.soapSend(
-            "<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+            "<CreateFolderRequest xmlns='urn:zmailMail'>" +
             "<folder name='"+ _folderName + "' l='"+ userRoot.getId() + "'/>" +
             "</CreateFolderRequest>");
 
@@ -755,12 +755,12 @@ public class CreateFolder extends AjaxCommonTest {
 
    @Test(description = "Create a new local folder using context menu", groups = { "smoke" })
    public void createLocalMailFolderThroughContextMenu() throws HarnessException {
-      _folderName = "folder" + ZimbraSeleniumProperties.getUniqueString();
+      _folderName = "folder" + ZmailSeleniumProperties.getUniqueString();
 
       FolderItem folderItem = FolderItem.importFromSOAP(app.zGetActiveAccount(),
             SystemFolder.UserRoot,
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
 
       DialogCreateFolder createFolderDialog = (DialogCreateFolder) app.zPageMail
             .zListItem(Action.A_RIGHTCLICK, Button.B_TREE_NEWFOLDER,
@@ -768,15 +768,15 @@ public class CreateFolder extends AjaxCommonTest {
       createFolderDialog.zEnterFolderName(_folderName);
       createFolderDialog.zClickButton(Button.B_OK);
       _folderIsCreated = true;
-      _accountName = ZimbraAccount.clientAccountName;
+      _accountName = ZmailAccount.clientAccountName;
 
       // Make sure the folder was created on the Desktop Server
       FolderItem desktopFolder = FolderItem.importFromSOAP(app
             .zGetActiveAccount(), _folderName,
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
       FolderItem desktopFolderParent = desktopFolder.getParentFolder(app.zGetActiveAccount(),
-            _soapDestination, ZimbraAccount.clientAccountName);
+            _soapDestination, ZmailAccount.clientAccountName);
 
       ZAssert.assertNotNull(desktopFolder, "Verify the folder is created on ZD Client's Local Folders");
       ZAssert.assertEquals(desktopFolder.getName(), _folderName,
@@ -788,30 +788,30 @@ public class CreateFolder extends AjaxCommonTest {
 
    @Test(description = "Create a new local subfolder using context menu", groups = { "smoke" })
    public void createLocalMailSubfolderThroughContextMenu() throws HarnessException {
-      _folderName = "folder" + ZimbraSeleniumProperties.getUniqueString();
+      _folderName = "folder" + ZmailSeleniumProperties.getUniqueString();
 
-      String subfolderName = "folder" + ZimbraSeleniumProperties.getUniqueString();
+      String subfolderName = "folder" + ZmailSeleniumProperties.getUniqueString();
 
       // Create a folder under local to create the subfolder
       //
       FolderItem rootLocalFolder = FolderItem.importFromSOAP(app.zGetActiveAccount(),
-            SystemFolder.UserRoot, SOAP_DESTINATION_HOST_TYPE.CLIENT, ZimbraAccount.clientAccountName);
+            SystemFolder.UserRoot, SOAP_DESTINATION_HOST_TYPE.CLIENT, ZmailAccount.clientAccountName);
 
       app.zGetActiveAccount().soapSend(
-            "<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+            "<CreateFolderRequest xmlns='urn:zmailMail'>" +
             "<folder name='" + _folderName +"' l='"+ rootLocalFolder.getId() +"'/>" +
             "</CreateFolderRequest>",
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
 
       // Make sure the folder was created on the Desktop Server
       FolderItem parentFolderItem = FolderItem.importFromSOAP(app
             .zGetActiveAccount(), _folderName,
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
 
       _folderIsCreated = true;
-      _accountName = ZimbraAccount.clientAccountName;
+      _accountName = ZmailAccount.clientAccountName;
 
       DialogCreateFolder createFolderDialog = (DialogCreateFolder) app.zPageMail
             .zListItem(Action.A_RIGHTCLICK, Button.B_TREE_NEWFOLDER,
@@ -823,9 +823,9 @@ public class CreateFolder extends AjaxCommonTest {
       FolderItem desktopFolder = FolderItem.importFromSOAP(app
             .zGetActiveAccount(), subfolderName,
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
       FolderItem desktopFolderParent = desktopFolder.getParentFolder(app.zGetActiveAccount(),
-            _soapDestination, ZimbraAccount.clientAccountName);
+            _soapDestination, ZmailAccount.clientAccountName);
 
       ZAssert.assertNotNull(desktopFolder, "Verify the subfolder is created on ZD Client's Local Folders");
       ZAssert.assertEquals(desktopFolder.getName(), subfolderName,
@@ -837,30 +837,30 @@ public class CreateFolder extends AjaxCommonTest {
 
    @Test(description = "Create a new local folder through SOAP to ZD Client", groups = { "smoke" })
    public void createLocalMailFolderThroughSOAP() throws HarnessException {
-      _folderName = "folder" + ZimbraSeleniumProperties.getUniqueString();
+      _folderName = "folder" + ZmailSeleniumProperties.getUniqueString();
 
       FolderItem folderItem = FolderItem.importFromSOAP(app.zGetActiveAccount(),
             SystemFolder.UserRoot,
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
 
       app.zGetActiveAccount().soapSend(
-            "<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+            "<CreateFolderRequest xmlns='urn:zmailMail'>" +
             "<folder name='" + _folderName +"' l='"+ folderItem.getId() +"'/>" +
             "</CreateFolderRequest>",
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
 
       _folderIsCreated = true;
-      _accountName = ZimbraAccount.clientAccountName;
+      _accountName = ZmailAccount.clientAccountName;
 
       // Make sure the folder was created on the Desktop Server
       FolderItem desktopFolder = FolderItem.importFromSOAP(app
             .zGetActiveAccount(), _folderName,
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
       FolderItem desktopFolderParent = desktopFolder.getParentFolder(app.zGetActiveAccount(),
-            _soapDestination, ZimbraAccount.clientAccountName);
+            _soapDestination, ZmailAccount.clientAccountName);
 
       ZAssert.assertNotNull(desktopFolder, "Verify the folder is created on ZD Client's Local Folders");
       ZAssert.assertEquals(desktopFolder.getName(), _folderName,
@@ -872,45 +872,45 @@ public class CreateFolder extends AjaxCommonTest {
 
    @Test(description = "Create a new local subfolder using SOAP request to ZD client", groups = { "smoke" })
    public void createLocalMailSubfolderThroughSOAP() throws HarnessException {
-      _folderName = "folder" + ZimbraSeleniumProperties.getUniqueString();
+      _folderName = "folder" + ZmailSeleniumProperties.getUniqueString();
 
-      String subfolderName = "folder" + ZimbraSeleniumProperties.getUniqueString();
+      String subfolderName = "folder" + ZmailSeleniumProperties.getUniqueString();
 
       // Create a folder under local to create the subfolder
       //
       FolderItem rootLocalFolder = FolderItem.importFromSOAP(app.zGetActiveAccount(),
-            SystemFolder.UserRoot, SOAP_DESTINATION_HOST_TYPE.CLIENT, ZimbraAccount.clientAccountName);
+            SystemFolder.UserRoot, SOAP_DESTINATION_HOST_TYPE.CLIENT, ZmailAccount.clientAccountName);
 
       app.zGetActiveAccount().soapSend(
-            "<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+            "<CreateFolderRequest xmlns='urn:zmailMail'>" +
             "<folder name='" + _folderName +"' l='"+ rootLocalFolder.getId() +"'/>" +
             "</CreateFolderRequest>",
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
 
       // Make sure the folder was created on the Desktop Server
       FolderItem parentFolderItem = FolderItem.importFromSOAP(app
             .zGetActiveAccount(), _folderName,
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
 
       _folderIsCreated = true;
-      _accountName = ZimbraAccount.clientAccountName;
+      _accountName = ZmailAccount.clientAccountName;
 
       app.zGetActiveAccount().soapSend(
-            "<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+            "<CreateFolderRequest xmlns='urn:zmailMail'>" +
             "<folder name='" + subfolderName +"' l='"+ parentFolderItem.getId() +"'/>" +
             "</CreateFolderRequest>",
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
 
       // Make sure the folder was created on the Desktop Server
       FolderItem desktopFolder = FolderItem.importFromSOAP(app
             .zGetActiveAccount(), subfolderName,
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
       FolderItem desktopFolderParent = desktopFolder.getParentFolder(app.zGetActiveAccount(),
-            _soapDestination, ZimbraAccount.clientAccountName);
+            _soapDestination, ZmailAccount.clientAccountName);
 
       ZAssert.assertNotNull(desktopFolder, "Verify the subfolder is created on ZD Client's Local Folders");
       ZAssert.assertEquals(desktopFolder.getName(), subfolderName,

@@ -20,17 +20,17 @@
  * 
  * @author Parag Shah.
  */
-function com_zimbra_collector_HandlerObject() {
+function org_zmail_collector_HandlerObject() {
 }
 
-com_zimbra_collector_HandlerObject.prototype = new ZmZimletBase();
-com_zimbra_collector_HandlerObject.prototype.constructor = com_zimbra_collector_HandlerObject;
+org_zmail_collector_HandlerObject.prototype = new ZmZimletBase();
+org_zmail_collector_HandlerObject.prototype.constructor = org_zmail_collector_HandlerObject;
 
 /**
  * Simplify handler object
  *
  */
-var CollectorZimlet = com_zimbra_collector_HandlerObject;
+var CollectorZimlet = org_zmail_collector_HandlerObject;
 
 /**
  * Defines the contact checkbox.
@@ -160,7 +160,7 @@ function(ev) {
 	for (var i = 0; i < checkedParts.length; i++) {
 		if (checkedParts[i].checked) {
 			if (!soapDoc) {
-				soapDoc = AjxSoapDoc.create("BatchRequest", "urn:zimbra");
+				soapDoc = AjxSoapDoc.create("BatchRequest", "urn:zmail");
 				soapDoc.setMethodAttribute("onerror", "continue");
 			}
 
@@ -168,7 +168,7 @@ function(ev) {
 			var contact = new ZmContact(null);
 			contact.initFromEmail(this._participants[i]);
 
-			var createContactReq = soapDoc.set("CreateContactRequest",null,null,"urn:zimbraMail");
+			var createContactReq = soapDoc.set("CreateContactRequest",null,null,"urn:zmailMail");
 			var doc = soapDoc.getDoc();
 			var cn = doc.createElement("cn");
 			createContactReq.appendChild(cn);

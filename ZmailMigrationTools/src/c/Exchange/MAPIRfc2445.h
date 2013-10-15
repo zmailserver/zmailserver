@@ -149,8 +149,8 @@ enum OutlookImportance
 class MAPIRfc2445
 {
 protected:
-    Zimbra::MAPI::MAPIMessage *m_mapiMessage;
-    Zimbra::MAPI::MAPISession *m_session;
+    Zmail::MAPI::MAPIMessage *m_mapiMessage;
+    Zmail::MAPI::MAPISession *m_session;
     LPMESSAGE m_pMessage;
     LPSPropValue m_pPropVals;
 
@@ -175,7 +175,7 @@ protected:
     void IntToWstring(int src, wstring& dest);
 
 public:
-    MAPIRfc2445(Zimbra::MAPI::MAPISession &session, Zimbra::MAPI::MAPIMessage &mMessage);
+    MAPIRfc2445(Zmail::MAPI::MAPISession &session, Zmail::MAPI::MAPIMessage &mMessage);
     ~MAPIRfc2445();
 
     vector<AttachmentInfo*> GetAttachmentInfo();

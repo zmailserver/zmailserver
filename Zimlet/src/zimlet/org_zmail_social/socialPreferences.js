@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-function com_zimbra_socialPreferences(zimlet) {
+function org_zmail_socialPreferences(zimlet) {
 	this.zimlet = zimlet;
 	this.shell = this.zimlet.getShell();
 	this._fbNeedPermCount = 0;
@@ -36,7 +36,7 @@ function com_zimbra_socialPreferences(zimlet) {
 	}
 }
 
-com_zimbra_socialPreferences.prototype._showManageAccntsDlg = function() {
+org_zmail_socialPreferences.prototype._showManageAccntsDlg = function() {
 	//if zimlet dialog already exists...
 	if (this._manageAccntsDlg) {
 		this._updateAccountsTable();
@@ -60,7 +60,7 @@ com_zimbra_socialPreferences.prototype._showManageAccntsDlg = function() {
 
 
 
-com_zimbra_socialPreferences.prototype._addPrefButtons =
+org_zmail_socialPreferences.prototype._addPrefButtons =
 function() {
 	/*var addTwitterBtn = new DwtButton({parent:this.zimlet.getShell()});
 	addTwitterBtn.setText(this.zimlet.getMessage("addTwitterAcc"));
@@ -106,29 +106,29 @@ function() {
 	document.getElementById("social_pref_refreshTableCell").appendChild(refreshTableBtn.getHtmlElement());
 };
 
-com_zimbra_socialPreferences.prototype._refreshTableBtnListener =
+org_zmail_socialPreferences.prototype._refreshTableBtnListener =
 function() {
 	this._updateAllFBPermissions();
 };
 
-com_zimbra_socialPreferences.prototype._addTwitterBtnListener =
+org_zmail_socialPreferences.prototype._addTwitterBtnListener =
 function() {
 	this.zimlet.twitter.performOAuth();
 };
 
-com_zimbra_socialPreferences.prototype.addSocialCastAccount =
+org_zmail_socialPreferences.prototype.addSocialCastAccount =
 function(email, pwd, server) {
 	this.zimlet.socialcast.addAccount(email, pwd, server);
 };
 
-com_zimbra_socialPreferences.prototype._addFacebookBtnListener =
+org_zmail_socialPreferences.prototype._addFacebookBtnListener =
 function() {
 	this.reloginToFB = true;
 	//this.showAddFBInfoDlg();
 	this.zimlet.facebook.showFBWindow();
 };
 
-com_zimbra_socialPreferences.prototype._deleteAccountBtnListener =
+org_zmail_socialPreferences.prototype._deleteAccountBtnListener =
 function() {
 	var needToUpdateAllAccounts = false;
 	var needToUpdateSocialcastAccounts = false;
@@ -171,7 +171,7 @@ function() {
 	}
 };
 
-com_zimbra_socialPreferences.prototype._createManageeAccntsView =
+org_zmail_socialPreferences.prototype._createManageeAccntsView =
 function() {
 	var html = new Array();
 	var i = 0;
@@ -213,7 +213,7 @@ function() {
 	return html.join("");
 };
 
-com_zimbra_socialPreferences.prototype._updateAccountsTable =
+org_zmail_socialPreferences.prototype._updateAccountsTable =
 function(additionalMsgParams) {
 	document.getElementById("social_pref_accntsTable").innerHTML = this._getPrefAccountsTableHTML();
 	for (var i = 0; i < this._authorizeDivIdAndAccountMap.length; i++) {
@@ -224,7 +224,7 @@ function(additionalMsgParams) {
 		document.getElementById(map.divId).appendChild(authBtn.getHtmlElement());
 	}
 	if (this._fbNeedPermCount != 0) {
-		this._setAccountPrefDlgAuthMessage(this.zimlet.getMessage("authorizeZimbraToAccessFacebook"), "blue");
+		this._setAccountPrefDlgAuthMessage(this.zimlet.getMessage("authorizeZmailToAccessFacebook"), "blue");
 	} else {
 		this._setAccountPrefDlgAuthMessage(this.zimlet.getMessage("accountsUpdated"), "green");
 	}
@@ -237,13 +237,13 @@ function(additionalMsgParams) {
 	}
 };
 
-com_zimbra_socialPreferences.prototype._setAccountPrefDlgAuthMessage =
+org_zmail_socialPreferences.prototype._setAccountPrefDlgAuthMessage =
 function (message, color) {
 	document.getElementById("social_prefDlg_currentStateMessage").innerHTML = "<lable style='color:" + color + "'>" + message + "</label>";
 	document.getElementById("social_prefDlg_currentStateMessage").style.display = "block";
 };
 
-com_zimbra_socialPreferences.prototype._updateAllFBPermissions =
+org_zmail_socialPreferences.prototype._updateAllFBPermissions =
 function(additionalMsgParams) {
 	for (var id in this.zimlet.allAccounts) {
 		var account = this.zimlet.allAccounts[id];
@@ -256,7 +256,7 @@ function(additionalMsgParams) {
 	}
 };
  /*
-com_zimbra_socialPreferences.prototype._authorizeBtnListener =
+org_zmail_socialPreferences.prototype._authorizeBtnListener =
 function(params) {
 	var permName = "";
 	if (params.permission == "read_stream")
@@ -269,7 +269,7 @@ function(params) {
 	this._addFacebookBtnListener();
 };
 */
-com_zimbra_socialPreferences.prototype._getPrefAccountsTableHTML =
+org_zmail_socialPreferences.prototype._getPrefAccountsTableHTML =
 function() {
 	this._authorizeDivIdAndAccountMap = new Array();
 	var html = new Array();
@@ -318,7 +318,7 @@ function() {
 	return html.join("");
 };
 
-com_zimbra_socialPreferences.prototype._getAccountPrefRowHtml = function(params) {
+org_zmail_socialPreferences.prototype._getAccountPrefRowHtml = function(params) {
 		var html = [];
 		var i = 0;
 		html[i++] = "<TR>";
@@ -339,14 +339,14 @@ com_zimbra_socialPreferences.prototype._getAccountPrefRowHtml = function(params)
 		html[i++] = "</TR>";
 	return html.join("");
 };
-com_zimbra_socialPreferences.prototype._setNeedPermission =
+org_zmail_socialPreferences.prototype._setNeedPermission =
 function(permission) {
 	if (this._fbNeedPermissions == "")
 		this._fbNeedPermissions = permission;
 	else
 		this._fbNeedPermissions = this._fbNeedPermissions + "," + permission;
 };
-com_zimbra_socialPreferences.prototype._manageAccntsOKBtnListener =
+org_zmail_socialPreferences.prototype._manageAccntsOKBtnListener =
 function() {
 	this.zimlet.setUserProperty("social_AllTwitterAccounts", this.zimlet.getAllAccountsAsString(), true);
 	this.zimlet._updateAllWidgetItems({updateSearchTree:false, updateSystemTree:true, updateAccntCheckboxes:true, searchCards:false});
@@ -354,7 +354,7 @@ function() {
 
 };
 
-com_zimbra_socialPreferences.prototype.showAddFBInfoDlg = function(obj) {
+org_zmail_socialPreferences.prototype.showAddFBInfoDlg = function(obj) {
 	//if zimlet dialog already exists...
 	var permStr = "";
 	if (obj) {
@@ -392,7 +392,7 @@ com_zimbra_socialPreferences.prototype.showAddFBInfoDlg = function(obj) {
 	this._getFbInfoDialog.popup();
 };
 
-com_zimbra_socialPreferences.prototype._getFbInfoOKBtnListener = function() {
+org_zmail_socialPreferences.prototype._getFbInfoOKBtnListener = function() {
 	if (this.reloginToFB) {
 		this.reloginToFB = false;
 		this.needSessionId = true;
@@ -407,7 +407,7 @@ com_zimbra_socialPreferences.prototype._getFbInfoOKBtnListener = function() {
 	}
 };
 
-com_zimbra_socialPreferences.prototype._createFbInfoView =
+org_zmail_socialPreferences.prototype._createFbInfoView =
 function() {
 	var html = new Array();
 	var i = 0;
@@ -426,7 +426,7 @@ function() {
 	return html.join("");
 };
 
-com_zimbra_socialPreferences.prototype._showPreferencesDlg = function() {
+org_zmail_socialPreferences.prototype._showPreferencesDlg = function() {
 	//if zimlet dialog already exists...
 	if (this._getPrefDialog) {
 		this._setPrefCheckboxes();
@@ -443,7 +443,7 @@ com_zimbra_socialPreferences.prototype._showPreferencesDlg = function() {
 
 };
 
-com_zimbra_socialPreferences.prototype._okPrefBtnListener =
+org_zmail_socialPreferences.prototype._okPrefBtnListener =
 function() {
 	var save = false;
 	var currentVal;
@@ -503,7 +503,7 @@ function() {
 	this._getPrefDialog.popdown();
 };
 
-com_zimbra_socialPreferences.prototype.showYesNoDialog =
+org_zmail_socialPreferences.prototype.showYesNoDialog =
 function() {
 	var dlg = appCtxt.getYesNoMsgDialog();
 	dlg.registerCallback(DwtDialog.YES_BUTTON, this._yesButtonClicked, this, dlg);
@@ -512,25 +512,25 @@ function() {
 	dlg.popup();
 };
 
-com_zimbra_socialPreferences.prototype._yesButtonClicked =
+org_zmail_socialPreferences.prototype._yesButtonClicked =
 function(dlg) {
 	dlg.popdown();
 	this._refreshBrowser();
 };
 
-com_zimbra_socialPreferences.prototype._NoButtonClicked =
+org_zmail_socialPreferences.prototype._NoButtonClicked =
 function(dlg) {
 	dlg.popdown();
 }
 
-com_zimbra_socialPreferences.prototype._refreshBrowser =
+org_zmail_socialPreferences.prototype._refreshBrowser =
 function() {
 	window.onbeforeunload = null;
 	var url = AjxUtil.formatUrl({});
-	ZmZimbraMail.sendRedirect(url);
+	ZmZmailMail.sendRedirect(url);
 };
 
-com_zimbra_socialPreferences.prototype._setPrefCheckboxes = function() {
+org_zmail_socialPreferences.prototype._setPrefCheckboxes = function() {
 	if (this.social_pref_tweetmemePopularIsOn) {
 		document.getElementById("social_pref_tweetmemePopularIsOn").checked = true;
 	}
@@ -573,7 +573,7 @@ com_zimbra_socialPreferences.prototype._setPrefCheckboxes = function() {
 
 };
 
-com_zimbra_socialPreferences.prototype._createPrefView =
+org_zmail_socialPreferences.prototype._createPrefView =
 function() {
 	var html = new Array();
 	var i = 0;
@@ -604,7 +604,7 @@ function() {
 	return html.join("");
 };
 
-com_zimbra_socialPreferences.prototype._createCardWidthList =
+org_zmail_socialPreferences.prototype._createCardWidthList =
 function() {
 	var html = new Array();
 	var i = 0;
@@ -646,7 +646,7 @@ function() {
 	return html.join("");
 };
 
-com_zimbra_socialPreferences.prototype._createNumberOfTweetsToReturnList =
+org_zmail_socialPreferences.prototype._createNumberOfTweetsToReturnList =
 function() {
 	var html = new Array();
 	var i = 0;
@@ -677,7 +677,7 @@ function() {
 	return html.join("");
 };
 
-com_zimbra_socialPreferences.prototype._createNumberOfTweetSearchesToReturnList =
+org_zmail_socialPreferences.prototype._createNumberOfTweetSearchesToReturnList =
 function() {
 	var html = new Array();
 	var i = 0;
@@ -700,13 +700,13 @@ function() {
 	return html.join("");
 };
 
-com_zimbra_socialPreferences.prototype._setWelCheckboxes = function() {
+org_zmail_socialPreferences.prototype._setWelCheckboxes = function() {
 	if (this.social_pref_dontShowWelcomeScreenOn)
 		document.getElementById("social_pref_dontShowWelcomeScreenOn").checked = true;
 
 };
 
-com_zimbra_socialPreferences.prototype._okWelBtnListener =
+org_zmail_socialPreferences.prototype._okWelBtnListener =
 function() {
 	var save = false;
 	var currentVal = document.getElementById("social_pref_dontShowWelcomeScreenOn").checked;
@@ -720,7 +720,7 @@ function() {
 	}
 	this._getwelDialog.popdown();
 };
-com_zimbra_socialPreferences.prototype._showWelcomeDlg = function() {
+org_zmail_socialPreferences.prototype._showWelcomeDlg = function() {
 	if (this._getwelDialog) {
 		this._setWelCheckboxes();
 		this._getwelDialog.popup();
@@ -729,13 +729,13 @@ com_zimbra_socialPreferences.prototype._showWelcomeDlg = function() {
 	this._getWelView = new DwtComposite(this.zimlet.getShell());
 	this._getWelView.getHtmlElement().style.overflow = "auto";
 	this._getWelView.getHtmlElement().innerHTML = this._createWelView();
-	this._getwelDialog = this.zimlet._createDialog({title:this.zimlet.getMessage("zimbraSocial"), view:this._getWelView, standardButtons:[DwtDialog.OK_BUTTON], id: "SocialZimlet_WelcomeDlg"});
+	this._getwelDialog = this.zimlet._createDialog({title:this.zimlet.getMessage("zmailSocial"), view:this._getWelView, standardButtons:[DwtDialog.OK_BUTTON], id: "SocialZimlet_WelcomeDlg"});
 	this._getwelDialog.setButtonListener(DwtDialog.OK_BUTTON, new AjxListener(this, this._okWelBtnListener));
 	this._getwelDialog.popup();
 	this._setWelCheckboxes();
 };
 
-com_zimbra_socialPreferences.prototype._createWelView =
+org_zmail_socialPreferences.prototype._createWelView =
 function() {
 	var html = new Array();
 	var i = 0;
@@ -753,7 +753,7 @@ function() {
 
 	html[i++] = "<li>"+this.zimlet.getMessage("thingsToDo5")+"</li>";
 	html[i++] = "</ul>";
-	html[i++] = this.zimlet.getMessage("takeA")+" <label id='SocialZimlet_takeATourLnk' style=\"color:blue;text-decoration: underline;font-weight:bold\"><a href='http://wiki.zimbra.com/index.php?title=Social' target=\"_blank\">"+
+	html[i++] = this.zimlet.getMessage("takeA")+" <label id='SocialZimlet_takeATourLnk' style=\"color:blue;text-decoration: underline;font-weight:bold\"><a href='http://wiki.zmail.com/index.php?title=Social' target=\"_blank\">"+
 		this.zimlet.getMessage("quickTour")+"</a></label> "+this.zimlet.getMessage("forExtraHelp");
 	html[i++] = "<br/><br/><input type='checkbox' id='social_pref_dontShowWelcomeScreenOn' /><b/>"+ this.zimlet.getMessage("dontShowMeThisAgain");
 	html[i++] = "</DIV>";

@@ -134,9 +134,9 @@ Creating and referring icons:
  Zipping this Zimlet back:
  
  Navigate *into* the Zimlet's base folder and do:
-  zip -r com_zimbra_salesdemo.zip *
+  zip -r org_zmail_salesdemo.zip *
   For example:
-  [Desktop/com_zimbra_salesdemo]$ zip -r com_zimbra_salesdemo.zip *
+  [Desktop/org_zmail_salesdemo]$ zip -r org_zmail_salesdemo.zip *
 
 
 

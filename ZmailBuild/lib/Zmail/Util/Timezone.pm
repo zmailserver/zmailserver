@@ -1,4 +1,4 @@
-package Zimbra::Util::Timezone;
+package Zmail::Util::Timezone;
 use strict;
 our %TIMEZONES;
 our $_PARSED=0;
@@ -49,7 +49,7 @@ sub parse {
   my $self = shift;
   my $file = shift;
   return if ($_PARSED == 1);
-  $file="/opt/zimbra/conf/timezones.ics" if ($file eq "");
+  $file="/opt/zmail/conf/timezones.ics" if ($file eq "");
   open(FILE, "$file") or return undef;
   my $tz;
   while (<FILE>) {

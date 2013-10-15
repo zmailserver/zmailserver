@@ -14,14 +14,14 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.ui.briefcase;
+package org.zmail.qa.selenium.projects.ajax.ui.briefcase;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
 
 /**
  * Represents a "Check In File to Briefcase" dialog box
@@ -79,7 +79,7 @@ public class DialogUploadFile extends AbsDialog {
 			    + "//*[contains(@class,'ZWidgetTitle') and contains(text(),'OK')]";
 		}else if (button == Button.B_BROWSE) {
 		    locator = "css=td>input[id*=_input][type=file][name=uploadFile]";
-		    if (ZimbraSeleniumProperties.isWebDriver()){ 
+		    if (ZmailSeleniumProperties.isWebDriver()){ 
 			WebElement el = this.getElement(locator);
 		    	if (webDriver() instanceof InternetExplorerDriver) {
 			    Actions action = new Actions(webDriver());

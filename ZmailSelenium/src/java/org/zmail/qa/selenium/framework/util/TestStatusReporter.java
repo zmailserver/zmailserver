@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.util;
+package org.zmail.qa.selenium.framework.util;
 
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
@@ -41,7 +41,7 @@ import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
 
-import com.zimbra.qa.selenium.framework.core.ClientSessionFactory;
+import org.zmail.qa.selenium.framework.core.ClientSessionFactory;
 
 
 public class TestStatusReporter extends TestListenerAdapter {  
@@ -92,7 +92,7 @@ public class TestStatusReporter extends TestListenerAdapter {
 				currentFileName=fileName;
 				try {
 					if (raf != null)  raf.close();
-					raf = new RandomAccessFile(ZimbraSeleniumProperties.getBaseDirectory() + "/src/java/" + fileName,"r");
+					raf = new RandomAccessFile(ZmailSeleniumProperties.getBaseDirectory() + "/src/java/" + fileName,"r");
 					longArray.clear();
 					furthestReadLong=0;
 				}
@@ -300,11 +300,11 @@ public class TestStatusReporter extends TestListenerAdapter {
 
 
 	public TestStatusReporter(String atype, ByteArrayOutputStream baos, PrintStream ps) throws Exception{  
-		path   = ZimbraSeleniumProperties.getStringProperty("ZimbraLogRoot")+"\\"  +
-		ZimbraSeleniumProperties.zimbraGetVersionString()  + "\\"  + 
+		path   = ZmailSeleniumProperties.getStringProperty("ZmailLogRoot")+"\\"  +
+		ZmailSeleniumProperties.zmailGetVersionString()  + "\\"  + 
 		atype +"\\" + 
-		ZimbraSeleniumProperties.getStringProperty("browser") + "\\" +  
-		ZimbraSeleniumProperties.getStringProperty("locale") ;
+		ZmailSeleniumProperties.getStringProperty("browser") + "\\" +  
+		ZmailSeleniumProperties.getStringProperty("locale") ;
 
 
 		mkDir(path);
@@ -318,7 +318,7 @@ public class TestStatusReporter extends TestListenerAdapter {
 
 		startDate = new Date();
 
-		output = new PrintWriter(new FileWriter(new File(path+ "/zimbraSelenium-failed.xml")));       
+		output = new PrintWriter(new FileWriter(new File(path+ "/zmailSelenium-failed.xml")));       
 		classInProgressPrintWriter= new PrintWriter(new File(path+ "\\" + inProgressDir + "\\class.html"));
 
 		this.baos=baos;
@@ -508,7 +508,7 @@ public class TestStatusReporter extends TestListenerAdapter {
 			int confSkipped =confSkipArray.size(); 
 			long duration = ((new Date()).getTime() - startDate.getTime())/1000;
 			String testdetails = 
-				//	" version:" + CommonTest.ZimbraVersion +
+				//	" version:" + CommonTest.ZmailVersion +
 				new Date().toString() + 
 				" -  Duration " + duration + " sec " +
 				"\n - " + (passed + failed + skipped ) + " run " + 
@@ -532,7 +532,7 @@ public class TestStatusReporter extends TestListenerAdapter {
 
 		String version = "unknown";
 		try {
-			version = ZimbraSeleniumProperties.zimbraGetVersionString();
+			version = ZmailSeleniumProperties.zmailGetVersionString();
 		} catch (HarnessException ex) {
 			LogManager.getLogger(TestStatusReporter.class).error("unable to get version", ex);
 		}
@@ -549,8 +549,8 @@ public class TestStatusReporter extends TestListenerAdapter {
 		String bodyfileXpPath = path;
 		String lines = "\n--------------------------------------------\n";
 		String uri = (bodyfileXpPath.replace("T:/",
-		"http://tms.lab.zimbra.com/testlogs/")).replace("\\", "/");
-		uri = ZimbraSeleniumProperties.getStringProperty("TestURL") + uri;
+		"http://tms.lab.zmail.com/testlogs/")).replace("\\", "/");
+		uri = ZmailSeleniumProperties.getStringProperty("TestURL") + uri;
 
 		StringBuffer body = new StringBuffer( "");
 		body.append("\n" + version);			
@@ -563,8 +563,8 @@ public class TestStatusReporter extends TestListenerAdapter {
 		body.append("\nSkip: " + skipped);
 		body.append("\nPass: " + passed);			
 		body.append("\nbrowser: " + ClientSessionFactory.session().currentBrowserName());
-		body.append("\nlocale: " + ZimbraSeleniumProperties.getStringProperty("locale")); 		
-		body.append("\nserver: " +ZimbraSeleniumProperties.getStringProperty("server.host"));
+		body.append("\nlocale: " + ZmailSeleniumProperties.getStringProperty("locale")); 		
+		body.append("\nserver: " +ZmailSeleniumProperties.getStringProperty("server.host"));
 		body.append("\nclient: " + System.getenv("COMPUTERNAME")) ;
 		body.append("\nduration: " + duration + " sec");
 		body.append("\nstart at: " + startDate);

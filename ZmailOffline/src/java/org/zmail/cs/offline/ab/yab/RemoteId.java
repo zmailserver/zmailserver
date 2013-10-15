@@ -12,9 +12,9 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.ab.yab;
+package org.zmail.cs.offline.ab.yab;
 
-import com.zimbra.cs.offline.ab.SyncException;
+import org.zmail.cs.offline.ab.SyncException;
 
 public class RemoteId {
     private final Type type;

@@ -53,7 +53,7 @@ ZmSearchFolder.ID_ROOT = ZmOrganizer.ID_ROOT;
  */
 ZmSearchFolder.create =
 function(params) {
-	var soapDoc = AjxSoapDoc.create("CreateSearchFolderRequest", "urn:zimbraMail");
+	var soapDoc = AjxSoapDoc.create("CreateSearchFolderRequest", "urn:zmailMail");
 	var searchNode = soapDoc.set("search");
 	searchNode.setAttribute("name", params.name);
 	searchNode.setAttribute("query", params.search.query);

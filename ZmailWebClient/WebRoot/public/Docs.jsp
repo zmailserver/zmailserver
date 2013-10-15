@@ -1,9 +1,9 @@
 <%@ page buffer="8kb" session="false" autoFlush="true" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
 <%@ page import="java.util.Locale" %>
-<%@ page import="com.zimbra.cs.taglib.bean.BeanUtils" %>
+<%@ page import="org.zmail.cs.taglib.bean.BeanUtils" %>
 <!--
 ***** BEGIN LICENSE BLOCK *****
 Zimbra Collaboration Suite Web Client
@@ -62,7 +62,7 @@ basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
     boolean isTinyMce = false;
 
     final String SKIN_COOKIE_NAME = "ZM_SKIN";
-    String skin = application.getInitParameter("zimbraDefaultSkin");
+    String skin = application.getInitParameter("zmailDefaultSkin");
     Cookie[] cookies = request.getCookies();
     String requestSkin = request.getParameter("skin");
     if (requestSkin != null) {
@@ -118,7 +118,7 @@ basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-    <title>Zimbra Docs</title>
+    <title>Zmail Docs</title>
     <style type="text/css">
         <!--
         @import url(<%= contextPath %>/css/common,dwt,msgview,login,zm,spellcheck,spreadsheet,docs,images,skin.css?v=<%= vers %><%= inSkinDebugMode || isDevMode ? "&debug=1" : "" %>&skin=${zm:cook(skin)});

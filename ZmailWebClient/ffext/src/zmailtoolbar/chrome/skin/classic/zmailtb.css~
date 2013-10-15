@@ -1,9 +1,9 @@
 #ZimTB-MainMenu {
-    list-style-image: url("chrome://zimbratb/skin/main.png");
+    list-style-image: url("chrome://zmailtb/skin/main.png");
 }
 
 #ZimTB-Combined-Button {
-    list-style-image: url("chrome://zimbratb/skin/combined.png");
+    list-style-image: url("chrome://zmailtb/skin/combined.png");
 }
 
 #ZimTB-Inbox-Button > .toolbarbutton-menubutton-button {
@@ -11,11 +11,11 @@
 }
 
 #ZimTB-Inbox-Button {
-    list-style-image: url("chrome://zimbratb/skin/inbox.gif");
+    list-style-image: url("chrome://zmailtb/skin/inbox.gif");
 }
 
 #ZimTB-Combined-Image {
-    list-style-image: url("chrome://zimbratb/skin/images.png");
+    list-style-image: url("chrome://zmailtb/skin/images.png");
 }
 
 #ZimTB-ResizeBar {

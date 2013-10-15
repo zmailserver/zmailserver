@@ -147,7 +147,7 @@ ZaGlobalAdvancedStatsPage.plotGlobalQuickChart = function (id, group, columns, c
     var chartdiv = document.getElementById("loggerchart" + id);
     ZaGlobalAdvancedStatsPage.setText(chartdiv, ZaMsg.NAD_AdvStatsLoadingDataLabel);
     
-    var soapRequest = AjxSoapDoc.create("GetLoggerStatsRequest", ZaZimbraAdmin.URN, null);
+    var soapRequest = AjxSoapDoc.create("GetLoggerStatsRequest", ZaZmailAdmin.URN, null);
     soapRequest.set("startTime", { "!time": start });
     soapRequest.set("endTime", { "!time": end });
     
@@ -252,7 +252,7 @@ ZaGlobalAdvancedStatsPage.plotQuickChart = function (id, hostname, group, column
     chartdiv.style.display = "block";
     ZaGlobalAdvancedStatsPage.setText(chartdiv, ZaMsg.NAD_AdvStatsLoadingDataLabel);
     
-    var soapRequest = AjxSoapDoc.create("GetLoggerStatsRequest", ZaZimbraAdmin.URN, null);
+    var soapRequest = AjxSoapDoc.create("GetLoggerStatsRequest", ZaZmailAdmin.URN, null);
     soapRequest.set("hostname", { "!hn": hostname });
     soapRequest.set("startTime", { "!time": start });
     soapRequest.set("endTime", { "!time": end });
@@ -417,7 +417,7 @@ ZaGlobalAdvancedStatsPage.serverSelected = function(evt, id) {
     
     var hostname = select[select.selectedIndex].value;
     
-    var soapRequest = AjxSoapDoc.create("GetLoggerStatsRequest", ZaZimbraAdmin.URN, null);
+    var soapRequest = AjxSoapDoc.create("GetLoggerStatsRequest", ZaZmailAdmin.URN, null);
     soapRequest.set("hostname", { "!hn": hostname });
     
     var cb = function(response) {
@@ -461,7 +461,7 @@ ZaGlobalAdvancedStatsPage.groupSelected = function(evt, id) {
 }
 
 ZaGlobalAdvancedStatsPage._getCounters = function(hostname, group, counterSelect) {
-    var soapRequest = AjxSoapDoc.create("GetLoggerStatsRequest", ZaZimbraAdmin.URN, null);
+    var soapRequest = AjxSoapDoc.create("GetLoggerStatsRequest", ZaZmailAdmin.URN, null);
     soapRequest.set("hostname", { "!hn": hostname });
     var child = soapRequest.set("stats", { "!name" : group });
     soapRequest.set(null, "get-counters", child);
@@ -504,8 +504,8 @@ ZaGlobalAdvancedStatsPage.getMTAHosts = function() {
             if(crtServer.attrs){
 		// EnabledServiceList InstalledServiceList are array-like object.
 		// contain the service installed or enabled
-                var EnabledServiceList = crtServer.attrs[ZaServer.A_zimbraServiceEnabled];
-                var InstalledServiceList = crtServer.attrs[ZaServer.A_zimbraServiceEnabled];
+                var EnabledServiceList = crtServer.attrs[ZaServer.A_zmailServiceEnabled];
+                var InstalledServiceList = crtServer.attrs[ZaServer.A_zmailServiceEnabled];
                 
 		var j;
                 for(j in EnabledServiceList){
@@ -545,7 +545,7 @@ ZaGlobalAdvancedStatsPage.hideDIVs = function(divs) {
 }
 
 ZaGlobalAdvancedStatsPage.getCounters = function(hostname, group) {
-    var soapRequest = AjxSoapDoc.create("GetLoggerStatsRequest", ZaZimbraAdmin.URN, null);
+    var soapRequest = AjxSoapDoc.create("GetLoggerStatsRequest", ZaZmailAdmin.URN, null);
     soapRequest.set("hostname", { "!hn": hostname });
     var child = soapRequest.set("stats", { "!name" : group });
     soapRequest.set(null, "get-counters", child);
@@ -783,7 +783,7 @@ ZaGlobalAdvancedStatsPage.insertChartHTML = function(element) {
 	element.appendChild(div);
 	
     var serversSelect = document.getElementById("select-servers" + id);
-    var soapRequest = AjxSoapDoc.create("GetLoggerStatsRequest", ZaZimbraAdmin.URN, null);
+    var soapRequest = AjxSoapDoc.create("GetLoggerStatsRequest", ZaZmailAdmin.URN, null);
     var cb = function(response) {
         var soapResponse = response.getResponse().Body.GetLoggerStatsResponse;
         ZaGlobalAdvancedStatsPage.clearSelect(serversSelect);

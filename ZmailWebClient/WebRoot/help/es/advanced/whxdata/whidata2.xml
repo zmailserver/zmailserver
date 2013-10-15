@@ -177,7 +177,7 @@
   </key>
 </key>
 <key name="panel de contenido" >
-  <topic name="Navegar por el cliente web Zimbra" url="zwc_help_files/1_setting_up/navigating_the_zimbra_web_client.htm" />
+  <topic name="Navegar por el cliente web Zmail" url="zwc_help_files/1_setting_up/navigating_the_zmail_web_client.htm" />
 </key>
 <key name="panel de lectura" >
   <topic name="Usar un panel de lectura" url="zwc_help_files/2_manage_email/using_a_reading_pane.htm" />
@@ -189,7 +189,7 @@
   <topic name="Personalizar la vista de la cuenta" url="zwc_help_files/1_setting_up/personalizing_the_view_of_your_account.htm" />
 </key>
 <key name="panel de resumen" >
-  <topic name="Navegar por el cliente web Zimbra" url="zwc_help_files/1_setting_up/navigating_the_zimbra_web_client.htm" />
+  <topic name="Navegar por el cliente web Zmail" url="zwc_help_files/1_setting_up/navigating_the_zmail_web_client.htm" />
 </key>
 <key name="papelera" >
   <topic name="Vaciar la papelera" url="zwc_help_files/2_manage_email/empty_your_trash_folder.htm" />

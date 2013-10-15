@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.staf;
+package org.zmail.qa.selenium.staf;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -34,7 +34,7 @@ import org.apache.log4j.Logger;
  * object, then during save() will write the Properties to a temporary config.properties
  * file used by STAF for execution.
  * 
- * When using STAF, the Zimbra server is set according to the arguments passed to STAF
+ * When using STAF, the Zmail server is set according to the arguments passed to STAF
  * 
  */
 public class StafProperties {

@@ -13,13 +13,13 @@
  * ***** END LICENSE BLOCK *****
  */
 
-//Author: Raja Rao DV (rrao@zimbra.com)
+//Author: Raja Rao DV (rrao@zmail.com)
 
-function com_zimbra_socialTweetMeme(zimlet) {
+function org_zmail_socialTweetMeme(zimlet) {
 	this.zimlet = zimlet;
 }
 
-com_zimbra_socialTweetMeme.prototype.loadTweetMemeCategories =
+org_zmail_socialTweetMeme.prototype.loadTweetMemeCategories =
 function() {
 	this.allTweetMemeCats = new Array();
 	this.allTweetMemeCats.push({query:"__MOST_POPULAR__", name:this.zimlet.getMessage("mostPopular")});
@@ -39,7 +39,7 @@ function() {
 	this.zimlet._updateAllWidgetItems({updateTweetMemeTree:true});
 };
 
-com_zimbra_socialTweetMeme.prototype._getQueryFromHeaderName =
+org_zmail_socialTweetMeme.prototype._getQueryFromHeaderName =
 function(headerName) {
 	for(var i =0; i < this.allTweetMemeCats.length; i++) {
 		var cat = this.allTweetMemeCats[i];
@@ -50,7 +50,7 @@ function(headerName) {
 	return "__MOST_POPULAR__";
 };
 
-com_zimbra_socialTweetMeme.prototype.tweetMemeSearch =
+org_zmail_socialTweetMeme.prototype.tweetMemeSearch =
 function(params) {
 	var headerName = params.headerName;
 	var query = this._getQueryFromHeaderName(headerName);
@@ -65,7 +65,7 @@ function(params) {
 	var entireurl = ZmZimletBase.PROXY + AjxStringUtil.urlComponentEncode(url);
 	AjxRpc.invoke(null, entireurl, null, new AjxCallback(this, this._tweetMemeSearchCallback, params), true);
 };
-com_zimbra_socialTweetMeme.prototype._tweetMemeSearchCallback =
+org_zmail_socialTweetMeme.prototype._tweetMemeSearchCallback =
 function(params, response) {
 	var jsonObj = this.zimlet._extractJSONResponse(params.tableId, this.zimlet.getMessage("tweetMemeError"), response);
 	if(jsonObj.stories) {

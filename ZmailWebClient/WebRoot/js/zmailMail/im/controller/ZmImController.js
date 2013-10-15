@@ -259,7 +259,7 @@ ZmImController.prototype._blockBuddyListener = function(ev) {
 	var roster = AjxDispatcher.run("GetRoster");
 	var pl = roster.getPrivacyList();
 	pl.block(item.getAddress());
-	var doc = AjxSoapDoc.create("IMSetPrivacyListRequest", "urn:zimbraIM");
+	var doc = AjxSoapDoc.create("IMSetPrivacyListRequest", "urn:zmailIM");
 	pl.toSoap(doc);
 	appCtxt.getAppController().sendRequest({ soapDoc: doc, asyncMode: true });
 };
@@ -269,7 +269,7 @@ ZmImController.prototype._unblockBuddyListener = function(ev) {
 	var roster = AjxDispatcher.run("GetRoster");
 	var pl = roster.getPrivacyList();
 	pl.unblock(item.getAddress());
-	var doc = AjxSoapDoc.create("IMSetPrivacyListRequest", "urn:zimbraIM");
+	var doc = AjxSoapDoc.create("IMSetPrivacyListRequest", "urn:zmailIM");
 	pl.toSoap(doc);
 	appCtxt.getAppController().sendRequest({ soapDoc: doc, asyncMode: true });
 };

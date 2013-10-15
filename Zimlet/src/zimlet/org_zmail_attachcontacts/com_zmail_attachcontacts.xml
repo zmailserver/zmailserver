@@ -14,7 +14,7 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_attachcontacts"
+<zimlet name="org_zmail_attachcontacts"
         version="1.0"
         target="main compose-window view-window"
         label="${msg.label}"
@@ -23,5 +23,5 @@
     <include>ACZimletNavToolBar.js</include>
     <include>AttachContactsTabView.js</include>
     <includeCSS>attachcontacts.css</includeCSS>
-    <handlerObject>com_zimbra_attachcontacts_HandlerObject</handlerObject>
+    <handlerObject>org_zmail_attachcontacts_HandlerObject</handlerObject>
 </zimlet>

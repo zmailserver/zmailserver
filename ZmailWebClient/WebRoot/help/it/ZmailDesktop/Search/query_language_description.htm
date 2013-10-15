@@ -65,13 +65,13 @@ addButton("show",BTN_TEXT,"Mostra","","","","",0,0,"","","");
 
 	
 	document.write("<p style=\"text-align:right; background: silver\"> ");
-AddMasterBreadcrumbs("../Zimbra_Mail_Help.htm", "", "&gt;", "Desktop", "../Getting_Started/Zimbra_User_Help.htm");
+AddMasterBreadcrumbs("../Zmail_Mail_Help.htm", "", "&gt;", "Desktop", "../Getting_Started/Zmail_User_Help.htm");
 document.write("<a href=\"using_the_search_feature.htm\">Ricerca di elementi<\/a> &gt; Descrizione del linguaggio di query<\/p>");
 
 
 	if (window.setRelStartPage)
 	{
-	setRelStartPage("../Zimbra_Mail_Help.htm");
+	setRelStartPage("../Zmail_Mail_Help.htm");
 
 		autoSync(1);
 		sendSyncInfo();
@@ -85,7 +85,7 @@ else
 //-->
 //]]></script>
 <h1>Descrizione del linguaggio di query</h1>
-<p>In questa sezione viene descritta dettagliatamente la grammatica di ricerca usata nella funzione di ricerca Zimbra. Alcuni tipi di query vengono sempre applicati per ottenere la vista che appare nell'interfaccia.</p>
+<p>In questa sezione viene descritta dettagliatamente la grammatica di ricerca usata nella funzione di ricerca Zmail. Alcuni tipi di query vengono sempre applicati per ottenere la vista che appare nell'interfaccia.</p>
 <h2>Struttura del linguaggio di query</h2>
 <p>Per eseguire ricerche semplici, è sufficiente inserire una parola nel boxino di ricerca. Nel caso di parole senza un operatore di ricerca, la query presume che la ricerca vada effettuata con l'operatore 'content' e restituisce come risultato qualsiasi parte di testo inclusa nel messaggio.</p>
 <p>Le ricerche più avanzate possono essere eseguite specificando un <b>operatore di ricerca</b>. L'operatore di ricerca è una parola chiave speciale seguita da due punti, a loro volta seguiti da qualche altro parametro specifico dell'operatore. Ad esempio,</p>
@@ -118,7 +118,7 @@ else
 <p style="font-weight: bold;">content:</p>
 <p style="margin-left: 40px;">Specifica il testo che il messaggio deve contenere. Ad esempio, <span class="code">content:banane</span> trova tutti gli elementi contenenti la parola &quot;banane&quot;.</p>
 <p style="font-weight: bold;">da:,</p>
-<p style="margin-left: 40px;">Specifica il nome di un mittente o un indirizzo email   incluso nell'intestazione Da. Può essere testo come in &quot;Mario Rossi&quot;, un indirizzo email come &quot; joe@acme.com&quot; o un dominio come &quot; zimbra.com&quot;.</p>
+<p style="margin-left: 40px;">Specifica il nome di un mittente o un indirizzo email   incluso nell'intestazione Da. Può essere testo come in &quot;Mario Rossi&quot;, un indirizzo email come &quot; joe@acme.com&quot; o un dominio come &quot; zmail.com&quot;.</p>
 <p style="font-weight: bold;">to:</p>
 <p style="margin-left: 40px;">Equivale a from: ma specifica una delle persone a cui è indirizzato il messaggio nell'intestazione A: A.</p>
 <p style="font-weight: bold;">cc:</p>

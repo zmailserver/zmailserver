@@ -14,18 +14,18 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.tasks.tags;
+package org.zmail.qa.selenium.projects.ajax.tests.tasks.tags;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.TagItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.*;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.TagItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.*;
 
 public class RenameTag extends AjaxCommonTest {
 
@@ -44,11 +44,11 @@ public class RenameTag extends AjaxCommonTest {
 		FolderItem taskFolder = FolderItem.importFromSOAP(app
 				.zGetActiveAccount(), SystemFolder.Tasks);
 		// Create the tag to rename
-		String name1 = "tag" + ZimbraSeleniumProperties.getUniqueString();
-		String name2 = "tag" + ZimbraSeleniumProperties.getUniqueString();
+		String name1 = "tag" + ZmailSeleniumProperties.getUniqueString();
+		String name2 = "tag" + ZmailSeleniumProperties.getUniqueString();
 
 		app.zGetActiveAccount().soapSend(
-				"<CreateTagRequest xmlns='urn:zimbraMail'>" + "<tag name='"
+				"<CreateTagRequest xmlns='urn:zmailMail'>" + "<tag name='"
 						+ name1 + "' color='1' />" + "</CreateTagRequest>");
 
 		TagItem tag = TagItem.importFromSOAP(app.zGetActiveAccount(), name1);
@@ -70,7 +70,7 @@ public class RenameTag extends AjaxCommonTest {
 		dialog.zClickButton(Button.B_OK);
 
 		// Verify the tag is no longer found
-		app.zGetActiveAccount().soapSend("<GetTagRequest xmlns='urn:zimbraMail'/>");
+		app.zGetActiveAccount().soapSend("<GetTagRequest xmlns='urn:zmailMail'/>");
 
 		Element[] eTag1 = app.zGetActiveAccount().soapSelectNodes("//mail:tag[@name='" + name1 + "']");
 		ZAssert.assertEquals(eTag1.length, 0,"Verify the old tag name no longer exists");

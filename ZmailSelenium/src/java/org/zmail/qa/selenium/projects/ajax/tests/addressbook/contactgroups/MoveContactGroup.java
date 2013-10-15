@@ -14,20 +14,20 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.addressbook.contactgroups;
+package org.zmail.qa.selenium.projects.ajax.tests.addressbook.contactgroups;
 
 
 
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogMove;
-import com.zimbra.qa.selenium.projects.ajax.ui.addressbook.FormContactGroupNew;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogMove;
+import org.zmail.qa.selenium.projects.ajax.ui.addressbook.FormContactGroupNew;
 
 
 public class MoveContactGroup extends AjaxCommonTest  {
@@ -51,9 +51,9 @@ public class MoveContactGroup extends AjaxCommonTest  {
 		
 		// Create the sub addressbook
 		FolderItem root = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.UserRoot);
-		String foldername = "ab"+ ZimbraSeleniumProperties.getUniqueString();
+		String foldername = "ab"+ ZmailSeleniumProperties.getUniqueString();
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+				"<CreateFolderRequest xmlns='urn:zmailMail'>" +
 					"<folder name='" + foldername +"' l='"+ root.getId() +"' view='contact'/>" +
 				"</CreateFolderRequest>");
 		FolderItem folder = FolderItem.importFromSOAP(app.zGetActiveAccount(), foldername);
@@ -98,9 +98,9 @@ public class MoveContactGroup extends AjaxCommonTest  {
 		
 		// Create the sub addressbook
 		FolderItem root = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.UserRoot);
-		String foldername = "ab"+ ZimbraSeleniumProperties.getUniqueString();
+		String foldername = "ab"+ ZmailSeleniumProperties.getUniqueString();
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+				"<CreateFolderRequest xmlns='urn:zmailMail'>" +
 					"<folder name='" + foldername +"' l='"+ root.getId() +"' view='contact'/>" +
 				"</CreateFolderRequest>");
 		FolderItem folder = FolderItem.importFromSOAP(app.zGetActiveAccount(), foldername);
@@ -143,9 +143,9 @@ public class MoveContactGroup extends AjaxCommonTest  {
 		
 		// Create the sub addressbook
 		FolderItem root = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.UserRoot);
-		String foldername = "ab"+ ZimbraSeleniumProperties.getUniqueString();
+		String foldername = "ab"+ ZmailSeleniumProperties.getUniqueString();
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+				"<CreateFolderRequest xmlns='urn:zmailMail'>" +
 					"<folder name='" + foldername +"' l='"+ root.getId() +"' view='contact'/>" +
 				"</CreateFolderRequest>");
 		FolderItem folder = FolderItem.importFromSOAP(app.zGetActiveAccount(), foldername);
@@ -190,9 +190,9 @@ public class MoveContactGroup extends AjaxCommonTest  {
 		
 		// Create the sub addressbook
 		FolderItem root = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.UserRoot);
-		String foldername = "ab"+ ZimbraSeleniumProperties.getUniqueString();
+		String foldername = "ab"+ ZmailSeleniumProperties.getUniqueString();
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+				"<CreateFolderRequest xmlns='urn:zmailMail'>" +
 					"<folder name='" + foldername +"' l='"+ root.getId() +"' view='contact'/>" +
 				"</CreateFolderRequest>");
 		FolderItem folder = FolderItem.importFromSOAP(app.zGetActiveAccount(), foldername);

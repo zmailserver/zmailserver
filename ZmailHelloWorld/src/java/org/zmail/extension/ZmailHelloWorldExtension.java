@@ -14,19 +14,19 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.extension;
+package org.zmail.extension;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.extension.ExtensionException;
-import com.zimbra.cs.extension.ZimbraExtension;
-import com.zimbra.soap.SoapServlet;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.extension.ExtensionException;
+import org.zmail.cs.extension.ZmailExtension;
+import org.zmail.soap.SoapServlet;
 /**
  * The main entry point for extensions
  * @author gsolovyev
  *
  */
-public class ZimbraHelloWorldExtension implements ZimbraExtension {
-	public static String ZAS_EXTENSION_NAME = "com_zimbra_appointment_summary";
+public class ZmailHelloWorldExtension implements ZmailExtension {
+	public static String ZAS_EXTENSION_NAME = "org_zmail_appointment_summary";
 	public static final String APPOINTMENT_SUMMARY_TASK_NAME = "SendAppointmentSummary";
 	public static final String E_helloWorld = "HelloWorld";
 	@Override
@@ -42,7 +42,7 @@ public class ZimbraHelloWorldExtension implements ZimbraExtension {
 
 	@Override
 	public void init() throws ExtensionException, ServiceException {
-		SoapServlet.addService("SoapServlet", new ZimbraHelloWorldService());
+		SoapServlet.addService("SoapServlet", new ZmailHelloWorldService());
 	}
 
 }

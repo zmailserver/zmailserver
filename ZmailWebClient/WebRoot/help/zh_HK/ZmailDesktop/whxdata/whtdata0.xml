@@ -17,22 +17,22 @@
 -->
 <tocdata>
 <book name="入門" >
-  <item name="關於 Zimbra Desktop" url="Getting_Started/Zimbra_User_Help.htm" />
-  <item name="Zimbra Desktop 功能概況" url="Zdesktop/Overview_of_Zimbra_Desktop_Features.htm" />
+  <item name="關於 Zmail Desktop" url="Getting_Started/Zmail_User_Help.htm" />
+  <item name="Zmail Desktop 功能概況" url="Zdesktop/Overview_of_Zmail_Desktop_Features.htm" />
   <item name="離線工作" url="Zdesktop/z-Working_Offline.htm" />
   <item name="快速鍵" url="Navigation_folders_and_tips/Keyboard_Shortcut_Keys.htm" />
 </book>
-<book name="設定 Zimbra Desktop" >
-  <item name="設定一個 Zimbra 網路用戶端帳戶" url="Zdesktop/Z-Setting_up_your_Zimbra_Web_Client_account.htm" />
+<book name="設定 Zmail Desktop" >
+  <item name="設定一個 Zmail 網路用戶端帳戶" url="Zdesktop/Z-Setting_up_your_Zmail_Web_Client_account.htm" />
   <item name="設定 Yahoo! 電郵及 Gmail 帳戶" url="Zdesktop/z-Setting_up_Yahoo!_Mail_Plus,_Gmail,_AOL_account_setup.htm" />
   <item name="設定 POP/IMAP 帳戶" url="Zdesktop/z-Setting_up_POP_IMAP_accounts.htm" />
-  <item name="同步你的帳戶資料" url="Zdesktop/Synchronize_your_account_to_Zimbra_Desktop.htm" />
+  <item name="同步你的帳戶資料" url="Zdesktop/Synchronize_your_account_to_Zmail_Desktop.htm" />
   <item name="關閉自動同步" url="Zdesktop/Turning_Off_Automatic_Sync.htm" />
   <item name="組織你的 Desktop 視窗" url="Zdesktop/z-Changing_account_order_on_Desktop.htm" />
   <item name="從 Desktop 刪除一個帳戶" url="Zdesktop/z-Deleting_an_account_from_Desktop.htm" />
 </book>
 <book name="瀏覽 Desktop 郵箱" >
-  <item name="瀏覽 Zimbra Desktop" url="Navigation_folders_and_tips/z-Navigating_Zimbra_Desktop.htm" />
+  <item name="瀏覽 Zmail Desktop" url="Navigation_folders_and_tips/z-Navigating_Zmail_Desktop.htm" />
   <item name="用戶介面功能和快速鍵" url="Getting_Started/user_interface_features_and_shortcuts.htm" />
   <item name="右鍵選單" url="Navigation_folders_and_tips/right-click_menus.htm" />
   <item name="系統資料夾" url="Navigation_folders_and_tips/inbox_folder.htm" />
@@ -123,7 +123,7 @@
   <item name="設定桌面提示" url="Userspecific/Setting_up_desktop_alerts.htm" />
   <item name="電郵通知至另一地址" url="Userspecific/New_mail_notifications.htm" />
   <item name="休假訊息" url="Userspecific/vacation_message.htm" />
-  <item name="將 Zimbra Desktop 設為預設的電郵程式" url="managing_your_account/Making_Zimbra_Desktop_Default_Mail_Client.htm" />
+  <item name="將 Zmail Desktop 設為預設的電郵程式" url="managing_your_account/Making_Zmail_Desktop_Default_Mail_Client.htm" />
 </book>
 <book name="整理帳戶資料" >
   <item name="郵件分類" url="Navigation_folders_and_tips/categorizing_your_mail_messages.htm#bc-1" />
@@ -144,8 +144,8 @@
   <item name="移動事項" url="Tasks/Moving_tasks.htm" />
   <item name="事項排序" url="Tasks/Sorting_tasks_.htm" />
 </book>
-<book name="分享資料夾（僅限 Zimbra 帳戶）" >
-  <item name="分享你的 Zimbra 資料夾" url="Zdesktop/zd_Sharing_Your_Zimbra_Folders.htm" />
+<book name="分享資料夾（僅限 Zmail 帳戶）" >
+  <item name="分享你的 Zmail 資料夾" url="Zdesktop/zd_Sharing_Your_Zmail_Folders.htm" />
   <item name="如何分享資料夾" url="Zdesktop/zd_Sharing_Folders_steps_.htm" />
   <item name="接受對分享郵件夾的存取權" url="Delegated_mailboxes/Accepting_access_to_the_shared_mailbox_folder.htm" />
   <item name="在分享資料夾中工作" url="Zdesktop/zd_working_in_a_shared_folder.htm" />

@@ -14,16 +14,16 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.ui.preferences.trustedaddresses;
+package org.zmail.qa.selenium.projects.desktop.ui.preferences.trustedaddresses;
 
 import java.util.Arrays;
 import java.util.List;
 
-import com.zimbra.qa.selenium.framework.ui.AbsApplication;
-import com.zimbra.qa.selenium.framework.ui.AbsDisplay;
-import com.zimbra.qa.selenium.framework.ui.AbsPage;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.ui.AbsApplication;
+import org.zmail.qa.selenium.framework.ui.AbsDisplay;
+import org.zmail.qa.selenium.framework.ui.AbsPage;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
 
 public class DisplayTrustedAddress extends AbsDisplay {
 
@@ -64,14 +64,14 @@ public class DisplayTrustedAddress extends AbsDisplay {
 
    }
 
-   public String zDisplayImageLink(String zimbraPrefGroupMailBy)
+   public String zDisplayImageLink(String zmailPrefGroupMailBy)
          throws HarnessException {
 
       String DisplayImgLink = null;
-      if (zimbraPrefGroupMailBy == "message") {
+      if (zmailPrefGroupMailBy == "message") {
          DisplayImgLink = sGetEval("selenium.browserbot.getCurrentWindow().document.getElementById('zv__TV__MSG_displayImages').style.display");
          return DisplayImgLink;
-      } else if (zimbraPrefGroupMailBy == "conversation") {
+      } else if (zmailPrefGroupMailBy == "conversation") {
          DisplayImgLink = sGetEval("selenium.browserbot.getCurrentWindow().document.getElementById('zv__CLV__MSG_displayImages').style.display");
          return DisplayImgLink;
       } else {
@@ -85,10 +85,10 @@ public class DisplayTrustedAddress extends AbsDisplay {
     * @return
     * @throws HarnessException
     */
-   public boolean zHasWDDLinks(String zimbraPrefGroupMailBy)
+   public boolean zHasWDDLinks(String zmailPrefGroupMailBy)
          throws HarnessException {
 
-      if (zimbraPrefGroupMailBy == "message") {
+      if (zmailPrefGroupMailBy == "message") {
          List<String> locators = Arrays.asList(
                Locators.zMsgViewDisplayImgLink,
                Locators.zMsgViewDomainLink, Locators.zMsgViewWarningIcon);
@@ -100,7 +100,7 @@ public class DisplayTrustedAddress extends AbsDisplay {
 
          return (true);
 
-      } else if (zimbraPrefGroupMailBy == "conversation") {
+      } else if (zmailPrefGroupMailBy == "conversation") {
          List<String> locators = Arrays.asList(
                Locators.zConViewDisplayImgLink,
                Locators.zConViewDomainLink, Locators.zConViewWarningIcon);

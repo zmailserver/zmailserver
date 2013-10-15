@@ -17,15 +17,15 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.octopus.ui;
+package org.zmail.qa.selenium.projects.octopus.ui;
 
 import java.util.*;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.octopus.ui.DialogError.DialogErrorID;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.octopus.ui.DialogError.DialogErrorID;
 
 public class PageOctopus extends AbsTab {
 
@@ -130,7 +130,7 @@ public class PageOctopus extends AbsTab {
 		if (!((AppOctopusClient) MyApplication).zPageLogin.zIsActive()) {
 			((AppOctopusClient) MyApplication).zPageLogin.zNavigateTo();
 		}
-		((AppOctopusClient) MyApplication).zPageLogin.zLogin(ZimbraAccount
+		((AppOctopusClient) MyApplication).zPageLogin.zLogin(ZmailAccount
 				.AccountZWC());
 		zWaitForActive();
 	}
@@ -782,8 +782,8 @@ public class PageOctopus extends AbsTab {
 	}
 
 	public String searchFile(String fileName) throws HarnessException {
-		ZimbraAccount account = MyApplication.zGetActiveAccount();
-		account.soapSend("<SearchRequest xmlns='urn:zimbraMail' types='document'>"
+		ZmailAccount account = MyApplication.zGetActiveAccount();
+		account.soapSend("<SearchRequest xmlns='urn:zmailMail' types='document'>"
 				+ "<query>" + fileName + "</query>" + "</SearchRequest>");
 
 		String id = account.soapSelectValue("//mail:SearchResponse//mail:doc",
@@ -794,8 +794,8 @@ public class PageOctopus extends AbsTab {
 
 	public String searchFileIn(String fileName, String folderName)
 			throws HarnessException {
-		ZimbraAccount account = MyApplication.zGetActiveAccount();
-		account.soapSend("<SearchRequest xmlns='urn:zimbraMail' types='document'>"
+		ZmailAccount account = MyApplication.zGetActiveAccount();
+		account.soapSend("<SearchRequest xmlns='urn:zmailMail' types='document'>"
 				+ "<query>in:"
 				+ folderName
 				+ " "
@@ -809,7 +809,7 @@ public class PageOctopus extends AbsTab {
 		return id;
 	}
 
-	public boolean waitForResponse(ZimbraAccount account, String request, String pattern, int timeout) throws HarnessException {
+	public boolean waitForResponse(ZmailAccount account, String request, String pattern, int timeout) throws HarnessException {
 		String response;
 		boolean found = false;
 		for(int i = 0; i < timeout; i ++){
@@ -825,23 +825,23 @@ public class PageOctopus extends AbsTab {
 		return found;
 	}
 	
-	public void permanentlyDeleteItemUsingSOAP(String itemId, ZimbraAccount account)
+	public void permanentlyDeleteItemUsingSOAP(String itemId, ZmailAccount account)
 			throws HarnessException {
-		account.soapSend("<ItemActionRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<ItemActionRequest xmlns='urn:zmailMail'>"
 				+ "<action id='" + itemId + "' op='delete'/>"
 				+ "</ItemActionRequest>");
 	}
 
-	public void deleteItemUsingSOAP(String itemId, ZimbraAccount account)
+	public void deleteItemUsingSOAP(String itemId, ZmailAccount account)
 			throws HarnessException {
-		account.soapSend("<ItemActionRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<ItemActionRequest xmlns='urn:zmailMail'>"
 				+ "<action id='" + itemId + "' op='trash'/>"
 				+ "</ItemActionRequest>");
 	}
 
 	public void moveItemUsingSOAP(String itemId, String targetId,
-			ZimbraAccount account) throws HarnessException {
-		account.soapSend("<ItemActionRequest xmlns='urn:zimbraMail'>"
+			ZmailAccount account) throws HarnessException {
+		account.soapSend("<ItemActionRequest xmlns='urn:zmailMail'>"
 				+ "<action id='" + itemId + "' l='" + targetId
 				+ "' op='move'/>" + "</ItemActionRequest>");
 	}
@@ -869,7 +869,7 @@ public class PageOctopus extends AbsTab {
 		zKeyEvent(Locators.zRenameInput.locator, "13", "keydown");
 	}
 
-	public boolean zVerifyElementText(ZimbraAccount account, String xPath,
+	public boolean zVerifyElementText(ZmailAccount account, String xPath,
 			String text) throws HarnessException {
 		try {
 			Element[] nodes = account.soapSelectNodes(xPath);

@@ -1,14 +1,14 @@
 How to deploy:
 --------------
 
-- create "oauth" directory under /opt/zimbra/lib/ext; copy "oauth-1.4.jar" and "sampleoauthprov.jar" under it
+- create "oauth" directory under /opt/zmail/lib/ext; copy "oauth-1.4.jar" and "sampleoauthprov.jar" under it
 
-- copy "authorize.jsp" file to /opt/zimbra/jetty/webapps/zimbra/public directory
+- copy "authorize.jsp" file to /opt/zmail/jetty/webapps/zmail/public directory
 
-- run "zmlocalconfig -e zimbra_auth_provider=zimbra,oauth"
+- run "zmlocalconfig -e zmail_auth_provider=zmail,oauth"
 
-- configure Zimbra memcached client:
-      zmprov mcf zimbraMemcachedClientServerList <memcached_server_host>:11211
+- configure Zmail memcached client:
+      zmprov mcf zmailMemcachedClientServerList <memcached_server_host>:11211
 
 - zmmailboxdctl restart
 
@@ -16,9 +16,9 @@ How to deploy:
 For Cosumer Apps:
 -----------------
 
-- to register a consumer app run "zmprov mcf +zimbraOAuthConsumerCredentials <consumer_key>:<consumer_secret>:<consumer_description>"
+- to register a consumer app run "zmprov mcf +zmailOAuthConsumerCredentials <consumer_key>:<consumer_secret>:<consumer_description>"
 
 - make your consumer app access
-  <zimbra_base_url>/service/extension/oauth/req_token, for request token,
-  <zimbra_base_url>/service/extension/oauth/authorization, for authorization
-  <zimbra_base_url>/service/extension/oauth/access_token, for access token.
+  <zmail_base_url>/service/extension/oauth/req_token, for request token,
+  <zmail_base_url>/service/extension/oauth/authorization, for authorization
+  <zmail_base_url>/service/extension/oauth/access_token, for access token.

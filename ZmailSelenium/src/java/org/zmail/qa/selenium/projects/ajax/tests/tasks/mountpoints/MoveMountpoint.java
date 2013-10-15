@@ -14,23 +14,23 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.tasks.mountpoints;
+package org.zmail.qa.selenium.projects.ajax.tests.tasks.mountpoints;
 
 
 import java.util.HashMap;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderMountpointItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderMountpointItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
 
 
 public class MoveMountpoint extends AjaxCommonTest {
@@ -42,9 +42,9 @@ public class MoveMountpoint extends AjaxCommonTest {
 		super.startingPage = app.zPageTasks;
 		super.startingAccountPreferences = new HashMap<String, String>() {
 			{
-				put("zimbraPrefReadingPaneLocation", "bottom");
-				put("zimbraPrefGroupMailBy", "message");
-				put("zimbraPrefShowSelectionCheckbox", "TRUE");
+				put("zmailPrefReadingPaneLocation", "bottom");
+				put("zmailPrefGroupMailBy", "message");
+				put("zmailPrefShowSelectionCheckbox", "TRUE");
 			}
 		};		
 		
@@ -55,17 +55,17 @@ public class MoveMountpoint extends AjaxCommonTest {
 			groups = { "smoke" })
 	public void MoveMountpoint_01() throws HarnessException {
 		
-		ZimbraAccount Owner = (new ZimbraAccount()).provision().authenticate();
+		ZmailAccount Owner = (new ZmailAccount()).provision().authenticate();
 
 		// Owner creates a folder, shares it with current user
-		String ownerFoldername = "ownerfolder"+ ZimbraSeleniumProperties.getUniqueString();
+		String ownerFoldername = "ownerfolder"+ ZmailSeleniumProperties.getUniqueString();
 		
 	//	FolderItem ownerInbox = FolderItem.importFromSOAP(Owner, FolderItem.SystemFolder.Inbox);
 		FolderItem ownerTask = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Tasks);
 		ZAssert.assertNotNull(ownerTask, "Verify the new owner folder exists");
 
 		Owner.soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>"
+					"<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+		"<folder name='" + ownerFoldername +"' l='" + ownerTask.getId() +"'/>"
 				+	"</CreateFolderRequest>");
 		
@@ -73,7 +73,7 @@ public class MoveMountpoint extends AjaxCommonTest {
 		ZAssert.assertNotNull(ownerFolder, "Verify the new owner folder exists");
 		
 		Owner.soapSend(
-					"<FolderActionRequest xmlns='urn:zimbraMail'>"
+					"<FolderActionRequest xmlns='urn:zmailMail'>"
 				+		"<action id='"+ ownerFolder.getId() +"' op='grant'>"
 				+			"<grant d='" + app.zGetActiveAccount().EmailAddress + "' gt='usr' perm='r'/>"
 				+		"</action>"
@@ -81,10 +81,10 @@ public class MoveMountpoint extends AjaxCommonTest {
 		
 
 		// Current user creates the mountpoint that points to the share
-		String mountpointFoldername = "mountpoint"+ ZimbraSeleniumProperties.getUniqueString();
+		String mountpointFoldername = "mountpoint"+ ZmailSeleniumProperties.getUniqueString();
 		app.zGetActiveAccount().soapSend(
-					"<CreateMountpointRequest xmlns='urn:zimbraMail'>"
-				+		"<link l='1' name='"+ mountpointFoldername +"' view='task' rid='"+ ownerFolder.getId() +"' zid='"+ Owner.ZimbraId +"'/>"
+					"<CreateMountpointRequest xmlns='urn:zmailMail'>"
+				+		"<link l='1' name='"+ mountpointFoldername +"' view='task' rid='"+ ownerFolder.getId() +"' zid='"+ Owner.ZmailId +"'/>"
 				+	"</CreateMountpointRequest>");
 		
 		FolderMountpointItem mountpoint = FolderMountpointItem.importFromSOAP(app.zGetActiveAccount(), mountpointFoldername);
@@ -93,9 +93,9 @@ public class MoveMountpoint extends AjaxCommonTest {
 		// Current user creates a subfolder for the move destination
 		FolderItem task = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Tasks);
 
-		String foldername = "subfolder" + ZimbraSeleniumProperties.getUniqueString();
+		String foldername = "subfolder" + ZmailSeleniumProperties.getUniqueString();
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+				"<CreateFolderRequest xmlns='urn:zmailMail'>" +
                 	"<folder name='"+ foldername +"' l='"+ task.getId() +"'/>" +
                 "</CreateFolderRequest>");
 

@@ -12,12 +12,12 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.bean;
+package org.zmail.cs.taglib.bean;
 
 import java.util.Date;
 
-import com.zimbra.common.mime.ContentType;
-import com.zimbra.client.ZDocument;
+import org.zmail.common.mime.ContentType;
+import org.zmail.client.ZDocument;
 
 public class ZDocumentBean {
 

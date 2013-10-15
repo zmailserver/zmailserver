@@ -14,19 +14,19 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.feeds;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.feeds;
 
 import java.net.*;
 
 import org.testng.annotations.*;
 
-import com.zimbra.common.soap.*;
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.items.FolderItem.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.*;
+import org.zmail.common.soap.*;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.items.FolderItem.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.*;
+import org.zmail.qa.selenium.projects.ajax.ui.*;
 
 
 public class RenameFeed extends PrefGroupMailByMessageTest {
@@ -48,11 +48,11 @@ public class RenameFeed extends PrefGroupMailByMessageTest {
 		ZAssert.assertNotNull(inbox, "Verify the inbox is available");
 				
 		// Create a subfolder in Inbox
-		String feedname = "feed" + ZimbraSeleniumProperties.getUniqueString();
+		String feedname = "feed" + ZmailSeleniumProperties.getUniqueString();
 		URL feedurl = new URL("http", "rss.news.yahoo.com", 80, "/rss/topstories");
 
 		app.zGetActiveAccount().soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>"
+					"<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+		"<folder name='"+ feedname +"' l='"+ inbox.getId() +"' url='"+ feedurl.toString() +"'/>"
 				+	"</CreateFolderRequest>");
 
@@ -68,13 +68,13 @@ public class RenameFeed extends PrefGroupMailByMessageTest {
 		ZAssert.assertNotNull(dialog, "Verify the dialog opened");
 		
 		// Set the name, click OK
-		String name2 = "feed" + ZimbraSeleniumProperties.getUniqueString();
+		String name2 = "feed" + ZmailSeleniumProperties.getUniqueString();
 		dialog.zSetNewName(name2);
 		dialog.zClickButton(Button.B_OK);
 
 		
 		// Get all the folders and verify the new name appears and the old name disappears
-		app.zGetActiveAccount().soapSend("<GetFolderRequest xmlns = 'urn:zimbraMail'/>");
+		app.zGetActiveAccount().soapSend("<GetFolderRequest xmlns = 'urn:zmailMail'/>");
 		
 		Element[] eFolder1 = app.zGetActiveAccount().soapSelectNodes("//mail:folder[@name='"+ feedname +"']");
 		ZAssert.assertEquals(eFolder1.length, 0, "Verify the old folder name no longer exists");

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.clientuploader;
+package org.zmail.clientuploader;
 
 /**
  * <code>ZClientUploaderException</code> will be thrown if error occurs in this extension.

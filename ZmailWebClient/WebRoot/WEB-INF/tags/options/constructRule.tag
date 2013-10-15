@@ -14,12 +14,12 @@
 --%>
 <%@ tag body-content="empty" %>
 <%@ attribute name="var" rtexprvalue="false" required="true" type="java.lang.String" %>
-<%@ variable name-from-attribute="var" alias='ruleVar' scope="AT_BEGIN" variable-class="com.zimbra.client.ZFilterRule" %>
+<%@ variable name-from-attribute="var" alias='ruleVar' scope="AT_BEGIN" variable-class="org.zmail.client.ZFilterRule" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
-<%@ taglib prefix="app" uri="com.zimbra.htmlclient" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
+<%@ taglib prefix="app" uri="org.zmail.htmlclient" %>
 
 <zm:filterRule var="ruleVar" name="${param.rulename}" active="${param.ruleactive}" allconditions="${param.allof eq 'all'}">
     <c:set var="badDate" value=""/>

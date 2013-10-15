@@ -112,18 +112,18 @@ AjxPackage.require("ajax.dwt.widgets.DwtIframe");
 AjxPackage.require("ajax.dwt.widgets.DwtForm");
 AjxPackage.require("ajax.dwt.widgets.DwtMessageDialog");
 
-AjxPackage.require("zimbra.csfe.ZmBatchCommand");
-AjxPackage.require("zimbra.csfe.ZmCsfeCommand");
-AjxPackage.require("zimbra.csfe.ZmCsfeException");
-AjxPackage.require("zimbra.csfe.ZmCsfeResult");
+AjxPackage.require("zmail.csfe.ZmBatchCommand");
+AjxPackage.require("zmail.csfe.ZmCsfeCommand");
+AjxPackage.require("zmail.csfe.ZmCsfeException");
+AjxPackage.require("zmail.csfe.ZmCsfeResult");
 
-AjxPackage.require("zimbraMail.core.ZmId");
-AjxPackage.require("zimbraMail.share.model.events.ZmEvent");
-AjxPackage.require("zimbraMail.share.model.events.ZmAppEvent");
-AjxPackage.require("zimbraMail.share.model.ZmModel");
-AjxPackage.require("zimbraMail.share.model.ZmSetting");
-AjxPackage.require("zimbraMail.core.ZmAppCtxt");
-AjxPackage.require("zimbraMail.core.ZmOperation");
-AjxPackage.require("zimbraMail.core.ZmMimeTable");
+AjxPackage.require("zmailMail.core.ZmId");
+AjxPackage.require("zmailMail.share.model.events.ZmEvent");
+AjxPackage.require("zmailMail.share.model.events.ZmAppEvent");
+AjxPackage.require("zmailMail.share.model.ZmModel");
+AjxPackage.require("zmailMail.share.model.ZmSetting");
+AjxPackage.require("zmailMail.core.ZmAppCtxt");
+AjxPackage.require("zmailMail.core.ZmOperation");
+AjxPackage.require("zmailMail.core.ZmMimeTable");
 
 

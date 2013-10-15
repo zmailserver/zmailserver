@@ -33,7 +33,7 @@ ZmZimletContext = function(id, zimlet) {
 	this.json = ZmZimletContext.sanitize(zimlet, "zimlet", ZmZimletContext.RE_ARRAY_ELEMENTS);
 
 	this.id = id;
-	this.icon = "ZimbraIcon";
+	this.icon = "ZmailIcon";
 	this.ctxt = zimlet.zimletContext;
 	this.config = zimlet.zimletConfig;
 	zimlet = zimlet.zimlet[0];
@@ -177,7 +177,7 @@ function(obj){
 
 /**
  * This function creates a 'sane' JSON object, given one returned by the
- * Zimbra server.
+ * Zmail server.
  *<p>
  * It will basically remove unnecessary arrays and create String objects for
  * those tags that have text data, so that we don't need to dereference lots of

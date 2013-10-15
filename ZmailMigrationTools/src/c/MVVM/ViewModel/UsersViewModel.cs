@@ -62,7 +62,7 @@ public class UsersViewModel: BaseViewModel
             string[] tokens = users[i].Split('~');
             if (tokens.Length < 5)
             {
-                MessageBox.Show("Object picker returned insufficient data", "Zimbra Migration", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Object picker returned insufficient data", "Zmail Migration", MessageBoxButton.OK, MessageBoxImage.Error);
                 EnablePopButtons = true;
                 return;
             }
@@ -143,13 +143,13 @@ public class UsersViewModel: BaseViewModel
                 CSVDelimiter = ",";
             }
 
-            ZimbraDomain = Z11.UserProvision.DestinationDomain;
+            ZmailDomain = Z11.UserProvision.DestinationDomain;
             if (DomainList.Count > 0)
-                CurrentDomainSelection = (ZimbraDomain == null) ? 0 :
-                    DomainList.IndexOf(ZimbraDomain);
+                CurrentDomainSelection = (ZmailDomain == null) ? 0 :
+                    DomainList.IndexOf(ZmailDomain);
 
             else
-                DomainList.Add(ZimbraDomain);
+                DomainList.Add(ZmailDomain);
 
         }
         if (fDialog.ShowDialog() == true)
@@ -176,7 +176,7 @@ public class UsersViewModel: BaseViewModel
                      * }
                      * catch (IOException ex)
                      * {
-                     *  MessageBox.Show(ex.Message, "Zimbra Migration", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                     *  MessageBox.Show(ex.Message, "Zmail Migration", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                      * }*/
                     List<string[]> parsedData = new List<string[]>();
                     try
@@ -200,7 +200,7 @@ public class UsersViewModel: BaseViewModel
                         {
                             MessageBox.Show(
                                 "There is no user information stored.Please enter some user info",
-                                "Zimbra Migration", MessageBoxButton.OK,
+                                "Zmail Migration", MessageBoxButton.OK,
                                 MessageBoxImage.Error);
                         }
                     }
@@ -250,7 +250,7 @@ public class UsersViewModel: BaseViewModel
                         }
                         catch (Exception)
                         {
-                            MessageBox.Show("Incorrect .csv file format", "Zimbra Migration", MessageBoxButton.OK, MessageBoxImage.Error);
+                            MessageBox.Show("Incorrect .csv file format", "Zmail Migration", MessageBoxButton.OK, MessageBoxImage.Error);
                             return;
                         }
 
@@ -276,19 +276,19 @@ public class UsersViewModel: BaseViewModel
                         fileRead.Close();
                     }*/
                    /* {
-                        ZimbraDomain = Z11.UserProvision.DestinationDomain;
+                        ZmailDomain = Z11.UserProvision.DestinationDomain;
                         if (DomainList.Count > 0)
-                            CurrentDomainSelection = (ZimbraDomain == null) ? 0 :
-                                DomainList.IndexOf(ZimbraDomain);
+                            CurrentDomainSelection = (ZmailDomain == null) ? 0 :
+                                DomainList.IndexOf(ZmailDomain);
 
                         else
-                            DomainList.Add(ZimbraDomain);
+                            DomainList.Add(ZmailDomain);
                     }*/
                     scheduleViewModel.SetUsermapFile(fDialog.FileName);
                 }
             }
             if (!bCSV)
-                MessageBox.Show("Only CSV files are supported", "Zimbra Migration",
+                MessageBox.Show("Only CSV files are supported", "Zmail Migration",
                     MessageBoxButton.OK, MessageBoxImage.Exclamation);
         }
     }
@@ -421,10 +421,10 @@ public class UsersViewModel: BaseViewModel
     {
         if (!ValidateUsersList(true))
             return;
-        ZimbraAPI zimbraAPI = new ZimbraAPI(isServer);
-        if (ZimbraValues.zimbraValues.AuthToken.Length == 0)
+        ZmailAPI zmailAPI = new ZmailAPI(isServer);
+        if (ZmailValues.zmailValues.AuthToken.Length == 0)
         {
-            MessageBox.Show("You must log on to the Zimbra server", "Zimbra Migration",
+            MessageBox.Show("You must log on to the Zmail server", "Zmail Migration",
                 MessageBoxButton.OK, MessageBoxImage.Error);
             return;
         }
@@ -438,14 +438,14 @@ public class UsersViewModel: BaseViewModel
         {
             string userName = (UsersList[i].MappedName.Length > 0) ? UsersList[i].MappedName :
                 UsersList[i].Username;
-            string acctName = userName + '@' + ZimbraDomain;
+            string acctName = userName + '@' + ZmailDomain;
 
-            if (zimbraAPI.GetAccount(acctName) == 0)
+            if (zmailAPI.GetAccount(acctName) == 0)
             {
                 UsersList[i].IsProvisioned = true;
                 scheduleViewModel.SchedList[i].isProvisioned = true;    // get (SchedList) in schedule view model will set again
             }
-            else if (zimbraAPI.LastError.IndexOf("no such account") != -1)
+            else if (zmailAPI.LastError.IndexOf("no such account") != -1)
             {
                 UsersList[i].IsProvisioned = false;     // get (SchedList) in schedule view model will set again
                 scheduleViewModel.SchedList[i].isProvisioned = false;
@@ -457,7 +457,7 @@ public class UsersViewModel: BaseViewModel
             else
             {
                 MessageBox.Show(string.Format("Error accessing account {0}: {1}", acctName,
-                    zimbraAPI.LastError), "Zimbra Migration", MessageBoxButton.OK,
+                    zmailAPI.LastError), "Zmail Migration", MessageBoxButton.OK,
                     MessageBoxImage.Error);
             }
         }
@@ -513,7 +513,7 @@ public class UsersViewModel: BaseViewModel
         {
             if (bShowWarning)
             {
-                MessageBox.Show("Please specify a source name", "Zimbra Migration", MessageBoxButton.OK,
+                MessageBox.Show("Please specify a source name", "Zmail Migration", MessageBoxButton.OK,
                                 MessageBoxImage.Warning);
             }
             EnableNext = false;
@@ -553,7 +553,7 @@ public class UsersViewModel: BaseViewModel
             ScheduleViewModel scheduleViewModel =
                 ((ScheduleViewModel)ViewModelPtrs[(int)ViewType.SCHED]);
 
-            ZimbraDomain = DomainList[CurrentDomainSelection];
+            ZmailDomain = DomainList[CurrentDomainSelection];
             if (scheduleViewModel.GetConfigFile().Length > 0)
             {
                 if (CurrentDomainSelection > -1)
@@ -577,7 +577,7 @@ public class UsersViewModel: BaseViewModel
         }
         catch (ArgumentOutOfRangeException)
         {
-             MessageBox.Show("Please specify a domain", "Zimbra Migration", MessageBoxButton.OK,
+             MessageBox.Show("Please specify a domain", "Zmail Migration", MessageBoxButton.OK,
                              MessageBoxImage.Warning);
         }
     }
@@ -632,7 +632,7 @@ public class UsersViewModel: BaseViewModel
         }
     }
 
-    public string ZimbraDomain {
+    public string ZmailDomain {
         get { return m_config.UserProvision.DestinationDomain; }
         set
         {
@@ -640,7 +640,7 @@ public class UsersViewModel: BaseViewModel
                 return;
             m_config.UserProvision.DestinationDomain = value;
 
-            OnPropertyChanged(new PropertyChangedEventArgs("ZimbraDomain"));
+            OnPropertyChanged(new PropertyChangedEventArgs("ZmailDomain"));
         }
     }
     public int CurrentUserSelection {

@@ -14,9 +14,9 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_example_toolbarhook"
+<zimlet name="org_zmail_example_toolbarhook"
         version="1.0"
         description="An example zimlet that adds a button to the Compose toolbar.">
-    <include>com_zimbra_example_toolbarhook.js</include>
-    <handlerObject>com_zimbra_example_toolbarhook_HandlerObject</handlerObject>
+    <include>org_zmail_example_toolbarhook.js</include>
+    <handlerObject>org_zmail_example_toolbarhook_HandlerObject</handlerObject>
 </zimlet>

@@ -12,20 +12,20 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib;
+package org.zmail.cs.taglib;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.calendar.Invite;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.calendar.Invite;
 
-public class Appointment extends ZimbraTag {
+public class Appointment extends ZmailTag {
     private static final long serialVersionUID = -4994874857866850527L;
 
     private String mApptId;
@@ -71,12 +71,12 @@ public class Appointment extends ZimbraTag {
     }
 
     @Override
-    public String getContentStart(Account acct, OperationContext octxt) throws ZimbraTagException, ServiceException {
+    public String getContentStart(Account acct, OperationContext octxt) throws ZmailTagException, ServiceException {
         if (mApptId == null) {
-            throw ZimbraTagException.MISSING_ATTR("id");
+            throw ZmailTagException.MISSING_ATTR("id");
         }
         if (mField == null) {
-            throw ZimbraTagException.MISSING_ATTR("field");
+            throw ZmailTagException.MISSING_ATTR("field");
         }
         if (!sFields.containsKey(mField)) {
             return "";

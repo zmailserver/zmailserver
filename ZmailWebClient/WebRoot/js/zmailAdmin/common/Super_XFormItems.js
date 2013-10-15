@@ -1622,7 +1622,7 @@ XFormItemFactory.createItemType("_ZA_TOP_GROUPER_", "za_top_grouper", ZATopGroup
 ZATopGrouper_XFormItem.prototype.numCols = 2;
 ZATopGrouper_XFormItem.prototype.colSizes = ["275px","auto"];
 ZATopGrouper_XFormItem.isGroupVisible = function(attrsArray, rightsArray,entry) {
-	if(ZaZimbraAdmin.currentAdminAccount.attrs[ZaAccount.A_zimbraIsAdminAccount] == 'TRUE')
+	if(ZaZmailAdmin.currentAdminAccount.attrs[ZaAccount.A_zmailIsAdminAccount] == 'TRUE')
 		return true;
 
 	if(!entry)
@@ -1773,7 +1773,7 @@ ZAGroup_XFormItem.prototype.initializeItems = function () {
 ZAWizGroup_XFormItem = function() {}
 XFormItemFactory.createItemType("_ZAWIZGROUP_", "zawizgroup", ZAWizGroup_XFormItem, Group_XFormItem);
 ZAWizGroup_XFormItem.prototype.numCols = 2;
-ZAWizGroup_XFormItem.prototype.colSizes = [(AjxEnv.isIE ? "100px":"200px"),(AjxEnv.isIE ? "450px":"275px" )];// modified by qin@zimbra.com
+ZAWizGroup_XFormItem.prototype.colSizes = [(AjxEnv.isIE ? "100px":"200px"),(AjxEnv.isIE ? "450px":"275px" )];// modified by qin@zmail.com
 ZAWizGroup_XFormItem.prototype.cssStyle = "margin-top:20px;margin-bottom:0px;padding-bottom:0px;";
 
 ZARightGrouper_XFormItem = function() {}

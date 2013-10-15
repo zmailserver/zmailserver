@@ -13,13 +13,13 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.taglib.tag.calendar;
+package org.zmail.cs.taglib.tag.calendar;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.taglib.bean.ZFileUploaderBean;
-import com.zimbra.cs.taglib.tag.ZimbraSimpleTag;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZMailbox.ZImportAppointmentsResult;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.taglib.bean.ZFileUploaderBean;
+import org.zmail.cs.taglib.tag.ZmailSimpleTag;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZMailbox.ZImportAppointmentsResult;
 
 import javax.servlet.jsp.JspContext;
 import javax.servlet.jsp.JspException;
@@ -27,7 +27,7 @@ import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 import java.io.IOException;
 
-public class ImportAppointmentsTag extends ZimbraSimpleTag {
+public class ImportAppointmentsTag extends ZmailSimpleTag {
 
     private String mVar;
     private String mFolderId;

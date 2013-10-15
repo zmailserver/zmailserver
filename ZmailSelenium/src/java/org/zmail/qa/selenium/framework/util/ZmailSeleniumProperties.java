@@ -15,7 +15,7 @@
  * ***** END LICENSE BLOCK *****
  */
 //helper class for retrieving properties
-package com.zimbra.qa.selenium.framework.util;
+package org.zmail.qa.selenium.framework.util;
 
 import java.io.File;
 import java.net.InetAddress;
@@ -27,23 +27,23 @@ import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-public class ZimbraSeleniumProperties {
-	private static final Logger logger = LogManager.getLogger(ZimbraSeleniumProperties.class);
+public class ZmailSeleniumProperties {
+	private static final Logger logger = LogManager.getLogger(ZmailSeleniumProperties.class);
 	
-	// Use these strings as arguments for some standard properties, e.g. ZimbraSeleniumProperties.getStringProperty(PropZimbraServer, "default");
-	public static final String PropZimbraVersion = "zimbraserverversion"; 
+	// Use these strings as arguments for some standard properties, e.g. ZmailSeleniumProperties.getStringProperty(PropZmailServer, "default");
+	public static final String PropZmailVersion = "zmailserverversion"; 
 	private static InetAddress localMachine;
-	private static ZimbraSeleniumProperties instance = null;
+	private static ZmailSeleniumProperties instance = null;
 	private File BaseDirectory = null;
 	private File PropertiesConfigurationFilename = null;	
 	private PropertiesConfiguration configProp;
 
 	public static void setStringProperty(String key,String value) {
-		ZimbraSeleniumProperties.getInstance().getConfigProp().setProperty(key, value);
+		ZmailSeleniumProperties.getInstance().getConfigProp().setProperty(key, value);
 	}
 	
 	public static String getStringProperty(String key, String defaultValue) {
-		return (ZimbraSeleniumProperties.getInstance().getConfigProp()
+		return (ZmailSeleniumProperties.getInstance().getConfigProp()
 				.getString(key, defaultValue));
 	}
 
@@ -56,7 +56,7 @@ public class ZimbraSeleniumProperties {
 	}
 
 	public static int getIntProperty(String key, int defaultValue) {
-		String value = ZimbraSeleniumProperties.getInstance().getConfigProp().getString(key, null);
+		String value = ZmailSeleniumProperties.getInstance().getConfigProp().getString(key, null);
 		if ( value == null )
 			return (defaultValue);
 		return (Integer.parseInt(value));
@@ -68,42 +68,42 @@ public class ZimbraSeleniumProperties {
 	}
 
 	public static ResourceBundle getResourceBundleProperty(String key) {
-		return ((ResourceBundle) ZimbraSeleniumProperties.getInstance()
+		return ((ResourceBundle) ZmailSeleniumProperties.getInstance()
 				.getConfigProp().getProperty(key));
 	}
 
 	public static PropertiesConfiguration getConfigProperties() {
-		return ZimbraSeleniumProperties.getInstance().getConfigProp();
+		return ZmailSeleniumProperties.getInstance().getConfigProp();
 	}
 	
 	public static PropertiesConfiguration setConfigProperties(String filename) {
 		logger.info("setConfigProperties using: "+ filename);
-		ZimbraSeleniumProperties.getInstance().PropertiesConfigurationFilename = new File(filename);
-		ZimbraSeleniumProperties.getInstance().init();
-		return (ZimbraSeleniumProperties.getInstance().getConfigProp());
+		ZmailSeleniumProperties.getInstance().PropertiesConfigurationFilename = new File(filename);
+		ZmailSeleniumProperties.getInstance().init();
+		return (ZmailSeleniumProperties.getInstance().getConfigProp());
 	}
 
 	public static String getBaseDirectory() {
-		if (ZimbraSeleniumProperties.getInstance().BaseDirectory == null)
+		if (ZmailSeleniumProperties.getInstance().BaseDirectory == null)
 			return (".");
-		return (ZimbraSeleniumProperties.getInstance().BaseDirectory.getAbsolutePath());
+		return (ZmailSeleniumProperties.getInstance().BaseDirectory.getAbsolutePath());
 	}
 	
 	public static File setBaseDirectory(String directory) {
 		logger.info("setWorkingDirectory using: "+ directory);
-		ZimbraSeleniumProperties.getInstance().BaseDirectory = new File(directory);
-		return (ZimbraSeleniumProperties.getInstance().BaseDirectory);
+		ZmailSeleniumProperties.getInstance().BaseDirectory = new File(directory);
+		return (ZmailSeleniumProperties.getInstance().BaseDirectory);
 	}
 	
 	private PropertiesConfiguration getConfigProp() {
 		return configProp;
 	}
 
-	private static ZimbraSeleniumProperties getInstance() {
+	private static ZmailSeleniumProperties getInstance() {
 		if ( instance == null ) {
-			synchronized(ZimbraSeleniumProperties.class) {
+			synchronized(ZmailSeleniumProperties.class) {
 				if ( instance == null ) {
-					instance = new ZimbraSeleniumProperties();
+					instance = new ZmailSeleniumProperties();
 					instance.init();
 				}
 			}
@@ -111,8 +111,8 @@ public class ZimbraSeleniumProperties {
 		return instance;
 	}
 
-	private ZimbraSeleniumProperties() {
-		logger.debug("new ZimbraSeleniumProperties");
+	private ZmailSeleniumProperties() {
+		logger.debug("new ZmailSeleniumProperties");
 	}
 
 	private void init() {
@@ -178,9 +178,9 @@ public class ZimbraSeleniumProperties {
 
 		defaultProp.setProperty("mode", "http");
 
-		defaultProp.setProperty("server", "qa60.lab.zimbra.com");
+		defaultProp.setProperty("server", "qa60.lab.zmail.com");
 
-		defaultProp.setProperty("ZimbraLogRoot", "test-output");
+		defaultProp.setProperty("ZmailLogRoot", "test-output");
 
 		defaultProp.setProperty("adminName", "admin");
 
@@ -217,7 +217,7 @@ public class ZimbraSeleniumProperties {
 	 * in the configuration settings
 	 */
 	public static boolean isWebDriver() {
-		if (ZimbraSeleniumProperties.getStringProperty("seleniumDriver") != null && ZimbraSeleniumProperties.getStringProperty("seleniumDriver").contentEquals("WebDriver"))
+		if (ZmailSeleniumProperties.getStringProperty("seleniumDriver") != null && ZmailSeleniumProperties.getStringProperty("seleniumDriver").contentEquals("WebDriver"))
 			return true;
 		else
 			return false;
@@ -229,7 +229,7 @@ public class ZimbraSeleniumProperties {
 	 * in the configuration settings
 	 */
 	public static boolean isWebDriverBackedSelenium() {
-		if (ZimbraSeleniumProperties.getStringProperty("seleniumDriver") != null && ZimbraSeleniumProperties.getStringProperty("seleniumDriver").contentEquals("WebDriverBackedSelenium"))
+		if (ZmailSeleniumProperties.getStringProperty("seleniumDriver") != null && ZmailSeleniumProperties.getStringProperty("seleniumDriver").contentEquals("WebDriverBackedSelenium"))
 			return true;
 		else
 			return false;
@@ -270,9 +270,9 @@ public class ZimbraSeleniumProperties {
 			return (browser);
 		}
 				
-		browser = ZimbraSeleniumProperties.getStringProperty(
-				ZimbraSeleniumProperties.getLocalHost() + ".browser",
-				ZimbraSeleniumProperties.getStringProperty("browser"));
+		browser = ZmailSeleniumProperties.getStringProperty(
+				ZmailSeleniumProperties.getLocalHost() + ".browser",
+				ZmailSeleniumProperties.getStringProperty("browser"));
 		
 		if (browser.charAt(0) == '*') {
 			browser = browser.substring(1);
@@ -287,7 +287,7 @@ public class ZimbraSeleniumProperties {
 		}
 		
 		// Save the browser value (for logging)
-		ZimbraSeleniumProperties.setStringProperty(CalculatedBrowser, browser);
+		ZmailSeleniumProperties.setStringProperty(CalculatedBrowser, browser);
 
 		return (browser);
 	}
@@ -299,7 +299,7 @@ public class ZimbraSeleniumProperties {
 	 */
 	public static String getLogoutURL() {
 		
-		ZimbraURI uri = new ZimbraURI(ZimbraURI.getBaseURI());
+		ZmailURI uri = new ZmailURI(ZmailURI.getBaseURI());
 		uri.addQuery("loginOp", "logout");
 		return (uri.toString());
 
@@ -313,15 +313,15 @@ public class ZimbraSeleniumProperties {
 	 */
 	public static String getBaseURL() {
 		
-		return (ZimbraURI.getBaseURI().toString());
+		return (ZmailURI.getBaseURI().toString());
 		
 	}
 	
-	public static String zimbraGetVersionString() throws HarnessException {		
-		ZimbraAdminAccount.GlobalAdmin().soapSend("<GetVersionInfoRequest xmlns='urn:zimbraAdmin'/>");
-		String version = ZimbraAdminAccount.GlobalAdmin().soapSelectValue("//admin:info", "version");
+	public static String zmailGetVersionString() throws HarnessException {		
+		ZmailAdminAccount.GlobalAdmin().soapSend("<GetVersionInfoRequest xmlns='urn:zmailAdmin'/>");
+		String version = ZmailAdminAccount.GlobalAdmin().soapSelectValue("//admin:info", "version");
 		if ( version == null )
-			throw new HarnessException("Unable to determine version from GetVersionInfoResponse "+ ZimbraAdminAccount.GlobalAdmin().soapLastResponse());
+			throw new HarnessException("Unable to determine version from GetVersionInfoResponse "+ ZmailAdminAccount.GlobalAdmin().soapLastResponse());
 		
 		// The version string looks like 6.0.7_GA_2470.UBUNTU8.NETWORK
 		return (version);
@@ -338,12 +338,12 @@ public class ZimbraSeleniumProperties {
 
 		System.out.println(System.getProperty("user.dir"));
 
-		String br = (String) ZimbraSeleniumProperties.getInstance()
+		String br = (String) ZmailSeleniumProperties.getInstance()
 				.getConfigProp().getProperty("browser");
 		System.out.println(br);
 		logger.debug(br);
 
-		ResourceBundle zmMsg = (ResourceBundle) ZimbraSeleniumProperties
+		ResourceBundle zmMsg = (ResourceBundle) ZmailSeleniumProperties
 				.getInstance().getConfigProp().getProperty("zmMsg");
 		System.out.println(zmMsg.getLocale());
 		logger.debug(zmMsg.getLocale());				

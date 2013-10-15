@@ -14,15 +14,15 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.admin.items;
+package org.zmail.qa.selenium.projects.admin.items;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import com.zimbra.qa.selenium.framework.items.IItem;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
+import org.zmail.qa.selenium.framework.items.IItem;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
 
 public class CosItem implements IItem {
 
@@ -35,12 +35,12 @@ public class CosItem implements IItem {
 	public CosItem() {
 		super();
 
-		cosName = "cos" + ZimbraSeleniumProperties.getUniqueString();
+		cosName = "cos" + ZmailSeleniumProperties.getUniqueString();
 		Id = null;
 
 	}
 	@Override
-	public void createUsingSOAP(ZimbraAccount account) throws HarnessException {
+	public void createUsingSOAP(ZmailAccount account) throws HarnessException {
 		// TODO Auto-generated method stub
 
 	}

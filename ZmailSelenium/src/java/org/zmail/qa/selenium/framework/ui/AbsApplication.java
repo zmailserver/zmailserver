@@ -14,16 +14,16 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.ui;
+package org.zmail.qa.selenium.framework.ui;
 
 import java.util.*;
 
 import org.apache.log4j.*;
 
-import com.zimbra.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.*;
 
 /**
- * A <code>AbsApplication</code> object defines a Zimbra "mail client", such as
+ * A <code>AbsApplication</code> object defines a Zmail "mail client", such as
  * the Ajax client, HTML client, Mobile client, Desktop client, and Admin console.
  * <p>
  * The <code>Application</code> object is the main access point
@@ -36,7 +36,7 @@ import com.zimbra.qa.selenium.framework.util.*;
  * <p>
  * Additionally, the <code>Application</code> object has data
  * specific to the current running client, such as currently logged in 
- * {@link ZimbraAccount}, the current localization {@link I18N}, etc.
+ * {@link ZmailAccount}, the current localization {@link I18N}, etc.
  * <p>
  * 
  * @author Matt Rhoades
@@ -58,7 +58,7 @@ public abstract class AbsApplication {
 	/**
 	 * The currently logged in user
 	 **/
-	private ZimbraAccount authenticatedAccount = null;
+	private ZmailAccount authenticatedAccount = null;
 	
 	/**
 	 * The Localization bundles for the currently logged in user
@@ -89,7 +89,7 @@ public abstract class AbsApplication {
 	 * For instance, when the {@link AppAjaxClient} is displaying the
 	 * {@link PageMail} mail view, this method will return {@link PageMail},
 	 * {@link PageMain}, {@link TreeMail} objects.
-	 * @see <a href="http://wiki.zimbra.com/wiki/Testing:_Selenium:_ZimbraSelenium_Overview#Mail_Page">Screen reference</a>
+	 * @see <a href="http://wiki.zmail.com/wiki/Testing:_Selenium:_ZmailSelenium_Overview#Mail_Page">Screen reference</a>
 	 * @return
 	 * @throws HarnessException
 	 */
@@ -114,7 +114,7 @@ public abstract class AbsApplication {
 	 * <p>
 	 * @return the authenticated account
 	 */
-	protected ZimbraAccount zSetActiveAcount(ZimbraAccount account) throws HarnessException {
+	protected ZmailAccount zSetActiveAcount(ZmailAccount account) throws HarnessException {
 		
 		// Check if we are setting the active account to nobody
 		if ( account == null ) {
@@ -144,7 +144,7 @@ public abstract class AbsApplication {
 	 * Return the currently logged in account
 	 * @return null if no account is authenticated
 	 */
-	public ZimbraAccount zGetActiveAccount() {
+	public ZmailAccount zGetActiveAccount() {
 		return (authenticatedAccount);
 	}
 

@@ -15,7 +15,7 @@
 
 /**
 * @class ZaServer
-* This class represents zimbraServer objects. ZaServer extends ZaItem
+* This class represents zmailServer objects. ZaServer extends ZaItem
 * @author Greg Solovyev
 * @contructor ZaServer
 * @param app reference to the application instance
@@ -33,99 +33,99 @@ ZaItem.loadMethods["ZaServer"] = new Array();
 ZaItem.initMethods["ZaServer"] = new Array();
 ZaItem.modifyMethods["ZaServer"] = new Array();
 ZaItem.modelExtensions["ZaServer"] = new Array();
-//attribute name constants, this values are taken from zimbra.schema
+//attribute name constants, this values are taken from zmail.schema
 ZaServer.A_name = "cn";
 ZaServer.A_description = "description";
-ZaServer.A_notes = "zimbraNotes";
-ZaServer.A_Service = "zimbraService";
-ZaServer.A_ServiceHostname = "zimbraServiceHostname";
-ZaServer.A_zimbraMailPort = "zimbraMailPort";
-ZaServer.A_zimbraMailSSLPort = "zimbraMailSSLPort";
-ZaServer.A_zimbraMailMode = "zimbraMailMode";
-ZaServer.A_zimbraMailReferMode = "zimbraMailReferMode";
+ZaServer.A_notes = "zmailNotes";
+ZaServer.A_Service = "zmailService";
+ZaServer.A_ServiceHostname = "zmailServiceHostname";
+ZaServer.A_zmailMailPort = "zmailMailPort";
+ZaServer.A_zmailMailSSLPort = "zmailMailSSLPort";
+ZaServer.A_zmailMailMode = "zmailMailMode";
+ZaServer.A_zmailMailReferMode = "zmailMailReferMode";
 // services
-ZaServer.A_zimbraServiceInstalled = "zimbraServiceInstalled";
-ZaServer.A_zimbraLdapServiceInstalled = "_"+ZaServer.A_zimbraServiceInstalled+"_ldap";
-ZaServer.A_zimbraMailboxServiceInstalled = "_"+ZaServer.A_zimbraServiceInstalled+"_mailbox";
-ZaServer.A_zimbraMtaServiceInstalled = "_"+ZaServer.A_zimbraServiceInstalled+"_mta";
-ZaServer.A_zimbraSnmpServiceInstalled = "_"+ZaServer.A_zimbraServiceInstalled+"_snmp";
-ZaServer.A_zimbraAntiVirusServiceInstalled = "_"+ZaServer.A_zimbraServiceInstalled+"_antivirus";
-ZaServer.A_zimbraAntiSpamServiceInstalled = "_"+ZaServer.A_zimbraServiceInstalled+"_antispam";
-ZaServer.A_zimbraOpenDKIMServiceInstalled = "_"+ZaServer.A_zimbraServiceInstalled+"_opendkim";
-ZaServer.A_zimbraSpellServiceInstalled = "_"+ZaServer.A_zimbraServiceInstalled+"_spell";
-ZaServer.A_zimbraLoggerServiceInstalled = "_"+ZaServer.A_zimbraServiceInstalled+"_logger";
-ZaServer.A_zimbraMailProxyServiceInstalled = "_"+ZaServer.A_zimbraServiceInstalled+"_proxy";
-ZaServer.A_zimbraVmwareHAServiceInstalled = "_"+ ZaServer.A_zimbraServiceInstalled+"_vmwareha";
-ZaServer.A_zimbraPolicydServiceInstalled = "_"+ ZaServer.A_zimbraServiceInstalled+"_cbpolicyd";
+ZaServer.A_zmailServiceInstalled = "zmailServiceInstalled";
+ZaServer.A_zmailLdapServiceInstalled = "_"+ZaServer.A_zmailServiceInstalled+"_ldap";
+ZaServer.A_zmailMailboxServiceInstalled = "_"+ZaServer.A_zmailServiceInstalled+"_mailbox";
+ZaServer.A_zmailMtaServiceInstalled = "_"+ZaServer.A_zmailServiceInstalled+"_mta";
+ZaServer.A_zmailSnmpServiceInstalled = "_"+ZaServer.A_zmailServiceInstalled+"_snmp";
+ZaServer.A_zmailAntiVirusServiceInstalled = "_"+ZaServer.A_zmailServiceInstalled+"_antivirus";
+ZaServer.A_zmailAntiSpamServiceInstalled = "_"+ZaServer.A_zmailServiceInstalled+"_antispam";
+ZaServer.A_zmailOpenDKIMServiceInstalled = "_"+ZaServer.A_zmailServiceInstalled+"_opendkim";
+ZaServer.A_zmailSpellServiceInstalled = "_"+ZaServer.A_zmailServiceInstalled+"_spell";
+ZaServer.A_zmailLoggerServiceInstalled = "_"+ZaServer.A_zmailServiceInstalled+"_logger";
+ZaServer.A_zmailMailProxyServiceInstalled = "_"+ZaServer.A_zmailServiceInstalled+"_proxy";
+ZaServer.A_zmailVmwareHAServiceInstalled = "_"+ ZaServer.A_zmailServiceInstalled+"_vmwareha";
+ZaServer.A_zmailPolicydServiceInstalled = "_"+ ZaServer.A_zmailServiceInstalled+"_cbpolicyd";
 
-ZaServer.A_zimbraPolicydServiceEnabled = "_"+ZaServer.A_zimbraServiceEnabled+"_cbpolicyd";
-ZaServer.A_zimbraReverseProxyHttpEnabled = "zimbraReverseProxyHttpEnabled";
-ZaServer.A_zimbraServiceEnabled = "zimbraServiceEnabled";
-ZaServer.A_zimbraLdapServiceEnabled = "_"+ZaServer.A_zimbraServiceEnabled+"_ldap";
-ZaServer.A_zimbraMailboxServiceEnabled = "_"+ZaServer.A_zimbraServiceEnabled+"_mailbox";
-ZaServer.A_zimbraMtaServiceEnabled = "_"+ZaServer.A_zimbraServiceEnabled+"_mta";
-ZaServer.A_zimbraSnmpServiceEnabled = "_"+ZaServer.A_zimbraServiceEnabled+"_snmp";
-ZaServer.A_zimbraAntiVirusServiceEnabled = "_"+ZaServer.A_zimbraServiceEnabled+"_antivirus";
-ZaServer.A_zimbraAntiSpamServiceEnabled = "_"+ZaServer.A_zimbraServiceEnabled+"_antispam";
-ZaServer.A_zimbraOpenDKIMServiceEnabled = "_"+ZaServer.A_zimbraServiceEnabled+"_opendkim";
-ZaServer.A_zimbraSpellServiceEnabled = "_"+ZaServer.A_zimbraServiceEnabled+"_spell";
-ZaServer.A_zimbraLoggerServiceEnabled = "_"+ZaServer.A_zimbraServiceEnabled+"_logger";
-ZaServer.A_zimbraMailProxyServiceEnabled = "_"+ZaServer.A_zimbraServiceEnabled+"_proxy";
-ZaServer.A_zimbraVmwareHAServiceEnabled = "_"+ZaServer.A_zimbraServiceEnabled+"_vmwareha";
+ZaServer.A_zmailPolicydServiceEnabled = "_"+ZaServer.A_zmailServiceEnabled+"_cbpolicyd";
+ZaServer.A_zmailReverseProxyHttpEnabled = "zmailReverseProxyHttpEnabled";
+ZaServer.A_zmailServiceEnabled = "zmailServiceEnabled";
+ZaServer.A_zmailLdapServiceEnabled = "_"+ZaServer.A_zmailServiceEnabled+"_ldap";
+ZaServer.A_zmailMailboxServiceEnabled = "_"+ZaServer.A_zmailServiceEnabled+"_mailbox";
+ZaServer.A_zmailMtaServiceEnabled = "_"+ZaServer.A_zmailServiceEnabled+"_mta";
+ZaServer.A_zmailSnmpServiceEnabled = "_"+ZaServer.A_zmailServiceEnabled+"_snmp";
+ZaServer.A_zmailAntiVirusServiceEnabled = "_"+ZaServer.A_zmailServiceEnabled+"_antivirus";
+ZaServer.A_zmailAntiSpamServiceEnabled = "_"+ZaServer.A_zmailServiceEnabled+"_antispam";
+ZaServer.A_zmailOpenDKIMServiceEnabled = "_"+ZaServer.A_zmailServiceEnabled+"_opendkim";
+ZaServer.A_zmailSpellServiceEnabled = "_"+ZaServer.A_zmailServiceEnabled+"_spell";
+ZaServer.A_zmailLoggerServiceEnabled = "_"+ZaServer.A_zmailServiceEnabled+"_logger";
+ZaServer.A_zmailMailProxyServiceEnabled = "_"+ZaServer.A_zmailServiceEnabled+"_proxy";
+ZaServer.A_zmailVmwareHAServiceEnabled = "_"+ZaServer.A_zmailServiceEnabled+"_vmwareha";
 
 // MTA
-ZaServer.A_zimbraMtaSaslAuthEnable = "zimbraMtaSaslAuthEnable";
-ZaServer.A_zimbraMtaDnsLookupsEnabled = "zimbraMtaDnsLookupsEnabled";
-ZaServer.A_zimbraMtaRelayHost = "zimbraMtaRelayHost";
-ZaServer.A_zimbraMtaFallbackRelayHost = "zimbraMtaFallbackRelayHost";
-ZaServer.A_zimbraMtaTlsAuthOnly = "zimbraMtaTlsAuthOnly";
-ZaServer.A_zimbraMtaMyNetworks = "zimbraMtaMyNetworks";
+ZaServer.A_zmailMtaSaslAuthEnable = "zmailMtaSaslAuthEnable";
+ZaServer.A_zmailMtaDnsLookupsEnabled = "zmailMtaDnsLookupsEnabled";
+ZaServer.A_zmailMtaRelayHost = "zmailMtaRelayHost";
+ZaServer.A_zmailMtaFallbackRelayHost = "zmailMtaFallbackRelayHost";
+ZaServer.A_zmailMtaTlsAuthOnly = "zmailMtaTlsAuthOnly";
+ZaServer.A_zmailMtaMyNetworks = "zmailMtaMyNetworks";
 //milter server
-ZaServer.A_zimbraMilterBindPort = "zimbraMilterBindPort";
-ZaServer.A_zimbraMilterBindAddress = "zimbraMilterBindAddress";
-ZaServer.A_zimbraMilterServerEnabled = "zimbraMilterServerEnabled";
+ZaServer.A_zmailMilterBindPort = "zmailMilterBindPort";
+ZaServer.A_zmailMilterBindAddress = "zmailMilterBindAddress";
+ZaServer.A_zmailMilterServerEnabled = "zmailMilterServerEnabled";
 
 //smtp
-ZaServer.A_zimbraSmtpHostname  = "zimbraSmtpHostname";
-ZaServer.A_SmtpPort = "zimbraSmtpPort";
-ZaServer.A_SmtpTimeout = "zimbraSmtpTimeout";
+ZaServer.A_zmailSmtpHostname  = "zmailSmtpHostname";
+ZaServer.A_SmtpPort = "zmailSmtpPort";
+ZaServer.A_SmtpTimeout = "zmailSmtpTimeout";
 //Lmtp
-ZaServer.A_LmtpAdvertisedName = "zimbraLmtpAdvertisedName";
-ZaServer.A_LmtpBindAddress = "zimbraLmtpBindAddress";
-ZaServer.A_LmtpBindPort = "zimbraLmtpBindPort";
+ZaServer.A_LmtpAdvertisedName = "zmailLmtpAdvertisedName";
+ZaServer.A_LmtpBindAddress = "zmailLmtpBindAddress";
+ZaServer.A_LmtpBindPort = "zmailLmtpBindPort";
 //pop3
-ZaServer.A_zimbraPop3NumThreads = "zimbraPop3NumThreads";
-ZaServer.A_Pop3AdvertisedName ="zimbraPop3AdvertisedName";
-ZaServer.A_Pop3BindAddress = "zimbraPop3BindAddress";
-ZaServer.A_zimbraPop3BindPort = "zimbraPop3BindPort";
-ZaServer.A_zimbraPop3SSLBindPort = "zimbraPop3SSLBindPort";
-ZaServer.A_Pop3SSLServerEnabled = "zimbraPop3SSLServerEnabled";
-ZaServer.A_Pop3ServerEnabled = "zimbraPop3ServerEnabled"
-ZaServer.A_Pop3CleartextLoginEnabled = "zimbraPop3CleartextLoginEnabled";
+ZaServer.A_zmailPop3NumThreads = "zmailPop3NumThreads";
+ZaServer.A_Pop3AdvertisedName ="zmailPop3AdvertisedName";
+ZaServer.A_Pop3BindAddress = "zmailPop3BindAddress";
+ZaServer.A_zmailPop3BindPort = "zmailPop3BindPort";
+ZaServer.A_zmailPop3SSLBindPort = "zmailPop3SSLBindPort";
+ZaServer.A_Pop3SSLServerEnabled = "zmailPop3SSLServerEnabled";
+ZaServer.A_Pop3ServerEnabled = "zmailPop3ServerEnabled"
+ZaServer.A_Pop3CleartextLoginEnabled = "zmailPop3CleartextLoginEnabled";
 //imap
-ZaServer.A_zimbraImapNumThreads="zimbraImapNumThreads";
-ZaServer.A_zimbraImapBindPort="zimbraImapBindPort";
-ZaServer.A_ImapServerEnabled="zimbraImapServerEnabled";
-ZaServer.A_ImapSSLBindPort="zimbraImapSSLBindPort";
-ZaServer.A_ImapSSLServerEnabled="zimbraImapSSLServerEnabled";
-ZaServer.A_ImapCleartextLoginEnabled="zimbraImapCleartextLoginEnabled";
+ZaServer.A_zmailImapNumThreads="zmailImapNumThreads";
+ZaServer.A_zmailImapBindPort="zmailImapBindPort";
+ZaServer.A_ImapServerEnabled="zmailImapServerEnabled";
+ZaServer.A_ImapSSLBindPort="zmailImapSSLBindPort";
+ZaServer.A_ImapSSLServerEnabled="zmailImapSSLServerEnabled";
+ZaServer.A_ImapCleartextLoginEnabled="zmailImapCleartextLoginEnabled";
 
 //proxy lookup target
-ZaServer.A_zimbraReverseProxyLookupTarget = "zimbraReverseProxyLookupTarget";
+ZaServer.A_zmailReverseProxyLookupTarget = "zmailReverseProxyLookupTarget";
 
 //redo log
-ZaServer.A_RedologEnabled = "zimbraRedologEnabled";
-ZaServer.A_RedologLogPath = "zimbraRedologLogPath";
-ZaServer.A_RedologArchiveDir = "zimbraRedologArchiveDir";
-ZaServer.A_RedologBacklogDir = "zimbraRedologBacklogDir";
-ZaServer.A_RedologRolloverFileSizeKB = "zimbraRedologRolloverFileSizeKB";
-ZaServer.A_RedologFsyncIntervalMS = "zimbraRedologFsyncIntervalMS";
+ZaServer.A_RedologEnabled = "zmailRedologEnabled";
+ZaServer.A_RedologLogPath = "zmailRedologLogPath";
+ZaServer.A_RedologArchiveDir = "zmailRedologArchiveDir";
+ZaServer.A_RedologBacklogDir = "zmailRedologBacklogDir";
+ZaServer.A_RedologRolloverFileSizeKB = "zmailRedologRolloverFileSizeKB";
+ZaServer.A_RedologFsyncIntervalMS = "zmailRedologFsyncIntervalMS";
 //master role settings
-ZaServer.A_MasterRedologClientConnections = "zimbraMasterRedologClientConnections";
-ZaServer.A_MasterRedologClientTimeoutSec = "zimbraMasterRedologClientTimeoutSec";
-ZaServer.A_MasterRedologClientTcpNoDelay = "zimbraMasterRedologClientTcpNoDelay";
+ZaServer.A_MasterRedologClientConnections = "zmailMasterRedologClientConnections";
+ZaServer.A_MasterRedologClientTimeoutSec = "zmailMasterRedologClientTimeoutSec";
+ZaServer.A_MasterRedologClientTcpNoDelay = "zmailMasterRedologClientTcpNoDelay";
 //slave role settings
-ZaServer.A_zimbraUserServicesEnabled = "zimbraUserServicesEnabled";
+ZaServer.A_zmailUserServicesEnabled = "zmailUserServicesEnabled";
 
 //Volume Management
 ZaServer.A_RemovedVolumes = "removed_volumes";
@@ -141,47 +141,47 @@ ZaServer.A_CurrentMsgVolumeId = "current_msg_volume_id";
 ZaServer.A_isCurrent = "isCurrent";
 
 //VAMI Appliance Update
-ZaServer.A_zimbraApplianceVendor = "zimbraApplianceVendor";
-ZaServer.A_zimbraApplianceName = "zimbraApplianceName";
-ZaServer.A_zimbraApplianceVersion = "zimbraApplianceVersion";
-ZaServer.A_zimbraApplianceFullVersion = "zimbraApplianceFullVersion";
-ZaServer.A_zimbraApplianceDetails = "zimbraApplianceDetails";
-ZaServer.A_zimbraApplianceDefaultRepUrl = "zimbraApplianceDefaultRepUrl";
-ZaServer.A_zimbraApplianceCustomRepUrl = "zimbraApplianceCustomRepUrl";
-ZaServer.A_zimbraApplianceCustomRepUrlUser = "zimbraApplianceCustomRepUrlUser";
-ZaServer.A_zimbraApplianceCustomRepUrlPass = "zimbraApplianceCustomRepUrlPass";
-ZaServer.A_zimbraApplianceUpdateOption = "zimbraApplianceUpdateOption";
-ZaServer.A_zimbraApplianceUpdateType = "zimbraApplianceUpdateType";
-ZaServer.A_zimbraApplianceUpdatehourofrun = "zimbraApplianceUpdatehourofrun";
+ZaServer.A_zmailApplianceVendor = "zmailApplianceVendor";
+ZaServer.A_zmailApplianceName = "zmailApplianceName";
+ZaServer.A_zmailApplianceVersion = "zmailApplianceVersion";
+ZaServer.A_zmailApplianceFullVersion = "zmailApplianceFullVersion";
+ZaServer.A_zmailApplianceDetails = "zmailApplianceDetails";
+ZaServer.A_zmailApplianceDefaultRepUrl = "zmailApplianceDefaultRepUrl";
+ZaServer.A_zmailApplianceCustomRepUrl = "zmailApplianceCustomRepUrl";
+ZaServer.A_zmailApplianceCustomRepUrlUser = "zmailApplianceCustomRepUrlUser";
+ZaServer.A_zmailApplianceCustomRepUrlPass = "zmailApplianceCustomRepUrlPass";
+ZaServer.A_zmailApplianceUpdateOption = "zmailApplianceUpdateOption";
+ZaServer.A_zmailApplianceUpdateType = "zmailApplianceUpdateType";
+ZaServer.A_zmailApplianceUpdatehourofrun = "zmailApplianceUpdatehourofrun";
 
 //bind ip address
-ZaServer.A_zimbraMailBindAddress = "zimbraMailBindAddress";
-ZaServer.A_zimbraMailSSLBindAddress = "zimbraMailSSLBindAddress";
-ZaServer.A_zimbraMailSSLClientCertBindAddress = "zimbraMailSSLClientCertBindAddress";
-ZaServer.A_zimbraAdminBindAddress = "zimbraAdminBindAddress";
+ZaServer.A_zmailMailBindAddress = "zmailMailBindAddress";
+ZaServer.A_zmailMailSSLBindAddress = "zmailMailSSLBindAddress";
+ZaServer.A_zmailMailSSLClientCertBindAddress = "zmailMailSSLClientCertBindAddress";
+ZaServer.A_zmailAdminBindAddress = "zmailAdminBindAddress";
 
 //spnego
-ZaServer.A_zimbraSpnegoAuthPrincipal = "zimbraSpnegoAuthPrincipal";
-ZaServer.A_zimbraSpnegoAuthTargetName = "zimbraSpnegoAuthTargetName";
+ZaServer.A_zmailSpnegoAuthPrincipal = "zmailSpnegoAuthPrincipal";
+ZaServer.A_zmailSpnegoAuthTargetName = "zmailSpnegoAuthTargetName";
 
 // Auto provision
-ZaServer.A_zimbraAutoProvPollingInterval = "zimbraAutoProvPollingInterval";
-ZaServer.A_zimbraAutoProvScheduledDomains = "zimbraAutoProvScheduledDomains";
+ZaServer.A_zmailAutoProvPollingInterval = "zmailAutoProvPollingInterval";
+ZaServer.A_zmailAutoProvScheduledDomains = "zmailAutoProvScheduledDomains";
 
 // web client authentication
-ZaServer.A_zimbraMailSSLClientCertMode = "zimbraMailSSLClientCertMode";
-ZaServer.A_zimbraMailSSLClientCertPort = "zimbraMailSSLClientCertPort";
-ZaServer.A_zimbraMailSSLProxyClientCertPort = "zimbraMailSSLProxyClientCertPort";
-ZaServer.A_zimbraReverseProxyMailMode = "zimbraReverseProxyMailMode";
-ZaServer.A_zimbraReverseProxyClientCertMode = "zimbraReverseProxyClientCertMode";
-ZaServer.A_zimbraReverseProxyClientCertCA = "zimbraReverseProxyClientCertCA";
+ZaServer.A_zmailMailSSLClientCertMode = "zmailMailSSLClientCertMode";
+ZaServer.A_zmailMailSSLClientCertPort = "zmailMailSSLClientCertPort";
+ZaServer.A_zmailMailSSLProxyClientCertPort = "zmailMailSSLProxyClientCertPort";
+ZaServer.A_zmailReverseProxyMailMode = "zmailReverseProxyMailMode";
+ZaServer.A_zmailReverseProxyClientCertMode = "zmailReverseProxyClientCertMode";
+ZaServer.A_zmailReverseProxyClientCertCA = "zmailReverseProxyClientCertCA";
 
 // other
-ZaServer.A_zimbraScheduledTaskNumThreads = "zimbraScheduledTaskNumThreads" ;
-ZaServer.A_zimbraMailPurgeSleepInterval = "zimbraMailPurgeSleepInterval" ;
-ZaServer.A_zimbraIsMonitorHost = "zimbraIsMonitorHost";
+ZaServer.A_zmailScheduledTaskNumThreads = "zmailScheduledTaskNumThreads" ;
+ZaServer.A_zmailMailPurgeSleepInterval = "zmailMailPurgeSleepInterval" ;
+ZaServer.A_zmailIsMonitorHost = "zmailIsMonitorHost";
 ZaServer.A_showVolumes = "show_volumes"; //this attribute is immutable
-ZaServer.A_zimbraLogHostname = "zimbraLogHostname";
+ZaServer.A_zmailLogHostname = "zmailLogHostname";
 ZaServer.A_isCurrentVolume = "isCurrentVolume";
 ZaServer.STANDALONE = "standalone";
 ZaServer.MASTER = "master";
@@ -489,8 +489,8 @@ ZaServer.volumeObjModel = {
 		
 ZaServer.myXModel = {
 	items: [
-		{id:ZaItem.A_zimbraId, type:_STRING_, ref:"attrs/" + ZaItem.A_zimbraId},
-		{id:ZaItem.A_zimbraCreateTimestamp, ref:"attrs/" + ZaItem.A_zimbraCreateTimestamp},
+		{id:ZaItem.A_zmailId, type:_STRING_, ref:"attrs/" + ZaItem.A_zmailId},
+		{id:ZaItem.A_zmailCreateTimestamp, ref:"attrs/" + ZaItem.A_zmailCreateTimestamp},
 		{id:ZaServer.A_name, ref:"attrs/" + ZaServer.A_name, type:_STRING_},
 //		{id:ZaServer.A_description, ref:"attrs/" +  ZaServer.A_description, type:_STRING_},
          ZaItem.descriptionModelItem,   
@@ -498,95 +498,95 @@ ZaServer.myXModel = {
 		{id:ZaServer.A_Service, ref:"attrs/" +  ZaServer.A_Service, type:_STRING_, maxLength: 256 },
 		{id:ZaServer.A_ServiceHostname, ref:"attrs/" +  ZaServer.A_ServiceHostname, type:_HOSTNAME_OR_IP_, maxLength: 256 },
 		// Services
-		{id:ZaServer.A_zimbraPolicydServiceEnabled, ref:"attrs/"+ZaServer.A_zimbraPolicydServiceEnabled, type: _ENUM_, choices: [false,true] },
-		{id:ZaServer.A_zimbraLdapServiceEnabled, ref:"attrs/"+ZaServer.A_zimbraLdapServiceEnabled, type: _ENUM_, choices: [false,true] },
-		{id:ZaServer.A_zimbraMailboxServiceEnabled, ref:"attrs/"+ZaServer.A_zimbraMailboxServiceEnabled, type: _ENUM_, choices: [false,true] },
-		{id:ZaServer.A_zimbraMtaServiceEnabled, ref:"attrs/"+ZaServer.A_zimbraMtaServiceEnabled, type: _ENUM_, choices: [false,true] },
-		{id:ZaServer.A_zimbraSnmpServiceEnabled, ref:"attrs/"+ZaServer.A_zimbraSnmpServiceEnabled, type: _ENUM_, choices: [false,true] },
-		{id:ZaServer.A_zimbraAntiVirusServiceEnabled, ref:"attrs/"+ZaServer.A_zimbraAntiVirusServiceEnabled, type: _ENUM_, choices: [false,true] },
-		{id:ZaServer.A_zimbraAntiSpamServiceEnabled, ref:"attrs/"+ZaServer.A_zimbraAntiSpamServiceEnabled, type: _ENUM_, choices: [false,true] },
+		{id:ZaServer.A_zmailPolicydServiceEnabled, ref:"attrs/"+ZaServer.A_zmailPolicydServiceEnabled, type: _ENUM_, choices: [false,true] },
+		{id:ZaServer.A_zmailLdapServiceEnabled, ref:"attrs/"+ZaServer.A_zmailLdapServiceEnabled, type: _ENUM_, choices: [false,true] },
+		{id:ZaServer.A_zmailMailboxServiceEnabled, ref:"attrs/"+ZaServer.A_zmailMailboxServiceEnabled, type: _ENUM_, choices: [false,true] },
+		{id:ZaServer.A_zmailMtaServiceEnabled, ref:"attrs/"+ZaServer.A_zmailMtaServiceEnabled, type: _ENUM_, choices: [false,true] },
+		{id:ZaServer.A_zmailSnmpServiceEnabled, ref:"attrs/"+ZaServer.A_zmailSnmpServiceEnabled, type: _ENUM_, choices: [false,true] },
+		{id:ZaServer.A_zmailAntiVirusServiceEnabled, ref:"attrs/"+ZaServer.A_zmailAntiVirusServiceEnabled, type: _ENUM_, choices: [false,true] },
+		{id:ZaServer.A_zmailAntiSpamServiceEnabled, ref:"attrs/"+ZaServer.A_zmailAntiSpamServiceEnabled, type: _ENUM_, choices: [false,true] },
         {
-            id: ZaServer.A_zimbraOpenDKIMServiceEnabled,
-            ref: "attrs/" + ZaServer.A_zimbraOpenDKIMServiceEnabled,
+            id: ZaServer.A_zmailOpenDKIMServiceEnabled,
+            ref: "attrs/" + ZaServer.A_zmailOpenDKIMServiceEnabled,
             type: _ENUM_,
             choices: [false, true]
         },
-		{id:ZaServer.A_zimbraSpellServiceEnabled, ref:"attrs/"+ZaServer.A_zimbraSpellServiceEnabled, type: _ENUM_, choices: [false,true] },
-		{id:ZaServer.A_zimbraLoggerServiceEnabled, ref:"attrs/"+ZaServer.A_zimbraLoggerServiceEnabled, type: _ENUM_, choices: [false,true] },
-        {id:ZaServer.A_zimbraVmwareHAServiceEnabled, ref:"attrs/"+ZaServer.A_zimbraVmwareHAServiceEnabled, type: _ENUM_, choices: [false,true] },
-		{id:ZaServer.A_zimbraMailProxyServiceEnabled, ref:"attrs/"+ZaServer.A_zimbraMailProxyServiceEnabled, type: _ENUM_, choices: [false,true] },		
-		{id:ZaServer.A_zimbraReverseProxyLookupTarget, ref:"attrs/"+ZaServer.A_zimbraReverseProxyLookupTarget, type: _COS_ENUM_, choices: ZaModel.BOOLEAN_CHOICES},
-		{id:ZaServer.A_zimbraLdapServiceInstalled, ref:"attrs/"+ZaServer.A_zimbraLdapServiceInstalled, type: _ENUM_, choices: [false,true] },
-		{id:ZaServer.A_zimbraMailboxServiceInstalled, ref:"attrs/"+ZaServer.A_zimbraMailboxServiceInstalled, type: _ENUM_, choices: [false,true] },
-		{id:ZaServer.A_zimbraMtaServiceInstalled, ref:"attrs/"+ZaServer.A_zimbraMtaServiceInstalled, type: _ENUM_, choices: [false,true] },
-		{id:ZaServer.A_zimbraSnmpServiceInstalled, ref:"attrs/"+ZaServer.A_zimbraSnmpServiceInstalled, type: _ENUM_, choices: [false,true] },
-		{id:ZaServer.A_zimbraAntiVirusServiceInstalled, ref:"attrs/"+ZaServer.A_zimbraAntiVirusServiceInstalled, type: _ENUM_, choices: [false,true] },
-		{id:ZaServer.A_zimbraAntiSpamServiceInstalled, ref:"attrs/"+ZaServer.A_zimbraAntiSpamServiceInstalled, type: _ENUM_, choices: [false,true] },
+		{id:ZaServer.A_zmailSpellServiceEnabled, ref:"attrs/"+ZaServer.A_zmailSpellServiceEnabled, type: _ENUM_, choices: [false,true] },
+		{id:ZaServer.A_zmailLoggerServiceEnabled, ref:"attrs/"+ZaServer.A_zmailLoggerServiceEnabled, type: _ENUM_, choices: [false,true] },
+        {id:ZaServer.A_zmailVmwareHAServiceEnabled, ref:"attrs/"+ZaServer.A_zmailVmwareHAServiceEnabled, type: _ENUM_, choices: [false,true] },
+		{id:ZaServer.A_zmailMailProxyServiceEnabled, ref:"attrs/"+ZaServer.A_zmailMailProxyServiceEnabled, type: _ENUM_, choices: [false,true] },		
+		{id:ZaServer.A_zmailReverseProxyLookupTarget, ref:"attrs/"+ZaServer.A_zmailReverseProxyLookupTarget, type: _COS_ENUM_, choices: ZaModel.BOOLEAN_CHOICES},
+		{id:ZaServer.A_zmailLdapServiceInstalled, ref:"attrs/"+ZaServer.A_zmailLdapServiceInstalled, type: _ENUM_, choices: [false,true] },
+		{id:ZaServer.A_zmailMailboxServiceInstalled, ref:"attrs/"+ZaServer.A_zmailMailboxServiceInstalled, type: _ENUM_, choices: [false,true] },
+		{id:ZaServer.A_zmailMtaServiceInstalled, ref:"attrs/"+ZaServer.A_zmailMtaServiceInstalled, type: _ENUM_, choices: [false,true] },
+		{id:ZaServer.A_zmailSnmpServiceInstalled, ref:"attrs/"+ZaServer.A_zmailSnmpServiceInstalled, type: _ENUM_, choices: [false,true] },
+		{id:ZaServer.A_zmailAntiVirusServiceInstalled, ref:"attrs/"+ZaServer.A_zmailAntiVirusServiceInstalled, type: _ENUM_, choices: [false,true] },
+		{id:ZaServer.A_zmailAntiSpamServiceInstalled, ref:"attrs/"+ZaServer.A_zmailAntiSpamServiceInstalled, type: _ENUM_, choices: [false,true] },
         {
-            id: ZaServer.A_zimbraOpenDKIMServiceInstalled,
-            ref: "attrs/" + ZaServer.A_zimbraOpenDKIMServiceInstalled,
+            id: ZaServer.A_zmailOpenDKIMServiceInstalled,
+            ref: "attrs/" + ZaServer.A_zmailOpenDKIMServiceInstalled,
             type: _ENUM_,
             choices: [false, true]
         },
-		{id:ZaServer.A_zimbraSpellServiceInstalled, ref:"attrs/"+ZaServer.A_zimbraSpellServiceInstalled, type: _ENUM_, choices: [false,true] },
-		{id:ZaServer.A_zimbraLoggerServiceInstalled, ref:"attrs/"+ZaServer.A_zimbraLoggerServiceInstalled, type: _ENUM_, choices: [false,true] },
-		{id:ZaServer.A_zimbraMailProxyServiceInstalled, ref:"attrs/"+ZaServer.A_zimbraMailProxyServiceInstalled, type: _ENUM_, choices: [false,true] },
-        {id:ZaServer.A_zimbraVmwareHAServiceInstalled, ref:"attrs/"+ZaServer.A_zimbraVmwareHAServiceInstalled, type: _ENUM_, choices: [false,true] },
-        {id:ZaServer.A_zimbraPolicydServiceInstalled, ref:"attrs/"+ZaServer.A_zimbraPolicydServiceInstalled, type: _ENUM_, choices: [false,true] },
+		{id:ZaServer.A_zmailSpellServiceInstalled, ref:"attrs/"+ZaServer.A_zmailSpellServiceInstalled, type: _ENUM_, choices: [false,true] },
+		{id:ZaServer.A_zmailLoggerServiceInstalled, ref:"attrs/"+ZaServer.A_zmailLoggerServiceInstalled, type: _ENUM_, choices: [false,true] },
+		{id:ZaServer.A_zmailMailProxyServiceInstalled, ref:"attrs/"+ZaServer.A_zmailMailProxyServiceInstalled, type: _ENUM_, choices: [false,true] },
+        {id:ZaServer.A_zmailVmwareHAServiceInstalled, ref:"attrs/"+ZaServer.A_zmailVmwareHAServiceInstalled, type: _ENUM_, choices: [false,true] },
+        {id:ZaServer.A_zmailPolicydServiceInstalled, ref:"attrs/"+ZaServer.A_zmailPolicydServiceInstalled, type: _ENUM_, choices: [false,true] },
 		// MTA
-		{id:ZaServer.A_zimbraMtaSaslAuthEnable, ref:"attrs/" +  ZaServer.A_zimbraMtaSaslAuthEnable, type: _COS_ENUM_, choices: ["yes", "no"] },
-		{id:ZaServer.A_zimbraMtaTlsAuthOnly, ref:"attrs/" +  ZaServer.A_zimbraMtaTlsAuthOnly, type: _COS_ENUM_, choices: ZaModel.BOOLEAN_CHOICES },
-		{id:ZaServer.A_zimbraMtaRelayHost, ref:"attrs/" +  ZaServer.A_zimbraMtaRelayHost,  type: _COS_HOSTNAME_OR_IP_, maxLength: 256 },
-        {id:ZaServer.A_zimbraMtaFallbackRelayHost, ref:"attrs/" + ZaServer.A_zimbraMtaFallbackRelayHost, type: _COS_HOSTNAME_OR_IP_, maxLength: 256 },
-		{id:ZaServer.A_zimbraMtaMyNetworks, ref:"attrs/" +  ZaServer.A_zimbraMtaMyNetworks, type:_COS_STRING_, maxLength: 10240 },
-		{id:ZaServer.A_zimbraMtaDnsLookupsEnabled, ref:"attrs/" +  ZaServer.A_zimbraMtaDnsLookupsEnabled, type: _COS_ENUM_, choices: ZaModel.BOOLEAN_CHOICES },
+		{id:ZaServer.A_zmailMtaSaslAuthEnable, ref:"attrs/" +  ZaServer.A_zmailMtaSaslAuthEnable, type: _COS_ENUM_, choices: ["yes", "no"] },
+		{id:ZaServer.A_zmailMtaTlsAuthOnly, ref:"attrs/" +  ZaServer.A_zmailMtaTlsAuthOnly, type: _COS_ENUM_, choices: ZaModel.BOOLEAN_CHOICES },
+		{id:ZaServer.A_zmailMtaRelayHost, ref:"attrs/" +  ZaServer.A_zmailMtaRelayHost,  type: _COS_HOSTNAME_OR_IP_, maxLength: 256 },
+        {id:ZaServer.A_zmailMtaFallbackRelayHost, ref:"attrs/" + ZaServer.A_zmailMtaFallbackRelayHost, type: _COS_HOSTNAME_OR_IP_, maxLength: 256 },
+		{id:ZaServer.A_zmailMtaMyNetworks, ref:"attrs/" +  ZaServer.A_zmailMtaMyNetworks, type:_COS_STRING_, maxLength: 10240 },
+		{id:ZaServer.A_zmailMtaDnsLookupsEnabled, ref:"attrs/" +  ZaServer.A_zmailMtaDnsLookupsEnabled, type: _COS_ENUM_, choices: ZaModel.BOOLEAN_CHOICES },
 		//milter server
-		{id:ZaServer.A_zimbraMilterBindAddress, ref:"attrs/" +  ZaServer.A_zimbraMilterBindAddress, type:_LIST_, listItem:{type:_HOSTNAME_OR_IP_, maxLength: 128} },
-		{id:ZaServer.A_zimbraMilterBindPort, ref:"attrs/" +  ZaServer.A_zimbraMilterBindPort, type:_COS_PORT_},
-		{id:ZaServer.A_zimbraMilterServerEnabled, ref:"attrs/" +  ZaServer.A_zimbraMilterServerEnabled, type: _COS_ENUM_, choices: ZaModel.BOOLEAN_CHOICES },
+		{id:ZaServer.A_zmailMilterBindAddress, ref:"attrs/" +  ZaServer.A_zmailMilterBindAddress, type:_LIST_, listItem:{type:_HOSTNAME_OR_IP_, maxLength: 128} },
+		{id:ZaServer.A_zmailMilterBindPort, ref:"attrs/" +  ZaServer.A_zmailMilterBindPort, type:_COS_PORT_},
+		{id:ZaServer.A_zmailMilterServerEnabled, ref:"attrs/" +  ZaServer.A_zmailMilterServerEnabled, type: _COS_ENUM_, choices: ZaModel.BOOLEAN_CHOICES },
         //spnego
-		{id:ZaServer.A_zimbraSpnegoAuthTargetName, ref:"attrs/" +  ZaServer.A_zimbraSpnegoAuthTargetName, type:_STRING_},
-        {id:ZaServer.A_zimbraSpnegoAuthPrincipal, ref:"attrs/" +  ZaServer.A_zimbraSpnegoAuthPrincipal, type:_STRING_},
-        {id:ZaServer.A_zimbraMailSSLClientCertMode, ref:"attrs/" +  ZaServer.A_zimbraMailSSLClientCertMode, type:_COS_STRING_, choices:["Disabled","NeedClientAuth","WantClientAuth"]},
-        {id:ZaServer.A_zimbraMailSSLClientCertPort, ref:"attrs/" +  ZaServer.A_zimbraMailSSLClientCertPort, type:_COS_PORT_},
-        {id:ZaServer.A_zimbraMailSSLProxyClientCertPort, ref:"attrs/" +  ZaServer.A_zimbraMailSSLProxyClientCertPort, type:_COS_PORT_},
-        {id:ZaServer.A_zimbraReverseProxyMailMode, ref:"attrs/" +  ZaServer.A_zimbraReverseProxyMailMode, type:_COS_STRING_, choices:["http","https","both","mixed","redirect"]},
-        {id:ZaServer.A_zimbraReverseProxyClientCertMode, ref:"attrs/" +  ZaServer.A_zimbraReverseProxyClientCertMode, type:_COS_STRING_, choices:["on","off","optional"]},
-        {id:ZaServer.A_zimbraReverseProxyClientCertCA, ref:"attrs/" + ZaServer.A_zimbraReverseProxyClientCertCA, type:_STRING_},
+		{id:ZaServer.A_zmailSpnegoAuthTargetName, ref:"attrs/" +  ZaServer.A_zmailSpnegoAuthTargetName, type:_STRING_},
+        {id:ZaServer.A_zmailSpnegoAuthPrincipal, ref:"attrs/" +  ZaServer.A_zmailSpnegoAuthPrincipal, type:_STRING_},
+        {id:ZaServer.A_zmailMailSSLClientCertMode, ref:"attrs/" +  ZaServer.A_zmailMailSSLClientCertMode, type:_COS_STRING_, choices:["Disabled","NeedClientAuth","WantClientAuth"]},
+        {id:ZaServer.A_zmailMailSSLClientCertPort, ref:"attrs/" +  ZaServer.A_zmailMailSSLClientCertPort, type:_COS_PORT_},
+        {id:ZaServer.A_zmailMailSSLProxyClientCertPort, ref:"attrs/" +  ZaServer.A_zmailMailSSLProxyClientCertPort, type:_COS_PORT_},
+        {id:ZaServer.A_zmailReverseProxyMailMode, ref:"attrs/" +  ZaServer.A_zmailReverseProxyMailMode, type:_COS_STRING_, choices:["http","https","both","mixed","redirect"]},
+        {id:ZaServer.A_zmailReverseProxyClientCertMode, ref:"attrs/" +  ZaServer.A_zmailReverseProxyClientCertMode, type:_COS_STRING_, choices:["on","off","optional"]},
+        {id:ZaServer.A_zmailReverseProxyClientCertCA, ref:"attrs/" + ZaServer.A_zmailReverseProxyClientCertCA, type:_STRING_},
 		// ...other...
-		{id:ZaServer.A_zimbraSmtpHostname, ref:"attrs/" +  ZaServer.A_zimbraSmtpHostname, type:_COS_LIST_, listItem:{type:_HOSTNAME_OR_IP_, maxLength: 256} },
+		{id:ZaServer.A_zmailSmtpHostname, ref:"attrs/" +  ZaServer.A_zmailSmtpHostname, type:_COS_LIST_, listItem:{type:_HOSTNAME_OR_IP_, maxLength: 256} },
 		{id:ZaServer.A_SmtpPort, ref:"attrs/" +  ZaServer.A_SmtpPort, type:_COS_PORT_},
 		{id:ZaServer.A_SmtpTimeout, ref:"attrs/" + ZaServer.A_SmtpTimeout, type:_COS_NUMBER_, minInclusive: 0, maxInclusive:2147483647 },
 		{id:ZaServer.A_LmtpAdvertisedName, ref:"attrs/" +  ZaServer.A_LmtpAdvertisedName, type:_STRING_, maxLength: 128 },
 		{id:ZaServer.A_LmtpBindAddress, ref:"attrs/" +  ZaServer.A_LmtpBindAddress, type:_HOSTNAME_OR_IP_, maxLength: 256 },
 		{id:ZaServer.A_LmtpBindPort, ref:"attrs/" +  ZaServer.A_LmtpBindPort, type:_COS_PORT_},		
-		{id:ZaServer.A_zimbraScheduledTaskNumThreads, ref:"attrs/" +  ZaServer.A_zimbraScheduledTaskNumThreads, type:_COS_INT_, minInclusive: 1, maxInclusive:2147483647 },
-		{id:ZaServer.A_zimbraMailPurgeSleepInterval, ref:"attrs/" +  ZaServer.A_zimbraMailPurgeSleepInterval, type:_COS_MLIFETIME_, minInclusive: 0, maxInclusive:2147483647 },
-		{id:ZaServer.A_zimbraPop3NumThreads, ref:"attrs/" +  ZaServer.A_zimbraPop3NumThreads, type:_COS_INT_, minInclusive: 0, maxInclusive:2147483647 },		
-		{id:ZaServer.A_zimbraImapNumThreads, ref:"attrs/" +  ZaServer.A_zimbraImapNumThreads, type:_COS_INT_, minInclusive: 0, maxInclusive:2147483647 },		
+		{id:ZaServer.A_zmailScheduledTaskNumThreads, ref:"attrs/" +  ZaServer.A_zmailScheduledTaskNumThreads, type:_COS_INT_, minInclusive: 1, maxInclusive:2147483647 },
+		{id:ZaServer.A_zmailMailPurgeSleepInterval, ref:"attrs/" +  ZaServer.A_zmailMailPurgeSleepInterval, type:_COS_MLIFETIME_, minInclusive: 0, maxInclusive:2147483647 },
+		{id:ZaServer.A_zmailPop3NumThreads, ref:"attrs/" +  ZaServer.A_zmailPop3NumThreads, type:_COS_INT_, minInclusive: 0, maxInclusive:2147483647 },		
+		{id:ZaServer.A_zmailImapNumThreads, ref:"attrs/" +  ZaServer.A_zmailImapNumThreads, type:_COS_INT_, minInclusive: 0, maxInclusive:2147483647 },		
 		{id:ZaServer.A_Pop3AdvertisedName, ref:"attrs/" +  ZaServer.A_Pop3AdvertisedName, type:_STRING_, maxLength: 128 },
 		{id:ZaServer.A_Pop3BindAddress, ref:"attrs/" +  ZaServer.A_Pop3BindAddress, type:_HOSTNAME_OR_IP_, maxLength: 128 },
 		{id:ZaServer.A_Pop3AdvertisedName, ref:"attrs/" +  ZaServer.A_Pop3AdvertisedName, type:_STRING_, maxLength: 128 },
 		{id:ZaServer.A_Pop3BindAddress, ref:"attrs/" +  ZaServer.A_Pop3BindAddress, type:_HOSTNAME_OR_IP_, maxLength: 128 },
-		{id:ZaServer.A_zimbraPop3BindPort, ref:"attrs/" +  ZaServer.A_zimbraPop3BindPort, type:_COS_PORT_ },
-		{id:ZaServer.A_zimbraPop3SSLBindPort, ref:"attrs/" +  ZaServer.A_zimbraPop3SSLBindPort, type:_COS_PORT_ },
+		{id:ZaServer.A_zmailPop3BindPort, ref:"attrs/" +  ZaServer.A_zmailPop3BindPort, type:_COS_PORT_ },
+		{id:ZaServer.A_zmailPop3SSLBindPort, ref:"attrs/" +  ZaServer.A_zmailPop3SSLBindPort, type:_COS_PORT_ },
 		{id:ZaServer.A_Pop3SSLServerEnabled, ref:"attrs/" + ZaServer.A_Pop3SSLServerEnabled, type:_COS_ENUM_, choices:ZaModel.BOOLEAN_CHOICES},		
 		{id:ZaServer.A_Pop3ServerEnabled, ref:"attrs/" + ZaServer.A_Pop3ServerEnabled, type:_COS_ENUM_, choices:ZaModel.BOOLEAN_CHOICES},		
 		{id:ZaServer.A_Pop3CleartextLoginEnabled, ref:"attrs/" + ZaServer.A_Pop3CleartextLoginEnabled, type:_COS_ENUM_, choices:ZaModel.BOOLEAN_CHOICES},		
-		{id:ZaServer.A_zimbraImapBindPort, ref:"attrs/" + ZaServer.A_zimbraImapBindPort, type:_COS_PORT_ },
+		{id:ZaServer.A_zmailImapBindPort, ref:"attrs/" + ZaServer.A_zmailImapBindPort, type:_COS_PORT_ },
 		{id:ZaServer.A_ImapServerEnabled, ref:"attrs/" + ZaServer.A_ImapServerEnabled, type:_COS_ENUM_, choices:ZaModel.BOOLEAN_CHOICES},		
 		{id:ZaServer.A_ImapSSLBindPort, ref:"attrs/" + ZaServer.A_ImapSSLBindPort, type:_COS_PORT_ },
 		{id:ZaServer.A_ImapSSLServerEnabled, ref:"attrs/" + ZaServer.A_ImapSSLServerEnabled, type:_COS_ENUM_, choices:ZaModel.BOOLEAN_CHOICES},		
 		
 		//ip address bindings
-		{id:ZaServer.A_zimbraMailBindAddress, ref:"attrs/" +  ZaServer.A_zimbraMailBindAddress, type:_IP_},
-		{id:ZaServer.A_zimbraMailSSLBindAddress, ref:"attrs/" +  ZaServer.A_zimbraMailSSLBindAddress, type:_IP_ },
-		{id:ZaServer.A_zimbraMailSSLClientCertBindAddress, ref:"attrs/" +  ZaServer.A_zimbraMailSSLClientCertBindAddress, type:_IP_ },
-		{id:ZaServer.A_zimbraAdminBindAddress, ref:"attrs/" +  ZaServer.A_zimbraAdminBindAddress, type:_IP_ },
+		{id:ZaServer.A_zmailMailBindAddress, ref:"attrs/" +  ZaServer.A_zmailMailBindAddress, type:_IP_},
+		{id:ZaServer.A_zmailMailSSLBindAddress, ref:"attrs/" +  ZaServer.A_zmailMailSSLBindAddress, type:_IP_ },
+		{id:ZaServer.A_zmailMailSSLClientCertBindAddress, ref:"attrs/" +  ZaServer.A_zmailMailSSLClientCertBindAddress, type:_IP_ },
+		{id:ZaServer.A_zmailAdminBindAddress, ref:"attrs/" +  ZaServer.A_zmailAdminBindAddress, type:_IP_ },
 
         // auto provision
-        {id:ZaServer.A_zimbraAutoProvPollingInterval, ref:"attrs/" + ZaServer.A_zimbraAutoProvPollingInterval, type: _COS_MLIFETIME_, minInclusive: 0 },
-        {id:ZaServer.A_zimbraAutoProvScheduledDomains, ref:"attrs/" +  ZaServer.A_zimbraAutoProvScheduledDomains, type:_LIST_, listItem:{type:_STRING_, maxLength: 256} },
+        {id:ZaServer.A_zmailAutoProvPollingInterval, ref:"attrs/" + ZaServer.A_zmailAutoProvPollingInterval, type: _COS_MLIFETIME_, minInclusive: 0 },
+        {id:ZaServer.A_zmailAutoProvScheduledDomains, ref:"attrs/" +  ZaServer.A_zmailAutoProvScheduledDomains, type:_LIST_, listItem:{type:_STRING_, maxLength: 256} },
 		{id:ZaServer.A_ImapCleartextLoginEnabled, ref:"attrs/" + ZaServer.A_ImapCleartextLoginEnabled, type:_COS_ENUM_, choices:ZaModel.BOOLEAN_CHOICES},		
 		{id:ZaServer.A_RedologEnabled, ref:"attrs/" + ZaServer.A_RedologEnabled, type:_ENUM_, choices:ZaModel.BOOLEAN_CHOICES},		
 		{id:ZaServer.A_RedologLogPath, ref:"attrs/" + ZaServer.A_RedologLogPath, type:_STRING_},		
@@ -597,7 +597,7 @@ ZaServer.myXModel = {
 		{id:ZaServer.A_MasterRedologClientConnections, ref:"attrs/" + ZaServer.A_MasterRedologClientConnections, type:_STRING_},		
 		{id:ZaServer.A_MasterRedologClientTimeoutSec, ref:"attrs/" + ZaServer.A_MasterRedologClientTimeoutSec, type:_STRING_},		
 		{id:ZaServer.A_MasterRedologClientTcpNoDelay, ref:"attrs/" + ZaServer.A_MasterRedologClientTcpNoDelay, type:_STRING_},		
-		{id:ZaServer.A_zimbraUserServicesEnabled, ref:"attrs/" + ZaServer.A_zimbraUserServicesEnabled, type:_ENUM_, choices:ZaModel.BOOLEAN_CHOICES},
+		{id:ZaServer.A_zmailUserServicesEnabled, ref:"attrs/" + ZaServer.A_zmailUserServicesEnabled, type:_ENUM_, choices:ZaModel.BOOLEAN_CHOICES},
 		//volumes
 		{id:ZaServer.A_Volumes,ref:ZaServer.A_Volumes, type:_LIST_, listItem:ZaServer.volumeObjModel},
 		{id:ZaServer.A_showVolumes, ref:ZaServer.A_showVolumes, type: _ENUM_, choices: [false,true]},
@@ -605,18 +605,18 @@ ZaServer.myXModel = {
 		{id:ZaServer.A_CurrentIndexVolumeId, ref:ZaServer.A_CurrentIndexVolumeId, type:_NUMBER_},
 		{id:ZaServer.A_CurrentMsgVolumeId, ref:ZaServer.A_CurrentMsgVolumeId, type:_NUMBER_},
 		//VAMI update
-		{id:ZaServer.A_zimbraApplianceVendor, ref:"attrs/" +  ZaServer.A_zimbraApplianceVendor, type:_STRING_, maxLength: 256 },
-		{id:ZaServer.A_zimbraApplianceName, ref:"attrs/" +  ZaServer.A_zimbraApplianceName, type:_STRING_, maxLength: 256 },
-		{id:ZaServer.A_zimbraApplianceVersion, ref:"attrs/" +  ZaServer.A_zimbraApplianceVersion, type:_STRING_, maxLength: 256 },
-		{id:ZaServer.A_zimbraApplianceFullVersion, ref:"attrs/" +  ZaServer.A_zimbraApplianceFullVersion, type:_STRING_, maxLength: 256 },
-		{id:ZaServer.A_zimbraApplianceDetails, ref:"attrs/" +  ZaServer.A_zimbraApplianceDetails, type:_STRING_, maxLength: 256 },
-		{id:ZaServer.A_zimbraApplianceDefaultRepUrl, ref:"attrs/" +  ZaServer.A_zimbraApplianceDefaultRepUrl, type:_STRING_, maxLength: 256 },
-		{id:ZaServer.A_zimbraApplianceCustomRepUrl, ref:"attrs/" +  ZaServer.A_zimbraApplianceCustomRepUrl, type:_STRING_, maxLength: 256 },
-		{id:ZaServer.A_zimbraApplianceCustomRepUrlUser, ref:"attrs/" +  ZaServer.A_zimbraApplianceCustomRepUrlUser, type:_STRING_, maxLength: 256 },
-		{id:ZaServer.A_zimbraApplianceCustomRepUrlPass, ref:"attrs/" +  ZaServer.A_zimbraApplianceCustomRepUrlPass, type:_STRING_, maxLength: 256 },
-		{id:ZaServer.A_zimbraApplianceUpdateOption, ref:"attrs/" +  ZaServer.A_zimbraApplianceUpdateOption, type:_LIST_},
-		{id:ZaServer.A_zimbraApplianceUpdateType, ref:"attrs/" +  ZaServer.A_zimbraApplianceUpdateType, type:_LIST_},
-		{id:ZaServer.A_zimbraApplianceUpdatehourofrun, ref:"attrs/" +  ZaServer.A_zimbraApplianceUpdatehourofrun, type:_LIST_}
+		{id:ZaServer.A_zmailApplianceVendor, ref:"attrs/" +  ZaServer.A_zmailApplianceVendor, type:_STRING_, maxLength: 256 },
+		{id:ZaServer.A_zmailApplianceName, ref:"attrs/" +  ZaServer.A_zmailApplianceName, type:_STRING_, maxLength: 256 },
+		{id:ZaServer.A_zmailApplianceVersion, ref:"attrs/" +  ZaServer.A_zmailApplianceVersion, type:_STRING_, maxLength: 256 },
+		{id:ZaServer.A_zmailApplianceFullVersion, ref:"attrs/" +  ZaServer.A_zmailApplianceFullVersion, type:_STRING_, maxLength: 256 },
+		{id:ZaServer.A_zmailApplianceDetails, ref:"attrs/" +  ZaServer.A_zmailApplianceDetails, type:_STRING_, maxLength: 256 },
+		{id:ZaServer.A_zmailApplianceDefaultRepUrl, ref:"attrs/" +  ZaServer.A_zmailApplianceDefaultRepUrl, type:_STRING_, maxLength: 256 },
+		{id:ZaServer.A_zmailApplianceCustomRepUrl, ref:"attrs/" +  ZaServer.A_zmailApplianceCustomRepUrl, type:_STRING_, maxLength: 256 },
+		{id:ZaServer.A_zmailApplianceCustomRepUrlUser, ref:"attrs/" +  ZaServer.A_zmailApplianceCustomRepUrlUser, type:_STRING_, maxLength: 256 },
+		{id:ZaServer.A_zmailApplianceCustomRepUrlPass, ref:"attrs/" +  ZaServer.A_zmailApplianceCustomRepUrlPass, type:_STRING_, maxLength: 256 },
+		{id:ZaServer.A_zmailApplianceUpdateOption, ref:"attrs/" +  ZaServer.A_zmailApplianceUpdateOption, type:_LIST_},
+		{id:ZaServer.A_zmailApplianceUpdateType, ref:"attrs/" +  ZaServer.A_zmailApplianceUpdateType, type:_LIST_},
+		{id:ZaServer.A_zmailApplianceUpdatehourofrun, ref:"attrs/" +  ZaServer.A_zmailApplianceUpdatehourofrun, type:_LIST_}
     ]
 };
 		
@@ -662,7 +662,7 @@ function (serverId) {
 
 ZaServer.getAllMBSs =
 function(attrs) {
-	var soapDoc = AjxSoapDoc.create("GetAllServersRequest", ZaZimbraAdmin.URN, null);	
+	var soapDoc = AjxSoapDoc.create("GetAllServersRequest", ZaZmailAdmin.URN, null);	
 	soapDoc.getMethod().setAttribute("service", "mailbox");
 	soapDoc.getMethod().setAttribute("applyConfig", "false");
 	var params = new Object();
@@ -683,7 +683,7 @@ function(attrs) {
 
 ZaServer.getAll =
 function(attrs) {
-	var soapDoc = AjxSoapDoc.create("GetAllServersRequest", ZaZimbraAdmin.URN, null);	
+	var soapDoc = AjxSoapDoc.create("GetAllServersRequest", ZaZmailAdmin.URN, null);	
 	soapDoc.getMethod().setAttribute("applyConfig", "false");
 //	var command = new ZmCsfeCommand();
 	var params = new Object();
@@ -710,22 +710,22 @@ ZaServer.modifyMethod = function (tmpObj) {
 		return;	
 	}
 	
-	if(ZaItem.hasWritePermission(ZaServer.A_zimbraServiceEnabled,tmpObj)) {
-		// update zimbraServiceEnabled
-		var svcInstalled = AjxUtil.isString(tmpObj.attrs[ZaServer.A_zimbraServiceInstalled])
-								? [ tmpObj.attrs[ZaServer.A_zimbraServiceInstalled] ]
-								: tmpObj.attrs[ZaServer.A_zimbraServiceInstalled];
+	if(ZaItem.hasWritePermission(ZaServer.A_zmailServiceEnabled,tmpObj)) {
+		// update zmailServiceEnabled
+		var svcInstalled = AjxUtil.isString(tmpObj.attrs[ZaServer.A_zmailServiceInstalled])
+								? [ tmpObj.attrs[ZaServer.A_zmailServiceInstalled] ]
+								: tmpObj.attrs[ZaServer.A_zmailServiceInstalled];
 		if (svcInstalled) {
 			// get list of actually enabled fields
 			var enabled = [];
 			for (var i = 0; i < svcInstalled.length; i++) {
 				var service = svcInstalled[i];
 				if (service == "vmware-ha") {
-					if (tmpObj.attrs["_"+ZaServer.A_zimbraServiceEnabled+"_"+"vmwareha"]) 
+					if (tmpObj.attrs["_"+ZaServer.A_zmailServiceEnabled+"_"+"vmwareha"]) 
 						enabled.push("vmware-ha");
 					continue;
 				}
-				if (tmpObj.attrs["_"+ZaServer.A_zimbraServiceEnabled+"_"+service]) {
+				if (tmpObj.attrs["_"+ZaServer.A_zmailServiceEnabled+"_"+service]) {
 					enabled.push(service);
 				}			
 			}
@@ -734,10 +734,10 @@ ZaServer.modifyMethod = function (tmpObj) {
 			
 			var dirty = false; 
 			
-			if (this.attrs[ZaServer.A_zimbraServiceEnabled]) {
-				var prevEnabled = AjxUtil.isString(this.attrs[ZaServer.A_zimbraServiceEnabled])
-								? [ this.attrs[ZaServer.A_zimbraServiceEnabled] ]
-								: this.attrs[ZaServer.A_zimbraServiceEnabled];
+			if (this.attrs[ZaServer.A_zmailServiceEnabled]) {
+				var prevEnabled = AjxUtil.isString(this.attrs[ZaServer.A_zmailServiceEnabled])
+								? [ this.attrs[ZaServer.A_zmailServiceEnabled] ]
+								: this.attrs[ZaServer.A_zmailServiceEnabled];
 								
 				dirty = (enabled.length != prevEnabled.length);		
 				
@@ -745,7 +745,7 @@ ZaServer.modifyMethod = function (tmpObj) {
 					for (var i = 0; i < prevEnabled.length; i++) {
 						var service = prevEnabled[i];
 						if (service == "vmware-ha") {
-							if(!tmpObj.attrs["_"+ZaServer.A_zimbraServiceEnabled+"_"+"vmware"]){
+							if(!tmpObj.attrs["_"+ZaServer.A_zmailServiceEnabled+"_"+"vmware"]){
 								dirty = true;
 								break;
 							} else {
@@ -753,7 +753,7 @@ ZaServer.modifyMethod = function (tmpObj) {
 							}
 
 						}
-						if (!tmpObj.attrs["_"+ZaServer.A_zimbraServiceEnabled+"_"+service]) {
+						if (!tmpObj.attrs["_"+ZaServer.A_zmailServiceEnabled+"_"+service]) {
 							dirty = true;
 							break;
 						}
@@ -763,12 +763,12 @@ ZaServer.modifyMethod = function (tmpObj) {
 			
 			// save new list of enabled fields
 			if (dirty) {
-				tmpObj.attrs[ZaServer.A_zimbraServiceEnabled] = enabled;
+				tmpObj.attrs[ZaServer.A_zmailServiceEnabled] = enabled;
 			}
 		}	
 	}
 	//modify volumes
-	if(this.attrs[ZaServer.A_zimbraMailboxServiceEnabled] && ZaItem.hasRight(ZaServer.MANAGE_VOLUME_RIGHT,this)) {
+	if(this.attrs[ZaServer.A_zmailMailboxServiceEnabled] && ZaItem.hasRight(ZaServer.MANAGE_VOLUME_RIGHT,this)) {
 		//remove Volumes
 		if(tmpObj[ZaServer.A_RemovedVolumes]) {
 			var cnt = tmpObj[ZaServer.A_RemovedVolumes].length;
@@ -842,13 +842,13 @@ ZaServer.modifyMethod = function (tmpObj) {
 	
 	var hasSomething = false;	
 	//create a ModifyServerRequest SOAP request
-	var soapDoc = AjxSoapDoc.create("ModifyServerRequest", ZaZimbraAdmin.URN, null);
+	var soapDoc = AjxSoapDoc.create("ModifyServerRequest", ZaZmailAdmin.URN, null);
 	soapDoc.set("id", this.id);
 	//get the list of changed fields
 	var mods = new Object();
 	for (var a in tmpObj.attrs) {
-		if(a == ZaItem.A_objectClass || /^_/.test(a) || a == ZaServer.A_zimbraServiceInstalled
-                || a == ZaItem.A_zimbraACE)
+		if(a == ZaItem.A_objectClass || /^_/.test(a) || a == ZaServer.A_zmailServiceInstalled
+                || a == ZaItem.A_zmailACE)
 			continue;
 		
 		if(!ZaItem.hasWritePermission(a,this)) {
@@ -920,7 +920,7 @@ function() {
 		html[idx++] = "</table></div></td></tr>";
 		html[idx++] = "<tr></tr>";
 		idx = this._addAttrRow(ZaItem.A_description, html, idx);	
-		idx = this._addAttrRow(ZaItem.A_zimbraId, html, idx);
+		idx = this._addAttrRow(ZaItem.A_zmailId, html, idx);
 		html[idx++] = "</table>";
 		this._toolTip = html.join("");
 	}
@@ -931,7 +931,7 @@ ZaServer.loadMethod =
 function(by, val) {
 	var _by = by ? by : "id";
 	var _val = val ? val : this.id
-	var soapDoc = AjxSoapDoc.create("GetServerRequest", ZaZimbraAdmin.URN, null);
+	var soapDoc = AjxSoapDoc.create("GetServerRequest", ZaZmailAdmin.URN, null);
 	var elBy = soapDoc.set("server", _val);
 	elBy.setAttribute("by", _by);
 	soapDoc.setMethodAttribute("applyConfig", "false");
@@ -951,21 +951,21 @@ function(by, val) {
 	this.initFromJS(resp.Body.GetServerResponse.server[0]);
 	
 	//this._defaultValues = ZaApp.getInstance().getGlobalConfig();
-	soapDoc = AjxSoapDoc.create("BatchRequest", "urn:zimbra");
+	soapDoc = AjxSoapDoc.create("BatchRequest", "urn:zmail");
 	soapDoc.setMethodAttribute("onerror", "continue");	
 	
-	if(this.attrs[ZaServer.A_zimbraMailboxServiceEnabled] && ZaItem.hasRight(ZaServer.MANAGE_VOLUME_RIGHT,this)) {
-		var getAllVols = soapDoc.set("GetAllVolumesRequest", null, null, ZaZimbraAdmin.URN);
-		var getCurrentVols = soapDoc.set("GetCurrentVolumesRequest", null, null, ZaZimbraAdmin.URN);
+	if(this.attrs[ZaServer.A_zmailMailboxServiceEnabled] && ZaItem.hasRight(ZaServer.MANAGE_VOLUME_RIGHT,this)) {
+		var getAllVols = soapDoc.set("GetAllVolumesRequest", null, null, ZaZmailAdmin.URN);
+		var getCurrentVols = soapDoc.set("GetCurrentVolumesRequest", null, null, ZaZmailAdmin.URN);
 	}				
-	var getAllVols = soapDoc.set("GetServerNIfsRequest", null, null, ZaZimbraAdmin.URN);
+	var getAllVols = soapDoc.set("GetServerNIfsRequest", null, null, ZaZmailAdmin.URN);
 	var server = soapDoc.set("server", _val, getAllVols);
 	server.setAttribute("by", _by);
 	try {
 		params = new Object();
 		params.soapDoc = soapDoc;	
 		params.asyncMode = false;
-		if(this.attrs && this.attrs[ZaServer.A_zimbraMailboxServiceInstalled] && this.attrs[ZaServer.A_zimbraMailboxServiceEnabled]) {
+		if(this.attrs && this.attrs[ZaServer.A_zmailMailboxServiceInstalled] && this.attrs[ZaServer.A_zmailMailboxServiceEnabled]) {
 			params.targetServer = this.id;
 		}
 		var reqMgrParams = {
@@ -1034,7 +1034,7 @@ function(resp) {
 ZaServer.prototype.initFromJS = function(server) {
 	ZaItem.prototype.initFromJS.call(this, server);
 	// convert installed/enabled services to hidden fields for xform binding
-	var installed = this.attrs[ZaServer.A_zimbraServiceInstalled];
+	var installed = this.attrs[ZaServer.A_zmailServiceInstalled];
 	if (installed) {
 		if (AjxUtil.isString(installed)) {
 			installed = [ installed ];
@@ -1042,16 +1042,16 @@ ZaServer.prototype.initFromJS = function(server) {
 		for (var i = 0; i < installed.length; i++) {
 			var service = installed[i];
 			if(service == "vmware-ha"){
-				this.attrs["_"+ZaServer.A_zimbraServiceInstalled+"_"+"vmwareha"] = true;
-                        	this.attrs["_"+ZaServer.A_zimbraServiceEnabled+"_"+"vmwareha"] = false;
+				this.attrs["_"+ZaServer.A_zmailServiceInstalled+"_"+"vmwareha"] = true;
+                        	this.attrs["_"+ZaServer.A_zmailServiceEnabled+"_"+"vmwareha"] = false;
 				continue;
 			}
-			this.attrs["_"+ZaServer.A_zimbraServiceInstalled+"_"+service] = true;
-			this.attrs["_"+ZaServer.A_zimbraServiceEnabled+"_"+service] = false;
+			this.attrs["_"+ZaServer.A_zmailServiceInstalled+"_"+service] = true;
+			this.attrs["_"+ZaServer.A_zmailServiceEnabled+"_"+service] = false;
 		}
 	}
 	
-	var enabled = this.attrs[ZaServer.A_zimbraServiceEnabled];
+	var enabled = this.attrs[ZaServer.A_zmailServiceEnabled];
 	if (enabled) {
 		if (AjxUtil.isString(enabled)) {
 			enabled = [ enabled ];
@@ -1059,33 +1059,33 @@ ZaServer.prototype.initFromJS = function(server) {
 		for (var i = 0; i < enabled.length; i++) {
 			var service = enabled[i];
 			if (service == "vmware-ha") {
-				this.attrs["_"+ZaServer.A_zimbraServiceEnabled+"_"+"vmwareha"] = true;
+				this.attrs["_"+ZaServer.A_zmailServiceEnabled+"_"+"vmwareha"] = true;
 				continue;
 			}
 
-			this.attrs["_"+ZaServer.A_zimbraServiceEnabled+"_"+service] = true;
+			this.attrs["_"+ZaServer.A_zmailServiceEnabled+"_"+service] = true;
 		}
 	}
 	this[ZaServer.A_ServiceHostname] = this.attrs[ZaServer.A_ServiceHostname]; // a hack for New Account Wizard	
-	this[ZaServer.A_showVolumes] = this.attrs[ZaServer.A_zimbraMailboxServiceEnabled];
-	if(this.attrs[ZaServer.A_zimbraSmtpHostname] && !(this.attrs[ZaServer.A_zimbraSmtpHostname] instanceof Array)) {
-		this.attrs[ZaServer.A_zimbraSmtpHostname] = [this.attrs[ZaServer.A_zimbraSmtpHostname]];
+	this[ZaServer.A_showVolumes] = this.attrs[ZaServer.A_zmailMailboxServiceEnabled];
+	if(this.attrs[ZaServer.A_zmailSmtpHostname] && !(this.attrs[ZaServer.A_zmailSmtpHostname] instanceof Array)) {
+		this.attrs[ZaServer.A_zmailSmtpHostname] = [this.attrs[ZaServer.A_zmailSmtpHostname]];
 	}
 	
-	if(this._defaultValues && this._defaultValues.attrs[ZaServer.A_zimbraSmtpHostname] && !(this._defaultValues.attrs[ZaServer.A_zimbraSmtpHostname]  instanceof Array)) {
-		this._defaultValues.attrs[ZaServer.A_zimbraSmtpHostname]  = [this._defaultValues.attrs[ZaServer.A_zimbraSmtpHostname]];
+	if(this._defaultValues && this._defaultValues.attrs[ZaServer.A_zmailSmtpHostname] && !(this._defaultValues.attrs[ZaServer.A_zmailSmtpHostname]  instanceof Array)) {
+		this._defaultValues.attrs[ZaServer.A_zmailSmtpHostname]  = [this._defaultValues.attrs[ZaServer.A_zmailSmtpHostname]];
 	}
 	
-	if(this.attrs[ZaServer.A_zimbraMilterBindAddress] && !(this.attrs[ZaServer.A_zimbraMilterBindAddress] instanceof Array)) {
-                this.attrs[ZaServer.A_zimbraMilterBindAddress] = [this.attrs[ZaServer.A_zimbraMilterBindAddress]];
+	if(this.attrs[ZaServer.A_zmailMilterBindAddress] && !(this.attrs[ZaServer.A_zmailMilterBindAddress] instanceof Array)) {
+                this.attrs[ZaServer.A_zmailMilterBindAddress] = [this.attrs[ZaServer.A_zmailMilterBindAddress]];
         }
 
-        if(this._defaultValues && this._defaultValues.attrs[ZaServer.A_zimbraMilterBindAddress] && !(this._defaultValues.attrs[ZaServer.A_zimbraMilterBindAddress]  instanceof Array)) {
-                this._defaultValues.attrs[ZaServer.A_zimbraMilterBindAddress]  = [this._defaultValues.attrs[ZaServer.A_zimbraMilterBindAddress]];
+        if(this._defaultValues && this._defaultValues.attrs[ZaServer.A_zmailMilterBindAddress] && !(this._defaultValues.attrs[ZaServer.A_zmailMilterBindAddress]  instanceof Array)) {
+                this._defaultValues.attrs[ZaServer.A_zmailMilterBindAddress]  = [this._defaultValues.attrs[ZaServer.A_zmailMilterBindAddress]];
         }
 
-	if(this.attrs[ZaServer.A_zimbraAutoProvScheduledDomains] && !(this.attrs[ZaServer.A_zimbraAutoProvScheduledDomains] instanceof Array)) {
-        this.attrs[ZaServer.A_zimbraAutoProvScheduledDomains] = [this.attrs[ZaServer.A_zimbraAutoProvScheduledDomains]];
+	if(this.attrs[ZaServer.A_zmailAutoProvScheduledDomains] && !(this.attrs[ZaServer.A_zmailAutoProvScheduledDomains] instanceof Array)) {
+        this.attrs[ZaServer.A_zmailAutoProvScheduledDomains] = [this.attrs[ZaServer.A_zmailAutoProvScheduledDomains]];
     }
 
 }
@@ -1128,7 +1128,7 @@ ZaServer.compareVolumesByName = function (a,b) {
 }
 
 ZaServer.prototype.loadVolumes = function (callback) {
-	var soapDoc = AjxSoapDoc.create("GetAllVolumesRequest", ZaZimbraAdmin.URN, null);
+	var soapDoc = AjxSoapDoc.create("GetAllVolumesRequest", ZaZmailAdmin.URN, null);
 	var params = {
 		soapDoc: soapDoc,
 		targetServer: this.id,
@@ -1148,7 +1148,7 @@ function (id, callback) {
 	if(!id)
 		return false;
 		
-	var soapDoc = AjxSoapDoc.create("DeleteVolumeRequest", ZaZimbraAdmin.URN, null);		
+	var soapDoc = AjxSoapDoc.create("DeleteVolumeRequest", ZaZmailAdmin.URN, null);		
 	soapDoc.getMethod().setAttribute(ZaServer.A_VolumeId, id);	
 	var params = {
 		soapDoc: soapDoc,
@@ -1168,7 +1168,7 @@ ZaServer.prototype.createVolume =
 function (volume) {
 	if(!volume)
 		return false;
-	var soapDoc = AjxSoapDoc.create("CreateVolumeRequest", ZaZimbraAdmin.URN, null);		
+	var soapDoc = AjxSoapDoc.create("CreateVolumeRequest", ZaZmailAdmin.URN, null);		
 	var elVolume = soapDoc.set("volume", null);
 	elVolume.setAttribute("type", volume[ZaServer.A_VolumeType]);
 	elVolume.setAttribute("name", volume[ZaServer.A_VolumeName]);	
@@ -1196,7 +1196,7 @@ ZaServer.prototype.modifyVolume =
 function (volume) {
 	if(!volume)
 		return false;
-	var soapDoc = AjxSoapDoc.create("ModifyVolumeRequest", ZaZimbraAdmin.URN, null);		
+	var soapDoc = AjxSoapDoc.create("ModifyVolumeRequest", ZaZmailAdmin.URN, null);		
 	soapDoc.getMethod().setAttribute(ZaServer.A_VolumeId, volume[ZaServer.A_VolumeId]);	
 	var elVolume = soapDoc.set("volume", null);
 	elVolume.setAttribute("type", volume[ZaServer.A_VolumeType]);
@@ -1220,7 +1220,7 @@ function (volume) {
 ZaServer.prototype.setCurrentVolume = function (id, type) {
 	if(!id || !type)
 		return false;	
-	var soapDoc = AjxSoapDoc.create("SetCurrentVolumeRequest", ZaZimbraAdmin.URN, null);		
+	var soapDoc = AjxSoapDoc.create("SetCurrentVolumeRequest", ZaZmailAdmin.URN, null);		
 	soapDoc.getMethod().setAttribute(ZaServer.A_VolumeType, type);		
 	soapDoc.getMethod().setAttribute(ZaServer.A_VolumeId, id);	
 	var params = {
@@ -1244,7 +1244,7 @@ ZaServer.initMethod = function () {
 ZaItem.initMethods["ZaServer"].push(ZaServer.initMethod);
 
 ZaServer.flushCache = function (params) {
-	var soapDoc = AjxSoapDoc.create("FlushCacheRequest", ZaZimbraAdmin.URN, null);
+	var soapDoc = AjxSoapDoc.create("FlushCacheRequest", ZaZmailAdmin.URN, null);
 	var elCache = soapDoc.set("cache", null);
 	
 	var type = [];
@@ -1265,7 +1265,7 @@ ZaServer.flushCache = function (params) {
 	
 	var reqParams = {
 		soapDoc: soapDoc,
-		targetServer: params.serverId ? params.serverId : params.serverList[params.ix].attrs[ZaItem.A_zimbraId],
+		targetServer: params.serverId ? params.serverId : params.serverList[params.ix].attrs[ZaItem.A_zmailId],
 		asyncMode: params.callback ? true : false,
 		callback: params.callback ? params.callback : null
 	}

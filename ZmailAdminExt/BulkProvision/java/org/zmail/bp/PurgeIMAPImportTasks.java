@@ -14,22 +14,22 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.bp;
+package org.zmail.bp;
 
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminExtConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.service.admin.AdminDocumentHandler;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminExtConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.service.admin.AdminDocumentHandler;
+import org.zmail.soap.ZmailSoapContext;
 
 public class PurgeIMAPImportTasks extends AdminDocumentHandler {
 
     public Element handle(Element request, Map<String, Object> context)
     throws ServiceException {
          
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Element response = zsc.createElement(AdminExtConstants.PURGE_BULK_IMAP_IMPORT_TASKS_RESPONSE);
         BulkIMAPImportTaskManager.purgeQueue(zsc.getAuthtokenAccountId());
         return response;

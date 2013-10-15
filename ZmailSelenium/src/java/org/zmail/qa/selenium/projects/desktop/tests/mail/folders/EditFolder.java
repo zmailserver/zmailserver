@@ -14,19 +14,19 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.mail.folders;
+package org.zmail.qa.selenium.projects.desktop.tests.mail.folders;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount.SOAP_DESTINATION_HOST_TYPE;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.mail.DialogEditFolder;
-import com.zimbra.qa.selenium.projects.desktop.ui.mail.DialogEditFolder.FolderColor;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.ZmailAccount.SOAP_DESTINATION_HOST_TYPE;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.mail.DialogEditFolder;
+import org.zmail.qa.selenium.projects.desktop.ui.mail.DialogEditFolder.FolderColor;
 
 public class EditFolder extends AjaxCommonTest {
 
@@ -47,10 +47,10 @@ public class EditFolder extends AjaxCommonTest {
 		ZAssert.assertNotNull(inbox, "Verify the inbox is available");
 
 		// Create the subfolder
-		String name1 = "folder" + ZimbraSeleniumProperties.getUniqueString();
+		String name1 = "folder" + ZmailSeleniumProperties.getUniqueString();
 
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>"
+				"<CreateFolderRequest xmlns='urn:zmailMail'>"
 						+ "<folder name='" + name1 + "' l='" + inbox.getId()
 						+ "'/>" + "</CreateFolderRequest>");
 
@@ -71,7 +71,7 @@ public class EditFolder extends AjaxCommonTest {
 		ZAssert.assertNotNull(dialog, "Verify the dialog opened");
 
 		// Set the name, click OK
-		String name2 = "folder" + ZimbraSeleniumProperties.getUniqueString();
+		String name2 = "folder" + ZmailSeleniumProperties.getUniqueString();
 		dialog.zSetNewName(name2);
 		dialog.zClickButton(Button.B_OK);
 
@@ -81,7 +81,7 @@ public class EditFolder extends AjaxCommonTest {
 		// Get all the folders and verify the new name appears and the old name
 		// disappears
 		app.zGetActiveAccount().soapSend(
-				"<GetFolderRequest xmlns = 'urn:zimbraMail'/>");
+				"<GetFolderRequest xmlns = 'urn:zmailMail'/>");
 
 		Element[] eFolder1 = app.zGetActiveAccount().soapSelectNodes(
 				"//mail:folder[@name='" + name1 + "']");
@@ -103,10 +103,10 @@ public class EditFolder extends AjaxCommonTest {
 		ZAssert.assertNotNull(inbox, "Verify the inbox is available");
 
 		// Create the subfolder
-		String name1 = "folder" + ZimbraSeleniumProperties.getUniqueString();
+		String name1 = "folder" + ZmailSeleniumProperties.getUniqueString();
 
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>"
+				"<CreateFolderRequest xmlns='urn:zmailMail'>"
 						+ "<folder name='" + name1 + "' l='" + inbox.getId()
 						+ "'/>" + "</CreateFolderRequest>");
 

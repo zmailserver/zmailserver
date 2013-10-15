@@ -121,7 +121,7 @@ ZmDataSourceCollection.prototype.importImapMailFor = function(folderId) {
 ZmDataSourceCollection.prototype.importMail = function(accounts) {
     if (accounts && accounts.length > 0) {
         var sourceMap = {};
-        var soapDoc = AjxSoapDoc.create("ImportDataRequest", "urn:zimbraMail");
+        var soapDoc = AjxSoapDoc.create("ImportDataRequest", "urn:zmailMail");
         for (var i = 0; i < accounts.length; i++) {
             var account = accounts[i];
             sourceMap[account.id] = account;
@@ -286,7 +286,7 @@ function(sourceMap, delayMs) {
 		delayMs += 2000;
 	}
 
-    var soapDoc = AjxSoapDoc.create("GetImportStatusRequest", "urn:zimbraMail");
+    var soapDoc = AjxSoapDoc.create("GetImportStatusRequest", "urn:zmailMail");
     var callback = new AjxCallback(this, this._checkStatusResponse, [sourceMap, delayMs]);
     var params = {
         soapDoc: soapDoc,

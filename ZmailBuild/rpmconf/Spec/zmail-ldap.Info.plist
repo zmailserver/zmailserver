@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleGetInfoString</key>
-	<string>@@VERSION@@, Zimbra, Inc.</string>
+	<string>@@VERSION@@, Zmail, Inc.</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.zimbra.zcs.ldap</string>
+	<string>org.zmail.zcs.ldap</string>
 	<key>CFBundleName</key>
-	<string>zimbra-ldap</string>
+	<string>zmail-ldap</string>
 	<key>CFBundleShortVersionString</key>
 	<string>@@MAJOR@@.@@MINOR@@</string>
 	<key>BuildVersion</key>

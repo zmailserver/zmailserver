@@ -14,22 +14,22 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.calendar.gui.features;
+package org.zmail.qa.selenium.projects.ajax.tests.calendar.gui.features;
 
 import java.util.HashMap;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
 
 
-public class ZimbraFeatureCalendarEnabled extends AjaxCommonTest {
+public class ZmailFeatureCalendarEnabled extends AjaxCommonTest {
 
 	
 	@SuppressWarnings("serial")
-	public ZimbraFeatureCalendarEnabled() {
-		logger.info("New "+ ZimbraFeatureCalendarEnabled.class.getCanonicalName());
+	public ZmailFeatureCalendarEnabled() {
+		logger.info("New "+ ZmailFeatureCalendarEnabled.class.getCanonicalName());
 		
 		// All tests start at the login page
 		super.startingPage = app.zPageCalendar;
@@ -38,14 +38,14 @@ public class ZimbraFeatureCalendarEnabled extends AjaxCommonTest {
 		super.startingAccountPreferences = new HashMap<String, String>() {{
 				    			
 					// Only mail is enabled
-				    put("zimbraFeatureMailEnabled", "FALSE");
-				    put("zimbraFeatureContactsEnabled", "FALSE");
-				    put("zimbraFeatureCalendarEnabled", "TRUE");
-				    put("zimbraFeatureTasksEnabled", "FALSE");
-				    put("zimbraFeatureBriefcasesEnabled", "FALSE");
+				    put("zmailFeatureMailEnabled", "FALSE");
+				    put("zmailFeatureContactsEnabled", "FALSE");
+				    put("zmailFeatureCalendarEnabled", "TRUE");
+				    put("zmailFeatureTasksEnabled", "FALSE");
+				    put("zmailFeatureBriefcasesEnabled", "FALSE");
 				    
-				    // https://bugzilla.zimbra.com/show_bug.cgi?id=62161#c3
-				    // put("zimbraFeatureOptionsEnabled", "FALSE");
+				    // https://bugzilla.zmail.com/show_bug.cgi?id=62161#c3
+				    // put("zmailFeatureOptionsEnabled", "FALSE");
 				    
 
 				}};
@@ -58,7 +58,7 @@ public class ZimbraFeatureCalendarEnabled extends AjaxCommonTest {
 	 */
 	@Test(	description = "Load the mail tab with just Calendar enabled",
 			groups = { "functional" })
-	public void ZimbraFeatureCalendarEnabled_01() throws HarnessException {
+	public void ZmailFeatureCalendarEnabled_01() throws HarnessException {
 		
 		// TODO: add basic verification that a simple appointment appears
 		

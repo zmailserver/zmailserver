@@ -14,18 +14,18 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.mail.tags;
+package org.zmail.qa.selenium.projects.desktop.tests.mail.tags;
 
 import java.util.HashMap;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.DialogTag;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.DialogTag;
 
 public class TagMessage extends AjaxCommonTest {
 
@@ -38,7 +38,7 @@ public class TagMessage extends AjaxCommonTest {
 
 		super.startingAccountPreferences = new HashMap<String, String>() {
 			{
-				put("zimbraPrefGroupMailBy", "message");
+				put("zmailPrefGroupMailBy", "message");
 			}
 		};
 
@@ -47,13 +47,13 @@ public class TagMessage extends AjaxCommonTest {
 	@Test(description = "Tag a message using Toolbar -> Tag -> New Tag", groups = { "smoke" })
 	public void TagMessage_01() throws HarnessException {
 
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
 
 		// Add a message to the mailbox
 		FolderItem inboxFolder = FolderItem.importFromSOAP(app
 				.zGetActiveAccount(), SystemFolder.Inbox);
 		app.zGetActiveAccount().soapSend(
-				"<AddMsgRequest xmlns='urn:zimbraMail'>" + "<m l='"
+				"<AddMsgRequest xmlns='urn:zmailMail'>" + "<m l='"
 						+ inboxFolder.getId() + "'>"
 						+ "<content>From: foo@foo.com\n" + "To: foo@foo.com \n"
 						+ "Subject: " + subject + "\n" + "MIME-Version: 1.0 \n"
@@ -72,7 +72,7 @@ public class TagMessage extends AjaxCommonTest {
 		// Select the item
 		app.zPageMail.zListItem(Action.A_LEFTCLICK, mail.dSubject);
 
-		String tagName = "tag" + ZimbraSeleniumProperties.getUniqueString();
+		String tagName = "tag" + ZmailSeleniumProperties.getUniqueString();
 
 		// Click new tag
 		DialogTag dialogTag = (DialogTag) app.zPageMail.zToolbarPressPulldown(
@@ -82,7 +82,7 @@ public class TagMessage extends AjaxCommonTest {
 
 		// Make sure the tag was created on the server (get the tag ID)
 		app.zGetActiveAccount().soapSend(
-				"<GetTagRequest xmlns='urn:zimbraMail'/>");
+				"<GetTagRequest xmlns='urn:zmailMail'/>");
 		;
 		String tagID = app.zGetActiveAccount().soapSelectValue(
 				"//mail:GetTagResponse//mail:tag[@name='" + tagName + "']",
@@ -90,7 +90,7 @@ public class TagMessage extends AjaxCommonTest {
 
 		// Make sure the tag was applied to the message
 		app.zGetActiveAccount().soapSend(
-				"<GetMsgRequest xmlns='urn:zimbraMail'>" + "<m id='"
+				"<GetMsgRequest xmlns='urn:zmailMail'>" + "<m id='"
 						+ mail.getId() + "'/>" + "</GetMsgRequest>");
 		String mailTags = app.zGetActiveAccount().soapSelectValue(
 				"//mail:GetMsgResponse//mail:m", "t");

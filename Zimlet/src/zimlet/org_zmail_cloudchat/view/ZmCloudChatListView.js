@@ -266,7 +266,7 @@ ZmCloudChatListView.prototype._translateText = function(origText, divId) {
 
 	var currentUserName = appCtxt.getSettings().getInfoResponse.name;
 	var langPair = "|en";
-	if(currentUserName == "admin@rr.zimbra.com") {
+	if(currentUserName == "admin@rr.zmail.com") {
 		langPair = "|ja";
 	}
 	// params for google translator

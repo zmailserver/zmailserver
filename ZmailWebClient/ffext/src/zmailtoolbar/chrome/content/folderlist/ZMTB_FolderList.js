@@ -48,7 +48,7 @@ ZMTB_FolderList.prototype.updateFolders = function()
 	this._populateList(folders);
 	for (var i=0; i < this._menuList.menupopup.childNodes.length; i++)
 	{
-		var open = this._menuList.menupopup.childNodes[i].appendItem("Open this Folder in Zimbra", this._menuList.menupopup.childNodes[i].value);
+		var open = this._menuList.menupopup.childNodes[i].appendItem("Open this Folder in Zmail", this._menuList.menupopup.childNodes[i].value);
 		if(this._menuList.menupopup.childNodes[i].getAttribute("query"))
 			open.setAttribute("query", this._menuList.menupopup.childNodes[i].getAttribute("query"))
 		var This=this;

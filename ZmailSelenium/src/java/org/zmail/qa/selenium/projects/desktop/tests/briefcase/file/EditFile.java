@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.briefcase.file;
+package org.zmail.qa.selenium.projects.desktop.tests.briefcase.file;
 
 import java.util.EnumMap;
 import java.util.HashMap;
@@ -22,20 +22,20 @@ import java.util.regex.Pattern;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
-import com.zimbra.qa.selenium.framework.items.FileItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.IItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.GeneralUtility;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.HtmlElement;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.briefcase.PageBriefcase;
+import org.zmail.qa.selenium.framework.items.FileItem;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.IItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.GeneralUtility;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.HtmlElement;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.briefcase.PageBriefcase;
 
 public class EditFile extends AjaxCommonTest {
 
@@ -49,13 +49,13 @@ public class EditFile extends AjaxCommonTest {
 
 	@Test(description = "Upload file through RestUtil - edit name & verify through GUI", groups = { "smoke" })
 	public void EditFile_01() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
 
 		// Create file item
-		String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+		String filePath = ZmailSeleniumProperties.getBaseDirectory()
 				+ "/data/public/other/putty.log";
 
 		IItem fileItem = new FileItem(filePath);
@@ -66,7 +66,7 @@ public class EditFile extends AjaxCommonTest {
 		// Save uploaded file to briefcase through SOAP
 		account.soapSend(
 
-		"<SaveDocumentRequest xmlns='urn:zimbraMail'>" +
+		"<SaveDocumentRequest xmlns='urn:zmailMail'>" +
 
 		"<doc l='" + briefcaseFolder.getId() + "'>" +
 
@@ -89,7 +89,7 @@ public class EditFile extends AjaxCommonTest {
 				fileItem);
 
 		String fileName2 = "renameFile"
-				+ ZimbraSeleniumProperties.getUniqueString();
+				+ ZmailSeleniumProperties.getUniqueString();
 
 		app.zPageBriefcase.rename(fileName2);
 
@@ -101,13 +101,13 @@ public class EditFile extends AjaxCommonTest {
 
 	@Test(description = "Upload file, edit name - verify the content remains the same", groups = { "functional" })
 	public void EditFile_02() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
 
 		// Create file item
-		String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+		String filePath = ZmailSeleniumProperties.getBaseDirectory()
 				+ "/data/public/other/putty.log";
 
 		FileItem fileItem = new FileItem(filePath);
@@ -116,7 +116,7 @@ public class EditFile extends AjaxCommonTest {
 		String attachmentId = account.uploadFile(filePath);
 
 		// Save uploaded file to briefcase through SOAP
-		account.soapSend("<SaveDocumentRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<SaveDocumentRequest xmlns='urn:zmailMail'>"
 				+ "<doc l='" + briefcaseFolder.getId() + "'><upload id='"
 				+ attachmentId + "'/>" + "</doc></SaveDocumentRequest>");
 
@@ -138,7 +138,7 @@ public class EditFile extends AjaxCommonTest {
 				fileItem);
 
 		String fileName2 = "renameFile"
-				+ ZimbraSeleniumProperties.getUniqueString();
+				+ ZmailSeleniumProperties.getUniqueString();
 
 		app.zPageBriefcase.rename(fileName2);
 
@@ -166,13 +166,13 @@ public class EditFile extends AjaxCommonTest {
 
 	@Test(description = "Upload file through RestUtil - Verify 'Edit' toolbar button is disabled", groups = { "functional" })
 	public void EditFile_03() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
 
 		// Create file item
-		String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+		String filePath = ZmailSeleniumProperties.getBaseDirectory()
 				+ "/data/public/other/putty.log";
 
 		IItem fileItem = new FileItem(filePath);
@@ -183,7 +183,7 @@ public class EditFile extends AjaxCommonTest {
 		// Save uploaded file to briefcase through SOAP
 		account.soapSend(
 
-		"<SaveDocumentRequest xmlns='urn:zimbraMail'>" +
+		"<SaveDocumentRequest xmlns='urn:zmailMail'>" +
 
 		"<doc l='" + briefcaseFolder.getId() + "'>" +
 
@@ -216,13 +216,13 @@ public class EditFile extends AjaxCommonTest {
 
 	@Test(description = "Upload file through RestUtil - Verify 'Edit' context menu is disabled", groups = { "functional" })
 	public void EditFile_04() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
 
 		// Create file item
-		String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+		String filePath = ZmailSeleniumProperties.getBaseDirectory()
 				+ "/data/public/other/putty.log";
 
 		IItem fileItem = new FileItem(filePath);
@@ -233,7 +233,7 @@ public class EditFile extends AjaxCommonTest {
 		// Save uploaded file to briefcase through SOAP
 		account.soapSend(
 
-		"<SaveDocumentRequest xmlns='urn:zimbraMail'>" +
+		"<SaveDocumentRequest xmlns='urn:zmailMail'>" +
 
 		"<doc l='" + briefcaseFolder.getId() + "'>" +
 
@@ -271,6 +271,6 @@ public class EditFile extends AjaxCommonTest {
       // if account is not reset, ZCS will be confused, and the next
       // uploaded file
       // will be deleted per previous command.
-      ZimbraAccount.ResetAccountZDC();
+      ZmailAccount.ResetAccountZDC();
    }
 }

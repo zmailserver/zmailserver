@@ -12,25 +12,25 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.offline;
+package org.zmail.cs.service.offline;
 
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.offline.backup.AccountBackupProducer;
-import com.zimbra.cs.offline.common.OfflineConstants;
-import com.zimbra.soap.DocumentHandler;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.offline.backup.AccountBackupProducer;
+import org.zmail.cs.offline.common.OfflineConstants;
+import org.zmail.soap.DocumentHandler;
+import org.zmail.soap.ZmailSoapContext;
 
 public class OfflineAccountRestoreService extends DocumentHandler {
     
     @Override
     public Element handle(Element request, Map<String, Object> context)
             throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         String accountId = request.getAttribute(AccountConstants.E_ID, null);
         String timestamp = request.getAttribute(AdminConstants.A_TIME, null);
         String resolve = request.getAttribute(OfflineConstants.A_RESOLVE, null);

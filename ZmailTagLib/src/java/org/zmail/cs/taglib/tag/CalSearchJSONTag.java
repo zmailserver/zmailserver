@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.tag;
+package org.zmail.cs.taglib.tag;
 
 import java.io.IOException;
 import java.util.Calendar;
@@ -24,20 +24,20 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.common.soap.SoapTransport;
-import com.zimbra.common.soap.ZimbraNamespace;
-import com.zimbra.common.zclient.ZClientException;
-import com.zimbra.cs.taglib.ZJspSession;
-import com.zimbra.cs.taglib.tag.TagUtil.JsonDebugListener;
-import com.zimbra.client.ZFolder;
-import com.zimbra.client.ZMailbox;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.common.soap.SoapTransport;
+import org.zmail.common.soap.ZmailNamespace;
+import org.zmail.common.zclient.ZClientException;
+import org.zmail.cs.taglib.ZJspSession;
+import org.zmail.cs.taglib.tag.TagUtil.JsonDebugListener;
+import org.zmail.client.ZFolder;
+import org.zmail.client.ZMailbox;
 
-public class CalSearchJSONTag extends ZimbraSimpleTag {
+public class CalSearchJSONTag extends ZmailSimpleTag {
 
     private static final Pattern sSCRIPT = Pattern.compile("</script>", Pattern.CASE_INSENSITIVE);
 
@@ -118,7 +118,7 @@ public class CalSearchJSONTag extends ZimbraSimpleTag {
             long calEnd = other.getTimeInMillis();
 
             //BatchRequest
-            Element batch = new Element.JSONElement(ZimbraNamespace.E_BATCH_REQUEST);
+            Element batch = new Element.JSONElement(ZmailNamespace.E_BATCH_REQUEST);
 
             //GetMiniCalRequest
             Element miniCalRequest = batch.addElement(MailConstants.GET_MINI_CAL_REQUEST);

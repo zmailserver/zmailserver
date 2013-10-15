@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.util;
+package org.zmail.qa.selenium.framework.util;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -23,15 +23,15 @@ import java.util.Map;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import com.zimbra.common.soap.Element;
+import org.zmail.common.soap.Element;
 
-public class OctopusAccount extends ZimbraAccount {
+public class OctopusAccount extends ZmailAccount {
 	private static Logger logger = LogManager.getLogger(OctopusAccount.class);
 	private static OctopusAccount _AccountZWC = null;
 
 	/**
 	 * Get the user account logged into ZWC being tested
-	 * @return the ZimbraAccount object representing the test account
+	 * @return the ZmailAccount object representing the test account
 	 */
 	public static synchronized OctopusAccount AccountZWC() {
 		if ( _AccountZWC == null ) {
@@ -45,20 +45,20 @@ public class OctopusAccount extends ZimbraAccount {
 	// Set the default account settings
 	@SuppressWarnings("serial")
 	private static final Map<String, String> accountAttrs = new HashMap<String, String>() {{
-		put("zimbraPrefLocale", ZimbraSeleniumProperties.getStringProperty("locale"));
-		put("zimbraPrefAutoAddAddressEnabled", "FALSE");
-		put("zimbraPrefTimeZoneId", ZimbraSeleniumProperties.getStringProperty("zimbraPrefTimeZoneId", "America/Los_Angeles"));			
+		put("zmailPrefLocale", ZmailSeleniumProperties.getStringProperty("locale"));
+		put("zmailPrefAutoAddAddressEnabled", "FALSE");
+		put("zmailPrefTimeZoneId", ZmailSeleniumProperties.getStringProperty("zmailPrefTimeZoneId", "America/Los_Angeles"));			
 	}};
 
 	/**
 	 * Creates the account on the ZCS using CreateAccountRequest
 	 */
-	public ZimbraAccount provision() {
+	public ZmailAccount provision() {
 		try {
 
 			
 			// Make sure domain exists
-			ZimbraDomain domain = new ZimbraDomain( EmailAddress.split("@")[1]);
+			ZmailDomain domain = new ZmailDomain( EmailAddress.split("@")[1]);
 			domain.provision();
 			
 
@@ -73,34 +73,34 @@ public class OctopusAccount extends ZimbraAccount {
 			}
 
 			// Create the account
-			ZimbraAdminAccount.GlobalAdmin().soapSend(
-					"<CreateAccountRequest xmlns='urn:zimbraAdmin'>"
+			ZmailAdminAccount.GlobalAdmin().soapSend(
+					"<CreateAccountRequest xmlns='urn:zmailAdmin'>"
 					+		"<name>"+ EmailAddress +"</name>"
 					+		"<password>"+ Password +"</password>"
 					+		prefs.toString()
 					+	"</CreateAccountRequest>");
 
-			Element[] createAccountResponse = ZimbraAdminAccount.GlobalAdmin().soapSelectNodes("//admin:CreateAccountResponse");
+			Element[] createAccountResponse = ZmailAdminAccount.GlobalAdmin().soapSelectNodes("//admin:CreateAccountResponse");
 
 
 			if ( (createAccountResponse == null) || (createAccountResponse.length == 0)) {
 
-				Element[] soapFault = ZimbraAdminAccount.GlobalAdmin().soapSelectNodes("//soap:Fault");
+				Element[] soapFault = ZmailAdminAccount.GlobalAdmin().soapSelectNodes("//soap:Fault");
 				if ( soapFault != null && soapFault.length > 0 ) {
 				
-					String error = ZimbraAdminAccount.GlobalAdmin().soapSelectValue("//zimbra:Code", null);
+					String error = ZmailAdminAccount.GlobalAdmin().soapSelectValue("//zmail:Code", null);
 					throw new HarnessException("Unable to create account: "+ error);
 					
 				}
 				
 				
 				logger.error("Error occured during account provisioning, perhaps account already exists: "+ EmailAddress);
-				ZimbraAdminAccount.GlobalAdmin().soapSend(
-						"<GetAccountRequest xmlns='urn:zimbraAdmin'>"
+				ZmailAdminAccount.GlobalAdmin().soapSend(
+						"<GetAccountRequest xmlns='urn:zmailAdmin'>"
 						+		"<account by='name'>"+ EmailAddress + "</account>"
 						+	"</GetAccountRequest>");
 
-				Element[] getAccountResponse = ZimbraAdminAccount.GlobalAdmin().soapSelectNodes("//admin:GetAccountResponse");
+				Element[] getAccountResponse = ZmailAdminAccount.GlobalAdmin().soapSelectNodes("//admin:GetAccountResponse");
 
 
 				if ( (getAccountResponse == null) || (getAccountResponse.length == 0)) {
@@ -109,30 +109,30 @@ public class OctopusAccount extends ZimbraAccount {
 
 				} else {
 
-					ZimbraId = ZimbraAdminAccount.GlobalAdmin().soapSelectValue("//admin:account", "id");
-					ZimbraMailHost = ZimbraAdminAccount.GlobalAdmin().soapSelectValue("//admin:account/admin:a[@n='zimbraMailHost']", null);
-					ZimbraPrefLocale = ZimbraAdminAccount.GlobalAdmin().soapSelectValue("//admin:account/admin:a[@n='zimbraPrefLocale']", null);
+					ZmailId = ZmailAdminAccount.GlobalAdmin().soapSelectValue("//admin:account", "id");
+					ZmailMailHost = ZmailAdminAccount.GlobalAdmin().soapSelectValue("//admin:account/admin:a[@n='zmailMailHost']", null);
+					ZmailPrefLocale = ZmailAdminAccount.GlobalAdmin().soapSelectValue("//admin:account/admin:a[@n='zmailPrefLocale']", null);
 
 				}
 			} else {
 
-				ZimbraId = ZimbraAdminAccount.GlobalAdmin().soapSelectValue("//admin:account", "id");
-				ZimbraMailHost = ZimbraAdminAccount.GlobalAdmin().soapSelectValue("//admin:account/admin:a[@n='zimbraMailHost']", null);
-				ZimbraPrefLocale = ZimbraAdminAccount.GlobalAdmin().soapSelectValue("//admin:account/admin:a[@n='zimbraPrefLocale']", null);
+				ZmailId = ZmailAdminAccount.GlobalAdmin().soapSelectValue("//admin:account", "id");
+				ZmailMailHost = ZmailAdminAccount.GlobalAdmin().soapSelectValue("//admin:account/admin:a[@n='zmailMailHost']", null);
+				ZmailPrefLocale = ZmailAdminAccount.GlobalAdmin().soapSelectValue("//admin:account/admin:a[@n='zmailPrefLocale']", null);
 
 
 			}
 
-			if ( (ZimbraPrefLocale == null) || ZimbraPrefLocale.trim().equals("") ) {
-				ZimbraPrefLocale = Locale.getDefault().toString();
+			if ( (ZmailPrefLocale == null) || ZmailPrefLocale.trim().equals("") ) {
+				ZmailPrefLocale = Locale.getDefault().toString();
 			}
 
-			if ( ZimbraSeleniumProperties.getStringProperty("soap.trace.enabled", "false").toLowerCase().equals("true") ) {
+			if ( ZmailSeleniumProperties.getStringProperty("soap.trace.enabled", "false").toLowerCase().equals("true") ) {
 				
-				ZimbraAdminAccount.GlobalAdmin().soapSend(
-							"<AddAccountLoggerRequest xmlns='urn:zimbraAdmin'>"
+				ZmailAdminAccount.GlobalAdmin().soapSend(
+							"<AddAccountLoggerRequest xmlns='urn:zmailAdmin'>"
 						+		"<account by='name'>"+ EmailAddress + "</account>"
-						+		"<logger category='zimbra.soap' level='trace'/>"
+						+		"<logger category='zmail.soap' level='trace'/>"
 						+	"</AddAccountLoggerRequest>");
 
 			}
@@ -145,8 +145,8 @@ public class OctopusAccount extends ZimbraAccount {
 		} catch (HarnessException e) {
 
 			logger.error("Unable to provision account: "+ EmailAddress, e);
-			ZimbraId = null;
-			ZimbraMailHost = null;
+			ZmailId = null;
+			ZmailMailHost = null;
 
 		}
 

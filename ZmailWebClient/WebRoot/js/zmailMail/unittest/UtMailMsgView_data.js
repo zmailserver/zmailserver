@@ -75,13 +75,13 @@ UtMailMsgView_data = [
         e: [
           // [0]:
           {
-            a: "p4@zcs103.zimbraqa.lab",
+            a: "p4@zcs103.zmailqa.lab",
             d: "p4",
             t: "f"
            },
           // [1]:
           {
-            a: "1@zcs103.zimbraqa.lab",
+            a: "1@zcs103.zmailqa.lab",
             d: "1",
             t: "t"
            }
@@ -90,7 +90,7 @@ UtMailMsgView_data = [
         fr: '<script>alert("Bad");</script>',
         id: "600",
         l: "2",
-        mid: "<6c3594eb-a17f-493f-8b70-44b41f8336b8@zcs103.zimbraqa.lab>",
+        mid: "<6c3594eb-a17f-493f-8b70-44b41f8336b8@zcs103.zmailqa.lab>",
         mp: [
           // [0]:
           {

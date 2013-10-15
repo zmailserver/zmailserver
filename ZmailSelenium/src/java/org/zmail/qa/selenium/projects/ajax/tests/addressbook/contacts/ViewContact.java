@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.addressbook.contacts;
+package org.zmail.qa.selenium.projects.ajax.tests.addressbook.contacts;
 
 
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.ContactItem;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.addressbook.FormContactNew;
+import org.zmail.qa.selenium.framework.items.ContactItem;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.addressbook.FormContactNew;
 
 
 public class ViewContact extends AjaxCommonTest  {
@@ -48,15 +48,15 @@ public class ViewContact extends AjaxCommonTest  {
 		//-- Data
 		
 		// Create a contact item
-		String firstname = "first"+ ZimbraSeleniumProperties.getUniqueString();
-		String lastname = "last"+ ZimbraSeleniumProperties.getUniqueString();
-		String email = "email"+ ZimbraSeleniumProperties.getUniqueString() + "@example.com";
-		String company = "company"+ ZimbraSeleniumProperties.getUniqueString();
+		String firstname = "first"+ ZmailSeleniumProperties.getUniqueString();
+		String lastname = "last"+ ZmailSeleniumProperties.getUniqueString();
+		String email = "email"+ ZmailSeleniumProperties.getUniqueString() + "@example.com";
+		String company = "company"+ ZmailSeleniumProperties.getUniqueString();
 		
 		String expected = String.format("%s %s", firstname, lastname);
 
 		app.zGetActiveAccount().soapSend(
-				"<CreateContactRequest xmlns='urn:zimbraMail'>" +
+				"<CreateContactRequest xmlns='urn:zmailMail'>" +
 						"<cn >" +
 							"<a n='firstName'>"+ firstname +"</a>" +
 							"<a n='lastName'>"+ lastname +"</a>" +
@@ -111,15 +111,15 @@ public class ViewContact extends AjaxCommonTest  {
 		//-- Data
 		
 		// Create a contact item
-		String firstname = "first"+ ZimbraSeleniumProperties.getUniqueString();
-		String lastname = "last"+ ZimbraSeleniumProperties.getUniqueString();
-		String email = "email"+ ZimbraSeleniumProperties.getUniqueString() + "@example.com";
-		String company = "company"+ ZimbraSeleniumProperties.getUniqueString();
+		String firstname = "first"+ ZmailSeleniumProperties.getUniqueString();
+		String lastname = "last"+ ZmailSeleniumProperties.getUniqueString();
+		String email = "email"+ ZmailSeleniumProperties.getUniqueString() + "@example.com";
+		String company = "company"+ ZmailSeleniumProperties.getUniqueString();
 		
 		String expected = String.format("%s, %s", lastname, firstname);
 
 		app.zGetActiveAccount().soapSend(
-				"<CreateContactRequest xmlns='urn:zimbraMail'>" +
+				"<CreateContactRequest xmlns='urn:zmailMail'>" +
 						"<cn >" +
 							"<a n='firstName'>"+ firstname +"</a>" +
 							"<a n='lastName'>"+ lastname +"</a>" +
@@ -174,15 +174,15 @@ public class ViewContact extends AjaxCommonTest  {
 		//-- Data
 		
 		// Create a contact item
-		String firstname = "first"+ ZimbraSeleniumProperties.getUniqueString();
-		String lastname = "last"+ ZimbraSeleniumProperties.getUniqueString();
-		String email = "email"+ ZimbraSeleniumProperties.getUniqueString() + "@example.com";
-		String company = "company"+ ZimbraSeleniumProperties.getUniqueString();
+		String firstname = "first"+ ZmailSeleniumProperties.getUniqueString();
+		String lastname = "last"+ ZmailSeleniumProperties.getUniqueString();
+		String email = "email"+ ZmailSeleniumProperties.getUniqueString() + "@example.com";
+		String company = "company"+ ZmailSeleniumProperties.getUniqueString();
 		
 		String expected = String.format("%s (%s, %s)", company, lastname, firstname);
 
 		app.zGetActiveAccount().soapSend(
-				"<CreateContactRequest xmlns='urn:zimbraMail'>" +
+				"<CreateContactRequest xmlns='urn:zmailMail'>" +
 						"<cn >" +
 							"<a n='firstName'>"+ firstname +"</a>" +
 							"<a n='lastName'>"+ lastname +"</a>" +
@@ -237,15 +237,15 @@ public class ViewContact extends AjaxCommonTest  {
 		//-- Data
 		
 		// Create a contact item
-		String firstname = "first"+ ZimbraSeleniumProperties.getUniqueString();
-		String lastname = "last"+ ZimbraSeleniumProperties.getUniqueString();
-		String email = "email"+ ZimbraSeleniumProperties.getUniqueString() + "@example.com";
-		String company = "company"+ ZimbraSeleniumProperties.getUniqueString();
+		String firstname = "first"+ ZmailSeleniumProperties.getUniqueString();
+		String lastname = "last"+ ZmailSeleniumProperties.getUniqueString();
+		String email = "email"+ ZmailSeleniumProperties.getUniqueString() + "@example.com";
+		String company = "company"+ ZmailSeleniumProperties.getUniqueString();
 		
 		String expected = String.format("%s", company);
 
 		app.zGetActiveAccount().soapSend(
-				"<CreateContactRequest xmlns='urn:zimbraMail'>" +
+				"<CreateContactRequest xmlns='urn:zmailMail'>" +
 						"<cn >" +
 							"<a n='firstName'>"+ firstname +"</a>" +
 							"<a n='lastName'>"+ lastname +"</a>" +
@@ -301,15 +301,15 @@ public class ViewContact extends AjaxCommonTest  {
 		//-- Data
 		
 		// Create a contact item
-		String firstname = "first"+ ZimbraSeleniumProperties.getUniqueString();
-		String lastname = "last"+ ZimbraSeleniumProperties.getUniqueString();
-		String email = "email"+ ZimbraSeleniumProperties.getUniqueString() + "@example.com";
-		String company = "company"+ ZimbraSeleniumProperties.getUniqueString();
+		String firstname = "first"+ ZmailSeleniumProperties.getUniqueString();
+		String lastname = "last"+ ZmailSeleniumProperties.getUniqueString();
+		String email = "email"+ ZmailSeleniumProperties.getUniqueString() + "@example.com";
+		String company = "company"+ ZmailSeleniumProperties.getUniqueString();
 		
 		String expected = String.format("%s, %s (%s)", lastname, firstname, company);
 				
 		app.zGetActiveAccount().soapSend(
-				"<CreateContactRequest xmlns='urn:zimbraMail'>" +
+				"<CreateContactRequest xmlns='urn:zmailMail'>" +
 						"<cn >" +
 							"<a n='firstName'>"+ firstname +"</a>" +
 							"<a n='lastName'>"+ lastname +"</a>" +
@@ -366,15 +366,15 @@ public class ViewContact extends AjaxCommonTest  {
 		//-- Data
 		
 		// Create a contact item
-		String firstname = "first"+ ZimbraSeleniumProperties.getUniqueString();
-		String lastname = "last"+ ZimbraSeleniumProperties.getUniqueString();
-		String email = "email"+ ZimbraSeleniumProperties.getUniqueString() + "@example.com";
-		String company = "company"+ ZimbraSeleniumProperties.getUniqueString();
+		String firstname = "first"+ ZmailSeleniumProperties.getUniqueString();
+		String lastname = "last"+ ZmailSeleniumProperties.getUniqueString();
+		String email = "email"+ ZmailSeleniumProperties.getUniqueString() + "@example.com";
+		String company = "company"+ ZmailSeleniumProperties.getUniqueString();
 		
 		String expected = String.format("%s %s (%s)", firstname, lastname, company);
 
 		app.zGetActiveAccount().soapSend(
-				"<CreateContactRequest xmlns='urn:zimbraMail'>" +
+				"<CreateContactRequest xmlns='urn:zmailMail'>" +
 						"<cn >" +
 							"<a n='firstName'>"+ firstname +"</a>" +
 							"<a n='lastName'>"+ lastname +"</a>" +
@@ -429,15 +429,15 @@ public class ViewContact extends AjaxCommonTest  {
 		//-- Data
 		
 		// Create a contact item
-		String firstname = "first"+ ZimbraSeleniumProperties.getUniqueString();
-		String lastname = "last"+ ZimbraSeleniumProperties.getUniqueString();
-		String email = "email"+ ZimbraSeleniumProperties.getUniqueString() + "@example.com";
-		String company = "company"+ ZimbraSeleniumProperties.getUniqueString();
+		String firstname = "first"+ ZmailSeleniumProperties.getUniqueString();
+		String lastname = "last"+ ZmailSeleniumProperties.getUniqueString();
+		String email = "email"+ ZmailSeleniumProperties.getUniqueString() + "@example.com";
+		String company = "company"+ ZmailSeleniumProperties.getUniqueString();
 		
 		String expected = String.format("%s (%s %s)", company, firstname, lastname);
 
 		app.zGetActiveAccount().soapSend(
-				"<CreateContactRequest xmlns='urn:zimbraMail'>" +
+				"<CreateContactRequest xmlns='urn:zmailMail'>" +
 						"<cn >" +
 							"<a n='firstName'>"+ firstname +"</a>" +
 							"<a n='lastName'>"+ lastname +"</a>" +

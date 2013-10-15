@@ -80,16 +80,16 @@ function(zimlet, now, isDragProxy) {
 			html[idx++] = "<td align='left' width=" + cellWidth + ">";
 			html[idx++] = AjxStringUtil.htmlEncode(zimlet.getLabel());
 			html[idx++] = "</td>";
-		} else if(field == ZaZimlet.A_zimbraZimletDescription) {	
+		} else if(field == ZaZimlet.A_zmailZimletDescription) {	
 			// description
 			html[idx++] = "<td align='left' width=" + cellWidth + ">";
-            var desc = ZaZimletListView.__processMessage(zimlet[ZaZimlet.A_name], zimlet.attrs[ZaZimlet.A_zimbraZimletDescription ]);
+            var desc = ZaZimletListView.__processMessage(zimlet[ZaZimlet.A_name], zimlet.attrs[ZaZimlet.A_zmailZimletDescription ]);
 			html[idx++] = AjxStringUtil.htmlEncode(desc);
 			html[idx++] = "</td>";
-		} else if(field == ZaZimlet.A_zimbraZimletEnabled) {	
+		} else if(field == ZaZimlet.A_zmailZimletEnabled) {	
 			// status
 			html[idx++] = "<td align='left' width=" + cellWidth + ">";
-			html[idx++] = (zimlet.attrs[ZaZimlet.A_zimbraZimletEnabled] == "TRUE") ?  AjxStringUtil.htmlEncode(ZaMsg.NAD_Enabled) :AjxStringUtil.htmlEncode(ZaMsg.NAD_Disabled) ;
+			html[idx++] = (zimlet.attrs[ZaZimlet.A_zmailZimletEnabled] == "TRUE") ?  AjxStringUtil.htmlEncode(ZaMsg.NAD_Enabled) :AjxStringUtil.htmlEncode(ZaMsg.NAD_Disabled) ;
 			html[idx++] = "</td>";
 		}
 	}
@@ -106,9 +106,9 @@ function() {
 	var sortable=1;
 	headerList[0] = new ZaListHeaderItem(ZaZimlet.A_name, ZaMsg.CLV_Name_col, null, "200px", sortable++, "name", true, true);
 
-	headerList[1] = new ZaListHeaderItem(ZaZimlet.A_zimbraZimletDescription, ZaMsg.DLV_Description_col, null, "auto", null, ZaZimlet.A_zimbraZimletDescription, true, true);
+	headerList[1] = new ZaListHeaderItem(ZaZimlet.A_zmailZimletDescription, ZaMsg.DLV_Description_col, null, "auto", null, ZaZimlet.A_zmailZimletDescription, true, true);
 
-	headerList[2] = new ZaListHeaderItem(ZaZimlet.A_zimbraZimletEnabled, ZaMsg.ALV_Status_col, null, "120px", null, ZaZimlet.A_zimbraZimletEnabled, true, true);	
+	headerList[2] = new ZaListHeaderItem(ZaZimlet.A_zmailZimletEnabled, ZaMsg.ALV_Status_col, null, "120px", null, ZaZimlet.A_zmailZimletEnabled, true, true);	
 		
 	return headerList;
 }

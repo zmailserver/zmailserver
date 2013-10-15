@@ -29,7 +29,7 @@
 ZmImAddress = {
 
     IM_SERVICES : [
-            { label: ZmMsg.zimbraTitle , value: "local" },
+            { label: ZmMsg.zmailTitle , value: "local" },
             { label: ZmMsg.yahoo       , value: "yahoo" },
             { label: ZmMsg.msn         , value: "msn" },
             { label: ZmMsg.aol         , value: "aol" },
@@ -73,7 +73,7 @@ ZmImAddress = {
 };
 
 // HACK for bug 23603
-if (/^SmartZone/.test(ZmMsg.zimbraTitle)) {
+if (/^SmartZone/.test(ZmMsg.zmailTitle)) {
         ZmImAddress.IM_SERVICES.splice(0, 1);
 }
 

@@ -14,7 +14,7 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_social"
+<zimlet name="org_zmail_social"
         version="3.6"
         label="${msg.label}"
         description="${msg.description}">
@@ -35,7 +35,7 @@
 
     <includeCSS>social.css</includeCSS>
     <resource>social-icon.png</resource>
-    <handlerObject>com_zimbra_social_handlerObject</handlerObject>
+    <handlerObject>org_zmail_social_handlerObject</handlerObject>
 
     <userProperties>
         <property type="string" name="social_pref_tweetmemePopularIsOn" value="true"/>

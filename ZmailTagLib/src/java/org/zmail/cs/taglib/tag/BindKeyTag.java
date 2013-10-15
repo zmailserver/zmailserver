@@ -12,12 +12,12 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.tag;
+package org.zmail.cs.taglib.tag;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.taglib.bean.ZUserAgentBean;
-import com.zimbra.cs.taglib.tag.i18n.I18nUtil;
-import com.zimbra.client.ZMailbox;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.taglib.bean.ZUserAgentBean;
+import org.zmail.cs.taglib.tag.i18n.I18nUtil;
+import org.zmail.client.ZMailbox;
 
 import javax.servlet.jsp.JspContext;
 import javax.servlet.jsp.JspException;
@@ -33,7 +33,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class BindKeyTag extends ZimbraSimpleTag {
+public class BindKeyTag extends ZmailSimpleTag {
 
     // Key names
      public static final String CTRL	= "Ctrl+";

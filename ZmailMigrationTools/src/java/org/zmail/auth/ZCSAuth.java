@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.auth;
+package org.zmail.auth;
 
 import java.util.logging.*;
 import javax.net.ssl.*;
@@ -29,8 +29,8 @@ import javax.xml.soap.SOAPElement;
 import javax.xml.soap.SOAPException;
 import javax.xml.soap.Name;
 import javax.xml.soap.SOAPHeader;
-import com.zimbra.utils.*;
-import com.zimbra.zcsprov.ZMSoapSession;
+import org.zmail.utils.*;
+import org.zmail.zcsprov.ZMSoapSession;
 
 import java.security.Security;
 
@@ -57,7 +57,7 @@ public class ZCSAuth
 	    auth_logger= logger;
         iauthtype=authtype;
         Security.setProperty( "ssl.SocketFactory.provider", 
-                                "com.zimbra.utils.ZMSSLSocketFactory");
+                                "org.zmail.utils.ZMSSLSocketFactory");
         HostnameVerifier hv = new HostnameVerifier() 
         {
             public boolean verify(String urlHostName,SSLSession session) 
@@ -119,8 +119,8 @@ public class ZCSAuth
             se.addNamespaceDeclaration("soap", "http://schemas.xmlsoap.org/soap/envelope/");        
 
             //add header
-            sh.addChildElement("context", "nsg", "urn:zimbra");
-            sh.addChildElement("userAgent", "name","ZimbraProvisioningTool");
+            sh.addChildElement("context", "nsg", "urn:zmail");
+            sh.addChildElement("userAgent", "name","ZmailProvisioningTool");
             sh.addChildElement("format", "type","xml"); 
 
             //create SOAP Body
@@ -129,7 +129,7 @@ public class ZCSAuth
             if((iauthtype== ZMSoapSession.AUTH_TYPE_ADMIN)||
                (iauthtype== ZMSoapSession.AUTH_TYPE_ADMIN_DEST))
             {
-                bodyName = se.createName("AuthRequest", "nsg","urn:zimbraAdmin");
+                bodyName = se.createName("AuthRequest", "nsg","urn:zmailAdmin");
                 bodyElement = body.addBodyElement(bodyName);
                 //add <name>admin_name</name>			
                 Name uname = se.createName("name");
@@ -138,7 +138,7 @@ public class ZCSAuth
             }
             else if(iauthtype== ZMSoapSession.AUTH_TYPE_ACUSER)
             {
-                bodyName = se.createName("AuthRequest", "nsg","urn:zimbraAccount");
+                bodyName = se.createName("AuthRequest", "nsg","urn:zmailAccount");
                 bodyElement = body.addBodyElement(bodyName);
                 //add <name>admin_name</name>			
                 Name uname = se.createName("account");

@@ -118,7 +118,7 @@ STDMETHODIMP CMapiWrapper::GetProfilelist(VARIANT *Profiles,BSTR *statusmessage)
                 return hr;
 	}
 
-    Zimbra::Mapi::Memory::SetMemAllocRoutines(NULL, MAPIAllocateBuffer, MAPIAllocateMore,
+    Zmail::Mapi::Memory::SetMemAllocRoutines(NULL, MAPIAllocateBuffer, MAPIAllocateMore,
         MAPIFreeBuffer);
 
     vector<string> vProfileList;
@@ -295,7 +295,7 @@ STDMETHODIMP CMapiWrapper::SelectExchangeUsers(VARIANT *Users, BSTR *pErrorText)
             {
                 strSN = (*its).pAttributeList[j].second;
             }
-            if ((*its).pAttributeList[j].first == L"zimbraForeignPrincipal")
+            if ((*its).pAttributeList[j].first == L"zmailForeignPrincipal")
             {
                 strZFP = (*its).pAttributeList[j].second;
             }

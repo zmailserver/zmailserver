@@ -13,38 +13,38 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service.offline;
+package org.zmail.cs.service.offline;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.account.ProvisioningConstants;
-import com.zimbra.common.service.RemoteServiceException;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.offline.OfflineAccount;
-import com.zimbra.cs.account.offline.OfflineDataSource;
-import com.zimbra.cs.account.offline.OfflineProvisioning;
-import com.zimbra.cs.offline.OfflineLog;
-import com.zimbra.cs.offline.common.OfflineConstants;
-import com.zimbra.cs.offline.util.OfflineYAuth;
-import com.zimbra.cs.util.yauth.AuthenticationException;
-import com.zimbra.cs.util.yauth.ErrorCode;
-import com.zimbra.soap.DocumentHandler;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.account.ProvisioningConstants;
+import org.zmail.common.service.RemoteServiceException;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.offline.OfflineAccount;
+import org.zmail.cs.account.offline.OfflineDataSource;
+import org.zmail.cs.account.offline.OfflineProvisioning;
+import org.zmail.cs.offline.OfflineLog;
+import org.zmail.cs.offline.common.OfflineConstants;
+import org.zmail.cs.offline.util.OfflineYAuth;
+import org.zmail.cs.util.yauth.AuthenticationException;
+import org.zmail.cs.util.yauth.ErrorCode;
+import org.zmail.soap.DocumentHandler;
+import org.zmail.soap.ZmailSoapContext;
 
 public class OfflineChangePassword extends DocumentHandler {
 
     @Override
     public Element handle(Element request, Map<String, Object> context)
                     throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         String accountId = request.getAttribute(AccountConstants.E_ID);
         Element password = request.getElement(AccountConstants.E_PASSWORD);
         String newPass = password.getText();
@@ -68,16 +68,16 @@ public class OfflineChangePassword extends DocumentHandler {
                 if (dataSources != null) {
                     for (DataSource ds : dataSources) {
                         boolean needModify = false;
-                        if (ds.getAttr(Provisioning.A_zimbraDataSourcePassword) != null) {
-                            attrs.put(Provisioning.A_zimbraDataSourcePassword, newPass);
+                        if (ds.getAttr(Provisioning.A_zmailDataSourcePassword) != null) {
+                            attrs.put(Provisioning.A_zmailDataSourcePassword, newPass);
                             needModify = true;
                         }
-                        if (ds.getAttr(OfflineConstants.A_zimbraDataSourceSmtpAuthPassword) != null) {
-                            attrs.put(OfflineConstants.A_zimbraDataSourceSmtpAuthPassword, newPass);
+                        if (ds.getAttr(OfflineConstants.A_zmailDataSourceSmtpAuthPassword) != null) {
+                            attrs.put(OfflineConstants.A_zmailDataSourceSmtpAuthPassword, newPass);
                             needModify = true;
                         }
                         if (needModify) {
-                            String domain = ds.getAttr(Provisioning.A_zimbraDataSourceDomain);
+                            String domain = ds.getAttr(Provisioning.A_zmailDataSourceDomain);
                             if ("yahoo.com".equals(domain)) {
                                 OfflineYAuth.removeToken(ds);
                             }

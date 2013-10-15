@@ -12,17 +12,17 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.tag.conv;
+package org.zmail.cs.taglib.tag.conv;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.taglib.bean.ZSearchResultBean;
-import com.zimbra.cs.taglib.tag.SearchContext;
-import com.zimbra.cs.taglib.tag.ZimbraSimpleTag;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZMailbox.Fetch;
-import com.zimbra.client.ZSearchPagerResult;
-import com.zimbra.client.ZSearchParams;
-import com.zimbra.soap.type.SearchSortBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.taglib.bean.ZSearchResultBean;
+import org.zmail.cs.taglib.tag.SearchContext;
+import org.zmail.cs.taglib.tag.ZmailSimpleTag;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZMailbox.Fetch;
+import org.zmail.client.ZSearchPagerResult;
+import org.zmail.client.ZSearchParams;
+import org.zmail.soap.type.SearchSortBy;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.jsp.JspException;
@@ -30,7 +30,7 @@ import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 import java.io.IOException;
 
-public class SearchConvTag extends ZimbraSimpleTag {
+public class SearchConvTag extends ZmailSimpleTag {
 
     private static final int DEFAULT_CONV_SEARCH_LIMIT = 10;
 

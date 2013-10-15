@@ -65,13 +65,13 @@ addButton("show",BTN_TEXT,"Mostrar","","","","",0,0,"","","");
 
 	
 	document.write("<p style=\"text-align:right; background: silver\"> ");
-AddMasterBreadcrumbs("../Zimbra_Mail_Help.htm", "", "&gt;", "Desktop", "../Getting_Started/Zimbra_User_Help.htm");
+AddMasterBreadcrumbs("../Zmail_Mail_Help.htm", "", "&gt;", "Desktop", "../Getting_Started/Zmail_User_Help.htm");
 document.write("<a href=\"using_the_search_feature.htm\">Buscando itens<\/a> &gt; Descrição da linguagem de critérios<\/p>");
 
 
 	if (window.setRelStartPage)
 	{
-	setRelStartPage("../Zimbra_Mail_Help.htm");
+	setRelStartPage("../Zmail_Mail_Help.htm");
 
 		autoSync(1);
 		sendSyncInfo();
@@ -85,7 +85,7 @@ else
 //-->
 //]]></script>
 <h1>Descrição da linguagem de critérios</h1>
-<p>Esse tópico avançado descreve em detalhes a gramática de busca usada no recurso de Busca do Zimbra. Algum tipo de critério é sempre aplicado para produzir a visualização que você tem na interface.</p>
+<p>Esse tópico avançado descreve em detalhes a gramática de busca usada no recurso de Busca do Zmail. Algum tipo de critério é sempre aplicado para produzir a visualização que você tem na interface.</p>
 <h2>Estrutura da linguagem de busca</h2>
 <p>As buscas simples podem ser feitas bastando apenas digitar a palavra no campo de busca. Palavras soltas (sem um operador de busca) são interpretadas como uma busca no operador &quot;content:&quot; - o que corresponde a qualquer texto na mensagem.</p>
 <p>Buscas mais avançadas podem ser feitas ao especificar um <b>operador de busca</b>. Um operador de busca é uma palavra-chave especial que é seguida por dois pontos, seguida de outro parâmetro específico para aquele operador. Por exemplo:</p>
@@ -118,7 +118,7 @@ else
 <p style="font-weight: bold;">content:</p>
 <p style="margin-left: 40px;">Especifica texto que a mensagem deve conter. Por exemplo, <span class="code">content:bananas</span> localiza todos os itens contendo a palavra &quot;bananas&quot;.</p>
 <p style="font-weight: bold;">de:</p>
-<p style="margin-left: 40px;">Especifica um nome ou endereço de e-mail de remetente que esteja no cabeçalho De. Isso pode ser texto, como em &quot;João Silva III&quot;, um endereço de e-mail como &quot; joao@acme.com&quot; ou um domínio como &quot; zimbra.com&quot;.</p>
+<p style="margin-left: 40px;">Especifica um nome ou endereço de e-mail de remetente que esteja no cabeçalho De. Isso pode ser texto, como em &quot;João Silva III&quot;, um endereço de e-mail como &quot; joao@acme.com&quot; ou um domínio como &quot; zmail.com&quot;.</p>
 <p style="font-weight: bold;">to:</p>
 <p style="margin-left: 40px;">Mesmo que from: exceto pelo fato de que especifica uma das pessoas para quem o e-mail foi endereçado em Para :.</p>
 <p style="font-weight: bold;">cc:</p>

@@ -17,21 +17,21 @@
 /**
  *
  */
-package com.zimbra.qa.selenium.projects.octopus.ui;
+package org.zmail.qa.selenium.projects.octopus.ui;
 
 import java.util.ArrayList;
 
-import com.zimbra.qa.selenium.framework.items.HistoryItem;
-import com.zimbra.qa.selenium.framework.items.IItem;
-import com.zimbra.qa.selenium.framework.ui.AbsApplication;
-import com.zimbra.qa.selenium.framework.ui.AbsPage;
-import com.zimbra.qa.selenium.framework.ui.AbsTab;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.projects.octopus.core.CommonConstants;
-import com.zimbra.qa.selenium.projects.octopus.ui.DialogError.DialogErrorID;
+import org.zmail.qa.selenium.framework.items.HistoryItem;
+import org.zmail.qa.selenium.framework.items.IItem;
+import org.zmail.qa.selenium.framework.ui.AbsApplication;
+import org.zmail.qa.selenium.framework.ui.AbsPage;
+import org.zmail.qa.selenium.framework.ui.AbsTab;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.projects.octopus.core.CommonConstants;
+import org.zmail.qa.selenium.projects.octopus.ui.DialogError.DialogErrorID;
 
 
 public class PageHistory extends AbsTab {
@@ -168,7 +168,7 @@ public class PageHistory extends AbsTab {
 		}
 
 
-		public static String share(SHARE_PERMISSION permission, String folderName, ZimbraAccount grantee){
+		public static String share(SHARE_PERMISSION permission, String folderName, ZmailAccount grantee){
 			String access="";
 
 			switch (permission) {
@@ -183,7 +183,7 @@ public class PageHistory extends AbsTab {
 		}
 
 
-		public static String revoke(SHARE_PERMISSION permission, String folderName, ZimbraAccount grantee){
+		public static String revoke(SHARE_PERMISSION permission, String folderName, ZmailAccount grantee){
 			String access="";
 
 			switch (permission) {
@@ -280,8 +280,8 @@ public class PageHistory extends AbsTab {
 		return (new Toaster(this.MyApplication));
 	}
 
-	public DialogError zGetErrorDialog(DialogErrorID zimbra) {
-		return (new DialogError(zimbra, this.MyApplication, this));
+	public DialogError zGetErrorDialog(DialogErrorID zmail) {
+		return (new DialogError(zmail, this.MyApplication, this));
 	}
 
 	@Override

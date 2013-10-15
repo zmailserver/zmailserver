@@ -12,9 +12,9 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.bean;
+package org.zmail.cs.taglib.bean;
 
-import com.zimbra.client.ZTag;
+import org.zmail.client.ZTag;
 
 public class ZTagBean {
 
@@ -37,42 +37,42 @@ public class ZTagBean {
     public String getImage() {
         switch(mTag.getColor()) {
         case blue:
-            return "zimbra/ImgTagBlue.png";
+            return "zmail/ImgTagBlue.png";
         case cyan:
-            return "zimbra/ImgTagCyan.png";
+            return "zmail/ImgTagCyan.png";
         case green:
-            return "zimbra/ImgTagGreen.png";
+            return "zmail/ImgTagGreen.png";
         case purple: 
-            return "zimbra/ImgTagPurple.png";
+            return "zmail/ImgTagPurple.png";
         case red:
-            return "zimbra/ImgTagRed.png";
+            return "zmail/ImgTagRed.png";
         case yellow: 
-            return "zimbra/ImgTagYellow.png";
+            return "zmail/ImgTagYellow.png";
         case orange:
         case defaultColor:
         default:
-            return "zimbra/ImgTagOrange.png";
+            return "zmail/ImgTagOrange.png";
         }
     }
     
     public String getMiniImage() {
         switch(mTag.getColor()) {
         case blue:
-            return "zimbra/ImgTagBlue.png";
+            return "zmail/ImgTagBlue.png";
         case cyan:
-            return "zimbra/ImgTagCyan.png";
+            return "zmail/ImgTagCyan.png";
         case green:
-            return "zimbra/ImgTagGreen.png";
+            return "zmail/ImgTagGreen.png";
         case purple: 
-            return "zimbra/ImgTagPurple.png";
+            return "zmail/ImgTagPurple.png";
         case red:
-            return "zimbra/ImgTagRed.png";
+            return "zmail/ImgTagRed.png";
         case yellow: 
-            return "zimbra/ImgTagYellow.png";
+            return "zmail/ImgTagYellow.png";
         case orange:
         case defaultColor:
         default:
-            return "zimbra/ImgTagOrange.png";
+            return "zmail/ImgTagOrange.png";
         }
     }
 

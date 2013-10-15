@@ -13,15 +13,15 @@
  * ***** END LICENSE BLOCK *****
  */
 
-//Author: Raja Rao DV (rrao@zimbra.com)
+//Author: Raja Rao DV (rrao@zmail.com)
 
-function com_zimbra_social_handlerObject() {
+function org_zmail_social_handlerObject() {
 }
 
-com_zimbra_social_handlerObject.prototype = new ZmZimletBase();
-com_zimbra_social_handlerObject.prototype.constructor = com_zimbra_social_handlerObject;
+org_zmail_social_handlerObject.prototype = new ZmZimletBase();
+org_zmail_social_handlerObject.prototype.constructor = org_zmail_social_handlerObject;
 
-var SocialZimlet = com_zimbra_social_handlerObject;
+var SocialZimlet = org_zmail_social_handlerObject;
 
 SocialZimlet.SOCIALIZE_BUTTON = "SOCIAL_ZIMLET_TOOLBAR_BUTTON";
 
@@ -153,13 +153,13 @@ SocialZimlet.prototype.initializeVariables =
 			this.isTextPasted = false;
 			this._autoShorten = true;
 
-			this.preferences = new com_zimbra_socialPreferences(this);
-			this.twitter = new com_zimbra_socialTwitter(this, this.preferences);
-			this.socialcast = new com_zimbra_socialcast(this);
-			this.facebook = new com_zimbra_socialFacebook(this);
-			this.tweetmeme = new com_zimbra_socialTweetMeme(this);
-			this.digg = new com_zimbra_socialDigg(this);
-			this.miniDlg = new com_zimbra_socialMiniDlg(this);
+			this.preferences = new org_zmail_socialPreferences(this);
+			this.twitter = new org_zmail_socialTwitter(this, this.preferences);
+			this.socialcast = new org_zmail_socialcast(this);
+			this.facebook = new org_zmail_socialFacebook(this);
+			this.tweetmeme = new org_zmail_socialTweetMeme(this);
+			this.digg = new org_zmail_socialDigg(this);
+			this.miniDlg = new org_zmail_socialMiniDlg(this);
 			this.socialOAuth = new SocialOAuth(this);
 			this.loadAllAccountsFromDB();
 			this._objectManager = new ZmObjectManager(new DwtComposite(this.getShell()));
@@ -292,7 +292,7 @@ SocialZimlet.prototype._shortenUrlButtonListener =
 			//if zimlet dialog already exists...
 			if (this._shortenUrlDialog) {
 				if (selectedTxt.indexOf("http:") == 0) {
-					document.getElementById("com_zimbra_twitter_longUrl_field").value = selectedTxt;
+					document.getElementById("org_zmail_twitter_longUrl_field").value = selectedTxt;
 				}
 				this._shortenUrlDialog.popup();
 				return;
@@ -307,7 +307,7 @@ SocialZimlet.prototype._shortenUrlButtonListener =
 
 			this._shortenUrlDialog.setButtonListener(suBtnId, new AjxListener(this, this._postToUrlShortner, {}));
 			if (selectedTxt.indexOf("http:") == 0) {
-				document.getElementById("com_zimbra_twitter_longUrl_field").value = selectedTxt;
+				document.getElementById("org_zmail_twitter_longUrl_field").value = selectedTxt;
 			}
 			this._shortenUrlDialog.popup();
 		};
@@ -317,9 +317,9 @@ SocialZimlet.prototype._postToUrlShortner =
 			var longUrl = params.longUrl;
 			var callback = params.callback;
 			if (!longUrl) {
-				var longUrlField = document.getElementById("com_zimbra_twitter_longUrl_field");
+				var longUrlField = document.getElementById("org_zmail_twitter_longUrl_field");
 				if (longUrlField) {
-					longUrl = document.getElementById("com_zimbra_twitter_longUrl_field").value;
+					longUrl = document.getElementById("org_zmail_twitter_longUrl_field").value;
 				} else {
 					return;
 				}
@@ -331,7 +331,7 @@ SocialZimlet.prototype._postToUrlShortner =
 			var url = "http://api.bit.ly/shorten?"
 					+ "version=" + AjxStringUtil.urlComponentEncode("2.0.1")
 					+ "&longUrl=" + AjxStringUtil.urlComponentEncode(longUrl)
-					+ "&login=" + AjxStringUtil.urlComponentEncode("zimbra")
+					+ "&login=" + AjxStringUtil.urlComponentEncode("zmail")
 					+ "&apiKey=" + AjxStringUtil.urlComponentEncode("R_20927271403ca63a07c25d17edc32a1d");
 			if (!callback)
 				callback = new AjxCallback(this, this._postToUrlShortnerCallback, longUrl);
@@ -401,7 +401,7 @@ SocialZimlet.prototype._createShortenURLView =
 			var i = 0;
 			html[i++] = "<BR>";
 			html[i++] = "<DIV>";
-			html[i++] = "Long URL:<input id='com_zimbra_twitter_longUrl_field'  type='text' width=100% style='width:100%'/>";
+			html[i++] = "Long URL:<input id='org_zmail_twitter_longUrl_field'  type='text' width=100% style='width:100%'/>";
 			html[i++] = "</DIV>";
 			return html.join("");
 		};
@@ -604,7 +604,7 @@ SocialZimlet.prototype._constructSkin =
 				charactersLeft: this.getMessage("charactersLeft"),
 				whatAreYouDoingMsg: this.getMessage("whatAreYouDoing")
 			};
-			return AjxTemplate.expand("com_zimbra_social.templates.Social#Skin", subs);
+			return AjxTemplate.expand("org_zmail_social.templates.Social#Skin", subs);
 		};
 
 SocialZimlet.prototype._setMainCardHeight =
@@ -694,7 +694,7 @@ SocialZimlet.prototype._addSocialcastGroupsMenuHndler = function() {
  }
  btn = new DwtButton({parent:this.getShell()});
  btn.setText("Update To:");
- btn.setImage("Zimbra");
+ btn.setImage("Zmail");
  var menu = new ZmPopupMenu(btn); //create menu
  btn.setMenu(menu);//add menu to button
  document.getElementById("social_updateMenuTD").appendChild(btn.getHtmlElement());
@@ -1259,7 +1259,7 @@ SocialZimlet.prototype.appActive = function(appName, active) {
 		if (this.getUserProperty("social_pref_dontShowWelcomeScreenOn") == "false") {
 			this.preferences._showWelcomeDlg();
 		}
-		document.title = this.getMessage("zimbraSocial");
+		document.title = this.getMessage("zmailSocial");
 	}
 	else {
 		this._hideApp(appName);
@@ -1426,7 +1426,7 @@ SocialZimlet.prototype._getTreeHeaderHTML =
 				treeName: treeName,
 				expandIconId: expandIconId
 			};
-			return AjxTemplate.expand("com_zimbra_social.templates.Social#CardHeader", subs);
+			return AjxTemplate.expand("org_zmail_social.templates.Social#CardHeader", subs);
 		};
 
 SocialZimlet.prototype._getFolderHTML =
@@ -1757,7 +1757,7 @@ SocialZimlet.prototype.addTwitterSearchWidget =
 				updateCheckBoxesHtml:  this._addUpdateToCheckboxes()
 			};
 			var toolbar = this.app.getToolbar();
-			toolbar.getHtmlElement().innerHTML = AjxTemplate.expand("com_zimbra_social.templates.Social#TwitterSearchWidget", subs);
+			toolbar.getHtmlElement().innerHTML = AjxTemplate.expand("org_zmail_social.templates.Social#TwitterSearchWidget", subs);
 			//this._setUpdateMenu();
 			this._addSocialcastGroupsMenuHndler();
 		};

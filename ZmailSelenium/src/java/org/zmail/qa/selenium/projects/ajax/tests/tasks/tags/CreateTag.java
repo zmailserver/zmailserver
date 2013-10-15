@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.tasks.tags;
+package org.zmail.qa.selenium.projects.ajax.tests.tasks.tags;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties.AppType;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogTag;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties.AppType;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogTag;
 
 public class CreateTag extends AjaxCommonTest {
 
@@ -42,10 +42,10 @@ public class CreateTag extends AjaxCommonTest {
 
 
 		// Set the new tag name
-		String name = "tag" + ZimbraSeleniumProperties.getUniqueString();
+		String name = "tag" + ZmailSeleniumProperties.getUniqueString();
 
 		DialogTag dialog = null;
-		if (ZimbraSeleniumProperties.getAppType() == AppType.DESKTOP) {
+		if (ZmailSeleniumProperties.getAppType() == AppType.DESKTOP) {
 			// TODO: For now, on desktop test, create the folder through New drop down menu,
 			// until a way to identify desktop/ajax specific
 			// test is decided.
@@ -77,7 +77,7 @@ public class CreateTag extends AjaxCommonTest {
 		FolderItem taskFolder = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Tasks);
 
 		// Set the new tag name
-		String name = "tag" + ZimbraSeleniumProperties.getUniqueString();
+		String name = "tag" + ZmailSeleniumProperties.getUniqueString();
 		
 		//Added explicitly boz some time focus does shifted into search input after login
 		app.zTreeTasks.zTreeItem(Action.A_LEFTCLICK, taskFolder);
@@ -107,12 +107,12 @@ public class CreateTag extends AjaxCommonTest {
 		FolderItem taskFolder = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Tasks);
 
 		// Set the new tag name
-		String name1 = "tag" + ZimbraSeleniumProperties.getUniqueString();
-		String name2 = "tag" + ZimbraSeleniumProperties.getUniqueString();
+		String name1 = "tag" + ZmailSeleniumProperties.getUniqueString();
+		String name2 = "tag" + ZmailSeleniumProperties.getUniqueString();
 
 		// Create a tag to right click on
 		app.zGetActiveAccount().soapSend(
-				"<CreateTagRequest xmlns='urn:zimbraMail'>" +
+				"<CreateTagRequest xmlns='urn:zmailMail'>" +
 				"<tag name='"+name2+"' color='1' />" +
 		"</CreateTagRequest>");
 
@@ -145,7 +145,7 @@ public class CreateTag extends AjaxCommonTest {
 	public void CreateTag_04() throws HarnessException {
 
 		// Set the new tag name
-		String name = "tag" + ZimbraSeleniumProperties.getUniqueString();
+		String name = "tag" + ZmailSeleniumProperties.getUniqueString();
 
 		// Create a new tag in the task page using the context menu + New tag
 		DialogTag dialog = (DialogTag) app.zPageTasks.zToolbarPressPulldown(

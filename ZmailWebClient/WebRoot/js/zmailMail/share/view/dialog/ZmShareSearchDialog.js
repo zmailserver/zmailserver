@@ -167,7 +167,7 @@ ZmShareSearchDialog.prototype._doGroupSearch = function() {
     var params = {
         jsonObj: {
             GetShareInfoRequest: {
-                _jsns: "urn:zimbraAccount",
+                _jsns: "urn:zmailAccount",
                 includeSelf: 0,
                 grantee: { type: "grp" }
             }
@@ -197,7 +197,7 @@ ZmShareSearchDialog.prototype._doUserSearch = function(emails) {
     for (var emailId in emailMap) {
         // add request
         requests.push({
-            _jsns: "urn:zimbraAccount",
+            _jsns: "urn:zmailAccount",
             requestId: i,
             includeSelf: 0,
             owner: { by: "name", _content: emailMap[emailId] }
@@ -227,7 +227,7 @@ ZmShareSearchDialog.prototype._doUserSearch = function(emails) {
     var params = {
         jsonObj: {
             BatchRequest: {
-                _jsns: "urn:zimbra",
+                _jsns: "urn:zmail",
                 GetShareInfoRequest: requests
             }
         },

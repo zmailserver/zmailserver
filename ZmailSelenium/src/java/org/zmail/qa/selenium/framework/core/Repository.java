@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.core;
+package org.zmail.qa.selenium.framework.core;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -25,10 +25,10 @@ import org.apache.log4j.Logger;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.Log;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.Log;
 
-import com.zimbra.qa.selenium.framework.util.RacetrackWebservice;
+import org.zmail.qa.selenium.framework.util.RacetrackWebservice;
 
 public class Repository {
    private static String DbHostURL = null;

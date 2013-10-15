@@ -14,18 +14,18 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.compose.autocomplete;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.compose.autocomplete;
 
 import java.util.List;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew.Field;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.*;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew.Field;
 
 
 public class AutoCompleteForget extends PrefGroupMailByMessageTest {
@@ -36,8 +36,8 @@ public class AutoCompleteForget extends PrefGroupMailByMessageTest {
 	public AutoCompleteForget() {
 		logger.info("New "+ AutoCompleteForget.class.getCanonicalName());
 		
-		super.startingAccountPreferences.put("zimbraPrefComposeFormat", "text");
-		super.startingAccountPreferences.put("zimbraPrefAutoAddAddressEnabled", "FALSE");
+		super.startingAccountPreferences.put("zmailPrefComposeFormat", "text");
+		super.startingAccountPreferences.put("zmailPrefAutoAddAddressEnabled", "FALSE");
 	
 	}
 	
@@ -59,13 +59,13 @@ public class AutoCompleteForget extends PrefGroupMailByMessageTest {
 	public void AutoCompleteForget_01() throws HarnessException {
 		
 		// Create a contact
-		String emailaddress = "foo"+ ZimbraSeleniumProperties.getUniqueString() + "@testdomain.zimbra.com";
+		String emailaddress = "foo"+ ZmailSeleniumProperties.getUniqueString() + "@testdomain.zmail.com";
 
 		// Send a message to the invalid email
 		
 		// Message properties
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String body = "body" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String body = "body" + ZmailSeleniumProperties.getUniqueString();
 
 		// Open the new mail form
 		FormMailNew mailform = (FormMailNew) app.zPageMail.zToolbarPressButton(Button.B_NEW);
@@ -141,11 +141,11 @@ public class AutoCompleteForget extends PrefGroupMailByMessageTest {
 		
 		// Create two contacts
 		String emailaddress = "admin@zqa-061.eng.vmware.com";
-		String firstname = "Michael" + ZimbraSeleniumProperties.getUniqueString();
-		String lastname = "Williams" + ZimbraSeleniumProperties.getUniqueString();
+		String firstname = "Michael" + ZmailSeleniumProperties.getUniqueString();
+		String lastname = "Williams" + ZmailSeleniumProperties.getUniqueString();
 		
 		app.zGetActiveAccount().soapSend(
-					"<CreateContactRequest xmlns='urn:zimbraMail'>"
+					"<CreateContactRequest xmlns='urn:zmailMail'>"
 				+		"<cn>"
 				+			"<a n='firstName'>"+ firstname +"</a>"
 				+			"<a n='lastName'>"+ lastname +"</a>"
@@ -154,12 +154,12 @@ public class AutoCompleteForget extends PrefGroupMailByMessageTest {
 				+	"</CreateContactRequest>");
 		
 		app.zGetActiveAccount().soapSend(
-				"<SendMsgRequest xmlns='urn:zimbraMail'>"
+				"<SendMsgRequest xmlns='urn:zmailMail'>"
 			+		"<m>"
 			+			"<e t='t' a='"+ emailaddress +"'/>"
-			+			"<su>subject"+ ZimbraSeleniumProperties.getUniqueString() +"</su>"
+			+			"<su>subject"+ ZmailSeleniumProperties.getUniqueString() +"</su>"
 			+			"<mp ct='text/plain'>"
-			+				"<content>content"+ ZimbraSeleniumProperties.getUniqueString() +"</content>"
+			+				"<content>content"+ ZmailSeleniumProperties.getUniqueString() +"</content>"
 			+			"</mp>"
 			+		"</m>"
 			+	"</SendMsgRequest>");
@@ -169,8 +169,8 @@ public class AutoCompleteForget extends PrefGroupMailByMessageTest {
 		// Send a message to the invalid email
 		
 		// Message properties
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String body = "body" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String body = "body" + ZmailSeleniumProperties.getUniqueString();
 
 		// Open the new mail form
 		FormMailNew mailform = (FormMailNew) app.zPageMail.zToolbarPressButton(Button.B_NEW);
@@ -208,20 +208,20 @@ public class AutoCompleteForget extends PrefGroupMailByMessageTest {
 	public void AutoCompleteForget_03() throws HarnessException {
 		
 		// Create a GAL Entry
-		ZimbraAccount account = new ZimbraAccount();
-		account.setPref("givenName", "Christopher" + ZimbraSeleniumProperties.getUniqueString());
-		account.setPref("sn", "White" + ZimbraSeleniumProperties.getUniqueString());
+		ZmailAccount account = new ZmailAccount();
+		account.setPref("givenName", "Christopher" + ZmailSeleniumProperties.getUniqueString());
+		account.setPref("sn", "White" + ZmailSeleniumProperties.getUniqueString());
 		account.setPref("displayName", account.getPref("givenName") + " " + account.getPref("sn"));
 		account.provision();
 		account.authenticate();
 		
 		app.zGetActiveAccount().soapSend(
-				"<SendMsgRequest xmlns='urn:zimbraMail'>"
+				"<SendMsgRequest xmlns='urn:zmailMail'>"
 			+		"<m>"
 			+			"<e t='t' a='"+ account.EmailAddress +"'/>"
-			+			"<su>subject"+ ZimbraSeleniumProperties.getUniqueString() +"</su>"
+			+			"<su>subject"+ ZmailSeleniumProperties.getUniqueString() +"</su>"
 			+			"<mp ct='text/plain'>"
-			+				"<content>content"+ ZimbraSeleniumProperties.getUniqueString() +"</content>"
+			+				"<content>content"+ ZmailSeleniumProperties.getUniqueString() +"</content>"
 			+			"</mp>"
 			+		"</m>"
 			+	"</SendMsgRequest>");
@@ -231,8 +231,8 @@ public class AutoCompleteForget extends PrefGroupMailByMessageTest {
 		// Send a message to the invalid email
 		
 		// Message properties
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String body = "body" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String body = "body" + ZmailSeleniumProperties.getUniqueString();
 
 		// Open the new mail form
 		FormMailNew mailform = (FormMailNew) app.zPageMail.zToolbarPressButton(Button.B_NEW);
@@ -279,16 +279,16 @@ public class AutoCompleteForget extends PrefGroupMailByMessageTest {
 	public void AutoCompleteForget_04() throws HarnessException {
 		
 		// Create two contacts
-		ZimbraAccount contact1 = new ZimbraAccount();
+		ZmailAccount contact1 = new ZmailAccount();
 		contact1.provision();
 		contact1.authenticate();
 		
 		String emailaddress1 = contact1.EmailAddress;
-		String firstname1 = "PaulOne" + ZimbraSeleniumProperties.getUniqueString();
-		String lastname1 = "Harris" + ZimbraSeleniumProperties.getUniqueString();
+		String firstname1 = "PaulOne" + ZmailSeleniumProperties.getUniqueString();
+		String lastname1 = "Harris" + ZmailSeleniumProperties.getUniqueString();
 		
 		app.zGetActiveAccount().soapSend(
-					"<CreateContactRequest xmlns='urn:zimbraMail'>"
+					"<CreateContactRequest xmlns='urn:zmailMail'>"
 				+		"<cn>"
 				+			"<a n='firstName'>"+ firstname1 +"</a>"
 				+			"<a n='lastName'>"+ lastname1 +"</a>"
@@ -298,28 +298,28 @@ public class AutoCompleteForget extends PrefGroupMailByMessageTest {
 		
 		// Send one message
 		app.zGetActiveAccount().soapSend(
-				"<SendMsgRequest xmlns='urn:zimbraMail'>"
+				"<SendMsgRequest xmlns='urn:zmailMail'>"
 			+		"<m>"
 			+			"<e t='t' a='"+ emailaddress1 +"'/>"
-			+			"<su>subject"+ ZimbraSeleniumProperties.getUniqueString() +"</su>"
+			+			"<su>subject"+ ZmailSeleniumProperties.getUniqueString() +"</su>"
 			+			"<mp ct='text/plain'>"
-			+				"<content>content"+ ZimbraSeleniumProperties.getUniqueString() +"</content>"
+			+				"<content>content"+ ZmailSeleniumProperties.getUniqueString() +"</content>"
 			+			"</mp>"
 			+		"</m>"
 			+	"</SendMsgRequest>");
 
 		
 		// Create a second contact
-		ZimbraAccount contact2 = new ZimbraAccount();
+		ZmailAccount contact2 = new ZmailAccount();
 		contact2.provision();
 		contact2.authenticate();
 		
 		String emailaddress2 = contact2.EmailAddress;
-		String firstname2 = "PaulTwo" + ZimbraSeleniumProperties.getUniqueString();
-		String lastname2 = "Harris" + ZimbraSeleniumProperties.getUniqueString();
+		String firstname2 = "PaulTwo" + ZmailSeleniumProperties.getUniqueString();
+		String lastname2 = "Harris" + ZmailSeleniumProperties.getUniqueString();
 		
 		app.zGetActiveAccount().soapSend(
-					"<CreateContactRequest xmlns='urn:zimbraMail'>"
+					"<CreateContactRequest xmlns='urn:zmailMail'>"
 				+		"<cn>"
 				+			"<a n='firstName'>"+ firstname2 +"</a>"
 				+			"<a n='lastName'>"+ lastname2 +"</a>"
@@ -329,23 +329,23 @@ public class AutoCompleteForget extends PrefGroupMailByMessageTest {
 		
 		// Send two messages
 		app.zGetActiveAccount().soapSend(
-				"<SendMsgRequest xmlns='urn:zimbraMail'>"
+				"<SendMsgRequest xmlns='urn:zmailMail'>"
 			+		"<m>"
 			+			"<e t='t' a='"+ emailaddress2 +"'/>"
-			+			"<su>subject"+ ZimbraSeleniumProperties.getUniqueString() +"</su>"
+			+			"<su>subject"+ ZmailSeleniumProperties.getUniqueString() +"</su>"
 			+			"<mp ct='text/plain'>"
-			+				"<content>content"+ ZimbraSeleniumProperties.getUniqueString() +"</content>"
+			+				"<content>content"+ ZmailSeleniumProperties.getUniqueString() +"</content>"
 			+			"</mp>"
 			+		"</m>"
 			+	"</SendMsgRequest>");
 
 		app.zGetActiveAccount().soapSend(
-				"<SendMsgRequest xmlns='urn:zimbraMail'>"
+				"<SendMsgRequest xmlns='urn:zmailMail'>"
 			+		"<m>"
 			+			"<e t='t' a='"+ emailaddress2 +"'/>"
-			+			"<su>subject"+ ZimbraSeleniumProperties.getUniqueString() +"</su>"
+			+			"<su>subject"+ ZmailSeleniumProperties.getUniqueString() +"</su>"
 			+			"<mp ct='text/plain'>"
-			+				"<content>content"+ ZimbraSeleniumProperties.getUniqueString() +"</content>"
+			+				"<content>content"+ ZmailSeleniumProperties.getUniqueString() +"</content>"
 			+			"</mp>"
 			+		"</m>"
 			+	"</SendMsgRequest>");
@@ -356,8 +356,8 @@ public class AutoCompleteForget extends PrefGroupMailByMessageTest {
 		// Send a message to the invalid email
 		
 		// Message properties
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String body = "body" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String body = "body" + ZmailSeleniumProperties.getUniqueString();
 
 		// Open the new mail form
 		FormMailNew mailform = (FormMailNew) app.zPageMail.zToolbarPressButton(Button.B_NEW);
@@ -451,51 +451,51 @@ public class AutoCompleteForget extends PrefGroupMailByMessageTest {
 	public void AutoCompleteForget_05() throws HarnessException {
 		
 		// Create a GAL Entry
-		ZimbraAccount account1 = new ZimbraAccount();
-		account1.setPref("givenName", "Mark" + ZimbraSeleniumProperties.getUniqueString());
-		account1.setPref("sn", "Martin" + ZimbraSeleniumProperties.getUniqueString());
+		ZmailAccount account1 = new ZmailAccount();
+		account1.setPref("givenName", "Mark" + ZmailSeleniumProperties.getUniqueString());
+		account1.setPref("sn", "Martin" + ZmailSeleniumProperties.getUniqueString());
 		account1.setPref("displayName", account1.getPref("givenName") + " " + account1.getPref("sn"));
 		account1.provision();
 		account1.authenticate();
 		
 		// Send one message
 		app.zGetActiveAccount().soapSend(
-				"<SendMsgRequest xmlns='urn:zimbraMail'>"
+				"<SendMsgRequest xmlns='urn:zmailMail'>"
 			+		"<m>"
 			+			"<e t='t' a='"+ account1.EmailAddress +"'/>"
-			+			"<su>subject"+ ZimbraSeleniumProperties.getUniqueString() +"</su>"
+			+			"<su>subject"+ ZmailSeleniumProperties.getUniqueString() +"</su>"
 			+			"<mp ct='text/plain'>"
-			+				"<content>content"+ ZimbraSeleniumProperties.getUniqueString() +"</content>"
+			+				"<content>content"+ ZmailSeleniumProperties.getUniqueString() +"</content>"
 			+			"</mp>"
 			+		"</m>"
 			+	"</SendMsgRequest>");
 
-		ZimbraAccount account2 = new ZimbraAccount();
-		account2.setPref("givenName", "Mark" + ZimbraSeleniumProperties.getUniqueString());
-		account2.setPref("sn", "Martin" + ZimbraSeleniumProperties.getUniqueString());
+		ZmailAccount account2 = new ZmailAccount();
+		account2.setPref("givenName", "Mark" + ZmailSeleniumProperties.getUniqueString());
+		account2.setPref("sn", "Martin" + ZmailSeleniumProperties.getUniqueString());
 		account2.setPref("displayName", account2.getPref("givenName") + " " + account2.getPref("sn"));
 		account2.provision();
 		account2.authenticate();
 		
 		// Send two messages
 		app.zGetActiveAccount().soapSend(
-				"<SendMsgRequest xmlns='urn:zimbraMail'>"
+				"<SendMsgRequest xmlns='urn:zmailMail'>"
 			+		"<m>"
 			+			"<e t='t' a='"+ account2.EmailAddress +"'/>"
-			+			"<su>subject"+ ZimbraSeleniumProperties.getUniqueString() +"</su>"
+			+			"<su>subject"+ ZmailSeleniumProperties.getUniqueString() +"</su>"
 			+			"<mp ct='text/plain'>"
-			+				"<content>content"+ ZimbraSeleniumProperties.getUniqueString() +"</content>"
+			+				"<content>content"+ ZmailSeleniumProperties.getUniqueString() +"</content>"
 			+			"</mp>"
 			+		"</m>"
 			+	"</SendMsgRequest>");
 		
 		app.zGetActiveAccount().soapSend(
-				"<SendMsgRequest xmlns='urn:zimbraMail'>"
+				"<SendMsgRequest xmlns='urn:zmailMail'>"
 			+		"<m>"
 			+			"<e t='t' a='"+ account2.EmailAddress +"'/>"
-			+			"<su>subject"+ ZimbraSeleniumProperties.getUniqueString() +"</su>"
+			+			"<su>subject"+ ZmailSeleniumProperties.getUniqueString() +"</su>"
 			+			"<mp ct='text/plain'>"
-			+				"<content>content"+ ZimbraSeleniumProperties.getUniqueString() +"</content>"
+			+				"<content>content"+ ZmailSeleniumProperties.getUniqueString() +"</content>"
 			+			"</mp>"
 			+		"</m>"
 			+	"</SendMsgRequest>");
@@ -505,8 +505,8 @@ public class AutoCompleteForget extends PrefGroupMailByMessageTest {
 		// Send a message to the invalid email
 		
 		// Message properties
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String body = "body" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String body = "body" + ZmailSeleniumProperties.getUniqueString();
 
 		// Open the new mail form
 		FormMailNew mailform = (FormMailNew) app.zPageMail.zToolbarPressButton(Button.B_NEW);

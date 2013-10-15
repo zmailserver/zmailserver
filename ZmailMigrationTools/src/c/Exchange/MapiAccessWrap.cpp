@@ -19,7 +19,7 @@
 #include "common.h"
 #include "MapiAccessWrap.h"
 
-Zimbra::Util::CriticalSection  cs;
+Zmail::Util::CriticalSection  cs;
 // CMapiAccessWrap
 
 STDMETHODIMP CMapiAccessWrap::InterfaceSupportsErrorInfo(REFIID riid)
@@ -39,11 +39,11 @@ STDMETHODIMP CMapiAccessWrap::InterfaceSupportsErrorInfo(REFIID riid)
 
 STDMETHODIMP CMapiAccessWrap::UserInit(BSTR UserName, BSTR userAccount, BSTR *StatusMsg)
 {
-	Zimbra::Util::AutoCriticalSection autocriticalsection(cs);
+	Zmail::Util::AutoCriticalSection autocriticalsection(cs);
     // TODO: Add your implementation code here
 
     dlog.trace(L" Begin mapiaccesswrap::userinit");
-    maapi = new Zimbra::MAPI::MAPIAccessAPI(UserName, userAccount);
+    maapi = new Zmail::MAPI::MAPIAccessAPI(UserName, userAccount);
 
     // Init session and stores
     LPCWSTR lpStatus = maapi->InitializeUser();
@@ -125,7 +125,7 @@ STDMETHODIMP CMapiAccessWrap::GetFolderList(VARIANT *folders)
             CComBSTR temp((*it).name.c_str());
 
             pIFolderObject->put_Name(SysAllocString(temp));
-            pIFolderObject->put_Id((*it).zimbraid);
+            pIFolderObject->put_Id((*it).zmailid);
 
             CComBSTR tempS((*it).folderpath.c_str());
 
@@ -306,10 +306,10 @@ STDMETHODIMP CMapiAccessWrap::GetItemsList(IFolderObject *FolderObj, VARIANT cre
 			else
 				dlog.err("MapiAccess->GetFolderItemsList SafeArrayCreate is null");
             pIItemObject->put_ItemID(var);
-            /*Zimbra::Util::ScopedArray<CHAR> spUid(new CHAR[(Itemid.cb * 2) + 1]);
+            /*Zmail::Util::ScopedArray<CHAR> spUid(new CHAR[(Itemid.cb * 2) + 1]);
     if (spUid.get() != NULL)
     {
-	Zimbra::Util::HexFromBin(Itemid.lpb, Itemid.cb, spUid.get());
+	Zmail::Util::HexFromBin(Itemid.lpb, Itemid.cb, spUid.get());
         CComBSTR str=spUid.getref();
       pIItemObject->put_IDasString(str);
       SysFreeString(str);
@@ -596,7 +596,7 @@ STDMETHODIMP CMapiAccessWrap::GetData(BSTR UserId, VARIANT ItemId, FolderType ty
                 {
                     if (apptData.Uid.length() == 0)     // FBS bug 72893 -- 4/12/12
                     {
-                        apptData.Uid = Zimbra::MAPI::Util::GetGUID();
+                        apptData.Uid = Zmail::MAPI::Util::GetGUID();
                     }
                     int numAttendees = (int)apptData.vAttendees.size();     // cast it because in delete loop, we'll go negative
                     wstring attendeeData = L"";
@@ -1025,7 +1025,7 @@ STDMETHODIMP CMapiAccessWrap::GetOOOInfo(BSTR *OOOInfo)
 STDMETHODIMP CMapiAccessWrap::GetRuleList(VARIANT *rules)
 {
     // This is the big method for Exchange rules processing.  It reads the PR_RULES_TABLE,
-    // gets the info back, and creates a map (pMap) that will be read by the Zimbra API
+    // gets the info back, and creates a map (pMap) that will be read by the Zmail API
     // layer (SetModifyFilterRulesRequest, which calls AddFilterRuleToRequest for each rule.)
     // Assuming there are two rules, Foo and Bar, here is an example of pMap.  We'll only show
     // the format of the first rule.  There are 3 entries for each rule, rule, tests and actions.

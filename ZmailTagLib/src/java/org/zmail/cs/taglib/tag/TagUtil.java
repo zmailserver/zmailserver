@@ -13,14 +13,14 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.taglib.tag;
+package org.zmail.cs.taglib.tag;
 
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.SoapHttpTransport;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.common.soap.SoapTransport;
-import com.zimbra.common.soap.SoapTransport.DebugListener;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.SoapHttpTransport;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.common.soap.SoapTransport;
+import org.zmail.common.soap.SoapTransport.DebugListener;
 
 public class TagUtil {
 

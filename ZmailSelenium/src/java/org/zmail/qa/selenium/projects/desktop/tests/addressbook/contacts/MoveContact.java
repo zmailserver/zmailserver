@@ -14,20 +14,20 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.addressbook.contacts;
+package org.zmail.qa.selenium.projects.desktop.tests.addressbook.contacts;
 
 
 import java.util.List;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount.SOAP_DESTINATION_HOST_TYPE;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.*;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.ZmailAccount.SOAP_DESTINATION_HOST_TYPE;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.*;
 
 
 public class MoveContact extends AjaxCommonTest  {
@@ -173,7 +173,7 @@ public class MoveContact extends AjaxCommonTest  {
             app.zGetActiveAccount(),
             SystemFolder.EmailedContacts,
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
 
       //click shortcut m
       DialogMove dialogContactMove = (DialogMove) app.zPageAddressbook.zKeyboardShortcut(
@@ -197,7 +197,7 @@ public class MoveContact extends AjaxCommonTest  {
             app.zGetActiveAccount(),
             SystemFolder.EmailedContacts,
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
 
       //click Move icon on context menu
       DialogMove dialogContactMove = (DialogMove) app.zPageAddressbook.zListItem(
@@ -225,7 +225,7 @@ public class MoveContact extends AjaxCommonTest  {
             app.zGetActiveAccount(),
             SystemFolder.EmailedContacts,
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
 
       //click Move icon on toolbar
       DialogMove dialogContactMove = (DialogMove) app.zPageAddressbook.zToolbarPressButton(
@@ -249,7 +249,7 @@ public class MoveContact extends AjaxCommonTest  {
             app.zGetActiveAccount(),
             SystemFolder.Trash,
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
 
       //click Move icon on toolbar
       DialogMove dialogContactMove = (DialogMove) app.zPageAddressbook.zToolbarPressButton(

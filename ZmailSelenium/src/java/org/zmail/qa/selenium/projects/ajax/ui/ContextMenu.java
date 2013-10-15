@@ -17,17 +17,17 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.ajax.ui;
+package org.zmail.qa.selenium.projects.ajax.ui;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.projects.ajax.ui.addressbook.PageAddressbook;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.DialogCreateFolder;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.projects.ajax.ui.addressbook.PageAddressbook;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.DialogCreateFolder;
 
 /*
  * Right-click menu

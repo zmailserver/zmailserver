@@ -276,7 +276,7 @@ function(parent, num) {
 	var isReadOnly = briefcase ? briefcase.isReadOnly() : false;
 	var isMultiFolder = (noOfFolders > 1);
 	var isItemSelected = (num>0);
-	var isZimbraAccount = appCtxt.getActiveAccount().isZimbraAccount;
+	var isZmailAccount = appCtxt.getActiveAccount().isZmailAccount;
 	var isMailEnabled = appCtxt.get(ZmSetting.MAIL_ENABLED);
     var isAdmin = briefcase && briefcase.isAdmin(); 
 
@@ -286,7 +286,7 @@ function(parent, num) {
     // isOldRevision is true if the item is a revision but not the latest.
     var isOldRevision = hasOldRevisionSelected ? true : item && item.revision && !hasHighestRevisionSelected;
 	
-	parent.enable([ZmOperation.SEND_FILE, ZmOperation.SEND_FILE_AS_ATT], (isZimbraAccount && isMailEnabled && isItemSelected && !isMultiFolder && !isFolderSelected));
+	parent.enable([ZmOperation.SEND_FILE, ZmOperation.SEND_FILE_AS_ATT], (isZmailAccount && isMailEnabled && isItemSelected && !isMultiFolder && !isFolderSelected));
 	parent.enable(ZmOperation.TAG_MENU, (!isReadOnly && isItemSelected && !isFolderSelected && !isOldRevision));
 	parent.enable([ZmOperation.NEW_FILE, ZmOperation.VIEW_MENU], true);
 	parent.enable([ZmOperation.NEW_SPREADSHEET, ZmOperation.NEW_PRESENTATION, ZmOperation.NEW_DOC], true);
@@ -1011,7 +1011,7 @@ function(items){
 ZmBriefcaseController.prototype._downloadFile =
 function(downloadUrl){
     if(downloadUrl){
-        ZmZimbraMail.unloadHackCallback();
+        ZmZmailMail.unloadHackCallback();
         location.href = downloadUrl;
     }
 };

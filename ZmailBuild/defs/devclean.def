@@ -4,7 +4,7 @@ DEV_CLEAN_TARGETS := \
 	$(DEV_INSTALL_ROOT)/$(MAILBOXD_DIR) \
 
 dev-allclean:
-	-su - zimbra -c "zmcontrol shutdown"
+	-su - zmail -c "zmcontrol shutdown"
 	rm -rf $(DEV_INSTALL_ROOT)
 
 dev-clean: dev-stop

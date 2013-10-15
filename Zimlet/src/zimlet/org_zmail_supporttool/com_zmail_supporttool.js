@@ -16,19 +16,19 @@
 /**
  * Constructor.
  *
- * @author Raja Rao DV (rrao@zimbra.com)
+ * @author Raja Rao DV (rrao@zmail.com)
  */
-function com_zimbra_supporttool_HandlerObject() {
+function org_zmail_supporttool_HandlerObject() {
 }
 
-com_zimbra_supporttool_HandlerObject.prototype = new ZmZimletBase();
-com_zimbra_supporttool_HandlerObject.prototype.constructor = com_zimbra_supporttool_HandlerObject;
+org_zmail_supporttool_HandlerObject.prototype = new ZmZimletBase();
+org_zmail_supporttool_HandlerObject.prototype.constructor = org_zmail_supporttool_HandlerObject;
 
 /**
  * Simplify handler object
  *
  */
-var SupportToolZimlet = com_zimbra_supporttool_HandlerObject;
+var SupportToolZimlet = org_zmail_supporttool_HandlerObject;
 
 
 /**
@@ -64,8 +64,8 @@ function() {
 };
 
 /**
- * Gets 5 latest Zimbra Versions
- * @param {string} pv Zimbra versions separated by ::
+ * Gets 5 latest Zmail Versions
+ * @param {string} pv Zmail versions separated by ::
  */
 SupportToolZimlet.prototype._get5PrevVersions =
 function(pv) {
@@ -78,7 +78,7 @@ function(pv) {
 };
 
 /**
- * creates  a hash of current and past Zimbra versions
+ * creates  a hash of current and past Zmail versions
  */
 SupportToolZimlet.prototype._createVersionNameValueArray =
 function() {
@@ -86,9 +86,9 @@ function() {
 	this._versionNameValArray = new Array();
 	for (var k = 0; k < this._prevVersions.length; k++) {
 		if (k == 0) {
-			this._versionNameValArray["zimbraCurrentVersion"] = this._prevVersions[k];
+			this._versionNameValArray["zmailCurrentVersion"] = this._prevVersions[k];
 		} else {
-			this._versionNameValArray["zimbraPreviousVersion" + prevVersionCounter] = this._prevVersions[k];
+			this._versionNameValArray["zmailPreviousVersion" + prevVersionCounter] = this._prevVersions[k];
 			prevVersionCounter++;
 		}
 	}
@@ -222,7 +222,7 @@ function() {
 	html[i++] = "<DIV class='supporttool_cardHdrDivTop' style=\"overflow:auto;width:99%; height:20px;\" >";
 	html[i++] = "<TABLE width='100%'  style=\"font-weight:bold;\">";
 	html[i++] = "<TR>";
-	html[i++] = ["<TD align='center'>",this.getMessage("SupportToolZimlet_zimbraPrefs"),"</TD>"].join("");
+	html[i++] = ["<TD align='center'>",this.getMessage("SupportToolZimlet_zmailPrefs"),"</TD>"].join("");
 	html[i++] = "</TR>";
 	html[i++] = "</TABLE>";
 	html[i++] = "</DIV>";

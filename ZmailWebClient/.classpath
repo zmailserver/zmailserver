@@ -7,18 +7,18 @@
 	<classpathentry kind="lib" path="jars/jsp-2.1/ant-1.6.5.jar"/>
 	<classpathentry kind="lib" path="jars/jsp-2.1/jsp-2.1.jar"/>
 	<classpathentry kind="lib" path="jars/jsp-2.1/jsp-api-2.1.jar"/>
-	<classpathentry kind="lib" path="/ZimbraCommon/jars/gifencoder.jar"/>
-	<classpathentry kind="lib" path="/ZimbraCommon/jars/servlet-api-2.5.jar"/>
-	<classpathentry kind="lib" path="/ZimbraCommon/jars/yuicompressor-2.4.2-zimbra.jar"/>
+	<classpathentry kind="lib" path="/ZmailCommon/jars/gifencoder.jar"/>
+	<classpathentry kind="lib" path="/ZmailCommon/jars/servlet-api-2.5.jar"/>
+	<classpathentry kind="lib" path="/ZmailCommon/jars/yuicompressor-2.4.2-zmail.jar"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/ZimbraCommon"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/ZimbraTagLib"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ZmailCommon"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ZmailTagLib"/>
 	<classpathentry kind="lib" path="jars/json-org.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/ZimbraClient"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/ZimbraServer"/>
-	<classpathentry kind="lib" path="/ZimbraCommon/jars/freemarker-2.3.19.jar"/>
-	<classpathentry kind="lib" path="/ZimbraCommon/jars/jetty-servlet-7.6.10.z5.jar"/>
-	<classpathentry kind="lib" path="/ZimbraCommon/jars/jetty-server-7.6.10.z5.jar"/>
-	<classpathentry kind="lib" path="/ZimbraCommon/jars/jetty-util-7.6.10.z5.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ZmailClient"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ZmailServer"/>
+	<classpathentry kind="lib" path="/ZmailCommon/jars/freemarker-2.3.19.jar"/>
+	<classpathentry kind="lib" path="/ZmailCommon/jars/jetty-servlet-7.6.10.z5.jar"/>
+	<classpathentry kind="lib" path="/ZmailCommon/jars/jetty-server-7.6.10.z5.jar"/>
+	<classpathentry kind="lib" path="/ZmailCommon/jars/jetty-util-7.6.10.z5.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

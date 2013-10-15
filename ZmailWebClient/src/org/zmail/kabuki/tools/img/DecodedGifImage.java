@@ -14,7 +14,7 @@
  */
 
 
-package com.zimbra.kabuki.tools.img;
+package org.zmail.kabuki.tools.img;
 
 import java.awt.*;
 import java.awt.image.*;

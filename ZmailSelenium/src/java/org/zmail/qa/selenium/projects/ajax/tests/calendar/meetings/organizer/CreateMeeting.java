@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.calendar.meetings.organizer;
+package org.zmail.qa.selenium.projects.ajax.tests.calendar.meetings.organizer;
 
 import java.util.Calendar;
 import org.testng.annotations.Test;
-import com.zimbra.qa.selenium.framework.items.AppointmentItem;
-import com.zimbra.qa.selenium.framework.items.MailItem;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.CalendarWorkWeekTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.calendar.FormApptNew;
-import com.zimbra.qa.selenium.projects.ajax.ui.calendar.FormApptNew.Locators;
+import org.zmail.qa.selenium.framework.items.AppointmentItem;
+import org.zmail.qa.selenium.framework.items.MailItem;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.CalendarWorkWeekTest;
+import org.zmail.qa.selenium.projects.ajax.ui.calendar.FormApptNew;
+import org.zmail.qa.selenium.projects.ajax.ui.calendar.FormApptNew.Locators;
 
 public class CreateMeeting extends CalendarWorkWeekTest {
 
@@ -42,9 +42,9 @@ public class CreateMeeting extends CalendarWorkWeekTest {
 		
 		String apptSubject, apptAttendee1, apptContent;
 		Calendar now = this.calendarWeekDayUTC;
-		apptSubject = ZimbraSeleniumProperties.getUniqueString();
-		apptAttendee1 = ZimbraAccount.AccountA().EmailAddress;
-		apptContent = ZimbraSeleniumProperties.getUniqueString();
+		apptSubject = ZmailSeleniumProperties.getUniqueString();
+		apptAttendee1 = ZmailAccount.AccountA().EmailAddress;
+		apptContent = ZmailSeleniumProperties.getUniqueString();
 		
 		appt.setSubject(apptSubject);
 		//appt.setAttendees(apptAttendee1);
@@ -72,7 +72,7 @@ public class CreateMeeting extends CalendarWorkWeekTest {
 		ZAssert.assertEquals(actual.getContent(), appt.getContent(), "Content: Verify the appointment data");
 
 		// Verify the attendee receives the meeting
-		AppointmentItem received = AppointmentItem.importFromSOAP(ZimbraAccount.AccountA(), "subject:("+ appt.getSubject() +")", appt.getStartTime().addDays(-7), appt.getEndTime().addDays(7));
+		AppointmentItem received = AppointmentItem.importFromSOAP(ZmailAccount.AccountA(), "subject:("+ appt.getSubject() +")", appt.getStartTime().addDays(-7), appt.getEndTime().addDays(7));
 		ZAssert.assertNotNull(received, "Verify the new appointment is created");
 		ZAssert.assertEquals(received.getSubject(), appt.getSubject(), "Subject: Verify the appointment data");
 		ZAssert.assertEquals(received.getAttendees(), apptAttendee1, "Attendees: Verify the appointment data");
@@ -80,7 +80,7 @@ public class CreateMeeting extends CalendarWorkWeekTest {
 		ZAssert.assertEquals(received.getContent(), appt.getContent(), "Content: Verify the appointment data");
 
 		// Verify the attendee receives the invitation
-		MailItem invite = MailItem.importFromSOAP(ZimbraAccount.AccountA(), "subject:("+ appt.getSubject() +")");
+		MailItem invite = MailItem.importFromSOAP(ZmailAccount.AccountA(), "subject:("+ appt.getSubject() +")");
 		ZAssert.assertNotNull(invite, "Verify the invite is received");
 		ZAssert.assertEquals(invite.dSubject, appt.getSubject(), "Subject: Verify the appointment data");
 
@@ -95,10 +95,10 @@ public class CreateMeeting extends CalendarWorkWeekTest {
 		
 		String apptSubject, apptAttendee1, apptOptional1, apptContent;
 		Calendar now = this.calendarWeekDayUTC;
-		apptSubject = ZimbraSeleniumProperties.getUniqueString();
-		apptAttendee1 = ZimbraAccount.AccountA().EmailAddress;
-		apptOptional1 = ZimbraAccount.AccountB().EmailAddress;
-		apptContent = ZimbraSeleniumProperties.getUniqueString();
+		apptSubject = ZmailSeleniumProperties.getUniqueString();
+		apptAttendee1 = ZmailAccount.AccountA().EmailAddress;
+		apptOptional1 = ZmailAccount.AccountB().EmailAddress;
+		apptContent = ZmailSeleniumProperties.getUniqueString();
 		
 		appt.setSubject(apptSubject);
 		//appt.setAttendees(apptAttendee1);
@@ -132,19 +132,19 @@ public class CreateMeeting extends CalendarWorkWeekTest {
 		ZAssert.assertEquals(actual.getContent(), appt.getContent(), "Content: Verify the appointment data");
 
 		// Verify the attendee receives the meeting
-		AppointmentItem received = AppointmentItem.importFromSOAP(ZimbraAccount.AccountA(), "subject:("+ appt.getSubject() +")", appt.getStartTime().addDays(-7), appt.getEndTime().addDays(7));
+		AppointmentItem received = AppointmentItem.importFromSOAP(ZmailAccount.AccountA(), "subject:("+ appt.getSubject() +")", appt.getStartTime().addDays(-7), appt.getEndTime().addDays(7));
 		ZAssert.assertNotNull(received, "Verify the new appointment is created");
 
 		// Verify the attendee receives the invitation
-		MailItem invite = MailItem.importFromSOAP(ZimbraAccount.AccountA(), "subject:("+ appt.getSubject() +")");
+		MailItem invite = MailItem.importFromSOAP(ZmailAccount.AccountA(), "subject:("+ appt.getSubject() +")");
 		ZAssert.assertNotNull(invite, "Verify the invite is received");
 
 		// Verify the optional receives the meeting
-		received = AppointmentItem.importFromSOAP(ZimbraAccount.AccountB(), "subject:("+ appt.getSubject() +")", appt.getStartTime().addDays(-7), appt.getEndTime().addDays(7));
+		received = AppointmentItem.importFromSOAP(ZmailAccount.AccountB(), "subject:("+ appt.getSubject() +")", appt.getStartTime().addDays(-7), appt.getEndTime().addDays(7));
 		ZAssert.assertNotNull(received, "Verify the new appointment is created");
 
 		// Verify the optional receives the invitation
-		invite = MailItem.importFromSOAP(ZimbraAccount.AccountB(), "subject:("+ appt.getSubject() +")");
+		invite = MailItem.importFromSOAP(ZmailAccount.AccountB(), "subject:("+ appt.getSubject() +")");
 		ZAssert.assertNotNull(invite, "Verify the invite is received");
 
 

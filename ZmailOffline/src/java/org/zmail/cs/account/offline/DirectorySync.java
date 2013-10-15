@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.offline;
+package org.zmail.cs.account.offline;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,37 +25,37 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.UUID;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.SignatureUtil;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AttributeManager;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Identity;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Signature;
-import com.zimbra.cs.filter.RuleManager;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.offline.OfflineLC;
-import com.zimbra.cs.offline.OfflineLog;
-import com.zimbra.cs.offline.OfflineSyncManager;
-import com.zimbra.cs.service.account.ModifyPrefs;
-import com.zimbra.cs.util.Zimbra;
-import com.zimbra.cs.util.ZimbraApplication;
-import com.zimbra.client.ZFilterRules;
-import com.zimbra.client.ZGetInfoResult;
-import com.zimbra.client.ZIdentity;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZSignature;
-import com.zimbra.cs.zimlet.ZimletUserProperties;
-import com.zimbra.soap.account.message.ModifyPropertiesRequest;
-import com.zimbra.soap.account.type.Prop;
-import com.zimbra.soap.mail.type.FilterRule;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.SignatureUtil;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AttributeManager;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Identity;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Signature;
+import org.zmail.cs.filter.RuleManager;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.offline.OfflineLC;
+import org.zmail.cs.offline.OfflineLog;
+import org.zmail.cs.offline.OfflineSyncManager;
+import org.zmail.cs.service.account.ModifyPrefs;
+import org.zmail.cs.util.Zmail;
+import org.zmail.cs.util.ZmailApplication;
+import org.zmail.client.ZFilterRules;
+import org.zmail.client.ZGetInfoResult;
+import org.zmail.client.ZIdentity;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZSignature;
+import org.zmail.cs.zimlet.ZimletUserProperties;
+import org.zmail.soap.account.message.ModifyPropertiesRequest;
+import org.zmail.soap.account.type.Prop;
+import org.zmail.soap.mail.type.FilterRule;
 
 public class DirectorySync {
 
@@ -70,7 +70,7 @@ public class DirectorySync {
     private DirectorySync() {
         timer.schedule(currentTask = new TimerTask() {
             @Override public void run() {
-                if (ZimbraApplication.getInstance().isShutdown()) {
+                if (ZmailApplication.getInstance().isShutdown()) {
                     currentTask.cancel();
                     return;
                 }
@@ -78,7 +78,7 @@ public class DirectorySync {
                     syncAllAccounts(false);
                 } catch (Throwable e) { //don't let exceptions kill the timer
                     if (e instanceof OutOfMemoryError)
-                        Zimbra.halt("caught out of memory error", e);
+                        Zmail.halt("caught out of memory error", e);
                     else if (OfflineSyncManager.getInstance().isServiceActive(false))
                         OfflineLog.offline.warn("caught exception in timer ", e);
                 }
@@ -250,7 +250,7 @@ public class DirectorySync {
 
     private void syncFilterRules(Account acct, ZMailbox zmbx) throws ServiceException {
         Set<String> modified = acct.getMultiAttrSet(OfflineProvisioning.A_offlineModifiedAttrs);
-        if (modified.contains(Provisioning.A_zimbraMailSieveScript)) {
+        if (modified.contains(Provisioning.A_zmailMailSieveScript)) {
             List<FilterRule> rules = RuleManager.getIncomingRulesAsXML(acct);
             zmbx.saveIncomingFilterRules(new ZFilterRules(rules));
             OfflineLog.offline.debug("dsync: pushed %d incoming filter rules: %s", rules.size(), acct.getName());
@@ -267,7 +267,7 @@ public class DirectorySync {
         }
         if (((OfflineAccount)acct).getRemoteServerVersion().isAtLeast7xx()) {
             //outgoing rules added in 7.0
-            if (modified.contains(Provisioning.A_zimbraMailOutgoingSieveScript)) {
+            if (modified.contains(Provisioning.A_zmailMailOutgoingSieveScript)) {
                 List<FilterRule> rules = RuleManager.getOutgoingRulesAsXML(acct);
                 zmbx.saveOutgoingFilterRules(new ZFilterRules(rules));
                 OfflineLog.offline.debug("dsync: pushed %d outgoing filter rules: %s", rules.size(), acct.getName());
@@ -310,7 +310,7 @@ public class DirectorySync {
 
         attrs = diffAttributes(acct, acct, attrs);
 
-        attrs.put(Provisioning.A_zimbraMailQuota, "0"); //legacy account correction in case an old account sync down server quota
+        attrs.put(Provisioning.A_zmailMailQuota, "0"); //legacy account correction in case an old account sync down server quota
         attrs.put(OfflineProvisioning.A_offlineRemoteServerVersion, zgi.getVersion()); //make sure always update if different
         OfflineLog.offline.info("dsync: remote server version: " + zgi.getVersion());
 
@@ -366,7 +366,7 @@ public class DirectorySync {
             Map<String, Object> zimletAttrs = new HashMap<String, Object>();
             zimletAttrs.putAll(zgi.getZimletProps());
             Account localAccount = prov.getLocalAccount();
-            //TODO: right now we're assuming zimletAttr has a single key (zimbraZimletUserProperties)
+            //TODO: right now we're assuming zimletAttr has a single key (zmailZimletUserProperties)
             //if that changes later may need to have diffattributes only delete from a subset of all acct attrs
             zimletAttrs = diffAttributes(localAccount, localAccount, zimletAttrs, false); //we're only looking at zimlet attrs; dont delete others
             if (!zimletAttrs.isEmpty()) {
@@ -410,7 +410,7 @@ public class DirectorySync {
         Map<String, Object> changes = new HashMap<String, Object>();
         for (Map.Entry<String, Object> zattr : attrs.entrySet()) {
             String key = zattr.getKey();
-            if (modified.contains(key) || key.equals(Provisioning.A_zimbraMailHost) || key.equals(Provisioning.A_zimbraMailSieveScript) || key.equals(Provisioning.A_zimbraMailOutgoingSieveScript) ||
+            if (modified.contains(key) || key.equals(Provisioning.A_zmailMailHost) || key.equals(Provisioning.A_zmailMailSieveScript) || key.equals(Provisioning.A_zmailMailOutgoingSieveScript) ||
                     OfflineProvisioning.sOfflineAttributes.contains(key))
                 continue;
             Object value = zattr.getValue();
@@ -435,7 +435,7 @@ public class DirectorySync {
             existing.removeAll(changes.keySet());
             String remoteVersion = ((OfflineAccount) acct).getRemoteServerVersion().toString();
             for (String key : existing) {
-                if (!key.startsWith("offline") && !OfflineProvisioning.sOfflineAttributes.contains(key) && !key.equals(Provisioning.A_zimbraMailSieveScript) && !key.equals(Provisioning.A_zimbraMailOutgoingSieveScript)) {
+                if (!key.startsWith("offline") && !OfflineProvisioning.sOfflineAttributes.contains(key) && !key.equals(Provisioning.A_zmailMailSieveScript) && !key.equals(Provisioning.A_zmailMailOutgoingSieveScript)) {
                     try {
                         if (AttributeManager.getInstance().inVersion(key, remoteVersion)) {
                             changes.put(key, null);
@@ -467,7 +467,7 @@ public class DirectorySync {
             // handle any naming conflicts by renaming the *local* identity
             // XXX: if the identity has been renamed locally, no need to rename the conflict
             Map<String, Object> resolution = new HashMap<String, Object>(1);
-            resolution.put(Provisioning.A_zimbraPrefIdentityName, name + '{' + UUID.randomUUID().toString() + '}');
+            resolution.put(Provisioning.A_zmailPrefIdentityName, name + '{' + UUID.randomUUID().toString() + '}');
             prov.modifyIdentity(acct, name, resolution);
             OfflineLog.offline.debug("dsync: detected conflict and renamed identity: " + acct.getName() + '/' + conflict.getName());
         }
@@ -505,7 +505,7 @@ public class DirectorySync {
             // handle any naming conflicts by renaming the *local* signature
             // XXX: if the signature has been renamed locally, no need to rename the conflict
             Map<String, Object> resolution = new HashMap<String, Object>(1);
-            resolution.put(Provisioning.A_zimbraSignatureName, name + '{' + UUID.randomUUID().toString() + '}');
+            resolution.put(Provisioning.A_zmailSignatureName, name + '{' + UUID.randomUUID().toString() + '}');
             prov.modifySignature(acct, signature == null ? conflict.getId() : signature.getId(), resolution);
             OfflineLog.offline.debug("dsync: detected conflict and renamed signature: " + acct.getName() + '/' + conflict.getName());
         }
@@ -544,7 +544,7 @@ public class DirectorySync {
 //            // handle any naming conflicts by renaming the *local* data source
 //            // XXX: if the data source has been renamed locally, no need to rename the conflict
 //            Map<String, Object> resolution = new HashMap<String, Object>(1);
-//            resolution.put(Provisioning.A_zimbraDataSourceName, name + '{' + UUID.randomUUID().toString() + '}');
+//            resolution.put(Provisioning.A_zmailDataSourceName, name + '{' + UUID.randomUUID().toString() + '}');
 //            prov.modifyDataSource(acct, conflict.getId(), resolution);
 //            OfflineLog.offline.debug("dsync: detected conflict and renamed data source: " + acct.getName() + '/' + conflict.getName());
 //        }
@@ -586,7 +586,7 @@ public class DirectorySync {
                         val = "";
                     }
                     changes.put(pref, val);
-                } else if (!pref.startsWith("offline") && !OfflineProvisioning.sOfflineAttributes.contains(pref) && !pref.equals(Provisioning.A_zimbraMailSieveScript) && !pref.equals(Provisioning.A_zimbraMailOutgoingSieveScript))
+                } else if (!pref.startsWith("offline") && !OfflineProvisioning.sOfflineAttributes.contains(pref) && !pref.equals(Provisioning.A_zmailMailSieveScript) && !pref.equals(Provisioning.A_zmailMailOutgoingSieveScript))
                     OfflineLog.offline.warn("dpush: could not push non-preference attribute: " + pref);
             }
             if (!changes.isEmpty()) {
@@ -620,7 +620,7 @@ public class DirectorySync {
         if (prov.syncZimletProperties(acct.getId())) {
             Account localAcct = prov.getLocalAccount();
             Set<String> zimletModified = localAcct.getMultiAttrSet(OfflineProvisioning.A_offlineModifiedAttrs);
-            if (zimletModified.contains(Provisioning.A_zimbraZimletUserProperties)) {
+            if (zimletModified.contains(Provisioning.A_zmailZimletUserProperties)) {
                 OfflineLog.offline.info("Pushing zimlet properties to remote account "+acct.getName());
                 ZimletUserProperties zimletProps = ZimletUserProperties.getProperties(localAcct);
                 ModifyPropertiesRequest req = new ModifyPropertiesRequest();
@@ -694,7 +694,7 @@ public class DirectorySync {
         Map<String, Object> attrs = signature.getAttrs();
         attrs.remove(OfflineProvisioning.A_offlineModifiedAttrs);
         scrubAttributes(attrs, acct);
-        String sigHtml = signature.getAttr(Provisioning.A_zimbraPrefMailSignatureHTML, null);
+        String sigHtml = signature.getAttr(Provisioning.A_zmailPrefMailSignatureHTML, null);
         String sigType = (sigHtml == null || sigHtml.length() == 0) ? "text/plain" : "text/html";
         ZSignature zsig = new ZSignature(signature.getId(), signature.getName(), signature.getAttr(SignatureUtil.mimeTypeToAttrName(sigType)), sigType);
 

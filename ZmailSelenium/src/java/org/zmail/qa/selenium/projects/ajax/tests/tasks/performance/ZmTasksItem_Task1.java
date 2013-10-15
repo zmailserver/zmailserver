@@ -14,19 +14,19 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.tasks.performance;
+package org.zmail.qa.selenium.projects.ajax.tests.tasks.performance;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.framework.util.performance.PerfKey;
-import com.zimbra.qa.selenium.framework.util.performance.PerfMetrics;
-import com.zimbra.qa.selenium.framework.util.performance.PerfToken;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.framework.util.performance.PerfKey;
+import org.zmail.qa.selenium.framework.util.performance.PerfMetrics;
+import org.zmail.qa.selenium.framework.util.performance.PerfToken;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
 
 public class ZmTasksItem_Task1 extends AjaxCommonTest{
 
@@ -43,13 +43,13 @@ public class ZmTasksItem_Task1 extends AjaxCommonTest{
    @Test(description="Measure the time to view a task",
          groups={"performance"})
    public void ZmTasksItem_01() throws HarnessException {
-      String subject1 = "task1"+ ZimbraSeleniumProperties.getUniqueString();
-      String subject2 = "task2"+ ZimbraSeleniumProperties.getUniqueString();
+      String subject1 = "task1"+ ZmailSeleniumProperties.getUniqueString();
+      String subject2 = "task2"+ ZmailSeleniumProperties.getUniqueString();
 
       // Create 2 tasks because by default when the latest one on the list
       // will be selected, thus selecting the first one to measure the performance
       app.zGetActiveAccount().soapSend(
-            "<CreateTaskRequest xmlns='urn:zimbraMail'>" +
+            "<CreateTaskRequest xmlns='urn:zmailMail'>" +
             "<m >" +
             "<inv>" +
             "<comp name='"+ subject1 +"'>" +
@@ -58,7 +58,7 @@ public class ZmTasksItem_Task1 extends AjaxCommonTest{
             "</inv>" +
             "<su>"+ subject1 +"</su>" +
             "<mp ct='text/plain'>" +
-            "<content>content"+ ZimbraSeleniumProperties.getUniqueString() +"</content>" +
+            "<content>content"+ ZmailSeleniumProperties.getUniqueString() +"</content>" +
             "</mp>" +
             "</m>" +
       "</CreateTaskRequest>");
@@ -68,7 +68,7 @@ public class ZmTasksItem_Task1 extends AjaxCommonTest{
 
       // Create the second item
       app.zGetActiveAccount().soapSend(
-            "<CreateTaskRequest xmlns='urn:zimbraMail'>" +
+            "<CreateTaskRequest xmlns='urn:zmailMail'>" +
             "<m >" +
             "<inv>" +
             "<comp name='"+ subject2 +"'>" +
@@ -77,7 +77,7 @@ public class ZmTasksItem_Task1 extends AjaxCommonTest{
             "</inv>" +
             "<su>"+ subject2 +"</su>" +
             "<mp ct='text/plain'>" +
-            "<content>content"+ ZimbraSeleniumProperties.getUniqueString() +"</content>" +
+            "<content>content"+ ZmailSeleniumProperties.getUniqueString() +"</content>" +
             "</mp>" +
             "</m>" +
       "</CreateTaskRequest>");

@@ -552,7 +552,7 @@ function() {
 DwtHtml5SoundPlugin.prototype._createHtml = 
 function(params) {
     if (AjxEnv.isSafari) {
-        AjxRpc.invoke(null, params.url, { 'X-Zimbra-Encoding': 'x-base64' },
+        AjxRpc.invoke(null, params.url, { 'X-Zmail-Encoding': 'x-base64' },
             this._setSource.bind(this), AjxRpcRequest.HTTP_GET);
     } else {
         this.getHtmlElement().innerHTML = this._getAudioHtml(params.url);

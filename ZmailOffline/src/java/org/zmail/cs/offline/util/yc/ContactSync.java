@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.util.yc;
+package org.zmail.cs.offline.util.yc;
 
 import java.util.Collections;
 import java.util.List;
@@ -22,7 +22,7 @@ import javax.xml.parsers.DocumentBuilder;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import com.zimbra.cs.offline.util.Xml;
+import org.zmail.cs.offline.util.Xml;
 
 /**
  * http://developer.yahoo.com/social/rest_api_guide/syncing.html

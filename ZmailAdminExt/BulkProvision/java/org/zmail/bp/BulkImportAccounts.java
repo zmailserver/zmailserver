@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.bp;
+package org.zmail.bp;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -39,44 +39,44 @@ import org.dom4j.io.SAXReader;
 import au.com.bytecode.opencsv.CSVReader;
 import au.com.bytecode.opencsv.CSVWriter;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.DomainBy;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.mailbox.ContactConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminExtConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.EmailUtil;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.GalContact;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Provisioning.GalMode;
-import com.zimbra.cs.account.Provisioning.SearchGalResult;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.PseudoTarget;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.cs.account.accesscontrol.TargetType;
-import com.zimbra.cs.account.gal.GalOp;
-import com.zimbra.cs.account.gal.GalParams;
-import com.zimbra.cs.account.ldap.LdapGalMapRules;
-import com.zimbra.cs.account.ldap.LdapGalSearch;
-import com.zimbra.cs.ldap.LdapConstants;
-import com.zimbra.cs.mailbox.ACL;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.service.FileUploadServlet;
-import com.zimbra.cs.service.admin.AdminDocumentHandler;
-import com.zimbra.cs.service.admin.AdminFileDownload;
-import com.zimbra.cs.service.admin.AdminService;
-import com.zimbra.soap.ZimbraSoapContext;
-import com.zimbra.soap.admin.type.DataSourceType;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.DomainBy;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.mailbox.ContactConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminExtConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.EmailUtil;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.GalContact;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Provisioning.GalMode;
+import org.zmail.cs.account.Provisioning.SearchGalResult;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.PseudoTarget;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.cs.account.accesscontrol.TargetType;
+import org.zmail.cs.account.gal.GalOp;
+import org.zmail.cs.account.gal.GalParams;
+import org.zmail.cs.account.ldap.LdapGalMapRules;
+import org.zmail.cs.account.ldap.LdapGalSearch;
+import org.zmail.cs.ldap.LdapConstants;
+import org.zmail.cs.mailbox.ACL;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.service.FileUploadServlet;
+import org.zmail.cs.service.admin.AdminDocumentHandler;
+import org.zmail.cs.service.admin.AdminFileDownload;
+import org.zmail.cs.service.admin.AdminService;
+import org.zmail.soap.ZmailSoapContext;
+import org.zmail.soap.admin.type.DataSourceType;
 
 /**
  * @author Greg Solovyev
@@ -88,17 +88,17 @@ public class BulkImportAccounts extends AdminDocumentHandler {
 
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Map attrs = AdminService.getAttrs(request, true);
         String op = request.getAttribute(AdminExtConstants.A_op);
         Element response = zsc.createElement(AdminExtConstants.BULK_IMPORT_ACCOUNTS_RESPONSE);
         Provisioning prov = Provisioning.getInstance();
-        if (ZimbraBulkProvisionExt.OP_PREVIEW.equalsIgnoreCase(op) || ZimbraBulkProvisionExt.OP_START_IMPORT.equalsIgnoreCase(op)) {
+        if (ZmailBulkProvisionExt.OP_PREVIEW.equalsIgnoreCase(op) || ZmailBulkProvisionExt.OP_START_IMPORT.equalsIgnoreCase(op)) {
             int totalAccounts = 0;
             int totalExistingAccounts = 0;
             String SMTPHost = "";
             String SMTPPort = "";
-            String zimbraMailTransport = "";
+            String zmailMailTransport = "";
             boolean createDomains = "TRUE".equalsIgnoreCase(request.getElement(AdminExtConstants.E_createDomains).getTextTrim());
 
             Element eSMTPHost = request.getOptionalElement(AdminExtConstants.E_SMTPHost);
@@ -110,7 +110,7 @@ public class BulkImportAccounts extends AdminDocumentHandler {
                 SMTPPort = eSMTPPort.getTextTrim();
             }
             if (SMTPPort.length() > 0 && SMTPHost.length() > 0) {
-                zimbraMailTransport = "smtp:" + SMTPHost + ":" + SMTPPort;
+                zmailMailTransport = "smtp:" + SMTPHost + ":" + SMTPPort;
             }
 
             /**
@@ -121,7 +121,7 @@ public class BulkImportAccounts extends AdminDocumentHandler {
             String sourceType = request.getElement(AdminExtConstants.A_sourceType).getTextTrim();
             if (sourceType.equalsIgnoreCase(AdminFileDownload.FILE_FORMAT_BULK_CSV)) {
                 String aid = request.getElement(AdminExtConstants.E_attachmentID).getTextTrim();
-                ZimbraLog.extensions.debug("Uploaded CSV file id = " + aid);
+                ZmailLog.extensions.debug("Uploaded CSV file id = " + aid);
                 // response.addElement(E_attachmentID).addText(aid);
                 FileUploadServlet.Upload up = FileUploadServlet.fetchUpload(zsc.getAuthtokenAccountId(), aid, zsc.getAuthToken());
                 if (up == null) {
@@ -149,7 +149,7 @@ public class BulkImportAccounts extends AdminDocumentHandler {
                         try {
                             isValidEntry = validEntry(nextLine, zsc);
                         } catch (ServiceException e) {
-                            ZimbraLog.extensions.error(e);
+                            ZmailLog.extensions.error(e);
                             throw e;
                         }
 
@@ -167,7 +167,7 @@ public class BulkImportAccounts extends AdminDocumentHandler {
                         if (domain != null) {
                             checkDomainRight(zsc, domain, Admin.R_createAccount);
                         } else if (createDomains) {
-                            if (ZimbraBulkProvisionExt.OP_START_IMPORT.equalsIgnoreCase(op)) {
+                            if (ZmailBulkProvisionExt.OP_START_IMPORT.equalsIgnoreCase(op)) {
                                 domain = createMissingDomain(parts[1], zsc, context);
                             }
                             checkDomainRight(zsc, domain, Admin.R_createAccount);
@@ -182,14 +182,14 @@ public class BulkImportAccounts extends AdminDocumentHandler {
                             StringUtil.addToMultiMap(accAttrs, Provisioning.A_displayName, nextLine[1].trim());
                             StringUtil.addToMultiMap(accAttrs, Provisioning.A_givenName, nextLine[2].trim());
                             StringUtil.addToMultiMap(accAttrs, Provisioning.A_sn, nextLine[3].trim());
-                            StringUtil.addToMultiMap(accAttrs, Provisioning.A_zimbraPasswordMustChange, nextLine[5].trim());
+                            StringUtil.addToMultiMap(accAttrs, Provisioning.A_zmailPasswordMustChange, nextLine[5].trim());
 
                             checkSetAttrsOnCreate(zsc, TargetType.account, userEmail, accAttrs);
 
                             StringUtil.addToMultiMap(accAttrs, Provisioning.A_mail, userEmail);
                             StringUtil.addToMultiMap(accAttrs, Provisioning.A_userPassword, nextLine[4].trim());
-                            if (zimbraMailTransport.length() > 0) {
-                                StringUtil.addToMultiMap(accAttrs, Provisioning.A_zimbraMailTransport, zimbraMailTransport);
+                            if (zmailMailTransport.length() > 0) {
+                                StringUtil.addToMultiMap(accAttrs, Provisioning.A_zmailMailTransport, zmailMailTransport);
                             }
                             sourceEntries.add(accAttrs);
                         }
@@ -205,21 +205,21 @@ public class BulkImportAccounts extends AdminDocumentHandler {
                         try {
                             in.close();
                         } catch (IOException e) {
-                            ZimbraLog.extensions.error(e);
+                            ZmailLog.extensions.error(e);
                         }
                     }
                     if (reader != null) {
                         try {
                             reader.close();
                         } catch (IOException e) {
-                            ZimbraLog.extensions.error(e);
+                            ZmailLog.extensions.error(e);
                         }
                     }
 
                 }
             } else if (sourceType.equalsIgnoreCase(AdminFileDownload.FILE_FORMAT_BULK_XML)) {
                 String aid = request.getElement(AdminExtConstants.E_attachmentID).getTextTrim();
-                ZimbraLog.extensions.debug("Uploaded XML file id = " + aid);
+                ZmailLog.extensions.debug("Uploaded XML file id = " + aid);
                 FileUploadServlet.Upload up = FileUploadServlet.fetchUpload(zsc.getAuthtokenAccountId(), aid, zsc.getAuthToken());
                 if (up == null) {
                     throw ServiceException.FAILURE("Uploaded CSV file with id " + aid + " was not found.", null);
@@ -255,9 +255,9 @@ public class BulkImportAccounts extends AdminDocumentHandler {
                             SMTPPort = elSMTPPort.getTextTrim();
                         }
                     }
-                    if (zimbraMailTransport.length() == 0) {
+                    if (zmailMailTransport.length() == 0) {
                         if (SMTPPort.length() > 0 && SMTPHost.length() > 0) {
-                            zimbraMailTransport = "smtp:" + SMTPHost + ":" + SMTPPort;
+                            zmailMailTransport = "smtp:" + SMTPHost + ":" + SMTPPort;
                         }
                     }
                     org.dom4j.Element elImportUsers = (org.dom4j.Element) iter.next();
@@ -299,7 +299,7 @@ public class BulkImportAccounts extends AdminDocumentHandler {
                                 userPassword = el.getTextTrim();
                             }
 
-                            if (Provisioning.A_zimbraPasswordMustChange.equalsIgnoreCase(el.getName())) {
+                            if (Provisioning.A_zmailPasswordMustChange.equalsIgnoreCase(el.getName())) {
                                 userPwdMustChange = el.getTextTrim();
                             }
                         }
@@ -326,7 +326,7 @@ public class BulkImportAccounts extends AdminDocumentHandler {
                             StringUtil.addToMultiMap(accAttrs, Provisioning.A_givenName, userFN);
                             StringUtil.addToMultiMap(accAttrs, Provisioning.A_displayName, userDN);
                             StringUtil.addToMultiMap(accAttrs, Provisioning.A_sn, userLN);
-                            StringUtil.addToMultiMap(accAttrs, Provisioning.A_zimbraPasswordMustChange, userPwdMustChange);
+                            StringUtil.addToMultiMap(accAttrs, Provisioning.A_zmailPasswordMustChange, userPwdMustChange);
 
                             checkSetAttrsOnCreate(zsc, TargetType.account, userEmail, accAttrs);
 
@@ -334,8 +334,8 @@ public class BulkImportAccounts extends AdminDocumentHandler {
                             if (userPassword != null) {
                                 StringUtil.addToMultiMap(accAttrs, Provisioning.A_userPassword, userPassword);
                             }
-                            if (zimbraMailTransport.length() > 0) {
-                                StringUtil.addToMultiMap(accAttrs, Provisioning.A_zimbraMailTransport, zimbraMailTransport);
+                            if (zmailMailTransport.length() > 0) {
+                                StringUtil.addToMultiMap(accAttrs, Provisioning.A_zmailMailTransport, zmailMailTransport);
                             }
                             sourceEntries.add(accAttrs);
                         }
@@ -347,7 +347,7 @@ public class BulkImportAccounts extends AdminDocumentHandler {
                 } catch (IOException e) {
                     throw ServiceException.FAILURE("Bulk provisioning failed to read uploaded XML document.", e);
                 }
-            } else if (sourceType.equalsIgnoreCase(ZimbraBulkProvisionExt.FILE_FORMAT_BULK_LDAP)) {
+            } else if (sourceType.equalsIgnoreCase(ZmailBulkProvisionExt.FILE_FORMAT_BULK_LDAP)) {
                 GalParams.ExternalGalParams galParams = new GalParams.ExternalGalParams(attrs, GalOp.search);
                 LdapGalMapRules rules = new LdapGalMapRules(Provisioning.getInstance().getConfig(), true);
 
@@ -382,7 +382,7 @@ public class BulkImportAccounts extends AdminDocumentHandler {
                 }
                 String mustChangePassword = request.getElement(AdminExtConstants.E_mustChangePassword).getTextTrim();
                 if (SMTPPort.length() > 0 && SMTPHost.length() > 0) {
-                    zimbraMailTransport = "smtp:" + SMTPHost + ":" + SMTPPort;
+                    zmailMailTransport = "smtp:" + SMTPHost + ":" + SMTPPort;
                 }
                 try {
                     SearchGalResult result = LdapGalSearch.searchLdapGal(galParams, GalOp.search, "*", maxResults, rules, null,
@@ -405,7 +405,7 @@ public class BulkImportAccounts extends AdminDocumentHandler {
                             if (domain != null) {
                                 checkDomainRight(zsc, domain, Admin.R_createAccount);
                             } else if (createDomains) {
-                                if (ZimbraBulkProvisionExt.OP_START_IMPORT.equalsIgnoreCase(op)) {
+                                if (ZmailBulkProvisionExt.OP_START_IMPORT.equalsIgnoreCase(op)) {
                                     domain = createMissingDomain(parts[1], zsc, context);
                                 }
                                 checkDomainRight(zsc, domain, Admin.R_createAccount);
@@ -448,11 +448,11 @@ public class BulkImportAccounts extends AdminDocumentHandler {
                                         entry.getSingleAttr(ContactConstants.A_homePostalCode));
                                 StringUtil.addToMultiMap(accAttrs, Provisioning.A_street,
                                         entry.getSingleAttr(ContactConstants.A_homeAddress));
-                                if (zimbraMailTransport.length() > 0) {
-                                    StringUtil.addToMultiMap(accAttrs, Provisioning.A_zimbraMailTransport, zimbraMailTransport);
+                                if (zmailMailTransport.length() > 0) {
+                                    StringUtil.addToMultiMap(accAttrs, Provisioning.A_zmailMailTransport, zmailMailTransport);
                                 }
                                 if ("true".equalsIgnoreCase(mustChangePassword)) {
-                                    StringUtil.addToMultiMap(accAttrs, Provisioning.A_zimbraPasswordMustChange, "TRUE");
+                                    StringUtil.addToMultiMap(accAttrs, Provisioning.A_zmailPasswordMustChange, "TRUE");
                                 }
                                 checkSetAttrsOnCreate(zsc, TargetType.account, emailAddress, accAttrs);
 
@@ -478,7 +478,7 @@ public class BulkImportAccounts extends AdminDocumentHandler {
                 throw ServiceException.INVALID_REQUEST(sourceType + " is not a valid value for parameter "
                         + AdminExtConstants.A_sourceType, null);
             }
-            if (ZimbraBulkProvisionExt.OP_PREVIEW.equalsIgnoreCase(op)) {
+            if (ZmailBulkProvisionExt.OP_PREVIEW.equalsIgnoreCase(op)) {
                 /*
                  * Do not start the import. Just generate a preview.
                  */
@@ -487,7 +487,7 @@ public class BulkImportAccounts extends AdminDocumentHandler {
                 response.addElement(AdminExtConstants.E_SMTPHost).setText(SMTPHost);
                 response.addElement(AdminExtConstants.E_SMTPPort).setText(SMTPPort);
 
-            } else if (ZimbraBulkProvisionExt.OP_START_IMPORT.equalsIgnoreCase(op)) {
+            } else if (ZmailBulkProvisionExt.OP_START_IMPORT.equalsIgnoreCase(op)) {
                 /*
                  * Spin off a provisioning thread
                  */
@@ -511,7 +511,7 @@ public class BulkImportAccounts extends AdminDocumentHandler {
             }
         }
 
-        if (ZimbraBulkProvisionExt.OP_ABORT_IMPORT.equalsIgnoreCase(op)) {
+        if (ZmailBulkProvisionExt.OP_ABORT_IMPORT.equalsIgnoreCase(op)) {
             BulkProvisioningThread thread = BulkProvisioningThread.getThreadInstance(zsc.getAuthtokenAccountId(), false);
             if (thread != null) {
                 int status = thread.getStatus();
@@ -536,7 +536,7 @@ public class BulkImportAccounts extends AdminDocumentHandler {
                 response.addElement(AdminExtConstants.E_status).setText(
                         Integer.toString(BulkProvisioningThread.iSTATUS_NOT_RUNNING));
             }
-        } else if (ZimbraBulkProvisionExt.OP_GET_STATUS.equalsIgnoreCase(op)) {
+        } else if (ZmailBulkProvisionExt.OP_GET_STATUS.equalsIgnoreCase(op)) {
             BulkProvisioningThread thread = BulkProvisioningThread.getThreadInstance(zsc.getAuthtokenAccountId(), false);
             if (thread != null) {
                 int status = thread.getStatus();
@@ -551,7 +551,7 @@ public class BulkImportAccounts extends AdminDocumentHandler {
                 if (status == BulkProvisioningThread.iSTATUS_FINISHED || status == BulkProvisioningThread.iSTATUS_ABORTED
                         || status == BulkProvisioningThread.iSTATUS_ERROR) {
                     String fileToken = Double.toString(Math.random() * 100);
-                    String outSuccessFileName = String.format("%s%s_bulk_report_%s_%s.csv", LC.zimbra_tmp_directory.value(),
+                    String outSuccessFileName = String.format("%s%s_bulk_report_%s_%s.csv", LC.zmail_tmp_directory.value(),
                             File.separator, zsc.getAuthtokenAccountId(), fileToken);
                     FileOutputStream outReport = null;
                     CSVWriter reportWriter = null;
@@ -574,7 +574,7 @@ public class BulkImportAccounts extends AdminDocumentHandler {
                             try {
                                 reportWriter.close();
                             } catch (IOException e) {
-                                ZimbraLog.extensions.error(e);
+                                ZmailLog.extensions.error(e);
                             }
                         }
 
@@ -582,7 +582,7 @@ public class BulkImportAccounts extends AdminDocumentHandler {
                             try {
                                 outReport.close();
                             } catch (IOException e) {
-                                ZimbraLog.extensions.error(e);
+                                ZmailLog.extensions.error(e);
                             }
                         }
                     }
@@ -596,7 +596,7 @@ public class BulkImportAccounts extends AdminDocumentHandler {
                         CSVWriter errorWriter = null;
                         try {
                             String outErrorsFileName = String.format("%s%s_bulk_errors_%s_%s.csv",
-                                    LC.zimbra_tmp_directory.value(), File.separator, zsc.getAuthtokenAccountId(), fileToken);
+                                    LC.zmail_tmp_directory.value(), File.separator, zsc.getAuthtokenAccountId(), fileToken);
                             out = new FileOutputStream(outErrorsFileName);
                             errorWriter = new CSVWriter(new OutputStreamWriter(out));
                             for (String failedAccount : thread.getfailedAccounts().keySet()) {
@@ -615,14 +615,14 @@ public class BulkImportAccounts extends AdminDocumentHandler {
                                 try {
                                     errorWriter.close();
                                 } catch (IOException e) {
-                                    ZimbraLog.extensions.error(e);
+                                    ZmailLog.extensions.error(e);
                                 }
                             }
                             if (out != null) {
                                 try {
                                     out.close();
                                 } catch (IOException e) {
-                                    ZimbraLog.extensions.error(e);
+                                    ZmailLog.extensions.error(e);
                                 }
                             }
                         }
@@ -674,16 +674,16 @@ public class BulkImportAccounts extends AdminDocumentHandler {
     /**
      * The account limits are decided by the following factors: 1) Hard limit:
      * MAX_ACCOUNTS_LIMIT or accountLimit - License Account Limit (whichever is
-     * smaller) 2) zimbraDomainMaxAccounts
+     * smaller) 2) zmailDomainMaxAccounts
      *
      * @param allEntries
      * @throws ServiceException
      */
-    private void checkAccountLimits(List<String[]> allEntries, ZimbraSoapContext zsc, Provisioning prov) throws ServiceException {
-        ZimbraLog.extensions.debug("Check the account limits ...");
+    private void checkAccountLimits(List<String[]> allEntries, ZmailSoapContext zsc, Provisioning prov) throws ServiceException {
+        ZmailLog.extensions.debug("Check the account limits ...");
         int numberOfEntries = allEntries.size();
 
-        // check against zimbraDomainMaxAccounts
+        // check against zmailDomainMaxAccounts
         Hashtable<String, Integer> h = new Hashtable<String, Integer>();
 
         for (int i = 0; i < numberOfEntries; i++) {
@@ -714,7 +714,7 @@ public class BulkImportAccounts extends AdminDocumentHandler {
             String domainName = keys.nextElement();
             Domain domain = prov.get(Key.DomainBy.name, domainName);
             if (domain != null) {
-                String domainMaxAccounts = domain.getAttr(Provisioning.A_zimbraDomainMaxAccounts);
+                String domainMaxAccounts = domain.getAttr(Provisioning.A_zmailDomainMaxAccounts);
                 if (domainMaxAccounts != null && domainMaxAccounts.length() > 0) {
                     int limit = Integer.parseInt(domainMaxAccounts);
                     int used = 0;
@@ -726,9 +726,9 @@ public class BulkImportAccounts extends AdminDocumentHandler {
                     int newAccounts = h.get(domainName).intValue();
                     int available = limit - used;
                     /*
-                     * ZimbraLog.extensions.debug("For domain " + domainName +
+                     * ZmailLog.extensions.debug("For domain " + domainName +
                      * " : csv entry = " + newAccounts +
-                     * ", zimbraDomainMaxAccounts = " + limit +
+                     * ", zmailDomainMaxAccounts = " + limit +
                      * ", used accounts = " + used) ;
                      */
                     if (newAccounts > available) {
@@ -741,7 +741,7 @@ public class BulkImportAccounts extends AdminDocumentHandler {
         }
     }
 
-    private boolean validEntry(String[] entries, ZimbraSoapContext lc) throws ServiceException {
+    private boolean validEntry(String[] entries, ZmailSoapContext lc) throws ServiceException {
         Provisioning prov = Provisioning.getInstance();
         String errorMsg = "";
         if (entries.length != 6) {
@@ -766,7 +766,7 @@ public class BulkImportAccounts extends AdminDocumentHandler {
         return true;
     }
 
-    private Domain createMissingDomain(String name, ZimbraSoapContext zsc, Map<String, Object> context) throws ServiceException {
+    private Domain createMissingDomain(String name, ZmailSoapContext zsc, Map<String, Object> context) throws ServiceException {
         //
         // TODO: check permission has to be consolidated with the one in
         // CraeteDomain
@@ -810,19 +810,19 @@ public class BulkImportAccounts extends AdminDocumentHandler {
 
         // create domain
         Map<String, Object> attrs = new HashMap<String, Object>();
-        StringUtil.addToMultiMap(attrs, Provisioning.A_zimbraGalMode, "zimbra");
-        StringUtil.addToMultiMap(attrs, Provisioning.A_zimbraAuthMech, "zimbra");
-        StringUtil.addToMultiMap(attrs, Provisioning.A_zimbraGalMaxResults, "100");
-        StringUtil.addToMultiMap(attrs, Provisioning.A_zimbraNotes, "automatically created by bulk provisioning");
+        StringUtil.addToMultiMap(attrs, Provisioning.A_zmailGalMode, "zmail");
+        StringUtil.addToMultiMap(attrs, Provisioning.A_zmailAuthMech, "zmail");
+        StringUtil.addToMultiMap(attrs, Provisioning.A_zmailGalMaxResults, "100");
+        StringUtil.addToMultiMap(attrs, Provisioning.A_zmailNotes, "automatically created by bulk provisioning");
         checkSetAttrsOnCreate(zsc, TargetType.domain, name, attrs);
         Domain domain = Provisioning.getInstance().createDomain(name, attrs);
         String acctValue = String.format("%s@%s", "galsync", name);
 
         // create galsync account
         Map<String, Object> accountAttrs = new HashMap<String, Object>();
-        StringUtil.addToMultiMap(accountAttrs, Provisioning.A_zimbraIsSystemResource, LdapConstants.LDAP_TRUE);
-        StringUtil.addToMultiMap(accountAttrs, Provisioning.A_zimbraHideInGal, LdapConstants.LDAP_TRUE);
-        StringUtil.addToMultiMap(accountAttrs, Provisioning.A_zimbraContactMaxNumEntries, "0");
+        StringUtil.addToMultiMap(accountAttrs, Provisioning.A_zmailIsSystemResource, LdapConstants.LDAP_TRUE);
+        StringUtil.addToMultiMap(accountAttrs, Provisioning.A_zmailHideInGal, LdapConstants.LDAP_TRUE);
+        StringUtil.addToMultiMap(accountAttrs, Provisioning.A_zmailContactMaxNumEntries, "0");
         checkSetAttrsOnCreate(zsc, TargetType.account, acctValue, accountAttrs);
         Account galSyncAccount = Provisioning.getInstance().createAccount(acctValue, null, accountAttrs);
 
@@ -832,7 +832,7 @@ public class BulkImportAccounts extends AdminDocumentHandler {
         domain.setGalAccountId(galAcctIds.toArray(new String[0]));
 
         // create folder if not already exists.
-        String folder = "/_zimbra";
+        String folder = "/_zmail";
         Mailbox mbox = MailboxManager.getInstance().getMailboxByAccount(galSyncAccount);
         Folder contactFolder = null;
         try {
@@ -849,14 +849,14 @@ public class BulkImportAccounts extends AdminDocumentHandler {
         // create datasource
         Map<String, Object> dsAttrs = new HashMap<String, Object>();
         try {
-            dsAttrs.put(Provisioning.A_zimbraGalType, GalMode.zimbra.name());
-            dsAttrs.put(Provisioning.A_zimbraDataSourcePollingInterval, "1d");
-            dsAttrs.put(Provisioning.A_zimbraDataSourceFolderId, "" + folderId);
-            dsAttrs.put(Provisioning.A_zimbraDataSourceEnabled, LdapConstants.LDAP_TRUE);
-            dsAttrs.put(Provisioning.A_zimbraGalStatus, "enabled");
-            Provisioning.getInstance().createDataSource(galSyncAccount, DataSourceType.gal, "zimbra", dsAttrs);
+            dsAttrs.put(Provisioning.A_zmailGalType, GalMode.zmail.name());
+            dsAttrs.put(Provisioning.A_zmailDataSourcePollingInterval, "1d");
+            dsAttrs.put(Provisioning.A_zmailDataSourceFolderId, "" + folderId);
+            dsAttrs.put(Provisioning.A_zmailDataSourceEnabled, LdapConstants.LDAP_TRUE);
+            dsAttrs.put(Provisioning.A_zmailGalStatus, "enabled");
+            Provisioning.getInstance().createDataSource(galSyncAccount, DataSourceType.gal, "zmail", dsAttrs);
         } catch (ServiceException e) {
-            ZimbraLog.extensions.error("error creating datasource for GalSyncAccount", e);
+            ZmailLog.extensions.error("error creating datasource for GalSyncAccount", e);
             throw e;
         }
         return domain;

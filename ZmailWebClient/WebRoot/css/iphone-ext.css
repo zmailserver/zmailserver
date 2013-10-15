@@ -630,7 +630,7 @@ div.row span.l {
 }
 /* TODO: Is this still used? And have we lost any formatting going to ImgEdit class?
 .Edit{
-    background: #eeeeee url("@AppContextPath@/img/zimbra/ImgEdit.png?v=@jsVersion@") 50% 50% no-repeat;
+    background: #eeeeee url("@AppContextPath@/img/zmail/ImgEdit.png?v=@jsVersion@") 50% 50% no-repeat;
     padding: 3px;
     border:1px outset #efefef;
     -webkit-border-radius: 5px;

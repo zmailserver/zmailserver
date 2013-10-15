@@ -42,7 +42,7 @@ function() {
 
 ZaBulkProvisionTasksView.prototype.getTitle = 
 function () {
-	return com_zimbra_bulkprovision.BP_view_title;
+	return org_zmail_bulkprovision.BP_view_title;
 }
 
 ZaBulkProvisionTasksView.prototype.getTabIcon = 
@@ -94,9 +94,9 @@ function(task, now, isDragProxy) {
 			if((parseInt(task.attrs[ZaBulkProvisionTask.A_finishedTasks]) + 
 					(task.attrs[ZaBulkProvisionTask.A_failedTasks] ? parseInt(task.attrs[ZaBulkProvisionTask.A_failedTasks]) : 0 )) == 
 				parseInt(task.attrs[ZaBulkProvisionTask.A_totalTasks])) {
-				html[idx++] = AjxStringUtil.htmlEncode(com_zimbra_bulkprovision.TaskComplete);	
+				html[idx++] = AjxStringUtil.htmlEncode(org_zmail_bulkprovision.TaskComplete);	
 			} else {
-				html[idx++] = AjxStringUtil.htmlEncode(com_zimbra_bulkprovision.TaskInProgress);
+				html[idx++] = AjxStringUtil.htmlEncode(org_zmail_bulkprovision.TaskInProgress);
 			}
 			
 			html[idx++] = "</td>";
@@ -113,11 +113,11 @@ function() {
 	var headerList = new Array();
 //idPrefix, label, iconInfo, width, sortable, sortField, resizeable, visible
 	var sortable=1;
-	headerList[0] = new ZaListHeaderItem(ZaBulkProvisionTask.A_totalTasks, com_zimbra_bulkprovision.NumTotalAccts, null, "120px", null, null, true, true);
-	headerList[1] = new ZaListHeaderItem(ZaBulkProvisionTask.A_finishedTasks, com_zimbra_bulkprovision.NumCompletedAccts, null, "80px", null, null, true, true);
-	headerList[2] = new ZaListHeaderItem(ZaBulkProvisionTask.A_failedTasks, com_zimbra_bulkprovision.NumFailedAccts, null, "80px", null, null, true, true);
-	headerList[3] = new ZaListHeaderItem(ZaBulkProvisionTask.A_status, com_zimbra_bulkprovision.TaskStatus, null, "120px", null, null, true, true);
-	headerList[4] = new ZaListHeaderItem(ZaBulkProvisionTask.A_owner, com_zimbra_bulkprovision.TaskOwner, null, "auto", null, null, true, true);
+	headerList[0] = new ZaListHeaderItem(ZaBulkProvisionTask.A_totalTasks, org_zmail_bulkprovision.NumTotalAccts, null, "120px", null, null, true, true);
+	headerList[1] = new ZaListHeaderItem(ZaBulkProvisionTask.A_finishedTasks, org_zmail_bulkprovision.NumCompletedAccts, null, "80px", null, null, true, true);
+	headerList[2] = new ZaListHeaderItem(ZaBulkProvisionTask.A_failedTasks, org_zmail_bulkprovision.NumFailedAccts, null, "80px", null, null, true, true);
+	headerList[3] = new ZaListHeaderItem(ZaBulkProvisionTask.A_status, org_zmail_bulkprovision.TaskStatus, null, "120px", null, null, true, true);
+	headerList[4] = new ZaListHeaderItem(ZaBulkProvisionTask.A_owner, org_zmail_bulkprovision.TaskOwner, null, "auto", null, null, true, true);
 	return headerList;
 }
 

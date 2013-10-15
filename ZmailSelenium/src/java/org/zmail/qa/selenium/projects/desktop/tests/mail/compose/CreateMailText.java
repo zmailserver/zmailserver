@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.mail.compose;
+package org.zmail.qa.selenium.projects.desktop.tests.mail.compose;
 
 import java.util.HashMap;
 
@@ -22,27 +22,27 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.DesktopAccountItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.MailItem;
-import com.zimbra.qa.selenium.framework.items.RecipientItem;
-import com.zimbra.qa.selenium.framework.items.DesktopAccountItem.SECURITY_TYPE;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.ui.Shortcut;
-import com.zimbra.qa.selenium.framework.util.GeneralUtility;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount.SOAP_DESTINATION_HOST_TYPE;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.accounts.FormAddPopAccount;
-import com.zimbra.qa.selenium.projects.desktop.ui.accounts.PageAddNewAccount.DROP_DOWN_OPTION;
-import com.zimbra.qa.selenium.projects.desktop.ui.mail.DisplayMail;
-import com.zimbra.qa.selenium.projects.desktop.ui.mail.FormMailNew;
-import com.zimbra.qa.selenium.projects.desktop.ui.mail.FormMailNew.Field;
+import org.zmail.qa.selenium.framework.items.DesktopAccountItem;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.MailItem;
+import org.zmail.qa.selenium.framework.items.RecipientItem;
+import org.zmail.qa.selenium.framework.items.DesktopAccountItem.SECURITY_TYPE;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.ui.Shortcut;
+import org.zmail.qa.selenium.framework.util.GeneralUtility;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.framework.util.ZmailAccount.SOAP_DESTINATION_HOST_TYPE;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.accounts.FormAddPopAccount;
+import org.zmail.qa.selenium.projects.desktop.ui.accounts.PageAddNewAccount.DROP_DOWN_OPTION;
+import org.zmail.qa.selenium.projects.desktop.ui.mail.DisplayMail;
+import org.zmail.qa.selenium.projects.desktop.ui.mail.FormMailNew;
+import org.zmail.qa.selenium.projects.desktop.ui.mail.FormMailNew.Field;
 
 public class CreateMailText extends AjaxCommonTest {
 
@@ -56,8 +56,8 @@ public class CreateMailText extends AjaxCommonTest {
 		// All tests start at the login page
 		super.startingPage = app.zPageMail;
 		super.startingAccountPreferences = new HashMap<String , String>() {{
-				    put("zimbraPrefComposeFormat", "text");
-				    put("zimbraPrefReadingPaneLocation", "bottom");
+				    put("zmailPrefComposeFormat", "text");
+				    put("zmailPrefReadingPaneLocation", "bottom");
 				}};
 		
 	}
@@ -69,9 +69,9 @@ public class CreateMailText extends AjaxCommonTest {
 		
 		// Create the message data to be sent
 		MailItem mail = new MailItem();
-		mail.dToRecipients.add(new RecipientItem(ZimbraAccount.AccountA()));
-		mail.dSubject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		mail.dBodyText = "body" + ZimbraSeleniumProperties.getUniqueString();
+		mail.dToRecipients.add(new RecipientItem(ZmailAccount.AccountA()));
+		mail.dSubject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		mail.dBodyText = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		// Open the new mail form
@@ -87,13 +87,13 @@ public class CreateMailText extends AjaxCommonTest {
 		GeneralUtility.syncDesktopToZcsWithSoap(app.zGetActiveAccount());
 		app.zPageMail.zWaitForDesktopLoadingSpinner(5000);
 
-		MailItem received = MailItem.importFromSOAP(ZimbraAccount.AccountA(), "subject:("+ mail.dSubject +")");
+		MailItem received = MailItem.importFromSOAP(ZmailAccount.AccountA(), "subject:("+ mail.dSubject +")");
 
       logger.debug("===========received is: " + received);
       logger.debug("===========app is: " + app);
 		// TODO: add checks for TO, Subject, Body
 		ZAssert.assertEquals(received.dFromRecipient.dEmailAddress, app.zGetActiveAccount().EmailAddress, "Verify the from field is correct");
-		ZAssert.assertEquals(received.dToRecipients.get(0).dEmailAddress, ZimbraAccount.AccountA().EmailAddress, "Verify the to field is correct");
+		ZAssert.assertEquals(received.dToRecipients.get(0).dEmailAddress, ZmailAccount.AccountA().EmailAddress, "Verify the to field is correct");
 		ZAssert.assertEquals(received.dSubject, mail.dSubject, "Verify the subject field is correct");
 		ZAssert.assertStringContains(received.dBodyText, mail.dBodyText, "Verify the body field is correct");
 		
@@ -117,9 +117,9 @@ public class CreateMailText extends AjaxCommonTest {
 		
 		// Create the message data to be sent
 		MailItem mail = new MailItem();
-		mail.dToRecipients.add(new RecipientItem(ZimbraAccount.AccountA()));
-		mail.dSubject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		mail.dBodyText = "body" + ZimbraSeleniumProperties.getUniqueString();
+		mail.dToRecipients.add(new RecipientItem(ZmailAccount.AccountA()));
+		mail.dSubject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		mail.dBodyText = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		// Open the new mail form
@@ -134,7 +134,7 @@ public class CreateMailText extends AjaxCommonTest {
 		app.zPageMail.zWaitForDesktopLoadingSpinner(5000);
 
 		// From the receipient end, make sure the message is received
-		MailItem received = MailItem.importFromSOAP(ZimbraAccount.AccountA(), "subject:("+ mail.dSubject +")");
+		MailItem received = MailItem.importFromSOAP(ZmailAccount.AccountA(), "subject:("+ mail.dSubject +")");
 
 		ZAssert.assertNotNull(received, "Verify the message is received");
 		
@@ -147,10 +147,10 @@ public class CreateMailText extends AjaxCommonTest {
 		
 		// Create the message data to be sent
 		MailItem mail = new MailItem();
-		mail.dToRecipients.add(new RecipientItem(ZimbraAccount.AccountA(), RecipientItem.RecipientType.To));
-		mail.dCcRecipients.add(new RecipientItem(ZimbraAccount.AccountB(), RecipientItem.RecipientType.Cc));
-		mail.dSubject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		mail.dBodyText = "body" + ZimbraSeleniumProperties.getUniqueString();
+		mail.dToRecipients.add(new RecipientItem(ZmailAccount.AccountA(), RecipientItem.RecipientType.To));
+		mail.dCcRecipients.add(new RecipientItem(ZmailAccount.AccountB(), RecipientItem.RecipientType.Cc));
+		mail.dSubject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		mail.dBodyText = "body" + ZmailSeleniumProperties.getUniqueString();
 
 		// Open the new mail form
 		FormMailNew mailform = (FormMailNew) app.zPageMail.zToolbarPressButton(Button.B_NEW);
@@ -172,18 +172,18 @@ public class CreateMailText extends AjaxCommonTest {
 		for (RecipientItem r: sent.dToRecipients) {
 			to.append(r.dEmailAddress).append(",");
 		}
-		ZAssert.assertStringContains(to.toString(), ZimbraAccount.AccountA().EmailAddress, "Verify TO contains AccountA");
+		ZAssert.assertStringContains(to.toString(), ZmailAccount.AccountA().EmailAddress, "Verify TO contains AccountA");
 
 		StringBuilder cc = new StringBuilder();
 		for (RecipientItem r: sent.dCcRecipients) {
 			cc.append(r.dEmailAddress).append(",");
 		}
-		ZAssert.assertStringContains(cc.toString(), ZimbraAccount.AccountB().EmailAddress, "Verify CC contains AccountB");
+		ZAssert.assertStringContains(cc.toString(), ZmailAccount.AccountB().EmailAddress, "Verify CC contains AccountB");
 
-		MailItem toReceived = MailItem.importFromSOAP(ZimbraAccount.AccountA(), "subject:("+ mail.dSubject +")");
+		MailItem toReceived = MailItem.importFromSOAP(ZmailAccount.AccountA(), "subject:("+ mail.dSubject +")");
 		ZAssert.assertNotNull(toReceived, "Verify the TO recipient receives the message");
 
-		MailItem ccReceived = MailItem.importFromSOAP(ZimbraAccount.AccountB(), "subject:("+ mail.dSubject +")");
+		MailItem ccReceived = MailItem.importFromSOAP(ZmailAccount.AccountB(), "subject:("+ mail.dSubject +")");
 		ZAssert.assertNotNull(ccReceived, "Verify the CC recipient receives the message");
 
 
@@ -196,10 +196,10 @@ public class CreateMailText extends AjaxCommonTest {
 		
 		// Create the message data to be sent
 		MailItem mail = new MailItem();
-		mail.dToRecipients.add(new RecipientItem(ZimbraAccount.AccountA(), RecipientItem.RecipientType.To));
-		mail.dBccRecipients.add(new RecipientItem(ZimbraAccount.AccountB(), RecipientItem.RecipientType.Bcc));
-		mail.dSubject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		mail.dBodyText = "body" + ZimbraSeleniumProperties.getUniqueString();
+		mail.dToRecipients.add(new RecipientItem(ZmailAccount.AccountA(), RecipientItem.RecipientType.To));
+		mail.dBccRecipients.add(new RecipientItem(ZmailAccount.AccountB(), RecipientItem.RecipientType.Bcc));
+		mail.dSubject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		mail.dBodyText = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		// Open the new mail form
@@ -222,12 +222,12 @@ public class CreateMailText extends AjaxCommonTest {
 		for (RecipientItem r: sent.dToRecipients) {
 			to.append(r.dEmailAddress).append(",");
 		}
-		ZAssert.assertStringContains(to.toString(), ZimbraAccount.AccountA().EmailAddress, "Verify TO contains AccountA");
+		ZAssert.assertStringContains(to.toString(), ZmailAccount.AccountA().EmailAddress, "Verify TO contains AccountA");
 		
-		MailItem toReceived = MailItem.importFromSOAP(ZimbraAccount.AccountA(), "subject:("+ mail.dSubject +")");
+		MailItem toReceived = MailItem.importFromSOAP(ZmailAccount.AccountA(), "subject:("+ mail.dSubject +")");
 		ZAssert.assertNotNull(toReceived, "Verify the TO recipient receives the message");
 		
-		MailItem bccReceived = MailItem.importFromSOAP(ZimbraAccount.AccountB(), "subject:("+ mail.dSubject +")");
+		MailItem bccReceived = MailItem.importFromSOAP(ZmailAccount.AccountB(), "subject:("+ mail.dSubject +")");
 		ZAssert.assertNotNull(bccReceived, "Verify the BCC recipient receives the message");
 		
 		
@@ -251,8 +251,8 @@ public class CreateMailText extends AjaxCommonTest {
 		// verify: the f field in the GetMsgResponse
 
 		// Create the message data to be sent
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String body = "body" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String body = "body" + ZmailSeleniumProperties.getUniqueString();
 
 
 		// Open the new mail form
@@ -263,7 +263,7 @@ public class CreateMailText extends AjaxCommonTest {
 		mailform.zToolbarPressPulldown(Button.B_PRIORITY, option);
 
 		// Fill out the rest of the form
-		mailform.zFillField(Field.To, ZimbraAccount.AccountA().EmailAddress);
+		mailform.zFillField(Field.To, ZmailAccount.AccountA().EmailAddress);
 		mailform.zFillField(Field.Subject, subject);
 		mailform.zFillField(Field.Body, body);
 
@@ -273,7 +273,7 @@ public class CreateMailText extends AjaxCommonTest {
 		GeneralUtility.syncDesktopToZcsWithSoap(app.zGetActiveAccount());
       app.zPageMail.zWaitForDesktopLoadingSpinner(5000);
 
-		MailItem received = MailItem.importFromSOAP(ZimbraAccount.AccountA(), "subject:("+ subject +")");
+		MailItem received = MailItem.importFromSOAP(ZmailAccount.AccountA(), "subject:("+ subject +")");
 		ZAssert.assertNotNull(received, "Verify the message is received");
 
 		ZAssert.assertStringContains(received.getFlags(), verify, "Verify the correct priority was sent");
@@ -288,9 +288,9 @@ public class CreateMailText extends AjaxCommonTest {
       DesktopAccountItem desktopAccountItem = app.zPageAddNewAccount.zAddYahooAccountThruUI();
       DesktopAccountItem destDesktopAccountItem = app.zPageAddNewAccount.zAddGmailAccountThruUI();
 
-      ZimbraAccount account = new ZimbraAccount(desktopAccountItem.emailAddress,
+      ZmailAccount account = new ZmailAccount(desktopAccountItem.emailAddress,
             desktopAccountItem.password);
-      ZimbraAccount destAccount = new ZimbraAccount(destDesktopAccountItem.emailAddress,
+      ZmailAccount destAccount = new ZmailAccount(destDesktopAccountItem.emailAddress,
             destDesktopAccountItem.password);
       account.authenticateToMailClientHost();
       destAccount.authenticateToMailClientHost();
@@ -300,8 +300,8 @@ public class CreateMailText extends AjaxCommonTest {
       // Create the message data to be sent
       MailItem mail = new MailItem();
       mail.dToRecipients.add(new RecipientItem(destAccount));
-      mail.dSubject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-      mail.dBodyText = "body" + ZimbraSeleniumProperties.getUniqueString();
+      mail.dSubject = "subject" + ZmailSeleniumProperties.getUniqueString();
+      mail.dBodyText = "body" + ZmailSeleniumProperties.getUniqueString();
 
       // Open the new mail form
       FormMailNew mailform = (FormMailNew) app.zPageMail.zToolbarPressButton(Button.B_NEW);
@@ -346,9 +346,9 @@ public class CreateMailText extends AjaxCommonTest {
       DesktopAccountItem desktopAccountItem = app.zPageAddNewAccount.zAddGmailAccountThruUI();
       DesktopAccountItem destDesktopAccountItem = app.zPageAddNewAccount.zAddYahooAccountThruUI();
 
-      ZimbraAccount account = new ZimbraAccount(desktopAccountItem.emailAddress,
+      ZmailAccount account = new ZmailAccount(desktopAccountItem.emailAddress,
             desktopAccountItem.password);
-      ZimbraAccount destAccount = new ZimbraAccount(destDesktopAccountItem.emailAddress,
+      ZmailAccount destAccount = new ZmailAccount(destDesktopAccountItem.emailAddress,
             destDesktopAccountItem.password);
       account.authenticateToMailClientHost();
       destAccount.authenticateToMailClientHost();
@@ -358,8 +358,8 @@ public class CreateMailText extends AjaxCommonTest {
       // Create the message data to be sent
       MailItem mail = new MailItem();
       mail.dToRecipients.add(new RecipientItem(destAccount));
-      mail.dSubject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-      mail.dBodyText = "body" + ZimbraSeleniumProperties.getUniqueString();
+      mail.dSubject = "subject" + ZmailSeleniumProperties.getUniqueString();
+      mail.dBodyText = "body" + ZmailSeleniumProperties.getUniqueString();
 
       // Open the new mail form
       FormMailNew mailform = (FormMailNew) app.zPageMail.zToolbarPressButton(Button.B_NEW);
@@ -404,9 +404,9 @@ public class CreateMailText extends AjaxCommonTest {
       DesktopAccountItem desktopAccountItem = app.zPageAddNewAccount.zAddPopAccountThruUI();
       DesktopAccountItem destDesktopAccountItem = app.zPageAddNewAccount.zAddGmailImapAccountThruUI();
 
-      ZimbraAccount account = new ZimbraAccount(desktopAccountItem.emailAddress,
+      ZmailAccount account = new ZmailAccount(desktopAccountItem.emailAddress,
             desktopAccountItem.password);
-      ZimbraAccount destAccount = new ZimbraAccount(destDesktopAccountItem.emailAddress,
+      ZmailAccount destAccount = new ZmailAccount(destDesktopAccountItem.emailAddress,
             destDesktopAccountItem.password);
       account.authenticateToMailClientHost();
       destAccount.authenticateToMailClientHost();
@@ -416,8 +416,8 @@ public class CreateMailText extends AjaxCommonTest {
       // Create the message data to be sent
       MailItem mail = new MailItem();
       mail.dToRecipients.add(new RecipientItem(destAccount));
-      mail.dSubject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-      mail.dBodyText = "body" + ZimbraSeleniumProperties.getUniqueString();
+      mail.dSubject = "subject" + ZmailSeleniumProperties.getUniqueString();
+      mail.dBodyText = "body" + ZmailSeleniumProperties.getUniqueString();
 
       // Open the new mail form
       FormMailNew mailform = (FormMailNew) app.zPageMail.zToolbarPressButton(Button.B_NEW);
@@ -480,9 +480,9 @@ public class CreateMailText extends AjaxCommonTest {
       accountForm.zFill(destDesktopAccountItem);
       accountForm.zSubmit();
 
-      ZimbraAccount account = new ZimbraAccount(desktopAccountItem.emailAddress,
+      ZmailAccount account = new ZmailAccount(desktopAccountItem.emailAddress,
             desktopAccountItem.password);
-      ZimbraAccount destAccount = new ZimbraAccount(destDesktopAccountItem.emailAddress,
+      ZmailAccount destAccount = new ZmailAccount(destDesktopAccountItem.emailAddress,
             destDesktopAccountItem.password);
       account.authenticateToMailClientHost();
       destAccount.authenticateToMailClientHost();
@@ -492,8 +492,8 @@ public class CreateMailText extends AjaxCommonTest {
       // Create the message data to be sent
       MailItem mail = new MailItem();
       mail.dToRecipients.add(new RecipientItem(destAccount));
-      mail.dSubject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-      mail.dBodyText = "body" + ZimbraSeleniumProperties.getUniqueString();
+      mail.dSubject = "subject" + ZmailSeleniumProperties.getUniqueString();
+      mail.dBodyText = "body" + ZmailSeleniumProperties.getUniqueString();
 
       // Open the new mail form
       FormMailNew mailform = (FormMailNew) app.zPageMail.zToolbarPressButton(Button.B_NEW);
@@ -530,15 +530,15 @@ public class CreateMailText extends AjaxCommonTest {
             "Verify the email body");
    }
 
-	@Test(  description = "Send a mail from Zimbra to Gmail",
+	@Test(  description = "Send a mail from Zmail to Gmail",
          groups = { "functional" })
-   public void createMailFromZimbraToGmail() throws HarnessException {
+   public void createMailFromZmailToGmail() throws HarnessException {
 	   _externalAccountTest = true;
 
       DesktopAccountItem destDesktopAccountItem = app.zPageAddNewAccount.zAddGmailAccountThruUI();
 
-      ZimbraAccount account = ZimbraAccount.AccountZDC();
-      ZimbraAccount destAccount = new ZimbraAccount(destDesktopAccountItem.emailAddress,
+      ZmailAccount account = ZmailAccount.AccountZDC();
+      ZmailAccount destAccount = new ZmailAccount(destDesktopAccountItem.emailAddress,
             destDesktopAccountItem.password);
       account.authenticateToMailClientHost();
       destAccount.authenticateToMailClientHost();
@@ -548,8 +548,8 @@ public class CreateMailText extends AjaxCommonTest {
       // Create the message data to be sent
       MailItem mail = new MailItem();
       mail.dToRecipients.add(new RecipientItem(destAccount));
-      mail.dSubject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-      mail.dBodyText = "body" + ZimbraSeleniumProperties.getUniqueString();
+      mail.dSubject = "subject" + ZmailSeleniumProperties.getUniqueString();
+      mail.dBodyText = "body" + ZmailSeleniumProperties.getUniqueString();
 
       // Open the new mail form
       FormMailNew mailform = (FormMailNew) app.zPageMail.zToolbarPressButton(Button.B_NEW);
@@ -586,15 +586,15 @@ public class CreateMailText extends AjaxCommonTest {
             "Verify the email body");
    }
 
-	@Test(  description = "Send a mail from Zimbra to Yahoo",
+	@Test(  description = "Send a mail from Zmail to Yahoo",
          groups = { "functional" })
-   public void createMailFromZimbraToYahoo() throws HarnessException {
+   public void createMailFromZmailToYahoo() throws HarnessException {
       _externalAccountTest = true;
 
       DesktopAccountItem destDesktopAccountItem = app.zPageAddNewAccount.zAddYahooAccountThruUI();
 
-      ZimbraAccount account = ZimbraAccount.AccountZDC();
-      ZimbraAccount destAccount = new ZimbraAccount(destDesktopAccountItem.emailAddress,
+      ZmailAccount account = ZmailAccount.AccountZDC();
+      ZmailAccount destAccount = new ZmailAccount(destDesktopAccountItem.emailAddress,
             destDesktopAccountItem.password);
       account.authenticateToMailClientHost();
       destAccount.authenticateToMailClientHost();
@@ -604,8 +604,8 @@ public class CreateMailText extends AjaxCommonTest {
       // Create the message data to be sent
       MailItem mail = new MailItem();
       mail.dToRecipients.add(new RecipientItem(destAccount));
-      mail.dSubject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-      mail.dBodyText = "body" + ZimbraSeleniumProperties.getUniqueString();
+      mail.dSubject = "subject" + ZmailSeleniumProperties.getUniqueString();
+      mail.dBodyText = "body" + ZmailSeleniumProperties.getUniqueString();
 
       // Open the new mail form
       FormMailNew mailform = (FormMailNew) app.zPageMail.zToolbarPressButton(Button.B_NEW);
@@ -642,7 +642,7 @@ public class CreateMailText extends AjaxCommonTest {
             "Verify the email body");
    }
 
-	public void multipleAccountsSetup(ZimbraAccount mainAccount) throws HarnessException {
+	public void multipleAccountsSetup(ZmailAccount mainAccount) throws HarnessException {
       app.zPageLogin.zLogin(mainAccount);
       super.startingPage.zNavigateTo();
 
@@ -668,7 +668,7 @@ public class CreateMailText extends AjaxCommonTest {
 
          _externalAccountTest = false;
          _emailSubjectCreated = null;
-         ZimbraAccount.ResetAccountZDC();
+         ZmailAccount.ResetAccountZDC();
       }
    }
 

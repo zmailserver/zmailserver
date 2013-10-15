@@ -18,13 +18,13 @@ ZaServerVersionInfo = function() {}
 
 ZaServerVersionInfo.load = function () {
 	if (!ZaServerVersionInfo._loaded){
-		var soapDoc = AjxSoapDoc.create("BatchRequest", "urn:zimbra");
+		var soapDoc = AjxSoapDoc.create("BatchRequest", "urn:zmail");
 		soapDoc.setMethodAttribute("onerror", "continue");
-		var versionInfoReq = soapDoc.set("GetVersionInfoRequest", null, null, ZaZimbraAdmin.URN);
+		var versionInfoReq = soapDoc.set("GetVersionInfoRequest", null, null, ZaZmailAdmin.URN);
 		
 		
 		//var licenseInfoReq = soapDoc.set("GetLicenseInfoRequest");
-		//licenseInfoReq.setAttribute("xmlns", ZaZimbraAdmin.URN);
+		//licenseInfoReq.setAttribute("xmlns", ZaZmailAdmin.URN);
 		var command = new ZmCsfeCommand();
 		var params = new Object();
 		params.soapDoc = soapDoc;	
@@ -36,7 +36,7 @@ ZaServerVersionInfo.load = function () {
 		ZaServerVersionInfo.host = versionResponse.info[0].host;
 		ZaServerVersionInfo.release = versionResponse.info[0].release;
 		ZaServerVersionInfo.version = versionResponse.info[0].version;
-		//license expiration information is handled in com_zimbra_license.js
+		//license expiration information is handled in org_zmail_license.js
 	}
 };
 

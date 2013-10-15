@@ -17,7 +17,7 @@
 <%@ page language="java" import="org.apache.commons.httpclient.methods.multipart.*" %>
 <%@ page language="java" import="org.apache.commons.httpclient.cookie.CookiePolicy" %>
 <%@ page language="java" import="java.io.InputStream" %>
-<%@ page language="java" import="com.zimbra.common.util.StringUtil" %>
+<%@ page language="java" import="org.zmail.common.util.StringUtil" %>
 <%
     String action = request.getParameter("_action");
     String authHeader = request.getParameter("_auth");
@@ -33,7 +33,7 @@
         method.setQueryString(new NameValuePair[]{
                                 //new NameValuePair("oauth_callback", "oob"),
                                 new NameValuePair("scope", scope),
-                                new NameValuePair("xoauth_displayname", "Zimbra")
+                                new NameValuePair("xoauth_displayname", "Zmail")
                             });
         
         try {

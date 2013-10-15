@@ -30,7 +30,7 @@ public:
     CMapiWrapper()
     {
         baseMigrationObj = new MapiMigration();
-        exchadmin = new Zimbra::MAPI::ExchangeAdmin(L"10.117.82.161");
+        exchadmin = new Zmail::MAPI::ExchangeAdmin(L"10.117.82.161");
     }
 
     DECLARE_REGISTRY_RESOURCEID(IDR_MAPIWRAPPER) BEGIN_COM_MAP(
@@ -43,7 +43,7 @@ public:
     void FinalRelease() {}
 
     CMigration *baseMigrationObj;
-    Zimbra::MAPI::ExchangeAdmin *exchadmin;
+    Zmail::MAPI::ExchangeAdmin *exchadmin;
 
     STDMETHOD(ConnectToServer) (BSTR ServerHostName, BSTR Port, BSTR AdminID);
     STDMETHOD(GlobalInit) (BSTR pMAPITarget, BSTR pAdminUser, BSTR pAdminPassword,

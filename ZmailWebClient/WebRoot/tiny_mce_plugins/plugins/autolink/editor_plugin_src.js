@@ -89,7 +89,7 @@
 					while (endContainer.nodeType != 3 && endContainer.firstChild)
 						endContainer = endContainer.firstChild;
 
-                    if( endContainer.nodeType !== 3) {//Zimbra code
+                    if( endContainer.nodeType !== 3) {//Zmail code
                         return;
                     }
 					r.setStart(endContainer, 0);

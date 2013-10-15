@@ -2,26 +2,26 @@
 # __LDAP
 
 ldap: CUR_DEST_ROOT := $(LDAP_DEST_ROOT)
-ldap: CUR_PACKAGE_SPEC := $(BUILD_ROOT)/zimbra-ldap.spec
-ldap: CUR_PACKAGE_NAME := zimbra-ldap
+ldap: CUR_PACKAGE_SPEC := $(BUILD_ROOT)/zmail-ldap.spec
+ldap: CUR_PACKAGE_NAME := zmail-ldap
 ldap: $(PACKAGE_DIR) ldap_stage ldap_pkg_spec_$(PACKAGE_EXT)
 	(cd $(CUR_DEST_ROOT); \
 		$(PACKAGING_COMMAND) $(PACKAGING_OPTIONS) )
 
 ldap_pkg_spec_ccs:
 
-ldap_pkg_spec_pkg: $(BUILD_ROOT)/resources/zimbra-ldap $(BUILD_ROOT)/zimbra-ldap.Info.plist $(BUILD_ROOT)/zimbra-ldap.Description.plist
+ldap_pkg_spec_pkg: $(BUILD_ROOT)/resources/zmail-ldap $(BUILD_ROOT)/zmail-ldap.Info.plist $(BUILD_ROOT)/zmail-ldap.Description.plist
 
-$(BUILD_ROOT)/zimbra-ldap.Description.plist:
-	cat $(PACKAGE_CONF_DIR)/Spec/zimbra-ldap.Description.plist | \
+$(BUILD_ROOT)/zmail-ldap.Description.plist:
+	cat $(PACKAGE_CONF_DIR)/Spec/zmail-ldap.Description.plist | \
 	sed -e 's/@@VERSION@@/$(VERSION_TAG)/' \
 	-e 's/@@RELEASE@@/$(RELEASE)/' \
 	-e 's/@@MAJOR@@/$(MAJOR)/' \
 	-e 's/@@MICRO@@/$(MICRO)/' \
 	-e 's/@@MINOR@@/$(MINOR)/' > $@
 
-$(BUILD_ROOT)/zimbra-ldap.Info.plist:
-	cat $(PACKAGE_CONF_DIR)/Spec/zimbra-ldap.Info.plist | \
+$(BUILD_ROOT)/zmail-ldap.Info.plist:
+	cat $(PACKAGE_CONF_DIR)/Spec/zmail-ldap.Info.plist | \
 	sed -e 's/@@VERSION@@/$(VERSION_TAG)/' \
 	-e 's/@@RELEASE@@/$(RELEASE)/' \
 	-e 's/@@MAJOR@@/$(MAJOR)/' \
@@ -29,46 +29,46 @@ $(BUILD_ROOT)/zimbra-ldap.Info.plist:
 	-e 's/@@BUILDNUM@@/$(BUILDNUM)/' \
 	-e 's/@@MINOR@@/$(MINOR)/' > $@
 
-$(BUILD_ROOT)/resources/zimbra-ldap:
+$(BUILD_ROOT)/resources/zmail-ldap:
 	mkdir -p $@
-	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zimbra-ldap.postupgrade $@/postupgrade
+	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zmail-ldap.postupgrade $@/postupgrade
 	chmod 755 $@/postupgrade
-	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zimbra-ldap.postinstall $@/postinstall
+	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zmail-ldap.postinstall $@/postinstall
 	chmod 755 $@/postinstall
 
 ldap_pkg_spec_deb: $(LDAP_DEST_ROOT)/DEBIAN/control
 
 $(LDAP_DEST_ROOT)/DEBIAN: force
 	mkdir -p $@
-	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zimbra-ldap.pre $@/preinst
-	cat $(PACKAGE_CONF_DIR)/Spec/Scripts/zimbra-ldap.post >> $@/postinst
+	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zmail-ldap.pre $@/preinst
+	cat $(PACKAGE_CONF_DIR)/Spec/Scripts/zmail-ldap.post >> $@/postinst
 	chmod 555 $@/*
 
 $(LDAP_DEST_ROOT)/DEBIAN/control: $(LDAP_DEST_ROOT)/DEBIAN force
-	cat $(PACKAGE_CONF_DIR)/Spec/zimbra-ldap.deb | \
+	cat $(PACKAGE_CONF_DIR)/Spec/zmail-ldap.deb | \
 	sed -e 's/@@VERSION@@/$(VERSION_TAG)/' \
 	-e 's/@@RELEASE@@/$(RELEASE)/' \
 	-e 's/@@ARCH@@/$(ARCH)/' > $@
 
-ldap_pkg_spec_rpm: $(BUILD_ROOT)/zimbra-ldap.spec
+ldap_pkg_spec_rpm: $(BUILD_ROOT)/zmail-ldap.spec
 
-$(BUILD_ROOT)/zimbra-ldap.spec:
-	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zimbra-ldap.pre $(BUILD_ROOT)
-	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zimbra-ldap.post $(BUILD_ROOT)
-	cat $(PACKAGE_CONF_DIR)/Spec/zimbra-ldap.spec | \
+$(BUILD_ROOT)/zmail-ldap.spec:
+	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zmail-ldap.pre $(BUILD_ROOT)
+	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zmail-ldap.post $(BUILD_ROOT)
+	cat $(PACKAGE_CONF_DIR)/Spec/zmail-ldap.spec | \
 		sed -e 's/@@VERSION@@/$(VERSION_TAG)/' \
 		-e 's/@@RELEASE@@/$(RELEASE)/' \
 		-e 's/^Copyright:/$(RPMCOPYRIGHTSTR):/' \
-		-e '/^%pre$$/ r zimbra-ldap.pre' \
-		-e '/^%post$$/ r zimbra-ldap.post' > $(BUILD_ROOT)/zimbra-ldap.spec
-	rm -f zimbra-ldap.pre
-	rm -f zimbra-ldap.post
-	echo "%attr(-, zimbra, zimbra) /opt/zimbra/libtool-$(LIBTOOL_VERSION)" >> \
-		$(BUILD_ROOT)/zimbra-ldap.spec
-	echo "%attr(-, zimbra, zimbra) /opt/zimbra/openldap-$(LDAP_VERSION)" >> \
-		$(BUILD_ROOT)/zimbra-ldap.spec
-	echo "" >> $(BUILD_ROOT)/zimbra-ldap.spec
-	echo "%clean" >> $(BUILD_ROOT)/zimbra-ldap.spec
+		-e '/^%pre$$/ r zmail-ldap.pre' \
+		-e '/^%post$$/ r zmail-ldap.post' > $(BUILD_ROOT)/zmail-ldap.spec
+	rm -f zmail-ldap.pre
+	rm -f zmail-ldap.post
+	echo "%attr(-, zmail, zmail) /opt/zmail/libtool-$(LIBTOOL_VERSION)" >> \
+		$(BUILD_ROOT)/zmail-ldap.spec
+	echo "%attr(-, zmail, zmail) /opt/zmail/openldap-$(LDAP_VERSION)" >> \
+		$(BUILD_ROOT)/zmail-ldap.spec
+	echo "" >> $(BUILD_ROOT)/zmail-ldap.spec
+	echo "%clean" >> $(BUILD_ROOT)/zmail-ldap.spec
 
 ldap_stage: $(LDAP_COMPONENTS)
 
@@ -88,10 +88,10 @@ $(LDAP_DEST_DIR)/$(LDAP_DIR)-$(LDAP_VERSION): $(LDAP_DEST_DIR)
 		$(LDAP_DEST_DIR)/$(LDAP_DIR)-$(LDAP_VERSION)/etc/openldap/schema/amavisd.ldif
 	cp -f $(SERVICE_DIR)/conf/ldap/opendkim.ldif \
 		$(LDAP_DEST_DIR)/$(LDAP_DIR)-$(LDAP_VERSION)/etc/openldap/schema/opendkim.ldif
-	cp $(SERVICE_DIR)/build/ldap-config/zimbra.schema \
+	cp $(SERVICE_DIR)/build/ldap-config/zmail.schema \
 		$(LDAP_DEST_DIR)/$(LDAP_DIR)-$(LDAP_VERSION)/etc/openldap/schema
-	cp $(SERVICE_DIR)/build/ldap-config/config/zimbra.ldif \
-		$(LDAP_DEST_DIR)/$(LDAP_DIR)-$(LDAP_VERSION)/etc/openldap/schema/zimbra.ldif
+	cp $(SERVICE_DIR)/build/ldap-config/config/zmail.ldif \
+		$(LDAP_DEST_DIR)/$(LDAP_DIR)-$(LDAP_VERSION)/etc/openldap/schema/zmail.ldif
 	cp $(SERVICE_DIR)/build/ldap-config/*.ldif \
 		$(LDAP_DEST_DIR)/$(LDAP_DIR)-$(LDAP_VERSION)/etc/openldap
 	mkdir -p $(LDAP_DEST_DIR)/$(LDAP_DIR)-$(LDAP_VERSION)/etc/openldap/config/cn=config

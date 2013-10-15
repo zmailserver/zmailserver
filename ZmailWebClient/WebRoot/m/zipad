@@ -1,13 +1,13 @@
-<%@ page import="com.zimbra.common.mime.MimeCompoundHeader" %>
-<%@ page import="com.zimbra.cs.httpclient.URLUtil" %>
+<%@ page import="org.zmail.common.mime.MimeCompoundHeader" %>
+<%@ page import="org.zmail.cs.httpclient.URLUtil" %>
 <%@ page buffer="8kb" autoFlush="true" %>
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
-<%@ taglib prefix="mo" uri="com.zimbra.mobileclient" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
+<%@ taglib prefix="mo" uri="org.zmail.mobileclient" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
-<%@ taglib prefix="app" uri="com.zimbra.htmlclient" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
+<%@ taglib prefix="app" uri="org.zmail.htmlclient" %>
 <c:set var="F_LIMIT" value="${not empty sessionScope.F_LIMIT ? sessionScope.F_LIMIT : 100}" scope="session"/>
 <c:if test="${empty param.ajax}"><?xml version="1.0" encoding="UTF-8"?>
 
@@ -26,7 +26,7 @@
     </c:url>
 <%--</c:if>--%>
 <c:if test="${not empty param.djs}"><c:set var="djs" value="${fn:escapeXml(param.djs)}" scope="session" /></c:if>
-<c:set var="version" value="${initParam.zimbraCacheBusterVersion}"/>
+<c:set var="version" value="${initParam.zmailCacheBusterVersion}"/>
 <c:set var="uiv" value="1" scope="session"/>
 <mo:handleError>
     <zm:getMailbox var="mailbox"/>
@@ -45,18 +45,18 @@
     <c:choose>
         <c:when test="${not empty param.doPrefsAction}">
             <zm:modifyPrefs var="updated">
-                <zm:pref name="zimbraPrefTimeZoneId" value="${param.zimbraPrefTimeZoneId}"/>
+                <zm:pref name="zmailPrefTimeZoneId" value="${param.zmailPrefTimeZoneId}"/>
                 <c:if test="${mailbox.features.conversations}">
-                    <zm:pref name="zimbraPrefGroupMailBy" value="${param.zimbraPrefGroupMailBy}"/>
+                    <zm:pref name="zmailPrefGroupMailBy" value="${param.zmailPrefGroupMailBy}"/>
                 </c:if>
                 <c:if test="${mailbox.features.initialSearchPreference}">
-                    <zm:pref name="zimbraPrefMailInitialSearch" value="${param.zimbraPrefMailInitialSearch}"/>
+                    <zm:pref name="zmailPrefMailInitialSearch" value="${param.zmailPrefMailInitialSearch}"/>
                 </c:if>
-                <zm:pref name="zimbraPrefAutoAddAddressEnabled" value="${param.zimbraPrefAutoAddAddressEnabled eq 'TRUE' ? 'TRUE' : 'FALSE'}"/>
-                <zm:pref name="zimbraPrefContactsPerPage" value="${param.zimbraPrefContactsPerPage}"/>
-                <zm:pref name="zimbraPrefMailItemsPerPage" value="${param.zimbraPrefMailItemsPerPage}"/>
-                <zm:pref name="zimbraPrefCalendarFirstdayOfWeek" value="${param.zimbraPrefCalendarFirstdayOfWeek}"/>
-                <zm:pref name="zimbraPrefUseTimeZoneListInCalendar" value="${param.zimbraPrefUseTimeZoneListInCalendar eq 'TRUE' ? 'TRUE' : 'FALSE'}"/>
+                <zm:pref name="zmailPrefAutoAddAddressEnabled" value="${param.zmailPrefAutoAddAddressEnabled eq 'TRUE' ? 'TRUE' : 'FALSE'}"/>
+                <zm:pref name="zmailPrefContactsPerPage" value="${param.zmailPrefContactsPerPage}"/>
+                <zm:pref name="zmailPrefMailItemsPerPage" value="${param.zmailPrefMailItemsPerPage}"/>
+                <zm:pref name="zmailPrefCalendarFirstdayOfWeek" value="${param.zmailPrefCalendarFirstdayOfWeek}"/>
+                <zm:pref name="zmailPrefUseTimeZoneListInCalendar" value="${param.zmailPrefUseTimeZoneListInCalendar eq 'TRUE' ? 'TRUE' : 'FALSE'}"/>
             </zm:modifyPrefs>
             <c:if test="${ua.isiPad == false}">
             <c:set var="flimit" value="${zm:cook(param.F_LIMIT)}"/>
@@ -123,7 +123,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-<title><fmt:message key="zimbraTitle"/></title>
+<title><fmt:message key="zmailTitle"/></title>
 <meta content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, width=device-width" name="viewport">
 <script type="text/javascript">window.onerror=function(m,u,l){if(window.console){window.console.log("An error occured in: "+u+"\n{\n\tmsg: "+m+",\n\tline: "+l+"\n}");}return false;};</script>
 <c:if test="${empty djs or not djs}"><script type="text/javascript">window.currentUrl='<c:url value="${currentUrl}"><c:param name="ajax" value="true"/></c:url>';<c:import url="/m/mojs${dbg ? '?dev=1':''}"/></script></c:if>
@@ -145,7 +145,7 @@
 			<div class="quota">
 
                 <c:set var="userQuota" value="0"/>
-                <c:set var="max" value="${mailbox.attrs.zimbraMailQuota[0]}"/>
+                <c:set var="max" value="${mailbox.attrs.zmailMailQuota[0]}"/>
                 <c:if test="${max != 0}">
                     <c:set var="userQuota" value="${(mailbox.size*100)/max}"/>
                 </c:if>
@@ -168,12 +168,12 @@
 				${fn:escapeXml(empty mailbox.defaultIdentity.fromDisplay ? mailbox.name : mailbox.defaultIdentity.fromDisplay)}
 			</div>
         	<div class ="alignLeft copyrights">
-       		 	&copy; 2010 <a href="#">Zimbra</a>. All rights reserved.
+       		 	&copy; 2010 <a href="#">Zmail</a>. All rights reserved.
         	</div>
         	-->
         	
-       <div class="button alignLeft" style="width: 20px; margin: 5px 0 0 10px; height: 14px; padding: 4px;"><app:img src="zimbra/ImgRefresh.png" border="0"/></div>
-        	<a href="www.zimbra.com" target="_new" class="alignLeft"><div class="logo"></div></a>
+       <div class="button alignLeft" style="width: 20px; margin: 5px 0 0 10px; height: 14px; padding: 4px;"><app:img src="zmail/ImgRefresh.png" border="0"/></div>
+        	<a href="www.zmail.com" target="_new" class="alignLeft"><div class="logo"></div></a>
         	<div class ="alignRight buttonBottom">
         		<c:url var="logoutUrl" value="${context_url}"><c:param name="loginOp" value="logout"/><c:param name="client" value="mobile"/></c:url>
        		 	<a href="${logoutUrl}" id="_logout" noajax='true'><fmt:message key="logOut"/></a>
@@ -185,7 +185,7 @@
     
 	<div class="topbar" style="display:none;">
 
-		<a href="www.zimbra.com" target="_new"><div class="logo"></div></a>
+		<a href="www.zmail.com" target="_new"><div class="logo"></div></a>
 
 		
 				<ul class="ul alignLeft">

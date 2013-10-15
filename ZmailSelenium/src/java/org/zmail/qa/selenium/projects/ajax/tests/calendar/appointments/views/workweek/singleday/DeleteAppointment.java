@@ -14,20 +14,20 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.calendar.appointments.views.workweek.singleday;
+package org.zmail.qa.selenium.projects.ajax.tests.calendar.appointments.views.workweek.singleday;
 
 import java.awt.event.KeyEvent;
 import java.util.Calendar;
 
 import org.testng.annotations.*;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.CalendarWorkWeekTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.AppAjaxClient;
-import com.zimbra.qa.selenium.projects.ajax.ui.calendar.DialogConfirmDeleteAppointment;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.CalendarWorkWeekTest;
+import org.zmail.qa.selenium.projects.ajax.ui.AppAjaxClient;
+import org.zmail.qa.selenium.projects.ajax.ui.calendar.DialogConfirmDeleteAppointment;
 
 @SuppressWarnings("unused")
 public class DeleteAppointment extends CalendarWorkWeekTest {
@@ -45,8 +45,8 @@ public class DeleteAppointment extends CalendarWorkWeekTest {
 		// Creating objects for appointment data
 		String tz, apptSubject, apptBody;
 		tz = ZTimeZone.TimeZoneEST.getID();
-		apptSubject = ZimbraSeleniumProperties.getUniqueString();
-		apptBody = ZimbraSeleniumProperties.getUniqueString();
+		apptSubject = ZmailSeleniumProperties.getUniqueString();
+		apptBody = ZmailSeleniumProperties.getUniqueString();
 		
 		// Absolute dates in UTC zone
 		Calendar now = this.calendarWeekDayUTC;
@@ -54,7 +54,7 @@ public class DeleteAppointment extends CalendarWorkWeekTest {
 		ZDate endUTC   = new ZDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH) + 1, now.get(Calendar.DAY_OF_MONTH), 14, 0, 0);
 		
         app.zGetActiveAccount().soapSend(
-    			"<CreateAppointmentRequest xmlns='urn:zimbraMail'>"
+    			"<CreateAppointmentRequest xmlns='urn:zmailMail'>"
     		+		"<m>"
     		+			"<inv method='REQUEST' type='event' fb='B' transp='O' allDay='0' name='"+ apptSubject +"'>"
     		+				"<s d='"+ startUTC.toTimeZone(tz).toYYYYMMDDTHHMMSS() +"' tz='"+ tz +"'/>"
@@ -87,8 +87,8 @@ public class DeleteAppointment extends CalendarWorkWeekTest {
 		// Creating objects for appointment data
 		String tz, apptSubject, apptBody;
 		tz = ZTimeZone.TimeZoneEST.getID();
-		apptSubject = ZimbraSeleniumProperties.getUniqueString();
-		apptBody = ZimbraSeleniumProperties.getUniqueString();
+		apptSubject = ZmailSeleniumProperties.getUniqueString();
+		apptBody = ZmailSeleniumProperties.getUniqueString();
 		
 		// Absolute dates in UTC zone
 		Calendar now = this.calendarWeekDayUTC;
@@ -96,7 +96,7 @@ public class DeleteAppointment extends CalendarWorkWeekTest {
 		ZDate endUTC   = new ZDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH) + 1, now.get(Calendar.DAY_OF_MONTH), 14, 0, 0);
 		
         app.zGetActiveAccount().soapSend(
-                          "<CreateAppointmentRequest xmlns='urn:zimbraMail'>" +
+                          "<CreateAppointmentRequest xmlns='urn:zmailMail'>" +
                                "<m>"+
                                "<inv method='REQUEST' type='event' fb='B' transp='O' allDay='0' name='"+ apptSubject +"'>"+
                                "<s d='"+ startUTC.toTimeZone(tz).toYYYYMMDDTHHMMSS() +"' tz='"+ tz +"'/>" +
@@ -138,8 +138,8 @@ public class DeleteAppointment extends CalendarWorkWeekTest {
 		// Creating objects for appointment data
 		String tz, apptSubject, apptBody;
 		tz = ZTimeZone.TimeZoneEST.getID();
-		apptSubject = ZimbraSeleniumProperties.getUniqueString();
-		apptBody = ZimbraSeleniumProperties.getUniqueString();
+		apptSubject = ZmailSeleniumProperties.getUniqueString();
+		apptBody = ZmailSeleniumProperties.getUniqueString();
 		
 		// Absolute dates in UTC zone
 		Calendar now = this.calendarWeekDayUTC;
@@ -147,7 +147,7 @@ public class DeleteAppointment extends CalendarWorkWeekTest {
 		ZDate endUTC   = new ZDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH) + 1, now.get(Calendar.DAY_OF_MONTH), 14, 0, 0);
 		
         app.zGetActiveAccount().soapSend(
-                          "<CreateAppointmentRequest xmlns='urn:zimbraMail'>" +
+                          "<CreateAppointmentRequest xmlns='urn:zmailMail'>" +
                                "<m>"+
                                "<inv method='REQUEST' type='event' fb='B' transp='O' allDay='0' name='"+ apptSubject +"'>"+
                                "<s d='"+ startUTC.toTimeZone(tz).toYYYYMMDDTHHMMSS() +"' tz='"+ tz +"'/>" +
@@ -170,7 +170,7 @@ public class DeleteAppointment extends CalendarWorkWeekTest {
 		
 		//-- Verification
 		app.zGetActiveAccount().soapSend(
-					"<SearchRequest xmlns='urn:zimbraMail' types='appointment' calExpandInstStart='"+ startUTC.addDays(-7).toMillis() +"' calExpandInstEnd='"+ startUTC.addDays(7).toMillis() +"'>"
+					"<SearchRequest xmlns='urn:zmailMail' types='appointment' calExpandInstStart='"+ startUTC.addDays(-7).toMillis() +"' calExpandInstEnd='"+ startUTC.addDays(7).toMillis() +"'>"
 				+	"<query>subject:("+ apptSubject +")</query>"
 				+	"</SearchRequest>");
 

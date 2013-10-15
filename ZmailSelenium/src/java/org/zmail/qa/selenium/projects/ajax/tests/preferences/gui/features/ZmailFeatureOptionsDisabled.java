@@ -14,24 +14,24 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.preferences.gui.features;
+package org.zmail.qa.selenium.projects.ajax.tests.preferences.gui.features;
 
 import java.util.HashMap;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogError;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogError.DialogErrorID;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogError;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogError.DialogErrorID;
 
-public class ZimbraFeatureOptionsDisabled extends AjaxCommonTest {
+public class ZmailFeatureOptionsDisabled extends AjaxCommonTest {
 
 	@SuppressWarnings("serial")
-	public ZimbraFeatureOptionsDisabled() {
-		logger.info("New "+ ZimbraFeatureOptionsDisabled.class.getCanonicalName());
+	public ZmailFeatureOptionsDisabled() {
+		logger.info("New "+ ZmailFeatureOptionsDisabled.class.getCanonicalName());
 
 		// All tests start at the login page
 		super.startingPage = app.zPageMail;
@@ -40,7 +40,7 @@ public class ZimbraFeatureOptionsDisabled extends AjaxCommonTest {
 			{
 
 				// Options/Preferences is disabled
-				put("zimbraFeatureOptionsEnabled", "FALSE");
+				put("zmailFeatureOptionsEnabled", "FALSE");
 
 			}
 		};
@@ -48,7 +48,7 @@ public class ZimbraFeatureOptionsDisabled extends AjaxCommonTest {
 	}
 	
 	/**
-	 * See http://bugzilla.zimbra.com/show_bug.cgi?id=62011 - WONTFIX
+	 * See http://bugzilla.zmail.com/show_bug.cgi?id=62011 - WONTFIX
 	 * @throws HarnessException
 	 */
 	@Bugs(ids="63652")	
@@ -56,14 +56,14 @@ public class ZimbraFeatureOptionsDisabled extends AjaxCommonTest {
 			description = "Load the app with Preferences tab disabled", 
 			groups = { "functional" }
 			)
-	public void ZimbraFeatureOptionsDisabled_01() throws HarnessException {
+	public void ZmailFeatureOptionsDisabled_01() throws HarnessException {
 		
 		// Verify that the main app is loaded
 		ZAssert.assertTrue(app.zPageMain.zIsActive(), "Verify that the main app is loaded");
 		ZAssert.assertTrue(app.zPageMail.zIsActive(), "Verify that the mail app is loaded");
 
 		// Verify bug 63652
-		DialogError dialog = app.zPageMain.zGetErrorDialog(DialogErrorID.Zimbra);
+		DialogError dialog = app.zPageMain.zGetErrorDialog(DialogErrorID.Zmail);
 		ZAssert.assertFalse(dialog.zIsActive(), "Verify that the Permission Denied error dialog is not present");
 		
 	}

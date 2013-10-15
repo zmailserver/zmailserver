@@ -6,7 +6,7 @@ using System.Windows.Navigation;
 using System.Windows;
 using System;
 
-namespace ZimbraMigrationXBAP
+namespace ZmailMigrationXBAP
 {
 // / <summary>
 // / Interaction logic for App.xaml

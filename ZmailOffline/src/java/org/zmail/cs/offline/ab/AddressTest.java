@@ -12,10 +12,10 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.ab;
+package org.zmail.cs.offline.ab;
 
-import com.zimbra.cs.offline.ab.Address;
-import com.zimbra.cs.offline.ab.Name;
+import org.zmail.cs.offline.ab.Address;
+import org.zmail.cs.offline.ab.Name;
 
 public class AddressTest {
     private static final String ADDRESSES[] = {

@@ -13,12 +13,12 @@
 # basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
 # ***** END LICENSE BLOCK *****
 # 
-if [ -L /opt/zimbra/logger/mysql ]; then
-  rm -f /opt/zimbra/logger/mysql
+if [ -L /opt/zmail/logger/mysql ]; then
+  rm -f /opt/zmail/logger/mysql
 fi
 
-PKG=`echo ${RECEIPT_PATH} | sed -e 's|.*/\(zimbra-logger.[^/]*pkg\)/.*|\1|' | sed -e 's/\./-/'`
+PKG=`echo ${RECEIPT_PATH} | sed -e 's|.*/\(zmail-logger.[^/]*pkg\)/.*|\1|' | sed -e 's/\./-/'`
 D=`date +%s`
-echo "${D}: INSTALLED ${PKG}" >> /opt/zimbra/.install_history
+echo "${D}: INSTALLED ${PKG}" >> /opt/zmail/.install_history
 
 exit 0

@@ -207,7 +207,7 @@ function(params, result) {
 
 ZmFreeBusyCache.prototype._getFreeBusyInfo =
 function(startTime, endTime, emailList, callback, errorCallback, noBusyOverlay, acct, excludedId) {
-	var soapDoc = AjxSoapDoc.create("GetFreeBusyRequest", "urn:zimbraMail");
+	var soapDoc = AjxSoapDoc.create("GetFreeBusyRequest", "urn:zmailMail");
 	soapDoc.setMethodAttribute("s", startTime);
 	soapDoc.setMethodAttribute("e", endTime);
 	soapDoc.setMethodAttribute("uid", emailList);
@@ -317,7 +317,7 @@ function(params, result) {
 
 ZmFreeBusyCache.prototype._getWorkingHours =
 function(startTime, endTime, emailList, callback, errorCallback, noBusyOverlay, acct) {
-    var soapDoc = AjxSoapDoc.create("GetWorkingHoursRequest", "urn:zimbraMail");
+    var soapDoc = AjxSoapDoc.create("GetWorkingHoursRequest", "urn:zmailMail");
     soapDoc.setMethodAttribute("s", startTime);
     soapDoc.setMethodAttribute("e", endTime);
     soapDoc.setMethodAttribute("name", emailList);

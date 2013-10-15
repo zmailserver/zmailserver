@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.util;
+package org.zmail.qa.selenium.framework.util;
 
 import java.io.File;
 import java.io.IOException;
@@ -45,37 +45,37 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.dom4j.InvalidXPathException;
 
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.net.SocketFactories;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.SoapFaultException;
-import com.zimbra.common.soap.SoapParseException;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.common.soap.SoapUtil;
-import com.zimbra.common.soap.Element.ContainerException;
-import com.zimbra.common.soap.XmlParseException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.qa.selenium.framework.core.*;
-import com.zimbra.qa.selenium.framework.ui.I18N;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties.AppType;
-import com.zimbra.qa.selenium.framework.util.staf.Stafpostqueue;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.net.SocketFactories;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.SoapFaultException;
+import org.zmail.common.soap.SoapParseException;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.common.soap.SoapUtil;
+import org.zmail.common.soap.Element.ContainerException;
+import org.zmail.common.soap.XmlParseException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.qa.selenium.framework.core.*;
+import org.zmail.qa.selenium.framework.ui.I18N;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties.AppType;
+import org.zmail.qa.selenium.framework.util.staf.Stafpostqueue;
 
 
 @SuppressWarnings("deprecation")
-public class ZimbraAccount {
-	private static Logger logger = LogManager.getLogger(ZimbraAccount.class);
+public class ZmailAccount {
+	private static Logger logger = LogManager.getLogger(ZmailAccount.class);
 
 	protected SoapClient soapClient = new SoapClient();
-	public String ZimbraSoapClientHost = null;
-	public String ZimbraSoapAdminHost = null;
-	public String ZimbraMailHost = null;
-	public String ZimbraMailClientHost = null;
-	public String ZimbraId = null;
+	public String ZmailSoapClientHost = null;
+	public String ZmailSoapAdminHost = null;
+	public String ZmailMailHost = null;
+	public String ZmailMailClientHost = null;
+	public String ZmailId = null;
 	public String EmailAddress = null;
 	public String Password = null;
 	public boolean accountIsDirty = false;
-	protected String ZimbraPrefLocale = Locale.getDefault().toString();
+	protected String ZmailPrefLocale = Locale.getDefault().toString();
 	protected String MyAuthToken = null;
 	protected String MyClientAuthToken = null;
 	protected Map<String, String> preferences = new HashMap<String, String>();
@@ -85,7 +85,7 @@ public class ZimbraAccount {
 	 * Create an account with the email address account<num>@<testdomain>
 	 * The password is set to config property "adminPwd"
 	 */
-	public ZimbraAccount() {
+	public ZmailAccount() {
 		this(null, null);
 	}
 
@@ -93,12 +93,12 @@ public class ZimbraAccount {
 	 * Create an account with the email address <name>@<domain>
 	 * The password is set to config property "adminPwd"
 	 */
-	public ZimbraAccount(String email, String password) {
+	public ZmailAccount(String email, String password) {
 
 		try {
 			if ( email == null ) {
-				setPref("displayName", ZimbraSeleniumProperties.getStringProperty("locale").toLowerCase().replace("_", "") + ZimbraSeleniumProperties.getUniqueString());
-				email = getPref("displayName") + "@" + ZimbraSeleniumProperties.getStringProperty("testdomain", "testdomain.com");
+				setPref("displayName", ZmailSeleniumProperties.getStringProperty("locale").toLowerCase().replace("_", "") + ZmailSeleniumProperties.getUniqueString());
+				email = getPref("displayName") + "@" + ZmailSeleniumProperties.getStringProperty("testdomain", "testdomain.com");
 			} else {
 				setPref("displayName", email.split("@")[0]);
 			}
@@ -109,18 +109,18 @@ public class ZimbraAccount {
 		EmailAddress = email;
 
 		if ( password == null ) {
-			password = ZimbraSeleniumProperties.getStringProperty("adminPwd", "test123");
+			password = ZmailSeleniumProperties.getStringProperty("adminPwd", "test123");
 		}
 		Password = password;
 	}
 
 	/**
 	 * Get the user account logged into ZDC being tested
-	 * @return the ZimbraAccount object representing the test account
+	 * @return the ZmailAccount object representing the test account
 	 */
-	public static synchronized ZimbraAccount AccountZDC() {
+	public static synchronized ZmailAccount AccountZDC() {
 		if ( _AccountZDC == null ) {
-			_AccountZDC = new ZimbraAccount();
+			_AccountZDC = new ZmailAccount();
 			_AccountZDC.provision();
 
 			logger.debug("Authenticating Mail server");
@@ -145,8 +145,8 @@ public class ZimbraAccount {
 	 * @return (String) Client Authorization Token
 	 */
 	public String authenticateToMailClientHost() {
-		if (this.ZimbraMailClientHost == null) {
-			this.ZimbraMailClientHost = ZimbraSeleniumProperties.getStringProperty(
+		if (this.ZmailMailClientHost == null) {
+			this.ZmailMailClientHost = ZmailSeleniumProperties.getStringProperty(
 					"desktop.server.host", "localhost");
 		}
 		if (this.MyClientAuthToken == null) {
@@ -162,15 +162,15 @@ public class ZimbraAccount {
 		logger.warn("AccountZDC is being reset");
 		_AccountZDC = null;
 	}
-	private static ZimbraAccount _AccountZDC = null;
+	private static ZmailAccount _AccountZDC = null;
 
 	/**
 	 * Get the user account logged into ZWC being tested
-	 * @return the ZimbraAccount object representing the test account
+	 * @return the ZmailAccount object representing the test account
 	 */
-	public static synchronized ZimbraAccount AccountZWC() {
+	public static synchronized ZmailAccount AccountZWC() {
 		if ( _AccountZWC == null ) {
-			_AccountZWC = new ZimbraAccount();
+			_AccountZWC = new ZmailAccount();
 			_AccountZWC.provision();
 			_AccountZWC.authenticate();
 		}
@@ -180,15 +180,15 @@ public class ZimbraAccount {
 		logger.warn("AccountZWC is being reset");
 		_AccountZWC = null;
 	}
-	private static ZimbraAccount _AccountZWC = null;
+	private static ZmailAccount _AccountZWC = null;
 
 	/**
 	 * Get the user account logged into HTML being tested
-	 * @return the ZimbraAccount object representing the test account
+	 * @return the ZmailAccount object representing the test account
 	 */
-	public static synchronized ZimbraAccount AccountHTML() {
+	public static synchronized ZmailAccount AccountHTML() {
 		if ( _AccountHTML == null ) {
-			_AccountHTML = new ZimbraAccount();
+			_AccountHTML = new ZmailAccount();
 			_AccountHTML.provision();
 			_AccountHTML.authenticate();
 		}
@@ -198,11 +198,11 @@ public class ZimbraAccount {
 		logger.warn("AccountHTML is being reset");
 		_AccountHTML = null;
 	}
-	private static ZimbraAccount _AccountHTML = null;
+	private static ZmailAccount _AccountHTML = null;
 
-	public static synchronized ZimbraAccount AccountZMC() {
+	public static synchronized ZmailAccount AccountZMC() {
 		if ( _AccountZMC == null ) {
-			_AccountZMC = new ZimbraAccount();
+			_AccountZMC = new ZmailAccount();
 			_AccountZMC.provision();
 			_AccountZMC.authenticate();
 		}
@@ -211,35 +211,35 @@ public class ZimbraAccount {
 	public static synchronized void ResetAccountZMC() {
 		_AccountZMC = null;
 	}
-	private static ZimbraAccount _AccountZMC = null;
+	private static ZmailAccount _AccountZMC = null;
 
 	/**
 	 * Get a general use account for interacting with the test account
-	 * @return a general use ZimbraAccount
+	 * @return a general use ZmailAccount
 	 */
-	public static synchronized ZimbraAccount AccountA() {
+	public static synchronized ZmailAccount AccountA() {
 		if ( _AccountA == null ) {
-			_AccountA = new ZimbraAccount();
+			_AccountA = new ZmailAccount();
 			_AccountA.provision();
 			_AccountA.authenticate();
 		}
 		return (_AccountA);
 	}
-	private static ZimbraAccount _AccountA = null;
+	private static ZmailAccount _AccountA = null;
 
 	/**
 	 * Get a general use account for interacting with the test account
-	 * @return a general use ZimbraAccount
+	 * @return a general use ZmailAccount
 	 */
-	public static synchronized ZimbraAccount AccountB() {
+	public static synchronized ZmailAccount AccountB() {
 		if ( _AccountB == null ) {
-			_AccountB = new ZimbraAccount();
+			_AccountB = new ZmailAccount();
 			_AccountB.provision();
 			_AccountB.authenticate();
 		}	
 		return (_AccountB);
 	}
-	private static ZimbraAccount _AccountB = null;
+	private static ZmailAccount _AccountB = null;
 
 
 	/**
@@ -250,12 +250,12 @@ public class ZimbraAccount {
 	 * the second request will have references to server1.
 	 */
 	public static void reset() {
-		ZimbraAccount._AccountA = null;
-		ZimbraAccount._AccountB = null;
-		ZimbraAccount._AccountHTML = null;
-		ZimbraAccount._AccountZDC = null;
-		ZimbraAccount._AccountZMC = null;
-		ZimbraAccount._AccountZWC = null;		
+		ZmailAccount._AccountA = null;
+		ZmailAccount._AccountB = null;
+		ZmailAccount._AccountHTML = null;
+		ZmailAccount._AccountZDC = null;
+		ZmailAccount._AccountZMC = null;
+		ZmailAccount._AccountZWC = null;		
 	}
 	
 	// Set the default account settings
@@ -265,21 +265,21 @@ public class ZimbraAccount {
 		// The following settings can be tuned from config.properties
 		//
 		
-		put("zimbraPrefLocale", ZimbraSeleniumProperties.getStringProperty("locale"));
-		put("zimbraPrefTimeZoneId", ZimbraSeleniumProperties.getStringProperty("zimbraPrefTimeZoneId", "America/Los_Angeles"));
+		put("zmailPrefLocale", ZmailSeleniumProperties.getStringProperty("locale"));
+		put("zmailPrefTimeZoneId", ZmailSeleniumProperties.getStringProperty("zmailPrefTimeZoneId", "America/Los_Angeles"));
 
 		
 		// The following settings are specific to the test harness
 		// and deviate from the default settings to work around
 		// test harness issues/limitations
 		//
-		// zimbraPrefCalendarApptReminderWarningTime=0 ... A random reminder will throw off the tests
-		// zimbraPrefAutoAddAddressEnabled=FALSE ... Adding addresses to the addressbook might break a test
-		// zimbraPrefWarnOnExit=FALSE ... A system popup will occur if this is TRUE, which will freeze the tests
+		// zmailPrefCalendarApptReminderWarningTime=0 ... A random reminder will throw off the tests
+		// zmailPrefAutoAddAddressEnabled=FALSE ... Adding addresses to the addressbook might break a test
+		// zmailPrefWarnOnExit=FALSE ... A system popup will occur if this is TRUE, which will freeze the tests
 
-		put("zimbraPrefAutoAddAddressEnabled", "FALSE");
-		put("zimbraPrefCalendarApptReminderWarningTime", "0");
-		put("zimbraPrefWarnOnExit","FALSE");
+		put("zmailPrefAutoAddAddressEnabled", "FALSE");
+		put("zmailPrefCalendarApptReminderWarningTime", "0");
+		put("zmailPrefWarnOnExit","FALSE");
 	}};
 
 	/**
@@ -290,12 +290,12 @@ public class ZimbraAccount {
 	public boolean exists() throws HarnessException {
 	
 		// Check if the account exists
-		ZimbraAdminAccount.GlobalAdmin().soapSend(
-				"<GetAccountRequest xmlns='urn:zimbraAdmin'>"
+		ZmailAdminAccount.GlobalAdmin().soapSend(
+				"<GetAccountRequest xmlns='urn:zmailAdmin'>"
 				+		"<account by='name'>"+ EmailAddress + "</account>"
 				+	"</GetAccountRequest>");
 		
-		Element[] getAccountResponse = ZimbraAdminAccount.GlobalAdmin().soapSelectNodes("//admin:GetAccountResponse");
+		Element[] getAccountResponse = ZmailAdminAccount.GlobalAdmin().soapSelectNodes("//admin:GetAccountResponse");
 
 
 		if ( (getAccountResponse == null) || (getAccountResponse.length == 0) ) {
@@ -307,19 +307,19 @@ public class ZimbraAccount {
 		
 
 		// Reset the account settings based on the response
-		ZimbraId = ZimbraAdminAccount.GlobalAdmin().soapSelectValue("//admin:account", "id");
-		ZimbraMailHost = ZimbraAdminAccount.GlobalAdmin().soapSelectValue("//admin:account/admin:a[@n='zimbraMailHost']", null);
-		ZimbraPrefLocale = ZimbraAdminAccount.GlobalAdmin().soapSelectValue("//admin:account/admin:a[@n='zimbraPrefLocale']", null);
+		ZmailId = ZmailAdminAccount.GlobalAdmin().soapSelectValue("//admin:account", "id");
+		ZmailMailHost = ZmailAdminAccount.GlobalAdmin().soapSelectValue("//admin:account/admin:a[@n='zmailMailHost']", null);
+		ZmailPrefLocale = ZmailAdminAccount.GlobalAdmin().soapSelectValue("//admin:account/admin:a[@n='zmailPrefLocale']", null);
 
 		// If pref is not set, then use default
-		if ( (ZimbraPrefLocale == null) || ZimbraPrefLocale.trim().equals("") ) {
-			ZimbraPrefLocale = Locale.getDefault().toString();
+		if ( (ZmailPrefLocale == null) || ZmailPrefLocale.trim().equals("") ) {
+			ZmailPrefLocale = Locale.getDefault().toString();
 		}
 
-		// If the adminHost value is set, use that value for the ZimbraMailHost
-		String adminHost = ZimbraSeleniumProperties.getStringProperty("adminHost", null);
+		// If the adminHost value is set, use that value for the ZmailMailHost
+		String adminHost = ZmailSeleniumProperties.getStringProperty("adminHost", null);
 		if ( adminHost != null ) {
-			ZimbraMailHost = adminHost;
+			ZmailMailHost = adminHost;
 		}
 		
 		return (true);
@@ -328,7 +328,7 @@ public class ZimbraAccount {
 	/**
 	 * Creates the account on the ZCS using CreateAccountRequest
 	 */
-	public ZimbraAccount provision() {
+	public ZmailAccount provision() {
 		
 		try {
 
@@ -343,7 +343,7 @@ public class ZimbraAccount {
 			
 			
 			// Make sure domain exists
-			ZimbraDomain domain = new ZimbraDomain( EmailAddress.split("@")[1]);
+			ZmailDomain domain = new ZmailDomain( EmailAddress.split("@")[1]);
 			domain.provision();
 			
 
@@ -358,22 +358,22 @@ public class ZimbraAccount {
 			}
 
 			// Create the account
-			ZimbraAdminAccount.GlobalAdmin().soapSend(
-					"<CreateAccountRequest xmlns='urn:zimbraAdmin'>"
+			ZmailAdminAccount.GlobalAdmin().soapSend(
+					"<CreateAccountRequest xmlns='urn:zmailAdmin'>"
 					+		"<name>"+ EmailAddress +"</name>"
 					+		"<password>"+ Password +"</password>"
 					+		prefs.toString()
 					+	"</CreateAccountRequest>");
 
-			Element[] createAccountResponse = ZimbraAdminAccount.GlobalAdmin().soapSelectNodes("//admin:CreateAccountResponse");
+			Element[] createAccountResponse = ZmailAdminAccount.GlobalAdmin().soapSelectNodes("//admin:CreateAccountResponse");
 
 
 			if ( (createAccountResponse == null) || (createAccountResponse.length == 0)) {
 
-				Element[] soapFault = ZimbraAdminAccount.GlobalAdmin().soapSelectNodes("//soap:Fault");
+				Element[] soapFault = ZmailAdminAccount.GlobalAdmin().soapSelectNodes("//soap:Fault");
 				if ( soapFault != null && soapFault.length > 0 ) {
 				
-					String error = ZimbraAdminAccount.GlobalAdmin().soapSelectValue("//zimbra:Code", null);
+					String error = ZmailAdminAccount.GlobalAdmin().soapSelectValue("//zmail:Code", null);
 					throw new HarnessException("Unable to create account: "+ error);
 					
 				}
@@ -384,29 +384,29 @@ public class ZimbraAccount {
 			
 
 			// Set the account settings based on the response
-			ZimbraId = ZimbraAdminAccount.GlobalAdmin().soapSelectValue("//admin:account", "id");
-			ZimbraMailHost = ZimbraAdminAccount.GlobalAdmin().soapSelectValue("//admin:account/admin:a[@n='zimbraMailHost']", null);
-			ZimbraPrefLocale = ZimbraAdminAccount.GlobalAdmin().soapSelectValue("//admin:account/admin:a[@n='zimbraPrefLocale']", null);
+			ZmailId = ZmailAdminAccount.GlobalAdmin().soapSelectValue("//admin:account", "id");
+			ZmailMailHost = ZmailAdminAccount.GlobalAdmin().soapSelectValue("//admin:account/admin:a[@n='zmailMailHost']", null);
+			ZmailPrefLocale = ZmailAdminAccount.GlobalAdmin().soapSelectValue("//admin:account/admin:a[@n='zmailPrefLocale']", null);
 
 
 			// If pref is not set, then use default
-			if ( (ZimbraPrefLocale == null) || ZimbraPrefLocale.trim().equals("") ) {
-				ZimbraPrefLocale = Locale.getDefault().toString();
+			if ( (ZmailPrefLocale == null) || ZmailPrefLocale.trim().equals("") ) {
+				ZmailPrefLocale = Locale.getDefault().toString();
 			}
 
-			// If the adminHost value is set, use that value for the ZimbraMailHost
-			String adminHost = ZimbraSeleniumProperties.getStringProperty("adminHost", null);
+			// If the adminHost value is set, use that value for the ZmailMailHost
+			String adminHost = ZmailSeleniumProperties.getStringProperty("adminHost", null);
 			if ( adminHost != null ) {
-				ZimbraMailHost = adminHost;
+				ZmailMailHost = adminHost;
 			}
 
 			// If SOAP trace logging is specified, turn it on
-			if ( ZimbraSeleniumProperties.getStringProperty("soap.trace.enabled", "false").toLowerCase().equals("true") ) {
+			if ( ZmailSeleniumProperties.getStringProperty("soap.trace.enabled", "false").toLowerCase().equals("true") ) {
 				
-				ZimbraAdminAccount.GlobalAdmin().soapSend(
-							"<AddAccountLoggerRequest xmlns='urn:zimbraAdmin'>"
+				ZmailAdminAccount.GlobalAdmin().soapSend(
+							"<AddAccountLoggerRequest xmlns='urn:zmailAdmin'>"
 						+		"<account by='name'>"+ EmailAddress + "</account>"
-						+		"<logger category='zimbra.soap' level='trace'/>"
+						+		"<logger category='zmail.soap' level='trace'/>"
 						+	"</AddAccountLoggerRequest>");
 
 			}
@@ -418,8 +418,8 @@ public class ZimbraAccount {
 		} catch (HarnessException e) {
 
 			logger.error("Unable to provision account: "+ EmailAddress, e);
-			ZimbraId = null;
-			ZimbraMailHost = null;
+			ZmailId = null;
+			ZmailMailHost = null;
 
 		}
 
@@ -427,7 +427,7 @@ public class ZimbraAccount {
 		return (this);
 	}
 
-	public ZimbraAccount authenticate() {
+	public ZmailAccount authenticate() {
 		return authenticate(SOAP_DESTINATION_HOST_TYPE.SERVER);
 	}
 
@@ -435,12 +435,12 @@ public class ZimbraAccount {
 	 * Authenticates the account (using SOAP client AuthRequest)
 	 * Sets the authToken
 	 */
-	public ZimbraAccount authenticate(SOAP_DESTINATION_HOST_TYPE destinationType) {
+	public ZmailAccount authenticate(SOAP_DESTINATION_HOST_TYPE destinationType) {
 		try {
 			switch (destinationType) {
 			case SERVER:
 				soapSend(
-						"<AuthRequest xmlns='urn:zimbraAccount'>" +
+						"<AuthRequest xmlns='urn:zmailAccount'>" +
 						"<account by='name'>"+ EmailAddress + "</account>" +
 						"<password>"+ Password +"</password>" +
 						"</AuthRequest>",
@@ -450,9 +450,9 @@ public class ZimbraAccount {
 				break;
 			case CLIENT:
 				String username = clientAccountName;
-				String password = ZimbraDesktopProperties.getInstance().getSerialNumber();
+				String password = ZmailDesktopProperties.getInstance().getSerialNumber();
 				soapSend(
-						"<AuthRequest xmlns='urn:zimbraAccount'>" +
+						"<AuthRequest xmlns='urn:zmailAccount'>" +
 						"<account by='name'>"+ username + "</account>" +
 						"<password>"+ password +"</password>" +
 						"</AuthRequest>",
@@ -474,7 +474,7 @@ public class ZimbraAccount {
     * @param preferences Preferences to be modified through SOAP
     * @throws HarnessException 
     */
-   public ZimbraAccount modifyPreferences(Map<String, String> preferences) {
+   public ZmailAccount modifyPreferences(Map<String, String> preferences) {
       return modifyPreferences(preferences, SOAP_DESTINATION_HOST_TYPE.SERVER);
 
    }
@@ -485,7 +485,7 @@ public class ZimbraAccount {
     * @param destinationType The destination Host Type: SERVER or CLIENT
     * @throws HarnessException
     */
-   public ZimbraAccount modifyPreferences(Map<String, String> preferences,
+   public ZmailAccount modifyPreferences(Map<String, String> preferences,
          SOAP_DESTINATION_HOST_TYPE destinationType) {
 
       // Test Case Trace logging
@@ -500,7 +500,7 @@ public class ZimbraAccount {
          
          
          // If the locale preference is being changed, then remember the value
-         if ( entry.getKey().equals("zimbraPrefLocale") ) {
+         if ( entry.getKey().equals("zmailPrefLocale") ) {
             setLocalePreference(entry.getValue());
          }
          
@@ -515,7 +515,7 @@ public class ZimbraAccount {
       {
          
          soapSend(
-            "<ModifyPrefsRequest xmlns='urn:zimbraAccount'>" +
+            "<ModifyPrefsRequest xmlns='urn:zmailAccount'>" +
                   sb.toString() +
             "</ModifyPrefsRequest>",
             destinationType);
@@ -548,7 +548,7 @@ public class ZimbraAccount {
 
 		try {
 			this.soapSend(
-					"<GetInfoRequest xmlns='urn:zimbraAccount'>" +
+					"<GetInfoRequest xmlns='urn:zmailAccount'>" +
 					"</GetInfoRequest>",
 					destinationType,
 					this.EmailAddress);
@@ -556,7 +556,7 @@ public class ZimbraAccount {
 
 			StringBuilder temp = new StringBuilder();
 			for (Element element : response) {
-				if (element.getAttribute("name").equals("zimbraZimletAvailableZimlets")) {
+				if (element.getAttribute("name").equals("zmailZimletAvailableZimlets")) {
 					temp.append(element.getText().trim().replace("+", "")).append(";");
 				}
 			}
@@ -580,7 +580,7 @@ public class ZimbraAccount {
 	 * @param destinationType The destination Host Type: SERVER or CLIENT
 	 * @throws HarnessException
 	 */
-	public ZimbraAccount modifyZimletPreferences(Map<String, String> preferences) {
+	public ZmailAccount modifyZimletPreferences(Map<String, String> preferences) {
 		return modifyZimletPreferences(preferences, SOAP_DESTINATION_HOST_TYPE.SERVER);
 	}
 
@@ -591,7 +591,7 @@ public class ZimbraAccount {
 	 * @param destinationType The destination Host Type: SERVER or CLIENT
 	 * @throws HarnessException
 	 */
-	public ZimbraAccount modifyZimletPreferences(Map<String, String> zimletPreferences,
+	public ZmailAccount modifyZimletPreferences(Map<String, String> zimletPreferences,
 			SOAP_DESTINATION_HOST_TYPE destinationType) {
 
 		for (Map.Entry<String, String> entry : zimletPreferences.entrySet()) {
@@ -611,7 +611,7 @@ public class ZimbraAccount {
 		try
 		{
 			soapSend(
-					"<ModifyZimletPrefsRequest xmlns='urn:zimbraAccount'>" +
+					"<ModifyZimletPrefsRequest xmlns='urn:zmailAccount'>" +
 					sb.toString() +
 					"</ModifyZimletPrefsRequest>",
 					destinationType);
@@ -632,7 +632,7 @@ public class ZimbraAccount {
 	public String getPreference(String pref) throws HarnessException {
 
 		soapSend(
-				"<GetPrefsRequest xmlns='urn:zimbraAccount'>" +
+				"<GetPrefsRequest xmlns='urn:zmailAccount'>" +
 				"<pref name='"+ pref +"'/>" +
 		"</GetPrefsRequest>");
 
@@ -641,7 +641,7 @@ public class ZimbraAccount {
 	}
 
 	/**
-	 * Set a user preference.  This method only changes the ZimbraAccount object.  The
+	 * Set a user preference.  This method only changes the ZmailAccount object.  The
 	 * harness must still call ModifyPrefsRequest, CreateAccountRequest, ModifyAccountRequest,
 	 * etc.
 	 * 
@@ -667,16 +667,16 @@ public class ZimbraAccount {
 	}
 
 	/**
-	 * Get this Account's Locale Preference (zimbraPrefLocale)
+	 * Get this Account's Locale Preference (zmailPrefLocale)
 	 * @return
 	 * @throws HarnessException
 	 */
 	public Locale getLocalePreference() {
-		return (I18N.getLocaleFromString(ZimbraPrefLocale));
+		return (I18N.getLocaleFromString(ZmailPrefLocale));
 	}
 
 	protected void setLocalePreference(String locale) {
-		ZimbraPrefLocale = locale;
+		ZmailPrefLocale = locale;
 	}
 
 	@Override
@@ -699,7 +699,7 @@ public class ZimbraAccount {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ZimbraAccount other = (ZimbraAccount) obj;
+		ZmailAccount other = (ZmailAccount) obj;
 		if (EmailAddress == null) {
 			if (other.EmailAddress != null)
 				return false;
@@ -746,7 +746,7 @@ public class ZimbraAccount {
 
 	/**
 	 * Send a SOAP request from this account to the specified destination host type
-	 * @param request the SOAP request body (see ZimbraServer/docs/soap.txt)
+	 * @param request the SOAP request body (see ZmailServer/docs/soap.txt)
 	 * @param destinationHostType The destination Host Type: SERVER or CLIENT
 	 * @return the response envelope
 	 * @throws HarnessException on failure
@@ -759,7 +759,7 @@ public class ZimbraAccount {
 	/**
 	 * Send a SOAP request from this account to the specified destination host type with specific
 	 * account name to be added in SOAP context
-	 * @param request the SOAP request body (see ZimbraServer/docs/soap.txt)
+	 * @param request the SOAP request body (see ZmailServer/docs/soap.txt)
 	 * @param destinationHostType The destination Host Type: SERVER or CLIENT
 	 * @param accountName Account name to be added in SOAP context
 	 * @return the response envelope
@@ -773,10 +773,10 @@ public class ZimbraAccount {
 		String destination = null;
 		switch (destinationHostType) {
 		case CLIENT:
-			destination = ZimbraMailClientHost;
+			destination = ZmailMailClientHost;
 			break;
 		case SERVER:
-			destination = ZimbraMailHost;
+			destination = ZmailMailHost;
 			break;
 		}
 
@@ -785,14 +785,14 @@ public class ZimbraAccount {
 
 	/**
 	 * Send a SOAP request from this account with the default mail server destination
-	 * @param request the SOAP request body (see ZimbraServer/docs/soap.txt)
+	 * @param request the SOAP request body (see ZmailServer/docs/soap.txt)
 	 * @return the response envelope
 	 * @throws HarnessException on failure
 	 */
 	public Element soapSend(String request) throws HarnessException {
 
 		try {
-			if ( !(this instanceof ZimbraAdminAccount) ) {
+			if ( !(this instanceof ZmailAdminAccount) ) {
 				ExecuteHarnessMain.tracer.trace(EmailAddress +" sends "+ Element.parseXML(request).getName());
 			}
 		} catch (XmlParseException e) {
@@ -929,7 +929,7 @@ public class ZimbraAccount {
 		 }
 
 		 /**
-		  * Set the Zimbra AuthToken
+		  * Set the Zmail AuthToken
 		  * @param token - use null to clear the context
 		  * @return
 		  */
@@ -938,7 +938,7 @@ public class ZimbraAccount {
 		 }
 
 		 /**
-		  * Set the Zimbra ClientAuthToken
+		  * Set the Zmail ClientAuthToken
 		  * @param token - use null to clear the context
 		  * @return
 		  */
@@ -947,7 +947,7 @@ public class ZimbraAccount {
 		 }
 
 		 /**
-		  * Set the Zimbra SessionId
+		  * Set the Zmail SessionId
 		  * @param id
 		  * @return
 		  */
@@ -956,7 +956,7 @@ public class ZimbraAccount {
 		 }
 
 		 /**
-		  * Set the Zimbra SessionId
+		  * Set the Zmail SessionId
 		  * @param id
 		  * @return
 		  */
@@ -965,7 +965,7 @@ public class ZimbraAccount {
 		 }
 
 		 /**
-		  * Set the Zimbra SequenceNum
+		  * Set the Zmail SequenceNum
 		  * Use with the SessionId
 		  * @param num - default -1
 		  * @return
@@ -998,7 +998,7 @@ public class ZimbraAccount {
 		 }
 
 		 /**
-		  * Send the specified Zimbra SOAP request to the specified host with the
+		  * Send the specified Zmail SOAP request to the specified host with the
 		  * default SERVER type destination host
 		  * @param host Host name to send the SOAP context/request
 		  * @param request Request to be sent over SOAP
@@ -1010,7 +1010,7 @@ public class ZimbraAccount {
 		 }
 
 		 /**
-		  * Send the specified Zimbra SOAP request to the specified host
+		  * Send the specified Zmail SOAP request to the specified host
 		  * @param host Host name to send the SOAP context/request
 		  * @param request Request to be sent over SOAP
 		  * @param destinationType Destination host type: SERVER or CLIENT
@@ -1023,7 +1023,7 @@ public class ZimbraAccount {
 		 }
 
 		 /**
-		  * Send the specified Zimbra SOAP request to the specified host with
+		  * Send the specified Zmail SOAP request to the specified host with
 		  * specific account name in context
 		  * @param host Host name to send the SOAP context/request
 		  * @param request Request to be sent over SOAP
@@ -1064,7 +1064,7 @@ public class ZimbraAccount {
 		 }
 
 		 /**
-		  * Send a Zimbra SOAP context/request to the host with the
+		  * Send a Zmail SOAP context/request to the host with the
 		  * default SERVER type destination host
 		  * @param host Host name to send the SOAP context/request
 		  * @param context
@@ -1078,7 +1078,7 @@ public class ZimbraAccount {
 		 }
 
 		 /**
-		  * Send a Zimbra SOAP context/request to the host
+		  * Send a Zmail SOAP context/request to the host
 		  * @param host Host name to send the SOAP context/request
 		  * @param context
 		  * @param request Request to be sent over SOAP
@@ -1121,7 +1121,7 @@ public class ZimbraAccount {
 		 public void doPostfixDelay() throws HarnessException {
 
 			 // If disabled, don't do anything
-			 boolean enabled = ZimbraSeleniumProperties.getStringProperty("postfix.check", "true").equals("true");
+			 boolean enabled = ZmailSeleniumProperties.getStringProperty("postfix.check", "true").equals("true");
 			 if ( !enabled ) {
 				 logger.debug("postfix.check was not true ... skipping queue check");
 				 return;
@@ -1196,15 +1196,15 @@ public class ZimbraAccount {
 				 org.dom4j.XPath Xpath = d4context.createXPath(xpath);
 				 Xpath.setNamespaceURIs(getURIs());
 				 
-				 List<Element> zimbraElements = new ArrayList<Element>();
+				 List<Element> zmailElements = new ArrayList<Element>();
 
 				 for (Object o : Xpath.selectNodes(d4context)) {
 					 if ( o instanceof org.dom4j.Element ) {
-						 zimbraElements.add(Element.convertDOM((org.dom4j.Element) o));
+						 zmailElements.add(Element.convertDOM((org.dom4j.Element) o));
 					 }
 				 }
 				 
-				 return (zimbraElements.toArray(new Element[zimbraElements.size()]));
+				 return (zmailElements.toArray(new Element[zmailElements.size()]));
 
 			 } catch (InvalidXPathException e) {
 				 LogManager.getRootLogger().error("Unable to select nodes", e);
@@ -1321,9 +1321,9 @@ public class ZimbraAccount {
 			 // TODO: need to get URI settings from config.properties
 
 
-			 String scheme = ZimbraSeleniumProperties.getStringProperty("server.scheme", "http");
+			 String scheme = ZmailSeleniumProperties.getStringProperty("server.scheme", "http");
 			 String userInfo = null;
-			 String p = ZimbraSeleniumProperties.getStringProperty("server.port", "80");
+			 String p = ZmailSeleniumProperties.getStringProperty("server.port", "80");
 			 int port = Integer.parseInt(p);
 			 String path = "/";
 			 String query = null;
@@ -1332,29 +1332,29 @@ public class ZimbraAccount {
 			 String namespace = getNamespace(request);
 			 logger.debug("namespace: " + namespace);
 
-			 if ( namespace.equals("urn:zimbraAdmin") ) {
+			 if ( namespace.equals("urn:zmailAdmin") ) {
 
 				 // https://server.com:7071/service/admin/soap/
 				 scheme = "https";
 				 path = "/service/admin/soap/";
 
-			 } else if ( namespace.equals("urn:zimbraAccount") ) {
+			 } else if ( namespace.equals("urn:zmailAccount") ) {
 
 				 // http://server.com:80/service/soap/
 				 path = "/service/soap/";
 
-			 } else if ( namespace.equals("urn:zimbraMail") ) {
+			 } else if ( namespace.equals("urn:zmailMail") ) {
 
 				 // http://server.com:80/service/soap/
 				 path = "/service/soap/";
 
-			 } else if ( namespace.equals("urn:zimbra") ) {
+			 } else if ( namespace.equals("urn:zmail") ) {
 
 				 // http://server.com:80/service/soap/
 				 path = "/service/soap/";
 
-			 } else if ( namespace.equals("urn:zimbraOffline") &&
-					 ZimbraSeleniumProperties.getAppType() == AppType.DESKTOP) {
+			 } else if ( namespace.equals("urn:zmailOffline") &&
+					 ZmailSeleniumProperties.getAppType() == AppType.DESKTOP) {
 				 // This is only for desktop
 				 path = "/service/soap/";
 
@@ -1364,12 +1364,12 @@ public class ZimbraAccount {
 
 			 switch (destinationType) {
 			 case SERVER:
-				 if ( namespace.equals("urn:zimbraAdmin") ) {
+				 if ( namespace.equals("urn:zmailAdmin") ) {
 					 port = 7071;
 				 }
 				 break;
 			 case CLIENT:
-				 port = Integer.parseInt(ZimbraDesktopProperties.getInstance().getConnectionPort());
+				 port = Integer.parseInt(ZmailDesktopProperties.getInstance().getConnectionPort());
 				 break;
 			 }
 
@@ -1410,18 +1410,18 @@ public class ZimbraAccount {
     		org.dom4j.Node node;
     		List dom4jElements = xpath.selectNodes(d4context);
 
-    		List<Element> zimbraElements = new ArrayList<Element>();
+    		List<Element> zmailElements = new ArrayList<Element>();
     		Iterator iter = dom4jElements.iterator();
     		while (iter.hasNext()) {
     			node = (org.dom4j.Node)iter.next();
     			if (node instanceof org.dom4j.Element) {
-    				Element zimbraElement = Element.convertDOM((org.dom4j.Element) node);
-    				zimbraElements.add(zimbraElement);
+    				Element zmailElement = Element.convertDOM((org.dom4j.Element) node);
+    				zmailElements.add(zmailElement);
     			}
     		}
 
-    		Element[] retVal = new Element[zimbraElements.size()];
-    		zimbraElements.toArray(retVal);
+    		Element[] retVal = new Element[zmailElements.size()];
+    		zmailElements.toArray(retVal);
     		return retVal;
         }
 
@@ -1430,17 +1430,17 @@ public class ZimbraAccount {
 		 private static Map<String, String> mURIs = null;
 		 static {
 			 mURIs = new HashMap<String, String>();
-			 mURIs.put("zimbra", "urn:zimbra");
-			 mURIs.put("acct", "urn:zimbraAccount");
-			 mURIs.put("mail", "urn:zimbraMail");
-			 mURIs.put("offline", "urn:zimbraOffline");
-			 mURIs.put("admin", "urn:zimbraAdmin");
-			 mURIs.put("voice", "urn:zimbraVoice");
-			 mURIs.put("im", "urn:zimbraIM");
-			 mURIs.put("mapi", "urn:zimbraMapi");
-			 mURIs.put("sync", "urn:zimbraSync");
-			 mURIs.put("cs", "urn:zimbraCS");
-			 mURIs.put("test", "urn:zimbraTestHarness");
+			 mURIs.put("zmail", "urn:zmail");
+			 mURIs.put("acct", "urn:zmailAccount");
+			 mURIs.put("mail", "urn:zmailMail");
+			 mURIs.put("offline", "urn:zmailOffline");
+			 mURIs.put("admin", "urn:zmailAdmin");
+			 mURIs.put("voice", "urn:zmailVoice");
+			 mURIs.put("im", "urn:zmailIM");
+			 mURIs.put("mapi", "urn:zmailMapi");
+			 mURIs.put("sync", "urn:zmailSync");
+			 mURIs.put("cs", "urn:zmailCS");
+			 mURIs.put("test", "urn:zmailTestHarness");
 			 mURIs.put("soap", "http://www.w3.org/2003/05/soap-envelope");
 			 mURIs.put("soap12", "http://www.w3.org/2003/05/soap-envelope");
 			 mURIs.put("soap11", "http://schemas.xmlsoap.org/soap/envelope/");
@@ -1452,7 +1452,7 @@ public class ZimbraAccount {
 
 	}
 
-	public static class ProxySoapHttpTransport extends com.zimbra.common.soap.SoapTransport {
+	public static class ProxySoapHttpTransport extends org.zmail.common.soap.SoapTransport {
 
 		private static final String X_ORIGINATING_IP = "X-Originating-IP";
 
@@ -1698,13 +1698,13 @@ public class ZimbraAccount {
 	public static void main(String[] args) throws HarnessException {
 
 
-		String domain = ZimbraSeleniumProperties.getStringProperty("server.host","qa60.lab.zimbra.com");
+		String domain = ZmailSeleniumProperties.getStringProperty("server.host","qa60.lab.zmail.com");
 
 		// Configure log4j using the basic configuration
 		BasicConfigurator.configure();
 
 		// Create a new account object
-		ZimbraAccount account = new ZimbraAccount("foo"+System.currentTimeMillis(), domain);
+		ZmailAccount account = new ZmailAccount("foo"+System.currentTimeMillis(), domain);
 
 		// Provision it on the server
 		account.provision();
@@ -1713,13 +1713,13 @@ public class ZimbraAccount {
 		account.authenticate();
 
 		// Send a basic SOAP request.  Check the response.
-		account.soapSend("<NoOpRequest xmlns='urn:zimbraMail'/>");
+		account.soapSend("<NoOpRequest xmlns='urn:zmailMail'/>");
 		if ( !account.soapMatch("//mail:NoOpResponse", null, null) )
 			throw new HarnessException("NoOpRequest did not return NoOpResponse");
 
 		// Add a message to the mailbox.  Check the response
 		account.soapSend(
-				"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+				"<SendMsgRequest xmlns='urn:zmailMail'>" +
 				"<m>" +
 				"<e t='t' a='"+ account.EmailAddress +"'/>" +
 				"<su>subject123</su>" +

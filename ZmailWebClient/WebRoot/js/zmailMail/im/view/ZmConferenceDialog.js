@@ -132,6 +132,6 @@ function(error) {
 	var message = ZMsg["im." + error] || ZMsg["im.unknown_error"];
 	var dialog = appCtxt.getMsgDialog();
 	dialog.reset();
-	dialog.setMessage(message, DwtMessageDialog.CRITICAL_STYLE, ZmMsg.zimbraTitle);
+	dialog.setMessage(message, DwtMessageDialog.CRITICAL_STYLE, ZmMsg.zmailTitle);
 	dialog.popup();
 };

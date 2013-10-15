@@ -31,7 +31,7 @@
  */
 
 // Original is from example in OAuth Java library(http://oauth.googlecode.com/svn/code/java/)
-// and modified for integratin with Zimbra
+// and modified for integratin with Zmail
 
 // Original's copyright and license terms
 /*
@@ -52,20 +52,20 @@
 
 package sample.oauth.provider;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.AuthTokenException;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.ZimbraAuthToken;
-import com.zimbra.cs.extension.ExtensionHttpHandler;
-import com.zimbra.cs.extension.ZimbraExtension;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.Metadata;
-import com.zimbra.cs.servlet.ZimbraServlet;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.AuthTokenException;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.ZmailAuthToken;
+import org.zmail.cs.extension.ExtensionHttpHandler;
+import org.zmail.cs.extension.ZmailExtension;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.Metadata;
+import org.zmail.cs.servlet.ZmailServlet;
 import net.oauth.OAuth;
 import net.oauth.OAuthAccessor;
 import net.oauth.OAuthMessage;
@@ -80,14 +80,14 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 /**
- * Access Token request handler for zimbra extension
+ * Access Token request handler for zmail extension
  *
  * @author Yutaka Obuchi
  */
 public class AccessTokenHandler extends ExtensionHttpHandler {
     
     
-    public void init(ZimbraExtension ext) throws ServiceException{
+    public void init(ZmailExtension ext) throws ServiceException{
         super.init(ext);    
     }
     
@@ -97,20 +97,20 @@ public class AccessTokenHandler extends ExtensionHttpHandler {
     
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
-    	ZimbraLog.extensions.debug("Access Token Handler doGet requested!");
+    	ZmailLog.extensions.debug("Access Token Handler doGet requested!");
         processRequest(request, response);
     }
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
-    	ZimbraLog.extensions.debug("Access Token Handler doPost requested!");
+    	ZmailLog.extensions.debug("Access Token Handler doPost requested!");
         processRequest(request, response);
     }
         
     public void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
         try{
-            String origUrl = request.getHeader("X-Zimbra-Orig-Url");
+            String origUrl = request.getHeader("X-Zmail-Orig-Url");
             OAuthMessage oAuthMessage =
                     StringUtil.isNullOrEmpty(origUrl) ?
                             OAuthServlet.getMessage(request, null) : OAuthServlet.getMessage(request, origUrl);
@@ -121,11 +121,11 @@ public class AccessTokenHandler extends ExtensionHttpHandler {
             // make sure token is authorized
             if (!Boolean.TRUE.equals(accessor.getProperty("authorized"))) {
                  OAuthProblemException problem = new OAuthProblemException("permission_denied");
-                 ZimbraLog.extensions.debug("permission_denied");
+                 ZmailLog.extensions.debug("permission_denied");
                  throw problem;
             }
 
-            AuthToken userAuthToken = ZimbraAuthToken.getAuthToken((String) accessor.getProperty("ZM_AUTH_TOKEN"));
+            AuthToken userAuthToken = ZmailAuthToken.getAuthToken((String) accessor.getProperty("ZM_AUTH_TOKEN"));
             String accountId = userAuthToken.getAccountId();
             Account account = Provisioning.getInstance().getAccountById(accountId);
             if (Provisioning.onLocalServer(account)) {
@@ -141,10 +141,10 @@ public class AccessTokenHandler extends ExtensionHttpHandler {
                                  out);
                 out.close();
             } else {
-                ZimbraServlet.proxyServletRequest(request, response, accountId);
+                ZmailServlet.proxyServletRequest(request, response, accountId);
             }
         } catch (Exception e){
-            ZimbraLog.extensions.debug("AccessTokenHandler exception", e);            
+            ZmailLog.extensions.debug("AccessTokenHandler exception", e);            
             SampleZmOAuthProvider.handleException(e, request, response, true);
         }
     }

@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.addressbook.contacts;
+package org.zmail.qa.selenium.projects.ajax.tests.addressbook.contacts;
 
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew.Field;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.*;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew.Field;
 
 public class SendMailToContact extends AjaxCommonTest  {
 	public SendMailToContact() {
@@ -45,18 +45,18 @@ public class SendMailToContact extends AjaxCommonTest  {
 		//--  Data
 		
 		// The message subject
-		String subject = "subject"+ ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject"+ ZmailSeleniumProperties.getUniqueString();
 		
 		// Create a contact
-		String firstName = "First" + ZimbraSeleniumProperties.getUniqueString();
-		String lastName = "Last" + ZimbraSeleniumProperties.getUniqueString();
+		String firstName = "First" + ZmailSeleniumProperties.getUniqueString();
+		String lastName = "Last" + ZmailSeleniumProperties.getUniqueString();
 
 		app.zGetActiveAccount().soapSend(
-	                "<CreateContactRequest xmlns='urn:zimbraMail'>" +
+	                "<CreateContactRequest xmlns='urn:zmailMail'>" +
 	                		"<cn >" +
 	                			"<a n='firstName'>" + firstName +"</a>" +
 	                			"<a n='lastName'>" + lastName +"</a>" +
-	                			"<a n='email'>" + ZimbraAccount.AccountA().EmailAddress + "</a>" +
+	                			"<a n='email'>" + ZmailAccount.AccountA().EmailAddress + "</a>" +
                 			"</cn>" +
 	                "</CreateContactRequest>");
 		
@@ -71,13 +71,13 @@ public class SendMailToContact extends AjaxCommonTest  {
         FormMailNew formMailNew = (FormMailNew) app.zPageAddressbook.zListItem(Action.A_RIGHTCLICK, Button.B_NEW, firstName);        
 
         formMailNew.zFillField(Field.Subject, subject);
-        formMailNew.zFillField(Field.Body, "body"+ ZimbraSeleniumProperties.getUniqueString());
+        formMailNew.zFillField(Field.Body, "body"+ ZmailSeleniumProperties.getUniqueString());
         formMailNew.zSubmit();
         
         
         //-- Verification
         
-        MailItem message1 = MailItem.importFromSOAP(ZimbraAccount.AccountA(), "subject:("+ subject +")");
+        MailItem message1 = MailItem.importFromSOAP(ZmailAccount.AccountA(), "subject:("+ subject +")");
         ZAssert.assertNotNull(message1, "Verify the message is received by Account A");
 
         

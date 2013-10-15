@@ -12,11 +12,11 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.tag.i18n;
+package org.zmail.cs.taglib.tag.i18n;
 
-import com.zimbra.client.ZMailbox;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.taglib.ZJspSession;
+import org.zmail.client.ZMailbox;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.taglib.ZJspSession;
 
 import java.io.*;
 import java.util.*;
@@ -315,7 +315,7 @@ public class I18nUtil {
                     nLoader = new ResourceLoader(oLoader, pageContext);
                     thread.setContextClassLoader(nLoader);
                 }catch(Exception e) {
-                    ZimbraLog.webclient.debug("FindBundle:error in overriding the class loader" + e);
+                    ZmailLog.webclient.debug("FindBundle:error in overriding the class loader" + e);
                     e.printStackTrace();
                 }
 				try {
@@ -324,12 +324,12 @@ public class I18nUtil {
 				}
 				catch (MissingResourceException e) {
 					// ignore -- nothing we can do
-                    ZimbraLog.webclient.debug("MissingResourceException:" + e);
+                    ZmailLog.webclient.debug("MissingResourceException:" + e);
                     e.printStackTrace();
 				}
 				catch (Exception e) {
 					// ignore -- nothing we can do
-                    ZimbraLog.webclient.debug("FindBundle:error in fetching the bundle resource" + e);
+                    ZmailLog.webclient.debug("FindBundle:error in fetching the bundle resource" + e);
                     e.printStackTrace();
 				}
                 finally {
@@ -391,7 +391,7 @@ public class I18nUtil {
     //
 
     public static final String P_SKIN = "skin";
-    public static final String P_DEFAULT_SKIN = "zimbraDefaultSkin";
+    public static final String P_DEFAULT_SKIN = "zmailDefaultSkin";
 
     public static final String A_SKIN = "skin";
     protected static final String MANIFEST = "manifest.xml";
@@ -413,12 +413,12 @@ public class I18nUtil {
     String setSkin(ServletRequest request, ServletResponse response) {
         // start with if skin is already set as an attribute
         String skin = (String)request.getAttribute(A_SKIN);
-//		ZimbraLog.webclient.debug("### request: "+skin);
+//		ZmailLog.webclient.debug("### request: "+skin);
 
         // is skin specified in request parameter?
         if (skin == null) {
             skin = request.getParameter(P_SKIN);
-//		ZimbraLog.webclient.debug("### param: "+skin);
+//		ZmailLog.webclient.debug("### param: "+skin);
         }
 
         // is it available in session?
@@ -426,7 +426,7 @@ public class I18nUtil {
             HttpSession hsession = ((HttpServletRequest)request).getSession(false);
             if (hsession != null) {
                 skin = (String)hsession.getAttribute(A_SKIN);
-//				ZimbraLog.webclient.debug("### http session: "+skin);
+//				ZmailLog.webclient.debug("### http session: "+skin);
             }
         }
 
@@ -440,12 +440,12 @@ public class I18nUtil {
                     if (zsession != null) {
                         mailbox = ZJspSession.getZMailbox(context);
                         skin = mailbox.getPrefs().getSkin();
-//						ZimbraLog.webclient.debug("### zimbra session: "+skin);
+//						ZmailLog.webclient.debug("### zmail session: "+skin);
                     }
                 }
                 catch (Exception e) {
-                    if (ZimbraLog.webclient.isDebugEnabled()) {
-                        ZimbraLog.webclient.debug("no zimbra session");
+                    if (ZmailLog.webclient.isDebugEnabled()) {
+                        ZmailLog.webclient.debug("no zmail session");
                     }
                 }
             }
@@ -467,7 +467,7 @@ public class I18nUtil {
                 }
             }
             catch (Exception e) {
-                ZimbraLog.webclient.error("unable to get available skins");
+                ZmailLog.webclient.error("unable to get available skins");
                 skin = null;
             }
         }
@@ -477,7 +477,7 @@ public class I18nUtil {
         if (skin != null) {
             File manifest = new File(this.pageContext.getServletContext().getRealPath("/skins/"+skin+"/"+MANIFEST));
             if (!manifest.exists()) {
-                ZimbraLog.webclient.debug("selected skin ("+skin+") doesn't exist");
+                ZmailLog.webclient.debug("selected skin ("+skin+") doesn't exist");
                 skin = null;
             }
         }
@@ -485,7 +485,7 @@ public class I18nUtil {
         // fall back to default skin
         if (skin == null) {
             skin = this.pageContext.getServletContext().getInitParameter(P_DEFAULT_SKIN);
-//			ZimbraLog.webclient.debug("### default: "+skin);
+//			ZmailLog.webclient.debug("### default: "+skin);
         }
 
         // store in the request
@@ -498,8 +498,8 @@ public class I18nUtil {
     // ClassLoader methods
     //
     public InputStream getResourceAsStream(String filename) {
-        if (ZimbraLog.webclient.isDebugEnabled()) {
-            ZimbraLog.webclient.debug("getResourceAsStream: filename="+filename);
+        if (ZmailLog.webclient.isDebugEnabled()) {
+            ZmailLog.webclient.debug("getResourceAsStream: filename="+filename);
         }
 
         // default resource
@@ -517,12 +517,12 @@ public class I18nUtil {
             skin = this.setSkin(this.pageContext.getRequest(), this.pageContext.getResponse());
         }
 
-        ZimbraLog.webclient.debug("omega:" + (this.pageContext.getServletContext().getRealPath("/skins/"+skin+basename)));
+        ZmailLog.webclient.debug("omega:" + (this.pageContext.getServletContext().getRealPath("/skins/"+skin+basename)));
 
         File file = new File(this.pageContext.getServletContext().getRealPath("/skins/"+skin+basename));
         if (file.exists()) {
-            if (ZimbraLog.webclient.isDebugEnabled()) {
-                ZimbraLog.webclient.debug("  found message overrides for skin="+skin);
+            if (ZmailLog.webclient.isDebugEnabled()) {
+                ZmailLog.webclient.debug("  found message overrides for skin="+skin);
             }
             try {
                 InputStream skinStream = new FileInputStream(file);
@@ -540,7 +540,7 @@ public class I18nUtil {
             }
             catch (FileNotFoundException e) {
                 // ignore
-                ZimbraLog.webclient.debug("FileNotFoundException:" + e);
+                ZmailLog.webclient.debug("FileNotFoundException:" + e);
             }
         }
 

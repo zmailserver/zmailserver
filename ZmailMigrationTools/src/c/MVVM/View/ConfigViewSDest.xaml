@@ -11,7 +11,7 @@
             <RowDefinition MaxHeight="40"></RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" HorizontalAlignment="Left" Margin="15,20,30,0" Name="serverDestTitle" Text="Destination" TextWrapping="Wrap" FontWeight="Bold" VerticalAlignment="Top" />
-        <TextBlock Grid.Row="1" HorizontalAlignment="Left" Margin="15,5,30,0" Name="serverDestText" Text="This is the destination Zimbra server for data to be migrated.  Enter your Zimbra server credentials." TextWrapping="Wrap" VerticalAlignment="Top" />
+        <TextBlock Grid.Row="1" HorizontalAlignment="Left" Margin="15,5,30,0" Name="serverDestText" Text="This is the destination Zmail server for data to be migrated.  Enter your Zmail server credentials." TextWrapping="Wrap" VerticalAlignment="Top" />
         <StackPanel Grid.Row="2">
             <Grid Name="ConfigDestGrid" Margin="0,40,0,0">
                 <Grid.RowDefinitions>
@@ -25,12 +25,12 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Label Content="Hostname" Margin="11,0,0,0" HorizontalAlignment="Left" Name="label1" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" />
-                <TextBox MinWidth="240" Margin="0,0,50,0" Name="tbHost" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1"  Text="{Binding Path=ZimbraServerHostName}"/>
+                <TextBox MinWidth="240" Margin="0,0,50,0" Name="tbHost" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1"  Text="{Binding Path=ZmailServerHostName}"/>
                 <Label Content="Admin Port" Margin="11,0,0,0" HorizontalAlignment="Left" Name="label2" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" />
-                <TextBox HorizontalAlignment="Left" MinWidth="50" Name="tbPort" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Text="{Binding Path=ZimbraPort}"/>
-                <CheckBox Content="Use Secure Connection" Margin="-80,0,0,0" HorizontalAlignment="Center"  Name="cbSecure" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" IsChecked="{Binding Path=ZimbraSSL}"/>
+                <TextBox HorizontalAlignment="Left" MinWidth="50" Name="tbPort" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Text="{Binding Path=ZmailPort}"/>
+                <CheckBox Content="Use Secure Connection" Margin="-80,0,0,0" HorizontalAlignment="Center"  Name="cbSecure" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" IsChecked="{Binding Path=ZmailSSL}"/>
                 <Label Content="Admin ID" Margin="11,0,0,0" HorizontalAlignment="Left" Name="label3" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" />
-                <TextBox MinWidth="240" Margin="0,0,50,0" Name="tbUser" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Text="{Binding Path=ZimbraAdmin}"/>
+                <TextBox MinWidth="240" Margin="0,0,50,0" Name="tbUser" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Text="{Binding Path=ZmailAdmin}"/>
                 <Label Content="Password" Margin="11,0,0,0" HorizontalAlignment="Left" Name="label4" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0"  />
                 <PasswordBox MinWidth="240" Margin="0,0,50,0" Name="passwordBox1" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" PasswordChanged="pb_PasswordChanged"/>
             </Grid>

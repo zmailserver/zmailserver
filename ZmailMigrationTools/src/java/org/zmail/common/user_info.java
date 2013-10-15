@@ -12,20 +12,20 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common;
+package org.zmail.common;
 
 public class user_info
 {
-    public String zimbraYahooID;
+    public String zmailYahooID;
     public String username;
     public String displayname;
     public String password;
-    public String ZimbraAcctStatus;
+    public String ZmailAcctStatus;
     public String description;
-    public String zimbraCOSId;
-    public String zimbraMailCanonicalAddress;
-    public String zimbraDomainAdmin;
-    public String zimbraPrefMailForwardingAddress;
+    public String zmailCOSId;
+    public String zmailMailCanonicalAddress;
+    public String zmailDomainAdmin;
+    public String zmailPrefMailForwardingAddress;
     //owner_yid,reg,product_type,domain,max_accounts,active_accounts, (<---PA_FIELDS)
     //emailaddr:yid:reg:fullname:farm:sledid:silo:privileges          (<---Account fields)
     public static final int OWNERYID=0;

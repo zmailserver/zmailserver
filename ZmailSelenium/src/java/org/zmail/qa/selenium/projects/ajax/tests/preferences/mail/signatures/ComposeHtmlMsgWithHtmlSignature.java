@@ -14,31 +14,31 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.preferences.mail.signatures;
+package org.zmail.qa.selenium.projects.ajax.tests.preferences.mail.signatures;
 
 import java.util.HashMap;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.items.MailItem;
-import com.zimbra.qa.selenium.framework.items.RecipientItem;
-import com.zimbra.qa.selenium.framework.items.SignatureItem;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.XmlStringUtil;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount.SOAP_DESTINATION_HOST_TYPE;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.items.MailItem;
+import org.zmail.qa.selenium.framework.items.RecipientItem;
+import org.zmail.qa.selenium.framework.items.SignatureItem;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.XmlStringUtil;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.framework.util.ZmailAccount.SOAP_DESTINATION_HOST_TYPE;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew;
 
 
 public class ComposeHtmlMsgWithHtmlSignature extends AjaxCommonTest {
-	String sigName = "signame" + ZimbraSeleniumProperties.getUniqueString();
-	String sigBody = "signature<b>bold"+ ZimbraSeleniumProperties.getUniqueString() + "</b>signature";
+	String sigName = "signame" + ZmailSeleniumProperties.getUniqueString();
+	String sigBody = "signature<b>bold"+ ZmailSeleniumProperties.getUniqueString() + "</b>signature";
 	String contentHTML = XmlStringUtil.escapeXml("<html>" + "<head></head>"
 			+ "<body>" + sigBody + "</body>" + "</html>");
 
@@ -47,7 +47,7 @@ public class ComposeHtmlMsgWithHtmlSignature extends AjaxCommonTest {
 		super.startingPage = app.zPageMail;
 		super.startingAccountPreferences = new HashMap<String, String>() {
 			{
-				put("zimbraPrefComposeFormat", "html");
+				put("zmailPrefComposeFormat", "html");
 			}
 		};
 	}
@@ -55,9 +55,9 @@ public class ComposeHtmlMsgWithHtmlSignature extends AjaxCommonTest {
 	@BeforeClass(groups = { "always" })
 	public void CreateSignature() throws HarnessException {
 		System.out.println(this.sigName);
-		ZimbraAccount.AccountZWC().authenticate(SOAP_DESTINATION_HOST_TYPE.SERVER);
-		ZimbraAccount.AccountZWC().soapSend(
-				"<CreateSignatureRequest xmlns='urn:zimbraAccount'>"
+		ZmailAccount.AccountZWC().authenticate(SOAP_DESTINATION_HOST_TYPE.SERVER);
+		ZmailAccount.AccountZWC().soapSend(
+				"<CreateSignatureRequest xmlns='urn:zmailAccount'>"
 				+ "<signature name='" + this.sigName + "' >"
 				+ "<content type='text/html'>'" + this.contentHTML
 				+ "'</content>" + "</signature>"
@@ -80,10 +80,10 @@ public class ComposeHtmlMsgWithHtmlSignature extends AjaxCommonTest {
 
 		// Create the message data to be sent
 		MailItem mail = new MailItem();
-		mail.dToRecipients.add(new RecipientItem(ZimbraAccount.AccountZWC()));
-		mail.dSubject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		//mail.dBodyHtml = "body<b>bold"+ ZimbraSeleniumProperties.getUniqueString()+"</b>body";
-		mail.dBodyHtml = "bodybold"+ ZimbraSeleniumProperties.getUniqueString()+"body";
+		mail.dToRecipients.add(new RecipientItem(ZmailAccount.AccountZWC()));
+		mail.dSubject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		//mail.dBodyHtml = "body<b>bold"+ ZmailSeleniumProperties.getUniqueString()+"</b>body";
+		mail.dBodyHtml = "bodybold"+ ZmailSeleniumProperties.getUniqueString()+"body";
 
 		// Open the new mail form
 		FormMailNew mailform = (FormMailNew) app.zPageMail.zToolbarPressButton(Button.B_NEW);
@@ -98,16 +98,16 @@ public class ComposeHtmlMsgWithHtmlSignature extends AjaxCommonTest {
 		// Send the message
 		mailform.zSubmit();
 
-		ZimbraAccount.AccountZWC().soapSend(
-				"<SearchRequest xmlns='urn:zimbraMail' types='message'>"
+		ZmailAccount.AccountZWC().soapSend(
+				"<SearchRequest xmlns='urn:zmailMail' types='message'>"
 				+ "<query>in:inbox subject:(" + mail.dSubject + ")</query>" + "</SearchRequest>");
 
-		String id = ZimbraAccount.AccountZWC().soapSelectValue("//mail:SearchResponse/mail:m", "id");
+		String id = ZmailAccount.AccountZWC().soapSelectValue("//mail:SearchResponse/mail:m", "id");
 
-		ZimbraAccount.AccountZWC().soapSend(
-				"<GetMsgRequest xmlns='urn:zimbraMail'>" + "<m id='" + id
+		ZmailAccount.AccountZWC().soapSend(
+				"<GetMsgRequest xmlns='urn:zmailMail'>" + "<m id='" + id
 				+ "' html='1'/>" + "</GetMsgRequest>");
-		Element getMsgResponse = ZimbraAccount.AccountZWC().soapSelectNode("//mail:GetMsgResponse", 1);
+		Element getMsgResponse = ZmailAccount.AccountZWC().soapSelectNode("//mail:GetMsgResponse", 1);
 		MailItem received = MailItem.importFromSOAP(getMsgResponse);
 
 		// Verify TO, Subject,html Body,html signature
@@ -115,7 +115,7 @@ public class ComposeHtmlMsgWithHtmlSignature extends AjaxCommonTest {
 		logger.info(mail.dBodyHtml);
 
 		ZAssert.assertEquals(received.dFromRecipient.dEmailAddress, app.zGetActiveAccount().EmailAddress,"Verify the from field is correct");
-		ZAssert.assertEquals(received.dToRecipients.get(0).dEmailAddress,ZimbraAccount.AccountZWC().EmailAddress,"Verify the to field is correct");
+		ZAssert.assertEquals(received.dToRecipients.get(0).dEmailAddress,ZmailAccount.AccountZWC().EmailAddress,"Verify the to field is correct");
 		ZAssert.assertEquals(received.dSubject, mail.dSubject,"Verify the subject field is correct");
 		ZAssert.assertStringContains(received.dBodyHtml.toLowerCase(), mail.dBodyHtml,"Verify the body content is correct");
 		ZAssert.assertStringContains(received.dBodyHtml.toLowerCase(), this.sigBody,"Verify the signature is correct");

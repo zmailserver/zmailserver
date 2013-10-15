@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-Com_Zimbra_Date.DEFAULT_FORMATS = [
+Com_Zmail_Date.DEFAULT_FORMATS = [
 	// conversion to UTC done with http://timeanddate.com/
     "Dante Mateo Comfort",          "2011-03-01T17:26:00Z",
 	"Brooke Ellen Henrikson",		"2009-10-17T10:20:00Z",

@@ -70,7 +70,7 @@ function () {
 	this._popupOperations[ZaOperation.SAVE]=new ZaOperation(ZaOperation.SAVE,ZaMsg.TBB_Save, ZaMsg.DTBB_Save_tt, "Save", "SaveDis", new AjxListener(this, this.saveButtonListener));
 
 
-	if(ZaItem.hasRight(ZaDomain.RIGHT_CREATE_TOP_DOMAIN, ZaZimbraAdmin.currentAdminAccount)
+	if(ZaItem.hasRight(ZaDomain.RIGHT_CREATE_TOP_DOMAIN, ZaZmailAdmin.currentAdminAccount)
 	|| ZaItem.hasRight(ZaDomain.RIGHT_CREATE_SUB_DOMAIN, this._currentObject)) {
 		this._popupOperations[ZaOperation.NEW]=new ZaOperation(ZaOperation.NEW,ZaMsg.TBB_New, ZaMsg.DTBB_New_tt, "Domain", "DomainDis", new AjxListener(this, this._newButtonListener));
 	}
@@ -179,8 +179,8 @@ function () {
 	
 	this._currentObject["mods"] = mods;
 
-    if (!(AjxUtil.isEmpty(tmpObj[ZaAccount.A_zimbraMailCatchAllAddress]) && AjxUtil.isEmpty(this._currentObject[ZaAccount.A_zimbraMailCatchAllAddress])) 
-    	&& (tmpObj[ZaAccount.A_zimbraMailCatchAllAddress] != this._currentObject[ZaAccount.A_zimbraMailCatchAllAddress])) {
+    if (!(AjxUtil.isEmpty(tmpObj[ZaAccount.A_zmailMailCatchAllAddress]) && AjxUtil.isEmpty(this._currentObject[ZaAccount.A_zmailMailCatchAllAddress])) 
+    	&& (tmpObj[ZaAccount.A_zmailMailCatchAllAddress] != this._currentObject[ZaAccount.A_zmailMailCatchAllAddress])) {
          catchAllChanged = true ;
     }
 
@@ -195,8 +195,8 @@ function () {
     }
 
 	for (var a in tmpObj.attrs) {
-		if(a == ZaItem.A_zimbraId || a==ZaDomain.A_domainName  || a == ZaDomain.A_domainType
-                || a == ZaItem.A_zimbraACE) {
+		if(a == ZaItem.A_zmailId || a==ZaDomain.A_domainName  || a == ZaDomain.A_domainType
+                || a == ZaItem.A_zmailACE) {
 			continue;
 		}
 		if(!ZaItem.hasWritePermission(a,tmpObj)) {
@@ -217,21 +217,21 @@ function () {
 			} else if(tmpObj.attrs[a] != this._currentObject.attrs[a]) {
 				mods[a] = tmpObj.attrs[a];
 				haveSmth = true;
-				if(a == ZaDomain.A_zimbraSkinForegroundColor || a == ZaDomain.A_zimbraSkinBackgroundColor || 
-					a == ZaDomain.A_zimbraSkinSecondaryColor || a == ZaDomain.A_zimbraSkinSelectionColor ||
-					a == ZaDomain.A_zimbraSkinLogoURL || a == ZaDomain.A_zimbraSkinLogoLoginBanner || 
-					a == ZaDomain.A_zimbraSkinLogoAppBanner) {
+				if(a == ZaDomain.A_zmailSkinForegroundColor || a == ZaDomain.A_zmailSkinBackgroundColor || 
+					a == ZaDomain.A_zmailSkinSecondaryColor || a == ZaDomain.A_zmailSkinSelectionColor ||
+					a == ZaDomain.A_zmailSkinLogoURL || a == ZaDomain.A_zmailSkinLogoLoginBanner || 
+					a == ZaDomain.A_zmailSkinLogoAppBanner) {
 					skinChanged = true;
 				}				
 			}
 		}
 	}
 
-	if(!this.checkCertKeyValid(tmpObj.attrs[ZaDomain.A_zimbraSSLCertificate],tmpObj.attrs[ZaDomain.A_zimbraSSLPrivateKey]))
+	if(!this.checkCertKeyValid(tmpObj.attrs[ZaDomain.A_zmailSSLCertificate],tmpObj.attrs[ZaDomain.A_zmailSSLPrivateKey]))
 		return false;
 	// check validation expression, which should be email-like pattern
-	if(tmpObj.attrs[ZaDomain.A_zimbraMailAddressValidationRegex]) {
-		var regList = tmpObj.attrs[ZaDomain.A_zimbraMailAddressValidationRegex];
+	if(tmpObj.attrs[ZaDomain.A_zmailMailAddressValidationRegex]) {
+		var regList = tmpObj.attrs[ZaDomain.A_zmailMailAddressValidationRegex];
 		var islegal = true;
 		var regval = null;
 		if(regList && regList instanceof Array) {
@@ -249,7 +249,7 @@ function () {
 		}
 		if(!islegal) {
 			this._errorDialog.setMessage(AjxMessageFormat.format(ZaMsg.ERROR_MSG_EmailValidReg, regval), 
-				null, DwtMessageDialog.CRITICAL_STYLE, ZabMsg.zimbraAdminTitle);
+				null, DwtMessageDialog.CRITICAL_STYLE, ZabMsg.zmailAdminTitle);
                         this._errorDialog.popup();
 			return islegal;
 		}
@@ -257,12 +257,12 @@ function () {
 
 	if(!haveSmth) {
 		if(tmpObj[ZaDomain.A2_gal_sync_accounts] && tmpObj[ZaDomain.A2_gal_sync_accounts][0]) { 
-			if(tmpObj[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_zimbra_ds] 
-				&& tmpObj[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_zimbra_ds].attrs
-				&& this._currentObject[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_zimbra_ds]
-				&& this._currentObject[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_zimbra_ds].attrs) {
-				if(this._currentObject[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_zimbra_ds].attrs[ZaDataSource.A_zimbraDataSourcePollingInterval] !=
-				tmpObj[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_zimbra_ds].attrs[ZaDataSource.A_zimbraDataSourcePollingInterval]) {
+			if(tmpObj[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_zmail_ds] 
+				&& tmpObj[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_zmail_ds].attrs
+				&& this._currentObject[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_zmail_ds]
+				&& this._currentObject[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_zmail_ds].attrs) {
+				if(this._currentObject[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_zmail_ds].attrs[ZaDataSource.A_zmailDataSourcePollingInterval] !=
+				tmpObj[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_zmail_ds].attrs[ZaDataSource.A_zmailDataSourcePollingInterval]) {
 					haveSmth = true;
 				}
 			}
@@ -275,8 +275,8 @@ function () {
 				&& tmpObj[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_ldap_ds].attrs
 				&& this._currentObject[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_ldap_ds]
 				&& this._currentObject[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_ldap_ds].attrs) {
-				if(this._currentObject[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_ldap_ds].attrs[ZaDataSource.A_zimbraDataSourcePollingInterval] !=
-				tmpObj[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_ldap_ds].attrs[ZaDataSource.A_zimbraDataSourcePollingInterval]) {
+				if(this._currentObject[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_ldap_ds].attrs[ZaDataSource.A_zmailDataSourcePollingInterval] !=
+				tmpObj[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_ldap_ds].attrs[ZaDataSource.A_zmailDataSourcePollingInterval]) {
 					haveSmth = true;
 				}
 			}
@@ -286,32 +286,32 @@ function () {
 		try { 
 			if(renameNotebookAccount) {
 				var account = new ZaAccount();
-				account.load(ZaAccount.A_name,this._currentObject.attrs[ZaDomain.A_zimbraNotebookAccount]);
-				account.rename(tmpObj.attrs[ZaDomain.A_zimbraNotebookAccount]);
+				account.load(ZaAccount.A_name,this._currentObject.attrs[ZaDomain.A_zmailNotebookAccount]);
+				account.rename(tmpObj.attrs[ZaDomain.A_zmailNotebookAccount]);
 			}
 
             //change the catchAllMailAddress for the account
             if (catchAllChanged) {
                 //1. remove the old account catchAll
-                if(!AjxUtil.isEmpty(this._currentObject[ZaAccount.A_zimbraMailCatchAllAddress]) && !AjxUtil.isEmpty(this._currentObject[ZaAccount.A_zimbraMailCatchAllAddress].id)) {
-                	ZaAccount.modifyCatchAll (this._currentObject[ZaAccount.A_zimbraMailCatchAllAddress].id, "") ;
-                } else if (this._currentObject[ZaAccount.A_zimbraMailCatchAllAddress] && ZaItem.ID_PATTERN.test(this._currentObject[ZaAccount.A_zimbraMailCatchAllAddress])) {
-                	ZaAccount.modifyCatchAll (this._currentObject[ZaAccount.A_zimbraMailCatchAllAddress], "") ;
+                if(!AjxUtil.isEmpty(this._currentObject[ZaAccount.A_zmailMailCatchAllAddress]) && !AjxUtil.isEmpty(this._currentObject[ZaAccount.A_zmailMailCatchAllAddress].id)) {
+                	ZaAccount.modifyCatchAll (this._currentObject[ZaAccount.A_zmailMailCatchAllAddress].id, "") ;
+                } else if (this._currentObject[ZaAccount.A_zmailMailCatchAllAddress] && ZaItem.ID_PATTERN.test(this._currentObject[ZaAccount.A_zmailMailCatchAllAddress])) {
+                	ZaAccount.modifyCatchAll (this._currentObject[ZaAccount.A_zmailMailCatchAllAddress], "") ;
                 }
-                if(!AjxUtil.isEmpty(tmpObj[ZaAccount.A_zimbraMailCatchAllAddress]) && !AjxUtil.isEmpty(tmpObj[ZaAccount.A_zimbraMailCatchAllAddress].id)) {
+                if(!AjxUtil.isEmpty(tmpObj[ZaAccount.A_zmailMailCatchAllAddress]) && !AjxUtil.isEmpty(tmpObj[ZaAccount.A_zmailMailCatchAllAddress].id)) {
                 //2. Add the new account catchAll
-                	ZaAccount.modifyCatchAll (tmpObj[ZaAccount.A_zimbraMailCatchAllAddress].id, this._currentObject.attrs[ZaDomain.A_domainName]) ;
-                } else if(tmpObj[ZaAccount.A_zimbraMailCatchAllAddress] && ZaItem.ID_PATTERN.test(tmpObj[ZaAccount.A_zimbraMailCatchAllAddress])) {
-                	ZaAccount.modifyCatchAll (tmpObj[ZaAccount.A_zimbraMailCatchAllAddress], this._currentObject.attrs[ZaDomain.A_domainName]) ;	
+                	ZaAccount.modifyCatchAll (tmpObj[ZaAccount.A_zmailMailCatchAllAddress].id, this._currentObject.attrs[ZaDomain.A_domainName]) ;
+                } else if(tmpObj[ZaAccount.A_zmailMailCatchAllAddress] && ZaItem.ID_PATTERN.test(tmpObj[ZaAccount.A_zmailMailCatchAllAddress])) {
+                	ZaAccount.modifyCatchAll (tmpObj[ZaAccount.A_zmailMailCatchAllAddress], this._currentObject.attrs[ZaDomain.A_domainName]) ;	
                 	
                 }
-                if(!AjxUtil.isEmpty(tmpObj[ZaAccount.A_zimbraMailCatchAllAddress])  && !AjxUtil.isEmpty(tmpObj[ZaAccount.A_zimbraMailCatchAllAddress].id)) {
+                if(!AjxUtil.isEmpty(tmpObj[ZaAccount.A_zmailMailCatchAllAddress])  && !AjxUtil.isEmpty(tmpObj[ZaAccount.A_zmailMailCatchAllAddress].id)) {
                 //3. Set the new catchAll value to the current object
-                	this._currentObject[ZaAccount.A_zimbraMailCatchAllAddress] = tmpObj[ZaAccount.A_zimbraMailCatchAllAddress] ;
-                } else if (!AjxUtil.isEmpty(tmpObj[ZaAccount.A_zimbraMailCatchAllAddress]) && ZaItem.ID_PATTERN.test(tmpObj[ZaAccount.A_zimbraMailCatchAllAddress])) {
+                	this._currentObject[ZaAccount.A_zmailMailCatchAllAddress] = tmpObj[ZaAccount.A_zmailMailCatchAllAddress] ;
+                } else if (!AjxUtil.isEmpty(tmpObj[ZaAccount.A_zmailMailCatchAllAddress]) && ZaItem.ID_PATTERN.test(tmpObj[ZaAccount.A_zmailMailCatchAllAddress])) {
                 	var acc = new ZaAccount(ZaApp.getInstance());
-                	acc.load("id",tmpObj[ZaAccount.A_zimbraMailCatchAllAddress],false,true);
-                	this._currentObject[ZaAccount.A_zimbraMailCatchAllAddress] = acc;
+                	acc.load("id",tmpObj[ZaAccount.A_zmailMailCatchAllAddress],false,true);
+                	this._currentObject[ZaAccount.A_zmailMailCatchAllAddress] = acc;
                 }
             }
 
@@ -635,7 +635,7 @@ function (resp) {
 				msgArray.push(response.entry[i]._content);
 			}
 		}
-		this._errorDialog.setMessage(response.message[0]._content, msgArray.join("<br/>"), DwtMessageDialog.CRITICAL_STYLE, ZabMsg.zimbraAdminTitle);
+		this._errorDialog.setMessage(response.message[0]._content, msgArray.join("<br/>"), DwtMessageDialog.CRITICAL_STYLE, ZabMsg.zmailAdminTitle);
 		this._errorDialog.popup();
 	}
 	
@@ -665,7 +665,7 @@ function(cert, prvkey) {
 		resp = ZaCert.verifyCertKey(ZaApp.getInstance(), params);
 
 		if(!resp){
-                        this._errorDialog.setMessage(ZaMsg.SERVER_ERROR, ZaMsg.ERROR_DOMAIN_CERT_VERIFY, DwtMessageDialog.CRITICAL_STYLE, ZabMsg.zimbraAdminTitle);
+                        this._errorDialog.setMessage(ZaMsg.SERVER_ERROR, ZaMsg.ERROR_DOMAIN_CERT_VERIFY, DwtMessageDialog.CRITICAL_STYLE, ZabMsg.zmailAdminTitle);
                         this._errorDialog.popup();
                         return false;
                  
@@ -673,12 +673,12 @@ function(cert, prvkey) {
 
 		var verifyResult = resp.verifyResult;
 		if(verifyResult == "false") {
-	                this._errorDialog.setMessage(ZaMsg.ERROR_DOMAIN_CERT_KEY_VERIFY, ZaMsg.ALERT_DOMAIN_CERT_KEY, DwtMessageDialog.CRITICAL_STYLE, ZabMsg.zimbraAdminTitle);
+	                this._errorDialog.setMessage(ZaMsg.ERROR_DOMAIN_CERT_KEY_VERIFY, ZaMsg.ALERT_DOMAIN_CERT_KEY, DwtMessageDialog.CRITICAL_STYLE, ZabMsg.zmailAdminTitle);
         	        this._errorDialog.popup();
 			return false;
 		 }else if(verifyResult == "invalid") {
                         this._errorDialog.setMessage(ZaMsg.ERROR_DOMAIN_CERT_KEY_INVALID, null, DwtMessageDialog.CRITICAL_STYLE, ZaMsg.
-zimbraAdminTitle);
+zmailAdminTitle);
                         this._errorDialog.popup();
                         return false;
 		 }else if(verifyResult == "true") {
@@ -686,11 +686,11 @@ zimbraAdminTitle);
 		 } else return false;
 
 	} else if(!cert && prvkey) {
-                        this._errorDialog.setMessage(ZaMsg.ERROR_DOMAIN_CERT_MISSING, null, DwtMessageDialog.CRITICAL_STYLE, ZabMsg.zimbraAdminTitle);
+                        this._errorDialog.setMessage(ZaMsg.ERROR_DOMAIN_CERT_MISSING, null, DwtMessageDialog.CRITICAL_STYLE, ZabMsg.zmailAdminTitle);
                         this._errorDialog.popup();
 			return false;
 	} else if(cert && !prvkey) {
-                        this._errorDialog.setMessage(ZaMsg.ERROR_DOMAIN_KEY_MISSING, null, DwtMessageDialog.CRITICAL_STYLE, ZabMsg.zimbraAdminTitle);
+                        this._errorDialog.setMessage(ZaMsg.ERROR_DOMAIN_KEY_MISSING, null, DwtMessageDialog.CRITICAL_STYLE, ZabMsg.zmailAdminTitle);
                         this._errorDialog.popup();
                         return false;
 	}

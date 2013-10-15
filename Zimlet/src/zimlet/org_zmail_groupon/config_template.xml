@@ -14,7 +14,7 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimletConfig name="com_zimbra_groupon" version="0.2">
+<zimletConfig name="org_zmail_groupon" version="0.2">
     <global>
         <property name="allowedDomains">*.groupon.com</property>
     </global>

@@ -1,6 +1,6 @@
 ABOUT
 
-The Zimbra web client allows customization using skins (also known as
+The Zmail web client allows customization using skins (also known as
 themes). Skins are collection of files that define the HTML layout, CSS
 styles, images, and text messages.
 
@@ -14,8 +14,8 @@ files that apply to the standard or advanced clients or both.
 All of the default skins that ship with ZCS are found at the following
 location:
 
-source:     //depot/{branch}/ZimbraWebClient/WebRoot/skins/
-deployed:   /opt/zimbra/jetty/webapps/zimbra/skins/
+source:     //depot/{branch}/ZmailWebClient/WebRoot/skins/
+deployed:   /opt/zmail/jetty/webapps/zmail/skins/
 
 and may contain the following files:
 
@@ -29,10 +29,10 @@ and may contain the following files:
 The skin can define its own resources or rely on resources from another
 (or a base) skin. Most skins use the base skin resources located at:
 
-	//depot/{branch}/ZimbraWebClient/WebRoot/skins/_base/base2/
+	//depot/{branch}/ZmailWebClient/WebRoot/skins/_base/base2/
 
-SEE: http://files.zimbra.com/docs/skins/Themes.html
-SEE: http://files.zimbra.com/docs/skins/Themes.html#skinmanifest
+SEE: http://files.zmail.com/docs/skins/Themes.html
+SEE: http://files.zmail.com/docs/skins/Themes.html#skinmanifest
 
 
 RESOURCES
@@ -41,7 +41,7 @@ The skin resources are processed and aggregated for the client by the
 SkinResources servlet. The request URL to this servlet can contain a
 comma-separate list of resources of a given resource type. For example:
 
-	http://example.com/zimbra/css/common,dwt,skin.css
+	http://example.org/zmail/css/common,dwt,skin.css
 
 For each item in the comma-separated list (e.g. "common", "dwt", and
 "skin"), the resources are combined for the client. The result is
@@ -50,12 +50,12 @@ If the item in the comma-separated list is "skin", the servlet reads
 the skin's manifest file to determine the set of files to aggregate
 for the request type. Otherwise, the file contents comes from resource
 directory specified in the request URL. For example, the "common" item
-corresponds to /zimbra/css/common.css.
+corresponds to /zmail/css/common.css.
 
 Complete skin details can be found in the Themes document.
 
-SEE: com.zimbra.webClient.servlet.SkinResources
-SEE: http://files.zimbra.com/docs/skins/Themes.html#skinpropertyfiles
+SEE: org.zmail.webClient.servlet.SkinResources
+SEE: http://files.zmail.com/docs/skins/Themes.html#skinpropertyfiles
 
 
 CHAMELEON SKIN
@@ -65,50 +65,50 @@ of LDAP attributes that affect the appearance of *all* of the skins for
 a given domain or all domains. When set, the chameleon values override
 colors and logos in the skin resources.
 
-zimbraSkinForegroundColor
+zmailSkinForegroundColor
 
 	Foreground (or text) in the user interface. Default is black.
 	This value is rarely changed and may have unexepected results
 	if changed to a non-dark color.
 
-zimbraSkinBackgroundColor
+zmailSkinBackgroundColor
 
 	Background in the user interface. This is the primary color of the
 	user interface. Other colors in the user interface are based on this
 	color (i.e. lighter and darker shades for borders, etc).
 
-	SEE: zimbraSkinSecondaryColor
+	SEE: zmailSkinSecondaryColor
 
-zimbraSkinSecondaryColor
+zmailSkinSecondaryColor
 
 	Secondary color in the user interface. This color is used in most
 	skins for accented elements such as the selected app, the app toolbar,
 	etc.
 
-	SEE: zimbraSkinBackgroundColor
+	SEE: zmailSkinBackgroundColor
 
-zimbraSkinSelectionColor
+zmailSkinSelectionColor
 
 	Selection color in the user inteface. This color is used to highlight
 	selected items in lists and pop-up menus.
 
-zimbraSkinLogoLoginBanner
+zmailSkinLogoLoginBanner
 
 	URL of the logo that appears on the login page. Recommend to use
 	absolute URLs but you can use relative URLs if the image is on
 	the deployment server accessible to the web application.
 
-	SEE: zimbraSkinLogoAppBanner
+	SEE: zmailSkinLogoAppBanner
 
-zimbraSkinLogoAppBanner
+zmailSkinLogoAppBanner
 
 	URL of the logo that appears in the main app. Recommend to use
 	absolute URLs but you can use relative URLs if the image is on
 	the deployment server accessible to the web application.
 
-	SEE: zimbraSkinLogoLoginBanner
+	SEE: zmailSkinLogoLoginBanner
 
-zimbraSkinFavicon
+zmailSkinFavicon
 
 	URL of the browser favorite icon. Recommend to use absolute URLs
 	but you can use relative URLs if the icon is on the deployment
@@ -116,8 +116,8 @@ zimbraSkinFavicon
 
 	NOTE: Older versions of ZCS did not support this attribute.
 
-SEE: zmprov md {domain} zimbraSkinForegroundColor silver
-SEE: zimbraSkinLogoURL
+SEE: zmprov md {domain} zmailSkinForegroundColor silver
+SEE: zmailSkinLogoURL
 
 NOTE: The overrides only work on skins that use the same property names
       as the default skins. If you use custom skins, some or all of these

@@ -12,20 +12,20 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.ab.yab;
+package org.zmail.cs.offline.ab.yab;
 
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.offline.OfflineDataSource;
-import com.zimbra.cs.offline.util.yab.Session;
-import com.zimbra.cs.offline.util.yab.ErrorResult;
-import com.zimbra.cs.offline.util.yab.YabException;
-import com.zimbra.cs.offline.util.OfflineYAuth;
-import com.zimbra.cs.offline.OfflineLog;
-import com.zimbra.cs.offline.ab.LocalData;
-import com.zimbra.cs.mailbox.SyncExceptionHandler;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Log;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.offline.OfflineDataSource;
+import org.zmail.cs.offline.util.yab.Session;
+import org.zmail.cs.offline.util.yab.ErrorResult;
+import org.zmail.cs.offline.util.yab.YabException;
+import org.zmail.cs.offline.util.OfflineYAuth;
+import org.zmail.cs.offline.OfflineLog;
+import org.zmail.cs.offline.ab.LocalData;
+import org.zmail.cs.mailbox.SyncExceptionHandler;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Log;
 
 import java.util.List;
 import java.io.IOException;

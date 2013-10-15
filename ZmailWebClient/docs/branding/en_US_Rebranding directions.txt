@@ -1,24 +1,24 @@
 REBRANDING ZWC HELP TOPICS - HOW TO CHANGE VARIABLES 
 
-The Zimbra Web Client Help can be rebranded to replace reference to Zimbra and the Zimbra product  name with your company and product names.
+The Zmail Web Client Help can be rebranded to replace reference to Zmail and the Zmail product  name with your company and product names.
 
 The default variables  in the file ZbMsg.properties are as follows:
 
-"web client long name" - ClientNameLong = Zimbra Web Client
+"web client long name" - ClientNameLong = Zmail Web Client
 "web client short name" - ClientNameShort = ZWC
-"Your company name" - CompanyName = Zimbra
-"This variable is not relevant.  Do not change" - DesktopName = Zimbra Desktop
-"product full name" - CollaborationProductFullName = Zimbra Collaboration Suite
+"Your company name" - CompanyName = Zmail
+"This variable is not relevant.  Do not change" - DesktopName = Zmail Desktop
+"product full name" - CollaborationProductFullName = Zmail Collaboration Suite
 "product short name" - CollaborationProductShortName = ZCS
 
 To change these variables
 
-1. SSH to the Zimbra server
+1. SSH to the Zmail server
 
-2. As Zimbra change directory to the following directory
-/opt/zimbra/jetty/webapps/zimbra/WEB-INF/classes/messages/
+2. As Zmail change directory to the following directory
+/opt/zmail/jetty/webapps/zmail/WEB-INF/classes/messages/
 
-3. To change the values, edit ZbMsg.properties.  Replace the Zimbra name with your company name. DO NOT CHANGE OR REMOVE THE VARIABLE DESCRIPTOR.
+3. To change the values, edit ZbMsg.properties.  Replace the Zmail name with your company name. DO NOT CHANGE OR REMOVE THE VARIABLE DESCRIPTOR.
 
 4. Restart the server.  Type zmcontrol restart.
 

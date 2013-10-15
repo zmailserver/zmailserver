@@ -46,21 +46,21 @@ ZaSearchOption.A_basic_uid = ZaAccount.A_uid ;
 //ZaSearchOption.A_basic_cn =  "cn" ;
 ZaSearchOption.A_basic_sn =  "sn" ;
 ZaSearchOption.A_basic_displayName = ZaAccount.A_displayname ;
-ZaSearchOption.A_basic_zimbraId = ZaItem.A_zimbraId ;
+ZaSearchOption.A_basic_zmailId = ZaItem.A_zmailId ;
 //ZaSearchOption.A_basic_mail = ZaAccount.A_mail ;
 ZaSearchOption.A_basic_status = ZaAccount.A_accountStatus ;
 
 ZaSearchOption.A_objTypeAccount = "option_" + ZaSearch.ACCOUNTS ;
-ZaSearchOption.A_objTypeAccountAdmin = ZaAccount.A_zimbraIsAdminAccount ;
-ZaSearchOption.A_objTypeSystemAccount = ZaAccount.A_zimbraIsSystemAccount;
-ZaSearchOption.A_enableAccountLastLoginTime_From = "enable_" + ZaAccount.A_zimbraLastLogonTimestamp + "_From" ;
-ZaSearchOption.A_enableAccountLastLoginTime_To = "enable_" + ZaAccount.A_zimbraLastLogonTimestamp + "_To" ;
+ZaSearchOption.A_objTypeAccountAdmin = ZaAccount.A_zmailIsAdminAccount ;
+ZaSearchOption.A_objTypeSystemAccount = ZaAccount.A_zmailIsSystemAccount;
+ZaSearchOption.A_enableAccountLastLoginTime_From = "enable_" + ZaAccount.A_zmailLastLogonTimestamp + "_From" ;
+ZaSearchOption.A_enableAccountLastLoginTime_To = "enable_" + ZaAccount.A_zmailLastLogonTimestamp + "_To" ;
 ZaSearchOption.A_includeNeverLoginedAccounts = "include_never_login_accounts" ;
-ZaSearchOption.A_accountLastLoginTime_From = ZaAccount.A_zimbraLastLogonTimestamp + "_From" ;
-ZaSearchOption.A_accountLastLoginTime_To = ZaAccount.A_zimbraLastLogonTimestamp + "_To" ;
-ZaSearchOption.A_accountLastLoginTime = ZaAccount.A_zimbraLastLogonTimestamp ;
-ZaSearchOption.A_zimbraMailForwardingAddress = ZaAccount.A_zimbraMailForwardingAddress ;
-ZaSearchOption.A_zimbraPrefMailForwardingAddress = ZaAccount.A_zimbraPrefMailForwardingAddress ;
+ZaSearchOption.A_accountLastLoginTime_From = ZaAccount.A_zmailLastLogonTimestamp + "_From" ;
+ZaSearchOption.A_accountLastLoginTime_To = ZaAccount.A_zmailLastLogonTimestamp + "_To" ;
+ZaSearchOption.A_accountLastLoginTime = ZaAccount.A_zmailLastLogonTimestamp ;
+ZaSearchOption.A_zmailMailForwardingAddress = ZaAccount.A_zmailMailForwardingAddress ;
+ZaSearchOption.A_zmailPrefMailForwardingAddress = ZaAccount.A_zmailPrefMailForwardingAddress ;
 //ZaSearchOption.A_objTypeAccountRegular = "option_" + ZaSearch.ACCOUNTS + "_regular" ;
 ZaSearchOption.A_objTypeDl = "option_" + ZaSearch.DLS ;
 ZaSearchOption.A_objTypeAlias = "option_" + ZaSearch.ALIASES;
@@ -107,7 +107,7 @@ function (optionId){
 			//{id: ZaSearchOption.A_basic_cn, ref: "options/" + ZaSearchOption.A_basic_cn, type: _STRING_},
 			{id: ZaSearchOption.A_basic_sn, ref: "options/" + ZaSearchOption.A_basic_sn, type: _STRING_},
 			{id: ZaSearchOption.A_basic_displayName, ref: "options/" + ZaSearchOption.A_basic_displayName, type: _STRING_},
-			{id: ZaSearchOption.A_basic_zimbraId, ref: "options/" + ZaSearchOption.A_basic_zimbraId, type: _STRING_},
+			{id: ZaSearchOption.A_basic_zmailId, ref: "options/" + ZaSearchOption.A_basic_zmailId, type: _STRING_},
 			//{id: ZaSearchOption.A_basic_mail, ref: "options/" + ZaSearchOption.A_basic_mail, type: _STRING_}
 			//{id: ZaSearchOption.A_accountLastLoginTime, ref: "options/" + ZaSearchOption.A_accountLastLoginTime, type: _STRING_},
 			{id: ZaSearchOption.A_basic_status, ref: "options/" + ZaSearchOption.A_basic_status, type: _STRING_}
@@ -154,7 +154,7 @@ function (optionId){
 			//last login time
 			{id: ZaSearchOption.A_accountLastLoginTime_From, ref: "options/" + ZaSearchOption.A_accountLastLoginTime_From, type:_DATETIME_},	
 			{id: ZaSearchOption.A_accountLastLoginTime_To, ref: "options/" + ZaSearchOption.A_accountLastLoginTime_To, type:_DATETIME_},
-            {id: ZaSearchOption.A_zimbraMailForwardingAddress, ref: "options/" + ZaSearchOption.A_zimbraMailForwardingAddress, type:_STRING_}
+            {id: ZaSearchOption.A_zmailMailForwardingAddress, ref: "options/" + ZaSearchOption.A_zmailMailForwardingAddress, type:_STRING_}
 	];
 
     var cosItems = [
@@ -193,7 +193,7 @@ function (optionId){
 			{id: ZaSearchOption.A_objTypeSystemAccount, ref: "options/" + ZaSearchOption.A_objTypeSystemAccount, type: _STRING_},
 			{id: ZaSearchOption.A_basic_sn, ref: "options/" + ZaSearchOption.A_basic_sn, type: _STRING_},
 			{id: ZaSearchOption.A_basic_displayName, ref: "options/" + ZaSearchOption.A_basic_displayName, type: _STRING_},
-			{id: ZaSearchOption.A_basic_zimbraId, ref: "options/" + ZaSearchOption.A_basic_zimbraId, type: _STRING_}
+			{id: ZaSearchOption.A_basic_zmailId, ref: "options/" + ZaSearchOption.A_basic_zmailId, type: _STRING_}
 		];
 
 	//network build
@@ -237,7 +237,7 @@ function (optionId){
     ];
 
     var extEmailItem = [
-            {id: ZaSearchOption.A_zimbraMailForwardingAddress, ref: "options/" + ZaSearchOption.A_zimbraMailForwardingAddress, type:_STRING_}
+            {id: ZaSearchOption.A_zmailMailForwardingAddress, ref: "options/" + ZaSearchOption.A_zmailMailForwardingAddress, type:_STRING_}
     ]
     var accountStatusItem = [
         {id:ZaSearchOption.A2_status_active, ref: "options/" + ZaSearchOption.A2_status_active, type:_STRING_},
@@ -305,8 +305,8 @@ function (optionId, height){
 			onChange: ZaSearchBuilderController.handleOptions,
 			enableDisableChecks:[],visibilityChecks:[]
 		 },
-		 { type: _TEXTFIELD_, ref:  ZaSearchOption.A_basic_zimbraId,
-			label: ZaMsg.search_option_zimbraId, align: _LEFT_, width: 100, 
+		 { type: _TEXTFIELD_, ref:  ZaSearchOption.A_basic_zmailId,
+			label: ZaMsg.search_option_zmailId, align: _LEFT_, width: 100, 
 			onChange: ZaSearchBuilderController.handleOptions,
 			enableDisableChecks:[],visibilityChecks:[]
 		 },
@@ -529,7 +529,7 @@ function (optionId, height){
 			 		{ref:ZaSearchOption.A_accountLastLoginTime_From, colSpan: "*", type:_DWT_DATETIME_,
 			 			onChange: ZaSearchBuilderController.handleOptions,
 			 			visibilityChecks:[[XForm.checkInstanceValue,ZaSearchOption.A_enableAccountLastLoginTime_From,"TRUE"]],
-			 			bmolsnr:true,firstDayOfWeek:ZaZimbraAdmin.FIRST_DAY_OF_WEEK,
+			 			bmolsnr:true,firstDayOfWeek:ZaZmailAdmin.FIRST_DAY_OF_WEEK,
                         visibilityChangeEventSources: [ZaSearchOption.A_enableAccountLastLoginTime_From] ,
 			 			label:ZaMsg.search_option_label_from, labelLocation:_LEFT_
 					},
@@ -537,13 +537,13 @@ function (optionId, height){
 			 			onChange: ZaSearchBuilderController.handleOptions,	
 			 			visibilityChecks:[[XForm.checkInstanceValue,ZaSearchOption.A_enableAccountLastLoginTime_To,"TRUE"]],
                         visibilityChangeEventSources: [ZaSearchOption.A_enableAccountLastLoginTime_To] ,			 				 				
-			 			bmolsnr:true,firstDayOfWeek:ZaZimbraAdmin.FIRST_DAY_OF_WEEK,
+			 			bmolsnr:true,firstDayOfWeek:ZaZmailAdmin.FIRST_DAY_OF_WEEK,
                         label:ZaMsg.search_option_label_to, labelLocation:_LEFT_
 					}]
 		 		},
 				{type:_SPACER_}, //used to avoid the missing border of the calendar
                 {
-                    type: _TEXTFIELD_, ref:  ZaSearchOption.A_zimbraMailForwardingAddress,
+                    type: _TEXTFIELD_, ref:  ZaSearchOption.A_zmailMailForwardingAddress,
                     label: ZaMsg.LB_External_mail, align: _LEFT_, width: 150, 
                     onChange: ZaSearchBuilderController.handleOptions,
                     toolTipContent: ZaMsg.LB_External_mail_tt,
@@ -600,8 +600,8 @@ function (optionId, height){
 			    enableDisableChecks:[],visibilityChecks:[]
 		        },
                 {type: _CELL_SPACER_, height: 10, colSpan: "*" },
-		        { type: _TEXTFIELD_, ref:  ZaSearchOption.A_basic_zimbraId,
-			    label: ZaMsg.search_option_zimbraId, align: _LEFT_, width: 100,
+		        { type: _TEXTFIELD_, ref:  ZaSearchOption.A_basic_zmailId,
+			    label: ZaMsg.search_option_zmailId, align: _LEFT_, width: 100,
 			    enableDisableChecks:[],visibilityChecks:[]
 		        },
                 {type: _CELL_SPACER_, height: 10, colSpan: "*" },
@@ -757,14 +757,14 @@ function (optionId, height){
 		 			items: [
 			 		{ref:ZaSearchOption.A_accountLastLoginTime_From, colSpan: "*", type:_DWT_DATETIME_,
 			 			visibilityChecks:[[XForm.checkInstanceValue,ZaSearchOption.A_enableAccountLastLoginTime_From,"TRUE"]],
-			 			bmolsnr:true,firstDayOfWeek:ZaZimbraAdmin.FIRST_DAY_OF_WEEK,
+			 			bmolsnr:true,firstDayOfWeek:ZaZmailAdmin.FIRST_DAY_OF_WEEK,
                         visibilityChangeEventSources: [ZaSearchOption.A_enableAccountLastLoginTime_From] ,
 			 			label:ZaMsg.search_option_label_from, labelLocation:_LEFT_
 					},
 					{ref:ZaSearchOption.A_accountLastLoginTime_To, colSpan: "*", type:_DWT_DATETIME_,
 			 			visibilityChecks:[[XForm.checkInstanceValue,ZaSearchOption.A_enableAccountLastLoginTime_To,"TRUE"]],
                         visibilityChangeEventSources: [ZaSearchOption.A_enableAccountLastLoginTime_To] ,
-			 			bmolsnr:true,firstDayOfWeek:ZaZimbraAdmin.FIRST_DAY_OF_WEEK,
+			 			bmolsnr:true,firstDayOfWeek:ZaZmailAdmin.FIRST_DAY_OF_WEEK,
                         label:ZaMsg.search_option_label_to, labelLocation:_LEFT_
 					}]
 		 		}
@@ -774,7 +774,7 @@ function (optionId, height){
 
     var extMailFilterItem = [
         {type:_OUTPUT_, value: ZaMsg.LBL_New_External_mail, colSpan: 2},
-        {type:_TEXTFIELD_, colSpan: 2, ref: ZaSearchOption.A_zimbraMailForwardingAddress, enableDisableChecks:[],
+        {type:_TEXTFIELD_, colSpan: 2, ref: ZaSearchOption.A_zmailMailForwardingAddress, enableDisableChecks:[],
              visibilityChecks:[]}
     ]
 

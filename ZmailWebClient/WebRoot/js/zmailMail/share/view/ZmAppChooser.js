@@ -16,14 +16,14 @@
 /**
  * @overview
  * 
- * This file defines the zimbra application chooser.
+ * This file defines the zmail application chooser.
  *
  */
 
 /**
  * @class
- * This class represents a zimbra application chooser. The chooser is the "tab application" toolbar shown
- * in the Zimbra Web Client. The toolbar buttons are represented as "tabs".
+ * This class represents a zmail application chooser. The chooser is the "tab application" toolbar shown
+ * in the Zmail Web Client. The toolbar buttons are represented as "tabs".
  * 
  * @param	{Hash}	params		a hash of parameters
  * 

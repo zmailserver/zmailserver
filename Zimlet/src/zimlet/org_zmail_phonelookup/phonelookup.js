@@ -14,17 +14,17 @@
  */
 
 /*
-* @author Raja Rao DV (rrao@zimbra.com)
+* @author Raja Rao DV (rrao@zmail.com)
 */
 
 
-function com_zimbra_phonelookup_handlerObject() {
+function org_zmail_phonelookup_handlerObject() {
 };
 
-com_zimbra_phonelookup_handlerObject.prototype = new ZmZimletBase();
-com_zimbra_phonelookup_handlerObject.prototype.constructor = com_zimbra_phonelookup_handlerObject;
+org_zmail_phonelookup_handlerObject.prototype = new ZmZimletBase();
+org_zmail_phonelookup_handlerObject.prototype.constructor = org_zmail_phonelookup_handlerObject;
 
-var PhoneLookupTooltipZimlet = com_zimbra_phonelookup_handlerObject;
+var PhoneLookupTooltipZimlet = org_zmail_phonelookup_handlerObject;
 PhoneLookupTooltipZimlet.API_KEY = "a374f585afac4e9539549d876cba193b";
 PhoneLookupTooltipZimlet.BASE_URL = "http://api.whitepages.com/reverse_phone/1.0/";
 
@@ -134,7 +134,7 @@ function(jsonObj) {
 		zip: address.zip ? address.zip.toString() : "",
 		displayName: listing.displayname ? listing.displayname.toString() : ""
 	};
-	var html = AjxTemplate.expand("com_zimbra_phonelookup.templates.PhoneLookup#RowItem", subs);
+	var html = AjxTemplate.expand("org_zmail_phonelookup.templates.PhoneLookup#RowItem", subs);
 	document.getElementById("phoneLookupZimlet_searchResultsDiv").innerHTML = html;
 };
 
@@ -150,7 +150,7 @@ function() {
 
 PhoneLookupTooltipZimlet.prototype._getTooltipBGHtml =
 function() {
-	return AjxTemplate.expand("com_zimbra_phonelookup.templates.PhoneLookup#Frame");
+	return AjxTemplate.expand("org_zmail_phonelookup.templates.PhoneLookup#Frame");
 };
 
 PhoneLookupTooltipZimlet.prototype._setTooltipSticky =

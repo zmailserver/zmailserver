@@ -16,24 +16,24 @@
 //////////////////////////////////////////////////////////////
 //  Zimlet to handle SMS alerts                             //
 //  @author Satish Dharmaraj                                //
-//  @author Raja Rao DV(rrao@zimbra.com)                    //
+//  @author Raja Rao DV(rrao@zmail.com)                    //
 //////////////////////////////////////////////////////////////
 
-function Com_Zimbra_sms() {
+function Com_Zmail_sms() {
 }
 
-Com_Zimbra_sms.authNS = "http://upsidewireless.com/webservice/authentication";
-Com_Zimbra_sms.autoURI = "http://api.upsidewireless.com/soap/Authentication.asmx";
-Com_Zimbra_sms.smsNS = "http://upsidewireless.com/webservice/sms";
-Com_Zimbra_sms.smsURI = "http://api.upsidewireless.com/soap/sms.asmx";
+Com_Zmail_sms.authNS = "http://upsidewireless.com/webservice/authentication";
+Com_Zmail_sms.autoURI = "http://api.upsidewireless.com/soap/Authentication.asmx";
+Com_Zmail_sms.smsNS = "http://upsidewireless.com/webservice/sms";
+Com_Zmail_sms.smsURI = "http://api.upsidewireless.com/soap/sms.asmx";
 
-Com_Zimbra_sms.prototype = new ZmZimletBase();
-Com_Zimbra_sms.prototype.constructor = Com_Zimbra_sms;
+Com_Zmail_sms.prototype = new ZmZimletBase();
+Com_Zmail_sms.prototype.constructor = Com_Zmail_sms;
 
 
 // Panel Zimlet Methods
-// Called by the Zimbra framework upon an accepted drag'n'drop
-Com_Zimbra_sms.prototype.doDrop =
+// Called by the Zmail framework upon an accepted drag'n'drop
+Com_Zmail_sms.prototype.doDrop =
 function(obj) {
 	switch (obj.TYPE) {
 		case "ZmContact":
@@ -55,7 +55,7 @@ function(obj) {
 	}
 };
 
-Com_Zimbra_sms.prototype.init = function() {
+Com_Zmail_sms.prototype.init = function() {
 
 	this.turnOnZimlet_SMS = this.getUserProperty("turnOnZimlet_SMS") == "true";
 	if (!this.turnOnZimlet_SMS)
@@ -68,12 +68,12 @@ Com_Zimbra_sms.prototype.init = function() {
 };
 
 // Called by the Zimlet framework when the SMS panel item was double clicked
-Com_Zimbra_sms.prototype.doubleClicked = function() {
+Com_Zmail_sms.prototype.doubleClicked = function() {
 	this.singleClicked();
 };
 
 // Called by the Zimlet framework when the SMS panel item was single clicked
-Com_Zimbra_sms.prototype.singleClicked = function(toValue, bodyValue) {
+Com_Zmail_sms.prototype.singleClicked = function(toValue, bodyValue) {
 	if (!this.turnOnZimlet_SMS) {
 		this._showWarningMsg("Please Turn-ON SMS Zimlet. Right-click on Zimlet > Select Preferences");
 		return;
@@ -141,7 +141,7 @@ Com_Zimbra_sms.prototype.singleClicked = function(toValue, bodyValue) {
 		}));
 };
 
-Com_Zimbra_sms.prototype.menuItemSelected = function(itemId) {
+Com_Zmail_sms.prototype.menuItemSelected = function(itemId) {
 	switch (itemId) {
 		case "PREFERENCES":
 			this.createPropertyEditor();
@@ -150,7 +150,7 @@ Com_Zimbra_sms.prototype.menuItemSelected = function(itemId) {
 };
 
 // Private Methods
-Com_Zimbra_sms.prototype._apptDropped = function(appt) {
+Com_Zmail_sms.prototype._apptDropped = function(appt) {
 
 	var body = "time: " + appt.startDate;
 	if (appt.location) {
@@ -162,7 +162,7 @@ Com_Zimbra_sms.prototype._apptDropped = function(appt) {
 	this.singleClicked(null, body);
 };
 
-Com_Zimbra_sms.prototype._msgDropped = function(from, note) {
+Com_Zmail_sms.prototype._msgDropped = function(from, note) {
 
 	var body = "from: " + from + " subject: " + note.subject;
 	if (note.fragment) {
@@ -171,7 +171,7 @@ Com_Zimbra_sms.prototype._msgDropped = function(from, note) {
 	this.singleClicked(null, body);
 };
 
-Com_Zimbra_sms.prototype._contactDropped =
+Com_Zmail_sms.prototype._contactDropped =
 function(contact) {
 
 	var cf = contact.firstName ? contact.firstName : " ";
@@ -189,7 +189,7 @@ function(contact) {
 	this.singleClicked(contact.mobilePhone, body);
 };
 /*	deprecated we now use upsidewireless.com's soap api
- Com_Zimbra_sms.prototype._sendSMS =
+ Com_Zmail_sms.prototype._sendSMS =
  function(to, body) {
  var url = this.getResource('sms.jsp');
 
@@ -201,7 +201,7 @@ function(contact) {
  AjxRpc.invoke(reqParam, url, reqHeader, new AjxCallback(this, this._resultCallback));
  };
 
- Com_Zimbra_sms.prototype._resultCallback=
+ Com_Zmail_sms.prototype._resultCallback=
  function(result) {
  var r = result.text;
  DBG.println(AjxDebug.DBG2, "result:" + r);
@@ -214,7 +214,7 @@ function(contact) {
 //@author: Raja Rao DV
 //=============================================================================
 
-Com_Zimbra_sms.prototype._sendMultipleSMS =
+Com_Zmail_sms.prototype._sendMultipleSMS =
 function(recepients, body) {
 	var accountNotSet = this._initializeVariables(true);
 	if (accountNotSet)
@@ -238,7 +238,7 @@ function(recepients, body) {
 	}
 };
 
-Com_Zimbra_sms.prototype._sendSMS =
+Com_Zmail_sms.prototype._sendSMS =
 function(to, body) {
 	var accountNotSet = this._initializeVariables(false);
 	if (accountNotSet)
@@ -248,7 +248,7 @@ function(to, body) {
 	this._auth(sendSmsCallback);
 };
 
-Com_Zimbra_sms.prototype._initializeVariables =
+Com_Zmail_sms.prototype._initializeVariables =
 function(isMultiple) {
 	this._totalResponseCount = 0;
 	if (!isMultiple) {
@@ -269,7 +269,7 @@ function(isMultiple) {
 	return false;//return account-not-set == true
 };
 
-Com_Zimbra_sms.prototype.createPropertyEditor =
+Com_Zmail_sms.prototype.createPropertyEditor =
 function() {
 	//if zimlet dialog already exists...
 	if (this.pbDialog) {
@@ -299,12 +299,12 @@ function() {
 	this.pbDialog.popup();
 };
 
-Com_Zimbra_sms.prototype._showSMSreadMe =
+Com_Zmail_sms.prototype._showSMSreadMe =
 function() {
 	window.open(this.getResource("showSMSreadMe.html"));
 };
 
-Com_Zimbra_sms.prototype._okBtnListner =
+Com_Zmail_sms.prototype._okBtnListner =
 function() {
 	this._reloadRequired = false;
 	if (document.getElementById("turnOnZimlet_SMS").checked) {
@@ -359,15 +359,15 @@ function() {
 	}
 };
 
-Com_Zimbra_sms.prototype._reloadBrowser =
+Com_Zmail_sms.prototype._reloadBrowser =
 function() {
 	window.onbeforeunload = null;
 	var url = AjxUtil.formatUrl({});
-	ZmZimbraMail.sendRedirect(url);
+	ZmZmailMail.sendRedirect(url);
 };
 
 
-Com_Zimbra_sms.prototype.createPrefView =
+Com_Zmail_sms.prototype.createPrefView =
 function() {
 	var html = new Array();
 	var i = 0;
@@ -403,26 +403,26 @@ function() {
 
 };
 
-Com_Zimbra_sms.prototype._auth =
+Com_Zmail_sms.prototype._auth =
 function(callbackAfterSuccessfulAuth) {
 	if (this._token && this._signature) {//if we already have authtoken and signature, reuse
 		callbackAfterSuccessfulAuth.run(this);
 		return;
 	}
-	var soapDoc = this._makeEnvelope("GetParameters", Com_Zimbra_sms.authNS);
-	soapDoc.set("username", this._smsUsername, null, Com_Zimbra_sms.authNS);
-	soapDoc.set("password", this._smsPassword, null, Com_Zimbra_sms.authNS);
+	var soapDoc = this._makeEnvelope("GetParameters", Com_Zmail_sms.authNS);
+	soapDoc.set("username", this._smsUsername, null, Com_Zmail_sms.authNS);
+	soapDoc.set("password", this._smsPassword, null, Com_Zmail_sms.authNS);
 
 	var hdrs = new Array();
 	hdrs["Content-type"] = "text/xml";
 	hdrs["Content-length"] = soapDoc.getXml().length;
 	hdrs["Connection"] = "close";
 
-	this.sendRequest(soapDoc, Com_Zimbra_sms.autoURI, hdrs, new AjxCallback(this, this._handleAuthResponse, callbackAfterSuccessfulAuth), false, true);
+	this.sendRequest(soapDoc, Com_Zmail_sms.autoURI, hdrs, new AjxCallback(this, this._handleAuthResponse, callbackAfterSuccessfulAuth), false, true);
 };
 
 
-Com_Zimbra_sms.prototype._handleAuthResponse =
+Com_Zmail_sms.prototype._handleAuthResponse =
 function(callback, response) {
 	if (!response.success) {
 		this._totalResponseCount++;
@@ -444,23 +444,23 @@ function(callback, response) {
 
 };
 
-Com_Zimbra_sms.prototype._sendSMSThruSOAP =
+Com_Zmail_sms.prototype._sendSMSThruSOAP =
 function(smsParams) {
-	var soapDoc = this._makeEnvelope("Send_Plain", Com_Zimbra_sms.smsNS);
-	soapDoc.set("token", this._token, null, Com_Zimbra_sms.smsNS);
-	soapDoc.set("signature", this._signature, null, Com_Zimbra_sms.smsNS);
-	soapDoc.set("recipient", smsParams.to, null, Com_Zimbra_sms.smsNS);
-	soapDoc.set("message", smsParams.body, null, Com_Zimbra_sms.smsNS);
-	soapDoc.set("encoding", "Eight", null, Com_Zimbra_sms.smsNS);
+	var soapDoc = this._makeEnvelope("Send_Plain", Com_Zmail_sms.smsNS);
+	soapDoc.set("token", this._token, null, Com_Zmail_sms.smsNS);
+	soapDoc.set("signature", this._signature, null, Com_Zmail_sms.smsNS);
+	soapDoc.set("recipient", smsParams.to, null, Com_Zmail_sms.smsNS);
+	soapDoc.set("message", smsParams.body, null, Com_Zmail_sms.smsNS);
+	soapDoc.set("encoding", "Eight", null, Com_Zmail_sms.smsNS);
 
 	var hdrs = new Array();
 	hdrs["Content-type"] = "text/xml";
 	hdrs["Content-length"] = soapDoc.getXml().length;
 	hdrs["Connection"] = "close";
-	this.sendRequest(soapDoc, Com_Zimbra_sms.smsURI, hdrs, new AjxCallback(this, this._handleSMS, smsParams), false, true);
+	this.sendRequest(soapDoc, Com_Zmail_sms.smsURI, hdrs, new AjxCallback(this, this._handleSMS, smsParams), false, true);
 };
 
-Com_Zimbra_sms.prototype._handleSMS =
+Com_Zmail_sms.prototype._handleSMS =
 function(smsParams, response) {
 	//console.log(response.text);
 	this._totalResponseCount++;
@@ -473,7 +473,7 @@ function(smsParams, response) {
 };
 
 
-Com_Zimbra_sms.prototype._makeEnvelope = function(method, ns) {
+Com_Zmail_sms.prototype._makeEnvelope = function(method, ns) {
 	var soap = AjxSoapDoc.create(
 		method, ns, null,
 		"http://schemas.xmlsoap.org/soap/envelope/");
@@ -483,7 +483,7 @@ Com_Zimbra_sms.prototype._makeEnvelope = function(method, ns) {
 	return soap;
 };
 
-Com_Zimbra_sms.prototype._handleExpn =
+Com_Zmail_sms.prototype._handleExpn =
 function(smsParams, response) {
 	var title = "SMS Zimlet: Error Report Dialog";
 	var expn = "";
@@ -515,7 +515,7 @@ function(smsParams, response) {
 		this._showExpnDlg(title);
 };
 
-Com_Zimbra_sms.prototype._showExpnDlg =
+Com_Zmail_sms.prototype._showExpnDlg =
 function(title) {
 	if (this._expnDialog) {
 		this._expnDialog.setContent(this._expnDialogViewHtml());
@@ -533,7 +533,7 @@ function(title) {
 
 };
 
-Com_Zimbra_sms.prototype._expnDialogViewHtml =
+Com_Zmail_sms.prototype._expnDialogViewHtml =
 function() {
 	var html = new Array();
 	var i = 0;
@@ -571,7 +571,7 @@ function() {
 	return html.join("");
 };
 
-Com_Zimbra_sms.prototype._addListListeners = function() {
+Com_Zmail_sms.prototype._addListListeners = function() {
 	var divs = this._expnDialog.getHtmlElement().getElementsByTagName("div");
 	for (var i = 0; i < divs.length; i++) {
 		var hdr = divs[i];
@@ -581,7 +581,7 @@ Com_Zimbra_sms.prototype._addListListeners = function() {
 	}
 };
 
-Com_Zimbra_sms.prototype._onListClick = function(hdr, ev) {
+Com_Zmail_sms.prototype._onListClick = function(hdr, ev) {
 	var id = hdr.id;
 	var indxId = id.replace("sms_cardHdrDiv", "");
 	var expndCell = document.getElementById("sms_expCollIcon" + indxId);
@@ -605,7 +605,7 @@ Com_Zimbra_sms.prototype._onListClick = function(hdr, ev) {
 // Following section deals with hooking up with composeView for Send SMS
 //@author: Raja Rao DV
 //=============================================================================
-Com_Zimbra_sms.prototype.onShowView = function(viewId, isNewView) {
+Com_Zmail_sms.prototype.onShowView = function(viewId, isNewView) {
 	if (!this.turnOnZimlet_SMS || !this.sms_showSendAndSMSButton)
 		return;
 
@@ -614,7 +614,7 @@ Com_Zimbra_sms.prototype.onShowView = function(viewId, isNewView) {
 	}
 };
 
-Com_Zimbra_sms.prototype._initComposeSMSToolbar = function() {
+Com_Zmail_sms.prototype._initComposeSMSToolbar = function() {
 
 	if (!appCtxt.get(ZmSetting.MAIL_ENABLED))
 		this._toolbar = true;
@@ -651,13 +651,13 @@ Com_Zimbra_sms.prototype._initComposeSMSToolbar = function() {
 
 };
 
-Com_Zimbra_sms.prototype._closeComposeView = function() {
+Com_Zmail_sms.prototype._closeComposeView = function() {
 	this._composeView.reset(true);
 	this._composeView.reEnableDesignMode();
 	appCtxt.getAppViewMgr().popView(true);
 };
 
-Com_Zimbra_sms.prototype._sendAndSMS = function() {
+Com_Zmail_sms.prototype._sendAndSMS = function() {
 	var emailOrSMSArry = [];
 	var smsNumber = "";
 	var justSMS = false;
@@ -709,7 +709,7 @@ Com_Zimbra_sms.prototype._sendAndSMS = function() {
 	}
 };
 
-Com_Zimbra_sms.prototype._waitForContactToLoadAndProcess = function() {
+Com_Zmail_sms.prototype._waitForContactToLoadAndProcess = function() {
 	this._contactList = AjxDispatcher.run("GetContacts");
 	if (!this._contactList)
 		return;
@@ -728,7 +728,7 @@ Com_Zimbra_sms.prototype._waitForContactToLoadAndProcess = function() {
 	}
 };
 
-Com_Zimbra_sms.prototype._startProcessing = function() {
+Com_Zmail_sms.prototype._startProcessing = function() {
 	var to = this._msg.getAddresses("TO", true, true);
 	var cc = this._msg.getAddresses("CC", true, true);
 	var bcc = this._msg.getAddresses("BCC", true, true);
@@ -755,7 +755,7 @@ Com_Zimbra_sms.prototype._startProcessing = function() {
 	this._sendMultipleSMS(this._emailAndPhone, content);
 };
 
-Com_Zimbra_sms.prototype._showWarningMsg = function(message) {
+Com_Zmail_sms.prototype._showWarningMsg = function(message) {
 	var style = DwtMessageDialog.WARNING_STYLE;
 	var dialog = appCtxt.getMsgDialog();
 	this.warningDialog = dialog;

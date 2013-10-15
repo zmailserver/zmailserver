@@ -14,15 +14,15 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.preferences.mail.accounts;
+package org.zmail.qa.selenium.projects.ajax.tests.preferences.mail.accounts;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
 
 
 public class GetPrimaryAccount extends AjaxCommonTest {
@@ -46,8 +46,8 @@ public class GetPrimaryAccount extends AjaxCommonTest {
 		app.zTreePreferences.zTreeItem(Action.A_LEFTCLICK, TreeItem.MailAccounts);
 
 		// TODO: Maybe this list should be abstracted?
-		String tableLocator = "css=div[id='zli__ACCT__"+ app.zGetActiveAccount().ZimbraId +"']";
-		ZAssert.assertTrue(app.zPagePreferences.sIsElementPresent(tableLocator), "Verify the zimbra default account is in the preferences list");
+		String tableLocator = "css=div[id='zli__ACCT__"+ app.zGetActiveAccount().ZmailId +"']";
+		ZAssert.assertTrue(app.zPagePreferences.sIsElementPresent(tableLocator), "Verify the zmail default account is in the preferences list");
 		
 		String accountName = app.zPagePreferences.sGetText(tableLocator + " td[id$='__na']");
 		String accountStatus = app.zPagePreferences.sGetText(tableLocator + " td[id$='__st']");

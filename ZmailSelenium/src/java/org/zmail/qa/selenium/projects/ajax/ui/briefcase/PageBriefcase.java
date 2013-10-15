@@ -17,7 +17,7 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.ajax.ui.briefcase;
+package org.zmail.qa.selenium.projects.ajax.ui.briefcase;
 
 import java.util.EnumMap;
 import java.util.Map;
@@ -25,28 +25,28 @@ import java.util.Map;
 import org.apache.commons.httpclient.HttpStatus;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import com.zimbra.qa.selenium.framework.core.ClientSessionFactory;
-import com.zimbra.qa.selenium.framework.items.DocumentItem;
-import com.zimbra.qa.selenium.framework.items.FileItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.IItem;
-import com.zimbra.qa.selenium.framework.ui.AbsApplication;
-import com.zimbra.qa.selenium.framework.ui.AbsPage;
-import com.zimbra.qa.selenium.framework.ui.AbsTab;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.ui.Shortcut;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.RestUtil;
-import com.zimbra.qa.selenium.framework.util.SleepUtil;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.ajax.ui.AppAjaxClient;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogMove;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogTag;
-import com.zimbra.qa.selenium.projects.ajax.ui.PageMain;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.DialogCreateFolder;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew;
+import org.zmail.qa.selenium.framework.core.ClientSessionFactory;
+import org.zmail.qa.selenium.framework.items.DocumentItem;
+import org.zmail.qa.selenium.framework.items.FileItem;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.IItem;
+import org.zmail.qa.selenium.framework.ui.AbsApplication;
+import org.zmail.qa.selenium.framework.ui.AbsPage;
+import org.zmail.qa.selenium.framework.ui.AbsTab;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.ui.Shortcut;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.RestUtil;
+import org.zmail.qa.selenium.framework.util.SleepUtil;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.ajax.ui.AppAjaxClient;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogMove;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogTag;
+import org.zmail.qa.selenium.projects.ajax.ui.PageMain;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.DialogCreateFolder;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew;
 
 /**
  * @author
@@ -54,7 +54,7 @@ import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew;
  */
 public class PageBriefcase extends AbsTab {
 
-	public static final String pageTitle = "Zimbra: Briefcase";
+	public static final String pageTitle = "Zmail: Briefcase";
 
 	public static class Locators {
 		public static final Locators zNewBriefcaseOverviewPaneIcon = new Locators(
@@ -244,7 +244,7 @@ public class PageBriefcase extends AbsTab {
 
 			zWaitForBusyOverlay();
 
-			// isEditDocLoaded("Zimbra Docs", "");
+			// isEditDocLoaded("Zmail Docs", "");
 
 			page = new DocumentBriefcaseNew(this.MyApplication);
 
@@ -365,7 +365,7 @@ public class PageBriefcase extends AbsTab {
 		if (pulldown == Button.B_NEW) {
 			pulldownLocator = Locators.zNewMenuArrowBtn.locator;
 			if (option == Button.O_NEW_BRIEFCASE) {
-				if (ZimbraSeleniumProperties.zimbraGetVersionString().contains(
+				if (ZmailSeleniumProperties.zmailGetVersionString().contains(
 						"7.1."))
 					optionLocator = "css=tr[id=POPUP_NEW_BRIEFCASE]";
 				else
@@ -376,7 +376,7 @@ public class PageBriefcase extends AbsTab {
 
 				// FALL THROUGH
 			} else if (option == Button.O_NEW_DOCUMENT) {
-				if (ZimbraSeleniumProperties.zimbraGetVersionString().contains(
+				if (ZmailSeleniumProperties.zmailGetVersionString().contains(
 						"7.1."))
 					optionLocator = "css=tr[id=POPUP_NEW_DOC]";
 				else
@@ -388,7 +388,7 @@ public class PageBriefcase extends AbsTab {
 			} else if (option == Button.O_NEW_FOLDER) {
 				throw new HarnessException("implement me!");
 			} else if (option == Button.O_NEW_TAG) {
-				if (ZimbraSeleniumProperties.zimbraGetVersionString().contains(
+				if (ZmailSeleniumProperties.zmailGetVersionString().contains(
 						"7.1."))
 					optionLocator = "css=tr[id=POPUP_NEW_TAG]>td[id$=_title]:contains(Tag)";
 				else
@@ -549,7 +549,7 @@ public class PageBriefcase extends AbsTab {
 
 			if (zIsBrowserMatch(BrowserMasks.BrowserMaskIE)) {
 				if (pulldown == Button.B_NEW) {
-				    if (ZimbraSeleniumProperties.isWebDriver()){
+				    if (ZmailSeleniumProperties.isWebDriver()){
 					pulldownLocator = "css=td[id=zb__NEW_MENU_dropdown]>div[class^=ImgSelectPullDownArrow]";
 					zClick(pulldownLocator);
 				    }else{
@@ -1278,10 +1278,10 @@ public class PageBriefcase extends AbsTab {
 		// ClientSessionFactory.session().selenium().getEval("var x = selenium.browserbot.findElementOrNull(\""+Locators.zFrame.locator+"\");if(x!=null)x=x.contentWindow.document.body;if(browserVersion.isChrome){x.textContent='"+text+"';}else if(browserVersion.isIE){x.innerText='"+text+"';}");
 		logger.info("renaming to: " + text);
 
-		zSelectWindow("Zimbra: Briefcase");
+		zSelectWindow("Zmail: Briefcase");
 
 		// sSelectFrame("relative=top");
-		if (ZimbraSeleniumProperties.isWebDriver()){
+		if (ZmailSeleniumProperties.isWebDriver()){
 			WebElement we = getElement(Locators.zRenameInput.locator);
 			we.clear();
 			we.sendKeys(text);
@@ -1325,7 +1325,7 @@ public class PageBriefcase extends AbsTab {
 	public void fireEvent(String locator, String eventName)
 			throws HarnessException {
 		logger.info("firing Event: " + eventName + " on " + locator);
-		if (ZimbraSeleniumProperties.isWebDriver()){
+		if (ZmailSeleniumProperties.isWebDriver()){
 			super.sFireEvent(locator, eventName);
 		}else{
 		// ClientSessionFactory.session().selenium().fireEvent(locator,eventName);
@@ -1461,23 +1461,23 @@ public class PageBriefcase extends AbsTab {
 	}
 
 	public void deleteFileByName(String docName) throws HarnessException {
-		ZimbraAccount account = MyApplication.zGetActiveAccount();
-		account.soapSend("<SearchRequest xmlns='urn:zimbraMail' types='document'>"
+		ZmailAccount account = MyApplication.zGetActiveAccount();
+		account.soapSend("<SearchRequest xmlns='urn:zmailMail' types='document'>"
 				+ "<query>" + docName + "</query>" + "</SearchRequest>");
 		String id = account.soapSelectValue("//mail:doc", "id");
 		deleteFileById(id);
 	}
 
 	public void deleteFileById(String docId) throws HarnessException {
-		ZimbraAccount account = MyApplication.zGetActiveAccount();
-		account.soapSend("<ItemActionRequest xmlns='urn:zimbraMail'>"
+		ZmailAccount account = MyApplication.zGetActiveAccount();
+		account.soapSend("<ItemActionRequest xmlns='urn:zmailMail'>"
 				+ "<action id='" + docId + "' op='trash'/>"
 				+ "</ItemActionRequest>");
 	}
 
 	public EnumMap<Response.ResponsePart, String> displayFile(String filename,
 			Map<String, String> params) throws HarnessException {
-		ZimbraAccount account = MyApplication.zGetActiveAccount();
+		ZmailAccount account = MyApplication.zGetActiveAccount();
 
 		RestUtil util = new RestUtil();
 
@@ -1525,7 +1525,7 @@ public class PageBriefcase extends AbsTab {
 
 	public String openUrl(String path, Map<String, String> params)
 			throws HarnessException {
-		ZimbraAccount account = MyApplication.zGetActiveAccount();
+		ZmailAccount account = MyApplication.zGetActiveAccount();
 
 		RestUtil util = new RestUtil();
 
@@ -1567,8 +1567,8 @@ public class PageBriefcase extends AbsTab {
 
 		boolean found = false;
 
-		if (ZimbraSeleniumProperties.isWebDriverBackedSelenium()
-				|| ZimbraSeleniumProperties.isWebDriver()) {
+		if (ZmailSeleniumProperties.isWebDriverBackedSelenium()
+				|| ZmailSeleniumProperties.isWebDriver()) {
 			super.zSelectWindow(windowID);
 		} else {
 			String[] windowNames = ClientSessionFactory.session()

@@ -14,11 +14,11 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_proxy_config" version="1.0.0"
+<zimlet name="org_zmail_proxy_config" version="1.0.0"
 	label="${msg.label}"
 	description="${msg.description}" 
 	extension="true">
-    <include>com_zimbra_proxy_config.js</include>
+    <include>org_zmail_proxy_config.js</include>
     <include>ZaEnableProxyWizard.js</include>
     <include>ZaDisableProxyWizard.js</include>
     <disableUIUndeploy>FALSE</disableUIUndeploy>

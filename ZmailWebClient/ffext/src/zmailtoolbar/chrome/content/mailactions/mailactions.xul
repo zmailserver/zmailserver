@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
-<!DOCTYPE window SYSTEM "chrome://zimbratb/locale/zimbratb.dtd">
-<?xml-stylesheet href="chrome://zimbratb/skin/mailactions/mailactions.css" type="text/css"?>
+<!DOCTYPE window SYSTEM "chrome://zmailtb/locale/zmailtb.dtd">
+<?xml-stylesheet href="chrome://zmailtb/skin/mailactions/mailactions.css" type="text/css"?>
 <overlay id="mailActions" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 	<script src="chrome://global/content/nsDragAndDrop.js"/>
 	<script src="chrome://global/content/nsTransferable.js"/>
-	<script type="application/x-javascript" src="chrome://zimbratb/content/messagecomposer/ZMTB_MessageComposer.js"/>
+	<script type="application/x-javascript" src="chrome://zmailtb/content/messagecomposer/ZMTB_MessageComposer.js"/>
 	<script type="application/x-javascript" src="ZMTB_MailActions.js"/>
 	<script>
 		window.addEventListener("load", function(){
-			new ZMTB_MailActions(com_zimbra_tb);
+			new ZMTB_MailActions(org_zmail_tb);
 		}, false);
 	</script>
 	<toolbar id="ZimTB-Toolbar">

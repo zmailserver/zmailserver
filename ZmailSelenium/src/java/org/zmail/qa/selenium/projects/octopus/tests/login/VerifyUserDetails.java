@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.octopus.tests.login;
+package org.zmail.qa.selenium.projects.octopus.tests.login;
 
 import junit.framework.Assert;
 
@@ -22,13 +22,13 @@ import mx4j.tools.config.DefaultConfigurationBuilder.New;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.QA.Bug;
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.projects.octopus.core.OctopusCommonTest;
-import com.zimbra.qa.selenium.projects.octopus.ui.PageOctopus.Locators;
+import org.zmail.qa.QA.Bug;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.projects.octopus.core.OctopusCommonTest;
+import org.zmail.qa.selenium.projects.octopus.ui.PageOctopus.Locators;
 
 public class VerifyUserDetails extends OctopusCommonTest{
 	
@@ -44,7 +44,7 @@ logger.info("New " + VerifyUserDetails.class.getCanonicalName());
 	public void verifyUserNameDisplayed() throws HarnessException
 	{
 		//create new account
-		ZimbraAccount account = new ZimbraAccount();
+		ZmailAccount account = new ZmailAccount();
 		//Clear Display Name
 		account.clearPref("displayName");
 		

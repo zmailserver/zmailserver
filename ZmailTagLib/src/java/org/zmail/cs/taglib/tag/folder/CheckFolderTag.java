@@ -12,16 +12,16 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.tag.folder;
+package org.zmail.cs.taglib.tag.folder;
 
-import com.zimbra.cs.taglib.tag.ZimbraSimpleTag;
-import com.zimbra.common.service.ServiceException;
+import org.zmail.cs.taglib.tag.ZmailSimpleTag;
+import org.zmail.common.service.ServiceException;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import java.io.IOException;
 
-public class CheckFolderTag extends ZimbraSimpleTag {
+public class CheckFolderTag extends ZmailSimpleTag {
 
     private String mId;
     private boolean mChecked;

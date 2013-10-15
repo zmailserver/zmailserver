@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -26,50 +26,50 @@ import java.util.Set;
 import org.apache.commons.httpclient.Header;
 import org.dom4j.ElementHandler;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.mailbox.Color;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.SoapHttpTransport;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.HttpUtil;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.offline.OfflineAccount;
-import com.zimbra.cs.account.offline.OfflineProvisioning;
-import com.zimbra.cs.db.Db;
-import com.zimbra.cs.db.Db.Capability;
-import com.zimbra.cs.db.DbMailItem;
-import com.zimbra.cs.db.DbOfflineMailbox;
-import com.zimbra.cs.mailbox.MailItem.TargetConstraint;
-import com.zimbra.cs.mailbox.MailServiceException.NoSuchItemException;
-import com.zimbra.cs.mailbox.calendar.Invite;
-import com.zimbra.cs.mailbox.util.TypedIdList;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.offline.Offline;
-import com.zimbra.cs.offline.OfflineLC;
-import com.zimbra.cs.offline.OfflineLog;
-import com.zimbra.cs.offline.OfflineSyncManager;
-import com.zimbra.cs.offline.common.OfflineConstants;
-import com.zimbra.cs.service.AuthProvider;
-import com.zimbra.cs.service.UserServlet;
-import com.zimbra.cs.service.UserServlet.HttpInputStream;
-import com.zimbra.cs.session.PendingModifications.Change;
-import com.zimbra.cs.session.Session;
-import com.zimbra.cs.store.MailboxBlob;
-import com.zimbra.cs.store.StoreManager;
-import com.zimbra.soap.DocumentHandler;
-import com.zimbra.soap.ProxyTarget;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.account.Key;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.mailbox.Color;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.SoapHttpTransport;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.HttpUtil;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.offline.OfflineAccount;
+import org.zmail.cs.account.offline.OfflineProvisioning;
+import org.zmail.cs.db.Db;
+import org.zmail.cs.db.Db.Capability;
+import org.zmail.cs.db.DbMailItem;
+import org.zmail.cs.db.DbOfflineMailbox;
+import org.zmail.cs.mailbox.MailItem.TargetConstraint;
+import org.zmail.cs.mailbox.MailServiceException.NoSuchItemException;
+import org.zmail.cs.mailbox.calendar.Invite;
+import org.zmail.cs.mailbox.util.TypedIdList;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.offline.Offline;
+import org.zmail.cs.offline.OfflineLC;
+import org.zmail.cs.offline.OfflineLog;
+import org.zmail.cs.offline.OfflineSyncManager;
+import org.zmail.cs.offline.common.OfflineConstants;
+import org.zmail.cs.service.AuthProvider;
+import org.zmail.cs.service.UserServlet;
+import org.zmail.cs.service.UserServlet.HttpInputStream;
+import org.zmail.cs.session.PendingModifications.Change;
+import org.zmail.cs.session.Session;
+import org.zmail.cs.store.MailboxBlob;
+import org.zmail.cs.store.StoreManager;
+import org.zmail.soap.DocumentHandler;
+import org.zmail.soap.ProxyTarget;
+import org.zmail.soap.ZmailSoapContext;
 
 public class ZcsMailbox extends ChangeTrackingMailbox {
 
@@ -446,7 +446,7 @@ public class ZcsMailbox extends ChangeTrackingMailbox {
             }
             delete(octxt, folderId, MailItem.Type.FOLDER);
         } catch (MailServiceException.NoSuchItemException nsie) {
-            ZimbraLog.mailbox.info("folder already deleted, skipping: %d", folderId);
+            ZmailLog.mailbox.info("folder already deleted, skipping: %d", folderId);
         } finally {
             lock.release();
         }
@@ -621,8 +621,8 @@ public class ZcsMailbox extends ChangeTrackingMailbox {
                     ProxyTarget proxy = new ProxyTarget(server, at, getSoapUri());
                     //zscProxy needs to be for the 'ffffff-' account, but with target of *this* mailbox's acct
                     //currently UI receives SoapJS in its responses, we ask for that protocol so notifications are handled correctly
-                    ZimbraSoapContext zscIn = new ZimbraSoapContext(at, at.getAccountId(), SoapProtocol.Soap12, SoapProtocol.SoapJS);
-                    ZimbraSoapContext zscProxy = new ZimbraSoapContext(zscIn, getAccountId(), session);
+                    ZmailSoapContext zscIn = new ZmailSoapContext(at, at.getAccountId(), SoapProtocol.Soap12, SoapProtocol.SoapJS);
+                    ZmailSoapContext zscProxy = new ZmailSoapContext(zscIn, getAccountId(), session);
                     proxy.setTimeouts(OfflineLC.zdesktop_request_timeout.intValue());
                     return DocumentHandler.proxyWithNotification(request, proxy, zscProxy, session);
                 }
@@ -733,9 +733,9 @@ public class ZcsMailbox extends ChangeTrackingMailbox {
                 UserServlet.putMailItem(getAuthToken(), url, item);
             int id = 0, version = 0;
             for (Header h : resp.getFirst()) {
-                if (h.getName().equals("X-Zimbra-ItemId"))
+                if (h.getName().equals("X-Zmail-ItemId"))
                     id = Integer.parseInt(h.getValue());
-                else if (h.getName().equals("X-Zimbra-Version"))
+                else if (h.getName().equals("X-Zmail-Version"))
                     version = Integer.parseInt(h.getValue());
             }
             return new Pair<Integer,Integer>(id, version);
@@ -764,7 +764,7 @@ public class ZcsMailbox extends ChangeTrackingMailbox {
         setConfig(null, VERSIONS_KEY, config);
     }
 
-    public boolean pushNewFolder(OperationContext octxt, int id, boolean suppressRssFailure, ZimbraSoapContext zsc)
+    public boolean pushNewFolder(OperationContext octxt, int id, boolean suppressRssFailure, ZmailSoapContext zsc)
             throws ServiceException {
         if ((getChangeMask(octxt, id, MailItem.Type.FOLDER) & Change.CONFLICT) == 0) {
             return false;

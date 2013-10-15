@@ -18,16 +18,16 @@
  *
  * @author		Raja Rao
  */
-function com_zimbra_meebo_HandlerObject() {
+function org_zmail_meebo_HandlerObject() {
 }
-com_zimbra_meebo_HandlerObject.prototype = new ZmZimletBase();
-com_zimbra_meebo_HandlerObject.prototype.constructor = com_zimbra_meebo_HandlerObject;
+org_zmail_meebo_HandlerObject.prototype = new ZmZimletBase();
+org_zmail_meebo_HandlerObject.prototype.constructor = org_zmail_meebo_HandlerObject;
 
 /**
  * Simplify handler object
  *
  */
-var MeeboZimlet = com_zimbra_meebo_HandlerObject;
+var MeeboZimlet = org_zmail_meebo_HandlerObject;
 
 /**
  * Defines the "load" interval (milliseconds).
@@ -94,7 +94,7 @@ m.insertBefore(n,m.firstChild).id="meebo";b.frameBorder="0";b.id="meebo-iframe";
 b.allowTransparency="true";v[j](b);try{b.contentWindow[g].open()}catch(w){c[e]=
 d[e];o="javascript:var d="+g+".open();d.domain='"+d.domain+"';";b[k]=o+"void(0);"}try{var t=
 b.contentWindow[g];t.write(p());t.close()}catch(x){b[k]=o+'d.write("'+p().replace(/"/g,
-'\\"')+'");d.close();'}a.T(1)}({network:"zimbra"});
+'\\"')+'");d.close();'}a.T(1)}({network:"zmail"});
 	Meebo.disableSharePageButton = true;
 };
 

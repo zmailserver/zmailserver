@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
 --%>
 <%@ tag body-content="empty" %>
-<%@ attribute name="mailbox" rtexprvalue="true" required="true" type="com.zimbra.cs.taglib.bean.ZMailboxBean"%>
+<%@ attribute name="mailbox" rtexprvalue="true" required="true" type="org.zmail.cs.taglib.bean.ZMailboxBean"%>
 <%@ attribute name="date" rtexprvalue="true" required="true" type="java.util.Calendar" %>
 <%@ attribute name="numdays" rtexprvalue="true" required="true" %>
 <%@ attribute name="view" rtexprvalue="true" required="true" %>
@@ -22,11 +22,11 @@
 <%@ attribute name="selectedId" rtexprvalue="true" required="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
-<%@ taglib prefix="rest" uri="com.zimbra.restclient" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
+<%@ taglib prefix="rest" uri="org.zmail.restclient" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
 <rest:handleError>
-    <c:set var="firstDOW" value="${requestScope.zimbra_target_account_prefCalendarFirstDayOfWeek}"/>
+    <c:set var="firstDOW" value="${requestScope.zmail_target_account_prefCalendarFirstDayOfWeek}"/>
 
     <fmt:message var="yearTitleFormat" key="CAL_DAY_TITLE_YEAR_FORMAT"/>
 
@@ -44,17 +44,17 @@
         </c:choose>
     <c:set var="workDays" value="${zm:getWorkDays(wdays)}"/>
     <c:choose>
-        <c:when test="${requestScope.zimbra_freebusy}">
+        <c:when test="${requestScope.zmail_freebusy}">
             <zm:getFreeBusyAppointments box="${mailbox}"
-                                        email="${requestScope.zimbra_target_account_name}"
+                                        email="${requestScope.zmail_target_account_name}"
                                         var="appts"
                                         start="${currentDay.timeInMillis}"
                                         end="${rangeEnd}"
-                                        folderid="${requestScope.zimbra_target_item_id}"
+                                        folderid="${requestScope.zmail_target_item_id}"
                                         varexception="gasException"/>
         </c:when>
         <c:otherwise>
-            <zm:getAppointmentSummaries  box="${mailbox}" timezone="${timezone}" var="appts" folderid="${not empty param.folderIds ? param.folderIds : requestScope.zimbra_target_item_id}" start="${currentDay.timeInMillis}" end="${rangeEnd}" query="${query}" varexception="gasException"/>
+            <zm:getAppointmentSummaries  box="${mailbox}" timezone="${timezone}" var="appts" folderid="${not empty param.folderIds ? param.folderIds : requestScope.zmail_target_item_id}" start="${currentDay.timeInMillis}" end="${rangeEnd}" query="${query}" varexception="gasException"/>
         </c:otherwise>
     </c:choose>
     
@@ -68,7 +68,7 @@
     <zm:apptMultiDayLayout timezone="${timezone}"
             schedule=""
             var="layout" appointments="${appts}" start="${currentDay.timeInMillis}" days="${numdays}" wdays="${wdays}"
-            hourstart="${requestScope.zimbra_target_account_prefCalendarDayHourStart}" hourend="${requestScope.zimbra_target_account_prefCalendarDayHourEnd}"/>
+            hourstart="${requestScope.zmail_target_account_prefCalendarDayHourStart}" hourend="${requestScope.zmail_target_account_prefCalendarDayHourEnd}"/>
 </rest:handleError>
 
 <table class='ZhCalDayGrid' width="100%" border="0" cellpadding="0" cellspacing="0" style='border-collapse:collapse; height:100%;'>

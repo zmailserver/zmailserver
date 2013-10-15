@@ -16,9 +16,9 @@
  */
 package sample.oauth.provider;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.util.memcached.MemcachedSerializer;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.util.memcached.MemcachedSerializer;
 import net.oauth.OAuth;
 import net.oauth.OAuthAccessor;
 import net.oauth.OAuthConsumer;
@@ -48,7 +48,7 @@ public class OAuthAccessorSerializer implements MemcachedSerializer<OAuthAccesso
                 ",zauthtoken:" + zauthtoken + ",verifier:" + verifier;
         //return value.encode().toString();
 
-        ZimbraLog.extensions.debug("put value: " + result + "  into memcache.");
+        ZmailLog.extensions.debug("put value: " + result + "  into memcache.");
 
         return result;
     }
@@ -56,7 +56,7 @@ public class OAuthAccessorSerializer implements MemcachedSerializer<OAuthAccesso
     public OAuthAccessor deserialize(Object obj) throws ServiceException {
 
         String value = (String) obj;
-        ZimbraLog.extensions.debug("get value: " + value + "  from memcache.");
+        ZmailLog.extensions.debug("get value: " + value + "  from memcache.");
         String consumer_key = value.substring(0, value.indexOf(",token_secret")).substring(13);
         String token_secret = value.substring(value.indexOf(",token_secret"), value.indexOf(",callback")).substring(14);
         String callback = value.substring(value.indexOf(",callback"), value.indexOf(",user")).substring(10);
@@ -65,12 +65,12 @@ public class OAuthAccessorSerializer implements MemcachedSerializer<OAuthAccesso
         String zauthtoken = value.substring(value.indexOf(",zauthtoken"), value.indexOf(",verifier")).substring(12);
         String verifier = value.substring(value.indexOf(",verifier")).substring(10);
 
-        ZimbraLog.extensions.debug("consumer_key:" + consumer_key);
-        ZimbraLog.extensions.debug("callback:" + callback);
-        ZimbraLog.extensions.debug("user:" + user);
-        ZimbraLog.extensions.debug("authorized:" + authorized);
-        ZimbraLog.extensions.debug("zauthtoken:" + zauthtoken);
-        ZimbraLog.extensions.debug("verifier:" + verifier);
+        ZmailLog.extensions.debug("consumer_key:" + consumer_key);
+        ZmailLog.extensions.debug("callback:" + callback);
+        ZmailLog.extensions.debug("user:" + user);
+        ZmailLog.extensions.debug("authorized:" + authorized);
+        ZmailLog.extensions.debug("zauthtoken:" + zauthtoken);
+        ZmailLog.extensions.debug("verifier:" + verifier);
 
         try {
             OAuthConsumer consumer = SampleZmOAuthProvider.getConsumer(consumer_key);

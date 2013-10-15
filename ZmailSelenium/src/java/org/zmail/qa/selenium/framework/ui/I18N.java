@@ -14,18 +14,18 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.ui;
+package org.zmail.qa.selenium.framework.ui;
 
 import java.util.*;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import com.zimbra.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.HarnessException;
 
 
 /**
- * A class that contains Zimbra translations
+ * A class that contains Zmail translations
  * @author Matt Rhoades
  *
  */
@@ -33,16 +33,16 @@ public class I18N {
 	private static Logger logger = LogManager.getLogger(I18N.class);
 	
 	/*
-	 * See http://wiki.zimbra.com/wiki/Translations
+	 * See http://wiki.zmail.com/wiki/Translations
 	 */
 	
     // I18nMsg.properties:	Internationalization messages such as names of months, date and time formats, etc. 
 	// AjxMsg.properties:	Messages used by the ajax toolkit. 
 	// ZMsg.properties:		Common messages such as server error messages, etc. 
-	// ZaMsg.properties:	Messages used by the Zimbra Admin web client. 
-	// ZmMsg.properties:	Messages used by the Zimbra End User web client. 
-	// ZhMsg.properties:	Messages used by the Zimbra End User basic web client. 
-	// ZsMsg.properties:	Messages used by the Zimbra Server when automatically replying to appointment requests for locations and resources. (The language used for the outgoing messages is based on the server's default locale, not the client.) 
+	// ZaMsg.properties:	Messages used by the Zmail Admin web client. 
+	// ZmMsg.properties:	Messages used by the Zmail End User web client. 
+	// ZhMsg.properties:	Messages used by the Zmail End User basic web client. 
+	// ZsMsg.properties:	Messages used by the Zmail Server when automatically replying to appointment requests for locations and resources. (The language used for the outgoing messages is based on the server's default locale, not the client.) 
 
 	public enum Catalog {
 		I18nMsg, AjxMsg, ZMsg, ZaMsg, ZhMsg, ZmMsg, ZsMsg

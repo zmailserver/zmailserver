@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.convert;
+package org.zmail.cs.convert;
 
 import java.io.IOException;
 
@@ -20,7 +20,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.zimbra.cs.extension.ExtensionHttpHandler;
+import org.zmail.cs.extension.ExtensionHttpHandler;
 
 /**
  * skeleton converter for zd.

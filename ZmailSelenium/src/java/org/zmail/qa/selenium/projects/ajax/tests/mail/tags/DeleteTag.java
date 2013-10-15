@@ -14,15 +14,15 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.tags;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.tags;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.TagItem;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogWarning;
+import org.zmail.qa.selenium.framework.items.TagItem;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogWarning;
 
 
 public class DeleteTag extends PrefGroupMailByMessageTest {
@@ -59,7 +59,7 @@ public class DeleteTag extends PrefGroupMailByMessageTest {
 
 
 		// To check whether deleted tag is exist
-		app.zGetActiveAccount().soapSend("<GetTagRequest xmlns='urn:zimbraMail'/>");
+		app.zGetActiveAccount().soapSend("<GetTagRequest xmlns='urn:zmailMail'/>");
 
 		String tagname = app.zGetActiveAccount().soapSelectValue("//mail:GetTagResponse//mail:tag[@name='" + tag.getName() + "']","name");
 		ZAssert.assertNull(tagname, "Verify the tag is deleted");

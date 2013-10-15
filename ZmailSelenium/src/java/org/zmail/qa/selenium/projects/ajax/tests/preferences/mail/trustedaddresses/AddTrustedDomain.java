@@ -14,15 +14,15 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.preferences.mail.trustedaddresses;
+package org.zmail.qa.selenium.projects.ajax.tests.preferences.mail.trustedaddresses;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
 
 public class AddTrustedDomain extends AjaxCommonTest {
 
@@ -41,7 +41,7 @@ public class AddTrustedDomain extends AjaxCommonTest {
 	public void AddTrustedDomain_01() throws HarnessException {
 
 		/* test properties */
-		final String domain = "@domain" + ZimbraSeleniumProperties.getUniqueString() + ".com";
+		final String domain = "@domain" + ZmailSeleniumProperties.getUniqueString() + ".com";
 
 	
 		/* GUI steps */
@@ -65,12 +65,12 @@ public class AddTrustedDomain extends AjaxCommonTest {
 		/* Test verification */
 		
 		app.zGetActiveAccount().soapSend(
-					"<GetPrefsRequest xmlns='urn:zimbraAccount'>"
-				+		"<pref name='zimbraPrefMailTrustedSenderList'/>"
+					"<GetPrefsRequest xmlns='urn:zmailAccount'>"
+				+		"<pref name='zmailPrefMailTrustedSenderList'/>"
 				+	"</GetPrefsRequest>");
 
 		String found = null;
-		Element[] nodes = app.zGetActiveAccount().soapSelectNodes("//acct:pref[@name='zimbraPrefMailTrustedSenderList']");
+		Element[] nodes = app.zGetActiveAccount().soapSelectNodes("//acct:pref[@name='zmailPrefMailTrustedSenderList']");
 		for (Element e : nodes) {
 			if ( e.getText().contains(domain) ) {
 				found = e.getText();

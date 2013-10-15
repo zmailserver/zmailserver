@@ -55,7 +55,7 @@ function(params) {
 		return cachedData;
 	}	
 
-	var jsonObj = {GetMiniCalRequest:{_jsns:"urn:zimbraMail"}};
+	var jsonObj = {GetMiniCalRequest:{_jsns:"urn:zmailMail"}};
 	var request = jsonObj.GetMiniCalRequest;
 
 	this._setSoapParams(request, params);

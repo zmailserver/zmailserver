@@ -14,18 +14,18 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.addressbook.performance;
+package org.zmail.qa.selenium.projects.ajax.tests.addressbook.performance;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.ContactItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.performance.PerfKey;
-import com.zimbra.qa.selenium.framework.util.performance.PerfMetrics;
-import com.zimbra.qa.selenium.framework.util.performance.PerfToken;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.framework.items.ContactItem;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.performance.PerfKey;
+import org.zmail.qa.selenium.framework.util.performance.PerfMetrics;
+import org.zmail.qa.selenium.framework.util.performance.PerfToken;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
 
 public class ZmContactsItem_BasicContact1 extends AjaxCommonTest{
 

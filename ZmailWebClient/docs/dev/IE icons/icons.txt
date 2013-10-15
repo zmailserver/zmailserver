@@ -1,16 +1,16 @@
-This documentation is in reference to bug 75630 (http://bugzilla.zimbra.com/show_bug.cgi?id=75630).
+This documentation is in reference to bug 75630 (http://bugzilla.zmail.com/show_bug.cgi?id=75630).
 
-With IE 10, Microsoft dropped support for DX filters. Zimbra used the DX filters to allow users to customize the color
-of icons (e.g. tags, folders, calendars, etc).  For browsers other than IE, Zimbra uses the Canvas tag for this 
-customization. However, as of Zimbra 8, the AJAx application is rendered using quirks mode which prevents the AJAX
+With IE 10, Microsoft dropped support for DX filters. Zmail used the DX filters to allow users to customize the color
+of icons (e.g. tags, folders, calendars, etc).  For browsers other than IE, Zmail uses the Canvas tag for this 
+customization. However, as of Zmail 8, the AJAx application is rendered using quirks mode which prevents the AJAX
 client for using Canvas or SVG to manipulate the color of the icons.  
 
-The approach to support IE 10 in Zimbra 8 is to generate all combinations of the icons which can be customized.  There
+The approach to support IE 10 in Zmail 8 is to generate all combinations of the icons which can be customized.  There
 are 15 icons with 59 possible color variations.  To generate these icons, we have a HTML web page which uses the same
 canvas methods in the non-IE browsers to generate the icons.  The data-uri that is generated is then POSTed to a PHP page
 and saved to a file.
 
-Once you have these 886 files, you can place them ZimbraWebClient/WebRoot/img/ie-custom-icons.
+Once you have these 886 files, you can place them ZmailWebClient/WebRoot/img/ie-custom-icons.
 
 Next, run ant clean deploy.
 
@@ -19,7 +19,7 @@ This will generate a ie-custom-icons.png sprite image and also add the required 
 Copy the ie-custom-icons.png into the /img/ie-custom-icons directory and remove the previously generated icons.
 Copy the CSS classes from images.css that reference ie-custom-icons.png into a CSS file ie-custom-icons.css.
 
-We conditionally load the ie-custom-icons.css stylesheet for IE9 user agents (in Zimbra 8 we force IE10 into IE9 browser
+We conditionally load the ie-custom-icons.css stylesheet for IE9 user agents (in Zmail 8 we force IE10 into IE9 browser
 mode so detection is done as IE9).
 
 ####PHP Script#####
@@ -43,7 +43,7 @@ chown _www /tmp/custom
 chmod 755 /tmp/custom
 
 #####JavaScript######
-* Copy ImageGenerator.html to the public directory of Zimbra so it can be accessed via
+* Copy ImageGenerator.html to the public directory of Zmail so it can be accessed via
 http://localhost:7070/public/ImageGenerator.html
 
 This script has only been tested with Chrome on Mac.  

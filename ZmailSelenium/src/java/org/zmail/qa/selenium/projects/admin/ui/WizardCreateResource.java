@@ -17,13 +17,13 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.admin.ui;
+package org.zmail.qa.selenium.projects.admin.ui;
 
-import com.zimbra.qa.selenium.framework.items.IItem;
-import com.zimbra.qa.selenium.framework.ui.AbsTab;
-import com.zimbra.qa.selenium.framework.ui.AbsWizard;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.projects.admin.items.ResourceItem;
+import org.zmail.qa.selenium.framework.items.IItem;
+import org.zmail.qa.selenium.framework.ui.AbsTab;
+import org.zmail.qa.selenium.framework.ui.AbsWizard;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.projects.admin.items.ResourceItem;
 
 
 /**
@@ -36,9 +36,9 @@ public class WizardCreateResource extends AbsWizard {
 		public static final String zdlg_RESOURCE_LOCAL_NAME = "zdlgv__NEW_RES_name";
 		public static final String zdlg_RESOURCE_DOMAIN_NAME="zdlgv__NEW_RES_name_2_display";
 		public static final String zdlg_OK="zdlg__NEW_ALIAS_button2_title";
-		public static final String zdlg_RESOURCE_TYPE="zdlgv__NEW_RES_zimbraCalResType_display";
-		public static final String zdlg_RESOURCE_TYPE_LOCATION="zdlgv__NEW_RES_zimbraCalResType_choice_0";
-		public static final String zdlg_RESOURCE_TYPE_EQUIPMENT="zdlgv__NEW_RES_zimbraCalResType_choice_1";
+		public static final String zdlg_RESOURCE_TYPE="zdlgv__NEW_RES_zmailCalResType_display";
+		public static final String zdlg_RESOURCE_TYPE_LOCATION="zdlgv__NEW_RES_zmailCalResType_choice_0";
+		public static final String zdlg_RESOURCE_TYPE_EQUIPMENT="zdlgv__NEW_RES_zmailCalResType_choice_1";
 		public static final String LOCATION="Location";
 		public static final String EQUIPMENT="Equipment";
 	}

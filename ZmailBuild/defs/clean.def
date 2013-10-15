@@ -13,8 +13,8 @@ CLEAN_TARGETS	=	\
 		zcs \
 		zcs-patch* \
 		zcs-*.tgz \
-		zimbra.rpmrc \
-		zimbra*.spec \
+		zmail.rpmrc \
+		zmail*.spec \
 		*.plist \
 		resources \
 		$(ARCH)

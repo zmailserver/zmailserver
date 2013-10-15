@@ -12,27 +12,27 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.offline;
+package org.zmail.cs.service.offline;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.service.mail.GetMiniCal;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.service.mail.GetMiniCal;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.soap.ZmailSoapContext;
 
 public class OfflineGetMiniCal extends GetMiniCal {
     
     @Override
     protected Element proxyIfNecessary(Element request,
                     Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Account reqAcct = getRequestedAccount(zsc);
         List<ItemId> itemIds = new ArrayList<ItemId>();
         boolean needToProxy = false;

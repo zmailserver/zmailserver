@@ -12,18 +12,18 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.util;
+package org.zmail.cs.offline.util;
 
-import com.zimbra.cs.util.yauth.RawAuthManager;
-import com.zimbra.cs.util.yauth.MetadataTokenStore;
-import com.zimbra.cs.util.yauth.Authenticator;
-import com.zimbra.cs.util.yauth.TokenStore;
-import com.zimbra.cs.util.yauth.RawAuth;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.datasource.DataSourceManager;
-import com.zimbra.cs.offline.OfflineLC;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.common.service.ServiceException;
+import org.zmail.cs.util.yauth.RawAuthManager;
+import org.zmail.cs.util.yauth.MetadataTokenStore;
+import org.zmail.cs.util.yauth.Authenticator;
+import org.zmail.cs.util.yauth.TokenStore;
+import org.zmail.cs.util.yauth.RawAuth;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.datasource.DataSourceManager;
+import org.zmail.cs.offline.OfflineLC;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.common.service.ServiceException;
 
 import java.util.Map;
 import java.util.HashMap;

@@ -13,18 +13,18 @@
 # basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
 # ***** END LICENSE BLOCK *****
 
-package Zimbra::Util::Common; 
+package Zmail::Util::Common; 
 use strict;
 
 
-# Zimbra Specfic library locations
-use lib "/opt/zimbra/zimbramon/lib";
-use lib "/opt/zimbra/zimbramon/lib/Zimbra/SOAP";
-use lib "/opt/zimbra/zimbramon/lib/Zimbra/Mon";
-use lib "/opt/zimbra/zimbramon/lib/Zimbra/DB";
+# Zmail Specfic library locations
+use lib "/opt/zmail/zmailmon/lib";
+use lib "/opt/zmail/zmailmon/lib/Zmail/SOAP";
+use lib "/opt/zmail/zmailmon/lib/Zmail/Mon";
+use lib "/opt/zmail/zmailmon/lib/Zmail/DB";
 foreach my $arch (qw(i386 x86_64 i486 i586 i686 darwin)) {
   foreach my $type (qw(linux-thread-multi linux-gnu-thread-multi linux thread-multi thread-multi-2level)) {
-    my $dir = "/opt/zimbra/zimbramon/lib/${arch}-${type}";
+    my $dir = "/opt/zmail/zmailmon/lib/${arch}-${type}";
     unshift(@INC, "$dir") 
       if (-d "$dir");
   }

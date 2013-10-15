@@ -13,17 +13,17 @@
  * ***** END LICENSE BLOCK *****
  */
 
-function com_zimbra_tracking_HandlerObject() {
+function org_zmail_tracking_HandlerObject() {
 }
 
-com_zimbra_tracking_HandlerObject.prototype = new ZmZimletBase();
-com_zimbra_tracking_HandlerObject.prototype.constructor = com_zimbra_tracking_HandlerObject;
+org_zmail_tracking_HandlerObject.prototype = new ZmZimletBase();
+org_zmail_tracking_HandlerObject.prototype.constructor = org_zmail_tracking_HandlerObject;
 
 /**
  * Simplify handler object
  *
  */
-var TrackingZimlet = com_zimbra_tracking_HandlerObject;
+var TrackingZimlet = org_zmail_tracking_HandlerObject;
 
 /**
  * Defines the regular expressions for UPS and FedEx packages.

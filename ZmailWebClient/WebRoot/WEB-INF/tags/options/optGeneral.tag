@@ -13,12 +13,12 @@
  * ***** END LICENSE BLOCK *****
 --%>
 <%@ tag body-content="empty" %>
-<%@ attribute name="mailbox" rtexprvalue="true" required="true" type="com.zimbra.cs.taglib.bean.ZMailboxBean" %>
+<%@ attribute name="mailbox" rtexprvalue="true" required="true" type="org.zmail.cs.taglib.bean.ZMailboxBean" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
-<%@ taglib prefix="app" uri="com.zimbra.htmlclient" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
+<%@ taglib prefix="app" uri="org.zmail.htmlclient" %>
 <fmt:setBundle basename='/messages/AjxMsg' var='AjxMsg' scope='request' />
 <table width="100%">
 <tr>
@@ -45,13 +45,13 @@
             <table>
                 <tr>
                     <td>
-                        <input id="clientA" type="radio" name="zimbraPrefClientType" value="advanced" <c:if test="${mailbox.prefs.isAdvancedClient}">checked</c:if>/>
+                        <input id="clientA" type="radio" name="zmailPrefClientType" value="advanced" <c:if test="${mailbox.prefs.isAdvancedClient}">checked</c:if>/>
                     </td>
                     <td>
                         <label for="clientA"><fmt:message key="optionsClientAdvanced"/></label>
                     </td>
                     <td>
-                        <input id="clientS" type="radio" name="zimbraPrefClientType" value="standard" <c:if test="${mailbox.prefs.isStandardClient}">checked</c:if>/>
+                        <input id="clientS" type="radio" name="zmailPrefClientType" value="standard" <c:if test="${mailbox.prefs.isStandardClient}">checked</c:if>/>
                     </td>
                     <td>
                         <label for="clientS"><fmt:message key="optionsClientStandard"/></label>
@@ -66,7 +66,7 @@
             <label for="skinPref"><fmt:message key="SKIN_uiTheme"/>:</label>
         </td>
         <td>
-            <select name="zimbraPrefSkin" id="skinPref">
+            <select name="zmailPrefSkin" id="skinPref">
                 <c:set var="skin" value="${mailbox.prefs.skin}"/>
                 <c:forEach var="name" items="${mailbox.availableSkins}">
                     <fmt:message var="displayName" key="SKIN_${name}"/>
@@ -83,7 +83,7 @@
             <label for="timeZone"><fmt:message key="timeZonePref"/>:</label>
         </td>
         <td>
-            <select name="zimbraPrefTimeZoneId" id="timeZone">
+            <select name="zmailPrefTimeZoneId" id="timeZone">
                 <c:set var="tzpref" value="${mailbox.prefs.timeZoneCanonicalId}"/>
                 <zm:forEachTimeZone var="tz">
                     <fmt:message var="displayName" bundle='${AjxMsg}' key="${tz.id}"/>
@@ -138,7 +138,7 @@
         </td>
         <c:if test="${mailbox.features.spam}">
         <td>
-            <app:optCheckbox boxfirst="true" label="includeJunkFolder" pref="zimbraPrefIncludeSpamInSearch"
+            <app:optCheckbox boxfirst="true" label="includeJunkFolder" pref="zmailPrefIncludeSpamInSearch"
                              checked="${mailbox.prefs.includeSpamInSearch}"/>
         </td>
     </tr>
@@ -146,7 +146,7 @@
         <td>&nbsp;</td>
         </c:if>
         <td>
-            <app:optCheckbox boxfirst="true" label="includeTrashFolder" pref="zimbraPrefIncludeTrashInSearch"
+            <app:optCheckbox boxfirst="true" label="includeTrashFolder" pref="zmailPrefIncludeTrashInSearch"
                              checked="${mailbox.prefs.includeTrashInSearch}"/>
         </td>
     </tr>
@@ -157,7 +157,7 @@
 			<fmt:message key="optionsSearchLanguage"/>:
 		</td>
         <td>
-            <app:optCheckbox boxfirst="true" label="showSearchString" pref="zimbraPrefShowSearchString"
+            <app:optCheckbox boxfirst="true" label="showSearchString" pref="zmailPrefShowSearchString"
                              checked="${mailbox.prefs.showSearchString}"/>
         </td>
     </tr>
@@ -181,7 +181,7 @@
         <label for="printFont"><fmt:message key="printFontSizePref"/>:</label>
     </td>
     <td>
-        <select name="zimbraPrefDefaultPrintFontSize" id="printFont">
+        <select name="zmailPrefDefaultPrintFontSize" id="printFont">
             <c:set var="printpref" value="${mailbox.prefs.defaultPrintFontSize}"/>
             <option <c:if test="${printpref eq '8pt'}"> selected</c:if> value="8pt">8pt</option>
             <option <c:if test="${printpref eq '10pt'}"> selected</c:if> value="10pt">10pt</option>

@@ -27,11 +27,11 @@ public class ConfigViewModelUDest: BaseViewModel
     }
     public void LoadConfig(Config config)
     {
-        ZimbraServerHostName = config.ZimbraServer.Hostname;
-        ZimbraPort = config.ZimbraServer.Port;
-        ZimbraUser = config.ZimbraServer.UserAccount;
-        ZimbraUserPasswd = config.ZimbraServer.UserPassword;
-        ZimbraSSL = config.ZimbraServer.UseSSL;
+        ZmailServerHostName = config.ZmailServer.Hostname;
+        ZmailPort = config.ZmailServer.Port;
+        ZmailUser = config.ZmailServer.UserAccount;
+        ZmailUserPasswd = config.ZmailServer.UserPassword;
+        ZmailSSL = config.ZmailServer.UseSSL;
     }
 
     private void Load()
@@ -58,7 +58,7 @@ public class ConfigViewModelUDest: BaseViewModel
                 catch (Exception e)
                 {
                     string temp = string.Format("Incorrect configuration file format.\n{0}", e.Message);
-                    MessageBox.Show(temp, "Zimbra Migration", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(temp, "Zmail Migration", MessageBoxButton.OK, MessageBoxImage.Error);
                     fileRead.Close();
                     return;
                 }
@@ -117,28 +117,28 @@ public class ConfigViewModelUDest: BaseViewModel
     }
     private void Next()
     {
-        if ((this.ZimbraServerHostName.Length == 0) || (this.ZimbraPort.Length == 0))
+        if ((this.ZmailServerHostName.Length == 0) || (this.ZmailPort.Length == 0))
         {
-            MessageBox.Show("Please fill in the host name and port", "Zimbra Migration",
+            MessageBox.Show("Please fill in the host name and port", "Zmail Migration",
                 MessageBoxButton.OK, MessageBoxImage.Error);
             return;
         }
         try
         {
-            System.Net.IPAddress address = System.Net.IPAddress.Parse(ZimbraServerHostName);
+            System.Net.IPAddress address = System.Net.IPAddress.Parse(ZmailServerHostName);
             MessageBox.Show("Please enter a valid host name rather than an IP address",
-                "Zimbra Migration", MessageBoxButton.OK, MessageBoxImage.Error);
+                "Zmail Migration", MessageBoxButton.OK, MessageBoxImage.Error);
             return;
         }
         catch (Exception)
         {}
-        ZimbraAPI zimbraAPI = new ZimbraAPI(false);
+        ZmailAPI zmailAPI = new ZmailAPI(false);
 
         int stat = -1;
         try
         {
-            stat = zimbraAPI.Logon(this.ZimbraServerHostName, this.ZimbraPort, this.ZimbraUser,
-                this.ZimbraUserPasswd, this.ZimbraSSL, false);
+            stat = zmailAPI.Logon(this.ZmailServerHostName, this.ZmailPort, this.ZmailUser,
+                this.ZmailUserPasswd, this.ZmailSSL, false);
         }
         catch (Exception e)
         {
@@ -148,73 +148,73 @@ public class ConfigViewModelUDest: BaseViewModel
 
         if (stat == 0)
         {
-            string authToken = ZimbraValues.GetZimbraValues().AuthToken;
+            string authToken = ZmailValues.GetZmailValues().AuthToken;
 
             if (authToken.Length > 0)
             {
-                zimbraAPI.GetInfo();
+                zmailAPI.GetInfo();
                 lb.SelectedIndex = 3;
             }
         }
         else
         {
-            MessageBox.Show(string.Format("Logon Unsuccessful: {0}", zimbraAPI.LastError),
-                "Zimbra Migration", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show(string.Format("Logon Unsuccessful: {0}", zmailAPI.LastError),
+                "Zmail Migration", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
-    public string ZimbraPort {
-        get { return m_config.ZimbraServer.Port; }
+    public string ZmailPort {
+        get { return m_config.ZmailServer.Port; }
         set
         {
-            if (value == m_config.ZimbraServer.Port)
+            if (value == m_config.ZmailServer.Port)
                 return;
-            m_config.ZimbraServer.Port = value;
+            m_config.ZmailServer.Port = value;
 
-            OnPropertyChanged(new PropertyChangedEventArgs("ZimbraPort"));
+            OnPropertyChanged(new PropertyChangedEventArgs("ZmailPort"));
         }
     }
-    public string ZimbraUser {
-        get { return m_config.ZimbraServer.UserAccount; }
+    public string ZmailUser {
+        get { return m_config.ZmailServer.UserAccount; }
         set
         {
-            if (value == m_config.ZimbraServer.UserAccount)
+            if (value == m_config.ZmailServer.UserAccount)
                 return;
-            m_config.ZimbraServer.UserAccount = value;
+            m_config.ZmailServer.UserAccount = value;
 
-            OnPropertyChanged(new PropertyChangedEventArgs("ZimbraUser"));
+            OnPropertyChanged(new PropertyChangedEventArgs("ZmailUser"));
         }
     }
-    public string ZimbraServerHostName {
-        get { return m_config.ZimbraServer.Hostname; }
+    public string ZmailServerHostName {
+        get { return m_config.ZmailServer.Hostname; }
         set
         {
-            if (value == m_config.ZimbraServer.Hostname)
+            if (value == m_config.ZmailServer.Hostname)
                 return;
-            m_config.ZimbraServer.Hostname = value;
+            m_config.ZmailServer.Hostname = value;
 
-            OnPropertyChanged(new PropertyChangedEventArgs("ZimbraServerHostName"));
+            OnPropertyChanged(new PropertyChangedEventArgs("ZmailServerHostName"));
         }
     }
-    public string ZimbraUserPasswd {
-        get { return m_config.ZimbraServer.UserPassword; }
+    public string ZmailUserPasswd {
+        get { return m_config.ZmailServer.UserPassword; }
         set
         {
-            if (value == m_config.ZimbraServer.UserPassword)
+            if (value == m_config.ZmailServer.UserPassword)
                 return;
-            m_config.ZimbraServer.UserPassword = value;
+            m_config.ZmailServer.UserPassword = value;
 
-            OnPropertyChanged(new PropertyChangedEventArgs("ZimbraUserPasswd"));
+            OnPropertyChanged(new PropertyChangedEventArgs("ZmailUserPasswd"));
         }
     }
-    public bool ZimbraSSL {
-        get { return m_config.ZimbraServer.UseSSL; }
+    public bool ZmailSSL {
+        get { return m_config.ZmailServer.UseSSL; }
         set
         {
-            if (value == m_config.ZimbraServer.UseSSL)
+            if (value == m_config.ZmailServer.UseSSL)
                 return;
-            m_config.ZimbraServer.UseSSL = value;
+            m_config.ZmailServer.UseSSL = value;
 
-            OnPropertyChanged(new PropertyChangedEventArgs("ZimbraSSL"));
+            OnPropertyChanged(new PropertyChangedEventArgs("ZmailSSL"));
         }
     }
 }

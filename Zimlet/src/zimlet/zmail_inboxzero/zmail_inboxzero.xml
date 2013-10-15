@@ -14,7 +14,7 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="zimbra_inboxzero"
+<zimlet name="zmail_inboxzero"
         version="1.3"
         target="main"
         label="Inbox Zero"

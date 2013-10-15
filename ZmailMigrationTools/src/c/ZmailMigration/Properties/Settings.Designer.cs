@@ -8,7 +8,7 @@
 // </auto-generated>
 // ------------------------------------------------------------------------------
 
-namespace ZimbraMigration.Properties
+namespace ZmailMigration.Properties
 {
 [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()][global::System.CodeDom.
 Compiler.GeneratedCodeAttribute(

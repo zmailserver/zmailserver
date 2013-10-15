@@ -14,20 +14,20 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.performance;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.performance;
 
 import java.io.File;
 import java.util.HashMap;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.performance.*;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.LmtpInject;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.ajax.core.*;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.performance.*;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.LmtpInject;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.ajax.core.*;
 
 
 public class ZmMailItem extends AjaxCommonTest {
@@ -41,8 +41,8 @@ public class ZmMailItem extends AjaxCommonTest {
 
 		
 		super.startingAccountPreferences = new HashMap<String, String>() {{
-				    put("zimbraPrefGroupMailBy", "message");
-				    put("zimbraPrefMessageViewHtmlPreferred", "FALSE");
+				    put("zmailPrefGroupMailBy", "message");
+				    put("zmailPrefMessageViewHtmlPreferred", "FALSE");
 				}};
 
 
@@ -53,7 +53,7 @@ public class ZmMailItem extends AjaxCommonTest {
 			groups = { "performance" })
 	public void ZmMailItem_01() throws HarnessException {
 		
-		String mime = ZimbraSeleniumProperties.getBaseDirectory() + "/data/public/mime/email02/mime01.txt";
+		String mime = ZmailSeleniumProperties.getBaseDirectory() + "/data/public/mime/email02/mime01.txt";
 		String subject = "Subject13155016716713";
 
 		LmtpInject.injectFile(app.zGetActiveAccount().EmailAddress, new File(mime));
@@ -76,7 +76,7 @@ public class ZmMailItem extends AjaxCommonTest {
 			groups = { "performance" })
 	public void ZmMailItem_02() throws HarnessException {
 		
-		String mime = ZimbraSeleniumProperties.getBaseDirectory() + "/data/public/mime/email02/mime01.txt";
+		String mime = ZmailSeleniumProperties.getBaseDirectory() + "/data/public/mime/email02/mime01.txt";
 		String subject = "Subject13155016716713";
 
 		LmtpInject.injectFile(app.zGetActiveAccount().EmailAddress, new File(mime));

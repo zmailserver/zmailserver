@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.octopus.tests.myfiles.files;
+package org.zmail.qa.selenium.projects.octopus.tests.myfiles.files;
 
 import java.util.regex.Pattern;
 
@@ -22,17 +22,17 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.octopus.core.OctopusCommonTest;
-import com.zimbra.qa.selenium.projects.octopus.ui.DisplayFilePreview;
-import com.zimbra.qa.selenium.projects.octopus.ui.DisplayFilePreview.Field;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.octopus.core.OctopusCommonTest;
+import org.zmail.qa.selenium.projects.octopus.ui.DisplayFilePreview;
+import org.zmail.qa.selenium.projects.octopus.ui.DisplayFilePreview.Field;
 
 public class FilePreview extends OctopusCommonTest{
 	private boolean _folderIsCreated = false;
@@ -58,14 +58,14 @@ public class FilePreview extends OctopusCommonTest{
 	public DisplayFilePreview openFilePreview() throws HarnessException
 	{
 		//get Active account
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseRootFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
 		// Create file item
 		String fileName=XML_FILE;
 
-		String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+		String filePath = ZmailSeleniumProperties.getBaseDirectory()
 		+ "/data/public/other/"+fileName;
 
 		// Upload file to server through RestUtil
@@ -73,7 +73,7 @@ public class FilePreview extends OctopusCommonTest{
 
 		// Save uploaded file to the root folder through SOAP
 		account.soapSend(
-				"<SaveDocumentRequest xmlns='urn:zimbraMail'>" +
+				"<SaveDocumentRequest xmlns='urn:zmailMail'>" +
 				"<doc l='" + briefcaseRootFolder.getId() + "'>" +
 				"<upload id='" + attachmentId + "'/>" +
 				"</doc>" +

@@ -12,20 +12,20 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.bean;
+package org.zmail.cs.taglib.bean;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.jsp.JspException;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.SoapFaultException;
-import com.zimbra.common.soap.ZimbraNamespace;
-import com.zimbra.common.util.ExceptionToString;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AccountServiceException;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.SoapFaultException;
+import org.zmail.common.soap.ZmailNamespace;
+import org.zmail.common.util.ExceptionToString;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AccountServiceException;
 
 public class ZExceptionBean {
 
@@ -64,13 +64,13 @@ public class ZExceptionBean {
         }
         if( e instanceof SoapFaultException)  {
             if(AccountServiceException.AUTH_FAILED.equals(((SoapFaultException)e).getCode())) {
-                ZimbraLog.webclient.debug(e.getMessage(), e);
+                ZmailLog.webclient.debug(e.getMessage(), e);
             } else {
-                ZimbraLog.webclient.error(e.getMessage(), e);
+                ZmailLog.webclient.error(e.getMessage(), e);
             }
         }
         else{
-            ZimbraLog.webclient.error(e.getMessage(), e);
+            ZmailLog.webclient.error(e.getMessage(), e);
         }
 
         if (e instanceof ServiceException) {
@@ -104,10 +104,10 @@ public class ZExceptionBean {
                 Element d = sfe.getDetail();
                 if (d != null) {
                     List<Element> list = d.getPathElementList(
-                            new String[] {ZimbraNamespace.E_ERROR.getName(), ZimbraNamespace.E_ARGUMENT.getName()});
+                            new String[] {ZmailNamespace.E_ERROR.getName(), ZmailNamespace.E_ARGUMENT.getName()});
                     for (Element el : list) {
-                        args.add(new Argument(el.getAttribute(ZimbraNamespace.A_ARG_NAME,""),
-                            el.getAttribute(ZimbraNamespace.A_ARG_TYPE, ""), el.getText()));
+                        args.add(new Argument(el.getAttribute(ZmailNamespace.A_ARG_NAME,""),
+                            el.getAttribute(ZmailNamespace.A_ARG_TYPE, ""), el.getText()));
                     }
                 }
             }

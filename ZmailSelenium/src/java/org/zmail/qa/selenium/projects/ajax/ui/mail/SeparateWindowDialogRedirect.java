@@ -17,18 +17,18 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.ajax.ui.mail;
+package org.zmail.qa.selenium.projects.ajax.ui.mail;
 
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.framework.util.staf.Stafpostqueue;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.DialogRedirect.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.staf.Stafpostqueue;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.DialogRedirect.*;
 
 /**
  * Represents a "Specify Message Send Time" dialog box (Send Later)
  * 
- * See https://bugzilla.zimbra.com/show_bug.cgi?id=7524
- * See https://bugzilla.zimbra.com/show_bug.cgi?id=61935
+ * See https://bugzilla.zmail.com/show_bug.cgi?id=7524
+ * See https://bugzilla.zmail.com/show_bug.cgi?id=61935
  * 
  * <p>
  * @author Matt Rhoades

@@ -14,26 +14,26 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.briefcase.document;
+package org.zmail.qa.selenium.projects.desktop.tests.briefcase.document;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.DocumentItem;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.ui.Shortcut;
-import com.zimbra.qa.selenium.framework.util.GeneralUtility;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.XmlStringUtil;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.*;
+import org.zmail.qa.selenium.framework.items.DocumentItem;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.ui.Shortcut;
+import org.zmail.qa.selenium.framework.util.GeneralUtility;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.XmlStringUtil;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.*;
 
 import org.testng.annotations.AfterMethod;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
 
 public class MoveDocument extends AjaxCommonTest {
 
@@ -44,22 +44,22 @@ public class MoveDocument extends AjaxCommonTest {
 
 		// Make sure we are using an account with message view
 		// super.startingAccountPreferences = new HashMap<String, String>()
-		// {{put("zimbraPrefGroupMailBy", "message");}};
+		// {{put("zmailPrefGroupMailBy", "message");}};
 	}
 
 	@Test(description = "Create document through SOAP - move & verify through GUI", groups = { "smoke" })
 	public void MoveDocument_01() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
 
-		String name = "folder" + ZimbraSeleniumProperties.getUniqueString();
+		String name = "folder" + ZmailSeleniumProperties.getUniqueString();
 
 		// Create a subfolder to move the message into i.e. Briefcase/subfolder
 		String briefcaseFolderId = briefcaseFolder.getId();
 
-		account.soapSend("<CreateFolderRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+ "<folder name='" + name + "' l='" + briefcaseFolderId + "'/>"
 				+ "</CreateFolderRequest>");
 
@@ -83,12 +83,12 @@ public class MoveDocument extends AjaxCommonTest {
 				+ docItem.getDocText() + "</body>" + "</html>");
 
 		account
-				.soapSend("<SaveDocumentRequest requestId='0' xmlns='urn:zimbraMail'>"
+				.soapSend("<SaveDocumentRequest requestId='0' xmlns='urn:zmailMail'>"
 						+ "<doc name='"
 						+ docItem.getName()
 						+ "' l='"
 						+ briefcaseFolderId
-						+ "' ct='application/x-zimbra-doc'>"
+						+ "' ct='application/x-zmail-doc'>"
 						+ "<content>"
 						+ contentHTML
 						+ "</content>"
@@ -131,7 +131,7 @@ public class MoveDocument extends AjaxCommonTest {
 
 	@Test(description = "Move Document using 'm' keyboard shortcut", groups = { "functional" })
 	public void MoveDocument_02() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseRootFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
@@ -141,14 +141,14 @@ public class MoveDocument extends AjaxCommonTest {
 		Shortcut shortcut = Shortcut.S_MOVE;
 
 		String[] subFolderNames = {
-				"subFolderName1" + ZimbraSeleniumProperties.getUniqueString(),
-				"subFolderName2" + ZimbraSeleniumProperties.getUniqueString() };
+				"subFolderName1" + ZmailSeleniumProperties.getUniqueString(),
+				"subFolderName2" + ZmailSeleniumProperties.getUniqueString() };
 
 		FolderItem[] subFolders = new FolderItem[subFolderNames.length];
 
 		// Create folders to move the message from/to: Briefcase/sub-folder
 		for (int i = 0; i < subFolderNames.length; i++) {
-			account.soapSend("<CreateFolderRequest xmlns='urn:zimbraMail'>"
+			account.soapSend("<CreateFolderRequest xmlns='urn:zmailMail'>"
 					+ "<folder name='" + subFolderNames[i] + "' l='"
 					+ briefcaseRootFolderId + "'/>" + "</CreateFolderRequest>");
 
@@ -174,12 +174,12 @@ public class MoveDocument extends AjaxCommonTest {
 				+ docItem.getDocText() + "</body>" + "</html>");
 
 		account
-				.soapSend("<SaveDocumentRequest requestId='0' xmlns='urn:zimbraMail'>"
+				.soapSend("<SaveDocumentRequest requestId='0' xmlns='urn:zmailMail'>"
 						+ "<doc name='"
 						+ docItem.getName()
 						+ "' l='"
 						+ subFolders[0].getId()
-						+ "' ct='application/x-zimbra-doc'>"
+						+ "' ct='application/x-zmail-doc'>"
 						+ "<content>"
 						+ contentHTML
 						+ "</content>"

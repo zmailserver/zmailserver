@@ -17,7 +17,7 @@
 #pragma once
 #include "Util.h"
 
-namespace Zimbra
+namespace Zmail
 {
 namespace MAPI
 {

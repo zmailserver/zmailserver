@@ -60,14 +60,14 @@ ZaTaskAutoProvDialog.prototype.setObject = function(entry) {
     this._containedObject = new ZaDomain();
     ZaItem.prototype.copyTo.call(entry,this._containedObject,true,4);
 
-    this._containedObject[ZaDomain.A2_zimbraAutoProvSearchActivated] = entry[ZaDomain.A2_zimbraAutoProvSearchActivated] || "TRUE";
-    if(entry.attrs[ZaDomain.A_zimbraAutoProvAttrMap] && (typeof entry.attrs[ZaDomain.A_zimbraAutoProvAttrMap] == "string"))
-         this._containedObject.attrs[ZaDomain.A_zimbraAutoProvAttrMap] = [entry.attrs[ZaDomain.A_zimbraAutoProvAttrMap]];
+    this._containedObject[ZaDomain.A2_zmailAutoProvSearchActivated] = entry[ZaDomain.A2_zmailAutoProvSearchActivated] || "TRUE";
+    if(entry.attrs[ZaDomain.A_zmailAutoProvAttrMap] && (typeof entry.attrs[ZaDomain.A_zmailAutoProvAttrMap] == "string"))
+         this._containedObject.attrs[ZaDomain.A_zmailAutoProvAttrMap] = [entry.attrs[ZaDomain.A_zmailAutoProvAttrMap]];
 
     // auto provisioning object backup
     this._backupLdapObj(this._containedObject);
-    this._containedObject[ZaDomain.A2_zimbraAutoProvAccountPool] = entry[ZaDomain.A2_zimbraAutoProvAccountPool] || [];
-    this._containedObject[ZaDomain.A2_zimbraAutoProvAccountTargetPool] = entry[ZaDomain.A2_zimbraAutoProvAccountTargetPool] || [];
+    this._containedObject[ZaDomain.A2_zmailAutoProvAccountPool] = entry[ZaDomain.A2_zmailAutoProvAccountPool] || [];
+    this._containedObject[ZaDomain.A2_zmailAutoProvAccountTargetPool] = entry[ZaDomain.A2_zmailAutoProvAccountTargetPool] || [];
 
     this._separateConfigureValues(this._containedObject);
     //ZaXDialog.prototype.setObject.call(this,entry);
@@ -132,7 +132,7 @@ function() {
     this.tabChoices.push({value:_tab4, label:ZaMsg.TBB_AUTOPROV_MANUAL});
 
     _tab5 = ++this.TAB_INDEX;
-    this.tabChoices.push({value:_tab5, label:ZaMsg.TBB_zimbraAutoProvEmailSetting});
+    this.tabChoices.push({value:_tab5, label:ZaMsg.TBB_zmailAutoProvEmailSetting});
 
 	var cases = [];
     var case1={type:_ZATABCASE_, numCols:2,colSizes:["150px","490px"], caseKey:_tab1, id:"auto_provision_config_general",
@@ -142,8 +142,8 @@ function() {
             {type: _SPACER_, height: 10 },
             {type:_GROUPER_, colSpan:"*", width: "100%",label:"LDAP Configuration", containerCssStyle: "padding-top:5px",
                 enableDisableChecks:[],
-                enableDisableChangeEventSources:[ZaDomain.A2_zimbraAutoProvModeEAGEREnabled, ZaDomain.A2_zimbraAutoProvModeLAZYEnabled,
-                ZaDomain.A2_zimbraAutoProvModeMANUALEnabled],
+                enableDisableChangeEventSources:[ZaDomain.A2_zmailAutoProvModeEAGEREnabled, ZaDomain.A2_zmailAutoProvModeLAZYEnabled,
+                ZaDomain.A2_zmailAutoProvModeMANUALEnabled],
             items: [
             {type:_GROUP_, numCols:6, label:"   ", labelLocation:_LEFT_,
                 visibilityChecks: [],
@@ -158,46 +158,46 @@ function() {
             },
 
 
-            {ref:ZaDomain.A_zimbraAutoProvLdapURL, type:_LDAPURL_, label:ZaMsg.LBL_zimbraAutoProvLdapURL,
+            {ref:ZaDomain.A_zmailAutoProvLdapURL, type:_LDAPURL_, label:ZaMsg.LBL_zmailAutoProvLdapURL,
                 ldapSSLPort:"636",ldapPort:"389",
                 labelLocation:_LEFT_,
-                label: ZaMsg.LBL_zimbraAutoProvLdapURL
+                label: ZaMsg.LBL_zmailAutoProvLdapURL
             },
-            {ref:ZaDomain.A_zimbraAutoProvLdapStartTlsEnabled, type:_CHECKBOX_,
-                label:ZaMsg.LBL_zimbraAutoProvLdapStartTlsEnabled, subLabel:"", align:_RIGHT_,
+            {ref:ZaDomain.A_zmailAutoProvLdapStartTlsEnabled, type:_CHECKBOX_,
+                label:ZaMsg.LBL_zmailAutoProvLdapStartTlsEnabled, subLabel:"", align:_RIGHT_,
                 trueValue:"TRUE", falseValue:"FALSE",labelLocation:_RIGHT_
             },
-            {ref:ZaDomain.A_zimbraAutoProvLdapAdminBindDn, type:_INPUT_,
-                label:ZaMsg.LBL_zimbraAutoProvLdapAdminBindDn, labelLocation:_LEFT_,
+            {ref:ZaDomain.A_zmailAutoProvLdapAdminBindDn, type:_INPUT_,
+                label:ZaMsg.LBL_zmailAutoProvLdapAdminBindDn, labelLocation:_LEFT_,
                 enableDisableChecks:[],
                 enableDisableChangeEventSources:[]
             },
-            {ref:ZaDomain.A_zimbraAutoProvLdapAdminBindPassword, type:_SECRET_,
-                label:ZaMsg.LBL_zimbraAutoProvLdapAdminBindPassword, labelLocation:_LEFT_
+            {ref:ZaDomain.A_zmailAutoProvLdapAdminBindPassword, type:_SECRET_,
+                label:ZaMsg.LBL_zmailAutoProvLdapAdminBindPassword, labelLocation:_LEFT_
             },
-            {ref:ZaDomain.A_zimbraAutoProvLdapSearchFilter, type:_TEXTAREA_, width:350, height:40,
-                label:ZaMsg.LBL_zimbraAutoProvLdapSearchFilter, labelLocation:_LEFT_,
+            {ref:ZaDomain.A_zmailAutoProvLdapSearchFilter, type:_TEXTAREA_, width:350, height:40,
+                label:ZaMsg.LBL_zmailAutoProvLdapSearchFilter, labelLocation:_LEFT_,
                 textWrapping:"soft"
             },
-            {ref:ZaDomain.A_zimbraAutoProvLdapSearchBase, type:_TEXTAREA_, width:350, height:40,
-                label:ZaMsg.LBL_zimbraAutoProvLdapSearchBase, labelLocation:_LEFT_,
+            {ref:ZaDomain.A_zmailAutoProvLdapSearchBase, type:_TEXTAREA_, width:350, height:40,
+                label:ZaMsg.LBL_zmailAutoProvLdapSearchBase, labelLocation:_LEFT_,
                 textWrapping:"soft"
             },
-            {ref:ZaDomain.A_zimbraAutoProvLdapBindDn, type:_INPUT_,
-                label:ZaMsg.LBL_zimbraAutoProvLdapBindDn, labelLocation:_LEFT_
+            {ref:ZaDomain.A_zmailAutoProvLdapBindDn, type:_INPUT_,
+                label:ZaMsg.LBL_zmailAutoProvLdapBindDn, labelLocation:_LEFT_
             }
             ]},
             {type: _SPACER_, height: 10 },
-            {ref:ZaDomain.A_zimbraAutoProvNotificationFromAddress, type:_TEXTFIELD_,
-                label:ZaMsg.LBL_zimbraAutoProvNotificationFromAddress, labelLocation:_LEFT_,
+            {ref:ZaDomain.A_zmailAutoProvNotificationFromAddress, type:_TEXTFIELD_,
+                label:ZaMsg.LBL_zmailAutoProvNotificationFromAddress, labelLocation:_LEFT_,
                 width:250, onChange:ZaDomainXFormView.onFormFieldChanged
             },
-            {ref:ZaDomain.A_zimbraAutoProvAccountNameMap, type:_TEXTFIELD_,
-                label:ZaMsg.LBL_zimbraAutoProvAccountNameMap, labelLocation:_LEFT_,
+            {ref:ZaDomain.A_zmailAutoProvAccountNameMap, type:_TEXTFIELD_,
+                label:ZaMsg.LBL_zmailAutoProvAccountNameMap, labelLocation:_LEFT_,
                 width:250, onChange:ZaDomainXFormView.onFormFieldChanged
             },
-            {ref:ZaDomain.A_zimbraAutoProvAttrMap, type:_REPEAT_,
-                label:ZaMsg.LBL_zimbraAutoProvAttrMap, repeatInstance:"", showAddButton:true,
+            {ref:ZaDomain.A_zmailAutoProvAttrMap, type:_REPEAT_,
+                label:ZaMsg.LBL_zmailAutoProvAttrMap, repeatInstance:"", showAddButton:true,
                 showRemoveButton:true,
                     addButtonLabel:ZaMsg.NAD_Add,
                     showAddOnNextRow:true,
@@ -218,35 +218,35 @@ function() {
         getCustomHeight:ZaTaskAutoProvDialog.getCustomHeight,
         items: [
             {type: _SPACER_, height: 20 },
-            {ref:ZaDomain.A2_zimbraAutoProvModeEAGEREnabled, type:_CHECKBOX_,
-                label:ZaMsg.LBL_zimbraAutoProvModeEAGER, subLabel:"", align:_RIGHT_,
+            {ref:ZaDomain.A2_zmailAutoProvModeEAGEREnabled, type:_CHECKBOX_,
+                label:ZaMsg.LBL_zmailAutoProvModeEAGER, subLabel:"", align:_RIGHT_,
                 trueValue:"TRUE", falseValue:"FALSE",labelLocation:_RIGHT_
             },
             {type: _SPACER_, height: 20 },
             {type:_GROUPER_, colSpan:"*", width: "100%",label:"Configuration", containerCssStyle: "padding-top:5px", colSizes:["175px","*"], numCols:2,
-                enableDisableChecks:[[XForm.checkInstanceValue,ZaDomain.A2_zimbraAutoProvModeEAGEREnabled,"TRUE"]],
-                enableDisableChangeEventSources:[ZaDomain.A2_zimbraAutoProvModeEAGEREnabled],
+                enableDisableChecks:[[XForm.checkInstanceValue,ZaDomain.A2_zmailAutoProvModeEAGEREnabled,"TRUE"]],
+                enableDisableChangeEventSources:[ZaDomain.A2_zmailAutoProvModeEAGEREnabled],
                 items: [
-                {ref:ZaDomain.A_zimbraAutoProvBatchSize, type:_TEXTFIELD_, label:ZaMsg.LBL_zimbraAutoProvBatchSize,
+                {ref:ZaDomain.A_zmailAutoProvBatchSize, type:_TEXTFIELD_, label:ZaMsg.LBL_zmailAutoProvBatchSize,
                     autoSaveValue:true, labelLocation:_LEFT_,
-                    enableDisableChecks: [[XForm.checkInstanceValue,ZaDomain.A2_zimbraAutoProvModeEAGEREnabled,"TRUE"]],
-                    enableDisableChangeEventSources:[ZaDomain.A2_zimbraAutoProvModeEAGEREnabled],
+                    enableDisableChecks: [[XForm.checkInstanceValue,ZaDomain.A2_zmailAutoProvModeEAGEREnabled,"TRUE"]],
+                    enableDisableChangeEventSources:[ZaDomain.A2_zmailAutoProvModeEAGEREnabled],
                     cssClass:"admin_xform_number_input"
                 },
-                {ref:ZaDomain.A2_zimbraAutoProvPollingInterval, type:_LIFETIME_,
+                {ref:ZaDomain.A2_zmailAutoProvPollingInterval, type:_LIFETIME_,
                     colSizes:["80px","100px","*"],
-                    label:ZaMsg.LBL_zimbraAutoProvPollingInterval, labelLocation:_LEFT_,
-                    enableDisableChecks: [[XForm.checkInstanceValue,ZaDomain.A2_zimbraAutoProvModeEAGEREnabled,"TRUE"]],
-                    enableDisableChangeEventSources:[ZaDomain.A2_zimbraAutoProvModeEAGEREnabled]
+                    label:ZaMsg.LBL_zmailAutoProvPollingInterval, labelLocation:_LEFT_,
+                    enableDisableChecks: [[XForm.checkInstanceValue,ZaDomain.A2_zmailAutoProvModeEAGEREnabled,"TRUE"]],
+                    enableDisableChangeEventSources:[ZaDomain.A2_zmailAutoProvModeEAGEREnabled]
                 },
-                {type: _DWT_LIST_, ref: ZaDomain.A2_zimbraAutoProvServerList,  width: 250, height: 50,
-                    label:ZaMsg.LBL_zimbraAutoProvServerList,
+                {type: _DWT_LIST_, ref: ZaDomain.A2_zmailAutoProvServerList,  width: 250, height: 50,
+                    label:ZaMsg.LBL_zmailAutoProvServerList,
                     labelLocation:_LEFT_,   labelCssStyle:"vertical-align:top",
                     nowrap:false,labelWrap:true,
                     forceUpdate: true, widgetClass: ZaServerOptionList,
                     multiselect: true, preserveSelection: true,
-                    enableDisableChecks: [[XForm.checkInstanceValue,ZaDomain.A2_zimbraAutoProvModeEAGEREnabled,"TRUE"]],
-                    enableDisableChangeEventSources:[ZaDomain.A2_zimbraAutoProvModeEAGEREnabled],
+                    enableDisableChecks: [[XForm.checkInstanceValue,ZaDomain.A2_zmailAutoProvModeEAGEREnabled,"TRUE"]],
+                    enableDisableChangeEventSources:[ZaDomain.A2_zmailAutoProvModeEAGEREnabled],
                     onSelection: ZaTaskAutoProvDialog.filterSelectionListener
                 }
             ]},
@@ -264,33 +264,33 @@ function() {
         getCustomHeight:ZaTaskAutoProvDialog.getCustomHeight,
         items: [
             {type: _SPACER_, height: 20 },
-            {ref:ZaDomain.A2_zimbraAutoProvModeLAZYEnabled, type:_CHECKBOX_,
-                label:ZaMsg.LBL_zimbraAutoProvModeLAZY, subLabel:"", align:_RIGHT_,
+            {ref:ZaDomain.A2_zmailAutoProvModeLAZYEnabled, type:_CHECKBOX_,
+                label:ZaMsg.LBL_zmailAutoProvModeLAZY, subLabel:"", align:_RIGHT_,
                 trueValue:"TRUE", falseValue:"FALSE",labelLocation:_RIGHT_
             },
             {type: _SPACER_, height: 20 },
             {type:_GROUPER_, colSpan:"*", width: "100%",label:"Configuration", containerCssStyle: "padding-top:5px", colSizes:["200px","*"], numCols:2,
             items: [
-                {type:_GROUP_, numCols:2, label:ZaMsg.LBL_zimbraAutoProvAuthMech,
+                {type:_GROUP_, numCols:2, label:ZaMsg.LBL_zmailAutoProvAuthMech,
                     labelLocation:_LEFT_, colSizes:["20px","150px"],labelCssStyle:"vertical-align:top",
                     nowrap:false,labelWrap:true,
-                    enableDisableChecks:[[XForm.checkInstanceValue,ZaDomain.A2_zimbraAutoProvModeLAZYEnabled,"TRUE"]],
-                    enableDisableChangeEventSources:[ZaDomain.A2_zimbraAutoProvModeLAZYEnabled],
+                    enableDisableChecks:[[XForm.checkInstanceValue,ZaDomain.A2_zmailAutoProvModeLAZYEnabled,"TRUE"]],
+                    enableDisableChangeEventSources:[ZaDomain.A2_zmailAutoProvModeLAZYEnabled],
                     items: [
-                        {ref:ZaDomain.A2_zimbraAutoProvAuthMechLDAPEnabled, type:_CHECKBOX_,
-                            label:ZaMsg.LBL_zimbraAutoProvAuthMechLDAP, subLabel:"",
+                        {ref:ZaDomain.A2_zmailAutoProvAuthMechLDAPEnabled, type:_CHECKBOX_,
+                            label:ZaMsg.LBL_zmailAutoProvAuthMechLDAP, subLabel:"",
                             trueValue:"TRUE", falseValue:"FALSE",labelLocation:_RIGHT_
                         },
-                        {ref:ZaDomain.A2_zimbraAutoProvAuthMechPREAUTHEnabled, type:_CHECKBOX_,
-                            label:ZaMsg.LBL_zimbraAutoProvAuthMechPREAUTH, subLabel:"",
+                        {ref:ZaDomain.A2_zmailAutoProvAuthMechPREAUTHEnabled, type:_CHECKBOX_,
+                            label:ZaMsg.LBL_zmailAutoProvAuthMechPREAUTH, subLabel:"",
                             trueValue:"TRUE", falseValue:"FALSE",labelLocation:_RIGHT_
                         },
-                        {ref:ZaDomain.A2_zimbraAutoProvAuthMechKRB5Enabled, type:_CHECKBOX_,
-                            label:ZaMsg.LBL_zimbraAutoProvAuthMechKRB5, subLabel:"",
+                        {ref:ZaDomain.A2_zmailAutoProvAuthMechKRB5Enabled, type:_CHECKBOX_,
+                            label:ZaMsg.LBL_zmailAutoProvAuthMechKRB5, subLabel:"",
                             trueValue:"TRUE", falseValue:"FALSE",labelLocation:_RIGHT_
                         },
-                        {ref:ZaDomain.A2_zimbraAutoProvAuthMechSPNEGOEnabled, type:_CHECKBOX_,
-                            label:ZaMsg.LBL_zimbraAutoProvAuthMechSPNEGO, subLabel:"",
+                        {ref:ZaDomain.A2_zmailAutoProvAuthMechSPNEGOEnabled, type:_CHECKBOX_,
+                            label:ZaMsg.LBL_zmailAutoProvAuthMechSPNEGO, subLabel:"",
                             trueValue:"TRUE", falseValue:"FALSE",labelLocation:_RIGHT_
                         }
                     ]
@@ -310,15 +310,15 @@ function() {
         getCustomHeight:ZaTaskAutoProvDialog.getCustomHeight,
         items: [
             {type: _SPACER_, height: 20 },
-            {ref:ZaDomain.A2_zimbraAutoProvModeMANUALEnabled, type:_CHECKBOX_,
-                label:ZaMsg.LBL_zimbraAutoProvModeMANUAL, subLabel:"", align:_RIGHT_,
+            {ref:ZaDomain.A2_zmailAutoProvModeMANUALEnabled, type:_CHECKBOX_,
+                label:ZaMsg.LBL_zmailAutoProvModeMANUAL, subLabel:"", align:_RIGHT_,
                 trueValue:"TRUE", falseValue:"FALSE",labelLocation:_RIGHT_,
                 onChange: ZaTaskAutoProvDialog.onFormFieldChanged
             },
             {type: _SPACER_, height: 20 },
             {type:_GROUPER_, colSpan:"*", width: "100%",label:"Find & Provisioning",
-            enableDisableChecks:[[XForm.checkInstanceValue,ZaDomain.A2_zimbraAutoProvModeMANUALEnabled,"TRUE"]],
-            enableDisableChangeEventSources:[ZaDomain.A2_zimbraAutoProvModeMANUALEnabled],
+            enableDisableChecks:[[XForm.checkInstanceValue,ZaDomain.A2_zmailAutoProvModeMANUALEnabled,"TRUE"]],
+            enableDisableChangeEventSources:[ZaDomain.A2_zmailAutoProvModeMANUALEnabled],
             containerCssStyle: "padding-top:5px",
             items: [
                     {type:_GROUP_, colSpan:2, numCols:3, width:"100%", colSizes:["180px","85px","180px"], cellspacing:"5px",
@@ -336,11 +336,11 @@ function() {
                             },
                             {type:_DWT_BUTTON_, label:ZaMsg.DLXV_ButtonSearch, width:"80px",
                                 onActivate:ZaTaskAutoProvDialog.srchButtonHndlr,align:_CENTER_,
-                                enableDisableChecks:[[XForm.checkInstanceValue,ZaDomain.A2_zimbraAutoProvSearchActivated,"TRUE"]],
-                                enableDisableChangeEventSources:[ZaDomain.A2_zimbraAutoProvSearchActivated]
+                                enableDisableChecks:[[XForm.checkInstanceValue,ZaDomain.A2_zmailAutoProvSearchActivated,"TRUE"]],
+                                enableDisableChangeEventSources:[ZaDomain.A2_zmailAutoProvSearchActivated]
                             },
                             {type:_OUTPUT_, value:ZaMsg.LBL_ManualProvAccount,visibilityChecks:[]},
-                            {ref:ZaDomain.A2_zimbraAutoProvAccountPool, type:_DWT_LIST_, height:"180px", width:"180px",
+                            {ref:ZaDomain.A2_zmailAutoProvAccountPool, type:_DWT_LIST_, height:"180px", width:"180px",
                                 cssClass: "DLSource",
                                 widgetClass:ZaAccMiniListView,
                                 rowSpan:4,
@@ -349,10 +349,10 @@ function() {
                             },
                             {type:_DWT_BUTTON_, label:AjxMsg.addAll, width:"80px",
                                 onActivate:ZaTaskAutoProvDialog.addAllButtonHndlr,
-                                enableDisableChecks:[[XForm.checkInstanceValueNotEmty,ZaDomain.A2_zimbraAutoProvAccountPool]],
-                                enableDisableChangeEventSources:[ZaDomain.A2_zimbraAutoProvAccountPool]
+                                enableDisableChecks:[[XForm.checkInstanceValueNotEmty,ZaDomain.A2_zmailAutoProvAccountPool]],
+                                enableDisableChangeEventSources:[ZaDomain.A2_zmailAutoProvAccountPool]
                             },
-                            {ref: ZaDomain.A2_zimbraAutoProvAccountTargetPool, type:_DWT_LIST_, height:"180px", width:"180px",
+                            {ref: ZaDomain.A2_zmailAutoProvAccountTargetPool, type:_DWT_LIST_, height:"180px", width:"180px",
                                 cssClass: "DLSource",
                                 widgetClass:ZaAccMiniListView,
                                 rowSpan:4,
@@ -361,18 +361,18 @@ function() {
                             },
                             {type:_DWT_BUTTON_, label:AjxMsg.add, width:"80px",
                                onActivate:ZaTaskAutoProvDialog.addButtonHndlr,
-                               enableDisableChecks:[[XForm.checkInstanceValueNotEmty,ZaDomain.A2_zimbraAutoProvAccountSrcSelectedPool]],
-                               enableDisableChangeEventSources:[ZaDomain.A2_zimbraAutoProvAccountSrcSelectedPool]
+                               enableDisableChecks:[[XForm.checkInstanceValueNotEmty,ZaDomain.A2_zmailAutoProvAccountSrcSelectedPool]],
+                               enableDisableChangeEventSources:[ZaDomain.A2_zmailAutoProvAccountSrcSelectedPool]
                             },
                             {type:_DWT_BUTTON_, label:AjxMsg.remove, width:"80px",
                                onActivate:ZaTaskAutoProvDialog.removeButtonHndlr,
-                               enableDisableChecks:[[XForm.checkInstanceValueNotEmty,ZaDomain.A2_zimbraAutoProvAccountTgtSelectedPool]],
-                               enableDisableChangeEventSources:[ZaDomain.A2_zimbraAutoProvAccountTgtSelectedPool]
+                               enableDisableChecks:[[XForm.checkInstanceValueNotEmty,ZaDomain.A2_zmailAutoProvAccountTgtSelectedPool]],
+                               enableDisableChangeEventSources:[ZaDomain.A2_zmailAutoProvAccountTgtSelectedPool]
                             },
                             {type:_DWT_BUTTON_, label:AjxMsg.removeAll, width:"80px",
                                 onActivate:ZaTaskAutoProvDialog.removeAllButtonHndlr,
-                                enableDisableChecks:[[XForm.checkInstanceValueNotEmty,ZaDomain.A2_zimbraAutoProvAccountTargetPool]],
-                                enableDisableChangeEventSources:[ZaDomain.A2_zimbraAutoProvAccountTargetPool]
+                                enableDisableChecks:[[XForm.checkInstanceValueNotEmty,ZaDomain.A2_zmailAutoProvAccountTargetPool]],
+                                enableDisableChangeEventSources:[ZaDomain.A2_zmailAutoProvAccountTargetPool]
                             },
                             {type:_GROUP_,numCols:3,colSizes:["90px","*","90px"],
                                 items:[
@@ -381,14 +381,14 @@ function() {
                                        id:"backButton", icon:"LeftArrow", disIcon:"LeftArrowDis",
                                        onActivate:ZaTaskAutoProvDialog.backPoolButtonHndlr,align:_CENTER_,
                                        enableDisableChecks:[ZaTaskAutoProvDialog.backBtnEnabled],
-                                       enableDisableChangeEventSources:[ZaDomain.A2_zimbraAutoProvAccountPoolPageNum,ZaDomain.A2_zimbraAutoProvSearchActivated]
+                                       enableDisableChangeEventSources:[ZaDomain.A2_zmailAutoProvAccountPoolPageNum,ZaDomain.A2_zmailAutoProvSearchActivated]
                                     },
                                     {type:_CELLSPACER_},
                                     {type:_DWT_BUTTON_, label:ZaMsg.Next, width:75,
                                        id:"fwdButton", icon:"RightArrow", disIcon:"RightArrowDis",
                                        onActivate:ZaTaskAutoProvDialog.fwdPoolButtonHndlr,align:_CENTER_,
                                        enableDisableChecks:[ZaTaskAutoProvDialog .forwardBtnEnabled],
-                                       enableDisableChangeEventSources:[ZaDomain.A2_zimbraAutoProvAccountPoolPageNum,ZaDomain.A2_zimbraAutoProvSearchActivated]
+                                       enableDisableChangeEventSources:[ZaDomain.A2_zmailAutoProvAccountPoolPageNum,ZaDomain.A2_zmailAutoProvSearchActivated]
                                     }
                                 ]
                             },
@@ -405,13 +405,13 @@ function() {
         getCustomHeight:ZaTaskAutoProvDialog.getCustomHeight,
         items: [
             {type: _SPACER_, height: 20 },
-            {type:_GROUPER_, colSpan:"*", width: "100%",label:ZaMsg.LBL_zimbraAutoProvConfiguration, containerCssStyle: "padding-top:5px", colSizes:["100px","auto"], numCols:2,
+            {type:_GROUPER_, colSpan:"*", width: "100%",label:ZaMsg.LBL_zmailAutoProvConfiguration, containerCssStyle: "padding-top:5px", colSizes:["100px","auto"], numCols:2,
             items: [
-                {ref:ZaDomain.A_zimbraAutoProvNotificationSubject, type:_SUPER_TEXTFIELD_, colSpan:2, label:ZaMsg.LBL_zimbraAutoProvEmailSubject,
+                {ref:ZaDomain.A_zmailAutoProvNotificationSubject, type:_SUPER_TEXTFIELD_, colSpan:2, label:ZaMsg.LBL_zmailAutoProvEmailSubject,
                     labelLocation:_LEFT_, textFieldCssStyle:"width:300; margin-right:5",
                     onChange:ZaTaskAutoProvDialog.onFormFieldChanged,
                     resetToSuperLabel:ZaMsg.NAD_ResetToGlobal},
-                {ref:ZaDomain.A_zimbraAutoProvNotificationBody, type:_SUPER_TEXTAREA_, colSpan:2, label:ZaMsg.LBL_zimbraAutoProvEmailBody,
+                {ref:ZaDomain.A_zmailAutoProvNotificationBody, type:_SUPER_TEXTAREA_, colSpan:2, label:ZaMsg.LBL_zmailAutoProvEmailBody,
                     labelLocation:_LEFT_, textAreaCssStyle:"width:300; margin-right:5",
                     onChange:ZaTaskAutoProvDialog.onFormFieldChanged,
                     resetToSuperLabel:ZaMsg.NAD_ResetToGlobal}
@@ -433,12 +433,12 @@ function() {
 ZaTaskAutoProvDialog.onFormFieldChanged =
 function (value, event, form) {
     var ref = this.getRefPath();
-    if (ref == ZaDomain.A_zimbraAutoProvNotificationSubject || ref == ZaDomain.A_zimbraAutoProvNotificationBody) {
+    if (ref == ZaDomain.A_zmailAutoProvNotificationSubject || ref == ZaDomain.A_zmailAutoProvNotificationBody) {
         this.setInstanceValue(value);
         return;
     }
     var instance = this.getInstance();
-    instance[ZaDomain.A2_zimbraAutoProvSearchActivated] = "TRUE";
+    instance[ZaDomain.A2_zmailAutoProvSearchActivated] = "TRUE";
     this.setInstanceValue(value);
     return value;
 }
@@ -453,8 +453,8 @@ function() {
     if(this._confirmPasswordSettingDialog)
         this._confirmPasswordSettingDialog.popdown();
     var obj = this.getObject();
-    if(obj[ZaDomain.A2_zimbraAutoProvAccountPasswordInDlg])
-        obj[ZaDomain.A2_zimbraAutoProvAccountPassword] = obj[ZaDomain.A2_zimbraAutoProvAccountPasswordInDlg]
+    if(obj[ZaDomain.A2_zmailAutoProvAccountPasswordInDlg])
+        obj[ZaDomain.A2_zmailAutoProvAccountPassword] = obj[ZaDomain.A2_zmailAutoProvAccountPasswordInDlg]
 }
 
 ZaTaskAutoProvDialog.getCustomWidth = function() {
@@ -494,32 +494,32 @@ ZaTaskAutoProvDialog.prototype._checkGeneralConfig =
 function() {
     var isError = false;
     var errorMsg = "";
-    if(!this._containedObject.attrs[ZaDomain.A_zimbraAutoProvLdapURL]
-            || this._containedObject.attrs[ZaDomain.A_zimbraAutoProvLdapURL] == "") {
+    if(!this._containedObject.attrs[ZaDomain.A_zmailAutoProvLdapURL]
+            || this._containedObject.attrs[ZaDomain.A_zmailAutoProvLdapURL] == "") {
         isError = true;
-        errorMsg = AjxMessageFormat.format(ZaMsg.ERROR_AUTOPROV,ZaMsg.MSG_zimbraAutoProvLdapURL);
-    } else if(!this._containedObject.attrs[ZaDomain.A_zimbraAutoProvLdapAdminBindDn]
-            || this._containedObject.attrs[ZaDomain.A_zimbraAutoProvLdapAdminBindDn] == "") {
+        errorMsg = AjxMessageFormat.format(ZaMsg.ERROR_AUTOPROV,ZaMsg.MSG_zmailAutoProvLdapURL);
+    } else if(!this._containedObject.attrs[ZaDomain.A_zmailAutoProvLdapAdminBindDn]
+            || this._containedObject.attrs[ZaDomain.A_zmailAutoProvLdapAdminBindDn] == "") {
         isError = true;
-        errorMsg = AjxMessageFormat.format(ZaMsg.ERROR_AUTOPROV,ZaMsg.MSG_zimbraAutoProvLdapAdminBindDn);
-    } else if(!this._containedObject.attrs[ZaDomain.A_zimbraAutoProvLdapAdminBindPassword]
-            || this._containedObject.attrs[ZaDomain.A_zimbraAutoProvLdapAdminBindPassword] == "") {
+        errorMsg = AjxMessageFormat.format(ZaMsg.ERROR_AUTOPROV,ZaMsg.MSG_zmailAutoProvLdapAdminBindDn);
+    } else if(!this._containedObject.attrs[ZaDomain.A_zmailAutoProvLdapAdminBindPassword]
+            || this._containedObject.attrs[ZaDomain.A_zmailAutoProvLdapAdminBindPassword] == "") {
         isError = true;
-        errorMsg = AjxMessageFormat.format(ZaMsg.ERROR_AUTOPROV,ZaMsg.MSG_zimbraAutoProvLdapAdminBindPassword);
-    } else if(!this._containedObject.attrs[ZaDomain.A_zimbraAutoProvLdapSearchBase]
-            || this._containedObject.attrs[ZaDomain.A_zimbraAutoProvLdapSearchBase] == "") {
+        errorMsg = AjxMessageFormat.format(ZaMsg.ERROR_AUTOPROV,ZaMsg.MSG_zmailAutoProvLdapAdminBindPassword);
+    } else if(!this._containedObject.attrs[ZaDomain.A_zmailAutoProvLdapSearchBase]
+            || this._containedObject.attrs[ZaDomain.A_zmailAutoProvLdapSearchBase] == "") {
         isError = true;
-        errorMsg = AjxMessageFormat.format(ZaMsg.ERROR_AUTOPROV,ZaMsg.MSG_zimbraAutoProvLdapSearchBase);
+        errorMsg = AjxMessageFormat.format(ZaMsg.ERROR_AUTOPROV,ZaMsg.MSG_zmailAutoProvLdapSearchBase);
     }
-    if(!isError && this._containedObject[ZaDomain.A2_zimbraAutoProvModeEAGEREnabled] == "TRUE") {
-        if(!this._containedObject.attrs[ZaDomain.A_zimbraAutoProvLdapSearchFilter]
-                || this._containedObject.attrs[ZaDomain.A_zimbraAutoProvLdapSearchFilter] == "") {
+    if(!isError && this._containedObject[ZaDomain.A2_zmailAutoProvModeEAGEREnabled] == "TRUE") {
+        if(!this._containedObject.attrs[ZaDomain.A_zmailAutoProvLdapSearchFilter]
+                || this._containedObject.attrs[ZaDomain.A_zmailAutoProvLdapSearchFilter] == "") {
             isError = true;
-            errorMsg = AjxMessageFormat.format(ZaMsg.ERROR_AUTOPROV,ZaMsg.MSG_zimbraAutoProvLdapSearchFilter);
-        } else if(!this._containedObject.attrs[ZaDomain.A_zimbraAutoProvLdapBindDn]
-                || this._containedObject.attrs[ZaDomain.A_zimbraAutoProvLdapBindDn] == "") {
+            errorMsg = AjxMessageFormat.format(ZaMsg.ERROR_AUTOPROV,ZaMsg.MSG_zmailAutoProvLdapSearchFilter);
+        } else if(!this._containedObject.attrs[ZaDomain.A_zmailAutoProvLdapBindDn]
+                || this._containedObject.attrs[ZaDomain.A_zmailAutoProvLdapBindDn] == "") {
             isError = true;
-            errorMsg = AjxMessageFormat.format(ZaMsg.ERROR_AUTOPROV,ZaMsg.MSG_zimbraAutoProvLdapBindDn);
+            errorMsg = AjxMessageFormat.format(ZaMsg.ERROR_AUTOPROV,ZaMsg.MSG_zmailAutoProvLdapBindDn);
         }
     }
     if(isError) {
@@ -532,11 +532,11 @@ ZaTaskAutoProvDialog.prototype._checkEagerConfig =
 function() {
     var isError = false;
     var errorMsg = "";
-    if(!isError && this._containedObject[ZaDomain.A2_zimbraAutoProvModeEAGEREnabled] == "TRUE") {
-        if(!this._containedObject.attrs[ZaDomain.A_zimbraAutoProvBatchSize]
-                || this._containedObject.attrs[ZaDomain.A_zimbraAutoProvBatchSize] == "") {
+    if(!isError && this._containedObject[ZaDomain.A2_zmailAutoProvModeEAGEREnabled] == "TRUE") {
+        if(!this._containedObject.attrs[ZaDomain.A_zmailAutoProvBatchSize]
+                || this._containedObject.attrs[ZaDomain.A_zmailAutoProvBatchSize] == "") {
             isError = true;
-            errorMsg = AjxMessageFormat.format(ZaMsg.ERROR_AUTOPROV,ZaMsg.MSG_zimbraAutoProvBatchSize);
+            errorMsg = AjxMessageFormat.format(ZaMsg.ERROR_AUTOPROV,ZaMsg.MSG_zmailAutoProvBatchSize);
         }
     }
     if(isError) {
@@ -547,15 +547,15 @@ function() {
 
 ZaTaskAutoProvDialog.prototype._checkLazyConfig =
 function() {
-        if(this._containedObject[ZaDomain.A2_zimbraAutoProvModeLAZYEnabled] == "TRUE"
-                && (!this._containedObject[ZaDomain.A2_zimbraAutoProvAuthMechLDAPEnabled]
-                    || this._containedObject[ZaDomain.A2_zimbraAutoProvAuthMechLDAPEnabled] == "FALSE")
-                && (!this._containedObject[ZaDomain.A2_zimbraAutoProvAuthMechPREAUTHEnabled]
-                    || this._containedObject[ZaDomain.A2_zimbraAutoProvAuthMechPREAUTHEnabled] == "FALSE")
-                && (!this._containedObject[ZaDomain.A2_zimbraAutoProvAuthMechKRB5Enabled]
-                    || this._containedObject[ZaDomain.A2_zimbraAutoProvAuthMechKRB5Enabled] == "FALSE")
-                && (!this._containedObject[ZaDomain.A2_zimbraAutoProvAuthMechSPNEGOEnabled]
-                    || this._containedObject[ZaDomain.A2_zimbraAutoProvAuthMechSPNEGOEnabled] == "FALSE")) {
+        if(this._containedObject[ZaDomain.A2_zmailAutoProvModeLAZYEnabled] == "TRUE"
+                && (!this._containedObject[ZaDomain.A2_zmailAutoProvAuthMechLDAPEnabled]
+                    || this._containedObject[ZaDomain.A2_zmailAutoProvAuthMechLDAPEnabled] == "FALSE")
+                && (!this._containedObject[ZaDomain.A2_zmailAutoProvAuthMechPREAUTHEnabled]
+                    || this._containedObject[ZaDomain.A2_zmailAutoProvAuthMechPREAUTHEnabled] == "FALSE")
+                && (!this._containedObject[ZaDomain.A2_zmailAutoProvAuthMechKRB5Enabled]
+                    || this._containedObject[ZaDomain.A2_zmailAutoProvAuthMechKRB5Enabled] == "FALSE")
+                && (!this._containedObject[ZaDomain.A2_zmailAutoProvAuthMechSPNEGOEnabled]
+                    || this._containedObject[ZaDomain.A2_zmailAutoProvAuthMechSPNEGOEnabled] == "FALSE")) {
             ZaApp.getInstance().getCurrentController().popupErrorDialog(ZaMsg.ERROR_AUTOPROV_LAZYAUTH);
             return false;
         } else return true;
@@ -563,7 +563,7 @@ function() {
 
 ZaTaskAutoProvDialog.prototype._checkManualConfig =
 function() {
-    var attrMaps =  this._containedObject.attrs[ZaDomain.A_zimbraAutoProvAttrMap];
+    var attrMaps =  this._containedObject.attrs[ZaDomain.A_zmailAutoProvAttrMap];
     var obj = this.getObject();
     var isGiven = false;
     if(attrMaps) {
@@ -575,7 +575,7 @@ function() {
                 isGiven = true;
         }
     }
-    if(obj[ZaDomain.A2_zimbraAutoProvAccountPassword])
+    if(obj[ZaDomain.A2_zmailAutoProvAccountPassword])
         return true;
     else if(!isGiven) {
         if(!this._confirmPasswordSettingDialog) {
@@ -594,61 +594,61 @@ function() {
 
 ZaTaskAutoProvDialog.prototype._separateConfigureValues =
 function(entry) {
-    if(entry.attrs[ZaDomain.A_zimbraAutoProvMode]) {
-        if(entry.attrs[ZaDomain.A_zimbraAutoProvMode] instanceof Array) {
-            for(var mode = 0; mode < entry.attrs[ZaDomain.A_zimbraAutoProvMode].length; mode ++){
-                if(entry.attrs[ZaDomain.A_zimbraAutoProvMode][mode] == "EAGER")
-                   entry[ZaDomain.A2_zimbraAutoProvModeEAGEREnabled] = "TRUE";
-                else if(entry.attrs[ZaDomain.A_zimbraAutoProvMode][mode] == "LAZY")
-                   entry[ZaDomain.A2_zimbraAutoProvModeLAZYEnabled] = "TRUE";
-                else if(entry.attrs[ZaDomain.A_zimbraAutoProvMode][mode] == "MANUAL")
-                   entry[ZaDomain.A2_zimbraAutoProvModeMANUALEnabled] = "TRUE";
+    if(entry.attrs[ZaDomain.A_zmailAutoProvMode]) {
+        if(entry.attrs[ZaDomain.A_zmailAutoProvMode] instanceof Array) {
+            for(var mode = 0; mode < entry.attrs[ZaDomain.A_zmailAutoProvMode].length; mode ++){
+                if(entry.attrs[ZaDomain.A_zmailAutoProvMode][mode] == "EAGER")
+                   entry[ZaDomain.A2_zmailAutoProvModeEAGEREnabled] = "TRUE";
+                else if(entry.attrs[ZaDomain.A_zmailAutoProvMode][mode] == "LAZY")
+                   entry[ZaDomain.A2_zmailAutoProvModeLAZYEnabled] = "TRUE";
+                else if(entry.attrs[ZaDomain.A_zmailAutoProvMode][mode] == "MANUAL")
+                   entry[ZaDomain.A2_zmailAutoProvModeMANUALEnabled] = "TRUE";
             }
         } else {
-            if(entry.attrs[ZaDomain.A_zimbraAutoProvMode] == "EAGER")
-               entry[ZaDomain.A2_zimbraAutoProvModeEAGEREnabled] = "TRUE";
-            else if(entry.attrs[ZaDomain.A_zimbraAutoProvMode] == "LAZY")
-               entry[ZaDomain.A2_zimbraAutoProvModeLAZYEnabled] = "TRUE";
-            else if(entry.attrs[ZaDomain.A_zimbraAutoProvMode] == "MANUAL")
-               entry[ZaDomain.A2_zimbraAutoProvModeMANUALEnabled] = "TRUE";
+            if(entry.attrs[ZaDomain.A_zmailAutoProvMode] == "EAGER")
+               entry[ZaDomain.A2_zmailAutoProvModeEAGEREnabled] = "TRUE";
+            else if(entry.attrs[ZaDomain.A_zmailAutoProvMode] == "LAZY")
+               entry[ZaDomain.A2_zmailAutoProvModeLAZYEnabled] = "TRUE";
+            else if(entry.attrs[ZaDomain.A_zmailAutoProvMode] == "MANUAL")
+               entry[ZaDomain.A2_zmailAutoProvModeMANUALEnabled] = "TRUE";
         }
     }
 
-    if(entry.attrs[ZaDomain.A_zimbraAutoProvAuthMech]) {
-        if(entry.attrs[ZaDomain.A_zimbraAutoProvAuthMech] instanceof Array) {
-            for(var mode = 0; mode < entry.attrs[ZaDomain.A_zimbraAutoProvAuthMech].length; mode ++){
-                if(entry.attrs[ZaDomain.A_zimbraAutoProvAuthMech][mode] == "LDAP")
-                   entry[ZaDomain.A2_zimbraAutoProvAuthMechLDAPEnabled] = "TRUE";
-                else if(entry.attrs[ZaDomain.A_zimbraAutoProvAuthMech][mode] == "PREAUTH")
-                   entry[ZaDomain.A2_zimbraAutoProvAuthMechPREAUTHEnabled] = "TRUE";
-                else if(entry.attrs[ZaDomain.A_zimbraAutoProvAuthMech][mode] == "KRB5")
-                   entry[ZaDomain.A2_zimbraAutoProvAuthMechKRB5Enabled] = "TRUE";
-                else if(entry.attrs[ZaDomain.A_zimbraAutoProvAuthMech][mode] == "SPNEGO")
-                   entry[ZaDomain.A2_zimbraAutoProvAuthMechSPNEGOEnabled] = "TRUE";
+    if(entry.attrs[ZaDomain.A_zmailAutoProvAuthMech]) {
+        if(entry.attrs[ZaDomain.A_zmailAutoProvAuthMech] instanceof Array) {
+            for(var mode = 0; mode < entry.attrs[ZaDomain.A_zmailAutoProvAuthMech].length; mode ++){
+                if(entry.attrs[ZaDomain.A_zmailAutoProvAuthMech][mode] == "LDAP")
+                   entry[ZaDomain.A2_zmailAutoProvAuthMechLDAPEnabled] = "TRUE";
+                else if(entry.attrs[ZaDomain.A_zmailAutoProvAuthMech][mode] == "PREAUTH")
+                   entry[ZaDomain.A2_zmailAutoProvAuthMechPREAUTHEnabled] = "TRUE";
+                else if(entry.attrs[ZaDomain.A_zmailAutoProvAuthMech][mode] == "KRB5")
+                   entry[ZaDomain.A2_zmailAutoProvAuthMechKRB5Enabled] = "TRUE";
+                else if(entry.attrs[ZaDomain.A_zmailAutoProvAuthMech][mode] == "SPNEGO")
+                   entry[ZaDomain.A2_zmailAutoProvAuthMechSPNEGOEnabled] = "TRUE";
             }
         } else {
-                if(entry.attrs[ZaDomain.A_zimbraAutoProvAuthMech] == "LDAP")
-                   entry[ZaDomain.A2_zimbraAutoProvAuthMechLDAPEnabled] = "TRUE";
-                else if(entry.attrs[ZaDomain.A_zimbraAutoProvAuthMech] == "PREAUTH")
-                   entry[ZaDomain.A2_zimbraAutoProvAuthMechPREAUTHEnabled] = "TRUE";
-                else if(entry.attrs[ZaDomain.A_zimbraAutoProvAuthMech] == "KRB5")
-                   entry[ZaDomain.A2_zimbraAutoProvAuthMechKRB5Enabled] = "TRUE";
-                else if(entry.attrs[ZaDomain.A_zimbraAutoProvAuthMech] == "SPNEGO")
-                   entry[ZaDomain.A2_zimbraAutoProvAuthMechSPNEGOEnabled] = "TRUE";
+                if(entry.attrs[ZaDomain.A_zmailAutoProvAuthMech] == "LDAP")
+                   entry[ZaDomain.A2_zmailAutoProvAuthMechLDAPEnabled] = "TRUE";
+                else if(entry.attrs[ZaDomain.A_zmailAutoProvAuthMech] == "PREAUTH")
+                   entry[ZaDomain.A2_zmailAutoProvAuthMechPREAUTHEnabled] = "TRUE";
+                else if(entry.attrs[ZaDomain.A_zmailAutoProvAuthMech] == "KRB5")
+                   entry[ZaDomain.A2_zmailAutoProvAuthMechKRB5Enabled] = "TRUE";
+                else if(entry.attrs[ZaDomain.A_zmailAutoProvAuthMech] == "SPNEGO")
+                   entry[ZaDomain.A2_zmailAutoProvAuthMechSPNEGOEnabled] = "TRUE";
         }
     }
-    entry[ZaDomain.A2_zimbraAutoProvServerList] = ZaApp.getInstance().getServerList(true).getArray();
-    entry[ZaDomain.A2_zimbraAutoProvSelectedServerList] = new AjxVector ();
-    for(var i = 0; i < entry[ZaDomain.A2_zimbraAutoProvServerList].length; i++) {
-        var server = entry[ZaDomain.A2_zimbraAutoProvServerList][i];
-        var scheduledDomains = server.attrs[ZaServer.A_zimbraAutoProvScheduledDomains];
+    entry[ZaDomain.A2_zmailAutoProvServerList] = ZaApp.getInstance().getServerList(true).getArray();
+    entry[ZaDomain.A2_zmailAutoProvSelectedServerList] = new AjxVector ();
+    for(var i = 0; i < entry[ZaDomain.A2_zmailAutoProvServerList].length; i++) {
+        var server = entry[ZaDomain.A2_zmailAutoProvServerList][i];
+        var scheduledDomains = server.attrs[ZaServer.A_zmailAutoProvScheduledDomains];
         for(var j = 0; scheduledDomains && j < scheduledDomains.length; j++) {
             if(scheduledDomains[j] == entry.name) {
-               entry[ZaDomain.A2_zimbraAutoProvSelectedServerList].add(server.name);
+               entry[ZaDomain.A2_zmailAutoProvSelectedServerList].add(server.name);
                 server["checked"] = true;
 
-                if(server.attrs[ZaServer.A_zimbraAutoProvPollingInterval])
-                    entry[ZaDomain.A2_zimbraAutoProvPollingInterval] = server.attrs[ZaServer.A_zimbraAutoProvPollingInterval];
+                if(server.attrs[ZaServer.A_zmailAutoProvPollingInterval])
+                    entry[ZaDomain.A2_zmailAutoProvPollingInterval] = server.attrs[ZaServer.A_zmailAutoProvPollingInterval];
             }
         }
     }
@@ -657,80 +657,80 @@ function(entry) {
 
 ZaTaskAutoProvDialog.prototype._combineConfigureValues =
 function(entry) {
-    entry.attrs[ZaDomain.A_zimbraAutoProvMode] = [];
-    if(entry[ZaDomain.A2_zimbraAutoProvModeEAGEREnabled] == "TRUE")
-        entry.attrs[ZaDomain.A_zimbraAutoProvMode].push("EAGER");
-    if(entry[ZaDomain.A2_zimbraAutoProvModeLAZYEnabled] == "TRUE")
-        entry.attrs[ZaDomain.A_zimbraAutoProvMode].push("LAZY");
-    if(entry[ZaDomain.A2_zimbraAutoProvModeMANUALEnabled] == "TRUE")
-        entry.attrs[ZaDomain.A_zimbraAutoProvMode].push("MANUAL");
+    entry.attrs[ZaDomain.A_zmailAutoProvMode] = [];
+    if(entry[ZaDomain.A2_zmailAutoProvModeEAGEREnabled] == "TRUE")
+        entry.attrs[ZaDomain.A_zmailAutoProvMode].push("EAGER");
+    if(entry[ZaDomain.A2_zmailAutoProvModeLAZYEnabled] == "TRUE")
+        entry.attrs[ZaDomain.A_zmailAutoProvMode].push("LAZY");
+    if(entry[ZaDomain.A2_zmailAutoProvModeMANUALEnabled] == "TRUE")
+        entry.attrs[ZaDomain.A_zmailAutoProvMode].push("MANUAL");
 
-    entry.attrs[ZaDomain.A_zimbraAutoProvAuthMech] = [];
-    if(entry[ZaDomain.A2_zimbraAutoProvAuthMechLDAPEnabled] == "TRUE")
-        entry.attrs[ZaDomain.A_zimbraAutoProvAuthMech].push("LDAP");
-    if(entry[ZaDomain.A2_zimbraAutoProvAuthMechPREAUTHEnabled] == "TRUE")
-        entry.attrs[ZaDomain.A_zimbraAutoProvAuthMech].push("PREAUTH");
-    if(entry[ZaDomain.A2_zimbraAutoProvAuthMechKRB5Enabled] == "TRUE")
-        entry.attrs[ZaDomain.A_zimbraAutoProvAuthMech].push("KRB5");
-    if(entry[ZaDomain.A2_zimbraAutoProvAuthMechSPNEGOEnabled] == "TRUE")
-        entry.attrs[ZaDomain.A_zimbraAutoProvAuthMech].push("SPNEGO");
+    entry.attrs[ZaDomain.A_zmailAutoProvAuthMech] = [];
+    if(entry[ZaDomain.A2_zmailAutoProvAuthMechLDAPEnabled] == "TRUE")
+        entry.attrs[ZaDomain.A_zmailAutoProvAuthMech].push("LDAP");
+    if(entry[ZaDomain.A2_zmailAutoProvAuthMechPREAUTHEnabled] == "TRUE")
+        entry.attrs[ZaDomain.A_zmailAutoProvAuthMech].push("PREAUTH");
+    if(entry[ZaDomain.A2_zmailAutoProvAuthMechKRB5Enabled] == "TRUE")
+        entry.attrs[ZaDomain.A_zmailAutoProvAuthMech].push("KRB5");
+    if(entry[ZaDomain.A2_zmailAutoProvAuthMechSPNEGOEnabled] == "TRUE")
+        entry.attrs[ZaDomain.A_zmailAutoProvAuthMech].push("SPNEGO");
 }
 
 ZaTaskAutoProvDialog.prototype._backupLdapObj = function(entry) {
     if(!this._autoprovLdapObject)
         this._autoprovLdapObject = {};
     if(!entry || !entry.attrs) return;
-    if(entry.attrs[ZaDomain.A_zimbraAutoProvLdapURL])
-        this._autoprovLdapObject[ZaDomain.A_zimbraAutoProvLdapURL] = entry.attrs[ZaDomain.A_zimbraAutoProvLdapURL];
-    else this._autoprovLdapObject[ZaDomain.A_zimbraAutoProvLdapURL] = null;
-    if(entry.attrs[ZaDomain.A_zimbraAutoProvLdapStartTlsEnabled])
-        this._autoprovLdapObject[ZaDomain.A_zimbraAutoProvLdapStartTlsEnabled] = entry.attrs[ZaDomain.A_zimbraAutoProvLdapStartTlsEnabled];
-    else this._autoprovLdapObject[ZaDomain.A_zimbraAutoProvLdapStartTlsEnabled] = null;
-    if(entry.attrs[ZaDomain.A_zimbraAutoProvLdapAdminBindDn])
-        this._autoprovLdapObject[ZaDomain.A_zimbraAutoProvLdapAdminBindDn] = entry.attrs[ZaDomain.A_zimbraAutoProvLdapAdminBindDn];
-    else  this._autoprovLdapObject[ZaDomain.A_zimbraAutoProvLdapAdminBindDn] = null;
-    if(entry.attrs[ZaDomain.A_zimbraAutoProvLdapAdminBindPassword])
-        this._autoprovLdapObject[ZaDomain.A_zimbraAutoProvLdapAdminBindPassword] = entry.attrs[ZaDomain.A_zimbraAutoProvLdapAdminBindPassword];
-    else this._autoprovLdapObject[ZaDomain.A_zimbraAutoProvLdapAdminBindPassword] = null;
-    if(entry.attrs[ZaDomain.A_zimbraAutoProvLdapSearchBase])
-        this._autoprovLdapObject[ZaDomain.A_zimbraAutoProvLdapSearchBase] = entry.attrs[ZaDomain.A_zimbraAutoProvLdapSearchBase];
-    else this._autoprovLdapObject[ZaDomain.A_zimbraAutoProvLdapSearchBase] = null;
-    if(entry.attrs[ZaDomain.A_zimbraAutoProvLdapSearchFilter])
-        this._autoprovLdapObject[ZaDomain.A_zimbraAutoProvLdapSearchFilter] = entry.attrs[ZaDomain.A_zimbraAutoProvLdapSearchFilter];
-    else this._autoprovLdapObject[ZaDomain.A_zimbraAutoProvLdapSearchFilter] = null;
-    if(entry.attrs[ZaDomain.A_zimbraAutoProvLdapBindDn])
-        this._autoprovLdapObject[ZaDomain.A_zimbraAutoProvLdapBindDn] = entry.attrs[ZaDomain.A_zimbraAutoProvLdapBindDn];
-    else this._autoprovLdapObject[ZaDomain.A_zimbraAutoProvLdapBindDn] = null;
-    if(entry.attrs[ZaDomain.A_zimbraAutoProvNotificationSubject])
-        this._autoprovLdapObject[ZaDomain.A_zimbraAutoProvNotificationSubject] = entry.attrs[ZaDomain.A_zimbraAutoProvNotificationSubject];
-    else this._autoprovLdapObject[ZaDomain.A_zimbraAutoProvNotificationSubject] = null;
-    if(entry.attrs[ZaDomain.A_zimbraAutoProvNotificationBody])
-        this._autoprovLdapObject[ZaDomain.A_zimbraAutoProvNotificationBody] = entry.attrs[ZaDomain.A_zimbraAutoProvNotificationBody];
-    else this._autoprovLdapObject[ZaDomain.A_zimbraAutoProvNotificationBody] = null;
+    if(entry.attrs[ZaDomain.A_zmailAutoProvLdapURL])
+        this._autoprovLdapObject[ZaDomain.A_zmailAutoProvLdapURL] = entry.attrs[ZaDomain.A_zmailAutoProvLdapURL];
+    else this._autoprovLdapObject[ZaDomain.A_zmailAutoProvLdapURL] = null;
+    if(entry.attrs[ZaDomain.A_zmailAutoProvLdapStartTlsEnabled])
+        this._autoprovLdapObject[ZaDomain.A_zmailAutoProvLdapStartTlsEnabled] = entry.attrs[ZaDomain.A_zmailAutoProvLdapStartTlsEnabled];
+    else this._autoprovLdapObject[ZaDomain.A_zmailAutoProvLdapStartTlsEnabled] = null;
+    if(entry.attrs[ZaDomain.A_zmailAutoProvLdapAdminBindDn])
+        this._autoprovLdapObject[ZaDomain.A_zmailAutoProvLdapAdminBindDn] = entry.attrs[ZaDomain.A_zmailAutoProvLdapAdminBindDn];
+    else  this._autoprovLdapObject[ZaDomain.A_zmailAutoProvLdapAdminBindDn] = null;
+    if(entry.attrs[ZaDomain.A_zmailAutoProvLdapAdminBindPassword])
+        this._autoprovLdapObject[ZaDomain.A_zmailAutoProvLdapAdminBindPassword] = entry.attrs[ZaDomain.A_zmailAutoProvLdapAdminBindPassword];
+    else this._autoprovLdapObject[ZaDomain.A_zmailAutoProvLdapAdminBindPassword] = null;
+    if(entry.attrs[ZaDomain.A_zmailAutoProvLdapSearchBase])
+        this._autoprovLdapObject[ZaDomain.A_zmailAutoProvLdapSearchBase] = entry.attrs[ZaDomain.A_zmailAutoProvLdapSearchBase];
+    else this._autoprovLdapObject[ZaDomain.A_zmailAutoProvLdapSearchBase] = null;
+    if(entry.attrs[ZaDomain.A_zmailAutoProvLdapSearchFilter])
+        this._autoprovLdapObject[ZaDomain.A_zmailAutoProvLdapSearchFilter] = entry.attrs[ZaDomain.A_zmailAutoProvLdapSearchFilter];
+    else this._autoprovLdapObject[ZaDomain.A_zmailAutoProvLdapSearchFilter] = null;
+    if(entry.attrs[ZaDomain.A_zmailAutoProvLdapBindDn])
+        this._autoprovLdapObject[ZaDomain.A_zmailAutoProvLdapBindDn] = entry.attrs[ZaDomain.A_zmailAutoProvLdapBindDn];
+    else this._autoprovLdapObject[ZaDomain.A_zmailAutoProvLdapBindDn] = null;
+    if(entry.attrs[ZaDomain.A_zmailAutoProvNotificationSubject])
+        this._autoprovLdapObject[ZaDomain.A_zmailAutoProvNotificationSubject] = entry.attrs[ZaDomain.A_zmailAutoProvNotificationSubject];
+    else this._autoprovLdapObject[ZaDomain.A_zmailAutoProvNotificationSubject] = null;
+    if(entry.attrs[ZaDomain.A_zmailAutoProvNotificationBody])
+        this._autoprovLdapObject[ZaDomain.A_zmailAutoProvNotificationBody] = entry.attrs[ZaDomain.A_zmailAutoProvNotificationBody];
+    else this._autoprovLdapObject[ZaDomain.A_zmailAutoProvNotificationBody] = null;
 }
 
 ZaTaskAutoProvDialog.prototype._checkModified = function() {
     var newObj = this.getObject();
     var oldObj = this._autoprovLdapObject;
 
-    if((oldObj[ZaDomain.A_zimbraAutoProvLdapURL] == newObj.attrs[ZaDomain.A_zimbraAutoProvLdapURL]
-            || !oldObj[ZaDomain.A_zimbraAutoProvLdapURL] && !newObj.attrs[ZaDomain.A_zimbraAutoProvLdapURL])
-    && (oldObj[ZaDomain.A_zimbraAutoProvLdapStartTlsEnabled] == newObj.attrs[ZaDomain.A_zimbraAutoProvLdapStartTlsEnabled]
-            || !oldObj[ZaDomain.A_zimbraAutoProvLdapStartTlsEnabled] && !newObj.attrs[ZaDomain.A_zimbraAutoProvLdapStartTlsEnabled])
-    && (oldObj[ZaDomain.A_zimbraAutoProvLdapAdminBindDn] == newObj.attrs[ZaDomain.A_zimbraAutoProvLdapAdminBindDn]
-            || !oldObj[ZaDomain.A_zimbraAutoProvLdapAdminBindDn] && !newObj.attrs[ZaDomain.A_zimbraAutoProvLdapAdminBindDn])
-    && (oldObj[ZaDomain.A_zimbraAutoProvLdapAdminBindPassword] == newObj.attrs[ZaDomain.A_zimbraAutoProvLdapAdminBindPassword]
-            || !oldObj[ZaDomain.A_zimbraAutoProvLdapAdminBindPassword] && !newObj.attrs[ZaDomain.A_zimbraAutoProvLdapAdminBindPassword])
-    && (oldObj[ZaDomain.A_zimbraAutoProvLdapSearchBase] == newObj.attrs[ZaDomain.A_zimbraAutoProvLdapSearchBase]
-            || !oldObj[ZaDomain.A_zimbraAutoProvLdapSearchBase] && !newObj.attrs[ZaDomain.A_zimbraAutoProvLdapSearchBase])
-    && (oldObj[ZaDomain.A_zimbraAutoProvLdapSearchFilter] == newObj.attrs[ZaDomain.A_zimbraAutoProvLdapSearchFilter]
-            || !oldObj[ZaDomain.A_zimbraAutoProvLdapSearchFilter] && !newObj.attrs[ZaDomain.A_zimbraAutoProvLdapSearchFilter])
-    && (oldObj[ZaDomain.A_zimbraAutoProvLdapBindDn] == newObj.attrs[ZaDomain.A_zimbraAutoProvLdapBindDn]
-            || !oldObj[ZaDomain.A_zimbraAutoProvLdapBindDn] && !newObj.attrs[ZaDomain.A_zimbraAutoProvLdapBindDn])
-    && (oldObj[ZaDomain.A_zimbraAutoProvNotificationSubject] == newObj.attrs[ZaDomain.A_zimbraAutoProvNotificationSubject]
-            || !oldObj[ZaDomain.A_zimbraAutoProvNotificationSubject] && !newObj.attrs[ZaDomain.A_zimbraAutoProvNotificationSubject])
-    && (oldObj[ZaDomain.A_zimbraAutoProvNotificationBody] == newObj.attrs[ZaDomain.A_zimbraAutoProvNotificationBody]
-            || !oldObj[ZaDomain.A_zimbraAutoProvNotificationBody] && !newObj.attrs[ZaDomain.A_zimbraAutoProvNotificationBody]))
+    if((oldObj[ZaDomain.A_zmailAutoProvLdapURL] == newObj.attrs[ZaDomain.A_zmailAutoProvLdapURL]
+            || !oldObj[ZaDomain.A_zmailAutoProvLdapURL] && !newObj.attrs[ZaDomain.A_zmailAutoProvLdapURL])
+    && (oldObj[ZaDomain.A_zmailAutoProvLdapStartTlsEnabled] == newObj.attrs[ZaDomain.A_zmailAutoProvLdapStartTlsEnabled]
+            || !oldObj[ZaDomain.A_zmailAutoProvLdapStartTlsEnabled] && !newObj.attrs[ZaDomain.A_zmailAutoProvLdapStartTlsEnabled])
+    && (oldObj[ZaDomain.A_zmailAutoProvLdapAdminBindDn] == newObj.attrs[ZaDomain.A_zmailAutoProvLdapAdminBindDn]
+            || !oldObj[ZaDomain.A_zmailAutoProvLdapAdminBindDn] && !newObj.attrs[ZaDomain.A_zmailAutoProvLdapAdminBindDn])
+    && (oldObj[ZaDomain.A_zmailAutoProvLdapAdminBindPassword] == newObj.attrs[ZaDomain.A_zmailAutoProvLdapAdminBindPassword]
+            || !oldObj[ZaDomain.A_zmailAutoProvLdapAdminBindPassword] && !newObj.attrs[ZaDomain.A_zmailAutoProvLdapAdminBindPassword])
+    && (oldObj[ZaDomain.A_zmailAutoProvLdapSearchBase] == newObj.attrs[ZaDomain.A_zmailAutoProvLdapSearchBase]
+            || !oldObj[ZaDomain.A_zmailAutoProvLdapSearchBase] && !newObj.attrs[ZaDomain.A_zmailAutoProvLdapSearchBase])
+    && (oldObj[ZaDomain.A_zmailAutoProvLdapSearchFilter] == newObj.attrs[ZaDomain.A_zmailAutoProvLdapSearchFilter]
+            || !oldObj[ZaDomain.A_zmailAutoProvLdapSearchFilter] && !newObj.attrs[ZaDomain.A_zmailAutoProvLdapSearchFilter])
+    && (oldObj[ZaDomain.A_zmailAutoProvLdapBindDn] == newObj.attrs[ZaDomain.A_zmailAutoProvLdapBindDn]
+            || !oldObj[ZaDomain.A_zmailAutoProvLdapBindDn] && !newObj.attrs[ZaDomain.A_zmailAutoProvLdapBindDn])
+    && (oldObj[ZaDomain.A_zmailAutoProvNotificationSubject] == newObj.attrs[ZaDomain.A_zmailAutoProvNotificationSubject]
+            || !oldObj[ZaDomain.A_zmailAutoProvNotificationSubject] && !newObj.attrs[ZaDomain.A_zmailAutoProvNotificationSubject])
+    && (oldObj[ZaDomain.A_zmailAutoProvNotificationBody] == newObj.attrs[ZaDomain.A_zmailAutoProvNotificationBody]
+            || !oldObj[ZaDomain.A_zmailAutoProvNotificationBody] && !newObj.attrs[ZaDomain.A_zmailAutoProvNotificationBody]))
         return false;
     else
         return true;
@@ -751,29 +751,29 @@ ZaTaskAutoProvDialog.srchButtonHndlr = function() {
 	var formParent = this.getForm().parent;
     if(!formParent._checkGeneralConfig())
         return;
-    var soapDoc = AjxSoapDoc.create("SearchAutoProvDirectoryRequest", ZaZimbraAdmin.URN, null);
+    var soapDoc = AjxSoapDoc.create("SearchAutoProvDirectoryRequest", ZaZmailAdmin.URN, null);
     soapDoc.getMethod().setAttribute("keyAttr","name");
 	var attr = soapDoc.set("domain", instance.id);
 	attr.setAttribute("by", "id");
 
-    var query = "(|(mail=*)(zimbraMailAlias=*)(uid=*))";
+    var query = "(|(mail=*)(zmailMailAlias=*)(uid=*))";
 	if(instance[ZaSearch.A_query]) {
 		query = ZaSearch.getSearchByNameQuery (instance[ZaSearch.A_query]);
 	}
     soapDoc.set("query", query);
     var limit = ZaSettings.RESULTSPERPAGE;
-	if(!instance[ZaDomain.A2_zimbraAutoProvAccountPoolPageNum]) {
-		instance[ZaDomain.A2_zimbraAutoProvAccountPoolPageNum] = 0;
+	if(!instance[ZaDomain.A2_zmailAutoProvAccountPoolPageNum]) {
+		instance[ZaDomain.A2_zmailAutoProvAccountPoolPageNum] = 0;
 	}
-	var offset = instance[ZaDomain.A2_zimbraAutoProvAccountPoolPageNum]*ZaSettings.RESULTSPERPAGE;
-	var attrs = [ZaAccount.A_name, ZaAccount.A_mail, ZaItem.A_zimbraId,ZaAccount.A_displayname].join(",");
+	var offset = instance[ZaDomain.A2_zmailAutoProvAccountPoolPageNum]*ZaSettings.RESULTSPERPAGE;
+	var attrs = [ZaAccount.A_name, ZaAccount.A_mail, ZaItem.A_zmailId,ZaAccount.A_displayname].join(",");
     soapDoc.getMethod().setAttribute("keyAttr","name");
 	soapDoc.getMethod().setAttribute("offset", offset);
 	soapDoc.getMethod().setAttribute("limit", limit);
     soapDoc.getMethod().setAttribute("attrs", attrs);
     soapDoc.getMethod().setAttribute("refresh", "1");
 
-	this.getModel().setInstanceValue(this.getInstance(),ZaDomain.A2_zimbraAutoProvSearchActivated,"FALSE");
+	this.getModel().setInstanceValue(this.getInstance(),ZaDomain.A2_zmailAutoProvSearchActivated,"FALSE");
 
     var params = {};
     params.soapDoc = soapDoc;
@@ -785,7 +785,7 @@ ZaTaskAutoProvDialog.srchButtonHndlr = function() {
 
     try {
         var resp = ZaRequestMgr.invoke(params, reqMgrParams);
-        this.getModel().setInstanceValue(this.getInstance(),ZaDomain.A2_zimbraAutoProvSearchActivated,"TRUE");
+        this.getModel().setInstanceValue(this.getInstance(),ZaDomain.A2_zmailAutoProvSearchActivated,"TRUE");
         if(!resp || resp.Body.SearchAutoProvDirectoryResponse.Fault)
             return;
         if(!resp.Body.SearchAutoProvDirectoryResponse || !resp.Body.SearchAutoProvDirectoryResponse.entry)
@@ -812,9 +812,9 @@ ZaTaskAutoProvDialog.srchButtonHndlr = function() {
             acct.name = acct.attrs[ZaAccount.A_mail];
             provAcctList.push(acct);
         }
-        this.getModel().setInstanceValue(this.getInstance(),ZaDomain.A2_zimbraAutoProvAccountPool,provAcctList);
+        this.getModel().setInstanceValue(this.getInstance(),ZaDomain.A2_zmailAutoProvAccountPool,provAcctList);
         var poolTotalPages = Math.ceil(searchTotal/ZaSettings.RESULTSPERPAGE);
-        this.getModel().setInstanceValue(this.getInstance(),ZaDomain.A2_zimbraAutoProvAccountPoolPageTotal,poolTotalPages);
+        this.getModel().setInstanceValue(this.getInstance(),ZaDomain.A2_zmailAutoProvAccountPoolPageTotal,poolTotalPages);
     } catch(ex) {
         ZaApp.getInstance().getCurrentController()._handleException(ex, "ZaTaskAutoProvDialog.srchButtonHndlr", null, false);
     }
@@ -824,19 +824,19 @@ ZaTaskAutoProvDialog.accPoolSelectionListener = function() {
 	var arr = this.widget.getSelection();
 	if(arr && arr.length) {
 		arr.sort();
-		this.getModel().setInstanceValue(this.getInstance(), ZaDomain.A2_zimbraAutoProvAccountSrcSelectedPool, arr);
+		this.getModel().setInstanceValue(this.getInstance(), ZaDomain.A2_zmailAutoProvAccountSrcSelectedPool, arr);
 	} else {
-		this.getModel().setInstanceValue(this.getInstance(), ZaDomain.A2_zimbraAutoProvAccountSrcSelectedPool, null);
+		this.getModel().setInstanceValue(this.getInstance(), ZaDomain.A2_zmailAutoProvAccountSrcSelectedPool, null);
 	}
 }
 
 ZaTaskAutoProvDialog.addButtonHndlr = function (ev) {
 	var form = this.getForm();
 	var instance = form.getInstance();
-	var sourceListItems = form.getItemsById(ZaDomain.A2_zimbraAutoProvAccountPool);
+	var sourceListItems = form.getItemsById(ZaDomain.A2_zmailAutoProvAccountPool);
 	if(sourceListItems && (sourceListItems instanceof Array) && sourceListItems[0] && sourceListItems[0].widget) {
 		var selection = sourceListItems[0].widget.getSelection();
-		var currentTargetList = instance[ZaDomain.A2_zimbraAutoProvAccountTargetPool] ? instance[ZaDomain.A2_zimbraAutoProvAccountTargetPool] : [];
+		var currentTargetList = instance[ZaDomain.A2_zmailAutoProvAccountTargetPool] ? instance[ZaDomain.A2_zmailAutoProvAccountTargetPool] : [];
 		var list = (selection instanceof AjxVector) ? selection.getArray() : (selection instanceof Array) ? selection : [selection];
 		if(list) {
 			list.sort(ZaItem.compareNamesDesc);
@@ -863,7 +863,7 @@ ZaTaskAutoProvDialog.addButtonHndlr = function (ev) {
 					currentTargetList.push(list[i])
 				}
 			}
-			this.getModel().setInstanceValue(this.getInstance(), ZaDomain.A2_zimbraAutoProvAccountTargetPool, currentTargetList);
+			this.getModel().setInstanceValue(this.getInstance(), ZaDomain.A2_zmailAutoProvAccountTargetPool, currentTargetList);
 		}
 	}
 	if(currentTargetList.length > 0) {
@@ -877,17 +877,17 @@ ZaTaskAutoProvDialog.accTargetSelectionListener = function() {
 	var arr = this.widget.getSelection();
 	if(arr && arr.length) {
 		arr.sort();
-		this.getModel().setInstanceValue(this.getInstance(), ZaDomain.A2_zimbraAutoProvAccountTgtSelectedPool, arr);
+		this.getModel().setInstanceValue(this.getInstance(), ZaDomain.A2_zmailAutoProvAccountTgtSelectedPool, arr);
 	} else {
-		this.getModel().setInstanceValue(this.getInstance(), ZaDomain.A2_zimbraAutoProvAccountTgtSelectedPool, null);
+		this.getModel().setInstanceValue(this.getInstance(), ZaDomain.A2_zmailAutoProvAccountTgtSelectedPool, null);
 	}
 }
 
 ZaTaskAutoProvDialog.addAllButtonHndlr = function (ev) {
 	var form = this.getForm();
 	var instance = form.getInstance();
-	var oldArr = instance[ZaDomain.A2_zimbraAutoProvAccountTargetPool] ? instance[ZaDomain.A2_zimbraAutoProvAccountTargetPool]  : [];
-	var arr = instance[ZaDomain.A2_zimbraAutoProvAccountPool];
+	var oldArr = instance[ZaDomain.A2_zmailAutoProvAccountTargetPool] ? instance[ZaDomain.A2_zmailAutoProvAccountTargetPool]  : [];
+	var arr = instance[ZaDomain.A2_zmailAutoProvAccountPool];
 	var arr2 = new Array();
 	if(arr) {
 		var cnt = arr.length;
@@ -905,10 +905,10 @@ ZaTaskAutoProvDialog.addAllButtonHndlr = function (ev) {
 		}
 	}
 	arr2 = arr2.concat(oldArr);
-	this.getModel().setInstanceValue(this.getInstance(), ZaDomain.A2_zimbraAutoProvAccountTargetPool, arr2);
-	//this.getModel().setInstanceValue(this.getInstance(), ZaDomain.A2_zimbraAutoProvAccountPool, new Array());
+	this.getModel().setInstanceValue(this.getInstance(), ZaDomain.A2_zmailAutoProvAccountTargetPool, arr2);
+	//this.getModel().setInstanceValue(this.getInstance(), ZaDomain.A2_zmailAutoProvAccountPool, new Array());
 	var instance = form.getInstance();
-	var currentTargetList = instance[ZaDomain.A2_zimbraAutoProvAccountTargetPool] ? instance[ZaDomain.A2_zimbraAutoProvAccountTargetPool] : [];
+	var currentTargetList = instance[ZaDomain.A2_zmailAutoProvAccountTargetPool] ? instance[ZaDomain.A2_zmailAutoProvAccountTargetPool] : [];
 	if(currentTargetList.length > 0) {
 		form.parent._button[DwtDialog.OK_BUTTON].setEnabled(true);
 	} else {
@@ -919,11 +919,11 @@ ZaTaskAutoProvDialog.addAllButtonHndlr = function (ev) {
 ZaTaskAutoProvDialog.removeButtonHndlr = function (ev) {
 	var form = this.getForm();
 	var instance = form.getInstance();
-	var targetListItems = form.getItemsById(ZaDomain.A2_zimbraAutoProvAccountTargetPool);
+	var targetListItems = form.getItemsById(ZaDomain.A2_zmailAutoProvAccountTargetPool);
 	if(targetListItems && (targetListItems instanceof Array) && targetListItems[0] && targetListItems[0].widget) {
 		var selection = targetListItems[0].widget.getSelection();
 
-		var currentTargetList = instance[ZaDomain.A2_zimbraAutoProvAccountTargetPool] ? instance[ZaDomain.A2_zimbraAutoProvAccountTargetPool] : [];
+		var currentTargetList = instance[ZaDomain.A2_zmailAutoProvAccountTargetPool] ? instance[ZaDomain.A2_zmailAutoProvAccountTargetPool] : [];
 		currentTargetList.sort(ZaItem.compareNamesDesc);
 		var tmpTargetList = [];
 		var list = (selection instanceof AjxVector) ? selection.getArray() : (selection instanceof Array) ? selection : [selection];
@@ -943,7 +943,7 @@ ZaTaskAutoProvDialog.removeButtonHndlr = function (ev) {
 					}
 				}
 			}
-			this.getModel().setInstanceValue(this.getInstance(), ZaDomain.A2_zimbraAutoProvAccountTargetPool, currentTargetList);
+			this.getModel().setInstanceValue(this.getInstance(), ZaDomain.A2_zmailAutoProvAccountTargetPool, currentTargetList);
 		}
 	}
 	if(currentTargetList.length > 0) {
@@ -957,8 +957,8 @@ ZaTaskAutoProvDialog.removeAllButtonHndlr = function (ev) {
 	var form = this.getForm();
 	var instance = form.getInstance();
 
-	instance[ZaDomain.A2_zimbraAutoProvAccountTargetPool] = new Array();
-	var currentTargetList = instance[ZaDomain.A2_zimbraAutoProvAccountTargetPool] ? instance[ZaDomain.A2_zimbraAutoProvAccountTargetPool] : [];
+	instance[ZaDomain.A2_zmailAutoProvAccountTargetPool] = new Array();
+	var currentTargetList = instance[ZaDomain.A2_zmailAutoProvAccountTargetPool] ? instance[ZaDomain.A2_zmailAutoProvAccountTargetPool] : [];
 	if(currentTargetList.length > 0) {
 		form.parent._button[DwtDialog.OK_BUTTON].setEnabled(true);
 	} else {
@@ -982,25 +982,25 @@ function(evt) {
 }
 
 ZaTaskAutoProvDialog.forwardBtnEnabled = function () {
-	return (parseInt(this.getInstanceValue(ZaDomain.A2_zimbraAutoProvAccountPoolPageNum)) < (parseInt(this.getInstanceValue(ZaDomain.A2_zimbraAutoProvAccountPoolPageTotal))-1)
-            && this.getInstanceValue(ZaDomain.A2_zimbraAutoProvSearchActivated)=="TRUE");
+	return (parseInt(this.getInstanceValue(ZaDomain.A2_zmailAutoProvAccountPoolPageNum)) < (parseInt(this.getInstanceValue(ZaDomain.A2_zmailAutoProvAccountPoolPageTotal))-1)
+            && this.getInstanceValue(ZaDomain.A2_zmailAutoProvSearchActivated)=="TRUE");
 };
 
 ZaTaskAutoProvDialog.backBtnEnabled = function () {
-	return (parseInt(this.getInstanceValue(ZaDomain.A2_zimbraAutoProvAccountPoolPageNum)) > 0
-            && this.getInstanceValue(ZaDomain.A2_zimbraAutoProvSearchActivated)== "TRUE");
+	return (parseInt(this.getInstanceValue(ZaDomain.A2_zmailAutoProvAccountPoolPageNum)) > 0
+            && this.getInstanceValue(ZaDomain.A2_zmailAutoProvSearchActivated)== "TRUE");
 };
 
 ZaTaskAutoProvDialog.prototype.finishConfig = function () {
     var instance = this.getObject();
 
-    var acctlist = instance[ZaDomain.A2_zimbraAutoProvAccountTargetPool];//this.getModel().getInstanceValue(instance,ZaDomain.A2_zimbraAutoProvAccountTargetPool);
+    var acctlist = instance[ZaDomain.A2_zmailAutoProvAccountTargetPool];//this.getModel().getInstanceValue(instance,ZaDomain.A2_zmailAutoProvAccountTargetPool);
     if(!acctlist || acctlist.length < 1) return;
-    var soapDoc = AjxSoapDoc.create("BatchRequest", "urn:zimbra");
+    var soapDoc = AjxSoapDoc.create("BatchRequest", "urn:zmail");
     soapDoc.setMethodAttribute("onerror", "continue");
 
     for(var i = 0; i < acctlist.length; i++) {
-		var autoProvDoc = soapDoc.set("AutoProvAccountRequest", null, null, ZaZimbraAdmin.URN);
+		var autoProvDoc = soapDoc.set("AutoProvAccountRequest", null, null, ZaZmailAdmin.URN);
 
         var attr = soapDoc.set("domain", instance.id, autoProvDoc);
         attr.setAttribute("by", "id");
@@ -1008,8 +1008,8 @@ ZaTaskAutoProvDialog.prototype.finishConfig = function () {
         attr = soapDoc.set("principal", acctlist[i].dn, autoProvDoc);
         attr.setAttribute("by", "dn");
 
-        if(instance[ZaDomain.A2_zimbraAutoProvAccountPassword]) {
-            attr = soapDoc.set("password", instance[ZaDomain.A2_zimbraAutoProvAccountPassword], autoProvDoc);
+        if(instance[ZaDomain.A2_zmailAutoProvAccountPassword]) {
+            attr = soapDoc.set("password", instance[ZaDomain.A2_zmailAutoProvAccountPassword], autoProvDoc);
         }
     }
 
@@ -1034,7 +1034,7 @@ function (value) {
 
 		var checkedFiltersVector = null ;
 
-        checkedFiltersVector = instance[ZaDomain.A2_zimbraAutoProvSelectedServerList];
+        checkedFiltersVector = instance[ZaDomain.A2_zmailAutoProvSelectedServerList];
 
 		if (targetEl.checked) {
 			checkedFiltersVector.remove(item);
@@ -1106,7 +1106,7 @@ ZaConfirmPasswordDialog.prototype.popup = function(loc){
     ZaXDialog.prototype.popup.call(this, loc);
     //this._button[DwtDialog.OK_BUTTON].setEnabled(false); //if we don't allow empty password, should switch to this
     this._button[DwtDialog.OK_BUTTON].setEnabled(true);
-    this._localXForm.setInstanceValue(false, ZaDomain.A2_zimbraAutoProvAccountPasswordUnmatchedWarning);
+    this._localXForm.setInstanceValue(false, ZaDomain.A2_zmailAutoProvAccountPasswordUnmatchedWarning);
 }
 
 ZaConfirmPasswordDialog.prototype.handleXFormChange =
@@ -1116,16 +1116,16 @@ function ( ) {
         return;
     }
 
-    var pw = xformObj.getInstanceValue(ZaDomain.A2_zimbraAutoProvAccountPasswordInDlg);
-    var pwAgain = xformObj.getInstanceValue(ZaDomain.A2_zimbraAutoProvAccountPasswordAgainInDlg);
+    var pw = xformObj.getInstanceValue(ZaDomain.A2_zmailAutoProvAccountPasswordInDlg);
+    var pwAgain = xformObj.getInstanceValue(ZaDomain.A2_zmailAutoProvAccountPasswordAgainInDlg);
 
     if (pw == pwAgain){
-        xformObj.setInstanceValue(false, ZaDomain.A2_zimbraAutoProvAccountPasswordUnmatchedWarning);
+        xformObj.setInstanceValue(false, ZaDomain.A2_zmailAutoProvAccountPasswordUnmatchedWarning);
         this._button[DwtDialog.OK_BUTTON].setEnabled(true);
     } else {
         var is1stTime = AjxUtil.isEmpty(pwAgain);
         //we show the warning msg until user start to input pwAgain
-        xformObj.setInstanceValue(!is1stTime, ZaDomain.A2_zimbraAutoProvAccountPasswordUnmatchedWarning);
+        xformObj.setInstanceValue(!is1stTime, ZaDomain.A2_zmailAutoProvAccountPasswordUnmatchedWarning);
 
         this._button[DwtDialog.OK_BUTTON].setEnabled(false);
     }
@@ -1144,7 +1144,7 @@ function() {
                     },
                     {type:_SPACER_, height:10, colSpan:"*"},
                     {
-                        ref:ZaDomain.A2_zimbraAutoProvAccountPasswordInDlg,
+                        ref:ZaDomain.A2_zmailAutoProvAccountPasswordInDlg,
                         type:_SECRET_, msgName:ZaMsg.LBL_provisionedAccountPassword,
                         label:ZaMsg.LBL_provisionedAccountPassword, labelLocation:_LEFT_,
                         width:"190px",
@@ -1152,20 +1152,20 @@ function() {
                     },
                     {type:_SPACER_, height:10, colSpan:"*"},
                     {
-                        ref:ZaDomain.A2_zimbraAutoProvAccountPasswordAgainInDlg,
+                        ref:ZaDomain.A2_zmailAutoProvAccountPasswordAgainInDlg,
                         type:_SECRET_, msgName:ZaMsg.NAD_ConfirmPassword,
                         label:ZaMsg.NAD_ConfirmPassword, labelLocation:_LEFT_,
                         width:"190px",
                         cssClass:"admin_xform_name_input"
                     },
                     {
-                        ref:ZaDomain.A2_zimbraAutoProvAccountPasswordUnmatchedWarning,
+                        ref:ZaDomain.A2_zmailAutoProvAccountPasswordUnmatchedWarning,
                         type:_DWT_ALERT_, style: DwtAlert.CRITICAL, iconVisible: false,
                         label:"", labelLocation:_LEFT_,
                         width:"180px", colSpan:"1",
                         content: ZaMsg.ERROR_PASSWORD_MISMATCH,
-                        visibilityChecks:[[XForm.checkInstanceValue, ZaDomain.A2_zimbraAutoProvAccountPasswordUnmatchedWarning, true]],
-                        visibilityChangeEventSources:[ZaDomain.A2_zimbraAutoProvAccountPasswordUnmatchedWarning]
+                        visibilityChecks:[[XForm.checkInstanceValue, ZaDomain.A2_zmailAutoProvAccountPasswordUnmatchedWarning, true]],
+                        visibilityChangeEventSources:[ZaDomain.A2_zmailAutoProvAccountPasswordUnmatchedWarning]
                     }
                 ]
             }

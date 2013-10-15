@@ -14,16 +14,16 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.octopus.tests.login;
+package org.zmail.qa.selenium.projects.octopus.tests.login;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.projects.octopus.core.OctopusCommonTest;
-import com.zimbra.qa.selenium.projects.octopus.ui.PageLogin;
-import com.zimbra.qa.selenium.projects.octopus.ui.PageOctopus.Locators;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.projects.octopus.core.OctopusCommonTest;
+import org.zmail.qa.selenium.projects.octopus.ui.PageLogin;
+import org.zmail.qa.selenium.projects.octopus.ui.PageOctopus.Locators;
 
 public class BasicLogin extends OctopusCommonTest {
 
@@ -39,7 +39,7 @@ public class BasicLogin extends OctopusCommonTest {
 	public void BasicLogin01() throws HarnessException {
 		// Login
 		if (!startingPage.zIsActive())
-			app.zPageLogin.zLogin(ZimbraAccount.AccountZMC());
+			app.zPageLogin.zLogin(ZmailAccount.AccountZMC());
 
 		app.zPageOctopus.zWaitForActive();
 
@@ -52,7 +52,7 @@ public class BasicLogin extends OctopusCommonTest {
 	public void BasicLogin02() throws HarnessException {
 		// Login
 		if (!startingPage.zIsActive())
-			app.zPageLogin.zLogin(ZimbraAccount.AccountZMC());
+			app.zPageLogin.zLogin(ZmailAccount.AccountZMC());
 
 		app.zPageOctopus.zWaitForActive();
 
@@ -92,7 +92,7 @@ public class BasicLogin extends OctopusCommonTest {
 	public void IncorrectPassword()throws HarnessException
 	{
 		//Create an account
-		ZimbraAccount a = ZimbraAccount.AccountZMC();
+		ZmailAccount a = ZmailAccount.AccountZMC();
 		
 		//Logout current account
 		app.zPageOctopus.zLogout();

@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.tasks.folders;
+package org.zmail.qa.selenium.projects.ajax.tests.tasks.folders;
 
 
 
@@ -22,21 +22,21 @@ import java.util.HashMap;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
 
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogError;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogRenameFolder;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogError.DialogErrorID;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.DialogEditFolder;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogError;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogRenameFolder;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogError.DialogErrorID;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.DialogEditFolder;
 
 
 
@@ -48,8 +48,8 @@ public class RenameTaskFolder extends AjaxCommonTest {
 		// test starts at the task tab
 		super.startingPage = app.zPageTasks;
 		super.startingAccountPreferences = new HashMap<String , String>() {{
-			put("zimbraPrefTasksReadingPaneLocation", "bottom");
-			put("zimbraPrefShowSelectionCheckbox", "TRUE");
+			put("zmailPrefTasksReadingPaneLocation", "bottom");
+			put("zmailPrefShowSelectionCheckbox", "TRUE");
 		}};
 	}	
 
@@ -61,10 +61,10 @@ public class RenameTaskFolder extends AjaxCommonTest {
 		ZAssert.assertNotNull(taskFolder, "Verify the task is available");
 		
 		// Create the subTaskList
-		String name = "taskList" + ZimbraSeleniumProperties.getUniqueString();
+		String name = "taskList" + ZmailSeleniumProperties.getUniqueString();
 		
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+				"<CreateFolderRequest xmlns='urn:zmailMail'>" +
                 	"<folder name='"+ name +"' l='"+ taskFolder.getId() +"'/>" +
                 "</CreateFolderRequest>");
 
@@ -78,11 +78,11 @@ public class RenameTaskFolder extends AjaxCommonTest {
 		DialogRenameFolder dlgRename = (DialogRenameFolder)app.zTreeTasks.zTreeItem(Action.A_RIGHTCLICK, Button.B_RENAME, subTaskList);
 		ZAssert.assertNotNull(dlgRename, "Verify the dialog opened");
 		
-		String name2 = "newTaskList" + ZimbraSeleniumProperties.getUniqueString();
+		String name2 = "newTaskList" + ZmailSeleniumProperties.getUniqueString();
 		dlgRename.zSetNewName(name2);
 		dlgRename.zClickButton(Button.B_OK);
 
-		app.zGetActiveAccount().soapSend("<GetFolderRequest xmlns = 'urn:zimbraMail'/>");
+		app.zGetActiveAccount().soapSend("<GetFolderRequest xmlns = 'urn:zmailMail'/>");
 		
 		Element[] eFolder1 = app.zGetActiveAccount().soapSelectNodes("//mail:folder[@name='"+ name +"']");
 		ZAssert.assertEquals(eFolder1.length, 0, "Verify the old tasklist name no longer exists");
@@ -98,10 +98,10 @@ public class RenameTaskFolder extends AjaxCommonTest {
 		ZAssert.assertNotNull(taskFolder, "Verify the task is available");
 		
 		// Create the subTaskList
-		String name = "taskList" + ZimbraSeleniumProperties.getUniqueString();
+		String name = "taskList" + ZmailSeleniumProperties.getUniqueString();
 		
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+				"<CreateFolderRequest xmlns='urn:zmailMail'>" +
                 	"<folder name='"+ name +"' l='"+ taskFolder.getId() +"'/>" +
                 "</CreateFolderRequest>");
 
@@ -115,7 +115,7 @@ public class RenameTaskFolder extends AjaxCommonTest {
 		DialogRenameFolder dlgRename = (DialogRenameFolder)app.zTreeTasks.zTreeItem(Action.A_RIGHTCLICK, Button.B_RENAME, subTaskList);
 		ZAssert.assertNotNull(dlgRename, "Verify the dialog opened");
 		
-		String name2 = "newTaskList:" + ZimbraSeleniumProperties.getUniqueString();
+		String name2 = "newTaskList:" + ZmailSeleniumProperties.getUniqueString();
 		dlgRename.zSetNewName(name2);
 		dlgRename.zClickButton(Button.B_OK);
 
@@ -131,10 +131,10 @@ public class RenameTaskFolder extends AjaxCommonTest {
 		ZAssert.assertNotNull(taskFolder, "Verify the task is available");
 		
 		// Create the subTaskList
-		String name = "taskList" + ZimbraSeleniumProperties.getUniqueString();
+		String name = "taskList" + ZmailSeleniumProperties.getUniqueString();
 		
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+				"<CreateFolderRequest xmlns='urn:zmailMail'>" +
                 	"<folder name='"+ name +"' l='"+ taskFolder.getId() +"'/>" +
                 "</CreateFolderRequest>");
 
@@ -149,13 +149,13 @@ public class RenameTaskFolder extends AjaxCommonTest {
 				Action.A_RIGHTCLICK, Button.B_TREE_EDIT, subTaskList);
 		ZAssert.assertNotNull(dialog, "Verify the dialog opened");
 		
-		String name2 = "newTaskList" + ZimbraSeleniumProperties.getUniqueString();
+		String name2 = "newTaskList" + ZmailSeleniumProperties.getUniqueString();
 		
 		// Change the name, click OK
 		dialog.zSetNewName(name2);		
 		dialog.zClickButton(Button.B_OK);
 
-		app.zGetActiveAccount().soapSend("<GetFolderRequest xmlns = 'urn:zimbraMail'/>");
+		app.zGetActiveAccount().soapSend("<GetFolderRequest xmlns = 'urn:zmailMail'/>");
 		
 		Element[] eFolder1 = app.zGetActiveAccount().soapSelectNodes("//mail:folder[@name='"+ name +"']");
 		ZAssert.assertEquals(eFolder1.length, 0, "Verify the old tasklist name no longer exists");

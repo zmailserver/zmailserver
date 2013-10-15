@@ -13,21 +13,21 @@
  * ***** END LICENSE BLOCK *****
  */
 
-function Com_Zimbra_AsteriskMWI() {
+function Com_Zmail_AsteriskMWI() {
 	//DBG.println(AjxDebug.DBG2, "MWI init");
 }
 
-Com_Zimbra_AsteriskMWI.prototype.init =
+Com_Zmail_AsteriskMWI.prototype.init =
 function() {
 	// Pre-load placeholder image
 	//DBG.println(AjxDebug.DBG2, "MWI init");
 	(new Image()).src = this.getResource('blank_pixel.gif');
 };
 
-Com_Zimbra_AsteriskMWI.prototype = new ZmZimletBase();
-Com_Zimbra_AsteriskMWI.prototype.constructor = Com_Zimbra_AsteriskMWI;
+Com_Zmail_AsteriskMWI.prototype = new ZmZimletBase();
+Com_Zmail_AsteriskMWI.prototype.constructor = Com_Zmail_AsteriskMWI;
 
-Com_Zimbra_AsteriskMWI.prototype.menuItemSelected = function(itemId) {
+Com_Zmail_AsteriskMWI.prototype.menuItemSelected = function(itemId) {
 	switch (itemId) {
 		case "CALL":
 			this.singleClicked();
@@ -42,25 +42,25 @@ Com_Zimbra_AsteriskMWI.prototype.menuItemSelected = function(itemId) {
 	}
 };
 
-// Called by the Zimbra framework when the panel item was double clicked
-Com_Zimbra_AsteriskMWI.prototype.doDrop = function(myobj) {
+// Called by the Zmail framework when the panel item was double clicked
+Com_Zmail_AsteriskMWI.prototype.doDrop = function(myobj) {
 	this.setupCall(myobj);
 };
 
-// Called by the Zimbra framework when the panel item was double clicked
-Com_Zimbra_AsteriskMWI.prototype.doubleClicked = function() {
+// Called by the Zmail framework when the panel item was double clicked
+Com_Zmail_AsteriskMWI.prototype.doubleClicked = function() {
 	this.singleClicked();
 };
 
-Com_Zimbra_AsteriskMWI.prototype.singleClicked = function() {
+Com_Zmail_AsteriskMWI.prototype.singleClicked = function() {
 	this.checkVM();
 };
 
-Com_Zimbra_AsteriskMWI.prototype.verifyPrefs = function() {
+Com_Zmail_AsteriskMWI.prototype.verifyPrefs = function() {
 	return ((this.getUserProperty("pbxUname")) && (this.getUserProperty("pbxPass")));
 };
 
-Com_Zimbra_AsteriskMWI.prototype.checkVM = function() {
+Com_Zmail_AsteriskMWI.prototype.checkVM = function() {
 
 	if (!this.verifyPrefs()) {
 		this.displayStatusMessage("Please populate preferences");
@@ -101,20 +101,20 @@ Com_Zimbra_AsteriskMWI.prototype.checkVM = function() {
 
 // Thanks, Kevin
 
-Com_Zimbra_AsteriskMWI.prototype.toolTipPoppedUp =
+Com_Zmail_AsteriskMWI.prototype.toolTipPoppedUp =
 function(canvas, dlg) {
 	canvas.innerHTML = '<div id="'+ ZmZimletBase.encodeId("asteriskVM")+'" />';
 
 	var requestDoc = "action=login&mailbox="+this.getUserProperty("pbxUname")+"&"+
 		"password="+this.getUserProperty("pbxPass");
 	var url = ZmZimletBase.PROXY + AjxStringUtil.urlEncode(this.getConfig("vmURL"));
-	//DBG.println(AjxDebug.DBG2, "Com_Zimbra_AsteriskMWI URL: " + url);
-	AjxRpc.invoke(requestDoc, url, null, new AjxCallback(this, Com_Zimbra_AsteriskMWI._callback, [dlg, this]), false);
+	//DBG.println(AjxDebug.DBG2, "Com_Zmail_AsteriskMWI URL: " + url);
+	AjxRpc.invoke(requestDoc, url, null, new AjxCallback(this, Com_Zmail_AsteriskMWI._callback, [dlg, this]), false);
 };
 
 // Private Methods
 
-Com_Zimbra_AsteriskMWI.prototype._displayImage = 
+Com_Zmail_AsteriskMWI.prototype._displayImage = 
 function(dlg, vm_src) {
 	var vmEl = document.getElementById(ZmZimletBase.encodeId("asteriskVM"));
 
@@ -253,7 +253,7 @@ function(dlg, vm_src) {
 	dlg.popup();
 };
 
-Com_Zimbra_AsteriskMWI.prototype._selectListener = 
+Com_Zmail_AsteriskMWI.prototype._selectListener = 
 function(evt) {
 
 	evt = DwtUiEvent.getEvent(evt);
@@ -269,10 +269,10 @@ function(evt) {
 		myObj.getUserProperty("pbxUname")+"&"+
 		"password="+myObj.getUserProperty("pbxPass");
 	var url = ZmZimletBase.PROXY + AjxStringUtil.urlEncode(myObj.getConfig("vmURL"));
-	AjxRpc.invoke(requestDoc, url, null, new AjxCallback(myObj, Com_Zimbra_AsteriskMWI._getAudio, [myObj]), false);
+	AjxRpc.invoke(requestDoc, url, null, new AjxCallback(myObj, Com_Zmail_AsteriskMWI._getAudio, [myObj]), false);
 };
 
-Com_Zimbra_AsteriskMWI._getAudio = 
+Com_Zmail_AsteriskMWI._getAudio = 
 function( myobj, result ) {
 	var r = result.text;
 	var i = r.indexOf ("<embed ");
@@ -312,9 +312,9 @@ function( myobj, result ) {
 
 };
 
-Com_Zimbra_AsteriskMWI._callback = 
+Com_Zmail_AsteriskMWI._callback = 
 function( dlg, myobj, result ) {
 	var r = result.text;
 	myobj._displayImage(dlg, r);
-	//Com_Zimbra_AsteriskMWI._displayImage(dlg, r);
+	//Com_Zmail_AsteriskMWI._displayImage(dlg, r);
 };

@@ -14,23 +14,23 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.ui.accounts;
+package org.zmail.qa.selenium.projects.desktop.ui.accounts;
 
-import com.zimbra.qa.selenium.framework.items.DesktopAccountItem;
-import com.zimbra.qa.selenium.framework.items.IItem;
-import com.zimbra.qa.selenium.framework.ui.AbsApplication;
-import com.zimbra.qa.selenium.framework.ui.AbsForm;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.GeneralUtility;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.projects.desktop.ui.AppAjaxClient;
-import com.zimbra.qa.selenium.projects.desktop.ui.PageLogin;
+import org.zmail.qa.selenium.framework.items.DesktopAccountItem;
+import org.zmail.qa.selenium.framework.items.IItem;
+import org.zmail.qa.selenium.framework.ui.AbsApplication;
+import org.zmail.qa.selenium.framework.ui.AbsForm;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.GeneralUtility;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.projects.desktop.ui.AppAjaxClient;
+import org.zmail.qa.selenium.projects.desktop.ui.PageLogin;
 
-public class FormAddZimbraAccount extends AbsForm {
+public class FormAddZmailAccount extends AbsForm {
 
-   public FormAddZimbraAccount(AbsApplication application) {
+   public FormAddZmailAccount(AbsApplication application) {
       super(application);
-      logger.info("new " + FormAddZimbraAccount.class.getCanonicalName());
+      logger.info("new " + FormAddZmailAccount.class.getCanonicalName());
    }
 
    public static class Locators {
@@ -96,7 +96,7 @@ public class FormAddZimbraAccount extends AbsForm {
 
    @Override
    public void zFill(IItem item) throws HarnessException {
-      logger.info(FormAddZimbraAccount.class.getCanonicalName() +
+      logger.info(FormAddZmailAccount.class.getCanonicalName() +
             ".fill(IItem)");
       logger.info(item.prettyPrint());
 

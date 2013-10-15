@@ -18,7 +18,7 @@
 #include <objbase.h>
 #include <dbghelp.h>
 
-namespace Zimbra
+namespace Zmail
 {
 namespace Util
 {

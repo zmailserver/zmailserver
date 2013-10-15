@@ -13,12 +13,12 @@
  * ***** END LICENSE BLOCK *****
 --%>
 <%@ tag body-content="empty" dynamic-attributes="dynattrs" %>
-<%@ attribute name="searchResult" rtexprvalue="true" required="true" type="com.zimbra.cs.taglib.bean.ZSearchResultBean"%>
+<%@ attribute name="searchResult" rtexprvalue="true" required="true" type="org.zmail.cs.taglib.bean.ZSearchResultBean"%>
 <%@ attribute name="max" rtexprvalue="true" required="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="app" uri="com.zimbra.htmlextras" %>
+<%@ taglib prefix="app" uri="org.zmail.htmlextras" %>
 
 <c:set var="first" value="${searchResult.size eq 0 ? 0 : searchResult.offset+1}"/>
 <c:set var="last" value="${searchResult.offset+searchResult.size}"/>    

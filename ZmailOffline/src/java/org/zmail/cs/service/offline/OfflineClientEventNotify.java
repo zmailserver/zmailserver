@@ -12,21 +12,21 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.offline;
+package org.zmail.cs.service.offline;
 
 import java.util.Map;
 import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.Constants;
-import com.zimbra.cs.mailbox.OfflineServiceException;
-import com.zimbra.cs.offline.OfflineLog;
-import com.zimbra.cs.offline.OfflineSyncManager;
-import com.zimbra.cs.offline.common.OfflineConstants;
-import com.zimbra.soap.DocumentHandler;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.Constants;
+import org.zmail.cs.mailbox.OfflineServiceException;
+import org.zmail.cs.offline.OfflineLog;
+import org.zmail.cs.offline.OfflineSyncManager;
+import org.zmail.cs.offline.common.OfflineConstants;
+import org.zmail.soap.DocumentHandler;
 
 public class OfflineClientEventNotify extends DocumentHandler {
 
@@ -77,7 +77,7 @@ public class OfflineClientEventNotify extends DocumentHandler {
             throw OfflineServiceException.UNKNOWN_CLIENT_EVENT(event);
         }
 
-        return getZimbraSoapContext(context).createElement(OfflineConstants.CLIENT_EVENT_NOTIFY_RESPONSE);
+        return getZmailSoapContext(context).createElement(OfflineConstants.CLIENT_EVENT_NOTIFY_RESPONSE);
     }
 
     @Override

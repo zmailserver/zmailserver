@@ -14,15 +14,15 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.util;
+package org.zmail.qa.selenium.framework.util;
 
 import java.util.*;
 
 import org.apache.log4j.*;
 
 
-public class ZimbraCharsets {
-	protected static Logger logger = LogManager.getLogger(ZimbraCharsets.class);
+public class ZmailCharsets {
+	protected static Logger logger = LogManager.getLogger(ZmailCharsets.class);
 
 	/**
 	 * Supported sample charsets
@@ -45,11 +45,11 @@ public class ZimbraCharsets {
 	}
 	
 	
-	public static ZimbraCharsets getInstance() {
+	public static ZmailCharsets getInstance() {
 		if (Instance == null) {
-			synchronized(ZimbraCharsets.class) {
+			synchronized(ZmailCharsets.class) {
 				if ( Instance == null) {
-					Instance = new ZimbraCharsets();
+					Instance = new ZmailCharsets();
 				}
 			}
 		}
@@ -102,9 +102,9 @@ public class ZimbraCharsets {
 	private Hashtable<ZCharset, String> samples = null;
 	
 	
-	protected volatile static ZimbraCharsets Instance;
+	protected volatile static ZmailCharsets Instance;
 
-	protected ZimbraCharsets() {	
+	protected ZmailCharsets() {	
 		logger.info("New "+ this.getClass().getCanonicalName());
 		
 		samples = new Hashtable<ZCharset, String>();
@@ -122,7 +122,7 @@ public class ZimbraCharsets {
 	public static void main(String[] args) throws HarnessException {
 		logger.info("Here!");
 		
-		logger.info("String: "+ ZimbraCharsets.getInstance().getSample(ZCharset.JIS_X_0202));
+		logger.info("String: "+ ZmailCharsets.getInstance().getSample(ZCharset.JIS_X_0202));
 		
 	}
 

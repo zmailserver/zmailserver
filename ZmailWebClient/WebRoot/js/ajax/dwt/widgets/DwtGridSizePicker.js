@@ -21,7 +21,7 @@
  * feature in {@link ZmHtmlEditor}, this widget will usually be embedded in a DwtMenu
  * with style {@link DwtMenu.GENERIC_WIDGET_STYLE}.
  *
- * @author Mihai Bazon <mihai@zimbra.com>
+ * @author Mihai Bazon <mihai@zmail.com>
  * 
  * @param	{DwtComposite}	parent 	the parent widget
  * @param	{string}	title		the title

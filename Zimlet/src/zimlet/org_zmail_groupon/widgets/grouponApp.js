@@ -11,10 +11,10 @@
  * Software distributed under the License is distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
- * @Author Raja Rao DV (rrao@zimbra.com)
+ * @Author Raja Rao DV (rrao@zmail.com)
  */
 
-function Com_Zimbra_GrouponApp(zimlet, tabApp) {
+function Com_Zmail_GrouponApp(zimlet, tabApp) {
 	this.zimlet = zimlet;
 	this.tabApp = tabApp;
 	this._shell = zimlet.getShell();
@@ -29,7 +29,7 @@ function Com_Zimbra_GrouponApp(zimlet, tabApp) {
 	this.preferences.groupon_pref_cardWidthList = "350px"; 
 };
 
-Com_Zimbra_GrouponApp.prototype.show =
+Com_Zmail_GrouponApp.prototype.show =
 function() {
 	this._addToolbarWidgets();
 	this.tabApp.setContent(this._constructSkin());
@@ -41,7 +41,7 @@ function() {
 };
 
 
-Com_Zimbra_GrouponApp.prototype._addAreaCodeMenuListener =
+Com_Zmail_GrouponApp.prototype._addAreaCodeMenuListener =
 function() {
 	var menu = document.getElementById("grouponZimlet_divisionsMenuId");
 
@@ -49,7 +49,7 @@ function() {
 	menu.onchange = callback;	
 };
 
-Com_Zimbra_GrouponApp.prototype._handleAreaCodeSelect =
+Com_Zmail_GrouponApp.prototype._handleAreaCodeSelect =
 function() {
 	var val = document.getElementById("grouponZimlet_divisionsMenuId").value;
 	this.zimlet.setUserProperty("grouponZimlet_myCityCode", val, true);//save
@@ -58,12 +58,12 @@ function() {
 };
 
 
-Com_Zimbra_GrouponApp.prototype._resizeHandler =
+Com_Zmail_GrouponApp.prototype._resizeHandler =
 function() {
 	this._setMainCardHeight();
 };
 
-Com_Zimbra_GrouponApp.prototype._setMainCardHeight =
+Com_Zmail_GrouponApp.prototype._setMainCardHeight =
 function() {
 	var mainCardsDiv = document.getElementById('groupon_twitterCardsDiv');
 	mainCardsDiv.style.overflow = "auto";
@@ -81,12 +81,12 @@ function() {
 	}
 };
 
-Com_Zimbra_GrouponApp.prototype._constructSkin =
+Com_Zmail_GrouponApp.prototype._constructSkin =
 function() {
-	return AjxTemplate.expand("com_zimbra_groupon.templates.Groupon#Frame");
+	return AjxTemplate.expand("org_zmail_groupon.templates.Groupon#Frame");
 };
 
-Com_Zimbra_GrouponApp.prototype._addToolbarWidgets =
+Com_Zmail_GrouponApp.prototype._addToolbarWidgets =
 function() {
 	var html = new Array();
 	var divisions = [];
@@ -112,7 +112,7 @@ function() {
 	toolbar.getHtmlElement().innerHTML = html.join("");
 };
 
-Com_Zimbra_GrouponApp.prototype._getMaxHeaderTextLength =
+Com_Zmail_GrouponApp.prototype._getMaxHeaderTextLength =
 function() {
 	if (!this.maxHeaderTextLength) {
 		var cardWidth = parseInt(this.preferences.groupon_pref_cardWidthList.replace("px", ""));
@@ -121,7 +121,7 @@ function() {
 	return this.maxHeaderTextLength;
 };
 
-Com_Zimbra_GrouponApp.prototype._showCard =
+Com_Zmail_GrouponApp.prototype._showCard =
 function(cardProps) {
 	var headerName = cardProps.headerName;
 	var type = cardProps.type;
@@ -188,7 +188,7 @@ function(cardProps) {
 		mainCardHeight:this._mainCardsHeight,
 		cardWidth: this.preferences.groupon_pref_cardWidthList
 	};
-	card.innerHTML = AjxTemplate.expand("com_zimbra_groupon.templates.Groupon#CardFrame", subs);
+	card.innerHTML = AjxTemplate.expand("org_zmail_groupon.templates.Groupon#CardFrame", subs);
 
 	var params = {row:row, cellId:card.id, tableId:cardInfoSectionId, headerName:headerName, type:type}
 	cardProps.cellId = card.id;
@@ -198,14 +198,14 @@ function(cardProps) {
 	return cardInfoSectionId;
 };
 
-Com_Zimbra_GrouponApp.prototype._handleCloseButton =
+Com_Zmail_GrouponApp.prototype._handleCloseButton =
 function(cardProps) {
 	cardProps.rowObj.deleteCell(document.getElementById(cardProps.cellId).cellIndex);
 	clearInterval(cardProps.timer);
 	cardProps.isClosed = true;
 };
 
-Com_Zimbra_GrouponApp.prototype.createCardView =
+Com_Zmail_GrouponApp.prototype.createCardView =
 function(tableId, deal) {
 	var conditions = deal.conditions;
 	var details = conditions.details;
@@ -224,7 +224,7 @@ function(tableId, deal) {
 	document.getElementById(tableId).innerHTML = html.join("");
 };
 
-Com_Zimbra_GrouponApp.prototype._getCardDetailedHtml =
+Com_Zmail_GrouponApp.prototype._getCardDetailedHtml =
 function(deal, mode) {
 	var conditions = deal.conditions;
 	var details =conditions.details;
@@ -264,7 +264,7 @@ function(deal, mode) {
 		discount_percent: deal.discount_percent,
 		price: price
 	};
-	var section1 =  AjxTemplate.expand("com_zimbra_groupon.templates.Groupon#CardSection1", subs);
+	var section1 =  AjxTemplate.expand("org_zmail_groupon.templates.Groupon#CardSection1", subs);
 
 	if(mode == GrouponZimlet.SHOW_FEATURED_AS_POPUP) {
 		return section1;
@@ -277,7 +277,7 @@ function(deal, mode) {
 		itemsRemaining: itemsRemaining,
 		tipping_point: deal.tipping_point
 	};
-	var section2 =  AjxTemplate.expand("com_zimbra_groupon.templates.Groupon#CardSection2", subs);
+	var section2 =  AjxTemplate.expand("org_zmail_groupon.templates.Groupon#CardSection2", subs);
 
 	var html = [];
 	html.push(section1);

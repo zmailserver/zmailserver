@@ -1,5 +1,5 @@
 //-------------------------------------------------------------------------------------------------------
-//List View for the zimbraDomainCOSMaxAccounts
+//List View for the zmailDomainCOSMaxAccounts
 
 ZaBulkProvisionAccountsListView = function(parent, className, posStyle, headerList) {
 	if (arguments.length == 0) return;
@@ -68,7 +68,7 @@ ZaBulkProvisionAccountsListView.prototype._setNoResultsHtml = function() {
 
 	buffer.append("<table width='100%' cellspacing='0' cellpadding='1'>",
 				  "<tr><td class='NoResults'><br />",
-                  com_zimbra_bulkprovision.no_accounts,
+                  org_zmail_bulkprovision.no_accounts,
                   "</td></tr></table>");
 
 	div.innerHTML = buffer.toString();

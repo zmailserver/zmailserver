@@ -14,13 +14,13 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.calendar.meetings.attendee;
+package org.zmail.qa.selenium.projects.ajax.tests.calendar.meetings.attendee;
 
 import java.util.Calendar;
 import org.testng.annotations.Test;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.CalendarWorkWeekTest;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.CalendarWorkWeekTest;
 
 public class DeleteMeeting extends CalendarWorkWeekTest {
 
@@ -35,7 +35,7 @@ public class DeleteMeeting extends CalendarWorkWeekTest {
 		
 		// Create the appointment on the server
 		// Create the message data to be sent
-		String subject = "appointment" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "appointment" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		// Absolute dates in UTC zone
@@ -48,7 +48,7 @@ public class DeleteMeeting extends CalendarWorkWeekTest {
 
 		// Create an appointment
 		app.zGetActiveAccount().soapSend(
-					"<CreateAppointmentRequest xmlns='urn:zimbraMail'>"
+					"<CreateAppointmentRequest xmlns='urn:zmailMail'>"
 				+		"<m>"
 				+			"<inv>"
 				+				"<comp status='CONF' fb='B' class='PUB' transp='O' allDay='0' name='"+ subject +"' >"

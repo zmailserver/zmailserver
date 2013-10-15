@@ -6,38 +6,38 @@
 
     <tlib-version>1.0</tlib-version>
     <short-name>zdf</short-name>
-    <uri>com.zimbra.cs.offline.jsp</uri>
+    <uri>org.zmail.cs.offline.jsp</uri>
     <function>
         <name>isValid</name>
         <function-class>
-            com.zimbra.cs.offline.jsp.FormBean
+            org.zmail.cs.offline.jsp.FormBean
         </function-class>
         <function-signature>
-            boolean isValid(com.zimbra.cs.offline.jsp.FormBean, java.lang.String)
+            boolean isValid(org.zmail.cs.offline.jsp.FormBean, java.lang.String)
         </function-signature>
     </function>
     <function>
         <name>reload</name>
         <function-class>
-            com.zimbra.cs.offline.jsp.FormBean
+            org.zmail.cs.offline.jsp.FormBean
         </function-class>
         <function-signature>
-            void reload(com.zimbra.cs.offline.jsp.FormBean)
+            void reload(org.zmail.cs.offline.jsp.FormBean)
         </function-signature>
     </function>
     <function>
         <name>doRequest</name>
         <function-class>
-            com.zimbra.cs.offline.jsp.FormBean
+            org.zmail.cs.offline.jsp.FormBean
         </function-class>
         <function-signature>
-            void doRequest(com.zimbra.cs.offline.jsp.FormBean)
+            void doRequest(org.zmail.cs.offline.jsp.FormBean)
         </function-signature>
     </function>
     <function>
         <name>getLocalConfig</name>
         <function-class>
-            com.zimbra.cs.offline.jsp.PageBean
+            org.zmail.cs.offline.jsp.PageBean
         </function-class>
         <function-signature>
             String getLocalConfig(java.lang.String)
@@ -46,7 +46,7 @@
     <function>
         <name>checkAuthToken</name>
         <function-class>
-            com.zimbra.cs.offline.jsp.PageBean
+            org.zmail.cs.offline.jsp.PageBean
         </function-class>
         <function-signature>
             boolean checkAuthToken(javax.servlet.http.HttpServletRequest)
@@ -55,7 +55,7 @@
     <function>
         <name>isPrism</name>
         <function-class>
-            com.zimbra.cs.offline.jsp.PageBean
+            org.zmail.cs.offline.jsp.PageBean
         </function-class>
         <function-signature>
             boolean isPrism(java.lang.String)
@@ -64,7 +64,7 @@
     <function>
         <name>getBaseUri</name>
         <function-class>
-            com.zimbra.cs.offline.jsp.PageBean
+            org.zmail.cs.offline.jsp.PageBean
         </function-class>
         <function-signature>
             boolean getBaseUri()
@@ -73,7 +73,7 @@
     <function>
         <name>addAuthToken</name>
         <function-class>
-            com.zimbra.cs.offline.jsp.PageBean
+            org.zmail.cs.offline.jsp.PageBean
         </function-class>
         <function-signature>
             String addAuthToken(java.lang.String, javax.servlet.http.HttpServletRequest)
@@ -82,10 +82,10 @@
     <function>
         <name>onLogin</name>
         <function-class>
-            com.zimbra.cs.offline.jsp.ClientEventBean
+            org.zmail.cs.offline.jsp.ClientEventBean
         </function-class>
         <function-signature>
-            void onLogin(com.zimbra.cs.offline.jsp.ClientEventBean)
+            void onLogin(org.zmail.cs.offline.jsp.ClientEventBean)
         </function-signature>
     </function>
 </taglib>

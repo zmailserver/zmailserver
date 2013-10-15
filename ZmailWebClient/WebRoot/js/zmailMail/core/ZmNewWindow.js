@@ -23,7 +23,7 @@
  * the <code>run()</code> factory method.
  * @class
  * This class is the controller for a window created outside the main client
- * window. It is a very stripped down and specialized version of {@link ZmZimbraMail}.
+ * window. It is a very stripped down and specialized version of {@link ZmZmailMail}.
  * The child window is single-use; it does not support switching among multiple
  * views.
  *
@@ -82,7 +82,7 @@ function() {
 	var winOpener = window.opener || window;
 
 	if (!window.parentController) {
-		window.parentController = winOpener._zimbraMail;
+		window.parentController = winOpener._zmailMail;
 	}
 
 	// Create the global app context
@@ -215,8 +215,8 @@ function() {
 		target = "view-window";
 	}
 
-	ZmZimbraMail.prototype._registerOrganizers.call(this);
-	ZmZimbraMail.registerViewsToTypeMap();
+	ZmZmailMail.prototype._registerOrganizers.call(this);
+	ZmZmailMail.registerViewsToTypeMap();
 
     
 	// setup zimlets, Load it first becoz.. zimlets has to get processed first.
@@ -538,7 +538,7 @@ function(apps) {
 		}
 	}
 	ZmApp.APPS.sort(function(a, b) {
-		return ZmZimbraMail.hashSortCompare(ZmApp.LOAD_SORT, a, b);
+		return ZmZmailMail.hashSortCompare(ZmApp.LOAD_SORT, a, b);
 	});
 
 	// instantiate enabled apps - this will invoke app registration

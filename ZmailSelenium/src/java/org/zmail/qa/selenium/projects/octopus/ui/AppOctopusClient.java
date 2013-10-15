@@ -17,12 +17,12 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.octopus.ui;
+package org.zmail.qa.selenium.projects.octopus.ui;
 
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.projects.octopus.ui.PageOctopus;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.projects.octopus.ui.PageOctopus;
 
 public class AppOctopusClient extends AbsApplication {
 
@@ -95,12 +95,12 @@ public class AppOctopusClient extends AbsApplication {
 		return ("Octopus Client");
 	}
 
-	public ZimbraAccount zSetActiveAcount(ZimbraAccount account)
+	public ZmailAccount zSetActiveAcount(ZmailAccount account)
 			throws HarnessException {
 		return (super.zSetActiveAcount(account));
 	}
 
-	public ZimbraAccount zGetActiveAcount() {
+	public ZmailAccount zGetActiveAcount() {
 		return (super.zGetActiveAccount());
 	}
 }

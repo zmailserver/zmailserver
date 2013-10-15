@@ -13,35 +13,35 @@
 # basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
 # ***** END LICENSE BLOCK *****
 # 
-# Create group, user for zimbra and postfix.
+# Create group, user for zmail and postfix.
 
 shopt -s nullglob 
 
 #Symlinks
-rm -f /opt/zimbra/openldap-clibs
-rm -f /opt/zimbra/libtool
-ln -s /opt/zimbra/libtool-2.2.6b /opt/zimbra/libtool
+rm -f /opt/zmail/openldap-clibs
+rm -f /opt/zmail/libtool
+ln -s /opt/zmail/libtool-2.2.6b /opt/zmail/libtool
 
-mkdir -p /opt/zimbra/openldap/var/openldap-data
-mkdir -p /opt/zimbra/data/ldap/config
-mkdir -p /opt/zimbra/data/ldap/mdb/db
-chown -R zimbra:zimbra /opt/zimbra/openldap/var
-chown -R zimbra:zimbra /opt/zimbra/data/ldap
+mkdir -p /opt/zmail/openldap/var/openldap-data
+mkdir -p /opt/zmail/data/ldap/config
+mkdir -p /opt/zmail/data/ldap/mdb/db
+chown -R zmail:zmail /opt/zmail/openldap/var
+chown -R zmail:zmail /opt/zmail/data/ldap
 
 SUDOMODE=`perl -e 'my $mode=(stat("/etc/sudoers"))[2];printf("%04o\n",$mode & 07777);'`
-egrep -v '^%zimbra.*slapd' /etc/sudoers > /tmp/sudoers
-echo "%zimbra   ALL=NOPASSWD:/opt/zimbra/openldap/libexec/slapd" >> /tmp/sudoers
-echo "%zimbra   ALL=NOPASSWD:/opt/zimbra/libexec/zmslapd" >> /tmp/sudoers
+egrep -v '^%zmail.*slapd' /etc/sudoers > /tmp/sudoers
+echo "%zmail   ALL=NOPASSWD:/opt/zmail/openldap/libexec/slapd" >> /tmp/sudoers
+echo "%zmail   ALL=NOPASSWD:/opt/zmail/libexec/zmslapd" >> /tmp/sudoers
 mv -f /tmp/sudoers /etc/sudoers
 chmod $SUDOMODE /etc/sudoers
 
-if [ -d "/opt/zimbra/openldap/libexec/slapd" ]; then
-  chown root:root /opt/zimbra/openldap/libexec/slapd
-  chmod 755 /opt/zimbra/openldap/libexec/slapd
+if [ -d "/opt/zmail/openldap/libexec/slapd" ]; then
+  chown root:root /opt/zmail/openldap/libexec/slapd
+  chmod 755 /opt/zmail/openldap/libexec/slapd
 fi
 
-if [ -x "/opt/zimbra/libexec/zmfixperms" ]; then
-  /opt/zimbra/libexec/zmfixperms
+if [ -x "/opt/zmail/libexec/zmfixperms" ]; then
+  /opt/zmail/libexec/zmfixperms
 fi
 
 ldconfig

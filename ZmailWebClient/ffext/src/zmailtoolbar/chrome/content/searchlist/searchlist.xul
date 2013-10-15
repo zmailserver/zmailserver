@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
-<!DOCTYPE window SYSTEM "chrome://zimbratb/locale/zimbratb.dtd">
-<?xml-stylesheet href="chrome://zimbratb/skin/searchlist/searchlist.css" type="text/css"?>
+<!DOCTYPE window SYSTEM "chrome://zmailtb/locale/zmailtb.dtd">
+<?xml-stylesheet href="chrome://zmailtb/skin/searchlist/searchlist.css" type="text/css"?>
 <overlay xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 	<script type="application/x-javascript" src="ZMTB_SearchList.js"/>
 	<script>
 		window.addEventListener("load", function(){
-			new ZMTB_SearchList(com_zimbra_tb);
+			new ZMTB_SearchList(org_zmail_tb);
 		}, false);
 	</script>
 	<toolbar id="ZimTB-Toolbar">

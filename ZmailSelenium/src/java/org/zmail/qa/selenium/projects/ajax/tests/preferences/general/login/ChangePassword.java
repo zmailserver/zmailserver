@@ -14,20 +14,20 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.preferences.general.login;
+package org.zmail.qa.selenium.projects.ajax.tests.preferences.general.login;
 
 import java.util.HashMap;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.preferences.SeparateWindowChangePassword;
-import com.zimbra.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.preferences.SeparateWindowChangePassword;
+import org.zmail.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
 
 
 public class ChangePassword extends AjaxCommonTest {
@@ -41,7 +41,7 @@ public class ChangePassword extends AjaxCommonTest {
 
 		// Add a preference so the account is 'dirty' after changing password
 		super.startingAccountPreferences = new HashMap<String, String>() {{
-					put("zimbraPrefGroupMailBy", "message");
+					put("zmailPrefGroupMailBy", "message");
 				}};
 			
 		
@@ -51,7 +51,7 @@ public class ChangePassword extends AjaxCommonTest {
 			groups = { "functional" })
 	public void ChangePassword_01() throws HarnessException {
 		
-		String password = "password"+ ZimbraSeleniumProperties.getUniqueString();
+		String password = "password"+ ZmailSeleniumProperties.getUniqueString();
 		
 		// Go to "General"
 		app.zTreePreferences.zTreeItem(Action.A_LEFTCLICK, TreeItem.General);
@@ -71,7 +71,7 @@ public class ChangePassword extends AjaxCommonTest {
 		// by getting a new token
 		app.zGetActiveAccount().Password = password;
 		app.zGetActiveAccount().soapSend(
-					"<AuthRequest xmlns='urn:zimbraAccount'>"
+					"<AuthRequest xmlns='urn:zmailAccount'>"
 				+		"<account by='name'>"+ app.zGetActiveAccount().EmailAddress +"</account>"
 				+		"<password>"+ app.zGetActiveAccount().Password +"</password>"
 				+	"</AuthRequest>");

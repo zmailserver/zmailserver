@@ -14,18 +14,18 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.preferences.addressbook;
+package org.zmail.qa.selenium.projects.ajax.tests.preferences.addressbook;
 
 import java.util.HashMap;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
 
 public class AddNewContactsToEmailedContactOptIn extends AjaxCommonTest {
 
@@ -34,7 +34,7 @@ public class AddNewContactsToEmailedContactOptIn extends AjaxCommonTest {
 		super.startingPage = app.zPagePreferences;
 		super.startingAccountPreferences = new HashMap<String, String>() {
 			{				
-		 		put("zimbraPrefAutoAddAddressEnabled", "TRUE");
+		 		put("zmailPrefAutoAddAddressEnabled", "TRUE");
 			}
 		};
 	}
@@ -49,8 +49,8 @@ public class AddNewContactsToEmailedContactOptIn extends AjaxCommonTest {
 		app.zTreePreferences.zTreeItem(Action.A_LEFTCLICK, TreeItem.AddressBook);
 
 		// Verify the status of the checkbox is TRUE
-		ZAssert.assertTrue(app.zPagePreferences.zGetCheckboxStatus("zimbraPrefAutoAddAddressEnabled"),
-				  "Verify if zimbraPrefAutoAddAddressEnabled is TRUE, the preference box is checked" );			
+		ZAssert.assertTrue(app.zPagePreferences.zGetCheckboxStatus("zmailPrefAutoAddAddressEnabled"),
+				  "Verify if zmailPrefAutoAddAddressEnabled is TRUE, the preference box is checked" );			
 	
 		// Uncheck the box
 		app.zPagePreferences.zCheckboxSet("css=input[id$=_AUTO_ADD_ADDRESS]",false);
@@ -60,17 +60,17 @@ public class AddNewContactsToEmailedContactOptIn extends AjaxCommonTest {
 		
 		// Verify the status of the checkbox is FALSE
 		// frontend check
-		ZAssert.assertFalse(app.zPagePreferences.zGetCheckboxStatus("zimbraPrefAutoAddAddressEnabled"),
+		ZAssert.assertFalse(app.zPagePreferences.zGetCheckboxStatus("zmailPrefAutoAddAddressEnabled"),
 				  "Verify the preference box is unchecked" );
 		
 		// backend check
 		app.zGetActiveAccount().soapSend(
-                   "<GetPrefsRequest xmlns='urn:zimbraAccount'>"
-                 +     "<pref name='zimbraPrefAutoAddAddressEnabled'/>"
+                   "<GetPrefsRequest xmlns='urn:zmailAccount'>"
+                 +     "<pref name='zmailPrefAutoAddAddressEnabled'/>"
                  + "</GetPrefsRequest>");
 
-		ZAssert.assertEquals(app.zGetActiveAccount().soapSelectValue("//acct:pref[@name='zimbraPrefAutoAddAddressEnabled']", null),
-				"FALSE", "Verify zimbraPrefAutoAddAddressEnabled is FALSE" );
+		ZAssert.assertEquals(app.zGetActiveAccount().soapSelectValue("//acct:pref[@name='zmailPrefAutoAddAddressEnabled']", null),
+				"FALSE", "Verify zmailPrefAutoAddAddressEnabled is FALSE" );
 				
 		// Revert to original value for subsequent test cases
 		// Check the box

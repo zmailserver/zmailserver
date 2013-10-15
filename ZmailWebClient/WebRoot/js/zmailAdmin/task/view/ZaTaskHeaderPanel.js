@@ -47,6 +47,6 @@ ZaTaskHeaderPanel.__handleClick =
 function(ev) {
     this._expanded = !this._expanded;
     this.getHtmlElement().innerHTML = this.getImgHtml();
-    ZaZimbraAdmin.getInstance().getTaskController().setExpanded(this._expanded);
+    ZaZmailAdmin.getInstance().getTaskController().setExpanded(this._expanded);
 }
 

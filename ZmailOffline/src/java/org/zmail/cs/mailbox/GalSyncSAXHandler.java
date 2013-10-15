@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,24 +29,24 @@ import java.util.Set;
 import org.dom4j.ElementHandler;
 import org.dom4j.ElementPath;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.offline.OfflineAccount;
-import com.zimbra.cs.account.offline.OfflineGal;
-import com.zimbra.cs.account.offline.OfflineProvisioning;
-import com.zimbra.cs.db.DbDataSource;
-import com.zimbra.cs.db.DbDataSource.DataSourceItem;
-import com.zimbra.cs.db.DbMailItem;
-import com.zimbra.cs.db.DbMailItem.QueryParams;
-import com.zimbra.cs.db.DbPool;
-import com.zimbra.cs.db.DbPool.DbConnection;
-import com.zimbra.cs.mime.ParsedContact;
-import com.zimbra.cs.offline.OfflineLC;
-import com.zimbra.cs.offline.OfflineLog;
-import com.zimbra.cs.offline.common.OfflineConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.offline.OfflineAccount;
+import org.zmail.cs.account.offline.OfflineGal;
+import org.zmail.cs.account.offline.OfflineProvisioning;
+import org.zmail.cs.db.DbDataSource;
+import org.zmail.cs.db.DbDataSource.DataSourceItem;
+import org.zmail.cs.db.DbMailItem;
+import org.zmail.cs.db.DbMailItem.QueryParams;
+import org.zmail.cs.db.DbPool;
+import org.zmail.cs.db.DbPool.DbConnection;
+import org.zmail.cs.mime.ParsedContact;
+import org.zmail.cs.offline.OfflineLC;
+import org.zmail.cs.offline.OfflineLog;
+import org.zmail.cs.offline.common.OfflineConstants;
 
 public class GalSyncSAXHandler implements ElementHandler {
     public static final String PATH_RESPONSE = "/Envelope/Body/SyncGalResponse";

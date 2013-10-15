@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.preferences.gui;
+package org.zmail.qa.selenium.projects.ajax.tests.preferences.gui;
 
 import java.util.HashMap;
 
 import org.testng.annotations.*;
 
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.*;
+import org.zmail.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
 
 
 public class NavigateAway extends AjaxCommonTest {
@@ -35,7 +35,7 @@ public class NavigateAway extends AjaxCommonTest {
 		super.startingAccountPreferences = new HashMap<String , String>() {
 			private static final long serialVersionUID = 8043572657728539313L;
 		{
-		    put("zimbraFeatureMobileSyncEnabled", "TRUE");
+		    put("zmailFeatureMobileSyncEnabled", "TRUE");
 		}};
 
 	}
@@ -117,7 +117,7 @@ public class NavigateAway extends AjaxCommonTest {
 		if ( 
 				(treeItemLocator == TreeItem.MobileDevices)
 				&&
-				ZimbraSeleniumProperties.zimbraGetVersionString().contains("FOSS")
+				ZmailSeleniumProperties.zmailGetVersionString().contains("FOSS")
 			) {
 			
 			// Mobile access is a NETWORK only feature

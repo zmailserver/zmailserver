@@ -30,13 +30,13 @@
 <%@ attribute name="onload" rtexprvalue="true" required="false" %>
 <%@ attribute name="tags" rtexprvalue="true" required="false" %>
 <%@ attribute name="keys" rtexprvalue="true" required="true" %>
-<%@ attribute name="context" rtexprvalue="true" required="true" type="com.zimbra.cs.taglib.tag.SearchContext"%>
-<%@ attribute name="mailbox" rtexprvalue="true" required="true" type="com.zimbra.cs.taglib.bean.ZMailboxBean"%>
-<%@ taglib prefix="app" uri="com.zimbra.htmlclient" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
+<%@ attribute name="context" rtexprvalue="true" required="true" type="org.zmail.cs.taglib.tag.SearchContext"%>
+<%@ attribute name="mailbox" rtexprvalue="true" required="true" type="org.zmail.cs.taglib.bean.ZMailboxBean"%>
+<%@ taglib prefix="app" uri="org.zmail.htmlclient" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
 
 <html>
 <app:skin mailbox="${mailbox}" />
@@ -46,13 +46,13 @@
 <app:handleViewError>
 <zm:getDomainInfo var="domainInfo" by="virtualHostname" value="${zm:getServerName(pageContext)}" />
 <c:if test="${not empty domainInfo}">
-	<c:set var="helpUrl" value="${domainInfo.attrs.zimbraHelpStandardURL}" scope='request' />
-	<c:set var="adminReference" value="${domainInfo.attrs.zimbraWebClientAdminReference}" scope="request"/>
-	<c:set var="logoUrl" value="${domainInfo.attrs.zimbraSkinLogoURL}" scope="request"/>
+	<c:set var="helpUrl" value="${domainInfo.attrs.zmailHelpStandardURL}" scope='request' />
+	<c:set var="adminReference" value="${domainInfo.attrs.zmailWebClientAdminReference}" scope="request"/>
+	<c:set var="logoUrl" value="${domainInfo.attrs.zmailSkinLogoURL}" scope="request"/>
 </c:if>
 <c:if test="${empty helpUrl}">
 	<%-- we use <c:url> below to add the locid param so don't need to do it here --%>
-	<c:set var='helpUrl' value="/help/standard/zimbra_user_help.htm" scope="request" />
+	<c:set var='helpUrl' value="/help/standard/zmail_user_help.htm" scope="request" />
 </c:if>
 
 <c:choose>
@@ -134,7 +134,7 @@
 								<td id='skin_td_quota' style="vertical-align:middle;">
 									<table class="BannerBar">
 										<tr>
-									<c:set var="max" value="${mailbox.attrs.zimbraMailQuota[0]}"/>
+									<c:set var="max" value="${mailbox.attrs.zmailMailQuota[0]}"/>
 									<c:choose>
 										<c:when test="${max gt 0}">
 											<c:set var="usage" value="${zm:displaySizePercentage(mailbox.size,max)}" />
@@ -274,7 +274,7 @@
 				</tr>
 			</table>
 		</td>
-<c:forEach var="zimlets" items="${mailbox.attrs.zimbraZimletAvailableZimlets}">
+<c:forEach var="zimlets" items="${mailbox.attrs.zmailZimletAvailableZimlets}">
 	<c:if test="${zimlets eq 'comcast_adsrvc'}">
 		<c:set var="comcast_adsrvc" value="true"/>
 	</c:if>
@@ -347,7 +347,7 @@ if (screen.width<=800) {
 		</td>
 		<!--td nowrap="nowrap" class="Tab">	<a href='<c:url value="/?client=advanced"/>'><fmt:message key="switchToAdvancedClient" /></a>  |
 		</td-->
-	<c:if test="${mailbox.attrs.zimbraIsDomainAdminAccount[0] eq 'TRUE' and not empty adminReference }">
+	<c:if test="${mailbox.attrs.zmailIsDomainAdminAccount[0] eq 'TRUE' and not empty adminReference }">
 		<td align="left" nowrap="nowrap" class="Tab">
 			<a target="_new" href="${adminReference}"><fmt:message key="adminLinkLabel"/></a> |
 		</td>
@@ -456,7 +456,7 @@ if (screen.width<=800) {
 									<%--<b>${fn:escapeXml(empty mailbox.defaultIdentity.fromDisplay ? mailbox.name : mailbox.defaultIdentity.fromDisplay)}</b>--%>
 									<%--<br>--%>
 									<!--a class='skin_yahoo_link' href='<c:url value="/?client=advanced"/>'><fmt:message key="switchToAdvancedClient" /></a-->
-									<!--<a class='skin_yahoo_link' target="_new" href="http://www.zimbra.com/products/desktop.html">Offline version</a>-->
+									<!--<a class='skin_yahoo_link' target="_new" href="http://www.zmail.com/products/desktop.html">Offline version</a>-->
 								</td>
 								<td valign="top" class="TopContent" align="center">
 									<app:appTop mailbox="${mailbox}" keys="${keys}" query="${empty context.query ? param.sq : context.query}" calendars="${calendars}" voice="${voice}" tasks="${tasks}" briefcases="${briefcases}"/>
@@ -467,7 +467,7 @@ if (screen.width<=800) {
 									<table width="100%" id="skin_spacing_app_row"><tr>
 										<td valign="bottom" nowrap="nowrap"><app:appTabs context="${context}" mailbox="${mailbox}" keys="${keys}" selected='${selected}' nofiller="${true}"/></td>
 										<td class="GlobalActions">
-										<c:if test="${mailbox.attrs.zimbraIsDomainAdminAccount[0] eq 'TRUE' and not empty adminReference }">
+										<c:if test="${mailbox.attrs.zmailIsDomainAdminAccount[0] eq 'TRUE' and not empty adminReference }">
 											<a class='skin_link' target="_new" href="${adminReference}"><fmt:message key="adminLinkLabel"/></a>&nbsp;<font color="gray">|</font>&nbsp;
 										</c:if>
 											<!--<a class='skin_yahoo_link' target="_new" href="<fmt:message key='yahooYahooMailURL'/>"><fmt:message key='yahooYahooMail'/></a>&nbsp;<font color="gray">|</font>&nbsp;-->

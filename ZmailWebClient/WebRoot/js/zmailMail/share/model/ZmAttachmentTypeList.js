@@ -71,7 +71,7 @@ function(callback) {
 
 	this._attachments = [];
 
-	var jsonObj = {BrowseRequest:{_jsns:"urn:zimbraMail"}};
+	var jsonObj = {BrowseRequest:{_jsns:"urn:zmailMail"}};
 	var request = jsonObj.BrowseRequest;
 	request.browseBy = "attachments";
 

@@ -93,7 +93,7 @@ ZmTrustedPage.prototype.isDirty =
 function() {
 	var isDirty = ZmPreferencesPage.prototype.isDirty.call(this) || this.isTrustedListDirty();
 	if (isDirty) {
-		AjxDebug.println(AjxDebug.PREFS, "Dirty preferences:\n" + "zimbraPrefMailTrustedSenderList");
+		AjxDebug.println(AjxDebug.PREFS, "Dirty preferences:\n" + "zmailPrefMailTrustedSenderList");
 	}
 	return isDirty;
 };
@@ -111,12 +111,12 @@ function(batchCmd) {
     if(this._trustedListControl && this._trustedListControl.isDirty()) {
         var i,
             value = this._trustedListControl.getValue(),
-            soapDoc = AjxSoapDoc.create("ModifyPrefsRequest", "urn:zimbraAccount"),
+            soapDoc = AjxSoapDoc.create("ModifyPrefsRequest", "urn:zmailAccount"),
             node,
             respCallback = new AjxCallback(this, this._postSaveBatchCmd, value.join(','));
         for(i=0; i<value.length;i++) {
             node = soapDoc.set("pref", AjxStringUtil.trim(value[i]));
-            node.setAttribute("name", "zimbraPrefMailTrustedSenderList");
+            node.setAttribute("name", "zmailPrefMailTrustedSenderList");
         }
         batchCmd.addNewRequestParams(soapDoc, respCallback);
     }

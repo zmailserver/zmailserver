@@ -13,14 +13,14 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.webClient.servlet;
+package org.zmail.webClient.servlet;
 
 import com.yahoo.platform.yui.compressor.CssCompressor;
 import com.yahoo.platform.yui.compressor.JavaScriptCompressor;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.servlet.DiskCacheServlet;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.servlet.DiskCacheServlet;
 import org.mozilla.javascript.ErrorReporter;
 import org.mozilla.javascript.EvaluatorException;
 import org.w3c.dom.Document;
@@ -40,14 +40,14 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.DomainBy;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.util.HttpUtil;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.soap.SoapProvisioning;
-import com.zimbra.cs.util.Zimbra;
-import com.zimbra.kabuki.util.Colors;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.DomainBy;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.util.HttpUtil;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.soap.SoapProvisioning;
+import org.zmail.cs.util.Zmail;
+import org.zmail.kabuki.util.Colors;
 
 import java.awt.Color;
 
@@ -66,8 +66,8 @@ public class SkinResources
 	public static final String A_IMAGE_CACHE = SkinResources.class.getName()+":images";
 
 	private static final String P_SKIN = "skin";
-	private static final String P_DEFAULT_SKIN = "zimbraDefaultSkin";
-	private static final String P_DEFAULT_ADMIN_SKIN = "zimbraDefaultAdminSkin";
+	private static final String P_DEFAULT_SKIN = "zmailDefaultSkin";
+	private static final String P_DEFAULT_ADMIN_SKIN = "zmailDefaultAdminSkin";
 	private static final String P_USER_AGENT = "agent";
 	private static final String P_DEBUG = "debug";
 	private static final String P_CLIENT = "client";
@@ -90,21 +90,21 @@ public class SkinResources
 
 	private static final String A_TEMPLATES_INCLUDED = "skin.templates.included";
 
-	private static final String A_SKIN_FOREGROUND_COLOR = "zimbraSkinForegroundColor";
-	private static final String A_SKIN_BACKGROUND_COLOR = "zimbraSkinBackgroundColor";
-	private static final String A_SKIN_SECONDARY_COLOR = "zimbraSkinSecondaryColor";
-	private static final String A_SKIN_SELECTION_COLOR = "zimbraSkinSelectionColor";
+	private static final String A_SKIN_FOREGROUND_COLOR = "zmailSkinForegroundColor";
+	private static final String A_SKIN_BACKGROUND_COLOR = "zmailSkinBackgroundColor";
+	private static final String A_SKIN_SECONDARY_COLOR = "zmailSkinSecondaryColor";
+	private static final String A_SKIN_SELECTION_COLOR = "zmailSkinSelectionColor";
 
-	private static final String A_SKIN_LOGO_LOGIN_BANNER = "zimbraSkinLogoLoginBanner";
-	private static final String A_SKIN_LOGO_APP_BANNER = "zimbraSkinLogoAppBanner";
-	private static final String A_SKIN_LOGO_URL = "zimbraSkinLogoURL";
+	private static final String A_SKIN_LOGO_LOGIN_BANNER = "zmailSkinLogoLoginBanner";
+	private static final String A_SKIN_LOGO_APP_BANNER = "zmailSkinLogoAppBanner";
+	private static final String A_SKIN_LOGO_URL = "zmailSkinLogoURL";
 
-	private static final String A_SKIN_FAVICON = "zimbraSkinFavicon";
+	private static final String A_SKIN_FAVICON = "zmailSkinFavicon";
 
-	private static final String A_HELP_ADMIN_URL = "zimbraHelpAdminURL";
-	private static final String A_HELP_ADVANCED_URL = "zimbraHelpAdvancedURL";
-	private static final String A_HELP_DELEGATED_URL = "zimbraHelpDelegatedURL";
-	private static final String A_HELP_STANDARD_URL = "zimbraHelpStandardURL";
+	private static final String A_HELP_ADMIN_URL = "zmailHelpAdminURL";
+	private static final String A_HELP_ADVANCED_URL = "zmailHelpAdvancedURL";
+	private static final String A_HELP_DELEGATED_URL = "zmailHelpDelegatedURL";
+	private static final String A_HELP_STANDARD_URL = "zmailHelpStandardURL";
 
 	private static final String A_VERSION = "version";
 
@@ -236,7 +236,7 @@ public class SkinResources
 
 		String compressStr = req.getParameter(P_COMPRESS);
 		boolean compress =
-			LC.zimbra_web_generate_gzip.booleanValue() &&
+			LC.zmail_web_generate_gzip.booleanValue() &&
 			(compressStr != null && (compressStr.equals("true") || compressStr.equals("1")))
 		;
 		compress = compress && macros.get("MSIE_6") == null;
@@ -245,25 +245,25 @@ public class SkinResources
 			cacheId += EXT_COMPRESSED;
 		}
 
-		if (ZimbraLog.webclient.isDebugEnabled()) {
-			ZimbraLog.webclient.debug("DEBUG: === debug is " + debug+" ("+debugStr+") ===");
-			ZimbraLog.webclient.debug("DEBUG: querystring=" + req.getQueryString());
-			ZimbraLog.webclient.debug("DEBUG: uri=" + uri);
-			ZimbraLog.webclient.debug("DEBUG: type=" + type);
-			ZimbraLog.webclient.debug("DEBUG: contentType=" + contentType);
-			ZimbraLog.webclient.debug("DEBUG: client=" + client);
-			ZimbraLog.webclient.debug("DEBUG: skin=" + skin);
-			ZimbraLog.webclient.debug("DEBUG: templates="+templates);
-			ZimbraLog.webclient.debug("DEBUG: browserType=" + browserType);
-			ZimbraLog.webclient.debug("DEBUG: locale=" + locale);
-			ZimbraLog.webclient.debug("DEBUG: cacheId=" + cacheId);
+		if (ZmailLog.webclient.isDebugEnabled()) {
+			ZmailLog.webclient.debug("DEBUG: === debug is " + debug+" ("+debugStr+") ===");
+			ZmailLog.webclient.debug("DEBUG: querystring=" + req.getQueryString());
+			ZmailLog.webclient.debug("DEBUG: uri=" + uri);
+			ZmailLog.webclient.debug("DEBUG: type=" + type);
+			ZmailLog.webclient.debug("DEBUG: contentType=" + contentType);
+			ZmailLog.webclient.debug("DEBUG: client=" + client);
+			ZmailLog.webclient.debug("DEBUG: skin=" + skin);
+			ZmailLog.webclient.debug("DEBUG: templates="+templates);
+			ZmailLog.webclient.debug("DEBUG: browserType=" + browserType);
+			ZmailLog.webclient.debug("DEBUG: locale=" + locale);
+			ZmailLog.webclient.debug("DEBUG: cacheId=" + cacheId);
 		}
 
 		// generate buffer
 		String buffer = null;
 		File file = !debug ? getCacheFile(cacheId) : null;
 		if (file == null || !file.exists()) {
-			if (ZimbraLog.webclient.isDebugEnabled()) ZimbraLog.webclient.debug("DEBUG: generating buffer");
+			if (ZmailLog.webclient.isDebugEnabled()) ZmailLog.webclient.debug("DEBUG: generating buffer");
 			buffer = generate(req, resp, cacheId, macros, type, client, locale, templates, cacheBusterVersion);
 			if (!debug) {
 				if (type.equals(T_CSS)) {
@@ -278,18 +278,18 @@ public class SkinResources
 						public void warning(String message, String sourceName,
 											int line, String lineSource, int lineOffset) {
 							if (line < 0) {
-								ZimbraLog.webclient.warn("\n" + message);
+								ZmailLog.webclient.warn("\n" + message);
 							} else {
-								ZimbraLog.webclient.warn("\n" + line + ':' + lineOffset + ':' + message);
+								ZmailLog.webclient.warn("\n" + line + ':' + lineOffset + ':' + message);
 							}
 						}
 
 						public void error(String message, String sourceName,
 										  int line, String lineSource, int lineOffset) {
 							if (line < 0) {
-								ZimbraLog.webclient.error("\n" + message);
+								ZmailLog.webclient.error("\n" + message);
 							} else {
-								ZimbraLog.webclient.error("\n" + line + ':' + lineOffset + ':' + message);
+								ZmailLog.webclient.error("\n" + line + ':' + lineOffset + ':' + message);
 							}
 						}
 
@@ -302,7 +302,7 @@ public class SkinResources
 					compressor.compress(out, 0, true, false, false, false);
 					buffer = out.toString();
 				}
-				ZimbraLog.webclient.debug("DEBUG: buffer.length: "+buffer.length());
+				ZmailLog.webclient.debug("DEBUG: buffer.length: "+buffer.length());
 
 				// write buffer to cache file
 				if (!debug) {
@@ -313,7 +313,7 @@ public class SkinResources
 
 					// store uncompressed file in cache
 					file = createCacheFile(uncompressedCacheId, type);
-					if (ZimbraLog.webclient.isDebugEnabled()) ZimbraLog.webclient.debug("DEBUG: buffer file: "+file);
+					if (ZmailLog.webclient.isDebugEnabled()) ZmailLog.webclient.debug("DEBUG: buffer file: "+file);
 					copy(buffer, file);
 					putCacheFile(uncompressedCacheId, file);
 
@@ -321,14 +321,14 @@ public class SkinResources
 					if (compress) {
 						String compressedCacheId = cacheId;
 						File gzfile = createCacheFile(compressedCacheId, type+EXT_COMPRESSED);
-						if (ZimbraLog.webclient.isDebugEnabled()) ZimbraLog.webclient.debug("DEBUG: buffer file: " + gzfile);
+						if (ZmailLog.webclient.isDebugEnabled()) ZmailLog.webclient.debug("DEBUG: buffer file: " + gzfile);
 						file = compress(file, gzfile);
 						putCacheFile(compressedCacheId, file);
 					}
 				}
 			}
 		} else {
-			if (ZimbraLog.webclient.isDebugEnabled()) ZimbraLog.webclient.debug("DEBUG: using previous buffer");
+			if (ZmailLog.webclient.isDebugEnabled()) ZmailLog.webclient.debug("DEBUG: using previous buffer");
 		}
 
 		// set headers
@@ -466,8 +466,8 @@ public class SkinResources
 
 		String appContextPath = req.getContextPath();
 		if (appContextPath == null) {
-			ZimbraLog.webclient.debug("!!!Did not find context path in request object!");
-			appContextPath = "/zimbra";
+			ZmailLog.webclient.debug("!!!Did not find context path in request object!");
+			appContextPath = "/zmail";
 		}
 		// domain overrides
 		
@@ -481,10 +481,10 @@ public class SkinResources
 		try {
 			SoapProvisioning provisioning = new SoapProvisioning();
 			String soapUri =
-				LC.zimbra_admin_service_scheme.value() +
-				LC.zimbra_zmprov_default_soap_server.value() +
+				LC.zmail_admin_service_scheme.value() +
+				LC.zmail_zmprov_default_soap_server.value() +
 				':' +
-				LC.zimbra_admin_service_port.intValue() +
+				LC.zmail_admin_service_port.intValue() +
 				AdminConstants.ADMIN_SERVICE_URI
 			;
 			provisioning.soapSetURI(soapUri);
@@ -513,8 +513,8 @@ public class SkinResources
 			}
 		}
 		catch (Exception e) {
-			if (ZimbraLog.webclient.isDebugEnabled()) {
-				ZimbraLog.webclient.debug("!!! Unable to get domain config");
+			if (ZmailLog.webclient.isDebugEnabled()) {
+				ZmailLog.webclient.debug("!!! Unable to get domain config");
 			}
 		}
 
@@ -525,7 +525,7 @@ public class SkinResources
 		StringTokenizer tokenizer = new StringTokenizer(filenames, ",");
 		while (tokenizer.hasMoreTokens()) {
 			String filename = tokenizer.nextToken();
-			if (ZimbraLog.webclient.isDebugEnabled()) ZimbraLog.webclient.debug("DEBUG: filename " + filename);
+			if (ZmailLog.webclient.isDebugEnabled()) ZmailLog.webclient.debug("DEBUG: filename " + filename);
 			String filenameExt = filename + ext;
 
 			List<File> files = new LinkedList<File>();
@@ -586,13 +586,13 @@ public class SkinResources
 			} else {
 				File dir = fileDir;
 				File file = new File(dir, filenameExt);
-				if (ZimbraLog.webclient.isDebugEnabled())
-					ZimbraLog.webclient.debug("DEBUG: file " + file.getAbsolutePath());
+				if (ZmailLog.webclient.isDebugEnabled())
+					ZmailLog.webclient.debug("DEBUG: file " + file.getAbsolutePath());
 				if (!file.exists() && type.equals(T_CSS) && filename.equals(N_IMAGES)) {
 					file = new File(rootDir, IMAGE_CSS);
 					dir = file.getParentFile();
-					if (ZimbraLog.webclient.isDebugEnabled())
-						ZimbraLog.webclient.debug("DEBUG: !file.exists() " + file.getAbsolutePath());
+					if (ZmailLog.webclient.isDebugEnabled())
+						ZmailLog.webclient.debug("DEBUG: !file.exists() " + file.getAbsolutePath());
 				}
 				files.add(file);
 				if (type.equals(T_CSS) || type.equals(T_JAVASCRIPT)) {
@@ -608,8 +608,8 @@ public class SkinResources
 					out.println();
 					continue;
 				}
-				if (ZimbraLog.webclient.isDebugEnabled())
-					ZimbraLog.webclient.debug("DEBUG: preprocess " + file.getAbsolutePath());
+				if (ZmailLog.webclient.isDebugEnabled())
+					ZmailLog.webclient.debug("DEBUG: preprocess " + file.getAbsolutePath());
 				preprocess(file, cout, macros, manifest,
 						commentStart, commentContinue, commentEnd, requestedLocale);
 			}
@@ -626,8 +626,8 @@ public class SkinResources
 		Locale[] locales = defaultLocale.equals(requestedLocale)
 						 ? new Locale[]{ requestedLocale }
 						 : new Locale[]{ defaultLocale, requestedLocale };
-		if (ZimbraLog.webclient.isDebugEnabled()) {
-			ZimbraLog.webclient.debug("addLocaleFiles: files="+files+", reqLoc="+requestedLocale+", dir="+dir+", fname="+filename+", ext="+ext);
+		if (ZmailLog.webclient.isDebugEnabled()) {
+			ZmailLog.webclient.debug("addLocaleFiles: files="+files+", reqLoc="+requestedLocale+", dir="+dir+", fname="+filename+", ext="+ext);
 		}
 		for (Locale locale : locales) {
 			// NOTE: Overrides are loaded in backwards order from
@@ -638,8 +638,8 @@ public class SkinResources
 			String language = locale.getLanguage();
 			File langFile = new File(dir, filename+"_"+language+ext);
 			if (langFile.exists()) {
-				if (ZimbraLog.webclient.isDebugEnabled()) {
-					ZimbraLog.webclient.debug("  adding file: "+langFile.getAbsolutePath());
+				if (ZmailLog.webclient.isDebugEnabled()) {
+					ZmailLog.webclient.debug("  adding file: "+langFile.getAbsolutePath());
 				}
 				files.add(langFile);
 			}
@@ -647,8 +647,8 @@ public class SkinResources
 			if (country != null && country.length() > 0) {
 				File langCountryFile = new File(dir, filename+"_"+language+"_"+country+ext);
 				if (langCountryFile.exists()) {
-					if (ZimbraLog.webclient.isDebugEnabled()) {
-						ZimbraLog.webclient.debug("  adding file: "+langCountryFile.getAbsolutePath());
+					if (ZmailLog.webclient.isDebugEnabled()) {
+						ZmailLog.webclient.debug("  adding file: "+langCountryFile.getAbsolutePath());
 					}
 					files.add(langCountryFile);
 				}
@@ -656,8 +656,8 @@ public class SkinResources
 				if (variant != null && variant.length() > 0) {
 					File langCountryVariantFile = new File(dir, filename+"_"+language+"_"+country+"_"+variant+ext);
 					if (langCountryVariantFile.exists()) {
-						if (ZimbraLog.webclient.isDebugEnabled()) {
-							ZimbraLog.webclient.debug("  adding file: "+langCountryVariantFile.getAbsolutePath());
+						if (ZmailLog.webclient.isDebugEnabled()) {
+							ZmailLog.webclient.debug("  adding file: "+langCountryVariantFile.getAbsolutePath());
 						}
 						files.add(langCountryVariantFile);
 					}
@@ -826,22 +826,22 @@ public class SkinResources
 	}
 
 	private String getSkin(HttpServletRequest req) {
-		String zimbraAdminURL = null;
+		String zmailAdminURL = null;
 		
 		try {
 			Context initCtx = new InitialContext();
 			Context envCtx = (Context) initCtx.lookup("java:comp/env");
-			zimbraAdminURL = (String) envCtx.lookup("adminUrl");
+			zmailAdminURL = (String) envCtx.lookup("adminUrl");
 		} catch (NamingException ne) {
 		}
-		if (zimbraAdminURL == null) {
-			zimbraAdminURL = "/zimbraAdmin";
+		if (zmailAdminURL == null) {
+			zmailAdminURL = "/zmailAdmin";
 		}
 		
 		String defaultSkinPara = null;
 		String defaultCookiePara = null;
 		String contentPath = req.getContextPath();
-		if (contentPath != null && contentPath.equalsIgnoreCase(zimbraAdminURL)) {
+		if (contentPath != null && contentPath.equalsIgnoreCase(zmailAdminURL)) {
 		defaultSkinPara = P_DEFAULT_ADMIN_SKIN;
 				defaultCookiePara = C_ADMIN_SKIN;
 		} else {
@@ -865,8 +865,8 @@ public class SkinResources
             }
         }
         catch(NullPointerException e) {
-            if (ZimbraLog.webclient.isDebugEnabled()) { 
-                ZimbraLog.webclient.debug("DEBUG: cannot get skin file " + skin);
+            if (ZmailLog.webclient.isDebugEnabled()) { 
+                ZmailLog.webclient.debug("DEBUG: cannot get skin file " + skin);
             }
             skin = getServletContext().getInitParameter(defaultSkinPara);
         }
@@ -1254,7 +1254,7 @@ public class SkinResources
 
 			// process substitutions
 			for (File file : substList) {
-				if (ZimbraLog.webclient.isDebugEnabled()) ZimbraLog.webclient.debug("DEBUG: subst file = " + file);
+				if (ZmailLog.webclient.isDebugEnabled()) ZmailLog.webclient.debug("DEBUG: subst file = " + file);
 				try {
 					CharArrayWriter out = new CharArrayWriter(4096); // 4K
 					SkinResources.preprocess(file, out, macros, null, "#", "#", "#", locale);
@@ -1292,34 +1292,34 @@ public class SkinResources
 						}
 					}
 				} catch (OutOfMemoryError e) {
-				Zimbra.halt("out of memory", e);
+				Zmail.halt("out of memory", e);
 				} catch (Throwable t) {
-					ZimbraLog.webclient.debug("ERROR loading subst file: " + file);
+					ZmailLog.webclient.debug("ERROR loading subst file: " + file);
 				}
 
-				if (ZimbraLog.webclient.isDebugEnabled())
-					ZimbraLog.webclient.debug("DEBUG: _SkinName_ = " + substitutions.getProperty("_SkinName_"));
+				if (ZmailLog.webclient.isDebugEnabled())
+					ZmailLog.webclient.debug("DEBUG: _SkinName_ = " + substitutions.getProperty("_SkinName_"));
 			}
 
 			Stack<String> stack = new Stack<String>();
 			Enumeration substKeys = substitutions.propertyNames();
-			if (ZimbraLog.webclient.isDebugEnabled())
-				ZimbraLog.webclient.debug("DEBUG: InsetBg (before) = " + substitutions.getProperty("InsetBg"));
+			if (ZmailLog.webclient.isDebugEnabled())
+				ZmailLog.webclient.debug("DEBUG: InsetBg (before) = " + substitutions.getProperty("InsetBg"));
 			while (substKeys.hasMoreElements()) {
 				stack.removeAllElements();
 
 				String substKey = (String) substKeys.nextElement();
 				if (substKey.equals("InsetBg")) {
-					if (ZimbraLog.webclient.isDebugEnabled())
-						ZimbraLog.webclient.debug("DEBUG: InsetBg (loop) = " + substitutions.getProperty("InsetBg"));
+					if (ZmailLog.webclient.isDebugEnabled())
+						ZmailLog.webclient.debug("DEBUG: InsetBg (loop) = " + substitutions.getProperty("InsetBg"));
 				}
 				getProperty(stack, substKey);
 			}
-			if (ZimbraLog.webclient.isDebugEnabled())
-				ZimbraLog.webclient.debug("DEBUG: InsetBg (after) = " + substitutions.getProperty("InsetBg"));
+			if (ZmailLog.webclient.isDebugEnabled())
+				ZmailLog.webclient.debug("DEBUG: InsetBg (after) = " + substitutions.getProperty("InsetBg"));
 
-			if (ZimbraLog.webclient.isDebugEnabled())
-				ZimbraLog.webclient.debug("DEBUG: _SkinName_ = " + substitutions.getProperty("_SkinName_"));
+			if (ZmailLog.webclient.isDebugEnabled())
+				ZmailLog.webclient.debug("DEBUG: _SkinName_ = " + substitutions.getProperty("_SkinName_"));
 		} // <init>(File,Map<String,String>,String,String)
 
 		//

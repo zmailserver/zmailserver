@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.util;
+package org.zmail.qa.selenium.framework.util;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -25,23 +25,23 @@ import java.util.Map.Entry;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import com.zimbra.qa.selenium.framework.core.ClientSessionFactory;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties.AppType;
-import com.zimbra.qa.selenium.framework.util.performance.PerfMetrics;
+import org.zmail.qa.selenium.framework.core.ClientSessionFactory;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties.AppType;
+import org.zmail.qa.selenium.framework.util.performance.PerfMetrics;
 
-public class ZimbraURI {
-	private static final Logger logger = LogManager.getLogger(ZimbraURI.class);
+public class ZmailURI {
+	private static final Logger logger = LogManager.getLogger(ZmailURI.class);
 	
 	private URI myURI = null;
 	
-	public ZimbraURI() {
+	public ZmailURI() {
 	}
 	
-	public ZimbraURI(String uri) {
+	public ZmailURI(String uri) {
 		setURI(uri);
 	}
 
-	public ZimbraURI(URI uri) {
+	public ZmailURI(URI uri) {
 		setURI(uri);
 	}
 	
@@ -52,8 +52,8 @@ public class ZimbraURI {
 	 */
 	public static boolean needsReload() {
 		
-		ZimbraURI base = new ZimbraURI(ZimbraURI.getBaseURI());
-		ZimbraURI current = new ZimbraURI(ZimbraURI.getCurrentURI());
+		ZmailURI base = new ZmailURI(ZmailURI.getBaseURI());
+		ZmailURI current = new ZmailURI(ZmailURI.getCurrentURI());
 		
 		
 		logger.debug("base: "+ base.getURL().toString());
@@ -77,8 +77,8 @@ public class ZimbraURI {
 		}
 
 		// Check the query parameters
-		Map<String,String> baseMap = ZimbraURI.getQueryFromString(base.getURL().getQuery());
-		Map<String,String> currMap = ZimbraURI.getQueryFromString(current.getURL().getQuery());
+		Map<String,String> baseMap = ZmailURI.getQueryFromString(base.getURL().getQuery());
+		Map<String,String> currMap = ZmailURI.getQueryFromString(current.getURL().getQuery());
 		if ( baseMap.entrySet().size() != currMap.entrySet().size() ) {
 			logger.info("Query: inequal query count");
 			return (true);
@@ -103,7 +103,7 @@ public class ZimbraURI {
 	}
 	
 	/**
-	 * Set the URL value for this ZimbraURL (for instance, to edit later)
+	 * Set the URL value for this ZmailURL (for instance, to edit later)
 	 * @param url
 	 * @throws URLSyntaxException
 	 */
@@ -112,7 +112,7 @@ public class ZimbraURI {
 	}
 	
 	/**
-	 * Set the URL value for this ZimbraURL (for instance, to edit later)
+	 * Set the URL value for this ZmailURL (for instance, to edit later)
 	 * @param URL
 	 * @throws URLSyntaxException
 	 */
@@ -121,12 +121,12 @@ public class ZimbraURI {
 			myURI = new URI(uri);
 		} catch (URISyntaxException e) {
 			logger.error("Unable to parse uri: " + uri, e);
-			myURI = ZimbraURI.defaultURI();
+			myURI = ZmailURI.defaultURI();
 		}
 	}
 	
 	/**
-	 * Set the URL value for this ZimbraURL (for instance, to edit later)
+	 * Set the URL value for this ZmailURL (for instance, to edit later)
 	 * @param URL
 	 * @throws URLSyntaxException
 	 */
@@ -135,7 +135,7 @@ public class ZimbraURI {
 			setURI(new URI(scheme, userInfo, host, port, path, query, fragment));
 		} catch (URISyntaxException e) {
 			logger.error("Unable to parse uri", e);
-			myURI = ZimbraURI.defaultURI();
+			myURI = ZmailURI.defaultURI();
 		}
 	}
 	
@@ -161,7 +161,7 @@ public class ZimbraURI {
 	public URI addQuery(String key, String value) {
 		
 		// Get the current query
-		Map<String, String> query = ZimbraURI.getQueryFromString(myURI.getQuery());
+		Map<String, String> query = ZmailURI.getQueryFromString(myURI.getQuery());
 		
 		// Add the new value
 		query.put(key, value);
@@ -173,7 +173,7 @@ public class ZimbraURI {
 				myURI.getHost(),
 				myURI.getPort(),
 				myURI.getPath(),
-				ZimbraURI.buildQueryFromMap(query),
+				ZmailURI.buildQueryFromMap(query),
 				myURI.getFragment());
 
 		return (myURI);
@@ -183,7 +183,7 @@ public class ZimbraURI {
 	public URI addQuery(Map<String, String> map) {
 		
 		// Get the current query
-		Map<String, String> query = ZimbraURI.getQueryFromString(myURI.getQuery());
+		Map<String, String> query = ZmailURI.getQueryFromString(myURI.getQuery());
 		
 		// Add the new value
 		query.putAll(map);
@@ -195,7 +195,7 @@ public class ZimbraURI {
 				myURI.getHost(),
 				myURI.getPort(),
 				myURI.getPath(),
-				ZimbraURI.buildQueryFromMap(query),
+				ZmailURI.buildQueryFromMap(query),
 				myURI.getFragment());
 
 		return (myURI);
@@ -209,7 +209,7 @@ public class ZimbraURI {
 	 */
 	public static URI getCurrentURI() {
 		String uri;
-		if (ZimbraSeleniumProperties.isWebDriver()){
+		if (ZmailSeleniumProperties.isWebDriver()){
 		    uri = ClientSessionFactory.session().webDriver().getCurrentUrl();
 		}else{
 		    uri = ClientSessionFactory.session().selenium().getLocation();
@@ -218,7 +218,7 @@ public class ZimbraURI {
 			return (new URI(uri));
 		} catch (URISyntaxException e) {
 			logger.error("Unable to parse current URL: "+ uri, e);
-			return (ZimbraURI.defaultURI());
+			return (ZmailURI.defaultURI());
 		}
 	}
 
@@ -231,10 +231,10 @@ public class ZimbraURI {
 	 */
 	public static URI getBaseURI() {
 		
-		String scheme = ZimbraSeleniumProperties.getStringProperty("server.scheme", "http");
+		String scheme = ZmailSeleniumProperties.getStringProperty("server.scheme", "http");
 		String userinfo = null;
-		String host = ZimbraSeleniumProperties.getStringProperty("server.host", "localhost");
-		String port = ZimbraSeleniumProperties.getStringProperty("server.port", "7070");
+		String host = ZmailSeleniumProperties.getStringProperty("server.host", "localhost");
+		String port = ZmailSeleniumProperties.getStringProperty("server.port", "7070");
 		
 		String path = null;
 		Map<String, String> queryMap = new HashMap<String, String>();
@@ -248,53 +248,53 @@ public class ZimbraURI {
 			queryMap.putAll(PerfMetrics.getInstance().getQueryMap());
 		}
 		
-		if ( ZimbraSeleniumProperties.getAppType() == AppType.DESKTOP ) {
-		   logger.info("AppType is: " + ZimbraSeleniumProperties.getAppType());
+		if ( ZmailSeleniumProperties.getAppType() == AppType.DESKTOP ) {
+		   logger.info("AppType is: " + ZmailSeleniumProperties.getAppType());
 
-		      ZimbraDesktopProperties zdp = ZimbraDesktopProperties.getInstance();
+		      ZmailDesktopProperties zdp = ZmailDesktopProperties.getInstance();
 		      int maxRetry = 30;
 		      int retry = 0;
 		      while (retry < maxRetry && zdp.getSerialNumber() == null) {
 		         logger.debug("Local Config file is still not ready");
 		         SleepUtil.sleep(1000);
 		         retry ++;
-		         zdp = ZimbraDesktopProperties.getInstance();
+		         zdp = ZmailDesktopProperties.getInstance();
 		      }
 
 		      port = zdp.getConnectionPort();
-		      host = ZimbraSeleniumProperties.getStringProperty("desktop.server.host", "localhost");
+		      host = ZmailSeleniumProperties.getStringProperty("desktop.server.host", "localhost");
 		      path = "/desktop/login.jsp";
 		      queryMap.put("at", zdp.getSerialNumber());
 
 		}
 
-		if ( ZimbraSeleniumProperties.getAppType() == AppType.AJAX ) {
+		if ( ZmailSeleniumProperties.getAppType() == AppType.AJAX ) {
 			
 			// FALL THROUGH
 
 		}
 
-		if ( ZimbraSeleniumProperties.getAppType() == AppType.HTML ) {
+		if ( ZmailSeleniumProperties.getAppType() == AppType.HTML ) {
 			
 			path ="/h/";
 
 		}
 
-		if ( ZimbraSeleniumProperties.getAppType() == AppType.MOBILE ) {
+		if ( ZmailSeleniumProperties.getAppType() == AppType.MOBILE ) {
 
 			path ="/m/";
 			
 		}
 
-		if ( ZimbraSeleniumProperties.getAppType() == AppType.ADMIN ) {
+		if ( ZmailSeleniumProperties.getAppType() == AppType.ADMIN ) {
 		
 			scheme = "https";
-			path = "/zimbraAdmin/";
+			path = "/zmailAdmin/";
 			port = "7071";
 
 		}
 
-		if ( ZimbraSeleniumProperties.getAppType() == AppType.OCTOPUS ) {
+		if ( ZmailSeleniumProperties.getAppType() == AppType.OCTOPUS ) {
 			
 			// FALL THROUGH
 
@@ -308,7 +308,7 @@ public class ZimbraURI {
 			return (uri);
 		} catch (URISyntaxException e) {
 			logger.error("unalbe to parse uri", e);
-			return (ZimbraURI.defaultURI());
+			return (ZmailURI.defaultURI());
 		}
 
 	}
@@ -371,9 +371,9 @@ public class ZimbraURI {
 	
 	private static URI defaultURI() {
 		
-		String scheme = ZimbraSeleniumProperties.getStringProperty("server.scheme", "http");
-		String host = ZimbraSeleniumProperties.getStringProperty("server.host", "localhost");
-		String port = ZimbraSeleniumProperties.getStringProperty("server.port", "7070");
+		String scheme = ZmailSeleniumProperties.getStringProperty("server.scheme", "http");
+		String host = ZmailSeleniumProperties.getStringProperty("server.host", "localhost");
+		String port = ZmailSeleniumProperties.getStringProperty("server.port", "7070");
 
 		try {
 			return (new URI(scheme, null, host, Integer.parseInt(port), null, null, null));

@@ -17,21 +17,21 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.desktop.ui.briefcase;
+package org.zmail.qa.selenium.projects.desktop.ui.briefcase;
 
 import java.util.*;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties.AppType;
-import com.zimbra.qa.selenium.projects.desktop.ui.DialogWarning;
-import com.zimbra.qa.selenium.projects.desktop.ui.AppAjaxClient;
-import com.zimbra.qa.selenium.projects.desktop.ui.briefcase.DialogCreateBriefcaseFolder;
-import com.zimbra.qa.selenium.projects.desktop.ui.*;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties.AppType;
+import org.zmail.qa.selenium.projects.desktop.ui.DialogWarning;
+import org.zmail.qa.selenium.projects.desktop.ui.AppAjaxClient;
+import org.zmail.qa.selenium.projects.desktop.ui.briefcase.DialogCreateBriefcaseFolder;
+import org.zmail.qa.selenium.projects.desktop.ui.*;
 
 /**
- * @author zimbra
+ * @author zmail
  * 
  */
 
@@ -89,7 +89,7 @@ public class TreeBriefcase extends AbsTree {
 		   FolderItem folder = (FolderItem) item;
 
 		   String emailAddress = folder.isDesktopClientLocalFolder() ? 
-		         ZimbraAccount.clientAccountName :
+		         ZmailAccount.clientAccountName :
 		            MyApplication.zGetActiveAccount().EmailAddress;
 
 		   if (folder.getName().equals("USER_ROOT")) {
@@ -182,7 +182,7 @@ public class TreeBriefcase extends AbsTree {
 		tracer.trace("Click " + action + " on folder " + item.getName());
 
 		String treeItemLocator = null;
-		if (ZimbraSeleniumProperties.getAppType() == AppType.DESKTOP) {
+		if (ZmailSeleniumProperties.getAppType() == AppType.DESKTOP) {
 			treeItemLocator = Locators.briefcaseTreeView_Desktop
 					+ "[class='DwtTreeItem-Text']";
 		} else {
@@ -226,7 +226,7 @@ public class TreeBriefcase extends AbsTree {
 		   FolderItem folder = (FolderItem) item;
 
 		   String emailAddress = folder.isDesktopClientLocalFolder() ?
-		         ZimbraAccount.clientAccountName :
+		         ZmailAccount.clientAccountName :
 		            MyApplication.zGetActiveAccount().EmailAddress;
 
 		   locator = Locators.briefcaseTreeView_Desktop + "[id*='"
@@ -281,7 +281,7 @@ public class TreeBriefcase extends AbsTree {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.zimbra.qa.selenium.framework.ui.AbsTree#zPressButton(com.zimbra.qa
+	 * org.zmail.qa.selenium.framework.ui.AbsTree#zPressButton(org.zmail.qa
 	 * .selenium.framework.ui.Button)
 	 */
 	@Override

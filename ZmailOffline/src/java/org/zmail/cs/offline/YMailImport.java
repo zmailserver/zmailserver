@@ -12,11 +12,11 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline;
+package org.zmail.cs.offline;
 
-import com.zimbra.cs.account.offline.OfflineDataSource;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.common.service.ServiceException;
+import org.zmail.cs.account.offline.OfflineDataSource;
+import org.zmail.cs.account.DataSource;
+import org.zmail.common.service.ServiceException;
 
 import java.util.List;
 import java.util.ArrayList;

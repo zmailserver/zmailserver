@@ -12,7 +12,7 @@
 # basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
 # ***** END LICENSE BLOCK *****
 # 
-package Zimbra::SOAP::Soap;
+package Zmail::SOAP::Soap;
 
 use strict;
 use warnings;
@@ -20,9 +20,9 @@ use warnings;
 use XML::Parser;
 
 use LWP::UserAgent;
-use Zimbra::SOAP::XmlElement;
-use Zimbra::SOAP::Soap12;
-use Zimbra::SOAP::Soap11;
+use Zmail::SOAP::XmlElement;
+use Zmail::SOAP::Soap12;
+use Zmail::SOAP::Soap11;
 
 #use overload '""' => \&to_string;
 
@@ -43,8 +43,8 @@ BEGIN {
 
 our @EXPORT_OK;
 
-our $Soap12 = new Zimbra::SOAP::Soap12;
-our $Soap11 = new Zimbra::SOAP::Soap11;
+our $Soap12 = new Zmail::SOAP::Soap12;
+our $Soap11 = new Zmail::SOAP::Soap11;
 
 #
 # given a XmlElement, wrap it in a SOAP envelope and return the envelope
@@ -155,10 +155,10 @@ sub toString {
     return "SOAP ".$self->getVersion();
 }
 
-sub zimbraContext {
+sub zmailContext {
         my ($self, $authtoken) = @_;
-        my $context = new Zimbra::SOAP::XmlElement("context", "urn:zimbra");
-        my $auth = new Zimbra::SOAP::XmlElement("authToken");
+        my $context = new Zmail::SOAP::XmlElement("context", "urn:zmail");
+        my $auth = new Zmail::SOAP::XmlElement("authToken");
         $auth->content($authtoken);
         $context->add_child($auth);
         return $context;                
@@ -192,7 +192,7 @@ sub invoke {
 
     my $xml = undef;
     eval {
-        $xml = Zimbra::SOAP::XmlElement::parse($res->content);
+        $xml = Zmail::SOAP::XmlElement::parse($res->content);
     };
     if (!defined($xml)) {
         # Check for network/HTTP error after trying XML parse because

@@ -12,11 +12,11 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.bean;
+package org.zmail.cs.taglib.bean;
 
-import com.zimbra.client.ZPhoneAccount;
-import com.zimbra.client.ZPhone;
-import com.zimbra.common.service.ServiceException;
+import org.zmail.client.ZPhoneAccount;
+import org.zmail.client.ZPhone;
+import org.zmail.common.service.ServiceException;
 
 public class ZPhoneAccountBean {
 

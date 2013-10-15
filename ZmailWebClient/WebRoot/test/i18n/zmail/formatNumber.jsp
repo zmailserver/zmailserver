@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
 -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
 <style type="text/css">
 	TR { vertical-align: top; }
 	TH { text-align: left; }

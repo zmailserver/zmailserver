@@ -41,7 +41,7 @@
 		${step3}<br/>
 		${step4}<br/>
 		${step5}<br/>
-		<B>${step6}<input id='com_zimbra_linkedin_pin_field'  type='text'/></B><br/>
+		<B>${step6}<input id='org_zmail_linkedin_pin_field'  type='text'/></B><br/>
 		${step7}<BR/><BR/>
 		${stepNotes} 
 	</DIV>

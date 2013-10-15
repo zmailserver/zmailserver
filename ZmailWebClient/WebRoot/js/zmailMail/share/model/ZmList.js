@@ -1151,7 +1151,7 @@ function(ctlr) {
  */
 ZmList.prototype._getActionNamespace =
 function() {
-	return "urn:zimbraMail";
+	return "urn:zmailMail";
 };
 
 /**

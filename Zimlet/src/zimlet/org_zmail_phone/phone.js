@@ -13,25 +13,25 @@
  * ***** END LICENSE BLOCK *****
  */
 
-function Com_Zimbra_Phone() {
+function Com_Zmail_Phone() {
 }
 
-Com_Zimbra_Phone.prototype = new ZmZimletBase();
-Com_Zimbra_Phone.prototype.constructor = Com_Zimbra_Phone;
+Com_Zmail_Phone.prototype = new ZmZimletBase();
+Com_Zmail_Phone.prototype.constructor = Com_Zmail_Phone;
 
 // Consts
-Com_Zimbra_Phone.PEOPLE_SEARCH_TOOLBAR_ID	= "phone";
+Com_Zmail_Phone.PEOPLE_SEARCH_TOOLBAR_ID	= "phone";
 
 
 
-Com_Zimbra_Phone.prototype._getHtmlContent =
+Com_Zmail_Phone.prototype._getHtmlContent =
 function(html, idx, phone, context) {
-	var call = Com_Zimbra_Phone.getCallToLink(phone);
+	var call = Com_Zmail_Phone.getCallToLink(phone);
 
 	html[idx++] = [
 			'<a href="',
 			call,
-			'" onclick="window.top.Com_Zimbra_Phone.unsetOnbeforeunload()">',
+			'" onclick="window.top.Com_Zmail_Phone.unsetOnbeforeunload()">',
 			AjxStringUtil.htmlEncode(phone),
 			'</a>'
 	].join("");
@@ -39,13 +39,13 @@ function(html, idx, phone, context) {
 	return idx;
 };
 
-Com_Zimbra_Phone.prototype.toolTipPoppedUp =
+Com_Zmail_Phone.prototype.toolTipPoppedUp =
 function(spanElement, contentObjText, matchContext, canvas) {
 	var subs = {contentObjText: contentObjText, callStr: this.getMessage("call")};
-	canvas.innerHTML = AjxTemplate.expand("com_zimbra_phone.templates.Phone#Tooltip", subs);
+	canvas.innerHTML = AjxTemplate.expand("org_zmail_phone.templates.Phone#Tooltip", subs);
 };
 
-Com_Zimbra_Phone.prototype.menuItemSelected =
+Com_Zmail_Phone.prototype.menuItemSelected =
 function(itemId) {
 	switch (itemId) {
 		case "SEARCH":		this._searchListener(); break;
@@ -54,7 +54,7 @@ function(itemId) {
 	}
 };
 
-Com_Zimbra_Phone.prototype.onPeopleSearchShow =
+Com_Zmail_Phone.prototype.onPeopleSearchShow =
 function(peopleSearch, contact, rowId) {
     peopleSearch._clearText(rowId+"-phone");
 	var phone = contact && contact.getAttr(ZmContact.F_workPhone);
@@ -69,47 +69,47 @@ function(peopleSearch, contact, rowId) {
 
 };
 
-Com_Zimbra_Phone.prototype._peopleSearchItemListener =
+Com_Zmail_Phone.prototype._peopleSearchItemListener =
 function(ev) {
 	var workPhone = ev.target.innerHTML;
-	var phone = Com_Zimbra_Phone.getCallToLink(workPhone);
-	Com_Zimbra_Phone.unsetOnbeforeunload();
+	var phone = Com_Zmail_Phone.getCallToLink(workPhone);
+	Com_Zmail_Phone.unsetOnbeforeunload();
 	window.location = phone;
 };
 
 
-Com_Zimbra_Phone.prototype._searchListener =
+Com_Zmail_Phone.prototype._searchListener =
 function() {
 	appCtxt.getSearchController().search({query: this._actionObject});
 };
 
-Com_Zimbra_Phone.prototype._contactListener =
+Com_Zmail_Phone.prototype._contactListener =
 function() {
 	var contact = new ZmContact(null);
 	contact.initFromPhone(this._actionObject,this.getConfig("defaultContactField"));
 	AjxDispatcher.run("GetContactController").show(contact);
 };
 
-Com_Zimbra_Phone.prototype._callListener =
+Com_Zmail_Phone.prototype._callListener =
 function() {
-	var phone = Com_Zimbra_Phone.getCallToLink(this._actionObject.toString());
-	Com_Zimbra_Phone.unsetOnbeforeunload();
+	var phone = Com_Zmail_Phone.getCallToLink(this._actionObject.toString());
+	Com_Zmail_Phone.unsetOnbeforeunload();
 	window.location = phone;
 };
 
-Com_Zimbra_Phone.resetOnbeforeunload =
+Com_Zmail_Phone.resetOnbeforeunload =
 function() {
-	window.onbeforeunload = ZmZimbraMail._confirmExitMethod;
+	window.onbeforeunload = ZmZmailMail._confirmExitMethod;
 };
 
-Com_Zimbra_Phone.unsetOnbeforeunload =
+Com_Zmail_Phone.unsetOnbeforeunload =
 function() {
 	window.onbeforeunload = null;
-	this._timerObj = new AjxTimedAction(null, Com_Zimbra_Phone.resetOnbeforeunload);
+	this._timerObj = new AjxTimedAction(null, Com_Zmail_Phone.resetOnbeforeunload);
 	AjxTimedAction.scheduleAction(this._timerObj, 3000);
 };
 
-Com_Zimbra_Phone.getCallToLink =
+Com_Zmail_Phone.getCallToLink =
 function(phoneIn) {
 	if (!phoneIn) { return ""; }
 
@@ -122,7 +122,7 @@ function(phoneIn) {
 	return "callto:" + phone;
 };
 
-Com_Zimbra_Phone.prototype.match = function(line, startIndex) {
+Com_Zmail_Phone.prototype.match = function(line, startIndex) {
 	var re = this.RE;
 	re.lastIndex = startIndex;
 	var m = re.exec(line);

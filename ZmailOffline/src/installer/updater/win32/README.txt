@@ -29,7 +29,7 @@ Install these packages on the Windows build machine:
    ac_add_options --disable-accessibility
    ac_add_options --enable-application=browser
 
-4) Replace "$TOPDIR/mozilla/toolkit/mozapps/update/src/updater/updater.cpp" with "ZimbraOffline/src/installer/updater/win32/updater.cpp"
+4) Replace "$TOPDIR/mozilla/toolkit/mozapps/update/src/updater/updater.cpp" with "ZmailOffline/src/installer/updater/win32/updater.cpp"
 
 5) Run the following command from $TOPDIR to kick off a build. updater.exe can be found at $TOPDIR/dist/bin when build finishes.
 

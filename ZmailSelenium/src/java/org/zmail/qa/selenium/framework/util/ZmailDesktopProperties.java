@@ -14,36 +14,36 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.util;
+package org.zmail.qa.selenium.framework.util;
 
 import java.io.IOException;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import com.zimbra.qa.selenium.framework.util.OperatingSystem.OsType;
+import org.zmail.qa.selenium.framework.util.OperatingSystem.OsType;
 
-public class ZimbraDesktopProperties {
+public class ZmailDesktopProperties {
 
    private String _serialNumber = null;
    private String _localConfigFileLocation = null;
    private String _userName = null;
 
-   private static ZimbraDesktopProperties _instance = null;
+   private static ZmailDesktopProperties _instance = null;
 
-   private static final Logger logger = LogManager.getLogger(ZimbraDesktopProperties.class);
+   private static final Logger logger = LogManager.getLogger(ZmailDesktopProperties.class);
 
-   private ZimbraDesktopProperties() {
-      logger.debug("New ZimbraDesktopProperties");
+   private ZmailDesktopProperties() {
+      logger.debug("New ZmailDesktopProperties");
       switch (OperatingSystem.getOSType()) {
       case WINDOWS: case WINDOWS_XP:
          this._userName = System.getProperty("user.name");;
          break;
       case LINUX: case MAC:
-         // For Linux and MAC, enforce it to "zimbra" user because
+         // For Linux and MAC, enforce it to "zmail" user because
          // TMS will shoot the staf command as root and installation & launch
          // must be done using non-root user
-         this._userName = "zimbra";
+         this._userName = "zmail";
          break;
       }
    }
@@ -56,14 +56,14 @@ public class ZimbraDesktopProperties {
       _instance = null;
    }
 
-   public static ZimbraDesktopProperties getInstance() {
+   public static ZmailDesktopProperties getInstance() {
       try {
          if (_instance == null ||
                _instance.getLocalConfigFileLocation() == null ||
                !_instance.getSerialNumber().equals(XmlStringUtil.parseXmlFile(_instance.getLocalConfigFileLocation(),
                "zdesktop_installation_key"))) {
-            synchronized (ZimbraDesktopProperties.class) {
-               _instance = new ZimbraDesktopProperties();
+            synchronized (ZmailDesktopProperties.class) {
+               _instance = new ZmailDesktopProperties();
                _instance.init();
             }
          }
@@ -71,7 +71,7 @@ public class ZimbraDesktopProperties {
 
       } catch (IOException ie) {
          logger.info(
-               "Getting IO Exception while getting instance of ZimbraDesktopProperties...");
+               "Getting IO Exception while getting instance of ZmailDesktopProperties...");
       }
 
       return null;
@@ -87,7 +87,7 @@ public class ZimbraDesktopProperties {
 
          switch(OperatingSystem.getOSType()) {
          case WINDOWS: case WINDOWS_XP:
-            output = _instance._localConfigFileLocation.split("Zimbra Desktop")[0]; 
+            output = _instance._localConfigFileLocation.split("Zmail Desktop")[0]; 
             break;
          case LINUX: case MAC:
             output = _instance._localConfigFileLocation.split("conf")[0];
@@ -100,11 +100,11 @@ public class ZimbraDesktopProperties {
    }
 
    private final static String [] _possibleFiles = {
-      "/opt/zimbra/zdesktop/conf/localconfig.xml",
+      "/opt/zmail/zdesktop/conf/localconfig.xml",
       "/home/<USER_NAME>/zdesktop/conf/localconfig.xml",
-      "C:\\Documents and Settings\\<USER_NAME>\\Local Settings\\Application Data\\Zimbra\\Zimbra Desktop\\conf\\localconfig.xml",
-      "/opt/<USER_NAME>/Library/Zimbra\\ Desktop/conf/localconfig.xml",
-      "/opt/<USER_NAME>/Library/Zimbra Desktop/conf/localconfig.xml"
+      "C:\\Documents and Settings\\<USER_NAME>\\Local Settings\\Application Data\\Zmail\\Zmail Desktop\\conf\\localconfig.xml",
+      "/opt/<USER_NAME>/Library/Zmail\\ Desktop/conf/localconfig.xml",
+      "/opt/<USER_NAME>/Library/Zmail Desktop/conf/localconfig.xml"
    };
 
    private void init() {
@@ -154,11 +154,11 @@ public class ZimbraDesktopProperties {
    }
 
    // There is no setter for ConnectionPort because connection port keeps on changing
-   // when re-initializing Zimbra Desktop App.
+   // when re-initializing Zmail Desktop App.
    public String getConnectionPort() {
       try {
          return XmlStringUtil.parseXmlFile(getLocalConfigFileLocation(),
-         "zimbra_admin_service_port");
+         "zmail_admin_service_port");
       } catch (IOException e) {
          logger.error("Local Config File location is not found.");
          return null;

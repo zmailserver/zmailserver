@@ -17,21 +17,21 @@
  * Defines the Zimlet handler class.
  *   
  */
-function com_zimbra_example_customtooltip_HandlerObject() {
+function org_zmail_example_customtooltip_HandlerObject() {
 }
 
 /**
  * Makes the Zimlet class a subclass of ZmZimletBase.
  *
  */
-com_zimbra_example_customtooltip_HandlerObject.prototype = new ZmZimletBase();
-com_zimbra_example_customtooltip_HandlerObject.prototype.constructor = com_zimbra_example_customtooltip_HandlerObject;
+org_zmail_example_customtooltip_HandlerObject.prototype = new ZmZimletBase();
+org_zmail_example_customtooltip_HandlerObject.prototype.constructor = org_zmail_example_customtooltip_HandlerObject;
 
 /**
  * This method gets called by the Zimlet framework when the zimlet loads.
  *  
  */
-com_zimbra_example_customtooltip_HandlerObject.prototype.init =
+org_zmail_example_customtooltip_HandlerObject.prototype.init =
 function() {
 };
 
@@ -43,7 +43,7 @@ function() {
  * @param	{Hash}	matchContent		the match content (matchContent[0], matchContent.index, matchContent.input)
  * @param	{Object}	canvas			the canvas
  */
-com_zimbra_example_customtooltip_HandlerObject.prototype.toolTipPoppedUp =
+org_zmail_example_customtooltip_HandlerObject.prototype.toolTipPoppedUp =
 function(spanElement, contentObjText, matchContent, canvas) {
 	
 	// generate the HTML

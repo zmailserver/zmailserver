@@ -22,11 +22,11 @@
 <%@ attribute name="value" rtexprvalue="true" required="true" type="java.lang.String" %>
 <%@ attribute name="name" rtexprvalue="true" required="true" type="java.lang.String" %>
 <%@ attribute name="index" rtexprvalue="true" required="false" type="java.lang.String" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
-<%@ taglib prefix="mo" uri="com.zimbra.mobileclient" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
+<%@ taglib prefix="mo" uri="org.zmail.mobileclient" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
 <fmt:setBundle basename="/msgs/ZhMsg" scope='request' />
 <div class="CompOrigAtt tbl">
     <div class="tr ${! empty index and index gt 0 ? 'nr' : ''}">
@@ -41,7 +41,7 @@
             <span class="Img ImgAttachment">&nbsp;</span>
             <input <c:if test="${checked}">checked </c:if>type=checkbox name="${name}" value="${value}">
             <c:choose>
-            <c:when test="${zm:isProvOrAttr(pageContext, 'zimbraAttachmentsBlocked')}">
+            <c:when test="${zm:isProvOrAttr(pageContext, 'zmailAttachmentsBlocked')}">
 	            ${fn:escapeXml(displayName)}&nbsp;<c:if test="${displaySize}">(${displaySize})</c:if>
 			</c:when>
 			<c:otherwise>

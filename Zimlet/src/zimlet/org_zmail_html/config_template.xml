@@ -14,7 +14,7 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimletConfig name="com_zimbra_html" version="1.0">
+<zimletConfig name="org_zmail_html" version="1.0">
 	<global>
 		<!--property name="...">...</property-->
 	</global>

@@ -82,7 +82,7 @@ ZaSambaDomainXFormView.myXFormModifier = function(xFormObject, entry) {
 		},	
 		{type:_TAB_BAR_,  ref:ZaModel.currentTab,
 			choices:[
-				{value:1, label:zimbra_samba.SambaDomainTabGeneral}				
+				{value:1, label:zmail_samba.SambaDomainTabGeneral}				
 			],
 			cssClass:"ZaTabBar", id:"xform_tabbar"
 		},
@@ -92,7 +92,7 @@ ZaSambaDomainXFormView.myXFormModifier = function(xFormObject, entry) {
 					colSizes:["250px","*"],
 					items:[
 						{ ref: ZaSambaDomain.A_sambaDomainName, type:_TEXTFIELD_, 
-						  label:zimbra_samba.Domain_DomainName,onChange:ZaTabView.onFormFieldChanged
+						  label:zmail_samba.Domain_DomainName,onChange:ZaTabView.onFormFieldChanged
 						},
 						{ ref: ZaSambaDomain.A_sambaSID, type:_TEXTFIELD_, 
 						  label:"sambaSID", width:300,

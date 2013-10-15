@@ -14,19 +14,19 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.mobile.tests.addressbook.contacts;
+package org.zmail.qa.selenium.projects.mobile.tests.addressbook.contacts;
 
 import java.util.List;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.ContactItem;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.mobile.core.MobileCommonTest;
-import com.zimbra.qa.selenium.projects.mobile.ui.FormContactNew;
+import org.zmail.qa.selenium.framework.items.ContactItem;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.mobile.core.MobileCommonTest;
+import org.zmail.qa.selenium.projects.mobile.ui.FormContactNew;
 
 
 public class CreateContact extends MobileCommonTest {
@@ -46,9 +46,9 @@ public class CreateContact extends MobileCommonTest {
 
 		// Define a new contact
 		ContactItem contact = new ContactItem();
-		contact.lastName = "last" + ZimbraSeleniumProperties.getUniqueString();
-		contact.firstName = "first" + ZimbraSeleniumProperties.getUniqueString();
-		contact.email = "email" + ZimbraSeleniumProperties.getUniqueString() + "@example.com";
+		contact.lastName = "last" + ZmailSeleniumProperties.getUniqueString();
+		contact.firstName = "first" + ZmailSeleniumProperties.getUniqueString();
+		contact.email = "email" + ZmailSeleniumProperties.getUniqueString() + "@example.com";
 
 		// Get the "new contact" page and fill it out (automatically)
 		FormContactNew form = (FormContactNew) app.zPageContacts.zToolbarPressButton(Button.B_NEW);

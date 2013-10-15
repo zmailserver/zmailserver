@@ -17,17 +17,17 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.admin.ui;
+package org.zmail.qa.selenium.projects.admin.ui;
 
-import com.zimbra.qa.selenium.framework.items.IItem;
-import com.zimbra.qa.selenium.framework.ui.AbsTab;
-import com.zimbra.qa.selenium.framework.ui.AbsWizard;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.projects.admin.items.AccountItem;
+import org.zmail.qa.selenium.framework.items.IItem;
+import org.zmail.qa.selenium.framework.ui.AbsTab;
+import org.zmail.qa.selenium.framework.ui.AbsWizard;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.projects.admin.items.AccountItem;
 
 
 /**
- * @author zimbra
+ * @author zmail
  *
  */
 public class WizardCreateAccount extends AbsWizard {
@@ -90,7 +90,7 @@ public class WizardCreateAccount extends AbsWizard {
 
 		// Need to dismiss the "account created" dialog.
 		zClick(Locators.zdlg_OK);
-		//throw new HarnessException("See http://bugzilla.zimbra.com/show_bug.cgi?id=59013");
+		//throw new HarnessException("See http://bugzilla.zmail.com/show_bug.cgi?id=59013");
 
 		return (account);
 

@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.core;
+package org.zmail.qa.selenium.projects.ajax.core;
 
 import java.util.HashMap;
 
@@ -29,7 +29,7 @@ public class FeatureBriefcaseTest extends AjaxCommonTest {
 		private static final long serialVersionUID = -4746013883105449655L;
 		
 		{
-			put("zimbraFeatureBriefcasesEnabled", "TRUE");
+			put("zmailFeatureBriefcasesEnabled", "TRUE");
 		}};
 	}
 }

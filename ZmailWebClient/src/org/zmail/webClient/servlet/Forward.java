@@ -13,13 +13,13 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.webClient.servlet;
+package org.zmail.webClient.servlet;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.util.ZmailLog;
 
 @SuppressWarnings("serial")
 public class Forward extends ZCServlet
@@ -41,7 +41,7 @@ public class Forward extends ZCServlet
 	    ServletContext sc = getServletConfig().getServletContext();
 	    sc.getRequestDispatcher(url).forward(req, resp);
 	} catch (Exception ex) {
-		ZimbraLog.webclient.warn("exception forwarding", ex);
+		ZmailLog.webclient.warn("exception forwarding", ex);
 		if (!resp.isCommitted())
 			resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 	}

@@ -12,21 +12,21 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.offline;
+package org.zmail.cs.service.offline;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.offline.OfflineSyncManager;
-import com.zimbra.cs.session.SoapSession;
-import com.zimbra.soap.SoapContextExtension;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.offline.OfflineSyncManager;
+import org.zmail.cs.session.SoapSession;
+import org.zmail.soap.SoapContextExtension;
+import org.zmail.soap.ZmailSoapContext;
 
 public class OfflineContextExtension extends SoapContextExtension {
 
 	public static final String ZDSYNC = "zdsync";
 	
 	@Override
-	public void addExtensionHeader(Element context, ZimbraSoapContext zsc, SoapSession session) throws ServiceException {
+	public void addExtensionHeader(Element context, ZmailSoapContext zsc, SoapSession session) throws ServiceException {
         OfflineSyncManager.getInstance().encode(context);
 	}
 }

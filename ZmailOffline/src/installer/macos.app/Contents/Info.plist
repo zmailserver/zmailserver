@@ -7,15 +7,15 @@
   <key>CFBundleExecutable</key>
   <string>zdrun</string>
   <key>CFBundleGetInfoString</key>
-  <string>Zimbra Desktop @version@, (C) 2008-2009 Zimbra</string>
+  <string>Zmail Desktop @version@, (C) 2008-2009 Zmail</string>
   <key>CFBundleIconFile</key>
   <string>launcher_128x128</string>
   <key>CFBundleIdentifier</key>
-  <string>com.zimbra.zdclient</string>
+  <string>org.zmail.zdclient</string>
   <key>CFBundleInfoDictionaryVersion</key>
   <string>6.0</string>
   <key>CFBundleName</key>
-  <string>Zimbra Desktop</string>
+  <string>Zmail Desktop</string>
   <key>CFBundlePackageType</key>
   <string>APPL</string>
   <key>CFBundleShortVersionString</key>

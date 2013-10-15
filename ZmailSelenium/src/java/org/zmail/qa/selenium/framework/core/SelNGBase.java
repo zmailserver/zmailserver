@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.core;
+package org.zmail.qa.selenium.framework.core;
 
 
 import java.util.ArrayList;
@@ -26,12 +26,12 @@ import net.sf.json.JSONArray;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
 
 
 /**
  * @deprecated As of version 7.0
- * @author zimbra
+ * @author zmail
  *
  */
 public class SelNGBase {
@@ -93,14 +93,14 @@ public class SelNGBase {
 	public static void openApplication() {
 
 		ClientSession session = ClientSessionFactory.session();
-		ZimbraSelenium selenium = session.selenium();
+		ZmailSelenium selenium = session.selenium();
 		selenium.start();
 		selenium.windowMaximize();
 		selenium.windowFocus();
 		selenium.setupZVariables();
 		selenium.allowNativeXpath("true");
 		//selenium.useXpathLibrary("javascript-xpath");
-		selenium.open(ZimbraSeleniumProperties.getBaseURL());
+		selenium.open(ZmailSeleniumProperties.getBaseURL());
 
 	}
 
@@ -115,13 +115,13 @@ public class SelNGBase {
 		}
 
 		ClientSession session = ClientSessionFactory.session();
-		ZimbraSelenium selenium = session.selenium();
+		ZmailSelenium selenium = session.selenium();
 		
 		selenium.start();
 		selenium.windowMaximize();
 		selenium.windowFocus();
 		selenium.allowNativeXpath("true");
-		selenium.open(ZimbraSeleniumProperties.getStringProperty("server.scheme") + "://"	+ ZimbraSeleniumProperties.getStringProperty("server.host") + "/" + parameter);
+		selenium.open(ZmailSeleniumProperties.getStringProperty("server.scheme") + "://"	+ ZmailSeleniumProperties.getStringProperty("server.host") + "/" + parameter);
 		
 	}
 

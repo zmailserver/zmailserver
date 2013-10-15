@@ -18,7 +18,7 @@ getConfigOptions() {
 	echo ""
 	echo "Configuration section"
 	if [ $STORE_HERE = "yes" -a $POSTFIX_HERE = "no" ]; then
-		askNonBlank "Please enter the hostname for zimbraSmtpHostname" \
+		askNonBlank "Please enter the hostname for zmailSmtpHostname" \
 			"$SMTPHOST"
 		SMTPHOST=$response
 	fi
@@ -46,12 +46,12 @@ getConfigOptions() {
 		LDAPHOST=$HOSTNAME
 		LDAPPORT=389
 		if [ $UPGRADE = "no" ]; then
-			su - zimbra -c "zmlocalconfig -e -r startup_ldap_password"
-			LDAPROOTPW=`su - zimbra -c "zmlocalconfig -s -m nokey startup_ldap_password"`
+			su - zmail -c "zmlocalconfig -e -r startup_ldap_password"
+			LDAPROOTPW=`su - zmail -c "zmlocalconfig -s -m nokey startup_ldap_password"`
 			askNonBlank "Enter the root ldap password for $LDAPHOST:" \
 				"$LDAPROOTPW"
 			LDAPROOTPW=$response
-			su - zimbra -c "zmlocalconfig -e startup_ldap_password=''"
+			su - zmail -c "zmlocalconfig -e startup_ldap_password=''"
 		fi
 	else
 		while :; do
@@ -65,7 +65,7 @@ getConfigOptions() {
 				askNonBlank "Enter the root ldap password for $LDAPHOST:" \
 					"$LDAPROOTPW"
 				LDAPROOTPW=$response
-				askNonBlank "Enter the zimbra admin ldap password for $LDAPHOST:" \
+				askNonBlank "Enter the zmail admin ldap password for $LDAPHOST:" \
 				LDAPZIMBRAPW=$response
 			fi
 

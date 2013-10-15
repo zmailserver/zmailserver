@@ -1,4 +1,4 @@
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
 <!--
  * ***** BEGIN LICENSE BLOCK *****
  * Zimbra Collaboration Suite Web Client
@@ -26,7 +26,7 @@
 	String controller = request.getParameter("controller");
 	String template = request.getParameter("template");
 	String skin = request.getParameter("skin");
-	if (skin == null) skin = application.getInitParameter("zimbraDefaultSkin");
+	if (skin == null) skin = application.getInitParameter("zmailDefaultSkin");
 
     pageContext.setAttribute("template", template);
     pageContext.setAttribute("controller", controller);

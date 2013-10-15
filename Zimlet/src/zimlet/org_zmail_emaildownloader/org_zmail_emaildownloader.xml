@@ -14,13 +14,13 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_emaildownloader"
+<zimlet name="org_zmail_emaildownloader"
         version="1.1"
         label="${msg.label}"
         description="${msg.description}">
     <include>emaildownloader.js</include>
 	<includeCSS>emaildownloader.css</includeCSS>
-	<handlerObject>com_zimbra_emaildownloader_HandlerObject</handlerObject>
+	<handlerObject>org_zmail_emaildownloader_HandlerObject</handlerObject>
 	<zimletPanelItem label="${msg.EmailDownloaderZimlet_panel_label}" icon="DownArrow">
         <toolTipText>${msg.EmailDownloader_panel_tooltip}</toolTipText>
 		<dragSource type="ZmConv" />

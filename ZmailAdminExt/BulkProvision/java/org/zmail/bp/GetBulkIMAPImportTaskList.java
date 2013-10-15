@@ -14,32 +14,32 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.bp;
+package org.zmail.bp;
 
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Queue;
 
-import com.zimbra.bp.BulkIMAPImportTaskManager.taskKeys;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.AdminExtConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.AttributeManager.IDNType;
-import com.zimbra.cs.account.accesscontrol.AccessControlUtil;
-import com.zimbra.cs.service.admin.AdminDocumentHandler;
-import com.zimbra.cs.service.admin.ToXML;
-import com.zimbra.soap.DocumentHandler;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.bp.BulkIMAPImportTaskManager.taskKeys;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.AdminExtConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.AttributeManager.IDNType;
+import org.zmail.cs.account.accesscontrol.AccessControlUtil;
+import org.zmail.cs.service.admin.AdminDocumentHandler;
+import org.zmail.cs.service.admin.ToXML;
+import org.zmail.soap.DocumentHandler;
+import org.zmail.soap.ZmailSoapContext;
 
 public class GetBulkIMAPImportTaskList extends AdminDocumentHandler  {
     @Override
     public Element handle(Element request, Map<String, Object> context)
             throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Account authedAcct = DocumentHandler.getAuthenticatedAccount(zsc);
         Element response = zsc.createElement(AdminExtConstants.GET_BULK_IMAP_IMPORT_TASKLIST_RESPONSE);
         HashMap<String, Queue<HashMap<taskKeys, String>>> importQueues = BulkIMAPImportTaskManager.getImportQueues();

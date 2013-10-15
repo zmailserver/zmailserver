@@ -14,21 +14,21 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.folders.accounts;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.folders.accounts;
 
 import java.util.List;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogError.DialogErrorID;
-import com.zimbra.qa.selenium.projects.ajax.ui.Toaster;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.PageMail.PageMailView;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.TreeMail.Locators;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogError.DialogErrorID;
+import org.zmail.qa.selenium.projects.ajax.ui.Toaster;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.PageMail.PageMailView;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.TreeMail.Locators;
 
 
 public class GetExternalIMAP extends PrefGroupMailByMessageTest {
@@ -57,15 +57,15 @@ public class GetExternalIMAP extends PrefGroupMailByMessageTest {
 		
 		
 		// Create the external data source on the same server
-		ZimbraAccount external = new ZimbraAccount();
+		ZmailAccount external = new ZmailAccount();
 		external.provision();
 		external.authenticate();
 		
 		// Add a message to the inbox
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
 
 		external.soapSend(
-				"<AddMsgRequest xmlns='urn:zimbraMail'>"
+				"<AddMsgRequest xmlns='urn:zmailMail'>"
     		+		"<m l='"+ FolderItem.importFromSOAP(external, SystemFolder.Inbox).getId() +"' f='u'>"
         	+			"<content>From: foo@foo.com\n"
         	+				"To: foo@foo.com \n"
@@ -80,10 +80,10 @@ public class GetExternalIMAP extends PrefGroupMailByMessageTest {
 			+	"</AddMsgRequest>");
 
 		// Create the folder to put the data source
-		String foldername = "external" + ZimbraSeleniumProperties.getUniqueString();
+		String foldername = "external" + ZmailSeleniumProperties.getUniqueString();
 		
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+				"<CreateFolderRequest xmlns='urn:zmailMail'>" +
                 	"<folder name='"+ foldername +"' l='1'/>" +
                 "</CreateFolderRequest>");
 
@@ -91,13 +91,13 @@ public class GetExternalIMAP extends PrefGroupMailByMessageTest {
 		ZAssert.assertNotNull(folder, "Verify the subfolder is available");
 		
 		// Create the data source
-		String datasourcename = "datasource" + ZimbraSeleniumProperties.getUniqueString();
-		String datasourceHost = ZimbraSeleniumProperties.getStringProperty("server.host");
-		String datasourceImapPort = ZimbraSeleniumProperties.getStringProperty("server.imap.port");
-		String datasourceImapType = ZimbraSeleniumProperties.getStringProperty("server.imap.type");
+		String datasourcename = "datasource" + ZmailSeleniumProperties.getUniqueString();
+		String datasourceHost = ZmailSeleniumProperties.getStringProperty("server.host");
+		String datasourceImapPort = ZmailSeleniumProperties.getStringProperty("server.imap.port");
+		String datasourceImapType = ZmailSeleniumProperties.getStringProperty("server.imap.type");
 		
 		app.zGetActiveAccount().soapSend(
-				"<CreateDataSourceRequest xmlns='urn:zimbraMail'>"
+				"<CreateDataSourceRequest xmlns='urn:zmailMail'>"
 			+		"<imap name='"+ datasourcename +"' l='"+ folder.getId() +"' isEnabled='true' "
 			+			"port='"+ datasourceImapPort +"' host='"+ datasourceHost +"' connectionType='"+ datasourceImapType +"' leaveOnServer='true' "
 			+			"username='"+ external.EmailAddress +"' password='"+ external.Password +"' "
@@ -108,14 +108,14 @@ public class GetExternalIMAP extends PrefGroupMailByMessageTest {
 		
 		
 		// Need to logout/login to get the new folder
-		ZimbraAccount active = app.zGetActiveAccount();
+		ZmailAccount active = app.zGetActiveAccount();
 		if ( app.zPageMain.zIsActive() )
 			app.zPageMain.zLogout();
 		app.zPageLogin.zLogin(active);
 		startingPage.zNavigateTo();
 		
 		/* TODO: ... debugging to be removed */
-		AbsDialog errorDialog = app.zPageMain.zGetErrorDialog(DialogErrorID.Zimbra);
+		AbsDialog errorDialog = app.zPageMain.zGetErrorDialog(DialogErrorID.Zmail);
 		int i = 0;
 		do {
 			if ( errorDialog.zIsActive() ) {
@@ -145,9 +145,9 @@ public class GetExternalIMAP extends PrefGroupMailByMessageTest {
 		toaster.zWaitForActive();
 
 		
-		// See: https://bugzilla.zimbra.com/show_bug.cgi?id=66447
+		// See: https://bugzilla.zmail.com/show_bug.cgi?id=66447
 		// Get the folder from the server
-		app.zGetActiveAccount().soapSend("<GetFolderRequest xmlns='urn:zimbraMail'/>");
+		app.zGetActiveAccount().soapSend("<GetFolderRequest xmlns='urn:zmailMail'/>");
 		String externalInbox = app.zGetActiveAccount().soapSelectValue("//mail:folder[@name='"+ foldername +"']//mail:folder[@name='INBOX']", "id");
 
 		/* TODO: ... debugging to be removed */
@@ -195,15 +195,15 @@ public class GetExternalIMAP extends PrefGroupMailByMessageTest {
 		
 		
 		// Create the external data source on the same server
-		ZimbraAccount external = new ZimbraAccount();
+		ZmailAccount external = new ZmailAccount();
 		external.provision();
 		external.authenticate();
 		
 		// Add a message to the inbox
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
 
 		external.soapSend(
-				"<AddMsgRequest xmlns='urn:zimbraMail'>"
+				"<AddMsgRequest xmlns='urn:zmailMail'>"
     		+		"<m l='"+ FolderItem.importFromSOAP(external, SystemFolder.Inbox).getId() +"' f='u'>"
         	+			"<content>From: foo@foo.com\n"
         	+				"To: foo@foo.com \n"
@@ -218,10 +218,10 @@ public class GetExternalIMAP extends PrefGroupMailByMessageTest {
 			+	"</AddMsgRequest>");
 
 		// Create the folder to put the data source
-		String foldername = "external" + ZimbraSeleniumProperties.getUniqueString();
+		String foldername = "external" + ZmailSeleniumProperties.getUniqueString();
 		
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+				"<CreateFolderRequest xmlns='urn:zmailMail'>" +
                 	"<folder name='"+ foldername +"' l='1'/>" +
                 "</CreateFolderRequest>");
 
@@ -229,13 +229,13 @@ public class GetExternalIMAP extends PrefGroupMailByMessageTest {
 		ZAssert.assertNotNull(folder, "Verify the subfolder is available");
 		
 		// Create the data source
-		String datasourcename = "datasource" + ZimbraSeleniumProperties.getUniqueString();
-		String datasourceHost = ZimbraSeleniumProperties.getStringProperty("server.host");
-		String datasourceImapPort = ZimbraSeleniumProperties.getStringProperty("server.imap.port");
-		String datasourceImapType = ZimbraSeleniumProperties.getStringProperty("server.imap.type");
+		String datasourcename = "datasource" + ZmailSeleniumProperties.getUniqueString();
+		String datasourceHost = ZmailSeleniumProperties.getStringProperty("server.host");
+		String datasourceImapPort = ZmailSeleniumProperties.getStringProperty("server.imap.port");
+		String datasourceImapType = ZmailSeleniumProperties.getStringProperty("server.imap.type");
 		
 		app.zGetActiveAccount().soapSend(
-				"<CreateDataSourceRequest xmlns='urn:zimbraMail'>"
+				"<CreateDataSourceRequest xmlns='urn:zmailMail'>"
 			+		"<imap name='"+ datasourcename +"' l='"+ folder.getId() +"' isEnabled='true' "
 			+			"port='"+ datasourceImapPort +"' host='"+ datasourceHost +"' connectionType='"+ datasourceImapType +"' leaveOnServer='true' "
 			+			"username='"+ external.EmailAddress +"' password='"+ external.Password +"' "
@@ -246,14 +246,14 @@ public class GetExternalIMAP extends PrefGroupMailByMessageTest {
 		
 		
 		// Need to logout/login to get the new folder
-		ZimbraAccount active = app.zGetActiveAccount();
+		ZmailAccount active = app.zGetActiveAccount();
 		if ( app.zPageMain.zIsActive() )
 			app.zPageMain.zLogout();
 		app.zPageLogin.zLogin(active);
 		startingPage.zNavigateTo();
 		
 		/* TODO: ... debugging to be removed */
-		AbsDialog errorDialog = app.zPageMain.zGetErrorDialog(DialogErrorID.Zimbra);
+		AbsDialog errorDialog = app.zPageMain.zGetErrorDialog(DialogErrorID.Zmail);
 		int i = 0;
 		do {
 			if ( errorDialog.zIsActive() ) {
@@ -284,9 +284,9 @@ public class GetExternalIMAP extends PrefGroupMailByMessageTest {
 
 
 		
-		// See: https://bugzilla.zimbra.com/show_bug.cgi?id=66447
+		// See: https://bugzilla.zmail.com/show_bug.cgi?id=66447
 		// Get the folder from the server
-		app.zGetActiveAccount().soapSend("<GetFolderRequest xmlns='urn:zimbraMail'/>");
+		app.zGetActiveAccount().soapSend("<GetFolderRequest xmlns='urn:zmailMail'/>");
 		String externalInbox = app.zGetActiveAccount().soapSelectValue("//mail:folder[@name='"+ foldername +"']//mail:folder[@name='INBOX']", "id");
 
 		// Click on the INBOX
@@ -294,9 +294,9 @@ public class GetExternalIMAP extends PrefGroupMailByMessageTest {
 		
 		
 		// Add another message
-		String subject2 = "subject" + ZimbraSeleniumProperties.getUniqueString();
+		String subject2 = "subject" + ZmailSeleniumProperties.getUniqueString();
 		external.soapSend(
-				"<AddMsgRequest xmlns='urn:zimbraMail'>"
+				"<AddMsgRequest xmlns='urn:zmailMail'>"
     		+		"<m l='"+ FolderItem.importFromSOAP(external, SystemFolder.Inbox).getId() +"' f='u'>"
         	+			"<content>From: foo@foo.com\n"
         	+				"To: foo@foo.com \n"
@@ -344,15 +344,15 @@ public class GetExternalIMAP extends PrefGroupMailByMessageTest {
 		
 		
 		// Create the external data source on the same server
-		ZimbraAccount external = new ZimbraAccount();
+		ZmailAccount external = new ZmailAccount();
 		external.provision();
 		external.authenticate();
 		
 		// Add a message to the inbox
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
 
 		external.soapSend(
-				"<AddMsgRequest xmlns='urn:zimbraMail'>"
+				"<AddMsgRequest xmlns='urn:zmailMail'>"
     		+		"<m l='"+ FolderItem.importFromSOAP(external, SystemFolder.Inbox).getId() +"' f='u'>"
         	+			"<content>From: foo@foo.com\n"
         	+				"To: foo@foo.com \n"
@@ -367,10 +367,10 @@ public class GetExternalIMAP extends PrefGroupMailByMessageTest {
 			+	"</AddMsgRequest>");
 
 		// Create the folder to put the data source
-		String foldername = "external" + ZimbraSeleniumProperties.getUniqueString();
+		String foldername = "external" + ZmailSeleniumProperties.getUniqueString();
 		
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+				"<CreateFolderRequest xmlns='urn:zmailMail'>" +
                 	"<folder name='"+ foldername +"' l='1'/>" +
                 "</CreateFolderRequest>");
 
@@ -378,13 +378,13 @@ public class GetExternalIMAP extends PrefGroupMailByMessageTest {
 		ZAssert.assertNotNull(folder, "Verify the subfolder is available");
 		
 		// Create the data source
-		String datasourcename = "datasource" + ZimbraSeleniumProperties.getUniqueString();
-		String datasourceHost = ZimbraSeleniumProperties.getStringProperty("server.host");
-		String datasourceImapPort = ZimbraSeleniumProperties.getStringProperty("server.imap.port");
-		String datasourceImapType = ZimbraSeleniumProperties.getStringProperty("server.imap.type");
+		String datasourcename = "datasource" + ZmailSeleniumProperties.getUniqueString();
+		String datasourceHost = ZmailSeleniumProperties.getStringProperty("server.host");
+		String datasourceImapPort = ZmailSeleniumProperties.getStringProperty("server.imap.port");
+		String datasourceImapType = ZmailSeleniumProperties.getStringProperty("server.imap.type");
 		
 		app.zGetActiveAccount().soapSend(
-				"<CreateDataSourceRequest xmlns='urn:zimbraMail'>"
+				"<CreateDataSourceRequest xmlns='urn:zmailMail'>"
 			+		"<imap name='"+ datasourcename +"' l='"+ folder.getId() +"' isEnabled='true' "
 			+			"port='"+ datasourceImapPort +"' host='"+ datasourceHost +"' connectionType='"+ datasourceImapType +"' leaveOnServer='true' "
 			+			"username='"+ external.EmailAddress +"' password='"+ external.Password +"' "
@@ -395,7 +395,7 @@ public class GetExternalIMAP extends PrefGroupMailByMessageTest {
 		
 		
 		// Need to logout/login to get the new folder
-		ZimbraAccount active = app.zGetActiveAccount();
+		ZmailAccount active = app.zGetActiveAccount();
 		if ( app.zPageMain.zIsActive() )
 			app.zPageMain.zLogout();
 		app.zPageLogin.zLogin(active);
@@ -419,9 +419,9 @@ public class GetExternalIMAP extends PrefGroupMailByMessageTest {
 
 
 		
-		// See: https://bugzilla.zimbra.com/show_bug.cgi?id=66447
+		// See: https://bugzilla.zmail.com/show_bug.cgi?id=66447
 		// Get the folder from the server
-		app.zGetActiveAccount().soapSend("<GetFolderRequest xmlns='urn:zimbraMail'/>");
+		app.zGetActiveAccount().soapSend("<GetFolderRequest xmlns='urn:zmailMail'/>");
 		String externalInbox = app.zGetActiveAccount().soapSelectValue("//mail:folder[@name='"+ foldername +"']//mail:folder[@name='INBOX']", "id");
 
 		// Click on the INBOX
@@ -429,9 +429,9 @@ public class GetExternalIMAP extends PrefGroupMailByMessageTest {
 		
 		
 		// Add another message
-		String subject2 = "subject" + ZimbraSeleniumProperties.getUniqueString();
+		String subject2 = "subject" + ZmailSeleniumProperties.getUniqueString();
 		external.soapSend(
-				"<AddMsgRequest xmlns='urn:zimbraMail'>"
+				"<AddMsgRequest xmlns='urn:zmailMail'>"
     		+		"<m l='"+ FolderItem.importFromSOAP(external, SystemFolder.Inbox).getId() +"' f='u'>"
         	+			"<content>From: foo@foo.com\n"
         	+				"To: foo@foo.com \n"

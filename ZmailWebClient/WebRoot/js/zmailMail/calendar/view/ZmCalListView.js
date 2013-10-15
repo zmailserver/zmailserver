@@ -61,7 +61,7 @@ function() {
 
 ZmCalListView.prototype.getTitle =
 function() {
-	return [ZmMsg.zimbraTitle, this.getCalTitle()].join(": ");
+	return [ZmMsg.zmailTitle, this.getCalTitle()].join(": ");
 };
 
 ZmCalListView.prototype.getCalTitle =

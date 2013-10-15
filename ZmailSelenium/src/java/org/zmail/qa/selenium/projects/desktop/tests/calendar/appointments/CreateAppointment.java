@@ -14,15 +14,15 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.calendar.appointments;
+package org.zmail.qa.selenium.projects.desktop.tests.calendar.appointments;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.AppointmentItem;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.calendar.FormApptNew;
+import org.zmail.qa.selenium.framework.items.AppointmentItem;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.calendar.FormApptNew;
 
 
 public class CreateAppointment extends AjaxCommonTest {
@@ -46,8 +46,8 @@ public class CreateAppointment extends AjaxCommonTest {
 
 		// Create the message data to be sent
 		AppointmentItem appt = new AppointmentItem();
-		appt.setSubject("appointment" + ZimbraSeleniumProperties.getUniqueString());
-		appt.setContent("content" + ZimbraSeleniumProperties.getUniqueString());
+		appt.setSubject("appointment" + ZmailSeleniumProperties.getUniqueString());
+		appt.setContent("content" + ZmailSeleniumProperties.getUniqueString());
 		appt.setStartTime(new ZDate(2014, 12, 25, 12, 0, 0));
 		appt.setEndTime(new ZDate(2014, 12, 25, 14, 0, 0));
 

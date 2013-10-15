@@ -1,10 +1,10 @@
-<!DOCTYPE window SYSTEM "chrome://zimbratb/locale/zimbratb.dtd">
-<?xml-stylesheet href="chrome://zimbratb/skin/appointments/appointments.css" type="text/css"?>
+<!DOCTYPE window SYSTEM "chrome://zmailtb/locale/zmailtb.dtd">
+<?xml-stylesheet href="chrome://zmailtb/skin/appointments/appointments.css" type="text/css"?>
 <overlay xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" id="ZimTB-Overlay">
 	<script type="application/x-javascript" src="ZMTB_ApptManager.js"/>
 	<script>
 		window.addEventListener("load", function(){
-			new ZMTB_ApptManager(com_zimbra_tb);
+			new ZMTB_ApptManager(org_zmail_tb);
 		}, false);
 	</script>
 	<toolbox id="navigator-toolbox">

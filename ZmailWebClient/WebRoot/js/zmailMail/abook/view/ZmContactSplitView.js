@@ -124,7 +124,7 @@ function(width, height) {
  */
 ZmContactSplitView.prototype.getTitle =
 function() {
-	return [ZmMsg.zimbraTitle, this._controller.getApp().getDisplayName()].join(": ");
+	return [ZmMsg.zmailTitle, this._controller.getApp().getDisplayName()].join(": ");
 };
 
 /**

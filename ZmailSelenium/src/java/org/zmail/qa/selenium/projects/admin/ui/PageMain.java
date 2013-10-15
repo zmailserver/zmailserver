@@ -14,14 +14,14 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.admin.ui;
+package org.zmail.qa.selenium.projects.admin.ui;
 
-import com.zimbra.qa.selenium.framework.ui.AbsApplication;
-import com.zimbra.qa.selenium.framework.ui.AbsPage;
-import com.zimbra.qa.selenium.framework.ui.AbsTab;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.ui.AbsApplication;
+import org.zmail.qa.selenium.framework.ui.AbsPage;
+import org.zmail.qa.selenium.framework.ui.AbsTab;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
 
 
 /**
@@ -34,7 +34,7 @@ public class PageMain extends AbsTab {
 	public static class Locators {
 		public static final String zSkinContainerLogo		= "xpath=//*[@id='skin_container_logo']";
 		public static final String zSkinContainerUsername	= "xpath=//*[@id='skin_container_username']";
-		//public static final String zSkinContainerLogoff		= "css=table[class='skin_table'] span[onclick='ZaZimbraAdmin.logOff();']";
+		//public static final String zSkinContainerLogoff		= "css=table[class='skin_table'] span[onclick='ZaZmailAdmin.logOff();']";
 		public static final String zLogoffDropDownArrow		="css=div.ImgNodeExpandedWhite";
 		public static final String zLogOff = "css=div.ImgLogoff";
 		public static final String zSkinContainerHelp		= "xpath=//*[@id='skin_container_help']";
@@ -127,7 +127,7 @@ public class PageMain extends AbsTab {
 		 */
 		sWaitForPageToLoad();
 		// Sometimes there is a "confirm" popup.
-		// Disable it using zimbraPrefAdminConsoleWarnOnExit=FALSE
+		// Disable it using zmailPrefAdminConsoleWarnOnExit=FALSE
 		// This is the default configureation for the AdminConsoleAdmin() account
 		
 		

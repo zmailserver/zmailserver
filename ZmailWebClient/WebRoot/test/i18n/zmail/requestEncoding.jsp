@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
 -->
-<%@ taglib prefix="jstl" uri="com.zimbra.i18n" %>
+<%@ taglib prefix="jstl" uri="org.zmail.i18n" %>
 <h3>Value: none</h3>
 <fmt:requestEncoding />
 <h3>Value: Shift-JIS</h3>

@@ -87,12 +87,12 @@ private:
 
     // these are the named property id's
     LONG nameIds[N_NUM_NAMES];
-    Zimbra::MAPI::MAPIMessage *m_mapiMessage;
-    Zimbra::MAPI::MAPISession *m_session;
+    Zmail::MAPI::MAPIMessage *m_mapiMessage;
+    Zmail::MAPI::MAPISession *m_session;
     LPMESSAGE m_pMessage;
     LPSPropValue m_pPropVals;
     bool m_bPersonalDL;
-    LONG m_zimbraFileAsId;
+    LONG m_zmailFileAsId;
 
     // contact data members
     wstring m_pCallbackPhone;
@@ -155,7 +155,7 @@ private:
     HRESULT Init();
 
 public:
-    MAPIContact(Zimbra::MAPI::MAPISession &session, Zimbra::MAPI::MAPIMessage &mMessage);
+    MAPIContact(Zmail::MAPI::MAPISession &session, Zmail::MAPI::MAPIMessage &mMessage);
     ~MAPIContact();
     bool IsPersonalDL() { return m_bPersonalDL; }
     HRESULT GetContactImage(wstring &wstrImagePath,wstring &wstrContentType,wstring &wstrContentDisposition);

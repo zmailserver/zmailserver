@@ -14,13 +14,13 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.offline;
+package org.zmail.cs.account.offline;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element.XMLElement;
-import com.zimbra.cs.account.soap.SoapProvisioning;
-import com.zimbra.cs.offline.common.OfflineConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element.XMLElement;
+import org.zmail.cs.account.soap.SoapProvisioning;
+import org.zmail.cs.offline.common.OfflineConstants;
 
 public class OfflineSoapProvisioning extends SoapProvisioning {
 

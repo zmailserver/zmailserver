@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.util;
+package org.zmail.cs.offline.util;
 
 import java.io.FileOutputStream;
 import java.io.FileWriter;
@@ -26,14 +26,14 @@ import org.apache.commons.httpclient.HttpState;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.methods.GetMethod;
 
-import com.zimbra.common.httpclient.HttpClientUtil;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.SoapHttpTransport;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.cs.mailbox.MailServiceException;
+import org.zmail.common.httpclient.HttpClientUtil;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.SoapHttpTransport;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.cs.mailbox.MailServiceException;
 
 public class CalDump {
 	

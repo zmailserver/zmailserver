@@ -7,8 +7,8 @@
     <description>A tag library for mobile client.</description>
     <tlib-version>1.0</tlib-version>
 
-    <short-name>ZimbraMobileMailTagLibrary</short-name>
-    <uri>com.zimbra.mobileclient</uri>
+    <short-name>ZmailMobileMailTagLibrary</short-name>
+    <uri>org.zmail.mobileclient</uri>
 
     <tag-file>
        <name>messageListView</name>

@@ -14,20 +14,20 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.mail.compose;
+package org.zmail.qa.selenium.projects.desktop.tests.mail.compose;
 
 import java.util.HashMap;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.ui.AbsDialog;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.mail.FormMailNew;
-import com.zimbra.qa.selenium.projects.desktop.ui.mail.FormMailNew.Field;
+import org.zmail.qa.selenium.framework.ui.AbsDialog;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.mail.FormMailNew;
+import org.zmail.qa.selenium.projects.desktop.ui.mail.FormMailNew.Field;
 
 
 public class CancelComposeText extends AjaxCommonTest {
@@ -39,7 +39,7 @@ public class CancelComposeText extends AjaxCommonTest {
 		// All tests start at the login page
 		super.startingPage = app.zPageMail;
 		super.startingAccountPreferences = new HashMap<String , String>() {{
-				    put("zimbraPrefComposeFormat", "text");
+				    put("zmailPrefComposeFormat", "text");
 				}};
 		
 	}
@@ -50,7 +50,7 @@ public class CancelComposeText extends AjaxCommonTest {
 		
 		
 		// Create the message data to be sent
-		String body = "body" + ZimbraSeleniumProperties.getUniqueString();
+		String body = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		// Open the new mail form

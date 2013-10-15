@@ -17,13 +17,13 @@
 #include "common.h"
 #include "Util.h"
 
-Zimbra::Util::CriticalSection Zimbra::Util::MiniDumpGenerator::cs;
-HINSTANCE Zimbra::Util::MiniDumpGenerator::m_hDbgHelpDll=NULL;
-wstring Zimbra::Util::MiniDumpGenerator::m_wstrDbgHelpDllPath=L"";
-Zimbra::Util::MiniDumpWriteDumpPtr_t Zimbra::Util::MiniDumpGenerator::m_MiniDumpWriteDumpPtr=NULL;
-bool Zimbra::Util::MiniDumpGenerator::m_initialized=false;
+Zmail::Util::CriticalSection Zmail::Util::MiniDumpGenerator::cs;
+HINSTANCE Zmail::Util::MiniDumpGenerator::m_hDbgHelpDll=NULL;
+wstring Zmail::Util::MiniDumpGenerator::m_wstrDbgHelpDllPath=L"";
+Zmail::Util::MiniDumpWriteDumpPtr_t Zmail::Util::MiniDumpGenerator::m_MiniDumpWriteDumpPtr=NULL;
+bool Zmail::Util::MiniDumpGenerator::m_initialized=false;
 
-Zimbra::Util::DllVersion::DllVersion(HINSTANCE hDbgHelpDll)
+Zmail::Util::DllVersion::DllVersion(HINSTANCE hDbgHelpDll)
 {
     if (hDbgHelpDll)
     {
@@ -32,7 +32,7 @@ Zimbra::Util::DllVersion::DllVersion(HINSTANCE hDbgHelpDll)
     }
 }
 
-BOOL Zimbra::Util::DllVersion::GetDllVersion(DWORD &dwMajor, DWORD &dwMinor,
+BOOL Zmail::Util::DllVersion::GetDllVersion(DWORD &dwMajor, DWORD &dwMinor,
     DWORD &dwMajorBuildNumber, DWORD &dwMinorBuildNumber)
 {
     if (!GetDllVersionFromDll(dwMajor, dwMinor, dwMajorBuildNumber, dwMinorBuildNumber))
@@ -41,7 +41,7 @@ BOOL Zimbra::Util::DllVersion::GetDllVersion(DWORD &dwMajor, DWORD &dwMinor,
     return TRUE;
 }
 
-BOOL Zimbra::Util::DllVersion::GetDllVersionFromDll(DWORD &dwMajor, DWORD &dwMinor,
+BOOL Zmail::Util::DllVersion::GetDllVersionFromDll(DWORD &dwMajor, DWORD &dwMinor,
     DWORD &dwMajorBuildNumber, DWORD &dwMinorBuildNumber)
 {
     DLLGETVERSIONPROC pDllGetVersion = NULL;
@@ -75,7 +75,7 @@ BOOL Zimbra::Util::DllVersion::GetDllVersionFromDll(DWORD &dwMajor, DWORD &dwMin
     }
 }
 
-BOOL Zimbra::Util::DllVersion::GetDllVersionFromFileInfo(DWORD &dwMajor, DWORD &dwMinor,
+BOOL Zmail::Util::DllVersion::GetDllVersionFromFileInfo(DWORD &dwMajor, DWORD &dwMinor,
     DWORD &dwMajorBuildNumber, DWORD &dwMinorBuildNumber)
 {
     DWORD dwVerHnd = 0;
@@ -126,7 +126,7 @@ BOOL Zimbra::Util::DllVersion::GetDllVersionFromFileInfo(DWORD &dwMajor, DWORD &
     return bRes;
 }
 
-BOOL Zimbra::Util::DllVersion::ParseVersionString(LPWSTR lpwszVersion, DWORD &dwMajor,
+BOOL Zmail::Util::DllVersion::ParseVersionString(LPWSTR lpwszVersion, DWORD &dwMajor,
     DWORD &dwMinor, DWORD &dwMajorBuildNumber, DWORD &dwMinorBuildNumber)
 {
     LPWSTR pwszMajor = NULL, pwszMinor = NULL, pwszMajorBuildNo = NULL, pwszMinorBuildNo = NULL;
@@ -165,7 +165,7 @@ BOOL Zimbra::Util::DllVersion::ParseVersionString(LPWSTR lpwszVersion, DWORD &dw
     }
 }
 
-void Zimbra::Util::MiniDumpGenerator::UnInit()
+void Zmail::Util::MiniDumpGenerator::UnInit()
 {
     if (m_hDbgHelpDll)
     FreeLibrary(m_hDbgHelpDll);
@@ -173,7 +173,7 @@ void Zimbra::Util::MiniDumpGenerator::UnInit()
 	m_initialized=false;
 }
 
-bool Zimbra::Util::MiniDumpGenerator::Initialize(LPTSTR strDbgHelpDllPath)
+bool Zmail::Util::MiniDumpGenerator::Initialize(LPTSTR strDbgHelpDllPath)
 {
     m_wstrDbgHelpDllPath= strDbgHelpDllPath;
     m_hDbgHelpDll = LoadLibrary(m_wstrDbgHelpDllPath.c_str());
@@ -183,7 +183,7 @@ bool Zimbra::Util::MiniDumpGenerator::Initialize(LPTSTR strDbgHelpDllPath)
         return false;
     }
     DWORD dwMajor = 0, dwMinor = 0, dwMajorBuildNumber = 0, dwMinorBuildNumber = 0;
-    Zimbra::Util::DllVersion dllversion(m_hDbgHelpDll);
+    Zmail::Util::DllVersion dllversion(m_hDbgHelpDll);
 
     if (!dllversion.GetDllVersion(dwMajor, dwMinor, dwMajorBuildNumber,
     dwMinorBuildNumber))
@@ -204,7 +204,7 @@ bool Zimbra::Util::MiniDumpGenerator::Initialize(LPTSTR strDbgHelpDllPath)
         return false;
     }
 
-    m_MiniDumpWriteDumpPtr = (Zimbra::Util::MiniDumpWriteDumpPtr_t)GetProcAddress(
+    m_MiniDumpWriteDumpPtr = (Zmail::Util::MiniDumpWriteDumpPtr_t)GetProcAddress(
     m_hDbgHelpDll, "MiniDumpWriteDump");
     if (!m_MiniDumpWriteDumpPtr)
     {
@@ -215,9 +215,9 @@ bool Zimbra::Util::MiniDumpGenerator::Initialize(LPTSTR strDbgHelpDllPath)
     return m_initialized;
 }
 
-LONG WINAPI Zimbra::Util::MiniDumpGenerator::GenerateCoreDump(LPEXCEPTION_POINTERS pExPtrs, LPWSTR &wstrOutMessage)
+LONG WINAPI Zmail::Util::MiniDumpGenerator::GenerateCoreDump(LPEXCEPTION_POINTERS pExPtrs, LPWSTR &wstrOutMessage)
 {
-	Zimbra::Util::AutoCriticalSection acs(cs);
+	Zmail::Util::AutoCriticalSection acs(cs);
 	if(!m_initialized)
         return ZM_MINIDMP_UNINIT;
 	
@@ -233,7 +233,7 @@ LONG WINAPI Zimbra::Util::MiniDumpGenerator::GenerateCoreDump(LPEXCEPTION_POINTE
 			setOccuredExcepAddrs.end()) && (setOccuredExcepCodes.end() !=
 			setOccuredExcepCodes.find(pExPtrs->ExceptionRecord->ExceptionCode)))
 		{
-			Zimbra::Util::CopyString(wstrOutMessage,L"Similar core dump already generated. Hence skipping this one.");
+			Zmail::Util::CopyString(wstrOutMessage,L"Similar core dump already generated. Hence skipping this one.");
 			return ZM_CORE_ALREADY_GENERATED;
 		}
 		if (pExPtrs->ExceptionRecord)
@@ -241,7 +241,7 @@ LONG WINAPI Zimbra::Util::MiniDumpGenerator::GenerateCoreDump(LPEXCEPTION_POINTE
 			WCHAR strbuf[128];
 			wsprintf(strbuf,L"Exception Address: 0x%x",            
 			pExPtrs->ExceptionRecord->ExceptionAddress);
-			Zimbra::Util::CopyString(wstrOutMessage,strbuf);
+			Zmail::Util::CopyString(wstrOutMessage,strbuf);
 		}
 
 		if (m_MiniDumpWriteDumpPtr)
@@ -261,7 +261,7 @@ LONG WINAPI Zimbra::Util::MiniDumpGenerator::GenerateCoreDump(LPEXCEPTION_POINTE
 			SYSTEMTIME st;
 
 			GetLocalTime(&st);
-			strCoreFileName.Format(L"ZimbraCore_%02d%02d%d_%02d%02d%02d.dmp", st.wMonth,
+			strCoreFileName.Format(L"ZmailCore_%02d%02d%d_%02d%02d%02d.dmp", st.wMonth,
 			st.wDay, st.wYear, st.wHour, st.wMinute, st.wSecond);
 
 			wcscpy(pwszDmpFile, pwszTempPath);
@@ -289,9 +289,9 @@ LONG WINAPI Zimbra::Util::MiniDumpGenerator::GenerateCoreDump(LPEXCEPTION_POINTE
 					WCHAR strbuf[512];
 					wsprintf(strbuf,L"  CORE: Generated core dump: %s", pwszDmpFile);
 					if(wstrOutMessage)
-						Zimbra::Util::AppendString(wstrOutMessage,strbuf);
+						Zmail::Util::AppendString(wstrOutMessage,strbuf);
 					else
-						Zimbra::Util::CopyString(wstrOutMessage,strbuf);
+						Zmail::Util::CopyString(wstrOutMessage,strbuf);
 					setOccuredExcepAddrs.insert(pExPtrs->ExceptionRecord->ExceptionAddress);
 					setOccuredExcepCodes.insert(pExPtrs->ExceptionRecord->ExceptionCode);
 					CloseHandle(hFile);
@@ -300,9 +300,9 @@ LONG WINAPI Zimbra::Util::MiniDumpGenerator::GenerateCoreDump(LPEXCEPTION_POINTE
 				else
 				{
 					if(wstrOutMessage)
-						Zimbra::Util::AppendString(wstrOutMessage,L"  CORE: Failed to generate core dump.");
+						Zmail::Util::AppendString(wstrOutMessage,L"  CORE: Failed to generate core dump.");
 					else
-						Zimbra::Util::CopyString(wstrOutMessage,L"  CORE: Failed to generate core dump.");
+						Zmail::Util::CopyString(wstrOutMessage,L"  CORE: Failed to generate core dump.");
 					CloseHandle(hFile);
 					DeleteFile(pwszDmpFile);
 				}
@@ -312,9 +312,9 @@ LONG WINAPI Zimbra::Util::MiniDumpGenerator::GenerateCoreDump(LPEXCEPTION_POINTE
 	else
 	{
 		if(wstrOutMessage)
-			Zimbra::Util::AppendString(wstrOutMessage,L"  CORE: Failed to generate core dump. Invalid LPEXCEPTION_POINTERS.");
+			Zmail::Util::AppendString(wstrOutMessage,L"  CORE: Failed to generate core dump. Invalid LPEXCEPTION_POINTERS.");
 		else
-			Zimbra::Util::CopyString(wstrOutMessage,L"  CORE: Failed to generate core dump. Invalid LPEXCEPTION_POINTERS.");
+			Zmail::Util::CopyString(wstrOutMessage,L"  CORE: Failed to generate core dump. Invalid LPEXCEPTION_POINTERS.");
 	}	
     return retVal;
 }

@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.addressbook.tags;
+package org.zmail.qa.selenium.projects.ajax.tests.addressbook.tags;
 
 import java.util.HashMap;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogTag;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogTag;
 
 public class TagContactGroup extends AjaxCommonTest  {
 	
@@ -39,7 +39,7 @@ public class TagContactGroup extends AjaxCommonTest  {
 		private static final long serialVersionUID = 1L;
 
 		{
-		    put("zimbraPrefShowSelectionCheckbox", "TRUE");		         
+		    put("zmailPrefShowSelectionCheckbox", "TRUE");		         
 		}};			
 					
 		
@@ -52,7 +52,7 @@ public class TagContactGroup extends AjaxCommonTest  {
 		//-- Data
 		
 		// Create a tag
-		String tagName = "tag"+ ZimbraSeleniumProperties.getUniqueString();
+		String tagName = "tag"+ ZmailSeleniumProperties.getUniqueString();
 
 		// Create a contact group via Soap then select
 		ContactGroupItem group = ContactGroupItem.createContactGroupItem(app.zGetActiveAccount());
@@ -76,7 +76,7 @@ public class TagContactGroup extends AjaxCommonTest  {
 		//-- Verification
 		
 		app.zGetActiveAccount().soapSend(
-				"<GetContactsRequest xmlns='urn:zimbraMail' >" +
+				"<GetContactsRequest xmlns='urn:zmailMail' >" +
 						"<cn id='"+ group.getId() +"'/>" +
 				"</GetContactsRequest>");
 		
@@ -97,7 +97,7 @@ public class TagContactGroup extends AjaxCommonTest  {
 		//-- Data
 		
 		// Create a tag
-		String tagName = "tag"+ ZimbraSeleniumProperties.getUniqueString();
+		String tagName = "tag"+ ZmailSeleniumProperties.getUniqueString();
 
 		// Create a contact group via Soap then select
 		ContactGroupItem group = ContactGroupItem.createContactGroupItem(app.zGetActiveAccount());
@@ -118,7 +118,7 @@ public class TagContactGroup extends AjaxCommonTest  {
 		//-- Verification
 		
 		app.zGetActiveAccount().soapSend(
-				"<GetContactsRequest xmlns='urn:zimbraMail' >" +
+				"<GetContactsRequest xmlns='urn:zmailMail' >" +
 						"<cn id='"+ group.getId() +"'/>" +
 				"</GetContactsRequest>");
 		
@@ -155,7 +155,7 @@ public class TagContactGroup extends AjaxCommonTest  {
 		//-- Verification
 		
 		app.zGetActiveAccount().soapSend(
-				"<GetContactsRequest xmlns='urn:zimbraMail' >" +
+				"<GetContactsRequest xmlns='urn:zmailMail' >" +
 						"<cn id='"+ group.getId() +"'/>" +
 				"</GetContactsRequest>");
 		
@@ -195,7 +195,7 @@ public class TagContactGroup extends AjaxCommonTest  {
 		//-- Verification
 		
 		app.zGetActiveAccount().soapSend(
-				"<GetContactsRequest xmlns='urn:zimbraMail' >" +
+				"<GetContactsRequest xmlns='urn:zmailMail' >" +
 						"<cn id='"+ group.getId() +"'/>" +
 				"</GetContactsRequest>");
 		
@@ -237,7 +237,7 @@ public class TagContactGroup extends AjaxCommonTest  {
 		//-- Verification
 		
 		app.zGetActiveAccount().soapSend(
-				"<GetContactsRequest xmlns='urn:zimbraMail' >" +
+				"<GetContactsRequest xmlns='urn:zmailMail' >" +
 						"<cn id='"+ group.getId() +"'/>" +
 				"</GetContactsRequest>");
 		
@@ -275,7 +275,7 @@ public class TagContactGroup extends AjaxCommonTest  {
 		//-- Verification
 		
 		app.zGetActiveAccount().soapSend(
-				"<GetContactsRequest xmlns='urn:zimbraMail' >" +
+				"<GetContactsRequest xmlns='urn:zmailMail' >" +
 						"<cn id='"+ group.getId() +"'/>" +
 				"</GetContactsRequest>");
 		

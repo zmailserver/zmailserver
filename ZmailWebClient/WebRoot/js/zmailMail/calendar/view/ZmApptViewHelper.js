@@ -829,7 +829,7 @@ function(calItem, attach, hasCheckbox) {
 			html[i++] = "</a>&nbsp;";
 		}
 		if (attach.ct != ZmMimeTable.MSG_RFC822) {
-			html[i++] = "<a style='text-decoration:underline' class='AttLink' onclick='ZmZimbraMail.unloadHackCallback();' ";
+			html[i++] = "<a style='text-decoration:underline' class='AttLink' onclick='ZmZmailMail.unloadHackCallback();' ";
 			html[i++] = hrefRoot;
 			html[i++] = attach.part;
 			html[i++] = "&disp=a'>";

@@ -27,13 +27,13 @@
     <value>false</value>
   </key>
   <key name="data_source_xsync_class">
-    <value>com.zimbra.zimbrasync.client.ExchangeSync</value>
+    <value>org.zmail.zmailsync.client.ExchangeSync</value>
   </key>
   <key name="data_source_xsync_factory_class">
-    <value>com.zimbra.zimbrasync.client.OfflineExchangeSyncFactory</value>
+    <value>org.zmail.zmailsync.client.OfflineExchangeSyncFactory</value>
   </key>
   <key name="data_source_ioexception_handler_class">
-    <value>com.zimbra.cs.mailbox.SyncExceptionHandler</value>
+    <value>org.zmail.cs.mailbox.SyncExceptionHandler</value>
   </key>
   <key name="debug_disable_mailbox_group">
     <value>true</value>
@@ -121,7 +121,7 @@
     <value>ffffffff-ffff-ffff-ffff-ffffffffffff</value>
   </key>
   <key name="zdesktop_backup_dir">
-    <value>${zimbra_home}/../zd_backup</value>
+    <value>${zmail_home}/../zd_backup</value>
   </key>
   <key name="zdesktop_sync_io_exception_limit">
     <value>10</value>
@@ -129,124 +129,124 @@
   <key name="zdesktop_sync_io_exception_rate">
     <value>50</value>
   </key>
-  <key name="zimbra_admin_service_port">
+  <key name="zmail_admin_service_port">
     <value>@port@</value>
   </key>
-  <key name="zimbra_admin_service_scheme">
+  <key name="zmail_admin_service_scheme">
     <value>http://</value>
   </key>
-  <key name="zimbra_authtoken_cache_size">
+  <key name="zmail_authtoken_cache_size">
     <value>16</value>
   </key>
-  <key name="zimbra_class_accessmanager">
-    <value>com.zimbra.cs.account.offline.OfflineAccessManager</value>
+  <key name="zmail_class_accessmanager">
+    <value>org.zmail.cs.account.offline.OfflineAccessManager</value>
   </key>
-  <key name="zimbra_class_application">
-    <value>com.zimbra.cs.offline.OfflineApplication</value>
+  <key name="zmail_class_application">
+    <value>org.zmail.cs.offline.OfflineApplication</value>
   </key>
-  <key name="zimbra_class_database">
-    <value>com.zimbra.cs.db.SQLite</value>
+  <key name="zmail_class_database">
+    <value>org.zmail.cs.db.SQLite</value>
   </key>
-  <key name="zimbra_class_datasourcemanager">
-    <value>com.zimbra.cs.datasource.offline.OfflineDataSourceManager</value>
+  <key name="zmail_class_datasourcemanager">
+    <value>org.zmail.cs.datasource.offline.OfflineDataSourceManager</value>
   </key>
-  <key name="zimbra_class_mboxmanager">
-    <value>com.zimbra.cs.mailbox.OfflineMailboxManager</value>
+  <key name="zmail_class_mboxmanager">
+    <value>org.zmail.cs.mailbox.OfflineMailboxManager</value>
   </key>
-  <key name="zimbra_class_provisioning">
-    <value>com.zimbra.cs.account.offline.OfflineProvisioning</value>
+  <key name="zmail_class_provisioning">
+    <value>org.zmail.cs.account.offline.OfflineProvisioning</value>
   </key>
-  <key name="zimbra_class_rulerewriterfactory">
-    <value>com.zimbra.cs.filter.OfflineRuleRewriterFactory</value>
+  <key name="zmail_class_rulerewriterfactory">
+    <value>org.zmail.cs.filter.OfflineRuleRewriterFactory</value>
   </key>
-  <key name="zimbra_class_sslprotocolsocketfactory">
-    <value>com.zimbra.common.net.CustomSSLProtocolSocketFactory</value>
+  <key name="zmail_class_sslprotocolsocketfactory">
+    <value>org.zmail.common.net.CustomSSLProtocolSocketFactory</value>
   </key>
-  <key name="zimbra_class_attrmanager">
-    <value>com.zimbra.cs.account.offline.OfflineAttributeManager</value>
+  <key name="zmail_class_attrmanager">
+    <value>org.zmail.cs.account.offline.OfflineAttributeManager</value>
   </key>
-  <key name="zimbra_class_soapsessionfactory">
-    <value>com.zimbra.cs.session.OfflineSoapSessionFactory</value>  
+  <key name="zmail_class_soapsessionfactory">
+    <value>org.zmail.cs.session.OfflineSoapSessionFactory</value>  
   </key>
-  <key name="zimbra_class_dbconnfactory">
-    <value>com.zimbra.cs.db.RetryConnectionFactory</value>
+  <key name="zmail_class_dbconnfactory">
+    <value>org.zmail.cs.db.RetryConnectionFactory</value>
   </key>
-  <key name="zimbra_class_conditionalproxyselector">
-    <value>com.zimbra.cs.offline.net.AttrProxySelector</value>
+  <key name="zmail_class_conditionalproxyselector">
+    <value>org.zmail.cs.offline.net.AttrProxySelector</value>
   </key>
-  <key name="zimbra_class_galgroupinfoprovider">
-    <value>com.zimbra.cs.mailbox.OfflineGalGroupInfoProvider</value>
+  <key name="zmail_class_galgroupinfoprovider">
+    <value>org.zmail.cs.mailbox.OfflineGalGroupInfoProvider</value>
   </key>
-  <key name="zimbra_disk_cache_servlet_flush">
+  <key name="zmail_disk_cache_servlet_flush">
     <value>false</value>
   </key>
-  <key name="zimbra_index_completed_pool_size">
+  <key name="zmail_index_completed_pool_size">
     <value>2</value>
   </key>
-  <key name="zimbra_index_flush_pool_size">
+  <key name="zmail_index_flush_pool_size">
     <value>2</value>
   </key>
-  <key name="zimbra_index_idle_flush_time">
+  <key name="zmail_index_idle_flush_time">
     <value>60</value>
   </key>
-  <key name="zimbra_index_lucene_nobatch_merge_factor">
+  <key name="zmail_index_lucene_nobatch_merge_factor">
     <value>6</value>
   </key>
-  <key name="zimbra_index_lucene_nobatch_ram_buffer_size_kb">
+  <key name="zmail_index_lucene_nobatch_ram_buffer_size_kb">
     <value>5120</value>
   </key>
-  <key name="zimbra_index_max_uncommitted_operations">
+  <key name="zmail_index_max_uncommitted_operations">
     <value>50</value>
   </key>
-  <key name="zimbra_index_reindex_pool_size">
+  <key name="zmail_index_reindex_pool_size">
     <value>2</value>
   </key>
-  <key name="zimbra_java_path">
+  <key name="zmail_java_path">
     <value>jre</value>
   </key>
-  <key name="zimbra_ldap_password">
+  <key name="zmail_ldap_password">
     <value>@install.key@</value>
   </key>
-  <key name="zimbra_log4j_properties_watch">
+  <key name="zmail_log4j_properties_watch">
     <value>0</value>
   </key>
-  <key name="zimbra_mailbox_groups">
+  <key name="zmail_mailbox_groups">
     <value>100</value>
   </key>
-  <key name="zimbra_mailbox_purgeable">
+  <key name="zmail_mailbox_purgeable">
     <value>false</value>
   </key>
-  <key name="zimbra_mailbox_active_cache">
+  <key name="zmail_mailbox_active_cache">
     <value>50</value>
   </key>
-  <key name="zimbra_mailbox_inactive_cache">
+  <key name="zmail_mailbox_inactive_cache">
     <value>10</value>
   </key>
-  <key name="zimbra_minimize_resources">
+  <key name="zmail_minimize_resources">
     <value>true</value>
   </key>
-  <key name="zimbra_relative_volume_path">
+  <key name="zmail_relative_volume_path">
     <value>true</value>
   </key>
-  <key name="zimbra_rights_delegated_admin_supported">
+  <key name="zmail_rights_delegated_admin_supported">
     <value>false</value>
   </key>
-  <key name="zimbra_web_generate_gzip">
+  <key name="zmail_web_generate_gzip">
     <value>false</value>
   </key>
-  <key name="zimbra_slow_logging_enabled">
+  <key name="zmail_slow_logging_enabled">
     <value>true</value>
   </key>
-  <key name="zimbra_slow_logging_threshold">
+  <key name="zmail_slow_logging_threshold">
     <value>5000</value>
   </key>
   <key name="data_source_imap_reuse_connections">
     <value>true</value>
   </key>
-  <key name="zimbra_auth_provider">
+  <key name="zmail_auth_provider">
     <value>offline</value>
   </key>
-  <key name="zimbra_archive_formatter_search_chunk_size">
+  <key name="zmail_archive_formatter_search_chunk_size">
     <value>128</value>
   </key>
   <key name="zdesktop_heapdump_enabled">

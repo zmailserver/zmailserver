@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.newwindow.mail;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.newwindow.mail;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.SeparateWindowDisplayMail;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.SeparateWindowDisplayMail;
 
 
 public class MarkUnReadMail extends PrefGroupMailByMessageTest {
@@ -45,11 +45,11 @@ public class MarkUnReadMail extends PrefGroupMailByMessageTest {
 		
 
 		// Create the message data to be sent
-		String subject = "subject"+ ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject"+ ZmailSeleniumProperties.getUniqueString();
 		
 		FolderItem inboxFolder = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Inbox);
 		app.zGetActiveAccount().soapSend(
-					"<AddMsgRequest xmlns='urn:zimbraMail'>"
+					"<AddMsgRequest xmlns='urn:zmailMail'>"
 				+		"<m l='"+ inboxFolder.getId() +"' f=''>"
 				+			"<content>"
 				+				"From: foo@foo.com\n"
@@ -108,11 +108,11 @@ public class MarkUnReadMail extends PrefGroupMailByMessageTest {
 	public void MarkUnReadMail_02() throws HarnessException {
 		
 		// Create the message data to be sent
-		String subject = "subject"+ ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject"+ ZmailSeleniumProperties.getUniqueString();
 
 		FolderItem inboxFolder = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Inbox);
 		app.zGetActiveAccount().soapSend(
-					"<AddMsgRequest xmlns='urn:zimbraMail'>"
+					"<AddMsgRequest xmlns='urn:zmailMail'>"
 				+		"<m l='"+ inboxFolder.getId() +"' f=''>"
 				+			"<content>"
 				+				"From: foo@foo.com\n"
@@ -172,11 +172,11 @@ public class MarkUnReadMail extends PrefGroupMailByMessageTest {
 	public void MarkUnReadMail_03() throws HarnessException {
 		
 		// Create the message data to be sent
-		String subject = "subject"+ ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject"+ ZmailSeleniumProperties.getUniqueString();
 
 		FolderItem inboxFolder = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Inbox);
 		app.zGetActiveAccount().soapSend(
-					"<AddMsgRequest xmlns='urn:zimbraMail'>"
+					"<AddMsgRequest xmlns='urn:zmailMail'>"
 				+		"<m l='"+ inboxFolder.getId() +"' f=''>"
 				+			"<content>"
 				+				"From: foo@foo.com\n"

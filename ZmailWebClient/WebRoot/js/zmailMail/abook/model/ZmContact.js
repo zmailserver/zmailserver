@@ -179,11 +179,11 @@ ZmContact.MC_homePhotoURL			= "homePhotoURL";
 ZmContact.MC_workPhotoURL			= "workPhotoURL";
 ZmContact.GAL_MODIFY_TIMESTAMP		= "modifyTimeStamp";	// GAL fields
 ZmContact.GAL_CREATE_TIMESTAMP		= "createTimeStamp";
-ZmContact.GAL_ZIMBRA_ID				= "zimbraId";
+ZmContact.GAL_ZIMBRA_ID				= "zmailId";
 ZmContact.GAL_OBJECT_CLASS			= "objectClass";
-ZmContact.GAL_MAIL_FORWARD_ADDRESS	= "zimbraMailForwardingAddress";
-ZmContact.GAL_CAL_RES_TYPE			= "zimbraCalResType";
-ZmContact.GAL_CAL_RES_LOC_NAME		= "zimbraCalResLocationDisplayName";
+ZmContact.GAL_MAIL_FORWARD_ADDRESS	= "zmailMailForwardingAddress";
+ZmContact.GAL_CAL_RES_TYPE			= "zmailCalResType";
+ZmContact.GAL_CAL_RES_LOC_NAME		= "zmailCalResLocationDisplayName";
 
 // file as
 var i = 1;
@@ -689,7 +689,7 @@ function(contact) {
  */
 ZmContact.prototype.load =
 function(callback, errorCallback, batchCmd, deref) {
-	var jsonObj = {GetContactsRequest:{_jsns:"urn:zimbraMail"}};
+	var jsonObj = {GetContactsRequest:{_jsns:"urn:zmailMail"}};
 	if (deref) {
 		jsonObj.GetContactsRequest.derefGroupMember = "1";
 	}
@@ -699,7 +699,7 @@ function(callback, errorCallback, batchCmd, deref) {
 	var respCallback = new AjxCallback(this, this._handleLoadResponse, [callback]);
 
 	if (batchCmd) {
-		var jsonObj = {GetContactsRequest:{_jsns:"urn:zimbraMail"}};
+		var jsonObj = {GetContactsRequest:{_jsns:"urn:zmailMail"}};
 		if (deref) {
 			jsonObj.GetContactsRequest.derefGroupMember = "1";
 		}
@@ -899,7 +899,7 @@ function() {
 
 ZmContact.prototype.loadDlInfo =
 function(callback) {
-	var soapDoc = AjxSoapDoc.create("GetDistributionListRequest", "urn:zimbraAccount", null);
+	var soapDoc = AjxSoapDoc.create("GetDistributionListRequest", "urn:zmailAccount", null);
 	soapDoc.setMethodAttribute("needOwners", "1");
 	soapDoc.setMethodAttribute("needRights", "sendToDistList");
 	var elBy = soapDoc.set("dl", this.getEmail());
@@ -910,7 +910,7 @@ function(callback) {
 
 ZmContact.prototype.toggleSubscription =
 function(callback) {
-	var soapDoc = AjxSoapDoc.create("SubscribeDistributionListRequest", "urn:zimbraAccount", null);
+	var soapDoc = AjxSoapDoc.create("SubscribeDistributionListRequest", "urn:zmailAccount", null);
 	soapDoc.setMethodAttribute("op", this.dlInfo.isMember ? "unsubscribe" : "subscribe");
 	var elBy = soapDoc.set("dl", this.getEmail());
 	elBy.setAttribute("by", "name");
@@ -1102,7 +1102,7 @@ function(attr, batchCmd, isAutoCreate) {
 		return;
 	}
 
-	var jsonObj = {CreateContactRequest:{_jsns:"urn:zimbraMail"}};
+	var jsonObj = {CreateContactRequest:{_jsns:"urn:zmailMail"}};
 	var request = jsonObj.CreateContactRequest;
 	var cn = request.cn = {};
 
@@ -1118,7 +1118,7 @@ function(attr, batchCmd, isAutoCreate) {
 	for (var name in attr) {
 		if (name == ZmContact.F_folderId ||
 			name == "objectClass" ||
-			name == "zimbraId" ||
+			name == "zmailId" ||
 			name == "createTimeStamp" ||
 			name == "modifyTimeStamp") { continue; }
 
@@ -1186,7 +1186,7 @@ function(attr, isBatchMode, isAutoCreate, result) {
  */
 ZmContact.prototype.createFromVCard =
 function(msgId, vcardPartId) {
-	var jsonObj = {CreateContactRequest:{_jsns:"urn:zimbraMail"}};
+	var jsonObj = {CreateContactRequest:{_jsns:"urn:zmailMail"}};
 	var cn = jsonObj.CreateContactRequest.cn = {l:ZmFolder.ID_CONTACTS};
 	cn.vcard = {mid:msgId, part:vcardPartId};
 
@@ -1232,7 +1232,7 @@ function(attr, callback, isAutoSave, batchCmd) {
 	if (this.list.isGal) { return; }
 
 	// change force to 0 and put up dialog if we get a MODIFY_CONFLICT fault?
-	var jsonObj = {ModifyContactRequest:{_jsns:"urn:zimbraMail", replace:"0", force:"1"}};
+	var jsonObj = {ModifyContactRequest:{_jsns:"urn:zmailMail", replace:"0", force:"1"}};
 	var cn = jsonObj.ModifyContactRequest.cn = {id:this.id};
 	cn.a = [];
 	cn.m = [];
@@ -1293,7 +1293,7 @@ function(attr) {
 
 	var jsonObj = {
 		BatchRequest: {
-			_jsns: "urn:zimbra",
+			_jsns: "urn:zmail",
 			CreateDistributionListRequest: createDlReq,
 			DistributionListActionRequest: reqs
 		}
@@ -1376,7 +1376,7 @@ function(attr) {
 	}
 	var jsonObj = {
 		BatchRequest: {
-			_jsns: "urn:zimbra",
+			_jsns: "urn:zmail",
 			DistributionListActionRequest: reqs
 		}
 	};
@@ -1388,7 +1388,7 @@ function(attr) {
 ZmContact.prototype._getAddOrRemoveReq =
 function(members, add) {
 	var req = {
-		_jsns: "urn:zimbraAccount",
+		_jsns: "urn:zmailAccount",
 		dl: {by: "name",
 			 _content: this.getEmail()
 		},
@@ -1409,7 +1409,7 @@ function(members, add) {
 ZmContact.prototype._getRenameDlReq =
 function(name) {
 	return {
-		_jsns: "urn:zimbraAccount",
+		_jsns: "urn:zmailAccount",
 		dl: {by: "name",
 			 _content: this.getEmail()
 		},
@@ -1431,7 +1431,7 @@ function(owners) {
 		});
 	}
 	return {
-		_jsns: "urn:zimbraAccount",
+		_jsns: "urn:zmailAccount",
 		dl: {by: "name",
 			 _content: this.getEmail()
 		},
@@ -1476,7 +1476,7 @@ function(mailPolicy, specificMailers) {
 	}
 
 	return {
-		_jsns: "urn:zimbraAccount",
+		_jsns: "urn:zmailAccount",
 		dl: {by: "name",
 			 _content: this.getEmail()
 		},
@@ -1505,10 +1505,10 @@ function(mods) {
 	var attrs = [];
 	this._addDlAttribute(attrs, mods, ZmContact.F_dlDisplayName, "displayName");
 	this._addDlAttribute(attrs, mods, ZmContact.F_dlDesc, "description");
-	this._addDlAttribute(attrs, mods, ZmContact.F_dlNotes, "zimbraNotes");
-	this._addDlAttribute(attrs, mods, ZmContact.F_dlHideInGal, "zimbraHideInGal");
-	this._addDlAttribute(attrs, mods, ZmContact.F_dlSubscriptionPolicy, "zimbraDistributionListSubscriptionPolicy");
-	this._addDlAttribute(attrs, mods, ZmContact.F_dlUnsubscriptionPolicy, "zimbraDistributionListUnsubscriptionPolicy");
+	this._addDlAttribute(attrs, mods, ZmContact.F_dlNotes, "zmailNotes");
+	this._addDlAttribute(attrs, mods, ZmContact.F_dlHideInGal, "zmailHideInGal");
+	this._addDlAttribute(attrs, mods, ZmContact.F_dlSubscriptionPolicy, "zmailDistributionListSubscriptionPolicy");
+	this._addDlAttribute(attrs, mods, ZmContact.F_dlUnsubscriptionPolicy, "zmailDistributionListUnsubscriptionPolicy");
 
 	return attrs;
 };
@@ -1517,7 +1517,7 @@ function(mods) {
 ZmContact.prototype._getCreateDlReq =
 function(attr) {
 	return {
-		_jsns: "urn:zimbraAccount",
+		_jsns: "urn:zmailAccount",
 		name: attr[ZmContact.F_email],
 		a: this._getDlAttributes(attr)
 	};
@@ -1530,7 +1530,7 @@ function(attr) {
 		return null;
 	}
 	return {
-		_jsns: "urn:zimbraAccount",
+		_jsns: "urn:zmailAccount",
 		dl: {by: "name",
 			 _content: this.getEmail()
 		},
@@ -1655,7 +1655,7 @@ function(newFolderId) {
 			this.list.moveItems({items:[this], folder:newFolder});
 		}
 	} else {
-		var jsonObj = {ContactActionRequest:{_jsns:"urn:zimbraMail"}};
+		var jsonObj = {ContactActionRequest:{_jsns:"urn:zmailMail"}};
 		jsonObj.ContactActionRequest.action = {id:this.id, op:"move", l:newFolderId};
 		var respCallback = new AjxCallback(this, this._handleResponseMove, [newFolderId]);
 		var accountName = appCtxt.multiAccounts && appCtxt.accountList.mainAccount.name;
@@ -2411,10 +2411,10 @@ function(node) {
 			isMinimal: true,
 			isMember: node.isMember,
 			isOwner: node.isOwner,
-			subscriptionPolicy: this.attr.zimbraDistributionListSubscriptionPolicy,
-			unsubscriptionPolicy: this.attr.zimbraDistributionListUnsubscriptionPolicy,
+			subscriptionPolicy: this.attr.zmailDistributionListSubscriptionPolicy,
+			unsubscriptionPolicy: this.attr.zmailDistributionListUnsubscriptionPolicy,
 			displayName: node.d || "",
-			hideInGal: this.attr.zimbraHideInGal == "TRUE"
+			hideInGal: this.attr.zmailHideInGal == "TRUE"
 		};
 
 		this.canExpand = node.exp;
@@ -2548,7 +2548,7 @@ function(offset, limit, callback) {
 
 	DBG.println("dl", "server call " + offset + " / " + limit);
 	if (!dl.total || (offset < dl.total)) {
-		var jsonObj = {GetDistributionListMembersRequest:{_jsns:"urn:zimbraAccount", offset:offset, limit:limit}};
+		var jsonObj = {GetDistributionListMembersRequest:{_jsns:"urn:zmailAccount", offset:offset, limit:limit}};
 		var request = jsonObj.GetDistributionListMembersRequest;
 		request.dl = {_content: this.getEmail()};
 		var respCallback = new AjxCallback(this, this._handleResponseGetDLMembers, [offset, limit, callback]);

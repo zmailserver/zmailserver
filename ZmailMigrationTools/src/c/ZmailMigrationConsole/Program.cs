@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading;
 using System;
 
-namespace ZimbraMigrationConsole
+namespace ZmailMigrationConsole
 {
     class CommandLineArgs
     {
@@ -229,7 +229,7 @@ class Program
 
                 if ((args[0].Equals("-Help", StringComparison.CurrentCultureIgnoreCase)) ||(args[0].Equals("-h", StringComparison.CurrentCultureIgnoreCase)))
                 {
-                    string builder = "Usage of ZimbraMigrationConsole.exe ConfigxmlFile=C:\\MyConfig.xml Users =C:\\users.csv \n";
+                    string builder = "Usage of ZmailMigrationConsole.exe ConfigxmlFile=C:\\MyConfig.xml Users =C:\\users.csv \n";
                     builder += "\n";
                     builder += "ConfigxmlFile= location of the xml file \n";
                     builder += "\n";
@@ -249,15 +249,15 @@ class Program
                     builder += "\n";
                     builder += "SourceAdminID= The Source AdminID \n";
                     builder += "\n";
-                    builder += "ZimbraHost= The Zimbra server hostname \n";
+                    builder += "ZmailHost= The Zmail server hostname \n";
                     builder += "\n";
-                    builder += "ZimbraPort= The Zimbra port \n";
+                    builder += "ZmailPort= The Zmail port \n";
                     builder += "\n";
-                    builder += " ZimbraID= The Zimbra ID. For server migration it’s the admin id and for user migration it’s the userid on Zimbra\n";
+                    builder += " ZmailID= The Zmail ID. For server migration it’s the admin id and for user migration it’s the userid on Zmail\n";
                     builder += "\n";
-                    builder += " ZimbraPwd= Pwd for Zimbra \n";
+                    builder += " ZmailPwd= Pwd for Zmail \n";
                     builder += "\n";
-                    builder += "ZimbraDomain= The Zimbra Domain name \n";
+                    builder += "ZmailDomain= The Zmail Domain name \n";
                     builder += "\n";
                     builder += "The Migration Item Options can be specified as Mail=True Calendar=True Contacts=True Sent=True DeletedItems=True Junk=True Tasks=True Rules=True OOO=True \n";
                     builder += " By default these options are false. Unless specified in the XML or as arguments \n";
@@ -322,11 +322,11 @@ class Program
                 string MaxWarns = CommandLineArgs.I.argAsString("MaxWarn");
                 string userid = CommandLineArgs.I.argAsString("Profile");
                 string Pstfile = CommandLineArgs.I.argAsString("DataFile");
-                string ZCSHost = CommandLineArgs.I.argAsString("ZimbraHost");
-                string ZCSPort = CommandLineArgs.I.argAsString("ZimbraPort");
-                string ZCSID = CommandLineArgs.I.argAsString("ZimbraID");
-                string ZCSPwd = CommandLineArgs.I.argAsString("ZimbraPwd");
-                string ZCSDomain = CommandLineArgs.I.argAsString("ZimbraDomain");
+                string ZCSHost = CommandLineArgs.I.argAsString("ZmailHost");
+                string ZCSPort = CommandLineArgs.I.argAsString("ZmailPort");
+                string ZCSID = CommandLineArgs.I.argAsString("ZmailID");
+                string ZCSPwd = CommandLineArgs.I.argAsString("ZmailPwd");
+                string ZCSDomain = CommandLineArgs.I.argAsString("ZmailDomain");
                 string SourceHost = CommandLineArgs.I.argAsString("SourceHost");
                 string SourceAdmin = CommandLineArgs.I.argAsString("SourceAdminID");
                 
@@ -435,10 +435,10 @@ class Program
                             userid = (myXmlConfig.ConfigObj.SourceServer.AdminID != "") ? myXmlConfig.ConfigObj.SourceServer.AdminID : myXmlConfig.ConfigObj.SourceServer.Profile;
 
                         if (ZCSID == "")
-                            ZCSID = myXmlConfig.ConfigObj.ZimbraServer.AdminID;
+                            ZCSID = myXmlConfig.ConfigObj.ZmailServer.AdminID;
 
                         if (ZCSPwd == "")
-                            ZCSPwd = myXmlConfig.ConfigObj.ZimbraServer.AdminPwd;
+                            ZCSPwd = myXmlConfig.ConfigObj.ZmailServer.AdminPwd;
 
                         if (ZCSID == "")
                         {
@@ -465,10 +465,10 @@ class Program
                             userid = myXmlConfig.ConfigObj.SourceServer.Profile;
 
                         if (ZCSID == "")
-                            ZCSID = myXmlConfig.ConfigObj.ZimbraServer.UserAccount;
+                            ZCSID = myXmlConfig.ConfigObj.ZmailServer.UserAccount;
 
                         if (ZCSPwd == "")
-                            ZCSPwd = myXmlConfig.ConfigObj.ZimbraServer.UserPassword;
+                            ZCSPwd = myXmlConfig.ConfigObj.ZmailServer.UserPassword;
 
                         if (Pstfile == "")
                             Pstfile = myXmlConfig.ConfigObj.SourceServer.DataFile;
@@ -477,15 +477,15 @@ class Program
 
                     if ((ZCSHost == "") && (ZCSDomain == ""))
                     {
-                        ZCSHost = myXmlConfig.ConfigObj.ZimbraServer.Hostname;
+                        ZCSHost = myXmlConfig.ConfigObj.ZmailServer.Hostname;
                         ZCSDomain = myXmlConfig.ConfigObj.UserProvision.DestinationDomain;
                     }
                     else
                     {
                         if (ZCSDomain == "")
                         {
-                            Log.err("ZimbraHost and ZimbraDomain go together.To override ZimbraHost ,ZimbraDomain has to be overridden as well \n");
-                            System.Console.WriteLine("ZimbraHost and ZimbraDomain go together.To override ZimbraHost ,ZimbraDomain has to be overridden as well \n");
+                            Log.err("ZmailHost and ZmailDomain go together.To override ZmailHost ,ZmailDomain has to be overridden as well \n");
+                            System.Console.WriteLine("ZmailHost and ZmailDomain go together.To override ZmailHost ,ZmailDomain has to be overridden as well \n");
                             //if ((CommandLineArgs.I.arg("Silent") != null) && (CommandLineArgs.I.argAsBool("Silent") == true))
                             if (!Silent)
                             
@@ -497,8 +497,8 @@ class Program
                         }
                         if (ZCSHost == "")
                         {
-                            Log.err("ZimbraHost and ZimbraDomain go together.To override ZimbraDomain ,ZimbraHost has to be overridden as well \n");
-                            System.Console.WriteLine("ZimbraHost and ZimbraDomain go together.To override ZimbraDomain ,ZimbraHost has to be overridden as well \n");
+                            Log.err("ZmailHost and ZmailDomain go together.To override ZmailDomain ,ZmailHost has to be overridden as well \n");
+                            System.Console.WriteLine("ZmailHost and ZmailDomain go together.To override ZmailDomain ,ZmailHost has to be overridden as well \n");
                             //if ((CommandLineArgs.I.arg("Silent") != null) && (CommandLineArgs.I.argAsBool("Silent") == true))
                             if (!Silent)
                             {
@@ -512,7 +512,7 @@ class Program
 
 
                     if (ZCSPort == "")
-                        ZCSPort = myXmlConfig.ConfigObj.ZimbraServer.Port;
+                        ZCSPort = myXmlConfig.ConfigObj.ZmailServer.Port;
 
                     if (Loglevel == "")
                         Loglevel = myXmlConfig.ConfigObj.GeneralOptions.LogLevel;
@@ -578,7 +578,7 @@ class Program
                         UseSSL = CommandLineArgs.I.argAsBool("UseSSL");
                     }
                     else
-                        UseSSL = myXmlConfig.ConfigObj.ZimbraServer.UseSSL;
+                        UseSSL = myXmlConfig.ConfigObj.ZmailServer.UseSSL;
 
                     if (CommandLineArgs.I.arg("Mail") != null)
                     {
@@ -910,7 +910,7 @@ class Program
 
                 }
 
-                ZimbraValues.GetZimbraValues().ClientVersion = new MVVM.Model.BuildNum().BUILD_NUM;
+                ZmailValues.GetZmailValues().ClientVersion = new MVVM.Model.BuildNum().BUILD_NUM;
                                 
                 if (ServerMigration)
                 {
@@ -922,19 +922,19 @@ class Program
 
                         System.Console.WriteLine();
                         /*ProgressUtil.RenderConsoleProgress(30, '\u2591', ConsoleColor.Green,
-                            "Connecting to to Zimbra Server \n   ");*/
-                        System.Console.WriteLine("Connecting to to Zimbra Server \n   ");
-                        Log.info("Connecting to to Zimbra Server \n   ");
+                            "Connecting to to Zmail Server \n   ");*/
+                        System.Console.WriteLine("Connecting to to Zmail Server \n   ");
+                        Log.info("Connecting to to Zmail Server \n   ");
                         System.Console.WriteLine();
 
-                        ZimbraAPI zimbraAPI = new ZimbraAPI(true, importopts.VerboseOn,importopts.SpecialCharRep);
-                        /*int stat = zimbraAPI.Logon(
-                            myXmlConfig.ConfigObj.zimbraServer.Hostname,
-                            myXmlConfig.ConfigObj.zimbraServer.Port,
-                            myXmlConfig.ConfigObj.zimbraServer.AdminID,
-                            myXmlConfig.ConfigObj.zimbraServer.AdminPwd, true);*/
+                        ZmailAPI zmailAPI = new ZmailAPI(true, importopts.VerboseOn,importopts.SpecialCharRep);
+                        /*int stat = zmailAPI.Logon(
+                            myXmlConfig.ConfigObj.zmailServer.Hostname,
+                            myXmlConfig.ConfigObj.zmailServer.Port,
+                            myXmlConfig.ConfigObj.zmailServer.AdminID,
+                            myXmlConfig.ConfigObj.zmailServer.AdminPwd, true);*/
 
-                        int stat = zimbraAPI.Logon(
+                        int stat = zmailAPI.Logon(
                            ZCSHost,
                            ZCSPort,
                           ZCSID,
@@ -943,27 +943,27 @@ class Program
 
                         if (stat != 0)
                         {
-                            zimbraAPI.LastError.Count();
+                            zmailAPI.LastError.Count();
 
                             System.Console.WriteLine();
-                           /* string message = "Logon to Zimbra Server for adminAccount " +
-                                myXmlConfig.ConfigObj.ZimbraServer.AdminID +"Failed ."+ zimbraAPI.LastError;*/
-                            string message = "Logon to Zimbra Server for adminAccount " +
-                                myXmlConfig.ConfigObj.ZimbraServer.AdminID + " Failed. " + System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(zimbraAPI.LastError.ToLower());
+                           /* string message = "Logon to Zmail Server for adminAccount " +
+                                myXmlConfig.ConfigObj.ZmailServer.AdminID +"Failed ."+ zmailAPI.LastError;*/
+                            string message = "Logon to Zmail Server for adminAccount " +
+                                myXmlConfig.ConfigObj.ZmailServer.AdminID + " Failed. " + System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(zmailAPI.LastError.ToLower());
 
                            
                             System.Console.WriteLine(message);
                             Log.err(message);
                          /*   ProgressUtil.RenderConsoleProgress(30, '\u2591', ConsoleColor.Red,
-                                "Logon to to Zimbra Server  for adminAccount failed " +
-                                myXmlConfig.ConfigObj.ZimbraServer.AdminID);*/
+                                "Logon to to Zmail Server  for adminAccount failed " +
+                                myXmlConfig.ConfigObj.ZmailServer.AdminID);*/
                             System.Console.WriteLine("......... \n");
                             System.Console.WriteLine();
                             
                             // return;
                         }
 
-                        // userAcct.InitializeMigration(myXmlConfig.ConfigObj.zimbraServer.ZimbraHostname, myXmlConfig.ConfigObj.zimbraServer.Port, myXmlConfig.ConfigObj.zimbraServer.ZimbraAdminID,user.UserName);
+                        // userAcct.InitializeMigration(myXmlConfig.ConfigObj.zmailServer.ZmailHostname, myXmlConfig.ConfigObj.zmailServer.Port, myXmlConfig.ConfigObj.zmailServer.ZmailAdminID,user.UserName);
                         string acctName;
                         if (user.MappedName == "")
                         {
@@ -979,16 +979,16 @@ class Program
 
                         }
 
-                        if (zimbraAPI.GetAccount(acctName) == 0)
+                        if (zmailAPI.GetAccount(acctName) == 0)
                         {
                             System.Console.WriteLine();
                             System.Console.WriteLine();
-                            string mesg = "Migration to Zimbra Started  for UserAccount " +
+                            string mesg = "Migration to Zmail Started  for UserAccount " +
                                 acctName;
                             System.Console.WriteLine(mesg);
                             Log.info(mesg);
                           /*  ProgressUtil.RenderConsoleProgress(30, '\u2591', ConsoleColor.Green,
-                                " Migration to Zimbra Started  for UserAccount " +
+                                " Migration to Zmail Started  for UserAccount " +
                                 acctName);*/
                             System.Console.WriteLine();
                             System.Console.WriteLine();
@@ -1000,12 +1000,12 @@ class Program
                         else
                         {
                             System.Console.WriteLine();
-                            string err = "User is not provisioned on Zimbra Server " +
+                            string err = "User is not provisioned on Zmail Server " +
                                 acctName;
                             System.Console.WriteLine(err);
                            /* ProgressUtil.RenderConsoleProgress(30, '\u2591',
                                 ConsoleColor.Yellow,
-                                " User is not provisioned on Zimbra Server " +
+                                " User is not provisioned on Zmail Server " +
                                 acctName);*/
                             Log.info(err);
                             System.Console.WriteLine();
@@ -1048,7 +1048,7 @@ class Program
                             }
 
                             bool mustChangePW = user.ChangePWD;
-                            if (zimbraAPI.CreateAccount(acctName,
+                            if (zmailAPI.CreateAccount(acctName,
                                 "",
                                 "",
                                 "",
@@ -1068,9 +1068,9 @@ class Program
                                 Log.info(err);
                                 /*ProgressUtil.RenderConsoleProgress(30, '\u2591',
                                     ConsoleColor.Green,
-                                    " Migration to Zimbra Started  for UserAccount  " +
+                                    " Migration to Zmail Started  for UserAccount  " +
                                     user.UserName);*/
-                                err = "Migration to Zimbra Started  for UserAccount  " +
+                                err = "Migration to Zmail Started  for UserAccount  " +
                                     user.UserName;
 
                                 System.Console.WriteLine(err);
@@ -1087,7 +1087,7 @@ class Program
                                     ConsoleColor.Red, " error provisioning user " +
                                     acctName);*/
                                 err = "error provisioning user " +
-                                    acctName + ". " + System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(zimbraAPI.LastError.ToLower()) + "\n";
+                                    acctName + ". " + System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(zmailAPI.LastError.ToLower()) + "\n";
                                 System.Console.WriteLine(err);
                                 Log.err(err);
                                user.IsProvisioned=false;
@@ -1143,19 +1143,19 @@ class Program
                         }
                         string accountid = (Pstfile != "") ? Pstfile : userid;
 
-                        ZimbraAPI zimbraAPI = new ZimbraAPI(false, importopts.VerboseOn);
+                        ZmailAPI zmailAPI = new ZmailAPI(false, importopts.VerboseOn);
 
                             System.Console.WriteLine();
                            /* ProgressUtil.RenderConsoleProgress(
                                     30, '\u2591', ConsoleColor.Green,
-                                    "Connecting to to Zimbra Server \n   ");*/
-                            string err = "Connecting to to Zimbra Server \n   ";
+                                    "Connecting to to Zmail Server \n   ");*/
+                            string err = "Connecting to to Zmail Server \n   ";
                             System.Console.WriteLine(err);
                             System.Console.WriteLine();
 
                             Log.info(err);
 
-                            int stat = zimbraAPI.Logon(
+                            int stat = zmailAPI.Logon(
                                     ZCSHost,
                                     ZCSPort,
                                     accountname,
@@ -1163,15 +1163,15 @@ class Program
 
                             if (stat != 0)
                             {
-                                zimbraAPI.LastError.Count();
+                                zmailAPI.LastError.Count();
 
                                 System.Console.WriteLine();
                                 /*ProgressUtil.RenderConsoleProgress(
                                         30, '\u2591', ConsoleColor.Red,
-                                        "Logon to to Zimbra Server  for userAccount failed " +
+                                        "Logon to to Zmail Server  for userAccount failed " +
                                         ZCSID);*/
-                                err = "Logon to Zimbra Server for userAccount " +
-                                        ZCSID + " Failed. " + System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(zimbraAPI.LastError.ToLower());
+                                err = "Logon to Zmail Server for userAccount " +
+                                        ZCSID + " Failed. " + System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(zmailAPI.LastError.ToLower());
                                 System.Console.WriteLine(err);
                                 Log.err(err);
                                 System.Console.WriteLine("......... \n");
@@ -1211,9 +1211,9 @@ class Program
                         System.Console.WriteLine();
                        /* ProgressUtil.RenderConsoleProgress(
                                 30, '\u2591', ConsoleColor.Green,
-                                " Migration to Zimbra Started  for Profile/PST  " +
+                                " Migration to Zmail Started  for Profile/PST  " +
                                 accountid);*/
-                        err = "Migration to Zimbra Started  for Profile/PST  " +
+                        err = "Migration to Zmail Started  for Profile/PST  " +
                                 accountid;
                         System.Console.WriteLine(err);
                         Log.info(err);

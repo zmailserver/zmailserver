@@ -1,4 +1,4 @@
-package Zimbra::LicenseKey;
+package Zmail::LicenseKey;
 
 # id                      INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 # pubkey          TEXT NOT NULL,
@@ -52,9 +52,9 @@ sub toText {
 	$txt .= "Expires: ". tsToSqlTime($self->{expiredate}). "\n";
 	if ($verbose) {
 		$txt .= "Private Key: \n";
-		$txt .= "".Zimbra::LicenseKey::keyToString($self->{privkey});
+		$txt .= "".Zmail::LicenseKey::keyToString($self->{privkey});
 		$txt .= "Public Key: \n";
-		$txt .= "".Zimbra::LicenseKey::keyToString($self->{pubkey});
+		$txt .= "".Zmail::LicenseKey::keyToString($self->{pubkey});
 	}
 	return $txt;
 }

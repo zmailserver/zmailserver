@@ -61,7 +61,7 @@ function() {
 							toolTipContent:ZaMsg.tt_StartTypingAccountName,
 							forceUpdate:true,dataFetcherMethod:ZaSearch.prototype.dynSelectSearch,
 							dataFetcherTypes:[ZaSearch.ACCOUNTS],
-							dataFetcherAttrs:[ZaItem.A_zimbraId, ZaItem.A_cn, ZaAccount.A_name, ZaAccount.A_displayname, ZaAccount.A_mail]
+							dataFetcherAttrs:[ZaItem.A_zmailId, ZaItem.A_cn, ZaAccount.A_name, ZaAccount.A_displayname, ZaAccount.A_mail]
 						}						
 					]
 				},

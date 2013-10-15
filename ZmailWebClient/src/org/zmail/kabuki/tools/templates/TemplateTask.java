@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.kabuki.tools.templates;
+package org.zmail.kabuki.tools.templates;
 
 import java.io.*;
 import java.util.*;
 import org.apache.tools.ant.*;
 import org.apache.tools.ant.types.*;
 
-import com.zimbra.common.util.TemplateCompiler;
+import org.zmail.common.util.TemplateCompiler;
 
 
 public class TemplateTask

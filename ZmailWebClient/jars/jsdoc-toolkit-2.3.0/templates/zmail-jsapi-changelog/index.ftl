@@ -12,11 +12,11 @@
 <div class="super-nav">
 	<div class="container">
 		<ul>
-			<li><a href="http://www.zimbra.com">zimbra.com</a></li>
-			<li><a href="http://wiki.zimbra.com">wiki</a></li>
-			<li><a href="http://www.zimbra.com/forums">forums</a></li>
-			<li><a href="http://gallery.zimbra.com">gallery</a></li>
-			<li class="last"><a href="http://www.zimbrablog.com">blog</a></li>
+			<li><a href="http://www.zmail.com">zmail.com</a></li>
+			<li><a href="http://wiki.zmail.com">wiki</a></li>
+			<li><a href="http://www.zmail.com/forums">forums</a></li>
+			<li><a href="http://gallery.zmail.com">gallery</a></li>
+			<li class="last"><a href="http://www.zmailblog.com">blog</a></li>
 		</ul>
 	</div>
 </div>
@@ -24,7 +24,7 @@
 <div class="wrap">
 
 	<div class="container header">
-		<img src="./images/logo.png" width="168" height="40" border="0" alt="Zimbra" title="Zimbra">
+		<img src="./images/logo.png" width="168" height="40" border="0" alt="Zmail" title="Zmail">
 		<h2>ZCS ${comparison.buildVersion} : Zimlet JavaScript API : Change Log</h2>
 	</div>
 
@@ -41,7 +41,7 @@
 				<li>None</li>
 			</#if>
 			<#list addedClasses as class>
-				<li><a href="http://files.zimbra.com/docs/zimlet/zcs/${comparison.buildVersion}/jsdocs/symbols/${class.name}.html">${class.fullName}</a></li>
+				<li><a href="http://files.zmail.com/docs/zimlet/zcs/${comparison.buildVersion}/jsdocs/symbols/${class.name}.html">${class.fullName}</a></li>
 			</#list>
 		</ul>
 		</div>
@@ -52,7 +52,7 @@
 				<li>None</li>
 			</#if>
 			<#list removedClasses as class>
-				<li><a href="http://files.zimbra.com/docs/zimlet/zcs/${baseline.buildVersion}/jsdocs/symbols/${class.name}.html">${class.fullName}</a></li>
+				<li><a href="http://files.zmail.com/docs/zimlet/zcs/${baseline.buildVersion}/jsdocs/symbols/${class.name}.html">${class.fullName}</a></li>
 			</#list>
 		</ul>
 		</div>
@@ -66,7 +66,7 @@
 			<#list modifiedClasses as modifiedClass>
 				<ul>
 					<li>
-						<h4><a href="http://files.zimbra.com/docs/zimlet/zcs/${comparison.buildVersion}/jsdocs/symbols/${modifiedClass.name}.html">${modifiedClass.fullName}</a></h4>
+						<h4><a href="http://files.zmail.com/docs/zimlet/zcs/${comparison.buildVersion}/jsdocs/symbols/${modifiedClass.name}.html">${modifiedClass.fullName}</a></h4>
 						<div style="padding-left:25px">
 						<ul>
 							<li><b>PROPERTIES ADDED</b>
@@ -135,10 +135,10 @@
 
 <div class="container footer">
 	<div class="span-12">
-		<p>Copyright &copy; 2010 Zimbra, Inc. All rights reserved</p>
+		<p>Copyright &copy; 2010 Zmail, Inc. All rights reserved</p>
 	</div>
 	<div class="span-12 last right">
-		<p><a href="http://www.zimbra.com/forums/">Forums</a> | <a href="http://www.zimbra.com/about/">About</a> | <a href="http://www.zimbra.com/legal.html#copyright">Copyright</a> | <a href="http://www.zimbra.com/privacy.html">Privacy</a> | <a href="http://www.zimbra.com/license/">License</a> | <a href="http://www.zimbra.com/legal.html">Trademarks</a></p>
+		<p><a href="http://www.zmail.com/forums/">Forums</a> | <a href="http://www.zmail.com/about/">About</a> | <a href="http://www.zmail.com/legal.html#copyright">Copyright</a> | <a href="http://www.zmail.com/privacy.html">Privacy</a> | <a href="http://www.zimbra.com/license.">License</a> | <a href="http://www.zmail.com/legal.html">Trademarks</a></p>
 	</div>
 </div>
 </body

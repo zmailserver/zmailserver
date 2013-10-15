@@ -19,11 +19,11 @@
  *
  */
 
-AjxPackage.require("zimbraMail.docs.ZmDocsEditApp");
+AjxPackage.require("zmailMail.docs.ZmDocsEditApp");
 
-AjxPackage.require("zimbraMail.docs.view.ZmDocsEditor");
-AjxPackage.require("zimbraMail.docs.view.ZmDocsEditView");
+AjxPackage.require("zmailMail.docs.view.ZmDocsEditor");
+AjxPackage.require("zmailMail.docs.view.ZmDocsEditView");
 
-AjxPackage.require("zimbraMail.docs.controller.ZmDocsEditController");
+AjxPackage.require("zmailMail.docs.controller.ZmDocsEditController");
 
-AjxPackage.require("zimbraMail.briefcase.model.ZmDocletMgr");
+AjxPackage.require("zmailMail.briefcase.model.ZmDocletMgr");

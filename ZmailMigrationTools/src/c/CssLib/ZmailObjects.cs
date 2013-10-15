@@ -7,7 +7,7 @@ using System.Xml;
 
 namespace CssLib
 {
-public class ZimbraMessage
+public class ZmailMessage
 {
     public string filePath;
     public string folderId;
@@ -15,7 +15,7 @@ public class ZimbraMessage
     public string tags;
     public string rcvdDate;
 
-    public ZimbraMessage()
+    public ZmailMessage()
     {
         folderId = "";
         flags = "";
@@ -23,7 +23,7 @@ public class ZimbraMessage
         rcvdDate = "";
     }
 
-    public ZimbraMessage(string FilePath, string FolderId, string Flags, string Tags, string
+    public ZmailMessage(string FilePath, string FolderId, string Flags, string Tags, string
         RcvdDate)
     {
         filePath = FilePath;
@@ -34,7 +34,7 @@ public class ZimbraMessage
     }
 }
 
-public class ZimbraFolder
+public class ZmailFolder
 {
     public string name;
     public string parent;
@@ -42,7 +42,7 @@ public class ZimbraFolder
     public string color;
     public string flags;
 
-    public ZimbraFolder()
+    public ZmailFolder()
     {
         name = "";
         parent = "";
@@ -51,7 +51,7 @@ public class ZimbraFolder
         flags = "";
     }
 
-    public ZimbraFolder(string Name, string Parent, string View, string Color, string Flags)
+    public ZmailFolder(string Name, string Parent, string View, string Color, string Flags)
     {
         name = Name;
         parent = Parent;

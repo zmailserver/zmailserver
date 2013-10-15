@@ -14,15 +14,15 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimletConfig name="com_zimbra_linkedin" version="0.7">
+<zimletConfig name="org_zmail_linkedin" version="0.7">
     <global>
         <property name="allowedDomains">*.linkedin.com</property>
         <!--
         <property name="hasSensitiveData">true</property>
-        Set hasSensitiveData to true to disable this Zimlet when Zimbra Web Client is used in http mode.
+        Set hasSensitiveData to true to disable this Zimlet when Zmail Web Client is used in http mode.
         PS:
-        - This property is ignored in Zimbra Desktop and in localhost
-        - Supported from Zimbra 7.1.3 onwards
+        - This property is ignored in Zmail Desktop and in localhost
+        - Supported from Zmail 7.1.3 onwards
         -->
         <property name="hasSensitiveData">true</property>
     </global>

@@ -12,31 +12,31 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.offline;
+package org.zmail.cs.account.offline;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.db.DbOfflineDirectory;
-import com.zimbra.cs.offline.common.OfflineConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.db.DbOfflineDirectory;
+import org.zmail.cs.offline.common.OfflineConstants;
 
 /**
  * directory:
- *          entry_id | entry_type | entry_name  | zimbraId 
+ *          entry_id | entry_type | entry_name  | zmailId 
  *              dd   |   Gal      | xxx.com     |  aaaa-bbbb-cccc-dddd
  *
  * directory_attrs:
  *          entry_id | name                     | value
  *              dd   | cn                       | xxx.com
  *              dd   | objectClass              | domainGalEntry
- *              dd   | zimbraId                 | aaaa-bbbb-cccc-dddd
+ *              dd   | zmailId                 | aaaa-bbbb-cccc-dddd
  *              dd   | offlineGalRetryEnabled   | TRUE
- *              dd   | offlineGalAccountId      | 1234-2323-232-3323 (Gal Account zimbraId)
+ *              dd   | offlineGalAccountId      | 1234-2323-232-3323 (Gal Account zmailId)
  *              dd   | offlineUsingGalAccountId | 1111-2222-3333-4444 (Account which uses this as their GAL)
  *              dd   | offlineUsingGalAccountId | 1111-2222-3333-5555 (Account which uses this as their GAL)
  *
@@ -53,7 +53,7 @@ public class OfflineDomainGal extends NamedEntry {
             List<String> ids = DbOfflineDirectory.listAllDirectoryEntries(OfflineProvisioning.EntryType.GAL);
             for (String id : ids) {
                 Map<String, Object> attrs = DbOfflineDirectory.readDirectoryEntry(OfflineProvisioning.EntryType.GAL,
-                        Provisioning.A_zimbraId, id);
+                        Provisioning.A_zmailId, id);
                 if (attrs == null)
                     continue;
                 String domainName = (String) attrs.get(Provisioning.A_cn);
@@ -76,7 +76,7 @@ public class OfflineDomainGal extends NamedEntry {
     }
 
     public String getId() {
-        return getAttr(Provisioning.A_zimbraId);
+        return getAttr(Provisioning.A_zmailId);
     }
 
     public Account getGalAccount() throws ServiceException {

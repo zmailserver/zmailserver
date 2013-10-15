@@ -1,4 +1,4 @@
-AjxTemplate.register("com_zimbra_salesdemo.templates.SalesDemo#TEMPLATE_FOR_SAP_SEM_ITEM_TOOLTIP", 
+AjxTemplate.register("org_zmail_salesdemo.templates.SalesDemo#TEMPLATE_FOR_SAP_SEM_ITEM_TOOLTIP", 
 function(name, params, data, buffer) {
 	var _hasBuffer = Boolean(buffer);
 	data = (typeof data == "string" ? { id: data } : data) || {};
@@ -14,10 +14,10 @@ function(name, params, data, buffer) {
 {
 	"id": "TEMPLATE_FOR_SAP_SEM_ITEM_TOOLTIP"
 }, true);
-AjxPackage.define("com_zimbra_salesdemo.templates.SalesDemo");
-AjxTemplate.register("com_zimbra_salesdemo.templates.SalesDemo", AjxTemplate.getTemplate("com_zimbra_salesdemo.templates.SalesDemo#TEMPLATE_FOR_SAP_SEM_ITEM_TOOLTIP"), AjxTemplate.getParams("com_zimbra_salesdemo.templates.SalesDemo#TEMPLATE_FOR_SAP_SEM_ITEM_TOOLTIP"));
+AjxPackage.define("org_zmail_salesdemo.templates.SalesDemo");
+AjxTemplate.register("org_zmail_salesdemo.templates.SalesDemo", AjxTemplate.getTemplate("org_zmail_salesdemo.templates.SalesDemo#TEMPLATE_FOR_SAP_SEM_ITEM_TOOLTIP"), AjxTemplate.getParams("org_zmail_salesdemo.templates.SalesDemo#TEMPLATE_FOR_SAP_SEM_ITEM_TOOLTIP"));
 
-AjxTemplate.register("com_zimbra_salesdemo.templates.SalesDemo#TEMPLATE_FOR_SAP_SEM_ITEM_DIALOG", 
+AjxTemplate.register("org_zmail_salesdemo.templates.SalesDemo#TEMPLATE_FOR_SAP_SEM_ITEM_DIALOG", 
 function(name, params, data, buffer) {
 	var _hasBuffer = Boolean(buffer);
 	data = (typeof data == "string" ? { id: data } : data) || {};
@@ -34,7 +34,7 @@ function(name, params, data, buffer) {
 	"id": "TEMPLATE_FOR_SAP_SEM_ITEM_DIALOG"
 }, true);
 
-AjxTemplate.register("com_zimbra_salesdemo.templates.SalesDemo#TEMPLATE_FOR_SAP_SEM_ITEM_TOOLBAR", 
+AjxTemplate.register("org_zmail_salesdemo.templates.SalesDemo#TEMPLATE_FOR_SAP_SEM_ITEM_TOOLBAR", 
 function(name, params, data, buffer) {
 	var _hasBuffer = Boolean(buffer);
 	data = (typeof data == "string" ? { id: data } : data) || {};
@@ -51,7 +51,7 @@ function(name, params, data, buffer) {
 	"id": "TEMPLATE_FOR_SAP_SEM_ITEM_TOOLBAR"
 }, true);
 
-AjxTemplate.register("com_zimbra_salesdemo.templates.SalesDemo#TEMPLATE_FOR_Q2_FORECAST_TOOLTIP", 
+AjxTemplate.register("org_zmail_salesdemo.templates.SalesDemo#TEMPLATE_FOR_Q2_FORECAST_TOOLTIP", 
 function(name, params, data, buffer) {
 	var _hasBuffer = Boolean(buffer);
 	data = (typeof data == "string" ? { id: data } : data) || {};
@@ -68,7 +68,7 @@ function(name, params, data, buffer) {
 	"id": "TEMPLATE_FOR_Q2_FORECAST_TOOLTIP"
 }, true);
 
-AjxTemplate.register("com_zimbra_salesdemo.templates.SalesDemo#TEMPLATE_FOR_Q2_FORECAST_DIALOG", 
+AjxTemplate.register("org_zmail_salesdemo.templates.SalesDemo#TEMPLATE_FOR_Q2_FORECAST_DIALOG", 
 function(name, params, data, buffer) {
 	var _hasBuffer = Boolean(buffer);
 	data = (typeof data == "string" ? { id: data } : data) || {};
@@ -85,7 +85,7 @@ function(name, params, data, buffer) {
 	"id": "TEMPLATE_FOR_Q2_FORECAST_DIALOG"
 }, true);
 
-AjxTemplate.register("com_zimbra_salesdemo.templates.SalesDemo#TEMPLATE_FOR_Q2_FORECAST_TOOLBAR", 
+AjxTemplate.register("org_zmail_salesdemo.templates.SalesDemo#TEMPLATE_FOR_Q2_FORECAST_TOOLBAR", 
 function(name, params, data, buffer) {
 	var _hasBuffer = Boolean(buffer);
 	data = (typeof data == "string" ? { id: data } : data) || {};
@@ -102,7 +102,7 @@ function(name, params, data, buffer) {
 	"id": "TEMPLATE_FOR_Q2_FORECAST_TOOLBAR"
 }, true);
 
-AjxTemplate.register("com_zimbra_salesdemo.templates.SalesDemo#TEMPLATE_FOR_EPIC_TOOLTIP", 
+AjxTemplate.register("org_zmail_salesdemo.templates.SalesDemo#TEMPLATE_FOR_EPIC_TOOLTIP", 
 function(name, params, data, buffer) {
 	var _hasBuffer = Boolean(buffer);
 	data = (typeof data == "string" ? { id: data } : data) || {};
@@ -119,7 +119,7 @@ function(name, params, data, buffer) {
 	"id": "TEMPLATE_FOR_EPIC_TOOLTIP"
 }, true);
 
-AjxTemplate.register("com_zimbra_salesdemo.templates.SalesDemo#TEMPLATE_FOR_EPIC_DIALOG", 
+AjxTemplate.register("org_zmail_salesdemo.templates.SalesDemo#TEMPLATE_FOR_EPIC_DIALOG", 
 function(name, params, data, buffer) {
 	var _hasBuffer = Boolean(buffer);
 	data = (typeof data == "string" ? { id: data } : data) || {};
@@ -136,7 +136,7 @@ function(name, params, data, buffer) {
 	"id": "TEMPLATE_FOR_EPIC_DIALOG"
 }, true);
 
-AjxTemplate.register("com_zimbra_salesdemo.templates.SalesDemo#TEMPLATE_FOR_EPIC_TOOLBAR", 
+AjxTemplate.register("org_zmail_salesdemo.templates.SalesDemo#TEMPLATE_FOR_EPIC_TOOLBAR", 
 function(name, params, data, buffer) {
 	var _hasBuffer = Boolean(buffer);
 	data = (typeof data == "string" ? { id: data } : data) || {};

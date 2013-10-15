@@ -14,16 +14,16 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.octopus.tests.settings;
+package org.zmail.qa.selenium.projects.octopus.tests.settings;
 
 import org.testng.annotations.*;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.octopus.core.OctopusCommonTest;
-import com.zimbra.qa.selenium.projects.octopus.ui.DialogSettings;
-import com.zimbra.qa.selenium.projects.octopus.ui.PageMyFiles;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.octopus.core.OctopusCommonTest;
+import org.zmail.qa.selenium.projects.octopus.ui.DialogSettings;
+import org.zmail.qa.selenium.projects.octopus.ui.PageMyFiles;
 
 public class AccountSettings extends OctopusCommonTest {
 
@@ -50,18 +50,18 @@ public class AccountSettings extends OctopusCommonTest {
 
 	@Test(description = "Open Settings dialog - verify UI layout", groups = { "functional" })
 	public void AccountSettings_01() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		String deviceName = "device"
-				+ ZimbraSeleniumProperties.getUniqueString();
+				+ ZmailSeleniumProperties.getUniqueString();
 
 		// Register device through SOAP
-		account.soapSend("<RegisterDeviceRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<RegisterDeviceRequest xmlns='urn:zmailMail'>"
 				+ "<device name='" + deviceName + "'/>"
 				+ "</RegisterDeviceRequest>");
 
 		// Get all devices through SOAP
-		account.soapSend("<GetAllDevicesRequest xmlns='urn:zimbraMail'/>");
+		account.soapSend("<GetAllDevicesRequest xmlns='urn:zmailMail'/>");
 
 		// Open Settings dialog
 		DialogSettings dlg = (DialogSettings) app.zPageOctopus
@@ -100,7 +100,7 @@ public class AccountSettings extends OctopusCommonTest {
 
 	@Test(description = "Open Settings dialog - verify account Name", groups = { "smoke" })
 	public void AccountSettings_02() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		DialogSettings dlg = (DialogSettings) app.zPageOctopus
 				.zToolbarPressPulldown(Button.B_USER_NAME, Button.O_SETTINGS);
@@ -116,18 +116,18 @@ public class AccountSettings extends OctopusCommonTest {
 
 	@Test(description = "Open Settings dialog - verify Devices field", groups = { "smoke" })
 	public void AccountSettings_03() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		String deviceName = "device"
-				+ ZimbraSeleniumProperties.getUniqueString();
+				+ ZmailSeleniumProperties.getUniqueString();
 
 		// Register device through SOAP
-		account.soapSend("<RegisterDeviceRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<RegisterDeviceRequest xmlns='urn:zmailMail'>"
 				+ "<device name='" + deviceName + "'/>"
 				+ "</RegisterDeviceRequest>");
 
 		// Get all devices through SOAP
-		account.soapSend("<GetAllDevicesRequest xmlns='urn:zimbraMail'/>");
+		account.soapSend("<GetAllDevicesRequest xmlns='urn:zmailMail'/>");
 
 		DialogSettings dlg = (DialogSettings) app.zPageOctopus
 				.zToolbarPressPulldown(Button.B_USER_NAME, Button.O_SETTINGS);
@@ -144,18 +144,18 @@ public class AccountSettings extends OctopusCommonTest {
 
 	@Test(description = "Click on device Unlink & Wipe button - verify device is disabled", groups = { "functional" })
 	public void AccountSettings_04() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		String deviceName = "device"
-				+ ZimbraSeleniumProperties.getUniqueString();
+				+ ZmailSeleniumProperties.getUniqueString();
 
 		// Register device through SOAP
-		account.soapSend("<RegisterDeviceRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<RegisterDeviceRequest xmlns='urn:zmailMail'>"
 				+ "<device name='" + deviceName + "'/>"
 				+ "</RegisterDeviceRequest>");
 
 		// Get all devices through SOAP
-		account.soapSend("<GetAllDevicesRequest xmlns='urn:zimbraMail'/>");
+		account.soapSend("<GetAllDevicesRequest xmlns='urn:zmailMail'/>");
 
 		DialogSettings dlg = (DialogSettings) app.zPageOctopus
 				.zToolbarPressPulldown(Button.B_USER_NAME, Button.O_SETTINGS);
@@ -234,14 +234,14 @@ public class AccountSettings extends OctopusCommonTest {
 		}
 		try {
 			// Refresh view
-			// ZimbraAccount account = app.zGetActiveAccount();
+			// ZmailAccount account = app.zGetActiveAccount();
 			// FolderItem item =
 			// FolderItem.importFromSOAP(account,SystemFolder.Briefcase);
-			// account.soapSend("<GetFolderRequest xmlns='urn:zimbraMail'><folder l='1' recursive='0'/>"
+			// account.soapSend("<GetFolderRequest xmlns='urn:zmailMail'><folder l='1' recursive='0'/>"
 			// + "</GetFolderRequest>");
-			// account.soapSend("<GetFolderRequest xmlns='urn:zimbraMail' requestId='folders' depth='1' tr='true' view='document'><folder l='"
+			// account.soapSend("<GetFolderRequest xmlns='urn:zmailMail' requestId='folders' depth='1' tr='true' view='document'><folder l='"
 			// + item.getId() + "'/></GetFolderRequest>");
-			// account.soapSend("<GetActivityStreamRequest xmlns='urn:zimbraMail' id='16'/>");
+			// account.soapSend("<GetActivityStreamRequest xmlns='urn:zmailMail' id='16'/>");
 			// app.zGetActiveAccount().accountIsDirty = true;
 			// app.zPageOctopus.sRefresh();
 

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-function com_zimbra_email_handlerObject() {
+function org_zmail_email_handlerObject() {
 	this.isPrimaryEmailTooltip = true;
 
 	// support for showing address objects in the msg header as bubbles
@@ -23,10 +23,10 @@ function com_zimbra_email_handlerObject() {
 	DwtControl.ALL_BY_ID[this._internalId] = this;
 }
 
-com_zimbra_email_handlerObject.prototype = new ZmZimletBase();
-com_zimbra_email_handlerObject.prototype.constructor = com_zimbra_email_handlerObject;
+org_zmail_email_handlerObject.prototype = new ZmZimletBase();
+org_zmail_email_handlerObject.prototype.constructor = org_zmail_email_handlerObject;
 
-var EmailTooltipZimlet = com_zimbra_email_handlerObject;
+var EmailTooltipZimlet = org_zmail_email_handlerObject;
 
 
 // static content

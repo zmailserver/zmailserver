@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.tarformatter;
+package org.zmail.tarformatter;
 
-import com.zimbra.utils.*;
-import com.zimbra.zcsprov.ZmProvGenericException;
-import com.zimbra.zcsprov.ZMSoapSession;
-import com.zimbra.zcsprov.ZCSACProvision;
-import com.zimbra.auth.AuthTokens;
-import com.zimbra.common.ZCSProvParams;
+import org.zmail.utils.*;
+import org.zmail.zcsprov.ZmProvGenericException;
+import org.zmail.zcsprov.ZMSoapSession;
+import org.zmail.zcsprov.ZCSACProvision;
+import org.zmail.auth.AuthTokens;
+import org.zmail.common.ZCSProvParams;
 import org.apache.log4j.PropertyConfigurator;
 
 import java.util.Properties;
@@ -201,9 +201,9 @@ class tarMigrator implements Runnable
             cmdarr[2]="-u";
             cmdarr[3]=destAdminuname+":"+destAdminpwd;
             cmdarr[4]="--data-binary";
-            //"@C:\\Zimbra_Work\\YZYMigration\\ZCSProvisioning\\zcsprov\\mailboxdumps\\test11.tgz";
+            //"@C:\\Zmail_Work\\YZYMigration\\ZCSProvisioning\\zcsprov\\mailboxdumps\\test11.tgz";
             cmdarr[5]="@"+tarfile;
-            //"https://10.66.118.237:7071/service/home/test13@in.zimbra.com?fmt=tgz";
+            //"https://10.66.118.237:7071/service/home/test13@in.zmail.com?fmt=tgz";
             cmdarr[6]="https://"+destServer+":"+destPort+"/service/home/"+destmailbox+"?fmt=tgz";
 
             String completeURL="";
@@ -333,10 +333,10 @@ class tarMigrator implements Runnable
                         }
                         else //move to SUCCESS directory
                         {
-                            //if not empty, modify ZimbraMailTransport
-                            if(!(isEmpty(tarMigparams.ZimbraMailTransport)))
+                            //if not empty, modify ZmailMailTransport
+                            if(!(isEmpty(tarMigparams.ZmailMailTransport)))
                             {
-                                if(!zcsacprov.ModifyAccountMailTransport(dest_accountid,tarMigparams.ZimbraMailTransport))
+                                if(!zcsacprov.ModifyAccountMailTransport(dest_accountid,tarMigparams.ZmailMailTransport))
                                 {
                                     tarmig_log.log(Level.SEVERE,"ModifyAccountMailTransport Failed: "+userInfoArr[0]+"@"+targetDomain);
                                 }
@@ -424,7 +424,7 @@ public class tarFormatter implements EventNotifier
     private static final String ztozlogFile="ztozlog";
     private static final String tarMigVersion="1.4";
     private static final String ztozconfigFile="zmztozmig.conf";
-    private static final String ztoz_default_configpath="/opt/zimbra/conf/";
+    private static final String ztoz_default_configpath="/opt/zmail/conf/";
     private String configFile="";
     private ZCSPLogger tarformatter_Logger;
     private Logger tarfmt_log;
@@ -439,7 +439,7 @@ public class tarFormatter implements EventNotifier
 
     private void SetdefaultLog4JAppender()
     {
-        String level = System.getProperty("zimbra.log4j.level");
+        String level = System.getProperty("zmail.log4j.level");
         if (level == null)
         {
             level = "INFO";
@@ -714,9 +714,9 @@ public class tarFormatter implements EventNotifier
             tarfmtparams.KeepSuccessFiles = attr[1].trim();
             ztozparamcounter++;
         }
-        else if (attr[0].trim().compareToIgnoreCase("ZimbraMailTransport")==0)
+        else if (attr[0].trim().compareToIgnoreCase("ZmailMailTransport")==0)
         {
-            tarfmtparams.ZimbraMailTransport = attr[1].trim();
+            tarfmtparams.ZmailMailTransport = attr[1].trim();
             ztozparamcounter++;
         }
         else if (attr[0].trim().compareToIgnoreCase("resolve")==0)
@@ -789,7 +789,7 @@ public class tarFormatter implements EventNotifier
         System.out.println("-v --version                    Prints version");
         System.out.println("-h --help                       Shows help");
         System.out.println("-f --ConfigFile                 Config file path");
-        System.out.println("                                [default file -> /opt/zimbra/conf/zmztozmig.conf]");
+        System.out.println("                                [default file -> /opt/zmail/conf/zmztozmig.conf]");
         System.out.println("-d --debug                      prints versbose debug messages");        
     }
 

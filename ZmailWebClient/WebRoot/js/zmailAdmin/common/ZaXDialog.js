@@ -167,14 +167,14 @@ ZaXDialog.prototype.popdownHookListner =
 function() {
     if (!this._inMin) {
 	    var task = this.getTaskItem();
-        ZaZimbraAdmin.getInstance().getTaskController().removeTask(task);
+        ZaZmailAdmin.getInstance().getTaskController().removeTask(task);
     }
 }
 
 ZaXDialog.prototype.__handleMinClick =
 function () {
     var task = this.getTaskItem();
-    ZaZimbraAdmin.getInstance().getTaskController().addTask(task);
+    ZaZmailAdmin.getInstance().getTaskController().addTask(task);
     this._inMin = true;
     this.popdown();
     this._inMin = false;

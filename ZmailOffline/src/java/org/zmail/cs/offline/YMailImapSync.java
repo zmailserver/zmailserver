@@ -12,16 +12,16 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline;
+package org.zmail.cs.offline;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.datasource.imap.ImapSync;
-import com.zimbra.cs.offline.common.OfflineConstants;
-import com.zimbra.cs.offline.util.OfflineYAuth;
-import com.zimbra.cs.util.yauth.Authenticator;
-import com.zimbra.cs.util.yauth.XYMEAuthenticator;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.datasource.imap.ImapSync;
+import org.zmail.cs.offline.common.OfflineConstants;
+import org.zmail.cs.offline.util.OfflineYAuth;
+import org.zmail.cs.util.yauth.Authenticator;
+import org.zmail.cs.util.yauth.XYMEAuthenticator;
 
 import javax.security.auth.login.LoginException;
 import java.io.IOException;
@@ -43,7 +43,7 @@ class YMailImapSync extends ImapSync {
             super.connect();
         } catch (ServiceException e) {
             if (!isAuthError(e)) throw e;
-            ZimbraLog.datasource.debug("Invalidating possibly expired cookie and retrying auth");
+            ZmailLog.datasource.debug("Invalidating possibly expired cookie and retrying auth");
             auth.invalidate();
             setAuthenticator(newXYMEAuthenticator(auth));
             super.connect();

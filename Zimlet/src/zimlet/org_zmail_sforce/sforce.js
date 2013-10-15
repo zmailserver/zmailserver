@@ -15,23 +15,23 @@
 
 ////////////////////////////////////////////////////////////////
 ///  Zimlet to handle integration with SalesForce            ///
-///  @author Raja Rao DV, <rrao@zimbra.com>	[V 3.0]			 ///
-///  @author Mihai Bazon, <mihai@zimbra.com>                 ///
-///  @author Kevin Henrikson, <kevinh@zimbra.com>            ///
+///  @author Raja Rao DV, <rrao@zmail.com>	[V 3.0]			 ///
+///  @author Mihai Bazon, <mihai@zmail.com>                 ///
+///  @author Kevin Henrikson, <kevinh@zmail.com>            ///
 ////////////////////////////////////////////////////////////////
-function Com_Zimbra_SForce() {
+function Com_Zmail_SForce() {
 }
 
-/// Zimlet handler objects, such as Com_Zimbra_SForce, must inherit from
+/// Zimlet handler objects, such as Com_Zmail_SForce, must inherit from
 /// ZmZimletBase.  The 2 lines below achieve this.
-Com_Zimbra_SForce.prototype = new ZmZimletBase();
-Com_Zimbra_SForce.prototype.constructor = Com_Zimbra_SForce;
+Com_Zmail_SForce.prototype = new ZmZimletBase();
+Com_Zmail_SForce.prototype.constructor = Com_Zmail_SForce;
 
-Com_Zimbra_SForce.SFORCE = "SFORCE";
-Com_Zimbra_SForce.SFORCE_MAIL = "SFORCE_MAIL_TB_BTN";
-Com_Zimbra_SForce.SFORCE_CONTACT_TB_BTN = "SFORCE_CONTACT_TB_BTN";
+Com_Zmail_SForce.SFORCE = "SFORCE";
+Com_Zmail_SForce.SFORCE_MAIL = "SFORCE_MAIL_TB_BTN";
+Com_Zmail_SForce.SFORCE_CONTACT_TB_BTN = "SFORCE_CONTACT_TB_BTN";
 
-Com_Zimbra_SForce.prototype.init = function() {
+Com_Zmail_SForce.prototype.init = function() {
 	this.LOGIN_SERVER = this.getUserProperty("sforce_logindlg_apiURL");
 	if(!this.LOGIN_SERVER || this.LOGIN_SERVER == "") {
 		this.LOGIN_SERVER = this.getConfig("SF_API_URL");
@@ -48,14 +48,14 @@ Com_Zimbra_SForce.prototype.init = function() {
 	if (this.loginToSFOnLaunch) {
 		this.login();
 	}
-	this.sForceSearchDlg = new Com_Zimbra_SForceSearchDlg(this);
+	this.sForceSearchDlg = new Com_Zmail_SForceSearchDlg(this);
 };
 
 //-------------------------------------------------------------------------------------------
 //UI Handlers (START)
 //-------------------------------------------------------------------------------------------
-/// Called by the Zimbra framework upon an accepted drag'n'drop
-Com_Zimbra_SForce.prototype.doDrop = function(obj) {
+/// Called by the Zmail framework upon an accepted drag'n'drop
+Com_Zmail_SForce.prototype.doDrop = function(obj) {
 	switch (obj.TYPE) {
 		case "ZmMailMsg":
 			if (obj instanceof Array) {
@@ -85,19 +85,19 @@ Com_Zimbra_SForce.prototype.doDrop = function(obj) {
 	}
 };
 
-/// Called by the Zimbra framework when the SForce panel item was clicked
-Com_Zimbra_SForce.prototype.singleClicked = function() {
+/// Called by the Zmail framework when the SForce panel item was clicked
+Com_Zmail_SForce.prototype.singleClicked = function() {
 	//this.login();
 	this._displayLoginDialog();
 };
 
-Com_Zimbra_SForce.prototype.doubleClicked = function() {
+Com_Zmail_SForce.prototype.doubleClicked = function() {
 	this.singleClicked();
 };
 
-/// Called by the Zimbra framework when some menu item that doesn't have an
+/// Called by the Zmail framework when some menu item that doesn't have an
 /// <actionURL> was selected
-Com_Zimbra_SForce.prototype.menuItemSelected = function(itemId, val) {
+Com_Zmail_SForce.prototype.menuItemSelected = function(itemId, val) {
 	switch (itemId) {
 		case "PREFERENCES":
 			this._displayLoginDialog();
@@ -130,7 +130,7 @@ Com_Zimbra_SForce.prototype.menuItemSelected = function(itemId, val) {
 	}
 };
 
-Com_Zimbra_SForce.prototype.getActionMenu =
+Com_Zmail_SForce.prototype.getActionMenu =
 function(obj, span, context) {
 	if (this._zimletContext._contentActionMenu instanceof AjxCallback) {
 		this._zimletContext._contentActionMenu = this._makeMenu(this._zimletContext._contentActionMenu.args);
@@ -143,7 +143,7 @@ function(obj, span, context) {
 	return this._zimletContext._contentActionMenu;
 };
 
-Com_Zimbra_SForce.prototype._makeMenu =
+Com_Zmail_SForce.prototype._makeMenu =
 function(obj) {
 	var items = obj[0];
 	var menu = new ZmActionMenu({parent:DwtShell.getShell(window), menuItems:ZmOperation.NONE});
@@ -210,7 +210,7 @@ function(obj) {
 	return menu;
 };
 
-Com_Zimbra_SForce.prototype._handleDynamicMenuItemLinks =
+Com_Zmail_SForce.prototype._handleDynamicMenuItemLinks =
 function(id) {
 	var caseNumber = this._getTooltipData(this._actionObject);
 	var arry = id.split("=::=");
@@ -218,7 +218,7 @@ function(id) {
 	this._getCaseLink(arry[0], caseNumber, callback);
 };
 
-Com_Zimbra_SForce.prototype._openSFLink =
+Com_Zmail_SForce.prototype._openSFLink =
 function(url) {
 	if (url == "") {
 		appCtxt.getAppController().setStatusMsg("Salesforce Link/URL was empty", ZmStatusView.LEVEL_WARNING);
@@ -227,7 +227,7 @@ function(url) {
 	window.open(url);
 };
 
-Com_Zimbra_SForce.prototype._handleDynamicMenuItemClick =
+Com_Zmail_SForce.prototype._handleDynamicMenuItemClick =
 function(id) {
 	var caseNumber = this._getTooltipData(this._actionObject);
 	var arry = id.split("=::=");
@@ -235,7 +235,7 @@ function(id) {
 	this._getCaseId(caseNumber, callback);
 };
 
-Com_Zimbra_SForce.prototype._updateCase =
+Com_Zmail_SForce.prototype._updateCase =
 function(field, val, id) {
 	var props = {};
 	var params = [];
@@ -246,12 +246,12 @@ function(field, val, id) {
 	this.updateSFObject(params, "Case", callback, true);
 };
 
-Com_Zimbra_SForce.prototype._closeCase =
+Com_Zmail_SForce.prototype._closeCase =
 function(id) {
 	this._updateCase("Status", "Close", id);
 };
 
-Com_Zimbra_SForce.prototype._handleUpdateCase =
+Com_Zmail_SForce.prototype._handleUpdateCase =
 function(response) {
 	if (response.success) {
 		appCtxt.getAppController().setStatusMsg("Support Case updated successfully", ZmStatusView.LEVEL_INFO);
@@ -261,12 +261,12 @@ function(response) {
 
 };
 
-Com_Zimbra_SForce.prototype._loadCaseDescriptionObject = function() {
+Com_Zmail_SForce.prototype._loadCaseDescriptionObject = function() {
 	if (this._caseObjectLoaded) {
 		return;
 	}
 	if (!this.sForceObject) {
-		this.sForceObject = new Com_Zimbra_SForceObject(this);
+		this.sForceObject = new Com_Zmail_SForceObject(this);
 	}
 	this._sforceCaseObject = this.sForceObject.getFieldMap("describeSObject", "Case");
 	//var hasItem = false;
@@ -283,7 +283,7 @@ Com_Zimbra_SForce.prototype._loadCaseDescriptionObject = function() {
 
 };
 
-Com_Zimbra_SForce.prototype._displayQuickUpdateDialog =
+Com_Zmail_SForce.prototype._displayQuickUpdateDialog =
 function(result) {
 	if (this.quDialog) {
 		this.quView.getHtmlElement().innerHTML = this._createQuickUpdateView(result);
@@ -303,7 +303,7 @@ function(result) {
 	this.quDialog.popup();
 };
 
-Com_Zimbra_SForce.prototype._quOKBtnListner =
+Com_Zmail_SForce.prototype._quOKBtnListner =
 function() {
 	var props = {};
 	for (var i = 0; i < this._quickUpdateSelectMenuList.length; i++) {
@@ -330,7 +330,7 @@ function() {
 	this.updateSFObject(params, "Case", callback, true);
 };
 
-Com_Zimbra_SForce.prototype._handleQuickUpdateCase =
+Com_Zmail_SForce.prototype._handleQuickUpdateCase =
 function(result) {
 	if (!result.errors) {
 		appCtxt.setStatusMsg("Support Case Updated", ZmStatusView.LEVEL_INFO);
@@ -345,7 +345,7 @@ function(result) {
 	}
 };
 
-Com_Zimbra_SForce.prototype._createQuickUpdateView =
+Com_Zmail_SForce.prototype._createQuickUpdateView =
 function(result) {
 	var ownerName = "";
 	var ownerId = "";
@@ -377,7 +377,7 @@ function(result) {
 	return html.join("");
 };
 
-Com_Zimbra_SForce.prototype._addCaseOwnerLookupBtn = function() {
+Com_Zmail_SForce.prototype._addCaseOwnerLookupBtn = function() {
 	var btn = new DwtButton({parent:this._shell});
 	btn.setText("Change");
 	btn.setImage("Search");
@@ -385,12 +385,12 @@ Com_Zimbra_SForce.prototype._addCaseOwnerLookupBtn = function() {
 	document.getElementById("sforce_quickUpdate_changeOwnerLookupBtn").appendChild(btn.getHtmlElement());
 };
 
-Com_Zimbra_SForce.prototype._changeCaseOwnerBtnHdlr = function() {
+Com_Zmail_SForce.prototype._changeCaseOwnerBtnHdlr = function() {
 	this.sForceSearchDlg.setProperties("User", "sforce_quickUpdate_changeOwner", null, "sforce_quickUpdate_changeOwnerClearLink");
 	this.sForceSearchDlg.displaySearchDialog();
 };
 
-Com_Zimbra_SForce.prototype._getQuickUpdateListHtml =
+Com_Zmail_SForce.prototype._getQuickUpdateListHtml =
 function(elName, label, items, currentValue) {
 	var html = new Array();
 	var i = 0;
@@ -432,7 +432,7 @@ function(elName, label, items, currentValue) {
 //-------------------------------------------------------------------------------------------
 //Login dialog related (START)
 //-------------------------------------------------------------------------------------------
-Com_Zimbra_SForce.prototype._displayLoginDialog =
+Com_Zmail_SForce.prototype._displayLoginDialog =
 function(callback, errorMsg) {
 	//if zimlet dialog already exists...
 	if (callback) {
@@ -458,7 +458,7 @@ function(callback, errorMsg) {
 	this.loginDlg.popup();
 };
 
-Com_Zimbra_SForce.prototype._setErrorMsgToLoginDlg =
+Com_Zmail_SForce.prototype._setErrorMsgToLoginDlg =
 function(errorMsg) {
 	if (errorMsg) {
 		document.getElementById("sforce_logindlg_errorDiv").innerHTML = errorMsg;
@@ -469,7 +469,7 @@ function(errorMsg) {
 	}
 };
 
-Com_Zimbra_SForce.prototype._setLoginValues =
+Com_Zmail_SForce.prototype._setLoginValues =
 function() {	//show the checkbox checked if needed
 	var user = this.getUserProperty("user");
 	var passwd = this.getUserProperty("passwd");
@@ -498,7 +498,7 @@ function() {	//show the checkbox checked if needed
 	}
 };
 
-Com_Zimbra_SForce.prototype._createLoginDlgView =
+Com_Zmail_SForce.prototype._createLoginDlgView =
 function() {
 	var html = new Array();
 	var i = 0;
@@ -520,7 +520,7 @@ function() {
 	html[i++] = "</TABLE></DIV>";
 	html[i++] = "<DIV>";
 	html[i++] = "<TABLE class='SForce_table' width='100%'>";
-	html[i++] = "<TR><TD width=18px><INPUT type='checkbox' id='sforce_logindlg_loginToSFOnLaunch' /></TD><TD  style='font-weight:bold'>Login to Salesforce when Zimbra is launched<TD></TD></TR>";
+	html[i++] = "<TR><TD width=18px><INPUT type='checkbox' id='sforce_logindlg_loginToSFOnLaunch' /></TD><TD  style='font-weight:bold'>Login to Salesforce when Zmail is launched<TD></TD></TR>";
 	html[i++] = "</TABLE></DIV>";
 	html[i++] = "<BR/>";
 	html[i++] = "<DIV class='SForce_yellow'>";
@@ -532,7 +532,7 @@ function() {
 	return html.join("");
 };
 
-Com_Zimbra_SForce.prototype._loginDlgOKBtnListener =
+Com_Zmail_SForce.prototype._loginDlgOKBtnListener =
 function() {
 	var needRefresh = false;
 	var user = AjxStringUtil.trim(document.getElementById("sforce_logindlg_userNamefield").value);
@@ -569,7 +569,7 @@ function() {
 	this.login(this._loginOkCallback, user, passwd);
 };
 
-Com_Zimbra_SForce.prototype._loginDlgCancelBtnListener =
+Com_Zmail_SForce.prototype._loginDlgCancelBtnListener =
 function() {
 	if (this.sForceViewManager) {
 		this.sForceViewManager.hideAllViewsIfBusy();
@@ -577,7 +577,7 @@ function() {
 	this.loginDlg.popdown();
 };
 
-Com_Zimbra_SForce.prototype._handleSaveProperties =
+Com_Zmail_SForce.prototype._handleSaveProperties =
 function(needRefresh) {
 	appCtxt.setStatusMsg("Preferences Saved", ZmStatusView.LEVEL_INFO);
 	if (needRefresh) {
@@ -585,7 +585,7 @@ function(needRefresh) {
 	}
 };
 
-Com_Zimbra_SForce.prototype.showYesNoDialog =
+Com_Zmail_SForce.prototype.showYesNoDialog =
 function() {
 	var dlg = appCtxt.getYesNoMsgDialog();
 	dlg.registerCallback(DwtDialog.YES_BUTTON, this._yesButtonClicked, this, dlg);
@@ -594,22 +594,22 @@ function() {
 	dlg.popup();
 };
 
-Com_Zimbra_SForce.prototype._yesButtonClicked =
+Com_Zmail_SForce.prototype._yesButtonClicked =
 function(dlg) {
 	dlg.popdown();
 	this._refreshBrowser();
 };
 
-Com_Zimbra_SForce.prototype._NoButtonClicked =
+Com_Zmail_SForce.prototype._NoButtonClicked =
 function(dlg) {
 	dlg.popdown();
 }
 
-Com_Zimbra_SForce.prototype._refreshBrowser =
+Com_Zmail_SForce.prototype._refreshBrowser =
 function() {
 	window.onbeforeunload = null;
 	var url = AjxUtil.formatUrl({});
-	ZmZimbraMail.sendRedirect(url);
+	ZmZmailMail.sendRedirect(url);
 };
 
 //-------------------------------------------------------------------------------------------
@@ -619,7 +619,7 @@ function() {
 //-------------------------------------------------------------------------------------------
 //Salesforce Bar related(START)
 //-------------------------------------------------------------------------------------------
-Com_Zimbra_SForce.prototype.onMsgView =
+Com_Zmail_SForce.prototype.onMsgView =
 function(msg) {
 	this._initializeSalesForceForThisMsg(msg);
 	if (this.user && this.user != "" && this.passwd && this.passwd != "") {
@@ -627,7 +627,7 @@ function(msg) {
 	}
 };
 
-Com_Zimbra_SForce.prototype._initializeSalesForceForThisMsg =
+Com_Zmail_SForce.prototype._initializeSalesForceForThisMsg =
 function(msg) {
 	this._currentSelectedMsg = msg;
 	this.sforce_bar_expanded = false;
@@ -645,7 +645,7 @@ function(msg) {
 	this._emailsForCurrentNote = this._getValidAddressesForCurrentNote(msg);
 };
 
-Com_Zimbra_SForce.prototype._addSForceBar =
+Com_Zmail_SForce.prototype._addSForceBar =
 function(recordsObj) {
 	this._parseAndSetRecordsObj(recordsObj);
 	var viewId = appCtxt.getCurrentViewId();
@@ -656,7 +656,7 @@ function(recordsObj) {
 	}
 };
 
-Com_Zimbra_SForce.prototype._parseAndSetRecordsObj =
+Com_Zmail_SForce.prototype._parseAndSetRecordsObj =
 function(recordsObj) {
 	this.cRecords = [];
 	this.lRecords = [];
@@ -680,7 +680,7 @@ function(recordsObj) {
 	this.allRecords = allRecords;
 };
 
-Com_Zimbra_SForce.prototype._do_addSForceBar =
+Com_Zmail_SForce.prototype._do_addSForceBar =
 function(viewId) {
 	if (this.sforce_logindlg_sbarShowOnlyOnResult && this.allRecords.length == 0 && !this._force_show_salesforceBar) {
 		return;
@@ -748,7 +748,7 @@ function(viewId) {
 	this._searchAllContacts = false;//set this before calling noteDropped
 };
 
-Com_Zimbra_SForce.prototype.opacity =
+Com_Zmail_SForce.prototype.opacity =
 function(id, opacStart, opacEnd, millisec) {
 	//speed for each frame
 	var speed = Math.round(millisec / 100);
@@ -770,7 +770,7 @@ function(id, opacStart, opacEnd, millisec) {
 };
 
 //change the opacity for different browsers
-Com_Zimbra_SForce.prototype.changeOpac =
+Com_Zmail_SForce.prototype.changeOpac =
 function(opacity, styleObj) {
 	styleObj.opacity = (opacity / 100);
 	styleObj.MozOpacity = (opacity / 100);
@@ -778,7 +778,7 @@ function(opacity, styleObj) {
 	styleObj.filter = "alpha(opacity=" + opacity + ")";
 };
 
-Com_Zimbra_SForce.prototype._getSFBarWidgetHtml =
+Com_Zmail_SForce.prototype._getSFBarWidgetHtml =
 function() {
 	var html = new Array();
 	var i = 0;
@@ -805,16 +805,16 @@ function() {
 	return html.join("");
 };
 
-Com_Zimbra_SForce.prototype._getNoSearchResultsFoundHtml =
+Com_Zmail_SForce.prototype._getNoSearchResultsFoundHtml =
 function() {
 	return "<table align=center width=100%><td align=center>No search result or Salesforce information to display<td></table>";
 };
-Com_Zimbra_SForce.prototype._getSearchingHtml =
+Com_Zmail_SForce.prototype._getSearchingHtml =
 function() {
 	return "<table align=center width=100%><td align=center>Searching..<td></table>";
 };
 
-Com_Zimbra_SForce.prototype._addWidgetsToSFBar =
+Com_Zmail_SForce.prototype._addWidgetsToSFBar =
 function() {
 	var callback = AjxCallback.simpleClosure(this._sforceBarExpandBtnListener, this);
 	document.getElementById("sforce_bar_mainHandler").onclick = callback;
@@ -855,7 +855,7 @@ function() {
 	}
 };
 
-Com_Zimbra_SForce.prototype._searchFieldKeyHdlr =
+Com_Zmail_SForce.prototype._searchFieldKeyHdlr =
 function(ev) {
 	var event = ev || window.event;
 	if (event.keyCode != undefined && event.keyCode != 13) {//if not enter key
@@ -864,7 +864,7 @@ function(ev) {
 	this._sforceBarSearchHandler();
 };
 
-Com_Zimbra_SForce.prototype._sforceBarSearchHandler =
+Com_Zmail_SForce.prototype._sforceBarSearchHandler =
 function() {
 	var sq = document.getElementById("sforce_bar_searchField").value;
 	if (sq.length <= 1) {
@@ -878,7 +878,7 @@ function() {
 	this.search(q, 10, callback, true, true);
 };
 
-Com_Zimbra_SForce.prototype._sforceBarSearchResultHandler =
+Com_Zmail_SForce.prototype._sforceBarSearchResultHandler =
 function(result) {
 	var records = result.getDoc().getElementsByTagName("record");
 	if (records.length == 0) {
@@ -973,7 +973,7 @@ function(result) {
 };
 
 
-Com_Zimbra_SForce.prototype._sforceAddNotesHandler =
+Com_Zmail_SForce.prototype._sforceAddNotesHandler =
 function() {
 	if (this._currentSelectedMsg) {
 		this._searchAllContacts = false;//set this before calling noteDropped
@@ -981,7 +981,7 @@ function() {
 	}
 };
 
-Com_Zimbra_SForce.prototype._sforceBarEmailToCaseHdlr =
+Com_Zmail_SForce.prototype._sforceBarEmailToCaseHdlr =
 function() {
 	var contactName = "";
 	var subject = this._currentSelectedMsg.subject;
@@ -1014,7 +1014,7 @@ function() {
 	this.login(callback, null, null, true);
 };
 
-Com_Zimbra_SForce.prototype._emailExistsInSF =
+Com_Zmail_SForce.prototype._emailExistsInSF =
 function(email) {
 	var len = this._emailsInSalesforce.length;
 	for (var i = 0; i < len; i++) {
@@ -1026,7 +1026,7 @@ function(email) {
 	return false;
 };
 
-Com_Zimbra_SForce.prototype._getCurrentAddressAndDateStr =
+Com_Zmail_SForce.prototype._getCurrentAddressAndDateStr =
 function() {
 	if (!this._currentSelectedMsg) {
 		return;
@@ -1067,7 +1067,7 @@ function() {
 };
 
 
-Com_Zimbra_SForce.prototype._createNewMenuListener =
+Com_Zmail_SForce.prototype._createNewMenuListener =
 function(itemName) {
 	var itemCode = "";
 	switch (itemName) {
@@ -1115,7 +1115,7 @@ function(itemName) {
 };
 
 
-Com_Zimbra_SForce.prototype._sforceBarExpandBtnListener =
+Com_Zmail_SForce.prototype._sforceBarExpandBtnListener =
 function() {
 	if (!this.sforce_bar_recordsForThisMsgParsed) {
 		this._setResultsToSForceBar();
@@ -1140,7 +1140,7 @@ function() {
 	}
 };
 
-Com_Zimbra_SForce.prototype._setResultsToSForceBar =
+Com_Zmail_SForce.prototype._setResultsToSForceBar =
 function() {
 	this.sforce_bar_recordsForThisMsgParsed = true;
 	if (this.allRecords.length == 0) {
@@ -1359,7 +1359,7 @@ function() {
 };
 
 
-Com_Zimbra_SForce.prototype._getSFViewEditLinks =
+Com_Zmail_SForce.prototype._getSFViewEditLinks =
 function(id, otherLinksArry) {
 	var lnks = ["<a id='sforce_view_",id,"'  style='color: #385495; font-size: 11px;text-decoration:underline'  href='javascript:void(0)'>view</a>&nbsp;",
 		"<a id='sforce_edit_",id,"' style='color: #385495; font-size: 11px;text-decoration:underline' href='javascript:void(0)'>edit</a>&nbsp;",
@@ -1375,7 +1375,7 @@ function(id, otherLinksArry) {
 	return lnks.join("");
 };
 
-Com_Zimbra_SForce.prototype._sforceBarMainOnClickHdlr =
+Com_Zmail_SForce.prototype._sforceBarMainOnClickHdlr =
 function(ev) {
 	if (AjxEnv.isIE) {
 		ev = window.event;
@@ -1407,7 +1407,7 @@ function(ev) {
 	}
 };
 
-Com_Zimbra_SForce.prototype._openFrontDoorUrl =
+Com_Zmail_SForce.prototype._openFrontDoorUrl =
 function(mode, id) {
 	if (!this.sforceInstanceName) {
 		this.sforceInstanceName = (this.SERVER.split(".")[0]).split("//")[1];
@@ -1434,14 +1434,14 @@ function(mode, id) {
 // Support Case Link in mail related...
 //-------------------------------------------------------------------------------------------
 
-Com_Zimbra_SForce.prototype._getCaseId =
+Com_Zmail_SForce.prototype._getCaseId =
 function(caseNumber, callback) {
 	var q = ["Select Id from  Case where CaseNumber='",caseNumber,"'"].join("");
 	var callback = AjxCallback.simpleClosure(this._handleGetCaseId, this, callback);
 	this.query(q, 10, callback);
 };
 
-Com_Zimbra_SForce.prototype._handleGetCaseId =
+Com_Zmail_SForce.prototype._handleGetCaseId =
 function(callback, result) {
 	if (result.length == 0) {
 		appCtxt.setStatusMsg("Unknown case or you are not authorized to view this case", ZmStatusView.LEVEL_WARNING);
@@ -1453,14 +1453,14 @@ function(callback, result) {
 	}
 };
 
-Com_Zimbra_SForce.prototype._getCaseLink =
+Com_Zmail_SForce.prototype._getCaseLink =
 function(linkFieldName, caseNumber, callback) {
 	var q = ["Select ",linkFieldName," from  Case where CaseNumber='",caseNumber,"'"].join("");
 	var callback = AjxCallback.simpleClosure(this._handleGetCaseLink, this, linkFieldName, callback);
 	this.query(q, 10, callback);
 };
 
-Com_Zimbra_SForce.prototype._handleGetCaseLink =
+Com_Zmail_SForce.prototype._handleGetCaseLink =
 function(linkFieldName, callback, result) {
 	if (result.length == 0) {
 		appCtxt.setStatusMsg("Unknown case or you are not authorized to view this case", ZmStatusView.LEVEL_WARNING);
@@ -1476,7 +1476,7 @@ function(linkFieldName, callback, result) {
 	}
 };
 
-Com_Zimbra_SForce.prototype._getCurrentValuesForQuickUpdateDlg =
+Com_Zmail_SForce.prototype._getCurrentValuesForQuickUpdateDlg =
 function(caseNumber) {
 	this._allQuickUpdatePickLists = [];
 	var pickListNames = [];
@@ -1499,7 +1499,7 @@ function(caseNumber) {
 	this.query(q, 10, callback);
 
 };
-Com_Zimbra_SForce.prototype._handleGetCurrentValuesFoQuickUpdateDlg =
+Com_Zmail_SForce.prototype._handleGetCurrentValuesFoQuickUpdateDlg =
 function(result) {
 	var result = result[0];
 	if (!result) {
@@ -1514,7 +1514,7 @@ function(result) {
 	this._displayQuickUpdateDialog(result);
 };
 
-Com_Zimbra_SForce.prototype.clicked =
+Com_Zmail_SForce.prototype.clicked =
 function(element, caseNumber, parts, mode) {
 	if (!mode) {
 		mode = "open";
@@ -1524,7 +1524,7 @@ function(element, caseNumber, parts, mode) {
 	this._getCaseId(caseNumber, callback);
 };
 
-Com_Zimbra_SForce.prototype._handleCaseContextmenu =
+Com_Zmail_SForce.prototype._handleCaseContextmenu =
 function(mode, id) {
 	if (!this.sforceInstanceName) {
 		this.sforceInstanceName = (this.SERVER.split(".")[0]).split("//")[1];
@@ -1540,7 +1540,7 @@ function(mode, id) {
 };
 
 
-Com_Zimbra_SForce.prototype.toolTipPoppedUp =
+Com_Zmail_SForce.prototype.toolTipPoppedUp =
 function(spanElement, caseNumber, matchContext, canvas) {
 	caseNumber = this._getTooltipData(caseNumber);
 	var customFields = [];
@@ -1568,7 +1568,7 @@ function(spanElement, caseNumber, matchContext, canvas) {
 };
 
 
-Com_Zimbra_SForce.prototype._getTooltipData =
+Com_Zmail_SForce.prototype._getTooltipData =
 function(objData) {
 	objData = objData.toLowerCase();
 	objData = objData.replace("case", "").replace(":", "");
@@ -1576,7 +1576,7 @@ function(objData) {
 	return objData;
 };
 
-Com_Zimbra_SForce.prototype._setCaseTooltipHtml =
+Com_Zmail_SForce.prototype._setCaseTooltipHtml =
 function(canvas, obj) {
 	if (!obj) {
 		canvas.innerHTML = "Loading..";
@@ -1620,7 +1620,7 @@ function(canvas, obj) {
 	canvas.innerHTML = html.join("");
 };
 
-Com_Zimbra_SForce.prototype._getVal =
+Com_Zmail_SForce.prototype._getVal =
 function(colName, ConProps) {
 	try {
 		var cObj = null;
@@ -1656,7 +1656,7 @@ function(colName, ConProps) {
 //--------------------------------------------------------------------------------------------------------
 //Notes dropped... (START)
 //--------------------------------------------------------------------------------------------------------
-Com_Zimbra_SForce.prototype.noteDropped = function(note, showInBar) {
+Com_Zmail_SForce.prototype.noteDropped = function(note, showInBar) {
 	if (!note) {
 		return;
 	}
@@ -1686,7 +1686,7 @@ Com_Zimbra_SForce.prototype.noteDropped = function(note, showInBar) {
 	}
 };
 
-Com_Zimbra_SForce.prototype._queryForLeadDetails =
+Com_Zmail_SForce.prototype._queryForLeadDetails =
 function (showInBar, zimlet, cRecords) {
 	var q = ["Select l.Id, l.Name,l.Title,l.Email,l.Phone,l.Company,l.Status,l.Street,l.State,l.PostalCode,l.Country, l.NumberOfEmployees,l.Website from Lead l where Email='", this._emailsForCurrentNote.join("' or Email='"), "'"].join("");
 
@@ -1695,13 +1695,13 @@ function (showInBar, zimlet, cRecords) {
 	this.query(q, 10, callback);
 };
 
-Com_Zimbra_SForce.prototype._mergeLeadAndContactRecords =
+Com_Zmail_SForce.prototype._mergeLeadAndContactRecords =
 function (showInBar, cRecords, zimlet, lRecords) {
 	var recordsObj = {cRecords:cRecords, lRecords:lRecords}
 	this._handleAddNotesRecords(showInBar, this, {cRecords:cRecords, lRecords:lRecords});
 };
 
-Com_Zimbra_SForce.prototype._getValidAddressesForCurrentNote =
+Com_Zmail_SForce.prototype._getValidAddressesForCurrentNote =
 function (note) {
 	var emails = [];
 	if (note._addrs) {
@@ -1730,7 +1730,7 @@ function (note) {
 	return	 emails;
 };
 
-Com_Zimbra_SForce.prototype._addEmails =
+Com_Zmail_SForce.prototype._addEmails =
 function (a) {
 	var emails = [];
 	if (!a) {
@@ -1752,7 +1752,7 @@ function (a) {
 };
 
 
-Com_Zimbra_SForce.prototype._ignoreThisEmail =
+Com_Zmail_SForce.prototype._ignoreThisEmail =
 function(email) {
 	email = email.toLowerCase();
 	if (!this._ignoreDomainList) {
@@ -1775,7 +1775,7 @@ function(email) {
 	return false;
 };
 
-Com_Zimbra_SForce.prototype._handleAddNotesRecords =
+Com_Zmail_SForce.prototype._handleAddNotesRecords =
 function(showInBar, zimlet, recordsObj) {
 	if (!showInBar) {
 		this._parseAndSetRecordsObj(recordsObj);
@@ -1786,11 +1786,11 @@ function(showInBar, zimlet, recordsObj) {
 	}
 };
 
-Com_Zimbra_SForce.prototype.call_internalFunc = function(callback, param) {
+Com_Zmail_SForce.prototype.call_internalFunc = function(callback, param) {
 	callback.call(this, param);
 };
 
-Com_Zimbra_SForce.prototype._setAddNotesHandlers = function() {
+Com_Zmail_SForce.prototype._setAddNotesHandlers = function() {
 	var callback = AjxCallback.simpleClosure(this._sfItemSelectionHandler, this, "sforce_contactLead_lookupMenu", "sforce_contactLead_selectionMenu");
 	document.getElementById("sforce_contactLead_lookupMenu").onchange = callback;
 	callback = AjxCallback.simpleClosure(this._sfItemSelectionHandler, this, "sforce_relatedTo_lookupMenu", "sforce_relatedTo_selectionMenu");
@@ -1803,7 +1803,7 @@ Com_Zimbra_SForce.prototype._setAddNotesHandlers = function() {
 	document.getElementById("sforce_quickCreateLeadLnk").onclick = callback;
 };
 
-Com_Zimbra_SForce.prototype._showCreateNewContactOrLeadDlg =
+Com_Zmail_SForce.prototype._showCreateNewContactOrLeadDlg =
 function(typeOrObj, setResultToAddNotesMenus) {
 	//var val = document.getElementById("sforce_contactLead_createMenu").value;
 	//if zimlet dialog already exists...
@@ -1837,7 +1837,7 @@ function(typeOrObj, setResultToAddNotesMenus) {
 	this._sforceCreateNewObjsDlg.popup();
 };
 
-Com_Zimbra_SForce.prototype._createNewContactOrLeadView =
+Com_Zmail_SForce.prototype._createNewContactOrLeadView =
 function(typeOrObj, setResultToAddNotesMenus) {
 	this._quickCreateContactObjIds = [];
 	this._quickCreateContactAccntRefIdsMap = [];
@@ -1862,7 +1862,7 @@ function(typeOrObj, setResultToAddNotesMenus) {
 	return html.join("");
 };
 
-Com_Zimbra_SForce.prototype._getNewContactOrLeadViewHtml =
+Com_Zmail_SForce.prototype._getNewContactOrLeadViewHtml =
 function(typeOrObj, indx, email) {
 	var html = new Array();
 	var i = 0;
@@ -1899,7 +1899,7 @@ function(typeOrObj, indx, email) {
 	return html.join("");
 }
 
-Com_Zimbra_SForce.prototype._createNewContactOrLeadOKBtnListner =
+Com_Zmail_SForce.prototype._createNewContactOrLeadOKBtnListner =
 function() {
 	var params = [];
 	var isLead = document.getElementById("sforce_contactOrLeadL").checked == true;
@@ -1962,7 +1962,7 @@ function() {
 	this._sforceCreateNewObjsDlg.popdown();//hide the dialog
 };
 
-Com_Zimbra_SForce.prototype._handleCreateContactOrLeadCB =
+Com_Zmail_SForce.prototype._handleCreateContactOrLeadCB =
 function(params, result) {
 	if (params.length == 1) {
 		if (result.success.toString() != "true") {
@@ -1982,14 +1982,14 @@ function(params, result) {
 	}
 };
 
-Com_Zimbra_SForce.prototype._createNewContactOrLeadClearLinkHdlr =
+Com_Zmail_SForce.prototype._createNewContactOrLeadClearLinkHdlr =
 function(i) {
 	document.getElementById("sforce_contactOrLeadAcc" + i).innerHTML = "";
 	document.getElementById("sforce_contactOrLeadAcc" + i).refObjIdValue = "";//set custom parameter
 	document.getElementById("sforce_contactOrLeadAccClearDiv" + i).style.display = "none";
 };
 
-Com_Zimbra_SForce.prototype._showHideFields =
+Com_Zmail_SForce.prototype._showHideFields =
 function(typeOrObj, indx) {
 	var type = "Contact";
 	if (typeOrObj.indexOf instanceof Object) {
@@ -2006,7 +2006,7 @@ function(typeOrObj, indx) {
 	}
 };
 
-Com_Zimbra_SForce.prototype._do_showHideFields =
+Com_Zmail_SForce.prototype._do_showHideFields =
 function(type, indx) {
 	if (indx == undefined) {
 		indx = 1;
@@ -2020,7 +2020,7 @@ function(type, indx) {
 	}
 };
 
-Com_Zimbra_SForce.prototype._addCreateNewContactOrLeadHdlrs =
+Com_Zmail_SForce.prototype._addCreateNewContactOrLeadHdlrs =
 function() {
 	var callback = AjxCallback.simpleClosure(this._showHideFields, this, "Contact", i);
 	document.getElementById("sforce_contactOrLeadC").onclick = callback;
@@ -2034,7 +2034,7 @@ function() {
 };
 
 
-Com_Zimbra_SForce.prototype._addAccountLookupBtn = function() {
+Com_Zmail_SForce.prototype._addAccountLookupBtn = function() {
 	for (var i = 0; i < this._quickCreateContactObjIds.length; i++) {
 		var btn = new DwtButton({parent:this._shell});
 		btn.setText("Lookup");
@@ -2044,13 +2044,13 @@ Com_Zimbra_SForce.prototype._addAccountLookupBtn = function() {
 	}
 };
 
-Com_Zimbra_SForce.prototype._accountlookupBtnHdlr = function(i) {
+Com_Zmail_SForce.prototype._accountlookupBtnHdlr = function(i) {
 	this.sForceSearchDlg.setProperties("Account", "sforce_contactOrLeadAcc" + i, null, "sforce_contactOrLeadAccClearDiv" + i);
 	this.sForceSearchDlg.displaySearchDialog();
 };
 
 
-Com_Zimbra_SForce.prototype._updateSelectMenuInNotesDlg =
+Com_Zmail_SForce.prototype._updateSelectMenuInNotesDlg =
 function(objName, selectMenuId, props, response) {
 	var props = props[0];
 	var name = "";
@@ -2081,7 +2081,7 @@ function(objName, selectMenuId, props, response) {
 };
 
 
-Com_Zimbra_SForce.prototype._sfItemSelectionHandler = function(selectId, objSelectId) {
+Com_Zmail_SForce.prototype._sfItemSelectionHandler = function(selectId, objSelectId) {
 	var tmp = document.getElementById(selectId).value;
 	var arry = tmp.split("_");
 	var objName = arry[0];
@@ -2089,7 +2089,7 @@ Com_Zimbra_SForce.prototype._sfItemSelectionHandler = function(selectId, objSele
 	this.sForceSearchDlg.displaySearchDialog();
 };
 
-Com_Zimbra_SForce.prototype._addLookupButtons = function() {
+Com_Zmail_SForce.prototype._addLookupButtons = function() {
 	this._shell = this._shell;
 	this.lookupBtnIdandBtnObjMap = {};
 	for (var lookupBtnDivId in this._lookupBtnDivIdAndObjsMap) {
@@ -2103,7 +2103,7 @@ Com_Zimbra_SForce.prototype._addLookupButtons = function() {
 	}
 };
 
-Com_Zimbra_SForce.prototype._lookupBtnHdlr = function(obj, btn) {
+Com_Zmail_SForce.prototype._lookupBtnHdlr = function(obj, btn) {
 	var selectId = obj.selectId;
 	var objName = this._selectidAndObjNameMap[selectId];
 	this.sForceSearchDlg.setProperties(objName, null, selectId);
@@ -2112,16 +2112,16 @@ Com_Zimbra_SForce.prototype._lookupBtnHdlr = function(obj, btn) {
 	this.sForceSearchDlg.displaySearchDialog();
 };
 
-Com_Zimbra_SForce.prototype._associationMenuChangedHdlr = function(btn) {
+Com_Zmail_SForce.prototype._associationMenuChangedHdlr = function(btn) {
 	btn.setEnabled(false);
 };
 
 
-Com_Zimbra_SForce.prototype._cleanMainAccountsInfoDiv = function() {
+Com_Zmail_SForce.prototype._cleanMainAccountsInfoDiv = function() {
 	document.getElementById("SForce_mainAccountsInfoDiv").innerHTML = "";
 };
 
-Com_Zimbra_SForce.prototype._showNotesDlg = function(note) {
+Com_Zmail_SForce.prototype._showNotesDlg = function(note) {
 	var subject = AjxStringUtil.htmlEncode(note.subject);
 	var addrDate = this._getCurrentAddressAndDateStr();
 	var body = AjxStringUtil.htmlEncode(this.getMailBodyAsText(note));
@@ -2198,25 +2198,25 @@ Com_Zimbra_SForce.prototype._showNotesDlg = function(note) {
 	this._addNotesDialog.setButtonListener(DwtDialog.CANCEL_BUTTON, new AjxListener(this, this._addNotesCancelButtonListener, this._addNotesDialog));
 };
 
-Com_Zimbra_SForce.prototype._setNotesDlgSubjectAndBody = function(subject, body) {
+Com_Zmail_SForce.prototype._setNotesDlgSubjectAndBody = function(subject, body) {
 	document.getElementById("sforce_notes_subjectField").value = AjxStringUtil.htmlDecode(subject);
 	document.getElementById("sforce_notes_MessageField").value = AjxStringUtil.htmlDecode(body);
 };
 
-Com_Zimbra_SForce.prototype._setNotesDlgAccountsDivAsLoading = function() {
+Com_Zmail_SForce.prototype._setNotesDlgAccountsDivAsLoading = function() {
 	document.getElementById("SForce_mainAccountsInfoDiv").innerHTML = this._loadingSalesForceHtml;
 };
 
-Com_Zimbra_SForce.prototype._setAlertMsgForNotesDlg = function(msg) {
+Com_Zmail_SForce.prototype._setAlertMsgForNotesDlg = function(msg) {
 	document.getElementById("SForce_MessageInfoDiv").innerHTML = ["<label style='font-weight:bold;font-size:12px;color:white;'>", msg, "</label>"].join("");
 	document.getElementById("SForce_MessageInfoDiv").style.display = "block";
 };
 
-Com_Zimbra_SForce.prototype._hideAlertMsgForNotesDlg = function(msg) {
+Com_Zmail_SForce.prototype._hideAlertMsgForNotesDlg = function(msg) {
 	document.getElementById("SForce_MessageInfoDiv").style.display = "none";
 };
 
-Com_Zimbra_SForce.prototype._addNotesOKButtonListener = function(dlg) {
+Com_Zmail_SForce.prototype._addNotesOKButtonListener = function(dlg) {
 	var ids = [];
 	var indx = 0;
 	var hasAtleastOneItem = false;
@@ -2298,7 +2298,7 @@ Com_Zimbra_SForce.prototype._addNotesOKButtonListener = function(dlg) {
 			ids[i].Subject = props.Title;
 			ids[i].Description = props.Body;
 			ids[i].Status = 'Completed';
-			ids[i].ActivityDate = Com_Zimbra_SForce.toIsoDateTime(new Date());
+			ids[i].ActivityDate = Com_Zmail_SForce.toIsoDateTime(new Date());
 
 			// bug 74118, force to set a type of Task
 			if (this.sforce_taskType) {
@@ -2313,11 +2313,11 @@ Com_Zimbra_SForce.prototype._addNotesOKButtonListener = function(dlg) {
 	}
 };
 
-Com_Zimbra_SForce.prototype._addNotesCancelButtonListener = function(dlg) {
+Com_Zmail_SForce.prototype._addNotesCancelButtonListener = function(dlg) {
 	dlg.popdown();
 };
 
-Com_Zimbra_SForce.prototype._setRecordsToNotesDlg = function() {
+Com_Zmail_SForce.prototype._setRecordsToNotesDlg = function() {
 	var html = [];
 	var i = 0;
 	var contactsSelectId = Dwt.getNextId();
@@ -2441,7 +2441,7 @@ Com_Zimbra_SForce.prototype._setRecordsToNotesDlg = function() {
 //--------------------------------------------------------------------------------------------------------
 // Toolbar related..(START)
 //--------------------------------------------------------------------------------------------------------
-Com_Zimbra_SForce.prototype.initializeToolbar = function(app, toolbar, controller, viewId) {
+Com_Zmail_SForce.prototype.initializeToolbar = function(app, toolbar, controller, viewId) {
 	if (this.sforce_logindlg_showSendAndAddBtn == undefined) {
 		this.sforce_logindlg_showSendAndAddBtn = this.getUserProperty("sforce_logindlg_showSendAndAddBtn") == "true";
 	}
@@ -2452,8 +2452,8 @@ Com_Zimbra_SForce.prototype.initializeToolbar = function(app, toolbar, controlle
 	}
 };
 
-Com_Zimbra_SForce.prototype._initContactSFToolbar = function(toolbar, controller) {
-	if (!toolbar.getButton(Com_Zimbra_SForce.SFORCE_CONTACT_TB_BTN)) {
+Com_Zmail_SForce.prototype._initContactSFToolbar = function(toolbar, controller) {
+	if (!toolbar.getButton(Com_Zmail_SForce.SFORCE_CONTACT_TB_BTN)) {
 		//get the index of View menu so we can display it after that.
 		var buttonIndex = -1;
 		for (var i = 0, count = toolbar.opList.length; i < count; i++) {
@@ -2467,31 +2467,31 @@ Com_Zimbra_SForce.prototype._initContactSFToolbar = function(toolbar, controller
 		}
 		ZmMsg.salesforce = "Sync with Salesforce";
 		ZmMsg.sforceMailTooltip = "Syncs a contact with salesforce";
-		var btn = toolbar.createOp(Com_Zimbra_SForce.SFORCE, {text:ZmMsg.salesforce, tooltip:ZmMsg.sforceMailTooltip, index:buttonIndex, image:"SFORCE-panelIcon"});
-		toolbar.addOp(Com_Zimbra_SForce.SFORCE_CONTACT_TB_BTN, buttonIndex);
+		var btn = toolbar.createOp(Com_Zmail_SForce.SFORCE, {text:ZmMsg.salesforce, tooltip:ZmMsg.sforceMailTooltip, index:buttonIndex, image:"SFORCE-panelIcon"});
+		toolbar.addOp(Com_Zmail_SForce.SFORCE_CONTACT_TB_BTN, buttonIndex);
 		btn.addSelectionListener(new AjxListener(this, this._sfContactTbButtonHdlr, controller));
 	}
 };
 
-Com_Zimbra_SForce.prototype._sfContactTbButtonHdlr = function(controller) {
+Com_Zmail_SForce.prototype._sfContactTbButtonHdlr = function(controller) {
 	var contact = controller.getListView().getSelection()[0];
 	this.contactDropped(contact);//should really show a dialog with two sections to sync
 
 };
 
-Com_Zimbra_SForce.prototype._initComposeSFToolbar = function(toolbar, controller) {
-	if (!toolbar.getButton(Com_Zimbra_SForce.SFORCE)) {
+Com_Zmail_SForce.prototype._initComposeSFToolbar = function(toolbar, controller) {
+	if (!toolbar.getButton(Com_Zmail_SForce.SFORCE)) {
 		ZmMsg.sforceAdd = "Send & Add";
 		ZmMsg.sforceTooltip = "Send and add to Salesforce.";
-		var btn = toolbar.createOp(Com_Zimbra_SForce.SFORCE, {text:ZmMsg.sforceAdd, tooltip:ZmMsg.sforceTooltip, index:1, image:"SFORCE-panelIcon"});
-		toolbar.addOp(Com_Zimbra_SForce.SFORCE, 2);
+		var btn = toolbar.createOp(Com_Zmail_SForce.SFORCE, {text:ZmMsg.sforceAdd, tooltip:ZmMsg.sforceTooltip, index:1, image:"SFORCE-panelIcon"});
+		toolbar.addOp(Com_Zmail_SForce.SFORCE, 2);
 		this._composerCtrl = controller;
 		this._composerCtrl._sforce = this;
 		btn.addSelectionListener(new AjxListener(this._composerCtrl, this._sendAddSForce));
 	}
 };
 
-Com_Zimbra_SForce.prototype._sendAddSForce = function(ev) {
+Com_Zmail_SForce.prototype._sendAddSForce = function(ev) {
 	var msg = this._composeView.getMsg();
 	this._send();
 	if (msg == undefined) {
@@ -2514,15 +2514,15 @@ Com_Zimbra_SForce.prototype._sendAddSForce = function(ev) {
 //--------------------------------------------------------------------------------------------------------
 /// Store the default SOAP server.  Note that after a successful login, the URL
 /// may change--which is why we store it in an object instance too (this.SERVER)
-//Com_Zimbra_SForce.LOGIN_SERVER = "https://www.salesforce.com/services/Soap/c/17.0";
+//Com_Zmail_SForce.LOGIN_SERVER = "https://www.salesforce.com/services/Soap/c/17.0";
 
-Com_Zimbra_SForce._RECENT = {};
+Com_Zmail_SForce._RECENT = {};
 
 // SOAP utils
 
 /// Utility function that creates a SOAP envelope.  This will also insert the
 /// session header if we already have a session.
-Com_Zimbra_SForce.prototype._makeEnvelope = function(method, limit, dontUseSessionId) {
+Com_Zmail_SForce.prototype._makeEnvelope = function(method, limit, dontUseSessionId) {
 	var soap = AjxSoapDoc.create(
 			method, this.XMLNS, null,
 			"http://schemas.xmlsoap.org/soap/envelope/");
@@ -2560,7 +2560,7 @@ Com_Zimbra_SForce.prototype._makeEnvelope = function(method, limit, dontUseSessi
 	return soap;
 };
 
-Com_Zimbra_SForce.prototype.xmlToObject = function(result, dontConvertToJSObj) {
+Com_Zmail_SForce.prototype.xmlToObject = function(result, dontConvertToJSObj) {
 	try {
 		if (dontConvertToJSObj) {
 			var xd = new AjxXmlDoc.createFromDom(result.xml);
@@ -2580,18 +2580,18 @@ Com_Zimbra_SForce.prototype.xmlToObject = function(result, dontConvertToJSObj) {
 };
 
 /// Utility function that calls the SForce server with the given SOAP data
-Com_Zimbra_SForce.prototype.rpc = function(soap, callback, passErrors) {
+Com_Zmail_SForce.prototype.rpc = function(soap, callback, passErrors) {
 	this.sendRequest(soap, this.SERVER, {SOAPAction: "m", "Content-Type": "text/xml"}, callback, false, passErrors);
 };
 
-Com_Zimbra_SForce.prototype.logout =
+Com_Zmail_SForce.prototype.logout =
 function() {
 	var soap = this._makeEnvelope("logout");
 
 	this.rpc(soap, new AjxCallback(this, this.done_logout), true);
 };
 
-Com_Zimbra_SForce.prototype.done_logout =
+Com_Zmail_SForce.prototype.done_logout =
 function(response) {
 	appCtxt.setStatusMsg("Logged out of Salesforce", ZmStatusView.LEVEL_INFO);
 };
@@ -2599,7 +2599,7 @@ function(response) {
 
 /// Login to SForce.  The given callback will be called in the case of a
 /// successful login.  Note that callback is a plain function (not AjxCallback)
-Com_Zimbra_SForce.prototype.login = function(callback, user, passwd, dontUseSessionId) {
+Com_Zmail_SForce.prototype.login = function(callback, user, passwd, dontUseSessionId) {
 	if (!callback) {
 		callback = false;
 	}
@@ -2618,7 +2618,7 @@ Com_Zimbra_SForce.prototype.login = function(callback, user, passwd, dontUseSess
 	}
 };
 
-Com_Zimbra_SForce.prototype._do_login = function(callback, user, passwd, dontUseSessionId) {
+Com_Zmail_SForce.prototype._do_login = function(callback, user, passwd, dontUseSessionId) {
 	this.SFuserName = user;//store username
 
 	var soap = this._makeEnvelope("login", null, dontUseSessionId);
@@ -2630,7 +2630,7 @@ Com_Zimbra_SForce.prototype._do_login = function(callback, user, passwd, dontUse
 	this.rpc(soap, new AjxCallback(this, this.done_login, [ callback ]), true);
 };
 
-Com_Zimbra_SForce.prototype.done_login = function(callback, result) {
+Com_Zmail_SForce.prototype.done_login = function(callback, result) {
 	var ans = this.xmlToObject(result);
 	if (ans && ans.Body && ans.Body.loginResponse) {
 		ans = ans.Body.loginResponse.result;
@@ -2687,7 +2687,7 @@ Com_Zimbra_SForce.prototype.done_login = function(callback, result) {
 };
 
 
-Com_Zimbra_SForce.prototype.queryMore = function(queryLocator, limit, callback, returnEntireResponse) {
+Com_Zmail_SForce.prototype.queryMore = function(queryLocator, limit, callback, returnEntireResponse) {
 	if (!this.sessionId) {
 		this.login(function() {
 			this._do_queryMore(queryLocator, limit, callback, returnEntireResponse);
@@ -2697,7 +2697,7 @@ Com_Zimbra_SForce.prototype.queryMore = function(queryLocator, limit, callback, 
 	}
 };
 
-Com_Zimbra_SForce.prototype._do_queryMore = function(queryLocator, limit, callback, returnEntireResponse) {
+Com_Zmail_SForce.prototype._do_queryMore = function(queryLocator, limit, callback, returnEntireResponse) {
 	if (!limit || limit < 1) {
 		limit = 1;
 	}
@@ -2709,14 +2709,14 @@ Com_Zimbra_SForce.prototype._do_queryMore = function(queryLocator, limit, callba
 	this.rpc(soap, new AjxCallback(this, this.done_queryMore, [ callback, returnEntireResponse ]));
 };
 
-Com_Zimbra_SForce.prototype.done_queryMore = function(callback, returnEntireResponse, result) {
+Com_Zmail_SForce.prototype.done_queryMore = function(callback, returnEntireResponse, result) {
 	var xd = this.xmlToObject(result);
 	var resultObj = xd.Body.queryMoreResponse.result;
 	this._parseResultObjAndCallback(resultObj, callback, returnEntireResponse);
 };
 
 
-Com_Zimbra_SForce.prototype.search = function(query, limit, callback, returnEntireResponse, returnResultAsXML) {
+Com_Zmail_SForce.prototype.search = function(query, limit, callback, returnEntireResponse, returnResultAsXML) {
 	if (!this.sessionId) {
 		this.login(function() {
 			this._do_search(query, limit, callback, returnEntireResponse, returnResultAsXML);
@@ -2726,7 +2726,7 @@ Com_Zimbra_SForce.prototype.search = function(query, limit, callback, returnEnti
 	}
 };
 
-Com_Zimbra_SForce.prototype._do_search = function(query, limit, callback, returnEntireResponse, returnResultAsXML) {
+Com_Zmail_SForce.prototype._do_search = function(query, limit, callback, returnEntireResponse, returnResultAsXML) {
 	if (!limit || limit < 1) {
 		limit = 1;
 	}
@@ -2738,7 +2738,7 @@ Com_Zimbra_SForce.prototype._do_search = function(query, limit, callback, return
 	this.rpc(soap, new AjxCallback(this, this.done_search, [ callback, returnEntireResponse, returnResultAsXML ]));
 };
 
-Com_Zimbra_SForce.prototype.done_search = function(callback, returnEntireResponse, returnResultAsXML, result) {
+Com_Zmail_SForce.prototype.done_search = function(callback, returnEntireResponse, returnResultAsXML, result) {
 	if (returnResultAsXML) {
 		var xd = this.xmlToObject(result, true);
 		var resultObj = xd;
@@ -2754,7 +2754,7 @@ Com_Zimbra_SForce.prototype.done_search = function(callback, returnEntireRespons
 
 /// Executes a SOQL (SalesForce Object Query Language) and calls the given
 /// callback upon successful execution.
-Com_Zimbra_SForce.prototype.query = function(query, limit, callback, returnEntireResponse, errorCallback) {
+Com_Zmail_SForce.prototype.query = function(query, limit, callback, returnEntireResponse, errorCallback) {
 	if (!errorCallback) {
 		var errorCallback = new AjxCallback(this, this._generalQueryErrorHdlr);
 	}
@@ -2767,7 +2767,7 @@ Com_Zimbra_SForce.prototype.query = function(query, limit, callback, returnEntir
 	}
 };
 
-Com_Zimbra_SForce.prototype._generalQueryErrorHdlr = function() {
+Com_Zmail_SForce.prototype._generalQueryErrorHdlr = function() {
 	var response = arguments[1];
 	if (response) {
 		if (response.text.indexOf("INVALID_SESSION_ID") >= 0 || response.text.indexOf("HTTP header missing") >= 0) {
@@ -2781,7 +2781,7 @@ Com_Zimbra_SForce.prototype._generalQueryErrorHdlr = function() {
 };
 
 
-Com_Zimbra_SForce.prototype._do_query = function(query, limit, callback, returnEntireResponse, errorCallback) {
+Com_Zmail_SForce.prototype._do_query = function(query, limit, callback, returnEntireResponse, errorCallback) {
 	if (!limit || limit < 1) {
 		limit = 1;
 	}
@@ -2794,7 +2794,7 @@ Com_Zimbra_SForce.prototype._do_query = function(query, limit, callback, returnE
 };
 
 
-Com_Zimbra_SForce.__query_result_get = function() {
+Com_Zmail_SForce.__query_result_get = function() {
 	for (var i = 0; i < arguments.length; ++i) {
 		var attr = arguments[i];
 		if (this[attr] != null) {
@@ -2804,12 +2804,12 @@ Com_Zimbra_SForce.__query_result_get = function() {
 	return "";
 };
 
-Com_Zimbra_SForce.prototype.done_objQuery = function(callback, result) {
+Com_Zmail_SForce.prototype.done_objQuery = function(callback, result) {
 	var xd = this.xmlToObject(result);
 	callback.call(this, xd.Body.describeSObjectResponse.result);
 };
 
-Com_Zimbra_SForce.prototype.done_query = function(callback, returnEntireResponse, errorCallback, result) {
+Com_Zmail_SForce.prototype.done_query = function(callback, returnEntireResponse, errorCallback, result) {
 	if (!result.success) {
 		if (errorCallback) {
 			if (errorCallback instanceof AjxCallback) {
@@ -2827,7 +2827,7 @@ Com_Zimbra_SForce.prototype.done_query = function(callback, returnEntireResponse
 	this._parseResultObjAndCallback(resultObj, callback, returnEntireResponse);
 };
 
-Com_Zimbra_SForce.prototype._parseResultObjAndCallback = function(resultObj, callback, returnEntireResponse) {
+Com_Zmail_SForce.prototype._parseResultObjAndCallback = function(resultObj, callback, returnEntireResponse) {
 	//if returnEntireResponse Object is true..
 	if (returnEntireResponse) {
 		if (callback instanceof AjxCallback) {
@@ -2847,7 +2847,7 @@ Com_Zimbra_SForce.prototype._parseResultObjAndCallback = function(resultObj, cal
 		for (var i = qr.length; --i >= 0;) {
 			if (qr[i].Id && (qr[i].Id instanceof Array))
 				qr[i].Id = qr[i].Id[0];
-			qr[i].get = Com_Zimbra_SForce.__query_result_get;
+			qr[i].get = Com_Zmail_SForce.__query_result_get;
 		}
 	} else {
 		qr = [];
@@ -2862,7 +2862,7 @@ Com_Zimbra_SForce.prototype._parseResultObjAndCallback = function(resultObj, cal
 
 // SOAP METHOD: create
 
-Com_Zimbra_SForce.prototype.createSFObject = function(props, type, callback, returnEntireResponse) {
+Com_Zmail_SForce.prototype.createSFObject = function(props, type, callback, returnEntireResponse) {
 	if (!callback) {
 		callback = false;
 	}
@@ -2875,7 +2875,7 @@ Com_Zimbra_SForce.prototype.createSFObject = function(props, type, callback, ret
 		this._actOnSFObject("create", props, type, callback, returnEntireResponse);
 };
 
-Com_Zimbra_SForce.prototype.updateSFObject = function(props, type, callback, returnEntireResponse) {
+Com_Zmail_SForce.prototype.updateSFObject = function(props, type, callback, returnEntireResponse) {
 	if (!callback) {
 		callback = false;
 	}
@@ -2888,7 +2888,7 @@ Com_Zimbra_SForce.prototype.updateSFObject = function(props, type, callback, ret
 		this._actOnSFObject("update", props, type, callback, returnEntireResponse);
 };
 
-Com_Zimbra_SForce.prototype.deleteSFObject = function(props, type, callback, returnEntireResponse) {
+Com_Zmail_SForce.prototype.deleteSFObject = function(props, type, callback, returnEntireResponse) {
 	if (!callback) {
 		callback = false;
 	}
@@ -2902,7 +2902,7 @@ Com_Zimbra_SForce.prototype.deleteSFObject = function(props, type, callback, ret
 };
 
 
-Com_Zimbra_SForce.prototype._actOnSFObject = function(action, props, type, callback, returnEntireResponse) {
+Com_Zmail_SForce.prototype._actOnSFObject = function(action, props, type, callback, returnEntireResponse) {
 	if (!callback) {
 		callback = false;
 	}
@@ -2947,7 +2947,7 @@ Com_Zimbra_SForce.prototype._actOnSFObject = function(action, props, type, callb
 	this.rpc(soap, respCallback);
 };
 
-Com_Zimbra_SForce.prototype.done_createSFObject = function(callback, returnEntireResponse, result) {
+Com_Zmail_SForce.prototype.done_createSFObject = function(callback, returnEntireResponse, result) {
 	var xd = this.xmlToObject(result);
 	if (xd && callback) {
 		result = xd.Body.createResponse.result;
@@ -2968,7 +2968,7 @@ Com_Zimbra_SForce.prototype.done_createSFObject = function(callback, returnEntir
 };
 
 
-Com_Zimbra_SForce.prototype.done_updateSFObject = function(callback, returnEntireResponse, result) {
+Com_Zmail_SForce.prototype.done_updateSFObject = function(callback, returnEntireResponse, result) {
 	var xd = this.xmlToObject(result);
 	if (xd && callback) {
 		result = xd.Body.updateResponse.result;
@@ -2984,7 +2984,7 @@ Com_Zimbra_SForce.prototype.done_updateSFObject = function(callback, returnEntir
 
 	}
 };
-Com_Zimbra_SForce.prototype.done_deleteSFObject = function(callback, returnEntireResponse, result) {
+Com_Zmail_SForce.prototype.done_deleteSFObject = function(callback, returnEntireResponse, result) {
 	var xd = this.xmlToObject(result);
 	if (xd && callback) {
 		result = xd.Body.deleteResponse.result;
@@ -3008,7 +3008,7 @@ Com_Zimbra_SForce.prototype.done_deleteSFObject = function(callback, returnEntir
 //--------------------------------------------------------------------------------------------------------
 //Misc/Supporting functions (START)
 //--------------------------------------------------------------------------------------------------------
-Com_Zimbra_SForce.prototype.showWarningDlg =
+Com_Zmail_SForce.prototype.showWarningDlg =
 function(msg) {
 	var dlg = appCtxt.getMsgDialog();
 	dlg.reset();//reset dialog since we could be using it
@@ -3016,7 +3016,7 @@ function(msg) {
 	dlg.popup();
 };
 
-Com_Zimbra_SForce.arrayContainsElement =
+Com_Zmail_SForce.arrayContainsElement =
 function(array, val) {
 	for (var i = 0; i < array.length; i++) {
 		if (array[i] == val) {
@@ -3029,7 +3029,7 @@ function(array, val) {
 function sforce_unique(b) {
 	var a = [], i, l = b.length;
 	for (i = 0; i < l; i++) {
-		if (!Com_Zimbra_SForce.arrayContainsElement(a, b[i])) {
+		if (!Com_Zmail_SForce.arrayContainsElement(a, b[i])) {
 			a.push(b[i]);
 		}
 	}
@@ -3037,7 +3037,7 @@ function sforce_unique(b) {
 }
 
 
-Com_Zimbra_SForce.prototype.getMailBodyAsText = function(note) {
+Com_Zmail_SForce.prototype.getMailBodyAsText = function(note) {
 	var body = "";
 	if (note.body) {
 		body = AjxStringUtil.htmlEncode(note.body);
@@ -3059,17 +3059,17 @@ Com_Zimbra_SForce.prototype.getMailBodyAsText = function(note) {
 	}
 };
 
-Com_Zimbra_SForce.prototype.showInfo =
+Com_Zmail_SForce.prototype.showInfo =
 function(msg) {
 	var transitions = [ ZmToast.FADE_IN, ZmToast.PAUSE, ZmToast.PAUSE, ZmToast.FADE_OUT ];
 	appCtxt.getAppController().setStatusMsg(msg, ZmStatusView.LEVEL_INFO, null, transitions);
 };
 
-Com_Zimbra_SForce.toIsoDate = function(theDate) {
+Com_Zmail_SForce.toIsoDate = function(theDate) {
 	return AjxDateFormat.format("yyyy-MM-dd", theDate);
 };
 
-Com_Zimbra_SForce.toIsoDateTime = function(theDate) {
+Com_Zmail_SForce.toIsoDateTime = function(theDate) {
 	var zDate = new Date(theDate.getTime());
 	zDate.setMinutes(zDate.getMinutes() + zDate.getTimezoneOffset());
 	var ret = AjxDateFormat.format("yyyy-MM-ddTHH:mm:ss'Z'", zDate);
@@ -3085,11 +3085,11 @@ Com_Zimbra_SForce.toIsoDateTime = function(theDate) {
 //--------------------------------------------------------------------------------------------------------
 //MailboxMetadata API
 //--------------------------------------------------------------------------------------------------------
-//"zwc:com_zimbra_sforce"
+//"zwc:org_zmail_sforce"
 //Usage: Pass the sectionName, eg. getMailboxMetaData("zwc:<sectioname>", callback);
-Com_Zimbra_SForce.prototype.getMailboxMetaData =
+Com_Zmail_SForce.prototype.getMailboxMetaData =
 function(sectionName, callback) {
-	var soapDoc = AjxSoapDoc.create("GetMailboxMetadataRequest", "urn:zimbraMail");//request name and urn(always zimbraMail)
+	var soapDoc = AjxSoapDoc.create("GetMailboxMetadataRequest", "urn:zmailMail");//request name and urn(always zmailMail)
 	var secNode = soapDoc.set("meta");
 	secNode.setAttribute("section", sectionName);
 	var asyncMode = true;
@@ -3099,7 +3099,7 @@ function(sectionName, callback) {
 	return appCtxt.getAppController().sendRequest({soapDoc:soapDoc, asyncMode:asyncMode, callback:callback});
 };
 
-Com_Zimbra_SForce.prototype.deleteMailboxMetaData =
+Com_Zmail_SForce.prototype.deleteMailboxMetaData =
 function(sectionName, keyName, callback) {
 	var _attrs = null;
 	var keyValArray = [];
@@ -3127,11 +3127,11 @@ function(sectionName, keyName, callback) {
 
 //Allows us to save random data in DB (upto 10kb per section)
 //Automatically keeps old data and merges old data w/in a section with new one if 'override' isn't true
-//@sectionName Name of the section; must start with zwc: ex: zwc:com_zimbra_sforce_AccListViews
+//@sectionName Name of the section; must start with zwc: ex: zwc:org_zmail_sforce_AccListViews
 //@keyValArray An array of key-val objects: ex: [{key:key1, val:val1}, {key:key2:val:val2}]
 //@callback AjxCallback[optional] - if null,JS will wait for this operation to complete 
 //@override - Boolean; If true, *entire section* will be overwritten with new set of key-val pairs
-Com_Zimbra_SForce.prototype.setMailboxMetaData =
+Com_Zmail_SForce.prototype.setMailboxMetaData =
 function(sectionName, keyValArray, callback, override) {
 	if (!keyValArray) {//dont allow deleting section using this function
 		return "No key=value pair sent. To delete section, use 'deleteMailboxMetaData' API";
@@ -3166,12 +3166,12 @@ function(sectionName, keyValArray, callback, override) {
 };
 
 //internal - dont call directly
-Com_Zimbra_SForce.prototype._doSetMailboxMetaData =
+Com_Zmail_SForce.prototype._doSetMailboxMetaData =
 function(sectionName, keyValArray, callback) {
 	if (sectionName.indexOf("zwc:") == -1 && sectionName.indexOf("zd:") == -1) {
 		return "sectionName must have namespace. send: 'zwc:<sectionName>'";
 	}
-	var soapDoc = AjxSoapDoc.create("SetMailboxMetadataRequest", "urn:zimbraMail");
+	var soapDoc = AjxSoapDoc.create("SetMailboxMetadataRequest", "urn:zmailMail");
 	var doc = soapDoc.getDoc();
 	var secNode = soapDoc.set("meta");// property name
 	secNode.setAttribute("section", sectionName);

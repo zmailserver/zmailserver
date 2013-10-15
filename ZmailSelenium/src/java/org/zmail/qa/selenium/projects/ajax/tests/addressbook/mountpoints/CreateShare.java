@@ -14,15 +14,15 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.addressbook.mountpoints;
+package org.zmail.qa.selenium.projects.ajax.tests.addressbook.mountpoints;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogShare;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogShare;
 
 
 public class CreateShare extends AjaxCommonTest  {
@@ -40,12 +40,12 @@ public class CreateShare extends AjaxCommonTest  {
 			groups = { "smoke" })
 	public void CreateShare_01() throws HarnessException {
 		
-		String addressbookname = "addressbook" + ZimbraSeleniumProperties.getUniqueString();
+		String addressbookname = "addressbook" + ZmailSeleniumProperties.getUniqueString();
 
 
 		// Create an addressbook
 		app.zGetActiveAccount().soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>"
+					"<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+		"<folder name='" + addressbookname +"' l='1' view='contact'/>"
 				+	"</CreateFolderRequest>");
 
@@ -64,30 +64,30 @@ public class CreateShare extends AjaxCommonTest  {
 		ZAssert.assertNotNull(dialog, "Verify the sharing dialog pops up");
 
 		// Use defaults for all options
-		dialog.zSetEmailAddress(ZimbraAccount.AccountA().EmailAddress);
+		dialog.zSetEmailAddress(ZmailAccount.AccountA().EmailAddress);
 		
 		// Send it
 		dialog.zClickButton(Button.B_OK);
 		
 		// Make sure that AccountA now has the share
-		ZimbraAccount.AccountA().soapSend(
-					"<GetShareInfoRequest xmlns='urn:zimbraAccount'>"
+		ZmailAccount.AccountA().soapSend(
+					"<GetShareInfoRequest xmlns='urn:zmailAccount'>"
 				+		"<grantee type='usr'/>"
 				+		"<owner by='name'>"+ app.zGetActiveAccount().EmailAddress +"</owner>"
 				+	"</GetShareInfoRequest>");
 		
 		// Example response:
-		//    <GetShareInfoResponse xmlns="urn:zimbraAccount">
+		//    <GetShareInfoResponse xmlns="urn:zmailAccount">
 		//		<share granteeId="e3c083c5-102a-416e-bcf4-6d4c59197e20" ownerName="enus13191472607033" granteeDisplayName="enus13191472702505" ownerId="8d5589ff-0548-4562-8d1d-1a4f70e3ca7e" rights="r" folderPath="/folder13191472674374" view="contact" granteeType="usr" ownerEmail="enus13191472607033@testdomain.com" granteeName="enus13191472702505@testdomain.com" folderId="257"/>
 	    //	  </GetShareInfoResponse>
 
-		String ownerEmail = ZimbraAccount.AccountA().soapSelectValue("//acct:GetShareInfoResponse//acct:share[@folderPath='/"+ addressbookname +"']", "ownerEmail");
+		String ownerEmail = ZmailAccount.AccountA().soapSelectValue("//acct:GetShareInfoResponse//acct:share[@folderPath='/"+ addressbookname +"']", "ownerEmail");
 		ZAssert.assertEquals(ownerEmail, app.zGetActiveAccount().EmailAddress, "Verify the owner of the shared folder");
 		
-		String rights = ZimbraAccount.AccountA().soapSelectValue("//acct:GetShareInfoResponse//acct:share[@folderPath='/"+ addressbookname +"']", "rights");
+		String rights = ZmailAccount.AccountA().soapSelectValue("//acct:GetShareInfoResponse//acct:share[@folderPath='/"+ addressbookname +"']", "rights");
 		ZAssert.assertEquals(rights, "r", "Verify the rights are 'read only'");
 
-		String granteeType = ZimbraAccount.AccountA().soapSelectValue("//acct:GetShareInfoResponse//acct:share[@folderPath='/"+ addressbookname +"']", "granteeType");
+		String granteeType = ZmailAccount.AccountA().soapSelectValue("//acct:GetShareInfoResponse//acct:share[@folderPath='/"+ addressbookname +"']", "granteeType");
 		ZAssert.assertEquals(granteeType, "usr", "Verify the grantee type is 'user'");
 
 	}

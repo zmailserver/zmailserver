@@ -12,20 +12,20 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib;
+package org.zmail.cs.taglib;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.zimlet.ZimletUserProperties;
-import com.zimbra.soap.account.type.Prop;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.zimlet.ZimletUserProperties;
+import org.zmail.soap.account.type.Prop;
 
-public class Property extends ZimbraTag {
+public class Property extends ZmailTag {
 
     private String mZimlet;
     private String mVar;
@@ -73,9 +73,9 @@ public class Property extends ZimbraTag {
         return mValue;
     }
 
-    private String doListProperty(Account acct, OperationContext octxt) throws ZimbraTagException, ServiceException {
+    private String doListProperty(Account acct, OperationContext octxt) throws ZmailTagException, ServiceException {
         if (mVar == null) {
-            throw ZimbraTagException.MISSING_ATTR("var");
+            throw ZmailTagException.MISSING_ATTR("var");
         }
         ZimletUserProperties props = ZimletUserProperties.getProperties(acct);
 
@@ -90,9 +90,9 @@ public class Property extends ZimbraTag {
         return "";
     }
 
-    private String doGetProperty(Account acct, OperationContext octxt) throws ZimbraTagException, ServiceException {
+    private String doGetProperty(Account acct, OperationContext octxt) throws ZmailTagException, ServiceException {
         if (mName == null) {
-            throw ZimbraTagException.MISSING_ATTR("name");
+            throw ZmailTagException.MISSING_ATTR("name");
         }
         ZimletUserProperties props = ZimletUserProperties.getProperties(acct);
 
@@ -106,12 +106,12 @@ public class Property extends ZimbraTag {
         return ret.toString();
     }
 
-    private String doSetProperty(Account acct, OperationContext octxt) throws ZimbraTagException, ServiceException {
+    private String doSetProperty(Account acct, OperationContext octxt) throws ZmailTagException, ServiceException {
         if (mName == null) {
-            throw ZimbraTagException.MISSING_ATTR("name");
+            throw ZmailTagException.MISSING_ATTR("name");
         }
         if (mValue == null) {
-            throw ZimbraTagException.MISSING_ATTR("value");
+            throw ZmailTagException.MISSING_ATTR("value");
         }
         ZimletUserProperties props = ZimletUserProperties.getProperties(acct);
         props.setProperty(mZimlet, mName, mValue);
@@ -119,9 +119,9 @@ public class Property extends ZimbraTag {
         return "";
     }
 
-    public String getContentStart(Account acct, OperationContext octxt) throws ZimbraTagException, ServiceException {
+    public String getContentStart(Account acct, OperationContext octxt) throws ZmailTagException, ServiceException {
         if (mZimlet == null) {
-            throw ZimbraTagException.MISSING_ATTR("zimlet");
+            throw ZmailTagException.MISSING_ATTR("zimlet");
         }
         if (mAction != null && mAction.equals("set")) {
             return doSetProperty(acct, octxt);

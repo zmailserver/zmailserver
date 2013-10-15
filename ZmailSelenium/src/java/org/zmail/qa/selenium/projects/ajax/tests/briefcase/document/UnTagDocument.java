@@ -14,14 +14,14 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.briefcase.document;
+package org.zmail.qa.selenium.projects.ajax.tests.briefcase.document;
 
 import org.testng.annotations.Test;
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.FeatureBriefcaseTest;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.FeatureBriefcaseTest;
 
 public class UnTagDocument extends FeatureBriefcaseTest {
 
@@ -31,12 +31,12 @@ public class UnTagDocument extends FeatureBriefcaseTest {
 		// All tests start at the Briefcase page
 		super.startingPage = app.zPageBriefcase;
 
-		super.startingAccountPreferences.put("zimbraPrefBriefcaseReadingPaneLocation", "bottom");				
+		super.startingAccountPreferences.put("zmailPrefBriefcaseReadingPaneLocation", "bottom");				
 	}
 
 	@Test(description = "Remove a tag from a Document using Toolbar -> Tag -> Remove Tag", groups = { "smoke" })
 	public void UnTagDocument_01() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
@@ -49,12 +49,12 @@ public class UnTagDocument extends FeatureBriefcaseTest {
 				+ docItem.getDocText() + "</body>" + "</html>");
 
 		account
-				.soapSend("<SaveDocumentRequest requestId='0' xmlns='urn:zimbraMail'>"
+				.soapSend("<SaveDocumentRequest requestId='0' xmlns='urn:zmailMail'>"
 						+ "<doc name='"
 						+ docItem.getName()
 						+ "' l='"
 						+ briefcaseFolder.getId()
-						+ "' ct='application/x-zimbra-doc'>"
+						+ "' ct='application/x-zmail-doc'>"
 						+ "<content>"
 						+ contentHTML
 						+ "</content>"
@@ -67,7 +67,7 @@ public class UnTagDocument extends FeatureBriefcaseTest {
 		 * ,"id");
 		 * 
 		 * // Search for created documentaccount.soapSend(
-		 * "<SearchRequest xmlns='urn:zimbraMail' types='document'>" +
+		 * "<SearchRequest xmlns='urn:zmailMail' types='document'>" +
 		 * "<query>in:" + briefcaseFolder.getName() +
 		 * "</query></SearchRequest>");
 		 * 
@@ -77,7 +77,7 @@ public class UnTagDocument extends FeatureBriefcaseTest {
 		 * "//mail:SearchResponse//mail:doc[@name='" + docName + "']", "ver");
 		 * 
 		 * account.soapSend(
-		 * "<SearchRequest xmlns='urn:zimbraMail' types='document'>" + "<query>"
+		 * "<SearchRequest xmlns='urn:zmailMail' types='document'>" + "<query>"
 		 * + docName + "</query>" + "</SearchRequest>");
 		 * 
 		 * docId = account.soapSelectValue("//mail:doc", "id"); version =
@@ -85,17 +85,17 @@ public class UnTagDocument extends FeatureBriefcaseTest {
 		 */
 
 		// Create a tag
-		String tagName = "tag" + ZimbraSeleniumProperties.getUniqueString();
+		String tagName = "tag" + ZmailSeleniumProperties.getUniqueString();
 
 		/*
 		 * //this flow needs page reload account.soapSend(
-		 * "<CreateTagRequest xmlns='urn:zimbraMail'>" + "<tag name='"+ tagName
+		 * "<CreateTagRequest xmlns='urn:zmailMail'>" + "<tag name='"+ tagName
 		 * +"' color='1' />" + "</CreateTagRequest>");
 		 * 
 		 * String tagId =
 		 * account.soapSelectValue("//mail:CreateTagResponse/mail:tag", "id");
 		 * 
-		 * account.soapSend( "<ItemActionRequest xmlns='urn:zimbraMail'>" +
+		 * account.soapSend( "<ItemActionRequest xmlns='urn:zmailMail'>" +
 		 * "<action id='"+ docId +"' op='tag' tag='" + tagId + "'/>" +
 		 * "</ItemActionRequest>");
 		 * 
@@ -120,12 +120,12 @@ public class UnTagDocument extends FeatureBriefcaseTest {
 		 * dialogTag.zSetTagName(tagName); dialogTag.zClickButton(Button.B_OK);
 		 */
 
-		account.soapSend("<CreateTagRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<CreateTagRequest xmlns='urn:zmailMail'>"
 				+ "<tag name='" + tagName + "' color='1' />"
 				+ "</CreateTagRequest>");
 
 		// Make sure the tag was created on the server
-		// account.soapSend("<GetTagRequest xmlns='urn:zimbraMail'/>");
+		// account.soapSend("<GetTagRequest xmlns='urn:zmailMail'/>");
 		// String tagId = account.soapSelectValue(
 		//		"//mail:GetTagResponse//mail:tag[@name='" + tagName + "']",
 		//		"id");
@@ -151,7 +151,7 @@ public class UnTagDocument extends FeatureBriefcaseTest {
 
 		// Make sure the tag was applied to the document
 		account
-				.soapSend("<SearchRequest xmlns='urn:zimbraMail' types='document'>"
+				.soapSend("<SearchRequest xmlns='urn:zmailMail' types='document'>"
 						+ "<query>"
 						+ docItem.getName()
 						+ "</query>"
@@ -179,7 +179,7 @@ public class UnTagDocument extends FeatureBriefcaseTest {
 				Button.O_TAG_REMOVETAG, docItem);
 
 		account
-				.soapSend("<SearchRequest xmlns='urn:zimbraMail' types='document'>"
+				.soapSend("<SearchRequest xmlns='urn:zmailMail' types='document'>"
 						+ "<query>"
 						+ docItem.getName()
 						+ "</query>"

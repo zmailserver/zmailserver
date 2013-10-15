@@ -13,13 +13,13 @@
  * ***** END LICENSE BLOCK *****
  */
 
-function Com_Zimbra_Url() {
+function Com_Zmail_Url() {
 }
 
-Com_Zimbra_Url.prototype = new ZmZimletBase();
-Com_Zimbra_Url.prototype.constructor = Com_Zimbra_Url;
+Com_Zmail_Url.prototype = new ZmZimletBase();
+Com_Zmail_Url.prototype.constructor = Com_Zmail_Url;
 
-Com_Zimbra_Url.prototype.init =
+Com_Zmail_Url.prototype.init =
 function() {
 	
 	this._disablePreview = this.getBoolConfig("disablePreview", true);
@@ -31,45 +31,45 @@ function() {
 		this._alexaKey = AjxStringUtil.trim(this.getConfig("alexaThumbnailKey"));
 		// console.log("Found Alexa Key: %s", this._alexaKey);
 	}
-	Com_Zimbra_Url.REGEXES = [];
+	Com_Zmail_Url.REGEXES = [];
 	//populate regular expressions
 	var s = this.getConfig("ZIMLET_CONFIG_REGEX_VALUE");
 	if(s){
 		var r = new RegExp(s,"gi");
 		if(r)
-		Com_Zimbra_Url.REGEXES.push(r);
+		Com_Zmail_Url.REGEXES.push(r);
 	}
 
 	if (/^\s*true\s*$/i.test(this.getConfig("supportUNC"))) {
 		s = this.getConfig("ZIMLET_UNC_REGEX_VALUE");
 		var r = new RegExp(s,"gi");
 		if(r)
-		Com_Zimbra_Url.REGEXES.push(r);
+		Com_Zmail_Url.REGEXES.push(r);
 	}
 
 };
 
 // Const
-//Com_Zimbra_Url.THUMB_URL = "http://pthumbnails.alexa.com/image_server.cgi?id=" + document.domain + "&url=";
-Com_Zimbra_Url.THUMB_URL = "http://images.websnapr.com/?url=";
-Com_Zimbra_Url.THUMB_SIZE = 'width="200" height="150"';
+//Com_Zmail_Url.THUMB_URL = "http://pthumbnails.alexa.com/image_server.cgi?id=" + document.domain + "&url=";
+Com_Zmail_Url.THUMB_URL = "http://images.websnapr.com/?url=";
+Com_Zmail_Url.THUMB_SIZE = 'width="200" height="150"';
 
 // chars to ignore if they follow a URL, since they are unlikely to be part of it
-Com_Zimbra_Url.IGNORE = AjxUtil.arrayAsHash([".", ",", ";", "!", "*", ":", "?", ")", "]", "}"]);
+Com_Zmail_Url.IGNORE = AjxUtil.arrayAsHash([".", ",", ";", "!", "*", ":", "?", ")", "]", "}"]);
 
-Com_Zimbra_Url.prototype.match =
+Com_Zmail_Url.prototype.match =
 function(line, startIndex) {
 
-	for (var i = 0; i < Com_Zimbra_Url.REGEXES.length; i++) {
+	for (var i = 0; i < Com_Zmail_Url.REGEXES.length; i++) {
 		
-		var re = Com_Zimbra_Url.REGEXES[i];
+		var re = Com_Zmail_Url.REGEXES[i];
 		re.lastIndex = startIndex;
 		var m = re.exec(line);
 		if (!m) { continue; }
 
 		var url = m[0];
 		var last = url.charAt(url.length - 1);
-		while (url.length && Com_Zimbra_Url.IGNORE[last]) {
+		while (url.length && Com_Zmail_Url.IGNORE[last]) {
 			//bug 70084, when it's ")", check whether there are matched "(" in url
 			if (last == ")") {
 				var countLeft = 0;
@@ -90,7 +90,7 @@ function(line, startIndex) {
 	}
 };
 
-Com_Zimbra_Url.prototype._getHtmlContent =
+Com_Zmail_Url.prototype._getHtmlContent =
 function(html, idx, obj, context) {
 
 	var escapedUrl = obj.replace(/\"/g, '\"').replace(/^\s+|\s+$/g, "");
@@ -127,7 +127,7 @@ function(html, idx, obj, context) {
 	return idx;
 };
 
-Com_Zimbra_Url.prototype.toolTipPoppedUp =
+Com_Zmail_Url.prototype.toolTipPoppedUp =
 function(spanElement, obj, context, canvas) {
 
 	var url = obj.replace(/^\s+|\s+$/g, "");
@@ -152,7 +152,7 @@ function(spanElement, obj, context, canvas) {
 	}
 };
 
-Com_Zimbra_Url.prototype.clicked = function(){
+Com_Zmail_Url.prototype.clicked = function(){
 	var tooltip = DwtShell.getShell(window).getToolTip();
 	if (tooltip) {
 		tooltip.popdown();
@@ -160,21 +160,21 @@ Com_Zimbra_Url.prototype.clicked = function(){
 	return true;
 };
 
-Com_Zimbra_Url.prototype._showUrlThumbnail = function(url, canvas){
+Com_Zmail_Url.prototype._showUrlThumbnail = function(url, canvas){
 	canvas.innerHTML = "<b>URL:</b> " + AjxStringUtil.htmlEncode(decodeURI(url));
 };
 
-Com_Zimbra_Url.prototype._showFreeThumbnail = function(url, canvas) {
+Com_Zmail_Url.prototype._showFreeThumbnail = function(url, canvas) {
 	var html = [];
 	var i = 0;
 
 	html[i++] = "<img src='";
 	html[i++] = this.getResource("blank_pixel.gif");
 	html[i++] = "' ";
-	html[i++] = Com_Zimbra_Url.THUMB_SIZE;
+	html[i++] = Com_Zmail_Url.THUMB_SIZE;
 	html[i++] = " style='background: url(";
 	html[i++] = '"';
-	html[i++] = Com_Zimbra_Url.THUMB_URL;
+	html[i++] = Com_Zmail_Url.THUMB_URL;
 	html[i++] = url;
 	html[i++] = '"';
 	html[i++] = ")'/>";
@@ -183,30 +183,30 @@ Com_Zimbra_Url.prototype._showFreeThumbnail = function(url, canvas) {
 };
 
 
-Com_Zimbra_Url.ALEXA_THUMBNAIL_CACHE = {};
-Com_Zimbra_Url.ALEXA_CACHE_EXPIRES = 10 * 60 * 1000; // 10 minutes
+Com_Zmail_Url.ALEXA_THUMBNAIL_CACHE = {};
+Com_Zmail_Url.ALEXA_CACHE_EXPIRES = 10 * 60 * 1000; // 10 minutes
 
-Com_Zimbra_Url.prototype._showAlexaThumbnail = function(url, canvas) {
+Com_Zmail_Url.prototype._showAlexaThumbnail = function(url, canvas) {
 	canvas.innerHTML = [ "<table style='width: 200px; height: 150px; border-collapse: collapse' cellspacing='0' cellpadding='0'><tr><td align='center'>",
 				 ZmMsg.fetchingAlexaThumbnail,
 				 "</td></tr></table>" ].join("");
 
 	// check cache first
-	var cached = Com_Zimbra_Url.ALEXA_THUMBNAIL_CACHE[url];
+	var cached = Com_Zmail_Url.ALEXA_THUMBNAIL_CACHE[url];
 	if (cached) {
 		var diff = new Date().getTime() - cached.timestamp;
-		if (diff < Com_Zimbra_Url.ALEXA_CACHE_EXPIRES) {
+		if (diff < Com_Zmail_Url.ALEXA_CACHE_EXPIRES) {
 			// cached image should still be good, let's use it
 			var html = [ "<img src='", cached.img, "' />" ].join("");
 			canvas.firstChild.rows[0].cells[0].innerHTML = html;
 			return;
 		} else {
 			// expired
-			delete Com_Zimbra_Url.ALEXA_THUMBNAIL_CACHE[url];
+			delete Com_Zmail_Url.ALEXA_THUMBNAIL_CACHE[url];
 		}
 	}
 
-	var now = new Date(), pad = Com_Zimbra_Url.zeroPad;
+	var now = new Date(), pad = Com_Zmail_Url.zeroPad;
 	var timestamp =
 		pad(now.getUTCFullYear()  , 4) + "-" +
 		pad(now.getUTCMonth() + 1 , 2) + "-" +
@@ -236,12 +236,12 @@ Com_Zimbra_Url.prototype._showAlexaThumbnail = function(url, canvas) {
 			 true);
 };
 
-Com_Zimbra_Url.prototype._computeAlexaSignature = function(timestamp) {
+Com_Zmail_Url.prototype._computeAlexaSignature = function(timestamp) {
 	return AjxSHA1.b64_hmac_sha1(this._alexaKey, "AlexaSiteThumbnailThumbnail" + timestamp)
 		+ "=";		// guess what, it _has_ to end in '=' :-(
 };
 
-Com_Zimbra_Url.prototype._alexaDataIn = function(canvas, url, query, result) {
+Com_Zmail_Url.prototype._alexaDataIn = function(canvas, url, query, result) {
 	var xml = AjxXmlDoc.createFromDom(result.xml);
 	var res = xml.toJSObject(true /* drop namespace decls. */,
 				 false /* keep case */,
@@ -254,7 +254,7 @@ Com_Zimbra_Url.prototype._alexaDataIn = function(canvas, url, query, result) {
 			canvas.firstChild.rows[0].cells[0].innerHTML = html;
 
 			// cache it
-			Com_Zimbra_Url.ALEXA_THUMBNAIL_CACHE[url] = {
+			Com_Zmail_Url.ALEXA_THUMBNAIL_CACHE[url] = {
 				img	  : res.ThumbnailResult.Thumbnail,
 				timestamp : new Date().getTime()
 			};
@@ -264,7 +264,7 @@ Com_Zimbra_Url.prototype._alexaDataIn = function(canvas, url, query, result) {
 		this._showFreeThumbnail(url, canvas);
 };
 
-Com_Zimbra_Url.zeroPad = function(number, width) {
+Com_Zmail_Url.zeroPad = function(number, width) {
 	var s = "" + number;
 	while (s.length < width)
 		s = "0" + s;
@@ -272,22 +272,22 @@ Com_Zimbra_Url.zeroPad = function(number, width) {
 };
 
 //Begin YouTube section
-Com_Zimbra_Url.YOUTUBE_LINK_PATTERN1 = "youtube.com/watch?";
-Com_Zimbra_Url.YOUTUBE_LINK_PATTERN2 = "youtube.com/v/";
-Com_Zimbra_Url.YOUTUBE_LINK_PATTERN3 = "youtu.be/";
-Com_Zimbra_Url.YOUTUBE_FEED = "http://gdata.youtube.com/feeds/api/videos/@ID?alt=jsonc&v=2";
-Com_Zimbra_Url.YOUTUBE_EMBED_URL = "www.youtube.com/embed/";
-Com_Zimbra_Url.YOUTUBE_DEFAULT_THUMBNAIL = "http://img.youtube.com/vi/@ID.jpg";
-Com_Zimbra_Url.PROTOCOL = location.protocol;
-Com_Zimbra_Url.YOUTUBE_MAX_VIDEOS = 5;
+Com_Zmail_Url.YOUTUBE_LINK_PATTERN1 = "youtube.com/watch?";
+Com_Zmail_Url.YOUTUBE_LINK_PATTERN2 = "youtube.com/v/";
+Com_Zmail_Url.YOUTUBE_LINK_PATTERN3 = "youtu.be/";
+Com_Zmail_Url.YOUTUBE_FEED = "http://gdata.youtube.com/feeds/api/videos/@ID?alt=jsonc&v=2";
+Com_Zmail_Url.YOUTUBE_EMBED_URL = "www.youtube.com/embed/";
+Com_Zmail_Url.YOUTUBE_DEFAULT_THUMBNAIL = "http://img.youtube.com/vi/@ID.jpg";
+Com_Zmail_Url.PROTOCOL = location.protocol;
+Com_Zmail_Url.YOUTUBE_MAX_VIDEOS = 5;
 
 /**
  * Get the gDATA feed so we can parse for title & thumbnail
  */
-Com_Zimbra_Url.prototype._getYouTubeFeed =
+Com_Zmail_Url.prototype._getYouTubeFeed =
 function() {
 	for (var youTubeId in this._youTubeHash) {
-		var gDataUrl = Com_Zimbra_Url.YOUTUBE_FEED;
+		var gDataUrl = Com_Zmail_Url.YOUTUBE_FEED;
 		gDataUrl = gDataUrl.replace("@ID", youTubeId);
 		gDataUrl = ZmZimletBase.PROXY + AjxStringUtil.urlComponentEncode(gDataUrl);
 		var params = {
@@ -303,11 +303,11 @@ function() {
  * @param youTubeId {String} 11 character id
  * @param req {HttpResponse} http response
  */
-Com_Zimbra_Url.prototype._parseYouTubeFeed =
+Com_Zmail_Url.prototype._parseYouTubeFeed =
 function(youTubeId, req) {
 	if (req.status != 200) {
 		DBG.println(AjxDebug.DBG1, "Error code in parsing YouTube Feed. Code = " + req.status);
-		var thumbnail = Com_Zimbra_Url.YOUTUBE_DEFAULT_THUMBNAIL.replace("@ID", youTubeId);
+		var thumbnail = Com_Zmail_Url.YOUTUBE_DEFAULT_THUMBNAIL.replace("@ID", youTubeId);
 		var title = "";
 		this._youTubeHash[youTubeId] = {"thumbnail" : thumbnail, "title" : title};
 		this._buildYouTubeImageHtml(youTubeId);
@@ -326,10 +326,10 @@ function(youTubeId, req) {
  * @param url
  * @return {String} id YouTube video id
  */
-Com_Zimbra_Url.prototype.getYouTubeId =
+Com_Zmail_Url.prototype.getYouTubeId =
 function(url) {
 	var id = null;
-	var index = url.indexOf(Com_Zimbra_Url.YOUTUBE_LINK_PATTERN1);
+	var index = url.indexOf(Com_Zmail_Url.YOUTUBE_LINK_PATTERN1);
 	if (index != -1) {
 		var qs = AjxStringUtil.parseQueryString(url);
 		if (qs && qs['v']) {
@@ -337,14 +337,14 @@ function(url) {
 		}
 	}
 	else {
-		index = url.indexOf(Com_Zimbra_Url.YOUTUBE_LINK_PATTERN2);
+		index = url.indexOf(Com_Zmail_Url.YOUTUBE_LINK_PATTERN2);
 		if (index != -1) {
-			id = AjxStringUtil.trim(url.substring(index + Com_Zimbra_Url.YOUTUBE_LINK_PATTERN2.length));
+			id = AjxStringUtil.trim(url.substring(index + Com_Zmail_Url.YOUTUBE_LINK_PATTERN2.length));
 		}
 		else {
-			index = url.indexOf(Com_Zimbra_Url.YOUTUBE_LINK_PATTERN3);
+			index = url.indexOf(Com_Zmail_Url.YOUTUBE_LINK_PATTERN3);
 			if (index != -1) {
-				id = AjxStringUtil.trim(url.substring(index + Com_Zimbra_Url.YOUTUBE_LINK_PATTERN3.length));
+				id = AjxStringUtil.trim(url.substring(index + Com_Zmail_Url.YOUTUBE_LINK_PATTERN3.length));
 			}
 		}
 	}
@@ -356,7 +356,7 @@ function(url) {
  * @param youTubeId
  * @param msgId
  */
-Com_Zimbra_Url.prototype._showYouTubeVideo =
+Com_Zmail_Url.prototype._showYouTubeVideo =
 function(youTubeId, msgId) {
 	if (!youTubeId || !msgId) return;
 
@@ -369,7 +369,7 @@ function(youTubeId, msgId) {
 			this._setYouTubeOpacity(youTubeId, msgId, true);
 		}
 		else {
-			if (iframeEl && iframeEl.src == Com_Zimbra_Url.PROTOCOL + '//www.youtube.com/embed/' + youTubeId) {
+			if (iframeEl && iframeEl.src == Com_Zmail_Url.PROTOCOL + '//www.youtube.com/embed/' + youTubeId) {
 				Dwt.setVisible(el, false); //toggle visiblity
 				this._setYouTubeOpacity(youTubeId, msgId, false);
 			}
@@ -386,19 +386,19 @@ function(youTubeId, msgId) {
  * @param youTubeId
  * @param msgId
  */
-Com_Zimbra_Url.prototype._showYouTubeEmbed = 
+Com_Zmail_Url.prototype._showYouTubeEmbed = 
 function(youTubeId, msgId) {
 	return '<iframe id="youtube-iframe_' + this._viewId + '_' + msgId +'" class="youtube-player" type="text/html"' +
 			'width="640" '  +
 			'height="385"'  +
-			'src="' + Com_Zimbra_Url.PROTOCOL + "//" +  Com_Zimbra_Url.YOUTUBE_EMBED_URL + youTubeId + '?autoplay=1&rel=0" frameborder="0"></iframe>';
+			'src="' + Com_Zmail_Url.PROTOCOL + "//" +  Com_Zmail_Url.YOUTUBE_EMBED_URL + youTubeId + '?autoplay=1&rel=0" frameborder="0"></iframe>';
 };
 
 /**
  * Display thumbnail of youtube video
  * @param youTubeId
  */
-Com_Zimbra_Url.prototype._showYouTubeThumbnail =
+Com_Zmail_Url.prototype._showYouTubeThumbnail =
 function(youTubeId) {
 	return "<div class='thumb-wrapper'><div class='play'></div><img src='" + this._youTubeHash[youTubeId].thumbnail + "' border='2'></div>"; 			   
 };
@@ -407,7 +407,7 @@ function(youTubeId) {
  * Parse the mail message for youtube links matching a specified pattern
  * @param text
  */
-Com_Zimbra_Url.prototype._getAllYouTubeLinks =
+Com_Zmail_Url.prototype._getAllYouTubeLinks =
 function(text) {
 	if (!text) return null;
 	var youTubeArr = text.match(/(\b(((http | https)\:\/\/)?(www\.)?((youtube\.com\/watch\?v=)|(youtube\.com\/watch\?.*\&v=)|(youtube\.com\/v\/)|(youtu\.be\/))((-)?[0-9a-zA-Z_-]+)?(&\w+=\w+)*)\b)/gi);
@@ -422,11 +422,11 @@ function(text) {
 			}
 		}
 		//quick check to see if hash is bigger than max before we do a loop through the hash
-		if (hashCount > Com_Zimbra_Url.YOUTUBE_MAX_VIDEOS) {
+		if (hashCount > Com_Zmail_Url.YOUTUBE_MAX_VIDEOS) {
 			var tempHash = {};
 			var size = 1;
 			for (var key in hash) {
-				if (size > Com_Zimbra_Url.YOUTUBE_MAX_VIDEOS){
+				if (size > Com_Zmail_Url.YOUTUBE_MAX_VIDEOS){
 					this._youTubeHitMax = true;
 					return tempHash;
 				}
@@ -444,7 +444,7 @@ function(text) {
  * Build the HTML of YouTube thumbnails
  * @param youTubeId
  */
-Com_Zimbra_Url.prototype._buildYouTubeImageHtml =
+Com_Zmail_Url.prototype._buildYouTubeImageHtml =
 function(youTubeId) {
 	if (!this._youTubeHash || !youTubeId || document.getElementById("YOUTUBE_" + youTubeId + "_" + this._viewId + "_" + this._msgId)) return;
 	
@@ -467,7 +467,7 @@ function(youTubeId) {
  * Onclick handler for playing video.
  * @param ev
  */
-Com_Zimbra_Url.prototype._onYouTubeClickListener =
+Com_Zmail_Url.prototype._onYouTubeClickListener =
 function(ev) {
 	if (ev && ev.target && ev.target.parentNode && ev.target.parentNode.parentNode) {
 		var id = ev.target.parentNode.parentNode.id.replace("YOUTUBE_", "");
@@ -480,21 +480,21 @@ function(ev) {
 	}
 };
 
-Com_Zimbra_Url.prototype._onYouTubeMouseOver =
+Com_Zmail_Url.prototype._onYouTubeMouseOver =
 function(ev) {
 	if (ev && ev.target && ev.target.tagName.toLowerCase() == "img") {
 		ev.target.style.border = "2px solid white";
 	}
 };
 
-Com_Zimbra_Url.prototype._onYouTubeMouseOut =
+Com_Zmail_Url.prototype._onYouTubeMouseOut =
 function(ev) {
    	if (ev && ev.target && ev.target.tagName.toLowerCase() == "img") {
 		ev.target.style.border = "2px solid";
 	}
 };
 
-Com_Zimbra_Url.prototype._setYouTubeOpacity =
+Com_Zmail_Url.prototype._setYouTubeOpacity =
 function(youTubeId, msgId, opacity) {
 	var img = document.getElementById("YOUTUBE_" + youTubeId + "_" + this._viewId + "_" + msgId);
 	if (img && img.firstChild && opacity) {
@@ -523,7 +523,7 @@ function(youTubeId, msgId, opacity) {
  * handle youtube videos on conversation view
  * @param msg
  */
-Com_Zimbra_Url.prototype.onConvView = 
+Com_Zmail_Url.prototype.onConvView = 
 function(msg, oldMsg, msgView) {
 	this._isConv = true;
 	this.renderYouTube(msg, msgView);
@@ -533,13 +533,13 @@ function(msg, oldMsg, msgView) {
  * handle youtube videos on message view
  * @param msg
  */
-Com_Zimbra_Url.prototype.onMsgView = 
+Com_Zmail_Url.prototype.onMsgView = 
 function(msg, oldMsg, msgView) {
 	this._isConv = false;
 	this.renderYouTube(msg, msgView);
 }
 
-Com_Zimbra_Url.prototype.renderYouTube =
+Com_Zmail_Url.prototype.renderYouTube =
 function(msg, msgView) {
 	if (!this._youtubePreview || appCtxt.isChildWindow ) return;
 	this._youTubeHitMax = false; //reset
@@ -563,7 +563,7 @@ function(msg, msgView) {
 		div.style.display = "none"; //don't show until we're getting all the thumbnails
 		var title = this.getMessage("youTubeTitle");
 		if (this._youTubeHitMax) {
-			title = this.getMessage("youTubeTitleMax").replace("{0}", Com_Zimbra_Url.YOUTUBE_MAX_VIDEOS);
+			title = this.getMessage("youTubeTitleMax").replace("{0}", Com_Zmail_Url.YOUTUBE_MAX_VIDEOS);
 		}
 		div.innerHTML = "<h3 class='user_font_" + appCtxt.get(ZmSetting.FONT_NAME) +"'>" + title + "</h3>";
 		
@@ -591,29 +591,29 @@ function(msg, msgView) {
 
 };
 
-Com_Zimbra_Url.CALENDAR_URL_EXTENSION = 'ics';
+Com_Zmail_Url.CALENDAR_URL_EXTENSION = 'ics';
 
-Com_Zimbra_Url.prototype.getActionMenu =
+Com_Zmail_Url.prototype.getActionMenu =
 function(obj, span, context) {
     var uri = AjxStringUtil.parseURL(obj),
         fileName = uri.fileName,
         extension = fileName ? fileName.substring(fileName.lastIndexOf('.') + 1) : '';
     if(!appCtxt.get(ZmApp.SETTING[ZmId.APP_CALENDAR]) ||
-        extension != Com_Zimbra_Url.CALENDAR_URL_EXTENSION) {
+        extension != Com_Zmail_Url.CALENDAR_URL_EXTENSION) {
         return false;
     }
 	if (this._zimletContext._contentActionMenu instanceof AjxCallback) {
 		this._zimletContext._contentActionMenu = this._zimletContext._contentActionMenu.run();
 	}
-	// Set some global context since the parent Zimlet (Com_Zimbra_Date) will be called for
+	// Set some global context since the parent Zimlet (Com_Zmail_Date) will be called for
 	// right click menu options, even though the getActionMenu will get called on the sub-classes.
-	Com_Zimbra_Url._actionObject = obj;
-	Com_Zimbra_Url._actionSpan = span;
-	Com_Zimbra_Url._actionContext = context;
+	Com_Zmail_Url._actionObject = obj;
+	Com_Zmail_Url._actionSpan = span;
+	Com_Zmail_Url._actionContext = context;
 	return this._zimletContext._contentActionMenu;
 };
 
-Com_Zimbra_Url.prototype.menuItemSelected =
+Com_Zmail_Url.prototype.menuItemSelected =
 function(itemId, ev) {
 	switch (itemId) {
 		case "NEWCAL":		this._newCalListener(ev); break;
@@ -621,24 +621,24 @@ function(itemId, ev) {
 	}
 };
 
-Com_Zimbra_Url.prototype._goToUrlListener =
+Com_Zmail_Url.prototype._goToUrlListener =
 function() {
-    window.open(Com_Zimbra_Url._actionObject, "_blank");
+    window.open(Com_Zmail_Url._actionObject, "_blank");
 };
 
-Com_Zimbra_Url.prototype.getMainWindow =
+Com_Zmail_Url.prototype.getMainWindow =
 function(appId) {
 	return appCtxt.isChildWindow ? window.opener : window;
 };
 
-Com_Zimbra_Url.prototype._newCalListener =
+Com_Zmail_Url.prototype._newCalListener =
 function(ev) {
     AjxDispatcher.require(["CalendarCore", "Calendar"]);
     var oc = appCtxt.getOverviewController();
 	var treeController = oc.getTreeController(ZmOrganizer.CALENDAR);
 
     var iCal = {
-                url : Com_Zimbra_Url._actionObject
+                url : Com_Zmail_Url._actionObject
             };
     treeController._newListener(ev);
     var dialog = appCtxt.getNewCalendarDialog();

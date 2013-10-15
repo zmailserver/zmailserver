@@ -17,17 +17,17 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.ajax.ui.mail;
+package org.zmail.qa.selenium.projects.ajax.ui.mail;
 
 import java.util.*;
 
-import com.zimbra.qa.selenium.framework.items.AttachmentItem;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.framework.util.staf.Stafpostqueue;
+import org.zmail.qa.selenium.framework.items.AttachmentItem;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.staf.Stafpostqueue;
 
 /**
- * @author zimbra
+ * @author zmail
  *
  */
 public class DisplayConversationMessage extends DisplayMail {

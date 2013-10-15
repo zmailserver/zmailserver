@@ -248,12 +248,12 @@ function(contact, callback, result) {
 	var mailPolicySpecificMailers = [];
 	contact.dlInfo = {	isMember: isMember,
 						isOwner: isOwner,
-						subscriptionPolicy: attrs.zimbraDistributionListSubscriptionPolicy,
-						unsubscriptionPolicy: attrs.zimbraDistributionListUnsubscriptionPolicy,
+						subscriptionPolicy: attrs.zmailDistributionListSubscriptionPolicy,
+						unsubscriptionPolicy: attrs.zmailDistributionListUnsubscriptionPolicy,
 						description: attrs.description || "",
 						displayName: attrs.displayName || "",
-						notes: attrs.zimbraNotes || "",
-						hideInGal: attrs.zimbraHideInGal == "TRUE",
+						notes: attrs.zmailNotes || "",
+						hideInGal: attrs.zmailHideInGal == "TRUE",
 						mailPolicy: isOwner && this._getMailPolicy(dl, mailPolicySpecificMailers, contact),
 						owners: isOwner && this._getOwners(dl)};
 
@@ -266,8 +266,8 @@ function(contact, callback, result) {
 ZmContactListController.prototype.loadDlMembers =
 function(contact, callback) {
 	if ((!appCtxt.get("EXPAND_DL_ENABLED") || contact.dlInfo.hideInGal) && !contact.dlInfo.isOwner) {
-		// can't get members if dl has zimbraHideInGal true, and not owner
-		//also, if zimbraFeatureDistributionListExpandMembersEnabled is false - also do not show the members (again unless it's the owner)
+		// can't get members if dl has zmailHideInGal true, and not owner
+		//also, if zmailFeatureDistributionListExpandMembersEnabled is false - also do not show the members (again unless it's the owner)
 		contact.dlMembers = [];
 		if (callback) {
 			callback();

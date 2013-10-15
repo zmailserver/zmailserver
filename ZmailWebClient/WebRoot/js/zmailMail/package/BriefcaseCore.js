@@ -16,5 +16,5 @@
  * Package: BriefcaseCore
  * 
  */
-AjxPackage.require("zimbraMail.briefcase.model.ZmBriefcase");
-AjxPackage.require("zimbraMail.briefcase.model.ZmBriefcaseItem");
+AjxPackage.require("zmailMail.briefcase.model.ZmBriefcase");
+AjxPackage.require("zmailMail.briefcase.model.ZmBriefcaseItem");

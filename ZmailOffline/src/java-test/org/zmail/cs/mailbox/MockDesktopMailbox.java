@@ -13,9 +13,9 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
 public class MockDesktopMailbox extends DesktopMailbox {
 

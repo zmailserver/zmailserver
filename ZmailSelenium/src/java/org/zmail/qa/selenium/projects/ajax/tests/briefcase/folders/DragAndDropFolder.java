@@ -14,14 +14,14 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.briefcase.folders;
+package org.zmail.qa.selenium.projects.ajax.tests.briefcase.folders;
 
 import org.testng.annotations.Test;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.FeatureBriefcaseTest;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.FeatureBriefcaseTest;
 
 public class DragAndDropFolder extends FeatureBriefcaseTest {
 
@@ -34,7 +34,7 @@ public class DragAndDropFolder extends FeatureBriefcaseTest {
 
 	@Test(description = "Drag one briefcase sub-folder and Drop into other", groups = { "functional" })
 	public void DragAndDropFolder_01() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseRootFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
@@ -45,11 +45,11 @@ public class DragAndDropFolder extends FeatureBriefcaseTest {
 		// Create two briefcase sub-folders:One folder to Drag & Another folder
 		// to drop into
 		String briefcaseSubFolderName1 = "folder1"
-				+ ZimbraSeleniumProperties.getUniqueString();
+				+ ZmailSeleniumProperties.getUniqueString();
 		String briefcaseSubFolderName2 = "folder2"
-				+ ZimbraSeleniumProperties.getUniqueString();
+				+ ZmailSeleniumProperties.getUniqueString();
 
-		account.soapSend("<CreateFolderRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+ "<folder name='" + briefcaseSubFolderName1 + "' l='"
 				+ briefcaseRootFolder.getId() + "'/>"
 				+ "</CreateFolderRequest>");
@@ -59,7 +59,7 @@ public class DragAndDropFolder extends FeatureBriefcaseTest {
 		ZAssert.assertNotNull(briefcaseSubFolder1,
 				"Verify the first subfolder is available");
 
-		account.soapSend("<CreateFolderRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+ "<folder name='" + briefcaseSubFolderName2 + "' l='"
 				+ briefcaseRootFolder.getId() + "'/>"
 				+ "</CreateFolderRequest>");

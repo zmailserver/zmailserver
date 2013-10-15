@@ -132,7 +132,7 @@ function () {
 	var elements = new Object();
 	elements[ZaAppViewMgr.C_APP_CONTENT] = this._contentView;
 	elements[ZaAppViewMgr.C_TOOLBAR_TOP] = this._toolbar;		
-//    ZaApp.getInstance().createView(ZaZimbraAdmin._SAMBA_DOMAIN_VIEW, elements);
+//    ZaApp.getInstance().createView(ZaZmailAdmin._SAMBA_DOMAIN_VIEW, elements);
     var tabParams = {
 		openInNewTab: true,
 		tabId: this.getContentViewId()

@@ -14,18 +14,18 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.calendar.meetings.resources;
+package org.zmail.qa.selenium.projects.ajax.tests.calendar.meetings.resources;
 
 import java.util.Calendar;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.items.AppointmentItem;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.CalendarWorkWeekTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.calendar.FormApptNew;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.items.AppointmentItem;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.CalendarWorkWeekTest;
+import org.zmail.qa.selenium.projects.ajax.ui.calendar.FormApptNew;
 
 public class CreateMeetingWithLocation extends CalendarWorkWeekTest {
 
@@ -45,14 +45,14 @@ public class CreateMeetingWithLocation extends CalendarWorkWeekTest {
 		
 		// Create appointment data
 		AppointmentItem appt = new AppointmentItem();
-		ZimbraResource location = new ZimbraResource(ZimbraResource.Type.LOCATION);
+		ZmailResource location = new ZmailResource(ZmailResource.Type.LOCATION);
 		
 		String apptSubject, apptAttendee1, apptLocation1, apptContent;
 		Calendar now = this.calendarWeekDayUTC;
-		apptSubject = "appointment" + ZimbraSeleniumProperties.getUniqueString();
-		apptAttendee1 = ZimbraAccount.AccountA().EmailAddress;
+		apptSubject = "appointment" + ZmailSeleniumProperties.getUniqueString();
+		apptAttendee1 = ZmailAccount.AccountA().EmailAddress;
 		apptLocation1 = location.EmailAddress;
-		apptContent = "content" + ZimbraSeleniumProperties.getUniqueString();
+		apptContent = "content" + ZmailSeleniumProperties.getUniqueString();
 		
 		appt.setSubject(apptSubject);
 		appt.setAttendees(apptAttendee1);
@@ -78,7 +78,7 @@ public class CreateMeetingWithLocation extends CalendarWorkWeekTest {
 		for (int i = 0; i < 10; i++) {
 			
 			app.zGetActiveAccount().soapSend(
-						"<SearchRequest xmlns='urn:zimbraMail' types='message'>"
+						"<SearchRequest xmlns='urn:zmailMail' types='message'>"
 					+		"<query>in:inbox subject:(aa"+ apptSubject +")</query>"
 					+	"</SearchRequest>");
 			
@@ -118,15 +118,15 @@ public class CreateMeetingWithLocation extends CalendarWorkWeekTest {
 		
 		// Create appointment data
 		AppointmentItem appt = new AppointmentItem();
-		ZimbraResource location1 = new ZimbraResource(ZimbraResource.Type.LOCATION);
-		ZimbraResource location2 = new ZimbraResource(ZimbraResource.Type.LOCATION);		
+		ZmailResource location1 = new ZmailResource(ZmailResource.Type.LOCATION);
+		ZmailResource location2 = new ZmailResource(ZmailResource.Type.LOCATION);		
 		
 		String apptSubject, apptAttendee1, apptLocation, apptContent;
 		Calendar now = this.calendarWeekDayUTC;
-		apptSubject = ZimbraSeleniumProperties.getUniqueString();
-		apptAttendee1 = ZimbraAccount.AccountA().EmailAddress;
+		apptSubject = ZmailSeleniumProperties.getUniqueString();
+		apptAttendee1 = ZmailAccount.AccountA().EmailAddress;
 		apptLocation = location1.EmailAddress + " " + location2.EmailAddress;
-		apptContent = ZimbraSeleniumProperties.getUniqueString();
+		apptContent = ZmailSeleniumProperties.getUniqueString();
 		
 		appt.setSubject(apptSubject);
 		appt.setAttendees(apptAttendee1);
@@ -146,14 +146,14 @@ public class CreateMeetingWithLocation extends CalendarWorkWeekTest {
 		for (int i = 0; i < 10; i++) {
 			
 			app.zGetActiveAccount().soapSend(
-						"<SearchRequest xmlns='urn:zimbraMail' types='message'>"
+						"<SearchRequest xmlns='urn:zmailMail' types='message'>"
 					+		"<query>in:inbox subject:(aa"+ apptSubject +") from:("+ location1.EmailAddress +")</query>"
 					+	"</SearchRequest>");
 			
 			String id1 = app.zGetActiveAccount().soapSelectValue("//mail:m", "id");
 
 			app.zGetActiveAccount().soapSend(
-					"<SearchRequest xmlns='urn:zimbraMail' types='message'>"
+					"<SearchRequest xmlns='urn:zmailMail' types='message'>"
 				+		"<query>in:inbox subject:(aa"+ apptSubject +") from:("+ location2.EmailAddress +")</query>"
 				+	"</SearchRequest>");
 		
@@ -190,10 +190,10 @@ public class CreateMeetingWithLocation extends CalendarWorkWeekTest {
 		
 		String apptSubject, apptAttendee1, apptLocation, apptContent;
 		Calendar now = this.calendarWeekDayUTC;
-		apptSubject = ZimbraSeleniumProperties.getUniqueString();
-		apptAttendee1 = ZimbraAccount.AccountA().EmailAddress;
-		apptLocation = ZimbraSeleniumProperties.getUniqueString() + " " + ZimbraSeleniumProperties.getUniqueString();
-		apptContent = ZimbraSeleniumProperties.getUniqueString();
+		apptSubject = ZmailSeleniumProperties.getUniqueString();
+		apptAttendee1 = ZmailAccount.AccountA().EmailAddress;
+		apptLocation = ZmailSeleniumProperties.getUniqueString() + " " + ZmailSeleniumProperties.getUniqueString();
+		apptContent = ZmailSeleniumProperties.getUniqueString();
 		
 		appt.setSubject(apptSubject);
 		appt.setAttendees(apptAttendee1);

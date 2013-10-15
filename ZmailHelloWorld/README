@@ -1,5 +1,5 @@
 README:
-This is an example of a Zimbra server extension. This extension adds "HelloWorldRequest" to zimbraAccount namespace.
+This is an example of a Zmail server extension. This extension adds "HelloWorldRequest" to zmailAccount namespace.
 To deploy run 
 >ant deploy
 

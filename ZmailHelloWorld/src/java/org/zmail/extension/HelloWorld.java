@@ -14,20 +14,20 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.extension;
+package org.zmail.extension;
 
 import java.util.Map;
 
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.ScheduledTask;
-import com.zimbra.cs.mailbox.ScheduledTaskManager;
-import com.zimbra.cs.service.account.AccountDocumentHandler;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.ScheduledTask;
+import org.zmail.cs.mailbox.ScheduledTaskManager;
+import org.zmail.cs.service.account.AccountDocumentHandler;
+import org.zmail.soap.ZmailSoapContext;
 
 public class HelloWorld extends AccountDocumentHandler {
 /**
@@ -36,10 +36,10 @@ public class HelloWorld extends AccountDocumentHandler {
 	@Override
 	public Element handle(Element request, Map<String, Object> context)
 			throws ServiceException {
-		ZimbraSoapContext zsc = getZimbraSoapContext(context);
-		Element response = zsc.createElement(ZimbraHelloWorldService.HELLO_WORLD_RESPONSE);
-		response.addElement(ZimbraHelloWorldExtension.E_helloWorld);
-		response.addAttribute(ZimbraHelloWorldExtension.E_helloWorld, "hellow");
+		ZmailSoapContext zsc = getZmailSoapContext(context);
+		Element response = zsc.createElement(ZmailHelloWorldService.HELLO_WORLD_RESPONSE);
+		response.addElement(ZmailHelloWorldExtension.E_helloWorld);
+		response.addAttribute(ZmailHelloWorldExtension.E_helloWorld, "hellow");
 		return response;
 	}
 

@@ -17,18 +17,18 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.html.ui.mail;
+package org.zmail.qa.selenium.projects.html.ui.mail;
 
 import java.util.*;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.html.ui.*;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.html.ui.*;
 
 
 /**
- * @author zimbra
+ * @author zmail
  *
  */
 public class TreeMail extends AbsTree {
@@ -122,7 +122,7 @@ public class TreeMail extends AbsTree {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.zimbra.qa.selenium.framework.ui.AbsTree#zPressButton(com.zimbra.qa.selenium.framework.ui.Button)
+	 * @see org.zmail.qa.selenium.framework.ui.AbsTree#zPressButton(org.zmail.qa.selenium.framework.ui.Button)
 	 */
 	@Override
 	public AbsPage zPressButton(Button button) throws HarnessException {

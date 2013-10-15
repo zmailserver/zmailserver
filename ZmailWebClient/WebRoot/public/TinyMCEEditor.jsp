@@ -20,7 +20,7 @@ TinyMCE editor test page used for development purpose
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <title>Zimbra TinyMCE Editor Test Page</title>
+    <title>Zmail TinyMCE Editor Test Page</title>
   </head>
     <body>
     <noscript><p><b>Javascript must be enabled to use this.</b></p></noscript>

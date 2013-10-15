@@ -14,20 +14,20 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.login.mountpoints.folders;
+package org.zmail.qa.selenium.projects.ajax.tests.login.mountpoints.folders;
 
 import org.testng.annotations.*;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
 
 
 
 public class OwnerAccountDeleted extends AjaxCommonTest {
 	
-	protected ZimbraAccount Owner = null;
+	protected ZmailAccount Owner = null;
 	
 	public OwnerAccountDeleted() {
 		logger.info("New "+ OwnerAccountDeleted.class.getCanonicalName());
@@ -41,7 +41,7 @@ public class OwnerAccountDeleted extends AjaxCommonTest {
 	@BeforeMethod(	description = "Make sure the Owner account exists",
 					groups = { "always" } )
 	public void CreateOwner() throws HarnessException {
-		Owner = new ZimbraAccount();
+		Owner = new ZmailAccount();
 		Owner.provision();
 		Owner.authenticate();
 	}
@@ -53,22 +53,22 @@ public class OwnerAccountDeleted extends AjaxCommonTest {
 		
 		// Data setup
 		
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String foldername = "folder" + ZimbraSeleniumProperties.getUniqueString();
-		String mountpointname = "mountpoint" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String foldername = "folder" + ZmailSeleniumProperties.getUniqueString();
+		String mountpointname = "mountpoint" + ZmailSeleniumProperties.getUniqueString();
 		
 		FolderItem inbox = FolderItem.importFromSOAP(Owner, FolderItem.SystemFolder.Inbox);
 		
 		// Create a folder to share
 		Owner.soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>"
+					"<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+		"<folder name='" + foldername + "' l='" + inbox.getId() + "'/>"
 				+	"</CreateFolderRequest>");
 		
 		FolderItem folder = FolderItem.importFromSOAP(Owner, foldername);
 		
 		Owner.soapSend(
-				"<AddMsgRequest xmlns='urn:zimbraMail'>"
+				"<AddMsgRequest xmlns='urn:zmailMail'>"
     		+		"<m l='"+ folder.getId() +"' f='u'>"
         	+			"<content>From: foo@foo.com\n"
         	+				"To: foo@foo.com \n"
@@ -84,7 +84,7 @@ public class OwnerAccountDeleted extends AjaxCommonTest {
 
 		// Share it
 		Owner.soapSend(
-					"<FolderActionRequest xmlns='urn:zimbraMail'>"
+					"<FolderActionRequest xmlns='urn:zmailMail'>"
 				+		"<action id='"+ folder.getId() +"' op='grant'>"
 				+			"<grant d='"+ app.zGetActiveAccount().EmailAddress +"' gt='usr' perm='rwidxa'/>"
 				+		"</action>"
@@ -93,8 +93,8 @@ public class OwnerAccountDeleted extends AjaxCommonTest {
 		
 		// Mount it
 		app.zGetActiveAccount().soapSend(
-					"<CreateMountpointRequest xmlns='urn:zimbraMail'>"
-				+		"<link l='1' name='"+ mountpointname +"'  rid='"+ folder.getId() +"' zid='"+ Owner.ZimbraId +"'/>"
+					"<CreateMountpointRequest xmlns='urn:zmailMail'>"
+				+		"<link l='1' name='"+ mountpointname +"'  rid='"+ folder.getId() +"' zid='"+ Owner.ZmailId +"'/>"
 				+	"</CreateMountpointRequest>");
 		
 		FolderMountpointItem mountpoint = FolderMountpointItem.importFromSOAP(app.zGetActiveAccount(), mountpointname);
@@ -109,13 +109,13 @@ public class OwnerAccountDeleted extends AjaxCommonTest {
 		app.zTreeMail.zTreeItem(Action.A_LEFTCLICK, mountpoint);
 		
 		// Logout
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 		app.zPageMain.zLogout();
 		
 		// Delete the Owner account
-		ZimbraAdminAccount.GlobalAdmin().soapSend(
-					"<DeleteAccountRequest xmlns='urn:zimbraAdmin'>"
-				+		"<id>"+ Owner.ZimbraId + "</id>"
+		ZmailAdminAccount.GlobalAdmin().soapSend(
+					"<DeleteAccountRequest xmlns='urn:zmailAdmin'>"
+				+		"<id>"+ Owner.ZmailId + "</id>"
 				+	"</DeleteAccountRequest>");
 		
 		

@@ -1,18 +1,18 @@
 #
-# spec file for zimbra.rpm
+# spec file for zmail.rpm
 #
-Summary: Zimbra Proxy
-Name: zimbra-proxy
+Summary: Zmail Proxy
+Name: zmail-proxy
 Version: @@VERSION@@
 Release: @@RELEASE@@
 License: ZPL and other
 Group: Applications/Messaging
-URL: http://www.zimbra.com
-Vendor: Zimbra, Inc.
-Packager: Zimbra, Inc.
-BuildRoot: /opt/zimbra
+URL: http://www.zmail.com
+Vendor: Zmail, Inc.
+Packager: Zmail, Inc.
+BuildRoot: /opt/zmail
 AutoReqProv: no
-requires: zimbra-core
+requires: zmail-core
 
 %description
 Best email money can buy

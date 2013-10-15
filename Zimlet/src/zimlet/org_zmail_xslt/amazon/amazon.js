@@ -48,7 +48,7 @@ function _initAmazon() {
 	amzn.getRequest = 
 		function (ctxt, q) { return this.queryAmazon(ctxt, q, this.id) };
 		
-	Com_Zimbra_Xslt.registerService(amzn);
+	Com_Zmail_Xslt.registerService(amzn);
 
 	amzn = new Object();
 	amzn.label = "Amazon Books";
@@ -59,7 +59,7 @@ function _initAmazon() {
 	amzn.getRequest = 
 		function (ctxt, q) { return this.queryAmazon(ctxt, q, this.id) };
 		
-	Com_Zimbra_Xslt.registerService(amzn);
+	Com_Zmail_Xslt.registerService(amzn);
 };
 
 _initAmazon();

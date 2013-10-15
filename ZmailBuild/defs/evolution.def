@@ -1,8 +1,8 @@
 # __Evolution
 
 evolution: CUR_DEST_ROOT := $(EVO_DEST_ROOT) 
-evolution: CUR_PACKAGE_NAME := zimbra-evolution
-evolution: CUR_PACKAGE_SPEC := $(BUILD_ROOT)/evolution-zimbra.spec
+evolution: CUR_PACKAGE_NAME := zmail-evolution
+evolution: CUR_PACKAGE_SPEC := $(BUILD_ROOT)/evolution-zmail.spec
 evolution: CUR_PACKAGING_OPTIONS := $(EVO_PACKAGING_OPTIONS)
 evolution: $(PACKAGE_DIR) evolution_stage evolution_pkg_spec_$(PACKAGE_EXT)
 	(cd $(CUR_DEST_ROOT); \
@@ -12,7 +12,7 @@ evolution_pkg_spec_ccs:
 
 evolution_pkg_spec_pkg:
 
-evolution_pkg_spec_rpm: $(BUILD_ROOT)/evolution-zimbra.spec
+evolution_pkg_spec_rpm: $(BUILD_ROOT)/evolution-zmail.spec
 
 evolution_pkg_spec_deb: $(EVO_DEST_ROOT)/DEBIAN/control
 
@@ -36,7 +36,7 @@ $(EVO_DEST_ROOT)/DEBIAN: force
 	chmod 755 $@
 
 $(EVO_DEST_ROOT)/DEBIAN/control: $(EVO_DEST_ROOT)/DEBIAN force
-	cat $(PACKAGE_CONF_DIR)/Spec/evolution-zimbra.deb | \
+	cat $(PACKAGE_CONF_DIR)/Spec/evolution-zmail.deb | \
 	sed -e 's/@@VERSION@@/$(VERSION_TAG)/' \
 	-e 's/@@RELEASE@@/$(RELEASE)/' \
 	-e 's/@@ARCH@@/$(ARCH)/' > $@
@@ -45,8 +45,8 @@ $(EVO_DEST_ROOT)/DEBIAN/control: $(EVO_DEST_ROOT)/DEBIAN force
 #
 # RPM 
 #
-$(BUILD_ROOT)/evolution-zimbra.spec:
-	cat $(PACKAGE_CONF_DIR)/Spec/evolution-zimbra.spec | \
+$(BUILD_ROOT)/evolution-zmail.spec:
+	cat $(PACKAGE_CONF_DIR)/Spec/evolution-zmail.spec | \
 	sed -e 's/@@VERSION@@/$(VERSION_TAG)/' \
 	-e 's/@@RELEASE@@/$(RELEASE)/' \
 	-e 's/@@ARCH@@/$(ARCH)/' > $@

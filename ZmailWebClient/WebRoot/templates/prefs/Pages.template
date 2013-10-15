@@ -355,7 +355,7 @@ and the container element is replaced with that control.
 						</tr>
 					<$ } $>
 
-					<$ if (!appCtxt.multiAccounts || appCtxt.isFamilyMbox || (!data.activeAccount.isMain && data.activeAccount.isZimbraAccount)) { $>
+					<$ if (!appCtxt.multiAccounts || appCtxt.isFamilyMbox || (!data.activeAccount.isMain && data.activeAccount.isZmailAccount)) { $>
 						<$ if (data.isEnabled(ZmSetting.MAIL_FORWARDING_ENABLED)) { $>
 							<tr>
 								<td class='ZOptionsLabel'><$=showMessageArrivalLabel() $></td>
@@ -582,7 +582,7 @@ and the container element is replaced with that control.
 		</tr>
 	</table>
 
-	<$ if (!appCtxt.multiAccounts || appCtxt.isFamilyMbox || (!data.activeAccount.isMain && data.activeAccount.isZimbraAccount)) { $>
+	<$ if (!appCtxt.multiAccounts || appCtxt.isFamilyMbox || (!data.activeAccount.isMain && data.activeAccount.isZmailAccount)) { $>
 		<$ if (appCtxt.get(ZmSetting.MAIL_BLACKLIST_MAX_NUM_ENTRIES) > 0 || appCtxt.get(ZmSetting.MAIL_WHITELIST_MAX_NUM_ENTRIES) > 0) { $>
 			<table width=100%>
 				<tr class='ZOptionsHeaderRow'>
@@ -833,7 +833,7 @@ and the container element is replaced with that control.
 						</tr>
 					<$ } $>
 
-					<$ if (!appCtxt.multiAccounts || (appCtxt.isFamilyMbox && data.activeAccount.isMain) || (!data.activeAccount.isMain && data.activeAccount.isZimbraAccount)) { $>
+					<$ if (!appCtxt.multiAccounts || (appCtxt.isFamilyMbox && data.activeAccount.isMain) || (!data.activeAccount.isMain && data.activeAccount.isZmailAccount)) { $>
 						<$ if (data.isEnabled(ZmSetting.INITIALLY_SEARCH_GAL)) { $>
 							<tr>
 								<td class='ZOptionsLabel'>
@@ -862,7 +862,7 @@ and the container element is replaced with that control.
 								<td class='ZOptionsField'><input id='${id}_AUTOCOMPLETE_SHARE' tabindex='55' type=checkbox></td>
 							</tr>
 						<$ } $>
-						<$ if (data.activeAccount.isZimbraAccount) { $>
+						<$ if (data.activeAccount.isZmailAccount) { $>
 							<$ if (data.isEnabled(ZmSetting.GAL_ENABLED) && data.isEnabled(ZmSetting.GAL_AUTOCOMPLETE_ENABLED)) { $>
 								<tr>
 									<td class='ZOptionsLabel'>
@@ -1518,7 +1518,7 @@ NOTE: The tables inside of the filter rule sections MUST contain a tbody element
 	<$
 	}
 	else if (appCtxt.multiAccounts &&
-			data.activeAccount.isZimbraAccount &&
+			data.activeAccount.isZmailAccount &&
 			appCtxt.getSettings(data.activeAccount).attrExists(ZmSetting.CAL_AUTO_ADD_INVITES))
 	{
 	$>

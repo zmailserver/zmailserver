@@ -336,7 +336,7 @@ function() {
 
 ZmApptComposeView.prototype.getTitle =
 function() {
-	return [ZmMsg.zimbraTitle, ZmMsg.appointment].join(": ");
+	return [ZmMsg.zmailTitle, ZmMsg.appointment].join(": ");
 };
 
 ZmApptComposeView.prototype._getAttendeeKey =

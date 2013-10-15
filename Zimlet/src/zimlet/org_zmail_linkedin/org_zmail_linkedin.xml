@@ -14,7 +14,7 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_linkedin"
+<zimlet name="org_zmail_linkedin"
         version="0.7"
         label="${msg.zimletLabel}"
         target="main view-window"
@@ -24,7 +24,7 @@
 	<include>LinkedInPrefDialog.js</include>
 	<include>templates/LinkedIn.template.js</include>
 	<includeCSS>linkedin.css</includeCSS>
-	<handlerObject>com_zimbra_linkedin_handlerObject</handlerObject>
+	<handlerObject>org_zmail_linkedin_handlerObject</handlerObject>
 	<zimletPanelItem label="${msg.label}" icon="LinkedinZimletIcon">
 		<toolTipText>${msg.tooltip}</toolTipText>
 		<contextMenu>

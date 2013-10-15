@@ -97,8 +97,8 @@ function onSetStartPage()
 <script type="text/javascript" src="../ehlpdhtm.js" language="JavaScript1.2"></script>
 
 
-<h1>Using the Zimbra Migration Wizard for Microsoft Exchange</h1>
-<p>The Zimbra Migration Wizard is used to move Microsoft® Exchange server email accounts to the Zimbra server and to import the email, calendars and contact information for selected Exchange users. The import process replicates the user's Outlook folder hierarchy, imports email messages, calendar and contacts on the Exchange server. Keywords are converted to tags in Zimbra.</p>
+<h1>Using the Zmail Migration Wizard for Microsoft Exchange</h1>
+<p>The Zmail Migration Wizard is used to move Microsoft® Exchange server email accounts to the Zmail server and to import the email, calendars and contact information for selected Exchange users. The import process replicates the user's Outlook folder hierarchy, imports email messages, calendar and contacts on the Exchange server. Keywords are converted to tags in Zmail.</p>
 <p class="note" style="background-color: Transparent;"><span class="Important">IMPORTANT:</span> <span class="Important" style="font-weight: normal; color: #000000; font-size: 10pt;"><font size="2" color="black" style="font-size:10.000000pt;">The Migration Wizard utilizes the Exchange MAPI provider. You must run the wizard from a Microsoft Windows computer that has either the Outlook or the Exchange Administration</font></span> <span class="Important" style="font-weight: normal; font-size: 10pt; color: #000000;"><font size="2" color="black" style="font-size:10.000000pt;">t</font></span><span class="Important" style="font-size: 10pt; color: #000000; font-weight: normal;"><font size="2" color="black" style="font-size:10.000000pt;">ools installed.</font></span></p>
 <ul style="list-style: disc;">
 <li class="p">
@@ -129,10 +129,10 @@ function onSetStartPage()
 <p>Decide whether to migrate individual accounts or large groups of accounts at one time.</p>
 </li>
 <li class="p">
-<p>Change the mail relay information to point to the Zimbra server instead of the Exchange server. This will prevent any lost mail while the files are being imported.</p>
+<p>Change the mail relay information to point to the Zmail server instead of the Exchange server. This will prevent any lost mail while the files are being imported.</p>
 </li>
 </ul>
-<p style="margin-left: 40px;">The user's Common Name ( CN) in Exchange is the first portion of the email address on the Zimbra server.</p>
+<p style="margin-left: 40px;">The user's Common Name ( CN) in Exchange is the first portion of the email address on the Zmail server.</p>
 <p>You can specify if email in <span style="font-style: italic;"><i>Junk folders</i></span> or <span style="font-style: italic;"><i>Deleted Items</i></span> folder is imported, and you set a latest receive date for old email to be imported.</p>
 <p>By default, messages larger than 10 MB will not be imported. The message size includes the message and attachments. If the message is larger than 10 MB, a warning is logged to Migration Wizard log file, which can be reviewed from the Import Complete dialog when the migration is complete.</p>
 <h2>How to Migrate Accounts</h2>
@@ -152,7 +152,7 @@ function onSetStartPage()
 <p><span style="font-weight: bold;"><a href="mw_import_destination.htm" target="_blank">Import Destination</a></span>. Enter the host name and administration user name and password.</p>
 </li>
 <li class="p" style="list-style: disc;">
-<p style="margin-left: 0px;"><span style="font-weight: bold;"><a href="mw_destination_domain.htm" target="_blank">Destination Domain</a></span>. Select the Zimbra domain name.</p>
+<p style="margin-left: 0px;"><span style="font-weight: bold;"><a href="mw_destination_domain.htm" target="_blank">Destination Domain</a></span>. Select the Zmail domain name.</p>
 </li>
 <li class="p" style="list-style: disc;">
 <p style="margin-left: 0px;"><span style="font-weight: bold;"><a href="mw_mapi_logon.htm" target="_blank">MAPI Log on</a></span>. Select the MAPI profile you created for use with the Migration Wizard.</p>
@@ -161,7 +161,7 @@ function onSetStartPage()
 <p style="margin-left: 0px;"><span style="font-weight: bold;"><a href="mw_source_and_destination_mailboxes.htm" target="_blank">Source and Destination Mailboxes</a></span>. Define which users should be migrated.</p>
 </li>
 <li class="p" style="list-style: disc;">
-<p style="margin-left: 0px;"><span style="font-weight: bold;"><a href="mw_target_account_verification.htm" target="_blank">Target Account Verification</a></span>. Displays the number of accounts that exist and the number of accounts that do not exist on the Zimbra server.</p>
+<p style="margin-left: 0px;"><span style="font-weight: bold;"><a href="mw_target_account_verification.htm" target="_blank">Target Account Verification</a></span>. Displays the number of accounts that exist and the number of accounts that do not exist on the Zmail server.</p>
 </li>
 <li class="p" style="list-style: disc;">
 <p style="margin-left: 0px;"><span style="font-weight: bold;"><a href="mw_account_provisioning.htm" target="_blank">Account Provisioning</a></span>. All accounts that do not exist are shown in the <span style="font-weight: bold;">Unprovisioned Accounts</span> list box.</p>

@@ -14,16 +14,16 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.newwindow.compose;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.newwindow.compose;
 
 import org.testng.annotations.*;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.SeparateWindowFormMailNew;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew.Field;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.SeparateWindowFormMailNew;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew.Field;
 
 
 public class CreateMailText extends PrefGroupMailByMessageTest {
@@ -31,8 +31,8 @@ public class CreateMailText extends PrefGroupMailByMessageTest {
 	public CreateMailText() {
 		logger.info("New "+ CreateMailText.class.getCanonicalName());
 		
-		super.startingAccountPreferences.put("zimbraPrefComposeFormat", "text");
-		super.startingAccountPreferences.put("zimbraPrefComposeInNewWindow", "TRUE");
+		super.startingAccountPreferences.put("zmailPrefComposeFormat", "text");
+		super.startingAccountPreferences.put("zmailPrefComposeInNewWindow", "TRUE");
 		
 	}
 	
@@ -43,9 +43,9 @@ public class CreateMailText extends PrefGroupMailByMessageTest {
 		
 		// Create the message data to be sent
 		MailItem mail = new MailItem();
-		mail.dToRecipients.add(new RecipientItem(ZimbraAccount.AccountA()));
-		mail.dSubject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		mail.dBodyText = "body" + ZimbraSeleniumProperties.getUniqueString();
+		mail.dToRecipients.add(new RecipientItem(ZmailAccount.AccountA()));
+		mail.dSubject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		mail.dBodyText = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		// Open the new mail form
@@ -89,11 +89,11 @@ public class CreateMailText extends PrefGroupMailByMessageTest {
 		//
 		for (int i = 0; i < 30; i++) {
 
-			ZimbraAccount.AccountA().soapSend(
-					"<SearchRequest types='message' xmlns='urn:zimbraMail'>"
+			ZmailAccount.AccountA().soapSend(
+					"<SearchRequest types='message' xmlns='urn:zmailMail'>"
 			+			"<query>subject:("+ mail.dSubject +")</query>"
 			+		"</SearchRequest>");
-			com.zimbra.common.soap.Element node = ZimbraAccount.AccountA().soapSelectNode("//mail:m", 1);
+			org.zmail.common.soap.Element node = ZmailAccount.AccountA().soapSelectNode("//mail:m", 1);
 			if ( node != null ) {
 				// found the message
 				break;
@@ -104,11 +104,11 @@ public class CreateMailText extends PrefGroupMailByMessageTest {
 		}
 
 
-		MailItem received = MailItem.importFromSOAP(ZimbraAccount.AccountA(), "subject:("+ mail.dSubject +")");
+		MailItem received = MailItem.importFromSOAP(ZmailAccount.AccountA(), "subject:("+ mail.dSubject +")");
 
 		// TODO: add checks for TO, Subject, Body
 		ZAssert.assertEquals(received.dFromRecipient.dEmailAddress, app.zGetActiveAccount().EmailAddress, "Verify the from field is correct");
-		ZAssert.assertEquals(received.dToRecipients.get(0).dEmailAddress, ZimbraAccount.AccountA().EmailAddress, "Verify the to field is correct");
+		ZAssert.assertEquals(received.dToRecipients.get(0).dEmailAddress, ZmailAccount.AccountA().EmailAddress, "Verify the to field is correct");
 		ZAssert.assertEquals(received.dSubject, mail.dSubject, "Verify the subject field is correct");
 		ZAssert.assertStringContains(received.dBodyText, mail.dBodyText, "Verify the body field is correct");
 		
@@ -132,9 +132,9 @@ public class CreateMailText extends PrefGroupMailByMessageTest {
 		
 		// Create the message data to be sent
 		MailItem mail = new MailItem();
-		mail.dToRecipients.add(new RecipientItem(ZimbraAccount.AccountA()));
-		mail.dSubject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		mail.dBodyText = "body" + ZimbraSeleniumProperties.getUniqueString();
+		mail.dToRecipients.add(new RecipientItem(ZmailAccount.AccountA()));
+		mail.dSubject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		mail.dBodyText = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		// Open the new mail form
 		SeparateWindowFormMailNew window = null;
@@ -172,7 +172,7 @@ public class CreateMailText extends PrefGroupMailByMessageTest {
 
 
 		// From the receipient end, make sure the message is received
-		MailItem received = MailItem.importFromSOAP(ZimbraAccount.AccountA(), "subject:("+ mail.dSubject +")");
+		MailItem received = MailItem.importFromSOAP(ZmailAccount.AccountA(), "subject:("+ mail.dSubject +")");
 
 		ZAssert.assertNotNull(received, "Verify the message is received");
 		
@@ -185,10 +185,10 @@ public class CreateMailText extends PrefGroupMailByMessageTest {
 		
 		// Create the message data to be sent
 		MailItem mail = new MailItem();
-		mail.dToRecipients.add(new RecipientItem(ZimbraAccount.AccountA(), RecipientItem.RecipientType.To));
-		mail.dCcRecipients.add(new RecipientItem(ZimbraAccount.AccountB(), RecipientItem.RecipientType.Cc));
-		mail.dSubject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		mail.dBodyText = "body" + ZimbraSeleniumProperties.getUniqueString();
+		mail.dToRecipients.add(new RecipientItem(ZmailAccount.AccountA(), RecipientItem.RecipientType.To));
+		mail.dCcRecipients.add(new RecipientItem(ZmailAccount.AccountB(), RecipientItem.RecipientType.Cc));
+		mail.dSubject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		mail.dBodyText = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		// Open the new mail form
 		SeparateWindowFormMailNew window = null;
@@ -231,18 +231,18 @@ public class CreateMailText extends PrefGroupMailByMessageTest {
 		for (RecipientItem r: sent.dToRecipients) {
 			to.append(r.dEmailAddress).append(",");
 		}
-		ZAssert.assertStringContains(to.toString(), ZimbraAccount.AccountA().EmailAddress, "Verify TO contains AccountA");
+		ZAssert.assertStringContains(to.toString(), ZmailAccount.AccountA().EmailAddress, "Verify TO contains AccountA");
 		
 		StringBuilder cc = new StringBuilder();
 		for (RecipientItem r: sent.dCcRecipients) {
 			cc.append(r.dEmailAddress).append(",");
 		}
-		ZAssert.assertStringContains(cc.toString(), ZimbraAccount.AccountB().EmailAddress, "Verify CC contains AccountB");
+		ZAssert.assertStringContains(cc.toString(), ZmailAccount.AccountB().EmailAddress, "Verify CC contains AccountB");
 
-		MailItem toReceived = MailItem.importFromSOAP(ZimbraAccount.AccountA(), "subject:("+ mail.dSubject +")");
+		MailItem toReceived = MailItem.importFromSOAP(ZmailAccount.AccountA(), "subject:("+ mail.dSubject +")");
 		ZAssert.assertNotNull(toReceived, "Verify the TO recipient receives the message");
 		
-		MailItem ccReceived = MailItem.importFromSOAP(ZimbraAccount.AccountB(), "subject:("+ mail.dSubject +")");
+		MailItem ccReceived = MailItem.importFromSOAP(ZmailAccount.AccountB(), "subject:("+ mail.dSubject +")");
 		ZAssert.assertNotNull(ccReceived, "Verify the CC recipient receives the message");
 		
 		
@@ -255,10 +255,10 @@ public class CreateMailText extends PrefGroupMailByMessageTest {
 		
 		// Create the message data to be sent
 		MailItem mail = new MailItem();
-		mail.dToRecipients.add(new RecipientItem(ZimbraAccount.AccountA(), RecipientItem.RecipientType.To));
-		mail.dBccRecipients.add(new RecipientItem(ZimbraAccount.AccountB(), RecipientItem.RecipientType.Bcc));
-		mail.dSubject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		mail.dBodyText = "body" + ZimbraSeleniumProperties.getUniqueString();
+		mail.dToRecipients.add(new RecipientItem(ZmailAccount.AccountA(), RecipientItem.RecipientType.To));
+		mail.dBccRecipients.add(new RecipientItem(ZmailAccount.AccountB(), RecipientItem.RecipientType.Bcc));
+		mail.dSubject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		mail.dBodyText = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		// Open the new mail form
@@ -301,12 +301,12 @@ public class CreateMailText extends PrefGroupMailByMessageTest {
 		for (RecipientItem r: sent.dToRecipients) {
 			to.append(r.dEmailAddress).append(",");
 		}
-		ZAssert.assertStringContains(to.toString(), ZimbraAccount.AccountA().EmailAddress, "Verify TO contains AccountA");
+		ZAssert.assertStringContains(to.toString(), ZmailAccount.AccountA().EmailAddress, "Verify TO contains AccountA");
 		
-		MailItem toReceived = MailItem.importFromSOAP(ZimbraAccount.AccountA(), "subject:("+ mail.dSubject +")");
+		MailItem toReceived = MailItem.importFromSOAP(ZmailAccount.AccountA(), "subject:("+ mail.dSubject +")");
 		ZAssert.assertNotNull(toReceived, "Verify the TO recipient receives the message");
 		
-		MailItem bccReceived = MailItem.importFromSOAP(ZimbraAccount.AccountB(), "subject:("+ mail.dSubject +")");
+		MailItem bccReceived = MailItem.importFromSOAP(ZmailAccount.AccountB(), "subject:("+ mail.dSubject +")");
 		ZAssert.assertNotNull(bccReceived, "Verify the BCC recipient receives the message");
 		
 		
@@ -331,8 +331,8 @@ public class CreateMailText extends PrefGroupMailByMessageTest {
 		// verify: the f field in the GetMsgResponse
 		
 		// Create the message data to be sent
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String body = "body" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String body = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		// Open the new mail form
@@ -354,7 +354,7 @@ public class CreateMailText extends PrefGroupMailByMessageTest {
 			window.zToolbarPressPulldown(Button.B_PRIORITY, option);
 			
 			// Fill out the rest of the form
-			window.zFillField(Field.To, ZimbraAccount.AccountA().EmailAddress);
+			window.zFillField(Field.To, ZmailAccount.AccountA().EmailAddress);
 			window.zFillField(Field.Subject, subject);
 			window.zFillField(Field.Body, body);
 			
@@ -375,7 +375,7 @@ public class CreateMailText extends PrefGroupMailByMessageTest {
 		}
 		
 
-		MailItem received = MailItem.importFromSOAP(ZimbraAccount.AccountA(), "subject:("+ subject +")");
+		MailItem received = MailItem.importFromSOAP(ZmailAccount.AccountA(), "subject:("+ subject +")");
 		ZAssert.assertNotNull(received, "Verify the message is received");
 		
 		ZAssert.assertStringContains(received.getFlags(), verify, "Verify the correct priority was sent");

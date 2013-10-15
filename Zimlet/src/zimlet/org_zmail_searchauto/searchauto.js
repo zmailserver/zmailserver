@@ -326,7 +326,7 @@ function() {
     }
     var zimlets = appCtxt.getZimletMgr().getZimlets();
     for (var i = 0; i < zimlets.length; i++) {
-        if (zimlets[i].name == "com_zimbra_searchrefiner") {
+        if (zimlets[i].name == "org_zmail_searchrefiner") {
             searchRefinerZimlet = zimlets[i];
             break;
         }

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cert;
+package org.zmail.cert;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,20 +21,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.CertMgrConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.common.account.Key.ServerBy;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.cs.rmgmt.RemoteManager;
-import com.zimbra.cs.rmgmt.RemoteResult;
-import com.zimbra.cs.service.admin.AdminDocumentHandler;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.CertMgrConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.common.account.Key.ServerBy;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.cs.rmgmt.RemoteManager;
+import org.zmail.cs.rmgmt.RemoteResult;
+import org.zmail.cs.service.admin.AdminDocumentHandler;
+import org.zmail.soap.ZmailSoapContext;
 
 
 public class GetCert extends AdminDocumentHandler {
@@ -46,7 +46,7 @@ public class GetCert extends AdminDocumentHandler {
     
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException{
-        ZimbraSoapContext lc = getZimbraSoapContext(context);
+        ZmailSoapContext lc = getZmailSoapContext(context);
 
         Provisioning prov = Provisioning.getInstance();
         ArrayList<Server> servers = new ArrayList<Server>();
@@ -56,7 +56,7 @@ public class GetCert extends AdminDocumentHandler {
         if (certType.equals(CERT_TYPE_STAGED)) {
             option = request.getAttribute(CertMgrConstants.A_OPTION);
         }
-        if (serverId != null && serverId.equals(ZimbraCertMgrExt.ALL_SERVERS)) {
+        if (serverId != null && serverId.equals(ZmailCertMgrExt.ALL_SERVERS)) {
             servers.addAll(prov.getAllServers());
         }else {
            Server server =  prov.get(ServerBy.id, serverId);
@@ -79,10 +79,10 @@ public class GetCert extends AdminDocumentHandler {
     
     private void addCertsOnServer(Element response, Server server,
             String certType, String option, Map<String, Object> context,
-            ZimbraSoapContext lc) throws ServiceException {
+            ZmailSoapContext lc) throws ServiceException {
         
         checkRight(lc, context, server, Admin.R_getCertificateInfo);
-        ZimbraLog.security.debug("load the cert info from server:  " + server.getName()) ;
+        ZmailLog.security.debug("load the cert info from server:  " + server.getName()) ;
         
         String cmd = "";
         try {
@@ -95,8 +95,8 @@ public class GetCert extends AdminDocumentHandler {
                 if (option == null || option.length() ==0) {
                     throw ServiceException.INVALID_REQUEST("No valid option type is set in GetCertRequest for staged certs", null);
                 }else if (option.equals(CERT_STAGED_OPTION_SELF) || option.equals(CERT_STAGED_OPTION_COMM)){
-                    cmd = ZimbraCertMgrExt.GET_STAGED_CERT_CMD + " " + option;
-                    ZimbraLog.security.debug("***** Executing the cmd = " + cmd) ;
+                    cmd = ZmailCertMgrExt.GET_STAGED_CERT_CMD + " " + option;
+                    ZmailLog.security.debug("***** Executing the cmd = " + cmd) ;
                     addCertInfo(response, rmgr.execute(cmd), certType, server.getName()) ;
                 }else{
                     throw ServiceException.INVALID_REQUEST(
@@ -105,14 +105,14 @@ public class GetCert extends AdminDocumentHandler {
                 }
             }else if (certType.equals(CERT_TYPE_ALL)){
                 for (int i=0; i < CERT_TYPES.length; i ++) {
-                    cmd = ZimbraCertMgrExt.GET_DEPLOYED_CERT_CMD + " " + CERT_TYPES[i] ;
-                    ZimbraLog.security.debug("***** Executing the cmd = " + cmd) ;
+                    cmd = ZmailCertMgrExt.GET_DEPLOYED_CERT_CMD + " " + CERT_TYPES[i] ;
+                    ZmailLog.security.debug("***** Executing the cmd = " + cmd) ;
                     addCertInfo(response, rmgr.execute(cmd), CERT_TYPES[i], server.getName()) ;
                 }
             }else if (Arrays.asList(CERT_TYPES).contains(certType)){
                     //individual types
-                cmd = ZimbraCertMgrExt.GET_DEPLOYED_CERT_CMD + " " + certType;
-                ZimbraLog.security.debug("***** Executing the cmd = " + cmd) ;
+                cmd = ZmailCertMgrExt.GET_DEPLOYED_CERT_CMD + " " + certType;
+                ZmailLog.security.debug("***** Executing the cmd = " + cmd) ;
                 addCertInfo(response, rmgr.execute(cmd), certType, server.getName()) ;
             }else{
                 throw ServiceException.INVALID_REQUEST("Invalid certificate type: " + certType + ". Must be (self|comm).", null);
@@ -130,13 +130,13 @@ public class GetCert extends AdminDocumentHandler {
             el.addAttribute(AdminConstants.A_TYPE, certType);
             el.addAttribute(AdminConstants.A_SERVER, serverName);
             for (String k: output.keySet()) {
-                ZimbraLog.security.debug("Adding element " + k + " = " + output.get(k)) ;
+                ZmailLog.security.debug("Adding element " + k + " = " + output.get(k)) ;
                 Element certEl = el.addElement(k);
                 certEl.setText(output.get(k));
             }
         }catch(ServiceException e) {
-            ZimbraLog.security.warn ("Failed to retrieve the certificate information for " + certType + ".");
-            ZimbraLog.security.error(e) ;
+            ZmailLog.security.warn ("Failed to retrieve the certificate information for " + certType + ".");
+            ZmailLog.security.error(e) ;
         }
     }
     

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.bp;
+package org.zmail.bp;
 
 import java.io.FileOutputStream;
 import java.io.OutputStream;
@@ -22,25 +22,25 @@ import java.util.*;
 
 import au.com.bytecode.opencsv.CSVWriter;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.ZAttrProvisioning;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.util.DateUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.Alias;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.CalendarResource;
-import com.zimbra.cs.account.Cos;
-import com.zimbra.cs.account.DistributionList;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.SearchDirectoryOptions;
-import com.zimbra.cs.ldap.ZLdapFilterFactory.FilterId;
-import com.zimbra.cs.service.admin.AdminAccessControl;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.ZAttrProvisioning;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.util.DateUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.Alias;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.CalendarResource;
+import org.zmail.cs.account.Cos;
+import org.zmail.cs.account.DistributionList;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.SearchDirectoryOptions;
+import org.zmail.cs.ldap.ZLdapFilterFactory.FilterId;
+import org.zmail.cs.service.admin.AdminAccessControl;
 
 /**
  * Created by IntelliJ IDEA.
@@ -52,16 +52,16 @@ import com.zimbra.cs.service.admin.AdminAccessControl;
 public class SearchResults {
 //    public static String ATTR_mail = "mail" ;
     public static String ATTR_displayName = "displayName" ;
-    public static String ATTR_zimbraAccountStatus = "zimbraAccountStatus" ;
-    public static String ATTR_zimbraCOSId = "zimbraCOSId" ;
-//    public static String ATTR_zimbraId = "zimbraId" ;
-    public static String [] ACCOUNT_ATTRS = {ATTR_displayName, ATTR_zimbraAccountStatus, ATTR_zimbraCOSId, ZAttrProvisioning.A_zimbraLastLogonTimestamp} ;
+    public static String ATTR_zmailAccountStatus = "zmailAccountStatus" ;
+    public static String ATTR_zmailCOSId = "zmailCOSId" ;
+//    public static String ATTR_zmailId = "zmailId" ;
+    public static String [] ACCOUNT_ATTRS = {ATTR_displayName, ATTR_zmailAccountStatus, ATTR_zmailCOSId, ZAttrProvisioning.A_zmailLastLogonTimestamp} ;
     private static Set<String> ACCOUNT_ATTRS_SET = new HashSet<String>(Arrays.asList(ACCOUNT_ATTRS));
     private static String DATE_PATTERN = "yyyy.MM.dd, hh:mm:ss z";
 
     /**
      * The CSV file format will be
-     * name, zimbraId, type, [displayName, zimbraAccountStatus, zimbraCOSId]
+     * name, zmailId, type, [displayName, zmailAccountStatus, zmailCOSId]
      * @param out
      * @param query
      * @param domain
@@ -104,20 +104,20 @@ public class SearchResults {
 
                  for (int j =0; j < ACCOUNT_ATTRS.length; j ++) {
                     line[j+m] = entry.getAttr(ACCOUNT_ATTRS[j], "") ;
-                     if (ACCOUNT_ATTRS[j].equals(ZAttrProvisioning.A_zimbraLastLogonTimestamp)
+                     if (ACCOUNT_ATTRS[j].equals(ZAttrProvisioning.A_zmailLastLogonTimestamp)
                              && !line[j+m].equals("")) {
                          Date date = DateUtil.parseGeneralizedTime(line[j+m]);
                          line[j+m] = formatter.format(date);
                      }
                 }
                 
-                ZimbraLog.extensions.debug("Adding entry content : " + Arrays.toString(line));
+                ZmailLog.extensions.debug("Adding entry content : " + Arrays.toString(line));
                 writer.writeNext(line);
             }
 
             writer.close();
         }catch (Exception e) {
-            ZimbraLog.extensions.error(e);
+            ZmailLog.extensions.error(e);
             throw ServiceException.FAILURE(e.getMessage(), e) ;
         }
     }
@@ -161,7 +161,7 @@ public class SearchResults {
 
     public static void main (String [] args) throws ServiceException {
         try {
-            // List accounts = getSearchResults("", "ccaomac.zimbra.com", "accounts, aliases, aliases, resources, domains, coses" );
+            // List accounts = getSearchResults("", "ccaomac.zmail.com", "accounts, aliases, aliases, resources, domains, coses" );
             FileOutputStream fo = new FileOutputStream ("/tmp/sr_out") ;
             writeSearchResultOutputStream(fo, "", null, "accounts, distributionlists, aliases, resources,domains", null) ;
         }catch (Exception e) {

@@ -14,4 +14,4 @@
 # ***** END LICENSE BLOCK *****
 # 
 
-exec `dirname $0`/../bin/zmjavaext -classpath /opt/zimbra/lib/ext/zimbraadminversioncheck/zimbraadminversioncheck.jar com.zimbra.cs.versioncheck.VersionCheckUtil "$@"
+exec `dirname $0`/../bin/zmjavaext -classpath /opt/zmail/lib/ext/zmailadminversioncheck/zmailadminversioncheck.jar org.zmail.cs.versioncheck.VersionCheckUtil "$@"

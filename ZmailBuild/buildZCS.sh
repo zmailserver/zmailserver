@@ -24,7 +24,7 @@ PMIRROR=no
 usage() {
 	echo ""
 	echo "Usage: "`basename $0`" [-d] [-t [-p]] [-n]" >&2
-	echo "-d: Perform a Zimbra Desktop build"
+	echo "-d: Perform a Zmail Desktop build"
 	echo "-n: Perform a Network Edition build"
 	echo "-p: Use private Perl mirror when building 3rd party"
 	echo "-t: Build third party as well as ZCS"
@@ -62,7 +62,7 @@ done
 RELEASE=${PATHDIR%/*}
 RELEASE=${RELEASE##*/}
 
-PLAT=`$PATHDIR/../ZimbraBuild/rpmconf/Build/get_plat_tag.sh`;
+PLAT=`$PATHDIR/../ZmailBuild/rpmconf/Build/get_plat_tag.sh`;
 
 echo "Checking for prerequisite binaries"
 for req in ant java
@@ -211,14 +211,14 @@ fi
 
 TARGETS="sourcetar all"
 if [ x$BUILDTYPE = x"network" ]; then
-	if [ -f "$PATHDIR/../ZimbraNetwork/ZimbraBuild/Makefile" ]; then
+	if [ -f "$PATHDIR/../ZmailNetwork/ZmailBuild/Makefile" ]; then
 		if [ x$RELEASE = x"main" ]; then
 			TARGETS="$TARGETS velodrome"
 		elif [[ $RELEASE == "FRANKLIN"* ]]; then
 			TARGETS="$TARGETS velodrome customercare"
 		fi
 	else
-		echo "Error: ZimbraNetwork is not available"
+		echo "Error: ZmailNetwork is not available"
 		exit 1;
 	fi
 fi
@@ -229,7 +229,7 @@ fi
 if [ x$BUILDTYPE = x"network" -o x$BUILDTYPE = x"foss" ]; then
 	cd $PATHDIR
 elif [ x$BUILDTYPE = x"desktop" ]; then
-	cd $PATHDIR/../ZimbraOffline
+	cd $PATHDIR/../ZmailOffline
 else
 	echo "Error: Unknown build type $BUILDTYPE"
 	exit 1;
@@ -238,8 +238,8 @@ fi
 echo "Starting ZCS build"
 mkdir -p $PATHDIR/../logs
 if [ x$BUILDTYPE = x"network" ]; then
-	make -f $PATHDIR/../ZimbraNetwork/ZimbraBuild/Makefile allclean
-	make -f $PATHDIR/../ZimbraNetwork/ZimbraBuild/Makefile $TARGETS | tee $PATHDIR/../logs/NE-build.log
+	make -f $PATHDIR/../ZmailNetwork/ZmailBuild/Makefile allclean
+	make -f $PATHDIR/../ZmailNetwork/ZmailBuild/Makefile $TARGETS | tee $PATHDIR/../logs/NE-build.log
 elif [ x$BUILDTYPE = x"foss" ]; then
 	make -f Makefile allclean
 	make -f Makefile $TARGETS | tee $PATHDIR/../logs/FOSS-build.log

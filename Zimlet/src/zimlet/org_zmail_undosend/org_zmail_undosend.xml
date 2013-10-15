@@ -14,14 +14,14 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_undosend"
+<zimlet name="org_zmail_undosend"
         version="1.4"
         label="${msg.label}"
         description="${msg.description}"
         target="main compose-window">
     <include>undosend.js</include>
     <includeCSS>undosend.css</includeCSS>
-    <handlerObject>com_zimbra_undosend_HandlerObject</handlerObject>
+    <handlerObject>org_zmail_undosend_HandlerObject</handlerObject>
 
     <zimletPanelItem label="${msg.UndoSendZimlet_Label}" icon="UndoSend-panelIcon">
     </zimletPanelItem>

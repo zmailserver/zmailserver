@@ -1,7 +1,7 @@
 /*
  * ***** Begin LICENSE BLOCK *****
  * Zimbra Collaboration Suite Web Client
- * Copyright (C) 2004 - 2011 Zimbra, Inc.
+ * Copyright (C) 2004 - 2011 Zmail, Inc.
  * 
  * The contents of this file are subject to the Zimbra Public License
  * Version 1.3 ("License"); you may not use this file except in
@@ -227,14 +227,14 @@ soap.txt SearchRequest says the default is conversation.\n\
         input: "\
 | DO NOT REPLY TO THIS EMAIL\n\
 |\n\
-| https://bugzilla.zimbra.com/show_bug.cgi?id=68357\n\
+| https://bugzilla.zmail.com/show_bug.cgi?id=68357\n\
 \n\
 \n\
-Dave Comfort <dcomfort@zimbra.com> changed:\n\
+Dave Comfort <dcomfort@zmail.com> changed:\n\
 \n\
 		   What    |Removed                     |Added\n\
 ----------------------------------------------------------------------------\n\
-		 AssignedTo|bugs.mail.web.client@zimbra.|cdamon@zimbra.com\n\
+		 AssignedTo|bugs.mail.web.client@zmail.|cdamon@zmail.com\n\
 				   |com                         |\n\
 			 Status|NEW                         |ASSIGNED\n\
 		   Keywords|                            |D3\n\
@@ -243,7 +243,7 @@ Dave Comfort <dcomfort@zimbra.com> changed:\n\
 \n\
 \n\
 -- \n\
-Configure bugmail: http://bugzilla.zimbra.com/userprefs.cgi?tab=email\n\
+Configure bugmail: http://bugzilla.zmail.com/userprefs.cgi?tab=email\n\
 ------- You are receiving this mail because: -------\n\
 You are the assignee for the bug.\n\
 ",
@@ -257,17 +257,17 @@ You are the assignee for the bug.\n\
 		input: "\
 | DO NOT REPLY TO THIS EMAIL\n\
 |\n\
-| https://bugzilla.zimbra.com/show_bug.cgi?id=62211\n\
+| https://bugzilla.zmail.com/show_bug.cgi?id=62211\n\
 \n\
 \n\
 --- Comment #20 from Lawrence Smith <lawrence@example.com>  2011-12-08 03:04:48 ---\n\
 Created an attachment (id=36658)\n\
- --> (http://bugzilla.zimbra.com/attachment.cgi?id=36658)\n\
-An example of a missing embedded image in Zimbra webmail in 7.1.3\n\
+ --> (http://bugzilla.zmail.com/attachment.cgi?id=36658)\n\
+An example of a missing embedded image in Zmail webmail in 7.1.3\n\
 \n\
 \n\
 -- \n\
-Configure bugmail: http://bugzilla.zimbra.com/userprefs.cgi?tab=email\n\
+Configure bugmail: http://bugzilla.zmail.com/userprefs.cgi?tab=email\n\
 ------- You are receiving this mail because: -------\n\
 You are on the CC list for the bug.\n\
 ",
@@ -284,7 +284,7 @@ What you see in the output are the only accounts we deploy.\n\
 -bp\n\
 On Dec 8, 2011, at 3:36 PM, Patrick Brien wrote:\n\n\
 > \n\
-> He also seems to indicate that there are other accounts besides root and zimbra... \n\
+> He also seems to indicate that there are other accounts besides root and zmail... \n\
 >\n\
 ", 
 		output:	"\
@@ -304,12 +304,12 @@ What you see in the output are the only accounts we deploy.\n\
 <div style='font-family: Arial; font-size: 10pt; color: #000000'>\
 I'm getting the same problem.<br><br>\
 -Jiho<br><br>\
------ \"Marc MacIntyre\" &lt;marcmac@zimbra.com&gt; wrote:<br>\
+----- \"Marc MacIntyre\" &lt;marcmac@zmail.com&gt; wrote:<br>\
 <blockquote style=\"border-left: 2px solid rgb(16, 16, 255); margin-left: 5px; padding-left: 5px;\">\
 <style>p { margin: 0; }</style><div style=\"font-family: Arial; font-size: 10pt; color: rgb(0, 0, 0);\">\
 anyone get inbound ssh to ssh7/8.engx.vmare.com working?&nbsp; Keeps rejecting my RSA (but the java vpn \
 browser thing works fine).<span><br><br>\
--- <br>Marc MacIntyre<br>marcmac@zimbra.com<br></span></div></blockquote><br></div></body></html>\
+-- <br>Marc MacIntyre<br>marcmac@zmail.com<br></span></div></blockquote><br></div></body></html>\
 ",
 		output: "\
 <html><head><style type=\"text/css\">p { margin: 0; }</style></head><body>\
@@ -367,7 +367,7 @@ Jim</p>\
 <hr size=\"2\" width=\"100%\" align=\"center\">\
 <font face=\"Tahoma\" size=\"2\">\
 <b>From</b>: Amber Weaver \
-<br><b>To</b>: all@zimbra.com\
+<br><b>To</b>: all@zmail.com\
 <br><b>Sent</b>: Tue Feb 02 12:00:05 2010<br>\
 <b>Subject</b>: OFFICIAL CLOSE DATE: Friday, February 5th\
 <br></font></p>\
@@ -404,8 +404,8 @@ won't see the reply box.<br></div>\
 <br></div>\
 <hr id=\"zwchr\">\
 <div style=\"color:#000;font-weight:normal;font-style:normal;text-decoration:none;font-family:Helvetica,Arial,sans-serif;font-size:12pt;\">\
-<b>From: </b>&quot;Arnold Yee&quot; &lt;ayee@zimbra.com&gt;<br>\
-<b>To: </b>&quot;Engineering&quot; &lt;engineering@zimbra.com&gt;<br>\
+<b>From: </b>&quot;Arnold Yee&quot; &lt;ayee@zmail.com&gt;<br>\
+<b>To: </b>&quot;Engineering&quot; &lt;engineering@zmail.com&gt;<br>\
 <b>Sent: </b>Friday, December 9, 2011 9:40:05 AM<br>\
 <b>Subject: </b>D2 Web Client UI change - quick reply message pane<br><br><br>\
 Hey All,<br><br>I find that the majority of the E-mails I receive do not require a reply from me.<br><br>\
@@ -473,8 +473,8 @@ If you're on-site, and are accessing the interwebs through their proxy, make sur
 exclude *.vmware.com from your proxy settings, because you can't get to helpzilla \
 through the proxy (from inside)...<br><br>\
 ----- Original Message -----<br>\
-From: &quot;Tony Publiski&quot; &lt;tpubliski@zimbra.com&gt;<br>\
-To: &quot;Jason He&quot; &lt;jmhe@zimbra.com&gt;<br>\
+From: &quot;Tony Publiski&quot; &lt;tpubliski@zmail.com&gt;<br>\
+To: &quot;Jason He&quot; &lt;jmhe@zmail.com&gt;<br>\
 Sent: Monday, February 8, 2010 11:08:32 AM<br>\
 Subject: Re: inbound ssh<br><br>\
 Once you're connected to Network Connect, go direct to the URL (helpzilla.vmware.com) \
@@ -501,8 +501,8 @@ through the proxy (from inside)...<br><br>\
 <div style=\"font-family: Times New Roman; font-size: 12pt; color: #000000\">\
 <span>Have you heard from the recruiter yet?<br><br>-Dave<br></span><br>\
 ----- Forwarded Message -----<br>\
-From: &quot;Jim Morrisroe&quot; &lt;jim.morrisroe@zimbra.com&gt;<br>\
-To: &quot;Brian Peterson&quot; &lt;brian@zimbra.com&gt;<br>\
+From: &quot;Jim Morrisroe&quot; &lt;jim.morrisroe@zmail.com&gt;<br>\
+To: &quot;Brian Peterson&quot; &lt;brian@zmail.com&gt;<br>\
 Sent: Tuesday, February 16, 2010 12:59:14 PM<br>\
 Subject: Fwd: Introduction<br><br>\
 FYI<br>\
@@ -544,7 +544,7 @@ Call me in a week when they have this stuff straightened out.\n\
 	// Text: W Q U Q
 	{
 		input: "\
------ \"Parag Shah\" <pshah@zimbra.com> wrote:\n\
+----- \"Parag Shah\" <pshah@zmail.com> wrote:\n\
 \n\
 > So how does the server know what to return? What is the default-to\n\
 > logic?\n\
@@ -563,10 +563,10 @@ roland\n\
 \n\
 > \n\
 > ----- Original Message -----\n\
-> From: \"Dan Karp\" <dkarp@zimbra.com>\n\
-> To: \"Parag Shah\" <pshah@zimbra.com>\n\
-> Cc: \"UI Team\" <ui-team@zimbra.com>, \"Roland Schemers\"\n\
-> <schemers@zimbra.com>\n\
+> From: \"Dan Karp\" <dkarp@zmail.com>\n\
+> To: \"Parag Shah\" <pshah@zmail.com>\n\
+> Cc: \"UI Team\" <ui-team@zmail.com>, \"Roland Schemers\"\n\
+> <schemers@zmail.com>\n\
 > Sent: Friday, January 22, 2010 2:33:47 PM\n\
 > Subject: Re: Problem running saved searches\n\
 > \n\
@@ -605,13 +605,13 @@ this weekend, lite client bug are already closed\n\
 -satish s\n\
 \n\
 On Feb 13, 2010, at 2:05 AM, Satishkumar Sugumaran\n\
-<satishs@zimbra.com> wrote:\n\
+<satishs@zmail.com> wrote:\n\
 \n\
 >\n\
 >\n\
 > -satish s\n\
 >\n\
-> On Feb 11, 2010, at 11:55 PM, Marc MacIntyre <marcmac@zimbra.com>\n\
+> On Feb 11, 2010, at 11:55 PM, Marc MacIntyre <marcmac@zmail.com>\n\
 > wrote:\n\
 >\n\
 > Guys, any idea if these are going to be fixable (amid all the move\n\
@@ -631,13 +631,13 @@ this weekend, lite client bug are already closed\n\
 	{
 		input: "\
 On Feb 13, 2010, at 2:05 AM, Satishkumar Sugumaran\n\
-<satishs@zimbra.com> wrote:\n\
+<satishs@zmail.com> wrote:\n\
 \n\
 >\n\
 >\n\
 > -satish s\n\
 >\n\
-> On Feb 11, 2010, at 11:55 PM, Marc MacIntyre <marcmac@zimbra.com>\n\
+> On Feb 11, 2010, at 11:55 PM, Marc MacIntyre <marcmac@zmail.com>\n\
 > wrote:\n\
 >\n\
 > Guys, any idea if these are going to be fixable (amid all the move\n\
@@ -665,8 +665,8 @@ this weekend, lite client bug are already closed\n\
 <html><head></head><body>\
 <div>Not enough teams signed up. The bball time slots have been getting a good turn out as well \
 so I didn't want to disrupt that.&nbsp;<br><br>\
-On Mar 5, 2012, at 1:58 PM, Jeff Wagner &lt;<a href=\"mailto:jwagner@zimbra.com\" target=\"_blank\">\
-jwagner@zimbra.com</a>&gt; wrote:\
+On Mar 5, 2012, at 1:58 PM, Jeff Wagner &lt;<a href=\"mailto:jwagner@zmail.com\" target=\"_blank\">\
+jwagner@zmail.com</a>&gt; wrote:\
 <br><br></div>\
 <div></div><blockquote><div>\
 <div style=\"font-family: times new roman, new york, times, serif; font-size: 12pt; color: #000000\">\
@@ -692,7 +692,7 @@ Fixed.\n\
 \n\
 ----- Original Message -----\n\
 > Enjoy!  If you get a chance before you leave any thoughts on:\n\
-> https://bugzilla.zimbra.com/show_bug.cgi?id=68203\n\
+> https://bugzilla.zmail.com/show_bug.cgi?id=68203\n\
 > \n\
 > It's marked 7_2_0 which is code freeze for Monday.  I was going to\n\
 > punt to 7_2_x.\n\
@@ -715,9 +715,9 @@ Fixed.\n\
 		input: "\
 | DO NOT REPLY TO THIS EMAIL\n\
 |\n\
-| https://bugzilla.zimbra.com/show_bug.cgi?id=71945\n\
+| https://bugzilla.zmail.com/show_bug.cgi?id=71945\n\
 \n\
---- Comment #5 from Jong Yoon Lee <jylee@zimbra.com>  2012-03-26 09:39:13 ---\n\
+--- Comment #5 from Jong Yoon Lee <jylee@zmail.com>  2012-03-26 09:39:13 ---\n\
 <html>\n\
 <body>\n\
 <script>alert(document.cookie);</script>\n\
@@ -725,14 +725,14 @@ Fixed.\n\
 </html>\n\
 \n\
 -- \n\
-Configure bugmail: http://bugzilla.zimbra.com/userprefs.cgi?tab=email\n\
+Configure bugmail: http://bugzilla.zmail.com/userprefs.cgi?tab=email\n\
 ",
 		output: "\
 | DO NOT REPLY TO THIS EMAIL\n\
 |\n\
-| https://bugzilla.zimbra.com/show_bug.cgi?id=71945\n\
+| https://bugzilla.zmail.com/show_bug.cgi?id=71945\n\
 \n\
---- Comment #5 from Jong Yoon Lee <jylee@zimbra.com>  2012-03-26 09:39:13 ---\n\
+--- Comment #5 from Jong Yoon Lee <jylee@zmail.com>  2012-03-26 09:39:13 ---\n\
 <html>\n\
 <body>\n\
 \n\
@@ -740,7 +740,7 @@ Configure bugmail: http://bugzilla.zimbra.com/userprefs.cgi?tab=email\n\
 </html>\n\
 \n\
 -- \n\
-Configure bugmail: http://bugzilla.zimbra.com/userprefs.cgi?tab=email\n\
+Configure bugmail: http://bugzilla.zmail.com/userprefs.cgi?tab=email\n\
 "
 	},
 

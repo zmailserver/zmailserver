@@ -14,16 +14,16 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.calendar.folders;
+package org.zmail.qa.selenium.projects.ajax.tests.calendar.folders;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogMove;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogMove;
 
 
 public class MoveCalendar extends AjaxCommonTest {
@@ -48,11 +48,11 @@ public class MoveCalendar extends AjaxCommonTest {
 		// Create two subfolders in the inbox
 		// One folder to move
 		// Another folder to move into
-		String name1 = "folder" + ZimbraSeleniumProperties.getUniqueString();
-		String name2 = "folder" + ZimbraSeleniumProperties.getUniqueString();
+		String name1 = "folder" + ZmailSeleniumProperties.getUniqueString();
+		String name2 = "folder" + ZmailSeleniumProperties.getUniqueString();
 		
 		app.zGetActiveAccount().soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>"
+					"<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+	  	"<folder name='"+ name1 +"' l='"+ root.getId() +"' view='appointment'/>"
 				+	"</CreateFolderRequest>");
 
@@ -60,7 +60,7 @@ public class MoveCalendar extends AjaxCommonTest {
 		ZAssert.assertNotNull(subfolder1, "Verify the first subfolder is available");
 		
 		app.zGetActiveAccount().soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>"
+					"<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+	  	"<folder name='"+ name2 +"' l='"+ root.getId() +"' view='appointment'/>"
 				+	"</CreateFolderRequest>");
 

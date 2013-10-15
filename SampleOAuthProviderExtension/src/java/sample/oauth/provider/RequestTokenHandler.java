@@ -31,7 +31,7 @@
  */
 
 // Original is from example in OAuth Java library(http://oauth.googlecode.com/svn/code/java/)
-// and modified for integratin with Zimbra
+// and modified for integratin with Zmail
 
 // Original's copyright and license terms
 /*
@@ -52,10 +52,10 @@
 
 package sample.oauth.provider;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.extension.ExtensionHttpHandler;
-import com.zimbra.cs.extension.ZimbraExtension;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.extension.ExtensionHttpHandler;
+import org.zmail.cs.extension.ZmailExtension;
 import net.oauth.OAuth;
 import net.oauth.OAuthAccessor;
 import net.oauth.OAuthConsumer;
@@ -70,14 +70,14 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 /**
- * Request token request handler for zimbra extension
+ * Request token request handler for zmail extension
  * 
  * @author Yutaka Obuchi
  */
 public class RequestTokenHandler extends ExtensionHttpHandler {
 
 	
-    public void init(ZimbraExtension ext) throws ServiceException{
+    public void init(ZmailExtension ext) throws ServiceException{
         super.init(ext);    
     }
     
@@ -88,13 +88,13 @@ public class RequestTokenHandler extends ExtensionHttpHandler {
     
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
-    	ZimbraLog.extensions.debug("RequestTokenHandler doGet requested!");
+    	ZmailLog.extensions.debug("RequestTokenHandler doGet requested!");
         processRequest(request, response);
     }
     
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
-    	ZimbraLog.extensions.debug("RequestTokenHandler doPost requested!");
+    	ZmailLog.extensions.debug("RequestTokenHandler doPost requested!");
         processRequest(request, response);
     }
         
@@ -122,7 +122,7 @@ public class RequestTokenHandler extends ExtensionHttpHandler {
             out.close();
             
         } catch (Exception e){
-            ZimbraLog.extensions.debug("RequestTokenHandler exception", e);
+            ZmailLog.extensions.debug("RequestTokenHandler exception", e);
             SampleZmOAuthProvider.handleException(e, request, response, true);
         }
         

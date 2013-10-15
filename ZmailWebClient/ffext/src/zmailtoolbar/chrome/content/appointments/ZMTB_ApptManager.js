@@ -129,7 +129,7 @@ ZMTB_ApptManager.prototype.notify = function(id)
 	
 	this._openNotification(note);
 	
-	// notifyBox.appendNotification(message, appt.id, "chrome://zimbratb/skin/calendar.gif", notifyBox.PRIORITY_INFO_MED, [{label:"Snooze", popup:"ZimTB-Snooze-Menu", accessKey:"S"}, {label:"Dismiss", callback:function(note, button){This.dismiss(note, button)}, accessKey:"D"}]);
+	// notifyBox.appendNotification(message, appt.id, "chrome://zmailtb/skin/calendar.gif", notifyBox.PRIORITY_INFO_MED, [{label:"Snooze", popup:"ZimTB-Snooze-Menu", accessKey:"S"}, {label:"Dismiss", callback:function(note, button){This.dismiss(note, button)}, accessKey:"D"}]);
 }
 
 ZMTB_ApptManager.prototype._openNotification = function(note)

@@ -14,7 +14,7 @@
  */
 
 
-package com.zimbra.kabuki.servlets;
+package org.zmail.kabuki.servlets;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -44,8 +44,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.util.BufferStream;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.util.BufferStream;
 
 /**
  * This class looks for the resource bundle for the requested file (e.g.
@@ -163,7 +163,7 @@ public class Props2JsServlet extends HttpServlet {
                 gzos.close();
                 buffer = bos.toByteArray();
             }
-            if (!LC.zimbra_minimize_resources.booleanValue())
+            if (!LC.zmail_minimize_resources.booleanValue())
                 localeBuffers.put(uri, buffer);
         }
 

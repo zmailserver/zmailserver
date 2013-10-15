@@ -13,8 +13,8 @@
  * ***** END LICENSE BLOCK *****
  */
 
-AjxPackage.require("zimbraMail.portal.controller.ZmPortalController");
-AjxPackage.require("zimbraMail.portal.model.ZmPortlet");
-AjxPackage.require("zimbraMail.portal.model.ZmPortletMgr");
-AjxPackage.require("zimbraMail.portal.view.ZmPortalView");
-AjxPackage.require("zimbraMail.portal.view.ZmPortletView");
+AjxPackage.require("zmailMail.portal.controller.ZmPortalController");
+AjxPackage.require("zmailMail.portal.model.ZmPortlet");
+AjxPackage.require("zmailMail.portal.model.ZmPortletMgr");
+AjxPackage.require("zmailMail.portal.view.ZmPortalView");
+AjxPackage.require("zmailMail.portal.view.ZmPortletView");

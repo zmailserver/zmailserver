@@ -14,8 +14,8 @@
 --%>
 <%@ tag body-content="empty" dynamic-attributes="dynattrs" %>
 <%@ attribute name="urlTarget" rtexprvalue="true" required="true" %>
-<%@ attribute name="mailbox" rtexprvalue="true" required="true" type="com.zimbra.cs.taglib.bean.ZMailboxBean"%>
-<%@ attribute name="context" rtexprvalue="true" required="true" type="com.zimbra.cs.taglib.tag.SearchContext" %>
+<%@ attribute name="mailbox" rtexprvalue="true" required="true" type="org.zmail.cs.taglib.bean.ZMailboxBean"%>
+<%@ attribute name="context" rtexprvalue="true" required="true" type="org.zmail.cs.taglib.tag.SearchContext" %>
 <%@ attribute name="app" rtexprvalue="true" required="true" %>
 <%@ attribute name="keys" rtexprvalue="true" required="true" %>
 
@@ -26,10 +26,10 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
-<%@ taglib prefix="app" uri="com.zimbra.htmlclient" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
-<%@ taglib prefix="mo" uri="com.zimbra.mobileclient" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
+<%@ taglib prefix="app" uri="org.zmail.htmlclient" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
+<%@ taglib prefix="mo" uri="org.zmail.mobileclient" %>
 <c:set var="id" value="${not empty id?id:(empty param.id ? context.currentItem.id : param.id)}"/>
 <mo:handleError>
 <zm:currentResultUrl var="closeUrl" value="${urlTarget}" context="${context}"/>
@@ -124,7 +124,7 @@
                       <div>
 
                           <c:set var="userQuota" value="0"/>
-                          <c:set var="max" value="${mailbox.attrs.zimbraMailQuota[0]}"/>
+                          <c:set var="max" value="${mailbox.attrs.zmailMailQuota[0]}"/>
                           <c:catch>
                               <fmt:message var="unlimited" key="unlimited"/>
                               <fmt:message key="quotaUsage" var="quotaUsage">

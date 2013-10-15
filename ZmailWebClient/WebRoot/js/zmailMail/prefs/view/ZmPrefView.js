@@ -387,8 +387,8 @@ function(section, viewPage, dirtyCheck, noValidation, list, errors, view, isSave
 			}
 		}
 
-        if (pref.name == "zimbraPrefAutoSaveDraftInterval"){
-          // We are checking if zimbraPrefAutoSaveDraftInterval is set or not
+        if (pref.name == "zmailPrefAutoSaveDraftInterval"){
+          // We are checking if zmailPrefAutoSaveDraftInterval is set or not
           var orig = !(!origValue);
           var current  = !(!value);
           if (orig == current)

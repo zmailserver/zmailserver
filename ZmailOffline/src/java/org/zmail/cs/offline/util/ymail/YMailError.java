@@ -12,13 +12,13 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.util.ymail;
+package org.zmail.cs.offline.util.ymail;
 
 import java.util.Map;
 import java.util.HashMap;
 
 /**
- * Bounce to Drafts if not retriable. (Look at zimbra size stuff).
+ * Bounce to Drafts if not retriable. (Look at zmail size stuff).
  */
 public enum YMailError {
     NICKNAME_EXPANSION_FAILED("NicknameExpansionFailed"),

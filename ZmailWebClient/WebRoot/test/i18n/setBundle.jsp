@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
 -->
 <%@ taglib prefix="jfmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="zfmt" uri="com.zimbra.i18n" %>
+<%@ taglib prefix="zfmt" uri="org.zmail.i18n" %>
 
 <% int times = 1000; %>
 
@@ -28,7 +28,7 @@
 <% after = System.currentTimeMillis(); %>
 <li>Time: <%=after-before%> ms</li>
 
-<h3>&lt;fmt:setBundle> (Zimbra, <%=times%> times)</h3>
+<h3>&lt;fmt:setBundle> (Zmail, <%=times%> times)</h3>
 <% before = System.currentTimeMillis(); %>
 <% for (int i = 0; i < times; i++) { %>
 	<zfmt:setBundle basename="/messages/ZhMsg" />
@@ -46,7 +46,7 @@
 <% after = System.currentTimeMillis(); %>
 <li>Time: <%=after-before%> ms</li>
 
-<h3>&lt;fmt:setBundle> (Zimbra, <%=times%> times)</h3>
+<h3>&lt;fmt:setBundle> (Zmail, <%=times%> times)</h3>
 <% before = System.currentTimeMillis(); %>
 <% for (int i = 0; i < times; i++) { %>
 	<zfmt:setBundle basename="/messages/ZmMsg" />

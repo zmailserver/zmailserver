@@ -14,16 +14,16 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.compose.personas;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.compose.personas;
 
 import org.testng.annotations.*;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew.Field;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew.Field;
 
 
 public class FromAllowAddress extends PrefGroupMailByMessageTest {
@@ -34,40 +34,40 @@ public class FromAllowAddress extends PrefGroupMailByMessageTest {
 	public FromAllowAddress() {
 		logger.info("New "+ FromAllowAddress.class.getCanonicalName());
 		
-		super.startingAccountPreferences.put("zimbraPrefComposeFormat", "text");
+		super.startingAccountPreferences.put("zmailPrefComposeFormat", "text");
 		
 	}
 	
 	@BeforeMethod( groups = { "always" } )
 	public void addAliasToActiveAccount() throws HarnessException {
 		
-		AllowFromDisplay = "allowed" + ZimbraSeleniumProperties.getUniqueString();
+		AllowFromDisplay = "allowed" + ZmailSeleniumProperties.getUniqueString();
 		AllowEmailAddress = AllowFromDisplay + 
 					"@" +
-					ZimbraSeleniumProperties.getStringProperty("testdomain", "testdomain.com");
+					ZmailSeleniumProperties.getStringProperty("testdomain", "testdomain.com");
 		
-		String identity = "identity" + ZimbraSeleniumProperties.getUniqueString();
+		String identity = "identity" + ZmailSeleniumProperties.getUniqueString();
 		
-		ZimbraAdminAccount.GlobalAdmin().soapSend(
-					"<ModifyAccountRequest xmlns='urn:zimbraAdmin'>"
-				+		"<id>"+ app.zGetActiveAccount().ZimbraId +"</id>"
-				+		"<a n='zimbraAllowFromAddress'>"+ AllowEmailAddress +"</a>"
+		ZmailAdminAccount.GlobalAdmin().soapSend(
+					"<ModifyAccountRequest xmlns='urn:zmailAdmin'>"
+				+		"<id>"+ app.zGetActiveAccount().ZmailId +"</id>"
+				+		"<a n='zmailAllowFromAddress'>"+ AllowEmailAddress +"</a>"
 				+	"</ModifyAccountRequest>");
 
 		
 		
 		app.zGetActiveAccount().soapSend(
-				" <CreateIdentityRequest xmlns='urn:zimbraAccount'>"
+				" <CreateIdentityRequest xmlns='urn:zmailAccount'>"
 			+		"<identity name='"+ identity +"'>"
-			+			"<a name='zimbraPrefIdentityName'>"+ identity +"</a>"
-			+			"<a name='zimbraPrefFromDisplay'>"+ AllowFromDisplay +"</a>"
-			+			"<a name='zimbraPrefFromAddress'>"+ AllowEmailAddress +"</a>"
-			+			"<a name='zimbraPrefReplyToEnabled'>FALSE</a>"
-			+			"<a name='zimbraPrefReplyToDisplay'/>"
-			+			"<a name='zimbraPrefDefaultSignatureId'/>"
-			+			"<a name='zimbraPrefForwardReplySignatureId'/>"
-			+			"<a name='zimbraPrefWhenSentToEnabled'>FALSE</a>"
-			+			"<a name='zimbraPrefWhenInFoldersEnabled'>FALSE</a>"
+			+			"<a name='zmailPrefIdentityName'>"+ identity +"</a>"
+			+			"<a name='zmailPrefFromDisplay'>"+ AllowFromDisplay +"</a>"
+			+			"<a name='zmailPrefFromAddress'>"+ AllowEmailAddress +"</a>"
+			+			"<a name='zmailPrefReplyToEnabled'>FALSE</a>"
+			+			"<a name='zmailPrefReplyToDisplay'/>"
+			+			"<a name='zmailPrefDefaultSignatureId'/>"
+			+			"<a name='zmailPrefForwardReplySignatureId'/>"
+			+			"<a name='zmailPrefWhenSentToEnabled'>FALSE</a>"
+			+			"<a name='zmailPrefWhenInFoldersEnabled'>FALSE</a>"
 			+		"</identity>"
 			+	"</CreateIdentityRequest>");
 		
@@ -77,14 +77,14 @@ public class FromAllowAddress extends PrefGroupMailByMessageTest {
 		
 	}
 
-	@Test(	description = "Send a mail using zimbraAllowFromAddress",
+	@Test(	description = "Send a mail using zmailAllowFromAddress",
 			groups = { "functional" })
 	public void FromAllowAddress_01() throws HarnessException {
 		
 		
 		
 		// Create the message data to be sent
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		// Open the new mail form
@@ -93,9 +93,9 @@ public class FromAllowAddress extends PrefGroupMailByMessageTest {
 		
 		// Fill out the form with the data
 		mailform.zFillField(Field.From, AllowEmailAddress);
-		mailform.zFillField(Field.To, ZimbraAccount.AccountA().EmailAddress);
+		mailform.zFillField(Field.To, ZmailAccount.AccountA().EmailAddress);
 		mailform.zFillField(Field.Subject, subject);
-		mailform.zFillField(Field.Body, "content" + ZimbraSeleniumProperties.getUniqueString());
+		mailform.zFillField(Field.Body, "content" + ZmailSeleniumProperties.getUniqueString());
 		
 		// Send the message
 		mailform.zSubmit();
@@ -103,23 +103,23 @@ public class FromAllowAddress extends PrefGroupMailByMessageTest {
 		
 		
 		// Verify the message shows as from the alias
-		ZimbraAccount.AccountA().soapSend(
-					"<SearchRequest types='message' xmlns='urn:zimbraMail'>"
+		ZmailAccount.AccountA().soapSend(
+					"<SearchRequest types='message' xmlns='urn:zmailMail'>"
 			+			"<query>subject:("+ subject +")</query>"
 			+		"</SearchRequest>");
-		String id = ZimbraAccount.AccountA().soapSelectValue("//mail:m", "id");
+		String id = ZmailAccount.AccountA().soapSelectValue("//mail:m", "id");
 
-		ZimbraAccount.AccountA().soapSend(
-					"<GetMsgRequest xmlns='urn:zimbraMail'>"
+		ZmailAccount.AccountA().soapSend(
+					"<GetMsgRequest xmlns='urn:zmailMail'>"
 			+			"<m id='"+ id +"' html='1'/>"
 			+		"</GetMsgRequest>");
 
 		// Verify From: alias
-		String address = ZimbraAccount.AccountA().soapSelectValue("//mail:e[@t='f']", "a");
+		String address = ZmailAccount.AccountA().soapSelectValue("//mail:e[@t='f']", "a");
 		ZAssert.assertEquals(address, AllowEmailAddress, "Verify the from is the alias email address");
 		
 		// Verify no headers contain active account
-		Element[] nodes = ZimbraAccount.AccountA().soapSelectNodes("//mail:e");
+		Element[] nodes = ZmailAccount.AccountA().soapSelectNodes("//mail:e");
 		for (Element e : nodes) {
 			String attr = e.getAttribute("a", null);
 			if ( attr != null ) {

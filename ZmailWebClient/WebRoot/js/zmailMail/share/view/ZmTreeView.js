@@ -188,17 +188,17 @@ function(params) {
 
     //determine if call is from dialog/picker rather than nav tree
     var isApp = this._overview && this._overview.isAppOverview;
-    var isZimbraAccount = true;
+    var isZmailAccount = true;
     var acct;
     if(appCtxt.multiAccounts && params.account){
         acct = params.account;
-        isZimbraAccount = acct.isZimbraAccount && !acct.isMain;
+        isZmailAccount = acct.isZmailAccount && !acct.isMain;
     }
 
 
     // TODO: Find a better way to indicate which trees show the share link
     var addShareLink =
-        appCtxt.get(ZmSetting.SHARING_ENABLED, null, acct)  && isApp  && isZimbraAccount &&
+        appCtxt.get(ZmSetting.SHARING_ENABLED, null, acct)  && isApp  && isZmailAccount &&
         (
             this.type == ZmOrganizer.FOLDER   ||
             this.type == ZmOrganizer.ADDRBOOK ||
@@ -659,7 +659,7 @@ ZmTreeView.prototype._handleAddShareLink = function(acctId, htmlEvent) {
 
     if( appCtxt.multiAccounts && acctId) {
         var account  = appCtxt.accountList.getAccount(acctId);
-        if (account && account.isZimbraAccount) {
+        if (account && account.isZmailAccount) {
             appCtxt.accountList.setActiveAccount(account);
         }
     }
@@ -687,7 +687,7 @@ ZmTreeView.prototype._handleAddShare = function() {
         var name = share.folderPath.substr(1).replace(/\//g," ");
         var ownerName = (share.normalizedOwnerName.indexOf('@') >1) ? share.normalizedOwnerName.substr(0, share.normalizedOwnerName.indexOf('@')) : share.normalizedOwnerName;
         requests.push({
-            _jsns: "urn:zimbraMail",
+            _jsns: "urn:zmailMail",
             link: {
                 l: ZmOrganizer.ID_ROOT,
                 name: ZmShare.getDefaultMountpointName(ownerName, name),
@@ -699,7 +699,7 @@ ZmTreeView.prototype._handleAddShare = function() {
         var params = {
             jsonObj: {
                 BatchRequest: {
-                    _jsns: "urn:zimbra",
+                    _jsns: "urn:zmail",
                     CreateMountpointRequest: requests
                 }
             },

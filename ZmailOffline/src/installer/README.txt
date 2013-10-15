@@ -1,5 +1,5 @@
 ====================================================================
-Zimbra Desktop README
+Zmail Desktop README
 ====================================================================
 
 @version@
@@ -15,7 +15,7 @@ HARDWARE REQUIREMENTS
 At least 200MB free disk space is required to install the software.
 Additional disk space is required to download mailbox data.
 
-At least 400MB free memory is required to run Zimbra Desktop.
+At least 400MB free memory is required to run Zmail Desktop.
 
 The computer must have network connectivity at account setup.
 Network connectivity is also required to synchronize local mailbox
@@ -35,33 +35,33 @@ Linux - (x86) 2.6.x and above
 INSTRUCTIONS
 --------------------------------------------------------------------
 
-See Zimbra Desktop release notes at
-http://wiki.zimbra.com/index.php?title=Zimbra_Desktop_2
+See Zmail Desktop release notes at
+http://wiki.zmail.com/index.php?title=Zmail_Desktop_2
 
-Also see Zimbra Desktop FAQ at
-http://wiki.zimbra.com/index.php?title=Zimbra_Desktop_2_FAQ
+Also see Zmail Desktop FAQ at
+http://wiki.zmail.com/index.php?title=Zmail_Desktop_2_FAQ
 
 ====================================================================
 SOURCE CODE INFORMATION
 ====================================================================
 
-Zimbra Desktop is an open source project.  Source code is
-available at http://sourceforge.net/projects/zimbra/
+Zmail Desktop is an open source project.  Source code is
+available at http://sourceforge.net/projects/zmail/
 
 ====================================================================
 KNOWN LIMITATIONS 
 ====================================================================
 
-See Zimbra Desktop Wiki at
-http://wiki.zimbra.com/index.php?title=Zimbra_Desktop_2
+See Zmail Desktop Wiki at
+http://wiki.zmail.com/index.php?title=Zmail_Desktop_2
 
 ====================================================================
 CONTACT INFORMATION AND WEBSITE
 ====================================================================
 
-Please use Zimbra Forums to post your questions and comments about
-Zimbra Desktop.
+Please use Zmail Forums to post your questions and comments about
+Zmail Desktop.
 
-http://www.zimbra.com/forums/zimbra-desktop/
+http://www.zmail.com/forums/zmail-desktop/
 
 ====================================================================

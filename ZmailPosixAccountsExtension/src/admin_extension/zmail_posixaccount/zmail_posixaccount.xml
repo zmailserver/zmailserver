@@ -1,4 +1,4 @@
-<zimlet name="zimbra_posixaccount" version="1" description="Admin Extension for managing  Posix Accounts" extension="true">
+<zimlet name="zmail_posixaccount" version="1" description="Admin Extension for managing  Posix Accounts" extension="true">
 <!--
  * ***** BEGIN LICENSE BLOCK *****
  * 
@@ -15,7 +15,7 @@
  * 
  * ***** END LICENSE BLOCK *****
 -->
-<include>zimbra_posixaccount.js</include>
+<include>zmail_posixaccount.js</include>
 <include>ZaPosixGroup.js</include>
 <include>ZaPosixGroupController.js</include>
 <include>ZaPosixGroupListController.js</include>

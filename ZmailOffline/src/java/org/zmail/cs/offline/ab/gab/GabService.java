@@ -12,15 +12,15 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.ab.gab;
+package org.zmail.cs.offline.ab.gab;
 
-import com.zimbra.cs.offline.OfflineLC;
-import com.zimbra.cs.offline.OfflineLog;
-import com.zimbra.cs.offline.ab.Ab;
-import com.zimbra.cs.mailbox.Contact.Attachment;
-import com.zimbra.common.mailbox.ContactConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Log;
+import org.zmail.cs.offline.OfflineLC;
+import org.zmail.cs.offline.OfflineLog;
+import org.zmail.cs.offline.ab.Ab;
+import org.zmail.cs.mailbox.Contact.Attachment;
+import org.zmail.common.mailbox.ContactConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Log;
 import com.google.gdata.client.contacts.ContactsService;
 import com.google.gdata.client.Query;
 import com.google.gdata.client.Service.GDataRequest;

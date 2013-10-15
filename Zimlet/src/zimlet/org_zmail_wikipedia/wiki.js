@@ -18,28 +18,28 @@
  * 
  * @author Kevin Henrikson
  */
-function com_zimbra_wikipedia_HandlerObject() {
+function org_zmail_wikipedia_HandlerObject() {
 }
 
-com_zimbra_wikipedia_HandlerObject.prototype = new ZmZimletBase();
-com_zimbra_wikipedia_HandlerObject.prototype.constructor = com_zimbra_wikipedia_HandlerObject;
+org_zmail_wikipedia_HandlerObject.prototype = new ZmZimletBase();
+org_zmail_wikipedia_HandlerObject.prototype.constructor = org_zmail_wikipedia_HandlerObject;
 
 /**
  * Simplify handler object
  *
  */
-var WikipediaZimlet = com_zimbra_wikipedia_HandlerObject;
+var WikipediaZimlet = org_zmail_wikipedia_HandlerObject;
 
 
 /**
- * Called by the Zimbra framework when the panel item was double clicked.
+ * Called by the Zmail framework when the panel item was double clicked.
  */
 WikipediaZimlet.prototype.doubleClicked = function() {
 	this.singleClicked();
 };
 
 /**
- * Called by the Zimbra framework when the panel item was clicked.
+ * Called by the Zmail framework when the panel item was clicked.
  */
 WikipediaZimlet.prototype.singleClicked = function() {
 	var editorProps = [

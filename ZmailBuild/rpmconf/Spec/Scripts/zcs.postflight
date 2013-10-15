@@ -14,10 +14,10 @@
 # ***** END LICENSE BLOCK *****
 # 
 
-/bin/sh /opt/zimbra/libexec/addUser.sh -g postfix postfix
+/bin/sh /opt/zmail/libexec/addUser.sh -g postfix postfix
 
-/bin/sh /opt/zimbra/libexec/addUser.sh -g zimbra -G postfix zimbra
+/bin/sh /opt/zmail/libexec/addUser.sh -g zmail -G postfix zmail
 
-if [ -x "/opt/zimbra/libexec/zmfixperms" ]; then
-  /opt/zimbra/libexec/zmfixperms
+if [ -x "/opt/zmail/libexec/zmfixperms" ]; then
+  /opt/zmail/libexec/zmfixperms
 fi

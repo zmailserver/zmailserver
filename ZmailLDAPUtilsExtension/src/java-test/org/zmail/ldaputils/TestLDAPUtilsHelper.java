@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.ldaputils;
+package org.zmail.ldaputils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,29 +20,29 @@ import java.util.Map;
 
 import org.junit.*;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.ldap.LdapObjectClass;
-import com.zimbra.cs.account.ldap.LdapProv;
-import com.zimbra.ldaputils.LDAPUtilsHelper;
-import com.zimbra.qa.unittest.TestLdap;
-import com.zimbra.qa.unittest.TestUtil;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.ldap.LdapObjectClass;
+import org.zmail.cs.account.ldap.LdapProv;
+import org.zmail.ldaputils.LDAPUtilsHelper;
+import org.zmail.qa.unittest.TestLdap;
+import org.zmail.qa.unittest.TestUtil;
 
 import static org.junit.Assert.*;
 
 /*
  * Before running:
  * 
- * cp ~/p4/main/ZimbraSambaExtension/src/schema/samba.schema /opt/zimbra/openldap/etc/openldap/schema/samba.schema
+ * cp ~/p4/main/ZmailSambaExtension/src/schema/samba.schema /opt/zmail/openldap/etc/openldap/schema/samba.schema
  * 
- * edit /opt/zimbra/conf/slapd.conf
+ * edit /opt/zmail/conf/slapd.conf
  * add:
- * include         "/opt/zimbra/openldap/etc/openldap/schema/nis.schema"    (for posix account and grop)
- * include         "/opt/zimbra/openldap/etc/openldap/schema/samba.schema"  (for samba domain)
+ * include         "/opt/zmail/openldap/etc/openldap/schema/nis.schema"    (for posix account and grop)
+ * include         "/opt/zmail/openldap/etc/openldap/schema/samba.schema"  (for samba domain)
  * 
  * then restart slapd
  * 
@@ -102,8 +102,8 @@ public class TestLDAPUtilsHelper extends TestLdap {
         boolean caughtException = false;
         try {
             ldapEntry = createEntry(leafRDN);
-        } catch (ZimbraLDAPUtilsServiceException e) {
-            if (ZimbraLDAPUtilsServiceException.DN_EXISTS.equals(e.getCode())) {
+        } catch (ZmailLDAPUtilsServiceException e) {
+            if (ZmailLDAPUtilsServiceException.DN_EXISTS.equals(e.getCode())) {
                 caughtException = true;
             }
         }

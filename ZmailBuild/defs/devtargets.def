@@ -6,7 +6,7 @@ DEV_INSTALL_COMPONENTS	:= \
 	$(DEV_INSTALL_ROOT)/$(TOMCAT_DIR) \
 	$(DEV_INSTALL_ROOT)/$(CLAMAV_DIR) \
 	$(DEV_INSTALL_ROOT)/$(AMAVISD_DIR) \
-	$(DEV_INSTALL_ROOT)/zimbramon \
+	$(DEV_INSTALL_ROOT)/zmailmon \
 	$(DEV_INSTALL_ROOT)/db \
 	$(DEV_INSTALL_ROOT)/lib \
 	$(DEV_INSTALL_ROOT)/libexec \
@@ -92,21 +92,21 @@ $(DEV_INSTALL_ROOT)/$(LDAP_DIR)-$(LDAP_VERSION): $(DEV_INSTALL_ROOT)
 	cp -f $(SERVICE_DIR)/conf/ldap/master-accesslog.conf $@/etc/openldap
 	cp -f $(SERVICE_DIR)/conf/ldap/master-accesslog-overlay.conf $@/etc/openldap
 	cp -f $(SERVICE_DIR)/conf/ldap/amavisd.schema $@/etc/openldap/schema
-	cp -f $(SERVICE_DIR)/conf/ldap/zimbra.schema $@/etc/openldap/schema
-	cp -f $(SERVICE_DIR)/conf/ldap/zimbra_schema.ldif $@/etc/openldap/schema/zimbra.ldif
+	cp -f $(SERVICE_DIR)/conf/ldap/zmail.schema $@/etc/openldap/schema
+	cp -f $(SERVICE_DIR)/conf/ldap/zmail_schema.ldif $@/etc/openldap/schema/zmail.ldif
 	cp -f $(SERVICE_DIR)/conf/ldap/amavisd.ldif $@/etc/openldap/schema/amavisd.ldif
-	cp -f $(SERVICE_DIR)/conf/ldap/zimbra.ldif $@/etc/openldap/zimbra.ldif
+	cp -f $(SERVICE_DIR)/conf/ldap/zmail.ldif $@/etc/openldap/zmail.ldif
 	cp -f $(SERVICE_DIR)/conf/ldap/widgets.ldif $@/etc/openldap/widgets.ldif
-	cp $(SERVICE_DIR)/conf/ldap/zimbra_mimehandlers.ldif \
-		$@/etc/openldap/zimbra_mimehandlers.ldif
+	cp $(SERVICE_DIR)/conf/ldap/zmail_mimehandlers.ldif \
+		$@/etc/openldap/zmail_mimehandlers.ldif
 
-$(DEV_INSTALL_ROOT)/$(TOMCAT_DIR): $(DEV_INSTALL_ROOT) $(SERVICE_DIR)/$(WEBAPP_BUILD_DIR)/service.war  $(CONSOLE_DIR)/$(WEBAPP_BUILD_DIR)/zimbra.war
+$(DEV_INSTALL_ROOT)/$(TOMCAT_DIR): $(DEV_INSTALL_ROOT) $(SERVICE_DIR)/$(WEBAPP_BUILD_DIR)/service.war  $(CONSOLE_DIR)/$(WEBAPP_BUILD_DIR)/zmail.war
 	@echo "*** Installing tomcat"
 	(cd $(DEV_INSTALL_ROOT); tar xzf $(TOMCAT_SOURCE).tar.gz;)
 	cp -f $(SERVICE_DIR)/conf/tomcat-5.5/server.xml $@/conf/server.xml
-	cp -f $(SERVICE_DIR)/conf/zimbra.xml $@/conf/Catalina/localhost/zimbra.xml
+	cp -f $(SERVICE_DIR)/conf/zmail.xml $@/conf/Catalina/localhost/zmail.xml
 	mkdir -p $@/conf/AdminService/localhost
-	cp -f $(SERVICE_DIR)/conf/zimbraAdmin.xml $@/conf/AdminService/localhost/zimbraAdmin.xml
+	cp -f $(SERVICE_DIR)/conf/zmailAdmin.xml $@/conf/AdminService/localhost/zmailAdmin.xml
 	cp -f $(SERVICE_DIR)/conf/tomcat-5.5/tomcat-users.xml $@/conf
 	cp -f $(SERVICE_DIR)/build/dist/conf/log4j.properties.production  $@/conf/log4j.properties
 	mkdir -p $@/temp
@@ -122,31 +122,31 @@ $(DEV_INSTALL_ROOT)/$(AMAVISD_DIR): $(DEV_INSTALL_ROOT)
 	cp -f $(SERVICE_DIR)/conf/DB_CONFIG.amavisd $@/DB_CONFIG.amavisd
 
 devperllibs: 
-	mkdir -p $(DEV_INSTALL_ROOT)/zimbramon/lib
-	(cd $(DEV_INSTALL_ROOT)/zimbramon/lib; \
+	mkdir -p $(DEV_INSTALL_ROOT)/zmailmon/lib
+	(cd $(DEV_INSTALL_ROOT)/zmailmon/lib; \
 	tar xzf $(PERL_LIB_SOURCE)/perllib.tgz)
-	cp -fR $(BUILD_ROOT)/lib/Zimbra $(DEV_INSTALL_ROOT)/zimbramon/lib
+	cp -fR $(BUILD_ROOT)/lib/Zmail $(DEV_INSTALL_ROOT)/zmailmon/lib
 
-$(DEV_INSTALL_ROOT)/zimbramon: $(DEV_INSTALL_ROOT) devperllibs
-	@echo "*** Installing zimbramon"
+$(DEV_INSTALL_ROOT)/zmailmon: $(DEV_INSTALL_ROOT) devperllibs
+	@echo "*** Installing zmailmon"
 	mkdir -p $@
 	cp -f -R $(ZIMBRA_BIN_DIR)/zmmon $@
 	chmod 755 $@/zmmon
 	cp -f -R $(ZIMBRA_BIN_DIR)/zmcontrol $@
 	chmod 755 $@/zmcontrol
-	cp -f -R $(PACKAGE_CONF_DIR)/Ctl/zimbra.cf.in $@/zimbra.cf
-	cp -f -R $(PACKAGE_CONF_DIR)/Ctl/zimbracore.cf $@
-	cp -f -R $(PACKAGE_CONF_DIR)/Ctl/zimbramail.cf $@
-	cp -f -R $(PACKAGE_CONF_DIR)/Ctl/zimbramta.cf $@
-	cp -f -R $(PACKAGE_CONF_DIR)/Ctl/zimbraldap.cf $@
-	cp -f -R $(PACKAGE_CONF_DIR)/Ctl/zimbralogger.cf $@
-	cp -f -R $(PACKAGE_CONF_DIR)/Ctl/zimbrasnmp.cf $@
-	mkdir -p $@/lib/Zimbra/Mon
-	@cp -f $(wildcard $(BUILD_ROOT)/lib/Zimbra/Mon/*.pm) $@/lib/Zimbra/Mon
-	mkdir -p $@/lib/Zimbra/Mon/SOAP
-	@cp -f $(wildcard $(SERVICE_DIR)/src/perl/soap/*.pm) $@/lib/Zimbra/Mon/SOAP
-	cat $(PACKAGE_CONF_DIR)/Env/crontabs/crontab* > $(DEV_INSTALL_ROOT)/zimbramon/crontab
-	(cd $(DEV_INSTALL_ROOT)/zimbramon; tar xzf $(RRD_SOURCE).tar.gz)
+	cp -f -R $(PACKAGE_CONF_DIR)/Ctl/zmail.cf.in $@/zmail.cf
+	cp -f -R $(PACKAGE_CONF_DIR)/Ctl/zmailcore.cf $@
+	cp -f -R $(PACKAGE_CONF_DIR)/Ctl/zmailmail.cf $@
+	cp -f -R $(PACKAGE_CONF_DIR)/Ctl/zmailmta.cf $@
+	cp -f -R $(PACKAGE_CONF_DIR)/Ctl/zmailldap.cf $@
+	cp -f -R $(PACKAGE_CONF_DIR)/Ctl/zmaillogger.cf $@
+	cp -f -R $(PACKAGE_CONF_DIR)/Ctl/zmailsnmp.cf $@
+	mkdir -p $@/lib/Zmail/Mon
+	@cp -f $(wildcard $(BUILD_ROOT)/lib/Zmail/Mon/*.pm) $@/lib/Zmail/Mon
+	mkdir -p $@/lib/Zmail/Mon/SOAP
+	@cp -f $(wildcard $(SERVICE_DIR)/src/perl/soap/*.pm) $@/lib/Zmail/Mon/SOAP
+	cat $(PACKAGE_CONF_DIR)/Env/crontabs/crontab* > $(DEV_INSTALL_ROOT)/zmailmon/crontab
+	(cd $(DEV_INSTALL_ROOT)/zmailmon; tar xzf $(RRD_SOURCE).tar.gz)
 
 $(DEV_INSTALL_ROOT)/db:
 	@echo "*** Installing db"

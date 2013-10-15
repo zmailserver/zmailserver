@@ -189,7 +189,7 @@ void MAPIFolder::Initialize(LPMAPIFOLDER pFolder, LPTSTR displayName, LPSBinary 
     }    
 */
 	//Apply restrictions.
-	Zimbra::MAPI::MIRestriction restriction;
+	Zmail::MAPI::MIRestriction restriction;
 	FILETIME tmpTime = { 0, 0 };
 	if (FAILED(hr = m_pContentsTable->Restrict(restriction.GetRestriction(ulItemMask, tmpTime), 0)))
     {
@@ -212,7 +212,7 @@ ExchangeSpecialFolderId MAPIFolder::GetExchangeFolderId()
     {
         SBinaryArray specialFolderIds = m_store->GetSpecialFolderIds();
 
-        efid= Zimbra::MAPI::Util::GetExchangeSpecialFolderId(m_store->GetInternalMAPIStore(),
+        efid= Zmail::MAPI::Util::GetExchangeSpecialFolderId(m_store->GetInternalMAPIStore(),
             m_EntryID.cb, (LPENTRYID)(m_EntryID.lpb), &specialFolderIds);
 		//it is possible that if its a pst migration then PR_IPM entries are not
 		//available so use english inbox contained IPM folder names to compare 
@@ -233,9 +233,9 @@ ExchangeSpecialFolderId MAPIFolder::GetExchangeFolderId()
     return efid;
 }
 
-ZimbraSpecialFolderId MAPIFolder::GetZimbraFolderId()
+ZmailSpecialFolderId MAPIFolder::GetZmailFolderId()
 {
-    ZimbraSpecialFolderId ZimbraSpecialFolderIdArray[TOTAL_NUM_SPECIAL_FOLDERS] = {
+    ZmailSpecialFolderId ZmailSpecialFolderIdArray[TOTAL_NUM_SPECIAL_FOLDERS] = {
         ZM_INBOX, ZM_ROOT, ZM_CALENDAR, ZM_CONTACTS, ZM_DRAFTS, ZM_SFID_NONE /*JOURNAL*/,
         ZM_SFID_NONE /*NOTES*/, ZM_TASKS, ZM_SFID_NONE /*OUTBOX*/, ZM_SENT_MAIL, ZM_TRASH,
         ZM_SFID_NONE /*SYNC_CONFLICTS*/, ZM_SFID_NONE /*SYNC_ISSUES*/,
@@ -247,7 +247,7 @@ ZimbraSpecialFolderId MAPIFolder::GetZimbraFolderId()
         int idx = GetExchangeFolderId();
 
         if (idx < ZM_SFID_MAX)
-            return ZimbraSpecialFolderIdArray[idx];
+            return ZmailSpecialFolderIdArray[idx];
         else
             return ZM_SFID_NONE;
     }
@@ -261,7 +261,7 @@ bool MAPIFolder::HiddenFolder()
 
     HRESULT hr = S_OK;
     bool bRet = false;
-    Zimbra::Util::ScopedBuffer<SPropValue> pPropValues;
+    Zmail::Util::ScopedBuffer<SPropValue> pPropValues;
 
     if (SUCCEEDED(hr = HrGetOneProp(m_folder, PR_ATTR_HIDDEN, pPropValues.getptr())))
         bRet = (pPropValues->Value.b != 0);
@@ -274,7 +274,7 @@ HRESULT MAPIFolder::ContainerClass(wstring &wstrContainerClass)
         return E_FAIL;
 
     HRESULT hr = S_OK;
-    Zimbra::Util::ScopedBuffer<SPropValue> pPropValues;
+    Zmail::Util::ScopedBuffer<SPropValue> pPropValues;
 
     wstrContainerClass = L"";
     if (SUCCEEDED(hr = HrGetOneProp(m_folder, PR_CONTAINER_CLASS, pPropValues.getptr())))
@@ -359,7 +359,7 @@ wstring MAPIFolder::FindFolderPath()
             }
         }
     }
-    wstrPath = Zimbra::MAPI::Util::ReverseDelimitedString(wstrPath, L"/");
+    wstrPath = Zmail::MAPI::Util::ReverseDelimitedString(wstrPath, L"/");
     if (wstrPath.length() > 2)
     {
         size_t npos = wstrPath.find('/', 1);
@@ -398,7 +398,7 @@ HRESULT MAPIFolder::GetItemCount(ULONG &ulCount)
 		ERR_MAPI_FOLDER, __LINE__, __FILE__);
 
     HRESULT hr = S_OK;
-    Zimbra::Util::ScopedBuffer<SPropValue> pPropValues;
+    Zmail::Util::ScopedBuffer<SPropValue> pPropValues;
 
 	if (FAILED(hr = m_pContentsTable->GetRowCount(0, &ulCount)))
     {

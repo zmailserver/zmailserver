@@ -90,7 +90,7 @@ function (arr) {
 
 ZaSignature.GetSignatures =
 function(by, val) {
-    var soapDoc = AjxSoapDoc.create("GetSignaturesRequest", "urn:zimbraAccount", null);
+    var soapDoc = AjxSoapDoc.create("GetSignaturesRequest", "urn:zmailAccount", null);
 
     var params = new Object();
     params.soapDoc = soapDoc;
@@ -134,7 +134,7 @@ function(by, val) {
 
 ZaSignature.CreateSignature =
 function(by, val) {
-    var soapDoc = AjxSoapDoc.create("CreateSignatureRequest", "urn:zimbraAccount", null);
+    var soapDoc = AjxSoapDoc.create("CreateSignatureRequest", "urn:zmailAccount", null);
     var signBy = soapDoc.set("signature", null);
     signBy.setAttribute("name", this[ZaSignature.A2_name]);
     var contentBy;
@@ -193,27 +193,27 @@ function(tmpObj, resource){
         }
         var mods = {};
         var index;
-        if (tmpObj.attrs[ZaResource.A_zimbraPrefCalendarAutoAcceptSignatureId]) {
+        if (tmpObj.attrs[ZaResource.A_zmailPrefCalendarAutoAcceptSignatureId]) {
             index = ZaUtil.findValueInObjArrByPropertyName(tmpObj[ZaResource.A2_signatureList],
-                        tmpObj.attrs[ZaResource.A_zimbraPrefCalendarAutoAcceptSignatureId]);
+                        tmpObj.attrs[ZaResource.A_zmailPrefCalendarAutoAcceptSignatureId]);
             if (index != -1 && tmpObj[ZaResource.A2_signatureList][index].id) {
-                mods[ZaResource.A_zimbraPrefCalendarAutoAcceptSignatureId] = tmpObj[ZaResource.A2_signatureList][index].id;
+                mods[ZaResource.A_zmailPrefCalendarAutoAcceptSignatureId] = tmpObj[ZaResource.A2_signatureList][index].id;
             }
         }
 
-        if (tmpObj.attrs[ZaResource.A_zimbraPrefCalendarAutoDenySignatureId]) {
+        if (tmpObj.attrs[ZaResource.A_zmailPrefCalendarAutoDenySignatureId]) {
             index = ZaUtil.findValueInObjArrByPropertyName(tmpObj[ZaResource.A2_signatureList],
-                        tmpObj.attrs[ZaResource.A_zimbraPrefCalendarAutoDenySignatureId]);
+                        tmpObj.attrs[ZaResource.A_zmailPrefCalendarAutoDenySignatureId]);
             if (index != -1 && tmpObj[ZaResource.A2_signatureList][index].id) {
-                mods[ZaResource.A_zimbraPrefCalendarAutoDenySignatureId] = tmpObj[ZaResource.A2_signatureList][index].id;
+                mods[ZaResource.A_zmailPrefCalendarAutoDenySignatureId] = tmpObj[ZaResource.A2_signatureList][index].id;
             }
         }
 
-        if (tmpObj.attrs[ZaResource.A_zimbraPrefCalendarAutoDeclineSignatureId]) {
+        if (tmpObj.attrs[ZaResource.A_zmailPrefCalendarAutoDeclineSignatureId]) {
             index = ZaUtil.findValueInObjArrByPropertyName(tmpObj[ZaResource.A2_signatureList],
-                        tmpObj.attrs[ZaResource.A_zimbraPrefCalendarAutoDeclineSignatureId]);
+                        tmpObj.attrs[ZaResource.A_zmailPrefCalendarAutoDeclineSignatureId]);
             if (index != -1 && tmpObj[ZaResource.A2_signatureList][index].id) {
-                mods[ZaResource.A_zimbraPrefCalendarAutoDeclineSignatureId] = tmpObj[ZaResource.A2_signatureList][index].id;
+                mods[ZaResource.A_zmailPrefCalendarAutoDeclineSignatureId] = tmpObj[ZaResource.A2_signatureList][index].id;
             }
         }
 
@@ -226,7 +226,7 @@ function(tmpObj, resource){
 
 ZaSignature.ModifySignature =
 function(by, val) {
-    var soapDoc = AjxSoapDoc.create("ModifySignatureRequest", "urn:zimbraAccount", null);
+    var soapDoc = AjxSoapDoc.create("ModifySignatureRequest", "urn:zmailAccount", null);
     var signBy = soapDoc.set("signature", null);
     signBy.setAttribute("name", this[ZaSignature.A2_name]);
     signBy.setAttribute("id", this[ZaSignature.A2_id]);
@@ -271,7 +271,7 @@ function(by, val) {
 
 ZaSignature.DeleteSignature =
 function(by, val) {
-    var soapDoc = AjxSoapDoc.create("DeleteSignatureRequest", "urn:zimbraAccount", null);
+    var soapDoc = AjxSoapDoc.create("DeleteSignatureRequest", "urn:zmailAccount", null);
     var signBy = soapDoc.set("signature", null);
     signBy.setAttribute("id", this[ZaSignature.A2_id]);
 

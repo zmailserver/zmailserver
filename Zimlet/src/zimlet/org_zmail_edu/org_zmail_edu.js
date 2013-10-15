@@ -13,29 +13,29 @@
  * ***** END LICENSE BLOCK *****
  */
 
-function Com_Zimbra_Edu() {
+function Com_Zmail_Edu() {
   ;
 }
 
-Com_Zimbra_Edu.prototype = new ZmZimletBase();
-Com_Zimbra_Edu.prototype.constructor = Com_Zimbra_Edu;
+Com_Zmail_Edu.prototype = new ZmZimletBase();
+Com_Zmail_Edu.prototype.constructor = Com_Zmail_Edu;
 
-Com_Zimbra_Edu.prototype.init =
+Com_Zmail_Edu.prototype.init =
 function() {
 };
 
-Com_Zimbra_Edu.NOT_ENROLLED = "Not Enrolled";
-Com_Zimbra_Edu.ENROLLED = "Currently Enrolled";
-Com_Zimbra_Edu.TAKEN = "Already Taken";
+Com_Zmail_Edu.NOT_ENROLLED = "Not Enrolled";
+Com_Zmail_Edu.ENROLLED = "Currently Enrolled";
+Com_Zmail_Edu.TAKEN = "Already Taken";
 
-Com_Zimbra_Edu.COURSE_DATA = {
-	"ZEDU-PSYCH-101": { prof: "Steve Patterson", title: "Intro to Pyschology, general", schedule: "M/W/F, 3-4:00pm", state: Com_Zimbra_Edu.NOT_ENROLLED },
-	"ZEDU-PHYS-103": { prof: "Jeanine Martin", title: "Intro to Physics, technical majors", schedule: "Not Available", state: Com_Zimbra_Edu.TAKEN },
-	"ZEDU-CS-100": { prof: "Arlene Johnson", title: "Intro to Computer Science", schedule: "T/R, 11:00am-12:30", state: Com_Zimbra_Edu.ENROLLED },
-	"ZEDU-CS-103": { prof: "Arlene Johnson", title: "Data Structures and Algorithms", schedule: "M/W/F, 11:00am-12:30", state: Com_Zimbra_Edu.NOT_ENROLLED }
+Com_Zmail_Edu.COURSE_DATA = {
+	"ZEDU-PSYCH-101": { prof: "Steve Patterson", title: "Intro to Pyschology, general", schedule: "M/W/F, 3-4:00pm", state: Com_Zmail_Edu.NOT_ENROLLED },
+	"ZEDU-PHYS-103": { prof: "Jeanine Martin", title: "Intro to Physics, technical majors", schedule: "Not Available", state: Com_Zmail_Edu.TAKEN },
+	"ZEDU-CS-100": { prof: "Arlene Johnson", title: "Intro to Computer Science", schedule: "T/R, 11:00am-12:30", state: Com_Zmail_Edu.ENROLLED },
+	"ZEDU-CS-103": { prof: "Arlene Johnson", title: "Data Structures and Algorithms", schedule: "M/W/F, 11:00am-12:30", state: Com_Zmail_Edu.NOT_ENROLLED }
 };
 
-Com_Zimbra_Edu.prototype.toolTipPoppedUp =
+Com_Zmail_Edu.prototype.toolTipPoppedUp =
 function(spanElement, obj, context, canvas) {
 	var course = this._getCourseData(obj);
 	var html = new Array(20);
@@ -62,12 +62,12 @@ function(spanElement, obj, context, canvas) {
 	canvas.innerHTML = html.join("");
 };
 
-//Com_Zimbra_Edu.prototype.toolTipPoppedDown =
+//Com_Zmail_Edu.prototype.toolTipPoppedDown =
 //function(spanElement, obj, context, canvas) {
 // alert("down");
 //}
 //
-Com_Zimbra_Edu.prototype.menuItemSelected = 
+Com_Zmail_Edu.prototype.menuItemSelected = 
 function(menuItemId) {
 	switch (menuItemId) {
 		case "ENROLL":
@@ -97,15 +97,15 @@ function(menuItemId) {
 	}
 };
 
-Com_Zimbra_Edu.prototype._getCourseData =
+Com_Zmail_Edu.prototype._getCourseData =
 function(obj) {
-	var course = Com_Zimbra_Edu.COURSE_DATA[obj];
+	var course = Com_Zmail_Edu.COURSE_DATA[obj];
 	if (course == null)
-		course = Com_Zimbra_Edu.COURSE_DATA[0];
+		course = Com_Zmail_Edu.COURSE_DATA[0];
 	return course;
 };
 
-Com_Zimbra_Edu.prototype._addEntryRow =
+Com_Zmail_Edu.prototype._addEntryRow =
 function(field, data, html, idx) {
 	html[idx++] = "<tr valign='top'><td align='right' style='padding-right: 5px;'><b>";
 	html[idx++] = AjxStringUtil.htmlEncode(field) + ":";
@@ -115,45 +115,45 @@ function(field, data, html, idx) {
 	return idx;
 };
 
-Com_Zimbra_Edu.prototype._getStyle =
+Com_Zmail_Edu.prototype._getStyle =
 function(obj) {
 	var course = this._getCourseData(obj);
 	switch (course.state) {
-		case Com_Zimbra_Edu.APPROVED: return "green";
-		case Com_Zimbra_Edu.REJECTED: return "red";
+		case Com_Zmail_Edu.APPROVED: return "green";
+		case Com_Zmail_Edu.REJECTED: return "red";
 		default: return "blue";
 	}
 };
 
-Com_Zimbra_Edu.prototype._enrollListener =
+Com_Zmail_Edu.prototype._enrollListener =
 function() {
 	var obj = this._actionObject;
 	var course = this._getCourseData(obj);
-	if (course.state == Com_Zimbra_Edu.ENROLLED) {
+	if (course.state == Com_Zmail_Edu.ENROLLED) {
 	  alert("You are currently enrolled in " + obj);
 	  return;
 	}
-	if (course.state == Com_Zimbra_Edu.TAKEN) {
+	if (course.state == Com_Zmail_Edu.TAKEN) {
 	  alert("You have already completed " + obj);
 	  return;
 	}
-	course.state = Com_Zimbra_Edu.ENROLLED;
+	course.state = Com_Zmail_Edu.ENROLLED;
 	this._actionSpan.style.color = this._getStyle(obj);
 };
 
-Com_Zimbra_Edu.prototype._rejectListener =
+Com_Zmail_Edu.prototype._rejectListener =
 function() {
 	var obj = this._actionObject;
 	var course = this._getCourseData(obj);
 
-	if (course.state == Com_Zimbra_Edu.TAKEN) {
+	if (course.state == Com_Zmail_Edu.TAKEN) {
 	  alert("You have already completed " + obj);
 	  return;
 	}
-	if (course.state != Com_Zimbra_Edu.ENROLLED) {
+	if (course.state != Com_Zmail_Edu.ENROLLED) {
 	  alert("You are not currently enrolled in " + obj);
 	  return;
 	}
-	course.state = Com_Zimbra_Edu.NOT_ENROLLED;
+	course.state = Com_Zmail_Edu.NOT_ENROLLED;
 	this._actionSpan.style.color = this._getStyle(obj);
 };

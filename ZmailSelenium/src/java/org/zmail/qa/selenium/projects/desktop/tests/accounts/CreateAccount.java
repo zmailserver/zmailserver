@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.accounts;
+package org.zmail.qa.selenium.projects.desktop.tests.accounts;
 
 import java.util.List;
 
@@ -22,24 +22,24 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.DesktopAccountItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.DesktopAccountItem.SECURITY_TYPE;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.framework.util.staf.Stafzmtlsctl;
-import com.zimbra.qa.selenium.framework.util.staf.Stafzmtlsctl.SERVER_ACCESS;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.PageLogin;
-import com.zimbra.qa.selenium.projects.desktop.ui.accounts.FormAddGmailAccount;
-import com.zimbra.qa.selenium.projects.desktop.ui.accounts.FormAddImapAccount;
-import com.zimbra.qa.selenium.projects.desktop.ui.accounts.FormAddPopAccount;
-import com.zimbra.qa.selenium.projects.desktop.ui.accounts.FormAddYahooAccount;
-import com.zimbra.qa.selenium.projects.desktop.ui.accounts.FormAddZimbraAccount;
-import com.zimbra.qa.selenium.projects.desktop.ui.accounts.PageAddNewAccount.DROP_DOWN_OPTION;
+import org.zmail.qa.selenium.framework.items.DesktopAccountItem;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.DesktopAccountItem.SECURITY_TYPE;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.framework.util.staf.Stafzmtlsctl;
+import org.zmail.qa.selenium.framework.util.staf.Stafzmtlsctl.SERVER_ACCESS;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.PageLogin;
+import org.zmail.qa.selenium.projects.desktop.ui.accounts.FormAddGmailAccount;
+import org.zmail.qa.selenium.projects.desktop.ui.accounts.FormAddImapAccount;
+import org.zmail.qa.selenium.projects.desktop.ui.accounts.FormAddPopAccount;
+import org.zmail.qa.selenium.projects.desktop.ui.accounts.FormAddYahooAccount;
+import org.zmail.qa.selenium.projects.desktop.ui.accounts.FormAddZmailAccount;
+import org.zmail.qa.selenium.projects.desktop.ui.accounts.PageAddNewAccount.DROP_DOWN_OPTION;
 
 public class CreateAccount extends AjaxCommonTest {
 
@@ -58,105 +58,105 @@ public class CreateAccount extends AjaxCommonTest {
    }
 
    // ZIMBRA ACCOUNT
-   @Test(description="Create New Single Account (Zimbra) - SSL", groups = { "sanity" })
-   public void CreateSingleZimbraAccountSSL() throws HarnessException{
+   @Test(description="Create New Single Account (Zmail) - SSL", groups = { "sanity" })
+   public void CreateSingleZmailAccountSSL() throws HarnessException{
       Stafzmtlsctl stafzmtlsctl = new Stafzmtlsctl();
       stafzmtlsctl.setServerAccess(SERVER_ACCESS.BOTH);
       _sslIsModified = true;
 
-      DesktopAccountItem desktopAccountItem = app.zPageAddNewAccount.zAddZimbraAccountThruUI(ZimbraAccount.AccountZDC().EmailAddress,
-            ZimbraAccount.AccountZDC().Password, true, "443");
+      DesktopAccountItem desktopAccountItem = app.zPageAddNewAccount.zAddZmailAccountThruUI(ZmailAccount.AccountZDC().EmailAddress,
+            ZmailAccount.AccountZDC().Password, true, "443");
 
       String message = app.zPageLogin.zGetMessage();
       ZAssert.assertStringContains(message, "Account added: " + desktopAccountItem.accountName, "Verify Account added message");
 
-      app.zPageLogin.zLogin(new ZimbraAccount(desktopAccountItem.emailAddress,
+      app.zPageLogin.zLogin(new ZmailAccount(desktopAccountItem.emailAddress,
             desktopAccountItem.password));
       List<FolderItem> folders = app.zTreeMail.zListGetFolders();
       ZAssert.assertGreaterThan(folders.size(), 0, "Folder with the active account's email address is greater than 0.");
 
    }
 
-   @Test(description="Create New Single Account (Zimbra) - Non SSL", groups = { "sanity" })
-   public void CreateSingleZimbraAccountNonSSL() throws HarnessException {
+   @Test(description="Create New Single Account (Zmail) - Non SSL", groups = { "sanity" })
+   public void CreateSingleZmailAccountNonSSL() throws HarnessException {
 
-      DesktopAccountItem desktopAccountItem = app.zPageAddNewAccount.zAddZimbraAccountThruUI();
+      DesktopAccountItem desktopAccountItem = app.zPageAddNewAccount.zAddZmailAccountThruUI();
 
       String message = app.zPageLogin.zGetMessage();
       ZAssert.assertStringContains(message, "Account added: " + desktopAccountItem.accountName, "Verify Account added message");
 
-      app.zPageLogin.zLogin(new ZimbraAccount(desktopAccountItem.emailAddress,
+      app.zPageLogin.zLogin(new ZmailAccount(desktopAccountItem.emailAddress,
             desktopAccountItem.password));
       List<FolderItem> folders = app.zTreeMail.zListGetFolders();
       ZAssert.assertGreaterThan(folders.size(), 0, "Folder with the active account's email address is greater than 0.");
    }
 
-   @Test(description="Create Multiple Accounts (Zimbra) - SSL", groups = { "functional" })
-   public void CreateMultipleZimbraAccountSSL() throws HarnessException {
+   @Test(description="Create Multiple Accounts (Zmail) - SSL", groups = { "functional" })
+   public void CreateMultipleZmailAccountSSL() throws HarnessException {
       Stafzmtlsctl stafzmtlsctl = new Stafzmtlsctl();
       stafzmtlsctl.setServerAccess(SERVER_ACCESS.BOTH);
       _sslIsModified = true;
 
-      DesktopAccountItem desktopAccountItem = app.zPageAddNewAccount.zAddZimbraAccountThruUI(ZimbraAccount.AccountZDC().EmailAddress,
-            ZimbraAccount.AccountZDC().Password, true, "443");
+      DesktopAccountItem desktopAccountItem = app.zPageAddNewAccount.zAddZmailAccountThruUI(ZmailAccount.AccountZDC().EmailAddress,
+            ZmailAccount.AccountZDC().Password, true, "443");
 
       String message = app.zPageLogin.zGetMessage();
       ZAssert.assertStringContains(message, "Account added: " + desktopAccountItem.accountName, "Verify Account added message");
 
-      DesktopAccountItem desktopAccountItem2 = app.zPageAddNewAccount.zAddZimbraAccountThruUI(ZimbraAccount.AccountA().EmailAddress,
-            ZimbraAccount.AccountA().Password, true, "443");
+      DesktopAccountItem desktopAccountItem2 = app.zPageAddNewAccount.zAddZmailAccountThruUI(ZmailAccount.AccountA().EmailAddress,
+            ZmailAccount.AccountA().Password, true, "443");
 
       message = app.zPageLogin.zGetMessage();
       ZAssert.assertStringContains(message, "Account added: " + desktopAccountItem2.accountName, "Verify Account added message");
 
-      app.zPageLogin.zLogin(new ZimbraAccount(desktopAccountItem.emailAddress,
+      app.zPageLogin.zLogin(new ZmailAccount(desktopAccountItem.emailAddress,
             desktopAccountItem.password));
       List<FolderItem> folders = app.zTreeMail.zListGetFolders();
       ZAssert.assertGreaterThan(folders.size(), 0, "Folder with the active account1's email address is greater than 0.");
 
-      app.zSetActiveAcount(new ZimbraAccount(desktopAccountItem2.emailAddress,
+      app.zSetActiveAcount(new ZmailAccount(desktopAccountItem2.emailAddress,
             desktopAccountItem2.password));
       folders = app.zTreeMail.zListGetFolders();
       ZAssert.assertGreaterThan(folders.size(), 0, "Folder with the active account2's email address is greater than 0.");
    }
 
-   @Test(description="Create Multiple Accounts (Zimbra) - Non SSL", groups = { "functional" })
-   public void CreateMultipleZimbraAccountNonSSL() throws HarnessException {
+   @Test(description="Create Multiple Accounts (Zmail) - Non SSL", groups = { "functional" })
+   public void CreateMultipleZmailAccountNonSSL() throws HarnessException {
 
-      DesktopAccountItem desktopAccountItem = app.zPageAddNewAccount.zAddZimbraAccountThruUI(ZimbraAccount.AccountZDC().EmailAddress,
-            ZimbraAccount.AccountZDC().Password, false, "80");
+      DesktopAccountItem desktopAccountItem = app.zPageAddNewAccount.zAddZmailAccountThruUI(ZmailAccount.AccountZDC().EmailAddress,
+            ZmailAccount.AccountZDC().Password, false, "80");
 
       String message = app.zPageLogin.zGetMessage();
       ZAssert.assertStringContains(message, "Account added: " + desktopAccountItem.accountName, "Verify Account added message");
 
-      DesktopAccountItem desktopAccountItem2 = app.zPageAddNewAccount.zAddZimbraAccountThruUI(ZimbraAccount.AccountA().EmailAddress,
-            ZimbraAccount.AccountA().Password, false, "80");
+      DesktopAccountItem desktopAccountItem2 = app.zPageAddNewAccount.zAddZmailAccountThruUI(ZmailAccount.AccountA().EmailAddress,
+            ZmailAccount.AccountA().Password, false, "80");
 
       message = app.zPageLogin.zGetMessage();
       ZAssert.assertStringContains(message, "Account added: " + desktopAccountItem2.accountName, "Verify Account added message");
 
-      app.zPageLogin.zLogin(new ZimbraAccount(desktopAccountItem.emailAddress,
+      app.zPageLogin.zLogin(new ZmailAccount(desktopAccountItem.emailAddress,
             desktopAccountItem.password));
       List<FolderItem> folders = app.zTreeMail.zListGetFolders();
       ZAssert.assertGreaterThan(folders.size(), 0, "Folder with the active account1's email address is greater than 0.");
 
-      app.zSetActiveAcount(new ZimbraAccount(desktopAccountItem2.emailAddress,
+      app.zSetActiveAcount(new ZmailAccount(desktopAccountItem2.emailAddress,
             desktopAccountItem2.password));
       folders = app.zTreeMail.zListGetFolders();
       ZAssert.assertGreaterThan(folders.size(), 0, "Folder with the active account2's email address is greater than 0.");
    }
 
-   @Test(description="Wrong email address format (alphabet characters only) when creating Zimbra Account", groups = { "functional" } )
-   public void wrongEmailAddressFormatZimbraAccount1() throws HarnessException {
+   @Test(description="Wrong email address format (alphabet characters only) when creating Zmail Account", groups = { "functional" } )
+   public void wrongEmailAddressFormatZmailAccount1() throws HarnessException {
 
-      String wrongEmailAddress = ZimbraSeleniumProperties.getUniqueString();
-      DesktopAccountItem desktopAccountItem = DesktopAccountItem.generateDesktopZimbraAccountItem(
+      String wrongEmailAddress = ZmailSeleniumProperties.getUniqueString();
+      DesktopAccountItem desktopAccountItem = DesktopAccountItem.generateDesktopZmailAccountItem(
             wrongEmailAddress,
-            ZimbraAccount.AccountZDC().Password,
-            ZimbraSeleniumProperties.getStringProperty("server.port", "80"),
+            ZmailAccount.AccountZDC().Password,
+            ZmailSeleniumProperties.getStringProperty("server.port", "80"),
             false);
 
-      FormAddZimbraAccount accountForm = (FormAddZimbraAccount)app.zPageAddNewAccount.zDropDownListSelect(DROP_DOWN_OPTION.ZIMBRA);
+      FormAddZmailAccount accountForm = (FormAddZmailAccount)app.zPageAddNewAccount.zDropDownListSelect(DROP_DOWN_OPTION.ZIMBRA);
       accountForm.zFill(desktopAccountItem);
       accountForm.zPressButton(Button.B_VALIDATE_AND_SAVE);
 
@@ -169,7 +169,7 @@ public class CreateAccount extends AjaxCommonTest {
 
       String welcomeMessage = app.zPageLogin.zGetWelcomeMessage();
       ZAssert.assertStringContains(welcomeMessage,
-            "Zimbra Desktop allows you to access email while you are disconnected from the internet.",
+            "Zmail Desktop allows you to access email while you are disconnected from the internet.",
             "Verify welcome message is displayed");
 
       ZAssert.assertEquals(false,
@@ -177,17 +177,17 @@ public class CreateAccount extends AjaxCommonTest {
             "Added account message is displayed");
    }
 
-   @Test(description="Wrong email address format (alphabet characters and '@') when creating Zimbra Account", groups = { "functional" } )
-   public void wrongEmailAddressFormatZimbraAccount2() throws HarnessException {
+   @Test(description="Wrong email address format (alphabet characters and '@') when creating Zmail Account", groups = { "functional" } )
+   public void wrongEmailAddressFormatZmailAccount2() throws HarnessException {
 
-      String wrongEmailAddress = ZimbraSeleniumProperties.getUniqueString() + "@";
-      DesktopAccountItem desktopAccountItem = DesktopAccountItem.generateDesktopZimbraAccountItem(
+      String wrongEmailAddress = ZmailSeleniumProperties.getUniqueString() + "@";
+      DesktopAccountItem desktopAccountItem = DesktopAccountItem.generateDesktopZmailAccountItem(
             wrongEmailAddress,
-            ZimbraAccount.AccountZDC().Password,
-            ZimbraSeleniumProperties.getStringProperty("server.port", "80"),
+            ZmailAccount.AccountZDC().Password,
+            ZmailSeleniumProperties.getStringProperty("server.port", "80"),
             false);
 
-      FormAddZimbraAccount accountForm = (FormAddZimbraAccount)app.zPageAddNewAccount.zDropDownListSelect(DROP_DOWN_OPTION.ZIMBRA);
+      FormAddZmailAccount accountForm = (FormAddZmailAccount)app.zPageAddNewAccount.zDropDownListSelect(DROP_DOWN_OPTION.ZIMBRA);
       accountForm.zFill(desktopAccountItem);
       accountForm.zPressButton(Button.B_VALIDATE_AND_SAVE);
 
@@ -200,7 +200,7 @@ public class CreateAccount extends AjaxCommonTest {
 
       String welcomeMessage = app.zPageLogin.zGetWelcomeMessage();
       ZAssert.assertStringContains(welcomeMessage,
-            "Zimbra Desktop allows you to access email while you are disconnected from the internet.",
+            "Zmail Desktop allows you to access email while you are disconnected from the internet.",
             "Verify welcome message is displayed");
 
       ZAssert.assertEquals(false,
@@ -208,17 +208,17 @@ public class CreateAccount extends AjaxCommonTest {
             "Added account message is displayed");
    }
 
-   @Test(description="Wrong email address when creating Zimbra Account", groups = { "functional" } )
-   public void wrongEmailAddressZimbraAccount() throws HarnessException {
+   @Test(description="Wrong email address when creating Zmail Account", groups = { "functional" } )
+   public void wrongEmailAddressZmailAccount() throws HarnessException {
 
-      String wrongEmailAddress = ZimbraSeleniumProperties.getUniqueString() + "@testdomain.com";
-      DesktopAccountItem desktopAccountItem = DesktopAccountItem.generateDesktopZimbraAccountItem(
+      String wrongEmailAddress = ZmailSeleniumProperties.getUniqueString() + "@testdomain.com";
+      DesktopAccountItem desktopAccountItem = DesktopAccountItem.generateDesktopZmailAccountItem(
             wrongEmailAddress,
-            ZimbraAccount.AccountZDC().Password,
-            ZimbraSeleniumProperties.getStringProperty("server.port", "80"),
+            ZmailAccount.AccountZDC().Password,
+            ZmailSeleniumProperties.getStringProperty("server.port", "80"),
             false);
 
-      FormAddZimbraAccount accountForm = (FormAddZimbraAccount)app.zPageAddNewAccount.zDropDownListSelect(DROP_DOWN_OPTION.ZIMBRA);
+      FormAddZmailAccount accountForm = (FormAddZmailAccount)app.zPageAddNewAccount.zDropDownListSelect(DROP_DOWN_OPTION.ZIMBRA);
       accountForm.zFill(desktopAccountItem);
       accountForm.zPressButton(Button.B_VALIDATE_AND_SAVE);
 
@@ -231,7 +231,7 @@ public class CreateAccount extends AjaxCommonTest {
 
       String welcomeMessage = app.zPageLogin.zGetWelcomeMessage();
       ZAssert.assertStringContains(welcomeMessage,
-            "Zimbra Desktop allows you to access email while you are disconnected from the internet.",
+            "Zmail Desktop allows you to access email while you are disconnected from the internet.",
             "Verify welcome message is displayed");
 
       ZAssert.assertEquals(false,
@@ -239,17 +239,17 @@ public class CreateAccount extends AjaxCommonTest {
             "Added account message is displayed");
    }
 
-   @Test(description="Wrong password when creating Zimbra Account", groups = { "functional" } )
-   public void wrongPasswordZimbraAccount() throws HarnessException {
+   @Test(description="Wrong password when creating Zmail Account", groups = { "functional" } )
+   public void wrongPasswordZmailAccount() throws HarnessException {
 
-      String wrongPassword = ZimbraSeleniumProperties.getUniqueString();
-      DesktopAccountItem desktopAccountItem = DesktopAccountItem.generateDesktopZimbraAccountItem(
-            ZimbraAccount.AccountZDC().EmailAddress,
+      String wrongPassword = ZmailSeleniumProperties.getUniqueString();
+      DesktopAccountItem desktopAccountItem = DesktopAccountItem.generateDesktopZmailAccountItem(
+            ZmailAccount.AccountZDC().EmailAddress,
             wrongPassword,
-            ZimbraSeleniumProperties.getStringProperty("server.port", "80"),
+            ZmailSeleniumProperties.getStringProperty("server.port", "80"),
             false);
 
-      FormAddZimbraAccount accountForm = (FormAddZimbraAccount)app.zPageAddNewAccount.zDropDownListSelect(DROP_DOWN_OPTION.ZIMBRA);
+      FormAddZmailAccount accountForm = (FormAddZmailAccount)app.zPageAddNewAccount.zDropDownListSelect(DROP_DOWN_OPTION.ZIMBRA);
       accountForm.zFill(desktopAccountItem);
       accountForm.zPressButton(Button.B_VALIDATE_AND_SAVE);
 
@@ -262,7 +262,7 @@ public class CreateAccount extends AjaxCommonTest {
 
       String welcomeMessage = app.zPageLogin.zGetWelcomeMessage();
       ZAssert.assertStringContains(welcomeMessage,
-            "Zimbra Desktop allows you to access email while you are disconnected from the internet.",
+            "Zmail Desktop allows you to access email while you are disconnected from the internet.",
             "Verify welcome message is displayed");
 
       ZAssert.assertEquals(false,
@@ -270,18 +270,18 @@ public class CreateAccount extends AjaxCommonTest {
             "Added account message is displayed");
    }
 
-   @Test(description="Wrong server when creating Zimbra Account", groups = { "functional" } )
-   public void wrongServerZimbraAccount() throws HarnessException {
+   @Test(description="Wrong server when creating Zmail Account", groups = { "functional" } )
+   public void wrongServerZmailAccount() throws HarnessException {
 
       String wrongServer = "1.1.1.1";
-      DesktopAccountItem desktopAccountItem = DesktopAccountItem.generateDesktopZimbraAccountItem(
-            ZimbraAccount.AccountZDC().EmailAddress,
-            ZimbraAccount.AccountZDC().Password,
-            ZimbraSeleniumProperties.getStringProperty("server.port", "80"),
+      DesktopAccountItem desktopAccountItem = DesktopAccountItem.generateDesktopZmailAccountItem(
+            ZmailAccount.AccountZDC().EmailAddress,
+            ZmailAccount.AccountZDC().Password,
+            ZmailSeleniumProperties.getStringProperty("server.port", "80"),
             wrongServer,
             false);
 
-      FormAddZimbraAccount accountForm = (FormAddZimbraAccount)app.zPageAddNewAccount.zDropDownListSelect(DROP_DOWN_OPTION.ZIMBRA);
+      FormAddZmailAccount accountForm = (FormAddZmailAccount)app.zPageAddNewAccount.zDropDownListSelect(DROP_DOWN_OPTION.ZIMBRA);
       accountForm.zFill(desktopAccountItem);
       accountForm.zPressButton(Button.B_VALIDATE_AND_SAVE);
 
@@ -295,7 +295,7 @@ public class CreateAccount extends AjaxCommonTest {
 
       String welcomeMessage = app.zPageLogin.zGetWelcomeMessage();
       ZAssert.assertStringContains(welcomeMessage,
-            "Zimbra Desktop allows you to access email while you are disconnected from the internet.",
+            "Zmail Desktop allows you to access email while you are disconnected from the internet.",
             "Verify welcome message is displayed");
 
       ZAssert.assertEquals(false,
@@ -303,16 +303,16 @@ public class CreateAccount extends AjaxCommonTest {
             "Added account message is displayed");
    }
 
-   @Test(description="Wrong Non-SSL port when creating Zimbra Account", groups = { "functional" })
-   public void wrongNonSSLPortZimbraAccount() throws HarnessException {
+   @Test(description="Wrong Non-SSL port when creating Zmail Account", groups = { "functional" })
+   public void wrongNonSSLPortZmailAccount() throws HarnessException {
       String nonSSLPort = "111";
-      DesktopAccountItem desktopAccountItem = DesktopAccountItem.generateDesktopZimbraAccountItem(
-            ZimbraAccount.AccountZDC().EmailAddress,
-            ZimbraAccount.AccountZDC().Password,
+      DesktopAccountItem desktopAccountItem = DesktopAccountItem.generateDesktopZmailAccountItem(
+            ZmailAccount.AccountZDC().EmailAddress,
+            ZmailAccount.AccountZDC().Password,
             nonSSLPort,
             false);
 
-      FormAddZimbraAccount accountForm = (FormAddZimbraAccount)app.zPageAddNewAccount.zDropDownListSelect(DROP_DOWN_OPTION.ZIMBRA);
+      FormAddZmailAccount accountForm = (FormAddZmailAccount)app.zPageAddNewAccount.zDropDownListSelect(DROP_DOWN_OPTION.ZIMBRA);
       accountForm.zFill(desktopAccountItem);
       accountForm.zPressButton(Button.B_VALIDATE_AND_SAVE);
 
@@ -326,7 +326,7 @@ public class CreateAccount extends AjaxCommonTest {
 
       String welcomeMessage = app.zPageLogin.zGetWelcomeMessage();
       ZAssert.assertStringContains(welcomeMessage,
-            "Zimbra Desktop allows you to access email while you are disconnected from the internet.",
+            "Zmail Desktop allows you to access email while you are disconnected from the internet.",
             "Verify welcome message is displayed");
 
       ZAssert.assertEquals(false,
@@ -334,16 +334,16 @@ public class CreateAccount extends AjaxCommonTest {
             "Added account message is displayed");
    }
 
-   @Test(description="Wrong SSL port when creating Zimbra Account", groups = { "functional" })
-   public void wrongSSLPortZimbraAccount() throws HarnessException {
+   @Test(description="Wrong SSL port when creating Zmail Account", groups = { "functional" })
+   public void wrongSSLPortZmailAccount() throws HarnessException {
       String sslPort = "111";
-      DesktopAccountItem desktopAccountItem = DesktopAccountItem.generateDesktopZimbraAccountItem(
-            ZimbraAccount.AccountZDC().EmailAddress,
-            ZimbraAccount.AccountZDC().Password,
+      DesktopAccountItem desktopAccountItem = DesktopAccountItem.generateDesktopZmailAccountItem(
+            ZmailAccount.AccountZDC().EmailAddress,
+            ZmailAccount.AccountZDC().Password,
             sslPort,
             true);
 
-      FormAddZimbraAccount accountForm = (FormAddZimbraAccount)app.zPageAddNewAccount.zDropDownListSelect(DROP_DOWN_OPTION.ZIMBRA);
+      FormAddZmailAccount accountForm = (FormAddZmailAccount)app.zPageAddNewAccount.zDropDownListSelect(DROP_DOWN_OPTION.ZIMBRA);
       accountForm.zFill(desktopAccountItem);
       accountForm.zPressButton(Button.B_VALIDATE_AND_SAVE);
 
@@ -357,7 +357,7 @@ public class CreateAccount extends AjaxCommonTest {
 
       String welcomeMessage = app.zPageLogin.zGetWelcomeMessage();
       ZAssert.assertStringContains(welcomeMessage,
-            "Zimbra Desktop allows you to access email while you are disconnected from the internet.",
+            "Zmail Desktop allows you to access email while you are disconnected from the internet.",
             "Verify welcome message is displayed");
 
       ZAssert.assertEquals(false,
@@ -365,14 +365,14 @@ public class CreateAccount extends AjaxCommonTest {
             "Added account message is displayed");
    }
 
-   @Test(description="Failure in attempting to add duplicated Zimbra accounts", groups = { "functional" })
-   public void addDuplicatedZimbraAccount() throws HarnessException {
-      // Adding the Zimbra account
-      DesktopAccountItem desktopAccountItem = app.zPageAddNewAccount.zAddZimbraAccountThruUI();
+   @Test(description="Failure in attempting to add duplicated Zmail accounts", groups = { "functional" })
+   public void addDuplicatedZmailAccount() throws HarnessException {
+      // Adding the Zmail account
+      DesktopAccountItem desktopAccountItem = app.zPageAddNewAccount.zAddZmailAccountThruUI();
 
-      // Trying to add the same Zimbra account
+      // Trying to add the same Zmail account
       app.zPageAddNewAccount.zNavigateTo();
-      FormAddZimbraAccount accountForm = (FormAddZimbraAccount)app.zPageAddNewAccount.zDropDownListSelect(
+      FormAddZmailAccount accountForm = (FormAddZmailAccount)app.zPageAddNewAccount.zDropDownListSelect(
             DROP_DOWN_OPTION.ZIMBRA);
       accountForm.zFill(desktopAccountItem);
       accountForm.zSubmit();
@@ -389,7 +389,7 @@ public class CreateAccount extends AjaxCommonTest {
       ZAssert.assertTrue(app.zPageLogin.sIsElementPresent(PageLogin.Locators.zDeleteButton),
             "Delete account link exists");
       ZAssert.assertTrue(app.zPageLogin.sIsElementPresent(PageLogin.Locators.zBtnLoginDesktop),
-            "Launch Zimbra Dekstop Button exists");
+            "Launch Zmail Dekstop Button exists");
    }
 
    // YAHOO ACCOUNT
@@ -401,7 +401,7 @@ public class CreateAccount extends AjaxCommonTest {
       String message = app.zPageLogin.zGetMessage();
       ZAssert.assertStringContains(message, "Account added: " + desktopAccountItem.accountName, "Verify Account added message");
 
-      app.zPageLogin.zLogin(new ZimbraAccount(desktopAccountItem.emailAddress,
+      app.zPageLogin.zLogin(new ZmailAccount(desktopAccountItem.emailAddress,
             desktopAccountItem.password));
       List<FolderItem> folders = app.zTreeMail.zListGetFolders();
       ZAssert.assertGreaterThan(folders.size(), 0, "Folder with the active account's email address is greater than 0.");
@@ -410,7 +410,7 @@ public class CreateAccount extends AjaxCommonTest {
    @Test(description="Wrong email address when creating Yahoo Account", groups = { "functional" })
    public void wrongEmailAddressYahooAccount() throws HarnessException {
 
-      String wrongEmailAddress = ZimbraSeleniumProperties.getUniqueString() + "@yahoo.com";
+      String wrongEmailAddress = ZmailSeleniumProperties.getUniqueString() + "@yahoo.com";
       DesktopAccountItem desktopAccountItem = DesktopAccountItem.generateDesktopYahooAccountItem(
             wrongEmailAddress, AjaxCommonTest.yahooPassword);
 
@@ -428,7 +428,7 @@ public class CreateAccount extends AjaxCommonTest {
 
       String welcomeMessage = app.zPageLogin.zGetWelcomeMessage();
       ZAssert.assertStringContains(welcomeMessage,
-            "Zimbra Desktop allows you to access email while you are disconnected from the internet.",
+            "Zmail Desktop allows you to access email while you are disconnected from the internet.",
             "Verify welcome message is displayed");
 
       ZAssert.assertEquals(false,
@@ -439,7 +439,7 @@ public class CreateAccount extends AjaxCommonTest {
    @Test(description="Wrong password when creating Yahoo Account", groups = { "functional" })
    public void wrongPasswordYahooAccount() throws HarnessException {
 
-      String wrongPassword = ZimbraSeleniumProperties.getUniqueString();
+      String wrongPassword = ZmailSeleniumProperties.getUniqueString();
       DesktopAccountItem desktopAccountItem = DesktopAccountItem.generateDesktopYahooAccountItem(
             AjaxCommonTest.yahooUserName, wrongPassword);
 
@@ -457,7 +457,7 @@ public class CreateAccount extends AjaxCommonTest {
 
       String welcomeMessage = app.zPageLogin.zGetWelcomeMessage();
       ZAssert.assertStringContains(welcomeMessage,
-            "Zimbra Desktop allows you to access email while you are disconnected from the internet.",
+            "Zmail Desktop allows you to access email while you are disconnected from the internet.",
             "Verify welcome message is displayed");
 
       ZAssert.assertEquals(false,
@@ -490,7 +490,7 @@ public class CreateAccount extends AjaxCommonTest {
       ZAssert.assertTrue(app.zPageLogin.sIsElementPresent(PageLogin.Locators.zDeleteButton),
             "Delete account link exists");
       ZAssert.assertTrue(app.zPageLogin.sIsElementPresent(PageLogin.Locators.zBtnLoginDesktop),
-            "Launch Zimbra Dekstop Button exists");
+            "Launch Zmail Dekstop Button exists");
    }
 
    // GMAIL ACCOUNT
@@ -502,7 +502,7 @@ public class CreateAccount extends AjaxCommonTest {
       String message = app.zPageLogin.zGetMessage();
       ZAssert.assertStringContains(message, "Account added: " + desktopAccountItem.accountName, "Verify Account added message");
 
-      app.zPageLogin.zLogin(new ZimbraAccount(desktopAccountItem.emailAddress,
+      app.zPageLogin.zLogin(new ZmailAccount(desktopAccountItem.emailAddress,
             desktopAccountItem.password));
       List<FolderItem> folders = app.zTreeMail.zListGetFolders();
       ZAssert.assertGreaterThan(folders.size(), 0, "Folder with the active account's email address is greater than 0.");
@@ -511,7 +511,7 @@ public class CreateAccount extends AjaxCommonTest {
    @Test(description="Wrong email address when creating Gmail Account", groups = { "functional" })
    public void wrongEmailAddressGmailAccount() throws HarnessException {
 
-      String wrongEmailAddress = ZimbraSeleniumProperties.getUniqueString() + "@gmail.com";
+      String wrongEmailAddress = ZmailSeleniumProperties.getUniqueString() + "@gmail.com";
       DesktopAccountItem desktopAccountItem = DesktopAccountItem.generateDesktopGmailAccountItem(
             wrongEmailAddress, AjaxCommonTest.gmailPassword);
 
@@ -529,7 +529,7 @@ public class CreateAccount extends AjaxCommonTest {
 
       String welcomeMessage = app.zPageLogin.zGetWelcomeMessage();
       ZAssert.assertStringContains(welcomeMessage,
-            "Zimbra Desktop allows you to access email while you are disconnected from the internet.",
+            "Zmail Desktop allows you to access email while you are disconnected from the internet.",
             "Verify welcome message is displayed");
 
       ZAssert.assertEquals(false,
@@ -540,7 +540,7 @@ public class CreateAccount extends AjaxCommonTest {
    @Test(description="Wrong password when creating Gmail Account", groups = { "functional" })
    public void wrongPasswordGmailAccount() throws HarnessException {
 
-      String wrongPassword = ZimbraSeleniumProperties.getUniqueString();
+      String wrongPassword = ZmailSeleniumProperties.getUniqueString();
       DesktopAccountItem desktopAccountItem = DesktopAccountItem.generateDesktopGmailAccountItem(
             AjaxCommonTest.gmailUserName, wrongPassword);
 
@@ -558,7 +558,7 @@ public class CreateAccount extends AjaxCommonTest {
 
       String welcomeMessage = app.zPageLogin.zGetWelcomeMessage();
       ZAssert.assertStringContains(welcomeMessage,
-            "Zimbra Desktop allows you to access email while you are disconnected from the internet.",
+            "Zmail Desktop allows you to access email while you are disconnected from the internet.",
             "Verify welcome message is displayed");
 
       ZAssert.assertEquals(false,
@@ -590,7 +590,7 @@ public class CreateAccount extends AjaxCommonTest {
       ZAssert.assertTrue(app.zPageLogin.sIsElementPresent(PageLogin.Locators.zDeleteButton),
             "Delete account link exists");
       ZAssert.assertTrue(app.zPageLogin.sIsElementPresent(PageLogin.Locators.zBtnLoginDesktop),
-            "Launch Zimbra Dekstop Button exists");
+            "Launch Zmail Dekstop Button exists");
    }
 
    // IMAP ACCOUNT
@@ -602,70 +602,70 @@ public class CreateAccount extends AjaxCommonTest {
       String message = app.zPageLogin.zGetMessage();
       ZAssert.assertStringContains(message, "Account added: " + desktopAccountItem.accountName, "Verify Account added message");
 
-      app.zPageLogin.zLogin(new ZimbraAccount(desktopAccountItem.emailAddress,
+      app.zPageLogin.zLogin(new ZmailAccount(desktopAccountItem.emailAddress,
             desktopAccountItem.password));
       List<FolderItem> folders = app.zTreeMail.zListGetFolders();
       ZAssert.assertGreaterThan(folders.size(), 0, "Folder with the active account's email address is greater than 0.");
    }
 
-   @Test(description="Add Zimbra IMAP (SSL) account to ZD client with Sending Mail set to SSL", groups = { "smoke" })
-   public void addZimbraImapSslSendingSslAccount() throws HarnessException {
+   @Test(description="Add Zmail IMAP (SSL) account to ZD client with Sending Mail set to SSL", groups = { "smoke" })
+   public void addZmailImapSslSendingSslAccount() throws HarnessException {
       Stafzmtlsctl stafzmtlsctl = new Stafzmtlsctl();
       stafzmtlsctl.setServerAccess(SERVER_ACCESS.BOTH);
       _sslIsModified = true;
 
-      DesktopAccountItem desktopAccountItem = app.zPageAddNewAccount.zAddZimbraImapAccountThruUI(ZimbraAccount.AccountZDC().EmailAddress,
-            ZimbraAccount.AccountZDC().Password,
-            ZimbraSeleniumProperties.getStringProperty("server.host", "localhost"),
+      DesktopAccountItem desktopAccountItem = app.zPageAddNewAccount.zAddZmailImapAccountThruUI(ZmailAccount.AccountZDC().EmailAddress,
+            ZmailAccount.AccountZDC().Password,
+            ZmailSeleniumProperties.getStringProperty("server.host", "localhost"),
             true,
             "465");
 
       String message = app.zPageLogin.zGetMessage();
       ZAssert.assertStringContains(message, "Account added: " + desktopAccountItem.accountName, "Verify Account added message");
 
-      app.zPageLogin.zLogin(new ZimbraAccount(desktopAccountItem.emailAddress,
+      app.zPageLogin.zLogin(new ZmailAccount(desktopAccountItem.emailAddress,
             desktopAccountItem.password));
       List<FolderItem> folders = app.zTreeMail.zListGetFolders();
       ZAssert.assertGreaterThan(folders.size(), 0, "Folder with the active account's email address is greater than 0.");
    }
 
-   @Test(description="Add Zimbra IMAP (SSL) account to ZD client with Sending Mail set to non SSL", groups = { "smoke-skip" })
-   public void addZimbraImapSslSendingNonSslAccount() throws HarnessException {
+   @Test(description="Add Zmail IMAP (SSL) account to ZD client with Sending Mail set to non SSL", groups = { "smoke-skip" })
+   public void addZmailImapSslSendingNonSslAccount() throws HarnessException {
       Stafzmtlsctl stafzmtlsctl = new Stafzmtlsctl();
       stafzmtlsctl.setServerAccess(SERVER_ACCESS.BOTH);
       _sslIsModified = true;
 
-      DesktopAccountItem desktopAccountItem = app.zPageAddNewAccount.zAddZimbraImapAccountThruUI(ZimbraAccount.AccountZDC().EmailAddress,
-            ZimbraAccount.AccountZDC().Password,
-            ZimbraSeleniumProperties.getStringProperty("server.host", "localhost"),
+      DesktopAccountItem desktopAccountItem = app.zPageAddNewAccount.zAddZmailImapAccountThruUI(ZmailAccount.AccountZDC().EmailAddress,
+            ZmailAccount.AccountZDC().Password,
+            ZmailSeleniumProperties.getStringProperty("server.host", "localhost"),
             false,
             "25");
 
       String message = app.zPageLogin.zGetMessage();
       ZAssert.assertStringContains(message, "Account added: " + desktopAccountItem.accountName, "Verify Account added message");
 
-      app.zPageLogin.zLogin(new ZimbraAccount(desktopAccountItem.emailAddress,
+      app.zPageLogin.zLogin(new ZmailAccount(desktopAccountItem.emailAddress,
             desktopAccountItem.password));
       List<FolderItem> folders = app.zTreeMail.zListGetFolders();
       ZAssert.assertGreaterThan(folders.size(), 0, "Folder with the active account's email address is greater than 0.");
    }
 
-   @Test(description="Failure in adding Zimbra IMAP account with Receiving Mail security set to None",
+   @Test(description="Failure in adding Zmail IMAP account with Receiving Mail security set to None",
          groups = { "functional" })
-   public void addZimbraImapNonSslAccount() throws HarnessException {
+   public void addZmailImapNonSslAccount() throws HarnessException {
 
       DesktopAccountItem desktopAccountItem = DesktopAccountItem.generateDesktopImapAccountItem(
-            ZimbraAccount.AccountZDC().EmailAddress,
-            ZimbraAccount.AccountZDC().EmailAddress,
-            ZimbraAccount.AccountZDC().Password,
-            ZimbraSeleniumProperties.getStringProperty("server.host", "localhost"),
+            ZmailAccount.AccountZDC().EmailAddress,
+            ZmailAccount.AccountZDC().EmailAddress,
+            ZmailAccount.AccountZDC().Password,
+            ZmailSeleniumProperties.getStringProperty("server.host", "localhost"),
             SECURITY_TYPE.NONE,
             null,
-            ZimbraSeleniumProperties.getStringProperty("server.host", "localhost"),
+            ZmailSeleniumProperties.getStringProperty("server.host", "localhost"),
             false,
             null,
-            ZimbraAccount.AccountZDC().EmailAddress,
-            ZimbraAccount.AccountZDC().Password);
+            ZmailAccount.AccountZDC().EmailAddress,
+            ZmailAccount.AccountZDC().Password);
 
       FormAddImapAccount accountForm = (FormAddImapAccount)app.
             zPageAddNewAccount.zDropDownListSelect(DROP_DOWN_OPTION.IMAP);
@@ -682,7 +682,7 @@ public class CreateAccount extends AjaxCommonTest {
 
       String welcomeMessage = app.zPageLogin.zGetWelcomeMessage();
       ZAssert.assertStringContains(welcomeMessage,
-            "Zimbra Desktop allows you to access email while you are disconnected from the internet.",
+            "Zmail Desktop allows you to access email while you are disconnected from the internet.",
             "Verify welcome message is displayed");
 
       ZAssert.assertEquals(false,
@@ -692,7 +692,7 @@ public class CreateAccount extends AjaxCommonTest {
 
    @Test(description="Wrong email address format (alphabet characters) when creating IMAP Account", groups = { "functional" } )
    public void wrongEmailAddressFormatImapAccount1() throws HarnessException {
-      String wrongEmailAddress = ZimbraSeleniumProperties.getUniqueString();
+      String wrongEmailAddress = ZmailSeleniumProperties.getUniqueString();
       DesktopAccountItem desktopAccountItem = DesktopAccountItem.generateDesktopImapAccountItem(
             wrongEmailAddress,
             AjaxCommonTest.gmailUserName,
@@ -719,7 +719,7 @@ public class CreateAccount extends AjaxCommonTest {
 
       String welcomeMessage = app.zPageLogin.zGetWelcomeMessage();
       ZAssert.assertStringContains(welcomeMessage,
-            "Zimbra Desktop allows you to access email while you are disconnected from the internet.",
+            "Zmail Desktop allows you to access email while you are disconnected from the internet.",
             "Verify welcome message is displayed");
 
       ZAssert.assertEquals(false,
@@ -729,7 +729,7 @@ public class CreateAccount extends AjaxCommonTest {
 
    @Test(description="Wrong email address format (alphabet characters and '@') when creating IMAP Account", groups = { "functional" } )
    public void wrongEmailAddressFormatImapAccount2() throws HarnessException {
-      String wrongEmailAddress = ZimbraSeleniumProperties.getUniqueString() + "@";
+      String wrongEmailAddress = ZmailSeleniumProperties.getUniqueString() + "@";
       DesktopAccountItem desktopAccountItem = DesktopAccountItem.generateDesktopImapAccountItem(
             wrongEmailAddress,
             AjaxCommonTest.gmailUserName,
@@ -756,7 +756,7 @@ public class CreateAccount extends AjaxCommonTest {
 
       String welcomeMessage = app.zPageLogin.zGetWelcomeMessage();
       ZAssert.assertStringContains(welcomeMessage,
-            "Zimbra Desktop allows you to access email while you are disconnected from the internet.",
+            "Zmail Desktop allows you to access email while you are disconnected from the internet.",
             "Verify welcome message is displayed");
 
       ZAssert.assertEquals(false,
@@ -793,7 +793,7 @@ public class CreateAccount extends AjaxCommonTest {
 
       String welcomeMessage = app.zPageLogin.zGetWelcomeMessage();
       ZAssert.assertStringContains(welcomeMessage,
-            "Zimbra Desktop allows you to access email while you are disconnected from the internet.",
+            "Zmail Desktop allows you to access email while you are disconnected from the internet.",
             "Verify welcome message is displayed");
 
       ZAssert.assertEquals(false,
@@ -830,7 +830,7 @@ public class CreateAccount extends AjaxCommonTest {
 
       String welcomeMessage = app.zPageLogin.zGetWelcomeMessage();
       ZAssert.assertStringContains(welcomeMessage,
-            "Zimbra Desktop allows you to access email while you are disconnected from the internet.",
+            "Zmail Desktop allows you to access email while you are disconnected from the internet.",
             "Verify welcome message is displayed");
 
       ZAssert.assertEquals(false,
@@ -867,7 +867,7 @@ public class CreateAccount extends AjaxCommonTest {
 
       String welcomeMessage = app.zPageLogin.zGetWelcomeMessage();
       ZAssert.assertStringContains(welcomeMessage,
-            "Zimbra Desktop allows you to access email while you are disconnected from the internet.",
+            "Zmail Desktop allows you to access email while you are disconnected from the internet.",
             "Verify welcome message is displayed");
 
       ZAssert.assertEquals(false,
@@ -904,7 +904,7 @@ public class CreateAccount extends AjaxCommonTest {
 
       String welcomeMessage = app.zPageLogin.zGetWelcomeMessage();
       ZAssert.assertStringContains(welcomeMessage,
-            "Zimbra Desktop allows you to access email while you are disconnected from the internet.",
+            "Zmail Desktop allows you to access email while you are disconnected from the internet.",
             "Verify welcome message is displayed");
 
       ZAssert.assertEquals(false,
@@ -914,7 +914,7 @@ public class CreateAccount extends AjaxCommonTest {
 
    @Test(description="Wrong receiving server when creating Gmail IMAP Account", groups = { "functional" })
    public void wrongReceivingServerGmailImapAccount() throws HarnessException {
-      String wrongReceivingServer = ZimbraSeleniumProperties.getUniqueString();
+      String wrongReceivingServer = ZmailSeleniumProperties.getUniqueString();
       DesktopAccountItem desktopAccountItem = DesktopAccountItem.generateDesktopImapAccountItem(
             gmailUserName,
             gmailUserName,
@@ -941,7 +941,7 @@ public class CreateAccount extends AjaxCommonTest {
 
       String welcomeMessage = app.zPageLogin.zGetWelcomeMessage();
       ZAssert.assertStringContains(welcomeMessage,
-            "Zimbra Desktop allows you to access email while you are disconnected from the internet.",
+            "Zmail Desktop allows you to access email while you are disconnected from the internet.",
             "Verify welcome message is displayed");
 
       ZAssert.assertEquals(false,
@@ -952,7 +952,7 @@ public class CreateAccount extends AjaxCommonTest {
    @Test(description="Wrong Receiving username when creating Gmail IMAP Account", groups = { "functional" })
    public void wrongReceivingUsernameGmailIMAPAccount() throws HarnessException {
 
-      String wrongUsername = ZimbraSeleniumProperties.getUniqueString();
+      String wrongUsername = ZmailSeleniumProperties.getUniqueString();
 
       DesktopAccountItem desktopImapAccountItem = DesktopAccountItem.generateDesktopImapAccountItem(
             gmailUserName,
@@ -983,7 +983,7 @@ public class CreateAccount extends AjaxCommonTest {
 
       String welcomeMessage = app.zPageLogin.zGetWelcomeMessage();
       ZAssert.assertStringContains(welcomeMessage,
-            "Zimbra Desktop allows you to access email while you are disconnected from the internet.",
+            "Zmail Desktop allows you to access email while you are disconnected from the internet.",
             "Verify welcome message is displayed");
 
       ZAssert.assertEquals(false,
@@ -994,7 +994,7 @@ public class CreateAccount extends AjaxCommonTest {
    @Test(description="Wrong Receiving password when creating Gmail IMAP Account", groups = { "functional" })
    public void wrongReceivingPasswordGmailIMAPAccount() throws HarnessException {
 
-      String wrongPassword = ZimbraSeleniumProperties.getUniqueString();
+      String wrongPassword = ZmailSeleniumProperties.getUniqueString();
 
       DesktopAccountItem desktopImapAccountItem = DesktopAccountItem.generateDesktopImapAccountItem(
             gmailUserName,
@@ -1025,7 +1025,7 @@ public class CreateAccount extends AjaxCommonTest {
 
       String welcomeMessage = app.zPageLogin.zGetWelcomeMessage();
       ZAssert.assertStringContains(welcomeMessage,
-            "Zimbra Desktop allows you to access email while you are disconnected from the internet.",
+            "Zmail Desktop allows you to access email while you are disconnected from the internet.",
             "Verify welcome message is displayed");
 
       ZAssert.assertEquals(false,
@@ -1036,7 +1036,7 @@ public class CreateAccount extends AjaxCommonTest {
    @Test(description="Wrong Sending username when creating Gmail IMAP Account", groups = { "functional" })
    public void wrongSendingUsernameGmailIMAPAccount() throws HarnessException {
 
-      String wrongUsername = ZimbraSeleniumProperties.getUniqueString();
+      String wrongUsername = ZmailSeleniumProperties.getUniqueString();
 
       DesktopAccountItem desktopImapAccountItem = DesktopAccountItem.generateDesktopImapAccountItem(
             gmailUserName,
@@ -1067,7 +1067,7 @@ public class CreateAccount extends AjaxCommonTest {
 
       String welcomeMessage = app.zPageLogin.zGetWelcomeMessage();
       ZAssert.assertStringContains(welcomeMessage,
-            "Zimbra Desktop allows you to access email while you are disconnected from the internet.",
+            "Zmail Desktop allows you to access email while you are disconnected from the internet.",
             "Verify welcome message is displayed");
 
       ZAssert.assertEquals(false,
@@ -1078,7 +1078,7 @@ public class CreateAccount extends AjaxCommonTest {
    @Test(description="Wrong Sending password when creating Gmail IMAP Account", groups = { "functional" })
    public void wrongSendingPasswordGmailIMAPAccount() throws HarnessException {
 
-      String wrongPassword = ZimbraSeleniumProperties.getUniqueString();
+      String wrongPassword = ZmailSeleniumProperties.getUniqueString();
 
       DesktopAccountItem desktopImapAccountItem = DesktopAccountItem.generateDesktopImapAccountItem(
             gmailUserName,
@@ -1109,7 +1109,7 @@ public class CreateAccount extends AjaxCommonTest {
 
       String welcomeMessage = app.zPageLogin.zGetWelcomeMessage();
       ZAssert.assertStringContains(welcomeMessage,
-            "Zimbra Desktop allows you to access email while you are disconnected from the internet.",
+            "Zmail Desktop allows you to access email while you are disconnected from the internet.",
             "Verify welcome message is displayed");
 
       ZAssert.assertEquals(false,
@@ -1117,17 +1117,17 @@ public class CreateAccount extends AjaxCommonTest {
             "Added account message is displayed");
    }
 
-   @Test(description="Failure in attempting to add duplicated Zimbra IMAP accounts", groups = { "functional" })
-   public void addDuplicatedZimbraImapAccount() throws HarnessException {
-      // Adding the Zimbra IMAP account
-      DesktopAccountItem desktopAccountItem = app.zPageAddNewAccount.zAddZimbraImapAccountThruUI(
-            ZimbraAccount.AccountZDC().EmailAddress,
-            ZimbraAccount.AccountZDC().Password,
-            ZimbraSeleniumProperties.getStringProperty("server.host", "localhost"),
+   @Test(description="Failure in attempting to add duplicated Zmail IMAP accounts", groups = { "functional" })
+   public void addDuplicatedZmailImapAccount() throws HarnessException {
+      // Adding the Zmail IMAP account
+      DesktopAccountItem desktopAccountItem = app.zPageAddNewAccount.zAddZmailImapAccountThruUI(
+            ZmailAccount.AccountZDC().EmailAddress,
+            ZmailAccount.AccountZDC().Password,
+            ZmailSeleniumProperties.getStringProperty("server.host", "localhost"),
             true,
             "465");
 
-      // Trying to add the same Zimbra IMAP account
+      // Trying to add the same Zmail IMAP account
       app.zPageAddNewAccount.zNavigateTo();
       FormAddImapAccount accountForm = (FormAddImapAccount)app.zPageAddNewAccount.zDropDownListSelect(
             DROP_DOWN_OPTION.IMAP);
@@ -1146,14 +1146,14 @@ public class CreateAccount extends AjaxCommonTest {
       ZAssert.assertTrue(app.zPageLogin.sIsElementPresent(PageLogin.Locators.zDeleteButton),
             "Delete account link exists");
       ZAssert.assertTrue(app.zPageLogin.sIsElementPresent(PageLogin.Locators.zBtnLoginDesktop),
-            "Launch Zimbra Dekstop Button exists");
+            "Launch Zmail Dekstop Button exists");
    }
 
-   @Test(description="Failure in attempting to add Zimbra IMAP account, where the same Zimbra account being used already exists",
+   @Test(description="Failure in attempting to add Zmail IMAP account, where the same Zmail account being used already exists",
          groups = { "functional" })
-   public void addImapAccountWithPreExistingZimbraAccount() throws HarnessException {
-      // Adding the Zimbra account
-      DesktopAccountItem desktopAccountItem = app.zPageAddNewAccount.zAddZimbraAccountThruUI();
+   public void addImapAccountWithPreExistingZmailAccount() throws HarnessException {
+      // Adding the Zmail account
+      DesktopAccountItem desktopAccountItem = app.zPageAddNewAccount.zAddZmailAccountThruUI();
 
       DesktopAccountItem desktopImapAccountItem = DesktopAccountItem.generateDesktopImapAccountItem(
             desktopAccountItem.emailAddress,
@@ -1168,7 +1168,7 @@ public class CreateAccount extends AjaxCommonTest {
             desktopAccountItem.emailAddress,
             desktopAccountItem.password);
 
-      // Trying to add the same Zimbra IMAP account
+      // Trying to add the same Zmail IMAP account
       app.zPageAddNewAccount.zNavigateTo();
       FormAddImapAccount accountForm = (FormAddImapAccount)app.zPageAddNewAccount.zDropDownListSelect(
             DROP_DOWN_OPTION.IMAP);
@@ -1187,7 +1187,7 @@ public class CreateAccount extends AjaxCommonTest {
       ZAssert.assertTrue(app.zPageLogin.sIsElementPresent(PageLogin.Locators.zDeleteButton),
             "Delete account link exists");
       ZAssert.assertTrue(app.zPageLogin.sIsElementPresent(PageLogin.Locators.zBtnLoginDesktop),
-            "Launch Zimbra Dekstop Button exists");
+            "Launch Zmail Dekstop Button exists");
    }
 
    @Test(description="Failure in attempting to add Gmail IMAP account, where the same Gmail account being used already exists",
@@ -1228,68 +1228,68 @@ public class CreateAccount extends AjaxCommonTest {
       ZAssert.assertTrue(app.zPageLogin.sIsElementPresent(PageLogin.Locators.zDeleteButton),
             "Delete account link exists");
       ZAssert.assertTrue(app.zPageLogin.sIsElementPresent(PageLogin.Locators.zBtnLoginDesktop),
-            "Launch Zimbra Dekstop Button exists");
+            "Launch Zmail Dekstop Button exists");
    }
 
    // POP ACCOUNT
-   @Test(description="Add Zimbra POP (SSL) account to ZD client with Sending Mail set to SSL", groups = { "smoke" })
-   public void addZimbraPopSslSendingSslAccount() throws HarnessException {
+   @Test(description="Add Zmail POP (SSL) account to ZD client with Sending Mail set to SSL", groups = { "smoke" })
+   public void addZmailPopSslSendingSslAccount() throws HarnessException {
       Stafzmtlsctl stafzmtlsctl = new Stafzmtlsctl();
       stafzmtlsctl.setServerAccess(SERVER_ACCESS.BOTH);
       _sslIsModified = true;
 
-      DesktopAccountItem desktopAccountItem = app.zPageAddNewAccount.zAddZimbraPopAccountThruUI(ZimbraAccount.AccountZDC().EmailAddress,
-            ZimbraAccount.AccountZDC().Password,
-            ZimbraSeleniumProperties.getStringProperty("server.host", "localhost"),
+      DesktopAccountItem desktopAccountItem = app.zPageAddNewAccount.zAddZmailPopAccountThruUI(ZmailAccount.AccountZDC().EmailAddress,
+            ZmailAccount.AccountZDC().Password,
+            ZmailSeleniumProperties.getStringProperty("server.host", "localhost"),
             true,
             "465");
 
       String message = app.zPageLogin.zGetMessage();
       ZAssert.assertStringContains(message, "Account added: " + desktopAccountItem.accountName, "Verify Account added message");
 
-      app.zPageLogin.zLogin(new ZimbraAccount(desktopAccountItem.emailAddress,
+      app.zPageLogin.zLogin(new ZmailAccount(desktopAccountItem.emailAddress,
             desktopAccountItem.password));
       List<FolderItem> folders = app.zTreeMail.zListGetFolders();
       ZAssert.assertGreaterThan(folders.size(), 0, "Folder with the active account's email address is greater than 0.");
    }
 
-   @Test(description="Add Zimbra POP (SSL) account to ZD client with Sending Mail set to non SSL", groups = { "smoke-skip" })
-   public void addZimbraPopSslSendingNonSslAccount() throws HarnessException {
+   @Test(description="Add Zmail POP (SSL) account to ZD client with Sending Mail set to non SSL", groups = { "smoke-skip" })
+   public void addZmailPopSslSendingNonSslAccount() throws HarnessException {
       Stafzmtlsctl stafzmtlsctl = new Stafzmtlsctl();
       stafzmtlsctl.setServerAccess(SERVER_ACCESS.BOTH);
       _sslIsModified = true;
 
-      DesktopAccountItem desktopAccountItem = app.zPageAddNewAccount.zAddZimbraPopAccountThruUI(ZimbraAccount.AccountZDC().EmailAddress,
-            ZimbraAccount.AccountZDC().Password,
-            ZimbraSeleniumProperties.getStringProperty("server.host", "localhost"),
+      DesktopAccountItem desktopAccountItem = app.zPageAddNewAccount.zAddZmailPopAccountThruUI(ZmailAccount.AccountZDC().EmailAddress,
+            ZmailAccount.AccountZDC().Password,
+            ZmailSeleniumProperties.getStringProperty("server.host", "localhost"),
             false,
             "25");
 
       String message = app.zPageLogin.zGetMessage();
       ZAssert.assertStringContains(message, "Account added: " + desktopAccountItem.accountName, "Verify Account added message");
 
-      app.zPageLogin.zLogin(new ZimbraAccount(desktopAccountItem.emailAddress,
+      app.zPageLogin.zLogin(new ZmailAccount(desktopAccountItem.emailAddress,
             desktopAccountItem.password));
       List<FolderItem> folders = app.zTreeMail.zListGetFolders();
       ZAssert.assertGreaterThan(folders.size(), 0, "Folder with the active account's email address is greater than 0.");
    }
 
-   @Test(description="Failure in adding Zimbra POP account with Receiving Mail security set to None",
+   @Test(description="Failure in adding Zmail POP account with Receiving Mail security set to None",
          groups = { "functional" })
-   public void addZimbraPopNonSslAccount() throws HarnessException {
+   public void addZmailPopNonSslAccount() throws HarnessException {
 
       DesktopAccountItem desktopAccountItem = DesktopAccountItem.generateDesktopPopAccountItem(
-            ZimbraAccount.AccountZDC().EmailAddress,
-            ZimbraAccount.AccountZDC().EmailAddress,
-            ZimbraAccount.AccountZDC().Password,
-            ZimbraSeleniumProperties.getStringProperty("server.host", "localhost"),
+            ZmailAccount.AccountZDC().EmailAddress,
+            ZmailAccount.AccountZDC().EmailAddress,
+            ZmailAccount.AccountZDC().Password,
+            ZmailSeleniumProperties.getStringProperty("server.host", "localhost"),
             SECURITY_TYPE.NONE,
             null,
-            ZimbraSeleniumProperties.getStringProperty("server.host", "localhost"),
+            ZmailSeleniumProperties.getStringProperty("server.host", "localhost"),
             false,
             null,
-            ZimbraAccount.AccountZDC().EmailAddress,
-            ZimbraAccount.AccountZDC().Password);
+            ZmailAccount.AccountZDC().EmailAddress,
+            ZmailAccount.AccountZDC().Password);
 
       FormAddPopAccount accountForm = (FormAddPopAccount)app.
             zPageAddNewAccount.zDropDownListSelect(DROP_DOWN_OPTION.POP);
@@ -1306,7 +1306,7 @@ public class CreateAccount extends AjaxCommonTest {
 
       String welcomeMessage = app.zPageLogin.zGetWelcomeMessage();
       ZAssert.assertStringContains(welcomeMessage,
-            "Zimbra Desktop allows you to access email while you are disconnected from the internet.",
+            "Zmail Desktop allows you to access email while you are disconnected from the internet.",
             "Verify welcome message is displayed");
 
       ZAssert.assertEquals(false,
@@ -1322,7 +1322,7 @@ public class CreateAccount extends AjaxCommonTest {
       String message = app.zPageLogin.zGetMessage();
       ZAssert.assertStringContains(message, "Account added: " + desktopAccountItem.accountName, "Verify Account added message");
 
-      app.zPageLogin.zLogin(new ZimbraAccount(desktopAccountItem.emailAddress,
+      app.zPageLogin.zLogin(new ZmailAccount(desktopAccountItem.emailAddress,
             desktopAccountItem.password));
       List<FolderItem> folders = app.zTreeMail.zListGetFolders();
       ZAssert.assertGreaterThan(folders.size(), 0, "Folder with the active account's email address is greater than 0.");
@@ -1330,7 +1330,7 @@ public class CreateAccount extends AjaxCommonTest {
 
    @Test(description="Wrong email address format (alphabet characters) when creating POP Account", groups = { "functional" } )
    public void wrongEmailAddressFormatPopAccount1() throws HarnessException {
-      String wrongEmailAddress = ZimbraSeleniumProperties.getUniqueString();
+      String wrongEmailAddress = ZmailSeleniumProperties.getUniqueString();
       DesktopAccountItem desktopAccountItem = DesktopAccountItem.generateDesktopImapAccountItem(
             wrongEmailAddress,
             AjaxCommonTest.hotmailUserName,
@@ -1357,7 +1357,7 @@ public class CreateAccount extends AjaxCommonTest {
 
       String welcomeMessage = app.zPageLogin.zGetWelcomeMessage();
       ZAssert.assertStringContains(welcomeMessage,
-            "Zimbra Desktop allows you to access email while you are disconnected from the internet.",
+            "Zmail Desktop allows you to access email while you are disconnected from the internet.",
             "Verify welcome message is displayed");
 
       ZAssert.assertEquals(false,
@@ -1367,7 +1367,7 @@ public class CreateAccount extends AjaxCommonTest {
 
    @Test(description="Wrong email address format (alphabet characters and '@') when creating POP Account", groups = { "functional" } )
    public void wrongEmailAddressFormatPopAccount2() throws HarnessException {
-      String wrongEmailAddress = ZimbraSeleniumProperties.getUniqueString() + "@";
+      String wrongEmailAddress = ZmailSeleniumProperties.getUniqueString() + "@";
       DesktopAccountItem desktopAccountItem = DesktopAccountItem.generateDesktopImapAccountItem(
             wrongEmailAddress,
             AjaxCommonTest.hotmailUserName,
@@ -1394,7 +1394,7 @@ public class CreateAccount extends AjaxCommonTest {
 
       String welcomeMessage = app.zPageLogin.zGetWelcomeMessage();
       ZAssert.assertStringContains(welcomeMessage,
-            "Zimbra Desktop allows you to access email while you are disconnected from the internet.",
+            "Zmail Desktop allows you to access email while you are disconnected from the internet.",
             "Verify welcome message is displayed");
 
       ZAssert.assertEquals(false,
@@ -1402,17 +1402,17 @@ public class CreateAccount extends AjaxCommonTest {
             "Added account message is displayed");
    }
 
-   @Test(description="Failure in attempting to add duplicated Zimbra POP accounts", groups = { "functional" })
-   public void addDuplicatedZimbraPopAccount() throws HarnessException {
-      // Adding the Zimbra POP account
-      DesktopAccountItem desktopAccountItem = app.zPageAddNewAccount.zAddZimbraPopAccountThruUI(
-            ZimbraAccount.AccountZDC().EmailAddress,
-            ZimbraAccount.AccountZDC().Password,
-            ZimbraSeleniumProperties.getStringProperty("server.host", "localhost"),
+   @Test(description="Failure in attempting to add duplicated Zmail POP accounts", groups = { "functional" })
+   public void addDuplicatedZmailPopAccount() throws HarnessException {
+      // Adding the Zmail POP account
+      DesktopAccountItem desktopAccountItem = app.zPageAddNewAccount.zAddZmailPopAccountThruUI(
+            ZmailAccount.AccountZDC().EmailAddress,
+            ZmailAccount.AccountZDC().Password,
+            ZmailSeleniumProperties.getStringProperty("server.host", "localhost"),
             true,
             "465");
 
-      // Trying to add the same Zimbra POP account
+      // Trying to add the same Zmail POP account
       app.zPageAddNewAccount.zNavigateTo();
       FormAddPopAccount accountForm = (FormAddPopAccount)app.zPageAddNewAccount.zDropDownListSelect(
             DROP_DOWN_OPTION.POP);
@@ -1431,7 +1431,7 @@ public class CreateAccount extends AjaxCommonTest {
       ZAssert.assertTrue(app.zPageLogin.sIsElementPresent(PageLogin.Locators.zDeleteButton),
             "Delete account link exists");
       ZAssert.assertTrue(app.zPageLogin.sIsElementPresent(PageLogin.Locators.zBtnLoginDesktop),
-            "Launch Zimbra Dekstop Button exists");
+            "Launch Zmail Dekstop Button exists");
    }
 
    @Test(description="Failure in attempting to add Hotmail POP account, where the same Hotmail POP account already exists",
@@ -1472,14 +1472,14 @@ public class CreateAccount extends AjaxCommonTest {
       ZAssert.assertTrue(app.zPageLogin.sIsElementPresent(PageLogin.Locators.zDeleteButton),
             "Delete account link exists");
       ZAssert.assertTrue(app.zPageLogin.sIsElementPresent(PageLogin.Locators.zBtnLoginDesktop),
-            "Launch Zimbra Dekstop Button exists");
+            "Launch Zmail Dekstop Button exists");
    }
 
-   @Test(description="Failure in attempting to add Zimbra POP account, where the same Zimbra account being used already exists",
+   @Test(description="Failure in attempting to add Zmail POP account, where the same Zmail account being used already exists",
          groups = { "functional" })
-   public void addPopAccountWithPreExistingZimbraAccount() throws HarnessException {
-      // Adding the Zimbra account
-      DesktopAccountItem desktopAccountItem = app.zPageAddNewAccount.zAddZimbraAccountThruUI();
+   public void addPopAccountWithPreExistingZmailAccount() throws HarnessException {
+      // Adding the Zmail account
+      DesktopAccountItem desktopAccountItem = app.zPageAddNewAccount.zAddZmailAccountThruUI();
 
       DesktopAccountItem desktopPopAccountItem = DesktopAccountItem.generateDesktopPopAccountItem(
             desktopAccountItem.emailAddress,
@@ -1494,7 +1494,7 @@ public class CreateAccount extends AjaxCommonTest {
             desktopAccountItem.emailAddress,
             desktopAccountItem.password);
 
-      // Trying to add the same Zimbra POP account
+      // Trying to add the same Zmail POP account
       app.zPageAddNewAccount.zNavigateTo();
       FormAddPopAccount accountForm = (FormAddPopAccount)app.zPageAddNewAccount.zDropDownListSelect(
             DROP_DOWN_OPTION.POP);
@@ -1513,12 +1513,12 @@ public class CreateAccount extends AjaxCommonTest {
       ZAssert.assertTrue(app.zPageLogin.sIsElementPresent(PageLogin.Locators.zDeleteButton),
             "Delete account link exists");
       ZAssert.assertTrue(app.zPageLogin.sIsElementPresent(PageLogin.Locators.zBtnLoginDesktop),
-            "Launch Zimbra Dekstop Button exists");
+            "Launch Zmail Dekstop Button exists");
    }
 
    @Test(description="Wrong receiving server name when creating Hotmail POP Account", groups = { "functional" } )
    public void wrongReceivingServerHotmailPopAccount() throws HarnessException {
-      String wrongReceivingServer = ZimbraSeleniumProperties.getUniqueString();
+      String wrongReceivingServer = ZmailSeleniumProperties.getUniqueString();
       DesktopAccountItem desktopAccountItem = DesktopAccountItem.generateDesktopImapAccountItem(
             hotmailUserName,
             hotmailUserName,
@@ -1545,7 +1545,7 @@ public class CreateAccount extends AjaxCommonTest {
 
       String welcomeMessage = app.zPageLogin.zGetWelcomeMessage();
       ZAssert.assertStringContains(welcomeMessage,
-            "Zimbra Desktop allows you to access email while you are disconnected from the internet.",
+            "Zmail Desktop allows you to access email while you are disconnected from the internet.",
             "Verify welcome message is displayed");
 
       ZAssert.assertEquals(false,
@@ -1582,7 +1582,7 @@ public class CreateAccount extends AjaxCommonTest {
 
       String welcomeMessage = app.zPageLogin.zGetWelcomeMessage();
       ZAssert.assertStringContains(welcomeMessage,
-            "Zimbra Desktop allows you to access email while you are disconnected from the internet.",
+            "Zmail Desktop allows you to access email while you are disconnected from the internet.",
             "Verify welcome message is displayed");
 
       ZAssert.assertEquals(false,
@@ -1619,7 +1619,7 @@ public class CreateAccount extends AjaxCommonTest {
 
       String welcomeMessage = app.zPageLogin.zGetWelcomeMessage();
       ZAssert.assertStringContains(welcomeMessage,
-            "Zimbra Desktop allows you to access email while you are disconnected from the internet.",
+            "Zmail Desktop allows you to access email while you are disconnected from the internet.",
             "Verify welcome message is displayed");
 
       ZAssert.assertEquals(false,
@@ -1656,7 +1656,7 @@ public class CreateAccount extends AjaxCommonTest {
 
       String welcomeMessage = app.zPageLogin.zGetWelcomeMessage();
       ZAssert.assertStringContains(welcomeMessage,
-            "Zimbra Desktop allows you to access email while you are disconnected from the internet.",
+            "Zmail Desktop allows you to access email while you are disconnected from the internet.",
             "Verify welcome message is displayed");
 
       ZAssert.assertEquals(false,
@@ -1693,7 +1693,7 @@ public class CreateAccount extends AjaxCommonTest {
 
       String welcomeMessage = app.zPageLogin.zGetWelcomeMessage();
       ZAssert.assertStringContains(welcomeMessage,
-            "Zimbra Desktop allows you to access email while you are disconnected from the internet.",
+            "Zmail Desktop allows you to access email while you are disconnected from the internet.",
             "Verify welcome message is displayed");
 
       ZAssert.assertEquals(false,
@@ -1708,7 +1708,7 @@ public class CreateAccount extends AjaxCommonTest {
          stafzmtlsctl.setServerAccess(SERVER_ACCESS.BOTH);
       }
 
-      ZimbraAccount.ResetAccountZDC();
+      ZmailAccount.ResetAccountZDC();
       app.zPageLogin.zNavigateTo();
    }
 }

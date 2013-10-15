@@ -26,7 +26,7 @@ ZaAccountViewMail = function () {}
 ZaAccountViewMail.initExtraToolbarButton = function () {
 
     this._toolbarOperations[ZaOperation.VIEW_MAIL] = new ZaOperation(ZaOperation.VIEW_MAIL,
-        com_zimbra_octopus.ACTBB_WebAccess, com_zimbra_octopus.ACTBB_WebAccess_tt, "ReadMailbox", "ReadMailbox",
+        org_zmail_octopus.ACTBB_WebAccess, org_zmail_octopus.ACTBB_WebAccess_tt, "ReadMailbox", "ReadMailbox",
         new AjxListener(this, ZaAccountViewMail._viewMailListener));
 
     if (!this._toolbarOrder) {
@@ -45,7 +45,7 @@ if (ZaController.initToolbarMethods["ZaSearchListController"]) {
 
 ZaAccountViewMail.initExtraPopupButton = function () {
     this._popupOperations[ZaOperation.VIEW_MAIL] = new ZaOperation(ZaOperation.VIEW_MAIL,
-        com_zimbra_octopus.ACTBB_WebAccess, com_zimbra_octopus.ACTBB_WebAccess_tt, "ReadMailbox", "ReadMailbox",
+        org_zmail_octopus.ACTBB_WebAccess, org_zmail_octopus.ACTBB_WebAccess_tt, "ReadMailbox", "ReadMailbox",
         new AjxListener(this, ZaAccountViewMail._viewMailListener));
     if (this._popupOrder) {
         this._popupOrder.push(ZaOperation.VIEW_MAIL);
@@ -147,7 +147,7 @@ function () {
             }
             if (item.type == ZaItem.ACCOUNT) {
 				var enable = false;
-				if(ZaZimbraAdmin.currentAdminAccount.attrs[ZaAccount.A_zimbraIsAdminAccount] == 'TRUE') {
+				if(ZaZmailAdmin.currentAdminAccount.attrs[ZaAccount.A_zmailIsAdminAccount] == 'TRUE') {
 					enable = true;
 				} else if (AjxUtil.isEmpty(item.rights)) {
 					item.loadEffectiveRights("id", item.id, false);
@@ -166,7 +166,7 @@ function () {
 					item.targetObj = item.getAliasTargetObj() ;
 
 				var enable = false;
-				if (ZaZimbraAdmin.currentAdminAccount.attrs[ZaAccount.A_zimbraIsAdminAccount] == 'TRUE') {
+				if (ZaZmailAdmin.currentAdminAccount.attrs[ZaAccount.A_zmailIsAdminAccount] == 'TRUE') {
 					enable = true;
 				} else if (AjxUtil.isEmpty(item.targetObj.rights)) {
 					item.targetObj.loadEffectiveRights("id", item.id, false);
@@ -185,7 +185,7 @@ function () {
 					item.targetObj = item.getAliasTargetObj() ;
 
 				var enable = false;
-				if (ZaZimbraAdmin.currentAdminAccount.attrs[ZaAccount.A_zimbraIsAdminAccount] == 'TRUE') {
+				if (ZaZmailAdmin.currentAdminAccount.attrs[ZaAccount.A_zmailIsAdminAccount] == 'TRUE') {
 					enable = true;
 				} else if (AjxUtil.isEmpty(item.targetObj.rights)) {
 					item.targetObj.loadEffectiveRights("id", item.id, false);
@@ -201,7 +201,7 @@ function () {
                 }
             } else if(item.type == ZaItem.RESOURCE) {
 				var enable = false;
-				if(ZaZimbraAdmin.currentAdminAccount.attrs[ZaAccount.A_zimbraIsAdminAccount] == 'TRUE') {
+				if(ZaZmailAdmin.currentAdminAccount.attrs[ZaAccount.A_zmailIsAdminAccount] == 'TRUE') {
 					enable = true;
 				} else if (AjxUtil.isEmpty(item.rights)) {
 					item.loadEffectiveRights("id", item.id, false);

@@ -14,12 +14,12 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.html.tests.login;
+package org.zmail.qa.selenium.projects.html.tests.login;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.html.core.HtmlCommonTest;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.html.core.HtmlCommonTest;
 
 
 
@@ -39,7 +39,7 @@ public class BasicLogin extends HtmlCommonTest {
 	public void BasicLogin01() throws HarnessException {
 		
 		// Login
-		app.zPageLogin.zLogin(ZimbraAccount.AccountHTML());
+		app.zPageLogin.zLogin(ZmailAccount.AccountHTML());
 		
 		// Verify main page becomes active
 		ZAssert.assertTrue(app.zPageMain.zIsActive(), "Verify that the account is logged in");

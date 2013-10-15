@@ -14,11 +14,11 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_example_taboverview"
+<zimlet name="org_zmail_example_taboverview"
         version="1.0"
         description="Creates a tab application">
-	<include>com_zimbra_example_taboverview.js</include>
-	<handlerObject>com_zimbra_example_taboverview_HandlerObject</handlerObject>
+	<include>org_zmail_example_taboverview.js</include>
+	<handlerObject>org_zmail_example_taboverview_HandlerObject</handlerObject>
 	<zimletPanelItem label="Tab Overview">
 	</zimletPanelItem>
 </zimlet>

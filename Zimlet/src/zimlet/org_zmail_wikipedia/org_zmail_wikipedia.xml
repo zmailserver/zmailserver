@@ -14,13 +14,13 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_wikipedia"
+<zimlet name="org_zmail_wikipedia"
         version="1.0"
         label="${msg.label}"
         description="${msg.description}">
     <include>wiki.js</include>
     <includeCSS>wikipedia.css</includeCSS>
-    <handlerObject>com_zimbra_wikipedia_HandlerObject</handlerObject>
+    <handlerObject>org_zmail_wikipedia_HandlerObject</handlerObject>
     <contentObject type="wikipedia">
         <matchOn>
             <regex attrs="ig">\[Wikipedia: ([a-zA-Z 0-9_-]+)\]</regex>

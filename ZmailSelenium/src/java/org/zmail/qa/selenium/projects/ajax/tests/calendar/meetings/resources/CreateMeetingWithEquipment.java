@@ -14,18 +14,18 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.calendar.meetings.resources;
+package org.zmail.qa.selenium.projects.ajax.tests.calendar.meetings.resources;
 
 import java.util.Calendar;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.items.AppointmentItem;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.CalendarWorkWeekTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.calendar.FormApptNew;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.items.AppointmentItem;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.CalendarWorkWeekTest;
+import org.zmail.qa.selenium.projects.ajax.ui.calendar.FormApptNew;
 
 public class CreateMeetingWithEquipment extends CalendarWorkWeekTest {
 
@@ -46,13 +46,13 @@ public class CreateMeetingWithEquipment extends CalendarWorkWeekTest {
 		// Create appointment data
 		AppointmentItem appt = new AppointmentItem();
 		Calendar now = this.calendarWeekDayUTC;
-		ZimbraResource equipment1 = new ZimbraResource(ZimbraResource.Type.EQUIPMENT);
+		ZmailResource equipment1 = new ZmailResource(ZmailResource.Type.EQUIPMENT);
 		
 		String apptSubject, apptAttendee1, apptEquipment1, apptContent;
-		apptSubject = ZimbraSeleniumProperties.getUniqueString();
-		apptAttendee1 = ZimbraAccount.AccountA().EmailAddress;
+		apptSubject = ZmailSeleniumProperties.getUniqueString();
+		apptAttendee1 = ZmailAccount.AccountA().EmailAddress;
 		apptEquipment1 = equipment1.EmailAddress;
-		apptContent = ZimbraSeleniumProperties.getUniqueString();
+		apptContent = ZmailSeleniumProperties.getUniqueString();
 		
 		appt.setSubject(apptSubject);
 		appt.setAttendees(apptAttendee1);
@@ -77,7 +77,7 @@ public class CreateMeetingWithEquipment extends CalendarWorkWeekTest {
 		for (int i = 0; i < 10; i++) {
 			
 			app.zGetActiveAccount().soapSend(
-						"<SearchRequest xmlns='urn:zimbraMail' types='message'>"
+						"<SearchRequest xmlns='urn:zmailMail' types='message'>"
 					+		"<query>in:inbox subject:(aa"+ apptSubject +")</query>"
 					+	"</SearchRequest>");
 			

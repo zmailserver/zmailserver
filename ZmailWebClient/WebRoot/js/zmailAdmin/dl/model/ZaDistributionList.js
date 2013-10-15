@@ -20,15 +20,15 @@ ZaDistributionList = function(id, name, memberList, description, notes) {
     this._init();
 
     this.attrs = new Object();
-	this.attrs[ZaAccount.A_zimbraMailAlias] = [];
+	this.attrs[ZaAccount.A_zmailMailAlias] = [];
 	this.id = (id != null)? id: null;
 	this.type = ZaItem.DL;
 	this.name = (name != null) ? name: null;
 	this._selfMember = new ZaDistributionListMember(this.name);
 	if (description != null) this.attrs.description = description;
-	if (notes != null) this.attrs.zimbraNotes = notes;
+	if (notes != null) this.attrs.zmailNotes = notes;
 
-    this.attrs[ZaDistributionList.A_zimbraIsACLGroup] = "TRUE";
+    this.attrs[ZaDistributionList.A_zmailIsACLGroup] = "TRUE";
     this[ZaDistributionList.A2_dlType] = ZaDistributionList.STATIC_DL_TYPE;
 	this[ZaDistributionList.A2_numMembers] = 0;
 	this[ZaDistributionList.A2_memberList] = (memberList != null) ? memberList: new Array();
@@ -55,13 +55,13 @@ ZaDistributionList.ID = "ZDLID";
 ZaDistributionList.MEMBER_QUERY_LIMIT = 25;
 ZaDistributionList.MEMBER_LIST_PAGE_SIZE = 15;
 ZaDistributionList.MEMBER_POOL_PAGE_SIZE = 15;
-ZaDistributionList.A_zimbraGroupId = "zimbraGroupId";
-ZaDistributionList.A_zimbraCreateTimestamp = "zimbraCreateTimestamp";
+ZaDistributionList.A_zmailGroupId = "zmailGroupId";
+ZaDistributionList.A_zmailCreateTimestamp = "zmailCreateTimestamp";
 
-ZaDistributionList.A_mailStatus = "zimbraMailStatus";
+ZaDistributionList.A_mailStatus = "zmailMailStatus";
 ZaDistributionList.A2_dlType = "dlType";
 ZaDistributionList.A_memberOfURL = "memberURL";
-ZaDistributionList.A_zimbraIsACLGroup = "zimbraIsACLGroup";
+ZaDistributionList.A_zmailIsACLGroup = "zmailIsACLGroup";
 ZaDistributionList.A2_members = "members";
 ZaDistributionList.A2_allMemberHash = "allMemberHash";
 ZaDistributionList.A2_allMemberPages = "allMemberPages";
@@ -89,18 +89,18 @@ ZaDistributionList.A2_directMemberList = "directMemberList";
 ZaDistributionList.A2_indirectMemberList = "indirectMemberList";
 ZaDistributionList.A2_nonMemberList = "nonMemberList";
 ZaDistributionList.A2_alias_selection_cache = "alias_selection_cache";
-ZaDistributionList.A_isAdminGroup = "zimbraIsAdminGroup" ;
+ZaDistributionList.A_isAdminGroup = "zmailIsAdminGroup" ;
 
-ZaDistributionList.A_zimbraPrefReplyToAddress = "zimbraPrefReplyToAddress";
-ZaDistributionList.A_zimbraPrefReplyToDisplay = "zimbraPrefReplyToDisplay";
-ZaDistributionList.A_zimbraPrefReplyToEnabled = "zimbraPrefReplyToEnabled";
+ZaDistributionList.A_zmailPrefReplyToAddress = "zmailPrefReplyToAddress";
+ZaDistributionList.A_zmailPrefReplyToDisplay = "zmailPrefReplyToDisplay";
+ZaDistributionList.A_zmailPrefReplyToEnabled = "zmailPrefReplyToEnabled";
 
-ZaDistributionList.A_zimbraDistributionListSubscriptionPolicy = "zimbraDistributionListSubscriptionPolicy";
-ZaDistributionList.A_zimbraDistributionListUnsubscriptionPolicy = "zimbraDistributionListUnsubscriptionPolicy";
+ZaDistributionList.A_zmailDistributionListSubscriptionPolicy = "zmailDistributionListSubscriptionPolicy";
+ZaDistributionList.A_zmailDistributionListUnsubscriptionPolicy = "zmailDistributionListUnsubscriptionPolicy";
 
-ZaDistributionList.A2_zimbraDLSubscriptionPolicyAccept = "ACCEPT";
-ZaDistributionList.A2_zimbraDLSubscriptionPolicyReject = "REJECT";
-ZaDistributionList.A2_zimbraDLSubscriptionPolicyApproval = "APPROVAL";
+ZaDistributionList.A2_zmailDLSubscriptionPolicyAccept = "ACCEPT";
+ZaDistributionList.A2_zmailDLSubscriptionPolicyReject = "REJECT";
+ZaDistributionList.A2_zmailDLSubscriptionPolicyApproval = "APPROVAL";
 
 ZaDistributionList.A2_DLOwners = "DLOwner";
 ZaDistributionList.A2_owners_selection_cache = "owners_selection_cache";
@@ -124,7 +124,7 @@ ZaDistributionList.GET_DL_SHARE_INFO_RIGHT = "getDistributionListShareInfo";
 ZaDistributionList.RIGHT_VIEW_ADMINUI_COMPONENTS = "viewDistributionListAdminUI";
 
 ZaDistributionList.searchAttributes = AjxBuffer.concat(ZaAccount.A_displayname,",",
-													   ZaItem.A_zimbraId,  "," , 
+													   ZaItem.A_zmailId,  "," , 
 													   ZaAccount.A_mailHost , "," , 
 													   ZaAccount.A_uid ,"," , 
 													   ZaAccount.A_description, ",",
@@ -141,7 +141,7 @@ ZaDistributionList.postLoadDataFunction = new Array();
 
 ZaDistributionList.prototype.remove = 
 function(callback) {
-	var soapDoc = AjxSoapDoc.create("DeleteDistributionListRequest", ZaZimbraAdmin.URN, null);
+	var soapDoc = AjxSoapDoc.create("DeleteDistributionListRequest", ZaZmailAdmin.URN, null);
 	soapDoc.set("id", this.id);
 	this.deleteCommand = new ZmCsfeCommand();
 	var params = new Object();
@@ -160,7 +160,7 @@ function(callback) {
 **/
 ZaDistributionList.prototype.rename = 
 function (newName) {
-	var soapDoc = AjxSoapDoc.create("RenameDistributionListRequest", ZaZimbraAdmin.URN, null);
+	var soapDoc = AjxSoapDoc.create("RenameDistributionListRequest", ZaZmailAdmin.URN, null);
 	soapDoc.set("id", this.id);
 	soapDoc.set("newName", newName);	
 	//var command = new ZmCsfeCommand();
@@ -185,7 +185,7 @@ function(tmpObj, dl) {
 	tmpObj.attrs[ZaAccount.A_mail] = tmpObj.name;	
 	var resp;	
 	//create SOAP request
-	var soapDoc = AjxSoapDoc.create("CreateDistributionListRequest", ZaZimbraAdmin.URN, null);
+	var soapDoc = AjxSoapDoc.create("CreateDistributionListRequest", ZaZmailAdmin.URN, null);
 	soapDoc.set(ZaAccount.A_name, tmpObj.name);
 
     if(tmpObj[ZaDistributionList.A2_dlType] == ZaDistributionList.DYNAMIC_DL_TYPE) {
@@ -202,11 +202,11 @@ function(tmpObj, dl) {
 	}
 	
 	for (var aname in tmpObj.attrs) {
-		if( aname == ZaAccount.A_zimbraMailAlias || aname == ZaItem.A_objectClass || aname == ZaAccount.A2_mbxsize || aname == ZaAccount.A_mail) {
+		if( aname == ZaAccount.A_zmailMailAlias || aname == ZaItem.A_objectClass || aname == ZaAccount.A2_mbxsize || aname == ZaAccount.A_mail) {
 			continue;
 		}	
 
-        if (tmpObj[ZaDistributionList.A2_dlType] != ZaDistributionList.DYNAMIC_DL_TYPE && aname == ZaDistributionList.A_zimbraIsACLGroup) {
+        if (tmpObj[ZaDistributionList.A2_dlType] != ZaDistributionList.DYNAMIC_DL_TYPE && aname == ZaDistributionList.A_zmailIsACLGroup) {
             continue;
         }
 		if(tmpObj.attrs[aname] instanceof Array) {
@@ -272,7 +272,7 @@ function(tmpObj, dl) {
 	tmpObj.setAttrs = dl.setAttrs;
 	tmpObj.getAttrs = dl.getAttrs;
 	tmpObj.id = dl.id;
-	tmpObj.attrs[ZaItem.A_zimbraId] = dl.attrs[ZaItem.A_zimbraId];
+	tmpObj.attrs[ZaItem.A_zmailId] = dl.attrs[ZaItem.A_zmailId];
 }
 ZaItem.createMethods["ZaDistributionList"].push(ZaDistributionList.createMethod);
 
@@ -283,12 +283,12 @@ ZaItem.createMethods["ZaDistributionList"].push(ZaDistributionList.createMethod)
 */
 ZaDistributionList.modifyMethod = function(mods, obj) {
 	var gotSomething = false;
-	var soapDoc = AjxSoapDoc.create("ModifyDistributionListRequest", ZaZimbraAdmin.URN, null);
+	var soapDoc = AjxSoapDoc.create("ModifyDistributionListRequest", ZaZmailAdmin.URN, null);
 	soapDoc.set("id", this.id);
 	//transfer the fields from the tmpObj to the _currentObject
 	for (var a in obj.attrs) {
-		if(a == ZaItem.A_objectClass || a==ZaAccount.A_mail || a == ZaItem.A_zimbraId
-                || a == ZaAccount.A_zimbraMailAlias || a == ZaItem.A_zimbraACE) {
+		if(a == ZaItem.A_objectClass || a==ZaAccount.A_mail || a == ZaItem.A_zmailId
+                || a == ZaAccount.A_zmailMailAlias || a == ZaItem.A_zmailACE) {
 			continue;
 		}	
 		//check if the value has been modified
@@ -379,7 +379,7 @@ function() {
 		html[idx++] = "</table></div></td></tr>";
 		html[idx++] = "<tr></tr>";
 		idx = this._addAttrRow(ZaItem.A_description, html, idx);
-		idx = this._addAttrRow(ZaItem.A_zimbraId, html, idx);
+		idx = this._addAttrRow(ZaItem.A_zmailId, html, idx);
 		html[idx++] = "</table>";
 		this._toolTip = html.join("");
 	}
@@ -391,43 +391,43 @@ ZaDistributionList.addRemoveAliases = function (mods, obj) {
 	var tmpObjCnt = -1;
 	var currentObjCnt = -1;
 	if(ZaItem.hasRight(ZaDistributionList.REMOVE_DL_ALIAS_RIGHT, this) || ZaItem.hasRight(ZaDistributionList.ADD_DL_ALIAS_RIGHT, this)) {
-		if(obj.attrs[ZaAccount.A_zimbraMailAlias]) {
-			if(typeof obj.attrs[ZaAccount.A_zimbraMailAlias] == "string") {
-				var tmpStr = obj.attrs[ZaAccount.A_zimbraMailAlias];
-				obj.attrs[ZaAccount.A_zimbraMailAlias] = new Array();
-				obj.attrs[ZaAccount.A_zimbraMailAlias].push(tmpStr);
+		if(obj.attrs[ZaAccount.A_zmailMailAlias]) {
+			if(typeof obj.attrs[ZaAccount.A_zmailMailAlias] == "string") {
+				var tmpStr = obj.attrs[ZaAccount.A_zmailMailAlias];
+				obj.attrs[ZaAccount.A_zmailMailAlias] = new Array();
+				obj.attrs[ZaAccount.A_zmailMailAlias].push(tmpStr);
 			}
-			tmpObjCnt = obj.attrs[ZaAccount.A_zimbraMailAlias].length - 1;
+			tmpObjCnt = obj.attrs[ZaAccount.A_zmailMailAlias].length - 1;
 		}
 		
-		if(this.attrs[ZaAccount.A_zimbraMailAlias]) {
-			if(typeof this.attrs[ZaAccount.A_zimbraMailAlias] == "string") {
-				var tmpStr = this.attrs[ZaAccount.A_zimbraMailAlias];
-				this.attrs[ZaAccount.A_zimbraMailAlias] = new Array();
-				this.attrs[ZaAccount.A_zimbraMailAlias].push(tmpStr);
+		if(this.attrs[ZaAccount.A_zmailMailAlias]) {
+			if(typeof this.attrs[ZaAccount.A_zmailMailAlias] == "string") {
+				var tmpStr = this.attrs[ZaAccount.A_zmailMailAlias];
+				this.attrs[ZaAccount.A_zmailMailAlias] = new Array();
+				this.attrs[ZaAccount.A_zmailMailAlias].push(tmpStr);
 			}
-			currentObjCnt = this.attrs[ZaAccount.A_zimbraMailAlias].length - 1;
+			currentObjCnt = this.attrs[ZaAccount.A_zmailMailAlias].length - 1;
 		}
 	
 		//diff two arrays
 		for(var tmpIx=tmpObjCnt; tmpIx >= 0; tmpIx--) {
 			for(var currIx=currentObjCnt; currIx >=0; currIx--) {
-				if(obj.attrs[ZaAccount.A_zimbraMailAlias][tmpIx] == this.attrs[ZaAccount.A_zimbraMailAlias][currIx]) {
+				if(obj.attrs[ZaAccount.A_zmailMailAlias][tmpIx] == this.attrs[ZaAccount.A_zmailMailAlias][currIx]) {
 					//this alias already exists
-					obj.attrs[ZaAccount.A_zimbraMailAlias].splice(tmpIx,1);
-					this.attrs[ZaAccount.A_zimbraMailAlias].splice(currIx,1);
+					obj.attrs[ZaAccount.A_zmailMailAlias].splice(tmpIx,1);
+					this.attrs[ZaAccount.A_zmailMailAlias].splice(currIx,1);
 					break;
 				}
 			}
 		}
 		//remove the aliases 
 		if(currentObjCnt != -1) {
-			currentObjCnt = this.attrs[ZaAccount.A_zimbraMailAlias].length;
+			currentObjCnt = this.attrs[ZaAccount.A_zmailMailAlias].length;
 		} 
 		if(ZaItem.hasRight(ZaDistributionList.REMOVE_DL_ALIAS_RIGHT, this)) {
 			try {
 				for(var ix=0; ix < currentObjCnt; ix++) {
-					this.removeAlias(this.attrs[ZaAccount.A_zimbraMailAlias][ix]);
+					this.removeAlias(this.attrs[ZaAccount.A_zmailMailAlias][ix]);
 				}
 			} catch (ex) {
 				ZaApp.getInstance().getCurrentController()._handleException(ex, "ZaDistributionList.addRemoveAliases", null, false);
@@ -435,14 +435,14 @@ ZaDistributionList.addRemoveAliases = function (mods, obj) {
 			}
 		}
 		if(tmpObjCnt != -1) {
-			tmpObjCnt = obj.attrs[ZaAccount.A_zimbraMailAlias].length;
+			tmpObjCnt = obj.attrs[ZaAccount.A_zmailMailAlias].length;
 		}
 		var failedAliases = "";
 		var failedAliasesCnt = 0;
 		if(ZaItem.hasRight(ZaDistributionList.ADD_DL_ALIAS_RIGHT, this)) {
 			try {
 				for(var ix=0; ix < tmpObjCnt; ix++) {
-					var aliasName = obj.attrs[ZaAccount.A_zimbraMailAlias][ix];
+					var aliasName = obj.attrs[ZaAccount.A_zmailMailAlias][ix];
 					try {
 						if(aliasName) {
 							if(aliasName.indexOf("@") != aliasName.lastIndexOf("@")) {
@@ -492,10 +492,10 @@ ZaDistributionList.addRemoveAliases = function (mods, obj) {
 				}
 		
 				if(failedAliasesCnt == 1) {
-					ZaApp.getInstance().getCurrentController()._errorDialog.setMessage(AjxMessageFormat.format(ZaMsg.WARNING_ALIAS_EXISTS, [failedAliases]), "", DwtMessageDialog.WARNING_STYLE, ZabMsg.zimbraAdminTitle);
+					ZaApp.getInstance().getCurrentController()._errorDialog.setMessage(AjxMessageFormat.format(ZaMsg.WARNING_ALIAS_EXISTS, [failedAliases]), "", DwtMessageDialog.WARNING_STYLE, ZabMsg.zmailAdminTitle);
 					ZaApp.getInstance().getCurrentController()._errorDialog.popup();			
 				} else if(failedAliasesCnt > 1) {
-					ZaApp.getInstance().getCurrentController()._errorDialog.setMessage(AjxMessageFormat.format(ZaMsg.WARNING_ALIASES_EXIST, [failedAliases]), "", DwtMessageDialog.WARNING_STYLE, ZabMsg.zimbraAdminTitle);
+					ZaApp.getInstance().getCurrentController()._errorDialog.setMessage(AjxMessageFormat.format(ZaMsg.WARNING_ALIASES_EXIST, [failedAliases]), "", DwtMessageDialog.WARNING_STYLE, ZabMsg.zmailAdminTitle);
 					ZaApp.getInstance().getCurrentController()._errorDialog.popup();			
 				}
 			} catch (ex) {
@@ -510,20 +510,20 @@ ZaItem.modifyMethods["ZaDistributionList"].push(ZaDistributionList.addRemoveAlia
 ZaDistributionList.addAliases = function (obj, dl) {
 	//add-remove aliases
 	if(ZaItem.hasRight(ZaDistributionList.ADD_DL_ALIAS_RIGHT, dl)) {
-		if(obj.attrs[ZaAccount.A_zimbraMailAlias]) {
-			if(typeof obj.attrs[ZaAccount.A_zimbraMailAlias] == "string") {
-				var tmpStr = obj.attrs[ZaAccount.A_zimbraMailAlias];
-				obj.attrs[ZaAccount.A_zimbraMailAlias] = new Array();
-				obj.attrs[ZaAccount.A_zimbraMailAlias].push(tmpStr);
+		if(obj.attrs[ZaAccount.A_zmailMailAlias]) {
+			if(typeof obj.attrs[ZaAccount.A_zmailMailAlias] == "string") {
+				var tmpStr = obj.attrs[ZaAccount.A_zmailMailAlias];
+				obj.attrs[ZaAccount.A_zmailMailAlias] = new Array();
+				obj.attrs[ZaAccount.A_zmailMailAlias].push(tmpStr);
 			}
-			tmpObjCnt = obj.attrs[ZaAccount.A_zimbraMailAlias].length;
+			tmpObjCnt = obj.attrs[ZaAccount.A_zmailMailAlias].length;
 		}
 
 		var failedAliases = "";
 		var failedAliasesCnt = 0;
 		try {
 			for(var ix=0; ix < tmpObjCnt; ix++) {
-				var aliasName = obj.attrs[ZaAccount.A_zimbraMailAlias][ix];
+				var aliasName = obj.attrs[ZaAccount.A_zmailMailAlias][ix];
 				try {
 					if(aliasName) {
 						if(aliasName.indexOf("@") != aliasName.lastIndexOf("@")) {
@@ -573,10 +573,10 @@ ZaDistributionList.addAliases = function (obj, dl) {
 			}
 	
 			if(failedAliasesCnt == 1) {
-				ZaApp.getInstance().getCurrentController()._errorDialog.setMessage(ZaMsg.WARNING_ALIAS_EXISTS + failedAliases, "", DwtMessageDialog.WARNING_STYLE, ZabMsg.zimbraAdminTitle);
+				ZaApp.getInstance().getCurrentController()._errorDialog.setMessage(ZaMsg.WARNING_ALIAS_EXISTS + failedAliases, "", DwtMessageDialog.WARNING_STYLE, ZabMsg.zmailAdminTitle);
 				ZaApp.getInstance().getCurrentController()._errorDialog.popup();			
 			} else if(failedAliasesCnt > 1) {
-				ZaApp.getInstance().getCurrentController()._errorDialog.setMessage(ZaMsg.WARNING_ALIASES_EXIST + failedAliases, "", DwtMessageDialog.WARNING_STYLE, ZabMsg.zimbraAdminTitle);
+				ZaApp.getInstance().getCurrentController()._errorDialog.setMessage(ZaMsg.WARNING_ALIASES_EXIST + failedAliases, "", DwtMessageDialog.WARNING_STYLE, ZabMsg.zmailAdminTitle);
 				ZaApp.getInstance().getCurrentController()._errorDialog.popup();			
 			}
 		} catch (ex) {
@@ -710,7 +710,7 @@ ZaDistributionList.addOwners = function (obj, dl) {
 ZaItem.createMethods["ZaDistributionList"].push(ZaDistributionList.addOwners);
 
 ZaDistributionList.prototype.addRemoveOwner = function (ownerName, isAdd){
-	var soapDoc = AjxSoapDoc.create("DistributionListActionRequest", "urn:zimbraAccount", null);
+	var soapDoc = AjxSoapDoc.create("DistributionListActionRequest", "urn:zmailAccount", null);
     var dlBy = soapDoc.set("dl", this.id);
     dlBy.setAttribute("by", "id");
 
@@ -791,7 +791,7 @@ ZaDistributionList.prototype.getMemberQueryParams = function(callbackQuery, offs
 			limit = ZaDistributionList.MEMBER_QUERY_LIMIT;
 		}
 
-		var soapDoc = AjxSoapDoc.create("GetDistributionListRequest", ZaZimbraAdmin.URN, null);
+		var soapDoc = AjxSoapDoc.create("GetDistributionListRequest", ZaZmailAdmin.URN, null);
 		if(!this.getAttrs.all && !AjxUtil.isEmpty(this.attrsToGet)) {
 			soapDoc.setMethodAttribute("attrs", this.attrsToGet.join(","));
 		}
@@ -862,7 +862,7 @@ ZaDistributionList.prototype.getAllMembers = function ( params ) {
 }
 
 ZaDistributionList.prototype.updateTree = function () {
-    var treeCtrl = ZaZimbraAdmin.getInstance().getOverviewPanelController();
+    var treeCtrl = ZaZmailAdmin.getInstance().getOverviewPanelController();
     treeCtrl.refreshRelatedTree(this, true, true);
 }
 
@@ -983,7 +983,7 @@ ZaDistributionList.prototype.pageAllMembers = function ( ) {
 /*
 ZaDistributionList.prototype.getMembers = function () {
 	if (this.id != null) {
-		var soapDoc = AjxSoapDoc.create("GetDistributionListRequest", ZaZimbraAdmin.URN, null);
+		var soapDoc = AjxSoapDoc.create("GetDistributionListRequest", ZaZmailAdmin.URN, null);
 
 		var limit = ZaDistributionList.MEMBER_LIST_PAGE_SIZE;
 			
@@ -1076,7 +1076,7 @@ ZaDistributionList.removeDeletedMembers = function (mods, obj, dl, finishedCallb
 	var removeMemberSoapDoc, r;
 	var command = new ZmCsfeCommand();
 	//var member = list.getLast();
-	removeMemberSoapDoc = AjxSoapDoc.create("RemoveDistributionListMemberRequest", ZaZimbraAdmin.URN, null);
+	removeMemberSoapDoc = AjxSoapDoc.create("RemoveDistributionListMemberRequest", ZaZmailAdmin.URN, null);
 	removeMemberSoapDoc.set("id", obj.id);
 	var len = obj[ZaDistributionList.A2_removeList].length;
 	if(len < 1)
@@ -1115,7 +1115,7 @@ ZaDistributionList.addNewMembers = function (mods, obj, dl, finishedCallback) {
 	
 	var addMemberSoapDoc, r;
 	var command = new ZmCsfeCommand();
-	addMemberSoapDoc = AjxSoapDoc.create("AddDistributionListMemberRequest", ZaZimbraAdmin.URN, null);
+	addMemberSoapDoc = AjxSoapDoc.create("AddDistributionListMemberRequest", ZaZmailAdmin.URN, null);
 	addMemberSoapDoc.set("id", obj.id);
 	var len = obj[ZaDistributionList.A2_addList].length;
 	if(len < 1)
@@ -1165,9 +1165,9 @@ ZaDistributionList.modifyAccountDL = function (dl, modifyList, isAdd){
 				if (accountName == v._containedObject.name ) {//firstly check for account
 					currentView = v;
 					break;
-				}else if(v._containedObject.attrs && v._containedObject.attrs[ZaAccount.A_zimbraMailAlias]){
+				}else if(v._containedObject.attrs && v._containedObject.attrs[ZaAccount.A_zmailMailAlias]){
 					//secondly match the name for account's alias name
-					var aliasList = v._containedObject.attrs[ZaAccount.A_zimbraMailAlias];
+					var aliasList = v._containedObject.attrs[ZaAccount.A_zmailMailAlias];
 					var isAliasMatch = false;
 					for(var iAlias = 0; iAlias < aliasList.length; iAlias++){
 						if(accountName == aliasList[iAlias]){
@@ -1219,15 +1219,15 @@ function (dl) {
 		return;
 		
 	this.attrs = new Object();	
-	this.attrs[ZaAccount.A_zimbraMailAlias] = new Array();
+	this.attrs[ZaAccount.A_zmailMailAlias] = new Array();
 	this.name = dl.name;
 	this.id = dl.id;
     this.dynamic = dl.dynamic;
 	var len = dl.a.length;
 
 	for(var ix = 0; ix < len; ix++) {
-		//we have to handle the special case for DL because server returns the dl itself as the zimbraMailAlias
-		if ( dl.a[ix].n == ZaAccount.A_zimbraMailAlias
+		//we have to handle the special case for DL because server returns the dl itself as the zmailMailAlias
+		if ( dl.a[ix].n == ZaAccount.A_zmailMailAlias
 					&& dl.a[ix]._content == this.name) {				
 			continue ;
 		}
@@ -1338,12 +1338,12 @@ ZaDistributionList.myXModel = {
         {id:ZaDistributionList.A2_owners_selection_cache, type:_LIST_},
 		{id:ZaDistributionList.A2_members, type:_LIST_},
 		ZaItem.descriptionModelItem,
-		{id:ZaItem.A_zimbraId, type:_STRING_, ref:"attrs/" + ZaItem.A_zimbraId},
+		{id:ZaItem.A_zmailId, type:_STRING_, ref:"attrs/" + ZaItem.A_zmailId},
         {id:ZaDistributionList.A_memberOfURL, ref:"attrs/" + ZaDistributionList.A_memberOfURL, type:_STRING_,
             constraints: {type:"method", value:
 			   function (value, form, formItem, instance) {
 				   value = AjxStringUtil.trim(value);
-                   var isAclGroup = instance.attrs[ZaDistributionList.A_zimbraIsACLGroup];
+                   var isAclGroup = instance.attrs[ZaDistributionList.A_zmailIsACLGroup];
                    if (isAclGroup != "TRUE" && !value) {
                        throw AjxMsg.valueIsRequired;
                    }
@@ -1351,17 +1351,17 @@ ZaDistributionList.myXModel = {
 			   }
 			}
         },
-        {id:ZaDistributionList.A_zimbraIsACLGroup, ref:"attrs/"+ZaDistributionList.A_zimbraIsACLGroup, type:_ENUM_, choices:ZaModel.BOOLEAN_CHOICES},
-		{id:ZaItem.A_zimbraCreateTimestamp, ref:"attrs/" + ZaItem.A_zimbraCreateTimestamp},
-        {id:ZaAccount.A_zimbraHideInGal, type:_ENUM_, ref:"attrs/"+ZaAccount.A_zimbraHideInGal, choices:ZaModel.BOOLEAN_CHOICES},
+        {id:ZaDistributionList.A_zmailIsACLGroup, ref:"attrs/"+ZaDistributionList.A_zmailIsACLGroup, type:_ENUM_, choices:ZaModel.BOOLEAN_CHOICES},
+		{id:ZaItem.A_zmailCreateTimestamp, ref:"attrs/" + ZaItem.A_zmailCreateTimestamp},
+        {id:ZaAccount.A_zmailHideInGal, type:_ENUM_, ref:"attrs/"+ZaAccount.A_zmailHideInGal, choices:ZaModel.BOOLEAN_CHOICES},
 		{id:ZaAccount.A_notes, ref:"attrs/"+ZaAccount.A_notes, type:_STRING_},
         {id:ZaAccount.A_mailHost, type:_STRING_, ref:"attrs/"+ZaAccount.A_mailHost},
         {id:ZaAccount.A2_autoMailServer, type:_ENUM_, choices:ZaModel.BOOLEAN_CHOICES},
 		{id:ZaAccount.A_displayname, type:_STRING_, ref:"attrs/"+ZaAccount.A_displayname},
-		{id:ZaAccount.A_zimbraMailAlias, type:_LIST_, ref:"attrs/"+ZaAccount.A_zimbraMailAlias, listItem:{type:_STRING_}},
+		{id:ZaAccount.A_zmailMailAlias, type:_LIST_, ref:"attrs/"+ZaAccount.A_zmailMailAlias, listItem:{type:_STRING_}},
 		{id:ZaDistributionList.A_mailStatus, ref:"attrs/"+ZaDistributionList.A_mailStatus, type:_STRING_},
-		{id:ZaDistributionList.A_zimbraDistributionListSubscriptionPolicy, ref:"attrs/"+ZaDistributionList.A_zimbraDistributionListSubscriptionPolicy, type:_STRING_},
-		{id:ZaDistributionList.A_zimbraDistributionListUnsubscriptionPolicy, ref:"attrs/"+ZaDistributionList.A_zimbraDistributionListUnsubscriptionPolicy, type:_STRING_},
+		{id:ZaDistributionList.A_zmailDistributionListSubscriptionPolicy, ref:"attrs/"+ZaDistributionList.A_zmailDistributionListSubscriptionPolicy, type:_STRING_},
+		{id:ZaDistributionList.A_zmailDistributionListUnsubscriptionPolicy, ref:"attrs/"+ZaDistributionList.A_zmailDistributionListUnsubscriptionPolicy, type:_STRING_},
 		{id:ZaDistributionList.A2_membersSelected, type:_LIST_},
 		{id:ZaDistributionList.A2_nonmembersSelected, type:_LIST_},
 		{id:ZaDistributionList.A2_memberPoolSelected, type:_LIST_},
@@ -1380,9 +1380,9 @@ ZaDistributionList.myXModel = {
 		{id:(ZaAccount.A2_nonMemberList + "_more"), type:_LIST_},
 		{id:(ZaAccount.A2_nonMemberList + "_offset"), type:_LIST_},
 		{id:ZaDistributionList.A2_alias_selection_cache, type:_LIST_},
-        {id:ZaDistributionList.A_zimbraPrefReplyToEnabled, type:_ENUM_, ref:"attrs/"+ZaDistributionList.A_zimbraPrefReplyToEnabled, choices:ZaModel.BOOLEAN_CHOICES},
-		{id:ZaDistributionList.A_zimbraPrefReplyToDisplay, type:_STRING_, ref:"attrs/"+ZaDistributionList.A_zimbraPrefReplyToDisplay},
-        {id:ZaDistributionList.A_zimbraPrefReplyToAddress, type:_EMAIL_ADDRESS_, ref:"attrs/"+ZaDistributionList.A_zimbraPrefReplyToAddress}
+        {id:ZaDistributionList.A_zmailPrefReplyToEnabled, type:_ENUM_, ref:"attrs/"+ZaDistributionList.A_zmailPrefReplyToEnabled, choices:ZaModel.BOOLEAN_CHOICES},
+		{id:ZaDistributionList.A_zmailPrefReplyToDisplay, type:_STRING_, ref:"attrs/"+ZaDistributionList.A_zmailPrefReplyToDisplay},
+        {id:ZaDistributionList.A_zmailPrefReplyToAddress, type:_EMAIL_ADDRESS_, ref:"attrs/"+ZaDistributionList.A_zmailPrefReplyToAddress}
 	]
 };
 
@@ -1395,7 +1395,7 @@ ZaDistributionList.prototype.schedulePostLoading = function (controller) {
 
 ZaDistributionList.getRelatedList =
 function (parentPath) {
-    var alias = this.attrs[ZaAccount.A_zimbraMailAlias];
+    var alias = this.attrs[ZaAccount.A_zmailMailAlias];
     var membersNum = this[ZaDistributionList.A2_numMembers];
     var Tis = [];
     if(alias.length > 0) {
@@ -1404,12 +1404,12 @@ function (parentPath) {
                     //type: 1,
                     count:alias.length,
                     image:"AccountAlias",
-                    mappingId: ZaZimbraAdmin._DL_ALIAS_LIST_VIEW,
+                    mappingId: ZaZmailAdmin._DL_ALIAS_LIST_VIEW,
                     path: parentPath + ZaTree.SEPERATOR + this.name + ZaTree.SEPERATOR + ZaMsg.TABT_Aliases
                     }
                 );
         aliasTi.setData("aliasTargetId", this.id);
-        ZaOverviewPanelController.overviewTreeListeners[ZaZimbraAdmin._DL_ALIAS_LIST_VIEW] = ZaOverviewPanelController.aliasListTreeListener;
+        ZaOverviewPanelController.overviewTreeListeners[ZaZmailAdmin._DL_ALIAS_LIST_VIEW] = ZaOverviewPanelController.aliasListTreeListener;
         Tis.push(aliasTi);
     }
     if(membersNum > 0) {
@@ -1417,12 +1417,12 @@ function (parentPath) {
                     text: ZaMsg.DLXV_LabelListMembers,
                     count:membersNum,
                     image:"DistributionList",
-                    mappingId: ZaZimbraAdmin._DL_MEMBERS_LIST_VIEW,
+                    mappingId: ZaZmailAdmin._DL_MEMBERS_LIST_VIEW,
                     path: parentPath + ZaTree.SEPERATOR + this.name + ZaTree.SEPERATOR + ZaMsg.DLXV_LabelListMembers
                     }
                 );
         membersTi.setData("dlItem", this);
-        ZaOverviewPanelController.overviewTreeListeners[ZaZimbraAdmin._DL_MEMBERS_LIST_VIEW] = ZaOverviewPanelController.memberListInDLTreeListener;
+        ZaOverviewPanelController.overviewTreeListeners[ZaZmailAdmin._DL_MEMBERS_LIST_VIEW] = ZaOverviewPanelController.memberListInDLTreeListener;
         Tis.push(membersTi);
     }
     return Tis;

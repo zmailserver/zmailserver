@@ -14,18 +14,18 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.items;
+package org.zmail.qa.selenium.framework.items;
 
 import java.util.*;
 
 import org.apache.log4j.*;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount.SOAP_DESTINATION_HOST_TYPE;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.ZmailAccount.SOAP_DESTINATION_HOST_TYPE;
 
 /**
- * The <code>ContactGroupItem</code> defines a Zimbra Contact Group
+ * The <code>ContactGroupItem</code> defines a Zmail Contact Group
  */
 public class ContactGroupItem extends ContactItem implements IItem {
 	protected static Logger logger = LogManager.getLogger(IItem.class);
@@ -88,7 +88,7 @@ public class ContactGroupItem extends ContactItem implements IItem {
 	
 	
 	/* (non-Javadoc)
-	 * @see com.zimbra.qa.selenium.framework.items.ContactItem#getName()
+	 * @see org.zmail.qa.selenium.framework.items.ContactItem#getName()
 	 */
 	@Override
 	public String getName() {
@@ -158,11 +158,11 @@ public class ContactGroupItem extends ContactItem implements IItem {
 		try {
 
 			// Make sure we only have the GetMsgResponse part
-			Element getContactsResponse = ZimbraAccount.SoapClient.selectNode(GetContactsResponse, "//mail:GetContactsResponse");
+			Element getContactsResponse = ZmailAccount.SoapClient.selectNode(GetContactsResponse, "//mail:GetContactsResponse");
 			if ( getContactsResponse == null )
 				throw new HarnessException("Element does not contain GetContactsResponse: " + GetContactsResponse.prettyPrint());
 
-			Element cn = ZimbraAccount.SoapClient.selectNode(getContactsResponse, "//mail:cn");
+			Element cn = ZmailAccount.SoapClient.selectNode(getContactsResponse, "//mail:cn");
 			if ( cn == null )
 				throw new HarnessException("Element does not contain a cn element: "+ getContactsResponse.prettyPrint());
 
@@ -176,7 +176,7 @@ public class ContactGroupItem extends ContactItem implements IItem {
 
 
 			// Iterate the attributes
-			Element[] attributes = ZimbraAccount.SoapClient.selectNodes(cn, "//mail:a");
+			Element[] attributes = ZmailAccount.SoapClient.selectNodes(cn, "//mail:a");
 			for (Element a : attributes) {
 				String key = a.getAttribute("n", "foo");
 				String value = a.getText();
@@ -189,7 +189,7 @@ public class ContactGroupItem extends ContactItem implements IItem {
 			}
 
 			// Iterate the members
-			Element[] members = ZimbraAccount.SoapClient.selectNodes(cn, "//mail:m");
+			Element[] members = ZmailAccount.SoapClient.selectNodes(cn, "//mail:m");
 			for (Element m : members) {
 				String value = m.getAttribute("value", null);
 				String type = m.getAttribute("type", null);
@@ -221,22 +221,22 @@ public class ContactGroupItem extends ContactItem implements IItem {
 	 * @return
 	 * @throws HarnessException
 	 */
-	public static ContactGroupItem createContactGroupItem(ZimbraAccount account) throws HarnessException {
+	public static ContactGroupItem createContactGroupItem(ZmailAccount account) throws HarnessException {
 
 		// Create a contact group
-		String unique = ZimbraSeleniumProperties.getUniqueString(); // group name is max 20 chars
+		String unique = ZmailSeleniumProperties.getUniqueString(); // group name is max 20 chars
 		String groupname = "group"+ unique.substring(unique.length() - 10);
 
 		// Create 2 members
-		String member1 = "member"+ ZimbraSeleniumProperties.getUniqueString() + "@zimbra.com";
-		String member2 = "member"+ ZimbraSeleniumProperties.getUniqueString() + "@zimbra.com";
+		String member1 = "member"+ ZmailSeleniumProperties.getUniqueString() + "@zmail.com";
+		String member2 = "member"+ ZmailSeleniumProperties.getUniqueString() + "@zmail.com";
 
 		StringBuilder sb = new StringBuilder();
 		sb.append("<m type='I' value='").append(member1).append("'/>");
 		sb.append("<m type='I' value='").append(member2).append("'/>");
 
 		account.soapSend(
-				"<CreateContactRequest xmlns='urn:zimbraMail'>" +
+				"<CreateContactRequest xmlns='urn:zmailMail'>" +
 						"<cn >" +
 						"<a n='type'>group</a>" +
 						"<a n='nickname'>" + groupname +"</a>" +
@@ -250,7 +250,7 @@ public class ContactGroupItem extends ContactItem implements IItem {
 
 	}
 
-	public static ContactGroupItem importFromSOAP(ZimbraAccount account, String query) throws HarnessException {
+	public static ContactGroupItem importFromSOAP(ZmailAccount account, String query) throws HarnessException {
 		return ContactGroupItem.importFromSOAP(
 				account,
 				query,
@@ -258,14 +258,14 @@ public class ContactGroupItem extends ContactItem implements IItem {
 				null);
 	}
 
-	public static ContactGroupItem importFromSOAP(ZimbraAccount account,
+	public static ContactGroupItem importFromSOAP(ZmailAccount account,
 			String query, SOAP_DESTINATION_HOST_TYPE destType, String accountName) throws HarnessException {
 
 		try
 		{
 
 			account.soapSend(
-					"<SearchRequest xmlns='urn:zimbraMail' types='contact'>" +
+					"<SearchRequest xmlns='urn:zmailMail' types='contact'>" +
 							"<query>"+ query +"</query>" +
 							"</SearchRequest>",
 							destType,
@@ -281,7 +281,7 @@ public class ContactGroupItem extends ContactItem implements IItem {
 			String id = account.soapSelectValue("//mail:SearchResponse/mail:cn", "id");
 
 			account.soapSend(
-					"<GetContactsRequest xmlns='urn:zimbraMail' >" +
+					"<GetContactsRequest xmlns='urn:zmailMail' >" +
 							"<cn id='"+ id +"'/>" +
 							"</GetContactsRequest>",
 							destType,
@@ -298,7 +298,7 @@ public class ContactGroupItem extends ContactItem implements IItem {
 	}
 
 
-	public static String getId(ZimbraAccount account) {
+	public static String getId(ZmailAccount account) {
 		return account.soapSelectValue("//mail:CreateContactResponse/mail:cn", "id");
 	}
 
@@ -381,7 +381,7 @@ public class ContactGroupItem extends ContactItem implements IItem {
 			super(value, type);
 		}
 		
-		public MemberItemGAL(ZimbraAccount a) {
+		public MemberItemGAL(ZmailAccount a) {
 			super(a.EmailAddress, MyType);
 		}
 		

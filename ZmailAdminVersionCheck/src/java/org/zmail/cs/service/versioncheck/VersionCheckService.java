@@ -14,12 +14,12 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.versioncheck;
+package org.zmail.cs.service.versioncheck;
 
-import com.zimbra.soap.DocumentDispatcher;
-import com.zimbra.soap.DocumentService;
+import org.zmail.soap.DocumentDispatcher;
+import org.zmail.soap.DocumentService;
 
-import com.zimbra.common.soap.AdminConstants;
+import org.zmail.common.soap.AdminConstants;
 /**
  * @author Greg Solovyev
  */

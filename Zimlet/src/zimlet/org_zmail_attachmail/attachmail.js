@@ -18,17 +18,17 @@
  * 
  * @author Raja Rao DV
  */
-function com_zimbra_attachmail_HandlerObject() {
+function org_zmail_attachmail_HandlerObject() {
 };
 
-com_zimbra_attachmail_HandlerObject.prototype = new ZmZimletBase();
-com_zimbra_attachmail_HandlerObject.prototype.constructor = com_zimbra_attachmail_HandlerObject;
+org_zmail_attachmail_HandlerObject.prototype = new ZmZimletBase();
+org_zmail_attachmail_HandlerObject.prototype.constructor = org_zmail_attachmail_HandlerObject;
 
 /**
  * Simplify handler object
  *
  */
-var AttachMailZimlet = com_zimbra_attachmail_HandlerObject;
+var AttachMailZimlet = org_zmail_attachmail_HandlerObject;
 
 
 
@@ -326,7 +326,7 @@ function(getNext) {
  */
 AttachMailTabView.prototype.searchFolder =
 function(params) {
-	var soapDoc = AjxSoapDoc.create("SearchRequest", "urn:zimbraMail");
+	var soapDoc = AjxSoapDoc.create("SearchRequest", "urn:zmailMail");
 	soapDoc.setMethodAttribute("types", "message");
 	soapDoc.setMethodAttribute("limit", params.limit);
 	soapDoc.setMethodAttribute("offset", params.offset);
@@ -458,7 +458,7 @@ function(attachmentDlg, msgIds) {
 AttachMailTabView.prototype.showAttachMailTreeView =
 function() {
 	var callback = new AjxCallback(this, this._showTreeView);
-	AjxPackage.undefine("zimbraMail.mail.controller.ZmMailFolderTreeController");
+	AjxPackage.undefine("zmailMail.mail.controller.ZmMailFolderTreeController");
 	AjxPackage.require({name:"MailCore", forceReload:true, callback:callback});
 };
 

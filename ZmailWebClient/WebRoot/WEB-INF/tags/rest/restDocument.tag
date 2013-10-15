@@ -14,15 +14,15 @@
 --%>
 <%@ tag body-content="scriptless" %>
 <%@ attribute name="title" rtexprvalue="true" required="false" %>
-<%@ attribute name="mailbox" rtexprvalue="true" required="true" type="com.zimbra.cs.taglib.bean.ZMailboxBean"%>
+<%@ attribute name="mailbox" rtexprvalue="true" required="true" type="org.zmail.cs.taglib.bean.ZMailboxBean"%>
 <%@ attribute name="timezone" rtexprvalue="true" required="true" type="java.util.TimeZone"%>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
-<%@ taglib prefix="rest" uri="com.zimbra.restclient" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
+<%@ taglib prefix="rest" uri="org.zmail.restclient" %>
 
-<zm:getDocument  var="doc" box="${mailbox}" id="${requestScope.zimbra_target_item_id}"/>
+<zm:getDocument  var="doc" box="${mailbox}" id="${requestScope.zmail_target_item_id}"/>
 
 <c:set var="isEdit" value="${not empty param.action and param.action eq 'edit'}" scope="request"/>
 
@@ -30,27 +30,27 @@
 <c:choose>
 
     <%--Documents--%>
-    <c:when test="${(contentType eq 'application/x-zimbra-doc' and isEdit)}">
+    <c:when test="${(contentType eq 'application/x-zmail-doc' and isEdit)}">
         <rest:documentView/>
     </c:when>
-    <c:when test="${(contentType eq 'application/x-zimbra-doc')}">
+    <c:when test="${(contentType eq 'application/x-zmail-doc')}">
          <rest:documentPreview/>
     </c:when>
 
     <%--Slides--%>
-    <c:when test="${(contentType eq 'application/x-zimbra-slides' and isEdit)}">
+    <c:when test="${(contentType eq 'application/x-zmail-slides' and isEdit)}">
         <rest:slideView/>
     </c:when>
-    <c:when test="${(contentType eq 'application/x-zimbra-slides')}">
+    <c:when test="${(contentType eq 'application/x-zmail-slides')}">
         <rest:slidePreview/>
     </c:when>
 
 
     <%--Spreadsheet--%>
-    <c:when test="${(contentType eq 'application/x-zimbra-xls' and isEdit)}">
+    <c:when test="${(contentType eq 'application/x-zmail-xls' and isEdit)}">
         <rest:spreadsheetView/>
     </c:when>
-    <c:when test="${(contentType eq 'application/x-zimbra-xls')}">
+    <c:when test="${(contentType eq 'application/x-zmail-xls')}">
         <rest:spreadsheetPreview/>
     </c:when>
 

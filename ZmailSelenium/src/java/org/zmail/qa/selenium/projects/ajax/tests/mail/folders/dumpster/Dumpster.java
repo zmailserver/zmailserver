@@ -14,16 +14,16 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.folders.dumpster;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.folders.dumpster;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.FormRecoverDeletedItems.Field;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.*;
+import org.zmail.qa.selenium.projects.ajax.ui.FormRecoverDeletedItems.Field;
 
 
 public class Dumpster extends PrefGroupMailByMessageTest {
@@ -33,7 +33,7 @@ public class Dumpster extends PrefGroupMailByMessageTest {
 
 		
 		
-		super.startingAccountPreferences.put("zimbraDumpsterEnabled", "TRUE");
+		super.startingAccountPreferences.put("zmailDumpsterEnabled", "TRUE");
 
 
 	}
@@ -43,23 +43,23 @@ public class Dumpster extends PrefGroupMailByMessageTest {
 			groups = { "functional" })
 	public void RecoverItems_01() throws HarnessException {
 
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String body = "body" + ZimbraSeleniumProperties.getUniqueString();
-		String foldername = "subfolder" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String body = "body" + ZmailSeleniumProperties.getUniqueString();
+		String foldername = "subfolder" + ZmailSeleniumProperties.getUniqueString();
 
 		FolderItem inbox = FolderItem.importFromSOAP(app.zGetActiveAccount(), FolderItem.SystemFolder.Inbox);
 		FolderItem trash = FolderItem.importFromSOAP(app.zGetActiveAccount(), FolderItem.SystemFolder.Trash);
 
 		// Create a subfolder (to recover the dumpster item to)
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+				"<CreateFolderRequest xmlns='urn:zmailMail'>" +
 					"<folder name='" + foldername +"' l='"+ inbox.getId() +"'/>" +
 				"</CreateFolderRequest>");
 		FolderItem subfolder = FolderItem.importFromSOAP(app.zGetActiveAccount(), foldername);
 
 		// Add an message 
 		app.zGetActiveAccount().soapSend(
-					"<AddMsgRequest xmlns='urn:zimbraMail'>" 
+					"<AddMsgRequest xmlns='urn:zmailMail'>" 
 				+		"<m l='" + inbox.getId() + "'>"
 				+			"<content>"
 				+				"From: foo@foo.com\n" + "To: foo@foo.com \n"
@@ -77,17 +77,17 @@ public class Dumpster extends PrefGroupMailByMessageTest {
 		String messageID = app.zGetActiveAccount().soapSelectValue("//mail:AddMsgResponse//mail:m", "id");
 		ZAssert.assertNotNull(messageID, "Verify the messageID exists");
 		
-		// https://bugzilla.zimbra.com/show_bug.cgi?id=62029
+		// https://bugzilla.zmail.com/show_bug.cgi?id=62029
 		// Workaround: search for the message before deleting
 		app.zGetActiveAccount().soapSend(
-					"<SearchRequest xmlns='urn:zimbraMail' types='message'>"
+					"<SearchRequest xmlns='urn:zmailMail' types='message'>"
 				+		"<query>subject:("+ subject +")</query>"
 				+	"</SearchRequest>");
 		
 		
 		// Delete the message, putting it in the dumpster
 		app.zGetActiveAccount().soapSend(
-				"<MsgActionRequest xmlns='urn:zimbraMail'>" 
+				"<MsgActionRequest xmlns='urn:zmailMail'>" 
 			+		"<action id='"+ messageID +"' op='delete'/>"
 			+	"</MsgActionRequest>");
 		
@@ -117,7 +117,7 @@ public class Dumpster extends PrefGroupMailByMessageTest {
 		form.zToolbarPressButton(Button.B_CLOSE);
 
 		// Verify the message is back
-		// Work around for https://bugzilla.zimbra.com/show_bug.cgi?id=62101#c1
+		// Work around for https://bugzilla.zmail.com/show_bug.cgi?id=62101#c1
 		// Search by folder ID rather than by subject
 		MailItem message = MailItem.importFromSOAP(app.zGetActiveAccount(), "inid:"+ subfolder.getId());
 		ZAssert.assertNotNull(message, "Verify the message is returned to the mailbox");

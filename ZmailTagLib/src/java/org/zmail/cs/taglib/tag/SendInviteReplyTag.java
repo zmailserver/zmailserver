@@ -12,15 +12,15 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.tag;
+package org.zmail.cs.taglib.tag;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.taglib.bean.ZMessageComposeBean;
-import com.zimbra.client.ZDateTime;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZMailbox.ReplyVerb;
-import com.zimbra.client.ZMailbox.ZOutgoingMessage;
-import com.zimbra.client.ZMailbox.ZSendInviteReplyResult;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.taglib.bean.ZMessageComposeBean;
+import org.zmail.client.ZDateTime;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZMailbox.ReplyVerb;
+import org.zmail.client.ZMailbox.ZOutgoingMessage;
+import org.zmail.client.ZMailbox.ZSendInviteReplyResult;
 
 import javax.servlet.jsp.JspContext;
 import javax.servlet.jsp.JspException;
@@ -28,7 +28,7 @@ import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 import java.io.IOException;
 
-public class SendInviteReplyTag extends ZimbraSimpleTag {
+public class SendInviteReplyTag extends ZmailSimpleTag {
 
     private String mVar;
     

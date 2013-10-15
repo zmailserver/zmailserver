@@ -17,23 +17,23 @@
  * @author Piyush Waradpande
  */
 
-function Com_Zimbra_Gplaces() {
+function Com_Zmail_Gplaces() {
 }
-Com_Zimbra_Gplaces.prototype = new ZmZimletBase();
-Com_Zimbra_Gplaces.prototype.constructor = Com_Zimbra_Gplaces;
-Com_Zimbra_Gplaces.DEFAULT_LAT = 37;
-Com_Zimbra_Gplaces.DEFAULT_LNG = -100;
-Com_Zimbra_Gplaces.DEFAULT_ZOOM_LEVEL = 3;
-Com_Zimbra_Gplaces.MEDIUM_ZOOM_LEVEL = 12;
-Com_Zimbra_Gplaces.MEDIUM_HIGH_ZOOM_LEVEL = 14;
-Com_Zimbra_Gplaces.HIGH_ZOOM_LEVEL = 16;
-Com_Zimbra_Gplaces.INCREMENT_ZOOM = 2;
-Com_Zimbra_Gplaces.SUGGESTIONS_TAB_WIDTH = 200;
-Com_Zimbra_Gplaces.ZIMLET_BUTTON_INDEX = 6;
+Com_Zmail_Gplaces.prototype = new ZmZimletBase();
+Com_Zmail_Gplaces.prototype.constructor = Com_Zmail_Gplaces;
+Com_Zmail_Gplaces.DEFAULT_LAT = 37;
+Com_Zmail_Gplaces.DEFAULT_LNG = -100;
+Com_Zmail_Gplaces.DEFAULT_ZOOM_LEVEL = 3;
+Com_Zmail_Gplaces.MEDIUM_ZOOM_LEVEL = 12;
+Com_Zmail_Gplaces.MEDIUM_HIGH_ZOOM_LEVEL = 14;
+Com_Zmail_Gplaces.HIGH_ZOOM_LEVEL = 16;
+Com_Zmail_Gplaces.INCREMENT_ZOOM = 2;
+Com_Zmail_Gplaces.SUGGESTIONS_TAB_WIDTH = 200;
+Com_Zmail_Gplaces.ZIMLET_BUTTON_INDEX = 6;
 
 
 // Initialize the toolbar
-Com_Zimbra_Gplaces.prototype.initializeToolbar = function(app, toolbar, controller, viewId) {
+Com_Zmail_Gplaces.prototype.initializeToolbar = function(app, toolbar, controller, viewId) {
 
     this._composeController = controller;
 
@@ -45,14 +45,14 @@ Com_Zimbra_Gplaces.prototype.initializeToolbar = function(app, toolbar, controll
             return;
         }
         //get the index of View menu so we can display it after that.
-        var buttonIndex = Com_Zimbra_Gplaces.ZIMLET_BUTTON_INDEX;
+        var buttonIndex = Com_Zmail_Gplaces.ZIMLET_BUTTON_INDEX;
 
         //create params obj with button details
         var buttonArgs = {
             text    : this.getMessage("buttonText"),
             tooltip: this.getMessage("tooltip"),
             index: buttonIndex, //position of the button
-            image: "zimbraicon" //icon
+            image: "zmailicon" //icon
         };
 
         //toolbar.createOp api creates the button with some id and  params containing button details.
@@ -65,14 +65,14 @@ Com_Zimbra_Gplaces.prototype.initializeToolbar = function(app, toolbar, controll
     }
 };
 
-Com_Zimbra_Gplaces.prototype._showMapsDialog = function(button, menu) {
+Com_Zmail_Gplaces.prototype._showMapsDialog = function(button, menu) {
     if (!this.mapsDialog) {
         this.mapsDialog = this._getMapsDialog();
     }
     this.mapsDialog.popup();
 };
 
-Com_Zimbra_Gplaces.prototype._getMapsDialog = function() {
+Com_Zmail_Gplaces.prototype._getMapsDialog = function() {
     return new ZmMapsDialog({id:"ZmMapsDialog", composeController: this._composeController, zimlet: this});
 };
 
@@ -129,11 +129,11 @@ ZmMapsDialog.prototype._contentHtml = function() {
 
 ZmMapsDialog.prototype._initializeMaps = function() {
 
-    var lat = Com_Zimbra_Gplaces.DEFAULT_LAT;
-    var lng = Com_Zimbra_Gplaces.DEFAULT_LNG;
+    var lat = Com_Zmail_Gplaces.DEFAULT_LAT;
+    var lng = Com_Zmail_Gplaces.DEFAULT_LNG;
     var myLatlng = new google.maps.LatLng(lat, lng);
     var myOptions = {
-        zoom: Com_Zimbra_Gplaces.DEFAULT_ZOOM_LEVEL,
+        zoom: Com_Zmail_Gplaces.DEFAULT_ZOOM_LEVEL,
         center: myLatlng,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         overviewMapControl: true,
@@ -178,7 +178,7 @@ ZmMapsDialog.prototype._geoSuccess = function(position) {
         latLng: myLatLng
     };
     this._addMarker(toAddMarker);
-    this._map.setZoom(Com_Zimbra_Gplaces.MEDIUM_ZOOM_LEVEL);
+    this._map.setZoom(Com_Zmail_Gplaces.MEDIUM_ZOOM_LEVEL);
 };
 
 // When something goes wrong with the geolocation
@@ -201,8 +201,8 @@ ZmMapsDialog.prototype._viewPlace = function() {
 
     this._addMarker(toAddMarker);
     var zoom = this._map.getZoom();
-    if (zoom < Com_Zimbra_Gplaces.MEDIUM_HIGH_ZOOM_LEVEL) {
-        this._map.setZoom(zoom + Com_Zimbra_Gplaces.INCREMENT_ZOOM)
+    if (zoom < Com_Zmail_Gplaces.MEDIUM_HIGH_ZOOM_LEVEL) {
+        this._map.setZoom(zoom + Com_Zmail_Gplaces.INCREMENT_ZOOM)
     }
 };
 
@@ -219,8 +219,8 @@ ZmMapsDialog.prototype._addMarker = function(event) {
             map: this._map
         });
 
-        if (zoom < Com_Zimbra_Gplaces.HIGH_ZOOM_LEVEL) {
-            this._map.setZoom(zoom + Com_Zimbra_Gplaces.INCREMENT_ZOOM);
+        if (zoom < Com_Zmail_Gplaces.HIGH_ZOOM_LEVEL) {
+            this._map.setZoom(zoom + Com_Zmail_Gplaces.INCREMENT_ZOOM);
         }
         this._reverseGeocode(event.latLng);
 
@@ -231,8 +231,8 @@ ZmMapsDialog.prototype._addMarker = function(event) {
     }
     else {
 
-        if (zoom < Com_Zimbra_Gplaces.HIGH_ZOOM_LEVEL) {
-            this._map.setZoom(zoom + Com_Zimbra_Gplaces.INCREMENT_ZOOM);
+        if (zoom < Com_Zmail_Gplaces.HIGH_ZOOM_LEVEL) {
+            this._map.setZoom(zoom + Com_Zmail_Gplaces.INCREMENT_ZOOM);
         }
         this._marker.setPosition(event.latLng);
         if (!event.reverseGeocodeSupress) {
@@ -253,12 +253,12 @@ ZmMapsDialog.prototype._expandSuggestionsTab = function() {
     var width = parseInt(x.style.width);
     x.style.display = "block";
 
-    if (width < Com_Zimbra_Gplaces.SUGGESTIONS_TAB_WIDTH) {
+    if (width < Com_Zmail_Gplaces.SUGGESTIONS_TAB_WIDTH) {
         // increase the width by 20% of current width and 2px
         x.style.width = width + (1.2 * width) + 2;
     }
 
-    if (width < Com_Zimbra_Gplaces.SUGGESTIONS_TAB_WIDTH) {
+    if (width < Com_Zmail_Gplaces.SUGGESTIONS_TAB_WIDTH) {
         setTimeout(function() {
             this._expandSuggestionsTab();
         }.bind(this), 2);      // 2 millisecond timeout
@@ -383,7 +383,7 @@ ZmMapsDialog.prototype._suggestionClicked = function (result) {
 
     var location = result.geometry.location;
     this._addMarker({latLng: location, reverseGeocodeSupress: true});
-    this._map.setZoom(Com_Zimbra_Gplaces.HIGH_ZOOM_LEVEL);
+    this._map.setZoom(Com_Zmail_Gplaces.HIGH_ZOOM_LEVEL);
 
     var request = {
         reference: result.reference

@@ -371,7 +371,7 @@ function() {
                 if(addrsbk.noSuchFolder) { continue; }
                 this._searchInSelect.addOption(addrsbk.getName(), false, addrsbk.id, "ImgContact");
             }
-            if(accts[i].isZimbraAccount && !accts[i].isMain) {
+            if(accts[i].isZmailAccount && !accts[i].isMain) {
                 if (appCtxt.get(ZmSetting.CONTACTS_ENABLED, null, this._account)) {
                     if (appCtxt.get(ZmSetting.SHARING_ENABLED, null, this._account))
                         this._searchInSelect.addOption(ZmMsg.searchPersonalSharedContacts, false, ZmContactsApp.SEARCHFOR_PAS, "ImgContact");

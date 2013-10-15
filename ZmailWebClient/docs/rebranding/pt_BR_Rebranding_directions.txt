@@ -1,24 +1,24 @@
 ﻿RENOMEANDO TÓPICOS DE AJUDA ZWC – COMO ALTERAR VARIÁVEIS
 
-A Ajuda do Cliente Zimbra para Web pode ser renomeada para substituir a referência de nome e dos produtos do Zimbra pelos nomes da sua empresa e dos seus produtos.
+A Ajuda do Cliente Zmail para Web pode ser renomeada para substituir a referência de nome e dos produtos do Zmail pelos nomes da sua empresa e dos seus produtos.
 
 As variáveis padrão no arquivo ZbMsg.properties são as seguintes:
 
-"nome completo do cliente web" - ClientNameLong = Cliente Zimbra para Web
+"nome completo do cliente web" - ClientNameLong = Cliente Zmail para Web
 "nome curto do cliente web" - ClientNameShort = ZWC
-"Nome da sua empresa" - CompanyName = Zimbra
-“Esta variável não é relevante. Não altere" - DesktopName = Zimbra Desktop
-"nome completo do produto" - CollaborationProductFullName = Pacote de colaboração Zimbra
+"Nome da sua empresa" - CompanyName = Zmail
+“Esta variável não é relevante. Não altere" - DesktopName = Zmail Desktop
+"nome completo do produto" - CollaborationProductFullName = Pacote de colaboração Zmail
 "nome curto do produto" - CollaborationProductShortName = ZCS
 
 Para alterar essas variáveis
 
-1. SSH para o servidor Zimbra
+1. SSH para o servidor Zmail
 
-2. À medida que o Zimbra altera para o seguinte diretório
-/opt/zimbra/jetty/webapps/zimbra/WEB-INF/classes/messages/
+2. À medida que o Zmail altera para o seguinte diretório
+/opt/zmail/jetty/webapps/zmail/WEB-INF/classes/messages/
 
-3. Para alterar os valores, edite ZbMsg.properties. Substitua “Zimbra” pelo nome da sua empresa. NÃO ALTERE NEM REMOVA O DESCRITOR DA VARIÁVEL.
+3. Para alterar os valores, edite ZbMsg.properties. Substitua “Zmail” pelo nome da sua empresa. NÃO ALTERE NEM REMOVA O DESCRITOR DA VARIÁVEL.
 
 4. Reinicie o servidor.  Digite zmcontrol restart.
 

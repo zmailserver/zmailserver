@@ -14,26 +14,26 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.mail;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.mail;
 
 import java.io.File;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.items.MailItem;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.DisplayMail;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.DisplayMail.Field;
-//import com.zimbra.qa.selenium.projects.ajax.ui.preferences.trustedaddresses.DisplayTrustedAddress;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.items.MailItem;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.DisplayMail;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.DisplayMail.Field;
+//import org.zmail.qa.selenium.projects.ajax.ui.preferences.trustedaddresses.DisplayTrustedAddress;
 
 
 public class ViewMail extends PrefGroupMailByMessageTest {
 
 	boolean injected = false;
-	final String mimeFolder = ZimbraSeleniumProperties.getBaseDirectory() + "/data/public/mime/email00";
+	final String mimeFolder = ZmailSeleniumProperties.getBaseDirectory() + "/data/public/mime/email00";
 	
 	public ViewMail() throws HarnessException {
 		logger.info("New "+ ViewMail.class.getCanonicalName());
@@ -78,12 +78,12 @@ public class ViewMail extends PrefGroupMailByMessageTest {
 		// Verify the To, From, Subject, Body
 		//ZAssert.assertEquals(	actual.zGetMailProperty(Field.OnBehalfOf), from, "Verify the On-Behalf-Of matches the 'From:' header");
 		/* TODO: ... debugging to be removed */
-		String fromLocator = "css=div[id='zv__TV-main__MSG'] td[id$='_from'] span[id$='_com_zimbra_email'] span:contains(from)";
+		String fromLocator = "css=div[id='zv__TV-main__MSG'] td[id$='_from'] span[id$='_org_zmail_email'] span:contains(from)";
 		ZAssert.assertEquals(app.zPageMail.sGetText(fromLocator).trim(), from, "Verify the On-Behalf-Of matches the 'From:' header");
 		
 		//ZAssert.assertEquals(	actual.zGetMailProperty(Field.From), sender, "Verify the From matches the 'Sender:' header");
 		/* TODO: ... debugging to be removed */
-		String senderLocator = "css=div[id='zv__TV-main__MSG'] td[id$='_from'] span[id$='_com_zimbra_email'] span:contains(sender)";
+		String senderLocator = "css=div[id='zv__TV-main__MSG'] td[id$='_from'] span[id$='_org_zmail_email'] span:contains(sender)";
 		ZAssert.assertEquals(app.zPageMail.sGetText(senderLocator).trim(), sender, "Verify the From matches the 'Sender:' header");
 		
 	}
@@ -117,12 +117,12 @@ public class ViewMail extends PrefGroupMailByMessageTest {
 		// Verify the To, From, Subject, Body
 		//ZAssert.assertEquals(	actual.zGetMailProperty(Field.ReplyTo), replyto, "Verify the Reply-To matches the 'Reply-To:' header");
 		/* TODO: ... debugging to be removed */
-		String replytoLocator = "css=div[id='zv__TV-main__MSG'] tr[id$='_reply to'] td.LabelColValue span[id$='_com_zimbra_email'] span:contains(replyto)";
+		String replytoLocator = "css=div[id='zv__TV-main__MSG'] tr[id$='_reply to'] td.LabelColValue span[id$='_org_zmail_email'] span:contains(replyto)";
 		ZAssert.assertEquals(app.zPageMail.sGetText(replytoLocator).trim(), replyto, "Verify the Reply-To matches the 'Reply-To:' header");
 		
 		//ZAssert.assertEquals(	actual.zGetMailProperty(Field.From), from, "Verify the From matches the 'From:' header");
 		/* TODO: ... debugging to be removed */
-		String fromLocator = "css=div[id='zv__TV-main__MSG'] td[id$='_from'] span[id$='_com_zimbra_email'] span:contains(from)";
+		String fromLocator = "css=div[id='zv__TV-main__MSG'] td[id$='_from'] span[id$='_org_zmail_email'] span:contains(from)";
 		ZAssert.assertEquals(app.zPageMail.sGetText(fromLocator).trim(), from, "Verify the From matches the 'From:' header");
 	
 	}
@@ -156,12 +156,12 @@ public class ViewMail extends PrefGroupMailByMessageTest {
 		// Verify the To, From, Subject, Body
 		//ZAssert.assertEquals(	actual.zGetMailProperty(Field.ResentFrom), resentfrom, "Verify the Resent-From matches the 'Resent-From:' header");
 		/* TODO: ... debugging to be removed */
-		String resentfromLocator = "css=div[id='zv__TV-main__MSG'] td[id$='_from'] span[id$='_com_zimbra_email'] span:contains(resentfrom)";
+		String resentfromLocator = "css=div[id='zv__TV-main__MSG'] td[id$='_from'] span[id$='_org_zmail_email'] span:contains(resentfrom)";
 		ZAssert.assertEquals(app.zPageMail.sGetText(resentfromLocator).trim(), resentfrom, "Verify the From matches the 'From:' header");
 
 		//ZAssert.assertEquals(	actual.zGetMailProperty(Field.From), from, "Verify the From matches the 'From:' header");
 		/* TODO: ... debugging to be removed */
-		String fromLocator = "css=div[id='zv__TV-main__MSG'] td[id$='_from'] span[id$='_com_zimbra_email'] span:contains(from)";
+		String fromLocator = "css=div[id='zv__TV-main__MSG'] td[id$='_from'] span[id$='_org_zmail_email'] span:contains(from)";
 		ZAssert.assertEquals(app.zPageMail.sGetText(fromLocator).trim(), from, "Verify the From matches the 'From:' header");
 
 
@@ -173,7 +173,7 @@ public class ViewMail extends PrefGroupMailByMessageTest {
 			groups = { "functional" })
 	public void ViewMail_04() throws HarnessException {
 		
-		final String mime = ZimbraSeleniumProperties.getBaseDirectory() + "/data/public/mime/Bugs/Bug64444";
+		final String mime = ZmailSeleniumProperties.getBaseDirectory() + "/data/public/mime/Bugs/Bug64444";
 		final String subject = "subject13150123168433";
 		final String from = "from13160123168433@testdomain.com";
 		final String to = "to3163210168433@testdomain.com";
@@ -204,7 +204,7 @@ public class ViewMail extends PrefGroupMailByMessageTest {
 			groups = { "functional" })
 	public void ViewMail_05() throws HarnessException {
 		
-		final String mime = ZimbraSeleniumProperties.getBaseDirectory() + "/data/public/mime/Bugs/Bug66565";
+		final String mime = ZmailSeleniumProperties.getBaseDirectory() + "/data/public/mime/Bugs/Bug66565";
 		final String subject = "subject13197565510464";
 		final String subjectText = "<u><i> subject13197565510464 </i></u>";
 
@@ -258,7 +258,7 @@ public class ViewMail extends PrefGroupMailByMessageTest {
 		// Inject the sample mime
 		String subject = "subject13188948451403";
 		String content = "Welcome to the NetWorker Listserv list";
-		String MimeFolder = ZimbraSeleniumProperties.getBaseDirectory() + "/data/public/mime/Bugs/Bug65933";
+		String MimeFolder = ZmailSeleniumProperties.getBaseDirectory() + "/data/public/mime/Bugs/Bug65933";
 		LmtpInject.injectFile(app.zGetActiveAccount().EmailAddress, new File(MimeFolder));
 
 		
@@ -281,7 +281,7 @@ public class ViewMail extends PrefGroupMailByMessageTest {
 		// Inject the sample mime
 		String subject = "subject13189485723753";
 		String content = "Enrico Medici";
-		String MimeFolder = ZimbraSeleniumProperties.getBaseDirectory() + "/data/public/mime/Bugs/Bug65623";
+		String MimeFolder = ZmailSeleniumProperties.getBaseDirectory() + "/data/public/mime/Bugs/Bug65623";
 		LmtpInject.injectFile(app.zGetActiveAccount().EmailAddress, new File(MimeFolder));
 
 		
@@ -304,7 +304,7 @@ public class ViewMail extends PrefGroupMailByMessageTest {
 		// Inject the sample mime
 		String subject = "subject13189993282183";
 		String content = "Incident Title";
-		String MimeFolder = ZimbraSeleniumProperties.getBaseDirectory() + "/data/private/mime/Bugs/Bug65079";
+		String MimeFolder = ZmailSeleniumProperties.getBaseDirectory() + "/data/private/mime/Bugs/Bug65079";
 		LmtpInject.injectFile(app.zGetActiveAccount().EmailAddress, new File(MimeFolder));
 
 		
@@ -319,11 +319,11 @@ public class ViewMail extends PrefGroupMailByMessageTest {
 		
 	}
 
-	@Test(	description = "zimbraPrefMessageViewHtmlPreferred=TRUE: Receive message with text only parts - should be rendered as text",
+	@Test(	description = "zmailPrefMessageViewHtmlPreferred=TRUE: Receive message with text only parts - should be rendered as text",
 			groups = { "functional" })
 	public void ViewMail_09() throws HarnessException {
 		
-		final String mimeFile = ZimbraSeleniumProperties.getBaseDirectory() + "/data/public/mime/email04/mimeTextOnly.txt";
+		final String mimeFile = ZmailSeleniumProperties.getBaseDirectory() + "/data/public/mime/email04/mimeTextOnly.txt";
 		final String subject = "subject13214016725788";
 		final String content = "The Ming Dynasty";
 
@@ -343,11 +343,11 @@ public class ViewMail extends PrefGroupMailByMessageTest {
 		
 	}
 
-	@Test(	description = "zimbraPrefMessageViewHtmlPreferred=TRUE: Receive message with html only parts - should be rendered as html",
+	@Test(	description = "zmailPrefMessageViewHtmlPreferred=TRUE: Receive message with html only parts - should be rendered as html",
 			groups = { "functional" })
 	public void ViewMail_10() throws HarnessException {
 		
-		final String mimeFile = ZimbraSeleniumProperties.getBaseDirectory() + "/data/public/mime/email04/mimeHtmlOnly.txt";
+		final String mimeFile = ZmailSeleniumProperties.getBaseDirectory() + "/data/public/mime/email04/mimeHtmlOnly.txt";
 		final String subject = "subject13214016672655";
 		final String content = "Bold";
 
@@ -368,11 +368,11 @@ public class ViewMail extends PrefGroupMailByMessageTest {
 		
 	}
 	
-	@Test(	description = "zimbraPrefMessageViewHtmlPreferred=TRUE: Receive message with text and html  parts - should be rendered as html",
+	@Test(	description = "zmailPrefMessageViewHtmlPreferred=TRUE: Receive message with text and html  parts - should be rendered as html",
 			groups = { "functional" })
 	public void ViewMail_11() throws HarnessException {
 		
-		final String mimeFile = ZimbraSeleniumProperties.getBaseDirectory() + "/data/public/mime/email04/mimeTextAndHtml.txt";
+		final String mimeFile = ZmailSeleniumProperties.getBaseDirectory() + "/data/public/mime/email04/mimeTextAndHtml.txt";
 		final String subject = "subject13214016621403";
 		final String content = "Bold";
 
@@ -399,7 +399,7 @@ public class ViewMail extends PrefGroupMailByMessageTest {
 			groups = { "functional", "matt" })
 	public void ViewMail_12() throws HarnessException {
 		
-		final String mimeFile = ZimbraSeleniumProperties.getBaseDirectory() + "/data/public/mime/Bugs/Bug67854";
+		final String mimeFile = ZmailSeleniumProperties.getBaseDirectory() + "/data/public/mime/Bugs/Bug67854";
 		final String subject = "subject13218526621403";
 		final String content = "The message has no text content.";
 		
@@ -430,7 +430,7 @@ public class ViewMail extends PrefGroupMailByMessageTest {
 			groups = { "functional" })
 	public void ViewMail_13() throws HarnessException {
 		
-		final String mimeFile = ZimbraSeleniumProperties.getBaseDirectory() + "/data/public/mime/Bugs/Bug72248";
+		final String mimeFile = ZmailSeleniumProperties.getBaseDirectory() + "/data/public/mime/Bugs/Bug72248";
 		final String subject = "subject13217218621403";
 		final String content = "content1328844621403";
 		
@@ -458,7 +458,7 @@ public class ViewMail extends PrefGroupMailByMessageTest {
 			groups = { "functional" })
 	public void ViewMail_14() throws HarnessException {
 		
-		final String mimeFile = ZimbraSeleniumProperties.getBaseDirectory() + "/data/public/mime/Bugs/Bug72233";
+		final String mimeFile = ZmailSeleniumProperties.getBaseDirectory() + "/data/public/mime/Bugs/Bug72233";
 		final String subject = "bug72233";
 		// final String textcontent = "text1328844621404";
 		final String htmlcontent = "html1328844621404";
@@ -484,14 +484,14 @@ public class ViewMail extends PrefGroupMailByMessageTest {
 	}
 
 	// See also 
-	// com.zimbra.qa.selenium.projects.ajax.tests.preferences.mail.trustedaddresses.TrustedEmailAddrMsgView.TrustedEmailAddrMsgView_01
+	// org.zmail.qa.selenium.projects.ajax.tests.preferences.mail.trustedaddresses.TrustedEmailAddrMsgView.TrustedEmailAddrMsgView_01
 	// et. al.
 	
 	@Test(	description = "View a message with external images",
 			groups = { "functional" })
 	public void ViewMail_20() throws HarnessException {
 		
-		final String mimeFile = ZimbraSeleniumProperties.getBaseDirectory() + "/data/public/mime/externalImage01/externalimage01.txt";
+		final String mimeFile = ZmailSeleniumProperties.getBaseDirectory() + "/data/public/mime/externalImage01/externalimage01.txt";
 		final String subject = "externalimage01";
 		
 		LmtpInject.injectFile(app.zGetActiveAccount().EmailAddress, new File(mimeFile));

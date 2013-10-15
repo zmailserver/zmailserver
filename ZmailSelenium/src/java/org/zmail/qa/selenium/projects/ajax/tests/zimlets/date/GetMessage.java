@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.zimlets.date;
+package org.zmail.qa.selenium.projects.ajax.tests.zimlets.date;
 
 import java.io.File;
 import java.util.*;
@@ -22,11 +22,11 @@ import java.util.regex.Pattern;
 
 import org.testng.annotations.*;
 
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.DisplayMail;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.DisplayMail.Field;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.DisplayMail;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.DisplayMail.Field;
 
 
 public class GetMessage extends AjaxCommonTest {
@@ -41,7 +41,7 @@ public class GetMessage extends AjaxCommonTest {
 
 		// Basic settings
 		super.startingAccountPreferences = new HashMap<String, String>() {{
-		    put("zimbraPrefGroupMailBy", "message");
+		    put("zmailPrefGroupMailBy", "message");
 		}};
 
 
@@ -53,13 +53,13 @@ public class GetMessage extends AjaxCommonTest {
 	public void GetMessage_01() throws HarnessException {
 		
 		// Create the message data to be sent
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
 		String date = "12/25/2014";
 		String body = "text " + date + " text";
 		
 		// Send the message from AccountA to the ZWC user
-		ZimbraAccount.AccountA().soapSend(
-					"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+		ZmailAccount.AccountA().soapSend(
+					"<SendMsgRequest xmlns='urn:zmailMail'>" +
 						"<m>" +
 							"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 							"<su>"+ subject +"</su>" +
@@ -83,13 +83,13 @@ public class GetMessage extends AjaxCommonTest {
 		
 		// Verify that the phone zimlet has been applied
 		//
-		// <span id="OBJ_PREFIX_DWT36_com_zimbra_date" class="Object">
-		//  <span id="OBJ_PREFIX_DWT37_com_zimbra_date" class="Object">
+		// <span id="OBJ_PREFIX_DWT36_org_zmail_date" class="Object">
+		//  <span id="OBJ_PREFIX_DWT37_org_zmail_date" class="Object">
 		//    12/25/2014
 		//  </span>
 		// </span>
 		//
-		HtmlElement.evaluate(bodyElement, "//span//span//span", "id", Pattern.compile(".*_com_zimbra_date"), 1);
+		HtmlElement.evaluate(bodyElement, "//span//span//span", "id", Pattern.compile(".*_org_zmail_date"), 1);
 		HtmlElement.evaluate(bodyElement, "//span//span//span", null, date, 1);
 
 	}
@@ -100,14 +100,14 @@ public class GetMessage extends AjaxCommonTest {
 	public void GetMessage_02() throws HarnessException {
 		
 		// Create the message data to be sent
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
 		String date1 = "12/25/2014";
 		String date2 = "1/1/2015";
 		String body = "date1: " + date1 + " date2: "+ date2;
 		
 		// Send the message from AccountA to the ZWC user
-		ZimbraAccount.AccountA().soapSend(
-					"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+		ZmailAccount.AccountA().soapSend(
+					"<SendMsgRequest xmlns='urn:zmailMail'>" +
 						"<m>" +
 							"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 							"<su>"+ subject +"</su>" +
@@ -142,7 +142,7 @@ public class GetMessage extends AjaxCommonTest {
 	public void GetMessage_03() throws HarnessException {
 
 		final String subject = "subject12912323015009";
-		final String mime = ZimbraSeleniumProperties.getBaseDirectory() + "/data/public/mime/date01/en_us_valid_dates.txt";
+		final String mime = ZmailSeleniumProperties.getBaseDirectory() + "/data/public/mime/date01/en_us_valid_dates.txt";
 		
 		// Inject the example message
 		LmtpInject.injectFile(app.zGetActiveAccount().EmailAddress, new File(mime));
@@ -180,7 +180,7 @@ public class GetMessage extends AjaxCommonTest {
 	public void GetMessage_04() throws HarnessException {
 
 		final String subject = "subject1293323025009";
-		final String mime = ZimbraSeleniumProperties.getBaseDirectory() + "/data/public/mime/date01/en_us_invalid_dates.txt";
+		final String mime = ZmailSeleniumProperties.getBaseDirectory() + "/data/public/mime/date01/en_us_invalid_dates.txt";
 		
 		// Inject the example message
 		LmtpInject.injectFile(app.zGetActiveAccount().EmailAddress, new File(mime));
@@ -213,13 +213,13 @@ public class GetMessage extends AjaxCommonTest {
 		String subject = "subject " + date;
 		
 		// Send the message from AccountA to the ZWC user
-		ZimbraAccount.AccountA().soapSend(
-					"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+		ZmailAccount.AccountA().soapSend(
+					"<SendMsgRequest xmlns='urn:zmailMail'>" +
 						"<m>" +
 							"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 							"<su>"+ subject +"</su>" +
 							"<mp ct='text/plain'>" +
-								"<content>content"+ ZimbraSeleniumProperties.getUniqueString() +"</content>" +
+								"<content>content"+ ZmailSeleniumProperties.getUniqueString() +"</content>" +
 							"</mp>" +
 						"</m>" +
 					"</SendMsgRequest>");
@@ -234,7 +234,7 @@ public class GetMessage extends AjaxCommonTest {
 		SleepUtil.sleep(5000);
 		
 		// Find the subject and the phone span
-		String locator = "css=span[id$='_com_zimbra_date']";
+		String locator = "css=span[id$='_org_zmail_date']";
 		
 		ZAssert.assertTrue(display.sIsElementPresent(locator), "Verify the date zimlet applies to the subject");
 		ZAssert.assertEquals(display.sGetText(locator), date, "Verify the date zimlet highlights the date");

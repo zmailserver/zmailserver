@@ -13,18 +13,18 @@
  * ***** END LICENSE BLOCK *****
  */
 
-AjxPackage.require("zimbraMail.spreadsheets.ZmSpreadSheetApp");
+AjxPackage.require("zmailMail.spreadsheets.ZmSpreadSheetApp");
 
-AjxPackage.require("zimbraMail.spreadsheets.controller.ZmSpreadSheetController");
-AjxPackage.require("zimbraMail.spreadsheets.controller.ZmSpreadSheetToolbars");
+AjxPackage.require("zmailMail.spreadsheets.controller.ZmSpreadSheetController");
+AjxPackage.require("zmailMail.spreadsheets.controller.ZmSpreadSheetToolbars");
 
-AjxPackage.require("zimbraMail.spreadsheets.model.msgs");
-AjxPackage.require("zimbraMail.spreadsheets.model.ZmSpreadSheetModel");
-AjxPackage.require("zimbraMail.spreadsheets.model.ZmSpreadSheetFormulae");
+AjxPackage.require("zmailMail.spreadsheets.model.msgs");
+AjxPackage.require("zmailMail.spreadsheets.model.ZmSpreadSheetModel");
+AjxPackage.require("zmailMail.spreadsheets.model.ZmSpreadSheetFormulae");
 
-AjxPackage.require("zimbraMail.spreadsheets.view.ZmSpreadSheet");
-AjxPackage.require("zimbraMail.spreadsheets.view.ZmSpreadSheetChart");
+AjxPackage.require("zmailMail.spreadsheets.view.ZmSpreadSheet");
+AjxPackage.require("zmailMail.spreadsheets.view.ZmSpreadSheetChart");
 
-AjxPackage.require("zimbraMail.briefcase.model.ZmDocletMgr");
+AjxPackage.require("zmailMail.briefcase.model.ZmDocletMgr");
 
-//AjxPackage.require("zimbraMail.ale.spreadsheet.ZmSpreadSheetEditController");
+//AjxPackage.require("zmailMail.ale.spreadsheet.ZmSpreadSheetEditController");

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.offline;
+package org.zmail.cs.offline;
 
 import java.io.IOException;
 
@@ -23,16 +23,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.offline.OfflineProvisioning;
-import com.zimbra.cs.account.soap.SoapProvisioning;
-import com.zimbra.client.ZMailbox;
+import org.zmail.common.account.Key;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.offline.OfflineProvisioning;
+import org.zmail.cs.account.soap.SoapProvisioning;
+import org.zmail.client.ZMailbox;
 
 
 public class OfflineServlet extends HttpServlet {
@@ -68,7 +68,7 @@ public class OfflineServlet extends HttpServlet {
         try {
             SoapProvisioning prov = new SoapProvisioning();
             prov.soapSetURI(LOCALHOST_ADMIN_URL);
-            prov.soapZimbraAdminAuthenticate();
+            prov.soapZmailAdminAuthenticate();
 
             setAuthCookie("local_account@host.local", "test123", resp);
             resp.sendRedirect(LOCALHOST_MAIL_URL);
@@ -82,13 +82,13 @@ public class OfflineServlet extends HttpServlet {
     @Override
     public void init() {
         try {
-            ZimbraLog.addContextFilters(OfflineLC.zdesktop_log_context_filter.value());
-            String port = LC.zimbra_admin_service_port.value();
+            ZmailLog.addContextFilters(OfflineLC.zdesktop_log_context_filter.value());
+            String port = LC.zmail_admin_service_port.value();
 
             //setting static variables
             LOCALHOST_SOAP_URL = LOCALHOST_URL_PREFIX + port + AccountConstants.USER_SERVICE_URI;
             LOCALHOST_ADMIN_URL = LOCALHOST_URL_PREFIX + port + AdminConstants.ADMIN_SERVICE_URI;
-            LOCALHOST_MAIL_URL = LOCALHOST_URL_PREFIX + port + "/zimbra/mail";
+            LOCALHOST_MAIL_URL = LOCALHOST_URL_PREFIX + port + "/zmail/mail";
 
             OfflineProvisioning.getOfflineInstance().getLocalAccount();
             OfflineSyncManager.getInstance().init();

@@ -55,7 +55,7 @@ var FLICKR_PHOTOSPERPAGE = FLICKRDISP_PHOTOSPERSLIDE;           // fetch 4x2 pho
 var YFLICKR_BUSYIMGURL = "img/animated/Imgwait_32.gif";
 
 /* YFlickr zimlet object */
-function Com_Zimbra_Yflickr_handlerObj()
+function Com_Zmail_Yflickr_handlerObj()
 {
     this.api_key = YFLICKR_APIKEY;              // API key (can be chosen roundrobin from a list
     this.api_secret = YFLICKR_APISECRET;        // API secret
@@ -89,10 +89,10 @@ function Com_Zimbra_Yflickr_handlerObj()
 }
 
 
-Com_Zimbra_Yflickr_handlerObj.prototype = new ZmZimletBase();
-Com_Zimbra_Yflickr_handlerObj.prototype.constructor = Com_Zimbra_Yflickr_handlerObj;
+Com_Zmail_Yflickr_handlerObj.prototype = new ZmZimletBase();
+Com_Zmail_Yflickr_handlerObj.prototype.constructor = Com_Zmail_Yflickr_handlerObj;
 
-FlickrZimlet = Com_Zimbra_Yflickr_handlerObj;
+FlickrZimlet = Com_Zmail_Yflickr_handlerObj;
 
 // initializer function (automatically called by zimlet framework)
 FlickrZimlet.prototype.init = function()
@@ -786,7 +786,7 @@ FlickrZimlet.prototype.doneAttachPhotos = function ()
     this.attachment_ids = [];
 }
 
-// upload a photo to the zimbra file-upload servlet
+// upload a photo to the zmail file-upload servlet
 FlickrZimlet.prototype.attachPhoto = function (callback)
 {
     var i = this.attach_current;

@@ -3257,10 +3257,10 @@ HTML>BODY .appt-selected .appt_allday_body
 }
 
 /* FIXME:these are temporary until Owen adds them as proper icons */
-.ImgYahooBig { background-image:url("/zimbra/public/tmp/yahoo.png?v=@jsVersion@"); }
-.ImgMsnBig { background-image:url("/zimbra/public/tmp/msn.png?v=@jsVersion@"); }
-.ImgAolBig { background-image:url("/zimbra/public/tmp/aol.png?v=@jsVersion@"); }
-.ImgJiveBig { background-image:url("/zimbra/public/tmp/jive.png?v=@jsVersion@"); }
+.ImgYahooBig { background-image:url("/zmail/public/tmp/yahoo.png?v=@jsVersion@"); }
+.ImgMsnBig { background-image:url("/zmail/public/tmp/msn.png?v=@jsVersion@"); }
+.ImgAolBig { background-image:url("/zmail/public/tmp/aol.png?v=@jsVersion@"); }
+.ImgJiveBig { background-image:url("/zmail/public/tmp/jive.png?v=@jsVersion@"); }
 
 .ImAccountLabel {
 	width:150px;

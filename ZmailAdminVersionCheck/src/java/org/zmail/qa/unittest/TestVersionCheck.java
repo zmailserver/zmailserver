@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -30,20 +30,20 @@ import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.io.XMLWriter;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.Version;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.client.LmcSession;
-import com.zimbra.cs.client.soap.LmcVersionCheckRequest;
-import com.zimbra.cs.client.soap.LmcVersionCheckResponse;
-import com.zimbra.cs.service.versioncheck.VersionCheck;
-import com.zimbra.cs.util.BuildInfo;
-import com.zimbra.cs.versioncheck.VersionUpdate;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.Version;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.client.LmcSession;
+import org.zmail.cs.client.soap.LmcVersionCheckRequest;
+import org.zmail.cs.client.soap.LmcVersionCheckResponse;
+import org.zmail.cs.service.versioncheck.VersionCheck;
+import org.zmail.cs.util.BuildInfo;
+import org.zmail.cs.versioncheck.VersionUpdate;
 /**
  * @author Greg Solovyev
  */
@@ -56,14 +56,14 @@ public class TestVersionCheck extends TestCase {
         Provisioning prov = Provisioning.getInstance();
         Config config;
         config = prov.getConfig();
-        this.versionCheckURL = config.getAttr(Provisioning.A_zimbraVersionCheckURL);
-        this.lastResponse = config.getAttr(Provisioning.A_zimbraVersionCheckLastResponse);
+        this.versionCheckURL = config.getAttr(Provisioning.A_zmailVersionCheckURL);
+        this.lastResponse = config.getAttr(Provisioning.A_zmailVersionCheckLastResponse);
         Map<String, String> attrs = new HashMap<String, String>();
         Server server = prov.getLocalServer();
-        attrs.put(Provisioning.A_zimbraVersionCheckURL, "http://localhost:"+server.getAttr(Provisioning.A_zimbraMailPort, "80")+"/zimbra/testversion.xml");
+        attrs.put(Provisioning.A_zmailVersionCheckURL, "http://localhost:"+server.getAttr(Provisioning.A_zmailMailPort, "80")+"/zmail/testversion.xml");
         prov.modifyAttrs(config, attrs, true);
         generateTestVersionXML();
-        String mode = server.getAttr(Provisioning.A_zimbraMailMode, "");
+        String mode = server.getAttr(Provisioning.A_zmailMailMode, "");
         if ("http".equals(mode) || "both".equals(mode)) {
             httpEnabled = true;
         } else {
@@ -73,7 +73,7 @@ public class TestVersionCheck extends TestCase {
 
     private void generateTestVersionXML() {
     	try {
-			FileWriter fileWriter = new FileWriter(LC.mailboxd_directory.value()+"/webapps/zimbra/testversion.xml");
+			FileWriter fileWriter = new FileWriter(LC.mailboxd_directory.value()+"/webapps/zmail/testversion.xml");
 			XMLWriter xw = new XMLWriter(fileWriter, org.dom4j.io.OutputFormat.createPrettyPrint());
 			Document doc = DocumentHelper.createDocument();
             org.dom4j.Element rootEl = DocumentHelper.createElement("versionCheck");
@@ -89,7 +89,7 @@ public class TestVersionCheck extends TestCase {
             updateEl.addAttribute("buildtype", BuildInfo.TYPE);
             updateEl.addAttribute("release", Integer.toString(Integer.parseInt(BuildInfo.BUILDNUM)+10));
             updateEl.addAttribute("critical", "0");
-            updateEl.addAttribute("updateURL", "http://www.zimbra.com/community/downloads.html");
+            updateEl.addAttribute("updateURL", "http://www.zmail.com/community/downloads.html");
             updateEl.addAttribute("description", "description");
             updatesEl.add(updateEl);
 
@@ -101,7 +101,7 @@ public class TestVersionCheck extends TestCase {
             updateEl.addAttribute("buildtype", BuildInfo.TYPE);
             updateEl.addAttribute("release", Integer.toString(Integer.parseInt(BuildInfo.BUILDNUM)+5));
             updateEl.addAttribute("critical", "0");
-            updateEl.addAttribute("updateURL", "http://www.zimbra.com/community/downloads.html");
+            updateEl.addAttribute("updateURL", "http://www.zmail.com/community/downloads.html");
             updateEl.addAttribute("description", "description");
             updatesEl.add(updateEl);
 
@@ -113,7 +113,7 @@ public class TestVersionCheck extends TestCase {
             updateEl.addAttribute("buildtype", BuildInfo.TYPE);
             updateEl.addAttribute("release", Integer.toString(Integer.parseInt(BuildInfo.BUILDNUM)+2));
             updateEl.addAttribute("critical", "1");
-            updateEl.addAttribute("updateURL", "http://www.zimbra.com/community/downloads.html");
+            updateEl.addAttribute("updateURL", "http://www.zmail.com/community/downloads.html");
             updateEl.addAttribute("description", "description");
             updatesEl.add(updateEl);
 
@@ -125,7 +125,7 @@ public class TestVersionCheck extends TestCase {
             updateEl.addAttribute("buildtype", BuildInfo.TYPE);
             updateEl.addAttribute("release", Integer.toString(Integer.parseInt(BuildInfo.BUILDNUM)+1));
             updateEl.addAttribute("critical", "1");
-            updateEl.addAttribute("updateURL", "http://www.zimbra.com/community/downloads.html");
+            updateEl.addAttribute("updateURL", "http://www.zmail.com/community/downloads.html");
             updateEl.addAttribute("description", "description");
             updatesEl.add(updateEl);
             xw.write(doc);
@@ -141,10 +141,10 @@ public class TestVersionCheck extends TestCase {
         Config config;
         config = prov.getConfig();
         Map<String, String> attrs = new HashMap<String, String>();
-        attrs.put(Provisioning.A_zimbraVersionCheckURL, this.versionCheckURL);
-        attrs.put(Provisioning.A_zimbraVersionCheckLastResponse, this.lastResponse);
+        attrs.put(Provisioning.A_zmailVersionCheckURL, this.versionCheckURL);
+        attrs.put(Provisioning.A_zmailVersionCheckLastResponse, this.lastResponse);
         prov.modifyAttrs(config, attrs, true);
-        File testxmlfile = new File(LC.mailboxd_directory.value()+"/webapps/zimbra/testversion.xml");
+        File testxmlfile = new File(LC.mailboxd_directory.value()+"/webapps/zmail/testversion.xml");
         testxmlfile.delete();
     }
 
@@ -155,12 +155,12 @@ public class TestVersionCheck extends TestCase {
 
     public void testSOAP() throws Exception {
         if (!httpEnabled) {
-            ZimbraLog.test.warn("http is not enabled on this server, skipping version test");
+            ZmailLog.test.warn("http is not enabled on this server, skipping version test");
             return;
         }
         LmcSession session = TestUtil.getAdminSoapSession();
         LmcVersionCheckRequest checkRequest = new LmcVersionCheckRequest();
-        checkRequest.setAction(AdminConstants.VERSION_CHECK_CHECK);//this should retreive the new version from http://localhost/zimbra/test/testversion.xml
+        checkRequest.setAction(AdminConstants.VERSION_CHECK_CHECK);//this should retreive the new version from http://localhost/zmail/test/testversion.xml
         checkRequest.setSession(session);
         String url = TestUtil.getAdminSoapUrl();
         LmcVersionCheckResponse resp = (LmcVersionCheckResponse) checkRequest.invoke(url);
@@ -171,7 +171,7 @@ public class TestVersionCheck extends TestCase {
         Provisioning prov = Provisioning.getInstance();
         Config config;
         config = prov.getConfig();
-        String savedResp = config.getAttr(Provisioning.A_zimbraVersionCheckLastResponse);
+        String savedResp = config.getAttr(Provisioning.A_zmailVersionCheckLastResponse);
         assertNotNull(savedResp);
 
         //check response from admin service
@@ -216,16 +216,16 @@ public class TestVersionCheck extends TestCase {
 
     public void testCheckVersion() throws Exception {
         if (!httpEnabled) {
-            ZimbraLog.test.warn("http is not enabled on this server, skipping version test");
+            ZmailLog.test.warn("http is not enabled on this server, skipping version test");
             return;
         }
         //the idea is to test retreiving an XML and putting it into LDAP
-        VersionCheck.checkVersion(); //this should retreive the new version from http://localhost/zimbra/test/testversion.xml
+        VersionCheck.checkVersion(); //this should retreive the new version from http://localhost/zmail/test/testversion.xml
         Provisioning prov = Provisioning.getInstance();
         Config config;
         config = prov.getConfig();
 
-        String resp = config.getAttr(Provisioning.A_zimbraVersionCheckLastResponse);
+        String resp = config.getAttr(Provisioning.A_zmailVersionCheckLastResponse);
         assertNotNull(resp);
         Element respDoc = Element.parseXML(resp);
         assertNotNull(respDoc);

@@ -14,7 +14,7 @@
 --%>
 
 
-<%@ page language="java" import="com.zimbra.zimlet.example.*" %>
+<%@ page language="java" import="org.zmail.zimlet.example.*" %>
 
 <%
 

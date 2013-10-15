@@ -13,18 +13,18 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.taglib.tag.calendar;
+package org.zmail.cs.taglib.tag.calendar;
 
-import com.zimbra.cs.taglib.bean.ZApptSummariesBean;
-import com.zimbra.cs.taglib.tag.ZimbraSimpleTag;
-import com.zimbra.client.ZAppointmentHit;
+import org.zmail.cs.taglib.bean.ZApptSummariesBean;
+import org.zmail.cs.taglib.tag.ZmailSimpleTag;
+import org.zmail.client.ZAppointmentHit;
 
 import javax.servlet.jsp.JspContext;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.JspFragment;
 import java.io.IOException;
 
-public class ForEachAppointmentTag extends ZimbraSimpleTag {
+public class ForEachAppointmentTag extends ZmailSimpleTag {
 
     private String mVar;
     private long mStart = -1;

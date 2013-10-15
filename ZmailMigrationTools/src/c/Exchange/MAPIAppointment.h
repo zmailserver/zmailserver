@@ -89,15 +89,15 @@ private:
     wstring m_pHtmlFile;
     vector<MAPIAppointment*> m_vExceptions;
     wstring m_pExceptionType;
-	Zimbra::Mail::TimeZone::OlkTimeZone _olkTz;
+	Zmail::Mail::TimeZone::OlkTimeZone _olkTz;
     LPWSTR _pTzString;
-	Zimbra::MAPI::MAPIStore *m_mapiStore;
-	Zimbra::Mail::TimeZone *pInvTz;
+	Zmail::MAPI::MAPIStore *m_mapiStore;
+	Zmail::Mail::TimeZone *pInvTz;
 
 	IAddrBook *m_pAddrBook;
 	HRESULT UpdateAttendeeFromEntryId(Attendee &pAttendee,SBinary &eid);
 public:
-    MAPIAppointment(Zimbra::MAPI::MAPISession &session, Zimbra::MAPI::MAPIStore &store, Zimbra::MAPI::MAPIMessage &mMessage, int exceptionType);
+    MAPIAppointment(Zmail::MAPI::MAPISession &session, Zmail::MAPI::MAPIStore &store, Zmail::MAPI::MAPIMessage &mMessage, int exceptionType);
     ~MAPIAppointment();
     HRESULT InitNamedPropsForAppt();
     HRESULT SetMAPIAppointmentValues();
@@ -126,8 +126,8 @@ public:
     int SetRecurValues();
     void SetExceptions();
     void SetExceptionType(int type);
-    void FillInExceptionAppt(MAPIAppointment* ex, Zimbra::Mapi::COutlookRecurrenceException* lpException);
-    void FillInCancelException(MAPIAppointment* pEx, Zimbra::Mapi::CFileTime cancelDate);
+    void FillInExceptionAppt(MAPIAppointment* ex, Zmail::Mapi::COutlookRecurrenceException* lpException);
+    void FillInCancelException(MAPIAppointment* pEx, Zmail::Mapi::CFileTime cancelDate);
 
     wstring GetSubject();
     wstring GetStartDate();

@@ -14,7 +14,7 @@
  */
 
 // Initialize 
-function Com_Zimbra_Photo() {
+function Com_Zmail_Photo() {
     this.nameToImage= {
 	"Bill Evans" : "bill_evans.jpg",
 	"Jimmy Smith" : "jimmy_smith.jpg",
@@ -24,16 +24,16 @@ function Com_Zimbra_Photo() {
     };
 }
 
-Com_Zimbra_Photo.prototype.init =
+Com_Zmail_Photo.prototype.init =
     function() {
 	// Pre-load placeholder image
 	(new Image()).src = this.getResource('blank_pixel.gif');
     };
 
-Com_Zimbra_Photo.prototype = new ZmZimletBase();
-Com_Zimbra_Photo.prototype.constructor = Com_Zimbra_Photo;
+Com_Zmail_Photo.prototype = new ZmZimletBase();
+Com_Zmail_Photo.prototype.constructor = Com_Zmail_Photo;
 
-Com_Zimbra_Photo.prototype.match =
+Com_Zmail_Photo.prototype.match =
     function(line, startIndex) {
 	var match;
 
@@ -50,7 +50,7 @@ Com_Zimbra_Photo.prototype.match =
 	return match;
     };
 
-Com_Zimbra_Photo.prototype.toolTipPoppedUp =
+Com_Zmail_Photo.prototype.toolTipPoppedUp =
     function(spanElement, obj, context, canvas) {
 	var image = this.nameToImage[obj];
 	// alert("obj = '" + obj + "', image='" + image + "'");

@@ -12,31 +12,31 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.tag;
+package org.zmail.cs.taglib.tag;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.VoiceConstants;
-import com.zimbra.cs.taglib.ZJspSession;
-import com.zimbra.cs.taglib.bean.ZFolderBean;
-import com.zimbra.cs.taglib.bean.ZTagBean;
-import com.zimbra.cs.taglib.bean.ZPhoneAccountBean;
-import com.zimbra.client.ZFolder;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZSearchFolder;
-import com.zimbra.client.ZSearchParams;
-import com.zimbra.client.ZTag;
-import com.zimbra.client.ZPhoneAccount;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.VoiceConstants;
+import org.zmail.cs.taglib.ZJspSession;
+import org.zmail.cs.taglib.bean.ZFolderBean;
+import org.zmail.cs.taglib.bean.ZTagBean;
+import org.zmail.cs.taglib.bean.ZPhoneAccountBean;
+import org.zmail.client.ZFolder;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZSearchFolder;
+import org.zmail.client.ZSearchParams;
+import org.zmail.client.ZTag;
+import org.zmail.client.ZPhoneAccount;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
-import com.zimbra.cs.taglib.tag.i18n.I18nUtil;
-import com.zimbra.soap.type.SearchSortBy;
+import org.zmail.cs.taglib.tag.i18n.I18nUtil;
+import org.zmail.soap.type.SearchSortBy;
 import java.io.IOException;
 import java.util.List;
 
-public class ComputeSearchContextTag extends ZimbraSimpleTag {
+public class ComputeSearchContextTag extends ZmailSimpleTag {
 
     private static final int DEFAULT_SEARCH_LIMIT = 25;
 
@@ -256,7 +256,7 @@ public class ComputeSearchContextTag extends ZimbraSimpleTag {
                 result.setSelectedId(folder.getId());
             } else if (acct != null) {
                 /**
-                 * Zimbra Desktop passes account name as a param to the print module as lite client doesn't understand
+                 * Zmail Desktop passes account name as a param to the print module as lite client doesn't understand
                  * family mailbox. Use the folder name passed from ZD as is to set the query for the SearchRequest. 
                  */
                 result.setQuery("inid:\"" + sfi + "\"");

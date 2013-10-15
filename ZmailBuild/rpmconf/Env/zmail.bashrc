@@ -13,7 +13,7 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
-ZIMBRA_HOME=/opt/zimbra
+ZIMBRA_HOME=/opt/zmail
 export ZIMBRA_HOME
 
 if [ -x "${ZIMBRA_HOME}/libexec/get_plat_tag.sh" ]; then
@@ -43,13 +43,13 @@ SNMPCONFPATH=${ZIMBRA_HOME}/conf
 export SNMPCONFPATH
 
 eval `/usr/bin/perl -V:archname`
-PERLLIB=${ZIMBRA_HOME}/zimbramon/lib/$archname:${ZIMBRA_HOME}/zimbramon/lib
+PERLLIB=${ZIMBRA_HOME}/zmailmon/lib/$archname:${ZIMBRA_HOME}/zmailmon/lib
 export PERLLIB
 
 PERL5LIB=$PERLLIB
 export PERL5LIB
 
-JYTHONPATH=/opt/zimbra/zimbramon/pylibs
+JYTHONPATH=/opt/zmail/zmailmon/pylibs
 export JYTHONPATH
 
 ulimit -n 524288 > /dev/null 2>&1
@@ -57,4 +57,4 @@ umask 0027
 
 unset DISPLAY
 
-export MANPATH=/opt/zimbra/opendkim/share/man:${MANPATH}
+export MANPATH=/opt/zmail/opendkim/share/man:${MANPATH}

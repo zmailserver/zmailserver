@@ -17,7 +17,7 @@
 #include "common.h"
 #include "..\Exchange\Exchange.h"
 #include "..\Exchange\ExchangeAdmin.h"
-#include "Zimbra/RPC.h"
+#include "Zmail/RPC.h"
 #include "..\Exchange\MAPIAccessAPI.h"
 #include "..\Exchange\Util.h"
 
@@ -30,27 +30,27 @@
 LPCWSTR lpProfileName = L"testprofile";
 LPCWSTR lpExchangeServer = L"10.112.16.164";
 LPCWSTR lpServerAddress = L"10.117.82.163";
-LPCWSTR lpAdminUser = L"admin@zcs2.zmexch.in.zimbra.com";
-LPCWSTR lpAccountUser = L"av1@zcs2.zmexch.in.zimbra.com";
+LPCWSTR lpAdminUser = L"admin@zcs2.zmexch.in.zmail.com";
+LPCWSTR lpAccountUser = L"av1@zcs2.zmexch.in.zmail.com";
 LPCWSTR lpAccountUserPwd = L"test123";
 LPCWSTR lpAdminPwd = L"z1mbr4";
 ULONG nAdminPort = 7071;
 ULONG nPort = 80;
-Zimbra::Rpc::Connection *m_pConnection = NULL;
+Zmail::Rpc::Connection *m_pConnection = NULL;
 
 void Init()
 {
-    Zimbra::Mapi::Memory::SetMemAllocRoutines(NULL, MAPIAllocateBuffer, MAPIAllocateMore,
+    Zmail::Mapi::Memory::SetMemAllocRoutines(NULL, MAPIAllocateBuffer, MAPIAllocateMore,
         MAPIFreeBuffer);
 }
 
 void AdminAuth()
 {
-    Zimbra::Rpc::AdminAuthRequest authRequest(lpAdminUser, lpAdminPwd, L"");
-    Zimbra::Rpc::AdminConnection *m_pAdminConnection;
-    Zimbra::Util::ScopedInterface<IXMLDOMDocument2> pResponseXml;
+    Zmail::Rpc::AdminAuthRequest authRequest(lpAdminUser, lpAdminPwd, L"");
+    Zmail::Rpc::AdminConnection *m_pAdminConnection;
+    Zmail::Util::ScopedInterface<IXMLDOMDocument2> pResponseXml;
 
-    m_pAdminConnection = new Zimbra::Rpc::AdminConnection(lpServerAddress, nAdminPort, TRUE, 0,
+    m_pAdminConnection = new Zmail::Rpc::AdminConnection(lpServerAddress, nAdminPort, TRUE, 0,
         L"");
     m_pAdminConnection->SetCurrentUser((LPWSTR)lpAccountUser);
     m_pAdminConnection->SendRequest(authRequest, pResponseXml.getref());
@@ -58,22 +58,22 @@ void AdminAuth()
 
 void UserAuth()
 {
-    Zimbra::Util::ScopedInterface<IXMLDOMDocument2> pResponseXml;
+    Zmail::Util::ScopedInterface<IXMLDOMDocument2> pResponseXml;
 
-    m_pConnection = new Zimbra::Rpc::Connection(L"migration", lpServerAddress, nPort, false, 0,
+    m_pConnection = new Zmail::Rpc::Connection(L"migration", lpServerAddress, nPort, false, 0,
         L"");
 
     m_pConnection->SetCurrentUser((LPWSTR)lpAccountUser);
 
-    Zimbra::Rpc::AuthRequest authRequest(lpAccountUser, lpAccountUserPwd, lpServerAddress);
+    Zmail::Rpc::AuthRequest authRequest(lpAccountUser, lpAccountUserPwd, lpServerAddress);
 
     m_pConnection->SendRequest(authRequest, pResponseXml.getref());
 
-    Zimbra::Util::ScopedPtr<Zimbra::Rpc::Response> pResponse(
-    Zimbra::Rpc::Response::Manager::NewResponse(pResponseXml.get()));
+    Zmail::Util::ScopedPtr<Zmail::Rpc::Response> pResponse(
+    Zmail::Rpc::Response::Manager::NewResponse(pResponseXml.get()));
 }
 
-BOOL FileUpload(Zimbra::Rpc::ZimbraConnection *z_connection, LPWSTR *ppwszToken)
+BOOL FileUpload(Zmail::Rpc::ZmailConnection *z_connection, LPWSTR *ppwszToken)
 {
     LOGFN_INTERNAL_NO;
 
@@ -105,10 +105,10 @@ BOOL FileUpload(Zimbra::Rpc::ZimbraConnection *z_connection, LPWSTR *ppwszToken)
 
 void ZCFileUploadTest()
 {
-    Zimbra::Rpc::UserSession *session = Zimbra::Rpc::UserSession::CreateInstance(lpProfileName,
+    Zmail::Rpc::UserSession *session = Zmail::Rpc::UserSession::CreateInstance(lpProfileName,
         lpAccountUser, lpAccountUserPwd, lpServerAddress, nPort, 0, 0, L"", false);
-    Zimbra::Rpc::UserSession::SetProfileName(lpProfileName);
-    Zimbra::Rpc::ZimbraConnection *z_pConnection = new Zimbra::Rpc::ZimbraConnection(
+    Zmail::Rpc::UserSession::SetProfileName(lpProfileName);
+    Zmail::Rpc::ZmailConnection *z_pConnection = new Zmail::Rpc::ZmailConnection(
         L"migration", lpServerAddress, nPort, false, 0, L"");
 
     z_pConnection->SetProfileName(lpProfileName);
@@ -117,7 +117,7 @@ void ZCFileUploadTest()
 
     FileUpload(z_pConnection, &pwszToken);
 
-    Zimbra::Rpc::SendMsgRequest request(pwszToken);
+    Zmail::Rpc::SendMsgRequest request(pwszToken);
 
     // free the token right away
     z_pConnection->FreeBuffer(pwszToken);
@@ -125,13 +125,13 @@ void ZCFileUploadTest()
     request.SetAuthToken(session->AuthToken());
     if (session->SetNoSession())
         request.SetNoSession();
-    Zimbra::Rpc::ScopedRPCResponse pResponse;
+    Zmail::Rpc::ScopedRPCResponse pResponse;
 
     try
     {
         z_pConnection->SendRequest(request, pResponse.getref());
     }
-    catch (Zimbra::Rpc::SoapFaultResponse &fault)
+    catch (Zmail::Rpc::SoapFaultResponse &fault)
     {
         LOG_ERROR(_T("Response is soap error exception (%s)."), fault.ErrorCode());
         return;
@@ -140,34 +140,34 @@ void ZCFileUploadTest()
 
 void CreateExchangeMailBox()
 {
-    Zimbra::MAPI::ExchangeAdmin *exchadmin = new Zimbra::MAPI::ExchangeAdmin(lpExchangeServer);
+    Zmail::MAPI::ExchangeAdmin *exchadmin = new Zmail::MAPI::ExchangeAdmin(lpExchangeServer);
 
     try
     {
         try
         {
-            exchadmin->DeleteProfile(Zimbra::MAPI::DEFAULT_ADMIN_PROFILE_NAME);
+            exchadmin->DeleteProfile(Zmail::MAPI::DEFAULT_ADMIN_PROFILE_NAME);
         }
-        catch (Zimbra::MAPI::ExchangeAdminException &ex)
+        catch (Zmail::MAPI::ExchangeAdminException &ex)
         {
             UNREFERENCED_PARAMETER(ex);
         }
         try
         {
-            exchadmin->DeleteExchangeMailBox(Zimbra::MAPI::DEFAULT_ADMIN_MAILBOX_NAME,
+            exchadmin->DeleteExchangeMailBox(Zmail::MAPI::DEFAULT_ADMIN_MAILBOX_NAME,
                 L"Administrator", L"z1mbr4Migration");
         }
-        catch (Zimbra::MAPI::ExchangeAdminException &ex)
+        catch (Zmail::MAPI::ExchangeAdminException &ex)
         {
             UNREFERENCED_PARAMETER(ex);
         }
-        exchadmin->CreateExchangeMailBox(Zimbra::MAPI::DEFAULT_ADMIN_MAILBOX_NAME,
+        exchadmin->CreateExchangeMailBox(Zmail::MAPI::DEFAULT_ADMIN_MAILBOX_NAME,
              L"z1mbr4Migration", L"Administrator", L"z1mbr4Migration");
-        exchadmin->CreateProfile(Zimbra::MAPI::DEFAULT_ADMIN_PROFILE_NAME,
-            Zimbra::MAPI::DEFAULT_ADMIN_MAILBOX_NAME,  L"z1mbr4Migration");
-        exchadmin->SetDefaultProfile(Zimbra::MAPI::DEFAULT_ADMIN_PROFILE_NAME);
+        exchadmin->CreateProfile(Zmail::MAPI::DEFAULT_ADMIN_PROFILE_NAME,
+            Zmail::MAPI::DEFAULT_ADMIN_MAILBOX_NAME,  L"z1mbr4Migration");
+        exchadmin->SetDefaultProfile(Zmail::MAPI::DEFAULT_ADMIN_PROFILE_NAME);
     }
-    catch (Zimbra::MAPI::ExchangeAdminException &ex)
+    catch (Zmail::MAPI::ExchangeAdminException &ex)
     {
         UNREFERENCED_PARAMETER(ex);
     }
@@ -176,7 +176,7 @@ void CreateExchangeMailBox()
 
 void GetAllProfiles()
 {
-    Zimbra::MAPI::ExchangeAdmin *exchadmin = new Zimbra::MAPI::ExchangeAdmin(lpExchangeServer);
+    Zmail::MAPI::ExchangeAdmin *exchadmin = new Zmail::MAPI::ExchangeAdmin(lpExchangeServer);
 
     vector<string> vProfileList;
     exchadmin->GetAllProfiles(vProfileList);
@@ -188,7 +188,7 @@ void GetUserDN()
 {
     wstring userDN;
     wstring lagcyName;
-    Zimbra::MAPI::Util::GetUserDNAndLegacyName(lpExchangeServer, L"Administrator", NULL, userDN,
+    Zmail::MAPI::Util::GetUserDNAndLegacyName(lpExchangeServer, L"Administrator", NULL, userDN,
         lagcyName);
 }
 
@@ -236,16 +236,16 @@ DWORD WINAPI AccountMigrationThread(LPVOID lpParameter)
 
     vector<Folder_Data> vfolderlist;
 
-    Zimbra::MAPI::MAPIAccessAPI *maapi = NULL;
+    Zmail::MAPI::MAPIAccessAPI *maapi = NULL;
 
     if (PROFILE_MIGARTION)
     {
-        maapi = new Zimbra::MAPI::MAPIAccessAPI(L"", L"");
+        maapi = new Zmail::MAPI::MAPIAccessAPI(L"", L"");
     }
     else
     {
         // Create class instance with Exchange mailbox to be migrated
-        maapi = new Zimbra::MAPI::MAPIAccessAPI(mtparams->mailboxname, L"");
+        maapi = new Zmail::MAPI::MAPIAccessAPI(mtparams->mailboxname, L"");
         printf("MAILBOXNAME: %S\n", mtparams->mailboxname.c_str());
     }
 
@@ -270,7 +270,7 @@ DWORD WINAPI AccountMigrationThread(LPVOID lpParameter)
         printf("FolderPath: %S ", (*it).folderpath.c_str());
         printf("ContainerClass: %S ", (*it).containerclass.c_str());
         printf("ItemCount: %d ", (*it).itemcount);
-        printf("ZimbraId: %d\n", (*it).zimbraid);
+        printf("ZmailId: %d\n", (*it).zmailid);
         printf("\n\n");
 
         SBinary sbin = (*it).sbin;
@@ -453,7 +453,7 @@ int main(int argc, TCHAR *argv[])
 // GetAllProfiles();
 // GetDomainName();
     MAPIAccessAPITestV();
-// Zimbra::MAPI::Util::ReverseDelimitedString(L"lb1/tv2/cr3/Inbox/TopFolder",L"/");
+// Zmail::MAPI::Util::ReverseDelimitedString(L"lb1/tv2/cr3/Inbox/TopFolder",L"/");
 // ExchangeMigrationSetupTest();
 // CreateExchangeMailBox();
 

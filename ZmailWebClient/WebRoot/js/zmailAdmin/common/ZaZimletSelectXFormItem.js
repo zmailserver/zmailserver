@@ -199,7 +199,7 @@ ZaZimletSelect_XFormItem.prototype.showToolTip = function(zimletName, event) {
 		desc = "Unknown Zimlet";
 	} else {
 		// convert description variable to the readable text
-		desc = ZaZimletListView.__processMessage(zimletName, zimlet.attrs[ZaZimlet.A_zimbraZimletDescription ]);
+		desc = ZaZimletListView.__processMessage(zimletName, zimlet.attrs[ZaZimlet.A_zmailZimletDescription ]);
 		if (desc.slice(0, 2) == "${") { // the zimlet main js is not yet loaded
 			desc = ZaMsg.Zimlet_Description_Loading;
 		}

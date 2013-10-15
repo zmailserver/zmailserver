@@ -1,11 +1,11 @@
 <%@ page buffer="8kb" autoFlush="true" %>
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
 <%@ page session="false" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
-<%@ taglib prefix="app" uri="com.zimbra.htmlclient" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
+<%@ taglib prefix="app" uri="org.zmail.htmlclient" %>
 <%-- this checks and redirects to admin if need be --%>
 <zm:adminRedirect/>
 <app:skinAndRedirect />
@@ -55,7 +55,7 @@
         </c:when>
         <c:when test="${param.loginOp eq 'logout'}">
             <zm:getDomainInfo var="domainInfo" by="virtualHostname" value="${zm:getServerName(pageContext)}"/>
-            <c:set var="logoutRedirectUrl" value="${domainInfo.attrs.zimbraWebClientLogoutURL}" />
+            <c:set var="logoutRedirectUrl" value="${domainInfo.attrs.zmailWebClientLogoutURL}" />
             <c:set var="isAllowedUA" value="${zm:isAllowedUA(ua, domainInfo.webClientLogoutURLAllowedUA)}"/>
             <zm:logout/>
             <c:if test="${not empty logoutRedirectUrl and (isAllowedUA eq true) and (empty param.virtualacctdomain) and (empty virtualacctdomain)}" >
@@ -135,7 +135,7 @@
             <c:set var="client" value="${param.client}"/>
             <c:if test="${empty client and useMobile}"><c:set var="client" value="mobile"/></c:if>
             <c:if test="${empty client or client eq 'preferred'}">
-                <c:set var="client" value="${requestScope.authResult.prefs.zimbraPrefClientType[0]}"/>
+                <c:set var="client" value="${requestScope.authResult.prefs.zmailPrefClientType[0]}"/>
             </c:if>
             <c:choose>
         		<c:when test="${client eq 'advanced'}">
@@ -231,7 +231,7 @@ if (application.getInitParameter("offlineMode") != null)  {
 
 <zm:getDomainInfo var="domainInfo" by="virtualHostname" value="${zm:getServerName(pageContext)}"/>
 <c:if test="${((empty pageContext.request.queryString) or (fn:indexOf(pageContext.request.queryString,'customerDomain') == -1)) and (empty param.virtualacctdomain) and (empty virtualacctdomain) }">
-	<c:set var="domainLoginRedirectUrl" value="${domainInfo.attrs.zimbraWebClientLoginURL}" />
+	<c:set var="domainLoginRedirectUrl" value="${domainInfo.attrs.zmailWebClientLoginURL}" />
     <c:set var="isAllowedUA" value="${zm:isAllowedUA(ua, domainInfo.webClientLoginURLAllowedUA)}"/>
 </c:if>
 
@@ -259,7 +259,7 @@ if (application.getInitParameter("offlineMode") != null)  {
 
 <%
 	Cookie testCookie = new Cookie("ZM_TEST", "true");
-	testCookie.setSecure(com.zimbra.cs.taglib.ZJspSession.secureAuthTokenCookie(request));
+	testCookie.setSecure(org.zmail.cs.taglib.ZJspSession.secureAuthTokenCookie(request));
 	response.addCookie(testCookie);
     //Add the no-cache headers to ensure that the login page is never served from cache
     response.addHeader("Vary", "User-Agent");
@@ -295,10 +295,10 @@ if (application.getInitParameter("offlineMode") != null)  {
     <c:set var="smallScreen" value="${client eq 'mobile'}"/>
     <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <title><fmt:message key="zimbraLoginTitle"/></title>
-    <c:set var="version" value="${initParam.zimbraCacheBusterVersion}"/>
+    <title><fmt:message key="zmailLoginTitle"/></title>
+    <c:set var="version" value="${initParam.zmailCacheBusterVersion}"/>
     <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=1;">
-    <meta name="description" content="<fmt:message key="zimbraLoginMetaDesc"/>">
+    <meta name="description" content="<fmt:message key="zmailLoginMetaDesc"/>">
     <link  rel="stylesheet" type="text/css" href="<c:url value='/css/common,login,zhtml.css'>
 		<c:param name="skin"	value="${skin}" />
 		<c:param name="v"		value="${version}" />
@@ -331,7 +331,7 @@ if (application.getInitParameter("offlineMode") != null)  {
 		<div class="${smallScreen?'center-small':'center'}">
 			<div class="contentBox">
 				<div class="ImgAltBanner"></div>
-				<h1><a href="http://www.zimbra.com/" id="bannerLink" target="_new">
+				<h1><a href="http://www.zmail.com/" id="bannerLink" target="_new">
 					<span class="Img${smallScreen?'App':'Login'}Banner"></span>
 				</a></h1>
 				<div id="ZLoginAppName"><fmt:message key="splashScreenAppName"/></div>

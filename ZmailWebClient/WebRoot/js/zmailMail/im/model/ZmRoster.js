@@ -228,14 +228,14 @@ function(callback, services) {
 };
 
 ZmRoster.prototype.joinChatRequest = function(thread, addr) {
-        var sd = AjxSoapDoc.create("IMJoinConferenceRoomRequest", "urn:zimbraIM");
+        var sd = AjxSoapDoc.create("IMJoinConferenceRoomRequest", "urn:zmailIM");
         var method = sd.getMethod();
         method.setAttribute("thread", thread);
         method.setAttribute("addr", addr);
         appCtxt.getAppController().sendRequest({ soapDoc: sd, asyncMode: true });
 
 //         // WORKAROUND: send "/join " + thread
-// 	var soapDoc = AjxSoapDoc.create("IMSendMessageRequest", "urn:zimbraIM");
+// 	var soapDoc = AjxSoapDoc.create("IMSendMessageRequest", "urn:zmailIM");
 // 	var method = soapDoc.getMethod();
 // 	var message = soapDoc.set("message");
 // 	message.setAttribute("thread", thread);

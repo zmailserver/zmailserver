@@ -1950,7 +1950,7 @@ function(email) {
     if(this._sharedCalIds && this._sharedCalIds[email]) {
         return this._sharedCalIds[email];
     }
-    var jsonObj = {GetShareInfoRequest:{_jsns:"urn:zimbraAccount"}};
+    var jsonObj = {GetShareInfoRequest:{_jsns:"urn:zmailAccount"}};
 	var request = jsonObj.GetShareInfoRequest;
 	if (email) {
 		request.owner = {by:"name", _content:email};
@@ -1986,7 +1986,7 @@ function(params) {
         return;
     }
 
-    var soapDoc = AjxSoapDoc.create("GetAccountInfoRequest", "urn:zimbraAccount", null);
+    var soapDoc = AjxSoapDoc.create("GetAccountInfoRequest", "urn:zmailAccount", null);
     var elBy = soapDoc.set("account", params.email);
     elBy.setAttribute("by", "name");
 

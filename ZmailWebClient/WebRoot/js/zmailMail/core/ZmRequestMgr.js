@@ -468,7 +468,7 @@ function(dlg, acct) {
 ZmRequestMgr.prototype._handleOfflineDialogAction =
 function(dlg, type, acctId, action) {
     var args = {
-			jsonObj: { DialogActionRequest: { _jsns: "urn:zimbraOffline", type: type, id:acctId, action: action ? "yes" : "no" } },
+			jsonObj: { DialogActionRequest: { _jsns: "urn:zmailOffline", type: type, id:acctId, action: action ? "yes" : "no" } },
             callback: new AjxCallback(this, this._handleOfflineDialogActionResp, dlg),
 			errorCallback: new AjxCallback(this, this._handleOfflineDialogActionResp, dlg),
 			asyncMode: true
@@ -623,7 +623,7 @@ function(dialog) {
     window.onbeforeunload = null;
     var url = AjxUtil.formatUrl();
 	DBG.println(AjxDebug.DBG1, "SERVER_VERSION changed!");
-    ZmZimbraMail.sendRedirect(url); // redirect to self to force reload
+    ZmZmailMail.sendRedirect(url); // redirect to self to force reload
 };
 
 /**

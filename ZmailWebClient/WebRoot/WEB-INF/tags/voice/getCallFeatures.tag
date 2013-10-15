@@ -13,14 +13,14 @@
  * ***** END LICENSE BLOCK *****
 --%>
 <%@ tag body-content="empty" %>
-<%@ attribute name="account" rtexprvalue="true" required="true" type="com.zimbra.cs.taglib.bean.ZPhoneAccountBean" %>
+<%@ attribute name="account" rtexprvalue="true" required="true" type="org.zmail.cs.taglib.bean.ZPhoneAccountBean" %>
 <%@ attribute name="var" rtexprvalue="false" required="true" type="java.lang.String" %>
-<%@ variable name-from-attribute="var" alias='outputVar' scope="AT_BEGIN" variable-class="com.zimbra.cs.taglib.bean.ZCallFeaturesBean" %>
+<%@ variable name-from-attribute="var" alias='outputVar' scope="AT_BEGIN" variable-class="org.zmail.cs.taglib.bean.ZCallFeaturesBean" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
-<%@ taglib prefix="app" uri="com.zimbra.htmlclient" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
+<%@ taglib prefix="app" uri="org.zmail.htmlclient" %>
 
 <c:choose>
     <c:when test="${param.haveForwardFromList and !zm:actionSet(param, 'actionSave')}">

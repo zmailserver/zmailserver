@@ -74,8 +74,8 @@ pref("app.update.lastUpdateDate.background-update-timer", 0);
 
 pref("app.update.silent", false);
 pref("app.update.log.all", true);
-pref("app.update.url.manual", "http://www.zimbra.com/products/desktop.html");
-pref("app.update.url.details", "http://www.zimbra.com/products/desktop.html");
-pref("app.update.url", "http://www.zimbra.com/update/zdesktop/%VERSION%/%BUILD_ID%/%OS%/update.xml");
+pref("app.update.url.manual", "http://www.zmail.com/products/desktop.html");
+pref("app.update.url.details", "http://www.zmail.com/products/desktop.html");
+pref("app.update.url", "http://www.zmail.com/update/zdesktop/%VERSION%/%BUILD_ID%/%OS%/update.xml");
 
 pref("browser.dom.window.dump.enabled", true);

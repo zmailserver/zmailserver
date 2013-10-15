@@ -1,5 +1,5 @@
 """
-Zimbra VA build components.
+Zmail VA build components.
 """
 
 CSC_UBUNTU804_BRANCH = 'main'

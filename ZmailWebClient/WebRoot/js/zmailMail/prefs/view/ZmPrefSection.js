@@ -34,7 +34,7 @@ ZmPrefSection = function(parent, section, controller) {
 
 	this._section = section;
 	this._controller = controller;
-	this._title = [ZmMsg.zimbraTitle, controller.getApp().getDisplayName(), section.title].join(": ");
+	this._title = [ZmMsg.zmailTitle, controller.getApp().getDisplayName(), section.title].join(": ");
 
 	this._rendered = false; // for DwtTabViewPage
 	this.hasRendered = false;

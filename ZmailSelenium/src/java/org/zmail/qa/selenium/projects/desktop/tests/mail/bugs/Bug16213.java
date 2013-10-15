@@ -14,19 +14,19 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.mail.bugs;
+package org.zmail.qa.selenium.projects.desktop.tests.mail.bugs;
 
 import java.io.File;
 import java.util.*;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.ConversationItem;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.mail.DisplayMail;
-import com.zimbra.qa.selenium.projects.desktop.ui.mail.DisplayMail.Field;
+import org.zmail.qa.selenium.framework.items.ConversationItem;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.mail.DisplayMail;
+import org.zmail.qa.selenium.projects.desktop.ui.mail.DisplayMail.Field;
 
 
 public class Bug16213 extends AjaxCommonTest {
@@ -43,9 +43,9 @@ public class Bug16213 extends AjaxCommonTest {
 
 		// Make sure we are using an account with message view
 		super.startingAccountPreferences = new HashMap<String, String>() {{
-			put("zimbraPrefGroupMailBy", "conversation");
-			put("zimbraPrefMessageViewHtmlPreferred", "TRUE");
-			put("zimbraPrefReadingPaneLocation", "bottom");
+			put("zmailPrefGroupMailBy", "conversation");
+			put("zmailPrefMessageViewHtmlPreferred", "TRUE");
+			put("zmailPrefReadingPaneLocation", "bottom");
 		}};
 
 
@@ -58,8 +58,8 @@ public class Bug16213 extends AjaxCommonTest {
 		String subject = "Encoding test";
 		String to = "ljk20k00k1je";
 
-		String MimeFolder = ZimbraSeleniumProperties.getBaseDirectory() + "/data/private/mime/Bugs/Bug16213";
-		LmtpInject.injectFile(ZimbraAccount.AccountZDC().EmailAddress, new File(MimeFolder));
+		String MimeFolder = ZmailSeleniumProperties.getBaseDirectory() + "/data/private/mime/Bugs/Bug16213";
+		LmtpInject.injectFile(ZmailAccount.AccountZDC().EmailAddress, new File(MimeFolder));
 
 		// Click Get Mail button
 		app.zPageMail.zToolbarPressButton(Button.B_GETMAIL);
@@ -86,8 +86,8 @@ public class Bug16213 extends AjaxCommonTest {
 		String subject = "Encoding test";
 		String from = "Unknown";
 
-		String MimeFolder = ZimbraSeleniumProperties.getBaseDirectory() + "/data/private/mime/Bugs/Bug16213";
-		LmtpInject.injectFile(ZimbraAccount.AccountZDC().EmailAddress, new File(MimeFolder));
+		String MimeFolder = ZmailSeleniumProperties.getBaseDirectory() + "/data/private/mime/Bugs/Bug16213";
+		LmtpInject.injectFile(ZmailAccount.AccountZDC().EmailAddress, new File(MimeFolder));
 
 		// Click Get Mail button
 		app.zPageMail.zToolbarPressButton(Button.B_GETMAIL);

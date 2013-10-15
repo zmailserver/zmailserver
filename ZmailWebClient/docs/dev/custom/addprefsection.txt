@@ -38,11 +38,11 @@ that prevent the user from seeing the new custom tab.
 
 Another option is to add this code to the custom skin code (or
 the base skin code) because that code gets evaluated *before* the
-Zimbra application starts. But the ZmPref class is not defined
+Zmail application starts. But the ZmPref class is not defined
 until the PreferencesCore package is loaded.
 
 To get around the package loading problem, though, you can register
-an app listener on ZmZimbraMail to call your own method when the
+an app listener on ZmZmailMail to call your own method when the
 user clicks on the preferences app. This allows you to register
 your custom pref section *before* the preferences app creates the
 preference tabs.
@@ -64,7 +64,7 @@ EXAMPLE
 	};
 
 	var listener = new AjxListener(skin, skin._prefsAppLoaded);
-	ZmZimbraMail.addAppListener(ZmApp.PREFERENCES, ZmAppEvent.PRE_LAUNCH, listener);
+	ZmZmailMail.addAppListener(ZmApp.PREFERENCES, ZmAppEvent.PRE_LAUNCH, listener);
 
 Now you have a custom prefs tab! Notice that the Save button
 is disabled when the user clicks on the tab. This is because
@@ -98,7 +98,7 @@ isDirty, addCommand, getPreSaveCallback, and getPostSaveCallback
 methods.
 
 NOTE: This document does *not* describe how to write a prefs page
-      that only shows Zimbra preferences (like General tab). We are
+      that only shows Zmail preferences (like General tab). We are
       only concerned in this document with custom behavior which
       includes custom saving of information.
 

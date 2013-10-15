@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.webClient.build;
+package org.zmail.webClient.build;
 
 import org.apache.tools.ant.*;
 import org.apache.tools.ant.util.*;
@@ -236,7 +236,7 @@ public class Jammer {
         private String webroot = null;
         private String webappName = null;
         
-        private static final String DEFAULT_WEBAPP_NAME="zimbra";
+        private static final String DEFAULT_WEBAPP_NAME="zmail";
         
         public LineReader(String filesString, Task owner, String splitToken,
                           String webroot, String webapp) {

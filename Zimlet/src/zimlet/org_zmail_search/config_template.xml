@@ -14,7 +14,7 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimletConfig name="com_zimbra_search" version="1.0">
+<zimletConfig name="org_zmail_search" version="1.0">
     <global>
 
         <property name="google-account">pub-8230960882754720</property>

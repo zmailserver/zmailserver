@@ -14,16 +14,16 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.admin.tests.accounts;
+package org.zmail.qa.selenium.projects.admin.tests.accounts;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.admin.core.AdminCommonTest;
-import com.zimbra.qa.selenium.projects.admin.items.AccountItem;
-import com.zimbra.qa.selenium.projects.admin.ui.WizardCreateAccount;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.admin.core.AdminCommonTest;
+import org.zmail.qa.selenium.projects.admin.items.AccountItem;
+import org.zmail.qa.selenium.projects.admin.ui.WizardCreateAccount;
 
 
 public class CreateAccount extends AdminCommonTest {
@@ -49,7 +49,7 @@ public class CreateAccount extends AdminCommonTest {
 			public void CreateAccount_01() throws HarnessException {
 
 		// Create a new account in the Admin Console
-		AccountItem account = new AccountItem("email" + ZimbraSeleniumProperties.getUniqueString(),ZimbraSeleniumProperties.getStringProperty("testdomain"));
+		AccountItem account = new AccountItem("email" + ZmailSeleniumProperties.getUniqueString(),ZmailSeleniumProperties.getStringProperty("testdomain"));
 
 
 
@@ -63,11 +63,11 @@ public class CreateAccount extends AdminCommonTest {
 
 
 		// Verify the account exists in the ZCS
-		ZimbraAdminAccount.AdminConsoleAdmin().soapSend(
-				"<GetAccountRequest xmlns='urn:zimbraAdmin'>"
+		ZmailAdminAccount.AdminConsoleAdmin().soapSend(
+				"<GetAccountRequest xmlns='urn:zmailAdmin'>"
 				+			"<account by='name'>"+ account.getEmailAddress() +"</account>"
 				+		"</GetAccountRequest>");
-		Element response = ZimbraAdminAccount.AdminConsoleAdmin().soapSelectNode("//admin:GetAccountResponse/admin:account", 1); 
+		Element response = ZmailAdminAccount.AdminConsoleAdmin().soapSelectNode("//admin:GetAccountResponse/admin:account", 1); 
 		ZAssert.assertNotNull(response, "Verify the account is created successfully");
 
 
@@ -88,7 +88,7 @@ public class CreateAccount extends AdminCommonTest {
 			public void CreateAccount_02() throws HarnessException {
 
 		// Create a new account in the Admin Console
-		AccountItem account = new AccountItem("email" + ZimbraSeleniumProperties.getUniqueString(),ZimbraSeleniumProperties.getStringProperty("testdomain"));
+		AccountItem account = new AccountItem("email" + ZmailSeleniumProperties.getUniqueString(),ZmailSeleniumProperties.getStringProperty("testdomain"));
 
 
 
@@ -102,11 +102,11 @@ public class CreateAccount extends AdminCommonTest {
 
 
 		// Verify the account exists in the ZCS
-		ZimbraAdminAccount.AdminConsoleAdmin().soapSend(
-				"<GetAccountRequest xmlns='urn:zimbraAdmin'>"
+		ZmailAdminAccount.AdminConsoleAdmin().soapSend(
+				"<GetAccountRequest xmlns='urn:zmailAdmin'>"
 				+			"<account by='name'>"+ account.getEmailAddress() +"</account>"
 				+		"</GetAccountRequest>");
-		Element response = ZimbraAdminAccount.AdminConsoleAdmin().soapSelectNode("//admin:GetAccountResponse/admin:account", 1); 
+		Element response = ZmailAdminAccount.AdminConsoleAdmin().soapSelectNode("//admin:GetAccountResponse/admin:account", 1); 
 		ZAssert.assertNotNull(response, "Verify the account is created successfully");
 
 

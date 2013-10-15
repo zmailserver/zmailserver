@@ -14,27 +14,27 @@
  */
 
 /**
- * @author Raja Rao DV (rrao@zimbra.com)
+ * @author Raja Rao DV (rrao@zmail.com)
  * Provides option to cancel or undo mail send for few seconds
  */
 
 /**
  * Constructor.
  *
- * @author Raja Rao DV (rrao@zimbra.com)
+ * @author Raja Rao DV (rrao@zmail.com)
  */
-function com_zimbra_undosend_HandlerObject() {
+function org_zmail_undosend_HandlerObject() {
 }
 
-com_zimbra_undosend_HandlerObject.prototype = new ZmZimletBase();
-com_zimbra_undosend_HandlerObject.prototype.constructor = com_zimbra_undosend_HandlerObject;
+org_zmail_undosend_HandlerObject.prototype = new ZmZimletBase();
+org_zmail_undosend_HandlerObject.prototype.constructor = org_zmail_undosend_HandlerObject;
 
 
 /**
  * Simplify handler object
  *
  */
-var UndoSendZimlet = com_zimbra_undosend_HandlerObject;
+var UndoSendZimlet = org_zmail_undosend_HandlerObject;
 
 /**
  * Initializes the zimlet.

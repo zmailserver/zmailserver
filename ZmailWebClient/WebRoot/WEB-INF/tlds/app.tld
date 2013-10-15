@@ -7,8 +7,8 @@
     <description>A tag library exercising SimpleTag handlers.</description>
     <tlib-version>1.0</tlib-version>
 
-    <short-name>ZimbraMailTagLibrary</short-name>
-    <uri>com.zimbra.htmlclient</uri>
+    <short-name>ZmailMailTagLibrary</short-name>
+    <uri>org.zmail.htmlclient</uri>
 
     <tag-file>
         <name>overviewFolder</name>

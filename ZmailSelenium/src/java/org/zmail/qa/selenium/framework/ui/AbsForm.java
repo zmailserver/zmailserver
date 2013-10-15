@@ -14,13 +14,13 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.ui;
+package org.zmail.qa.selenium.framework.ui;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import com.zimbra.qa.selenium.framework.items.IItem;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.items.IItem;
+import org.zmail.qa.selenium.framework.util.HarnessException;
 
 
 /**
@@ -29,8 +29,8 @@ import com.zimbra.qa.selenium.framework.util.HarnessException;
  * <p>
  * Form objects are usually returned after clicking NEW from the toolbar.
  * <p>
- * As a shortcut, form objects take a {@link ZimbraItem} object in the 
- * {@link AbsForm#zFill(ZimbraItem)} and attempts to fill in the form
+ * As a shortcut, form objects take a {@link ZmailItem} object in the 
+ * {@link AbsForm#zFill(ZmailItem)} and attempts to fill in the form
  * automatically based on the item's previously set properties.
  * <p>
  * 

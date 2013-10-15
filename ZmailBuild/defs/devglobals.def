@@ -1,1 +1,1 @@
-DEV_INSTALL_ROOT := /opt/zimbra
+DEV_INSTALL_ROOT := /opt/zmail

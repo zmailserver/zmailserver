@@ -538,7 +538,7 @@ ZmNotificationsPageForm.prototype._handleSendCode = function() {
 	var params = {
 		jsonObj: {
 			SendVerificationCodeRequest: {
-				_jsns: "urn:zimbraMail",
+				_jsns: "urn:zmailMail",
 				a: this.getEmailAddress()
 			}
 		},
@@ -570,7 +570,7 @@ ZmNotificationsPageForm.prototype._handleValidateCode = function() {
 	var params = {
 		jsonObj: {
 			VerifyCodeRequest: {
-				_jsns: "urn:zimbraMail",
+				_jsns: "urn:zmailMail",
 				a: this.getEmailAddress(),
 				code: this.getValue("DEVICE_EMAIL_CODE")
 			}
@@ -613,7 +613,7 @@ ZmNotificationsPageForm.prototype._handleInvalidateDevice = function() {
 	var params = {
 		jsonObj: {
 			InvalidateReminderDeviceRequest: {
-				_jsns: "urn:zimbraMail",
+				_jsns: "urn:zmailMail",
 				a: this._getValidatedDevice()
 			}
 		},

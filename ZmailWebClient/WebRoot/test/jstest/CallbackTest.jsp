@@ -22,8 +22,8 @@ basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
 
 		<title>Callback Test</title>
 
-		<script src="/zimbra/js/ajax/boot/AjxCallback.js"></script>
-		<script src="/zimbra/js/ajax/util/AjxBuffer.js"></script>
+		<script src="/zmail/js/ajax/boot/AjxCallback.js"></script>
+		<script src="/zmail/js/ajax/util/AjxBuffer.js"></script>
 
 		<script>
 			function myFunc() {

@@ -14,16 +14,16 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.addressbook.contactgroups;
+package org.zmail.qa.selenium.projects.desktop.tests.addressbook.contactgroups;
 
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.*;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.*;
 
 public class TagContactGroup extends AjaxCommonTest  {
 	public TagContactGroup() {
@@ -38,18 +38,18 @@ public class TagContactGroup extends AjaxCommonTest  {
 	
 	private void TagGroup(DialogTag dialogTag, ContactGroupItem group) throws HarnessException {
 	
-		String tagName = "tag"+ ZimbraSeleniumProperties.getUniqueString();			
+		String tagName = "tag"+ ZmailSeleniumProperties.getUniqueString();			
 		dialogTag.zSetTagName(tagName);
 		dialogTag.zClickButton(Button.B_OK);		
 				
 	
 		// Make sure the tag was created on the server (get the tag ID)
-		app.zGetActiveAccount().soapSend("<GetTagRequest xmlns='urn:zimbraMail'/>");;
+		app.zGetActiveAccount().soapSend("<GetTagRequest xmlns='urn:zmailMail'/>");;
 		String tagID = app.zGetActiveAccount().soapSelectValue("//mail:GetTagResponse//mail:tag[@name='"+ tagName +"']", "id");
 
 		// Make sure the tag was applied to the contact
 		app.zGetActiveAccount().soapSend(
-					"<GetContactsRequest xmlns='urn:zimbraMail'>" +
+					"<GetContactsRequest xmlns='urn:zmailMail'>" +
 						"<cn id='"+ group.getId() +"'/>" +
 					"</GetContactsRequest>");
 		

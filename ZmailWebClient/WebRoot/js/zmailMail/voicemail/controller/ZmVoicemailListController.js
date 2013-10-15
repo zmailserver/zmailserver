@@ -304,7 +304,7 @@ function() {
 	// This scary looking piece of code does not change the page that the browser is
 	// pointing at. Because the server will send back a "Content-Disposition:attachment"
 	// header for this url, the browser opens a dialog to let the user save the file.
-	ZmZimbraMail.unloadHackCallback();
+	ZmZmailMail.unloadHackCallback();
 	var voicemail = this._getView().getSelection()[0];
 	document.location = this._getAttachmentUrl(voicemail);
 };
@@ -334,7 +334,7 @@ ZmVoicemailListController.prototype._sendMail =
 function(ev, subject, to) {
 	var inNewWindow = this._app._inNewWindow(ev);
 	var voicemail = this._getView().getSelection()[0];
-    var soapDoc = AjxSoapDoc.create("UploadVoiceMailRequest", "urn:zimbraVoice");
+    var soapDoc = AjxSoapDoc.create("UploadVoiceMailRequest", "urn:zmailVoice");
 	appCtxt.getApp(ZmApp.VOICE).setStorePrincipal(soapDoc);
 	var node = soapDoc.set("vm");
     node.setAttribute("id", voicemail.id);

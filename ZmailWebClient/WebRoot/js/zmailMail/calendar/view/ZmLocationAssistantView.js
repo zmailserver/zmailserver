@@ -126,7 +126,7 @@ function(params) {
 
     var currAcct = this._apptView.getCalendarAccount();
 	// Bug: 48189 Don't send GetFreeBusyRequest for non-ZCS accounts.
-	if (appCtxt.isOffline && (!currAcct.isZimbraAccount || currAcct.isMain)) {
+	if (appCtxt.isOffline && (!currAcct.isZmailAccount || currAcct.isMain)) {
         //todo: avoid showing smart scheduler button for non-ZCS accounts - offline client
         return;
     }

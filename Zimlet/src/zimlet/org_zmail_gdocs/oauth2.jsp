@@ -53,7 +53,7 @@
 <%@ page language="java" import="org.apache.commons.httpclient.methods.*" %>
 <%@ page language="java" import="org.apache.commons.httpclient.methods.multipart.*" %>
 <%@ page language="java" import="org.apache.commons.httpclient.cookie.CookiePolicy" %>
-<%@ page language="java" import="com.zimbra.common.util.StringUtil" %>
+<%@ page language="java" import="org.zmail.common.util.StringUtil" %>
 <%@ page trimDirectiveWhitespaces="true" %><%
     GoogleOAuthParameters oauthParameters = new GoogleOAuthParameters();
     oauthParameters.setOAuthConsumerKey("anonymous");
@@ -74,7 +74,7 @@
      */
     if(reqAction.equals("reqToken")) {
         oauthParameters.setScope("https://docs.google.com/feeds/ http://spreadsheets.google.com/feeds/ https://docs.googleusercontent.com/");
-        oauthParameters.addCustomBaseParameter("xoauth_displayname", "Zimbra");
+        oauthParameters.addCustomBaseParameter("xoauth_displayname", "Zmail");
         oauthHelper.getUnauthorizedRequestToken(oauthParameters);
         String requestUrl = oauthHelper.createUserAuthorizationUrl(oauthParameters);
 
@@ -127,7 +127,7 @@
                 oauthParameters.setOAuthToken(accessToken);
                 oauthParameters.setOAuthTokenSecret(accessTokenSecret);
 
-                DocsService docsService = new DocsService("Zimbra-MailAttachments-1.0");
+                DocsService docsService = new DocsService("Zmail-MailAttachments-1.0");
                 docsService.setOAuthCredentials(oauthParameters, signer);
 
                 DocumentListFeed listFeed = docsService.getFeed(resourceUrl, DocumentListFeed.class);
@@ -167,7 +167,7 @@
         oauthParameters.setOAuthToken(accessToken);
         oauthParameters.setOAuthTokenSecret(accessTokenSecret);
 
-        DocsService docsService = new DocsService("Zimbra-MailAttachments-1.0");
+        DocsService docsService = new DocsService("Zmail-MailAttachments-1.0");
         docsService.setOAuthCredentials(oauthParameters, signer);
         try {
             responseText = "{"
@@ -197,7 +197,7 @@
         oauthParameters.setOAuthToken(accessToken);
         oauthParameters.setOAuthTokenSecret(accessTokenSecret);
 
-        DocsService docsService = new DocsService("Zimbra-MailAttachments-1.0");
+        DocsService docsService = new DocsService("Zmail-MailAttachments-1.0");
         docsService.setOAuthCredentials(oauthParameters, signer);
         //OutputStream out = response.getOutputStream();
         this.downloadFile(docsService, resourceUrl, response);
@@ -216,7 +216,7 @@
         oauthParameters.setOAuthToken(accessToken);
         oauthParameters.setOAuthTokenSecret(accessTokenSecret);
 
-        DocsService docsService = new DocsService("Zimbra-MailAttachments-1.0");
+        DocsService docsService = new DocsService("Zmail-MailAttachments-1.0");
         docsService.setOAuthCredentials(oauthParameters, signer);
         byte[] bytes = this.downloadFile(docsService, resourceUrl);
         

@@ -14,20 +14,20 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.addressbook.contactgroups;
+package org.zmail.qa.selenium.projects.desktop.tests.addressbook.contactgroups;
 
 
 import java.util.List;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.addressbook.*;
-import com.zimbra.qa.selenium.projects.desktop.ui.addressbook.FormContactGroupNew.Toolbar;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.addressbook.*;
+import org.zmail.qa.selenium.projects.desktop.ui.addressbook.FormContactGroupNew.Toolbar;
 
 
 public class CreateContactGroup extends AjaxCommonTest  {
@@ -142,7 +142,7 @@ public class CreateContactGroup extends AjaxCommonTest  {
       formGroup.select(app, FormContactGroupNew.Locators.zSearchDropdown,  FormContactGroupNew.SELECT_OPTION_TEXT_GAL);
 
       //find email from GAL
-      formGroup.sType(FormContactGroupNew.Locators.zFindField, ZimbraAccount.AccountB().EmailAddress);
+      formGroup.sType(FormContactGroupNew.Locators.zFindField, ZmailAccount.AccountB().EmailAddress);
 
       //click Find
       formGroup.zClick(FormContactGroupNew.Locators.zSearchButton);

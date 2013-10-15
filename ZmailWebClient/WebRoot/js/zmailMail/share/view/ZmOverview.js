@@ -31,7 +31,7 @@
  * @param	{String}	params.overviewId 	the overview id
  * @param	{String}	params.containerId 	the overview container id (multi-account)
  * @param	{Array}	params.treeIds an array of organizer types that may be displayed in this overview
- * @param	{ZmZimbraAccount}	params.account		the account this overview belongs to
+ * @param	{ZmZmailAccount}	params.account		the account this overview belongs to
  * @param	{DwtControl}	params.parent			the containing widget
  * @param	{String}	params.overviewClass		the class name for overview DIV
  * @param	{constant}	params.posStyle				the positioning style for overview DIV

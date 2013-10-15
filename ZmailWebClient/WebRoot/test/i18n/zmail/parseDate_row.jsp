@@ -13,8 +13,8 @@
  * ***** END LICENSE BLOCK *****
 -->
 <%@ page import="java.text.*,java.util.*" %>
-<%@ page import="com.zimbra.cs.taglib.tag.i18n.*" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
+<%@ page import="org.zmail.cs.taglib.tag.i18n.*" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
 <%!
 	static final Map<String,Integer> MAP = new HashMap<String,Integer>();
 	static {

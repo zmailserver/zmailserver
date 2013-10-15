@@ -1,4 +1,4 @@
-AjxTemplate.register("com_zimbra_phonelookup.templates.PhoneLookup#Frame", 
+AjxTemplate.register("org_zmail_phonelookup.templates.PhoneLookup#Frame", 
 function(name, params, data, buffer) {
 	var _hasBuffer = Boolean(buffer);
 	data = (typeof data == "string" ? { id: data } : data) || {};
@@ -12,10 +12,10 @@ function(name, params, data, buffer) {
 {
 	"id": "Frame"
 }, true);
-AjxPackage.define("com_zimbra_phonelookup.templates.PhoneLookup");
-AjxTemplate.register("com_zimbra_phonelookup.templates.PhoneLookup", AjxTemplate.getTemplate("com_zimbra_phonelookup.templates.PhoneLookup#Frame"), AjxTemplate.getParams("com_zimbra_phonelookup.templates.PhoneLookup#Frame"));
+AjxPackage.define("org_zmail_phonelookup.templates.PhoneLookup");
+AjxTemplate.register("org_zmail_phonelookup.templates.PhoneLookup", AjxTemplate.getTemplate("org_zmail_phonelookup.templates.PhoneLookup#Frame"), AjxTemplate.getParams("org_zmail_phonelookup.templates.PhoneLookup#Frame"));
 
-AjxTemplate.register("com_zimbra_phonelookup.templates.PhoneLookup#RowItem", 
+AjxTemplate.register("org_zmail_phonelookup.templates.PhoneLookup#RowItem", 
 function(name, params, data, buffer) {
 	var _hasBuffer = Boolean(buffer);
 	data = (typeof data == "string" ? { id: data } : data) || {};

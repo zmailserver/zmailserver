@@ -14,9 +14,9 @@
  */
 using System;
 
-namespace Zimbra.Client.Soap
+namespace Zmail.Client.Soap
 {
-	public class SoapService : IZimbraService
+	public class SoapService : IZmailService
 	{
 		//this services namespace uri
 		public static String NS_PREFIX		= "soap";

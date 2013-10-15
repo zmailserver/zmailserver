@@ -246,7 +246,7 @@ function(accounts, callback) {
  * Sets the given account as the active one, which will then be used when fetching
  * any account-specific data such as settings or folder tree.
  *
- * @param {ZmZimbraAccount}	account		the account to make active
+ * @param {ZmZmailAccount}	account		the account to make active
  * @param {Boolean}	skipNotify		if <code>true</code>, skip notify
  */
 ZmAccountList.prototype.setActiveAccount =
@@ -374,12 +374,12 @@ function(settings, obj) {
 	account.id = obj.id;
 	account.name = obj.name;
 	account.isMain = true;
-	account.isZimbraAccount = true;
+	account.isZmailAccount = true;
 	account.loaded = true;
 	account.visible = true;
 	account.settings = settings;
 	account.type = ZmAccount.TYPE_ZIMBRA;
-	account.icon = "AccountZimbra";
+	account.icon = "AccountZmail";
 	account.active = true; // always set active for main/parent account
 
 	this._accounts[account.id] = account;
@@ -395,7 +395,7 @@ function(settings, obj) {
 	var childAccounts = obj.childAccounts && obj.childAccounts.childAccount;
 	if (childAccounts) {
 		for (var i = 0; i < childAccounts.length; i++) {
-			this.add(ZmZimbraAccount.createFromDom(childAccounts[i]));
+			this.add(ZmZmailAccount.createFromDom(childAccounts[i]));
 		}
 
 		// set global vars per number of child accounts

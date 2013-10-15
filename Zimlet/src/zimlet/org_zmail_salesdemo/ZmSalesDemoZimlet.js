@@ -36,7 +36,7 @@ function(spanElement, matchedText, context, canvas) {
 		return;
 	}
 	canvas.innerHTML = AjxTemplate.expand(
-			"com_zimbra_salesdemo.templates.SalesDemo#"+templateId, {zimletBaseUrl:this.zimletBaseUrl});
+			"org_zmail_salesdemo.templates.SalesDemo#"+templateId, {zimletBaseUrl:this.zimletBaseUrl});
 
 };
 
@@ -51,7 +51,7 @@ function(span, matchedText) {
 	var dialogContent = "Zimlet Dialog Content";
 	if(item.dialogTemplateId != "") {
 		dialogContent = AjxTemplate.expand(
-			"com_zimbra_salesdemo.templates.SalesDemo#"+templateId, {zimletBaseUrl:this.zimletBaseUrl});
+			"org_zmail_salesdemo.templates.SalesDemo#"+templateId, {zimletBaseUrl:this.zimletBaseUrl});
 	}
 	var msgDialog = appCtxt.getMsgDialog();
 	msgDialog.setTitle(matchedText);
@@ -175,7 +175,7 @@ function(item) {
 	var templateId = item.toolbarTemplateId;
 	var resultsContent = "Toolbar content is displayed here";
 	if(templateId != "") {
-		resultsContent = AjxTemplate.expand("com_zimbra_salesdemo.templates.SalesDemo#"+templateId, {zimletBaseUrl:this.zimletBaseUrl});
+		resultsContent = AjxTemplate.expand("org_zmail_salesdemo.templates.SalesDemo#"+templateId, {zimletBaseUrl:this.zimletBaseUrl});
 	}
 	var resultsDiv = document.getElementById("salesZimlet_bar_resultsMainDiv");
 	 if(resultsDiv) {

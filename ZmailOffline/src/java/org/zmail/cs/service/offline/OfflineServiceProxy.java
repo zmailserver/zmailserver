@@ -12,19 +12,19 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.offline;
+package org.zmail.cs.service.offline;
 
 import java.util.Map;
 
 import org.dom4j.QName;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.OfflineServiceException;
-import com.zimbra.cs.mailbox.ZcsMailbox;
-import com.zimbra.soap.DocumentHandler;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.OfflineServiceException;
+import org.zmail.cs.mailbox.ZcsMailbox;
+import org.zmail.soap.DocumentHandler;
+import org.zmail.soap.ZmailSoapContext;
 
 public class OfflineServiceProxy extends DocumentHandler {
 
@@ -44,7 +44,7 @@ public class OfflineServiceProxy extends DocumentHandler {
     }
     
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext ctxt = getZimbraSoapContext(context);
+        ZmailSoapContext ctxt = getZmailSoapContext(context);
         Mailbox mbox = getRequestedMailbox(ctxt);
         if (!(mbox instanceof ZcsMailbox)) {
             if (mHandleLocal)

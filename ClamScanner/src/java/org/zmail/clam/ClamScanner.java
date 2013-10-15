@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.clam;
+package org.zmail.clam;
 
 import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
@@ -26,17 +26,17 @@ import java.net.UnknownHostException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
 
-import com.zimbra.cs.extension.ZimbraExtension;
-import com.zimbra.cs.service.mail.UploadScanner;
-import com.zimbra.common.io.TcpServerInputStream;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.CliUtil;
+import org.zmail.cs.extension.ZmailExtension;
+import org.zmail.cs.service.mail.UploadScanner;
+import org.zmail.common.io.TcpServerInputStream;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.CliUtil;
 
-public class ClamScanner extends UploadScanner implements ZimbraExtension {
+public class ClamScanner extends UploadScanner implements ZmailExtension {
 
     private static final String DEFAULT_URL = "clam://localhost:3310/";
 

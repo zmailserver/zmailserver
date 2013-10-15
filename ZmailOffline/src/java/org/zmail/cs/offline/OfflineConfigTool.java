@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline;
+package org.zmail.cs.offline;
 
 import java.io.BufferedWriter;
 import java.io.BufferedReader;
@@ -37,7 +37,7 @@ public class OfflineConfigTool {
 			boolean done = false;
 			while ((line = in.readLine()) != null) {
 				text = text + line + "\n";
-				if (!done && line.indexOf("zimbra_admin_service_port") > 0) {
+				if (!done && line.indexOf("zmail_admin_service_port") > 0) {
 					text = text + "    <value>" + Integer.toString(port) + "</value>\n";
 					in.readLine();
 					done = true;

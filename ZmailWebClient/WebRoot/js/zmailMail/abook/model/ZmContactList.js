@@ -640,7 +640,7 @@ function(items, confirmDelete) {
 		var contact = items[i];
 		var email = contact.getEmail();
 		reqs.push({
-				_jsns: "urn:zimbraAccount",
+				_jsns: "urn:zmailAccount",
 				dl: {by: "name",
 					 _content: contact.getEmail()
 				},
@@ -651,7 +651,7 @@ function(items, confirmDelete) {
 	}
 	var jsonObj = {
 		BatchRequest: {
-			_jsns: "urn:zimbra",
+			_jsns: "urn:zmail",
 			DistributionListActionRequest: reqs
 		}
 	};

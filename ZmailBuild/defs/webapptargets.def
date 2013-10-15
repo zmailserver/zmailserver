@@ -3,19 +3,19 @@
 
 BUILD_TYPE := FOSS
 
-MWDOWNLOAD = $(shell cd $(WEBAPP_DIR)/zimbra/downloads; ls ZCSExchangeMigrationWizard*)
-GMW32DOWNLOAD = $(shell cd $(WEBAPP_DIR)/zimbra/downloads; ls ZimbraMigration_*_x86.zip)
-GMW64DOWNLOAD = $(shell cd $(WEBAPP_DIR)/zimbra/downloads; ls ZimbraMigration_*_x64.zip)
-IWDOWNLOAD = $(shell cd $(WEBAPP_DIR)/zimbra/downloads; ls ZCSPSTImportWizard*)
-CN32DOWNLOAD = $(shell cd $(WEBAPP_DIR)/zimbra/downloads; ls ZimbraConnectorOLK*x86.msi)
-CN64DOWNLOAD = $(shell cd $(WEBAPP_DIR)/zimbra/downloads; ls ZimbraConnectorOLK*x64.msi)
-CMDOWNLOAD = $(shell cd $(WEBAPP_DIR)/zimbra/downloads; ls ZmCus*)
-DMDOWNLOAD = $(shell cd $(WEBAPP_DIR)/zimbra/downloads; ls ZCSDominoMigrationWizard*)
-#ZTDOWNLOAD = $(shell cd $(WEBAPP_DIR)/zimbra/downloads; ls ZimbraToast*)
+MWDOWNLOAD = $(shell cd $(WEBAPP_DIR)/zmail/downloads; ls ZCSExchangeMigrationWizard*)
+GMW32DOWNLOAD = $(shell cd $(WEBAPP_DIR)/zmail/downloads; ls ZmailMigration_*_x86.zip)
+GMW64DOWNLOAD = $(shell cd $(WEBAPP_DIR)/zmail/downloads; ls ZmailMigration_*_x64.zip)
+IWDOWNLOAD = $(shell cd $(WEBAPP_DIR)/zmail/downloads; ls ZCSPSTImportWizard*)
+CN32DOWNLOAD = $(shell cd $(WEBAPP_DIR)/zmail/downloads; ls ZmailConnectorOLK*x86.msi)
+CN64DOWNLOAD = $(shell cd $(WEBAPP_DIR)/zmail/downloads; ls ZmailConnectorOLK*x64.msi)
+CMDOWNLOAD = $(shell cd $(WEBAPP_DIR)/zmail/downloads; ls ZmCus*)
+DMDOWNLOAD = $(shell cd $(WEBAPP_DIR)/zmail/downloads; ls ZCSDominoMigrationWizard*)
+#ZTDOWNLOAD = $(shell cd $(WEBAPP_DIR)/zmail/downloads; ls ZmailToast*)
 #ZDMDOWNLOAD = $(shell cd $(THIRD_PARTY_BUILDS)/zdesktop; ls zdesktop*.dmg)
 #ZDLDOWNLOAD = $(shell cd $(THIRD_PARTY_BUILDS)/zdesktop; ls zdesktop*.sh)
 #ZDWDOWNLOAD = $(shell cd $(THIRD_PARTY_BUILDS)/zdesktop; ls zdesktop*.exe)
-GWDOWNLOAD = $(shell cd $(WEBAPP_DIR)/zimbra/downloads; ls ZCSGroupwiseMigrationWizard*)
+GWDOWNLOAD = $(shell cd $(WEBAPP_DIR)/zmail/downloads; ls ZCSGroupwiseMigrationWizard*)
 
 $(WEBAPP_DIR)/service.war: $(WEBAPP_DIR) $(WEBAPP_STAGE_DIR)/service/service.war
 	-mkdir $(WEBAPP_DIR)/service
@@ -23,128 +23,128 @@ $(WEBAPP_DIR)/service.war: $(WEBAPP_DIR) $(WEBAPP_STAGE_DIR)/service/service.war
 
 $(SERVICE_DIR)/$(WEBAPP_BUILD_DIR)/service.war:
 	(cd $(SERVICE_DIR); $(ANT) $(ANT_DEBUG) \
-		-Dzimbra.buildinfo.platform=$(BUILD_PLATFORM) \
+		-Dzmail.buildinfo.platform=$(BUILD_PLATFORM) \
 		-Dis-production=1 \
-		-Dzimbra.buildinfo.version=$(SOURCE_TAG) \
-		-Dzimbra.buildinfo.type=$(BUILD_TYPE) \
-		-Dzimbra.buildinfo.release=$(RELEASE) -Dzimbra.buildinfo.date=$(DATE) \
-		-Dzimbra.buildinfo.host=$(HOST) dev-dist ; )
+		-Dzmail.buildinfo.version=$(SOURCE_TAG) \
+		-Dzmail.buildinfo.type=$(BUILD_TYPE) \
+		-Dzmail.buildinfo.release=$(RELEASE) -Dzmail.buildinfo.date=$(DATE) \
+		-Dzmail.buildinfo.host=$(HOST) dev-dist ; )
 
 $(WEBAPP_STAGE_DIR)/service/service.war: $(SERVICE_DIR)/$(WEBAPP_BUILD_DIR)/service.war
 	@($(ECHO) "*** Staging service.war")
 	@($(MKDIR) -p $(@D))
 	@($(CP) $(SERVICE_DIR)/$(WEBAPP_BUILD_DIR)/service.war $@)
 
-$(WEBAPP_DIR)/zimbraAdmin.war: $(WEBAPP_DIR) $(WEBAPP_STAGE_DIR)/admin/zimbraAdmin.war $(WEBAPP_DIR)/zimbra/downloads
-	mkdir $(WEBAPP_DIR)/zimbraAdmin
-	(cd $(WEBAPP_DIR)/zimbraAdmin; jar xf $(WEBAPP_STAGE_DIR)/admin/zimbraAdmin.war)
+$(WEBAPP_DIR)/zmailAdmin.war: $(WEBAPP_DIR) $(WEBAPP_STAGE_DIR)/admin/zmailAdmin.war $(WEBAPP_DIR)/zmail/downloads
+	mkdir $(WEBAPP_DIR)/zmailAdmin
+	(cd $(WEBAPP_DIR)/zmailAdmin; jar xf $(WEBAPP_STAGE_DIR)/admin/zmailAdmin.war)
 	for download in $(IWDOWNLOAD); do \
-		echo "IMPORT_WIZ_DOWNLOAD_LINK = /downloads/$$download" >> $(WEBAPP_DIR)/zimbraAdmin/WEB-INF/classes/messages/ZaMsg.properties; \
+		echo "IMPORT_WIZ_DOWNLOAD_LINK = /downloads/$$download" >> $(WEBAPP_DIR)/zmailAdmin/WEB-INF/classes/messages/ZaMsg.properties; \
 	done
 	for download in $(MWDOWNLOAD); do \
-		echo "MIG_WIZ_DOWNLOAD_LINK = /downloads/$$download" >> $(WEBAPP_DIR)/zimbraAdmin/WEB-INF/classes/messages/ZaMsg.properties; \
+		echo "MIG_WIZ_DOWNLOAD_LINK = /downloads/$$download" >> $(WEBAPP_DIR)/zmailAdmin/WEB-INF/classes/messages/ZaMsg.properties; \
 	done
 	for download in $(GMW32DOWNLOAD); do \
-		echo "GENERAL_MIG_WIZ_X86_DOWNLOAD_LINK = /downloads/$$download" >> $(WEBAPP_DIR)/zimbraAdmin/WEB-INF/classes/messages/ZaMsg.properties; \
+		echo "GENERAL_MIG_WIZ_X86_DOWNLOAD_LINK = /downloads/$$download" >> $(WEBAPP_DIR)/zmailAdmin/WEB-INF/classes/messages/ZaMsg.properties; \
 	done
 	for download in $(GMW64DOWNLOAD); do \
-		echo "GENERAL_MIG_WIZ_X64_DOWNLOAD_LINK = /downloads/$$download" >> $(WEBAPP_DIR)/zimbraAdmin/WEB-INF/classes/messages/ZaMsg.properties; \
+		echo "GENERAL_MIG_WIZ_X64_DOWNLOAD_LINK = /downloads/$$download" >> $(WEBAPP_DIR)/zmailAdmin/WEB-INF/classes/messages/ZaMsg.properties; \
 	done
 	for download in $(CN32DOWNLOAD); do \
-		echo "CONNECTOR_32_DOWNLOAD_LINK = /downloads/$$download" >> $(WEBAPP_DIR)/zimbraAdmin/WEB-INF/classes/messages/ZaMsg.properties; \
+		echo "CONNECTOR_32_DOWNLOAD_LINK = /downloads/$$download" >> $(WEBAPP_DIR)/zmailAdmin/WEB-INF/classes/messages/ZaMsg.properties; \
 	done
 	for download in $(CN64DOWNLOAD); do \
-		echo "CONNECTOR_64_DOWNLOAD_LINK = /downloads/$$download" >> $(WEBAPP_DIR)/zimbraAdmin/WEB-INF/classes/messages/ZaMsg.properties; \
+		echo "CONNECTOR_64_DOWNLOAD_LINK = /downloads/$$download" >> $(WEBAPP_DIR)/zmailAdmin/WEB-INF/classes/messages/ZaMsg.properties; \
 	done
 	for download in $(CMDOWNLOAD); do \
-		echo "CONNECTOR_MSI_DOWNLOAD_LINK = /downloads/$$download" >> $(WEBAPP_DIR)/zimbraAdmin/WEB-INF/classes/messages/ZaMsg.properties; \
+		echo "CONNECTOR_MSI_DOWNLOAD_LINK = /downloads/$$download" >> $(WEBAPP_DIR)/zmailAdmin/WEB-INF/classes/messages/ZaMsg.properties; \
 	done
 	for download in $(DMDOWNLOAD); do \
-		echo "DOMINO_MIG_WIZ_DOWNLOAD_LINK = /downloads/$$download" >> $(WEBAPP_DIR)/zimbraAdmin/WEB-INF/classes/messages/ZaMsg.properties; \
+		echo "DOMINO_MIG_WIZ_DOWNLOAD_LINK = /downloads/$$download" >> $(WEBAPP_DIR)/zmailAdmin/WEB-INF/classes/messages/ZaMsg.properties; \
 	done
 #	for download in $(ZTDOWNLOAD); do \
-#		echo "ZIMBRA_TOASTER_DOWNLOAD_LINK = /downloads/$$download" >> $(WEBAPP_DIR)/zimbraAdmin/WEB-INF/classes/messages/ZaMsg.properties; \
+#		echo "ZIMBRA_TOASTER_DOWNLOAD_LINK = /downloads/$$download" >> $(WEBAPP_DIR)/zmailAdmin/WEB-INF/classes/messages/ZaMsg.properties; \
 #	done
 #	for download in $(ZDLDOWNLOAD); do \
-#		echo "ZDESKTOP_LINUX_DOWNLOAD_LINK = /downloads/$$download" >> $(WEBAPP_DIR)/zimbraAdmin/WEB-INF/classes/messages/ZaMsg.properties; \
+#		echo "ZDESKTOP_LINUX_DOWNLOAD_LINK = /downloads/$$download" >> $(WEBAPP_DIR)/zmailAdmin/WEB-INF/classes/messages/ZaMsg.properties; \
 #	done
 #	for download in $(ZDMDOWNLOAD); do \
-#		echo "ZDESKTOP_MAC_DOWNLOAD_LINK = /downloads/$$download" >> $(WEBAPP_DIR)/zimbraAdmin/WEB-INF/classes/messages/ZaMsg.properties; \
+#		echo "ZDESKTOP_MAC_DOWNLOAD_LINK = /downloads/$$download" >> $(WEBAPP_DIR)/zmailAdmin/WEB-INF/classes/messages/ZaMsg.properties; \
 #	done
 #	for download in $(ZDWDOWNLOAD); do \
-#		echo "ZDESKTOP_WINDOWS_DOWNLOAD_LINK = /downloads/$$download" >> $(WEBAPP_DIR)/zimbraAdmin/WEB-INF/classes/messages/ZaMsg.properties; \
+#		echo "ZDESKTOP_WINDOWS_DOWNLOAD_LINK = /downloads/$$download" >> $(WEBAPP_DIR)/zmailAdmin/WEB-INF/classes/messages/ZaMsg.properties; \
 #	done
 #	@(for download in $(ZDMDOWNLOAD); do \
-#		echo "ZDESKTOP_MAC_DOWNLOAD_LINK = /downloads/$$download" >> $(WEBAPP_DIR)/zimbraAdmin/WEB-INF/classes/messages/ZaMsg.properties; \
+#		echo "ZDESKTOP_MAC_DOWNLOAD_LINK = /downloads/$$download" >> $(WEBAPP_DIR)/zmailAdmin/WEB-INF/classes/messages/ZaMsg.properties; \
 #	done)
 #	@(for download in $(ZDLDOWNLOAD); do \
-#		echo "ZDESKTOP_LINUX_DOWNLOAD_LINK = /downloads/$$download" >> $(WEBAPP_DIR)/zimbraAdmin/WEB-INF/classes/messages/ZaMsg.properties; \
+#		echo "ZDESKTOP_LINUX_DOWNLOAD_LINK = /downloads/$$download" >> $(WEBAPP_DIR)/zmailAdmin/WEB-INF/classes/messages/ZaMsg.properties; \
 #	done)
 #	@(for download in $(ZDWDOWNLOAD); do \
-#		echo "ZDESKTOP_WIN_DOWNLOAD_LINK = /downloads/$$download" >> $(WEBAPP_DIR)/zimbraAdmin/WEB-INF/classes/messages/ZaMsg.properties; \
+#		echo "ZDESKTOP_WIN_DOWNLOAD_LINK = /downloads/$$download" >> $(WEBAPP_DIR)/zmailAdmin/WEB-INF/classes/messages/ZaMsg.properties; \
 #	done)
 	for download in $(GWDOWNLOAD); do \
-		echo "GROUPWISE_MIG_WIZ_DOWNLOAD_LINK = /downloads/$$download" >> $(WEBAPP_DIR)/zimbraAdmin/WEB-INF/classes/messages/ZaMsg.properties; \
+		echo "GROUPWISE_MIG_WIZ_DOWNLOAD_LINK = /downloads/$$download" >> $(WEBAPP_DIR)/zmailAdmin/WEB-INF/classes/messages/ZaMsg.properties; \
 	done
 #
 
-$(CONSOLE_DIR)/$(WEBAPP_BUILD_DIR)/zimbraAdmin.war:
+$(CONSOLE_DIR)/$(WEBAPP_BUILD_DIR)/zmailAdmin.war:
 	(cd $(CONSOLE_DIR); $(ANT) $(ANT_DEBUG) \
-		-Dzimbra.buildinfo.platform=$(BUILD_PLATFORM) \
-		-Dzimbra.buildinfo.version=$(SOURCE_TAG) \
-		-Dzimbra.buildinfo.type=$(BUILD_TYPE) \
-		-Dzimbra.buildinfo.release=$(RELEASE) -Dzimbra.buildinfo.date=$(DATE) \
-		-Dzimbra.buildinfo.host=$(HOST) clean admin prod war package-jsapi-zimbra-doc package-jsapi-inventory package-jsapi-changelog ; )
-	#rm -rf zimbraAdminConf
-	#mkdir zimbraAdminConf
-	#cp $(CONSOLE_DIR)/build/web.xml zimbraAdminConf/web.xml
+		-Dzmail.buildinfo.platform=$(BUILD_PLATFORM) \
+		-Dzmail.buildinfo.version=$(SOURCE_TAG) \
+		-Dzmail.buildinfo.type=$(BUILD_TYPE) \
+		-Dzmail.buildinfo.release=$(RELEASE) -Dzmail.buildinfo.date=$(DATE) \
+		-Dzmail.buildinfo.host=$(HOST) clean admin prod war package-jsapi-zmail-doc package-jsapi-inventory package-jsapi-changelog ; )
+	#rm -rf zmailAdminConf
+	#mkdir zmailAdminConf
+	#cp $(CONSOLE_DIR)/build/web.xml zmailAdminConf/web.xml
 	#cp $(CONSOLE_DIR)/build/docs/jsapi-inventory.zip $(PACKAGE_DIR)/jsapi-inventory.zip
-	#cp $(CONSOLE_DIR)/build/docs/jsapi-zimbra-doc.zip $(PACKAGE_DIR)/jsapi-zimbra-doc.zip
+	#cp $(CONSOLE_DIR)/build/docs/jsapi-zmail-doc.zip $(PACKAGE_DIR)/jsapi-zmail-doc.zip
 	#cp $(CONSOLE_DIR)/build/docs/jsapi-changelog.zip $(PACKAGE_DIR)/jsapi-changelog.zip
 
-$(WEBAPP_STAGE_DIR)/admin/zimbraAdmin.war: $(CONSOLE_DIR)/$(WEBAPP_BUILD_DIR)/zimbraAdmin.war
-	@($(ECHO) "*** Staging zimbraAdmin.war")
+$(WEBAPP_STAGE_DIR)/admin/zmailAdmin.war: $(CONSOLE_DIR)/$(WEBAPP_BUILD_DIR)/zmailAdmin.war
+	@($(ECHO) "*** Staging zmailAdmin.war")
 	@($(MKDIR) -p $(@D))
-	@($(CP) $(CONSOLE_DIR)/$(WEBAPP_BUILD_DIR)/zimbraAdmin.war $@)
+	@($(CP) $(CONSOLE_DIR)/$(WEBAPP_BUILD_DIR)/zmailAdmin.war $@)
 	@($(CP) $(CONSOLE_DIR)/build/web.xml $(@D)/web.xml)
 	@($(CP) $(CONSOLE_DIR)/build/docs/jsapi-inventory.zip $(@D)/jsapi-inventory.zip)
-	@($(CP) $(CONSOLE_DIR)/build/docs/jsapi-zimbra-doc.zip $(@D)/jsapi-zimbra-doc.zip)
+	@($(CP) $(CONSOLE_DIR)/build/docs/jsapi-zmail-doc.zip $(@D)/jsapi-zmail-doc.zip)
 	@($(CP) $(CONSOLE_DIR)/build/docs/jsapi-changelog.zip $(@D)/jsapi-changelog.zip)
 
-$(WEBAPP_DIR)/zimbra/robots.txt: $(WEBAPP_DIR)/zimbra.war
+$(WEBAPP_DIR)/zmail/robots.txt: $(WEBAPP_DIR)/zmail.war
 	cp $(SERVICE_DIR)/conf/robots.txt $@
 
-$(WEBAPP_DIR)/zimbra.war: $(WEBAPP_DIR) $(WEBAPP_STAGE_DIR)/zimbra/zimbra.war $(STORE_DEST_DIR)/$(MAILBOXD_DIR)/work
-	mkdir $(WEBAPP_DIR)/zimbra
-	(cd $(WEBAPP_DIR)/zimbra; jar xf $(WEBAPP_STAGE_DIR)/zimbra/zimbra.war)
+$(WEBAPP_DIR)/zmail.war: $(WEBAPP_DIR) $(WEBAPP_STAGE_DIR)/zmail/zmail.war $(STORE_DEST_DIR)/$(MAILBOXD_DIR)/work
+	mkdir $(WEBAPP_DIR)/zmail
+	(cd $(WEBAPP_DIR)/zmail; jar xf $(WEBAPP_STAGE_DIR)/zmail/zmail.war)
 
-$(STORE_DEST_DIR)/$(MAILBOXD_DIR)/work: $(CONSOLE_DIR)/$(WEBAPP_BUILD_DIR)/zimbra.war
+$(STORE_DEST_DIR)/$(MAILBOXD_DIR)/work: $(CONSOLE_DIR)/$(WEBAPP_BUILD_DIR)/zmail.war
 	mkdir -p $@
 	cp -rf $(CONSOLE_DIR)/build/dist/$(MAILBOXD_SERVER)/work/* $@
 
-$(CONSOLE_DIR)/$(WEBAPP_BUILD_DIR)/zimbra.war:  $(TAGLIB_DIR)/build/zimbrataglib.jar
+$(CONSOLE_DIR)/$(WEBAPP_BUILD_DIR)/zmail.war:  $(TAGLIB_DIR)/build/zmailtaglib.jar
 	(cd $(CONSOLE_DIR); $(ANT) $(ANT_DEBUG) \
-		-Dzimbra.buildinfo.platform=$(BUILD_PLATFORM) \
-		-Dzimbra.buildinfo.version=$(SOURCE_TAG) \
-		-Dzimbra.buildinfo.type=$(BUILD_TYPE) \
-		-Dzimbra.buildinfo.release=$(RELEASE) -Dzimbra.buildinfo.date=$(DATE) \
-		-Dzimbra.buildinfo.host=$(HOST) clean prod-build; )
-	#rm -rf zimbraConf
-	#mkdir zimbraConf
-	#cp $(CONSOLE_DIR)/build/web.xml zimbraConf
+		-Dzmail.buildinfo.platform=$(BUILD_PLATFORM) \
+		-Dzmail.buildinfo.version=$(SOURCE_TAG) \
+		-Dzmail.buildinfo.type=$(BUILD_TYPE) \
+		-Dzmail.buildinfo.release=$(RELEASE) -Dzmail.buildinfo.date=$(DATE) \
+		-Dzmail.buildinfo.host=$(HOST) clean prod-build; )
+	#rm -rf zmailConf
+	#mkdir zmailConf
+	#cp $(CONSOLE_DIR)/build/web.xml zmailConf
 
-$(WEBAPP_STAGE_DIR)/zimbra/zimbra.war: $(CONSOLE_DIR)/$(WEBAPP_BUILD_DIR)/zimbra.war
-	@($(ECHO) "*** Staging zimbra.war")
+$(WEBAPP_STAGE_DIR)/zmail/zmail.war: $(CONSOLE_DIR)/$(WEBAPP_BUILD_DIR)/zmail.war
+	@($(ECHO) "*** Staging zmail.war")
 	@($(MKDIR) -p $(@D))
-	@($(CP) $(CONSOLE_DIR)/$(WEBAPP_BUILD_DIR)/zimbra.war $@)
+	@($(CP) $(CONSOLE_DIR)/$(WEBAPP_BUILD_DIR)/zmail.war $@)
 	@($(CP) $(CONSOLE_DIR)/build/web.xml $(@D)/web.xml)
 
-$(TAGLIB_DIR)/build/zimbrataglib.jar:
+$(TAGLIB_DIR)/build/zmailtaglib.jar:
 	(cd $(TAGLIB_DIR); $(ANT) $(ANT_DEBUG) \
-		-Dzimbra.buildinfo.platform=$(BUILD_PLATFORM) \
+		-Dzmail.buildinfo.platform=$(BUILD_PLATFORM) \
 		-Dis-production=1 \
-		-Dzimbra.buildinfo.version=$(SOURCE_TAG) \
-		-Dzimbra.buildinfo.type=$(BUILD_TYPE) \
-		-Dzimbra.buildinfo.release=$(RELEASE) -Dzimbra.buildinfo.date=$(DATE) \
-		-Dzimbra.buildinfo.host=$(HOST) clean jar ; )
+		-Dzmail.buildinfo.version=$(SOURCE_TAG) \
+		-Dzmail.buildinfo.type=$(BUILD_TYPE) \
+		-Dzmail.buildinfo.release=$(RELEASE) -Dzmail.buildinfo.date=$(DATE) \
+		-Dzmail.buildinfo.host=$(HOST) clean jar ; )
 

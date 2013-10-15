@@ -19,15 +19,15 @@ I=`hostname -i`
 
 #Symlinks
 
-if [ -L "/opt/zimbra/snmp" ]; then
-  rm -f /opt/zimbra/snmp
+if [ -L "/opt/zmail/snmp" ]; then
+  rm -f /opt/zmail/snmp
 fi
-if [ -L "/opt/zimbra/net-snmp" ]; then
-  rm -f /opt/zimbra/net-snmp
+if [ -L "/opt/zmail/net-snmp" ]; then
+  rm -f /opt/zmail/net-snmp
 fi
-ln -s /opt/zimbra/net-snmp-5.7.2 /opt/zimbra/snmp
-ln -s /opt/zimbra/net-snmp-5.7.2 /opt/zimbra/net-snmp
+ln -s /opt/zmail/net-snmp-5.7.2 /opt/zmail/snmp
+ln -s /opt/zmail/net-snmp-5.7.2 /opt/zmail/net-snmp
 
-if [ -x "/opt/zimbra/libexec/zmfixperms" ]; then
-  /opt/zimbra/libexec/zmfixperms
+if [ -x "/opt/zmail/libexec/zmfixperms" ]; then
+  /opt/zmail/libexec/zmfixperms
 fi

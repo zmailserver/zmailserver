@@ -40,11 +40,11 @@ ZaServerStatsView.prototype.getOneServersMtaServiceStatus = function( by, val ){
 
 	try {
 						
-			var soapDoc = AjxSoapDoc.create("GetServerRequest", ZaZimbraAdmin.URN, null);
+			var soapDoc = AjxSoapDoc.create("GetServerRequest", ZaZmailAdmin.URN, null);
 			var elBy = soapDoc.set("server", val );
 			elBy.setAttribute( "by", by );
 			soapDoc.setMethodAttribute("applyConfig", "false");
-			soapDoc.setMethodAttribute("attrs", ZaServer.A_zimbraServiceInstalled + "," +  ZaServer.A_zimbraServiceEnabled  );
+			soapDoc.setMethodAttribute("attrs", ZaServer.A_zmailServiceInstalled + "," +  ZaServer.A_zmailServiceEnabled  );
 		
 			var params = new Object();
 			params.soapDoc = soapDoc;	
@@ -76,11 +76,11 @@ ZaServerStatsView.prototype.getOneServersMtaServiceStatus = function( by, val ){
  	for ( ; j < oneServerDetailInfo.length; j++){
 			oneService = oneServerDetailInfo[j];
 			if( "mta" == oneService._content){
-				if( oneService.n == ZaServer.A_zimbraServiceEnabled ){
+				if( oneService.n == ZaServer.A_zmailServiceEnabled ){
 							
 					isEnabled = true;
 							
-				}else if ( oneService.n == ZaServer.A_zimbraServiceInstalled ){
+				}else if ( oneService.n == ZaServer.A_zmailServiceInstalled ){
 							
 					isInstalled = true;
 						
@@ -165,7 +165,7 @@ function(entry) {
     }
     this._sessionPage.setObject(entry);
 
-    if (ZaZimbraAdmin.isGlobalAdmin()) {
+    if (ZaZmailAdmin.isGlobalAdmin()) {
         if( this._mbxPage == null ){
             this._mbxPage = new ZaServerMBXStatsPage (this);
             ZaServerMBXStatsPage.TAB_KEY = this.addTab(ZaMsg.TABT_MBX, this._mbxPage);
@@ -260,7 +260,7 @@ function() {
     //var innerTabs = this._tab;
     var innerTabs = [ZaMsg.TABT_Disk, ZaMsg.TABT_Session];
 
-    if (ZaZimbraAdmin.isGlobalAdmin()) {
+    if (ZaZmailAdmin.isGlobalAdmin()) {
         innerTabs.push(ZaMsg.TABT_MBX);
     }
 

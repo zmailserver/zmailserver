@@ -87,7 +87,7 @@ ZmAutocomplete.prototype.toString =
  * @param {String}					str				the string to match against
  * @param {closure}					callback		the callback to run with results
  * @param {ZmAutocompleteListView}	aclv			the needed to show wait msg
- * @param {ZmZimbraAccount}			account			the account to fetch cached items from
+ * @param {ZmZmailAccount}			account			the account to fetch cached items from
  * @param {Hash}					options			additional options:
  * @param {constant}				 type			 type of result to match; default is {@link ZmAutocomplete.AC_TYPE_CONTACT}; other valid values are for location or equipment
  * @param {Boolean}					needItem		 if <code>true</code>, return a {@link ZmItem} as part of match result
@@ -225,7 +225,7 @@ ZmAutocomplete.prototype.isComplete =
 ZmAutocomplete.prototype.forget =
 		function(addr, callback) {
 
-			var jsonObj = {RankingActionRequest:{_jsns:"urn:zimbraMail"}};
+			var jsonObj = {RankingActionRequest:{_jsns:"urn:zmailMail"}};
 			jsonObj.RankingActionRequest.action = {op:"delete", email:addr};
 			var respCallback = this._handleResponseForget.bind(this, callback);
 			var aCtxt = appCtxt.isChildWindow ? parentAppCtxt : appCtxt;
@@ -280,7 +280,7 @@ ZmAutocomplete.prototype._handleResponseExpandDL =
 /**
  * @param acType		[constant]			type of result to match
  * @param str			[string]			string to match against
- * @param account		[ZmZimbraAccount]*	account to check cache against
+ * @param account		[ZmZmailAccount]*	account to check cache against
  * @param create		[boolean]			if <code>true</code>, create a cache if none found
  *
  * @private
@@ -298,7 +298,7 @@ ZmAutocomplete.prototype._getCache =
  * @param hasGal		[boolean]*			if true, list includes GAL results
  * @param cacheable		[boolean]*			server indication of cacheability
  * @param baseCache		[hash]*				cache that is superset of this one
- * @param account		[ZmZimbraAccount]*	account to check cache against
+ * @param account		[ZmZmailAccount]*	account to check cache against
  *
  * @private
  */
@@ -379,7 +379,7 @@ ZmAutocomplete.prototype._checkCache =
  * @param str				[string]			string to match against
  * @param acType			[constant]			type of result to match
  * @param checkCacheable	[boolean]			if true, make sure results are cacheable
- * @param account			[ZmZimbraAccount]*	account to fetch cached results from
+ * @param account			[ZmZmailAccount]*	account to fetch cached results from
  *
  * @private
  */
@@ -442,7 +442,7 @@ ZmAutocompleteMatch = function(match, options, isContact, str) {
 		this.text = this.name = match.getFullName();
 		this.email = match.getEmail();
 		this.item = match;
-		this.type = ZmContact.getAttr(match, ZmResource && ZmResource.F_type || "zimbraCalResType") || ZmAutocomplete.AC_TYPE_GAL;
+		this.type = ZmContact.getAttr(match, ZmResource && ZmResource.F_type || "zmailCalResType") || ZmAutocomplete.AC_TYPE_GAL;
 		this.fullAddress = (new AjxEmailAddress(this.email, null, this.text)).toString(); //bug:60789 formated the email and name to get fullAddress
 	} else {
 		this.isGroup = Boolean(match.isGroup);

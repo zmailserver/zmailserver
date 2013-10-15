@@ -14,20 +14,20 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.calendar.meetings.attendee.invitations.message;
+package org.zmail.qa.selenium.projects.ajax.tests.calendar.meetings.attendee.invitations.message;
 
 import java.util.*;
 
 import org.testng.annotations.Test;
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.DisplayMail;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew.Field;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.*;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.DisplayMail;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew.Field;
 
 public class AcceptMeeting extends PrefGroupMailByMessageTest {
 
@@ -37,7 +37,7 @@ public class AcceptMeeting extends PrefGroupMailByMessageTest {
 	}
 
 	/**
-	 * ZimbraAccount.AccountA() sends a two-hour appointment to app.zGetActiveAccount()
+	 * ZmailAccount.AccountA() sends a two-hour appointment to app.zGetActiveAccount()
 	 * with subject and start time
 	 * @param subject
 	 * @param start
@@ -45,13 +45,13 @@ public class AcceptMeeting extends PrefGroupMailByMessageTest {
 	 */
 	private void SendCreateAppointmentRequest(String subject, ZDate start) throws HarnessException {
 				
-		ZimbraAccount.AccountA().soapSend(
-				"<CreateAppointmentRequest xmlns='urn:zimbraMail'>"
+		ZmailAccount.AccountA().soapSend(
+				"<CreateAppointmentRequest xmlns='urn:zmailMail'>"
 				+		"<m>"
 				+			"<inv method='REQUEST' type='event' status='CONF' draft='0' class='PUB' fb='B' transp='O' allDay='0' name='"+ subject +"'>"
 				+				"<s d='"+ start.toTimeZone(ZTimeZone.TimeZoneEST.getID()).toYYYYMMDDTHHMMSS() +"' tz='"+ ZTimeZone.TimeZoneEST.getID() +"'/>"
 				+				"<e d='"+ start.addHours(2).toTimeZone(ZTimeZone.TimeZoneEST.getID()).toYYYYMMDDTHHMMSS() +"' tz='"+ ZTimeZone.TimeZoneEST.getID() +"'/>"
-				+				"<or a='"+ ZimbraAccount.AccountA().EmailAddress +"'/>"
+				+				"<or a='"+ ZmailAccount.AccountA().EmailAddress +"'/>"
 				+				"<at role='REQ' ptst='NE' rsvp='1' a='" + app.zGetActiveAccount().EmailAddress + "'/>"
 				+			"</inv>"
 				+			"<e a='"+ app.zGetActiveAccount().EmailAddress +"' t='t'/>"
@@ -72,7 +72,7 @@ public class AcceptMeeting extends PrefGroupMailByMessageTest {
 
 		// ------------------------ Test data ------------------------------------
 
-		String apptSubject = "appointment" + ZimbraSeleniumProperties.getUniqueString();
+		String apptSubject = "appointment" + ZmailSeleniumProperties.getUniqueString();
 
 		Calendar now = Calendar.getInstance();
 		ZDate startUTC = new ZDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH) + 1, now.get(Calendar.DAY_OF_MONTH), 12, 0, 0);
@@ -82,13 +82,13 @@ public class AcceptMeeting extends PrefGroupMailByMessageTest {
 
 		// --------------- Creating invitation (organizer) ----------------------------
 
-		ZimbraAccount.AccountA().soapSend(
-				"<CreateAppointmentRequest xmlns='urn:zimbraMail'>"
+		ZmailAccount.AccountA().soapSend(
+				"<CreateAppointmentRequest xmlns='urn:zmailMail'>"
 				+		"<m>"
 				+			"<inv method='REQUEST' type='event' status='CONF' draft='0' class='PUB' fb='B' transp='O' allDay='0' name='"+ apptSubject +"'>"
 				+				"<s d='"+ startUTC.toTimeZone(ZTimeZone.TimeZoneEST.getID()).toYYYYMMDDTHHMMSS() +"' tz='"+ ZTimeZone.TimeZoneEST.getID() +"'/>"
 				+				"<e d='"+ endUTC.toTimeZone(ZTimeZone.TimeZoneEST.getID()).toYYYYMMDDTHHMMSS() +"' tz='"+ ZTimeZone.TimeZoneEST.getID() +"'/>"
-				+				"<or a='"+ ZimbraAccount.AccountA().EmailAddress +"'/>"
+				+				"<or a='"+ ZmailAccount.AccountA().EmailAddress +"'/>"
 				+				"<at role='REQ' ptst='NE' rsvp='1' a='" + app.zGetActiveAccount().EmailAddress + "'/>"
 				+			"</inv>"
 				+			"<e a='"+ app.zGetActiveAccount().EmailAddress +"' t='t'/>"
@@ -120,18 +120,18 @@ public class AcceptMeeting extends PrefGroupMailByMessageTest {
 		// --- Check that the organizer shows the attendee as "ACCEPT" ---
 
 		// Organizer: Search for the appointment (InvId)
-		ZimbraAccount.AccountA().soapSend(
-					"<SearchRequest xmlns='urn:zimbraMail' types='appointment' calExpandInstStart='"+ startUTC.addDays(-10).toMillis() +"' calExpandInstEnd='"+ endUTC.addDays(10).toMillis() +"'>"
+		ZmailAccount.AccountA().soapSend(
+					"<SearchRequest xmlns='urn:zmailMail' types='appointment' calExpandInstStart='"+ startUTC.addDays(-10).toMillis() +"' calExpandInstEnd='"+ endUTC.addDays(10).toMillis() +"'>"
 				+		"<query>"+ apptSubject +"</query>"
 				+	"</SearchRequest>");
 		
-		String organizerInvId = ZimbraAccount.AccountA().soapSelectValue("//mail:appt", "invId");
+		String organizerInvId = ZmailAccount.AccountA().soapSelectValue("//mail:appt", "invId");
 
 		// Get the appointment details
-		ZimbraAccount.AccountA().soapSend(
-					"<GetAppointmentRequest  xmlns='urn:zimbraMail' id='"+ organizerInvId +"'/>");
+		ZmailAccount.AccountA().soapSend(
+					"<GetAppointmentRequest  xmlns='urn:zmailMail' id='"+ organizerInvId +"'/>");
 		
-		String attendeeStatus = ZimbraAccount.AccountA().soapSelectValue("//mail:at[@a='"+ app.zGetActiveAccount().EmailAddress +"']", "ptst");
+		String attendeeStatus = ZmailAccount.AccountA().soapSelectValue("//mail:at[@a='"+ app.zGetActiveAccount().EmailAddress +"']", "ptst");
 
 		// Verify attendee status shows as psts=AC
 		ZAssert.assertEquals(attendeeStatus, "AC", "Verify that the attendee shows as 'ACCEPTED'");
@@ -141,7 +141,7 @@ public class AcceptMeeting extends PrefGroupMailByMessageTest {
 
 		// Attendee: Search for the appointment (InvId)
 		app.zGetActiveAccount().soapSend(
-					"<SearchRequest xmlns='urn:zimbraMail' types='appointment' calExpandInstStart='"+ startUTC.addDays(-10).toMillis() +"' calExpandInstEnd='"+ endUTC.addDays(10).toMillis() +"'>"
+					"<SearchRequest xmlns='urn:zmailMail' types='appointment' calExpandInstStart='"+ startUTC.addDays(-10).toMillis() +"' calExpandInstEnd='"+ endUTC.addDays(10).toMillis() +"'>"
 				+		"<query>"+ apptSubject +"</query>"
 				+	"</SearchRequest>");
 		
@@ -149,7 +149,7 @@ public class AcceptMeeting extends PrefGroupMailByMessageTest {
 
 		// Get the appointment details
 		app.zGetActiveAccount().soapSend(
-					"<GetAppointmentRequest  xmlns='urn:zimbraMail' id='"+ attendeeInvId +"'/>");
+					"<GetAppointmentRequest  xmlns='urn:zmailMail' id='"+ attendeeInvId +"'/>");
 		
 		String myStatus = app.zGetActiveAccount().soapSelectValue("//mail:at[@a='"+ app.zGetActiveAccount().EmailAddress +"']", "ptst");
 
@@ -166,7 +166,7 @@ public class AcceptMeeting extends PrefGroupMailByMessageTest {
 
 		// ------------------------ Test data ------------------------------------
 
-		String apptSubject = "appointment" + ZimbraSeleniumProperties.getUniqueString();
+		String apptSubject = "appointment" + ZmailSeleniumProperties.getUniqueString();
 		Calendar now = Calendar.getInstance();
 		ZDate startUTC = new ZDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH) + 1, now.get(Calendar.DAY_OF_MONTH), 12, 0, 0);
 
@@ -193,18 +193,18 @@ public class AcceptMeeting extends PrefGroupMailByMessageTest {
 		// --- Check that the organizer shows the attendee as "ACCEPT" ---
 
 		// Organizer: Search for the appointment response
-		String inboxId = FolderItem.importFromSOAP(ZimbraAccount.AccountA(), FolderItem.SystemFolder.Inbox).getId();
+		String inboxId = FolderItem.importFromSOAP(ZmailAccount.AccountA(), FolderItem.SystemFolder.Inbox).getId();
 		
-		ZimbraAccount.AccountA().soapSend(
-					"<SearchRequest xmlns='urn:zimbraMail' types='message'>"
+		ZmailAccount.AccountA().soapSend(
+					"<SearchRequest xmlns='urn:zmailMail' types='message'>"
 				+		"<query>inid:"+ inboxId +" subject:("+ apptSubject +")</query>"
 				+	"</SearchRequest>");
 		
-		String messageId = ZimbraAccount.AccountA().soapSelectValue("//mail:m", "id");
+		String messageId = ZmailAccount.AccountA().soapSelectValue("//mail:m", "id");
 
 		// Get the appointment details
-		ZimbraAccount.AccountA().soapSend(
-					"<GetMsgRequest  xmlns='urn:zimbraMail'>"
+		ZmailAccount.AccountA().soapSend(
+					"<GetMsgRequest  xmlns='urn:zmailMail'>"
 				+		"<m id='"+ messageId +"'/>"
 				+	"</GetMsgRequest>");
 
@@ -218,7 +218,7 @@ public class AcceptMeeting extends PrefGroupMailByMessageTest {
 
 		// ------------------------ Test data ------------------------------------
 
-		String apptSubject = "appointment" + ZimbraSeleniumProperties.getUniqueString();
+		String apptSubject = "appointment" + ZmailSeleniumProperties.getUniqueString();
 
 		Calendar now = Calendar.getInstance();
 		ZDate startUTC = new ZDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH) + 1, now.get(Calendar.DAY_OF_MONTH), 12, 0, 0);
@@ -227,13 +227,13 @@ public class AcceptMeeting extends PrefGroupMailByMessageTest {
 
 		// --------------- Creating invitation (organizer) ----------------------------
 
-		ZimbraAccount.AccountA().soapSend(
-				"<CreateAppointmentRequest xmlns='urn:zimbraMail'>"
+		ZmailAccount.AccountA().soapSend(
+				"<CreateAppointmentRequest xmlns='urn:zmailMail'>"
 				+		"<m>"
 				+			"<inv method='REQUEST' type='event' status='CONF' draft='0' class='PUB' fb='B' transp='O' allDay='0' name='"+ apptSubject +"'>"
 				+				"<s d='"+ startUTC.toTimeZone(ZTimeZone.TimeZoneEST.getID()).toYYYYMMDDTHHMMSS() +"' tz='"+ ZTimeZone.TimeZoneEST.getID() +"'/>"
 				+				"<e d='"+ endUTC.toTimeZone(ZTimeZone.TimeZoneEST.getID()).toYYYYMMDDTHHMMSS() +"' tz='"+ ZTimeZone.TimeZoneEST.getID() +"'/>"
-				+				"<or a='"+ ZimbraAccount.AccountA().EmailAddress +"'/>"
+				+				"<or a='"+ ZmailAccount.AccountA().EmailAddress +"'/>"
 				+				"<at role='REQ' ptst='NE' rsvp='1' a='" + app.zGetActiveAccount().EmailAddress + "'/>"
 				+			"</inv>"
 				+			"<e a='"+ app.zGetActiveAccount().EmailAddress +"' t='t'/>"
@@ -263,18 +263,18 @@ public class AcceptMeeting extends PrefGroupMailByMessageTest {
 		// --- Check that the organizer shows the attendee as "ACCEPT" ---
 
 		// Organizer: Search for the appointment (InvId)
-		ZimbraAccount.AccountA().soapSend(
-					"<SearchRequest xmlns='urn:zimbraMail' types='appointment' calExpandInstStart='"+ startUTC.addDays(-10).toMillis() +"' calExpandInstEnd='"+ endUTC.addDays(10).toMillis() +"'>"
+		ZmailAccount.AccountA().soapSend(
+					"<SearchRequest xmlns='urn:zmailMail' types='appointment' calExpandInstStart='"+ startUTC.addDays(-10).toMillis() +"' calExpandInstEnd='"+ endUTC.addDays(10).toMillis() +"'>"
 				+		"<query>"+ apptSubject +"</query>"
 				+	"</SearchRequest>");
 		
-		String organizerInvId = ZimbraAccount.AccountA().soapSelectValue("//mail:appt", "invId");
+		String organizerInvId = ZmailAccount.AccountA().soapSelectValue("//mail:appt", "invId");
 
 		// Get the appointment details
-		ZimbraAccount.AccountA().soapSend(
-					"<GetAppointmentRequest  xmlns='urn:zimbraMail' id='"+ organizerInvId +"'/>");
+		ZmailAccount.AccountA().soapSend(
+					"<GetAppointmentRequest  xmlns='urn:zmailMail' id='"+ organizerInvId +"'/>");
 		
-		String attendeeStatus = ZimbraAccount.AccountA().soapSelectValue("//mail:at[@a='"+ app.zGetActiveAccount().EmailAddress +"']", "ptst");
+		String attendeeStatus = ZmailAccount.AccountA().soapSelectValue("//mail:at[@a='"+ app.zGetActiveAccount().EmailAddress +"']", "ptst");
 
 		// Verify attendee status shows as psts=AC
 		ZAssert.assertEquals(attendeeStatus, "AC", "Verify that the attendee shows as 'ACCEPTED'");
@@ -284,7 +284,7 @@ public class AcceptMeeting extends PrefGroupMailByMessageTest {
 
 		// Attendee: Search for the appointment (InvId)
 		app.zGetActiveAccount().soapSend(
-					"<SearchRequest xmlns='urn:zimbraMail' types='appointment' calExpandInstStart='"+ startUTC.addDays(-10).toMillis() +"' calExpandInstEnd='"+ endUTC.addDays(10).toMillis() +"'>"
+					"<SearchRequest xmlns='urn:zmailMail' types='appointment' calExpandInstStart='"+ startUTC.addDays(-10).toMillis() +"' calExpandInstEnd='"+ endUTC.addDays(10).toMillis() +"'>"
 				+		"<query>"+ apptSubject +"</query>"
 				+	"</SearchRequest>");
 		
@@ -292,7 +292,7 @@ public class AcceptMeeting extends PrefGroupMailByMessageTest {
 
 		// Get the appointment details
 		app.zGetActiveAccount().soapSend(
-					"<GetAppointmentRequest  xmlns='urn:zimbraMail' id='"+ attendeeInvId +"'/>");
+					"<GetAppointmentRequest  xmlns='urn:zmailMail' id='"+ attendeeInvId +"'/>");
 		
 		String myStatus = app.zGetActiveAccount().soapSelectValue("//mail:at[@a='"+ app.zGetActiveAccount().EmailAddress +"']", "ptst");
 
@@ -300,18 +300,18 @@ public class AcceptMeeting extends PrefGroupMailByMessageTest {
 		ZAssert.assertEquals(myStatus, "AC", "Verify that the attendee shows as 'ACCEPTED'");
 
 		// Organizer: Search for the appointment response
-		String inboxId = FolderItem.importFromSOAP(ZimbraAccount.AccountA(), FolderItem.SystemFolder.Inbox).getId();
+		String inboxId = FolderItem.importFromSOAP(ZmailAccount.AccountA(), FolderItem.SystemFolder.Inbox).getId();
 		
-		ZimbraAccount.AccountA().soapSend(
-					"<SearchRequest xmlns='urn:zimbraMail' types='message'>"
+		ZmailAccount.AccountA().soapSend(
+					"<SearchRequest xmlns='urn:zmailMail' types='message'>"
 				+		"<query>inid:"+ inboxId +" subject:("+ apptSubject +")</query>"
 				+	"</SearchRequest>");
 		
-		String messageId = ZimbraAccount.AccountA().soapSelectValue("//mail:m", "id");
+		String messageId = ZmailAccount.AccountA().soapSelectValue("//mail:m", "id");
 
 		// Get the appointment details
-		ZimbraAccount.AccountA().soapSend(
-					"<GetMsgRequest  xmlns='urn:zimbraMail'>"
+		ZmailAccount.AccountA().soapSend(
+					"<GetMsgRequest  xmlns='urn:zmailMail'>"
 				+		"<m id='"+ messageId +"'/>"
 				+	"</GetMsgRequest>");
 		
@@ -325,8 +325,8 @@ public class AcceptMeeting extends PrefGroupMailByMessageTest {
 
 		// ------------------------ Test data ------------------------------------
 
-		String apptSubject = "appointment" + ZimbraSeleniumProperties.getUniqueString();
-		String modifiedBody = "modified" + ZimbraSeleniumProperties.getUniqueString();
+		String apptSubject = "appointment" + ZmailSeleniumProperties.getUniqueString();
+		String modifiedBody = "modified" + ZmailSeleniumProperties.getUniqueString();
 
 		Calendar now = Calendar.getInstance();
 		ZDate startUTC = new ZDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH) + 1, now.get(Calendar.DAY_OF_MONTH), 12, 0, 0);
@@ -335,13 +335,13 @@ public class AcceptMeeting extends PrefGroupMailByMessageTest {
 
 		// --------------- Creating invitation (organizer) ----------------------------
 
-		ZimbraAccount.AccountA().soapSend(
-				"<CreateAppointmentRequest xmlns='urn:zimbraMail'>"
+		ZmailAccount.AccountA().soapSend(
+				"<CreateAppointmentRequest xmlns='urn:zmailMail'>"
 				+		"<m>"
 				+			"<inv method='REQUEST' type='event' status='CONF' draft='0' class='PUB' fb='B' transp='O' allDay='0' name='"+ apptSubject +"'>"
 				+				"<s d='"+ startUTC.toTimeZone(ZTimeZone.TimeZoneEST.getID()).toYYYYMMDDTHHMMSS() +"' tz='"+ ZTimeZone.TimeZoneEST.getID() +"'/>"
 				+				"<e d='"+ endUTC.toTimeZone(ZTimeZone.TimeZoneEST.getID()).toYYYYMMDDTHHMMSS() +"' tz='"+ ZTimeZone.TimeZoneEST.getID() +"'/>"
-				+				"<or a='"+ ZimbraAccount.AccountA().EmailAddress +"'/>"
+				+				"<or a='"+ ZmailAccount.AccountA().EmailAddress +"'/>"
 				+				"<at role='REQ' ptst='NE' rsvp='1' a='" + app.zGetActiveAccount().EmailAddress + "'/>"
 				+			"</inv>"
 				+			"<e a='"+ app.zGetActiveAccount().EmailAddress +"' t='t'/>"
@@ -378,27 +378,27 @@ public class AcceptMeeting extends PrefGroupMailByMessageTest {
 		
 		// Get the response/appointment
         
-		ZimbraAccount.AccountA().soapSend(
-					"<SearchRequest xmlns='urn:zimbraMail' types='message'>"
+		ZmailAccount.AccountA().soapSend(
+					"<SearchRequest xmlns='urn:zmailMail' types='message'>"
 				+		"<query>in:inbox subject:("+ apptSubject +")</query>"
 				+	"</SearchRequest>");
-		String messageId = ZimbraAccount.AccountA().soapSelectValue("//mail:m", "id");
+		String messageId = ZmailAccount.AccountA().soapSelectValue("//mail:m", "id");
 
-		ZimbraAccount.AccountA().soapSend(
-				"<GetMsgRequest xmlns='urn:zimbraMail'>"
+		ZmailAccount.AccountA().soapSend(
+				"<GetMsgRequest xmlns='urn:zmailMail'>"
 			+		"<m id='" + messageId + "'/>"
 			+	"</GetMsgRequest>");
 
 		
 		// --- Check that the organizer sees the modified response ---
 
-		String body = ZimbraAccount.AccountA().soapSelectValue("//mail:mp[@ct='text/plain']//mail:content", null);
+		String body = ZmailAccount.AccountA().soapSelectValue("//mail:mp[@ct='text/plain']//mail:content", null);
 		ZAssert.assertStringContains(body, modifiedBody, "Verify modified body value");
 
 		
 		// --- Check that the organizer shows the attendee as "ACCEPT" ---
 		
-		String attendeeStatus = ZimbraAccount.AccountA().soapSelectValue("//mail:at[@a='"+ app.zGetActiveAccount().EmailAddress +"']", "ptst");
+		String attendeeStatus = ZmailAccount.AccountA().soapSelectValue("//mail:at[@a='"+ app.zGetActiveAccount().EmailAddress +"']", "ptst");
 
 		// Verify attendee status shows as psts=AC
 		ZAssert.assertEquals(attendeeStatus, "AC", "Verify that the attendee shows as 'ACCEPTED'");
@@ -409,7 +409,7 @@ public class AcceptMeeting extends PrefGroupMailByMessageTest {
 
 		// Attendee: Search for the appointment (InvId)
 		app.zGetActiveAccount().soapSend(
-					"<SearchRequest xmlns='urn:zimbraMail' types='appointment' calExpandInstStart='"+ startUTC.addDays(-10).toMillis() +"' calExpandInstEnd='"+ endUTC.addDays(10).toMillis() +"'>"
+					"<SearchRequest xmlns='urn:zmailMail' types='appointment' calExpandInstStart='"+ startUTC.addDays(-10).toMillis() +"' calExpandInstEnd='"+ endUTC.addDays(10).toMillis() +"'>"
 				+		"<query>"+ apptSubject +"</query>"
 				+	"</SearchRequest>");
 		
@@ -417,7 +417,7 @@ public class AcceptMeeting extends PrefGroupMailByMessageTest {
 
 		// Get the appointment details
 		app.zGetActiveAccount().soapSend(
-					"<GetAppointmentRequest  xmlns='urn:zimbraMail' id='"+ attendeeInvId +"'/>");
+					"<GetAppointmentRequest  xmlns='urn:zmailMail' id='"+ attendeeInvId +"'/>");
 		
 		String myStatus = app.zGetActiveAccount().soapSelectValue("//mail:at[@a='"+ app.zGetActiveAccount().EmailAddress +"']", "ptst");
 
@@ -435,7 +435,7 @@ public class AcceptMeeting extends PrefGroupMailByMessageTest {
 
 		// ------------------------ Test data ------------------------------------
 
-		String apptSubject = "appointment" + ZimbraSeleniumProperties.getUniqueString();
+		String apptSubject = "appointment" + ZmailSeleniumProperties.getUniqueString();
 
 		Calendar now = Calendar.getInstance();
 		ZDate startUTC = new ZDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH) + 1, now.get(Calendar.DAY_OF_MONTH), 12, 0, 0);
@@ -444,13 +444,13 @@ public class AcceptMeeting extends PrefGroupMailByMessageTest {
 
 		// --------------- Creating invitation (organizer) ----------------------------
 
-		ZimbraAccount.AccountA().soapSend(
-				"<CreateAppointmentRequest xmlns='urn:zimbraMail'>"
+		ZmailAccount.AccountA().soapSend(
+				"<CreateAppointmentRequest xmlns='urn:zmailMail'>"
 				+		"<m>"
 				+			"<inv method='REQUEST' type='event' status='CONF' draft='0' class='PUB' fb='B' transp='O' allDay='0' name='"+ apptSubject +"'>"
 				+				"<s d='"+ startUTC.toTimeZone(ZTimeZone.TimeZoneEST.getID()).toYYYYMMDDTHHMMSS() +"' tz='"+ ZTimeZone.TimeZoneEST.getID() +"'/>"
 				+				"<e d='"+ endUTC.toTimeZone(ZTimeZone.TimeZoneEST.getID()).toYYYYMMDDTHHMMSS() +"' tz='"+ ZTimeZone.TimeZoneEST.getID() +"'/>"
-				+				"<or a='"+ ZimbraAccount.AccountA().EmailAddress +"'/>"
+				+				"<or a='"+ ZmailAccount.AccountA().EmailAddress +"'/>"
 				+				"<at role='REQ' ptst='NE' rsvp='1' a='" + app.zGetActiveAccount().EmailAddress + "'/>"
 				+			"</inv>"
 				+			"<e a='"+ app.zGetActiveAccount().EmailAddress +"' t='t'/>"
@@ -480,18 +480,18 @@ public class AcceptMeeting extends PrefGroupMailByMessageTest {
 		// --- Check that the organizer shows the attendee as "ACCEPT" ---
 
 		// Organizer: Search for the appointment (InvId)
-		ZimbraAccount.AccountA().soapSend(
-					"<SearchRequest xmlns='urn:zimbraMail' types='appointment' calExpandInstStart='"+ startUTC.addDays(-10).toMillis() +"' calExpandInstEnd='"+ endUTC.addDays(10).toMillis() +"'>"
+		ZmailAccount.AccountA().soapSend(
+					"<SearchRequest xmlns='urn:zmailMail' types='appointment' calExpandInstStart='"+ startUTC.addDays(-10).toMillis() +"' calExpandInstEnd='"+ endUTC.addDays(10).toMillis() +"'>"
 				+		"<query>"+ apptSubject +"</query>"
 				+	"</SearchRequest>");
 		
-		String organizerInvId = ZimbraAccount.AccountA().soapSelectValue("//mail:appt", "invId");
+		String organizerInvId = ZmailAccount.AccountA().soapSelectValue("//mail:appt", "invId");
 
 		// Get the appointment details
-		ZimbraAccount.AccountA().soapSend(
-					"<GetAppointmentRequest  xmlns='urn:zimbraMail' id='"+ organizerInvId +"'/>");
+		ZmailAccount.AccountA().soapSend(
+					"<GetAppointmentRequest  xmlns='urn:zmailMail' id='"+ organizerInvId +"'/>");
 		
-		String attendeeStatus = ZimbraAccount.AccountA().soapSelectValue("//mail:at[@a='"+ app.zGetActiveAccount().EmailAddress +"']", "ptst");
+		String attendeeStatus = ZmailAccount.AccountA().soapSelectValue("//mail:at[@a='"+ app.zGetActiveAccount().EmailAddress +"']", "ptst");
 
 		// Verify attendee status shows as psts=NE (bug 65356)
 		ZAssert.assertEquals(attendeeStatus, "NE", "Verify that the attendee shows as 'ACCEPTED'");
@@ -501,7 +501,7 @@ public class AcceptMeeting extends PrefGroupMailByMessageTest {
 
 		// Attendee: Search for the appointment (InvId)
 		app.zGetActiveAccount().soapSend(
-					"<SearchRequest xmlns='urn:zimbraMail' types='appointment' calExpandInstStart='"+ startUTC.addDays(-10).toMillis() +"' calExpandInstEnd='"+ endUTC.addDays(10).toMillis() +"'>"
+					"<SearchRequest xmlns='urn:zmailMail' types='appointment' calExpandInstStart='"+ startUTC.addDays(-10).toMillis() +"' calExpandInstEnd='"+ endUTC.addDays(10).toMillis() +"'>"
 				+		"<query>"+ apptSubject +"</query>"
 				+	"</SearchRequest>");
 		
@@ -509,7 +509,7 @@ public class AcceptMeeting extends PrefGroupMailByMessageTest {
 
 		// Get the appointment details
 		app.zGetActiveAccount().soapSend(
-					"<GetAppointmentRequest  xmlns='urn:zimbraMail' id='"+ attendeeInvId +"'/>");
+					"<GetAppointmentRequest  xmlns='urn:zmailMail' id='"+ attendeeInvId +"'/>");
 		
 		String myStatus = app.zGetActiveAccount().soapSelectValue("//mail:at[@a='"+ app.zGetActiveAccount().EmailAddress +"']", "ptst");
 
@@ -517,15 +517,15 @@ public class AcceptMeeting extends PrefGroupMailByMessageTest {
 		ZAssert.assertEquals(myStatus, "AC", "Verify that the attendee shows as 'ACCEPTED'");
 
 		// Organizer: Search for the appointment response
-		String inboxId = FolderItem.importFromSOAP(ZimbraAccount.AccountA(), FolderItem.SystemFolder.Inbox).getId();
+		String inboxId = FolderItem.importFromSOAP(ZmailAccount.AccountA(), FolderItem.SystemFolder.Inbox).getId();
 		
-		ZimbraAccount.AccountA().soapSend(
-					"<SearchRequest xmlns='urn:zimbraMail' types='message'>"
+		ZmailAccount.AccountA().soapSend(
+					"<SearchRequest xmlns='urn:zmailMail' types='message'>"
 				+		"<query>inid:"+ inboxId +" subject:("+ apptSubject +")</query>"
 				+	"</SearchRequest>");
 		
 		app.zGetActiveAccount().soapSend(
-				"<SearchRequest xmlns='urn:zimbraMail' types='message'>"
+				"<SearchRequest xmlns='urn:zmailMail' types='message'>"
 			+		"<query>inid:"+ inboxId +" subject:("+ apptSubject +")</query>"
 			+	"</SearchRequest>");
 

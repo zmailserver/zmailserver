@@ -14,23 +14,23 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.briefcase.file;
+package org.zmail.qa.selenium.projects.ajax.tests.briefcase.file;
 
 import org.testng.annotations.Test;
-import com.zimbra.qa.selenium.framework.items.FileItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.SleepUtil;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.ajax.core.FeatureBriefcaseTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogWarning;
-import com.zimbra.qa.selenium.projects.ajax.ui.briefcase.DialogConfirm;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew;
+import org.zmail.qa.selenium.framework.items.FileItem;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.SleepUtil;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.ajax.core.FeatureBriefcaseTest;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogWarning;
+import org.zmail.qa.selenium.projects.ajax.ui.briefcase.DialogConfirm;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew;
 
 public class SendFileLink extends FeatureBriefcaseTest {
 
@@ -39,24 +39,24 @@ public class SendFileLink extends FeatureBriefcaseTest {
 
 		super.startingPage = app.zPageBriefcase;
 
-		if(ZimbraSeleniumProperties.zimbraGetVersionString().contains("FOSS")){
-		    super.startingAccountPreferences.put("zimbraPrefShowSelectionCheckbox","TRUE");
+		if(ZmailSeleniumProperties.zmailGetVersionString().contains("FOSS")){
+		    super.startingAccountPreferences.put("zmailPrefShowSelectionCheckbox","TRUE");
 		}
 		   
-		super.startingAccountPreferences.put("zimbraPrefComposeFormat", "html");
+		super.startingAccountPreferences.put("zmailPrefComposeFormat", "html");
 			    
-		super.startingAccountPreferences.put("zimbraPrefBriefcaseReadingPaneLocation", "bottom");
+		super.startingAccountPreferences.put("zmailPrefBriefcaseReadingPaneLocation", "bottom");
 	}	
 
 	@Test(description = "Upload file through RestUtil - click Send Link, Cancel & verify through GUI", groups = { "functional" })
 	public void SendFileLink_01() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
 
 		// Create file item
-		String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+		String filePath = ZmailSeleniumProperties.getBaseDirectory()
 				+ "/data/public/other/testexcelfile.xls";
 
 		FileItem fileItem = new FileItem(filePath);
@@ -67,7 +67,7 @@ public class SendFileLink extends FeatureBriefcaseTest {
 		String attachmentId = account.uploadFile(filePath);
 
 		// Save uploaded file to briefcase through SOAP
-		account.soapSend("<SaveDocumentRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<SaveDocumentRequest xmlns='urn:zmailMail'>"
 				+ "<doc l='" + briefcaseFolder.getId() + "'><upload id='"
 				+ attachmentId + "'/></doc></SaveDocumentRequest>");
 
@@ -77,7 +77,7 @@ public class SendFileLink extends FeatureBriefcaseTest {
 		SleepUtil.sleepVerySmall();
 		
 		// Click on uploaded file
-		if(ZimbraSeleniumProperties.zimbraGetVersionString().contains(
+		if(ZmailSeleniumProperties.zmailGetVersionString().contains(
     			"FOSS")){
 		    app.zPageBriefcase.zListItem(Action.A_BRIEFCASE_CHECKBOX, fileItem);
 
@@ -87,7 +87,7 @@ public class SendFileLink extends FeatureBriefcaseTest {
 		
 		// Click on Send Link
 		DialogConfirm confDlg;
-		if (ZimbraSeleniumProperties.zimbraGetVersionString().contains("7.1."))
+		if (ZmailSeleniumProperties.zmailGetVersionString().contains("7.1."))
 			confDlg = (DialogConfirm) app.zPageBriefcase
 			.zToolbarPressPulldown(Button.B_SEND, Button.O_SEND_LINK, fileItem);
 		else
@@ -126,13 +126,13 @@ public class SendFileLink extends FeatureBriefcaseTest {
 
 	@Test(description = "Send File link using Right Click Context Menu & verify through GUI", groups = { "functional" })
 	public void SendFileLink_02() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
 
 		// Create file item
-		String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+		String filePath = ZmailSeleniumProperties.getBaseDirectory()
 				+ "/data/public/other/testexcelfile.xls";
 
 		FileItem fileItem = new FileItem(filePath);
@@ -143,7 +143,7 @@ public class SendFileLink extends FeatureBriefcaseTest {
 		String attachmentId = account.uploadFile(filePath);
 
 		// Save uploaded file to briefcase through SOAP
-		account.soapSend("<SaveDocumentRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<SaveDocumentRequest xmlns='urn:zmailMail'>"
 				+ "<doc l='" + briefcaseFolder.getId() + "'><upload id='"
 				+ attachmentId + "'/></doc></SaveDocumentRequest>");
 
@@ -155,7 +155,7 @@ public class SendFileLink extends FeatureBriefcaseTest {
 		SleepUtil.sleepVerySmall();
 		
 		// Click on uploaded file
-		if(ZimbraSeleniumProperties.zimbraGetVersionString().contains(
+		if(ZmailSeleniumProperties.zmailGetVersionString().contains(
     			"FOSS")){
 		    app.zPageBriefcase.zListItem(Action.A_BRIEFCASE_CHECKBOX, fileItem);
 

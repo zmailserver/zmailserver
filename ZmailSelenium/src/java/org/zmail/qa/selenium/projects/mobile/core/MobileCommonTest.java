@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.mobile.core;
+package org.zmail.qa.selenium.projects.mobile.core;
 
 import java.awt.Toolkit;
 import java.lang.reflect.Method;
@@ -36,11 +36,11 @@ import org.testng.annotations.BeforeSuite;
 
 import com.thoughtworks.selenium.DefaultSelenium;
 import com.thoughtworks.selenium.SeleniumException;
-import com.zimbra.qa.selenium.framework.core.ClientSessionFactory;
-import com.zimbra.qa.selenium.framework.core.Repository;
-import com.zimbra.qa.selenium.framework.ui.AbsTab;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.mobile.ui.AppMobileClient;
+import org.zmail.qa.selenium.framework.core.ClientSessionFactory;
+import org.zmail.qa.selenium.framework.core.Repository;
+import org.zmail.qa.selenium.framework.ui.AbsTab;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.mobile.ui.AppMobileClient;
 
 
 /**
@@ -67,7 +67,7 @@ public class MobileCommonTest {
 	 * startingAccount = the account to log in as
 	 */
 	protected AbsTab startingPage = null;
-	protected ZimbraAccount startingAccount = null;
+	protected ZmailAccount startingAccount = null;
 	private Repository _repository = new Repository();
 
 	protected MobileCommonTest() {
@@ -76,7 +76,7 @@ public class MobileCommonTest {
 		app = new AppMobileClient();
 		
 		startingPage = app.zPageMain;
-		startingAccount = ZimbraAccount.AccountZMC();
+		startingAccount = ZmailAccount.AccountZMC();
 		
 		app.zPageLogin.DefaultLoginAccount = startingAccount;
 		
@@ -94,27 +94,27 @@ public class MobileCommonTest {
 		logger.info("commonTestBeforeSuite: start");
 
       //Racetrack
-      String DbHostURL = ZimbraSeleniumProperties.getStringProperty("racetrack.dbUrl",
+      String DbHostURL = ZmailSeleniumProperties.getStringProperty("racetrack.dbUrl",
             "racetrack.eng.vmware.com");
-      String buildNumber = ZimbraSeleniumProperties.getStringProperty("racetrack.buildNumber",
+      String buildNumber = ZmailSeleniumProperties.getStringProperty("racetrack.buildNumber",
             "000000");
-      String userName = ZimbraSeleniumProperties.getStringProperty("racetrack.username",
+      String userName = ZmailSeleniumProperties.getStringProperty("racetrack.username",
             "anonymous");
-      String product = ZimbraSeleniumProperties.getStringProperty("racetrack.product",
+      String product = ZmailSeleniumProperties.getStringProperty("racetrack.product",
             "mobile");
-      String description = ZimbraSeleniumProperties.getStringProperty("racetrack.description",
+      String description = ZmailSeleniumProperties.getStringProperty("racetrack.description",
             "mobile description");
-      String branch = ZimbraSeleniumProperties.getStringProperty("racetrack.branch",
+      String branch = ZmailSeleniumProperties.getStringProperty("racetrack.branch",
             "Please specify the branch");
-      String buildType = ZimbraSeleniumProperties.getStringProperty("racetrack.buildType",
+      String buildType = ZmailSeleniumProperties.getStringProperty("racetrack.buildType",
             "beta");
-      String testType = ZimbraSeleniumProperties.getStringProperty("racetrack.testType",
+      String testType = ZmailSeleniumProperties.getStringProperty("racetrack.testType",
             "functional");
-      String recordToRacetrack = ZimbraSeleniumProperties.getStringProperty("racetrack.recordToRacetrack",
+      String recordToRacetrack = ZmailSeleniumProperties.getStringProperty("racetrack.recordToRacetrack",
             "false");
-      String appendToExisting = ZimbraSeleniumProperties.getStringProperty("racetrack.appendToExisting",
+      String appendToExisting = ZmailSeleniumProperties.getStringProperty("racetrack.appendToExisting",
             "false");
-      String resultId = ZimbraSeleniumProperties.getStringProperty("racetrack.resultId",
+      String resultId = ZmailSeleniumProperties.getStringProperty("racetrack.resultId",
             "");
 
       _repository.connectingToRacetrack(DbHostURL);
@@ -131,15 +131,15 @@ public class MobileCommonTest {
             resultId);
 
       	// Make sure there is a new default account
-		ZimbraAccount.ResetAccountZMC();
+		ZmailAccount.ResetAccountZMC();
 				
 		// Set the app type
-		ZimbraSeleniumProperties.setAppType(ZimbraSeleniumProperties.AppType.MOBILE);
+		ZmailSeleniumProperties.setAppType(ZmailSeleniumProperties.AppType.MOBILE);
 
 		try
 		{
 
-			if (ZimbraSeleniumProperties.isWebDriver()) {
+			if (ZmailSeleniumProperties.isWebDriver()) {
 
 				_webDriver = ClientSessionFactory.session().webDriver();
 
@@ -173,12 +173,12 @@ public class MobileCommonTest {
 					logger.info("Retry #" + retry);
 					retry ++;
 
-					if (ZimbraSeleniumProperties.isWebDriver()) {
-						//_webDriver.get(ZimbraSeleniumProperties.getBaseURL());
-						_webDriver.navigate().to(ZimbraSeleniumProperties.getBaseURL());
+					if (ZmailSeleniumProperties.isWebDriver()) {
+						//_webDriver.get(ZmailSeleniumProperties.getBaseURL());
+						_webDriver.navigate().to(ZmailSeleniumProperties.getBaseURL());
 					} 
 					else {
-						_selenium.open(ZimbraSeleniumProperties.getBaseURL());
+						_selenium.open(ZmailSeleniumProperties.getBaseURL());
 					}
 
 					appIsReady = true;
@@ -302,7 +302,7 @@ public class MobileCommonTest {
 	public void commonTestAfterSuite() throws HarnessException {	
 		logger.info("commonTestAfterSuite: start");
 		
-		if (ZimbraSeleniumProperties.isWebDriver()) {
+		if (ZmailSeleniumProperties.isWebDriver()) {
 			_webDriver.quit();
 		} else {
 			ClientSessionFactory.session().selenium().stop();

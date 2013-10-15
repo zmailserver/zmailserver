@@ -17,11 +17,11 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.desktop.ui.briefcase;
+package org.zmail.qa.selenium.projects.desktop.ui.briefcase;
 
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
 
 /**
  * Represents a "Add Document Version Notes" dialog box
@@ -139,7 +139,7 @@ public class DialogAddVersionNotes extends AbsDialog {
 
 			if (zIsActive()) {
 				zEnterVersionNotes("notes"
-						+ ZimbraSeleniumProperties.getUniqueString());
+						+ ZmailSeleniumProperties.getUniqueString());
 
 				zClickButton(Button.B_OK);
 			}

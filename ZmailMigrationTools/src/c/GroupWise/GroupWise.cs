@@ -50,11 +50,11 @@ namespace GroupWise
             //commenting out the following since we will have to use trusted connection thru the admin acoount.
 
            /* pt.username = "knuthi";
-            pt.password = "zimbra";
+            pt.password = "zmail";
             req.auth = pt;*/
 
             TrustedApplication trustedapp = new TrustedApplication();
-            trustedapp.name = "ZimbraGWmigration";
+            trustedapp.name = "ZmailGWmigration";
             trustedapp.key = admin.Key;
             trustedapp.username = admin.Username;
 
@@ -113,7 +113,7 @@ namespace GroupWise
 
             getUserListRequest listreq = new getUserListRequest();
             getUserListResponse listresp = new getUserListResponse();
-            listreq.name = "ZimbraGWmigration";
+            listreq.name = "ZmailGWmigration";
             listreq.key = admin.Key;
             try
             {
@@ -167,7 +167,7 @@ namespace GroupWise
 
             TrustedApplication trusted = new TrustedApplication();
 
-            trusted.name = "ZimbraGWMigration";
+            trusted.name = "ZmailGWMigration";
             trusted.key = key;//outkey.ToString();
 
 
@@ -349,7 +349,7 @@ namespace GroupWise
             ws.Url = str;
             TrustedApplication trusted = new TrustedApplication();
 
-            trusted.name = "ZimbraGWmigration";
+            trusted.name = "ZmailGWmigration";
             trusted.key = admin.Key;//outkey.ToString();
 
 

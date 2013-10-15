@@ -14,27 +14,27 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.octopus.tests.history;
+package org.zmail.qa.selenium.projects.octopus.tests.history;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.octopus.ui.DialogFileShare;
-import com.zimbra.qa.selenium.projects.octopus.ui.DisplayFilePreview;
-import com.zimbra.qa.selenium.projects.octopus.ui.PageHistory.GetText;
-import com.zimbra.qa.selenium.projects.octopus.ui.PageMyFiles;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.octopus.ui.DialogFileShare;
+import org.zmail.qa.selenium.projects.octopus.ui.DisplayFilePreview;
+import org.zmail.qa.selenium.projects.octopus.ui.PageHistory.GetText;
+import org.zmail.qa.selenium.projects.octopus.ui.PageMyFiles;
 
 public class GlobalHistory extends HistoryCommonTest {
 
 	private FolderItem folder = null;
-	private ZimbraAccount granteeAccount = null;
+	private ZmailAccount granteeAccount = null;
 
 	public GlobalHistory()
 	{
@@ -43,7 +43,7 @@ public class GlobalHistory extends HistoryCommonTest {
 		// test starts at the History tab
 		super.startingPage = app.zPageHistory;
 		super.startingAccountPreferences = null;
-		granteeAccount = new ZimbraAccount();
+		granteeAccount = new ZmailAccount();
 		granteeAccount.provision();
 		granteeAccount.authenticate();
 	}
@@ -61,7 +61,7 @@ public class GlobalHistory extends HistoryCommonTest {
 		DisplayFilePreview filePreview = (DisplayFilePreview) app.zPageMyFiles.zListItem(Action.A_LEFTCLICK, fileName);
 
 		//make comment via soap
-		String comment = "Comment" + ZimbraSeleniumProperties.getUniqueString();
+		String comment = "Comment" + ZmailSeleniumProperties.getUniqueString();
 		makeCommentViaSoap(app.zGetActiveAccount(), fileId, comment);
 
 		//Click on History tab
@@ -82,7 +82,7 @@ public class GlobalHistory extends HistoryCommonTest {
 		String  fileId = uploadFileViaSoap(app.zGetActiveAccount(), fileName);
 
 		//rename via soap
-		String newName = "NewName " + ZimbraSeleniumProperties.getUniqueString() +
+		String newName = "NewName " + ZmailSeleniumProperties.getUniqueString() +
 		fileName.substring(fileName.indexOf("."),fileName.length());
 		renameViaSoap(app.zGetActiveAccount(), fileId, newName);
 
@@ -234,13 +234,13 @@ public class GlobalHistory extends HistoryCommonTest {
 		//click on the My Files tab
 		app.zPageOctopus.zToolbarPressButton(Button.B_TAB_MY_FILES);
 
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseRootFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
 		// Create the sub-folder
 		String subFolderName = "folder"
-			+ ZimbraSeleniumProperties.getUniqueString();
+			+ ZmailSeleniumProperties.getUniqueString();
 
 		// Verify the sub-folder exists on the server
 		FolderItem subFolder = createFolderViaSoap(account, briefcaseRootFolder);
@@ -287,7 +287,7 @@ public class GlobalHistory extends HistoryCommonTest {
 	{
 		//click on the My Files tab
 		app.zPageOctopus.zToolbarPressButton(Button.B_TAB_MY_FILES);
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseRootFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
@@ -295,9 +295,9 @@ public class GlobalHistory extends HistoryCommonTest {
 		// Create two briefcase sub-folders:
 		// One folder to Move & Another folder to move into
 		String subFolderName1 = "folder1"
-			+ ZimbraSeleniumProperties.getUniqueString();
+			+ ZmailSeleniumProperties.getUniqueString();
 		String subFolderName2 = "folder2"
-			+ ZimbraSeleniumProperties.getUniqueString();
+			+ ZmailSeleniumProperties.getUniqueString();
 
 		// Verify the sub-folder exists on the server
 		FolderItem subFolderItem1 = createFolderViaSoap(account,subFolderName1,briefcaseRootFolder);

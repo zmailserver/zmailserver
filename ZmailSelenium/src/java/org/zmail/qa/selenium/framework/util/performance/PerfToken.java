@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.util.performance;
+package org.zmail.qa.selenium.framework.util.performance;
 
 /**
  * A PerfToken is used to track one instance of measuring the browser performance

@@ -12,10 +12,10 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.ab.gab;
+package org.zmail.cs.offline.ab.gab;
 
-import com.zimbra.cs.offline.OfflineLC;
-import com.zimbra.common.service.ServiceException;
+import org.zmail.cs.offline.OfflineLC;
+import org.zmail.common.service.ServiceException;
 import com.google.gdata.data.BaseEntry;
 
 import java.net.URL;
@@ -24,7 +24,7 @@ import java.net.MalformedURLException;
 public final class Gab {
     public static final String BASE_URL = OfflineLC.zdesktop_gab_base_url.value();
 
-    public static final String APP_NAME = String.format("Zimbra-%s-%s",
+    public static final String APP_NAME = String.format("Zmail-%s-%s",
         OfflineLC.zdesktop_name.value(), OfflineLC.zdesktop_version.value());
 
     public static final String CONTACTS = "/contacts/";

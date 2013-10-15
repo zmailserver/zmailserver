@@ -15,9 +15,9 @@
  * ***** END LICENSE BLOCK *****
 -->
 <%@ page import="java.io.*" %>
-<%@ page import="com.zimbra.common.localconfig.*" %>
+<%@ page import="org.zmail.common.localconfig.*" %>
 <%
-    final String ZIMLET = "zimbra_inboxzero";
+    final String ZIMLET = "zmail_inboxzero";
     final String FILENAME = "SetMessageDateFoReelz.jsp";
 
     ServletContext zimletContext = getServletContext();

@@ -271,7 +271,7 @@ function(mode, batchCmd) {
     var jsonObj = {},
         requestName = this._getRequestNameForMode(mode),
         request = jsonObj[requestName] = {
-            _jsns : "urn:zimbraMail"
+            _jsns : "urn:zmailMail"
         };
 	this._addInviteAndCompNum(request);
 

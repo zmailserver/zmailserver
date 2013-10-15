@@ -17,12 +17,12 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.ajax.ui.briefcase;
+package org.zmail.qa.selenium.projects.ajax.ui.briefcase;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
 
 /**
  * Represents a "Create New Briefcase Folder" dialog box
@@ -189,7 +189,7 @@ public class DialogCreateBriefcaseFolder extends AbsDialog {
 		// For some reason, the text doesn't get entered on the first try
 		this.sFocus(locator);
 		this.zClickAt(locator, "0,0");
-		if(ZimbraSeleniumProperties.isWebDriver()){
+		if(ZmailSeleniumProperties.isWebDriver()){
 			this.clearField(locator);
 		}
 		this.sType(locator, folder);

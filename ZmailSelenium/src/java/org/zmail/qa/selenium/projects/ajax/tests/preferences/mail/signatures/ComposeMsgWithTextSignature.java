@@ -14,37 +14,37 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.preferences.mail.signatures;
+package org.zmail.qa.selenium.projects.ajax.tests.preferences.mail.signatures;
 
 import java.util.HashMap;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.MailItem;
-import com.zimbra.qa.selenium.framework.items.RecipientItem;
-import com.zimbra.qa.selenium.framework.items.SignatureItem;
+import org.zmail.qa.selenium.framework.items.MailItem;
+import org.zmail.qa.selenium.framework.items.RecipientItem;
+import org.zmail.qa.selenium.framework.items.SignatureItem;
 
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
 
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount.SOAP_DESTINATION_HOST_TYPE;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.framework.util.ZmailAccount.SOAP_DESTINATION_HOST_TYPE;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew;
 
 public class ComposeMsgWithTextSignature extends AjaxCommonTest {
-	String sigName = "signame" + ZimbraSeleniumProperties.getUniqueString();
-	String sigBody = "sigbody" + ZimbraSeleniumProperties.getUniqueString();
+	String sigName = "signame" + ZmailSeleniumProperties.getUniqueString();
+	String sigBody = "sigbody" + ZmailSeleniumProperties.getUniqueString();
 
 	@SuppressWarnings("serial")
 	public ComposeMsgWithTextSignature() {
 		super.startingPage = app.zPageMail;
 		super.startingAccountPreferences = new HashMap<String, String>() {
 			{
-				put("zimbraPrefComposeFormat", "text");
+				put("zmailPrefComposeFormat", "text");
 			}
 		};
 	}
@@ -52,10 +52,10 @@ public class ComposeMsgWithTextSignature extends AjaxCommonTest {
 	@BeforeClass(groups = { "always" })
 	public void CreateSignature() throws HarnessException {
 		System.out.println(this.sigName);
-		ZimbraAccount.AccountZWC().authenticate(
+		ZmailAccount.AccountZWC().authenticate(
 				SOAP_DESTINATION_HOST_TYPE.SERVER);
-		ZimbraAccount.AccountZWC().soapSend(
-				"<CreateSignatureRequest xmlns='urn:zimbraAccount'>"
+		ZmailAccount.AccountZWC().soapSend(
+				"<CreateSignatureRequest xmlns='urn:zmailAccount'>"
 						+ "<signature name='" + this.sigName + "' >"
 						+ "<content type='text/plain'>" + this.sigBody
 						+ "</content>" + "</signature>"
@@ -78,9 +78,9 @@ public class ComposeMsgWithTextSignature extends AjaxCommonTest {
 
 		// Create the message data to be sent
 		MailItem mail = new MailItem();
-		mail.dToRecipients.add(new RecipientItem(ZimbraAccount.AccountZWC()));
-		mail.dSubject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		mail.dBodyText = "body" + ZimbraSeleniumProperties.getUniqueString();
+		mail.dToRecipients.add(new RecipientItem(ZmailAccount.AccountZWC()));
+		mail.dSubject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		mail.dBodyText = "body" + ZmailSeleniumProperties.getUniqueString();
 
 		// Open the new mail form
 		FormMailNew mailform = (FormMailNew) app.zPageMail.zToolbarPressButton(Button.B_NEW);
@@ -94,7 +94,7 @@ public class ComposeMsgWithTextSignature extends AjaxCommonTest {
 		// Send the message
 		mailform.zSubmit();
 
-		MailItem received = MailItem.importFromSOAP(ZimbraAccount.AccountZWC(),"in:inbox subject:(" + mail.dSubject + ")");
+		MailItem received = MailItem.importFromSOAP(ZmailAccount.AccountZWC(),"in:inbox subject:(" + mail.dSubject + ")");
 
 		logger.debug("===========received is: " + received);
 		logger.debug("===========app is: " + app);
@@ -102,7 +102,7 @@ public class ComposeMsgWithTextSignature extends AjaxCommonTest {
 		//Verify TO, Subject, Body,Signature
 
 		ZAssert.assertEquals(received.dFromRecipient.dEmailAddress, app.zGetActiveAccount().EmailAddress,"Verify the from field is correct");
-		ZAssert.assertEquals(received.dToRecipients.get(0).dEmailAddress,ZimbraAccount.AccountZWC().EmailAddress,"Verify the to field is correct");
+		ZAssert.assertEquals(received.dToRecipients.get(0).dEmailAddress,ZmailAccount.AccountZWC().EmailAddress,"Verify the to field is correct");
 		ZAssert.assertEquals(received.dSubject, mail.dSubject,"Verify the subject field is correct");
 		ZAssert.assertStringContains(received.dBodyText, mail.dBodyText,"Verify the body content is correct");
 		ZAssert.assertStringContains(received.dBodyText, this.sigBody,"Verify the signature is correct");

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.zcsprov;
+package org.zmail.zcsprov;
 
 import java.util.logging.*;
 import java.util.HashMap;
@@ -22,8 +22,8 @@ import javax.xml.soap.SOAPPart;
 import javax.xml.soap.SOAPBody;
 import javax.xml.soap.SOAPElement;
 import javax.xml.soap.Name;
-import com.zimbra.common.DomainInfo;
-import com.zimbra.utils.*;
+import org.zmail.common.DomainInfo;
+import org.zmail.utils.*;
 
 
 public class ZCSDomain
@@ -74,7 +74,7 @@ public class ZCSDomain
             SOAPBody body = se.getBody();
             
             //create SOAP Body
-            Name bodyName = se.createName("ModifyDomainRequest", "","urn:zimbraAdmin");
+            Name bodyName = se.createName("ModifyDomainRequest", "","urn:zmailAdmin");
             SOAPElement bodyElement = body.addBodyElement(bodyName);
             
             //<id>2c2d5329-7881-4897-b89f-7d70fc2c4fd7</id>
@@ -125,9 +125,9 @@ public class ZCSDomain
             SOAPBody body = se.getBody();
             
             //create SOAP Body
-            Name bodyName = se.createName("GetDomainRequest", "","urn:zimbraAdmin");
+            Name bodyName = se.createName("GetDomainRequest", "","urn:zmailAdmin");
             SOAPElement bodyElement = body.addBodyElement(bodyName);
-            //<domain by="name">amitabh-zimbra</domain>
+            //<domain by="name">amitabh-zmail</domain>
             Name ne = se.createName("by");
             SOAPElement sea = bodyElement.addChildElement("domain");
             sea.addAttribute(ne, "name");
@@ -185,64 +185,64 @@ public class ZCSDomain
             SOAPBody body = se.getBody();
             
             //create SOAP Body
-            Name bodyName = se.createName("CreateDomainRequest", "","urn:zimbraAdmin");
+            Name bodyName = se.createName("CreateDomainRequest", "","urn:zmailAdmin");
             SOAPElement bodyElement = body.addBodyElement(bodyName);
             //<name>test_domain1</name>
             SOAPElement nelement=bodyElement.addChildElement("name");
             nelement.setValue(dmInfo.name);
-            //add <a n="zimbraGalMode">ldap</a>
-            attrs.put("zimbraGalMode", dmInfo.GalMode);            
-            //add <a n="zimbraGalMaxResults">100</a>
-            attrs.put("zimbraGalMaxResults", dmInfo.GalMaxresults);            
-            //<a n="zimbraNotes">test_domain description here</a>
-            attrs.put("zimbraNotes", dmInfo.Notes);            
+            //add <a n="zmailGalMode">ldap</a>
+            attrs.put("zmailGalMode", dmInfo.GalMode);            
+            //add <a n="zmailGalMaxResults">100</a>
+            attrs.put("zmailGalMaxResults", dmInfo.GalMaxresults);            
+            //<a n="zmailNotes">test_domain description here</a>
+            attrs.put("zmailNotes", dmInfo.Notes);            
             //<a n="description">test domain</a>
             attrs.put("description", dmInfo.Description);            
-            //<a n="zimbraDomainDefaultCOSId">3378d8f9-2517-44d8-89c5-85b18016e1a5</a>
-            attrs.put("zimbraDomainDefaultCOSId", dmInfo.DoaminCosID);            
-            //<a n="zimbraPublicServiceHostname">public service host name here</a>
-            attrs.put("zimbraPublicServiceHostname", dmInfo.PublicServiceHostName);            
-            //<a n="zimbraDomainStatus">active</a>
-            attrs.put("zimbraDomainStatus", dmInfo.DomainStatus);            
+            //<a n="zmailDomainDefaultCOSId">3378d8f9-2517-44d8-89c5-85b18016e1a5</a>
+            attrs.put("zmailDomainDefaultCOSId", dmInfo.DoaminCosID);            
+            //<a n="zmailPublicServiceHostname">public service host name here</a>
+            attrs.put("zmailPublicServiceHostname", dmInfo.PublicServiceHostName);            
+            //<a n="zmailDomainStatus">active</a>
+            attrs.put("zmailDomainStatus", dmInfo.DomainStatus);            
                     
 /*  //should be part of Global config     
- *          attrs.put("zimbraWebClientLogoutURL", dmInfo.ZimbraLogOutUrl);                   
+ *          attrs.put("zmailWebClientLogoutURL", dmInfo.ZmailLogOutUrl);                   
 */          
-            attrs.put("zimbraWebClientLoginURL", dmInfo.ZimbraLoginUrl);                   
-            attrs.put("zimbraDomainMaxAccounts", dmInfo.zimbraDomainMaxAccounts);                   
+            attrs.put("zmailWebClientLoginURL", dmInfo.ZmailLoginUrl);                   
+            attrs.put("zmailDomainMaxAccounts", dmInfo.zmailDomainMaxAccounts);                   
             //preauth key
-            attrs.put("zimbraPreAuthKey", dmInfo.preAuthkey);                   
+            attrs.put("zmailPreAuthKey", dmInfo.preAuthkey);                   
                          
-            //<a n="zimbraVirtualHostname">VHtest_doamin1</a>
+            //<a n="zmailVirtualHostname">VHtest_doamin1</a>
             if (dmInfo.VirtualHosts !=null)
             {
                 for (int i=0; i<dmInfo.VirtualHosts.size();i++)
                 {
-                    attrs.put("zimbraVirtualHostname", (String)dmInfo.VirtualHosts.get(i));                   
+                    attrs.put("zmailVirtualHostname", (String)dmInfo.VirtualHosts.get(i));                   
                 }
             }
             //if galmode is ldap or both then add following elements
             if ((dmInfo.GalMode.compareTo("ldap")==0) ||
                 (dmInfo.GalMode.compareTo("both")==0))
             {
-                //<a n="zimbraGalLdapURL">ldaps://10.66.118.114:636</a>
-                attrs.put("zimbraGalLdapURL", dmInfo.GalLDAPUrl);                   
-                //<a n="zimbraGalLdapSearchBase">dc=test_doamin2</a>
-                attrs.put("zimbraGalLdapSearchBase", dmInfo.GalLDAPSearchBase);                   
-                //<a n="zimbraGalLdapBindDn">dn</a>
-                attrs.put("zimbraGalLdapBindDn", dmInfo.GalLDAPBindDN);                   
-                //<a n="zimbraGalLdapBindPassword">test123</a>
-                attrs.put("zimbraGalLdapBindPassword", dmInfo.GalLDAPBindPwd);                   
-                //<a n="zimbraGalLdapFilter">*</a>
-                attrs.put("zimbraGalLdapFilter", dmInfo.GalLDAPFilter);                   
-                //<a n="zimbraGalAutoCompleteLdapFilter">*</a>
-                attrs.put("zimbraGalAutoCompleteLdapFilter", dmInfo.GalAutoCLDAPFilter);                   
+                //<a n="zmailGalLdapURL">ldaps://10.66.118.114:636</a>
+                attrs.put("zmailGalLdapURL", dmInfo.GalLDAPUrl);                   
+                //<a n="zmailGalLdapSearchBase">dc=test_doamin2</a>
+                attrs.put("zmailGalLdapSearchBase", dmInfo.GalLDAPSearchBase);                   
+                //<a n="zmailGalLdapBindDn">dn</a>
+                attrs.put("zmailGalLdapBindDn", dmInfo.GalLDAPBindDN);                   
+                //<a n="zmailGalLdapBindPassword">test123</a>
+                attrs.put("zmailGalLdapBindPassword", dmInfo.GalLDAPBindPwd);                   
+                //<a n="zmailGalLdapFilter">*</a>
+                attrs.put("zmailGalLdapFilter", dmInfo.GalLDAPFilter);                   
+                //<a n="zmailGalAutoCompleteLdapFilter">*</a>
+                attrs.put("zmailGalAutoCompleteLdapFilter", dmInfo.GalAutoCLDAPFilter);                   
             }
             
             if (!IsCustom)
             {
-                //zimbraAuthMech
-                attrs.put("zimbraAuthMech", dmInfo.zimbraAuthMech);  
+                //zmailAuthMech
+                attrs.put("zmailAuthMech", dmInfo.zmailAuthMech);  
             }
             zmsession.AddAttributes(se, bodyElement, attrs);
             //Save the message
@@ -285,7 +285,7 @@ public class ZCSDomain
             SOAPBody body = se.getBody();
             
             //create SOAP Body
-            Name bodyName = se.createName("SearchDirectoryRequest", "","urn:zimbraAdmin");
+            Name bodyName = se.createName("SearchDirectoryRequest", "","urn:zmailAdmin");
             SOAPElement bodyElement = body.addBodyElement(bodyName);
             //if (!domain.isEmpty())
             if(!(domain != null && domain.length() == 0))
@@ -298,7 +298,7 @@ public class ZCSDomain
             Name lmtnm=se.createName("limit");
             bodyElement.addAttribute(lmtnm, "50");
             //Name sortnm= se.createName("sortBy");
-            //bodyElement.addAttribute(sortnm, "zimbraDomainName");
+            //bodyElement.addAttribute(sortnm, "zmailDomainName");
             Name sortAnm= se.createName("sortAscending");
             bodyElement.addAttribute(sortAnm, "1");
             Name attrnm= se.createName("attrs");

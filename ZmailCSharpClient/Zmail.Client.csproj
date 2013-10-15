@@ -9,7 +9,7 @@
             <Settings
                 ApplicationIcon = ""
                 AssemblyKeyContainerName = ""
-                AssemblyName = "Zimbra.Client"
+                AssemblyName = "Zmail.Client"
                 AssemblyOriginatorKeyFile = ""
                 DefaultClientScript = "JScript"
                 DefaultHTMLPageLayout = "Grid"
@@ -18,7 +18,7 @@
                 OutputType = "Library"
                 PreBuildEvent = ""
                 PostBuildEvent = ""
-                RootNamespace = "Zimbra.Client"
+                RootNamespace = "Zmail.Client"
                 RunPostBuildEvent = "OnBuildSuccess"
                 StartupObject = ""
             >
@@ -113,7 +113,7 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "src\ZimbraService.cs"
+                    RelPath = "src\ZmailService.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />

@@ -14,19 +14,19 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.octopus.tests.search;
+package org.zmail.qa.selenium.projects.octopus.tests.search;
 
 import java.util.List;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.IOctListViewItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.octopus.core.OctopusCommonTest;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.IOctListViewItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.octopus.core.OctopusCommonTest;
 
 public class SearchFile extends OctopusCommonTest {
 
@@ -44,8 +44,8 @@ public class SearchFile extends OctopusCommonTest {
 			groups = { "functional" })
 	public void SearchFile_01() throws HarnessException {
 
-		String filename = "filename"+ ZimbraSeleniumProperties.getUniqueString() +".xls";
-		String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+		String filename = "filename"+ ZmailSeleniumProperties.getUniqueString() +".xls";
+		String filePath = ZmailSeleniumProperties.getBaseDirectory()
 				+ "/data/public/other/testexcelfile.xls";
 		
 		
@@ -57,7 +57,7 @@ public class SearchFile extends OctopusCommonTest {
 		FolderItem briefcaseRootFolder = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Briefcase);
 
 		app.zGetActiveAccount().soapSend(
-					"<SaveDocumentRequest xmlns='urn:zimbraMail'>"
+					"<SaveDocumentRequest xmlns='urn:zmailMail'>"
 				+		"<doc name='"+ filename +"' l='" + briefcaseRootFolder.getId() + "'>"
 				+			"<upload id='" + attachmentId + "'/>"
 				+		"</doc>"
@@ -94,9 +94,9 @@ public class SearchFile extends OctopusCommonTest {
 	public void SearchFile_02() throws HarnessException {
 		
 
-		String filename = "filename"+ ZimbraSeleniumProperties.getUniqueString() +".txt";
+		String filename = "filename"+ ZmailSeleniumProperties.getUniqueString() +".txt";
 		String query = "reunification";
-		String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+		String filePath = ZmailSeleniumProperties.getBaseDirectory()
 				+ "/data/public/documents/doc01/plaintext.txt";
 		
 		
@@ -108,7 +108,7 @@ public class SearchFile extends OctopusCommonTest {
 		FolderItem briefcaseRootFolder = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Briefcase);
 
 		app.zGetActiveAccount().soapSend(
-					"<SaveDocumentRequest xmlns='urn:zimbraMail'>"
+					"<SaveDocumentRequest xmlns='urn:zmailMail'>"
 				+		"<doc name='"+ filename +"' l='" + briefcaseRootFolder.getId() + "'>"
 				+			"<upload id='" + attachmentId + "'/>"
 				+		"</doc>"
@@ -146,9 +146,9 @@ public class SearchFile extends OctopusCommonTest {
 	public void SearchFile_03() throws HarnessException {
 		
 
-		String filename = "filename"+ ZimbraSeleniumProperties.getUniqueString() +".docx";
+		String filename = "filename"+ ZmailSeleniumProperties.getUniqueString() +".docx";
 		String query = "reunification";
-		String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+		String filePath = ZmailSeleniumProperties.getBaseDirectory()
 				+ "/data/public/documents/doc01/word2007.docx";
 		
 		
@@ -160,7 +160,7 @@ public class SearchFile extends OctopusCommonTest {
 		FolderItem briefcaseRootFolder = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Briefcase);
 
 		app.zGetActiveAccount().soapSend(
-					"<SaveDocumentRequest xmlns='urn:zimbraMail'>"
+					"<SaveDocumentRequest xmlns='urn:zmailMail'>"
 				+		"<doc name='"+ filename +"' l='" + briefcaseRootFolder.getId() + "'>"
 				+			"<upload id='" + attachmentId + "'/>"
 				+		"</doc>"
@@ -199,9 +199,9 @@ public class SearchFile extends OctopusCommonTest {
 		
 		
 
-		String filename = "filename"+ ZimbraSeleniumProperties.getUniqueString() +".txt";
+		String filename = "filename"+ ZmailSeleniumProperties.getUniqueString() +".txt";
 		String query = "reunification";
-		String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+		String filePath = ZmailSeleniumProperties.getBaseDirectory()
 				+ "/data/public/documents/doc01/plaintext.txt";
 		
 		
@@ -214,7 +214,7 @@ public class SearchFile extends OctopusCommonTest {
 		FolderItem trashFolder = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Trash);
 
 		app.zGetActiveAccount().soapSend(
-					"<SaveDocumentRequest xmlns='urn:zimbraMail'>"
+					"<SaveDocumentRequest xmlns='urn:zmailMail'>"
 				+		"<doc name='"+ filename +"' l='" + briefcaseRootFolder.getId() + "'>"
 				+			"<upload id='" + attachmentId + "'/>"
 				+		"</doc>"
@@ -224,7 +224,7 @@ public class SearchFile extends OctopusCommonTest {
 
 		// Delete the doc
 		app.zGetActiveAccount().soapSend(
-					"<ItemActionRequest xmlns='urn:zimbraMail'>"
+					"<ItemActionRequest xmlns='urn:zmailMail'>"
 				+		"<action op='move' id='"+ documentId +"' l='" + trashFolder.getId() +"'/>"
 				+	"</ItemActionRequest>");
 

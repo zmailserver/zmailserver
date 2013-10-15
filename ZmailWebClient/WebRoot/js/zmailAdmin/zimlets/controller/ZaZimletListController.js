@@ -149,8 +149,8 @@ ZaZimletListController.prototype._createUI = function () {
 		this._actionMenu =  new ZaPopupMenu(this._contentView, "ActionMenu", null, this._popupOperations, ZaId.VIEW_ZIMLIST, ZaId.MENU_POP);
 
 		elements[ZaAppViewMgr.C_APP_CONTENT] = this._contentView;
-		//ZaApp.getInstance().createView(ZaZimbraAdmin._ZIMLET_LIST_VIEW, elements);
-		//ZaApp.getInstance().createView(ZaZimbraAdmin._ADMIN_ZIMLET_LIST_VIEW, elements);
+		//ZaApp.getInstance().createView(ZaZmailAdmin._ZIMLET_LIST_VIEW, elements);
+		//ZaApp.getInstance().createView(ZaZmailAdmin._ADMIN_ZIMLET_LIST_VIEW, elements);
         ZaApp.getInstance().getAppViewMgr().createView(this.getContentViewId(), elements);
 		this._contentView.addSelectionListener(new AjxListener(this, this._listSelectionListener));
 		this._contentView.addActionListener(new AjxListener(this, this._listActionListener));			
@@ -181,7 +181,7 @@ function(ev) {
 			ZaApp.getInstance().getZimletController().show(ev.item);
 
             var parentPath = ZaTree.getPathByArray([ZaMsg.OVP_home, ZaMsg.OVP_configure, ZaMsg.OVP_zimlets]);
-            ZaZimbraAdmin.getInstance().getOverviewPanelController().addObjectItem(parentPath, ev.item.name, null, false, false, ev.item);
+            ZaZmailAdmin.getInstance().getOverviewPanelController().addObjectItem(parentPath, ev.item.name, null, false, false, ev.item);
 		}
 	} else {
 		this.changeActionsState();	

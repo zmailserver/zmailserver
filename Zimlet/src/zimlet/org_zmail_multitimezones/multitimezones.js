@@ -22,7 +22,7 @@ ZmMultiTimezoneZimlet.prototype.constructor = ZmMultiTimezoneZimlet;
 ZmMultiTimezoneZimlet.BTN_SUFFIX = "_mtz_btn_suffix";
 ZmMultiTimezoneZimlet.DIV_SUFFIX = "_mtz_div_suffix";
 
-ZmMultiTimezoneZimlet.WORKING_HR_START = 8;  // 8:00 AM is the default Zimbra setting
+ZmMultiTimezoneZimlet.WORKING_HR_START = 8;  // 8:00 AM is the default Zmail setting
 ZmMultiTimezoneZimlet.WORKING_HR_END = 17.5; //use 5:30 as we dont highlight 30 mins
 
 ZmMultiTimezoneZimlet.prototype.init =

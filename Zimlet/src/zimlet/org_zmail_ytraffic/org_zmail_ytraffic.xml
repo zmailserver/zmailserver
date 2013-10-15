@@ -14,13 +14,13 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_ytraffic"
+<zimlet name="org_zmail_ytraffic"
         version="1.0"
         description="View traffic information using Yahoo! Maps.">
     <include>ytraffic.js</include>
     <includeCSS>ytraffic.css</includeCSS>
     <resource>ytraffic.gif</resource>
-    <handlerObject>Com_Zimbra_YTraffic</handlerObject>
+    <handlerObject>Com_Zmail_YTraffic</handlerObject>
     <zimletPanelItem label="Traffic" icon="YTraffic-panelIcon">
         <toolTipText>Double-click to wiew traffic information using Yahoo! Maps.</toolTipText>
         <contextMenu>

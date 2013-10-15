@@ -308,7 +308,7 @@ function() {
 	} else {
 		text = ZmMsg.compose;
 	}
-	return [ZmMsg.zimbraTitle, text].join(": ");
+	return [ZmMsg.zmailTitle, text].join(": ");
 };
 
 /**
@@ -512,7 +512,7 @@ ZmComposeView.prototype._generateCid =
 function() {
 	var timeStr = ""+new Date().getTime();
 	var hash = AjxSHA1.hex_sha1(timeStr + Dwt.getNextId());
-	return hash + "@zimbra";
+	return hash + "@zmail";
 }
 
 /**
@@ -887,7 +887,7 @@ function(msg, isDraft, forceBail) {
 	* yes/no dialog. This zimlet must return an object {hasError:<true or false>,
 	* errorMsg:<Some Error msg>, zimletName:<zimletName>} e.g: {hasError:true,
 	* errorMsg:"you might have forgotten attaching an attachment, do you want to
-	* continue?", zimletName:"com_zimbra_attachmentAlert"}
+	* continue?", zimletName:"org_zmail_attachmentAlert"}
 	**/
 	if ((!isDraft || forceBail) && appCtxt.areZimletsLoaded()) {
 		var boolAndErrorMsgArray = [];
@@ -1474,7 +1474,7 @@ function(){
  *
  * @param {String}	content				the content
  * @param {String}	replaceSignatureId	the signature id
- * @param {ZmZimbraAccount}	account				the account
+ * @param {ZmZmailAccount}	account				the account
  * 
  * @private
  */
@@ -2884,7 +2884,7 @@ ZmComposeView.prototype._handleMoveDraft =
 function(accountName, msgId) {
 	var jsonObj = {
 		ItemActionRequest: {
-			_jsns:  "urn:zimbraMail",
+			_jsns:  "urn:zmailMail",
 			action: { id:msgId, op:"delete" }
 		}
 	};
@@ -3828,7 +3828,7 @@ function(ev) {
 	return true;
 };
 
-// for com.zimbra.dnd zimlet
+// for org.zmail.dnd zimlet
 ZmComposeView.prototype.uploadFiles =
 function() {
 	var attachDialog = appCtxt.getAttachDialog();

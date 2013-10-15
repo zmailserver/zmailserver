@@ -103,15 +103,15 @@ else
 <p style="margin-left: 40px;">The following is an example of the filter 
  string. Syntax &quot;%s&quot; represents the string the user types.</p>
 <p style="margin-left: 40px;"><span class="code">(&amp;(|( cn=*%s*)( sn=*%s*)( gn=*%s*)( mail=*%s*)( 
- zimbraMailDeliveryAddress=*%s*)<br />
-( zimbraMailAlias=*%s*)( zimbraMailAddress=*%s*))<br />
-(|( objectclass=zimbraAccount)( objectclass=zimbraDistributionList)))</span> 
+ zmailMailDeliveryAddress=*%s*)<br />
+( zmailMailAlias=*%s*)( zmailMailAddress=*%s*))<br />
+(|( objectclass=zmailAccount)( objectclass=zmailDistributionList)))</span> 
  &#160;&#160;</p>
 <p style="margin-left: 40px;">This filter example, combines the basic search 
  filters using the Boolean operation <span style="font-weight: bold;"><b>OR</b></span> 
  to first search the various attributes ( cn, 
  gn, etc.), and then verifies that the entry matched 
- is either a Zimbra account or distribution list.</p>
+ is either a Zmail account or distribution list.</p>
 <table width="100%">
  <tr>
  <td>
@@ -157,36 +157,36 @@ else
 	</tr>
 	<tr style="vertical-align: top;">
 		<td style="width: 36.214%; padding-right: 10px; padding-left: 10px; 
-			 border-bottom-style: Solid; border-bottom-width: 1px;"><p>zimbraMailDeliveryAddress=*%s*</p></td>
+			 border-bottom-style: Solid; border-bottom-width: 1px;"><p>zmailMailDeliveryAddress=*%s*</p></td>
 		<td style="width: 63.786%; padding-right: 10px; padding-left: 10px; 
 			 border-bottom-style: Solid; border-bottom-width: 1px;"><p>Entries 
-		 with a Zimbra email address</p></td>
+		 with a Zmail email address</p></td>
 	</tr>
 	<tr style="vertical-align: top;">
 		<td style="width: 36.214%; padding-right: 10px; padding-left: 10px; 
-			 border-bottom-style: Solid; border-bottom-width: 1px;"><p>zimbraMailAlias=*%s*</p></td>
+			 border-bottom-style: Solid; border-bottom-width: 1px;"><p>zmailMailAlias=*%s*</p></td>
 		<td style="width: 63.786%; padding-right: 10px; padding-left: 10px; 
 			 border-bottom-style: Solid; border-bottom-width: 1px;"><p>Entry 
-		 is a Zimbra alias</p></td>
+		 is a Zmail alias</p></td>
 	</tr>
 	<tr style="vertical-align: top;">
 		<td style="width: 36.214%; padding-right: 10px; padding-left: 10px; 
-			 border-bottom-style: Solid; border-bottom-width: 1px;"><p>zimbraMailAddress=*%s*</p></td>
+			 border-bottom-style: Solid; border-bottom-width: 1px;"><p>zmailMailAddress=*%s*</p></td>
 		<td style="width: 63.786%; padding-right: 10px; padding-left: 10px; 
 			 border-bottom-style: Solid; border-bottom-width: 1px;"><p>Entries 
-		 with a Zimbra distribution list address</p></td>
+		 with a Zmail distribution list address</p></td>
 	</tr>
 	<tr style="vertical-align: top;">
 		<td style="width: 36.214%; padding-right: 10px; padding-left: 10px; 
-			 border-bottom-style: Solid; border-bottom-width: 1px;"><p>objectclass=zimbraAccount</p></td>
+			 border-bottom-style: Solid; border-bottom-width: 1px;"><p>objectclass=zmailAccount</p></td>
 		<td style="width: 63.786%; padding-right: 10px; padding-left: 10px; 
 			 border-bottom-style: Solid; border-bottom-width: 1px;"><p>The 
-		 matches found exist as a Zimbra account.</p></td>
+		 matches found exist as a Zmail account.</p></td>
 	</tr>
 	<tr style="vertical-align: top;">
-		<td style="width: 36.214%; padding-right: 10px; padding-left: 10px;"><p>objectclass=zimbraDistributionList</p></td>
+		<td style="width: 36.214%; padding-right: 10px; padding-left: 10px;"><p>objectclass=zmailDistributionList</p></td>
 		<td style="width: 63.786%; padding-right: 10px; padding-left: 10px;"><p>The 
-		 matches found exist as a Zimbra distribution list.</p></td>
+		 matches found exist as a Zmail distribution list.</p></td>
 	</tr>
 </table>
 </td></tr>

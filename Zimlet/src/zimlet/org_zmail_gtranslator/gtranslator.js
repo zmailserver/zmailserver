@@ -16,24 +16,24 @@
 /**
  * Zimlet to translate a message using Google.
  *
- * @author Raja Rao DV (rrao@zimbra.com)
+ * @author Raja Rao DV (rrao@zmail.com)
  */
-function com_zimbra_gtranslator_HandlerObject() {
+function org_zmail_gtranslator_HandlerObject() {
 }
 
-com_zimbra_gtranslator_HandlerObject.prototype = new ZmZimletBase();
-com_zimbra_gtranslator_HandlerObject.prototype.constructor = com_zimbra_gtranslator_HandlerObject;
+org_zmail_gtranslator_HandlerObject.prototype = new ZmZimletBase();
+org_zmail_gtranslator_HandlerObject.prototype.constructor = org_zmail_gtranslator_HandlerObject;
 
 /**
  * Simplify handler object
  *
  */
-var GTranslatorZimlet = com_zimbra_gtranslator_HandlerObject;
+var GTranslatorZimlet = org_zmail_gtranslator_HandlerObject;
 
 
 GTranslatorZimlet.prototype.init =
 function() {
-	this.isZimbra8 = appCtxt.getSettings().getInfoResponse.version.indexOf("8") == 0;
+	this.isZmail8 = appCtxt.getSettings().getInfoResponse.version.indexOf("8") == 0;
 	this.googleTranslateApiKey = this.getConfig("GOOGLE_TRANSLATE_API_KEY");
 
 	if(this._zimletContext._isToolbarClosed == undefined) {
@@ -49,9 +49,9 @@ function() {
 GTranslatorZimlet.prototype.initializeToolbar =
 function(app, toolbar, controller, view) {
 	var addToolbarButton = false;
-	if (!this.isZimbra8 && !toolbar.getOp("GOOGLE_TRANSLATOR") && (view == ZmId.VIEW_CONVLIST || view == ZmId.VIEW_CONV || view == ZmId.VIEW_TRAD)) {
+	if (!this.isZmail8 && !toolbar.getOp("GOOGLE_TRANSLATOR") && (view == ZmId.VIEW_CONVLIST || view == ZmId.VIEW_CONV || view == ZmId.VIEW_TRAD)) {
 		addToolbarButton = true;
-	} else if(this.isZimbra8 && !toolbar.getOp("GOOGLE_TRANSLATOR") && (view.indexOf(ZmId.VIEW_CONV) == 0 || view.indexOf(ZmId.VIEW_MSG) == 0)) {
+	} else if(this.isZmail8 && !toolbar.getOp("GOOGLE_TRANSLATOR") && (view.indexOf(ZmId.VIEW_CONV) == 0 || view.indexOf(ZmId.VIEW_MSG) == 0)) {
 	    //in zcs 8, we only support conv-view and msg-view i.e. no support for gmail-like view
 		addToolbarButton = true;
 	}
@@ -86,7 +86,7 @@ function(app, toolbar, controller, view) {
 GTranslatorZimlet.prototype.onShowView =
 function(viewId, isNewView) {
 	if(appCtxt.isChildWindow) {
-		this._zimletContext = parentAppCtxt.getZimletMgr().getZimletByName("com_zimbra_gtranslator");
+		this._zimletContext = parentAppCtxt.getZimletMgr().getZimletByName("org_zmail_gtranslator");
 	}
 	var isComposeView = viewId.indexOf(ZmId.VIEW_COMPOSE) == 0
 					|| (appCtxt.getViewTypeFromId && appCtxt.getViewTypeFromId(viewId) == ZmId.VIEW_COMPOSE) ? true : false;
@@ -156,8 +156,8 @@ function(controller) {
  */
 GTranslatorZimlet.prototype._getUserToLanguage =
 function() {
-	 var locale = appCtxt.getActiveAccount().settings.getInfoResponse.attrs._attrs.zimbraLocale;
-	var prefLocale = appCtxt.getActiveAccount().settings.getInfoResponse.prefs._attrs.zimbraPrefLocale;
+	 var locale = appCtxt.getActiveAccount().settings.getInfoResponse.attrs._attrs.zmailLocale;
+	var prefLocale = appCtxt.getActiveAccount().settings.getInfoResponse.prefs._attrs.zmailPrefLocale;
 	if(prefLocale) {
 		locale = prefLocale;
 	}
@@ -241,7 +241,7 @@ GTranslatorZimlet.prototype.getMailBodyAsText = function() {
 };
 
 /**
- * Called by Zimbra when an email is opened. Used to indicate tollbar was removed
+ * Called by Zmail when an email is opened. Used to indicate tollbar was removed
  */
 GTranslatorZimlet.prototype.onMsgView =
 function() {
@@ -267,7 +267,7 @@ function() {
 	reqParams[i++] =  "&key=";
 	reqParams[i++] = AjxStringUtil.urlComponentEncode(this.googleTranslateApiKey);
 	reqParams[i++] =  "&format=text&prettyprint=true";
-	var reqHeader = { "X-HTTP-Method-Override" : "GET", "Content-Type": "application/x-www-form-urlencoded", "Referrer": "http://www.zimbra.com" };
+	var reqHeader = { "X-HTTP-Method-Override" : "GET", "Content-Type": "application/x-www-form-urlencoded", "Referrer": "http://www.zmail.com" };
 	var url = ZmZimletBase.PROXY + AjxStringUtil.urlEncode("https://www.googleapis.com/language/translate/v2");
 
 	AjxRpc.invoke(reqParams.join(""), url, reqHeader, new AjxCallback(this, this._translationHandler));
@@ -362,7 +362,7 @@ GTranslatorZimlet.prototype._initializeGTranslatorToolbar =
 function() {
 	var viewId = appCtxt.getCurrentViewId();
 	var id;
-	if(this.isZimbra8) {
+	if(this.isZmail8) {
 		id = "zv__" + viewId + "__MSG__body";
 	} else {
 		id = "zv__" + viewId + "__MSG_body";

@@ -117,7 +117,7 @@ ZmSpreadSheetView = function(parent, className, posStyle, deferred) {
 ZmSpreadSheetView.prototype = new ZmSpreadSheet;
 ZmSpreadSheetView.prototype.construction = ZmSpreadSheetView;
 
-ZmSpreadSheetView.APP_ZIMBRA_XLS = "application/x-zimbra-xls";
+ZmSpreadSheetView.APP_ZIMBRA_XLS = "application/x-zmail-xls";
 
 ZmSpreadSheetView.prototype.saveFile =
 function() {

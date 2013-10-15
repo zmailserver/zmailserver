@@ -14,22 +14,22 @@
 # ***** END LICENSE BLOCK *****
 # 
 
-if [ x`whoami` != xzimbra ]; then
-  echo Error: must be run as zimbra user
+if [ x`whoami` != xzmail ]; then
+  echo Error: must be run as zmail user
   exit 1
 fi
 
 source `dirname $0`/../bin/zmshutil || exit 1
 zmsetvars \
-  zimbra_home \
-  zimbra_log_directory \
+  zmail_home \
+  zmail_log_directory \
   cbpolicyd_pid_file \
   cbpolicyd_db_file
 
-pidfile=${cbpolicyd_pid_file:=${zimbra_log_directory}/cbpolicyd.pid}
-dbfile=${cbpolicyd_db_file:=${zimbra_home}/data/cbpolicyd/db/cbpolicyd.sqlitedb}
+pidfile=${cbpolicyd_pid_file:=${zmail_log_directory}/cbpolicyd.pid}
+dbfile=${cbpolicyd_db_file:=${zmail_home}/data/cbpolicyd/db/cbpolicyd.sqlitedb}
 dbdir=$(dirname $dbfile)
-cbpolicyDir=${zimbra_home}/cbpolicyd
+cbpolicyDir=${zmail_home}/cbpolicyd
 sqlite3=$(which sqlite3)
 
 if [ x${sqlite3} = "x" ]; then

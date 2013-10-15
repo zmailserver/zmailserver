@@ -12,11 +12,11 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.bp;
+package org.zmail.bp;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.soap.SoapServlet;
-import com.zimbra.cs.extension.ZimbraExtension;
+import org.zmail.common.service.ServiceException;
+import org.zmail.soap.SoapServlet;
+import org.zmail.cs.extension.ZmailExtension;
 
 /**
  * Created by IntelliJ IDEA.
@@ -25,12 +25,12 @@ import com.zimbra.cs.extension.ZimbraExtension;
  * Time: 10:56:57 AM
  * To change this template use File | Settings | File Templates.
  */
-public class ZimbraBulkProvisionExt implements ZimbraExtension {
+public class ZmailBulkProvisionExt implements ZmailExtension {
 
-    public static final String EXTENSION_NAME_BULKPROVISION = "com_zimbra_bulkprovision";
+    public static final String EXTENSION_NAME_BULKPROVISION = "org_zmail_bulkprovision";
     public static final String FILE_FORMAT_BULK_LDAP = "ldap";
     public static final String FILE_FORMAT_BULK_AD = "ad";
-    public static final String FILE_FORMAT_ZIMBRA = "zimbra";
+    public static final String FILE_FORMAT_ZIMBRA = "zmail";
     public static final String EXCHANGE_IMAP = "EXCHANGE_IMAP";
     public static final String DEFAULT_INDEX_BATCH_SIZE = "40";
     
@@ -51,7 +51,7 @@ public class ZimbraBulkProvisionExt implements ZimbraExtension {
 
     public void init() throws ServiceException {
         //need to add the service calls to the admin soap calls
-        SoapServlet.addService("AdminServlet", new ZimbraBulkProvisionService());
+        SoapServlet.addService("AdminServlet", new ZmailBulkProvisionService());
     }
                
     

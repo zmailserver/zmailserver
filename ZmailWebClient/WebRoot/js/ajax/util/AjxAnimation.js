@@ -17,7 +17,7 @@
  * @class
  * An object useful for implementing accelerated / decelerated animation.
  *
- * @author Mihai Bazon <mihai@zimbra.com>
+ * @author Mihai Bazon <mihai@zmail.com>
  *
  * This object creates a timer (setInterval) and calls the function
  * ({@link AjxCallback}) that you supply at onUpdate every "speed" milliseconds,

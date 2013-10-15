@@ -14,15 +14,15 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.staf;
+package org.zmail.qa.selenium.staf;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import com.zimbra.qa.selenium.framework.core.ExecuteHarnessMain;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.core.ExecuteHarnessMain;
+import org.zmail.qa.selenium.framework.util.HarnessException;
 
 
 public class Driver {

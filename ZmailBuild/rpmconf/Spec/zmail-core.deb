@@ -1,7 +1,7 @@
-Package: zimbra-core
+Package: zmail-core
 Version: @@VERSION@@
 Description: Best email money can buy
-Maintainer: build@zimbra.com
+Maintainer: build@zmail.com
 Section: Mail
 Priority: optional
 Architecture: @@ARCH@@

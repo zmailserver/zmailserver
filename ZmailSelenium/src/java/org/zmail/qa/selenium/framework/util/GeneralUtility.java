@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.util;
+package org.zmail.qa.selenium.framework.util;
 
 import java.io.BufferedReader;
 import java.io.Closeable;
@@ -35,9 +35,9 @@ import org.apache.log4j.Logger;
 
 import com.zimbra.common.util.tar.TarEntry;
 import com.zimbra.common.util.tar.TarInputStream;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount.SOAP_DESTINATION_HOST_TYPE;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties.AppType;
-import com.zimbra.qa.selenium.framework.util.staf.Stafpostqueue;
+import org.zmail.qa.selenium.framework.util.ZmailAccount.SOAP_DESTINATION_HOST_TYPE;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties.AppType;
+import org.zmail.qa.selenium.framework.util.staf.Stafpostqueue;
 
 /**
  * This class contains general utilities methods that can be used across the framework
@@ -313,7 +313,7 @@ public class GeneralUtility {
     * @param account Account
     * @throws HarnessException
     */
-   public static void syncDesktopToZcsWithSoap(ZimbraAccount account)
+   public static void syncDesktopToZcsWithSoap(ZmailAccount account)
    throws HarnessException {
       syncDesktopToZcsWithSoap(account, account.EmailAddress);
    }
@@ -324,15 +324,15 @@ public class GeneralUtility {
     * @param emailAddressToBeSynced Email address to be synced
     * @throws HarnessException
     */
-   public static void syncDesktopToZcsWithSoap(ZimbraAccount account,
+   public static void syncDesktopToZcsWithSoap(ZmailAccount account,
          String emailAddressToBeSynced)
    throws HarnessException {
-      if (ZimbraSeleniumProperties.getAppType() == AppType.DESKTOP) {
+      if (ZmailSeleniumProperties.getAppType() == AppType.DESKTOP) {
          Stafpostqueue sp = new Stafpostqueue();
          sp.waitForPostqueue();
 
          String request =
-               "<SyncRequest xmlns=\"urn:zimbraOffline\"/>";
+               "<SyncRequest xmlns=\"urn:zmailOffline\"/>";
 
          account.soapSend(request,
                SOAP_DESTINATION_HOST_TYPE.CLIENT,

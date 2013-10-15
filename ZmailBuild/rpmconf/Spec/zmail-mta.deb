@@ -1,11 +1,11 @@
-Package: zimbra-mta
+Package: zmail-mta
 Version: @@VERSION@@
 Description: Best email money can buy
-Maintainer: build@zimbra.com
+Maintainer: build@zmail.com
 Section: Mail
 Priority: optional
 Architecture: @@ARCH@@
-Depends: zimbra-core
+Depends: zmail-core
 Provides: mail-transport-agent
 Conflicts: mail-transport-agent
 Replaces: mail-transport-agent

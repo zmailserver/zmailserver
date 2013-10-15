@@ -12,18 +12,18 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.ldaputils;
+package org.zmail.ldaputils;
 
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.LDAPUtilsConstants;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.service.admin.AdminDocumentHandler;
-import com.zimbra.cs.service.admin.AdminService;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.LDAPUtilsConstants;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.service.admin.AdminDocumentHandler;
+import org.zmail.cs.service.admin.AdminService;
+import org.zmail.soap.ZmailSoapContext;
 
 /**
  * @author Greg Solovyev
@@ -33,18 +33,18 @@ public class CreateLDAPEntry extends AdminDocumentHandler {
     public Element handle(Element request, Map<String, Object> context)
     throws ServiceException {
 
-        ZimbraSoapContext lc = getZimbraSoapContext(context);
+        ZmailSoapContext lc = getZmailSoapContext(context);
 
         String dn = request.getAttribute(LDAPUtilsConstants.E_DN);
         Map<String, Object> attrs = AdminService.getAttrs(request, true);
 
         NamedEntry ne = LDAPUtilsHelper.getInstance().createLDAPEntry(dn,  attrs);
 
-        ZimbraLog.security.info(ZimbraLog.encodeAttrs(
+        ZmailLog.security.info(ZmailLog.encodeAttrs(
                 new String[] {"cmd", "CreateLDAPEntry","dn", dn}, attrs));
 
         Element response = lc.createElement(LDAPUtilsConstants.CREATE_LDAP_ENTRY_RESPONSE);
-        ZimbraLDAPUtilsService.encodeLDAPEntry(response,ne);
+        ZmailLDAPUtilsService.encodeLDAPEntry(response,ne);
 
         return response;
     }

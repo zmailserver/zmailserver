@@ -1,4 +1,4 @@
-<template id='zimbra.Widgets#ZmErrorDialogControls' width='20' height='32'>
+<template id='zmail.Widgets#ZmErrorDialogControls' width='20' height='32'>
   <div id='${id}_buttons' class='DwtDialogButtonBar'>
     <$ if (AjxEnv.isNav) { $>
       <input type='button' id='${id}_focus' style='height:0px;width:0px;display:none;'>
@@ -6,7 +6,7 @@
   </div>
 </template>
 
-<template id='zimbra.Widgets#ZmErrorDialogContent'>
+<template id='zmail.Widgets#ZmErrorDialogContent'>
 	<table width='100%' height='100%'>
 		<tr>
 			<td>${message}</td>
@@ -26,7 +26,7 @@
 	</table>
 </template>
 
-<template id='zimbra.Widgets#ZmColorMenuItem' class='ZWidget'>
+<template id='zmail.Widgets#ZmColorMenuItem' class='ZWidget'>
 	<table class='ZWidgetTable ZMenuItemTable ZMenuItemBorder'>
 		<tr>
 			<td id='${id}_title' class='ZWidgetTitle'></td>

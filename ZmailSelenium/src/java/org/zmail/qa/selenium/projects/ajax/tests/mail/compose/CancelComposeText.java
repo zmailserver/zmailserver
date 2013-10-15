@@ -14,19 +14,19 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.compose;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.compose;
 
 import java.util.List;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.MailItem;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogWarning;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew.Field;
+import org.zmail.qa.selenium.framework.items.MailItem;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogWarning;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew.Field;
 
 
 public class CancelComposeText extends PrefGroupMailByMessageTest {
@@ -36,7 +36,7 @@ public class CancelComposeText extends PrefGroupMailByMessageTest {
 		
 		
 		
-		super.startingAccountPreferences.put("zimbraPrefComposeFormat", "text");
+		super.startingAccountPreferences.put("zmailPrefComposeFormat", "text");
 		
 	}
 	
@@ -46,7 +46,7 @@ public class CancelComposeText extends PrefGroupMailByMessageTest {
 		
 		
 		// Create the message data to be sent
-		String body = "body" + ZimbraSeleniumProperties.getUniqueString();
+		String body = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		// Open the new mail form
@@ -84,8 +84,8 @@ public class CancelComposeText extends PrefGroupMailByMessageTest {
 		
 		Shortcut shortcut = Shortcut.S_ESCAPE;
 		// Create the message data to be sent
-		String body = "body" + ZimbraSeleniumProperties.getUniqueString();
-		String Subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
+		String body = "body" + ZmailSeleniumProperties.getUniqueString();
+		String Subject = "subject" + ZmailSeleniumProperties.getUniqueString();
 		
 
 		// Open the new mail form

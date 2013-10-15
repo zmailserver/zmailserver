@@ -66,7 +66,7 @@ function () {
     var now = new Date();
     var formatter = AjxDateFormat.getDateInstance(AjxDateFormat.LONG);
     var currentTime = formatter.format(now);
-    this.attrs[ZaHome.A2_account] = ZaZimbraAdmin.currentAdminAccount.attrs.mail;
+    this.attrs[ZaHome.A2_account] = ZaZmailAdmin.currentAdminAccount.attrs.mail;
     this.attrs[ZaHome.A2_version] = ZaServerVersionInfo.version;
 
     this.attrs[ZaHome.A2_accountNum] = ZaMsg.MSG_HomeLoading;
@@ -123,7 +123,7 @@ ZaHome.prototype.updateAccountNum = function(resp) {
 }
 
 ZaHome.loadServerServerNum = function() {
-    var soapDoc = AjxSoapDoc.create("GetAllServersRequest", ZaZimbraAdmin.URN, null);
+    var soapDoc = AjxSoapDoc.create("GetAllServersRequest", ZaZmailAdmin.URN, null);
 	soapDoc.getMethod().setAttribute("applyConfig", "false");
 //	var command = new ZmCsfeCommand();
     var updateServerNum = new AjxCallback(this, this.updateServerNum);
@@ -198,10 +198,10 @@ ZaHome.prototype.updateCosNum = function(resp) {
 
 ZaHome.loadStatusfo = function () {
     try {
-		var logHost = ZaApp.getInstance().getGlobalConfig().attrs[ZaServer.A_zimbraLogHostname];
-		//if zimbraLogHostname is set
+		var logHost = ZaApp.getInstance().getGlobalConfig().attrs[ZaServer.A_zmailLogHostname];
+		//if zmailLogHostname is set
 		if (logHost) {
-			var soapDoc = AjxSoapDoc.create("GetServiceStatusRequest", ZaZimbraAdmin.URN, null);
+			var soapDoc = AjxSoapDoc.create("GetServiceStatusRequest", ZaZmailAdmin.URN, null);
             var updateServiceStatus = new AjxCallback(this, this.updateServiceStatus);
 			var command = new ZmCsfeCommand();
 			var params = new Object();
@@ -293,7 +293,7 @@ ZaHome.loadActiveSesson = function () {
             		var server = ZaServer.getServerById(currentSession.targetServer);
             		if(server) {
             			if(ZaItem.hasRight(ZaServer.RIGHT_GET_SESSIONS, server)) {
-            				 var soapDoc = AjxSoapDoc.create("GetSessionsRequest", ZaZimbraAdmin.URN, null);
+            				 var soapDoc = AjxSoapDoc.create("GetSessionsRequest", ZaZmailAdmin.URN, null);
                              var sessionCallback = new  AjxCallback (this, loadOneSessionNumer);
                              var params = {};
                              params.type = currentSession.type;
@@ -378,7 +378,7 @@ ZaHome.loadQueueLength = function () {
                 var isEx = false;
                 var queueLengthCallback = new AjxCallback(this, loadOneQueueLength);
                 try {
-                    var soapDoc = AjxSoapDoc.create("GetMailQueueInfoRequest", ZaZimbraAdmin.URN, null);
+                    var soapDoc = AjxSoapDoc.create("GetMailQueueInfoRequest", ZaZmailAdmin.URN, null);
                     var attr = soapDoc.set("server", "");
                     attr.setAttribute("name", currentName);
                     var command = new ZmCsfeCommand();

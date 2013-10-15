@@ -14,22 +14,22 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.preferences.mail.trustedaddresses;
+package org.zmail.qa.selenium.projects.ajax.tests.preferences.mail.trustedaddresses;
 
 import java.io.File;
 import java.util.HashMap;
 
 import org.testng.annotations.Test;
-import com.zimbra.qa.selenium.framework.items.MailItem;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.LmtpInject;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-//import com.zimbra.qa.selenium.projects.ajax.ui.preferences.trustedaddresses.DisplayTrustedAddress;
+import org.zmail.qa.selenium.framework.items.MailItem;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.LmtpInject;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+//import org.zmail.qa.selenium.projects.ajax.ui.preferences.trustedaddresses.DisplayTrustedAddress;
 
 public class TrustedDomainMsgView extends AjaxCommonTest {
 
@@ -40,9 +40,9 @@ public class TrustedDomainMsgView extends AjaxCommonTest {
 		// Make sure we are using an account with message view
 		super.startingAccountPreferences = new HashMap<String, String>() {
 			{
-				put("zimbraPrefGroupMailBy", "message");
-				put("zimbraPrefMessageViewHtmlPreferred", "TRUE");
-				put("zimbraPrefMailTrustedSenderList", "testdoamin.com");
+				put("zmailPrefGroupMailBy", "message");
+				put("zmailPrefMessageViewHtmlPreferred", "TRUE");
+				put("zmailPrefMailTrustedSenderList", "testdoamin.com");
 			}
 		};
 	}
@@ -63,12 +63,12 @@ public class TrustedDomainMsgView extends AjaxCommonTest {
 		final String subject = "TestTrustedAddress";
 		final String from = "admintest@testdoamin.com";
 		final String to = "admin@testdoamin.com";
-		final String mimeFolder = ZimbraSeleniumProperties.getBaseDirectory()
+		final String mimeFolder = ZmailSeleniumProperties.getBaseDirectory()
 				+ "/data/public/mime/ExternalImg.txt";
 
 		//Verify domain through soap- GetPrefsRequest
-		String PrefMailTrustedAddr = ZimbraAccount.AccountZWC().getPreference(
-				"zimbraPrefMailTrustedSenderList");
+		String PrefMailTrustedAddr = ZmailAccount.AccountZWC().getPreference(
+				"zmailPrefMailTrustedSenderList");
 		ZAssert.assertTrue(PrefMailTrustedAddr.equals("testdoamin.com"),
 				"Verify doamin is present /Pref/TrustedAddr");
 

@@ -12,15 +12,15 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.bean;
+package org.zmail.cs.taglib.bean;
 
-import com.zimbra.cs.taglib.bean.ZMessageComposeBean.MessageAttachment;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZEmailAddress;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.service.FileUploadServlet;
+import org.zmail.cs.taglib.bean.ZMessageComposeBean.MessageAttachment;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZEmailAddress;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.service.FileUploadServlet;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadBase;
 import org.apache.commons.fileupload.FileUploadException;
@@ -583,7 +583,7 @@ public class ZComposeUploaderBean {
                 return ZEmailAddress.parseAddresses(mPendingAttendees, ZEmailAddress.EMAIL_TYPE_TO);
             }
         }catch (Exception e){
-            ZimbraLog.webclient.debug("Parse attendees failed for:" + mPendingAttendees);
+            ZmailLog.webclient.debug("Parse attendees failed for:" + mPendingAttendees);
         }
         return null;
     }
@@ -594,7 +594,7 @@ public class ZComposeUploaderBean {
                 return ZEmailAddress.parseAddresses(mPendingResources, ZEmailAddress.EMAIL_TYPE_TO);
             }
         }catch (Exception e){
-            ZimbraLog.webclient.debug("Parse resources failed for:" + mPendingResources);
+            ZmailLog.webclient.debug("Parse resources failed for:" + mPendingResources);
         }
         return null;
     }
@@ -608,12 +608,12 @@ public class ZComposeUploaderBean {
         try{
             l3 = getCompose().getAttendeesAddrs();
         }catch (ServiceException se ){
-            ZimbraLog.webclient.debug("compose bean getAttendiesAddrs failed");
+            ZmailLog.webclient.debug("compose bean getAttendiesAddrs failed");
         }
         try{
             l4 = getCompose().getResourcesAddrs();
         }catch (ServiceException se ){
-            ZimbraLog.webclient.debug("compose bean getResourcesAddrs failed");            
+            ZmailLog.webclient.debug("compose bean getResourcesAddrs failed");            
         }
         if(l1 != null){
             if(l2 != null){
@@ -655,12 +655,12 @@ public class ZComposeUploaderBean {
             long maxSize;
             if(limitByFileUploadMaxSize) {
                 maxSize = Provisioning.getInstance().getLocalServer().getLongAttr(
-                                Provisioning.A_zimbraFileUploadMaxSize, DEFAULT_MAX_SIZE);
+                                Provisioning.A_zmailFileUploadMaxSize, DEFAULT_MAX_SIZE);
             } else {
                 maxSize = Provisioning.getInstance().getConfig().getLongAttr(
-                                Provisioning.A_zimbraMtaMaxMessageSize, DEFAULT_MAX_SIZE);
+                                Provisioning.A_zmailMtaMaxMessageSize, DEFAULT_MAX_SIZE);
                 if (maxSize == 0) {
-                    /* zimbraMtaMaxMessageSize=0 means "no limit".
+                    /* zmailMtaMaxMessageSize=0 means "no limit".
                      * ServletFileUpload "sizeMax" uses "-1" to mean "no limit"
                      */
                     maxSize = -1;
@@ -668,9 +668,9 @@ public class ZComposeUploaderBean {
             }
             upload.setSizeMax(maxSize);
         } catch (ServiceException e) {
-            if (ZimbraLog.webclient.isDebugEnabled()) {
-                ZimbraLog.webclient.debug("unable to read " + ((limitByFileUploadMaxSize) ?
-                        Provisioning.A_zimbraFileUploadMaxSize : Provisioning.A_zimbraMtaMaxMessageSize) +
+            if (ZmailLog.webclient.isDebugEnabled()) {
+                ZmailLog.webclient.debug("unable to read " + ((limitByFileUploadMaxSize) ?
+                        Provisioning.A_zmailFileUploadMaxSize : Provisioning.A_zmailMtaMaxMessageSize) +
                         "attribute" + e.getMessage());
             }
         }

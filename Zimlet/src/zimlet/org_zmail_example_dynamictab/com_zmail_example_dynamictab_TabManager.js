@@ -20,35 +20,35 @@
  * @param	{ZmZimletBase}		zimletBase		the zimlet base
  *   
  */
-function com_zimbra_example_dynamictab_TabManager(zimletBase) {
+function org_zmail_example_dynamictab_TabManager(zimletBase) {
 	
 	this._zimletBase = zimletBase;
 };
 
-com_zimbra_example_dynamictab_TabManager.prototype.constructor = com_zimbra_example_dynamictab_TabManager;
+org_zmail_example_dynamictab_TabManager.prototype.constructor = org_zmail_example_dynamictab_TabManager;
 
 /**
  * Constants
  */
-com_zimbra_example_dynamictab_TabManager.USER_PROPERTY_TAB_IDS = "com_zimbra_dynamictab_property_tab_ids";
-com_zimbra_example_dynamictab_TabManager.USER_PROPERTY_TAB_LABEL = "com_zimbra_dynamictab_property_tab_label_";
-com_zimbra_example_dynamictab_TabManager.USER_PROPERTY_TAB_TOOLTIP = "com_zimbra_dynamictab_property_tab_tooltip_";
-com_zimbra_example_dynamictab_TabManager.USER_PROPERTY_TAB_URL = "com_zimbra_dynamictab_property_tab_url_";
+org_zmail_example_dynamictab_TabManager.USER_PROPERTY_TAB_IDS = "org_zmail_dynamictab_property_tab_ids";
+org_zmail_example_dynamictab_TabManager.USER_PROPERTY_TAB_LABEL = "org_zmail_dynamictab_property_tab_label_";
+org_zmail_example_dynamictab_TabManager.USER_PROPERTY_TAB_TOOLTIP = "org_zmail_dynamictab_property_tab_tooltip_";
+org_zmail_example_dynamictab_TabManager.USER_PROPERTY_TAB_URL = "org_zmail_dynamictab_property_tab_url_";
 
-com_zimbra_example_dynamictab_TabManager.TAB_ID_LIST_SEPARATOR = ",";
+org_zmail_example_dynamictab_TabManager.TAB_ID_LIST_SEPARATOR = ",";
 
 /**
  * Gets the tab ids.
  * 
  * @return	{Array}	an array of tab ids or an empty array for none
  */
-com_zimbra_example_dynamictab_TabManager.prototype.getTabIdsArray =
+org_zmail_example_dynamictab_TabManager.prototype.getTabIdsArray =
 function () {
-	var tabIds = this._zimletBase.getUserProperty(com_zimbra_example_dynamictab_TabManager.USER_PROPERTY_TAB_IDS);
+	var tabIds = this._zimletBase.getUserProperty(org_zmail_example_dynamictab_TabManager.USER_PROPERTY_TAB_IDS);
 	if (tabIds == null || tabIds.length <= 0)
 		return	new Array();
 	
-	return	tabIds.split(com_zimbra_example_dynamictab_TabManager.TAB_ID_LIST_SEPARATOR);
+	return	tabIds.split(org_zmail_example_dynamictab_TabManager.TAB_ID_LIST_SEPARATOR);
 };
 
 /**
@@ -57,12 +57,12 @@ function () {
  * @param	{Array}	props		the properties
  * @return	{Array}	an array of tab ids or an empty array for none
  */
-com_zimbra_example_dynamictab_TabManager.prototype.getTabIdsArrayFromProps =
+org_zmail_example_dynamictab_TabManager.prototype.getTabIdsArrayFromProps =
 function (props) {
 	var tabIds = "";
 	var i=0;
 	for(i=0;props && i<props.length;i++) {
-		if (props[i].name == com_zimbra_example_dynamictab_TabManager.USER_PROPERTY_TAB_IDS) {
+		if (props[i].name == org_zmail_example_dynamictab_TabManager.USER_PROPERTY_TAB_IDS) {
 			tabIds = props[i].value;
 			break;
 		}
@@ -71,7 +71,7 @@ function (props) {
 	if (tabIds == null || tabIds.length <= 0)
 		return	new Array();
 	
-	return	tabIds.split(com_zimbra_example_dynamictab_TabManager.TAB_ID_LIST_SEPARATOR);
+	return	tabIds.split(org_zmail_example_dynamictab_TabManager.TAB_ID_LIST_SEPARATOR);
 };
 
 /**
@@ -79,9 +79,9 @@ function (props) {
  * 
  * @return	{String}	a string tab id list or an empty string for none
  */
-com_zimbra_example_dynamictab_TabManager.prototype.getTabIdsString =
+org_zmail_example_dynamictab_TabManager.prototype.getTabIdsString =
 function () {
-	var tabIds = this._zimletBase.getUserProperty(com_zimbra_example_dynamictab_TabManager.USER_PROPERTY_TAB_IDS);
+	var tabIds = this._zimletBase.getUserProperty(org_zmail_example_dynamictab_TabManager.USER_PROPERTY_TAB_IDS);
 	if (tabIds == null || tabIds.length <= 0)
 		return	"";
 	
@@ -93,11 +93,11 @@ function () {
  * 
  * @param	{Array}	an array tab id list
  */
-com_zimbra_example_dynamictab_TabManager.prototype.setTabIds =
+org_zmail_example_dynamictab_TabManager.prototype.setTabIds =
 function (tabIds) {
-	var tabIdsList = tabIds.join(com_zimbra_example_dynamictab_TabManager.TAB_ID_LIST_SEPARATOR);
+	var tabIdsList = tabIds.join(org_zmail_example_dynamictab_TabManager.TAB_ID_LIST_SEPARATOR);
 	
-	this._zimletBase.setUserProperty(com_zimbra_example_dynamictab_TabManager.USER_PROPERTY_TAB_IDS,tabIdsList,true);
+	this._zimletBase.setUserProperty(org_zmail_example_dynamictab_TabManager.USER_PROPERTY_TAB_IDS,tabIdsList,true);
 };
 
 /**
@@ -106,12 +106,12 @@ function (tabIds) {
  * @param	{String}	tabId		the tab id
  * @return	{String}	a hash representing a tab object
  */
-com_zimbra_example_dynamictab_TabManager.prototype.getTab =
+org_zmail_example_dynamictab_TabManager.prototype.getTab =
 function (tabId) {
 	
-	var tabLabelPropName = com_zimbra_example_dynamictab_TabManager.USER_PROPERTY_TAB_LABEL + tabId;
-	var tabToolTipPropName = com_zimbra_example_dynamictab_TabManager.USER_PROPERTY_TAB_TOOLTIP + tabId;
-	var tabUrlPropName = com_zimbra_example_dynamictab_TabManager.USER_PROPERTY_TAB_URL + tabId;
+	var tabLabelPropName = org_zmail_example_dynamictab_TabManager.USER_PROPERTY_TAB_LABEL + tabId;
+	var tabToolTipPropName = org_zmail_example_dynamictab_TabManager.USER_PROPERTY_TAB_TOOLTIP + tabId;
+	var tabUrlPropName = org_zmail_example_dynamictab_TabManager.USER_PROPERTY_TAB_URL + tabId;
 
 	var tabLabel = this._zimletBase.getUserProperty(tabLabelPropName);
 	var tabToolTip = this._zimletBase.getUserProperty(tabToolTipPropName);
@@ -135,9 +135,9 @@ function (tabId) {
  * @param	{String}	defaultValue		the default value
  * @return	{String}	the tab label
  */
-com_zimbra_example_dynamictab_TabManager.prototype.getTabLabel =
+org_zmail_example_dynamictab_TabManager.prototype.getTabLabel =
 function (props, tabId, defaultValue) {
-	return	this._getProp(props, com_zimbra_example_dynamictab_TabManager.USER_PROPERTY_TAB_LABEL + tabId, defaultValue);
+	return	this._getProp(props, org_zmail_example_dynamictab_TabManager.USER_PROPERTY_TAB_LABEL + tabId, defaultValue);
 };
 
 /**
@@ -148,9 +148,9 @@ function (props, tabId, defaultValue) {
  * @param	{String}	defaultValue		the default value
  * @return	{String}	the tab label
  */
-com_zimbra_example_dynamictab_TabManager.prototype.getTabToolTip =
+org_zmail_example_dynamictab_TabManager.prototype.getTabToolTip =
 function (props, tabId, defaultValue) {
-	return	this._getProp(props, com_zimbra_example_dynamictab_TabManager.USER_PROPERTY_TAB_TOOLTIP + tabId, defaultValue);
+	return	this._getProp(props, org_zmail_example_dynamictab_TabManager.USER_PROPERTY_TAB_TOOLTIP + tabId, defaultValue);
 };
 
 /**
@@ -161,16 +161,16 @@ function (props, tabId, defaultValue) {
  * @param	{String}	defaultValue		the default value
  * @return	{String}	the tab label
  */
-com_zimbra_example_dynamictab_TabManager.prototype.getTabUrl =
+org_zmail_example_dynamictab_TabManager.prototype.getTabUrl =
 function (props, tabId, defaultValue) {
-	return	this._getProp(props, com_zimbra_example_dynamictab_TabManager.USER_PROPERTY_TAB_URL + tabId, defaultValue);
+	return	this._getProp(props, org_zmail_example_dynamictab_TabManager.USER_PROPERTY_TAB_URL + tabId, defaultValue);
 };
 
 /**
  * Gets the property.
  * 
  */
-com_zimbra_example_dynamictab_TabManager.prototype._getProp =
+org_zmail_example_dynamictab_TabManager.prototype._getProp =
 function(props, name, defaultValue) {
 	var value = defaultValue;
 	
@@ -191,12 +191,12 @@ function(props, name, defaultValue) {
  * @param	{String}	tabUrl		the tab url
  * @param	{Boolean}	commit		<code>true</code> to commit the properties
  */
-com_zimbra_example_dynamictab_TabManager.prototype.saveTab =
+org_zmail_example_dynamictab_TabManager.prototype.saveTab =
 function (tabId,tabLabel,tabToolTip,tabUrl,commit) {
 	
-	var tabLabelPropName = com_zimbra_example_dynamictab_TabManager.USER_PROPERTY_TAB_LABEL + tabId;
-	var tabToolTipPropName = com_zimbra_example_dynamictab_TabManager.USER_PROPERTY_TAB_TOOLTIP + tabId;
-	var tabUrlPropName = com_zimbra_example_dynamictab_TabManager.USER_PROPERTY_TAB_URL + tabId;
+	var tabLabelPropName = org_zmail_example_dynamictab_TabManager.USER_PROPERTY_TAB_LABEL + tabId;
+	var tabToolTipPropName = org_zmail_example_dynamictab_TabManager.USER_PROPERTY_TAB_TOOLTIP + tabId;
+	var tabUrlPropName = org_zmail_example_dynamictab_TabManager.USER_PROPERTY_TAB_URL + tabId;
 
 	this._zimletBase.setUserProperty(tabLabelPropName,tabLabel);
 	this._zimletBase.setUserProperty(tabToolTipPropName,tabToolTip);
@@ -209,28 +209,28 @@ function (tabId,tabLabel,tabToolTip,tabUrl,commit) {
  * @param	{String	propName	the property name
  * @return	{String}	the tab id or <code>null</code> if not tab property
  */
-com_zimbra_example_dynamictab_TabManager.prototype.getTabIdFromProperty =
+org_zmail_example_dynamictab_TabManager.prototype.getTabIdFromProperty =
 function (propName) {
 
 	var idx = -1;
 	var tmp = new String(propName);
 
 	// check for label property
-	idx = propName.indexOf(com_zimbra_example_dynamictab_TabManager.USER_PROPERTY_TAB_LABEL)
+	idx = propName.indexOf(org_zmail_example_dynamictab_TabManager.USER_PROPERTY_TAB_LABEL)
 	if (idx >= 0) {
-		return	tmp.substr(com_zimbra_example_dynamictab_TabManager.USER_PROPERTY_TAB_LABEL.length);
+		return	tmp.substr(org_zmail_example_dynamictab_TabManager.USER_PROPERTY_TAB_LABEL.length);
 	}
 
 	// check for tooltip property
-	idx = propName.indexOf(com_zimbra_example_dynamictab_TabManager.USER_PROPERTY_TAB_TOOLTIP)
+	idx = propName.indexOf(org_zmail_example_dynamictab_TabManager.USER_PROPERTY_TAB_TOOLTIP)
 	if (idx >= 0) {
-		return	tmp.substr(com_zimbra_example_dynamictab_TabManager.USER_PROPERTY_TAB_TOOLTIP.length);
+		return	tmp.substr(org_zmail_example_dynamictab_TabManager.USER_PROPERTY_TAB_TOOLTIP.length);
 	}
 
 	// check for url property
-	idx = propName.indexOf(com_zimbra_example_dynamictab_TabManager.USER_PROPERTY_TAB_URL)
+	idx = propName.indexOf(org_zmail_example_dynamictab_TabManager.USER_PROPERTY_TAB_URL)
 	if (idx >= 0) {
-		return	tmp.substr(com_zimbra_example_dynamictab_TabManager.USER_PROPERTY_TAB_URL.length);
+		return	tmp.substr(org_zmail_example_dynamictab_TabManager.USER_PROPERTY_TAB_URL.length);
 	}
 
 	return	null;

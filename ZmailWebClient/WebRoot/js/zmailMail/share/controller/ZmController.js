@@ -225,7 +225,7 @@ function(msg, ex, noExecReset, hideReportButton, expanded, noEncoding) {
 	if (!noEncoding) {
 		msg = AjxStringUtil.htmlEncode(msg);
 	}
-	errorDialog.setMessage(msg, detailStr, DwtMessageDialog.CRITICAL_STYLE, ZmMsg.zimbraTitle);
+	errorDialog.setMessage(msg, detailStr, DwtMessageDialog.CRITICAL_STYLE, ZmMsg.zmailTitle);
 	errorDialog.popup(null, hideReportButton);
 	if (expanded)
 		errorDialog.showDetail();
@@ -591,7 +591,7 @@ function(ex, continuation) {
 	{
 		ZmCsfeCommand.noAuth = true;
         DBG.println(AjxDebug.DBG1, "ZmController.prototype._handleException ex.code : " + ex.code + ". Invoking logout.");
-		ZmZimbraMail.logOff(null, true);
+		ZmZmailMail.logOff(null, true);
 		return;
 	}
 

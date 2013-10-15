@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!-- UpgradeCode must remain constant through all versions of Zimbra Desktop -->
+<!-- UpgradeCode must remain constant through all versions of Zmail Desktop -->
 <?define UpgradeCode="f8836321-20a3-43c8-96e3-5df9ce908691"?>
 
 <?define version="@zd.version@"?>
 
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Product Id="*" Name="Zimbra Desktop" Manufacturer="Zimbra" UpgradeCode="$(var.UpgradeCode)" Language="1033" Codepage="1252" Version="$(var.version)">
+  <Product Id="*" Name="Zmail Desktop" Manufacturer="Zmail" UpgradeCode="$(var.UpgradeCode)" Language="1033" Codepage="1252" Version="$(var.version)">
     
-    <Package Id="*" Description="Zimbra Desktop" Manufacturer="Zimbra" SummaryCodepage="1252" Languages="1033" InstallerVersion="300" Keywords="Installer" Compressed="yes" />
+    <Package Id="*" Description="Zmail Desktop" Manufacturer="Zmail" SummaryCodepage="1252" Languages="1033" InstallerVersion="300" Keywords="Installer" Compressed="yes" />
     <Media Id="1" Cabinet="Setup_1.cab" EmbedCab="yes" DiskPrompt="CD-ROM #1" CompressionLevel="high" />
-    <Property Id="DiskPrompt" Value="Zimbra Desktop Installation [1]" />
+    <Property Id="DiskPrompt" Value="Zmail Desktop Installation [1]" />
     <Upgrade Id="$(var.UpgradeCode)">
       <!-- Detect any newer version of this product -->
       <UpgradeVersion Minimum="$(var.version)" IncludeMinimum="no" OnlyDetect="yes" Property="NEWER_VERSION_FOUND"/>
@@ -22,9 +22,9 @@
     <!-- working around a wix bug: icon id must ends with '.exe' -->
     <Icon Id="ZD_Installer_Icon.exe" SourceFile="@build.root@\src\installer\resources\launcher_128x128.ico" />
     <Property Id="ARPPRODUCTICON" Value="ZD_Installer_Icon.exe" />
-    <Property Id="ARPHELPLINK" Value="http://www.zimbra.com/zdesktop" />
+    <Property Id="ARPHELPLINK" Value="http://www.zmail.com/zdesktop" />
 
-    <CustomAction Id="ID10617" Error="Can't downgrade to an older version of Zimbra Desktop." />
+    <CustomAction Id="ID10617" Error="Can't downgrade to an older version of Zmail Desktop." />
 
     <InstallExecuteSequence>
       <Custom Action="ID10617" After="FindRelatedProducts">NEWER_VERSION_FOUND</Custom>
@@ -128,24 +128,24 @@
       <Directory Id="ProgramMenuFolder" Name="Programs">
         <Directory Id="DesktopFolder" Name="Desktop">
           <Component Id="ID10619" Guid="5a6c426a-6f4a-42c5-82fe-1e4fc19d82aa">
-            <RegistryValue Root="HKCU" Key="SOFTWARE\Zimbra\Zimbra Desktop\Components\ID10619" Type="string" KeyPath="yes" Value="" />
+            <RegistryValue Root="HKCU" Key="SOFTWARE\Zmail\Zmail Desktop\Components\ID10619" Type="string" KeyPath="yes" Value="" />
             <RemoveFolder Id="ID10620" On="uninstall" />
 @desktop.shortcut@ 
           </Component>
         </Directory>
         <Component Id="ID10621" Guid="6f5dc277-6ebc-4891-9fb6-78e30e79935d">
-          <RegistryValue Root="HKCU" Key="SOFTWARE\Zimbra\Zimbra Desktop\Components\ID10621" Type="string" KeyPath="yes" Value="" />
+          <RegistryValue Root="HKCU" Key="SOFTWARE\Zmail\Zmail Desktop\Components\ID10621" Type="string" KeyPath="yes" Value="" />
           <RemoveFolder Id="ID10622" On="uninstall" />
         </Component>
-        <Directory Id="ProgramMenuDir" Name="Zimbra Desktop">
+        <Directory Id="ProgramMenuDir" Name="Zmail Desktop">
           <Component Id="ID10623" Guid="c04e89cb-01bd-4935-a380-099f825636df">
-            <RegistryValue Root="HKCU" Key="SOFTWARE\Zimbra\Zimbra Desktop\Components\ID10623" Type="string" KeyPath="yes" Value="" />
+            <RegistryValue Root="HKCU" Key="SOFTWARE\Zmail\Zmail Desktop\Components\ID10623" Type="string" KeyPath="yes" Value="" />
             <RemoveFolder Id="ID10624" On="uninstall" />
           </Component>
         </Directory>
         <Directory Id="StartupFolder" Name="StartupFolder Directory">
           <Component Id="ID10625" Guid="40453fff-4de1-4e25-96c2-bd425c3aca5c">
-            <RegistryValue Root="HKCU" Key="SOFTWARE\Zimbra\Zimbra Desktop\Components\ID10625" Type="string" KeyPath="yes" Value="" />
+            <RegistryValue Root="HKCU" Key="SOFTWARE\Zmail\Zmail Desktop\Components\ID10625" Type="string" KeyPath="yes" Value="" />
             <RemoveFolder Id="ID10626" On="uninstall" />
           </Component>
         </Directory>
@@ -153,73 +153,73 @@
 
 
       <Directory Id="ProgramFilesFolder" Name="Program Files Folder">
-        <Directory Id="InstallOrganizationFolder" Name="Zimbra">
+        <Directory Id="InstallOrganizationFolder" Name="Zmail">
         
-          <!-- Root Application Directory: Id="APPLICATIONFOLDER", Name="Zimbra Desktop" -->
+          <!-- Root Application Directory: Id="APPLICATIONFOLDER", Name="Zmail Desktop" -->
 @build.application.folder.contents@          
                     
         </Directory>  <!--  InstallOrganizationFolder -->
         
-        <!-- Registry entries for ZimbraMAPI extension -->
+        <!-- Registry entries for ZmailMAPI extension -->
         <Component Id="ID10629" Guid="b76b6050-8869-497b-8d69-5f43fc37715b">
-          <RegistryKey Root="HKLM" Action="createAndRemoveOnUninstall" Key="SOFTWARE\Clients\Mail\Zimbra Desktop">
-            <RegistryValue Value="Zimbra Desktop" Type="string" />
-            <RegistryValue Name="DLLPath" Value="[APPLICATIONFOLDER]win32\prism\extensions\mapi@zimbra.com\zimMapi32.dll" Type="string" />
+          <RegistryKey Root="HKLM" Action="createAndRemoveOnUninstall" Key="SOFTWARE\Clients\Mail\Zmail Desktop">
+            <RegistryValue Value="Zmail Desktop" Type="string" />
+            <RegistryValue Name="DLLPath" Value="[APPLICATIONFOLDER]win32\prism\extensions\mapi@zmail.com\zimMapi32.dll" Type="string" />
           </RegistryKey>
-          <RegistryKey Root="HKLM" Action="createAndRemoveOnUninstall" Key="SOFTWARE\Clients\Mail\Zimbra Desktop\Capabilities">
+          <RegistryKey Root="HKLM" Action="createAndRemoveOnUninstall" Key="SOFTWARE\Clients\Mail\Zmail Desktop\Capabilities">
             <RegistryValue Name="ApplicationDescription" Value="" Type="string" />
-            <RegistryValue Name="ApplicationIcon" Value="[APPLICATIONFOLDER]win32\prism\extensions\mapi@zimbra.com\zimbra.ico,0" Type="string" />
-            <RegistryValue Name="ApplicationName" Value="ZimbraDesktop" Type="string" />
+            <RegistryValue Name="ApplicationIcon" Value="[APPLICATIONFOLDER]win32\prism\extensions\mapi@zmail.com\zmail.ico,0" Type="string" />
+            <RegistryValue Name="ApplicationName" Value="ZmailDesktop" Type="string" />
           </RegistryKey>
-          <RegistryKey Root="HKLM" Action="createAndRemoveOnUninstall" Key="SOFTWARE\Clients\Mail\Zimbra Desktop\Capabilities\FileAssociations">
-            <RegistryValue Name=".eml" Value="ZimbraDesktopEML" Type="string" />
-            <RegistryValue Name=".wdseml" Value="ZimbraDesktopEML" Type="string" />
+          <RegistryKey Root="HKLM" Action="createAndRemoveOnUninstall" Key="SOFTWARE\Clients\Mail\Zmail Desktop\Capabilities\FileAssociations">
+            <RegistryValue Name=".eml" Value="ZmailDesktopEML" Type="string" />
+            <RegistryValue Name=".wdseml" Value="ZmailDesktopEML" Type="string" />
           </RegistryKey>
-          <RegistryKey Root="HKLM" Action="createAndRemoveOnUninstall" Key="SOFTWARE\Clients\Mail\Zimbra Desktop\Capabilities\StartMenu">
-            <RegistryValue Name="Mail" Value="Zimbra Desktop" Type="string" />
+          <RegistryKey Root="HKLM" Action="createAndRemoveOnUninstall" Key="SOFTWARE\Clients\Mail\Zmail Desktop\Capabilities\StartMenu">
+            <RegistryValue Name="Mail" Value="Zmail Desktop" Type="string" />
           </RegistryKey>
-          <RegistryKey Root="HKLM" Action="createAndRemoveOnUninstall" Key="SOFTWARE\Clients\Mail\Zimbra Desktop\Capabilities\URLAssociations">
-            <RegistryValue Name="mailto" Value="ZimbraDesktop.Url.mailto" Type="string" />
+          <RegistryKey Root="HKLM" Action="createAndRemoveOnUninstall" Key="SOFTWARE\Clients\Mail\Zmail Desktop\Capabilities\URLAssociations">
+            <RegistryValue Name="mailto" Value="ZmailDesktop.Url.mailto" Type="string" />
           </RegistryKey>
-          <RegistryKey Root="HKLM" Action="createAndRemoveOnUninstall" Key="SOFTWARE\Clients\Mail\Zimbra Desktop\DefaultIcon">
-            <RegistryValue Value="[APPLICATIONFOLDER]win32\prism\extensions\mapi@zimbra.com\zimbra.ico,0" Type="string" />
+          <RegistryKey Root="HKLM" Action="createAndRemoveOnUninstall" Key="SOFTWARE\Clients\Mail\Zmail Desktop\DefaultIcon">
+            <RegistryValue Value="[APPLICATIONFOLDER]win32\prism\extensions\mapi@zmail.com\zmail.ico,0" Type="string" />
           </RegistryKey>
-          <RegistryKey Root="HKLM" Action="createAndRemoveOnUninstall" Key="SOFTWARE\Clients\Mail\Zimbra Desktop\InstallInfo">
-            <RegistryValue Name="HideIconsCommand" Value="&quot;[APPLICATIONFOLDER]win32\prism\extensions\mapi@zimbra.com\helper.exe&quot; /HideShortcuts" Type="string" />
-            <RegistryValue Name="ShowIconsCommand" Value="&quot;[APPLICATIONFOLDER]win32\prism\extensions\mapi@zimbra.com\helper.exe&quot; /ShowShortcuts" Type="string" />
-            <RegistryValue Name="ReinstallCommand" Value="&quot;[APPLICATIONFOLDER]win32\prism\extensions\mapi@zimbra.com\helper.exe&quot; /SetAsDefaultAppGlobal" Type="string" />
+          <RegistryKey Root="HKLM" Action="createAndRemoveOnUninstall" Key="SOFTWARE\Clients\Mail\Zmail Desktop\InstallInfo">
+            <RegistryValue Name="HideIconsCommand" Value="&quot;[APPLICATIONFOLDER]win32\prism\extensions\mapi@zmail.com\helper.exe&quot; /HideShortcuts" Type="string" />
+            <RegistryValue Name="ShowIconsCommand" Value="&quot;[APPLICATIONFOLDER]win32\prism\extensions\mapi@zmail.com\helper.exe&quot; /ShowShortcuts" Type="string" />
+            <RegistryValue Name="ReinstallCommand" Value="&quot;[APPLICATIONFOLDER]win32\prism\extensions\mapi@zmail.com\helper.exe&quot; /SetAsDefaultAppGlobal" Type="string" />
             <RegistryValue Name="IconsVisible" Value="0" Type="integer" />
           </RegistryKey>
-          <RegistryKey Root="HKLM" Action="createAndRemoveOnUninstall" Key="SOFTWARE\Clients\Mail\Zimbra Desktop\Protocols" />
-          <RegistryKey Root="HKLM" Action="createAndRemoveOnUninstall" Key="SOFTWARE\Clients\Mail\Zimbra Desktop\Protocols\mailto">
-            <RegistryValue Value="ZimbraDesktop URL" Type="string" />
-            <RegistryValue Name="FriendlyTypeName" Value="ZimbraDesktop URL" Type="string" />
+          <RegistryKey Root="HKLM" Action="createAndRemoveOnUninstall" Key="SOFTWARE\Clients\Mail\Zmail Desktop\Protocols" />
+          <RegistryKey Root="HKLM" Action="createAndRemoveOnUninstall" Key="SOFTWARE\Clients\Mail\Zmail Desktop\Protocols\mailto">
+            <RegistryValue Value="ZmailDesktop URL" Type="string" />
+            <RegistryValue Name="FriendlyTypeName" Value="ZmailDesktop URL" Type="string" />
             <RegistryValue Name="URL Protocol" Value="" Type="string" />
             <RegistryValue Name="EditFlags" Value="2" Type="integer" />
           </RegistryKey>
-          <RegistryKey Root="HKLM" Action="createAndRemoveOnUninstall" Key="SOFTWARE\Clients\Mail\Zimbra Desktop\Protocols\mailto\DefaultIcon">
-            <RegistryValue Value="[APPLICATIONFOLDER]win32\prism\extensions\mapi@zimbra.com\zimbra.ico,0" Type="string" />
+          <RegistryKey Root="HKLM" Action="createAndRemoveOnUninstall" Key="SOFTWARE\Clients\Mail\Zmail Desktop\Protocols\mailto\DefaultIcon">
+            <RegistryValue Value="[APPLICATIONFOLDER]win32\prism\extensions\mapi@zmail.com\zmail.ico,0" Type="string" />
           </RegistryKey>
-          <RegistryKey Root="HKLM" Action="createAndRemoveOnUninstall" Key="SOFTWARE\Clients\Mail\Zimbra Desktop\Protocols\mailto\shell" />
-          <RegistryKey Root="HKLM" Action="createAndRemoveOnUninstall" Key="SOFTWARE\Clients\Mail\Zimbra Desktop\Protocols\mailto\shell\open" />
-          <RegistryKey Root="HKLM" Action="createAndRemoveOnUninstall" Key="SOFTWARE\Clients\Mail\Zimbra Desktop\Protocols\mailto\shell\open\command">
+          <RegistryKey Root="HKLM" Action="createAndRemoveOnUninstall" Key="SOFTWARE\Clients\Mail\Zmail Desktop\Protocols\mailto\shell" />
+          <RegistryKey Root="HKLM" Action="createAndRemoveOnUninstall" Key="SOFTWARE\Clients\Mail\Zmail Desktop\Protocols\mailto\shell\open" />
+          <RegistryKey Root="HKLM" Action="createAndRemoveOnUninstall" Key="SOFTWARE\Clients\Mail\Zmail Desktop\Protocols\mailto\shell\open\command">
             <RegistryValue Value="&quot;[APPLICATIONFOLDER]win32\prism\zdclient.exe&quot; -url &quot;%1&quot;" Type="string" />
           </RegistryKey>
-          <RegistryKey Root="HKLM" Action="createAndRemoveOnUninstall" Key="SOFTWARE\Clients\Mail\Zimbra Desktop\shell" />
-          <RegistryKey Root="HKLM" Action="createAndRemoveOnUninstall" Key="SOFTWARE\Clients\Mail\Zimbra Desktop\shell\open" />
-          <RegistryKey Root="HKLM" Action="createAndRemoveOnUninstall" Key="SOFTWARE\Clients\Mail\Zimbra Desktop\shell\open\command">
+          <RegistryKey Root="HKLM" Action="createAndRemoveOnUninstall" Key="SOFTWARE\Clients\Mail\Zmail Desktop\shell" />
+          <RegistryKey Root="HKLM" Action="createAndRemoveOnUninstall" Key="SOFTWARE\Clients\Mail\Zmail Desktop\shell\open" />
+          <RegistryKey Root="HKLM" Action="createAndRemoveOnUninstall" Key="SOFTWARE\Clients\Mail\Zmail Desktop\shell\open\command">
             <RegistryValue Value="&quot;[APPLICATIONFOLDER]win32\prism\zdclient.exe&quot;" Type="string" />
           </RegistryKey>
-          <RegistryKey Root="HKLM" Action="createAndRemoveOnUninstall" Key="SOFTWARE\Clients\Mail\Zimbra Desktop\shell\properties">
+          <RegistryKey Root="HKLM" Action="createAndRemoveOnUninstall" Key="SOFTWARE\Clients\Mail\Zmail Desktop\shell\properties">
             <RegistryValue Value="" Type="string" />
           </RegistryKey>
-          <RegistryKey Root="HKLM" Action="createAndRemoveOnUninstall" Key="SOFTWARE\Clients\Mail\Zimbra Desktop\shell\properties\command">
+          <RegistryKey Root="HKLM" Action="createAndRemoveOnUninstall" Key="SOFTWARE\Clients\Mail\Zmail Desktop\shell\properties\command">
             <RegistryValue Value="&quot;[APPLICATIONFOLDER]win32\prism\zdclient.exe&quot; -options" Type="string" />
           </RegistryKey>
-          <RegistryKey Root="HKLM" Action="createAndRemoveOnUninstall" Key="SOFTWARE\Clients\Mail\Zimbra Desktop\shell\safemode">
+          <RegistryKey Root="HKLM" Action="createAndRemoveOnUninstall" Key="SOFTWARE\Clients\Mail\Zmail Desktop\shell\safemode">
             <RegistryValue Value="" Type="string" />
           </RegistryKey>
-          <RegistryKey Root="HKLM" Action="createAndRemoveOnUninstall" Key="SOFTWARE\Clients\Mail\Zimbra Desktop\shell\safemode\command">
+          <RegistryKey Root="HKLM" Action="createAndRemoveOnUninstall" Key="SOFTWARE\Clients\Mail\Zmail Desktop\shell\safemode\command">
             <RegistryValue Value="&quot;[APPLICATIONFOLDER]win32\prism\zdclient.exe&quot; -safe-mode" Type="string" />
           </RegistryKey>
         </Component>
@@ -228,7 +228,7 @@
     </Directory>  <!-- TARGETDIR -->
     
     
-    <Property Id="ApplicationFolderName" Value="Zimbra Desktop" />
+    <Property Id="ApplicationFolderName" Value="Zmail Desktop" />
     <Property Id="WIXUI_INSTALLDIR" Value="APPLICATIONFOLDER" />
     <Property Id="WixAppFolder" Value="WixPerUserFolder" />
     
@@ -249,7 +249,7 @@
     </Feature>
    
     <CustomAction Id="ID10702" Directory="@zdrun.dir.id@" ExeCommand="[SystemFolder]wscript.exe zdrun.vbs" Execute="immediate" Impersonate="yes" Return="asyncNoWait" />
-    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Launch Zimbra Desktop" />
+    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Launch Zmail Desktop" />
     <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOX" Value="1" />
     <UI>
       <UIRef Id="WixUI_InstallDir" />

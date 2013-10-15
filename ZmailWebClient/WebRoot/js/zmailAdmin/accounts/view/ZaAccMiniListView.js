@@ -65,15 +65,15 @@ function(account, now, isDragProxy) {
 					html[idx++] = "<td width=" + this._headerList[i]._width + ">";
 					switch(account.type) {
 						case ZaItem.ACCOUNT:
-							if(account.attrs[ZaAccount.A_zimbraIsAdminAccount]=="TRUE" ) {
+							if(account.attrs[ZaAccount.A_zmailIsAdminAccount]=="TRUE" ) {
 								imgName = ("AdminUser");
-							} else if (account.attrs[ZaAccount.A_zimbraIsDelegatedAdminAccount] == "TRUE") {
+							} else if (account.attrs[ZaAccount.A_zmailIsDelegatedAdminAccount] == "TRUE") {
 								imgName = ("DomainAdminUser");
-							} else if (account.attrs[ZaAccount.A_zimbraIsSystemAccount] == "TRUE") {
+							} else if (account.attrs[ZaAccount.A_zmailIsSystemAccount] == "TRUE") {
 								imgName = ("SpecialAccount");
-							} else if (account.attrs[ZaAccount.A_zimbraIsSystemResource] == "TRUE") {
+							} else if (account.attrs[ZaAccount.A_zmailIsSystemResource] == "TRUE") {
 								imgName = ("SystemResource");
-							} else if (account.attrs[ZaAccount.A_zimbraIsExternalVirtualAccount] == "TRUE") {
+							} else if (account.attrs[ZaAccount.A_zmailIsExternalVirtualAccount] == "TRUE") {
 								imgName = ("AccountExternalVirtual");
 							} else {
 								if(account.isExternal) {
@@ -100,7 +100,7 @@ function(account, now, isDragProxy) {
 							imgName = ("COS");
 						break;
 						case ZaItem.RESOURCE:
-							if (account.attrs[ZaResource.A_zimbraCalResType] == ZaResource.RESOURCE_TYPE_LOCATION){
+							if (account.attrs[ZaResource.A_zmailCalResType] == ZaResource.RESOURCE_TYPE_LOCATION){
 								imgName = ("Location");
 							} else {//equipment or other resource types
 								imgName = ("Resource");

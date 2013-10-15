@@ -12,24 +12,24 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.offline;
+package org.zmail.cs.service.offline;
 
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.SoapFaultException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.ZcsMailbox;
-import com.zimbra.cs.mailbox.OfflineServiceException;
-import com.zimbra.cs.service.mail.GetImportStatus;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.SoapFaultException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.ZcsMailbox;
+import org.zmail.cs.mailbox.OfflineServiceException;
+import org.zmail.cs.service.mail.GetImportStatus;
+import org.zmail.soap.ZmailSoapContext;
 
 public class OfflineGetImportStatus extends GetImportStatus {
 
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException, SoapFaultException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Mailbox mbox = getRequestedMailbox(zsc);
         if (!(mbox instanceof ZcsMailbox))
             throw OfflineServiceException.MISCONFIGURED("incorrect mailbox class: " + mbox.getClass().getSimpleName());

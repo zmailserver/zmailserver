@@ -2,26 +2,26 @@
 # __SNMP
 
 snmp: CUR_DEST_ROOT := $(SNMP_DEST_ROOT)
-snmp: CUR_PACKAGE_SPEC := $(BUILD_ROOT)/zimbra-snmp.spec
-snmp: CUR_PACKAGE_NAME := zimbra-snmp
+snmp: CUR_PACKAGE_SPEC := $(BUILD_ROOT)/zmail-snmp.spec
+snmp: CUR_PACKAGE_NAME := zmail-snmp
 snmp: $(PACKAGE_DIR) snmp_stage snmp_pkg_spec_$(PACKAGE_EXT)
 	(cd $(CUR_DEST_ROOT); \
 		$(PACKAGING_COMMAND) $(PACKAGING_OPTIONS) )
 
 snmp_pkg_spec_ccs:
 
-snmp_pkg_spec_pkg: $(BUILD_ROOT)/resources/zimbra-snmp $(BUILD_ROOT)/zimbra-snmp.Info.plist $(BUILD_ROOT)/zimbra-snmp.Description.plist
+snmp_pkg_spec_pkg: $(BUILD_ROOT)/resources/zmail-snmp $(BUILD_ROOT)/zmail-snmp.Info.plist $(BUILD_ROOT)/zmail-snmp.Description.plist
 
-$(BUILD_ROOT)/zimbra-snmp.Description.plist:
-	cat $(PACKAGE_CONF_DIR)/Spec/zimbra-snmp.Description.plist | \
+$(BUILD_ROOT)/zmail-snmp.Description.plist:
+	cat $(PACKAGE_CONF_DIR)/Spec/zmail-snmp.Description.plist | \
 	sed -e 's/@@VERSION@@/$(VERSION_TAG)/' \
 	-e 's/@@RELEASE@@/$(RELEASE)/' \
 	-e 's/@@MAJOR@@/$(MAJOR)/' \
 	-e 's/@@MICRO@@/$(MICRO)/' \
 	-e 's/@@MINOR@@/$(MINOR)/' > $@
 
-$(BUILD_ROOT)/zimbra-snmp.Info.plist:
-	cat $(PACKAGE_CONF_DIR)/Spec/zimbra-snmp.Info.plist | \
+$(BUILD_ROOT)/zmail-snmp.Info.plist:
+	cat $(PACKAGE_CONF_DIR)/Spec/zmail-snmp.Info.plist | \
 	sed -e 's/@@VERSION@@/$(VERSION_TAG)/' \
 	-e 's/@@RELEASE@@/$(RELEASE)/' \
 	-e 's/@@MAJOR@@/$(MAJOR)/' \
@@ -29,44 +29,44 @@ $(BUILD_ROOT)/zimbra-snmp.Info.plist:
 	-e 's/@@BUILDNUM@@/$(BUILDNUM)/' \
 	-e 's/@@MINOR@@/$(MINOR)/' > $@
 
-$(BUILD_ROOT)/resources/zimbra-snmp:
+$(BUILD_ROOT)/resources/zmail-snmp:
 	mkdir -p $@
-	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zimbra-snmp.postinstall $@/postinstall
+	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zmail-snmp.postinstall $@/postinstall
 	chmod 755 $@/postinstall
-	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zimbra-snmp.postupgrade $@/postupgrade
+	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zmail-snmp.postupgrade $@/postupgrade
 	chmod 755 $@/postupgrade
 
 snmp_pkg_spec_deb: $(SNMP_DEST_ROOT)/DEBIAN/control
 
 $(SNMP_DEST_ROOT)/DEBIAN: force
 	mkdir -p $@
-	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zimbra-snmp.pre $@/preinst
-	cat $(PACKAGE_CONF_DIR)/Spec/Scripts/zimbra-snmp.post >> $@/postinst
+	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zmail-snmp.pre $@/preinst
+	cat $(PACKAGE_CONF_DIR)/Spec/Scripts/zmail-snmp.post >> $@/postinst
 	chmod 555 $@/*
 
 $(SNMP_DEST_ROOT)/DEBIAN/control: $(SNMP_DEST_ROOT)/DEBIAN force
-	cat $(PACKAGE_CONF_DIR)/Spec/zimbra-snmp.deb | \
+	cat $(PACKAGE_CONF_DIR)/Spec/zmail-snmp.deb | \
 	sed -e 's/@@VERSION@@/$(VERSION_TAG)/' \
 	-e 's/@@RELEASE@@/$(RELEASE)/' \
 	-e 's/@@ARCH@@/$(ARCH)/' > $@
 
-snmp_pkg_spec_rpm: $(BUILD_ROOT)/zimbra-snmp.spec
+snmp_pkg_spec_rpm: $(BUILD_ROOT)/zmail-snmp.spec
 
-$(BUILD_ROOT)/zimbra-snmp.spec:
-	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zimbra-snmp.pre $(BUILD_ROOT)
-	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zimbra-snmp.post $(BUILD_ROOT)
-	cat $(PACKAGE_CONF_DIR)/Spec/zimbra-snmp.spec | \
+$(BUILD_ROOT)/zmail-snmp.spec:
+	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zmail-snmp.pre $(BUILD_ROOT)
+	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zmail-snmp.post $(BUILD_ROOT)
+	cat $(PACKAGE_CONF_DIR)/Spec/zmail-snmp.spec | \
 		sed -e 's/@@VERSION@@/$(VERSION_TAG)/' \
 		-e 's/@@RELEASE@@/$(RELEASE)/' \
 		-e 's/^Copyright:/$(RPMCOPYRIGHTSTR):/' \
-		-e '/^%pre$$/ r zimbra-snmp.pre' \
-		-e '/^%post$$/ r zimbra-snmp.post' > $(BUILD_ROOT)/zimbra-snmp.spec
-	rm -f zimbra-snmp.pre
-	rm -f zimbra-snmp.post
-	echo "%attr(-, zimbra, zimbra) /opt/zimbra/$(SNMP_DIR)" >> \
-		$(BUILD_ROOT)/zimbra-snmp.spec
-	echo "" >> $(BUILD_ROOT)/zimbra-snmp.spec
-	echo "%clean" >> $(BUILD_ROOT)/zimbra-snmp.spec
+		-e '/^%pre$$/ r zmail-snmp.pre' \
+		-e '/^%post$$/ r zmail-snmp.post' > $(BUILD_ROOT)/zmail-snmp.spec
+	rm -f zmail-snmp.pre
+	rm -f zmail-snmp.post
+	echo "%attr(-, zmail, zmail) /opt/zmail/$(SNMP_DIR)" >> \
+		$(BUILD_ROOT)/zmail-snmp.spec
+	echo "" >> $(BUILD_ROOT)/zmail-snmp.spec
+	echo "%clean" >> $(BUILD_ROOT)/zmail-snmp.spec
 
 snmp_stage: $(SNMP_COMPONENTS)
 

@@ -13,10 +13,10 @@
 # basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
 # ***** END LICENSE BLOCK *****
 # 
-rm -f /opt/zimbra/httpd
-ln -s /opt/zimbra/httpd-2.4.3 /opt/zimbra/httpd
+rm -f /opt/zmail/httpd
+ln -s /opt/zmail/httpd-2.4.3 /opt/zmail/httpd
 
-PKG=`echo ${RECEIPT_PATH} | sed -e 's|.*/\(zimbra-apache.[^/]*pkg\)/.*|\1|' | sed -e 's/\./-/'`
+PKG=`echo ${RECEIPT_PATH} | sed -e 's|.*/\(zmail-apache.[^/]*pkg\)/.*|\1|' | sed -e 's/\./-/'`
 D=`date +%s`
-echo "${D}: UPGRADED ${PKG}" >> /opt/zimbra/.install_history
+echo "${D}: UPGRADED ${PKG}" >> /opt/zmail/.install_history
 exit 0

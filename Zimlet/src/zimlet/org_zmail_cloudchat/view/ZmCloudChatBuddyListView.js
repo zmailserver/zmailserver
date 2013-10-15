@@ -38,7 +38,7 @@ ZmCloudChatBuddyListView.prototype.display = function() {
 				chatStatusStr: this.zimlet.getMessage("chatStatus"),
 				chatUsers: this.zimlet.getMessage("chatUsers"),
 				emailParticipants: this.zimlet.getMessage("emailParticipants")};
-	this._parentDom.innerHTML = AjxTemplate.expand("com_zimbra_cloudchat.templates.ZmCloudChat#BuddyListWidget", subs);
+	this._parentDom.innerHTML = AjxTemplate.expand("org_zmail_cloudchat.templates.ZmCloudChat#BuddyListWidget", subs);
 
     //main frame..
     this._contentDiv = document.getElementById("cloudchat_content_div");
@@ -59,8 +59,8 @@ ZmCloudChatBuddyListView.prototype.display = function() {
     this.loginBtn = new DwtButton({
         parent: this.zimlet.getShell()
     });
-    this.loginBtn.setText(this.zimlet.getMessage("loginAsZimbraUser"));
-	this.loginBtn.setImage("CCZimbraIcon");
+    this.loginBtn.setText(this.zimlet.getMessage("loginAsZmailUser"));
+	this.loginBtn.setImage("CCZmailIcon");
 
     document.getElementById("cloudChat_buddy_login_btn_cell").appendChild(
     this.loginBtn.getHtmlElement());

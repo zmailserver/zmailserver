@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.addressbook.contacts;
+package org.zmail.qa.selenium.projects.desktop.tests.addressbook.contacts;
 
 
 import java.awt.event.KeyEvent;
@@ -22,12 +22,12 @@ import java.util.List;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount.SOAP_DESTINATION_HOST_TYPE;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.ZmailAccount.SOAP_DESTINATION_HOST_TYPE;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
 
 
 public class DeleteContact extends AjaxCommonTest  {
@@ -187,7 +187,7 @@ public class DeleteContact extends AjaxCommonTest  {
 
       // Verify document moved to Trash
       app.zGetActiveAccount()
-            .soapSend("<SearchRequest xmlns='urn:zimbraMail' types='contact'>"
+            .soapSend("<SearchRequest xmlns='urn:zmailMail' types='contact'>"
                   + "<query>in:"
                   + trash.getName()
                   + " "
@@ -199,7 +199,7 @@ public class DeleteContact extends AjaxCommonTest  {
       ZAssert.assertEquals(trash.getId(), parentId, "New parent ID of the contact item 1 matches");
 
       app.zGetActiveAccount()
-      .soapSend("<SearchRequest xmlns='urn:zimbraMail' types='contact'>"
+      .soapSend("<SearchRequest xmlns='urn:zmailMail' types='contact'>"
             + "<query>in:"
             + trash.getName()
             + " "
@@ -211,7 +211,7 @@ public class DeleteContact extends AjaxCommonTest  {
       ZAssert.assertEquals(trash.getId(), parentId, "New parent ID of the contact item 2 matches");
 
       app.zGetActiveAccount()
-      .soapSend("<SearchRequest xmlns='urn:zimbraMail' types='contact'>"
+      .soapSend("<SearchRequest xmlns='urn:zmailMail' types='contact'>"
             + "<query>in:"
             + trash.getName()
             + " "
@@ -271,7 +271,7 @@ public class DeleteContact extends AjaxCommonTest  {
 
       // Verify document moved to Trash
       app.zGetActiveAccount()
-            .soapSend("<SearchRequest xmlns='urn:zimbraMail' types='contact'>"
+            .soapSend("<SearchRequest xmlns='urn:zmailMail' types='contact'>"
                   + "<query>in:"
                   + trash.getName()
                   + " "
@@ -298,7 +298,7 @@ public class DeleteContact extends AjaxCommonTest  {
 
       //verify contact deleted
       _verifyContactDeleted(contactItem, SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
    }
 
    @Test(   description = "Delete a local contact item selected with checkbox",
@@ -314,7 +314,7 @@ public class DeleteContact extends AjaxCommonTest  {
 
       //verify contact deleted
       _verifyContactDeleted(contactItem, SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
    }
 
    @Test(   description = "Delete a local contact item using keyboard short cut Del",
@@ -330,7 +330,7 @@ public class DeleteContact extends AjaxCommonTest  {
        
       //verify contact deleted
       _verifyContactDeleted(contactItem, SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);    
+            ZmailAccount.clientAccountName);    
    }
 
    @Test(   description = "Delete a local contact item using keyboard short cut backspace",
@@ -346,7 +346,7 @@ public class DeleteContact extends AjaxCommonTest  {
        
       //verify contact deleted
       _verifyContactDeleted(contactItem, SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);    
+            ZmailAccount.clientAccountName);    
    }
 
    @Test(   description = "Right click on local contact then click delete",
@@ -364,7 +364,7 @@ public class DeleteContact extends AjaxCommonTest  {
 
       //verify contact deleted
       _verifyContactDeleted(contactItem, SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);    
+            ZmailAccount.clientAccountName);    
    }
 
    @Test(   description = "Delete multiple local contact items",
@@ -372,22 +372,22 @@ public class DeleteContact extends AjaxCommonTest  {
    public void DeleteMultipleLocalContacts() throws HarnessException {
 
 ////      // Create a contact via Soap
-////      ContactItem contactItem1 = ContactItem.createLocalUsingSOAP(app, ZimbraAccount.clientAccountName);                      
+////      ContactItem contactItem1 = ContactItem.createLocalUsingSOAP(app, ZmailAccount.clientAccountName);                      
 ////      contactItem1.setId(app.zGetActiveAccount().soapSelectValue("//mail:CreateContactResponse/mail:cn", "id"));
 ////
 ////      // Create a contact via Soap
-////      ContactItem contactItem2 = ContactItem.createLocalUsingSOAP(app, ZimbraAccount.clientAccountName);                      
+////      ContactItem contactItem2 = ContactItem.createLocalUsingSOAP(app, ZmailAccount.clientAccountName);                      
 ////      contactItem2.setId(app.zGetActiveAccount().soapSelectValue("//mail:CreateContactResponse/mail:cn", "id"));
 ////
 ////      // Create a contact via Soap
-////      ContactItem contactItem3 = ContactItem.createLocalUsingSOAP(app, ZimbraAccount.clientAccountName);                      
+////      ContactItem contactItem3 = ContactItem.createLocalUsingSOAP(app, ZmailAccount.clientAccountName);                      
 ////      contactItem3.setId(app.zGetActiveAccount().soapSelectValue("//mail:CreateContactResponse/mail:cn", "id"));
 //
 //      // Refresh the view, to pick up the new contact
 //      FolderItem contactFolder = FolderItem.importFromSOAP(app.zGetActiveAccount(),
 //            SystemFolder.Contacts,
 //            SOAP_DESTINATION_HOST_TYPE.CLIENT,
-//            ZimbraAccount.clientAccountName);
+//            ZmailAccount.clientAccountName);
 //
 //      GeneralUtility.syncDesktopToZcsWithSoap(app.zGetActiveAccount());
 //      app.zTreeContacts.zTreeItem(Action.A_LEFTCLICK, contactFolder);
@@ -421,7 +421,7 @@ public class DeleteContact extends AjaxCommonTest  {
 //      ZAssert.assertTrue(count==0, "Verify contact fileAs (" + contactItem1.fileAs + "," + contactItem2.fileAs + "," + contactItem3.fileAs + ") deleted");
 //
 //      SOAP_DESTINATION_HOST_TYPE destType = SOAP_DESTINATION_HOST_TYPE.CLIENT;
-//      String accountName = ZimbraAccount.clientAccountName;
+//      String accountName = ZmailAccount.clientAccountName;
 //
 //      FolderItem trash = FolderItem.importFromSOAP(app.zGetActiveAccount(),
 //            SystemFolder.Trash,
@@ -430,7 +430,7 @@ public class DeleteContact extends AjaxCommonTest  {
 //
 //      // Verify document moved to Trash
 //      app.zGetActiveAccount()
-//            .soapSend("<SearchRequest xmlns='urn:zimbraMail' types='contact'>"
+//            .soapSend("<SearchRequest xmlns='urn:zmailMail' types='contact'>"
 //                  + "<query>in:"
 //                  + trash.getName()
 //                  + " "
@@ -444,7 +444,7 @@ public class DeleteContact extends AjaxCommonTest  {
 //      ZAssert.assertEquals(trash.getId(), parentId, "New parent ID of the contact item 1 matches");
 //
 //      app.zGetActiveAccount()
-//      .soapSend("<SearchRequest xmlns='urn:zimbraMail' types='contact'>"
+//      .soapSend("<SearchRequest xmlns='urn:zmailMail' types='contact'>"
 //            + "<query>in:"
 //            + trash.getName()
 //            + " "
@@ -458,7 +458,7 @@ public class DeleteContact extends AjaxCommonTest  {
 //      ZAssert.assertEquals(trash.getId(), parentId, "New parent ID of the contact item 2 matches");
 //
 //      app.zGetActiveAccount()
-//      .soapSend("<SearchRequest xmlns='urn:zimbraMail' types='contact'>"
+//      .soapSend("<SearchRequest xmlns='urn:zmailMail' types='contact'>"
 //            + "<query>in:"
 //            + trash.getName()
 //            + " "

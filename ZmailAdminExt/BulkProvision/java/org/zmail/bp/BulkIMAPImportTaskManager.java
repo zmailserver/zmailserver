@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.bp;
+package org.zmail.bp;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -22,16 +22,16 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.datasource.DataSourceManager;
-import com.zimbra.cs.datasource.ImportStatus;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.datasource.DataSourceManager;
+import org.zmail.cs.datasource.ImportStatus;
 
 public class BulkIMAPImportTaskManager {
     /*
@@ -135,11 +135,11 @@ public class BulkIMAPImportTaskManager {
                     String accountID = task.get(taskKeys.accountID);
                     String dataSourceID = task.get(taskKeys.dataSourceID);
                     if (accountID == null) {
-                        ZimbraLog.extensions.error("Error while cleaning IMAP import task queue.", BulkProvisionException.EMPTY_ACCOUNT_ID());
+                        ZmailLog.extensions.error("Error while cleaning IMAP import task queue.", BulkProvisionException.EMPTY_ACCOUNT_ID());
                         continue;
                     }
                     if (dataSourceID == null) {
-                        ZimbraLog.extensions.error("Error while cleaning IMAP import task queue.", BulkProvisionException.EMPTY_DATASOURCE_ID());
+                        ZmailLog.extensions.error("Error while cleaning IMAP import task queue.", BulkProvisionException.EMPTY_DATASOURCE_ID());
                         continue;
                     }   
                     Account acct = Provisioning.getInstance().getAccountById(accountID);
@@ -148,7 +148,7 @@ public class BulkIMAPImportTaskManager {
                         Provisioning.getInstance().deleteDataSource(acct, dataSourceID);
                     } catch (AccountServiceException ex) {
                         if(!AccountServiceException.NO_SUCH_DATA_SOURCE.equalsIgnoreCase(ex.getCode())) {
-                            ZimbraLog.extensions.error("Error while cleaning IMAP import task queue.", ex);
+                            ZmailLog.extensions.error("Error while cleaning IMAP import task queue.", ex);
                         }
                     }
                     iter.remove();
@@ -219,11 +219,11 @@ public class BulkIMAPImportTaskManager {
                 String accountID = task.get(taskKeys.accountID);
                 String dataSourceID = task.get(taskKeys.dataSourceID);
                 if (accountID == null) {
-                    ZimbraLog.extensions.error("Error in IMAP import task", BulkProvisionException.EMPTY_ACCOUNT_ID());
+                    ZmailLog.extensions.error("Error in IMAP import task", BulkProvisionException.EMPTY_ACCOUNT_ID());
                     return;
                 }
                 if (dataSourceID == null) {
-                    ZimbraLog.extensions.error("Error in IMAP import task", BulkProvisionException.EMPTY_DATASOURCE_ID());
+                    ZmailLog.extensions.error("Error in IMAP import task", BulkProvisionException.EMPTY_DATASOURCE_ID());
                     return;
                 }
                 try {
@@ -232,19 +232,19 @@ public class BulkIMAPImportTaskManager {
                     ImportStatus importStatus = DataSourceManager.getImportStatus(acct, importDS);
                     synchronized (importStatus) {
                         if (importStatus.isRunning()) {
-                            ZimbraLog.extensions.error("Tried to import the same account twice");
+                            ZmailLog.extensions.error("Tried to import the same account twice");
                             return;
                         }
                     }
 
                     //set mail transport to local (for split domain)
-                    String mailHostName = acct.getAttr(Provisioning.A_zimbraMailHost);
+                    String mailHostName = acct.getAttr(Provisioning.A_zmailMailHost);
                     if(mailHostName == null) {
                         Map<String, Object> accAttrs = new HashMap<String, Object>();
                         Server server = Provisioning.getInstance().getLocalServer();
-                        mailHostName = server.getAttr(Provisioning.A_zimbraServiceHostname);
-                        StringUtil.addToMultiMap(accAttrs,Provisioning.A_zimbraMailHost,mailHostName);
-                        StringUtil.addToMultiMap(accAttrs,Provisioning.A_zimbraMailTransport,"");
+                        mailHostName = server.getAttr(Provisioning.A_zmailServiceHostname);
+                        StringUtil.addToMultiMap(accAttrs,Provisioning.A_zmailMailHost,mailHostName);
+                        StringUtil.addToMultiMap(accAttrs,Provisioning.A_zmailMailTransport,"");
                         Provisioning.getInstance().modifyAttrs(acct, accAttrs, true);
                     }
 
@@ -252,7 +252,7 @@ public class BulkIMAPImportTaskManager {
                     
                     //revert batch index size
                     Map<String, Object> accAttrs = new HashMap<String, Object>();
-                    StringUtil.addToMultiMap(accAttrs,Provisioning.A_zimbraBatchedIndexingSize, null);                    
+                    StringUtil.addToMultiMap(accAttrs,Provisioning.A_zmailBatchedIndexingSize, null);                    
                     Provisioning.getInstance().modifyAttrs(acct, accAttrs, true);
                     
                     //report finished task
@@ -263,7 +263,7 @@ public class BulkIMAPImportTaskManager {
                         finishedList.add(finishedTask);
                     }                    
                 } catch (ServiceException e) {
-                    ZimbraLog.extensions.error(String.format("Error in IMAP import task for account %s, datasource %s",accountID,dataSourceID), e);
+                    ZmailLog.extensions.error(String.format("Error in IMAP import task for account %s, datasource %s",accountID,dataSourceID), e);
                     synchronized (failedQueues) {
                         Queue<HashMap<taskKeys, String>> failedList = failedQueues.get(queueKey);
                         if(failedList == null) {

@@ -60,7 +60,7 @@ function() {
 	html[idx++] = "<tr><td style='text-align:right;width:";
 	html[idx++] = this.labelWidth;
 	html[idx++] = "' class='xform_label'";
-	html[idx++] = ">" + ZaMsg.NAD_zimbraInstalledSkin + "</td>";
+	html[idx++] = ">" + ZaMsg.NAD_zmailInstalledSkin + "</td>";
 	// source list
 	html[idx++] = "<td class='xform_field_container' width='";
 	html[idx++] = this.tableWidth;
@@ -131,7 +131,7 @@ function() {
 	html[idx++] = "</div></td></tr>";
 
 
-	html[idx++] = "<tr><td style='text-align:right' class='xform_label'>" + ZaMsg.NAD_zimbraAvailableSkin + "</td>";
+	html[idx++] = "<tr><td style='text-align:right' class='xform_label'>" + ZaMsg.NAD_zmailAvailableSkin + "</td>";
 	// target list
 	html[idx++] = "<td class='xform_field_container' width='";
 	html[idx++] = this.tableWidth;
@@ -146,7 +146,7 @@ function() {
 	html[idx++] = "<table cellspacing=0 cellpadding=0 border=0 width=100%>";
 	html[idx++] = "<colgroup><col width='40%'/><col width='20%'/><col width='40%'/> </colgroup>";
 	html[idx++] = "<tbody>";
-	html[idx++] = "<tr><td style='text-align:center' class='xform_label'>" + ZaMsg.NAD_zimbraInstalledSkin + "</td><td>&nbsp;</td><td style='text-align:center'  class='xform_label'>" + ZaMsg.NAD_zimbraAvailableSkin + "</td</tr>"
+	html[idx++] = "<tr><td style='text-align:center' class='xform_label'>" + ZaMsg.NAD_zmailInstalledSkin + "</td><td>&nbsp;</td><td style='text-align:center'  class='xform_label'>" + ZaMsg.NAD_zmailAvailableSkin + "</td</tr>"
 	html[idx++] = "<tr>";
 
 	// source list

@@ -19,7 +19,7 @@
 #include "Util.h"
 #include "MAPIRules.h"
 
-namespace Zimbra
+namespace Zmail
 {
 namespace MAPI
 {
@@ -29,7 +29,7 @@ typedef struct _Folder_Data
     SBinary sbin;
     wstring folderpath;
     wstring containerclass;
-    long zimbraid;
+    long zmailid;
     unsigned long itemcount;
 } Folder_Data;
 typedef struct _Item_Data
@@ -236,21 +236,21 @@ class MAPIAccessAPI
 private:
     static std::wstring m_strTargetProfileName;
     static std::wstring m_strExchangeHostName;
-    static Zimbra::MAPI::MAPISession *m_zmmapisession;
-    static Zimbra::MAPI::MAPIStore *m_defaultStore;
+    static Zmail::MAPI::MAPISession *m_zmmapisession;
+    static Zmail::MAPI::MAPIStore *m_defaultStore;
     static bool m_bSingleMailBoxMigration;
 	static bool m_bHasJoinedDomain;
 	std::wstring m_strUserName;
         std::wstring m_strUserAccount;
-    Zimbra::MAPI::MAPIStore *m_userStore;
-    Zimbra::MAPI::MAPIFolder *m_rootFolder;
+    Zmail::MAPI::MAPIStore *m_userStore;
+    Zmail::MAPI::MAPIFolder *m_rootFolder;
     ExchangeSpecialFolderId FolderToSkip[TS_FOLDERS_MAX];
 
     void InitFoldersToSkip();
     bool SkipFolder(ExchangeSpecialFolderId exfid);
     LPCWSTR OpenUserStore();
-    HRESULT Iterate_folders(Zimbra::MAPI::MAPIFolder &folder, vector<Folder_Data> &fd);
-    void traverse_folder(Zimbra::MAPI::MAPIFolder &folder);
+    HRESULT Iterate_folders(Zmail::MAPI::MAPIFolder &folder, vector<Folder_Data> &fd);
+    void traverse_folder(Zmail::MAPI::MAPIFolder &folder);
     HRESULT GetInternalFolder(SBinary sbFolderEID, MAPIFolder &folder);
 	static LONG WINAPI UnhandledExceptionFilter(LPEXCEPTION_POINTERS pExPtrs);
 	static void internalInit();

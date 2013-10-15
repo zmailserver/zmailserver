@@ -15,9 +15,9 @@
 using System;
 using System.Xml;
 
-using Zimbra.Client.Soap;
+using Zmail.Client.Soap;
 
-namespace Zimbra.Client
+namespace Zmail.Client
 {
 
 	public class RequestEnvelope

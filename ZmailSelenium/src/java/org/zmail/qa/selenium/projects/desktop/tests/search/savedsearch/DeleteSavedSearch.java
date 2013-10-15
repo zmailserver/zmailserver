@@ -14,18 +14,18 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.search.savedsearch;
+package org.zmail.qa.selenium.projects.desktop.tests.search.savedsearch;
 
 import java.util.List;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.SavedSearchFolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.SavedSearchFolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
 
 
 //TODO: add more in ContactItem.java
@@ -50,12 +50,12 @@ public class DeleteSavedSearch extends AjaxCommonTest  {
 				
 			
 		// Create the message data to be sent
-		String name = "search" + ZimbraSeleniumProperties.getUniqueString();
-		String query = "subject:(" + ZimbraSeleniumProperties.getUniqueString() + ")";
+		String name = "search" + ZmailSeleniumProperties.getUniqueString();
+		String query = "subject:(" + ZmailSeleniumProperties.getUniqueString() + ")";
 		
 
 		app.zGetActiveAccount().soapSend(
-				"<CreateSearchFolderRequest xmlns='urn:zimbraMail'>" +
+				"<CreateSearchFolderRequest xmlns='urn:zmailMail'>" +
 					"<search name='"+ name +"' query='"+ query +"' l='1'/>" +
 				"</CreateSearchFolderRequest>");
 		

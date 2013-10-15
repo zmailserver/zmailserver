@@ -14,7 +14,7 @@
 # 
 #!/usr/bin/perl
 
-package Zimbra::Mon::Logger;
+package Zmail::Mon::Logger;
 
 use strict;
 
@@ -25,7 +25,7 @@ require Exporter;
 
 my @ISA = qw(Exporter);
 
-my $ident="zimbramon";
+my $ident="zmailmon";
 my $facility="local0";
 my $stats_facility = "local1";
 

@@ -9,7 +9,7 @@ BUILD   = build
 
 BUILD_ROOT := $(shell pwd)
 
-BUILD_PLATFORM := $(shell sh $(BUILD_ROOT)/../ZimbraBuild/rpmconf/Build/get_plat_tag.sh)
+BUILD_PLATFORM := $(shell sh $(BUILD_ROOT)/../ZmailBuild/rpmconf/Build/get_plat_tag.sh)
 
 ifeq ($(BUILD_PLATFORM), MACOSX)
 MACDEF := -DDARWIN
@@ -31,16 +31,16 @@ all: $(BUILD) $(BUILD)/zmmailboxdmgr $(BUILD)/zmmailboxdmgr.unrestricted
 $(BUILD):
 	mkdir $(BUILD)
 
-JAVA_BINARY ?= /opt/zimbra/java/bin/java
-MAILBOXD_MANAGER_PIDFILE ?= /opt/zimbra/log/zmmailboxd_manager.pid
-MAILBOXD_MANAGER_DEPRECATED_PIDFILE ?= /opt/zimbra/log/zmmailboxd.pid
-MAILBOXD_JAVA_PIDFILE ?= /opt/zimbra/log/zmmailboxd_java.pid
-MAILBOXD_CWD ?= /opt/zimbra/log
-MAILBOXD_HOME ?= /opt/zimbra/mailboxd
-MAILBOXD_OUTFILE ?= /opt/zimbra/log/zmmailboxd.out
-ZIMBRA_LIB ?= /opt/zimbra/lib
-ZIMBRA_USER ?= zimbra
-ZIMBRA_CONFIG ?= /opt/zimbra/conf/localconfig.xml
+JAVA_BINARY ?= /opt/zmail/java/bin/java
+MAILBOXD_MANAGER_PIDFILE ?= /opt/zmail/log/zmmailboxd_manager.pid
+MAILBOXD_MANAGER_DEPRECATED_PIDFILE ?= /opt/zmail/log/zmmailboxd.pid
+MAILBOXD_JAVA_PIDFILE ?= /opt/zmail/log/zmmailboxd_java.pid
+MAILBOXD_CWD ?= /opt/zmail/log
+MAILBOXD_HOME ?= /opt/zmail/mailboxd
+MAILBOXD_OUTFILE ?= /opt/zmail/log/zmmailboxd.out
+ZIMBRA_LIB ?= /opt/zmail/lib
+ZIMBRA_USER ?= zmail
+ZIMBRA_CONFIG ?= /opt/zmail/conf/localconfig.xml
 
 LAUNCHER_CFLAGS = \
 	-DJAVA_BINARY='"$(JAVA_BINARY)"' \

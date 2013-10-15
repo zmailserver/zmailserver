@@ -17,8 +17,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="app" uri="com.zimbra.htmlextras" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
+<%@ taglib prefix="app" uri="org.zmail.htmlextras" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
 
 <c:set var="ids" value="${fn:join(paramValues.id, ',')}"/>
 <c:choose>

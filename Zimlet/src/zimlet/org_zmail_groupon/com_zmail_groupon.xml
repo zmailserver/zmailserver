@@ -14,7 +14,7 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_groupon"
+<zimlet name="org_zmail_groupon"
         label="Groupon"
         version="0.2"
         description="Displays amazing daily deals from Groupon">
@@ -23,7 +23,7 @@
 	<include>widgets/grouponApp.js</include>
 	<include>templates/Groupon.template.js</include>
 	<includeCSS>groupon.css</includeCSS>
-	<handlerObject>com_zimbra_groupon_handlerObject</handlerObject>
+	<handlerObject>org_zmail_groupon_handlerObject</handlerObject>
 	<zimletPanelItem label="${msg.label}" icon="GrouponIcon">
 	</zimletPanelItem>
 	<userProperties>

@@ -75,7 +75,7 @@
   <topic name="Weeknummers in agenda weergeven" url="Calendar/Viewing_Calendar_Week_Numbers.htm" />
 </key>
 <key name="Navigeren, met het toetsenbord" >
-  <topic name="Sneltoetsen in de Zimbra-webclient" url="Navigation_folders_and_tips/Keyboard_Shortcut_Keys.htm" />
+  <topic name="Sneltoetsen in de Zmail-webclient" url="Navigation_folders_and_tips/Keyboard_Shortcut_Keys.htm" />
 </key>
 <key name="Nieuwe berichten" >
   <topic name="Hoe weet je dat je nieuwe e-mail hebt?" url="reading_mail/how_to_tell_when_you_ve_got_new_mail.htm" />
@@ -181,7 +181,7 @@
   <topic name="Snel zoeken" url="Search/Quick_search.htm" />
 </key>
 <key name="Sneltoetsen" >
-  <topic name="Sneltoetsen in de Zimbra-webclient" url="Navigation_folders_and_tips/Keyboard_Shortcut_Keys.htm" />
+  <topic name="Sneltoetsen in de Zmail-webclient" url="Navigation_folders_and_tips/Keyboard_Shortcut_Keys.htm" />
 </key>
 <key name="Sorteren, taken" >
   <topic name="Taken sorteren " url="Tasks/Sorting_tasks_.htm" />
@@ -199,7 +199,7 @@
   <topic name="Terugkerende afspraken wijzigen" url="Calendar/Deleting_recurring_appointments.htm" />
 </key>
 <key name="Toetsenbordsneltoetsen" >
-  <topic name="Sneltoetsen in de Zimbra-webclient" url="Navigation_folders_and_tips/Keyboard_Shortcut_Keys.htm" />
+  <topic name="Sneltoetsen in de Zmail-webclient" url="Navigation_folders_and_tips/Keyboard_Shortcut_Keys.htm" />
 </key>
 <key name="toevoegen, bestanden van Aktetas" >
   <topic name="Bestanden als bijlage toevoegen" url="Creating_Messages/attaching_files_to_a_mail_message.htm" />

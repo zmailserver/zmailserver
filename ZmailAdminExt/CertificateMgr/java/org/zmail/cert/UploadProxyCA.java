@@ -16,26 +16,26 @@
  */
 
 
-package com.zimbra.cert;
+package org.zmail.cert;
 
 import java.io.IOException;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.CertMgrConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.service.FileUploadServlet;
-import com.zimbra.cs.service.FileUploadServlet.Upload;
-import com.zimbra.cs.service.admin.AdminDocumentHandler;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.CertMgrConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.service.FileUploadServlet;
+import org.zmail.cs.service.FileUploadServlet.Upload;
+import org.zmail.cs.service.admin.AdminDocumentHandler;
+import org.zmail.soap.ZmailSoapContext;
 
 public class UploadProxyCA extends AdminDocumentHandler {
 
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext lc = getZimbraSoapContext(context);
+        ZmailSoapContext lc = getZmailSoapContext(context);
         Element response = lc.createElement(CertMgrConstants.UPLOAD_PROXYCA_RESPONSE);
 
         String attachId = null;
@@ -45,7 +45,7 @@ public class UploadProxyCA extends AdminDocumentHandler {
         try {
             attachId = request.getAttribute(CertMgrConstants.A_CERT_AID);
             filename = request.getAttribute(CertMgrConstants.A_CERT_NAME);
-            ZimbraLog.security.debug("Found certificate Filename  = " + filename + "; attid = " + attachId );
+            ZmailLog.security.debug("Found certificate Filename  = " + filename + "; attid = " + attachId );
 
             up = FileUploadServlet.fetchUpload(lc.getAuthtokenAccountId(), attachId, lc.getAuthToken());
             if (up == null)

@@ -12,9 +12,9 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.jsp;
+package org.zmail.cs.offline.jsp;
 
-import com.zimbra.soap.admin.type.DataSourceType;
+import org.zmail.soap.admin.type.DataSourceType;
 
 public class PopBean extends XmailBean {
     public PopBean() {

@@ -1,6 +1,6 @@
 Date: Thu, 29 Mar 2012 15:40:12 -0700 (PDT)
-From: foo@zimbra.com
-To: bar@zimbra.com
+From: foo@zmail.com
+To: bar@zmail.com
 Subject: bug72233
 MIME-Version: 1.0
 Content-Type: multipart/alternative; 

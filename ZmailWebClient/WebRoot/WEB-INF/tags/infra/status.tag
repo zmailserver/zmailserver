@@ -16,8 +16,8 @@
 <%@ attribute name="style" rtexprvalue="true" required="false" %>
 <%@ attribute name="html" rtexprvalue="true" required="false" %>
 <%@ attribute name="block" rtexprvalue="true" required="false" %>
-<%@ taglib prefix="app" uri="com.zimbra.htmlclient" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
+<%@ taglib prefix="app" uri="org.zmail.htmlclient" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="statusMessage" scope="request"><jsp:doBody/></c:set>

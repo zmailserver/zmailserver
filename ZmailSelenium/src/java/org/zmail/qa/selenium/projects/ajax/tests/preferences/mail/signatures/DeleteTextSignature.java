@@ -14,27 +14,27 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.preferences.mail.signatures;
+package org.zmail.qa.selenium.projects.ajax.tests.preferences.mail.signatures;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.SignatureItem;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount.SOAP_DESTINATION_HOST_TYPE;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
-import com.zimbra.qa.selenium.projects.ajax.ui.preferences.signature.FormSignatureNew;
-import com.zimbra.qa.selenium.projects.ajax.ui.preferences.signature.PageSignature.Locators;
+import org.zmail.qa.selenium.framework.items.SignatureItem;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.framework.util.ZmailAccount.SOAP_DESTINATION_HOST_TYPE;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
+import org.zmail.qa.selenium.projects.ajax.ui.preferences.signature.FormSignatureNew;
+import org.zmail.qa.selenium.projects.ajax.ui.preferences.signature.PageSignature.Locators;
 
 public class DeleteTextSignature extends AjaxCommonTest {
-	String sigName = "signame" + ZimbraSeleniumProperties.getUniqueString();
-	String sigBody = "sigbody" + ZimbraSeleniumProperties.getUniqueString();
+	String sigName = "signame" + ZmailSeleniumProperties.getUniqueString();
+	String sigBody = "sigbody" + ZmailSeleniumProperties.getUniqueString();
 
 	public DeleteTextSignature() throws HarnessException{
 		super.startingPage = app.zPagePreferences;
@@ -49,9 +49,9 @@ public class DeleteTextSignature extends AjaxCommonTest {
 	@BeforeClass(groups = { "always" })
 	public void CreateSignature() throws HarnessException {
 		System.out.println(this.sigName);
-		ZimbraAccount.AccountZWC().authenticate(SOAP_DESTINATION_HOST_TYPE.SERVER);
-		ZimbraAccount.AccountZWC().soapSend(
-				"<CreateSignatureRequest xmlns='urn:zimbraAccount'>"
+		ZmailAccount.AccountZWC().authenticate(SOAP_DESTINATION_HOST_TYPE.SERVER);
+		ZmailAccount.AccountZWC().soapSend(
+				"<CreateSignatureRequest xmlns='urn:zmailAccount'>"
 				+ "<signature name='" + this.sigName + "' >"
 				+ "<content type='text/plain'>" + this.sigBody
 				+ "</content>" + "</signature>"
@@ -90,7 +90,7 @@ public class DeleteTextSignature extends AjaxCommonTest {
 		signew.zSubmit();
 
 		// To check whether deleted signature is exist
-		app.zGetActiveAccount().soapSend("<GetSignaturesRequest xmlns='urn:zimbraAccount'/>");
+		app.zGetActiveAccount().soapSend("<GetSignaturesRequest xmlns='urn:zmailAccount'/>");
 
 		String signame = app.zGetActiveAccount().soapSelectValue("//acct:signature[@name='" + this.sigName + "']","name");
 		ZAssert.assertNull(signame, "Verify  signature is deleted");

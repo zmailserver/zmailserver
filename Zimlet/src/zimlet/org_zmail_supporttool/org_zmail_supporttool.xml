@@ -14,13 +14,13 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_supporttool"
+<zimlet name="org_zmail_supporttool"
         version="0.4"
         label="${msg.label}"
         description="${msg.description}">
-    <include>com_zimbra_supporttool.js</include>
-    <includeCSS>com_zimbra_supporttool.css</includeCSS>
-    <handlerObject>com_zimbra_supporttool_HandlerObject</handlerObject>
+    <include>org_zmail_supporttool.js</include>
+    <includeCSS>org_zmail_supporttool.css</includeCSS>
+    <handlerObject>org_zmail_supporttool_HandlerObject</handlerObject>
 
     <zimletPanelItem label="${msg.SupportToolZimlet_label}" icon="supporttool-panelIcon">
         <toolTipText>${msg.SupportToolZimlet_tooltip}</toolTipText>

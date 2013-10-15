@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.offline;
+package org.zmail.cs.service.offline;
 
 import java.util.Map;
 import java.util.UUID;
@@ -21,27 +21,27 @@ import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.mailbox.ACL;
-import com.zimbra.cs.mailbox.Flag;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.ZcsMailbox;
-import com.zimbra.cs.mime.Mime;
-import com.zimbra.cs.offline.OfflineLC;
-import com.zimbra.cs.offline.OfflineLog;
-import com.zimbra.cs.service.mail.SendDeliveryReport;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.util.AccountUtil;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.mailbox.ACL;
+import org.zmail.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.ZcsMailbox;
+import org.zmail.cs.mime.Mime;
+import org.zmail.cs.offline.OfflineLC;
+import org.zmail.cs.offline.OfflineLog;
+import org.zmail.cs.service.mail.SendDeliveryReport;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.util.AccountUtil;
+import org.zmail.soap.ZmailSoapContext;
 
 /**
  * @author vmahajan
@@ -49,13 +49,13 @@ import com.zimbra.soap.ZimbraSoapContext;
 public class OfflineSendDeliveryReport extends SendDeliveryReport {
 
     @Override
-    protected Account getSenderAccount(ZimbraSoapContext zsc) throws ServiceException {
+    protected Account getSenderAccount(ZmailSoapContext zsc) throws ServiceException {
         return getRequestedAccount(zsc);
     }
 
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Mailbox mbox = getRequestedMailbox(zsc);
         OperationContext octxt = getOperationContext(zsc, context);
 
@@ -135,7 +135,7 @@ public class OfflineSendDeliveryReport extends SendDeliveryReport {
 
     private synchronized String getSelfUri() {
         if (selfUri == null)
-            selfUri = "http://127.0.0.1:" + LC.zimbra_admin_service_port.intValue() + "/service/soap";
+            selfUri = "http://127.0.0.1:" + LC.zmail_admin_service_port.intValue() + "/service/soap";
         return selfUri;
     }
 }

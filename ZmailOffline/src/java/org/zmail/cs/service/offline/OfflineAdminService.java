@@ -16,12 +16,12 @@
 /*
  * Created on Jul 30, 2010
  */
-package com.zimbra.cs.service.offline;
+package org.zmail.cs.service.offline;
 
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.cs.offline.common.OfflineConstants;
-import com.zimbra.cs.service.admin.AdminService;
-import com.zimbra.soap.DocumentDispatcher;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.cs.offline.common.OfflineConstants;
+import org.zmail.cs.service.admin.AdminService;
+import org.zmail.soap.DocumentDispatcher;
 
 public class OfflineAdminService extends AdminService {
 

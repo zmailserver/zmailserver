@@ -14,21 +14,21 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.addressbook.contacts;
+package org.zmail.qa.selenium.projects.desktop.tests.addressbook.contacts;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.ContactItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.GeneralUtility;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount.SOAP_DESTINATION_HOST_TYPE;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.framework.items.ContactItem;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.GeneralUtility;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.framework.util.ZmailAccount.SOAP_DESTINATION_HOST_TYPE;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
 
 public class UnTagContact extends AjaxCommonTest  {
 	public UnTagContact() {
@@ -51,7 +51,7 @@ public class UnTagContact extends AjaxCommonTest  {
       
       // Create a tag via soap
        app.zGetActiveAccount().soapSend(
-         "<CreateTagRequest xmlns='urn:zimbraMail'>" +
+         "<CreateTagRequest xmlns='urn:zmailMail'>" +
                "<tag name='"+ tagName +"' color='1' />" +
             "</CreateTagRequest>",
             destType,
@@ -60,16 +60,16 @@ public class UnTagContact extends AjaxCommonTest  {
              "//mail:CreateTagResponse/mail:tag", "id");
 
        String tagParam = " t='" + tagid + "'";;
-       String firstName = "first" + ZimbraSeleniumProperties.getUniqueString();     
-       String lastName = "last" + ZimbraSeleniumProperties.getUniqueString();
-       String email = "email" +  ZimbraSeleniumProperties.getUniqueString() +
-             "@zimbra.com";
+       String firstName = "first" + ZmailSeleniumProperties.getUniqueString();     
+       String lastName = "last" + ZmailSeleniumProperties.getUniqueString();
+       String email = "email" +  ZmailSeleniumProperties.getUniqueString() +
+             "@zmail.com";
    
         //default value for file as is last, first
        String fileAs = lastName + ", " + firstName;
 
         app.zGetActiveAccount().soapSend(
-            "<CreateContactRequest xmlns='urn:zimbraMail'>" +
+            "<CreateContactRequest xmlns='urn:zmailMail'>" +
             "<cn " + tagParam + " fileAsStr='" + fileAs + "' >" +
             "<a n='firstName'>" + firstName +"</a>" +
             "<a n='lastName'>" + lastName +"</a>" +
@@ -94,7 +94,7 @@ public class UnTagContact extends AjaxCommonTest  {
               accountName);
 
         if (accountName == null ||
-              !accountName.equals(ZimbraAccount.clientAccountName)) {
+              !accountName.equals(ZmailAccount.clientAccountName)) {
            GeneralUtility.syncDesktopToZcsWithSoap(app.zGetActiveAccount());
            app.zPageAddressbook.zWaitForDesktopLoadingSpinner(5000);
         }
@@ -124,7 +124,7 @@ public class UnTagContact extends AjaxCommonTest  {
 	   app.zPageAddressbook.zWaitForDesktopLoadingSpinner(5000);
 
 	   app.zGetActiveAccount().soapSend(
-	         "<GetContactsRequest xmlns='urn:zimbraMail'>" +
+	         "<GetContactsRequest xmlns='urn:zmailMail'>" +
 	         "<cn id='"+ contactItem.getId() +"'/>" +
 	         "</GetContactsRequest>",
             destType,
@@ -137,7 +137,7 @@ public class UnTagContact extends AjaxCommonTest  {
 	@Test(	description = "Untag a contact by click Toolbar Tag, then select Remove Tag",
 			groups = { "smoke" })
 	public void clickToolbarTagRemoveTag() throws HarnessException {
-      String tagName = "tag"+ ZimbraSeleniumProperties.getUniqueString();
+      String tagName = "tag"+ ZmailSeleniumProperties.getUniqueString();
       
       ContactItem contactItem = createContactWithTag(tagName);
 
@@ -150,7 +150,7 @@ public class UnTagContact extends AjaxCommonTest  {
 	@Test(  description = "Untag a contact by click Tag->Remove Tag on context menu",
          groups = { "smoke" })
    public void clickContextMenuTagRemoveTag() throws HarnessException {
-       String tagName = "tag"+ ZimbraSeleniumProperties.getUniqueString();
+       String tagName = "tag"+ ZmailSeleniumProperties.getUniqueString();
       
         ContactItem contactItem = createContactWithTag(tagName);
 
@@ -163,12 +163,12 @@ public class UnTagContact extends AjaxCommonTest  {
    @Test(   description = "Untag a Local Folders' contact by click Toolbar Tag, then select Remove Tag",
          groups = { "smoke" })
    public void LocalClickToolbarTagRemoveTag() throws HarnessException {
-      String tagName = "tag"+ ZimbraSeleniumProperties.getUniqueString();
+      String tagName = "tag"+ ZmailSeleniumProperties.getUniqueString();
       
       ContactItem contactItem = createContactWithTag(
             tagName,
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
 
       // Untag it
       app.zPageAddressbook.zToolbarPressPulldown(Button.B_TAG, Button.O_TAG_REMOVETAG);
@@ -176,18 +176,18 @@ public class UnTagContact extends AjaxCommonTest  {
       VerifyTagRemove(tagName,
             contactItem,
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
    }
 
    @Test(  description = "Untag a Local Folders' contact by click Tag->Remove Tag on context menu",
          groups = { "smoke" })
    public void LocalClickContextMenuTagRemoveTag() throws HarnessException {
-       String tagName = "tag"+ ZimbraSeleniumProperties.getUniqueString();
+       String tagName = "tag"+ ZmailSeleniumProperties.getUniqueString();
       
         ContactItem contactItem = createContactWithTag(
               tagName,
               SOAP_DESTINATION_HOST_TYPE.CLIENT,
-              ZimbraAccount.clientAccountName);
+              ZmailAccount.clientAccountName);
 
         // Untag it
         app.zPageAddressbook.zListItem(Action.A_RIGHTCLICK, Button.B_TAG, Button.O_TAG_REMOVETAG , contactItem.fileAs);
@@ -195,7 +195,7 @@ public class UnTagContact extends AjaxCommonTest  {
         VerifyTagRemove(tagName,
               contactItem,
               SOAP_DESTINATION_HOST_TYPE.CLIENT,
-              ZimbraAccount.clientAccountName);   
+              ZmailAccount.clientAccountName);   
    }
 }
 

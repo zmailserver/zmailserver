@@ -22,8 +22,8 @@ Quotas
 EOT
 
 # User to run this daemon as
-user=@@zimbra_user@@
-group=@@zimbra_user@@
+user=@@zmail_user@@
+group=@@zmail_user@@
 
 # Filename to store pid of parent process
 pid_file=@@cbpolicyd_pid_file@@

@@ -3478,7 +3478,7 @@ DEFINITIONS
 - "Software" refers to the JTNEF Java TNEF package.
 - "Author" and "Licensor" refers to Amichai Rothman, who is the author of the
 software, or someone explicitly assigned by him to manage the software.
-- "You", "User" and "Your" refer to Zimbra, Inc. of San Mateo, CA.
+- "You", "User" and "Your" refer to Zmail, Inc. of San Mateo, CA.
 - "Derived Work" refers to this software, or any other software derived from,
 based on, or containing this software.
 

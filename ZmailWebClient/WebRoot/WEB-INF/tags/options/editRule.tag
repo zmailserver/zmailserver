@@ -13,13 +13,13 @@
  * ***** END LICENSE BLOCK *****
 --%>
 <%@ tag body-content="empty" %>
-<%@ attribute name="rule" rtexprvalue="true" required="true" type="com.zimbra.client.ZFilterRule" %>
-<%@ attribute name="mailbox" rtexprvalue="true" required="true" type="com.zimbra.cs.taglib.bean.ZMailboxBean" %>
+<%@ attribute name="rule" rtexprvalue="true" required="true" type="org.zmail.client.ZFilterRule" %>
+<%@ attribute name="mailbox" rtexprvalue="true" required="true" type="org.zmail.cs.taglib.bean.ZMailboxBean" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
-<%@ taglib prefix="app" uri="com.zimbra.htmlclient" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
+<%@ taglib prefix="app" uri="org.zmail.htmlclient" %>
 <%--
 
 param values:
@@ -470,7 +470,7 @@ action_stop                         stop checkbox (true)
                         <select name="action_add">
                             <option value="select"><fmt:message key="EFILT_NEW_ACTION_SELECT"/>
                             <option value="keep"><fmt:message key="EFILT_NEW_ACTION_KEEP"/>
-                            <%--Display discard action only if zimbraFeatureDiscardInFiltersEnabled is true--%>
+                            <%--Display discard action only if zmailFeatureDiscardInFiltersEnabled is true--%>
                             <c:if test="${mailbox.features.discardFilterEnabled eq true}">
                                 <option value="discard"><fmt:message key="EFILT_NEW_ACTION_DISCARD"/>
                             </c:if>

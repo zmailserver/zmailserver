@@ -14,19 +14,19 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.zimlets.url;
+package org.zmail.qa.selenium.projects.ajax.tests.zimlets.url;
 
 import java.io.File;
 import java.util.*;
 
 import org.testng.annotations.*;
 
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.DisplayMail;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.DisplayMail.Field;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.DisplayMail;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.DisplayMail.Field;
 
 
 public class GetMessage extends AjaxCommonTest {
@@ -41,7 +41,7 @@ public class GetMessage extends AjaxCommonTest {
 
 		// Basic settings
 		super.startingAccountPreferences = new HashMap<String, String>() {{
-		    put("zimbraPrefGroupMailBy", "message");
+		    put("zmailPrefGroupMailBy", "message");
 		}};
 
 
@@ -53,13 +53,13 @@ public class GetMessage extends AjaxCommonTest {
 	public void GetMessage_01() throws HarnessException {
 		
 		// Create the message data to be sent
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
 		String url = "http://www.vmware.com";
-		String body = "text " + System.getProperty("line.separator") + url + System.getProperty("line.separator") + "text"+ ZimbraSeleniumProperties.getUniqueString() + System.getProperty("line.separator") ;
+		String body = "text " + System.getProperty("line.separator") + url + System.getProperty("line.separator") + "text"+ ZmailSeleniumProperties.getUniqueString() + System.getProperty("line.separator") ;
 		
 		// Send the message from AccountA to the ZWC user
-		ZimbraAccount.AccountA().soapSend(
-					"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+		ZmailAccount.AccountA().soapSend(
+					"<SendMsgRequest xmlns='urn:zmailMail'>" +
 						"<m>" +
 							"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 							"<su>"+ subject +"</su>" +
@@ -95,14 +95,14 @@ public class GetMessage extends AjaxCommonTest {
 	public void GetMessage_02() throws HarnessException {
 		
 		// Create the message data to be sent
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
 		String url1 = "http://www.vmware.com";
 		String url2 = "http://www.google.com";
 		String body = "url1: " + url1 + " url2: "+ url2;
 		
 		// Send the message from AccountA to the ZWC user
-		ZimbraAccount.AccountA().soapSend(
-					"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+		ZmailAccount.AccountA().soapSend(
+					"<SendMsgRequest xmlns='urn:zmailMail'>" +
 						"<m>" +
 							"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 							"<su>"+ subject +"</su>" +
@@ -125,7 +125,7 @@ public class GetMessage extends AjaxCommonTest {
 		HtmlElement bodyElement = display.zGetMailPropertyAsHtml(Field.Body);
 		
 		// Verify that the phone zimlet has been applied
-		// <a href="callto:1-877-486-9273" onclick="window.top.Com_Zimbra_Phone.unsetOnbeforeunload()">1-877-486-9273</a>
+		// <a href="callto:1-877-486-9273" onclick="window.top.Com_Zmail_Phone.unsetOnbeforeunload()">1-877-486-9273</a>
 		HtmlElement.evaluate(bodyElement, "//a[@href='"+ url1 +"']", null, (String)null, 1);
 		HtmlElement.evaluate(bodyElement, "//a[@href='"+ url1 +"']", "target", "_blank", 1);
 		HtmlElement.evaluate(bodyElement, "//a[@href='"+ url1 +"']", null, url1, 1);
@@ -142,7 +142,7 @@ public class GetMessage extends AjaxCommonTest {
 	public void GetMessage_03() throws HarnessException {
 
 		final String subject = "subject12955323015009";
-		final String mime = ZimbraSeleniumProperties.getBaseDirectory() + "/data/public/mime/url01/valid_url.txt";
+		final String mime = ZmailSeleniumProperties.getBaseDirectory() + "/data/public/mime/url01/valid_url.txt";
 		final String url1 = "http://www.vmware.com";
 		final String url2 = "https://www.vmware.com";
 		
@@ -162,7 +162,7 @@ public class GetMessage extends AjaxCommonTest {
 		HtmlElement bodyElement = display.zGetMailPropertyAsHtml(Field.Body);
 		
 		// Verify that the phone zimlet has been applied
-		// <a href="callto:1-877-486-9273" onclick="window.top.Com_Zimbra_Phone.unsetOnbeforeunload()">1-877-486-9273</a>
+		// <a href="callto:1-877-486-9273" onclick="window.top.Com_Zmail_Phone.unsetOnbeforeunload()">1-877-486-9273</a>
 		HtmlElement.evaluate(bodyElement, "//a[@href='"+ url1 +"']", null, (String)null, 1);
 		HtmlElement.evaluate(bodyElement, "//a[@href='"+ url1 +"']", "target", "_blank", 1);
 		HtmlElement.evaluate(bodyElement, "//a[@href='"+ url1 +"']", null, url1, 1);
@@ -179,7 +179,7 @@ public class GetMessage extends AjaxCommonTest {
 	public void GetMessage_04() throws HarnessException {
 
 		final String subject = "subject12976223025009";
-		final String mime = ZimbraSeleniumProperties.getBaseDirectory() + "/data/public/mime/url01/invalid_url.txt";
+		final String mime = ZmailSeleniumProperties.getBaseDirectory() + "/data/public/mime/url01/invalid_url.txt";
 		
 		// Inject the example message
 		LmtpInject.injectFile(app.zGetActiveAccount().EmailAddress, new File(mime));
@@ -214,13 +214,13 @@ public class GetMessage extends AjaxCommonTest {
 		String subject = "subject " + url;
 		
 		// Send the message from AccountA to the ZWC user
-		ZimbraAccount.AccountA().soapSend(
-					"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+		ZmailAccount.AccountA().soapSend(
+					"<SendMsgRequest xmlns='urn:zmailMail'>" +
 						"<m>" +
 							"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 							"<su>"+ subject +"</su>" +
 							"<mp ct='text/plain'>" +
-								"<content>content"+ ZimbraSeleniumProperties.getUniqueString() +"</content>" +
+								"<content>content"+ ZmailSeleniumProperties.getUniqueString() +"</content>" +
 							"</mp>" +
 						"</m>" +
 					"</SendMsgRequest>");
@@ -235,7 +235,7 @@ public class GetMessage extends AjaxCommonTest {
 		SleepUtil.sleep(5000);
 		
 		// Find the subject and the phone span
-		String locator = "css=span[id$='_com_zimbra_url']";
+		String locator = "css=span[id$='_org_zmail_url']";
 		
 		ZAssert.assertTrue(display.sIsElementPresent(locator), "Verify the phone zimlet applies to the subject");
 		ZAssert.assertEquals(display.sGetText(locator), url, "Verify the phone zimlet highlights the phone number");
@@ -249,14 +249,14 @@ public class GetMessage extends AjaxCommonTest {
 	public void GetMessage_06() throws HarnessException {
 		
 		// Create the message data to be sent
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
 		String url = "http://www.vmware.com";
-		String body = "text &lt;" + url + "&gt; text "+ ZimbraSeleniumProperties.getUniqueString();
+		String body = "text &lt;" + url + "&gt; text "+ ZmailSeleniumProperties.getUniqueString();
 				
 		
 		// Send the message from AccountA to the ZWC user
-		ZimbraAccount.AccountA().soapSend(
-					"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+		ZmailAccount.AccountA().soapSend(
+					"<SendMsgRequest xmlns='urn:zmailMail'>" +
 						"<m>" +
 							"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 							"<su>"+ subject +"</su>" +

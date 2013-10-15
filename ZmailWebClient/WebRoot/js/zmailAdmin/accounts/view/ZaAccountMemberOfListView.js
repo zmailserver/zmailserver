@@ -69,8 +69,8 @@ function(resp) {
 			} else{
 				directML[d] = { name: dls[m].name, id: dls[m].id } ;
                 var attrs = ZaItem.initAttrsFromJS (dls[m]) ;
-                if (attrs["zimbraIsAdminGroup"] != null) {
-                	directML[d]["zimbraIsAdminGroup"] = attrs["zimbraIsAdminGroup"] ; 
+                if (attrs["zmailIsAdminGroup"] != null) {
+                	directML[d]["zmailIsAdminGroup"] = attrs["zmailIsAdminGroup"] ; 
                 }
                 d ++ ;
 			}
@@ -96,7 +96,7 @@ function (val, by){
 	var nonML = [];
 		 
 	try {
-		soapDoc = AjxSoapDoc.create("GetAccountMembershipRequest", ZaZimbraAdmin.URN, null);
+		soapDoc = AjxSoapDoc.create("GetAccountMembershipRequest", ZaZmailAdmin.URN, null);
 		var elBy = soapDoc.set("account", val);
 		elBy.setAttribute("by", by);
 
@@ -118,8 +118,8 @@ function (val, by){
 				}else{
 					directML[d] = { name: dls[m].name, id: dls[m].id } ;
                     var attrs = ZaItem.initAttrsFromJS (dls[m]) ;
-                    if (attrs["zimbraIsAdminGroup"] != null) {
-                        directML[d]["zimbraIsAdminGroup"] = attrs["zimbraIsAdminGroup"] ; 
+                    if (attrs["zmailIsAdminGroup"] != null) {
+                        directML[d]["zmailIsAdminGroup"] = attrs["zmailIsAdminGroup"] ; 
                     }
                     d ++ ;
 				}
@@ -144,7 +144,7 @@ function (val, by){
 	var nonML = [];
 		 
 	try {
-		soapDoc = AjxSoapDoc.create("GetDistributionListMembershipRequest", ZaZimbraAdmin.URN, null);
+		soapDoc = AjxSoapDoc.create("GetDistributionListMembershipRequest", ZaZmailAdmin.URN, null);
 		var elBy = soapDoc.set("dl", val);
 		elBy.setAttribute("by", by);
 
@@ -506,7 +506,7 @@ function (account, addArray) {
 	var addMemberSoapDoc, r, addMemberSoapDoc;
 	var command = new ZmCsfeCommand();
 	for (var i = 0; i < len; ++i) {
-		addMemberSoapDoc = AjxSoapDoc.create("AddDistributionListMemberRequest", ZaZimbraAdmin.URN, null);
+		addMemberSoapDoc = AjxSoapDoc.create("AddDistributionListMemberRequest", ZaZmailAdmin.URN, null);
 		addMemberSoapDoc.set("id", addArray[i].id); //group id 
 		addMemberSoapDoc.set("dlm", account.name); //account name
 		var params = new Object();
@@ -526,7 +526,7 @@ function (account, removeArray){
 	var addMemberSoapDoc, r, removeMemberSoapDoc;
 	var command = new ZmCsfeCommand();	
 	for (var i = 0; i < len; ++i) {
-		removeMemberSoapDoc = AjxSoapDoc.create("RemoveDistributionListMemberRequest", ZaZimbraAdmin.URN, null);
+		removeMemberSoapDoc = AjxSoapDoc.create("RemoveDistributionListMemberRequest", ZaZmailAdmin.URN, null);
 		removeMemberSoapDoc.set("id", removeArray[i].id);
 		removeMemberSoapDoc.set("dlm", account.name);
 		var params = new Object();
@@ -600,7 +600,7 @@ function (rawQueryString) {
 		rawQueryString = "";
 	}
 
-	return "(&" + rawQueryString + "(!(zimbraIsACLGroup=FALSE)))";
+	return "(&" + rawQueryString + "(!(zmailIsACLGroup=FALSE)))";
 }
 
 /**
@@ -634,7 +634,7 @@ function (item, offset){
 				}
 			}
 			
-			var attrs = [ZaAccount.A_name, ZaItem.A_zimbraId];
+			var attrs = [ZaAccount.A_name, ZaItem.A_zmailId];
 			//var attrs = [""];
 			var valStr = curInstance[ZaSearch.A_query];
 			var queryTypes = [ZaSearch.DLS] ;

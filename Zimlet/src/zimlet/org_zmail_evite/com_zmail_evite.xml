@@ -14,13 +14,13 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_evite"
+<zimlet name="org_zmail_evite"
         version="1.5"
         label="${msg.label}"
         description="${msg.description}">
     <include>evite.js</include>
     <includeCSS>evite.css</includeCSS>
-    <handlerObject>Com_Zimbra_Evite_HandlerObject</handlerObject>
+    <handlerObject>Com_Zmail_Evite_HandlerObject</handlerObject>
     <zimletPanelItem label="${msg.EviteZimlet_label}" icon="Evite-panelIcon">
         <toolTipText>${msg.EviteZimlet_panelTooltip}</toolTipText>
         <contextMenu>

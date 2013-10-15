@@ -80,7 +80,7 @@ public class Log {
     Tasks = 0x0008, Calendar = 0x0004, Contacts = 0x0002, Mail = 0x0001, None = 0x0000
 }
 
-public enum ZimbraFolders
+public enum ZmailFolders
 {
     Min = 0, UserRoot = 1, Inbox = 2, Trash = 3, Junk = 4, Sent = 5, Drafts = 6,
     Contacts = 7, Tags = 8, Conversations = 9, Calendar = 10, MailboxRoot = 11, Wiki = 12,
@@ -265,17 +265,17 @@ public class CSMigrationWrapper
 
     private bool SkipFolder(MigrationOptions options, List<string> skipList, dynamic folder) {
         // Note that Rules and OOO do not apply here
-        if ((folder.Id == (int)ZimbraFolders.Calendar &&
+        if ((folder.Id == (int)ZmailFolders.Calendar &&
             !options.ItemsAndFolders.HasFlag(ItemsAndFoldersOptions.Calendar)) ||
-            (folder.Id == (int)ZimbraFolders.Contacts &&
+            (folder.Id == (int)ZmailFolders.Contacts &&
             !options.ItemsAndFolders.HasFlag(ItemsAndFoldersOptions.Contacts)) ||
-            (folder.Id == (int)ZimbraFolders.Junk &&
+            (folder.Id == (int)ZmailFolders.Junk &&
             !options.ItemsAndFolders.HasFlag(ItemsAndFoldersOptions.Junk)) ||
-            (folder.Id == (int)ZimbraFolders.Sent &&
+            (folder.Id == (int)ZmailFolders.Sent &&
             !options.ItemsAndFolders.HasFlag(ItemsAndFoldersOptions.Sent)) ||
-            (folder.Id == (int)ZimbraFolders.Tasks &&
+            (folder.Id == (int)ZmailFolders.Tasks &&
             !options.ItemsAndFolders.HasFlag(ItemsAndFoldersOptions.Tasks)) ||
-            (folder.Id == (int)ZimbraFolders.Trash &&
+            (folder.Id == (int)ZmailFolders.Trash &&
             !options.ItemsAndFolders.HasFlag(ItemsAndFoldersOptions.DeletedItems)) ||
             // FBS NOTE THAT THESE ARE EXCHANGE SPECIFIC and need to be removed
             (folder.ContainerClass == "IPF.Contact" &&
@@ -316,7 +316,7 @@ public class CSMigrationWrapper
     }
 
     // if the tag has already been created, just return it; if not, do the req and create it
-    private string DealWithTags(string theTags, MigrationAccount acct, ZimbraAPI api)
+    private string DealWithTags(string theTags, MigrationAccount acct, ZmailAPI api)
     {
         string retval = "";
         string[] tokens = theTags.Split(',');
@@ -369,7 +369,7 @@ public class CSMigrationWrapper
     }
 
     private void ProcessItems(MigrationAccount Acct, bool isServer, dynamic user, dynamic folder,
-        ZimbraAPI api, string path, MigrationOptions options)
+        ZmailAPI api, string path, MigrationOptions options)
     {
         int trial = 0;
       do
@@ -1355,17 +1355,17 @@ public class CSMigrationWrapper
                 Acct.TotalItems += folder.ItemCount;
         }
         Log.info("Acct.TotalItems=", Acct.TotalItems.ToString());
-        ZimbraAPI api;
+        ZmailAPI api;
         if (options.LangID != 0)
-            api = new ZimbraAPI(isServer, logLevel, options.SpecialCharRep, options.LangID);
+            api = new ZmailAPI(isServer, logLevel, options.SpecialCharRep, options.LangID);
         else
-            api = new ZimbraAPI(isServer, logLevel, options.SpecialCharRep);
+            api = new ZmailAPI(isServer, logLevel, options.SpecialCharRep);
 
         api.AccountID = Acct.AccountID;
         api.AccountName = Acct.AccountName;
 
         api.GetTags();
-        foreach (TagInfo taginfo in ZimbraValues.GetZimbraValues().Tags)
+        foreach (TagInfo taginfo in ZmailValues.GetZmailValues().Tags)
         {
             try
             {
@@ -1429,7 +1429,7 @@ public class CSMigrationWrapper
             Acct.migrationFolder.CurrentCountOfItems = 0;
             Acct.migrationFolder.FolderView = folder.ContainerClass;
             Acct.migrationFolder.FolderName = folder.Name;
-            if (folder.Id == (int)ZimbraFolders.Trash)
+            if (folder.Id == (int)ZmailFolders.Trash)
             {
                 path = "/MAPIRoot/Deleted Items";   // FBS EXCHANGE SPECIFIC HACK !!!
             }

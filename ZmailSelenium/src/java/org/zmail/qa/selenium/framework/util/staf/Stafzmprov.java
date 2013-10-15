@@ -14,20 +14,20 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.util.staf;
+package org.zmail.qa.selenium.framework.util.staf;
 
-import com.zimbra.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.*;
 
 /**
  * @deprecated As of version 7.0
- * @author zimbra
+ * @author zmail
  *
  */
 public class Stafzmprov extends StafServicePROCESS {
 	
 	
 	public static String createAccount(String emailaddress) throws HarnessException {
-		ZimbraAccount a = new ZimbraAccount(emailaddress, "test123");
+		ZmailAccount a = new ZmailAccount(emailaddress, "test123");
 		a.provision();
 		a.authenticate();
 		return (a.EmailAddress);
@@ -39,29 +39,29 @@ public class Stafzmprov extends StafServicePROCESS {
 		// Use <locale>_<timestamp>@domain.com
 		//
 		long now = System.currentTimeMillis();
-		String testdomain = ZimbraSeleniumProperties.getStringProperty("testdomain");
-		String locale = ZimbraSeleniumProperties.getStringProperty("locale");
+		String testdomain = ZmailSeleniumProperties.getStringProperty("testdomain");
+		String locale = ZmailSeleniumProperties.getStringProperty("locale");
 		String emailaddress = locale + "_" + now + "@" + testdomain;
 
 		return (createAccount(emailaddress));
 		
 	}
 	
-	public static void modifyAccount(ZimbraAccount account, String attr, String value) throws HarnessException {
+	public static void modifyAccount(ZmailAccount account, String attr, String value) throws HarnessException {
 		
-		ZimbraAdminAccount.GlobalAdmin().soapSend(
-				"<ModifyAccountRequest xmlns='urn:zimbraAdmin'>" +
-					"<id>"+ account.ZimbraId  +"</id>" +
+		ZmailAdminAccount.GlobalAdmin().soapSend(
+				"<ModifyAccountRequest xmlns='urn:zmailAdmin'>" +
+					"<id>"+ account.ZmailId  +"</id>" +
 					"<a n='" + attr +"'>"+ value +"</a>" +
 				"</ModifyAccountRequest>");
-		ZimbraAdminAccount.GlobalAdmin().soapSelectNode("//admin:ModifyAccountResponse", 1);
+		ZmailAdminAccount.GlobalAdmin().soapSelectNode("//admin:ModifyAccountResponse", 1);
 
 	}
 	
 	public static void modifyAccount(String emailaddress, String attr, String value) throws HarnessException {
 		
 		// Get the account id by calling provision
-		ZimbraAccount account = new ZimbraAccount(emailaddress, "test123");
+		ZmailAccount account = new ZmailAccount(emailaddress, "test123");
 		account.provision();
 		
 		// Next, modify the account
@@ -71,23 +71,23 @@ public class Stafzmprov extends StafServicePROCESS {
 	
 	public static String getAccountPreferenceValue(String emailaddress, String attr) throws HarnessException {
 				
-		ZimbraAdminAccount.GlobalAdmin().soapSend(
-				"<GetAccountRequest xmlns='urn:zimbraAdmin'>" +
+		ZmailAdminAccount.GlobalAdmin().soapSend(
+				"<GetAccountRequest xmlns='urn:zmailAdmin'>" +
 					"<account by='name'>"+ emailaddress +"</account>" +
 				"</GetAccountRequest>");
 		
-		ZimbraAdminAccount.GlobalAdmin().soapSelectNode("//admin:GetAccountResponse", 1);
-		String value = ZimbraAdminAccount.GlobalAdmin().soapSelectValue("//admin:a[@n='" + attr + "']", null);
+		ZmailAdminAccount.GlobalAdmin().soapSelectNode("//admin:GetAccountResponse", 1);
+		String value = ZmailAdminAccount.GlobalAdmin().soapSelectValue("//admin:a[@n='" + attr + "']", null);
 		logger.debug("GetAccountRequest returned "+ attr +" "+ value);
 		
 		return (value);
 		
 	}
 	
-	public static ZimbraAccount addAccountAlias(ZimbraAccount account, String alias) throws HarnessException {
-		ZimbraAdminAccount.GlobalAdmin().soapSend(
-				"<AddAccountAliasRequest xmlns='urn:zimbraAdmin'>" +
-					"<id>"+ account.ZimbraId +"</id>" +
+	public static ZmailAccount addAccountAlias(ZmailAccount account, String alias) throws HarnessException {
+		ZmailAdminAccount.GlobalAdmin().soapSend(
+				"<AddAccountAliasRequest xmlns='urn:zmailAdmin'>" +
+					"<id>"+ account.ZmailId +"</id>" +
 					"<alias>"+ alias +"</alias>" +
 				"</AddAccountAliasRequest>");
 		return (account);
@@ -96,7 +96,7 @@ public class Stafzmprov extends StafServicePROCESS {
 	public static String addAccountAlias(String emailaddress, String alias) throws HarnessException {
 		
 		// Get the account so we know the ID
-		ZimbraAccount account = new ZimbraAccount(emailaddress, "test123");
+		ZmailAccount account = new ZmailAccount(emailaddress, "test123");
 		account.provision();
 		
 		// Add the alias
@@ -106,18 +106,18 @@ public class Stafzmprov extends StafServicePROCESS {
 	}
 	
 	public static String createEquipment(String emailaddress) throws HarnessException {
-		ZimbraResource resource = new ZimbraResource(ZimbraResource.Type.EQUIPMENT, emailaddress, "test123");
+		ZmailResource resource = new ZmailResource(ZmailResource.Type.EQUIPMENT, emailaddress, "test123");
 		return (resource.EmailAddress);
 	}
 	
 	public static String createLocation(String emailaddress) throws HarnessException {
-		ZimbraResource resource = new ZimbraResource(ZimbraResource.Type.LOCATION, emailaddress, "test123");
+		ZmailResource resource = new ZmailResource(ZmailResource.Type.LOCATION, emailaddress, "test123");
 		return (resource.EmailAddress);
 	}
 	
 	public static String createDomain(String domain) throws HarnessException {
-		ZimbraAdminAccount.GlobalAdmin().soapSend(
-				"<CreateDomainRequest xmlns='urn:zimbraAdmin'>"+
+		ZmailAdminAccount.GlobalAdmin().soapSend(
+				"<CreateDomainRequest xmlns='urn:zmailAdmin'>"+
                 	"<name>"+ domain +"</name>" +
                 "</CreateDomainRequest>");
 		
@@ -145,13 +145,13 @@ public class Stafzmprov extends StafServicePROCESS {
 		
 		// Make sure the full path is specified
 		if ( command.trim().startsWith("zmprov") ) {
-			command = "/opt/zimbra/bin/" + command;
+			command = "/opt/zmail/bin/" + command;
 		}
-		// Running a command as 'zimbra' user.
+		// Running a command as 'zmail' user.
 		// We must convert the command to a special format
-		// START SHELL COMMAND "su - zimbra -c \'<cmd>\'" RETURNSTDOUT RETURNSTDERR WAIT 30000</params>
+		// START SHELL COMMAND "su - zmail -c \'<cmd>\'" RETURNSTDOUT RETURNSTDERR WAIT 30000</params>
 
-		StafParms = String.format("START SHELL COMMAND \"su - zimbra -c '%s'\" RETURNSTDOUT RETURNSTDERR WAIT %d", command, this.getTimeout());
+		StafParms = String.format("START SHELL COMMAND \"su - zmail -c '%s'\" RETURNSTDOUT RETURNSTDERR WAIT %d", command, this.getTimeout());
 		return (getStafCommand());
 	}
 

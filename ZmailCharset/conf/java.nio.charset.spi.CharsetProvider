@@ -1,1 +1,1 @@
-com.zimbra.cs.mime.charset.ZimbraCharsetProvider
+org.zmail.cs.mime.charset.ZmailCharsetProvider

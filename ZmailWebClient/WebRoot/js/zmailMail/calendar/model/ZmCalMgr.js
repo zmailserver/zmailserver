@@ -326,7 +326,7 @@ function(params) {
 
 ZmCalMgr.prototype._search =
 function(params) {
-	var jsonObj = {SearchRequest:{_jsns:"urn:zimbraMail"}};
+	var jsonObj = {SearchRequest:{_jsns:"urn:zmailMail"}};
 	var request = jsonObj.SearchRequest;
 
 	this._setSoapParams(request, params);

@@ -110,12 +110,12 @@ ZmAttendeePicker.SF_LABEL[ZmAttendeePicker.SF_FLOOR]	= "floor";
 // corresponding attributes for search command
 ZmAttendeePicker.SF_ATTR = {};
 ZmAttendeePicker.SF_ATTR[ZmAttendeePicker.SF_NAME]		  = "fullName";
-ZmAttendeePicker.SF_ATTR[ZmAttendeePicker.SF_CAPACITY]	  = "zimbraCalResCapacity";
+ZmAttendeePicker.SF_ATTR[ZmAttendeePicker.SF_CAPACITY]	  = "zmailCalResCapacity";
 ZmAttendeePicker.SF_ATTR[ZmAttendeePicker.SF_DESCRIPTION] = "description";
-ZmAttendeePicker.SF_ATTR[ZmAttendeePicker.SF_CONTACT]	  = "zimbraCalResContactName";
-ZmAttendeePicker.SF_ATTR[ZmAttendeePicker.SF_SITE]		  = "zimbraCalResSite";
-ZmAttendeePicker.SF_ATTR[ZmAttendeePicker.SF_BUILDING]	  = "zimbraCalResBuilding";
-ZmAttendeePicker.SF_ATTR[ZmAttendeePicker.SF_FLOOR]		  = "zimbraCalResFloor";
+ZmAttendeePicker.SF_ATTR[ZmAttendeePicker.SF_CONTACT]	  = "zmailCalResContactName";
+ZmAttendeePicker.SF_ATTR[ZmAttendeePicker.SF_SITE]		  = "zmailCalResSite";
+ZmAttendeePicker.SF_ATTR[ZmAttendeePicker.SF_BUILDING]	  = "zmailCalResBuilding";
+ZmAttendeePicker.SF_ATTR[ZmAttendeePicker.SF_FLOOR]		  = "zmailCalResFloor";
 
 // search field compares ops - listed here if not substring ("has")
 ZmAttendeePicker.SF_OP = {};
@@ -124,11 +124,11 @@ ZmAttendeePicker.SF_OP[ZmAttendeePicker.SF_FLOOR]		= "eq";
 
 ZmAttendeePicker.ATTRS = {};
 ZmAttendeePicker.ATTRS[ZmCalBaseItem.LOCATION] =
-	["fullName", "email", "zimbraCalResLocationDisplayName",
-	 "zimbraCalResCapacity", "zimbraCalResContactEmail", "description", "zimbraCalResType"];
+	["fullName", "email", "zmailCalResLocationDisplayName",
+	 "zmailCalResCapacity", "zmailCalResContactEmail", "description", "zmailCalResType"];
 ZmAttendeePicker.ATTRS[ZmCalBaseItem.EQUIPMENT] =
-	["fullName", "email", "zimbraCalResLocationDisplayName",
-	 "zimbraCalResContactEmail", "description", "zimbraCalResType"];
+	["fullName", "email", "zmailCalResLocationDisplayName",
+	 "zmailCalResContactEmail", "description", "zmailCalResType"];
 
 ZmAttendeePicker.SEARCH_FIELDS = {};
 ZmAttendeePicker.SEARCH_FIELDS[ZmCalBaseItem.PERSON] =
@@ -755,7 +755,7 @@ function(defaultSearch, sortBy, lastId, lastSortVal) {
 	var fields = ZmAttendeePicker.SETTINGS_SEARCH_FIELDS[this.type] || ZmAttendeePicker.SEARCH_FIELDS[this.type];
 	var conds = [];
 	var value = (this.type == ZmCalBaseItem.LOCATION) ? "Location" : "Equipment";
-	conds.push({attr: "zimbraCalResType", op: "eq", value: value});
+	conds.push({attr: "zmailCalResType", op: "eq", value: value});
 	var gotValue = false;
 	for (var i = 0; i < fields.length; i++) {
 		var sf = fields[i];
@@ -806,7 +806,7 @@ function(items, callback) {
 
 	var currAcct = this._editView.getCalendarAccount();
 	// Bug: 48189 Don't send GetFreeBusyRequest for non-ZCS accounts.
-	if (appCtxt.isOffline && (!currAcct.isZimbraAccount || currAcct.isMain)) {
+	if (appCtxt.isOffline && (!currAcct.isZmailAccount || currAcct.isMain)) {
 		if (callback) {
 			callback(items);
 		}

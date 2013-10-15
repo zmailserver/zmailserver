@@ -21,7 +21,7 @@
 <%@ attribute name="rawdate" rtexprvalue="true" required="false" type="java.util.Calendar"%>
 <%@ attribute name="timezone" rtexprvalue="true" required="false" type="java.util.TimeZone"%>
 <%@ attribute name="date" rtexprvalue="true" required="false" %>
-<%@ attribute name="appt" rtexprvalue="true" required="false" type="com.zimbra.client.ZAppointmentHit" %>
+<%@ attribute name="appt" rtexprvalue="true" required="false" type="org.zmail.client.ZAppointmentHit" %>
 <%@ attribute name="nodate" rtexprvalue="true" required="false" %>
 <%@ attribute name="toggleInstance" rtexprvalue="true" required="false" %>
 <%@ attribute name="apptFromParam" rtexprvalue="true" required="false" %>
@@ -29,8 +29,8 @@
 <%@ variable name-from-attribute="var" alias='urlVar' scope="AT_BEGIN" variable-class="java.lang.String" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
 
 <c:set var='view' value='${not empty view ? view : param.view}'/>
 <c:url value="${not empty value ? value : '/h/calendar'}" var="urlVar">

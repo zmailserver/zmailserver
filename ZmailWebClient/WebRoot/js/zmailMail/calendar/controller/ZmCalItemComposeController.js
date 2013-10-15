@@ -599,7 +599,7 @@ function() {
 ZmCalItemComposeController.prototype._doSpellCheck =
 function() {
 	var text = this._composeView.getHtmlEditor().getTextVersion();
-	var soap = AjxSoapDoc.create("CheckSpellingRequest", "urn:zimbraMail");
+	var soap = AjxSoapDoc.create("CheckSpellingRequest", "urn:zmailMail");
 	soap.getMethod().appendChild(soap.getDoc().createTextNode(text));
 	var cmd = new ZmCsfeCommand();
 	var callback = new AjxCallback(this, this._spellCheckCallback);

@@ -14,23 +14,23 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.briefcase.file;
+package org.zmail.qa.selenium.projects.ajax.tests.briefcase.file;
 
 import org.testng.annotations.Test;
-import com.zimbra.qa.selenium.framework.items.FileItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.ui.Shortcut;
-import com.zimbra.qa.selenium.framework.util.GeneralUtility;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.SleepUtil;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.ajax.core.FeatureBriefcaseTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.briefcase.DialogConfirm;
+import org.zmail.qa.selenium.framework.items.FileItem;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.ui.Shortcut;
+import org.zmail.qa.selenium.framework.util.GeneralUtility;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.SleepUtil;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.ajax.core.FeatureBriefcaseTest;
+import org.zmail.qa.selenium.projects.ajax.ui.briefcase.DialogConfirm;
 
 public class DeleteFile extends FeatureBriefcaseTest {
 
@@ -39,22 +39,22 @@ public class DeleteFile extends FeatureBriefcaseTest {
 
 		super.startingPage = app.zPageBriefcase;
 		
-		if(ZimbraSeleniumProperties.zimbraGetVersionString().contains("FOSS")){
-		    super.startingAccountPreferences.put("zimbraPrefShowSelectionCheckbox","TRUE");
+		if(ZmailSeleniumProperties.zmailGetVersionString().contains("FOSS")){
+		    super.startingAccountPreferences.put("zmailPrefShowSelectionCheckbox","TRUE");
 		}
 			    
-		super.startingAccountPreferences.put("zimbraPrefBriefcaseReadingPaneLocation", "bottom");	
+		super.startingAccountPreferences.put("zmailPrefBriefcaseReadingPaneLocation", "bottom");	
 	}		
 
 	@Test(description = "Upload file through RestUtil - delete & verify through GUI", groups = { "smoke" })
 	public void DeleteFile_01() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
 
 		// Create file item
-		String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+		String filePath = ZmailSeleniumProperties.getBaseDirectory()
 				+ "/data/public/other/putty.log";
 
 		FileItem fileItem = new FileItem(filePath);
@@ -67,7 +67,7 @@ public class DeleteFile extends FeatureBriefcaseTest {
 		// Save uploaded file to briefcase through SOAP
 		account.soapSend(
 
-		"<SaveDocumentRequest xmlns='urn:zimbraMail'>" +
+		"<SaveDocumentRequest xmlns='urn:zmailMail'>" +
 
 		"<doc l='" + briefcaseFolder.getId() + "'>" +
 
@@ -83,7 +83,7 @@ public class DeleteFile extends FeatureBriefcaseTest {
 		SleepUtil.sleepVerySmall();
 		
 		// Click on created document
-		 if(ZimbraSeleniumProperties.zimbraGetVersionString().contains(
+		 if(ZmailSeleniumProperties.zmailGetVersionString().contains(
 	    			"FOSS")){
 		     app.zPageBriefcase.zListItem(Action.A_BRIEFCASE_CHECKBOX, fileItem);
 
@@ -116,7 +116,7 @@ public class DeleteFile extends FeatureBriefcaseTest {
 
 	@Test(description = "Upload file through RestUtil - delete using Delete Key & check trash", groups = { "functional" })
 	public void DeleteFile_02() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
@@ -125,7 +125,7 @@ public class DeleteFile extends FeatureBriefcaseTest {
 				SystemFolder.Trash);
 
 		// Create file item
-		String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+		String filePath = ZmailSeleniumProperties.getBaseDirectory()
 				+ "/data/public/other/putty.log";
 
 		FileItem fileItem = new FileItem(filePath);
@@ -138,7 +138,7 @@ public class DeleteFile extends FeatureBriefcaseTest {
 		String attachmentId = account.uploadFile(filePath);
 
 		// Save uploaded file to briefcase through SOAP
-		account.soapSend("<SaveDocumentRequest xmlns='urn:zimbraMail'><doc l='"
+		account.soapSend("<SaveDocumentRequest xmlns='urn:zmailMail'><doc l='"
 				+ briefcaseFolder.getId() + "'>" + "<upload id='"
 				+ attachmentId + "'/></doc></SaveDocumentRequest>");
 
@@ -151,7 +151,7 @@ public class DeleteFile extends FeatureBriefcaseTest {
 		SleepUtil.sleepVerySmall();
 		
 		// Click on created document
-		if(ZimbraSeleniumProperties.zimbraGetVersionString().contains(
+		if(ZmailSeleniumProperties.zmailGetVersionString().contains(
     			"FOSS")){
 		    app.zPageBriefcase.zListItem(Action.A_BRIEFCASE_CHECKBOX, fileItem);
 
@@ -176,7 +176,7 @@ public class DeleteFile extends FeatureBriefcaseTest {
 		
 		// Verify document moved to Trash
 		account
-				.soapSend("<SearchRequest xmlns='urn:zimbraMail' types='document'>"
+				.soapSend("<SearchRequest xmlns='urn:zmailMail' types='document'>"
 						+ "<query>in:"
 						+ trashFolder.getName()
 						+ " "
@@ -193,7 +193,7 @@ public class DeleteFile extends FeatureBriefcaseTest {
 	
 	@Test(description = "Upload file through RestUtil - delete using <Backspace> Key & check trash", groups = { "functional" })
 	public void DeleteFile_03() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
@@ -202,7 +202,7 @@ public class DeleteFile extends FeatureBriefcaseTest {
 				SystemFolder.Trash);
 
 		// Create file item
-		String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+		String filePath = ZmailSeleniumProperties.getBaseDirectory()
 				+ "/data/public/other/putty.log";
 
 		FileItem fileItem = new FileItem(filePath);
@@ -215,7 +215,7 @@ public class DeleteFile extends FeatureBriefcaseTest {
 		String attachmentId = account.uploadFile(filePath);
 
 		// Save uploaded file to briefcase through SOAP
-		account.soapSend("<SaveDocumentRequest xmlns='urn:zimbraMail'><doc l='"
+		account.soapSend("<SaveDocumentRequest xmlns='urn:zmailMail'><doc l='"
 				+ briefcaseFolder.getId() + "'>" + "<upload id='"
 				+ attachmentId + "'/></doc></SaveDocumentRequest>");
 
@@ -228,7 +228,7 @@ public class DeleteFile extends FeatureBriefcaseTest {
 		SleepUtil.sleepVerySmall();
 		
 		// Click on created document
-		if(ZimbraSeleniumProperties.zimbraGetVersionString().contains(
+		if(ZmailSeleniumProperties.zmailGetVersionString().contains(
     			"FOSS")){
 		    app.zPageBriefcase.zListItem(Action.A_BRIEFCASE_CHECKBOX, fileItem);
 
@@ -253,7 +253,7 @@ public class DeleteFile extends FeatureBriefcaseTest {
 		
 		// Verify document moved to Trash
 		account
-				.soapSend("<SearchRequest xmlns='urn:zimbraMail' types='document'>"
+				.soapSend("<SearchRequest xmlns='urn:zmailMail' types='document'>"
 						+ "<query>in:"
 						+ trashFolder.getName()
 						+ " "
@@ -270,13 +270,13 @@ public class DeleteFile extends FeatureBriefcaseTest {
 	
 	@Test(description = "Upload file through RestUtil - delete using Right Click context menu", groups = { "functional" })
 	public void DeleteFile_04() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
 
 		// Create file item
-		String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+		String filePath = ZmailSeleniumProperties.getBaseDirectory()
 				+ "/data/public/other/putty.log";
 
 		FileItem fileItem = new FileItem(filePath);
@@ -287,7 +287,7 @@ public class DeleteFile extends FeatureBriefcaseTest {
 		String attachmentId = account.uploadFile(filePath);
 
 		// Save uploaded file to briefcase through SOAP
-		account.soapSend("<SaveDocumentRequest xmlns='urn:zimbraMail'><doc l='"
+		account.soapSend("<SaveDocumentRequest xmlns='urn:zmailMail'><doc l='"
 				+ briefcaseFolder.getId() + "'>" + "<upload id='"
 				+ attachmentId + "'/></doc></SaveDocumentRequest>");
 
@@ -299,7 +299,7 @@ public class DeleteFile extends FeatureBriefcaseTest {
 		SleepUtil.sleepVerySmall();
 		
 		// Click on created file
-		if(ZimbraSeleniumProperties.zimbraGetVersionString().contains(
+		if(ZmailSeleniumProperties.zmailGetVersionString().contains(
     			"FOSS")){
 		    app.zPageBriefcase.zListItem(Action.A_BRIEFCASE_CHECKBOX, fileItem);
 

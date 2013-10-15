@@ -47,7 +47,7 @@ ZaSambaDomain.loadMethod = function(by, val) {
 	if(!val)
 		return;
 		
-	var soapDoc = AjxSoapDoc.create("GetLDAPEntriesRequest", "urn:zimbraAdmin", null);	
+	var soapDoc = AjxSoapDoc.create("GetLDAPEntriesRequest", "urn:zmailAdmin", null);	
 	soapDoc.set("ldapSearchBase", Zambra.ldapSuffix);
 	soapDoc.set("query", "(&(objectClass=sambaDomain)(sambaDomainName="+val+"))");	
 	
@@ -62,7 +62,7 @@ ZaSambaDomain.loadMethod = function(by, val) {
 
 	var reqMgrParams = {} ;
 	reqMgrParams.controller = ZaApp.getInstance().getCurrentController();
-	reqMgrParams.busyMsg = zimbra_samba.BUSY_GETTING_SAMBA_DOMAIN;
+	reqMgrParams.busyMsg = zmail_samba.BUSY_GETTING_SAMBA_DOMAIN;
 	var resp = ZaRequestMgr.invoke(csfeParams, reqMgrParams ).Body.GetLDAPEntriesResponse;
 	if(resp && resp.LDAPEntry) {	
 		this.initFromJS(resp.LDAPEntry[0]);
@@ -85,12 +85,12 @@ ZaSambaDomain.prototype.initFromJS = function(sambaDomain) {
 
 ZaSambaDomain.prototype.remove = 
 function(callback) {
-	var soapDoc = AjxSoapDoc.create("DeleteLDAPEntryRequest", "urn:zimbraAdmin", null);
+	var soapDoc = AjxSoapDoc.create("DeleteLDAPEntryRequest", "urn:zmailAdmin", null);
 
 	var dn = [[ZaSambaDomain.A_sambaDomainName,"=",this.attrs[ZaSambaDomain.A_sambaDomainName]].join("")];
 
 	
-	if(zimbra_posixaccount.ldapSuffix)
+	if(zmail_posixaccount.ldapSuffix)
 		dn.push(Zambra.ldapSuffix);
 		
 
@@ -108,7 +108,7 @@ function(callback) {
 
 ZaSambaDomain.getAll =
 function() {
-	var soapDoc = AjxSoapDoc.create("GetLDAPEntriesRequest", "urn:zimbraAdmin", null);	
+	var soapDoc = AjxSoapDoc.create("GetLDAPEntriesRequest", "urn:zmailAdmin", null);	
 	soapDoc.set("ldapSearchBase", Zambra.ldapSuffix);
 	soapDoc.set("query", "objectClass=sambaDomain");	
 
@@ -117,7 +117,7 @@ function() {
 	
 	var reqMgrParams = {} ;
 	reqMgrParams.controller = ZaApp.getInstance().getCurrentController();
-	reqMgrParams.busyMsg = zimbra_samba.BUSY_GETTING_SAMBA_DOMAINS;
+	reqMgrParams.busyMsg = zmail_samba.BUSY_GETTING_SAMBA_DOMAINS;
 	var resp = ZaRequestMgr.invoke(csfeParams, reqMgrParams ).Body.GetLDAPEntriesResponse;
 	var list = new ZaItemList(ZaSambaDomain)
 	if(resp) {	
@@ -144,7 +144,7 @@ ZaSambaDomain.myXModel = {
 
 ZaSambaDomain.createMethod = function(tmpObj, domain) {
 	//test
-	var soapDoc = AjxSoapDoc.create("CreateLDAPEntryRequest", "urn:zimbraAdmin", null);
+	var soapDoc = AjxSoapDoc.create("CreateLDAPEntryRequest", "urn:zmailAdmin", null);
 
 	var sambaDomainName = tmpObj.attrs[ZaSambaDomain.A_sambaDomainName];
 	
@@ -188,7 +188,7 @@ ZaSambaDomain.createMethod = function(tmpObj, domain) {
 	csfeParams.soapDoc = soapDoc;	
 	var reqMgrParams = {} ;
 	reqMgrParams.controller = ZaApp.getInstance().getCurrentController();
-	reqMgrParams.busyMsg = zimbra_samba.BUSY_CREATING_SAMBA_DOMAIN;
+	reqMgrParams.busyMsg = zmail_samba.BUSY_CREATING_SAMBA_DOMAIN;
 	resp = ZaRequestMgr.invoke(csfeParams, reqMgrParams ).Body.CreateLDAPEntryResponse;
 	
 	if(resp.LDAPEntry)		
@@ -212,7 +212,7 @@ function(mods) {
 	var sambaDomainName = this.attrs[ZaSambaDomain.A_sambaDomainName];
 	if(mods[ZaSambaDomain.A_sambaDomainName]) {
 		sambaDomainName = mods[ZaSambaDomain.A_sambaDomainName];
-		var soapDoc = AjxSoapDoc.create("RenameLDAPEntryRequest", "urn:zimbraAdmin", null);			
+		var soapDoc = AjxSoapDoc.create("RenameLDAPEntryRequest", "urn:zmailAdmin", null);			
 		var dn = [[ZaSambaDomain.A_sambaDomainName,"=",this.attrs[ZaSambaDomain.A_sambaDomainName]].join("")];		
 		var new_dn = [[ZaSambaDomain.A_sambaDomainName,"=",mods[ZaSambaDomain.A_sambaDomainName]].join("")];				
 		
@@ -254,7 +254,7 @@ function(mods) {
 		return;
 		
 	//update the object
-	var soapDoc = AjxSoapDoc.create("ModifyLDAPEntryRequest", "urn:zimbraAdmin", null);
+	var soapDoc = AjxSoapDoc.create("ModifyLDAPEntryRequest", "urn:zmailAdmin", null);
 	var dn = [[ZaSambaDomain.A_sambaDomainName,"=",this.attrs[ZaSambaDomain.A_sambaDomainName]].join("")];
 
 		
@@ -300,7 +300,7 @@ function(mods) {
 	csfeParams.soapDoc = soapDoc;	
 	var reqMgrParams = {} ;
 	reqMgrParams.controller = ZaApp.getInstance().getCurrentController();
-	reqMgrParams.busyMsg = zimbra_samba.BUSY_UPDATING_SAMBA_DOMAIN;
+	reqMgrParams.busyMsg = zmail_samba.BUSY_UPDATING_SAMBA_DOMAIN;
 	resp = ZaRequestMgr.invoke(csfeParams, reqMgrParams ).Body.ModifyLDAPEntryResponse;
 	
 	if(resp.LDAPEntry[0])	

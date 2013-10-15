@@ -1,6 +1,6 @@
-<project name="ZimbraWebClient" default="war">
+<project name="ZmailWebClient" default="war">
     <!-- Properties -->
-    <dirname property="this.zwc.basedir" file="${ant.file.ZimbraWebClient}" />
+    <dirname property="this.zwc.basedir" file="${ant.file.ZmailWebClient}" />
 
     <property file='${this.zwc.basedir}/build-custom.properties'/>
 
@@ -8,49 +8,49 @@
 
     <property environment="env"/>
 
-	<property file="${this.zwc.basedir}/../ZimbraCustomerServices/${env.CUSTOMER_SKIN}/ZimbraWebClient/build-custom.properties" />
+	<property file="${this.zwc.basedir}/../ZmailCustomerServices/${env.CUSTOMER_SKIN}/ZmailWebClient/build-custom.properties" />
 
     <property name="zwc.basedir" value="${this.zwc.basedir}" />
     <property name="overlay.dir" value="${env.APP_OVERLAY}" />
     <property name="overlay.lib.dir" value="${overlay.dir}/jars" />
 
     <!-- default web.xml token replacements -->
-    <property name="webxml.zimbraAdminURL" value="/zimbraAdmin" />
-    <property name="webxml.zimbraMailURL" value="/" />
-    <property name="webxml.zimbraAdminPort" value="7071" />
-    <property name="webxml.zimbraMailPort" value="7070" />
-    <property name="webxml.zimbraMailSSLPort" value="7443" />
-    <property name="webxml.zimbraMailTrustedIP" value="" />
-	<property name="webxml.zimbraHttpDosFilterMaxRequestsPerSec" value="30" />
+    <property name="webxml.zmailAdminURL" value="/zmailAdmin" />
+    <property name="webxml.zmailMailURL" value="/" />
+    <property name="webxml.zmailAdminPort" value="7071" />
+    <property name="webxml.zmailMailPort" value="7070" />
+    <property name="webxml.zmailMailSSLPort" value="7443" />
+    <property name="webxml.zmailMailTrustedIP" value="" />
+	<property name="webxml.zmailHttpDosFilterMaxRequestsPerSec" value="30" />
 
     <!-- NOTE: These dirs need to stay ABSOLUTE paths! -->
-	<property name='common.dir' value='${this.zwc.basedir}/../ZimbraCommon'/>
+	<property name='common.dir' value='${this.zwc.basedir}/../ZmailCommon'/>
     <property name='common.lib.dir' value='${common.dir}/jars'/>
     <property name='common.build.dir' value='${common.dir}/build'/>
     <property name='common.build.classes.dir' value='${common.build.dir}/classes'/>
 
-    <property name='soap.dir' location='${this.zwc.basedir}/../ZimbraSoap'/>
+    <property name='soap.dir' location='${this.zwc.basedir}/../ZmailSoap'/>
 	<property name='soap.build.dir' value='${soap.dir}/build'/>
 
-    <property name="client.dir" location="${this.zwc.basedir}/../ZimbraClient"/>
+    <property name="client.dir" location="${this.zwc.basedir}/../ZmailClient"/>
     <property name="client.build.classes.dir" location="${client.dir}/build/classes" />
     <property name="client.build.dir" location="${client.dir}/build" />    
-    <property name="client.jarfile" location="${client.dir}/build/zimbraclient.jar"/>
+    <property name="client.jarfile" location="${client.dir}/build/zmailclient.jar"/>
 
-    <property name='taglib.dir' value='${this.zwc.basedir}/../ZimbraTagLib'/>
+    <property name='taglib.dir' value='${this.zwc.basedir}/../ZmailTagLib'/>
     <property name='taglib.build.dir' value='${taglib.dir}/build'/>
 	<property name='taglib.build.classes.dir' value='${taglib.build.dir}/classes'/>
 
-    <property name='server.dir' value='${this.zwc.basedir}/../ZimbraServer'/>
+    <property name='server.dir' value='${this.zwc.basedir}/../ZmailServer'/>
     <property name='server.build.dir' value='${server.dir}/build'/>
 	<property name='server.build.classes.dir' value='${server.build.dir}/classes'/>
     <property name='server.dist.dir' value='${server.build.dir}/dist'/>
 
-	<property name='network.dir' value='${this.zwc.basedir}/../ZimbraNetwork' />
-	<property name='network.zwc.dir' value='${network.dir}/ZimbraWebClient' />
+	<property name='network.dir' value='${this.zwc.basedir}/../ZmailNetwork' />
+	<property name='network.zwc.dir' value='${network.dir}/ZmailWebClient' />
 	<property name='network.zwc.help.dir' value='${network.zwc.dir}/WebRoot/help' />
 
-	<property name='license.dir' value='${this.zwc.basedir}/../ZimbraLicenses'/>
+	<property name='license.dir' value='${this.zwc.basedir}/../ZmailLicenses'/>
 
     <property name='lib.dir' value='${this.zwc.basedir}/jars'/>
     <property name="jsdoctoolkit.dir" location="${lib.dir}/jsdoc-toolkit-2.3.0" />
@@ -80,10 +80,10 @@
     <property name='build.dist.dir' value='${build.dir}/dist'/>
 
 	<property name='build.docs.dir' value='${build.dir}/docs'/>
-	<property name='build.jsapi-zimbra-doc.dir' value='${build.docs.dir}/jsapi-zimbra-doc'/>
+	<property name='build.jsapi-zmail-doc.dir' value='${build.docs.dir}/jsapi-zmail-doc'/>
     <property name='build.jsapi-inventory.dir' value='${build.docs.dir}/jsapi-inventory'/>
     <property name='build.jsapi-changelog.dir' value='${build.docs.dir}/jsapi-changelog'/>
-	<property name='jsapi-zimbra-doc.file' value='${build.docs.dir}/jsapi-zimbra-doc.zip'/>
+	<property name='jsapi-zmail-doc.file' value='${build.docs.dir}/jsapi-zmail-doc.zip'/>
 	<property name='jsapi-inventory.file' value='${build.docs.dir}/jsapi-inventory.zip'/>
 	<property name='jsapi-changelog.file' value='${build.docs.dir}/jsapi-changelog.zip'/>
 
@@ -100,10 +100,10 @@
     <property name="compress.ext" value='.zgz'/>
 
     <!-- ZIMBRA FIREFOX EXTENSION -->
-    <property name="ffext.jarfile" value="zimbradnd.jar"/>
-    <property name="ffext.xpifile" value="ZimbraDnD.xpi"/>
+    <property name="ffext.jarfile" value="zmaildnd.jar"/>
+    <property name="ffext.xpifile" value="ZmailDnD.xpi"/>
     <property name="ffext.build.dir" location="ffext/build"/>
-    <property name="ffext.src.dir" value="ffext/src/zimbradnd"/>
+    <property name="ffext.src.dir" value="ffext/src/zmaildnd"/>
 
     <!-- TINY_MCE INTEGRATION -->
     <property name="tinymce.version" value="3.5.4.1"/>
@@ -122,10 +122,10 @@
 	<if>
 		<isset property='adminSkin'/>
 		<then>
-			<property name="webxml.zimbraDefaultAdminSkin" value="${adminSkin}" />
+			<property name="webxml.zmailDefaultAdminSkin" value="${adminSkin}" />
 		</then>
 		<else>
-			<property name="webxml.zimbraDefaultAdminSkin" value="serenity" />
+			<property name="webxml.zmailDefaultAdminSkin" value="serenity" />
 		</else>
 	</if>
     <!-- Paths and Filesets -->
@@ -155,7 +155,7 @@
 
     <target name='common'>
 		<condition property='build.network'>
-			<equals arg1="${zimbra.buildinfo.type}" arg2="NETWORK" />
+			<equals arg1="${zmail.buildinfo.type}" arg2="NETWORK" />
 		</condition>
         <property name='common.web.includes' value='${custom.web.includes},js/**,css/**'/>
         <property name='common.web.excludes' value='${custom.web.excludes},js/*/package/**,**/AjxTimezoneData.js,tiny_mce*/**'/>
@@ -182,7 +182,7 @@
         <property name='build.ajax' value='true'/>
         <property name='deploy.app' value='ajax'/>
         <property name='skins.dir' value='${web.dir}/skins'/>
-        <property name='web.includes' value='js/ajax/**,css/**,js/zimbraAdmin/**/*AutoComplete*.js'/>
+        <property name='web.includes' value='js/ajax/**,css/**,js/zmailAdmin/**/*AutoComplete*.js'/>
         <property name='web.excludes' value='WEB-INF/classes/**'/> <!-- default Eclipse output dir -->
         <property name='jsp.includes' value='frameOpenerHelper.jsp'/>
         <property name='jsp.excludes' value=''/>
@@ -201,12 +201,12 @@
     </target>
 
     <target name='client' depends='common'>
-        <property name='deploy.app' value='zimbra'/>
+        <property name='deploy.app' value='zmail'/>
         <property name='skins.dir' value='${web.dir}/skins'/>
         <property name='help.dir' value='${web.dir}/help'/>
         <property name='build.help.dir' value='${build.web.dir}/help'/>
         <property name='web.includes' value='${common.web.includes},h/**,m/**,portals/**,sounds/**,test/**,yui/**,tiny_mce/**,qunit/**'/>
-        <property name='web.excludes' value='${common.web.excludes},js/zimbraAdmin/**'/>
+        <property name='web.excludes' value='${common.web.excludes},js/zmailAdmin/**'/>
         <property name='jsp.includes' value='${common.jsp.includes}'/>
         <property name='jsp.excludes' value='${common.jsp.excludes},admin.jsp'/>
         <property name='img.includes' value='${common.img.includes}'/>
@@ -214,7 +214,7 @@
         <property name='template.includes' value='${common.template.includes}'/>
         <property name='template.excludes' value='${common.template.excludes},admin/**'/>
         <property name='jam.includes' value='${common.jam.includes}'/>
-        <property name='jam.excludes' value='${common.jam.excludes},**/zimbraAdmin/**'/>
+        <property name='jam.excludes' value='${common.jam.excludes},**/zmailAdmin/**'/>
         <property name='help.includes' value='${common.help.includes},*/standard/**,*/advanced/**'/>
         <property name='help.excludes' value='${common.help.excludes}'/>
         <property name='build.web.includes' value='${common.build.web.includes}'/>
@@ -229,21 +229,21 @@
 
     <target name='admin' depends='common'>
         <property name='build.admin' value='true'/>
-        <property name='deploy.app' value='zimbraAdmin'/>
+        <property name='deploy.app' value='zmailAdmin'/>
         <property name='skins.dir' value='${web.dir}/admin_skins'/>
         <property name='adminhelp.dir' value='${web.dir}/adminhelp'/>
         <property name='build.adminhelp.dir' value='${build.web.dir}/adminhelp'/>
         <property name='web.includes' value='${common.web.includes},migrationwizard/**,yui/**'/>
-        <property name='web.excludes' value='${common.web.excludes},js/zimbraMail/**'/>
+        <property name='web.excludes' value='${common.web.excludes},js/zmailMail/**'/>
         <property name='jsp.includes' value='${common.jsp.includes}'/>
         <property name='jsp.excludes'
                   value='${common.jsp.excludes},launchNewWindow.jsp,login.jsp,*Mail.jsp,*ZCS.jsp,Spreadsheet*'/>
         <property name='img.includes' value='admin/**,animated/**,dwt/**,logo/favicon.ico'/>
         <property name='img.excludes' value='${common.img.excludes}'/>
-        <property name='template.includes' value='admin/**,dwt/**,zimbra/**'/>
+        <property name='template.includes' value='admin/**,dwt/**,zmail/**'/>
         <property name='template.excludes' value='${common.template.excludes}'/>
         <property name='jam.includes' value='${common.jam.includes}'/>
-        <property name='jam.excludes' value='${common.jam.excludes},**/zimbraMail/**'/>
+        <property name='jam.excludes' value='${common.jam.excludes},**/zmailMail/**'/>
 		    <property name='help.includes' value='${common.admin.help.includes},*/**'/>
 		    <property name='help.excludes' value='${common.admin.help.excludes},*/standard/**,*/advanced/**'/>
         <property name='build.web.includes' value='${common.build.web.includes}'/>
@@ -260,7 +260,7 @@
     <target name='prod'>
         <property name='build.prod' value='true'/>
         <property name='war.compress' value='true'/>
-        <property name='web.excludes' value='${common.web.excludes},js/zimbraAdmin/**,test/**'/>
+        <property name='web.excludes' value='${common.web.excludes},js/zmailAdmin/**,test/**'/>
     </target>
 
     <target name="war"
@@ -268,7 +268,7 @@
             description="Builds all dependencies and assembles the war file.">
     </target>
 
-    <target name="assemble-war" depends="webxml-package-replace" description="Assembles the war file.  Assumes that all dependencies have been built.  Octopus/ZimbraWebClient/build.xml calls the war target, modifies files in ZimbraWebClient/build, and then calls this target.">
+    <target name="assemble-war" depends="webxml-package-replace" description="Assembles the war file.  Assumes that all dependencies have been built.  Octopus/ZmailWebClient/build.xml calls the war target, modifies files in ZmailWebClient/build, and then calls this target.">
         <mkdir dir='${build.war.dir}'/>
         <war warfile="${build.war.file}" webxml='${build.dir}/web.xml'
              compress='${war.compress}' duplicate="preserve">
@@ -284,10 +284,10 @@
             <classes refid="messages.fileset" />
 
             <lib dir='${lib.dir}' includes='gifencoder.jar'/>
-            <lib dir='${soap.build.dir}' includes='zimbrasoap.jar'/>
+            <lib dir='${soap.build.dir}' includes='zmailsoap.jar'/>
             <lib file="${client.jarfile}"/>
-            <lib dir='${taglib.build.dir}' includes='zimbrataglib.jar'/>
-            <lib dir='${server.build.dir}' includes='zimbrastore.jar'/>
+            <lib dir='${taglib.build.dir}' includes='zmailtaglib.jar'/>
+            <lib dir='${server.build.dir}' includes='zmailstore.jar'/>
             <lib dir='${common.lib.dir}' includes='gmbal-api-only-*.jar'/>
             <lib dir='${common.lib.dir}' includes='jaxb-api-*.jar'/>
             <lib dir='${common.lib.dir}' includes='jaxb-impl-*.jar'/>
@@ -340,10 +340,10 @@
 
         <copy todir="${webapp.dir}/WEB-INF/lib" verbose="${sync.verbose}">
             <fileset dir='${lib.dir}' includes='gifencoder.jar'/>
-            <fileset dir='${soap.build.dir}' includes='zimbrasoap.jar'/>
+            <fileset dir='${soap.build.dir}' includes='zmailsoap.jar'/>
             <fileset file="${client.jarfile}" />
-            <fileset dir='${taglib.build.dir}' includes='zimbrataglib.jar'/>
-            <fileset dir='${server.build.dir}' includes='zimbrastore.jar'/>
+            <fileset dir='${taglib.build.dir}' includes='zmailtaglib.jar'/>
+            <fileset dir='${server.build.dir}' includes='zmailstore.jar'/>
             <fileset dir='${common.lib.dir}' includes='gmbal-api-only-*.jar'/>
             <fileset dir='${common.lib.dir}' includes='jaxb-api-*.jar'/>
             <fileset dir='${common.lib.dir}' includes='jaxb-impl-*.jar'/>
@@ -399,7 +399,7 @@
         <property name='deploy.server' value='jetty'/>
         <property name='build.war.dir' value='${build.dist.dir}/${deploy.server}/webapps'/>
         <property name='build.war.file' value='${build.war.dir}/${deploy.app}.war'/>
-        <property name='deploy.dir' value='/opt/zimbra/${deploy.server}/webapps'/>
+        <property name='deploy.dir' value='/opt/zmail/${deploy.server}/webapps'/>
         <property name='webapp.dir' value='${deploy.dir}/${deploy.app}'/>
         <property name='webapp.file' value='${deploy.dir}/${deploy.app}.war'/>
 
@@ -409,31 +409,31 @@
 
 
         <condition property='external.done' value='true'>
-            <available file="${taglib.build.dir}/zimbrataglib.jar"/>
+            <available file="${taglib.build.dir}/zmailtaglib.jar"/>
         </condition>
 
         <!-- deployment properties -->
         <tstamp/>
 
         <!-- TODO: Does the production build set this before calling Ant? -->
-        <condition property="zimbra.buildinfo.version" value="0.0">
+        <condition property="zmail.buildinfo.version" value="0.0">
             <not>
-                <isset property="${zimbra.buildinfo.version}"/>
+                <isset property="${zmail.buildinfo.version}"/>
             </not>
         </condition>
-        <condition property="zimbra.buildinfo.release" value="${user.name}">
+        <condition property="zmail.buildinfo.release" value="${user.name}">
             <not>
-                <isset property="${zimbra.buildinfo.release}"/>
+                <isset property="${zmail.buildinfo.release}"/>
             </not>
         </condition>
-        <condition property="zimbra.buildinfo.date" value="${DSTAMP}-${TSTAMP}">
+        <condition property="zmail.buildinfo.date" value="${DSTAMP}-${TSTAMP}">
             <not>
-                <isset property="${zimbra.buildinfo.date}"/>
+                <isset property="${zmail.buildinfo.date}"/>
             </not>
         </condition>
-        <condition property="zimbra.buildinfo.host" value="${zimbra.server.hostname}">
+        <condition property="zmail.buildinfo.host" value="${zmail.server.hostname}">
             <not>
-                <isset property="${zimbra.buildinfo.host}"/>
+                <isset property="${zmail.buildinfo.host}"/>
             </not>
         </condition>
 
@@ -507,8 +507,8 @@
                 <isset property='build.ajax'/>
             </not>
             <then>
-                <property name='customer.dir' value='../ZimbraCustomerServices/${env.CUSTOMER_SKIN}'/>
-                <property name='customer.web.dir' value='${customer.dir}/ZimbraWebClient/WebRoot'/>
+                <property name='customer.dir' value='../ZmailCustomerServices/${env.CUSTOMER_SKIN}'/>
+                <property name='customer.web.dir' value='${customer.dir}/ZmailWebClient/WebRoot'/>
                 <property name='customer.jsp.dir' value='${customer.web.dir}/public'/>
                 <property name='customer.img.dir' value='${customer.web.dir}/img' />
                 <property name='customer.skin.dir' value='${customer.web.dir}/skins'/>
@@ -587,7 +587,7 @@
     </target>
 
     <target name='external' unless="external.done">
-        <!-- ant jar in ZimbraTagLib will build ZimbraCommon and ZimbraServer -->
+        <!-- ant jar in ZmailTagLib will build ZmailCommon and ZmailServer -->
         <ant dir='${taglib.dir}' target="jar" inheritall="false"/>
     </target>
 
@@ -628,7 +628,7 @@
             </not>
             <then>
                 <taskdef name='template'
-                         classname='com.zimbra.kabuki.tools.templates.TemplateTask'
+                         classname='org.zmail.kabuki.tools.templates.TemplateTask'
                          classpathref='class.path'
                         />
 	            <antcall target="templates-generate">
@@ -739,7 +739,7 @@
             </not>
             <then>
                 <taskdef name='timezones'
-                         classname='com.zimbra.kabuki.tools.tz.GenerateDataTask'
+                         classname='org.zmail.kabuki.tools.tz.GenerateDataTask'
                          classpathref='class.path'
                         />
 
@@ -764,7 +764,7 @@
             </not>
             <then>
                 <taskdef name='i18n'
-                         classname='com.zimbra.kabuki.tools.i18n.GenerateDataTask'
+                         classname='org.zmail.kabuki.tools.i18n.GenerateDataTask'
                          classpath='${build.classes.dir}'
                         />
 
@@ -777,7 +777,7 @@
 
 	<target name='keys-check' depends='compile'>
 		<taskdef name='keycheck'
-		         classname='com.zimbra.kabuki.tools.i18n.CompareKeysTask'
+		         classname='org.zmail.kabuki.tools.i18n.CompareKeysTask'
 		         classpath='${build.classes.dir}'
 		/>
 		<keycheck dir='${web.dir}' verbose='${keys-check-verbose}'>
@@ -847,7 +847,7 @@
 				<!-- default locale images -->
 				<imagemerge destdir='${destdir}' disable='true'
 							cssfile='${build.css.filename}' csspath='${csspath}'
-							spacerimagespath='${this.zwc.basedir}/WebRoot/img/zimbra/'
+							spacerimagespath='${this.zwc.basedir}/WebRoot/img/zmail/'
 							jsfile='${build.css.filename}.js'>
 					<dirset dir='${srcdir}' includes='*' excludes='?*_??,?*_??_??' />
 				</imagemerge>
@@ -865,7 +865,7 @@
 								<imagemerge destdir='${destdir}' disable='true'
 											cssfile='${build.css.file}_@{locale}${build.css.ext}'
 											csspath='${csspath}'
-											spacerimagespath='${this.zwc.basedir}/WebRoot/img/zimbra/'
+											spacerimagespath='${this.zwc.basedir}/WebRoot/img/zmail/'
 											jsfile='${build.css.filename}.js'>
 									<dirset dir='${srcdir}' includes='?*_@{locale}' />
 								</imagemerge>
@@ -882,11 +882,11 @@
 
     <target name='images-init' depends='compile'>
         <taskdef name='imagemerge'
-                 classname='com.zimbra.kabuki.tools.img.ImageMergerTask'
+                 classname='org.zmail.kabuki.tools.img.ImageMergerTask'
                  classpathref='class.path'
                 />
         <taskdef name='imagesort'
-                 classname='com.zimbra.kabuki.tools.img.ImageSortTask'
+                 classname='org.zmail.kabuki.tools.img.ImageSortTask'
                  classpathref='class.path'
                 />
     </target>
@@ -903,7 +903,7 @@
         <echo/>
         <imagemerge destdir='${build.this.skin.dir}'
                     cssfile='${build.css.filename}' csspath='@AppContextPath@/skins/${skindir}/img/'
-					spacerimagespath='${this.zwc.basedir}/WebRoot/img/zimbra/'
+					spacerimagespath='${this.zwc.basedir}/WebRoot/img/zmail/'
 					jsfile='${build.css.filename}.js'>
             <dirset dir='${skinbasedir}/skins/${skindir}' includes='img/**'/>
         </imagemerge>
@@ -966,15 +966,15 @@
                 </not>
             </and>
             <then>
-                <property name='settings.dir' value='${build.js.dir}/zimbraMail/share/model'/>
+                <property name='settings.dir' value='${build.js.dir}/zmailMail/share/model'/>
                 <property name='settings.file' value='${settings.dir}/ZmSettings.js'/>
 
                 <mkdir dir='${settings.dir}'/>
                 <copy todir='${settings.dir}' flatten='true'>
                     <fileset dir='${js.dir}' includes='**/ZmSettings.js'/>
                 </copy>
-                <replace file="${settings.file}" token="@buildVersion@" value="${zimbra.buildinfo.version}"/>
-                <replace file="${settings.file}" token="@buildRelease@" value="${zimbra.buildinfo.release}"/>
+                <replace file="${settings.file}" token="@buildVersion@" value="${zmail.buildinfo.version}"/>
+                <replace file="${settings.file}" token="@buildRelease@" value="${zmail.buildinfo.release}"/>
                 <replace file="${settings.file}" token="@buildDateTime@" value="${DSTAMP}-${TSTAMP}"/>
             </then>
         </if>
@@ -993,11 +993,11 @@
         </copy>
 
         <taskdef name="packagedependset"
-                 classname="com.zimbra.webClient.build.PackageDependSetTask"
+                 classname="org.zmail.webClient.build.PackageDependSetTask"
                  classpath="${build.classes.dir}"
                 />
         <taskdef name="jammer"
-                 classname="com.zimbra.webClient.build.PackageJammerTask"
+                 classname="org.zmail.webClient.build.PackageJammerTask"
                  classpath="${build.classes.dir}"
                 />
 
@@ -1048,10 +1048,10 @@
                 <property name="jam.template.ImportExport.includes"     value="data/**" />
                 <property name="jam.template.MailCore.includes"         value="mail/**" />
                 <property name="jam.template.PreferencesCore.includes"  value="prefs/**" />
-                <property name="jam.template.Startup1_2.includes"       value="dwt/**,zimbra/**,share/**" />
+                <property name="jam.template.Startup1_2.includes"       value="dwt/**,zmail/**,share/**" />
                 <property name="jam.template.TasksCore.includes"        value="tasks/**" />
                 <property name="jam.template.Voicemail.includes"        value="voicemail/**" />
-                <property name="jam.template.Zimbra.includes"           value="zimbra/**" />
+                <property name="jam.template.Zmail.includes"           value="zmail/**" />
 
                 <!-- template fileset -->
                 <if><isset property="jam.template.${arg}.includes" />
@@ -1112,7 +1112,7 @@ if (ext == null) ext = "";
         <fileset id="js-includes" dir="${build.js.dir}" includes="${compress.includes}" />
 
 	    <taskdef name="try"
-	             classname="com.zimbra.webClient.build.TryTask"
+	             classname="org.zmail.webClient.build.TryTask"
 	             classpath="${build.classes.dir}"
 	    />
 
@@ -1141,7 +1141,7 @@ if (ext == null) ext = "";
                         <echo>Minimizing to @{var}${jsmin.ext}</echo>
 	                    <try>
 	                        <block>
-		                        <java jar="${common.lib.dir}/yuicompressor-2.4.2-zimbra.jar" fork="true" failonerror="true"
+		                        <java jar="${common.lib.dir}/yuicompressor-2.4.2-zmail.jar" fork="true" failonerror="true"
 		                              output="${build.dir}/yui-compress.out">
 		                            <arg value="--line-break"/>
 		                            <arg value="0"/>
@@ -1164,7 +1164,7 @@ if (ext == null) ext = "";
                         <echo>Prepending Copyright to @{var}${license.ext}</echo>
                         <concat destfile="@{var}${license.ext}" fixlastline="true">
                             <header filtering="no" trimleading="yes">
-                                /* Copyright (C) 2005-2009 Zimbra Inc. http://www.zimbra.com/ */
+                                /* Copyright (C) 2005-2009 Zmail Inc. http://www.zmail.com/ */
                             </header>
                             <fileset file='@{var}${jsmin.ext}'/>
                         </concat>
@@ -1179,7 +1179,7 @@ if (ext == null) ext = "";
 		<fail message='This target cannot be called directly.' unless='filename'/>
 
 		<taskdef name="filelist"
-		         classname="com.zimbra.webClient.build.FilelistTask"
+		         classname="org.zmail.webClient.build.FilelistTask"
 		         classpath="${build.classes.dir}"
 		/>
 
@@ -1188,7 +1188,7 @@ if (ext == null) ext = "";
 		<for list="${files}" param="filename">
 			<sequential>
 				<echo>Testing file: @{filename}</echo>
-				<java jar="${common.lib.dir}/yuicompressor-2.4.2-zimbra.jar" fork="true" failonerror="true">
+				<java jar="${common.lib.dir}/yuicompressor-2.4.2-zmail.jar" fork="true" failonerror="true">
 				    <arg value="--line-break"/>
 				    <arg value="0"/>
 				    <arg value="--type"/>
@@ -1240,18 +1240,18 @@ if (ext == null) ext = "";
         <!-- replace @xyz@ tokens -->
         <replace file="${build.dir}/web.xml" token="@prodMode@" value="${build.prod.value}"/>
         <replace file="${build.dir}/web.xml" token="@jsVersion@" value="${build.simpleDate}"/>
-    	<replace file="${build.dir}/web.xml" token="%%zimbraDefaultAdminSkin%%" value="${webxml.zimbraDefaultAdminSkin}"/>
+    	<replace file="${build.dir}/web.xml" token="%%zmailDefaultAdminSkin%%" value="${webxml.zmailDefaultAdminSkin}"/>
     </target>
 
     <target name='webxml-deploy-replace' depends='init'>
         <!-- replace %%xyz%% tokens -->
-        <replace file="${webapp.dir}/WEB-INF/web.xml" token="%%zimbraAdminURL%%" value="${webxml.zimbraAdminURL}"/>
-        <replace file="${webapp.dir}/WEB-INF/web.xml" token="%%zimbraMailURL%%" value="${webxml.zimbraMailURL}"/>
-        <replace file="${webapp.dir}/WEB-INF/web.xml" token="%%zimbraAdminPort%%" value="${webxml.zimbraAdminPort}"/>
-        <replace file="${webapp.dir}/WEB-INF/web.xml" token="%%zimbraMailPort%%" value="${webxml.zimbraMailPort}"/>
-        <replace file="${webapp.dir}/WEB-INF/web.xml" token="%%zimbraMailSSLPort%%" value="${webxml.zimbraMailSSLPort}"/>
-    	<replace file="${webapp.dir}/WEB-INF/web.xml" token="%%zimbraMailTrustedIP%%" value="${webxml.zimbraMailTrustedIP}"/>
-    	<replace file="${webapp.dir}/WEB-INF/web.xml" token="%%zimbraHttpDosFilterMaxRequestsPerSec%%" value="${webxml.zimbraHttpDosFilterMaxRequestsPerSec}"/>
+        <replace file="${webapp.dir}/WEB-INF/web.xml" token="%%zmailAdminURL%%" value="${webxml.zmailAdminURL}"/>
+        <replace file="${webapp.dir}/WEB-INF/web.xml" token="%%zmailMailURL%%" value="${webxml.zmailMailURL}"/>
+        <replace file="${webapp.dir}/WEB-INF/web.xml" token="%%zmailAdminPort%%" value="${webxml.zmailAdminPort}"/>
+        <replace file="${webapp.dir}/WEB-INF/web.xml" token="%%zmailMailPort%%" value="${webxml.zmailMailPort}"/>
+        <replace file="${webapp.dir}/WEB-INF/web.xml" token="%%zmailMailSSLPort%%" value="${webxml.zmailMailSSLPort}"/>
+    	<replace file="${webapp.dir}/WEB-INF/web.xml" token="%%zmailMailTrustedIP%%" value="${webxml.zmailMailTrustedIP}"/>
+    	<replace file="${webapp.dir}/WEB-INF/web.xml" token="%%zmailHttpDosFilterMaxRequestsPerSec%%" value="${webxml.zmailHttpDosFilterMaxRequestsPerSec}"/>
     </target>
 
     <target name='clean' depends='customer-init'>
@@ -1261,9 +1261,9 @@ if (ext == null) ext = "";
     </target>
 
 	<!-- JavaScript API Documentation Tasks -->
-	<target name="clean-jsapi-zimbra-doc" >
-        <delete dir="${build.jsapi-zimbra-doc.dir}"/>
-        <delete file="${jsapi-zimbra-doc.file}"/>
+	<target name="clean-jsapi-zmail-doc" >
+        <delete dir="${build.jsapi-zmail-doc.dir}"/>
+        <delete file="${jsapi-zmail-doc.file}"/>
 	</target>
 
 	<target name="clean-jsapi-inventory" >
@@ -1276,24 +1276,24 @@ if (ext == null) ext = "";
         <delete file="${jsapi-changelog.file}"/>
 	</target>
 
-	<target name="generate-jsapi-zimbra-doc" depends="clean-jsapi-zimbra-doc">
+	<target name="generate-jsapi-zmail-doc" depends="clean-jsapi-zmail-doc">
 	  <java jar="${jsdoctoolkit.dir}/jsrun.jar" fork="true" failonerror="true">
 	    <arg value="${jsdoctoolkit.dir}/app/run.js"/>
-	    <arg value="-t=${jsdoctoolkit.dir}/templates/zimbra-jsapi-doc"/>
-	    <arg value="-d=${build.jsapi-zimbra-doc.dir}"/>
+	    <arg value="-t=${jsdoctoolkit.dir}/templates/zmail-jsapi-doc"/>
+	    <arg value="-d=${build.jsapi-zmail-doc.dir}"/>
 	    <arg value="-r=4"/>
 	    <arg value="${js.dir}/ajax"/>
-	    <arg value="${js.dir}/zimbra/common/ZmErrorDialog.js"/>
-	    <arg value="${js.dir}/zimbra/csfe"/>
-	    <arg value="${js.dir}/zimbraMail/abook"/>
-	    <arg value="${js.dir}/zimbraMail/briefcase"/>
-	    <arg value="${js.dir}/zimbraMail/calendar"/>
-	    <arg value="${js.dir}/zimbraMail/core"/>
-	    <arg value="${js.dir}/zimbraMail/mail"/>
-	    <arg value="${js.dir}/zimbraMail/portal"/>
-	    <arg value="${js.dir}/zimbraMail/prefs"/>
-	    <arg value="${js.dir}/zimbraMail/share"/>
-	    <arg value="${js.dir}/zimbraMail/tasks"/>
+	    <arg value="${js.dir}/zmail/common/ZmErrorDialog.js"/>
+	    <arg value="${js.dir}/zmail/csfe"/>
+	    <arg value="${js.dir}/zmailMail/abook"/>
+	    <arg value="${js.dir}/zmailMail/briefcase"/>
+	    <arg value="${js.dir}/zmailMail/calendar"/>
+	    <arg value="${js.dir}/zmailMail/core"/>
+	    <arg value="${js.dir}/zmailMail/mail"/>
+	    <arg value="${js.dir}/zmailMail/portal"/>
+	    <arg value="${js.dir}/zmailMail/prefs"/>
+	    <arg value="${js.dir}/zmailMail/share"/>
+	    <arg value="${js.dir}/zmailMail/tasks"/>
 	  </java>
 	</target>
 
@@ -1301,50 +1301,50 @@ if (ext == null) ext = "";
         <mkdir dir="${build.jsapi-inventory.dir}"/>
         <echo file="${build.jsapi-inventory.dir}/manifest.json">
 {
-	"build.version": "${zimbra.buildinfo.version}",
-	"build.release": "${zimbra.buildinfo.release}",
-	"build.date": "${zimbra.buildinfo.date}"
+	"build.version": "${zmail.buildinfo.version}",
+	"build.release": "${zmail.buildinfo.release}",
+	"build.date": "${zmail.buildinfo.date}"
 }
         </echo>
 	  <java jar="${jsdoctoolkit.dir}/jsrun.jar" fork="true" failonerror="true">
 	    <arg value="${jsdoctoolkit.dir}/app/run.js"/>
-	    <arg value="-t=${jsdoctoolkit.dir}/templates/zimbra-jsapi-inventory"/>
+	    <arg value="-t=${jsdoctoolkit.dir}/templates/zmail-jsapi-inventory"/>
 	    <arg value="-d=${build.jsapi-inventory.dir}"/>
 	    <arg value="-r=4"/>
 	    <arg value="-s"/>
 	    <arg value="${js.dir}/ajax"/>
-	    <arg value="${js.dir}/zimbra/common/ZmErrorDialog.js"/>
-	    <arg value="${js.dir}/zimbra/csfe"/>
-	    <arg value="${js.dir}/zimbraMail/abook"/>
-	    <arg value="${js.dir}/zimbraMail/briefcase"/>
-	    <arg value="${js.dir}/zimbraMail/calendar"/>
-	    <arg value="${js.dir}/zimbraMail/core"/>
-	    <arg value="${js.dir}/zimbraMail/mail"/>
-	    <arg value="${js.dir}/zimbraMail/portal"/>
-	    <arg value="${js.dir}/zimbraMail/prefs"/>
-	    <arg value="${js.dir}/zimbraMail/share"/>
-	    <arg value="${js.dir}/zimbraMail/tasks"/>
+	    <arg value="${js.dir}/zmail/common/ZmErrorDialog.js"/>
+	    <arg value="${js.dir}/zmail/csfe"/>
+	    <arg value="${js.dir}/zmailMail/abook"/>
+	    <arg value="${js.dir}/zmailMail/briefcase"/>
+	    <arg value="${js.dir}/zmailMail/calendar"/>
+	    <arg value="${js.dir}/zmailMail/core"/>
+	    <arg value="${js.dir}/zmailMail/mail"/>
+	    <arg value="${js.dir}/zmailMail/portal"/>
+	    <arg value="${js.dir}/zmailMail/prefs"/>
+	    <arg value="${js.dir}/zmailMail/share"/>
+	    <arg value="${js.dir}/zmailMail/tasks"/>
 	  </java>
 	</target>
 	
 	<target name="generate-jsapi-changelog" depends="compile,package-jsapi-inventory">
         <mkdir dir="${build.jsapi-changelog.dir}"/>
 		<copy todir="${build.jsapi-changelog.dir}">
-			<fileset dir="${jsdoctoolkit.dir}/templates/zimbra-jsapi-changelog">
+			<fileset dir="${jsdoctoolkit.dir}/templates/zmail-jsapi-changelog">
 				<exclude name="**/*.ftl"/>
 			</fileset>
 		</copy>
-		<java classname="com.zimbra.jsapi.JsChangeLogUtil" classpathref="class.path" fork="true" failonerror="true">
+		<java classname="org.zmail.jsapi.JsChangeLogUtil" classpathref="class.path" fork="true" failonerror="true">
 			<arg line="-output ${build.jsapi-changelog.dir}"/>
-		    <arg line="-template ${jsdoctoolkit.dir}/templates/zimbra-jsapi-changelog"/>
+		    <arg line="-template ${jsdoctoolkit.dir}/templates/zmail-jsapi-changelog"/>
 		    <arg line="-baseline.inventory ${docs.dir}/jsapi/jsapi-inventory.zip"/>
 		    <arg line="-current.inventory ${jsapi-inventory.file}"/>
 		</java>
 	</target>
 		
-	<target name="package-jsapi-zimbra-doc" depends="generate-jsapi-zimbra-doc">
-		<zip destfile="${jsapi-zimbra-doc.file}"
-		       basedir="${build.jsapi-zimbra-doc.dir}" />
+	<target name="package-jsapi-zmail-doc" depends="generate-jsapi-zmail-doc">
+		<zip destfile="${jsapi-zmail-doc.file}"
+		       basedir="${build.jsapi-zmail-doc.dir}" />
 	</target>
 
 	<target name="package-jsapi-inventory" depends="generate-jsapi-inventory">
@@ -1360,33 +1360,33 @@ if (ext == null) ext = "";
     <!-- image tasks -->
 
     <target name='sorticons' depends='images-init'>
-        <!-- usage:  make a "images" directory in your ZimbraWebClient directory and do:
+        <!-- usage:  make a "images" directory in your ZmailWebClient directory and do:
                   ant sorticons
           -->
-        <echo message='Sorting icons from:  ZimbraWebClient/image to ZimbraWebClient/WebRoot/img'/>
+        <echo message='Sorting icons from:  ZmailWebClient/image to ZmailWebClient/WebRoot/img'/>
         <echo/>
         <imagesort source='images' target='WebRoot/img' delete='true'/>
     </target>
 
     <target name='sortskin' depends='images-init'>
-        <!-- usage:  make a "images" directory in your ZimbraWebClient directory and do:
+        <!-- usage:  make a "images" directory in your ZmailWebClient directory and do:
                   ant -Dskin.dir=<pathtoskin> sortskin
                e.g.
                    ant -Dskin.dir=WebRoot/skins/steel sortskin
                or
-                   ant -Dskin.dir=../ZimbraCustomerServices/.../skins/someskin sortskin
+                   ant -Dskin.dir=../ZmailCustomerServices/.../skins/someskin sortskin
           -->
-        <echo message='Sorting icons from ZimbraWebClient/images to ${skin.dir}/img'/>
+        <echo message='Sorting icons from ZmailWebClient/images to ${skin.dir}/img'/>
         <imagesort source='images' target='${skin.dir}/img' delete='true'/>
     </target>
 
     <target name='sortcustomerimg' depends='images-init'>
-        <!-- usage:  make a "images" directory in your ZimbraWebClient directory and do:
+        <!-- usage:  make a "images" directory in your ZmailWebClient directory and do:
                   ant -Denv.CUSTOMER_SKIN=<customername> sortcustomerimg
                e.g.
                    ant -Denv.CUSTOMER_SKIN=velodrome sortcustomerimg
           -->
-        <echo message='Sorting icons from ZimbraWebClient/images to ${skin.dir}/img'/>
+        <echo message='Sorting icons from ZmailWebClient/images to ${skin.dir}/img'/>
         <imagesort source='images' target='${customer.web.dir}/img' delete='true'/>
     </target>
 
@@ -1433,22 +1433,22 @@ if (ext == null) ext = "";
         <mkdir dir="${ffext.build.dir}/chrome"/>
         <copy file="${ffext.src.dir}/chrome.manifest" todir="${ffext.build.dir}"/>
         <copy file="${ffext.src.dir}/install.rdf" todir="${ffext.build.dir}"/>
-        <zip destfile="${ffext.build.dir}/chrome/${ffext.jarfile}" basedir="${ffext.src.dir}/chrome/zimbradnd"/>
+        <zip destfile="${ffext.build.dir}/chrome/${ffext.jarfile}" basedir="${ffext.src.dir}/chrome/zmaildnd"/>
         <zip destfile="${ffext.build.dir}/${ffext.xpifile}" basedir="${ffext.build.dir}"/>
     </target>
 
     <!-- JSP PRECOMPILE STUFF -->
     <property name="jspc.src.dir" value="${build.dir}/WebRoot" />
-    <property name="jspc.build.dir" value="${build.dist.dir}/jetty/work/zimbra/jsp" />
+    <property name="jspc.build.dir" value="${build.dist.dir}/jetty/work/zmail/jsp" />
 
     <path id='jspc.class.path'>
         <pathelement  path="${build.classes.dir}" />
         <pathelement path="${server.dist.dir}/jetty/resources" />
         <fileset dir="${lib.dir}/jsp-2.1" includes="*.jar"/>
-        <fileset dir="${taglib.build.dir}" includes="zimbrataglib.jar"/>
-        <fileset dir="${client.build.dir}" includes="zimbraclient.jar"/>
-        <fileset dir="${server.dist.dir}/jetty/common/lib" includes="zimbracommon.jar"/>
-        <fileset dir="${server.build.dir}" includes="zimbrastore.jar"/>
+        <fileset dir="${taglib.build.dir}" includes="zmailtaglib.jar"/>
+        <fileset dir="${client.build.dir}" includes="zmailclient.jar"/>
+        <fileset dir="${server.dist.dir}/jetty/common/lib" includes="zmailcommon.jar"/>
+        <fileset dir="${server.build.dir}" includes="zmailstore.jar"/>
         <fileset dir="${lib.dir}" includes="standard.jar,servlet-api-2.5.jar"/>
         <fileset dir="${common.lib.dir}" includes="*.jar"/>
         <fileset dir="${jspc.src.dir}/WEB-INF/lib" includes="*.jar"/>
@@ -1501,8 +1501,8 @@ if (ext == null) ext = "";
     <target name="jspc.build" depends="jspc.precompile,jspc.compile"/>
 
     <target name="jspc.deploy" depends="jspc.build">
-        <mkdir dir="/opt/zimbra/jetty/work/zimbra/jsp"/>
-        <copy todir="/opt/zimbra/jetty/work/zimbra/jsp" overwrite="true">
+        <mkdir dir="/opt/zmail/jetty/work/zmail/jsp"/>
+        <copy todir="/opt/zmail/jetty/work/zmail/jsp" overwrite="true">
             <fileset dir="${jspc.build.dir}"/>
         </copy>
     </target>

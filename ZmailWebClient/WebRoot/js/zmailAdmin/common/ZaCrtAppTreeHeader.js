@@ -26,7 +26,7 @@ ZaCrtAppTreeHeader = function(parent, className, buttons) {
     var cssClass = className || "ZaCtrAppTreeHeader";
 	DwtButton.call(this, parent, "", cssClass, Dwt.ABSOLUTE_STYLE);
     this.preObj = null;
-	this._historyMgr = ZaZimbraAdmin.getInstance().getHisotryMgr();
+	this._historyMgr = ZaZmailAdmin.getInstance().getHisotryMgr();
     this._historyMgr.addChangeListener(new AjxListener(this, this.updateMenu));
     this.menu = new ZaPopupMenu(this);
     this.menu.setWidth(150);
@@ -69,7 +69,7 @@ ZaCrtAppTreeHeader.prototype.setRightImg = function (imgName) {
 ZaCrtAppTreeHeader.prototype._handleClick =
 function(ev) {
     if (this._isArrowEvent(ev)) {
-        var tree = ZaZimbraAdmin.getInstance().getOverviewPanelController().getOverviewPanel().getFolderTree();
+        var tree = ZaZmailAdmin.getInstance().getOverviewPanelController().getOverviewPanel().getFolderTree();
         tree.setSelectionByPath(this.preObj.path, false);
     }
     // Nothing doing here
@@ -77,7 +77,7 @@ function(ev) {
 
 ZaCrtAppTreeHeader.prototype._getPreviousObject = function(path) {
 
-    var tree = ZaZimbraAdmin.getInstance().getOverviewPanelController().getOverviewPanel().getFolderTree();
+    var tree = ZaZmailAdmin.getInstance().getOverviewPanelController().getOverviewPanel().getFolderTree();
     var currentRoot = tree.getCurrentRootItem();
     var dataItem = currentRoot.getData("dataItem");
     var path = tree.getABPath(dataItem);

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.util.yc.oauth;
+package org.zmail.cs.offline.util.yc.oauth;
 
 import java.io.InputStream;
 import java.util.HashMap;
@@ -23,15 +23,15 @@ import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 
-import com.zimbra.common.httpclient.HttpClientUtil;
-import com.zimbra.common.util.ZimbraHttpConnectionManager;
-import com.zimbra.cs.offline.OfflineLog;
+import org.zmail.common.httpclient.HttpClientUtil;
+import org.zmail.common.util.ZmailHttpConnectionManager;
+import org.zmail.cs.offline.OfflineLog;
 
 public abstract class OAuthRequest {
 
     protected Map<String, String> params = new HashMap<String, String>();
     private OAuthToken token;
-    protected static HttpClient httpClient = ZimbraHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
+    protected static HttpClient httpClient = ZmailHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
 
     public OAuthRequest(OAuthToken token) {
         this.token = token;
@@ -76,7 +76,7 @@ public abstract class OAuthRequest {
                     OAuthHelper.getBaseString(this.params, getEndpointURL(), getHttpMethod(), getStep()),
                     OAuthConstants.OAUTH_CONSUMER_SECRET_VALUE, getToken().getTokenSecret());
             this.addParam(OAuthConstants.OAUTH_SIGNATURE, signature);
-        } catch (com.zimbra.cs.offline.util.yc.oauth.OAuthException e) {
+        } catch (org.zmail.cs.offline.util.yc.oauth.OAuthException e) {
             throw new OAuthException("Generate signature error at " + getStep(), "", false, null, null);
         }
     }

@@ -14,24 +14,24 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.briefcase.file;
+package org.zmail.qa.selenium.projects.desktop.tests.briefcase.file;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.FileItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.GeneralUtility;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.SleepUtil;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.briefcase.DialogCheckInFile;
+import org.zmail.qa.selenium.framework.items.FileItem;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.GeneralUtility;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.SleepUtil;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.briefcase.DialogCheckInFile;
 
 public class CheckInFile extends AjaxCommonTest {
 
@@ -45,13 +45,13 @@ public class CheckInFile extends AjaxCommonTest {
 
    @Test(description = "Check Out File through SOAP - right click 'Check In' - click 'Cancel'", groups = { "functional" })
    public void CheckInFile_01() throws HarnessException {
-      ZimbraAccount account = app.zGetActiveAccount();
+      ZmailAccount account = app.zGetActiveAccount();
 
       FolderItem briefcaseFolder = FolderItem.importFromSOAP(account,
             SystemFolder.Briefcase);
 
       // Create file item
-      String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+      String filePath = ZmailSeleniumProperties.getBaseDirectory()
             + "/data/public/other/putty.log";
 
       FileItem file = new FileItem(filePath);
@@ -62,7 +62,7 @@ public class CheckInFile extends AjaxCommonTest {
       String attachmentId = account.uploadFile(filePath);
 
       // Save uploaded file to briefcase through SOAP
-      account.soapSend("<SaveDocumentRequest xmlns='urn:zimbraMail'>"
+      account.soapSend("<SaveDocumentRequest xmlns='urn:zmailMail'>"
             + "<doc l='" + briefcaseFolder.getId() + "'>" + "<upload id='"
             + attachmentId + "'/>" + "</doc>" + "</SaveDocumentRequest>");
 
@@ -70,7 +70,7 @@ public class CheckInFile extends AjaxCommonTest {
 
       // search the uploaded file
       account
-            .soapSend("<SearchRequest xmlns='urn:zimbraMail' types='document'>"
+            .soapSend("<SearchRequest xmlns='urn:zmailMail' types='document'>"
                   + "<query>"
                   + fileName
                   + "</query>"
@@ -93,7 +93,7 @@ public class CheckInFile extends AjaxCommonTest {
       
       // Check Out file through SOAP
       String id = account.soapSelectValue("//mail:doc", "id");
-      account.soapSend("<ItemActionRequest xmlns='urn:zimbraMail'>"
+      account.soapSend("<ItemActionRequest xmlns='urn:zmailMail'>"
             + "<action id='" + id + "' op='lock'/>"
             + "</ItemActionRequest>");
 
@@ -127,13 +127,13 @@ public class CheckInFile extends AjaxCommonTest {
    
    @Test(description = "Check Out File through SOAP - right click 'Discard Check Out'", groups = { "functional" })
    public void CheckInFile_02() throws HarnessException {
-      ZimbraAccount account = app.zGetActiveAccount();
+      ZmailAccount account = app.zGetActiveAccount();
 
       FolderItem briefcaseFolder = FolderItem.importFromSOAP(account,
             SystemFolder.Briefcase);
 
       // Create file item
-      String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+      String filePath = ZmailSeleniumProperties.getBaseDirectory()
             + "/data/public/other/testtextfile.txt";
 
       FileItem file = new FileItem(filePath);
@@ -144,13 +144,13 @@ public class CheckInFile extends AjaxCommonTest {
       String attachmentId = account.uploadFile(filePath);
 
       // Save uploaded file to briefcase through SOAP
-      account.soapSend("<SaveDocumentRequest xmlns='urn:zimbraMail'>"
+      account.soapSend("<SaveDocumentRequest xmlns='urn:zmailMail'>"
             + "<doc l='" + briefcaseFolder.getId() + "'>" + "<upload id='"
             + attachmentId + "'/>" + "</doc>" + "</SaveDocumentRequest>");
 
       // search the uploaded file
       account
-            .soapSend("<SearchRequest xmlns='urn:zimbraMail' types='document'>"
+            .soapSend("<SearchRequest xmlns='urn:zmailMail' types='document'>"
                   + "<query>"
                   + fileName
                   + "</query>"
@@ -173,7 +173,7 @@ public class CheckInFile extends AjaxCommonTest {
       
       // Check Out file through SOAP
       String id = account.soapSelectValue("//mail:doc", "id");
-      account.soapSend("<ItemActionRequest xmlns='urn:zimbraMail'>"
+      account.soapSend("<ItemActionRequest xmlns='urn:zmailMail'>"
             + "<action id='" + id + "' op='lock'/>"
             + "</ItemActionRequest>");
 
@@ -210,7 +210,7 @@ public class CheckInFile extends AjaxCommonTest {
    public void cleanup() {
       // This is needed because the next test might upload the same file as these tests do
       // and it will fail if there is a duplicate file in briefcase
-      ZimbraAccount.ResetAccountZDC();
+      ZmailAccount.ResetAccountZDC();
    }
 }
 

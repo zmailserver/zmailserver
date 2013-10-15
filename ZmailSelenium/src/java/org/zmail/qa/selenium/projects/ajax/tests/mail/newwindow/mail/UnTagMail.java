@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.newwindow.mail;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.newwindow.mail;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.SeparateWindowDisplayMail;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.SeparateWindowDisplayMail;
 
 public class UnTagMail extends PrefGroupMailByMessageTest {
 
@@ -39,10 +39,10 @@ public class UnTagMail extends PrefGroupMailByMessageTest {
 	public void UnTagMail_01() throws HarnessException {
 
 		// Create the tag to delete
-		String tagname = "tag" + ZimbraSeleniumProperties.getUniqueString();
+		String tagname = "tag" + ZmailSeleniumProperties.getUniqueString();
 		
 		app.zGetActiveAccount().soapSend(
-					"<CreateTagRequest xmlns='urn:zimbraMail'>"
+					"<CreateTagRequest xmlns='urn:zmailMail'>"
 				+	  	"<tag name='"+ tagname +"' color='1' />"
 				+	"</CreateTagRequest>");
 
@@ -50,12 +50,12 @@ public class UnTagMail extends PrefGroupMailByMessageTest {
 		ZAssert.assertNotNull(tag, "Verify the tag was created");
 
 		
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
 
 		// Add a message to the mailbox
 		FolderItem inboxFolder = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Inbox);
 		app.zGetActiveAccount().soapSend(
-					"<AddMsgRequest xmlns='urn:zimbraMail'>"
+					"<AddMsgRequest xmlns='urn:zmailMail'>"
 				+		"<m l='" + inboxFolder.getId() + "' t='"+ tag.getId() +"'>"
 				+			"<content>"
 				+				"From: foo@foo.com\n"
@@ -110,7 +110,7 @@ public class UnTagMail extends PrefGroupMailByMessageTest {
 
 		// Make sure the tag was applied to the message
 		app.zGetActiveAccount().soapSend(
-						"<GetMsgRequest xmlns='urn:zimbraMail'>"
+						"<GetMsgRequest xmlns='urn:zmailMail'>"
 				+			"<m id='" + mail.getId() + "'/>"
 				+		"</GetMsgRequest>");
 		String mailTags = app.zGetActiveAccount().soapSelectValue("//mail:m", "t");

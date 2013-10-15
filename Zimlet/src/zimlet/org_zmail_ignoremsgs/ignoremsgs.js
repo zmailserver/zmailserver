@@ -11,7 +11,7 @@
  * Software distributed under the License is distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
- *@Author Raja Rao DV rrao@zimbra.com
+ *@Author Raja Rao DV rrao@zmail.com
  * Allows ignoring message for a specific period of time
  */
 
@@ -71,7 +71,7 @@ ZmIgnoreMsgsZimlet.prototype.setIgnoreMsgsFldrId =
 				}
 				return;
 			}
-			var soapDoc = AjxSoapDoc.create("GetFolderRequest", "urn:zimbraMail");
+			var soapDoc = AjxSoapDoc.create("GetFolderRequest", "urn:zmailMail");
 			var folderNode = soapDoc.set("folder");
 			folderNode.setAttribute("l", appCtxt.getFolderTree().root.id);
 
@@ -168,7 +168,7 @@ ZmIgnoreMsgsZimlet.prototype.createFolder =
 
 ZmIgnoreMsgsZimlet.prototype._createFolder =
 		function(params) {
-			var jsonObj = {CreateFolderRequest:{_jsns:"urn:zimbraMail"}};
+			var jsonObj = {CreateFolderRequest:{_jsns:"urn:zmailMail"}};
 			var folder = jsonObj.CreateFolderRequest.folder = {};
 			for (var i in params) {
 				if (i == "callback" || i == "errorCallback" || i == "postCallback") {

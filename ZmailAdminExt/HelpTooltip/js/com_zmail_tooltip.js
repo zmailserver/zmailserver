@@ -14,10 +14,10 @@
  */
 
 if(window.console && window.console.log) {
-    window.console.log("Starting loading com_zimbra_helptooltip.js")
+    window.console.log("Starting loading org_zmail_helptooltip.js")
 }
 
-if(ZaSettings && ZaSettings.EnabledZimlet["com_zimbra_tooltip"]){
+if(ZaSettings && ZaSettings.EnabledZimlet["org_zmail_tooltip"]){
 
 if(XFormItem) {
     XFormItem.prototype.helpTooltip = true;
@@ -114,5 +114,5 @@ function() {
 }
 
 if(window.console && window.console.log) {
-    window.console.log("loaded com_zimbra_helptooltip.js")
+    window.console.log("loaded org_zmail_helptooltip.js")
 }

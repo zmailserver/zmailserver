@@ -54,14 +54,14 @@ ZaItem.MAILQ_ITEM = "message";
 ZaItem.MAILQ = "mailque";
 ZaItem.HOME = "home";
 ZaItem.A_objectClass = "objectClass";
-ZaItem.A_zimbraId = "zimbraId";
+ZaItem.A_zmailId = "zmailId";
 ZaItem.A_cn = "cn" ;
-ZaItem.A_zimbraACE = "zimbraACE";
-ZaItem.A_zimbraCreateTimestamp = "zimbraCreateTimestamp";
+ZaItem.A_zmailACE = "zmailACE";
+ZaItem.A_zmailCreateTimestamp = "zmailCreateTimestamp";
 
 /* Translation of  the attribute names to the screen names */
 ZaItem._ATTR = new Object();
-ZaItem._ATTR[ZaItem.A_zimbraId] = ZaMsg.attrDesc_zimbraId;
+ZaItem._ATTR[ZaItem.A_zmailId] = ZaMsg.attrDesc_zmailId;
 
 ZaItem.ID_PATTERN = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
 
@@ -299,8 +299,8 @@ ZaItem.prototype.parseTargetsRightsFromJS = function(targetObj) {
 						}
 					}
 				}
-				if(!getAttrs[ZaItem.A_zimbraId] ) {
-					this.attrsToGet.push(ZaItem.A_zimbraId);
+				if(!getAttrs[ZaItem.A_zmailId] ) {
+					this.attrsToGet.push(ZaItem.A_zmailId);
 				}				
 			} 
 			if (targetObj.getAttrs[0].all){
@@ -388,7 +388,7 @@ ZaItem.prototype._getEffectiveRights = function (by, val, expandDefaults) {
     var inCacheProcess =  ZaItem.inCacheProcess(val);
     var resp;
     if (((!ZaItem.RightCache[cacheName])&&inCacheProcess) || !inCacheProcess) {
-        var soapDoc = AjxSoapDoc.create("GetEffectiveRightsRequest", ZaZimbraAdmin.URN, null);
+        var soapDoc = AjxSoapDoc.create("GetEffectiveRightsRequest", ZaZmailAdmin.URN, null);
         if(expandDefaults) {
             soapDoc.setMethodAttribute("expandAllAttrs","getAttrs");
         }
@@ -400,7 +400,7 @@ ZaItem.prototype._getEffectiveRights = function (by, val, expandDefaults) {
 
         elTarget.setAttribute("type",this.type);
 
-        var elGrantee = soapDoc.set("grantee", ZaZimbraAdmin.currentUserId);
+        var elGrantee = soapDoc.set("grantee", ZaZmailAdmin.currentUserId);
         elGrantee.setAttribute("by","id");
 
         var csfeParams = new Object();
@@ -426,7 +426,7 @@ ZaItem.prototype.loadNewObjectDefaults = function (domainBy, domain, cosBy, cos)
 	if(!this.type)
 		return;
 		
-	var soapDoc = AjxSoapDoc.create("GetCreateObjectAttrsRequest", ZaZimbraAdmin.URN, null);
+	var soapDoc = AjxSoapDoc.create("GetCreateObjectAttrsRequest", ZaZmailAdmin.URN, null);
 	var elTarget = soapDoc.set("target", "");
 	elTarget.setAttribute("type",this.type);	
 
@@ -613,8 +613,8 @@ function (obj) {
 		this.attrs[ZaAccount.A_description] = [this.attrs[ZaAccount.A_description]];
 	}	
 	
-	if(!this.attrs[ZaItem.A_zimbraId] && this.id) {
-		this.attrs[ZaItem.A_zimbraId] = this.id;
+	if(!this.attrs[ZaItem.A_zmailId] && this.id) {
+		this.attrs[ZaItem.A_zmailId] = this.id;
 	}	
 }
 
@@ -722,7 +722,7 @@ function (newAlias) {
 		default: throw new Error("Can't add alias for account type: " + this.type) ;				
 	}
 	
-	var soapDoc = AjxSoapDoc.create(soapCmd, ZaZimbraAdmin.URN, null);
+	var soapDoc = AjxSoapDoc.create(soapCmd, ZaZmailAdmin.URN, null);
 	soapDoc.set("id", this.id);
 	soapDoc.set("alias", newAlias);	
 	
@@ -750,7 +750,7 @@ function (aliasToRemove) {
 		default: throw new Error("Can't add alias for account type: " + account.type) ;				
 	}
 
-	var soapDoc = AjxSoapDoc.create(soapCmd, ZaZimbraAdmin.URN, null);
+	var soapDoc = AjxSoapDoc.create(soapCmd, ZaZmailAdmin.URN, null);
 	soapDoc.set("id", this.id);
 	soapDoc.set("alias", aliasToRemove);	
 	//var command = new ZmCsfeCommand();
@@ -777,37 +777,37 @@ function () {
 
        //if(window.console && window.console.log) console.log("Checking the interop settings ...") ;
        var soapCmd  = "CheckExchangeAuthRequest";
-       var soapDoc = AjxSoapDoc.create(soapCmd, ZaZimbraAdmin.URN, null);
+       var soapDoc = AjxSoapDoc.create(soapCmd, ZaZmailAdmin.URN, null);
        var authEl = soapDoc.set("auth", "") ;
 
-        var attrNames = [ZaDomain.A_zimbraFreebusyExchangeURL, ZaDomain.A_zimbraFreebusyExchangeAuthScheme,
-                             ZaDomain.A_zimbraFreebusyExchangeAuthUsername, ZaDomain.A_zimbraFreebusyExchangeAuthPassword ];
+        var attrNames = [ZaDomain.A_zmailFreebusyExchangeURL, ZaDomain.A_zmailFreebusyExchangeAuthScheme,
+                             ZaDomain.A_zmailFreebusyExchangeAuthUsername, ZaDomain.A_zmailFreebusyExchangeAuthPassword ];
 
         for (var i=0; i < attrNames.length; i ++ ) {
            var n = attrNames [i] ;
            var value =  currentSettingObj.attrs[n] || defaultValues.attrs[n];
            if (value == null) {
                var errorMsg ;
-               if (n == ZaDomain.A_zimbraFreebusyExchangeURL) {
+               if (n == ZaDomain.A_zmailFreebusyExchangeURL) {
                    errorMsg = ZaMsg.Error_missing_exchange_url ;
-               } else if (n == ZaDomain.A_zimbraFreebusyExchangeAuthScheme) {
+               } else if (n == ZaDomain.A_zmailFreebusyExchangeAuthScheme) {
                    errorMsg = ZaMsg.Error_missing_scheme ;
-               } else if (n == ZaDomain.A_zimbraFreebusyExchangeAuthUsername) {
+               } else if (n == ZaDomain.A_zmailFreebusyExchangeAuthUsername) {
                    errorMsg = ZaMsg.Error_missing_exchange_username ;
-               } else if (n == ZaDomain.A_zimbraFreebusyExchangeAuthPassword) {
+               } else if (n == ZaDomain.A_zmailFreebusyExchangeAuthPassword) {
                    errorMsg = ZaMsg.Error_missing_exchange_password ;
                }
                controller.popupErrorDialog(errorMsg);
                return ;
            } else {
                var attrName ;
-               if (n == ZaDomain.A_zimbraFreebusyExchangeURL) {
+               if (n == ZaDomain.A_zmailFreebusyExchangeURL) {
                    attrName = "url" ;
-               } else if (n == ZaDomain.A_zimbraFreebusyExchangeAuthScheme) {
+               } else if (n == ZaDomain.A_zmailFreebusyExchangeAuthScheme) {
                     attrName = "scheme" ;
-               } else if (n == ZaDomain.A_zimbraFreebusyExchangeAuthUsername) {
+               } else if (n == ZaDomain.A_zmailFreebusyExchangeAuthUsername) {
                    attrName = "user" ;
-               } else if (n == ZaDomain.A_zimbraFreebusyExchangeAuthPassword) {
+               } else if (n == ZaDomain.A_zmailFreebusyExchangeAuthPassword) {
                    attrName = "pass" ;
                }
                authEl.setAttribute(attrName, value ) ;
@@ -830,9 +830,9 @@ function () {
 
 ZaItem.clearInteropSettings = function () {
      var currentSettingObj = this.getForm().getInstance() ;
-     var attrNames = [ZaDomain.A_zimbraFreebusyExchangeURL, ZaDomain.A_zimbraFreebusyExchangeAuthScheme,
-                     ZaDomain.A_zimbraFreebusyExchangeAuthUsername, ZaDomain.A_zimbraFreebusyExchangeAuthPassword,
-                     ZaDomain.A_zimbraFreebusyExchangeUserOrg ] ;
+     var attrNames = [ZaDomain.A_zmailFreebusyExchangeURL, ZaDomain.A_zmailFreebusyExchangeAuthScheme,
+                     ZaDomain.A_zmailFreebusyExchangeAuthUsername, ZaDomain.A_zmailFreebusyExchangeAuthPassword,
+                     ZaDomain.A_zmailFreebusyExchangeUserOrg ] ;
 
     for (var i=0; i < attrNames.length; i ++ ) {
         var n = attrNames [i] ;
@@ -926,7 +926,7 @@ ZaItem.deepCloneListItem = function (sourceValue) {
  * Method of XFormItem
  */
 ZaItem.hasReadPermission = function (refToCheck, instance) {
-	if(ZaZimbraAdmin.currentAdminAccount.attrs[ZaAccount.A_zimbraIsAdminAccount] == 'TRUE')
+	if(ZaZmailAdmin.currentAdminAccount.attrs[ZaAccount.A_zmailIsAdminAccount] == 'TRUE')
 		return true;
 	
 	if(!instance)
@@ -958,7 +958,7 @@ Repeat_XFormItem.prototype.visibilityChecks = [ZaItem.hasReadPermission];
  * Method of XFormItem
  */
 ZaItem.hasWritePermission = function (refToCheck,instance) {
-	if(ZaZimbraAdmin.currentAdminAccount.attrs[ZaAccount.A_zimbraIsAdminAccount] == 'TRUE')
+	if(ZaZmailAdmin.currentAdminAccount.attrs[ZaAccount.A_zmailIsAdminAccount] == 'TRUE')
 		return true;
 
 	if(!instance)
@@ -992,7 +992,7 @@ Repeat_XFormItem.prototype.enableDisableChecks = [ZaItem.hasWritePermission];
  * Method of XFormItem
  */
 ZaItem.hasRight = function (right, instance) {
-	if(ZaZimbraAdmin.currentAdminAccount.attrs[ZaAccount.A_zimbraIsAdminAccount] == 'TRUE')
+	if(ZaZmailAdmin.currentAdminAccount.attrs[ZaAccount.A_zmailIsAdminAccount] == 'TRUE')
 		return true;
 		
 	if(!instance)
@@ -1009,7 +1009,7 @@ ZaItem.hasRight = function (right, instance) {
 XFormItem.prototype.hasRight = ZaItem.hasRight;
 
 ZaItem.hasAnyRight = function (rights, instance) {
-	if(ZaZimbraAdmin.currentAdminAccount.attrs[ZaAccount.A_zimbraIsAdminAccount] == 'TRUE')
+	if(ZaZmailAdmin.currentAdminAccount.attrs[ZaAccount.A_zmailIsAdminAccount] == 'TRUE')
 		return true;
 
 	if(!instance)
@@ -1034,7 +1034,7 @@ ZaItem.hasAnyRight = function (rights, instance) {
 XFormItem.prototype.hasAnyRight = ZaItem.hasAnyRight;
 
 ZaItem.adminHasAnyRight = function (rights) {
-    if(ZaZimbraAdmin.currentAdminAccount.attrs[ZaAccount.A_zimbraIsAdminAccount] == 'TRUE') {
+    if(ZaZmailAdmin.currentAdminAccount.attrs[ZaAccount.A_zmailIsAdminAccount] == 'TRUE') {
         return true;
     }
 
@@ -1047,7 +1047,7 @@ ZaItem.adminHasAnyRight = function (rights) {
     }
 
     var adminAccount = new ZaAccount();
-    adminAccount.load(null, ZaZimbraAdmin.currentAdminId, false, true);
+    adminAccount.load(null, ZaZmailAdmin.currentAdminId, false, true);
 
     if (!adminAccount.rights) {
         return false;

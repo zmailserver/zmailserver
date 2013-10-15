@@ -12,10 +12,10 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.ab;
+package org.zmail.cs.offline.ab;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.mailbox.Metadata;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.mailbox.Metadata;
 
 public class SyncState {
     private int lastModSequence;

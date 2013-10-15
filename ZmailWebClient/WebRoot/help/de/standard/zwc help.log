@@ -1,5 +1,5 @@
 ﻿|SourceProjectName:ZWC Help.hpr
-|DestinationProjectName:zimbra_user_help.htm
+|DestinationProjectName:zmail_user_help.htm
 whhost.js
 whmsg.js
 whmozemu.js
@@ -131,9 +131,9 @@ whskin_mbars.htm
 whskin_frmset010.htm
 whst_topics.xml
 whskin_frmset01.htm
-zimbra_user_help_hha.hhk
-zimbra_user_help.hhc
-zimbra_user_help.hhk
+zmail_user_help_hha.hhk
+zmail_user_help.hhc
+zmail_user_help.hhk
 standard\adding_background_color_to_calendars.htm
 standard\b_about_calendar.htm
 standard\b_adding_new_contacts.htm
@@ -180,7 +180,7 @@ standard\searching_for_messages_sent_to_or_received_from_a_contact_name.htm
 standard\subscribing_to_rss_atom_feeds.htm
 standard\using_the_trash_folder.htm
 version.htm
-zimbra_basic_user_help.htm
+zmail_basic_user_help.htm
 zwc_help_files\12_search\and_versus_or_searches.htm
 zwc_help_files\12_search\non-western_language_attachments.htm
 zwc_help_files\12_search\search_example.htm
@@ -211,21 +211,21 @@ zwc_help_files\3_compose\set_preferences_for_forwarded_email.htm
 zwc_help_files\3_compose\using_html_to_compose_messages.htm
 zwc_help_files\4_filters\filter_conditions.htm
 zwc_help_files\9_tasks\using_task_lists.htm
-zimbra_user_help.glo
+zmail_user_help.glo
 zwc_8.css
 zwc_help_files\searchhelptopics.css
 newwindowbutton.png
 basicsearchfolder.png
-zimbra_desktop_icons_32x32.png
+zmail_desktop_icons_32x32.png
 mail.png
-zimbra_logo.png
+zmail_logo.png
 groupcontasticon.png
 standard\navigating_around_your_mailbox00001.jpg
 calendarmultimgtview.gif
 ehlpdhtm.js
 searchoptions.xml
 robohhre.lng
-zimbra_user_help.ppf
+zmail_user_help.ppf
 whxdata\package_0.xml
 whxdata\package_1.xml
 whxdata\package_2.xml
@@ -424,6 +424,6 @@ whgdata\whlstf72.htm
 whgdata\whlstf73.htm
 whgdata\whlstf74.htm
 whgdata\whlstg0.htm
-zimbra_user_help.htm
-zimbra_user_help_csh.htm
-zimbra_user_help_rhc.htm
+zmail_user_help.htm
+zmail_user_help_csh.htm
+zmail_user_help_rhc.htm

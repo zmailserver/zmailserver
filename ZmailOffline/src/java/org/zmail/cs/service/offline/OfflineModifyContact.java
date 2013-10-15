@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.offline;
+package org.zmail.cs.service.offline;
 
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.service.mail.ModifyContact;
-import com.zimbra.cs.service.util.ItemId;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.service.mail.ModifyContact;
+import org.zmail.cs.service.util.ItemId;
 
 public class OfflineModifyContact extends ModifyContact {
 

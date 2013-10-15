@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.octopus.tests.history;
+package org.zmail.qa.selenium.projects.octopus.tests.history;
 
 import java.util.ArrayList;
 
@@ -22,20 +22,20 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.items.FileItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.items.HistoryItem;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.octopus.core.OctopusCommonTest;
-import com.zimbra.qa.selenium.projects.octopus.ui.DisplayFilePreview;
-import com.zimbra.qa.selenium.projects.octopus.ui.PageHistory;
-import com.zimbra.qa.selenium.projects.octopus.ui.PageHistory.GetText;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.items.FileItem;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.items.HistoryItem;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.octopus.core.OctopusCommonTest;
+import org.zmail.qa.selenium.projects.octopus.ui.DisplayFilePreview;
+import org.zmail.qa.selenium.projects.octopus.ui.PageHistory;
+import org.zmail.qa.selenium.projects.octopus.ui.PageHistory.GetText;
 
 
 public class ActivityHistory extends OctopusCommonTest {
@@ -63,13 +63,13 @@ public class ActivityHistory extends OctopusCommonTest {
 
 	@Test(description = "Upload file through RestUtil - verify account email in the history through SOAP", groups = { "functional" })
 	public void ActivityHistory_01() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem rootFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
 
 		// Create file item
-		String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+		String filePath = ZmailSeleniumProperties.getBaseDirectory()
 		+ "/data/public/other/testpptfile.ppt";
 
 		FileItem fileItem = new FileItem(filePath);
@@ -199,16 +199,16 @@ public class ActivityHistory extends OctopusCommonTest {
 	public void VerifyActivityForComments()throws HarnessException
 	{
 		// get current Active account
-		ZimbraAccount act = app.zGetActiveAccount();
+		ZmailAccount act = app.zGetActiveAccount();
 		//Select a file type to upload
 		String fileName = TEXT_FILE;
 		//Upload a file using Soap
 		_fileId = uploadFileViaSoap(act, fileName);
 
 
-		String Comment = "comment"+ ZimbraSeleniumProperties.getUniqueString();
+		String Comment = "comment"+ ZmailSeleniumProperties.getUniqueString();
 		//Add comments to a file using SOAP AddCommentRequest
-		act.soapSend("<AddCommentRequest xmlns='urn:zimbraMail'> <comment parentId='"
+		act.soapSend("<AddCommentRequest xmlns='urn:zmailMail'> <comment parentId='"
 				+ _fileId + "' text='" + Comment + "'/></AddCommentRequest>");
 
 		app.zPageOctopus.zToolbarPressButton(Button.B_TAB_HISTORY);
@@ -247,7 +247,7 @@ public class ActivityHistory extends OctopusCommonTest {
 	public void VerifyHistoryIsNotEmpty() throws HarnessException
 	{
 		// Get current Active account
-		ZimbraAccount act = app.zGetActiveAccount();
+		ZmailAccount act = app.zGetActiveAccount();
 		//Select a file type to upload
 		String fileName = TEXT_FILE;
 		//Upload a file using Soap
@@ -264,7 +264,7 @@ public class ActivityHistory extends OctopusCommonTest {
 	@Test(description ="Ensure version link in history opens that version" ,groups = { "smoke" })
 	public void VerifyVersionLinkNameFromHistory() throws HarnessException
 	{
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		// Create file item
 		String fileName = TEXT_FILE;
@@ -323,14 +323,14 @@ public class ActivityHistory extends OctopusCommonTest {
 		}
 		try {
 			// Refresh view
-			// ZimbraAccount account = app.zGetActiveAccount();
+			// ZmailAccount account = app.zGetActiveAccount();
 			// FolderItem item =
 			// FolderItem.importFromSOAP(account,SystemFolder.Briefcase);
-			// account.soapSend("<GetFolderRequest xmlns='urn:zimbraMail'><folder l='1' recursive='0'/>"
+			// account.soapSend("<GetFolderRequest xmlns='urn:zmailMail'><folder l='1' recursive='0'/>"
 			// + "</GetFolderRequest>");
-			// account.soapSend("<GetFolderRequest xmlns='urn:zimbraMail' requestId='folders' depth='1' tr='true' view='document'><folder l='"
+			// account.soapSend("<GetFolderRequest xmlns='urn:zmailMail' requestId='folders' depth='1' tr='true' view='document'><folder l='"
 			// + item.getId() + "'/></GetFolderRequest>");
-			// account.soapSend("<GetActivityStreamRequest xmlns='urn:zimbraMail' id='16'/>");
+			// account.soapSend("<GetActivityStreamRequest xmlns='urn:zmailMail' id='16'/>");
 			// app.zGetActiveAccount().accountIsDirty = true;
 			// app.zPageOctopus.sRefresh();
 

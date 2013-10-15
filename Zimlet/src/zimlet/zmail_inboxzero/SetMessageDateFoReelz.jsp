@@ -15,9 +15,9 @@
  * ***** END LICENSE BLOCK *****
 -->
 <%@ page import="java.util.*" %>
-<%@ page import="com.zimbra.cs.account.*" %>
-<%@ page import="com.zimbra.cs.mailbox.*" %>
-<%@ page import="com.zimbra.common.service.ServiceException" %>
+<%@ page import="org.zmail.cs.account.*" %>
+<%@ page import="org.zmail.cs.mailbox.*" %>
+<%@ page import="org.zmail.common.service.ServiceException" %>
 <%
 int itemId = getParameterInt(request, "itemId", -1);
 long date = getParameterLong(request, "date", -1L);

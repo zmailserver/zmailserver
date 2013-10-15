@@ -12,13 +12,13 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.clientuploader;
+package org.zmail.clientuploader;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.extension.ExtensionDispatcherServlet;
-import com.zimbra.cs.extension.ZimbraExtension;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.extension.ExtensionDispatcherServlet;
+import org.zmail.cs.extension.ZmailExtension;
 
-public class ZClientUploaderExt implements ZimbraExtension {
+public class ZClientUploaderExt implements ZmailExtension {
     public static final String EXTENTION_NAME = "clientUploader";
     public void init() {
         /*

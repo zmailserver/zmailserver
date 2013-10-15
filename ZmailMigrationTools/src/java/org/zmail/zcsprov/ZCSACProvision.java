@@ -12,16 +12,16 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.zcsprov;
+package org.zmail.zcsprov;
 
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.logging.*;
-import com.zimbra.common.user_info;
-import com.zimbra.common.ZCSProvParams;
-import com.zimbra.common.DomainInfo;
-import com.zimbra.utils.*;
-import com.zimbra.auth.*;
+import org.zmail.common.user_info;
+import org.zmail.common.ZCSProvParams;
+import org.zmail.common.DomainInfo;
+import org.zmail.utils.*;
+import org.zmail.auth.*;
 
 public class ZCSACProvision 
 {
@@ -147,21 +147,21 @@ public class ZCSACProvision
             prog_logger.log(Level.INFO, "Creating Domain: "+stDomain);
             DomainInfo dmInfo = new DomainInfo();
             dmInfo.name=stDomain;
-            dmInfo.GalMode="zimbra";
+            dmInfo.GalMode="zmail";
             dmInfo.GalMaxresults="100";
             dmInfo.Description="";
             dmInfo.Notes="";
-            dmInfo.AuthMechanism="zimbra";
+            dmInfo.AuthMechanism="zmail";
             dmInfo.DoaminCosID ="";
             dmInfo.PublicServiceHostName ="";
             dmInfo.DomainStatus="active";
             dmInfo.VirtualHosts = new ArrayList();
             //Add Virtual domains here
             //dmInfo.VirtualHosts.add("virtual_domain");
-            dmInfo.ZimbraLogOutUrl="http://mail."+stDomain;//Not used
-            dmInfo.ZimbraLoginUrl="http://mail."+stDomain;
-            dmInfo.zimbraDomainMaxAccounts=max_accounts;
-            dmInfo.zimbraAuthMech = acprovprms.zimbraAuthMech;
+            dmInfo.ZmailLogOutUrl="http://mail."+stDomain;//Not used
+            dmInfo.ZmailLoginUrl="http://mail."+stDomain;
+            dmInfo.zmailDomainMaxAccounts=max_accounts;
+            dmInfo.zmailAuthMech = acprovprms.zmailAuthMech;
             //preauth key
             try
             {
@@ -225,38 +225,38 @@ public class ZCSACProvision
         return retval;
     }
 
-    public boolean ModifyAccountMailTransport(String zimbraid, String MailTransport)
+    public boolean ModifyAccountMailTransport(String zmailid, String MailTransport)
     {
         boolean retval=false;
-        if (!(retval=zcsaccounts.ModifyAccountMailTransport(zimbraid,MailTransport)))
+        if (!(retval=zcsaccounts.ModifyAccountMailTransport(zmailid,MailTransport)))
         {
-            prog_logger.log(Level.WARNING, "ModifyAccountMailTransport Failed: "+zimbraid);
+            prog_logger.log(Level.WARNING, "ModifyAccountMailTransport Failed: "+zmailid);
         }
         if(dump_all)
         {
-            prog_logger.log(Level.INFO, "Success in ModifyAccountMailTransport: "+zimbraid);
+            prog_logger.log(Level.INFO, "Success in ModifyAccountMailTransport: "+zmailid);
         }
         return retval;
     }
 
-    public boolean ModifyAccountStatus(String zimbraid, String status)
+    public boolean ModifyAccountStatus(String zmailid, String status)
     {
         boolean retval=false;
-        if (!(retval=zcsaccounts.ModifyAccountStatus(zimbraid,status)))
+        if (!(retval=zcsaccounts.ModifyAccountStatus(zmailid,status)))
         {
-            prog_logger.log(Level.WARNING, "ModifyAccountStatus Failed: "+zimbraid);
+            prog_logger.log(Level.WARNING, "ModifyAccountStatus Failed: "+zmailid);
         }
         if(dump_all)
         {
-            prog_logger.log(Level.INFO, "Success in ModifyAccountStatus: "+zimbraid);
+            prog_logger.log(Level.INFO, "Success in ModifyAccountStatus: "+zmailid);
         }
         return retval;
     }
     
-    public boolean AddAccountAliasRequest(String zimbraid, String alias)
+    public boolean AddAccountAliasRequest(String zmailid, String alias)
     {
         boolean retval=false;
-        if (!(retval=zcsaccounts.AddAccountAliasRequest(zimbraid,alias)))
+        if (!(retval=zcsaccounts.AddAccountAliasRequest(zmailid,alias)))
         {
             prog_logger.log(Level.WARNING, "AddAccountAliasRequest Failed: "+alias);
         }
@@ -268,17 +268,17 @@ public class ZCSACProvision
         return retval;
     }
     
-    public boolean RemovePassword(String zimbraid)
+    public boolean RemovePassword(String zmailid)
     {
         boolean retval=false;
         //set to empty pwd
-        if (!(retval=zcsaccounts.SetPassword(zimbraid,"")))
+        if (!(retval=zcsaccounts.SetPassword(zmailid,"")))
         {
-            prog_logger.log(Level.WARNING, "RemovePassword Failed: "+zimbraid);
+            prog_logger.log(Level.WARNING, "RemovePassword Failed: "+zmailid);
         }
         if(dump_all)
         {
-            prog_logger.log(Level.INFO, "Success in RemovePassword: "+zimbraid);
+            prog_logger.log(Level.INFO, "Success in RemovePassword: "+zmailid);
         }
         return retval;
     }
@@ -286,7 +286,7 @@ public class ZCSACProvision
     public boolean AddZMAuthMech(String Domain)
     {
         boolean retval=false;
-        if (!(retval=ModifyDomainAttribute(Domain,"zimbraAuthMech" ,acprovprms.zimbraAuthMech)))
+        if (!(retval=ModifyDomainAttribute(Domain,"zmailAuthMech" ,acprovprms.zmailAuthMech)))
         {
             prog_logger.log(Level.WARNING, "AddZMAuthMech Failed: "+Domain);
         }

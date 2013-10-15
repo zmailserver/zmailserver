@@ -14,19 +14,19 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.ui;
+package org.zmail.qa.selenium.framework.ui;
 
 import java.util.List;
 
 import org.apache.log4j.*;
 
-import com.zimbra.qa.selenium.framework.items.TagItem;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.framework.util.GeneralUtility.WAIT_FOR_OPERAND;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties.AppType;
+import org.zmail.qa.selenium.framework.items.TagItem;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.GeneralUtility.WAIT_FOR_OPERAND;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties.AppType;
 
 /**
- * A <code>AbsTab</code> object represents a major Zimbra application "tab",
+ * A <code>AbsTab</code> object represents a major Zmail application "tab",
  * such as a Mail, Addressbook, Calendar, Tasks, Briefcase, Preferences, etc.
  * <p>
  * In addition to the major application tabs, the AbsPage also implements other
@@ -182,7 +182,7 @@ public abstract class AbsTab extends AbsPage {
 	 */
 	public void zWaitForDesktopLoadingSpinner(long timeout)
 			throws HarnessException {
-		if (ZimbraSeleniumProperties.getAppType() == AppType.DESKTOP) {
+		if (ZmailSeleniumProperties.getAppType() == AppType.DESKTOP) {
 			String spinnerLocator = "css=img[src='/img/animated/ImgSpinner.gif']";
 			if (GeneralUtility.waitForElementPresent(this, spinnerLocator,
 					timeout)) {
@@ -203,7 +203,7 @@ public abstract class AbsTab extends AbsPage {
 	 * @return Tag Item with the given tagName under given account
 	 * @throws HarnessException
 	 */
-	public TagItem zGetTagItem(ZimbraAccount account, String tagName)
+	public TagItem zGetTagItem(ZmailAccount account, String tagName)
 			throws HarnessException {
 		if (account == null) {
 			throw new HarnessException("Account cannot be null");

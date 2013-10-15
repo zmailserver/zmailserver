@@ -12,16 +12,16 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.tag;
+package org.zmail.cs.taglib.tag;
 
-import com.zimbra.cs.taglib.bean.NextPrevItemBean;
-import com.zimbra.cs.taglib.bean.ZSearchResultBean;
+import org.zmail.cs.taglib.bean.NextPrevItemBean;
+import org.zmail.cs.taglib.bean.ZSearchResultBean;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 import java.io.IOException;
 
-public class ComputeNextPrevItemTag extends ZimbraSimpleTag {
+public class ComputeNextPrevItemTag extends ZmailSimpleTag {
 
 
     private String mVar;

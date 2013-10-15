@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.nginx;
+package org.zmail.cs.nginx;
 
 public abstract class LookupEntry {
     private String mKey;

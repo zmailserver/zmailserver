@@ -12,9 +12,9 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.jsp;
+package org.zmail.cs.offline.jsp;
 
-import com.zimbra.soap.type.DataSource.ConnectionType;
+import org.zmail.soap.type.DataSource.ConnectionType;
 
 public class GmailBean extends ImapBean {
     public static final String Domain = "gmail.com";

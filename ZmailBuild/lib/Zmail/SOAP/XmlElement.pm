@@ -12,7 +12,7 @@
 # basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
 # ***** END LICENSE BLOCK *****
 # 
-package Zimbra::SOAP::XmlElement;
+package Zmail::SOAP::XmlElement;
 
 use strict;
 use warnings;
@@ -334,7 +334,7 @@ sub XPStart {
   my $expat = shift;
   my $tag = shift;
 
-  my $element = new Zimbra::SOAP::XmlElement($tag, $expat->namespace($tag));
+  my $element = new Zmail::SOAP::XmlElement($tag, $expat->namespace($tag));
 
   if ($#_ >= 0) {
       $element->attrs({@_});

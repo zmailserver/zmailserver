@@ -14,14 +14,14 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.util;
+package org.zmail.qa.selenium.framework.util;
 
 import java.text.*;
 import java.util.*;
 
 import org.apache.log4j.*;
 
-import com.zimbra.common.soap.Element;
+import org.zmail.common.soap.Element;
 
 public class ZDate {
 	Logger logger = LogManager.getLogger(ZDate.class);
@@ -99,7 +99,7 @@ public class ZDate {
 	}
 
 	/**
-	 * Create a ZDate object by parsing a Zimbra SOAP element, such as <s d="20140101T070000" u="1388577600000" tz="America/New_York"/>
+	 * Create a ZDate object by parsing a Zmail SOAP element, such as <s d="20140101T070000" u="1388577600000" tz="America/New_York"/>
 	 * @param e
 	 * @throws HarnessException
 	 */

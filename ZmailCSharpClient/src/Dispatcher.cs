@@ -17,9 +17,9 @@ using System.IO;
 using System.Xml;
 using System.Net;
 
-using Zimbra.Client.Soap;
+using Zmail.Client.Soap;
 
-namespace Zimbra.Client
+namespace Zmail.Client
 {
 	public class Dispatcher
 	{
@@ -116,7 +116,7 @@ namespace Zimbra.Client
 				ResponseManager.NewResponse(responseDoc) );
 
 			if( faultToException && respEnv.ApiResponse is SoapFault )
-				throw new ZimbraException( respEnv, re );
+				throw new ZmailException( respEnv, re );
 
 			return respEnv;
 		}

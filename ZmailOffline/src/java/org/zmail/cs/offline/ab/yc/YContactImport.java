@@ -12,20 +12,20 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.ab.yc;
+package org.zmail.cs.offline.ab.yc;
 
 import java.util.List;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.offline.OfflineDataSource;
-import com.zimbra.cs.account.offline.OfflineProvisioning;
-import com.zimbra.cs.mailbox.OfflineServiceException;
-import com.zimbra.cs.mailbox.YContactSync;
-import com.zimbra.cs.offline.OfflineLog;
-import com.zimbra.cs.offline.ab.LocalData;
-import com.zimbra.cs.offline.util.yc.YContactException;
-import com.zimbra.cs.offline.util.yc.oauth.OAuthManager;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.offline.OfflineDataSource;
+import org.zmail.cs.account.offline.OfflineProvisioning;
+import org.zmail.cs.mailbox.OfflineServiceException;
+import org.zmail.cs.mailbox.YContactSync;
+import org.zmail.cs.offline.OfflineLog;
+import org.zmail.cs.offline.ab.LocalData;
+import org.zmail.cs.offline.util.yc.YContactException;
+import org.zmail.cs.offline.util.yc.oauth.OAuthManager;
 
 
 public class YContactImport implements DataSource.DataImport {

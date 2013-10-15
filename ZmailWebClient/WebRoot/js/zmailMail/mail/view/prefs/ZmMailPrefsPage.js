@@ -41,7 +41,7 @@ function() {
 	if (!this._initialized) {
 		this._initialized = true;
 		if (this._blackListControl && this._whiteListControl) {
-			var soapDoc = AjxSoapDoc.create("GetWhiteBlackListRequest", "urn:zimbraAccount");
+			var soapDoc = AjxSoapDoc.create("GetWhiteBlackListRequest", "urn:zmailAccount");
 			var callback = new AjxCallback(this, this._handleResponseLoadWhiteBlackList);
 			appCtxt.getRequestMgr().sendRequest({soapDoc:soapDoc, asyncMode:true, callback:callback});
 		}
@@ -97,7 +97,7 @@ function() {
 ZmMailPrefsPage.prototype.addCommand =
 function(batchCmd) {
 	if (this.isWhiteBlackListDirty()) {
-		var soapDoc = AjxSoapDoc.create("ModifyWhiteBlackListRequest", "urn:zimbraAccount");
+		var soapDoc = AjxSoapDoc.create("ModifyWhiteBlackListRequest", "urn:zmailAccount");
 		this._blackListControl.setSoapContent(soapDoc, "blackList");
 		this._whiteListControl.setSoapContent(soapDoc, "whiteList");
 
@@ -606,9 +606,9 @@ function(changed) {
 		}
 	}
 	if (modified) {
-        var soapDoc = AjxSoapDoc.create("ModifyPrefsRequest", "urn:zimbraAccount");
+        var soapDoc = AjxSoapDoc.create("ModifyPrefsRequest", "urn:zmailAccount");
         var node = soapDoc.set("pref", "TRUE");
-        node.setAttribute("name", "zimbraPrefOutOfOfficeStatusAlertOnLogin");
+        node.setAttribute("name", "zmailPrefOutOfOfficeStatusAlertOnLogin");
         appCtxt.getAppController().sendRequest({soapDoc:soapDoc, asyncMode:true});
     }
 
@@ -661,7 +661,7 @@ function(dialog) {
 	window.onbeforeunload = null;
 	var url = AjxUtil.formatUrl();
 	DBG.println(AjxDebug.DBG1, "Conv mode change, redirect to: " + url);
-	ZmZimbraMail.sendRedirect(url); // redirect to self to force reload
+	ZmZmailMail.sendRedirect(url); // redirect to self to force reload
 };
 
 // ??? SHOULD THIS BE IN A NEW FILE?       ???

@@ -4,5 +4,5 @@ param (
 	[bool] $secure = $false,
 	[bool] $faultToException = $true )
 
-$global:zdisp = new-object Zimbra.Client.Dispatcher $server, $port, $secure, $faultToException
+$global:zdisp = new-object Zmail.Client.Dispatcher $server, $port, $secure, $faultToException
 echo $global:zdisp

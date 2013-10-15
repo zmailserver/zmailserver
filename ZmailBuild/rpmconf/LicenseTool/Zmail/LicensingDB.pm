@@ -1,10 +1,10 @@
-package Zimbra::LicensingDB;
+package Zmail::LicensingDB;
 
 use strict;
 use DBI;
 use Time::Local;
 
-#my $data_source="dbi:mysql:database=license;mysql_read_default_file=/opt/zimbra/conf/my.logger.cnf;mysql_socket=/opt/zimbra/logger/db/mysql.sock";
+#my $data_source="dbi:mysql:database=license;mysql_read_default_file=/opt/zmail/conf/my.logger.cnf;mysql_socket=/opt/zmail/logger/db/mysql.sock";
 my $data_source="dbi:mysql:database=license;mysql_read_default_file=/etc/my.cnf;mysql_socket=/var/lib/mysql/mysql.sock";
 
 my $username="license";
@@ -93,8 +93,8 @@ sub putKey {
 	my $statement = "insert into sign_keys (pubkey, privkey, gendate, expiredate, is_expired) ".
 		"values (?,?,?,?,?)";
 	my $sth = sqlExec ($statement,
-						Zimbra::LicenseKey::keyToString($key->{pubkey}),
-						Zimbra::LicenseKey::keyToString($key->{privkey}),
+						Zmail::LicenseKey::keyToString($key->{pubkey}),
+						Zmail::LicenseKey::keyToString($key->{privkey}),
 						tsToSqlTime($key->{gendate}),
 						tsToSqlTime($key->{expiredate}),
 						$key->{is_expired});

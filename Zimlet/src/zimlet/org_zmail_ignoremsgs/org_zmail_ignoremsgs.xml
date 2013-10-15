@@ -14,7 +14,7 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_ignoremsgs"
+<zimlet name="org_zmail_ignoremsgs"
         version="0.3"
         label="Ignore Messages"
         description="Allows you to ignore message threads.">

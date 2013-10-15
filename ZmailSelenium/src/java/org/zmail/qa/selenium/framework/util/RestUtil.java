@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.util;
+package org.zmail.qa.selenium.framework.util;
 
 import java.io.*;
 import java.net.URI;
@@ -51,8 +51,8 @@ import org.apache.log4j.Logger;
 
 /**
  * The <code>RestUtil</code> utility provides the ability to interact with the
- * Zimbra REST interface.  The Zimbra REST interface allows messaging clients
- * and end users to upload and download data files from the Zimbra server.
+ * Zmail REST interface.  The Zmail REST interface allows messaging clients
+ * and end users to upload and download data files from the Zmail server.
  * <p>
  * The RestUtil has methods for defining the REST URL to use, methods to set
  * authentication, data files, and HTTP parameters.  Two main methods are included,
@@ -105,8 +105,8 @@ public class RestUtil {
 	public RestUtil() {
 		logger.info("new RestUtil()");
 		
-		scheme = ZimbraSeleniumProperties.getStringProperty("server.scheme", "http");
-		String p = ZimbraSeleniumProperties.getStringProperty("server.port", "80");
+		scheme = ZmailSeleniumProperties.getStringProperty("server.scheme", "http");
+		String p = ZmailSeleniumProperties.getStringProperty("server.port", "80");
 		port = Integer.parseInt(p);
 		path = "service/home/~/";
 	}
@@ -116,12 +116,12 @@ public class RestUtil {
 	 * @param account
 	 * @return
 	 */
-	public ZimbraAccount setAuthentication(ZimbraAccount account) {
+	public ZmailAccount setAuthentication(ZmailAccount account) {
 		if ( account == null ) {
 			host = null;
 			authToken = null;
 		} else {
-			host = account.ZimbraMailHost;
+			host = account.ZmailMailHost;
 			authToken = account.MyAuthToken;			
 		}
 		return (account);
@@ -132,10 +132,10 @@ public class RestUtil {
     * @param account
     * @return
     */
-   public ZimbraAccount setZDAuthentication(ZimbraAccount account) {
-      ZimbraDesktopProperties zdp = ZimbraDesktopProperties.getInstance();
+   public ZmailAccount setZDAuthentication(ZmailAccount account) {
+      ZmailDesktopProperties zdp = ZmailDesktopProperties.getInstance();
       port = Integer.parseInt(zdp.getConnectionPort());
-      host = account.ZimbraMailClientHost;
+      host = account.ZmailMailClientHost;
       authToken = account.MyClientAuthToken;       
 
       return (account);
@@ -210,7 +210,7 @@ public class RestUtil {
 	 * Set the URI path to the default (i.e. /service/home/account@domain.com/
 	 * @param path
 	 */
-	public void setPath(ZimbraAccount account) {
+	public void setPath(ZmailAccount account) {
 		setPath("/service/home/"+ account.EmailAddress +"/");
 	}
 	
@@ -287,7 +287,7 @@ public class RestUtil {
 		}
 		
 		if ( session != null ) {
-			Cookie cookie = new Cookie(requestURI.getHost(), "JSESSIONID", session, "/zimbra", null, false);
+			Cookie cookie = new Cookie(requestURI.getHost(), "JSESSIONID", session, "/zmail", null, false);
 			initialState.addCookie(cookie);
 
 		}
@@ -477,7 +477,7 @@ public class RestUtil {
 		}
 		
 		if ( session != null ) {
-			Cookie cookie = new Cookie(requestURI.getHost(), "JSESSIONID", session, "/zimbra", null, false);
+			Cookie cookie = new Cookie(requestURI.getHost(), "JSESSIONID", session, "/zmail", null, false);
 			initialState.addCookie(cookie);
 
 		}
@@ -703,7 +703,7 @@ public class RestUtil {
 			try {
 									
 				// Create the output file
-				result = File.createTempFile("temp" + ZimbraSeleniumProperties.getUniqueString(), ".dat");
+				result = File.createTempFile("temp" + ZmailSeleniumProperties.getUniqueString(), ".dat");
 
 				reader = new BufferedReader(new FileReader(in));
 				writer = new PrintWriter(new FileWriter(result));

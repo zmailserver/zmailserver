@@ -12,24 +12,24 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.ab.gab;
+package org.zmail.cs.offline.ab.gab;
 
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.offline.OfflineDataSource;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Contact;
-import com.zimbra.cs.mailbox.Contact.Attachment;
-import com.zimbra.cs.offline.OfflineLog;
-import com.zimbra.cs.offline.ab.LocalData;
-import com.zimbra.cs.offline.ab.SyncState;
-import com.zimbra.cs.offline.ab.Change;
-import com.zimbra.cs.offline.ab.ContactGroup;
-import com.zimbra.cs.offline.ab.Ab;
-import com.zimbra.cs.db.DbDataSource.DataSourceItem;
-import com.zimbra.cs.mime.ParsedContact;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.service.ServiceException;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.offline.OfflineDataSource;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Contact;
+import org.zmail.cs.mailbox.Contact.Attachment;
+import org.zmail.cs.offline.OfflineLog;
+import org.zmail.cs.offline.ab.LocalData;
+import org.zmail.cs.offline.ab.SyncState;
+import org.zmail.cs.offline.ab.Change;
+import org.zmail.cs.offline.ab.ContactGroup;
+import org.zmail.cs.offline.ab.Ab;
+import org.zmail.cs.db.DbDataSource.DataSourceItem;
+import org.zmail.cs.mime.ParsedContact;
+import org.zmail.common.util.Log;
+import org.zmail.common.service.ServiceException;
 import com.google.gdata.client.http.HttpGDataRequest;
 import com.google.gdata.data.contacts.ContactEntry;
 import com.google.gdata.data.contacts.GroupMembershipInfo;

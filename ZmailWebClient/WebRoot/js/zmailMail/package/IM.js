@@ -26,21 +26,21 @@
  */
 
 AjxPackage.require("ajax.dwt.widgets.DwtButtonColorPicker");
-AjxPackage.require("zimbraMail.share.view.htmlEditor.ZmLiteHtmlEditor");
+AjxPackage.require("zmailMail.share.view.htmlEditor.ZmLiteHtmlEditor");
 AjxPackage.require("ajax.dwt.widgets.DwtSoundPlugin");
 
-AjxPackage.require("zimbraMail.share.view.dialog.ZmPromptDialog");
+AjxPackage.require("zmailMail.share.view.dialog.ZmPromptDialog");
 
-AjxPackage.require("zimbraMail.im.view.ZmChatWidget");
-AjxPackage.require("zimbraMail.im.view.ZmImNewChatDlg");
-AjxPackage.require("zimbraMail.im.view.ZmCustomStatusDlg");
+AjxPackage.require("zmailMail.im.view.ZmChatWidget");
+AjxPackage.require("zmailMail.im.view.ZmImNewChatDlg");
+AjxPackage.require("zmailMail.im.view.ZmCustomStatusDlg");
 
-AjxPackage.require("zimbraMail.im.view.popup.ZmTaskbarPopup");
-AjxPackage.require("zimbraMail.im.view.popup.ZmChatPopup");
-AjxPackage.require("zimbraMail.im.view.popup.ZmNewBuddyPopup");
-AjxPackage.require("zimbraMail.im.view.popup.ZmSubscribePopup");
-AjxPackage.require("zimbraMail.im.view.popup.ZmPresencePopup");
-AjxPackage.require("zimbraMail.im.view.popup.ZmGatewayPopup");
-AjxPackage.require("zimbraMail.im.view.popup.ZmBuddyListPopup");
+AjxPackage.require("zmailMail.im.view.popup.ZmTaskbarPopup");
+AjxPackage.require("zmailMail.im.view.popup.ZmChatPopup");
+AjxPackage.require("zmailMail.im.view.popup.ZmNewBuddyPopup");
+AjxPackage.require("zmailMail.im.view.popup.ZmSubscribePopup");
+AjxPackage.require("zmailMail.im.view.popup.ZmPresencePopup");
+AjxPackage.require("zmailMail.im.view.popup.ZmGatewayPopup");
+AjxPackage.require("zmailMail.im.view.popup.ZmBuddyListPopup");
 
-AjxPackage.require("zimbraMail.im.controller.ZmImController");
+AjxPackage.require("zmailMail.im.controller.ZmImController");

@@ -14,25 +14,25 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.tasks.mountpoints;
+package org.zmail.qa.selenium.projects.ajax.tests.tasks.mountpoints;
 
 
 import java.util.HashMap;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderMountpointItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.DialogEditFolder;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.DialogEditFolder.FolderColor;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderMountpointItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.DialogEditFolder;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.DialogEditFolder.FolderColor;
 
 
 public class ChangeColorMountpoint extends PrefGroupMailByMessageTest {
@@ -46,8 +46,8 @@ public class ChangeColorMountpoint extends PrefGroupMailByMessageTest {
 		super.startingPage = app.zPageTasks;
 		super.startingAccountPreferences = new HashMap<String, String>() {
 			{
-				put("zimbraPrefReadingPaneLocation", "bottom");
-				put("zimbraPrefShowSelectionCheckbox", "TRUE");
+				put("zmailPrefReadingPaneLocation", "bottom");
+				put("zmailPrefShowSelectionCheckbox", "TRUE");
 				
 			}
 		};
@@ -58,35 +58,35 @@ public class ChangeColorMountpoint extends PrefGroupMailByMessageTest {
 			groups = { "functional" })
 	public void ChangeColorMountpoint_01() throws HarnessException {
 		
-		ZimbraAccount Owner = (new ZimbraAccount()).provision().authenticate();
+		ZmailAccount Owner = (new ZmailAccount()).provision().authenticate();
 
 		// Owner creates a folder, shares it with current user
-		String ownerFoldername = "ownerfolder"+ ZimbraSeleniumProperties.getUniqueString();
+		String ownerFoldername = "ownerfolder"+ ZmailSeleniumProperties.getUniqueString();
 
 		
 		FolderItem ownerTask = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Tasks);
 		ZAssert.assertNotNull(ownerTask, "Verify the new owner folder exists");
 
-		Owner.soapSend("<CreateFolderRequest xmlns='urn:zimbraMail'>"
+		Owner.soapSend("<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+ "<folder name='" + ownerFoldername + "' l='"
 				+ ownerTask.getId() + "'/>" + "</CreateFolderRequest>");
 
 		FolderItem ownerFolder = FolderItem.importFromSOAP(Owner,ownerFoldername);
 		ZAssert.assertNotNull(ownerFolder,"Verify the new owner folder exists");
 
-		Owner.soapSend("<FolderActionRequest xmlns='urn:zimbraMail'>"
+		Owner.soapSend("<FolderActionRequest xmlns='urn:zmailMail'>"
 				+ "<action id='" + ownerFolder.getId() + "' op='grant'>"
 				+ "<grant d='" + app.zGetActiveAccount().EmailAddress
 				+ "' gt='usr' perm='r'/>" + "</action>"
 				+ "</FolderActionRequest>");
 
 		// Current user creates the mountpoint that points to the share
-		String mountpointFoldername = "mountpoint"+ ZimbraSeleniumProperties.getUniqueString();
+		String mountpointFoldername = "mountpoint"+ ZmailSeleniumProperties.getUniqueString();
 		app.zGetActiveAccount().soapSend(
-				"<CreateMountpointRequest xmlns='urn:zimbraMail'>"
+				"<CreateMountpointRequest xmlns='urn:zmailMail'>"
 						+ "<link l='1' name='" + mountpointFoldername
 						+ "' view='task' rid='" + ownerFolder.getId()
-						+ "' zid='" + Owner.ZimbraId + "'/>"
+						+ "' zid='" + Owner.ZmailId + "'/>"
 						+ "</CreateMountpointRequest>");
 
 		FolderMountpointItem mountpoint = FolderMountpointItem.importFromSOAP(
@@ -106,7 +106,7 @@ public class ChangeColorMountpoint extends PrefGroupMailByMessageTest {
 		dialog.zClickButton(Button.B_OK);
 
 		// Check the color
-		app.zGetActiveAccount().soapSend("<GetFolderRequest xmlns='urn:zimbraMail'/>");
+		app.zGetActiveAccount().soapSend("<GetFolderRequest xmlns='urn:zmailMail'/>");
 
 		String color = app.zGetActiveAccount().soapSelectValue("//mail:link[@name='" + mountpoint.getName() + "']", "color");
 		ZAssert.assertEquals(color, "8", "Verify the color of the folder is set to gray (8)");

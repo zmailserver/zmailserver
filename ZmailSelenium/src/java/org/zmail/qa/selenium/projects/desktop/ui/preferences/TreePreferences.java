@@ -17,21 +17,21 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.desktop.ui.preferences;
+package org.zmail.qa.selenium.projects.desktop.ui.preferences;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.zimbra.qa.selenium.framework.items.IItem;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties.AppType;
+import org.zmail.qa.selenium.framework.items.IItem;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties.AppType;
 
 
 /**
- * @author zimbra
+ * @author zmail
  *
  */
 public class TreePreferences extends AbsTree {
@@ -72,7 +72,7 @@ public class TreePreferences extends AbsTree {
 	public void zTreeItem(Action action, TreeItem item) throws HarnessException {
 		logger.info("zTreeItem(" + action +", "+ item +")");
 		String locator = null;
-		if (ZimbraSeleniumProperties.getAppType() == AppType.DESKTOP) {
+		if (ZmailSeleniumProperties.getAppType() == AppType.DESKTOP) {
 		   if ( !itemToLocator_desktop.containsKey(item) ) {
             throw new HarnessException("locator not defined in itemToLocator_desktop for "+ item);
          }

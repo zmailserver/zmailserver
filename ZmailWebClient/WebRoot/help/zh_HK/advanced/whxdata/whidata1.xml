@@ -20,7 +20,7 @@
   <topic name="管理郵件" url="zwc_help_files/2_manage_email/managing_your_email.htm" />
 </key>
 <key name="小日曆" >
-  <topic name="瀏覽 Zimbra 網絡用戶端" url="zwc_help_files/1_setting_up/navigating_the_zimbra_web_client.htm" />
+  <topic name="瀏覽 Zmail 網絡用戶端" url="zwc_help_files/1_setting_up/navigating_the_zmail_web_client.htm" />
 </key>
 <key name="已加密郵件，撰寫" >
   <topic name="撰寫及傳送已加密郵件" url="zwc_help_files/15_s_mime/compose_and_send_an_encrypted_message.htm" />
@@ -151,7 +151,7 @@
   <topic name="設定新郵件的桌面提醒" url="zwc_help_files/2_manage_email/setting_desktop_alerts_for_new_email_messages.htm" />
 </key>
 <key name="概況窗格" >
-  <topic name="瀏覽 Zimbra 網絡用戶端" url="zwc_help_files/1_setting_up/navigating_the_zimbra_web_client.htm" />
+  <topic name="瀏覽 Zmail 網絡用戶端" url="zwc_help_files/1_setting_up/navigating_the_zmail_web_client.htm" />
 </key>
 <key name="標準版網絡用戶端" >
   <topic name="使用進階版和標準版用戶端" url="zwc_help_files/1_setting_up/using_advanced_and_standard_clients.htm" />
@@ -231,7 +231,7 @@
   </key>
 </key>
 <key name="畫面" >
-  <topic name="瀏覽 Zimbra 網絡用戶端" url="zwc_help_files/1_setting_up/navigating_the_zimbra_web_client.htm" />
+  <topic name="瀏覽 Zmail 網絡用戶端" url="zwc_help_files/1_setting_up/navigating_the_zmail_web_client.htm" />
 </key>
 <key name="登入" >
   <topic name="正在登入和登出" url="zwc_help_files/1_setting_up/signing_in_and_signing_out.htm" />

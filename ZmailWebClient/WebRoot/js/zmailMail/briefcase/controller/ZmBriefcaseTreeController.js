@@ -101,7 +101,7 @@ function(actionMenu, type, id) {
                 var isShareVisible = (!isLinkOrRemote || briefcase.isAdmin());
                 if (appCtxt.isOffline) {
                     var acct = briefcase.getAccount();
-                    isShareVisible = !acct.isMain && acct.isZimbraAccount;
+                    isShareVisible = !acct.isMain && acct.isZmailAccount;
                 }
                 menuItem.setEnabled(isShareVisible);
             }

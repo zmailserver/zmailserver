@@ -15,7 +15,7 @@
 using System;
 using System.Xml;
 
-namespace Zimbra.Client
+namespace Zmail.Client
 {
 	public class RequestContext
 	{
@@ -104,13 +104,13 @@ namespace Zimbra.Client
 		}
 
 		//update this request context based on the response context and auth response
-		public void Update( ResponseContext rc, Zimbra.Client.Account.AuthResponse ar )
+		public void Update( ResponseContext rc, Zmail.Client.Account.AuthResponse ar )
 		{
 			this.AuthToken = ar.AuthToken;
 			Update( rc );
 		}
 
-		public void Update( ResponseContext rc, Zimbra.Client.Admin.AuthResponse ar )
+		public void Update( ResponseContext rc, Zmail.Client.Admin.AuthResponse ar )
 		{
 			this.AuthToken = ar.AuthToken;
 			Update(rc);
@@ -121,57 +121,57 @@ namespace Zimbra.Client
 		{
 			XmlDocument d = new XmlDocument();
 
-			XmlElement contextElement = d.CreateElement( ZimbraService.E_CONTEXT, ZimbraService.NAMESPACE_URI );
+			XmlElement contextElement = d.CreateElement( ZmailService.E_CONTEXT, ZmailService.NAMESPACE_URI );
 
 			if( authToken != null )
 			{
-				XmlElement ate = d.CreateElement( ZimbraService.E_AUTHTOKEN, ZimbraService.NAMESPACE_URI );
+				XmlElement ate = d.CreateElement( ZmailService.E_AUTHTOKEN, ZmailService.NAMESPACE_URI );
 				ate.InnerText = authToken;
 				contextElement.AppendChild( ate );
 			}
 
 			if( sessionId != null )
 			{
-				XmlElement se = d.CreateElement( ZimbraService.E_SESSION, ZimbraService.NAMESPACE_URI );
-				se.SetAttribute( ZimbraService.A_ID, sessionId );
+				XmlElement se = d.CreateElement( ZmailService.E_SESSION, ZmailService.NAMESPACE_URI );
+				se.SetAttribute( ZmailService.A_ID, sessionId );
 				contextElement.AppendChild( se ); 
 			} else if( noSession == false)
 			{
-				contextElement.AppendChild( d.CreateElement( ZimbraService.E_SESSION, ZimbraService.NAMESPACE_URI ) );
+				contextElement.AppendChild( d.CreateElement( ZmailService.E_SESSION, ZmailService.NAMESPACE_URI ) );
 			} 
 
 			if( noNotifications )
 			{
-				contextElement.AppendChild( d.CreateElement( ZimbraService.E_NONOTIFY, ZimbraService.NAMESPACE_URI ) );
+				contextElement.AppendChild( d.CreateElement( ZmailService.E_NONOTIFY, ZmailService.NAMESPACE_URI ) );
 			}
 
 			if( notificationSequence != null ) 
 			{
-				XmlElement e = d.CreateElement( ZimbraService.E_NOTIFY, ZimbraService.NAMESPACE_URI );
-				e.SetAttribute( ZimbraService.A_NOTIFY_SEQUENCE, notificationSequence );
+				XmlElement e = d.CreateElement( ZmailService.E_NOTIFY, ZmailService.NAMESPACE_URI );
+				e.SetAttribute( ZmailService.A_NOTIFY_SEQUENCE, notificationSequence );
 				contextElement.AppendChild( e );
 			}
 
 			if( targetAccount != null )
 			{
-				XmlElement tae = d.CreateElement( ZimbraService.E_ACCOUNT, ZimbraService.NAMESPACE_URI );
-				tae.SetAttribute( ZimbraService.A_BY, targetAccountFormat.ToString() );
+				XmlElement tae = d.CreateElement( ZmailService.E_ACCOUNT, ZmailService.NAMESPACE_URI );
+				tae.SetAttribute( ZmailService.A_BY, targetAccountFormat.ToString() );
 				tae.InnerText = targetAccount;
 				contextElement.AppendChild( tae );
 			}
 
 			if( targetServer != null )
 			{
-				XmlElement tse = d.CreateElement( ZimbraService.E_TARGET_SERVER, ZimbraService.NAMESPACE_URI );
+				XmlElement tse = d.CreateElement( ZmailService.E_TARGET_SERVER, ZmailService.NAMESPACE_URI );
 				tse.InnerText = targetServer;
 				contextElement.AppendChild( tse );
 			}
 
 			if( changeToken != null )
 			{
-				XmlElement cte = d.CreateElement( ZimbraService.E_CHANGE, ZimbraService.NAMESPACE_URI );
-				cte.SetAttribute( ZimbraService.A_TOKEN, changeToken );
-				cte.SetAttribute( ZimbraService.A_TYPE, raceType.ToString() );
+				XmlElement cte = d.CreateElement( ZmailService.E_CHANGE, ZmailService.NAMESPACE_URI );
+				cte.SetAttribute( ZmailService.A_TOKEN, changeToken );
+				cte.SetAttribute( ZmailService.A_TYPE, raceType.ToString() );
 			}
 
 			if( contextElement.ChildNodes.Count > 0 )

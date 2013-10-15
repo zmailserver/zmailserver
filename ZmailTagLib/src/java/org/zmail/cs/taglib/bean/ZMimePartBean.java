@@ -13,9 +13,9 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.taglib.bean;
+package org.zmail.cs.taglib.bean;
 
-import com.zimbra.client.ZMessage.ZMimePart;
+import org.zmail.client.ZMessage.ZMimePart;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -67,7 +67,7 @@ public class ZMimePartBean {
     public static final String CT_TEXT_XML			= "text/xml";
     public static final String CT_VIDEO				= "video";
     public static final String CT_VIDEO_WMV			= "video/x-ms-wmv";
-    public static final String CT_XML_ZIMBRA_SHARE	= "xml/x-zimbra-share";
+    public static final String CT_XML_ZIMBRA_SHARE	= "xml/x-zmail-share";
     public static final String CT_PLAIN_TEXT		= "plain/text"; // strange, saw this type...
 
     private static final Set<String> sIgnoredTypes =
@@ -96,27 +96,27 @@ public class ZMimePartBean {
     private static final Map<String,String> sTypeToImage = new HashMap<String, String>();
 
     static {
-        sTypeToImage.put(CT_APP,               "zimbra/ImgExeDoc.png");
-        sTypeToImage.put(CT_APP_ADOBE_PDF,     "zimbra/ImgPDFDoc.png");
-        sTypeToImage.put(CT_APP_ADOBE_PS,      "zimbra/ImgGenericDoc.png");
-        sTypeToImage.put(CT_APP_EXE,           "zimbra/ImgExeDoc.png");
+        sTypeToImage.put(CT_APP,               "zmail/ImgExeDoc.png");
+        sTypeToImage.put(CT_APP_ADOBE_PDF,     "zmail/ImgPDFDoc.png");
+        sTypeToImage.put(CT_APP_ADOBE_PS,      "zmail/ImgGenericDoc.png");
+        sTypeToImage.put(CT_APP_EXE,           "zmail/ImgExeDoc.png");
 
-        sTypeToImage.put(CT_APP_MS_DOWNLOAD,   "zimbra/ImgExeDoc.png");
-        sTypeToImage.put(CT_APP_MS_EXCEL,		"zimbra/ImgMSExcelDoc.png");
-        sTypeToImage.put(CT_APP_MS_PPT,			"zimbra/ImgMSPowerpointDoc.png");
-        sTypeToImage.put(CT_APP_MS_PROJECT,		"zimbra/ImgMSProjectDoc.png");
-        sTypeToImage.put(CT_APP_MS_VISIO,		"zimbra/ImgMSVisioDoc.png");
-        sTypeToImage.put(CT_APP_MS_WORD,        "zimbra/ImgMSWordDoc.png");
-        sTypeToImage.put(CT_APP_OCTET_STREAM,	"zimbra/ImgUnknownDoc.png");
-        sTypeToImage.put(CT_APP_ZIP,            "zimbra/ImgZipDoc.png");
-        sTypeToImage.put(CT_APP_ZIP2,			"zimbra/ImgZipDoc.png");
-        sTypeToImage.put(CT_AUDIO,				"zimbra/ImgAudioDoc.png");
-        sTypeToImage.put(CT_VIDEO,				"zimbra/ImgVideoDoc.png");
-        sTypeToImage.put(CT_IMG,                "zimbra/ImgImageDoc.png");
-        sTypeToImage.put(CT_MSG_RFC822,			"zimbra/ImgMessageDoc.png");
-        sTypeToImage.put(CT_TEXT,				"zimbra/ImgGenericDoc.png");
-        sTypeToImage.put(CT_PLAIN_TEXT,			"zimbra/ImgGenericDoc.png");
-        sTypeToImage.put(CT_TEXT_HTML, 			"zimbra/ImgHtmlDoc.png");
+        sTypeToImage.put(CT_APP_MS_DOWNLOAD,   "zmail/ImgExeDoc.png");
+        sTypeToImage.put(CT_APP_MS_EXCEL,		"zmail/ImgMSExcelDoc.png");
+        sTypeToImage.put(CT_APP_MS_PPT,			"zmail/ImgMSPowerpointDoc.png");
+        sTypeToImage.put(CT_APP_MS_PROJECT,		"zmail/ImgMSProjectDoc.png");
+        sTypeToImage.put(CT_APP_MS_VISIO,		"zmail/ImgMSVisioDoc.png");
+        sTypeToImage.put(CT_APP_MS_WORD,        "zmail/ImgMSWordDoc.png");
+        sTypeToImage.put(CT_APP_OCTET_STREAM,	"zmail/ImgUnknownDoc.png");
+        sTypeToImage.put(CT_APP_ZIP,            "zmail/ImgZipDoc.png");
+        sTypeToImage.put(CT_APP_ZIP2,			"zmail/ImgZipDoc.png");
+        sTypeToImage.put(CT_AUDIO,				"zmail/ImgAudioDoc.png");
+        sTypeToImage.put(CT_VIDEO,				"zmail/ImgVideoDoc.png");
+        sTypeToImage.put(CT_IMG,                "zmail/ImgImageDoc.png");
+        sTypeToImage.put(CT_MSG_RFC822,			"zmail/ImgMessageDoc.png");
+        sTypeToImage.put(CT_TEXT,				"zmail/ImgGenericDoc.png");
+        sTypeToImage.put(CT_PLAIN_TEXT,			"zmail/ImgGenericDoc.png");
+        sTypeToImage.put(CT_TEXT_HTML, 			"zmail/ImgHtmlDoc.png");
     }
 
     private ZMimePart mMimePart;

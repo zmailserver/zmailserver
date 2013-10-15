@@ -13,16 +13,16 @@
  * ***** END LICENSE BLOCK *****
 --%>
 <%@ tag body-content="empty" %>
-<%@ attribute name="uploader" rtexprvalue="true" required="true" type="com.zimbra.cs.taglib.bean.ZComposeUploaderBean"%>
-<%@ attribute name="searchResult" rtexprvalue="true" required="true" type="com.zimbra.cs.taglib.bean.ZSearchResultBean"%>
-<%@ attribute name="searchGalResult" rtexprvalue="true" required="true" type="com.zimbra.cs.taglib.bean.ZSearchGalResultBean"%>
+<%@ attribute name="uploader" rtexprvalue="true" required="true" type="org.zmail.cs.taglib.bean.ZComposeUploaderBean"%>
+<%@ attribute name="searchResult" rtexprvalue="true" required="true" type="org.zmail.cs.taglib.bean.ZSearchResultBean"%>
+<%@ attribute name="searchGalResult" rtexprvalue="true" required="true" type="org.zmail.cs.taglib.bean.ZSearchGalResultBean"%>
 <%@ attribute name="attendeeMode" rtexprvalue="true" required="false"%>
 <%@ attribute name="groupMode" rtexprvalue="true" required="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
-<%@ taglib prefix="app" uri="com.zimbra.htmlclient" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
+<%@ taglib prefix="app" uri="org.zmail.htmlclient" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
 <c:if test="${attendeeMode}">
 <c:set var="tz" value="${zm:getTimeZone(uploader.compose.timeZone)}"/>
 <c:set var="today" value="${zm:getCalendarMidnight(uploader.compose.apptStartCalendar.timeInMillis,tz)}"/>
@@ -490,7 +490,7 @@
 
             <c:if test="${attendeeMode and uploader.contactLocation eq 'resources'}">
             <td>
-                    ${fn:escapeXml(contact.attrs.zimbraCalResType)}
+                    ${fn:escapeXml(contact.attrs.zmailCalResType)}
             </td>
             </c:if>
             <c:if test="${attendeeMode}">

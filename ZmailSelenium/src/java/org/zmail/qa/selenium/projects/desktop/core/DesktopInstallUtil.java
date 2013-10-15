@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.core;
+package org.zmail.qa.selenium.projects.desktop.core;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,21 +23,21 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.xml.sax.SAXException;
 
-import com.zimbra.qa.selenium.framework.util.BuildUtility;
-import com.zimbra.qa.selenium.framework.util.CommandLine;
-import com.zimbra.qa.selenium.framework.util.GeneralUtility;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.OperatingSystem;
-import com.zimbra.qa.selenium.framework.util.SleepUtil;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraDesktopProperties;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.framework.util.BuildUtility.ARCH;
-import com.zimbra.qa.selenium.framework.util.BuildUtility.BRANCH;
-import com.zimbra.qa.selenium.framework.util.BuildUtility.PRODUCT_NAME;
-import com.zimbra.qa.selenium.framework.util.GeneralUtility.WAIT_FOR_OPERAND;
-import com.zimbra.qa.selenium.framework.util.OperatingSystem.OsArch;
-import com.zimbra.qa.selenium.framework.util.OperatingSystem.OsType;
+import org.zmail.qa.selenium.framework.util.BuildUtility;
+import org.zmail.qa.selenium.framework.util.CommandLine;
+import org.zmail.qa.selenium.framework.util.GeneralUtility;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.OperatingSystem;
+import org.zmail.qa.selenium.framework.util.SleepUtil;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailDesktopProperties;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.framework.util.BuildUtility.ARCH;
+import org.zmail.qa.selenium.framework.util.BuildUtility.BRANCH;
+import org.zmail.qa.selenium.framework.util.BuildUtility.PRODUCT_NAME;
+import org.zmail.qa.selenium.framework.util.GeneralUtility.WAIT_FOR_OPERAND;
+import org.zmail.qa.selenium.framework.util.OperatingSystem.OsArch;
+import org.zmail.qa.selenium.framework.util.OperatingSystem.OsType;
 
 class ZDProcess{
    public int desktopClientPid = 0;
@@ -50,7 +50,7 @@ class ZDProcess{
 }
 
 /**
- * This class contains methods that can be used for Zimbra Desktop Installation and Uninstallation
+ * This class contains methods that can be used for Zmail Desktop Installation and Uninstallation
  * @author Jeffry Hidayat
  *
  */
@@ -59,9 +59,9 @@ public class DesktopInstallUtil {
    private static final String _commonRegistryPath_x64 = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall";
    private static final String _commonRegistryPath_x86 = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall";
    private static String _desktopRegistryPath = null;
-   private static final String _zimbraDesktopDisplayName = "Zimbra Desktop";
+   private static final String _zmailDesktopDisplayName = "Zmail Desktop";
    private static ZDProcess zdProcess = null;
-   //private static final String _buildUrl = "http://zre-matrix.eng.vmware.com/links/WINDOWS/HELIX/20110114070101_ZDESKTOP/ZimbraBuild/i386/";
+   //private static final String _buildUrl = "http://zre-matrix.eng.vmware.com/links/WINDOWS/HELIX/20110114070101_ZDESKTOP/ZmailBuild/i386/";
 
    /**
     * Reads Windows registry value based on the specified location and key
@@ -69,7 +69,7 @@ public class DesktopInstallUtil {
     * @param key Registry Key to be queried for value
     * @return (String) Raw output of the query
     */
-   private static final String _readZimbraDesktopRegistry(String location, String key){
+   private static final String _readZmailDesktopRegistry(String location, String key){
       try {
          String registryQuery = "reg query " + location;
          // Run reg query, then read output with StreamReader (internal class)
@@ -79,7 +79,7 @@ public class DesktopInstallUtil {
          logger.debug("Lines are: ");
 
          String output = null;
-         String zimbraDesktopRegistryPath = null;
+         String zmailDesktopRegistryPath = null;
          if (_desktopRegistryPath == null) {
             for (int i = 0; i < lines.length; i++) {
                if (lines[i].contains("\"")) {
@@ -91,21 +91,21 @@ public class DesktopInstallUtil {
                   String displayName = CommandLine.cmdExecWithOutput("reg query " +
                          lines[i] + " /v DisplayName");
                   logger.debug("Display Name is: " + displayName);
-                  if (displayName.contains(_zimbraDesktopDisplayName)) {
-                     zimbraDesktopRegistryPath = _desktopRegistryPath = lines[i];
+                  if (displayName.contains(_zmailDesktopDisplayName)) {
+                     zmailDesktopRegistryPath = _desktopRegistryPath = lines[i];
                      break;
                   }
                }
             }
          } else {
-            zimbraDesktopRegistryPath = _desktopRegistryPath;
+            zmailDesktopRegistryPath = _desktopRegistryPath;
          }
 
-         if (zimbraDesktopRegistryPath == null) {
+         if (zmailDesktopRegistryPath == null) {
             return null;
          } else {
             output = CommandLine.cmdExecWithOutput("reg query " +
-                  zimbraDesktopRegistryPath + " /v " + key);
+                  zmailDesktopRegistryPath + " /v " + key);
             return output;
          }
 
@@ -121,7 +121,7 @@ public class DesktopInstallUtil {
     * @return (String) Value of the specified key
     */
    private static final String _getRegistryValue(String location, String key) {
-      String output = _readZimbraDesktopRegistry(location, key).trim();
+      String output = _readZmailDesktopRegistry(location, key).trim();
       logger.info("Registry output is: " + output);
       // Now process it
       // Output has the following format:
@@ -148,7 +148,7 @@ public class DesktopInstallUtil {
          
          switch (OperatingSystem.getOSType()) {
          case LINUX:
-            String username = ZimbraDesktopProperties.getInstance().getUserName();
+            String username = ZmailDesktopProperties.getInstance().getUserName();
             logger.info("user name is: " + username);
             String [] output = CommandLine.cmdExecWithOutput("ps -ef").split("\n");
             logger.info("output's length is: " + output.length);
@@ -190,7 +190,7 @@ public class DesktopInstallUtil {
 
             break;
          case MAC:
-            username = ZimbraDesktopProperties.getInstance().getUserName();
+            username = ZmailDesktopProperties.getInstance().getUserName();
             logger.info("user name is: " + username);
             output = CommandLine.cmdExecWithOutput("ps -ef").split("\n");
             logger.info("output's length is: " + output.length);
@@ -306,7 +306,7 @@ public class DesktopInstallUtil {
       } catch (InterruptedException ie) {
          throw new HarnessException("Getting Interrupted Exception", ie);
       } finally {
-         ZimbraAccount.AccountZDC().resetClientAuthentication();
+         ZmailAccount.AccountZDC().resetClientAuthentication();
       }
    }
 
@@ -315,7 +315,7 @@ public class DesktopInstallUtil {
    }
 
    /**
-    * Uninstalls Zimbra Desktop Application, if it was uninstalled already, then
+    * Uninstalls Zmail Desktop Application, if it was uninstalled already, then
     * just exits the method, otherwise it will execute and wait dynamically until
     * the uninstallation is done (Waiting for the registry query to return nothing)
     * @throws InterruptedException 
@@ -348,24 +348,24 @@ public class DesktopInstallUtil {
             logger.info("uninstallCommand is: " + uninstallCommand);
       
             if ( (uninstallCommand == null) || (uninstallCommand.trim().equals(""))) {
-               logger.info("Zimbra Desktop App doesn't exist, thus exiting the method");
+               logger.info("Zmail Desktop App doesn't exist, thus exiting the method");
                return;
             } else {
                logger.debug("Executing command...");
                CommandLine.CmdExec(uninstallCommand);
                logger.debug("uninstallCommand execution is successful");
-               GeneralUtility.waitFor("com.zimbra.qa.selenium.projects.desktop.core.DesktopInstallUtil", null, true, "isDesktopAppInstalled", null, WAIT_FOR_OPERAND.NEQ, true,
+               GeneralUtility.waitFor("org.zmail.qa.selenium.projects.desktop.core.DesktopInstallUtil", null, true, "isDesktopAppInstalled", null, WAIT_FOR_OPERAND.NEQ, true,
                      300 * 1000, 5 * 1000);
                logger.debug("Successfully waiting for");
-               logger.info("Zimbra Desktop Uninstallation is complete!");
+               logger.info("Zmail Desktop Uninstallation is complete!");
             }
             break;
          case LINUX:
-            File mainDir = new File("/opt/zimbra/zdesktop");
+            File mainDir = new File("/opt/zmail/zdesktop");
             GeneralUtility.deleteDirectory(mainDir);
             break;
          case MAC:
-            mainDir = new File("/Applications/Zimbra Desktop/");
+            mainDir = new File("/Applications/Zmail Desktop/");
             GeneralUtility.deleteDirectory(mainDir);
             break;
          }
@@ -375,9 +375,9 @@ public class DesktopInstallUtil {
 
       logger.info("Removing existing config file");
 
-      ZimbraDesktopProperties.getInstance();
-      if (ZimbraDesktopProperties.getUserFolder() != null) {
-         File localProfile = new File(ZimbraDesktopProperties.getUserFolder());
+      ZmailDesktopProperties.getInstance();
+      if (ZmailDesktopProperties.getUserFolder() != null) {
+         File localProfile = new File(ZmailDesktopProperties.getUserFolder());
          logger.debug("Deleting Local profile... : " + localProfile.getCanonicalPath());
          if (GeneralUtility.deleteDirectory(localProfile)) {
             logger.debug("Local Profile folders cannot be deleted.");
@@ -386,12 +386,12 @@ public class DesktopInstallUtil {
          }
       }
 
-      ZimbraDesktopProperties.reset();
+      ZmailDesktopProperties.reset();
       _desktopRegistryPath = null;
    }
 
    /**
-    * Installs Zimbra Desktop Application, if the app has been installed (based on the readRegistry),
+    * Installs Zmail Desktop Application, if the app has been installed (based on the readRegistry),
     * then nothing to proceed
     * @param msiLocation Location of the installation file
     * @throws HarnessException
@@ -401,7 +401,7 @@ public class DesktopInstallUtil {
    public static void installDesktopApp(String installFileBinaryLocation) throws HarnessException, IOException, InterruptedException {
 
       if (DesktopInstallUtil.isDesktopAppInstalled()) {
-         logger.info("Zimbra Desktop App has already been installed.");
+         logger.info("Zmail Desktop App has already been installed.");
       } else {
          //TODO: Do for Linux and Mac, right now it's only for Windows
          logger.info("installFileBinaryLocation is: " + installFileBinaryLocation);
@@ -418,9 +418,9 @@ public class DesktopInstallUtil {
                logger.debug("installCommand is: " + installCommand);
                CommandLine.CmdExec(installCommand);
                logger.debug("installCommand execution is successful");
-               GeneralUtility.waitFor("com.zimbra.qa.selenium.projects.desktop.core.DesktopInstallUtil", null, true, "isDesktopAppInstalled", null, WAIT_FOR_OPERAND.EQ, true,
+               GeneralUtility.waitFor("org.zmail.qa.selenium.projects.desktop.core.DesktopInstallUtil", null, true, "isDesktopAppInstalled", null, WAIT_FOR_OPERAND.EQ, true,
                      300 * 1000, 5 * 1000);
-               logger.info("Zimbra Desktop Installation is complete!");
+               logger.info("Zmail Desktop Installation is complete!");
                break;
 
             case LINUX:
@@ -468,14 +468,14 @@ public class DesktopInstallUtil {
                logger.info("executing installCommand");
                CommandLine.CmdExec(installCommand, params);
 
-               CommandLine.CmdExec("chmod -R 777 " + "/opt/zimbra/zdesktop");
-               //CommandLine.CmdExec("su - zimbra -c ", new String[] {"zimbra"});
+               CommandLine.CmdExec("chmod -R 777 " + "/opt/zmail/zdesktop");
+               //CommandLine.CmdExec("su - zmail -c ", new String[] {"zmail"});
                String[] params2 = new String[] {"\n", "\n", "\\x03"};
-               CommandLine.CmdExec("su - " + ZimbraDesktopProperties.getInstance().getUserName() +
-                     " -c \"/opt/zimbra/zdesktop/linux/user-install.pl\"", params2);
+               CommandLine.CmdExec("su - " + ZmailDesktopProperties.getInstance().getUserName() +
+                     " -c \"/opt/zmail/zdesktop/linux/user-install.pl\"", params2);
                zdProcess = getZDProcess();
 
-               GeneralUtility.waitFor("com.zimbra.qa.selenium.projects.desktop.core.DesktopInstallUtil", null,
+               GeneralUtility.waitFor("org.zmail.qa.selenium.projects.desktop.core.DesktopInstallUtil", null,
                      true, "isDesktopAppRunning", null, WAIT_FOR_OPERAND.EQ, true, 60000, 1000);
                // The reason for killing the current process because desktop app is started by
                // the user-install.pl script and this will lock the thread
@@ -484,18 +484,18 @@ public class DesktopInstallUtil {
             case MAC:
                logger.info(CommandLine.cmdExecWithOutput(
                      "hdiutil mount " + installFileBinaryLocation));
-               String [] command = {"cp", "-R", "/Volumes/Zimbra Desktop Installer", "/Applications"};
+               String [] command = {"cp", "-R", "/Volumes/Zmail Desktop Installer", "/Applications"};
                logger.info(CommandLine.cmdExecWithOutput(command, null));
 
-               command = new String[] {"installer", "-package", "/Applications/Zimbra Desktop Installer/Zimbra Desktop.mpkg", "-target", "/Volumes/Server HD"};
+               command = new String[] {"installer", "-package", "/Applications/Zmail Desktop Installer/Zmail Desktop.mpkg", "-target", "/Volumes/Server HD"};
                logger.info(CommandLine.cmdExecWithOutput(command, null));
 
-               command = new String[] {"hdiutil", "unmount", "/Volumes/Zimbra Desktop Installer/"};
+               command = new String[] {"hdiutil", "unmount", "/Volumes/Zmail Desktop Installer/"};
                logger.info(CommandLine.cmdExecWithOutput(command, null));
 
-               GeneralUtility.waitFor("com.zimbra.qa.selenium.projects.desktop.core.DesktopInstallUtil", null,
+               GeneralUtility.waitFor("org.zmail.qa.selenium.projects.desktop.core.DesktopInstallUtil", null,
                      true, "isDesktopAppRunning", null, WAIT_FOR_OPERAND.EQ, true, 60000, 1000);
-               GeneralUtility.waitFor(null, ZimbraAccount.AccountZDC(), false,
+               GeneralUtility.waitFor(null, ZmailAccount.AccountZDC(), false,
                      "authenticateToMailClientHost", null, WAIT_FOR_OPERAND.NEQ, null, 60000, 3000);
                // The reason for killing the current process because desktop app is started by
                // the installer script and this will block selenium test browser window
@@ -507,7 +507,7 @@ public class DesktopInstallUtil {
    }
 
    /**
-    * Determines whether the Zimbra Desktop client is installed
+    * Determines whether the Zmail Desktop client is installed
     * @return true, if it is installed, otherwise, false
     */
    public static boolean isDesktopAppInstalled() {
@@ -519,10 +519,10 @@ public class DesktopInstallUtil {
          String registry = null;
          switch (osArch) {
          case X64:
-            registry = DesktopInstallUtil._readZimbraDesktopRegistry(DesktopInstallUtil._commonRegistryPath_x64, "UninstallString");
+            registry = DesktopInstallUtil._readZmailDesktopRegistry(DesktopInstallUtil._commonRegistryPath_x64, "UninstallString");
             break;
          case X86:
-            registry = DesktopInstallUtil._readZimbraDesktopRegistry(DesktopInstallUtil._commonRegistryPath_x86, "UninstallString");
+            registry = DesktopInstallUtil._readZmailDesktopRegistry(DesktopInstallUtil._commonRegistryPath_x86, "UninstallString");
             break;
          } 
 
@@ -535,13 +535,13 @@ public class DesktopInstallUtil {
          }
          break;
       case LINUX:
-         File installDir = new File("/opt/zimbra/zdesktop");
+         File installDir = new File("/opt/zmail/zdesktop");
          if (installDir.exists()) {
             isDesktopInstalled = true;
          }
          break;
       case MAC:
-         installDir = new File("/Applications/Zimbra Desktop/Zimbra Desktop.app/Contents/MacOS/zdrun");
+         installDir = new File("/Applications/Zmail Desktop/Zmail Desktop.app/Contents/MacOS/zdrun");
          if (installDir.exists()) {
             isDesktopInstalled = true;
          }
@@ -558,7 +558,7 @@ public class DesktopInstallUtil {
     * @param prodName Product Name
     * @param branch Branch Name
     * @param arch Arch Name
-    * @param downloadLocation Location to download the install file, ie. C:\\download-zimbra-qa-test\\ for windows
+    * @param downloadLocation Location to download the install file, ie. C:\\download-zmail-qa-test\\ for windows
     * @throws HarnessException 
     * @throws InterruptedException 
     * @throws IOException 
@@ -578,7 +578,7 @@ public class DesktopInstallUtil {
       }
 
       logger.info("Downloading the build");
-      String buildUrl = ZimbraSeleniumProperties.getStringProperty("desktop.buildUrl", "");
+      String buildUrl = ZmailSeleniumProperties.getStringProperty("desktop.buildUrl", "");
       String fullDownloadPath = null;
       if (buildUrl.equals("")) {
          fullDownloadPath = BuildUtility.downloadLatestBuild(downloadLocation, prodName, branch, arch);         

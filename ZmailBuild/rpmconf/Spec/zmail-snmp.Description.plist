@@ -3,8 +3,8 @@
 <plist version="1.0">
 <dict>
 	<key>IFPkgDescriptionTitle</key>
-	<string>zimbra-snmp @@VERSION@@</string>
+	<string>zmail-snmp @@VERSION@@</string>
 	<key>IFPkgDescriptionTitle</key>
-	<string>Zimbra snmp utilities</string>
+	<string>Zmail snmp utilities</string>
 </dict>
 </plist>

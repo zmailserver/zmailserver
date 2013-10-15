@@ -21,25 +21,25 @@
  */
 
 // base class for ZmApptView
-AjxPackage.require("zimbraMail.mail.view.ZmMailMsgView");
+AjxPackage.require("zmailMail.mail.view.ZmMailMsgView");
 
-AjxPackage.require("zimbraMail.calendar.controller.ZmCalItemComposeController");
+AjxPackage.require("zmailMail.calendar.controller.ZmCalItemComposeController");
 
-AjxPackage.require("zimbraMail.calendar.model.ZmRecurrence");
-AjxPackage.require("zimbraMail.calendar.model.ZmCalItem");
+AjxPackage.require("zmailMail.calendar.model.ZmRecurrence");
+AjxPackage.require("zmailMail.calendar.model.ZmCalItem");
 
-AjxPackage.require("zimbraMail.calendar.view.ZmApptRecurDialog");
-AjxPackage.require("zimbraMail.calendar.view.ZmApptViewHelper");
-AjxPackage.require("zimbraMail.calendar.view.ZmCalItemEditView");
-AjxPackage.require("zimbraMail.calendar.view.ZmCalItemView");
+AjxPackage.require("zmailMail.calendar.view.ZmApptRecurDialog");
+AjxPackage.require("zmailMail.calendar.view.ZmApptViewHelper");
+AjxPackage.require("zmailMail.calendar.view.ZmCalItemEditView");
+AjxPackage.require("zmailMail.calendar.view.ZmCalItemView");
 
-AjxPackage.require("zimbraMail.calendar.controller.ZmCalendarTreeController");
+AjxPackage.require("zmailMail.calendar.controller.ZmCalendarTreeController");
 
 
-AjxPackage.require("zimbraMail.tasks.view.ZmTaskView");
-AjxPackage.require("zimbraMail.tasks.view.ZmTaskMultiView");
-AjxPackage.require("zimbraMail.tasks.view.ZmTaskEditView");
-AjxPackage.require("zimbraMail.tasks.view.ZmNewTaskFolderDialog");
+AjxPackage.require("zmailMail.tasks.view.ZmTaskView");
+AjxPackage.require("zmailMail.tasks.view.ZmTaskMultiView");
+AjxPackage.require("zmailMail.tasks.view.ZmTaskEditView");
+AjxPackage.require("zmailMail.tasks.view.ZmNewTaskFolderDialog");
 
-AjxPackage.require("zimbraMail.tasks.controller.ZmTaskController");
-AjxPackage.require("zimbraMail.tasks.controller.ZmTaskTreeController");
+AjxPackage.require("zmailMail.tasks.controller.ZmTaskController");
+AjxPackage.require("zmailMail.tasks.controller.ZmTaskTreeController");

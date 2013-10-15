@@ -14,15 +14,15 @@
  *@Author Raja Rao DV
  */
 
-function com_zimbra_searchrefiner() {
+function org_zmail_searchrefiner() {
 }
 
-com_zimbra_searchrefiner.prototype = new ZmZimletBase();
-com_zimbra_searchrefiner.prototype.constructor = com_zimbra_searchrefiner;
-com_zimbra_searchrefiner.limit = 100;
-com_zimbra_searchrefiner.initialOffset = 0;
+org_zmail_searchrefiner.prototype = new ZmZimletBase();
+org_zmail_searchrefiner.prototype.constructor = org_zmail_searchrefiner;
+org_zmail_searchrefiner.limit = 100;
+org_zmail_searchrefiner.initialOffset = 0;
 
-com_zimbra_searchrefiner.prototype.init =
+org_zmail_searchrefiner.prototype.init =
 function() {
 	this.turnSearchRefinerON = this.getUserProperty("turnSearchRefinerON") == "true";
 };
@@ -30,12 +30,12 @@ function() {
 //------------------------------------------------------------------------------------------
 //			HANDLE SEARCH BUTTON CLICK
 //------------------------------------------------------------------------------------------
-com_zimbra_searchrefiner.prototype.onKeyPressSearchField =
+org_zmail_searchrefiner.prototype.onKeyPressSearchField =
 function() {
 	this.onSearchButtonClick();
 };
 
-com_zimbra_searchrefiner.prototype.onSearchButtonClick =
+org_zmail_searchrefiner.prototype.onSearchButtonClick =
 function() {
 	//if we are not searching for mail/conv, dont do anything
 	if (appCtxt.getSearchController()._searchFor != ZmId.SEARCH_MAIL)
@@ -52,20 +52,20 @@ function() {
 
 	this.wasTriggeredBySearchBtn = true;
 	this._refineMore = false;
-	setTimeout(AjxCallback.simpleClosure(this.doInternalSearch, this, com_zimbra_searchrefiner.limit, 0), 1000);
+	setTimeout(AjxCallback.simpleClosure(this.doInternalSearch, this, org_zmail_searchrefiner.limit, 0), 1000);
 };
 
-com_zimbra_searchrefiner.prototype._initializeOnce =
+org_zmail_searchrefiner.prototype._initializeOnce =
 function() {
 	if(this._initializeOnceCalled != undefined)
 		return;
 	this.refinerSearchSize = this.getUserProperty("refinerSearchSize");
-	this._totalNumberOfSearchRequests = parseInt(this.refinerSearchSize) / com_zimbra_searchrefiner.limit;
+	this._totalNumberOfSearchRequests = parseInt(this.refinerSearchSize) / org_zmail_searchrefiner.limit;
 	this._originalPageSize = appCtxt.get(ZmSetting.PAGE_SIZE);
 	this._initializeOnceCalled = true;
 };
 
-com_zimbra_searchrefiner.prototype.doInternalSearch =
+org_zmail_searchrefiner.prototype.doInternalSearch =
 function(_limit, _offset) {
 	if (!this.wasTriggeredBySearchBtn) {
 		return;
@@ -84,7 +84,7 @@ function(_limit, _offset) {
 	appCtxt.getSearchController().search({query: this._searchField.value, userText: true, limit:parseInt(_limit),  offset:parseInt(_offset), types:_types, noRender:true, getHtml: getHtml, callback:callbck});
 };
 
-com_zimbra_searchrefiner.prototype._handleInternalSrcResponse =
+org_zmail_searchrefiner.prototype._handleInternalSrcResponse =
 function(result) {
 	if (!this.wasTriggeredBySearchBtn) {
 		return;
@@ -96,9 +96,9 @@ function(result) {
 		return;
 	}
 	//if we need to do further search with diferent offset go ahead. BUT, if #results is < total expected, start processing(ignore further processing)
-	if (this._totalNumberOfSearchRequests > this._currentRequestNumber && (this._totalMsgArray.length == this._currentRequestNumber * com_zimbra_searchrefiner.limit)) {
+	if (this._totalNumberOfSearchRequests > this._currentRequestNumber && (this._totalMsgArray.length == this._currentRequestNumber * org_zmail_searchrefiner.limit)) {
 		//this._processResult(this._totalMsgArray, true);
-		setTimeout(AjxCallback.simpleClosure(this.doInternalSearch, this, com_zimbra_searchrefiner.limit, this._currentRequestNumber * com_zimbra_searchrefiner.limit), 1000);
+		setTimeout(AjxCallback.simpleClosure(this.doInternalSearch, this, org_zmail_searchrefiner.limit, this._currentRequestNumber * org_zmail_searchrefiner.limit), 1000);
 		return;
 	}
 	//done with searching, now process..
@@ -108,7 +108,7 @@ function(result) {
 
 };
 
-com_zimbra_searchrefiner.prototype._processResult = function(array, isPartialResult) {
+org_zmail_searchrefiner.prototype._processResult = function(array, isPartialResult) {
 	this.senderArry = [];
 	this.propArry = [];
 	this.fldrArry = [];
@@ -129,7 +129,7 @@ com_zimbra_searchrefiner.prototype._processResult = function(array, isPartialRes
 //------------------------------------------------------------------------------------------
 //			CONTROL NARROWED-BY(PRE-REFINED) SECTION'S VIEW
 //------------------------------------------------------------------------------------------
-com_zimbra_searchrefiner.prototype.updateNarrowedBy = function(hideIfEmpty) {
+org_zmail_searchrefiner.prototype.updateNarrowedBy = function(hideIfEmpty) {
 	var html = new Array();
 	var i = 0;
 	if (hideIfEmpty) {//when we undo all refined items..
@@ -156,11 +156,11 @@ com_zimbra_searchrefiner.prototype.updateNarrowedBy = function(hideIfEmpty) {
 
 };
 
-com_zimbra_searchrefiner.prototype._showNarrowedBy = function() {
+org_zmail_searchrefiner.prototype._showNarrowedBy = function() {
 	document.getElementById("sr_narrowedByMainDiv").style.display = "block";
 };
 
-com_zimbra_searchrefiner.prototype._hideNarrowedBy = function() {
+org_zmail_searchrefiner.prototype._hideNarrowedBy = function() {
 	document.getElementById("sr_narrowByContentDiv").innerHTML = "";
 	document.getElementById("sr_narrowedByMainDiv").style.display = "none";
 	this._narrowedItems = [];
@@ -170,7 +170,7 @@ com_zimbra_searchrefiner.prototype._hideNarrowedBy = function() {
 //------------------------------------------------------------------------------------------
 //			HANDLE CLICKING ON ALREADY-REFINED-LINKS
 //------------------------------------------------------------------------------------------
-com_zimbra_searchrefiner.prototype._addNarrowListeners =
+org_zmail_searchrefiner.prototype._addNarrowListeners =
 function(id) {
 	var rows = document.getElementById(id).getElementsByTagName("tr");
 	for (var i = 0; i < rows.length; i++) {
@@ -180,7 +180,7 @@ function(id) {
 	}
 };
 
-com_zimbra_searchrefiner.prototype._onNarrowedByclick =
+org_zmail_searchrefiner.prototype._onNarrowedByclick =
 function(id) {
 	this._removeNarrowArryEl(id);
 	this.updateNarrowedBy(true);
@@ -190,7 +190,7 @@ function(id) {
 	this._hideOrShowSections();
 };
 
-com_zimbra_searchrefiner.prototype._removeNarrowArryEl =
+org_zmail_searchrefiner.prototype._removeNarrowArryEl =
 function(id) {
 	id = id.replace("_narrow", "");
 	var tmp = new Array();
@@ -206,7 +206,7 @@ function(id) {
 //			HANDLE CLICKING ON REFINEMENT-LINKS
 //------------------------------------------------------------------------------------------
 
-com_zimbra_searchrefiner.prototype._addListeners =
+org_zmail_searchrefiner.prototype._addListeners =
 function(id) {
 	var rows = document.getElementById(id).getElementsByTagName("tr");
 	for (var i = 0; i < rows.length; i++) {
@@ -216,7 +216,7 @@ function(id) {
 	}
 };
 
-com_zimbra_searchrefiner.prototype._onclick =
+org_zmail_searchrefiner.prototype._onclick =
 function(id) {
 	var value = document.getElementById(id).innerHTML;
 	this._narrowedItems[id] = value;
@@ -236,7 +236,7 @@ function(id) {
 	this.searchAgain();
 };
 
-com_zimbra_searchrefiner.prototype.searchAgain =
+org_zmail_searchrefiner.prototype.searchAgain =
 function() {
 	this._refineMore = true;
 	//redo the search with new query
@@ -245,10 +245,10 @@ function() {
 
 	//update search-refiner
 	this.wasTriggeredBySearchBtn = true;//to emulate new-search
-	setTimeout(AjxCallback.simpleClosure(this.doInternalSearch, this, com_zimbra_searchrefiner.limit, 0), 1000);
+	setTimeout(AjxCallback.simpleClosure(this.doInternalSearch, this, org_zmail_searchrefiner.limit, 0), 1000);
 };
 
-com_zimbra_searchrefiner.prototype._hideOrShowSections =
+org_zmail_searchrefiner.prototype._hideOrShowSections =
 function() {
 	for (var id in this._narrowedItems) {
 		if (id.indexOf("sender") >= 0) {
@@ -263,7 +263,7 @@ function() {
 //			CREATE SEARCH-REFINER VIEW
 //------------------------------------------------------------------------------------------
 
-com_zimbra_searchrefiner.prototype.createRefinerView =
+org_zmail_searchrefiner.prototype.createRefinerView =
 function() {
 	if (!this._refineMore) {
 		this._hideNarrowedBy();
@@ -280,7 +280,7 @@ function() {
 	this._hideOrShowSections();
 };
 
-com_zimbra_searchrefiner.prototype.initBaseView =
+org_zmail_searchrefiner.prototype.initBaseView =
 function() {
 	if (this.isZmletUIInitialized)
 		return;
@@ -303,15 +303,15 @@ function() {
 	this.isZmletUIInitialized = true;//set this to true
 };
 
-com_zimbra_searchrefiner.prototype._headerHTML = function() {
+org_zmail_searchrefiner.prototype._headerHTML = function() {
 	return "<div class='overviewHeader'><TABLE><TD width=90%><B>Narrow Results<\B></TD><TD  align=\"right\"><DIV  id='sr_closeButtonDiv' class='ImgClose'></DIV></TD></TABLE></div>";
 };
 
-com_zimbra_searchrefiner.prototype._narrowedByHTML = function() {
+org_zmail_searchrefiner.prototype._narrowedByHTML = function() {
 	return "<DIV id='sr_narrowedByMainDiv' ><DIV class='sr_header'>Narrowed By:</DIV><DIV id='sr_narrowByContentDiv'></DIV></DIV>";
 };
 
-com_zimbra_searchrefiner.prototype._collectAddnlProperties =
+org_zmail_searchrefiner.prototype._collectAddnlProperties =
 function(eml) {
 	if (eml.hasAttach) {
 		this.propArry.push("has Attachment");
@@ -334,7 +334,7 @@ function(eml) {
 
 };
 
-com_zimbra_searchrefiner.prototype._getAllSectionsHTML =
+org_zmail_searchrefiner.prototype._getAllSectionsHTML =
 function() {
 	var html = new Array();
 	var i = 0;
@@ -345,12 +345,12 @@ function() {
 	return html.join("");
 };
 
-com_zimbra_searchrefiner.prototype.getSenderSection =
+org_zmail_searchrefiner.prototype.getSenderSection =
 function() {
 	var html = new Array();
 	var i = 0;
 	document.getElementById("sr_senderSectionId").parentNode.style.display = "none";
-	var uniqueArry = com_zimbra_searchrefiner.unique(this.senderArry);
+	var uniqueArry = org_zmail_searchrefiner.unique(this.senderArry);
 	if (uniqueArry.length == 0)
 		return "";
 	var arr = this.getitemsWithCount(uniqueArry, this.senderArry);
@@ -363,12 +363,12 @@ function() {
 	return html.join("");
 };
 
-com_zimbra_searchrefiner.prototype.getFldrSection =
+org_zmail_searchrefiner.prototype.getFldrSection =
 function() {
 	var html = new Array();
 	var i = 0;
 	document.getElementById("sr_fldrSectionId").parentNode.style.display = "none";
-	var uniqueArry = com_zimbra_searchrefiner.unique(this.fldrArry);
+	var uniqueArry = org_zmail_searchrefiner.unique(this.fldrArry);
 	if (uniqueArry.length == 0)
 		return "";
 	var arr = this.getitemsWithCount(uniqueArry, this.fldrArry);
@@ -382,12 +382,12 @@ function() {
 	return html.join("");
 };
 
-com_zimbra_searchrefiner.prototype.getPropSection =
+org_zmail_searchrefiner.prototype.getPropSection =
 function() {
 	var html = new Array();
 	var i = 0;
 	document.getElementById("sr_propSectionId").parentNode.style.display = "none";
-	var uniqueArry = com_zimbra_searchrefiner.unique(this.propArry);
+	var uniqueArry = org_zmail_searchrefiner.unique(this.propArry);
 	if (uniqueArry.length == 0)
 		return "";
 	var arr = this.getitemsWithCount(uniqueArry, this.propArry);
@@ -400,7 +400,7 @@ function() {
 	return html.join("");
 };
 
-com_zimbra_searchrefiner.prototype.getSection =
+org_zmail_searchrefiner.prototype.getSection =
 function(sectionName, sectionId) {
 	var html = new Array();
 	var i = 0;
@@ -412,13 +412,13 @@ function(sectionName, sectionId) {
 	return html.join("");
 };
 
-com_zimbra_searchrefiner.prototype.getDisclaimer =
+org_zmail_searchrefiner.prototype.getDisclaimer =
 function() {
 	document.getElementById("sr_discSectionId").parentNode.style.display = "block";
 	return  "<span class='sr_disclaimer'>* Valid for first " + this.refinerSearchSize + " matches due to performance reasons</span>";
 };
 
-com_zimbra_searchrefiner.prototype.getitemsWithCount =
+org_zmail_searchrefiner.prototype.getitemsWithCount =
 function(uniqueArry, origArry) {
 	var arry = [];
 	for (var i = 0; i < uniqueArry.length; i++) {
@@ -437,7 +437,7 @@ function(uniqueArry, origArry) {
 //------------------------------------------------------------------------------------------
 //			SHOW/HIDE FOLDER,TAG ETC FOLDER-HEADERS
 //------------------------------------------------------------------------------------------
-com_zimbra_searchrefiner.prototype.onShowView =
+org_zmail_searchrefiner.prototype.onShowView =
 function(viewId, isNewView) {
 	var viewType = appCtxt.getViewTypeFromId(viewId);
 	if (viewType != ZmId.VIEW_COMPOSE) {
@@ -445,7 +445,7 @@ function(viewId, isNewView) {
 	}
 };
 
-com_zimbra_searchrefiner.prototype.show =
+org_zmail_searchrefiner.prototype.show =
 function(ev) {	
 	var sr = document.getElementById("sr_mainDivId");
 	sr.style.display = "block";
@@ -454,7 +454,7 @@ function(ev) {
 
 };
 
-com_zimbra_searchrefiner.prototype.hide =
+org_zmail_searchrefiner.prototype.hide =
 function(ev) {
 	if (!this.isZmletUIInitialized)
 		return;
@@ -470,15 +470,15 @@ function(ev) {
 //			SHOW PREFERENCES DIALOG
 //------------------------------------------------------------------------------------------
 
-com_zimbra_searchrefiner.prototype.doubleClicked = function() {
+org_zmail_searchrefiner.prototype.doubleClicked = function() {
 	this.singleClicked();
 };
 
-com_zimbra_searchrefiner.prototype.singleClicked = function() {
+org_zmail_searchrefiner.prototype.singleClicked = function() {
 	this.showPrefDialog();
 };
 
-com_zimbra_searchrefiner.prototype.showPrefDialog =
+org_zmail_searchrefiner.prototype.showPrefDialog =
 function() {
 	//if zimlet dialog already exists...
 	if (this.pbDialog) {
@@ -500,7 +500,7 @@ function() {
 
 };
 
-com_zimbra_searchrefiner.prototype._updateSearchSize =
+org_zmail_searchrefiner.prototype._updateSearchSize =
 function() {
 	var optn = document.getElementById("sr_refinerSearchSize_menu").options;
 	for (var i = 0; i < optn.length; i++) {
@@ -512,7 +512,7 @@ function() {
 };
 
 
-com_zimbra_searchrefiner.prototype.createPrefView =
+org_zmail_searchrefiner.prototype.createPrefView =
 function() {
 	var html = new Array();
 	var i = 0;
@@ -529,7 +529,7 @@ function() {
 
 };
 
-com_zimbra_searchrefiner.prototype._getSearchCntMenu =
+org_zmail_searchrefiner.prototype._getSearchCntMenu =
 function(id) {
 	var rs = this.getUserProperty("refinerSearchSize");
 	var html = new Array();
@@ -546,7 +546,7 @@ function(id) {
 	return html.join("");
 };
 
-com_zimbra_searchrefiner.prototype._okBtnListner =
+org_zmail_searchrefiner.prototype._okBtnListner =
 function() {
 	this._reloadRequired = false;
 	if (document.getElementById("turnSearchRefinerON_chkbx").checked) {
@@ -565,7 +565,7 @@ function() {
 	if (this._reloadRequired) {
 		window.onbeforeunload = null;
 		var url = AjxUtil.formatUrl({});
-		ZmZimbraMail.sendRedirect(url);
+		ZmZmailMail.sendRedirect(url);
 	}
 
 };
@@ -573,7 +573,7 @@ function() {
 //------------------------------------------------------------------------------------------
 //			HELPERS...
 //------------------------------------------------------------------------------------------
-com_zimbra_searchrefiner.arrayContainsElement =
+org_zmail_searchrefiner.arrayContainsElement =
 function(array, val) {
 	for (var i = 0; i < array.length; i++) {
 		if (array[i] == val) {
@@ -583,11 +583,11 @@ function(array, val) {
 	return false;
 };
 
-com_zimbra_searchrefiner.unique =
+org_zmail_searchrefiner.unique =
 function(b) {
 	var a = [], i, l = b.length;
 	for (i = 0; i < l; i++) {
-		if (!com_zimbra_searchrefiner.arrayContainsElement(a, b[i])) {
+		if (!org_zmail_searchrefiner.arrayContainsElement(a, b[i])) {
 			a.push(b[i]);
 		}
 	}

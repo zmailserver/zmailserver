@@ -14,16 +14,16 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.octopus.tests.myfiles.folders;
+package org.zmail.qa.selenium.projects.octopus.tests.myfiles.folders;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.octopus.core.OctopusCommonTest;
-import com.zimbra.qa.selenium.projects.octopus.ui.PageMyFiles;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.octopus.core.OctopusCommonTest;
+import org.zmail.qa.selenium.projects.octopus.ui.PageMyFiles;
 
 public class RenameFolder extends OctopusCommonTest {
 
@@ -38,7 +38,7 @@ public class RenameFolder extends OctopusCommonTest {
 
 	@Test(description = "Rename folder using context menu", groups = { "sanity" })
 	public void RenameFolder_01() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseRootFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
@@ -48,9 +48,9 @@ public class RenameFolder extends OctopusCommonTest {
 
 		// Create the sub-folder
 		String subFolderName = "folder"
-				+ ZimbraSeleniumProperties.getUniqueString();
+				+ ZmailSeleniumProperties.getUniqueString();
 
-		account.soapSend("<CreateFolderRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+ "<folder name='" + subFolderName + "' l='"
 				+ briefcaseRootFolder.getId() + "' view='document'/>"
 				+ "</CreateFolderRequest>");
@@ -70,7 +70,7 @@ public class RenameFolder extends OctopusCommonTest {
 				Button.O_RENAME, subFolderName);
 
 		String newSubFolderName = "newSubFolderName"
-				+ ZimbraSeleniumProperties.getUniqueString();
+				+ ZmailSeleniumProperties.getUniqueString();
 
 		app.zPageOctopus.rename(newSubFolderName);
 

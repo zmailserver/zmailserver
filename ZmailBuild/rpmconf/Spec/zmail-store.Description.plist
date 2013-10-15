@@ -3,8 +3,8 @@
 <plist version="1.0">
 <dict>
 	<key>IFPkgDescriptionTitle</key>
-	<string>zimbra-store @@VERSION@@</string>
+	<string>zmail-store @@VERSION@@</string>
 	<key>IFPkgDescriptionTitle</key>
-	<string>Zimbra store utilities</string>
+	<string>Zmail store utilities</string>
 </dict>
 </plist>

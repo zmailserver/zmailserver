@@ -37,7 +37,7 @@ ZaDomainXFormView = function(parent, entry) {
 	];	
 	
 	this.AuthMechs = [
-		{label:ZaMsg.AuthMech_zimbra, value:ZaDomain.AuthMech_zimbra},
+		{label:ZaMsg.AuthMech_zmail, value:ZaDomain.AuthMech_zmail},
 		{label:ZaMsg.AuthMech_ldap, value:ZaDomain.AuthMech_ldap},
 		{label:ZaMsg.AuthMech_ad, value:ZaDomain.AuthMech_ad}		
 	];
@@ -91,8 +91,8 @@ function(entry) {
             this._containedObject.attrs[a] = entry.attrs[a];
         }
     }
-	if(!this._containedObject.attrs[ZaDomain.A_zimbraDomainStatus]) {
-		this._containedObject.attrs[ZaDomain.A_zimbraDomainStatus] = ZaDomain.DOMAIN_STATUS_ACTIVE;
+	if(!this._containedObject.attrs[ZaDomain.A_zmailDomainStatus]) {
+		this._containedObject.attrs[ZaDomain.A_zmailDomainStatus] = ZaDomain.DOMAIN_STATUS_ACTIVE;
 	}
 	this._containedObject[ZaDomain.A_AuthUseBindPassword] = entry[ZaDomain.A_AuthUseBindPassword];
 	
@@ -146,12 +146,12 @@ function(entry) {
 	}
 
     //set the catchAllChoices
-    var isCatchAllEnabled = this._containedObject.attrs[ZaDomain.A_zimbraAdminConsoleCatchAllAddressEnabled] ?
-    			this._containedObject.attrs[ZaDomain.A_zimbraAdminConsoleCatchAllAddressEnabled] : this._containedObject._defaultValues.attrs[ZaDomain.A_zimbraAdminConsoleCatchAllAddressEnabled] ;
+    var isCatchAllEnabled = this._containedObject.attrs[ZaDomain.A_zmailAdminConsoleCatchAllAddressEnabled] ?
+    			this._containedObject.attrs[ZaDomain.A_zmailAdminConsoleCatchAllAddressEnabled] : this._containedObject._defaultValues.attrs[ZaDomain.A_zmailAdminConsoleCatchAllAddressEnabled] ;
     			
     if (isCatchAllEnabled && isCatchAllEnabled == "TRUE") {
-        this._containedObject[ZaAccount.A_zimbraMailCatchAllAddress] = entry [ZaAccount.A_zimbraMailCatchAllAddress] ;
-        this.catchAllChoices.setChoices ([entry[ZaAccount.A_zimbraMailCatchAllAddress]]) ;
+        this._containedObject[ZaAccount.A_zmailMailCatchAllAddress] = entry [ZaAccount.A_zmailMailCatchAllAddress] ;
+        this.catchAllChoices.setChoices ([entry[ZaAccount.A_zmailMailCatchAllAddress]]) ;
         this.catchAllChoices.dirtyChoices();
     }
     
@@ -172,18 +172,18 @@ function(entry) {
 		this._containedObject[ZaDomain.A2_gal_sync_accounts][0].attrs[ZaDomain.A_mailHost] = entry[ZaDomain.A2_gal_sync_accounts][0].attrs[ZaDomain.A_mailHost]; 
 
 		//this._containedObject[ZaDomain.A2_gal_sync_accounts][0].attrs = ZaItem.deepCloneListItem (entry[ZaDomain.A2_gal_sync_accounts][0].attrs);
-		if(entry[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_zimbra_ds]) {
-			this._containedObject[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_zimbra_ds] = new ZaDataSource();
-			this._containedObject[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_zimbra_ds].attrs = [];
-			this._containedObject[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_zimbra_ds].name = entry[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_zimbra_ds].name;
-			this._containedObject[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_zimbra_ds].id = entry[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_zimbra_ds].id;
-			for (var a in entry[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_zimbra_ds].attrs) {
+		if(entry[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_zmail_ds]) {
+			this._containedObject[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_zmail_ds] = new ZaDataSource();
+			this._containedObject[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_zmail_ds].attrs = [];
+			this._containedObject[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_zmail_ds].name = entry[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_zmail_ds].name;
+			this._containedObject[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_zmail_ds].id = entry[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_zmail_ds].id;
+			for (var a in entry[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_zmail_ds].attrs) {
 		        var modelItem = this._localXForm.getModel().getItem(a) ;
-		        if (entry[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_zimbra_ds].attrs[a] != null && entry[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_zimbra_ds].attrs[a] instanceof Array) {  
+		        if (entry[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_zmail_ds].attrs[a] != null && entry[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_zmail_ds].attrs[a] instanceof Array) {  
 		        	//need deep clone
-		            this._containedObject[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_zimbra_ds].attrs[a] = ZaItem.deepCloneListItem (entry[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_zimbra_ds].attrs[a]);
+		            this._containedObject[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_zmail_ds].attrs[a] = ZaItem.deepCloneListItem (entry[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_zmail_ds].attrs[a]);
 		        } else {
-		            this._containedObject[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_zimbra_ds].attrs[a] = entry[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_zimbra_ds].attrs[a];
+		            this._containedObject[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_zmail_ds].attrs[a] = entry[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_zmail_ds].attrs[a];
 		        }
 		    }
 		}
@@ -201,61 +201,61 @@ function(entry) {
 		            this._containedObject[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_ldap_ds].attrs[a] = entry[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_ldap_ds].attrs[a];
 		        }
 		    }		    
-			//this._containedObject[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_zimbra_ds].attrs = ZaItem.deepCloneListItem (entry[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_zimbra_ds].attrs); 
+			//this._containedObject[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_zmail_ds].attrs = ZaItem.deepCloneListItem (entry[ZaDomain.A2_gal_sync_accounts][0][ZaAccount.A2_zmail_ds].attrs); 
 		}
 	}
 
-    if(this._containedObject.attrs[ZaDomain.A_zimbraAutoProvMode]) {
-        if(this._containedObject.attrs[ZaDomain.A_zimbraAutoProvMode] instanceof Array) {
-            for(var mode = 0; mode < this._containedObject.attrs[ZaDomain.A_zimbraAutoProvMode].length; mode ++){
-                if(this._containedObject.attrs[ZaDomain.A_zimbraAutoProvMode][mode] == "EAGER")
-                   this._containedObject[ZaDomain.A2_zimbraAutoProvModeEAGEREnabled] = "TRUE";
-                else if(this._containedObject.attrs[ZaDomain.A_zimbraAutoProvMode][mode] == "LAZY")
-                   this._containedObject[ZaDomain.A2_zimbraAutoProvModeLAZYEnabled] = "TRUE";
-                else if(this._containedObject.attrs[ZaDomain.A_zimbraAutoProvMode][mode] == "MANUAL")
-                   this._containedObject[ZaDomain.A2_zimbraAutoProvModeMANUALEnabled] = "TRUE";
+    if(this._containedObject.attrs[ZaDomain.A_zmailAutoProvMode]) {
+        if(this._containedObject.attrs[ZaDomain.A_zmailAutoProvMode] instanceof Array) {
+            for(var mode = 0; mode < this._containedObject.attrs[ZaDomain.A_zmailAutoProvMode].length; mode ++){
+                if(this._containedObject.attrs[ZaDomain.A_zmailAutoProvMode][mode] == "EAGER")
+                   this._containedObject[ZaDomain.A2_zmailAutoProvModeEAGEREnabled] = "TRUE";
+                else if(this._containedObject.attrs[ZaDomain.A_zmailAutoProvMode][mode] == "LAZY")
+                   this._containedObject[ZaDomain.A2_zmailAutoProvModeLAZYEnabled] = "TRUE";
+                else if(this._containedObject.attrs[ZaDomain.A_zmailAutoProvMode][mode] == "MANUAL")
+                   this._containedObject[ZaDomain.A2_zmailAutoProvModeMANUALEnabled] = "TRUE";
             }
         } else {
-            if(this._containedObject.attrs[ZaDomain.A_zimbraAutoProvMode] == "EAGER")
-               this._containedObject[ZaDomain.A2_zimbraAutoProvModeEAGEREnabled] = "TRUE";
-            else if(this._containedObject.attrs[ZaDomain.A_zimbraAutoProvMode] == "LAZY")
-               this._containedObject[ZaDomain.A2_zimbraAutoProvModeLAZYEnabled] = "TRUE";
-            else if(this._containedObject.attrs[ZaDomain.A_zimbraAutoProvMode] == "MANUAL")
-               this._containedObject[ZaDomain.A2_zimbraAutoProvModeMANUALEnabled] = "TRUE";
+            if(this._containedObject.attrs[ZaDomain.A_zmailAutoProvMode] == "EAGER")
+               this._containedObject[ZaDomain.A2_zmailAutoProvModeEAGEREnabled] = "TRUE";
+            else if(this._containedObject.attrs[ZaDomain.A_zmailAutoProvMode] == "LAZY")
+               this._containedObject[ZaDomain.A2_zmailAutoProvModeLAZYEnabled] = "TRUE";
+            else if(this._containedObject.attrs[ZaDomain.A_zmailAutoProvMode] == "MANUAL")
+               this._containedObject[ZaDomain.A2_zmailAutoProvModeMANUALEnabled] = "TRUE";
         }
     }
 
-    if(this._containedObject.attrs[ZaDomain.A_zimbraAutoProvAuthMech]) {
-        if(this._containedObject.attrs[ZaDomain.A_zimbraAutoProvAuthMech] instanceof Array) {
-            for(var mode = 0; mode < this._containedObject.attrs[ZaDomain.A_zimbraAutoProvAuthMech].length; mode ++){
-                if(this._containedObject.attrs[ZaDomain.A_zimbraAutoProvAuthMech][mode] == "LDAP")
-                   this._containedObject[ZaDomain.A2_zimbraAutoProvAuthMechLDAPEnabled] = "TRUE";
-                else if(this._containedObject.attrs[ZaDomain.A_zimbraAutoProvAuthMech][mode] == "PREAUTH")
-                   this._containedObject[ZaDomain.A2_zimbraAutoProvAuthMechPREAUTHEnabled] = "TRUE";
-                else if(this._containedObject.attrs[ZaDomain.A_zimbraAutoProvAuthMech][mode] == "KRB5")
-                   this._containedObject[ZaDomain.A2_zimbraAutoProvAuthMechKRB5Enabled] = "TRUE";
-                else if(this._containedObject.attrs[ZaDomain.A_zimbraAutoProvAuthMech][mode] == "SPNEGO")
-                   this._containedObject[ZaDomain.A2_zimbraAutoProvAuthMechSPNEGOEnabled] = "TRUE";
+    if(this._containedObject.attrs[ZaDomain.A_zmailAutoProvAuthMech]) {
+        if(this._containedObject.attrs[ZaDomain.A_zmailAutoProvAuthMech] instanceof Array) {
+            for(var mode = 0; mode < this._containedObject.attrs[ZaDomain.A_zmailAutoProvAuthMech].length; mode ++){
+                if(this._containedObject.attrs[ZaDomain.A_zmailAutoProvAuthMech][mode] == "LDAP")
+                   this._containedObject[ZaDomain.A2_zmailAutoProvAuthMechLDAPEnabled] = "TRUE";
+                else if(this._containedObject.attrs[ZaDomain.A_zmailAutoProvAuthMech][mode] == "PREAUTH")
+                   this._containedObject[ZaDomain.A2_zmailAutoProvAuthMechPREAUTHEnabled] = "TRUE";
+                else if(this._containedObject.attrs[ZaDomain.A_zmailAutoProvAuthMech][mode] == "KRB5")
+                   this._containedObject[ZaDomain.A2_zmailAutoProvAuthMechKRB5Enabled] = "TRUE";
+                else if(this._containedObject.attrs[ZaDomain.A_zmailAutoProvAuthMech][mode] == "SPNEGO")
+                   this._containedObject[ZaDomain.A2_zmailAutoProvAuthMechSPNEGOEnabled] = "TRUE";
             }
         } else {
-                if(this._containedObject.attrs[ZaDomain.A_zimbraAutoProvAuthMech] == "LDAP")
-                   this._containedObject[ZaDomain.A2_zimbraAutoProvAuthMechLDAPEnabled] = "TRUE";
-                else if(this._containedObject.attrs[ZaDomain.A_zimbraAutoProvAuthMech] == "PREAUTH")
-                   this._containedObject[ZaDomain.A2_zimbraAutoProvAuthMechPREAUTHEnabled] = "TRUE";
-                else if(this._containedObject.attrs[ZaDomain.A_zimbraAutoProvAuthMech] == "KRB5")
-                   this._containedObject[ZaDomain.A2_zimbraAutoProvAuthMechKRB5Enabled] = "TRUE";
-                else if(this._containedObject.attrs[ZaDomain.A_zimbraAutoProvAuthMech] == "SPNEGO")
-                   this._containedObject[ZaDomain.A2_zimbraAutoProvAuthMechSPNEGOEnabled] = "TRUE";
+                if(this._containedObject.attrs[ZaDomain.A_zmailAutoProvAuthMech] == "LDAP")
+                   this._containedObject[ZaDomain.A2_zmailAutoProvAuthMechLDAPEnabled] = "TRUE";
+                else if(this._containedObject.attrs[ZaDomain.A_zmailAutoProvAuthMech] == "PREAUTH")
+                   this._containedObject[ZaDomain.A2_zmailAutoProvAuthMechPREAUTHEnabled] = "TRUE";
+                else if(this._containedObject.attrs[ZaDomain.A_zmailAutoProvAuthMech] == "KRB5")
+                   this._containedObject[ZaDomain.A2_zmailAutoProvAuthMechKRB5Enabled] = "TRUE";
+                else if(this._containedObject.attrs[ZaDomain.A_zmailAutoProvAuthMech] == "SPNEGO")
+                   this._containedObject[ZaDomain.A2_zmailAutoProvAuthMechSPNEGOEnabled] = "TRUE";
         }
     }
-    this._containedObject[ZaDomain.A2_zimbraAutoProvServerList] = ZaApp.getInstance().getServerList(true).getArray();
-    this._containedObject[ZaDomain.A2_zimbraAutoProvSelectedServerList] = new AjxVector ();
-    for(var i = 0; i < this._containedObject[ZaDomain.A2_zimbraAutoProvServerList].length; i++) {
-        var server = this._containedObject[ZaDomain.A2_zimbraAutoProvServerList][i];
-        var scheduledDomains = server.attrs[ZaServer.A_zimbraAutoProvScheduledDomains];
+    this._containedObject[ZaDomain.A2_zmailAutoProvServerList] = ZaApp.getInstance().getServerList(true).getArray();
+    this._containedObject[ZaDomain.A2_zmailAutoProvSelectedServerList] = new AjxVector ();
+    for(var i = 0; i < this._containedObject[ZaDomain.A2_zmailAutoProvServerList].length; i++) {
+        var server = this._containedObject[ZaDomain.A2_zmailAutoProvServerList][i];
+        var scheduledDomains = server.attrs[ZaServer.A_zmailAutoProvScheduledDomains];
         for(var j = 0; scheduledDomains && j < scheduledDomains.length; j++) {
             if(scheduledDomains[j] == this._containedObject.name) {
-               this._containedObject[ZaDomain.A2_zimbraAutoProvSelectedServerList].add(server.name);
+               this._containedObject[ZaDomain.A2_zmailAutoProvSelectedServerList].add(server.name);
                 server["checked"] = true;
             }
         }
@@ -283,11 +283,11 @@ function(entry) {
 ZaDomainXFormView.isCatchAllEnabled = function () {
     /*var form = this;
     var instance = form.getInstance () ;
-    var isCatchAllEnabled = instance.attrs[ZaDomain.A_zimbraAdminConsoleCatchAllAddressEnabled]
-               || instance._defaultValues.attrs[ZaDomain.A_zimbraAdminConsoleCatchAllAddressEnabled] ;
+    var isCatchAllEnabled = instance.attrs[ZaDomain.A_zmailAdminConsoleCatchAllAddressEnabled]
+               || instance._defaultValues.attrs[ZaDomain.A_zmailAdminConsoleCatchAllAddressEnabled] ;
 
     return (isCatchAllEnabled == "TRUE" ? true : false) ;*/
-    return (this.getInstanceValue(ZaDomain.A_zimbraAdminConsoleCatchAllAddressEnabled) == "TRUE");
+    return (this.getInstanceValue(ZaDomain.A_zmailAdminConsoleCatchAllAddressEnabled) == "TRUE");
 }
 
 ZaDomainXFormView.aclSelectionListener = 
@@ -339,17 +339,17 @@ ZaDomainXFormView.hasACEName = function () {
 ZaDomainXFormView.resetAllColorThemes = function () {
     var form = this.getForm() ;
 //    var instance = form.getInstance () ;
-    this.setInstanceValue (null, ZaDomain.A_zimbraSkinForegroundColor) ;
-    this.setInstanceValue (null, ZaDomain.A_zimbraSkinBackgroundColor) ;
-    this.setInstanceValue (null, ZaDomain.A_zimbraSkinSecondaryColor) ;
-    this.setInstanceValue (null, ZaDomain.A_zimbraSkinSelectionColor) ;
+    this.setInstanceValue (null, ZaDomain.A_zmailSkinForegroundColor) ;
+    this.setInstanceValue (null, ZaDomain.A_zmailSkinBackgroundColor) ;
+    this.setInstanceValue (null, ZaDomain.A_zmailSkinSecondaryColor) ;
+    this.setInstanceValue (null, ZaDomain.A_zmailSkinSelectionColor) ;
 
     form.parent.setDirty(true);
     form.refresh () ;        
 }
 
 ZaDomainXFormView.isDomainModeNotInternal = function () {
-	return (this.getInstanceValue(ZaDomain.A_zimbraGalMode) !=ZaDomain.GAL_Mode_internal);
+	return (this.getInstanceValue(ZaDomain.A_zmailGalMode) !=ZaDomain.GAL_Mode_internal);
 }
 
 ZaDomainXFormView.addButtonListener =
@@ -391,10 +391,10 @@ function (params,resp) {
 			
 		var domain = new ZaDomain();
 		var instance = this.getInstance();
-		domain.attrs[ZaDomain.A_zimbraNotebookAccount] = this.getModel().getInstanceValue(this.getInstance(),ZaDomain.A_zimbraNotebookAccount);
-		domain.attrs[ZaDomain.A_zimbraDomainStatus] = this.getModel().getInstanceValue(this.getInstance(),ZaDomain.A_zimbraDomainStatus);
+		domain.attrs[ZaDomain.A_zmailNotebookAccount] = this.getModel().getInstanceValue(this.getInstance(),ZaDomain.A_zmailNotebookAccount);
+		domain.attrs[ZaDomain.A_zmailDomainStatus] = this.getModel().getInstanceValue(this.getInstance(),ZaDomain.A_zmailDomainStatus);
 		domain.id = this.getInstance().id;
-		domain.attrs[ZaItem.A_zimbraId] = this.getModel().getInstanceValue(this.getInstance(),ZaItem.A_zimbraId);
+		domain.attrs[ZaItem.A_zmailId] = this.getModel().getInstanceValue(this.getInstance(),ZaItem.A_zmailId);
 		domain.name = this.getInstance().name;
 		ZaDomain.loadNotebookACLs.call(domain);
 		var oldArray = this.getModel().getInstanceValue(this.getInstance(),ZaDomain.A_allNotebookACLS);
@@ -415,8 +415,8 @@ function () {
 		this.parent.addAclDlg.popdown();
 		var obj = this.parent.addAclDlg.getObject();
 
-		var accountName = this.getModel().getInstanceValue(this.getInstance(),ZaDomain.A_zimbraNotebookAccount);
-		var soapDoc = AjxSoapDoc.create("BatchRequest", "urn:zimbra");
+		var accountName = this.getModel().getInstanceValue(this.getInstance(),ZaDomain.A_zmailNotebookAccount);
+		var soapDoc = AjxSoapDoc.create("BatchRequest", "urn:zmail");
 		soapDoc.setMethodAttribute("onerror", "stop");		
 		ZaDomain.getGrantNotebookACLsRequest(obj,soapDoc);
 
@@ -477,8 +477,8 @@ function () {
 			}
 		}
 		if(dirty) {
-			var accountName = this.getModel().getInstanceValue(this.getInstance(),ZaDomain.A_zimbraNotebookAccount);
-			var soapDoc = AjxSoapDoc.create("BatchRequest", "urn:zimbra");
+			var accountName = this.getModel().getInstanceValue(this.getInstance(),ZaDomain.A_zmailNotebookAccount);
+			var soapDoc = AjxSoapDoc.create("BatchRequest", "urn:zmail");
 			soapDoc.setMethodAttribute("onerror", "stop");		
 			ZaDomain.getGrantNotebookACLsRequest(obj,soapDoc);
 	
@@ -533,10 +533,10 @@ function () {
 		return;
 	var cnt = aclSelectionCache.length;
 	if(cnt > 0) {
-		var accountName = this.getModel().getInstanceValue(this.getInstance(),ZaDomain.A_zimbraNotebookAccount);
-		var soapDoc = AjxSoapDoc.create("BatchRequest", "urn:zimbra");
+		var accountName = this.getModel().getInstanceValue(this.getInstance(),ZaDomain.A_zmailNotebookAccount);
+		var soapDoc = AjxSoapDoc.create("BatchRequest", "urn:zmail");
 		soapDoc.setMethodAttribute("onerror", "stop");
-		var accountName = this.getModel().getInstanceValue(this.getInstance(),ZaDomain.A_zimbraNotebookAccount);
+		var accountName = this.getModel().getInstanceValue(this.getInstance(),ZaDomain.A_zmailNotebookAccount);
 		ZaDomain.getRevokeNotebookACLsRequest(aclSelectionCache,soapDoc);
 		
 		var params = new Object();
@@ -604,7 +604,7 @@ function () {
 ZaDomainXFormView.onFormFieldChanged = 
 function (value, event, form) {
 	var instance = this.getInstance();
-	if(instance.attrs[ZaDomain.A_zimbraDomainStatus] && (instance.attrs[ZaDomain.A_zimbraDomainStatus]==ZaDomain.DOMAIN_STATUS_SHUTDOWN)) {
+	if(instance.attrs[ZaDomain.A_zmailDomainStatus] && (instance.attrs[ZaDomain.A_zmailDomainStatus]==ZaDomain.DOMAIN_STATUS_SHUTDOWN)) {
 		var oldVal = this.getInstanceValue();
 		return oldVal;
 	} else {
@@ -689,52 +689,52 @@ ZaDomainXFormView.updateUserQuota = function(params, resp) {
     }
 }
 
-ZaDomainXFormView.GAL_TAB_ATTRS = [ZaDomain.A_zimbraGalMode,ZaDomain.A_zimbraGalMaxResults,ZaDomain.A_GalLdapFilter,
-	ZaDomain.A_zimbraGalAutoCompleteLdapFilter,ZaDomain.A_GalLdapSearchBase,ZaDomain.A_GalLdapURL,ZaDomain.A_GalLdapBindDn];
+ZaDomainXFormView.GAL_TAB_ATTRS = [ZaDomain.A_zmailGalMode,ZaDomain.A_zmailGalMaxResults,ZaDomain.A_GalLdapFilter,
+	ZaDomain.A_zmailGalAutoCompleteLdapFilter,ZaDomain.A_GalLdapSearchBase,ZaDomain.A_GalLdapURL,ZaDomain.A_GalLdapBindDn];
 ZaDomainXFormView.GAL_TAB_RIGHTS = [];
 
 ZaDomainXFormView.AUTH_TAB_ATTRS = [ZaDomain.A_AuthMech,ZaDomain.A_AuthLdapUserDn,ZaDomain.A_AuthLdapURL,
-	ZaDomain.A_zimbraAuthLdapStartTlsEnabled,ZaDomain.A_AuthLdapSearchFilter,ZaDomain.A_AuthLdapSearchBase,
+	ZaDomain.A_zmailAuthLdapStartTlsEnabled,ZaDomain.A_AuthLdapSearchFilter,ZaDomain.A_AuthLdapSearchBase,
 	ZaDomain.A_AuthLdapSearchBindDn];
 ZaDomainXFormView.AUTH_TAB_RIGHTS = [];
 
-ZaDomainXFormView.VH_TAB_ATTRS = [ZaDomain.A_zimbraVirtualHostname];
+ZaDomainXFormView.VH_TAB_ATTRS = [ZaDomain.A_zmailVirtualHostname];
 ZaDomainXFormView.VH_TAB_RIGHTS = [];
 
-ZaDomainXFormView.ADV_TAB_ATTRS = [ZaDomain.A_zimbraBasicAuthRealm, ZaDomain.A_zimbraMailAddressValidationRegex,
-    ZaDomain.A_zimbraMailDomainQuota, ZaDomain.A_zimbraDomainAggregateQuota, ZaDomain.A_zimbraDomainAggregateQuotaWarnPercent,
-    ZaDomain.A_zimbraDomainAggregateQuotaWarnEmailRecipient, ZaDomain.A_zimbraDomainAggregateQuotaPolicy
+ZaDomainXFormView.ADV_TAB_ATTRS = [ZaDomain.A_zmailBasicAuthRealm, ZaDomain.A_zmailMailAddressValidationRegex,
+    ZaDomain.A_zmailMailDomainQuota, ZaDomain.A_zmailDomainAggregateQuota, ZaDomain.A_zmailDomainAggregateQuotaWarnPercent,
+    ZaDomain.A_zmailDomainAggregateQuotaWarnEmailRecipient, ZaDomain.A_zmailDomainAggregateQuotaPolicy
 ];
 
 ZaDomainXFormView.ADV_TAB_RIGHTS = [];
 
-ZaDomainXFormView.Feature_TAB_ATTRS = [ZaDomain.A_zimbraFeatureCalendarReminderDeviceEmailEnabled];
+ZaDomainXFormView.Feature_TAB_ATTRS = [ZaDomain.A_zmailFeatureCalendarReminderDeviceEmailEnabled];
 ZaDomainXFormView.Feature_TAB_RIGHTS = [];
 
-ZaDomainXFormView.CERT_TAB_ATTRS = [ZaDomain.A_zimbraSSLCertificate];
+ZaDomainXFormView.CERT_TAB_ATTRS = [ZaDomain.A_zmailSSLCertificate];
 ZaDomainXFormView.CERT_TAB_RIGHTS = [];
 
-ZaDomainXFormView.PROV_TAB_ATTRS = [ZaDomain.A_zimbraAutoProvMode, ZaDomain.A_zimbraAutoProvAuthMech,
-    ZaDomain.A_zimbraAutoProvLdapURL,
-    ZaDomain.A_zimbraAutoProvLdapStartTlsEnabled,ZaDomain.A_zimbraAutoProvLdapAdminBindDn,
-    ZaDomain.A_zimbraAutoProvLdapAdminBindPassword,ZaDomain.A_zimbraAutoProvLdapSearchBase,
-    ZaDomain.A_zimbraAutoProvLdapSearchFilter,ZaDomain.A_zimbraAutoProvLdapBindDn,
-    ZaDomain.A_zimbraAutoProvAccountNameMap,ZaDomain.A_zimbraAutoProvAttrMap,
-    ZaDomain.A_zimbraAutoProvNotificationFromAddress,ZaDomain.A_zimbraAutoProvBatchSize,
-    ZaDomain.A_zimbraAutoProvLastPolledTimestamp,ZaDomain.A_zimbraAutoProvNotificationSubject,
-    ZaDomain.A_zimbraAutoProvNotificationBody];
+ZaDomainXFormView.PROV_TAB_ATTRS = [ZaDomain.A_zmailAutoProvMode, ZaDomain.A_zmailAutoProvAuthMech,
+    ZaDomain.A_zmailAutoProvLdapURL,
+    ZaDomain.A_zmailAutoProvLdapStartTlsEnabled,ZaDomain.A_zmailAutoProvLdapAdminBindDn,
+    ZaDomain.A_zmailAutoProvLdapAdminBindPassword,ZaDomain.A_zmailAutoProvLdapSearchBase,
+    ZaDomain.A_zmailAutoProvLdapSearchFilter,ZaDomain.A_zmailAutoProvLdapBindDn,
+    ZaDomain.A_zmailAutoProvAccountNameMap,ZaDomain.A_zmailAutoProvAttrMap,
+    ZaDomain.A_zmailAutoProvNotificationFromAddress,ZaDomain.A_zmailAutoProvBatchSize,
+    ZaDomain.A_zmailAutoProvLastPolledTimestamp,ZaDomain.A_zmailAutoProvNotificationSubject,
+    ZaDomain.A_zmailAutoProvNotificationBody];
 ZaDomainXFormView.PROV_TAB_RIGHTS = [];
 
-ZaDomainXFormView.INTEROP_TAB_ATTRS = [ZaDomain.A_zimbraFreebusyExchangeURL, ZaDomain.A_zimbraFreebusyExchangeAuthScheme,
-	ZaDomain.A_zimbraFreebusyExchangeAuthUsername, ZaDomain.A_zimbraFreebusyExchangeAuthPassword,
-	ZaDomain.A_zimbraFreebusyExchangeUserOrg, ZaDomain.A_zimbraFreebusyExchangeServerType];
+ZaDomainXFormView.INTEROP_TAB_ATTRS = [ZaDomain.A_zmailFreebusyExchangeURL, ZaDomain.A_zmailFreebusyExchangeAuthScheme,
+	ZaDomain.A_zmailFreebusyExchangeAuthUsername, ZaDomain.A_zmailFreebusyExchangeAuthPassword,
+	ZaDomain.A_zmailFreebusyExchangeUserOrg, ZaDomain.A_zmailFreebusyExchangeServerType];
 ZaDomainXFormView.INTEROP_TAB_RIGHTS = [];
 
-ZaDomainXFormView.ZIMLETS_TAB_ATTRS = [ZaDomain.A_zimbraZimletDomainAvailableZimlets];
+ZaDomainXFormView.ZIMLETS_TAB_ATTRS = [ZaDomain.A_zmailZimletDomainAvailableZimlets];
 ZaDomainXFormView.ZIMLETS_TAB_RIGHTS = [];
 
-ZaDomainXFormView.SKIN_TAB_ATTRS = [ZaDomain.A_zimbraSkinForegroundColor, ZaDomain.A_zimbraSkinBackgroundColor,ZaDomain.A_zimbraSkinSecondaryColor,
-	ZaDomain.A_zimbraSkinSelectionColor, ZaDomain.A_zimbraSkinLogoURL, ZaDomain.A_zimbraSkinLogoLoginBanner, ZaDomain.A_zimbraSkinLogoAppBanner ];
+ZaDomainXFormView.SKIN_TAB_ATTRS = [ZaDomain.A_zmailSkinForegroundColor, ZaDomain.A_zmailSkinBackgroundColor,ZaDomain.A_zmailSkinSecondaryColor,
+	ZaDomain.A_zmailSkinSelectionColor, ZaDomain.A_zmailSkinLogoURL, ZaDomain.A_zmailSkinLogoLoginBanner, ZaDomain.A_zmailSkinLogoAppBanner ];
 
 ZaDomainXFormView.SKIN_TAB_RIGHTS = [];
 
@@ -803,9 +803,9 @@ ZaDomainXFormView.myXFormModifier = function(xFormObject,entry) {
 						{type:_AJX_IMAGE_, src:"Domain_32", label:null,rowSpan:3},
 						{type:_OUTPUT_, ref:"name", label:null,cssClass:"AdminTitle",
                             height: 32, rowSpan:3},				
-						{type:_OUTPUT_, ref:ZaItem.A_zimbraId, label:ZaMsg.NAD_ZimbraID,visibilityChecks:[ZaItem.hasReadPermission]},
-						{type:_OUTPUT_, ref:ZaItem.A_zimbraCreateTimestamp, 
-							label:ZaMsg.LBL_zimbraCreateTimestamp, labelLocation:_LEFT_,
+						{type:_OUTPUT_, ref:ZaItem.A_zmailId, label:ZaMsg.NAD_ZmailID,visibilityChecks:[ZaItem.hasReadPermission]},
+						{type:_OUTPUT_, ref:ZaItem.A_zmailCreateTimestamp, 
+							label:ZaMsg.LBL_zmailCreateTimestamp, labelLocation:_LEFT_,
 							getDisplayValue:function() {
 								var val = ZaItem.formatServerTime(this.getInstanceValue());
 								if(!val)
@@ -815,7 +815,7 @@ ZaDomainXFormView.myXFormModifier = function(xFormObject,entry) {
 							},
 							visibilityChecks:[ZaItem.hasReadPermission]	
 						},
-						{type:_OUTPUT_, choices:ZaDomain.domainStatusChoices, bmolsnr:true, ref:ZaDomain.A_zimbraDomainStatus, label:ZaMsg.LBL_zimbraDomainStatus,visibilityChecks:[ZaItem.hasReadPermission]}
+						{type:_OUTPUT_, choices:ZaDomain.domainStatusChoices, bmolsnr:true, ref:ZaDomain.A_zmailDomainStatus, label:ZaMsg.LBL_zmailDomainStatus,visibilityChecks:[ZaItem.hasReadPermission]}
 					]
 				}
 			]
@@ -833,8 +833,8 @@ ZaDomainXFormView.myXFormModifier = function(xFormObject,entry) {
 		{type:_ZA_TOP_GROUPER_, label:ZaMsg.TABT_GeneralPage, width:"100%", numCols:2,colSizes: ["275px","auto"],
 			items:[
                 { type: _DWT_ALERT_,
-                    visibilityChecks:[[XForm.checkInstanceValue,ZaDomain.A_zimbraDomainStatus,ZaDomain.DOMAIN_STATUS_SHUTDOWN]],
-                    visibilityChangeEventSources:[ZaDomain.A_zimbraDomainStatus],
+                    visibilityChecks:[[XForm.checkInstanceValue,ZaDomain.A_zmailDomainStatus,ZaDomain.DOMAIN_STATUS_SHUTDOWN]],
+                    visibilityChangeEventSources:[ZaDomain.A_zmailDomainStatus],
                     containerCssStyle: "padding-bottom:0;",
                     style: DwtAlert.WARNING,
                     iconVisible: true,
@@ -844,9 +844,9 @@ ZaDomainXFormView.myXFormModifier = function(xFormObject,entry) {
                 { ref: "name", type:_OUTPUT_,
                   label:ZaMsg.Domain_DomainName
                 },
-                {ref:ZaAccount.A_zimbraMailCatchAllAddress, id: ZaAccount.A_zimbraMailCatchAllAddress, type:_DYNSELECT_,
+                {ref:ZaAccount.A_zmailMailCatchAllAddress, id: ZaAccount.A_zmailMailCatchAllAddress, type:_DYNSELECT_,
                     visibilityChecks:[ZaDomainXFormView.isCatchAllEnabled] ,
-                    visibilityChangeEventSources:[ZaDomain.A_zimbraAdminConsoleCatchAllAddressEnabled],
+                    visibilityChangeEventSources:[ZaDomain.A_zmailAdminConsoleCatchAllAddressEnabled],
                     dataFetcherClass:null,
                     choices:this.catchAllChoices,
                     emptyText:ZaMsg.enterSearchTerm,
@@ -898,20 +898,20 @@ ZaDomainXFormView.myXFormModifier = function(xFormObject,entry) {
                     label:ZaMsg.Domain_ACEName+":",visibilityChecks:[ZaDomainXFormView.hasACEName],
                     visibilityChangeEventSources:[ZaDomain.A_domainName]
                 },
-                {ref:ZaDomain.A_zimbraPrefTimeZoneId, type:_OSELECT1_, msgName:ZaMsg.MSG_zimbraPrefTimeZoneId,
-                   label:ZaMsg.LBL_zimbraPrefTimeZoneId, labelLocation:_LEFT_,
+                {ref:ZaDomain.A_zmailPrefTimeZoneId, type:_OSELECT1_, msgName:ZaMsg.MSG_zmailPrefTimeZoneId,
+                   label:ZaMsg.LBL_zmailPrefTimeZoneId, labelLocation:_LEFT_,
                    onChange:ZaDomainXFormView.onFormFieldChanged
                 },
-                {ref: ZaDomain.A_zimbraPublicServiceHostname, type:_TEXTFIELD_,
-                    label:ZaMsg.Domain_zimbraPublicServiceHostname, width:250,
+                {ref: ZaDomain.A_zmailPublicServiceHostname, type:_TEXTFIELD_,
+                    label:ZaMsg.Domain_zmailPublicServiceHostname, width:250,
                     onChange:ZaDomainXFormView.onFormFieldChanged
                 },
-                {ref: ZaDomain.A_zimbraPublicServiceProtocol, type:_OSELECT1_,
-                    label:ZaMsg.Domain_zimbraPublicServiceProtocol, choices:ZaDomain.protocolChoices,
+                {ref: ZaDomain.A_zmailPublicServiceProtocol, type:_OSELECT1_,
+                    label:ZaMsg.Domain_zmailPublicServiceProtocol, choices:ZaDomain.protocolChoices,
                     onChange:ZaDomainXFormView.onFormFieldChanged
                 },
-                {ref: ZaDomain.A_zimbraPublicServicePort, type:_TEXTFIELD_,
-                    label:ZaMsg.Domain_zimbraPublicServicePort, width:100,
+                {ref: ZaDomain.A_zmailPublicServicePort, type:_TEXTFIELD_,
+                    label:ZaMsg.Domain_zmailPublicServicePort, width:100,
                     onChange:ZaDomainXFormView.onFormFieldChanged
                 },
                 { type: _DWT_ALERT_,
@@ -919,11 +919,11 @@ ZaDomainXFormView.myXFormModifier = function(xFormObject,entry) {
                     style: DwtAlert.INFO,
                     iconVisible: true,
                     content: ZaMsg.Domain_InboundSMTPNote,
-                    visibilityChecks:[[ZaItem.hasReadPermission, ZaDomain.A_zimbraDNSCheckHostname]],
+                    visibilityChecks:[[ZaItem.hasReadPermission, ZaDomain.A_zmailDNSCheckHostname]],
                     colSpan:"2"
                 },
-                {ref: ZaDomain.A_zimbraDNSCheckHostname, type:_SUPER_TEXTFIELD_, colSpan:2,
-                    txtBoxLabel:ZaMsg.Domain_zimbraDNSCheckHostname, onChange:ZaDomainXFormView.onFormFieldChanged,
+                {ref: ZaDomain.A_zmailDNSCheckHostname, type:_SUPER_TEXTFIELD_, colSpan:2,
+                    txtBoxLabel:ZaMsg.Domain_zmailDNSCheckHostname, onChange:ZaDomainXFormView.onFormFieldChanged,
                     resetToSuperLabel:ZaMsg.NAD_ResetToGlobal
                 },
                 ZaItem.descriptionXFormItem,
@@ -952,20 +952,20 @@ ZaDomainXFormView.myXFormModifier = function(xFormObject,entry) {
                         return newValue;
                     }
                 },
-                {ref:ZaDomain.A_zimbraDomainStatus, type:_OSELECT1_, msgName:ZaMsg.Domain_zimbraDomainStatus,
-                    label:ZaMsg.LBL_zimbraDomainStatus,
+                {ref:ZaDomain.A_zmailDomainStatus, type:_OSELECT1_, msgName:ZaMsg.Domain_zmailDomainStatus,
+                    label:ZaMsg.LBL_zmailDomainStatus,
                     labelLocation:_LEFT_, choices:ZaDomain.domainStatusChoices, onChange:ZaDomainXFormView.onFormFieldChanged
                 },
                 { ref: ZaDomain.A_notes, type:_TEXTAREA_,
                     label:ZaMsg.NAD_Notes, labelCssStyle:"vertical-align:top;", width:250,
                     onChange:ZaDomainXFormView.onFormFieldChanged
                 },
-			    {ref: ZaDomain.A_zimbraHelpAdminURL, type:_TEXTFIELD_,
-                    label:ZaMsg.Domain_zimbraHelpAdminURL, width:250,
+			    {ref: ZaDomain.A_zmailHelpAdminURL, type:_TEXTFIELD_,
+                    label:ZaMsg.Domain_zmailHelpAdminURL, width:250,
                     onChange:ZaDomainXFormView.onFormFieldChanged
         		},
-                { ref: ZaDomain.A_zimbraHelpDelegatedURL, type:_TEXTFIELD_,
-                    label:ZaMsg.Domain_zimbraHelpDelegatedURL, width:250,
+                { ref: ZaDomain.A_zmailHelpDelegatedURL, type:_TEXTFIELD_,
+                    label:ZaMsg.Domain_zmailHelpDelegatedURL, width:250,
                     onChange:ZaDomainXFormView.onFormFieldChanged
                 }
 			]
@@ -984,26 +984,26 @@ ZaDomainXFormView.myXFormModifier = function(xFormObject,entry) {
 		{type:_ZA_TOP_GROUPER_, label:ZaMsg.Domain_GAL_Configuration, numCols:2,colSizes: ["275px","auto"],
 			items:[
 				{ type: _DWT_ALERT_,
-					visibilityChangeEventSources:[ZaDomain.A_zimbraDomainStatus],
-					visibilityChecks:[[XForm.checkInstanceValue,ZaDomain.A_zimbraDomainStatus,ZaDomain.DOMAIN_STATUS_SHUTDOWN]],
+					visibilityChangeEventSources:[ZaDomain.A_zmailDomainStatus],
+					visibilityChecks:[[XForm.checkInstanceValue,ZaDomain.A_zmailDomainStatus,ZaDomain.DOMAIN_STATUS_SHUTDOWN]],
 					containerCssStyle: "padding-bottom:0;",
 					style: DwtAlert.WARNING,
 					iconVisible: true,
 					content: ZaMsg.Domain_Locked_Note,
 					colSpan:"*"
 				},
-				{ref:ZaDomain.A_zimbraGalMode, type:_OUTPUT_, label:ZaMsg.Domain_GalMode, choices:this.GALModes,visibilityChecks:[ZaItem.hasReadPermission] },
-				{ref:ZaDomain.A_zimbraGalMaxResults, type:_TEXTFIELD_, label:ZaMsg.LBL_zimbraGalMaxResults, msgName:ZaMsg.MSG_zimbraGalMaxResults, autoSaveValue:true, labelLocation:_LEFT_,
+				{ref:ZaDomain.A_zmailGalMode, type:_OUTPUT_, label:ZaMsg.Domain_GalMode, choices:this.GALModes,visibilityChecks:[ZaItem.hasReadPermission] },
+				{ref:ZaDomain.A_zmailGalMaxResults, type:_TEXTFIELD_, label:ZaMsg.LBL_zmailGalMaxResults, msgName:ZaMsg.MSG_zmailGalMaxResults, autoSaveValue:true, labelLocation:_LEFT_,
                     cssClass:"admin_xform_number_input"}
 				]
 		},
 		{type:_ZA_TOP_GROUPER_, label:ZaMsg.LBL_GALAccount, numCols:2,colSizes: ["275px","auto"],
-			visibilityChecks:[[XForm.checkInstanceValueNotEmty,ZaDomain.A2_gal_sync_accounts],[ZaItem.hasReadPermission,ZaDomain.A_zimbraGalAccountId]],
+			visibilityChecks:[[XForm.checkInstanceValueNotEmty,ZaDomain.A2_gal_sync_accounts],[ZaItem.hasReadPermission,ZaDomain.A_zmailGalAccountId]],
 			items:[
                 {type:_REPEAT_, ref:ZaDomain.A2_gal_sync_accounts, colSpan: "*",  label:null,
                     showAddButton:false,
                     showRemoveButton: false,
-                    visibilityChecks:[[XForm.checkInstanceValueNotEmty,ZaDomain.A2_gal_sync_accounts],[ZaItem.hasReadPermission,ZaDomain.A_zimbraGalAccountId]],
+                    visibilityChecks:[[XForm.checkInstanceValueNotEmty,ZaDomain.A2_gal_sync_accounts],[ZaItem.hasReadPermission,ZaDomain.A_zmailGalAccountId]],
                     items:[
                         {type:_GROUP_, ref:".", numCols:1, width:"100%", items:[
                             {ref:"name", type:_OUTPUT_,label:ZaMsg.Domain_GalSyncAccount
@@ -1011,31 +1011,31 @@ ZaDomainXFormView.myXFormModifier = function(xFormObject,entry) {
                             {ref:("attrs." + ZaDomain.A_mailHost), type: _OUTPUT_, label:ZaMsg.NAD_MailServer,
                                 required:true
                             },
-                            {ref:(ZaAccount.A2_zimbra_ds + ".name"), label:ZaMsg.Domain_InternalGALDSName, type:_OUTPUT_,
-                                visibilityChangeEventSources:[ZaDomain.A_zimbraGalMode],
+                            {ref:(ZaAccount.A2_zmail_ds + ".name"), label:ZaMsg.Domain_InternalGALDSName, type:_OUTPUT_,
+                                visibilityChangeEventSources:[ZaDomain.A_zmailGalMode],
                                 visibilityChecks:[
                                     ZaNewDomainXWizard.isDomainModeNotExternal,
-                                    [ZaDomainXFormView.checkGALAccountAttribute, ZaAccount.A2_zimbra_ds, false]
+                                    [ZaDomainXFormView.checkGALAccountAttribute, ZaAccount.A2_zmail_ds, false]
                                 ]
                             },
-                            {ref:(ZaAccount.A2_zimbra_ds + ".attrs." + ZaDataSource.A_zimbraDataSourcePollingInterval),
-                                type:_LIFETIME_, label:ZaMsg.LBL_zimbraDataSourcePollingInterval_internal, labelLocation:_LEFT_,
-                                msgName:ZaMsg.MSG_zimbraDataSourcePollingInterval_internal,
+                            {ref:(ZaAccount.A2_zmail_ds + ".attrs." + ZaDataSource.A_zmailDataSourcePollingInterval),
+                                type:_LIFETIME_, label:ZaMsg.LBL_zmailDataSourcePollingInterval_internal, labelLocation:_LEFT_,
+                                msgName:ZaMsg.MSG_zmailDataSourcePollingInterval_internal,
                                 visibilityChecks:[
                                     ZaNewDomainXWizard.isDomainModeNotExternal,
-                                    [ZaDomainXFormView.checkGALAccountAttribute, ZaAccount.A2_zimbra_ds, false]
+                                    [ZaDomainXFormView.checkGALAccountAttribute, ZaAccount.A2_zmail_ds, false]
                                 ]
                             },
                             {ref:(ZaAccount.A2_ldap_ds + ".name"), label:ZaMsg.Domain_ExternalGALDSName, type:_OUTPUT_,
-                                visibilityChangeEventSources:[ZaDomain.A_zimbraGalMode],
+                                visibilityChangeEventSources:[ZaDomain.A_zmailGalMode],
                                 visibilityChecks:[
                                     ZaNewDomainXWizard.isDomainModeNotInternal,
                                     [ZaDomainXFormView.checkGALAccountAttribute, ZaAccount.A2_ldap_ds, false]
                                 ]
                             },
-                            {ref:(ZaAccount.A2_ldap_ds + ".attrs." + ZaDataSource.A_zimbraDataSourcePollingInterval),
-                                type:_LIFETIME_, label:ZaMsg.LBL_zimbraDataSourcePollingInterval_external, labelLocation:_LEFT_,
-                                msgName:ZaMsg.MSG_zimbraDataSourcePollingInterval_external,
+                            {ref:(ZaAccount.A2_ldap_ds + ".attrs." + ZaDataSource.A_zmailDataSourcePollingInterval),
+                                type:_LIFETIME_, label:ZaMsg.LBL_zmailDataSourcePollingInterval_external, labelLocation:_LEFT_,
+                                msgName:ZaMsg.MSG_zmailDataSourcePollingInterval_external,
                                 visibilityChecks:[
                                     ZaNewDomainXWizard.isDomainModeNotInternal,
                                     [ZaDomainXFormView.checkGALAccountAttribute, ZaAccount.A2_ldap_ds, false]
@@ -1045,27 +1045,27 @@ ZaDomainXFormView.myXFormModifier = function(xFormObject,entry) {
                     ]
                 },
                 {ref:ZaDomain.A_GALServerType, type:_OUTPUT_, label:ZaMsg.Domain_GALServerType,
-                    visibilityChecks:[ZaDomainXFormView.isDomainModeNotInternal], visibilityChangeEventSources:[ZaDomain.A_zimbraGalMode],
+                    visibilityChecks:[ZaDomainXFormView.isDomainModeNotInternal], visibilityChangeEventSources:[ZaDomain.A_zmailGalMode],
                     choices:this.GALServerTypes, labelLocation:_LEFT_},
                 {ref:ZaDomain.A_GalLdapFilter, type:_OUTPUT_, label:ZaMsg.Domain_GalLdapFilter, labelLocation:_LEFT_,
                     visibilityChecks:[[XForm.checkInstanceValue,ZaDomain.A_GALServerType,ZaDomain.GAL_ServerType_ldap], [ZaDomainXFormView.isDomainModeNotInternal]],
-                    visibilityChangeEventSources:[ZaDomain.A_GALServerType, ZaDomain.A_zimbraGalMode]
+                    visibilityChangeEventSources:[ZaDomain.A_GALServerType, ZaDomain.A_zmailGalMode]
                 },
-                {ref:ZaDomain.A_zimbraGalAutoCompleteLdapFilter, type:_OUTPUT_, label:ZaMsg.Domain_zimbraGalAutoCompleteLdapFilter, labelLocation:_LEFT_,
+                {ref:ZaDomain.A_zmailGalAutoCompleteLdapFilter, type:_OUTPUT_, label:ZaMsg.Domain_zmailGalAutoCompleteLdapFilter, labelLocation:_LEFT_,
                     visibilityChecks:[[XForm.checkInstanceValue,ZaDomain.A_GALServerType,ZaDomain.GAL_ServerType_ldap], [ZaDomainXFormView.isDomainModeNotInternal]],
-                    visibilityChangeEventSources:[ZaDomain.A_GALServerType, ZaDomain.A_zimbraGalMode]
+                    visibilityChangeEventSources:[ZaDomain.A_GALServerType, ZaDomain.A_zmailGalMode]
                 },
                 {ref:ZaDomain.A_GalLdapSearchBase, type:_OUTPUT_, label:ZaMsg.Domain_GalLdapSearchBase,
-                    visibilityChecks:[ZaDomainXFormView.isDomainModeNotInternal], visibilityChangeEventSources:[ZaDomain.A_zimbraGalMode],
+                    visibilityChecks:[ZaDomainXFormView.isDomainModeNotInternal], visibilityChangeEventSources:[ZaDomain.A_zmailGalMode],
                     labelLocation:_LEFT_},
                 {ref:ZaDomain.A_GalLdapURL, type:_REPEAT_, label:ZaMsg.LBL_Domain_GalLdapURL, labelLocation:_LEFT_,showAddButton:false, showRemoveButton:false,
-                    visibilityChecks:[ZaDomainXFormView.isDomainModeNotInternal], visibilityChangeEventSources:[ZaDomain.A_zimbraGalMode],
+                    visibilityChecks:[ZaDomainXFormView.isDomainModeNotInternal], visibilityChangeEventSources:[ZaDomain.A_zmailGalMode],
                     items:[
                         {type:_OUTPUT_, ref:".", label:null,labelLocation:_NONE_}
                     ]
                 },
                 {ref:ZaDomain.A_GalLdapBindDn, type:_OUTPUT_, label:ZaMsg.Domain_GalLdapBindDn, labelLocation:_LEFT_,
-                    visibilityChecks:[ZaDomainXFormView.isDomainModeNotInternal], visibilityChangeEventSources:[ZaDomain.A_zimbraGalMode],
+                    visibilityChecks:[ZaDomainXFormView.isDomainModeNotInternal], visibilityChangeEventSources:[ZaDomain.A_zmailGalMode],
                     enableDisableChangeEventSources:[ZaDomain.A_UseBindPassword],
                     enableDisableChecks:[[XForm.checkInstanceValue,ZaDomain.A_UseBindPassword,"TRUE"]]
 
@@ -1083,8 +1083,8 @@ ZaDomainXFormView.myXFormModifier = function(xFormObject,entry) {
 		var case3 = {type:_ZATABCASE_, caseKey:tabIx,paddingStyle:"padding-left:15px;", width:"98%", cellpadding:2,
 			items: [
 				{ type: _DWT_ALERT_,
-					visibilityChangeEventSources:[ZaDomain.A_zimbraDomainStatus],
-					visibilityChecks:[[XForm.checkInstanceValue,ZaDomain.A_zimbraDomainStatus,ZaDomain.DOMAIN_STATUS_SHUTDOWN]],
+					visibilityChangeEventSources:[ZaDomain.A_zmailDomainStatus],
+					visibilityChecks:[[XForm.checkInstanceValue,ZaDomain.A_zmailDomainStatus,ZaDomain.DOMAIN_STATUS_SHUTDOWN]],
 					containerCssStyle: "padding-bottom:0;",
 					style: DwtAlert.WARNING,
 					iconVisible: true, 
@@ -1115,7 +1115,7 @@ ZaDomainXFormView.myXFormModifier = function(xFormObject,entry) {
                                     {type:_OUTPUT_, ref:".", label:null,labelLocation:_NONE_}
                                 ]
                             },
-                            {ref:ZaDomain.A_zimbraAuthLdapStartTlsEnabled, type:_OUTPUT_, label:ZaMsg.Domain_llAuthLdapStartTlsEnabled, labelLocation:_LEFT_,choices:ZaModel.BOOLEAN_CHOICES},
+                            {ref:ZaDomain.A_zmailAuthLdapStartTlsEnabled, type:_OUTPUT_, label:ZaMsg.Domain_llAuthLdapStartTlsEnabled, labelLocation:_LEFT_,choices:ZaModel.BOOLEAN_CHOICES},
                             {ref:ZaDomain.A_AuthLdapSearchFilter, type:_OUTPUT_, label:ZaMsg.Domain_AuthLdapFilter, labelLocation:_LEFT_},
                             {ref:ZaDomain.A_AuthLdapSearchBase, type:_OUTPUT_, label:ZaMsg.Domain_AuthLdapSearchBase, labelLocation:_LEFT_},
                             {ref:ZaDomain.A_AuthUseBindPassword, type:_OUTPUT_, label:ZaMsg.Domain_AuthUseBindPassword, labelLocation:_LEFT_,choices:ZaModel.BOOLEAN_CHOICES},
@@ -1125,20 +1125,20 @@ ZaDomainXFormView.myXFormModifier = function(xFormObject,entry) {
                             }
                         ]
                     },
-						{ref:ZaDomain.A_zimbraPasswordChangeListener, type:_TEXTFIELD_, 
-							label:ZaMsg.Domain_zimbraPasswordChangeListener, labelLocation:_LEFT_, 
+						{ref:ZaDomain.A_zmailPasswordChangeListener, type:_TEXTFIELD_, 
+							label:ZaMsg.Domain_zmailPasswordChangeListener, labelLocation:_LEFT_, 
                                                         visibilityChecks:[function() {
                                                                 var instance = this.getInstance();
-                                                                return (instance.attrs[ZaDomain.A_AuthMech] !=  ZaDomain.AuthMech_zimbra);
+                                                                return (instance.attrs[ZaDomain.A_AuthMech] !=  ZaDomain.AuthMech_zmail);
                                                         }],
                                                         visibilityChangeEventSources:[ZaDomain.A_AuthMech]
 						},
-                                                {ref:ZaDomain.A_zimbraAuthFallbackToLocal, type:_CHECKBOX_,
-                                                        label:ZaMsg.Domain_zimbraAuthFallbackToLocal, labelLocation:_RIGHT_,
+                                                {ref:ZaDomain.A_zmailAuthFallbackToLocal, type:_CHECKBOX_,
+                                                        label:ZaMsg.Domain_zmailAuthFallbackToLocal, labelLocation:_RIGHT_,
                                                         trueValue:"TRUE", falseValue:"FALSE",
                                                         visibilityChecks:[function() {
                                                                 var instance = this.getInstance();
-                                                                return (instance.attrs[ZaDomain.A_AuthMech] !=  ZaDomain.AuthMech_zimbra);
+                                                                return (instance.attrs[ZaDomain.A_AuthMech] !=  ZaDomain.AuthMech_zmail);
                                                         }],
                                                         visibilityChangeEventSources:[ZaDomain.A_AuthMech]
                                                 }
@@ -1147,17 +1147,17 @@ ZaDomainXFormView.myXFormModifier = function(xFormObject,entry) {
                 { type:_ZA_TOP_GROUPER_, label:ZaMsg.Domain_URLSetting, colSpan:"*",
                     numCols: 2, colSizes: ["275px","*"],
                     visibilityChecks:[[ZATopGrouper_XFormItem.isGroupVisible,
-                        [ZaDomain.A_zimbraAdminConsoleLoginURL,
-                         ZaDomain.A_zimbraAdminConsoleLogoutURL
+                        [ZaDomain.A_zmailAdminConsoleLoginURL,
+                         ZaDomain.A_zmailAdminConsoleLogoutURL
                          ]]
                     ],
                     items :[
-			        {ref: ZaDomain.A_zimbraAdminConsoleLoginURL, type:_TEXTFIELD_,
-          		    label:ZaMsg.Domain_zimbraAdminConsoleLoginURL, width:250,
+			        {ref: ZaDomain.A_zmailAdminConsoleLoginURL, type:_TEXTFIELD_,
+          		    label:ZaMsg.Domain_zmailAdminConsoleLoginURL, width:250,
           		    onChange:ZaDomainXFormView.onFormFieldChanged
         		    },
-                    { ref: ZaDomain.A_zimbraAdminConsoleLogoutURL, type:_TEXTFIELD_,
-                    label:ZaMsg.Domain_zimbraAdminConsoleLogoutURL  , width:250,
+                    { ref: ZaDomain.A_zmailAdminConsoleLogoutURL, type:_TEXTFIELD_,
+                    label:ZaMsg.Domain_zmailAdminConsoleLogoutURL  , width:250,
                     onChange:ZaDomainXFormView.onFormFieldChanged
                     }
                 ]},
@@ -1169,35 +1169,35 @@ ZaDomainXFormView.myXFormModifier = function(xFormObject,entry) {
                         [
                             ZATopGrouper_XFormItem.isGroupVisible,
                             [
-                                ZaDomain.A_zimbraWebClientLoginURL,
-                                ZaDomain.A_zimbraWebClientLogoutURL,
-                                ZaDomain.A_zimbraWebClientLoginURLAllowedUA,
-                                ZaDomain.A_zimbraWebClientLogoutURLAllowedUA,
-                                ZaDomain.A_zimbraWebClientLoginURLAllowedIP,
-                                ZaDomain.A_zimbraWebClientLogoutURLAllowedIP,
-                                ZaDomain.A_zimbraForceClearCookies
+                                ZaDomain.A_zmailWebClientLoginURL,
+                                ZaDomain.A_zmailWebClientLogoutURL,
+                                ZaDomain.A_zmailWebClientLoginURLAllowedUA,
+                                ZaDomain.A_zmailWebClientLogoutURLAllowedUA,
+                                ZaDomain.A_zmailWebClientLoginURLAllowedIP,
+                                ZaDomain.A_zmailWebClientLogoutURLAllowedIP,
+                                ZaDomain.A_zmailForceClearCookies
                             ]
                         ]
                     ],
                       items:[
-                          { ref: ZaDomain.A_zimbraWebClientLoginURL,useParentTable: false,
+                          { ref: ZaDomain.A_zmailWebClientLoginURL,useParentTable: false,
                             colSpan: 2,
                             type:_SUPER_TEXTFIELD_, textFieldWidth: "220px",
                             resetToSuperLabel:ZaMsg.NAD_ResetToGlobal,
-                            msgName: ZaMsg.LBL_zimbraWebClientLoginURL,
-                            txtBoxLabel: ZaMsg.LBL_zimbraWebClientLoginURL,
+                            msgName: ZaMsg.LBL_zmailWebClientLoginURL,
+                            txtBoxLabel: ZaMsg.LBL_zmailWebClientLoginURL,
                             onChange:ZaDomainXFormView.onFormFieldChanged
                           },
-                          { ref: ZaDomain.A_zimbraWebClientLogoutURL,useParentTable: false,
+                          { ref: ZaDomain.A_zmailWebClientLogoutURL,useParentTable: false,
                             colSpan: 2,
                             type:_SUPER_TEXTFIELD_, textFieldWidth: "220px",
                             resetToSuperLabel:ZaMsg.NAD_ResetToGlobal,
-                            msgName: ZaMsg.LBL_zimbraWebClientLogoutURL,
-                            txtBoxLabel: ZaMsg.LBL_zimbraWebClientLogoutURL,
+                            msgName: ZaMsg.LBL_zmailWebClientLogoutURL,
+                            txtBoxLabel: ZaMsg.LBL_zmailWebClientLogoutURL,
                             onChange:ZaDomainXFormView.onFormFieldChanged
                           },
-                          { ref: ZaDomain.A_zimbraWebClientLoginURLAllowedUA,
-                            label:ZaMsg.LBL_zimbraWebClientLoginURLAllowedUA,
+                          { ref: ZaDomain.A_zmailWebClientLoginURLAllowedUA,
+                            label:ZaMsg.LBL_zmailWebClientLoginURLAllowedUA,
                             type:_SUPER_REPEAT_,
                             resetToSuperLabel:ZaMsg.NAD_ResetToGlobal,
                             repeatInstance:"",
@@ -1213,8 +1213,8 @@ ZaDomainXFormView.myXFormModifier = function(xFormObject,entry) {
                             ],
                             onChange:ZaDomainXFormView.onFormFieldChanged
                           },
-                          { ref: ZaDomain.A_zimbraWebClientLogoutURLAllowedUA,
-                            label:ZaMsg.LBL_zimbraWebClientLogoutURLAllowedUA,
+                          { ref: ZaDomain.A_zmailWebClientLogoutURLAllowedUA,
+                            label:ZaMsg.LBL_zmailWebClientLogoutURLAllowedUA,
                             type:_SUPER_REPEAT_,
                             resetToSuperLabel:ZaMsg.NAD_ResetToGlobal,
                             repeatInstance:"",
@@ -1230,8 +1230,8 @@ ZaDomainXFormView.myXFormModifier = function(xFormObject,entry) {
                             ],
                             onChange:ZaDomainXFormView.onFormFieldChanged
                           },
-                          { ref: ZaDomain.A_zimbraWebClientLoginURLAllowedIP,
-                            label:ZaMsg.LBL_zimbraWebClientLoginURLAllowedIP,
+                          { ref: ZaDomain.A_zmailWebClientLoginURLAllowedIP,
+                            label:ZaMsg.LBL_zmailWebClientLoginURLAllowedIP,
                             type:_SUPER_REPEAT_,
                             resetToSuperLabel:ZaMsg.NAD_ResetToGlobal,
                             repeatInstance:"",
@@ -1247,8 +1247,8 @@ ZaDomainXFormView.myXFormModifier = function(xFormObject,entry) {
                             ],
                             onChange:ZaDomainXFormView.onFormFieldChanged
                           },
-                          { ref: ZaDomain.A_zimbraWebClientLogoutURLAllowedIP,
-                            label:ZaMsg.LBL_zimbraWebClientLogoutURLAllowedIP,
+                          { ref: ZaDomain.A_zmailWebClientLogoutURLAllowedIP,
+                            label:ZaMsg.LBL_zmailWebClientLogoutURLAllowedIP,
                             type:_SUPER_REPEAT_,
                             resetToSuperLabel:ZaMsg.NAD_ResetToGlobal,
                             repeatInstance:"",
@@ -1265,15 +1265,15 @@ ZaDomainXFormView.myXFormModifier = function(xFormObject,entry) {
                             onChange:ZaDomainXFormView.onFormFieldChanged
                           },
                           {
-                              ref: ZaDomain.A_zimbraForceClearCookies,
+                              ref: ZaDomain.A_zmailForceClearCookies,
                               useParentTable: false,
                               colSpan: 2,
                               type: _CHECKBOX_,
                               trueValue: "TRUE",
                               falseValue: "FALSE",
                               resetToSuperLabel: ZaMsg.NAD_ResetToGlobal,
-                              msgName: ZaMsg.MSG_zimbraForceClearCookies,
-                              label: ZaMsg.LBL_zimbraForceClearCookies,
+                              msgName: ZaMsg.MSG_zmailForceClearCookies,
+                              label: ZaMsg.LBL_zmailForceClearCookies,
                               labelLocation: _LEFT_,
                               onChange: ZaDomainXFormView.onFormFieldChanged
                           }
@@ -1291,8 +1291,8 @@ ZaDomainXFormView.myXFormModifier = function(xFormObject,entry) {
 			cssStyle:"padding-left:10px;",
 			items:[
 				{ type: _DWT_ALERT_,
-					visibilityChangeEventSources:[ZaDomain.A_zimbraDomainStatus],
-					visibilityChecks:[[XForm.checkInstanceValue,ZaDomain.A_zimbraDomainStatus,ZaDomain.DOMAIN_STATUS_SHUTDOWN]],
+					visibilityChangeEventSources:[ZaDomain.A_zmailDomainStatus],
+					visibilityChecks:[[XForm.checkInstanceValue,ZaDomain.A_zmailDomainStatus,ZaDomain.DOMAIN_STATUS_SHUTDOWN]],
 					containerCssStyle: "padding-bottom:0;",
 					style: DwtAlert.WARNING,
 					iconVisible: true, 
@@ -1308,7 +1308,7 @@ ZaDomainXFormView.myXFormModifier = function(xFormObject,entry) {
 					align:_CENTER_,				
 					style: DwtAlert.INFORMATION
 				},
-				{ref:ZaDomain.A_zimbraVirtualHostname, type:_REPEAT_,
+				{ref:ZaDomain.A_zmailVirtualHostname, type:_REPEAT_,
                         label:null, repeatInstance:"", showAddButton:true,
                         showRemoveButton:true,
 						addButtonLabel:ZaMsg.NAD_AddVirtualHost, 
@@ -1316,8 +1316,8 @@ ZaDomainXFormView.myXFormModifier = function(xFormObject,entry) {
 						removeButtonLabel:ZaMsg.NAD_RemoveVirtualHost,
                       	items: [
 							{ref:".", type:_TEXTFIELD_, label:null,
-                                enableDisableChecks:[[ZaItem.hasWritePermission,ZaDomain.A_zimbraVirtualHostname]],
-								visibilityChecks:[[ZaItem.hasReadPermission,ZaDomain.A_zimbraVirtualHostname]],
+                                enableDisableChecks:[[ZaItem.hasWritePermission,ZaDomain.A_zmailVirtualHostname]],
+								visibilityChecks:[[ZaItem.hasReadPermission,ZaDomain.A_zmailVirtualHostname]],
                                 onChange:ZaDomainXFormView.onFormFieldChanged}
 						]
 				}
@@ -1333,12 +1333,12 @@ ZaDomainXFormView.myXFormModifier = function(xFormObject,entry) {
 		var caseFeature = {type:_ZATABCASE_, caseKey:tabIx,
                         cssStyle:"padding-left:10px;",
 			items : [
-				{ type:_ZA_TOP_GROUPER_, label:ZaMsg.NAD_zimbraCalendarFeature,
+				{ type:_ZA_TOP_GROUPER_, label:ZaMsg.NAD_zmailCalendarFeature,
 				  items :[
-                      {ref:ZaDomain.A_zimbraFeatureCalendarReminderDeviceEmailEnabled,
+                      {ref:ZaDomain.A_zmailFeatureCalendarReminderDeviceEmailEnabled,
                           type:_CHECKBOX_,labelLocation:_RIGHT_,
-                          msgName:ZaMsg.LBL_zimbraFeatureCalendarReminderDeviceEmailEnabled,
-                          label:ZaMsg.LBL_zimbraFeatureCalendarReminderDeviceEmailEnabled,
+                          msgName:ZaMsg.LBL_zmailFeatureCalendarReminderDeviceEmailEnabled,
+                          label:ZaMsg.LBL_zmailFeatureCalendarReminderDeviceEmailEnabled,
                           trueValue:"TRUE", falseValue:"FALSE"
                       }
 		         ]
@@ -1356,8 +1356,8 @@ ZaDomainXFormView.myXFormModifier = function(xFormObject,entry) {
                         cssStyle:"padding-left:10px;",
 			items:[
                 {type: _DWT_ALERT_,
-                    visibilityChangeEventSources:[ZaDomain.A_zimbraDomainStatus],
-                    visibilityChecks:[[XForm.checkInstanceValue,ZaDomain.A_zimbraDomainStatus,ZaDomain.DOMAIN_STATUS_SHUTDOWN]],
+                    visibilityChangeEventSources:[ZaDomain.A_zmailDomainStatus],
+                    visibilityChecks:[[XForm.checkInstanceValue,ZaDomain.A_zmailDomainStatus,ZaDomain.DOMAIN_STATUS_SHUTDOWN]],
                     containerCssStyle: "padding-bottom:0;",
                     style: DwtAlert.WARNING,
                     iconVisible: true,
@@ -1366,20 +1366,20 @@ ZaDomainXFormView.myXFormModifier = function(xFormObject,entry) {
                 },
 
 				{type:_ZA_TOP_GROUPER_, label:ZaMsg.Domain_BC_ShareConf,
-                    visibilityChecks:[[ZATopGrouper_XFormItem.isGroupVisible, ZaDomain.A_zimbraBasicAuthRealm]],
+                    visibilityChecks:[[ZATopGrouper_XFormItem.isGroupVisible, ZaDomain.A_zmailBasicAuthRealm]],
 				    items:[
-					    {ref: ZaDomain.A_zimbraBasicAuthRealm,
+					    {ref: ZaDomain.A_zmailBasicAuthRealm,
                             type: _SUPER_TEXTFIELD_, width: 250 ,
                             resetToSuperLabel:ZaMsg.NAD_ResetToGlobal,
                             onChange: ZaDomainXFormView.onFormFieldChanged ,
-                            txtBoxLabel: ZaMsg.Domain_zimbraBasicAuthRealm}
+                            txtBoxLabel: ZaMsg.Domain_zmailBasicAuthRealm}
 				    ]
 				},
 
                 {type:_ZA_TOP_GROUPER_, label:ZaMsg.Domain_AD_EmailValidate,
-                    visibilityChecks:[[ZATopGrouper_XFormItem.isGroupVisible, ZaDomain.A_zimbraMailAddressValidationRegex]],
+                    visibilityChecks:[[ZATopGrouper_XFormItem.isGroupVisible, ZaDomain.A_zmailMailAddressValidationRegex]],
                     items:[
-                        {ref:ZaDomain.A_zimbraMailAddressValidationRegex, type:_REPEAT_,
+                        {ref:ZaDomain.A_zmailMailAddressValidationRegex, type:_REPEAT_,
                             nowrap:false,labelWrap:true,
                             label:ZaMsg.LBL_EmailValidate, repeatInstance:"", showAddButton:true,
                             showRemoveButton:true,
@@ -1397,30 +1397,30 @@ ZaDomainXFormView.myXFormModifier = function(xFormObject,entry) {
 
                 {type:_ZA_TOP_GROUPER_, label:ZaMsg.Domain_QUOTA_Configuration,
                     visibilityChecks:[[ZATopGrouper_XFormItem.isGroupVisible, [
-                            ZaDomain.A_zimbraMailDomainQuota,
-                            ZaDomain.A_zimbraDomainAggregateQuota,
-                            ZaDomain.A_zimbraDomainAggregateQuotaWarnPercent,
-                            ZaDomain.A_zimbraDomainAggregateQuotaWarnEmailRecipient,
-                            ZaDomain.A_zimbraDomainAggregateQuotaPolicy
+                            ZaDomain.A_zmailMailDomainQuota,
+                            ZaDomain.A_zmailDomainAggregateQuota,
+                            ZaDomain.A_zmailDomainAggregateQuotaWarnPercent,
+                            ZaDomain.A_zmailDomainAggregateQuotaWarnEmailRecipient,
+                            ZaDomain.A_zmailDomainAggregateQuotaPolicy
                         ]]],
                     items:[
-                        {ref:ZaDomain.A_zimbraMailDomainQuota, type:_TEXTFIELD_,
+                        {ref:ZaDomain.A_zmailMailDomainQuota, type:_TEXTFIELD_,
                             label:ZaMsg.LBL_DomainQuota,
                             onChange:ZaDomainXFormView.onFormFieldChanged
                         },
-                        {ref:ZaDomain.A_zimbraDomainAggregateQuota, type:_TEXTFIELD_,
+                        {ref:ZaDomain.A_zmailDomainAggregateQuota, type:_TEXTFIELD_,
                             label:ZaMsg.LBL_DomainAggregateQuota,
                             onChange:ZaDomainXFormView.onFormFieldChanged
                         },
-                        {ref:ZaDomain.A_zimbraDomainAggregateQuotaWarnPercent, type:_TEXTFIELD_,
+                        {ref:ZaDomain.A_zmailDomainAggregateQuotaWarnPercent, type:_TEXTFIELD_,
                             label:ZaMsg.LBL_DomainAggregateQuotaWarnPercent,
                             onChange:ZaDomainXFormView.onFormFieldChanged
                         },
-                        {ref:ZaDomain.A_zimbraDomainAggregateQuotaWarnEmailRecipient, type:_TEXTFIELD_,
+                        {ref:ZaDomain.A_zmailDomainAggregateQuotaWarnEmailRecipient, type:_TEXTFIELD_,
                             label:ZaMsg.LBL_DomainAggregateQuotaWarnEmailRecipient,
                             onChange:ZaDomainXFormView.onFormFieldChanged
                         },
-                        {ref:ZaDomain.A_zimbraDomainAggregateQuotaPolicy, type:_OSELECT1_,
+                        {ref:ZaDomain.A_zmailDomainAggregateQuotaPolicy, type:_OSELECT1_,
                            label:ZaMsg.LBL_DomainAggregateQuotaPolicy, labelLocation:_LEFT_,
                            onChange:ZaDomainXFormView.onFormFieldChanged
                         }
@@ -1441,33 +1441,33 @@ ZaDomainXFormView.myXFormModifier = function(xFormObject,entry) {
 		 	items: [
 				{type:_ZA_TOP_GROUPER_, label:ZaMsg.NAD_Exchange_Settings, colSizes:["275px","100%"],//colSizes:["auto"],numCols:1,
 					items: [
-						{ ref: ZaDomain.A_zimbraFreebusyExchangeURL,
+						{ ref: ZaDomain.A_zmailFreebusyExchangeURL,
                              type: _SUPER_TEXTFIELD_, width: "30em" ,
                              resetToSuperLabel:ZaMsg.NAD_ResetToGlobal,
                              onChange: ZaDomainXFormView.onFormFieldChanged ,
                              txtBoxLabel: ZaMsg.NAD_Exchange_URL
 						},
-						{ ref: ZaDomain.A_zimbraFreebusyExchangeAuthScheme, label: ZaMsg.NAD_Exchange_Auth_Schema,
+						{ ref: ZaDomain.A_zmailFreebusyExchangeAuthScheme, label: ZaMsg.NAD_Exchange_Auth_Schema,
 							type: _SUPER_SELECT1_,   resetToSuperLabel:ZaMsg.NAD_ResetToGlobal,
 					    	onChange: ZaDomainXFormView.onFormFieldChanged
         	           	},
-						{ ref: ZaDomain.A_zimbraFreebusyExchangeServerType, label: ZaMsg.NAD_Exchange_Server_Type,
+						{ ref: ZaDomain.A_zmailFreebusyExchangeServerType, label: ZaMsg.NAD_Exchange_Server_Type,
                                                         type: _SUPER_SELECT1_,   resetToSuperLabel:ZaMsg.NAD_ResetToGlobal,
                                                 	onChange: ZaDomainXFormView.onFormFieldChanged
                                 		},
-						{ ref: ZaDomain.A_zimbraFreebusyExchangeAuthUsername,
+						{ ref: ZaDomain.A_zmailFreebusyExchangeAuthUsername,
                             resetToSuperLabel:ZaMsg.NAD_ResetToGlobal,
 				  	  		type: _SUPER_TEXTFIELD_, width: "20em",
                          	txtBoxLabel: ZaMsg.NAD_Exchange_Auth_User,
 					  		onChange: ZaDomainXFormView.onFormFieldChanged
 				  		},
-					  	{ ref: ZaDomain.A_zimbraFreebusyExchangeAuthPassword, type: _PASSWORD_,
+					  	{ ref: ZaDomain.A_zmailFreebusyExchangeAuthPassword, type: _PASSWORD_,
 					  	  label: ZaMsg.NAD_Exchange_Auth_Password, width: "20em",
 						  onChange: ZaDomainXFormView.onFormFieldChanged
 					  	},
-                        { ref: ZaDomain.A_zimbraFreebusyExchangeUserOrg, type: _SUPER_TEXTFIELD_ ,
+                        { ref: ZaDomain.A_zmailFreebusyExchangeUserOrg, type: _SUPER_TEXTFIELD_ ,
                           resetToSuperLabel:ZaMsg.NAD_ResetToGlobal,
-					  	  txtBoxLabel: ZaMsg.LBL_zimbraFreebusyExchangeUserOrg, width: "30em",
+					  	  txtBoxLabel: ZaMsg.LBL_zmailFreebusyExchangeUserOrg, width: "30em",
 						  onChange: ZaDomainXFormView.onFormFieldChanged
 					  	},
                         {type: _GROUP_, colSpan:2, numCols:5, colSizes: ["20%", "22%", "6%", "22%", "20%" ], width:"100%",
@@ -1504,8 +1504,8 @@ ZaDomainXFormView.myXFormModifier = function(xFormObject,entry) {
 					items: [
                     	{type: _OUTPUT_, value: ZaMsg.NAD_LimitZimletsToDomain },
                     	{type:_ZA_ZIMLET_SELECT_COMBO_,
-                            selectRef:ZaDomain.A_zimbraZimletDomainAvailableZimlets,
-							ref:ZaDomain.A_zimbraZimletDomainAvailableZimlets,
+                            selectRef:ZaDomain.A_zmailZimletDomainAvailableZimlets,
+							ref:ZaDomain.A_zmailZimletDomainAvailableZimlets,
 							choices:ZaDomainXFormView.zimletChoices
 						},
 						{type: _DWT_ALERT_,
@@ -1538,29 +1538,29 @@ ZaDomainXFormView.myXFormModifier = function(xFormObject,entry) {
 							colSpan:2,
 							visibilityChecks:[],ref:null
 						},
-                    	{ref:ZaDomain.A_zimbraSkinForegroundColor,
+                    	{ref:ZaDomain.A_zmailSkinForegroundColor,
                             type: _SUPER_DWT_COLORPICKER_,
-                            label:ZaMsg.NAD_zimbraSkinForegroundColor,
+                            label:ZaMsg.NAD_zmailSkinForegroundColor,
                             labelLocation:_LEFT_,
                             resetToSuperLabel:ZaMsg.NAD_ResetToGlobal,
                             buttonImage: "Color", width: "50px"
                         }  ,
-                        {ref:ZaDomain.A_zimbraSkinBackgroundColor,
+                        {ref:ZaDomain.A_zmailSkinBackgroundColor,
                             type: _SUPER_DWT_COLORPICKER_,
-                            label:ZaMsg.NAD_zimbraSkinBackgroundColor,
+                            label:ZaMsg.NAD_zmailSkinBackgroundColor,
                             labelLocation:_LEFT_,  resetToSuperLabel:ZaMsg.NAD_ResetToGlobal,
                             buttonImage: "Color", width: "50px"
                         }  ,
-                        {ref:ZaDomain.A_zimbraSkinSecondaryColor, 
+                        {ref:ZaDomain.A_zmailSkinSecondaryColor, 
                             type: _SUPER_DWT_COLORPICKER_,
                             resetToSuperLabel:ZaMsg.NAD_ResetToGlobal,
-                            label:ZaMsg.NAD_zimbraSkinSecondaryColor,
+                            label:ZaMsg.NAD_zmailSkinSecondaryColor,
                             labelLocation:_LEFT_,
                             buttonImage: "Color", width: "50px"
                         },
-                        {ref:ZaDomain.A_zimbraSkinSelectionColor,
+                        {ref:ZaDomain.A_zmailSkinSelectionColor,
                             type: _SUPER_DWT_COLORPICKER_,
-                            label:ZaMsg.NAD_zimbraSkinSelectionColor,
+                            label:ZaMsg.NAD_zmailSkinSelectionColor,
                             labelLocation:_LEFT_, resetToSuperLabel:ZaMsg.NAD_ResetToGlobal,
                             buttonImage: "Color", width: "50px"
                         },
@@ -1594,14 +1594,14 @@ ZaDomainXFormView.myXFormModifier = function(xFormObject,entry) {
 					{type:_SPACER_, height:"10"},
 					{type:_ZALEFT_GROUPER_, numCols:1, width: "100%",label:ZaMsg.NAD_DomainSSLCertificate, containerCssStyle: "padding-top:5px;", 
 					items: [
-                        {ref: ZaDomain.A_zimbraSSLCertificate, type:_TEXTAREA_, width: "100%", height: 450,
+                        {ref: ZaDomain.A_zmailSSLCertificate, type:_TEXTAREA_, width: "100%", height: 450,
                         onChange:ZaDomainXFormView.onFormFieldChanged}
 					]}
 				
 					,
 					{type:_ZARIGHT_GROUPER_, numCols:1, width: "100%", label:ZaMsg.NAD_DomainSSLPrivateKey, containerCssStyle: "padding-top:5px;",
 					items: [
-                        {ref: ZaDomain.A_zimbraSSLPrivateKey, type:_TEXTAREA_, width: "100%", height: 450,
+                        {ref: ZaDomain.A_zmailSSLPrivateKey, type:_TEXTAREA_, width: "100%", height: 450,
                         onChange:ZaDomainXFormView.onFormFieldChanged}
 
 					]}
@@ -1660,7 +1660,7 @@ ZaAccMiniListView.prototype.createHeaderHtml = function (defaultColumnSort) {
 }
 
 //-------------------------------------------------------------------------------------------------------
-//List View for the zimbraDomainCOSMaxAccounts
+//List View for the zmailDomainCOSMaxAccounts
 
 ZaDomainCOSMaxAccountsListView = function(parent, className, posStyle, headerList) {
 	if (arguments.length == 0) return;
@@ -1746,7 +1746,7 @@ ZaDomainCOSMaxAccountsListView.prototype._setNoResultsHtml = function() {
 };
 
 //-------------------------------------------------------------------------------------------------------
-//List View for the zimbraDomainFeatureMaxAccounts
+//List View for the zmailDomainFeatureMaxAccounts
 
 ZaDomainFeatureMaxAccountsListView = function(parent, className, posStyle, headerList) {
 	if (arguments.length == 0) return;

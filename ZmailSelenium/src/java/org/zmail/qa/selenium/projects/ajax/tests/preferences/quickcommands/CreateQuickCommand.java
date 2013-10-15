@@ -14,19 +14,19 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.preferences.quickcommands;
+package org.zmail.qa.selenium.projects.ajax.tests.preferences.quickcommands;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.items.QuickCommand;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.preferences.DialogEditQuickCommand;
-import com.zimbra.qa.selenium.projects.ajax.ui.preferences.DialogEditQuickCommand.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.items.QuickCommand;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.preferences.DialogEditQuickCommand;
+import org.zmail.qa.selenium.projects.ajax.ui.preferences.DialogEditQuickCommand.*;
+import org.zmail.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
 
 
 public class CreateQuickCommand extends AjaxCommonTest {
@@ -46,8 +46,8 @@ public class CreateQuickCommand extends AjaxCommonTest {
 			)
 	public void CreateQuickCommand_01() throws HarnessException {
 		
-		String name = "name"+ ZimbraSeleniumProperties.getUniqueString();
-		String description = "description"+ ZimbraSeleniumProperties.getUniqueString();
+		String name = "name"+ ZmailSeleniumProperties.getUniqueString();
+		String description = "description"+ ZmailSeleniumProperties.getUniqueString();
 		
 		
 
@@ -77,19 +77,19 @@ public class CreateQuickCommand extends AjaxCommonTest {
 		/**
 		Example:
 		
-    <ModifyPrefsResponse xmlns="urn:zimbraAccount">
-      <pref name="zimbraPrefQuickCommand">{"id":1,"itemTypeId":"MSG","name":"qcname","description":"qcdescription","isActive":true,"actions":[{"id":1,"typeId":"actionTag","value":"257","isActive":true},{"id":2,"typeId":"actionFlag","value":"unread","isActive":true}]}</pref>
-      <pref name="zimbraPrefQuickCommand">{"id":2,"itemTypeId":"CONTACT","name":"qcname2","description":"qcdescription2","isActive":true,"actions":[{"id":1,"typeId":"actionTag","value":"258","isActive":true},{"id":2,"typeId":"actionFileInto","value":"2","isActive":true}]}</pref>
+    <ModifyPrefsResponse xmlns="urn:zmailAccount">
+      <pref name="zmailPrefQuickCommand">{"id":1,"itemTypeId":"MSG","name":"qcname","description":"qcdescription","isActive":true,"actions":[{"id":1,"typeId":"actionTag","value":"257","isActive":true},{"id":2,"typeId":"actionFlag","value":"unread","isActive":true}]}</pref>
+      <pref name="zmailPrefQuickCommand">{"id":2,"itemTypeId":"CONTACT","name":"qcname2","description":"qcdescription2","isActive":true,"actions":[{"id":1,"typeId":"actionTag","value":"258","isActive":true},{"id":2,"typeId":"actionFileInto","value":"2","isActive":true}]}</pref>
     </ModifyPrefsResponse>
 
 		 **/
 		app.zGetActiveAccount().soapSend(
-					"<GetPrefsRequest xmlns='urn:zimbraAccount'>"
-				+		"<pref name='zimbraPrefQuickCommand'/>"
+					"<GetPrefsRequest xmlns='urn:zmailAccount'>"
+				+		"<pref name='zmailPrefQuickCommand'/>"
 				+	"</GetPrefsRequest>");
 		
 		String found = null;
-		Element[] nodes = app.zGetActiveAccount().soapSelectNodes("//acct:pref[@name='zimbraPrefQuickCommand']");
+		Element[] nodes = app.zGetActiveAccount().soapSelectNodes("//acct:pref[@name='zmailPrefQuickCommand']");
 		for (Element e : nodes) {
 			if ( e.getText().contains(name) ) {
 				found = e.getText();

@@ -12,24 +12,24 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.offline;
+package org.zmail.cs.service.offline;
 
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.offline.OfflineAccount;
-import com.zimbra.cs.offline.common.OfflineConstants;
-import com.zimbra.cs.service.account.GetInfo;
-import com.zimbra.cs.session.Session;
-import com.zimbra.cs.session.SoapSession;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.offline.OfflineAccount;
+import org.zmail.cs.offline.common.OfflineConstants;
+import org.zmail.cs.service.account.GetInfo;
+import org.zmail.cs.session.Session;
+import org.zmail.cs.session.SoapSession;
+import org.zmail.soap.ZmailSoapContext;
 
 public class OfflineGetInfo extends GetInfo {
     @Override
     protected Element encodeChildAccount(Element parent, Account child,
         boolean isVisible) {
-        String accountName = child.getAttr(Provisioning.A_zimbraPrefLabel);
+        String accountName = child.getAttr(Provisioning.A_zmailPrefLabel);
         if (child instanceof OfflineAccount && ((OfflineAccount)child).isDisabledDueToError()) {
             //bug 47450
             //eventually want the UI to be able to show a meaningful error
@@ -44,14 +44,14 @@ public class OfflineGetInfo extends GetInfo {
             Element attrsElem = elem.addUniqueElement(AccountConstants.E_ATTRS);
             
             if (accountName != null)
-                attrsElem.addKeyValuePair(Provisioning.A_zimbraPrefLabel,
+                attrsElem.addKeyValuePair(Provisioning.A_zmailPrefLabel,
                     accountName, AccountConstants.E_ATTR, AccountConstants.A_NAME);
         }
         return elem;
     }
     
     @Override
-    protected Session getSession(ZimbraSoapContext zsc, Session.Type stype) {
+    protected Session getSession(ZmailSoapContext zsc, Session.Type stype) {
         Session s = super.getSession(zsc, stype);
         if (!s.isDelegatedSession())
             ((SoapSession)s).setOfflineSoapSession();

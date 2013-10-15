@@ -14,13 +14,13 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_webex"
+<zimlet name="org_zmail_webex"
         version="3.3"
         label="${msg.label}"
         description="${msg.description}">
     <include>webex.js</include>
     <includeCSS>webex.css</includeCSS>
-    <handlerObject>com_zimbra_webex_HandlerObject</handlerObject>
+    <handlerObject>org_zmail_webex_HandlerObject</handlerObject>
     <zimletPanelItem label="${msg.WebExZimlet_label}" icon="WEBEX-panelIcon">
         <toolTipText>${msg.WebExZimlet_toolTip}</toolTipText>
         <dragSource type="ZmContact" />

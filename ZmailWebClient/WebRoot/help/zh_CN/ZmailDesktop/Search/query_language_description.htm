@@ -65,13 +65,13 @@ addButton("show",BTN_TEXT,"显示","","","","",0,0,"","","");
 
 	
 	document.write("<p style=\"text-align:right; background: silver\"> ");
-AddMasterBreadcrumbs("../Zimbra_Mail_Help.htm", "", "&gt;", "Desktop", "../Getting_Started/Zimbra_User_Help.htm");
+AddMasterBreadcrumbs("../Zmail_Mail_Help.htm", "", "&gt;", "Desktop", "../Getting_Started/Zmail_User_Help.htm");
 document.write("<a href=\"using_the_search_feature.htm\">搜索项目<\/a> &gt; 查询语言说明<\/p>");
 
 
 	if (window.setRelStartPage)
 	{
-	setRelStartPage("../Zimbra_Mail_Help.htm");
+	setRelStartPage("../Zmail_Mail_Help.htm");
 
 		autoSync(1);
 		sendSyncInfo();
@@ -85,7 +85,7 @@ else
 //-->
 //]]></script>
 <h1>查询语言说明</h1>
-<p>此节详细说明 Zimbra 的搜索功能中使用的搜索语法。始终使用某类型的查询来生成您在界面上看到的视图。</p>
+<p>此节详细说明 Zmail 的搜索功能中使用的搜索语法。始终使用某类型的查询来生成您在界面上看到的视图。</p>
 <h2>搜索语言结构</h2>
 <p>只需在搜索字段中输入一个单词即可搜索。裸词（不含搜索运算符的单词）被解释为在“content:”运算符中搜索 -- 与邮件中的任何文本相匹配。</p>
 <p>更高级的搜索可通过指定一个<b>搜索运算符</b>实现。特殊关键字后跟一个冒号即为搜索运算符，其后是适合于该运算符的其他参数。例如：</p>
@@ -118,7 +118,7 @@ else
 <p style="font-weight: bold;">content:</p>
 <p style="margin-left: 40px;">用于指定邮件中必须包含的文本。例如，<span class="code">content:bananas</span> 将找出所有包含“bananas”的项。</p>
 <p style="font-weight: bold;">from:</p>
-<p style="margin-left: 40px;">指定发件人标题中的发件人姓名或电子邮件地址。可以是文字，如“John Smith III”，可以是电子邮箱地址，如“ joe@acme.com”，也可以是域名，如“ zimbra.com”。</p>
+<p style="margin-left: 40px;">指定发件人标题中的发件人姓名或电子邮件地址。可以是文字，如“John Smith III”，可以是电子邮箱地址，如“ joe@acme.com”，也可以是域名，如“ zmail.com”。</p>
 <p style="font-weight: bold;">to:</p>
 <p style="margin-left: 40px;">与 from: 相同，除非指定在“收件人:”标题中填写的电子邮件地址对应的人员。</p>
 <p style="font-weight: bold;">cc:</p>

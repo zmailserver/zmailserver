@@ -1,8 +1,8 @@
 <%@ page buffer="8kb" session="false" autoFlush="true" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
-<%@ page import="java.util.*,javax.naming.*,com.zimbra.client.ZAuthResult" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
-<%@ taglib prefix="app" uri="com.zimbra.htmlclient" %>
+<%@ page import="java.util.*,javax.naming.*,org.zmail.client.ZAuthResult" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
+<%@ taglib prefix="app" uri="org.zmail.htmlclient" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <app:skinAndRedirect />
@@ -35,7 +35,7 @@
  * ***** END LICENSE BLOCK *****
 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-<title><fmt:message key="zimbraTitle"/></title>
+<title><fmt:message key="zmailTitle"/></title>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/images,common,dwt,msgview,login,zm,spellcheck,skin' />">
 <fmt:message key="favIconUrl" var="favIconUrl"/>
 </head>

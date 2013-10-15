@@ -12,17 +12,17 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.tag;
+package org.zmail.cs.taglib.tag;
 
-import com.zimbra.cs.taglib.bean.ZMessageBean;
-import com.zimbra.cs.taglib.bean.ZMessageComposeBean;
-import com.zimbra.cs.taglib.bean.ZMimePartBean;
+import org.zmail.cs.taglib.bean.ZMessageBean;
+import org.zmail.cs.taglib.bean.ZMessageComposeBean;
+import org.zmail.cs.taglib.bean.ZMimePartBean;
 
 import javax.servlet.jsp.JspException;
 import java.io.IOException;
 import java.util.List;
 
-public class FixupMessageComposeTag extends ZimbraSimpleTag {
+public class FixupMessageComposeTag extends ZmailSimpleTag {
 
 
     private ZMessageComposeBean mCompose;

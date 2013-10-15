@@ -14,21 +14,21 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.octopus.tests.login.performance;
+package org.zmail.qa.selenium.projects.octopus.tests.login.performance;
 
 import java.io.File;
 import java.io.IOException;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.ajax.ui.PageLogin.Locators;
-import com.zimbra.qa.selenium.projects.octopus.core.OctopusCommonTest;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.ajax.ui.PageLogin.Locators;
+import org.zmail.qa.selenium.projects.octopus.core.OctopusCommonTest;
 
 public class ZmMyFilesApp extends OctopusCommonTest {
 
@@ -48,8 +48,8 @@ public class ZmMyFilesApp extends OctopusCommonTest {
 		/**
 		 * Load all the sample files into the account
 		 */
-		FolderItem briefcaseRootFolder = FolderItem.importFromSOAP(ZimbraAccount.AccountZWC(), SystemFolder.Briefcase);
-		String filepath = ZimbraSeleniumProperties.getBaseDirectory() + "/data/public/Files/Basic01";
+		FolderItem briefcaseRootFolder = FolderItem.importFromSOAP(ZmailAccount.AccountZWC(), SystemFolder.Briefcase);
+		String filepath = ZmailSeleniumProperties.getBaseDirectory() + "/data/public/Files/Basic01";
 		
 		File directory = new File(filepath);
 		ZAssert.assertTrue(directory.exists(), "Verify the sample files exist");
@@ -57,10 +57,10 @@ public class ZmMyFilesApp extends OctopusCommonTest {
 		File[] files = directory.listFiles();
 		for (int i = 0; i < files.length; i++) {
 			
-			String aid = ZimbraAccount.AccountZWC().uploadFile(files[i].getCanonicalPath());
+			String aid = ZmailAccount.AccountZWC().uploadFile(files[i].getCanonicalPath());
 			
-			ZimbraAccount.AccountZWC().soapSend(
-					"<SaveDocumentRequest xmlns='urn:zimbraMail'>" +
+			ZmailAccount.AccountZWC().soapSend(
+					"<SaveDocumentRequest xmlns='urn:zmailMail'>" +
 						"<doc l='" + briefcaseRootFolder.getId() + "'>" +
 							"<upload id='" + aid + "'/>" +
 						"</doc>" +
@@ -71,8 +71,8 @@ public class ZmMyFilesApp extends OctopusCommonTest {
 
 		app.zPageLogin.zNavigateTo();
 
-		app.zPageLogin.zSetLoginName(ZimbraAccount.AccountZWC().EmailAddress);
-		app.zPageLogin.zSetLoginPassword(ZimbraAccount.AccountZWC().Password);
+		app.zPageLogin.zSetLoginName(ZmailAccount.AccountZWC().EmailAddress);
+		app.zPageLogin.zSetLoginPassword(ZmailAccount.AccountZWC().Password);
 
 		// PerfToken token = PerfMetrics.startTimestamp(PerfKey.ZmMailApp, "Login to the ajax client (mail app)");
 
@@ -86,14 +86,14 @@ public class ZmMyFilesApp extends OctopusCommonTest {
 
 		
 		// Add perf checks here
-		throw new HarnessException("Implement perf verification here.  See http://bugzilla.zimbra.com/show_bug.cgi?id=65989");
+		throw new HarnessException("Implement perf verification here.  See http://bugzilla.zmail.com/show_bug.cgi?id=65989");
 	}
 	
 	@Test(	description = "Measure the time to load the ajax client with 100 folders",
 		groups = { "performance" })
 	public void ZmMyFilesApp_02() throws HarnessException {
 			
-			FolderItem briefcaseRootFolder = FolderItem.importFromSOAP(ZimbraAccount.AccountZWC(), SystemFolder.Briefcase);
+			FolderItem briefcaseRootFolder = FolderItem.importFromSOAP(ZmailAccount.AccountZWC(), SystemFolder.Briefcase);
 			ZAssert.assertNotNull(briefcaseRootFolder, "Verify the Briefcase root folder is available");
 
 
@@ -103,23 +103,23 @@ public class ZmMyFilesApp extends OctopusCommonTest {
 			
 			for (int i = 0; i < 100; i++) {
 				
-				foldername = "folder" + ZimbraSeleniumProperties.getUniqueString();
+				foldername = "folder" + ZmailSeleniumProperties.getUniqueString();
 				
-				ZimbraAccount.AccountZWC().soapSend(
-						"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+				ZmailAccount.AccountZWC().soapSend(
+						"<CreateFolderRequest xmlns='urn:zmailMail'>" +
 							"<folder name='" + foldername + "' l='" + briefcaseRootFolder.getId() + "' view='document'/>" +
 						"</CreateFolderRequest>");
 			}
 			
-			FolderItem folder = FolderItem.importFromSOAP(ZimbraAccount.AccountZWC(), foldername);
+			FolderItem folder = FolderItem.importFromSOAP(ZmailAccount.AccountZWC(), foldername);
 			ZAssert.assertNotNull(folder, "Verify the subfolder is available");
 
 			
 			
 			app.zPageLogin.zNavigateTo();
 
-			app.zPageLogin.zSetLoginName(ZimbraAccount.AccountZWC().EmailAddress);
-			app.zPageLogin.zSetLoginPassword(ZimbraAccount.AccountZWC().Password);
+			app.zPageLogin.zSetLoginName(ZmailAccount.AccountZWC().EmailAddress);
+			app.zPageLogin.zSetLoginPassword(ZmailAccount.AccountZWC().Password);
 
 			// PerfToken token = PerfMetrics.startTimestamp(PerfKey.ZmMailApp, "Login to the ajax client (mail app)");
 
@@ -133,7 +133,7 @@ public class ZmMyFilesApp extends OctopusCommonTest {
 
 			
 			// Add perf checks here
-			throw new HarnessException("Implement perf verification here.  See http://bugzilla.zimbra.com/show_bug.cgi?id=65989");
+			throw new HarnessException("Implement perf verification here.  See http://bugzilla.zmail.com/show_bug.cgi?id=65989");
 			
 			
 	}

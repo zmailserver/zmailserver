@@ -37,13 +37,13 @@ acct_exists() {
   fi
 }
 
-# Create group, user for zimbra and postfix.
-grp_exists zimbra
+# Create group, user for zmail and postfix.
+grp_exists zmail
 if [ $? != 0 ]; then
-	groupadd -r zimbra
+	groupadd -r zmail
 fi
 
-acct_exists zimbra
+acct_exists zmail
 if [ $? != 0 ]; then
-	useradd -r -g zimbra -G tty -d /opt/zimbra -s /bin/bash -M -n zimbra
+	useradd -r -g zmail -G tty -d /opt/zmail -s /bin/bash -M -n zmail
 fi

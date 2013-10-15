@@ -14,7 +14,7 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_yfinance"
+<zimlet name="org_zmail_yfinance"
         version="1.1"
         label="Yahoo! Finance"
         description="Stock quotes and financial information using Yahoo! Finance.">
@@ -25,7 +25,7 @@
     <includeCSS>yfinance.css</includeCSS>
     <include>templates/YFinance.template.js</include>
     <resource>blank_pixel.gif</resource>
-    <handlerObject>Com_Zimbra_YFinance</handlerObject>
+    <handlerObject>Com_Zmail_YFinance</handlerObject>
 
     <contentObject type="companyname">
         <!--@bug 27511 matchOn>
@@ -44,7 +44,7 @@
             <menuItem label="Visit Yahoo Finance" id="FINANCE.YAHOO.COM" icon="YFINANCE-panelIcon">
                 <canvas type="window" width="800" height="600" />
                 <actionUrl target="http://finance.yahoo.com">
-                    <param name="referrer">www.zimbra.com</param>
+                    <param name="referrer">www.zmail.com</param>
                 </actionUrl>
             </menuItem>
         </contextMenu>

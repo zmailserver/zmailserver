@@ -18,18 +18,18 @@
  *
  * @author Raja Rao DV
  */
-function com_zimbra_attachcontacts_HandlerObject() {
+function org_zmail_attachcontacts_HandlerObject() {
 }
 ;
 
-com_zimbra_attachcontacts_HandlerObject.prototype = new ZmZimletBase();
-com_zimbra_attachcontacts_HandlerObject.prototype.constructor = com_zimbra_attachcontacts_HandlerObject;
+org_zmail_attachcontacts_HandlerObject.prototype = new ZmZimletBase();
+org_zmail_attachcontacts_HandlerObject.prototype.constructor = org_zmail_attachcontacts_HandlerObject;
 
 /**
  * Simplify handler object
  *
  */
-var AttachContactsZimlet = com_zimbra_attachcontacts_HandlerObject;
+var AttachContactsZimlet = org_zmail_attachcontacts_HandlerObject;
 
 AttachContactsZimlet.SEND_CONTACTS = "SEND_CONTACTS_IN_EMAIL";
 
@@ -306,21 +306,21 @@ AttachContactsZimlet.prototype.overrideAPI = function(object, funcname, newfunc)
 //---------------------------------------------------
 
 /**
- * Try to add to add to the actionmenu provided by com_zimbra_email
+ * Try to add to add to the actionmenu provided by org_zmail_email
  */
 AttachContactsZimlet.prototype.setEmailActionMenu = function() {
-	if (window.com_zimbra_email_handlerObject) { // Other zimlet exists
-		this.overrideAPI(com_zimbra_email_handlerObject.prototype, "getActionMenu", AjxCallback.simpleClosure(AttachContactsZimlet._getEmailActionMenu, null, this));
+	if (window.org_zmail_email_handlerObject) { // Other zimlet exists
+		this.overrideAPI(org_zmail_email_handlerObject.prototype, "getActionMenu", AjxCallback.simpleClosure(AttachContactsZimlet._getEmailActionMenu, null, this));
 	}
 };
 
 /**
- * Will override EmailTooltipZimlet.prototype.getActionMenu in com_zimbra_email
+ * Will override EmailTooltipZimlet.prototype.getActionMenu in org_zmail_email
  */
 AttachContactsZimlet._getEmailActionMenu = function(attachContactsZimlet) {
 	var args = Array.prototype.slice.call(arguments, 1); // Cut off our own argument
 	var menu = this.getActionMenu.func.apply(this, args); // Call overridden function
-	var contactCallback = new AjxCallback(this, this._getActionedContact, [false]); // Callback to method in com_zimbra_email
+	var contactCallback = new AjxCallback(this, this._getActionedContact, [false]); // Callback to method in org_zmail_email
 	var contact = contactCallback.run();
 	if (contact && !contact.isGal && contact.id) {
 		attachContactsZimlet.addMenuButton(contactCallback, menu, "NEWCONTACT");

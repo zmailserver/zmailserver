@@ -14,11 +14,11 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.util.staf;
+package org.zmail.qa.selenium.framework.util.staf;
 
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.SleepUtil;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.SleepUtil;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
 
 public class Stafzmtlsctl extends StafServicePROCESS {
 
@@ -33,9 +33,9 @@ public class Stafzmtlsctl extends StafServicePROCESS {
       String setting = null;
 
       StafServicePROCESS stafServicePROCESS = new StafServicePROCESS();
-      stafServicePROCESS.execute("zmprov gs `zmhostname` ZimbraMailMode");
-      String serverName = ZimbraSeleniumProperties.getStringProperty("server.host", "localhost");
-      String mode = stafServicePROCESS.getStafResponse().split(serverName)[1].split("}")[0].split("zimbraMailMode:")[1].trim();
+      stafServicePROCESS.execute("zmprov gs `zmhostname` ZmailMailMode");
+      String serverName = ZmailSeleniumProperties.getStringProperty("server.host", "localhost");
+      String mode = stafServicePROCESS.getStafResponse().split(serverName)[1].split("}")[0].split("zmailMailMode:")[1].trim();
 
       logger.info("Current server access mode: " + mode);
 
@@ -82,13 +82,13 @@ public class Stafzmtlsctl extends StafServicePROCESS {
 
       // Make sure the full path is specified
       if ( command.trim().startsWith("zmtlsctl") ) {
-         command = "/opt/zimbra/bin/" + command;
+         command = "/opt/zmail/bin/" + command;
       }
-      // Running a command as 'zimbra' user.
+      // Running a command as 'zmail' user.
       // We must convert the command to a special format
-      // START SHELL COMMAND "su - zimbra -c \'<cmd>\'" RETURNSTDOUT RETURNSTDERR WAIT 30000</params>
+      // START SHELL COMMAND "su - zmail -c \'<cmd>\'" RETURNSTDOUT RETURNSTDERR WAIT 30000</params>
 
-      StafParms = String.format("START SHELL COMMAND \"su - zimbra -c '%s'\" RETURNSTDOUT RETURNSTDERR WAIT %d", command, this.getTimeout());
+      StafParms = String.format("START SHELL COMMAND \"su - zmail -c '%s'\" RETURNSTDOUT RETURNSTDERR WAIT %d", command, this.getTimeout());
       return (getStafCommand());
    }
 }

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.io.IOException;
 import java.lang.reflect.Constructor;
@@ -22,28 +22,28 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import com.zimbra.common.mailbox.Color;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.offline.OfflineDataSource;
-import com.zimbra.cs.account.offline.OfflineProvisioning;
-import com.zimbra.cs.datasource.DataSourceManager;
-import com.zimbra.cs.extension.ExtensionUtil;
-import com.zimbra.cs.mailbox.MailServiceException.NoSuchItemException;
-import com.zimbra.cs.offline.OfflineLC;
-import com.zimbra.cs.offline.OfflineLog;
-import com.zimbra.cs.offline.OfflineSyncManager;
-import com.zimbra.cs.offline.common.OfflineConstants;
-import com.zimbra.cs.session.PendingModifications.Change;
-import com.zimbra.cs.util.ZimbraApplication;
+import org.zmail.common.mailbox.Color;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.offline.OfflineDataSource;
+import org.zmail.cs.account.offline.OfflineProvisioning;
+import org.zmail.cs.datasource.DataSourceManager;
+import org.zmail.cs.extension.ExtensionUtil;
+import org.zmail.cs.mailbox.MailServiceException.NoSuchItemException;
+import org.zmail.cs.offline.OfflineLC;
+import org.zmail.cs.offline.OfflineLog;
+import org.zmail.cs.offline.OfflineSyncManager;
+import org.zmail.cs.offline.common.OfflineConstants;
+import org.zmail.cs.session.PendingModifications.Change;
+import org.zmail.cs.util.ZmailApplication;
 
 public class ExchangeMailbox extends ChangeTrackingMailbox {
 
-    private static final String EXCHANGE_HELPER_CLASS = "com.zimbra.cs.offline.OfflineExchangeHelper";
+    private static final String EXCHANGE_HELPER_CLASS = "org.zmail.cs.offline.OfflineExchangeHelper";
     private static final Class<?>[] EXCHANGE_HELPER_CONSTRUCTOR_SIGNATURE = {
         Mailbox.class, DataSource.class
     };
@@ -53,7 +53,7 @@ public class ExchangeMailbox extends ChangeTrackingMailbox {
 
     static boolean isXsyncEnabled() {
         if (!isXsyncExtChecked) {
-            List<String> extNames = ZimbraApplication.getInstance().getExtensionNames();
+            List<String> extNames = ZmailApplication.getInstance().getExtensionNames();
             if (extNames != null) {
                 for (String ext : extNames)
                     if (OfflineConstants.EXTENSION_XSYNC.equals(ext))
@@ -165,7 +165,7 @@ public class ExchangeMailbox extends ChangeTrackingMailbox {
             if (!isOnRequest && isAutoSyncDisabled(ds))
                 continue;
 
-            ZimbraLog.xsync.debug("sending pending mail (id=%d): %s", msg.getId(), msg.getSubject());
+            ZmailLog.xsync.debug("sending pending mail (id=%d): %s", msg.getId(), msg.getSubject());
 
 
             // try to avoid repeated sends of the same message by tracking "send UIDs" on SendMsg requests
@@ -181,13 +181,13 @@ public class ExchangeMailbox extends ChangeTrackingMailbox {
                 helper.doSendMail(msg.getContentStream(), msg.getSize(), saveToSent);
             } catch (ServiceException x) {
                 //TODO:
-                ZimbraLog.xsync.warn("send mail failure (id=%d)", msg.getId(), x);
+                ZmailLog.xsync.warn("send mail failure (id=%d)", msg.getId(), x);
             } catch (IOException x) {
                 //TODO:
-                ZimbraLog.xsync.warn("send mail failure (id=%d)", msg.getId(), x);
+                ZmailLog.xsync.warn("send mail failure (id=%d)", msg.getId(), x);
             }
 
-            ZimbraLog.xsync.debug("sent pending mail (id=%d)", msg.getId());
+            ZmailLog.xsync.debug("sent pending mail (id=%d)", msg.getId());
 
             // remove the draft from the outbox
             delete(sContext, id, MailItem.Type.MESSAGE);
@@ -228,7 +228,7 @@ public class ExchangeMailbox extends ChangeTrackingMailbox {
         try {
             sync(false, false);
         } catch (ServiceException x) {
-            ZimbraLog.xsync.warn(x);
+            ZmailLog.xsync.warn(x);
         }
     }
 
@@ -272,12 +272,12 @@ public class ExchangeMailbox extends ChangeTrackingMailbox {
                     try {
                         count = sendPendingMessages(isOnRequest);
 //                    } catch (NeedProvisioningException x) {
-//                        ZimbraLog.xsync.info("Server requiring Policy Provision. Force sync to trigger Provision.");
+//                        ZmailLog.xsync.info("Server requiring Policy Provision. Force sync to trigger Provision.");
 //                        isOnRequest = true;
 //                    } catch (HttpStatusException x) {
                     } catch (Exception x) {
                         //TODO
-                        ZimbraLog.xsync.warn("send mail failure", x);
+                        ZmailLog.xsync.warn("send mail failure", x);
                     }
                     syncDataSource(count > 0, isOnRequest);
                 } catch (Exception x) {
@@ -316,7 +316,7 @@ public class ExchangeMailbox extends ChangeTrackingMailbox {
             syncMan.syncStart(ds);
             DataSourceManager.importData(ds, null, true);
             syncMan.syncComplete(ds);
-            OfflineProvisioning.getOfflineInstance().setDataSourceAttribute(ds, OfflineConstants.A_zimbraDataSourceLastSync, Long.toString(System.currentTimeMillis()));
+            OfflineProvisioning.getOfflineInstance().setDataSourceAttribute(ds, OfflineConstants.A_zmailDataSourceLastSync, Long.toString(System.currentTimeMillis()));
         } catch (Exception x) {
             if (isDeleting())
                 OfflineLog.offline.info("Mailbox \"%s\" is being deleted", getAccountName());

@@ -14,21 +14,21 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.preferences.general.login;
+package org.zmail.qa.selenium.projects.ajax.tests.preferences.general.login;
 
 import java.util.HashMap;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
 
-public class ZimbraPrefSkinSerenity extends AjaxCommonTest {
+public class ZmailPrefSkinSerenity extends AjaxCommonTest {
 
-	public ZimbraPrefSkinSerenity() {
-		logger.info("New "+ ZimbraPrefSkinSerenity.class.getCanonicalName());
+	public ZmailPrefSkinSerenity() {
+		logger.info("New "+ ZmailPrefSkinSerenity.class.getCanonicalName());
 
 		// All tests start at the login page
 		super.startingPage = app.zPagePreferences;
@@ -37,7 +37,7 @@ public class ZimbraPrefSkinSerenity extends AjaxCommonTest {
 			private static final long serialVersionUID = -1303088148746653112L;
 			{
 
-				put("zimbraPrefSkin", "serenity");
+				put("zmailPrefSkin", "serenity");
 
 			}
 		};
@@ -45,10 +45,10 @@ public class ZimbraPrefSkinSerenity extends AjaxCommonTest {
 	}
 	
 	@Test(
-			description = "Verify the 'zimbraPrefSkin' option can be changed", 
+			description = "Verify the 'zmailPrefSkin' option can be changed", 
 			groups = { "functional" }
 			)
-	public void ZimbraPrefSkinSerenity_01() throws HarnessException {
+	public void ZmailPrefSkinSerenity_01() throws HarnessException {
 				
 		// Go to "General"
 		app.zTreePreferences.zTreeItem(Action.A_LEFTCLICK, TreeItem.General);
@@ -72,12 +72,12 @@ public class ZimbraPrefSkinSerenity extends AjaxCommonTest {
 		app.zPagePreferences.zToolbarPressButton(Button.B_SAVE);
 		
 		app.zGetActiveAccount().soapSend(
-						"<GetPrefsRequest xmlns='urn:zimbraAccount'>"
-				+			"<pref name='zimbraPrefSkin'/>"
+						"<GetPrefsRequest xmlns='urn:zmailAccount'>"
+				+			"<pref name='zmailPrefSkin'/>"
 				+		"</GetPrefsRequest>");
 
-		String value = app.zGetActiveAccount().soapSelectValue("//acct:pref[@name='zimbraPrefSkin']", null);
-		ZAssert.assertEquals(value, "bare", "Verify the zimbraPrefSkin preference was saved");
+		String value = app.zGetActiveAccount().soapSelectValue("//acct:pref[@name='zmailPrefSkin']", null);
+		ZAssert.assertEquals(value, "bare", "Verify the zmailPrefSkin preference was saved");
 
 	}
 }

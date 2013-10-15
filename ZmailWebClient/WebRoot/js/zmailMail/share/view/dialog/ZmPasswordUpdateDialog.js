@@ -80,7 +80,7 @@ ZmPasswordUpdateDialog.prototype._okButtonListener =
 function(ev) {
     var pwd = AjxStringUtil.trim(this._nameField.value);
     if (pwd && pwd.length > 0 ) {
-        var soapDoc = AjxSoapDoc.create("ChangePasswordRequest", "urn:zimbraOffline");
+        var soapDoc = AjxSoapDoc.create("ChangePasswordRequest", "urn:zmailOffline");
         soapDoc.setMethodAttribute("id", this.acct.id);
         soapDoc.set("password", pwd);
 

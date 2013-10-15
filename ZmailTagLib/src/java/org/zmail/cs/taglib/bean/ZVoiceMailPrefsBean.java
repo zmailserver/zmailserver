@@ -13,11 +13,11 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.taglib.bean;
+package org.zmail.cs.taglib.bean;
 
-import com.zimbra.client.ZVoiceMailPrefs;
+import org.zmail.client.ZVoiceMailPrefs;
 
-import com.zimbra.common.soap.VoiceConstants;
+import org.zmail.common.soap.VoiceConstants;
 
 public class ZVoiceMailPrefsBean extends ZCallFeatureBean {
 

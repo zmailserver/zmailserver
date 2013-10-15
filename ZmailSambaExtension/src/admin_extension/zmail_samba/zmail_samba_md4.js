@@ -8,7 +8,7 @@
 **/
 
 /**
- * Modified by Greg Solovyev @ Zimbra (c) (2007)
+ * Modified by Greg Solovyev @ Zmail (c) (2007)
  */
 function ZaSambaUtil () {
 	

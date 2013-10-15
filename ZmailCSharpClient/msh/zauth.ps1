@@ -6,10 +6,10 @@ $passBSTR = [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR( $passS
 $pass = [System.Runtime.InteropServices.Marshal]::PtrToStringBSTR( $passBSTR )
 [System.Runtime.InteropServices.Marshal]::ZeroFreeBSTR( $passBSTR )
 
-$zreqctx = new-object Zimbra.Client.RequestContext
-$zreqapi = new-object Zimbra.Client.Account.AuthRequest $user, $pass
+$zreqctx = new-object Zmail.Client.RequestContext
+$zreqapi = new-object Zmail.Client.Account.AuthRequest $user, $pass
 
-$global:zreq = new-object Zimbra.Client.RequestEnvelope $zreqctx , $zreqapi
+$global:zreq = new-object Zmail.Client.RequestEnvelope $zreqctx , $zreqapi
 $global:zres = $global:zdisp.SendRequest( $global:zreq )
 
 $global:zreq.Context.Update( $global:zres.Context, $global:zres.ApiResponse )

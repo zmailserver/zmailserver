@@ -85,7 +85,7 @@ function(parent, type, id) {
         }
         if (appCtxt.isOffline) {
             var acct = folder.getAccount();
-            isShareVisible = !acct.isMain && acct.isZimbraAccount;
+            isShareVisible = !acct.isMain && acct.isZmailAccount;
         }
         parent.enable([ZmOperation.SHARE_TASKFOLDER], isShareVisible);
         parent.enable(ZmOperation.SYNC, folder.isFeed());

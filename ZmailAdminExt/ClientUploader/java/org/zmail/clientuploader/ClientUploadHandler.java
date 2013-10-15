@@ -12,19 +12,19 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.clientuploader;
+package org.zmail.clientuploader;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthToken;
+import org.zmail.common.account.Key;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthToken;
 
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.accesscontrol.RightCommand;
-import com.zimbra.cs.extension.ExtensionHttpHandler;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.accesscontrol.RightCommand;
+import org.zmail.cs.extension.ExtensionHttpHandler;
 
-import com.zimbra.cs.servlet.ZimbraServlet;
+import org.zmail.cs.servlet.ZmailServlet;
 
 
 import javax.servlet.http.HttpServletRequest;
@@ -48,7 +48,7 @@ public class ClientUploadHandler extends ExtensionHttpHandler {
         String reqId = req.getParameter("requestId");
         ZClientUploadManager man = new ZClientUploadManager();
         try {
-            AuthToken authToken = ZimbraServlet.getAdminAuthTokenFromCookie(req, resp);
+            AuthToken authToken = ZmailServlet.getAdminAuthTokenFromCookie(req, resp);
             if (!authenticate(authToken, resp)){
                 return;
             }

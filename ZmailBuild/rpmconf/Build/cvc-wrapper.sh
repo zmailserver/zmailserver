@@ -65,7 +65,7 @@ tar czf $WORK/$PKGNAME.tar.gz -C $DESTDIR .
 
 # create a simple recipe to unpack the archive
 cat > $WORK/$PKGNAME.recipe <<EOF
-class ZimbraBuildRecipe(PackageRecipe):
+class ZmailBuildRecipe(PackageRecipe):
     name = "$PKGNAME"
     version = "$VERSION"
 
@@ -74,7 +74,7 @@ class ZimbraBuildRecipe(PackageRecipe):
         r.addArchive("%(name)s.tar.gz", dir="/")
         # avoid java deps for now
         r.Requires(exceptDeps=('.*', 'java:.*'))
-        r.Provides('soname: /opt/zimbra/mysql/lib/libmysqlclient.so.15',
+        r.Provides('soname: /opt/zmail/mysql/lib/libmysqlclient.so.15',
                    '.*/libmysqlclient.so.15')
         # FIXME: some perl bits use CPAN::Config, but nothing provides it
         r.Requires(exceptDeps=('.*', 'perl:.*CPAN::Config'))
@@ -83,65 +83,65 @@ class ZimbraBuildRecipe(PackageRecipe):
         del r.EnforcePerlBuildRequirements
         del r.DanglingSymlinks
         r.RemoveNonPackageFiles(exceptions='.*')
-        r.InitialContents('/opt/zimbra/conf/localconfig.xml');
+        r.InitialContents('/opt/zmail/conf/localconfig.xml');
         # don't delete specific empty directories
-        if r.name == 'zimbra-core':
+        if r.name == 'zmail-core':
           r.MakeDirs('/etc/conary/entitlements')
-          r.Symlink ('/opt/zimbra/libexec/zmgenentitlement', '/etc/conary/entitlements/products.rpath.com')
-          r.Symlink ('/opt/zimbra/libexec/zmgenentitlement', '/etc/conary/entitlements/conary.rpath.com')
-          r.Symlink ('/opt/zimbra/libexec/zmgenentitlement', '/etc/conary/entitlements/zimbra.liquidsys.com')
-        if r.name == 'zimbra-mta':
-          r.ExcludeDirectories(exceptions='/opt/zimbra/postfix.*')
-          r.ExcludeDirectories(exceptions='/opt/zimbra/clamav.*')
-          r.ExcludeDirectories(exceptions='/opt/zimbra/amavis.*')
-          r.ExcludeDirectories(exceptions='/opt/zimbra/dspam.*')
-        if r.name == 'zimbra-store':
-          r.MakeDirs('/opt/zimbra/apache-tomcat-5.5.15/work', mode=0755)
-          r.MakeDirs('/opt/zimbra/apache-tomcat-5.5.15/work/Catalina', mode=0755)
-          r.MakeDirs('/opt/zimbra/apache-tomcat-5.5.15/work/Catalina/localhost', mode=0755)
-          r.Ownership('zimbra', 'zimbra' '/opt/zimbra/apache-tomcat-5.5.15/work/Catalina/localhost');
-          r.ExcludeDirectories(exceptions='/opt/zimbra/apache-tomcat-5.5.15/?.*')
-          r.ExcludeDirectories(exceptions='/opt/zimbra/wiki/?.*')
-          r.Config('/opt/zimbra/apache-tomcat-5.5.15/webapps/zimbra/WEB-INF/web.xml')
-          r.Config('/opt/zimbra/apache-tomcat-5.5.15/webapps/service/WEB-INF/web.xml')
-          r.SetModes('/opt/zimbra/verity/FilterSDK/bin/kvoop', 0755)
-        if r.name == 'zimbra-ldap':
-          r.ExcludeDirectories(exceptions='/opt/zimbra/openldap.*')
-        if r.name == 'zimbra-apache':
-          r.ExcludeDirectories(exceptions='/opt/zimbra/httpd.*')
+          r.Symlink ('/opt/zmail/libexec/zmgenentitlement', '/etc/conary/entitlements/products.rpath.com')
+          r.Symlink ('/opt/zmail/libexec/zmgenentitlement', '/etc/conary/entitlements/conary.rpath.com')
+          r.Symlink ('/opt/zmail/libexec/zmgenentitlement', '/etc/conary/entitlements/zmail.liquidsys.com')
+        if r.name == 'zmail-mta':
+          r.ExcludeDirectories(exceptions='/opt/zmail/postfix.*')
+          r.ExcludeDirectories(exceptions='/opt/zmail/clamav.*')
+          r.ExcludeDirectories(exceptions='/opt/zmail/amavis.*')
+          r.ExcludeDirectories(exceptions='/opt/zmail/dspam.*')
+        if r.name == 'zmail-store':
+          r.MakeDirs('/opt/zmail/apache-tomcat-5.5.15/work', mode=0755)
+          r.MakeDirs('/opt/zmail/apache-tomcat-5.5.15/work/Catalina', mode=0755)
+          r.MakeDirs('/opt/zmail/apache-tomcat-5.5.15/work/Catalina/localhost', mode=0755)
+          r.Ownership('zmail', 'zmail' '/opt/zmail/apache-tomcat-5.5.15/work/Catalina/localhost');
+          r.ExcludeDirectories(exceptions='/opt/zmail/apache-tomcat-5.5.15/?.*')
+          r.ExcludeDirectories(exceptions='/opt/zmail/wiki/?.*')
+          r.Config('/opt/zmail/apache-tomcat-5.5.15/webapps/zmail/WEB-INF/web.xml')
+          r.Config('/opt/zmail/apache-tomcat-5.5.15/webapps/service/WEB-INF/web.xml')
+          r.SetModes('/opt/zmail/verity/FilterSDK/bin/kvoop', 0755)
+        if r.name == 'zmail-ldap':
+          r.ExcludeDirectories(exceptions='/opt/zmail/openldap.*')
+        if r.name == 'zmail-apache':
+          r.ExcludeDirectories(exceptions='/opt/zmail/httpd.*')
         # set up libraries to be included in /etc/ld.so.conf
-        r.SharedLibrary(subtrees='/opt/zimbra/%(lib)s')
+        r.SharedLibrary(subtrees='/opt/zmail/%(lib)s')
         # add PERL5LIB
-        r.Environment('PERL5LIB', '/opt/zimbra/zimbramon/lib:/opt/zimbra/zimbramon/lib/i386-linux-thread-multi')
+        r.Environment('PERL5LIB', '/opt/zmail/zmailmon/lib:/opt/zmail/zmailmon/lib/i386-linux-thread-multi')
         # glob not supported until conary 1.0.15
-        #r.SharedLibrary(subtrees='/opt/zimbra/cyrus-sasl.*/%(lib)s')
-        r.SharedLibrary(subtrees='/opt/zimbra/cyrus-sasl-2.1.22.3z/%(lib)s')
+        #r.SharedLibrary(subtrees='/opt/zmail/cyrus-sasl.*/%(lib)s')
+        r.SharedLibrary(subtrees='/opt/zmail/cyrus-sasl-2.1.22.3z/%(lib)s')
         # add a runtime requirements on sudo
         for x in ('postfix', 'qshape', 'postconf', 'tomcat', 'ldap'):
-            r.Requires('sudo:runtime', '/opt/zimbra/bin/' + x)
-        r.Requires('openssl:runtime', '/opt/zimbra/bin/zmcreateca')
-        r.Requires('vixie-cron:runtime', '/opt/zimbra/libexec/zmsetup.pl')
-        r.Requires('openssh-client:runtime', '/opt/zimbra/libexec/zmrc')
-        r.Requires('openssh-server:runtime', '/opt/zimbra/libexec/zmrc')
-        # add requirements on zimbra-core (note that '' is for zimbra-store)
+            r.Requires('sudo:runtime', '/opt/zmail/bin/' + x)
+        r.Requires('openssl:runtime', '/opt/zmail/bin/zmcreateca')
+        r.Requires('vixie-cron:runtime', '/opt/zmail/libexec/zmsetup.pl')
+        r.Requires('openssh-client:runtime', '/opt/zmail/libexec/zmrc')
+        r.Requires('openssh-server:runtime', '/opt/zmail/libexec/zmrc')
+        # add requirements on zmail-core (note that '' is for zmail-store)
         for pkg in ('apache', 'mta', 'ldap', 'store', 'logger', 'snmp', 'proxy', 'memcached'):
-            r.Requires('zimbra-core:runtime',
-                       '/opt/zimbra/scripts/zimbra-%s.post' %pkg)
-        # add requirement from zimbra-spell -> zimbra-apache
-        r.Requires('zimbra-apache:runtime',
-                   '/opt/zimbra/scripts/zimbra-spell.post')
-        # add requirement from zimbra-mta -> zimbra-store
-        r.Requires('zimbra-store:runtime',
-                   '/opt/zimbra/scripts/zimbra-mta.post')
-        # add requirement from zimbra->mta -> mailbase for /etc/aliases
-        r.Requires('mailbase:runtime', '/opt/zimbra/postfix.*/sbin/postalias')
+            r.Requires('zmail-core:runtime',
+                       '/opt/zmail/scripts/zmail-%s.post' %pkg)
+        # add requirement from zmail-spell -> zmail-apache
+        r.Requires('zmail-apache:runtime',
+                   '/opt/zmail/scripts/zmail-spell.post')
+        # add requirement from zmail-mta -> zmail-store
+        r.Requires('zmail-store:runtime',
+                   '/opt/zmail/scripts/zmail-mta.post')
+        # add requirement from zmail->mta -> mailbase for /etc/aliases
+        r.Requires('mailbase:runtime', '/opt/zmail/postfix.*/sbin/postalias')
         # add an exclude for convertd libs
         r.Requires(exceptDeps=('.*', 'soname:.*libnotes.*'))
         # zmfixperms uses these user/groups when changing ownerships
-        for user in ('zimbra', 'postfix', 'nobody'):
-            r.UtilizeUser(user, '/opt/zimbra/libexec/zmfixperms')
-            r.UtilizeGroup(user, '/opt/zimbra/libexec/zmfixperms')
-        r.UtilizeGroup('postdrop', '/opt/zimbra/libexec/zmfixperms')
+        for user in ('zmail', 'postfix', 'nobody'):
+            r.UtilizeUser(user, '/opt/zmail/libexec/zmfixperms')
+            r.UtilizeGroup(user, '/opt/zmail/libexec/zmfixperms')
+        r.UtilizeGroup('postdrop', '/opt/zmail/libexec/zmfixperms')
 EOF
 
 script=$SCRIPTDIR/$PKGNAME.post
@@ -160,14 +160,14 @@ EOF
 #!/bin/bash
 case \$2 in
     update)
-        /opt/zimbra/scripts/$s 1
+        /opt/zmail/scripts/$s 1
         ;;
 esac
 exit 0
 EOF
     cat >> $WORK/$PKGNAME.recipe <<EOF
-        r.addSource("$s", dest="/opt/zimbra/scripts/", mode=0755)
-        r.TagSpec("$PKGNAME", "/opt/zimbra/scripts/$s")
+        r.addSource("$s", dest="/opt/zmail/scripts/", mode=0755)
+        r.TagSpec("$PKGNAME", "/opt/zmail/scripts/$s")
         r.addSource("$PKGNAME-tagdescription",
                     dest='%(tagdescriptiondir)s/%(name)s', macros=True)
         r.addSource("$PKGNAME-taghandler",
@@ -197,7 +197,7 @@ else
     if [ -n "$new" ]; then
         cvc add $new --text
     fi
-    cvc commit -m 'automated update from ZimbraBuild'
+    cvc commit -m 'automated update from ZmailBuild'
     cd -
     # build it
     cvc cook $PKGNAME=$LABEL

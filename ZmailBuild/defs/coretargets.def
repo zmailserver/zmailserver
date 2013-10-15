@@ -1,27 +1,27 @@
 # __CORE
 
 core: CUR_DEST_ROOT := $(CORE_DEST_ROOT)
-core: CUR_PACKAGE_SPEC := $(BUILD_ROOT)/zimbra-core.spec
-core: CUR_PACKAGE_NAME := zimbra-core
+core: CUR_PACKAGE_SPEC := $(BUILD_ROOT)/zmail-core.spec
+core: CUR_PACKAGE_NAME := zmail-core
 core: $(PACKAGE_DIR) core_stage core_pkg_spec_$(PACKAGE_EXT)
 	(cd $(CUR_DEST_ROOT); \
 		$(PACKAGING_COMMAND) $(PACKAGING_OPTIONS) )
 
 core_pkg_spec_ccs:
 
-core_pkg_spec_pkg: $(BUILD_ROOT)/resources/zimbra-core $(BUILD_ROOT)/zimbra-core.Info.plist $(BUILD_ROOT)/zimbra-core.Description.plist
+core_pkg_spec_pkg: $(BUILD_ROOT)/resources/zmail-core $(BUILD_ROOT)/zmail-core.Info.plist $(BUILD_ROOT)/zmail-core.Description.plist
 	rm -rf $(CORE_DEST_DIR)/$(JAVA_FILE)-$(JAVA_VERSION)
 
-$(BUILD_ROOT)/zimbra-core.Description.plist:
-	cat $(PACKAGE_CONF_DIR)/Spec/zimbra-core.Description.plist | \
+$(BUILD_ROOT)/zmail-core.Description.plist:
+	cat $(PACKAGE_CONF_DIR)/Spec/zmail-core.Description.plist | \
 		sed -e 's/@@VERSION@@/$(VERSION_TAG)/' \
 		-e 's/@@RELEASE@@/$(RELEASE)/' \
 		-e 's/@@MAJOR@@/$(MAJOR)/' \
 		-e 's/@@MICRO@@/$(MICRO)/' \
 		-e 's/@@MINOR@@/$(MINOR)/' > $@
 
-$(BUILD_ROOT)/zimbra-core.Info.plist:
-	cat $(PACKAGE_CONF_DIR)/Spec/zimbra-core.Info.plist | \
+$(BUILD_ROOT)/zmail-core.Info.plist:
+	cat $(PACKAGE_CONF_DIR)/Spec/zmail-core.Info.plist | \
 		sed -e 's/@@VERSION@@/$(VERSION_TAG)/' \
 		-e 's/@@RELEASE@@/$(RELEASE)/' \
 		-e 's/@@MAJOR@@/$(MAJOR)/' \
@@ -29,17 +29,17 @@ $(BUILD_ROOT)/zimbra-core.Info.plist:
 		-e 's/@@BUILDNUM@@/$(BUILDNUM)/' \
 		-e 's/@@MINOR@@/$(MINOR)/' > $@
 
-$(BUILD_ROOT)/resources/zimbra-core:
+$(BUILD_ROOT)/resources/zmail-core:
 	mkdir -p $@
-	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zimbra-core.preflight $@/preflight
+	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zmail-core.preflight $@/preflight
 	chmod 755 $@/preflight
-	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zimbra-core.postflight $@/postflight
+	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zmail-core.postflight $@/postflight
 	chmod 755 $@/postflight
-	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zimbra-core.postinstall $@/postinstall
+	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zmail-core.postinstall $@/postinstall
 	chmod 755 $@/postinstall
-	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zimbra-core.preupgrade $@/preupgrade
+	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zmail-core.preupgrade $@/preupgrade
 	chmod 755 $@/preupgrade
-	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zimbra-core.postupgrade $@/postupgrade
+	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zmail-core.postupgrade $@/postupgrade
 	chmod 755 $@/postupgrade
 	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/InstallationCheck $@/InstallationCheck
 	chmod 755 $@/InstallationCheck
@@ -50,77 +50,77 @@ core_pkg_spec_deb: $(CORE_DEST_ROOT)/DEBIAN/control
 
 $(CORE_DEST_ROOT)/DEBIAN: force
 	mkdir -p $@
-	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zimbra-core.pre $@/preinst
-	cat $(PACKAGE_CONF_DIR)/Spec/Scripts/zimbra-core.post >> $@/postinst
+	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zmail-core.pre $@/preinst
+	cat $(PACKAGE_CONF_DIR)/Spec/Scripts/zmail-core.post >> $@/postinst
 	chmod 555 $@/*
 
 $(CORE_DEST_ROOT)/DEBIAN/control: $(CORE_DEST_ROOT)/DEBIAN force
-	cat $(PACKAGE_CONF_DIR)/Spec/zimbra-core.deb | \
+	cat $(PACKAGE_CONF_DIR)/Spec/zmail-core.deb | \
 		sed -e 's/@@VERSION@@/$(VERSION_TAG)/' \
 		-e 's/@@RELEASE@@/$(RELEASE)/' \
 		-e 's/@@ARCH@@/$(ARCH)/' \
 		-e 's/^Copyright:/$(RPMCOPYRIGHTSTR):/' \
-		-e '/^%pre$$/ r zimbra-core.pre' \
-		-e '/^%post$$/ r zimbra-core.post' > $@
+		-e '/^%pre$$/ r zmail-core.pre' \
+		-e '/^%post$$/ r zmail-core.post' > $@
 
-core_pkg_spec_rpm: $(BUILD_ROOT)/zimbra-core.spec
+core_pkg_spec_rpm: $(BUILD_ROOT)/zmail-core.spec
 
-$(BUILD_ROOT)/zimbra-core.spec:
-	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zimbra-core.pre $(BUILD_ROOT)
-	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zimbra-core.post $(BUILD_ROOT)
-	cat $(PACKAGE_CONF_DIR)/Spec/zimbra-core.spec | \
+$(BUILD_ROOT)/zmail-core.spec:
+	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zmail-core.pre $(BUILD_ROOT)
+	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zmail-core.post $(BUILD_ROOT)
+	cat $(PACKAGE_CONF_DIR)/Spec/zmail-core.spec | \
 		sed -e 's/@@VERSION@@/$(VERSION_TAG)/' \
 		-e 's/@@RELEASE@@/$(RELEASE)/' \
 		-e 's/^Copyright:/$(RPMCOPYRIGHTSTR):/' \
-		-e '/^%pre$$/ r zimbra-core.pre' \
-		-e '/^%post$$/ r zimbra-core.post' > $(BUILD_ROOT)/zimbra-core.spec
-	rm -f zimbra-core.pre
-	rm -f zimbra-core.post
+		-e '/^%pre$$/ r zmail-core.pre' \
+		-e '/^%post$$/ r zmail-core.post' > $(BUILD_ROOT)/zmail-core.spec
+	rm -f zmail-core.pre
+	rm -f zmail-core.post
 	(cd $(CORE_DEST_ROOT); find opt -maxdepth 2 -type f -o -type l \
-		| sed -e 's|^|%attr(-, zimbra, zimbra) /|' >> \
-		$(BUILD_ROOT)/zimbra-core.spec )
-	echo "%attr(755, root, root) /opt/zimbra/bin" >> \
-		$(BUILD_ROOT)/zimbra-core.spec
-	echo "%attr(755, zimbra, zimbra) /opt/zimbra/docs" >> \
-		$(BUILD_ROOT)/zimbra-core.spec
-	echo "%attr(444, zimbra, zimbra) /opt/zimbra/docs/*" >> \
-		$(BUILD_ROOT)/zimbra-core.spec
-	echo "%attr(755, root, root) /opt/zimbra/contrib" >> \
-		$(BUILD_ROOT)/zimbra-core.spec
-	echo "%attr(755, root, root) /opt/zimbra/libexec" >> \
-		$(BUILD_ROOT)/zimbra-core.spec
-	echo "%attr(755, root, root) /opt/zimbra/logger" >> \
-		$(BUILD_ROOT)/zimbra-core.spec
-	echo "%attr(-, zimbra, zimbra) /opt/zimbra/conf" >> \
-		$(BUILD_ROOT)/zimbra-core.spec
-	echo "%attr(-, zimbra, zimbra) /opt/zimbra/db" >> \
-		$(BUILD_ROOT)/zimbra-core.spec
-	echo "%attr(-, root, root) /opt/zimbra/jdk-$(JAVA_VERSION)" >> \
-		$(BUILD_ROOT)/zimbra-core.spec
-	echo "%attr(-, root, root) /opt/zimbra/lib" >> \
-		$(BUILD_ROOT)/zimbra-core.spec
-	echo "%attr(-, zimbra, zimbra) /opt/zimbra/zimbramon" >> \
-		$(BUILD_ROOT)/zimbra-core.spec
-	echo "%attr(-, zimbra, zimbra) /opt/zimbra/bdb-$(BDB_VERSION)" >> \
-		$(BUILD_ROOT)/zimbra-core.spec
-	echo "%attr(-, zimbra, zimbra) /opt/zimbra/openssl-$(OPENSSL_VERSION)" >> \
-		$(BUILD_ROOT)/zimbra-core.spec
-	echo "%attr(-, zimbra, zimbra) /opt/zimbra/heimdal-$(HEIMDAL_VERSION)" >> \
-		$(BUILD_ROOT)/zimbra-core.spec
-	echo "%attr(-, zimbra, zimbra) /opt/zimbra/curl-$(CURL_VERSION)" >> \
-		$(BUILD_ROOT)/zimbra-core.spec
-	echo "%attr(-, root, zimbra) /opt/zimbra/$(SASL_DIR)-$(SASL_VERSION)" >> \
-		$(BUILD_ROOT)/zimbra-core.spec
-	echo "%attr(-, zimbra, zimbra) /opt/zimbra/mysql-standard-$(MYSQL_VERSION_STRING)-pc-linux-gnu-i686-glibc23" >> \
-		$(BUILD_ROOT)/zimbra-core.spec
-	echo "%attr(-, zimbra, zimbra) /opt/zimbra/openldap-$(LDAP_VERSION)" >> \
-		$(BUILD_ROOT)/zimbra-core.spec
-	echo "%attr(-, zimbra, zimbra) /opt/zimbra/tcmalloc-$(TCMALLOC_VERSION)" >> \
-		$(BUILD_ROOT)/zimbra-core.spec
-	echo "%attr(-, zimbra, zimbra) /opt/zimbra/rsync-$(RSYNC_VERSION)" >> \
-		$(BUILD_ROOT)/zimbra-core.spec
-	echo "" >>  $(BUILD_ROOT)/zimbra-core.spec
-	echo "%clean" >>  $(BUILD_ROOT)/zimbra-core.spec
+		| sed -e 's|^|%attr(-, zmail, zmail) /|' >> \
+		$(BUILD_ROOT)/zmail-core.spec )
+	echo "%attr(755, root, root) /opt/zmail/bin" >> \
+		$(BUILD_ROOT)/zmail-core.spec
+	echo "%attr(755, zmail, zmail) /opt/zmail/docs" >> \
+		$(BUILD_ROOT)/zmail-core.spec
+	echo "%attr(444, zmail, zmail) /opt/zmail/docs/*" >> \
+		$(BUILD_ROOT)/zmail-core.spec
+	echo "%attr(755, root, root) /opt/zmail/contrib" >> \
+		$(BUILD_ROOT)/zmail-core.spec
+	echo "%attr(755, root, root) /opt/zmail/libexec" >> \
+		$(BUILD_ROOT)/zmail-core.spec
+	echo "%attr(755, root, root) /opt/zmail/logger" >> \
+		$(BUILD_ROOT)/zmail-core.spec
+	echo "%attr(-, zmail, zmail) /opt/zmail/conf" >> \
+		$(BUILD_ROOT)/zmail-core.spec
+	echo "%attr(-, zmail, zmail) /opt/zmail/db" >> \
+		$(BUILD_ROOT)/zmail-core.spec
+	echo "%attr(-, root, root) /opt/zmail/jdk-$(JAVA_VERSION)" >> \
+		$(BUILD_ROOT)/zmail-core.spec
+	echo "%attr(-, root, root) /opt/zmail/lib" >> \
+		$(BUILD_ROOT)/zmail-core.spec
+	echo "%attr(-, zmail, zmail) /opt/zmail/zmailmon" >> \
+		$(BUILD_ROOT)/zmail-core.spec
+	echo "%attr(-, zmail, zmail) /opt/zmail/bdb-$(BDB_VERSION)" >> \
+		$(BUILD_ROOT)/zmail-core.spec
+	echo "%attr(-, zmail, zmail) /opt/zmail/openssl-$(OPENSSL_VERSION)" >> \
+		$(BUILD_ROOT)/zmail-core.spec
+	echo "%attr(-, zmail, zmail) /opt/zmail/heimdal-$(HEIMDAL_VERSION)" >> \
+		$(BUILD_ROOT)/zmail-core.spec
+	echo "%attr(-, zmail, zmail) /opt/zmail/curl-$(CURL_VERSION)" >> \
+		$(BUILD_ROOT)/zmail-core.spec
+	echo "%attr(-, root, zmail) /opt/zmail/$(SASL_DIR)-$(SASL_VERSION)" >> \
+		$(BUILD_ROOT)/zmail-core.spec
+	echo "%attr(-, zmail, zmail) /opt/zmail/mysql-standard-$(MYSQL_VERSION_STRING)-pc-linux-gnu-i686-glibc23" >> \
+		$(BUILD_ROOT)/zmail-core.spec
+	echo "%attr(-, zmail, zmail) /opt/zmail/openldap-$(LDAP_VERSION)" >> \
+		$(BUILD_ROOT)/zmail-core.spec
+	echo "%attr(-, zmail, zmail) /opt/zmail/tcmalloc-$(TCMALLOC_VERSION)" >> \
+		$(BUILD_ROOT)/zmail-core.spec
+	echo "%attr(-, zmail, zmail) /opt/zmail/rsync-$(RSYNC_VERSION)" >> \
+		$(BUILD_ROOT)/zmail-core.spec
+	echo "" >>  $(BUILD_ROOT)/zmail-core.spec
+	echo "%clean" >>  $(BUILD_ROOT)/zmail-core.spec
 
 core_stage: $(CORE_COMPONENTS)
 
@@ -138,84 +138,84 @@ $(CORE_DEST_DIR):
 
 $(CORE_DEST_DIR)/docs:
 	mkdir -p $@
-	cp $(LICENSE_DIR)/zimbra/zpl-full.txt $@/ZPL.txt
-	cp $(LICENSE_DIR)/zimbra/mit.txt $@/MIT.txt
-	cp $(LICENSE_DIR)/zimbra/ypl-full.txt $@/YPL.txt
-	cp $(LICENSE_DIR)/zimbra/zimbra_public_eula_2.1.txt $@/zimbra_public_eula_2.1.txt
+	cp $(LICENSE_DIR)/zmail/zpl-full.txt $@/ZPL.txt
+	cp $(LICENSE_DIR)/zmail/mit.txt $@/MIT.txt
+	cp $(LICENSE_DIR)/zmail/ypl-full.txt $@/YPL.txt
+	cp $(LICENSE_DIR)/zmail/zmail_public_eula_2.1.txt $@/zmail_public_eula_2.1.txt
 	cp $(LICENSE_DIR)/thirdparty/oracle_jdk_eula.txt $@/oracle_jdk_eula.txt
 	cp $(SERVICE_DIR)/docs/*txt $@
 	cp $(SERVICE_DIR)/docs/*html $@
 	cp $(MIG_TOOLS_DIR)/ReadMe.txt $@/zmztozmig.txt
-	echo "Zimbra Third Party Software version information" >$@/zimbra-software-versions.txt
-	echo "Altermime version: $(ALTERMIME_VERSION)" >> $@/zimbra-software-versions.txt
-	echo "Amavisd-new version: $(AMAVISD_VERSION)" >> $@/zimbra-software-versions.txt
-	echo "Apache HTTPD version: $(APACHE_VERSION)" >> $@/zimbra-software-versions.txt
-	echo "Aspell version: $(SPELL_VERSION)" >> $@/zimbra-software-versions.txt
-	echo "BDB version: $(BDB_VERSION)" >> $@/zimbra-software-versions.txt
-	echo "Cbpolicyd version: $(CBPOLICYD_VERSION)" >> $@/zimbra-software-versions.txt
-	echo "ClamAV version: $(CLAMAV_VERSION)" >> $@/zimbra-software-versions.txt
-	echo "Curl version: $(CURL_VERSION)" >> $@/zimbra-software-versions.txt
-	echo "Cyrus SASL version: $(SASL_VERSION)" >> $@/zimbra-software-versions.txt
-	echo "Dspam version: $(DSPAM_VERSION)" >> $@/zimbra-software-versions.txt
-	echo "Expat version (OSX only): $(EXPAT_VERSION)" >> $@/zimbra-software-versions.txt
-	echo "Heimdal version: $(HEIMDAL_VERSION)" >> $@/zimbra-software-versions.txt
-	echo "JDK version: $(JAVA_VERSION)" >> $@/zimbra-software-versions.txt
-	echo "Jetty version: $(JETTY_VERSION)" >> $@/zimbra-software-versions.txt
-	echo "Libtool version: $(LIBTOOL_VERSION)" >> $@/zimbra-software-versions.txt
-	echo "Memcached version: $(MEMCACHED_VERSION)" >> $@/zimbra-software-versions.txt
-	echo "MySQL version: $(MYSQL_VERSION_STRING)" >> $@/zimbra-software-versions.txt
-	echo "NetSNMP version: $(SNMP_VERSION)" >> $@/zimbra-software-versions.txt
-	echo "Nginx version: $(NGINX_VERSION)" >> $@/zimbra-software-versions.txt
-	echo "OpenLDAP version: $(LDAP_VERSION)" >> $@/zimbra-software-versions.txt
-	echo "OpenSSL version: $(OPENSSL_VERSION)" >> $@/zimbra-software-versions.txt
-	echo "Pcre version (OSX only): $(PCRE_VERSION)" >> $@/zimbra-software-versions.txt
-	echo "Popt version (OSX only): $(POPT_VERSION)" >> $@/zimbra-software-versions.txt
-	echo "Postfix version: $(POSTFIX_VERSION)" >> $@/zimbra-software-versions.txt
-	echo "RRDtool version: $(RRD_VERSION)" >> $@/zimbra-software-versions.txt
-	echo "Rsync version: $(RSYNC_VERSION)" >> $@/zimbra-software-versions.txt
-	echo "Tcmalloc version: $(TCMALLOC_VERSION)" >> $@/zimbra-software-versions.txt
+	echo "Zmail Third Party Software version information" >$@/zmail-software-versions.txt
+	echo "Altermime version: $(ALTERMIME_VERSION)" >> $@/zmail-software-versions.txt
+	echo "Amavisd-new version: $(AMAVISD_VERSION)" >> $@/zmail-software-versions.txt
+	echo "Apache HTTPD version: $(APACHE_VERSION)" >> $@/zmail-software-versions.txt
+	echo "Aspell version: $(SPELL_VERSION)" >> $@/zmail-software-versions.txt
+	echo "BDB version: $(BDB_VERSION)" >> $@/zmail-software-versions.txt
+	echo "Cbpolicyd version: $(CBPOLICYD_VERSION)" >> $@/zmail-software-versions.txt
+	echo "ClamAV version: $(CLAMAV_VERSION)" >> $@/zmail-software-versions.txt
+	echo "Curl version: $(CURL_VERSION)" >> $@/zmail-software-versions.txt
+	echo "Cyrus SASL version: $(SASL_VERSION)" >> $@/zmail-software-versions.txt
+	echo "Dspam version: $(DSPAM_VERSION)" >> $@/zmail-software-versions.txt
+	echo "Expat version (OSX only): $(EXPAT_VERSION)" >> $@/zmail-software-versions.txt
+	echo "Heimdal version: $(HEIMDAL_VERSION)" >> $@/zmail-software-versions.txt
+	echo "JDK version: $(JAVA_VERSION)" >> $@/zmail-software-versions.txt
+	echo "Jetty version: $(JETTY_VERSION)" >> $@/zmail-software-versions.txt
+	echo "Libtool version: $(LIBTOOL_VERSION)" >> $@/zmail-software-versions.txt
+	echo "Memcached version: $(MEMCACHED_VERSION)" >> $@/zmail-software-versions.txt
+	echo "MySQL version: $(MYSQL_VERSION_STRING)" >> $@/zmail-software-versions.txt
+	echo "NetSNMP version: $(SNMP_VERSION)" >> $@/zmail-software-versions.txt
+	echo "Nginx version: $(NGINX_VERSION)" >> $@/zmail-software-versions.txt
+	echo "OpenLDAP version: $(LDAP_VERSION)" >> $@/zmail-software-versions.txt
+	echo "OpenSSL version: $(OPENSSL_VERSION)" >> $@/zmail-software-versions.txt
+	echo "Pcre version (OSX only): $(PCRE_VERSION)" >> $@/zmail-software-versions.txt
+	echo "Popt version (OSX only): $(POPT_VERSION)" >> $@/zmail-software-versions.txt
+	echo "Postfix version: $(POSTFIX_VERSION)" >> $@/zmail-software-versions.txt
+	echo "RRDtool version: $(RRD_VERSION)" >> $@/zmail-software-versions.txt
+	echo "Rsync version: $(RSYNC_VERSION)" >> $@/zmail-software-versions.txt
+	echo "Tcmalloc version: $(TCMALLOC_VERSION)" >> $@/zmail-software-versions.txt
 
-$(CORE_DEST_DIR)/zimbramon: $(CORE_DEST_DIR)/zimbramon/bin $(CORE_DEST_DIR)/zimbramon/lib $(CORE_DEST_DIR)/zimbramon/pylibs $(CORE_DEST_DIR)/zimbramon/crontabs $(CORE_DEST_DIR)
-	@echo "*** Creating zimbramon"
+$(CORE_DEST_DIR)/zmailmon: $(CORE_DEST_DIR)/zmailmon/bin $(CORE_DEST_DIR)/zmailmon/lib $(CORE_DEST_DIR)/zmailmon/pylibs $(CORE_DEST_DIR)/zmailmon/crontabs $(CORE_DEST_DIR)
+	@echo "*** Creating zmailmon"
 	mkdir -p $@
-	(cd $(CORE_DEST_DIR)/zimbramon; tar xzf $(RRD_SOURCE).tar.gz)
+	(cd $(CORE_DEST_DIR)/zmailmon; tar xzf $(RRD_SOURCE).tar.gz)
 	mkdir -p $(CORE_DEST_DIR)/logger/db/work
 	cp -f $(PACKAGE_CONF_DIR)/Img/connection_failed.gif \
 		$(CORE_DEST_DIR)/logger/db/work
 	cp -f $(PACKAGE_CONF_DIR)/Img/data_not_available.gif \
 		$(CORE_DEST_DIR)/logger/db/work
 
-$(CORE_DEST_DIR)/zimbramon/crontabs:
+$(CORE_DEST_DIR)/zmailmon/crontabs:
 	mkdir -p $@
-	cp -f $(PACKAGE_CONF_DIR)/Env/crontabs/* $(CORE_DEST_DIR)/zimbramon/crontabs/
+	cp -f $(PACKAGE_CONF_DIR)/Env/crontabs/* $(CORE_DEST_DIR)/zmailmon/crontabs/
 
-$(CORE_DEST_DIR)/zimbramon/bin:
-	mkdir -p $(CORE_DEST_DIR)/zimbramon/bin
-	(cd $(CORE_DEST_DIR)/zimbramon/bin; \
+$(CORE_DEST_DIR)/zmailmon/bin:
+	mkdir -p $(CORE_DEST_DIR)/zmailmon/bin
+	(cd $(CORE_DEST_DIR)/zmailmon/bin; \
 	tar xzf $(PERL_LIB_SOURCE)/perlbin.tgz)
 	mkdir -p $(CORE_DEST_DIR)/libexec
-	cp -pr $(CORE_DEST_DIR)/zimbramon/bin/sa-learn $(CORE_DEST_DIR)/libexec/
+	cp -pr $(CORE_DEST_DIR)/zmailmon/bin/sa-learn $(CORE_DEST_DIR)/libexec/
 
-$(CORE_DEST_DIR)/zimbramon/pylibs:
-	mkdir -p $(CORE_DEST_DIR)/zimbramon
-	cp -R $(SERVICE_DIR)/src/python/pylibs $(CORE_DEST_DIR)/zimbramon
+$(CORE_DEST_DIR)/zmailmon/pylibs:
+	mkdir -p $(CORE_DEST_DIR)/zmailmon
+	cp -R $(SERVICE_DIR)/src/python/pylibs $(CORE_DEST_DIR)/zmailmon
 
-$(CORE_DEST_DIR)/zimbramon/lib:
-	mkdir -p $(CORE_DEST_DIR)/zimbramon/lib
-	(cd $(CORE_DEST_DIR)/zimbramon/lib; \
+$(CORE_DEST_DIR)/zmailmon/lib:
+	mkdir -p $(CORE_DEST_DIR)/zmailmon/lib
+	(cd $(CORE_DEST_DIR)/zmailmon/lib; \
 	tar xzf $(PERL_LIB_SOURCE)/perllib.tgz)
-	cp -R $(BUILD_ROOT)/lib/Zimbra $(CORE_DEST_DIR)/zimbramon/lib
+	cp -R $(BUILD_ROOT)/lib/Zmail $(CORE_DEST_DIR)/zmailmon/lib
 
-$(CORE_DEST_DIR)/lib: $(WEBAPP_DIR)/service.war $(LDAP_DEST_DIR)/$(LDAP_DIR)-$(LDAP_VERSION) $(NATIVE_DIR)/build/libzimbra-native.$(JNI_EXT)
+$(CORE_DEST_DIR)/lib: $(WEBAPP_DIR)/service.war $(LDAP_DEST_DIR)/$(LDAP_DIR)-$(LDAP_VERSION) $(NATIVE_DIR)/build/libzmail-native.$(JNI_EXT)
 	mkdir -p $@
 	cp -pr $(SERVICE_DIR)/build/dist/lib/* $@
 	-rm -rf $@/jars/junit*.jar
 	-rm -rf $@/jars/objenesis*.jar
-	cp -pr $(NATIVE_DIR)/build/libzimbra-native.$(JNI_EXT) $@
+	cp -pr $(NATIVE_DIR)/build/libzmail-native.$(JNI_EXT) $@
 	cp -pr $(JUNIXSOCKET_NATIVE) $@
 	(cd $(CORE_DEST_DIR); tar xzf $(THIRD_PARTY_BUILDS)/$(BUILD_PLATFORM)/mysql/mysql-libs-$(MYSQL_VERSION).tgz)
 
-$(NATIVE_DIR)/build/libzimbra-native.$(JNI_EXT):
+$(NATIVE_DIR)/build/libzmail-native.$(JNI_EXT):
 	(cd $(NATIVE_DIR); make JAVA_BINARY=$(JAVA_BINARY))
 
 $(LAUNCHER_DIR)/build/zmmailboxdmgr:
@@ -274,7 +274,7 @@ $(CORE_DEST_DIR)/conf: $(WEBAPP_DIR)/service.war
 	cp $(SERVICE_DIR)/conf/zmconfigd.cf $@/zmconfigd.cf
 	cp $(SERVICE_DIR)/conf/zmconfigd.log4j.properties $@/zmconfigd.log4j.properties
 	cp $(SERVICE_DIR)/conf/timezones.ics $@
-	cp $(SERVICE_DIR)/conf/zimbra.ld.conf $@
+	cp $(SERVICE_DIR)/conf/zmail.ld.conf $@
 	mkdir -p $@/zmconfigd
 	cp $(SERVICE_DIR)/conf/zmconfigd/postfix_content_filter.cf $@/zmconfigd/postfix_content_filter.cf
 	cp $(SERVICE_DIR)/conf/zmconfigd/smtpd_recipient_restrictions.cf $@/zmconfigd/smtpd_recipient_restrictions.cf
@@ -283,7 +283,7 @@ $(CORE_DEST_DIR)/conf: $(WEBAPP_DIR)/service.war
 	cp $(SERVICE_DIR)/conf/zmconfigd/smtpd_sender_restrictions.cf $@/zmconfigd/smtpd_sender_restrictions.cf
 	cp -Rf $(SERVICE_DIR)/conf/externaldirsync $@/externaldirsync
 	cp -Rf $(SERVICE_DIR)/build/dist/conf/rights $@/rights
-	rm -f $@/rights/zimbra-rights-domainadmin.xml-template
+	rm -f $@/rights/zmail-rights-domainadmin.xml-template
 	cp -Rf $(SERVICE_DIR)/build/dist/conf/msgs $@/msgs
 	mkdir -p $@/spamassassin
 	cp $(SERVICE_DIR)/conf/spamassassin/* $@/spamassassin
@@ -293,9 +293,9 @@ ifeq ($(ZIMBRA_USE_CBPOLICYD), 1)
 	cp $(ZMCBPOLICYD_DIR)/conf/* $@
 endif
 
-$(CORE_DEST_DIR)/conf/com.zimbra.zcs.plist:
+$(CORE_DEST_DIR)/conf/org.zmail.zcs.plist:
 	mkdir -p $(CORE_DEST_DIR)/conf
-	cp $(SERVICE_DIR)/conf/com.zimbra.zcs.plist $@
+	cp $(SERVICE_DIR)/conf/org.zmail.zcs.plist $@
 
 $(CORE_DEST_DIR)/libexec: $(LAUNCHER_DIR)/build/zmmailboxdmgr
 	@echo "*** Installing libexec"
@@ -340,7 +340,7 @@ $(CORE_DEST_DIR)/bin:
 	cp $(ZIMBRA_BIN_DIR)/zmauditswatchctl $@
 	cp $(ZIMBRA_BIN_DIR)/zmcertmgr $@
 	cp $(ZIMBRA_BIN_DIR)/zmtlsctl $@
-	cp $(LDAP_DEST_ROOT)/opt/zimbra/$(LDAP_DIR)-$(LDAP_VERSION)/bin/ldapsearch $@
+	cp $(LDAP_DEST_ROOT)/opt/zmail/$(LDAP_DIR)-$(LDAP_VERSION)/bin/ldapsearch $@
 	cp $(ZIMBRA_BIN_DIR)/zmantispamctl $@
 	cp $(ZIMBRA_BIN_DIR)/zmantivirusctl $@
 	cp $(ZIMBRA_BIN_DIR)/zmcontrol $@

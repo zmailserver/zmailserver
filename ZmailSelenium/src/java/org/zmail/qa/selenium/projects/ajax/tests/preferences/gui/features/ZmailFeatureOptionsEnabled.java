@@ -14,23 +14,23 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.preferences.gui.features;
+package org.zmail.qa.selenium.projects.ajax.tests.preferences.gui.features;
 
 import java.util.HashMap;
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
 
-public class ZimbraFeatureOptionsEnabled extends AjaxCommonTest {
+public class ZmailFeatureOptionsEnabled extends AjaxCommonTest {
 
 	@SuppressWarnings("serial")
-	public ZimbraFeatureOptionsEnabled() {
-		logger.info("New "+ ZimbraFeatureOptionsEnabled.class.getCanonicalName());
+	public ZmailFeatureOptionsEnabled() {
+		logger.info("New "+ ZmailFeatureOptionsEnabled.class.getCanonicalName());
 
 		// All tests start at the login page
 		super.startingPage = app.zPagePreferences;
@@ -39,14 +39,14 @@ public class ZimbraFeatureOptionsEnabled extends AjaxCommonTest {
 			{
 
 				// Only options/Preferences is enabled
-				put("zimbraFeatureOptionsEnabled", "TRUE");
-				put("zimbraFeatureTasksEnabled", "FALSE");
-				put("zimbraFeatureMailEnabled", "FALSE");
-				put("zimbraFeatureContactsEnabled", "FALSE");
-				put("zimbraFeatureCalendarEnabled", "FALSE");
-				put("zimbraFeatureBriefcasesEnabled", "FALSE");
-				put("zimbraZimletAvailableZimlets", "-com_zimbra_social");
-				put("zimbraPrefAutocompleteAddressBubblesEnabled", "TRUE");
+				put("zmailFeatureOptionsEnabled", "TRUE");
+				put("zmailFeatureTasksEnabled", "FALSE");
+				put("zmailFeatureMailEnabled", "FALSE");
+				put("zmailFeatureContactsEnabled", "FALSE");
+				put("zmailFeatureCalendarEnabled", "FALSE");
+				put("zmailFeatureBriefcasesEnabled", "FALSE");
+				put("zmailZimletAvailableZimlets", "-org_zmail_social");
+				put("zmailPrefAutocompleteAddressBubblesEnabled", "TRUE");
 
 			}
 		};
@@ -54,21 +54,21 @@ public class ZimbraFeatureOptionsEnabled extends AjaxCommonTest {
 	}
 	
 	/**
-	 * See http://bugzilla.zimbra.com/show_bug.cgi?id=62011 - WONTFIX
+	 * See http://bugzilla.zmail.com/show_bug.cgi?id=62011 - WONTFIX
 	 * @throws HarnessException
 	 */
 	@Bugs(ids="62011")	
 	@Test(description = "Load the Preferences tab with just Preferences enabled", groups = { "deprecated" })
-	public void ZimbraFeatureOptionsEnabled_01() throws HarnessException {
+	public void ZmailFeatureOptionsEnabled_01() throws HarnessException {
 		
 		// Go to "General"
 		app.zTreePreferences.zTreeItem(Action.A_LEFTCLICK, TreeItem.General);
 
 		// Determine the status of the checkbox
 		boolean checked = app.zPagePreferences
-				.zGetCheckboxStatus("zimbraPrefAutocompleteAddressBubblesEnabled");
+				.zGetCheckboxStatus("zmailPrefAutocompleteAddressBubblesEnabled");
 
-		// Since zimbraPrefAutocompleteAddressBubblesEnabled is set to TRUE, the
+		// Since zmailPrefAutocompleteAddressBubblesEnabled is set to TRUE, the
 		// Bubble checkbox should be checked
 		ZAssert.assertTrue(checked, "Verify if Address Bubbles check box is checked");
 

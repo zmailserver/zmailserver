@@ -14,7 +14,7 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_example_panelitemprops"
+<zimlet name="org_zmail_example_panelitemprops"
         version="1.0"
         description="Demos panel item with menus and user properties in XML">
     <zimletPanelItem label="Test Panel Item with Props">

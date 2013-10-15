@@ -39,7 +39,7 @@ ZaController.changeActionsStateMethods["ZaDomainListController"] = new Array();
 
 ZaDomainListController.prototype.show = function (doPush,openInNewTab) {
 
-    if(!ZaZimbraAdmin.hasGlobalDomainListAccess() && this._currentQuery == "") {
+    if(!ZaZmailAdmin.hasGlobalDomainListAccess() && this._currentQuery == "") {
         var domainNameList = ZaApp.getInstance()._domainNameList;
         if(domainNameList && (domainNameList instanceof Array) && domainNameList.length > 0) {
             for(var i = 0; i < domainNameList.length; i++)
@@ -71,7 +71,7 @@ ZaDomainListController.prototype.show = function (doPush,openInNewTab) {
 			busyId:busyId,
 			busyMsg:ZaMsg.BUSY_SEARCHING_DOMAINS,
 			skipCallbackIfCancelled:false,
-			attrs:[ZaDomain.A_description, ZaDomain.A_domainName,ZaDomain.A_zimbraDomainStatus,ZaItem.A_zimbraId, ZaDomain.A_domainType]		
+			attrs:[ZaDomain.A_description, ZaDomain.A_domainName,ZaDomain.A_zmailDomainStatus,ZaItem.A_zmailId, ZaDomain.A_domainType]		
 	}
     this.scrollSearchParams={
         query:this._currentQuery,
@@ -82,7 +82,7 @@ ZaDomainListController.prototype.show = function (doPush,openInNewTab) {
 			showBusy:true,
 			busyMsg:ZaMsg.BUSY_SEARCHING_DOMAINS,
 			skipCallbackIfCancelled:false,
-			attrs:[ZaDomain.A_description, ZaDomain.A_domainName,ZaDomain.A_zimbraDomainStatus,ZaItem.A_zimbraId, ZaDomain.A_domainType]
+			attrs:[ZaDomain.A_description, ZaDomain.A_domainName,ZaDomain.A_zmailDomainStatus,ZaItem.A_zmailId, ZaDomain.A_domainType]
     };
 	ZaSearch.searchDirectory(searchParams);
 }
@@ -90,7 +90,7 @@ ZaDomainListController.prototype.show = function (doPush,openInNewTab) {
 ZaDomainListController.prototype._show = 
 function (list,  openInNewTab, openInSearchTab, hasMore) {
 	this._updateUI(list, openInNewTab, openInSearchTab, hasMore);
-	//ZaApp.getInstance().pushView(ZaZimbraAdmin._DOMAINS_LIST_VIEW);
+	//ZaApp.getInstance().pushView(ZaZmailAdmin._DOMAINS_LIST_VIEW);
 	ZaApp.getInstance().pushView(this.getContentViewId(), openInNewTab, openInSearchTab);
     return;
 }
@@ -131,7 +131,7 @@ function (ev) {
                 this.show(false);
             }
 			this.changeActionsState();
-             ZaZimbraAdmin.getInstance().getOverviewPanelController().refreshRelatedTreeByEdit (ev.getDetails());
+             ZaZmailAdmin.getInstance().getOverviewPanelController().refreshRelatedTreeByEdit (ev.getDetails());
 		}
 	}
 }
@@ -139,12 +139,12 @@ function (ev) {
 
 ZaDomainListController.initPopupMenuMethod =
 function () {
-	if(ZaItem.hasRight(ZaDomain.RIGHT_CREATE_TOP_DOMAIN, ZaZimbraAdmin.currentAdminAccount)) {
+	if(ZaItem.hasRight(ZaDomain.RIGHT_CREATE_TOP_DOMAIN, ZaZmailAdmin.currentAdminAccount)) {
 		this._popupOperations[ZaOperation.NEW]=new ZaOperation(ZaOperation.NEW,ZaMsg.TBB_New, ZaMsg.DTBB_New_tt, "Domain", "DomainDis", new AjxListener(this, ZaDomainListController.prototype._newButtonListener));
 	}
 	this._popupOperations[ZaOperation.EDIT]=new ZaOperation(ZaOperation.EDIT,ZaMsg.TBB_Edit, ZaMsg.DTBB_Edit_tt, "Edit", "EditDis",  new AjxListener(this, ZaDomainListController.prototype._editButtonListener));    	
 	this._popupOperations[ZaOperation.DELETE]=new ZaOperation(ZaOperation.DELETE,ZaMsg.TBB_Delete, ZaMsg.DTBB_Delete_tt, "Delete", "DeleteDis", new AjxListener(this, ZaDomainListController.prototype._deleteButtonListener));    	    	
-    	if(ZaItem.hasRight(ZaDomain.RIGHT_CREATE_TOP_DOMAIN, ZaZimbraAdmin.currentAdminAccount)){
+    	if(ZaItem.hasRight(ZaDomain.RIGHT_CREATE_TOP_DOMAIN, ZaZmailAdmin.currentAdminAccount)){
 		this._popupOperations[ZaOperation.ADD_DOMAIN_ALIAS]=new ZaOperation(ZaOperation.ADD_DOMAIN_ALIAS,ZaMsg.TBB_AddDomainAlias, ZaMsg.DTBB_addDomainAlias_tt, "DomainAlias", "DomainAliasDis", new AjxListener(this, ZaDomainListController.prototype._addDomainAliasListener));
 	}
 	this._popupOperations[ZaOperation.VIEW_DOMAIN_ACCOUNTS]=new ZaOperation(ZaOperation.VIEW_DOMAIN_ACCOUNTS,ZaMsg.Domain_view_accounts, ZaMsg.Domain_view_accounts_tt, "Search", "SearchDis", new AjxListener(this, this.viewAccountsButtonListener));
@@ -236,7 +236,7 @@ function(ev) {
                 ZaApp.getInstance().getDomainAliasWizard(true).editDomainAlias (item, true) ;
             }
             var parentPath = ZaTree.getPathByArray([ZaMsg.OVP_home, ZaMsg.OVP_configure, ZaMsg.OVP_domains]);
-            ZaZimbraAdmin.getInstance().getOverviewPanelController().addObjectItem(parentPath, item.name, null, false, false, item, undefined, true);
+            ZaZmailAdmin.getInstance().getOverviewPanelController().addObjectItem(parentPath, item.name, null, false, false, item, undefined, true);
 		}
 	} else {
 		this.changeActionsState();	
@@ -270,7 +270,7 @@ function(item) {
         ZaApp.getInstance().getDomainAliasWizard(true).editDomainAlias (item, true) ;
     }
     var parentPath = ZaTree.getPathByArray([ZaMsg.OVP_home, ZaMsg.OVP_configure, ZaMsg.OVP_domains]);
-    ZaZimbraAdmin.getInstance().getOverviewPanelController().addObjectItem(parentPath, item.name, null, false, false, item, undefined, true);
+    ZaZmailAdmin.getInstance().getOverviewPanelController().addObjectItem(parentPath, item.name, null, false, false, item, undefined, true);
 }
 
 ZaDomainListController.prototype._addDomainAliasListener =
@@ -278,7 +278,7 @@ function (ev) {
     var domain = new ZaDomain () ;
     if(this._contentView.getSelectionCount() == 1) {
              var item = this._contentView.getSelection()[0];
-             domain[ZaDomain.A2_zimbraDomainAliasTarget] = item;
+             domain[ZaDomain.A2_zmailDomainAliasTarget] = item;
     }
     var domainAliasWizard = ZaApp.getInstance().getDomainAliasWizard () ;
     domainAliasWizard.registerCallback(DwtDialog.OK_BUTTON,
@@ -581,7 +581,7 @@ function (domain) {
         var sysacctNum = 0;
         var regularacctNum = 0;
         for (var i = 0; i < acctlist.length; i++) {
-            if(acctlist[i].attrs[ZaAccount.A_zimbraIsSystemAccount] == "TRUE")
+            if(acctlist[i].attrs[ZaAccount.A_zmailIsSystemAccount] == "TRUE")
                 sysacctNum ++;
             else regularacctNum++;
         }
@@ -639,7 +639,7 @@ function () {
                                         this._popupOperations[ZaOperation.AUTOPROV_WIZARD].enabled=false;
 			}
 			
-			if(item.attrs[ZaDomain.A_zimbraDomainStatus] == ZaDomain.DOMAIN_STATUS_SHUTDOWN) {
+			if(item.attrs[ZaDomain.A_zmailDomainStatus] == ZaDomain.DOMAIN_STATUS_SHUTDOWN) {
 					
 				if(this._popupOperations[ZaOperation.EDIT])
 					this._popupOperations[ZaOperation.EDIT].enabled=false;

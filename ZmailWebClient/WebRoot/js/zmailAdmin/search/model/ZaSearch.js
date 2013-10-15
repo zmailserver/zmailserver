@@ -66,19 +66,19 @@ ZaSearch._savedSearchToBeUpdated = true ; //initial value to be true
 
 ZaSearch.getPredefinedSavedSearchesForAdminOnly = function () {
     return   [
-        {name: ZaMsg.ss_admin_account , query: "(|(zimbraIsAdminAccount=TRUE)(zimbraIsDelegatedAdminAccount=TRUE))"}
+        {name: ZaMsg.ss_admin_account , query: "(|(zmailIsAdminAccount=TRUE)(zmailIsDelegatedAdminAccount=TRUE))"}
     ];
 }
                   
 ZaSearch.getPredefinedSavedSearches =  function () {
     return [
-        {name: ZaMsg.ss_external_accounts, query: "(zimbraIsExternalVirtualAccount=TRUE)"},
-        {name: ZaMsg.ss_locked_out_accounts, query: "(zimbraAccountStatus=*lockout*)"},
-        {name: ZaMsg.ss_closed_accounts, query: "(zimbraAccountStatus=*closed*)"},
-        {name: ZaMsg.ss_maintenance_accounts, query: "(zimbraAccountStatus=*maintenance*)"},
-        {name: ZaMsg.ss_non_active_accounts, query: "(!(zimbraAccountStatus=*active*))" },
-        {name: ZaMsg.ss_inactive_accounts_30, query: "(zimbraLastLogonTimestamp<=###JSON:{func: ZaSearch.getTimestampByDays, args:[-30]}###)"},
-        {name: ZaMsg.ss_inactive_accounts_90, query: "(zimbraLastLogonTimestamp<=###JSON:{func: ZaSearch.getTimestampByDays, args:[-90]}###)"}
+        {name: ZaMsg.ss_external_accounts, query: "(zmailIsExternalVirtualAccount=TRUE)"},
+        {name: ZaMsg.ss_locked_out_accounts, query: "(zmailAccountStatus=*lockout*)"},
+        {name: ZaMsg.ss_closed_accounts, query: "(zmailAccountStatus=*closed*)"},
+        {name: ZaMsg.ss_maintenance_accounts, query: "(zmailAccountStatus=*maintenance*)"},
+        {name: ZaMsg.ss_non_active_accounts, query: "(!(zmailAccountStatus=*active*))" },
+        {name: ZaMsg.ss_inactive_accounts_30, query: "(zmailLastLogonTimestamp<=###JSON:{func: ZaSearch.getTimestampByDays, args:[-30]}###)"},
+        {name: ZaMsg.ss_inactive_accounts_90, query: "(zmailLastLogonTimestamp<=###JSON:{func: ZaSearch.getTimestampByDays, args:[-90]}###)"}
     ];
 }
 
@@ -93,7 +93,7 @@ function() {
 
 
 ZaSearch.standardAttributes = [ZaAccount.A_displayname,
-							ZaItem.A_zimbraId,
+							ZaItem.A_zmailId,
 							ZaAlias.A_AliasTargetId,
 							ZaAccount.A_accountName,
 							ZaAccount.A_lastName,
@@ -101,31 +101,31 @@ ZaSearch.standardAttributes = [ZaAccount.A_displayname,
 							ZaAccount.A_uid,
 							ZaAccount.A_COSId,
 							ZaAccount.A_accountStatus,
-							ZaAccount.A_zimbraLastLogonTimestamp,
+							ZaAccount.A_zmailLastLogonTimestamp,
 							ZaAccount.A_description,
-							ZaAccount.A_zimbraIsSystemAccount,
-                            ZaAccount.A_zimbraIsDelegatedAdminAccount,
-                            ZaAccount.A_zimbraIsAdminAccount,
-                            ZaAccount.A_zimbraIsSystemResource,
-                            ZaAccount.A_zimbraAuthTokenValidityValue,
-                            ZaAccount.A_zimbraIsExternalVirtualAccount,
+							ZaAccount.A_zmailIsSystemAccount,
+                            ZaAccount.A_zmailIsDelegatedAdminAccount,
+                            ZaAccount.A_zmailIsAdminAccount,
+                            ZaAccount.A_zmailIsSystemResource,
+                            ZaAccount.A_zmailAuthTokenValidityValue,
+                            ZaAccount.A_zmailIsExternalVirtualAccount,
 							ZaDistributionList.A_mailStatus,
                             ZaDistributionList.A_isAdminGroup,
-							ZaResource.A_zimbraCalResType,
+							ZaResource.A_zmailCalResType,
 							ZaDomain.A_domainType,
 							ZaDomain.A_domainName,
-							ZaDomain.A_zimbraDomainStatus].join();
+							ZaDomain.A_zmailDomainStatus].join();
 /**
 * Sends SearchDirectoryRequest to the SOAP Servlet
 * params {
 * 	query - query string should be an LDAP-style filter string (RFC 2254)
-* 	sortBy - LDAP attribute name, default is zimbraId
+* 	sortBy - LDAP attribute name, default is zmailId
 * 	limit - the number of objects to return (0 is default and means all)
 * 	offset - the starting offset (0, 25, etc)
 * 	domain - the domain name to limit the search to (do not use if searching for domains)
 *	applyCos - whether or not (0/1) to apply the COS policy to account. specify 0 if only
 *	           requesting attrs that aren't inherited from COS
-*	attrs - array of of attributes to return ("displayName", "zimbraId", "zimbraAccountStatus")
+*	attrs - array of of attributes to return ("displayName", "zmailId", "zmailAccountStatus")
 *	sortAscending - whether to sort in ascending order (0/1), 1 is default
 *   types = array of types to return. legal values are: accounts|distributionlists|aliases|resources|domains, 
 * 		default is accounts
@@ -135,7 +135,7 @@ ZaSearch.standardAttributes = [ZaAccount.A_displayname,
 
 ZaSearch.searchDirectory =
 function (params) {
-	var soapDoc = AjxSoapDoc.create("SearchDirectoryRequest", ZaZimbraAdmin.URN, null);
+	var soapDoc = AjxSoapDoc.create("SearchDirectoryRequest", ZaZmailAdmin.URN, null);
 	if(params.query) {
 		soapDoc.set("query", params.query);
 		ZaSearch._currentQuery = params.query ;
@@ -231,7 +231,7 @@ ZaSearch.handleTooManyResultsException = function (ex, from) {
 }
 
 ZaSearch.findAccount = function(by, val) {
-	var soapDoc = AjxSoapDoc.create("SearchDirectoryRequest", ZaZimbraAdmin.URN, null);
+	var soapDoc = AjxSoapDoc.create("SearchDirectoryRequest", ZaZmailAdmin.URN, null);
 	soapDoc.getMethod().setAttribute("limit", "1");
 	var query = ["(",by,"=",val,")"].join("");
 	soapDoc.set("query", query);
@@ -390,7 +390,7 @@ ZaSearch.prototype.dynSelectSearchDomains = function (callArgs) {
 		params.callback = dataCallback;
 		params.sortBy = ZaDomain.A_domainName;
         	params.query = "";
-        	if(!ZaZimbraAdmin.hasGlobalDomainListAccess()) {
+        	if(!ZaZmailAdmin.hasGlobalDomainListAccess()) {
             		var domainNameList = ZaApp.getInstance()._domainNameList;
             		if(domainNameList && domainNameList instanceof Array) {
                 		for(var i = 0; i < domainNameList.length; i++) {
@@ -408,7 +408,7 @@ ZaSearch.prototype.dynSelectSearchDomains = function (callArgs) {
 		params.applyConfig = applyConfig;
 		params.busyMsg = ZaMsg.BUSY_SEARCHING_DOMAINS;
 		params.skipCallbackIfCancelled = false;
-        params.attrs = [ZaDomain.A_domainName,ZaDomain.A_zimbraDomainStatus,ZaItem.A_zimbraId, ZaDomain.A_domainType, ZaDomain.A_zimbraMailAddressValidationRegex];
+        params.attrs = [ZaDomain.A_domainName,ZaDomain.A_zmailDomainStatus,ZaItem.A_zmailId, ZaDomain.A_domainType, ZaDomain.A_zmailMailAddressValidationRegex];
 		ZaSearch.searchDirectory(params);
 	} catch (ex) {
 		ZaApp.getInstance().getCurrentController()._handleException(ex, "ZaSearch.prototype.dynSelectSearchDomains");		
@@ -433,7 +433,7 @@ ZaSearch.prototype.dynSelectSearchOnlyDomains = function (callArgs) {
                 params.busyId = busyId;
                 params.busyMsg = ZaMsg.BUSY_SEARCHING_DOMAINS;
                 params.skipCallbackIfCancelled = false;
-        params.attrs = [ZaDomain.A_domainName,ZaDomain.A_zimbraDomainStatus,ZaItem.A_zimbraId, ZaDomain.A_domainType];
+        params.attrs = [ZaDomain.A_domainName,ZaDomain.A_zmailDomainStatus,ZaItem.A_zmailId, ZaDomain.A_domainType];
                 ZaSearch.searchDirectory(params);
         } catch (ex) {
                 ZaApp.getInstance().getCurrentController()._handleException(ex, "ZaSearch.prototype.dynSelectSearchOnlyDomains"); 
@@ -456,7 +456,7 @@ ZaSearch.prototype.dynSelectSearchCoses = function (callArgs) {
 		params.callback = dataCallback;
 		params.sortBy = ZaCos.A_name;
                 params.query = "";
-                if(!ZaZimbraAdmin.hasGlobalCOSSListAccess()) {
+                if(!ZaZmailAdmin.hasGlobalCOSSListAccess()) {
                         var cosNameList = ZaApp.getInstance()._cosNameList;
                         if(cosNameList && (cosNameList instanceof Array) && cosNameList.length == 0) {
                             for(var i = 0; i < cosNameList.length; i++)
@@ -504,7 +504,7 @@ function(query, types, pagenum, orderby, isascending,  attrs, limit, domainName,
 	var offset = (pagenum-1) * limit;
 	attrs = (attrs != null)? attrs: ZaSearch.standardAttributes;
 	/*
-	var soapDoc = AjxSoapDoc.create("SearchDirectoryRequest", ZaZimbraAdmin.URN, null);
+	var soapDoc = AjxSoapDoc.create("SearchDirectoryRequest", ZaZmailAdmin.URN, null);
 	soapDoc.set("query", query);
 	if (domainName != null) {
 		soapDoc.getMethod().setAttribute("domain", domainName);
@@ -573,7 +573,7 @@ function() {
     retObj[ZaItem.DL] = 0;
 
     for (var i in retObj) {
-        if (!ZaZimbraAdmin.isGlobalAdmin())
+        if (!ZaZmailAdmin.isGlobalAdmin())
             retObj[i] = ZaSearch.getObjectNumberBySearch(i);
         else
             retObj[i] = ZaSearch.getObjectNumberByType(i);
@@ -585,7 +585,7 @@ function() {
 ZaSearch.getObjectNumberBySearch = function (type) {
     var query = "";
     if (type == ZaItem.ACCOUNT) {
-        query = "(!("+ ZaAccount.A_zimbraIsSystemAccount +"=TRUE))";
+        query = "(!("+ ZaAccount.A_zmailIsSystemAccount +"=TRUE))";
         type = ZaSearch.ACCOUNTS;
     } else if (type == ZaItem.ALIAS) {
         type = ZaSearch.ALIASES;
@@ -596,7 +596,7 @@ ZaSearch.getObjectNumberBySearch = function (type) {
     }
 
     var num = 0;
-    var soapDoc = AjxSoapDoc.create("SearchDirectoryRequest", ZaZimbraAdmin.URN, null);
+    var soapDoc = AjxSoapDoc.create("SearchDirectoryRequest", ZaZmailAdmin.URN, null);
     soapDoc.setMethodAttribute("types", type);
     soapDoc.setMethodAttribute("countOnly", 1);
 
@@ -617,7 +617,7 @@ ZaSearch.getObjectNumberBySearch = function (type) {
 
 ZaSearch.getObjectNumberByType = function (type) {
     var num = 0;
-    var soapDoc = AjxSoapDoc.create("CountObjectsRequest", ZaZimbraAdmin.URN, null);
+    var soapDoc = AjxSoapDoc.create("CountObjectsRequest", ZaZmailAdmin.URN, null);
     if (type == ZaItem.ACCOUNT) {
         type = "userAccount"; // exclude system account
     }
@@ -644,7 +644,7 @@ function(n) {
 	} else {
 		n = ZaSearch.escapeLdapQuery(n);
 		//n = String(n).replace(/([\\\\\\*\\(\\)])/g, "\\$1");
-		return ("(|(uid=*"+n+"*)(cn=*"+n+"*)(sn=*"+n+"*)(gn=*"+n+"*)(zimbraId="+n+"))");
+		return ("(|(uid=*"+n+"*)(cn=*"+n+"*)(sn=*"+n+"*)(gn=*"+n+"*)(zmailId="+n+"))");
 	}
 }
 
@@ -655,7 +655,7 @@ function(n) {
 	} else {
 		n = ZaSearch.escapeLdapQuery(n);
 		//n = String(n).replace(/([\\\\\\*\\(\\)])/g, "\\$1");
-		return ("(|(uid=*"+n+"*)(cn=*"+n+"*)(sn=*"+n+"*)(gn=*"+n+"*)(zimbraId="+n+")(zimbraDomainName=*"+n+"*))");
+		return ("(|(uid=*"+n+"*)(cn=*"+n+"*)(sn=*"+n+"*)(gn=*"+n+"*)(zmailId="+n+")(zmailDomainName=*"+n+"*))");
 	}
 }
 
@@ -666,7 +666,7 @@ function(n) {
         } else {
                 n = ZaSearch.escapeLdapQuery(n);
                 //n = String(n).replace(/([\\\\\\*\\(\\)])/g, "\\$1");
-                return ("(&(|(uid=*"+n+"*)(cn=*"+n+"*)(sn=*"+n+"*)(gn=*"+n+"*)(zimbraId="+n+")(zimbraDomainName=*"+n+"*))(zimbraDomainType=local))");
+                return ("(&(|(uid=*"+n+"*)(cn=*"+n+"*)(sn=*"+n+"*)(gn=*"+n+"*)(zmailId="+n+")(zmailDomainName=*"+n+"*))(zmailDomainType=local))");
         }
 }
 
@@ -676,12 +676,12 @@ function(n, types,excludeClosed) {
 	var query = [];
 	/*if (n == null || n == "") {
 		if(excludeClosed) {
-			return "!(zimbraAccountStatus=closed)";
+			return "!(zmailAccountStatus=closed)";
 		} else {
 			return "";
 		}*/
 	if(excludeClosed) {
-		query.push("(&(!(zimbraAccountStatus=closed))");
+		query.push("(&(!(zmailAccountStatus=closed))");
 	} 
 	
 	if (!AjxUtil.isEmpty(n)) {
@@ -694,11 +694,11 @@ function(n, types,excludeClosed) {
         var addedDLAliasFields = false;
         for (var i = 0 ; i < types.length; i ++) {
             if (types[i] == "domains") {
-                query.push ("(zimbraDomainName=*"+n+"*)") ;
+                query.push ("(zmailDomainName=*"+n+"*)") ;
             } else if(types[i] == ZaSearch.COSES) {
 		query.push("(cn=*" + n + "*)");
 	    } else if(types[i] == ZaSearch.ALIASES) {
-		query.push("(zimbraDomainName=*" + n + "*)(uid=*"+n+"*)");
+		query.push("(zmailDomainName=*" + n + "*)(uid=*"+n+"*)");
 
 	    }else {
             	if(!addedAddrFields) {
@@ -706,10 +706,10 @@ function(n, types,excludeClosed) {
             		addedAddrFields = true;
             	}
                 if (!addedAccResFields && (types[i] == "accounts" || types[i] == "resources")) {
-                    query.push ("(zimbraMailDeliveryAddress=*"+n+"*)");
+                    query.push ("(zmailMailDeliveryAddress=*"+n+"*)");
                     addedAccResFields = true;
                 } else if (!addedDLAliasFields && (types[i] == "distributionlists" || types[i] == "aliases")) {
-                    query.push("(zimbraMailAlias=*"+n+"*)(uid=*"+n+"*)");
+                    query.push("(zmailMailAlias=*"+n+"*)(uid=*"+n+"*)");
                     addedDLAliasFields = true;
                 } 
             }
@@ -742,7 +742,7 @@ ZaSearch.searchAliasByNameQuery = function(n, types, excludeClosed) {
     var query = [];
 
     if(excludeClosed) {
-        query.push("(&(!(zimbraAccountStatus=closed))");
+        query.push("(&(!(zmailAccountStatus=closed))");
     }
 
     if (!AjxUtil.isEmpty(n)) {
@@ -760,21 +760,21 @@ ZaSearch.searchAliasByNameQuery = function(n, types, excludeClosed) {
 
         for (var i = 0 ; i < types.length; i ++) {
             if (types[i] == "domains") {
-                query.push ("(zimbraDomainName=" + n + ")");
+                query.push ("(zmailDomainName=" + n + ")");
             } else if(types[i] == ZaSearch.COSES) {
                 query.push("(cn=" + n + ")");
             } else if(types[i] == ZaSearch.ALIASES) {
-                query.push("(zimbraDomainName=" + n + ")(uid=" + n + ")");
+                query.push("(zmailDomainName=" + n + ")(uid=" + n + ")");
             } else {
                 if(!addedAddrFields) {
                     query.push("(mail=" + n + ")(cn=" + n + ")(sn=" + n + ")(gn=" + n + ")(displayName=" + n + ")") ;
                     addedAddrFields = true;
                 }
                 if (!addedAccResFields && (types[i] == "accounts" || types[i] == "resources")) {
-                    query.push ("(zimbraMailDeliveryAddress=" + n + ")");
+                    query.push ("(zmailMailDeliveryAddress=" + n + ")");
                     addedAccResFields = true;
                 } else if (!addedDLAliasFields && (types[i] == "distributionlists" || types[i] == "aliases")) {
-                    query.push("(zimbraMailAlias=" + n + ")(uid=" + n + ")");
+                    query.push("(zmailMailAlias=" + n + ")(uid=" + n + ")");
                     addedDLAliasFields = true;
                 }
             }
@@ -820,7 +820,7 @@ function(n) {
 		return "";
 	} else {
 		n = String(n).replace(/([\\\\\\*\\(\\)])/g, "\\$1");
-		//return ("(|(uid=*"+n+"*)(cn=*"+n+"*)(sn=*"+n+"*)(gn=*"+n+"*)(displayName=*"+n+"*)(zimbraId="+n+")(mail=*"+n+"*)(zimbraMailAlias=*"+n+"*)(zimbraMailDeliveryAddress=*"+n+"*)(zimbraDomainName=*"+n+"*))");
+		//return ("(|(uid=*"+n+"*)(cn=*"+n+"*)(sn=*"+n+"*)(gn=*"+n+"*)(displayName=*"+n+"*)(zmailId="+n+")(mail=*"+n+"*)(zmailMailAlias=*"+n+"*)(zmailMailDeliveryAddress=*"+n+"*)(zmailDomainName=*"+n+"*))");
 		return ("(displayName=*"+n+"*)");
 	}
 }
@@ -978,7 +978,7 @@ function (domainName, controller) {
 ZaSearch.modifySavedSearches =
 function (savedSearchArray, callback) {
     if (ZaSearchField.canSaveSearch()){
-        var soapDoc = AjxSoapDoc.create("ModifyAdminSavedSearchesRequest", ZaZimbraAdmin.URN, null);
+        var soapDoc = AjxSoapDoc.create("ModifyAdminSavedSearchesRequest", ZaZmailAdmin.URN, null);
         for (var i=0; i < savedSearchArray.length; i ++) {
             var cSavedSearch = savedSearchArray[i] ;
             var el = soapDoc.set("search", cSavedSearch.query) ;
@@ -1002,7 +1002,7 @@ function (savedSearchArray, callback) {
 ZaSearch.getSavedSearches = 
 function (searchNameArr, callback) {
     if (ZaSearchField.canViewSavedSearch()) {
-        var soapDoc = AjxSoapDoc.create("GetAdminSavedSearchesRequest", ZaZimbraAdmin.URN, null);
+        var soapDoc = AjxSoapDoc.create("GetAdminSavedSearchesRequest", ZaZmailAdmin.URN, null);
         if (searchNameArr) {
             for (var i=0; i < searchNameArr.length; i ++) {
                 var el = soapDoc.set("search", "") ;
@@ -1050,7 +1050,7 @@ function () {
         //var currentSavedSearches = ZaSearch.getSavedSearches().Body.GetAdminSavedSearchesResponse.search;
         var currentSavedSearches = ZaApp.getInstance().getSavedSearchList();
         /*
-         * If we get saved search from server and have write-permission, we will         * replace all the "zimbraIsDomainAdminAccount" with "zimbraIsDelegatedA         * dminAccount" to update the query string for version update      
+         * If we get saved search from server and have write-permission, we will         * replace all the "zmailIsDomainAdminAccount" with "zmailIsDelegatedA         * dminAccount" to update the query string for version update      
          */ 
         if ( (!AjxUtil.isEmpty(currentSavedSearches)) && ( ZaSearchField.canSaveSearch() )){
             var modifiedSearches = [];
@@ -1059,9 +1059,9 @@ function () {
                var currentName = currentSavedSearches[i].name;
                var currentContent = currentSavedSearches[i].query;
     
-               if (currentContent && currentContent.search(/zimbraIsDomainAdminAccount/) != -1){
+               if (currentContent && currentContent.search(/zmailIsDomainAdminAccount/) != -1){
              
-                  currentContent = currentContent.replace(/zimbraIsDomainAdminAccount/g , "zimbraIsDelegatedAdminAccount"); //'g' is used for global replace
+                  currentContent = currentContent.replace(/zmailIsDomainAdminAccount/g , "zmailIsDelegatedAdminAccount"); //'g' is used for global replace
                   modifiedSearches.push ({
                       name  : currentName,
                       query : currentContent

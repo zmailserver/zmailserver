@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -29,38 +29,38 @@ import javax.xml.parsers.DocumentBuilder;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.offline.OfflineDataSource;
-import com.zimbra.cs.db.DbDataSource;
-import com.zimbra.cs.db.DbDataSource.DataSourceItem;
-import com.zimbra.cs.mime.ParsedContact;
-import com.zimbra.cs.offline.OfflineLog;
-import com.zimbra.cs.offline.ab.Change;
-import com.zimbra.cs.offline.ab.Change.Type;
-import com.zimbra.cs.offline.ab.LocalData;
-import com.zimbra.cs.offline.ab.SyncState;
-import com.zimbra.cs.offline.ab.yc.ContactData;
-import com.zimbra.cs.offline.ab.yc.RemoteId;
-import com.zimbra.cs.offline.util.Xml;
-import com.zimbra.cs.offline.util.yc.Action;
-import com.zimbra.cs.offline.util.yc.Contact;
-import com.zimbra.cs.offline.util.yc.ContactAddOrUpdate;
-import com.zimbra.cs.offline.util.yc.ContactChanges;
-import com.zimbra.cs.offline.util.yc.ContactOperation;
-import com.zimbra.cs.offline.util.yc.ContactRemove;
-import com.zimbra.cs.offline.util.yc.ContactSync;
-import com.zimbra.cs.offline.util.yc.Fields;
-import com.zimbra.cs.offline.util.yc.PutRequest;
-import com.zimbra.cs.offline.util.yc.PutResponse;
-import com.zimbra.cs.offline.util.yc.SyncRequest;
-import com.zimbra.cs.offline.util.yc.SyncResponse;
-import com.zimbra.cs.offline.util.yc.SyncResult;
-import com.zimbra.cs.offline.util.yc.YContactException;
-import com.zimbra.cs.offline.util.yc.YContactSyncResult;
-import com.zimbra.cs.offline.util.yc.oauth.OAuthException;
-import com.zimbra.cs.offline.util.yc.oauth.OAuthManager;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.offline.OfflineDataSource;
+import org.zmail.cs.db.DbDataSource;
+import org.zmail.cs.db.DbDataSource.DataSourceItem;
+import org.zmail.cs.mime.ParsedContact;
+import org.zmail.cs.offline.OfflineLog;
+import org.zmail.cs.offline.ab.Change;
+import org.zmail.cs.offline.ab.Change.Type;
+import org.zmail.cs.offline.ab.LocalData;
+import org.zmail.cs.offline.ab.SyncState;
+import org.zmail.cs.offline.ab.yc.ContactData;
+import org.zmail.cs.offline.ab.yc.RemoteId;
+import org.zmail.cs.offline.util.Xml;
+import org.zmail.cs.offline.util.yc.Action;
+import org.zmail.cs.offline.util.yc.Contact;
+import org.zmail.cs.offline.util.yc.ContactAddOrUpdate;
+import org.zmail.cs.offline.util.yc.ContactChanges;
+import org.zmail.cs.offline.util.yc.ContactOperation;
+import org.zmail.cs.offline.util.yc.ContactRemove;
+import org.zmail.cs.offline.util.yc.ContactSync;
+import org.zmail.cs.offline.util.yc.Fields;
+import org.zmail.cs.offline.util.yc.PutRequest;
+import org.zmail.cs.offline.util.yc.PutResponse;
+import org.zmail.cs.offline.util.yc.SyncRequest;
+import org.zmail.cs.offline.util.yc.SyncResponse;
+import org.zmail.cs.offline.util.yc.SyncResult;
+import org.zmail.cs.offline.util.yc.YContactException;
+import org.zmail.cs.offline.util.yc.YContactSyncResult;
+import org.zmail.cs.offline.util.yc.oauth.OAuthException;
+import org.zmail.cs.offline.util.yc.oauth.OAuthManager;
 
 public class YContactSync {
 
@@ -185,7 +185,7 @@ public class YContactSync {
             Type type = change.getType();
             switch (type) {
             case ADD:
-                com.zimbra.cs.mailbox.Contact mboxContact = this.localData.getContact(itemId);
+                org.zmail.cs.mailbox.Contact mboxContact = this.localData.getContact(itemId);
                 Contact contact = ContactData.getYContactFromZcsContact(mboxContact, Action.ADD);
                 contact.setOp(Action.ADD);
                 String refId = UUID.randomUUID().toString();

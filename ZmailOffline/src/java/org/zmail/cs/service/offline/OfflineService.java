@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.offline;
+package org.zmail.cs.service.offline;
 
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.cs.offline.common.OfflineConstants;
-import com.zimbra.soap.DocumentDispatcher;
-import com.zimbra.soap.DocumentService;
-import com.zimbra.soap.SoapContextExtension;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.cs.offline.common.OfflineConstants;
+import org.zmail.soap.DocumentDispatcher;
+import org.zmail.soap.DocumentService;
+import org.zmail.soap.SoapContextExtension;
 
 public class OfflineService implements DocumentService {
 

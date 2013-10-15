@@ -29,7 +29,7 @@
  * XML representation:
  * <pre>
  * &lt;!ELEMENT share (grantee,grantor,link)>
- * &lt;!ATTLIST share xmlns CDATA #FIXED "urn:zimbraShare">
+ * &lt;!ATTLIST share xmlns CDATA #FIXED "urn:zmailShare">
  * &lt;!ATTLIST share version NMTOKEN #FIXED "0.1">
  * &lt;!ATTLIST share action (new|edit|delete|accept|decline) #REQUIRED>
  *
@@ -81,7 +81,7 @@ ZmShare = function(params) {
 
 // Constants
 
-ZmShare.URI = "urn:zimbraShare";
+ZmShare.URI = "urn:zmailShare";
 ZmShare.VERSION = "0.2";
 ZmShare.PREV_VERSION = "0.1"; // keep this till it's no longer supported
 
@@ -379,13 +379,13 @@ ZmShare.ACTIONS[ZmShare.ROLE_ADMIN]		= ZmShare.getRoleActions(ZmShare.ROLE_ADMIN
  */
 ZmShare.createFromDom =
 function(doc) {
-	// NOTE: This code initializes share info from the Zimbra share format, v0.1
+	// NOTE: This code initializes share info from the Zmail share format, v0.1
 	var share = new ZmShare();
 
 	var shareNode = doc.documentElement;
 	share.version = shareNode.getAttribute("version");
 	if (share.version != ZmShare.VERSION && share.version != ZmShare.PREV_VERSION) { //support previous version here for smooth transition. 
-		throw "Zimbra share version must be " + ZmShare.VERSION;
+		throw "Zmail share version must be " + ZmShare.VERSION;
 	}
 	share.action = shareNode.getAttribute("action");
 	
@@ -642,7 +642,7 @@ function(notes, replyType, shareAction, result) {
  */
 ZmShare.prototype._sendShareNotification =
 function(userEmail, folderId, notes, action, callback) {
-    var soapDoc = AjxSoapDoc.create("SendShareNotificationRequest", "urn:zimbraMail");
+    var soapDoc = AjxSoapDoc.create("SendShareNotificationRequest", "urn:zmailMail");
     if (action != ZmShare.NEW)
         soapDoc.setMethodAttribute("action", action);
     var itemNode = soapDoc.set("item");
@@ -841,7 +841,7 @@ function() {
  */
 ZmShare.prototype._shareAction =
 function(operation, actionAttrs, grantAttrs, callback, batchCmd, notes) {
-	var soapDoc = AjxSoapDoc.create("FolderActionRequest", "urn:zimbraMail");
+	var soapDoc = AjxSoapDoc.create("FolderActionRequest", "urn:zmailMail");
 
 	var actionNode = soapDoc.set("action");
 	actionNode.setAttribute("op", operation);
@@ -882,7 +882,7 @@ function(operation, actionAttrs, grantAttrs, callback, batchCmd, notes) {
 ZmShare.prototype._shareActionJson =
 function(operation, actionAttrs, grantAttrs, callback, batchCmd) {
 
-	var jsonObj = {FolderActionRequest:{_jsns:"urn:zimbraMail"}};
+	var jsonObj = {FolderActionRequest:{_jsns:"urn:zmailMail"}};
 	var action = jsonObj.FolderActionRequest.action = {op:operation};
 	if (this.object.rid && this.object.zid) {
 		action.id = this.object.zid + ":" + this.object.rid;
@@ -1156,7 +1156,7 @@ ZmShare._getRoleFromPerm = ZmShare.getRoleFromPerm;
  * Revokes all grants for the given zid (one whose account has been
  * removed).
  *
- * @param {String}	zid			the zimbra ID
+ * @param {String}	zid			the zmail ID
  * @param {constant}	granteeType	the grantee type (see <code>ZmShare.TYPE_</code> constants)
  * @param {AjxCallback}	callback		the client callback
  * @param {ZmBatchCommand}	batchCmd		the batch command
@@ -1166,7 +1166,7 @@ function(zid, granteeType, callback, batchCmd) {
 
 	var jsonObj = {
 		FolderActionRequest: {
-			_jsns:	"urn:zimbraMail",
+			_jsns:	"urn:zmailMail",
 			action:	{
 				op:		"revokeorphangrants",
 				id:		ZmFolder.ID_ROOT,

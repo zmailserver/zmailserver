@@ -71,7 +71,7 @@ function(title) {
 	}
 	
 	this._currentAppLabel.setText(title);
-	//this._currentAppLabel.setImage(ZaZimbraAdmin.APP_ICON[appName]);
+	//this._currentAppLabel.setImage(ZaZmailAdmin.APP_ICON[appName]);
 }
 
 ZaCurrentAppToolBar.WIDTH = {};

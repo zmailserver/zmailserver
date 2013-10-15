@@ -24,6 +24,6 @@
 		<property type="string" name="ZDSurveyZimlet_RemindMeInSeconds" value="604800"/>
 		
 		<!-- Survey URL -->
-		<property type="string" name="ZDSurveyZimlet_SurveyURL" value="https://www.surveymonkey.com/s/ZimbraDesktop"/>	
+		<property type="string" name="ZDSurveyZimlet_SurveyURL" value="https://www.surveymonkey.com/s/ZmailDesktop"/>	
 	</userProperties>
 </zimlet>

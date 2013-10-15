@@ -89,7 +89,7 @@ ZaServerMBXStatsPage.prototype._render = function (server) {
 //data instance of the xform
 ZaServerMBXStatsPage.prototype.getMbxes = function ( targetServer, offset, sortBy, sortAscending, callback){
 	var result = { totalPage: 0, curPage:0, hasMore: false, mbxes: new Array() };
-	var soapDoc = AjxSoapDoc.create("GetQuotaUsageRequest", ZaZimbraAdmin.URN, null);
+	var soapDoc = AjxSoapDoc.create("GetQuotaUsageRequest", ZaZmailAdmin.URN, null);
 	
 	this._prevAscending = sortAscending ;
 	this._prevSortBy = sortBy ;
@@ -250,10 +250,10 @@ function (refresh){
 	var instance = null ;
 
 	if ( !this._initialized || refresh) {
-		//check whether the targetServer has the zimbra store enabled
+		//check whether the targetServer has the zmail store enabled
 		var serverAttrs = this._server.attrs ;
 		var mbxesObj = {};
-		if (serverAttrs && (!(serverAttrs[ZaServer.A_zimbraMailboxServiceInstalled] && serverAttrs[ZaServer.A_zimbraMailboxServiceEnabled]))){
+		if (serverAttrs && (!(serverAttrs[ZaServer.A_zmailMailboxServiceInstalled] && serverAttrs[ZaServer.A_zmailMailboxServiceEnabled]))){
 			mbxesObj.mbxes = [] ;
 		}else{
 			//reserve the previous sort and ascending information. so the list hearder can display currectly

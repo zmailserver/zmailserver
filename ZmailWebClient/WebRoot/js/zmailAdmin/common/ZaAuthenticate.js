@@ -29,7 +29,7 @@ function() {
 
 ZaAuthenticate.prototype.changePassword = 
 function (uname,oldPass,newPass,callback) {
-    var soapDoc = AjxSoapDoc.create("ChangePasswordRequest", "urn:zimbraAccount");
+    var soapDoc = AjxSoapDoc.create("ChangePasswordRequest", "urn:zmailAccount");
     var el = soapDoc.set("account", uname);
     el.setAttribute("by", "name");
     soapDoc.set("oldPassword", oldPass);
@@ -46,7 +46,7 @@ function (uname,oldPass,newPass,callback) {
 
 ZaAuthenticate.prototype.execute =
 function (uname, pword, callback) {
-	var soapDoc = AjxSoapDoc.create("AuthRequest", ZaZimbraAdmin.URN, null);
+	var soapDoc = AjxSoapDoc.create("AuthRequest", ZaZmailAdmin.URN, null);
 	this.uname = uname;
 	soapDoc.set("name", uname);
 	soapDoc.set("password", pword);

@@ -14,26 +14,26 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.briefcase.file;
+package org.zmail.qa.selenium.projects.desktop.tests.briefcase.file;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.FileItem;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.ui.Shortcut;
-import com.zimbra.qa.selenium.framework.util.GeneralUtility;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.SleepUtil;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.*;
+import org.zmail.qa.selenium.framework.items.FileItem;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.ui.Shortcut;
+import org.zmail.qa.selenium.framework.util.GeneralUtility;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.SleepUtil;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.*;
 
 import org.testng.annotations.AfterMethod;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
 
 public class MoveFile extends AjaxCommonTest {
 
@@ -44,22 +44,22 @@ public class MoveFile extends AjaxCommonTest {
 
 		// Make sure we are using an account with message view
 		// super.startingAccountPreferences = new HashMap<String, String>()
-		// {{put("zimbraPrefGroupMailBy", "message");}};
+		// {{put("zmailPrefGroupMailBy", "message");}};
 	}
 
 	@Test(description = "Upload file through RestUtil - move & verify through GUI", groups = { "smoke" })
 	public void MoveFile_01() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem folderItem = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
 
-		String name = "folder" + ZimbraSeleniumProperties.getUniqueString();
+		String name = "folder" + ZmailSeleniumProperties.getUniqueString();
 
 		// Create a subfolder to move the message into i.e. Briefcase/subfolder
 		String briefcaseFolderId = folderItem.getId();
 
-		account.soapSend("<CreateFolderRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+ "<folder name='" + name + "' l='" + briefcaseFolderId + "'/>"
 				+ "</CreateFolderRequest>");
 
@@ -74,7 +74,7 @@ public class MoveFile extends AjaxCommonTest {
 		app.zPageBriefcase.zListItem(Action.A_LEFTCLICK, subFolder);
 
 		// Create file item
-		String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+		String filePath = ZmailSeleniumProperties.getBaseDirectory()
 		+ "/data/public/other/putty.log";
 		
 		FileItem fileItem = new FileItem(filePath);
@@ -85,7 +85,7 @@ public class MoveFile extends AjaxCommonTest {
 		// Save uploaded file to briefcase through SOAP
 		account.soapSend(
 
-		"<SaveDocumentRequest xmlns='urn:zimbraMail'>" +
+		"<SaveDocumentRequest xmlns='urn:zmailMail'>" +
 
 		"<doc l='" + folderItem.getId() + "'>" +
 
@@ -134,7 +134,7 @@ public class MoveFile extends AjaxCommonTest {
 
 	@Test(description = "Move File using 'm' keyboard shortcut", groups = { "functional" })
 	public void MoveFile_02() throws HarnessException {
-	   ZimbraAccount account = app.zGetActiveAccount();
+	   ZmailAccount account = app.zGetActiveAccount();
 
 	   FolderItem briefcaseRootFolder = FolderItem.importFromSOAP(account,
 	         SystemFolder.Briefcase);
@@ -144,14 +144,14 @@ public class MoveFile extends AjaxCommonTest {
 	   Shortcut shortcut = Shortcut.S_MOVE;
 
 	   String[] subFolderNames = {
-	         "subFolderName1" + ZimbraSeleniumProperties.getUniqueString(),
-	         "subFolderName2" + ZimbraSeleniumProperties.getUniqueString() };
+	         "subFolderName1" + ZmailSeleniumProperties.getUniqueString(),
+	         "subFolderName2" + ZmailSeleniumProperties.getUniqueString() };
 
 	   FolderItem[] subFolders = new FolderItem[subFolderNames.length];
 
 	   // Create sub-folders to move the message from/to: Briefcase/sub-folder
 	   for (int i = 0; i < subFolderNames.length; i++) {
-	      account.soapSend("<CreateFolderRequest xmlns='urn:zimbraMail'>"
+	      account.soapSend("<CreateFolderRequest xmlns='urn:zmailMail'>"
 	            + "<folder name='" + subFolderNames[i] + "' l='"
 	            + briefcaseRootFolderId + "'/>" + "</CreateFolderRequest>");
 
@@ -167,7 +167,7 @@ public class MoveFile extends AjaxCommonTest {
 	         true);
 
 	   // Create file item
-	   String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+	   String filePath = ZmailSeleniumProperties.getBaseDirectory()
 	         + "/data/public/other/putty.log";
 
 	   FileItem fileItem = new FileItem(filePath);
@@ -177,7 +177,7 @@ public class MoveFile extends AjaxCommonTest {
 
 	   // Save uploaded file to briefcase through SOAP
 	   account.soapSend(
-	         "<SaveDocumentRequest xmlns='urn:zimbraMail'>" +
+	         "<SaveDocumentRequest xmlns='urn:zmailMail'>" +
 	         "<doc l='" + subFolders[0].getId() + "'>" +
 	         "<upload id='" + attachmentId + "'/>" +
 	         "</doc>" +
@@ -238,17 +238,17 @@ public class MoveFile extends AjaxCommonTest {
 
 	@Test(description = "Upload file through RestUtil - move using Right Click Context Menu & verify through GUI", groups = { "functional" })
 	public void MoveFile_03() throws HarnessException {
-	   ZimbraAccount account = app.zGetActiveAccount();
+	   ZmailAccount account = app.zGetActiveAccount();
 
 	   FolderItem folderItem = FolderItem.importFromSOAP(account,
 	         SystemFolder.Briefcase);
 
 	   String briefcaseFolderId = folderItem.getId();
 
-	   String name = "subFolder" + ZimbraSeleniumProperties.getUniqueString();
+	   String name = "subFolder" + ZmailSeleniumProperties.getUniqueString();
 
 	   // Create a subfolder to move the message into i.e. Briefcase/subfolder
-	   account.soapSend("<CreateFolderRequest xmlns='urn:zimbraMail'>"
+	   account.soapSend("<CreateFolderRequest xmlns='urn:zmailMail'>"
 	         + "<folder name='" + name + "' l='" + briefcaseFolderId + "'/>"
 	         + "</CreateFolderRequest>");
 
@@ -263,7 +263,7 @@ public class MoveFile extends AjaxCommonTest {
 	   app.zPageBriefcase.zListItem(Action.A_LEFTCLICK, subFolderItem);
 
 	   // Create file item
-	   String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+	   String filePath = ZmailSeleniumProperties.getBaseDirectory()
 	         + "/data/public/other/putty.log";
 
 	   FileItem fileItem = new FileItem(filePath);
@@ -273,7 +273,7 @@ public class MoveFile extends AjaxCommonTest {
 
 	   // Save uploaded file to briefcase through SOAP
 	   account.soapSend(
-	         "<SaveDocumentRequest xmlns='urn:zimbraMail'>" +
+	         "<SaveDocumentRequest xmlns='urn:zmailMail'>" +
 	         "<doc l='" + folderItem.getId() + "'>" +
 	         "<upload id='" + attachmentId + "'/>" +
 	         "</doc>" +
@@ -339,6 +339,6 @@ public class MoveFile extends AjaxCommonTest {
       // if account is not reset, ZCS will be confused, and the next
       // uploaded file
       // will be deleted per previous command.
-      ZimbraAccount.ResetAccountZDC();
+      ZmailAccount.ResetAccountZDC();
 	}
 }

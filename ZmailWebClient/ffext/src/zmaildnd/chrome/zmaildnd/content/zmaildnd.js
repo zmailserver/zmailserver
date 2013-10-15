@@ -113,30 +113,30 @@ var zDnDService = {
 	}
 };
 
-var ZimbraDnD = {
+var ZmailDnD = {
 	butEle: null,
     evtAdded: false,
 	init: function(e) {
-        ZimbraDnD.evtAdded = false;
+        ZmailDnD.evtAdded = false;
         var oZmCv = e.target;
 		var el = e.target.ownerDocument.getElementById(oZmCv.id + '_zdnd_tooltip');
 		if (el) {
 			el.style.display = "block";
 		}
         if (oZmCv.className) {
-          oZmCv.addEventListener("dragdrop", ZimbraDnD.onDrop, false);
-          if(!ZimbraDnD.evtAdded) {
-            oZmCv.addEventListener("drop", ZimbraDnD.onDrop, false);
+          oZmCv.addEventListener("dragdrop", ZmailDnD.onDrop, false);
+          if(!ZmailDnD.evtAdded) {
+            oZmCv.addEventListener("drop", ZmailDnD.onDrop, false);
           }    
-          oZmCv.addEventListener("dragenter", ZimbraDnD.checkDrag, false);
-          oZmCv.addEventListener("dragover", ZimbraDnD.checkDrag, false);
+          oZmCv.addEventListener("dragenter", ZmailDnD.checkDrag, false);
+          oZmCv.addEventListener("dragover", ZmailDnD.checkDrag, false);
         }
 		zUploadService.fileInputName = "_attFile_";
 	},
 	onDrop: function(ev) {
         try {
 			nsDragAndDrop.drop(ev, zDnDService);
-            ZimbraDnD.evtAdded = true;
+            ZmailDnD.evtAdded = true;
 		} catch(ex) {
 			// do nothing
 		}
@@ -146,4 +146,4 @@ var ZimbraDnD = {
     }
 };
 
-document.addEventListener("ZimbraDnD", function(e) { ZimbraDnD.init(e); }, false, true);
+document.addEventListener("ZmailDnD", function(e) { ZmailDnD.init(e); }, false, true);

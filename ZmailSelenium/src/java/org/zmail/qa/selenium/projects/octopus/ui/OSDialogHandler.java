@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.octopus.ui;
+package org.zmail.qa.selenium.projects.octopus.ui;
 /*
  * @author:Hrushikesh Amdekar
  * This class can be used to write the Dialog Handling functions on OS system like (MAC, windows etc.)
@@ -27,9 +27,9 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import com.cobra.ldtp.Ldtp;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.OperatingSystem;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.OperatingSystem;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
 
 public class OSDialogHandler {
 
@@ -61,7 +61,7 @@ public class OSDialogHandler {
 	{
 		//Constructor to initialize the OSDialogHandlerClass.
 		osType= OperatingSystem.getOSType().toString();
-		BrowserType= ZimbraSeleniumProperties.getStringProperty("browser");
+		BrowserType= ZmailSeleniumProperties.getStringProperty("browser");
 		SetBrowserType();
 
 	}

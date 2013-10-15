@@ -984,15 +984,15 @@ a.accept,a.tentative,a.decline{
 }
 
 .Attachment{
-	background: transparent url("@AppContextPath@/img/zimbra/ImgAttachment.png?v=@jsVersion@") no-repeat top left;
+	background: transparent url("@AppContextPath@/img/zmail/ImgAttachment.png?v=@jsVersion@") no-repeat top left;
 }
 
 .Flag{
-	background: transparent url("@AppContextPath@/img/zimbra/ImgFlagRed.png?v=@jsVersion@") no-repeat top left;
+	background: transparent url("@AppContextPath@/img/zmail/ImgFlagRed.png?v=@jsVersion@") no-repeat top left;
 }
 
 .Edit{
-	background: transparent url("@AppContextPath@/img/zimbra/ImgEdit.png?v=@jsVersion@") no-repeat top left;
+	background: transparent url("@AppContextPath@/img/zmail/ImgEdit.png?v=@jsVersion@") no-repeat top left;
 }
 
 .Msg {

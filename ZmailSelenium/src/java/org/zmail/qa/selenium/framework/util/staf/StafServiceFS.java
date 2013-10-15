@@ -14,9 +14,9 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.util.staf;
+package org.zmail.qa.selenium.framework.util.staf;
 
-import com.zimbra.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.HarnessException;
 
 /**
  * Use the STAF FS service to execute a command

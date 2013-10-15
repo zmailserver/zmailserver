@@ -14,14 +14,14 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.util.performance;
+package org.zmail.qa.selenium.framework.util.performance;
 
 import java.util.*;
 
 import org.apache.log4j.*;
 
-import com.zimbra.qa.selenium.framework.core.ClientSessionFactory;
-import com.zimbra.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.core.ClientSessionFactory;
+import org.zmail.qa.selenium.framework.util.*;
 
 
 /**
@@ -47,7 +47,7 @@ public class PerfMetrics {
 		
 		// Print the server version
 		try {
-			traceLog.info("Server Version: "+ ZimbraSeleniumProperties.zimbraGetVersionString());
+			traceLog.info("Server Version: "+ ZmailSeleniumProperties.zmailGetVersionString());
 		} catch (HarnessException e) {
 			logger.warn("Unable to determine the server version to log into the perf output.", e);
 		}
@@ -136,8 +136,8 @@ public class PerfMetrics {
 	
 	
 	/**
-	 * Return a map of URL query parameters, required to enable perf metrics from the Zimbra ajax app.
-	 * See config.properties performance.metrics.query value (per http://bugzilla.zimbra.com/show_bug.cgi?id=61972#c11 : perfMetric=1)
+	 * Return a map of URL query parameters, required to enable perf metrics from the Zmail ajax app.
+	 * See config.properties performance.metrics.query value (per http://bugzilla.zmail.com/show_bug.cgi?id=61972#c11 : perfMetric=1)
 	 * @return
 	 */
 	public Map<String, String> getQueryMap() {
@@ -148,8 +148,8 @@ public class PerfMetrics {
 		// But, if not specified, default to the non-specific property
 		// i.e. "coverage.query"
 		//
-		String property = ZimbraSeleniumProperties.getStringProperty("performance.metrics.query", "");
-		String appPoperty = ZimbraSeleniumProperties.getStringProperty("performance.metrics.query."+ ZimbraSeleniumProperties.getAppType(), null );
+		String property = ZmailSeleniumProperties.getStringProperty("performance.metrics.query", "");
+		String appPoperty = ZmailSeleniumProperties.getStringProperty("performance.metrics.query."+ ZmailSeleniumProperties.getAppType(), null );
 		if ( appPoperty != null ) {
 			property = appPoperty; // Override the default
 		}
@@ -167,7 +167,7 @@ public class PerfMetrics {
 	}
 
 	/**
-	 * Get the perf metric value.  See http://bugzilla.zimbra.com/show_bug.cgi?id=61972
+	 * Get the perf metric value.  See http://bugzilla.zmail.com/show_bug.cgi?id=61972
 	 * @param key
 	 * @param type
 	 * @return

@@ -14,10 +14,10 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_videos" version="1.2" description="Watch video.">
+<zimlet name="org_zmail_videos" version="1.2" description="Watch video.">
     <include>videos.js</include>
     <includeCSS>videos.css</includeCSS>
-    <handlerObject>Com_Zimbra_Video</handlerObject>
+    <handlerObject>Com_Zmail_Video</handlerObject>
 
     <contentObject>
         <matchOn>

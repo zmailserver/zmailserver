@@ -38,7 +38,7 @@ UT.test("Show compose page", {
 UT.test("New window compose", {
 
 	teardown: function() {
-		ZmZimbraMail.closeChildWindows();
+		ZmZmailMail.closeChildWindows();
 	}},
 
     // New window compose.

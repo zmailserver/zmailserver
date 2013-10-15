@@ -189,7 +189,7 @@ TypePad.prototype.handleBlogListResponse = function(result) {
 		*/	
 	}catch(ex){
 		DBG.println(AjxDebug.DBG1,'unable to post blog :'+ex);
-		this.controller.showWarningMsg(Com_Zimbra_Blog.UNABLE_TO_FETCH);
+		this.controller.showWarningMsg(Com_Zmail_Blog.UNABLE_TO_FETCH);
 	}	
 	
 };
@@ -228,7 +228,7 @@ TypePad.prototype.handleCategoryResponse = function(result) {
 
 	}catch(ex){
 		DBG.println(AjxDebug.DBG1,'unable to post blog :'+ex);
-		this.controller.showWarningMsg(Com_Zimbra_Blog.UNABLE_TO_FETCH_CATEGORY);
+		this.controller.showWarningMsg(Com_Zmail_Blog.UNABLE_TO_FETCH_CATEGORY);
 	}	
 
 	this.categoryHandler.run(categories);			

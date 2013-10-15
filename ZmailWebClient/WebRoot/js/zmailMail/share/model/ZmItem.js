@@ -711,7 +711,7 @@ ZmItem.move =
 function(itemId, folderId, callback, errorCallback, accountName) {
 	var json = {
 		ItemActionRequest: {
-			_jsns: "urn:zimbraMail",
+			_jsns: "urn:zmailMail",
 			action: {
 				id:	itemId instanceof Array ? itemId.join() : itemId,
 				op:	"move",
@@ -852,7 +852,7 @@ ZmItem.rename =
 function(itemId, newName, callback, errorCallback, accountName) {
     var json = {
 		ItemActionRequest: {
-			_jsns: "urn:zimbraMail",
+			_jsns: "urn:zmailMail",
 			action: {
 				id:	itemId instanceof Array ? itemId[0] : itemId,
 				op:	"rename",

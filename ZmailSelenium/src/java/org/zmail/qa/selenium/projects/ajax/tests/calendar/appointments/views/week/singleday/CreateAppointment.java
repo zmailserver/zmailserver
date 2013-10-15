@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.calendar.appointments.views.week.singleday;
+package org.zmail.qa.selenium.projects.ajax.tests.calendar.appointments.views.week.singleday;
 
 import java.util.Calendar;
 import java.util.HashMap;
 
 import org.testng.annotations.Test;
-import com.zimbra.qa.selenium.framework.items.AppointmentItem;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.CalendarWorkWeekTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.calendar.FormApptNew;
+import org.zmail.qa.selenium.framework.items.AppointmentItem;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.CalendarWorkWeekTest;
+import org.zmail.qa.selenium.projects.ajax.ui.calendar.FormApptNew;
 
 public class CreateAppointment extends CalendarWorkWeekTest {
 
@@ -38,7 +38,7 @@ public class CreateAppointment extends CalendarWorkWeekTest {
 		super.startingAccountPreferences = new HashMap<String, String>() {
 			private static final long serialVersionUID = -2913827779459595178L;
 		{
-		    put("zimbraPrefCalendarInitialView", "week");
+		    put("zmailPrefCalendarInitialView", "week");
 		}};
 
 	}
@@ -52,8 +52,8 @@ public class CreateAppointment extends CalendarWorkWeekTest {
 		// Create appointment
 		AppointmentItem appt = new AppointmentItem();
 		Calendar now = this.calendarWeekDayUTC;
-		appt.setSubject("appointment" + ZimbraSeleniumProperties.getUniqueString());
-		appt.setContent("content" + ZimbraSeleniumProperties.getUniqueString());
+		appt.setSubject("appointment" + ZmailSeleniumProperties.getUniqueString());
+		appt.setContent("content" + ZmailSeleniumProperties.getUniqueString());
 		appt.setStartTime(new ZDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH) + 1, now.get(Calendar.DAY_OF_MONTH), 12, 0, 0));
 		appt.setEndTime(new ZDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH) + 1, now.get(Calendar.DAY_OF_MONTH), 14, 0, 0));
 	
@@ -79,19 +79,19 @@ public class CreateAppointment extends CalendarWorkWeekTest {
 	public void CreateAppointment_02() throws HarnessException {
 		
 		// Create appointment data
-		ZimbraResource location = new ZimbraResource(ZimbraResource.Type.LOCATION);
-		ZimbraResource equipment = new ZimbraResource(ZimbraResource.Type.EQUIPMENT);
+		ZmailResource location = new ZmailResource(ZmailResource.Type.LOCATION);
+		ZmailResource equipment = new ZmailResource(ZmailResource.Type.EQUIPMENT);
 		
 		AppointmentItem appt = new AppointmentItem();
 		
 		String apptSubject, apptAttendee1, apptOptional1, apptLocation1, apptEquipment1, apptContent;
 		Calendar now = this.calendarWeekDayUTC;
-		apptSubject = ZimbraSeleniumProperties.getUniqueString();
-		apptAttendee1 = ZimbraAccount.AccountA().EmailAddress;
-		apptOptional1 = ZimbraAccount.AccountB().EmailAddress;
+		apptSubject = ZmailSeleniumProperties.getUniqueString();
+		apptAttendee1 = ZmailAccount.AccountA().EmailAddress;
+		apptOptional1 = ZmailAccount.AccountB().EmailAddress;
 		apptLocation1 = location.EmailAddress;
 		apptEquipment1 = equipment.EmailAddress;
-		apptContent = ZimbraSeleniumProperties.getUniqueString();
+		apptContent = ZmailSeleniumProperties.getUniqueString();
 		
 		appt.setSubject(apptSubject);
 		appt.setAttendees(apptAttendee1);
@@ -125,12 +125,12 @@ public class CreateAppointment extends CalendarWorkWeekTest {
 		
 		// Create appointment
 		String apptSubject;
-		apptSubject = "appointment" + ZimbraSeleniumProperties.getUniqueString();
+		apptSubject = "appointment" + ZmailSeleniumProperties.getUniqueString();
 		AppointmentItem appt = new AppointmentItem();
 		
 		appt.setSubject(apptSubject);
-		appt.setContent("content" + ZimbraSeleniumProperties.getUniqueString());
-		appt.setAttendees(ZimbraAccount.AccountA().EmailAddress);
+		appt.setContent("content" + ZmailSeleniumProperties.getUniqueString());
+		appt.setAttendees(ZmailAccount.AccountA().EmailAddress);
 		appt.setIsPrivate(true);
 	
 		// Open the new mail form

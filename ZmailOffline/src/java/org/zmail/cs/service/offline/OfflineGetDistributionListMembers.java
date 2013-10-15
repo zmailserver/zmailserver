@@ -12,27 +12,27 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.offline;
+package org.zmail.cs.service.offline;
 
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.offline.OfflineAccount;
-import com.zimbra.cs.gal.GalGroupMembers.ContactDLMembers;
-import com.zimbra.cs.mailbox.Contact;
-import com.zimbra.cs.mailbox.GalSyncUtil;
-import com.zimbra.cs.service.account.GetDistributionListMembers;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.offline.OfflineAccount;
+import org.zmail.cs.gal.GalGroupMembers.ContactDLMembers;
+import org.zmail.cs.mailbox.Contact;
+import org.zmail.cs.mailbox.GalSyncUtil;
+import org.zmail.cs.service.account.GetDistributionListMembers;
+import org.zmail.soap.ZmailSoapContext;
 
 public class OfflineGetDistributionListMembers extends GetDistributionListMembers {
 
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
-        Account account = getRequestedAccount(getZimbraSoapContext(context));
+        ZmailSoapContext zsc = getZmailSoapContext(context);
+        Account account = getRequestedAccount(getZmailSoapContext(context));
 
         int limit = (int) request.getAttributeLong(AdminConstants.A_LIMIT, 0);
         if (limit < 0) {

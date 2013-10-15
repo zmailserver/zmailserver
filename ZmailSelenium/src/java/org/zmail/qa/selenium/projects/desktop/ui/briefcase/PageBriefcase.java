@@ -17,19 +17,19 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.desktop.ui.briefcase;
+package org.zmail.qa.selenium.projects.desktop.ui.briefcase;
 
 import java.util.*;
 
 import org.apache.commons.httpclient.HttpStatus;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount.SOAP_DESTINATION_HOST_TYPE;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties.AppType;
-import com.zimbra.qa.selenium.projects.desktop.ui.*;
-import com.zimbra.qa.selenium.projects.desktop.ui.mail.FormMailNew;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.ZmailAccount.SOAP_DESTINATION_HOST_TYPE;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties.AppType;
+import org.zmail.qa.selenium.projects.desktop.ui.*;
+import org.zmail.qa.selenium.projects.desktop.ui.mail.FormMailNew;
 
 /**
  * @author
@@ -37,7 +37,7 @@ import com.zimbra.qa.selenium.projects.desktop.ui.mail.FormMailNew;
  */
 public class PageBriefcase extends AbsTab {
 
-	public static final String pageTitle = "Zimbra: Briefcase";
+	public static final String pageTitle = "Zmail: Briefcase";
 
 	public static class Locators {
 		public static final Locators zNewBriefcaseOverviewPaneIcon = new Locators(
@@ -141,10 +141,10 @@ public class PageBriefcase extends AbsTab {
 		// If the "folders" tree is visible, then Briefcase tab is active
 
 		String locator = null;
-		if (ZimbraSeleniumProperties.getAppType() == AppType.DESKTOP) {
+		if (ZmailSeleniumProperties.getAppType() == AppType.DESKTOP) {
 			String currentActiveEmailAddress = MyApplication
 					.zGetActiveAccount() != null ? MyApplication
-					.zGetActiveAccount().EmailAddress : ZimbraAccount
+					.zGetActiveAccount().EmailAddress : ZmailAccount
 					.AccountZDC().EmailAddress;
 			locator = Locators.zBriefcaseFolderIcon_Desktop.locator + "[id*='"
 					+ currentActiveEmailAddress + "']";
@@ -192,7 +192,7 @@ public class PageBriefcase extends AbsTab {
 		// ((AppAjaxClient) MyApplication).zPageMain.zNavigateTo();
 
 		// make sure mail page is loaded
-		if (ZimbraSeleniumProperties.getAppType() == AppType.DESKTOP) {
+		if (ZmailSeleniumProperties.getAppType() == AppType.DESKTOP) {
 			((AppAjaxClient) MyApplication).zPageMail.zNavigateTo();
 			GeneralUtility.waitForElementPresent(this,
 					PageMain.Locators.zAppbarBriefcase, 20000);
@@ -204,7 +204,7 @@ public class PageBriefcase extends AbsTab {
 
 		zWaitForBusyOverlay();
 
-		if (ZimbraSeleniumProperties.getAppType() == AppType.DESKTOP) {
+		if (ZmailSeleniumProperties.getAppType() == AppType.DESKTOP) {
 			zWaitForActive();
 		} else {
 			zWaitForElementPresent(Locators.zBriefcaseFolderIcon.locator);
@@ -243,7 +243,7 @@ public class PageBriefcase extends AbsTab {
 
 			zWaitForBusyOverlay();
 
-			// isEditDocLoaded("Zimbra Docs", "");
+			// isEditDocLoaded("Zmail Docs", "");
 
 			page = new DocumentBriefcaseNew(this.MyApplication);
 
@@ -979,7 +979,7 @@ public class PageBriefcase extends AbsTab {
 	public void rename(String text) throws HarnessException {
 		// ClientSessionFactory.session().selenium().getEval("var x = selenium.browserbot.findElementOrNull(\""+Locators.zFrame.locator+"\");if(x!=null)x=x.contentWindow.document.body;if(browserVersion.isChrome){x.textContent='"+text+"';}else if(browserVersion.isIE){x.innerText='"+text+"';}");
 		logger.info("renaming to: " + text);
-		zSelectWindow("Zimbra: Briefcase");
+		zSelectWindow("Zmail: Briefcase");
 		// sSelectFrame("relative=top");
 		sType(Locators.zRenameInput.locator, text);
 		sFocus(Locators.zRenameInput.locator);
@@ -1113,9 +1113,9 @@ public class PageBriefcase extends AbsTab {
 	public void deleteFileByName(String docName,
 	      SOAP_DESTINATION_HOST_TYPE destType,
          String accountName) throws HarnessException {
-		ZimbraAccount account = MyApplication.zGetActiveAccount();
+		ZmailAccount account = MyApplication.zGetActiveAccount();
 		account
-				.soapSend("<SearchRequest xmlns='urn:zimbraMail' types='document'>"
+				.soapSend("<SearchRequest xmlns='urn:zmailMail' types='document'>"
 						+ "<query>" + docName + "</query>" + "</SearchRequest>",
 						destType, accountName);
 		String id = account.soapSelectValue("//mail:doc", "id");
@@ -1129,8 +1129,8 @@ public class PageBriefcase extends AbsTab {
 	public void deleteFileById(String docId,
 	      SOAP_DESTINATION_HOST_TYPE destType,
          String accountName) throws HarnessException {
-		ZimbraAccount account = MyApplication.zGetActiveAccount();
-		account.soapSend("<ItemActionRequest xmlns='urn:zimbraMail'>"
+		ZmailAccount account = MyApplication.zGetActiveAccount();
+		account.soapSend("<ItemActionRequest xmlns='urn:zmailMail'>"
 				+ "<action id='" + docId + "' op='trash'/>"
 				+ "</ItemActionRequest>",
 				destType, accountName);
@@ -1144,7 +1144,7 @@ public class PageBriefcase extends AbsTab {
 	public EnumMap<Response.ResponsePart, String> displayFile(String filename,
 			Map<String, String> params,
 			SOAP_DESTINATION_HOST_TYPE destType) throws HarnessException {
-		ZimbraAccount account = MyApplication.zGetActiveAccount();
+		ZmailAccount account = MyApplication.zGetActiveAccount();
 		
 		RestUtil util = new RestUtil();
 

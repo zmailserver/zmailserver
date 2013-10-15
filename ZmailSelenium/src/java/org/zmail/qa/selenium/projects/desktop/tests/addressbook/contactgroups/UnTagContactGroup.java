@@ -14,19 +14,19 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.addressbook.contactgroups;
+package org.zmail.qa.selenium.projects.desktop.tests.addressbook.contactgroups;
 
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.ContactGroupItem;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.GeneralUtility;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.framework.items.ContactGroupItem;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.GeneralUtility;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
 
 
 
@@ -51,7 +51,7 @@ public class UnTagContactGroup extends AjaxCommonTest  {
 	    GeneralUtility.syncDesktopToZcsWithSoap(app.zGetActiveAccount());
 
 	    app.zGetActiveAccount().soapSend(
-				"<GetContactsRequest xmlns='urn:zimbraMail'>" +
+				"<GetContactsRequest xmlns='urn:zmailMail'>" +
 					"<cn id='"+ group.getId() +"'/>" +
 				"</GetContactsRequest>");
 	    String contactTag = app.zGetActiveAccount().soapSelectValue("//mail:GetContactsResponse//mail:cn", "t");
@@ -64,7 +64,7 @@ public class UnTagContactGroup extends AjaxCommonTest  {
 			
 	   // Create a tag via soap
 		app.zGetActiveAccount().soapSend(
-				"<CreateTagRequest xmlns='urn:zimbraMail'>" +
+				"<CreateTagRequest xmlns='urn:zmailMail'>" +
                	"<tag name='"+ tagName +"' color='1' />" +
                "</CreateTagRequest>");
 		String tagid = app.zGetActiveAccount().soapSelectValue("//mail:CreateTagResponse/mail:tag", "id");
@@ -75,7 +75,7 @@ public class UnTagContactGroup extends AjaxCommonTest  {
 	@Test(	description = "Untag a contact group by click Tag->Remove tag on toolbar ",
 			groups = { "smoke" })
 	public void UnTagContactGroup_01() throws HarnessException {
-		String tagName = "tag"+ ZimbraSeleniumProperties.getUniqueString();	
+		String tagName = "tag"+ ZmailSeleniumProperties.getUniqueString();	
 		String tagid = GetTagid(tagName);
 		
 		// Create a contact group via Soap then select
@@ -93,7 +93,7 @@ public class UnTagContactGroup extends AjaxCommonTest  {
 	@Test(	description = "Untag a contact group by click Tag->Remove tag on Context Menu",
 			groups = { "functional" })
 	public void UnTagContactGroup_02() throws HarnessException {
-		String tagName = "tag"+ ZimbraSeleniumProperties.getUniqueString();	
+		String tagName = "tag"+ ZmailSeleniumProperties.getUniqueString();	
 		String tagid = GetTagid(tagName);
 		
 		// Create a contact group via Soap then select

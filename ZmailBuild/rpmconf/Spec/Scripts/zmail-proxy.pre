@@ -37,10 +37,10 @@ acct_exists() {
   fi
 }
 
-# Create group, user for zimbra and postfix.
-grp_exists zimbra
+# Create group, user for zmail and postfix.
+grp_exists zmail
 if [ $? != 0 ]; then
-	groupadd -r zimbra
+	groupadd -r zmail
 fi
 
 grp_exists postfix
@@ -48,16 +48,16 @@ if [ $? != 0 ]; then
 	groupadd -r postfix
 fi
 
-acct_exists zimbra
+acct_exists zmail
 if [ $? != 0 ]; then
-	useradd -r -g zimbra -G postfix,tty -d /opt/zimbra -s /bin/bash zimbra
+	useradd -r -g zmail -G postfix,tty -d /opt/zmail -s /bin/bash zmail
 fi
 
 # Fix incase the account existed but the groups were wrong
 # add adm for mandriva so logger can read the log files
 grp_exists adm
 if [ $? = 0 ]; then
-  usermod -g zimbra -G postfix,tty,adm zimbra
+  usermod -g zmail -G postfix,tty,adm zmail
 else 
-  usermod -g zimbra -G postfix,tty zimbra
+  usermod -g zmail -G postfix,tty zmail
 fi

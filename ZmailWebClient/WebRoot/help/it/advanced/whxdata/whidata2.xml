@@ -112,7 +112,7 @@
   <topic name="Inoltro di un messaggio come messaggio reindirizzato" url="zwc_help_files/3_compose/forward_a_message_as_a_redirected_message.htm" />
 </key>
 <key name="miniagenda" >
-  <topic name="Navigazione in Zimbra Web Client" url="zwc_help_files/1_setting_up/navigating_the_zimbra_web_client.htm" />
+  <topic name="Navigazione in Zmail Web Client" url="zwc_help_files/1_setting_up/navigating_the_zmail_web_client.htm" />
 </key>
 <key name="mittente" >
   <topic name="Inoltro di un messaggio come mittente" url="zwc_help_files/3_compose/forward_a_message_as_the_originator.htm" />
@@ -237,7 +237,7 @@
   <topic name="Apertura di allegati a un messaggio email" url="zwc_help_files/2_manage_email/opening_attachments_to_an_email_message.htm" />
 </key>
 <key name="riquadro del contenuto." >
-  <topic name="Navigazione in Zimbra Web Client" url="zwc_help_files/1_setting_up/navigating_the_zimbra_web_client.htm" />
+  <topic name="Navigazione in Zmail Web Client" url="zwc_help_files/1_setting_up/navigating_the_zmail_web_client.htm" />
 </key>
 <key name="riquadro di lettura" >
   <topic name="Uso di un riquadro di lettura" url="zwc_help_files/2_manage_email/using_a_reading_pane.htm" />

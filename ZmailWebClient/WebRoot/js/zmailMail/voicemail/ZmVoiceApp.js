@@ -19,7 +19,7 @@ ZmVoiceApp = function(container, parentController) {
 	this.accordionItem = null; // Currently selected accordion item.
 	this.soapInfo = {
 		method: "SearchVoiceRequest",
-		namespace: "urn:zimbraVoice",
+		namespace: "urn:zmailVoice",
 		response: "SearchVoiceResponse",
 		additional: null
 	};
@@ -170,8 +170,8 @@ ZmVoiceApp.prototype._registerPrefs = function() {
 ZmVoiceApp.prototype._registerSettings =
 function(settings) {
 	settings = settings || appCtxt.getSettings();
-	settings.registerSetting("VOICE_PAGE_SIZE", {name:"zimbraPrefVoiceItemsPerPage", type:ZmSetting.T_PREF, dataType:ZmSetting.D_INT, defaultValue:25});
-	settings.registerSetting("VOICE_PAGE_SIZE_MAX", {name:"zimbraMaxVoiceItemsPerPage", type:ZmSetting.T_COS, dataType:ZmSetting.D_INT, defaultValue:100});
+	settings.registerSetting("VOICE_PAGE_SIZE", {name:"zmailPrefVoiceItemsPerPage", type:ZmSetting.T_PREF, dataType:ZmSetting.D_INT, defaultValue:25});
+	settings.registerSetting("VOICE_PAGE_SIZE_MAX", {name:"zmailMaxVoiceItemsPerPage", type:ZmSetting.T_COS, dataType:ZmSetting.D_INT, defaultValue:100});
 };
 
 
@@ -247,7 +247,7 @@ ZmVoiceApp.prototype.getVoiceInfo =
 function(callback, errorCallback, noBusyOverlay) {
 	if (!this.phones.length) {
 		if (!this._gettingVoiceInfo) {
-			var soapDoc = AjxSoapDoc.create("GetVoiceInfoRequest", "urn:zimbraVoice");
+			var soapDoc = AjxSoapDoc.create("GetVoiceInfoRequest", "urn:zmailVoice");
 			var respCallback = new AjxCallback(this, this._handleResponseVoiceInfo);
 			var respErrorCallback = new AjxCallback(this, this._handleErrorResponseVoiceInfo);
 			var params = {
@@ -352,7 +352,7 @@ function(response) {
 ZmVoiceApp.prototype.refreshFolders =
 function(callback, errorCallback) {
 	if (this.phones.length) {
-	    var soapDoc = AjxSoapDoc.create("GetVoiceFolderRequest", "urn:zimbraVoice");
+	    var soapDoc = AjxSoapDoc.create("GetVoiceFolderRequest", "urn:zmailVoice");
 		this.setStorePrincipal(soapDoc);
 		var respCallback = new AjxCallback(this, this._handleResponseUpdateFolders, [callback]);
 	    var params = {
@@ -485,7 +485,7 @@ function(items, op, attributes, callback, errorCallback) {
     for (var i = 0, count = items.length; i < count; i++) {
     	ids[i] = items[i].id;
     }
-    var soapDoc = AjxSoapDoc.create("VoiceMsgActionRequest", "urn:zimbraVoice");
+    var soapDoc = AjxSoapDoc.create("VoiceMsgActionRequest", "urn:zmailVoice");
 	this.setStorePrincipal(soapDoc);
 	var node = soapDoc.set("action");
     node.setAttribute("op", op);
@@ -718,7 +718,7 @@ ZmVoiceApp.prototype.registerUCProvider =
 ZmVoiceApp.prototype.displayClickToCallDlg =
 function(toPhoneNumber) {
 	if(!this._click2CallZimlet) {
-		var zimletContext = appCtxt.getZimletMgr().getZimletByName("com_zimbra_click2call");
+		var zimletContext = appCtxt.getZimletMgr().getZimletByName("org_zmail_click2call");
 		if(zimletContext && zimletContext.handlerObject) {
 			this._click2CallZimlet = zimletContext.handlerObject;
 		} else {

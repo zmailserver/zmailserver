@@ -17,9 +17,9 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.admin.ui;
+package org.zmail.qa.selenium.projects.admin.ui;
 
-import com.zimbra.qa.selenium.framework.ui.AbsApplication;
+import org.zmail.qa.selenium.framework.ui.AbsApplication;
 
 /**
  * The "Edit Alias" page opens the "Edit Account" page

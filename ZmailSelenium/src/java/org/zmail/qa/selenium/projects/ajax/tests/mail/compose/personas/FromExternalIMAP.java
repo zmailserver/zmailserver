@@ -14,16 +14,16 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.compose.personas;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.compose.personas;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew.Field;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew.Field;
 
 
 public class FromExternalIMAP extends PrefGroupMailByMessageTest {
@@ -39,16 +39,16 @@ public class FromExternalIMAP extends PrefGroupMailByMessageTest {
 		
 		
 		// Create the external data source on the same server
-		ZimbraAccount external = new ZimbraAccount();
+		ZmailAccount external = new ZmailAccount();
 		external.provision();
 		external.authenticate();
 		
 
 		// Create the folder to put the data source
-		String foldername = "external" + ZimbraSeleniumProperties.getUniqueString();
+		String foldername = "external" + ZmailSeleniumProperties.getUniqueString();
 		
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+				"<CreateFolderRequest xmlns='urn:zmailMail'>" +
                 	"<folder name='"+ foldername +"' l='1'/>" +
                 "</CreateFolderRequest>");
 
@@ -56,13 +56,13 @@ public class FromExternalIMAP extends PrefGroupMailByMessageTest {
 		ZAssert.assertNotNull(folder, "Verify the subfolder is available");
 		
 		// Create the data source
-		String datasourcename = "datasource" + ZimbraSeleniumProperties.getUniqueString();
-		String datasourceHost = ZimbraSeleniumProperties.getStringProperty("server.host");
-		String datasourceImapPort = ZimbraSeleniumProperties.getStringProperty("server.imap.port");
-		String datasourceImapType = ZimbraSeleniumProperties.getStringProperty("server.imap.type");
+		String datasourcename = "datasource" + ZmailSeleniumProperties.getUniqueString();
+		String datasourceHost = ZmailSeleniumProperties.getStringProperty("server.host");
+		String datasourceImapPort = ZmailSeleniumProperties.getStringProperty("server.imap.port");
+		String datasourceImapType = ZmailSeleniumProperties.getStringProperty("server.imap.type");
 		
 		app.zGetActiveAccount().soapSend(
-				"<CreateDataSourceRequest xmlns='urn:zimbraMail'>"
+				"<CreateDataSourceRequest xmlns='urn:zmailMail'>"
 			+		"<imap name='"+ datasourcename +"' l='"+ folder.getId() +"' isEnabled='true' "
 			+			"port='"+ datasourceImapPort +"' host='"+ datasourceHost +"' connectionType='"+ datasourceImapType +"' leaveOnServer='true' "
 			+			"username='"+ external.EmailAddress +"' password='"+ external.Password +"' />"
@@ -77,7 +77,7 @@ public class FromExternalIMAP extends PrefGroupMailByMessageTest {
 
 		
 		// Create the message data to be sent
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		// Open the new mail form
@@ -86,9 +86,9 @@ public class FromExternalIMAP extends PrefGroupMailByMessageTest {
 		
 		// Fill out the form with the data
 		mailform.zFillField(Field.From, external.EmailAddress);
-		mailform.zFillField(Field.To, ZimbraAccount.AccountA().EmailAddress);
+		mailform.zFillField(Field.To, ZmailAccount.AccountA().EmailAddress);
 		mailform.zFillField(Field.Subject, subject);
-		mailform.zFillField(Field.Body, "content" + ZimbraSeleniumProperties.getUniqueString());
+		mailform.zFillField(Field.Body, "content" + ZmailSeleniumProperties.getUniqueString());
 		
 		// Send the message
 		mailform.zSubmit();
@@ -96,37 +96,37 @@ public class FromExternalIMAP extends PrefGroupMailByMessageTest {
 		
 		
 		// Verify the message shows as from the alias
-		ZimbraAccount.AccountA().soapSend(
-					"<SearchRequest types='message' xmlns='urn:zimbraMail'>"
+		ZmailAccount.AccountA().soapSend(
+					"<SearchRequest types='message' xmlns='urn:zmailMail'>"
 			+			"<query>subject:("+ subject +")</query>"
 			+		"</SearchRequest>");
-		String id = ZimbraAccount.AccountA().soapSelectValue("//mail:m", "id");
+		String id = ZmailAccount.AccountA().soapSelectValue("//mail:m", "id");
 
-		ZimbraAccount.AccountA().soapSend(
-					"<GetMsgRequest xmlns='urn:zimbraMail'>"
+		ZmailAccount.AccountA().soapSend(
+					"<GetMsgRequest xmlns='urn:zmailMail'>"
 			+			"<m id='"+ id +"' html='1'/>"
 			+		"</GetMsgRequest>");
 
 		/**
-		 * Since we are using Zimbra to Zimbra to set up the external
+		 * Since we are using Zmail to Zmail to set up the external
 		 * account, the MTA knows both accounts and allows the
-		 * Zimbra user to send from the External account directly,
+		 * Zmail user to send from the External account directly,
 		 * without the OBO.
 		 * 
 		 * Due to limitations in the WDC (5/22/2012), external
 		 * accounts cannot be set up with third party servers.
-		 * (Maybe a stand alone Zimbra server may be used.)
+		 * (Maybe a stand alone Zmail server may be used.)
 		 * 
 		 * If this test case is executed with a third party
 		 * server, you should see:
-		 * From: Zimbra
+		 * From: Zmail
 		 * OBO: External
 		 * 
 		 */
 		
 		// Verify From: alias
-		String address = ZimbraAccount.AccountA().soapSelectValue("//mail:e[@t='f']", "a");
-		ZAssert.assertEquals(address, app.zGetActiveAccount().EmailAddress, "In the Zimbra-Zimbra config, verify the from is the Zimbra email address");
+		String address = ZmailAccount.AccountA().soapSelectValue("//mail:e[@t='f']", "a");
+		ZAssert.assertEquals(address, app.zGetActiveAccount().EmailAddress, "In the Zmail-Zmail config, verify the from is the Zmail email address");
 
 		
 	}	

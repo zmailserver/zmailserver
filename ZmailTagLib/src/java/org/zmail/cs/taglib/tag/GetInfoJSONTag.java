@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.tag;
+package org.zmail.cs.taglib.tag;
 
 import java.io.IOException;
 
@@ -21,22 +21,22 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.common.soap.SoapTransport;
-import com.zimbra.common.soap.ZimbraNamespace;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.zclient.ZClientException;
-import com.zimbra.cs.taglib.ZJspSession;
-import com.zimbra.cs.taglib.tag.TagUtil.JsonDebugListener;
-import com.zimbra.client.ZFolder;
-import com.zimbra.client.ZMailbox;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.common.soap.SoapTransport;
+import org.zmail.common.soap.ZmailNamespace;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.zclient.ZClientException;
+import org.zmail.cs.taglib.ZJspSession;
+import org.zmail.cs.taglib.tag.TagUtil.JsonDebugListener;
+import org.zmail.client.ZFolder;
+import org.zmail.client.ZMailbox;
 
-public class GetInfoJSONTag extends ZimbraSimpleTag {
+public class GetInfoJSONTag extends ZmailSimpleTag {
 
     private String mVar;
     private ZAuthToken mAuthToken;
@@ -96,7 +96,7 @@ public class GetInfoJSONTag extends ZimbraSimpleTag {
         SoapTransport transport = TagUtil.newJsonTransport(url, remoteAddr, authToken, debug);
 
         try {
-            Element batch = Element.create(SoapProtocol.SoapJS, ZimbraNamespace.E_BATCH_REQUEST);
+            Element batch = Element.create(SoapProtocol.SoapJS, ZmailNamespace.E_BATCH_REQUEST);
             Element getInfoRequest = batch.addElement(AccountConstants.GET_INFO_REQUEST);
 			getInfoRequest.addAttribute("rights", "createDistList");
             if (doSearch) {
@@ -131,9 +131,9 @@ public class GetInfoJSONTag extends ZimbraSimpleTag {
                 folderId = folder.getId();
             }
         }
-        if (ZimbraLog.webclient.isDebugEnabled()) {
-            ZimbraLog.webclient.debug("folderPath = " + folderPath);
-            ZimbraLog.webclient.debug("folderId = " + folderId);
+        if (ZmailLog.webclient.isDebugEnabled()) {
+            ZmailLog.webclient.debug("folderPath = " + folderPath);
+            ZmailLog.webclient.debug("folderId = " + folderId);
 		}
         return folderId;
     }
@@ -156,9 +156,9 @@ public class GetInfoJSONTag extends ZimbraSimpleTag {
                 }
             }
         }
-        if (ZimbraLog.webclient.isDebugEnabled()) {
-            ZimbraLog.webclient.debug("sortOrderPref = " + sortOrderPref);
-            ZimbraLog.webclient.debug("sortBy = " + sortBy);
+        if (ZmailLog.webclient.isDebugEnabled()) {
+            ZmailLog.webclient.debug("sortOrderPref = " + sortOrderPref);
+            ZmailLog.webclient.debug("sortBy = " + sortBy);
 		}
         return sortBy;
     }

@@ -14,22 +14,22 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.ui.preferences.signature;
+package org.zmail.qa.selenium.projects.ajax.ui.preferences.signature;
 
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
 
-import com.zimbra.qa.selenium.framework.items.IItem;
-import com.zimbra.qa.selenium.framework.ui.AbsApplication;
-import com.zimbra.qa.selenium.framework.ui.AbsForm;
-import com.zimbra.qa.selenium.framework.ui.AbsPage;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.ui.I18N;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.ajax.ui.AppAjaxClient;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogWarning;
+import org.zmail.qa.selenium.framework.items.IItem;
+import org.zmail.qa.selenium.framework.ui.AbsApplication;
+import org.zmail.qa.selenium.framework.ui.AbsForm;
+import org.zmail.qa.selenium.framework.ui.AbsPage;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.ui.I18N;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.ajax.ui.AppAjaxClient;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogWarning;
 
 public class FormSignatureNew extends AbsForm {
 
@@ -174,7 +174,7 @@ public class FormSignatureNew extends AbsForm {
 
 		} else if (field == Field.SignatureHtmlBody) {
 			//locator = Locators.zHtmlBodyField;
-		    if(ZimbraSeleniumProperties.isWebDriver()){
+		    if(ZmailSeleniumProperties.isWebDriver()){
 			sClickAt("//div[contains(@class,'ZmHtmlEditor')]","");
 			zTypeFormattedText("css=iframe[id*=ifr]", value);					
 		    }else{
@@ -211,7 +211,7 @@ public class FormSignatureNew extends AbsForm {
 					+ " locator=" + locator);
 
 		// Enter text
-		if(ZimbraSeleniumProperties.isWebDriver()){
+		if(ZmailSeleniumProperties.isWebDriver()){
 		    this.zClickAt(locator,"");
 		    clearField(locator);
 		    sType(locator, value);

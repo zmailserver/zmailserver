@@ -16,19 +16,19 @@
 /**
  * Constructor.
  *
- * @author Raja Rao DV (rrao@zimbra.com)
+ * @author Raja Rao DV (rrao@zmail.com)
  */
-function com_zimbra_webex_HandlerObject() {
+function org_zmail_webex_HandlerObject() {
 }
 
-com_zimbra_webex_HandlerObject.prototype = new ZmZimletBase();
-com_zimbra_webex_HandlerObject.prototype.constructor = com_zimbra_webex_HandlerObject;
+org_zmail_webex_HandlerObject.prototype = new ZmZimletBase();
+org_zmail_webex_HandlerObject.prototype.constructor = org_zmail_webex_HandlerObject;
 
 /**
  * Simplify handler object
  *
  */
-var WebExZimlet = com_zimbra_webex_HandlerObject;
+var WebExZimlet = org_zmail_webex_HandlerObject;
 
 /**
  * Stores WebEx userName property.
@@ -134,17 +134,17 @@ WebExZimlet.APPEND_SUB_OPTIONS = [WebExZimlet.PROP_APPEND_WEBEX_MEETING_PWD,
 	WebExZimlet.PROP_APPEND_PHONE_PASSCODE];
 
 /**
- * Array with all General options. This entire list is stored  in Zimbra DB
+ * Array with all General options. This entire list is stored  in Zmail DB
  */
 WebExZimlet.ALL_GENERAL_PROPS = [WebExZimlet.PROP_APPEND_WEBEX_MEETING_PWD,
 	WebExZimlet.PROP_APPEND_TOLL_FREE_PHONE_NUMBER,WebExZimlet.PROP_APPEND_TOLL_PHONE_NUMBER,
 	WebExZimlet.PROP_APPEND_PHONE_PASSCODE];
 
 /**
- * Map Zimbra TimeZone Name to WebEx TimeZone Id
+ * Map Zmail TimeZone Name to WebEx TimeZone Id
  *
  */
-WebExZimlet.WebExToZimbraTZIDMap = {"Etc/GMT+12" : "0", "Pacific/Midway" : "1", "Pacific/Honolulu" : "2", "America/Anchorage" : "3", "America/Los_Angeles" : "4", "America/Tijuana" : "4",
+WebExZimlet.WebExToZmailTZIDMap = {"Etc/GMT+12" : "0", "Pacific/Midway" : "1", "Pacific/Honolulu" : "2", "America/Anchorage" : "3", "America/Los_Angeles" : "4", "America/Tijuana" : "4",
 	"America/Phoenix" : "5","America/Chihuahua" : "6", "America/Denver" : "6", "America/Chicago" : "7", "America/Guatemala" : "7", "America/Mexico_City" : "8", "America/Regina" : "9", "America/Bogota" : "10",
 	"America/New_York" : "11", "America/Indiana/Indianapolis" : "12", "America/Halifax" : "13", "America/Guyana" : "13", "America/La_Paz" : "13", "America/Manaus" : "13", "America/Santiago" : "13",
 	"America/Caracas" : "14", "America/St_Johns" : "15", "America/Sao_Paulo" : "16", "America/Argentina/Buenos_Aires" : "17", "America/Godthab" : "17", "America/Montevideo" : "17",
@@ -159,7 +159,7 @@ WebExZimlet.WebExToZimbraTZIDMap = {"Etc/GMT+12" : "0", "Pacific/Midway" : "1", 
 
 
 /**
- * Map Zimbra's short Weekday name to WebEx's Weekday
+ * Map Zmail's short Weekday name to WebEx's Weekday
  */
 WebExZimlet.WEEK_NAME_MAP = { "MO": "MONDAY","TU": "TUESDAY","WE": "WEDNESDAY","TH": "THURSDAY","FR": "FRIDAY", "SA": "SATURDAY", "SU": "SUNDAY"};
 
@@ -326,8 +326,8 @@ function(dlg) {
 /**
  * Initiates calendar toolbar.
  *
- * @param {ZmToolbar} toolbar	 the Zimbra toolbar
- * @param {ZmCalController} controller  the Zimbra calendar controller
+ * @param {ZmToolbar} toolbar	 the Zmail toolbar
+ * @param {ZmCalController} controller  the Zmail calendar controller
  */
 WebExZimlet.prototype._initCalendarWebexToolbar = function(toolbar, controller) {
 	if (!toolbar.getButton("SAVE_AS_WEBEX")) {
@@ -483,7 +483,7 @@ WebExZimlet.prototype._createOrUpdateMeeting = function(params) {
 	newParams["loc"] = AjxStringUtil.urlComponentEncode(appt.location);
 	newParams["emails"] = params["emails"] = appt.getAttendees(ZmCalBaseItem.PERSON);
 	newParams["duration"] = (appt.endDate.getTime() - appt.startDate.getTime()) / 60000;
-	newParams["timeZoneID"] = WebExZimlet.WebExToZimbraTZIDMap[appt.timezone];
+	newParams["timeZoneID"] = WebExZimlet.WebExToZmailTZIDMap[appt.timezone];
 	newParams["pwd"] = this._currentWebExAccount[WebExZimlet.PROP_MEETING_PASSWORD.propId];
 	newParams["recurrence"] = this._getRecurrenceString(appt);
 	var startDate = appt.startDate;
@@ -1157,7 +1157,7 @@ WebExZimlet.prototype.doubleClicked = function() {
 };
 
 /**
- * Called by the Zimbra framework when a menu item is selected
+ * Called by the Zmail framework when a menu item is selected
  * dispatch the call, ensuring the webex configuration is set.
  *
  */
@@ -1715,7 +1715,7 @@ function() {
 	var j = 0;
 	var html = new Array();
 
-	var soapDoc = AjxSoapDoc.create("GetFolderRequest", "urn:zimbraMail");
+	var soapDoc = AjxSoapDoc.create("GetFolderRequest", "urn:zmailMail");
 	var folderNode = soapDoc.set("folder");
 	folderNode.setAttribute("l", appCtxt.getFolderTree().root.id);
 
@@ -2577,11 +2577,11 @@ function(params) {
 	newParams["duration"] = 60;
 	var tzName = "";
 	try {
-		tzName = appCtxt.getActiveAccount().settings.getInfoResponse.prefs._attrs.zimbraPrefTimeZoneId;
+		tzName = appCtxt.getActiveAccount().settings.getInfoResponse.prefs._attrs.zmailPrefTimeZoneId;
 	} catch(e) {
 		tzName = "America/Los_Angeles";//default
 	}
-	newParams["timeZoneID"] = WebExZimlet.WebExToZimbraTZIDMap[tzName];
+	newParams["timeZoneID"] = WebExZimlet.WebExToZmailTZIDMap[tzName];
 	newParams["pwd"] = this._currentWebExAccount[WebExZimlet.PROP_MEETING_PASSWORD.propId];
 	var d = new Date();
 	var utc = d.getTime() + (d.getTimezoneOffset() * 60000);

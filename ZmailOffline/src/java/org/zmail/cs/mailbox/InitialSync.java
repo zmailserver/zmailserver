@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.io.FilterInputStream;
 import java.io.IOException;
@@ -35,73 +35,73 @@ import java.util.zip.ZipInputStream;
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HttpStatus;
 
-import com.zimbra.client.ZMailbox;
-import com.zimbra.common.mailbox.Color;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.SoapFaultException;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.common.soap.ZimbraNamespace;
-import com.zimbra.common.util.BufferStream;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.CopyInputStream;
-import com.zimbra.common.util.DateUtil;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.StringUtil;
+import org.zmail.client.ZMailbox;
+import org.zmail.common.mailbox.Color;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.SoapFaultException;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.common.soap.ZmailNamespace;
+import org.zmail.common.util.BufferStream;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.CopyInputStream;
+import org.zmail.common.util.DateUtil;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.StringUtil;
 import com.zimbra.common.util.tar.TarEntry;
 import com.zimbra.common.util.tar.TarInputStream;
 import com.zimbra.common.util.zip.ZipShort;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.offline.OfflineAccount;
-import com.zimbra.cs.account.offline.OfflineAccount.Version;
-import com.zimbra.cs.account.offline.OfflineProvisioning;
-import com.zimbra.cs.mailbox.ChangeTrackingMailbox.TracelessContext;
-import com.zimbra.cs.mailbox.MailItem.UnderlyingData;
-import com.zimbra.cs.mailbox.MailServiceException.NoSuchItemException;
-import com.zimbra.cs.mailbox.Message.DraftInfo;
-import com.zimbra.cs.mailbox.calendar.IcalXmlStrMap;
-import com.zimbra.cs.mailbox.calendar.ZAttendee;
-import com.zimbra.cs.mailbox.util.TagUtil;
-import com.zimbra.cs.mime.ParsedContact;
-import com.zimbra.cs.mime.ParsedDocument;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.mime.ParsedMessageOptions;
-import com.zimbra.cs.offline.Offline;
-import com.zimbra.cs.offline.OfflineLC;
-import com.zimbra.cs.offline.OfflineLog;
-import com.zimbra.cs.offline.OfflineSyncManager;
-import com.zimbra.cs.offline.ab.SyncException;
-import com.zimbra.cs.offline.common.OfflineConstants;
-import com.zimbra.cs.offline.common.OfflineConstants.SyncMsgOptions;
-import com.zimbra.cs.redolog.op.CreateChat;
-import com.zimbra.cs.redolog.op.CreateContact;
-import com.zimbra.cs.redolog.op.CreateFolder;
-import com.zimbra.cs.redolog.op.CreateMessage;
-import com.zimbra.cs.redolog.op.CreateMountpoint;
-import com.zimbra.cs.redolog.op.CreateSavedSearch;
-import com.zimbra.cs.redolog.op.CreateTag;
-import com.zimbra.cs.redolog.op.RedoableOp;
-import com.zimbra.cs.redolog.op.SaveChat;
-import com.zimbra.cs.redolog.op.SaveDocument;
-import com.zimbra.cs.redolog.op.SaveDraft;
-import com.zimbra.cs.service.AuthProvider;
-import com.zimbra.cs.service.ContentServlet;
-import com.zimbra.cs.service.FileUploadServlet;
-import com.zimbra.cs.service.UserServlet;
-import com.zimbra.cs.service.formatter.SyncFormatter;
-import com.zimbra.cs.service.mail.SetCalendarItem;
-import com.zimbra.cs.service.mail.SetCalendarItem.SetCalendarItemParseResult;
-import com.zimbra.cs.service.mail.Sync;
-import com.zimbra.cs.service.util.ItemData;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.session.PendingModifications.Change;
-import com.zimbra.cs.store.Blob;
-import com.zimbra.cs.store.StoreManager;
-import com.zimbra.cs.util.AccountUtil.AccountAddressMatcher;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.offline.OfflineAccount;
+import org.zmail.cs.account.offline.OfflineAccount.Version;
+import org.zmail.cs.account.offline.OfflineProvisioning;
+import org.zmail.cs.mailbox.ChangeTrackingMailbox.TracelessContext;
+import org.zmail.cs.mailbox.MailItem.UnderlyingData;
+import org.zmail.cs.mailbox.MailServiceException.NoSuchItemException;
+import org.zmail.cs.mailbox.Message.DraftInfo;
+import org.zmail.cs.mailbox.calendar.IcalXmlStrMap;
+import org.zmail.cs.mailbox.calendar.ZAttendee;
+import org.zmail.cs.mailbox.util.TagUtil;
+import org.zmail.cs.mime.ParsedContact;
+import org.zmail.cs.mime.ParsedDocument;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.mime.ParsedMessageOptions;
+import org.zmail.cs.offline.Offline;
+import org.zmail.cs.offline.OfflineLC;
+import org.zmail.cs.offline.OfflineLog;
+import org.zmail.cs.offline.OfflineSyncManager;
+import org.zmail.cs.offline.ab.SyncException;
+import org.zmail.cs.offline.common.OfflineConstants;
+import org.zmail.cs.offline.common.OfflineConstants.SyncMsgOptions;
+import org.zmail.cs.redolog.op.CreateChat;
+import org.zmail.cs.redolog.op.CreateContact;
+import org.zmail.cs.redolog.op.CreateFolder;
+import org.zmail.cs.redolog.op.CreateMessage;
+import org.zmail.cs.redolog.op.CreateMountpoint;
+import org.zmail.cs.redolog.op.CreateSavedSearch;
+import org.zmail.cs.redolog.op.CreateTag;
+import org.zmail.cs.redolog.op.RedoableOp;
+import org.zmail.cs.redolog.op.SaveChat;
+import org.zmail.cs.redolog.op.SaveDocument;
+import org.zmail.cs.redolog.op.SaveDraft;
+import org.zmail.cs.service.AuthProvider;
+import org.zmail.cs.service.ContentServlet;
+import org.zmail.cs.service.FileUploadServlet;
+import org.zmail.cs.service.UserServlet;
+import org.zmail.cs.service.formatter.SyncFormatter;
+import org.zmail.cs.service.mail.SetCalendarItem;
+import org.zmail.cs.service.mail.SetCalendarItem.SetCalendarItemParseResult;
+import org.zmail.cs.service.mail.Sync;
+import org.zmail.cs.service.util.ItemData;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.session.PendingModifications.Change;
+import org.zmail.cs.store.Blob;
+import org.zmail.cs.store.StoreManager;
+import org.zmail.cs.util.AccountUtil.AccountAddressMatcher;
+import org.zmail.soap.ZmailSoapContext;
 
 public class InitialSync {
     public static interface InviteMimeLocator {
@@ -646,7 +646,7 @@ public class InitialSync {
             if (contactIds.length <= 1)
                 return Collections.emptyList();
 
-            Element batch = new Element.XMLElement(ZimbraNamespace.E_BATCH_REQUEST);
+            Element batch = new Element.XMLElement(ZmailNamespace.E_BATCH_REQUEST);
             for (String id : contactIds) {
                 Element request = batch.addElement(MailConstants.GET_CONTACTS_REQUEST);
                 request.addAttribute(MailConstants.A_SYNC, true).addElement(MailConstants.E_CONTACT).addAttribute(MailConstants.A_ID, id);
@@ -881,13 +881,13 @@ public class InitialSync {
             boolean isAppointment)
     throws ServiceException {
         // make a fake context to trick the parser so that we can reuse the soap parsing code
-        ZimbraSoapContext zsc = new ZimbraSoapContext(AuthProvider.getAuthToken(getMailbox().getAccount()),
+        ZmailSoapContext zsc = new ZmailSoapContext(AuthProvider.getAuthToken(getMailbox().getAccount()),
                 getMailbox().getAccountId(), SoapProtocol.Soap12, SoapProtocol.Soap12);
         Folder folder = getMailbox().getFolderById(folderId);
         SetCalendarItemParseResult parsed = SetCalendarItem.parseSetAppointmentRequest(request, zsc, sContext, folder,
                 isAppointment ? MailItem.Type.APPOINTMENT : MailItem.Type.TASK, true);
 
-        com.zimbra.cs.redolog.op.SetCalendarItem player = new com.zimbra.cs.redolog.op.SetCalendarItem(ombx.getId(), true, flags, tags);
+        org.zmail.cs.redolog.op.SetCalendarItem player = new org.zmail.cs.redolog.op.SetCalendarItem(ombx.getId(), true, flags, tags);
         player.setData(parsed.defaultInv, parsed.exceptions, parsed.replies, parsed.nextAlarm);
         if (parsed.defaultInv != null) {
             player.setCalendarItemPartStat(parsed.defaultInv.invite.getPartStat());
@@ -1155,12 +1155,12 @@ public class InitialSync {
 
     private boolean isAttachmentDownloadBlocked() throws ServiceException {
         return (ombx.getRemoteServerVersion().getMajor() < 7) &&
-                (Boolean.valueOf(ombx.getOfflineAccount().getAttr(Provisioning.A_zimbraAttachmentsBlocked)));
+                (Boolean.valueOf(ombx.getOfflineAccount().getAttr(Provisioning.A_zmailAttachmentsBlocked)));
     }
 
     /**
-     * GNR server sends blocking msg back if zimbraAttachmentsBlocked is set to TRUE. There is no way zd can sync with server. Generates a SyncException and user get an error report.
-     * @param account account whose zimbraAttachmentBlocked attribute is set to TRUE
+     * GNR server sends blocking msg back if zmailAttachmentsBlocked is set to TRUE. There is no way zd can sync with server. Generates a SyncException and user get an error report.
+     * @param account account whose zmailAttachmentBlocked attribute is set to TRUE
      * @throws ServiceException
      */
     private void handleAttachmentDownloadBlocking(OfflineAccount account) throws ServiceException {
@@ -1203,8 +1203,8 @@ public class InitialSync {
                 zin = new ZipInputStream(in);
                 while ((entry = zin.getNextEntry()) != null) {
                     Map<String, String> headers = recoverHeadersFromBytes(entry.getExtra());
-                    int id = Integer.parseInt(headers.get("X-Zimbra-ItemId"));
-                    int folderId = Integer.parseInt(headers.get("X-Zimbra-FolderId"));
+                    int id = Integer.parseInt(headers.get("X-Zmail-ItemId"));
+                    int folderId = Integer.parseInt(headers.get("X-Zmail-FolderId"));
 
                     InputStream fin = new FilterInputStream(zin) {
                         @Override
@@ -1259,10 +1259,10 @@ public class InitialSync {
 
     private void saveMessage(InputStream in, long sizeHint, Map<String, String> headers, int id, int folderId,
             MailItem.Type type) throws ServiceException {
-        int received = (int) (Long.parseLong(headers.get("X-Zimbra-Received")) / 1000);
-        int flags = Flag.toBitmask(headers.get("X-Zimbra-Flags"));
-        String[] tags = TagUtil.decodeTags(headers.get("X-Zimbra-Tag-Names"));
-        int convId = Integer.parseInt(headers.get("X-Zimbra-Conv"));
+        int received = (int) (Long.parseLong(headers.get("X-Zmail-Received")) / 1000);
+        int flags = Flag.toBitmask(headers.get("X-Zmail-Flags"));
+        String[] tags = TagUtil.decodeTags(headers.get("X-Zmail-Tag-Names"));
+        int convId = Integer.parseInt(headers.get("X-Zmail-Conv"));
 
         saveMessage(in, sizeHint, id, folderId, type, received, flags, tags, convId, null);
     }
@@ -1295,7 +1295,7 @@ public class InitialSync {
         }
         try {
             digest = blob.getDigest();
-            //zimbraAttachmentsIndexingEnabled is not exposed in GetInfo, but its default value is TRUE.
+            //zmailAttachmentsIndexingEnabled is not exposed in GetInfo, but its default value is TRUE.
             pm = new ParsedMessage(new ParsedMessageOptions(blob, data,
                 received * 1000L, this.getMailbox().getAccount().isAttachmentsIndexingEnabled()));
             long cutOffTime = 0l;

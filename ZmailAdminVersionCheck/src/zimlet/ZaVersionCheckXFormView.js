@@ -1,8 +1,8 @@
 ZaVersionCheckXFormView = function(parent, entry) {
 	ZaTabView.call(this, parent, "ZaVersionCheckXFormView", undefined, "VERSION_EDIT");
 	this.TAB_INDEX = 0;	
-	this.criticalChoices = new XFormChoices([{value:"1",label:com_zimbra_adminversioncheck.Critical},
-		{value:"0",label:com_zimbra_adminversioncheck.NotCritical}], XFormChoices.OBJECT_LIST, "value", "label");
+	this.criticalChoices = new XFormChoices([{value:"1",label:org_zmail_adminversioncheck.Critical},
+		{value:"0",label:org_zmail_adminversioncheck.NotCritical}], XFormChoices.OBJECT_LIST, "value", "label");
 	this.initForm(ZaVersionCheck.myXModel,this.getMyXForm(entry), null);
 }
 
@@ -12,7 +12,7 @@ ZaTabView.XFormModifiers["ZaVersionCheckXFormView"] = new Array();
 
 ZaVersionCheckXFormView.prototype.getTitle =
 function () {
-	return com_zimbra_adminversioncheck.VersionCheck_view_title;
+	return org_zmail_adminversioncheck.VersionCheck_view_title;
 }
 
 ZaVersionCheckXFormView.prototype.getTabIcon =
@@ -37,7 +37,7 @@ ZaVersionCheckXFormView.STATUS_TAB_ATTRS = [];
 ZaVersionCheckXFormView.STATUS_TAB_RIGHTS = [];
 
 ZaVersionCheckXFormView.checkLastAttemptFailed = function() {
-	return (this.getInstanceValue(ZaVersionCheck.A_zimbraVersionCheckLastAttempt) != this.getInstanceValue(ZaVersionCheck.A_zimbraVersionCheckLastSuccess));	
+	return (this.getInstanceValue(ZaVersionCheck.A_zmailVersionCheckLastAttempt) != this.getInstanceValue(ZaVersionCheck.A_zmailVersionCheckLastSuccess));	
 }
 
 ZaVersionCheckXFormView.prototype.setObject =
@@ -77,9 +77,9 @@ function(entry) {
 	else
 		this._containedObject[ZaModel.currentTab] = entry[ZaModel.currentTab];
 			
-	this._containedObject[ZaVersionCheck.A_zimbraVersionCheckUpdates] = [];
-	if(entry[ZaVersionCheck.A_zimbraVersionCheckUpdates]) {
-		this._containedObject[ZaVersionCheck.A_zimbraVersionCheckUpdates] = entry[ZaVersionCheck.A_zimbraVersionCheckUpdates]; 
+	this._containedObject[ZaVersionCheck.A_zmailVersionCheckUpdates] = [];
+	if(entry[ZaVersionCheck.A_zmailVersionCheckUpdates]) {
+		this._containedObject[ZaVersionCheck.A_zmailVersionCheckUpdates] = entry[ZaVersionCheck.A_zmailVersionCheckUpdates]; 
 	}
 	
 	this._localXForm.setInstance(this._containedObject);
@@ -123,8 +123,8 @@ ZaVersionCheckXFormView.myXFormModifier = function(xFormObject, entry) {
 	_tab1 = ++this.TAB_INDEX;
 	_tab2 = ++this.TAB_INDEX;
     var tabBarChoices = [
-    	{value:_tab1, label:com_zimbra_adminversioncheck.TABT_ConfigPage},
-    	{value:_tab2, label:com_zimbra_adminversioncheck.TABT_UpdatesPage}
+    	{value:_tab1, label:org_zmail_adminversioncheck.TABT_ConfigPage},
+    	{value:_tab2, label:org_zmail_adminversioncheck.TABT_UpdatesPage}
     ] ;
     var case1 = {type:_ZATABCASE_, caseKey:_tab1,
 		colSizes:["auto"],numCols:1,
@@ -132,8 +132,8 @@ ZaVersionCheckXFormView.myXFormModifier = function(xFormObject, entry) {
 		items:[
 			{type:_ZAGROUP_,
 				items:[
-					{ref:ZaVersionCheck.A_zimbraVersionCheckServer, type: _OSELECT1_, 
-						label:com_zimbra_adminversioncheck.VersionCheckServer,
+					{ref:ZaVersionCheck.A_zmailVersionCheckServer, type: _OSELECT1_, 
+						label:org_zmail_adminversioncheck.VersionCheckServer,
 						editable:false, choices: ZaApp.getInstance().getServerIdListChoices(), 
 						enableDisableChecks:[],
 						visibilityChecks:[],
@@ -144,53 +144,53 @@ ZaVersionCheckXFormView.myXFormModifier = function(xFormObject, entry) {
 					  containerCssStyle: "padding-bottom:0px",
 					  style: DwtAlert.WARNING,
 					  iconVisible: false,
-					  ref:ZaVersionCheck.A_zimbraVersionCheckServer,
+					  ref:ZaVersionCheck.A_zmailVersionCheckServer,
 					  getDisplayValue:function(val) {
-					  	return AjxMessageFormat.format(com_zimbra_adminversioncheck.Alert_Crontab, [ZaApp.getInstance().getServerMap()[val]]);
+					  	return AjxMessageFormat.format(org_zmail_adminversioncheck.Alert_Crontab, [ZaApp.getInstance().getServerMap()[val]]);
 					  },
 					  bmolsnr:true
-					  //content: com_zimbra_adminversioncheck.Alert_Crontab
+					  //content: org_zmail_adminversioncheck.Alert_Crontab
 					},				  	
-				  	{ref:ZaVersionCheck.A_zimbraVersionCheckInterval,
+				  	{ref:ZaVersionCheck.A_zmailVersionCheckInterval,
 				  		type:_LIFETIME_, 
-				  		label:com_zimbra_adminversioncheck.LBL_zimbraVersionCheckInterval,labelLocation:_LEFT_
+				  		label:org_zmail_adminversioncheck.LBL_zmailVersionCheckInterval,labelLocation:_LEFT_
 				  	},
-					{ref:ZaVersionCheck.A_zimbraVersionCheckURL, type:_TEXTFIELD_, 
-						label:com_zimbra_adminversioncheck.LBL_zimbraVersionCheckURL, width:250, required:true
+					{ref:ZaVersionCheck.A_zmailVersionCheckURL, type:_TEXTFIELD_, 
+						label:org_zmail_adminversioncheck.LBL_zmailVersionCheckURL, width:250, required:true
   					},
-  					{type:_CHECKBOX_, ref:ZaVersionCheck.A_zimbraVersionCheckSendNotifications,
-  						label:com_zimbra_adminversioncheck.LBL_zimbraVersionCheckSendNotifications,
+  					{type:_CHECKBOX_, ref:ZaVersionCheck.A_zmailVersionCheckSendNotifications,
+  						label:org_zmail_adminversioncheck.LBL_zmailVersionCheckSendNotifications,
 						trueValue:"TRUE",falseValue:"FALSE",
 						enableDisableChecks:[],visibilityChecks:[]
 					},
 					{ type: _DWT_ALERT_,colSpan:"*",
 						  containerCssStyle: "padding-bottom:0px",
 						  style: DwtAlert.WARNING,
-						  iconVisible: false, content:com_zimbra_adminversioncheck.NoteSendingNotificationFromAddress
+						  iconVisible: false, content:org_zmail_adminversioncheck.NoteSendingNotificationFromAddress
 					},
-					{ref:ZaVersionCheck.A_zimbraVersionCheckNotificationEmail, type:_TEXTFIELD_, 
-						label:com_zimbra_adminversioncheck.LBL_zimbraVersionCheckNotificationEmail, width:250,
+					{ref:ZaVersionCheck.A_zmailVersionCheckNotificationEmail, type:_TEXTFIELD_, 
+						label:org_zmail_adminversioncheck.LBL_zmailVersionCheckNotificationEmail, width:250,
 						visibilityChecks:[],
-						enableDisableChangeEventSources:[ZaVersionCheck.A_zimbraVersionCheckSendNotifications],
-						enableDisableChecks:[[XForm.checkInstanceValue,ZaVersionCheck.A_zimbraVersionCheckSendNotifications,"TRUE"]]						
+						enableDisableChangeEventSources:[ZaVersionCheck.A_zmailVersionCheckSendNotifications],
+						enableDisableChecks:[[XForm.checkInstanceValue,ZaVersionCheck.A_zmailVersionCheckSendNotifications,"TRUE"]]						
   					},
-  					{ref:ZaVersionCheck.A_zimbraVersionCheckNotificationEmailFrom, type:_TEXTFIELD_,
+  					{ref:ZaVersionCheck.A_zmailVersionCheckNotificationEmailFrom, type:_TEXTFIELD_,
 						visibilityChecks:[],
-						enableDisableChangeEventSources:[ZaVersionCheck.A_zimbraVersionCheckSendNotifications],
-						enableDisableChecks:[[XForm.checkInstanceValue,ZaVersionCheck.A_zimbraVersionCheckSendNotifications,"TRUE"]],
-  						label:com_zimbra_adminversioncheck.LBL_zimbraVersionCheckNotificationEmailFrom
+						enableDisableChangeEventSources:[ZaVersionCheck.A_zmailVersionCheckSendNotifications],
+						enableDisableChecks:[[XForm.checkInstanceValue,ZaVersionCheck.A_zmailVersionCheckSendNotifications,"TRUE"]],
+  						label:org_zmail_adminversioncheck.LBL_zmailVersionCheckNotificationEmailFrom
   					},
-					{ref:ZaVersionCheck.A_zimbraVersionCheckNotificationSubject, type:_TEXTFIELD_, 
-						label:com_zimbra_adminversioncheck.LBL_zimbraVersionCheckNotificationSubject, width:250,
+					{ref:ZaVersionCheck.A_zmailVersionCheckNotificationSubject, type:_TEXTFIELD_, 
+						label:org_zmail_adminversioncheck.LBL_zmailVersionCheckNotificationSubject, width:250,
 						visibilityChecks:[],
-						enableDisableChangeEventSources:[ZaVersionCheck.A_zimbraVersionCheckSendNotifications],
-						enableDisableChecks:[[XForm.checkInstanceValue,ZaVersionCheck.A_zimbraVersionCheckSendNotifications,"TRUE"]]						
+						enableDisableChangeEventSources:[ZaVersionCheck.A_zmailVersionCheckSendNotifications],
+						enableDisableChecks:[[XForm.checkInstanceValue,ZaVersionCheck.A_zmailVersionCheckSendNotifications,"TRUE"]]						
   					},  					
-					{type:_TEXTAREA_, ref:ZaVersionCheck.A_zimbraVersionCheckNotificationBody,
-						label:com_zimbra_adminversioncheck.LBL_zimbraVersionCheckNotificationBody,
+					{type:_TEXTAREA_, ref:ZaVersionCheck.A_zmailVersionCheckNotificationBody,
+						label:org_zmail_adminversioncheck.LBL_zmailVersionCheckNotificationBody,
 						visibilityChecks:[],
-						enableDisableChangeEventSources:[ZaVersionCheck.A_zimbraVersionCheckSendNotifications],
-						enableDisableChecks:[[XForm.checkInstanceValue,ZaVersionCheck.A_zimbraVersionCheckSendNotifications,"TRUE"]]
+						enableDisableChangeEventSources:[ZaVersionCheck.A_zmailVersionCheckSendNotifications],
+						enableDisableChecks:[[XForm.checkInstanceValue,ZaVersionCheck.A_zmailVersionCheckSendNotifications,"TRUE"]]
 					}  					
                 ]
 			}
@@ -201,20 +201,20 @@ ZaVersionCheckXFormView.myXFormModifier = function(xFormObject, entry) {
     	colSizes:["auto"],numCols:1,
     	items:[
 			{type:_ZAGROUP_,colSizes:["275","*"],items:[
-	    		{ref:ZaVersionCheck.A_zimbraVersionCheckLastAttempt,type:_OUTPUT_,
-	    			label:com_zimbra_adminversioncheck.LBL_zimbraVersionCheckLastAttempt,
+	    		{ref:ZaVersionCheck.A_zmailVersionCheckLastAttempt,type:_OUTPUT_,
+	    			label:org_zmail_adminversioncheck.LBL_zmailVersionCheckLastAttempt,
 	    			getDisplayValue:function(val) {
 	    				return ZaVersionCheck.getAttemptTime(val);
 	    			}
 	    		},
-	    		{ref:ZaVersionCheck.A_zimbraVersionCheckLastSuccess,type:_OUTPUT_,
-	    			label:com_zimbra_adminversioncheck.LBL_zimbraVersionCheckLastSuccess,
+	    		{ref:ZaVersionCheck.A_zmailVersionCheckLastSuccess,type:_OUTPUT_,
+	    			label:org_zmail_adminversioncheck.LBL_zmailVersionCheckLastSuccess,
 	    			getDisplayValue:function(val) {
 	    				return ZaVersionCheck.getAttemptTime(val);
 	    			}	    			
 	    		},
 	    		{
-	    			ref:ZaVersionCheck.A_zimbraVersionCheckUpdates,
+	    			ref:ZaVersionCheck.A_zmailVersionCheckUpdates,
 	    			type:_REPEAT_,
 	    			colSpan:"*",
 	    			bmolsnr:true,
@@ -223,24 +223,24 @@ ZaVersionCheckXFormView.myXFormModifier = function(xFormObject, entry) {
 					showAddButton:false,
 					showRemoveButton:false,
 					showAddOnNextRow:false,
-					visibilityChecks:[[XForm.checkInstanceValueNotEmty,ZaVersionCheck.A_zimbraVersionCheckUpdates]],
-					visibilityChangeEventSources:[ZaVersionCheck.A_zimbraVersionCheckUpdates],
+					visibilityChecks:[[XForm.checkInstanceValueNotEmty,ZaVersionCheck.A_zmailVersionCheckUpdates]],
+					visibilityChangeEventSources:[ZaVersionCheck.A_zmailVersionCheckUpdates],
 					items: [
 						{type:_GROUP_,
 							numCols:3,
 							colSizes:["275","100","300"],				
 							items:[
 								{ 
-									ref:ZaVersionCheck.A_zimbraVersionCheckUpdateShortversion, 
+									ref:ZaVersionCheck.A_zmailVersionCheckUpdateShortversion, 
 									type: _OUTPUT_, label:null,labelLocation:_NONE_, containerCssStyle:"text-align:right"
 								},
 								{ 
-									ref:ZaVersionCheck.A_zimbraVersionCheckUpdateCritical, 
+									ref:ZaVersionCheck.A_zmailVersionCheckUpdateCritical, 
 									type: _OUTPUT_, label:null,labelLocation:_NONE_,
 									choices:this.criticalChoices, containerCssStyle:"text-align:center"
 								},
 								{ 
-									ref:ZaVersionCheck.A_zimbraVersionCheckUpdateUpdateURL, 
+									ref:ZaVersionCheck.A_zmailVersionCheckUpdateUpdateURL, 
 									type: _URL_, label:null,labelLocation:_NONE_, containerCssStyle:"text-align:center"
 								}
 							]
@@ -256,29 +256,29 @@ ZaVersionCheckXFormView.myXFormModifier = function(xFormObject, entry) {
         { type:_GROUP_, id:"xform_warningpanel", colSpan:"*", width: "100%", cols:["auto"], items:[
             { type: _DWT_ALERT_,cssClass: "DwtTabTable",
                 visibilityChecks:[ZaVersionCheckXFormView.checkLastAttemptFailed],
-                visibilityChangeEventSources:[ZaVersionCheck.A_zimbraVersionCheckLastAttempt,ZaVersionCheck.A_zimbraVersionCheckLastSuccess],
+                visibilityChangeEventSources:[ZaVersionCheck.A_zmailVersionCheckLastAttempt,ZaVersionCheck.A_zmailVersionCheckLastSuccess],
                 containerCssStyle: "padding-bottom:0px",
                 style: DwtAlert.CRITICAL,
                 iconVisible: true,
-                content: com_zimbra_adminversioncheck.WARNING_LAST_ATTEMPT_FAILED,
+                content: org_zmail_adminversioncheck.WARNING_LAST_ATTEMPT_FAILED,
                 colSpan:"*"
             },
             { type: _DWT_ALERT_,cssClass: "DwtTabTable",
-                visibilityChecks:[[XForm.checkInstanceValueNotEmty,ZaVersionCheck.A_zimbraVersionCheckUpdates]],
-                visibilityChangeEventSources:[ZaVersionCheck.A_zimbraVersionCheckUpdates],
+                visibilityChecks:[[XForm.checkInstanceValueNotEmty,ZaVersionCheck.A_zmailVersionCheckUpdates]],
+                visibilityChangeEventSources:[ZaVersionCheck.A_zmailVersionCheckUpdates],
                 containerCssStyle: "padding-bottom:0px",
                 style: DwtAlert.WARNING,
                 iconVisible: true,
-                content: com_zimbra_adminversioncheck.UpdatesAreAvailable,
+                content: org_zmail_adminversioncheck.UpdatesAreAvailable,
                 colSpan:"*"
             },
             { type: _DWT_ALERT_,cssClass: "DwtTabTable",
-                visibilityChecks:[[XForm.checkInstanceValueEmty,ZaVersionCheck.A_zimbraVersionCheckUpdates]],
-                visibilityChangeEventSources:[ZaVersionCheck.A_zimbraVersionCheckUpdates],
+                visibilityChecks:[[XForm.checkInstanceValueEmty,ZaVersionCheck.A_zmailVersionCheckUpdates]],
+                visibilityChangeEventSources:[ZaVersionCheck.A_zmailVersionCheckUpdates],
                 containerCssStyle: "padding-bottom:0px",
                 style: DwtAlert.INFORMATION,
                 iconVisible: true,
-                content: com_zimbra_adminversioncheck.ServerIsUpToDate,
+                content: org_zmail_adminversioncheck.ServerIsUpToDate,
                 colSpan:"*"
             }
         ]},

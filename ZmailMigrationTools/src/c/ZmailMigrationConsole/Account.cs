@@ -3,7 +3,7 @@ using System.Threading;
 using System;
 
 
-namespace ZimbraMigrationConsole
+namespace ZmailMigrationConsole
 {
 class Account: BackgroundWorker
 {

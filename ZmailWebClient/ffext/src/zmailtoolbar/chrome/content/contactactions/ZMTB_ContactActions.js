@@ -121,7 +121,7 @@ ZMTB_ContactActions.prototype._initActions = function()
 			Phone:document.getElementById("ZimTB-NewContact-Phone").value,
 			Fax:document.getElementById("ZimTB-NewContact-Fax").value
 		};
-		//Zimbra 6 accepts homeEmail or workEmail, zimbra 5 accepts only email
+		//Zmail 6 accepts homeEmail or workEmail, zmail 5 accepts only email
 		if(This._zmtb.getRequestManager().getServerVersion().charAt(0) == "6")
 			contactObj.Email = document.getElementById("ZimTB-NewContact-Email").value;
 		else

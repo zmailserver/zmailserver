@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.jsp;
+package org.zmail.cs.offline.jsp;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -26,10 +26,10 @@ import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.zimbra.common.net.SSLCertInfo;
-import com.zimbra.common.service.RemoteServiceException;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.offline.jsp.JspConstants.JspVerb;
+import org.zmail.common.net.SSLCertInfo;
+import org.zmail.common.service.RemoteServiceException;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.offline.jsp.JspConstants.JspVerb;
 
 public abstract class FormBean extends PageBean {
 

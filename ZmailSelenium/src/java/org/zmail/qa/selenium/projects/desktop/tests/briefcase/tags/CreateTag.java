@@ -14,16 +14,16 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.briefcase.tags;
+package org.zmail.qa.selenium.projects.desktop.tests.briefcase.tags;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.DialogTag;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.DialogTag;
 
 public class CreateTag extends AjaxCommonTest {
 
@@ -39,10 +39,10 @@ public class CreateTag extends AjaxCommonTest {
 	// NOTE: Not valid for desktop test
 	@Test(description = "Create a new tag by clicking 'new tag' on folder tree", groups = { "skip-functional" })
 	public void CreateTag_01() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		// Set the new tag name
-		String name = "tag" + ZimbraSeleniumProperties.getUniqueString();
+		String name = "tag" + ZmailSeleniumProperties.getUniqueString();
 
 		DialogTag dialog = (DialogTag) app.zTreeBriefcase
 				.zPressButton(Button.B_TREE_NEWTAG);
@@ -65,7 +65,7 @@ public class CreateTag extends AjaxCommonTest {
 
 	@Test(description = "Create a new tag using keyboard shortcuts", groups = { "functional" })
 	public void CreateTag_02() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
@@ -73,7 +73,7 @@ public class CreateTag extends AjaxCommonTest {
 		Shortcut shortcut = Shortcut.S_NEWTAG;
 
 		// Set the new tag name
-		String name = "tag" + ZimbraSeleniumProperties.getUniqueString();
+		String name = "tag" + ZmailSeleniumProperties.getUniqueString();
 
 		// refresh briefcase page tags section before creating a new tag
 		app.zTreeBriefcase
@@ -133,17 +133,17 @@ public class CreateTag extends AjaxCommonTest {
 
 	@Test(description = "Create a new tag using context menu on a tag", groups = { "functional" })
 	public void CreateTag_03() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
 
 		// Set the new tag name
-		String name1 = "tag" + ZimbraSeleniumProperties.getUniqueString();
-		String name2 = "tag" + ZimbraSeleniumProperties.getUniqueString();
+		String name1 = "tag" + ZmailSeleniumProperties.getUniqueString();
+		String name2 = "tag" + ZmailSeleniumProperties.getUniqueString();
 
 		// Create a tag to right click on
-		account.soapSend("<CreateTagRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<CreateTagRequest xmlns='urn:zmailMail'>"
 				+ "<tag name='" + name1 + "' color='1' />"
 				+ "</CreateTagRequest>");
 
@@ -183,13 +183,13 @@ public class CreateTag extends AjaxCommonTest {
 
 	@Test(description = "Create a new tag using briefcase app New -> New Tag", groups = { "functional" })
 	public void CreateTag_04() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
 
 		// Set the new tag name
-		String name = "tag" + ZimbraSeleniumProperties.getUniqueString();
+		String name = "tag" + ZmailSeleniumProperties.getUniqueString();
 
 		// refresh briefcase page tags section before creating a new tag
 		app.zTreeBriefcase

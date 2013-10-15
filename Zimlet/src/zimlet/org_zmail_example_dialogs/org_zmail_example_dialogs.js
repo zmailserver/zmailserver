@@ -17,21 +17,21 @@
  * Defines the Zimlet handler class.
  *   
  */
-function com_zimbra_example_dialogs_HandlerObject() {
+function org_zmail_example_dialogs_HandlerObject() {
 };
 
 /**
  * Makes the Zimlet class a subclass of ZmZimletBase.
  *
  */
-com_zimbra_example_dialogs_HandlerObject.prototype = new ZmZimletBase();
-com_zimbra_example_dialogs_HandlerObject.prototype.constructor = com_zimbra_example_dialogs_HandlerObject;
+org_zmail_example_dialogs_HandlerObject.prototype = new ZmZimletBase();
+org_zmail_example_dialogs_HandlerObject.prototype.constructor = org_zmail_example_dialogs_HandlerObject;
 
 /**
  * This method gets called by the Zimlet framework when the zimlet loads.
  *  
  */
-com_zimbra_example_dialogs_HandlerObject.prototype.init =
+org_zmail_example_dialogs_HandlerObject.prototype.init =
 function() {
 
 };
@@ -40,7 +40,7 @@ function() {
  * This method gets called when the zimlet is double-clicked.
  *  
  */
-com_zimbra_example_dialogs_HandlerObject.prototype.doubleClicked =
+org_zmail_example_dialogs_HandlerObject.prototype.doubleClicked =
 function() {
 	this.singleClicked();
 };
@@ -49,7 +49,7 @@ function() {
  * This method gets called when the zimlet is single-clicked.
  *  
  */
-com_zimbra_example_dialogs_HandlerObject.prototype.singleClicked =
+org_zmail_example_dialogs_HandlerObject.prototype.singleClicked =
 function() {	
 	var appController = appCtxt.getAppController();
 		
@@ -60,21 +60,21 @@ function() {
  * This method is called when a context menu item is selected.
  * 
  */
-com_zimbra_example_dialogs_HandlerObject.prototype.menuItemSelected = 
+org_zmail_example_dialogs_HandlerObject.prototype.menuItemSelected = 
 function(itemId) {
 
 	this._dialog =  null;
 	var style = DwtMessageDialog.INFO_STYLE; //show info status by default
 
 	switch (itemId) {
-		case "com_zimbra_dialogs_msgInfodlg":
+		case "org_zmail_dialogs_msgInfodlg":
 			this._dialog = appCtxt.getMsgDialog(); // returns DwtMessageDialog
 			msg = "This is message dialog with info status";
 
 			// set the button listeners
 			this._dialog.setButtonListener(DwtDialog.OK_BUTTON, new AjxListener(this, this._okBtnListener)); // listens for OK button events
 			break;
-		case "com_zimbra_dialogs_msgWarndlg":
+		case "org_zmail_dialogs_msgWarndlg":
 			this._dialog = appCtxt.getMsgDialog(); // returns DwtMessageDialog
 			msg = "This is message dialog with warning status";
 			style = DwtMessageDialog.WARNING_STYLE;
@@ -82,7 +82,7 @@ function(itemId) {
 			// set the button listeners
 			this._dialog.setButtonListener(DwtDialog.OK_BUTTON, new AjxListener(this, this._okBtnListener)); // listens for OK button events
 			break;
-		case "com_zimbra_dialogs_msgCriticaldlg":
+		case "org_zmail_dialogs_msgCriticaldlg":
 			this._dialog = appCtxt.getMsgDialog(); // returns DwtMessageDialog
 			msg = "This is message dialog with critical status";
 			style = DwtMessageDialog.CRITICAL_STYLE;
@@ -90,14 +90,14 @@ function(itemId) {
 			// set the button listeners
 			this._dialog.setButtonListener(DwtDialog.OK_BUTTON, new AjxListener(this, this._okBtnListener)); // listens for OK button events
 				break;
-		case "com_zimbra_dialogs_errordlg":
+		case "org_zmail_dialogs_errordlg":
 			this._dialog = appCtxt.getErrorDialog(); // returns ZmErrorDialog
 			msg = "This is an Error dialog";
 
 			// set the button listeners
 			this._dialog.setButtonListener(DwtDialog.OK_BUTTON, new AjxListener(this, this._okBtnListener)); // listens for OK button events
 			break;
-		case "com_zimbra_dialogs_yesnodlg":
+		case "org_zmail_dialogs_yesnodlg":
 			this._dialog = appCtxt.getYesNoMsgDialog(); // returns DwtMessageDialog
 			msg = "This is a dialog with yes/no buttons ";
 
@@ -105,7 +105,7 @@ function(itemId) {
 			this._dialog.setButtonListener(DwtDialog.YES_BUTTON, new AjxListener(this, this._yesBtnListener)); // listens for YES button events
 			this._dialog.setButtonListener(DwtDialog.NO_BUTTON, new AjxListener(this, this._noBtnListener)); // listens for NO button events
 			break;
-		case "com_zimbra_dialogs_yesnocanceldlg":
+		case "org_zmail_dialogs_yesnocanceldlg":
 			this._dialog = appCtxt.getYesNoCancelMsgDialog(); // returns DwtMessageDialog
 			msg = "This is a dialog with yes/no/cancel buttons ";
 			
@@ -127,7 +127,7 @@ function(itemId) {
  * 
  * @param	{DwtSelectionEvent}		event		the event
  */
-com_zimbra_example_dialogs_HandlerObject.prototype._yesBtnListener = 
+org_zmail_example_dialogs_HandlerObject.prototype._yesBtnListener = 
 function(obj) {
 	this._dialog.popdown(); // close the dialog
 };
@@ -137,7 +137,7 @@ function(obj) {
  * 
  * @param	{DwtSelectionEvent}		event		the event
  */
-com_zimbra_example_dialogs_HandlerObject.prototype._noBtnListener = 
+org_zmail_example_dialogs_HandlerObject.prototype._noBtnListener = 
 function(obj) {
 	this._dialog.popdown(); // close the dialog
 };
@@ -147,7 +147,7 @@ function(obj) {
  * 
  * @param	{DwtSelectionEvent}		event		the event
  */
-com_zimbra_example_dialogs_HandlerObject.prototype._cancelBtnListener = 
+org_zmail_example_dialogs_HandlerObject.prototype._cancelBtnListener = 
 function(obj) {
 	this._dialog.popdown(); // close the dialog
 };
@@ -157,7 +157,7 @@ function(obj) {
  * 
  * @param	{DwtSelectionEvent}		event		the event
  */
-com_zimbra_example_dialogs_HandlerObject.prototype._okBtnListener = 
+org_zmail_example_dialogs_HandlerObject.prototype._okBtnListener = 
 function(obj) {
 	this._dialog.popdown(); // close the dialog
 };

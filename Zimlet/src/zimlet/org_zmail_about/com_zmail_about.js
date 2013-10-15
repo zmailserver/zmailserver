@@ -16,7 +16,7 @@
 /**
  * Constructor.
  * 
- * @author Raja Rao DV (rrao@zimbra.com)
+ * @author Raja Rao DV (rrao@zmail.com)
  */
 function ZmAboutZimlet() {
 }
@@ -31,7 +31,7 @@ ZmAboutZimlet.prototype._getContent = function() {
 			copyright: this.getMessage("copyright")
 		};
 		return AjxTemplate.expand(
-				"com_zimbra_about.templates.About#DialogView", subs);
+				"org_zmail_about.templates.About#DialogView", subs);
 
 };
 

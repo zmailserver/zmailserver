@@ -13,11 +13,11 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.taglib.bean;
+package org.zmail.cs.taglib.bean;
 
-import com.zimbra.client.ZPhone;
-import com.zimbra.client.ZVoiceMailItemHit;
-import com.zimbra.common.service.ServiceException;
+import org.zmail.client.ZPhone;
+import org.zmail.client.ZVoiceMailItemHit;
+import org.zmail.common.service.ServiceException;
 
 import java.util.Date;
 

@@ -13,18 +13,18 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.taglib.tag.calendar;
+package org.zmail.cs.taglib.tag.calendar;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.taglib.bean.ZMessageBean;
-import com.zimbra.cs.taglib.bean.ZMessageComposeBean;
-import com.zimbra.cs.taglib.tag.ZimbraSimpleTag;
-import com.zimbra.client.ZDateTime;
-import com.zimbra.client.ZInvite;
-import com.zimbra.client.ZInvite.ZComponent;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZMailbox.ZOutgoingMessage;
-import com.zimbra.client.ZMailbox.ZOutgoingMessage.MessagePart;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.taglib.bean.ZMessageBean;
+import org.zmail.cs.taglib.bean.ZMessageComposeBean;
+import org.zmail.cs.taglib.tag.ZmailSimpleTag;
+import org.zmail.client.ZDateTime;
+import org.zmail.client.ZInvite;
+import org.zmail.client.ZInvite.ZComponent;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZMailbox.ZOutgoingMessage;
+import org.zmail.client.ZMailbox.ZOutgoingMessage.MessagePart;
 
 import javax.servlet.jsp.JspContext;
 import javax.servlet.jsp.JspException;
@@ -32,7 +32,7 @@ import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 import java.io.IOException;
 
-public class CancelAppointmentTag extends ZimbraSimpleTag {
+public class CancelAppointmentTag extends ZmailSimpleTag {
 
     private ZMessageComposeBean mCompose;
     private ZMessageBean mMessage;

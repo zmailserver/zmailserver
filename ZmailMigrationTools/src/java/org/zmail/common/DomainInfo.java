@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common;
+package org.zmail.common;
 
 import java.util.ArrayList;
 
@@ -34,10 +34,10 @@ public class DomainInfo
     public String GalLDAPBindPwd;
     public String GalLDAPFilter;
     public String GalAutoCLDAPFilter;
-    public String ZimbraLogOutUrl;
-    public String ZimbraLoginUrl;
-    public String zimbraDomainMaxAccounts;
+    public String ZmailLogOutUrl;
+    public String ZmailLoginUrl;
+    public String zmailDomainMaxAccounts;
     public String preAuthkey;
-    public String zimbraAuthMech;
+    public String zmailAuthMech;
 }
 

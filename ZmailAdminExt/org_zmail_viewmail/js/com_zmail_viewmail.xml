@@ -14,7 +14,7 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_viewmail" version="8.0.0" label="${msg.label}" description="${msg.description}" extension="true">
-    <include>com_zimbra_viewmail.js</include>
+<zimlet name="org_zmail_viewmail" version="8.0.0" label="${msg.label}" description="${msg.description}" extension="true">
+    <include>org_zmail_viewmail.js</include>
     <disableUIUndeploy>FALSE</disableUIUndeploy>
 </zimlet>

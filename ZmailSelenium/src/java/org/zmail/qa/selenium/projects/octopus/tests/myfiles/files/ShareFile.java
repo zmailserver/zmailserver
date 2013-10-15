@@ -14,18 +14,18 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.octopus.tests.myfiles.files;
+package org.zmail.qa.selenium.projects.octopus.tests.myfiles.files;
 
 import org.testng.annotations.*;
-import com.zimbra.qa.selenium.framework.items.FileItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.octopus.ui.DialogFileShare;
-import com.zimbra.qa.selenium.projects.octopus.core.OctopusCommonTest;
-import com.zimbra.qa.selenium.projects.octopus.ui.PageMyFiles;
-import com.zimbra.qa.selenium.projects.octopus.ui.PageSharing.Locators;
+import org.zmail.qa.selenium.framework.items.FileItem;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.octopus.ui.DialogFileShare;
+import org.zmail.qa.selenium.projects.octopus.core.OctopusCommonTest;
+import org.zmail.qa.selenium.projects.octopus.ui.PageMyFiles;
+import org.zmail.qa.selenium.projects.octopus.ui.PageSharing.Locators;
 
 public class ShareFile extends OctopusCommonTest {
 
@@ -52,20 +52,20 @@ public class ShareFile extends OctopusCommonTest {
 
 	@Test(description = "Share file using soap - verify file is shared", groups = { "functional" })
 	public void ShareFile_01() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseRootFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
 
 		// Create file item
-		String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+		String filePath = ZmailSeleniumProperties.getBaseDirectory()
 				+ "/data/public/other/putty.log";
 
 		// Upload file to server through RestUtil
 		String attachmentId = account.uploadFile(filePath);
 
 		// Save uploaded file to the root folder through SOAP
-		account.soapSend("<SaveDocumentRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<SaveDocumentRequest xmlns='urn:zmailMail'>"
 				+ "<doc l='" + briefcaseRootFolder.getId() + "'><upload id='"
 				+ attachmentId + "'/></doc></SaveDocumentRequest>");
 
@@ -77,12 +77,12 @@ public class ShareFile extends OctopusCommonTest {
 		ZAssert.assertNotNull(_fileId, "Verify file is uploaded");
 
 		// Share file through SOAP
-		account.soapSend("<DocumentActionRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<DocumentActionRequest xmlns='urn:zmailMail'>"
 				+ "<action id='" + _fileId + "' op='grant' zid='"
-				+ account.ZimbraId + "'>" + "<grant gt='pub' perm='r'/>"
+				+ account.ZmailId + "'>" + "<grant gt='pub' perm='r'/>"
 				+ "</action>" + "</DocumentActionRequest>");
 
-		account.soapSend("<GetShareNotificationsRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<GetShareNotificationsRequest xmlns='urn:zmailMail'>"
 				+ "</GetShareNotificationsRequest>");
 
 		// Verify the file share icon is displayed
@@ -94,13 +94,13 @@ public class ShareFile extends OctopusCommonTest {
 
 	@Test(description = "Share file using context menu - verify file is shared", groups = { "smoke" })
 	public void ShareFile_02() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseRootFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
 
 		// Create file item
-		String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+		String filePath = ZmailSeleniumProperties.getBaseDirectory()
 				+ "/data/public/other/testsoundfile.wav";
 
 		FileItem file = new FileItem(filePath);
@@ -111,7 +111,7 @@ public class ShareFile extends OctopusCommonTest {
 		String attachmentId = account.uploadFile(filePath);
 
 		// Save uploaded file to the root folder through SOAP
-		account.soapSend("<SaveDocumentRequest xmlns='urn:zimbraMail'><doc l='"
+		account.soapSend("<SaveDocumentRequest xmlns='urn:zmailMail'><doc l='"
 				+ briefcaseRootFolder.getId() + "'>" + "<upload id='"
 				+ attachmentId + "'/></doc></SaveDocumentRequest>");
 
@@ -206,11 +206,11 @@ public class ShareFile extends OctopusCommonTest {
 		}
 		try {
 			// Refresh view
-			//ZimbraAccount account = app.zGetActiveAccount();
+			//ZmailAccount account = app.zGetActiveAccount();
 			//FolderItem item = FolderItem.importFromSOAP(account,SystemFolder.Briefcase);
-			//account.soapSend("<GetFolderRequest xmlns='urn:zimbraMail'><folder l='1' recursive='0'/>" + "</GetFolderRequest>");
-			//account.soapSend("<GetFolderRequest xmlns='urn:zimbraMail' requestId='folders' depth='1' tr='true' view='document'><folder l='" + item.getId() + "'/></GetFolderRequest>");
-			//account.soapSend("<GetActivityStreamRequest xmlns='urn:zimbraMail' id='16'/>");
+			//account.soapSend("<GetFolderRequest xmlns='urn:zmailMail'><folder l='1' recursive='0'/>" + "</GetFolderRequest>");
+			//account.soapSend("<GetFolderRequest xmlns='urn:zmailMail' requestId='folders' depth='1' tr='true' view='document'><folder l='" + item.getId() + "'/></GetFolderRequest>");
+			//account.soapSend("<GetActivityStreamRequest xmlns='urn:zmailMail' id='16'/>");
 			//app.zGetActiveAccount().accountIsDirty = true;
 			//app.zPageOctopus.sRefresh();
 			// Empty trash

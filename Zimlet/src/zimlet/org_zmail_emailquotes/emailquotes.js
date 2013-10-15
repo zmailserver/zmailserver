@@ -18,17 +18,17 @@
  * 
  * @author Raja Rao DV
  */
-function com_zimbra_emailquotes_HandlerObject() {
+function org_zmail_emailquotes_HandlerObject() {
 }
 
-com_zimbra_emailquotes_HandlerObject.prototype = new ZmZimletBase();
-com_zimbra_emailquotes_HandlerObject.prototype.constructor = com_zimbra_emailquotes_HandlerObject;
+org_zmail_emailquotes_HandlerObject.prototype = new ZmZimletBase();
+org_zmail_emailquotes_HandlerObject.prototype.constructor = org_zmail_emailquotes_HandlerObject;
 
 /**
  * Simplify handler object
  *
  */
-var EmailQuotesZimlet = com_zimbra_emailquotes_HandlerObject;
+var EmailQuotesZimlet = org_zmail_emailquotes_HandlerObject;
 
 /**
  * Defines the "enabled" user property.
@@ -673,5 +673,5 @@ EmailQuotesZimlet.prototype._reloadBrowser =
 function() {
     window.onbeforeunload = null;
     var url = AjxUtil.formatUrl({});
-    ZmZimbraMail.sendRedirect(url);
+    ZmZmailMail.sendRedirect(url);
 };

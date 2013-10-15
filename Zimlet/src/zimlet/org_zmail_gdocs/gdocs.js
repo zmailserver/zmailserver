@@ -14,7 +14,7 @@
  */
 
 /**
- * @author ssutar@zimbra.com
+ * @author ssutar@zmail.com
  */
 
 /**
@@ -22,11 +22,11 @@
  * @constructor
  */
 
-function com_zimbra_gdocs() {
+function org_zmail_gdocs() {
 }
 
-com_zimbra_gdocs.prototype = new ZmZimletBase();
-com_zimbra_gdocs.prototype.constructor = com_zimbra_gdocs;
+org_zmail_gdocs.prototype = new ZmZimletBase();
+org_zmail_gdocs.prototype.constructor = org_zmail_gdocs;
 
 /**
  * Required method inplemented for the initialization of the gdocs zimlet.
@@ -34,7 +34,7 @@ com_zimbra_gdocs.prototype.constructor = com_zimbra_gdocs;
  * It gets the object of attachment dialog from app context. It creates the instance of the @see GoogleDocsTabView and adds it to the attachment dialog.
  * 
  */
-com_zimbra_gdocs.prototype.init = function() {
+org_zmail_gdocs.prototype.init = function() {
     var attachDialog = this._attachDialog = appCtxt.getAttachDialog(),
 	    tabview = attachDialog ? attachDialog.getTabView() : null,
         tabLabel = 'Google Docs', //this.getMessage("AttachMailZimlet_tab_label"),
@@ -48,15 +48,15 @@ com_zimbra_gdocs.prototype.init = function() {
 	attachDialog.addOkListener(tabkey, callback);
 };
 /**
- * Called by the Zimbra framework when the panel item is double clicked.
+ * Called by the Zmail framework when the panel item is double clicked.
  */
-com_zimbra_gdocs.prototype.doubleClicked = function() {
+org_zmail_gdocs.prototype.doubleClicked = function() {
 	this.singleClicked();
 };
 /**
- * Called by the Zimbra framework when the panel item is single clicked.
+ * Called by the Zmail framework when the panel item is single clicked.
  */
-com_zimbra_gdocs.prototype.singleClicked = function() {
+org_zmail_gdocs.prototype.singleClicked = function() {
     
 };
 
@@ -64,7 +64,7 @@ com_zimbra_gdocs.prototype.singleClicked = function() {
  * Open the window in the center of the screen with the passed URL, called when opening the Google's OAuth page.
  * @param {String} url
  */
-com_zimbra_gdocs.prototype.openCenteredWindow = function (url) {
+org_zmail_gdocs.prototype.openCenteredWindow = function (url) {
 	var width = 800,
 	    height = 600,
 	    left = parseInt((screen.availWidth / 2) - (width / 2)),
@@ -77,14 +77,14 @@ com_zimbra_gdocs.prototype.openCenteredWindow = function (url) {
 	}
 };
 
-com_zimbra_gdocs.prototype._showWarningMsg = function(message) {
+org_zmail_gdocs.prototype._showWarningMsg = function(message) {
 	var style = DwtMessageDialog.WARNING_STYLE;
 	var dialog = appCtxt.getMsgDialog();
 	dialog.setMessage(message, style);
 	dialog.popup();
 }
 
-com_zimbra_gdocs.prototype.accessor = {
+org_zmail_gdocs.prototype.accessor = {
                 consumerKey   : "anonymous",
                 consumerSecret: "anonymous",
                 serviceProvider: {
@@ -98,7 +98,7 @@ com_zimbra_gdocs.prototype.accessor = {
                 }
             };
 
-com_zimbra_gdocs.prototype.oauthHandlerJSP = "oauth3.jsp"
+org_zmail_gdocs.prototype.oauthHandlerJSP = "oauth3.jsp"
 
 /**
  * Object definition for tab view object.
@@ -119,7 +119,7 @@ GoogleDocsTabView.prototype = new DwtTabViewPage;
 GoogleDocsTabView.prototype.constructor = GoogleDocsTabView;
 
 /**
- * Called by Zimbra framework when the tab is viewed. It will generate the view depending on the User's linked status, if its not loaded already
+ * Called by Zmail framework when the tab is viewed. It will generate the view depending on the User's linked status, if its not loaded already
  */
 GoogleDocsTabView.prototype.showMe = function() {
     if(!this._viewLoaded) {    
@@ -140,13 +140,13 @@ GoogleDocsTabView.prototype.showMe = function() {
     this.setSize(Dwt.DEFAULT, "235");	
 };
 /**
- * Called by zimbra framework to generate the HTML content. This is called only once so used to set the flag _viewLoaded to false
+ * Called by zmail framework to generate the HTML content. This is called only once so used to set the flag _viewLoaded to false
  */
 GoogleDocsTabView.prototype._createHtml = function() {
     this._viewLoaded = false;
 };
 /**
- * called by zimbra framework when the tab lost focus
+ * called by zmail framework when the tab lost focus
  */
 GoogleDocsTabView.prototype.hideMe = function() {
 	DwtTabViewPage.prototype.hideMe.call(this);
@@ -175,7 +175,7 @@ GoogleDocsTabView.prototype.getRequestToken = function() {
             parameters: [
                             ["oauth_callback", "oob"],
                             ["scope", accessor.serviceProvider.scope],                            
-                            ["xoauth_displayname", "Zimbra"]
+                            ["xoauth_displayname", "Zmail"]
                         ]
             };
     OAuth.completeRequest(message, accessor);

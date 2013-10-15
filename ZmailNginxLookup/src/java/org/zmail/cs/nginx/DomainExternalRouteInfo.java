@@ -12,9 +12,9 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.nginx;
+package org.zmail.cs.nginx;
 
-import com.zimbra.cs.ldap.LdapConstants;
+import org.zmail.cs.ldap.LdapConstants;
 
 public class DomainExternalRouteInfo extends LookupEntry {
     

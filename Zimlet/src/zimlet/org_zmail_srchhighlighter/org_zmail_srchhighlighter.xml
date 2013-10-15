@@ -14,12 +14,12 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_srchhighlighter"
+<zimlet name="org_zmail_srchhighlighter"
         version="0.9"
         label="${msg.label}"
         description="${msg.description}">
     <include>searchhighlighter.js</include>
-    <handlerObject>com_zimbra_srchhltr_HandlerObject</handlerObject>
+    <handlerObject>org_zmail_srchhltr_HandlerObject</handlerObject>
     <contentObject>
         <matchOn>
             <regex></regex>

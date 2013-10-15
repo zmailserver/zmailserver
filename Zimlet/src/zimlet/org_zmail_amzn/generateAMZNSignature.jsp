@@ -17,7 +17,7 @@
 /**
  * Copyright (C) Amazon (Original Java Format)
  *
- * Author: Raja Rao DV (rrao@zimbra.com) Converted to JSP
+ * Author: Raja Rao DV (rrao@zmail.com) Converted to JSP
  */
 --%>
 

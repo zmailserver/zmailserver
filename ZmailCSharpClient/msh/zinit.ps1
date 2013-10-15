@@ -1,2 +1,2 @@
-$assemblyFile = "D:\src\main\ZimbraToast\Zimbra.Client\bin\Debug\Zimbra.Client.dll"
+$assemblyFile = "D:\src\main\ZmailToast\Zmail.Client\bin\Debug\Zmail.Client.dll"
 $global:zassembly = [System.Reflection.Assembly]::LoadFrom( $assemblyFile )

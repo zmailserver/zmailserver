@@ -20,7 +20,7 @@
 <%@ attribute name="value" rtexprvalue="true" required="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
 
 <tr>
     <td width=30% nowrap align=right valign='top'><label for="${pref}"><fmt:message key="${label}"/> :</label></td>

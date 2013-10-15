@@ -48,7 +48,7 @@ ZmBriefcaseBaseView.prototype.constructor = ZmBriefcaseBaseView;
 ZmBriefcaseBaseView.prototype.getTitle =
 function() {
 	//TODO: title is the name of the current folder
-	return [ZmMsg.zimbraTitle, this._controller.getApp().getDisplayName()].join(": ");
+	return [ZmMsg.zmailTitle, this._controller.getApp().getDisplayName()].join(": ");
 };
 
 ZmBriefcaseBaseView.prototype._sortIndex =
@@ -188,7 +188,7 @@ function(){
 
 ZmBriefcaseBaseView.prototype.getTitle =
 function(){
-    return [ZmMsg.zimbraTitle, ZmMsg.briefcase].join(': ');  
+    return [ZmMsg.zmailTitle, ZmMsg.briefcase].join(': ');  
 };
 
 ZmBriefcaseBaseView.prototype._cloneList =

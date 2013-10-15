@@ -12,17 +12,17 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib;
+package org.zmail.cs.taglib;
 
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.OperationContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.OperationContext;
 
-public class Contact extends ZimbraTag {
+public class Contact extends ZmailTag {
     private static final long serialVersionUID = 4310265594871660074L;
 
     private String mContactId;
@@ -44,17 +44,17 @@ public class Contact extends ZimbraTag {
         return mField;
     }
 
-    public String getContentStart(Account acct, OperationContext octxt) throws ZimbraTagException, ServiceException {
+    public String getContentStart(Account acct, OperationContext octxt) throws ZmailTagException, ServiceException {
         if (mContactId == null) {
-            throw ZimbraTagException.MISSING_ATTR("id");
+            throw ZmailTagException.MISSING_ATTR("id");
         }
         if (mField == null) {
-            throw ZimbraTagException.MISSING_ATTR("field");
+            throw ZmailTagException.MISSING_ATTR("field");
         }
         int cid = Integer.parseInt(mContactId);
         String id = acct.getId();
         Mailbox mbox = MailboxManager.getInstance().getMailboxByAccountId(id);
-        com.zimbra.cs.mailbox.Contact con = mbox.getContactById(octxt, cid);
+        org.zmail.cs.mailbox.Contact con = mbox.getContactById(octxt, cid);
         Map fields = con.getFields();
         String val = (String)fields.get(mField);
         if (val == null) {

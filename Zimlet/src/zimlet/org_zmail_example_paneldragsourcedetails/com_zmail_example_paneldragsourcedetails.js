@@ -17,21 +17,21 @@
  * Defines the Zimlet handler class.
  *   
  */
-function com_zimbra_example_paneldragsourcedetails_HandlerObject() {
+function org_zmail_example_paneldragsourcedetails_HandlerObject() {
 }
 
 /**
  * Makes the Zimlet class a subclass of ZmZimletBase.
  *
  */
-com_zimbra_example_paneldragsourcedetails_HandlerObject.prototype = new ZmZimletBase();
-com_zimbra_example_paneldragsourcedetails_HandlerObject.prototype.constructor = com_zimbra_example_paneldragsourcedetails_HandlerObject;
+org_zmail_example_paneldragsourcedetails_HandlerObject.prototype = new ZmZimletBase();
+org_zmail_example_paneldragsourcedetails_HandlerObject.prototype.constructor = org_zmail_example_paneldragsourcedetails_HandlerObject;
 
 /**
  * This method gets called by the Zimlet framework when the zimlet loads.
  *  
  */
-com_zimbra_example_paneldragsourcedetails_HandlerObject.prototype.init =
+org_zmail_example_paneldragsourcedetails_HandlerObject.prototype.init =
 function() {
 	// do something
 };
@@ -42,7 +42,7 @@ function() {
  * 
  * @param	obj		the dropped object
  */
-com_zimbra_example_paneldragsourcedetails_HandlerObject.prototype.doDrop =
+org_zmail_example_paneldragsourcedetails_HandlerObject.prototype.doDrop =
 function(obj) {
 
 	var type = obj.TYPE;
@@ -191,7 +191,7 @@ function(obj) {
  * @param	{Object}	obj			an object
  * 
  */
-com_zimbra_example_paneldragsourcedetails_HandlerObject.prototype._handleConvMsgs =
+org_zmail_example_paneldragsourcedetails_HandlerObject.prototype._handleConvMsgs =
 function(conv,obj) {
 	
 	var msgs = conv.msgs.getArray(); // {Array} of {ZmMailMsg}

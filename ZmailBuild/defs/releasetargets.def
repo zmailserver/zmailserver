@@ -1,7 +1,7 @@
 zcs-$(RELEASE).dmg: $(ARCH)/zcs.mpkg packages
 	mkdir -p $(ARCH)/tmp/scripts
 	mkdir -p $(ARCH)/tmp/docs
-	-cp -f $(WEBAPP_DIR)/zimbra/downloads/* $(ARCH)
+	-cp -f $(WEBAPP_DIR)/zmail/downloads/* $(ARCH)
 	cp -f $(PACKAGE_CONF_DIR)/Install/install-mac.sh $(ARCH)/tmp/scripts/installZCS.sh
 	-@(for d in `find $(CONSOLE_DIR)/WebRoot/help -mindepth 1 -maxdepth 1 -type d -exec basename "{}" \;`; do \
 		[ ! -e $(CONSOLE_DIR)/WebRoot/help/$$d/admin/pdf ] && continue; \
@@ -36,10 +36,10 @@ $(ARCH)/zcs.mpkg/Contents/Resources: $(ARCH)/zcs.mpkg/Contents/Resources/English
 
 $(ARCH)/zcs.mpkg/Contents/Resources/English.lproj:
 	mkdir -p $@
-	cp $(LICENSE_DIR)/zimbra/zcl.txt $@/License.txt
+	cp $(LICENSE_DIR)/zmail/zcl.txt $@/License.txt
 	echo "Welcome to the ZCS installer" > $@/Welcome.txt
 	echo "ZCS Installation complete" > $@/Conclusion.txt
-	echo "Run /opt/zimbra/libexec/zmsetup.pl AS ROOT" >> $@/Conclusion.txt
+	echo "Run /opt/zmail/libexec/zmsetup.pl AS ROOT" >> $@/Conclusion.txt
 	echo "to complete system configuration" >> $@/Conclusion.txt
 	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zcs.postflight $@/postflight
 	chmod 755 $@/postflight
@@ -53,20 +53,20 @@ zcs-$(RELEASE).tgz: zcs_stage packages
 
 $(SOAP_DIR)/package-soap-api-doc:
 	(cd $(SOAP_DIR); $(ANT) $(ANT_DEBUG) \
-		-Dzimbra.buildinfo.platform=$(BUILD_PLATFORM) \
-		-Dzimbra.buildinfo.version=$(SOURCE_TAG) \
-		-Dzimbra.buildinfo.type=$(BUILD_TYPE) \
-		-Dzimbra.buildinfo.release=$(RELEASE) -Dzimbra.buildinfo.date=$(DATE) \
-		-Dzimbra.buildinfo.host=$(HOST) package-soap-api-doc ; )
+		-Dzmail.buildinfo.platform=$(BUILD_PLATFORM) \
+		-Dzmail.buildinfo.version=$(SOURCE_TAG) \
+		-Dzmail.buildinfo.type=$(BUILD_TYPE) \
+		-Dzmail.buildinfo.release=$(RELEASE) -Dzmail.buildinfo.date=$(DATE) \
+		-Dzmail.buildinfo.host=$(HOST) package-soap-api-doc ; )
 
 $(SOAP_DIR)/package-soap-api-changelog:
 	(cd $(SOAP_DIR); $(ANT) $(ANT_DEBUG) \
-		-Dzimbra.buildinfo.platform=$(BUILD_PLATFORM) \
+		-Dzmail.buildinfo.platform=$(BUILD_PLATFORM) \
 		-Dis-production=1 \
-		-Dzimbra.buildinfo.version=$(SOURCE_TAG) \
-		-Dzimbra.buildinfo.type=$(BUILD_TYPE) \
-		-Dzimbra.buildinfo.release=$(RELEASE) -Dzimbra.buildinfo.date=$(DATE) \
-		-Dzimbra.buildinfo.host=$(HOST) package-soap-api-changelog ; )
+		-Dzmail.buildinfo.version=$(SOURCE_TAG) \
+		-Dzmail.buildinfo.type=$(BUILD_TYPE) \
+		-Dzmail.buildinfo.release=$(RELEASE) -Dzmail.buildinfo.date=$(DATE) \
+		-Dzmail.buildinfo.host=$(HOST) package-soap-api-changelog ; )
 
 zcs_stage: $(SOAP_DIR)/package-soap-api-doc $(SOAP_DIR)/package-soap-api-changelog
 	mkdir -p zcs-$(RELEASE_VERSION_TAG).$(RELEASE)/packages
@@ -74,10 +74,10 @@ zcs_stage: $(SOAP_DIR)/package-soap-api-doc $(SOAP_DIR)/package-soap-api-changel
 	mkdir -p zcs-$(RELEASE_VERSION_TAG).$(RELEASE)/data
 	mkdir -p zcs-$(RELEASE_VERSION_TAG).$(RELEASE)/docs
 	mkdir -p zcs-$(RELEASE_VERSION_TAG).$(RELEASE)/util/modules
-	cp -f $(LICENSE_DIR)/zimbra/mit.txt zcs-$(RELEASE_VERSION_TAG).$(RELEASE)/docs/MIT.txt
-	cp -f $(LICENSE_DIR)/zimbra/ypl-full.txt zcs-$(RELEASE_VERSION_TAG).$(RELEASE)/docs/YPL.txt
-	cp -f $(LICENSE_DIR)/zimbra/zcl.txt zcs-$(RELEASE_VERSION_TAG).$(RELEASE)/docs/zcl.txt
-	cp -f $(LICENSE_DIR)/zimbra/zimbra_public_eula_2.1.txt zcs-$(RELEASE_VERSION_TAG).$(RELEASE)/docs/zimbra_public_eula_2.1.txt
+	cp -f $(LICENSE_DIR)/zmail/mit.txt zcs-$(RELEASE_VERSION_TAG).$(RELEASE)/docs/MIT.txt
+	cp -f $(LICENSE_DIR)/zmail/ypl-full.txt zcs-$(RELEASE_VERSION_TAG).$(RELEASE)/docs/YPL.txt
+	cp -f $(LICENSE_DIR)/zmail/zcl.txt zcs-$(RELEASE_VERSION_TAG).$(RELEASE)/docs/zcl.txt
+	cp -f $(LICENSE_DIR)/zmail/zmail_public_eula_2.1.txt zcs-$(RELEASE_VERSION_TAG).$(RELEASE)/docs/zmail_public_eula_2.1.txt
 	cp $(LICENSE_DIR)/thirdparty/oracle_jdk_eula.txt zcs-$(RELEASE_VERSION_TAG).$(RELEASE)/docs/oracle_jdk_eula.txt
 	-@(for d in `find $(CONSOLE_DIR)/WebRoot/help -mindepth 1 -maxdepth 1 -type d -exec basename "{}" \;`; do \
 		[ ! -e $(CONSOLE_DIR)/WebRoot/help/$$d/admin/pdf ] && continue; \
@@ -100,7 +100,7 @@ zcs_stage: $(SOAP_DIR)/package-soap-api-doc $(SOAP_DIR)/package-soap-api-changel
 	tar czf zcs-$(RELEASE_VERSION_TAG).$(RELEASE).tgz zcs-$(RELEASE_VERSION_TAG).$(RELEASE)
 	mv zcs-$(RELEASE_VERSION_TAG).$(RELEASE).tgz $(PACKAGE_DIR)
 	(cd $(PACKAGE_DIR); ln -s zcs-$(RELEASE_VERSION_TAG).$(RELEASE).tgz zcs.tgz)
-	-cp -f $(WEBAPP_DIR)/zimbra/downloads/* $(PACKAGE_DIR)
+	-cp -f $(WEBAPP_DIR)/zmail/downloads/* $(PACKAGE_DIR)
 	-cp -f $(SOAP_DIR)/build/docs/*.zip $(PACKAGE_DIR)
 	-cp -f $(WEBAPP_STAGE_DIR)/admin/*.zip $(PACKAGE_DIR)
 	@echo "*** BUILD COMPLETED ***"

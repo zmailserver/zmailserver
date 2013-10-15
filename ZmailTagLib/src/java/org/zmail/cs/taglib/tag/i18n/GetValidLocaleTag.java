@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.tag.i18n;
+package org.zmail.cs.taglib.tag.i18n;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,17 +24,17 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.Element.XMLElement;
-import com.zimbra.common.soap.SoapHttpTransport;
-import com.zimbra.cs.taglib.ZJspSession;
-import com.zimbra.cs.taglib.tag.ZimbraSimpleTag;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.Element.XMLElement;
+import org.zmail.common.soap.SoapHttpTransport;
+import org.zmail.cs.taglib.ZJspSession;
+import org.zmail.cs.taglib.tag.ZmailSimpleTag;
 
 
-public class GetValidLocaleTag extends ZimbraSimpleTag {
+public class GetValidLocaleTag extends ZmailSimpleTag {
 
 
 	private String mVar;

@@ -14,19 +14,19 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.compose.spellcheck;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.compose.spellcheck;
 
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew.Field;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew.Field;
 
 public class SpellCheckHtml extends PrefGroupMailByMessageTest {
 
@@ -35,7 +35,7 @@ public class SpellCheckHtml extends PrefGroupMailByMessageTest {
 		
 		
 		
-		super.startingAccountPreferences.put("zimbraPrefComposeFormat", "html");
+		super.startingAccountPreferences.put("zmailPrefComposeFormat", "html");
 		
 	}
 	
@@ -43,14 +43,14 @@ public class SpellCheckHtml extends PrefGroupMailByMessageTest {
 			groups = { "functional" })
 	public void SpellCheckHtml_01() throws HarnessException {
 		
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
 		
 		// Open the new mail form
 		FormMailNew mailform = (FormMailNew) app.zPageMail.zToolbarPressButton(Button.B_NEW);
 		ZAssert.assertNotNull(mailform, "Verify the new form opened");
 		
 		// Fill out the form with the data
-		mailform.zFillField(Field.To, ZimbraAccount.AccountA().EmailAddress);
+		mailform.zFillField(Field.To, ZmailAccount.AccountA().EmailAddress);
 		mailform.zFillField(Field.Subject, subject);
 		//mailform.zFillField(Field.Body, "write mispeled words here");
 		

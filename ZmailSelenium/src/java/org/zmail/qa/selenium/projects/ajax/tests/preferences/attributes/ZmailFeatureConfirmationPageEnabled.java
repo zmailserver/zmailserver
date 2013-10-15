@@ -12,38 +12,38 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.preferences.attributes;
+package org.zmail.qa.selenium.projects.ajax.tests.preferences.attributes;
 
 import org.testng.annotations.*;
 
-import com.zimbra.qa.selenium.framework.core.*;
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.*;
+import org.zmail.qa.selenium.framework.core.*;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.*;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.*;
 
 
 
-public class ZimbraFeatureConfirmationPageEnabled extends PrefGroupMailByMessageTest {
+public class ZmailFeatureConfirmationPageEnabled extends PrefGroupMailByMessageTest {
 	
-	public ZimbraFeatureConfirmationPageEnabled() {
-		logger.info("New "+ ZimbraFeatureConfirmationPageEnabled.class.getCanonicalName());
+	public ZmailFeatureConfirmationPageEnabled() {
+		logger.info("New "+ ZmailFeatureConfirmationPageEnabled.class.getCanonicalName());
 
-		super.startingAccountPreferences.put("zimbraPrefComposeFormat", "text");
-		super.startingAccountPreferences.put("ZimbraFeatureConfirmationPageEnabled", "TRUE");
+		super.startingAccountPreferences.put("zmailPrefComposeFormat", "text");
+		super.startingAccountPreferences.put("ZmailFeatureConfirmationPageEnabled", "TRUE");
 	}
 	
 	@Bugs(ids = "21979")
 	@Test(	description = "Send a message and confirm the confirmation page",
 			groups = { "functional" })
-	public void ZimbraFeatureConfirmationPageEnabled01() throws HarnessException {
+	public void ZmailFeatureConfirmationPageEnabled01() throws HarnessException {
 		
 		// Create the message data to be sent
 		MailItem mail = new MailItem();
-		mail.dToRecipients.add(new RecipientItem(ZimbraAccount.AccountA()));
-		mail.dSubject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		mail.dBodyText = "body" + ZimbraSeleniumProperties.getUniqueString();
+		mail.dToRecipients.add(new RecipientItem(ZmailAccount.AccountA()));
+		mail.dSubject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		mail.dBodyText = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		// Open the new mail form
@@ -64,7 +64,7 @@ public class ZimbraFeatureConfirmationPageEnabled extends PrefGroupMailByMessage
 		dialog.zClickButton(Button.B_CLOSE);
 		
 
-		MailItem received = MailItem.importFromSOAP(ZimbraAccount.AccountA(), "subject:("+ mail.dSubject +")");
+		MailItem received = MailItem.importFromSOAP(ZmailAccount.AccountA(), "subject:("+ mail.dSubject +")");
 		ZAssert.assertNotNull(received, "Verify the message is received");
 
 		

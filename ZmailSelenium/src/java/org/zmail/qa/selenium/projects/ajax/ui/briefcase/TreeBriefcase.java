@@ -17,18 +17,18 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.ajax.ui.briefcase;
+package org.zmail.qa.selenium.projects.ajax.ui.briefcase;
 
 import java.util.*;
 
 import org.openqa.selenium.By;
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.*;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.ui.*;
 
 /**
- * @author zimbra
+ * @author zmail
  * 
  */
 
@@ -192,7 +192,7 @@ public class TreeBriefcase extends AbsTree {
 		} else if (item instanceof LinkItem) {
 			page = new DialogFindShares(MyApplication,
 					((AppAjaxClient) MyApplication).zPageBriefcase);
-			if (ZimbraSeleniumProperties.isWebDriver()) {
+			if (ZmailSeleniumProperties.isWebDriver()) {
 				clickBy(By.id("ztih__main_Briefcase__BRIEFCASE"),
 					By.linkText("Find Shares..."));
 				return page;

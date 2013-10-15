@@ -17,16 +17,16 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.ajax.ui.mail;
+package org.zmail.qa.selenium.projects.ajax.ui.mail;
 
 import java.util.*;
 
 import com.thoughtworks.selenium.SeleniumException;
-import com.zimbra.qa.selenium.framework.ui.AbsApplication;
-import com.zimbra.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.ui.AbsApplication;
+import org.zmail.qa.selenium.framework.util.*;
 
 /**
- * @author zimbra
+ * @author zmail
  *
  */
 public class DisplayConversation extends DisplayMail {

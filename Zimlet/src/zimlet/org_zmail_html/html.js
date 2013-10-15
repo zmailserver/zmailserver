@@ -13,24 +13,24 @@
  * ***** END LICENSE BLOCK *****
  */
 
-function Com_Zimbra_Html() {
+function Com_Zmail_Html() {
     ZmZimletBase.call(this);
 }
-Com_Zimbra_Html.prototype = new ZmZimletBase;
-Com_Zimbra_Html.prototype.constructor = Com_Zimbra_Html;
+Com_Zmail_Html.prototype = new ZmZimletBase;
+Com_Zmail_Html.prototype.constructor = Com_Zmail_Html;
 
 //
 // Constants
 //
 
-Com_Zimbra_Html.INLINE = "inline";
-Com_Zimbra_Html.IFRAME = "iframe";
+Com_Zmail_Html.INLINE = "inline";
+Com_Zmail_Html.IFRAME = "iframe";
 
 //
 // Public methods
 //
 
-Com_Zimbra_Html.prototype.portletCreated = function(portlet) {
+Com_Zmail_Html.prototype.portletCreated = function(portlet) {
     var refresh = portlet.properties.refresh;
     if (refresh) {
         portlet.setRefreshInterval(refresh);
@@ -38,8 +38,8 @@ Com_Zimbra_Html.prototype.portletCreated = function(portlet) {
     this.portletRefreshed(portlet);
 };
 
-Com_Zimbra_Html.prototype.portletRefreshed = function(portlet) {
-    var isIFrame = portlet.properties.type != Com_Zimbra_Html.INLINE;
+Com_Zmail_Html.prototype.portletRefreshed = function(portlet) {
+    var isIFrame = portlet.properties.type != Com_Zmail_Html.INLINE;
     if (isIFrame) {
         var html = [
             "<iframe ",
@@ -69,7 +69,7 @@ Com_Zimbra_Html.prototype.portletRefreshed = function(portlet) {
 // Protected methods
 //
 
-Com_Zimbra_Html.prototype._handleHtml = function(portlet, req) {
+Com_Zmail_Html.prototype._handleHtml = function(portlet, req) {
     if (!req || !req.responseText) return;
     portlet.setContent(req.responseText);
 };

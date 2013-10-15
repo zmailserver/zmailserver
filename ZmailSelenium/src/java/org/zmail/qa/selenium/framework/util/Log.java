@@ -40,7 +40,7 @@
  *
  * @author nguyenc
  */
-package com.zimbra.qa.selenium.framework.util;
+package org.zmail.qa.selenium.framework.util;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

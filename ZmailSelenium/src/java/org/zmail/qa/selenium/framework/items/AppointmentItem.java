@@ -14,12 +14,12 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.items;
+package org.zmail.qa.selenium.framework.items;
 
 import java.util.*;
 import org.apache.log4j.*;
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.util.*;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.util.*;
 
 public class AppointmentItem implements IItem {
 	protected static Logger logger = LogManager.getLogger(IItem.class);
@@ -100,11 +100,11 @@ public static AppointmentItem importFromSOAP(Element GetAppointmentResponse) thr
 		try {
 
 			// Make sure we only have the GetMsgResponse part
-			Element getAppointmentResponse = ZimbraAccount.SoapClient.selectNode(GetAppointmentResponse, "//mail:GetAppointmentResponse");
+			Element getAppointmentResponse = ZmailAccount.SoapClient.selectNode(GetAppointmentResponse, "//mail:GetAppointmentResponse");
 			if ( getAppointmentResponse == null )
 				throw new HarnessException("Element does not contain GetAppointmentResponse");
 	
-			Element m = ZimbraAccount.SoapClient.selectNode(getAppointmentResponse, "//mail:appt");
+			Element m = ZmailAccount.SoapClient.selectNode(getAppointmentResponse, "//mail:appt");
 			if ( m == null )
 				throw new HarnessException("Element does not contain an appt element");
 			
@@ -116,7 +116,7 @@ public static AppointmentItem importFromSOAP(Element GetAppointmentResponse) thr
 				appt.dFolder = parentFolder;
 			}
 
-			Element sElement = ZimbraAccount.SoapClient.selectNode(m, "//mail:s");
+			Element sElement = ZmailAccount.SoapClient.selectNode(m, "//mail:s");
 			if ( sElement != null ) {
 				
 				// Start time
@@ -124,7 +124,7 @@ public static AppointmentItem importFromSOAP(Element GetAppointmentResponse) thr
 
 			}
 
-			Element eElement = ZimbraAccount.SoapClient.selectNode(m, "//mail:e");
+			Element eElement = ZmailAccount.SoapClient.selectNode(m, "//mail:e");
 			if ( eElement != null ) {
 				
 				// End time
@@ -132,7 +132,7 @@ public static AppointmentItem importFromSOAP(Element GetAppointmentResponse) thr
 
 			}
 
-			Element compElement = ZimbraAccount.SoapClient.selectNode(m, "//mail:comp");
+			Element compElement = ZmailAccount.SoapClient.selectNode(m, "//mail:comp");
 			if ( compElement != null ) {
 
 				// Subject
@@ -147,7 +147,7 @@ public static AppointmentItem importFromSOAP(Element GetAppointmentResponse) thr
 				
 			// Parse the required attendees
 			ArrayList<String> attendees = new ArrayList<String>();
-			Element[] requiredElements = ZimbraAccount.SoapClient.selectNodes(m, "//mail:at[@role='REQ']");
+			Element[] requiredElements = ZmailAccount.SoapClient.selectNodes(m, "//mail:at[@role='REQ']");
 			for ( Element e : requiredElements ) {
 				attendees.add(e.getAttribute("a"));
 			}
@@ -157,7 +157,7 @@ public static AppointmentItem importFromSOAP(Element GetAppointmentResponse) thr
 			
 			// Parse the optional attendees
 			ArrayList<String> optionals = new ArrayList<String>();
-			Element[] optionalElements = ZimbraAccount.SoapClient.selectNodes(m, "//mail:at[@role='OPT']");
+			Element[] optionalElements = ZmailAccount.SoapClient.selectNodes(m, "//mail:at[@role='OPT']");
 			for ( Element e : optionalElements ) {
 				optionals.add(e.getAttribute("a"));
 			}
@@ -167,7 +167,7 @@ public static AppointmentItem importFromSOAP(Element GetAppointmentResponse) thr
 			
 			if (appt.dLocation == "") {
 				
-				Element equipElement = ZimbraAccount.SoapClient.selectNode(m, "//mail:at[@cutype='RES']");
+				Element equipElement = ZmailAccount.SoapClient.selectNode(m, "//mail:at[@cutype='RES']");
 				if ( equipElement != null ) {
 				
 					// Equipment
@@ -177,7 +177,7 @@ public static AppointmentItem importFromSOAP(Element GetAppointmentResponse) thr
 				
 			} else if (appt.dLocation != null) {
 				
-				Element equipElement = ZimbraAccount.SoapClient.selectNode(m, "//mail:at[@cutype='RES'][2]");
+				Element equipElement = ZmailAccount.SoapClient.selectNode(m, "//mail:at[@cutype='RES'][2]");
 				if ( equipElement != null ) {
 				
 					// Equipment
@@ -186,7 +186,7 @@ public static AppointmentItem importFromSOAP(Element GetAppointmentResponse) thr
 				}
 			}
 			
-			Element descElement = ZimbraAccount.SoapClient.selectNode(m, "//mail:fr");
+			Element descElement = ZmailAccount.SoapClient.selectNode(m, "//mail:fr");
 			if ( descElement != null ) {
 				
 				// Body
@@ -211,7 +211,7 @@ public static AppointmentItem importFromSOAP(Element GetAppointmentResponse) thr
 	 * @return
 	 * @throws HarnessException
 	 */
-	public static AppointmentItem importFromSOAP(ZimbraAccount account, String query) throws HarnessException {
+	public static AppointmentItem importFromSOAP(ZmailAccount account, String query) throws HarnessException {
 		Calendar now = Calendar.getInstance();
 		ZDate date = new ZDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH) + 1, now.get(Calendar.DAY_OF_MONTH), 12, 0, 0);
 		return (importFromSOAP(account, query, date.addDays(-31), date.addDays(31)));
@@ -227,11 +227,11 @@ public static AppointmentItem importFromSOAP(Element GetAppointmentResponse) thr
 	 * @return
 	 * @throws HarnessException
 	 */
-	public static AppointmentItem importFromSOAP(ZimbraAccount account, String query, ZDate start, ZDate end) throws HarnessException {
+	public static AppointmentItem importFromSOAP(ZmailAccount account, String query, ZDate start, ZDate end) throws HarnessException {
 		
 		try {
 			account.soapSend(
-					"<SearchRequest xmlns='urn:zimbraMail' types='appointment' calExpandInstStart='"+ start.toMillis() +"' calExpandInstEnd='"+ end.toMillis() +"'>" +
+					"<SearchRequest xmlns='urn:zmailMail' types='appointment' calExpandInstStart='"+ start.toMillis() +"' calExpandInstEnd='"+ end.toMillis() +"'>" +
 						"<query>"+ query +"</query>" +
 					"</SearchRequest>");
 			
@@ -243,7 +243,7 @@ public static AppointmentItem importFromSOAP(Element GetAppointmentResponse) thr
 			String id = account.soapSelectValue("//mail:appt", "id");
 			
 			account.soapSend(
-					"<GetAppointmentRequest xmlns='urn:zimbraMail' id='"+ id +"' includeContent='1'>" +
+					"<GetAppointmentRequest xmlns='urn:zmailMail' id='"+ id +"' includeContent='1'>" +
 	                "</GetAppointmentRequest>");
 			Element getAppointmentResponse = account.soapSelectNode("//mail:GetAppointmentResponse", 1);
 			
@@ -257,7 +257,7 @@ public static AppointmentItem importFromSOAP(Element GetAppointmentResponse) thr
 	
 
 	@Override
-	public void createUsingSOAP(ZimbraAccount account) throws HarnessException {
+	public void createUsingSOAP(ZmailAccount account) throws HarnessException {
 		// TODO Auto-generated method stub
 
 	}
@@ -672,7 +672,7 @@ public static AppointmentItem importFromSOAP(Element GetAppointmentResponse) thr
 	 * @return
 	 * @throws HarnessException
 	 */
-	public static AppointmentItem createAppointmentSingleDay(ZimbraAccount account, Calendar start, int duration, TimeZone tz, String subject, String content, String location, List<ZimbraAccount> attendees)
+	public static AppointmentItem createAppointmentSingleDay(ZmailAccount account, Calendar start, int duration, TimeZone tz, String subject, String content, String location, List<ZmailAccount> attendees)
 	throws HarnessException {
 		
 		// If location is null, don't specify the loc attribute
@@ -687,7 +687,7 @@ public static AppointmentItem importFromSOAP(Element GetAppointmentResponse) thr
 		ZDate ending = beginning.addMinutes(duration);
 		
 		account.soapSend(
-				"<CreateAppointmentRequest xmlns='urn:zimbraMail'>"
+				"<CreateAppointmentRequest xmlns='urn:zmailMail'>"
 			+		"<m l='10'>"
 			+			"<inv>"
 			+				"<comp name='"+ subject +"' "+ loc + " draft='0' status='CONF' class='PUB' transp='O' fb='F'>"
@@ -723,7 +723,7 @@ public static AppointmentItem importFromSOAP(Element GetAppointmentResponse) thr
 	 * @return
 	 * @throws HarnessException
 	 */
-	public static AppointmentItem createAppointmentAllDay(ZimbraAccount account, Calendar date, int duration, String subject, String content, String location, List<ZimbraAccount> attendees)
+	public static AppointmentItem createAppointmentAllDay(ZmailAccount account, Calendar date, int duration, String subject, String content, String location, List<ZmailAccount> attendees)
 	throws HarnessException {
 
 		// If location is null, don't specify the loc attribute
@@ -733,7 +733,7 @@ public static AppointmentItem importFromSOAP(Element GetAppointmentResponse) thr
 		ZDate start = new ZDate(date.get(Calendar.YEAR), date.get(Calendar.MONTH) + 1, date.get(Calendar.DAY_OF_MONTH), 12, 0, 0);
 
 		account.soapSend(
-				"<CreateAppointmentRequest xmlns='urn:zimbraMail'>"
+				"<CreateAppointmentRequest xmlns='urn:zmailMail'>"
 			+		"<m l='10'>"
 			+			"<inv>"
 			+				"<comp allDay='1' name='"+ subject +"' "+ loc + " draft='0' status='CONF' class='PUB' transp='O' fb='F'>"

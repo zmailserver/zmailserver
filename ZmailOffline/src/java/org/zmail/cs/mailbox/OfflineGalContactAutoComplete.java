@@ -12,12 +12,12 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.mailbox.ContactAutoComplete.AutoCompleteResult;
-import com.zimbra.cs.mailbox.ContactAutoComplete.ContactEntry;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.mailbox.ContactAutoComplete.AutoCompleteResult;
+import org.zmail.cs.mailbox.ContactAutoComplete.ContactEntry;
+import org.zmail.soap.ZmailSoapContext;
 
 public class OfflineGalContactAutoComplete extends ContactAutoComplete {
 
@@ -25,7 +25,7 @@ public class OfflineGalContactAutoComplete extends ContactAutoComplete {
         super(acct, octxt);
     }
 
-    public OfflineGalContactAutoComplete(Account acct, ZimbraSoapContext zsc,
+    public OfflineGalContactAutoComplete(Account acct, ZmailSoapContext zsc,
                     OperationContext octxt) {
         super(acct, zsc, octxt);
     }
@@ -35,7 +35,7 @@ public class OfflineGalContactAutoComplete extends ContactAutoComplete {
         if (entry.isGroup() && result.entries.contains(entry)) {
             //duplicate non-group added; addEntry rejects duplicates so we need to manually set the flag
             //this occurs because GAL search in ZD uses mailbox search; there can be multiple entries for one addr 
-            //for example VMware GAL has server-team@zimbra.com as type=account and Zimbra GAL has server-team@zimbra.com as type=group
+            //for example VMware GAL has server-team@zmail.com as type=account and Zmail GAL has server-team@zmail.com as type=group
             for (ContactEntry exist : result.entries) {
                 if (entry.getKey().equals(exist.getKey()) && !exist.isGroup()) {
                     exist.setIsGalGroup(true);

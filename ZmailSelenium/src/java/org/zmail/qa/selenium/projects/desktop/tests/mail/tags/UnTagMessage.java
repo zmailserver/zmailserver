@@ -14,21 +14,21 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.mail.tags;
+package org.zmail.qa.selenium.projects.desktop.tests.mail.tags;
 
 import java.util.HashMap;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.MailItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.MailItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
 
 public class UnTagMessage extends AjaxCommonTest {
 
@@ -41,7 +41,7 @@ public class UnTagMessage extends AjaxCommonTest {
 
 		super.startingAccountPreferences = new HashMap<String, String>() {
 			{
-				put("zimbraPrefGroupMailBy", "message");
+				put("zmailPrefGroupMailBy", "message");
 			}
 		};
 
@@ -50,12 +50,12 @@ public class UnTagMessage extends AjaxCommonTest {
 	@Test(description = "Remove a tag from a message using Toolbar -> Tag -> New Tag", groups = { "smoke" })
 	public void UnTagMessage_01() throws HarnessException {
 
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String tagname = "tag" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String tagname = "tag" + ZmailSeleniumProperties.getUniqueString();
 
 		// Create a tag
 		app.zGetActiveAccount().soapSend(
-				"<CreateTagRequest xmlns='urn:zimbraMail'>" + "<tag name='"
+				"<CreateTagRequest xmlns='urn:zmailMail'>" + "<tag name='"
 						+ tagname + "' color='1' />" + "</CreateTagRequest>");
 		String tagid = app.zGetActiveAccount().soapSelectValue(
 				"//mail:CreateTagResponse/mail:tag", "id");
@@ -64,7 +64,7 @@ public class UnTagMessage extends AjaxCommonTest {
 		FolderItem inboxFolder = FolderItem.importFromSOAP(app
 				.zGetActiveAccount(), SystemFolder.Inbox);
 		app.zGetActiveAccount().soapSend(
-				"<AddMsgRequest xmlns='urn:zimbraMail'>" + "<m l='"
+				"<AddMsgRequest xmlns='urn:zmailMail'>" + "<m l='"
 						+ inboxFolder.getId() + "' t='" + tagid + "'>"
 						+ "<content>From: foo@foo.com\n" + "To: foo@foo.com \n"
 						+ "Subject: " + subject + "\n" + "MIME-Version: 1.0 \n"
@@ -88,7 +88,7 @@ public class UnTagMessage extends AjaxCommonTest {
 				Button.O_TAG_REMOVETAG);
 
 		app.zGetActiveAccount().soapSend(
-				"<GetMsgRequest xmlns='urn:zimbraMail'>" + "<m id='"
+				"<GetMsgRequest xmlns='urn:zmailMail'>" + "<m id='"
 						+ mail.getId() + "'/>" + "</GetMsgRequest>");
 		String mailTags = app.zGetActiveAccount().soapSelectValue(
 				"//mail:GetMsggResponse//mail:m", "t");

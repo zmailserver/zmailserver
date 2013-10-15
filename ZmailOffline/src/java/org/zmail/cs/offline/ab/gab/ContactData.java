@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.ab.gab;
+package org.zmail.cs.offline.ab.gab;
 
 import com.google.gdata.data.contacts.ContactEntry;
 import com.google.gdata.data.contacts.Nickname;
@@ -45,21 +45,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Arrays;
 
-import com.zimbra.cs.mailbox.Contact;
-import com.zimbra.cs.mailbox.Contact.Attachment;
-import com.zimbra.cs.mime.ParsedContact;
-import com.zimbra.cs.offline.ab.Ab;
-import com.zimbra.cs.offline.ab.Address;
-import com.zimbra.cs.offline.ab.Name;
-import com.zimbra.common.mailbox.ContactConstants;
-import com.zimbra.common.service.ServiceException;
+import org.zmail.cs.mailbox.Contact;
+import org.zmail.cs.mailbox.Contact.Attachment;
+import org.zmail.cs.mime.ParsedContact;
+import org.zmail.cs.offline.ab.Ab;
+import org.zmail.cs.offline.ab.Address;
+import org.zmail.cs.offline.ab.Name;
+import org.zmail.common.mailbox.ContactConstants;
+import org.zmail.common.service.ServiceException;
 
-import static com.zimbra.common.mailbox.ContactConstants.*;
+import static org.zmail.common.mailbox.ContactConstants.*;
 
 public class ContactData {
     private final Map<String, String> fields = new HashMap<String, String>();
 
-    private static final String SERVICE_ZIMBRA = "zimbra";
+    private static final String SERVICE_ZIMBRA = "zmail";
     private static final String SERVICE_YAHOO = "yahoo";
     private static final String SERVICE_AOL = "aol";
     private static final String SERVICE_MSN = "msn";
@@ -436,7 +436,7 @@ public class ContactData {
         return gname;
     }
 
-    private static final String ZIM_PREFIX = "zimbra:";
+    private static final String ZIM_PREFIX = "zmail:";
     
     private static String getLocalImAddress(Im im) {
         String address = im.getAddress();

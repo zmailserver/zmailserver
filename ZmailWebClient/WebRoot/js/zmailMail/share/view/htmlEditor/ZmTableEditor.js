@@ -452,7 +452,7 @@ ZmCellPropsDialog = function(parent) {
 ZmCellPropsDialog.prototype = new DwtDialog;
 ZmCellPropsDialog.prototype.constructor = ZmCellPropsDialog;
 
-ZmCellPropsDialog.URL = appContextPath + "/js/zimbraMail/share/view/htmlEditor/dlg-cell-properties.html";
+ZmCellPropsDialog.URL = appContextPath + "/js/zmailMail/share/view/htmlEditor/dlg-cell-properties.html";
 
 ZmCellPropsDialog.IDS = [
 	"BackgroundColor",

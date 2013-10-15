@@ -17,21 +17,21 @@
  * Defines the Zimlet handler class.
  *   
  */
-function com_zimbra_example_menuitemsjs_HandlerObject() {
+function org_zmail_example_menuitemsjs_HandlerObject() {
 }
 
 /**
  * Makes the Zimlet class a subclass of ZmZimletBase.
  *
  */
-com_zimbra_example_menuitemsjs_HandlerObject.prototype = new ZmZimletBase();
-com_zimbra_example_menuitemsjs_HandlerObject.prototype.constructor = com_zimbra_example_menuitemsjs_HandlerObject;
+org_zmail_example_menuitemsjs_HandlerObject.prototype = new ZmZimletBase();
+org_zmail_example_menuitemsjs_HandlerObject.prototype.constructor = org_zmail_example_menuitemsjs_HandlerObject;
 
 /**
  * This method gets called by the Zimlet framework when the zimlet loads.
  *  
  */
-com_zimbra_example_menuitemsjs_HandlerObject.prototype.init =
+org_zmail_example_menuitemsjs_HandlerObject.prototype.init =
 function() {
 	// do something
 };
@@ -41,7 +41,7 @@ function() {
  * 
  * @param	itemId		the Id of selected menu item
  */
-com_zimbra_example_menuitemsjs_HandlerObject.prototype.menuItemSelected =
+org_zmail_example_menuitemsjs_HandlerObject.prototype.menuItemSelected =
 function(itemId) {
 	switch (itemId) {
 		case "SOME_MENU_ITEM_ID1":

@@ -14,7 +14,7 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimletConfig name="com_zimbra_cloudchat" version="0.1">
+<zimletConfig name="org_zmail_cloudchat" version="0.1">
     <global>
         <property name="cloudChatServer">https://cloudchat.cloudfoundry.com:443/</property>
     </global>

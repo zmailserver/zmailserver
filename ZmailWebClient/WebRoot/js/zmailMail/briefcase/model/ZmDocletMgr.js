@@ -30,13 +30,13 @@ function(item) {
 ZmDocletMgr.prototype._uploadSaveDocs2 =
 function(files, status, guids, name, content, ct, enableDesc, desc) {
     // create document wrappers
-    var soapDoc = AjxSoapDoc.create("BatchRequest", "urn:zimbra", null);
+    var soapDoc = AjxSoapDoc.create("BatchRequest", "urn:zmail", null);
     soapDoc.setMethodAttribute("onerror", "continue");
     for (var i = 0; i < files.length; i++) {
         var file = files[i];
         if (file.done) continue;
 
-        var saveDocNode = soapDoc.set("SaveDocumentRequest", null, null, "urn:zimbraMail");
+        var saveDocNode = soapDoc.set("SaveDocumentRequest", null, null, "urn:zmailMail");
         saveDocNode.setAttribute("requestId", i);
 
         var docNode = soapDoc.set("doc", null, saveDocNode);
@@ -206,7 +206,7 @@ function(item) {
 ZmDocletMgr.prototype.getItemInfo =
 function(params)
 {
-    var soapDoc = AjxSoapDoc.create("GetItemRequest", "urn:zimbraMail");
+    var soapDoc = AjxSoapDoc.create("GetItemRequest", "urn:zmailMail");
     var folderNode = soapDoc.set("item");
 
     if(params.path){
@@ -343,7 +343,7 @@ function(item, callback, errorCallback, accountName){
 
     var json = {
 		ItemActionRequest: {
-			_jsns: "urn:zimbraMail",
+			_jsns: "urn:zmailMail",
 			action: {
 				id:	item.id,
 				op:	"unlock"

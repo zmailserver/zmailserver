@@ -1,6 +1,6 @@
 [App]
-Vendor=Zimbra
-Name=Zimbra Desktop
+Vendor=Zmail
+Name=Zmail Desktop
 
 [Environment]
 PRISM_HOME=@install.app.root@/macos/prism/Prism.app/Contents/Resources

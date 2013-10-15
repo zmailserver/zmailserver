@@ -31,22 +31,22 @@ AjxPackage.require("ajax.dwt.widgets.DwtSpinner");
 
 AjxPackage.require("ajax.util.AjxDlgUtil");
 
-AjxPackage.require("zimbraMail.core.ZmClientCmdHandler");
+AjxPackage.require("zmailMail.core.ZmClientCmdHandler");
 
-AjxPackage.require("zimbraMail.share.view.dialog.ZmDialog");
-AjxPackage.require("zimbraMail.share.view.dialog.ZmChooseFolderDialog");
-AjxPackage.require("zimbraMail.share.view.dialog.ZmChooseAccountDialog");
-AjxPackage.require("zimbraMail.share.view.dialog.ZmDumpsterDialog");
-AjxPackage.require("zimbraMail.share.view.dialog.ZmLinkPropsDialog");
-AjxPackage.require("zimbraMail.share.view.dialog.ZmRenameFolderDialog");
-AjxPackage.require("zimbraMail.share.view.dialog.ZmRenameTagDialog");
-AjxPackage.require("zimbraMail.share.view.dialog.ZmPasswordUpdateDialog");
-AjxPackage.require("zimbraMail.share.view.dialog.ZmPickTagDialog");
-AjxPackage.require("zimbraMail.share.view.dialog.ZmUploadDialog");
-AjxPackage.require("zimbraMail.share.view.dialog.ZmUploadConflictDialog");
-AjxPackage.require("zimbraMail.share.view.dialog.ZmDebugLogDialog");
+AjxPackage.require("zmailMail.share.view.dialog.ZmDialog");
+AjxPackage.require("zmailMail.share.view.dialog.ZmChooseFolderDialog");
+AjxPackage.require("zmailMail.share.view.dialog.ZmChooseAccountDialog");
+AjxPackage.require("zmailMail.share.view.dialog.ZmDumpsterDialog");
+AjxPackage.require("zmailMail.share.view.dialog.ZmLinkPropsDialog");
+AjxPackage.require("zmailMail.share.view.dialog.ZmRenameFolderDialog");
+AjxPackage.require("zmailMail.share.view.dialog.ZmRenameTagDialog");
+AjxPackage.require("zmailMail.share.view.dialog.ZmPasswordUpdateDialog");
+AjxPackage.require("zmailMail.share.view.dialog.ZmPickTagDialog");
+AjxPackage.require("zmailMail.share.view.dialog.ZmUploadDialog");
+AjxPackage.require("zmailMail.share.view.dialog.ZmUploadConflictDialog");
+AjxPackage.require("zmailMail.share.view.dialog.ZmDebugLogDialog");
 
-AjxPackage.require("zimbraMail.share.view.htmlEditor.ZmTableEditor");
-AjxPackage.require("zimbraMail.share.view.htmlEditor.ZmSpellChecker");
+AjxPackage.require("zmailMail.share.view.htmlEditor.ZmTableEditor");
+AjxPackage.require("zmailMail.share.view.htmlEditor.ZmSpellChecker");
 
-AjxPackage.require("zimbraMail.share.model.ZmAttachmentTypeList");
+AjxPackage.require("zmailMail.share.model.ZmAttachmentTypeList");

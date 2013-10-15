@@ -12,13 +12,13 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.backup;
+package org.zmail.cs.offline.backup;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.offline.OfflineLog;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.offline.OfflineLog;
 
 public class StatusTracker {
     ConcurrentMap<String, Process> inProgress = new ConcurrentHashMap<String, Process>();

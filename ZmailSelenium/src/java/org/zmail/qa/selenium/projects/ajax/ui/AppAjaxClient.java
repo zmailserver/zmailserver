@@ -17,30 +17,30 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.ajax.ui;
+package org.zmail.qa.selenium.projects.ajax.ui;
 
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.addressbook.PageAddressbook;
-import com.zimbra.qa.selenium.projects.ajax.ui.addressbook.TreeContacts;
-import com.zimbra.qa.selenium.projects.ajax.ui.briefcase.PageBriefcase;
-import com.zimbra.qa.selenium.projects.ajax.ui.briefcase.TreeBriefcase;
-import com.zimbra.qa.selenium.projects.ajax.ui.calendar.PageCalendar;
-import com.zimbra.qa.selenium.projects.ajax.ui.calendar.TreeCalendar;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.preferences.PagePreferences;
-import com.zimbra.qa.selenium.projects.ajax.ui.preferences.TreePreferences;
-import com.zimbra.qa.selenium.projects.ajax.ui.preferences.signature.PageSignature;
-import com.zimbra.qa.selenium.projects.ajax.ui.search.PageAdvancedSearch;
-import com.zimbra.qa.selenium.projects.ajax.ui.search.PageSearch;
-import com.zimbra.qa.selenium.projects.ajax.ui.social.PageSocial;
-import com.zimbra.qa.selenium.projects.ajax.ui.tasks.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.addressbook.PageAddressbook;
+import org.zmail.qa.selenium.projects.ajax.ui.addressbook.TreeContacts;
+import org.zmail.qa.selenium.projects.ajax.ui.briefcase.PageBriefcase;
+import org.zmail.qa.selenium.projects.ajax.ui.briefcase.TreeBriefcase;
+import org.zmail.qa.selenium.projects.ajax.ui.calendar.PageCalendar;
+import org.zmail.qa.selenium.projects.ajax.ui.calendar.TreeCalendar;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.*;
+import org.zmail.qa.selenium.projects.ajax.ui.preferences.PagePreferences;
+import org.zmail.qa.selenium.projects.ajax.ui.preferences.TreePreferences;
+import org.zmail.qa.selenium.projects.ajax.ui.preferences.signature.PageSignature;
+import org.zmail.qa.selenium.projects.ajax.ui.search.PageAdvancedSearch;
+import org.zmail.qa.selenium.projects.ajax.ui.search.PageSearch;
+import org.zmail.qa.selenium.projects.ajax.ui.social.PageSocial;
+import org.zmail.qa.selenium.projects.ajax.ui.tasks.*;
 
 
 /**
- * The <code>AppAjaxClient</code> class defines the Zimbra Ajax client.
+ * The <code>AppAjaxClient</code> class defines the Zmail Ajax client.
  * <p>
  * The <code>AppAjaxClient</code> contains all pages, folder trees,
  * dialog boxes, forms, menus for the Ajax client.
@@ -208,7 +208,7 @@ public class AppAjaxClient extends AbsApplication {
 	 * @see projects.admin.ui.AbsApplication#myApplicationName()
 	 */
 	@Override
-	protected ZimbraAccount zSetActiveAcount(ZimbraAccount account) throws HarnessException {
+	protected ZmailAccount zSetActiveAcount(ZmailAccount account) throws HarnessException {
 		return (super.zSetActiveAcount(account));
 	}
 

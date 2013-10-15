@@ -8,8 +8,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="ZimbraServer" />
-    <orderEntry type="module" module-name="ZimbraCommon" />
+    <orderEntry type="module" module-name="ZmailServer" />
+    <orderEntry type="module" module-name="ZmailCommon" />
   </component>
 </module>
 

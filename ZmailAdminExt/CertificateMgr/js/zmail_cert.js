@@ -1,13 +1,13 @@
-if(window.console && window.console.log) console.log("Loaded zimbra_cert.js");
-if(ZaSettings && ZaSettings.EnabledZimlet["com_zimbra_cert_manager"]){
+if(window.console && window.console.log) console.log("Loaded zmail_cert.js");
+if(ZaSettings && ZaSettings.EnabledZimlet["org_zmail_cert_manager"]){
 if (ZaOperation) ZaOperation.INSTALLCERT = ++ZA_OP_INDEX;
 ZaItem.CERT = "cert" ;
 
 if(ZaOverviewPanelController.treeModifiers)
 	ZaOverviewPanelController.treeModifiers.push(ZaCert.certOvTreeModifier);
 
-ZaZimbraAdmin._CERTS = ZaZimbraAdmin.VIEW_INDEX++;
-ZaZimbraAdmin._CERTS_SERVER_LIST_VIEW = ZaZimbraAdmin.VIEW_INDEX++;
+ZaZmailAdmin._CERTS = ZaZmailAdmin.VIEW_INDEX++;
+ZaZmailAdmin._CERTS_SERVER_LIST_VIEW = ZaZmailAdmin.VIEW_INDEX++;
 
 ZaApp.prototype.getCertViewController =
 function(viewId) {
@@ -21,9 +21,9 @@ function(viewId) {
 
 ZaApp.prototype.getCertsServerListController =
 function() {
-	if (this._controllers[ZaZimbraAdmin._CERTS_SERVER_LIST_VIEW] == null) {
-		this._controllers[ZaZimbraAdmin._CERTS_SERVER_LIST_VIEW] = new ZaCertsServerListController(this._appCtxt, this._container, this);
+	if (this._controllers[ZaZmailAdmin._CERTS_SERVER_LIST_VIEW] == null) {
+		this._controllers[ZaZmailAdmin._CERTS_SERVER_LIST_VIEW] = new ZaCertsServerListController(this._appCtxt, this._container, this);
 	}
-	return this._controllers[ZaZimbraAdmin._CERTS_SERVER_LIST_VIEW];
+	return this._controllers[ZaZmailAdmin._CERTS_SERVER_LIST_VIEW];
 }
 }

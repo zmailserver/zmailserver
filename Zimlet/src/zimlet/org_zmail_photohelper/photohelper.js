@@ -14,12 +14,12 @@
  *@Author Raja Rao DV
  */
 
-function com_zimbra_photohelper() {
+function org_zmail_photohelper() {
 }
-com_zimbra_photohelper.prototype = new ZmZimletBase();
-com_zimbra_photohelper.prototype.constructor = com_zimbra_photohelper;
+org_zmail_photohelper.prototype = new ZmZimletBase();
+org_zmail_photohelper.prototype.constructor = org_zmail_photohelper;
 
-com_zimbra_photohelper.prototype.init =
+org_zmail_photohelper.prototype.init =
 function() {
 	this._photoLocatorURI = this.getConfig("photoLocatorURI");
 	this._useProxy = this.getConfig("useProxy");
@@ -32,7 +32,7 @@ function() {
  *
  * Implement onPeopleSearchData and return photoUrl so that when people search is done, we can show people's photo
 */
-com_zimbra_photohelper.prototype.onPeopleSearchData =
+org_zmail_photohelper.prototype.onPeopleSearchData =
 function(data) {
 	var photoName = data["photoFileName"] ? data["photoFileName"] : (data["jpegPhoto"] ? data["jpegPhoto"] : "noname.jpg");
 	var photoUrl = this._photoLocatorURI.replace("{photoFileName}", photoName).replace("{jpegPhoto}", photoName);

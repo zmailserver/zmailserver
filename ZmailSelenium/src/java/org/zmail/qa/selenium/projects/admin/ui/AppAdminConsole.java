@@ -14,11 +14,11 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.admin.ui;
+package org.zmail.qa.selenium.projects.admin.ui;
 
-import com.zimbra.qa.selenium.framework.ui.AbsApplication;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
+import org.zmail.qa.selenium.framework.ui.AbsApplication;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
 
 
 /**
@@ -82,7 +82,7 @@ public class AppAdminConsole extends AbsApplication {
 	// Searches
 	public PageEditSearch				zPageEditSearch = null;
 	
-	// Downloads page (http://server.com/zimbra/downloads/index.html
+	// Downloads page (http://server.org/zmail/downloads/index.html
 	public PageDownloads				zPageDownloads = null;
 	
 	public AppAdminConsole() {
@@ -252,8 +252,8 @@ public class AppAdminConsole extends AbsApplication {
 		return ("Admin Console");
 	}
 
-	protected ZimbraAccount zSetActiveAcount(ZimbraAccount account) throws HarnessException {
-		// Should we throw an exception if the account is not a ZimbraAdminAccount?
+	protected ZmailAccount zSetActiveAcount(ZmailAccount account) throws HarnessException {
+		// Should we throw an exception if the account is not a ZmailAdminAccount?
 		return (super.zSetActiveAcount(account));
 	}
 

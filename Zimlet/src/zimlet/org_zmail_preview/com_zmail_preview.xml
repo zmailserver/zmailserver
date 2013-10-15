@@ -14,10 +14,10 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_preview"
+<zimlet name="org_zmail_preview"
         version="1.0"
         target="main"
         description="Enable Preview View in Briefcase">
 	<include>preview.js</include>
-	<handlerObject>Com_Zimbra_Preview</handlerObject>
+	<handlerObject>Com_Zmail_Preview</handlerObject>
 </zimlet>

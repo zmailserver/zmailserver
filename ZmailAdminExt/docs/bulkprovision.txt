@@ -1,4 +1,4 @@
-http://bugzilla.zimbra.com/show_bug.cgi?id=31430
+http://bugzilla.zmail.com/show_bug.cgi?id=31430
 
 Requirements:
 
@@ -8,7 +8,7 @@ file import.
 user@domain.tld, displayname, password
 
 see the following url for a functional spec and overview.
-http://twiki.corp.yahoo.com/view/Mail/ZimbraLDAPPasswordMigration
+http://twiki.corp.yahoo.com/view/Mail/ZmailLDAPPasswordMigration
 
 ------------------------------------------------------------------------------------------------
 Work flows/Function specs:
@@ -37,17 +37,17 @@ Download Account provision Summary   -----|----------------------------> A summa
    - The accounts must have the domain name and should be in the current domain
      (Global Admin can create accounts in all the existing domains)
 
-2) List of accounts to be provisioned  (use zimbraAdminExt:GetBulkProvisionAccountsRequest )
+2) List of accounts to be provisioned  (use zmailAdminExt:GetBulkProvisionAccountsRequest )
    account name / display name / password /  checkbox (allow provision or not) / checkbox (Users must change passwords on first login)/ Provision Status (succeed/failed with error info)
 
    Nice to have:
     a) allow editing of lists
     b) allow add more accounts
 
-3) provision accounts  (use zimbraAdmin:CreateAccountRequest)
+3) provision accounts  (use zmailAdmin:CreateAccountRequest)
    - Display and update the create status
    - Use a loop to iterate through all the accounts and disable the UI with Cancel option and status display
-   - zimbraPasswordMustChange=TRUE
+   - zmailPasswordMustChange=TRUE
    - the status will keep on the client side
     
 4) Allow the provision summary to be downloaded.
@@ -60,7 +60,7 @@ Download Account provision Summary   -----|----------------------------> A summa
 -----------------------------------------------------------------------------------------------------
 Soap Commands:
 
-namespaces: urn:zimbraAdminExt
+namespaces: urn:zmailAdminExt
 
 -----------------------------------
 <GetBulkProvisionAccountsRequest accountLimit="20">
@@ -116,4 +116,4 @@ In this example, it is assumed that the email account in ZCS has already been pr
 bulkprovisionexample1.xml - this file shows an example of an XML file that is used to provision multiple email accounts without importing mail.  
 
 bulkprovisionexample2.xml - this file shows an example of an XML file that is used to provision multiple email accounts for externally hosted domain without importing mail.
-In this exampe, zimbraMailTransport attribute of newly provisioned account will be set to point to external SMTP server instead of ZCS server. 
+In this exampe, zmailMailTransport attribute of newly provisioned account will be set to point to external SMTP server instead of ZCS server. 

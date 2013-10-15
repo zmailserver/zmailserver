@@ -20,7 +20,7 @@ Received: from unknown (HELO minotaur.apache.org) (209.237.227.194) by
 	daedalus.apache.org with SMTP; 16 Sep 2003 19:57:48 -0000
 Received: (qmail 90403 invoked by uid 1739); 16 Sep 2003 19:57:59 -0000
 Date: 16 Sep 2003 19:57:59 -0000
-X-Zimbra-Received: 16 Sep 2003 19:57:59 -0000
+X-Zmail-Received: 16 Sep 2003 19:57:59 -0000
 Message-ID: <20030916195759.90402.qmail@minotaur.apache.org>
 From: ericvas@apache.org
 To: xml-xmlbeans-cvs@apache.org
@@ -144,7 +144,7 @@ ericvas     2003/09/16 12:57:59
     * <hr width="50%">
     *
     * @author TAMURA Kent &lt;kent@trl.ibm.co.jp&gt;
-  + * @version $Id: //depot/main/ZimbraServer/data/TestMailRaw/109#3 $
+  + * @version $Id: //depot/main/ZmailServer/data/TestMailRaw/109#3 $
     */
    public class RegularExpression implements java.io.Serializable {
        static final boolean DEBUG = false;

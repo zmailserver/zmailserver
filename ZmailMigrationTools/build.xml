@@ -42,11 +42,11 @@
   <!-- Project Libraries -->
 
   <path id="library.lib.classpath">
-    <pathelement location="../ZimbraCommon/jars/commons-codec-1.6.jar"/>
-    <pathelement location="../ZimbraCommon/jars/commons-httpclient-3.1.jar"/>
-    <pathelement location="../ZimbraCommon/jars/commons-logging.jar"/>
-    <pathelement location="../ZimbraCommon/jars/saaj.jar"/>
-    <pathelement location="../ZimbraCommon/jars/log4j-1.2.16.jar"/>
+    <pathelement location="../ZmailCommon/jars/commons-codec-1.6.jar"/>
+    <pathelement location="../ZmailCommon/jars/commons-httpclient-3.1.jar"/>
+    <pathelement location="../ZmailCommon/jars/commons-logging.jar"/>
+    <pathelement location="../ZmailCommon/jars/saaj.jar"/>
+    <pathelement location="../ZmailCommon/jars/log4j-1.2.16.jar"/>
   </path>
 
   <!-- Modules -->
@@ -131,8 +131,8 @@
 
   <target name="all" depends="init, clean, compile.module.ztozprov" description="build all"/>
 
-  <target name="zmzimbratozimbramig" depends="all">
+  <target name="zmzmailtozmailmig" depends="all">
     <mkdir dir="${basedir}/build"/>
-    <jar manifest="${basedir}/MANIFEST.MF" destfile="${basedir}/build/zmzimbratozimbramig.jar" basedir="${basedir}/out/production/ztozprov"/>
+    <jar manifest="${basedir}/MANIFEST.MF" destfile="${basedir}/build/zmzmailtozmailmig.jar" basedir="${basedir}/out/production/ztozprov"/>
   </target>
 </project>

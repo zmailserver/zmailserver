@@ -16,7 +16,7 @@
  */
 #pragma once
 
-namespace Zimbra
+namespace Zmail
 {
 namespace MAPI
 {
@@ -46,7 +46,7 @@ private:
 
     HRESULT _mapiLogon(LPWSTR strProfile, DWORD dwFlags, LPMAPISESSION &session);
 
-    Zimbra::Util::CriticalSection cs;
+    Zmail::Util::CriticalSection cs;
 
 public:
     MAPISession();

@@ -14,18 +14,18 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.mail.mail;
+package org.zmail.qa.selenium.projects.desktop.tests.mail.mail;
 
 import java.util.HashMap;
 
 import org.testng.annotations.*;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.*;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.*;
 
 
 public class MoveMessage extends AjaxCommonTest {
@@ -52,7 +52,7 @@ public class MoveMessage extends AjaxCommonTest {
 
 		// Make sure we are using an account with message view
 		super.startingAccountPreferences = new HashMap<String, String>() {{
-				    put("zimbraPrefGroupMailBy", "message");
+				    put("zmailPrefGroupMailBy", "message");
 				}};
 		
 	}
@@ -61,28 +61,28 @@ public class MoveMessage extends AjaxCommonTest {
 			groups = { "smoke" })
 	public void MoveMail_01() throws HarnessException {
 
-		String subject = "subject"+ ZimbraSeleniumProperties.getUniqueString();
-		String foldername = "folder"+ ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject"+ ZmailSeleniumProperties.getUniqueString();
+		String foldername = "folder"+ ZmailSeleniumProperties.getUniqueString();
 
 		// Create a subfolder to move the message into
 		// i.e. Inbox/subfolder
 		//
 		FolderItem inbox = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Inbox);
 		app.zGetActiveAccount().soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+					"<CreateFolderRequest xmlns='urn:zmailMail'>" +
 						"<folder name='" + foldername +"' l='"+ inbox.getId() +"'/>" +
 					"</CreateFolderRequest>");
 		GeneralUtility.syncDesktopToZcsWithSoap(app.zGetActiveAccount());
 		FolderItem subfolder = FolderItem.importFromSOAP(app.zGetActiveAccount(), foldername);
 
 		// Send a message to the account
-		ZimbraAccount.AccountA().soapSend(
-					"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+		ZmailAccount.AccountA().soapSend(
+					"<SendMsgRequest xmlns='urn:zmailMail'>" +
 						"<m>" +
 							"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 							"<su>"+ subject +"</su>" +
 							"<mp ct='text/plain'>" +
-								"<content>content"+ ZimbraSeleniumProperties.getUniqueString() +"</content>" +
+								"<content>content"+ ZmailSeleniumProperties.getUniqueString() +"</content>" +
 							"</mp>" +
 						"</m>" +
 					"</SendMsgRequest>");
@@ -106,7 +106,7 @@ public class MoveMessage extends AjaxCommonTest {
 
 		// Get the message, make sure it is in the correct folder
 		app.zGetActiveAccount().soapSend(
-				"<GetMsgRequest xmlns='urn:zimbraMail'>" +
+				"<GetMsgRequest xmlns='urn:zmailMail'>" +
 					"<m id='" + mail.getId() +"'/>" +
 				"</GetMsgRequest>");
 		String folderId = app.zGetActiveAccount().soapSelectValue("//mail:m", "l");
@@ -119,28 +119,28 @@ public class MoveMessage extends AjaxCommonTest {
 			groups = { "functional" })
 	public void MoveMail_02() throws HarnessException {
 		
-		String subject = "subject"+ ZimbraSeleniumProperties.getUniqueString();
-		String foldername = "folder"+ ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject"+ ZmailSeleniumProperties.getUniqueString();
+		String foldername = "folder"+ ZmailSeleniumProperties.getUniqueString();
 		
 		// Create a subfolder to move the message into
 		// i.e. Inbox/subfolder
 		//
 		FolderItem inbox = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Inbox);
 		app.zGetActiveAccount().soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+					"<CreateFolderRequest xmlns='urn:zmailMail'>" +
 						"<folder name='" + foldername +"' l='"+ inbox.getId() +"'/>" +
 					"</CreateFolderRequest>");
 		GeneralUtility.syncDesktopToZcsWithSoap(app.zGetActiveAccount());
 		FolderItem subfolder = FolderItem.importFromSOAP(app.zGetActiveAccount(), foldername);
 
 		// Send a message to the account
-		ZimbraAccount.AccountA().soapSend(
-					"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+		ZmailAccount.AccountA().soapSend(
+					"<SendMsgRequest xmlns='urn:zmailMail'>" +
 						"<m>" +
 							"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 							"<su>"+ subject +"</su>" +
 							"<mp ct='text/plain'>" +
-								"<content>content"+ ZimbraSeleniumProperties.getUniqueString() +"</content>" +
+								"<content>content"+ ZmailSeleniumProperties.getUniqueString() +"</content>" +
 							"</mp>" +
 						"</m>" +
 					"</SendMsgRequest>");
@@ -167,7 +167,7 @@ public class MoveMessage extends AjaxCommonTest {
 
 		// Get the message, make sure it is in the correct folder
 		app.zGetActiveAccount().soapSend(
-				"<GetMsgRequest xmlns='urn:zimbraMail'>" +
+				"<GetMsgRequest xmlns='urn:zmailMail'>" +
 					"<m id='" + mail.getId() +"'/>" +
 				"</GetMsgRequest>");
 		String folderId = app.zGetActiveAccount().soapSelectValue("//mail:m", "l");
@@ -181,16 +181,16 @@ public class MoveMessage extends AjaxCommonTest {
 			groups = { "functional" })
 	public void MoveMail_03() throws HarnessException {
 
-		String subject = "subject"+ ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject"+ ZmailSeleniumProperties.getUniqueString();
 
 		// Send a message to the account
-		ZimbraAccount.AccountA().soapSend(
-					"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+		ZmailAccount.AccountA().soapSend(
+					"<SendMsgRequest xmlns='urn:zmailMail'>" +
 						"<m>" +
 							"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 							"<su>"+ subject +"</su>" +
 							"<mp ct='text/plain'>" +
-								"<content>content"+ ZimbraSeleniumProperties.getUniqueString() +"</content>" +
+								"<content>content"+ ZmailSeleniumProperties.getUniqueString() +"</content>" +
 							"</mp>" +
 						"</m>" +
 					"</SendMsgRequest>");
@@ -211,7 +211,7 @@ public class MoveMessage extends AjaxCommonTest {
 
 		// Get the message, make sure it is in the correct folder
 		app.zGetActiveAccount().soapSend(
-				"<GetMsgRequest xmlns='urn:zimbraMail'>" +
+				"<GetMsgRequest xmlns='urn:zmailMail'>" +
 					"<m id='" + mail.getId() +"'/>" +
 				"</GetMsgRequest>");
 
@@ -227,15 +227,15 @@ public class MoveMessage extends AjaxCommonTest {
 			groups = { "skip-functional" })
 	public void MoveMail_04() throws HarnessException {
 		
-		String subject = "subject"+ ZimbraSeleniumProperties.getUniqueString();
-		String foldername = "folder"+ ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject"+ ZmailSeleniumProperties.getUniqueString();
+		String foldername = "folder"+ ZmailSeleniumProperties.getUniqueString();
 		
 		// Create a subfolder to move the message into
 		// i.e. Inbox/subfolder
 		//
 		FolderItem inbox = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Inbox);
 		app.zGetActiveAccount().soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+					"<CreateFolderRequest xmlns='urn:zmailMail'>" +
 						"<folder name='" + foldername +"' l='"+ inbox.getId() +"'/>" +
 					"</CreateFolderRequest>");
 
@@ -244,7 +244,7 @@ public class MoveMessage extends AjaxCommonTest {
 
 		// Send a message to the account
 		app.zGetActiveAccount().soapSend(
-				"<AddMsgRequest xmlns='urn:zimbraMail'>" +
+				"<AddMsgRequest xmlns='urn:zmailMail'>" +
             		"<m l='"+ subfolder.getId() +"'>" +
                 		"<content>From: foo@foo.com\n" +
 "To: foo@foo.com \n" +
@@ -280,7 +280,7 @@ public class MoveMessage extends AjaxCommonTest {
 
 		// Get the message, make sure it is in the correct folder
 		app.zGetActiveAccount().soapSend(
-				"<GetMsgRequest xmlns='urn:zimbraMail'>" +
+				"<GetMsgRequest xmlns='urn:zmailMail'>" +
 					"<m id='" + mail.getId() +"'/>" +
 				"</GetMsgRequest>");
 		String folderId = app.zGetActiveAccount().soapSelectValue("//mail:m", "l");
@@ -293,15 +293,15 @@ public class MoveMessage extends AjaxCommonTest {
 			groups = { "functional" })
 	public void MoveMail_05() throws HarnessException {
 		
-		String subject = "subject"+ ZimbraSeleniumProperties.getUniqueString();
-		String foldername = "folder"+ ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject"+ ZmailSeleniumProperties.getUniqueString();
+		String foldername = "folder"+ ZmailSeleniumProperties.getUniqueString();
 		
 		// Create a subfolder to move the message into
 		// i.e. Inbox/subfolder
 		//
 		FolderItem inbox = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Inbox);
 		app.zGetActiveAccount().soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+					"<CreateFolderRequest xmlns='urn:zmailMail'>" +
 						"<folder name='" + foldername +"' l='"+ inbox.getId() +"'/>" +
 					"</CreateFolderRequest>");
 
@@ -311,13 +311,13 @@ public class MoveMessage extends AjaxCommonTest {
       FolderItem subfolder = FolderItem.importFromSOAP(app.zGetActiveAccount(), foldername);
 
 		// Send a message to the account
-		ZimbraAccount.AccountA().soapSend(
-					"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+		ZmailAccount.AccountA().soapSend(
+					"<SendMsgRequest xmlns='urn:zmailMail'>" +
 						"<m>" +
 							"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 							"<su>"+ subject +"</su>" +
 							"<mp ct='text/plain'>" +
-								"<content>content"+ ZimbraSeleniumProperties.getUniqueString() +"</content>" +
+								"<content>content"+ ZmailSeleniumProperties.getUniqueString() +"</content>" +
 							"</mp>" +
 						"</m>" +
 					"</SendMsgRequest>");
@@ -341,7 +341,7 @@ public class MoveMessage extends AjaxCommonTest {
 
 		// Get the message, make sure it is in the correct folder
 		app.zGetActiveAccount().soapSend(
-				"<GetMsgRequest xmlns='urn:zimbraMail'>" +
+				"<GetMsgRequest xmlns='urn:zmailMail'>" +
 					"<m id='" + mail.getId() +"'/>" +
 				"</GetMsgRequest>");
 		String folderId = app.zGetActiveAccount().soapSelectValue("//mail:m", "l");

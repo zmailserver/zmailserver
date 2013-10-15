@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.addressbook.bugs;
+package org.zmail.qa.selenium.projects.ajax.tests.addressbook.bugs;
 
 
 
@@ -22,13 +22,13 @@ import java.util.*;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.addressbook.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.addressbook.FormContactGroupNew.Field;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.addressbook.*;
+import org.zmail.qa.selenium.projects.ajax.ui.addressbook.FormContactGroupNew.Field;
 
 
 public class ContactGroup extends AjaxCommonTest  {
@@ -46,7 +46,7 @@ public class ContactGroup extends AjaxCommonTest  {
 		
 	
 	/*
-	 * http://bugzilla.zimbra.com/show_bug.cgi?id=60652#c0
+	 * http://bugzilla.zmail.com/show_bug.cgi?id=60652#c0
 	 * 
 	 * 1)Login to ZWC
 	 * 2)Create a new contact group, make sure you have some contacts created initially.
@@ -60,7 +60,7 @@ public class ContactGroup extends AjaxCommonTest  {
 		
 		//-- Data
 		
-		String groupname = "group" + ZimbraSeleniumProperties.getUniqueString();
+		String groupname = "group" + ZmailSeleniumProperties.getUniqueString();
 		
 		// Create a contact
 		ContactItem contact = ContactItem.createContactItem(app.zGetActiveAccount());
@@ -143,7 +143,7 @@ public class ContactGroup extends AjaxCommonTest  {
 	@Test( description="create a new contact group from GAL search result",
 		   groups= { "functional"  } )
 	public void Bug66623_AddingAGALToAContactGroup() throws HarnessException{
-		String email=ZimbraAccount.AccountB().EmailAddress.substring(0,ZimbraAccount.AccountB().EmailAddress.indexOf('@'));
+		String email=ZmailAccount.AccountB().EmailAddress.substring(0,ZmailAccount.AccountB().EmailAddress.indexOf('@'));
 		
 		// search for a GAL
 		app.zPageSearch.zToolbarPressPulldown(Button.B_SEARCHTYPE, Button.O_SEARCHTYPE_GAL); 		
@@ -156,10 +156,10 @@ public class ContactGroup extends AjaxCommonTest  {
 	
 	 	//Create a contact item
 	 	ContactItem contactItem = new ContactItem(email);
-	 	contactItem.email = ZimbraAccount.AccountB().EmailAddress;
+	 	contactItem.email = ZmailAccount.AccountB().EmailAddress;
 	 	
 	 	//Create contact group 
-		 ContactGroupItem newGroup = new ContactGroupItem("group_" + ZimbraSeleniumProperties.getUniqueString().substring(8));
+		 ContactGroupItem newGroup = new ContactGroupItem("group_" + ZmailSeleniumProperties.getUniqueString().substring(8));
 		 
 		 //Add the member to the group	 
 		 newGroup.addDListMember(contactItem);

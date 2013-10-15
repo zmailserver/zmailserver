@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.tasks;
+package org.zmail.qa.selenium.projects.ajax.tests.tasks;
 
 import java.util.HashMap;
 import java.util.List;
@@ -22,22 +22,22 @@ import java.util.List;
 import org.testng.annotations.Test;
 
 
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.TaskItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.GeneralUtility;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.SleepUtil;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZDate;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.tasks.DisplayTask;
-import com.zimbra.qa.selenium.projects.ajax.ui.tasks.FormTaskNew;
-import com.zimbra.qa.selenium.projects.ajax.ui.tasks.FormTaskNew.Field;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.TaskItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.GeneralUtility;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.SleepUtil;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZDate;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.tasks.DisplayTask;
+import org.zmail.qa.selenium.projects.ajax.ui.tasks.FormTaskNew;
+import org.zmail.qa.selenium.projects.ajax.ui.tasks.FormTaskNew.Field;
 
 public class EditTask extends AjaxCommonTest{
 
@@ -49,8 +49,8 @@ public class EditTask extends AjaxCommonTest{
 		super.startingPage = app.zPageTasks;
 
 		super.startingAccountPreferences = new HashMap<String , String>() {{
-			put("zimbraPrefShowSelectionCheckbox", "TRUE");
-			put("zimbraPrefTasksReadingPaneLocation", "bottom");
+			put("zmailPrefShowSelectionCheckbox", "TRUE");
+			put("zmailPrefTasksReadingPaneLocation", "bottom");
 		}};
 	}
 
@@ -60,11 +60,11 @@ public class EditTask extends AjaxCommonTest{
 		FolderItem taskFolder = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Tasks);
 
 
-		String subject = "task"+ ZimbraSeleniumProperties.getUniqueString();
-		String Newsubject = "Edittask"+ ZimbraSeleniumProperties.getUniqueString();
+		String subject = "task"+ ZmailSeleniumProperties.getUniqueString();
+		String Newsubject = "Edittask"+ ZmailSeleniumProperties.getUniqueString();
 
 		app.zGetActiveAccount().soapSend(
-				"<CreateTaskRequest xmlns='urn:zimbraMail'>" +
+				"<CreateTaskRequest xmlns='urn:zmailMail'>" +
 				"<m >" +
 				"<inv>" +
 				"<comp name='"+ subject +"'>" +
@@ -73,7 +73,7 @@ public class EditTask extends AjaxCommonTest{
 				"</inv>" +
 				"<su>"+ subject +"</su>" +
 				"<mp ct='text/plain'>" +
-				"<content>content"+ ZimbraSeleniumProperties.getUniqueString() +"</content>" +
+				"<content>content"+ ZmailSeleniumProperties.getUniqueString() +"</content>" +
 				"</mp>" +
 				"</m>" +
 		"</CreateTaskRequest>");
@@ -143,12 +143,12 @@ public class EditTask extends AjaxCommonTest{
 		FolderItem taskFolder = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Tasks);
 		FolderItem trashFolder = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Trash);
 
-		String subject = "task"+ ZimbraSeleniumProperties.getUniqueString();
+		String subject = "task"+ ZmailSeleniumProperties.getUniqueString();
 		ZDate dueDate      = new ZDate(2015, 11, 17, 12, 0, 0);
 		
 		//Create task
 		app.zGetActiveAccount().soapSend(
-				"<CreateTaskRequest xmlns='urn:zimbraMail'>" +
+				"<CreateTaskRequest xmlns='urn:zmailMail'>" +
 				"<m >" +
 				"<inv>" +
 				"<comp name='"+ subject +"'>" +
@@ -157,7 +157,7 @@ public class EditTask extends AjaxCommonTest{
 				"</inv>" +
 				"<su>"+ subject +"</su>" +
 				"<mp ct='text/plain'>" +
-				"<content>content"+ ZimbraSeleniumProperties.getUniqueString() +"</content>" +
+				"<content>content"+ ZmailSeleniumProperties.getUniqueString() +"</content>" +
 				"</mp>" +
 				"</m>" +
 		"</CreateTaskRequest>");
@@ -180,7 +180,7 @@ public class EditTask extends AjaxCommonTest{
 		DisplayTask actual = (DisplayTask) app.zPageTasks.zListItem(Action.A_LEFTCLICK, subject);
 		
 		//Verify Due Date before refresh
-		ZAssert.assertEquals(actual.zGetTaskListViewProperty(com.zimbra.qa.selenium.projects.ajax.ui.tasks.DisplayTask.Field.DueDate), dueDate.toMM_DD_YYYY(), "Verify the due date matches");
+		ZAssert.assertEquals(actual.zGetTaskListViewProperty(org.zmail.qa.selenium.projects.ajax.ui.tasks.DisplayTask.Field.DueDate), dueDate.toMM_DD_YYYY(), "Verify the due date matches");
 		
 		// click on Trash folder
 		app.zTreeTasks.zTreeItem(Action.A_LEFTCLICK, trashFolder);		
@@ -188,7 +188,7 @@ public class EditTask extends AjaxCommonTest{
 		app.zTreeTasks.zTreeItem(Action.A_LEFTCLICK, taskFolder);
 		
 		//Verify the due date matches after refresh
-		ZAssert.assertEquals(actual.zGetTaskListViewProperty(com.zimbra.qa.selenium.projects.ajax.ui.tasks.DisplayTask.Field.DueDate), dueDate.toMM_DD_YYYY(), "Verify the due date matches after refresh");
+		ZAssert.assertEquals(actual.zGetTaskListViewProperty(org.zmail.qa.selenium.projects.ajax.ui.tasks.DisplayTask.Field.DueDate), dueDate.toMM_DD_YYYY(), "Verify the due date matches after refresh");
 			
 	}
 	@Test(	description = "Create task through SOAP - Edit task using Right Click Context Menu & verify through GUI",groups = { "functional" })
@@ -197,11 +197,11 @@ public class EditTask extends AjaxCommonTest{
 		FolderItem taskFolder = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Tasks);
 
 
-		String subject = "task"+ ZimbraSeleniumProperties.getUniqueString();
-		String Newsubject = "Edittask"+ ZimbraSeleniumProperties.getUniqueString();
+		String subject = "task"+ ZmailSeleniumProperties.getUniqueString();
+		String Newsubject = "Edittask"+ ZmailSeleniumProperties.getUniqueString();
 
 		app.zGetActiveAccount().soapSend(
-				"<CreateTaskRequest xmlns='urn:zimbraMail'>" +
+				"<CreateTaskRequest xmlns='urn:zmailMail'>" +
 				"<m >" +
 				"<inv>" +
 				"<comp name='"+ subject +"'>" +
@@ -210,7 +210,7 @@ public class EditTask extends AjaxCommonTest{
 				"</inv>" +
 				"<su>"+ subject +"</su>" +
 				"<mp ct='text/plain'>" +
-				"<content>content"+ ZimbraSeleniumProperties.getUniqueString() +"</content>" +
+				"<content>content"+ ZmailSeleniumProperties.getUniqueString() +"</content>" +
 				"</mp>" +
 				"</m>" +
 		"</CreateTaskRequest>");

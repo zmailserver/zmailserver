@@ -11,7 +11,7 @@
  * Software distributed under the License is distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
- * @author Raja Rao DV rrao@zimbra.com
+ * @author Raja Rao DV rrao@zmail.com
  *
  * Checks for attach* word in email and also if there is an attachment.
  * If the email does not have an attachment, throws missing-attachment alert dialog
@@ -20,16 +20,16 @@
 /**
  * Constructor
  */
-function com_zimbra_attachalert_HandlerObject() {
+function org_zmail_attachalert_HandlerObject() {
 }
 
-com_zimbra_attachalert_HandlerObject.prototype = new ZmZimletBase();
-com_zimbra_attachalert_HandlerObject.prototype.constructor = com_zimbra_attachalert_HandlerObject;
+org_zmail_attachalert_HandlerObject.prototype = new ZmZimletBase();
+org_zmail_attachalert_HandlerObject.prototype.constructor = org_zmail_attachalert_HandlerObject;
 
 /**
  * Simplify Zimlet handler name.
  */
-var AttachAlertZimlet = com_zimbra_attachalert_HandlerObject;
+var AttachAlertZimlet = org_zmail_attachalert_HandlerObject;
 
 /**
  * Defines the "zimlet name".
@@ -241,6 +241,6 @@ function() {
 	if (this._reloadRequired) {
 		window.onbeforeunload = null;
 		var url = AjxUtil.formatUrl({});
-		ZmZimbraMail.sendRedirect(url);
+		ZmZmailMail.sendRedirect(url);
 	}
 };

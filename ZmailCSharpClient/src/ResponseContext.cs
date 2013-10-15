@@ -14,9 +14,9 @@
  */
 using System;
 using System.Xml;
-using Zimbra.Client.Util;
+using Zmail.Client.Util;
 
-namespace Zimbra.Client
+namespace Zmail.Client
 {
 	public class ResponseContext
 	{
@@ -29,10 +29,10 @@ namespace Zimbra.Client
 		{
 			if( contextNode == null )
 				return;
-			sessionId = XmlUtil.GetNodeText( contextNode, ZimbraService.NS_PREFIX + ":" + ZimbraService.E_SESSION );
-			changeToken = XmlUtil.GetAttributeValue( contextNode, ZimbraService.E_CHANGE, ZimbraService.A_TOKEN );
+			sessionId = XmlUtil.GetNodeText( contextNode, ZmailService.NS_PREFIX + ":" + ZmailService.E_SESSION );
+			changeToken = XmlUtil.GetAttributeValue( contextNode, ZmailService.E_CHANGE, ZmailService.A_TOKEN );
 
-			XmlNode notifyNode = contextNode.SelectSingleNode( ZimbraService.NS_PREFIX + ":" + ZimbraService.E_NOTIFY, XmlUtil.NamespaceManager );
+			XmlNode notifyNode = contextNode.SelectSingleNode( ZmailService.NS_PREFIX + ":" + ZmailService.E_NOTIFY, XmlUtil.NamespaceManager );
 			if( notifyNode != null ) 
 			{
 				notification = new Notification(notifyNode);

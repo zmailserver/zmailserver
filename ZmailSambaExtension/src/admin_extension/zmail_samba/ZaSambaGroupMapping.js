@@ -100,9 +100,9 @@ ZaSambaGroupMapping.validateSambaGroup =
 function (params) {
 	var obj = this._view.getObject();
 	if(AjxUtil.isEmpty(obj.attrs[ZaSambaGroupMapping.A_sambaGroupType])) {
-		throw new AjxException(AjxMessageFormat.format(zimbra_samba.ERROR_MISSING_VALUE_SAMBA_GROUP,[ZaSambaGroupMapping.A_sambaGroupType]),AjxException.INVALID_PARAM,"ZaSambaGroupMapping.prototype.validateSambaGroup");		
+		throw new AjxException(AjxMessageFormat.format(zmail_samba.ERROR_MISSING_VALUE_SAMBA_GROUP,[ZaSambaGroupMapping.A_sambaGroupType]),AjxException.INVALID_PARAM,"ZaSambaGroupMapping.prototype.validateSambaGroup");		
 	} else if (AjxUtil.isEmpty(obj.attrs[ZaSambaGroupMapping.A_sambaSID])) {
-		throw new AjxException(AjxMessageFormat.format(zimbra_samba.ERROR_MISSING_VALUE_SAMBA_GROUP,[ZaSambaGroupMapping.A_sambaSID]),AjxException.INVALID_PARAM,"ZaSambaGroupMapping.prototype.validateSambaGroup");
+		throw new AjxException(AjxMessageFormat.format(zmail_samba.ERROR_MISSING_VALUE_SAMBA_GROUP,[ZaSambaGroupMapping.A_sambaSID]),AjxException.INVALID_PARAM,"ZaSambaGroupMapping.prototype.validateSambaGroup");
 	} else {
 		this.runValidationStack(params);
 	}
@@ -123,12 +123,12 @@ if(ZaTabView.XFormModifiers["ZaPosixGroupXFormView"]) {
 		var sambaTabIx = ++this.TAB_INDEX;
 		
 		var tabBar = xFormObject.items[1] ;
-		tabBar.choices.push({value:sambaTabIx, label:zimbra_samba.SambaGroupTabTitle});		
+		tabBar.choices.push({value:sambaTabIx, label:zmail_samba.SambaGroupTabTitle});		
 		var sambaGroupTab={type:_ZATABCASE_, numCols:1, caseKey:sambaTabIx,
 					items: [
 						{type:_ZAGROUP_, 
 							items:[
-								{ref:ZaSambaGroupMapping.A_sambaDomainSID, type:_OSELECT1_, editable:false,choices:ZaApp.getInstance().getSambaDomainSIDListChoices(true), msgName:zimbra_samba.MSG_SambaDomain,label:zimbra_samba.LBL_SambaDomain, labelLocation:_LEFT_,
+								{ref:ZaSambaGroupMapping.A_sambaDomainSID, type:_OSELECT1_, editable:false,choices:ZaApp.getInstance().getSambaDomainSIDListChoices(true), msgName:zmail_samba.MSG_SambaDomain,label:zmail_samba.LBL_SambaDomain, labelLocation:_LEFT_,
 									onChange:ZaTabView.onFormFieldChanged,
 									elementChanged:function(val,instanceValue, event) {
 										var v = val;
@@ -170,16 +170,16 @@ if(ZaTabView.XFormModifiers["ZaPosixGroupXFormView"]) {
 								},	
 								{ref:ZaSambaGroupMapping.A_isSpecialNTGroup, 
 									type:_CHECKBOX_,  
-									msgName:zimbra_samba.MSG_SpecialWindowsGroup,
-									label:zimbra_samba.LBL_SpecialWindowsGroup,
+									msgName:zmail_samba.MSG_SpecialWindowsGroup,
+									label:zmail_samba.LBL_SpecialWindowsGroup,
 									trueValue:1, falseValue:0, 
 									onChange:ZaTabView.onFormFieldChanged
 								},
 								{ref:ZaSambaGroupMapping.A_specialNTGroupType,
 									visibilityChecks:[[XForm.checkInstanceValue,ZaSambaGroupMapping.A_isSpecialNTGroup,1]],
 									visibilityChangeEventSources:[ZaSambaGroupMapping.A_isSpecialNTGroup],
-									type:_OSELECT1_, msgName:zimbra_samba.MSG_SpecialWindowsGroupType,
-									label:zimbra_samba.LBL_SpecialWindowsGroupType, 
+									type:_OSELECT1_, msgName:zmail_samba.MSG_SpecialWindowsGroupType,
+									label:zmail_samba.LBL_SpecialWindowsGroupType, 
 									labelLocation:_LEFT_, 
 									choices:ZaSambaGroupMapping.specialNTGorupChoices, 
 									onChange:ZaTabView.onFormFieldChanged,

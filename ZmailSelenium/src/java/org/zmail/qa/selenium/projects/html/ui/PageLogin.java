@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.html.ui;
+package org.zmail.qa.selenium.projects.html.ui;
 
-import com.zimbra.qa.selenium.framework.ui.AbsApplication;
-import com.zimbra.qa.selenium.framework.ui.AbsPage;
-import com.zimbra.qa.selenium.framework.ui.AbsTab;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.ui.Shortcut;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
+import org.zmail.qa.selenium.framework.ui.AbsApplication;
+import org.zmail.qa.selenium.framework.ui.AbsPage;
+import org.zmail.qa.selenium.framework.ui.AbsTab;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.ui.Shortcut;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
 
 
 public class PageLogin extends AbsTab {
@@ -98,8 +98,8 @@ public class PageLogin extends AbsTab {
 	 * @param account
 	 * @throws HarnessException
 	 */
-	public void zLogin(ZimbraAccount account) throws HarnessException {
-		logger.debug("login(ZimbraAccount account)" + account.EmailAddress);
+	public void zLogin(ZmailAccount account) throws HarnessException {
+		logger.debug("login(ZmailAccount account)" + account.EmailAddress);
 
 		tracer.trace("Login to the "+ MyApplication.myApplicationName() +" using user/password "+ account.EmailAddress +"/"+ account.Password);
 
@@ -119,7 +119,7 @@ public class PageLogin extends AbsTab {
 
 		// TODO: maybe handle this in the pulldown options?
 		// Force the html client to load
-		this.sOpen(ZimbraSeleniumProperties.getBaseURL());
+		this.sOpen(ZmailSeleniumProperties.getBaseURL());
 		
 
 	}

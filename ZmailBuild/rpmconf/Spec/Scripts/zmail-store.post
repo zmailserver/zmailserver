@@ -18,22 +18,22 @@ H=`hostname -s`
 I=`hostname -i`
 JETTY_VERSION=distribution-7.6.10.z5
 
-if [ -f /opt/zimbra/db/db.sql ]; then
-  mv /opt/zimbra/db/db.sql /opt/zimbra/db/db.sql.in
-  sed -e "/server.hostname/ s/local/$H/" /opt/zimbra/db/db.sql.in > /opt/zimbra/db/db.sql
-  chown zimbra:zimbra /opt/zimbra/db/db.sql*
-  chmod 440 /opt/zimbra/db/db.sql*
+if [ -f /opt/zmail/db/db.sql ]; then
+  mv /opt/zmail/db/db.sql /opt/zmail/db/db.sql.in
+  sed -e "/server.hostname/ s/local/$H/" /opt/zmail/db/db.sql.in > /opt/zmail/db/db.sql
+  chown zmail:zmail /opt/zmail/db/db.sql*
+  chmod 440 /opt/zmail/db/db.sql*
 fi
-rm -f /opt/zimbra/perdition
-rm -rf /opt/zimbra/verity
+rm -f /opt/zmail/perdition
+rm -rf /opt/zmail/verity
 
 for i in jetty apache-tomcat ; do
-  MAILBOXD=`perl -e 'print ($1 eq "apache-tomcat" ? "tomcat $1-$2" : "jetty $1-$2")  if ($ARGV[0] =~ m/(jetty|apache-tomcat)-(.*)/ && $2 ne "*");' /opt/zimbra/$i-*`
+  MAILBOXD=`perl -e 'print ($1 eq "apache-tomcat" ? "tomcat $1-$2" : "jetty $1-$2")  if ($ARGV[0] =~ m/(jetty|apache-tomcat)-(.*)/ && $2 ne "*");' /opt/zmail/$i-*`
   if [ "x${MAILBOXD}" = "x" ]; then
     continue
   fi
-  SHORT=/opt/zimbra/`echo $MAILBOXD | awk '{print $1}'`
-  LONG=/opt/zimbra/`echo $MAILBOXD | awk '{print $2}'`
+  SHORT=/opt/zmail/`echo $MAILBOXD | awk '{print $1}'`
+  LONG=/opt/zmail/`echo $MAILBOXD | awk '{print $2}'`
   if [ -L "$SHORT" ]; then
     rm -f $SHORT
   fi
@@ -41,43 +41,43 @@ for i in jetty apache-tomcat ; do
   ln -s $LONG $SHORT
   if [ -f "${LONG}/start.jar" -o -f "${LONG}/bin/startup.sh" ]; then
     echo "Relinking mailboxd to $LONG"
-    rm -rf /opt/zimbra/mailboxd
-    ln -s $LONG /opt/zimbra/mailboxd
+    rm -rf /opt/zmail/mailboxd
+    ln -s $LONG /opt/zmail/mailboxd
   fi
   mkdir -p $SHORT/logs
-  chown zimbra:zimbra $SHORT/logs
+  chown zmail:zmail $SHORT/logs
   chown root:root $LONG
 done
-rm -f /opt/zimbra/mailboxd
-rm -f /opt/zimbra/jetty
-ln -s /opt/zimbra/jetty-${JETTY_VERSION} /opt/zimbra/jetty
-ln -s /opt/zimbra/jetty-${JETTY_VERSION} /opt/zimbra/mailboxd
+rm -f /opt/zmail/mailboxd
+rm -f /opt/zmail/jetty
+ln -s /opt/zmail/jetty-${JETTY_VERSION} /opt/zmail/jetty
+ln -s /opt/zmail/jetty-${JETTY_VERSION} /opt/zmail/mailboxd
 
-mkdir -p /opt/zimbra/mailboxd/logs
-chown zimbra:zimbra /opt/zimbra/mailboxd/logs
+mkdir -p /opt/zmail/mailboxd/logs
+chown zmail:zmail /opt/zmail/mailboxd/logs
 
-mkdir -p /opt/zimbra/redolog
-mkdir -p /opt/zimbra/store
-mkdir -p /opt/zimbra/index
-mkdir -p /opt/zimbra/backup
-chown zimbra:zimbra /opt/zimbra/redolog /opt/zimbra/store /opt/zimbra/index /opt/zimbra/backup 
+mkdir -p /opt/zmail/redolog
+mkdir -p /opt/zmail/store
+mkdir -p /opt/zmail/index
+mkdir -p /opt/zmail/backup
+chown zmail:zmail /opt/zmail/redolog /opt/zmail/store /opt/zmail/index /opt/zmail/backup 
 
 SUDOMODE=`perl -e 'my $mode=(stat("/etc/sudoers"))[2];printf("%04o\n",$mode & 07777);'`
-egrep -v -e '^%zimbra.*tomcat' -e '^%zimbra.*mailboxdmgr'  /etc/sudoers > /tmp/sudoers
-echo "%zimbra ALL=NOPASSWD:/opt/zimbra/libexec/zmmailboxdmgr" >> /tmp/sudoers
+egrep -v -e '^%zmail.*tomcat' -e '^%zmail.*mailboxdmgr'  /etc/sudoers > /tmp/sudoers
+echo "%zmail ALL=NOPASSWD:/opt/zmail/libexec/zmmailboxdmgr" >> /tmp/sudoers
 mv -f /tmp/sudoers /etc/sudoers
 chmod $SUDOMODE /etc/sudoers
 
-egrep -v -e '^%zimbra.*zmcertmgr' /etc/sudoers > /tmp/sudoers
-echo "%zimbra ALL=NOPASSWD:/opt/zimbra/bin/zmcertmgr" >> /tmp/sudoers
+egrep -v -e '^%zmail.*zmcertmgr' /etc/sudoers > /tmp/sudoers
+echo "%zmail ALL=NOPASSWD:/opt/zmail/bin/zmcertmgr" >> /tmp/sudoers
 mv -f /tmp/sudoers /etc/sudoers
 chmod $SUDOMODE /etc/sudoers
 
-if [ -d "/opt/zimbra/mailboxd/work/zimbra" ]; then
-  find /opt/zimbra/mailboxd/work/zimbra -exec touch {} \; 2> /dev/null
+if [ -d "/opt/zmail/mailboxd/work/zmail" ]; then
+  find /opt/zmail/mailboxd/work/zmail -exec touch {} \; 2> /dev/null
 fi
 
-if [ -x "/opt/zimbra/libexec/zmfixperms" ]; then
-  /opt/zimbra/libexec/zmfixperms
+if [ -x "/opt/zmail/libexec/zmfixperms" ]; then
+  /opt/zmail/libexec/zmfixperms
 fi
 

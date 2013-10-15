@@ -78,16 +78,16 @@ ZaZimletXFormView.myXFormModifier = function(xFormObject) {
 					{type:_GROUP_,	numCols:4,colSizes:["90px","350px","100px","200px"],
                         items:[
                             {type:_OUTPUT_, ref:"name", label:ZaMsg.NAD_zimletName},
-                            {type:_OUTPUT_, ref:ZaZimlet.A_zimbraZimletEnabled, label:ZaMsg.NAD_zimletStatus,choices:ZaModel.BOOLEAN_CHOICES },
-                            {type:_OUTPUT_, ref:ZaZimlet.A_zimbraZimletDescription, label:ZaMsg.NAD_Description, colSpan: "*",
+                            {type:_OUTPUT_, ref:ZaZimlet.A_zmailZimletEnabled, label:ZaMsg.NAD_zimletStatus,choices:ZaModel.BOOLEAN_CHOICES },
+                            {type:_OUTPUT_, ref:ZaZimlet.A_zmailZimletDescription, label:ZaMsg.NAD_Description, colSpan: "*",
 				getDisplayValue:function(itemVal){
 				   var name = this.getInstanceValue(ZaZimlet.A_name);				
 				   var ret = ZaZimletListView.__processMessage(name, itemVal);
 				   return ret;	
 				}
 			    },
-							{type:_OUTPUT_, ref:ZaItem.A_zimbraCreateTimestamp, 
-								label:ZaMsg.LBL_zimbraCreateTimestamp, labelLocation:_LEFT_,
+							{type:_OUTPUT_, ref:ZaItem.A_zmailCreateTimestamp, 
+								label:ZaMsg.LBL_zmailCreateTimestamp, labelLocation:_LEFT_,
 								getDisplayValue:function() {
 										var val = ZaItem.formatServerTime(this.getInstanceValue());
 									if(!val)

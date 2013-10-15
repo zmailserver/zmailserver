@@ -14,15 +14,15 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.compose.delegates;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.compose.delegates;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew.Field;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew.Field;
 
 
 public class SendOnBehalfOf extends PrefGroupMailByMessageTest {
@@ -34,7 +34,7 @@ public class SendOnBehalfOf extends PrefGroupMailByMessageTest {
 		
 		
 
-		super.startingAccountPreferences.put("zimbraPrefComposeFormat", "text");
+		super.startingAccountPreferences.put("zmailPrefComposeFormat", "text");
 		
 	}
 	
@@ -45,16 +45,16 @@ public class SendOnBehalfOf extends PrefGroupMailByMessageTest {
 		//-- Data Setup
 		
 		// Mail data
-		String subject = "subject"+ ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject"+ ZmailSeleniumProperties.getUniqueString();
 		
 		// The grantor
-		ZimbraAccount grantor = null;
-		grantor = new ZimbraAccount();
+		ZmailAccount grantor = null;
+		grantor = new ZmailAccount();
 		grantor.provision();
 		grantor.authenticate();
 
 		grantor.soapSend(
-					"<GrantRightsRequest xmlns='urn:zimbraAccount'>"
+					"<GrantRightsRequest xmlns='urn:zmailAccount'>"
 				+		"<ace gt='usr' d='"+ app.zGetActiveAccount().EmailAddress +"' right='sendOnBehalfOf'/>"
 				+	"</GrantRightsRequest>");
 
@@ -70,9 +70,9 @@ public class SendOnBehalfOf extends PrefGroupMailByMessageTest {
 		ZAssert.assertNotNull(mailform, "Verify the new form opened");
 		
 		// Fill out the form with the data
-		mailform.zFillField(Field.To, ZimbraAccount.AccountA().EmailAddress);
+		mailform.zFillField(Field.To, ZmailAccount.AccountA().EmailAddress);
 		mailform.zFillField(Field.Subject, subject);
-		mailform.zFillField(Field.Body, "body" + ZimbraSeleniumProperties.getUniqueString());
+		mailform.zFillField(Field.Body, "body" + ZmailSeleniumProperties.getUniqueString());
 		mailform.zFillField(Field.From, grantor.EmailAddress);	
 		mailform.zSubmit();
 	
@@ -80,24 +80,24 @@ public class SendOnBehalfOf extends PrefGroupMailByMessageTest {
 		
 		//-- Data verification
 		
-		ZimbraAccount.AccountA().soapSend(
-				"<SearchRequest xmlns='urn:zimbraMail' types='message'>"
+		ZmailAccount.AccountA().soapSend(
+				"<SearchRequest xmlns='urn:zmailMail' types='message'>"
 			+		"<query>subject:("+ subject +")</query>"
 			+	"</SearchRequest>");
-		String id = ZimbraAccount.AccountA().soapSelectValue("//mail:m", "id");
+		String id = ZmailAccount.AccountA().soapSelectValue("//mail:m", "id");
 
-		ZimbraAccount.AccountA().soapSend(
-				"<GetMsgRequest xmlns='urn:zimbraMail' >"
+		ZmailAccount.AccountA().soapSend(
+				"<GetMsgRequest xmlns='urn:zmailMail' >"
 			+		"<m id='"+ id +"'/>"
 			+	"</GetMsgRequest>");
 
 
 		// Verify From: grantor
-		String from = ZimbraAccount.AccountA().soapSelectValue("//mail:e[@t='f']", "a");
+		String from = ZmailAccount.AccountA().soapSelectValue("//mail:e[@t='f']", "a");
 		ZAssert.assertEquals(from, grantor.EmailAddress, "Verify From: grantor");
 		
 		// Verify Sender: active account
-		String sender = ZimbraAccount.AccountA().soapSelectValue("//mail:e[@t='s']", "a");
+		String sender = ZmailAccount.AccountA().soapSelectValue("//mail:e[@t='s']", "a");
 		ZAssert.assertEquals(sender, app.zGetActiveAccount().EmailAddress, "Verify Sender: active account");
 
 	}

@@ -13,9 +13,9 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.taglib.bean;
+package org.zmail.cs.taglib.bean;
 
-import com.zimbra.client.ZAppointmentHit;
+import org.zmail.client.ZAppointmentHit;
 
 import java.util.Collections;
 import java.util.List;

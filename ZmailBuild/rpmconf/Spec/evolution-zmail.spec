@@ -2,20 +2,20 @@
 %define eds_version 1.3.7
 %define evo_api_version 2.8
 
-Summary: Zimbra Connector for Evolution %{evo_api_version}
-Name: evolution-zimbra
+Summary: Zmail Connector for Evolution %{evo_api_version}
+Name: evolution-zmail
 Version: @@VERSION@@
 Release: @@RELEASE@@
 License: GPL
-URL: http://www.zimbra.com/evolution-connector.htm
+URL: http://www.zmail.com/evolution-connector.htm
 Group: System Environment/Libraries
 
-Source: http://www.zimbra.com/work/%{name}-%{version}.tar.gz
-Vendor: Zimbra
-Packager: Scott Herscher <scott.herscher@zimbra.com>
+Source: http://www.zmail.com/work/%{name}-%{version}.tar.gz
+Vendor: Zmail
+Packager: Scott Herscher <scott.herscher@zmail.com>
 BuildRoot: %{_tmppath}/%{name}-root
 
-Provides:  evolution-zimbra
+Provides:  evolution-zmail
 
 BuildRequires:  evolution-devel >= %{evolution_version}
 BuildRequires:  evolution-data-server-devel >= %{eds_version}
@@ -26,8 +26,8 @@ Requires:  evolution-data-server >= %{eds_version}
 Requires:  glib2 >= 2.8.1
 
 %description
-Use Zimbra Connector to use all features provided by the
-Zimbra mail server in Evolution %{evo_api_version}.
+Use Zmail Connector to use all features provided by the
+Zmail mail server in Evolution %{evo_api_version}.
 
 %clean
 [ -n $RPM_BUILD_ROOT -a $RPM_BUILD_ROOT != / ] && rm -rf $RPM_BUILD_ROOT

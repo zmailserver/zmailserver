@@ -578,7 +578,7 @@ function(messagesProcessed) {
 ZmFilterWork.prototype.doWork =
 function(msgIds, query, callback) {
 	var filterSel = this._filterSel;
-	var soapDoc = AjxSoapDoc.create(this._outgoing ? "ApplyOutgoingFilterRulesRequest" : "ApplyFilterRulesRequest", "urn:zimbraMail");
+	var soapDoc = AjxSoapDoc.create(this._outgoing ? "ApplyOutgoingFilterRulesRequest" : "ApplyFilterRulesRequest", "urn:zmailMail");
 	var filterRules = soapDoc.set("filterRules", null);
 	for (var i = 0; i < filterSel.length; i++) {
 		var rule = soapDoc.set("filterRule", null, filterRules);

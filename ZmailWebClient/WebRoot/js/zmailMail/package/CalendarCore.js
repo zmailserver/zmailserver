@@ -24,20 +24,20 @@
  */
 
 // base classes for ZmResource and ZmResourceList
-AjxPackage.require("zimbraMail.abook.model.ZmContact");
-AjxPackage.require("zimbraMail.abook.model.ZmContactList");
+AjxPackage.require("zmailMail.abook.model.ZmContact");
+AjxPackage.require("zmailMail.abook.model.ZmContactList");
 
-AjxPackage.require("zimbraMail.calendar.model.ZmCalendar");
-AjxPackage.require("zimbraMail.calendar.model.ZmRecurrence");
-AjxPackage.require("zimbraMail.calendar.model.ZmCalItem");
-AjxPackage.require("zimbraMail.calendar.model.ZmAppt");
-AjxPackage.require("zimbraMail.calendar.model.ZmApptList");
-AjxPackage.require("zimbraMail.calendar.model.ZmApptCache");
-AjxPackage.require("zimbraMail.calendar.model.ZmFreeBusyCache");
-AjxPackage.require("zimbraMail.calendar.model.ZmResource");
-AjxPackage.require("zimbraMail.calendar.model.ZmResourceList");
-AjxPackage.require("zimbraMail.calendar.view.ZmApptViewHelper");
-AjxPackage.require("zimbraMail.calendar.controller.ZmCalItemComposeController");
-AjxPackage.require("zimbraMail.calendar.controller.ZmApptComposeController");
-AjxPackage.require("zimbraMail.calendar.controller.ZmCalViewController");
+AjxPackage.require("zmailMail.calendar.model.ZmCalendar");
+AjxPackage.require("zmailMail.calendar.model.ZmRecurrence");
+AjxPackage.require("zmailMail.calendar.model.ZmCalItem");
+AjxPackage.require("zmailMail.calendar.model.ZmAppt");
+AjxPackage.require("zmailMail.calendar.model.ZmApptList");
+AjxPackage.require("zmailMail.calendar.model.ZmApptCache");
+AjxPackage.require("zmailMail.calendar.model.ZmFreeBusyCache");
+AjxPackage.require("zmailMail.calendar.model.ZmResource");
+AjxPackage.require("zmailMail.calendar.model.ZmResourceList");
+AjxPackage.require("zmailMail.calendar.view.ZmApptViewHelper");
+AjxPackage.require("zmailMail.calendar.controller.ZmCalItemComposeController");
+AjxPackage.require("zmailMail.calendar.controller.ZmApptComposeController");
+AjxPackage.require("zmailMail.calendar.controller.ZmCalViewController");
 

@@ -36,7 +36,7 @@ function() {
 		newDoc.async = true; // Force Async loading
 		if (ZMTB_AjxXmlDoc._msxmlVers == "MSXML2.DOMDocument.4.0") {
 			newDoc.setProperty("SelectionLanguage", "XPath");
-			newDoc.setProperty("SelectionNamespaces", "xmlns:zimbra='urn:zimbra' xmlns:mail='urn:zimbraMail' xmlns:account='urn:zimbraAccount'");
+			newDoc.setProperty("SelectionNamespaces", "xmlns:zmail='urn:zmail' xmlns:mail='urn:zmailMail' xmlns:account='urn:zmailAccount'");
 		}
 	} else if (document.implementation && document.implementation.createDocument) {
 		newDoc = document.implementation.createDocument("", "", null);
@@ -99,7 +99,7 @@ function(url) {
  *      will be saved in node.__msh_content (returned by toString()).
  *   3. Attributes get discarded; this might not be good in general but it's OK
  *      for the application I have in mind now.  IAE, I'll be able to fix this if
- *      anyone requires--mail mihai@zimbra.com.
+ *      anyone requires--mail mihai@zmail.com.
  *   4. Each subnode will map to a property with its tagName in the parent
  *      node.  So, parent[subnode.tagName] == subnode.
  *   5. If multiple nodes with the same tagName have the same parent node, then

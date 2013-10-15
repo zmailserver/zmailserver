@@ -14,20 +14,20 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.conversation.performance;
+package org.zmail.qa.selenium.projects.ajax.tests.conversation.performance;
 
 import java.io.File;
 import java.util.HashMap;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.performance.*;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.LmtpInject;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.ajax.core.*;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.performance.*;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.LmtpInject;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.ajax.core.*;
 
 
 public class ZmConv extends AjaxCommonTest {
@@ -41,8 +41,8 @@ public class ZmConv extends AjaxCommonTest {
 
 		
 		super.startingAccountPreferences = new HashMap<String, String>() {{
-					put("zimbraPrefGroupMailBy", "conversation");
-				    put("zimbraPrefMessageViewHtmlPreferred", "FALSE");
+					put("zmailPrefGroupMailBy", "conversation");
+				    put("zmailPrefMessageViewHtmlPreferred", "FALSE");
 				}};
 
 
@@ -53,7 +53,7 @@ public class ZmConv extends AjaxCommonTest {
 			groups = { "performance" })
 	public void ZmMailItem_01() throws HarnessException {
 		
-		String mime = ZimbraSeleniumProperties.getBaseDirectory() + "/data/public/mime/conversation02";
+		String mime = ZmailSeleniumProperties.getBaseDirectory() + "/data/public/mime/conversation02";
 		String subject = "Conversation13155016716714";
 
 		LmtpInject.injectFile(app.zGetActiveAccount().EmailAddress, new File(mime));

@@ -15,13 +15,13 @@
 <%@ tag body-content="empty" %>
 <%@ attribute name="date" rtexprvalue="true" required="true" type="java.util.Calendar" %>
 <%@ attribute name="timezone" rtexprvalue="true" required="true" type="java.util.TimeZone" %>
-<%@ attribute name="mailbox" rtexprvalue="true" required="true" type="com.zimbra.cs.taglib.bean.ZMailboxBean" %>
+<%@ attribute name="mailbox" rtexprvalue="true" required="true" type="org.zmail.cs.taglib.bean.ZMailboxBean" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
-<%@ taglib prefix="rest" uri="com.zimbra.restclient" %>
-<%@ taglib prefix="app" uri="com.zimbra.htmlclient" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
+<%@ taglib prefix="rest" uri="org.zmail.restclient" %>
+<%@ taglib prefix="app" uri="org.zmail.htmlclient" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
 <rest:handleError>
     <fmt:message key="noSubject" var="noSubject"/>
     <fmt:setTimeZone value="${timezone}"/>
@@ -36,22 +36,22 @@
     <c:set var="today" value="${zm:getToday(timezone)}"/>
     <c:set var="prevDate" value="${zm:addMonth(date, -1)}"/>
     <c:set var="nextDate" value="${zm:addMonth(date,  1)}"/>
-    <c:set var="firstDOW" value="${requestScope.zimbra_target_account_prefCalendarFirstDayOfWeek}"/>
+    <c:set var="firstDOW" value="${requestScope.zmail_target_account_prefCalendarFirstDayOfWeek}"/>
     <c:set var="currentDay" value="${zm:getFirstDayOfMonthView(date, firstDOW)}"/>
 
     <c:choose>
-        <c:when test="${requestScope.zimbra_freebusy}">
+        <c:when test="${requestScope.zmail_freebusy}">
             <zm:getFreeBusyAppointments box="${mailbox}"
-                                        email="${requestScope.zimbra_target_account_name}"
+                                        email="${requestScope.zmail_target_account_name}"
                                         var="appts"
                                         start="${currentDay.timeInMillis}"
                                         end="${zm:addDay(currentDay, 42).timeInMillis}"
-                                        folderid="${requestScope.zimbra_target_item_id}"
+                                        folderid="${requestScope.zmail_target_item_id}"
                                         varexception="gasException"/>
         </c:when>
         <c:otherwise>
             <zm:getAppointmentSummaries box="${mailbox}" timezone="${timezone}" var="appts"
-                                        folderid="${not empty param.folderIds ? param.folderIds : requestScope.zimbra_target_item_id}" start="${currentDay.timeInMillis}"
+                                        folderid="${not empty param.folderIds ? param.folderIds : requestScope.zmail_target_item_id}" start="${currentDay.timeInMillis}"
                                         end="${zm:addDay(currentDay, 42).timeInMillis}" query="${requestScope.calendarQuery}"
                                         varexception="gasException"/>
         </c:otherwise>
@@ -66,7 +66,7 @@
     </c:if>
 </rest:handleError>
 
-<rest:view title="${not empty requestScope.zimbra_target_item_name ? requestScope.zimbra_target_item_name : requestScope.zimbra_target_account_name}: ${title}" rssfeed="${true}">
+<rest:view title="${not empty requestScope.zmail_target_item_name ? requestScope.zmail_target_item_name : requestScope.zmail_target_account_name}: ${title}" rssfeed="${true}">
 <!-- tz=timezone  date=YYYYMMDD   view=day|workWeek|week|month  notoolbar=1 folderIds=[...]
 skin=skin-name color=defaultColor(0)|blue(1)|cyan(2)|green(3)|purple(4)|red(5)|yellow(6)|pink(7)|gray(8)|orange(9) -->
     <table width="100%" cellpadding="0" cellspacing="0" border="0">

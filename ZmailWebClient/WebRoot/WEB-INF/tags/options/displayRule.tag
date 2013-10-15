@@ -13,13 +13,13 @@
  * ***** END LICENSE BLOCK *****
 --%>
 <%@ tag body-content="empty" %>
-<%@ attribute name="rule" rtexprvalue="true" required="true" type="com.zimbra.client.ZFilterRule" %>
-<%@ attribute name="mailbox" rtexprvalue="true" required="true" type="com.zimbra.cs.taglib.bean.ZMailboxBean" %>
+<%@ attribute name="rule" rtexprvalue="true" required="true" type="org.zmail.client.ZFilterRule" %>
+<%@ attribute name="mailbox" rtexprvalue="true" required="true" type="org.zmail.cs.taglib.bean.ZMailboxBean" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
-<%@ taglib prefix="app" uri="com.zimbra.htmlclient" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
+<%@ taglib prefix="app" uri="org.zmail.htmlclient" %>
 
 <table width="100%" cellpadding="0" cellspacing="0">
 <tr>
@@ -123,7 +123,7 @@
                 <fmt:message key="FILT_ACTION_KEEP"/>
             </c:if>
 
-            <%--Display discard action only if zimbraFeatureDiscardInFiltersEnabled is true--%>            
+            <%--Display discard action only if zmailFeatureDiscardInFiltersEnabled is true--%>            
             <c:if test="${mailbox.features.discardFilterEnabled eq true and zm:isDiscardAction(action)}">
                 <fmt:message key="FILT_ACTION_DISCARD"/>
             </c:if>

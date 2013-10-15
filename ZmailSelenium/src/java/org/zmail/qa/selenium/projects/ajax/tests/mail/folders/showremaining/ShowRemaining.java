@@ -14,16 +14,16 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.folders.showremaining;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.folders.showremaining;
 
 import java.util.List;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
 
 
 public class ShowRemaining extends PrefGroupMailByMessageTest {
@@ -45,16 +45,16 @@ public class ShowRemaining extends PrefGroupMailByMessageTest {
 		// Create 500 subfolders
 
 		for ( int i = 0; i < 125; i++ ) {
-			name = "folder" + ZimbraSeleniumProperties.getUniqueString();
+			name = "folder" + ZmailSeleniumProperties.getUniqueString();
 			
 			app.zGetActiveAccount().soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+					"<CreateFolderRequest xmlns='urn:zmailMail'>" +
 	                	"<folder name='"+ name +"' l='1'/>" +
 	                "</CreateFolderRequest>");
 		}
 
 		// Need to logout/login for changes to take effect
-		ZimbraAccount active = app.zGetActiveAccount();
+		ZmailAccount active = app.zGetActiveAccount();
 		app.zPageMain.zLogout();
 		app.zPageLogin.zLogin(active);
 		if ( !startingPage.zIsActive() ) {

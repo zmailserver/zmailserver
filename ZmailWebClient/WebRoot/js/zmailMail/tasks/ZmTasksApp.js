@@ -78,10 +78,10 @@ function() {
 ZmTasksApp.prototype._registerSettings =
 function(settings) {
 	settings = settings || appCtxt.getSettings();
-	settings.registerSetting("READING_PANE_LOCATION_TASKS",		{name:"zimbraPrefTasksReadingPaneLocation", type:ZmSetting.T_PREF, dataType:ZmSetting.D_STRING, defaultValue:ZmSetting.RP_BOTTOM, isImplicit:true});
-    settings.registerSetting("TASKS_FILTERBY",		{name:"zimbraPrefTasksFilterBy", type:ZmSetting.T_PREF, dataType:ZmSetting.D_STRING, defaultValue:ZmSetting.TASK_FILTER_ALL, isImplicit:true});
+	settings.registerSetting("READING_PANE_LOCATION_TASKS",		{name:"zmailPrefTasksReadingPaneLocation", type:ZmSetting.T_PREF, dataType:ZmSetting.D_STRING, defaultValue:ZmSetting.RP_BOTTOM, isImplicit:true});
+    settings.registerSetting("TASKS_FILTERBY",		{name:"zmailPrefTasksFilterBy", type:ZmSetting.T_PREF, dataType:ZmSetting.D_STRING, defaultValue:ZmSetting.TASK_FILTER_ALL, isImplicit:true});
     if (!appCtxt.get(ZmSetting.HIGHLIGHT_OBJECTS))
-        settings.registerSetting("HIGHLIGHT_OBJECTS",               {name:"zimbraMailHighlightObjectsMaxSize", type:ZmSetting.T_COS, dataType:ZmSetting.D_INT, defaultValue:70});
+        settings.registerSetting("HIGHLIGHT_OBJECTS",               {name:"zmailMailHighlightObjectsMaxSize", type:ZmSetting.T_COS, dataType:ZmSetting.D_INT, defaultValue:70});
 };
 
 ZmTasksApp.prototype._registerItems =

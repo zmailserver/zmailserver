@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.util.performance;
+package org.zmail.qa.selenium.framework.util.performance;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -28,11 +28,11 @@ import java.util.Map;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.OperatingSystem;
-import com.zimbra.qa.selenium.framework.util.ZimbraAdminAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.OperatingSystem;
+import org.zmail.qa.selenium.framework.util.ZmailAdminAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
 
 
 /**
@@ -196,7 +196,7 @@ public class PerfDatabase {
 	protected int getAppType() throws HarnessException {
 		getAppTypeTable();
 
-		String type = ZimbraSeleniumProperties.getAppType().toString().toLowerCase();
+		String type = ZmailSeleniumProperties.getAppType().toString().toLowerCase();
 		if (!appTable.containsKey(type)) {
 			throw new HarnessException("Unknown app type: "+ type +".  Maybe INSERT INTO apps ('name') VALUES ('"+ type +"') ?");
 		}
@@ -324,7 +324,7 @@ public class PerfDatabase {
 	protected int getBrowserID() throws HarnessException {
 		getBrowserTable();
 		
-		String browser = ZimbraSeleniumProperties.getCalculatedBrowser();
+		String browser = ZmailSeleniumProperties.getCalculatedBrowser();
 
 		if (!browserTable.containsKey(browser)) {
 			insertBrowser(browser);
@@ -613,8 +613,8 @@ public class PerfDatabase {
 	protected String versionString = null;
 	protected String getVersionString() throws HarnessException {
 		if ( versionString == null ) {
-			ZimbraAdminAccount.GlobalAdmin().soapSend("<GetVersionInfoRequest xmlns='urn:zimbraAdmin'/>");
-			Element getVersionInfo = ZimbraAdminAccount.GlobalAdmin().soapSelectNode("//admin:GetVersionInfoResponse//admin:info", 1);
+			ZmailAdminAccount.GlobalAdmin().soapSend("<GetVersionInfoRequest xmlns='urn:zmailAdmin'/>");
+			Element getVersionInfo = ZmailAdminAccount.GlobalAdmin().soapSelectNode("//admin:GetVersionInfoResponse//admin:info", 1);
 			versionString = String.format("%s.%s.%s",
 					getVersionInfo.getAttribute("majorversion", "X"),
 					getVersionInfo.getAttribute("minorversion", "X"),
@@ -780,9 +780,9 @@ public class PerfDatabase {
 
 				Class.forName("com.mysql.jdbc.Driver");
 				
-				dbURL = ZimbraSeleniumProperties.getStringProperty("performance.metrics.db.url", dbDefaultURL);
-				dbUsername = ZimbraSeleniumProperties.getStringProperty("performance.metrics.db.username", dbDefaultUsername);
-				dbUserpass = ZimbraSeleniumProperties.getStringProperty("performance.metrics.db.userpass", dbDefaultUserpass);
+				dbURL = ZmailSeleniumProperties.getStringProperty("performance.metrics.db.url", dbDefaultURL);
+				dbUsername = ZmailSeleniumProperties.getStringProperty("performance.metrics.db.username", dbDefaultUsername);
+				dbUserpass = ZmailSeleniumProperties.getStringProperty("performance.metrics.db.userpass", dbDefaultUserpass);
 
 			} catch (ClassNotFoundException e) {
 				throw new HarnessException(e);

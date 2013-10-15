@@ -17,10 +17,10 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.desktop.ui;
+package org.zmail.qa.selenium.projects.desktop.ui;
 
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.HarnessException;
 
 /**
  * Represents a "Rename Tag" dialog box
@@ -31,7 +31,7 @@ import com.zimbra.qa.selenium.framework.util.HarnessException;
 public class DialogRenameTag extends AbsDialog {
 
 	public static class Locators {
-		//see https://bugzilla.zimbra.com/show_bug.cgi?id=57458
+		//see https://bugzilla.zmail.com/show_bug.cgi?id=57458
 		public static final String zRenameTagDialogId	= "RenameTagDialog";
 		public static final String zNewTagNameFieldId	= "RenameTagDialog_name";
 		public static final String zButtonsId 		= "RenameTagDialog_buttons";

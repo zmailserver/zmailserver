@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.kabuki.servlets;
+package org.zmail.kabuki.servlets;
 
 import java.io.BufferedOutputStream;
 import java.io.DataOutputStream;

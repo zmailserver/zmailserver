@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.addressbook.assistant;
+package org.zmail.qa.selenium.projects.ajax.tests.addressbook.assistant;
 
 import java.util.List;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogAssistant;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogAssistant;
 
 
 public class CreateContact extends AjaxCommonTest {
@@ -41,7 +41,7 @@ public class CreateContact extends AjaxCommonTest {
 
 	}
 	
-	@Test(	description = "Create a new conntact using the Zimbra Assistant",
+	@Test(	description = "Create a new conntact using the Zmail Assistant",
 			groups = { "deprecated" })
 	public void CreateContact_01() throws HarnessException {
 		

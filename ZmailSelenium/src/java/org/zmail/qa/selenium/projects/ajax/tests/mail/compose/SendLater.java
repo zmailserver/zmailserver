@@ -14,24 +14,24 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.compose;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.compose;
 
 import java.util.GregorianCalendar;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.MailItem;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogWarning;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogWarning.DialogWarningID;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.DialogSendLater;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew.Field;
+import org.zmail.qa.selenium.framework.items.MailItem;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogWarning;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogWarning.DialogWarningID;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.DialogSendLater;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew.Field;
 
 
 public class SendLater extends PrefGroupMailByMessageTest {
@@ -41,8 +41,8 @@ public class SendLater extends PrefGroupMailByMessageTest {
 		
 		
 		
-		super.startingAccountPreferences.put("zimbraPrefComposeFormat", "text");
-		super.startingAccountPreferences.put("zimbraFeatureMailSendLaterEnabled", "TRUE");
+		super.startingAccountPreferences.put("zmailPrefComposeFormat", "text");
+		super.startingAccountPreferences.put("zmailFeatureMailSendLaterEnabled", "TRUE");
 		
 	}
 	
@@ -52,7 +52,7 @@ public class SendLater extends PrefGroupMailByMessageTest {
 		
 		
 		// Create the message data to be sent
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		// Open the new mail form
@@ -61,8 +61,8 @@ public class SendLater extends PrefGroupMailByMessageTest {
 		
 		// Fill out the form with the data
 		mailform.zFillField(Field.Subject, subject);
-		mailform.zFillField(Field.Body, "body" + ZimbraSeleniumProperties.getUniqueString());
-		mailform.zFillField(Field.To, ZimbraAccount.AccountA().EmailAddress);
+		mailform.zFillField(Field.Body, "body" + ZmailSeleniumProperties.getUniqueString());
+		mailform.zFillField(Field.To, ZmailAccount.AccountA().EmailAddress);
 
 		DialogSendLater dialog = (DialogSendLater)mailform.zToolbarPressPulldown(Button.B_SEND, Button.O_SEND_SEND_LATER);
 
@@ -89,7 +89,7 @@ public class SendLater extends PrefGroupMailByMessageTest {
 		
 		// Create the message data to be sent
 		GregorianCalendar calendar = new GregorianCalendar(2015, 11, 25, 12, 0, 0); // Dec 25, 2015 at noon local time
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
 
 
 		// Open the new mail form
@@ -98,8 +98,8 @@ public class SendLater extends PrefGroupMailByMessageTest {
 		
 		// Fill out the form with the data
 		mailform.zFillField(Field.Subject, subject);
-		mailform.zFillField(Field.Body, "body" + ZimbraSeleniumProperties.getUniqueString());
-		mailform.zFillField(Field.To, ZimbraAccount.AccountA().EmailAddress);
+		mailform.zFillField(Field.Body, "body" + ZmailSeleniumProperties.getUniqueString());
+		mailform.zFillField(Field.To, ZmailAccount.AccountA().EmailAddress);
 
 		DialogSendLater dialog = (DialogSendLater)mailform.zToolbarPressPulldown(Button.B_SEND, Button.O_SEND_SEND_LATER);
 
@@ -122,7 +122,7 @@ public class SendLater extends PrefGroupMailByMessageTest {
 		
 		
 		// Create the message data to be sent
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		// Open the new mail form
@@ -131,13 +131,13 @@ public class SendLater extends PrefGroupMailByMessageTest {
 		
 		// Fill out the form with the data
 		mailform.zFillField(Field.Subject, subject);
-		mailform.zFillField(Field.Body, "body" + ZimbraSeleniumProperties.getUniqueString());
-		mailform.zFillField(Field.To, ZimbraAccount.AccountA().EmailAddress);
+		mailform.zFillField(Field.Body, "body" + ZmailSeleniumProperties.getUniqueString());
+		mailform.zFillField(Field.To, ZmailAccount.AccountA().EmailAddress);
 
 		mailform.zToolbarPressPulldown(Button.B_SEND, Button.O_SEND_SEND);
 		
 		// Verify the message is received immediately
-		MailItem received = MailItem.importFromSOAP(ZimbraAccount.AccountA(), "subject:("+ subject +")");
+		MailItem received = MailItem.importFromSOAP(ZmailAccount.AccountA(), "subject:("+ subject +")");
 		ZAssert.assertNotNull(received, "Verify message is recieved immediately at destination account");
 				
 	}

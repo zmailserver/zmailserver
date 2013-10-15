@@ -14,18 +14,18 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.conversation.conversationview;
+package org.zmail.qa.selenium.projects.ajax.tests.conversation.conversationview;
 
 import java.util.*;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.*;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.*;
 
 
 public class DragAndDropMessage extends AjaxCommonTest {
@@ -39,7 +39,7 @@ public class DragAndDropMessage extends AjaxCommonTest {
 		
 		// Make sure we are using an account with conversation view
 		super.startingAccountPreferences = new HashMap<String , String>() {{
-				    put("zimbraPrefGroupMailBy", "conversation");
+				    put("zmailPrefGroupMailBy", "conversation");
 				}};
 	
 	}
@@ -50,21 +50,21 @@ public class DragAndDropMessage extends AjaxCommonTest {
 		
 		// Create a subfolder
 		FolderItem inbox = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Inbox);
-		String foldername = "folder"+ ZimbraSeleniumProperties.getUniqueString();
+		String foldername = "folder"+ ZmailSeleniumProperties.getUniqueString();
 
 		app.zGetActiveAccount().soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+					"<CreateFolderRequest xmlns='urn:zmailMail'>" +
 						"<folder name='" + foldername +"' l='"+ inbox.getId() +"'/>" +
 					"</CreateFolderRequest>");
 		FolderItem subfolder = FolderItem.importFromSOAP(app.zGetActiveAccount(), foldername);
 
 		// Create the message data to be sent
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String content1 = "contentA" + ZimbraSeleniumProperties.getUniqueString();
-		String content2 = "contentB" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String content1 = "contentA" + ZmailSeleniumProperties.getUniqueString();
+		String content2 = "contentB" + ZmailSeleniumProperties.getUniqueString();
 		
-		ZimbraAccount.AccountA().soapSend(
-				"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+		ZmailAccount.AccountA().soapSend(
+				"<SendMsgRequest xmlns='urn:zmailMail'>" +
 					"<m>" +
 						"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 						"<su>RE: "+ subject +"</su>" +
@@ -74,8 +74,8 @@ public class DragAndDropMessage extends AjaxCommonTest {
 					"</m>" +
 				"</SendMsgRequest>");
 
-		ZimbraAccount.AccountA().soapSend(
-				"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+		ZmailAccount.AccountA().soapSend(
+				"<SendMsgRequest xmlns='urn:zmailMail'>" +
 					"<m>" +
 						"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 						"<su>RE: "+ subject +"</su>" +
@@ -108,14 +108,14 @@ public class DragAndDropMessage extends AjaxCommonTest {
 		//-- Server Verification
 		
 		app.zGetActiveAccount().soapSend(
-				"<SearchRequest xmlns='urn:zimbraMail' types='message'>"
+				"<SearchRequest xmlns='urn:zmailMail' types='message'>"
 			+		"<query>" + content1 + "</query>" 
 			+	"</SearchRequest>");
 		String folder1 = app.zGetActiveAccount().soapSelectValue("//mail:m", "l");
 		ZAssert.assertEquals(folder1, subfolder.getId(), "Verify the first message is in the subfolder");
 	
 		app.zGetActiveAccount().soapSend(
-				"<SearchRequest xmlns='urn:zimbraMail' types='message'>"
+				"<SearchRequest xmlns='urn:zmailMail' types='message'>"
 			+		"<query>" + content2 + "</query>" 
 			+	"</SearchRequest>");
 		String folder2 = app.zGetActiveAccount().soapSelectValue("//mail:m", "l");

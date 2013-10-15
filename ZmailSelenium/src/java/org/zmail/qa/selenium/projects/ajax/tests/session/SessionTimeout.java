@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.session;
+package org.zmail.qa.selenium.projects.ajax.tests.session;
 
 import org.testng.annotations.*;
 
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew.Field;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew.Field;
 
 
 public class SessionTimeout extends PrefGroupMailByMessageTest {
@@ -32,21 +32,21 @@ public class SessionTimeout extends PrefGroupMailByMessageTest {
 	public SessionTimeout() {
 		logger.info("New "+ SessionTimeout.class.getCanonicalName());
 		
-		super.startingAccountPreferences.put("zimbraPrefComposeFormat", "text");
-		super.startingAccountPreferences.put("zimbraPrefAutoSaveDraftInterval", "90s");
-		super.startingAccountPreferences.put("zimbraMailIdleSessionTimeout", "30s");
+		super.startingAccountPreferences.put("zmailPrefComposeFormat", "text");
+		super.startingAccountPreferences.put("zmailPrefAutoSaveDraftInterval", "90s");
+		super.startingAccountPreferences.put("zmailMailIdleSessionTimeout", "30s");
 
 	}
 	
 	@Bugs(ids = "75133")
-	@Test(	description = "Verify content is saved when compose is interupted by zimbraMailIdleSessionTimeout",
+	@Test(	description = "Verify content is saved when compose is interupted by zmailMailIdleSessionTimeout",
 			groups = { "functional" })
 	public void SessionTimeout_01() throws HarnessException {
 		
 		
 		// Create the message data to be sent
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String body = "body" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String body = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		// Open the new mail form
@@ -54,14 +54,14 @@ public class SessionTimeout extends PrefGroupMailByMessageTest {
 		ZAssert.assertNotNull(mailform, "Verify the new form opened");
 		
 		// Fill out the form with the data
-		mailform.zFillField(Field.To, ZimbraAccount.AccountA().EmailAddress);
+		mailform.zFillField(Field.To, ZmailAccount.AccountA().EmailAddress);
 		mailform.zFillField(Field.Subject, subject);
 		mailform.zFillField(Field.Body, body);
 
 
 		// Wait for the session timeout
 		// User will automatically be logged out
-		ZimbraAccount a = app.zGetActiveAccount();
+		ZmailAccount a = app.zGetActiveAccount();
 		SleepUtil.sleep(60000);
 		
 		app.zPageLogin.zWaitForActive();

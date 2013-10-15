@@ -12,24 +12,24 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.offline.OfflineAccount;
-import com.zimbra.cs.account.offline.OfflineDataSource;
-import com.zimbra.cs.account.offline.OfflineProvisioning;
-import com.zimbra.cs.datasource.imap.ImapFolder;
-import com.zimbra.cs.db.DbDataSource;
-import com.zimbra.cs.db.DbImapFolder;
-import com.zimbra.cs.db.DbDataSource.DataSourceItem;
-import com.zimbra.cs.index.SortBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.offline.OfflineAccount;
+import org.zmail.cs.account.offline.OfflineDataSource;
+import org.zmail.cs.account.offline.OfflineProvisioning;
+import org.zmail.cs.datasource.imap.ImapFolder;
+import org.zmail.cs.db.DbDataSource;
+import org.zmail.cs.db.DbImapFolder;
+import org.zmail.cs.db.DbDataSource.DataSourceItem;
+import org.zmail.cs.index.SortBy;
 
 class OfflineMailboxMigration {
     /*
@@ -109,12 +109,12 @@ class OfflineMailboxMigration {
             MailItem.Type type, String typeName) throws ServiceException {
         if (toDs == null) return;
         Mailbox mbox = fromDs.getMailbox();
-        ZimbraLog.datasource.info("Migrating offline mailbox %s db mappings", typeName);
+        ZmailLog.datasource.info("Migrating offline mailbox %s db mappings", typeName);
         for (MailItem item : mbox.getItemList(null, type)) {
             // Move contact mappings to new contact data source
             DataSourceItem dsi = DbDataSource.getMapping(fromDs, item.getId());
             if (dsi.remoteId != null) {
-                ZimbraLog.datasource.debug(
+                ZmailLog.datasource.debug(
                     "Moving db mapping for %s item id %d from data source '%s' to '%s'",
                     typeName, item.getId(), fromDs.getName(), toDs.getName());
                 DbDataSource.deleteMapping(fromDs, item.getId());
@@ -125,7 +125,7 @@ class OfflineMailboxMigration {
             if (folder.getDefaultView() == type) {
                 DataSourceItem dsi = DbDataSource.getMapping(fromDs, folder.getId());
                 if (dsi.remoteId != null) {
-                    ZimbraLog.datasource.debug(
+                    ZmailLog.datasource.debug(
                         "Moving db mapping for %s folder '%s' from data source '%s' to '%s'",
                         typeName, folder.getName(), fromDs.getName(), toDs.getName());
                     DbDataSource.deleteMapping(fromDs, folder.getId());
@@ -133,6 +133,6 @@ class OfflineMailboxMigration {
                 }
             }
         }
-        ZimbraLog.datasource.info("Done migrating offline mailbox %s db mappings", typeName);
+        ZmailLog.datasource.info("Done migrating offline mailbox %s db mappings", typeName);
     }
 }

@@ -14,14 +14,14 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.preferences.importexport;
+package org.zmail.qa.selenium.projects.ajax.tests.preferences.importexport;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
 
 
 public class ImportEmpty extends AjaxCommonTest {
@@ -53,7 +53,7 @@ public class ImportEmpty extends AjaxCommonTest {
 		// Navigate to preferences -> notifications
 		app.zTreePreferences.zTreeItem(Action.A_LEFTCLICK, TreeItem.ImportExport);
 
-		// TODO: See https://bugzilla.zimbra.com/show_bug.cgi?id=63289
+		// TODO: See https://bugzilla.zmail.com/show_bug.cgi?id=63289
 		app.zPagePreferences.zClick("css=div[id='IMPORT_BUTTON'] td[id$='_title']");
 		
 		// Should probably verify toaster that says "Must Specify Import File"

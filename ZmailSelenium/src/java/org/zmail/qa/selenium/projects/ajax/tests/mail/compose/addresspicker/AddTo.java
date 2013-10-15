@@ -14,22 +14,22 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.compose.addresspicker;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.compose.addresspicker;
 
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.core.ExecuteHarnessMain.ResultListener;
-import com.zimbra.qa.selenium.framework.items.MailItem;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormAddressPicker;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew.Field;
+import org.zmail.qa.selenium.framework.core.ExecuteHarnessMain.ResultListener;
+import org.zmail.qa.selenium.framework.items.MailItem;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormAddressPicker;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew.Field;
 
 
 public class AddTo extends PrefGroupMailByMessageTest {
@@ -39,7 +39,7 @@ public class AddTo extends PrefGroupMailByMessageTest {
 		
 		
 		
-		super.startingAccountPreferences.put("zimbraPrefComposeFormat", "text");
+		super.startingAccountPreferences.put("zmailPrefComposeFormat", "text");
 		
 	}
 	
@@ -49,10 +49,10 @@ public class AddTo extends PrefGroupMailByMessageTest {
 		
 		// The account must exist before the picker is opened
 		// Log it to initialize it
-		logger.info("Will add the following account to the To:" + ZimbraAccount.AccountB().EmailAddress);
+		logger.info("Will add the following account to the To:" + ZmailAccount.AccountB().EmailAddress);
 
 		// Create the message data to be sent
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		
@@ -62,14 +62,14 @@ public class AddTo extends PrefGroupMailByMessageTest {
 		
 		// Fill out the form with the data
 		mailform.zFillField(Field.Subject, subject);
-		mailform.zFillField(Field.Body, "body"+ ZimbraSeleniumProperties.getUniqueString());
+		mailform.zFillField(Field.Body, "body"+ ZmailSeleniumProperties.getUniqueString());
 
 		// Open the addresspicker by clicking To
 		
 		FormAddressPicker pickerform = (FormAddressPicker)mailform.zToolbarPressButton(Button.B_TO);
 		ZAssert.assertTrue(pickerform.zIsActive(), "Verify the address picker opened corectly");
 		
-		pickerform.zFillField(FormAddressPicker.Field.Search, ZimbraAccount.AccountB().EmailAddress);
+		pickerform.zFillField(FormAddressPicker.Field.Search, ZmailAccount.AccountB().EmailAddress);
 
 		pickerform.zToolbarPressButton(Button.B_SEARCH);
 		pickerform.zToolbarPressButton(Button.B_TO);
@@ -83,7 +83,7 @@ public class AddTo extends PrefGroupMailByMessageTest {
 
 		MailItem sent = MailItem.importFromSOAP(app.zGetActiveAccount(), "subject:("+ subject +")");
 		ZAssert.assertNotNull(sent, "Verify the message appears in the sent folder");
-		ZAssert.assertEquals(sent.dToRecipients.get(0).dEmailAddress, ZimbraAccount.AccountB().EmailAddress, "Verify the 'to' field is correct");		
+		ZAssert.assertEquals(sent.dToRecipients.get(0).dEmailAddress, ZmailAccount.AccountB().EmailAddress, "Verify the 'to' field is correct");		
 		
 	}
 

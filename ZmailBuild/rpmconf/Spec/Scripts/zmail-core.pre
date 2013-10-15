@@ -13,7 +13,7 @@
 # basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
 # ***** END LICENSE BLOCK *****
 # 
-# Create group, user for zimbra and postfix.
+# Create group, user for zmail and postfix.
 
 grp_exists() {
   if [ -x /usr/bin/getent ]
@@ -38,34 +38,34 @@ acct_exists() {
   fi
 }
 
-grp_exists zimbra
+grp_exists zmail
 if [ $? != 0 ]; then
-	groupadd -r zimbra
+	groupadd -r zmail
 fi
 
-acct_exists zimbra
+acct_exists zmail
 if [ $? != 0 ]; then
-	useradd -r -g zimbra -G tty -d /opt/zimbra -s /bin/bash zimbra
+	useradd -r -g zmail -G tty -d /opt/zmail -s /bin/bash zmail
 else
-	usermod -g zimbra -d /opt/zimbra -s /bin/bash zimbra
+	usermod -g zmail -d /opt/zmail -s /bin/bash zmail
 fi
 
 if [ -f "/etc/security/limits.d/90-nproc.conf" ]; then
-    echo "zimbra soft nproc 278528" > /etc/security/limits.d/80-zimbra.conf
-    echo "zimbra hard nproc 278528" >> /etc/security/limits.d/80-zimbra.conf
-    echo "postfix soft nproc 278528" >> /etc/security/limits.d/80-zimbra.conf
-    echo "postfix hard nproc 278528" >> /etc/security/limits.d/80-zimbra.conf
-    echo "root soft nproc 278528" >> /etc/security/limits.d/80-zimbra.conf
-    echo "root hard nproc 278528" >> /etc/security/limits.d/80-zimbra.conf
+    echo "zmail soft nproc 278528" > /etc/security/limits.d/80-zmail.conf
+    echo "zmail hard nproc 278528" >> /etc/security/limits.d/80-zmail.conf
+    echo "postfix soft nproc 278528" >> /etc/security/limits.d/80-zmail.conf
+    echo "postfix hard nproc 278528" >> /etc/security/limits.d/80-zmail.conf
+    echo "root soft nproc 278528" >> /etc/security/limits.d/80-zmail.conf
+    echo "root hard nproc 278528" >> /etc/security/limits.d/80-zmail.conf
 fi
 if [ -f "/etc/security/limits.conf" ]; then
-    egrep -v -e '^zimbra.*nofile' /etc/security/limits.conf > /tmp/limits.conf
-    echo "zimbra soft nofile 524288" >> /tmp/limits.conf
-    echo "zimbra hard nofile 524288" >> /tmp/limits.conf
+    egrep -v -e '^zmail.*nofile' /etc/security/limits.conf > /tmp/limits.conf
+    echo "zmail soft nofile 524288" >> /tmp/limits.conf
+    echo "zmail hard nofile 524288" >> /tmp/limits.conf
     mv -f /tmp/limits.conf /etc/security/limits.conf
     chmod 640 /etc/security/limits.conf
 else
-    echo "zimbra soft nofile 524288" > /etc/security/limits.conf
-    echo "zimbra hard nofile 524288" >> /etc/security/limits.conf
+    echo "zmail soft nofile 524288" > /etc/security/limits.conf
+    echo "zmail hard nofile 524288" >> /etc/security/limits.conf
     chmod 640 /etc/security/limits.conf
 fi

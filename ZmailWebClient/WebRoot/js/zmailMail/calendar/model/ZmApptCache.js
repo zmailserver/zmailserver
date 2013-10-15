@@ -216,7 +216,7 @@ function(params) {
 
 		// bug #46296/#47041 - skip shared folders if account is offline
 		var calFolder = appCtxt.isOffline && appCtxt.getById(fid);
-		if (calFolder && calFolder.isRemote() && calFolder.getAccount().status == ZmZimbraAccount.STATUS_OFFLINE) {
+		if (calFolder && calFolder.isRemote() && calFolder.getAccount().status == ZmZmailAccount.STATUS_OFFLINE) {
 			continue;
 		}
 
@@ -262,7 +262,7 @@ function(params) {
 
 ZmApptCache.prototype._search =
 function(params) {
-	var jsonObj = {SearchRequest:{_jsns:"urn:zimbraMail"}};
+	var jsonObj = {SearchRequest:{_jsns:"urn:zmailMail"}};
 	var request = jsonObj.SearchRequest;
 
 	this._setSoapParams(request, params);
@@ -315,7 +315,7 @@ function(searchParams, miniCalParams, reminderSearchParams) {
 	}
 
 	var apptVec;
-	var jsonObj = {BatchRequest:{_jsns:"urn:zimbra", onerror:"continue"}};
+	var jsonObj = {BatchRequest:{_jsns:"urn:zmail", onerror:"continue"}};
 	var request = jsonObj.BatchRequest;
 
 	if (searchParams) {
@@ -330,7 +330,7 @@ function(searchParams, miniCalParams, reminderSearchParams) {
 			this._cachedVec = apptVec;
 			this._accountsSearchList.addList(apptVec);
 		} else {
-			var searchRequest = request.SearchRequest = {_jsns:"urn:zimbraMail"};
+			var searchRequest = request.SearchRequest = {_jsns:"urn:zmailMail"};
 			this._setSoapParams(searchRequest, searchParams);
 		}
 	}
@@ -344,7 +344,7 @@ function(searchParams, miniCalParams, reminderSearchParams) {
 		apptVec = this.setSearchParams(reminderSearchParams);
 
 		if (!apptVec) {
-			var searchRequest ={_jsns:"urn:zimbraMail"};
+			var searchRequest ={_jsns:"urn:zmailMail"};
 			request.SearchRequest = request.SearchRequest ? [request.SearchRequest, searchRequest] : searchRequest;
 			this._setSoapParams(searchRequest, reminderSearchParams);
 		}
@@ -364,7 +364,7 @@ function(searchParams, miniCalParams, reminderSearchParams) {
 				miniCalParams.callback.run(cacheData);
 			}
 		} else {
-			var miniCalRequest = request.GetMiniCalRequest = {_jsns:"urn:zimbraMail"};
+			var miniCalRequest = request.GetMiniCalRequest = {_jsns:"urn:zmailMail"};
 			miniCalCache._setSoapParams(miniCalRequest, miniCalParams);
 		}
 	}

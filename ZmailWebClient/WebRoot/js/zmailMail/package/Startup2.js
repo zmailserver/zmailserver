@@ -44,49 +44,49 @@ AjxPackage.require("ajax.dwt.widgets.DwtMessageComposite");
 AjxPackage.require("ajax.dwt.widgets.DwtRadioButtonGroup");
 AjxPackage.require("ajax.dwt.widgets.DwtComboBox");
 
-AjxPackage.require("zimbra.common.ZLoginFactory");
-AjxPackage.require("zimbra.common.ZmBaseSplashScreen");
-AjxPackage.require("zimbra.common.ZmErrorDialog");
+AjxPackage.require("zmail.common.ZLoginFactory");
+AjxPackage.require("zmail.common.ZmBaseSplashScreen");
+AjxPackage.require("zmail.common.ZmErrorDialog");
 
-AjxPackage.require("zimbraMail.share.model.ZmAuthenticate");
-AjxPackage.require("zimbraMail.share.model.ZmAutocomplete");
-AjxPackage.require("zimbraMail.share.model.ZmInvite");
-AjxPackage.require("zimbraMail.share.model.ZmSystemRetentionPolicy");
+AjxPackage.require("zmailMail.share.model.ZmAuthenticate");
+AjxPackage.require("zmailMail.share.model.ZmAutocomplete");
+AjxPackage.require("zmailMail.share.model.ZmInvite");
+AjxPackage.require("zmailMail.share.model.ZmSystemRetentionPolicy");
 
-AjxPackage.require("zimbraMail.share.view.ZmAutocompleteListView");
-AjxPackage.require("zimbraMail.share.view.ZmPeopleAutocompleteListView");
-AjxPackage.require("zimbraMail.share.view.ZmDLAutocompleteListView");
-AjxPackage.require("zimbraMail.share.view.ZmAddressInputField");
+AjxPackage.require("zmailMail.share.view.ZmAutocompleteListView");
+AjxPackage.require("zmailMail.share.view.ZmPeopleAutocompleteListView");
+AjxPackage.require("zmailMail.share.view.ZmDLAutocompleteListView");
+AjxPackage.require("zmailMail.share.view.ZmAddressInputField");
 
-AjxPackage.require("zimbraMail.share.view.ZmColorMenu");
-AjxPackage.require("zimbraMail.share.view.ZmColorButton");
-AjxPackage.require("zimbraMail.share.view.ZmFolderChooser");
+AjxPackage.require("zmailMail.share.view.ZmColorMenu");
+AjxPackage.require("zmailMail.share.view.ZmColorButton");
+AjxPackage.require("zmailMail.share.view.ZmFolderChooser");
 
-AjxPackage.require("zimbraMail.share.view.htmlEditor.ZmHtmlEditor");
-AjxPackage.require("zimbraMail.share.view.htmlEditor.ZmAdvancedHtmlEditor");
-AjxPackage.require("zimbraMail.share.view.ZmDragAndDrop");
+AjxPackage.require("zmailMail.share.view.htmlEditor.ZmHtmlEditor");
+AjxPackage.require("zmailMail.share.view.htmlEditor.ZmAdvancedHtmlEditor");
+AjxPackage.require("zmailMail.share.view.ZmDragAndDrop");
 
-AjxPackage.require("zimbraMail.share.view.dialog.ZmDialog");
-AjxPackage.require("zimbraMail.share.view.dialog.ZmAttachDialog");
-AjxPackage.require("zimbraMail.share.view.dialog.ZmNewOrganizerDialog");
-AjxPackage.require("zimbraMail.share.view.dialog.ZmNewSearchDialog");
-AjxPackage.require("zimbraMail.share.view.dialog.ZmNewTagDialog");
-AjxPackage.require("zimbraMail.share.view.dialog.ZmFolderDialogTabView");
-AjxPackage.require("zimbraMail.share.view.dialog.ZmFolderPropertyView");
-AjxPackage.require("zimbraMail.share.view.dialog.ZmFolderRetentionView");
-AjxPackage.require("zimbraMail.share.view.dialog.ZmFolderPropsDialog");
-AjxPackage.require("zimbraMail.share.view.dialog.ZmQuickAddDialog");
-AjxPackage.require("zimbraMail.share.view.dialog.ZmTimeDialog");
-AjxPackage.require("zimbraMail.core.ZmNewWindow");
-AjxPackage.require("zimbraMail.core.ZmToolTipMgr");
+AjxPackage.require("zmailMail.share.view.dialog.ZmDialog");
+AjxPackage.require("zmailMail.share.view.dialog.ZmAttachDialog");
+AjxPackage.require("zmailMail.share.view.dialog.ZmNewOrganizerDialog");
+AjxPackage.require("zmailMail.share.view.dialog.ZmNewSearchDialog");
+AjxPackage.require("zmailMail.share.view.dialog.ZmNewTagDialog");
+AjxPackage.require("zmailMail.share.view.dialog.ZmFolderDialogTabView");
+AjxPackage.require("zmailMail.share.view.dialog.ZmFolderPropertyView");
+AjxPackage.require("zmailMail.share.view.dialog.ZmFolderRetentionView");
+AjxPackage.require("zmailMail.share.view.dialog.ZmFolderPropsDialog");
+AjxPackage.require("zmailMail.share.view.dialog.ZmQuickAddDialog");
+AjxPackage.require("zmailMail.share.view.dialog.ZmTimeDialog");
+AjxPackage.require("zmailMail.core.ZmNewWindow");
+AjxPackage.require("zmailMail.core.ZmToolTipMgr");
 
-AjxPackage.require("zimbraMail.calendar.model.ZmCalMgr");
-AjxPackage.require("zimbraMail.tasks.model.ZmTaskMgr");
-AjxPackage.require("zimbraMail.calendar.model.ZmMiniCalCache");
-AjxPackage.require("zimbraMail.calendar.controller.ZmSnoozeBeforeProcessor");
-AjxPackage.require("zimbraMail.calendar.controller.ZmReminderController");
-AjxPackage.require("zimbraMail.calendar.view.ZmReminderDialog");
-AjxPackage.require("zimbraMail.calendar.view.ZmQuickReminderDialog");
+AjxPackage.require("zmailMail.calendar.model.ZmCalMgr");
+AjxPackage.require("zmailMail.tasks.model.ZmTaskMgr");
+AjxPackage.require("zmailMail.calendar.model.ZmMiniCalCache");
+AjxPackage.require("zmailMail.calendar.controller.ZmSnoozeBeforeProcessor");
+AjxPackage.require("zmailMail.calendar.controller.ZmReminderController");
+AjxPackage.require("zmailMail.calendar.view.ZmReminderDialog");
+AjxPackage.require("zmailMail.calendar.view.ZmQuickReminderDialog");
 
-AjxPackage.require("zimbraMail.mail.view.ZmRetentionWarningDialog");
+AjxPackage.require("zmailMail.mail.view.ZmRetentionWarningDialog");
 

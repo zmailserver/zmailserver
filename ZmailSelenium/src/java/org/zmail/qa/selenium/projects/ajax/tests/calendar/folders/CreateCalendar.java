@@ -14,19 +14,19 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.calendar.folders;
+package org.zmail.qa.selenium.projects.ajax.tests.calendar.folders;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.ui.Shortcut;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.DialogCreateFolder;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.ui.Shortcut;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.DialogCreateFolder;
 
 public class CreateCalendar extends AjaxCommonTest {
 
@@ -46,7 +46,7 @@ public class CreateCalendar extends AjaxCommonTest {
 
 		
 		// Set the new calendar name
-		String calendarname = "calendar" + ZimbraSeleniumProperties.getUniqueString();
+		String calendarname = "calendar" + ZmailSeleniumProperties.getUniqueString();
 
 		
 		// Click on the "New Calendar" button in the calendar tree
@@ -70,7 +70,7 @@ public class CreateCalendar extends AjaxCommonTest {
 
 		
 		// Set the new calendar name
-		String calendarname = "calendar" + ZimbraSeleniumProperties.getUniqueString();
+		String calendarname = "calendar" + ZmailSeleniumProperties.getUniqueString();
 
 
 		// Click on the "New Calendar" button in the calendar tree
@@ -93,7 +93,7 @@ public class CreateCalendar extends AjaxCommonTest {
 	public void CreateCalendar_03() throws HarnessException {
 
 		// Set the new calendar name
-		String calendarname = "calendar" + ZimbraSeleniumProperties.getUniqueString();
+		String calendarname = "calendar" + ZmailSeleniumProperties.getUniqueString();
 
 		// Determine the calendar folder
 		FolderItem root = FolderItem.importFromSOAP(app.zGetActiveAccount(), FolderItem.SystemFolder.UserRoot);
@@ -119,7 +119,7 @@ public class CreateCalendar extends AjaxCommonTest {
 	public void CreateCalendar_04() throws HarnessException {
 
 		// Set the new calendar name
-		String calendarname = "calendar" + ZimbraSeleniumProperties.getUniqueString();
+		String calendarname = "calendar" + ZmailSeleniumProperties.getUniqueString();
 
 		// Create a new folder in the inbox
 		// using the context menu + New Folder

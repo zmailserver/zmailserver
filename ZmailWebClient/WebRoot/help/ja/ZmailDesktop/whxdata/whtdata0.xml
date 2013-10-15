@@ -17,22 +17,22 @@
 -->
 <tocdata>
 <book name="はじめに" >
-  <item name="Zimbra Desktopについて" url="Getting_Started/Zimbra_User_Help.htm" />
-  <item name="Zimbra Desktopの機能の概要" url="Zdesktop/Overview_of_Zimbra_Desktop_Features.htm" />
+  <item name="Zmail Desktopについて" url="Getting_Started/Zmail_User_Help.htm" />
+  <item name="Zmail Desktopの機能の概要" url="Zdesktop/Overview_of_Zmail_Desktop_Features.htm" />
   <item name="オフラインで作業する" url="Zdesktop/z-Working_Offline.htm" />
   <item name="キーボードショートカット" url="Navigation_folders_and_tips/Keyboard_Shortcut_Keys.htm" />
 </book>
-<book name="Zimbra Desktopを設定する" >
-  <item name="Zimbra Web Clientのアカウントを設定する" url="Zdesktop/Z-Setting_up_your_Zimbra_Web_Client_account.htm" />
+<book name="Zmail Desktopを設定する" >
+  <item name="Zmail Web Clientのアカウントを設定する" url="Zdesktop/Z-Setting_up_your_Zmail_Web_Client_account.htm" />
   <item name="Yahoo!メールおよびGmailのアカウントを設定する" url="Zdesktop/z-Setting_up_Yahoo!_Mail_Plus,_Gmail,_AOL_account_setup.htm" />
   <item name="POP/IMAPアカウントを設定する" url="Zdesktop/z-Setting_up_POP_IMAP_accounts.htm" />
-  <item name="アカウントを同期する" url="Zdesktop/Synchronize_your_account_to_Zimbra_Desktop.htm" />
+  <item name="アカウントを同期する" url="Zdesktop/Synchronize_your_account_to_Zmail_Desktop.htm" />
   <item name="自動同期を無効にする" url="Zdesktop/Turning_Off_Automatic_Sync.htm" />
   <item name="Desktopビューを整理する" url="Zdesktop/z-Changing_account_order_on_Desktop.htm" />
   <item name="Desktopからアカウントを削除する" url="Zdesktop/z-Deleting_an_account_from_Desktop.htm" />
 </book>
 <book name="Desktopメールボックス内を移動する" >
-  <item name="Zimbra Desktop内を移動する" url="Navigation_folders_and_tips/z-Navigating_Zimbra_Desktop.htm" />
+  <item name="Zmail Desktop内を移動する" url="Navigation_folders_and_tips/z-Navigating_Zmail_Desktop.htm" />
   <item name="ユーザーインターフェイスの機能とショートカット" url="Getting_Started/user_interface_features_and_shortcuts.htm" />
   <item name="右クリックメニュー" url="Navigation_folders_and_tips/right-click_menus.htm" />
   <item name="システムフォルダ" url="Navigation_folders_and_tips/inbox_folder.htm" />
@@ -123,7 +123,7 @@
   <item name="デスクトップアラートを設定する" url="Userspecific/Setting_up_desktop_alerts.htm" />
   <item name="他のアドレスにメール通知を送信する" url="Userspecific/New_mail_notifications.htm" />
   <item name="不在メッセージ" url="Userspecific/vacation_message.htm" />
-  <item name="Zimbra Desktopをデフォルトのメールクライアントに設定する" url="managing_your_account/Making_Zimbra_Desktop_Default_Mail_Client.htm" />
+  <item name="Zmail Desktopをデフォルトのメールクライアントに設定する" url="managing_your_account/Making_Zmail_Desktop_Default_Mail_Client.htm" />
 </book>
 <book name="アカウントを整理する" >
   <item name="メールメッセージを分類する" url="Navigation_folders_and_tips/categorizing_your_mail_messages.htm#bc-1" />
@@ -144,8 +144,8 @@
   <item name="タスクを移動する" url="Tasks/Moving_tasks.htm" />
   <item name="タスクを並べ替える" url="Tasks/Sorting_tasks_.htm" />
 </book>
-<book name="フォルダを共有する（Zimbraアカウントのみ）" >
-  <item name="Zimbraフォルダを共有する" url="Zdesktop/zd_Sharing_Your_Zimbra_Folders.htm" />
+<book name="フォルダを共有する（Zmailアカウントのみ）" >
+  <item name="Zmailフォルダを共有する" url="Zdesktop/zd_Sharing_Your_Zmail_Folders.htm" />
   <item name="フォルダを共有するには" url="Zdesktop/zd_Sharing_Folders_steps_.htm" />
   <item name="共有メールボックスフォルダへのアクセスを受け入れる" url="Delegated_mailboxes/Accepting_access_to_the_shared_mailbox_folder.htm" />
   <item name="共有フォルダで作業する" url="Zdesktop/zd_working_in_a_shared_folder.htm" />

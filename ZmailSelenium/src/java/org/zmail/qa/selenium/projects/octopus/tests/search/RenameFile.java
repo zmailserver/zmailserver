@@ -14,20 +14,20 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.octopus.tests.search;
+package org.zmail.qa.selenium.projects.octopus.tests.search;
 
 import java.util.List;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.IOctListViewItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.octopus.core.OctopusCommonTest;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.IOctListViewItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.octopus.core.OctopusCommonTest;
 
 public class RenameFile extends OctopusCommonTest {
 
@@ -46,9 +46,9 @@ public class RenameFile extends OctopusCommonTest {
 	public void RenameFile_01() throws HarnessException {
 
 		String extension = ".txt";
-		String name1 = "filename"+ ZimbraSeleniumProperties.getUniqueString();
-		String name2 = "filename"+ ZimbraSeleniumProperties.getUniqueString();
-		String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+		String name1 = "filename"+ ZmailSeleniumProperties.getUniqueString();
+		String name2 = "filename"+ ZmailSeleniumProperties.getUniqueString();
+		String filePath = ZmailSeleniumProperties.getBaseDirectory()
 				+ "/data/public/documents/doc01/plaintext.txt";
 	
 		
@@ -60,7 +60,7 @@ public class RenameFile extends OctopusCommonTest {
 		FolderItem briefcaseRootFolder = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Briefcase);
 
 		app.zGetActiveAccount().soapSend(
-					"<SaveDocumentRequest xmlns='urn:zimbraMail'>"
+					"<SaveDocumentRequest xmlns='urn:zmailMail'>"
 				+		"<doc name='"+ name1 + extension +"' l='" + briefcaseRootFolder.getId() + "'>"
 				+			"<upload id='" + attachmentId + "'/>"
 				+		"</doc>"
@@ -100,7 +100,7 @@ public class RenameFile extends OctopusCommonTest {
 		
 		// Verify the document is renamed
 		app.zGetActiveAccount().soapSend(
-				"<GetItemRequest xmlns='urn:zimbraMail'>"
+				"<GetItemRequest xmlns='urn:zmailMail'>"
 			+		"<item id='"+ documentId +"'/>"
 			+	"</GetItemRequest>");
 

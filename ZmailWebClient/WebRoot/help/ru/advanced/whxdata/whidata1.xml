@@ -36,7 +36,7 @@
   <topic name="Использование списков задач" url="zwc_help_files/9_tasks/using_task_lists.htm" />
 </key>
 <key name="календарик" >
-  <topic name="Навигация в веб-клиенте Zimbra" url="zwc_help_files/1_setting_up/navigating_the_zimbra_web_client.htm" />
+  <topic name="Навигация в веб-клиенте Zmail" url="zwc_help_files/1_setting_up/navigating_the_zmail_web_client.htm" />
 </key>
 <key name="коллекция модулей zimlet" >
   <topic name="Управление модулями Zimlet" url="zwc_help_files/14_zimlets/managing_your_zimlets.htm" />
@@ -108,10 +108,10 @@
   <topic name="Добавление контактов в адресную книгу" url="zwc_help_files/6_address_book/adding_contacts_to_an_address_book.htm" />
 </key>
 <key name="область обзора" >
-  <topic name="Навигация в веб-клиенте Zimbra" url="zwc_help_files/1_setting_up/navigating_the_zimbra_web_client.htm" />
+  <topic name="Навигация в веб-клиенте Zmail" url="zwc_help_files/1_setting_up/navigating_the_zmail_web_client.htm" />
 </key>
 <key name="область содержимого" >
-  <topic name="Навигация в веб-клиенте Zimbra" url="zwc_help_files/1_setting_up/navigating_the_zimbra_web_client.htm" />
+  <topic name="Навигация в веб-клиенте Zmail" url="zwc_help_files/1_setting_up/navigating_the_zmail_web_client.htm" />
 </key>
 <key name="область чтения" >
   <topic name="Использование области чтения" url="zwc_help_files/2_manage_email/using_a_reading_pane.htm" />

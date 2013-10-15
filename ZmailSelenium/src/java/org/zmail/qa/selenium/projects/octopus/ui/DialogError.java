@@ -14,9 +14,9 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.octopus.ui;
+package org.zmail.qa.selenium.projects.octopus.ui;
 
-import com.zimbra.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.ui.*;
 
 public class DialogError extends DialogWarning {
 

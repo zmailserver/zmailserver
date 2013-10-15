@@ -14,20 +14,20 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.admin.tests.aliases;
+package org.zmail.qa.selenium.projects.admin.tests.aliases;
 
 import java.util.List;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAdminAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.admin.core.AdminCommonTest;
-import com.zimbra.qa.selenium.projects.admin.items.AccountItem;
-import com.zimbra.qa.selenium.projects.admin.items.AliasItem;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAdminAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.admin.core.AdminCommonTest;
+import org.zmail.qa.selenium.projects.admin.items.AccountItem;
+import org.zmail.qa.selenium.projects.admin.items.AliasItem;
 
 public class GetAlias extends AdminCommonTest {
 
@@ -48,15 +48,15 @@ public class GetAlias extends AdminCommonTest {
 			groups = { "smoke" })
 			public void GetAlias_01() throws HarnessException {
 
-		AccountItem target = new AccountItem("email" + ZimbraSeleniumProperties.getUniqueString(),ZimbraSeleniumProperties.getStringProperty("testdomain"));
+		AccountItem target = new AccountItem("email" + ZmailSeleniumProperties.getUniqueString(),ZmailSeleniumProperties.getStringProperty("testdomain"));
 		AccountItem.createUsingSOAP(target);
 		
 		
 		// Create a new account in the Admin Console using SOAP
 		AliasItem alias = new AliasItem();
 		String aliasEmailAddress=alias.getEmailAddress();
-		ZimbraAdminAccount.AdminConsoleAdmin().soapSend(
-						"<AddAccountAliasRequest xmlns='urn:zimbraAdmin'>"
+		ZmailAdminAccount.AdminConsoleAdmin().soapSend(
+						"<AddAccountAliasRequest xmlns='urn:zmailAdmin'>"
 				+			"<id>" + target.getID() + "</id>"
 				+			"<alias>" + aliasEmailAddress + "</alias>"
 				+		"</AddAccountAliasRequest>");
@@ -81,7 +81,7 @@ public class GetAlias extends AdminCommonTest {
 				break;
 			}
 		}
-		ZAssert.assertNotNull(found, "See http://bugzilla.zimbra.com/show_bug.cgi?id=4704");
+		ZAssert.assertNotNull(found, "See http://bugzilla.zmail.com/show_bug.cgi?id=4704");
 
 	}
 

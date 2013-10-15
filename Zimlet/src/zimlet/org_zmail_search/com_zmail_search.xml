@@ -14,7 +14,7 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_search"
+<zimlet name="org_zmail_search"
         version="1.1"
         label="${msg.label}"
         description="${msg.description}">
@@ -24,5 +24,5 @@
     <includeCSS>search.css</includeCSS>
     <resource>google.gif</resource>
     <resource>yahoo.gif</resource>
-    <handlerObject>Com_Zimbra_Search</handlerObject>
+    <handlerObject>Com_Zmail_Search</handlerObject>
 </zimlet>

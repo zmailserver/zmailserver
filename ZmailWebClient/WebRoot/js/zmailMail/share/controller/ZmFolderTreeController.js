@@ -104,7 +104,7 @@ function(parent, type, id) {
 	if (nId == ZmOrganizer.ID_ROOT || ((!folder.isSystem()) /*&& !folder.isSyncIssuesFolder()*/)) {
 		var isShareVisible = (!folder.link || folder.isAdmin());
         if (appCtxt.isOffline) {
-            isShareVisible = !folder.getAccount().isMain && folder.getAccount().isZimbraAccount;
+            isShareVisible = !folder.getAccount().isMain && folder.getAccount().isZmailAccount;
         }
 		parent.enableAll(true);
 		parent.enable(ZmOperation.SYNC, folder.isFeed()/* || folder.hasFeeds()*/);
@@ -149,7 +149,7 @@ function(parent, type, id) {
 			parent.enable([ZmOperation.SHARE_FOLDER, ZmOperation.EDIT_PROPS], true);
 		}
         if (appCtxt.multiAccounts) {
-            var isShareVisible = !folder.getAccount().isMain && folder.getAccount().isZimbraAccount;
+            var isShareVisible = !folder.getAccount().isMain && folder.getAccount().isZmailAccount;
             if(nId == ZmFolder.ID_SPAM || nId == ZmFolder.ID_TRASH) {
                 isShareVisible = false;
             }

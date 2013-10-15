@@ -1,10 +1,10 @@
 <%@ page buffer="8kb" session="false" autoFlush="true" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
 <%@ page session="false" %>
-<%@ page import="java.util.Locale,com.zimbra.client.ZAuthResult" %>
+<%@ page import="java.util.Locale,org.zmail.client.ZAuthResult" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
 <%@ taglib prefix="zd" tagdir="/WEB-INF/tags/desktop" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
 
 <zd:auth/>
 
@@ -52,7 +52,7 @@
  * ***** END LICENSE BLOCK *****
 -->
 <%
-    java.util.List<String> localePref = authResult.getPrefs().get("zimbraPrefLocale");
+    java.util.List<String> localePref = authResult.getPrefs().get("zmailPrefLocale");
     if (localePref != null && localePref.size() > 0)
 	request.setAttribute("localeId", localePref.get(0));
 
@@ -122,7 +122,7 @@
 <fmt:setBundle basename="/messages/ZdMsg" scope="request" />
 
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-<title><fmt:message key="ZimbraDesktop"/></title>
+<title><fmt:message key="ZmailDesktop"/></title>
 <link rel="stylesheet" href="<c:url value="/css/images,common,dwt,msgview,login,zm,wiki,skin.css">
     <c:param name="v" value="${vers}" />
     <c:param name="debug" value='${isDebug?"1":""}' />
@@ -273,7 +273,7 @@
 
 	AjxHistoryMgr.BLANK_FILE = "${contextPath}/public/blankHistory.html";
 
-<c:set var="types" value="${requestScope.authResult.attrs.zimbraFeatureConversationsEnabled[0] eq 'FALSE' ? 'message' : requestScope.authResult.prefs.zimbraPrefGroupMailBy[0]}"/>
+<c:set var="types" value="${requestScope.authResult.attrs.zmailFeatureConversationsEnabled[0] eq 'FALSE' ? 'message' : requestScope.authResult.prefs.zmailPrefGroupMailBy[0]}"/>
 <zm:getInfoJSON var="getInfoJSON" authtoken="${requestScope.authResult.authToken}" dosearch="false" itemsperpage="50" types="${types}"/>
         var batchInfoResponse = ${getInfoJSON};
 
@@ -291,7 +291,7 @@
 	    settings:settings, batchInfoResponse:batchInfoResponse,
 	    devMode:${isDevMode}, offlineMode:${isOfflineMode}
 	};
-	ZmZimbraMail.run(params);
+	ZmZmailMail.run(params);
     }
 
     // Mozilla and Opera 9 expose the event we could use
@@ -318,7 +318,7 @@
     }
 
     AjxCore.addOnloadListener(launch);
-    AjxCore.addOnunloadListener(ZmZimbraMail.unload);
+    AjxCore.addOnunloadListener(ZmZmailMail.unload);
 </script>
 </body>
 </html>

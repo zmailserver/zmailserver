@@ -177,7 +177,7 @@ ZmTag.getIcon = function(color) {
  */
 ZmTag.create =
 function(params) {
-	var request = {_jsns: "urn:zimbraMail"};
+	var request = {_jsns: "urn:zmailMail"};
 	var jsonObj = {CreateTagRequest: request};
 	request.tag = {name: params.name}
 

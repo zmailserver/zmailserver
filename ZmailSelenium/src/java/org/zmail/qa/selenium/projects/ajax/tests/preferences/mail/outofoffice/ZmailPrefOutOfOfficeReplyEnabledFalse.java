@@ -14,34 +14,34 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.preferences.mail.outofoffice;
+package org.zmail.qa.selenium.projects.ajax.tests.preferences.mail.outofoffice;
 
 import java.util.HashMap;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
 
-public class ZimbraPrefOutOfOfficeReplyEnabledFalse extends AjaxCommonTest {
+public class ZmailPrefOutOfOfficeReplyEnabledFalse extends AjaxCommonTest {
 
-	public static final String Message = "message" + ZimbraSeleniumProperties.getUniqueString();
+	public static final String Message = "message" + ZmailSeleniumProperties.getUniqueString();
 	
 
-	public ZimbraPrefOutOfOfficeReplyEnabledFalse() throws HarnessException {
+	public ZmailPrefOutOfOfficeReplyEnabledFalse() throws HarnessException {
 		
 		super.startingPage = app.zPagePreferences;
 		super.startingAccountPreferences = new HashMap<String, String>() {
 			private static final long serialVersionUID = -3101848474022410670L;
 			{
-				put("zimbraPrefOutOfOfficeReplyEnabled", "TRUE");
-				put("zimbraPrefOutOfOfficeReply", Message);
-				put("zimbraPrefOutOfOfficeStatusAlertOnLogin", "TRUE");
+				put("zmailPrefOutOfOfficeReplyEnabled", "TRUE");
+				put("zmailPrefOutOfOfficeReply", Message);
+				put("zmailPrefOutOfOfficeStatusAlertOnLogin", "TRUE");
 			}
 		};
 		
@@ -51,7 +51,7 @@ public class ZimbraPrefOutOfOfficeReplyEnabledFalse extends AjaxCommonTest {
 			description = "Disable out of office",
 			groups = { "smoke" }
 			)
-	public void ZimbraPrefOutOfOfficeReplyEnabledTrue_01() throws HarnessException {
+	public void ZmailPrefOutOfOfficeReplyEnabledTrue_01() throws HarnessException {
 
 		/* test properties */
 
@@ -76,23 +76,23 @@ public class ZimbraPrefOutOfOfficeReplyEnabledFalse extends AjaxCommonTest {
 		/* Test verification */
 		
 		app.zGetActiveAccount().soapSend(
-					"<GetPrefsRequest xmlns='urn:zimbraAccount'>"
-				+		"<pref name='zimbraPrefOutOfOfficeReplyEnabled'/>"
-				+		"<pref name='zimbraPrefOutOfOfficeReply'/>"
-				+		"<pref name='zimbraPrefOutOfOfficeStatusAlertOnLogin'/>"
+					"<GetPrefsRequest xmlns='urn:zmailAccount'>"
+				+		"<pref name='zmailPrefOutOfOfficeReplyEnabled'/>"
+				+		"<pref name='zmailPrefOutOfOfficeReply'/>"
+				+		"<pref name='zmailPrefOutOfOfficeStatusAlertOnLogin'/>"
 				+	"</GetPrefsRequest>");
 
-		String zimbraPrefOutOfOfficeReplyEnabled = app.zGetActiveAccount().soapSelectValue("//acct:pref[@name='zimbraPrefOutOfOfficeReplyEnabled']", null);
-		String zimbraPrefOutOfOfficeReply = app.zGetActiveAccount().soapSelectValue("//acct:pref[@name='zimbraPrefOutOfOfficeReply']", null);
-		String zimbraPrefOutOfOfficeStatusAlertOnLogin = app.zGetActiveAccount().soapSelectValue("//acct:pref[@name='zimbraPrefOutOfOfficeStatusAlertOnLogin']", null);
+		String zmailPrefOutOfOfficeReplyEnabled = app.zGetActiveAccount().soapSelectValue("//acct:pref[@name='zmailPrefOutOfOfficeReplyEnabled']", null);
+		String zmailPrefOutOfOfficeReply = app.zGetActiveAccount().soapSelectValue("//acct:pref[@name='zmailPrefOutOfOfficeReply']", null);
+		String zmailPrefOutOfOfficeStatusAlertOnLogin = app.zGetActiveAccount().soapSelectValue("//acct:pref[@name='zmailPrefOutOfOfficeStatusAlertOnLogin']", null);
 		
-		// zimbraPrefOutOfOfficeReplyEnabled should be FALSE, but
+		// zmailPrefOutOfOfficeReplyEnabled should be FALSE, but
 		// all other properties should not be cleared (in case 
 		// re-enabled in the future)
 		//
-		ZAssert.assertEquals(zimbraPrefOutOfOfficeReplyEnabled, "FALSE", "Verify zimbraPrefOutOfOfficeReplyEnabled is FALSE");
-		ZAssert.assertEquals(zimbraPrefOutOfOfficeReply, Message, "Verify zimbraPrefOutOfOfficeReply contains the message");
-		ZAssert.assertEquals(zimbraPrefOutOfOfficeStatusAlertOnLogin, "TRUE", "Verify zimbraPrefOutOfOfficeStatusAlertOnLogin is TRUE");
+		ZAssert.assertEquals(zmailPrefOutOfOfficeReplyEnabled, "FALSE", "Verify zmailPrefOutOfOfficeReplyEnabled is FALSE");
+		ZAssert.assertEquals(zmailPrefOutOfOfficeReply, Message, "Verify zmailPrefOutOfOfficeReply contains the message");
+		ZAssert.assertEquals(zmailPrefOutOfOfficeStatusAlertOnLogin, "TRUE", "Verify zmailPrefOutOfOfficeStatusAlertOnLogin is TRUE");
 		
 		
 	}

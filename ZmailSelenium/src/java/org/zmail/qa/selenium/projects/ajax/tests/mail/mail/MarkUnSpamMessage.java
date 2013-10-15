@@ -14,15 +14,15 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.mail;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.mail;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
 
 
 public class MarkUnSpamMessage extends PrefGroupMailByMessageTest {
@@ -41,7 +41,7 @@ public class MarkUnSpamMessage extends PrefGroupMailByMessageTest {
 			groups = { "smoke" })
 	public void MarkUnSpamMessage_01() throws HarnessException {
 		
-		String subject = "subject"+ ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject"+ ZmailSeleniumProperties.getUniqueString();
 		
 		// Get the junk and inbox folder
 		FolderItem junk = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Junk);
@@ -50,7 +50,7 @@ public class MarkUnSpamMessage extends PrefGroupMailByMessageTest {
 
 		// Add a message to the account's junk folder
 		app.zGetActiveAccount().soapSend(
-				"<AddMsgRequest xmlns='urn:zimbraMail'>" +
+				"<AddMsgRequest xmlns='urn:zmailMail'>" +
             		"<m l='"+ junk.getId() +"'>" +
                 		"<content>From: foo@foo.com\n" +
 "To: foo@foo.com \n" +

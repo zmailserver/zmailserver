@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.tag;
+package org.zmail.cs.taglib.tag;
 
 import java.io.IOException;
 
@@ -20,14 +20,14 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.SkipPageException;
 
-import com.zimbra.cs.taglib.bean.ZExceptionBean;
-import com.zimbra.cs.taglib.bean.ZTagLibException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.zclient.ZClientException;
-import com.zimbra.common.service.ServiceException;
+import org.zmail.cs.taglib.bean.ZExceptionBean;
+import org.zmail.cs.taglib.bean.ZTagLibException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.zclient.ZClientException;
+import org.zmail.common.service.ServiceException;
 import org.eclipse.jetty.io.RuntimeIOException;
 
-public class GetExceptionTag extends ZimbraSimpleTag {
+public class GetExceptionTag extends ZmailSimpleTag {
     
     private String mVar;
     private Exception mException;
@@ -43,7 +43,7 @@ public class GetExceptionTag extends ZimbraSimpleTag {
             if (
                     (!(e instanceof ServiceException)) ||
                             ((e instanceof ZTagLibException) && (!(e.getCause() instanceof SkipPageException || e.getCause() instanceof IllegalStateException || e.getCause() instanceof RuntimeIOException))) || (e instanceof ZClientException))
-                ZimbraLog.webclient.warn("local exception", e);
+                ZmailLog.webclient.warn("local exception", e);
         }
         getJspContext().setAttribute(mVar, eb,  PageContext.PAGE_SCOPE);
     }

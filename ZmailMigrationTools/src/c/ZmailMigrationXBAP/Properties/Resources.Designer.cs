@@ -8,7 +8,7 @@
 // </auto-generated>
 // ------------------------------------------------------------------------------
 
-namespace ZimbraMigrationXBAP.Properties
+namespace ZmailMigrationXBAP.Properties
 {
 using System;
 
@@ -41,7 +41,7 @@ Runtime.CompilerServices.CompilerGeneratedAttribute()] internal class Resources
             {
                 global::System.Resources.ResourceManager temp =
                     new global::System.Resources.ResourceManager(
-                    "ZimbraMigrationXBAP.Properties.Resources",
+                    "ZmailMigrationXBAP.Properties.Resources",
                     typeof (Resources).Assembly);
 
                 resourceMan = temp;

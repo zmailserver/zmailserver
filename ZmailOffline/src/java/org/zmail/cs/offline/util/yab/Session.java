@@ -12,12 +12,12 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.util.yab;
+package org.zmail.cs.offline.util.yab;
 
-import com.zimbra.common.util.ZimbraHttpConnectionManager;
-import com.zimbra.cs.util.yauth.AuthenticationException;
-import com.zimbra.cs.util.yauth.Authenticator;
-import com.zimbra.cs.offline.util.Xml;
+import org.zmail.common.util.ZmailHttpConnectionManager;
+import org.zmail.cs.util.yauth.AuthenticationException;
+import org.zmail.cs.util.yauth.Authenticator;
+import org.zmail.cs.offline.util.Xml;
 
 import java.io.IOException;
 import java.io.ByteArrayOutputStream;
@@ -61,7 +61,7 @@ public class Session {
         }
         this.format = format;
         this.authenticator = authenticator;
-        httpClient = ZimbraHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
+        httpClient = ZmailHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
         docBuilder = Xml.newDocumentBuilder();
         transformer = createTransformer();
         baos = new ByteArrayOutputStream(4096);

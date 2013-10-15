@@ -52,7 +52,7 @@ public class IntroViewModel: BaseViewModel
     }
     private void GetIntroLicense()
     {
-        string urlString = "http://files.zimbra.com/website/docs/zimbra_network_la.pdf";
+        string urlString = "http://files.zmail.com/website/docs/zmail_network_la.pdf";
 
         Process.Start(new ProcessStartInfo(urlString));
     }
@@ -122,7 +122,7 @@ public class IntroViewModel: BaseViewModel
                 
                 string error = "Migration cannot be initialized.  ";
                 error += e.Message;
-                MessageBox.Show(error, "Zimbra Migration", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(error, "Zmail Migration", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             Application.Current.Properties["mw"] = mw;
@@ -154,7 +154,7 @@ public class IntroViewModel: BaseViewModel
                 m_configViewModelU.Isprofile = false;
                 m_configViewModelU.IspST = true;
             }
-            MessageBox.Show(msg, "Zimbra Migration", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(msg, "Zmail Migration", MessageBoxButton.OK, MessageBoxImage.Information);
             m_configViewModelS.CSEnableNext = true;
         }
         else
@@ -173,7 +173,7 @@ public class IntroViewModel: BaseViewModel
             {
                 if (s.IndexOf("GetListofMapiProfiles Exception") != -1)
                 {
-                    MessageBox.Show(s, "Zimbra Migration", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(s, "Zmail Migration", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
                 if (isServer)
@@ -260,7 +260,7 @@ public class IntroViewModel: BaseViewModel
         IsServerMigration = true;
         IsUserMigration = false;
         savedDomain = "";
-        ZimbraValues.GetZimbraValues().ClientVersion = BuildNum;
+        ZmailValues.GetZmailValues().ClientVersion = BuildNum;
 
         m_configViewModelS = new ConfigViewModelS();
         m_configViewModelS.Name = "ConfigViewModelS";
@@ -286,22 +286,22 @@ public class IntroViewModel: BaseViewModel
         m_configViewModelSDest.ViewTitle = "Destination";
         m_configViewModelSDest.lb = lb;
         m_configViewModelSDest.isBrowser = isBrowser;
-        m_configViewModelSDest.ZimbraServerHostName = "";
-        m_configViewModelSDest.ZimbraPort = "";
-        m_configViewModelSDest.ZimbraAdmin = "";
-        m_configViewModelSDest.ZimbraAdminPasswd = "";
-        m_configViewModelSDest.ZimbraSSL = true;
+        m_configViewModelSDest.ZmailServerHostName = "";
+        m_configViewModelSDest.ZmailPort = "";
+        m_configViewModelSDest.ZmailAdmin = "";
+        m_configViewModelSDest.ZmailAdminPasswd = "";
+        m_configViewModelSDest.ZmailSSL = true;
 
         m_configViewModelUDest = new ConfigViewModelUDest();
         m_configViewModelUDest.Name = "ConfigViewModelUDest";
         m_configViewModelUDest.ViewTitle = "Destination";
         m_configViewModelUDest.lb = lb;
         m_configViewModelUDest.isBrowser = isBrowser;
-        m_configViewModelUDest.ZimbraServerHostName = "";
-        m_configViewModelUDest.ZimbraPort = "";
-        m_configViewModelUDest.ZimbraUser = "";
-        m_configViewModelUDest.ZimbraUserPasswd = "";
-        m_configViewModelUDest.ZimbraSSL = true;
+        m_configViewModelUDest.ZmailServerHostName = "";
+        m_configViewModelUDest.ZmailPort = "";
+        m_configViewModelUDest.ZmailUser = "";
+        m_configViewModelUDest.ZmailUserPasswd = "";
+        m_configViewModelUDest.ZmailSSL = true;
 
         m_optionsViewModel = new OptionsViewModel();
         m_optionsViewModel.Name = "OptionsViewModel";
@@ -343,7 +343,7 @@ public class IntroViewModel: BaseViewModel
         m_usersViewModel.Name = "Users";
         m_usersViewModel.ViewTitle = "Users";
         m_usersViewModel.lb = lb;
-        m_usersViewModel.ZimbraDomain = "";
+        m_usersViewModel.ZmailDomain = "";
         m_usersViewModel.isBrowser = isBrowser;
         m_usersViewModel.CurrentUserSelection = -1;
         m_usersViewModel.svm = m_scheduleViewModel;  // LDAP Browser needs to get to ScheduleView to set EnableMigrate 

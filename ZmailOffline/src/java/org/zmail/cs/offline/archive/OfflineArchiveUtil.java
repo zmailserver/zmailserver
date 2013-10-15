@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.archive;
+package org.zmail.cs.offline.archive;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -31,23 +31,23 @@ import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 
 import com.google.common.base.Strings;
-import com.zimbra.common.account.ZAttrProvisioning;
-import com.zimbra.common.httpclient.HttpClientUtil;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.service.ServiceException.Argument;
-import com.zimbra.common.service.ServiceException.InternalArgument;
-import com.zimbra.common.util.FileUtil;
-import com.zimbra.common.util.ZimbraHttpConnectionManager;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.offline.OfflineLC;
-import com.zimbra.cs.offline.OfflineLog;
-import com.zimbra.cs.offline.util.Xml;
-import com.zimbra.cs.service.AuthProvider;
-import com.zimbra.cs.service.UserServlet;
-import com.zimbra.cs.service.formatter.ArchiveFormatter;
-import com.zimbra.cs.service.formatter.ArchiveFormatter.Resolve;
+import org.zmail.common.account.ZAttrProvisioning;
+import org.zmail.common.httpclient.HttpClientUtil;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.service.ServiceException.Argument;
+import org.zmail.common.service.ServiceException.InternalArgument;
+import org.zmail.common.util.FileUtil;
+import org.zmail.common.util.ZmailHttpConnectionManager;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.offline.OfflineLC;
+import org.zmail.cs.offline.OfflineLog;
+import org.zmail.cs.offline.util.Xml;
+import org.zmail.cs.service.AuthProvider;
+import org.zmail.cs.service.UserServlet;
+import org.zmail.cs.service.formatter.ArchiveFormatter;
+import org.zmail.cs.service.formatter.ArchiveFormatter.Resolve;
 
 public final class OfflineArchiveUtil {
 
@@ -86,11 +86,11 @@ public final class OfflineArchiveUtil {
      */
     public static File exportArchive(Account acct, Folder folder, String url, NameValuePair[] params)
             throws ServiceException {
-        HttpClient client = ZimbraHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
+        HttpClient client = ZmailHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
         GetMethod get = new GetMethod(url);
         get.setQueryString(params);
         AuthToken authtoken = AuthProvider.getAuthToken(acct);
-        authtoken.encode(client, get, false, acct.getAttr(ZAttrProvisioning.A_zimbraMailHost));
+        authtoken.encode(client, get, false, acct.getAttr(ZAttrProvisioning.A_zmailMailHost));
         try {
             int statusCode = HttpClientUtil.executeMethod(client, get);
             if (statusCode != HttpStatus.SC_OK) {
@@ -133,7 +133,7 @@ public final class OfflineArchiveUtil {
     public static void importArchive(Account acct, Folder destFolder, File archivedFile) throws ServiceException {
         AuthToken authtoken = AuthProvider.getAuthToken(acct);
         String url = UserServlet.getRestUrl(destFolder);
-        HttpClient client = ZimbraHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
+        HttpClient client = ZmailHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
         PostMethod post = new PostMethod(url);
         NameValuePair[] params = new NameValuePair[] { new NameValuePair(UserServlet.QP_FMT, "tgz"),
                 new NameValuePair(ArchiveFormatter.PARAM_RESOLVE, Resolve.Skip.toString()) };
@@ -144,7 +144,7 @@ public final class OfflineArchiveUtil {
         } catch (FileNotFoundException e) {
             throw ServiceException.UNKNOWN_DOCUMENT("File " + archivedFile + " not found", e);
         }
-        authtoken.encode(client, post, false, acct.getAttr(ZAttrProvisioning.A_zimbraMailHost));
+        authtoken.encode(client, post, false, acct.getAttr(ZAttrProvisioning.A_zmailMailHost));
         try {
             int statusCode = HttpClientUtil.executeMethod(client, post);
             if (statusCode != HttpStatus.SC_OK) {

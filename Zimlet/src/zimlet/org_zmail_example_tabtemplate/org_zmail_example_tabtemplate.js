@@ -17,24 +17,24 @@
  * Defines the Zimlet handler class.
  *   
  */
-function com_zimbra_example_tabtemplate_HandlerObject() {
+function org_zmail_example_tabtemplate_HandlerObject() {
 }
 
 /**
  * Makes the Zimlet class a subclass of ZmZimletBase.
  *
  */
-com_zimbra_example_tabtemplate_HandlerObject.prototype = new ZmZimletBase();
-com_zimbra_example_tabtemplate_HandlerObject.prototype.constructor = com_zimbra_example_tabtemplate_HandlerObject;
+org_zmail_example_tabtemplate_HandlerObject.prototype = new ZmZimletBase();
+org_zmail_example_tabtemplate_HandlerObject.prototype.constructor = org_zmail_example_tabtemplate_HandlerObject;
 
 /**
 * This method gets called by the Zimlet framework when the zimlet loads.
 *  
 */
-com_zimbra_example_tabtemplate_HandlerObject.prototype.init =
+org_zmail_example_tabtemplate_HandlerObject.prototype.init =
 function() {
 
-	this._simpleAppName = this.createApp("Tab Template App", "zimbraIcon", "A app in a new tab with a template");
+	this._simpleAppName = this.createApp("Tab Template App", "zmailIcon", "A app in a new tab with a template");
 
 };
 
@@ -44,7 +44,7 @@ function() {
  * @param	{String}	appName		the application name
  * @param	{Boolean}	active		if true, the application status is open; otherwise, false
  */
-com_zimbra_example_tabtemplate_HandlerObject.prototype.appActive =
+org_zmail_example_tabtemplate_HandlerObject.prototype.appActive =
 function(appName, active) {
 	
 	switch (appName) {
@@ -64,7 +64,7 @@ function(appName, active) {
  *  
  * @param	{String}	appName		the application name		
  */
-com_zimbra_example_tabtemplate_HandlerObject.prototype.appLaunch =
+org_zmail_example_tabtemplate_HandlerObject.prototype.appLaunch =
 function(appName) {
 
 	switch (appName) {
@@ -88,9 +88,9 @@ function(appName) {
  * 
  * @return	{String}	the tab HTML content
  */
-com_zimbra_example_tabtemplate_HandlerObject.prototype._createTabView =
+org_zmail_example_tabtemplate_HandlerObject.prototype._createTabView =
 function() {
-	return	AjxTemplate.expand("com_zimbra_example_tabtemplate.templates.Tab#Main");		
+	return	AjxTemplate.expand("org_zmail_example_tabtemplate.templates.Tab#Main");		
 };
 
 

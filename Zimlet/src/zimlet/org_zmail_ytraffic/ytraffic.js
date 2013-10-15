@@ -18,21 +18,21 @@
 //  @author Charles Cao                                     //
 //////////////////////////////////////////////////////////////
 
-function Com_Zimbra_YTraffic() {
+function Com_Zmail_YTraffic() {
 }
 
-Com_Zimbra_YTraffic.prototype = new ZmZimletBase();
-Com_Zimbra_YTraffic.prototype.constructor = Com_Zimbra_YTraffic;
+Com_Zmail_YTraffic.prototype = new ZmZimletBase();
+Com_Zmail_YTraffic.prototype.constructor = Com_Zmail_YTraffic;
 
-Com_Zimbra_YTraffic.prototype.init =
+Com_Zmail_YTraffic.prototype.init =
 function() {
 };
 
 //TODO Y! Traffic Webservice URL
-Com_Zimbra_YTraffic.URL = "http://api.local.yahoo.com/MapsService/V1/trafficData?appid=ZimbraTraffic";
+Com_Zmail_YTraffic.URL = "http://api.local.yahoo.com/MapsService/V1/trafficData?appid=ZmailTraffic";
 
-//Called by the Zimbra framework when the panel item was double clicked
-Com_Zimbra_YTraffic.prototype.doubleClicked = function() {
+//Called by the Zmail framework when the panel item was double clicked
+Com_Zmail_YTraffic.prototype.doubleClicked = function() {
 	var editorProps = [
 		{ label 		 : "Street",
 		  name           : "street",
@@ -88,7 +88,7 @@ Com_Zimbra_YTraffic.prototype.doubleClicked = function() {
 	this._dlg_propertyEditor.popup();
 };
 
-Com_Zimbra_YTraffic.prototype._getDisplayCustomTraffic =
+Com_Zmail_YTraffic.prototype._getDisplayCustomTraffic =
 function() {
 	this._dlg_propertyEditor.popdown();
 	var addressProps = this._propertyEditor.getProperties();
@@ -97,7 +97,7 @@ function() {
 	this._dlg_propertyEditor = null;
 };
 
-Com_Zimbra_YTraffic.prototype._displayDialogTraffic = 
+Com_Zmail_YTraffic.prototype._displayDialogTraffic = 
 function(address) {
 	var view = new DwtComposite(this.getShell());
 	var dialog_args = {
@@ -125,7 +125,7 @@ function(address) {
 
 // Content Object Methods
 
-Com_Zimbra_YTraffic.prototype.toolTipPoppedUp =
+Com_Zmail_YTraffic.prototype.toolTipPoppedUp =
 function(spanElement, obj, context, canvas) {
 
 	var addressURL = "";
@@ -134,19 +134,19 @@ function(spanElement, obj, context, canvas) {
 	addressURL += obj.state.length > 0 ? "&" + "state=" + AjxStringUtil.urlComponentEncode(obj.state) : "" ;
 	addressURL += obj.zip.length > 0 ? "&" + "zip=" + AjxStringUtil.urlComponentEncode(obj.zip) : "" ;
 	canvas.innerHTML = "<div id='" + ZmZimletBase.encodeId("YahooTrafficElement") + "'>Retriving the traffic data ....</div>";
-	var url = ZmZimletBase.PROXY + AjxStringUtil.urlComponentEncode(Com_Zimbra_YTraffic.URL + addressURL);
-	DBG.println(AjxDebug.DBG2, "Com_Zimbra_YTraffic URL: " + url);
-	AjxRpc.invoke(null, url, null, new AjxCallback(this, Com_Zimbra_YTraffic._callback, obj), true);
+	var url = ZmZimletBase.PROXY + AjxStringUtil.urlComponentEncode(Com_Zmail_YTraffic.URL + addressURL);
+	DBG.println(AjxDebug.DBG2, "Com_Zmail_YTraffic URL: " + url);
+	AjxRpc.invoke(null, url, null, new AjxCallback(this, Com_Zmail_YTraffic._callback, obj), true);
 };
 
-Com_Zimbra_YTraffic._displayTrafficInfo = 
+Com_Zmail_YTraffic._displayTrafficInfo = 
 function (trafficInfo, obj){
 	var resultEl = document.getElementById(ZmZimletBase.encodeId("YahooTrafficElement"));
 	resultEl.innerHTML = trafficInfo ;
 
 };
 
-Com_Zimbra_YTraffic._callback = 
+Com_Zmail_YTraffic._callback = 
 function(obj, results) {
 
 	var xmlDom = results.xml;
@@ -185,5 +185,5 @@ function(obj, results) {
 	}else{
 		rHtml = results.text;
 	}
-	Com_Zimbra_YTraffic._displayTrafficInfo(rHtml, obj);
+	Com_Zmail_YTraffic._displayTrafficInfo(rHtml, obj);
 };

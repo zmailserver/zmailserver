@@ -13,21 +13,21 @@
  * ***** END LICENSE BLOCK *****
  */
 
-//Author: Raja Rao DV (rrao@zimbra.com)
+//Author: Raja Rao DV (rrao@zmail.com)
 
-function com_zimbra_socialMiniDlg(zimlet) {
+function org_zmail_socialMiniDlg(zimlet) {
 	this.zimlet = zimlet;
 	this.miniDlgON = false;
 	this.urlRegEx = /((telnet:)|((https?|ftp|gopher|news|file):\/\/)|(www.[\w\.\_\-]+))[^\s\<\>\[\]\{\}\'\"]*/gi;
 
 }
 
-com_zimbra_socialMiniDlg.prototype._buttonListener =
+org_zmail_socialMiniDlg.prototype._buttonListener =
 function(controller) {
 	this._showSocialMiniDlg(controller);
 };
 
-com_zimbra_socialMiniDlg.prototype.getMailContents =
+org_zmail_socialMiniDlg.prototype.getMailContents =
 function(controller) {
 	var message = controller.getMsg();
 	var lastUrl = "";
@@ -61,7 +61,7 @@ function(controller) {
 	}
 };
 
-com_zimbra_socialMiniDlg.prototype._processContent =
+org_zmail_socialMiniDlg.prototype._processContent =
 function(params, response) {
 	var content = "";
 	var subject = params.subject;
@@ -90,7 +90,7 @@ function(params, response) {
 	this.zimlet.showNumberOfLetters();
 };
 
-com_zimbra_socialMiniDlg.prototype._showSocialMiniDlg = function(controller) {
+org_zmail_socialMiniDlg.prototype._showSocialMiniDlg = function(controller) {
 	this.miniDlgON = true;
 	if (this.socialMiniDialog) {
 		this.zimlet.toggleFields();
@@ -131,7 +131,7 @@ com_zimbra_socialMiniDlg.prototype._showSocialMiniDlg = function(controller) {
 	this.zimlet.setFieldFocused(this.zimlet.updateField);
 };
 
-com_zimbra_socialMiniDlg.prototype._SocialMiniCancelBtnListener =
+org_zmail_socialMiniDlg.prototype._SocialMiniCancelBtnListener =
 function() {
 	this.miniDlgON = false;//set this first
 	this.zimlet.toggleFields();
@@ -139,7 +139,7 @@ function() {
 };
 
 
-com_zimbra_socialMiniDlg.prototype._addUrlShortenButton_miniDlg =
+org_zmail_socialMiniDlg.prototype._addUrlShortenButton_miniDlg =
 function() {
 	var shortenButton = new DwtButton({parent:this.zimlet.getShell()});
 	shortenButton.setText(this.zimlet.getMessage("shortenUrl"));
@@ -147,7 +147,7 @@ function() {
 	document.getElementById("social_shortenUrlButtonDIV_miniDlg").appendChild(shortenButton.getHtmlElement());
 };
 
-com_zimbra_socialMiniDlg.prototype._createSocialMiniView =
+org_zmail_socialMiniDlg.prototype._createSocialMiniView =
 function() {
 	var subs = {
 		undo: this.zimlet.getMessage("undo"),
@@ -156,6 +156,6 @@ function() {
 		whatAreYouDoingMsg: this.zimlet.getMessage("whatAreYouDoing"),
 		updateCheckBoxesHtml: this.zimlet._addUpdateToCheckboxes()
 	};
-	return AjxTemplate.expand("com_zimbra_social.templates.Social#miniDlg", subs);
+	return AjxTemplate.expand("org_zmail_social.templates.Social#miniDlg", subs);
 };
 

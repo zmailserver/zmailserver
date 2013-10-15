@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.preferences.mail.trustedaddresses;
+package org.zmail.qa.selenium.projects.ajax.tests.preferences.mail.trustedaddresses;
 
 import java.util.HashMap;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
 
 
 
@@ -32,7 +32,7 @@ import com.zimbra.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeI
 public class RemoveTrustedEmail extends AjaxCommonTest {
 
 	// For RemoveTrustedEmail_01
-	public String email1 = "email"+ ZimbraSeleniumProperties.getUniqueString() + "@zimbra.com";
+	public String email1 = "email"+ ZmailSeleniumProperties.getUniqueString() + "@zmail.com";
 	
 	
 	
@@ -43,7 +43,7 @@ public class RemoveTrustedEmail extends AjaxCommonTest {
 		super.startingAccountPreferences = new HashMap<String, String>() {
 			private static final long serialVersionUID = -1977182849340781539L;
 			{
-				put("zimbraPrefMailTrustedSenderList", email1);
+				put("zmailPrefMailTrustedSenderList", email1);
 			}
 		};
 		
@@ -81,12 +81,12 @@ public class RemoveTrustedEmail extends AjaxCommonTest {
 		/* Test verification */
 		
 		app.zGetActiveAccount().soapSend(
-					"<GetPrefsRequest xmlns='urn:zimbraAccount'>"
-				+		"<pref name='zimbraPrefMailTrustedSenderList'/>"
+					"<GetPrefsRequest xmlns='urn:zmailAccount'>"
+				+		"<pref name='zmailPrefMailTrustedSenderList'/>"
 				+	"</GetPrefsRequest>");
 
 		String found = null;
-		Element[] nodes = app.zGetActiveAccount().soapSelectNodes("//acct:pref[@name='zimbraPrefMailTrustedSenderList']");
+		Element[] nodes = app.zGetActiveAccount().soapSelectNodes("//acct:pref[@name='zmailPrefMailTrustedSenderList']");
 		for (Element e : nodes) {
 			if ( e.getText().contains(email1) ) {
 				found = e.getText();

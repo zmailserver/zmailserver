@@ -14,13 +14,13 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.admin.ui;
+package org.zmail.qa.selenium.projects.admin.ui;
 
-import com.zimbra.qa.selenium.framework.ui.AbsApplication;
+import org.zmail.qa.selenium.framework.ui.AbsApplication;
 
 /**
  * The "Edit Zimlet" page has the same functionality as "Edit Admin Extension"
- * @author zimbra
+ * @author zmail
  *
  */
 public class PageEditZimlet extends PageEditAdminExtension {

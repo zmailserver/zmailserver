@@ -7,7 +7,7 @@ function ZaBulkProvision () {
 
 ZaItem.BULK_PROVISION = "BulkProvsion";
 ZaItem.BULK_PROVISION_TASK = "BulkProvsionTask";
-ZaBulkProvision.URN = "urn:zimbraAdminExt" ;
+ZaBulkProvision.URN = "urn:zmailAdminExt" ;
 
 ZaBulkProvision.prototype = new ZaItem;
 ZaBulkProvision.prototype.constructor = ZaBulkProvision;
@@ -65,11 +65,11 @@ ZaBulkProvision.A2_tgt_acct_selection_pool = "tgt_acct_selection_pool";
 
 //LDAP import options
 ZaBulkProvision.A2_maxResults = "maxResults";
-ZaBulkProvision.A2_GalLdapURL = "zimbraGalLdapURL";
-ZaBulkProvision.A2_GalLdapSearchBase = "zimbraGalLdapSearchBase";
-ZaBulkProvision.A2_GalLdapBindDn = "zimbraGalLdapBindDn";
-ZaBulkProvision.A2_GalLdapBindPassword = "zimbraGalLdapBindPassword";
-ZaBulkProvision.A2_GalLdapFilter = "zimbraGalLdapFilter";
+ZaBulkProvision.A2_GalLdapURL = "zmailGalLdapURL";
+ZaBulkProvision.A2_GalLdapSearchBase = "zmailGalLdapSearchBase";
+ZaBulkProvision.A2_GalLdapBindDn = "zmailGalLdapBindDn";
+ZaBulkProvision.A2_GalLdapBindPassword = "zmailGalLdapBindPassword";
+ZaBulkProvision.A2_GalLdapFilter = "zmailGalLdapFilter";
 
 //IMAP Migration options
 ZaBulkProvision.A2_sourceServerType = "sourceServerType";
@@ -93,9 +93,9 @@ ZaBulkProvision.A2_InvalidSSLOk = "InvalidSSLOk";
 ZaBulkProvision.A2_MapiProfile = "MapiProfile";
 ZaBulkProvision.A2_MapiServer = "MapiServer";
 ZaBulkProvision.A2_MapiLogonUserDN = "MapiLogonUserDN";
-ZaBulkProvision.A2_ZimbraAdminPassword = "ZimbraAdminPassword";
-ZaBulkProvision.A2_ZimbraAdminLogin = "ZimbraAdminLogin";
-ZaBulkProvision.A2_ZimbraAdminPasswordConfirm = "ZimbraAdminPasswordConfirm";
+ZaBulkProvision.A2_ZmailAdminPassword = "ZmailAdminPassword";
+ZaBulkProvision.A2_ZmailAdminLogin = "ZmailAdminLogin";
+ZaBulkProvision.A2_ZmailAdminPasswordConfirm = "ZmailAdminPasswordConfirm";
 ZaBulkProvision.A2_provisionUsers = "provisionUsers";
 ZaBulkProvision.A2_importEmail = "importEmail";
 
@@ -123,7 +123,7 @@ ZaBulkProvision.FILE_FORMAT_MIGRATION_XML = "migrationxml";
 ZaBulkProvision.FILE_FORMAT_BULK_XML = "bulkxml";
 ZaBulkProvision.FILE_FORMAT_BULK_CSV = "csv";
 
-ZaBulkProvision.SOURCE_TYPE_ZIMBRA = "zimbra";
+ZaBulkProvision.SOURCE_TYPE_ZIMBRA = "zmail";
 ZaBulkProvision.SOURCE_TYPE_LDAP = "ldap";
 ZaBulkProvision.SOURCE_TYPE_XML = "bulkxml";
 ZaBulkProvision.SOURCE_TYPE_REUSE_XML = "reusebulkxml";
@@ -152,30 +152,30 @@ ZaBulkProvision.BP_NO_ACCOUNTS_TO_IMPORT =  "bulkprovision.BP_NO_ACCOUNTS_TO_IMP
 
 ZaBulkProvision.getMyXModel = function () {
 	ZaBulkProvision.ProvActionChoices = [
-		{value:ZaBulkProvision.ACTION_IMPORT_LDAP,label:com_zimbra_bulkprovision.ActionImportFromLDAP},
-		{value:ZaBulkProvision.ACTION_IMPORT_CSV,label:com_zimbra_bulkprovision.ActionImportFromSCV},
-		{value:ZaBulkProvision.ACTION_IMPORT_XML,label:com_zimbra_bulkprovision.ActionImportFromXML},
-		{value:ZaBulkProvision.ACTION_GENERATE_MIG_XML,label:com_zimbra_bulkprovision.ActionGenerateMigXML},
-		{value:ZaBulkProvision.ACTION_IMPORT_AD,label:com_zimbra_bulkprovision.ActionImportAccountsFromAD},
-		{value:ZaBulkProvision.ACTION_GENERATE_BULK_XML,label:com_zimbra_bulkprovision.ActionGenerateBulkXML},
-		{value:ZaBulkProvision.ACTION_GENERATE_BULK_CSV,label:com_zimbra_bulkprovision.ActionGenerateBulkCSV}
+		{value:ZaBulkProvision.ACTION_IMPORT_LDAP,label:org_zmail_bulkprovision.ActionImportFromLDAP},
+		{value:ZaBulkProvision.ACTION_IMPORT_CSV,label:org_zmail_bulkprovision.ActionImportFromSCV},
+		{value:ZaBulkProvision.ACTION_IMPORT_XML,label:org_zmail_bulkprovision.ActionImportFromXML},
+		{value:ZaBulkProvision.ACTION_GENERATE_MIG_XML,label:org_zmail_bulkprovision.ActionGenerateMigXML},
+		{value:ZaBulkProvision.ACTION_IMPORT_AD,label:org_zmail_bulkprovision.ActionImportAccountsFromAD},
+		{value:ZaBulkProvision.ACTION_GENERATE_BULK_XML,label:org_zmail_bulkprovision.ActionGenerateBulkXML},
+		{value:ZaBulkProvision.ACTION_GENERATE_BULK_CSV,label:org_zmail_bulkprovision.ActionGenerateBulkCSV}
     ];
 
 	ZaBulkProvision.SourceServerTypeChoices = [
-        {label:com_zimbra_bulkprovision.SourceServerTypeIMAP, value:ZaBulkProvision.MAIL_SOURCE_TYPE_IMAP},
-        {label:com_zimbra_bulkprovision.SourceServerTypeZimbra, value:ZaBulkProvision.MAIL_SOURCE_TYPE_ZIMBRA}
+        {label:org_zmail_bulkprovision.SourceServerTypeIMAP, value:ZaBulkProvision.MAIL_SOURCE_TYPE_IMAP},
+        {label:org_zmail_bulkprovision.SourceServerTypeZmail, value:ZaBulkProvision.MAIL_SOURCE_TYPE_ZIMBRA}
 	];
 
 	ZaBulkProvision.AccountListSourceTypeChoices = [
-        {label:com_zimbra_bulkprovision.AccountListTypeLDAP, value:ZaBulkProvision.SOURCE_TYPE_LDAP},
-        {label:com_zimbra_bulkprovision.AccountListTypeXML, value:ZaBulkProvision.SOURCE_TYPE_XML}
+        {label:org_zmail_bulkprovision.AccountListTypeLDAP, value:ZaBulkProvision.SOURCE_TYPE_LDAP},
+        {label:org_zmail_bulkprovision.AccountListTypeXML, value:ZaBulkProvision.SOURCE_TYPE_XML}
     ];
 
 	ZaBulkProvision.IMAPConnectionTypeChoices = [
-        {label:com_zimbra_bulkprovision.IMAPConnectionCleartext, value:ZaBulkProvision.CONNECTION_CLEARTEXT},
-        {label:com_zimbra_bulkprovision.IMAPConnectionSSL, value:ZaBulkProvision.CONNECTION_SSL},
-        {label:com_zimbra_bulkprovision.IMAPConnectionTLS, value:ZaBulkProvision.CONNECTION_TLS},
-        {label:com_zimbra_bulkprovision.IMAPConnectionTLSIfAvailable, value:ZaBulkProvision.CONNECTION_TLS_IF_AVAILABLE}
+        {label:org_zmail_bulkprovision.IMAPConnectionCleartext, value:ZaBulkProvision.CONNECTION_CLEARTEXT},
+        {label:org_zmail_bulkprovision.IMAPConnectionSSL, value:ZaBulkProvision.CONNECTION_SSL},
+        {label:org_zmail_bulkprovision.IMAPConnectionTLS, value:ZaBulkProvision.CONNECTION_TLS},
+        {label:org_zmail_bulkprovision.IMAPConnectionTLSIfAvailable, value:ZaBulkProvision.CONNECTION_TLS_IF_AVAILABLE}
     ];
 
 	var xmodel = {
@@ -240,9 +240,9 @@ ZaBulkProvision.getMyXModel = function () {
 	        {id:ZaBulkProvision.A2_MapiProfile, type:_STRING_, ref:ZaBulkProvision.A2_MapiProfile},
 	        {id:ZaBulkProvision.A2_MapiServer, type:_STRING_, ref:ZaBulkProvision.A2_MapiServer},
 	        {id:ZaBulkProvision.A2_MapiLogonUserDN, type:_STRING_, ref:ZaBulkProvision.A2_MapiLogonUserDN},
-	        {id:ZaBulkProvision.A2_ZimbraAdminPassword, type:_STRING_, ref:ZaBulkProvision.A2_ZimbraAdminPassword},
-	        {id:ZaBulkProvision.A2_ZimbraAdminPasswordConfirm, type:_STRING_, ref:ZaBulkProvision.A2_ZimbraAdminPasswordConfirm},
-	        {id:ZaBulkProvision.A2_ZimbraAdminLogin, type:_STRING_, ref:ZaBulkProvision.A2_ZimbraAdminLogin},
+	        {id:ZaBulkProvision.A2_ZmailAdminPassword, type:_STRING_, ref:ZaBulkProvision.A2_ZmailAdminPassword},
+	        {id:ZaBulkProvision.A2_ZmailAdminPasswordConfirm, type:_STRING_, ref:ZaBulkProvision.A2_ZmailAdminPasswordConfirm},
+	        {id:ZaBulkProvision.A2_ZmailAdminLogin, type:_STRING_, ref:ZaBulkProvision.A2_ZmailAdminLogin},
 	        {id:ZaBulkProvision.A2_provisionUsers, type:_ENUM_, choices:ZaModel.BOOLEAN_CHOICES, ref:ZaBulkProvision.A2_provisionUsers},
 	        {id:ZaBulkProvision.A2_importEmail, type:_ENUM_, choices:ZaModel.BOOLEAN_CHOICES, ref:ZaBulkProvision.A2_importEmail},
 	        //direct import from LDAP
@@ -268,7 +268,7 @@ ZaBulkProvision.bulkDataIMport = function(obj, callback) {
 		if (obj[ZaBulkProvision.A_aid] != null) {
 	    	soapDoc.set("aid", obj[ZaBulkProvision.A_aid]) ;
 	    } else{
-	    	controller.popupErrorDialog(com_zimbra_bulkprovision.error_no_aid) ;
+	    	controller.popupErrorDialog(org_zmail_bulkprovision.error_no_aid) ;
 	    	return ;
 	    }
 	}
@@ -307,7 +307,7 @@ ZaBulkProvision.bulkDataIMport = function(obj, callback) {
 
 	var reqMgrParams = {} ;
 	reqMgrParams.controller = controller;
-	reqMgrParams.busyMsg = com_zimbra_bulkprovision.BUSY_START_PROVISION_ACCOUNTS;
+	reqMgrParams.busyMsg = org_zmail_bulkprovision.BUSY_START_PROVISION_ACCOUNTS;
 	ZaRequestMgr.invoke(csfeParams, reqMgrParams);	
 }
 
@@ -318,7 +318,7 @@ ZaBulkProvision.getBulkProvisionAccounts = function (app, obj) {
     if (aid != null) {
     	soapDoc.set("aid", aid) ;
     } else{
-    	controller.popupErrorDialog(com_zimbra_bulkprovision.error_no_aid) ;
+    	controller.popupErrorDialog(org_zmail_bulkprovision.error_no_aid) ;
     	return ;
     }
 
@@ -332,7 +332,7 @@ ZaBulkProvision.getBulkProvisionAccounts = function (app, obj) {
 	csfeParams.soapDoc = soapDoc;
 	var reqMgrParams = {} ;
 	reqMgrParams.controller = controller ;
-	reqMgrParams.busyMsg = com_zimbra_bulkprovision.BUSY_GET_PROVISION_ACCOUNTS ;
+	reqMgrParams.busyMsg = org_zmail_bulkprovision.BUSY_GET_PROVISION_ACCOUNTS ;
 
     /*
     if (callback) {
@@ -379,7 +379,7 @@ ZaBulkProvision.abortImportThread = function(callback) {
 
 	var reqMgrParams = {} ;
 	reqMgrParams.controller = ZaApp.getInstance().getCurrentController();
-	reqMgrParams.busyMsg = com_zimbra_bulkprovision.BUSY_ABORTING_IMPORT_THREAD;
+	reqMgrParams.busyMsg = org_zmail_bulkprovision.BUSY_ABORTING_IMPORT_THREAD;
 	ZaRequestMgr.invoke(csfeParams, reqMgrParams);	
 }
 
@@ -394,7 +394,7 @@ ZaBulkProvision.getImportStatus = function(callback) {
 	}
 	var reqMgrParams = {} ;
 	reqMgrParams.controller = ZaApp.getInstance().getCurrentController();
-	reqMgrParams.busyMsg = com_zimbra_bulkprovision.BUSY_GETTING_PROVISIONING_STATUS;
+	reqMgrParams.busyMsg = org_zmail_bulkprovision.BUSY_GETTING_PROVISIONING_STATUS;
 	return ZaRequestMgr.invoke(csfeParams, reqMgrParams);	
 }
 
@@ -420,7 +420,7 @@ ZaBulkProvision.importAccountsFromFile = function (obj, callback) {
 
 	var reqMgrParams = {} ;
 	reqMgrParams.controller = ZaApp.getInstance().getCurrentController();
-	reqMgrParams.busyMsg = com_zimbra_bulkprovision.BUSY_START_PROVISION_ACCOUNTS;
+	reqMgrParams.busyMsg = org_zmail_bulkprovision.BUSY_START_PROVISION_ACCOUNTS;
 	ZaRequestMgr.invoke(csfeParams, reqMgrParams);	
 }
 
@@ -429,7 +429,7 @@ ZaBulkProvision.importAccountsFromLDAP = function (obj, callback) {
 	soapDoc.getMethod().setAttribute(ZaBulkProvision.A2_op, ZaBulkProvision.OP_START_IMPORT);
 
 	var attr = soapDoc.set("a", ZaDomain.GAL_Mode_external);
-	attr.setAttribute("n", ZaDomain.A_zimbraGalMode);
+	attr.setAttribute("n", ZaDomain.A_zmailGalMode);
 
 	attr = soapDoc.set("a", obj[ZaBulkProvision.A2_GalLdapURL]);
 	attr.setAttribute("n", ZaBulkProvision.A2_GalLdapURL);	
@@ -470,14 +470,14 @@ ZaBulkProvision.importAccountsFromLDAP = function (obj, callback) {
 
 	var reqMgrParams = {} ;
 	reqMgrParams.controller = ZaApp.getInstance().getCurrentController();
-	reqMgrParams.busyMsg = com_zimbra_bulkprovision.BUSY_START_PROVISION_ACCOUNTS;
+	reqMgrParams.busyMsg = org_zmail_bulkprovision.BUSY_START_PROVISION_ACCOUNTS;
 	ZaRequestMgr.invoke(csfeParams, reqMgrParams);	
 }
 
 ZaBulkProvision.generateBulkProvisionPreview = function(obj, callback) {
 	var soapDoc = AjxSoapDoc.create("GenerateBulkProvisionFileFromLDAPRequest",ZaBulkProvision.URN, null);
 	var attr = soapDoc.set("a", ZaDomain.GAL_Mode_external);
-	attr.setAttribute("n", ZaDomain.A_zimbraGalMode);
+	attr.setAttribute("n", ZaDomain.A_zmailGalMode);
 
 	attr = soapDoc.set("a", obj[ZaBulkProvision.A2_GalLdapURL]);
 	attr.setAttribute("n", ZaBulkProvision.A2_GalLdapURL);	
@@ -518,14 +518,14 @@ ZaBulkProvision.generateBulkProvisionPreview = function(obj, callback) {
 
 	var reqMgrParams = {} ;
 	reqMgrParams.controller = ZaApp.getInstance().getCurrentController();
-	reqMgrParams.busyMsg = com_zimbra_bulkprovision.BUSY_GENERATING_BULK_FILE;
+	reqMgrParams.busyMsg = org_zmail_bulkprovision.BUSY_GENERATING_BULK_FILE;
 	ZaRequestMgr.invoke(csfeParams, reqMgrParams );
 };
 
 ZaBulkProvision.generateBulkProvisionFile = function(obj, callback) {
 	var soapDoc = AjxSoapDoc.create("GenerateBulkProvisionFileFromLDAPRequest",ZaBulkProvision.URN, null);
 	var attr = soapDoc.set("a", ZaDomain.GAL_Mode_external);
-	attr.setAttribute("n", ZaDomain.A_zimbraGalMode);
+	attr.setAttribute("n", ZaDomain.A_zmailGalMode);
 
 	attr = soapDoc.set("a", obj[ZaBulkProvision.A2_GalLdapURL]);
 	attr.setAttribute("n", ZaBulkProvision.A2_GalLdapURL);	
@@ -561,8 +561,8 @@ ZaBulkProvision.generateBulkProvisionFile = function(obj, callback) {
 		attr = soapDoc.set(ZaBulkProvision.A2_ignorePreviouslyImported,obj[ZaBulkProvision.A2_ignorePreviouslyImported]);
 		attr = soapDoc.set(ZaBulkProvision.A2_InvalidSSLOk,obj[ZaBulkProvision.A2_InvalidSSLOk]);
 		attr = soapDoc.set(ZaBulkProvision.A2_TargetDomainName,obj[ZaBulkProvision.A2_TargetDomainName]);
-		attr = soapDoc.set(ZaBulkProvision.A2_ZimbraAdminLogin,obj[ZaBulkProvision.A2_ZimbraAdminLogin]);
-		attr = soapDoc.set(ZaBulkProvision.A2_ZimbraAdminPassword,obj[ZaBulkProvision.A2_ZimbraAdminPassword]);
+		attr = soapDoc.set(ZaBulkProvision.A2_ZmailAdminLogin,obj[ZaBulkProvision.A2_ZmailAdminLogin]);
+		attr = soapDoc.set(ZaBulkProvision.A2_ZmailAdminPassword,obj[ZaBulkProvision.A2_ZmailAdminPassword]);
 		attr = soapDoc.set(ZaBulkProvision.A2_MapiProfile,obj[ZaBulkProvision.A2_MapiProfile]);
 		attr = soapDoc.set(ZaBulkProvision.A2_MapiServer,obj[ZaBulkProvision.A2_MapiServer]);
 		attr = soapDoc.set(ZaBulkProvision.A2_MapiLogonUserDN,obj[ZaBulkProvision.A2_MapiLogonUserDN]);
@@ -580,7 +580,7 @@ ZaBulkProvision.generateBulkProvisionFile = function(obj, callback) {
 
 	var reqMgrParams = {} ;
 	reqMgrParams.controller = ZaApp.getInstance().getCurrentController();
-	reqMgrParams.busyMsg = com_zimbra_bulkprovision.BUSY_GENERATING_BULK_FILE;
+	reqMgrParams.busyMsg = org_zmail_bulkprovision.BUSY_GENERATING_BULK_FILE;
 	ZaRequestMgr.invoke(csfeParams, reqMgrParams );
 };
 
@@ -595,7 +595,7 @@ ZaBulkProvision.getBulkDataImportTasks = function() {
 		params.targetServer = servers[j].id;
 		var reqMgrParams = {
 			controller : ZaApp.getInstance().getCurrentController(),
-			busyMsg : com_zimbra_bulkprovision.BUSY_GET_BULK_TASKS
+			busyMsg : org_zmail_bulkprovision.BUSY_GET_BULK_TASKS
 		}
 		var resp = ZaRequestMgr.invoke(params, reqMgrParams).Body.GetBulkIMAPImportTaskListResponse;	
 		var list = new ZaItemList(ZaBulkProvisionTask);
@@ -615,7 +615,7 @@ ZaBulkProvision.deleteBulkDataImportTasks = function () {
 	params.asyncMode=false;
 	var reqMgrParams = {
 		controller : ZaApp.getInstance().getCurrentController(),
-		busyMsg : com_zimbra_bulkprovision.BUSY_GET_BULK_TASKS
+		busyMsg : org_zmail_bulkprovision.BUSY_GET_BULK_TASKS
 	}
 	var resp = ZaRequestMgr.invoke(params, reqMgrParams).Body.PurgeBulkIMAPImportTasksResponse;	
 }

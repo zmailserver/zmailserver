@@ -12,11 +12,11 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.nginx;
+package org.zmail.cs.nginx;
 
 import java.util.Map;
 
-import com.zimbra.common.util.MapUtil;
+import org.zmail.common.util.MapUtil;
 
 public class NginxLookupCache<E extends LookupEntry> {
     

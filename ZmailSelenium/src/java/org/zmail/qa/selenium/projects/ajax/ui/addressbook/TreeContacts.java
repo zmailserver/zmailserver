@@ -17,19 +17,19 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.ajax.ui.addressbook;
+package org.zmail.qa.selenium.projects.ajax.ui.addressbook;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.*;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.ui.*;
 
 
 
 
 
 /**
- * @author zimbra
+ * @author zmail
  *
  */
 public class TreeContacts extends AbsTree {

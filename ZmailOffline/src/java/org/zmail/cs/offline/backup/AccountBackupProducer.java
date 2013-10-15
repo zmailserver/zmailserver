@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.backup;
+package org.zmail.cs.offline.backup;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -35,22 +35,22 @@ import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 
-import com.zimbra.common.httpclient.HttpClientUtil;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.service.ServiceException.Argument;
-import com.zimbra.common.service.ServiceException.InternalArgument;
-import com.zimbra.common.util.FileUtil;
-import com.zimbra.common.util.RegexFilenameFilter;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraHttpConnectionManager;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.offline.OfflineProvisioning;
-import com.zimbra.cs.offline.OfflineLog;
-import com.zimbra.cs.service.AuthProvider;
-import com.zimbra.cs.service.UserServlet;
-import com.zimbra.cs.service.formatter.ArchiveFormatter.Resolve;
+import org.zmail.common.httpclient.HttpClientUtil;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.service.ServiceException.Argument;
+import org.zmail.common.service.ServiceException.InternalArgument;
+import org.zmail.common.util.FileUtil;
+import org.zmail.common.util.RegexFilenameFilter;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailHttpConnectionManager;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.offline.OfflineProvisioning;
+import org.zmail.cs.offline.OfflineLog;
+import org.zmail.cs.service.AuthProvider;
+import org.zmail.cs.service.UserServlet;
+import org.zmail.cs.service.formatter.ArchiveFormatter.Resolve;
 
 public class AccountBackupProducer {
     
@@ -112,11 +112,11 @@ public class AccountBackupProducer {
         
         //make req to userservlet to create backup file
         String url = UserServlet.getRestUrl(acct);
-        HttpClient client = ZimbraHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
+        HttpClient client = ZmailHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
         GetMethod get = new GetMethod(url);
         NameValuePair[] params = new NameValuePair[] {new NameValuePair("fmt", "tgz")};
         get.setQueryString(params);
-        authtoken.encode(client, get, false, acct.getAttr(Provisioning.A_zimbraMailHost));
+        authtoken.encode(client, get, false, acct.getAttr(Provisioning.A_zmailMailHost));
         try {
             int statusCode = HttpClientUtil.executeMethod(client, get);
             if (statusCode != HttpStatus.SC_OK) {
@@ -292,7 +292,7 @@ public class AccountBackupProducer {
                         
                         //make req to userservlet to create backup file
                         String url = UserServlet.getRestUrl(acct);
-                        HttpClient client = ZimbraHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
+                        HttpClient client = ZmailHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
                         PostMethod post = new PostMethod(url);
                         NameValuePair[] params = new NameValuePair[] {new NameValuePair("fmt", "tgz"), 
                                 new NameValuePair("resolve",(resolve != null ? resolve : Resolve.Skip.toString())),
@@ -303,7 +303,7 @@ public class AccountBackupProducer {
                         } catch (FileNotFoundException e) {
                             throw ServiceException.UNKNOWN_DOCUMENT("File "+backupFile+" not found", e);
                         }
-                        authtoken.encode(client, post, false, acct.getAttr(Provisioning.A_zimbraMailHost));
+                        authtoken.encode(client, post, false, acct.getAttr(Provisioning.A_zmailMailHost));
                         try {
                             int statusCode = HttpClientUtil.executeMethod(client, post);
                             if (statusCode != HttpStatus.SC_OK) {
@@ -323,7 +323,7 @@ public class AccountBackupProducer {
                         //function onLoad() {
                         //    window.parent.ZmImportExportController__callback__import1('warn',
                         //    {"Code":{"Value":"soap:Sender"},"Reason":{"Text":"object with that name already exists: Flagged"},"Detail":{"Error":
-                        //    {"Code":"mail.ALREADY_EXISTS","Trace":"com.zimbra.cs.mailbox.MailServiceException: object with that name already exists:
+                        //    {"Code":"mail.ALREADY_EXISTS","Trace":"org.zmail.cs.mailbox.MailServiceException: object with that name already exists:
                         
                         OfflineLog.offline.info("Finished Restoring account "+acct.getName());
                         return Status.RESTORED.toString().toLowerCase();

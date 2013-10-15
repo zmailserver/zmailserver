@@ -14,20 +14,20 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.briefcase.bugs;
+package org.zmail.qa.selenium.projects.ajax.tests.briefcase.bugs;
 
 import org.testng.annotations.Test;
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.LinkItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.projects.ajax.core.FeatureBriefcaseTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.briefcase.DialogFindShares;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.LinkItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.projects.ajax.core.FeatureBriefcaseTest;
+import org.zmail.qa.selenium.projects.ajax.ui.briefcase.DialogFindShares;
 
 public class FindSharesWithFeatureDisabled extends FeatureBriefcaseTest {
 	String url;
@@ -40,14 +40,14 @@ public class FindSharesWithFeatureDisabled extends FeatureBriefcaseTest {
 		super.startingPage = app.zPageBriefcase;
 
 		// use an account with some of the Features disabled
-		super.startingAccountPreferences.put("zimbraFeatureCalendarEnabled", "FALSE");
-		// super.startingAccountPreferences.put("zimbraFeatureTasksEnabled", "FALSE");
+		super.startingAccountPreferences.put("zmailFeatureCalendarEnabled", "FALSE");
+		// super.startingAccountPreferences.put("zmailFeatureTasksEnabled", "FALSE");
 	}	
 
 	@Bugs(ids = "60854")
 	@Test(description = "Click on Find Shares link when some of the Features are disabled - Verify Find Shares dialog is displayed", groups = { "functional" })
 	public void FindSharesWithFeatureDisabled_01() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);

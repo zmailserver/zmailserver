@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,24 +26,24 @@ import java.util.UUID;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
-import com.zimbra.common.mailbox.Color;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.SoapFaultException;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.mailbox.ChangeTrackingMailbox.TracelessContext;
-import com.zimbra.cs.mailbox.util.TagUtil;
-import com.zimbra.cs.mime.ParsedContact;
-import com.zimbra.cs.offline.Offline;
-import com.zimbra.cs.offline.OfflineLC;
-import com.zimbra.cs.offline.OfflineLog;
-import com.zimbra.cs.offline.OfflineSyncManager;
-import com.zimbra.cs.service.UserServlet;
-import com.zimbra.cs.service.mail.Sync;
-import com.zimbra.cs.service.offline.OfflineDialogAction;
-import com.zimbra.cs.session.PendingModifications.Change;
+import org.zmail.common.mailbox.Color;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.SoapFaultException;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.mailbox.ChangeTrackingMailbox.TracelessContext;
+import org.zmail.cs.mailbox.util.TagUtil;
+import org.zmail.cs.mime.ParsedContact;
+import org.zmail.cs.offline.Offline;
+import org.zmail.cs.offline.OfflineLC;
+import org.zmail.cs.offline.OfflineLog;
+import org.zmail.cs.offline.OfflineSyncManager;
+import org.zmail.cs.service.UserServlet;
+import org.zmail.cs.service.mail.Sync;
+import org.zmail.cs.service.offline.OfflineDialogAction;
+import org.zmail.cs.session.PendingModifications.Change;
 
 public class DeltaSync {
 

@@ -14,16 +14,16 @@
  */
 
 /*
-* @author Raja Rao DV (rrao@zimbra.com)
+* @author Raja Rao DV (rrao@zmail.com)
 */
 
-function com_zimbra_linkedin_handlerObject() {
+function org_zmail_linkedin_handlerObject() {
 };
 
-com_zimbra_linkedin_handlerObject.prototype = new ZmZimletBase();
-com_zimbra_linkedin_handlerObject.prototype.constructor = com_zimbra_linkedin_handlerObject;
+org_zmail_linkedin_handlerObject.prototype = new ZmZimletBase();
+org_zmail_linkedin_handlerObject.prototype.constructor = org_zmail_linkedin_handlerObject;
 
-var LinkedInZimlet = com_zimbra_linkedin_handlerObject;
+var LinkedInZimlet = org_zmail_linkedin_handlerObject;
 
 //static variables
 LinkedInZimlet.SEARCH_BASE_QUERY = "https://api.linkedin.com/v1/people-search:(people:(relation-to-viewer,id,first-name,last-name,picture-url,public-profile-url,headline,api-standard-profile-request))";
@@ -109,7 +109,7 @@ LinkedInZimlet.prototype.doubleClicked = function() {
 };
 
 /**
- * Called by the Zimbra framework when a menu item is selected
+ * Called by the Zmail framework when a menu item is selected
  * dispatch the call, ensuring the webex configuration is set.
  *
  */
@@ -268,12 +268,12 @@ function(person) {
 		viewStr: this._viewStr,
 		inviteStr: this._inviteStr
 	};
-	return AjxTemplate.expand("com_zimbra_linkedin.templates.LinkedIn#RowItem", subs);
+	return AjxTemplate.expand("org_zmail_linkedin.templates.LinkedIn#RowItem", subs);
 };
 
 LinkedInZimlet.prototype._getTooltipBGHtml =
 function() {
-	return AjxTemplate.expand("com_zimbra_linkedin.templates.LinkedIn#Frame");
+	return AjxTemplate.expand("org_zmail_linkedin.templates.LinkedIn#Frame");
 };
 
 LinkedInZimlet.prototype._setTooltipSticky =

@@ -21,25 +21,25 @@
 use strict;
 use warnings;
 
-my $license = "PLEASE READ THIS AGREEMENT CAREFULLY BEFORE USING THE SOFTWARE. VMWARE INC. WILL ONLY LICENSE THIS SOFTWARE TO YOU IF YOU FIRST ACCEPT THE TERMS OF THIS AGREEMENT. BY DOWNLOADING OR INSTALLING THE SOFTWARE, OR USING THE PRODUCT, YOU ARE CONSENTING TO BE BOUND BY THIS AGREEMENT. IF YOU DO NOT AGREE TO ALL OF THE TERMS OF THIS AGREEMENT, THEN DO NOT DOWNLOAD, INSTALL OR USE THE PRODUCT.\n\nLicense Terms for this Zimbra Collaboration Server Software: http://www.zimbra.com/license/zimbra_public_eula_2.1.html";
+my $license = "PLEASE READ THIS AGREEMENT CAREFULLY BEFORE USING THE SOFTWARE. VMWARE INC. WILL ONLY LICENSE THIS SOFTWARE TO YOU IF YOU FIRST ACCEPT THE TERMS OF THIS AGREEMENT. BY DOWNLOADING OR INSTALLING THE SOFTWARE, OR USING THE PRODUCT, YOU ARE CONSENTING TO BE BOUND BY THIS AGREEMENT. IF YOU DO NOT AGREE TO ALL OF THE TERMS OF THIS AGREEMENT, THEN DO NOT DOWNLOAD, INSTALL OR USE THE PRODUCT.\n\nLicense Terms for this Zmail Collaboration Server Software: http://www.zimbra.com/license.zmail_public_eula_2.1.html";
 my $locale = "en_US";
 my $app_root;
-my $default_app_root = "/opt/zimbra/zdesktop";
+my $default_app_root = "/opt/zmail/zdesktop";
 
 my $messages = {
     en_US => {
         AcceptDecline => "(A)ccept or (D)ecline",
-        ChooseAppRoot => "Choose the folder where you would like to install Zimbra Desktop's application files",
-        ConfirmAppRoot => "Are you sure you would like to install Zimbra Desktop under folder {0} ? NOTE: All files under this directory will be deleted.",
+        ChooseAppRoot => "Choose the folder where you would like to install Zmail Desktop's application files",
+        ConfirmAppRoot => "Are you sure you would like to install Zmail Desktop under folder {0} ? NOTE: All files under this directory will be deleted.",
         Continue => "Press enter to continue",
         Done => "done",
         Installing => "Installing application files...",
         Success => 'You have finished installing application files.',
         UserInstall => "Would you like to continue to install data files for user: {0} ?",
         UserInstallNote => "To install data files for additional users, please login as the user and run this command:",
-        Welcome => "Welcome to Zimbra Desktop setup wizard. This will install Zimbra Desktop on your computer.",
+        Welcome => "Welcome to Zmail Desktop setup wizard. This will install Zmail Desktop on your computer.",
         YesNo => "(Y)es or (N)o",
-        IA32Warning => "WARNING: ia32-libs is missing for x86_64 platform. This package is required to run Zimbra Desktop on 64-bit Linux."
+        IA32Warning => "WARNING: ia32-libs is missing for x86_64 platform. This package is required to run Zmail Desktop on 64-bit Linux."
     }
 };
 

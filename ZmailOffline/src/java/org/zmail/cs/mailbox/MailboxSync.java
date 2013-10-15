@@ -12,22 +12,22 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.offline.OfflineProvisioning;
-import com.zimbra.cs.offline.OfflineLC;
-import com.zimbra.cs.offline.OfflineLog;
-import com.zimbra.cs.offline.OfflineSyncManager;
-import com.zimbra.cs.offline.common.OfflineConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.offline.OfflineProvisioning;
+import org.zmail.cs.offline.OfflineLC;
+import org.zmail.cs.offline.OfflineLog;
+import org.zmail.cs.offline.OfflineSyncManager;
+import org.zmail.cs.offline.common.OfflineConstants;
 
 public class MailboxSync {
 
@@ -90,7 +90,7 @@ public class MailboxSync {
                 }
                 }
             } catch (Exception e) {
-                ZimbraLog.mailbox.warn("invalid persisted sync data - must reset mailbox", e);
+                ZmailLog.mailbox.warn("invalid persisted sync data - must reset mailbox", e);
             }
         } else { //legacy metadata support
             Metadata config = ombx.getConfig(null, SN_OFFLINE);
@@ -113,7 +113,7 @@ public class MailboxSync {
                     }
                     ombx.setConfig(null, SN_OFFLINE, null);
                 } catch (Exception e) {
-                    ZimbraLog.mailbox.warn("invalid persisted sync data; will force reset");
+                    ZmailLog.mailbox.warn("invalid persisted sync data; will force reset");
             }
             }
         }

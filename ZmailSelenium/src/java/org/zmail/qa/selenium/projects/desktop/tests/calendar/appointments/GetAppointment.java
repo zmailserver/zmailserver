@@ -14,13 +14,13 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.calendar.appointments;
+package org.zmail.qa.selenium.projects.desktop.tests.calendar.appointments;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.AppointmentItem;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.framework.items.AppointmentItem;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
 
 
 public class GetAppointment extends AjaxCommonTest {
@@ -43,15 +43,15 @@ public class GetAppointment extends AjaxCommonTest {
 	public void GetAppointment_01() throws HarnessException {
 		
 		// Create the message data to be sent
-		String subject = "appointment" + ZimbraSeleniumProperties.getUniqueString();
-		String location = "location" + ZimbraSeleniumProperties.getUniqueString();
-		String content = "content" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "appointment" + ZmailSeleniumProperties.getUniqueString();
+		String location = "location" + ZmailSeleniumProperties.getUniqueString();
+		String content = "content" + ZmailSeleniumProperties.getUniqueString();
 		ZDate startUTC = new ZDate(2014, 12, 25, 12, 0, 0);
 		ZDate endUTC   = new ZDate(2014, 12, 25, 14, 0, 0);
 
 		// Create an appointment
 		app.zGetActiveAccount().soapSend(
-					"<CreateAppointmentRequest xmlns='urn:zimbraMail'>" +
+					"<CreateAppointmentRequest xmlns='urn:zmailMail'>" +
 						"<m>" +
 							"<inv>" +
 								"<comp status='CONF' fb='B' class='PUB' transp='O' allDay='0' name='"+ subject +"' loc='"+ location +"'>" +
@@ -85,9 +85,9 @@ public class GetAppointment extends AjaxCommonTest {
 	public void GetAppointment_02() throws HarnessException {
 		
 		// Create the message data to be sent
-		String subject = "appointment" + ZimbraSeleniumProperties.getUniqueString();
-		String location = "location" + ZimbraSeleniumProperties.getUniqueString();
-		String content = "content" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "appointment" + ZmailSeleniumProperties.getUniqueString();
+		String location = "location" + ZmailSeleniumProperties.getUniqueString();
+		String content = "content" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		// Absolute dates in UTC zone
@@ -98,15 +98,15 @@ public class GetAppointment extends AjaxCommonTest {
 		String tz = ZTimeZone.TimeZoneEST.getID();
 
 		// Create a meeting request from AccountA to the test account
-		ZimbraAccount.AccountA().soapSend(
-					"<CreateAppointmentRequest xmlns='urn:zimbraMail'>" +
+		ZmailAccount.AccountA().soapSend(
+					"<CreateAppointmentRequest xmlns='urn:zmailMail'>" +
 						"<m>" +
 							"<inv>" +
 								"<comp status='CONF' fb='B' class='PUB' transp='O' allDay='0' name='"+ subject +"' loc='"+ location +"'>" +
 									"<s d='"+ startUTC.toTimeZone(tz).toYYYYMMDDTHHMMSS() +"' tz='"+ tz +"'/>" +
 									"<e d='"+ endUTC.toTimeZone(tz).toYYYYMMDDTHHMMSS() +"' tz='"+ tz +"'/>" +
 									"<at role='REQ' ptst='NE' rsvp='1' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
-									"<or a='"+ ZimbraAccount.AccountA().EmailAddress + "'/>" +
+									"<or a='"+ ZmailAccount.AccountA().EmailAddress + "'/>" +
 								"</comp>" +
 							"</inv>" +
 							"<e a='"+ app.zGetActiveAccount().EmailAddress +"' t='t'/>" +

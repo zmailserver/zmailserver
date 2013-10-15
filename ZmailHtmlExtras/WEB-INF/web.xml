@@ -33,12 +33,12 @@
 	</context-param>
     <!-- =============	
 	<context-param>
-	   <param-name>zimbra.soap.url</param-name>
+	   <param-name>zmail.soap.url</param-name>
 	   <param-value>http://localhost:7070/service/soap</param-value>
 	</context-param>
     -->	
 	<context-param>
-	   <param-name>zimbra.jsp.session.timeout</param-name>
+	   <param-name>zmail.jsp.session.timeout</param-name>
 	   <param-value>900</param-value>
 	</context-param>	
 		   

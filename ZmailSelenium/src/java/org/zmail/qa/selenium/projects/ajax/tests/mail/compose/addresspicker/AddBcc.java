@@ -14,21 +14,21 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.compose.addresspicker;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.compose.addresspicker;
 
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.MailItem;
-import com.zimbra.qa.selenium.framework.items.RecipientItem;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormAddressPicker;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew;
+import org.zmail.qa.selenium.framework.items.MailItem;
+import org.zmail.qa.selenium.framework.items.RecipientItem;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormAddressPicker;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew;
 
 
 public class AddBcc extends PrefGroupMailByMessageTest {
@@ -38,7 +38,7 @@ public class AddBcc extends PrefGroupMailByMessageTest {
 		
 		
 		
-		super.startingAccountPreferences.put("zimbraPrefComposeFormat", "text");
+		super.startingAccountPreferences.put("zmailPrefComposeFormat", "text");
 
 		
 	}
@@ -49,13 +49,13 @@ public class AddBcc extends PrefGroupMailByMessageTest {
 		
 		// The account must exist before the picker is opened
 		// Log it to initialize it
-		logger.info("Will add the following account to the Bcc:" + ZimbraAccount.AccountB().EmailAddress);
+		logger.info("Will add the following account to the Bcc:" + ZmailAccount.AccountB().EmailAddress);
 		
 		// Create the message data to be sent
 		MailItem mail = new MailItem();
-		mail.dToRecipients.add(new RecipientItem(ZimbraAccount.AccountA()));
-		mail.dSubject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		mail.dBodyText = "body" + ZimbraSeleniumProperties.getUniqueString();
+		mail.dToRecipients.add(new RecipientItem(ZmailAccount.AccountA()));
+		mail.dSubject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		mail.dBodyText = "body" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		
@@ -70,7 +70,7 @@ public class AddBcc extends PrefGroupMailByMessageTest {
 		FormAddressPicker pickerform = (FormAddressPicker)mailform.zToolbarPressButton(Button.B_CC);
 		ZAssert.assertTrue(pickerform.zIsActive(), "Verify the address picker opened corectly");
 		
-		pickerform.zFillField(FormAddressPicker.Field.Search, ZimbraAccount.AccountB().EmailAddress);
+		pickerform.zFillField(FormAddressPicker.Field.Search, ZmailAccount.AccountB().EmailAddress);
 		pickerform.zToolbarPressButton(Button.B_SEARCH);
 		pickerform.zToolbarPressButton(Button.B_BCC);
 		pickerform.zSubmit();
@@ -82,7 +82,7 @@ public class AddBcc extends PrefGroupMailByMessageTest {
 
 		MailItem sent = MailItem.importFromSOAP(app.zGetActiveAccount(), "subject:("+ mail.dSubject +")");
 		ZAssert.assertNotNull(sent, "Verify the message appears in the sent folder");
-		ZAssert.assertEquals(sent.dBccRecipients.get(0).dEmailAddress, ZimbraAccount.AccountB().EmailAddress, "Verify the 'cc' field is correct");		
+		ZAssert.assertEquals(sent.dBccRecipients.get(0).dEmailAddress, ZmailAccount.AccountB().EmailAddress, "Verify the 'cc' field is correct");		
 		
 	}
 

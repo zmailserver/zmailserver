@@ -14,11 +14,11 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.ui;
+package org.zmail.qa.selenium.projects.desktop.ui;
 
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.projects.desktop.ui.mail.FormMailNew;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.projects.desktop.ui.mail.FormMailNew;
 
 
 /**
@@ -95,7 +95,7 @@ public class DialogWarning extends AbsDialog {
 		AbsPage page = null; 		// Does this ever result in a page being returned?
 		
 
-		// See http://bugzilla.zimbra.com/show_bug.cgi?id=54560
+		// See http://bugzilla.zmail.com/show_bug.cgi?id=54560
 		// Need unique id's for the buttons
 		String buttonsTableLocator = "//div[@id='"+ MyDivId +"']//div[contains(@id, '_buttons')]";
 		

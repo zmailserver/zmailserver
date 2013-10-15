@@ -14,27 +14,27 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.newwindow.mail;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.newwindow.mail;
 
 import java.io.File;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.LmtpInject;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.SeparateWindowDisplayMail;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.DisplayMail.Field;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.LmtpInject;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.SeparateWindowDisplayMail;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.DisplayMail.Field;
 
 
 public class ViewMail extends PrefGroupMailByMessageTest {
 
 	boolean injected = false;
-	final String mimeFolder = ZimbraSeleniumProperties.getBaseDirectory() + "/data/public/mime/email00";
+	final String mimeFolder = ZmailSeleniumProperties.getBaseDirectory() + "/data/public/mime/email00";
 	
 	public ViewMail() throws HarnessException {
 		logger.info("New "+ ViewMail.class.getCanonicalName());
@@ -158,7 +158,7 @@ public class ViewMail extends PrefGroupMailByMessageTest {
 //			groups = { "functional" })
 //	public void ViewMail_04() throws HarnessException {
 //		
-//		final String mime = ZimbraSeleniumProperties.getBaseDirectory() + "/data/public/mime/Bugs/Bug64444";
+//		final String mime = ZmailSeleniumProperties.getBaseDirectory() + "/data/public/mime/Bugs/Bug64444";
 //		final String subject = "subject13150123168433";
 //		final String from = "from13160123168433@testdomain.com";
 //		final String to = "to3163210168433@testdomain.com";
@@ -189,7 +189,7 @@ public class ViewMail extends PrefGroupMailByMessageTest {
 //			groups = { "functional" })
 //	public void ViewMail_05() throws HarnessException {
 //		
-//		final String mime = ZimbraSeleniumProperties.getBaseDirectory() + "/data/public/mime/Bugs/Bug66565";
+//		final String mime = ZmailSeleniumProperties.getBaseDirectory() + "/data/public/mime/Bugs/Bug66565";
 //		final String subject = "subject13197565510464";
 //		final String subjectText = "<u><i> subject13197565510464 </i></u>";
 //
@@ -243,7 +243,7 @@ public class ViewMail extends PrefGroupMailByMessageTest {
 //		// Inject the sample mime
 //		String subject = "subject13188948451403";
 //		String content = "Welcome to the NetWorker Listserv list";
-//		String MimeFolder = ZimbraSeleniumProperties.getBaseDirectory() + "/data/public/mime/Bugs/Bug65933";
+//		String MimeFolder = ZmailSeleniumProperties.getBaseDirectory() + "/data/public/mime/Bugs/Bug65933";
 //		LmtpInject.injectFile(app.zGetActiveAccount().EmailAddress, new File(MimeFolder));
 //
 //		
@@ -266,7 +266,7 @@ public class ViewMail extends PrefGroupMailByMessageTest {
 //		// Inject the sample mime
 //		String subject = "subject13189485723753";
 //		String content = "Enrico Medici";
-//		String MimeFolder = ZimbraSeleniumProperties.getBaseDirectory() + "/data/public/mime/Bugs/Bug65623";
+//		String MimeFolder = ZmailSeleniumProperties.getBaseDirectory() + "/data/public/mime/Bugs/Bug65623";
 //		LmtpInject.injectFile(app.zGetActiveAccount().EmailAddress, new File(MimeFolder));
 //
 //		
@@ -289,7 +289,7 @@ public class ViewMail extends PrefGroupMailByMessageTest {
 //		// Inject the sample mime
 //		String subject = "subject13189993282183";
 //		String content = "Incident Title";
-//		String MimeFolder = ZimbraSeleniumProperties.getBaseDirectory() + "/data/private/mime/Bugs/Bug65079";
+//		String MimeFolder = ZmailSeleniumProperties.getBaseDirectory() + "/data/private/mime/Bugs/Bug65079";
 //		LmtpInject.injectFile(app.zGetActiveAccount().EmailAddress, new File(MimeFolder));
 //
 //		
@@ -304,11 +304,11 @@ public class ViewMail extends PrefGroupMailByMessageTest {
 //		
 //	}
 //
-//	@Test(	description = "zimbraPrefMessageViewHtmlPreferred=TRUE: Receive message with text only parts - should be rendered as text",
+//	@Test(	description = "zmailPrefMessageViewHtmlPreferred=TRUE: Receive message with text only parts - should be rendered as text",
 //			groups = { "functional" })
 //	public void ViewMail_09() throws HarnessException {
 //		
-//		final String mimeFile = ZimbraSeleniumProperties.getBaseDirectory() + "/data/public/mime/email04/mimeTextOnly.txt";
+//		final String mimeFile = ZmailSeleniumProperties.getBaseDirectory() + "/data/public/mime/email04/mimeTextOnly.txt";
 //		final String subject = "subject13214016725788";
 //		final String content = "The Ming Dynasty";
 //
@@ -328,11 +328,11 @@ public class ViewMail extends PrefGroupMailByMessageTest {
 //		
 //	}
 //
-//	@Test(	description = "zimbraPrefMessageViewHtmlPreferred=TRUE: Receive message with html only parts - should be rendered as html",
+//	@Test(	description = "zmailPrefMessageViewHtmlPreferred=TRUE: Receive message with html only parts - should be rendered as html",
 //			groups = { "functional" })
 //	public void ViewMail_10() throws HarnessException {
 //		
-//		final String mimeFile = ZimbraSeleniumProperties.getBaseDirectory() + "/data/public/mime/email04/mimeHtmlOnly.txt";
+//		final String mimeFile = ZmailSeleniumProperties.getBaseDirectory() + "/data/public/mime/email04/mimeHtmlOnly.txt";
 //		final String subject = "subject13214016672655";
 //		final String content = "Bold";
 //
@@ -353,11 +353,11 @@ public class ViewMail extends PrefGroupMailByMessageTest {
 //		
 //	}
 //	
-//	@Test(	description = "zimbraPrefMessageViewHtmlPreferred=TRUE: Receive message with text and html  parts - should be rendered as html",
+//	@Test(	description = "zmailPrefMessageViewHtmlPreferred=TRUE: Receive message with text and html  parts - should be rendered as html",
 //			groups = { "functional" })
 //	public void ViewMail_11() throws HarnessException {
 //		
-//		final String mimeFile = ZimbraSeleniumProperties.getBaseDirectory() + "/data/public/mime/email04/mimeTextAndHtml.txt";
+//		final String mimeFile = ZmailSeleniumProperties.getBaseDirectory() + "/data/public/mime/email04/mimeTextAndHtml.txt";
 //		final String subject = "subject13214016621403";
 //		final String content = "Bold";
 //
@@ -384,7 +384,7 @@ public class ViewMail extends PrefGroupMailByMessageTest {
 //			groups = { "functional" })
 //	public void ViewMail_12() throws HarnessException {
 //		
-//		final String mimeFile = ZimbraSeleniumProperties.getBaseDirectory() + "/data/public/mime/Bugs/Bug67854";
+//		final String mimeFile = ZmailSeleniumProperties.getBaseDirectory() + "/data/public/mime/Bugs/Bug67854";
 //		final String subject = "subject13218526621403";
 //		final String content = "The message has no text content.";
 //		
@@ -415,7 +415,7 @@ public class ViewMail extends PrefGroupMailByMessageTest {
 //			groups = { "functional" })
 //	public void ViewMail_13() throws HarnessException {
 //		
-//		final String mimeFile = ZimbraSeleniumProperties.getBaseDirectory() + "/data/public/mime/Bugs/Bug72248";
+//		final String mimeFile = ZmailSeleniumProperties.getBaseDirectory() + "/data/public/mime/Bugs/Bug72248";
 //		final String subject = "subject13217218621403";
 //		final String content = "content1328844621403";
 //		
@@ -443,7 +443,7 @@ public class ViewMail extends PrefGroupMailByMessageTest {
 			groups = { "functional", "matt" })
 	public void ViewMail_14() throws HarnessException {
 		
-		final String mimeFile = ZimbraSeleniumProperties.getBaseDirectory() + "/data/public/mime/Bugs/Bug72233";
+		final String mimeFile = ZmailSeleniumProperties.getBaseDirectory() + "/data/public/mime/Bugs/Bug72233";
 		final String subject = "bug72233";
 		// final String textcontent = "text1328844621404";
 		final String htmlcontent = "html1328844621404";

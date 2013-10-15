@@ -12,10 +12,10 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.bean;
+package org.zmail.cs.taglib.bean;
 
-import com.zimbra.client.*;
-import com.zimbra.client.ZSearchResult.ZConversationSummary;
+import org.zmail.client.*;
+import org.zmail.client.ZSearchResult.ZConversationSummary;
 
 import java.util.ArrayList;
 import java.util.List;

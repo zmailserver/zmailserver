@@ -27,7 +27,7 @@ function() {
           {type:_GROUP_,isTabGroup:true, items: [ //allows tab key iteration
                 {ref:ZaDomain.A_domainName, type: _TEXTFIELD_, label:ZaMsg.LBL_domainAlias,
                     width: 250, visibilityChecks:[],enableDisableChecks:[]},
-                {ref:ZaDomain.A2_zimbraDomainAliasTarget, type:_DYNSELECT_,
+                {ref:ZaDomain.A2_zmailDomainAliasTarget, type:_DYNSELECT_,
 					inputWidth: 250,   emptyText:ZaMsg.enterSearchTerm,	
                     label: ZaMsg.LBL_targetDomain, toolTipContent:ZaMsg.tt_StartTypingDomainName,
                     dataFetcherMethod:ZaSearch.prototype.dynSelectSearchOnlyDomains,
@@ -65,7 +65,7 @@ function() {
           {type:_GROUP_,isTabGroup:true, items: [ //allows tab key iteration
                 {ref:ZaDomain.A_domainName, type: _OUTPUT_, label:ZaMsg.LBL_domainAlias,
                     width: 250, visibilityChecks:[],enableDisableChecks:[]},
-                {ref:ZaDomain.A2_zimbraDomainAliasTarget, type:_DYNSELECT_,
+                {ref:ZaDomain.A2_zmailDomainAliasTarget, type:_DYNSELECT_,
 					inputWidth: 250,   emptyText:ZaMsg.enterSearchTerm,	
                     label: ZaMsg.LBL_targetDomain, toolTipContent:ZaMsg.tt_StartTypingDomainName,
                     dataFetcherMethod:ZaSearch.prototype.dynSelectSearchDomains,
@@ -85,7 +85,7 @@ ZaDomainAliasEditWizard.prototype.editDomainAlias = function (domain, reload) {
     if (reload) domain.load ("id", domain.id) ;
 
     var domainAlias = domain.attrs[ZaDomain.A_domainName] ;
-    var domainTarget = domain.attrs[ZaDomain.A_zimbraMailCatchAllForwardingAddress] ;
+    var domainTarget = domain.attrs[ZaDomain.A_zmailMailCatchAllForwardingAddress] ;
 
     if (domainTarget!= null) {
         domainTarget = domainTarget.replace("@", "") ;
@@ -94,10 +94,10 @@ ZaDomainAliasEditWizard.prototype.editDomainAlias = function (domain, reload) {
     if (!instance) instance = {} ;
     if (!instance.attrs) instance.attrs = {} ;
     instance.attrs [ZaDomain.A_domainName] = domainAlias ;
-    instance [ZaDomain.A2_zimbraDomainAliasTarget] = domainTarget ;
+    instance [ZaDomain.A2_zmailDomainAliasTarget] = domainTarget ;
     instance.type = ZaItem.DOMAIN;
     instance.attrs[ZaDomain.A_domainType] =  ZaDomain.domainTypes.alias;
-    instance.attrs[ZaDomain.A_zimbraMailCatchAllForwardingAddress] =  "@" + domainTarget ;
+    instance.attrs[ZaDomain.A_zmailMailCatchAllForwardingAddress] =  "@" + domainTarget ;
     this.setObject (domain) ;
     form.setInstance (instance);
     this.registerCallback(DwtDialog.OK_BUTTON,

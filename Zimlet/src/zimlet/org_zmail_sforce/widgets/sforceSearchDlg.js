@@ -1,4 +1,4 @@
-function Com_Zimbra_SForceSearchDlg(zimlet) {
+function Com_Zmail_SForceSearchDlg(zimlet) {
 	this.zimlet = zimlet;
 	this._shell = this.zimlet.getShell();
 	this.objName == "";
@@ -6,7 +6,7 @@ function Com_Zimbra_SForceSearchDlg(zimlet) {
 	this.targetDivId = "";
 }
 
-Com_Zimbra_SForceSearchDlg.prototype.setProperties =
+Com_Zmail_SForceSearchDlg.prototype.setProperties =
 function(objName, targetDivId, selectMenuId, clearLinkId) {
 	this._resetSearchDlg();
 	this.objName =  objName;
@@ -18,12 +18,12 @@ function(objName, targetDivId, selectMenuId, clearLinkId) {
 	}
 };
 
-Com_Zimbra_SForceSearchDlg.prototype.setAssociationMenuCallback =
+Com_Zmail_SForceSearchDlg.prototype.setAssociationMenuCallback =
 function(callback) {
 	this.associationMenuCallback = callback;
 }
 
-Com_Zimbra_SForceSearchDlg.prototype.displaySearchDialog =
+Com_Zmail_SForceSearchDlg.prototype.displaySearchDialog =
 function() {
 	//if zimlet dialog already exists...
 	if (this.searchDialog) {
@@ -44,7 +44,7 @@ function() {
 	this.searchDialog.popup();
 };
 
-Com_Zimbra_SForceSearchDlg.prototype._searchDlgOkBtnListner =
+Com_Zmail_SForceSearchDlg.prototype._searchDlgOkBtnListner =
 function() {
 	var someRadioSelected = false;
 	for(var i =0; i < this.searchResultRadioIds.length; i++) {
@@ -75,7 +75,7 @@ function() {
 	this.searchDialog.popdown();
 };
 
-Com_Zimbra_SForceSearchDlg.prototype._updateSelectmenu =
+Com_Zmail_SForceSearchDlg.prototype._updateSelectmenu =
 function(name, id) {
 	var elSel = document.getElementById(this.selectMenuId);
 	var elOptNew = document.createElement('option');
@@ -95,7 +95,7 @@ function(name, id) {
 	}
 };
 
-Com_Zimbra_SForceSearchDlg.prototype._resetSearchDlg =
+Com_Zmail_SForceSearchDlg.prototype._resetSearchDlg =
 function() {
 	this.resultObjId = "";
 	var dom = document.getElementById("sforce_searchResultsDiv");
@@ -104,7 +104,7 @@ function() {
 	}
 };
 
-Com_Zimbra_SForceSearchDlg.prototype._addSearchDlgWidgets =
+Com_Zmail_SForceSearchDlg.prototype._addSearchDlgWidgets =
 function() {
 	var btn = new DwtButton({parent:this._shell});
 	btn.setText("Search");
@@ -114,7 +114,7 @@ function() {
 
 };
 
-Com_Zimbra_SForceSearchDlg.prototype._searchDlgSearchBtnHandler =
+Com_Zmail_SForceSearchDlg.prototype._searchDlgSearchBtnHandler =
 function(ev) {
 	var event = ev || window.event;
 	if (event.keyCode != undefined && event.keyCode != 13) {//if not enter key
@@ -143,7 +143,7 @@ function(ev) {
 	this.zimlet.query(q, 10, callback);
 };
 
-Com_Zimbra_SForceSearchDlg.prototype._searchQueryListHandler =
+Com_Zmail_SForceSearchDlg.prototype._searchQueryListHandler =
 function(list) {
 	var html = [];
 	var i =0;
@@ -239,7 +239,7 @@ function(list) {
 	document.getElementById("sforce_searchResultsDiv").innerHTML = html.join("");
 };
 
-Com_Zimbra_SForceSearchDlg.prototype._createSearchDlgView =
+Com_Zmail_SForceSearchDlg.prototype._createSearchDlgView =
 function() {
 	var html = [];
 	var i =0;

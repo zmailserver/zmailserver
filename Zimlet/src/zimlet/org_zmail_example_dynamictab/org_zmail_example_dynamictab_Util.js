@@ -18,7 +18,7 @@
  * This is a utility class.
  * 
  */
-function com_zimbra_example_dynamictab_Util() {
+function org_zmail_example_dynamictab_Util() {
 };
 
 /**
@@ -27,7 +27,7 @@ function com_zimbra_example_dynamictab_Util() {
  * @param	{int}	range		a range
  * @return	{int}	a random number
  */
-com_zimbra_example_dynamictab_Util._getRandomNumber =
+org_zmail_example_dynamictab_Util._getRandomNumber =
 function(range) {
 	return Math.floor(Math.random() * range);
 };
@@ -37,7 +37,7 @@ function(range) {
  * 
  * @return	{String}	a random char
  */
-com_zimbra_example_dynamictab_Util._getRandomChar =
+org_zmail_example_dynamictab_Util._getRandomChar =
 function() {
 	var chars = "0123456789abcdefghijklmnopqurstuvwxyzABCDEFGHIJKLMNOPQURSTUVWXYZ";
 	return chars.substr( this._getRandomNumber(62), 1 );
@@ -49,7 +49,7 @@ function() {
  * @param	{int}	size		the size of the unique id
  * @return	{String}	the unique id
  */
-com_zimbra_example_dynamictab_Util.generateUniqueID =
+org_zmail_example_dynamictab_Util.generateUniqueID =
 function(size) {
 	var str = "";
 	for(var i = 0; i < size; i++)
@@ -65,7 +65,7 @@ function(size) {
  * @param	{String}	url		the url to clean
  * @return	{String}	the resulting url
  */
-com_zimbra_example_dynamictab_Util.cleanUrl =
+org_zmail_example_dynamictab_Util.cleanUrl =
 function(url) {
 
 	var newUrl = url;
@@ -90,7 +90,7 @@ function(url) {
  * @param	{String}	item		the item
  * @return	{Boolean}	<code>true</code> if the item is in the array
  */
-com_zimbra_example_dynamictab_Util.arrayContains =
+org_zmail_example_dynamictab_Util.arrayContains =
 function(array,item) {
 	for (i=0;array && i<array.length; i++) {
 		if (array[i] == item)
@@ -103,7 +103,7 @@ function(array,item) {
 /**
  * 
  */
-com_zimbra_example_dynamictab_Util.escapeHTML =
+org_zmail_example_dynamictab_Util.escapeHTML =
 function (str) {                                       
     return(                                                               
         str.replace(/&/g,'&amp;').                                         

@@ -17,14 +17,14 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.admin.ui;
+package org.zmail.qa.selenium.projects.admin.ui;
 
-import com.zimbra.qa.selenium.framework.items.IItem;
-import com.zimbra.qa.selenium.framework.ui.AbsTab;
-import com.zimbra.qa.selenium.framework.ui.AbsWizard;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.admin.items.DomainItem;
+import org.zmail.qa.selenium.framework.items.IItem;
+import org.zmail.qa.selenium.framework.ui.AbsTab;
+import org.zmail.qa.selenium.framework.ui.AbsWizard;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.admin.items.DomainItem;
 
 
 /**
@@ -34,8 +34,8 @@ import com.zimbra.qa.selenium.projects.admin.items.DomainItem;
 public class WizardCreateDomain extends AbsWizard {
 
 	public static class Locators {
-		public static final String zdlg_DOMAIN_NAME="zdlgv__NEW_DOMAIN_zimbraDomainName";
-		public static final String MAIL_SERVER_DROPDOWN="css=div[id$='zimbraMailHost_arrow_button']/div";
+		public static final String zdlg_DOMAIN_NAME="zdlgv__NEW_DOMAIN_zmailDomainName";
+		public static final String MAIL_SERVER_DROPDOWN="css=div[id$='zmailMailHost_arrow_button']/div";
 		//public static final String MAIL_SERVER_DROPDOWN="css=div[id^='zdlgv__NEW_DOMAIN_zdlgv__NEW_DOMAIN_gal_sync_accounts_set_wizard'] div.ImgSelectPullDownArrow";
 
 		public static final String MAIL_SERVER_DROPDOWN_TABLE="css=div#___OSELECT_MENU___";
@@ -70,7 +70,7 @@ public class WizardCreateDomain extends AbsWizard {
 		//sClickAt(Locators.ADD_A_GAL_ACCOUNT_BUTTON,"");
 		sClickAt(Locators.MAIL_SERVER_DROPDOWN, "");
 		sClickAt(Locators.MAIL_SERVER_DROPDOWN_TABLE+" div:contains('"+
-					ZimbraSeleniumProperties.getStringProperty("server.host")+
+					ZmailSeleniumProperties.getStringProperty("server.host")+
 					"')", "");
 		
 		

@@ -14,21 +14,21 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.admin.tests.cos;
+package org.zmail.qa.selenium.projects.admin.tests.cos;
 
 import java.util.List;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAdminAccount;
-import com.zimbra.qa.selenium.projects.admin.core.AdminCommonTest;
-import com.zimbra.qa.selenium.projects.admin.items.AccountItem;
-import com.zimbra.qa.selenium.projects.admin.items.CosItem;
-import com.zimbra.qa.selenium.projects.admin.ui.DialogForDeleteOperation;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAdminAccount;
+import org.zmail.qa.selenium.projects.admin.core.AdminCommonTest;
+import org.zmail.qa.selenium.projects.admin.items.AccountItem;
+import org.zmail.qa.selenium.projects.admin.items.CosItem;
+import org.zmail.qa.selenium.projects.admin.ui.DialogForDeleteOperation;
 
 public class DeleteCos extends AdminCommonTest {
 	public DeleteCos() {
@@ -55,8 +55,8 @@ public class DeleteCos extends AdminCommonTest {
 		CosItem cos = new CosItem();
 		String cosName=cos.getName();
 
-		ZimbraAdminAccount.AdminConsoleAdmin().soapSend(
-				"<CreateCosRequest xmlns='urn:zimbraAdmin'>"
+		ZmailAdminAccount.AdminConsoleAdmin().soapSend(
+				"<CreateCosRequest xmlns='urn:zmailAdmin'>"
 				+			"<name>" + cosName + "</name>"
 				+		"</CreateCosRequest>");
 
@@ -110,8 +110,8 @@ public class DeleteCos extends AdminCommonTest {
 		CosItem cos = new CosItem();
 		String cosName=cos.getName();
 
-		ZimbraAdminAccount.AdminConsoleAdmin().soapSend(
-				"<CreateCosRequest xmlns='urn:zimbraAdmin'>"
+		ZmailAdminAccount.AdminConsoleAdmin().soapSend(
+				"<CreateCosRequest xmlns='urn:zmailAdmin'>"
 				+			"<name>" + cosName + "</name>"
 				+		"</CreateCosRequest>");
 
@@ -165,8 +165,8 @@ public class DeleteCos extends AdminCommonTest {
 		CosItem cos = new CosItem();
 		String cosName=cos.getName();
 
-		ZimbraAdminAccount.AdminConsoleAdmin().soapSend(
-				"<CreateCosRequest xmlns='urn:zimbraAdmin'>"
+		ZmailAdminAccount.AdminConsoleAdmin().soapSend(
+				"<CreateCosRequest xmlns='urn:zmailAdmin'>"
 				+			"<name>" + cosName + "</name>"
 				+		"</CreateCosRequest>");
 
@@ -220,8 +220,8 @@ public class DeleteCos extends AdminCommonTest {
 		CosItem cos = new CosItem();
 		String cosName=cos.getName();
 
-		ZimbraAdminAccount.AdminConsoleAdmin().soapSend(
-				"<CreateCosRequest xmlns='urn:zimbraAdmin'>"
+		ZmailAdminAccount.AdminConsoleAdmin().soapSend(
+				"<CreateCosRequest xmlns='urn:zmailAdmin'>"
 				+			"<name>" + cosName + "</name>"
 				+		"</CreateCosRequest>");
 

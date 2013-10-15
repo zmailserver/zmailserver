@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.webClient.filters;
+package org.zmail.webClient.filters;
 
 import java.io.IOException;
 import java.text.DateFormat;
@@ -37,11 +37,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.ZmailLog;
 
-public final class SetHeaderFilter extends com.zimbra.cs.servlet.SetHeaderFilter {
-    private static final Log LOG = ZimbraLog.webclient;
+public final class SetHeaderFilter extends org.zmail.cs.servlet.SetHeaderFilter {
+    private static final Log LOG = ZmailLog.webclient;
 
     // --------------------------------------------------------------
     // Class constants
@@ -140,7 +140,7 @@ public final class SetHeaderFilter extends com.zimbra.cs.servlet.SetHeaderFilter
         StringBuffer noCachePatternSb = new StringBuffer(".*(");
         for (int i = 0; i < tempList.length; ++i){
             /**
-             * If the value of zimbraMailURL is set to "/", the noCachePatternList
+             * If the value of zmailMailURL is set to "/", the noCachePatternList
              * will have "//". Replace the "//", if any, by "/" before the
              * pattern match.
              */
@@ -184,7 +184,7 @@ public final class SetHeaderFilter extends com.zimbra.cs.servlet.SetHeaderFilter
         }
 
         if (mailUrl == null) {
-        mailUrl = "/zimbra";
+        mailUrl = "/zmail";
         }
         mailUrlHome = mailUrl + "/home/";
           mailUrlUser = mailUrl + "/user/";
@@ -247,7 +247,7 @@ public final class SetHeaderFilter extends com.zimbra.cs.servlet.SetHeaderFilter
             throws IOException, ServletException {
         super.doFilter(request, response, chain);
         // Clear logging context before each servlet request.
-        ZimbraLog.clearContext();
+        ZmailLog.clearContext();
     }
 
     @Override

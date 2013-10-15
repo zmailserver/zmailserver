@@ -24,8 +24,8 @@
  */
 AjxPackage.require("ajax.dwt.widgets.DwtChooser");
 
-AjxPackage.require("zimbraMail.abook.model.ZmAddrBook");
-AjxPackage.require("zimbraMail.abook.model.ZmContact");
-AjxPackage.require("zimbraMail.abook.model.ZmContactList");
-AjxPackage.require("zimbraMail.abook.view.ZmContactsHelper");
-AjxPackage.require("zimbraMail.abook.view.ZmContactPicker");
+AjxPackage.require("zmailMail.abook.model.ZmAddrBook");
+AjxPackage.require("zmailMail.abook.model.ZmContact");
+AjxPackage.require("zmailMail.abook.model.ZmContactList");
+AjxPackage.require("zmailMail.abook.view.ZmContactsHelper");
+AjxPackage.require("zmailMail.abook.view.ZmContactPicker");

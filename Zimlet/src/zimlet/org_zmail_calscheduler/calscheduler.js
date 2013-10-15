@@ -17,7 +17,7 @@
 //  Zimlet to handle scheduling of calendar                  //
 //  @author Sathishkumar Sugumaran                          //
 //////////////////////////////////////////////////////////////
-function Com_Zimbra_CalScheduler() {
+function Com_Zmail_CalScheduler() {
 this._toolbar = {};
 
 this._listeners = {};
@@ -26,15 +26,15 @@ this._listeners[ZmOperation.NEW_APPT] = new AjxListener(this, this._newListener)
 
 }
 
-Com_Zimbra_CalScheduler.prototype = new ZmZimletBase();
-Com_Zimbra_CalScheduler.prototype.constructor = Com_Zimbra_CalScheduler;
+Com_Zmail_CalScheduler.prototype = new ZmZimletBase();
+Com_Zmail_CalScheduler.prototype.constructor = Com_Zmail_CalScheduler;
 
-Com_Zimbra_CalScheduler.prototype.init =
+Com_Zmail_CalScheduler.prototype.init =
 function() {
 
 };
 
-Com_Zimbra_CalScheduler.prototype.showScheduleView =
+Com_Zmail_CalScheduler.prototype.showScheduleView =
 function(symbol, result) {
 
 	var appViewMgr = appCtxt.getAppViewMgr();
@@ -57,7 +57,7 @@ function(symbol, result) {
     return resultView;
 };
 
-Com_Zimbra_CalScheduler.prototype._createScheduleView =
+Com_Zmail_CalScheduler.prototype._createScheduleView =
 function() {
 		var appViewMgr = appCtxt.getAppViewMgr();
 
@@ -75,14 +75,14 @@ function() {
 		return resultView;
 };
 
-Com_Zimbra_CalScheduler.prototype._initToolbar =
+Com_Zmail_CalScheduler.prototype._initToolbar =
 function() {
 	var buttons = [ZmOperation.NEW_APPT, ZmOperation.CLOSE];
 	this._toolbar[ZmId.VIEW_CAL_SCHEDULE_ZIMLET] = new ZmButtonToolBar({parent: appCtxt.getShell(), buttons: buttons});
 	this._addSelectionListeners(this._toolbar[ZmId.VIEW_CAL_SCHEDULE_ZIMLET]);
 };
 
-Com_Zimbra_CalScheduler.prototype._addSelectionListeners =
+Com_Zmail_CalScheduler.prototype._addSelectionListeners =
 function(toolbar) {
 
 	var buttons = toolbar.opList;
@@ -96,13 +96,13 @@ function(toolbar) {
 };
 
 
-Com_Zimbra_CalScheduler.prototype.singleClicked =
+Com_Zmail_CalScheduler.prototype.singleClicked =
 function() {
 	this.showScheduleView();
 	return;
 };
 
-Com_Zimbra_CalScheduler.prototype.doDrop =
+Com_Zmail_CalScheduler.prototype.doDrop =
 function(obj) {
 	switch (obj.TYPE) {
 	    case "ZmMailMsg":
@@ -112,7 +112,7 @@ function(obj) {
 	}
 };
 
-Com_Zimbra_CalScheduler.prototype.newApptFromMailItem =
+Com_Zmail_CalScheduler.prototype.newApptFromMailItem =
 function(mailItem, date) {
 
 	//select the first mail item if multiple items are dropped
@@ -132,13 +132,13 @@ function(mailItem, date) {
 	}
 };
 
-Com_Zimbra_CalScheduler.prototype._convLoadedCallback =
+Com_Zmail_CalScheduler.prototype._convLoadedCallback =
 function(date, subject, conv) {
 	var respCallback = new AjxCallback(this, this._setAppt, [date, subject]);
 	conv.getFirstHotMsg({}, respCallback);
 };
 
-Com_Zimbra_CalScheduler.prototype._msgLoadedCallback =
+Com_Zmail_CalScheduler.prototype._msgLoadedCallback =
 function(date, subject, result) {
 
 	if(!result) { return; }
@@ -153,7 +153,7 @@ function(date, subject, result) {
 	this._setAppt(date, subject, msg);
 };
 
-Com_Zimbra_CalScheduler.prototype._setAppt =
+Com_Zmail_CalScheduler.prototype._setAppt =
 function(date, subject, msg) {
 
 	if(!msg){ return; }
@@ -183,14 +183,14 @@ function(date, subject, msg) {
 };
 
 // Panel Zimlet Methods
-// Called by the Zimbra framework when the Ymaps panel item was double clicked
-Com_Zimbra_CalScheduler.prototype.doubleClicked =
+// Called by the Zmail framework when the Ymaps panel item was double clicked
+Com_Zmail_CalScheduler.prototype.doubleClicked =
 function() {
 	this.singleClicked();
 };
 
 
-Com_Zimbra_CalScheduler.prototype.menuItemSelected = function(itemId) {
+Com_Zmail_CalScheduler.prototype.menuItemSelected = function(itemId) {
 	switch (itemId) {
 	    case "PREFERENCES":
 		this.createPropertyEditor();
@@ -200,12 +200,12 @@ Com_Zimbra_CalScheduler.prototype.menuItemSelected = function(itemId) {
 };
 
 
-Com_Zimbra_CalScheduler.prototype._closeListener =
+Com_Zmail_CalScheduler.prototype._closeListener =
 function() {
 	appCtxt.getAppViewMgr().popView(true);
 };
 
-Com_Zimbra_CalScheduler.prototype._newListener =
+Com_Zmail_CalScheduler.prototype._newListener =
 function() {
 	appCtxt.getAppViewMgr().popView(true);
 
@@ -536,7 +536,7 @@ function() {
 	this._schedTable[0] = null;	// header row has no attendee data
 
 	var subs = { id:this._htmlElId, isAppt: true, showTZSelector: appCtxt.get(ZmSetting.CAL_SHOW_TIMEZONE) };
-	this.getHtmlElement().innerHTML = AjxTemplate.expand("com_zimbra_calscheduler.templates.CalScheduler#CalSchedulerView_Main", subs);
+	this.getHtmlElement().innerHTML = AjxTemplate.expand("org_zmail_calscheduler.templates.CalScheduler#CalSchedulerView_Main", subs);
 
 	//this._initColumns();
 };
@@ -2069,7 +2069,7 @@ function(resize) {
 			columns: this._columns,
 			numDays: this.getNumDays()
 		};
-		this._timeGrid.innerHTML = AjxTemplate.expand("com_zimbra_calscheduler.templates.CalScheduler#CalScheduler_TimeGrid", params);
+		this._timeGrid.innerHTML = AjxTemplate.expand("org_zmail_calscheduler.templates.CalScheduler#CalScheduler_TimeGrid", params);
 	}
 
 	this._updateSeparators();

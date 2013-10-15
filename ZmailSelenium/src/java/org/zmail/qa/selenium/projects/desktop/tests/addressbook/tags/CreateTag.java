@@ -14,18 +14,18 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.addressbook.tags;
+package org.zmail.qa.selenium.projects.desktop.tests.addressbook.tags;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.TagItem;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.GeneralUtility;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.desktop.ui.DialogTag;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.framework.items.TagItem;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.GeneralUtility;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.desktop.ui.DialogTag;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
 
 public class CreateTag extends AjaxCommonTest {
    public CreateTag() {
@@ -38,7 +38,7 @@ public class CreateTag extends AjaxCommonTest {
    }
 
    private void _verifyTagCreated(DialogTag dialog) throws HarnessException {
-      String name = "tag" + ZimbraSeleniumProperties.getUniqueString();
+      String name = "tag" + ZmailSeleniumProperties.getUniqueString();
       
       // Fill out the form with the basic details
       dialog.zSubmit(name);

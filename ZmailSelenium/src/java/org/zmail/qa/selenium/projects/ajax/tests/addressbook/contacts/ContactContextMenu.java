@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.addressbook.contacts;
+package org.zmail.qa.selenium.projects.ajax.tests.addressbook.contacts;
 
 
 import java.util.ArrayList;
@@ -23,23 +23,23 @@ import java.util.List;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.ContactItem;
-import com.zimbra.qa.selenium.framework.items.ContextMenuItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.MailItem;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.GeneralUtility;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.ContextMenu;
-import com.zimbra.qa.selenium.projects.ajax.ui.PagePrint;
-import com.zimbra.qa.selenium.projects.ajax.ui.addressbook.PageAddressbook;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew;
-import com.zimbra.qa.selenium.projects.ajax.ui.search.PageAdvancedSearch;
+import org.zmail.qa.selenium.framework.items.ContactItem;
+import org.zmail.qa.selenium.framework.items.ContextMenuItem;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.MailItem;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.GeneralUtility;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.ContextMenu;
+import org.zmail.qa.selenium.projects.ajax.ui.PagePrint;
+import org.zmail.qa.selenium.projects.ajax.ui.addressbook.PageAddressbook;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew;
+import org.zmail.qa.selenium.projects.ajax.ui.search.PageAdvancedSearch;
 
 public class ContactContextMenu extends AjaxCommonTest  {
 	public ContactContextMenu() {
@@ -61,7 +61,7 @@ public class ContactContextMenu extends AjaxCommonTest  {
 			tagParam = " t='" + tagIdArray[0] + "'";
 		}
         app.zGetActiveAccount().soapSend(
-                "<CreateContactRequest xmlns='urn:zimbraMail'>" +
+                "<CreateContactRequest xmlns='urn:zmailMail'>" +
                 "<cn " + tagParam + " fileAsStr='" + fileAs + "' >" +
                 "<a n='firstName'>" + firstName +"</a>" +
                 "<a n='lastName'>" + lastName +"</a>" +
@@ -83,9 +83,9 @@ public class ContactContextMenu extends AjaxCommonTest  {
 
 	private ContactItem createSelectARandomContactItem(String ... tagIdArray) throws HarnessException {
 
-		String firstName = "first" + ZimbraSeleniumProperties.getUniqueString();		
-		String lastName = "last" + ZimbraSeleniumProperties.getUniqueString();
-	    String email = "email" +  ZimbraSeleniumProperties.getUniqueString() + "@zimbra.com";
+		String firstName = "first" + ZmailSeleniumProperties.getUniqueString();		
+		String lastName = "last" + ZmailSeleniumProperties.getUniqueString();
+	    String email = "email" +  ZmailSeleniumProperties.getUniqueString() + "@zmail.com";
 	
 	    return createSelectAContactItem(firstName, lastName, email, tagIdArray );
 	}
@@ -196,17 +196,17 @@ public class ContactContextMenu extends AjaxCommonTest  {
 
 			
 	    //Create  email sent to this contacts	
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String lastName = "lastname " + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String lastName = "lastname " + ZmailSeleniumProperties.getUniqueString();
 		
 		// Send the message from AccountA to the ZWC user
-		ZimbraAccount.AccountA().soapSend(
-					"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+		ZmailAccount.AccountA().soapSend(
+					"<SendMsgRequest xmlns='urn:zmailMail'>" +
 						"<m>" +
 							"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 							"<su>"+ subject +"</su>" +
 							"<mp ct='text/plain'>" +
-								"<content>"+ "body" + ZimbraSeleniumProperties.getUniqueString() +"</content>" +
+								"<content>"+ "body" + ZmailSeleniumProperties.getUniqueString() +"</content>" +
 							"</mp>" +
 						"</m>" +
 					"</SendMsgRequest>");
@@ -229,24 +229,24 @@ public class ContactContextMenu extends AjaxCommonTest  {
 	public void FindEmailsReceivedFromContact() throws HarnessException {
 		
 	    //Create  email sent to this contacts	
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String lastName = "lastname " + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String lastName = "lastname " + ZmailSeleniumProperties.getUniqueString();
 		
 		// Send the message from AccountB to the ZWC user
-		ZimbraAccount.AccountB().soapSend(
-					"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+		ZmailAccount.AccountB().soapSend(
+					"<SendMsgRequest xmlns='urn:zmailMail'>" +
 						"<m>" +
 							"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 							"<su>"+ subject +"</su>" +
 							"<mp ct='text/plain'>" +
-								"<content>"+ "body" + ZimbraSeleniumProperties.getUniqueString() +"</content>" +
+								"<content>"+ "body" + ZmailSeleniumProperties.getUniqueString() +"</content>" +
 							"</mp>" +
 						"</m>" +
 					"</SendMsgRequest>");
 
-		MailItem.importFromSOAP(ZimbraAccount.AccountB(), "subject:("+ subject +")");
+		MailItem.importFromSOAP(ZmailAccount.AccountB(), "subject:("+ subject +")");
 
-		ContactItem contactItem = createSelectAContactItem(app.zGetActiveAccount().getPref("displayName"),lastName, ZimbraAccount.AccountB().EmailAddress);
+		ContactItem contactItem = createSelectAContactItem(app.zGetActiveAccount().getPref("displayName"),lastName, ZmailAccount.AccountB().EmailAddress);
 		
 		
 		//Click Find Emails->Received From Contact
@@ -255,7 +255,7 @@ public class ContactContextMenu extends AjaxCommonTest  {
         
         // Get the bubleText
 		String bubleText = app.zPageSearch.sGetText("css=[class='addrBubble']");
-		ZAssert.assertEquals(bubleText, "from:"+ ZimbraAccount.AccountB().EmailAddress ,"Verify the message list exists");
+		ZAssert.assertEquals(bubleText, "from:"+ ZmailAccount.AccountB().EmailAddress ,"Verify the message list exists");
 		
                 
 	}

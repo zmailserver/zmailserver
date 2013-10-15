@@ -16,26 +16,26 @@
 /**
  * Helps organize contacts by allowing action on multiple contacts
  * 
- * @author RAJA RAO DV (rrao@zimbra.com)
+ * @author RAJA RAO DV (rrao@zmail.com)
  */
-function Com_Zimbra_contactOrganizer() {
+function Com_Zmail_contactOrganizer() {
 }
 
-Com_Zimbra_contactOrganizer.prototype = new ZmZimletBase();
-Com_Zimbra_contactOrganizer.prototype.constructor = Com_Zimbra_contactOrganizer;
+Com_Zmail_contactOrganizer.prototype = new ZmZimletBase();
+Com_Zmail_contactOrganizer.prototype.constructor = Com_Zmail_contactOrganizer;
 
 // Consts
-Com_Zimbra_contactOrganizer.AddressBookOnlyMsg = "You can use this Zimlet from 'within Address Book' only";
-Com_Zimbra_contactOrganizer.prototype.BEGIN_AT = 0;
-Com_Zimbra_contactOrganizer.prototype.END_AT = 49;
-Com_Zimbra_contactOrganizer.prototype.PROCESS_AT_ONCE = 50;
+Com_Zmail_contactOrganizer.AddressBookOnlyMsg = "You can use this Zimlet from 'within Address Book' only";
+Com_Zmail_contactOrganizer.prototype.BEGIN_AT = 0;
+Com_Zmail_contactOrganizer.prototype.END_AT = 49;
+Com_Zmail_contactOrganizer.prototype.PROCESS_AT_ONCE = 50;
 
 
-Com_Zimbra_contactOrganizer.prototype.singleClicked =
+Com_Zmail_contactOrganizer.prototype.singleClicked =
 function() {
 	if (appCtxt.getAppController().getActiveApp() != "Contacts") {
 		var transitions = [ ZmToast.FADE_IN, ZmToast.PAUSE, ZmToast.PAUSE, ZmToast.PAUSE, ZmToast.PAUSE, ZmToast.FADE_OUT ];
-		appCtxt.getAppController().setStatusMsg(Com_Zimbra_contactOrganizer.AddressBookOnlyMsg, ZmStatusView.LEVEL_CRITICAL, null, transitions);
+		appCtxt.getAppController().setStatusMsg(Com_Zmail_contactOrganizer.AddressBookOnlyMsg, ZmStatusView.LEVEL_CRITICAL, null, transitions);
 		return;
 	}
 
@@ -63,14 +63,14 @@ function() {
 
 };
 
-Com_Zimbra_contactOrganizer.prototype._initializeEmptyDlg =
+Com_Zmail_contactOrganizer.prototype._initializeEmptyDlg =
 function() {
 	this._parentView = new DwtComposite(this.getShell());
 	this._parentView.setSize("500", "240");
 	this._parentView.getHtmlElement().style.overflow = "auto";
 };
 
-Com_Zimbra_contactOrganizer.prototype._initializeProgressbarDlg =
+Com_Zmail_contactOrganizer.prototype._initializeProgressbarDlg =
 function() {
 	this.pbView = new DwtComposite(this.getShell());
 	this.pbView.setSize("500", "80");
@@ -89,12 +89,12 @@ function() {
 	this.pbDialog.runInBackground = false;
 };
 
-Com_Zimbra_contactOrganizer.prototype.getProgressbarLen =
+Com_Zmail_contactOrganizer.prototype.getProgressbarLen =
 function() {
 	return this.pblen;
 };
 
-Com_Zimbra_contactOrganizer.prototype.addContactManagerButtons =
+Com_Zmail_contactOrganizer.prototype.addContactManagerButtons =
 function() {
 	if (this.conOrgDialog)
 		return;
@@ -118,7 +118,7 @@ function() {
 
 };
 
-Com_Zimbra_contactOrganizer.prototype.organizerProcessBtnListner =
+Com_Zmail_contactOrganizer.prototype.organizerProcessBtnListner =
 function() {
 	var parsingOK = this.parseSelection();
 	if (!parsingOK)
@@ -135,7 +135,7 @@ function() {
 
 };
 
-Com_Zimbra_contactOrganizer.prototype._waitForContactToLoadAndProcess = function() {
+Com_Zmail_contactOrganizer.prototype._waitForContactToLoadAndProcess = function() {
 	this._contactList = AjxDispatcher.run("GetContacts");
 	if (!this._contactList)
 		return;
@@ -153,7 +153,7 @@ Com_Zimbra_contactOrganizer.prototype._waitForContactToLoadAndProcess = function
 	}
 };
 
-Com_Zimbra_contactOrganizer.prototype._startProcessing =
+Com_Zmail_contactOrganizer.prototype._startProcessing =
 function(ev) {
 	this.filterContacts();//filter contacts based on the selection
 
@@ -170,7 +170,7 @@ function(ev) {
 	}
 };
 
-Com_Zimbra_contactOrganizer.prototype.constructContactProgressbarView =
+Com_Zmail_contactOrganizer.prototype.constructContactProgressbarView =
 function() {
 	var html = new Array();
 	var i = 0;
@@ -182,7 +182,7 @@ function() {
 	return html.join("");
 };
 
-Com_Zimbra_contactOrganizer.prototype._createContactsFolderList =
+Com_Zmail_contactOrganizer.prototype._createContactsFolderList =
 function() {
 	var html = new Array();
 	var i = 0;
@@ -196,11 +196,11 @@ function() {
 	document.getElementById("corg_selectedfoldersTD").innerHTML = html.join("");
 };
 
-Com_Zimbra_contactOrganizer.prototype._createContactsChoiceList =
+Com_Zmail_contactOrganizer.prototype._createContactsChoiceList =
 function() {
 	var html = new Array();
 	var i = 0;
-	html[i++] = "<select id=\"corg_contactsChoice\" onChange=\"Com_Zimbra_contactOrganizer._displayHideContainsField()\">";
+	html[i++] = "<select id=\"corg_contactsChoice\" onChange=\"Com_Zmail_contactOrganizer._displayHideContainsField()\">";
 	html[i++] = "<option value='allcontacts'>All Contacts</option>";
 	html[i++] = "<option value='contacts_email_contains'>Contact's email contains</option>";
 	html[i++] = "<option value='contacts_with_phonenumber'>Contacts with phone number</option>";
@@ -208,7 +208,7 @@ function() {
 	document.getElementById("corg_contactsChoiceTD").innerHTML = html.join("");
 };
 
-Com_Zimbra_contactOrganizer._displayHideContainsField =
+Com_Zmail_contactOrganizer._displayHideContainsField =
 function() {
 	var w = document.getElementById("corg_contactsChoice").value;
 	if (w == "contacts_email_contains") {
@@ -218,7 +218,7 @@ function() {
 	}
 };
 
-Com_Zimbra_contactOrganizer.prototype.constructContactManagerView =
+Com_Zmail_contactOrganizer.prototype.constructContactManagerView =
 function() {
 	var html = new Array();
 	var i = 0;
@@ -267,12 +267,12 @@ function() {
 	return html.join("");
 };
 
-Com_Zimbra_contactOrganizer.prototype.setProgressbarMsg =
+Com_Zmail_contactOrganizer.prototype.setProgressbarMsg =
 function(msg) {
 	document.getElementById("corg_pbMsgDiv").innerHTML = msg;
 };
 
-Com_Zimbra_contactOrganizer.prototype.parseSelection =
+Com_Zmail_contactOrganizer.prototype.parseSelection =
 function() {
 	this.corg_contactsChoice = document.getElementById("corg_contactsChoice").value;
 	this.corg_contactPropInput = document.getElementById("corg_contactPropInput").value;
@@ -293,14 +293,14 @@ function() {
 	return true;
 };
 
-Com_Zimbra_contactOrganizer.prototype.returnFailureMsg =
+Com_Zmail_contactOrganizer.prototype.returnFailureMsg =
 function(msg) {
 	var transitions = [ ZmToast.FADE_IN, ZmToast.PAUSE, ZmToast.PAUSE, ZmToast.PAUSE, ZmToast.FADE_OUT ];
 	appCtxt.getAppController().setStatusMsg(msg, ZmStatusView.LEVEL_CRITICAL, null, transitions);
 	return false;
 };
 
-Com_Zimbra_contactOrganizer.prototype._getSelectedFolders =
+Com_Zmail_contactOrganizer.prototype._getSelectedFolders =
 function() {
 	var me = document.getElementById("corg_selectedfolders");
 	var selectedFolders = [];
@@ -312,7 +312,7 @@ function() {
 	return selectedFolders;
 };
 
-Com_Zimbra_contactOrganizer.prototype._parseFileAsSelect =
+Com_Zmail_contactOrganizer.prototype._parseFileAsSelect =
 function() {
 	this.fileAsHash = "1";
 	if (!this._contactList) return;
@@ -343,7 +343,7 @@ function() {
 	}
 };
 
-Com_Zimbra_contactOrganizer.prototype.filterContacts =
+Com_Zmail_contactOrganizer.prototype.filterContacts =
 function() {
 	if (!this._contactList)
 		return;
@@ -381,7 +381,7 @@ function() {
 	}
 };
 
-Com_Zimbra_contactOrganizer.prototype.setFolderList =
+Com_Zmail_contactOrganizer.prototype.setFolderList =
 function() {
 	var folders = appCtxt.getFolderTree().asList()[0].children.getArray();
 	this.folderNamesIdsArry = [];
@@ -403,7 +403,7 @@ function() {
 	this.conOrgDialog.popup();
 };
 
-Com_Zimbra_contactOrganizer.prototype._handleResponseFolderList =
+Com_Zmail_contactOrganizer.prototype._handleResponseFolderList =
 function(callback, result) {
 	var resp = result.getResponse().GetFolderResponse;
 	this.folderNamesIdsArry = [];
@@ -424,7 +424,7 @@ function(callback, result) {
 };
 
 
-Com_Zimbra_contactOrganizer.prototype.cleanUpMenus =
+Com_Zmail_contactOrganizer.prototype.cleanUpMenus =
 function() {
 	//delete all the folders and re-add them, just to get any new folders
 	if (this.conOrgDialog) {
@@ -439,9 +439,9 @@ function() {
 	}
 };
 
-Com_Zimbra_contactOrganizer.prototype.setTagsList =
+Com_Zmail_contactOrganizer.prototype.setTagsList =
 function() {
-	var soapDoc = AjxSoapDoc.create("GetTagRequest", "urn:zimbraMail");
+	var soapDoc = AjxSoapDoc.create("GetTagRequest", "urn:zmailMail");
 	var method = soapDoc.getMethod();
 	method.setAttribute("visible", "1");
 
@@ -453,7 +453,7 @@ function() {
 	appCtxt.getRequestMgr().sendRequest(params);
 };
 
-Com_Zimbra_contactOrganizer.prototype._handleResponseTagList =
+Com_Zmail_contactOrganizer.prototype._handleResponseTagList =
 function(callback, result) {
 	var resp = result.getResponse().GetTagResponse;
 	this.tagNamesIdsArry = [];
@@ -494,7 +494,7 @@ function(callback, result) {
 
 };
 
-Com_Zimbra_contactOrganizer.prototype.getTagImageName =
+Com_Zmail_contactOrganizer.prototype.getTagImageName =
 function(imageNumber) {
 	switch (imageNumber) {
 		case 1:
@@ -528,7 +528,7 @@ function(imageNumber) {
 
 };
 
-Com_Zimbra_contactOrganizer.prototype._moveAllToAnotherFldrListener =
+Com_Zmail_contactOrganizer.prototype._moveAllToAnotherFldrListener =
 function() {
 	if (this.filteredContactsArry.length == 0) {
 		appCtxt.getAppController().setStatusMsg("No Contacts found or matched your  filter criteria", ZmStatusView.LEVEL_CRITICAL);
@@ -548,11 +548,11 @@ function() {
 	}
 	var soapDoc = null;
 	if (!soapDoc) {
-		soapDoc = AjxSoapDoc.create("BatchRequest", "urn:zimbra");
+		soapDoc = AjxSoapDoc.create("BatchRequest", "urn:zmail");
 		soapDoc.setMethodAttribute("onerror", "continue");
 	}
-	var contactActionReq = soapDoc.set("ContactActionRequest", null, null, "urn:zimbraMail");
-	var action = soapDoc.set("action", null, null, "urn:zimbraMail");
+	var contactActionReq = soapDoc.set("ContactActionRequest", null, null, "urn:zmailMail");
+	var action = soapDoc.set("action", null, null, "urn:zmailMail");
 	action.setAttribute("op", "move");
 
 	//collect ids of duplicate contacts that will be deleted.
@@ -582,7 +582,7 @@ function() {
 
 };
 
-Com_Zimbra_contactOrganizer.prototype._applyTagToContactsListener =
+Com_Zmail_contactOrganizer.prototype._applyTagToContactsListener =
 function() {
 	if (this.filteredContactsArry.length == 0) {
 		appCtxt.getAppController().setStatusMsg("No Contacts found or matched your  filter criteria", ZmStatusView.LEVEL_CRITICAL);
@@ -598,10 +598,10 @@ function() {
 
 	var soapDoc = null;
 	if (!soapDoc) {
-		soapDoc = AjxSoapDoc.create("BatchRequest", "urn:zimbra");
+		soapDoc = AjxSoapDoc.create("BatchRequest", "urn:zmail");
 		soapDoc.setMethodAttribute("onerror", "continue");
 	}
-	var contactActionReq = soapDoc.set("ContactActionRequest", null, null, "urn:zimbraMail");
+	var contactActionReq = soapDoc.set("ContactActionRequest", null, null, "urn:zmailMail");
 	var action = soapDoc.set("action");
 	if (applyOrRemoveTag == "applyTheTag") {
 		action.setAttribute("op", "tag");
@@ -637,7 +637,7 @@ function() {
 
 };
 
-Com_Zimbra_contactOrganizer.prototype.conOrgDialogDoFileAsListener =
+Com_Zmail_contactOrganizer.prototype.conOrgDialogDoFileAsListener =
 function() {
 	if (this.filteredContactsArry.length == 0) {
 		appCtxt.getAppController().setStatusMsg("No Contacts found or matched your  filter criteria", ZmStatusView.LEVEL_CRITICAL);
@@ -652,11 +652,11 @@ function() {
 	}
 	for (var i = this.startAt; i <= this.endAt; i++) {
 		if (!soapDoc) {
-			soapDoc = AjxSoapDoc.create("BatchRequest", "urn:zimbra");
+			soapDoc = AjxSoapDoc.create("BatchRequest", "urn:zmail");
 			soapDoc.setMethodAttribute("onerror", "continue");
 		}
 
-		var modifyContactReq = soapDoc.set("ModifyContactRequest", null, null, "urn:zimbraMail");
+		var modifyContactReq = soapDoc.set("ModifyContactRequest", null, null, "urn:zmailMail");
 		modifyContactReq.setAttribute("replace", "0");
 		modifyContactReq.setAttribute("force", "1");
 		var doc = soapDoc.getDoc();
@@ -683,7 +683,7 @@ function() {
 };
 
 // Callbacks.....
-Com_Zimbra_contactOrganizer.prototype._handleResponseFileAs =
+Com_Zmail_contactOrganizer.prototype._handleResponseFileAs =
 function() {
 	var msg = "";
 	if (this.abortProcess) {
@@ -700,7 +700,7 @@ function() {
 	}
 };
 
-Com_Zimbra_contactOrganizer.prototype._handleResponseMoveAll =
+Com_Zmail_contactOrganizer.prototype._handleResponseMoveAll =
 function() {
 	var msg = "";
 	if (this.abortProcess) {
@@ -717,7 +717,7 @@ function() {
 	}
 };
 
-Com_Zimbra_contactOrganizer.prototype._handleResponseApplyTag =
+Com_Zmail_contactOrganizer.prototype._handleResponseApplyTag =
 function() {
 	var msg = "";
 	if (this.abortProcess) {
@@ -735,7 +735,7 @@ function() {
 };
 
 //Progressbar related listners...
-Com_Zimbra_contactOrganizer.prototype.setProgressbarComplete =
+Com_Zmail_contactOrganizer.prototype.setProgressbarComplete =
 function(msg) {
 	this.pbDialog.getButton("corg_pbAbortBtn").setEnabled(false);//disable Abort btn
 	this.pbDialog.getButton("corg_pbrunBackgroundBtn").setEnabled(false); //disable runInBg btn
@@ -746,20 +746,20 @@ function(msg) {
 	this.pbDialog.runInBackground = false;
 };
 
-Com_Zimbra_contactOrganizer.prototype.setProgressbarAbortMsg =
+Com_Zmail_contactOrganizer.prototype.setProgressbarAbortMsg =
 function(msg) {
 	document.getElementById("corg_processBusy").className = "corg_texthidden";
 	document.getElementById("corg_pbMsgDiv").innerHTML = this.formatMsg(msg);
 };
 
-Com_Zimbra_contactOrganizer.prototype.setProgressbarBegin =
+Com_Zmail_contactOrganizer.prototype.setProgressbarBegin =
 function() {
 	document.getElementById("corg_processBarForeground").style.width = "0px";
 	document.getElementById("corg_processBusy").className = "corg_shown";
 	document.getElementById("corg_pbMsgDiv").innerHTML = "";
 };
 
-Com_Zimbra_contactOrganizer.prototype.pbDialogAbortListner =
+Com_Zmail_contactOrganizer.prototype.pbDialogAbortListner =
 function() {
 	var msg = "Aborting...";
 	this.abortProcess = true;
@@ -769,13 +769,13 @@ function() {
 	this.pbDialog.getButton("corg_pbrunBackgroundBtn").setEnabled(false);// disable runInBg btn
 };
 
-Com_Zimbra_contactOrganizer.prototype.pbRunBackgroundAbortListner =
+Com_Zmail_contactOrganizer.prototype.pbRunBackgroundAbortListner =
 function() {
 	this.pbDialog.runInBackground = true;
 	this.pbDialog.popdown();
 };
 
-Com_Zimbra_contactOrganizer.prototype.formatMsg =
+Com_Zmail_contactOrganizer.prototype.formatMsg =
 function(msg) {
 	return  msg; //currently no formatting is done.
 };

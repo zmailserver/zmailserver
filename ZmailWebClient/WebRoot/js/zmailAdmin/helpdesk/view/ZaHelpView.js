@@ -30,11 +30,11 @@ ZaHelpView = function(parent) {
 ZaHelpView.mainHelpPage = "administration_console_help.htm";
 
 // URL for the most latest documentation page
-ZaHelpView.RELEASE_NOTES_URL = "http://www.zimbra.com/support/documentation/zcs-ne-documentation.html";
+ZaHelpView.RELEASE_NOTES_URL = "http://www.zmail.com/support/documentation/zcs-ne-documentation.html";
 
-ZaHelpView.RELEASE_NOTE_LINK = "adminhelp/pdf/Zimbra_Release_Note.pdf";
-ZaHelpView.HELP_FORUM_LINK = "http://www.zimbra.com/forums/";
-ZaHelpView.HELP_WIKI_LINK = "http://wiki.zimbra.com";
+ZaHelpView.RELEASE_NOTE_LINK = "adminhelp/pdf/Zmail_Release_Note.pdf";
+ZaHelpView.HELP_FORUM_LINK = "http://www.zmail.com/forums/";
+ZaHelpView.HELP_WIKI_LINK = "http://wiki.zmail.com";
 ZaHelpView.prototype = new ZaTabView();
 ZaHelpView.prototype.constructor = ZaHelpView;
 ZaTabView.XFormModifiers["ZaHelpView"] = new Array();
@@ -78,7 +78,7 @@ function (xModelMetaData, xFormMetaData) {
 
 ZaHelpView.prototype.showAboutDialog = function () {                  
     var appCtrl = this._appCtxt.getAppController() ;
-    appCtrl._aboutZimbraListener();
+    appCtrl._aboutZmailListener();
 };
 
 ZaHelpView.showWikiLink = function () {
@@ -100,7 +100,7 @@ ZaHelpView.myXFormModifier = function(xFormObject) {
 			{type:_OUTPUT_, label:null, value:ZabMsg.HELP_PAGE_1, colSpan:"*", cssStyle:"font-size:12px;"},
 
 			{type:_SPACER_, colSpan:"*"},
-			{type:_GROUP_, numCols:2, id:"ZimbraHelpPageDownloadItems" , colSpan: "*",
+			{type:_GROUP_, numCols:2, id:"ZmailHelpPageDownloadItems" , colSpan: "*",
 				items: [
 					{type:_GROUP_,numCols:2,
 						items: [
@@ -193,7 +193,7 @@ ZaHelpView.myXFormModifier = function(xFormObject) {
                 items: [
                     {type:_OUTPUT_, value:AjxImg.getImageHtml("PDFDoc")},
                     {type:_ANCHOR_, cssStyle:"font-size:12px;", showInNewWindow:true, labelLocation:_NONE_, label: ZaMsg.ICAL_MIG_GUIDE,
-                         href:(location.pathname + "help/admin/pdf/Zimbra%20iCalendar%20Migration%20Guide.pdf?locid=" + AjxEnv.DEFAULT_LOCALE)}
+                         href:(location.pathname + "help/admin/pdf/Zmail%20iCalendar%20Migration%20Guide.pdf?locid=" + AjxEnv.DEFAULT_LOCALE)}
                 ]
             },
             {type:_SPACER_},
@@ -239,7 +239,7 @@ ZaHelpView.myXFormModifier = function(xFormObject) {
     var helpItems = xFormObject.items[0].items[0].items ;
     for (var i=0; i< helpItems.length; i++) {
         //insert teh networkHelpItems before the About button
-        if (helpItems[i].id == "ZimbraHelpPageDownloadItems") {
+        if (helpItems[i].id == "ZmailHelpPageDownloadItems") {
             helpItems [i].items = helpItems[i].items.concat(adminGuideItem) ;
             break ;
         }
@@ -252,7 +252,7 @@ ZaHelpView.myXFormModifier = function(xFormObject) {
                 items: [
                     {type:_OUTPUT_, value:AjxImg.getImageHtml("PDFDoc")},
                     {type:_ANCHOR_, cssStyle:"font-size:12px;", showInNewWindow:true, labelLocation:_NONE_, label: ZabMsg.ZWC_END_USER_GUIDE,
-                         href:(location.pathname + "help/admin/pdf/zimbra_user_guide.pdf?locid=" + AjxEnv.DEFAULT_LOCALE)}
+                         href:(location.pathname + "help/admin/pdf/zmail_user_guide.pdf?locid=" + AjxEnv.DEFAULT_LOCALE)}
                 ]
             },
             {type:_CELL_SPACER_},
@@ -265,7 +265,7 @@ ZaHelpView.myXFormModifier = function(xFormObject) {
         var helpItems = xFormObject.items[0].items[0].items ;
         for (var i=0; i< helpItems.length; i++) {
             //insert teh networkHelpItems before the About button
-            if (helpItems[i].id == "ZimbraHelpPageDownloadItems") {
+            if (helpItems[i].id == "ZmailHelpPageDownloadItems") {
                 helpItems [i].items = helpItems[i].items.concat(zwcUserGuideItem) ;
                 break ;
             }
@@ -326,7 +326,7 @@ function() {
                                         {type:_SPACER_, height:"20"},
                                         {type: _GROUP_, id:"helpDocsGroup_User", numCols:1, width: "100%",
                                             items:[
-                                                {type:_ANCHOR_, cssStyle:"font-size:14px;", showInNewWindow:true, labelLocation:_NONE_, label:ZabMsg.HELP_usersGuide, href:(location.pathname + "help/admin/pdf/zimbra_user_guide.pdf?locid=" + AjxEnv.DEFAULT_LOCALE)},
+                                                {type:_ANCHOR_, cssStyle:"font-size:14px;", showInNewWindow:true, labelLocation:_NONE_, label:ZabMsg.HELP_usersGuide, href:(location.pathname + "help/admin/pdf/zmail_user_guide.pdf?locid=" + AjxEnv.DEFAULT_LOCALE)},
                                                 {type:_OUTPUT_, cssStyle:"font-size:12px;",
                                                     label:null, value:ZabMsg.HELP_usersGuideDetail,
                                                     cssStyle:"padding-top:5px;padding-right:10px;padding-left:10px;"}
@@ -374,7 +374,7 @@ function() {
                                 {type: _GROUP_, width: "100%", numCols: 2, colSizes: ["20","*"],items: [
                                     {type:_OUTPUT_, cssStyle:"font-size:8px;",
                                         label:null, value:"<li></li>"},
-                                    {type:_ANCHOR_, cssStyle:"font-size:13px;", showInNewWindow:true, labelLocation:_NONE_, label:ZabMsg.HELP_MIG_Q4, href:(location.pathname + "help/admin/pdf/Zimbra%20iCalendar%20Migration%20Guide.pdf?locid=" + AjxEnv.DEFAULT_LOCALE)}
+                                    {type:_ANCHOR_, cssStyle:"font-size:13px;", showInNewWindow:true, labelLocation:_NONE_, label:ZabMsg.HELP_MIG_Q4, href:(location.pathname + "help/admin/pdf/Zmail%20iCalendar%20Migration%20Guide.pdf?locid=" + AjxEnv.DEFAULT_LOCALE)}
                                 ]}
                             ]
                         }

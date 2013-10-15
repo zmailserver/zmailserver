@@ -14,18 +14,18 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.ui.briefcase;
+package org.zmail.qa.selenium.projects.ajax.ui.briefcase;
 
 import org.openqa.selenium.WebElement;
 
-import com.zimbra.qa.selenium.framework.items.DocumentItem;
-import com.zimbra.qa.selenium.framework.items.IItem;
-import com.zimbra.qa.selenium.framework.ui.AbsApplication;
-import com.zimbra.qa.selenium.framework.ui.AbsForm;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.SleepUtil;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.ajax.ui.AppAjaxClient;
+import org.zmail.qa.selenium.framework.items.DocumentItem;
+import org.zmail.qa.selenium.framework.items.IItem;
+import org.zmail.qa.selenium.framework.ui.AbsApplication;
+import org.zmail.qa.selenium.framework.ui.AbsForm;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.SleepUtil;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.ajax.ui.AppAjaxClient;
 
 public class DocumentBriefcaseNew extends AbsForm {
 
@@ -49,7 +49,7 @@ public class DocumentBriefcaseNew extends AbsForm {
 		}
 	}
 
-	public static final String pageTitle = "Zimbra Docs";
+	public static final String pageTitle = "Zmail Docs";
 
 	public DocumentBriefcaseNew(AbsApplication application) {
 		super(application);
@@ -71,7 +71,7 @@ public class DocumentBriefcaseNew extends AbsForm {
 	}
 
 	public void typeDocumentName(String text) throws HarnessException {
-		this.zSelectWindow("Zimbra Docs");
+		this.zSelectWindow("Zmail Docs");
 
 		sType(Locators.zNameField, text);
 	}
@@ -113,7 +113,7 @@ public class DocumentBriefcaseNew extends AbsForm {
 				throw new HarnessException("Locator is not present: "
 						+ iframeLocator);
 			
-			if (ZimbraSeleniumProperties.isWebDriver()) {				
+			if (ZmailSeleniumProperties.isWebDriver()) {				
 				//String locator = Locators.zBodyField;
 				//sSelectFrame(Locators.zFrame);
 				//this.sType(locator, value);
@@ -135,7 +135,7 @@ public class DocumentBriefcaseNew extends AbsForm {
 							+ "else if(navigator.userAgent.indexOf('MSIE')!=-1){iframe_body.innerHTML=bodytext;}"
 							+ "else {iframe_body.innerHTML=bodytext;}", we);
 				
-			} else if (ZimbraSeleniumProperties.isWebDriverBackedSelenium()){
+			} else if (ZmailSeleniumProperties.isWebDriverBackedSelenium()){
 				this.sMouseOver(iframeLocator);
 				this.sFocus(iframeLocator);
 				this.zClickAt(iframeLocator,"0,0");

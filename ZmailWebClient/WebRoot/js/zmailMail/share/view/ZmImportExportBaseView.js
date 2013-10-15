@@ -112,7 +112,7 @@ ZmImportExportBaseView.prototype._initSubType = function(type) {
 ZmImportExportBaseView.prototype._getSubTypeOptions = function(type) {
 	if (!ZmImportExportBaseView.prototype.TGZ_OPTIONS) {
 		ZmImportExportBaseView.prototype.TGZ_OPTIONS = [
-			{ displayValue: ZmMsg["zimbra-tgz"],			value: "zimbra-tgz" }
+			{ displayValue: ZmMsg["zmail-tgz"],			value: "zmail-tgz" }
 		];
 		ZmImportExportBaseView.prototype.CSV_OPTIONS = [];
 		var formats = appCtxt.get(ZmSetting.AVAILABLE_CSVFORMATS);
@@ -125,7 +125,7 @@ ZmImportExportBaseView.prototype._getSubTypeOptions = function(type) {
 			}
 		}
 		ZmImportExportBaseView.prototype.ICS_OPTIONS = [
-			{ displayValue: ZmMsg["zimbra-ics"],			value: "zimbra-ics" }
+			{ displayValue: ZmMsg["zmail-ics"],			value: "zmail-ics" }
 		];
 	}
 	var options;

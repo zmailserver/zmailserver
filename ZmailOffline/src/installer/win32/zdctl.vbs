@@ -29,7 +29,7 @@ Sub LogMsg(sMsg, iLevel)
         WScript.StdOut.WriteLine(sMsg)
     End If
     If iLevel <= iLogLevel Then
-        oShell.LogEvent iLevel, "Zimbra Desktop: " & sMsg
+        oShell.LogEvent iLevel, "Zmail Desktop: " & sMsg
     End If
 End Sub
 

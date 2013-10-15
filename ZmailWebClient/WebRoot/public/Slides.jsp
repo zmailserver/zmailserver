@@ -1,9 +1,9 @@
 <%@ page buffer="8kb" session="false" autoFlush="true" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
-<%@ page import="java.util.*,javax.naming.*,com.zimbra.client.ZAuthResult" %>
-<%@ page import="com.zimbra.cs.taglib.bean.BeanUtils" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
-<%@ taglib prefix="app" uri="com.zimbra.htmlclient" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
+<%@ page import="java.util.*,javax.naming.*,org.zmail.client.ZAuthResult" %>
+<%@ page import="org.zmail.cs.taglib.bean.BeanUtils" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
+<%@ taglib prefix="app" uri="org.zmail.htmlclient" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!--
@@ -53,7 +53,7 @@ basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
 
 
     final String SKIN_COOKIE_NAME = "ZM_SKIN";
-    String skin = application.getInitParameter("zimbraDefaultSkin");
+    String skin = application.getInitParameter("zmailDefaultSkin");
     Cookie[] cookies = request.getCookies();
     String requestSkin = request.getParameter("skin");
     if (requestSkin != null) {
@@ -118,7 +118,7 @@ basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-    <title>Zimbra Presentations</title>
+    <title>Zmail Presentations</title>
     <style type="text/css">                                                               
         <!--
         @import url(<%= contextPath %>/css/common,dwt,msgview,login,zm,spellcheck,spreadsheet,presentation,slides,images,skin.css?v=<%= vers %><%= isSkinDebugMode || isDevMode ? "&debug=1" : "" %>&skin=${zm:cook(skin)});
@@ -209,7 +209,7 @@ basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
 
         window.onresize = _resize;
 
-        window.fileInfo = {name: '${fileName}', folderId: '${folderId}' || ZmOrganizer.ID_BRIEFCASE, contentType: 'application/x-zimbra-ppt'};
+        window.fileInfo = {name: '${fileName}', folderId: '${folderId}' || ZmOrganizer.ID_BRIEFCASE, contentType: 'application/x-zmail-ppt'};
 
         var item = null;
     <% if(fileId != null) {%>

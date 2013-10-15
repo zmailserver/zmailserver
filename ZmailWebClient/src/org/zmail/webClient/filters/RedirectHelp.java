@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.webClient.filters;
+package org.zmail.webClient.filters;
 
 import java.io.*;
 import java.util.*;
@@ -20,7 +20,7 @@ import java.util.regex.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.util.ZmailLog;
 
 public class RedirectHelp implements Filter {
 
@@ -60,9 +60,9 @@ public class RedirectHelp implements Filter {
 		if (this.inDirName== null) this.inDirName = DEFAULT_INPUT_DIRNAME;
 		this.outDirName = config.getInitParameter(P_OUTPUT_DIRNAME);
 		if (this.outDirName == null) this.outDirName = DEFAULT_OUTPUT_DIRNAME;
-		if (ZimbraLog.webclient.isDebugEnabled()) {
-			ZimbraLog.webclient.debug("### indir:  "+this.inDirName);
-			ZimbraLog.webclient.debug("### outdir: "+this.outDirName);
+		if (ZmailLog.webclient.isDebugEnabled()) {
+			ZmailLog.webclient.debug("### indir:  "+this.inDirName);
+			ZmailLog.webclient.debug("### outdir: "+this.outDirName);
 		}
 	}
 
@@ -78,9 +78,9 @@ public class RedirectHelp implements Filter {
 			//       available in init().
 			this.inDirPattern = Pattern.compile("^"+escape(contextPath)+escape(this.inDirName)+"/(.*)");
 			this.outDirPattern = Pattern.compile("^"+escape(contextPath)+"/help/[a-z]{2}(?:_[A-Z]{2})?/.*");
-			if (ZimbraLog.webclient.isDebugEnabled()) {
-				ZimbraLog.webclient.debug("### indir pattern:  "+this.inDirPattern.pattern());
-				ZimbraLog.webclient.debug("### outdir pattern: "+this.outDirPattern.pattern());
+			if (ZmailLog.webclient.isDebugEnabled()) {
+				ZmailLog.webclient.debug("### indir pattern:  "+this.inDirPattern.pattern());
+				ZmailLog.webclient.debug("### outdir pattern: "+this.outDirPattern.pattern());
 			}
 		}
 
@@ -101,9 +101,9 @@ public class RedirectHelp implements Filter {
 			country != null ? new Locale(language) : null,
 			Locale.US
 		};
-		if (ZimbraLog.webclient.isDebugEnabled()) {
+		if (ZmailLog.webclient.isDebugEnabled()) {
 			for (Locale locale : locales) {
-				ZimbraLog.webclient.debug("locale: "+locale);
+				ZmailLog.webclient.debug("locale: "+locale);
 			}
 		}
 
@@ -115,16 +115,16 @@ public class RedirectHelp implements Filter {
 			return;
 		}
 
-		if (ZimbraLog.webclient.isDebugEnabled()) {
-			ZimbraLog.webclient.debug("### filename: "+matcher.group(1));
+		if (ZmailLog.webclient.isDebugEnabled()) {
+			ZmailLog.webclient.debug("### filename: "+matcher.group(1));
 		}
 		String filename = decode(matcher.group(1)).replace('/', File.separatorChar);
-		if (ZimbraLog.webclient.isDebugEnabled()) {
-			ZimbraLog.webclient.debug("### filename: "+filename);
+		if (ZmailLog.webclient.isDebugEnabled()) {
+			ZmailLog.webclient.debug("### filename: "+filename);
 		}
 		File baseDir = new File(this.context.getRealPath("/"));
-		if (ZimbraLog.webclient.isDebugEnabled()) {
-			ZimbraLog.webclient.debug("### basedir:  "+baseDir);
+		if (ZmailLog.webclient.isDebugEnabled()) {
+			ZmailLog.webclient.debug("### basedir:  "+baseDir);
 		}
 		for (Locale locale : locales) {
 			if (locale == null) continue;
@@ -145,8 +145,8 @@ public class RedirectHelp implements Filter {
 			this.outDirName.replaceAll("\\{locale\\}", actualLocale.toString())+"/" +
 			filename
 		;
-		if (ZimbraLog.webclient.isDebugEnabled()) {
-			ZimbraLog.webclient.debug("redirecting to: "+redirectUrl);
+		if (ZmailLog.webclient.isDebugEnabled()) {
+			ZmailLog.webclient.debug("redirecting to: "+redirectUrl);
 		}
 		httpResponse.sendRedirect(redirectUrl);
 	}

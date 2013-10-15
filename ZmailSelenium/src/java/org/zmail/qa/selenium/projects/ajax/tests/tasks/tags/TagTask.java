@@ -14,22 +14,22 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.tasks.tags;
+package org.zmail.qa.selenium.projects.ajax.tests.tasks.tags;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.TaskItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.GeneralUtility;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.AppAjaxClient;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogTag;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.TaskItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.GeneralUtility;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.AppAjaxClient;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogTag;
 
 public class TagTask extends AjaxCommonTest{
 
@@ -46,9 +46,9 @@ public class TagTask extends AjaxCommonTest{
 	public void TagTask_01() throws HarnessException {
 		FolderItem taskFolder = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Tasks);
 
-		String subject = "task"+ ZimbraSeleniumProperties.getUniqueString();
+		String subject = "task"+ ZmailSeleniumProperties.getUniqueString();
 		app.zGetActiveAccount().soapSend(
-				"<CreateTaskRequest xmlns='urn:zimbraMail'>"
+				"<CreateTaskRequest xmlns='urn:zmailMail'>"
 				+		"<m >"
 				+			"<inv>"
 				+				"<comp name='" + subject + "'>"
@@ -57,7 +57,7 @@ public class TagTask extends AjaxCommonTest{
 				+			"</inv>"
 				+			"<su>" + subject + "</su>"
 				+			"<mp ct='text/plain'>"
-				+				"<content>content" + ZimbraSeleniumProperties.getUniqueString() + "</content>"
+				+				"<content>content" + ZmailSeleniumProperties.getUniqueString() + "</content>"
 				+			"</mp>"
 				+		"</m>"
 				+	"</CreateTaskRequest>");
@@ -74,7 +74,7 @@ public class TagTask extends AjaxCommonTest{
 		app.zPageTasks.zListItem(Action.A_LEFTCLICK, subject);
 
 		// Create a tag using GUI
-		String tagName = "tag" + ZimbraSeleniumProperties.getUniqueString();
+		String tagName = "tag" + ZmailSeleniumProperties.getUniqueString();
 
 		// Click on New Tag and check for active
 		DialogTag dialogtag = (DialogTag)app.zPageTasks.zToolbarPressPulldown(Button.B_TAG, Button.O_TAG_NEWTAG);
@@ -88,12 +88,12 @@ public class TagTask extends AjaxCommonTest{
 		GeneralUtility.syncDesktopToZcsWithSoap(app.zGetActiveAccount());
 
 		// Make sure the tag was created on the server (get the tag ID)
-		app.zGetActiveAccount().soapSend("<GetTagRequest xmlns='urn:zimbraMail'/>");;
+		app.zGetActiveAccount().soapSend("<GetTagRequest xmlns='urn:zmailMail'/>");;
 		String tagID = app.zGetActiveAccount().soapSelectValue("//mail:GetTagResponse//mail:tag[@name='"+ tagName +"']", "id");
 
 		// Verify tagged task name
 		app.zGetActiveAccount()
-		.soapSend("<SearchRequest xmlns='urn:zimbraMail' types='task'>"
+		.soapSend("<SearchRequest xmlns='urn:zmailMail' types='task'>"
 				+ "<query>tag:"
 				+ tagName
 				+ "</query>"
@@ -106,7 +106,7 @@ public class TagTask extends AjaxCommonTest{
 
 		// Make sure the tag was applied to the task
 		app.zGetActiveAccount()
-		.soapSend("<SearchRequest xmlns='urn:zimbraMail' types='task'>"
+		.soapSend("<SearchRequest xmlns='urn:zmailMail' types='task'>"
 				+ "<query>" + subject + "</query>" + "</SearchRequest>");
 
 		String id = app.zGetActiveAccount().soapSelectValue(

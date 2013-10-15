@@ -163,7 +163,7 @@ function() {
     //bug:48189 Hide schedule tab for non-ZCS acct
     if (appCtxt.isOffline) {
         var currAcct = appCtxt.getActiveAccount();
-        this.setSchedulerVisibility(currAcct.isZimbraAccount && !currAcct.isMain);
+        this.setSchedulerVisibility(currAcct.isZmailAccount && !currAcct.isMain);
     }
 
     this._editViewInitialized = true;
@@ -277,7 +277,7 @@ function() {
     var endTime = ZmApptComposeController.getCheckResourceConflictEndTime(
         this._locationConflictAppt, startDate, numRecurrence);
 
-    var jsonObj = {SearchRequest:{_jsns:"urn:zimbraMail"}};
+    var jsonObj = {SearchRequest:{_jsns:"urn:zmailMail"}};
     var request = jsonObj.SearchRequest;
 
     request.sortBy = "dateasc";
@@ -1933,7 +1933,7 @@ function() {
 	if (appCtxt.isOffline) {
         var currAcct = cal.getAccount();
         appCtxt.accountList.setActiveAccount(currAcct);
-		this.setSchedulerVisibility(currAcct.isZimbraAccount && !currAcct.isMain);
+		this.setSchedulerVisibility(currAcct.isZmailAccount && !currAcct.isMain);
 	}
 
 	var acct = appCtxt.getActiveAccount();
@@ -2552,7 +2552,7 @@ ZmApptEditView.prototype.getRequiredAttendeeEmails =
 function() {
     var attendees = [];
     var inputField = this._attInputField[ZmCalBaseItem.PERSON];
-    if(!inputField) { return attendees; } // input field can be null if zimbraFeatureGroupCalendarEnabled is FALSE
+    if(!inputField) { return attendees; } // input field can be null if zmailFeatureGroupCalendarEnabled is FALSE
 
     var requiredEmails = inputField.getValue();
     var items = AjxEmailAddress.split(requiredEmails);

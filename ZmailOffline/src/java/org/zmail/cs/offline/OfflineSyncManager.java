@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline;
+package org.zmail.cs.offline;
 
 import java.io.IOException;
 import java.net.ConnectException;
@@ -42,49 +42,49 @@ import org.dom4j.QName;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.RemoteServiceException;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.service.ServiceException.Argument;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.SoapFaultException;
-import com.zimbra.common.soap.SoapHttpTransport;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.ExceptionToString;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.SystemUtil;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.offline.DirectorySync;
-import com.zimbra.cs.account.offline.OfflineAccount;
-import com.zimbra.cs.account.offline.OfflineProvisioning;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.GalSync;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.OfflineMailboxManager;
-import com.zimbra.cs.mailbox.OfflineServiceException;
-import com.zimbra.cs.offline.ab.gab.GDataServiceException;
-import com.zimbra.cs.offline.common.OfflineConstants;
-import com.zimbra.cs.offline.common.OfflineConstants.SyncStatus;
-import com.zimbra.cs.offline.util.HeapDumpScanner;
-import com.zimbra.cs.service.UserServlet;
-import com.zimbra.cs.service.UserServletContext;
-import com.zimbra.cs.service.formatter.ArchiveFormatter;
-import com.zimbra.cs.service.formatter.ArchiveFormatter.Resolve;
-import com.zimbra.cs.service.formatter.FormatListener;
-import com.zimbra.cs.service.formatter.Formatter;
-import com.zimbra.cs.service.offline.OfflineDialogAction;
-import com.zimbra.cs.util.Zimbra;
-import com.zimbra.cs.util.ZimbraApplication;
-import com.zimbra.cs.util.yauth.AuthenticationException;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.RemoteServiceException;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.service.ServiceException.Argument;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.SoapFaultException;
+import org.zmail.common.soap.SoapHttpTransport;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.ExceptionToString;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.SystemUtil;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.offline.DirectorySync;
+import org.zmail.cs.account.offline.OfflineAccount;
+import org.zmail.cs.account.offline.OfflineProvisioning;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.GalSync;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.OfflineMailboxManager;
+import org.zmail.cs.mailbox.OfflineServiceException;
+import org.zmail.cs.offline.ab.gab.GDataServiceException;
+import org.zmail.cs.offline.common.OfflineConstants;
+import org.zmail.cs.offline.common.OfflineConstants.SyncStatus;
+import org.zmail.cs.offline.util.HeapDumpScanner;
+import org.zmail.cs.service.UserServlet;
+import org.zmail.cs.service.UserServletContext;
+import org.zmail.cs.service.formatter.ArchiveFormatter;
+import org.zmail.cs.service.formatter.ArchiveFormatter.Resolve;
+import org.zmail.cs.service.formatter.FormatListener;
+import org.zmail.cs.service.formatter.Formatter;
+import org.zmail.cs.service.offline.OfflineDialogAction;
+import org.zmail.cs.util.Zmail;
+import org.zmail.cs.util.ZmailApplication;
+import org.zmail.cs.util.yauth.AuthenticationException;
 
 public class OfflineSyncManager implements FormatListener {
 
@@ -363,7 +363,7 @@ public class OfflineSyncManager implements FormatListener {
 
     /**
      * register the flag that will be encoded into zdsync header.
-     * @param accountId zimbraId of account
+     * @param accountId zmailId of account
      * @param flag (dialogType, displayMsg) pair
      */
     public void registerDialog(String accountId, Pair<String, String> flag) {
@@ -372,7 +372,7 @@ public class OfflineSyncManager implements FormatListener {
 
     /**
      * unregister so the zdsync header will no longer has this flag.
-     * @param accountId zimbraId of account
+     * @param accountId zmailId of account
      * @param type dialog type of the flag, should be something defined in OfflineDialogAction.DialogType
      */
     public void unregisterDialog(String accountId, String type) {
@@ -609,7 +609,7 @@ public class OfflineSyncManager implements FormatListener {
         else
             code = RemoteServiceException.getErrorCode(cause);
 
-        if (ZimbraApplication.getInstance().isShutdown()) {
+        if (ZmailApplication.getInstance().isShutdown()) {
             OfflineLog.offline.info("sync aborted by shutdown: " + entry.getName());
         } else if (!isServiceActive(false)) {
             OfflineLog.offline.info("sync aborted by network: " + entry.getName());
@@ -686,12 +686,12 @@ public class OfflineSyncManager implements FormatListener {
 
     public synchronized boolean isServiceActive(boolean onRequest) {
         boolean active = isServiceUp && (onRequest || !isConnectionDown) &&
-                        !ZimbraApplication.getInstance().isShutdown() && !isUiLoading;
+                        !ZmailApplication.getInstance().isShutdown() && !isUiLoading;
         if (!active && onRequest && OfflineLog.offline.isDebugEnabled()) {
             String reason = "";
             if (!isServiceUp) {
                 reason = "service not yet initialized";
-            } else if (ZimbraApplication.getInstance().isShutdown()) {
+            } else if (ZmailApplication.getInstance().isShutdown()) {
                 reason = "application shutting down";
             } else if (isUiLoading) {
                 reason = "UI loading";
@@ -788,13 +788,13 @@ public class OfflineSyncManager implements FormatListener {
         }
         if (failIfConnDown && isConnectionDown)
             throw ServiceException.INTERRUPTED("network down - sync cancelled");
-        else if (ZimbraApplication.getInstance().isShutdown())
+        else if (ZmailApplication.getInstance().isShutdown())
             throw ServiceException.INTERRUPTED("system shutting down");
     }
 
     private void backgroundInit() {
         synchronized (this) {
-            String uri = LC.zimbra_admin_service_scheme.value() + "127.0.0.1"+ ":" + LC.zimbra_admin_service_port.value() +
+            String uri = LC.zmail_admin_service_scheme.value() + "127.0.0.1"+ ":" + LC.zmail_admin_service_port.value() +
             AdminConstants.ADMIN_SERVICE_URI;
             final int LOOP_COUNT = 24 * 10;
             int loop = 0;
@@ -828,7 +828,7 @@ public class OfflineSyncManager implements FormatListener {
                 } catch (InterruptedException e) {}
             }
             if (loop == LOOP_COUNT)
-                Zimbra.halt("Zimbra Desktop Service failed to initialize. Shutting down...");
+                Zmail.halt("Zmail Desktop Service failed to initialize. Shutting down...");
             //load all mailboxes so that timers are kicked off
             String[] toSkip = OfflineLC.zdesktop_sync_skip_idlist.value().split("\\s*,\\s*");
             for (String s : toSkip) {
@@ -882,7 +882,7 @@ public class OfflineSyncManager implements FormatListener {
                 }
             }
         } catch (Exception e) {
-            Zimbra.halt("Zimbra Desktop failed to initialize accounts. Shutting down...", e);
+            Zmail.halt("Zmail Desktop failed to initialize accounts. Shutting down...", e);
         }
     }
 
@@ -891,7 +891,7 @@ public class OfflineSyncManager implements FormatListener {
     private Map<Mailbox, Folder> inboxFolderCache = new ConcurrentHashMap<Mailbox, Folder>();
 
     /*
-        <zdsync xmlns="urn:zimbraOffline">
+        <zdsync xmlns="urn:zmailOffline">
           <account name="foo@domain1.com" id="1234-5678" status="online" [code="{CODE}"] lastsync="1234567" unread="32">
               [<error [message="{MESSAGE}"]>
                 [<exception>{EXCEPTION}</exception>]

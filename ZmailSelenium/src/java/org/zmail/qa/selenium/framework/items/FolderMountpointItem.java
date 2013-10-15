@@ -17,14 +17,14 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.framework.items;
+package org.zmail.qa.selenium.framework.items;
 
 import org.apache.log4j.*;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount.SOAP_DESTINATION_HOST_TYPE;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.ZmailAccount.SOAP_DESTINATION_HOST_TYPE;
 
 
 /**
@@ -81,17 +81,17 @@ public class FolderMountpointItem extends FolderItem {
 		if ( response == null )
 			throw new HarnessException("Element cannot be null");
 
-		// TODO: can the ZimbraSOAP methods be used to convert this response to item?
+		// TODO: can the ZmailSOAP methods be used to convert this response to item?
 		
 		// Example response:
-		//	        <GetFolderResponse xmlns="urn:zimbraMail">
+		//	        <GetFolderResponse xmlns="urn:zmailMail">
 	    //				<link id="257" rev="2" s="198" rid="257" oname="folder12986731211244" zid="e39a1429-cf7e-466d-8a69-4f23417d2ae2" name="mountpoint12986731211246" ms="2" owner="enus12986731211247@testdomain.com" n="1" l="1" perm="rw"/>
 	    //			</GetFolderResponse>
 
 		
 		logger.debug("importFromSOAP("+ response.prettyPrint() +")");
 		
-		Element fElement = ZimbraAccount.SoapClient.selectNode(response, "//mail:link");
+		Element fElement = ZmailAccount.SoapClient.selectNode(response, "//mail:link");
 		if ( fElement == null )
 			throw new HarnessException("response did not contain folder "+ response.prettyPrint());
 		
@@ -122,7 +122,7 @@ public class FolderMountpointItem extends FolderItem {
 	}
 
 
-	public static FolderMountpointItem importFromSOAP(ZimbraAccount account, String name) throws HarnessException {
+	public static FolderMountpointItem importFromSOAP(ZmailAccount account, String name) throws HarnessException {
 	   return importFromSOAP(account, name, SOAP_DESTINATION_HOST_TYPE.SERVER, null);
 	}
 
@@ -135,12 +135,12 @@ public class FolderMountpointItem extends FolderItem {
 	 * @return (FolderMountpointItem)
 	 * @throws HarnessException
 	 */
-	public static FolderMountpointItem importFromSOAP(ZimbraAccount account, String name,
+	public static FolderMountpointItem importFromSOAP(ZmailAccount account, String name,
 	      SOAP_DESTINATION_HOST_TYPE destType, String accountName) throws HarnessException {
 		logger.debug("importFromSOAP("+ account.EmailAddress +", "+ name +")");
 		
 		// Get all the folders
-		account.soapSend("<GetFolderRequest xmlns='urn:zimbraMail'/>", destType, accountName);
+		account.soapSend("<GetFolderRequest xmlns='urn:zmailMail'/>", destType, accountName);
 		String id = account.soapSelectValue("//mail:link[@name='"+ name +"']", "id");
 
 		if (id == null) {
@@ -149,7 +149,7 @@ public class FolderMountpointItem extends FolderItem {
 
 		// Get just the folder specified
 		account.soapSend(
-				"<GetFolderRequest xmlns='urn:zimbraMail'>" +
+				"<GetFolderRequest xmlns='urn:zmailMail'>" +
 					"<folder l='"+ id +"'/>" +
 				"</GetFolderRequest>",
 				destType, accountName);

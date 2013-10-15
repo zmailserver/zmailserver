@@ -14,7 +14,7 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_ybabelfish"
+<zimlet name="org_zmail_ybabelfish"
         version="1.2"
         label="${msg.label}"
         description="${msg.description}">
@@ -22,7 +22,7 @@
     <include>YBabelfishPrefsDialog.js</include>
     <includeCSS>ybabelfish.css</includeCSS>
     <resource>babelfish-icon.gif</resource>
-    <handlerObject>Com_Zimbra_Ybabelfish</handlerObject>
+    <handlerObject>Com_Zmail_Ybabelfish</handlerObject>
 
     <zimletPanelItem label="Yahoo! Translator" icon="Babelfish-panelIcon">
         <toolTipText>Drag-and-drop a conversation or message to translate using Yahoo! Translator.</toolTipText>

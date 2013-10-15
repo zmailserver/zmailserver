@@ -17,11 +17,11 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.html.ui;
+package org.zmail.qa.selenium.projects.html.ui;
 
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogError.DialogErrorID;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogError.DialogErrorID;
 
 
 /**
@@ -58,7 +58,7 @@ public class PageMain extends AbsTab {
 		throw new HarnessException("implement me!");
 	}
 	
-	public AbsDialog zGetErrorDialog(DialogErrorID zimbra) throws HarnessException {
+	public AbsDialog zGetErrorDialog(DialogErrorID zmail) throws HarnessException {
 		throw new HarnessException("implement me!");
 	}
 
@@ -109,7 +109,7 @@ public class PageMain extends AbsTab {
 		if ( !((AppHtmlClient)MyApplication).zPageLogin.zIsActive() ) {
 			((AppHtmlClient)MyApplication).zPageLogin.zNavigateTo();
 		}
-		((AppHtmlClient)MyApplication).zPageLogin.zLogin(ZimbraAccount.AccountHTML());
+		((AppHtmlClient)MyApplication).zPageLogin.zLogin(ZmailAccount.AccountHTML());
 		zWaitForActive();
 		
 	}
@@ -139,7 +139,7 @@ public class PageMain extends AbsTab {
 
 		// TODO: maybe handle this in the pulldown of PageLogin.zLogin() ?
 		// Force the html client to load
-		this.sOpen(ZimbraSeleniumProperties.getBaseURL());
+		this.sOpen(ZmailSeleniumProperties.getBaseURL());
 
 	}
 

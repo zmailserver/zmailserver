@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.tag;
+package org.zmail.cs.taglib.tag;
 
-import com.zimbra.cs.taglib.ZJspSession;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZPrefs;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.StringUtil;
+import org.zmail.cs.taglib.ZJspSession;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZPrefs;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.StringUtil;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
@@ -32,7 +32,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ModifyPrefsTag extends ZimbraSimpleTag {
+public class ModifyPrefsTag extends ZmailSimpleTag {
 
     protected Map<String, Object> mAttrs = new HashMap<String,Object>();
     private String mVar;
@@ -51,8 +51,8 @@ public class ModifyPrefsTag extends ZimbraSimpleTag {
             boolean update = !mAttrs.isEmpty();
             if (update) {
                 mailbox.modifyPrefs(mAttrs);
-                if (mAttrs.containsKey(Provisioning.A_zimbraPrefSkin)) {
-                    String skin = (String)mAttrs.get(Provisioning.A_zimbraPrefSkin);
+                if (mAttrs.containsKey(Provisioning.A_zmailPrefSkin)) {
+                    String skin = (String)mAttrs.get(Provisioning.A_zmailPrefSkin);
                     Cookie skinCookie = new Cookie("ZM_SKIN", skin);
                     skinCookie.setMaxAge(63072000);
                     skinCookie.setPath("/");

@@ -45,7 +45,7 @@ function() {
 
 ZmTaskView.prototype.getTitle =
 function() {
-	return [ZmMsg.zimbraTitle, this._calItem.getName()].join(": ");
+	return [ZmMsg.zmailTitle, this._calItem.getName()].join(": ");
 };
 
 ZmTaskView.prototype.close =

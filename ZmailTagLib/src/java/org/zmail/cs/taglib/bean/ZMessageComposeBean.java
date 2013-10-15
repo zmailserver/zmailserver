@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.bean;
+package org.zmail.cs.taglib.bean;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -39,38 +39,38 @@ import org.apache.commons.httpclient.methods.multipart.StringPart;
 import org.apache.commons.httpclient.methods.multipart.Part;
 import org.apache.commons.httpclient.methods.multipart.PartSource;
 
-import com.zimbra.common.calendar.ParsedDuration;
-import com.zimbra.common.calendar.TZIDMapper;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.taglib.tag.i18n.I18nUtil;
-import com.zimbra.client.ZAlarm;
-import com.zimbra.client.ZDateTime;
-import com.zimbra.client.ZEmailAddress;
-import com.zimbra.client.ZFolder;
-import com.zimbra.client.ZIdentity;
-import com.zimbra.client.ZInvite;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZPrefs;
-import com.zimbra.client.ZSignature;
-import com.zimbra.client.ZSimpleRecurrence;
-import com.zimbra.client.ZInvite.ZAttendee;
-import com.zimbra.client.ZInvite.ZByDayWeekDay;
-import com.zimbra.client.ZInvite.ZClass;
-import com.zimbra.client.ZInvite.ZComponent;
-import com.zimbra.client.ZInvite.ZFreeBusyStatus;
-import com.zimbra.client.ZInvite.ZOrganizer;
-import com.zimbra.client.ZInvite.ZParticipantStatus;
-import com.zimbra.client.ZInvite.ZRole;
-import com.zimbra.client.ZInvite.ZStatus;
-import com.zimbra.client.ZInvite.ZTransparency;
-import com.zimbra.client.ZInvite.ZWeekDay;
-import com.zimbra.client.ZMailbox.ReplyVerb;
-import com.zimbra.client.ZMailbox.ZOutgoingMessage;
-import com.zimbra.client.ZMailbox.ZOutgoingMessage.AttachedMessagePart;
-import com.zimbra.client.ZMailbox.ZOutgoingMessage.MessagePart;
-import com.zimbra.client.ZSimpleRecurrence.ZSimpleRecurrenceEnd;
-import com.zimbra.client.ZSimpleRecurrence.ZSimpleRecurrenceType;
+import org.zmail.common.calendar.ParsedDuration;
+import org.zmail.common.calendar.TZIDMapper;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.taglib.tag.i18n.I18nUtil;
+import org.zmail.client.ZAlarm;
+import org.zmail.client.ZDateTime;
+import org.zmail.client.ZEmailAddress;
+import org.zmail.client.ZFolder;
+import org.zmail.client.ZIdentity;
+import org.zmail.client.ZInvite;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZPrefs;
+import org.zmail.client.ZSignature;
+import org.zmail.client.ZSimpleRecurrence;
+import org.zmail.client.ZInvite.ZAttendee;
+import org.zmail.client.ZInvite.ZByDayWeekDay;
+import org.zmail.client.ZInvite.ZClass;
+import org.zmail.client.ZInvite.ZComponent;
+import org.zmail.client.ZInvite.ZFreeBusyStatus;
+import org.zmail.client.ZInvite.ZOrganizer;
+import org.zmail.client.ZInvite.ZParticipantStatus;
+import org.zmail.client.ZInvite.ZRole;
+import org.zmail.client.ZInvite.ZStatus;
+import org.zmail.client.ZInvite.ZTransparency;
+import org.zmail.client.ZInvite.ZWeekDay;
+import org.zmail.client.ZMailbox.ReplyVerb;
+import org.zmail.client.ZMailbox.ZOutgoingMessage;
+import org.zmail.client.ZMailbox.ZOutgoingMessage.AttachedMessagePart;
+import org.zmail.client.ZMailbox.ZOutgoingMessage.MessagePart;
+import org.zmail.client.ZSimpleRecurrence.ZSimpleRecurrenceEnd;
+import org.zmail.client.ZSimpleRecurrence.ZSimpleRecurrenceType;
 
 public class ZMessageComposeBean {
 
@@ -183,7 +183,7 @@ public class ZMessageComposeBean {
     private String mContentType = "text/plain";
     private String mContent;
     private String mHtmlContent;
-    private String mMessageId; // zimbra internal message id of message for reply/forward
+    private String mMessageId; // zmail internal message id of message for reply/forward
     private String mInReplyTo; // original message-id header
     private String mDraftId; // id of draft we are editting
     private List<MessageAttachment> mMessageAttachments;
@@ -612,7 +612,7 @@ public class ZMessageComposeBean {
      * @param msg Message for reply/replyAll/forward
      * @param mailbox mailbox object
      * @param pc the JSP PageContext for localization information
-     * @throws com.zimbra.common.service.ServiceException on error
+     * @throws org.zmail.common.service.ServiceException on error
      * @param options appointment options
      */
     public ZMessageComposeBean(Action action, ZMessageBean msg, ZMailbox mailbox, PageContext pc,

@@ -26,7 +26,7 @@
 <!--
   <filter>
     <filter-name>ZimletFilter</filter-name>
-    <filter-class>com.zimbra.cs.zimlet.ZimletFilter</filter-class>
+    <filter-class>org.zmail.cs.zimlet.ZimletFilter</filter-class>
   </filter>
 
   <filter-mapping>
@@ -36,13 +36,13 @@
 
   <servlet>
     <servlet-name>ProxyServlet</servlet-name>
-    <servlet-class>com.zimbra.cs.zimlet.ProxyServlet</servlet-class>
+    <servlet-class>org.zmail.cs.zimlet.ProxyServlet</servlet-class>
     <load-on-startup>8</load-on-startup>
   </servlet>
 
   <servlet>
     <servlet-name>ZimletResources</servlet-name>
-    <servlet-class>com.zimbra.cs.zimlet.ZimletResources</servlet-class>
+    <servlet-class>org.zmail.cs.zimlet.ZimletResources</servlet-class>
   </servlet>
 
   <servlet-mapping>

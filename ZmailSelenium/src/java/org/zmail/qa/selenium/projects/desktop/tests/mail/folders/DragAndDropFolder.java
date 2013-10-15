@@ -14,19 +14,19 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.mail.folders;
+package org.zmail.qa.selenium.projects.desktop.tests.mail.folders;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.GeneralUtility;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.Toaster;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.GeneralUtility;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.Toaster;
 
 public class DragAndDropFolder extends AjaxCommonTest{
 
@@ -50,11 +50,11 @@ public class DragAndDropFolder extends AjaxCommonTest{
 		// Create two subfolders in the inbox
 		// One folder to Drag
 		// Another folder to drop into
-		String name1 = "folder" + ZimbraSeleniumProperties.getUniqueString();
-		String name2 = "folder" + ZimbraSeleniumProperties.getUniqueString();
+		String name1 = "folder" + ZmailSeleniumProperties.getUniqueString();
+		String name2 = "folder" + ZmailSeleniumProperties.getUniqueString();
 
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+				"<CreateFolderRequest xmlns='urn:zmailMail'>" +
 				"<folder name='"+ name1 +"' l='"+ inbox.getId() +"'/>" +
 		"</CreateFolderRequest>");
 
@@ -63,7 +63,7 @@ public class DragAndDropFolder extends AjaxCommonTest{
 		ZAssert.assertNotNull(subfolder1, "Verify the first subfolder is available");
 
 		app.zGetActiveAccount().soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+				"<CreateFolderRequest xmlns='urn:zmailMail'>" +
 				"<folder name='"+ name2 +"' l='"+ inbox.getId() +"'/>" +
 		"</CreateFolderRequest>");
 

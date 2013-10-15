@@ -83,7 +83,7 @@ function(batchCmd) {
  */
 ZmResourceList.prototype.searchCalResources =
 function(params) {
-    var soapDoc = AjxSoapDoc.create("SearchCalendarResourcesRequest", "urn:zimbraAccount");
+    var soapDoc = AjxSoapDoc.create("SearchCalendarResourcesRequest", "urn:zmailAccount");
     var method = soapDoc.getMethod();
     if (params.attrs) {
         AjxUtil.arrayRemove(params.attrs, "fullName");

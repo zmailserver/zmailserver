@@ -21,12 +21,12 @@ ZaProxyCAUpload.myXFormModifier = function(xFormObject) {
     var uploadCertUI =
         {type:_GROUP_,  numCols: 3, colSizes: ["275px","250px","100px"], colSpan: "*",
             items: [
-            {type:_OUTPUT_, value: com_zimbra_cert_manager.certFile,
+            {type:_OUTPUT_, value: org_zmail_cert_manager.certFile,
                 containerCssClass:(appNewUI?"gridGroupBodyLabel":"xform_label"),
                 containerCssStyle:(appNewUI?"text-align:left;border-right: 1px solid":_UNDEFINED_)
             },
             {type:_OUTPUT_, value: ZaProxyCAUpload.getUploadFormHtml(this) },
-            {type: _DWT_BUTTON_ , label: com_zimbra_cert_manager.CERT_UploadButton, width: "9em",
+            {type: _DWT_BUTTON_ , label: org_zmail_cert_manager.CERT_UploadButton, width: "9em",
                onActivate: ZaProxyCAUpload.uploadCertKeyFile
             }
         ]};
@@ -43,7 +43,7 @@ ZaProxyCAUpload.myXFormModifier = function(xFormObject) {
         for(var j = 0; j < tempItems.length; j ++) {
             if(tempItems[j].label == ZaMsg.NAD_AUTH_ClientConfigure) {
                 for(var k = 0; k < tempItems[j].items.length; k++) {
-                    if(tempItems[j].items[k].label == ZaMsg.NAD_zimbraReverseProxyClientCertCA) {
+                    if(tempItems[j].items[k].label == ZaMsg.NAD_zmailReverseProxyClientCertCA) {
                         tempItems[j].items.splice(k+1,0,uploadCertUI);
                         break;
                     }
@@ -64,7 +64,7 @@ ZaProxyCAUpload.myDlgXFormModifier = function(xFormObject) {
             cssStyle: "margin-bottom: 10px;margin-left: 195px",
             items: [
             {type:_OUTPUT_, value: ZaProxyCAUpload.getUploadFormHtml(this) },
-            {type: _DWT_BUTTON_ , label: com_zimbra_cert_manager.CERT_UploadButton, width: "9em",
+            {type: _DWT_BUTTON_ , label: org_zmail_cert_manager.CERT_UploadButton, width: "9em",
                onActivate: ZaProxyCAUpload.uploadCertKeyFile
             }
         ]};
@@ -151,7 +151,7 @@ ZaProxyCAUpload.uploadCertKeyFile = function() {
             if (v != null && v.length != 0) {
                 if (ZaUtil.findValueInArray(filenameArr, v) != -1) {
                     ZaApp.getInstance().getCurrentController().popupErrorDialog (
-                        com_zimbra_cert_manager.dupFileNameError + v
+                        org_zmail_cert_manager.dupFileNameError + v
                     );
                     return ;
                 }
@@ -160,7 +160,7 @@ ZaProxyCAUpload.uploadCertKeyFile = function() {
 
             if ( n == "certFile") {
                 if (v == null ||  v.length == 0) {
-                    ZaApp.getInstance().getCurrentController().popupErrorDialog(com_zimbra_cert_manager.noCertFileError);
+                    ZaApp.getInstance().getCurrentController().popupErrorDialog(org_zmail_cert_manager.noCertFileError);
                     return ;
                 }else{
                     ZaProxyCAUpload.uploadInputs["certFile"] = v ;
@@ -176,7 +176,7 @@ ZaProxyCAUpload.uploadCertKeyFile = function() {
         um.execute(certUploadCallback, document.getElementById (certFormId));
         return ;
     }catch (err) {
-        ZaApp.getInstance().getCurrentController().popupErrorDialog(com_zimbra_cert_manager.certFileNameError) ;
+        ZaApp.getInstance().getCurrentController().popupErrorDialog(org_zmail_cert_manager.certFileNameError) ;
         return ;
     }
 }
@@ -214,7 +214,7 @@ function (status, uploadResults) {
 				}
 			}
         }
-	    var soapDoc = AjxSoapDoc.create("UploadProxyCARequest", "urn:zimbraAdmin", null);
+	    var soapDoc = AjxSoapDoc.create("UploadProxyCARequest", "urn:zmailAdmin", null);
         if(uploadFiles.aid)
             soapDoc.set("cert.aid", uploadFiles.aid);
         if(uploadFiles.filename)
@@ -225,14 +225,14 @@ function (status, uploadResults) {
         try {
                 var reqMgrParams = {} ;
                 reqMgrParams.controller = ZaApp.getInstance().getCurrentController();
-                reqMgrParams.busyMsg = com_zimbra_cert_manager.BUSY_UPLOAD_CERTKEY;
+                reqMgrParams.busyMsg = org_zmail_cert_manager.BUSY_UPLOAD_CERTKEY;
                 var resp = ZaRequestMgr.invoke(csfeParams, reqMgrParams ).Body.UploadProxyCAResponse;
                 if(resp && resp.cert_content) {
-                    var ref = ZaGlobalConfig.A_zimbraReverseProxyClientCertCA;
+                    var ref = ZaGlobalConfig.A_zmailReverseProxyClientCertCA;
                     if(this.getForm().parent instanceof ZaServerXFormView)
-                        ref = ZaServer.A_zimbraReverseProxyClientCertCA;
+                        ref = ZaServer.A_zmailReverseProxyClientCertCA;
                     else if(this.getForm().parent instanceof ZaDomainXFormView || this.getForm().parent instanceof ZaNewDomainXWizard)
-                        ref = ZaDomain.A_zimbraReverseProxyClientCertCA;
+                        ref = ZaDomain.A_zmailReverseProxyClientCertCA;
                     form.getModel().setInstanceValue(instance, ref, resp.cert_content);
                     form.parent.setDirty(true);
                     form.refresh () ;

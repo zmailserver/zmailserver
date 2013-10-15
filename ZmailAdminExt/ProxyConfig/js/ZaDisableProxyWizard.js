@@ -14,7 +14,7 @@
  */
 
 /*---Disable Proxy Wizard Model---*/
-if(ZaSettings && ZaSettings.EnabledZimlet["com_zimbra_proxy_config"]) {
+if(ZaSettings && ZaSettings.EnabledZimlet["org_zmail_proxy_config"]) {
 function ZaDisableProxy () {
 	ZaItem.call(this, "ZaDisableProxy");
 	this._init();
@@ -28,20 +28,20 @@ ZaDisableProxy.prototype.constructor = ZaDisableProxy;
 ZaDisableProxy.myXModel = {
 	items: [
 		// web proxy
-		{id: ZaProxyConfig.A_zimbraReverseProxyHttpEnabled, type: _ENUM_, ref: "attrs/" + ZaProxyConfig.A_zimbraReverseProxyHttpEnabled, choices: ZaModel.BOOLEAN_CHOICES},
-		{id: ZaProxyConfig.A_zimbraMailMode, type: _ENUM_, ref: "attrs/" + ZaProxyConfig.A_zimbraMailMode, choices: ZaProxyConfig.MAIL_MODE_CHOICES},
-		{id: ZaProxyConfig.A_zimbraMailPort, type: _PORT_, ref: "attrs/" + ZaProxyConfig.A_zimbraMailPort},
-		{id: ZaProxyConfig.A_zimbraMailSSLPort, type: _PORT_, ref: "attrs/" + ZaProxyConfig.A_zimbraMailSSLPort},
-		{id: ZaProxyConfig.A_zimbraAdminPort, type: _PORT_, ref: "attrs/" + ZaProxyConfig.A_zimbraAdminPort},
+		{id: ZaProxyConfig.A_zmailReverseProxyHttpEnabled, type: _ENUM_, ref: "attrs/" + ZaProxyConfig.A_zmailReverseProxyHttpEnabled, choices: ZaModel.BOOLEAN_CHOICES},
+		{id: ZaProxyConfig.A_zmailMailMode, type: _ENUM_, ref: "attrs/" + ZaProxyConfig.A_zmailMailMode, choices: ZaProxyConfig.MAIL_MODE_CHOICES},
+		{id: ZaProxyConfig.A_zmailMailPort, type: _PORT_, ref: "attrs/" + ZaProxyConfig.A_zmailMailPort},
+		{id: ZaProxyConfig.A_zmailMailSSLPort, type: _PORT_, ref: "attrs/" + ZaProxyConfig.A_zmailMailSSLPort},
+		{id: ZaProxyConfig.A_zmailAdminPort, type: _PORT_, ref: "attrs/" + ZaProxyConfig.A_zmailAdminPort},
 		
 		// mail proxy
-		{id: ZaProxyConfig.A_zimbraReverseProxyMailEnabled, type: _ENUM_, ref: "attrs/" + ZaProxyConfig.A_zimbraReverseProxyMailEnabled, choices: ZaModel.BOOLEAN_CHOICES},
-		{id: ZaProxyConfig.A_zimbraImapBindPort, type: _PORT_, ref: "attrs/" + ZaProxyConfig.A_zimbraImapBindPort},
-		{id: ZaProxyConfig.A_zimbraImapSSLBindPort, type: _PORT_, ref: "attrs/" + ZaProxyConfig.A_zimbraImapSSLBindPort},
-		{id: ZaProxyConfig.A_zimbraPop3BindPort, type: _PORT_, ref: "attrs/" + ZaProxyConfig.A_zimbraPop3BindPort},
-		{id: ZaProxyConfig.A_zimbraPop3SSLBindPort, type: _PORT_, ref: "attrs/" + ZaProxyConfig.A_zimbraPop3SSLBindPort},
-        {id: ZaProxyConfig.A_zimbraImapCleartextLoginEnabled, type: _ENUM_, ref: "attrs/" + ZaProxyConfig.A_zimbraImapCleartextLoginEnabled, choices: ZaModel.BOOLEAN_CHOICES},
-        {id: ZaProxyConfig.A_zimbraPop3CleartextLoginEnabled, type: _ENUM_, ref: "attrs/" + ZaProxyConfig.A_zimbraPop3CleartextLoginEnabled, choices: ZaModel.BOOLEAN_CHOICES},
+		{id: ZaProxyConfig.A_zmailReverseProxyMailEnabled, type: _ENUM_, ref: "attrs/" + ZaProxyConfig.A_zmailReverseProxyMailEnabled, choices: ZaModel.BOOLEAN_CHOICES},
+		{id: ZaProxyConfig.A_zmailImapBindPort, type: _PORT_, ref: "attrs/" + ZaProxyConfig.A_zmailImapBindPort},
+		{id: ZaProxyConfig.A_zmailImapSSLBindPort, type: _PORT_, ref: "attrs/" + ZaProxyConfig.A_zmailImapSSLBindPort},
+		{id: ZaProxyConfig.A_zmailPop3BindPort, type: _PORT_, ref: "attrs/" + ZaProxyConfig.A_zmailPop3BindPort},
+		{id: ZaProxyConfig.A_zmailPop3SSLBindPort, type: _PORT_, ref: "attrs/" + ZaProxyConfig.A_zmailPop3SSLBindPort},
+        {id: ZaProxyConfig.A_zmailImapCleartextLoginEnabled, type: _ENUM_, ref: "attrs/" + ZaProxyConfig.A_zmailImapCleartextLoginEnabled, choices: ZaModel.BOOLEAN_CHOICES},
+        {id: ZaProxyConfig.A_zmailPop3CleartextLoginEnabled, type: _ENUM_, ref: "attrs/" + ZaProxyConfig.A_zmailPop3CleartextLoginEnabled, choices: ZaModel.BOOLEAN_CHOICES},
 
 		// utility
 		{id: ZaProxyConfig.A2_mbx_name_array, type: _LIST_, itemType: _STRING_},
@@ -53,19 +53,19 @@ ZaDisableProxy.myXModel = {
 ZaDisableProxy.init = function () {
 	this.attrs = {};
 	
-	this.attrs[ZaProxyConfig.A_zimbraReverseProxyHttpEnabled] = "FALSE";
-	this.attrs[ZaProxyConfig.A_zimbraMailMode] = "http";
-	this.attrs[ZaProxyConfig.A_zimbraMailPort] = ZaProxyConfig.DEFAULT_MAIL_PORT;
-	this.attrs[ZaProxyConfig.A_zimbraMailSSLPort] = ZaProxyConfig.DEFAULT_MAIL_SSL_PORT;
-	this.attrs[ZaProxyConfig.A_zimbraAdminPort] = ZaProxyConfig.DEFAULT_ADMIN_CONSOLE_PORT_ZCS;
+	this.attrs[ZaProxyConfig.A_zmailReverseProxyHttpEnabled] = "FALSE";
+	this.attrs[ZaProxyConfig.A_zmailMailMode] = "http";
+	this.attrs[ZaProxyConfig.A_zmailMailPort] = ZaProxyConfig.DEFAULT_MAIL_PORT;
+	this.attrs[ZaProxyConfig.A_zmailMailSSLPort] = ZaProxyConfig.DEFAULT_MAIL_SSL_PORT;
+	this.attrs[ZaProxyConfig.A_zmailAdminPort] = ZaProxyConfig.DEFAULT_ADMIN_CONSOLE_PORT_ZCS;
 	
-	this.attrs[ZaProxyConfig.A_zimbraReverseProxyMailEnabled] = "FALSE";
-	this.attrs[ZaProxyConfig.A_zimbraImapBindPort] = ZaProxyConfig.DEFAULT_IMAP_PORT;
-	this.attrs[ZaProxyConfig.A_zimbraImapSSLBindPort] = ZaProxyConfig.DEFAULT_IMAP_SSL_PORT;
-	this.attrs[ZaProxyConfig.A_zimbraPop3BindPort] = ZaProxyConfig.DEFAULT_POP3_PORT;
-	this.attrs[ZaProxyConfig.A_zimbraPop3SSLBindPort] = ZaProxyConfig.DEFAULT_POP3_SSL_PORT;
-	this.attrs[ZaProxyConfig.A_zimbraImapCleartextLoginEnabled] = "FALSE";
-	this.attrs[ZaProxyConfig.A_zimbraPop3CleartextLoginEnabled] = "FALSE";
+	this.attrs[ZaProxyConfig.A_zmailReverseProxyMailEnabled] = "FALSE";
+	this.attrs[ZaProxyConfig.A_zmailImapBindPort] = ZaProxyConfig.DEFAULT_IMAP_PORT;
+	this.attrs[ZaProxyConfig.A_zmailImapSSLBindPort] = ZaProxyConfig.DEFAULT_IMAP_SSL_PORT;
+	this.attrs[ZaProxyConfig.A_zmailPop3BindPort] = ZaProxyConfig.DEFAULT_POP3_PORT;
+	this.attrs[ZaProxyConfig.A_zmailPop3SSLBindPort] = ZaProxyConfig.DEFAULT_POP3_SSL_PORT;
+	this.attrs[ZaProxyConfig.A_zmailImapCleartextLoginEnabled] = "FALSE";
+	this.attrs[ZaProxyConfig.A_zmailPop3CleartextLoginEnabled] = "FALSE";
 	
 	this.initServerList();
 }
@@ -78,12 +78,12 @@ ZaDisableProxy.prototype.initServerList = function() {
 	var servers = ZaServer.getAll().getArray();
 	for(var i = 0; i < servers.length; i++) {
 		var s = servers[i];
-		if (s.attrs[ZaServer.A_zimbraMailProxyServiceEnabled]) { // we want to disable the "enabled" proxy server
-			this[ZaProxyConfig.A2_proxy_name_array].push(s["zimbraServiceHostname"]);
+		if (s.attrs[ZaServer.A_zmailMailProxyServiceEnabled]) { // we want to disable the "enabled" proxy server
+			this[ZaProxyConfig.A2_proxy_name_array].push(s["zmailServiceHostname"]);
 		}
 		
-		if (s.attrs[ZaServer.A_zimbraMailboxServiceEnabled]) {
-			this[ZaProxyConfig.A2_mbx_name_array].push(s["zimbraServiceHostname"]);
+		if (s.attrs[ZaServer.A_zmailMailboxServiceEnabled]) {
+			this[ZaProxyConfig.A2_mbx_name_array].push(s["zmailServiceHostname"]);
 		}
 	}
 	
@@ -98,7 +98,7 @@ ZaDisableProxy.prototype.initServerList = function() {
 	var allServers = {};
 	for(var i = 0; i < servers.length; i++) {
 		var s = servers[i];
-		allServers[s["zimbraServiceHostname"]] = s;
+		allServers[s["zmailServiceHostname"]] = s;
 	}
 	this[ZaProxyConfig.A2_all_servers] = allServers;
 }
@@ -109,13 +109,13 @@ function ZaDisableProxyWizard (parent) {
 	if (AjxEnv.isIE) {
 		w = "550px" ;
 	}
-	ZaXWizardDialog.call(this, parent, null, com_zimbra_proxy_config.LBL_DisableProxyWizTitle, w, "330px", "ZaDisableProxyWizard");
+	ZaXWizardDialog.call(this, parent, null, org_zmail_proxy_config.LBL_DisableProxyWizTitle, w, "330px", "ZaDisableProxyWizard");
 
 	this.stepChoices = [
-		{label: com_zimbra_proxy_config.LBL_ProxyWizardStepSelectServer, value: ZaDisableProxyWizard.STEP_SELECT_SERVER},
-		{label: com_zimbra_proxy_config.LBL_ProxyWizardStepWebProxy,     value: ZaDisableProxyWizard.STEP_CONFIG_WEBPROXY},
-		{label: com_zimbra_proxy_config.LBL_ProxyWizardStepMailProxy,    value: ZaDisableProxyWizard.STEP_CONFIG_MAILPROXY},
-		{label: com_zimbra_proxy_config.LBL_ProxyWizardStepFinish,       value: ZaDisableProxyWizard.STEP_FINISH}
+		{label: org_zmail_proxy_config.LBL_ProxyWizardStepSelectServer, value: ZaDisableProxyWizard.STEP_SELECT_SERVER},
+		{label: org_zmail_proxy_config.LBL_ProxyWizardStepWebProxy,     value: ZaDisableProxyWizard.STEP_CONFIG_WEBPROXY},
+		{label: org_zmail_proxy_config.LBL_ProxyWizardStepMailProxy,    value: ZaDisableProxyWizard.STEP_CONFIG_MAILPROXY},
+		{label: org_zmail_proxy_config.LBL_ProxyWizardStepFinish,       value: ZaDisableProxyWizard.STEP_FINISH}
 	];
 	
 	this.initForm(ZaDisableProxy.myXModel, this.getMyXForm());
@@ -206,29 +206,29 @@ ZaDisableProxyWizard.prototype.applyProxyConfig = function() {
 	var proxyServer = allServers[instance[ZaProxyConfig.A2_target_server]];
 
 	// 1) modify proxy server
-	var proxyDoc = AjxSoapDoc.create("ModifyServerRequest", ZaZimbraAdmin.URN);
+	var proxyDoc = AjxSoapDoc.create("ModifyServerRequest", ZaZmailAdmin.URN);
 	proxyDoc.set("id", proxyServer.id);
-	if (instance.attrs[ZaProxyConfig.A_zimbraReverseProxyHttpEnabled] == "FALSE") {
+	if (instance.attrs[ZaProxyConfig.A_zmailReverseProxyHttpEnabled] == "FALSE") {
 		// apply web proxy config
-		ZaDisableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zimbraReverseProxyHttpEnabled, instance.attrs[ZaProxyConfig.A_zimbraReverseProxyHttpEnabled]);
-		ZaDisableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zimbraReverseProxyAdminEnabled, "FALSE");
-		ZaDisableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zimbraMailSSLProxyPort, "0", md);
-		ZaDisableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zimbraMailProxyPort, "0", md);
-		ZaDisableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zimbraAdminProxyPort, "0", md);
+		ZaDisableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zmailReverseProxyHttpEnabled, instance.attrs[ZaProxyConfig.A_zmailReverseProxyHttpEnabled]);
+		ZaDisableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zmailReverseProxyAdminEnabled, "FALSE");
+		ZaDisableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zmailMailSSLProxyPort, "0", md);
+		ZaDisableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zmailMailProxyPort, "0", md);
+		ZaDisableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zmailAdminProxyPort, "0", md);
 	}
 	
-	if (instance.attrs[ZaProxyConfig.A_zimbraReverseProxyMailEnabled] == "FALSE") {
+	if (instance.attrs[ZaProxyConfig.A_zmailReverseProxyMailEnabled] == "FALSE") {
 		// apply mail proxy config
-		ZaDisableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zimbraReverseProxyMailEnabled, instance.attrs[ZaProxyConfig.A_zimbraReverseProxyMailEnabled]);
-		ZaDisableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zimbraImapProxyBindPort, "0", md);
-		ZaDisableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zimbraPop3ProxyBindPort, "0", md);
-		ZaDisableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zimbraImapSSLProxyBindPort, "0", md);
-		ZaDisableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zimbraPop3SSLProxyBindPort, "0", md);
+		ZaDisableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zmailReverseProxyMailEnabled, instance.attrs[ZaProxyConfig.A_zmailReverseProxyMailEnabled]);
+		ZaDisableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zmailImapProxyBindPort, "0", md);
+		ZaDisableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zmailPop3ProxyBindPort, "0", md);
+		ZaDisableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zmailImapSSLProxyBindPort, "0", md);
+		ZaDisableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zmailPop3SSLProxyBindPort, "0", md);
 	}
 	
-	if (proxyServer.attrs[ZaProxyConfig.A_zimbraReverseProxyHttpEnabled] == "FALSE" &&
-		proxyServer.attrs[ZaProxyConfig.A_zimbraReverseProxyMailEnabled] == "FALSE") {
-		ZaDisableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zimbraServiceEnabled, "proxy", null, "-");
+	if (proxyServer.attrs[ZaProxyConfig.A_zmailReverseProxyHttpEnabled] == "FALSE" &&
+		proxyServer.attrs[ZaProxyConfig.A_zmailReverseProxyMailEnabled] == "FALSE") {
+		ZaDisableProxyWizard.setAttr(proxyDoc, ZaProxyConfig.A_zmailServiceEnabled, "proxy", null, "-");
 	}
     
 	var params1 = new Object();
@@ -242,33 +242,33 @@ ZaDisableProxyWizard.prototype.applyProxyConfig = function() {
 	
 	// 2) modify upstream servers
 	
-	var upServers = proxyServer.attrs[ZaProxyConfig.A_zimbraReverseProxyUpstreamServers];
+	var upServers = proxyServer.attrs[ZaProxyConfig.A_zmailReverseProxyUpstreamServers];
 	if (upServers == null) {
 		upServers = instance[ZaProxyConfig.A2_mbx_name_array];
 	}
 	
-	var batchDoc = AjxSoapDoc.create("BatchRequest", "urn:zimbra");
+	var batchDoc = AjxSoapDoc.create("BatchRequest", "urn:zmail");
 	batchDoc.setMethodAttribute("onerror", "stop");
 	for (var s in upServers) {
-		var md = batchDoc.set("ModifyServerRequest", null, null, ZaZimbraAdmin.URN);
+		var md = batchDoc.set("ModifyServerRequest", null, null, ZaZmailAdmin.URN);
 		var server = allServers[upServers[s]];
 		var id = server.id;
 		batchDoc.set("id", id, md);
 		
-		if (instance.attrs[ZaProxyConfig.A_zimbraReverseProxyHttpEnabled] == "FALSE") {
-			ZaDisableProxyWizard.setAttr(batchDoc, ZaProxyConfig.A_zimbraMailSSLPort, instance.attrs[ZaProxyConfig.A_zimbraMailSSLPort], md);
-			ZaDisableProxyWizard.setAttr(batchDoc, ZaProxyConfig.A_zimbraMailPort, instance.attrs[ZaProxyConfig.A_zimbraMailPort], md);
-			ZaDisableProxyWizard.setAttr(batchDoc, ZaProxyConfig.A_zimbraMailMode, instance.attrs[ZaProxyConfig.A_zimbraMailMode], md);
-			ZaDisableProxyWizard.setAttr(batchDoc, ZaProxyConfig.A_zimbraAdminPort, instance.attrs[ZaProxyConfig.A_zimbraAdminPort], md);
+		if (instance.attrs[ZaProxyConfig.A_zmailReverseProxyHttpEnabled] == "FALSE") {
+			ZaDisableProxyWizard.setAttr(batchDoc, ZaProxyConfig.A_zmailMailSSLPort, instance.attrs[ZaProxyConfig.A_zmailMailSSLPort], md);
+			ZaDisableProxyWizard.setAttr(batchDoc, ZaProxyConfig.A_zmailMailPort, instance.attrs[ZaProxyConfig.A_zmailMailPort], md);
+			ZaDisableProxyWizard.setAttr(batchDoc, ZaProxyConfig.A_zmailMailMode, instance.attrs[ZaProxyConfig.A_zmailMailMode], md);
+			ZaDisableProxyWizard.setAttr(batchDoc, ZaProxyConfig.A_zmailAdminPort, instance.attrs[ZaProxyConfig.A_zmailAdminPort], md);
 		}
 		
-		if (instance.attrs[ZaProxyConfig.A_zimbraReverseProxyMailEnabled] == "FALSE") {
-			ZaDisableProxyWizard.setAttr(batchDoc, ZaProxyConfig.A_zimbraImapBindPort, instance.attrs[ZaProxyConfig.A_zimbraImapBindPort], md);
-			ZaDisableProxyWizard.setAttr(batchDoc, ZaProxyConfig.A_zimbraPop3BindPort, instance.attrs[ZaProxyConfig.A_zimbraPop3BindPort], md);
-			ZaDisableProxyWizard.setAttr(batchDoc, ZaProxyConfig.A_zimbraImapSSLBindPort, instance.attrs[ZaProxyConfig.A_zimbraImapSSLBindPort], md);
-			ZaDisableProxyWizard.setAttr(batchDoc, ZaProxyConfig.A_zimbraPop3SSLBindPort, instance.attrs[ZaProxyConfig.A_zimbraPop3SSLBindPort], md);
-			ZaDisableProxyWizard.setAttr(batchDoc, ZaProxyConfig.A_zimbraImapCleartextLoginEnabled, instance.attrs[ZaProxyConfig.A_zimbraImapCleartextLoginEnabled], md);
-			ZaDisableProxyWizard.setAttr(batchDoc, ZaProxyConfig.A_zimbraPop3CleartextLoginEnabled, instance.attrs[ZaProxyConfig.A_zimbraPop3CleartextLoginEnabled], md);
+		if (instance.attrs[ZaProxyConfig.A_zmailReverseProxyMailEnabled] == "FALSE") {
+			ZaDisableProxyWizard.setAttr(batchDoc, ZaProxyConfig.A_zmailImapBindPort, instance.attrs[ZaProxyConfig.A_zmailImapBindPort], md);
+			ZaDisableProxyWizard.setAttr(batchDoc, ZaProxyConfig.A_zmailPop3BindPort, instance.attrs[ZaProxyConfig.A_zmailPop3BindPort], md);
+			ZaDisableProxyWizard.setAttr(batchDoc, ZaProxyConfig.A_zmailImapSSLBindPort, instance.attrs[ZaProxyConfig.A_zmailImapSSLBindPort], md);
+			ZaDisableProxyWizard.setAttr(batchDoc, ZaProxyConfig.A_zmailPop3SSLBindPort, instance.attrs[ZaProxyConfig.A_zmailPop3SSLBindPort], md);
+			ZaDisableProxyWizard.setAttr(batchDoc, ZaProxyConfig.A_zmailImapCleartextLoginEnabled, instance.attrs[ZaProxyConfig.A_zmailImapCleartextLoginEnabled], md);
+			ZaDisableProxyWizard.setAttr(batchDoc, ZaProxyConfig.A_zmailPop3CleartextLoginEnabled, instance.attrs[ZaProxyConfig.A_zmailPop3CleartextLoginEnabled], md);
 		}
 	}
 	
@@ -324,12 +324,12 @@ function(obj) {
 }
 
 ZaDisableProxyWizard.isWebProxyDisabled = function() {
-	var webProxyEnabled = this.getInstanceValue(ZaProxyConfig.A_zimbraReverseProxyHttpEnabled);
+	var webProxyEnabled = this.getInstanceValue(ZaProxyConfig.A_zmailReverseProxyHttpEnabled);
 	return (webProxyEnabled == "FALSE");
 }
 
 ZaDisableProxyWizard.isMailProxyDisabled = function() {
-	var mailProxyEnabled = this.getInstanceValue(ZaProxyConfig.A_zimbraReverseProxyMailEnabled);
+	var mailProxyEnabled = this.getInstanceValue(ZaProxyConfig.A_zmailReverseProxyMailEnabled);
 	return (mailProxyEnabled == "FALSE");
 }
 
@@ -345,12 +345,12 @@ ZaDisableProxyWizard.myXFormModifier = function(xFormObject) {
 	
 	case_select_server.items = [
 		{type: _SPACER_, height: 10},
-		{type: _OUTPUT_, colSpan: 2, value: com_zimbra_proxy_config.LBL_ProxySelectProxyServer},
+		{type: _OUTPUT_, colSpan: 2, value: org_zmail_proxy_config.LBL_ProxySelectProxyServer},
 		{type: _SPACER_, height: 10},
 		{type: _GROUP_, colSpan: "*", colSizes: ["260px", "*"],
 		 items:[
 			{type: _OSELECT1_, ref: ZaProxyConfig.A2_target_server, 
-			 label: com_zimbra_proxy_config.LBL_ProxySelectProxyServerToDisableInDetail, 
+			 label: org_zmail_proxy_config.LBL_ProxySelectProxyServerToDisableInDetail, 
 			 labelLocation:_LEFT_, labelCssStyle: "text-align:left",
 			 choices: ZaDisableProxyWizard.proxyServerChoices,
 			 editable: false
@@ -369,42 +369,42 @@ ZaDisableProxyWizard.myXFormModifier = function(xFormObject) {
 	case_config_webproxy.items = [
 		{type: _GROUP_, numCols:2, colSpan: "*", colSizes:["100px","*"],
 		 items: [
-			{ type:_OUTPUT_, colSpan: "*", value: com_zimbra_proxy_config.LBL_ProxyWebProxyConfig, cssStyle: "font-weight:bold"},
+			{ type:_OUTPUT_, colSpan: "*", value: org_zmail_proxy_config.LBL_ProxyWebProxyConfig, cssStyle: "font-weight:bold"},
 			{ type:_OUTPUT_ , ref: ZaProxyConfig.A2_target_server, 
 			  labelLocation:_LEFT_ , labelCssStyle: "text-align: left; font-weight:bold",
-			  label: com_zimbra_proxy_config.LBL_ProxyServerName
+			  label: org_zmail_proxy_config.LBL_ProxyServerName
 			}
 		 ]
 		},
 		{type:_SPACER_, height: 10},
 		{type: _GROUP_, numCols:2, colSizes: ["120px", "auto"],
 		 items: [
-			{type: _CHECKBOX_, label: com_zimbra_proxy_config.LBL_ProxyDisableWebProxy,
-			 ref: ZaProxyConfig.A_zimbraReverseProxyHttpEnabled,
+			{type: _CHECKBOX_, label: org_zmail_proxy_config.LBL_ProxyDisableWebProxy,
+			 ref: ZaProxyConfig.A_zmailReverseProxyHttpEnabled,
 			 trueValue: "FALSE", falseValue: "TRUE", labelCssStyle: "text-align: right"
 			} // meant to converse true & false value
 		 ]
 		},
 		{type: _GROUP_, numCols:2, colSizes: ["200px", "auto"],
 		 visibilityChecks: [ZaDisableProxyWizard.isWebProxyDisabled],
-		 visibilityChangeEventSources: [ZaProxyConfig.A_zimbraReverseProxyHttpEnabled],
+		 visibilityChangeEventSources: [ZaProxyConfig.A_zmailReverseProxyHttpEnabled],
 		 items: [
-			{type: _SELECT1_, label: com_zimbra_proxy_config.LBL_ProxyWebMode,
-			 ref: ZaProxyConfig.A_zimbraMailMode,
+			{type: _SELECT1_, label: org_zmail_proxy_config.LBL_ProxyWebMode,
+			 ref: ZaProxyConfig.A_zmailMailMode,
 			 width: "60px"
 			},
 			{type:_SPACER_, height: 10},
-			{type: _TEXTFIELD_, label: com_zimbra_proxy_config.LBL_ProxyHttpPort,
-			 ref: ZaProxyConfig.A_zimbraMailPort,
+			{type: _TEXTFIELD_, label: org_zmail_proxy_config.LBL_ProxyHttpPort,
+			 ref: ZaProxyConfig.A_zmailMailPort,
 			 width: "60px"
 			},
-			{type: _TEXTFIELD_, label: com_zimbra_proxy_config.LBL_ProxyHttpSSLPort,
-			 ref: ZaProxyConfig.A_zimbraMailSSLPort,
+			{type: _TEXTFIELD_, label: org_zmail_proxy_config.LBL_ProxyHttpSSLPort,
+			 ref: ZaProxyConfig.A_zmailMailSSLPort,
 			 width: "60px"
 			},
 			{type: _SPACER_, height: 10},
-			{type: _TEXTFIELD_, label: com_zimbra_proxy_config.LBL_ProxyAdminPort,
-			 ref: ZaProxyConfig.A_zimbraAdminPort,
+			{type: _TEXTFIELD_, label: org_zmail_proxy_config.LBL_ProxyAdminPort,
+			 ref: ZaProxyConfig.A_zmailAdminPort,
 			 width: "60px"
 			}
 		 ]
@@ -422,50 +422,50 @@ ZaDisableProxyWizard.myXFormModifier = function(xFormObject) {
 	case_config_mailproxy.items = [
 		{type: _GROUP_, numCols:2, colSpan: "*", colSizes:["100px","*"],
 		 items: [
-			{ type:_OUTPUT_, colSpan: "*", value: com_zimbra_proxy_config.LBL_ProxyMailProxyConfig, cssStyle: "font-weight:bold"},
+			{ type:_OUTPUT_, colSpan: "*", value: org_zmail_proxy_config.LBL_ProxyMailProxyConfig, cssStyle: "font-weight:bold"},
 			{ type:_OUTPUT_ , ref: ZaProxyConfig.A2_target_server, 
 			  labelLocation:_LEFT_ , labelCssStyle: "text-align: left; font-weight:bold",
-			  label: com_zimbra_proxy_config.LBL_ProxyServerName
+			  label: org_zmail_proxy_config.LBL_ProxyServerName
 			}
 		 ]
 		},
 		{type:_SPACER_, height: 10},
 		{type: _GROUP_, numCols:2, colSizes: ["120px", "auto"],
 		 items: [
-			{type: _CHECKBOX_, label: com_zimbra_proxy_config.LBL_ProxyEnableMailProxy,
-			 ref: ZaProxyConfig.A_zimbraReverseProxyMailEnabled,
+			{type: _CHECKBOX_, label: org_zmail_proxy_config.LBL_ProxyEnableMailProxy,
+			 ref: ZaProxyConfig.A_zmailReverseProxyMailEnabled,
 			 trueValue: "FALSE", falseValue: "TRUE", labelCssStyle: "text-align: right"
 			}  // mean to convese the true and false value
 		 ]
 		},
 		{type: _GROUP_, numCols:2, colSizes: ["200px", "auto"],
 		 visibilityChecks: [ZaDisableProxyWizard.isMailProxyDisabled],
-		 visibilityChangeEventSources: [ZaProxyConfig.A_zimbraReverseProxyMailEnabled],
+		 visibilityChangeEventSources: [ZaProxyConfig.A_zmailReverseProxyMailEnabled],
 		 items: [
-			{type: _TEXTFIELD_, label: com_zimbra_proxy_config.LBL_ProxyImapPort,
-			 ref: ZaProxyConfig.A_zimbraImapBindPort,
+			{type: _TEXTFIELD_, label: org_zmail_proxy_config.LBL_ProxyImapPort,
+			 ref: ZaProxyConfig.A_zmailImapBindPort,
 			 width: "60px"
 			},
-			{type: _TEXTFIELD_, label: com_zimbra_proxy_config.LBL_ProxyImapSSLPort,
-			 ref: ZaProxyConfig.A_zimbraImapSSLBindPort,
+			{type: _TEXTFIELD_, label: org_zmail_proxy_config.LBL_ProxyImapSSLPort,
+			 ref: ZaProxyConfig.A_zmailImapSSLBindPort,
 			 width: "60px"
 			},
-			{type: _CHECKBOX_, label: com_zimbra_proxy_config.LBL_EnableImapCleartextLogin,
-			 ref: ZaProxyConfig.A_zimbraImapCleartextLoginEnabled,
+			{type: _CHECKBOX_, label: org_zmail_proxy_config.LBL_EnableImapCleartextLogin,
+			 ref: ZaProxyConfig.A_zmailImapCleartextLoginEnabled,
 			 trueValue: "TRUE", falseValue: "FALSE",
 			 labelCssStyle: "text-align: right"
 			},
 			{type: _SPACER_, height: 10},
-			{type: _TEXTFIELD_, label: com_zimbra_proxy_config.LBL_ProxyPop3Port,
-			 ref: ZaProxyConfig.A_zimbraPop3BindPort,
+			{type: _TEXTFIELD_, label: org_zmail_proxy_config.LBL_ProxyPop3Port,
+			 ref: ZaProxyConfig.A_zmailPop3BindPort,
 			 width: "60px"
 			},
-			{type: _TEXTFIELD_, label: com_zimbra_proxy_config.LBL_ProxyPop3SSLPort,
-			 ref: ZaProxyConfig.A_zimbraPop3SSLBindPort,
+			{type: _TEXTFIELD_, label: org_zmail_proxy_config.LBL_ProxyPop3SSLPort,
+			 ref: ZaProxyConfig.A_zmailPop3SSLBindPort,
 			 width: "60px"
 			},
-			{type: _CHECKBOX_, label: com_zimbra_proxy_config.LBL_EnablePop3CleartextLogin,
-			 ref: ZaProxyConfig.A_zimbraPop3CleartextLoginEnabled,
+			{type: _CHECKBOX_, label: org_zmail_proxy_config.LBL_EnablePop3CleartextLogin,
+			 ref: ZaProxyConfig.A_zmailPop3CleartextLoginEnabled,
 			 trueValue: "TRUE", falseValue: "FALSE",
 			 labelCssStyle: "text-align: right"
 			}
@@ -485,7 +485,7 @@ ZaDisableProxyWizard.myXFormModifier = function(xFormObject) {
 			{ type:_SPACER_, height: 10},
 			{ type:_OUTPUT_, 
 			  labelLocation:_LEFT_ , labelCssStyle: "text-align: left",
-			  label: com_zimbra_proxy_config.MSG_ProxyDisableFinish
+			  label: org_zmail_proxy_config.MSG_ProxyDisableFinish
 			}
 		 ]
 		}

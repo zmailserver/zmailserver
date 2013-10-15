@@ -14,18 +14,18 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.addressbook.contacts;
+package org.zmail.qa.selenium.projects.ajax.tests.addressbook.contacts;
 
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.ContactItem;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogWarning;
-import com.zimbra.qa.selenium.projects.ajax.ui.addressbook.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.addressbook.FormContactNew.Field;
+import org.zmail.qa.selenium.framework.items.ContactItem;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogWarning;
+import org.zmail.qa.selenium.projects.ajax.ui.addressbook.*;
+import org.zmail.qa.selenium.projects.ajax.ui.addressbook.FormContactNew.Field;
 
 
 
@@ -52,7 +52,7 @@ public class EditContact extends AjaxCommonTest  {
 		ContactItem contact = ContactItem.createContactItem(app.zGetActiveAccount());
 		
 		// The new first name
-		String firstname = "new" + ZimbraSeleniumProperties.getUniqueString();
+		String firstname = "new" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		
@@ -91,7 +91,7 @@ public class EditContact extends AjaxCommonTest  {
 		ContactItem contact = ContactItem.createContactItem(app.zGetActiveAccount());
 		
 		// The new first name
-		String firstname = "new" + ZimbraSeleniumProperties.getUniqueString();
+		String firstname = "new" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		
@@ -126,7 +126,7 @@ public class EditContact extends AjaxCommonTest  {
 		ContactItem contact = ContactItem.createContactItem(app.zGetActiveAccount());
 		
 		// The new first name
-		String firstname = "new" + ZimbraSeleniumProperties.getUniqueString();
+		String firstname = "new" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		
@@ -198,7 +198,7 @@ public class EditContact extends AjaxCommonTest  {
 		ContactItem contact = ContactItem.createContactItem(app.zGetActiveAccount());
 		
 		// The new first name
-		String firstname = "new" + ZimbraSeleniumProperties.getUniqueString();
+		String firstname = "new" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		//-- GUI
@@ -243,7 +243,7 @@ public class EditContact extends AjaxCommonTest  {
 		ContactItem contact = ContactItem.createContactItem(app.zGetActiveAccount());
 		
 		// The new first name
-		String firstname = "new" + ZimbraSeleniumProperties.getUniqueString();
+		String firstname = "new" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		//-- GUI
@@ -291,7 +291,7 @@ public class EditContact extends AjaxCommonTest  {
 		ContactItem contact = ContactItem.createContactItem(app.zGetActiveAccount());
 		
 		// The new first name
-		String firstname = "new" + ZimbraSeleniumProperties.getUniqueString();
+		String firstname = "new" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		//-- GUI

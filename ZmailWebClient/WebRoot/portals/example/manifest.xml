@@ -17,27 +17,27 @@
 -->
     <!-- portlets -->
     <portlets>
-        <portlet zimlet='com_zimbra_html'>
+        <portlet zimlet='org_zmail_html'>
             <panel id='portlet_html_static1' />
-            <property name='url'>/zimbra/portals/example/static.html</property>
+            <property name='url'>/zmail/portals/example/static.html</property>
             <property name='type'>inline</property>
         </portlet>
-        <portlet zimlet='com_zimbra_html'>
+        <portlet zimlet='org_zmail_html'>
             <panel id='portlet_html_static2' />
-            <property name='url'>/zimbra/portals/example/static.html</property>
+            <property name='url'>/zmail/portals/example/static.html</property>
         </portlet>
-        <portlet zimlet='com_zimbra_html'>
+        <portlet zimlet='org_zmail_html'>
             <panel id='portlet_html_dynamic1' />
-            <property name='url'>/zimbra/portals/example/dynamic.jsp</property>
+            <property name='url'>/zmail/portals/example/dynamic.jsp</property>
             <property name='refresh'>10000</property>
             <property name='type'>inline</property>
         </portlet>
-        <portlet zimlet='com_zimbra_html'>
+        <portlet zimlet='org_zmail_html'>
             <panel id='portlet_html_dynamic2' />
-            <property name='url'>/zimbra/portals/example/dynamic.jsp</property>
+            <property name='url'>/zmail/portals/example/dynamic.jsp</property>
             <property name='refresh'>30000</property>
         </portlet>
-        <portlet zimlet='com_zimbra_rss'>
+        <portlet zimlet='org_zmail_rss'>
             <panel id='portlet_news' />
             <property name='url'>http://rss.news.yahoo.com/rss/tech</property>
             <property name='refresh'>300000</property>

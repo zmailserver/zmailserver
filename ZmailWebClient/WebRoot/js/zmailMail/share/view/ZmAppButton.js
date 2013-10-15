@@ -22,7 +22,7 @@
 /**
  * @class
  * This class represents a button that behaves like a "tab" button, designed specifically for the row of
- * applications buttons at the top of the Zimbra Web Client interface.
+ * applications buttons at the top of the Zmail Web Client interface.
  * <p>
  * Limitations:
  * <ul>

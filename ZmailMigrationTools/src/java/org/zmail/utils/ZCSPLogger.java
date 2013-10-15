@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.utils;
+package org.zmail.utils;
 
 import java.io.*;
 import java.text.*;

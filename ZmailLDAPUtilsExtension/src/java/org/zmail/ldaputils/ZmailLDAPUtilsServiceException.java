@@ -17,9 +17,9 @@
  * Created on Jun 1, 2004
  *
  */
-package com.zimbra.ldaputils;
+package org.zmail.ldaputils;
 
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
 
 /**
@@ -27,15 +27,15 @@ import com.zimbra.common.service.ServiceException;
  * 
  */
 @SuppressWarnings("serial")
-public class ZimbraLDAPUtilsServiceException extends ServiceException {
+public class ZmailLDAPUtilsServiceException extends ServiceException {
 
     public static final String DN_EXISTS  = "zimblraldaputils.DN_EXISTS";
     
-    private ZimbraLDAPUtilsServiceException(String message, String code, boolean isReceiversFault, Throwable cause) {
+    private ZmailLDAPUtilsServiceException(String message, String code, boolean isReceiversFault, Throwable cause) {
         super(message, code, isReceiversFault, cause);
     }
     
-    public static ZimbraLDAPUtilsServiceException DN_EXISTS(String dn) {
-    	return new ZimbraLDAPUtilsServiceException("dn already exists: "+dn, DN_EXISTS, SENDERS_FAULT, null);
+    public static ZmailLDAPUtilsServiceException DN_EXISTS(String dn) {
+    	return new ZmailLDAPUtilsServiceException("dn already exists: "+dn, DN_EXISTS, SENDERS_FAULT, null);
     }
 }

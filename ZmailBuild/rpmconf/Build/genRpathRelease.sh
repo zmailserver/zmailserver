@@ -16,7 +16,7 @@
 
 
 LOCAL=0
-LABEL=zimbra.liquidsys.com@zimbra:zcs
+LABEL=zmail.liquidsys.com@zmail:zcs
 
 
 if [ "$1" = "--local" ]; then
@@ -27,8 +27,8 @@ elif [ "$1" = "--label" ]; then
   shift; shift;
 fi
 
-if [ $LABEL = "zimbra.liquidsys.com@zimbra:zcs" ]; then
-  LABEL="/zimbra.rpath.org@rpl:1//zimbra.liquidsys.com@zimbra:devel//zcs" 
+if [ $LABEL = "zmail.liquidsys.com@zmail:zcs" ]; then
+  LABEL="/zmail.rpath.org@rpl:1//zmail.liquidsys.com@zmail:devel//zcs" 
 fi
 BUILDROOT=$1
 RELEASETAG=$4
@@ -53,7 +53,7 @@ if [ $? != 0 ]; then
   exit 1
 fi
 echo "Building ISO Image $BUILDROOT/zcs-${RELEASETAG}.iso..."
-BUILD=`rbuilder build-create zimbra "$TROVE" installable_iso --wait --option "baseFileName zcs-${RELEASETAG}" | awk -F= '{print $NF}'`
+BUILD=`rbuilder build-create zmail "$TROVE" installable_iso --wait --option "baseFileName zcs-${RELEASETAG}" | awk -F= '{print $NF}'`
 if [ $? -eq 0 ]; then
   echo "Getting URL for Build $BUILD"
   ISO=`rbuilder build-url $BUILD | head -1`
@@ -65,7 +65,7 @@ if [ $? -eq 0 ]; then
 fi
 
 echo "Building VMWare Image $BUILDROOT/zcs-${RELEASETAG}-vmware.zip..."
-BUILD=`rbuilder build-create zimbra "$TROVE" vmware_image --wait --option 'vmMemory 512' --option 'freespace 500' --option "baseFileName zcs-${RELEASETAG}-vmware"  | awk -F= '{print $NF}'`
+BUILD=`rbuilder build-create zmail "$TROVE" vmware_image --wait --option 'vmMemory 512' --option 'freespace 500' --option "baseFileName zcs-${RELEASETAG}-vmware"  | awk -F= '{print $NF}'`
 if [ $? -eq 0 ]; then
   echo "Getting URL for Build $BUILD"
   ZIP=`rbuilder build-url $BUILD | head -1`

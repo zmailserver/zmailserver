@@ -356,7 +356,7 @@ function() {
 	var smb = this._searchToolBar.getButton(ZmSearchToolBar.TYPES_BUTTON);
 	var mi = smb ? smb.getMenu().getItemById(ZmSearchToolBar.MENUITEM_ID, ZmId.SEARCH_GAL) : null;
 	if (mi) {
-		mi.setVisible(appCtxt.getActiveAccount().isZimbraAccount);
+		mi.setVisible(appCtxt.getActiveAccount().isZmailAccount);
 	}
 };
 
@@ -669,7 +669,7 @@ function(results, search, noUpdateOverview) {
  * status message to indicate why the query failed. Those errors are: no such
  * folder, no such tag, and bad query. If it's a "no such folder" error caused
  * by the deletion of a folder backing a mountpoint, we pass it along for
- * special handling by ZmZimbraMail.
+ * special handling by ZmZmailMail.
  * 
  * @private
  */

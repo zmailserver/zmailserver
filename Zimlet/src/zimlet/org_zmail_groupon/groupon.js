@@ -15,19 +15,19 @@
 
 
 /**
-* @author Raja Rao DV (rrao@zimbra.com)
+* @author Raja Rao DV (rrao@zmail.com)
 */
 
 
-function com_zimbra_groupon_handlerObject() {
+function org_zmail_groupon_handlerObject() {
 }
 
-/// Zimlet handler objects, such as com_zimbra_groupon, must inherit from
+/// Zimlet handler objects, such as org_zmail_groupon, must inherit from
 /// ZmZimletBase.  The 2 lines below achieve this.
-com_zimbra_groupon_handlerObject.prototype = new ZmZimletBase();
-com_zimbra_groupon_handlerObject.prototype.constructor = com_zimbra_groupon_handlerObject;
+org_zmail_groupon_handlerObject.prototype = new ZmZimletBase();
+org_zmail_groupon_handlerObject.prototype.constructor = org_zmail_groupon_handlerObject;
 
-var GrouponZimlet = com_zimbra_groupon_handlerObject;
+var GrouponZimlet = org_zmail_groupon_handlerObject;
 
 //static variables
 GrouponZimlet.API_KEY = "da764d22a837b923b4ff39fa4f2383edcf3d1a8e";
@@ -93,7 +93,7 @@ GrouponZimlet.prototype.appLaunch = function(appName) {
 	}
 
 	this.tabApp = appCtxt.getCurrentApp();//actual app
-	this.grouponApp = new Com_Zimbra_GrouponApp(this, this.tabApp);
+	this.grouponApp = new Com_Zmail_GrouponApp(this, this.tabApp);
 	this.grouponApp.show();
 	this.getDeals(this._dealAreaCode, GrouponZimlet.SHOW_IN_CARD_VIEW);
 };
@@ -140,7 +140,7 @@ GrouponZimlet.prototype._showFeaturedDealAsPopup = function(deals) {
 };
 
 GrouponZimlet.prototype._showPopup = function(deal) {
-	var gApp = new Com_Zimbra_GrouponApp(this);
+	var gApp = new Com_Zmail_GrouponApp(this);
 	var html = gApp._getCardDetailedHtml(deal, GrouponZimlet.SHOW_FEATURED_AS_POPUP);
 	var transitions = [ ZmToast.FADE_IN, ZmToast.PAUSE, ZmToast.PAUSE, ZmToast.PAUSE, ZmToast.PAUSE, ZmToast.PAUSE,  ZmToast.FADE_OUT ];
 	appCtxt.getAppController().setStatusMsg(html, ZmStatusView.LEVEL_INFO, null, transitions);
@@ -148,7 +148,7 @@ GrouponZimlet.prototype._showPopup = function(deal) {
 
 
 GrouponZimlet.prototype._openNewsFeedCard = function(deal) {
-	var cardProps = new Com_Zimbra_GrouponCardProps();
+	var cardProps = new Com_Zmail_GrouponCardProps();
 	if (deal.placement_priority == "featured") {
 		cardProps.featured = true;
 	} else {

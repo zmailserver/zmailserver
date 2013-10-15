@@ -17,7 +17,7 @@
 -->
 
 	<property file="build.properties"/>
-	<property name="prod_title" value="Zimbra Desktop"/>
+	<property name="prod_title" value="Zmail Desktop"/>
         <tstamp>
           <format property="current.time" pattern="yyyyMMddhhmmss"/>
         </tstamp>
@@ -25,12 +25,12 @@
 	<property name="media_macos" value="zdesktop_${offline.filever}${offline.branch}_b${offline.buildid}_${current.time}_${offline.suffix_macos}"/>
 	<property name="media_linux" value="zdesktop_${offline.filever}${offline.branch}_b${offline.buildid}_${current.time}_${offline.suffix_linux}"/>
 	<property name="media_linux_dir" value="zdesktop_${offline.filever}${offline.branch}_b${offline.buildid}_linux_i686"/>
-	<property name="build.dir" location="../ZimbraBuild/i386" />
+	<property name="build.dir" location="../ZmailBuild/i386" />
 	<property name="pmdoc.dir" location="./build/macos_installer.pmdoc" />
 	<property name="wxs.dir" location="${basedir}\build" />
 	<property name="prism.app" value="build/dist/app/macos/prism/Prism.app" />
 	<property name="updater.app" value="build/dist/app/macos/prism/Prism.app/Contents/Frameworks/XUL.framework/updater.app" />
-	<property name="zd.app" value="${basedir}/build/dist/app/macos/Zimbra Desktop.app" />
+	<property name="zd.app" value="${basedir}/build/dist/app/macos/Zmail Desktop.app" />
 	<property name="winperl" value="C:\strawberry\perl\bin\perl.exe" />
 	<property name="wix.home" value="C:\Program Files\Windows Installer XML v3" />
 	<property name="sign.tool" value="C:\signtool\signtool.exe" />
@@ -61,7 +61,7 @@
  
 	<taskdef resource="net/sf/antcontrib/antlib.xml">
 		<classpath>
-			<pathelement location="../ZimbraCommon/jars/ant-contrib-1.0b1.jar" />
+			<pathelement location="../ZmailCommon/jars/ant-contrib-1.0b1.jar" />
 		</classpath>
 	</taskdef>
 
@@ -125,7 +125,7 @@
 			<arg value="--title" />
 			<arg value="${prod_title}" />
 			<arg value="--id" />
-			<arg value="com.zimbra.desktop.full" />
+			<arg value="org.zmail.desktop.full" />
 			<arg value="--verbose" />
 			<arg value="--no-recommend" />
 		</exec>
@@ -136,7 +136,7 @@
 			<arg value="-srcfolder" />
 			<arg value="${build.dir}/${prod_title}.mpkg" />
 			<arg value="-volname" />
-			<arg value="Zimbra Desktop Installer" />
+			<arg value="Zmail Desktop Installer" />
 			<arg value="-ov" />
 			<arg value="${build.dir}/${media_macos}" />
 			<arg value="-format" />
@@ -156,7 +156,7 @@
 					<arg value="/f" />
 					<arg value="${sign.cert}" />
 					<arg value="/p" />
-					<arg value="zimbra" />
+					<arg value="zmail" />
 					<arg value="@{file}" />
 				</exec>
 			</then></if>
@@ -175,7 +175,7 @@
 		<delete file="build/dist/app/data/zdesktop.webapp/override.ini.linux" />
 		<delete file="build/dist/app/data/zdesktop.webapp/override.ini.macos" />
 		<move file="build/dist/app/data/zdesktop.webapp/override.ini.win32" tofile="build/dist/app/data/zdesktop.webapp/override.ini" />
-		<sign-binary-file file="build/dist/app/win32/prism/extensions/mapi@zimbra.com/helper.exe" />
+		<sign-binary-file file="build/dist/app/win32/prism/extensions/mapi@zmail.com/helper.exe" />
 
 		<copy todir="${wxs.dir}" file="src/installer/win32/win_installer.wxs" overwrite="true" />
 		<replace file="${wxs.dir}/win_installer.wxs" token="@build.root@" value="${basedir}" />

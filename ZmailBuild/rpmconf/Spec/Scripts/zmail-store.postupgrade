@@ -14,32 +14,32 @@
 # ***** END LICENSE BLOCK *****
 # 
 
-SAVEDIR=/opt/zimbra/.saveconfig
-PLAT=`/opt/zimbra/libexec/get_plat_tag.sh`
+SAVEDIR=/opt/zmail/.saveconfig
+PLAT=`/opt/zmail/libexec/get_plat_tag.sh`
 H=$(hostname -s)
-zimbra_home=/opt/zimbra
+zmail_home=/opt/zmail
 JETTY_VERSION=distribution-7.6.2.z4
 
-if [ -e "${zimbra_home}/perdition" ]; then
-  rm -f ${zimbra_home}/perdition
+if [ -e "${zmail_home}/perdition" ]; then
+  rm -f ${zmail_home}/perdition
 fi
 
-if [ -e "/opt/zimbra/verity" ]; then
-  rm -rf /opt/zimbra/verity
+if [ -e "/opt/zmail/verity" ]; then
+  rm -rf /opt/zmail/verity
 fi
 
-if [ -e "${zimbra_home}/db/db.sql" ]; then
-  mv ${zimbra_home}/db/db.sql ${zimbra_home}/db/db.sql.in
-  sed -e "/server.hostname/ s/local/$H/" ${zimbra_home}/db/db.sql.in > ${zimbra_home}/db/db.sql
+if [ -e "${zmail_home}/db/db.sql" ]; then
+  mv ${zmail_home}/db/db.sql ${zmail_home}/db/db.sql.in
+  sed -e "/server.hostname/ s/local/$H/" ${zmail_home}/db/db.sql.in > ${zmail_home}/db/db.sql
 fi
 
 for i in jetty apache-tomcat ; do
-  MAILBOXD=`perl -e 'print ($1 eq "apache-tomcat" ? "tomcat $1-$2" : "jetty $1-$2")  if ($ARGV[0] =~ m/(jetty|apache-tomcat)-(.*)/ && $2 ne "*");' /opt/zimbra/$i-*`
+  MAILBOXD=`perl -e 'print ($1 eq "apache-tomcat" ? "tomcat $1-$2" : "jetty $1-$2")  if ($ARGV[0] =~ m/(jetty|apache-tomcat)-(.*)/ && $2 ne "*");' /opt/zmail/$i-*`
   if [ "x${MAILBOXD}" = "x" ]; then
     continue
   fi
-  SHORT=/opt/zimbra/`echo $MAILBOXD | awk '{print $1}'`
-  LONG=/opt/zimbra/`echo $MAILBOXD | awk '{print $2}'`
+  SHORT=/opt/zmail/`echo $MAILBOXD | awk '{print $1}'`
+  LONG=/opt/zmail/`echo $MAILBOXD | awk '{print $2}'`
   if [ -L "$SHORT" ]; then
     rm -f $SHORT
   fi
@@ -47,53 +47,53 @@ for i in jetty apache-tomcat ; do
   ln -s $LONG $SHORT
   if [ -f "${LONG}/start.jar" -o -f "${LONG}/bin/startup.sh" ]; then
     echo "Relinking mailboxd to $LONG"
-    rm -rf /opt/zimbra/mailboxd
-    ln -s $LONG /opt/zimbra/mailboxd
+    rm -rf /opt/zmail/mailboxd
+    ln -s $LONG /opt/zmail/mailboxd
   fi
   mkdir -p $SHORT/logs
-  chown zimbra:zimbra $SHORT/logs
+  chown zmail:zmail $SHORT/logs
   chown root:wheel $LONG
 done
 
-rm -f /opt/zimbra/mailboxd
-rm -f /opt/zimbra/jetty
-ln -s /opt/zimbra/jetty-${JETTY_VERSION} /opt/zimbra/jetty
-ln -s /opt/zimbra/jetty-${JETTY_VERSION} /opt/zimbra/mailboxd
+rm -f /opt/zmail/mailboxd
+rm -f /opt/zmail/jetty
+ln -s /opt/zmail/jetty-${JETTY_VERSION} /opt/zmail/jetty
+ln -s /opt/zmail/jetty-${JETTY_VERSION} /opt/zmail/mailboxd
 
-mkdir -p /opt/zimbra/mailboxd/logs
-chown zimbra:zimbra /opt/zimbra/mailboxd/logs
+mkdir -p /opt/zmail/mailboxd/logs
+chown zmail:zmail /opt/zmail/mailboxd/logs
 
-if [ -f $SAVEDIR/keystore -a -d /opt/zimbra/tomcat/conf ]; then
-  rm -f /opt/zimbra/tomcat/conf > /dev/null 2>&1
+if [ -f $SAVEDIR/keystore -a -d /opt/zmail/tomcat/conf ]; then
+  rm -f /opt/zmail/tomcat/conf > /dev/null 2>&1
 fi
-if [ -f $SAVEDIR/keystore -a -d /opt/zimbra/jetty/etc ]; then
-  echo "Restoring $SAVEDIR/keystore to /opt/zimbra/jetty/etc"
-	cp -f $SAVEDIR/keystore /opt/zimbra/jetty/etc/keystore
-	chown zimbra:zimbra /opt/zimbra/jetty/etc/keystore 
+if [ -f $SAVEDIR/keystore -a -d /opt/zmail/jetty/etc ]; then
+  echo "Restoring $SAVEDIR/keystore to /opt/zmail/jetty/etc"
+	cp -f $SAVEDIR/keystore /opt/zmail/jetty/etc/keystore
+	chown zmail:zmail /opt/zmail/jetty/etc/keystore 
 else 
-  echo "Couldn't restore /opt/zimbra/jetty/etc/keystore"
+  echo "Couldn't restore /opt/zmail/jetty/etc/keystore"
 fi
 
 SUDOMODE=`perl -e 'my $mode=(stat("/etc/sudoers"))[2];printf("%04o\n",$mode & 07777);'`
-egrep -v -e '^%zimbra.*tomcat' -e '^%zimbra.*mailboxdmgr' /etc/sudoers > /tmp/sudoers
-echo "%zimbra ALL=NOPASSWD:/opt/zimbra/libexec/zmmailboxdmgr" >> /tmp/sudoers
+egrep -v -e '^%zmail.*tomcat' -e '^%zmail.*mailboxdmgr' /etc/sudoers > /tmp/sudoers
+echo "%zmail ALL=NOPASSWD:/opt/zmail/libexec/zmmailboxdmgr" >> /tmp/sudoers
 mv -f /tmp/sudoers /etc/sudoers
 chmod $SUDOMODE /etc/sudoers
 
-egrep -v -e '^%zimbra.*zmcertmgr' /etc/sudoers > /tmp/sudoers
-echo "%zimbra ALL=NOPASSWD:/opt/zimbra/bin/zmcertmgr" >> /tmp/sudoers
+egrep -v -e '^%zmail.*zmcertmgr' /etc/sudoers > /tmp/sudoers
+echo "%zmail ALL=NOPASSWD:/opt/zmail/bin/zmcertmgr" >> /tmp/sudoers
 mv -f /tmp/sudoers /etc/sudoers
 chmod $SUDOMODE /etc/sudoers
 
-egrep -v '^%zimbra.*perdition' /etc/sudoers > /tmp/sudoers
+egrep -v '^%zmail.*perdition' /etc/sudoers > /tmp/sudoers
 mv -f /tmp/sudoers /etc/sudoers
 chmod $SUDOMODE /etc/sudoers
 
-if [ -d "/opt/zimbra/mailboxd/work/zimbra" ]; then
-  find /opt/zimbra/mailboxd/work/zimbra -exec touch {} \; 2> /dev/null
+if [ -d "/opt/zmail/mailboxd/work/zmail" ]; then
+  find /opt/zmail/mailboxd/work/zmail -exec touch {} \; 2> /dev/null
 fi
 
-PKG=`echo ${RECEIPT_PATH} | sed -e 's|.*/\(zimbra-store.[^/]*pkg\)/.*|\1|' | sed -e 's/\./-/'`
+PKG=`echo ${RECEIPT_PATH} | sed -e 's|.*/\(zmail-store.[^/]*pkg\)/.*|\1|' | sed -e 's/\./-/'`
 D=`date +%s`
-echo "${D}: UPGRADED ${PKG}" >> /opt/zimbra/.install_history
+echo "${D}: UPGRADED ${PKG}" >> /opt/zmail/.install_history
 exit 0

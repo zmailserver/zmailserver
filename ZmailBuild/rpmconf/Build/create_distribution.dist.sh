@@ -20,7 +20,7 @@ TEMPLATE=$2
 get_size_from_pkg() {
 	pkg=$1
 	bpkg=`basename $pkg`
-	NAME=`echo $bpkg | awk -F. '{print $1}'| sed -e 's/zimbra-//' -e 'y/abcdefghijklmnopqrstuvwxyz/ABCDEFGHIJKLMNOPQRSTUVWXYZ/'`
+	NAME=`echo $bpkg | awk -F. '{print $1}'| sed -e 's/zmail-//' -e 'y/abcdefghijklmnopqrstuvwxyz/ABCDEFGHIJKLMNOPQRSTUVWXYZ/'`
 	SIZE=`cat ${pkg}/Contents/Info.plist |  sed -ne '/IFPkgFlagInstalledSize/{n;p;}'| sed -ne '/integer/ s/<integer>//p' | sed -e 's/<\/integer>//' -e 's/ //g' -e 's/	//g'`
 }
 

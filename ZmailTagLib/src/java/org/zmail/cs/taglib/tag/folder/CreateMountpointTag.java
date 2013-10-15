@@ -12,21 +12,21 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.tag.folder;
+package org.zmail.cs.taglib.tag.folder;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.taglib.bean.ZFolderBean;
-import com.zimbra.cs.taglib.tag.ZimbraSimpleTag;
-import com.zimbra.client.ZFolder;
-import com.zimbra.client.ZMailbox.OwnerBy;
-import com.zimbra.client.ZMailbox.SharedItemBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.taglib.bean.ZFolderBean;
+import org.zmail.cs.taglib.tag.ZmailSimpleTag;
+import org.zmail.client.ZFolder;
+import org.zmail.client.ZMailbox.OwnerBy;
+import org.zmail.client.ZMailbox.SharedItemBy;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 import java.io.IOException;
 
-public class CreateMountpointTag extends ZimbraSimpleTag {
+public class CreateMountpointTag extends ZmailSimpleTag {
 
     private String mParentId;
     private String mName;

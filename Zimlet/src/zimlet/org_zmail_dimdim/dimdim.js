@@ -16,19 +16,19 @@
 /**
  * Constructor.
  *
- * @author Raja Rao DV (rrao@zimbra.com)
+ * @author Raja Rao DV (rrao@zmail.com)
  */
-function com_zimbra_dimdim_HandlerObject() {
+function org_zmail_dimdim_HandlerObject() {
 }
 
-com_zimbra_dimdim_HandlerObject.prototype = new ZmZimletBase();
-com_zimbra_dimdim_HandlerObject.prototype.constructor = com_zimbra_dimdim_HandlerObject;
+org_zmail_dimdim_HandlerObject.prototype = new ZmZimletBase();
+org_zmail_dimdim_HandlerObject.prototype.constructor = org_zmail_dimdim_HandlerObject;
 
 /**
  * Simplify handler object
  *
  */
-var DimDimZimlet = com_zimbra_dimdim_HandlerObject;
+var DimDimZimlet = org_zmail_dimdim_HandlerObject;
 
 /**
  * Stores DimDim userName property.
@@ -128,7 +128,7 @@ DimDimZimlet.APPEND_SUB_OPTIONS = [DimDimZimlet.PROP_APPEND_DimDim_MEETING_PWD,
 	DimDimZimlet.PROP_APPEND_PHONE_PASSCODE];
 
 /**
- * Array with all General options. This entire list is stored  in Zimbra DB
+ * Array with all General options. This entire list is stored  in Zmail DB
  */
 DimDimZimlet.ALL_GENERAL_PROPS = [DimDimZimlet.PROP_APPEND_DimDim_MEETING_PWD,
 	DimDimZimlet.PROP_APPEND_TOLL_FREE_PHONE_NUMBER,DimDimZimlet.PROP_APPEND_TOLL_PHONE_NUMBER,
@@ -137,16 +137,16 @@ DimDimZimlet.ALL_GENERAL_PROPS = [DimDimZimlet.PROP_APPEND_DimDim_MEETING_PWD,
 
 /**
  * Map the DimDim timezoneIds to TimeZone Names 
- * Note: For most TimeZones, DimDim's TimeZone name is exactly same as Zimbra's. This list only those where we need to map.
+ * Note: For most TimeZones, DimDim's TimeZone name is exactly same as Zmail's. This list only those where we need to map.
  *
  */
-DimDimZimlet.DimDimToZimbraTZIDMap = {"Asia/Kolkata" :"Asia/Calcutta","Etc/GMT+12" :"HST","America/Los_Angeles" :"US/Pacific-New","America/Tijuana" :"US/Pacific-New","America/Phoenix" :"US/Arizona","America/Denver" :"US/Mountain","America/Chicago" :"US/East-Indiana","America/New_York" :"US/East-Indiana","America/Indiana/Indianapolis" :"US/East-Indiana"};
+DimDimZimlet.DimDimToZmailTZIDMap = {"Asia/Kolkata" :"Asia/Calcutta","Etc/GMT+12" :"HST","America/Los_Angeles" :"US/Pacific-New","America/Tijuana" :"US/Pacific-New","America/Phoenix" :"US/Arizona","America/Denver" :"US/Mountain","America/Chicago" :"US/East-Indiana","America/New_York" :"US/East-Indiana","America/Indiana/Indianapolis" :"US/East-Indiana"};
 
 
 /**
- * Converts a Zimbra's TimeZone Name to DimDim's timezone name
+ * Converts a Zmail's TimeZone Name to DimDim's timezone name
  */
-DimDimZimlet.prototype.convertTimeZone_Zimbra2DimDim = function(zTimeZone) {
+DimDimZimlet.prototype.convertTimeZone_Zmail2DimDim = function(zTimeZone) {
 	if(!this._notSupportedTZ) {
 		this._notSupportedTZ =	["Pacific/Auckland","Pacific/Honolulu","America/Anchorage","America/Halifax","America/Guyana",
 			"America/La_Paz","America/Manaus","America/Sao_Paulo","America/Argentina/Buenos_Aires","America/Montevideo",
@@ -155,11 +155,11 @@ DimDimZimlet.prototype.convertTimeZone_Zimbra2DimDim = function(zTimeZone) {
 			"America/Regina","Asia/Novosibirsk","Asia/Kuala_Lumpur","Australia/Sydney","Pacific/Guam"];
 	}
 	if(this._notSupportedTZ[zTimeZone]) {
-		throw new AjxException("TimeZone Not supported by DimDim", AjxException.INTERNAL_ERROR, "convertTimeZone_Zimbra2DimDim");
+		throw new AjxException("TimeZone Not supported by DimDim", AjxException.INTERNAL_ERROR, "convertTimeZone_Zmail2DimDim");
 	}
 
-	if(DimDimZimlet.DimDimToZimbraTZIDMap[zTimeZone]) {
-		return DimDimZimlet.DimDimToZimbraTZIDMap[zTimeZone];
+	if(DimDimZimlet.DimDimToZmailTZIDMap[zTimeZone]) {
+		return DimDimZimlet.DimDimToZmailTZIDMap[zTimeZone];
 	}
 	return zTimeZone;//dimdim directly supports this timezone
 
@@ -288,8 +288,8 @@ function(dlg) {
 /**
  * Initiates calendar toolbar.
  *
- * @param {ZmToolbar} toolbar	 the Zimbra toolbar
- * @param {ZmCalController} controller  the Zimbra calendar controller
+ * @param {ZmToolbar} toolbar	 the Zmail toolbar
+ * @param {ZmCalController} controller  the Zmail calendar controller
  */
 DimDimZimlet.prototype._initCalendarDimDimToolbar = function(toolbar, controller) {
 	if (!toolbar.getButton("SAVE_AS_DimDim")) {
@@ -524,7 +524,7 @@ DimDimZimlet.prototype._createOrUpdateMeeting = function(params) {
 	newParams["meetingName"] = appt.name;
 	newParams["attendees"] = this._getEmailsFromContacts(appt.getAttendees(ZmCalBaseItem.PERSON));
 	newParams["meetingLengthMinutes"] = (appt.endDate.getTime() - appt.startDate.getTime()) / 60000;
-	newParams["timezone"] = this.convertTimeZone_Zimbra2DimDim(appt.timezone);
+	newParams["timezone"] = this.convertTimeZone_Zmail2DimDim(appt.timezone);
 	newParams["attendeeKey"] = this._currentDimDimAccount[DimDimZimlet.PROP_MEETING_PASSWORD.propId];
 	newParams["meetingRecurrance"] = this._getRecurrenceString(appt);	
 	newParams["startDate"] = this._formatDateFromAppt(appt);
@@ -626,7 +626,7 @@ DimDimZimlet.prototype._getCreateOrModifyMeetingRequest = function(params) {
 	}
 	request =  request.join(",");
 	request = ["{\"request\":{", request, "}}"].join("");
-//{"request":{"groupName": "all","accountName": "raja","roomName": "default","startDate": "May 13, 2010","startHour": "12","startMinute": "0","timeAMPM": "AM","agenda": "","meetingName": "someName","attendees": "attendee1@zimbra.com,zttendee2@zimbra.com","timezone": "Asia/Calcutta","whiteboardEnabled": "false","cobrowserEnabled": "false"}}
+//{"request":{"groupName": "all","accountName": "raja","roomName": "default","startDate": "May 13, 2010","startHour": "12","startMinute": "0","timeAMPM": "AM","agenda": "","meetingName": "someName","attendees": "attendee1@zmail.com,zttendee2@zmail.com","timezone": "Asia/Calcutta","whiteboardEnabled": "false","cobrowserEnabled": "false"}}
 	return request;
 };
 
@@ -639,7 +639,7 @@ DimDimZimlet.prototype._getCreateOrModifyMeetingRequest = function(params) {
  * @see this._showDeleteDimDimApptYesNoDlg
  */
 DimDimZimlet.prototype._createOrUpdateMeetingResponseHdlr = function(params, respObj) {	
-	params["joinMeetingUrl"] = [this._getDimDimServerURL(),"/all/",this._currentDimDimAccount[DimDimZimlet.PROP_USERNAME.propId],"/default/?clientId=zimbra"].join("");
+	params["joinMeetingUrl"] = [this._getDimDimServerURL(),"/all/",this._currentDimDimAccount[DimDimZimlet.PROP_USERNAME.propId],"/default/?clientId=zmail"].join("");
 	params["scheduleId"] = respObj.response.scheduleId;
 	this._params = params;
 	this._appt = params.appt;
@@ -924,7 +924,7 @@ DimDimZimlet.prototype.doubleClicked = function() {
 };
 
 /**
- * Called by the Zimbra framework when a menu item is selected
+ * Called by the Zmail framework when a menu item is selected
  * dispatch the call, ensuring the DimDim configuration is set.
  *
  */
@@ -1374,7 +1374,7 @@ function() {
 	var j = 0;
 	var html = new Array();
 
-	var soapDoc = AjxSoapDoc.create("GetFolderRequest", "urn:zimbraMail");
+	var soapDoc = AjxSoapDoc.create("GetFolderRequest", "urn:zmailMail");
 	var folderNode = soapDoc.set("folder");
 	folderNode.setAttribute("l", appCtxt.getFolderTree().root.id);
 
@@ -2013,12 +2013,12 @@ function(params) {
 	newParams["meetingLengthMinutes"] = 60;
 	var zTimeZone = "";
 	try { 
-		zTimeZone = appCtxt.getActiveAccount().settings.getInfoResponse.prefs._attrs.zimbraPrefTimeZoneId;
+		zTimeZone = appCtxt.getActiveAccount().settings.getInfoResponse.prefs._attrs.zmailPrefTimeZoneId;
 	} catch(e) {
 		zTimeZone = "America/Los_Angeles";//default
 	}
 
-	newParams["timezone"] = this.convertTimeZone_Zimbra2DimDim(zTimeZone);
+	newParams["timezone"] = this.convertTimeZone_Zmail2DimDim(zTimeZone);
 	newParams["attendeeKey"] = this._currentDimDimAccount[DimDimZimlet.PROP_MEETING_PASSWORD.propId];
 	newParams["meetingRecurrance"] = "";	
 	newParams["startDate"] = this._formatDate(startDate);

@@ -250,7 +250,7 @@ function(dates) {
     var startDateStr = ZmPref.dateLocal2GMT(this._formatter.format(dates.startDate));
     var endDateStr = ZmPref.dateLocal2GMT(this._formatter.format(dates.endDate));
 
-    var soapDoc = AjxSoapDoc.create("ModifyPrefsRequest", "urn:zimbraAccount");
+    var soapDoc = AjxSoapDoc.create("ModifyPrefsRequest", "urn:zmailAccount");
 
     var node = soapDoc.set("pref", "TRUE");
     node.setAttribute("name", settings.getSetting(ZmSetting.VACATION_MSG_ENABLED).name);
@@ -459,7 +459,7 @@ ZmPTOZimlet.prototype._sendEmail =
 function(subject, bodyHtml, bodyText, to, ccEmails, dates, accountInfo) {
     var jsonObj = {
         SendMsgRequest: {
-            _jsns: "urn:zimbraMail"
+            _jsns: "urn:zmailMail"
         }
     };
     var request = jsonObj.SendMsgRequest;

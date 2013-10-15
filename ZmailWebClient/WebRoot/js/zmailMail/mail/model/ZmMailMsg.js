@@ -74,7 +74,7 @@ ZmMailMsg.HDR_SENDER	= AjxEmailAddress.SENDER;
 ZmMailMsg.HDR_DATE		= "DATE";
 ZmMailMsg.HDR_SUBJECT	= "SUBJECT";
 ZmMailMsg.HDR_LISTID    = "List-ID";
-ZmMailMsg.HDR_XZIMBRADL = "X-Zimbra-DL";
+ZmMailMsg.HDR_XZIMBRADL = "X-Zmail-DL";
 ZmMailMsg.HDR_INREPLYTO = "IN-REPLY-TO";
 
 ZmMailMsg.HDR_KEY = {};
@@ -122,13 +122,13 @@ ZmMailMsg.CONTENT_PART_ID = "ci";
 ZmMailMsg.CONTENT_PART_LOCATION = "cl";
 
 // Additional headers to request.  Also used by ZmConv and ZmSearch
-ZmMailMsg.requestHeaders = {listId: ZmMailMsg.HDR_LISTID, xZimbraDL: ZmMailMsg.HDR_XZIMBRADL,replyTo:ZmMailMsg.HDR_INREPLYTO};
+ZmMailMsg.requestHeaders = {listId: ZmMailMsg.HDR_LISTID, xZmailDL: ZmMailMsg.HDR_XZIMBRADL,replyTo:ZmMailMsg.HDR_INREPLYTO};
 
 /**
  * Fetches a message from the server.
  *
  * @param {Hash}			params					a hash of parameters
- * @param {ZmZimbraMail}	params.sender			the provides access to sendRequest()
+ * @param {ZmZmailMail}	params.sender			the provides access to sendRequest()
  * @param {int}				params.msgId			the ID of the msg to be fetched.
  * @param {int}				params.partId 			the msg part ID (if retrieving attachment part, i.e. rfc/822)
  * @param {int}				params.ridZ   			the RECURRENCE-ID in Z (UTC) timezone
@@ -144,7 +144,7 @@ ZmMailMsg.requestHeaders = {listId: ZmMailMsg.HDR_LISTID, xZimbraDL: ZmMailMsg.H
  */
 ZmMailMsg.fetchMsg =
 function(params) {
-	var jsonObj = {GetMsgRequest:{_jsns:"urn:zimbraMail"}};
+	var jsonObj = {GetMsgRequest:{_jsns:"urn:zmailMail"}};
 	var request = jsonObj.GetMsgRequest;
 	var m = request.m = {};
 	m.id = params.msgId;
@@ -1129,7 +1129,7 @@ function(edited, componentId, callback, errorCallback, instanceDate, accountName
 
 ZmMailMsg.prototype._sendInviteReply =
 function(edited, componentId, callback, errorCallback, instanceDate, accountName, ignoreNotify) {
-	var jsonObj = {SendInviteReplyRequest:{_jsns:"urn:zimbraMail"}};
+	var jsonObj = {SendInviteReplyRequest:{_jsns:"urn:zmailMail"}};
 	var request = jsonObj.SendInviteReplyRequest;
 
 	request.id = this._origMsg.id;
@@ -1382,10 +1382,10 @@ function(isDraft, callback, errorCallback, accountName, noSave, requestReadRecei
 	} else {
 		var jsonObj, request;
 		if (isDraft) {
-			jsonObj = {SaveDraftRequest:{_jsns:"urn:zimbraMail"}};
+			jsonObj = {SaveDraftRequest:{_jsns:"urn:zmailMail"}};
 			request = jsonObj.SaveDraftRequest;
 		} else {
-			jsonObj = {SendMsgRequest:{_jsns:"urn:zimbraMail"}};
+			jsonObj = {SendMsgRequest:{_jsns:"urn:zmailMail"}};
 			request = jsonObj.SendMsgRequest;
 			if (this.sendUID) {
 				request.suid = this.sendUID;
@@ -2002,7 +2002,7 @@ ZmMailMsg.prototype.getAttachmentLinks = ZmMailMsg.prototype.getAttachmentInfo;
 
 ZmMailMsg.prototype.removeAttachments =
 function(partIds, callback) {
-	var jsonObj = {RemoveAttachmentsRequest: {_jsns:"urn:zimbraMail"}};
+	var jsonObj = {RemoveAttachmentsRequest: {_jsns:"urn:zmailMail"}};
 	var request = jsonObj.RemoveAttachmentsRequest;
 	request.m = {
 		id:		this.id,
@@ -2193,14 +2193,14 @@ function(msgNode) {
 
 ZmMailMsg.createDlSubFromDom =
 function(doc) {
-	// NOTE: This code initializes DL subscription info from the Zimbra dlSub format, v0.1
+	// NOTE: This code initializes DL subscription info from the Zmail dlSub format, v0.1
 	var sub = {};
 
 	var node = doc.documentElement;
 	sub.version = node.getAttribute("version");
 	sub.subscribe = node.getAttribute("action") == "subscribe";
 	if (sub.version != ZmMailMsg.DL_SUB_VERSION) {
-		throw "Zimbra dl sub version must be " + ZmMailMsg.DL_SUB_VERSION;
+		throw "Zmail dl sub version must be " + ZmMailMsg.DL_SUB_VERSION;
 	}
 
 	for (var child = node.firstChild; child != null; child = child.nextSibling) {
@@ -2614,7 +2614,7 @@ function(autoSendTime) {
 ZmMailMsg.prototype.sendReadReceipt =
 function(callback) {
 
-	var jsonObj = {SendDeliveryReportRequest:{_jsns:"urn:zimbraMail"}};
+	var jsonObj = {SendDeliveryReportRequest:{_jsns:"urn:zmailMail"}};
 	var request = jsonObj.SendDeliveryReportRequest;
 	request.mid = this.id;
 	var ac = window.parentAppCtxt || window.appCtxt;
@@ -2626,7 +2626,7 @@ function(callback) {
 ZmMailMsg.prototype.redirect =
 function(addrs, callback) {
 
-	var jsonObj = {BounceMsgRequest:{_jsns:"urn:zimbraMail"}};
+	var jsonObj = {BounceMsgRequest:{_jsns:"urn:zmailMail"}};
 	var request = jsonObj.BounceMsgRequest;
 	request.m = {id:this.id};
 	var e = request.m.e = [];
@@ -2654,7 +2654,7 @@ function(addrs, callback) {
 ZmMailMsg.prototype.doDelete =
 function() {
 
-	var jsonObj = {MsgActionRequest:{_jsns:"urn:zimbraMail"}};
+	var jsonObj = {MsgActionRequest:{_jsns:"urn:zmailMail"}};
 	var request = jsonObj.MsgActionRequest;
 	request.action = {id:this.id, op:"delete"};
 	var ac = window.parentAppCtxt || window.appCtxt;
@@ -2694,10 +2694,10 @@ function() {
 };
 
 /**
- * Return the zimbra DL header if it exists, otherwise return null
+ * Return the zmail DL header if it exists, otherwise return null
  * @return {AjxEmailAddress} AjxEmailAddress object if header exists
 **/
-ZmMailMsg.prototype.getXZimbraDLHeader = 
+ZmMailMsg.prototype.getXZmailDLHeader = 
 function() {
 	if (this.attrs && this.attrs[ZmMailMsg.HDR_XZIMBRADL]) {
 		return AjxEmailAddress.parseEmailString(this.attrs[ZmMailMsg.HDR_XZIMBRADL]);

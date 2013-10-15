@@ -57,7 +57,7 @@ function(item,openInNewTab) {
 		this._UICreated = true;
 		ZaApp.getInstance()._controllers[this.getContentViewId ()] = this ;
 	}
-//	ZaApp.getInstance().pushView(ZaZimbraAdmin._STATISTICS_BY_SERVER);
+//	ZaApp.getInstance().pushView(ZaZmailAdmin._STATISTICS_BY_SERVER);
 	ZaApp.getInstance().pushView(this.getContentViewId());
 //	ZaApp.getInstance().setCurrentController(this);
 
@@ -227,10 +227,10 @@ ZaServerStatsListController._getMapForMappingId2handler =
 function (){
     if (!ZaServerStatsListController.mappingId2handlerMap){
         ZaServerStatsListController.mappingId2handlerMap = {
-            "mainNode": { "mappingId": ZaZimbraAdmin._STATISTICS_BY_SERVER,
+            "mainNode": { "mappingId": ZaZmailAdmin._STATISTICS_BY_SERVER,
                           "handler": ZaOverviewPanelController.statsByServerTreeListener
                         },
-            "tabNodes": { "mappingId": ZaZimbraAdmin._SERVER_STATISTICS_TAB_VIEW,
+            "tabNodes": { "mappingId": ZaZmailAdmin._SERVER_STATISTICS_TAB_VIEW,
                           "handler": ZaOverviewPanelController.statsByServerTabTreeListener
                         }
         }
@@ -282,7 +282,7 @@ ZaServerStatsListController.prototype._switchToSubItem = function (item)
         //must switch to the individual server stats view firstly,
         //then the ZaApp.getInstance().getAppViewMgr().getCurrentView() == server stats view,
         //let the  addObjectItemForAll get the right view id
-        var overviewPanelController = ZaZimbraAdmin.getInstance().getOverviewPanelController();
+        var overviewPanelController = ZaZmailAdmin.getInstance().getOverviewPanelController();
         var parentPath = ZaServerStatsListController._getparentPathInTree();
         var map = ZaServerStatsListController._getMapForMappingId2handler();
 

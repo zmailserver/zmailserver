@@ -14,11 +14,11 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.util.yc;
+package org.zmail.cs.offline.util.yc;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Objects.ToStringHelper;
-import com.zimbra.cs.mime.ParsedContact;
+import org.zmail.cs.mime.ParsedContact;
 
 public class ContactRemove implements ContactOperation {
 

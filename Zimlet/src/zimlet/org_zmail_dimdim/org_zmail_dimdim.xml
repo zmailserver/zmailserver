@@ -14,13 +14,13 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_dimdim"
+<zimlet name="org_zmail_dimdim"
         version="0.3"
         label="${msg.label}"
         description="${msg.description}">
     <include>dimdim.js</include>
     <includeCSS>dimdim.css</includeCSS>
-    <handlerObject>com_zimbra_dimdim_HandlerObject</handlerObject>
+    <handlerObject>org_zmail_dimdim_HandlerObject</handlerObject>
     <zimletPanelItem label="${msg.DimDimZimlet_label}" icon="DimDim-panelIcon">
         <toolTipText>${msg.DimDimZimlet_toolTip}</toolTipText>
         <dragSource type="ZmContact" />

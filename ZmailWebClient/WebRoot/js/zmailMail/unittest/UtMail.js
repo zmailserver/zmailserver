@@ -107,7 +107,7 @@ UT.test("parseComposeUrl",
 		
 		queryStr='&cc="\"><iframe src=a onload=alert(\"VL\") <\"><iframe src=a onload=alert(\"VL\") <" <qa-test1@zim"';
 		result = mailApp._parseComposeUrl(queryStr);
-		UT.notEqual(result.cc, '"\"><iframe src=a onload=alert(\"VL\") <\"><iframe src=a onload=alert(\"VL\") <" <qa-test1@zimbra.com>'); //should be HTML encoded
+		UT.notEqual(result.cc, '"\"><iframe src=a onload=alert(\"VL\") <\"><iframe src=a onload=alert(\"VL\") <" <qa-test1@zmail.com>'); //should be HTML encoded
 	}
 		
 );

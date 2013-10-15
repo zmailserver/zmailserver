@@ -16,61 +16,61 @@
 /**
  * Constructor.
  */
-function Com_Zimbra_Blog() {
+function Com_Zmail_Blog() {
 	this.note = {};
 	this.blogid = null;
 };
 
-Com_Zimbra_Blog.prototype = new ZmZimletBase();
-Com_Zimbra_Blog.prototype.constructor = Com_Zimbra_Blog;
+Com_Zmail_Blog.prototype = new ZmZimletBase();
+Com_Zmail_Blog.prototype.constructor = Com_Zmail_Blog;
 
-Com_Zimbra_Blog.TITLE_WARNING = "Cannot post to blog. You must enter a title for the new blog post.";	
-Com_Zimbra_Blog.UNABLE_TO_FETCH = "Unable to fetch blog information";
-Com_Zimbra_Blog.UNABLE_TO_FETCH_CATEGORY = "Unable to fetch category information";
+Com_Zmail_Blog.TITLE_WARNING = "Cannot post to blog. You must enter a title for the new blog post.";	
+Com_Zmail_Blog.UNABLE_TO_FETCH = "Unable to fetch blog information";
+Com_Zmail_Blog.UNABLE_TO_FETCH_CATEGORY = "Unable to fetch category information";
 
 /**
  * Defines the "username" user property.
  */
-Com_Zimbra_Blog.USER_PROP_USERNAME = "user";
+Com_Zmail_Blog.USER_PROP_USERNAME = "user";
 /**
  * Defines the "password" user property.
  */
-Com_Zimbra_Blog.USER_PROP_PASSWORD = "passwd";
+Com_Zmail_Blog.USER_PROP_PASSWORD = "passwd";
 /**
  * Defines the "blog url" user property.
  */
-Com_Zimbra_Blog.USER_PROP_BLOG_URL = "blogurl";
+Com_Zmail_Blog.USER_PROP_BLOG_URL = "blogurl";
 /**
  * Defines the "blog type" user property.
  */
-Com_Zimbra_Blog.USER_PROP_BLOG_TYPE = "blogtype";
+Com_Zmail_Blog.USER_PROP_BLOG_TYPE = "blogtype";
 
 /**
  * Defines the "preferences" menu item ID.
  */
-Com_Zimbra_Blog.MENU_ITEM_ID_PREFERENCES = "PREFERENCES";
+Com_Zmail_Blog.MENU_ITEM_ID_PREFERENCES = "PREFERENCES";
 
 /**
  * Defines the "TypePad" blog type.
  */
-Com_Zimbra_Blog.BLOG_TYPE_TYPE_PAD = "TypePad";
+Com_Zmail_Blog.BLOG_TYPE_TYPE_PAD = "TypePad";
 /**
  * Defines the "WordPress" blog type.
  */
-Com_Zimbra_Blog.BLOG_TYPE_WORD_PRESS = "WordPress";
+Com_Zmail_Blog.BLOG_TYPE_WORD_PRESS = "WordPress";
 
 /**
  * Initializes the zimlet.
  * 
  */
-Com_Zimbra_Blog.prototype.init = function(){
+Com_Zmail_Blog.prototype.init = function(){
 	DBG.println(AjxDebug.DBG1,"Blog  Zimlet Initialized");
 };
 
 /**
  * Called when the view changes.
  */
-Com_Zimbra_Blog.prototype.onShowView =
+Com_Zmail_Blog.prototype.onShowView =
 function(viewId, isNewView) {
     if (viewId == ZmId.VIEW_NOTEBOOK_PAGE_EDIT && !this._toolbar){
         this._initPageEditToolbar();
@@ -80,7 +80,7 @@ function(viewId, isNewView) {
 /**
  * Initializes the page edit toolbar.
  */
-Com_Zimbra_Blog.prototype._initPageEditToolbar =
+Com_Zmail_Blog.prototype._initPageEditToolbar =
 function() {
     try {
         if (!appCtxt.get(ZmSetting.NOTEBOOK_ENABLED))
@@ -114,7 +114,7 @@ function() {
 	}
 };
 
-Com_Zimbra_Blog.prototype._postToBlog =
+Com_Zmail_Blog.prototype._postToBlog =
 function(ev) {
 	
 	this._createBlogHandler();
@@ -125,9 +125,9 @@ function(ev) {
 		
 	this.note={subject:name,body:content};
 	
-	var user = this.getUserProperty(Com_Zimbra_Blog.USER_PROP_USERNAME);
-	var passwd = this.getUserProperty(Com_Zimbra_Blog.USER_PROP_PASSWORD);
-	var blogurl = this.getUserProperty(Com_Zimbra_Blog.USER_PROP_BLOG_URL);
+	var user = this.getUserProperty(Com_Zmail_Blog.USER_PROP_USERNAME);
+	var passwd = this.getUserProperty(Com_Zmail_Blog.USER_PROP_PASSWORD);
+	var blogurl = this.getUserProperty(Com_Zmail_Blog.USER_PROP_BLOG_URL);
 	
 	
 	if(user==null || user=="" || passwd==null || passwd=="" || blogurl==null || blogurl=="")
@@ -137,9 +137,9 @@ function(ev) {
 	}
 	
 	var params = {
-		username: this.getUserProperty(Com_Zimbra_Blog.USER_PROP_USERNAME),
-		password: this.getUserProperty(Com_Zimbra_Blog.USER_PROP_PASSWORD),
-		url: this.getUserProperty(Com_Zimbra_Blog.USER_PROP_BLOG_URL),
+		username: this.getUserProperty(Com_Zmail_Blog.USER_PROP_USERNAME),
+		password: this.getUserProperty(Com_Zmail_Blog.USER_PROP_PASSWORD),
+		url: this.getUserProperty(Com_Zmail_Blog.USER_PROP_BLOG_URL),
 		callback: new AjxCallback(this, this._handleBlogInfo)
 	};
 	this.currentBlog._getBlogList(params);
@@ -149,18 +149,18 @@ function(ev) {
 /**
  * Called when the zimlet panel item is single-clicked.
  */
-Com_Zimbra_Blog.prototype.singleClicked =
+Com_Zmail_Blog.prototype.singleClicked =
 function(myElement, myNumber) {
 	
 	//this.showCategories(['BlogRoll','Uncategorized','Web2.0']);		
 
 };
 
-Com_Zimbra_Blog.prototype.checkPreferences=function(callback,args)
+Com_Zmail_Blog.prototype.checkPreferences=function(callback,args)
 {
-	var user = this.getUserProperty(Com_Zimbra_Blog.USER_PROP_USERNAME);
-	var passwd = this.getUserProperty(Com_Zimbra_Blog.USER_PROP_PASSWORD);
-	var blogurl = this.getUserProperty(Com_Zimbra_Blog.USER_PROP_BLOG_URL);
+	var user = this.getUserProperty(Com_Zmail_Blog.USER_PROP_USERNAME);
+	var passwd = this.getUserProperty(Com_Zmail_Blog.USER_PROP_PASSWORD);
+	var blogurl = this.getUserProperty(Com_Zmail_Blog.USER_PROP_BLOG_URL);
 
 	if(callback==null){
 		callback=this.checkPreferences;
@@ -181,7 +181,7 @@ Com_Zimbra_Blog.prototype.checkPreferences=function(callback,args)
 
 };
 
-Com_Zimbra_Blog.prototype._handleBlogInfo = function(bloginfo) {
+Com_Zmail_Blog.prototype._handleBlogInfo = function(bloginfo) {
 
 
 	try{
@@ -199,13 +199,13 @@ Com_Zimbra_Blog.prototype._handleBlogInfo = function(bloginfo) {
 		if(blogid)
 		{
 	 	this.blogid = blogid;
-	 	this.blogurl = this.getUserProperty(Com_Zimbra_Blog.USER_PROP_BLOG_URL);
+	 	this.blogurl = this.getUserProperty(Com_Zmail_Blog.USER_PROP_BLOG_URL);
 	 
 	 	var params = {
 	 		blogid: blogid,
-		 	url: this.getUserProperty(Com_Zimbra_Blog.USER_PROP_BLOG_URL),
-		 	username: this.getUserProperty(Com_Zimbra_Blog.USER_PROP_USERNAME),
-	 		password: this.getUserProperty(Com_Zimbra_Blog.USER_PROP_PASSWORD),
+		 	url: this.getUserProperty(Com_Zmail_Blog.USER_PROP_BLOG_URL),
+		 	username: this.getUserProperty(Com_Zmail_Blog.USER_PROP_USERNAME),
+	 		password: this.getUserProperty(Com_Zmail_Blog.USER_PROP_PASSWORD),
 		 	callback: new AjxCallback(this, this.showCategories)
 		 };
 	 
@@ -224,7 +224,7 @@ Com_Zimbra_Blog.prototype._handleBlogInfo = function(bloginfo) {
 	}	
 };
 
-Com_Zimbra_Blog.prototype._resultCallback1 = function(result) {
+Com_Zmail_Blog.prototype._resultCallback1 = function(result) {
 	var r = result.text;
 
 	try{
@@ -243,7 +243,7 @@ Com_Zimbra_Blog.prototype._resultCallback1 = function(result) {
  * Called when an object is dropped on the zimlet.
  * 
  */
-Com_Zimbra_Blog.prototype.doDrop =
+Com_Zmail_Blog.prototype.doDrop =
 function(obj) {
 	
 	switch (obj.TYPE) {
@@ -265,11 +265,11 @@ function(obj) {
  * 
  * @param	{ZmMailMsg|ZmConv}	note		the note
  */
-Com_Zimbra_Blog.prototype.noteDropped =
+Com_Zmail_Blog.prototype.noteDropped =
 function(note) {
-	var user = this.getUserProperty(Com_Zimbra_Blog.USER_PROP_USERNAME);
-	var passwd = this.getUserProperty(Com_Zimbra_Blog.USER_PROP_PASSWORD);
-	var blogurl = this.getUserProperty(Com_Zimbra_Blog.USER_PROP_BLOG_URL);
+	var user = this.getUserProperty(Com_Zmail_Blog.USER_PROP_USERNAME);
+	var passwd = this.getUserProperty(Com_Zmail_Blog.USER_PROP_PASSWORD);
+	var blogurl = this.getUserProperty(Com_Zmail_Blog.USER_PROP_BLOG_URL);
 	
 	if(user==null || user=="" || passwd==null || passwd=="" || blogurl==null || blogurl=="") {
 		this.createPropertyEditor(new AjxCallback(this, this.noteDropped, [ note ]));
@@ -299,7 +299,7 @@ function(note) {
  * Shows the categories.
  * 
  */
-Com_Zimbra_Blog.prototype.showCategories =
+Com_Zmail_Blog.prototype.showCategories =
 function(categories) {
 
 	if(categories.length == 0) {
@@ -366,7 +366,7 @@ function(categories) {
  * 
  * @see		showCategories
  */
-Com_Zimbra_Blog.prototype._onOKPress =
+Com_Zmail_Blog.prototype._onOKPress =
 function() {
 	var dlg = this.popupDialog;
 	dlg.popdown();
@@ -375,7 +375,7 @@ function() {
 	var title = info._title;	
 	
 	if(title == null || title == ""){		
-		this.showWarningMsg(Com_Zimbra_Blog.TITLE_WARNING,new AjxListener(this,this.onWarningAccepted));
+		this.showWarningMsg(Com_Zmail_Blog.TITLE_WARNING,new AjxListener(this,this.onWarningAccepted));
 	}else{
 		
 		if(this.warningDialog){
@@ -404,7 +404,7 @@ function() {
 
 };
 		
-Com_Zimbra_Blog.prototype.showWarningMsg =
+Com_Zmail_Blog.prototype.showWarningMsg =
 function(message,listener) {
 	var style = DwtMessageDialog.WARNING_STYLE;
 	var dialog = appCtxt.getMsgDialog();
@@ -419,7 +419,7 @@ function(message,listener) {
 /**
  * 
  */
-Com_Zimbra_Blog.prototype.onWarningAccepted =
+Com_Zmail_Blog.prototype.onWarningAccepted =
 function() {
 	this.warningDialog.popdown();
 	this.popupDialog.popup();	
@@ -428,7 +428,7 @@ function() {
 /**
  * 
  */
-Com_Zimbra_Blog.prototype.showBlogs =
+Com_Zmail_Blog.prototype.showBlogs =
 function(blogs) {
 
 	if (blogs.length == 0) {
@@ -483,7 +483,7 @@ function(blogs) {
  * 
  * @see			showBlogs
  */
-Com_Zimbra_Blog.prototype._handleBlogSelection = function(){
+Com_Zmail_Blog.prototype._handleBlogSelection = function(){
 	
 	var dlg = this.blogsDialog;
 	dlg.popdown();
@@ -491,7 +491,7 @@ Com_Zimbra_Blog.prototype._handleBlogSelection = function(){
 	var info = this.blogsProperties.getProperties();
 	var bid = info._blog;
 	this.blogid = bid;
-	var burl = this.getUserProperty(Com_Zimbra_Blog.USER_PROP_BLOG_URL);
+	var burl = this.getUserProperty(Com_Zmail_Blog.USER_PROP_BLOG_URL);
 	
 	if(this.blogsList[bid] && this.blogsList[bid].url){
 		burl = this.blogsList[bid].url;
@@ -502,29 +502,29 @@ Com_Zimbra_Blog.prototype._handleBlogSelection = function(){
 	 	var params = {
 	 		blogid: bid,
 		 	url: burl,
-		 	username: this.getUserProperty(Com_Zimbra_Blog.USER_PROP_USERNAME),
-	 		password: this.getUserProperty(Com_Zimbra_Blog.USER_PROP_PASSWORD),	 	
+		 	username: this.getUserProperty(Com_Zmail_Blog.USER_PROP_USERNAME),
+	 		password: this.getUserProperty(Com_Zmail_Blog.USER_PROP_PASSWORD),	 	
 		 	callback: new AjxCallback(this, this.showCategories)
 		 };
 	
 	 	this.currentBlog._getCategories(params);
 };
 	
-Com_Zimbra_Blog.prototype._createBlogHandler = function(){
+Com_Zmail_Blog.prototype._createBlogHandler = function(){
 	
-	var blogtype = this.getUserProperty(Com_Zimbra_Blog.USER_PROP_BLOG_TYPE);
+	var blogtype = this.getUserProperty(Com_Zmail_Blog.USER_PROP_BLOG_TYPE);
 	
-	if (blogtype == Com_Zimbra_Blog.BLOG_TYPE_TYPE_PAD) {
+	if (blogtype == Com_Zmail_Blog.BLOG_TYPE_TYPE_PAD) {
 		this.currentBlog = new TypePad(this);		
 	} else {
 		this.currentBlog = new WordPress(this);			
 	}
 };
 
-Com_Zimbra_Blog.prototype.menuItemSelected =
+Com_Zmail_Blog.prototype.menuItemSelected =
 function(itemId) {
 	switch (itemId) {
-	    case Com_Zimbra_Blog.MENU_ITEM_ID_PREFERENCES:
+	    case Com_Zmail_Blog.MENU_ITEM_ID_PREFERENCES:
 	    	this.createPropertyEditor();
 		break;	    
 	}

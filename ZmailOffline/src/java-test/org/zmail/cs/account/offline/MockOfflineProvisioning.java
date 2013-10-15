@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.offline;
+package org.zmail.cs.account.offline;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,40 +21,40 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.account.Key.CalendarResourceBy;
-import com.zimbra.common.account.Key.CosBy;
-import com.zimbra.common.account.Key.DataSourceBy;
-import com.zimbra.common.account.Key.DistributionListBy;
-import com.zimbra.common.account.Key.DomainBy;
-import com.zimbra.common.account.Key.IdentityBy;
-import com.zimbra.common.account.Key.ServerBy;
-import com.zimbra.common.account.Key.SignatureBy;
-import com.zimbra.common.account.Key.XMPPComponentBy;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.CalendarResource;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.Cos;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.DistributionList;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.GlobalGrant;
-import com.zimbra.cs.account.Identity;
-import com.zimbra.cs.account.NamedEntry.Visitor;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.Signature;
-import com.zimbra.cs.account.XMPPComponent;
-import com.zimbra.cs.account.Zimlet;
-import com.zimbra.cs.account.auth.AuthContext;
-import com.zimbra.cs.account.auth.AuthContext.Protocol;
-import com.zimbra.cs.mime.MimeTypeInfo;
-import com.zimbra.cs.mime.MockMimeTypeInfo;
-import com.zimbra.cs.mime.handler.UnknownTypeHandler;
-import com.zimbra.soap.admin.type.CacheEntryType;
-import com.zimbra.soap.admin.type.DataSourceType;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.account.Key.CalendarResourceBy;
+import org.zmail.common.account.Key.CosBy;
+import org.zmail.common.account.Key.DataSourceBy;
+import org.zmail.common.account.Key.DistributionListBy;
+import org.zmail.common.account.Key.DomainBy;
+import org.zmail.common.account.Key.IdentityBy;
+import org.zmail.common.account.Key.ServerBy;
+import org.zmail.common.account.Key.SignatureBy;
+import org.zmail.common.account.Key.XMPPComponentBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.CalendarResource;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.Cos;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.DistributionList;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.GlobalGrant;
+import org.zmail.cs.account.Identity;
+import org.zmail.cs.account.NamedEntry.Visitor;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.Signature;
+import org.zmail.cs.account.XMPPComponent;
+import org.zmail.cs.account.Zimlet;
+import org.zmail.cs.account.auth.AuthContext;
+import org.zmail.cs.account.auth.AuthContext.Protocol;
+import org.zmail.cs.mime.MimeTypeInfo;
+import org.zmail.cs.mime.MockMimeTypeInfo;
+import org.zmail.cs.mime.handler.UnknownTypeHandler;
+import org.zmail.soap.admin.type.CacheEntryType;
+import org.zmail.soap.admin.type.DataSourceType;
 
 public final class MockOfflineProvisioning extends OfflineProvisioning {
 
@@ -65,7 +65,7 @@ public final class MockOfflineProvisioning extends OfflineProvisioning {
     public MockOfflineProvisioning() {
         super(true);
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraServiceHostname, "localhost");
+        attrs.put(Provisioning.A_zmailServiceHostname, "localhost");
         localhost = new Server("localhost", "localhost", attrs, Collections.<String, Object> emptyMap(), this);
     }
 
@@ -167,7 +167,7 @@ public final class MockOfflineProvisioning extends OfflineProvisioning {
     }
 
     @Override
-    public synchronized boolean inDistributionList(Account acct, String zimbraId) {
+    public synchronized boolean inDistributionList(Account acct, String zmailId) {
         throw new UnsupportedOperationException();
     }
 
@@ -203,12 +203,12 @@ public final class MockOfflineProvisioning extends OfflineProvisioning {
     }
 
     @Override
-    public void deleteAccount(String zimbraId) {
+    public void deleteAccount(String zmailId) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public synchronized void renameAccount(String zimbraId, String newName) {
+    public synchronized void renameAccount(String zmailId, String newName) {
         throw new UnsupportedOperationException();
     }
 
@@ -289,7 +289,7 @@ public final class MockOfflineProvisioning extends OfflineProvisioning {
     }
 
     @Override
-    public synchronized void deleteDomain(String zimbraId) {
+    public synchronized void deleteDomain(String zmailId) {
         throw new UnsupportedOperationException();
     }
 
@@ -304,7 +304,7 @@ public final class MockOfflineProvisioning extends OfflineProvisioning {
     }
 
     @Override
-    public synchronized void renameCos(String zimbraId, String newName) {
+    public synchronized void renameCos(String zmailId, String newName) {
         throw new UnsupportedOperationException();
     }
 
@@ -319,7 +319,7 @@ public final class MockOfflineProvisioning extends OfflineProvisioning {
     }
 
     @Override
-    public synchronized void deleteCos(String zimbraId) {
+    public synchronized void deleteCos(String zmailId) {
         throw new UnsupportedOperationException();
     }
 
@@ -344,7 +344,7 @@ public final class MockOfflineProvisioning extends OfflineProvisioning {
     }
 
     @Override
-    public synchronized void deleteServer(String zimbraId) {
+    public synchronized void deleteServer(String zmailId) {
         throw new UnsupportedOperationException();
     }
 
@@ -359,7 +359,7 @@ public final class MockOfflineProvisioning extends OfflineProvisioning {
     }
 
     @Override
-    public synchronized void deleteDistributionList(String zimbraId) {
+    public synchronized void deleteDistributionList(String zmailId) {
         throw new UnsupportedOperationException();
     }
 
@@ -374,7 +374,7 @@ public final class MockOfflineProvisioning extends OfflineProvisioning {
     }
 
     @Override
-    public synchronized void renameDistributionList(String zimbraId, String newName) {
+    public synchronized void renameDistributionList(String zmailId, String newName) {
         throw new UnsupportedOperationException();
     }
 
@@ -404,12 +404,12 @@ public final class MockOfflineProvisioning extends OfflineProvisioning {
     }
 
     @Override
-    public synchronized void deleteCalendarResource(String zimbraId) {
+    public synchronized void deleteCalendarResource(String zmailId) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public synchronized void renameCalendarResource(String zimbraId, String newName) {
+    public synchronized void renameCalendarResource(String zmailId, String newName) {
         throw new UnsupportedOperationException();
     }
 
@@ -528,7 +528,7 @@ public final class MockOfflineProvisioning extends OfflineProvisioning {
 
     @Override
     public synchronized DataSource createDataSource(Account account, DataSourceType type, String dataSourceName, Map<String, Object> attrs) {
-        DataSource ds = new OfflineDataSource(account, type, dataSourceName, (String) attrs.get(A_zimbraDataSourceId), attrs, this);
+        DataSource ds = new OfflineDataSource(account, type, dataSourceName, (String) attrs.get(A_zmailDataSourceId), attrs, this);
         dataSourcesById.put(ds.getId(), ds);
         dataSourcesByName.put(ds.getName(), ds);
         return ds;

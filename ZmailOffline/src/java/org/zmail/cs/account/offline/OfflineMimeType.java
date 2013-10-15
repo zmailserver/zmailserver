@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.offline;
+package org.zmail.cs.account.offline;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import com.zimbra.cs.mime.MimeTypeInfo;
+import org.zmail.cs.mime.MimeTypeInfo;
 
 class OfflineMimeType implements MimeTypeInfo {
     private String mTypes[], mHandler;

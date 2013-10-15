@@ -189,7 +189,7 @@ if(x.t("feature"))y.f("6,1");
 if(x.t("space"))y.f("7,2");
 if(x.t("mailboxes"))y.f("7,1");
 if(x.t("button"))y.f("9,1");
-if(x.t("zimbra"))y.f("0,2,4,1,3,6");
+if(x.t("zmail"))y.f("0,2,4,1,3,6");
 if(x.t("importing"))y.f("0,1");
 if(x.t("number"))y.f("7,1,0,1,4,3");
 if(x.t("cause"))y.f("5,1,6,1");

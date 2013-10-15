@@ -8,17 +8,17 @@ import re
 import helpers.env
 import helpers.target
 import helpers.make
-import specs.zimbra
+import specs.zmail
 
 ALLOW_OFFICIAL_KEY='allow.elfofficialkey'
 
-class ZimbraVA(helpers.target.Target, helpers.make.MakeHelper):
+class ZmailVA(helpers.target.Target, helpers.make.MakeHelper):
    """
    Zimbra Collaboration Suite virtual appliance
    """
 
    def GetBuildProductNames(self):
-      return { 'name':      'zimbra_va',
+      return { 'name':      'zmail_va',
                'longname' : 'Zimbra Collaboration Suite virtual appliance' }
 
    def GetClusterRequirements(self):
@@ -36,60 +36,60 @@ class ZimbraVA(helpers.target.Target, helpers.make.MakeHelper):
    def GetRepositories(self, hosttype):
       repos = [
             helpers.target.PerforceRepo(
-               'zimbra/%(branch)/ZimbraBuild',
-               'zimbra/ZimbraBuild'),
+               'zmail/%(branch)/ZmailBuild',
+               'zmail/ZmailBuild'),
             helpers.target.PerforceRepo(
-               'zimbra/%(branch)/ZimbraAppliance',
-               'zimbra/ZimbraAppliance'),
+               'zmail/%(branch)/ZmailAppliance',
+               'zmail/ZmailAppliance'),
             helpers.target.PerforceRepo(
-               'zimbra/%(branch)/ZimbraNetwork',
-               'zimbra/ZimbraNetwork'),
+               'zmail/%(branch)/ZmailNetwork',
+               'zmail/ZmailNetwork'),
 	    helpers.target.PerforceRepo(
-               'zimbra/%(branch)/ZimbraCommon',
-               'zimbra/ZimbraCommon'),
+               'zmail/%(branch)/ZmailCommon',
+               'zmail/ZmailCommon'),
 	    helpers.target.PerforceRepo(
-               'zimbra/%(branch)/ZimbraSoap',
-               'zimbra/ZimbraSoap'),
+               'zmail/%(branch)/ZmailSoap',
+               'zmail/ZmailSoap'),
 	    helpers.target.PerforceRepo(
-               'zimbra/%(branch)/ZimbraWebClient',
-               'zimbra/ZimbraWebClient'),
+               'zmail/%(branch)/ZmailWebClient',
+               'zmail/ZmailWebClient'),
 	    helpers.target.PerforceRepo(
-               'zimbra/%(branch)/ZimbraWebClient/jars',
-               'zimbra/ZimbraWebClient/jars'),	
+               'zmail/%(branch)/ZmailWebClient/jars',
+               'zmail/ZmailWebClient/jars'),	
  	    helpers.target.PerforceRepo(
-               'zimbra/%(branch)/ZimbraLicenses',
-               'zimbra/ZimbraLicenses'),		
+               'zmail/%(branch)/ZmailLicenses',
+               'zmail/ZmailLicenses'),		
 	    helpers.target.PerforceRepo(
-               'zimbra/%(branch)/ZimbraTagLib',
-               'zimbra/ZimbraTagLib'),
+               'zmail/%(branch)/ZmailTagLib',
+               'zmail/ZmailTagLib'),
 	    helpers.target.PerforceRepo(
-               'zimbra/%(branch)/ZimbraServer',
-               'zimbra/ZimbraServer'),	
+               'zmail/%(branch)/ZmailServer',
+               'zmail/ZmailServer'),	
 	    helpers.target.PerforceRepo(
-               'zimbra/%(branch)/ZimbraIM',
-               'zimbra/ZimbraIM'),
+               'zmail/%(branch)/ZmailIM',
+               'zmail/ZmailIM'),
             helpers.target.PerforceRepo(
-               'zimbra/%(branch)/ZimbraIM/jars',
-               'zimbra/ZimbraIM/jars'),
+               'zmail/%(branch)/ZmailIM/jars',
+               'zmail/ZmailIM/jars'),
          ]
       return repos
 
    def GetComponentDependencies(self):
       comps = {}
       comps['csc-ubuntu804'] = {
-         'branch': specs.zimbra.CSC_UBUNTU804_BRANCH,
-         'change': specs.zimbra.CSC_UBUNTU804_CLN,
-         'buildtype': specs.zimbra.CSC_UBUNTU804_BUILDTYPE,
+         'branch': specs.zmail.CSC_UBUNTU804_BRANCH,
+         'change': specs.zmail.CSC_UBUNTU804_CLN,
+         'buildtype': specs.zmail.CSC_UBUNTU804_BUILDTYPE,
       }
       comps['tools'] = {
-         'branch': specs.zimbra.TOOLS_BRANCH,
-         'change': specs.zimbra.TOOLS_CLN,
-         'buildtype': specs.zimbra.TOOLS_BUILDTYPE,
+         'branch': specs.zmail.TOOLS_BRANCH,
+         'change': specs.zmail.TOOLS_CLN,
+         'buildtype': specs.zmail.TOOLS_BUILDTYPE,
       }
       comps['va_build'] = {
-         'branch': specs.zimbra.VA_BUILD_BRANCH,
-         'change': specs.zimbra.VA_BUILD_CLN,
-         'buildtype': specs.zimbra.VA_BUILD_BUILDTYPE,
+         'branch': specs.zmail.VA_BUILD_BRANCH,
+         'change': specs.zmail.VA_BUILD_CLN,
+         'buildtype': specs.zmail.VA_BUILD_BUILDTYPE,
       }
       return comps
 
@@ -97,9 +97,9 @@ class ZimbraVA(helpers.target.Target, helpers.make.MakeHelper):
       target = 'all'
       flags = {}
       flags['--makefile'] = 'Makefile.vai'
-      return [ { 'desc'    : 'Running Zimbra VA build',
-                 'root'    : 'zimbra/ZimbraAppliance',
-                 'log'     : 'zimbra-va-%s.log' % target,
+      return [ { 'desc'    : 'Running Zmail VA build',
+                 'root'    : 'zmail/ZmailAppliance',
+                 'log'     : 'zmail-va-%s.log' % target,
                  'command' : self._Command(hosttype,
                                            target,
                                            **flags),
@@ -109,14 +109,14 @@ class ZimbraVA(helpers.target.Target, helpers.make.MakeHelper):
    def GetStorageInfo(self, hosttype):
       storages = []
       if hosttype == 'linux':
-         storages += [{'type': 'source', 'src': 'zimbra/'}]
+         storages += [{'type': 'source', 'src': 'zmail/'}]
       storages += [{'type': 'build',
-                     'src': 'zimbra/ZimbraAppliance/build/'}]
+                     'src': 'zmail/ZmailAppliance/build/'}]
       return storages
 
    def GetBuildProductVersion(self, hosttype):
       if hosttype.startswith('linux'):
-         vfile = "%s/zimbra/ZimbraAppliance/defs.mk" % self.options.get('buildroot')
+         vfile = "%s/zmail/ZmailAppliance/defs.mk" % self.options.get('buildroot')
          vregexp = re.compile(r'^VA_PRODUCT_VERSION\s*:=\s*(.*)')
          try:
             for line in file(vfile):

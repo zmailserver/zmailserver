@@ -14,7 +14,7 @@
 --%>
 <%@ tag body-content="empty" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
 
 (<a href="javascript:zd.toggle('certInfo')"><fmt:message key='CertDetails'/></a>)
 

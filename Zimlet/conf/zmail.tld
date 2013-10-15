@@ -4,11 +4,11 @@
 <taglib>
   <tlibversion>1.0</tlibversion>
   <jspversion>1.1</jspversion>
-  <shortname>zimbra</shortname>
-  <info>Zimbra Tag library</info>
+  <shortname>zmail</shortname>
+  <info>Zmail Tag library</info>
   <tag>
     <name>message</name>
-    <tagclass>com.zimbra.cs.taglib.Message</tagclass>
+    <tagclass>org.zmail.cs.taglib.Message</tagclass>
     <bodycontent>empty</bodycontent>
     <info>mail message</info>
     <attribute>
@@ -24,7 +24,7 @@
   </tag>
   <tag>
     <name>conversation</name>
-    <tagclass>com.zimbra.cs.taglib.Conversation</tagclass>
+    <tagclass>org.zmail.cs.taglib.Conversation</tagclass>
     <bodycontent>empty</bodycontent>
     <info>conversation (array of mail message)</info>
     <attribute>
@@ -45,7 +45,7 @@
   </tag>
   <tag>
     <name>note</name>
-    <tagclass>com.zimbra.cs.taglib.Note</tagclass>
+    <tagclass>org.zmail.cs.taglib.Note</tagclass>
     <bodycontent>empty</bodycontent>
     <info>note</info>
     <attribute>
@@ -56,7 +56,7 @@
   </tag>
   <tag>
     <name>contact</name>
-    <tagclass>com.zimbra.cs.taglib.Contact</tagclass>
+    <tagclass>org.zmail.cs.taglib.Contact</tagclass>
     <bodycontent>empty</bodycontent>
     <info>address book contact</info>
     <attribute>
@@ -72,7 +72,7 @@
   </tag>
   <tag>
     <name>appointment</name>
-    <tagclass>com.zimbra.cs.taglib.Appointment</tagclass>
+    <tagclass>org.zmail.cs.taglib.Appointment</tagclass>
     <bodycontent>empty</bodycontent>
     <info>calendar appointment</info>
     <attribute>
@@ -88,7 +88,7 @@
   </tag>
   <tag>
     <name>property</name>
-    <tagclass>com.zimbra.cs.taglib.Property</tagclass>
+    <tagclass>org.zmail.cs.taglib.Property</tagclass>
     <bodycontent>empty</bodycontent>
     <info>user property</info>
     <attribute>
@@ -119,7 +119,7 @@
   </tag>
   <tag>
     <name>zimletconfig</name>
-    <tagclass>com.zimbra.cs.taglib.ZimletConfig</tagclass>
+    <tagclass>org.zmail.cs.taglib.ZimletConfig</tagclass>
     <bodycontent>empty</bodycontent>
     <info>zimlet configuration</info>
     <attribute>

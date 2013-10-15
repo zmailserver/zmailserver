@@ -13,15 +13,15 @@
  * ***** END LICENSE BLOCK *****
  */
 
-com_zimbra_example_simplejspasync_HandlerObject = function() {
+org_zmail_example_simplejspasync_HandlerObject = function() {
 };
-com_zimbra_example_simplejspasync_HandlerObject.prototype = new ZmZimletBase;
-com_zimbra_example_simplejspasync_HandlerObject.prototype.constructor = com_zimbra_example_simplejspasync_HandlerObject;
+org_zmail_example_simplejspasync_HandlerObject.prototype = new ZmZimletBase;
+org_zmail_example_simplejspasync_HandlerObject.prototype.constructor = org_zmail_example_simplejspasync_HandlerObject;
 
 /**
  * Double clicked.
  */
-com_zimbra_example_simplejspasync_HandlerObject.prototype.doubleClicked =
+org_zmail_example_simplejspasync_HandlerObject.prototype.doubleClicked =
 function() {
 	this.singleClicked();
 };
@@ -29,7 +29,7 @@ function() {
 /**
  * Single clicked.
  */
-com_zimbra_example_simplejspasync_HandlerObject.prototype.singleClicked =
+org_zmail_example_simplejspasync_HandlerObject.prototype.singleClicked =
 function() {
 	this._displayDialog();
 };
@@ -38,7 +38,7 @@ function() {
  * Displays the zimlet jsp page.
  * 
  */
-com_zimbra_example_simplejspasync_HandlerObject.prototype._displayDialog = 
+org_zmail_example_simplejspasync_HandlerObject.prototype._displayDialog = 
 function() {
 	
 	var jspUrl = this.getResource("jspfile.jsp");
@@ -53,7 +53,7 @@ function() {
  * Called from the ajax callback.
  * 
  */
-com_zimbra_example_simplejspasync_HandlerObject.prototype._rpcCallback =
+org_zmail_example_simplejspasync_HandlerObject.prototype._rpcCallback =
 function(p1, p2, response) {
 
 	if (response.success == true) {

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.nginx;
+package org.zmail.cs.nginx;
 
 public class ServerInfo extends LookupEntry {
     
@@ -56,7 +56,7 @@ public class ServerInfo extends LookupEntry {
         mHttpImapSSLPort = port;
     }
     
-    String getPortForProto(String proto, boolean isZimbraAdmin) {
+    String getPortForProto(String proto, boolean isZmailAdmin) {
         if (NginxLookupExtension.NginxLookupHandler.POP3.equalsIgnoreCase(proto))
             return mHttpPop3Port;
         else if (NginxLookupExtension.NginxLookupHandler.POP3_SSL.equalsIgnoreCase(proto))
@@ -68,7 +68,7 @@ public class ServerInfo extends LookupEntry {
         else if (NginxLookupExtension.NginxLookupHandler.HTTP.equalsIgnoreCase(proto)) {
             return mHttpPort;            
         } else if (NginxLookupExtension.NginxLookupHandler.HTTP_SSL.equalsIgnoreCase(proto)) {
-            if (isZimbraAdmin) {
+            if (isZmailAdmin) {
                 return mHttpAdminPort;
             } else {
                 return mHttpSSLPort;

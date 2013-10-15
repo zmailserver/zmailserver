@@ -15,7 +15,7 @@
 
 /**
  * @overview
- * This file defines the Zimbra Retention Warning dialog, when attempting to delete
+ * This file defines the Zmail Retention Warning dialog, when attempting to delete
  * items that a retention policy specifies should be kept.
  *
  */

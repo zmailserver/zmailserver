@@ -12,17 +12,17 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.offline;
+package org.zmail.cs.service.offline;
 
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.offline.backup.AccountBackupProducer;
-import com.zimbra.cs.offline.common.OfflineConstants;
-import com.zimbra.soap.DocumentHandler;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.offline.backup.AccountBackupProducer;
+import org.zmail.cs.offline.common.OfflineConstants;
+import org.zmail.soap.DocumentHandler;
+import org.zmail.soap.ZmailSoapContext;
 
 public class OfflineAccountBackupService extends DocumentHandler {
     
@@ -36,7 +36,7 @@ public class OfflineAccountBackupService extends DocumentHandler {
         } else {
             status = AccountBackupProducer.getInstance().backupAllAccounts();
         }
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Element response = zsc.createElement(OfflineConstants.ACCOUNT_BACKUP_RESPONSE);
         for (String acctId : status.keySet()) {
             String backupStatus = status.get(acctId);

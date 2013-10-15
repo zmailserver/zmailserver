@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.tag;
+package org.zmail.cs.taglib.tag;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.taglib.bean.ZMessageBean;
-import com.zimbra.cs.taglib.bean.ZMessageComposeBean;
-import com.zimbra.cs.taglib.bean.ZMessageComposeBean.Action;
-import com.zimbra.cs.taglib.bean.ZMessageComposeBean.AppointmentOptions;
-import com.zimbra.client.ZMailbox;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.taglib.bean.ZMessageBean;
+import org.zmail.cs.taglib.bean.ZMessageComposeBean;
+import org.zmail.cs.taglib.bean.ZMessageComposeBean.Action;
+import org.zmail.cs.taglib.bean.ZMessageComposeBean.AppointmentOptions;
+import org.zmail.client.ZMailbox;
 
 import javax.servlet.jsp.JspContext;
 import javax.servlet.jsp.JspException;
@@ -28,7 +28,7 @@ import javax.servlet.jsp.PageContext;
 import java.io.IOException;
 import java.util.Calendar;
 
-public class MessageComposeTag extends ZimbraSimpleTag {
+public class MessageComposeTag extends ZmailSimpleTag {
 
     public static final String ACTION_NEW = "new";
     public static final String ACTION_APPT_EDIT = "apptedit";

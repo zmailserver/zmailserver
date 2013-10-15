@@ -14,15 +14,15 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_phone"
+<zimlet name="org_zmail_phone"
         version="2.7"
         label="${msg.label}"
         target="main view-window"
         description="${msg.description}">
 	<include>phone.js</include>
 	<include>templates/Phone.template.js</include>
-	<handlerObject>Com_Zimbra_Phone</handlerObject>
-	<serverExtension hasKeyword="phone" extensionClass="com.zimbra.cs.zimlet.handler.NANPHandler"/>
+	<handlerObject>Com_Zmail_Phone</handlerObject>
+	<serverExtension hasKeyword="phone" extensionClass="org.zmail.cs.zimlet.handler.NANPHandler"/>
 	<contentObject type="phone">
 		<contextMenu>
 			<menuItem label="${msg.search}" icon="Search" id="SEARCH"/>

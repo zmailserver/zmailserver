@@ -14,18 +14,18 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.calendar.appointments.views.month.allday;
+package org.zmail.qa.selenium.projects.ajax.tests.calendar.appointments.views.month.allday;
 
 import java.util.*;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.calendar.DialogConfirmDeleteAppointment;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.calendar.DialogConfirmDeleteAppointment;
 
 
 public class DeleteAppointment extends AjaxCommonTest {
@@ -42,7 +42,7 @@ public class DeleteAppointment extends AjaxCommonTest {
 			private static final long serialVersionUID = 3028486541122343959L;
 
 		{
-		    put("zimbraPrefCalendarInitialView", "month");
+		    put("zmailPrefCalendarInitialView", "month");
 		}};
 
 
@@ -54,15 +54,15 @@ public class DeleteAppointment extends AjaxCommonTest {
 	public void DeleteAppointment_01() throws HarnessException {
 		
 		// Create an appointment on the server
-		String subject = "appointment" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "appointment" + ZmailSeleniumProperties.getUniqueString();
 
 		AppointmentItem.createAppointmentAllDay(
 				app.zGetActiveAccount(),
 				Calendar.getInstance(),
 				1,
 				subject,
-				"content" + ZimbraSeleniumProperties.getUniqueString(),
-				"location" + ZimbraSeleniumProperties.getUniqueString(),
+				"content" + ZmailSeleniumProperties.getUniqueString(),
+				"location" + ZmailSeleniumProperties.getUniqueString(),
 				null);
 		
 		

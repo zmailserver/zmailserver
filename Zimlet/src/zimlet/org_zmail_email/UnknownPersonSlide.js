@@ -182,7 +182,7 @@ function(ev) {
     }
     else if (el.id == "UnknownPersonSlide_imAnchorId" &&
 		appCtxt.getSettings()._hasVoiceFeature()) {
-        ZmZimbraMail.unloadHackCallback();
+        ZmZmailMail.unloadHackCallback();
         location.href = this.imURI;
         this.emailZimlet._imListener(this.imURI);
         return false;
@@ -243,7 +243,7 @@ function() {
     }
 	else { //not in address book - search in the GAL
 		var jsonObj, request, soapDoc;
-		jsonObj = {SearchGalRequest:{_jsns:"urn:zimbraAccount"}};
+		jsonObj = {SearchGalRequest:{_jsns:"urn:zmailAccount"}};
 		request = jsonObj.SearchGalRequest;
 		request.type = "account";
 		request.name = this.emailZimlet.emailAddress;
@@ -345,7 +345,7 @@ function(email) {
 		width: width,
 		left: left
 	};
-	return AjxTemplate.expand("com_zimbra_email.templates.Email1#Frame", subs);
+	return AjxTemplate.expand("org_zmail_email.templates.Email1#Frame", subs);
 };
 
 UnknownPersonSlide.prototype._setContactDetails =
@@ -382,7 +382,7 @@ function(attrs) {
     this.attribs = attrs;
     attrs = this._formatTexts(attrs);
 
-	var iHtml = AjxTemplate.expand("com_zimbra_email.templates.Email1#ContactDetails", attrs);
+	var iHtml = AjxTemplate.expand("org_zmail_email.templates.Email1#ContactDetails", attrs);
 	document.getElementById(UnknownPersonSlide.TEXT_DIV_ID).innerHTML = iHtml;
 	document.getElementById("UnknownPersonSlide_Frame").onmouseup =  AjxCallback.simpleClosure(this._handleAllClicks, this);
 	/*

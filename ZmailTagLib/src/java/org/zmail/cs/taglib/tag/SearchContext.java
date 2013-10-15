@@ -12,19 +12,19 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.tag;
+package org.zmail.cs.taglib.tag;
 
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.MapMaker;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.taglib.bean.*;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZSearchParams;
-import com.zimbra.client.ZSearchPagerResult;
-import com.zimbra.client.ZPhoneAccount;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.taglib.bean.*;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZSearchParams;
+import org.zmail.client.ZSearchPagerResult;
+import org.zmail.client.ZPhoneAccount;
 
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;

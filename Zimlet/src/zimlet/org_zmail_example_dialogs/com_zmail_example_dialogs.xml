@@ -14,19 +14,19 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_example_dialogs"
+<zimlet name="org_zmail_example_dialogs"
         version="1.0"
         description="Creates various dialogs">
-    <include>com_zimbra_example_dialogs.js</include>
-    <handlerObject>com_zimbra_example_dialogs_HandlerObject</handlerObject>
+    <include>org_zmail_example_dialogs.js</include>
+    <handlerObject>org_zmail_example_dialogs_HandlerObject</handlerObject>
     <zimletPanelItem label="Dialogs Zimlet">
         <contextMenu>
-            <menuItem label="Message Dialog (info)" icon="zimbraIcon" id="com_zimbra_dialogs_msgInfodlg"/>
-            <menuItem label="Message Dialog (warn)" icon="zimbraIcon" id="com_zimbra_dialogs_msgWarndlg"/>
-            <menuItem label="Message Dialog (critical)" icon="zimbraIcon" id="com_zimbra_dialogs_msgCriticaldlg"/>
-            <menuItem label="Error" icon="zimbraIcon" id="com_zimbra_dialogs_errordlg"/>
-            <menuItem label="Yes/No Dialog" icon="zimbraIcon" id="com_zimbra_dialogs_yesnodlg"/>
-            <menuItem label="Yes/No/Cancel Dialog" icon="zimbraIcon" id="com_zimbra_dialogs_yesnocanceldlg"/>
+            <menuItem label="Message Dialog (info)" icon="zmailIcon" id="org_zmail_dialogs_msgInfodlg"/>
+            <menuItem label="Message Dialog (warn)" icon="zmailIcon" id="org_zmail_dialogs_msgWarndlg"/>
+            <menuItem label="Message Dialog (critical)" icon="zmailIcon" id="org_zmail_dialogs_msgCriticaldlg"/>
+            <menuItem label="Error" icon="zmailIcon" id="org_zmail_dialogs_errordlg"/>
+            <menuItem label="Yes/No Dialog" icon="zmailIcon" id="org_zmail_dialogs_yesnodlg"/>
+            <menuItem label="Yes/No/Cancel Dialog" icon="zmailIcon" id="org_zmail_dialogs_yesnocanceldlg"/>
         </contextMenu>
     </zimletPanelItem>
 </zimlet>

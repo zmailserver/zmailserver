@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>ZimbraTagLib</name>
+	<name>ZmailTagLib</name>
 	<comment></comment>
 	<projects>
-		<project>ZimbraCommon</project>
-		<project>ZimbraServer</project>
+		<project>ZmailCommon</project>
+		<project>ZmailServer</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

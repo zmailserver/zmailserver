@@ -18,15 +18,15 @@
  *
  * Window - Preferences - Java - Code Style - Code Templates
  */
-package com.zimbra.ldaputils;
+package org.zmail.ldaputils;
 
 import java.util.Map;
 
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.ldap.entry.LdapEntry;
-import com.zimbra.cs.ldap.LdapException;
-import com.zimbra.cs.ldap.ZAttributes;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.ldap.entry.LdapEntry;
+import org.zmail.cs.ldap.LdapException;
+import org.zmail.cs.ldap.ZAttributes;
 
 /**
  * @author Greg Solovyev

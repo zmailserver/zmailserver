@@ -30,7 +30,7 @@
  * will be called in the context of this object.
  */
 function ZmSugarCrm(server, callback) {
-	this.server = "/zimbra/zimlets/sugarcrm/sugarcrm.jsp?address=" +
+	this.server = "/zmail/zimlets/sugarcrm/sugarcrm.jsp?address=" +
 		AjxStringUtil.urlEncode(server);
 	if (typeof callback == "function")
 		callback = new AjxCallback(this, callback);
@@ -129,7 +129,7 @@ ZmSugarCrm.prototype.login = function(user, passwd) {
 		version   : "1.1"
 	};
 	env.set("user_auth", auth);
-	env.set("application", "Zimbra");
+	env.set("application", "Zmail");
 	this._rpc(env);
 };
 

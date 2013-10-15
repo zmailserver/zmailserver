@@ -364,8 +364,8 @@ function(params) {
 
 	var obj = {Header:{}, Body:params.jsonObj};
 
-	var context = obj.Header.context = {_jsns:"urn:zimbra"};
-	var ua_name = ["ZimbraWebClient - ", AjxEnv.browser, " (", AjxEnv.platform, ")"].join("");
+	var context = obj.Header.context = {_jsns:"urn:zmail"};
+	var ua_name = ["ZmailWebClient - ", AjxEnv.browser, " (", AjxEnv.platform, ")"].join("");
 	context.userAgent = {name:ua_name};
 	if (ZmCsfeCommand.clientVersion) {
 		context.userAgent.version = ZmCsfeCommand.clientVersion;
@@ -447,10 +447,10 @@ function(params) {
 
 		// Add the SOAP header and context
 		var hdr = soapDoc.createHeaderElement();
-		var context = soapDoc.set("context", null, hdr, "urn:zimbra");
+		var context = soapDoc.set("context", null, hdr, "urn:zmail");
 	
 		var ua = soapDoc.set("userAgent", null, context);
-		var name = ["ZimbraWebClient - ", AjxEnv.browser, " (", AjxEnv.platform, ")"].join("");
+		var name = ["ZmailWebClient - ", AjxEnv.browser, " (", AjxEnv.platform, ")"].join("");
 		ua.setAttribute("name", name);
 		if (ZmCsfeCommand.clientVersion) {
 			ua.setAttribute("version", ZmCsfeCommand.clientVersion);

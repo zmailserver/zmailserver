@@ -76,7 +76,7 @@ ZaFp.getEntry = function (obj) {
 
 
 ZaFp.push = function (id) {
-    var soapDoc = AjxSoapDoc.create("PushFreeBusyRequest", ZaZimbraAdmin.URN, null);
+    var soapDoc = AjxSoapDoc.create("PushFreeBusyRequest", ZaZmailAdmin.URN, null);
 	var entry = soapDoc.set("account", "");
 	entry.setAttribute("id", id);
 	try {
@@ -97,7 +97,7 @@ ZaFp.push = function (id) {
 }
 
 ZaFp.getProviders = function () {
-    var soapDoc = AjxSoapDoc.create("GetAllFreeBusyProvidersRequest", ZaZimbraAdmin.URN, null);
+    var soapDoc = AjxSoapDoc.create("GetAllFreeBusyProvidersRequest", ZaZmailAdmin.URN, null);
     try {
 		params = new Object();
 		params.soapDoc = soapDoc;

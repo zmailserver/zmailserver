@@ -18,22 +18,22 @@
  * 
  * @author Kevin Henrikson
  */
-function com_zimbra_ymaps_HandlerObject() {
+function org_zmail_ymaps_HandlerObject() {
 }
 
-com_zimbra_ymaps_HandlerObject.prototype = new ZmZimletBase();
-com_zimbra_ymaps_HandlerObject.prototype.constructor = com_zimbra_ymaps_HandlerObject;
+org_zmail_ymaps_HandlerObject.prototype = new ZmZimletBase();
+org_zmail_ymaps_HandlerObject.prototype.constructor = org_zmail_ymaps_HandlerObject;
 
 /**
  * Simplify handler object
  *
  */
-var YMapsZimlet = com_zimbra_ymaps_HandlerObject;
+var YMapsZimlet = org_zmail_ymaps_HandlerObject;
 
 /**
  * Y! Maps Webservice URL
  */
-YMapsZimlet.URL = "http://api.local.yahoo.com/MapsService/V1/mapImage?appid=ZimbraMail&zoom=4&image_height=245&image_width=345&location=";
+YMapsZimlet.URL = "http://api.local.yahoo.com/MapsService/V1/mapImage?appid=ZmailMail&zoom=4&image_height=245&image_width=345&location=";
 
 /**
  * Matches if the address contains country name at the end(instead of Zip)
@@ -60,7 +60,7 @@ YMapsZimlet.REGEX = "\\d+?-??\\d{0,5},??\\s(?=((\\w+\\W+){2,9}))\\1((\\d{5,7}(-\
 YMapsZimlet.CACHE = [];
 
 /**
- * Called by the Zimbra framework when the Ymaps panel item was double clicked.
+ * Called by the Zmail framework when the Ymaps panel item was double clicked.
  */
 YMapsZimlet.prototype.doubleClicked =
 function() {
@@ -111,7 +111,7 @@ function() {
 };
 
 /**
- * Called by the Zimbra framework when the Ymaps panel item was clicked.
+ * Called by the Zmail framework when the Ymaps panel item was clicked.
  * 
  */
 YMapsZimlet.prototype.singleClicked =

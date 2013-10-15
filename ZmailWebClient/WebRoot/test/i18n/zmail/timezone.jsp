@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
 -->
 <%@ page import="java.util.*" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
 
 <jsp:useBean id="now" class="java.util.Date" />
 <%

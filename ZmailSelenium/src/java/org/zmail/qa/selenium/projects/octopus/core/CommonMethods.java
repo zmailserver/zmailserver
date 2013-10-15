@@ -14,61 +14,61 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.octopus.core;
+package org.zmail.qa.selenium.projects.octopus.core;
 
 import java.util.ArrayList;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.OctopusAccount;
-import com.zimbra.qa.selenium.framework.util.SleepUtil;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.OctopusAccount;
+import org.zmail.qa.selenium.framework.util.SleepUtil;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
 
 public class CommonMethods {
 
 	public CommonMethods() {}
 
 	// revoke sharing a folder via soap
-	protected void revokeShareFolderViaSoap(ZimbraAccount account, ZimbraAccount grantee, FolderItem folder) throws HarnessException {
+	protected void revokeShareFolderViaSoap(ZmailAccount account, ZmailAccount grantee, FolderItem folder) throws HarnessException {
 
-		account.soapSend("<FolderActionRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<FolderActionRequest xmlns='urn:zmailMail'>"
 				+ "<action id='" + folder.getId()
-				+ "' op='!grant' zid='" +  grantee.ZimbraId +"'" + ">"
+				+ "' op='!grant' zid='" +  grantee.ZmailId +"'" + ">"
 				+ "</action>"
 				+ "</FolderActionRequest>");
 
 	}
 	// create mountpoint via soap
-	protected void mountFolderViaSoap(ZimbraAccount account, ZimbraAccount grantee, FolderItem folder,
+	protected void mountFolderViaSoap(ZmailAccount account, ZmailAccount grantee, FolderItem folder,
 			String permission, FolderItem mountPointFolder, String mountPointName) throws HarnessException {
 
-		account.soapSend("<FolderActionRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<FolderActionRequest xmlns='urn:zmailMail'>"
 				+ "<action id='" + folder.getId()
 				+ "' op='grant'>" + "<grant d='"
 				+ grantee.EmailAddress + "' gt='usr' perm='" + permission + "'/>"
 				+ "</action>" + "</FolderActionRequest>");
 
-		grantee.soapSend("<CreateMountpointRequest xmlns='urn:zimbraMail'>"
+		grantee.soapSend("<CreateMountpointRequest xmlns='urn:zmailMail'>"
 				+ "<link l='" + mountPointFolder.getId()
 				+ "' name='" + mountPointName
 				+ "' view='document' rid='" + folder.getId()
-				+ "' zid='" + account.ZimbraId + "'/>"
+				+ "' zid='" + account.ZmailId + "'/>"
 				+ "</CreateMountpointRequest>");
 	}
 	// share a folder via soap
-	protected void shareFolderViaSoap(ZimbraAccount account, ZimbraAccount grantee, FolderItem folder,
+	protected void shareFolderViaSoap(ZmailAccount account, ZmailAccount grantee, FolderItem folder,
 			String permission) throws HarnessException {
 
-		account.soapSend("<FolderActionRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<FolderActionRequest xmlns='urn:zmailMail'>"
 				+ "<action id='" + folder.getId()
 				+ "' op='grant'>" + "<grant d='"
 				+ grantee.EmailAddress + "' gt='usr' perm='" + permission + "'/>"
 				+ "</action>" + "</FolderActionRequest>");
 
-		account.soapSend("<SendShareNotificationRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<SendShareNotificationRequest xmlns='urn:zmailMail'>"
 				+ "<item id='"
 				+ folder.getId()
 				+ "'/>"
@@ -79,7 +79,7 @@ public class CommonMethods {
 				+ "</SendShareNotificationRequest>");
 	}
 	// create a new folder via soap
-	protected FolderItem createFolderViaSoap(ZimbraAccount account, FolderItem ...folderItemArray) throws HarnessException {
+	protected FolderItem createFolderViaSoap(ZmailAccount account, FolderItem ...folderItemArray) throws HarnessException {
 
 		FolderItem folderItem = FolderItem.importFromSOAP(account, SystemFolder.Briefcase);
 
@@ -88,10 +88,10 @@ public class CommonMethods {
 		}
 
 		// generate folder name
-		String foldername = "Folder " + ZimbraSeleniumProperties.getUniqueString();
+		String foldername = "Folder " + ZmailSeleniumProperties.getUniqueString();
 
 		// send soap request
-		account.soapSend("<CreateFolderRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+ "<folder name='" + foldername + "' l='"
 				+ folderItem.getId()
 				+ "' view='document'/>" + "</CreateFolderRequest>");
@@ -100,7 +100,7 @@ public class CommonMethods {
 		return FolderItem.importFromSOAP(account, foldername);
 	}
 	// Create a new folder, pass the required folder name
-	protected FolderItem createFolderViaSoap(ZimbraAccount account, String folderName, FolderItem ...folderItemArray) throws HarnessException
+	protected FolderItem createFolderViaSoap(ZmailAccount account, String folderName, FolderItem ...folderItemArray) throws HarnessException
 	{
 		FolderItem folderItem = FolderItem.importFromSOAP(account, SystemFolder.Briefcase);
 
@@ -109,7 +109,7 @@ public class CommonMethods {
 		}
 
 		// send soap request
-		account.soapSend("<CreateFolderRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+ "<folder name='" + folderName + "' l='"
 				+ folderItem.getId()
 				+ "' view='document'/>" + "</CreateFolderRequest>");
@@ -117,7 +117,7 @@ public class CommonMethods {
 		// verify folder creation on the server
 		return FolderItem.importFromSOAP(account, folderName);
 	}
-	// create a new zimbra account
+	// create a new zmail account
 	protected OctopusAccount getNewAccount() {
 		OctopusAccount newAccount = new OctopusAccount();
 		newAccount.provision();
@@ -125,10 +125,10 @@ public class CommonMethods {
 		return newAccount;
 	}
 	// return comment id
-	protected String makeCommentViaSoap(ZimbraAccount account, String fileId, String comment)
+	protected String makeCommentViaSoap(ZmailAccount account, String fileId, String comment)
 			throws HarnessException {
 		// Add comments to the file using SOAP
-		account.soapSend("<AddCommentRequest xmlns='urn:zimbraMail'> <comment parentId='"
+		account.soapSend("<AddCommentRequest xmlns='urn:zmailMail'> <comment parentId='"
 				+ fileId + "' text='" + comment + "'/></AddCommentRequest>");
 
 		SleepUtil.sleepVerySmall();
@@ -137,10 +137,10 @@ public class CommonMethods {
 		return account.soapSelectValue("//mail:AddCommentResponse//mail:comment", "id");
 	}
 	//Rename a file via Soap
-	protected String renameViaSoap(ZimbraAccount account, String fileId, String newName)
+	protected String renameViaSoap(ZmailAccount account, String fileId, String newName)
 			throws HarnessException {
 		// Rename file using SOAP
-		account.soapSend("<ItemActionRequest xmlns='urn:zimbraMail'> <action id='"
+		account.soapSend("<ItemActionRequest xmlns='urn:zmailMail'> <action id='"
 				+ fileId + "' name='" + newName + "' op='rename' /></ItemActionRequest>");
 
 		SleepUtil.sleepVerySmall();
@@ -153,9 +153,9 @@ public class CommonMethods {
 		return newName;
 	}
 	// Mark file favorite using soap
-	protected void markFileFavoriteViaSoap(ZimbraAccount account, String fileId)
+	protected void markFileFavoriteViaSoap(ZmailAccount account, String fileId)
 			throws HarnessException {
-		account.soapSend("<DocumentActionRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<DocumentActionRequest xmlns='urn:zmailMail'>"
 				+ "<action id='" + fileId + "'  op='watch' /></DocumentActionRequest>");
 
 		SleepUtil.sleepVerySmall();
@@ -167,9 +167,9 @@ public class CommonMethods {
 
 	}
 	// Unmark file favorite using soap
-	protected void unMarkFileFavoriteViaSoap(ZimbraAccount account, String fileId)
+	protected void unMarkFileFavoriteViaSoap(ZmailAccount account, String fileId)
 			throws HarnessException {
-		account.soapSend("<DocumentActionRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<DocumentActionRequest xmlns='urn:zmailMail'>"
 				+ "<action id='" + fileId + "'  op='!watch' /></DocumentActionRequest>");
 
 		SleepUtil.sleepVerySmall();
@@ -180,7 +180,7 @@ public class CommonMethods {
 				"Verify file is inmarked favorite");
 	}
 	// upload file
-	protected String uploadFileViaSoap(ZimbraAccount account, String fileName, FolderItem ...folderItemArray)
+	protected String uploadFileViaSoap(ZmailAccount account, String fileName, FolderItem ...folderItemArray)
 			throws HarnessException {
 		FolderItem folderItem = FolderItem.importFromSOAP(account, SystemFolder.Briefcase);
 
@@ -190,7 +190,7 @@ public class CommonMethods {
 
 
 		// Create file item
-		String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+		String filePath = ZmailSeleniumProperties.getBaseDirectory()
 				+ "/data/public/other/" + fileName;
 
 		// Upload file to server through RestUtil
@@ -198,7 +198,7 @@ public class CommonMethods {
 
 		// if file already upload, then delete and upload it again
 		if (attachmentId == null) {
-			account.soapSend("<ItemActionRequest xmlns='urn:zimbraMail'>"
+			account.soapSend("<ItemActionRequest xmlns='urn:zmailMail'>"
 					+ "<action id='" + attachmentId + "' op='trash'/>"
 					+ "</ItemActionRequest>");
 
@@ -207,7 +207,7 @@ public class CommonMethods {
 
 		// Save uploaded file to the root folder through SOAP
 		account.soapSend(
-				"<SaveDocumentRequest xmlns='urn:zimbraMail'>" + "<doc l='"
+				"<SaveDocumentRequest xmlns='urn:zmailMail'>" + "<doc l='"
 						+ folderItem.getId() + "'>" + "<upload id='"
 						+ attachmentId + "'/>" + "</doc></SaveDocumentRequest>");
 
@@ -216,31 +216,31 @@ public class CommonMethods {
 				"//mail:SaveDocumentResponse//mail:doc", "id");
 	}
 	// save document request
-	protected void saveDocumentRequestViaSoap(ZimbraAccount account, FolderItem folder,String attachmentId) throws HarnessException
+	protected void saveDocumentRequestViaSoap(ZmailAccount account, FolderItem folder,String attachmentId) throws HarnessException
 	{
-		account.soapSend("<SaveDocumentRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<SaveDocumentRequest xmlns='urn:zmailMail'>"
 				+ "<doc l='" + folder.getId() + "'><upload id='"
 				+ attachmentId + "'/></doc></SaveDocumentRequest>");
 	}
 	// get activity stream request
-	protected void getActivityStreamRequest(ZimbraAccount account,FolderItem folder) throws HarnessException
+	protected void getActivityStreamRequest(ZmailAccount account,FolderItem folder) throws HarnessException
 	{
 		account.soapSend(
-				"<GetActivityStreamRequest xmlns='urn:zimbraMail' offset='0' limit='250' id='"
+				"<GetActivityStreamRequest xmlns='urn:zmailMail' offset='0' limit='250' id='"
 						+ folder.getId() + "'/>"
 				);
 	}
 	// delete folder via Soap
-	protected void deleteFolderViaSoap(ZimbraAccount account, FolderItem folder)throws HarnessException
+	protected void deleteFolderViaSoap(ZmailAccount account, FolderItem folder)throws HarnessException
 	{
 		account.soapSend(
-				"<ItemActionRequest xmlns='urn:zimbraMail'>"
+				"<ItemActionRequest xmlns='urn:zmailMail'>"
 						+ "<action id='" + folder.getId() + "' op='delete'/>"
 						+ "</ItemActionRequest>"
 				);
 	}
 	//Function returns the array list containing folder Items. folder structure gets created is with hierarchy folder1>folder2>folder3.
-	protected ArrayList<FolderItem> createMultipleSubfolders(ZimbraAccount act,String ParentFolder,int noOfSubFolders) throws HarnessException
+	protected ArrayList<FolderItem> createMultipleSubfolders(ZmailAccount act,String ParentFolder,int noOfSubFolders) throws HarnessException
 
 	{
 		ArrayList<FolderItem> folderNames = new ArrayList<FolderItem>();
@@ -253,11 +253,11 @@ public class CommonMethods {
 
 			folderNames.add(newParentFolder);
 
-			String subFolderName = "childFolder"+ZimbraSeleniumProperties.getUniqueString();
+			String subFolderName = "childFolder"+ZmailSeleniumProperties.getUniqueString();
 			// Create sub folder Using SOAP under a folder created
 
 			act.soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>"
+					"<CreateFolderRequest xmlns='urn:zmailMail'>"
 							+"<folder name='" + subFolderName + "' l='" + newParentFolder.getId() + "' view='document'/>"
 							+"</CreateFolderRequest>");
 
@@ -270,14 +270,14 @@ public class CommonMethods {
 
 	}
 	// Function for checking if required document is present in destination folder or not.
-	public boolean isDocumentPresentInFolder(ZimbraAccount acount,String folderName, String fileName)throws HarnessException
+	public boolean isDocumentPresentInFolder(ZmailAccount acount,String folderName, String fileName)throws HarnessException
 	{
 		boolean docPresent= false;
 
 		FolderItem FolderName = FolderItem.importFromSOAP(acount, folderName);
 
 		acount.soapSend(
-				"<SearchRequest xmlns=\"urn:zimbraMail\" types=\"document\">"
+				"<SearchRequest xmlns=\"urn:zmailMail\" types=\"document\">"
 						+"<query>inid:"+FolderName.getId()+"</query>"
 						+"</SearchRequest>"
 				);
@@ -287,14 +287,14 @@ public class CommonMethods {
 		return docPresent;
 	}
 	// create mountpoint request via soap
-	protected void mountRequestViaSoap(ZimbraAccount account,ZimbraAccount grantee,FolderItem folder,FolderItem mountPointFolder,
+	protected void mountRequestViaSoap(ZmailAccount account,ZmailAccount grantee,FolderItem folder,FolderItem mountPointFolder,
 			String mountPointName) throws HarnessException {
 		grantee
-		.soapSend("<CreateMountpointRequest xmlns='urn:zimbraMail'>"
+		.soapSend("<CreateMountpointRequest xmlns='urn:zmailMail'>"
 				+ "<link l='" + mountPointFolder.getId()
 				+ "' name='" + mountPointName
 				+ "' view='document' rid='" + folder.getId()
-				+ "' zid='" + account.ZimbraId + "'/>"
+				+ "' zid='" + account.ZmailId + "'/>"
 				+ "</CreateMountpointRequest>");
 	}
 

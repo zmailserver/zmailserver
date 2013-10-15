@@ -100,7 +100,7 @@ function(file, status, guid) {
 
     var json = {
 		SaveDocumentRequest: {
-			_jsns: "urn:zimbraMail",
+			_jsns: "urn:zmailMail",
 			doc: {
 				id:	    file.id,
                 ver:    file.version,

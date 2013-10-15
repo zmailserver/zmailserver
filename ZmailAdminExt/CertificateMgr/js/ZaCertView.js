@@ -22,7 +22,7 @@ function() {
 
 ZaCertView.prototype.getTitle = 
 function () {
-	return com_zimbra_cert_manager.Cert_view_title;
+	return org_zmail_cert_manager.Cert_view_title;
 }
 
 ZaCertView.prototype.getTabIcon = 
@@ -32,7 +32,7 @@ function () {
 
 ZaCertView.prototype.getTabTitle = 
 function () {
-	return com_zimbra_cert_manager.Cert_view_title + ": "  + this.getTargetServerName();
+	return org_zmail_cert_manager.Cert_view_title + ": "  + this.getTargetServerName();
 }
 
 ZaCertView.prototype.getTabToolTip =
@@ -55,19 +55,19 @@ ZaCertView.prototype._setUI = function (certs) {
 	var html = [] ;
 	
 	html.push("<div style='padding-left:10px;'>") ;
-	html.push("<h2>" + com_zimbra_cert_manager.CERT_server_name + " " + this.getTargetServerName() + "</h2>");
+	html.push("<h2>" + org_zmail_cert_manager.CERT_server_name + " " + this.getTargetServerName() + "</h2>");
 
 	if (certs && certs.cert) {
 		for (var i=0; i < certs.cert.length; i ++) {
 			var currentCert = certs.cert[i];
 			var certType = currentCert.type ;
 			var certInfo = this.getCertTable(currentCert) ;
-			var title = AjxMessageFormat.format(com_zimbra_cert_manager.Cert_Service_title, certType) ;
+			var title = AjxMessageFormat.format(org_zmail_cert_manager.Cert_Service_title, certType) ;
 			html.push("<h3>" + title + "</h3>") ;
 			html.push(certInfo) ;
 		}
 	}else{
-		html.push(com_zimbra_cert_manager.Cert_Info_Unavailable);
+		html.push(org_zmail_cert_manager.Cert_Info_Unavailable);
 	}
 	html.push("</div>") ;
 	this._certContent.getHtmlElement().innerHTML = html.join("") ;	
@@ -78,27 +78,27 @@ ZaCertView.prototype.getCertTable = function (cert) {
 	if (cert) {
 		html.push("<table><colgroup><col width=160 /><col width='*' /></colgroup>") ;
 		if (cert[ZaCert.A_subject] && cert[ZaCert.A_subject][0]) {
-			html.push("<tr><td><strong>" + com_zimbra_cert_manager.CERT_INFO_SUBJECT + "</strong> " 
+			html.push("<tr><td><strong>" + org_zmail_cert_manager.CERT_INFO_SUBJECT + "</strong> " 
 				+ "</td><td>" + cert[ZaCert.A_subject][0]._content 
 				+ "</td></tr>") ;
 		}
 		if (cert.issuer && cert.issuer[0]) {
-			html.push("<tr><td><strong>" + com_zimbra_cert_manager.CERT_INFO_ISSUER+ "</strong>" + "</td><td>" 
+			html.push("<tr><td><strong>" + org_zmail_cert_manager.CERT_INFO_ISSUER+ "</strong>" + "</td><td>" 
 			+ cert.issuer[0]._content + "</td></tr>") ;
 		}
 		
 		if (cert.notBefore && cert.notBefore[0] && cert.notAfter && cert.notAfter[0]) {
-			html.push("<tr><td><strong>" + com_zimbra_cert_manager.CERT_INFO_VALIDATION_DAYS +"</strong>" 
+			html.push("<tr><td><strong>" + org_zmail_cert_manager.CERT_INFO_VALIDATION_DAYS +"</strong>" 
 					+ "</td><td> " + cert.notBefore[0]._content + " - " + cert.notAfter[0]._content + "</td></tr>") ;
 		}
 		
 		if (cert[ZaCert.A_subject_alt] && cert[ZaCert.A_subject_alt][0]) {
-			html.push("<tr><td><strong>" + com_zimbra_cert_manager.CERT_INFO_SubjectAltName + " </strong>" + "</td><td> " 
+			html.push("<tr><td><strong>" + org_zmail_cert_manager.CERT_INFO_SubjectAltName + " </strong>" + "</td><td> " 
 			+ cert[ZaCert.A_subject_alt][0]._content +  "</td></tr>") ;
 		}
 		html.push("</table>") ;
 	}else{
-		html.push (com_zimbra_cert_manager.Cert_Service_Unavailable);
+		html.push (org_zmail_cert_manager.Cert_Service_Unavailable);
 	}
 	return html.join("");
 }                             
@@ -116,7 +116,7 @@ ZaCertView.prototype.set = function (certs, targetServerId) {
 
 ZaCertView.prototype.setTargetServerId = function (targetServerId) {
 	if (!targetServerId) 
-		throw new AjxException (com_zimbra_cert_manager.NO_TARGET_SERVER_ERROR, "ZaCertView.prototype.setTargetServerId");
+		throw new AjxException (org_zmail_cert_manager.NO_TARGET_SERVER_ERROR, "ZaCertView.prototype.setTargetServerId");
 	this._targetServerId = targetServerId ;	
 }
 

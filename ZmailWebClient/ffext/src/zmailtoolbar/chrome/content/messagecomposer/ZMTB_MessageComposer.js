@@ -38,9 +38,9 @@ ZMTB_MessageComposer.prototype.receiveUpdate = function(responseObj)
 {
 	if(responseObj.Body.BatchResponse && responseObj.Body.BatchResponse.GetInfoResponse)
 	{
-		if(responseObj.Body.BatchResponse.GetInfoResponse[0].identities && responseObj.Body.BatchResponse.GetInfoResponse[0].identities.identity[0]._attrs.zimbraPrefDefaultSignatureId)
+		if(responseObj.Body.BatchResponse.GetInfoResponse[0].identities && responseObj.Body.BatchResponse.GetInfoResponse[0].identities.identity[0]._attrs.zmailPrefDefaultSignatureId)
 		{
-			var sigId = responseObj.Body.BatchResponse.GetInfoResponse[0].identities.identity[0]._attrs.zimbraPrefDefaultSignatureId;
+			var sigId = responseObj.Body.BatchResponse.GetInfoResponse[0].identities.identity[0]._attrs.zmailPrefDefaultSignatureId;
 			this._signature = "";
 			if(responseObj.Body.BatchResponse.GetInfoResponse[0].signatures)
 			{
@@ -76,7 +76,7 @@ ZMTB_MessageComposer.prototype.open = function(email)
 		this._attachments = [];
 		var x = window.screenX + 200;
 		var y = window.screenY + 150;
-		this._panel = window.open("chrome://zimbratb/content/messagecomposer/compose.xul", "zimbracompose", "chrome,top="+y+",left="+x+",width=450,height=450");
+		this._panel = window.open("chrome://zmailtb/content/messagecomposer/compose.xul", "zmailcompose", "chrome,top="+y+",left="+x+",width=450,height=450");
 		var This=this;
 		this._panel.addEventListener("load", function(){This._addEvents(email)}, false);
 	}
@@ -200,13 +200,13 @@ ZMTB_MessageComposer.prototype.saveMessage = function()
 ZMTB_MessageComposer.prototype.receiveFile = function(file)
 {
 	this._files = [file];
-	this._browser.loadURI("chrome://zimbratb/content/messagecomposer/upload.html");
+	this._browser.loadURI("chrome://zmailtb/content/messagecomposer/upload.html");
 };
 
 ZMTB_MessageComposer.prototype.receiveFiles = function(files)
 {
 	this._files = files;
-	this._browser.loadURI("chrome://zimbratb/content/messagecomposer/upload.html");
+	this._browser.loadURI("chrome://zmailtb/content/messagecomposer/upload.html");
 };
 
 ZMTB_MessageComposer.prototype.processStatus = function(status)
@@ -232,7 +232,7 @@ ZMTB_MessageComposer.prototype.processPage = function(URI, doc)
 	doc = this._browser.contentDocument;
 	//End hack
 	
-	if(URI.host == "zimbratb" && doc.getElementsByName("fileUpload").length==0)
+	if(URI.host == "zmailtb" && doc.getElementsByName("fileUpload").length==0)
 	{
 		var filediv = doc.getElementById("zmfiles");
 		var files = this._files;

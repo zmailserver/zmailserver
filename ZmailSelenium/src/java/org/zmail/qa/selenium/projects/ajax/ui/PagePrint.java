@@ -14,15 +14,15 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.ui;
+package org.zmail.qa.selenium.projects.ajax.ui;
 
 import java.awt.event.KeyEvent;
 
 import org.apache.log4j.*;
 
-import com.zimbra.qa.selenium.framework.core.ClientSessionFactory;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.core.ClientSessionFactory;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
 
 
 public class PagePrint extends AbsPage {
@@ -62,8 +62,8 @@ public class PagePrint extends AbsPage {
 		SleepUtil.sleepSmall();
 		
 		//switch to Print View
-		String title ="title=Zimbra";
-		if (ZimbraSeleniumProperties.isWebDriver()){
+		String title ="title=Zmail";
+		if (ZmailSeleniumProperties.isWebDriver()){
 			logger.info("...WebDriver...switch to Print View");
 			switchTo(title);
 		}else{

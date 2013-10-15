@@ -14,18 +14,18 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.briefcase.tags;
+package org.zmail.qa.selenium.projects.ajax.tests.briefcase.tags;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.TagItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.FeatureBriefcaseTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.*;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.TagItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.FeatureBriefcaseTest;
+import org.zmail.qa.selenium.projects.ajax.ui.*;
 
 public class RenameTag extends FeatureBriefcaseTest {
 
@@ -38,16 +38,16 @@ public class RenameTag extends FeatureBriefcaseTest {
 
 	@Test(description = "Rename a tag - Right click, Rename", groups = { "functional" })
 	public void RenameTag_01() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
 
 		// Create the tag to rename
-		String name1 = "tag" + ZimbraSeleniumProperties.getUniqueString();
-		String name2 = "tag" + ZimbraSeleniumProperties.getUniqueString();
+		String name1 = "tag" + ZmailSeleniumProperties.getUniqueString();
+		String name2 = "tag" + ZmailSeleniumProperties.getUniqueString();
 
-		account.soapSend("<CreateTagRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<CreateTagRequest xmlns='urn:zmailMail'>"
 				+ "<tag name='" + name1 + "' color='1' />"
 				+ "</CreateTagRequest>");
 
@@ -73,7 +73,7 @@ public class RenameTag extends FeatureBriefcaseTest {
 				.zTreeItem(Action.A_LEFTCLICK, briefcaseFolder, false);
 
 		// Verify the tag is no longer found
-		account.soapSend("<GetTagRequest xmlns='urn:zimbraMail'/>");
+		account.soapSend("<GetTagRequest xmlns='urn:zmailMail'/>");
 
 		Element[] eTag1 = account.soapSelectNodes("//mail:tag[@name='" + name1
 				+ "']");

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,30 +29,30 @@ import java.util.UUID;
 import com.google.common.base.Splitter;
 import com.google.common.base.Strings;
 import com.google.common.io.Closeables;
-import com.zimbra.common.mailbox.ContactConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.Element.XMLElement;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.offline.OfflineAccount;
-import com.zimbra.cs.account.offline.OfflineGal;
-import com.zimbra.cs.account.offline.OfflineProvisioning;
-import com.zimbra.cs.db.DbDataSource;
-import com.zimbra.cs.db.DbDataSource.DataSourceItem;
-import com.zimbra.cs.index.SortBy;
-import com.zimbra.cs.index.ZimbraHit;
-import com.zimbra.cs.index.ZimbraQueryResults;
-import com.zimbra.cs.mime.ParsedContact;
-import com.zimbra.cs.offline.OfflineLC;
-import com.zimbra.cs.offline.OfflineLog;
-import com.zimbra.cs.offline.common.OfflineConstants;
-import com.zimbra.soap.admin.type.DataSourceType;
+import org.zmail.common.mailbox.ContactConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.Element.XMLElement;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.offline.OfflineAccount;
+import org.zmail.cs.account.offline.OfflineGal;
+import org.zmail.cs.account.offline.OfflineProvisioning;
+import org.zmail.cs.db.DbDataSource;
+import org.zmail.cs.db.DbDataSource.DataSourceItem;
+import org.zmail.cs.index.SortBy;
+import org.zmail.cs.index.ZmailHit;
+import org.zmail.cs.index.ZmailQueryResults;
+import org.zmail.cs.mime.ParsedContact;
+import org.zmail.cs.offline.OfflineLC;
+import org.zmail.cs.offline.OfflineLog;
+import org.zmail.cs.offline.common.OfflineConstants;
+import org.zmail.soap.admin.type.DataSourceType;
 
 /**
  * Utility class for common gal sync operations
@@ -108,12 +108,12 @@ public final class GalSyncUtil {
         Contact con = null;
         if (requestedAcct.isZcsAccount() && requestedAcct.isFeatureGalEnabled()
                 && requestedAcct.isFeatureGalSyncEnabled()) {
-            ZimbraQueryResults dlResult = (new OfflineGal((OfflineAccount) requestedAcct)).search(addr, "group",
+            ZmailQueryResults dlResult = (new OfflineGal((OfflineAccount) requestedAcct)).search(addr, "group",
                     SortBy.NONE, 0, 0, null);
             if (dlResult != null) {
                 try {
                     if (dlResult.hasNext()) {
-                        ZimbraHit hit = dlResult.getNext();
+                        ZmailHit hit = dlResult.getNext();
                         con = (Contact) hit.getMailItem();
                         while (OfflineLog.offline.isDebugEnabled() && dlResult.hasNext()) {
                             Contact dupe = (Contact) dlResult.getNext().getMailItem();
@@ -137,13 +137,13 @@ public final class GalSyncUtil {
      * @throws ServiceException
      */
     public static List<String> getGroupNames(Account requestedAcct, Set<String> addrs) throws ServiceException {
-        ZimbraQueryResults dlResult = (new OfflineGal((OfflineAccount) requestedAcct)).search(addrs, "group",
+        ZmailQueryResults dlResult = (new OfflineGal((OfflineAccount) requestedAcct)).search(addrs, "group",
                 SortBy.NONE, 0, 0, null);
         List<String> groups = new ArrayList<String>();
         if (dlResult != null) {
             try {
                 while (dlResult.hasNext()) {
-                    ZimbraHit hit = dlResult.getNext();
+                    ZmailHit hit = dlResult.getNext();
                     Contact contact = (Contact) hit.getMailItem();
                     if (contact.getEmailAddresses().size() > 0) {
                         groups.addAll(contact.getEmailAddresses());
@@ -178,7 +178,7 @@ public final class GalSyncUtil {
         }
         String type = map.get(ContactConstants.A_type);
         if (type == null) {
-            type = map.get(OfflineGal.A_zimbraCalResType) == null ? OfflineGal.CTYPE_ACCOUNT
+            type = map.get(OfflineGal.A_zmailCalResType) == null ? OfflineGal.CTYPE_ACCOUNT
                     : OfflineGal.CTYPE_RESOURCE;
             map.put(ContactConstants.A_type, type);
         }

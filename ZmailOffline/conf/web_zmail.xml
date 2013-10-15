@@ -37,28 +37,28 @@
 	</context-param>
 
 	<context-param>
-	   <param-name>zimbra.jsp.session.timeout</param-name>
+	   <param-name>zmail.jsp.session.timeout</param-name>
 	   <param-value>900</param-value>
 	</context-param>
 
 	<context-param>
 		<!-- how long to cache the result of the zm:getDomainInfo tag result  -->
-		<param-name>zimbra.domaininfo.ttl</param-name>
+		<param-name>zmail.domaininfo.ttl</param-name>
 		<param-value>60m</param-value>
 	</context-param>
 
 	<context-param>
-	       <param-name>zimbraShowAds</param-name>
+	       <param-name>zmailShowAds</param-name>
 	       <param-value>0</param-value>
 	</context-param>
 
 	<context-param>
-		<param-name>zimbraCacheBusterVersion</param-name>
+		<param-name>zmailCacheBusterVersion</param-name>
 		<param-value>@jsVersion@</param-value>
 	</context-param>
 
 	<context-param>
-		<param-name>zimbraDefaultSkin</param-name>
+		<param-name>zmailDefaultSkin</param-name>
 		<param-value>carbon</param-value>
 	</context-param>
 
@@ -75,7 +75,7 @@
 	<filter>
 		<filter-name>Set Header Filter</filter-name>
 		<filter-class>
-			com.zimbra.webClient.filters.SetHeaderFilter
+			org.zmail.webClient.filters.SetHeaderFilter
 		</filter-class>
 		<init-param>
 			<param-name>debug</param-name>
@@ -109,11 +109,11 @@
 			-->
 			<param-name>noCachePatternList</param-name>
 			<param-value>
-				zimbra/,zimbra/mail,zimbra/auth/,.jsp,zimbra/h/,zimbra/h/.*,/h/.*
+				zmail/,zmail/mail,zmail/auth/,.jsp,zmail/h/,zmail/h/.*,/h/.*
 			</param-value>
 		</init-param>
 	    <init-param>
-		    <param-name>zimbraResponseHeader.enabled</param-name>
+		    <param-name>zmailResponseHeader.enabled</param-name>
 		    <param-value>false</param-value>
 	    </init-param>
 	</filter>
@@ -126,7 +126,7 @@
 	<servlet>
 		<servlet-name>Forwarder</servlet-name>
 		<servlet-class>
-			com.zimbra.webClient.servlet.Forward
+			org.zmail.webClient.servlet.Forward
 		</servlet-class>
 	</servlet>
 
@@ -138,7 +138,7 @@
 	<servlet>
 		<servlet-name>SetCookieServlet</servlet-name>
 		<servlet-class>
-			com.zimbra.webClient.servlet.SetCookieServlet
+			org.zmail.webClient.servlet.SetCookieServlet
 		</servlet-class>
 	</servlet>
 
@@ -150,7 +150,7 @@
 	<servlet>
 		<servlet-name>jsp</servlet-name>
 		<servlet-class>
-			com.zimbra.webClient.servlet.JspServlet</servlet-class>
+			org.zmail.webClient.servlet.JspServlet</servlet-class>
 		<init-param>
 			<param-name>logVerbosityLevel</param-name>
 			<param-value>DEBUG</param-value>
@@ -179,7 +179,7 @@
 	<servlet>
 		<servlet-name>ConfigServlet</servlet-name>
 		<servlet-class>
-			com.zimbra.cs.offline.jsp.ConfigServlet
+			org.zmail.cs.offline.jsp.ConfigServlet
 		</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
@@ -199,7 +199,7 @@
 	<servlet>
 		<servlet-name>Properties2Javascript</servlet-name>
 		<servlet-class>
-			com.zimbra.webClient.servlet.Props2JsServlet
+			org.zmail.webClient.servlet.Props2JsServlet
 		</servlet-class>
 		<init-param>
 			<param-name>basename-patterns</param-name>
@@ -208,8 +208,8 @@
 				WEB-INF/classes/messages/${name},
 				WEB-INF/classes/keys/${name},
 				WEB-INF/classes/${dir}/${name},
-				${zimbra.home}/zimlets-deployed/${name}/${name},
-				${zimbra.home}/zimlets-deployed/_dev/${name}/${name}
+				${zmail.home}/zimlets-deployed/${name}/${name},
+				${zmail.home}/zimlets-deployed/_dev/${name}/${name}
 			</param-value>
 		</init-param>
 	</servlet>
@@ -224,7 +224,7 @@
 	<servlet>
 		<servlet-name>SkinResources</servlet-name>
 		<servlet-class>
-			com.zimbra.webClient.servlet.SkinResources
+			org.zmail.webClient.servlet.SkinResources
 		</servlet-class>
 	</servlet>
 
@@ -260,7 +260,7 @@
 	<env-entry>
 		<env-entry-name>mailUrl</env-entry-name>
 		<env-entry-type>java.lang.String</env-entry-type>
-		<env-entry-value>/zimbra</env-entry-value>
+		<env-entry-value>/zmail</env-entry-value>
 	</env-entry>
 
 	<jsp-config>

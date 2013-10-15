@@ -27,7 +27,7 @@
 	<$ if (data.showOfflineLink) { $>
 		<tr>
 			<td id='skin_td_switch_offline' colspan=3>
-				<a href="http://www.zimbra.com/products/desktop.html" target="_blank"><$= ZmMsg.switchToOfflineClientEx $></a>
+				<a href="http://www.zmail.com/products/desktop.html" target="_blank"><$= ZmMsg.switchToOfflineClientEx $></a>
 			</td>
 		</tr>
 	<$ } $>
@@ -44,7 +44,7 @@
                 <span id='skin_container_help_button'></span>
 			</td>
 			<td id='skin_container_logoff'>
-							<a href='javascript:;' onclick='ZmZimbraMail._onClickLogOff();'>${logoutText}</a>
+							<a href='javascript:;' onclick='ZmZmailMail._onClickLogOff();'>${logoutText}</a>
 			</td>
 		</tr>
 	</table>
@@ -53,7 +53,7 @@
 <template id="share.App#PrintView">
 	<html>
 		<head>
-			<title><$= ZmMsg.zimbraLabel $> <$= data.username $></title>
+			<title><$= ZmMsg.zmailLabel $> <$= data.username $></title>
 			<link rel='stylesheet' href='<$= data.appContextPath $>/css/msgview,zm.css?v=<$= data.cacheKillerVersion $>' media='screen'></link>
 			<$ if (data.onloadStr) { $>
 				<script language='javascript'>
@@ -71,7 +71,7 @@
 		<table width=100%>
 			<tr>
 				<td class='ZmPrintView-company'>
-					<$= ZmMsg.zimbraTitle $> <$= ZmMsg.splashScreenAppName $>
+					<$= ZmMsg.zmailTitle $> <$= ZmMsg.splashScreenAppName $>
 				</td>
 				<td class='ZmPrintView-username' align=right>
 					<$= data.username $>
@@ -135,7 +135,7 @@
 	</table>
 </template>
 
-<template id="share.App#ZimbraAccountTooltip">
+<template id="share.App#ZmailAccountTooltip">
 	<table>
 		<$ if (data.lastSync && data.lastSync != "") { $>
 			<tr>
@@ -186,8 +186,8 @@
 <template id='share.App#NetworkStatus'>
 	<table width=90>
 		<tr>
-			<td class="ZmNetworkStatusIcon" onclick="ZmZimbraMail.handleNetworkStatusClick();" id="${id}_networkStatusText"></td>
-			<td class="ZmNetworkStatusIcon" align=right width=18 onclick="ZmZimbraMail.handleNetworkStatusClick();" id="${id}_networkStatusIcon"></td>
+			<td class="ZmNetworkStatusIcon" onclick="ZmZmailMail.handleNetworkStatusClick();" id="${id}_networkStatusText"></td>
+			<td class="ZmNetworkStatusIcon" align=right width=18 onclick="ZmZmailMail.handleNetworkStatusClick();" id="${id}_networkStatusIcon"></td>
 		</tr>
 	</table>
 </template>

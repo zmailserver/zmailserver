@@ -17,10 +17,10 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.ajax.ui.mail;
+package org.zmail.qa.selenium.projects.ajax.ui.mail;
 
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
 
 /**
  * Represents a "Send Confirmation" dialog box 
@@ -39,7 +39,7 @@ public class DialogSendConfirmation extends AbsDialog {
 	public static class Locators {
 		
 		// Main dialog locator
-		// TODO: need to update this locator https://bugzilla.zimbra.com/show_bug.cgi?id=61935
+		// TODO: need to update this locator https://bugzilla.zmail.com/show_bug.cgi?id=61935
 		public static final String DialogLocatorID				= "ztb__MAILCONFIRM";
 		public static final String DialogLocatorCSS				= "css=div#" + DialogLocatorID;
 

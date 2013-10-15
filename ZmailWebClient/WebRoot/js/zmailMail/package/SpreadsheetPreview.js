@@ -7,7 +7,7 @@ AjxPackage.require("ajax.net.AjxRpc");
 
 AjxPackage.require("ajax.xml.AjxXmlDoc");
 
-AjxPackage.require("zimbraMail.spreadsheets.model.msgs");
-AjxPackage.require("zimbraMail.spreadsheets.model.ZmSpreadSheetModel");
-AjxPackage.require("zimbraMail.spreadsheets.model.ZmSpreadSheetFormulae");
-AjxPackage.require("zimbraMail.spreadsheets.view.ZmSpreadSheetPreview");
+AjxPackage.require("zmailMail.spreadsheets.model.msgs");
+AjxPackage.require("zmailMail.spreadsheets.model.ZmSpreadSheetModel");
+AjxPackage.require("zmailMail.spreadsheets.model.ZmSpreadSheetFormulae");
+AjxPackage.require("zmailMail.spreadsheets.view.ZmSpreadSheetPreview");

@@ -131,7 +131,7 @@ function(account, sectionId) {
 			if (sectionId == "COMPOSING") {
 				return false;
 			}
-			if (!account.isZimbraAccount &&
+			if (!account.isZmailAccount &&
 				(sectionId == "MAIL" ||
 				 sectionId == "SHARING" ||
 				 sectionId == "CALENDAR" ||

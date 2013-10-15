@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.briefcase.folders;
+package org.zmail.qa.selenium.projects.ajax.tests.briefcase.folders;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.FeatureBriefcaseTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.briefcase.DialogEditProperties;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.FeatureBriefcaseTest;
+import org.zmail.qa.selenium.projects.ajax.ui.briefcase.DialogEditProperties;
 
 public class EditProperties extends FeatureBriefcaseTest {
 
@@ -37,7 +37,7 @@ public class EditProperties extends FeatureBriefcaseTest {
 
 	@Test(description = "Edit Properties - Rename folder using context menu", groups = { "functional" })
 	public void EditProperties_01() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseRootFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
@@ -47,9 +47,9 @@ public class EditProperties extends FeatureBriefcaseTest {
 
 		// Create the sub-folder
 		String subFolderName = "folder"
-				+ ZimbraSeleniumProperties.getUniqueString();
+				+ ZmailSeleniumProperties.getUniqueString();
 
-		account.soapSend("<CreateFolderRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+ "<folder name='" + subFolderName + "' l='"
 				+ briefcaseRootFolder.getId() + "'/>"
 				+ "</CreateFolderRequest>");
@@ -69,14 +69,14 @@ public class EditProperties extends FeatureBriefcaseTest {
 		ZAssert.assertNotNull(dialog, "Verify the dialog opened");
 		
 		// Set the name, click OK
-		String subFolderName2 = "renamedfolder" + ZimbraSeleniumProperties.getUniqueString();
+		String subFolderName2 = "renamedfolder" + ZmailSeleniumProperties.getUniqueString();
 		
 		dialog.zSetNewName(subFolderName2);
 		
 		dialog.zClickButton(Button.B_OK);
 
 		// Get all the folders and verify the new name appears and the old name disappears
-				account.soapSend("<GetFolderRequest xmlns = 'urn:zimbraMail'/>");
+				account.soapSend("<GetFolderRequest xmlns = 'urn:zmailMail'/>");
 				
 				Element[] eFolder1 = account.soapSelectNodes("//mail:folder[@name='"+ subFolderName +"']");
 				ZAssert.assertEquals(eFolder1.length, 0, "Verify the old folder name no longer exists");

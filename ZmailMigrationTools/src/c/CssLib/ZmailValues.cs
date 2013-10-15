@@ -2,13 +2,13 @@
 
 namespace CssLib
 {
-public class ZimbraValues
+public class ZmailValues
 {
-    public static ZimbraValues zimbraValues;
+    public static ZmailValues zmailValues;
 
-    public ZimbraValues()
+    public ZmailValues()
     {
-        zimbraValues = null;
+        zmailValues = null;
         sUrl = "";
         sAuthToken = "";
         sServerVersion = "";
@@ -17,11 +17,11 @@ public class ZimbraValues
         lTags = new List<TagInfo>();
     }
 
-    public static ZimbraValues GetZimbraValues()
+    public static ZmailValues GetZmailValues()
     {
-        if (zimbraValues == null)
-            zimbraValues = new ZimbraValues();
-        return zimbraValues;
+        if (zmailValues == null)
+            zmailValues = new ZmailValues();
+        return zmailValues;
     }
 
     private string sUrl;

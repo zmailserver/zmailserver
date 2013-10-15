@@ -12,21 +12,21 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.ldaputils;
+package org.zmail.ldaputils;
 
 import java.util.Map;
 
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.soap.DocumentDispatcher;
-import com.zimbra.soap.DocumentService;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.LDAPUtilsConstants;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.soap.DocumentDispatcher;
+import org.zmail.soap.DocumentService;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.LDAPUtilsConstants;
 
 /**
  * @author Greg Solovyev
  */
-public class ZimbraLDAPUtilsService implements DocumentService {
+public class ZmailLDAPUtilsService implements DocumentService {
 
     public void registerHandlers(DocumentDispatcher dispatcher) {
         dispatcher.registerHandler(LDAPUtilsConstants.GET_LDAP_ENTRIES_REQUEST, new GetLDAPEntries());

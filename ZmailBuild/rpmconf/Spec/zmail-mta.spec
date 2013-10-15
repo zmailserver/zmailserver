@@ -1,19 +1,19 @@
 #
-# spec file for zimbra.rpm
+# spec file for zmail.rpm
 #
-Summary: Zimbra MTA
-Name: zimbra-mta
+Summary: Zmail MTA
+Name: zmail-mta
 Version: @@VERSION@@
 Release: @@RELEASE@@
 License: Various
 Group: Applications/Messaging
-URL: http://www.zimbra.com
-Vendor: Zimbra, Inc.
-Packager: Zimbra, Inc.
-BuildRoot: /opt/zimbra
+URL: http://www.zmail.com
+Vendor: Zmail, Inc.
+Packager: Zmail, Inc.
+BuildRoot: /opt/zmail
 AutoReqProv: no
 provides: @@MTA_PROVIDES@@
-requires: zimbra-core
+requires: zmail-core
 
 %description
 Best email money can buy

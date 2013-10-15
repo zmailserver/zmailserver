@@ -1,39 +1,39 @@
 ﻿ИЗМЕНЕНИЕ РАЗДЕЛОВ СПРАВКИ ZWC: КАК МЕНЯТЬ ПЕРЕМЕННЫЕ
 
-Справку веб-клиента Zimbra можно изменить, чтобы заменить упоминаемые имена компании и продуктов Zimbra именем вашей компании и продуктов.
+Справку веб-клиента Zmail можно изменить, чтобы заменить упоминаемые имена компании и продуктов Zmail именем вашей компании и продуктов.
 
 В файле ZbMsg.properties хранятся следующие переменные по умолчанию:
 
-"web client long name" (полное имя веб-клиента) - ClientNameLong = веб-клиент Zimbra Web Client
+"web client long name" (полное имя веб-клиента) - ClientNameLong = веб-клиент Zmail Web Client
 
 "web client short name" (сокращенное имя веб-клиента) - ClientNameShort = ZWC
 
-"Your company name" (название вашей компании) - CompanyName = Zimbra
+"Your company name" (название вашей компании) - CompanyName = Zmail
 
 "This variable is not relevant.
 
-Do not change" (Данная переменная не актуальна. Не изменять.) - DesktopName = Zimbra Desktop
+Do not change" (Данная переменная не актуальна. Не изменять.) - DesktopName = Zmail Desktop
 
 
-"product full name" (полное имя продукта) - CollaborationProductFullName = Zimbra Collaboration Suite
+"product full name" (полное имя продукта) - CollaborationProductFullName = Zmail Collaboration Suite
 
 "product short name" (сокращенное имя продукта) - CollaborationProductShortName = ZCS
 Изменение данных переменных
 
 1.
-Используя протокол SSH, подключитесь к серверу Zimbra.
+Используя протокол SSH, подключитесь к серверу Zmail.
 
 
 
 2.
 
-Как пользователь Zimbra измените каталог на следующий:
-/opt/zimbra/jetty/webapps/zimbra/WEB-INF/classes/messages/.
+Как пользователь Zmail измените каталог на следующий:
+/opt/zmail/jetty/webapps/zmail/WEB-INF/classes/messages/.
 
 
 3.
 Чтобы изменить значения, измените файл ZbMsg.properties.
-Замените имя Zimbra названием вашей компании.
+Замените имя Zmail названием вашей компании.
 
 НЕ МЕНЯЙТЕ И НЕ УДАЛЯЙТЕ ДЕСКРИПТОРЫ ПЕРЕМЕННЫХ
 

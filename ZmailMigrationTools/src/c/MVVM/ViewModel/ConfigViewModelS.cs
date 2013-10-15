@@ -84,7 +84,7 @@ public class ConfigViewModelS: BaseViewModel
                 catch (Exception e)
                 {
                     string temp = string.Format("Incorrect configuration file format.\n{0}", e.Message);
-                    MessageBox.Show(temp, "Zimbra Migration", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(temp, "Zmail Migration", MessageBoxButton.OK, MessageBoxImage.Error);
                     fileRead.Close();
                     return;
                 }
@@ -101,7 +101,7 @@ public class ConfigViewModelS: BaseViewModel
                     if ((IsProfile) && (CurrentProfileSelection == -1))
                     {
                         MessageBox.Show("The profile listed in the file does not exist on this system.  Please select a valid profile",
-                                        "Zimbra Migration", MessageBoxButton.OK, MessageBoxImage.Error);
+                                        "Zmail Migration", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
                 }
@@ -157,13 +157,13 @@ public class ConfigViewModelS: BaseViewModel
         {
             if (CurrentProfileSelection == -1)
             {
-                MessageBox.Show("Please select a valid profile", "Zimbra Migration", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Please select a valid profile", "Zmail Migration", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             if (iMailSvrInitialized == EXCHSVR_MODE)
             {
                 MessageBox.Show("You are already logged in via Exchange Server credentials",
-                    "Zimbra Migration", MessageBoxButton.OK, MessageBoxImage.Error);
+                    "Zmail Migration", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             if (iMailSvrInitialized == -1)
@@ -174,7 +174,7 @@ public class ConfigViewModelS: BaseViewModel
             if (iMailSvrInitialized == PROFILE_MODE)
             {
                 MessageBox.Show("You are already logged in via an Outlook Profile",
-                    "Zimbra Migration", MessageBoxButton.OK, MessageBoxImage.Error);
+                    "Zmail Migration", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             if (iMailSvrInitialized == -1)
@@ -183,7 +183,7 @@ public class ConfigViewModelS: BaseViewModel
                     (MailServerAdminPwd.Length == 0))
                 {
                     MessageBox.Show("Please enter all source mail server credentials",
-                        "Zimbra Migration", MessageBoxButton.OK, MessageBoxImage.Error);
+                        "Zmail Migration", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
                 ret = mw.GlobalInit(MailServerHostName, MailServerAdminID, MailServerAdminPwd);
@@ -191,7 +191,7 @@ public class ConfigViewModelS: BaseViewModel
         }
         if (ret.Length > 0)
         {
-            MessageBox.Show(ret, "Zimbra Migration", MessageBoxButton.OK,
+            MessageBox.Show(ret, "Zmail Migration", MessageBoxButton.OK,
                 MessageBoxImage.Error);
             ret = mw.GlobalUninit();
             return;

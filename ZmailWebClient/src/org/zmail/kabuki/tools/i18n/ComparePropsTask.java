@@ -14,7 +14,7 @@
  */
 
 
-package com.zimbra.kabuki.tools.i18n;
+package org.zmail.kabuki.tools.i18n;
 
 import java.io.*;
 import java.util.*;

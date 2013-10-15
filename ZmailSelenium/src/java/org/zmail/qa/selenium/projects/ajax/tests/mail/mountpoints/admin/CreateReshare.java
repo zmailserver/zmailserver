@@ -14,16 +14,16 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.mountpoints.admin;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.mountpoints.admin;
 
 import org.testng.annotations.*;
 
-import com.zimbra.qa.selenium.framework.core.*;
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.*;
+import org.zmail.qa.selenium.framework.core.*;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.*;
+import org.zmail.qa.selenium.projects.ajax.ui.*;
 
 
 public class CreateReshare extends PrefGroupMailByMessageTest {
@@ -46,28 +46,28 @@ public class CreateReshare extends PrefGroupMailByMessageTest {
 	public void CreateReshare_01() throws HarnessException {
 
 		// Create the owner and destination accounts
-		ZimbraAccount Owner = new ZimbraAccount();
+		ZmailAccount Owner = new ZmailAccount();
 		Owner.provision();
 		Owner.authenticate();
 
-		ZimbraAccount Destination = new ZimbraAccount();
+		ZmailAccount Destination = new ZmailAccount();
 		Destination.provision();
 		Destination.authenticate();
 
 		FolderItem ownerInbox = FolderItem.importFromSOAP(Owner, FolderItem.SystemFolder.Inbox);
-		String ownerFoldername = "folder" + ZimbraSeleniumProperties.getUniqueString();
+		String ownerFoldername = "folder" + ZmailSeleniumProperties.getUniqueString();
 
 
 		// Owner shares a folder to the test account with admin rights
 		//
 		Owner.soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>"
+					"<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+		"<folder name='" + ownerFoldername +"' l='" + ownerInbox.getId() +"'/>"
 				+	"</CreateFolderRequest>");
 		String ownerFolderid = Owner.soapSelectValue("//mail:folder", "id");
 		
 		Owner.soapSend(
-				"<FolderActionRequest xmlns='urn:zimbraMail'>"
+				"<FolderActionRequest xmlns='urn:zmailMail'>"
 			+		"<action id='"+ ownerFolderid +"' op='grant'>"
 			+			"<grant d='" + app.zGetActiveAccount().EmailAddress + "' gt='usr' perm='rwidxa'/>"
 			+		"</action>"
@@ -76,10 +76,10 @@ public class CreateReshare extends PrefGroupMailByMessageTest {
 		
 		// Test account creates a mountpoint
 		//
-		String mountpointFoldername = "mountpoint"+ ZimbraSeleniumProperties.getUniqueString();
+		String mountpointFoldername = "mountpoint"+ ZmailSeleniumProperties.getUniqueString();
 		app.zGetActiveAccount().soapSend(
-					"<CreateMountpointRequest xmlns='urn:zimbraMail'>"
-				+		"<link l='1' name='"+ mountpointFoldername +"' view='message' rid='"+ ownerFolderid +"' zid='"+ Owner.ZimbraId +"'/>"
+					"<CreateMountpointRequest xmlns='urn:zmailMail'>"
+				+		"<link l='1' name='"+ mountpointFoldername +"' view='message' rid='"+ ownerFolderid +"' zid='"+ Owner.ZmailId +"'/>"
 				+	"</CreateMountpointRequest>");
 		
 		FolderMountpointItem mountpoint = FolderMountpointItem.importFromSOAP(app.zGetActiveAccount(), mountpointFoldername);
@@ -100,13 +100,13 @@ public class CreateReshare extends PrefGroupMailByMessageTest {
 		
 		// Make sure that AccountA now has the share
 		Destination.soapSend(
-					"<GetShareInfoRequest xmlns='urn:zimbraAccount'>"
+					"<GetShareInfoRequest xmlns='urn:zmailAccount'>"
 				+		"<grantee type='usr'/>"
 				+		"<owner by='name'>"+ Owner.EmailAddress +"</owner>"
 				+	"</GetShareInfoRequest>");
 		
 		// Example response:
-		//	    <GetShareInfoResponse xmlns="urn:zimbraAccount">
+		//	    <GetShareInfoResponse xmlns="urn:zmailAccount">
 		//	      <share granteeId="0136d047-b771-49c0-a735-12183f3ca654" ownerName="enus12986828702967" granteeDisplayName="enus12986828648903" ownerId="4000b6a8-56bc-4910-ae3e-77528a5d5b18" rights="r" folderPath="/Inbox/folder12986828702964" mid="257" granteeType="usr" ownerEmail="enus12986828702967@testdomain.com" granteeName="enus12986828648903@testdomain.com" folderId="257"/>
 		//	    </GetShareInfoResponse>
 

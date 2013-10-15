@@ -25,7 +25,7 @@ ZaAuthConfigXWizard = function(parent) {
 	ZaXWizardDialog.call(this, parent, null, ZaMsg.NCD_AuthConfigTitle,"700px", "350px","ZaAuthConfigXWizard", null, ZaId.DLG_AUTH_CONFIG);
 	
 	this.AuthMechs = [
-		{label:ZaMsg.AuthMech_zimbra, value:ZaDomain.AuthMech_zimbra},
+		{label:ZaMsg.AuthMech_zmail, value:ZaDomain.AuthMech_zmail},
 		{label:ZaMsg.AuthMech_ldap, value:ZaDomain.AuthMech_ldap},
 		{label:ZaMsg.AuthMech_ad, value:ZaDomain.AuthMech_ad}		
 	];
@@ -194,7 +194,7 @@ function () {
 		this.goPage(ZaAuthConfigXWizard.AUTH_CONFIG_SUMMARY_STEP);
 	} else if (this._containedObject[ZaModel.currentStep] == ZaAuthConfigXWizard.AUTH_CONFIG_SUMMARY_STEP && this._containedObject.attrs[ZaDomain.A_AuthMech]==ZaDomain.AuthMech_ad) {
 		this.goPage(ZaAuthConfigXWizard.AUTH_CONFIG_STEP_1);//skip ZaAuthConfigXWizard.AUTH_CONFIG_BIND_PWD_STEP step for Active Directory
-	} else if(this._containedObject[ZaModel.currentStep] == ZaAuthConfigXWizard.CONFIG_COMPLETE_STEP && this._containedObject.attrs[ZaDomain.A_AuthMech]==ZaDomain.AuthMech_zimbra) {
+	} else if(this._containedObject[ZaModel.currentStep] == ZaAuthConfigXWizard.CONFIG_COMPLETE_STEP && this._containedObject.attrs[ZaDomain.A_AuthMech]==ZaDomain.AuthMech_zmail) {
 		this.goPage(ZaAuthConfigXWizard.AUTH_CONFIG_STEP_1);
 	} else {
 		this.goPage(this._containedObject[ZaModel.currentStep]-1);
@@ -214,7 +214,7 @@ function() {
 		this.goPage(ZaAuthConfigXWizard.AUTH_CONFIG_SUMMARY_STEP);//skip ZaAuthConfigXWizard.AUTH_CONFIG_BIND_PWD_STEP step for Active Directory
 	} else if(this._containedObject[ZaModel.currentStep]==ZaAuthConfigXWizard.AUTH_CONFIG_STEP_1 && this._containedObject.attrs[ZaDomain.A_AuthMech]==ZaDomain.AuthMech_ldap) {
 		var temp = this._containedObject.attrs[ZaDomain.A_AuthLdapURL].join(" ");
-		if(this._containedObject.attrs[ZaDomain.A_zimbraAuthLdapStartTlsEnabled] == "TRUE") {
+		if(this._containedObject.attrs[ZaDomain.A_zmailAuthLdapStartTlsEnabled] == "TRUE") {
 			//check that we don't have ldaps://
 			if(temp.indexOf("ldaps://") > -1) {
 				ZaApp.getInstance().getCurrentController().popupWarningDialog(ZaMsg.Domain_WarningStartTLSIgnored)
@@ -234,7 +234,7 @@ function() {
 			return false;
 		}
 		this.goPage(ZaAuthConfigXWizard.AUTH_CONFIG_SUMMARY_STEP);
-	} else if(this._containedObject[ZaModel.currentStep]==ZaAuthConfigXWizard.AUTH_CONFIG_STEP_1 && this._containedObject.attrs[ZaDomain.A_AuthMech]==ZaDomain.AuthMech_zimbra) {
+	} else if(this._containedObject[ZaModel.currentStep]==ZaAuthConfigXWizard.AUTH_CONFIG_STEP_1 && this._containedObject.attrs[ZaDomain.A_AuthMech]==ZaDomain.AuthMech_zmail) {
 		this.goPage(ZaAuthConfigXWizard.CONFIG_COMPLETE_STEP);
 	} else {
 		this.goPage(this._containedObject[ZaModel.currentStep]+1);
@@ -274,8 +274,8 @@ function(entry) {
 	this._containedObject[ZaDomain.A_AuthUseBindPassword] = entry[ZaDomain.A_AuthUseBindPassword];
 	this.setTitle(ZaMsg.NCD_AuthConfigTitle + " (" + entry.name + ")");
 
-    if (ZaSettings.isDomainAdmin && (entry.attrs[ZaDomain.A_zimbraAdminConsoleLDAPAuthEnabled] == "TRUE")
-           && entry.attrs[ZaDomain.A_zimbraAuthLdapStartTlsEnabled] != "TRUE") {
+    if (ZaSettings.isDomainAdmin && (entry.attrs[ZaDomain.A_zmailAdminConsoleLDAPAuthEnabled] == "TRUE")
+           && entry.attrs[ZaDomain.A_zmailAuthLdapStartTlsEnabled] != "TRUE") {
         this._containedObject [ZaDomain.A2_allowClearTextLDAPAuth] = "FALSE" ;
     }
 
@@ -350,7 +350,7 @@ ZaAuthConfigXWizard.myXFormModifier = function(xFormObject) {
 											visibilityChecks:[],enableDisableChecks:[]}
 										]
 									},	
-									{ref:ZaDomain.A_zimbraAuthLdapStartTlsEnabled, type:_CHECKBOX_, label:ZaMsg.Domain_AuthLdapStartTlsEnabled, onChange: ZaAuthConfigXWizard.startTlsEnabledChanged,
+									{ref:ZaDomain.A_zmailAuthLdapStartTlsEnabled, type:_CHECKBOX_, label:ZaMsg.Domain_AuthLdapStartTlsEnabled, onChange: ZaAuthConfigXWizard.startTlsEnabledChanged,
 										 trueValue:"TRUE", falseValue:"FALSE",labelLocation:_RIGHT_
 									},
 									{ref:ZaDomain.A_AuthLdapSearchFilter, type:_TEXTAREA_, width:380, height:40, label:ZaMsg.Domain_AuthLdapFilter, labelLocation:_LEFT_, textWrapping:"soft"},
@@ -383,7 +383,7 @@ ZaAuthConfigXWizard.myXFormModifier = function(xFormObject) {
 						]						
 					},
 					{type:_CASE_, numCols:2,colSizes:["220px","430px"],	caseKey:ZaAuthConfigXWizard.AUTH_CONFIG_SUMMARY_STEP,
-						visibilityChecks:[Case_XFormItem.prototype.isCurrentTab,ZaNewDomainXWizard.isAuthMechNotZimbra],					
+						visibilityChecks:[Case_XFormItem.prototype.isCurrentTab,ZaNewDomainXWizard.isAuthMechNotZmail],					
 						items: [
 							{type:_OUTPUT_, value:ZaMsg.Domain_Auth_ConfigSummary, align:_CENTER_, colSpan:"*"}, 
 							{type:_SPACER_, height:10},
@@ -410,7 +410,7 @@ ZaAuthConfigXWizard.myXFormModifier = function(xFormObject) {
 										]
 										
 									},	
-									{ref:ZaDomain.A_zimbraAuthLdapStartTlsEnabled, type:_OUTPUT_, label:ZaMsg.Domain_AuthLdapStartTlsEnabled, labelLocation:_LEFT_,choices:ZaModel.BOOLEAN_CHOICES,visibilityChecks:[]},
+									{ref:ZaDomain.A_zmailAuthLdapStartTlsEnabled, type:_OUTPUT_, label:ZaMsg.Domain_AuthLdapStartTlsEnabled, labelLocation:_LEFT_,choices:ZaModel.BOOLEAN_CHOICES,visibilityChecks:[]},
 									{ref:ZaDomain.A_AuthLdapSearchFilter, type:_OUTPUT_, label:ZaMsg.Domain_AuthLdapFilter, labelLocation:_LEFT_,visibilityChecks:[]},
 									{ref:ZaDomain.A_AuthLdapSearchBase, type:_OUTPUT_, label:ZaMsg.Domain_AuthLdapSearchBase, labelLocation:_LEFT_,visibilityChecks:[]},
 									{ref:ZaDomain.A_AuthUseBindPassword, type:_OUTPUT_, label:ZaMsg.Domain_AuthUseBindPassword, labelLocation:_LEFT_,choices:ZaModel.BOOLEAN_CHOICES},											
@@ -427,14 +427,14 @@ ZaAuthConfigXWizard.myXFormModifier = function(xFormObject) {
 						]
 					},
 					{type:_CASE_, caseKey:ZaAuthConfigXWizard.AUTH_TEST_STEP,numCols:1,colSizes:["100%"], 
-						visibilityChecks:[Case_XFormItem.prototype.isCurrentTab,ZaNewDomainXWizard.isAuthMechNotZimbra],
+						visibilityChecks:[Case_XFormItem.prototype.isCurrentTab,ZaNewDomainXWizard.isAuthMechNotZmail],
 						visibilityChangeEventSources:[ZaModel.currentStep],					
 						items: [
 							{type:_DWT_ALERT_,content:ZaMsg.Domain_AuthTestingInProgress,style:DwtAlert.WARNING}
 						]
 					},
 					{type:_CASE_, numCols:2,colSizes:["220px","430px"], caseKey:ZaAuthConfigXWizard.AUTH_TEST_RESULT_STEP,
-						visibilityChecks:[Case_XFormItem.prototype.isCurrentTab,ZaNewDomainXWizard.isAuthMechNotZimbra],
+						visibilityChecks:[Case_XFormItem.prototype.isCurrentTab,ZaNewDomainXWizard.isAuthMechNotZmail],
 						visibilityChangeEventSources:[ZaModel.currentStep],					
 						items: [
 							{type:_DWT_ALERT_, style:DwtAlert.INFORMATION, content:ZaMsg.Domain_AuthTestSuccessful, alignment:_CENTER_,colSpan:2,
@@ -476,8 +476,8 @@ ZaAuthConfigXWizard.startTlsEnabledChanged =  function (value, event, form) {
     var instance = form.getInstance () ;
     var ldapUrls = instance.attrs[ZaDomain.A_AuthLdapURL] ;
     var newUrls = [];
-    if (ZaSettings.isDomainAdmin && (instance.attrs[ZaDomain.A_zimbraAdminConsoleLDAPAuthEnabled] == "TRUE")
-               && instance.attrs[ZaDomain.A_zimbraAuthLdapStartTlsEnabled] != "TRUE") {
+    if (ZaSettings.isDomainAdmin && (instance.attrs[ZaDomain.A_zmailAdminConsoleLDAPAuthEnabled] == "TRUE")
+               && instance.attrs[ZaDomain.A_zmailAuthLdapStartTlsEnabled] != "TRUE") {
         //force ldaps protocol
         instance[ZaDomain.A2_allowClearTextLDAPAuth] = "FALSE" ;
 

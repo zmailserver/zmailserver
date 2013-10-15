@@ -14,14 +14,14 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.octopus.tests.myfiles.folders;
+package org.zmail.qa.selenium.projects.octopus.tests.myfiles.folders;
 
 import org.testng.annotations.*;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.octopus.core.OctopusCommonTest;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.octopus.core.OctopusCommonTest;
 
 public class CreateFolder extends OctopusCommonTest {
 
@@ -38,7 +38,7 @@ public class CreateFolder extends OctopusCommonTest {
 
 	@Test(description = "Create a new folder using drop down list option", groups = { "sanity" })
 	public void CreateFolder_01() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseRootFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
@@ -51,7 +51,7 @@ public class CreateFolder extends OctopusCommonTest {
 				"Verify size of the client and server subfolders match");
 
 		// Set the new folder name
-		// _folderName = "folder" + ZimbraSeleniumProperties.getUniqueString();
+		// _folderName = "folder" + ZmailSeleniumProperties.getUniqueString();
 
 		app.zPageMyFiles.zToolbarPressPulldown(Button.B_MY_FILES,
 				Button.O_NEW_FOLDER);

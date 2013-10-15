@@ -12,30 +12,30 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.versioncheck;
+package org.zmail.cs.versioncheck;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.qa.unittest.TestVersionCheck;
-import com.zimbra.qa.unittest.ZimbraSuite;
-import com.zimbra.soap.SoapServlet;
-import com.zimbra.cs.extension.ZimbraExtension;
-import com.zimbra.cs.service.versioncheck.VersionCheckService;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.qa.unittest.TestVersionCheck;
+import org.zmail.qa.unittest.ZmailSuite;
+import org.zmail.soap.SoapServlet;
+import org.zmail.cs.extension.ZmailExtension;
+import org.zmail.cs.service.versioncheck.VersionCheckService;
 
 /**
  * @author Greg Solovyev
  */
-public class VersionCheckExtension implements ZimbraExtension {
+public class VersionCheckExtension implements ZmailExtension {
     public static final String EXTENSION_NAME_VERSIONCHECK = "versioncheck";
     
     public void init() throws ServiceException {
         SoapServlet.addService("AdminServlet", new VersionCheckService());
         // XXX bburtin: Disabling test to avoid false positives until bug 54812 is fixed.
         try {
-            ZimbraSuite.addTest(TestVersionCheck.class);
+            ZmailSuite.addTest(TestVersionCheck.class);
         } catch (NoClassDefFoundError e) {
             // Expected in production, because JUnit is not available. 
-            ZimbraLog.test.debug("Unable to load ZimbraAdminVersionCheck unit tests.", e);
+            ZmailLog.test.debug("Unable to load ZmailAdminVersionCheck unit tests.", e);
         }
     }
 

@@ -14,21 +14,21 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.tasks;
+package org.zmail.qa.selenium.projects.desktop.tests.tasks;
 
 import java.util.HashMap;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.GeneralUtility;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.Toaster;
-import com.zimbra.qa.selenium.projects.desktop.ui.tasks.FormTaskNew;
-import com.zimbra.qa.selenium.projects.desktop.ui.tasks.FormTaskNew.Field;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.GeneralUtility;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.Toaster;
+import org.zmail.qa.selenium.projects.desktop.ui.tasks.FormTaskNew;
+import org.zmail.qa.selenium.projects.desktop.ui.tasks.FormTaskNew.Field;
 
 public class CreateTask extends AjaxCommonTest {
 
@@ -40,7 +40,7 @@ public class CreateTask extends AjaxCommonTest {
 		super.startingPage = app.zPageTasks;
 
       super.startingAccountPreferences = new HashMap<String , String>() {{
-         put("zimbraPrefComposeFormat", "html");
+         put("zmailPrefComposeFormat", "html");
       }};
 	}
 
@@ -48,8 +48,8 @@ public class CreateTask extends AjaxCommonTest {
 			groups = { "sanity" })
 	public void CreateTask_01() throws HarnessException {
 
-		String subject = "task" + ZimbraSeleniumProperties.getUniqueString();
-		String body = "taskbody" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "task" + ZmailSeleniumProperties.getUniqueString();
+		String body = "taskbody" + ZmailSeleniumProperties.getUniqueString();
 
 		// Click NEW button
 		FormTaskNew taskNew = (FormTaskNew) app.zPageTasks.zToolbarPressButton(Button.B_NEW);

@@ -95,7 +95,7 @@ YMEmoticonsPicker = function(parent, className, posStyle){
 //Needs to act like a button, so DwtButton
 YMEmoticonsPicker.prototype = new DwtControl;
 YMEmoticonsPicker.prototype.constructor = YMEmoticonsPicker;
-YMEmoticonsPicker.SMILEYS = Com_Zimbra_YMEmoticons.SMILEYS;
+YMEmoticonsPicker.SMILEYS = Com_Zmail_YMEmoticons.SMILEYS;
 
 YMEmoticonsPicker.getDefaultSmiley = function() {
 	for (var smiley in YMEmoticonsPicker.SMILEYS) {

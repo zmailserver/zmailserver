@@ -2,7 +2,7 @@
 using System.Text;
 using System;
 
-namespace ZimbraMigrationConsole
+namespace ZmailMigrationConsole
 {
 class ProgressUtil
 {
@@ -57,7 +57,7 @@ class ProgressUtil
             sb.AppendLine(DateTime.Now.ToString());
             sb.AppendLine(message);
 
-            File.AppendAllText(@"C:\Temp\ZimbraMigLog.log", sb.ToString());*/
+            File.AppendAllText(@"C:\Temp\ZmailMigLog.log", sb.ToString());*/
         }
 
         catch (Exception e)

@@ -14,24 +14,24 @@
 # ***** END LICENSE BLOCK *****
 # 
 
-if [ x`whoami` != xzimbra ]; then
-  echo Error: must be run as zimbra user
+if [ x`whoami` != xzmail ]; then
+  echo Error: must be run as zmail user
   exit 1
 fi
 
 source `dirname $0`/zmshutil || exit 1
 zmsetvars \
-  zimbra_home \
-  zimbra_log_directory \
+  zmail_home \
+  zmail_log_directory \
   cbpolicyd_pid_file \
   cbpolicyd_db_file
 
-pidfile=${cbpolicyd_pid_file:=${zimbra_log_directory}/cbpolicyd.pid}
-dbfile=${cbpolicyd_db_file:=${zimbra_home}/data/cbpolicyd/db/cbpolicyd.sqlitedb}
+pidfile=${cbpolicyd_pid_file:=${zmail_log_directory}/cbpolicyd.pid}
+dbfile=${cbpolicyd_db_file:=${zmail_home}/data/cbpolicyd/db/cbpolicyd.sqlitedb}
 
 
 rewriteconfig() {
-  /opt/zimbra/libexec/configrewrite cbpolicyd > /dev/null 2>&1
+  /opt/zmail/libexec/configrewrite cbpolicyd > /dev/null 2>&1
 }
 
 getpid() {
@@ -71,11 +71,11 @@ case "$1" in
       echo "policyd is already running."
       exit 0
     else
-      if [ ! -d /opt/zimbra/data/cbpolicyd/db ]; then
-        mkdir /opt/zimbra/data/cbpolicyd/db
+      if [ ! -d /opt/zmail/data/cbpolicyd/db ]; then
+        mkdir /opt/zmail/data/cbpolicyd/db
       fi
       if [ ! -f ${dbfile} ]; then
-        ${zimbra_home}/libexec/zmcbpolicydinit
+        ${zmail_home}/libexec/zmcbpolicydinit
         if [ $? != 0 ]; then
           echo "Unable to initialize cbpolicyd database." 
           exit 1
@@ -84,7 +84,7 @@ case "$1" in
       if [ x$2 = "x" ]; then
         rewriteconfig
       fi
-      ${zimbra_home}/cbpolicyd/bin/cbpolicyd --config ${zimbra_home}/conf/cbpolicyd.conf 2> /dev/null
+      ${zmail_home}/cbpolicyd/bin/cbpolicyd --config ${zmail_home}/conf/cbpolicyd.conf 2> /dev/null
       for ((i=0; i < 30; i++)); do
         checkrunning
         if [ $RUNNING = 1 ]; then 

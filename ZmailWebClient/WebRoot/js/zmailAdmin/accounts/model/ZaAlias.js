@@ -23,7 +23,7 @@ ZaAlias = function() {
 
 ZaAlias.prototype = new ZaItem;
 ZaAlias.prototype.constructor = ZaAlias;
-ZaAlias.A_AliasTargetId = "zimbraAliasTargetId";
+ZaAlias.A_AliasTargetId = "zmailAliasTargetId";
 ZaAlias.A_targetAccount = "targetName";
 ZaAlias.A_targetType = "type";
 ZaAlias.A_index = "index";
@@ -36,7 +36,7 @@ ZaAlias.TARGET_TYPE_RESOURCE = ZaItem.RESOURCE;
 ZaItem._ATTR[ZaAlias.A_targetAccount] = ZaMsg.attrDesc_aliasFor;
 
 ZaAlias.searchAttributes = AjxBuffer.concat(ZaAlias.A_AliasTargetId,",",
-											   ZaItem.A_zimbraId,  "," , 
+											   ZaItem.A_zmailId,  "," , 
 											   ZaAlias.A_targetAccount, "," , 
 											   ZaAlias.A_uid,"," , 
 											   ZaAlias.A_targetType, "," , 
@@ -53,7 +53,7 @@ function(callback) {
 		default: throw new Error("Can't add alias for account type: " + this.attrs[ZaAlias.A_targetType]) ;				
 	}
 	
-	var soapDoc = AjxSoapDoc.create(soapCmd, ZaZimbraAdmin.URN, null);
+	var soapDoc = AjxSoapDoc.create(soapCmd, ZaZmailAdmin.URN, null);
 	
 	soapDoc.set("id", this.attrs[ZaAlias.A_AliasTargetId]);
 	soapDoc.set("alias", this.name);
@@ -119,7 +119,7 @@ function() {
 				idx = this._addRow(ZaMsg.NAD_MailServer, target.attrs[ZaResource.A_mailHost], html, idx);
 			}	
 		}
-		idx = this._addAttrRow(ZaItem.A_zimbraId, html, idx);
+		idx = this._addAttrRow(ZaItem.A_zmailId, html, idx);
 		html[idx++] = "</table>";
 		this._toolTip = html.join("");
 	}
@@ -205,10 +205,10 @@ function (val, targetType) {
 	var elBy ;
 	
 	if (targetType == ZaAlias.TARGET_TYPE_DL) {
-		soapDoc = AjxSoapDoc.create("GetDistributionListRequest", ZaZimbraAdmin.URN, null);
+		soapDoc = AjxSoapDoc.create("GetDistributionListRequest", ZaZmailAdmin.URN, null);
 		elBy = soapDoc.set("dl", val);
 	}else if (targetType == ZaAlias.TARGET_TYPE_ACCOUNT) {
-		soapDoc = AjxSoapDoc.create("GetAccountRequest", ZaZimbraAdmin.URN, null);
+		soapDoc = AjxSoapDoc.create("GetAccountRequest", ZaZmailAdmin.URN, null);
 		elBy = soapDoc.set("account", val);
 	}else {
 		throw new Error ("Alias type " + targetType + " is not valid.") ;
@@ -281,7 +281,7 @@ ZaAlias.prototype.initEffectiveRightsFromJS = function(resp) {
 			if(!this.targetObj.attrs)
 				this.targetObj.attrs = {};
 			this.targetObj.attrs[ZaItem.A_cn] = targetName;
-			this.targetObj.attrs[ZaItem.A_zimbraId] = targetId;
+			this.targetObj.attrs[ZaItem.A_zmailId] = targetId;
 		}
 	}
 	this.targetObj.initEffectiveRightsFromJS(resp);

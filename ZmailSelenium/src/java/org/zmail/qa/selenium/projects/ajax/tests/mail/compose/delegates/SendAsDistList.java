@@ -14,16 +14,16 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.compose.delegates;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.compose.delegates;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew.Field;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew.Field;
 
 
 public class SendAsDistList extends PrefGroupMailByMessageTest {
@@ -35,7 +35,7 @@ public class SendAsDistList extends PrefGroupMailByMessageTest {
 		
 		
 
-		super.startingAccountPreferences.put("zimbraPrefComposeFormat", "text");
+		super.startingAccountPreferences.put("zmailPrefComposeFormat", "text");
 		
 	}
 	
@@ -46,14 +46,14 @@ public class SendAsDistList extends PrefGroupMailByMessageTest {
 		//-- Data Setup
 		
 		// Mail data
-		String subject = "subject"+ ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject"+ ZmailSeleniumProperties.getUniqueString();
 		
 		// The grantor
-		ZimbraDistributionList list = new ZimbraDistributionList();
+		ZmailDistributionList list = new ZmailDistributionList();
 		list.provision();
 
 		// Add a member
-		list.addMember(ZimbraAccount.AccountA());
+		list.addMember(ZmailAccount.AccountA());
 		
 		// Grant send rights
 		list.grantRight(app.zGetActiveAccount(), "sendAsDistList");
@@ -71,9 +71,9 @@ public class SendAsDistList extends PrefGroupMailByMessageTest {
 		ZAssert.assertNotNull(mailform, "Verify the new form opened");
 		
 		// Fill out the form with the data
-		mailform.zFillField(Field.To, ZimbraAccount.AccountA().EmailAddress);
+		mailform.zFillField(Field.To, ZmailAccount.AccountA().EmailAddress);
 		mailform.zFillField(Field.Subject, subject);
-		mailform.zFillField(Field.Body, "body" + ZimbraSeleniumProperties.getUniqueString());
+		mailform.zFillField(Field.Body, "body" + ZmailSeleniumProperties.getUniqueString());
 		mailform.zFillField(Field.From, list.EmailAddress);	
 		mailform.zSubmit();
 	
@@ -81,24 +81,24 @@ public class SendAsDistList extends PrefGroupMailByMessageTest {
 		
 		//-- Data verification
 		
-		ZimbraAccount.AccountA().soapSend(
-				"<SearchRequest xmlns='urn:zimbraMail' types='message'>"
+		ZmailAccount.AccountA().soapSend(
+				"<SearchRequest xmlns='urn:zmailMail' types='message'>"
 			+		"<query>subject:("+ subject +")</query>"
 			+	"</SearchRequest>");
-		String id = ZimbraAccount.AccountA().soapSelectValue("//mail:m", "id");
+		String id = ZmailAccount.AccountA().soapSelectValue("//mail:m", "id");
 
-		ZimbraAccount.AccountA().soapSend(
-				"<GetMsgRequest xmlns='urn:zimbraMail' >"
+		ZmailAccount.AccountA().soapSend(
+				"<GetMsgRequest xmlns='urn:zmailMail' >"
 			+		"<m id='"+ id +"'/>"
 			+	"</GetMsgRequest>");
 
 
 		// Verify From: grantor
-		String from = ZimbraAccount.AccountA().soapSelectValue("//mail:e[@t='f']", "a");
+		String from = ZmailAccount.AccountA().soapSelectValue("//mail:e[@t='f']", "a");
 		ZAssert.assertEquals(from, list.EmailAddress, "Verify From: grantor");
 		
 		// Verify no headers contain active account
-		Element[] nodes = ZimbraAccount.AccountA().soapSelectNodes("//mail:e");
+		Element[] nodes = ZmailAccount.AccountA().soapSelectNodes("//mail:e");
 		for (Element e : nodes) {
 			String attr = e.getAttribute("a", null);
 			if ( attr != null ) {

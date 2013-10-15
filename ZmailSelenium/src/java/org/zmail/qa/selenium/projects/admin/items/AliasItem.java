@@ -14,13 +14,13 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.admin.items;
+package org.zmail.qa.selenium.projects.admin.items;
 
-import com.zimbra.qa.selenium.framework.items.IItem;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraAdminAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
+import org.zmail.qa.selenium.framework.items.IItem;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailAdminAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
 
 public class AliasItem implements IItem {
 
@@ -33,13 +33,13 @@ public class AliasItem implements IItem {
 	public AliasItem() {
 		super();
 		
-		aliasLocalName = "alias" + ZimbraSeleniumProperties.getUniqueString();
-		aliasDomainName = ZimbraSeleniumProperties.getStringProperty("testdomain");
+		aliasLocalName = "alias" + ZmailSeleniumProperties.getUniqueString();
+		aliasDomainName = ZmailSeleniumProperties.getStringProperty("testdomain");
 		aliasId = null;	
 	}
 	
 	@Override
-	public void createUsingSOAP(ZimbraAccount account) throws HarnessException {
+	public void createUsingSOAP(ZmailAccount account) throws HarnessException {
 		// TODO Auto-generated method stub
 
 	}
@@ -98,11 +98,11 @@ public class AliasItem implements IItem {
 			throw new HarnessException("emailAddress cannot be null or blank");
 		
 		// Need to get the AccountID
-		ZimbraAdminAccount.AdminConsoleAdmin().soapSend(
-							"<GetAccountRequest xmlns='urn:zimbraAdmin'>"
+		ZmailAdminAccount.AdminConsoleAdmin().soapSend(
+							"<GetAccountRequest xmlns='urn:zmailAdmin'>"
 				+                "<account by='name'>"+ emailAddress +"</account>"
                 +            "</GetAccountRequest>");
-		String id = ZimbraAdminAccount.AdminConsoleAdmin().soapSelectValue("//admin:account", "id");
+		String id = ZmailAdminAccount.AdminConsoleAdmin().soapSelectValue("//admin:account", "id");
 		
 		aliasTargetEmail = emailAddress;		
 		aliasTargetId = id;
@@ -120,11 +120,11 @@ public class AliasItem implements IItem {
 			throw new HarnessException("id cannot be null or blank");
 		
 		// Need to get the AccountID
-		ZimbraAdminAccount.AdminConsoleAdmin().soapSend(
-							"<GetAccountRequest xmlns='urn:zimbraAdmin'>"
+		ZmailAdminAccount.AdminConsoleAdmin().soapSend(
+							"<GetAccountRequest xmlns='urn:zmailAdmin'>"
 				+                "<account by='id'>"+ id +"</account>"
                 +            "</GetAccountRequest>");
-		String emailAddress = ZimbraAdminAccount.AdminConsoleAdmin().soapSelectValue("//admin:account", "name");
+		String emailAddress = ZmailAdminAccount.AdminConsoleAdmin().soapSelectValue("//admin:account", "name");
 
 		aliasTargetEmail = emailAddress;		
 		aliasTargetId = id;

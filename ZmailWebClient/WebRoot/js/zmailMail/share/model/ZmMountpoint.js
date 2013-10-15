@@ -61,7 +61,7 @@ function() {
  */
 ZmMountpoint.create =
 function(params, callback) {
-	var soapDoc = AjxSoapDoc.create("CreateMountpointRequest", "urn:zimbraMail");
+	var soapDoc = AjxSoapDoc.create("CreateMountpointRequest", "urn:zmailMail");
 
 	var linkNode = soapDoc.set("link");
 	for (var p in params) {

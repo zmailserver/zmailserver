@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.html.core;
+package org.zmail.qa.selenium.projects.html.core;
 
 import java.awt.Toolkit;
 import java.io.IOException;
@@ -27,10 +27,10 @@ import org.testng.annotations.*;
 import org.xml.sax.SAXException;
 
 import com.thoughtworks.selenium.*;
-import com.zimbra.qa.selenium.framework.core.ClientSessionFactory;
-import com.zimbra.qa.selenium.framework.ui.AbsTab;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.html.ui.AppHtmlClient;
+import org.zmail.qa.selenium.framework.core.ClientSessionFactory;
+import org.zmail.qa.selenium.framework.ui.AbsTab;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.html.ui.AppHtmlClient;
 
 /**
  * The <code>HtmlCommonTest</code> class is the base test case class
@@ -40,7 +40,7 @@ import com.zimbra.qa.selenium.projects.html.ui.AppHtmlClient;
  * <ol>
  * <li>{@link AbsTab} {@link #startingPage} - navigate to this
  * page before each test case method</li>
- * <li>{@link ZimbraAccount} {@link #startingAccountPreferences} - ensure this
+ * <li>{@link ZmailAccount} {@link #startingAccountPreferences} - ensure this
  * account is authenticated before each test case method</li>
  * </ol>
  * <p>
@@ -64,7 +64,7 @@ import com.zimbra.qa.selenium.projects.html.ui.AppHtmlClient;
  *         super.startingPage = app.zPageMail;
  *         
  *         // Create a new account to log into
- *         ZimbraAccount account = new ZimbraAccount();
+ *         ZmailAccount account = new ZmailAccount();
  *         super.startingAccount = account;
  *         
  *         // ...
@@ -134,12 +134,12 @@ public class HtmlCommonTest {
 		logger.info("commonTestBeforeSuite: start");
 
 
-		ZimbraSeleniumProperties.setAppType(ZimbraSeleniumProperties.AppType.HTML);
+		ZmailSeleniumProperties.setAppType(ZmailSeleniumProperties.AppType.HTML);
 
 		try
 		{
 			
-			if (ZimbraSeleniumProperties.isWebDriver()) {
+			if (ZmailSeleniumProperties.isWebDriver()) {
 
 				_webDriver = ClientSessionFactory.session().webDriver();
 
@@ -174,12 +174,12 @@ public class HtmlCommonTest {
 			{
 				logger.info("Retry #" + retry);
 
-				if (ZimbraSeleniumProperties.isWebDriver()) {
-					//_webDriver.get(ZimbraSeleniumProperties.getBaseURL());
-					_webDriver.navigate().to(ZimbraSeleniumProperties.getBaseURL());
+				if (ZmailSeleniumProperties.isWebDriver()) {
+					//_webDriver.get(ZmailSeleniumProperties.getBaseURL());
+					_webDriver.navigate().to(ZmailSeleniumProperties.getBaseURL());
 				} 
 				else {
-					_selenium.open(ZimbraSeleniumProperties.getBaseURL());
+					_selenium.open(ZmailSeleniumProperties.getBaseURL());
 				}
 
 				// If we made it here, everything is ok
@@ -241,15 +241,15 @@ public class HtmlCommonTest {
 			for (Map.Entry<String, String> entry : startingAccountPreferences.entrySet()) {
 				settings.append(String.format("<a n='%s'>%s</a>", entry.getKey(), entry.getValue()));
 			}
-			ZimbraAdminAccount.GlobalAdmin().soapSend(
-					"<ModifyAccountRequest xmlns='urn:zimbraAdmin'>"
-					+		"<id>"+ ZimbraAccount.AccountHTML().ZimbraId +"</id>"
+			ZmailAdminAccount.GlobalAdmin().soapSend(
+					"<ModifyAccountRequest xmlns='urn:zmailAdmin'>"
+					+		"<id>"+ ZmailAccount.AccountHTML().ZmailId +"</id>"
 					+		settings.toString()
 					+	"</ModifyAccountRequest>");
 
 
 			// Set the flag so the account is reset for the next test
-			ZimbraAccount.AccountHTML().accountIsDirty = true;
+			ZmailAccount.AccountHTML().accountIsDirty = true;
 		}
 
 		// If test account zimlet preferences are defined, then make sure the test account
@@ -257,21 +257,21 @@ public class HtmlCommonTest {
 		//
 		if ( (startingAccountZimletPreferences != null) && (!startingAccountZimletPreferences.isEmpty()) ) {
 			logger.debug("commonTestBeforeMethod: startingAccountPreferences are defined");
-			ZimbraAccount.AccountHTML().modifyZimletPreferences(startingAccountZimletPreferences);
+			ZmailAccount.AccountHTML().modifyZimletPreferences(startingAccountZimletPreferences);
 		}
 
 		// If AccountHTML is not currently logged in, then login now
-		if ( !ZimbraAccount.AccountHTML().equals(app.zGetActiveAccount()) ) {
+		if ( !ZmailAccount.AccountHTML().equals(app.zGetActiveAccount()) ) {
 			logger.debug("commonTestBeforeMethod: AccountHTML is not currently logged in");
 
 			if ( app.zPageMain.zIsActive() )
 				app.zPageMain.zLogout();
 
-			app.zPageLogin.zLogin(ZimbraAccount.AccountHTML());
+			app.zPageLogin.zLogin(ZmailAccount.AccountHTML());
 
 			// Confirm
-			if ( !ZimbraAccount.AccountHTML().equals(app.zGetActiveAccount())) {
-				throw new HarnessException("Unable to authenticate as "+ ZimbraAccount.AccountHTML().EmailAddress);
+			if ( !ZmailAccount.AccountHTML().equals(app.zGetActiveAccount())) {
+				throw new HarnessException("Unable to authenticate as "+ ZmailAccount.AccountHTML().EmailAddress);
 			}
 
 		}
@@ -326,12 +326,12 @@ public class HtmlCommonTest {
 
 		// For Ajax and Html, if account is considered dirty (modified),
 		// then recreate a new account
-		ZimbraAccount currentAccount = app.zGetActiveAccount();
+		ZmailAccount currentAccount = app.zGetActiveAccount();
 		if (currentAccount != null 
 				&& currentAccount.accountIsDirty 
-				&& currentAccount == ZimbraAccount.AccountHTML()) {
+				&& currentAccount == ZmailAccount.AccountHTML()) {
 
-			ZimbraAccount.ResetAccountHTML();
+			ZmailAccount.ResetAccountHTML();
 
 		}
 

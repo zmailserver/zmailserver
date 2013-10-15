@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=Zimbra Desktop
+Name=Zmail Desktop
 Type=Application
 Comment=Web Application
 Exec="@install.app.root@/linux/prism/zdclient" -webapp "@install.data.root@/zdesktop.webapp" -override "@install.data.root@/zdesktop.webapp/override.ini" -profile "@install.data.root@/profile"

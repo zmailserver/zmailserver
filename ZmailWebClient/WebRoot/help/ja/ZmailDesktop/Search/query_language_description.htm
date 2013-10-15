@@ -65,13 +65,13 @@ addButton("show",BTN_TEXT,"表示","","","","",0,0,"","","");
 
 	
 	document.write("<p style=\"text-align:right; background: silver\"> ");
-AddMasterBreadcrumbs("../Zimbra_Mail_Help.htm", "", "&gt;", "Desktop", "../Getting_Started/Zimbra_User_Help.htm");
+AddMasterBreadcrumbs("../Zmail_Mail_Help.htm", "", "&gt;", "Desktop", "../Getting_Started/Zmail_User_Help.htm");
 document.write("<a href=\"using_the_search_feature.htm\">項目を検索する<\/a> &gt; クエリ言語の記述<\/p>");
 
 
 	if (window.setRelStartPage)
 	{
-	setRelStartPage("../Zimbra_Mail_Help.htm");
+	setRelStartPage("../Zmail_Mail_Help.htm");
 
 		autoSync(1);
 		sendSyncInfo();
@@ -85,7 +85,7 @@ else
 //-->
 //]]></script>
 <h1>クエリ言語の記述</h1>
-<p>この上級者向けのトピックでは、Zimbraの検索機能で使用される検索文法について詳しく説明します。インターフェイスに表示される画面を生成するために、常にある種のクエリが適用されます。</p>
+<p>この上級者向けのトピックでは、Zmailの検索機能で使用される検索文法について詳しく説明します。インターフェイスに表示される画面を生成するために、常にある種のクエリが適用されます。</p>
 <h2>検索言語の構造</h2>
 <p>簡単な検索は、検索フィールドに語句を入力するだけで実行できます。語句のみの入力（検索演算子なし）は、「content:」演算子を使った検索として解釈されます。つまり、メッセージ内のすべてのテキストが照合されます。</p>
 <p>さらに高度な検索は、<b>検索演算子</b>を指定することによって実行できます。検索演算子は特殊なキーワードで、その後に半角コロンとそのキーワードに固有なその他のパラメータが続きます。以下にその例を挙げます。</p>
@@ -118,7 +118,7 @@ else
 <p style="font-weight: bold;">content:</p>
 <p style="margin-left: 40px;">メッセージに含まれているテキストを指定します。たとえば、「<span class="code">content:bananas</span>」と指定すると、「bananas」という語句を含むすべての項目が検索されます。</p>
 <p style="font-weight: bold;">from:</p>
-<p style="margin-left: 40px;">差出人ヘッダーに含まれている送信者の名前やメールアドレスを指定します。これには、「田中良夫」などの名前、「tanaka@acme.com」などのメールアドレス、「zimbra.com」などのドメインを指定できます。</p>
+<p style="margin-left: 40px;">差出人ヘッダーに含まれている送信者の名前やメールアドレスを指定します。これには、「田中良夫」などの名前、「tanaka@acme.com」などのメールアドレス、「zmail.com」などのドメインを指定できます。</p>
 <p style="font-weight: bold;">to:</p>
 <p style="margin-left: 40px;">メッセージのTo:ヘッダーに含まれている人物の1人を指定するという点を除き、from:と同じです。</p>
 <p style="font-weight: bold;">cc:</p>

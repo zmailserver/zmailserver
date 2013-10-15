@@ -31,7 +31,7 @@
  */
 
 // Original is from example in OAuth Java library(http://oauth.googlecode.com/svn/code/java/)
-// and modified for integratin with Zimbra
+// and modified for integratin with Zmail
 
 // Original's copyright and license terms
 /*
@@ -64,11 +64,11 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.zimbra.common.util.StringUtil;
+import org.zmail.common.util.StringUtil;
 import net.oauth.signature.OAuthSignatureMethod;
 import net.oauth.*;
 
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.util.ZmailLog;
 
 /**
  * A simple OAuthValidator for OAuth 1.0 Rev.A, which checks the version, whether the timestamp
@@ -138,15 +138,15 @@ public class SimpleOAuthRevAValidator implements OAuthValidator {
     public void validateAccTokenMessage(OAuthMessage message, OAuthAccessor accessor)
     throws OAuthException, IOException, URISyntaxException {
         checkSingleParameters(message);
-        ZimbraLog.extensions.debug("validateAccToken:checkShingle done.");
+        ZmailLog.extensions.debug("validateAccToken:checkShingle done.");
         validateVersion(message);
-        ZimbraLog.extensions.debug("validateAccToken:validateVersion done.");
+        ZmailLog.extensions.debug("validateAccToken:validateVersion done.");
         validateTimestampAndNonce(message);
-        ZimbraLog.extensions.debug("validateAccToken:validateTimestamp done.");
+        ZmailLog.extensions.debug("validateAccToken:validateTimestamp done.");
         validateSignature(message, accessor);
-        ZimbraLog.extensions.debug("validateAccToken:validateSignature done.");
+        ZmailLog.extensions.debug("validateAccToken:validateSignature done.");
         validateVerifier(message, accessor);
-        ZimbraLog.extensions.debug("validateAccToken:validateVerifier done.");
+        ZmailLog.extensions.debug("validateAccToken:validateVerifier done.");
     }
     public void validateReqTokenMessage(OAuthMessage message, OAuthAccessor accessor)
     throws OAuthException, IOException, URISyntaxException {
@@ -231,7 +231,7 @@ public class SimpleOAuthRevAValidator implements OAuthValidator {
     throws OAuthException, IOException {
         String verifier = message.getParameter(OAuth.OAUTH_VERIFIER);
         if (!StringUtil.equal(verifier, (String) accessor.getProperty(OAuth.OAUTH_VERIFIER))) {
-        		ZimbraLog.extensions.debug("verifier from request("+verifier+") and local memory("+accessor.getProperty(OAuth.OAUTH_VERIFIER)+") should be same.");
+        		ZmailLog.extensions.debug("verifier from request("+verifier+") and local memory("+accessor.getProperty(OAuth.OAUTH_VERIFIER)+") should be same.");
                 OAuthProblemException problem = new OAuthProblemException("invalid_verifier");
                 throw problem;
         }
@@ -243,14 +243,14 @@ public class SimpleOAuthRevAValidator implements OAuthValidator {
      
         String callback = message.getParameter(OAuth.OAUTH_CALLBACK);
         if (callback != null && callback != "") {
-        	ZimbraLog.extensions.debug("callback is ready.");
+        	ZmailLog.extensions.debug("callback is ready.");
         	//if(callback=="oob"){
         		//oob is not implemented yet	
         	//}else{
         		accessor.setProperty(OAuth.OAUTH_CALLBACK, callback);
         	//}
         }else{
-        	ZimbraLog.extensions.debug("no callbacks set!");
+        	ZmailLog.extensions.debug("no callbacks set!");
         	OAuthProblemException problem = new OAuthProblemException("no_callback");
             throw problem;
         }

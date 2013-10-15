@@ -14,21 +14,21 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.preferences.general.login;
+package org.zmail.qa.selenium.projects.ajax.tests.preferences.general.login;
 
 import java.util.HashMap;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
 
-public class ZimbraPrefClientTypeAdvanced extends AjaxCommonTest {
+public class ZmailPrefClientTypeAdvanced extends AjaxCommonTest {
 
-	public ZimbraPrefClientTypeAdvanced() {
-		logger.info("New "+ ZimbraPrefClientTypeAdvanced.class.getCanonicalName());
+	public ZmailPrefClientTypeAdvanced() {
+		logger.info("New "+ ZmailPrefClientTypeAdvanced.class.getCanonicalName());
 
 		// All tests start at the login page
 		super.startingPage = app.zPagePreferences;
@@ -37,7 +37,7 @@ public class ZimbraPrefClientTypeAdvanced extends AjaxCommonTest {
 			private static final long serialVersionUID = -1303088148746653112L;
 			{
 
-				put("zimbraPrefClientType", "advanced");
+				put("zmailPrefClientType", "advanced");
 
 			}
 		};
@@ -48,7 +48,7 @@ public class ZimbraPrefClientTypeAdvanced extends AjaxCommonTest {
 			description = "Verify the 'Sign in using' option can be toggled", 
 			groups = { "functional" }
 			)
-	public void ZimbraPrefClientTypeAdvanced_01() throws HarnessException {
+	public void ZmailPrefClientTypeAdvanced_01() throws HarnessException {
 				
 		// Go to "General"
 		app.zTreePreferences.zTreeItem(Action.A_LEFTCLICK, TreeItem.General);
@@ -65,12 +65,12 @@ public class ZimbraPrefClientTypeAdvanced extends AjaxCommonTest {
 		app.zPagePreferences.zToolbarPressButton(Button.B_SAVE);
 		
 		app.zGetActiveAccount().soapSend(
-						"<GetPrefsRequest xmlns='urn:zimbraAccount'>"
-				+			"<pref name='zimbraPrefClientType'/>"
+						"<GetPrefsRequest xmlns='urn:zmailAccount'>"
+				+			"<pref name='zmailPrefClientType'/>"
 				+		"</GetPrefsRequest>");
 
-		String value = app.zGetActiveAccount().soapSelectValue("//acct:pref[@name='zimbraPrefClientType']", null);
-		ZAssert.assertEquals(value, "standard", "Verify the zimbraPrefClientType preference was changed to 'standard'");
+		String value = app.zGetActiveAccount().soapSelectValue("//acct:pref[@name='zmailPrefClientType']", null);
+		ZAssert.assertEquals(value, "standard", "Verify the zmailPrefClientType preference was changed to 'standard'");
 
 	}
 }

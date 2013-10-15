@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cert;
+package org.zmail.cert;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -54,11 +54,11 @@ import java.util.Enumeration;
 *    java PKCS12Import keystore.pkcs12 keytore.jks inputPassphrase  outputPassphrase
 * </PRE>
 *
-* The customization for Zimbra to read the keystore password from 
+* The customization for Zmail to read the keystore password from 
 * as an argument instead of the stdin .
 *
 
-* @author ccao (Customized for zimbra)
+* @author ccao (Customized for zmail)
 */
 public class MyPKCS12Import
 {

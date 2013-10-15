@@ -150,8 +150,8 @@
 		getInfo : function() {
 			return {
 				longname : 'QuickCreate Table Plugin',
-				author : 'Zimbra Inc.,',
-				authorurl : 'http://www.zimbra.com',
+				author : 'Zmail Inc.,',
+				authorurl : 'http://www.zmail.com',
 				version : tinymce.majorVersion + "." + tinymce.minorVersion
 			};
 		}

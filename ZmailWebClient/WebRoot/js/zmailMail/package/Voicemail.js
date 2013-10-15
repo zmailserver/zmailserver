@@ -30,33 +30,33 @@ AjxPackage.require("ajax.dwt.widgets.DwtBorderlessButton");
 AjxPackage.require("ajax.dwt.widgets.DwtSlider");
 AjxPackage.require("ajax.dwt.widgets.DwtSoundPlugin");
 
-AjxPackage.require("zimbraMail.abook.model.ZmContact");
+AjxPackage.require("zmailMail.abook.model.ZmContact");
 
-AjxPackage.require("zimbraMail.voicemail.model.ZmCallFeature");
-AjxPackage.require("zimbraMail.voicemail.model.ZmPhone");
-AjxPackage.require("zimbraMail.voicemail.model.ZmCallingParty");
-AjxPackage.require("zimbraMail.voicemail.model.ZmVoiceItem");
-AjxPackage.require("zimbraMail.voicemail.model.ZmCall");
-AjxPackage.require("zimbraMail.voicemail.model.ZmVoicemail");
-AjxPackage.require("zimbraMail.voicemail.model.ZmVoiceFolder");
-AjxPackage.require("zimbraMail.voicemail.model.ZmVoiceFolderTree");
-AjxPackage.require("zimbraMail.voicemail.model.ZmVoiceList");
+AjxPackage.require("zmailMail.voicemail.model.ZmCallFeature");
+AjxPackage.require("zmailMail.voicemail.model.ZmPhone");
+AjxPackage.require("zmailMail.voicemail.model.ZmCallingParty");
+AjxPackage.require("zmailMail.voicemail.model.ZmVoiceItem");
+AjxPackage.require("zmailMail.voicemail.model.ZmCall");
+AjxPackage.require("zmailMail.voicemail.model.ZmVoicemail");
+AjxPackage.require("zmailMail.voicemail.model.ZmVoiceFolder");
+AjxPackage.require("zmailMail.voicemail.model.ZmVoiceFolderTree");
+AjxPackage.require("zmailMail.voicemail.model.ZmVoiceList");
 
-AjxPackage.require("zimbraMail.voicemail.view.ZmSoundPlayer");
-AjxPackage.require("zimbraMail.voicemail.view.ZmFlashAudioPlayer");
+AjxPackage.require("zmailMail.voicemail.view.ZmSoundPlayer");
+AjxPackage.require("zmailMail.voicemail.view.ZmFlashAudioPlayer");
 
-AjxPackage.require("zimbraMail.voicemail.view.ZmVoiceListView");
-AjxPackage.require("zimbraMail.voicemail.view.ZmCallListView");
+AjxPackage.require("zmailMail.voicemail.view.ZmVoiceListView");
+AjxPackage.require("zmailMail.voicemail.view.ZmCallListView");
 
-AjxPackage.require("zimbraMail.voicemail.view.ZmVoicemailListView");
-AjxPackage.require("zimbraMail.voicemail.view.ZmMP3VoicemailListView");
+AjxPackage.require("zmailMail.voicemail.view.ZmVoicemailListView");
+AjxPackage.require("zmailMail.voicemail.view.ZmMP3VoicemailListView");
 
-AjxPackage.require("zimbraMail.voicemail.view.ZmVoiceOverviewContainer");
-AjxPackage.require("zimbraMail.voicemail.view.ZmVoiceTreeView");
-AjxPackage.require("zimbraMail.voicemail.view.ZmMP3VoicemailListView");
+AjxPackage.require("zmailMail.voicemail.view.ZmVoiceOverviewContainer");
+AjxPackage.require("zmailMail.voicemail.view.ZmVoiceTreeView");
+AjxPackage.require("zmailMail.voicemail.view.ZmMP3VoicemailListView");
 
-AjxPackage.require("zimbraMail.voicemail.controller.ZmVoiceListController");
-AjxPackage.require("zimbraMail.voicemail.controller.ZmCallListController");
-AjxPackage.require("zimbraMail.voicemail.controller.ZmVoicemailListController");
-AjxPackage.require("zimbraMail.voicemail.controller.ZmVoiceTreeController");
+AjxPackage.require("zmailMail.voicemail.controller.ZmVoiceListController");
+AjxPackage.require("zmailMail.voicemail.controller.ZmCallListController");
+AjxPackage.require("zmailMail.voicemail.controller.ZmVoicemailListController");
+AjxPackage.require("zmailMail.voicemail.controller.ZmVoiceTreeController");
 

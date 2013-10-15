@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.admin.tests.downloads;
+package org.zmail.qa.selenium.projects.admin.tests.downloads;
 
 import java.io.IOException;
 import java.net.*;
@@ -22,8 +22,8 @@ import java.util.*;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.admin.core.AdminCommonTest;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.admin.core.AdminCommonTest;
 
 
 public class DownloadsTab extends AdminCommonTest {
@@ -32,23 +32,23 @@ public class DownloadsTab extends AdminCommonTest {
 		
 		// These links only appear on NETWORK
 
-		// Zimbra Connector for Outlook MSI Customizer
-		"//a[contains(text(),'Zimbra Connector for Outlook MSI Customizer')]", // TODO: need to add unique ID
+		// Zmail Connector for Outlook MSI Customizer
+		"//a[contains(text(),'Zmail Connector for Outlook MSI Customizer')]", // TODO: need to add unique ID
 		
-		// Zimbra Connector for Outlook Branding MSI
-		"//a[contains(text(),'Zimbra Connector for Outlook Branding MSI')]", // TODO: need to add unique ID
+		// Zmail Connector for Outlook Branding MSI
+		"//a[contains(text(),'Zmail Connector for Outlook Branding MSI')]", // TODO: need to add unique ID
 		
-		// Zimbra Connector(32bits) for Outlook
-		"//a[contains(text(),'Zimbra Connector(32bits) for Outlook')]", // TODO: need to add unique ID
+		// Zmail Connector(32bits) for Outlook
+		"//a[contains(text(),'Zmail Connector(32bits) for Outlook')]", // TODO: need to add unique ID
 		
-		// Zimbra Connector(64bits) for Outlook
-		"//a[contains(text(),'Zimbra Connector(64bits) for Outlook')]", // TODO: need to add unique ID
+		// Zmail Connector(64bits) for Outlook
+		"//a[contains(text(),'Zmail Connector(64bits) for Outlook')]", // TODO: need to add unique ID
 		
 		// (User Instructions )
 		"//a[contains(text(),'User Instructions')]", // TODO: need to add unique ID
 
-		// Zimbra Connector for Apple iSync
-		"//a[contains(text(),'Zimbra Connector for Apple iSync')]", // TODO: need to add unique ID
+		// Zmail Connector for Apple iSync
+		"//a[contains(text(),'Zmail Connector for Apple iSync')]", // TODO: need to add unique ID
 		
 	};
 	
@@ -101,7 +101,7 @@ public class DownloadsTab extends AdminCommonTest {
 		
 		// If NETWORK, make sure NETWORK-only links appear and FOSS-only links do not appear
 		// If FOSS, make sure FOSS-only links appear and NETWORK-only links do not appear
-		if ( ZimbraSeleniumProperties.zimbraGetVersionString().contains("NETWORK") ) {
+		if ( ZmailSeleniumProperties.zmailGetVersionString().contains("NETWORK") ) {
 			
 			for ( String locator : NetworkOnlyLocators ) {
 				ZAssert.assertTrue(app.zPageDownloads.sIsElementPresent(locator), "Verify the network-only locator exists: "+ locator);
@@ -111,7 +111,7 @@ public class DownloadsTab extends AdminCommonTest {
 				ZAssert.assertFalse(app.zPageDownloads.sIsElementPresent(locator), "Verify the foss-only locator does not exists: "+ locator);
 			}
 
-		} else if ( ZimbraSeleniumProperties.zimbraGetVersionString().contains("FOSS") ) {
+		} else if ( ZmailSeleniumProperties.zmailGetVersionString().contains("FOSS") ) {
 			
 			for ( String locator : NetworkOnlyLocators ) {
 				ZAssert.assertFalse(app.zPageDownloads.sIsElementPresent(locator), "Verify the network-only locator does not exists: "+ locator);
@@ -122,7 +122,7 @@ public class DownloadsTab extends AdminCommonTest {
 			}
 
 		} else {
-			throw new HarnessException("Unable to find NETWORK or FOSS in version string: "+ ZimbraSeleniumProperties.zimbraGetVersionString());
+			throw new HarnessException("Unable to find NETWORK or FOSS in version string: "+ ZmailSeleniumProperties.zmailGetVersionString());
 		}
 		
 
@@ -135,23 +135,23 @@ public class DownloadsTab extends AdminCommonTest {
 		// Determine which links should be present
 		List<String> locators = new ArrayList<String>();
 		
-		if ( ZimbraSeleniumProperties.zimbraGetVersionString().contains("NETWORK") ) {
+		if ( ZmailSeleniumProperties.zmailGetVersionString().contains("NETWORK") ) {
 			
 			locators.addAll(Arrays.asList(NetworkOnlyLocators));
 			locators.addAll(Arrays.asList(CommonLocators));
 			
-		} else if ( ZimbraSeleniumProperties.zimbraGetVersionString().contains("FOSS") ) {
+		} else if ( ZmailSeleniumProperties.zmailGetVersionString().contains("FOSS") ) {
 			
 			locators.addAll(Arrays.asList(FossOnlyLocators));
 			locators.addAll(Arrays.asList(CommonLocators));
 
 		} else {
-			throw new HarnessException("Unable to find NETWORK or FOSS in version string: "+ ZimbraSeleniumProperties.zimbraGetVersionString());
+			throw new HarnessException("Unable to find NETWORK or FOSS in version string: "+ ZmailSeleniumProperties.zmailGetVersionString());
 		}
 
 		for (String locator : locators ) {
 			String href = app.zPageDownloads.sGetAttribute("xpath="+ locator +"@href");
-			String page = ZimbraSeleniumProperties.getBaseURL() + href;
+			String page = ZmailSeleniumProperties.getBaseURL() + href;
 			
 			HttpURLConnection  connection = null;
 			try {

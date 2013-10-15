@@ -14,21 +14,21 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.octopus.tests.search;
+package org.zmail.qa.selenium.projects.octopus.tests.search;
 
 import java.util.List;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.IOctListViewItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.octopus.core.OctopusCommonTest;
-import com.zimbra.qa.selenium.projects.octopus.ui.DialogMove;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.IOctListViewItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.octopus.core.OctopusCommonTest;
+import org.zmail.qa.selenium.projects.octopus.ui.DialogMove;
 
 public class MoveFile extends OctopusCommonTest {
 
@@ -46,17 +46,17 @@ public class MoveFile extends OctopusCommonTest {
 			groups = { "smoke" })
 	public void MoveFile_01() throws HarnessException {
 
-		String filename = "filename"+ ZimbraSeleniumProperties.getUniqueString() +".txt";
-		String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+		String filename = "filename"+ ZmailSeleniumProperties.getUniqueString() +".txt";
+		String filePath = ZmailSeleniumProperties.getBaseDirectory()
 				+ "/data/public/documents/doc01/plaintext.txt";
-		String subFolderName = "subFolder" + ZimbraSeleniumProperties.getUniqueString();
+		String subFolderName = "subFolder" + ZmailSeleniumProperties.getUniqueString();
 
 		
 		// Save uploaded file through SOAP
 		FolderItem briefcaseRootFolder = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Briefcase);
 
 		app.zGetActiveAccount().soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>"
+					"<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+		"<folder name='" + subFolderName + "' l='" + briefcaseRootFolder.getId() + "' view='document'/>"
 				+	"</CreateFolderRequest>");
 
@@ -69,7 +69,7 @@ public class MoveFile extends OctopusCommonTest {
 
 
 		app.zGetActiveAccount().soapSend(
-					"<SaveDocumentRequest xmlns='urn:zimbraMail'>"
+					"<SaveDocumentRequest xmlns='urn:zmailMail'>"
 				+		"<doc name='"+ filename +"' l='" + briefcaseRootFolder.getId() + "'>"
 				+			"<upload id='" + attachmentId + "'/>"
 				+		"</doc>"
@@ -115,7 +115,7 @@ public class MoveFile extends OctopusCommonTest {
 		
 		// Verify the document is shared
 		app.zGetActiveAccount().soapSend(
-				"<GetItemRequest xmlns='urn:zimbraMail'>"
+				"<GetItemRequest xmlns='urn:zmailMail'>"
 			+		"<item id='"+ documentId +"'/>"
 			+	"</GetItemRequest>");
 

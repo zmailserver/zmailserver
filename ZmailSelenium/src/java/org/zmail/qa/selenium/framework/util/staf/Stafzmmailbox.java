@@ -14,13 +14,13 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.util.staf;
+package org.zmail.qa.selenium.framework.util.staf;
 
-import com.zimbra.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.HarnessException;
 
 /**
  * @deprecated As of version 7.0
- * @author zimbra
+ * @author zmail
  *
  */
 public class Stafzmmailbox extends StafServicePROCESS {
@@ -42,13 +42,13 @@ public class Stafzmmailbox extends StafServicePROCESS {
 		
 		// Make sure the full path is specified
 		if ( command.trim().startsWith("zmmailbox") ) {
-			command = "/opt/zimbra/bin/" + command;
+			command = "/opt/zmail/bin/" + command;
 		}
-		// Running a command as 'zimbra' user.
+		// Running a command as 'zmail' user.
 		// We must convert the command to a special format
-		// START SHELL COMMAND "su - zimbra -c \'<cmd>\'" RETURNSTDOUT RETURNSTDERR WAIT 30000</params>
+		// START SHELL COMMAND "su - zmail -c \'<cmd>\'" RETURNSTDOUT RETURNSTDERR WAIT 30000</params>
 
-		StafParms = String.format("START SHELL COMMAND \"su - zimbra -c '%s'\" RETURNSTDOUT RETURNSTDERR WAIT %d", command, this.getTimeout());
+		StafParms = String.format("START SHELL COMMAND \"su - zmail -c '%s'\" RETURNSTDOUT RETURNSTDERR WAIT %d", command, this.getTimeout());
 		return (getStafCommand());
 	}
 	

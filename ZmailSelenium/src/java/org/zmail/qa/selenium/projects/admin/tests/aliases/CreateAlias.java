@@ -14,18 +14,18 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.admin.tests.aliases;
+package org.zmail.qa.selenium.projects.admin.tests.aliases;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAdminAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.admin.core.AdminCommonTest;
-import com.zimbra.qa.selenium.projects.admin.items.*;
-import com.zimbra.qa.selenium.projects.admin.ui.WizardCreateAlias;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAdminAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.admin.core.AdminCommonTest;
+import org.zmail.qa.selenium.projects.admin.items.*;
+import org.zmail.qa.selenium.projects.admin.ui.WizardCreateAlias;
 
 
 public class CreateAlias extends AdminCommonTest {
@@ -47,7 +47,7 @@ public class CreateAlias extends AdminCommonTest {
 			groups = { "obsolete" })
 	public void CreateAlias_01() throws HarnessException {
 
-		AccountItem target = new AccountItem("email" + ZimbraSeleniumProperties.getUniqueString(),ZimbraSeleniumProperties.getStringProperty("testdomain"));
+		AccountItem target = new AccountItem("email" + ZmailSeleniumProperties.getUniqueString(),ZmailSeleniumProperties.getStringProperty("testdomain"));
 		AccountItem.createUsingSOAP(target);
 		
 		AliasItem alias = new AliasItem();		// Create a new account in the Admin Console using SOAP
@@ -62,11 +62,11 @@ public class CreateAlias extends AdminCommonTest {
 		wizard.zCompleteWizard(alias);
 
 		// Verify the alias exists in the ZCS
-		ZimbraAdminAccount.AdminConsoleAdmin().soapSend(
-						"<GetAccountRequest xmlns='urn:zimbraAdmin'>"
+		ZmailAdminAccount.AdminConsoleAdmin().soapSend(
+						"<GetAccountRequest xmlns='urn:zmailAdmin'>"
 				+			"<account by='name'>"+ alias.getEmailAddress() +"</account>"
 				+		"</GetAccountRequest>");
-		String email = ZimbraAdminAccount.AdminConsoleAdmin().soapSelectValue("//admin:account", "name");
+		String email = ZmailAdminAccount.AdminConsoleAdmin().soapSelectValue("//admin:account", "name");
 		ZAssert.assertEquals(email, target.getEmailAddress(), "Verify the alias is associated with the correct account");
 	}
 	
@@ -81,7 +81,7 @@ public class CreateAlias extends AdminCommonTest {
 			groups = { "sanity" })
 			public void CreateAlias_02() throws HarnessException {
 
-		AccountItem target = new AccountItem("email" + ZimbraSeleniumProperties.getUniqueString(),ZimbraSeleniumProperties.getStringProperty("testdomain"));
+		AccountItem target = new AccountItem("email" + ZmailSeleniumProperties.getUniqueString(),ZmailSeleniumProperties.getStringProperty("testdomain"));
 		AccountItem.createUsingSOAP(target);
 		
 
@@ -99,11 +99,11 @@ public class CreateAlias extends AdminCommonTest {
 		wizard.zCompleteWizard(alias);
 
 		// Verify the alias exists in the ZCS
-		ZimbraAdminAccount.AdminConsoleAdmin().soapSend(
-						"<GetAccountRequest xmlns='urn:zimbraAdmin'>"
+		ZmailAdminAccount.AdminConsoleAdmin().soapSend(
+						"<GetAccountRequest xmlns='urn:zmailAdmin'>"
 				+			"<account by='name'>"+ alias.getEmailAddress() +"</account>"
 				+		"</GetAccountRequest>");
-		String email = ZimbraAdminAccount.AdminConsoleAdmin().soapSelectValue("//admin:account", "name");
+		String email = ZmailAdminAccount.AdminConsoleAdmin().soapSelectValue("//admin:account", "name");
 		ZAssert.assertEquals(email, target.getEmailAddress(), "Verify the alias is associated with the correct account");
 	}
 

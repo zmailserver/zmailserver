@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.mobile.tests.main;
+package org.zmail.qa.selenium.projects.mobile.tests.main;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.projects.mobile.core.MobileCommonTest;
-import com.zimbra.qa.selenium.projects.mobile.ui.PageMain;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.projects.mobile.core.MobileCommonTest;
+import org.zmail.qa.selenium.projects.mobile.ui.PageMain;
 
 
 public class MainScreen extends MobileCommonTest {
@@ -61,7 +61,7 @@ public class MainScreen extends MobileCommonTest {
 		// The copyright doesn't seem to be translated
 		//use "\u00a9" (char)169 for Copyright
 		
-		String copyright = "Copyright " + "\u00a9" + " 2005-2013 VMware, Inc. VMware and Zimbra are registered trademarks or trademarks of VMware, Inc.";
+		String copyright = "Copyright " + "\u00a9" + " 2005-2013 VMware, Inc. VMware and Zmail are registered trademarks or trademarks of VMware, Inc.";
 		
 				
 		ZAssert.assertTrue(app.zPageMain.sIsElementPresent(PageMain.Locators.zMainCopyright),	"Verify that the copyright notice is present");

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.zcsprov;
+package org.zmail.zcsprov;
 
 import java.util.logging.*;
 import javax.xml.soap.SOAPEnvelope;
@@ -22,7 +22,7 @@ import javax.xml.soap.SOAPBody;
 import javax.xml.soap.SOAPElement;
 import javax.xml.soap.SOAPHeader;
 import javax.xml.soap.Name;
-import com.zimbra.utils.*;
+import org.zmail.utils.*;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 
@@ -76,7 +76,7 @@ public class ZCSImportFile
             }
             
             //create SOAP Body
-            Name bodyName = se.createName("ImportContactsRequest", "","urn:zimbraMail");
+            Name bodyName = se.createName("ImportContactsRequest", "","urn:zmailMail");
             SOAPElement bodyElement = body.addBodyElement(bodyName);
             Name ctne= se.createName("ct");
             bodyElement.addAttribute(ctne, "csv");

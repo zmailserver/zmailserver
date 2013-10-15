@@ -27,12 +27,12 @@
  * wish to override some functions in order to provide custom functionality. All Zimlet Handler Objects should extend this base class.
  * <br />
  * <br />
- * <code>function com_zimbra_myZimlet_HandlerObject() { };</code>
+ * <code>function org_zmail_myZimlet_HandlerObject() { };</code>
  * <br />
  * <br />
  * <code>
- * com_zimbra_myZimlet_HandlerObject.prototype = new ZmZimletBase();
- * com_zimbra_myZimlet_HandlerObject.prototype.constructor = com_zimbra_myZimlet_HandlerObject;
+ * org_zmail_myZimlet_HandlerObject.prototype = new ZmZimletBase();
+ * org_zmail_myZimlet_HandlerObject.prototype.constructor = org_zmail_myZimlet_HandlerObject;
  * </code>
  * 
  * @extends	ZmObjectHandler
@@ -814,7 +814,7 @@ function(props) {
  */
 ZmZimletBase.prototype.setBusyIcon =
 function() {
-	this.setIcon("ZimbraIcon DwtWait16Icon");
+	this.setIcon("ZmailIcon DwtWait16Icon");
 };
 
 /**
@@ -825,7 +825,7 @@ function() {
  *  customHeaders.push({name:"header1", _content:"headerValue"});
  *
  *  Note: Header name ("header1" in this case) MUST be one of the valid/allowed values of
- *  zimbraCustomMimeHeaderNameAllowed global-config property (set by admin)
+ *  zmailCustomMimeHeaderNameAllowed global-config property (set by admin)
  * @param {array} customMimeHeaders The array containing all custom headers
  *
  */
@@ -892,7 +892,7 @@ function(parent, num){};
  */
 ZmZimletBase.prototype.saveUserProperties =
 function(callback) {
-	var soapDoc = AjxSoapDoc.create("ModifyPropertiesRequest", "urn:zimbraAccount");
+	var soapDoc = AjxSoapDoc.create("ModifyPropertiesRequest", "urn:zmailAccount");
 
 	var props = this.xmlObj().userProperties;
 	var check = this.checkProperties(props);

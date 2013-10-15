@@ -79,7 +79,7 @@ private:
     //
 
 public:
-    MAPITask(Zimbra::MAPI::MAPISession &session, Zimbra::MAPI::MAPIMessage &mMessage);
+    MAPITask(Zmail::MAPI::MAPISession &session, Zmail::MAPI::MAPIMessage &mMessage);
     ~MAPITask();
     HRESULT InitNamedPropsForTask();
     HRESULT SetMAPITaskValues();

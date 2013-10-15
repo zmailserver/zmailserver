@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -31,18 +31,18 @@ import java.util.concurrent.ConcurrentMap;
 import javax.mail.Message.RecipientType;
 import javax.mail.internet.MimeMessage;
 
-import com.zimbra.common.mime.shim.JavaMailInternetAddress;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.SoapFaultException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.cs.datasource.IOExceptionHandler;
-import com.zimbra.cs.mime.Mime;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.offline.OfflineLC;
-import com.zimbra.cs.offline.OfflineLog;
-import com.zimbra.cs.offline.OfflineSyncManager;
-import com.zimbra.cs.offline.util.RecoverableException;
-import com.zimbra.cs.util.JMSession;
+import org.zmail.common.mime.shim.JavaMailInternetAddress;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.SoapFaultException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.cs.datasource.IOExceptionHandler;
+import org.zmail.cs.mime.Mime;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.offline.OfflineLC;
+import org.zmail.cs.offline.OfflineLog;
+import org.zmail.cs.offline.OfflineSyncManager;
+import org.zmail.cs.offline.util.RecoverableException;
+import org.zmail.cs.util.JMSession;
 
 public class SyncExceptionHandler extends IOExceptionHandler {
 
@@ -322,7 +322,7 @@ public class SyncExceptionHandler extends IOExceptionHandler {
 
             //TODO: need to i18n the entire block here
             StringBuilder sb = new StringBuilder();
-            sb.append("Product name:    Zimbra Desktop\n");
+            sb.append("Product name:    Zmail Desktop\n");
             sb.append("Product version: ").append(OfflineLC.zdesktop_version.value()).append("\n");
             sb.append("Build ID:        ").append(OfflineLC.zdesktop_buildid.value()).append("\n");
             sb.append("Release type:    ").append(OfflineLC.zdesktop_relabel.value()).append("\n");

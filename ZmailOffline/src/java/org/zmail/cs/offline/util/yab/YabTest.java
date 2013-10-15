@@ -12,15 +12,15 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.util.yab;
+package org.zmail.cs.offline.util.yab;
 
 import junit.framework.TestCase;
 import junit.framework.Assert;
-import com.zimbra.cs.util.yauth.RawAuthManager;
-import com.zimbra.cs.util.yauth.FileTokenStore;
-import com.zimbra.cs.util.yauth.TokenStore;
-import com.zimbra.cs.offline.OfflineLog;
-import com.zimbra.common.util.Log;
+import org.zmail.cs.util.yauth.RawAuthManager;
+import org.zmail.cs.util.yauth.FileTokenStore;
+import org.zmail.cs.util.yauth.TokenStore;
+import org.zmail.cs.offline.OfflineLog;
+import org.zmail.common.util.Log;
 
 import java.io.File;
 import java.util.List;

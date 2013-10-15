@@ -69,7 +69,7 @@
   <topic name="Rédaction et envoi d'un mail signé numériquement" url="zwc_help_files/15_s_mime/compose_and_send_a_digitally_signed_message.htm" />
 </key>
 <key name="mini-calendrier" >
-  <topic name="navigation dans le client Web de Zimbra" url="zwc_help_files/1_setting_up/navigating_the_zimbra_web_client.htm" />
+  <topic name="navigation dans le client Web de Zmail" url="zwc_help_files/1_setting_up/navigating_the_zmail_web_client.htm" />
 </key>
 <key name="mobile" >
   <topic name="Effacement des données de votre périphérique mobile" url="zwc_help_files/11_mobile/wipe_your_mobile_device.htm" />
@@ -128,10 +128,10 @@
   </key>
 </key>
 <key name="panneau d'aperçu" >
-  <topic name="navigation dans le client Web de Zimbra" url="zwc_help_files/1_setting_up/navigating_the_zimbra_web_client.htm" />
+  <topic name="navigation dans le client Web de Zmail" url="zwc_help_files/1_setting_up/navigating_the_zmail_web_client.htm" />
 </key>
 <key name="panneau de contenu" >
-  <topic name="navigation dans le client Web de Zimbra" url="zwc_help_files/1_setting_up/navigating_the_zimbra_web_client.htm" />
+  <topic name="navigation dans le client Web de Zmail" url="zwc_help_files/1_setting_up/navigating_the_zmail_web_client.htm" />
 </key>
 <key name="panneau de lecture" >
   <topic name="Utilisation d'un panneau de lecture" url="zwc_help_files/2_manage_email/using_a_reading_pane.htm" />

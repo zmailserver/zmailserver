@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.calendar.folders;
+package org.zmail.qa.selenium.projects.ajax.tests.calendar.folders;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.DialogEditFolder;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.DialogEditFolder.FolderColor;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.DialogEditFolder;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.DialogEditFolder.FolderColor;
 
 public class ChangeColorCalendar extends AjaxCommonTest {
 
@@ -45,10 +45,10 @@ public class ChangeColorCalendar extends AjaxCommonTest {
 		ZAssert.assertNotNull(root, "Verify the inbox is available");
 
 		// Create the subfolder
-		String name = "calendar" + ZimbraSeleniumProperties.getUniqueString();
+		String name = "calendar" + ZmailSeleniumProperties.getUniqueString();
 
 		app.zGetActiveAccount().soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>"
+					"<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+		"<folder name='" + name + "' l='" + root.getId() + "' view='appointment'/>"
 				+	"</CreateFolderRequest>");
 
@@ -68,7 +68,7 @@ public class ChangeColorCalendar extends AjaxCommonTest {
 
 		// Check the color
 		app.zGetActiveAccount().soapSend(
-				"<GetFolderRequest xmlns='urn:zimbraMail'>"
+				"<GetFolderRequest xmlns='urn:zmailMail'>"
 			+		"<folder id='" + calendar.getId() + "'/>"
 			+	"</GetFolderRequest>");
 

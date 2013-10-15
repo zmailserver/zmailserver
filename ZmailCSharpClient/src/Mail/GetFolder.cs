@@ -15,10 +15,10 @@
 using System;
 using System.Xml;
 using System.Collections;
-using Zimbra.Client.Util;
+using Zmail.Client.Util;
 
 
-namespace Zimbra.Client.Mail
+namespace Zmail.Client.Mail
 {
 	public class GetFolderRequest : MailServiceRequest
 	{

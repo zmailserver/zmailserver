@@ -65,13 +65,13 @@ addButton("show",BTN_TEXT,"Montrer","","","","",0,0,"","","");
 
 	
 	document.write("<p style=\"text-align:right; background: silver\"> ");
-AddMasterBreadcrumbs("../Zimbra_Mail_Help.htm", "", "&gt;", "Desktop", "../Getting_Started/Zimbra_User_Help.htm");
+AddMasterBreadcrumbs("../Zmail_Mail_Help.htm", "", "&gt;", "Desktop", "../Getting_Started/Zmail_User_Help.htm");
 document.write("<a href=\"using_the_search_feature.htm\">Recherche d'objets<\/a> &gt; Description du langage de demande<\/p>");
 
 
 	if (window.setRelStartPage)
 	{
-	setRelStartPage("../Zimbra_Mail_Help.htm");
+	setRelStartPage("../Zmail_Mail_Help.htm");
 
 		autoSync(1);
 		sendSyncInfo();
@@ -85,7 +85,7 @@ else
 //-->
 //]]></script>
 <h1>Description du langage d'interrogation</h1>
-<p>Cette rubrique avancée décrit en détail la syntaxe des requêtes utilisée pour la fonction Rechercher de Zimbra. Certains types de recherche sont toujours appliqués pour produire l'affichage que vous voyez dans l'interface.</p>
+<p>Cette rubrique avancée décrit en détail la syntaxe des requêtes utilisée pour la fonction Rechercher de Zmail. Certains types de recherche sont toujours appliqués pour produire l'affichage que vous voyez dans l'interface.</p>
 <h2>Structure de langage de recherche</h2>
 <p>Les recherches simples peuvent être effectuées en saisissant simplement un mot dans le champ de recherche. Les mots simples (mots sans opérateur de recherche) sont interprétés pour effectuer une recherche dans le « contenu ». Opérateur : correspond à n'importe quel texte du mail.</p>
 <p>Des recherches plus avancées peuvent être effectuées en spécifiant un <b>opérateur de recherche</b>. Un opérateur de recherche est un mot clé spécial suivi de deux points, puis de tout autre paramètre spécifique de l'opérateur. Par exemple :</p>
@@ -118,7 +118,7 @@ else
 <p style="font-weight: bold;">contenu :</p>
 <p style="margin-left: 40px;">Spécifie le texte que le message doit contenir. Par exemple, <span class="code">content:bananes</span> recherche tous les éléments contenant le mot &quot;bananes&quot;.</p>
 <p style="font-weight: bold;">from:</p>
-<p style="margin-left: 40px;">Spécifie le nom ou l'adresse mail d'un expéditeur qui se trouve dans l'en-tête De. Il peut s'agir d'un texte, comme dans &quot;John Smith III&quot;, d'une adresse mail, telle que &quot; joe@acme.com&quot; ou d'un domaine, tel que &quot; zimbra.com&quot;.</p>
+<p style="margin-left: 40px;">Spécifie le nom ou l'adresse mail d'un expéditeur qui se trouve dans l'en-tête De. Il peut s'agir d'un texte, comme dans &quot;John Smith III&quot;, d'une adresse mail, telle que &quot; joe@acme.com&quot; ou d'un domaine, tel que &quot; zmail.com&quot;.</p>
 <p style="font-weight: bold;">to:</p>
 <p style="margin-left: 40px;">Identique à from: hormis le fait qu'il spécifie une des personnes à laquelle le mail était adressé dans l'en-tête To:.</p>
 <p style="font-weight: bold;">Cc :</p>

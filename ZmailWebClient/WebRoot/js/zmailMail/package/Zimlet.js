@@ -23,9 +23,9 @@ AjxPackage.require("ajax.util.AjxSHA1");
 
 AjxPackage.require("ajax.xslt.AjxXslt");
 
-AjxPackage.require("zimbraMail.share.model.ZmZimletBase");
-AjxPackage.require("zimbraMail.share.model.ZmZimletContext");
-AjxPackage.require("zimbraMail.share.model.ZmZimletMgr");
-AjxPackage.require("zimbraMail.share.model.ZmZimlet");
+AjxPackage.require("zmailMail.share.model.ZmZimletBase");
+AjxPackage.require("zmailMail.share.model.ZmZimletContext");
+AjxPackage.require("zmailMail.share.model.ZmZimletMgr");
+AjxPackage.require("zmailMail.share.model.ZmZimlet");
 
-AjxPackage.require("zimbraMail.share.controller.ZmZimletTreeController");
+AjxPackage.require("zmailMail.share.controller.ZmZimletTreeController");

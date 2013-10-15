@@ -12,15 +12,15 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.tag;
+package org.zmail.cs.taglib.tag;
 
-import com.zimbra.cs.account.soap.SoapProvisioning;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.util.HttpUtil;
+import org.zmail.cs.account.soap.SoapProvisioning;
+import org.zmail.cs.account.Entry;
+import org.zmail.common.account.Key;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.util.HttpUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspContext;
@@ -28,7 +28,7 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 import java.io.IOException;
 
-public class GetFavIconTag extends ZimbraSimpleTag {
+public class GetFavIconTag extends ZmailSimpleTag {
 
 	//
 	// Data
@@ -57,10 +57,10 @@ public class GetFavIconTag extends ZimbraSimpleTag {
 		try {
 			// get provisioning
 			String soapUri =
-				LC.zimbra_admin_service_scheme.value() +
-				LC.zimbra_zmprov_default_soap_server.value() +
+				LC.zmail_admin_service_scheme.value() +
+				LC.zmail_zmprov_default_soap_server.value() +
 				':' +
-				LC.zimbra_admin_service_port.intValue() +
+				LC.zmail_admin_service_port.intValue() +
 				AdminConstants.ADMIN_SERVICE_URI
 			;
 
@@ -83,18 +83,18 @@ public class GetFavIconTag extends ZimbraSimpleTag {
 				info = provisioning.getConfig();
 			}
 			if (info != null) {
-			    String favicon = info.getAttr("zimbraSkinFavicon");
+			    String favicon = info.getAttr("zmailSkinFavicon");
 				getJspContext().setAttribute(this.var, favicon, PageContext.REQUEST_SCOPE);
 			}
 			else {
-				if (ZimbraLog.webclient.isDebugEnabled()) {
-					ZimbraLog.webclient.debug("unable to get domain or config info");
+				if (ZmailLog.webclient.isDebugEnabled()) {
+					ZmailLog.webclient.debug("unable to get domain or config info");
 				}
 			}
 		}
 		catch (Exception e) {
-			if (ZimbraLog.webclient.isDebugEnabled()) {
-				ZimbraLog.webclient.debug("error getting favicon: "+e.getMessage());
+			if (ZmailLog.webclient.isDebugEnabled()) {
+				ZmailLog.webclient.debug("error getting favicon: "+e.getMessage());
 			}
 		}
 	}

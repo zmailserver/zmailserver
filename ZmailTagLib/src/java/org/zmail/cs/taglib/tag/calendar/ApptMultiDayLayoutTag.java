@@ -13,17 +13,17 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.taglib.tag.calendar;
+package org.zmail.cs.taglib.tag.calendar;
 
-import com.zimbra.cs.taglib.bean.ZApptCellLayoutBean;
-import com.zimbra.cs.taglib.bean.ZApptDayLayoutBean;
-import com.zimbra.cs.taglib.bean.ZApptMultiDayLayoutBean;
-import com.zimbra.cs.taglib.bean.ZApptRowLayoutBean;
-import com.zimbra.cs.taglib.bean.ZApptSummariesBean;
-import com.zimbra.cs.taglib.bean.ZApptAllDayLayoutBean;
-import com.zimbra.cs.taglib.bean.BeanUtils;
-import com.zimbra.cs.taglib.tag.ZimbraSimpleTag;
-import com.zimbra.client.ZAppointmentHit;
+import org.zmail.cs.taglib.bean.ZApptCellLayoutBean;
+import org.zmail.cs.taglib.bean.ZApptDayLayoutBean;
+import org.zmail.cs.taglib.bean.ZApptMultiDayLayoutBean;
+import org.zmail.cs.taglib.bean.ZApptRowLayoutBean;
+import org.zmail.cs.taglib.bean.ZApptSummariesBean;
+import org.zmail.cs.taglib.bean.ZApptAllDayLayoutBean;
+import org.zmail.cs.taglib.bean.BeanUtils;
+import org.zmail.cs.taglib.tag.ZmailSimpleTag;
+import org.zmail.client.ZAppointmentHit;
 
 import javax.servlet.jsp.JspContext;
 import javax.servlet.jsp.JspException;
@@ -35,7 +35,7 @@ import java.util.List;
 import java.util.TimeZone;
 import java.util.Calendar;
 
-public class ApptMultiDayLayoutTag extends ZimbraSimpleTag {
+public class ApptMultiDayLayoutTag extends ZmailSimpleTag {
 
     private int DEFAULT_HOUR_START = 8;
     private int DEFAULT_HOUR_END = 18;

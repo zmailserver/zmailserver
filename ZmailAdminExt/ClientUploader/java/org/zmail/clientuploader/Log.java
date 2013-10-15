@@ -12,9 +12,9 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.clientuploader;
+package org.zmail.clientuploader;
 
-import com.zimbra.common.util.LogFactory;
+import org.zmail.common.util.LogFactory;
 
 /**
  * Log for client uploader extension
@@ -24,8 +24,8 @@ import com.zimbra.common.util.LogFactory;
  */
 public class Log {
     /**
-     * the "zimbra.clientUploader" logger, for client upload logs.
+     * the "zmail.clientUploader" logger, for client upload logs.
      */
-    public static final com.zimbra.common.util.Log clientUploader = LogFactory.getLog("zimbra.clientUploader");
+    public static final org.zmail.common.util.Log clientUploader = LogFactory.getLog("zmail.clientUploader");
 
 }

@@ -98,7 +98,7 @@ public class ConfigViewModelU: BaseViewModel
                 catch (Exception e)
                 {
                     string temp = string.Format("Incorrect configuration file format.\n{0}", e.Message);
-                    MessageBox.Show(temp, "Zimbra Migration", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(temp, "Zmail Migration", MessageBoxButton.OK, MessageBoxImage.Error);
                     fileRead.Close();
                     return;
                 }
@@ -114,7 +114,7 @@ public class ConfigViewModelU: BaseViewModel
                     if ((IsProfile) && (CurrentProfileSelection == -1))
                     {
                         MessageBox.Show("The profile listed in the file does not exist on this system.  Please select a valid profile",
-                                        "Zimbra Migration", MessageBoxButton.OK, MessageBoxImage.Error);
+                                        "Zmail Migration", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }   
                 }
@@ -192,21 +192,21 @@ public class ConfigViewModelU: BaseViewModel
         {
             if (PSTFile.Length == 0)
             {
-                MessageBox.Show("Please enter a PST file", "Zimbra Migration", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Please enter a PST file", "Zmail Migration", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             else
             if (!File.Exists(PSTFile))
             {
                 string temp = string.Format("{0} does not exist", PSTFile);
-                MessageBox.Show(temp, "Zimbra Migration", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(temp, "Zmail Migration", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
         }
         else
         if (CurrentProfileSelection == -1)
         {
-            MessageBox.Show("Please select a valid profile", "Zimbra Migration", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show("Please select a valid profile", "Zmail Migration", MessageBoxButton.OK, MessageBoxImage.Error);
             return;
         }
 

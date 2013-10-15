@@ -13,17 +13,17 @@
  * ***** END LICENSE BLOCK *****
  */
 
-com_zimbra_example_toolbarhook_HandlerObject = function() {
+org_zmail_example_toolbarhook_HandlerObject = function() {
 };
-com_zimbra_example_toolbarhook_HandlerObject.prototype = new ZmZimletBase;
-com_zimbra_example_toolbarhook_HandlerObject.prototype.constructor = com_zimbra_example_toolbarhook_HandlerObject;
+org_zmail_example_toolbarhook_HandlerObject.prototype = new ZmZimletBase;
+org_zmail_example_toolbarhook_HandlerObject.prototype.constructor = org_zmail_example_toolbarhook_HandlerObject;
 
 /**
  * This method gets called by the Zimlet framework when a toolbar is created.
  * 
- * http://files.zimbra.com/docs/zimlet/zcs/6.0/jsdocs/symbols/ZmZimletBase.html#initializeToolbar
+ * http://files.zmail.com/docs/zimlet/zcs/6.0/jsdocs/symbols/ZmZimletBase.html#initializeToolbar
  */
-com_zimbra_example_toolbarhook_HandlerObject.prototype.initializeToolbar =
+org_zmail_example_toolbarhook_HandlerObject.prototype.initializeToolbar =
 function(app, toolbar, controller, viewId) {
 
     if (viewId == ZmId.VIEW_CONVLIST || viewId == ZmId.VIEW_TRAD) {
@@ -40,7 +40,7 @@ function(app, toolbar, controller, viewId) {
                 text    : "Toolbar Button",
                 tooltip: "This button shows up in Conversation view, traditional view, and in convlist view",
                 index: buttonIndex, // position of the button
-                image: "zimbraicon" // icon
+                image: "zmailicon" // icon
         };
 
         // creates the button with an id and params containing the button details
@@ -53,7 +53,7 @@ function(app, toolbar, controller, viewId) {
  * Shows the selected mail.
  * 
  */
-com_zimbra_example_toolbarhook_HandlerObject.prototype._showSelectedMail =
+org_zmail_example_toolbarhook_HandlerObject.prototype._showSelectedMail =
 function(controller) {
 
 	var message = controller.getMsg();

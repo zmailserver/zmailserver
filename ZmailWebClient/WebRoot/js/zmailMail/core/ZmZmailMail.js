@@ -15,17 +15,17 @@
 
 /**
  * @overview
- * This file contains the Zimbra mail controller class.
+ * This file contains the Zmail mail controller class.
  * 
  */
 
 /**
- * Creates a controller to run ZimbraMail. Do not call directly, instead use the run()
+ * Creates a controller to run ZmailMail. Do not call directly, instead use the run()
  * factory method.
  * @constructor
  * @class
  * This class is the "ubercontroller", as it manages all the apps as well as bootstrapping
- * the ZimbraMail application.
+ * the ZmailMail application.
  *
  * @param {Hash}	params	a hash of parameters
  * @param {constant}    params.app		the starting app
@@ -33,7 +33,7 @@
  *        
  * @extends	ZmController
  */
-ZmZimbraMail = function(params) {
+ZmZmailMail = function(params) {
 
     if (arguments.length == 0) { return; }
 
@@ -42,14 +42,14 @@ ZmZimbraMail = function(params) {
     appCtxt.setAppController(this);
 
 	// ALWAYS set back reference into our world (also used by unload handler)
-	window._zimbraMail = this;
+	window._zmailMail = this;
 
     // app event handling
     this._evt = new ZmAppEvent();
     this._evtMgr = new AjxEventMgr();
     // copy over any statically registered listeners
-    for (var type in ZmZimbraMail._listeners) {
-        var list = ZmZimbraMail._listeners[type];
+    for (var type in ZmZmailMail._listeners) {
+        var list = ZmZmailMail._listeners[type];
         if (list && list.length) {
             for (var i = 0; i < list.length; i++) {
                 this._evtMgr.addListener(type, list[i]);
@@ -58,8 +58,8 @@ ZmZimbraMail = function(params) {
     }
 
     // all subsequent calls to register static app listeners go to instance
-    ZmZimbraMail.addListener = AjxCallback.simpleClosure(this.addListener, this);
-    ZmZimbraMail.addAppListener = AjxCallback.simpleClosure(this.addAppListener, this);
+    ZmZmailMail.addListener = AjxCallback.simpleClosure(this.addListener, this);
+    ZmZmailMail.addAppListener = AjxCallback.simpleClosure(this.addAppListener, this);
 
     // Create generic operations
     ZmOperation.initialize();
@@ -81,16 +81,16 @@ ZmZimbraMail = function(params) {
 
 	this._upsellView = {};
 	this._activeApp = null;
-	this._sessionTimer = new AjxTimedAction(null, ZmZimbraMail.executeSessionTimer);
+	this._sessionTimer = new AjxTimedAction(null, ZmZmailMail.executeSessionTimer);
 	this._sessionTimerId = -1;
 	this._pollActionId = null;	// AjaxTimedAction ID of timer counting down to next poll time
 	this._pollRequest = null;	// HTTP request of poll we've sent to server
 	this._pollInstantNotifications = false; // if TRUE, we're in "instant notification" mode
 	this.statusView = null;
-	ZmZimbraMail._exitTimer = new AjxTimedAction(null, ZmZimbraMail.exitSession);
-	ZmZimbraMail._exitTimerId = -1;
-	ZmZimbraMail.stayOnPagePrompt = false;
-	ZmZimbraMail.STAYONPAGE_INTERVAL = 2;  //in minutes
+	ZmZmailMail._exitTimer = new AjxTimedAction(null, ZmZmailMail.exitSession);
+	ZmZmailMail._exitTimerId = -1;
+	ZmZmailMail.stayOnPagePrompt = false;
+	ZmZmailMail.STAYONPAGE_INTERVAL = 2;  //in minutes
     // setup history support
     if (appCtxt.get(ZmSetting.HISTORY_SUPPORT_ENABLED) && !AjxEnv.isSafari) {
         window.historyMgr = appCtxt.getHistoryMgr();
@@ -126,8 +126,8 @@ ZmZimbraMail = function(params) {
     this.startup(params);
 };
 
-ZmZimbraMail.prototype = new ZmController;
-ZmZimbraMail.prototype.constructor = ZmZimbraMail;
+ZmZmailMail.prototype = new ZmController;
+ZmZmailMail.prototype.constructor = ZmZmailMail;
 
 // REVISIT: This is done so that we when we switch from being "beta"
 //          to production, we don't have to ensure that all of the
@@ -136,17 +136,17 @@ ZmZimbraMail.prototype.constructor = ZmZimbraMail;
 ZmMsg.BETA_documents = [ZmMsg.documents, ZmMsg.beta].join(" ");
 
 // dummy app (needed when defining drop targets in _registerOrganizers)
-ZmApp.MAIN = "ZmZimbraMail";
+ZmApp.MAIN = "ZmZmailMail";
 ZmApp.DROP_TARGETS[ZmApp.MAIN] = {};
 
 // Static listener registration
-ZmZimbraMail._listeners = {};
+ZmZmailMail._listeners = {};
 
 // Consts
-ZmZimbraMail.UI_LOAD_BEGIN		= "ui_load_begin";
-ZmZimbraMail.UI_LOAD_END		= "ui_load_end";
-ZmZimbraMail.UI_NETWORK_UP		= "network_up";
-ZmZimbraMail.UI_NETWORK_DOWN	= "network_down";
+ZmZmailMail.UI_LOAD_BEGIN		= "ui_load_begin";
+ZmZmailMail.UI_LOAD_END		= "ui_load_end";
+ZmZmailMail.UI_NETWORK_UP		= "network_up";
+ZmZmailMail.UI_NETWORK_DOWN	= "network_down";
 
 
 // Public methods
@@ -156,13 +156,13 @@ ZmZimbraMail.UI_NETWORK_DOWN	= "network_down";
  * 
  * @return		{String}		a string representation of the object
  */
-ZmZimbraMail.prototype.toString =
+ZmZmailMail.prototype.toString =
 function() {
-	return "ZmZimbraMail";
+	return "ZmZmailMail";
 };
 
 /**
- * Sets up ZimbraMail, and then starts it by calling its constructor. It is assumed that the
+ * Sets up ZmailMail, and then starts it by calling its constructor. It is assumed that the
  * CSFE is on the same host.
  *
  * @param {Hash}	params			a hash of parameters
@@ -173,11 +173,11 @@ function() {
  * @param {constant}      params.protocolMode	the protocal mode (http, https or mixed)
  * @param {Boolean}      params.noSplashScreen	if <code>true</code>, do not show splash screen during startup
  */
-ZmZimbraMail.run =
+ZmZmailMail.run =
 function(params) {
 
 	if (params.noSplashScreen) {
-		ZmZimbraMail.killSplash();
+		ZmZmailMail.killSplash();
 	}
 
 	// Create the global app context
@@ -199,7 +199,7 @@ function(params) {
 	appCtxt.setShell(shell);
 
 	// Go!
-	new ZmZimbraMail(params);
+	new ZmZmailMail(params);
 };
 
 /**
@@ -207,35 +207,35 @@ function(params) {
  * or "disable" them.
  * 
  */
-ZmZimbraMail.unload =
+ZmZmailMail.unload =
 function() {
 
-	if (!ZmZimbraMail._endSessionDone) {
-		ZmZimbraMail._endSession();
+	if (!ZmZmailMail._endSessionDone) {
+		ZmZmailMail._endSession();
 	}
 
-	if (ZmZimbraMail._isLogOff) {
-		ZmZimbraMail._isLogOff = false;
+	if (ZmZmailMail._isLogOff) {
+		ZmZmailMail._isLogOff = false;
 		// stop keeping track of user input (if applicable)
-		if (window._zimbraMail) {
-			window._zimbraMail.setSessionTimer(false);
+		if (window._zmailMail) {
+			window._zmailMail.setSessionTimer(false);
 		}
 
 		ZmCsfeCommand.noAuth = true;
 	}
 
-	ZmZimbraMail.closeChildWindows();
+	ZmZmailMail.closeChildWindows();
 	
-	ZmZimbraMail.stayOnPagePrompt = false;
-	ZmZimbraMail.setExitTimer(false);
-	ZmZimbraMail.sessionTimerInvoked = false;
-	window._zimbraMail = window.onload = window.onunload = window.onresize = window.document.onkeypress = null;
+	ZmZmailMail.stayOnPagePrompt = false;
+	ZmZmailMail.setExitTimer(false);
+	ZmZmailMail.sessionTimerInvoked = false;
+	window._zmailMail = window.onload = window.onunload = window.onresize = window.document.onkeypress = null;
 };
 
-ZmZimbraMail.closeChildWindows =
+ZmZmailMail.closeChildWindows =
 function() {
 	
-	var childWinList = window._zimbraMail ? window._zimbraMail._childWinList : null;
+	var childWinList = window._zmailMail ? window._zmailMail._childWinList : null;
 	if (childWinList) {
 		// close all child windows
 		for (var i = 0; i < childWinList.size(); i++) {
@@ -255,7 +255,7 @@ function() {
  * @param {String}	b			a key into hash
  * @return	{int}	0 if the items are the same; 1 if "a" is before "b"; -1 if "b" is before "a"
  */
-ZmZimbraMail.hashSortCompare =
+ZmZmailMail.hashSortCompare =
 function(hash, a, b) {
 	var appA = a ? Number(hash[a]) : 0;
 	var appB = b ? Number(hash[b]) : 0;
@@ -268,7 +268,7 @@ function(hash, a, b) {
  * Hides the splash screen.
  * 
  */
-ZmZimbraMail.killSplash =
+ZmZmailMail.killSplash =
 function() {
 	// 	Splash screen is now a part of the skin, loaded in statically via the JSP
 	//	as a well-known ID.  To hide the splash screen, just hide that div.
@@ -292,10 +292,10 @@ function() {
  * @param {constant}	app			the starting app
  * @param {Hash}	settings		a hash of settings overrides
  */
-ZmZimbraMail.prototype.startup =
+ZmZmailMail.prototype.startup =
 function(params) {
 	if (appCtxt.isOffline) {
-		this.sendClientEventNotify(ZmZimbraMail.UI_LOAD_BEGIN);
+		this.sendClientEventNotify(ZmZmailMail.UI_LOAD_BEGIN);
 	}
 
 	appCtxt.inStartup = true;
@@ -308,7 +308,7 @@ function(params) {
 		this._components = {};
 		this._components[ZmAppViewMgr.C_SASH] = new DwtSash({parent:this._shell, style:DwtSash.HORIZONTAL_STYLE,
 															 className:"console_inset_app_l", threshold:20, id:ZmId.MAIN_SASH});
-		this._components[ZmAppViewMgr.C_SASH].addListener(DwtEvent.ONMOUSEUP, ZmZimbraMail._folderTreeSashRelease);
+		this._components[ZmAppViewMgr.C_SASH].addListener(DwtEvent.ONMOUSEUP, ZmZmailMail._folderTreeSashRelease);
 		this._components[ZmAppViewMgr.C_BANNER] = this._createBanner();
 		this._components[ZmAppViewMgr.C_USER_INFO] = this._userNameField =
 			this._createUserInfo("BannerTextUser", ZmAppViewMgr.C_USER_INFO, ZmId.USER_NAME);
@@ -330,7 +330,7 @@ function(params) {
 	for (var i in ZmSearch.TYPE) {
 		ZmSearch.TYPE_MAP[ZmSearch.TYPE[i]] = i;
 	}
-	ZmZimbraMail.registerViewsToTypeMap();
+	ZmZmailMail.registerViewsToTypeMap();
 
 	this._getStartApp(params);
 	appCtxt.startApp = params.startApp;
@@ -371,9 +371,9 @@ function(params) {
 };
 
 
-ZmZimbraMail.prototype._initDelegatedSenderAddrs =
+ZmZmailMail.prototype._initDelegatedSenderAddrs =
 function() {
-    var soapDoc = AjxSoapDoc.create("DiscoverRightsRequest", "urn:zimbraAccount");
+    var soapDoc = AjxSoapDoc.create("DiscoverRightsRequest", "urn:zmailAccount");
     soapDoc.set("right","sendAs" );
     soapDoc.set("right","sendOnBehalfOf");
     soapDoc.set("right","sendAsDistList");
@@ -384,7 +384,7 @@ function() {
     batchCmd.run();
 };
 
-ZmZimbraMail.prototype._getDelegatedSenderEmails =
+ZmZmailMail.prototype._getDelegatedSenderEmails =
 function(sendRights, sendRight) {
     var emails = [];
         if (sendRights && sendRights.length){
@@ -406,7 +406,7 @@ function(sendRights, sendRight) {
     return emails;
 };
 
-ZmZimbraMail.prototype._initDelegatedSenderEmails =
+ZmZmailMail.prototype._initDelegatedSenderEmails =
 function(result){
     var response = result.getResponse().DiscoverRightsResponse;
     var sendRights = response && response.targets;
@@ -414,7 +414,7 @@ function(result){
     appCtxt.sendOboEmails = this._getDelegatedSenderEmails(sendRights, 'sendOnBehalfOf');
 }
 
-ZmZimbraMail.registerViewsToTypeMap = function() {
+ZmZmailMail.registerViewsToTypeMap = function() {
 	// organizer types based on view
 	for (var i in ZmOrganizer.VIEWS) {
 		var list = ZmOrganizer.VIEWS[i];
@@ -424,7 +424,7 @@ ZmZimbraMail.registerViewsToTypeMap = function() {
 	}
 };
 
-ZmZimbraMail.prototype._createSettings = function(params) {
+ZmZmailMail.prototype._createSettings = function(params) {
     // We've received canned SOAP responses for GetInfoRequest and SearchRequest from the
     // launch JSP, wrapped in a BatchRequest. Jiggle them so that they look like real
     // responses, and pass them along.
@@ -468,7 +468,7 @@ ZmZimbraMail.prototype._createSettings = function(params) {
     settings.setUserSettings({info:params.getInfoResponse.Body.GetInfoResponse, preInit:true});
 };
 
-ZmZimbraMail.prototype._initializeSettings = function(params) {
+ZmZmailMail.prototype._initializeSettings = function(params) {
     var info = params.getInfoResponse.Body.GetInfoResponse;
 
     var settings = appCtxt.getSettings();
@@ -525,17 +525,17 @@ ZmZimbraMail.prototype._initializeSettings = function(params) {
  * Perform any additional operation after initializing settings
  * @private
  */
-ZmZimbraMail.prototype._postInitializeSettings =
+ZmZmailMail.prototype._postInitializeSettings =
 function() {
 	this._setCustomInvalidEmailPats();
 };
 
 /**
- * Set an array of invalid Email patterns(values of zimbraMailAddressValidationRegex in ldap) to
+ * Set an array of invalid Email patterns(values of zmailMailAddressValidationRegex in ldap) to
  * AjxEmailAddress.customInvalidEmailPats
  * @private
  */
-ZmZimbraMail.prototype._setCustomInvalidEmailPats =
+ZmZmailMail.prototype._setCustomInvalidEmailPats =
 function() {
  	var customPatSetting = appCtxt.getSettings().getSetting(ZmSetting.EMAIL_VALIDATION_REGEX);
 	var cPatList = [];
@@ -553,7 +553,7 @@ function() {
 /**
  * @private
  */
-ZmZimbraMail.prototype._handleResponseGetMetaData =
+ZmZmailMail.prototype._handleResponseGetMetaData =
 function(params) {
     this._handleResponseLoadUserSettings(params);
 };
@@ -562,7 +562,7 @@ function(params) {
  * Shows the mini-calendar.
  * 
  */
-ZmZimbraMail.prototype.showMiniCalendar =
+ZmZmailMail.prototype.showMiniCalendar =
 function() {
 	var calMgr = appCtxt.getCalManager();
 	calMgr.getMiniCalendar();
@@ -574,7 +574,7 @@ function() {
 /**
  * Shows reminders.
  */
-ZmZimbraMail.prototype.showReminder =
+ZmZmailMail.prototype.showReminder =
 function() {
 	var calMgr = appCtxt.getCalManager();
 	var reminderController = calMgr.getReminderController();
@@ -584,7 +584,7 @@ function() {
 /**
  * Shows reminders.
  */
-ZmZimbraMail.prototype.showTaskReminder =
+ZmZmailMail.prototype.showTaskReminder =
 function() {
 	var taskMgr = appCtxt.getTaskManager();
 	var taskReminderController = taskMgr.getReminderController();
@@ -594,18 +594,18 @@ function() {
 /**
  * @private
  */
-ZmZimbraMail.prototype._handleErrorStartup =
+ZmZmailMail.prototype._handleErrorStartup =
 function(params, ex) {
-	ZmZimbraMail.killSplash();
+	ZmZmailMail.killSplash();
 	appCtxt.inStartup = false;
 	return false;
 };
 
-ZmZimbraMail.prototype._isProtocolHandlerAccessed =
+ZmZmailMail.prototype._isProtocolHandlerAccessed =
 function() {
     if (AjxEnv.isFirefox){
-      if (!localStorage || localStorage['zimbra_mailto_init']) return true;
-      localStorage['zimbra_mailto_init'] = true;
+      if (!localStorage || localStorage['zmail_mailto_init']) return true;
+      localStorage['zmail_mailto_init'] = true;
     }
     return false;
 };
@@ -613,7 +613,7 @@ function() {
 /**
  * @private
  */
-ZmZimbraMail.prototype._handleResponseLoadUserSettings =
+ZmZmailMail.prototype._handleResponseLoadUserSettings =
 function(params, result) {
 	if (appCtxt.multiAccounts) {
 		var callback = new AjxCallback(this, this._handleResponseStartup, [params, result]);
@@ -635,7 +635,7 @@ function(params, result) {
  * 
  * @private
  */
-ZmZimbraMail.prototype._handleResponseStartup =
+ZmZmailMail.prototype._handleResponseStartup =
 function(params, result) {
 
 	params = params || {};
@@ -672,7 +672,7 @@ function(params, result) {
 		}    
 	}
 
-	window.onbeforeunload = ZmZimbraMail._confirmExitMethod;
+	window.onbeforeunload = ZmZmailMail._confirmExitMethod;
 
 	if (!this._components[ZmAppViewMgr.C_APP_CHOOSER]) {
 		this._components[ZmAppViewMgr.C_APP_CHOOSER] = this._appChooser = this._createAppChooser();
@@ -743,7 +743,7 @@ function(params, result) {
         callback = new AjxCallback(this,
             function() {
                 try {
-                    navigator.registerProtocolHandler("mailto",AjxUtil.formatUrl({qsArgs:{view:'compose',to:'%s'}, qsReset:true}) ,ZmMsg.zimbraTitle);
+                    navigator.registerProtocolHandler("mailto",AjxUtil.formatUrl({qsArgs:{view:'compose',to:'%s'}, qsReset:true}) ,ZmMsg.zmailTitle);
                 } catch (err){};
         });
         this.addPostRenderCallback(callback, 6, 100);
@@ -795,7 +795,7 @@ function(params, result) {
  *
  * @private
  */
-ZmZimbraMail.prototype.handleTaskComponents =
+ZmZmailMail.prototype.handleTaskComponents =
 function() {
     var reminderAction = new AjxTimedAction(this, this.showTaskReminder);
     var delay = appCtxt.isOffline ? 0 : ZmTasksApp.REMINDER_START_DELAY;
@@ -807,7 +807,7 @@ function() {
  * 
  * @private
  */
-ZmZimbraMail.prototype.handleCalendarComponents =
+ZmZmailMail.prototype.handleCalendarComponents =
 function() {
 	if (appCtxt.get(ZmSetting.CAL_ALWAYS_SHOW_MINI_CAL)) {
         var miniCalAction = new AjxTimedAction(this, this.showMiniCalendar);
@@ -835,7 +835,7 @@ function() {
  *        
  * @private
  */
-ZmZimbraMail.prototype._handleResponseStartup1 =
+ZmZmailMail.prototype._handleResponseStartup1 =
 function(params) {
 
 	this._setExternalLinks();
@@ -868,7 +868,7 @@ function(params) {
 	this.getKeyMapMgr();	// make sure keyboard handling is initialized
 
 	this.setSessionTimer(true);
-	ZmZimbraMail.killSplash();
+	ZmZmailMail.killSplash();
 
 	// Give apps a chance to add their own UI components.
 	this.runAppFunction("addComponents", false, this._components);
@@ -886,7 +886,7 @@ function(params) {
 /**
  * set the refresh button at the masthead.
  */
-ZmZimbraMail.prototype._setRefresh =
+ZmZmailMail.prototype._setRefresh =
 function() {
 	var containerEl = document.getElementById(ZmId.SKIN_REFRESH);
 	if (!containerEl) {
@@ -907,7 +907,7 @@ function() {
 /**
  * refresh button listener. call runRefresh() of all the enabled apps that have this method defined.
  */
-ZmZimbraMail.prototype._refreshListener =
+ZmZmailMail.prototype._refreshListener =
 function() {
 	this.runAppFunction("runRefresh");
 };
@@ -915,7 +915,7 @@ function() {
 
 
 // popup a warning dialog if there is a problem with the license
-ZmZimbraMail.prototype._checkLicense =
+ZmZmailMail.prototype._checkLicense =
 function(ev) {
 
 	var status = appCtxt.get(ZmSetting.LICENSE_STATUS);
@@ -936,7 +936,7 @@ function(ev) {
  * 
  * @private
  */
-ZmZimbraMail.prototype._postRenderStartup =
+ZmZmailMail.prototype._postRenderStartup =
 function(ev) {
 	this._postRenderCallbacks.sort(function(a, b) {
 		return a.order - b.order;
@@ -947,7 +947,7 @@ function(ev) {
 /**
  * @private
  */
-ZmZimbraMail.prototype._runNextPostRenderCallback =
+ZmZmailMail.prototype._runNextPostRenderCallback =
 function() {
 	DBG.println(AjxDebug.DBG2, "POST-RENDER CALLBACKS: " + this._postRenderCallbacks.length);
 	if (this._postRenderCallbacks && this._postRenderCallbacks.length) {
@@ -961,12 +961,12 @@ function() {
 			}), prcb.delay);
 	} else {
 		if (appCtxt.isOffline) {
-			this.sendClientEventNotify(ZmZimbraMail.UI_LOAD_END);
+			this.sendClientEventNotify(ZmZmailMail.UI_LOAD_END);
 
 			if (AjxEnv.isPrism) {
 				this._firstTimeNetworkChange = true;
 
-				var nc = new ZimbraNetworkChecker();
+				var nc = new ZmailNetworkChecker();
 				nc.addEventListener("offline", function(e) { window["appCtxt"].getAppController().handleNetworkChange(false); }, false);
 				nc.addEventListener("online", function(e) { window["appCtxt"].getAppController().handleNetworkChange(true); }, false);
 			}
@@ -977,7 +977,7 @@ function() {
 /**
  * @private
  */
-ZmZimbraMail.prototype.handleNetworkChange =
+ZmZmailMail.prototype.handleNetworkChange =
 function(online) {
 	this._isPrismOnline = online;
 
@@ -986,12 +986,12 @@ function(online) {
 	}
 };
 
-ZmZimbraMail.prototype._updateNetworkStatus =
+ZmZmailMail.prototype._updateNetworkStatus =
 function(online) {
 	// bug 48108 - Prism sometimes triggers network status change mutliple times
 	// So don't bother if the last change is the same as current status
-	if ((online && this._currentNetworkStatus == ZmZimbraMail.UI_NETWORK_UP) ||
-		(!online && this._currentNetworkStatus == ZmZimbraMail.UI_NETWORK_DOWN))
+	if ((online && this._currentNetworkStatus == ZmZmailMail.UI_NETWORK_UP) ||
+		(!online && this._currentNetworkStatus == ZmZmailMail.UI_NETWORK_DOWN))
 	{
 		return;
 	}
@@ -1003,11 +1003,11 @@ function(online) {
 			this._firstTimeNetworkChange = false;
 			this._isUserOnline = online;
 		}
-		this._currentNetworkStatus = ZmZimbraMail.UI_NETWORK_UP;
+		this._currentNetworkStatus = ZmZmailMail.UI_NETWORK_UP;
         this.sendClientEventNotify(this._currentNetworkStatus, true);
 	} else {
 		this.setStatusMsg(ZmMsg.networkChangeOffline, ZmStatusView.LEVEL_WARNING);
-		this._currentNetworkStatus = ZmZimbraMail.UI_NETWORK_DOWN;
+		this._currentNetworkStatus = ZmZmailMail.UI_NETWORK_DOWN;
         this.sendClientEventNotify(this._currentNetworkStatus);
 	}
 
@@ -1028,7 +1028,7 @@ function(online) {
  * @param {int}	delay			how long to pause before running the callback
  * @param {Boolean}	runNow		if <code>true</code>, we are not doing post-render callbacks, run the callback now and don't add it to the list
  */
-ZmZimbraMail.prototype.addPostRenderCallback =
+ZmZmailMail.prototype.addPostRenderCallback =
 function(callback, order, delay, runNow) {
 	if (!this._doingPostRenderStartup && runNow) {
 		callback.run();
@@ -1041,7 +1041,7 @@ function(callback, order, delay, runNow) {
 /**
  * @private
  */
-ZmZimbraMail.prototype._getStartApp =
+ZmZmailMail.prototype._getStartApp =
 function(params) {
 	// determine starting app
 	var startApp;
@@ -1061,7 +1061,7 @@ function(params) {
 			ZmApp.DEFAULT_APPS.push(app);
 		}
 		ZmApp.DEFAULT_APPS.sort(function(a, b) {
-			return ZmZimbraMail.hashSortCompare(ZmApp.DEFAULT_SORT, a, b);
+			return ZmZmailMail.hashSortCompare(ZmApp.DEFAULT_SORT, a, b);
 		});
 		var defaultStartApp = null;
 		for (var i = 0; i < ZmApp.DEFAULT_APPS.length; i++) {
@@ -1088,7 +1088,7 @@ function(params) {
 /**
  * @private
  */
-ZmZimbraMail.prototype._getDefaultStartAppName =
+ZmZmailMail.prototype._getDefaultStartAppName =
 function(account) {
 	account = account || (appCtxt.multiAccounts && appCtxt.accountList.mainAccount) || null;
 	
@@ -1096,7 +1096,7 @@ function(account) {
 		ZmApp.DEFAULT_APPS.push(app);
 	}
 	ZmApp.DEFAULT_APPS.sort(function(a, b) {
-		return ZmZimbraMail.hashSortCompare(ZmApp.DEFAULT_SORT, a, b);
+		return ZmZmailMail.hashSortCompare(ZmApp.DEFAULT_SORT, a, b);
 	});
 	var defaultStartApp = null;
 	for (var i = 0; i < ZmApp.DEFAULT_APPS.length; i++) {
@@ -1116,7 +1116,7 @@ function(account) {
  * @param	{Boolean}	noBusyOverlay	if <code>true</code>, do not show busy overlay
  * @see	ZmRequestMgr#cancelRequest
  */
-ZmZimbraMail.prototype.cancelRequest =
+ZmZmailMail.prototype.cancelRequest =
 function(reqId, errorCallback, noBusyOverlay) {
 	this._requestMgr.cancelRequest(reqId, errorCallback, noBusyOverlay);
 };
@@ -1127,7 +1127,7 @@ function(reqId, errorCallback, noBusyOverlay) {
  * @param	{Hash}	params		a hash of parameters
  * @see	ZmRequestMgr#sendRequest
  */
-ZmZimbraMail.prototype.sendRequest =
+ZmZmailMail.prototype.sendRequest =
 function(params) {
 	return this._requestMgr.sendRequest(params);
 };
@@ -1138,7 +1138,7 @@ function(params) {
  * @param {String}	funcName		the function name
  * @param {Boolean}	force			if <code>true</code>, run func for disabled apps as well
  */
-ZmZimbraMail.prototype.runAppFunction =
+ZmZmailMail.prototype.runAppFunction =
 function(funcName, force) {
 	var args = [];
 	for (var i = 2; i < arguments.length; i++) {
@@ -1167,7 +1167,7 @@ function(funcName, force) {
  * 
  * @private
  */
-ZmZimbraMail.prototype._createEnabledApps =
+ZmZmailMail.prototype._createEnabledApps =
 function(apps) {
     this._apps = {};
 
@@ -1177,7 +1177,7 @@ function(apps) {
 		}
 	}
 	ZmApp.APPS.sort(function(a, b) {
-		return ZmZimbraMail.hashSortCompare(ZmApp.LOAD_SORT, a, b);
+		return ZmZmailMail.hashSortCompare(ZmApp.LOAD_SORT, a, b);
 	});
 
 	// Instantiate enabled apps, which will invoke app registration.
@@ -1206,17 +1206,17 @@ function(apps) {
  * @param {constant}	type		the event type
  * @param {AjxListener}	listener	a listener
  */
-ZmZimbraMail.addListener =
+ZmZmailMail.addListener =
 function(type, listener) {
-	if (!ZmZimbraMail._listeners[type]) {
-		ZmZimbraMail._listeners[type] = [];
+	if (!ZmZmailMail._listeners[type]) {
+		ZmZmailMail._listeners[type] = [];
 	}
-	ZmZimbraMail._listeners[type].push(listener);
+	ZmZmailMail._listeners[type].push(listener);
 };
 
 /**
  * Static function to add an app listener before this class has been
- * instantiated. This is separate from {@link ZmZimbraMail#addListener}
+ * instantiated. This is separate from {@link ZmZmailMail#addListener}
  * so that the caller doesn't need to know the specifics of how we
  * twiddle the type name for app events.
  * 
@@ -1225,10 +1225,10 @@ function(type, listener) {
  * @param {AjxListener}	listener	a listener
  * 
  */
-ZmZimbraMail.addAppListener =
+ZmZmailMail.addAppListener =
 function(appName, type, listener) {
 	type = [appName, type].join("_");
-	ZmZimbraMail.addListener(type, listener);
+	ZmZmailMail.addListener(type, listener);
 };
 
 /**
@@ -1239,7 +1239,7 @@ function(appName, type, listener) {
  * @return	{Boolean}	<code>true</code> if the listener is added
  * 
  */
-ZmZimbraMail.prototype.addListener =
+ZmZmailMail.prototype.addListener =
 function(type, listener) {
 	return this._evtMgr.addListener(type, listener);
 };
@@ -1251,7 +1251,7 @@ function(type, listener) {
  * @param {AjxListener}	listener	a listener
  * @return	{Boolean}	<code>true</code> if the listener is removed
  */
-ZmZimbraMail.prototype.removeListener =
+ZmZmailMail.prototype.removeListener =
 function(type, listener) {
 	return this._evtMgr.removeListener(type, listener);
 };
@@ -1264,7 +1264,7 @@ function(type, listener) {
  * @param {AjxListener}	listener	a listener
  * @return	{Boolean}	<code>true</code> if the listener is added
  */
-ZmZimbraMail.prototype.addAppListener =
+ZmZmailMail.prototype.addAppListener =
 function(app, type, listener) {
 	type = [app, type].join("_");
 	return this.addListener(type, listener);
@@ -1278,7 +1278,7 @@ function(app, type, listener) {
  * @param {AjxListener}	listener	a listener
  * @return	{Boolean}	<code>true</code> if the listener is removed
  */
-ZmZimbraMail.prototype.removeAppListener =
+ZmZmailMail.prototype.removeAppListener =
 function(app, type, listener) {
 	type = [app, type].join("_");
 	return this.removeListener(type, listener);
@@ -1287,9 +1287,9 @@ function(app, type, listener) {
 /**
  * Sends a <code>&lt;NoOpRequest&gt;</code> to the server. Used for '$set:noop'
  */
-ZmZimbraMail.prototype.sendNoOp =
+ZmZmailMail.prototype.sendNoOp =
 function() {
-	var soapDoc = AjxSoapDoc.create("NoOpRequest", "urn:zimbraMail");
+	var soapDoc = AjxSoapDoc.create("NoOpRequest", "urn:zmailMail");
 	var accountName = appCtxt.isOffline && appCtxt.accountList.mainAccount.name;
 	this.sendRequest({soapDoc:soapDoc, asyncMode:true, noBusyOverlay:true, accountName:accountName});
 };
@@ -1299,12 +1299,12 @@ function() {
  * 
  * @param	{Object}	event		the event
  */
-ZmZimbraMail.prototype.sendClientEventNotify =
+ZmZmailMail.prototype.sendClientEventNotify =
 function(event, isNetworkOn) {
 	var params = {
 		jsonObj: {
 			ClientEventNotifyRequest: {
-				_jsns:"urn:zimbraOffline",
+				_jsns:"urn:zmailOffline",
 				e: event
 			}
 		},
@@ -1327,7 +1327,7 @@ function(event, isNetworkOn) {
     this.clientEventNotifyReqId = this.sendRequest(params);
 };
 
-ZmZimbraMail.prototype.handleClientEventNotifyResponse =
+ZmZmailMail.prototype.handleClientEventNotifyResponse =
 function(event, res) {
     if (!res.isException() && res.getResponse()) {
         if (this.clientEventNotifyTimerId) {
@@ -1343,7 +1343,7 @@ function(event, res) {
  * 
  * @param {Boolean}	on				if <code>true</code>, turn on instant notify
  */
-ZmZimbraMail.prototype.setInstantNotify =
+ZmZmailMail.prototype.setInstantNotify =
 function(on) {
 	if (on) {
 		this._pollInstantNotifications = true;
@@ -1366,12 +1366,12 @@ function(on) {
  * 
  * @return	{Boolean}	<code>true</code> if instant notification is "ON"
  */
-ZmZimbraMail.prototype.getInstantNotify =
+ZmZmailMail.prototype.getInstantNotify =
 function() {
 	return this._pollInstantNotifications;
 };
 
-ZmZimbraMail.prototype.registerMailtoHandler =
+ZmZmailMail.prototype.registerMailtoHandler =
 function(regProto, selected) {
 	if (appCtxt.get(ZmSetting.OFFLINE_SUPPORTS_MAILTO) && window.platform) {
 		try { // add try/catch - see bug #33870
@@ -1381,9 +1381,9 @@ function(regProto, selected) {
 					var url = appCtxt.get(ZmSetting.OFFLINE_WEBAPP_URI, null, appCtxt.accountList.mainAccount);
 					window.platform.registerProtocolHandler("mailto", url + "&mailto=%s");
 				
-					// handle "send to mail recipient" on windows (requires mapi@zimbra.com extension)
+					// handle "send to mail recipient" on windows (requires mapi@zmail.com extension)
 					if (AjxEnv.isWindows) {
-						var shell = new ZimbraDesktopShell;
+						var shell = new ZmailDesktopShell;
 						shell.defaultClient = true;
 					}
 				}
@@ -1395,7 +1395,7 @@ function(regProto, selected) {
 				window.platform.unregisterProtocolHandler("mailto");
 
 				if (AjxEnv.isWindows) {
-					var shell = new ZimbraDesktopShell;
+					var shell = new ZmailDesktopShell;
 					shell.defaultClient = false;
 				}
 			}
@@ -1408,7 +1408,7 @@ function(regProto, selected) {
 /**
  * @private
  */
-ZmZimbraMail.prototype.handleOfflineMailTo =
+ZmZmailMail.prototype.handleOfflineMailTo =
 function(uri, callback) {
 	if (window.platform && !window.platform.isRegisteredProtocolHandler("mailto")) { return false; }
 
@@ -1424,7 +1424,7 @@ function(uri, callback) {
 	return false;
 };
 
-ZmZimbraMail.prototype._checkOfflineMailToAttachments =
+ZmZmailMail.prototype._checkOfflineMailToAttachments =
 function(controller, queryStr) {
     var qs = queryStr || location.search;
 
@@ -1456,7 +1456,7 @@ function(controller, queryStr) {
     }
 };
 
-ZmZimbraMail.prototype._handleMailToAttachment =
+ZmZmailMail.prototype._handleMailToAttachment =
 function(attachment, controller) {
 
     var filePath = attachment;
@@ -1503,7 +1503,7 @@ function(attachment, controller) {
     }
 };
 
-ZmZimbraMail.prototype._getAttachmentContentType =
+ZmZmailMail.prototype._getAttachmentContentType =
 function(file) {
 	var contentType;
 	try {
@@ -1515,7 +1515,7 @@ function(file) {
 	return contentType;
 };
 
-ZmZimbraMail.prototype._handleUploadErrorResponse = function(respCode) {
+ZmZmailMail.prototype._handleUploadErrorResponse = function(respCode) {
     var warngDlg = appCtxt.getMsgDialog();
     var style = DwtMessageDialog.CRITICAL_STYLE;
     if (respCode == '200') {
@@ -1529,7 +1529,7 @@ ZmZimbraMail.prototype._handleUploadErrorResponse = function(respCode) {
     warngDlg.popup();
 };
 
-ZmZimbraMail.prototype._handleUploadResponse = function(req, controller) {
+ZmZmailMail.prototype._handleUploadResponse = function(req, controller) {
     if(req) {
         if(req.readyState == 4 && req.status == 200) {
             var resp = eval("["+req.responseText+"]");
@@ -1567,7 +1567,7 @@ ZmZimbraMail.prototype._handleUploadResponse = function(req, controller) {
  * @param {Boolean}	kickMe	if <code>true</code>, start the poll timer
  * @return	{Boolean}	<code>true</code> if poll interval started; <code>false</code> if in "instant notification" mode
  */
-ZmZimbraMail.prototype.setPollInterval =
+ZmZmailMail.prototype.setPollInterval =
 function(kickMe) {
 	if (!this._pollInstantNotifications) {
 		this._pollInterval = appCtxt.get(ZmSetting.POLLING_INTERVAL) * 1000;
@@ -1594,7 +1594,7 @@ function(kickMe) {
 /**
  * @private
  */
-ZmZimbraMail.prototype._cancelInstantNotify =
+ZmZmailMail.prototype._cancelInstantNotify =
 function() {
 	if (this._pollRequest) {
 		this._requestMgr.cancelRequest(this._pollRequest);
@@ -1629,10 +1629,10 @@ function() {
  * 
  * @private
  */
-ZmZimbraMail.prototype._kickPolling =
+ZmZmailMail.prototype._kickPolling =
 function(resetBackoff) {
 	DBG.println(AjxDebug.DBG2, [
-		"ZmZimbraMail._kickPolling ",
+		"ZmZmailMail._kickPolling ",
 		this._pollInterval, ", ",
 		this._pollActionId, ", ",
 		this._pollRequest ? "request_pending" : "no_request_pending"
@@ -1657,7 +1657,7 @@ function(resetBackoff) {
 			this._pollActionId = AjxTimedAction.scheduleAction(new AjxTimedAction(this, this._execPoll), this._pollInterval);
 		} catch (ex) {
 			this._pollActionId = null;
-			DBG.println(AjxDebug.DBG1, "Caught exception in ZmZimbraMail._kickPolling.  Polling chain broken!");
+			DBG.println(AjxDebug.DBG1, "Caught exception in ZmZmailMail._kickPolling.  Polling chain broken!");
 		}
 	}
 };
@@ -1667,13 +1667,13 @@ function(resetBackoff) {
  *
  * @private
  */
-ZmZimbraMail.prototype._execPoll =
+ZmZmailMail.prototype._execPoll =
 function() {
 	this._cancelInstantNotify();
 
 	// It'd be more efficient to make these instance variables, but for some
 	// reason that breaks polling in IE.
-	var soapDoc = AjxSoapDoc.create("NoOpRequest", "urn:zimbraMail");
+	var soapDoc = AjxSoapDoc.create("NoOpRequest", "urn:zmailMail");
 	try {
         if (this._pollInstantNotifications) {
             var method = soapDoc.getMethod();
@@ -1697,7 +1697,7 @@ function() {
 		// bug #42664 - handle case where sync-status-changes fall between 2 client requests
 		if (appCtxt.isOffline &&
 			!appCtxt.accountList.isInitialSyncing() &&
-			appCtxt.accountList.isSyncStatus(ZmZimbraAccount.STATUS_RUNNING))
+			appCtxt.accountList.isSyncStatus(ZmZmailAccount.STATUS_RUNNING))
 		{
 			this.sendNoOp();
 		}
@@ -1709,7 +1709,7 @@ function() {
 /**
  * @private
  */
-ZmZimbraMail.prototype._handleErrorDoPoll =
+ZmZmailMail.prototype._handleErrorDoPoll =
 function(ex) {
 	if (this._pollRequest) {
 		// reset the polling timeout
@@ -1744,7 +1744,7 @@ function(ex) {
 /**
  * @private
  */
-ZmZimbraMail.prototype._handleResponseDoPoll =
+ZmZmailMail.prototype._handleResponseDoPoll =
 function(result) {
 	this._pollRequest = null;
 	var noopResult = result.getResponse().NoOpResponse;
@@ -1763,7 +1763,7 @@ function(result) {
  * 
  * @return	{DwtKeyMapMgr}	the key map manager
  */
-ZmZimbraMail.prototype.getKeyMapMgr =
+ZmZmailMail.prototype.getKeyMapMgr =
 function() {
 	var kbMgr = appCtxt.getKeyboardMgr();
 	if (!kbMgr.__keyMapMgr) {
@@ -1775,7 +1775,7 @@ function() {
 /**
  * @private
  */
-ZmZimbraMail.prototype._initKeyboardHandling =
+ZmZmailMail.prototype._initKeyboardHandling =
 function() {
 	var kbMgr = appCtxt.getKeyboardMgr();
 	if (kbMgr.__keyMapMgr) { return; }
@@ -1792,7 +1792,7 @@ function() {
 /**
  * @private
  */
-ZmZimbraMail.prototype._setupTabGroups =
+ZmZmailMail.prototype._setupTabGroups =
 function() {
 	DBG.println(AjxDebug.DBG2, "SETTING SEARCH CONTROLLER TAB GROUP");
 	var rootTg = appCtxt.getRootTabGroup();
@@ -1815,7 +1815,7 @@ function() {
 /**
  * @private
  */
-ZmZimbraMail.prototype._registerOrganizers =
+ZmZmailMail.prototype._registerOrganizers =
 function() {
 
 	ZmOrganizer.registerOrg(ZmOrganizer.FOLDER,
@@ -1914,7 +1914,7 @@ function() {
  * @param {String}	appName		the app name
  * @return	{ZmApp}	the app
  */
-ZmZimbraMail.prototype.getApp =
+ZmZmailMail.prototype.getApp =
 function(appName) {
 	if (!ZmApp.ENABLED_APPS[appName]) {
 		return null;
@@ -1930,7 +1930,7 @@ function(appName) {
  * 
  * @return	{ZmAppViewMgr}	the app view manager
  */
-ZmZimbraMail.prototype.getAppViewMgr =
+ZmZmailMail.prototype.getAppViewMgr =
 function() {
 	return this._appViewMgr;
 };
@@ -1940,7 +1940,7 @@ function() {
  * 
  * @return	{ZmApp}	the app
  */
-ZmZimbraMail.prototype.getActiveApp =
+ZmZmailMail.prototype.getActiveApp =
 function() {
 	return this._activeApp;
 };
@@ -1950,7 +1950,7 @@ function() {
  * 
  * @return	{ZmApp}	the app
  */
-ZmZimbraMail.prototype.getPreviousApp =
+ZmZmailMail.prototype.getPreviousApp =
 function() {
 	return this._previousApp;
 };
@@ -1966,7 +1966,7 @@ function() {
  * @param {Boolean}	params.checkQS		if <code>true</code>, check query string for launch args
  * @param {ZmCsfeResult}	params.result		the result object from load of user settings
  */
-ZmZimbraMail.prototype.activateApp =
+ZmZmailMail.prototype.activateApp =
 function(appName, force, callback, errorCallback, params) {
 	DBG.println(AjxDebug.DBG1, "activateApp: " + appName + ", current app = " + this._activeApp);
 
@@ -1978,7 +1978,7 @@ function(appName, force, callback, errorCallback, params) {
 		if (this._appViewMgr.pushView(view)) {
 			this._appViewMgr.setAppView(appName, view);
             if (!appCtxt.get(ZmApp.SETTING[appName], null, account) && appCtxt.get(ZmApp.UPSELL_SETTING[appName])) {
-                var title = [ZmMsg.zimbraTitle, appName].join(": ");
+                var title = [ZmMsg.zmailTitle, appName].join(": ");
                 Dwt.setTitle(title);
             }            
 		}
@@ -2017,7 +2017,7 @@ function(appName, force, callback, errorCallback, params) {
 /**
  * @private
  */
-ZmZimbraMail.prototype._handleResponseActivateApp =
+ZmZmailMail.prototype._handleResponseActivateApp =
 function(callback, appName) {
 	if (callback) {
 		callback.run();
@@ -2041,7 +2041,7 @@ function(callback, appName) {
  * @param {constant}	view		the view
  * @param	{Boolean}	isTabView	if <code>true</code>, the app has a tab view
  */
-ZmZimbraMail.prototype.setActiveApp =
+ZmZmailMail.prototype.setActiveApp =
 function(appName, view, isTabView) {
 
 	// update app chooser
@@ -2115,7 +2115,7 @@ function(appName, view, isTabView) {
  * @param	{String}	id		the id
  * @return	{ZmAppButton}	the button
  */
-ZmZimbraMail.prototype.getAppChooserButton =
+ZmZmailMail.prototype.getAppChooserButton =
 function(id) {
 	var chooser = this._components[ZmAppViewMgr.C_APP_CHOOSER];
 	return chooser && chooser.getButton(id);
@@ -2127,7 +2127,7 @@ function(id) {
  * 
  * @param	{String}	appName		the app name
  */
-ZmZimbraMail.prototype.appRendered =
+ZmZmailMail.prototype.appRendered =
 function(appName) {
 	var eventType = [appName, ZmAppEvent.POST_RENDER].join("_");
 	this.notify(eventType);
@@ -2143,7 +2143,7 @@ function(appName) {
  * 
  * @param	{ZmApp}		app		the app
  */
-ZmZimbraMail.prototype.addApp = function(app) {
+ZmZmailMail.prototype.addApp = function(app) {
 	var appName = app.getName();
 	this._apps[appName] = app;
 	ZmApp.ENABLED_APPS[appName] = true;
@@ -2156,7 +2156,7 @@ ZmZimbraMail.prototype.addApp = function(app) {
  * 
  * @private
  */
-ZmZimbraMail.prototype._createApp =
+ZmZmailMail.prototype._createApp =
 function(appName) {
 	if (!appName || this._apps[appName]) return;
 	DBG.println(AjxDebug.DBG1, "Creating app " + appName);
@@ -2167,7 +2167,7 @@ function(appName) {
 /**
  * @private
  */
-ZmZimbraMail.prototype._setExternalLinks =
+ZmZmailMail.prototype._setExternalLinks =
 function() {
     // bug: 41313 - admin console link
     var adminUrl;
@@ -2206,8 +2206,8 @@ function() {
 };
 
 
-ZmZimbraMail.ONLINE_HELP_URL = "http://help.zimbra.com/?";
-ZmZimbraMail.NEW_FEATURES_URL = "http://www.zimbra.com/products/whats_new.html?";
+ZmZmailMail.ONLINE_HELP_URL = "http://help.zmail.com/?";
+ZmZmailMail.NEW_FEATURES_URL = "http://www.zmail.com/products/whats_new.html?";
 
 /**
 * Adds a "help" submenu.
@@ -2215,7 +2215,7 @@ ZmZimbraMail.NEW_FEATURES_URL = "http://www.zimbra.com/products/whats_new.html?"
 * @param {DwtComposite}		parent		the parent widget
 * @return {ZmActionMenu}	the menu
 */
-ZmZimbraMail.prototype.getDropMenuOptions =
+ZmZmailMail.prototype.getDropMenuOptions =
 function(parent, parentElement, adminUrl) {
 
 	var button = new DwtLinkButton({parent: parent, className: DwtButton.LINK_BUTTON_CLASS, parentElement: parentElement});
@@ -2231,7 +2231,7 @@ function(parent, parentElement, adminUrl) {
     var mi;
     if(adminUrl) {
 	    mi = menu.createMenuItem("adminLink", {text: ZmMsg.adminLinkLabel});
-	    mi.addSelectionListener(new AjxListener(null, ZmZimbraMail.adminLinkCallback, adminUrl));
+	    mi.addSelectionListener(new AjxListener(null, ZmZmailMail.adminLinkCallback, adminUrl));
 
         menu.createSeparator();
     }
@@ -2259,13 +2259,13 @@ function(parent, parentElement, adminUrl) {
 	}
 
     mi = menu.createMenuItem("logOff", {text: ZmMsg.logOff});
-	mi.addSelectionListener(new AjxListener(null, ZmZimbraMail.logOff));
+	mi.addSelectionListener(new AjxListener(null, ZmZmailMail.logOff));
 
 	button.setMenu(menu);
 	return button;
 };
 
-ZmZimbraMail.prototype.getNewButton =
+ZmZmailMail.prototype.getNewButton =
 function() {
 
 	var newButton = this._newButton;
@@ -2298,7 +2298,7 @@ function() {
  *
  * @private
  */
-ZmZimbraMail.prototype._newDropDownListener =
+ZmZmailMail.prototype._newDropDownListener =
 function(selectionListener, event) {
 
 	var newButton = this.getNewButton();
@@ -2326,7 +2326,7 @@ function(selectionListener, event) {
  *
  * @private
  */
-ZmZimbraMail.prototype._newButtonListener =
+ZmZmailMail.prototype._newButtonListener =
 function(ev, op, params) {
 
 	if (!ev && !op) { return; }
@@ -2352,7 +2352,7 @@ function(ev, op, params) {
 /**
  * Set up the New button based on the current app.
  */
-ZmZimbraMail.prototype.setNewButtonProps =
+ZmZmailMail.prototype.setNewButtonProps =
 function(params) {
 	var newButton = this.getNewButton();
 	if (newButton) {
@@ -2372,7 +2372,7 @@ function(params) {
 * @param {DwtComposite}		parent		the parent widget
 * @return {ZmActionMenu}	the menu
 */
-ZmZimbraMail.prototype.getHelpButton =
+ZmZmailMail.prototype.getHelpButton =
 function(parent) {
 
 	var button = new DwtLinkButton({parent: parent, className: DwtButton.LINK_BUTTON_CLASS});
@@ -2404,19 +2404,19 @@ function(parent) {
 	return button;
 };
 
-ZmZimbraMail.prototype._helpListener =
+ZmZmailMail.prototype._helpListener =
 function(ev) {
-	ZmZimbraMail.helpLinkCallback();
+	ZmZmailMail.helpLinkCallback();
 };
 
 
-ZmZimbraMail.prototype._getVersion =
+ZmZmailMail.prototype._getVersion =
 function() {
 	return appCtxt.get(ZmSetting.CLIENT_VERSION);
 };
 
 
-ZmZimbraMail.prototype._getQueryParams =
+ZmZmailMail.prototype._getQueryParams =
 function() {
 
 	var appName = appCtxt.getCurrentAppName().toLowerCase();
@@ -2425,26 +2425,26 @@ function() {
 };
 
 
-ZmZimbraMail.prototype._onlineHelpListener =
+ZmZmailMail.prototype._onlineHelpListener =
 function(ev) {
-	ZmZimbraMail.unloadHackCallback();
-	var url = [ZmZimbraMail.ONLINE_HELP_URL, this._getQueryParams()].join("");
+	ZmZmailMail.unloadHackCallback();
+	var url = [ZmZmailMail.ONLINE_HELP_URL, this._getQueryParams()].join("");
 	window.open(url);
 };
 
-ZmZimbraMail.prototype._newFeaturesListener =
+ZmZmailMail.prototype._newFeaturesListener =
 function(ev) {
-	ZmZimbraMail.unloadHackCallback();
-	var url = [ZmZimbraMail.NEW_FEATURES_URL, this._getQueryParams()].join("");
+	ZmZmailMail.unloadHackCallback();
+	var url = [ZmZmailMail.NEW_FEATURES_URL, this._getQueryParams()].join("");
 	window.open(url);
 };
 
-ZmZimbraMail.prototype._changePasswordListener =
+ZmZmailMail.prototype._changePasswordListener =
 function(ev) {
     appCtxt.getChangePasswordWindow(ev);
 }
 
-ZmZimbraMail.prototype._aboutListener =
+ZmZmailMail.prototype._aboutListener =
 function(ev) {
 	var dialog = appCtxt.getMsgDialog();
 	dialog.reset();
@@ -2457,7 +2457,7 @@ function(ev) {
 };
 
 
-ZmZimbraMail.prototype._initOfflineUserInfo =
+ZmZmailMail.prototype._initOfflineUserInfo =
 function() {
 	var htmlElId = this._userNameField.getHTMLElId();
 	this._userNameField.getHtmlElement().innerHTML = AjxTemplate.expand('share.App#NetworkStatus', {id:htmlElId});
@@ -2481,7 +2481,7 @@ function() {
 	}
 };
 
-ZmZimbraMail.prototype._offlineUpdateChannelPref =
+ZmZmailMail.prototype._offlineUpdateChannelPref =
 function(val) {
     try {
         netscape.security.PrivilegeManager.enablePrivilege('UniversalXPConnect');
@@ -2499,7 +2499,7 @@ function(val) {
  * Sets the user info.
  *
  */
-ZmZimbraMail.prototype.setUserInfo =
+ZmZmailMail.prototype.setUserInfo =
 function() {
 	if (appCtxt.isOffline) { return; }
 
@@ -2516,7 +2516,7 @@ function() {
     this.setQuotaInfo(login, username);
 };
 
-ZmZimbraMail.prototype.setQuotaInfo =
+ZmZmailMail.prototype.setQuotaInfo =
 function(login, username) {
     var quota = appCtxt.get(ZmSetting.QUOTA);
 	var usedQuota = (appCtxt.get(ZmSetting.QUOTA_USED)) || 0;
@@ -2551,14 +2551,14 @@ function(login, username) {
  * If a user has been prompted and elects to stay on page, this timer automatically logs them off after an interval of time.
  * @param startTimer {boolean} true to start timer, false to cancel
  */
-ZmZimbraMail.setExitTimer = 
+ZmZmailMail.setExitTimer = 
 function(startTimer) {
-	if (startTimer && ZmZimbraMail.stayOnPagePrompt) {
+	if (startTimer && ZmZmailMail.stayOnPagePrompt) {
 		DBG.println(AjxDebug.DBG1, "user has clicked stay on page. scheduled exit timer at " + new Date().toLocaleString());
-		if (ZmZimbraMail._exitTimerId == -1) {
-			ZmZimbraMail._exitTimerId = AjxTimedAction.scheduleAction(ZmZimbraMail._exitTimer, ZmZimbraMail.STAYONPAGE_INTERVAL * 60 * 1000); //give user 2 minutes
+		if (ZmZmailMail._exitTimerId == -1) {
+			ZmZmailMail._exitTimerId = AjxTimedAction.scheduleAction(ZmZmailMail._exitTimer, ZmZmailMail.STAYONPAGE_INTERVAL * 60 * 1000); //give user 2 minutes
 			if (AjxEnv.isFirefox) {
-				var msg = AjxMessageFormat.format(ZmMsg.appExitPrompt, [ZmZimbraMail.STAYONPAGE_INTERVAL]);
+				var msg = AjxMessageFormat.format(ZmMsg.appExitPrompt, [ZmZmailMail.STAYONPAGE_INTERVAL]);
 				var msgDialog = appCtxt.getMsgDialog();
 				msgDialog.setMessage(msg, DwtMessageDialog.CRITICAL_STYLE); //Firefox 4+ doesn't allow custom stay on page message. Prompt user they have X minutes
 				//wait 2 seconds before popping up  so FF doesn't show dialog when leave page is clicked
@@ -2567,10 +2567,10 @@ function(startTimer) {
 		}
 
 	}
-	else if (!startTimer && ZmZimbraMail._exitTimerId) {
+	else if (!startTimer && ZmZmailMail._exitTimerId) {
 		DBG.println(AjxDebug.DBG1, "canceling exit timer at " + new Date().toLocaleString());
-		AjxTimedAction.cancelAction(ZmZimbraMail._exitTimerId);
-		ZmZimbraMail._exitTimerId = -1;
+		AjxTimedAction.cancelAction(ZmZmailMail._exitTimerId);
+		ZmZmailMail._exitTimerId = -1;
 	}
 	
 };
@@ -2581,14 +2581,14 @@ function(startTimer) {
  * Logs off the application.
  * 
  */
-ZmZimbraMail.logOff =
+ZmZmailMail.logOff =
 function(ev, relogin) {
 	if (appCtxt.isChildWindow) {
 		window.close();
 		return;
 	}
 
-	ZmZimbraMail._isLogOff = true;
+	ZmZmailMail._isLogOff = true;
 
 	// bug fix #36791 - reset the systray icon when returning to Account Setup
 	if (appCtxt.isOffline && AjxEnv.isWindows &&
@@ -2611,10 +2611,10 @@ function(ev, relogin) {
         urlParams.qsArgs.virtualacctdomain = vAcctDomain ? vAcctDomain : "";
     }
 	var url = AjxUtil.formatUrl(urlParams);
-	ZmZimbraMail.sendRedirect(url);	// will trigger onbeforeunload
+	ZmZmailMail.sendRedirect(url);	// will trigger onbeforeunload
 	if (AjxEnv.isFirefox) {
 		DBG.println(AjxDebug.DBG1, "calling setExitTimer from logoff "  + new Date().toLocaleString());
-		ZmZimbraMail.setExitTimer(true);	
+		ZmZmailMail.setExitTimer(true);	
 	}
 	
 
@@ -2623,24 +2623,24 @@ function(ev, relogin) {
 /**
  * Logs user off when session has expired and user has choosen to stay on page when prompted
  */
-ZmZimbraMail.exitSession =
+ZmZmailMail.exitSession =
 function() {
 	DBG.println(AjxDebug.DBG1, "exit timer called  " + new Date().toLocaleString());
-	ZmZimbraMail.logOff();
+	ZmZmailMail.logOff();
 };
 
-ZmZimbraMail.executeSessionTimer = 
+ZmZmailMail.executeSessionTimer = 
 function() {
-	ZmZimbraMail.sessionTimerInvoked = true;
+	ZmZmailMail.sessionTimerInvoked = true;
 	DBG.println(AjxDebug.DBG1, "session timer invoked  " + new Date().toLocaleString());
-	ZmZimbraMail.logOff();
+	ZmZmailMail.logOff();
 };
 
 
 /**
  * @private
  */
-ZmZimbraMail._onClickLogOff =
+ZmZmailMail._onClickLogOff =
 function() {
 	if (AjxEnv.isIE) {
 		// Don't the the default <a> handler process the event. It can bring up
@@ -2648,15 +2648,15 @@ function() {
 		var ev = DwtUiEvent.getEvent();
 		ev.returnValue = false;
 	}
-	ZmZimbraMail.logOff();
+	ZmZmailMail.logOff();
 };
 
 /**
  * @private
  */
-ZmZimbraMail.adminLinkCallback =
+ZmZmailMail.adminLinkCallback =
 function(url) {
-	ZmZimbraMail.unloadHackCallback();
+	ZmZmailMail.unloadHackCallback();
 	var ac = window.parentAppCtxt || window.appCtxt;
 	window.open(url);
 };
@@ -2664,9 +2664,9 @@ function(url) {
 /**
  * @private
  */
-ZmZimbraMail.helpLinkCallback =
+ZmZmailMail.helpLinkCallback =
 function() {
-	ZmZimbraMail.unloadHackCallback();
+	ZmZmailMail.unloadHackCallback();
 
 	var ac = window.parentAppCtxt || window.appCtxt;
 	var url;
@@ -2678,8 +2678,8 @@ function() {
 	} else {
 		url = ac.get(ZmSetting.HELP_URI).replace(/\/$/,"");
 		// bug fix #35098 - offline help is only available in en_US for now
-		url = [url, "help", "en_US", "Zimbra_Mail_Help.htm"].join("/");
-//		url = [url, "help", AjxEnv.DEFAULT_LOCALE, "Zimbra_Mail_Help.htm"].join("/");
+		url = [url, "help", "en_US", "Zmail_Mail_Help.htm"].join("/");
+//		url = [url, "help", AjxEnv.DEFAULT_LOCALE, "Zmail_Mail_Help.htm"].join("/");
 	}
 	window.open(url);
 };
@@ -2689,15 +2689,15 @@ function() {
  * 
  * @param	{String}	locationStr		the redirect location
  */
-ZmZimbraMail.sendRedirect =
+ZmZmailMail.sendRedirect =
 function(locationStr) {
 	// not sure why IE doesn't allow this to process immediately, but since
 	// it does not, we'll set up a timed action.
 	if (AjxEnv.isIE) {
-		var act = new AjxTimedAction(null, ZmZimbraMail.redir, [locationStr]);
+		var act = new AjxTimedAction(null, ZmZmailMail.redir, [locationStr]);
 		AjxTimedAction.scheduleAction(act, 1);
 	} else {
-		ZmZimbraMail.redir(locationStr);
+		ZmZmailMail.redir(locationStr);
 	}
 };
 
@@ -2706,7 +2706,7 @@ function(locationStr) {
  * 
  * @param	{String}	locationStr		the redirect location
  */
-ZmZimbraMail.redir =
+ZmZmailMail.redir =
 function(locationStr){
 	// IE has a tendency to throw a mysterious error when the "are you sure" dialog pops up and the user presses "cancel".
 	// Pressing cancel, however, equals doing nothing, so we can just catch the exception and ignore it (bug #59853)
@@ -2721,7 +2721,7 @@ function(locationStr){
  * 
  * @param	{Boolean}	bStartTimer		if <code>true</code>, start the timer
  */
-ZmZimbraMail.prototype.setSessionTimer =
+ZmZmailMail.prototype.setSessionTimer =
 function(bStartTimer) {
 
 	// if no timeout value, user's client never times out from inactivity
@@ -2734,12 +2734,12 @@ function(bStartTimer) {
 		DBG.println(AjxDebug.DBG3, "INACTIVITY TIMER SET (" + (new Date()).toLocaleString() + ")");
 		this._sessionTimerId = AjxTimedAction.scheduleAction(this._sessionTimer, timeout);
 
-		DwtEventManager.addListener(DwtEvent.ONMOUSEUP, ZmZimbraMail._userEventHdlr);
-		this._shell.setHandler(DwtEvent.ONMOUSEUP, ZmZimbraMail._userEventHdlr);
+		DwtEventManager.addListener(DwtEvent.ONMOUSEUP, ZmZmailMail._userEventHdlr);
+		this._shell.setHandler(DwtEvent.ONMOUSEUP, ZmZmailMail._userEventHdlr);
 		if (AjxEnv.isIE)  {
-			document.attachEvent("onkeydown", ZmZimbraMail._userEventHdlr);
+			document.attachEvent("onkeydown", ZmZmailMail._userEventHdlr);
 		}
-		window.onkeydown = ZmZimbraMail._userEventHdlr;		
+		window.onkeydown = ZmZmailMail._userEventHdlr;		
 	}
 	else {
 		DBG.println(AjxDebug.DBG3, "INACTIVITY TIMER CANCELED (" + (new Date()).toLocaleString() + ")");
@@ -2747,10 +2747,10 @@ function(bStartTimer) {
 		AjxTimedAction.cancelAction(this._sessionTimerId);
 		this._sessionTimerId = -1;
 
-		DwtEventManager.removeListener(DwtEvent.ONMOUSEUP, ZmZimbraMail._userEventHdlr);
+		DwtEventManager.removeListener(DwtEvent.ONMOUSEUP, ZmZmailMail._userEventHdlr);
 		this._shell.clearHandler(DwtEvent.ONMOUSEUP);
 		if (AjxEnv.isIE) {
-			document.detachEvent("onkeydown", ZmZimbraMail._userEventHdlr);
+			document.detachEvent("onkeydown", ZmZmailMail._userEventHdlr);
 		}	
 		window.onkeydown = null;
 	}
@@ -2761,7 +2761,7 @@ function(bStartTimer) {
  * 
  * @private
  */
-ZmZimbraMail.prototype.addChildWindow =
+ZmZmailMail.prototype.addChildWindow =
 function(childWin) {
 	if (this._childWinList == null) {
 		this._childWinList = new AjxVector();
@@ -2780,7 +2780,7 @@ function(childWin) {
  * 
  * @private
  */
-ZmZimbraMail.prototype.getChildWindow =
+ZmZmailMail.prototype.getChildWindow =
 function(childWin) {
 	if (this._childWinList) {
 		for (var i = 0; i < this._childWinList.size(); i++) {
@@ -2797,7 +2797,7 @@ function(childWin) {
  * 
  * @private
  */
-ZmZimbraMail.prototype.removeChildWindow =
+ZmZmailMail.prototype.removeChildWindow =
 function(childWin) {
 	if (this._childWinList) {
 		for (var i = 0; i < this._childWinList.size(); i++) {
@@ -2818,7 +2818,7 @@ function(childWin) {
  * 
  * @private
  */
-ZmZimbraMail.prototype._handleException =
+ZmZmailMail.prototype._handleException =
 function(ex, continuation) {
 	var handled = false;
 	if (ex.code == ZmCsfeException.MAIL_NO_SUCH_FOLDER) {
@@ -2845,40 +2845,40 @@ function(ex, continuation) {
  * 
  * @private
  */
-ZmZimbraMail._confirmExitMethod =
+ZmZmailMail._confirmExitMethod =
 function() {
 
 	if (!ZmCsfeCommand.noAuth) {
 		appCtxt.accountList.saveImplicitPrefs();
 
-		if (appCtxt.get(ZmSetting.WARN_ON_EXIT) && !ZmZimbraMail._isOkToExit()) {
-			if (ZmZimbraMail.stayOnPagePrompt) {
+		if (appCtxt.get(ZmSetting.WARN_ON_EXIT) && !ZmZmailMail._isOkToExit()) {
+			if (ZmZmailMail.stayOnPagePrompt) {
 				DBG.println(AjxDebug.DBG1, "user has already been prompted. Forcing exit " + new Date().toLocaleString());
 				return;
 			}
 			
-			ZmZimbraMail._isLogOff = false;
+			ZmZmailMail._isLogOff = false;
 			DBG.println(AjxDebug.DBG1, "prompting to user to stay on page or leave " + new Date().toLocaleString());
 			var msg = (appCtxt.isOffline) ? ZmMsg.appExitWarningZD : ZmMsg.appExitWarning;
 			
-			if (ZmZimbraMail.sessionTimerInvoked) {
-				ZmZimbraMail.stayOnPagePrompt = true;
-				msg = AjxMessageFormat.format(msg + ZmMsg.appExitTimeWarning, [ZmZimbraMail.STAYONPAGE_INTERVAL]); //append time warning
+			if (ZmZmailMail.sessionTimerInvoked) {
+				ZmZmailMail.stayOnPagePrompt = true;
+				msg = AjxMessageFormat.format(msg + ZmMsg.appExitTimeWarning, [ZmZmailMail.STAYONPAGE_INTERVAL]); //append time warning
 			}
 			if (!AjxEnv.isFirefox) {
 				DBG.println(AjxDebug.DBG1, "calling setExitTimer  "  + new Date().toLocaleString());
-				ZmZimbraMail.setExitTimer(true);
+				ZmZmailMail.setExitTimer(true);
 			}
 			return msg;
 			
 		}
 
-		ZmZimbraMail._endSession();
+		ZmZmailMail._endSession();
 	}
     if (window.ZmDesktopAlert) {
         ZmDesktopAlert.closeNotification();
     }
-	ZmZimbraMail._endSessionDone = true;
+	ZmZmailMail._endSessionDone = true;
 };
 
 /**
@@ -2887,11 +2887,11 @@ function() {
  * 
  * @private
  */
-ZmZimbraMail._isOkToExit =
+ZmZmailMail._isOkToExit =
 function() {
-	var appCtlr = window._zimbraMail;
+	var appCtlr = window._zmailMail;
 	if (!appCtlr) { return true; }
-	var okToExit = appCtlr._appViewMgr.isOkToUnload() && ZmZimbraMail._childWindowsOkToUnload();
+	var okToExit = appCtlr._appViewMgr.isOkToUnload() && ZmZmailMail._childWindowsOkToUnload();
 	if (okToExit && !AjxEnv.isPrism && appCtlr._pollRequest) {
 		appCtlr._requestMgr.cancelRequest(appCtlr._pollRequest);
 	}
@@ -2899,9 +2899,9 @@ function() {
 };
 
 // returns true if no child windows are dirty
-ZmZimbraMail._childWindowsOkToUnload =
+ZmZmailMail._childWindowsOkToUnload =
 function() {
-	var childWinList = window._zimbraMail ? window._zimbraMail._childWinList : null;
+	var childWinList = window._zmailMail ? window._zmailMail._childWinList : null;
 	if (childWinList) {
 		for (var i = 0; i < childWinList.size(); i++) {
 			var childWin = childWinList.get(i);
@@ -2913,7 +2913,7 @@ function() {
 	return true;
 };
 
-ZmZimbraMail.handleNetworkStatusClick =
+ZmZmailMail.handleNetworkStatusClick =
 function() {
 	var ac = window["appCtxt"].getAppController();
 
@@ -2927,19 +2927,19 @@ function() {
 /**
  * @private
  */
-ZmZimbraMail.unloadHackCallback =
+ZmZmailMail.unloadHackCallback =
 function() {
 	window.onbeforeunload = null;
-	var f = function() { window.onbeforeunload = ZmZimbraMail._confirmExitMethod; };
+	var f = function() { window.onbeforeunload = ZmZmailMail._confirmExitMethod; };
 	AjxTimedAction.scheduleAction((new AjxTimedAction(null, f)), 3000);
 };
 
 /**
  * @private
  */
-ZmZimbraMail._userEventHdlr =
+ZmZmailMail._userEventHdlr =
 function(ev) {
-	var zm = window._zimbraMail;
+	var zm = window._zmailMail;
 	if (zm) {
 		// cancel old timer and start a new one
 		AjxTimedAction.cancelAction(zm._sessionTimerId);
@@ -2955,7 +2955,7 @@ function(ev) {
 /**
  * @private
  */
-ZmZimbraMail.prototype._createBanner =
+ZmZmailMail.prototype._createBanner =
 function() {
 	var banner = new DwtComposite({parent:this._shell, posStyle:Dwt.ABSOLUTE_STYLE, id:ZmId.BANNER});
 	var logoUrl = appCtxt.getSkinHint("banner", "url") || appCtxt.get(ZmSetting.LOGO_URI);
@@ -2967,7 +2967,7 @@ function() {
 /**
  * @private
  */
-ZmZimbraMail.prototype._createUserInfo =
+ZmZmailMail.prototype._createUserInfo =
 function(className, cid, id) {
 	var position = appCtxt.getSkinHint(cid, "position");
 	var posStyle = position || Dwt.ABSOLUTE_STYLE;
@@ -2979,7 +2979,7 @@ function(className, cid, id) {
 /**
  * @private
  */
-ZmZimbraMail.prototype._createAppChooser =
+ZmZmailMail.prototype._createAppChooser =
 function() {
 
 	var buttons = [];
@@ -2996,7 +2996,7 @@ function() {
 		}
 	}
 	buttons.sort(function(a, b) {
-		return ZmZimbraMail.hashSortCompare(ZmApp.CHOOSER_SORT, a, b);
+		return ZmZmailMail.hashSortCompare(ZmApp.CHOOSER_SORT, a, b);
 	});
 
 	var appChooser = new ZmAppChooser({parent:this._shell, buttons:buttons, id:ZmId.APP_CHOOSER, refElementId:ZmId.SKIN_APP_CHOOSER});
@@ -3010,15 +3010,15 @@ function() {
 /**
  * @private
  */
-ZmZimbraMail.prototype._appButtonListener =
+ZmZmailMail.prototype._appButtonListener =
 function(ev) {
 	try {
 		var id = ev.item.getData(Dwt.KEY_ID);
-		DBG.println(AjxDebug.DBG1, "ZmZimbraMail button press: " + id);
+		DBG.println(AjxDebug.DBG1, "ZmZmailMail button press: " + id);
 		if (id == ZmAppChooser.B_HELP) {
 			window.open(appCtxt.get(ZmSetting.HELP_URI));
 		} else if (id == ZmAppChooser.B_LOGOUT) {
-			ZmZimbraMail.logOff();
+			ZmZmailMail.logOff();
 		} else if (id && ZmApp.ENABLED_APPS[id] && (id != this._activeTabId)) {
 			this.activateApp(id);
 			if (appCtxt.zimletsPresent()) {
@@ -3043,7 +3043,7 @@ function(ev) {
  * 
  * @return	{ZmAppChooser}	the chooser
  */
-ZmZimbraMail.prototype.getAppChooser =
+ZmZmailMail.prototype.getAppChooser =
 function() {
 	return this._appChooser;
 };
@@ -3053,7 +3053,7 @@ function() {
  * 
  * @param	{String}	id		the tab id
  */
-ZmZimbraMail.prototype.setActiveTabId =
+ZmZmailMail.prototype.setActiveTabId =
 function(id) {
 	this._activeTabId = id;
 	this._appChooser.setSelected(id);
@@ -3072,7 +3072,7 @@ function(id) {
  * @param {AjxCallback}    [dismissCallback]    callback to run when the toast is dismissed (by another message using [force], or explicitly calling ZmStatusView.prototype.dismiss())
  * @param {AjxCallback}    [finishCallback]     callback to run when the toast finishes its transitions by itself (not when dismissed)
  */
-ZmZimbraMail.prototype.setStatusMsg =
+ZmZmailMail.prototype.setStatusMsg =
 function(params) {
 	params = Dwt.getParams(arguments, ZmStatusView.MSG_PARAMS);
 	this.statusView.setStatusMsg(params);
@@ -3082,7 +3082,7 @@ function(params) {
  * Dismisses the displayed status message, if any
  */
 
-ZmZimbraMail.prototype.dismissStatusMsg =
+ZmZmailMail.prototype.dismissStatusMsg =
 function(all) {
 	this.statusView.dismissStatusMsg(all);
 };
@@ -3092,7 +3092,7 @@ function(all) {
  * 
  * @return	{String}	the key map name
  */
-ZmZimbraMail.prototype.getKeyMapName =
+ZmZmailMail.prototype.getKeyMapName =
 function() {
 	var ctlr = appCtxt.getCurrentController();
 	if (ctlr && ctlr.getKeyMapName) {
@@ -3109,7 +3109,7 @@ function() {
  * @see		ZmApp.ACTION_CODES_R
  * @see		ZmKeyMap
  */
-ZmZimbraMail.prototype.handleKeyAction =
+ZmZmailMail.prototype.handleKeyAction =
 function(actionCode, ev) {
 
 	DwtMenu.closeActiveMenu();
@@ -3166,8 +3166,8 @@ function(actionCode, ev) {
 		}
 
 		case ZmKeyMap.LOGOFF: {
-            DBG.println(AjxDebug.DBG1, "ZmZimbraMail.prototype.handleKeyAction:matched ZmKeyMap.LOGOFF, invoking logout");
-			ZmZimbraMail.logOff();
+            DBG.println(AjxDebug.DBG1, "ZmZmailMail.prototype.handleKeyAction:matched ZmKeyMap.LOGOFF, invoking logout");
+			ZmZmailMail.logOff();
 			break;
 		}
 
@@ -3273,7 +3273,7 @@ function(actionCode, ev) {
  * Focuses on the content pane.
  * 
  */
-ZmZimbraMail.prototype.focusContentPane =
+ZmZmailMail.prototype.focusContentPane =
 function() {
 	// Set focus to the list view that's in the content pane. If there is no
 	// list view in the content pane, nothing happens. The list view will be
@@ -3289,7 +3289,7 @@ function() {
  * Focuses on the toolbar.
  * 
  */
-ZmZimbraMail.prototype.focusToolbar =
+ZmZmailMail.prototype.focusToolbar =
 function() {
 	// Set focus to the toolbar that's in the content pane.
 	var ctlr = appCtxt.getCurrentController();
@@ -3308,7 +3308,7 @@ function() {
  * 
  * @private
  */
-ZmZimbraMail.prototype._createUpsellView =
+ZmZmailMail.prototype._createUpsellView =
 function(appName) {
 	var viewName = [appName, "upsell"].join("_");
 	if (!this._upsellView[appName]) {
@@ -3339,9 +3339,9 @@ function(appName) {
 	this._appViewMgr.pushView(viewName);
 };
 
-ZmZimbraMail.prototype._displayUpsellView =
+ZmZmailMail.prototype._displayUpsellView =
 function(appName) {
-	var title = [ZmMsg.zimbraTitle, appName].join(": ");
+	var title = [ZmMsg.zmailTitle, appName].join(": ");
 	Dwt.setTitle(title);
 	appCtxt.getApp(this._getDefaultStartAppName()).setOverviewPanelContent(false);
 };
@@ -3353,7 +3353,7 @@ function(appName) {
  * 
  * @private
  */
-ZmZimbraMail.prototype._postLoadZimlet =
+ZmZmailMail.prototype._postLoadZimlet =
 function() {
 	appCtxt.setZimletsPresent(true);
 };
@@ -3361,7 +3361,7 @@ function() {
 /**
  * @private
  */
-ZmZimbraMail.prototype._globalSelectionListener =
+ZmZmailMail.prototype._globalSelectionListener =
 function(ev) {
 	// bug 47514
 	if (this._waitDisallowed) {
@@ -3401,7 +3401,7 @@ function(ev) {
 	}
 };
 
-ZmZimbraMail._folderTreeSashRelease =
+ZmZmailMail._folderTreeSashRelease =
 function(sash) {
 	var currentWidth = skin.getTreeWidth();
 	if (currentWidth) {
@@ -3412,12 +3412,12 @@ function(sash) {
 /**
  * @private
  */
-ZmZimbraMail._endSession =
+ZmZmailMail._endSession =
 function() {
 	if (!AjxEnv.isPrism) {
 		// Let the server know that the session is ending.
 		var args = {
-			jsonObj: { EndSessionRequest: { _jsns: "urn:zimbraAccount" } },
+			jsonObj: { EndSessionRequest: { _jsns: "urn:zmailAccount" } },
 			asyncMode: !appCtxt.get("FORCE_CLEAR_COOKIES"),
 			emptyResponseOkay:	true
 		};
@@ -3425,7 +3425,7 @@ function() {
 	}
 };
 
-ZmZimbraMail.prototype.notify =
+ZmZmailMail.prototype.notify =
 function(eventType) {
 	this._evtMgr.notifyListeners(eventType, this._evt);
 };

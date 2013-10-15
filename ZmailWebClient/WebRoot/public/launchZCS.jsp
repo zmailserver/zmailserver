@@ -1,9 +1,9 @@
 <%@ page buffer="8kb" session="true" autoFlush="true" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
-<%@ page import="java.util.*,javax.naming.*,com.zimbra.client.ZAuthResult" %>
-<%@ page import="com.zimbra.cs.taglib.bean.BeanUtils" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
-<%@ taglib prefix="app" uri="com.zimbra.htmlclient" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
+<%@ page import="java.util.*,javax.naming.*,org.zmail.client.ZAuthResult" %>
+<%@ page import="org.zmail.cs.taglib.bean.BeanUtils" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
+<%@ taglib prefix="app" uri="org.zmail.htmlclient" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%!
@@ -73,7 +73,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
 -->
-<%	java.util.List<String> localePref = authResult.getPrefs().get("zimbraPrefLocale");
+<%	java.util.List<String> localePref = authResult.getPrefs().get("zmailPrefLocale");
 	if (localePref != null && localePref.size() > 0) {
 		request.setAttribute("localeId", localePref.get(0));
 	}
@@ -173,7 +173,7 @@
 </c:if>
 	
 <fmt:setBundle basename="/messages/ZmMsg" scope="request" force="true" />
-<title><fmt:message key="zimbraTitle"/></title>
+<title><fmt:message key="zmailTitle"/></title>
 <link href="<c:url value="/css/images,common,dwt,msgview,login,zm,spellcheck,skin.css">
 	<c:param name="v" value="${vers}" />
 	<c:param name="debug" value='${isDebug?"1":""}' />
@@ -201,7 +201,7 @@
 	</script>
 	<link rel="stylesheet" href="/qunit/qunit.css" />
 	<script src="/qunit/qunit.js"></script>
-	<script src="/js/zimbraMail/unittest/ZmUnitTestManager.js"></script>
+	<script src="/js/zmailMail/unittest/ZmUnitTestManager.js"></script>
 </c:if>
 <zm:getFavIcon request="${pageContext.request}" var="favIconUrl" />
 <c:if test="${empty favIconUrl}">
@@ -317,7 +317,7 @@
 		document.location = appContextPath + "/?client=standard";
 	}
     killSplashScreenSwitch();
-	<c:set var="enforceMinDisplay" value="${requestScope.authResult.prefs.zimbraPrefAdvancedClientEnforceMinDisplay[0]}"/>
+	<c:set var="enforceMinDisplay" value="${requestScope.authResult.prefs.zmailPrefAdvancedClientEnforceMinDisplay[0]}"/>
 	<c:if test="${param.client ne 'advanced'}">
 		var enforceMinDisplay = ${enforceMinDisplay ne 'FALSE'};
 		var unsupported = (screen && (screen.width <= 800 && screen.height <= 600) && !${isOfflineMode}) || (AjxEnv.isSafari && !AjxEnv.isSafari4up);
@@ -421,14 +421,14 @@ for (var pkg in window.AjxTemplateMsg) {
 		var noSplashScreen = "<%= (noSplashScreen != null) ? noSplashScreen : "" %>";
 		var protocolMode = "<%=protocolMode%>";
 
-        <c:set var="initialMailSearch" value="${requestScope.authResult.prefs.zimbraPrefMailInitialSearch[0]}"/>
+        <c:set var="initialMailSearch" value="${requestScope.authResult.prefs.zmailPrefMailInitialSearch[0]}"/>
         <c:if test="${fn:startsWith(initialMailSearch, 'in:')}">
             <c:set var="path" value="${fn:substring(initialMailSearch, 3, -1)}"/>
-            <c:set var="sortOrder" value="${requestScope.authResult.prefs.zimbraPrefSortOrder[0]}"/>
+            <c:set var="sortOrder" value="${requestScope.authResult.prefs.zmailPrefSortOrder[0]}"/>
         </c:if>
 
-        <c:set var="types" value="${requestScope.authResult.attrs.zimbraFeatureConversationsEnabled[0] eq 'FALSE' ? 'message' : requestScope.authResult.prefs.zimbraPrefGroupMailBy[0]}"/>
-		<c:set var="numItems" value="${requestScope.authResult.prefs.zimbraPrefItemsPerVirtualPage[0]}"/>
+        <c:set var="types" value="${requestScope.authResult.attrs.zmailFeatureConversationsEnabled[0] eq 'FALSE' ? 'message' : requestScope.authResult.prefs.zmailPrefGroupMailBy[0]}"/>
+		<c:set var="numItems" value="${requestScope.authResult.prefs.zmailPrefItemsPerVirtualPage[0]}"/>
 
         <zm:getInfoJSON var="getInfoJSON" authtoken="${requestScope.authResult.authToken}" dosearch="${not empty app and app ne 'mail' or isOfflineMode ? false : true}" itemsperpage="${numItems * 2}" types="${types}" folderpath="${path}" sortby="${sortOrder}"/>
         var batchInfoResponse = ${getInfoJSON};
@@ -476,7 +476,7 @@ for (var pkg in window.AjxTemplateMsg) {
 			protocolMode:protocolMode, httpPort:"<%=httpPort%>", httpsPort:"<%=httpsPort%>",
 			noSplashScreen:noSplashScreen, unitTest:"${unitTest}", preset:"${preset}", virtualAcctDomain : virtualAcctDomain
 		};
-		ZmZimbraMail.run(params);
+		ZmZmailMail.run(params);
 	}
 
     //	START DOMContentLoaded
@@ -508,7 +508,7 @@ for (var pkg in window.AjxTemplateMsg) {
     //	END DOMContentLoaded
 
     AjxCore.addOnloadListener(launch);
-    AjxCore.addOnunloadListener(ZmZimbraMail.unload);
+    AjxCore.addOnunloadListener(ZmZmailMail.unload);
 </script>
 </div>
 </body>

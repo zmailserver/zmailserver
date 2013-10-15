@@ -17,17 +17,17 @@
  * Constructor.
  * 
  */
-function com_zimbra_skinpreviewer_HandlerObject() {
+function org_zmail_skinpreviewer_HandlerObject() {
 }
 
-com_zimbra_skinpreviewer_HandlerObject.prototype = new ZmZimletBase();
-com_zimbra_skinpreviewer_HandlerObject.prototype.constructor = com_zimbra_skinpreviewer_HandlerObject;
+org_zmail_skinpreviewer_HandlerObject.prototype = new ZmZimletBase();
+org_zmail_skinpreviewer_HandlerObject.prototype.constructor = org_zmail_skinpreviewer_HandlerObject;
 
 /**
  * Simplify handler object
  *
  */
-var SkinPreviewerZimlet = com_zimbra_skinpreviewer_HandlerObject;
+var SkinPreviewerZimlet = org_zmail_skinpreviewer_HandlerObject;
 
 /**
  * Defines the "skin menu" element id.
@@ -64,7 +64,7 @@ SkinPreviewerZimlet.prototype.singleClicked = function() {
  */
 SkinPreviewerZimlet.prototype._loadAvailableSkins =
 function() {
-	var soapDoc = AjxSoapDoc.create("GetAvailableSkinsRequest", "urn:zimbraAccount");
+	var soapDoc = AjxSoapDoc.create("GetAvailableSkinsRequest", "urn:zmailAccount");
 	var respCallback = new AjxCallback(this, this._handleResponseLoadAvailableSkins);
 	appCtxt.getAppController().sendRequest({soapDoc:soapDoc, asyncMode:true, callback:respCallback});
 };

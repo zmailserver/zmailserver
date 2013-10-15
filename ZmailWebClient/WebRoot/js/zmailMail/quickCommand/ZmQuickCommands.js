@@ -122,18 +122,18 @@ ZmQuickCommands.prototype.crudQuickCommand = function(crudQuickCommand, crud, ca
 };
 
 ZmQuickCommands.prototype._saveQuickCommands = function(quickCommands, callback) {
-    var soapDoc = AjxSoapDoc.create("ModifyPrefsRequest", "urn:zimbraAccount");
+    var soapDoc = AjxSoapDoc.create("ModifyPrefsRequest", "urn:zmailAccount");
 
     var len = quickCommands.length;
     if (!len){
 		var node = soapDoc.set("pref", ""); // No quick commands
-		node.setAttribute("name", "zimbraPrefQuickCommand");
+		node.setAttribute("name", "zmailPrefQuickCommand");
     } else {
 	    for (var i = 0; i < len; i++) {
 		var quickCommand = quickCommands[i];
 		var quickCommandJSON = quickCommand.toJSON();
 		var node = soapDoc.set("pref", AjxStringUtil.trim(quickCommandJSON));
-		node.setAttribute("name", "zimbraPrefQuickCommand");
+		node.setAttribute("name", "zmailPrefQuickCommand");
 	    }
     }
     var postSaveClosure = this._postSave.bind(this, quickCommands, callback);

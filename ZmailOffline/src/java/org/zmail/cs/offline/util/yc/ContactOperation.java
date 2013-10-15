@@ -14,9 +14,9 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.util.yc;
+package org.zmail.cs.offline.util.yc;
 
-import com.zimbra.cs.mime.ParsedContact;
+import org.zmail.cs.mime.ParsedContact;
 
 public interface ContactOperation extends Comparable<ContactOperation> {
 

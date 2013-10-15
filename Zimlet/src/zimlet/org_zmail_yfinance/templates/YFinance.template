@@ -75,7 +75,7 @@
 </template>
 
 <template id="ResultView">
-<div class="ZimbraCalculatorDiv" style='background-color:white;display:block;padding:5px;'>
+<div class="ZmailCalculatorDiv" style='background-color:white;display:block;padding:5px;'>
 	<h2 style='color:purple;font-family: Verdana,Arial,Helvetica,sans-serif; font-weight:bold;'><$= data.title $></h2>
 	<hr style='width: 100%; height: 2px;'>
 	<span style='font-family: Verdana,Arial,Helvetica,sans-serif; font-size:10px;'> <$=data.summary$> </span>

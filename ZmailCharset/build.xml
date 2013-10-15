@@ -16,16 +16,16 @@
   <target name="jar" depends="compile,generate-jar-version">
     <mkdir dir="build/classes/META-INF/services"/>
     <copy todir="build/classes/META-INF/services" file="conf/java.nio.charset.spi.CharsetProvider"/>
-    <jar destfile="build/zimbra-charset.jar"
+    <jar destfile="build/zmail-charset.jar"
           basedir="build/classes" includes="**/*.class **/java.nio.charset.spi.CharsetProvider">
         <manifest>
-            <attribute name="Main-Class" value="com.zimbra.buildinfo.Version" />
+            <attribute name="Main-Class" value="org.zmail.buildinfo.Version" />
             <attribute name="Implementation-Vendor" value="VMware, Inc."/>
-            <attribute name="Implementation-Title" value="Zimbra Charset"/>
-            <attribute name="Implementation-Version" value="${zimbra.buildinfo.version}"/>
+            <attribute name="Implementation-Title" value="Zmail Charset"/>
+            <attribute name="Implementation-Version" value="${zmail.buildinfo.version}"/>
             <attribute name="Specification-Vendor" value="VMware, Inc."/>
-            <attribute name="Specification-Title" value="Zimbra Collaboration Suite"/>
-            <attribute name="Specification-version" value="${zimbra.buildinfo.majorversion}.${zimbra.buildinfo.minorversion}.${zimbra.buildinfo.microversion}"/>
+            <attribute name="Specification-Title" value="Zmail Collaboration Suite"/>
+            <attribute name="Specification-version" value="${zmail.buildinfo.majorversion}.${zmail.buildinfo.minorversion}.${zmail.buildinfo.microversion}"/>
 	      </manifest>
     </jar>
     <delete dir="build/classes/META-INF"/>

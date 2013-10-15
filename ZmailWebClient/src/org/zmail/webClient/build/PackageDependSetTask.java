@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.webClient.build;
+package org.zmail.webClient.build;
 
 import java.io.*;
 import org.apache.tools.ant.*;

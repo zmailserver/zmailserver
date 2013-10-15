@@ -53,7 +53,7 @@ ZmSearchTreeController.APP_JOIN_CHAR = "-";
  * @param	{Boolean}	params.showUnread		if <code>true</code>, unread counts will be shown
  * @param	{Array}	params.omit				a hash of organizer IDs to ignore
  * @param	{Boolean}	params.forceCreate	if <code>true</code>, tree view will be created
- * @param	{ZmZimbraAccount}	params.account	the account to show tree for (if not currently active account)
+ * @param	{ZmZmailAccount}	params.account	the account to show tree for (if not currently active account)
  * 
  */
 ZmSearchTreeController.prototype.show =

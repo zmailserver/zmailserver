@@ -497,7 +497,7 @@ function(msg, oldMsg, dayViewCallback) {
 };
 
 // This is needed for Gecko only: for some reason, clicking on a local link will
-// open the full Zimbra chrome in the iframe :-( so we fake a scroll to the link
+// open the full Zmail chrome in the iframe :-( so we fake a scroll to the link
 // target here. (bug 7927)
 ZmMailMsgView.__localLinkClicked =
 function(msgView, ev) {
@@ -677,7 +677,7 @@ function(msg, parent) {
 			}
 		}
         else {
-            img.src = "/img/zimbra/1x1-trans.png";
+            img.src = "/img/zmail/1x1-trans.png";
         }
 		hasExternalImages = external || hasExternalImages;
 	}
@@ -2257,7 +2257,7 @@ function(attachments, viewAllImages, filename) {
 	}
 	params.html = AjxTemplate.expand("mail.Message#AllAttachments", params);
 	
-	params.downloadAllCallback = ZmZimbraMail.unloadHackCallback.bind(null);
+	params.downloadAllCallback = ZmZmailMail.unloadHackCallback.bind(null);
 	params.removeAllCallback = this.removeAttachmentCallback.bind(this, partsStr);
 	return params;
 };
@@ -2660,7 +2660,7 @@ function(addr, icon) {
 
 ZmMailMsgView.vcardCallback =
 function(msgId, partId) {
-	ZmZimbraMail.unloadHackCallback();
+	ZmZmailMail.unloadHackCallback();
 
 	var ac = window.parentAppCtxt || window.appCtxt;
 	ac.getApp(ZmApp.CONTACTS).createFromVCard(msgId, partId);
@@ -2668,14 +2668,14 @@ function(msgId, partId) {
 
 ZmMailMsgView.downloadCallback =
 function(downloadUrl) {
-	ZmZimbraMail.unloadHackCallback();
+	ZmZmailMail.unloadHackCallback();
 	location.href = downloadUrl;
 };
 
 
 ZmMailMsgView.prototype.removeAttachmentCallback =
 function(partIds) {
-	ZmZimbraMail.unloadHackCallback();
+	ZmZmailMail.unloadHackCallback();
 
 	if (!(partIds instanceof Array)) { partIds = partIds.split(","); }
 
@@ -2710,7 +2710,7 @@ function(result) {
 
 ZmMailMsgView.briefcaseCallback =
 function(msgId, partId, name) {
-	ZmZimbraMail.unloadHackCallback();
+	ZmZmailMail.unloadHackCallback();
 
 	// force create deferred folders if not created
 	AjxDispatcher.require("BriefcaseCore");
@@ -2728,7 +2728,7 @@ function() {
 
 ZmMailMsgView.addToCalendarCallback =
 function(msgId, partId, name) {
-	ZmZimbraMail.unloadHackCallback();
+	ZmZmailMail.unloadHackCallback();
 
 	// force create deferred folders if not created
 	AjxDispatcher.require("CalendarCore");

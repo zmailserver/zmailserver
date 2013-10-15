@@ -18,21 +18,21 @@
  * Defines the Zimlet handler class.
  *   
  */
-function com_zimbra_example_paneldragsource_HandlerObject() {
+function org_zmail_example_paneldragsource_HandlerObject() {
 }
 
 /**
  * Makes the Zimlet class a subclass of ZmZimletBase.
  *
  */
-com_zimbra_example_paneldragsource_HandlerObject.prototype = new ZmZimletBase();
-com_zimbra_example_paneldragsource_HandlerObject.prototype.constructor = com_zimbra_example_paneldragsource_HandlerObject;
+org_zmail_example_paneldragsource_HandlerObject.prototype = new ZmZimletBase();
+org_zmail_example_paneldragsource_HandlerObject.prototype.constructor = org_zmail_example_paneldragsource_HandlerObject;
 
 /**
  * This method gets called by the Zimlet framework when the zimlet loads.
  *  
  */
-com_zimbra_example_paneldragsource_HandlerObject.prototype.init =
+org_zmail_example_paneldragsource_HandlerObject.prototype.init =
 function() {
 	// do something
 };
@@ -43,7 +43,7 @@ function() {
  * 
  * @param	obj		the dropped object
  */
-com_zimbra_example_paneldragsource_HandlerObject.prototype.doDrop =
+org_zmail_example_paneldragsource_HandlerObject.prototype.doDrop =
 function(obj) {
 
 	var type = obj.TYPE;

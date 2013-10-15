@@ -184,7 +184,7 @@ function(method, idOnly, respCallback, errorCallback, batchCmd) {
 
 /*
 	var jsonObj = {};
-	var request = jsonObj[method] = {_jsns:"urn:zimbraAccount"};
+	var request = jsonObj[method] = {_jsns:"urn:zmailAccount"};
 	var sig = request.signature = {};
 	if (this.id) {
 		sig.id = this.id;
@@ -201,7 +201,7 @@ function(method, idOnly, respCallback, errorCallback, batchCmd) {
 	}
 */
 
-	var soapDoc = AjxSoapDoc.create(method, "urn:zimbraAccount");
+	var soapDoc = AjxSoapDoc.create(method, "urn:zmailAccount");
 	var signatureEl = soapDoc.set("signature");
 	if (this.id) {
 		signatureEl.setAttribute("id", this.id);

@@ -14,14 +14,14 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_xmailer"
+<zimlet name="org_zmail_xmailer"
         version="1.4"
         label="${msg.label}"
         description="${msg.description}">
     <include>xmailer.js</include>
     <includeCSS>xmailer.css</includeCSS>
     <resource>xmailer-icon.gif</resource>
-    <handlerObject>com_zimbra_xmailer_HandlerObject</handlerObject>
+    <handlerObject>org_zmail_xmailer_HandlerObject</handlerObject>
     <zimletPanelItem label="${msg.XMailerZimlet_panel_label}" icon="xmailer-panelIcon">
         <toolTipText>${XMailerZimlet_panel_tooltip}</toolTipText>
     </zimletPanelItem>

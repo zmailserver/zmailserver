@@ -18,16 +18,16 @@ function ZaCertWizard (parent) {
     if (AjxEnv.isIE) {
         w = "550px" ;
     }
-    ZaXWizardDialog.call(this, parent, null, com_zimbra_cert_manager.CERT_WIZARD_title, w, "300px","ZaCertWizard");
+    ZaXWizardDialog.call(this, parent, null, org_zmail_cert_manager.CERT_WIZARD_title, w, "300px","ZaCertWizard");
 
 	this.stepChoices = [
-		{label:com_zimbra_cert_manager.CERT_WIZARD_TABT_selectServer, value:ZaCertWizard.STEP_SELECT_SERVER},
-		{label:com_zimbra_cert_manager.CERT_WIZARD_TABT_useroption, value:ZaCertWizard.STEP_USER_OPTION},
-		{label:com_zimbra_cert_manager.CERT_WIZARD_TABT_gencsr, value:ZaCertWizard.STEP_GEN_CSR},
-		{label:com_zimbra_cert_manager.CERT_WIZARD_TABT_uploadCert, value:ZaCertWizard.STEP_UPLOAD_CERT},
-		{label:com_zimbra_cert_manager.CERT_WIZARD_TABT_installCert, value:ZaCertWizard.STEP_INSTALL_CERT},
-		{label:com_zimbra_cert_manager.CERT_WIZARD_TABT_downloadCSR, value:ZaCertWizard.STEP_DOWNLOAD_CSR},
-		{label:com_zimbra_cert_manager.CERT_WIZARD_TABT_reviewCSR, value:ZaCertWizard.STEP_CSR_CONFIRM}		
+		{label:org_zmail_cert_manager.CERT_WIZARD_TABT_selectServer, value:ZaCertWizard.STEP_SELECT_SERVER},
+		{label:org_zmail_cert_manager.CERT_WIZARD_TABT_useroption, value:ZaCertWizard.STEP_USER_OPTION},
+		{label:org_zmail_cert_manager.CERT_WIZARD_TABT_gencsr, value:ZaCertWizard.STEP_GEN_CSR},
+		{label:org_zmail_cert_manager.CERT_WIZARD_TABT_uploadCert, value:ZaCertWizard.STEP_UPLOAD_CERT},
+		{label:org_zmail_cert_manager.CERT_WIZARD_TABT_installCert, value:ZaCertWizard.STEP_INSTALL_CERT},
+		{label:org_zmail_cert_manager.CERT_WIZARD_TABT_downloadCSR, value:ZaCertWizard.STEP_DOWNLOAD_CSR},
+		{label:org_zmail_cert_manager.CERT_WIZARD_TABT_reviewCSR, value:ZaCertWizard.STEP_CSR_CONFIRM}		
 	];
 		
 	//this._lastStep = this.stepChoices.length;
@@ -87,7 +87,7 @@ function () {
 		if (this._containedObject[ZaCert.A_type_csr]) {
 			this._button[DwtWizardDialog.FINISH_BUTTON].setText(AjxMsg._finish);
 		}else{
-			this._button[DwtWizardDialog.FINISH_BUTTON].setText(com_zimbra_cert_manager.CERT_INSTALL_BUTTON_text);			
+			this._button[DwtWizardDialog.FINISH_BUTTON].setText(org_zmail_cert_manager.CERT_INSTALL_BUTTON_text);			
 		}
 	}
 }
@@ -95,9 +95,9 @@ function () {
 ZaCertWizard.getInstallMsg =
 function () {
 	if (ZaCertWizard.INSTALL_STATUS == 0) {
-		return com_zimbra_cert_manager.CERT_INSTALL_STATUS_0 ;
+		return org_zmail_cert_manager.CERT_INSTALL_STATUS_0 ;
 	}else if (ZaCertWizard.INSTALL_STATUS == 1){
-		return com_zimbra_cert_manager.CERT_INSTALL_STATUS_1;
+		return org_zmail_cert_manager.CERT_INSTALL_STATUS_1;
 	}else{
 		return "";
 	}
@@ -166,7 +166,7 @@ function() {
 ZaCertWizard.getCause = 
 function (detailMsg) {
 	//TODO: get the cert related detail exceptions
-	var causeBy = /Caused by:\s*com.zimbra.cs.license.LicenseException:\s*(.*)/;
+	var causeBy = /Caused by:\s*org.zmail.cs.license.LicenseException:\s*(.*)/;
 	
 	var result = detailMsg.match(causeBy);
 	if (result != null) {
@@ -184,7 +184,7 @@ function (resp){
 	try {
 		if (resp._isException) {
 			var detailMsg = resp._data.msg ;			
-			throw new AjxException(com_zimbra_cert_manager.CERT_INSTALL_STATUS_1 + ": " + ZaCertWizard.getCause(detailMsg), "ZaCertWizard.prototype.installCallback", AjxException.UNKNOWN_ERROR, detailMsg) ;
+			throw new AjxException(org_zmail_cert_manager.CERT_INSTALL_STATUS_1 + ": " + ZaCertWizard.getCause(detailMsg), "ZaCertWizard.prototype.installCallback", AjxException.UNKNOWN_ERROR, detailMsg) ;
 			//throw new Error(resp._data.msg) ;
 		}else{
 			var installResponse = resp._data.Body.InstallCertResponse ;
@@ -193,14 +193,14 @@ function (resp){
 				ZaCertWizard.INSTALL_STATUS = 0;
 								
 				statusElement.setStyle (DwtAlert.INFORMATION) ;
-				statusElement.setContent(com_zimbra_cert_manager.CERT_INSTALL_STATUS_0);
+				statusElement.setContent(org_zmail_cert_manager.CERT_INSTALL_STATUS_0);
 				if (controller instanceof ZaCertViewController) {
 					controller.show(ZaCert.getCerts(ZaApp.getInstance(), this._containedObject[ZaCert.A_target_server]), 
 									this._containedObject[ZaCert.A_target_server]) ;
 				}
 				ZaCertWizard.INSTALL_STATUS = -1;
 			}else{
-				throw new AjxException(com_zimbra_cert_manager.CERT_INSTALL_STATUS_1, "installCallback", AjxException.UNKNOWN_ERROR) ;
+				throw new AjxException(org_zmail_cert_manager.CERT_INSTALL_STATUS_1, "installCallback", AjxException.UNKNOWN_ERROR) ;
 				//throw new AjxException ();
 			}
 		}
@@ -238,7 +238,7 @@ function (status, uploadResults) {
       // comment this out as these are coming back as application/octet-stream
 			//if (v.ct != "application/x-x509-ca-cert") {
 				//ZaApp.getInstance().getCurrentController().popupErrorDialog (
-					//com_zimbra_cert_manager.invalidContentType + ": " + v.filename
+					//org_zmail_cert_manager.invalidContentType + ": " + v.filename
 				//);
 				//return ;
 			//}
@@ -269,8 +269,8 @@ function (status, uploadResults) {
 		this._button[DwtWizardDialog.FINISH_BUTTON].setEnabled(true);
 	} else {
 		// handle errors during attachment upload.
-		var msg = AjxMessageFormat.format(com_zimbra_cert_manager.UploadCertErrorMsg, status);
-		ZaApp.getInstance().getCurrentController().popupErrorDialog(msg + com_zimbra_cert_manager.ErrorTryAgain, null, null, true);		
+		var msg = AjxMessageFormat.format(org_zmail_cert_manager.UploadCertErrorMsg, status);
+		ZaApp.getInstance().getCurrentController().popupErrorDialog(msg + org_zmail_cert_manager.ErrorTryAgain, null, null, true);		
 	}	
 }
 
@@ -358,7 +358,7 @@ function() {
 		if (cn ==null || cn.match(cn_regEx) == null){
 			//show error msg
 			ZaApp.getInstance().getCurrentController().popupErrorDialog(
-					AjxMessageFormat.format(com_zimbra_cert_manager.CERT_CN_INVALID, cn || "Current CN "));
+					AjxMessageFormat.format(org_zmail_cert_manager.CERT_CN_INVALID, cn || "Current CN "));
 			return false;
 		}
 		
@@ -366,7 +366,7 @@ function() {
 		for (var i=0; i < subjAltNames.length; i ++) {
 			if (subjAltNames[i].match(san_regEx) == null){
 				ZaApp.getInstance().getCurrentController().popupErrorDialog(	
-					AjxMessageFormat.format(com_zimbra_cert_manager.CERT_SUBJ_ALT_NAME_INVALID, subjAltNames[i]||"SubjectAltName " + i));
+					AjxMessageFormat.format(org_zmail_cert_manager.CERT_SUBJ_ALT_NAME_INVALID, subjAltNames[i]||"SubjectAltName " + i));
 				return false;
 			}
 		}
@@ -388,7 +388,7 @@ function() {
 				if(window.console && window.console.log) console.log("Previous CSR exists, skip the CSR generation.") ;
 			}
 		}catch (ex) {
-			ZaApp.getInstance().getCurrentController().popupErrorDialog(com_zimbra_cert_manager.genCSRError, ex, true) ;		
+			ZaApp.getInstance().getCurrentController().popupErrorDialog(org_zmail_cert_manager.genCSRError, ex, true) ;		
 		}
 		this.goPage(nextStep) ;
 	}else if (cStep == ZaCertWizard.STEP_UPLOAD_CERT) {
@@ -413,7 +413,7 @@ function() {
 					if (v != null && v.length != 0) {
 						if (ZaUtil.findValueInArray(filenameArr, v) != -1) {
 							ZaApp.getInstance().getCurrentController().popupErrorDialog (
-								com_zimbra_cert_manager.dupFileNameError + v
+								org_zmail_cert_manager.dupFileNameError + v
 							);
 							return ;
 						}
@@ -422,14 +422,14 @@ function() {
 					
 					if ( n == "certFile") {
 						if (v == null ||  v.length == 0) {
-							ZaApp.getInstance().getCurrentController().popupErrorDialog(com_zimbra_cert_manager.noCertFileError);
+							ZaApp.getInstance().getCurrentController().popupErrorDialog(org_zmail_cert_manager.noCertFileError);
 							return ;
 						}else{
 							this.uploadInputs["certFile"] = v ;
 						}
 					}else if (n == "rootCA") {
 						if (v == null || v.length == 0 ) {
-							ZaApp.getInstance().getCurrentController().popupErrorDialog(com_zimbra_cert_manager.noRootCAError);
+							ZaApp.getInstance().getCurrentController().popupErrorDialog(org_zmail_cert_manager.noRootCAError);
 							return ;
 						}else{
 							this.uploadInputs["rootCA"] = v ;							
@@ -452,13 +452,13 @@ function() {
 				um.execute(certUploadCallback, document.getElementById (ZaCertWizard.CertUploadFormId));
 				return ; //allow the callback to handle the wizard buttons
 			}catch (err) {
-				ZaApp.getInstance().getCurrentController().popupErrorDialog(com_zimbra_cert_manager.certFileNameError) ;
+				ZaApp.getInstance().getCurrentController().popupErrorDialog(org_zmail_cert_manager.certFileNameError) ;
 				return ;
 			}			
 		}else if (this._containedObject[ZaCert.A_type_self]) {
 			this.goPage(nextStep) ;
 		}else {
-			ZaApp.getInstance().getCurrentController().popupErrorDialog(com_zimbra_cert_manager.certTypeError) ;	
+			ZaApp.getInstance().getCurrentController().popupErrorDialog(org_zmail_cert_manager.certTypeError) ;	
 		}
 	}else if (cStep == ZaCertWizard.STEP_CSR_CONFIRM) {
 		nextStep = ZaCertWizard.STEP_UPLOAD_CERT;
@@ -559,7 +559,7 @@ function (){
 	//var uri = location.protocol + "//" + document.domain + appContextPath 
 	//							+ "/../service/upload";
 	//need the full content of the response.
-	//200,'1',[{"filename":"zimbra.crt","aid":"0466544c-1372-4cc3-ad8e-b1ff570dccca:85f82c13-6381-4c84-8915-bfbe515fdbd4","ct":"application/x-x509-ca-cert"},{"filename":"mycert.crt","aid":"0466544c-1372-4cc3-ad8e-b1ff570dccca:2321870e-1229-4359-a9c7-f11222a50042","ct":"application/x-x509-ca-cert"}]
+	//200,'1',[{"filename":"zmail.crt","aid":"0466544c-1372-4cc3-ad8e-b1ff570dccca:85f82c13-6381-4c84-8915-bfbe515fdbd4","ct":"application/x-x509-ca-cert"},{"filename":"mycert.crt","aid":"0466544c-1372-4cc3-ad8e-b1ff570dccca:2321870e-1229-4359-a9c7-f11222a50042","ct":"application/x-x509-ca-cert"}]
 	
 	var uri = appContextPath + "/../service/upload?fmt=extended";
 	var html = [];
@@ -572,10 +572,10 @@ function (){
 	html[idx++] = "<div><table border=0 cellspacing=0 cellpadding=2 style='table-layout: fixed;'> " ;
 	html[idx++] = "<colgroup><col width=100/><col width='*' /><col width=50 /></colgroup>";
 	
-	html[idx++] = "<tbody><tr><td>" + com_zimbra_cert_manager.CERT_upload_comm_cert + "</td>";
+	html[idx++] = "<tbody><tr><td>" + org_zmail_cert_manager.CERT_upload_comm_cert + "</td>";
 	html[idx++] = "<td><input type=file  name='certFile' size='40'></input></td><td></td></tr>";
 
-	html[idx++] = "<tr><td>" + com_zimbra_cert_manager.CERT_upload_root_CA + "</td>";
+	html[idx++] = "<tr><td>" + org_zmail_cert_manager.CERT_upload_root_CA + "</td>";
 	html[idx++] = "<td><input type=file  name='rootCA' size='40'></input></td><td></td></tr>";
 
 //	html[idx++] = "<tr>" + ZaCertWizard.getIntermediaCAUploadInput() + "</tr>";
@@ -590,7 +590,7 @@ function (){
 					" onmouseout='this.style.cursor=\"default\"' " +
 					" onmouseover='this.style.cursor=\"pointer\"'" +
 				    " onclick='ZaCertWizard.addIntermediateCAInput(this);' >" +
-				    com_zimbra_cert_manager.ADD_IntermediateCA_Label + "</span>";
+				    org_zmail_cert_manager.ADD_IntermediateCA_Label + "</span>";
 	html[idx++] = "</div>" ;	
 			    
 	html[idx++] = "</form></div>";
@@ -605,13 +605,13 @@ ZaCertWizard.getIntermediaCAUploadInput = function () {
 	html[idx++] = "<colgroup><col width=100/><col width='*' /><col width=50 /></colgroup>";
 	
 	html[idx++] = "<tbody><tr>" ;
-	html[idx++] = "<td>" + com_zimbra_cert_manager.CERT_upload_intermediate_ca + "</td>";
+	html[idx++] = "<td>" + org_zmail_cert_manager.CERT_upload_intermediate_ca + "</td>";
 	html[idx++] = "<td><input type=file  name='intermediateCA' size='40'></input></td>"; 
 	html[idx++] = "<td><span style='padding-left:5px; color: blue; text-decoration: underline; cursor: default;' " +
 					" onmouseout='this.style.cursor=\"default\"' " +
 					" onmouseover='this.style.cursor=\"pointer\"'" +
 				    " onclick='ZaCertWizard.removeIntermediaCAInput(this);' >" +
-				    com_zimbra_cert_manager.Remove_IntermediateCA_Label + "</span></td>";
+				    org_zmail_cert_manager.Remove_IntermediateCA_Label + "</span></td>";
 	html[idx++] = "</tr></tbody></table>";
 	return html.join("");	
 } 
@@ -648,10 +648,10 @@ ZaCertWizard.myXFormModifier = function(xFormObject) {
 	
 	var case_select_server_items = [
 				{ type:_SPACER_, height: 10},
-				{ type:_OUTPUT_, colSpan: 2, value: com_zimbra_cert_manager.CERT_select_server},
+				{ type:_OUTPUT_, colSpan: 2, value: org_zmail_cert_manager.CERT_select_server},
 				{ type:_SPACER_, height: 10},
 				{ ref:ZaCert.A_target_server, type:_OSELECT1_,
-					label:com_zimbra_cert_manager.CERT_server_name, 
+					label:org_zmail_cert_manager.CERT_server_name, 
 					labelLocation:_LEFT_, 
 					choices:ZaCert.TARGET_SERVER_CHOICES,
                     visibilityChecks:[],
@@ -660,7 +660,7 @@ ZaCertWizard.myXFormModifier = function(xFormObject) {
 				}
 				/*
 				,
-				{ type:_CHECKBOX_, ref: ZaCert.A_target_all_servers  , label: com_zimbra_cert_manager.all_servers}
+				{ type:_CHECKBOX_, ref: ZaCert.A_target_all_servers  , label: org_zmail_cert_manager.all_servers}
 		*/
 		];
 	case_select_server.items = case_select_server_items;
@@ -683,14 +683,14 @@ ZaCertWizard.myXFormModifier = function(xFormObject) {
                                  }
                                 }
                             },
-							label: com_zimbra_cert_manager.lb_target_server, choices:ZaCert.TARGET_SERVER_CHOICES}
+							label: org_zmail_cert_manager.lb_target_server, choices:ZaCert.TARGET_SERVER_CHOICES}
 					]
 				},
 				{ type:_SPACER_, height: 10},
-				{ type:_OUTPUT_, colSpan: 2, value: com_zimbra_cert_manager.CERT_select_option},
+				{ type:_OUTPUT_, colSpan: 2, value: org_zmail_cert_manager.CERT_select_option},
 				{ type:_SPACER_, height: 10},
 				{ type:_RADIO_,   groupname: "install_type", ref: ZaCert.A_type_self,
-					label:  com_zimbra_cert_manager.CERT_self_signed , enableLabelFor: true,
+					label:  org_zmail_cert_manager.CERT_self_signed , enableLabelFor: true,
                     visibilityChecks:[],
                     enableDisableChecks:[],
                         labelLocation:_RIGHT_ , align: _LEFT_ ,
@@ -708,7 +708,7 @@ ZaCertWizard.myXFormModifier = function(xFormObject) {
 						}
 					},
 				{ type:_RADIO_,  groupname: "install_type", ref: ZaCert.A_type_csr,
-					label: com_zimbra_cert_manager.CERT_gen_csr, enableLabelFor: true,
+					label: org_zmail_cert_manager.CERT_gen_csr, enableLabelFor: true,
                     visibilityChecks:[],
                     enableDisableChecks:[],
                     labelLocation:_RIGHT_ , align: _LEFT_ ,
@@ -739,7 +739,7 @@ ZaCertWizard.myXFormModifier = function(xFormObject) {
 						this.setInstanceValue (!value, ZaCert.A_type_self ) ;
 						this.setInstanceValue (!value, ZaCert.A_type_csr) ;
 					},
-					label: com_zimbra_cert_manager.CERT_comm_signed, enableLabelFor: true,
+					label: org_zmail_cert_manager.CERT_comm_signed, enableLabelFor: true,
 					labelLocation:_RIGHT_ , align: _LEFT_} ,
                  { type:_SPACER_, height: 10}
     ];
@@ -755,7 +755,7 @@ ZaCertWizard.myXFormModifier = function(xFormObject) {
                 visibilityChecks:["instance[ZaCert.A_csr_exists] == true "],
                 containerCssStyle: "width:400px;",
 				style: DwtAlert.WARNING, iconVisible: false,
-				content: com_zimbra_cert_manager.CSR_EXISTS_WARNING 
+				content: org_zmail_cert_manager.CSR_EXISTS_WARNING 
 		 }, 
 		{type: _GROUP_ , colSpan:2, numCols: 2, colSizes:["150px","*"], width:"100%",
 			  items :[
@@ -774,7 +774,7 @@ ZaCertWizard.myXFormModifier = function(xFormObject) {
 							label: "Target Server: ", choices:ZaCert.TARGET_SERVER_CHOICES}
 					]
 				},
-				{ref: ZaCert.A_force_new_csr, type: _CHECKBOX_ , label: com_zimbra_cert_manager.FORCE_NEW_CSR , 
+				{ref: ZaCert.A_force_new_csr, type: _CHECKBOX_ , label: org_zmail_cert_manager.FORCE_NEW_CSR , 
 					visibilityChecks:[" instance[ZaCert.A_csr_exists] == true "],
                     enableDisableChecks:[" instance[ZaCert.A_csr_exists] == true "],
                     enableDisableChangeEventSources:[ZaCert.A_csr_exists],
@@ -783,10 +783,10 @@ ZaCertWizard.myXFormModifier = function(xFormObject) {
 						form.parent._containedObject.modifySubjectAltNames();
 						form.refresh();
 					},
-					trueValue:"TRUE", falseValue:"FALSE", msgName:com_zimbra_cert_manager.FORCE_NEW_CSR },
+					trueValue:"TRUE", falseValue:"FALSE", msgName:org_zmail_cert_manager.FORCE_NEW_CSR },
 
                   {ref: ZaCert.A_keysize,type:_OSELECT1_,
-					label:com_zimbra_cert_manager.CERT_keysize, 
+					label:org_zmail_cert_manager.CERT_keysize, 
 					labelLocation:_LEFT_,
 					choices:ZaCert.KEY_SIZE_CHOICES,
                     visibilityChecks:[],
@@ -796,12 +796,12 @@ ZaCertWizard.myXFormModifier = function(xFormObject) {
 					visibilityChecks:[],  bmolsnr:true,
                     enableDisableChecks:[ZaCertWizard.isCSRFieldsEnabled],
 				    enableDisableChangeEventSources:[ZaCert.A_csr_exists, ZaCert.A_force_new_csr],
-                    label: com_zimbra_cert_manager.CERT_INFO_CN},
+                    label: org_zmail_cert_manager.CERT_INFO_CN},
 				{ ref: ZaCert.A_use_wildcard_server_name, type:_WIZ_CHECKBOX_,
 						visibilityChecks:[],
                         enableDisableChecks:[ZaCertWizard.isCSRFieldsEnabled],
 				        enableDisableChangeEventSources:[ZaCert.A_csr_exists, ZaCert.A_force_new_csr],
-                        label: com_zimbra_cert_manager.Use_Wildcard_Server_Name,
+                        label: org_zmail_cert_manager.Use_Wildcard_Server_Name,
 						onChange: function (value, event, form) {
 							if(window.console && window.console.log) console.log("use wildcard: " + value) ;
 							this.setInstanceValue (value) ;
@@ -816,36 +816,36 @@ ZaCertWizard.myXFormModifier = function(xFormObject) {
                     visibilityChecks:[],
                     enableDisableChecks:[ZaCertWizard.isCSRFieldsEnabled],
                     enableDisableChangeEventSources:[ZaCert.A_csr_exists, ZaCert.A_force_new_csr],
-                    label: com_zimbra_cert_manager.CERT_INFO_C},
+                    label: org_zmail_cert_manager.CERT_INFO_C},
 				{ ref: ZaCert.A_state, type:_TEXTFIELD_, width: 150, 
                     visibilityChecks:[],
                     enableDisableChecks:[ZaCertWizard.isCSRFieldsEnabled],
                     enableDisableChangeEventSources:[ZaCert.A_csr_exists, ZaCert.A_force_new_csr],
-					label: com_zimbra_cert_manager.CERT_INFO_ST},
+					label: org_zmail_cert_manager.CERT_INFO_ST},
 				{ ref: ZaCert.A_city, type:_TEXTFIELD_, width: 150, 
                     visibilityChecks:[],
                     enableDisableChecks:[ZaCertWizard.isCSRFieldsEnabled],
                     enableDisableChangeEventSources:[ZaCert.A_csr_exists, ZaCert.A_force_new_csr],
-					label: com_zimbra_cert_manager.CERT_INFO_L},
+					label: org_zmail_cert_manager.CERT_INFO_L},
 				{ ref: ZaCert.A_organization, type:_TEXTFIELD_, width: 150,
                     visibilityChecks:[],
                     enableDisableChecks:[ZaCertWizard.isCSRFieldsEnabled],
                     enableDisableChangeEventSources:[ZaCert.A_csr_exists, ZaCert.A_force_new_csr],
-					label: com_zimbra_cert_manager.CERT_INFO_O},
+					label: org_zmail_cert_manager.CERT_INFO_O},
 				{ ref: ZaCert.A_organizationUnit, type:_TEXTFIELD_, width: 150,
                     visibilityChecks:[],
                     enableDisableChecks:[ZaCertWizard.isCSRFieldsEnabled],
                     enableDisableChangeEventSources:[ZaCert.A_csr_exists, ZaCert.A_force_new_csr],
-					label: com_zimbra_cert_manager.CERT_INFO_OU},
+					label: org_zmail_cert_manager.CERT_INFO_OU},
 				 { ref: ZaCert.A_subject_alt,
                      visibilityChecks:[],
                      enableDisableChecks:[ZaCertWizard.isCSRFieldsEnabled],
                      enableDisableChangeEventSources:[ZaCert.A_csr_exists, ZaCert.A_force_new_csr],
 					type:_REPEAT_,
-					label:com_zimbra_cert_manager.CERT_INFO_SubjectAltName,
+					label:org_zmail_cert_manager.CERT_INFO_SubjectAltName,
 					labelLocation:_LEFT_, 
 					labelCssStyle:"vertical-align: top; padding-top: 3px;",
-					addButtonLabel:com_zimbra_cert_manager.NAD_Add, 
+					addButtonLabel:org_zmail_cert_manager.NAD_Add, 
 					align:_LEFT_,
 					repeatInstance:"", 
 					showAddButton:true, 
@@ -854,7 +854,7 @@ ZaCertWizard.myXFormModifier = function(xFormObject) {
                     addButtonCSSStyle:"margin-left:10px;",
                     //showAddOnNextRow:true,
 					alwaysShowAddButton:true,
-					removeButtonLabel:com_zimbra_cert_manager.NAD_Remove,								
+					removeButtonLabel:org_zmail_cert_manager.NAD_Remove,								
 					items: [
 						{ref:".", type:_TEXTFIELD_, 
                         visibilityChecks:[],
@@ -872,7 +872,7 @@ ZaCertWizard.myXFormModifier = function(xFormObject) {
 		
 		{ type:_SPACER_ , height: 10 },
 		{ type: _GROUP_, colSpan: "*", items: [
-		 		{type: _OUTPUT_, value: com_zimbra_cert_manager.CERT_SubjectAlt_Note }
+		 		{type: _OUTPUT_, value: org_zmail_cert_manager.CERT_SubjectAlt_Note }
 		 	]
 		 }	
 	];	
@@ -895,7 +895,7 @@ ZaCertWizard.myXFormModifier = function(xFormObject) {
                                          }
                                         }
                                     },
-                                    label: com_zimbra_cert_manager.lb_target_server,
+                                    label: org_zmail_cert_manager.lb_target_server,
                                     choices:ZaCert.TARGET_SERVER_CHOICES}
 							]
 						},
@@ -903,7 +903,7 @@ ZaCertWizard.myXFormModifier = function(xFormObject) {
 						{ type:_GROUP_, id: "CertUpload", 
                             visibilityChecks:["instance[ZaCert.A_type_comm] == true"],
                             colSpan: 2, numCols: 1, colSizes: "*", items : [
-								{ type:_OUTPUT_, value: com_zimbra_cert_manager.CERT_uploadTitle, align: _LEFT_},
+								{ type:_OUTPUT_, value: org_zmail_cert_manager.CERT_uploadTitle, align: _LEFT_},
 								{ type:_OUTPUT_, value: ZaCertWizard.getUploadFormHtml() } ,
 								{ type:_SPACER_ , height: 10 }
 							]
@@ -928,17 +928,17 @@ ZaCertWizard.myXFormModifier = function(xFormObject) {
                      }
                     }
                 },
-                label: com_zimbra_cert_manager.lb_target_server,
+                label: org_zmail_cert_manager.lb_target_server,
                 choices:ZaCert.TARGET_SERVER_CHOICES},
 			{ type:_SPACER_, height: 10},	
 			{type:_OUTPUT_, colSpan: 2, 
                 visibilityChecks:["instance[ZaCert.A_type_self] == true"],
-                value: com_zimbra_cert_manager.CERT_installTitle },
+                value: org_zmail_cert_manager.CERT_installTitle },
 			{ type:_SPACER_ , height: 10 },
 			{type:_TEXTFIELD_, ref: ZaCert.A_validation_days ,			
 				//Validation_days is not required for comm install
 				visibilityChecks:["instance[ZaCert.A_type_self] == true"],
-                label: com_zimbra_cert_manager.CERT_validate_days
+                label: org_zmail_cert_manager.CERT_validate_days
 			}
 		];	
 	
@@ -962,14 +962,14 @@ ZaCertWizard.myXFormModifier = function(xFormObject) {
                                  }
                                 }
                             },
-							label: com_zimbra_cert_manager.lb_target_server,
+							label: org_zmail_cert_manager.lb_target_server,
                             choices:ZaCert.TARGET_SERVER_CHOICES}
 					]
 				},
-				{ type:_OUTPUT_, value: com_zimbra_cert_manager.CSR_download_msg_1 },
+				{ type:_OUTPUT_, value: org_zmail_cert_manager.CSR_download_msg_1 },
 				{ type:_SPACER_ , height: 10 },
-				{ type:_OUTPUT_, value:"<a href='adminres?action=getCSR' onclick='ZaZimbraAdmin.unloadHackCallback();'> "
-										+ com_zimbra_cert_manager.CSR_download_msg_2 + "</a> "},
+				{ type:_OUTPUT_, value:"<a href='adminres?action=getCSR' onclick='ZaZmailAdmin.unloadHackCallback();'> "
+										+ org_zmail_cert_manager.CSR_download_msg_2 + "</a> "},
 				{ type:_SPACER_ , height: 10 }
 			]
 		}		
@@ -996,27 +996,27 @@ ZaCertWizard.myXFormModifier = function(xFormObject) {
                                          }
                                         }
                                     },
-                                    label: com_zimbra_cert_manager.lb_target_server,
+                                    label: org_zmail_cert_manager.lb_target_server,
                                     choices:ZaCert.TARGET_SERVER_CHOICES}
 							]
 						},
-						{ type: _OUTPUT_, value: com_zimbra_cert_manager.CSR_REVIEW, colSpan: 2 },
+						{ type: _OUTPUT_, value: org_zmail_cert_manager.CSR_REVIEW, colSpan: 2 },
 						{ type:_SPACER_, height:10},
 						{ ref: ZaCert.A_commonName, type:_OUTPUT_, width: 150, 
-							label: com_zimbra_cert_manager.CERT_INFO_CN},
+							label: org_zmail_cert_manager.CERT_INFO_CN},
 						{ ref: ZaCert.A_countryName, type:_OUTPUT_, width: 150, 
-							label: com_zimbra_cert_manager.CERT_INFO_C},
+							label: org_zmail_cert_manager.CERT_INFO_C},
 						{ ref: ZaCert.A_state, type:_OUTPUT_, width: 150, 
-							label: com_zimbra_cert_manager.CERT_INFO_ST},
+							label: org_zmail_cert_manager.CERT_INFO_ST},
 						{ ref: ZaCert.A_city, type:_OUTPUT_, width: 150, 
-							label: com_zimbra_cert_manager.CERT_INFO_L},
+							label: org_zmail_cert_manager.CERT_INFO_L},
 						{ ref: ZaCert.A_organization, type:_OUTPUT_, width: 150, 
-							label: com_zimbra_cert_manager.CERT_INFO_O},
+							label: org_zmail_cert_manager.CERT_INFO_O},
 						{ ref: ZaCert.A_organizationUnit, type:_OUTPUT_, width: 150, 
-							label: com_zimbra_cert_manager.CERT_INFO_OU},
+							label: org_zmail_cert_manager.CERT_INFO_OU},
 						{ ref: ZaCert.A_subject_alt, 
 							type:_REPEAT_,
-							label:com_zimbra_cert_manager.CERT_INFO_SubjectAltName,
+							label:org_zmail_cert_manager.CERT_INFO_SubjectAltName,
 							labelLocation:_LEFT_, 
 							labelCssStyle:"vertical-align: top;",
 							align:_LEFT_,
@@ -1036,10 +1036,10 @@ ZaCertWizard.myXFormModifier = function(xFormObject) {
                             visibilityChecks:["!instance[ZaCert.A_csr_exists] "],
                             containerCssStyle: "width:400px;",
 							style: DwtAlert.WARNING, iconVisible: false,
-							content: com_zimbra_cert_manager.CSR_NON_EXISTS_WARNING 
+							content: org_zmail_cert_manager.CSR_NON_EXISTS_WARNING 
 				 		},
 				 		{type:_SPACER_, height:10},
-				 		{type: _OUTPUT_, value: com_zimbra_cert_manager.CSR_NON_EXISTS_MSG }
+				 		{type: _OUTPUT_, value: org_zmail_cert_manager.CSR_NON_EXISTS_MSG }
 			 		]
 				}
 			]

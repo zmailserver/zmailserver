@@ -221,7 +221,7 @@ function(msgId, partId, name, folderId, attribs) {
 
     var json = {
         SaveDocumentRequest: {
-            _jsns: "urn:zimbraMail",
+            _jsns: "urn:zmailMail",
 			doc: {
                 m: {
                     id: msgId,
@@ -255,7 +255,7 @@ function(restoreVerion, callback){
 
     var json = {
 		SaveDocumentRequest: {
-			_jsns: "urn:zimbraMail",
+			_jsns: "urn:zmailMail",
 			doc: {
 				id:	this.id,
                 ver: this.version,
@@ -281,7 +281,7 @@ function(version, callback, batchCmd){
 
     var json = {
 		PurgeRevisionRequest: {
-			_jsns: "urn:zimbraMail",
+			_jsns: "urn:zmailMail",
 			revision: {
 				id:	this.id,
                 ver: version,
@@ -438,7 +438,7 @@ ZmBriefcaseItem.getRevision =
 function(itemId, version, callback, errorCallback, accountName) {
 	var json = {
 		ListDocumentRevisionsRequest: {
-			_jsns: "urn:zimbraMail",
+			_jsns: "urn:zmailMail",
 			doc: {
 				id:	itemId,
                 ver: version,   //verion=-1 for all versions of count
@@ -461,7 +461,7 @@ ZmBriefcaseItem.lock =
 function(itemId, callback, errorCallback, accountName) {
 	var json = {
 		ItemActionRequest: {
-			_jsns: "urn:zimbraMail",
+			_jsns: "urn:zmailMail",
 			action: {
 				id:	itemId instanceof Array ? itemId.join() : itemId,
 				op:	"lock"
@@ -484,7 +484,7 @@ ZmBriefcaseItem.unlock =
 function(itemId, callback, errorCallback, accountName) {
 	var json = {
 		ItemActionRequest: {
-			_jsns: "urn:zimbraMail",
+			_jsns: "urn:zmailMail",
 			action: {
 				id:	itemId instanceof Array ? itemId.join() : itemId,
 				op:	"unlock"

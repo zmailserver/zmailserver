@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <install4j version="4.1.4" transformSequenceNumber="2">
   <directoryPresets config="./build/dist/jetty/common/lib" />
-  <application name="Yahoo! Zimbra Desktop" distributionSourceDir="" applicationId="4062-5711-9195-4050" mediaDir="./install4j" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="6" lzmaCompression="true" pack200Compression="true" excludeSignedFromPacking="true" keepModificationTimes="true" shortName="zdesktop" publisher="Yahoo! Inc" publisherWeb="www.zimbra.com" version="0.90" allPathsRelative="true" backupOnSave="false" autoSave="true" convertDotsToUnderscores="true" macSignature="ZIMD" installerName="Zimbra Desktop Installer" javaMinVersion="1.5" javaMaxVersion="1.6" allowBetaVM="true" jdkMode="runtimeJre" jdkName="">
+  <application name="Yahoo! Zmail Desktop" distributionSourceDir="" applicationId="4062-5711-9195-4050" mediaDir="./install4j" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="6" lzmaCompression="true" pack200Compression="true" excludeSignedFromPacking="true" keepModificationTimes="true" shortName="zdesktop" publisher="Yahoo! Inc" publisherWeb="www.zmail.com" version="0.90" allPathsRelative="true" backupOnSave="false" autoSave="true" convertDotsToUnderscores="true" macSignature="ZIMD" installerName="Zmail Desktop Installer" javaMinVersion="1.5" javaMaxVersion="1.6" allowBetaVM="true" jdkMode="runtimeJre" jdkName="">
     <languages skipLanguageSelection="false">
       <principalLanguage id="en_US" customLocalizationFile="./src/installer/messages/ZiMsg.properties" />
       <additionalLanguages>
@@ -33,9 +33,9 @@
       <variable name="offline_relabel" value="ALPHA" />
       <variable name="offline_version" value="0.1" />
       <variable name="offline_buildid" value="1" />
-      <variable name="offline_ausurl" value="https://www.zimbra.com/aus/zdesktop/update.php" />
+      <variable name="offline_ausurl" value="https://www.zmail.com/aus/zdesktop/update.php" />
       <variable name="offline_update" value="false" />
-      <variable name="offline_ausurl_dev" value="http://devel.zimbra.com/aus/desktop/nightly/update.php" />
+      <variable name="offline_ausurl_dev" value="http://devel.zmail.com/aus/desktop/nightly/update.php" />
     </variables>
   </application>
   <files>
@@ -64,7 +64,7 @@
       <dirEntry mountPoint="66" file="./build/dist/jetty" overwrite="1" shared="false" mode="644" uninstallMode="2" excludeSuffixes="*.zgz" dirMode="755">
         <exclude>
           <entry location="lib/ext" fileType="regular" />
-          <entry location="webapps/zimbra/help/webhelp.jar" fileType="regular" />
+          <entry location="webapps/zmail/help/webhelp.jar" fileType="regular" />
         </exclude>
       </dirEntry>
       <dirEntry mountPoint="239" file="./build/dist/conf" overwrite="1" shared="false" mode="644" uninstallMode="2" excludeSuffixes="" dirMode="755">
@@ -102,8 +102,8 @@
     <components />
   </files>
   <launchers>
-    <launcher name="Yahoo! Zimbra Desktop Service" id="32" external="false" excludeFromMenu="true" menuName="" icnsFile="" pngIcon16File="./src/installer/resources/launcher_16x16.png" pngIcon32File="./src/installer/resources/launcher_32x32.png" macServiceDependencies="" swtApp="false" fileset="">
-      <executable name="zdesktop" type="1" iconSet="false" iconFile="" executableDir="." redirectStderr="true" stderrFile="log/zdesktop.out" redirectStdout="true" stdoutFile="log/zdesktop.out" failOnStderrOutput="true" executableMode="3" changeWorkingDirectory="true" workingDirectory="log" singleInstance="true" serviceStartType="2" serviceDependencies="" serviceDescription="Yahoo! Zimbra Desktop Service" jreLocation="" executionLevel="asInvoker">
+    <launcher name="Yahoo! Zmail Desktop Service" id="32" external="false" excludeFromMenu="true" menuName="" icnsFile="" pngIcon16File="./src/installer/resources/launcher_16x16.png" pngIcon32File="./src/installer/resources/launcher_32x32.png" macServiceDependencies="" swtApp="false" fileset="">
+      <executable name="zdesktop" type="1" iconSet="false" iconFile="" executableDir="." redirectStderr="true" stderrFile="log/zdesktop.out" redirectStdout="true" stdoutFile="log/zdesktop.out" failOnStderrOutput="true" executableMode="3" changeWorkingDirectory="true" workingDirectory="log" singleInstance="true" serviceStartType="2" serviceDependencies="" serviceDescription="Yahoo! Zmail Desktop Service" jreLocation="" executionLevel="asInvoker">
         <versionInfo include="false" fileVersion="" fileDescription="" legalCopyright="" internalName="" />
       </executable>
       <splashScreen show="false" autoOff="true" alwaysOnTop="true" width="0" height="0" bitmapFile="" java6SplashScreen="false">
@@ -112,7 +112,7 @@
           <versionLine x="20" y="40" text="version ${compiler:sys.version}" font="Arial" fontSize="8" fontColor="0,0,0" fontWeight="500" />
         </text>
       </splashScreen>
-      <java mainClass="com.zimbra.cs.offline.start.Main" vmParameters="-server -Djava.awt.headless=true -Xms24m -Xmx100m -Xss180k -XX:+AggressiveOpts -XX:MinHeapFreeRatio=20 -XX:MaxHeapFreeRatio=40 -XX:NewRatio=3 -XX:TargetSurvivorRatio=80 -Dsun.net.inetaddr.ttl=30 -DSTART=&quot;${launcher:sys.launcherDirectory}jetty/etc/start.config&quot; -Dzimbra.config=&quot;${launcher:sys.launcherDirectory}conf/localconfig.xml&quot; -Djava.library.path=&quot;${launcher:sys.launcherDirectory}lib&quot; -Djetty.home=&quot;${launcher:sys.launcherDirectory}jetty&quot; -Djava.awt.headless=true" arguments="org.mortbay.start.Main" allowVMPassthroughParameters="false" preferredVM="">
+      <java mainClass="org.zmail.cs.offline.start.Main" vmParameters="-server -Djava.awt.headless=true -Xms24m -Xmx100m -Xss180k -XX:+AggressiveOpts -XX:MinHeapFreeRatio=20 -XX:MaxHeapFreeRatio=40 -XX:NewRatio=3 -XX:TargetSurvivorRatio=80 -Dsun.net.inetaddr.ttl=30 -DSTART=&quot;${launcher:sys.launcherDirectory}jetty/etc/start.config&quot; -Dzmail.config=&quot;${launcher:sys.launcherDirectory}conf/localconfig.xml&quot; -Djava.library.path=&quot;${launcher:sys.launcherDirectory}lib&quot; -Djetty.home=&quot;${launcher:sys.launcherDirectory}jetty&quot; -Djava.awt.headless=true" arguments="org.mortbay.start.Main" allowVMPassthroughParameters="false" preferredVM="">
         <classPath>
           <archive location="lib/zdesktop.jar" failOnError="false" />
           <archive location="jetty/start.jar" failOnError="false" />
@@ -140,9 +140,9 @@
       <archive location="./build/dist/jetty/common/lib/commons-pool-1.1.jar" />
       <archive location="./build/dist/jetty/common/lib/json.jar" />
       <archive location="./build/dist/jetty/common/lib/javamail-1.4.3.jar" />
-      <archive location="./build/dist/jetty/common/lib/zimbracommon.jar" />
-      <archive location="./build/dist/jetty/webapps/service/WEB-INF/lib/zimbrastore.jar" />
-      <archive location="./build/dist/jetty/webapps/service/WEB-INF/lib/zimbraoffline.jar" />
+      <archive location="./build/dist/jetty/common/lib/zmailcommon.jar" />
+      <archive location="./build/dist/jetty/webapps/service/WEB-INF/lib/zmailstore.jar" />
+      <archive location="./build/dist/jetty/webapps/service/WEB-INF/lib/zmailoffline.jar" />
     </customCode>
     <applications>
       <application name="" id="installer" beanClass="com.install4j.runtime.beans.applications.InstallerApplication" enabled="true" commentSet="false" comment="" customIcnsFile="./src/installer/resources/launcher_128x128.icns" customIcoFile="">
@@ -327,7 +327,7 @@ if (installed) {
             } else if (noPrevVer &amp;&amp; name.getNodeValue().equals("zdesktop_buildid")) {
                 build = ((Element)nodeList.item(i)).getElementsByTagName("value").item(0)
                     .getChildNodes().item(0).getNodeValue();
-            } else if (name.getNodeValue().equals("zimbra_admin_service_port")) {
+            } else if (name.getNodeValue().equals("zmail_admin_service_port")) {
                 servicePort = ((Element)nodeList.item(i)).getElementsByTagName("value").item(0)
                     .getChildNodes().item(0).getNodeValue();
             }
@@ -806,7 +806,7 @@ try {
                             <string>stop</string>
                           </void>
                           <void index="1">
-                            <string>"Zimbra Desktop Service"</string>
+                            <string>"Zmail Desktop Service"</string>
                           </void>
                         </array>
                       </void>
@@ -1006,30 +1006,30 @@ try {
                       <void property="script">
                         <object class="com.install4j.api.beans.ScriptProperty">
                           <void property="value">
-                            <string>System.setProperty("zimbra.config", context.getDestinationFile("conf/localconfig.xml").getAbsolutePath());
+                            <string>System.setProperty("zmail.config", context.getDestinationFile("conf/localconfig.xml").getAbsolutePath());
 
 String errorMsg = null;
 
 try {
     Thread.sleep(2000);
-    new com.zimbra.cs.db.DbOfflineMigration().testRun();
+    new org.zmail.cs.db.DbOfflineMigration().testRun();
     return true;
-} catch (com.zimbra.cs.db.DbExclusiveAccessException x) {
+} catch (org.zmail.cs.db.DbExclusiveAccessException x) {
     Thread.sleep(5000);
     try {
-        new com.zimbra.cs.db.DbOfflineMigration().testRun();
+        new org.zmail.cs.db.DbOfflineMigration().testRun();
         return true;
-    } catch (com.zimbra.cs.db.DbExclusiveAccessException e) {
+    } catch (org.zmail.cs.db.DbExclusiveAccessException e) {
         Util.showMessage(context.getMessage("installer.ErrPrevSvcRunning"), javax.swing.JOptionPane.WARNING_MESSAGE);
         return false;
     }
-} catch (com.zimbra.cs.db.DbNotFoundException x) {
+} catch (org.zmail.cs.db.DbNotFoundException x) {
     errorMsg = context.getMessage("installer.ErrDatasetMissing");
-} catch (com.zimbra.cs.db.DbDataCorruptedException x) {
+} catch (org.zmail.cs.db.DbDataCorruptedException x) {
     errorMsg = context.getMessage("installer.ErrDatasetCorrupted");
-} catch (com.zimbra.cs.db.DbUnsupportedVersionException x) {
+} catch (org.zmail.cs.db.DbUnsupportedVersionException x) {
     errorMsg = context.getMessage("installer.ErrDatasetTooOld");
-} catch (com.zimbra.cs.db.DbUpdateException x) {
+} catch (org.zmail.cs.db.DbUpdateException x) {
     errorMsg = context.getMessage("installer.ErrDatasetIncompat");
 } catch (Exception x) {
     errorMsg = context.getMessage("installer.ErrDatasetUnreusable");
@@ -1063,7 +1063,7 @@ default:
                             <string>remove</string>
                           </void>
                           <void index="1">
-                            <string>com.zimbra.zdesktop</string>
+                            <string>org.zmail.zdesktop</string>
                           </void>
                         </array>
                       </void>
@@ -1274,7 +1274,7 @@ return true;</string>
                     <object class="com.install4j.runtime.beans.actions.files.CreateSymlinkAction">
                       <void property="file">
                         <object class="java.io.File">
-                          <string>${installer:sys.installationDir}/Zimbra Desktop Uninstaller.app/Contents/MacOS/JavaApplicationStub</string>
+                          <string>${installer:sys.installationDir}/Zmail Desktop Uninstaller.app/Contents/MacOS/JavaApplicationStub</string>
                         </object>
                       </void>
                       <void property="linkFile">
@@ -1410,29 +1410,29 @@ return true;</string>
                       <void property="script">
                         <object class="com.install4j.api.beans.ScriptProperty">
                           <void property="value">
-                            <string>System.setProperty("zimbra.config", context.getDestinationFile("conf/localconfig.xml").getAbsolutePath());
+                            <string>System.setProperty("zmail.config", context.getDestinationFile("conf/localconfig.xml").getAbsolutePath());
 
 String errorMsg = null;
 
 try {
-    new com.zimbra.cs.db.DbOfflineMigration().run();
+    new org.zmail.cs.db.DbOfflineMigration().run();
     return true;
-} catch (com.zimbra.cs.db.DbExclusiveAccessException x) {
+} catch (org.zmail.cs.db.DbExclusiveAccessException x) {
     Thread.sleep(5000);
     try {
-        new com.zimbra.cs.db.DbOfflineMigration().testRun();
+        new org.zmail.cs.db.DbOfflineMigration().testRun();
         return true;
-    } catch (com.zimbra.cs.db.DbExclusiveAccessException e) {
+    } catch (org.zmail.cs.db.DbExclusiveAccessException e) {
         Util.showMessage(context.getMessage("installer.ErrPrevSvcRunning"), javax.swing.JOptionPane.WARNING_MESSAGE);
         return false;
     }
-} catch (com.zimbra.cs.db.DbNotFoundException x) {
+} catch (org.zmail.cs.db.DbNotFoundException x) {
     errorMsg = context.getMessage("installer.ErrDatasetMissing");
-} catch (com.zimbra.cs.db.DbDataCorruptedException x) {
+} catch (org.zmail.cs.db.DbDataCorruptedException x) {
     errorMsg = context.getMessage("installer.ErrDatasetCorrupted");
-} catch (com.zimbra.cs.db.DbUnsupportedVersionException x) {
+} catch (org.zmail.cs.db.DbUnsupportedVersionException x) {
     errorMsg = context.getMessage("installer.ErrDatasetTooOld");
-} catch (com.zimbra.cs.db.DbUpdateException x) {
+} catch (org.zmail.cs.db.DbUpdateException x) {
     errorMsg = context.getMessage("installer.ErrDatasetIncompat");
 } catch (Exception x) {
     errorMsg = context.getMessage("installer.ErrDatasetUnreusable");
@@ -1666,7 +1666,7 @@ default:
                     <object class="com.install4j.runtime.beans.actions.files.DeleteFileAction">
                       <void property="file">
                         <object class="java.io.File">
-                          <string>Zimbra Desktop Uninstaller.app</string>
+                          <string>Zmail Desktop Uninstaller.app</string>
                         </object>
                       </void>
                       <void property="recurse">
@@ -1703,7 +1703,7 @@ default:
                       </void>
                       <void property="file">
                         <object class="java.io.File">
-                          <string>/Applications/Zimbra Desktop.app</string>
+                          <string>/Applications/Zmail Desktop.app</string>
                         </object>
                       </void>
                       <void property="recurse">
@@ -1723,7 +1723,7 @@ default:
                       </void>
                       <void property="file">
                         <object class="java.io.File">
-                          <string>/Applications/Yahoo! Zimbra Desktop.app</string>
+                          <string>/Applications/Yahoo! Zmail Desktop.app</string>
                         </object>
                       </void>
                       <void property="recurse">
@@ -1743,7 +1743,7 @@ default:
                       </void>
                       <void property="file">
                         <object class="java.io.File">
-                          <string>${installer:userHome}/Desktop/Zimbra Desktop.app</string>
+                          <string>${installer:userHome}/Desktop/Zmail Desktop.app</string>
                         </object>
                       </void>
                       <void property="recurse">
@@ -1763,7 +1763,7 @@ default:
                       </void>
                       <void property="file">
                         <object class="java.io.File">
-                          <string>${installer:userHome}/Desktop/Yahoo! Zimbra Desktop.app</string>
+                          <string>${installer:userHome}/Desktop/Yahoo! Zmail Desktop.app</string>
                         </object>
                       </void>
                       <void property="recurse">
@@ -1806,7 +1806,7 @@ if (m.find()) {
 }
 return true;</validation>
             <preActivation>if (Util.isWindows()) {
-    String subdir = Util.isWindowsVista() ? "\\AppData\\Local\\Zimbra\\zdesktop" : "\\Local Settings\\Application Data\\Zimbra\\zdesktop";
+    String subdir = Util.isWindowsVista() ? "\\AppData\\Local\\Zmail\\zdesktop" : "\\Local Settings\\Application Data\\Zmail\\zdesktop";
     context.setInstallationDirectory(new File(context.getVariable("sys.userHome") + subdir));
 }</preActivation>
             <postActivation />
@@ -2058,7 +2058,7 @@ return utf8 ? instDir : new String(instDir.getBytes("UTF-8"));
                         <string>${installer:sys.installationDir}</string>
                       </void>
                       <void property="searchValue">
-                        <string>/opt/zimbra/zdesktop</string>
+                        <string>/opt/zmail/zdesktop</string>
                       </void>
                     </object>
                   </java>
@@ -2092,7 +2092,7 @@ return utf8 ? instDir : new String(instDir.getBytes("UTF-8"));
                       <void property="script">
                         <object class="com.install4j.api.beans.ScriptProperty">
                           <void property="value">
-                            <string>System.setProperty("zimbra.config", context.getDestinationFile("conf/localconfig.xml").getAbsolutePath());
+                            <string>System.setProperty("zmail.config", context.getDestinationFile("conf/localconfig.xml").getAbsolutePath());
 
 try {
     File f = context.getDestinationFile("db" + File.separator + "derbyij.sql");
@@ -2325,13 +2325,13 @@ return true;</string>
                     </serializedBean>
                     <condition />
                   </action>
-                  <action name="zimbra web.xml" id="289594" beanClass="com.install4j.runtime.beans.actions.text.ModifyTextFileAction" enabled="true" commentSet="false" comment="" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
+                  <action name="zmail web.xml" id="289594" beanClass="com.install4j.runtime.beans.actions.text.ModifyTextFileAction" enabled="true" commentSet="false" comment="" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
                     <serializedBean>
                       <java class="java.beans.XMLDecoder">
                         <object class="com.install4j.runtime.beans.actions.text.ModifyTextFileAction">
                           <void property="file">
                             <object class="java.io.File">
-                              <string>jetty/webapps/zimbra/WEB-INF/web.xml</string>
+                              <string>jetty/webapps/zmail/WEB-INF/web.xml</string>
                             </object>
                           </void>
                           <void property="replaceValue">
@@ -2417,12 +2417,12 @@ File prism = context.getDestinationFile("win32/prism/zdclient.exe");
 String iconFile = Util.isWindowsVista() ? "win32/launcher_48x48.ico" : "win32/launcher_32x32.ico";
 File icon = context.getDestinationFile(iconFile);
 
-File desktop = new File(WinFileSystem.getSpecialFolder(SpecialFolder.DESKTOP, false), "Yahoo! Zimbra Desktop.lnk");
-File startmenu = new File(WinFileSystem.getSpecialFolder(SpecialFolder.STARTMENU, false), "Yahoo! Zimbra Desktop.lnk");
+File desktop = new File(WinFileSystem.getSpecialFolder(SpecialFolder.DESKTOP, false), "Yahoo! Zmail Desktop.lnk");
+File startmenu = new File(WinFileSystem.getSpecialFolder(SpecialFolder.STARTMENU, false), "Yahoo! Zmail Desktop.lnk");
 
-WinFileSystem.createShellLink(startmenu, prism, icon, "", "Yahoo! Zimbra Desktop");
+WinFileSystem.createShellLink(startmenu, prism, icon, "", "Yahoo! Zmail Desktop");
 if (context.getBooleanVariable("createDesktopLinkAction"))
-  WinFileSystem.createShellLink(desktop, prism, icon, "", "Yahoo! Zimbra Desktop");
+  WinFileSystem.createShellLink(desktop, prism, icon, "", "Yahoo! Zmail Desktop");
 
 // migrate old mailto registery entry that still refers to prism.exe
 String mailtoCmd = (String)WinRegistry.getValue(RegistryRoot.HKEY_CLASSES_ROOT, "mailto\\shell\\open\\command", "");
@@ -2502,7 +2502,7 @@ return true;</string>
                             <object class="com.install4j.runtime.beans.actions.text.ModifyTextFileAction">
                               <void property="file">
                                 <object class="java.io.File">
-                                  <string>macos/Yahoo! Zimbra Desktop.app/Contents/Resources/application.ini</string>
+                                  <string>macos/Yahoo! Zmail Desktop.app/Contents/Resources/application.ini</string>
                                 </object>
                               </void>
                               <void property="replaceValue">
@@ -2522,7 +2522,7 @@ return true;</string>
                             <object class="com.install4j.runtime.beans.actions.files.SetModeAction">
                               <void property="file">
                                 <object class="java.io.File">
-                                  <string>macos/Yahoo! Zimbra Desktop.app/Contents/MacOS/prism</string>
+                                  <string>macos/Yahoo! Zmail Desktop.app/Contents/MacOS/prism</string>
                                 </object>
                               </void>
                               <void property="mode">
@@ -2556,7 +2556,7 @@ return true;</string>
                             <object class="com.install4j.runtime.beans.actions.files.CopyFileAction">
                               <void property="destinationFile">
                                 <object class="java.io.File">
-                                  <string>${installer:sys.userHome}/Desktop/Yahoo! Zimbra Desktop.app/Contents/Info.plist</string>
+                                  <string>${installer:sys.userHome}/Desktop/Yahoo! Zmail Desktop.app/Contents/Info.plist</string>
                                 </object>
                               </void>
                               <void property="overwriteMode">
@@ -2564,7 +2564,7 @@ return true;</string>
                               </void>
                               <void property="sourceFile">
                                 <object class="java.io.File">
-                                  <string>macos/Yahoo! Zimbra Desktop.app/Contents/Info.plist</string>
+                                  <string>macos/Yahoo! Zmail Desktop.app/Contents/Info.plist</string>
                                 </object>
                               </void>
                               <void property="uninstallMode">
@@ -2581,7 +2581,7 @@ return true;</string>
                             <object class="com.install4j.runtime.beans.actions.files.CopyFileAction">
                               <void property="destinationFile">
                                 <object class="java.io.File">
-                                  <string>${installer:sys.userHome}/Desktop/Yahoo! Zimbra Desktop.app/Contents/Resources/launcher_128x128.icns</string>
+                                  <string>${installer:sys.userHome}/Desktop/Yahoo! Zmail Desktop.app/Contents/Resources/launcher_128x128.icns</string>
                                 </object>
                               </void>
                               <void property="overwriteMode">
@@ -2589,7 +2589,7 @@ return true;</string>
                               </void>
                               <void property="sourceFile">
                                 <object class="java.io.File">
-                                  <string>macos/Yahoo! Zimbra Desktop.app/Contents/Resources/launcher_128x128.icns</string>
+                                  <string>macos/Yahoo! Zmail Desktop.app/Contents/Resources/launcher_128x128.icns</string>
                                 </object>
                               </void>
                               <void property="uninstallMode">
@@ -2606,7 +2606,7 @@ return true;</string>
                             <object class="com.install4j.runtime.beans.actions.files.CopyFileAction">
                               <void property="destinationFile">
                                 <object class="java.io.File">
-                                  <string>${installer:sys.userHome}/Desktop/Yahoo! Zimbra Desktop.app/Contents/MacOS/prism</string>
+                                  <string>${installer:sys.userHome}/Desktop/Yahoo! Zmail Desktop.app/Contents/MacOS/prism</string>
                                 </object>
                               </void>
                               <void property="mode">
@@ -2617,7 +2617,7 @@ return true;</string>
                               </void>
                               <void property="sourceFile">
                                 <object class="java.io.File">
-                                  <string>macos/Yahoo! Zimbra Desktop.app/Contents/MacOS/prism</string>
+                                  <string>macos/Yahoo! Zmail Desktop.app/Contents/MacOS/prism</string>
                                 </object>
                               </void>
                               <void property="uninstallMode">
@@ -2634,7 +2634,7 @@ return true;</string>
                             <object class="com.install4j.runtime.beans.actions.files.CopyFileAction">
                               <void property="destinationFile">
                                 <object class="java.io.File">
-                                  <string>${installer:sys.userHome}/Desktop/Yahoo! Zimbra Desktop.app/Contents/Resources/application.ini</string>
+                                  <string>${installer:sys.userHome}/Desktop/Yahoo! Zmail Desktop.app/Contents/Resources/application.ini</string>
                                 </object>
                               </void>
                               <void property="overwriteMode">
@@ -2642,7 +2642,7 @@ return true;</string>
                               </void>
                               <void property="sourceFile">
                                 <object class="java.io.File">
-                                  <string>macos/Yahoo! Zimbra Desktop.app/Contents/Resources/application.ini</string>
+                                  <string>macos/Yahoo! Zmail Desktop.app/Contents/Resources/application.ini</string>
                                 </object>
                               </void>
                               <void property="uninstallMode">
@@ -2659,7 +2659,7 @@ return true;</string>
                             <object class="com.install4j.runtime.beans.actions.files.CopyFileAction">
                               <void property="destinationFile">
                                 <object class="java.io.File">
-                                  <string>${installer:sys.userHome}/Desktop/Yahoo! Zimbra Desktop.app/Contents/Resources/branding/brand.dtd</string>
+                                  <string>${installer:sys.userHome}/Desktop/Yahoo! Zmail Desktop.app/Contents/Resources/branding/brand.dtd</string>
                                 </object>
                               </void>
                               <void property="overwriteMode">
@@ -2667,7 +2667,7 @@ return true;</string>
                               </void>
                               <void property="sourceFile">
                                 <object class="java.io.File">
-                                  <string>macos/Yahoo! Zimbra Desktop.app/Contents/Resources/branding/brand.dtd</string>
+                                  <string>macos/Yahoo! Zmail Desktop.app/Contents/Resources/branding/brand.dtd</string>
                                 </object>
                               </void>
                               <void property="uninstallMode">
@@ -2684,7 +2684,7 @@ return true;</string>
                             <object class="com.install4j.runtime.beans.actions.files.CopyFileAction">
                               <void property="destinationFile">
                                 <object class="java.io.File">
-                                  <string>${installer:sys.userHome}/Desktop/Yahoo! Zimbra Desktop.app/Contents/Resources/branding/brand.properties</string>
+                                  <string>${installer:sys.userHome}/Desktop/Yahoo! Zmail Desktop.app/Contents/Resources/branding/brand.properties</string>
                                 </object>
                               </void>
                               <void property="overwriteMode">
@@ -2692,7 +2692,7 @@ return true;</string>
                               </void>
                               <void property="sourceFile">
                                 <object class="java.io.File">
-                                  <string>macos/Yahoo! Zimbra Desktop.app/Contents/Resources/branding/brand.properties</string>
+                                  <string>macos/Yahoo! Zmail Desktop.app/Contents/Resources/branding/brand.properties</string>
                                 </object>
                               </void>
                               <void property="uninstallMode">
@@ -2709,7 +2709,7 @@ return true;</string>
                             <object class="com.install4j.runtime.beans.actions.files.CopyFileAction">
                               <void property="destinationFile">
                                 <object class="java.io.File">
-                                  <string>${installer:sys.userHome}/Desktop/Yahoo! Zimbra Desktop.app/Contents/Resources/chrome/chrome.manifest</string>
+                                  <string>${installer:sys.userHome}/Desktop/Yahoo! Zmail Desktop.app/Contents/Resources/chrome/chrome.manifest</string>
                                 </object>
                               </void>
                               <void property="overwriteMode">
@@ -2717,7 +2717,7 @@ return true;</string>
                               </void>
                               <void property="sourceFile">
                                 <object class="java.io.File">
-                                  <string>macos/Yahoo! Zimbra Desktop.app/Contents/Resources/chrome/chrome.manifest</string>
+                                  <string>macos/Yahoo! Zmail Desktop.app/Contents/Resources/chrome/chrome.manifest</string>
                                 </object>
                               </void>
                               <void property="uninstallMode">
@@ -2734,7 +2734,7 @@ return true;</string>
                             <object class="com.install4j.runtime.beans.actions.files.SetModeAction">
                               <void property="file">
                                 <object class="java.io.File">
-                                  <string>${installer:sys.userHome}/Desktop/Yahoo! Zimbra Desktop.app</string>
+                                  <string>${installer:sys.userHome}/Desktop/Yahoo! Zmail Desktop.app</string>
                                 </object>
                               </void>
                               <void property="mode">
@@ -2771,7 +2771,7 @@ return true;</string>
                             <object class="com.install4j.runtime.beans.actions.files.CopyFileAction">
                               <void property="destinationFile">
                                 <object class="java.io.File">
-                                  <string>/Applications/Yahoo! Zimbra Desktop.app/Contents/Info.plist</string>
+                                  <string>/Applications/Yahoo! Zmail Desktop.app/Contents/Info.plist</string>
                                 </object>
                               </void>
                               <void property="overwriteMode">
@@ -2779,7 +2779,7 @@ return true;</string>
                               </void>
                               <void property="sourceFile">
                                 <object class="java.io.File">
-                                  <string>macos/Yahoo! Zimbra Desktop.app/Contents/Info.plist</string>
+                                  <string>macos/Yahoo! Zmail Desktop.app/Contents/Info.plist</string>
                                 </object>
                               </void>
                               <void property="uninstallMode">
@@ -2796,7 +2796,7 @@ return true;</string>
                             <object class="com.install4j.runtime.beans.actions.files.CopyFileAction">
                               <void property="destinationFile">
                                 <object class="java.io.File">
-                                  <string>/Applications/Yahoo! Zimbra Desktop.app/Contents/Resources/launcher_128x128.icns</string>
+                                  <string>/Applications/Yahoo! Zmail Desktop.app/Contents/Resources/launcher_128x128.icns</string>
                                 </object>
                               </void>
                               <void property="overwriteMode">
@@ -2804,7 +2804,7 @@ return true;</string>
                               </void>
                               <void property="sourceFile">
                                 <object class="java.io.File">
-                                  <string>macos/Yahoo! Zimbra Desktop.app/Contents/Resources/launcher_128x128.icns</string>
+                                  <string>macos/Yahoo! Zmail Desktop.app/Contents/Resources/launcher_128x128.icns</string>
                                 </object>
                               </void>
                               <void property="uninstallMode">
@@ -2821,7 +2821,7 @@ return true;</string>
                             <object class="com.install4j.runtime.beans.actions.files.CopyFileAction">
                               <void property="destinationFile">
                                 <object class="java.io.File">
-                                  <string>/Applications/Yahoo! Zimbra Desktop.app/Contents/MacOS/prism</string>
+                                  <string>/Applications/Yahoo! Zmail Desktop.app/Contents/MacOS/prism</string>
                                 </object>
                               </void>
                               <void property="mode">
@@ -2832,7 +2832,7 @@ return true;</string>
                               </void>
                               <void property="sourceFile">
                                 <object class="java.io.File">
-                                  <string>macos/Yahoo! Zimbra Desktop.app/Contents/MacOS/prism</string>
+                                  <string>macos/Yahoo! Zmail Desktop.app/Contents/MacOS/prism</string>
                                 </object>
                               </void>
                               <void property="uninstallMode">
@@ -2849,7 +2849,7 @@ return true;</string>
                             <object class="com.install4j.runtime.beans.actions.files.CopyFileAction">
                               <void property="destinationFile">
                                 <object class="java.io.File">
-                                  <string>/Applications/Yahoo! Zimbra Desktop.app/Contents/Resources/application.ini</string>
+                                  <string>/Applications/Yahoo! Zmail Desktop.app/Contents/Resources/application.ini</string>
                                 </object>
                               </void>
                               <void property="overwriteMode">
@@ -2857,7 +2857,7 @@ return true;</string>
                               </void>
                               <void property="sourceFile">
                                 <object class="java.io.File">
-                                  <string>macos/Yahoo! Zimbra Desktop.app/Contents/Resources/application.ini</string>
+                                  <string>macos/Yahoo! Zmail Desktop.app/Contents/Resources/application.ini</string>
                                 </object>
                               </void>
                               <void property="uninstallMode">
@@ -2874,7 +2874,7 @@ return true;</string>
                             <object class="com.install4j.runtime.beans.actions.files.CopyFileAction">
                               <void property="destinationFile">
                                 <object class="java.io.File">
-                                  <string>/Applications/Yahoo! Zimbra Desktop.app/Contents/Resources/branding/brand.dtd</string>
+                                  <string>/Applications/Yahoo! Zmail Desktop.app/Contents/Resources/branding/brand.dtd</string>
                                 </object>
                               </void>
                               <void property="overwriteMode">
@@ -2882,7 +2882,7 @@ return true;</string>
                               </void>
                               <void property="sourceFile">
                                 <object class="java.io.File">
-                                  <string>macos/Yahoo! Zimbra Desktop.app/Contents/Resources/branding/brand.dtd</string>
+                                  <string>macos/Yahoo! Zmail Desktop.app/Contents/Resources/branding/brand.dtd</string>
                                 </object>
                               </void>
                               <void property="uninstallMode">
@@ -2899,7 +2899,7 @@ return true;</string>
                             <object class="com.install4j.runtime.beans.actions.files.CopyFileAction">
                               <void property="destinationFile">
                                 <object class="java.io.File">
-                                  <string>/Applications/Yahoo! Zimbra Desktop.app/Contents/Resources/branding/brand.properties</string>
+                                  <string>/Applications/Yahoo! Zmail Desktop.app/Contents/Resources/branding/brand.properties</string>
                                 </object>
                               </void>
                               <void property="overwriteMode">
@@ -2907,7 +2907,7 @@ return true;</string>
                               </void>
                               <void property="sourceFile">
                                 <object class="java.io.File">
-                                  <string>macos/Yahoo! Zimbra Desktop.app/Contents/Resources/branding/brand.properties</string>
+                                  <string>macos/Yahoo! Zmail Desktop.app/Contents/Resources/branding/brand.properties</string>
                                 </object>
                               </void>
                               <void property="uninstallMode">
@@ -2924,7 +2924,7 @@ return true;</string>
                             <object class="com.install4j.runtime.beans.actions.files.CopyFileAction">
                               <void property="destinationFile">
                                 <object class="java.io.File">
-                                  <string>/Applications/Yahoo! Zimbra Desktop.app/Contents/Resources/chrome/chrome.manifest</string>
+                                  <string>/Applications/Yahoo! Zmail Desktop.app/Contents/Resources/chrome/chrome.manifest</string>
                                 </object>
                               </void>
                               <void property="overwriteMode">
@@ -2932,7 +2932,7 @@ return true;</string>
                               </void>
                               <void property="sourceFile">
                                 <object class="java.io.File">
-                                  <string>macos/Yahoo! Zimbra Desktop.app/Contents/Resources/chrome/chrome.manifest</string>
+                                  <string>macos/Yahoo! Zmail Desktop.app/Contents/Resources/chrome/chrome.manifest</string>
                                 </object>
                               </void>
                               <void property="uninstallMode">
@@ -2949,7 +2949,7 @@ return true;</string>
                             <object class="com.install4j.runtime.beans.actions.files.SetModeAction">
                               <void property="file">
                                 <object class="java.io.File">
-                                  <string>/Applications/Yahoo! Zimbra Desktop.app</string>
+                                  <string>/Applications/Yahoo! Zmail Desktop.app</string>
                                 </object>
                               </void>
                               <void property="mode">
@@ -3161,7 +3161,7 @@ return true;</string>
                     <object class="com.install4j.runtime.beans.actions.files.MoveFileAction">
                       <void property="destinationFile">
                         <object class="java.io.File">
-                          <string>${installer:sys.userHome}/Library/LaunchAgents/com.zimbra.zdesktop.plist</string>
+                          <string>${installer:sys.userHome}/Library/LaunchAgents/org.zmail.zdesktop.plist</string>
                         </object>
                       </void>
                       <void property="overwriteMode">
@@ -3207,7 +3207,7 @@ return true;</string>
                             <string>load</string>
                           </void>
                           <void index="1">
-                            <string>${installer:sys.userHome}/Library/LaunchAgents/com.zimbra.zdesktop.plist</string>
+                            <string>${installer:sys.userHome}/Library/LaunchAgents/org.zmail.zdesktop.plist</string>
                           </void>
                         </array>
                       </void>
@@ -3239,7 +3239,7 @@ return true;</string>
                             <string>start</string>
                           </void>
                           <void index="1">
-                            <string>com.zimbra.zdesktop</string>
+                            <string>org.zmail.zdesktop</string>
                           </void>
                         </array>
                       </void>
@@ -3284,7 +3284,7 @@ return true;</string>
                         <boolean>false</boolean>
                       </void>
                       <void property="keyName">
-                        <string>SYSTEM\CurrentControlSet\Services\Yahoo! Zimbra Desktop Service</string>
+                        <string>SYSTEM\CurrentControlSet\Services\Yahoo! Zmail Desktop Service</string>
                       </void>
                       <void property="registryRoot">
                         <object class="com.install4j.api.windows.RegistryRoot" field="HKEY_LOCAL_MACHINE" />
@@ -3353,7 +3353,7 @@ return instDir.indexOf(" ") &gt;= 0;
                       <void property="script">
                         <object class="com.install4j.api.beans.ScriptProperty">
                           <void property="value">
-                            <string>System.setProperty("zimbra.config", context.getDestinationFile("conf/localconfig.xml").getAbsolutePath());
+                            <string>System.setProperty("zmail.config", context.getDestinationFile("conf/localconfig.xml").getAbsolutePath());
 
 org.apache.log4j.Logger.getRootLogger().setLevel(org.apache.log4j.Level.OFF);
 
@@ -3392,10 +3392,10 @@ File[] zimlets = zimletsDir.listFiles(fnf);
 boolean hasFailures = false;
 for (int i = 0; i &lt; zimlets.length; ++i) {
     try {
-        com.zimbra.cs.zimlet.ZimletUtil.deployZimletBySoap(zimlets[i].getAbsolutePath(),
+        org.zmail.cs.zimlet.ZimletUtil.deployZimletBySoap(zimlets[i].getAbsolutePath(),
             "http://127.0.0.1:" + port + "/service/admin/soap/", 
             "http://127.0.0.1:" + port + "/service/upload?fmt=raw",
-            "zimbra", (String)context.getVariable("instanceId"));
+            "zmail", (String)context.getVariable("instanceId"));
         zimlets[i].delete();
     } catch (Exception x) {
         hasFailures = true;
@@ -3553,7 +3553,7 @@ return true;</string>
                         <object class="com.install4j.runtime.beans.actions.files.CopyFileAction">
                           <void property="destinationFile">
                             <object class="java.io.File">
-                              <string>${installer:sys.userHome}/Desktop/Yahoo! Zimbra Desktop.app/Contents/Resources/update.params</string>
+                              <string>${installer:sys.userHome}/Desktop/Yahoo! Zmail Desktop.app/Contents/Resources/update.params</string>
                             </object>
                           </void>
                           <void property="overwriteMode">
@@ -3578,7 +3578,7 @@ return true;</string>
                         <object class="com.install4j.runtime.beans.actions.files.CopyFileAction">
                           <void property="destinationFile">
                             <object class="java.io.File">
-                              <string>/Applications/Yahoo! Zimbra Desktop.app/Contents/Resources/update.params</string>
+                              <string>/Applications/Yahoo! Zmail Desktop.app/Contents/Resources/update.params</string>
                             </object>
                           </void>
                           <void property="overwriteMode">
@@ -3603,7 +3603,7 @@ return true;</string>
                         <object class="com.install4j.runtime.beans.actions.files.CopyFileAction">
                           <void property="destinationFile">
                             <object class="java.io.File">
-                              <string>${installer:sys.installationDir}/macos/Yahoo! Zimbra Desktop.app/Contents/Resources/update.params</string>
+                              <string>${installer:sys.installationDir}/macos/Yahoo! Zmail Desktop.app/Contents/Resources/update.params</string>
                             </object>
                           </void>
                           <void property="overwriteMode">
@@ -3991,7 +3991,7 @@ return true;</string>
                           </void>
                           <void property="executable">
                             <object class="java.io.File">
-                              <string>macos/Yahoo! Zimbra Desktop.app/Contents/MacOS/prism</string>
+                              <string>macos/Yahoo! Zmail Desktop.app/Contents/MacOS/prism</string>
                             </object>
                           </void>
                           <void property="logArguments">
@@ -4397,7 +4397,7 @@ return true;</string>
                           </void>
                           <void property="executable">
                             <object class="java.io.File">
-                              <string>macos/Yahoo! Zimbra Desktop.app/Contents/MacOS/prism</string>
+                              <string>macos/Yahoo! Zmail Desktop.app/Contents/MacOS/prism</string>
                             </object>
                           </void>
                           <void property="logArguments">
@@ -4905,7 +4905,7 @@ try {
                             <string>remove</string>
                           </void>
                           <void index="1">
-                            <string>com.zimbra.zdesktop</string>
+                            <string>org.zmail.zdesktop</string>
                           </void>
                         </array>
                       </void>
@@ -5163,8 +5163,8 @@ return true;</string>
                       <void property="script">
                         <object class="com.install4j.api.beans.ScriptProperty">
                           <void property="value">
-                            <string>File desktop = new File(WinFileSystem.getSpecialFolder(SpecialFolder.DESKTOP, false), "Yahoo! Zimbra Desktop.lnk");
-File startmenu = new File(WinFileSystem.getSpecialFolder(SpecialFolder.STARTMENU, false), "Yahoo! Zimbra Desktop.lnk");
+                            <string>File desktop = new File(WinFileSystem.getSpecialFolder(SpecialFolder.DESKTOP, false), "Yahoo! Zmail Desktop.lnk");
+File startmenu = new File(WinFileSystem.getSpecialFolder(SpecialFolder.STARTMENU, false), "Yahoo! Zmail Desktop.lnk");
 
 if (desktop.exists())
     desktop.delete();
@@ -5190,7 +5190,7 @@ return true;</string>
                       </void>
                       <void property="file">
                         <object class="java.io.File">
-                          <string>/Applications/Yahoo! Zimbra Desktop.app</string>
+                          <string>/Applications/Yahoo! Zmail Desktop.app</string>
                         </object>
                       </void>
                       <void property="recurse">
@@ -5210,7 +5210,7 @@ return true;</string>
                       </void>
                       <void property="file">
                         <object class="java.io.File">
-                          <string>${installer:userHome}/Desktop/Yahoo! Zimbra Desktop.app</string>
+                          <string>${installer:userHome}/Desktop/Yahoo! Zmail Desktop.app</string>
                         </object>
                       </void>
                       <void property="recurse">
@@ -5280,7 +5280,7 @@ return true;</string>
       </exclude>
       <variables />
     </win32>
-    <unixInstaller name="Unix" id="59040" mediaFileName="${compiler:sys.shortName}_${compiler:offline_version}_build_${compiler:offline_buildid}_linux_i686" installDir="zdesktop" overridePrincipalLanguage="false" requires64bit="false" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" includedJRE="linux-x86-1.5.0_15" manualJREEntry="false" bundleType="1" jreURL="" jreFtpURL="" jreShared="false" customInstallBaseDir="~/zimbra" createUninstallIcon="true" contentFilesType="1" downloadURL="">
+    <unixInstaller name="Unix" id="59040" mediaFileName="${compiler:sys.shortName}_${compiler:offline_version}_build_${compiler:offline_buildid}_linux_i686" installDir="zdesktop" overridePrincipalLanguage="false" requires64bit="false" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" includedJRE="linux-x86-1.5.0_15" manualJREEntry="false" bundleType="1" jreURL="" jreFtpURL="" jreShared="false" customInstallBaseDir="~/zmail" createUninstallIcon="true" contentFilesType="1" downloadURL="">
       <excludedLaunchers />
       <excludedComponents />
       <excludedBeans />
@@ -5294,7 +5294,7 @@ return true;</string>
         <scriptLines />
       </installerScript>
     </unixInstaller>
-    <macosFolder name="Mac OS X Intel" id="44" mediaFileName="${compiler:sys.shortName}_${compiler:offline_version}_build_${compiler:offline_buildid}_macos_intel" installDir="zdesktop" overridePrincipalLanguage="false" requires64bit="false" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" customInstallBaseDir="~/zimbra" createUninstallIcon="true" contentFilesType="1" downloadURL="">
+    <macosFolder name="Mac OS X Intel" id="44" mediaFileName="${compiler:sys.shortName}_${compiler:offline_version}_build_${compiler:offline_buildid}_macos_intel" installDir="zdesktop" overridePrincipalLanguage="false" requires64bit="false" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" customInstallBaseDir="~/zmail" createUninstallIcon="true" contentFilesType="1" downloadURL="">
       <excludedLaunchers />
       <excludedComponents />
       <excludedBeans />

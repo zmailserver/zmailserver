@@ -7,11 +7,11 @@ import re
 
 # This file needs to have type "ktext" in order to make the RCS
 # keyword expansion work.
-RCS_FILE = '$File: //depot/zcs/IRONMAIDEN-804/ZimbraBuild/support/gobuild/helpers/__init__.py $'[7:-2]
+RCS_FILE = '$File: //depot/zcs/IRONMAIDEN-804/ZmailBuild/support/gobuild/helpers/__init__.py $'[7:-2]
 
 # This line needs to be modified appropriately when the gobuild
 # starter kit is imported into a new branch.
-BRANCH_REGEX = re.compile(r'^(//.+/)zimbra/([^/]+)/ZimbraBuild/support/gobuild/')
+BRANCH_REGEX = re.compile(r'^(//.+/)zmail/([^/]+)/ZmailBuild/support/gobuild/')
 
 DEFAULT_DEPOT = '//depot/'
 DEFAULT_BRANCH = '%(branch)'

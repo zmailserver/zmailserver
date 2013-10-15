@@ -17,17 +17,17 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.ajax.ui.mail;
+package org.zmail.qa.selenium.projects.ajax.ui.mail;
 
 import java.util.*;
 
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.SleepUtil;
-import com.zimbra.qa.selenium.framework.util.staf.Stafpostqueue;
-import com.zimbra.qa.selenium.projects.ajax.ui.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogWarning.DialogWarningID;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.DisplayMail.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.SleepUtil;
+import org.zmail.qa.selenium.framework.util.staf.Stafpostqueue;
+import org.zmail.qa.selenium.projects.ajax.ui.*;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogWarning.DialogWarningID;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.DisplayMail.*;
 
 
 
@@ -63,28 +63,28 @@ public class SeparateWindowDisplayMail extends AbsSeparateWindow {
 		
 		if ( field == Field.From ) {
 			
-			locator = container + " tr[id$='_from'] span[id$='_com_zimbra_email']";
+			locator = container + " tr[id$='_from'] span[id$='_org_zmail_email']";
 			if ( !this.sIsElementPresent(locator) ) {
 				locator = container + " tr[id$='_from']"; // No bubbles
 			}
 			
 		} else if ( field == Field.To ) {
 			
-			locator = container + " tr[id$='_to'] span[id$='_com_zimbra_email']";
+			locator = container + " tr[id$='_to'] span[id$='_org_zmail_email']";
 			if ( !this.sIsElementPresent(locator) ) {
 				locator = container + " tr[id$='_to']"; // No bubbles
 			}
 			
 		} else if ( field == Field.Cc ) {
 			
-			locator = container + " tr[id$='_cc'] span[id$='_com_zimbra_email']";
+			locator = container + " tr[id$='_cc'] span[id$='_org_zmail_email']";
 			if ( !this.sIsElementPresent(locator) ) {
 				locator = container + " tr[id$='_cc']"; // No bubbles
 			}
 			
 		} else if ( field == Field.OnBehalfOf ) {
 			
-			locator = container + " td[id$='_obo'] span[id$='_com_zimbra_email']";
+			locator = container + " td[id$='_obo'] span[id$='_org_zmail_email']";
 			if ( !sIsElementPresent(locator) ) {
 				// no email zimlet case
 				locator = container + " td[id$='_obo']";
@@ -92,7 +92,7 @@ public class SeparateWindowDisplayMail extends AbsSeparateWindow {
 
 		} else if ( field == Field.ResentFrom ) {
 			
-			locator = container + " td[id$='_bwo'] span[id$='_com_zimbra_email']";
+			locator = container + " td[id$='_bwo'] span[id$='_org_zmail_email']";
 			if ( !sIsElementPresent(locator) ) {
 				// no email zimlet case
 				locator = container + " tr[id$='_bwo']";
@@ -104,7 +104,7 @@ public class SeparateWindowDisplayMail extends AbsSeparateWindow {
 
 		} else if ( field == Field.ReplyTo ) {
 			
-			locator = container + " tr[id$='_reply to'] span[id$='_com_zimbra_email']";
+			locator = container + " tr[id$='_reply to'] span[id$='_org_zmail_email']";
 			if ( !sIsElementPresent(locator) ) {
 				// no email zimlet case
 				locator = container + " tr[id$='_reply to']";
@@ -116,11 +116,11 @@ public class SeparateWindowDisplayMail extends AbsSeparateWindow {
 			
 		} else if ( field == Field.ReceivedDate ) {
 			
-			locator = container + " tr[id$='_hdrTableTopRow'] td[class~='DateCol'] span[id$='_com_zimbra_date']";
+			locator = container + " tr[id$='_hdrTableTopRow'] td[class~='DateCol'] span[id$='_org_zmail_date']";
 
 		} else if ( field == Field.ReceivedTime ) {
 			
-			String timeAndDateLocator = container + " tr[id$='_hdrTableTopRow'] td[class~='DateCol'] span[id$='_com_zimbra_date']";
+			String timeAndDateLocator = container + " tr[id$='_hdrTableTopRow'] td[class~='DateCol'] span[id$='_org_zmail_date']";
 
 			// Make sure the subject is present
 			if ( !sIsElementPresent(timeAndDateLocator) )
@@ -175,7 +175,7 @@ public class SeparateWindowDisplayMail extends AbsSeparateWindow {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.zimbra.qa.selenium.framework.ui.AbsPage#zWaitForActive()
+	 * @see org.zmail.qa.selenium.framework.ui.AbsPage#zWaitForActive()
 	 */
 	public void zWaitForActive() throws HarnessException {
 		super.zWaitForActive(PageLoadDelay);

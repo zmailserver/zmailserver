@@ -1,4 +1,4 @@
-package Zimbra::License;
+package Zmail::License;
 
 use strict;
 
@@ -53,9 +53,9 @@ sub generate {
 	my $self = shift;
 	print "Generating license...";
 
-	$self->{license_version} = Zimbra::LicenseKey::getCurrentKeyId();
+	$self->{license_version} = Zmail::LicenseKey::getCurrentKeyId();
 
-	$self->{license_text} = Zimbra::LicenseKey::sign($self->licenseToText())."\n".$self->licenseToText();
+	$self->{license_text} = Zmail::LicenseKey::sign($self->licenseToText())."\n".$self->licenseToText();
 
 	print "Done\n";
 	return 1;
@@ -82,7 +82,7 @@ sub verify {
 	my $self = shift;
 	my $verbose = shift;
 
-	my $key = Zimbra::LicenseKey::getKey($self->{license_version});
+	my $key = Zmail::LicenseKey::getKey($self->{license_version});
 
 	return ($key->verify($self->licenseSignature(),$self->licenseToText()));
 

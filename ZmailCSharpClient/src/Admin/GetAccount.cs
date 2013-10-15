@@ -16,9 +16,9 @@ using System;
 using System.Xml;
 using System.Collections;
 
-using Zimbra.Client.Util;
+using Zmail.Client.Util;
 
-namespace Zimbra.Client.Admin
+namespace Zmail.Client.Admin
 {
 
 	public class GetAccountRequest : AdminServiceRequest

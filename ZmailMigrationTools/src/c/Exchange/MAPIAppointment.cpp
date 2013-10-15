@@ -39,7 +39,7 @@ MAPIAppointmentException::MAPIAppointmentException(HRESULT hrErrCode, LPCWSTR lp
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 //bool MAPIAppointment::m_bNamedPropsInitialized = false;
 
-MAPIAppointment::MAPIAppointment(Zimbra::MAPI::MAPISession &session, Zimbra::MAPI::MAPIStore &store, Zimbra::MAPI::MAPIMessage &mMessage, int exceptionType)
+MAPIAppointment::MAPIAppointment(Zmail::MAPI::MAPISession &session, Zmail::MAPI::MAPIStore &store, Zmail::MAPI::MAPIMessage &mMessage, int exceptionType)
                                 : MAPIRfc2445 (session, mMessage)
 {
 	m_mapiStore = &store;
@@ -130,7 +130,7 @@ HRESULT MAPIAppointment::InitNamedPropsForAppt()
 	nameIdsC[2] = 0x8503;
 
     HRESULT hr = S_OK;
-    Zimbra::Util::ScopedBuffer<SPropValue> pPropValMsgClass;
+    Zmail::Util::ScopedBuffer<SPropValue> pPropValMsgClass;
 
     if (FAILED(hr = HrGetOneProp(m_pMessage, PR_MESSAGE_CLASS, pPropValMsgClass.getptr())))
         throw MAPIAppointmentException(hr, L"InitNamedPropsForAppt(): HrGetOneProp Failed.", 
@@ -220,8 +220,8 @@ HRESULT MAPIAppointment::SetMAPIAppointmentValues()
     m_bHasAttachments = false;
     m_bIsRecurring = false;	
 
-	// get the zimbra appt wrapper around the mapi message
- 	Zimbra::Mapi::Appt appt(m_pMessage, m_mapiStore->GetInternalMAPIStore());
+	// get the zmail appt wrapper around the mapi message
+ 	Zmail::Mapi::Appt appt(m_pMessage, m_mapiStore->GetInternalMAPIStore());
 
     // save off the default timezone info for this appointment
 	try
@@ -235,7 +235,7 @@ HRESULT MAPIAppointment::SetMAPIAppointmentValues()
 	if (SUCCEEDED(hr))
     {
 		// get the timezone info for this appt
-		pInvTz= new Zimbra::Mail::TimeZone(_pTzString);
+		pInvTz= new Zmail::Mail::TimeZone(_pTzString);
 		pInvTz->Initialize(_olkTz, _pTzString);
 	}
 
@@ -358,7 +358,7 @@ void MAPIAppointment::SetTimezoneId(LPTSTR pStr)
 
  int MAPIAppointment::SetRecurValues()
 {
-    Zimbra::Util::ScopedInterface<IStream> pRecurrenceStream;
+    Zmail::Util::ScopedInterface<IStream> pRecurrenceStream;
     HRESULT hResult = m_pMessage->OpenProperty(pr_recurstream, &IID_IStream, 0, 0,
 						(LPUNKNOWN *)pRecurrenceStream.getptr());
     if (FAILED(hResult))
@@ -366,8 +366,8 @@ void MAPIAppointment::SetTimezoneId(LPTSTR pStr)
 	return 0;
     }
     LPSTREAM pStream = pRecurrenceStream.get();
-    Zimbra::Mapi::Appt OlkAppt(m_pMessage, NULL);
-    Zimbra::Mapi::COutlookRecurrencePattern &recur = OlkAppt.GetRecurrencePattern();
+    Zmail::Mapi::Appt OlkAppt(m_pMessage, NULL);
+    Zmail::Mapi::COutlookRecurrencePattern &recur = OlkAppt.GetRecurrencePattern();
     hResult = recur.ReadRecurrenceStream(pStream);
     if (FAILED(hResult))
     {
@@ -377,10 +377,10 @@ void MAPIAppointment::SetTimezoneId(LPTSTR pStr)
 	// Set Timezone info
     SYSTEMTIME stdTime;
     SYSTEMTIME dsTime;
-	Zimbra::Mail::TimeZone tmpz =  recur.GetTimeZone();
+	Zmail::Mail::TimeZone tmpz =  recur.GetTimeZone();
 	if(pInvTz)
 		tmpz= *pInvTz;
-	const Zimbra::Mail::TimeZone &tzone= tmpz;
+	const Zmail::Mail::TimeZone &tzone= tmpz;
 	
 	m_timezone.id = m_pTimezoneId;  // don't use m_timezone.id = tzone.GetId()
 	IntToWstring(tzone.GetStandardOffset(), m_timezone.standardOffset);
@@ -483,9 +483,9 @@ void MAPIAppointment::SetTimezoneId(LPTSTR pStr)
     }
 
     ULONG ulRecurrenceEndType = recur.GetEndType();
-    Zimbra::Mapi::CRecurrenceTime rtEndDate = recur.GetEndDate();
-    Zimbra::Mapi::CFileTime ft = (FILETIME)rtEndDate;
-    m_pCalFilterDate = Zimbra::MAPI::Util::CommonDateString(ft);
+    Zmail::Mapi::CRecurrenceTime rtEndDate = recur.GetEndDate();
+    Zmail::Mapi::CFileTime ft = (FILETIME)rtEndDate;
+    m_pCalFilterDate = Zmail::MAPI::Util::CommonDateString(ft);
     if (ulRecurrenceEndType == oetEndAfterN)
     {
 	IntToWstring(recur.GetOccurrences(), m_pRecurCount);
@@ -495,7 +495,7 @@ void MAPIAppointment::SetTimezoneId(LPTSTR pStr)
     {
         SYSTEMTIME st;
         FileTimeToSystemTime(&ft, &st);
-        wstring temp = Zimbra::Util::FormatSystemTime(st, TRUE, TRUE);
+        wstring temp = Zmail::Util::FormatSystemTime(st, TRUE, TRUE);
         m_pRecurEndDate = temp.substr(0, 8);
     }
     return recur.GetExceptionCount();  
@@ -503,7 +503,7 @@ void MAPIAppointment::SetTimezoneId(LPTSTR pStr)
 
 void MAPIAppointment::SetExceptions()
 {
-    Zimbra::Util::ScopedInterface<IStream> pRecurrenceStream;
+    Zmail::Util::ScopedInterface<IStream> pRecurrenceStream;
     HRESULT hResult = m_pMessage->OpenProperty(pr_recurstream, &IID_IStream, 0, 0,
 						(LPUNKNOWN *)pRecurrenceStream.getptr());
     if (FAILED(hResult))
@@ -511,8 +511,8 @@ void MAPIAppointment::SetExceptions()
 	return;
     }
     LPSTREAM pStream = pRecurrenceStream.get();
-    Zimbra::Mapi::Appt OlkAppt(m_pMessage, NULL);
-    Zimbra::Mapi::COutlookRecurrencePattern &recur = OlkAppt.GetRecurrencePattern();
+    Zmail::Mapi::Appt OlkAppt(m_pMessage, NULL);
+    Zmail::Mapi::COutlookRecurrencePattern &recur = OlkAppt.GetRecurrencePattern();
     hResult = recur.ReadRecurrenceStream(pStream);
     if (FAILED(hResult))
     {
@@ -522,14 +522,14 @@ void MAPIAppointment::SetExceptions()
 
     for (LONG i = 0; i < lExceptionCount; i++)
     {
-        Zimbra::Mapi::CRecurrenceTime rtDate = recur.GetExceptionOriginalDate(i);
-        Zimbra::Mapi::CFileTime ftOrigDate = (FILETIME)rtDate;
+        Zmail::Mapi::CRecurrenceTime rtDate = recur.GetExceptionOriginalDate(i);
+        Zmail::Mapi::CFileTime ftOrigDate = (FILETIME)rtDate;
 
-        Zimbra::Mapi::COutlookRecurrenceException *lpException = recur.GetException(i);
+        Zmail::Mapi::COutlookRecurrenceException *lpException = recur.GetException(i);
         if (lpException != NULL)    
         {
-            Zimbra::Util::ScopedInterface<IMessage> lpExceptionMessage;
-            Zimbra::Util::ScopedInterface<IAttach> lpExceptionAttach;
+            Zmail::Util::ScopedInterface<IMessage> lpExceptionMessage;
+            Zmail::Util::ScopedInterface<IAttach> lpExceptionAttach;
 
             // FBS bug 70987 -- 5/27/12 -- since Exchange provider doesn't seem to support restriction on
             // attachment table, call OpenApptNR instead of OpenAppointment
@@ -543,7 +543,7 @@ void MAPIAppointment::SetExceptions()
             }
 
             // We have everything for the object
-            Zimbra::Mapi::Appt pOccurrence(lpExceptionMessage.get(), OlkAppt.GetStore(),
+            Zmail::Mapi::Appt pOccurrence(lpExceptionMessage.get(), OlkAppt.GetStore(),
                                            lpException, lpExceptionAttach.get(),
                                            OlkAppt.MapiMsg());
             MAPIMessage exMAPIMsg;
@@ -564,30 +564,30 @@ void MAPIAppointment::SetExceptions()
     }
 }
 
-void MAPIAppointment::FillInExceptionAppt(MAPIAppointment* pEx, Zimbra::Mapi::COutlookRecurrenceException* lpException)
+void MAPIAppointment::FillInExceptionAppt(MAPIAppointment* pEx, Zmail::Mapi::COutlookRecurrenceException* lpException)
 {
     // FBS 4/12/12 -- set this up no matter what (so exceptId will be set)
     // FBS bug 71050 -- 4/9/12 -- recurrence id needs the original occurrence date
-    Zimbra::Mapi::CRecurrenceTime rtOriginalDate = lpException->GetOriginalDateTime();  
-    Zimbra::Mapi::CFileTime ftOriginalDate = (FILETIME)rtOriginalDate;
+    Zmail::Mapi::CRecurrenceTime rtOriginalDate = lpException->GetOriginalDateTime();  
+    Zmail::Mapi::CFileTime ftOriginalDate = (FILETIME)rtOriginalDate;
     pEx->m_pStartDateForRecID = MakeDateFromExPtr(rtOriginalDate);
     //
 
     if (pEx->m_pStartDate.length() == 0)
     {
-        Zimbra::Mapi::CRecurrenceTime rtStartDate = lpException->GetStartDateTime();
-        Zimbra::Mapi::CFileTime ftStartDate = (FILETIME)rtStartDate;
+        Zmail::Mapi::CRecurrenceTime rtStartDate = lpException->GetStartDateTime();
+        Zmail::Mapi::CFileTime ftStartDate = (FILETIME)rtStartDate;
         pEx->m_pStartDate = MakeDateFromExPtr(ftStartDate);
-        pEx->m_pCalFilterDate = Zimbra::MAPI::Util::CommonDateString(ftStartDate);
+        pEx->m_pCalFilterDate = Zmail::MAPI::Util::CommonDateString(ftStartDate);
     }
     if (pEx->m_pEndDate.length() == 0)
     {
-        Zimbra::Mapi::CRecurrenceTime rtEndDate = lpException->GetEndDateTime();
+        Zmail::Mapi::CRecurrenceTime rtEndDate = lpException->GetEndDateTime();
         if (lpException->GetAllDay())
         {
-            rtEndDate = rtEndDate - 1440;  // for Zimbra
+            rtEndDate = rtEndDate - 1440;  // for Zmail
         }
-        Zimbra::Mapi::CFileTime ftEndDate = (FILETIME)rtEndDate;
+        Zmail::Mapi::CFileTime ftEndDate = (FILETIME)rtEndDate;
         pEx->m_pEndDate = MakeDateFromExPtr(ftEndDate);
     }
     if (lpException->GetAllDay())   // FBS bug 71053 -- 4/12/12
@@ -672,7 +672,7 @@ void MAPIAppointment::FillInExceptionAppt(MAPIAppointment* pEx, Zimbra::Mapi::CO
     }
 }
 
-void MAPIAppointment::FillInCancelException(MAPIAppointment* pEx, Zimbra::Mapi::CFileTime cancelDate)
+void MAPIAppointment::FillInCancelException(MAPIAppointment* pEx, Zmail::Mapi::CFileTime cancelDate)
 {
     // should really use a copy constructor
     pEx->m_pStartDate = MakeDateFromExPtr(cancelDate);
@@ -710,9 +710,9 @@ void MAPIAppointment::SetStartDate(FILETIME ft)
 	//GetTimeZoneInformation(&localTimeZone);	
 	bUseLocal = SystemTimeToTzSpecificLocalTime(&localTimeZone, &st, &localst);
     }
-    m_pStartDate = (bUseLocal) ? Zimbra::Util::FormatSystemTime(localst, FALSE, TRUE)
-			       : Zimbra::Util::FormatSystemTime(st, TRUE, TRUE);
-    m_pCalFilterDate = Zimbra::MAPI::Util::CommonDateString(m_pPropVals[C_START].Value.ft);   // may have issue with recur/local
+    m_pStartDate = (bUseLocal) ? Zmail::Util::FormatSystemTime(localst, FALSE, TRUE)
+			       : Zmail::Util::FormatSystemTime(st, TRUE, TRUE);
+    m_pCalFilterDate = Zmail::MAPI::Util::CommonDateString(m_pPropVals[C_START].Value.ft);   // may have issue with recur/local
 }
 
 LPWSTR MAPIAppointment::MakeDateFromExPtr(FILETIME ft)
@@ -720,7 +720,7 @@ LPWSTR MAPIAppointment::MakeDateFromExPtr(FILETIME ft)
     SYSTEMTIME st;
 
     FileTimeToSystemTime(&ft, &st);
-    return Zimbra::Util::FormatSystemTime(st, FALSE, TRUE);			       
+    return Zmail::Util::FormatSystemTime(st, FALSE, TRUE);			       
 }
 
 void MAPIAppointment::SetEndDate(FILETIME ft, bool bAllday)
@@ -730,7 +730,7 @@ void MAPIAppointment::SetEndDate(FILETIME ft, bool bAllday)
 
     FileTimeToSystemTime(&ft, &st);
 
-    if (bAllday)    // if AllDay appt, subtract one from the end date for Zimbra friendliness
+    if (bAllday)    // if AllDay appt, subtract one from the end date for Zmail friendliness
     {
 	double dat = -1;
 	if (SystemTimeToVariantTime(&st, &dat))
@@ -749,18 +749,18 @@ void MAPIAppointment::SetEndDate(FILETIME ft, bool bAllday)
 	    bUseLocal = SystemTimeToTzSpecificLocalTime(&localTimeZone, &st, &localst);
 	}
     }
-    m_pEndDate = (bUseLocal) ? Zimbra::Util::FormatSystemTime(localst, FALSE, TRUE)
-			     : Zimbra::Util::FormatSystemTime(st, TRUE, TRUE);
+    m_pEndDate = (bUseLocal) ? Zmail::Util::FormatSystemTime(localst, FALSE, TRUE)
+			     : Zmail::Util::FormatSystemTime(st, TRUE, TRUE);
 }
 
 void MAPIAppointment::SetInstanceUID(LPSBinary bin)
 {
-    Zimbra::Util::ScopedArray<CHAR> spUid(new CHAR[(bin->cb * 2) + 1]);
+    Zmail::Util::ScopedArray<CHAR> spUid(new CHAR[(bin->cb * 2) + 1]);
     if (spUid.get() != NULL)
     {
-	Zimbra::Util::HexFromBin(bin->lpb, bin->cb, spUid.get());
+	Zmail::Util::HexFromBin(bin->lpb, bin->cb, spUid.get());
     }
-    m_pInstanceUID = Zimbra::Util::AnsiiToUnicode(spUid.get());
+    m_pInstanceUID = Zmail::Util::AnsiiToUnicode(spUid.get());
 }
 
 void MAPIAppointment::SetLocation(LPTSTR pStr)
@@ -889,12 +889,12 @@ void MAPIAppointment::SetResponseRequested(unsigned short usPrivate)
 }
 void MAPIAppointment::SetPlainTextFileAndContent()
 {
-    m_pPlainTextFile = Zimbra::MAPI::Util::SetPlainText(m_pMessage, &m_pPropVals[C_BODY]);
+    m_pPlainTextFile = Zmail::MAPI::Util::SetPlainText(m_pMessage, &m_pPropVals[C_BODY]);
 }
 
 void MAPIAppointment::SetHtmlFileAndContent()
 {
-    m_pHtmlFile = Zimbra::MAPI::Util::SetHtml(m_pMessage, &m_pPropVals[C_HTMLBODY]);
+    m_pHtmlFile = Zmail::MAPI::Util::SetHtml(m_pMessage, &m_pPropVals[C_HTMLBODY]);
 }
 
 void MAPIAppointment::SetExceptionType(int type)
@@ -917,7 +917,7 @@ void MAPIAppointment::SetExceptionType(int type)
 HRESULT MAPIAppointment::UpdateAttendeeFromEntryId(Attendee &pAttendee,
     SBinary &eid)
 {
-    Zimbra::Util::ScopedInterface<IMailUser> pUser;
+    Zmail::Util::ScopedInterface<IMailUser> pUser;
     ULONG ulObjType = 0;
 	if(!m_pAddrBook)
 		return E_FAIL;
@@ -931,7 +931,7 @@ HRESULT MAPIAppointment::UpdateAttendeeFromEntryId(Attendee &pAttendee,
     };
 
     ULONG cVals = 0;
-    Zimbra::Util::ScopedBuffer<SPropValue> pVals;
+    Zmail::Util::ScopedBuffer<SPropValue> pVals;
 
     hr = pUser->GetProps((LPSPropTagArray) & tags, MAPI_UNICODE, &cVals, pVals.getptr());
     if (FAILED(hr))
@@ -949,7 +949,7 @@ HRESULT MAPIAppointment::UpdateAttendeeFromEntryId(Attendee &pAttendee,
 
 HRESULT MAPIAppointment::SetOrganizerAndAttendees()
 {
-    Zimbra::Util::ScopedInterface<IMAPITable> pRecipTable;
+    Zmail::Util::ScopedInterface<IMAPITable> pRecipTable;
     HRESULT hr = 0;
 
     hr = m_pMessage->GetRecipientTable(fMapiUnicode, pRecipTable.getptr());
@@ -968,7 +968,7 @@ HRESULT MAPIAppointment::SetOrganizerAndAttendees()
     };
 
     ULONG ulRows = 0;
-    Zimbra::Util::ScopedRowSet pRecipRows;
+    Zmail::Util::ScopedRowSet pRecipRows;
 
     hr = pRecipTable->SetColumns((LPSPropTagArray) & reciptags, 0);
     if (FAILED(hr))
@@ -1035,7 +1035,7 @@ HRESULT MAPIAppointment::SetOrganizerAndAttendees()
 							try
 							{
 
-							Zimbra::MAPI::Util::GetSMTPFromAD(*m_session, tempRecip,L"" , L"",wstrEmailAddress);
+							Zmail::MAPI::Util::GetSMTPFromAD(*m_session, tempRecip,L"" , L"",wstrEmailAddress);
 							}
 							catch(...)
 							{
@@ -1057,7 +1057,7 @@ HRESULT MAPIAppointment::SetOrganizerAndAttendees()
 		{
                     if (!(RECIP_FLAG_EXCEP_DELETED & pRecipRows->aRow[iRow].lpProps[AT_RECIPIENT_FLAGS].Value.l)) // make sure attendee wasn't deleted
                     {
-		        Attendee* pAttendee = new Attendee();   // delete done in CMapiAccessWrap::GetData after we allocate dict string for ZimbraAPI
+		        Attendee* pAttendee = new Attendee();   // delete done in CMapiAccessWrap::GetData after we allocate dict string for ZmailAPI
 			    if (PROP_TYPE(pRecipRows->aRow[iRow].lpProps[AT_DISPLAY_NAME].ulPropTag) != PT_ERROR)
 				    pAttendee->nam = pRecipRows->aRow[iRow].lpProps[AT_DISPLAY_NAME].Value.lpszW;
 				
@@ -1093,7 +1093,7 @@ HRESULT MAPIAppointment::SetOrganizerAndAttendees()
 						std::wstring wstrEmailAddress;
 						try
 						{
-						Zimbra::MAPI::Util::GetSMTPFromAD(*m_session, tempRecip,L"" , L"",wstrEmailAddress);
+						Zmail::MAPI::Util::GetSMTPFromAD(*m_session, tempRecip,L"" , L"",wstrEmailAddress);
 						}
 						catch(...)
 						{

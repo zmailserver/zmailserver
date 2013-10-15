@@ -14,19 +14,19 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.login;
+package org.zmail.qa.selenium.projects.ajax.tests.login;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.PageLogin;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.PageLogin;
 
 
 
@@ -79,7 +79,7 @@ public class LoginScreen extends AjaxCommonTest {
 		app.zPageLogin.zNavigateTo();
 		
 		// Type a unique string into the browser
-		String value = "foo" + ZimbraSeleniumProperties.getUniqueString();
+		String value = "foo" + ZmailSeleniumProperties.getUniqueString();
 		app.zPageLogin.zKeyboardTypeString(value);
 		
 		// Get the value of the username field

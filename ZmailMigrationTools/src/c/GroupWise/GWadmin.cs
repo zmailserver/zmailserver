@@ -44,7 +44,7 @@ namespace GroupWise
             {
                 try
                 {
-                    int status = CreateTrustedAppObject(domainpath, "ZimbraGWmigration", "", "", "", false, false, false, true, outkey);
+                    int status = CreateTrustedAppObject(domainpath, "ZmailGWmigration", "", "", "", false, false, false, true, outkey);
                     Key = outkey.ToString();
                     System.IO.File.AppendAllText(@"Key.txt", outkey.ToString());
                     string szMsg ="" ;

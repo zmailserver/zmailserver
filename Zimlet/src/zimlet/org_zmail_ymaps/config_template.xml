@@ -14,7 +14,7 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimletConfig name="com_zimbra_ymaps" version="1.6">
+<zimletConfig name="org_zmail_ymaps" version="1.6">
     <global>
         <property name="allowedDomains">*.yahoo.com,*.yimg.com</property>
     </global>

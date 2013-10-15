@@ -1,19 +1,19 @@
-Return-Path: <smith@example.zimbra.com>
-Received: from kenny.example.zimbra.com ([unix socket]) by kenny.example.zimbra.com
+Return-Path: <smith@example.zmail.com>
+Received: from kenny.example.zmail.com ([unix socket]) by kenny.example.zmail.com
 	(Cyrus v2.1.16) with LMTP; Fri, 26 Mar 2004 16:43:58 -0800
 X-Sieve: CMU Sieve 2.2
 Received: from [10.10.130.109] (unknown [10.10.130.109]) by
-	kenny.example.zimbra.com (Postfix) with ESMTP id 392C940040E for
-	<smith@example.zimbra.com>; Fri, 26 Mar 2004 16:43:58 -0800 (PST)
+	kenny.example.zmail.com (Postfix) with ESMTP id 392C940040E for
+	<smith@example.zmail.com>; Fri, 26 Mar 2004 16:43:58 -0800 (PST)
 Subject: outlook...
-From: "Smith, Roland Q. (VP)" <smith@example.zimbra.com>
-To: smith@example.zimbra.com
+From: "Smith, Roland Q. (VP)" <smith@example.zmail.com>
+To: smith@example.zmail.com
 Content-Type: multipart/mixed; boundary="=-mTT+IyyX+d829XGe+k1/"
 Message-Id: <1080348223.24248.6.camel@localhost.localdomain>
 Mime-Version: 1.0
 X-Mailer: Ximian Evolution 1.4.5 (1.4.5-7) 
 Date: Fri, 26 Mar 2004 16:43:43 -0800
-X-Zimbra-Received: Fri, 26 Mar 2004 16:43:43 -0800
+X-Zmail-Received: Fri, 26 Mar 2004 16:43:43 -0800
 X-Evolution-Source: imap://smith@10.10.130.30/
 X-Evolution: 0000000f-0130
 

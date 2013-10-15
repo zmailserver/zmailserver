@@ -14,15 +14,15 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.mail;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.mail;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.MailItem;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew;
+import org.zmail.qa.selenium.framework.items.MailItem;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew;
 
 
 public class EditAsNewMessage extends PrefGroupMailByMessageTest {
@@ -39,18 +39,18 @@ public class EditAsNewMessage extends PrefGroupMailByMessageTest {
 			groups = { "smoke" })
 	public void EditAsNewMessage_01() throws HarnessException {
 		
-		String subject = "subject"+ ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject"+ ZmailSeleniumProperties.getUniqueString();
 	
 
 		// Send a message to the account
-		ZimbraAccount.AccountA().soapSend(
-					"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+		ZmailAccount.AccountA().soapSend(
+					"<SendMsgRequest xmlns='urn:zmailMail'>" +
 						"<m>" +
-							"<e t='t' a='"+ ZimbraAccount.AccountB().EmailAddress +"'/>" +
+							"<e t='t' a='"+ ZmailAccount.AccountB().EmailAddress +"'/>" +
 							"<e t='c' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 							"<su>"+ subject +"</su>" +
 							"<mp ct='text/plain'>" +
-								"<content>content"+ ZimbraSeleniumProperties.getUniqueString() +"</content>" +
+								"<content>content"+ ZmailSeleniumProperties.getUniqueString() +"</content>" +
 							"</mp>" +
 						"</m>" +
 					"</SendMsgRequest>");
@@ -72,10 +72,10 @@ public class EditAsNewMessage extends PrefGroupMailByMessageTest {
 		
 
 		// Verify the redirected message is received
-		MailItem original = MailItem.importFromSOAP(ZimbraAccount.AccountB(), "subject:("+subject+") from:("+ZimbraAccount.AccountA().EmailAddress+")");
+		MailItem original = MailItem.importFromSOAP(ZmailAccount.AccountB(), "subject:("+subject+") from:("+ZmailAccount.AccountA().EmailAddress+")");
 		ZAssert.assertNotNull(original, "Verify the original message from Account A is received by Account B");
 		
-		MailItem resent = MailItem.importFromSOAP(ZimbraAccount.AccountB(), "subject:("+subject+") from:("+app.zGetActiveAccount().EmailAddress+")");
+		MailItem resent = MailItem.importFromSOAP(ZmailAccount.AccountB(), "subject:("+subject+") from:("+app.zGetActiveAccount().EmailAddress+")");
 		ZAssert.assertNotNull(resent, "Verify the 'edit as new' message from the test account is received by Account B");
 
 
@@ -87,18 +87,18 @@ public class EditAsNewMessage extends PrefGroupMailByMessageTest {
 			groups = { "functional" })
 	public void EditAsNewMessage_02() throws HarnessException {
 		
-		String subject = "subject"+ ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject"+ ZmailSeleniumProperties.getUniqueString();
 	
 
 		// Send a message to the account
-		ZimbraAccount.AccountA().soapSend(
-					"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+		ZmailAccount.AccountA().soapSend(
+					"<SendMsgRequest xmlns='urn:zmailMail'>" +
 						"<m>" +
-							"<e t='t' a='"+ ZimbraAccount.AccountB().EmailAddress +"'/>" +
+							"<e t='t' a='"+ ZmailAccount.AccountB().EmailAddress +"'/>" +
 							"<e t='c' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 							"<su>"+ subject +"</su>" +
 							"<mp ct='text/plain'>" +
-								"<content>content"+ ZimbraSeleniumProperties.getUniqueString() +"</content>" +
+								"<content>content"+ ZmailSeleniumProperties.getUniqueString() +"</content>" +
 							"</mp>" +
 						"</m>" +
 					"</SendMsgRequest>");
@@ -117,10 +117,10 @@ public class EditAsNewMessage extends PrefGroupMailByMessageTest {
 		
 
 		// Verify the redirected message is received
-		MailItem original = MailItem.importFromSOAP(ZimbraAccount.AccountB(), "subject:("+subject+") from:("+ZimbraAccount.AccountA().EmailAddress+")");
+		MailItem original = MailItem.importFromSOAP(ZmailAccount.AccountB(), "subject:("+subject+") from:("+ZmailAccount.AccountA().EmailAddress+")");
 		ZAssert.assertNotNull(original, "Verify the original message from Account A is received by Account B");
 		
-		MailItem resent = MailItem.importFromSOAP(ZimbraAccount.AccountB(), "subject:("+subject+") from:("+app.zGetActiveAccount().EmailAddress+")");
+		MailItem resent = MailItem.importFromSOAP(ZmailAccount.AccountB(), "subject:("+subject+") from:("+app.zGetActiveAccount().EmailAddress+")");
 		ZAssert.assertNotNull(resent, "Verify the 'edit as new' message from the test account is received by Account B");
 
 

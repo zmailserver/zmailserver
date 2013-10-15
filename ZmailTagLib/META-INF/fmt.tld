@@ -5,18 +5,18 @@
     xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
     version="2.0">
 
-  <description>Zimbra - JSTL 1.1 i18n-capable formatting library</description>
-  <display-name>Zimbra - JSTL fmt</display-name>
+  <description>Zmail - JSTL 1.1 i18n-capable formatting library</description>
+  <display-name>Zmail - JSTL fmt</display-name>
   <tlib-version>1.1</tlib-version>
-  <short-name>zimbra-fmt</short-name>
-  <uri>com.zimbra.i18n</uri>
+  <short-name>zmail-fmt</short-name>
+  <uri>org.zmail.i18n</uri>
 
   <tag>
     <description>
         Sets the request character encoding
     </description>
     <name>requestEncoding</name>
-    <tag-class>com.zimbra.cs.taglib.tag.i18n.RequestEncodingTag</tag-class>
+    <tag-class>org.zmail.cs.taglib.tag.i18n.RequestEncodingTag</tag-class>
     <body-content>empty</body-content>
     <attribute>
         <description>
@@ -35,7 +35,7 @@ decoding request parameters.
 			and store it in a scoped variable.
 		</description>
 		<name>getLocale</name>
-		<tag-class>com.zimbra.cs.taglib.tag.i18n.GetLocaleTag</tag-class>
+		<tag-class>org.zmail.cs.taglib.tag.i18n.GetLocaleTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<description>
@@ -58,7 +58,7 @@ decoding request parameters.
         Stores the given locale in the locale configuration variable
     </description>
     <name>setLocale</name>
-    <tag-class>com.zimbra.cs.taglib.tag.i18n.SetLocaleTag</tag-class>
+    <tag-class>org.zmail.cs.taglib.tag.i18n.SetLocaleTag</tag-class>
     <body-content>empty</body-content>
     <attribute>
         <description>
@@ -102,7 +102,7 @@ Scope of the locale configuration variable.
         nested in its body
     </description>
     <name>timeZone</name>
-    <tag-class>com.zimbra.cs.taglib.tag.i18n.TimeZoneTag</tag-class>
+    <tag-class>org.zmail.cs.taglib.tag.i18n.TimeZoneTag</tag-class>
     <body-content>JSP</body-content>
     <attribute>
         <description>
@@ -126,7 +126,7 @@ supported time zone formats.
         Stores the given time zone in the time zone configuration variable
     </description>
     <name>setTimeZone</name>
-    <tag-class>com.zimbra.cs.taglib.tag.i18n.SetTimeZoneTag</tag-class>
+    <tag-class>org.zmail.cs.taglib.tag.i18n.SetTimeZoneTag</tag-class>
     <body-content>empty</body-content>
     <attribute>
         <description>
@@ -169,7 +169,7 @@ variable.
         Loads a resource bundle to be used by its tag body
     </description>
     <name>bundle</name>
-    <tag-class>com.zimbra.cs.taglib.tag.i18n.BundleTag</tag-class>
+    <tag-class>org.zmail.cs.taglib.tag.i18n.BundleTag</tag-class>
     <body-content>JSP</body-content>
     <attribute>
         <description>
@@ -211,7 +211,7 @@ NOTE: This is a non-standard attribute.
         the bundle configuration variable
     </description>
     <name>setBundle</name>
-    <tag-class>com.zimbra.cs.taglib.tag.i18n.SetBundleTag</tag-class>
+    <tag-class>org.zmail.cs.taglib.tag.i18n.SetBundleTag</tag-class>
     <body-content>empty</body-content>
     <attribute>
         <description>
@@ -263,7 +263,7 @@ NOTE: This is a non-standard attribute.
         Maps key to localized message and performs parametric replacement
     </description>
     <name>message</name>
-    <tag-class>com.zimbra.cs.taglib.tag.i18n.MessageTag</tag-class>
+    <tag-class>org.zmail.cs.taglib.tag.i18n.MessageTag</tag-class>
     <body-content>JSP</body-content>
     <attribute>
         <description>
@@ -317,7 +317,7 @@ NOTE: This is a non-standard attribute.
         &lt;message&gt; tag
     </description>
     <name>param</name>
-    <tag-class>com.zimbra.cs.taglib.tag.i18n.ParamTag</tag-class>
+    <tag-class>org.zmail.cs.taglib.tag.i18n.ParamTag</tag-class>
     <body-content>JSP</body-content>
     <attribute>
         <description>
@@ -335,7 +335,7 @@ Argument used for parametric replacement.
         Formats a numeric value as a number, currency, or percentage
     </description>
     <name>formatNumber</name>
-    <tag-class>com.zimbra.cs.taglib.tag.i18n.FormatNumberTag</tag-class>
+    <tag-class>org.zmail.cs.taglib.tag.i18n.FormatNumberTag</tag-class>
     <body-content>JSP</body-content>
     <attribute>
         <description>
@@ -453,7 +453,7 @@ Scope of var.
         Parses the string representation of a number, currency, or percentage
     </description>
     <name>parseNumber</name>
-    <tag-class>com.zimbra.cs.taglib.tag.i18n.ParseNumberTag</tag-class>
+    <tag-class>org.zmail.cs.taglib.tag.i18n.ParseNumberTag</tag-class>
     <body-content>JSP</body-content>
     <attribute>
         <description>
@@ -530,7 +530,7 @@ Scope of var.
         Formats a date and/or time using the supplied styles and pattern
     </description>
     <name>formatDate</name>
-    <tag-class>com.zimbra.cs.taglib.tag.i18n.FormatDateTag</tag-class>
+    <tag-class>org.zmail.cs.taglib.tag.i18n.FormatDateTag</tag-class>
     <body-content>empty</body-content>
     <attribute>
         <description>
@@ -620,7 +620,7 @@ Scope of var.
         Parses the string representation of a date and/or time
     </description>
     <name>parseDate</name>
-    <tag-class>com.zimbra.cs.taglib.tag.i18n.ParseDateTag</tag-class>
+    <tag-class>org.zmail.cs.taglib.tag.i18n.ParseDateTag</tag-class>
     <body-content>JSP</body-content>
     <attribute>
         <description>

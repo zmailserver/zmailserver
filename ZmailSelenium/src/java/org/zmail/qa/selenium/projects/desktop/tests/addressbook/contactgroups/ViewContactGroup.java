@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.addressbook.contactgroups;
+package org.zmail.qa.selenium.projects.desktop.tests.addressbook.contactgroups;
 
 import java.util.List;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.addressbook.DisplayContactGroup;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.addressbook.DisplayContactGroup;
 
 
 public class ViewContactGroup extends AjaxCommonTest  {
@@ -43,7 +43,7 @@ public class ViewContactGroup extends AjaxCommonTest  {
 	   
 	  
        app.zGetActiveAccount().soapSend(
-    		   "<ModifyContactRequest xmlns = 'urn:zimbraMail' replace = '0' force = '1'>" +
+    		   "<ModifyContactRequest xmlns = 'urn:zmailMail' replace = '0' force = '1'>" +
                 "<cn id = '"+ group.getId() +"'>" +
                 "<a n = 'fileAs'>8:"+ firstLetterOfGroupName + group.getName() +"</a>" +
                 "<a n = 'fullName'>"+ firstLetterOfGroupName + group.getName() +"</a>" +

@@ -12,10 +12,10 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline;
+package org.zmail.cs.offline;
 
-import com.zimbra.common.localconfig.KnownKey;
-import com.zimbra.common.util.Constants;
+import org.zmail.common.localconfig.KnownKey;
+import org.zmail.common.util.Constants;
 
 public class OfflineLC {
     public static final KnownKey zdesktop_app_id;
@@ -140,19 +140,19 @@ public class OfflineLC {
     static {
     	zdesktop_app_id = new KnownKey("zdesktop_app_id");
 
-    	// UserAgent name of the Zimbra Desktop software.
+    	// UserAgent name of the Zmail Desktop software.
         zdesktop_name = new KnownKey("zdesktop_name");
-        zdesktop_name.setDefault("Zimbra Desktop");
+        zdesktop_name.setDefault("Zmail Desktop");
         
         // Release label such as R or BETA
         zdesktop_relabel = new KnownKey("zdesktop_relabel");
         zdesktop_relabel.setDefault("ALPHA");
         
-        // Version number of the Zimbra Desktop software.
+        // Version number of the Zmail Desktop software.
         zdesktop_version = new KnownKey("zdesktop_version");
         zdesktop_version.setDefault("2.0");
         
-        // Build number of the Zimbra Desktop software.
+        // Build number of the Zmail Desktop software.
         zdesktop_buildid = new KnownKey("zdesktop_buildid");
         zdesktop_buildid.setDefault("1");
         
@@ -375,7 +375,7 @@ public class OfflineLC {
 
         // support email address
         zdesktop_support_email = new KnownKey("zdesktop_support_email");
-        zdesktop_support_email.setDefault("zdesktop-report@zimbra.com");
+        zdesktop_support_email.setDefault("zdesktop-report@zmail.com");
 
         // min zcs server version to support tgz format for sync
         zdesktop_min_zcs_version_sync_tgz = new KnownKey("zdesktop_min_zcs_version_sync_tgz");
@@ -407,7 +407,7 @@ public class OfflineLC {
         // size threshold for blob store compression
         zdesktop_volume_compression_threshold = new KnownKey("zdesktop_volume_compression_threshold", "131072");
 
-        zdesktop_backup_dir = new KnownKey("zdesktop_backup_dir", "${zimbra_home}/../zd_backup");
+        zdesktop_backup_dir = new KnownKey("zdesktop_backup_dir", "${zmail_home}/../zd_backup");
         
         //number of io exceptions in a single sync which triggers abort
         zdesktop_sync_io_exception_limit = new KnownKey("zdesktop_sync_io_exception_limit", "10");
@@ -418,15 +418,15 @@ public class OfflineLC {
 
         //by default disabled in localconfig
         zdesktop_heapdump_enabled = new KnownKey("zdesktop_heapdump_enabled", "false");
-        zdesktop_heapdump_dir = new KnownKey("zdesktop_heapdump_dir", "${zimbra_home}/heapdump");
+        zdesktop_heapdump_dir = new KnownKey("zdesktop_heapdump_dir", "${zmail_home}/heapdump");
         //ftp account used for uploading heap dumps
-        zdesktop_heapdump_ftp = new KnownKey("zdesktop_heapdump_ftp", "ftp.zimbra.com");
+        zdesktop_heapdump_ftp = new KnownKey("zdesktop_heapdump_ftp", "ftp.zmail.com");
         zdesktop_heapdump_ftp_user = new KnownKey("zdesktop_heapdump_ftp_user", "zdthrdump");
         zdesktop_heapdump_ftp_psw = new KnownKey("zdesktop_heapdump_ftp_psw", "kvlprG");
         //mailbox cache size for LRU used in OfflineMailboxMananer
         zdesktop_mailbox_cache = new KnownKey("zdesktop_mailbox_cache", "50");
         //archive dir
-        zdesktop_archive_dir = new KnownKey("zdesktop_archive_dir", "${zimbra_tmp_directory}/archive");
+        zdesktop_archive_dir = new KnownKey("zdesktop_archive_dir", "${zmail_tmp_directory}/archive");
     }
 
     public static String getFullVersion() {

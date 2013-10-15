@@ -1,4 +1,4 @@
-<project name="ZimbraTagLib" default="jar">
+<project name="ZmailTagLib" default="jar">
 
     <import file="../ant-global.xml" />
 
@@ -9,7 +9,7 @@
 
     <property name="webinf.dir" location="WEB-INF"/>
 
-    <property name="jarfile" location="${build.dir}/zimbrataglib.jar" />
+    <property name="jarfile" location="${build.dir}/zmailtaglib.jar" />
 
     <condition property='isProduction' value='true'>
         <or>

@@ -1,7 +1,7 @@
-<%@ page import="com.zimbra.cs.taglib.bean.BeanUtils" %>
+<%@ page import="org.zmail.cs.taglib.bean.BeanUtils" %>
 <%@ page import="java.util.regex.Pattern" %>
 <%@ page import="java.util.regex.Matcher" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
 <!--
 ***** BEGIN LICENSE BLOCK *****
 Zimbra Collaboration Suite Web Client
@@ -24,7 +24,7 @@ basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
 
 
     final String SKIN_COOKIE_NAME = "ZM_SKIN";
-    String skin = application.getInitParameter("zimbraDefaultSkin");
+    String skin = application.getInitParameter("zmailDefaultSkin");
     Cookie[] cookies = request.getCookies();
     String requestSkin = request.getParameter("skin");
     if (requestSkin != null) {
@@ -53,7 +53,7 @@ basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <title>Zimbra Spreadsheet Prototype</title>
+    <title>Zmail Spreadsheet Prototype</title>
     <link rel="stylesheet" href="<%= contextPath %>/css/common,dwt,msgview,login,zm,spellcheck,spreadsheet,images,skin.css?v=<%= vers %><%= inSkinDebugMode || inDevMode ? "&debug=1" : "" %>&skin=${zm:cook(skin)}" />
 	<jsp:include page="Resources.jsp">
 		<jsp:param name="res" value="I18nMsg,AjxMsg,ZMsg,ZmMsg,AjxKeys" />

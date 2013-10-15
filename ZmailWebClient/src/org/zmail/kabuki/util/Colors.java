@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.kabuki.util;
+package org.zmail.kabuki.util;
 
 import java.awt.Color;
 import java.io.*;

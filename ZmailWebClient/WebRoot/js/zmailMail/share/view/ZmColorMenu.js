@@ -213,7 +213,7 @@ ZmColorMenuItem.prototype.toString = function() {
     return "ZmColorMenuItem";
 };
 
-ZmColorMenuItem.prototype.TEMPLATE = "zimbra.Widgets#ZmColorMenuItem";
+ZmColorMenuItem.prototype.TEMPLATE = "zmail.Widgets#ZmColorMenuItem";
 
 // DwtMenuItem methods
 

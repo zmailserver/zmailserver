@@ -22,7 +22,7 @@ ZaMTAListController = function(appCtxt, container) {
    	this._toolbarOperations = new Array();
    	this._popupOperations = new Array();			
 	this.MTAPool = [];
-	this._helpURL = location.pathname + ZaUtil.HELP_URL + "monitoring/monitoring_zimbra_mta_mail_queues.htm?locid="+AjxEnv.DEFAULT_LOCALE;
+	this._helpURL = location.pathname + ZaUtil.HELP_URL + "monitoring/monitoring_zmail_mta_mail_queues.htm?locid="+AjxEnv.DEFAULT_LOCALE;
 	this._helpButtonText = ZaMsg.helpManageMailQueue;
 }
 
@@ -62,7 +62,7 @@ function(list, openInNewTab) {
 			tmp[i].load("id",tmp[i].id,false,true);
 		}
 	}	
-	//ZaApp.getInstance().pushView(ZaZimbraAdmin._POSTQ_VIEW);			
+	//ZaApp.getInstance().pushView(ZaZmailAdmin._POSTQ_VIEW);			
 	ZaApp.getInstance().pushView(this.getContentViewId());
 	this._removeList = new Array();
 	if (list != null)

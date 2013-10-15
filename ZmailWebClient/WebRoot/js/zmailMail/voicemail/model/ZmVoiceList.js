@@ -133,6 +133,6 @@ function(params) {
 
 ZmVoiceList.prototype._getActionNamespace =
 function() {
-	return "urn:zimbraVoice";
+	return "urn:zmailVoice";
 };
 

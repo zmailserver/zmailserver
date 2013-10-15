@@ -5,10 +5,10 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ZimbraMigrationConsole")][assembly: AssemblyDescription(
+[assembly: AssemblyTitle("ZmailMigrationConsole")][assembly: AssemblyDescription(
 "")][assembly: AssemblyConfiguration("")][assembly: AssemblyCompany(
 "Microsoft")][assembly: AssemblyProduct(
-"ZimbraMigrationConsole")][assembly: AssemblyCopyright(
+"ZmailMigrationConsole")][assembly: AssemblyCopyright(
 "Copyright © Microsoft 2011")][assembly: AssemblyTrademark("")][assembly: AssemblyCulture(
 "")]
 // Setting ComVisible to false makes the types in this assembly not visible

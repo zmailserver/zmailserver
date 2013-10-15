@@ -14,9 +14,9 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.util.staf;
+package org.zmail.qa.selenium.framework.util.staf;
 
-import com.zimbra.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.HarnessException;
 
 public class StafServicePROCESS extends StafAbstract {
 	
@@ -51,8 +51,8 @@ public class StafServicePROCESS extends StafAbstract {
 	 */
 	public boolean execute(String command) throws HarnessException {
 		if ( command.trim().startsWith("zm") ) {
-			// For zm commands, run as zimbra user, and prepend the full path
-			StafParms = String.format("START SHELL COMMAND \"su - zimbra -c '/opt/zimbra/bin/%s'\" RETURNSTDOUT RETURNSTDERR WAIT %d", command, StafTimeoutMillis);
+			// For zm commands, run as zmail user, and prepend the full path
+			StafParms = String.format("START SHELL COMMAND \"su - zmail -c '/opt/zmail/bin/%s'\" RETURNSTDOUT RETURNSTDERR WAIT %d", command, StafTimeoutMillis);
 		} else {
 			StafParms = String.format("START SHELL COMMAND \"%s\" RETURNSTDOUT RETURNSTDERR WAIT %d", command, StafTimeoutMillis);
 		}

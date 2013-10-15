@@ -14,27 +14,27 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.tasks.gui.features;
+package org.zmail.qa.selenium.projects.ajax.tests.tasks.gui.features;
 
 import java.util.HashMap;
 import java.util.List;
 
 import org.testng.annotations.Test;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.TaskItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.util.GeneralUtility;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.TaskItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.util.GeneralUtility;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
 
-public class ZimbraFeatureTaskEnabled extends AjaxCommonTest {
+public class ZmailFeatureTaskEnabled extends AjaxCommonTest {
 
 	@SuppressWarnings("serial")
-	public ZimbraFeatureTaskEnabled() {
-		logger.info("New " + ZimbraFeatureTaskEnabled.class.getCanonicalName());
+	public ZmailFeatureTaskEnabled() {
+		logger.info("New " + ZmailFeatureTaskEnabled.class.getCanonicalName());
 
 		// All tests start at the login page
 		super.startingPage = app.zPageTasks;
@@ -43,16 +43,16 @@ public class ZimbraFeatureTaskEnabled extends AjaxCommonTest {
 			{
 
 				// Only task is enabled
-				put("zimbraFeatureTasksEnabled", "TRUE");
-				put("zimbraFeatureMailEnabled", "FALSE");
-				put("zimbraFeatureContactsEnabled", "FALSE");
-				put("zimbraFeatureCalendarEnabled", "FALSE");
-				put("zimbraFeatureBriefcasesEnabled", "FALSE");
+				put("zmailFeatureTasksEnabled", "TRUE");
+				put("zmailFeatureMailEnabled", "FALSE");
+				put("zmailFeatureContactsEnabled", "FALSE");
+				put("zmailFeatureCalendarEnabled", "FALSE");
+				put("zmailFeatureBriefcasesEnabled", "FALSE");
 
-			    // https://bugzilla.zimbra.com/show_bug.cgi?id=62161#c3
-			    // put("zimbraFeatureOptionsEnabled", "FALSE");
+			    // https://bugzilla.zmail.com/show_bug.cgi?id=62161#c3
+			    // put("zmailFeatureOptionsEnabled", "FALSE");
 				
-				put("zimbraPrefTasksReadingPaneLocation", "bottom");
+				put("zmailPrefTasksReadingPaneLocation", "bottom");
 				
 
 			}
@@ -62,15 +62,15 @@ public class ZimbraFeatureTaskEnabled extends AjaxCommonTest {
 	
 	@Test(	description = "Load the Task tab with just Tasks enabled",
 			groups = { "functional" })
-	public void ZimbraFeatureTaskEnabled_01() throws HarnessException {
+	public void ZmailFeatureTaskEnabled_01() throws HarnessException {
 		
 		FolderItem taskFolder = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Tasks);
 
 		// Create a basic task
-		String subject = "task" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "task" + ZmailSeleniumProperties.getUniqueString();
 				
 		app.zGetActiveAccount().soapSend(
-				"<CreateTaskRequest xmlns='urn:zimbraMail'>" +
+				"<CreateTaskRequest xmlns='urn:zmailMail'>" +
 					"<m >" +
 			        	"<inv>" +
 			        		"<comp name='"+ subject +"'>" +
@@ -79,7 +79,7 @@ public class ZimbraFeatureTaskEnabled extends AjaxCommonTest {
 			        	"</inv>" +
 			        	"<su>"+ subject +"</su>" +
 			        	"<mp ct='text/plain'>" +
-			        		"<content>content"+ ZimbraSeleniumProperties.getUniqueString() +"</content>" +
+			        		"<content>content"+ ZmailSeleniumProperties.getUniqueString() +"</content>" +
 			        	"</mp>" +
 					"</m>" +
 				"</CreateTaskRequest>");

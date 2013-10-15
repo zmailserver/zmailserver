@@ -62,14 +62,14 @@ UT.test("Search Conditions", {
 		var activityStreamDialog = appCtxt.getActivityStreamFilterDialog();
 		var testRule = new ZmFilterRule("testRule", true, {}, {});
 		testRule.addCondition(ZmFilterRule.TEST_HEADER, ZmFilterRule.OP_CONTAINS, "Daily Deal!", ZmFilterRule.C_HEADER_VALUE[ZmFilterRule.C_SUBJECT]);
-		testRule.addCondition(ZmFilterRule.TEST_ADDRESS, ZmFilterRule.OP_CONTAINS, "test@example.zimbra.com", ZmFilterRule.C_HEADER_VALUE[ZmFilterRule.C_FROM]);
+		testRule.addCondition(ZmFilterRule.TEST_ADDRESS, ZmFilterRule.OP_CONTAINS, "test@example.zmail.com", ZmFilterRule.C_HEADER_VALUE[ZmFilterRule.C_FROM]);
 		activityStreamDialog._subject = "Daily Deal!";
-		activityStreamDialog._from = "test@example.zimbra.com";
+		activityStreamDialog._from = "test@example.zmail.com";
 		var result = activityStreamDialog._isNewCondition(testRule);
 		UT.equal(result, false, "subject or from is not a new condition");
 		
 		activityStreamDialog._subject = "Daily Digest";
-		activityStreamDialog._from = "daily@example.zimbra.com";
+		activityStreamDialog._from = "daily@example.zmail.com";
 		result = activityStreamDialog._isNewCondition(testRule);
 		UT.equal(result, true, "subject or from is new condition");
 		
@@ -79,9 +79,9 @@ UT.test("Search Conditions", {
 		result = activityStreamDialog._isNewCondition(testRule);
 		UT.equal(result, false, "subject is not a new condition");
 		
-		activityStreamDialog._from = "deal@example.zimbra.com";
+		activityStreamDialog._from = "deal@example.zmail.com";
 		activityStreamDialog._subject = null;
-		testRule.addCondition(ZmFilterRule.TEST_ADDRESS, ZmFilterRule.OP_CONTAINS, "@example.zimbra.com", ZmFilterRule.C_HEADER_VALUE[ZmFilterRule.C_FROM]);
+		testRule.addCondition(ZmFilterRule.TEST_ADDRESS, ZmFilterRule.OP_CONTAINS, "@example.zmail.com", ZmFilterRule.C_HEADER_VALUE[ZmFilterRule.C_FROM]);
 		result = activityStreamDialog._isNewCondition(testRule);
 		UT.equal(result, false, "from is not a new condition");
 	}

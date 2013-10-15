@@ -11,13 +11,13 @@
  * Software distributed under the License is distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
---%><%@ tag body-content="empty" import="java.io.*,java.util.*,com.zimbra.webClient.servlet.SkinResources"
+--%><%@ tag body-content="empty" import="java.io.*,java.util.*,org.zmail.webClient.servlet.SkinResources"
 %><%@ attribute name="var" rtexprvalue="false" required="true"
 %><%@ attribute name="value" rtexprvalue="true" required="true"
 %><%@ variable name-from-attribute="var" alias="info" scope="AT_END"
 %><%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"
-%><%@ taglib prefix="zm" uri="com.zimbra.zm"
-%><%@ taglib prefix="fmt" uri="com.zimbra.i18n"
+%><%@ taglib prefix="zm" uri="org.zmail.zm"
+%><%@ taglib prefix="fmt" uri="org.zmail.i18n"
 %><%!
 static final String V_NO_SKIN = "<noskin>";
 
@@ -28,7 +28,7 @@ static File getImageSrc(File appdir, String src, Locale locale) {
     String dirname = dir.getName();
     File dirdir = dir.getParentFile();
     if (!file.exists()) {
-        File zfile = new File(dir.getParentFile(), "zimbra/"+file.getName());
+        File zfile = new File(dir.getParentFile(), "zmail/"+file.getName());
         if (zfile.exists()) {
             file = zfile;
         }
@@ -48,8 +48,8 @@ static File getImageSrc(File appdir, String src, Locale locale) {
 %><fmt:getLocale var='locale' scope='page' /><%
 PageContext pageContext = (PageContext)getJspContext();
 %>
-<c:set var="zimbraMailURL" value="${zm:getMailURL(pageContext)}"/>
-<c:set var="contextURL" value="${zimbraMailURL}/css/skin.css"/>
+<c:set var="zmailMailURL" value="${zm:getMailURL(pageContext)}"/>
+<c:set var="contextURL" value="${zmailMailURL}/css/skin.css"/>
 <%
 // generate cache-id
 String skin = (String)pageContext.findAttribute("skin");

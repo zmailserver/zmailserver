@@ -327,7 +327,7 @@ InboxZero.prototype._pollDeferredItems = function() {
 
         var request = {
             SearchRequest: {
-                _jsns: "urn:zimbraMail",
+                _jsns: "urn:zmailMail",
                 query: [ "inid:\"",deferred.id,"\" AND ","before:-1minutes" ].join(""),
                 types: "message"
             }
@@ -371,13 +371,13 @@ InboxZero.prototype._pollDeferredItemsResponse = function(result) {
         var params = {
             jsonObj: {
                 BatchRequest: {
-                    _jsns: "urn:zimbra",
+                    _jsns: "urn:zmail",
                     onerror: "continue",
                     ItemActionRequest: [
-                        {   _jsns: "urn:zimbraMail",
+                        {   _jsns: "urn:zmailMail",
                             action: { id: ids, op: "!read" }
                         },
-                        {   _jsns: "urn:zimbraMail",
+                        {   _jsns: "urn:zmailMail",
                             action: { id: ids, op: "move", l: ZmOrganizer.ID_INBOX }
                         }
                     ]
@@ -509,13 +509,13 @@ InboxZero.prototype._createFolders = function(callback) {
     var params = {
         jsonObj: {
             BatchRequest: {
-                _jsns: "urn:zimbra",
+                _jsns: "urn:zmail",
                 onerror: "continue",
                 CreateFolderRequest: [
-                    {   _jsns: "urn:zimbraMail",
+                    {   _jsns: "urn:zmailMail",
                         folder: { name: this.getMessage("archiveFolder"), l: ZmOrganizer.ID_INBOX }
                     },
-                    {   _jsns: "urn:zimbraMail",
+                    {   _jsns: "urn:zmailMail",
                         folder: { name: this.getMessage("deferFolder"), l: ZmOrganizer.ID_INBOX }
                     }
                 ]

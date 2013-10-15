@@ -12,18 +12,18 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Pair;
-import com.zimbra.cs.db.DbOfflineMailbox;
-import com.zimbra.cs.mailbox.MailServiceException.NoSuchItemException;
-import com.zimbra.cs.mailbox.util.TypedIdList;
-import com.zimbra.cs.redolog.op.RedoableOp;
-import com.zimbra.cs.session.PendingModifications.Change;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Pair;
+import org.zmail.cs.db.DbOfflineMailbox;
+import org.zmail.cs.mailbox.MailServiceException.NoSuchItemException;
+import org.zmail.cs.mailbox.util.TypedIdList;
+import org.zmail.cs.redolog.op.RedoableOp;
+import org.zmail.cs.session.PendingModifications.Change;
 
 public abstract class ChangeTrackingMailbox extends SyncMailbox {
 

@@ -82,21 +82,21 @@ function(entry) {
 
 	
 	if (entry.getAttrs) {
-        if(entry.getAttrs[ZaCos.A_zimbraAvailableSkin] || entry.getAttrs.all) {
-            var skins = entry.attrs[ZaCos.A_zimbraAvailableSkin];
+        if(entry.getAttrs[ZaCos.A_zmailAvailableSkin] || entry.getAttrs.all) {
+            var skins = entry.attrs[ZaCos.A_zmailAvailableSkin];
             if(skins != null && skins != "") {
                 if (AjxUtil.isString(skins))	 {
-                    this._containedObject.attrs[ZaCos.A_zimbraAvailableSkin] = [skins];
+                    this._containedObject.attrs[ZaCos.A_zmailAvailableSkin] = [skins];
                 } else {
                     var cnt = skins.length;
-                    this._containedObject.attrs[ZaCos.A_zimbraAvailableSkin] = [];
+                    this._containedObject.attrs[ZaCos.A_zmailAvailableSkin] = [];
                     for(var i = 0; i < cnt; i ++) {
-                        this._containedObject.attrs[ZaCos.A_zimbraAvailableSkin].push(skins[i]);
+                        this._containedObject.attrs[ZaCos.A_zmailAvailableSkin].push(skins[i]);
                     }
                 }
 
             } else {
-                this._containedObject.attrs[ZaCos.A_zimbraAvailableSkin] = null;
+                this._containedObject.attrs[ZaCos.A_zmailAvailableSkin] = null;
             }
 
             var skins = ZaApp.getInstance().getInstalledSkins();
@@ -111,7 +111,7 @@ function(entry) {
             ZaCosXFormView.themeChoices.dirtyChoices();
         }
 
-        if(entry.getAttrs[ZaCos.A_zimbraZimletAvailableZimlets] || entry.getAttrs.all) {
+        if(entry.getAttrs[ZaCos.A_zmailZimletAvailableZimlets] || entry.getAttrs.all) {
             //get all Zimlets
             var allZimlets = ZaZimlet.getAll(ZaZimlet.EXCLUDE_EXTENSIONS);
             if(allZimlets == null) {
@@ -155,178 +155,178 @@ ZaCosXFormView.gotNoSkins = function () {
 }
 
 ZaCosXFormView.isPasswordLockoutEnabled = function () {
-	return (this.getInstanceValue(ZaCos.A_zimbraPasswordLockoutEnabled) == 'TRUE');
+	return (this.getInstanceValue(ZaCos.A_zmailPasswordLockoutEnabled) == 'TRUE');
 }
 
 ZaCosXFormView.isMailFeatureEnabled = function () {
-	return (this.getInstanceValue(ZaCos.A_zimbraFeatureMailEnabled) == "TRUE");
+	return (this.getInstanceValue(ZaCos.A_zmailFeatureMailEnabled) == "TRUE");
 }
 
 ZaCosXFormView.isContactsFeatureEnabled = function () {
-    return this.getInstanceValue(ZaCos.A_zimbraFeatureContactsEnabled) == "TRUE";
+    return this.getInstanceValue(ZaCos.A_zmailFeatureContactsEnabled) == "TRUE";
 }
 
 ZaCosXFormView.isCalendarFeatureEnabled = function () {
-	return this.getInstanceValue(ZaCos.A_zimbraFeatureCalendarEnabled)=="TRUE";
+	return this.getInstanceValue(ZaCos.A_zmailFeatureCalendarEnabled)=="TRUE";
 }
 
 ZaCosXFormView.isMailForwardingEnabled = function () {
-	return (this.getInstanceValue(ZaCos.A_zimbraFeatureMailForwardingEnabled) == "TRUE");
+	return (this.getInstanceValue(ZaCos.A_zmailFeatureMailForwardingEnabled) == "TRUE");
 }
 
 //ZaCosXFormView.isMailFeatureEnabled = function () {
-//	return (this.getInstanceValue(ZaCos.A_zimbraFeatureMailEnabled) == "TRUE");
+//	return (this.getInstanceValue(ZaCos.A_zmailFeatureMailEnabled) == "TRUE");
 //}
 
 ZaCosXFormView.isBriefcaseFeatureEnabled = function () {
-	return (this.getInstanceValue(ZaCos.A_zimbraFeatureBriefcasesEnabled) == "TRUE");
+	return (this.getInstanceValue(ZaCos.A_zmailFeatureBriefcasesEnabled) == "TRUE");
 }
 
-ZaCosXFormView.FEATURE_TAB_ATTRS = [ZaCos.A_zimbraFeatureMailEnabled,
-	ZaCos.A_zimbraFeatureReadReceiptsEnabled,
-	ZaCos.A_zimbraFeatureContactsEnabled,
-    ZaCos.A_zimbraFeatureDistributionListFolderEnabled,
-	ZaCos.A_zimbraFeatureCalendarEnabled,
-	ZaCos.A_zimbraFeatureTasksEnabled,
-	//ZaCos.A_zimbraFeatureNotebookEnabled,
-	ZaCos.A_zimbraFeatureBriefcasesEnabled,
-	//ZaCos.A_zimbraFeatureIMEnabled,
-	ZaCos.A_zimbraFeatureOptionsEnabled,
-	ZaCos.A_zimbraFeatureTaggingEnabled,
-	ZaCos.A_zimbraFeatureSharingEnabled,
-	ZaCos.A_zimbraExternalSharingEnabled,
-	ZaCos.A_zimbraPublicSharingEnabled,
-	ZaCos.A_zimbraFeatureChangePasswordEnabled,
-	ZaCos.A_zimbraFeatureSkinChangeEnabled,
-	ZaCos.A_zimbraFeatureManageZimlets,
-	ZaCos.A_zimbraFeatureHtmlComposeEnabled,
-	//ZaCos.A_zimbraFeatureShortcutAliasesEnabled,
-	ZaCos.A_zimbraFeatureGalEnabled,
-	ZaCos.A_zimbraFeatureMAPIConnectorEnabled,
-	ZaCos.A_zimbraFeatureGalAutoCompleteEnabled,
-	ZaCos.A_zimbraFeatureMailPriorityEnabled,
-	ZaCos.A_zimbraFeatureFlaggingEnabled,
-	ZaCos.A_zimbraImapEnabled,
-	ZaCos.A_zimbraPop3Enabled,
-	ZaCos.A_zimbraFeatureImapDataSourceEnabled,
-	ZaCos.A_zimbraFeaturePop3DataSourceEnabled,
-	ZaCos.A_zimbraFeatureConversationsEnabled,
-	ZaCos.A_zimbraFeatureFiltersEnabled,
-	ZaCos.A_zimbraFeatureOutOfOfficeReplyEnabled,
-	ZaCos.A_zimbraFeatureNewMailNotificationEnabled,
-	ZaCos.A_zimbraFeatureMailPollingIntervalPreferenceEnabled,
-	ZaCos.A_zimbraFeatureIdentitiesEnabled,
-	ZaCos.A_zimbraFeatureGroupCalendarEnabled,
-	//ZaCos.A_zimbraFeatureInstantNotify,
-	ZaCos.A_zimbraFeaturePeopleSearchEnabled,
-	ZaCos.A_zimbraFeatureAdvancedSearchEnabled,
-	ZaCos.A_zimbraFeatureSavedSearchesEnabled,
-	ZaCos.A_zimbraFeatureInitialSearchPreferenceEnabled,
-	ZaCos.A_zimbraFeatureImportFolderEnabled,
-    ZaCos.A_zimbraFeatureExportFolderEnabled,
-	ZaCos.A_zimbraDumpsterEnabled,
-	ZaCos.A_zimbraDumpsterPurgeEnabled,
-	ZaCos.A_zimbraFeatureMailSendLaterEnabled,
-	//ZaCos.A_zimbraFeatureFreeBusyViewEnabled,
-    ZaCos.A_zimbraFeatureCalendarReminderDeviceEmailEnabled,
-	ZaCos.A_zimbraFeatureSMIMEEnabled
+ZaCosXFormView.FEATURE_TAB_ATTRS = [ZaCos.A_zmailFeatureMailEnabled,
+	ZaCos.A_zmailFeatureReadReceiptsEnabled,
+	ZaCos.A_zmailFeatureContactsEnabled,
+    ZaCos.A_zmailFeatureDistributionListFolderEnabled,
+	ZaCos.A_zmailFeatureCalendarEnabled,
+	ZaCos.A_zmailFeatureTasksEnabled,
+	//ZaCos.A_zmailFeatureNotebookEnabled,
+	ZaCos.A_zmailFeatureBriefcasesEnabled,
+	//ZaCos.A_zmailFeatureIMEnabled,
+	ZaCos.A_zmailFeatureOptionsEnabled,
+	ZaCos.A_zmailFeatureTaggingEnabled,
+	ZaCos.A_zmailFeatureSharingEnabled,
+	ZaCos.A_zmailExternalSharingEnabled,
+	ZaCos.A_zmailPublicSharingEnabled,
+	ZaCos.A_zmailFeatureChangePasswordEnabled,
+	ZaCos.A_zmailFeatureSkinChangeEnabled,
+	ZaCos.A_zmailFeatureManageZimlets,
+	ZaCos.A_zmailFeatureHtmlComposeEnabled,
+	//ZaCos.A_zmailFeatureShortcutAliasesEnabled,
+	ZaCos.A_zmailFeatureGalEnabled,
+	ZaCos.A_zmailFeatureMAPIConnectorEnabled,
+	ZaCos.A_zmailFeatureGalAutoCompleteEnabled,
+	ZaCos.A_zmailFeatureMailPriorityEnabled,
+	ZaCos.A_zmailFeatureFlaggingEnabled,
+	ZaCos.A_zmailImapEnabled,
+	ZaCos.A_zmailPop3Enabled,
+	ZaCos.A_zmailFeatureImapDataSourceEnabled,
+	ZaCos.A_zmailFeaturePop3DataSourceEnabled,
+	ZaCos.A_zmailFeatureConversationsEnabled,
+	ZaCos.A_zmailFeatureFiltersEnabled,
+	ZaCos.A_zmailFeatureOutOfOfficeReplyEnabled,
+	ZaCos.A_zmailFeatureNewMailNotificationEnabled,
+	ZaCos.A_zmailFeatureMailPollingIntervalPreferenceEnabled,
+	ZaCos.A_zmailFeatureIdentitiesEnabled,
+	ZaCos.A_zmailFeatureGroupCalendarEnabled,
+	//ZaCos.A_zmailFeatureInstantNotify,
+	ZaCos.A_zmailFeaturePeopleSearchEnabled,
+	ZaCos.A_zmailFeatureAdvancedSearchEnabled,
+	ZaCos.A_zmailFeatureSavedSearchesEnabled,
+	ZaCos.A_zmailFeatureInitialSearchPreferenceEnabled,
+	ZaCos.A_zmailFeatureImportFolderEnabled,
+    ZaCos.A_zmailFeatureExportFolderEnabled,
+	ZaCos.A_zmailDumpsterEnabled,
+	ZaCos.A_zmailDumpsterPurgeEnabled,
+	ZaCos.A_zmailFeatureMailSendLaterEnabled,
+	//ZaCos.A_zmailFeatureFreeBusyViewEnabled,
+    ZaCos.A_zmailFeatureCalendarReminderDeviceEmailEnabled,
+	ZaCos.A_zmailFeatureSMIMEEnabled
 ];
 
 ZaCosXFormView.FEATURE_TAB_RIGHTS = [];
 
 ZaCosXFormView.PREFERENCES_TAB_ATTRS = [
-	ZaCos.A_zimbraPrefMailSendReadReceipts,
-	ZaCos.A_zimbraPrefUseTimeZoneListInCalendar,
-	ZaCos.A_zimbraPrefCalendarUseQuickAdd,
-	ZaCos.A_zimbraPrefCalendarAlwaysShowMiniCal,
-	ZaCos.A_zimbraPrefCalendarApptReminderWarningTime,
-	ZaCos.A_zimbraPrefTimeZoneId,
-	ZaCos.A_zimbraPrefGalAutoCompleteEnabled,
-	ZaCos.A_zimbraPrefAutoAddAddressEnabled,
-	ZaCos.A_zimbraMailSignatureMaxLength,
-	ZaCos.A_zimbraPrefForwardReplyInOriginalFormat,
-	ZaCos.A_zimbraPrefHtmlEditorDefaultFontColor,
-	ZaCos.A_zimbraPrefHtmlEditorDefaultFontFamily,
-	ZaCos.A_zimbraPrefHtmlEditorDefaultFontSize,
-	ZaCos.A_zimbraPrefComposeFormat,
-	ZaCos.A_zimbraPrefComposeInNewWindow,
-	ZaCos.A_zimbraAllowAnyFromAddress,
-	ZaCos.A_zimbraMailMinPollingInterval,
-	ZaCos.A_zimbraPrefMailPollingInterval,
-	ZaCos.A_zimbraPrefAutoSaveDraftInterval,
-	ZaCos.A_zimbraPrefMailDefaultCharset,
-	ZaCos.A_zimbraMaxMailItemsPerPage,
-	ZaCos.A_zimbraPrefMailItemsPerPage,
-	ZaCos.A_zimbraPrefGroupMailBy,
-	ZaCos.A_zimbraPrefDisplayExternalImages,
-	ZaCos.A_zimbraPrefMessageViewHtmlPreferred,
-	ZaCos.A_zimbraPrefLocale,
-	ZaCos.A_zimbraJunkMessagesIndexingEnabled,
-	ZaCos.A_zimbraPrefShowSelectionCheckbox,
-	ZaCos.A_zimbraPrefWarnOnExit,
-	ZaCos.A_zimbraPrefAdminConsoleWarnOnExit,
-    ZaCos.A_zimbraPrefUseKeyboardShortcuts,
-	ZaCos.A_zimbraPrefImapSearchFoldersEnabled,
-	ZaCos.A_zimbraPrefShowSearchString,
-	ZaCos.A_zimbraPrefMailInitialSearch,
-	ZaCos.A_zimbraPrefClientType,
-	ZaCos.A_zimbraPrefCalendarInitialView,
-	ZaCos.A_zimbraPrefCalendarFirstDayOfWeek,
-	ZaCos.A_zimbraPrefCalendarReminderFlashTitle,
-	ZaCos.A_zimbraPrefCalendarAllowCancelEmailToSelf,
-	ZaCos.A_zimbraPrefCalendarAllowPublishMethodInvite,
-	ZaCos.A_zimbraPrefCalendarToasterEnabled,
-	ZaCos.A_zimbraPrefCalendarShowPastDueReminders,
-	ZaCos.A_zimbraPrefAppleIcalDelegationEnabled,
-	ZaCos.A_zimbraPrefMandatorySpellCheckEnabled
+	ZaCos.A_zmailPrefMailSendReadReceipts,
+	ZaCos.A_zmailPrefUseTimeZoneListInCalendar,
+	ZaCos.A_zmailPrefCalendarUseQuickAdd,
+	ZaCos.A_zmailPrefCalendarAlwaysShowMiniCal,
+	ZaCos.A_zmailPrefCalendarApptReminderWarningTime,
+	ZaCos.A_zmailPrefTimeZoneId,
+	ZaCos.A_zmailPrefGalAutoCompleteEnabled,
+	ZaCos.A_zmailPrefAutoAddAddressEnabled,
+	ZaCos.A_zmailMailSignatureMaxLength,
+	ZaCos.A_zmailPrefForwardReplyInOriginalFormat,
+	ZaCos.A_zmailPrefHtmlEditorDefaultFontColor,
+	ZaCos.A_zmailPrefHtmlEditorDefaultFontFamily,
+	ZaCos.A_zmailPrefHtmlEditorDefaultFontSize,
+	ZaCos.A_zmailPrefComposeFormat,
+	ZaCos.A_zmailPrefComposeInNewWindow,
+	ZaCos.A_zmailAllowAnyFromAddress,
+	ZaCos.A_zmailMailMinPollingInterval,
+	ZaCos.A_zmailPrefMailPollingInterval,
+	ZaCos.A_zmailPrefAutoSaveDraftInterval,
+	ZaCos.A_zmailPrefMailDefaultCharset,
+	ZaCos.A_zmailMaxMailItemsPerPage,
+	ZaCos.A_zmailPrefMailItemsPerPage,
+	ZaCos.A_zmailPrefGroupMailBy,
+	ZaCos.A_zmailPrefDisplayExternalImages,
+	ZaCos.A_zmailPrefMessageViewHtmlPreferred,
+	ZaCos.A_zmailPrefLocale,
+	ZaCos.A_zmailJunkMessagesIndexingEnabled,
+	ZaCos.A_zmailPrefShowSelectionCheckbox,
+	ZaCos.A_zmailPrefWarnOnExit,
+	ZaCos.A_zmailPrefAdminConsoleWarnOnExit,
+    ZaCos.A_zmailPrefUseKeyboardShortcuts,
+	ZaCos.A_zmailPrefImapSearchFoldersEnabled,
+	ZaCos.A_zmailPrefShowSearchString,
+	ZaCos.A_zmailPrefMailInitialSearch,
+	ZaCos.A_zmailPrefClientType,
+	ZaCos.A_zmailPrefCalendarInitialView,
+	ZaCos.A_zmailPrefCalendarFirstDayOfWeek,
+	ZaCos.A_zmailPrefCalendarReminderFlashTitle,
+	ZaCos.A_zmailPrefCalendarAllowCancelEmailToSelf,
+	ZaCos.A_zmailPrefCalendarAllowPublishMethodInvite,
+	ZaCos.A_zmailPrefCalendarToasterEnabled,
+	ZaCos.A_zmailPrefCalendarShowPastDueReminders,
+	ZaCos.A_zmailPrefAppleIcalDelegationEnabled,
+	ZaCos.A_zmailPrefMandatorySpellCheckEnabled
 ];
 ZaCosXFormView.PREFERENCES_TAB_RIGHTS = [];	
 
-ZaCosXFormView.SKIN_TAB_ATTRS = [ZaCos.A_zimbraPrefSkin,ZaCos.A_zimbraAvailableSkin];
+ZaCosXFormView.SKIN_TAB_ATTRS = [ZaCos.A_zmailPrefSkin,ZaCos.A_zmailAvailableSkin];
 ZaCosXFormView.SKIN_TAB_RIGHTS = [];
 
-ZaCosXFormView.ZIMLET_TAB_ATTRS = [ZaCos.A_zimbraZimletAvailableZimlets];
+ZaCosXFormView.ZIMLET_TAB_ATTRS = [ZaCos.A_zmailZimletAvailableZimlets];
 ZaCosXFormView.ZIMLET_TAB_RIGHTS = [ZaCos.RIGHT_GET_ZIMLET, ZaCos.RIGHT_LIST_ZIMLET];
 
-ZaCosXFormView.SERVERPOOL_TAB_ATTRS = [ZaCos.A_zimbraMailHostPool];
+ZaCosXFormView.SERVERPOOL_TAB_ATTRS = [ZaCos.A_zmailMailHostPool];
 ZaCosXFormView.SERVERPOOL_TAB_RIGHTS = [ZaCos.RIGHT_GET_HOSTNAME];
 
-ZaCosXFormView.ADVANCED_TAB_ATTRS = [ZaCos.A_zimbraAttachmentsBlocked,
-	ZaCos.A_zimbraMailQuota,
-	ZaCos.A_zimbraContactMaxNumEntries,
-	ZaCos.A_zimbraQuotaWarnPercent,
-	ZaCos.A_zimbraQuotaWarnInterval,
-	ZaCos.A_zimbraQuotaWarnMessage,
-	ZaCos.A_zimbraPasswordLocked,
-	ZaCos.A_zimbraMinPwdLength,
-	ZaCos.A_zimbraMaxPwdLength,
-	ZaCos.A_zimbraPasswordMinUpperCaseChars,
-	ZaCos.A_zimbraPasswordMinLowerCaseChars,
-	ZaCos.A_zimbraPasswordMinPunctuationChars,
-	ZaCos.A_zimbraPasswordMinNumericChars,
-	ZaCos.A_zimbraPasswordMinPunctuationChars,
-	ZaCos.A_zimbraMinPwdAge,
-	ZaCos.A_zimbraMaxPwdAge,
-	ZaCos.A_zimbraEnforcePwdHistory,
-	ZaCos.A_zimbraPasswordLockoutEnabled,
-	ZaCos.A_zimbraPasswordLockoutMaxFailures,
-	ZaCos.A_zimbraPasswordLockoutDuration,
-	ZaCos.A_zimbraPasswordLockoutFailureLifetime,
-	ZaCos.A_zimbraAdminAuthTokenLifetime,
-	ZaCos.A_zimbraAuthTokenLifetime,
-	ZaCos.A_zimbraMailIdleSessionTimeout,
-	ZaCos.A_zimbraMailMessageLifetime,
-	ZaCos.A_zimbraMailTrashLifetime,
-	ZaCos.A_zimbraMailSpamLifetime,
-	ZaCos.A_zimbraMailDumpsterLifetime,
-	ZaCos.A_zimbraDumpsterUserVisibleAge,
-	ZaCos.A_zimbraFreebusyExchangeUserOrg,
-        ZaCos.A_zimbraDataSourcePop3PollingInterval,
-        ZaCos.A_zimbraDataSourceImapPollingInterval,
-        ZaCos.A_zimbraDataSourceCalendarPollingInterval,
-        ZaCos.A_zimbraDataSourceRssPollingInterval,
-        ZaCos.A_zimbraDataSourceCaldavPollingInterval,
-	ZaCos.A_zimbraDataSourceMinPollingInterval
+ZaCosXFormView.ADVANCED_TAB_ATTRS = [ZaCos.A_zmailAttachmentsBlocked,
+	ZaCos.A_zmailMailQuota,
+	ZaCos.A_zmailContactMaxNumEntries,
+	ZaCos.A_zmailQuotaWarnPercent,
+	ZaCos.A_zmailQuotaWarnInterval,
+	ZaCos.A_zmailQuotaWarnMessage,
+	ZaCos.A_zmailPasswordLocked,
+	ZaCos.A_zmailMinPwdLength,
+	ZaCos.A_zmailMaxPwdLength,
+	ZaCos.A_zmailPasswordMinUpperCaseChars,
+	ZaCos.A_zmailPasswordMinLowerCaseChars,
+	ZaCos.A_zmailPasswordMinPunctuationChars,
+	ZaCos.A_zmailPasswordMinNumericChars,
+	ZaCos.A_zmailPasswordMinPunctuationChars,
+	ZaCos.A_zmailMinPwdAge,
+	ZaCos.A_zmailMaxPwdAge,
+	ZaCos.A_zmailEnforcePwdHistory,
+	ZaCos.A_zmailPasswordLockoutEnabled,
+	ZaCos.A_zmailPasswordLockoutMaxFailures,
+	ZaCos.A_zmailPasswordLockoutDuration,
+	ZaCos.A_zmailPasswordLockoutFailureLifetime,
+	ZaCos.A_zmailAdminAuthTokenLifetime,
+	ZaCos.A_zmailAuthTokenLifetime,
+	ZaCos.A_zmailMailIdleSessionTimeout,
+	ZaCos.A_zmailMailMessageLifetime,
+	ZaCos.A_zmailMailTrashLifetime,
+	ZaCos.A_zmailMailSpamLifetime,
+	ZaCos.A_zmailMailDumpsterLifetime,
+	ZaCos.A_zmailDumpsterUserVisibleAge,
+	ZaCos.A_zmailFreebusyExchangeUserOrg,
+        ZaCos.A_zmailDataSourcePop3PollingInterval,
+        ZaCos.A_zmailDataSourceImapPollingInterval,
+        ZaCos.A_zmailDataSourceCalendarPollingInterval,
+        ZaCos.A_zmailDataSourceRssPollingInterval,
+        ZaCos.A_zmailDataSourceCaldavPollingInterval,
+	ZaCos.A_zmailDataSourceMinPollingInterval
 
 ];
 ZaCosXFormView.ADVANCED_TAB_RIGHTS = [];
@@ -614,9 +614,9 @@ ZaCosXFormView.myXFormModifier = function(xFormObject, entry) {
 	var headerItems = [	{type:_AJX_IMAGE_, src:"COS_32", label:null,rowSpan:2},
 							{type:_OUTPUT_, ref:ZaCos.A_name, label:null,cssClass:"AdminTitle",
                                 visibilityChecks:[ZaItem.hasReadPermission], height: 32, rowSpan:2},				
-							{type:_OUTPUT_, ref:ZaItem.A_zimbraId, label:ZaMsg.NAD_ZimbraID,visibilityChecks:[ZaItem.hasReadPermission]},
-							{type:_OUTPUT_, ref:ZaItem.A_zimbraCreateTimestamp, 
-								label:ZaMsg.LBL_zimbraCreateTimestamp, labelLocation:_LEFT_,
+							{type:_OUTPUT_, ref:ZaItem.A_zmailId, label:ZaMsg.NAD_ZmailID,visibilityChecks:[ZaItem.hasReadPermission]},
+							{type:_OUTPUT_, ref:ZaItem.A_zmailCreateTimestamp, 
+								label:ZaMsg.LBL_zmailCreateTimestamp, labelLocation:_LEFT_,
 								getDisplayValue:function() {
 									var val = ZaItem.formatServerTime(this.getInstanceValue());
 									if(!val)
@@ -644,7 +644,7 @@ ZaCosXFormView.myXFormModifier = function(xFormObject, entry) {
     if(ZaTabView.isTAB_ENABLED(entry,ZaCosXFormView.SKIN_TAB_ATTRS, ZaCosXFormView.SKIN_TAB_RIGHTS)) {
        	_tab4 = ++this.TAB_INDEX;
         this.tabChoices.push({value:_tab4, label:ZaMsg.TABT_Themes});
-        this.helpMap[_tab4] = [location.pathname, ZaUtil.HELP_URL, "ui_themes/defining_theme_for_the_zimbra_web_client_ui.htm", "?locid=", AjxEnv.DEFAULT_LOCALE].join("");
+        this.helpMap[_tab4] = [location.pathname, ZaUtil.HELP_URL, "ui_themes/defining_theme_for_the_zmail_web_client_ui.htm", "?locid=", AjxEnv.DEFAULT_LOCALE].join("");
     }
     
     var allZimlets = ZaZimlet.getAll(ZaZimlet.EXCLUDE_EXTENSIONS);
@@ -684,7 +684,7 @@ ZaCosXFormView.myXFormModifier = function(xFormObject, entry) {
 					enableDisableChecks:[[ZaItem.hasRight,ZaCos.RENAME_COS_RIGHT]],
 					msgName:ZaMsg.NAD_DisplayName,label:ZaMsg.NAD_DisplayName, labelLocation:_LEFT_, cssClass:"admin_xform_name_input", required:true, width: "30em"},
 				ZaItem.descriptionXFormItem ,
-                {ref:ZaCos.A_zimbraNotes, type:_TEXTAREA_, msgName:ZaMsg.NAD_Notes,label:ZaMsg.NAD_Notes, labelLocation:_LEFT_, labelCssStyle:"vertical-align:top;",width: "30em"}
+                {ref:ZaCos.A_zmailNotes, type:_TEXTAREA_, msgName:ZaMsg.NAD_Notes,label:ZaMsg.NAD_Notes, labelLocation:_LEFT_, labelCssStyle:"vertical-align:top;",width: "30em"}
 			]
 		}
 	];
@@ -698,197 +698,197 @@ ZaCosXFormView.myXFormModifier = function(xFormObject, entry) {
             id:"cos_form_features_tab"};
 
         var case2Items = [
-            {type:_ZA_TOP_GROUPER_,  label:ZaMsg.NAD_zimbraMajorFeature, id:"cos_form_features_major",
+            {type:_ZA_TOP_GROUPER_,  label:ZaMsg.NAD_zmailMajorFeature, id:"cos_form_features_major",
             	visibilityChecks:[[ZATopGrouper_XFormItem.isGroupVisible, 
 					[
-						ZaCos.A_zimbraFeatureMailEnabled,
-						ZaCos.A_zimbraFeatureContactsEnabled,
-						ZaCos.A_zimbraFeatureCalendarEnabled,
-						ZaCos.A_zimbraFeatureTasksEnabled,
-						ZaCos.A_zimbraFeatureBriefcasesEnabled,
-						ZaCos.A_zimbraFeatureOptionsEnabled
+						ZaCos.A_zmailFeatureMailEnabled,
+						ZaCos.A_zmailFeatureContactsEnabled,
+						ZaCos.A_zmailFeatureCalendarEnabled,
+						ZaCos.A_zmailFeatureTasksEnabled,
+						ZaCos.A_zmailFeatureBriefcasesEnabled,
+						ZaCos.A_zmailFeatureOptionsEnabled
 					]]
 				],
                 items:[
-                    {ref:ZaCos.A_zimbraFeatureMailEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zimbraFeatureMailEnabled,label:ZaMsg.LBL_zimbraFeatureMailEnabled,trueValue:"TRUE", falseValue:"FALSE"},
-                    {ref:ZaCos.A_zimbraFeatureContactsEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zimbraFeatureContactsEnabled,label:ZaMsg.LBL_zimbraFeatureContactsEnabled,trueValue:"TRUE", falseValue:"FALSE"},
-                    {ref:ZaCos.A_zimbraFeatureCalendarEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zimbraFeatureCalendarEnabled,label:ZaMsg.LBL_zimbraFeatureCalendarEnabled,  trueValue:"TRUE", falseValue:"FALSE"},
-                    {ref:ZaCos.A_zimbraFeatureTasksEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zimbraFeatureTaskEnabled,label:ZaMsg.LBL_zimbraFeatureTaskEnabled,  trueValue:"TRUE", falseValue:"FALSE"},
-                    //{ref:ZaCos.A_zimbraFeatureNotebookEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zimbraFeatureNotebookEnabled,label:ZaMsg.LBL_zimbraFeatureNotebookEnabled,  trueValue:"TRUE", falseValue:"FALSE"},
-                    {ref:ZaCos.A_zimbraFeatureBriefcasesEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zimbraFeatureBriefcasesEnabled,label:ZaMsg.LBL_zimbraFeatureBriefcasesEnabled,  trueValue:"TRUE", falseValue:"FALSE"},
-                    //{ref:ZaCos.A_zimbraFeatureIMEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zimbraFeatureIMEnabled,label:ZaMsg.LBL_zimbraFeatureIMEnabled,  trueValue:"TRUE", falseValue:"FALSE"},
-                    {ref:ZaCos.A_zimbraFeatureOptionsEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zimbraFeatureOptionsEnabled,label:ZaMsg.LBL_zimbraFeatureOptionsEnabled,  trueValue:"TRUE", falseValue:"FALSE"}
-                    //zimbraMobile from the extension
+                    {ref:ZaCos.A_zmailFeatureMailEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zmailFeatureMailEnabled,label:ZaMsg.LBL_zmailFeatureMailEnabled,trueValue:"TRUE", falseValue:"FALSE"},
+                    {ref:ZaCos.A_zmailFeatureContactsEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zmailFeatureContactsEnabled,label:ZaMsg.LBL_zmailFeatureContactsEnabled,trueValue:"TRUE", falseValue:"FALSE"},
+                    {ref:ZaCos.A_zmailFeatureCalendarEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zmailFeatureCalendarEnabled,label:ZaMsg.LBL_zmailFeatureCalendarEnabled,  trueValue:"TRUE", falseValue:"FALSE"},
+                    {ref:ZaCos.A_zmailFeatureTasksEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zmailFeatureTaskEnabled,label:ZaMsg.LBL_zmailFeatureTaskEnabled,  trueValue:"TRUE", falseValue:"FALSE"},
+                    //{ref:ZaCos.A_zmailFeatureNotebookEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zmailFeatureNotebookEnabled,label:ZaMsg.LBL_zmailFeatureNotebookEnabled,  trueValue:"TRUE", falseValue:"FALSE"},
+                    {ref:ZaCos.A_zmailFeatureBriefcasesEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zmailFeatureBriefcasesEnabled,label:ZaMsg.LBL_zmailFeatureBriefcasesEnabled,  trueValue:"TRUE", falseValue:"FALSE"},
+                    //{ref:ZaCos.A_zmailFeatureIMEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zmailFeatureIMEnabled,label:ZaMsg.LBL_zmailFeatureIMEnabled,  trueValue:"TRUE", falseValue:"FALSE"},
+                    {ref:ZaCos.A_zmailFeatureOptionsEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zmailFeatureOptionsEnabled,label:ZaMsg.LBL_zmailFeatureOptionsEnabled,  trueValue:"TRUE", falseValue:"FALSE"}
+                    //zmailMobile from the extension
                 ]
             },
-            {type:_ZA_TOP_GROUPER_,  label:ZaMsg.NAD_zimbraGeneralFeature, id:"cos_form_features_general",
+            {type:_ZA_TOP_GROUPER_,  label:ZaMsg.NAD_zmailGeneralFeature, id:"cos_form_features_general",
                 visibilityChecks:[[ZATopGrouper_XFormItem.isGroupVisible, 
 					[
-						ZaCos.A_zimbraFeatureTaggingEnabled,
-						ZaCos.A_zimbraFeatureSharingEnabled,
-						ZaCos.A_zimbraFeatureChangePasswordEnabled,
-						ZaCos.A_zimbraFeatureSkinChangeEnabled,
-						ZaCos.A_zimbraFeatureManageZimlets,
-						ZaCos.A_zimbraFeatureHtmlComposeEnabled,
-						ZaCos.A_zimbraFeatureGalEnabled,
-						ZaCos.A_zimbraFeatureMAPIConnectorEnabled,
-						ZaCos.A_zimbraFeatureGalAutoCompleteEnabled,
-						ZaCos.A_zimbraFeatureImportFolderEnabled,
-                        ZaCos.A_zimbraFeatureExportFolderEnabled,
-						ZaCos.A_zimbraDumpsterEnabled,
-						ZaCos.A_zimbraDumpsterPurgeEnabled
+						ZaCos.A_zmailFeatureTaggingEnabled,
+						ZaCos.A_zmailFeatureSharingEnabled,
+						ZaCos.A_zmailFeatureChangePasswordEnabled,
+						ZaCos.A_zmailFeatureSkinChangeEnabled,
+						ZaCos.A_zmailFeatureManageZimlets,
+						ZaCos.A_zmailFeatureHtmlComposeEnabled,
+						ZaCos.A_zmailFeatureGalEnabled,
+						ZaCos.A_zmailFeatureMAPIConnectorEnabled,
+						ZaCos.A_zmailFeatureGalAutoCompleteEnabled,
+						ZaCos.A_zmailFeatureImportFolderEnabled,
+                        ZaCos.A_zmailFeatureExportFolderEnabled,
+						ZaCos.A_zmailDumpsterEnabled,
+						ZaCos.A_zmailDumpsterPurgeEnabled
 					]]
 				],
                 items:[
-                    {ref:ZaCos.A_zimbraFeatureTaggingEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zimbraFeatureTaggingEnabled,label:ZaMsg.LBL_zimbraFeatureTaggingEnabled,trueValue:"TRUE", falseValue:"FALSE"},
-                    {ref:ZaCos.A_zimbraFeatureSharingEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zimbraFeatureSharingEnabled,label:ZaMsg.LBL_zimbraFeatureSharingEnabled,trueValue:"TRUE", falseValue:"FALSE"},
-                    {ref:ZaCos.A_zimbraExternalSharingEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zimbraExternalSharingEnabled,label:ZaMsg.LBL_zimbraExternalSharingEnabled,trueValue:"TRUE", falseValue:"FALSE",
-                    	visibilityChecks:[[ZaItem.hasReadPermission], [XForm.checkInstanceValue, ZaCos.A_zimbraFeatureSharingEnabled, "TRUE"]], visibilityChangeEventSources:[ZaCos.A_zimbraFeatureSharingEnabled]	
+                    {ref:ZaCos.A_zmailFeatureTaggingEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zmailFeatureTaggingEnabled,label:ZaMsg.LBL_zmailFeatureTaggingEnabled,trueValue:"TRUE", falseValue:"FALSE"},
+                    {ref:ZaCos.A_zmailFeatureSharingEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zmailFeatureSharingEnabled,label:ZaMsg.LBL_zmailFeatureSharingEnabled,trueValue:"TRUE", falseValue:"FALSE"},
+                    {ref:ZaCos.A_zmailExternalSharingEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zmailExternalSharingEnabled,label:ZaMsg.LBL_zmailExternalSharingEnabled,trueValue:"TRUE", falseValue:"FALSE",
+                    	visibilityChecks:[[ZaItem.hasReadPermission], [XForm.checkInstanceValue, ZaCos.A_zmailFeatureSharingEnabled, "TRUE"]], visibilityChangeEventSources:[ZaCos.A_zmailFeatureSharingEnabled]	
                     },
-                    {ref:ZaCos.A_zimbraPublicSharingEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zimbraPublicSharingEnabled,label:ZaMsg.LBL_zimbraPublicSharingEnabled,trueValue:"TRUE", falseValue:"FALSE",
-                    	visibilityChecks:[[ZaItem.hasReadPermission], [XForm.checkInstanceValue, ZaCos.A_zimbraFeatureSharingEnabled, "TRUE"]], visibilityChangeEventSources:[ZaCos.A_zimbraFeatureSharingEnabled]	
+                    {ref:ZaCos.A_zmailPublicSharingEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zmailPublicSharingEnabled,label:ZaMsg.LBL_zmailPublicSharingEnabled,trueValue:"TRUE", falseValue:"FALSE",
+                    	visibilityChecks:[[ZaItem.hasReadPermission], [XForm.checkInstanceValue, ZaCos.A_zmailFeatureSharingEnabled, "TRUE"]], visibilityChangeEventSources:[ZaCos.A_zmailFeatureSharingEnabled]	
                     },
-                    {ref:ZaCos.A_zimbraFeatureChangePasswordEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zimbraFeatureChangePasswordEnabled,label:ZaMsg.LBL_zimbraFeatureChangePasswordEnabled, trueValue:"TRUE", falseValue:"FALSE"},
-                    {ref:ZaCos.A_zimbraFeatureSkinChangeEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zimbraFeatureSkinChangeEnabled,label:ZaMsg.LBL_zimbraFeatureSkinChangeEnabled,  trueValue:"TRUE", falseValue:"FALSE"},
-                    {ref:ZaCos.A_zimbraFeatureManageZimlets, type:_CHECKBOX_, msgName:ZaMsg.LBL_zimbraFeatureManageZimlets,label:ZaMsg.LBL_zimbraFeatureManageZimlets,  trueValue:"TRUE", falseValue:"FALSE"},
-                    {ref:ZaCos.A_zimbraFeatureHtmlComposeEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zimbraFeatureHtmlComposeEnabled,label:ZaMsg.LBL_zimbraFeatureHtmlComposeEnabled, trueValue:"TRUE", falseValue:"FALSE"},
-                    //{ref:ZaCos.A_zimbraFeatureShortcutAliasesEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zimbraFeatureShortcutAliasesEnabled,label:ZaMsg.LBL_zimbraFeatureShortcutAliasesEnabled, trueValue:"TRUE", falseValue:"FALSE"},
-                    {ref:ZaCos.A_zimbraFeatureGalEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zimbraFeatureGalEnabled,label:ZaMsg.LBL_zimbraFeatureGalEnabled, trueValue:"TRUE", falseValue:"FALSE"},
-                    {ref:ZaCos.A_zimbraFeatureMAPIConnectorEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zimbraFeatureMAPIConnectorEnabled,label:ZaMsg.LBL_zimbraFeatureMAPIConnectorEnabled, trueValue:"TRUE", falseValue:"FALSE"},
-                    {ref:ZaCos.A_zimbraFeatureGalAutoCompleteEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zimbraFeatureGalAutoCompleteEnabled,label:ZaMsg.LBL_zimbraFeatureGalAutoCompleteEnabled, trueValue:"TRUE", falseValue:"FALSE"},
-                    {ref:ZaCos.A_zimbraFeatureImportFolderEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zimbraFeatureImportFolderEnabled,label:ZaMsg.LBL_zimbraFeatureImportFolderEnabled, trueValue:"TRUE", falseValue:"FALSE"},
-		    		{ref:ZaCos.A_zimbraFeatureExportFolderEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zimbraFeatureExportFolderEnabled,label:ZaMsg.LBL_zimbraFeatureExportFolderEnabled, trueValue:"TRUE", falseValue:"FALSE"},
-					{ref:ZaCos.A_zimbraDumpsterEnabled, type:_CHECKBOX_, msgName:ZaMsg.MSG_zimbraDumpsterEnabled,label:ZaMsg.LBL_zimbraDumpsterEnabled, trueValue:"TRUE", falseValue:"FALSE"},
-					{ref:ZaCos.A_zimbraDumpsterPurgeEnabled, type:_CHECKBOX_, msgName:ZaMsg.MSG_zimbraDumpsterPurgeEnabled,label:ZaMsg.LBL_zimbraDumpsterPurgeEnabled, trueValue:"TRUE", falseValue:"FALSE",
-						visibilityChecks:[[ZaItem.hasReadPermission], [XForm.checkInstanceValue, ZaCos.A_zimbraDumpsterEnabled, "TRUE"]], visibilityChangeEventSources:[ZaCos.A_zimbraDumpsterEnabled]
+                    {ref:ZaCos.A_zmailFeatureChangePasswordEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zmailFeatureChangePasswordEnabled,label:ZaMsg.LBL_zmailFeatureChangePasswordEnabled, trueValue:"TRUE", falseValue:"FALSE"},
+                    {ref:ZaCos.A_zmailFeatureSkinChangeEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zmailFeatureSkinChangeEnabled,label:ZaMsg.LBL_zmailFeatureSkinChangeEnabled,  trueValue:"TRUE", falseValue:"FALSE"},
+                    {ref:ZaCos.A_zmailFeatureManageZimlets, type:_CHECKBOX_, msgName:ZaMsg.LBL_zmailFeatureManageZimlets,label:ZaMsg.LBL_zmailFeatureManageZimlets,  trueValue:"TRUE", falseValue:"FALSE"},
+                    {ref:ZaCos.A_zmailFeatureHtmlComposeEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zmailFeatureHtmlComposeEnabled,label:ZaMsg.LBL_zmailFeatureHtmlComposeEnabled, trueValue:"TRUE", falseValue:"FALSE"},
+                    //{ref:ZaCos.A_zmailFeatureShortcutAliasesEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zmailFeatureShortcutAliasesEnabled,label:ZaMsg.LBL_zmailFeatureShortcutAliasesEnabled, trueValue:"TRUE", falseValue:"FALSE"},
+                    {ref:ZaCos.A_zmailFeatureGalEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zmailFeatureGalEnabled,label:ZaMsg.LBL_zmailFeatureGalEnabled, trueValue:"TRUE", falseValue:"FALSE"},
+                    {ref:ZaCos.A_zmailFeatureMAPIConnectorEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zmailFeatureMAPIConnectorEnabled,label:ZaMsg.LBL_zmailFeatureMAPIConnectorEnabled, trueValue:"TRUE", falseValue:"FALSE"},
+                    {ref:ZaCos.A_zmailFeatureGalAutoCompleteEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zmailFeatureGalAutoCompleteEnabled,label:ZaMsg.LBL_zmailFeatureGalAutoCompleteEnabled, trueValue:"TRUE", falseValue:"FALSE"},
+                    {ref:ZaCos.A_zmailFeatureImportFolderEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zmailFeatureImportFolderEnabled,label:ZaMsg.LBL_zmailFeatureImportFolderEnabled, trueValue:"TRUE", falseValue:"FALSE"},
+		    		{ref:ZaCos.A_zmailFeatureExportFolderEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zmailFeatureExportFolderEnabled,label:ZaMsg.LBL_zmailFeatureExportFolderEnabled, trueValue:"TRUE", falseValue:"FALSE"},
+					{ref:ZaCos.A_zmailDumpsterEnabled, type:_CHECKBOX_, msgName:ZaMsg.MSG_zmailDumpsterEnabled,label:ZaMsg.LBL_zmailDumpsterEnabled, trueValue:"TRUE", falseValue:"FALSE"},
+					{ref:ZaCos.A_zmailDumpsterPurgeEnabled, type:_CHECKBOX_, msgName:ZaMsg.MSG_zmailDumpsterPurgeEnabled,label:ZaMsg.LBL_zmailDumpsterPurgeEnabled, trueValue:"TRUE", falseValue:"FALSE",
+						visibilityChecks:[[ZaItem.hasReadPermission], [XForm.checkInstanceValue, ZaCos.A_zmailDumpsterEnabled, "TRUE"]], visibilityChangeEventSources:[ZaCos.A_zmailDumpsterEnabled]
 					}
 
                 ] 
             },
-            {type:_ZA_TOP_GROUPER_,  label:ZaMsg.NAD_zimbraMailFeature, id:"cos_form_features_mail",
+            {type:_ZA_TOP_GROUPER_,  label:ZaMsg.NAD_zmailMailFeature, id:"cos_form_features_mail",
                 enableDisableChecks:[ZaCosXFormView.isMailFeatureEnabled],
-                enableDisableChangeEventSources:[ZaCos.A_zimbraFeatureMailEnabled],
+                enableDisableChangeEventSources:[ZaCos.A_zmailFeatureMailEnabled],
                 visibilityChecks:[[ZATopGrouper_XFormItem.isGroupVisible, 
 					[
-						ZaCos.A_zimbraFeatureMailPriorityEnabled,
-						ZaCos.A_zimbraFeatureFlaggingEnabled,
-						ZaCos.A_zimbraImapEnabled,
-						ZaCos.A_zimbraPop3Enabled,
-						ZaCos.A_zimbraFeatureImapDataSourceEnabled,
-						ZaCos.A_zimbraFeaturePop3DataSourceEnabled,
-						ZaCos.A_zimbraFeatureMailForwardingEnabled,
-						ZaCos.A_zimbraFeatureMailSendLaterEnabled,
-						ZaCos.A_zimbraFeatureConversationsEnabled,
-						ZaCos.A_zimbraFeatureFiltersEnabled,
-						ZaCos.A_zimbraFeatureOutOfOfficeReplyEnabled,
-						ZaCos.A_zimbraFeatureNewMailNotificationEnabled,
-						ZaCos.A_zimbraFeatureMailPollingIntervalPreferenceEnabled,
-						ZaCos.A_zimbraFeatureIdentitiesEnabled,
-						ZaCos.A_zimbraFeatureReadReceiptsEnabled
+						ZaCos.A_zmailFeatureMailPriorityEnabled,
+						ZaCos.A_zmailFeatureFlaggingEnabled,
+						ZaCos.A_zmailImapEnabled,
+						ZaCos.A_zmailPop3Enabled,
+						ZaCos.A_zmailFeatureImapDataSourceEnabled,
+						ZaCos.A_zmailFeaturePop3DataSourceEnabled,
+						ZaCos.A_zmailFeatureMailForwardingEnabled,
+						ZaCos.A_zmailFeatureMailSendLaterEnabled,
+						ZaCos.A_zmailFeatureConversationsEnabled,
+						ZaCos.A_zmailFeatureFiltersEnabled,
+						ZaCos.A_zmailFeatureOutOfOfficeReplyEnabled,
+						ZaCos.A_zmailFeatureNewMailNotificationEnabled,
+						ZaCos.A_zmailFeatureMailPollingIntervalPreferenceEnabled,
+						ZaCos.A_zmailFeatureIdentitiesEnabled,
+						ZaCos.A_zmailFeatureReadReceiptsEnabled
 					]]
 				],
                 items:[
-                        {ref:ZaCos.A_zimbraFeatureMailPriorityEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zimbraFeatureMailPriorityEnabled,label:ZaMsg.LBL_zimbraFeatureMailPriorityEnabled,  trueValue:"TRUE", falseValue:"FALSE"},
-                        {ref:ZaCos.A_zimbraFeatureFlaggingEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zimbraFeatureFlaggingEnabled,label:ZaMsg.LBL_zimbraFeatureFlaggingEnabled,  trueValue:"TRUE", falseValue:"FALSE"},
-                        {ref:ZaCos.A_zimbraImapEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zimbraImapEnabled,label:ZaMsg.LBL_zimbraImapEnabled,trueValue:"TRUE", falseValue:"FALSE"},
-                        {ref:ZaCos.A_zimbraPop3Enabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zimbraPop3Enabled,label:ZaMsg.LBL_zimbraPop3Enabled,trueValue:"TRUE", falseValue:"FALSE"},
-                        {ref:ZaCos.A_zimbraFeatureImapDataSourceEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zimbraExternalImapEnabled,label:ZaMsg.LBL_zimbraExternalImapEnabled, trueValue:"TRUE", falseValue:"FALSE"},
-                        {ref:ZaCos.A_zimbraFeaturePop3DataSourceEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zimbraExternalPop3Enabled,label:ZaMsg.LBL_zimbraExternalPop3Enabled, trueValue:"TRUE", falseValue:"FALSE"},
-                        {ref:ZaCos.A_zimbraFeatureMailForwardingEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zimbraFeatureMailForwardingEnabled,label:ZaMsg.LBL_zimbraFeatureMailForwardingEnabled, trueValue:"TRUE", falseValue:"FALSE"},
-                        {ref:ZaCos.A_zimbraFeatureMailSendLaterEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zimbraFeatureMailSendLaterEnabled, label:ZaMsg.LBL_zimbraFeatureMailSendLaterEnabled, trueValue:"TRUE", falseValue:"FALSE"},
-			{ref:ZaCos.A_zimbraFeatureConversationsEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zimbraFeatureConversationsEnabled,label:ZaMsg.LBL_zimbraFeatureConversationsEnabled,trueValue:"TRUE", falseValue:"FALSE"},
-                        {ref:ZaCos.A_zimbraFeatureFiltersEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zimbraFeatureFiltersEnabled,label:ZaMsg.LBL_zimbraFeatureFiltersEnabled,trueValue:"TRUE", falseValue:"FALSE"},
-                        {ref:ZaCos.A_zimbraFeatureOutOfOfficeReplyEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zimbraFeatureOutOfOfficeReplyEnabled,label:ZaMsg.LBL_zimbraFeatureOutOfOfficeReplyEnabled, trueValue:"TRUE", falseValue:"FALSE"},
-                        {ref:ZaCos.A_zimbraFeatureNewMailNotificationEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zimbraFeatureNewMailNotificationEnabled,label:ZaMsg.LBL_zimbraFeatureNewMailNotificationEnabled, trueValue:"TRUE", falseValue:"FALSE"},
-                        {ref:ZaCos.A_zimbraFeatureMailPollingIntervalPreferenceEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zimbraFeatureMailPollingIntervalPreferenceEnabled,label:ZaMsg.LBL_zimbraFeatureMailPollingIntervalPreferenceEnabled, trueValue:"TRUE", falseValue:"FALSE"},
-                        {ref:ZaCos.A_zimbraFeatureIdentitiesEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zimbraFeatureIdentitiesEnabled,label:ZaMsg.LBL_zimbraFeatureIdentitiesEnabled,trueValue:"TRUE", falseValue:"FALSE"},
-                        {ref:ZaCos.A_zimbraFeatureReadReceiptsEnabled, type:_CHECKBOX_,label:ZaMsg.LBL_zimbraFeatureReadReceiptsEnabled,trueValue:"TRUE", falseValue:"FALSE"}
+                        {ref:ZaCos.A_zmailFeatureMailPriorityEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zmailFeatureMailPriorityEnabled,label:ZaMsg.LBL_zmailFeatureMailPriorityEnabled,  trueValue:"TRUE", falseValue:"FALSE"},
+                        {ref:ZaCos.A_zmailFeatureFlaggingEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zmailFeatureFlaggingEnabled,label:ZaMsg.LBL_zmailFeatureFlaggingEnabled,  trueValue:"TRUE", falseValue:"FALSE"},
+                        {ref:ZaCos.A_zmailImapEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zmailImapEnabled,label:ZaMsg.LBL_zmailImapEnabled,trueValue:"TRUE", falseValue:"FALSE"},
+                        {ref:ZaCos.A_zmailPop3Enabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zmailPop3Enabled,label:ZaMsg.LBL_zmailPop3Enabled,trueValue:"TRUE", falseValue:"FALSE"},
+                        {ref:ZaCos.A_zmailFeatureImapDataSourceEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zmailExternalImapEnabled,label:ZaMsg.LBL_zmailExternalImapEnabled, trueValue:"TRUE", falseValue:"FALSE"},
+                        {ref:ZaCos.A_zmailFeaturePop3DataSourceEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zmailExternalPop3Enabled,label:ZaMsg.LBL_zmailExternalPop3Enabled, trueValue:"TRUE", falseValue:"FALSE"},
+                        {ref:ZaCos.A_zmailFeatureMailForwardingEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zmailFeatureMailForwardingEnabled,label:ZaMsg.LBL_zmailFeatureMailForwardingEnabled, trueValue:"TRUE", falseValue:"FALSE"},
+                        {ref:ZaCos.A_zmailFeatureMailSendLaterEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zmailFeatureMailSendLaterEnabled, label:ZaMsg.LBL_zmailFeatureMailSendLaterEnabled, trueValue:"TRUE", falseValue:"FALSE"},
+			{ref:ZaCos.A_zmailFeatureConversationsEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zmailFeatureConversationsEnabled,label:ZaMsg.LBL_zmailFeatureConversationsEnabled,trueValue:"TRUE", falseValue:"FALSE"},
+                        {ref:ZaCos.A_zmailFeatureFiltersEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zmailFeatureFiltersEnabled,label:ZaMsg.LBL_zmailFeatureFiltersEnabled,trueValue:"TRUE", falseValue:"FALSE"},
+                        {ref:ZaCos.A_zmailFeatureOutOfOfficeReplyEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zmailFeatureOutOfOfficeReplyEnabled,label:ZaMsg.LBL_zmailFeatureOutOfOfficeReplyEnabled, trueValue:"TRUE", falseValue:"FALSE"},
+                        {ref:ZaCos.A_zmailFeatureNewMailNotificationEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zmailFeatureNewMailNotificationEnabled,label:ZaMsg.LBL_zmailFeatureNewMailNotificationEnabled, trueValue:"TRUE", falseValue:"FALSE"},
+                        {ref:ZaCos.A_zmailFeatureMailPollingIntervalPreferenceEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zmailFeatureMailPollingIntervalPreferenceEnabled,label:ZaMsg.LBL_zmailFeatureMailPollingIntervalPreferenceEnabled, trueValue:"TRUE", falseValue:"FALSE"},
+                        {ref:ZaCos.A_zmailFeatureIdentitiesEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zmailFeatureIdentitiesEnabled,label:ZaMsg.LBL_zmailFeatureIdentitiesEnabled,trueValue:"TRUE", falseValue:"FALSE"},
+                        {ref:ZaCos.A_zmailFeatureReadReceiptsEnabled, type:_CHECKBOX_,label:ZaMsg.LBL_zmailFeatureReadReceiptsEnabled,trueValue:"TRUE", falseValue:"FALSE"}
 
                 ]
             },
             {
                 type: _ZA_TOP_GROUPER_,
-                label: ZaMsg.NAD_zimbraContactFeature,
+                label: ZaMsg.NAD_zmailContactFeature,
                 id: "cos_form_features_contact",
                 enableDisableChecks: [ZaCosXFormView.isContactsFeatureEnabled],
-                enableDisableChangeEventSources: [ZaCos.A_zimbraFeatureContactsEnabled],
+                enableDisableChangeEventSources: [ZaCos.A_zmailFeatureContactsEnabled],
                 visibilityChecks: [
                     [
                         ZATopGrouper_XFormItem.isGroupVisible,
                         [
-                            ZaCos.A_zimbraFeatureDistributionListFolderEnabled
+                            ZaCos.A_zmailFeatureDistributionListFolderEnabled
                         ]
                     ]
                 ],
                 items: [
                     {
-                        ref: ZaCos.A_zimbraFeatureDistributionListFolderEnabled,
+                        ref: ZaCos.A_zmailFeatureDistributionListFolderEnabled,
                         type: _CHECKBOX_,
-                        msgName: ZaMsg.MSG_zimbraFeatureDistributionListFolderEnabled,
-                        label: ZaMsg.LBL_zimbraFeatureDistributionListFolderEnabled,
+                        msgName: ZaMsg.MSG_zmailFeatureDistributionListFolderEnabled,
+                        label: ZaMsg.LBL_zmailFeatureDistributionListFolderEnabled,
                         trueValue: "TRUE",
                         falseValue: "FALSE"
                     }
                 ]
             },
-            {type:_ZA_TOP_GROUPER_,  label:ZaMsg.NAD_zimbraCalendarFeature, id:"cos_form_features_calendar",
+            {type:_ZA_TOP_GROUPER_,  label:ZaMsg.NAD_zmailCalendarFeature, id:"cos_form_features_calendar",
                 enableDisableChecks:[ZaCosXFormView.isCalendarFeatureEnabled],
-                enableDisableChangeEventSources:[ZaCos.A_zimbraFeatureCalendarEnabled],
+                enableDisableChangeEventSources:[ZaCos.A_zmailFeatureCalendarEnabled],
 				visibilityChecks:[[ZATopGrouper_XFormItem.isGroupVisible, 
 					[
-						ZaCos.A_zimbraFeatureGroupCalendarEnabled,
-						//ZaCos.A_zimbraFeatureFreeBusyViewEnabled,
-                        ZaCos.A_zimbraFeatureCalendarReminderDeviceEmailEnabled
+						ZaCos.A_zmailFeatureGroupCalendarEnabled,
+						//ZaCos.A_zmailFeatureFreeBusyViewEnabled,
+                        ZaCos.A_zmailFeatureCalendarReminderDeviceEmailEnabled
 					]]
 				],
                 items:[
-                    {ref:ZaCos.A_zimbraFeatureGroupCalendarEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zimbraFeatureGroupCalendarEnabled,label:ZaMsg.LBL_zimbraFeatureGroupCalendarEnabled, trueValue:"TRUE", falseValue:"FALSE"},
-		            //{ref:ZaCos.A_zimbraFeatureFreeBusyViewEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zimbraFeatureFreeBusyViewEnabled, label:ZaMsg.LBL_zimbraFeatureFreeBusyViewEnabled, trueValue:"TRUE", falseValue:"FALSE"},
-                    {ref:ZaCos.A_zimbraFeatureCalendarReminderDeviceEmailEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zimbraFeatureCalendarReminderDeviceEmailEnabled, label:ZaMsg.LBL_zimbraFeatureCalendarReminderDeviceEmailEnabled, trueValue:"TRUE", falseValue:"FALSE"}
+                    {ref:ZaCos.A_zmailFeatureGroupCalendarEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zmailFeatureGroupCalendarEnabled,label:ZaMsg.LBL_zmailFeatureGroupCalendarEnabled, trueValue:"TRUE", falseValue:"FALSE"},
+		            //{ref:ZaCos.A_zmailFeatureFreeBusyViewEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zmailFeatureFreeBusyViewEnabled, label:ZaMsg.LBL_zmailFeatureFreeBusyViewEnabled, trueValue:"TRUE", falseValue:"FALSE"},
+                    {ref:ZaCos.A_zmailFeatureCalendarReminderDeviceEmailEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zmailFeatureCalendarReminderDeviceEmailEnabled, label:ZaMsg.LBL_zmailFeatureCalendarReminderDeviceEmailEnabled, trueValue:"TRUE", falseValue:"FALSE"}
                 ]
             },
-            //{type:_ZA_TOP_GROUPER_,  label:ZaMsg.NAD_zimbraIMFeature, id:"cos_form_features_im",
+            //{type:_ZA_TOP_GROUPER_,  label:ZaMsg.NAD_zmailIMFeature, id:"cos_form_features_im",
             //    visibilityChecks:[ZaCosXFormView.isIMFeatureEnabled],
-            //    visibilityChangeEventSources:[ZaCos.A_zimbraFeatureIMEnabled],
+            //    visibilityChangeEventSources:[ZaCos.A_zmailFeatureIMEnabled],
             //    visibilityChecks:[[ZATopGrouper_XFormItem.isGroupVisible, 
 	//				[
-	//					ZaCos.A_zimbraFeatureInstantNotify
+	//					ZaCos.A_zmailFeatureInstantNotify
 	//				]]
 	//			], 
           //      items:[
-          //        {ref:ZaCos.A_zimbraFeatureInstantNotify,
+          //        {ref:ZaCos.A_zmailFeatureInstantNotify,
           //           type:_CHECKBOX_,
-          //           msgName:ZaMsg.LBL_zimbraFeatureInstantNotify,
-          //           label:ZaMsg.LBL_zimbraFeatureInstantNotify,
+          //           msgName:ZaMsg.LBL_zmailFeatureInstantNotify,
+          //           label:ZaMsg.LBL_zmailFeatureInstantNotify,
           //           trueValue:"TRUE",
           //           falseValue:"FALSE"}
 		
           //      ]
           //  },
-            {type:_ZA_TOP_GROUPER_,  label:ZaMsg.NAD_zimbraSearchFeature, id:"cos_form_features_search",
+            {type:_ZA_TOP_GROUPER_,  label:ZaMsg.NAD_zmailSearchFeature, id:"cos_form_features_search",
                 visibilityChecks:[[ZATopGrouper_XFormItem.isGroupVisible,
 					[
-						ZaCos.A_zimbraFeatureAdvancedSearchEnabled,
-						ZaCos.A_zimbraFeatureSavedSearchesEnabled,
-						ZaCos.A_zimbraFeatureInitialSearchPreferenceEnabled,
-						ZaCos.A_zimbraFeaturePeopleSearchEnabled
+						ZaCos.A_zmailFeatureAdvancedSearchEnabled,
+						ZaCos.A_zmailFeatureSavedSearchesEnabled,
+						ZaCos.A_zmailFeatureInitialSearchPreferenceEnabled,
+						ZaCos.A_zmailFeaturePeopleSearchEnabled
 					]]
 				],
                 items:[
-                    {ref:ZaCos.A_zimbraFeatureAdvancedSearchEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zimbraFeatureAdvancedSearchEnabled,label:ZaMsg.LBL_zimbraFeatureAdvancedSearchEnabled,trueValue:"TRUE", falseValue:"FALSE"},
-                    {ref:ZaCos.A_zimbraFeatureSavedSearchesEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zimbraFeatureSavedSearchesEnabled,label:ZaMsg.LBL_zimbraFeatureSavedSearchesEnabled,trueValue:"TRUE", falseValue:"FALSE"},
-                    {ref:ZaCos.A_zimbraFeatureInitialSearchPreferenceEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zimbraFeatureInitialSearchPreferenceEnabled,label:ZaMsg.LBL_zimbraFeatureInitialSearchPreferenceEnabled, trueValue:"TRUE", falseValue:"FALSE"},
-                    {ref:ZaCos.A_zimbraFeaturePeopleSearchEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zimbraFeaturePeopleSearchEnabled,label:ZaMsg.LBL_zimbraFeaturePeopleSearchEnabled, trueValue:"TRUE", falseValue:"FALSE"}
+                    {ref:ZaCos.A_zmailFeatureAdvancedSearchEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zmailFeatureAdvancedSearchEnabled,label:ZaMsg.LBL_zmailFeatureAdvancedSearchEnabled,trueValue:"TRUE", falseValue:"FALSE"},
+                    {ref:ZaCos.A_zmailFeatureSavedSearchesEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zmailFeatureSavedSearchesEnabled,label:ZaMsg.LBL_zmailFeatureSavedSearchesEnabled,trueValue:"TRUE", falseValue:"FALSE"},
+                    {ref:ZaCos.A_zmailFeatureInitialSearchPreferenceEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zmailFeatureInitialSearchPreferenceEnabled,label:ZaMsg.LBL_zmailFeatureInitialSearchPreferenceEnabled, trueValue:"TRUE", falseValue:"FALSE"},
+                    {ref:ZaCos.A_zmailFeaturePeopleSearchEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zmailFeaturePeopleSearchEnabled,label:ZaMsg.LBL_zmailFeaturePeopleSearchEnabled, trueValue:"TRUE", falseValue:"FALSE"}
                 ]
             },
-            {type:_ZA_TOP_GROUPER_,  label:ZaMsg.NAD_zimbraSMIMEFeature, id:"cos_form_features_smime",
+            {type:_ZA_TOP_GROUPER_,  label:ZaMsg.NAD_zmailSMIMEFeature, id:"cos_form_features_smime",
                 visibilityChecks:[[ZATopGrouper_XFormItem.isGroupVisible,
 					[
-						ZaCos.A_zimbraFeatureSMIMEEnabled
+						ZaCos.A_zmailFeatureSMIMEEnabled
 					]]
 				],
                 items:[
-                    {ref:ZaCos.A_zimbraFeatureSMIMEEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zimbraFeatureSMIMEEnabled,label:ZaMsg.LBL_zimbraFeatureSMIMEEnabled, trueValue:"TRUE", falseValue:"FALSE"}
+                    {ref:ZaCos.A_zmailFeatureSMIMEEnabled, type:_CHECKBOX_, msgName:ZaMsg.LBL_zmailFeatureSMIMEEnabled,label:ZaMsg.LBL_zmailFeatureSMIMEEnabled, trueValue:"TRUE", falseValue:"FALSE"}
                 ]
             }
 
@@ -908,62 +908,62 @@ ZaCosXFormView.myXFormModifier = function(xFormObject, entry) {
                 label: ZaMsg.NAD_GeneralOptions,
                 visibilityChecks:[[ZATopGrouper_XFormItem.isGroupVisible,
 					[
-						ZaCos.A_zimbraPrefClientType,
-						ZaCos.A_zimbraPrefShowSearchString,
-						ZaCos.A_zimbraPrefMailInitialSearch,
-						ZaCos.A_zimbraPrefImapSearchFoldersEnabled,
-						ZaCos.A_zimbraPrefUseKeyboardShortcuts,
-						ZaCos.A_zimbraPrefWarnOnExit,
-						ZaCos.A_zimbraPrefAdminConsoleWarnOnExit,
-						ZaCos.A_zimbraPrefShowSelectionCheckbox,
-						//ZaCos.A_zimbraPrefIMAutoLogin,
-						ZaCos.A_zimbraJunkMessagesIndexingEnabled,
-						ZaCos.A_zimbraPrefLocale
+						ZaCos.A_zmailPrefClientType,
+						ZaCos.A_zmailPrefShowSearchString,
+						ZaCos.A_zmailPrefMailInitialSearch,
+						ZaCos.A_zmailPrefImapSearchFoldersEnabled,
+						ZaCos.A_zmailPrefUseKeyboardShortcuts,
+						ZaCos.A_zmailPrefWarnOnExit,
+						ZaCos.A_zmailPrefAdminConsoleWarnOnExit,
+						ZaCos.A_zmailPrefShowSelectionCheckbox,
+						//ZaCos.A_zmailPrefIMAutoLogin,
+						ZaCos.A_zmailJunkMessagesIndexingEnabled,
+						ZaCos.A_zmailPrefLocale
 					]]
 				],
                 items :[
-                {ref:ZaCos.A_zimbraPrefClientType, type:_OSELECT1_, msgName:ZaMsg.MSG_zimbraPrefClientType,
-                    label:ZaMsg.LBL_zimbraPrefClientType, labelLocation:_LEFT_
+                {ref:ZaCos.A_zmailPrefClientType, type:_OSELECT1_, msgName:ZaMsg.MSG_zmailPrefClientType,
+                    label:ZaMsg.LBL_zmailPrefClientType, labelLocation:_LEFT_
                 },
-                {ref:ZaCos.A_zimbraPrefShowSearchString, type:_CHECKBOX_,
-                    msgName:ZaMsg.LBL_zimbraPrefShowSearchString,
-                    label:ZaMsg.LBL_zimbraPrefShowSearchString, trueValue:"TRUE", falseValue:"FALSE"
+                {ref:ZaCos.A_zmailPrefShowSearchString, type:_CHECKBOX_,
+                    msgName:ZaMsg.LBL_zmailPrefShowSearchString,
+                    label:ZaMsg.LBL_zmailPrefShowSearchString, trueValue:"TRUE", falseValue:"FALSE"
                 },
-                {ref:ZaCos.A_zimbraPrefMailInitialSearch, type:_TEXTFIELD_, cssClass:"admin_xform_name_input",
-                    msgName:ZaMsg.LBL_zimbraPrefMailInitialSearch,label:ZaMsg.LBL_zimbraPrefMailInitialSearch,
+                {ref:ZaCos.A_zmailPrefMailInitialSearch, type:_TEXTFIELD_, cssClass:"admin_xform_name_input",
+                    msgName:ZaMsg.LBL_zmailPrefMailInitialSearch,label:ZaMsg.LBL_zmailPrefMailInitialSearch,
                     labelLocation:_LEFT_
                 },
-                {ref:ZaCos.A_zimbraPrefImapSearchFoldersEnabled, type:_CHECKBOX_,
-                    msgName:ZaMsg.LBL_zimbraPrefImapSearchFoldersEnabled,
-                    label:ZaMsg.LBL_zimbraPrefImapSearchFoldersEnabled, trueValue:"TRUE", falseValue:"FALSE"
+                {ref:ZaCos.A_zmailPrefImapSearchFoldersEnabled, type:_CHECKBOX_,
+                    msgName:ZaMsg.LBL_zmailPrefImapSearchFoldersEnabled,
+                    label:ZaMsg.LBL_zmailPrefImapSearchFoldersEnabled, trueValue:"TRUE", falseValue:"FALSE"
                 },
-                {ref:ZaCos.A_zimbraPrefUseKeyboardShortcuts, type:_CHECKBOX_,
-                    msgName:ZaMsg.LBL_zimbraPrefUseKeyboardShortcuts,label:ZaMsg.LBL_zimbraPrefUseKeyboardShortcuts,
+                {ref:ZaCos.A_zmailPrefUseKeyboardShortcuts, type:_CHECKBOX_,
+                    msgName:ZaMsg.LBL_zmailPrefUseKeyboardShortcuts,label:ZaMsg.LBL_zmailPrefUseKeyboardShortcuts,
                     trueValue:"TRUE", falseValue:"FALSE"
                 },
-                {ref:ZaCos.A_zimbraPrefWarnOnExit, type:_CHECKBOX_,
-                    msgName:ZaMsg.LBL_zimbraPrefWarnOnExit,label:ZaMsg.LBL_zimbraPrefWarnOnExit,
+                {ref:ZaCos.A_zmailPrefWarnOnExit, type:_CHECKBOX_,
+                    msgName:ZaMsg.LBL_zmailPrefWarnOnExit,label:ZaMsg.LBL_zmailPrefWarnOnExit,
                     trueValue:"TRUE", falseValue:"FALSE"
                 },
-                {ref:ZaCos.A_zimbraPrefAdminConsoleWarnOnExit, type:_CHECKBOX_,
-                    msgName:ZabMsg.LBL_zimbraPrefAdminConsoleWarnOnExit,label:ZabMsg.LBL_zimbraPrefAdminConsoleWarnOnExit,
+                {ref:ZaCos.A_zmailPrefAdminConsoleWarnOnExit, type:_CHECKBOX_,
+                    msgName:ZabMsg.LBL_zmailPrefAdminConsoleWarnOnExit,label:ZabMsg.LBL_zmailPrefAdminConsoleWarnOnExit,
                     trueValue:"TRUE", falseValue:"FALSE"
                 },  
-                {ref:ZaCos.A_zimbraPrefShowSelectionCheckbox, type:_CHECKBOX_,
-                    msgName:ZaMsg.LBL_zimbraPrefShowSelectionCheckbox,label:ZaMsg.LBL_zimbraPrefShowSelectionCheckbox,
+                {ref:ZaCos.A_zmailPrefShowSelectionCheckbox, type:_CHECKBOX_,
+                    msgName:ZaMsg.LBL_zmailPrefShowSelectionCheckbox,label:ZaMsg.LBL_zmailPrefShowSelectionCheckbox,
                     trueValue:"TRUE", falseValue:"FALSE"
                 },
-                //{ref:ZaCos.A_zimbraPrefIMAutoLogin, type:_CHECKBOX_,
-                //    msgName:ZaMsg.LBL_zimbraPrefIMAutoLogin,label:ZaMsg.LBL_zimbraPrefIMAutoLogin,
+                //{ref:ZaCos.A_zmailPrefIMAutoLogin, type:_CHECKBOX_,
+                //    msgName:ZaMsg.LBL_zmailPrefIMAutoLogin,label:ZaMsg.LBL_zmailPrefIMAutoLogin,
                 //    trueValue:"TRUE", falseValue:"FALSE"
                 //},
-                {ref:ZaCos.A_zimbraJunkMessagesIndexingEnabled, type:_CHECKBOX_,
-                    msgName:ZaMsg.LBL_zimbraJunkMessagesIndexingEnabled,
-                    label:ZaMsg.LBL_zimbraJunkMessagesIndexingEnabled,
+                {ref:ZaCos.A_zmailJunkMessagesIndexingEnabled, type:_CHECKBOX_,
+                    msgName:ZaMsg.LBL_zmailJunkMessagesIndexingEnabled,
+                    label:ZaMsg.LBL_zmailJunkMessagesIndexingEnabled,
                     trueValue:"TRUE", falseValue:"FALSE"
                 },
-                {ref:ZaCos.A_zimbraPrefLocale, type:_OSELECT1_,
-                     msgName:ZaMsg.LBL_zimbraPrefLocale,label:ZaMsg.LBL_zimbraPrefLocale,
+                {ref:ZaCos.A_zmailPrefLocale, type:_OSELECT1_,
+                     msgName:ZaMsg.LBL_zmailPrefLocale,label:ZaMsg.LBL_zmailPrefLocale,
                      labelLocation:_LEFT_,
                      labelCssStyle:"white-space:normal;",nowrap:false,labelWrap:true,
                      choices: ZaSettings.getLocaleChoices()
@@ -973,17 +973,17 @@ ZaCosXFormView.myXFormModifier = function(xFormObject, entry) {
                 colSizes:["275px","auto"],numCols:2,
             	visibilityChecks:[[ZATopGrouper_XFormItem.isGroupVisible, 
 					[
-						ZaCos.A_zimbraMaxMailItemsPerPage,
-						ZaCos.A_zimbraPrefMailItemsPerPage
+						ZaCos.A_zmailMaxMailItemsPerPage,
+						ZaCos.A_zmailPrefMailItemsPerPage
 					]]
 				],
             	items :[
-					{ref:ZaCos.A_zimbraMaxMailItemsPerPage, type:_OSELECT1_, msgName:ZaMsg.MSG_zimbraMaxMailItemsPerPage,
-	                    label:ZaMsg.LBL_zimbraMaxMailItemsPerPage, labelLocation:_LEFT_, choices:[10,25,50,100,250,500,1000], editable:true,
+					{ref:ZaCos.A_zmailMaxMailItemsPerPage, type:_OSELECT1_, msgName:ZaMsg.MSG_zmailMaxMailItemsPerPage,
+	                    label:ZaMsg.LBL_zmailMaxMailItemsPerPage, labelLocation:_LEFT_, choices:[10,25,50,100,250,500,1000], editable:true,
 	                    inputSize:4
 	                },                
-	                {ref:ZaCos.A_zimbraPrefMailItemsPerPage, type:_OSELECT1_, msgName:ZaMsg.MSG_zimbraPrefMailItemsPerPage,
-	                    label:ZaMsg.LBL_zimbraPrefMailItemsPerPage, labelLocation:_LEFT_
+	                {ref:ZaCos.A_zmailPrefMailItemsPerPage, type:_OSELECT1_, msgName:ZaMsg.MSG_zmailPrefMailItemsPerPage,
+	                    label:ZaMsg.LBL_zmailPrefMailItemsPerPage, labelLocation:_LEFT_
 	                }            		
             	]
             },
@@ -991,47 +991,47 @@ ZaCosXFormView.myXFormModifier = function(xFormObject, entry) {
                 label:ZaMsg.NAD_MailOptions,
                 visibilityChecks:[[ZATopGrouper_XFormItem.isGroupVisible,
 					[
-						ZaCos.A_zimbraPrefMessageViewHtmlPreferred,
-						ZaCos.A_zimbraPrefDisplayExternalImages,
-						ZaCos.A_zimbraPrefGroupMailBy,
-						ZaCos.A_zimbraPrefMailDefaultCharset,
-						ZaCos.A_zimbraPrefCalendarToasterEnabled,
-                                                ZaCos.A_zimbraPrefItemsPerVirtualPage
+						ZaCos.A_zmailPrefMessageViewHtmlPreferred,
+						ZaCos.A_zmailPrefDisplayExternalImages,
+						ZaCos.A_zmailPrefGroupMailBy,
+						ZaCos.A_zmailPrefMailDefaultCharset,
+						ZaCos.A_zmailPrefCalendarToasterEnabled,
+                                                ZaCos.A_zmailPrefItemsPerVirtualPage
 					]]
 				],
                 items :[
-                {ref:ZaCos.A_zimbraPrefMessageViewHtmlPreferred, type:_CHECKBOX_,
-                    msgName:ZaMsg.LBL_zimbraPrefMessageViewHtmlPreferred,
-                    label:ZaMsg.LBL_zimbraPrefMessageViewHtmlPreferred,
+                {ref:ZaCos.A_zmailPrefMessageViewHtmlPreferred, type:_CHECKBOX_,
+                    msgName:ZaMsg.LBL_zmailPrefMessageViewHtmlPreferred,
+                    label:ZaMsg.LBL_zmailPrefMessageViewHtmlPreferred,
                     trueValue:"TRUE", falseValue:"FALSE"
                 },
-                {ref:ZaCos.A_zimbraPrefDisplayExternalImages, type:_CHECKBOX_,
-                    msgName:ZaMsg.LBL_zimbraPrefDisplayExternalImages,
-                    label:ZaMsg.LBL_zimbraPrefDisplayExternalImages,
+                {ref:ZaCos.A_zmailPrefDisplayExternalImages, type:_CHECKBOX_,
+                    msgName:ZaMsg.LBL_zmailPrefDisplayExternalImages,
+                    label:ZaMsg.LBL_zmailPrefDisplayExternalImages,
                     trueValue:"TRUE", falseValue:"FALSE"
                 },
-                {ref:ZaCos.A_zimbraPrefGroupMailBy, type:_OSELECT1_, msgName:ZaMsg.LBL_zimbraPrefGroupMailBy,
-                    label:ZaMsg.LBL_zimbraPrefGroupMailBy, labelLocation:_LEFT_
+                {ref:ZaCos.A_zmailPrefGroupMailBy, type:_OSELECT1_, msgName:ZaMsg.LBL_zmailPrefGroupMailBy,
+                    label:ZaMsg.LBL_zmailPrefGroupMailBy, labelLocation:_LEFT_
                 },
-                {ref:ZaCos.A_zimbraPrefMailDefaultCharset, type:_OSELECT1_,
-                     msgName:ZaMsg.LBL_zimbraPrefMailDefaultCharset,label:ZaMsg.LBL_zimbraPrefMailDefaultCharset,
+                {ref:ZaCos.A_zmailPrefMailDefaultCharset, type:_OSELECT1_,
+                     msgName:ZaMsg.LBL_zmailPrefMailDefaultCharset,label:ZaMsg.LBL_zmailPrefMailDefaultCharset,
                      labelLocation:_LEFT_,
                      labelCssStyle:"white-space:normal;",nowrap:false,labelWrap:true
                 },
-		{ref:ZaCos.A_zimbraPrefMailToasterEnabled, type:_CHECKBOX_,
-                    msgName:ZaMsg.LBL_zimbraPrefMailToasterEnabled,
-                    label:ZaMsg.LBL_zimbraPrefMailToasterEnabled,
+		{ref:ZaCos.A_zmailPrefMailToasterEnabled, type:_CHECKBOX_,
+                    msgName:ZaMsg.LBL_zmailPrefMailToasterEnabled,
+                    label:ZaMsg.LBL_zmailPrefMailToasterEnabled,
                     trueValue:"TRUE", falseValue:"FALSE"
                 },
-		        {ref:ZaCos.A_zimbraPrefMessageIdDedupingEnabled, type:_CHECKBOX_,
-                    msgName:ZaMsg.LBL_zimbraPrefMessageIdDedupingEnabled,
-                    label:ZaMsg.LBL_zimbraPrefMessageIdDedupingEnabled,
+		        {ref:ZaCos.A_zmailPrefMessageIdDedupingEnabled, type:_CHECKBOX_,
+                    msgName:ZaMsg.LBL_zmailPrefMessageIdDedupingEnabled,
+                    label:ZaMsg.LBL_zmailPrefMessageIdDedupingEnabled,
                     trueValue:"TRUE", falseValue:"FALSE"
                 },
-                {ref:ZaCos.A_zimbraPrefItemsPerVirtualPage, 
+                {ref:ZaCos.A_zmailPrefItemsPerVirtualPage, 
 	       	type:_TEXTFIELD_, 
-		msgName:ZaMsg.LBL_zimbraPrefItemsPerVirtualPage,
-		label:ZaMsg.LBL_zimbraPrefItemsPerVirtualPage, 
+		msgName:ZaMsg.LBL_zmailPrefItemsPerVirtualPage,
+		label:ZaMsg.LBL_zmailPrefItemsPerVirtualPage, 
 		labelLocation:_LEFT_
 		}
 
@@ -1039,120 +1039,120 @@ ZaCosXFormView.myXFormModifier = function(xFormObject, entry) {
             {type:_ZA_TOP_GROUPER_, id:"cos_prefs_mail_receiving",label:ZaMsg.NAD_MailOptionsReceiving,
             	visibilityChecks:[[ZATopGrouper_XFormItem.isGroupVisible, 
 					[
-						ZaCos.A_zimbraPrefMailSoundsEnabled,
-						ZaCos.A_zimbraPrefMailFlashIcon,
-						ZaCos.A_zimbraPrefMailFlashTitle,
-						ZaCos.A_zimbraPrefMailPollingInterval,
-						ZaCos.A_zimbraMailMinPollingInterval,
-						ZaCos.A_zimbraPrefOutOfOfficeCacheDuration,
-						ZaCos.A_zimbraPrefMailSendReadReceipts
+						ZaCos.A_zmailPrefMailSoundsEnabled,
+						ZaCos.A_zmailPrefMailFlashIcon,
+						ZaCos.A_zmailPrefMailFlashTitle,
+						ZaCos.A_zmailPrefMailPollingInterval,
+						ZaCos.A_zmailMailMinPollingInterval,
+						ZaCos.A_zmailPrefOutOfOfficeCacheDuration,
+						ZaCos.A_zmailPrefMailSendReadReceipts
 					]]
 				],
             	items :[
-                {ref:ZaCos.A_zimbraPrefMailSoundsEnabled,
+                {ref:ZaCos.A_zmailPrefMailSoundsEnabled,
                     type:_CHECKBOX_,
                     msgName:ZaMsg.LBL_playSound,
                     label:ZaMsg.LBL_playSound,
                     trueValue:"TRUE", falseValue:"FALSE"
                 },
-                {ref:ZaCos.A_zimbraPrefMailFlashIcon,
+                {ref:ZaCos.A_zmailPrefMailFlashIcon,
                     type:_CHECKBOX_,
                     msgName:ZaMsg.LBL_flashIcon,
                     label:ZaMsg.LBL_flashIcon,
                     trueValue:"TRUE", falseValue:"FALSE"
                 },
-                {ref:ZaCos.A_zimbraPrefMailFlashTitle,
+                {ref:ZaCos.A_zmailPrefMailFlashTitle,
                     type:_CHECKBOX_,
                     msgName:ZaMsg.LBL_flashTitle,
                     label:ZaMsg.LBL_flashTitle,
                     trueValue:"TRUE", falseValue:"FALSE"
                 },
-                {ref:ZaCos.A_zimbraPrefMailPollingInterval, type:_OSELECT1_,
-                    msgName:ZaMsg.MSG_zimbraPrefMailPollingInterval,
-                    label:ZaMsg.LBL_zimbraPrefMailPollingInterval, labelLocation:_LEFT_,
+                {ref:ZaCos.A_zmailPrefMailPollingInterval, type:_OSELECT1_,
+                    msgName:ZaMsg.MSG_zmailPrefMailPollingInterval,
+                    label:ZaMsg.LBL_zmailPrefMailPollingInterval, labelLocation:_LEFT_,
                     onChange:ZaCosXFormView.validatePollingInterval,
                     labelCssStyle:"white-space:normal;",nowrap:false,labelWrap:true
                 },
-                {ref:ZaCos.A_zimbraMailMinPollingInterval, type:_LIFETIME_,
-                    msgName:ZaMsg.MSG_zimbraMailMinPollingInterval,
-                    label:ZaMsg.LBL_zimbraMailMinPollingInterval, labelLocation:_LEFT_,
+                {ref:ZaCos.A_zmailMailMinPollingInterval, type:_LIFETIME_,
+                    msgName:ZaMsg.MSG_zmailMailMinPollingInterval,
+                    label:ZaMsg.LBL_zmailMailMinPollingInterval, labelLocation:_LEFT_,
                     onChange:ZaCosXFormView.validatePollingInterval,
                     labelCssStyle:"white-space:normal;",nowrap:false,labelWrap:true
                 },
-                {ref:ZaCos.A_zimbraPrefOutOfOfficeCacheDuration, type:_LIFETIME_,
-                    msgName:ZaMsg.MSG_zimbraPrefOutOfOfficeCacheDuration,
-                    label:ZaMsg.LBL_zimbraPrefOutOfOfficeCacheDuration, labelLocation:_LEFT_,
+                {ref:ZaCos.A_zmailPrefOutOfOfficeCacheDuration, type:_LIFETIME_,
+                    msgName:ZaMsg.MSG_zmailPrefOutOfOfficeCacheDuration,
+                    label:ZaMsg.LBL_zmailPrefOutOfOfficeCacheDuration, labelLocation:_LEFT_,
                     labelCssStyle:"white-space:normal;",nowrap:false,labelWrap:true
                 },
-				{ref:ZaCos.A_zimbraPrefMailSendReadReceipts, type:_OSELECT1_, label:ZaMsg.LBL_zimbraPrefMailSendReadReceipts,labelLocation:_LEFT_,nowrap:false,labelWrap:true}                
+				{ref:ZaCos.A_zmailPrefMailSendReadReceipts, type:_OSELECT1_, label:ZaMsg.LBL_zmailPrefMailSendReadReceipts,labelLocation:_LEFT_,nowrap:false,labelWrap:true}                
             ]},
             {type:_ZA_TOP_GROUPER_, id:"cos_prefs_mail_sending",borderCssClass:"LowPaddedTopGrouperBorder",label:ZaMsg.NAD_MailOptionsSending,
             	visibilityChecks:[[ZATopGrouper_XFormItem.isGroupVisible, 
 					[
-						ZaCos.A_zimbraPrefSaveToSent,
-						ZaCos.A_zimbraAllowAnyFromAddress
+						ZaCos.A_zmailPrefSaveToSent,
+						ZaCos.A_zmailAllowAnyFromAddress
 					]]
 				],
             	items :[
-                {ref:ZaCos.A_zimbraPrefSaveToSent, type:_CHECKBOX_, msgName:ZaMsg.LBL_zimbraPrefSaveToSent,label:ZaMsg.LBL_zimbraPrefSaveToSent,
+                {ref:ZaCos.A_zmailPrefSaveToSent, type:_CHECKBOX_, msgName:ZaMsg.LBL_zmailPrefSaveToSent,label:ZaMsg.LBL_zmailPrefSaveToSent,
                     trueValue:"TRUE", falseValue:"FALSE"
                 },
-                {ref:ZaCos.A_zimbraAllowAnyFromAddress, type:_CHECKBOX_, msgName:ZaMsg.LBL_zimbraAllowAnyFromAddress,
-                	label:ZaMsg.LBL_zimbraAllowAnyFromAddress,
+                {ref:ZaCos.A_zmailAllowAnyFromAddress, type:_CHECKBOX_, msgName:ZaMsg.LBL_zmailAllowAnyFromAddress,
+                	label:ZaMsg.LBL_zmailAllowAnyFromAddress,
                     trueValue:"TRUE", falseValue:"FALSE"
                 }
             ]},
             {type:_ZA_TOP_GROUPER_, id:"cos_prefs_mail_sending",borderCssClass:"LowPaddedTopGrouperBorder",label:ZaMsg.NAD_MailOptionsComposing,
             	visibilityChecks:[[ZATopGrouper_XFormItem.isGroupVisible, 
 					[
-						ZaCos.A_zimbraPrefComposeInNewWindow,
-						ZaCos.A_zimbraPrefComposeFormat,
-						ZaCos.A_zimbraPrefHtmlEditorDefaultFontFamily,
-						ZaCos.A_zimbraPrefHtmlEditorDefaultFontSize,
-						ZaCos.A_zimbraPrefHtmlEditorDefaultFontColor,
-						ZaCos.A_zimbraPrefForwardReplyInOriginalFormat,
-						ZaCos.A_zimbraPrefMandatorySpellCheckEnabled,
-						ZaCos.A_zimbraMailSignatureMaxLength,
-						ZaCos.A_zimbraPrefAutoSaveDraftInterval
+						ZaCos.A_zmailPrefComposeInNewWindow,
+						ZaCos.A_zmailPrefComposeFormat,
+						ZaCos.A_zmailPrefHtmlEditorDefaultFontFamily,
+						ZaCos.A_zmailPrefHtmlEditorDefaultFontSize,
+						ZaCos.A_zmailPrefHtmlEditorDefaultFontColor,
+						ZaCos.A_zmailPrefForwardReplyInOriginalFormat,
+						ZaCos.A_zmailPrefMandatorySpellCheckEnabled,
+						ZaCos.A_zmailMailSignatureMaxLength,
+						ZaCos.A_zmailPrefAutoSaveDraftInterval
 
 					]]
 				],
             	items :[
-                {ref:ZaCos.A_zimbraPrefComposeInNewWindow, type:_CHECKBOX_, msgName:ZaMsg.LBL_zimbraPrefComposeInNewWindow,
-                    label:ZaMsg.LBL_zimbraPrefComposeInNewWindow, trueValue:"TRUE", falseValue:"FALSE"
+                {ref:ZaCos.A_zmailPrefComposeInNewWindow, type:_CHECKBOX_, msgName:ZaMsg.LBL_zmailPrefComposeInNewWindow,
+                    label:ZaMsg.LBL_zmailPrefComposeInNewWindow, trueValue:"TRUE", falseValue:"FALSE"
                 },
-                {ref:ZaCos.A_zimbraPrefComposeFormat, type:_OSELECT1_, msgName:ZaMsg.LBL_zimbraPrefComposeFormat,label:ZaMsg.LBL_zimbraPrefComposeFormat, labelLocation:_LEFT_},
-                {ref:ZaCos.A_zimbraPrefHtmlEditorDefaultFontFamily, type:_OSELECT1_, msgName:ZaMsg.LBL_zimbraPrefHtmlEditorDefaultFontFamily,
-                    label:ZaMsg.LBL_zimbraPrefHtmlEditorDefaultFontFamily, labelLocation:_LEFT_
+                {ref:ZaCos.A_zmailPrefComposeFormat, type:_OSELECT1_, msgName:ZaMsg.LBL_zmailPrefComposeFormat,label:ZaMsg.LBL_zmailPrefComposeFormat, labelLocation:_LEFT_},
+                {ref:ZaCos.A_zmailPrefHtmlEditorDefaultFontFamily, type:_OSELECT1_, msgName:ZaMsg.LBL_zmailPrefHtmlEditorDefaultFontFamily,
+                    label:ZaMsg.LBL_zmailPrefHtmlEditorDefaultFontFamily, labelLocation:_LEFT_
                 },
-                {ref:ZaCos.A_zimbraPrefHtmlEditorDefaultFontSize, type:_OSELECT1_, msgName:ZaMsg.LBL_zimbraPrefHtmlEditorDefaultFontSize,
-                    label:ZaMsg.LBL_zimbraPrefHtmlEditorDefaultFontSize, labelLocation:_LEFT_
+                {ref:ZaCos.A_zmailPrefHtmlEditorDefaultFontSize, type:_OSELECT1_, msgName:ZaMsg.LBL_zmailPrefHtmlEditorDefaultFontSize,
+                    label:ZaMsg.LBL_zmailPrefHtmlEditorDefaultFontSize, labelLocation:_LEFT_
                 },
-                {ref:ZaCos.A_zimbraPrefHtmlEditorDefaultFontColor, type:_DWT_COLORPICKER_, msgName:ZaMsg.LBL_zimbraPrefHtmlEditorDefaultFontColor,
+                {ref:ZaCos.A_zmailPrefHtmlEditorDefaultFontColor, type:_DWT_COLORPICKER_, msgName:ZaMsg.LBL_zmailPrefHtmlEditorDefaultFontColor,
                     height: "25px",
-                    label:ZaMsg.LBL_zimbraPrefHtmlEditorDefaultFontColor, labelLocation:_LEFT_
+                    label:ZaMsg.LBL_zmailPrefHtmlEditorDefaultFontColor, labelLocation:_LEFT_
                 },
-                {ref:ZaCos.A_zimbraPrefForwardReplyInOriginalFormat, type:_CHECKBOX_,
-                    msgName:ZaMsg.LBL_zimbraPrefForwardReplyInOriginalFormat,
-                    label:ZaMsg.LBL_zimbraPrefForwardReplyInOriginalFormat, trueValue:"TRUE", falseValue:"FALSE"
+                {ref:ZaCos.A_zmailPrefForwardReplyInOriginalFormat, type:_CHECKBOX_,
+                    msgName:ZaMsg.LBL_zmailPrefForwardReplyInOriginalFormat,
+                    label:ZaMsg.LBL_zmailPrefForwardReplyInOriginalFormat, trueValue:"TRUE", falseValue:"FALSE"
                 },
-                {ref:ZaCos.A_zimbraPrefMandatorySpellCheckEnabled, type:_CHECKBOX_, 
-                	msgName:ZaMsg.LBL_zimbraPrefMandatorySpellCheckEnabled,
-                	label:ZaMsg.LBL_zimbraPrefMandatorySpellCheckEnabled,
+                {ref:ZaCos.A_zmailPrefMandatorySpellCheckEnabled, type:_CHECKBOX_, 
+                	msgName:ZaMsg.LBL_zmailPrefMandatorySpellCheckEnabled,
+                	label:ZaMsg.LBL_zmailPrefMandatorySpellCheckEnabled,
                     trueValue:"TRUE", falseValue:"FALSE"
                 },
-               /* {ref:ZaCos.A_zimbraPrefMailSignatureStyle, type:_CHECKBOX_,
-                    msgName:ZaMsg.LBL_zimbraPrefMailSignatureStyle,
-                    label:ZaMsg.LBL_zimbraPrefMailSignatureStyle,
+               /* {ref:ZaCos.A_zmailPrefMailSignatureStyle, type:_CHECKBOX_,
+                    msgName:ZaMsg.LBL_zmailPrefMailSignatureStyle,
+                    label:ZaMsg.LBL_zmailPrefMailSignatureStyle,
                     trueValue:"internet", falseValue:"outlook"
                 },*/
-                {ref:ZaCos.A_zimbraMailSignatureMaxLength, type:_TEXTFIELD_,
-                    msgName:ZaMsg.LBL_zimbraMailSignatureMaxLength,
-                    label:ZaMsg.LBL_zimbraMailSignatureMaxLength, labelLocation:_LEFT_,
+                {ref:ZaCos.A_zmailMailSignatureMaxLength, type:_TEXTFIELD_,
+                    msgName:ZaMsg.LBL_zmailMailSignatureMaxLength,
+                    label:ZaMsg.LBL_zmailMailSignatureMaxLength, labelLocation:_LEFT_,
                     cssClass:"admin_xform_number_input"},
-                {ref:ZaCos.A_zimbraPrefAutoSaveDraftInterval, type:_LIFETIME_,
-                    msgName:ZaMsg.MSG_zimbraPrefAutoSaveDraftInterval,
-                    label:ZaMsg.LBL_zimbraPrefAutoSaveDraftInterval, labelLocation:_LEFT_,
+                {ref:ZaCos.A_zmailPrefAutoSaveDraftInterval, type:_LIFETIME_,
+                    msgName:ZaMsg.MSG_zmailPrefAutoSaveDraftInterval,
+                    label:ZaMsg.LBL_zmailPrefAutoSaveDraftInterval, labelLocation:_LEFT_,
                     onChange:ZaCosXFormView.validatePollingInterval,
                     labelCssStyle:"white-space:normal;",nowrap:false,labelWrap:true
                 }
@@ -1161,162 +1161,162 @@ ZaCosXFormView.myXFormModifier = function(xFormObject, entry) {
                 label: ZaMsg.NAD_ContactsOptions,
                 visibilityChecks:[[ZATopGrouper_XFormItem.isGroupVisible,
 					[
-						ZaCos.A_zimbraPrefAutoAddAddressEnabled,
-						ZaCos.A_zimbraPrefGalAutoCompleteEnabled
+						ZaCos.A_zmailPrefAutoAddAddressEnabled,
+						ZaCos.A_zmailPrefGalAutoCompleteEnabled
 					]]
 				],
                 items :[
-                {ref:ZaCos.A_zimbraPrefAutoAddAddressEnabled, type:_CHECKBOX_,
-                    msgName:ZaMsg.LBL_zimbraPrefAutoAddAddressEnabled,
-                    label:ZaMsg.LBL_zimbraPrefAutoAddAddressEnabled, trueValue:"TRUE", falseValue:"FALSE"
+                {ref:ZaCos.A_zmailPrefAutoAddAddressEnabled, type:_CHECKBOX_,
+                    msgName:ZaMsg.LBL_zmailPrefAutoAddAddressEnabled,
+                    label:ZaMsg.LBL_zmailPrefAutoAddAddressEnabled, trueValue:"TRUE", falseValue:"FALSE"
                 },
-                {ref:ZaCos.A_zimbraPrefGalAutoCompleteEnabled, type:_CHECKBOX_,
-                    msgName:ZaMsg.LBL_zimbraPrefGalAutoCompleteEnabled,
-                    label:ZaMsg.LBL_zimbraPrefGalAutoCompleteEnabled, trueValue:"TRUE", falseValue:"FALSE"
+                {ref:ZaCos.A_zmailPrefGalAutoCompleteEnabled, type:_CHECKBOX_,
+                    msgName:ZaMsg.LBL_zmailPrefGalAutoCompleteEnabled,
+                    label:ZaMsg.LBL_zmailPrefGalAutoCompleteEnabled, trueValue:"TRUE", falseValue:"FALSE"
                 }
             ]},
             {type:_ZA_TOP_GROUPER_, id:"cos_prefs_calendar_general",colSizes:["275px","auto"],numCols:2,
                 label: ZaMsg.NAD_CalendarOptions,
                 visibilityChecks:[[ZATopGrouper_XFormItem.isGroupVisible,
 					[
-						ZaCos.A_zimbraPrefTimeZoneId,
-						ZaCos.A_zimbraPrefCalendarApptReminderWarningTime,
-						ZaCos.A_zimbraPrefCalendarInitialView,
-						ZaCos.A_zimbraPrefCalendarFirstDayOfWeek,
-						ZaCos.A_zimbraPrefCalendarApptVisibility,
-						ZaCos.A_zimbraPrefAppleIcalDelegationEnabled,
-						ZaCos.A_zimbraPrefCalendarShowPastDueReminders,
-						ZaCos.A_zimbraPrefCalendarToasterEnabled,
-						ZaCos.A_zimbraPrefCalendarAllowCancelEmailToSelf,
-						ZaCos.A_zimbraPrefCalendarAllowPublishMethodInvite,
-						ZaCos.A_zimbraPrefCalendarAllowForwardedInvite,
-						ZaCos.A_zimbraPrefCalendarReminderFlashTitle,
-						ZaCos.A_zimbraPrefCalendarReminderSoundsEnabled,
-						ZaCos.A_zimbraPrefCalendarSendInviteDeniedAutoReply,
-						ZaCos.A_zimbraPrefCalendarAutoAddInvites,
-						ZaCos.A_zimbraPrefCalendarNotifyDelegatedChanges,
-						ZaCos.A_zimbraPrefCalendarAlwaysShowMiniCal,
-						ZaCos.A_zimbraPrefCalendarUseQuickAdd,
-						ZaCos.A_zimbraPrefUseTimeZoneListInCalendar
+						ZaCos.A_zmailPrefTimeZoneId,
+						ZaCos.A_zmailPrefCalendarApptReminderWarningTime,
+						ZaCos.A_zmailPrefCalendarInitialView,
+						ZaCos.A_zmailPrefCalendarFirstDayOfWeek,
+						ZaCos.A_zmailPrefCalendarApptVisibility,
+						ZaCos.A_zmailPrefAppleIcalDelegationEnabled,
+						ZaCos.A_zmailPrefCalendarShowPastDueReminders,
+						ZaCos.A_zmailPrefCalendarToasterEnabled,
+						ZaCos.A_zmailPrefCalendarAllowCancelEmailToSelf,
+						ZaCos.A_zmailPrefCalendarAllowPublishMethodInvite,
+						ZaCos.A_zmailPrefCalendarAllowForwardedInvite,
+						ZaCos.A_zmailPrefCalendarReminderFlashTitle,
+						ZaCos.A_zmailPrefCalendarReminderSoundsEnabled,
+						ZaCos.A_zmailPrefCalendarSendInviteDeniedAutoReply,
+						ZaCos.A_zmailPrefCalendarAutoAddInvites,
+						ZaCos.A_zmailPrefCalendarNotifyDelegatedChanges,
+						ZaCos.A_zmailPrefCalendarAlwaysShowMiniCal,
+						ZaCos.A_zmailPrefCalendarUseQuickAdd,
+						ZaCos.A_zmailPrefUseTimeZoneListInCalendar
 					]]
 				],
                 items :[
-                {ref:ZaCos.A_zimbraPrefTimeZoneId, type:_OSELECT1_,
-                     msgName:ZaMsg.MSG_zimbraPrefTimeZoneId,label:ZaMsg.LBL_zimbraPrefTimeZoneId,
+                {ref:ZaCos.A_zmailPrefTimeZoneId, type:_OSELECT1_,
+                     msgName:ZaMsg.MSG_zmailPrefTimeZoneId,label:ZaMsg.LBL_zmailPrefTimeZoneId,
                      labelLocation:_LEFT_,
                      labelCssStyle:"white-space:normal;",nowrap:false,labelWrap:true
                 },
-                {ref:ZaCos.A_zimbraPrefCalendarApptReminderWarningTime, type:_OSELECT1_,
-                     msgName:ZaMsg.MSG_zimbraPrefCalendarApptReminderWarningTime,
-                     label:ZaMsg.LBL_zimbraPrefCalendarApptReminderWarningTime,
+                {ref:ZaCos.A_zmailPrefCalendarApptReminderWarningTime, type:_OSELECT1_,
+                     msgName:ZaMsg.MSG_zmailPrefCalendarApptReminderWarningTime,
+                     label:ZaMsg.LBL_zmailPrefCalendarApptReminderWarningTime,
                      labelLocation:_LEFT_,
                      labelCssStyle:"white-space:normal;",nowrap:false,labelWrap:true
                 },
-                {ref:ZaCos.A_zimbraPrefCalendarInitialView, type:_OSELECT1_, msgName:ZaMsg.MSG_zimbraPrefCalendarInitialView,
-                    label:ZaMsg.LBL_zimbraPrefCalendarInitialView, labelLocation:_LEFT_
+                {ref:ZaCos.A_zmailPrefCalendarInitialView, type:_OSELECT1_, msgName:ZaMsg.MSG_zmailPrefCalendarInitialView,
+                    label:ZaMsg.LBL_zmailPrefCalendarInitialView, labelLocation:_LEFT_
                 },
-				{ref:ZaCos.A_zimbraPrefCalendarFirstDayOfWeek, type:_OSELECT1_,
-                    msgName:ZaMsg.LBL_zimbraPrefCalendarFirstDayOfWeek,
-                    label:ZaMsg.LBL_zimbraPrefCalendarFirstDayOfWeek, labelLocation:_LEFT_,
+				{ref:ZaCos.A_zmailPrefCalendarFirstDayOfWeek, type:_OSELECT1_,
+                    msgName:ZaMsg.LBL_zmailPrefCalendarFirstDayOfWeek,
+                    label:ZaMsg.LBL_zmailPrefCalendarFirstDayOfWeek, labelLocation:_LEFT_,
                     labelCssStyle:"white-space:normal;",nowrap:false,labelWrap:true
                 },
-				{ref:ZaCos.A_zimbraPrefCalendarApptVisibility, type:_OSELECT1_,
-                    msgName:ZaMsg.LBL_zimbraPrefCalendarApptVisibility,
-                    label:ZaMsg.LBL_zimbraPrefCalendarApptVisibility, labelLocation:_LEFT_,
+				{ref:ZaCos.A_zmailPrefCalendarApptVisibility, type:_OSELECT1_,
+                    msgName:ZaMsg.LBL_zmailPrefCalendarApptVisibility,
+                    label:ZaMsg.LBL_zmailPrefCalendarApptVisibility, labelLocation:_LEFT_,
                     labelCssStyle:"white-space:normal;",nowrap:false,labelWrap:true
                 },
-                {ref:ZaCos.A_zimbraPrefAppleIcalDelegationEnabled, 
+                {ref:ZaCos.A_zmailPrefAppleIcalDelegationEnabled, 
                 	type:_CHECKBOX_,
-                    msgName:ZaMsg.MSG_zimbraPrefAppleIcalDelegationEnabled,
-                    label:ZaMsg.LBL_zimbraPrefAppleIcalDelegationEnabled,
+                    msgName:ZaMsg.MSG_zmailPrefAppleIcalDelegationEnabled,
+                    label:ZaMsg.LBL_zmailPrefAppleIcalDelegationEnabled,
                     trueValue:"TRUE", falseValue:"FALSE",
                     labelCssStyle:"white-space:normal;",
                     nowrap:false,labelWrap:true
                 },
-                {ref:ZaCos.A_zimbraPrefCalendarShowPastDueReminders, 
+                {ref:ZaCos.A_zmailPrefCalendarShowPastDueReminders, 
                 	type:_CHECKBOX_,
-                    msgName:ZaMsg.MSG_zimbraPrefCalendarShowPastDueReminders,
-                    label:ZaMsg.LBL_zimbraPrefCalendarShowPastDueReminders,
+                    msgName:ZaMsg.MSG_zmailPrefCalendarShowPastDueReminders,
+                    label:ZaMsg.LBL_zmailPrefCalendarShowPastDueReminders,
                     trueValue:"TRUE", falseValue:"FALSE",
                     labelCssStyle:"white-space:normal;",
                     nowrap:false,labelWrap:true
                 },
-                {ref:ZaCos.A_zimbraPrefCalendarToasterEnabled, 
+                {ref:ZaCos.A_zmailPrefCalendarToasterEnabled, 
                 	type:_CHECKBOX_,
-                    msgName:ZaMsg.MSG_zimbraPrefCalendarToasterEnabled,
-                    label:ZaMsg.LBL_zimbraPrefCalendarToasterEnabled,
+                    msgName:ZaMsg.MSG_zmailPrefCalendarToasterEnabled,
+                    label:ZaMsg.LBL_zmailPrefCalendarToasterEnabled,
                     trueValue:"TRUE", falseValue:"FALSE",
                     labelCssStyle:"white-space:normal;",
                     nowrap:false,labelWrap:true
                 },
-                {ref:ZaCos.A_zimbraPrefCalendarAllowCancelEmailToSelf, 
+                {ref:ZaCos.A_zmailPrefCalendarAllowCancelEmailToSelf, 
                 	type:_CHECKBOX_,
-                    msgName:ZaMsg.MSG_zimbraPrefCalendarAllowCancelEmailToSelf,
-                    label:ZaMsg.LBL_zimbraPrefCalendarAllowCancelEmailToSelf,
+                    msgName:ZaMsg.MSG_zmailPrefCalendarAllowCancelEmailToSelf,
+                    label:ZaMsg.LBL_zmailPrefCalendarAllowCancelEmailToSelf,
                     trueValue:"TRUE", falseValue:"FALSE",
                     labelCssStyle:"white-space:normal;",
                     nowrap:false,labelWrap:true
                 },
-                {ref:ZaCos.A_zimbraPrefCalendarAllowPublishMethodInvite, 
+                {ref:ZaCos.A_zmailPrefCalendarAllowPublishMethodInvite, 
                 	type:_CHECKBOX_,
-                    msgName:ZaMsg.MSG_zimbraPrefCalendarAllowPublishMethodInvite,
-                    label:ZaMsg.LBL_zimbraPrefCalendarAllowPublishMethodInvite,
+                    msgName:ZaMsg.MSG_zmailPrefCalendarAllowPublishMethodInvite,
+                    label:ZaMsg.LBL_zmailPrefCalendarAllowPublishMethodInvite,
                     trueValue:"TRUE", falseValue:"FALSE",
                     labelCssStyle:"white-space:normal;",
                     nowrap:false,labelWrap:true
                 },                                
-                {ref:ZaCos.A_zimbraPrefCalendarAllowForwardedInvite, 
+                {ref:ZaCos.A_zmailPrefCalendarAllowForwardedInvite, 
                 	type:_CHECKBOX_,
-                    msgName:ZaMsg.MSG_zimbraPrefCalendarAllowForwardedInvite,
-                    label:ZaMsg.LBL_zimbraPrefCalendarAllowForwardedInvite,
+                    msgName:ZaMsg.MSG_zmailPrefCalendarAllowForwardedInvite,
+                    label:ZaMsg.LBL_zmailPrefCalendarAllowForwardedInvite,
                     trueValue:"TRUE", falseValue:"FALSE",
                     labelCssStyle:"white-space:normal;",
                     nowrap:false,labelWrap:true
                 },                                                                
-                {ref:ZaCos.A_zimbraPrefCalendarReminderFlashTitle, 
+                {ref:ZaCos.A_zmailPrefCalendarReminderFlashTitle, 
                 	type:_CHECKBOX_,
-                    msgName:ZaMsg.MSG_zimbraPrefCalendarReminderFlashTitle,
-                    label:ZaMsg.LBL_zimbraPrefCalendarReminderFlashTitle,
+                    msgName:ZaMsg.MSG_zmailPrefCalendarReminderFlashTitle,
+                    label:ZaMsg.LBL_zmailPrefCalendarReminderFlashTitle,
                     trueValue:"TRUE", falseValue:"FALSE",
                     labelCssStyle:"white-space:normal;",
                     nowrap:false,labelWrap:true
                 },                                                                
-                {ref:ZaCos.A_zimbraPrefCalendarReminderSoundsEnabled, 
+                {ref:ZaCos.A_zmailPrefCalendarReminderSoundsEnabled, 
                 	type:_CHECKBOX_,
-                    msgName:ZaMsg.MSG_zimbraPrefCalendarReminderSoundsEnabled,
-                    label:ZaMsg.LBL_zimbraPrefCalendarReminderSoundsEnabled,
+                    msgName:ZaMsg.MSG_zmailPrefCalendarReminderSoundsEnabled,
+                    label:ZaMsg.LBL_zmailPrefCalendarReminderSoundsEnabled,
                     trueValue:"TRUE", falseValue:"FALSE",
                     labelCssStyle:"white-space:normal;",
                     nowrap:false,labelWrap:true
                 },                                                
-                {ref:ZaCos.A_zimbraPrefCalendarSendInviteDeniedAutoReply, type:_CHECKBOX_,
-                    msgName:ZaMsg.MSG_zimbraPrefCalendarSendInviteDeniedAutoReply,
-                    label:ZaMsg.LBL_zimbraPrefCalendarSendInviteDeniedAutoReply,
+                {ref:ZaCos.A_zmailPrefCalendarSendInviteDeniedAutoReply, type:_CHECKBOX_,
+                    msgName:ZaMsg.MSG_zmailPrefCalendarSendInviteDeniedAutoReply,
+                    label:ZaMsg.LBL_zmailPrefCalendarSendInviteDeniedAutoReply,
                     trueValue:"TRUE", falseValue:"FALSE",
                     labelCssStyle:"white-space:normal;",
                     nowrap:false,labelWrap:true
                 },                                                
-                {ref:ZaCos.A_zimbraPrefCalendarAutoAddInvites, type:_CHECKBOX_,
-                    msgName:ZaMsg.LBL_zimbraPrefCalendarAutoAddInvites,label:ZaMsg.LBL_zimbraPrefCalendarAutoAddInvites,
+                {ref:ZaCos.A_zmailPrefCalendarAutoAddInvites, type:_CHECKBOX_,
+                    msgName:ZaMsg.LBL_zmailPrefCalendarAutoAddInvites,label:ZaMsg.LBL_zmailPrefCalendarAutoAddInvites,
                     trueValue:"TRUE", falseValue:"FALSE",
                     labelCssStyle:"white-space:normal;",nowrap:false,labelWrap:true
                 },                                
-                {ref:ZaCos.A_zimbraPrefCalendarNotifyDelegatedChanges, type:_CHECKBOX_,
-                    msgName:ZaMsg.LBL_zimbraPrefCalendarNotifyDelegatedChanges,label:ZaMsg.LBL_zimbraPrefCalendarNotifyDelegatedChanges,
+                {ref:ZaCos.A_zmailPrefCalendarNotifyDelegatedChanges, type:_CHECKBOX_,
+                    msgName:ZaMsg.LBL_zmailPrefCalendarNotifyDelegatedChanges,label:ZaMsg.LBL_zmailPrefCalendarNotifyDelegatedChanges,
                     trueValue:"TRUE", falseValue:"FALSE",
                     labelCssStyle:"white-space:normal;",nowrap:false,labelWrap:true
                 },
-                {ref:ZaCos.A_zimbraPrefCalendarAlwaysShowMiniCal, type:_CHECKBOX_,
-                    msgName:ZaMsg.LBL_zimbraPrefCalendarAlwaysShowMiniCal,label:ZaMsg.LBL_zimbraPrefCalendarAlwaysShowMiniCal,
+                {ref:ZaCos.A_zmailPrefCalendarAlwaysShowMiniCal, type:_CHECKBOX_,
+                    msgName:ZaMsg.LBL_zmailPrefCalendarAlwaysShowMiniCal,label:ZaMsg.LBL_zmailPrefCalendarAlwaysShowMiniCal,
                     trueValue:"TRUE", falseValue:"FALSE",
                     labelCssStyle:"white-space:normal;",nowrap:false,labelWrap:true
                 },
-                {ref:ZaCos.A_zimbraPrefCalendarUseQuickAdd, type:_CHECKBOX_, msgName:ZaMsg.NAD_useQuickAdd,
-                    label:ZaMsg.LBL_zimbraPrefCalendarUseQuickAdd, trueValue:"TRUE", falseValue:"FALSE"
+                {ref:ZaCos.A_zmailPrefCalendarUseQuickAdd, type:_CHECKBOX_, msgName:ZaMsg.NAD_useQuickAdd,
+                    label:ZaMsg.LBL_zmailPrefCalendarUseQuickAdd, trueValue:"TRUE", falseValue:"FALSE"
                 },
-                {ref:ZaCos.A_zimbraPrefUseTimeZoneListInCalendar, type:_CHECKBOX_,
-                    msgName:ZaMsg.LBL_zimbraPrefUseTimeZoneListInCalendar,
-                    label:ZaMsg.LBL_zimbraPrefUseTimeZoneListInCalendar, trueValue:"TRUE", falseValue:"FALSE"
+                {ref:ZaCos.A_zmailPrefUseTimeZoneListInCalendar, type:_CHECKBOX_,
+                    msgName:ZaMsg.LBL_zmailPrefUseTimeZoneListInCalendar,
+                    label:ZaMsg.LBL_zmailPrefUseTimeZoneListInCalendar, trueValue:"TRUE", falseValue:"FALSE"
                 }
             ]}
         ];
@@ -1332,15 +1332,15 @@ ZaCosXFormView.myXFormModifier = function(xFormObject, entry) {
             {type:_GROUP_, numCols:2, colSizes:["275px","auto"],
                 items:[
                     {type:_OSELECT1_,
-                        ref:ZaCos.A_zimbraPrefSkin,
-                        msgName:ZaMsg.LBL_zimbraPrefSkin,label:ZaMsg.LBL_zimbraPrefSkin, labelLocation:_LEFT_,choices:ZaCosXFormView.themeChoices,
+                        ref:ZaCos.A_zmailPrefSkin,
+                        msgName:ZaMsg.LBL_zmailPrefSkin,label:ZaMsg.LBL_zmailPrefSkin, labelLocation:_LEFT_,choices:ZaCosXFormView.themeChoices,
                         visibilityChecks:[ZaCosXFormView.gotSkins]
                     }
                 ]
             },
             {type:_GROUP_,
                 items:[
-                    {type:_OUTPUT_,ref:ZaCos.A_zimbraPrefSkin,label:ZaMsg.LBL_zimbraPrefSkin, labelLocation:_LEFT_,
+                    {type:_OUTPUT_,ref:ZaCos.A_zmailPrefSkin,label:ZaMsg.LBL_zmailPrefSkin, labelLocation:_LEFT_,
                         visibilityChecks:[ZaCosXFormView.gotNoSkins]
                     }
                 ]
@@ -1349,8 +1349,8 @@ ZaCosXFormView.myXFormModifier = function(xFormObject, entry) {
             {type:_GROUP_, numCols:1,colSizes:["auto"],
                 items: [
                     {type:_ZASELECT_RADIO_,
-                        selectRef:ZaCos.A_zimbraAvailableSkin,
-                        ref:ZaCos.A_zimbraAvailableSkin,
+                        selectRef:ZaCos.A_zmailAvailableSkin,
+                        ref:ZaCos.A_zmailAvailableSkin,
                         choices:ZaCosXFormView.themeChoices,
                         visibilityChecks:[Case_XFormItem.prototype.isCurrentTab, ZaCosXFormView.gotSkins],
                         visibilityChangeEventSources:[ZaModel.currentTab],
@@ -1359,11 +1359,11 @@ ZaCosXFormView.myXFormModifier = function(xFormObject, entry) {
                         radioBoxLabel2:ZaMsg.COS_LimitThemesTo
                     },
                     {type:_DWT_ALERT_,style: DwtAlert.WARNING, iconVisible:true,
-                        visibilityChecks:[ZaCosXFormView.gotNoSkins,ZaZimbraAdmin.isGlobalAdmin],
+                        visibilityChecks:[ZaCosXFormView.gotNoSkins,ZaZmailAdmin.isGlobalAdmin],
                         value:ZaMsg.ERROR_CANNOT_FIND_SKINS_FOR_COS
                     },
                     {type:_DWT_ALERT_,style: DwtAlert.WARNING, iconVisible:true,
-                        visibilityChecks:[ZaCosXFormView.gotNoSkins, [function(){return !ZaZimbraAdmin.isGlobalAdmin()}]],
+                        visibilityChecks:[ZaCosXFormView.gotNoSkins, [function(){return !ZaZmailAdmin.isGlobalAdmin()}]],
                         value:ZaMsg.ERROR_CANNOT_FIND_SKINS_FOR_COS_OR_NO_PERM
                     }
                 ]
@@ -1381,8 +1381,8 @@ ZaCosXFormView.myXFormModifier = function(xFormObject, entry) {
                 items: [
                     {type: _OUTPUT_, value: ZaMsg.COS_LimitZimletsTo},
                     {type:_ZA_ZIMLET_SELECT_COMBO_,
-                        selectRef:ZaCos.A_zimbraZimletAvailableZimlets,
-                        ref:ZaCos.A_zimbraZimletAvailableZimlets,
+                        selectRef:ZaCos.A_zmailZimletAvailableZimlets,
+                        ref:ZaCos.A_zmailZimletAvailableZimlets,
                         choices:ZaCosXFormView.zimletChoices,
                         visibilityChecks:[Case_XFormItem.prototype.isCurrentTab],
                         visibilityChangeEventSources:[ZaModel.currentTab],
@@ -1409,8 +1409,8 @@ ZaCosXFormView.myXFormModifier = function(xFormObject, entry) {
             {type:_ZAGROUP_, numCols:1,colSizes:["auto"],border:0,
                 items: [
                     {type:_ZASELECT_RADIO_,
-                        selectRef:ZaCos.A_zimbraMailHostPool,
-                        ref:ZaCos.A_zimbraMailHostPool,
+                        selectRef:ZaCos.A_zmailMailHostPool,
+                        ref:ZaCos.A_zmailMailHostPool,
                         choices:ZaApp.getInstance().getServerIdListChoices(),
                         visibilityChecks:[Case_XFormItem.prototype.isCurrentTab],
                         visibilityChangeEventSources:[ZaModel.currentTab],
@@ -1438,44 +1438,44 @@ ZaCosXFormView.myXFormModifier = function(xFormObject, entry) {
 	    },      
             {type:_ZA_TOP_GROUPER_, id:"cos_attachment_settings",
                 label:ZaMsg.NAD_AttachmentsGrouper,visibilityChecks:[[ZATopGrouper_XFormItem.isGroupVisible,
-                                                          			[ZaCos.A_zimbraAttachmentsBlocked]]],
+                                                          			[ZaCos.A_zmailAttachmentsBlocked]]],
                 items :[
-                    {ref:ZaCos.A_zimbraAttachmentsBlocked, type:_CHECKBOX_,  msgName:ZaMsg.NAD_RemoveAllAttachments,label:ZaMsg.NAD_RemoveAllAttachments, labelLocation:_LEFT_, trueValue:"TRUE", falseValue:"FALSE",labelCssClass:"xform_label",  align:_LEFT_}
+                    {ref:ZaCos.A_zmailAttachmentsBlocked, type:_CHECKBOX_,  msgName:ZaMsg.NAD_RemoveAllAttachments,label:ZaMsg.NAD_RemoveAllAttachments, labelLocation:_LEFT_, trueValue:"TRUE", falseValue:"FALSE",labelCssClass:"xform_label",  align:_LEFT_}
                 ]
             },
             {type:_ZA_TOP_GROUPER_, id:"cos_quota_settings",
                 label:ZaMsg.NAD_QuotaGrouper,
                 items: [
-                    {ref:ZaCos.A_zimbraMailForwardingAddressMaxLength, type:_TEXTFIELD_, 
-                    	msgName:ZaMsg.MSG_zimbraMailForwardingAddressMaxLength,
-                    	label:ZaMsg.LBL_zimbraMailForwardingAddressMaxLength, 
+                    {ref:ZaCos.A_zmailMailForwardingAddressMaxLength, type:_TEXTFIELD_, 
+                    	msgName:ZaMsg.MSG_zmailMailForwardingAddressMaxLength,
+                    	label:ZaMsg.LBL_zmailMailForwardingAddressMaxLength, 
                     	labelLocation:_LEFT_, 
                     	cssClass:"admin_xform_number_input"
                     },
-                    {ref:ZaCos.A_zimbraMailForwardingAddressMaxNumAddrs, type:_TEXTFIELD_, 
-                    	msgName:ZaMsg.MSG_zimbraMailForwardingAddressMaxNumAddrs,
-                    	label:ZaMsg.LBL_zimbraMailForwardingAddressMaxNumAddrs, 
+                    {ref:ZaCos.A_zmailMailForwardingAddressMaxNumAddrs, type:_TEXTFIELD_, 
+                    	msgName:ZaMsg.MSG_zmailMailForwardingAddressMaxNumAddrs,
+                    	label:ZaMsg.LBL_zmailMailForwardingAddressMaxNumAddrs, 
                     	labelLocation:_LEFT_, 
                     	cssClass:"admin_xform_number_input"
                     },                
-                    {ref:ZaCos.A_zimbraMailQuota, type:_TEXTFIELD_, 
-                    	msgName:ZaMsg.MSG_zimbraMailQuota,
-                    	label:ZaMsg.LBL_zimbraMailQuota, labelLocation:_LEFT_, cssClass:"admin_xform_number_input"
+                    {ref:ZaCos.A_zmailMailQuota, type:_TEXTFIELD_, 
+                    	msgName:ZaMsg.MSG_zmailMailQuota,
+                    	label:ZaMsg.LBL_zmailMailQuota, labelLocation:_LEFT_, cssClass:"admin_xform_number_input"
                     },
-                    {ref:ZaCos.A_zimbraContactMaxNumEntries, type:_TEXTFIELD_, 
-                    	msgName:ZaMsg.MSG_zimbraContactMaxNumEntries,
-                    	label:ZaMsg.LBL_zimbraContactMaxNumEntries, 
+                    {ref:ZaCos.A_zmailContactMaxNumEntries, type:_TEXTFIELD_, 
+                    	msgName:ZaMsg.MSG_zmailContactMaxNumEntries,
+                    	label:ZaMsg.LBL_zmailContactMaxNumEntries, 
                     	labelLocation:_LEFT_, 
                     	cssClass:"admin_xform_number_input"
                     },
-                    {ref:ZaCos.A_zimbraQuotaWarnPercent, type:_INPUT_, msgName:ZaMsg.MSG_zimbraQuotaWarnPercent,
-                    	label:ZaMsg.LBL_zimbraQuotaWarnPercent, labelLocation:_LEFT_, cssClass:"admin_xform_number_input"
+                    {ref:ZaCos.A_zmailQuotaWarnPercent, type:_INPUT_, msgName:ZaMsg.MSG_zmailQuotaWarnPercent,
+                    	label:ZaMsg.LBL_zmailQuotaWarnPercent, labelLocation:_LEFT_, cssClass:"admin_xform_number_input"
                     },
-                    {ref:ZaCos.A_zimbraQuotaWarnInterval, type:_LIFETIME_, msgName:ZaMsg.MSG_zimbraQuotaWarnInterval,
-                    	label:ZaMsg.LBL_zimbraQuotaWarnInterval, labelLocation:_LEFT_
+                    {ref:ZaCos.A_zmailQuotaWarnInterval, type:_LIFETIME_, msgName:ZaMsg.MSG_zmailQuotaWarnInterval,
+                    	label:ZaMsg.LBL_zmailQuotaWarnInterval, labelLocation:_LEFT_
                     },
-                    {ref:ZaCos.A_zimbraQuotaWarnMessage, type:_TEXTAREA_, msgName:ZaMsg.MSG_zimbraQuotaWarnMessage,
-                    	label:ZaMsg.LBL_zimbraQuotaWarnMessage, labelLocation:_LEFT_, labelCssStyle:"vertical-align:top;",width: "30em"
+                    {ref:ZaCos.A_zmailQuotaWarnMessage, type:_TEXTAREA_, msgName:ZaMsg.MSG_zmailQuotaWarnMessage,
+                    	label:ZaMsg.LBL_zmailQuotaWarnMessage, labelLocation:_LEFT_, labelCssStyle:"vertical-align:top;",width: "30em"
                     }
                 ]
             },
@@ -1483,43 +1483,43 @@ ZaCosXFormView.myXFormModifier = function(xFormObject, entry) {
             {type:_ZA_TOP_GROUPER_, id:"cos_datasourcepolling_settings",
                 label:ZaMsg.NAD_DataSourcePolling,
                 visibilityChecks:[[ZATopGrouper_XFormItem.isGroupVisible,
-                                  [ZaCos.A_zimbraDataSourceMinPollingInterval, ZaCos.A_zimbraDataSourcePop3PollingInterval,ZaCos.A_zimbraDataSourceImapPollingInterval,
-                                   ZaCos.A_zimbraDataSourceCalendarPollingInterval,ZaCos.A_zimbraDataSourceRssPollingInterval,ZaCos.A_zimbraDataSourceCaldavPollingInterval
+                                  [ZaCos.A_zmailDataSourceMinPollingInterval, ZaCos.A_zmailDataSourcePop3PollingInterval,ZaCos.A_zmailDataSourceImapPollingInterval,
+                                   ZaCos.A_zmailDataSourceCalendarPollingInterval,ZaCos.A_zmailDataSourceRssPollingInterval,ZaCos.A_zmailDataSourceCaldavPollingInterval
                                   ]]],
                 items: [
-                    {ref:ZaCos.A_zimbraDataSourceMinPollingInterval, type:_LIFETIME_,
-                        msgName:ZaMsg.MSG_zimbraDataSourceMinPollingInterval,
-                        label:ZaMsg.LBL_zimbraDataSourceMinPollingInterval, labelLocation:_LEFT_,
+                    {ref:ZaCos.A_zmailDataSourceMinPollingInterval, type:_LIFETIME_,
+                        msgName:ZaMsg.MSG_zmailDataSourceMinPollingInterval,
+                        label:ZaMsg.LBL_zmailDataSourceMinPollingInterval, labelLocation:_LEFT_,
                         onChange:ZaCosXFormView.validatePollingInterval,
                         labelCssStyle:"white-space:normal;",nowrap:false,labelWrap:true
                     },
-                    {ref:ZaCos.A_zimbraDataSourcePop3PollingInterval, type:_LIFETIME_,
-                        msgName:ZaMsg.MSG_zimbraDataSourcePop3PollingInterval,
-                        label:ZaMsg.LBL_zimbraDataSourcePop3PollingInterval, labelLocation:_LEFT_,
+                    {ref:ZaCos.A_zmailDataSourcePop3PollingInterval, type:_LIFETIME_,
+                        msgName:ZaMsg.MSG_zmailDataSourcePop3PollingInterval,
+                        label:ZaMsg.LBL_zmailDataSourcePop3PollingInterval, labelLocation:_LEFT_,
                         onChange:ZaCosXFormView.validatePollingInterval,
                         labelCssStyle:"white-space:normal;",nowrap:false,labelWrap:true
                     },
-                    {ref:ZaCos.A_zimbraDataSourceImapPollingInterval, type:_LIFETIME_,
-                        msgName:ZaMsg.MSG_zimbraDataSourceImapPollingInterval,
-                        label:ZaMsg.LBL_zimbraDataSourceImapPollingInterval, labelLocation:_LEFT_,
+                    {ref:ZaCos.A_zmailDataSourceImapPollingInterval, type:_LIFETIME_,
+                        msgName:ZaMsg.MSG_zmailDataSourceImapPollingInterval,
+                        label:ZaMsg.LBL_zmailDataSourceImapPollingInterval, labelLocation:_LEFT_,
                         onChange:ZaCosXFormView.validatePollingInterval,
                         labelCssStyle:"white-space:normal;",nowrap:false,labelWrap:true
                     },
-                    {ref:ZaCos.A_zimbraDataSourceCalendarPollingInterval, type:_LIFETIME_,
-                        msgName:ZaMsg.MSG_zimbraDataSourceCalendarPollingInterval,
-                        label:ZaMsg.LBL_zimbraDataSourceCalendarPollingInterval, labelLocation:_LEFT_,
+                    {ref:ZaCos.A_zmailDataSourceCalendarPollingInterval, type:_LIFETIME_,
+                        msgName:ZaMsg.MSG_zmailDataSourceCalendarPollingInterval,
+                        label:ZaMsg.LBL_zmailDataSourceCalendarPollingInterval, labelLocation:_LEFT_,
                         onChange:ZaCosXFormView.validatePollingInterval,
                         labelCssStyle:"white-space:normal;",nowrap:false,labelWrap:true
                     },
-                    {ref:ZaCos.A_zimbraDataSourceRssPollingInterval, type:_LIFETIME_,
-                        msgName:ZaMsg.MSG_zimbraDataSourceRssPollingInterval,
-                        label:ZaMsg.LBL_zimbraDataSourceRssPollingInterval, labelLocation:_LEFT_,
+                    {ref:ZaCos.A_zmailDataSourceRssPollingInterval, type:_LIFETIME_,
+                        msgName:ZaMsg.MSG_zmailDataSourceRssPollingInterval,
+                        label:ZaMsg.LBL_zmailDataSourceRssPollingInterval, labelLocation:_LEFT_,
                         onChange:ZaCosXFormView.validatePollingInterval,
                         labelCssStyle:"white-space:normal;",nowrap:false,labelWrap:true
                     },
-                    {ref:ZaCos.A_zimbraDataSourceCaldavPollingInterval, type:_LIFETIME_,
-                        msgName:ZaMsg.MSG_zimbraDataSourceCaldavPollingInterval,
-                        label:ZaMsg.LBL_zimbraDataSourceCaldavPollingInterval, labelLocation:_LEFT_,
+                    {ref:ZaCos.A_zmailDataSourceCaldavPollingInterval, type:_LIFETIME_,
+                        msgName:ZaMsg.MSG_zmailDataSourceCaldavPollingInterval,
+                        label:ZaMsg.LBL_zmailDataSourceCaldavPollingInterval, labelLocation:_LEFT_,
                         onChange:ZaCosXFormView.validatePollingInterval,
                         labelCssStyle:"white-space:normal;",nowrap:false,labelWrap:true
                     }
@@ -1529,12 +1529,12 @@ ZaCosXFormView.myXFormModifier = function(xFormObject, entry) {
             {type:_ZA_TOP_GROUPER_, id:"cos_proxyalloweddomain_settings",
              	label: ZaMsg.NAD_ProxyAllowedDomains,
                 visibilityChecks:[[ZATopGrouper_XFormItem.isGroupVisible,
-                                  [ZaCos.A_zimbraProxyAllowedDomains]]],
+                                  [ZaCos.A_zmailProxyAllowedDomains]]],
              	items:[
 		    {
-			ref: ZaCos.A_zimbraProxyAllowedDomains,  
-			msgName:ZaMsg.MSG_zimbraProxyAllowedDomains,
-    			label:ZaMsg.LBL_zimbraProxyAllowedDomains, labelLocation:_LEFT_, 
+			ref: ZaCos.A_zmailProxyAllowedDomains,  
+			msgName:ZaMsg.MSG_zmailProxyAllowedDomains,
+    			label:ZaMsg.LBL_zmailProxyAllowedDomains, labelLocation:_LEFT_, 
    			labelCssStyle:"vertical-align:top;",
     			type:_REPEAT_,
     			align:_LEFT_,
@@ -1564,62 +1564,62 @@ ZaCosXFormView.myXFormModifier = function(xFormObject, entry) {
                       iconVisible:  false,
                       content: ((ZaCosXFormView.isAllAuthfromInternal())?ZaMsg.Alert_InternalPassword:ZaMsg.Alert_ExternalPassword)
                     },
-                    {ref:ZaCos.A_zimbraPasswordLocked, type:_CHECKBOX_,
+                    {ref:ZaCos.A_zmailPasswordLocked, type:_CHECKBOX_,
                         msgName:ZaMsg.NAD_PwdLocked,
                         label:ZaMsg.NAD_PwdLocked,
                         trueValue:"TRUE", falseValue:"FALSE",
 			visibilityChecks:[],enableDisableChecks:[[ZaCosXFormView.isAllAuthfromInternal]]
                     },
-                    {ref:ZaCos.A_zimbraMinPwdLength, 
-			type:_TEXTFIELD_, msgName:ZaMsg.MSG_zimbraMinPwdLength,
-			label:ZaMsg.LBL_zimbraMinPwdLength, labelLocation:_LEFT_, cssClass:"admin_xform_number_input",
+                    {ref:ZaCos.A_zmailMinPwdLength, 
+			type:_TEXTFIELD_, msgName:ZaMsg.MSG_zmailMinPwdLength,
+			label:ZaMsg.LBL_zmailMinPwdLength, labelLocation:_LEFT_, cssClass:"admin_xform_number_input",
 			visibilityChecks:[ZaItem.hasWritePermission],enableDisableChecks:[[ZaCosXFormView.isAllAuthfromInternal]]
 		    },
-                    {ref:ZaCos.A_zimbraMaxPwdLength, 
-			type:_TEXTFIELD_, msgName:ZaMsg.MSG_zimbraMaxPwdLength,
-			label:ZaMsg.LBL_zimbraMaxPwdLength, labelLocation:_LEFT_, cssClass:"admin_xform_number_input",
+                    {ref:ZaCos.A_zmailMaxPwdLength, 
+			type:_TEXTFIELD_, msgName:ZaMsg.MSG_zmailMaxPwdLength,
+			label:ZaMsg.LBL_zmailMaxPwdLength, labelLocation:_LEFT_, cssClass:"admin_xform_number_input",
 			visibilityChecks:[ZaItem.hasWritePermission],enableDisableChecks:[[ZaCosXFormView.isAllAuthfromInternal]]
 		    },
 
-                    {ref:ZaCos.A_zimbraPasswordMinUpperCaseChars, 
-			type:_TEXTFIELD_, msgName:ZaMsg.MSG_zimbraPasswordMinUpperCaseChars,
-			label:ZaMsg.LBL_zimbraPasswordMinUpperCaseChars, labelLocation:_LEFT_, cssClass:"admin_xform_number_input",
+                    {ref:ZaCos.A_zmailPasswordMinUpperCaseChars, 
+			type:_TEXTFIELD_, msgName:ZaMsg.MSG_zmailPasswordMinUpperCaseChars,
+			label:ZaMsg.LBL_zmailPasswordMinUpperCaseChars, labelLocation:_LEFT_, cssClass:"admin_xform_number_input",
 			visibilityChecks:[ZaItem.hasWritePermission],enableDisableChecks:[[ZaCosXFormView.isAllAuthfromInternal]]
 		    },
-                    {ref:ZaCos.A_zimbraPasswordMinLowerCaseChars, 
-			type:_TEXTFIELD_, msgName:ZaMsg.MSG_zimbraPasswordMinLowerCaseChars,
-			label:ZaMsg.LBL_zimbraPasswordMinLowerCaseChars, labelLocation:_LEFT_, cssClass:"admin_xform_number_input",
+                    {ref:ZaCos.A_zmailPasswordMinLowerCaseChars, 
+			type:_TEXTFIELD_, msgName:ZaMsg.MSG_zmailPasswordMinLowerCaseChars,
+			label:ZaMsg.LBL_zmailPasswordMinLowerCaseChars, labelLocation:_LEFT_, cssClass:"admin_xform_number_input",
 			visibilityChecks:[ZaItem.hasWritePermission],enableDisableChecks:[[ZaCosXFormView.isAllAuthfromInternal]]
 		    },
-                    {ref:ZaCos.A_zimbraPasswordMinPunctuationChars, 
-			type:_TEXTFIELD_, msgName:ZaMsg.MSG_zimbraPasswordMinPunctuationChars,
-			label:ZaMsg.LBL_zimbraPasswordMinPunctuationChars, labelLocation:_LEFT_, cssClass:"admin_xform_number_input",
+                    {ref:ZaCos.A_zmailPasswordMinPunctuationChars, 
+			type:_TEXTFIELD_, msgName:ZaMsg.MSG_zmailPasswordMinPunctuationChars,
+			label:ZaMsg.LBL_zmailPasswordMinPunctuationChars, labelLocation:_LEFT_, cssClass:"admin_xform_number_input",
 			visibilityChecks:[ZaItem.hasWritePermission],enableDisableChecks:[[ZaCosXFormView.isAllAuthfromInternal]]
 	 	    },
-                    {ref:ZaCos.A_zimbraPasswordMinNumericChars, 
-			type:_TEXTFIELD_, msgName:ZaMsg.MSG_zimbraPasswordMinNumericChars,
-			label:ZaMsg.LBL_zimbraPasswordMinNumericChars, labelLocation:_LEFT_, cssClass:"admin_xform_number_input",
+                    {ref:ZaCos.A_zmailPasswordMinNumericChars, 
+			type:_TEXTFIELD_, msgName:ZaMsg.MSG_zmailPasswordMinNumericChars,
+			label:ZaMsg.LBL_zmailPasswordMinNumericChars, labelLocation:_LEFT_, cssClass:"admin_xform_number_input",
 			visibilityChecks:[ZaItem.hasWritePermission],enableDisableChecks:[[ZaCosXFormView.isAllAuthfromInternal]]
 		    },
-                    {ref:ZaCos.A_zimbraPasswordMinDigitsOrPuncs, 
-			type:_TEXTFIELD_, msgName:ZaMsg.MSG_zimbraPasswordMinDigitsOrPuncs,
-			label:ZaMsg.LBL_zimbraPasswordMinDigitsOrPuncs, labelLocation:_LEFT_, cssClass:"admin_xform_number_input",
+                    {ref:ZaCos.A_zmailPasswordMinDigitsOrPuncs, 
+			type:_TEXTFIELD_, msgName:ZaMsg.MSG_zmailPasswordMinDigitsOrPuncs,
+			label:ZaMsg.LBL_zmailPasswordMinDigitsOrPuncs, labelLocation:_LEFT_, cssClass:"admin_xform_number_input",
 			visibilityChecks:[ZaItem.hasWritePermission],enableDisableChecks:[[ZaCosXFormView.isAllAuthfromInternal]]
 		    },
 
-                    {ref:ZaCos.A_zimbraMinPwdAge, 
+                    {ref:ZaCos.A_zmailMinPwdAge, 
 			type:_TEXTFIELD_, msgName:ZaMsg.MSG_passMinAge,
 			label:ZaMsg.LBL_passMinAge, labelLocation:_LEFT_, cssClass:"admin_xform_number_input",
 			visibilityChecks:[],enableDisableChecks:[[ZaCosXFormView.isAllAuthfromInternal]]
 		    },
-                    {ref:ZaCos.A_zimbraMaxPwdAge, 
+                    {ref:ZaCos.A_zmailMaxPwdAge, 
 			type:_TEXTFIELD_, msgName:ZaMsg.MSG_passMaxAge,
 			label:ZaMsg.LBL_passMaxAge, labelLocation:_LEFT_, cssClass:"admin_xform_number_input",
 			visibilityChecks:[],enableDisableChecks:[[ZaCosXFormView.isAllAuthfromInternal]]
 		    },
-                    {ref:ZaCos.A_zimbraEnforcePwdHistory, 
-			type:_TEXTFIELD_, msgName:ZaMsg.MSG_zimbraEnforcePwdHistory,
-			label:ZaMsg.LBL_zimbraEnforcePwdHistory, labelLocation:_LEFT_, cssClass:"admin_xform_number_input",
+                    {ref:ZaCos.A_zmailEnforcePwdHistory, 
+			type:_TEXTFIELD_, msgName:ZaMsg.MSG_zmailEnforcePwdHistory,
+			label:ZaMsg.LBL_zmailEnforcePwdHistory, labelLocation:_LEFT_, cssClass:"admin_xform_number_input",
 			visibilityChecks:[],enableDisableChecks:[[ZaCosXFormView.isAllAuthfromInternal]]
 		    }
                 ]
@@ -1628,35 +1628,35 @@ ZaCosXFormView.myXFormModifier = function(xFormObject, entry) {
                 label:ZaMsg.NAD_FailedLoginGrouper,
                 items :[
 
-                    {ref:ZaCos.A_zimbraPasswordLockoutEnabled, type:_CHECKBOX_,
-                        msgName:ZaMsg.LBL_zimbraPasswordLockoutEnabled,
-                        label:ZaMsg.LBL_zimbraPasswordLockoutEnabled,
+                    {ref:ZaCos.A_zmailPasswordLockoutEnabled, type:_CHECKBOX_,
+                        msgName:ZaMsg.LBL_zmailPasswordLockoutEnabled,
+                        label:ZaMsg.LBL_zmailPasswordLockoutEnabled,
                         trueValue:"TRUE", falseValue:"FALSE"
                     },
-                    {ref:ZaCos.A_zimbraPasswordLockoutMaxFailures, type:_TEXTFIELD_,
+                    {ref:ZaCos.A_zmailPasswordLockoutMaxFailures, type:_TEXTFIELD_,
                         enableDisableChecks: [ZaCosXFormView.isPasswordLockoutEnabled],
-                        enableDisableChangeEventSources:[ZaCos.A_zimbraPasswordLockoutEnabled],
-                        label:ZaMsg.LBL_zimbraPasswordLockoutMaxFailures,
-                        subLabel:ZaMsg.TTP_zimbraPasswordLockoutMaxFailuresSub,
-                        msgName:ZaMsg.MSG_zimbraPasswordLockoutMaxFailures,
+                        enableDisableChangeEventSources:[ZaCos.A_zmailPasswordLockoutEnabled],
+                        label:ZaMsg.LBL_zmailPasswordLockoutMaxFailures,
+                        subLabel:ZaMsg.TTP_zmailPasswordLockoutMaxFailuresSub,
+                        msgName:ZaMsg.MSG_zmailPasswordLockoutMaxFailures,
                         labelLocation:_LEFT_,
                         cssClass:"admin_xform_number_input"
                     },
-                    {ref:ZaCos.A_zimbraPasswordLockoutDuration, type:_LIFETIME_,
+                    {ref:ZaCos.A_zmailPasswordLockoutDuration, type:_LIFETIME_,
                         enableDisableChecks: [ZaCosXFormView.isPasswordLockoutEnabled],
-                        enableDisableChangeEventSources:[ZaCos.A_zimbraPasswordLockoutEnabled],
-                        label:ZaMsg.LBL_zimbraPasswordLockoutDuration,
-                        subLabel:ZaMsg.TTP_zimbraPasswordLockoutDurationSub,
-                        msgName:ZaMsg.MSG_zimbraPasswordLockoutDuration,
+                        enableDisableChangeEventSources:[ZaCos.A_zmailPasswordLockoutEnabled],
+                        label:ZaMsg.LBL_zmailPasswordLockoutDuration,
+                        subLabel:ZaMsg.TTP_zmailPasswordLockoutDurationSub,
+                        msgName:ZaMsg.MSG_zmailPasswordLockoutDuration,
                         labelLocation:_LEFT_,
                         textFieldCssClass:"admin_xform_number_input"
                     },
-                    {ref:ZaCos.A_zimbraPasswordLockoutFailureLifetime, type:_LIFETIME_,
+                    {ref:ZaCos.A_zmailPasswordLockoutFailureLifetime, type:_LIFETIME_,
                         enableDisableChecks: [ZaCosXFormView.isPasswordLockoutEnabled],
-                        enableDisableChangeEventSources:[ZaCos.A_zimbraPasswordLockoutEnabled],
-                        label:ZaMsg.LBL_zimbraPasswordLockoutFailureLifetime,
-                        subLabel:ZaMsg.TTP_zimbraPasswordLockoutFailureLifetimeSub,
-                        msgName:ZaMsg.MSG_zimbraPasswordLockoutFailureLifetime,
+                        enableDisableChangeEventSources:[ZaCos.A_zmailPasswordLockoutEnabled],
+                        label:ZaMsg.LBL_zmailPasswordLockoutFailureLifetime,
+                        subLabel:ZaMsg.TTP_zmailPasswordLockoutFailureLifetimeSub,
+                        msgName:ZaMsg.MSG_zmailPasswordLockoutFailureLifetime,
                         labelLocation:_LEFT_,
                         textFieldCssClass:"admin_xform_number_input",
                         labelCssStyle:"white-space:normal;",
@@ -1667,11 +1667,11 @@ ZaCosXFormView.myXFormModifier = function(xFormObject, entry) {
             {type:_ZA_TOP_GROUPER_, id:"cos_timeout_settings",
                 label:ZaMsg.NAD_TimeoutGrouper,
                 items: [
-                    {ref:ZaCos.A_zimbraAdminAuthTokenLifetime, type:_LIFETIME_, msgName:ZaMsg.MSG_zimbraAdminAuthTokenLifetime,label:ZaMsg.LBL_zimbraAdminAuthTokenLifetime,labelLocation:_LEFT_},
-                    {ref:ZaCos.A_zimbraAuthTokenLifetime, type:_LIFETIME_, msgName:ZaMsg.MSG_zimbraAuthTokenLifetime,label:ZaMsg.LBL_zimbraAuthTokenLifetime,labelLocation:_LEFT_},
-                    {ref:ZaCos.A_zimbraMailIdleSessionTimeout, type:_LIFETIME_, msgName:ZaMsg.MSG_zimbraMailIdleSessionTimeout,label:ZaMsg.LBL_zimbraMailIdleSessionTimeout,labelLocation:_LEFT_},
-                    {ref:ZaCos.A_zimbraDumpsterUserVisibleAge, type:_LIFETIME_, msgName:ZaMsg.MSG_zimbraDumpsterUserVisibleAge, label:ZaMsg.LBL_zimbraDumpsterUserVisibleAge,
-                        visibilityChecks:[[ZaItem.hasReadPermission], [XForm.checkInstanceValue, ZaCos.A_zimbraDumpsterEnabled, "TRUE"]], visibilityChangeEventSources:[ZaCos.A_zimbraDumpsterEnabled]
+                    {ref:ZaCos.A_zmailAdminAuthTokenLifetime, type:_LIFETIME_, msgName:ZaMsg.MSG_zmailAdminAuthTokenLifetime,label:ZaMsg.LBL_zmailAdminAuthTokenLifetime,labelLocation:_LEFT_},
+                    {ref:ZaCos.A_zmailAuthTokenLifetime, type:_LIFETIME_, msgName:ZaMsg.MSG_zmailAuthTokenLifetime,label:ZaMsg.LBL_zmailAuthTokenLifetime,labelLocation:_LEFT_},
+                    {ref:ZaCos.A_zmailMailIdleSessionTimeout, type:_LIFETIME_, msgName:ZaMsg.MSG_zmailMailIdleSessionTimeout,label:ZaMsg.LBL_zmailMailIdleSessionTimeout,labelLocation:_LEFT_},
+                    {ref:ZaCos.A_zmailDumpsterUserVisibleAge, type:_LIFETIME_, msgName:ZaMsg.MSG_zmailDumpsterUserVisibleAge, label:ZaMsg.LBL_zmailDumpsterUserVisibleAge,
+                        visibilityChecks:[[ZaItem.hasReadPermission], [XForm.checkInstanceValue, ZaCos.A_zmailDumpsterEnabled, "TRUE"]], visibilityChangeEventSources:[ZaCos.A_zmailDumpsterEnabled]
                     }
                 ]
             },
@@ -1684,22 +1684,22 @@ ZaCosXFormView.myXFormModifier = function(xFormObject, entry) {
                       iconVisible: false,
                       content: ZaMsg.Alert_MailRetention
                     },
-                    {ref:ZaCos.A_zimbraMailMessageLifetime, type:_LIFETIME2_, msgName:ZaMsg.MSG_zimbraMailMessageLifetime,label:ZaMsg.LBL_zimbraMailMessageLifetime,labelLocation:_LEFT_},
-                    {ref:ZaCos.A_zimbraMailTrashLifetime, type:_LIFETIME1_, msgName:ZaMsg.MSG_zimbraMailTrashLifetime,label:ZaMsg.LBL_zimbraMailTrashLifetime, labelLocation:_LEFT_},
-                    {ref:ZaCos.A_zimbraMailSpamLifetime, type:_LIFETIME1_, msgName:ZaMsg.MSG_zimbraMailSpamLifetime,label:ZaMsg.LBL_zimbraMailSpamLifetime, labelLocation:_LEFT_},
-                    {ref:ZaCos.A_zimbraMailDumpsterLifetime, type:_LIFETIME1_, msgName:ZaMsg.MSG_zimbraMailDumpsterLifetime, label:ZaMsg.LBL_zimbraMailDumpsterLifetime,
-                        visibilityChecks:[[ZaItem.hasReadPermission], [XForm.checkInstanceValue, ZaCos.A_zimbraDumpsterEnabled, "TRUE"], [XForm.checkInstanceValue, ZaCos.A_zimbraDumpsterPurgeEnabled, "TRUE"]],
-                        visibilityChangeEventSources:[ZaCos.A_zimbraDumpsterEnabled, ZaCos.A_zimbraDumpsterPurgeEnabled]
+                    {ref:ZaCos.A_zmailMailMessageLifetime, type:_LIFETIME2_, msgName:ZaMsg.MSG_zmailMailMessageLifetime,label:ZaMsg.LBL_zmailMailMessageLifetime,labelLocation:_LEFT_},
+                    {ref:ZaCos.A_zmailMailTrashLifetime, type:_LIFETIME1_, msgName:ZaMsg.MSG_zmailMailTrashLifetime,label:ZaMsg.LBL_zmailMailTrashLifetime, labelLocation:_LEFT_},
+                    {ref:ZaCos.A_zmailMailSpamLifetime, type:_LIFETIME1_, msgName:ZaMsg.MSG_zmailMailSpamLifetime,label:ZaMsg.LBL_zmailMailSpamLifetime, labelLocation:_LEFT_},
+                    {ref:ZaCos.A_zmailMailDumpsterLifetime, type:_LIFETIME1_, msgName:ZaMsg.MSG_zmailMailDumpsterLifetime, label:ZaMsg.LBL_zmailMailDumpsterLifetime,
+                        visibilityChecks:[[ZaItem.hasReadPermission], [XForm.checkInstanceValue, ZaCos.A_zmailDumpsterEnabled, "TRUE"], [XForm.checkInstanceValue, ZaCos.A_zmailDumpsterPurgeEnabled, "TRUE"]],
+                        visibilityChangeEventSources:[ZaCos.A_zmailDumpsterEnabled, ZaCos.A_zmailDumpsterPurgeEnabled]
                     }
                 ]
             },
             {type:_ZA_TOP_GROUPER_,
                 label:ZaMsg.NAD_InteropGrouper,visibilityChecks:[[ZATopGrouper_XFormItem.isGroupVisible,
-                                                      			[ZaCos.A_zimbraFreebusyExchangeUserOrg]]],
+                                                      			[ZaCos.A_zmailFreebusyExchangeUserOrg]]],
                 items: [
-                    {ref:ZaCos.A_zimbraFreebusyExchangeUserOrg, type:_TEXTFIELD_,
-                        msgName:ZaMsg.LBL_zimbraFreebusyExchangeUserOrg, width: "250px",
-                        label:ZaMsg.LBL_zimbraFreebusyExchangeUserOrg,labelLocation:_LEFT_
+                    {ref:ZaCos.A_zmailFreebusyExchangeUserOrg, type:_TEXTFIELD_,
+                        msgName:ZaMsg.LBL_zmailFreebusyExchangeUserOrg, width: "250px",
+                        label:ZaMsg.LBL_zmailFreebusyExchangeUserOrg,labelLocation:_LEFT_
                     }
                 ]
             } ,
@@ -1849,7 +1849,7 @@ function() {
 	if(!domainList) return isAll;
 	for(var i = 0; i < domainList.length && isAll; i ++) {
 		var dom = domainList[i];
-		if(dom.attrs[ZaDomain.A_AuthMech] == ZaDomain.AuthMech_zimbra)
+		if(dom.attrs[ZaDomain.A_AuthMech] == ZaDomain.AuthMech_zmail)
 			isAll = false; 
 	}
         return !isAll;
@@ -1860,9 +1860,9 @@ function (value, event, form) {
 	DBG.println(AjxDebug.DBG3, "The polling interval = " + value);
 	var instance = form.getInstance ();
 	this.setInstanceValue(value);
-	var prefPollingInterval = instance.attrs[ZaCos.A_zimbraPrefMailPollingInterval] ;
-	var minPollingInterval = instance.attrs[ZaCos.A_zimbraMailMinPollingInterval] ;
-	var prefPollingIntervalItem = form.getItemsById (ZaCos.A_zimbraPrefMailPollingInterval)[0];
+	var prefPollingInterval = instance.attrs[ZaCos.A_zmailPrefMailPollingInterval] ;
+	var minPollingInterval = instance.attrs[ZaCos.A_zmailMailMinPollingInterval] ;
+	var prefPollingIntervalItem = form.getItemsById (ZaCos.A_zmailPrefMailPollingInterval)[0];
 	try {
 		if (ZaUtil.getLifeTimeInSeconds(prefPollingInterval) < ZaUtil.getLifeTimeInSeconds(minPollingInterval)){
 			prefPollingIntervalItem.setError (ZaMsg.tt_mailPollingIntervalError + minPollingInterval) ;

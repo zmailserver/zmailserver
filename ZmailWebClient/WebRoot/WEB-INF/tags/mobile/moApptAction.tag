@@ -14,8 +14,8 @@
 --%>
 <%@ tag body-content="empty" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="mo" uri="com.zimbra.mobileclient" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
+<%@ taglib prefix="mo" uri="org.zmail.mobileclient" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
 
 <zm:requirePost/>
 <mo:handleError>

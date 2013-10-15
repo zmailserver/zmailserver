@@ -169,7 +169,7 @@ function(treeItem, skipNotify, kbNavEvent, noFocus) {
 };
 
 /*
- * Remove isAddHistory Now(By ming@zimbra.com).
+ * Remove isAddHistory Now(By ming@zmail.com).
  * Currenty, we won't add history in this function.
  * For it won't easy for us to decide when we should add history.
  * We only add history automatically when user click the tree item
@@ -582,7 +582,7 @@ function (treeItem, isAddHistory, isShowInHistory) {
     var dataItem = treeItem.getData("dataItem");
     var path = this.getABPath(dataItem);
     var historyObject = new ZaHistory(path, text, undefined, isShowInHistory);
-    ZaZimbraAdmin.getInstance().updateHistory(historyObject, isAddHistory);
+    ZaZmailAdmin.getInstance().updateHistory(historyObject, isAddHistory);
 }
 
 ZaTree.prototype._updateHistoryObj =
@@ -612,7 +612,7 @@ function (dataItem) {
 
 
     var historyObject = new ZaHistory(path, text, type);
-    var historyMgr = ZaZimbraAdmin.getInstance().getHisotryMgr();
+    var historyMgr = ZaZmailAdmin.getInstance().getHisotryMgr();
     historyMgr.addHistoryObj(historyObject);
     var objList = historyMgr.getAllHistoryObj().getArray();
     var ti = null;

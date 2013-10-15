@@ -12,36 +12,36 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.ab.yab;
+package org.zmail.cs.offline.ab.yab;
 
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.offline.util.yab.Session;
-import com.zimbra.cs.offline.util.yab.Contact;
-import com.zimbra.cs.offline.util.yab.SyncResponse;
-import com.zimbra.cs.offline.util.yab.SyncResponseEvent;
-import com.zimbra.cs.offline.util.yab.SyncRequest;
-import com.zimbra.cs.offline.util.yab.SyncRequestEvent;
-import com.zimbra.cs.offline.util.yab.Result;
-import com.zimbra.cs.offline.util.yab.ErrorResult;
-import com.zimbra.cs.offline.util.yab.SuccessResult;
-import com.zimbra.cs.offline.util.yab.Category;
-import com.zimbra.cs.offline.util.yab.Entity;
-import com.zimbra.cs.offline.util.yab.ContactChange;
-import com.zimbra.cs.offline.util.yab.Field;
-import com.zimbra.cs.offline.util.yab.SimpleField;
-import com.zimbra.cs.offline.util.yab.YabException;
-import com.zimbra.cs.offline.OfflineLog;
-import com.zimbra.cs.offline.ab.LocalData;
-import com.zimbra.cs.offline.ab.SyncState;
-import com.zimbra.cs.offline.ab.Change;
-import com.zimbra.cs.offline.ab.SyncException;
-import com.zimbra.cs.offline.ab.ContactGroup;
-import com.zimbra.cs.db.DbDataSource.DataSourceItem;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.offline.OfflineDataSource;
-import com.zimbra.cs.mime.ParsedContact;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Log;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.offline.util.yab.Session;
+import org.zmail.cs.offline.util.yab.Contact;
+import org.zmail.cs.offline.util.yab.SyncResponse;
+import org.zmail.cs.offline.util.yab.SyncResponseEvent;
+import org.zmail.cs.offline.util.yab.SyncRequest;
+import org.zmail.cs.offline.util.yab.SyncRequestEvent;
+import org.zmail.cs.offline.util.yab.Result;
+import org.zmail.cs.offline.util.yab.ErrorResult;
+import org.zmail.cs.offline.util.yab.SuccessResult;
+import org.zmail.cs.offline.util.yab.Category;
+import org.zmail.cs.offline.util.yab.Entity;
+import org.zmail.cs.offline.util.yab.ContactChange;
+import org.zmail.cs.offline.util.yab.Field;
+import org.zmail.cs.offline.util.yab.SimpleField;
+import org.zmail.cs.offline.util.yab.YabException;
+import org.zmail.cs.offline.OfflineLog;
+import org.zmail.cs.offline.ab.LocalData;
+import org.zmail.cs.offline.ab.SyncState;
+import org.zmail.cs.offline.ab.Change;
+import org.zmail.cs.offline.ab.SyncException;
+import org.zmail.cs.offline.ab.ContactGroup;
+import org.zmail.cs.db.DbDataSource.DataSourceItem;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.offline.OfflineDataSource;
+import org.zmail.cs.mime.ParsedContact;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Log;
 
 import java.util.Map;
 import java.util.List;
@@ -196,7 +196,7 @@ public class SyncSession {
     private SyncRequestEvent getContactEvent(Change change) throws ServiceException {
         int itemId = change.getItemId();
         if (change.isAdd() || change.isUpdate()) {
-            com.zimbra.cs.mailbox.Contact zcontact = localData.getContact(itemId);
+            org.zmail.cs.mailbox.Contact zcontact = localData.getContact(itemId);
             if (ContactGroup.isContactGroup(zcontact)) {
                 // Delete mapping so contact group will no longer be sync'd
                 localData.deleteMapping(itemId);

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-function Com_Zimbra_TravelAgent() {
+function Com_Zmail_TravelAgent() {
 	/*if(!ZmOperation.MSG_KEY[201]) {
 		ZmOperation.MSG_KEY[201] = "travelAgent";
 		var op = new Object();
@@ -23,26 +23,26 @@ function Com_Zimbra_TravelAgent() {
 		op.disImage = "TravelAgent-panelIcon";
 		op.toolTip = "Book Flight, Car or Hotel on the selected day";
 		ZmZimlet.actionMenus["ZmCalViewController"].push(op);
-		ZmZimlet.listeners["ZmCalViewController"][201] = Com_Zimbra_TravelAgent.launchMe;
+		ZmZimlet.listeners["ZmCalViewController"][201] = Com_Zmail_TravelAgent.launchMe;
 	}*/
-	Com_Zimbra_TravelAgent._instance = this;
+	Com_Zmail_TravelAgent._instance = this;
 }
 
-Com_Zimbra_TravelAgent.getInstance = function () {
-	return Com_Zimbra_TravelAgent._instance;
+Com_Zmail_TravelAgent.getInstance = function () {
+	return Com_Zmail_TravelAgent._instance;
 }
-Com_Zimbra_TravelAgent.prototype = new ZmZimletBase;
-Com_Zimbra_TravelAgent.prototype.constructor = Com_Zimbra_TravelAgent;
+Com_Zmail_TravelAgent.prototype = new ZmZimletBase;
+Com_Zmail_TravelAgent.prototype.constructor = Com_Zmail_TravelAgent;
 //Map of airline codes 
 
-Com_Zimbra_TravelAgent.ZIPCODE_CACHE = [];
+Com_Zmail_TravelAgent.ZIPCODE_CACHE = [];
 
-Com_Zimbra_TravelAgent.prototype.singleClicked =
+Com_Zmail_TravelAgent.prototype.singleClicked =
 function () {
 	this.showSideStepDlg();
 }
 
-Com_Zimbra_TravelAgent.prototype.menuItemSelected = function(itemId) {
+Com_Zmail_TravelAgent.prototype.menuItemSelected = function(itemId) {
 	switch (itemId) {
 	    case "PREFERENCES":
 			this.createPropertyEditor();
@@ -62,7 +62,7 @@ Com_Zimbra_TravelAgent.prototype.menuItemSelected = function(itemId) {
    }
 };
 
-Com_Zimbra_TravelAgent.prototype.showSideStepDlg = 
+Com_Zmail_TravelAgent.prototype.showSideStepDlg = 
 function (homeOptions, workOptions, workZip, homeZip,addr) {
 	var view = new DwtComposite(appCtxt.getShell());	
 	this.tabView = new DwtTabView(view,"SideStepTabView");
@@ -87,10 +87,10 @@ function (homeOptions, workOptions, workZip, homeZip,addr) {
 	this.tabView.getTabButton(this.tabkeys[2]).setImage("SideStep-hotel");	
 }
 
-Com_Zimbra_TravelAgent.prototype.findAirports = 
+Com_Zmail_TravelAgent.prototype.findAirports = 
 function (zipcode) {
-	if(Com_Zimbra_TravelAgent.ZIPCODE_CACHE[zipcode]) {
-		return Com_Zimbra_TravelAgent.ZIPCODE_CACHE[zipcode];
+	if(Com_Zmail_TravelAgent.ZIPCODE_CACHE[zipcode]) {
+		return Com_Zmail_TravelAgent.ZIPCODE_CACHE[zipcode];
 	}
 	//zipcode = AjxStringUtil.urlEncode(zipcode).replace(/\+/g, "%20");
 	
@@ -118,12 +118,12 @@ function (zipcode) {
 			//
 	}
 	// Cache Zip Lookup
-	Com_Zimbra_TravelAgent.ZIPCODE_CACHE[zipcode] = options;
+	Com_Zmail_TravelAgent.ZIPCODE_CACHE[zipcode] = options;
 	return options;	
 }
 
 
-Com_Zimbra_TravelAgent.launchMe =
+Com_Zmail_TravelAgent.launchMe =
 function () {
 	var d = this._minicalMenu ? this._minicalMenu.__detail : null;
 	if (d != null) 
@@ -133,18 +133,18 @@ function () {
 
 	if (d == null) d = new Date();
 	
-	Com_Zimbra_TravelAgent.getInstance().showSideStepDlg();
-	Com_Zimbra_TravelAgent.getInstance().flightPage.setDepartDate(d);
-	Com_Zimbra_TravelAgent.getInstance().carPage.setPickupDate(d);
-	Com_Zimbra_TravelAgent.getInstance().hotelPage.setCheckinDate(d);
+	Com_Zmail_TravelAgent.getInstance().showSideStepDlg();
+	Com_Zmail_TravelAgent.getInstance().flightPage.setDepartDate(d);
+	Com_Zmail_TravelAgent.getInstance().carPage.setPickupDate(d);
+	Com_Zmail_TravelAgent.getInstance().hotelPage.setCheckinDate(d);
 }
 
-Com_Zimbra_TravelAgent.prototype.myplannerCallback = 
+Com_Zmail_TravelAgent.prototype.myplannerCallback = 
 function () {
 	//nothing yet
 }
 
-Com_Zimbra_TravelAgent.prototype.doDrop = 
+Com_Zmail_TravelAgent.prototype.doDrop = 
 function(obj) {
 	if (obj.TYPE == "ZmContact") {
 		var workOptions = null;

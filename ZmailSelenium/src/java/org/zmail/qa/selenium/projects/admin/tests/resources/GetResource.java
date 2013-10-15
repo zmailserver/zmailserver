@@ -14,19 +14,19 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.admin.tests.resources;
+package org.zmail.qa.selenium.projects.admin.tests.resources;
 
 import java.util.List;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAdminAccount;
-import com.zimbra.qa.selenium.projects.admin.core.AdminCommonTest;
-import com.zimbra.qa.selenium.projects.admin.items.AccountItem;
-import com.zimbra.qa.selenium.projects.admin.items.ResourceItem;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAdminAccount;
+import org.zmail.qa.selenium.projects.admin.core.AdminCommonTest;
+import org.zmail.qa.selenium.projects.admin.items.AccountItem;
+import org.zmail.qa.selenium.projects.admin.items.ResourceItem;
 
 public class GetResource extends AdminCommonTest {
 	
@@ -55,11 +55,11 @@ public class GetResource extends AdminCommonTest {
 		// Create a new resource in the Admin Console using SOAP
 		ResourceItem resource = new ResourceItem();
 		
-		ZimbraAdminAccount.AdminConsoleAdmin().soapSend(
-						"<CreateCalendarResourceRequest xmlns='urn:zimbraAdmin'>"
+		ZmailAdminAccount.AdminConsoleAdmin().soapSend(
+						"<CreateCalendarResourceRequest xmlns='urn:zmailAdmin'>"
 				 		+ "<name>" + resource.getEmailAddress() + "</name>"
 				 		+ "<a n=\"displayName\">" + resource.getName() + "</a>"
-				 		+ "<a n=\"zimbraCalResType\">" + "Location" + "</a>"
+				 		+ "<a n=\"zmailCalResType\">" + "Location" + "</a>"
 				 		+ "<password>test123</password>"
 				 		+ "</CreateCalendarResourceRequest>");
 		
@@ -99,11 +99,11 @@ public class GetResource extends AdminCommonTest {
 		// Create a new resource in the Admin Console using SOAP
 		ResourceItem resource = new ResourceItem();
 		
-		ZimbraAdminAccount.AdminConsoleAdmin().soapSend(
-						"<CreateCalendarResourceRequest xmlns='urn:zimbraAdmin'>"
+		ZmailAdminAccount.AdminConsoleAdmin().soapSend(
+						"<CreateCalendarResourceRequest xmlns='urn:zmailAdmin'>"
 				 		+ "<name>" + resource.getEmailAddress() + "</name>"
 				 		+ "<a n=\"displayName\">" + resource.getName() + "</a>"
-				 		+ "<a n=\"zimbraCalResType\">" + "Equipment" + "</a>"
+				 		+ "<a n=\"zmailCalResType\">" + "Equipment" + "</a>"
 				 		+ "<password>test123</password>"
 				 		+ "</CreateCalendarResourceRequest>");
 		

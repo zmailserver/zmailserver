@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.octopus.tests.myfiles.folders;
+package org.zmail.qa.selenium.projects.octopus.tests.myfiles.folders;
 
 import org.testng.annotations.*;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.octopus.core.OctopusCommonTest;
-import com.zimbra.qa.selenium.projects.octopus.ui.DialogMove;
-import com.zimbra.qa.selenium.projects.octopus.ui.PageMyFiles;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.octopus.core.OctopusCommonTest;
+import org.zmail.qa.selenium.projects.octopus.ui.DialogMove;
+import org.zmail.qa.selenium.projects.octopus.ui.PageMyFiles;
 
 public class MoveFolder extends OctopusCommonTest {
 
@@ -48,7 +48,7 @@ public class MoveFolder extends OctopusCommonTest {
 
 	@Test(description = "Move folder using soap - verify folder is moved", groups = { "functional" })
 	public void MoveFolder_01() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseRootFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
@@ -56,11 +56,11 @@ public class MoveFolder extends OctopusCommonTest {
 		// Create two briefcase sub-folders:
 		// One folder to Move & Another folder to move into
 		String subFolderName1 = "folder1"
-				+ ZimbraSeleniumProperties.getUniqueString();
+				+ ZmailSeleniumProperties.getUniqueString();
 		String subFolderName2 = "folder2"
-				+ ZimbraSeleniumProperties.getUniqueString();
+				+ ZmailSeleniumProperties.getUniqueString();
 
-		account.soapSend("<CreateFolderRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+ "<folder name='" + subFolderName1 + "' l='"
 				+ briefcaseRootFolder.getId() + "' view='document'/>"
 				+ "</CreateFolderRequest>");
@@ -71,7 +71,7 @@ public class MoveFolder extends OctopusCommonTest {
 		ZAssert.assertNotNull(subFolderItem1,
 				"Verify the first subfolder is available");
 
-		account.soapSend("<CreateFolderRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+ "<folder name='" + subFolderName2 + "' l='"
 				+ briefcaseRootFolder.getId() + "' view='document'/>"
 				+ "</CreateFolderRequest>");
@@ -100,7 +100,7 @@ public class MoveFolder extends OctopusCommonTest {
 
 	@Test(description = "Move folder using context menu - verify folder is moved", groups = { "sanity" })
 	public void MoveFolder_02() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseRootFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
@@ -108,11 +108,11 @@ public class MoveFolder extends OctopusCommonTest {
 		// Create two briefcase sub-folders:
 		// One folder to Move & Another folder to move into
 		String subFolderName1 = "folder1"
-				+ ZimbraSeleniumProperties.getUniqueString();
+				+ ZmailSeleniumProperties.getUniqueString();
 		String subFolderName2 = "folder2"
-				+ ZimbraSeleniumProperties.getUniqueString();
+				+ ZmailSeleniumProperties.getUniqueString();
 
-		account.soapSend("<CreateFolderRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+ "<folder name='" + subFolderName1 + "' l='"
 				+ briefcaseRootFolder.getId() + "' view='document'/>"
 				+ "</CreateFolderRequest>");
@@ -123,7 +123,7 @@ public class MoveFolder extends OctopusCommonTest {
 		ZAssert.assertNotNull(subFolderItem1,
 				"Verify the first subfolder is available");
 
-		account.soapSend("<CreateFolderRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+ "<folder name='" + subFolderName2 + "' l='"
 				+ briefcaseRootFolder.getId() + "' view='document'/>"
 				+ "</CreateFolderRequest>");
@@ -175,11 +175,11 @@ public class MoveFolder extends OctopusCommonTest {
 			}
 			try {
 				// Refresh view 
-				//ZimbraAccount account = app.zGetActiveAccount();
+				//ZmailAccount account = app.zGetActiveAccount();
 				//FolderItem item = FolderItem.importFromSOAP(account,SystemFolder.Briefcase);
-				//account.soapSend("<GetFolderRequest xmlns='urn:zimbraMail'><folder l='1' recursive='0'/>" + "</GetFolderRequest>");
-				//account.soapSend("<GetFolderRequest xmlns='urn:zimbraMail' requestId='folders' depth='1' tr='true' view='document'><folder l='" + item.getId() + "'/></GetFolderRequest>");
-				//account.soapSend("<GetActivityStreamRequest xmlns='urn:zimbraMail' id='16'/>");
+				//account.soapSend("<GetFolderRequest xmlns='urn:zmailMail'><folder l='1' recursive='0'/>" + "</GetFolderRequest>");
+				//account.soapSend("<GetFolderRequest xmlns='urn:zmailMail' requestId='folders' depth='1' tr='true' view='document'><folder l='" + item.getId() + "'/></GetFolderRequest>");
+				//account.soapSend("<GetActivityStreamRequest xmlns='urn:zmailMail' id='16'/>");
 				//app.zGetActiveAccount().accountIsDirty = true;
 				//app.zPageOctopus.sRefresh();
 													

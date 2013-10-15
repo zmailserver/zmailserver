@@ -87,7 +87,7 @@ inline void SFAddEidMVBin(UINT mvIdx, UINT propIdx, LPSPropValue lpProps, UINT f
     }
 }
 
-HRESULT Zimbra::MAPI::Util::HrMAPIFindDefaultMsgStore(LPMAPISESSION lplhSession, SBinary &bin)
+HRESULT Zmail::MAPI::Util::HrMAPIFindDefaultMsgStore(LPMAPISESSION lplhSession, SBinary &bin)
 {
     HRESULT hr = S_OK;
     ULONG cRows = 0;
@@ -96,8 +96,8 @@ HRESULT Zimbra::MAPI::Util::HrMAPIFindDefaultMsgStore(LPMAPISESSION lplhSession,
     bin.lpb = NULL;
     bin.cb = 0;
 
-    Zimbra::Util::ScopedInterface<IMAPITable> lpTable;
-    Zimbra::Util::ScopedRowSet lpRows(NULL);
+    Zmail::Util::ScopedInterface<IMAPITable> lpTable;
+    Zmail::Util::ScopedRowSet lpRows(NULL);
 
     SizedSPropTagArray(2, rgPropTagArray) = {
         2, { PR_DEFAULT_STORE, PR_ENTRYID }
@@ -156,7 +156,7 @@ HRESULT Zimbra::MAPI::Util::HrMAPIFindDefaultMsgStore(LPMAPISESSION lplhSession,
     return hr;
 }
 
-HRESULT Zimbra::MAPI::Util::MailboxLogon(LPMAPISESSION pSession, LPMDB pMdb, LPWSTR pStoreDn,
+HRESULT Zmail::MAPI::Util::MailboxLogon(LPMAPISESSION pSession, LPMDB pMdb, LPWSTR pStoreDn,
     LPWSTR pMailboxDn, LPMDB *ppMdb)
 {
     SBinary storeEID;
@@ -164,7 +164,7 @@ HRESULT Zimbra::MAPI::Util::MailboxLogon(LPMAPISESSION pSession, LPMDB pMdb, LPW
     storeEID.cb = 0;
     storeEID.lpb = NULL;
 
-    Zimbra::Util::ScopedBuffer<BYTE> pB(storeEID.lpb);
+    Zmail::Util::ScopedBuffer<BYTE> pB(storeEID.lpb);
     LPEXCHANGEMANAGESTORE pXManageStore = NULL;
     HRESULT hr = S_OK;
 
@@ -213,7 +213,7 @@ HRESULT Zimbra::MAPI::Util::MailboxLogon(LPMAPISESSION pSession, LPMDB pMdb, LPW
     return hr;
 }
 
-HRESULT Zimbra::MAPI::Util::GetmsExchHomeServerName(LPCWSTR lpszServer, LPCWSTR lpszUser, LPCWSTR lpszPwd,
+HRESULT Zmail::MAPI::Util::GetmsExchHomeServerName(LPCWSTR lpszServer, LPCWSTR lpszUser, LPCWSTR lpszPwd,
     wstring &wstrHmSvrName)
 {
 	wstrHmSvrName = L"";
@@ -310,7 +310,7 @@ HRESULT Zimbra::MAPI::Util::GetmsExchHomeServerName(LPCWSTR lpszServer, LPCWSTR 
 	return S_OK;
 }
 
-HRESULT Zimbra::MAPI::Util::GetUserDNAndLegacyName(LPCWSTR lpszServer, LPCWSTR lpszUser, LPCWSTR
+HRESULT Zmail::MAPI::Util::GetUserDNAndLegacyName(LPCWSTR lpszServer, LPCWSTR lpszUser, LPCWSTR
     lpszPwd, wstring &wstruserdn, wstring &wstrlegacyname)
 {
     wstruserdn = L"";
@@ -421,14 +421,14 @@ HRESULT Zimbra::MAPI::Util::GetUserDNAndLegacyName(LPCWSTR lpszServer, LPCWSTR l
     return S_OK;
 }
 
-HRESULT Zimbra::MAPI::Util::GetUserDnAndServerDnFromProfile(LPMAPISESSION pSession,
+HRESULT Zmail::MAPI::Util::GetUserDnAndServerDnFromProfile(LPMAPISESSION pSession,
     LPSTR &pExchangeServerDn, LPSTR &pExchangeUserDn, LPSTR &pExchangeServerHostName)
 {
     HRESULT hr = S_OK;
     ULONG nVals = 0;
-    Zimbra::Util::ScopedInterface<IMsgServiceAdmin> pServiceAdmin;
-    Zimbra::Util::ScopedInterface<IProfSect> pProfileSection;
-    Zimbra::Util::ScopedBuffer<SPropValue> pPropValues;
+    Zmail::Util::ScopedInterface<IMsgServiceAdmin> pServiceAdmin;
+    Zmail::Util::ScopedInterface<IProfSect> pProfileSection;
+    Zmail::Util::ScopedBuffer<SPropValue> pPropValues;
 
     SizedSPropTagArray(3, profileProps) = {
         3, { PR_PROFILE_HOME_SERVER_DN, PR_PROFILE_USER, PR_PROFILE_HOME_SERVER_ADDRS }
@@ -495,9 +495,9 @@ HRESULT Zimbra::MAPI::Util::GetUserDnAndServerDnFromProfile(LPMAPISESSION pSessi
     return S_OK;
 }
 
-HRESULT Zimbra::MAPI::Util::HrMAPIFindIPMSubtree(LPMDB lpMdb, SBinary &bin)
+HRESULT Zmail::MAPI::Util::HrMAPIFindIPMSubtree(LPMDB lpMdb, SBinary &bin)
 {
-    Zimbra::Util::ScopedBuffer<SPropValue> lpEID;
+    Zmail::Util::ScopedBuffer<SPropValue> lpEID;
     HRESULT hr = S_OK;
 
     if (FAILED(hr = HrGetOneProp(lpMdb, PR_IPM_SUBTREE_ENTRYID, lpEID.getptr())))
@@ -518,7 +518,7 @@ HRESULT Zimbra::MAPI::Util::HrMAPIFindIPMSubtree(LPMDB lpMdb, SBinary &bin)
     return S_OK;
 }
 
-ULONG Zimbra::MAPI::Util::IMAPHeaderInfoPropTag(LPMAPIPROP lpMapiProp)
+ULONG Zmail::MAPI::Util::IMAPHeaderInfoPropTag(LPMAPIPROP lpMapiProp)
 {
     HRESULT hRes = S_OK;
     LPSPropTagArray lpNamedPropTag = NULL;
@@ -543,7 +543,7 @@ ULONG Zimbra::MAPI::Util::IMAPHeaderInfoPropTag(LPMAPIPROP lpMapiProp)
     return ulIMAPHeaderPropTag;
 }
 
-wstring Zimbra::MAPI::Util::ReverseDelimitedString(wstring wstrString, WCHAR *delimiter)
+wstring Zmail::MAPI::Util::ReverseDelimitedString(wstring wstrString, WCHAR *delimiter)
 {
     wstring wstrresult = L"";
 
@@ -565,7 +565,7 @@ wstring Zimbra::MAPI::Util::ReverseDelimitedString(wstring wstrString, WCHAR *de
     return wstrresult;
 }
 
-HRESULT Zimbra::MAPI::Util::GetMdbSpecialFolders(IN LPMDB lpMdb, IN OUT SBinaryArray *pEntryIds)
+HRESULT Zmail::MAPI::Util::GetMdbSpecialFolders(IN LPMDB lpMdb, IN OUT SBinaryArray *pEntryIds)
 {
     HRESULT hr = S_OK;
     ULONG cValues = 0;
@@ -591,7 +591,7 @@ cleanup: MAPIFreeBuffer(lpProps);
     return hr;
 }
 
-HRESULT Zimbra::MAPI::Util::GetInboxSpecialFolders(LPMAPIFOLDER pInbox, SBinaryArray *pEntryIds)
+HRESULT Zmail::MAPI::Util::GetInboxSpecialFolders(LPMAPIFOLDER pInbox, SBinaryArray *pEntryIds)
 {
     HRESULT hr = S_OK;
     ULONG cValues = 0;
@@ -628,7 +628,7 @@ cleanup: MAPIFreeBuffer(lpProps);
     return hr;
 }
 
-HRESULT Zimbra::MAPI::Util::GetAllSpecialFolders(IN LPMDB lpMdb, IN OUT SBinaryArray *pEntryIds)
+HRESULT Zmail::MAPI::Util::GetAllSpecialFolders(IN LPMDB lpMdb, IN OUT SBinaryArray *pEntryIds)
 {
     HRESULT hr = S_OK;
     LPMAPIFOLDER pInbox = NULL;
@@ -670,7 +670,7 @@ cleanup: UlRelease(pInbox);
     return hr;
 }
 
-HRESULT Zimbra::MAPI::Util::FreeAllSpecialFolders(IN SBinaryArray *lpSFIds)
+HRESULT Zmail::MAPI::Util::FreeAllSpecialFolders(IN SBinaryArray *lpSFIds)
 {
     HRESULT hr = S_OK;
 
@@ -688,7 +688,7 @@ HRESULT Zimbra::MAPI::Util::FreeAllSpecialFolders(IN SBinaryArray *lpSFIds)
     return hr;
 }
 
-ExchangeSpecialFolderId Zimbra::MAPI::Util::GetExchangeSpecialFolderId(IN LPMDB userStore, IN
+ExchangeSpecialFolderId Zmail::MAPI::Util::GetExchangeSpecialFolderId(IN LPMDB userStore, IN
     ULONG cbEntryId, IN LPENTRYID pFolderEntryId, SBinaryArray *pEntryIds)
 {
     SBinary *pCurr = pEntryIds->lpbin;
@@ -705,7 +705,7 @@ ExchangeSpecialFolderId Zimbra::MAPI::Util::GetExchangeSpecialFolderId(IN LPMDB 
     return SPECIAL_FOLDER_ID_NONE;
 }
 
-HRESULT Zimbra::MAPI::Util::GetExchangeUsersUsingObjectPicker(
+HRESULT Zmail::MAPI::Util::GetExchangeUsersUsingObjectPicker(
     vector<ObjectPickerData> &vUserList)
 {
     HRESULT hr = S_OK;
@@ -819,7 +819,7 @@ HRESULT Zimbra::MAPI::Util::GetExchangeUsersUsingObjectPicker(
                     wstrExchangeDomainAddress = wcschr(pDsSelList->aDsSelection[0].pwzUPN,
                         '@') + 1;
 
-                // TO Do: //use Zimbra domain here
+                // TO Do: //use Zmail domain here
                 CString pDomain = wstrExchangeDomainAddress.c_str();
                 int nDomain = pDomain.GetLength();
 
@@ -851,7 +851,7 @@ HRESULT Zimbra::MAPI::Util::GetExchangeUsersUsingObjectPicker(
 
                     CString alias;
 
-                    // Use USERPRINCIPALNAME to provison account on Zimbra. bug: 34846
+                    // Use USERPRINCIPALNAME to provison account on Zmail. bug: 34846
                     BSTR bstrAlias =
                         pDsSelList->aDsSelection[i].pvarFetchedAttributes[USERPRINCIPALNAME].
                         bstrVal;
@@ -882,7 +882,7 @@ HRESULT Zimbra::MAPI::Util::GetExchangeUsersUsingObjectPicker(
                                 // Skipping alias with value NULL
                                 continue;
                             }
-                            // Use the primary SMTP address to create user's account at Zimbra
+                            // Use the primary SMTP address to create user's account at Zmail
                             // if "alias" is not currently set and "pwszAlias" refers to primaty SMTP address.
                             if (!alias.GetLength() && (wcsncmp(pwszAlias, L"SMTP:", 5) == 0))
                             {
@@ -920,20 +920,20 @@ HRESULT Zimbra::MAPI::Util::GetExchangeUsersUsingObjectPicker(
                                 if (!pwszEnd)
                                     nAlias = wcslen(pwszStart) + 1;
 
-                                LPWSTR pwszZimbraAlias = new WCHAR[nAlias + nDomain + 1];
+                                LPWSTR pwszZmailAlias = new WCHAR[nAlias + nDomain + 1];
 
-                                wcsncpy(pwszZimbraAlias, pwszStart, nAlias - 1);
-                                pwszZimbraAlias[nAlias - 1] = L'\0';
-                                wcscat_s(pwszZimbraAlias, (nAlias + nDomain + 1), L"@");
-                                wcscat_s(pwszZimbraAlias, (nAlias + nDomain + 1), pDomain);
+                                wcsncpy(pwszZmailAlias, pwszStart, nAlias - 1);
+                                pwszZmailAlias[nAlias - 1] = L'\0';
+                                wcscat_s(pwszZmailAlias, (nAlias + nDomain + 1), L"@");
+                                wcscat_s(pwszZmailAlias, (nAlias + nDomain + 1), pDomain);
 
-                                wstring pwszNameTemp = L"zimbraMailAlias";
+                                wstring pwszNameTemp = L"zmailMailAlias";
 
-                                // Zimbra::Util::CopyString( pwszNameTemp, L"zimbraMailAlias" );
+                                // Zmail::Util::CopyString( pwszNameTemp, L"zmailMailAlias" );
                                 std::pair<wstring, wstring> p;
 
                                 p.first = pwszNameTemp;
-                                p.second = pwszZimbraAlias;
+                                p.second = pwszZmailAlias;
                                 opdData.pAttributeList.push_back(p);
 
                                 opdData.vAliases.push_back(pwszAlias + 5);
@@ -963,7 +963,7 @@ HRESULT Zimbra::MAPI::Util::GetExchangeUsersUsingObjectPicker(
                         wstring pAttrVal;
                         std::pair<wstring, wstring> p;
 
-                        // Get the objectSID for zimbraForeignPrincipal
+                        // Get the objectSID for zmailForeignPrincipal
                         if (j == OBJECTSID)
                         {
                             void HUGEP *pArray;
@@ -994,22 +994,22 @@ HRESULT Zimbra::MAPI::Util::GetExchangeUsersUsingObjectPicker(
                                     // LookupAccountSid Failed: %u ,GetLastError()
                                 }
 
-                                // Convert the SID as per zimbraForeignPrincipal format
-                                CString strzimbraForeignPrincipal;
+                                // Convert the SID as per zmailForeignPrincipal format
+                                CString strzmailForeignPrincipal;
 
-                                strzimbraForeignPrincipal = CString(L"ad:") + CString(
+                                strzmailForeignPrincipal = CString(L"ad:") + CString(
                                     acco_name);
 
                                 // Free the buffer allocated by ConvertSidToStringSid
                                 LocalFree(StringSid);
 
-                                // Add the SID into the attribute list vector for zimbraForeignPrincipal
-                                LPCTSTR lpZFP = strzimbraForeignPrincipal;
+                                // Add the SID into the attribute list vector for zmailForeignPrincipal
+                                LPCTSTR lpZFP = strzmailForeignPrincipal;
 
-                                // Zimbra::Util::CopyString( pAttrName, L"zimbraForeignPrincipal" );
-                                // Zimbra::Util::CopyString( pAttrVal, ( LPWSTR ) lpZFP );
+                                // Zmail::Util::CopyString( pAttrName, L"zmailForeignPrincipal" );
+                                // Zmail::Util::CopyString( pAttrVal, ( LPWSTR ) lpZFP );
 
-                                p.first = L"zimbraForeignPrincipal";
+                                p.first = L"zmailForeignPrincipal";
                                 p.second = (LPWSTR)lpZFP;
                                 opdData.pAttributeList.push_back(p);
 
@@ -1021,7 +1021,7 @@ HRESULT Zimbra::MAPI::Util::GetExchangeUsersUsingObjectPicker(
 
                         if (b != NULL)
                         {
-                            // Zimbra doesnt know USERPRINCIPALNAME. Skip it.#39286
+                            // Zmail doesnt know USERPRINCIPALNAME. Skip it.#39286
                             if (j == USERPRINCIPALNAME)
                                 continue;
                             // Change the attribute name to "street" if its "streetAddress"
@@ -1029,15 +1029,15 @@ HRESULT Zimbra::MAPI::Util::GetExchangeUsersUsingObjectPicker(
                             {
                                 pAttrName = L"street";
 
-                                // Zimbra::Util::CopyString( pAttrName, L"street" );
+                                // Zmail::Util::CopyString( pAttrName, L"street" );
                             }
                             else
                             {
                                 pAttrName = (LPWSTR)pAttrs[j];
 
-                                // Zimbra::Util::CopyString( pAttrName, (LPWSTR)pAttrs[j] );
+                                // Zmail::Util::CopyString( pAttrName, (LPWSTR)pAttrs[j] );
                             }
-                            // Zimbra::Util::CopyString( pAttrVal,  (LPWSTR)b );
+                            // Zmail::Util::CopyString( pAttrVal,  (LPWSTR)b );
                             pAttrVal = (LPWSTR)b;
                             p.first = pAttrName;
                             p.second = pAttrVal;
@@ -1058,7 +1058,7 @@ HRESULT Zimbra::MAPI::Util::GetExchangeUsersUsingObjectPicker(
     return hr;
 }
 
-HRESULT Zimbra::MAPI::Util::HrMAPIGetSMTPAddress(IN MAPISession &session, IN
+HRESULT Zmail::MAPI::Util::HrMAPIGetSMTPAddress(IN MAPISession &session, IN
     RECIP_INFO &recipInfo, OUT wstring &strSmtpAddress)
 {
     LPMAILUSER pUser = NULL;
@@ -1117,7 +1117,7 @@ HRESULT Zimbra::MAPI::Util::HrMAPIGetSMTPAddress(IN MAPISession &session, IN
     return hr;
 }
 
-BOOL Zimbra::MAPI::Util::CompareRecipients(MAPISession &session, RECIP_INFO &r1, RECIP_INFO &r2)
+BOOL Zmail::MAPI::Util::CompareRecipients(MAPISession &session, RECIP_INFO &r1, RECIP_INFO &r2)
 {
     SBinary eid1, eid2;
 
@@ -1134,7 +1134,7 @@ BOOL Zimbra::MAPI::Util::CompareRecipients(MAPISession &session, RECIP_INFO &r1,
     return ulResult;
 }
 
-bool Zimbra::MAPI::Util::NeedsEncoding(LPSTR pStr)
+bool Zmail::MAPI::Util::NeedsEncoding(LPSTR pStr)
 {
     for (unsigned int i = 0; i < strlen(pStr); i++)
     {
@@ -1146,7 +1146,7 @@ bool Zimbra::MAPI::Util::NeedsEncoding(LPSTR pStr)
     return false;
 }
 
-void Zimbra::MAPI::Util::CreateMimeSubject(IN LPTSTR pSubject, IN UINT codepage, IN OUT
+void Zmail::MAPI::Util::CreateMimeSubject(IN LPTSTR pSubject, IN UINT codepage, IN OUT
     LPSTR *ppMimeSubject)
 {
     LPSTR pMBSubject = NULL;
@@ -1225,12 +1225,12 @@ void ReplaceLFWithCRLF(LPSTR pszMimeMsg, UINT mimeLength, LPSTR *ppszNewMsg, siz
     // DumpBuffer( *ppszNewMsg, *pNewLength );
 }
 
-void Zimbra::MAPI::Util::AddBodyToPart(mimepp::BodyPart *pPart, LPSTR pStr, size_t length, BOOL
+void Zmail::MAPI::Util::AddBodyToPart(mimepp::BodyPart *pPart, LPSTR pStr, size_t length, BOOL
     bConvertLFToCRLF)
 {
     if (!pStr)
     {
-        // TRACE( _T("Zimbra::MAPI::Util::AddBodyToPart: No body pStr found"));
+        // TRACE( _T("Zmail::MAPI::Util::AddBodyToPart: No body pStr found"));
         return;
     }
 
@@ -1290,7 +1290,7 @@ void Zimbra::MAPI::Util::AddBodyToPart(mimepp::BodyPart *pPart, LPSTR pStr, size
 }
 
 BYTE OID_MAC_BINARY[] = { 0x2A, 0x86, 0x48, 0x86, 0xf7, 0x14, 0x03, 0x0B, 0x01 };
-mimepp::BodyPart *Zimbra::MAPI::Util::AttachPartFromIAttach(MAPISession &session, LPATTACH
+mimepp::BodyPart *Zmail::MAPI::Util::AttachPartFromIAttach(MAPISession &session, LPATTACH
     pAttach, LPSTR pCharset, LONG codepage)
 {
     // text/plain attachments may start with a byte order mark
@@ -1320,7 +1320,7 @@ mimepp::BodyPart *Zimbra::MAPI::Util::AttachPartFromIAttach(MAPISession &session
 
     if (FAILED(hr))
     {
-        throw Zimbra::MAPI::Util::MapiUtilsException(hr, L"Util::AttachPartFromIAttach(): GetProps.", 
+        throw Zmail::MAPI::Util::MapiUtilsException(hr, L"Util::AttachPartFromIAttach(): GetProps.", 
 			ERR_GET_ATTCHMENT, __LINE__, __FILE__);
     }
     if (pProps[ATTACH_METHOD].ulPropTag != PR_ATTACH_METHOD)
@@ -1377,19 +1377,19 @@ mimepp::BodyPart *Zimbra::MAPI::Util::AttachPartFromIAttach(MAPISession &session
     }
     else if (pProps[ATTACH_LONG_FILENAME].ulPropTag == PR_ATTACH_LONG_FILENAME_A)
     {
-        Zimbra::Util::CopyString(pAttachFilename, pProps[ATTACH_LONG_FILENAME].Value.lpszA);
+        Zmail::Util::CopyString(pAttachFilename, pProps[ATTACH_LONG_FILENAME].Value.lpszA);
         pAttachPart->headers().contentDisposition().setFilename(pAttachFilename);
         pAttachPart->headers().contentDisposition().assemble();
     }
     else if (pProps[ATTACH_FILENAME].ulPropTag == PR_ATTACH_FILENAME_A)
     {
-        Zimbra::Util::CopyString(pAttachFilename,pProps[ATTACH_FILENAME].Value.lpszA);
+        Zmail::Util::CopyString(pAttachFilename,pProps[ATTACH_FILENAME].Value.lpszA);
         pAttachPart->headers().contentDisposition().setFilename(pAttachFilename);
         pAttachPart->headers().contentDisposition().assemble();
     }
     else if (pProps[ATTACH_DISPLAY_NAME].ulPropTag == PR_DISPLAY_NAME_A)
     {
-        Zimbra::Util::CopyString(pAttachFilename,pProps[ATTACH_DISPLAY_NAME].Value.lpszA);
+        Zmail::Util::CopyString(pAttachFilename,pProps[ATTACH_DISPLAY_NAME].Value.lpszA);
         pAttachPart->headers().contentDisposition().setFilename(pAttachFilename);
         pAttachPart->headers().contentDisposition().assemble();
     }
@@ -1580,7 +1580,7 @@ mimepp::BodyPart *Zimbra::MAPI::Util::AttachPartFromIAttach(MAPISession &session
     return pAttachPart;
 }
 
-mimepp::BodyPart *Zimbra::MAPI::Util::AttachTooLargeAttachPart(ULONG attachSize, LPATTACH
+mimepp::BodyPart *Zmail::MAPI::Util::AttachTooLargeAttachPart(ULONG attachSize, LPATTACH
     pAttach, LPSTR)
 {
     mimepp::BodyPart *pAttachPart = NULL;
@@ -1610,7 +1610,7 @@ mimepp::BodyPart *Zimbra::MAPI::Util::AttachTooLargeAttachPart(ULONG attachSize,
 
     if (FAILED(hr))
     {
-        throw Zimbra::MAPI::Util::MapiUtilsException(hr, L"Util::AttachTooLargeAttachPart(): GetProps.",
+        throw Zmail::MAPI::Util::MapiUtilsException(hr, L"Util::AttachTooLargeAttachPart(): GetProps.",
 			ERR_GET_ATTCHMENT, __LINE__, __FILE__);
     }
     if (pProps[ATTACH_METHOD].ulPropTag != PR_ATTACH_METHOD)
@@ -1657,13 +1657,13 @@ mimepp::BodyPart *Zimbra::MAPI::Util::AttachTooLargeAttachPart(ULONG attachSize,
     pAttachPart->headers().contentDisposition().setFilename("ImportAttachError.txt");
     pAttachPart->headers().contentDisposition().assemble();
 
-    Zimbra::MAPI::Util::AddBodyToPart(pAttachPart, (LPSTR)textBody.c_str(), textBody.length());
+    Zmail::MAPI::Util::AddBodyToPart(pAttachPart, (LPSTR)textBody.c_str(), textBody.length());
 
     MAPIFreeBuffer(pProps);
     return pAttachPart;
 }
 
-void Zimbra::MAPI::Util::CharsetUtil::CharsetStringFromCodePageId(UINT codePageId,
+void Zmail::MAPI::Util::CharsetUtil::CharsetStringFromCodePageId(UINT codePageId,
     LPSTR *ppCharset)
 {
     LPSTR pCS = NULL;
@@ -2009,7 +2009,7 @@ void Zimbra::MAPI::Util::CharsetUtil::CharsetStringFromCodePageId(UINT codePageI
     }
 }
 
-Zimbra::MAPI::Util::MIME_ENCODING Zimbra::MAPI::Util::CharsetUtil::FindBestEncoding(LPSTR
+Zmail::MAPI::Util::MIME_ENCODING Zmail::MAPI::Util::CharsetUtil::FindBestEncoding(LPSTR
     pBuffer, int nBuffer)
 {
     MIME_ENCODING result = ME_7BIT;
@@ -2049,10 +2049,10 @@ Zimbra::MAPI::Util::MIME_ENCODING Zimbra::MAPI::Util::CharsetUtil::FindBestEncod
     return result;
 }
 
-Zimbra::MAPI::Util::StoreUtils *Zimbra::MAPI::Util::StoreUtils::stUtilsInst = NULL;
+Zmail::MAPI::Util::StoreUtils *Zmail::MAPI::Util::StoreUtils::stUtilsInst = NULL;
 // HrGetRegMultiSZValueA
 // Get a REG_MULTI_SZ registry value - allocating memory using new to hold it.
-void Zimbra::MAPI::Util::StoreUtils::HrGetRegMultiSZValueA(IN HKEY hKey,        // the key.
+void Zmail::MAPI::Util::StoreUtils::HrGetRegMultiSZValueA(IN HKEY hKey,        // the key.
     IN LPCSTR lpszValue,                                                        // value name in key.
     OUT LPVOID *lppData)                                                        // where to put the data.
 {
@@ -2087,7 +2087,7 @@ void Zimbra::MAPI::Util::StoreUtils::HrGetRegMultiSZValueA(IN HKEY hKey,        
 // Return type      : void
 // Argument         : LPSTR szMAPIDir - Buffer to hold the path to the MAPI32DLL file.
 // ULONG cchMAPIDir - size of the buffer
-void Zimbra::MAPI::Util::StoreUtils::GetMAPIDLLPath(LPSTR szMAPIDir, ULONG cchMAPIDir)
+void Zmail::MAPI::Util::StoreUtils::GetMAPIDLLPath(LPSTR szMAPIDir, ULONG cchMAPIDir)
 {
     HRESULT hRes = S_OK;
     UINT uiRet = 0;
@@ -2204,7 +2204,7 @@ void Zimbra::MAPI::Util::StoreUtils::GetMAPIDLLPath(LPSTR szMAPIDir, ULONG cchMA
     }
 }
 
-bool Zimbra::MAPI::Util::StoreUtils::isUnicodeStore(LPMESSAGE pMsg)
+bool Zmail::MAPI::Util::StoreUtils::isUnicodeStore(LPMESSAGE pMsg)
 {
         #define STORE_UNICODE_OK ((ULONG)0x00040000)
 
@@ -2219,7 +2219,7 @@ bool Zimbra::MAPI::Util::StoreUtils::isUnicodeStore(LPMESSAGE pMsg)
     return retval;
 }
 
-bool Zimbra::MAPI::Util::StoreUtils::Init()
+bool Zmail::MAPI::Util::StoreUtils::Init()
 {
     if (_hinstLib == NULL)
     {
@@ -2261,7 +2261,7 @@ bool Zimbra::MAPI::Util::StoreUtils::Init()
     return true;
 }
 
-bool Zimbra::MAPI::Util::StoreUtils::GetAnsiStoreMsgNativeType(LPMESSAGE pMsg, ULONG *nBody)
+bool Zmail::MAPI::Util::StoreUtils::GetAnsiStoreMsgNativeType(LPMESSAGE pMsg, ULONG *nBody)
 {
     bool retval = false;
 
@@ -2320,7 +2320,7 @@ bool Zimbra::MAPI::Util::StoreUtils::GetAnsiStoreMsgNativeType(LPMESSAGE pMsg, U
     return retval;
 }
 
-void Zimbra::MAPI::Util::StoreUtils::UnInit()
+void Zmail::MAPI::Util::StoreUtils::UnInit()
 {
     if (_hinstLib != NULL)
     {
@@ -2331,7 +2331,7 @@ void Zimbra::MAPI::Util::StoreUtils::UnInit()
     _hinstLib = NULL;
 }
 
-BOOL Zimbra::MAPI::Util::CreateAppTemporaryDirectory()
+BOOL Zmail::MAPI::Util::CreateAppTemporaryDirectory()
 {
     BOOL bRet = FALSE;
     wstring wstrTempDirPath;
@@ -2350,7 +2350,7 @@ BOOL Zimbra::MAPI::Util::CreateAppTemporaryDirectory()
     return bRet;
 }
 
-BOOL Zimbra::MAPI::Util::GetAppTemporaryDirectory(wstring &wstrTempAppDirPath)
+BOOL Zmail::MAPI::Util::GetAppTemporaryDirectory(wstring &wstrTempAppDirPath)
 {
     WCHAR pwszTempDir[MAX_PATH];
 
@@ -2366,7 +2366,7 @@ BOOL Zimbra::MAPI::Util::GetAppTemporaryDirectory(wstring &wstrTempAppDirPath)
     return TRUE;
 }
 
-BOOL Zimbra::MAPI::Util::GetAppName(wstring &wstrAppName)
+BOOL Zmail::MAPI::Util::GetAppName(wstring &wstrAppName)
 {
     WCHAR szAppPath[MAX_PATH] = L"";
 
@@ -2379,7 +2379,7 @@ BOOL Zimbra::MAPI::Util::GetAppName(wstring &wstrAppName)
     return TRUE;
 }
 
-wstring Zimbra::MAPI::Util::GetUniqueName()
+wstring Zmail::MAPI::Util::GetUniqueName()
 {
     GUID guid;
     HRESULT hr = CoCreateGuid(&guid);
@@ -2401,7 +2401,7 @@ wstring Zimbra::MAPI::Util::GetUniqueName()
     return unique;
 }
 
-bool Zimbra::MAPI::Util::GetDomainName(wstring &wstrDomain)
+bool Zmail::MAPI::Util::GetDomainName(wstring &wstrDomain)
 {
     wstrDomain = L"";
 
@@ -2455,14 +2455,14 @@ bool Zimbra::MAPI::Util::GetDomainName(wstring &wstrDomain)
     return ret;
 }
 
-BOOL Zimbra::MAPI::Util::CreatePSTProfile(LPSTR lpstrProfileName, LPSTR lpstrPSTFQPathName, bool
+BOOL Zmail::MAPI::Util::CreatePSTProfile(LPSTR lpstrProfileName, LPSTR lpstrPSTFQPathName, bool
     bNoUI)
 {
     HRESULT hr = S_OK;
-    Zimbra::Util::ScopedInterface<IProfAdmin> iprofadmin;
-    Zimbra::Util::ScopedInterface<IMsgServiceAdmin> imsadmin;
-    Zimbra::Util::ScopedInterface<IMAPITable> mstable;
-    Zimbra::Util::ScopedRowSet msrows;
+    Zmail::Util::ScopedInterface<IProfAdmin> iprofadmin;
+    Zmail::Util::ScopedInterface<IMsgServiceAdmin> imsadmin;
+    Zmail::Util::ScopedInterface<IMAPITable> mstable;
+    Zmail::Util::ScopedRowSet msrows;
     
     // Get IProfAdmin interface pointer
     if (FAILED(hr = MAPIAdminProfiles(0, iprofadmin.getptr())))
@@ -2483,11 +2483,11 @@ BOOL Zimbra::MAPI::Util::CreatePSTProfile(LPSTR lpstrProfileName, LPSTR lpstrPST
     }
     // Now create the message-store-service.
     hr = imsadmin->CreateMsgService((LPTSTR)"MSUPST MS",
-        (LPTSTR)"ZimbraPSTMigration Message Store", NULL, !bNoUI ? SERVICE_UI_ALLOWED : 0);
+        (LPTSTR)"ZmailPSTMigration Message Store", NULL, !bNoUI ? SERVICE_UI_ALLOWED : 0);
     if (hr == MAPI_E_UNKNOWN_FLAGS)
     {
         hr = imsadmin->CreateMsgService((LPTSTR)"MSUPST MS",
-            (LPTSTR)"ZimbraPSTMigration Message Store", 0, 0);
+            (LPTSTR)"ZmailPSTMigration Message Store", 0, 0);
     }
     if (hr != S_OK)
     {
@@ -2531,15 +2531,15 @@ BOOL Zimbra::MAPI::Util::CreatePSTProfile(LPSTR lpstrProfileName, LPSTR lpstrPST
 	AtoW(lpstrProfileName,lpwstrProfileName);
     if(!SetOLProfileRegistryEntries(lpwstrProfileName))
 	{
-		Zimbra::Util::SafeDelete(lpwstrProfileName);
+		Zmail::Util::SafeDelete(lpwstrProfileName);
 		throw MapiUtilsException(hr, L"Util:: CreatePSTProfile()::SetOLProfileRegistryEntries Failed.",
             ERR_CREATE_PSTPROFILE, __LINE__, __FILE__);
 	}
-	Zimbra::Util::SafeDelete(lpwstrProfileName);
+	Zmail::Util::SafeDelete(lpwstrProfileName);
     return TRUE;
 }
 
-bool Zimbra::MAPI::Util::SetOLProfileRegistryEntries(LPCWSTR strProfileName)
+bool Zmail::MAPI::Util::SetOLProfileRegistryEntries(LPCWSTR strProfileName)
 {
 	bool bRet=false;
 	int iOLVersion = -1;
@@ -2591,11 +2591,11 @@ bool Zimbra::MAPI::Util::SetOLProfileRegistryEntries(LPCWSTR strProfileName)
 	return bRet;
 }
 
-BOOL Zimbra::MAPI::Util::DeleteAlikeProfiles(LPCSTR lpstrProfileName)
+BOOL Zmail::MAPI::Util::DeleteAlikeProfiles(LPCSTR lpstrProfileName)
 {
     HRESULT hr = S_OK;
-    Zimbra::Util::ScopedInterface<IMAPITable> proftable;
-    Zimbra::Util::ScopedInterface<IProfAdmin> iprofadmin;
+    Zmail::Util::ScopedInterface<IMAPITable> proftable;
+    Zmail::Util::ScopedInterface<IProfAdmin> iprofadmin;
         
     // Get IProfAdmin interface pointer
     if (FAILED(hr = MAPIAdminProfiles(0, iprofadmin.getptr())))
@@ -2612,7 +2612,7 @@ BOOL Zimbra::MAPI::Util::DeleteAlikeProfiles(LPCSTR lpstrProfileName)
         2, { PR_DISPLAY_NAME_A, PR_DEFAULT_PROFILE }
     };
 
-    Zimbra::Util::ScopedRowSet profrows;
+    Zmail::Util::ScopedRowSet profrows;
 
     if (SUCCEEDED(hr = HrQueryAllRows(proftable.get(), (SPropTagArray *)&proftablecols, NULL,
             NULL, 0, profrows.getptr())))
@@ -2630,7 +2630,7 @@ BOOL Zimbra::MAPI::Util::DeleteAlikeProfiles(LPCSTR lpstrProfileName)
     return TRUE;
 }
 
-LONG Zimbra::MAPI::Util::GetOutlookVersion(int &iVersion)
+LONG Zmail::MAPI::Util::GetOutlookVersion(int &iVersion)
 {
     HKEY hKey = NULL;
     // Get the outlook version if its installed
@@ -2816,14 +2816,14 @@ LPWSTR WriteUnicodeToFile(LPTSTR pBody)
 	int nBytesToBeWritten = (int)(wcslen(pTemp)*sizeof(WCHAR));
    
     wstring wstrTempAppDirPath;
-    if (!Zimbra::MAPI::Util::GetAppTemporaryDirectory(wstrTempAppDirPath))
+    if (!Zmail::MAPI::Util::GetAppTemporaryDirectory(wstrTempAppDirPath))
     {
 	return L"";
     }
 
     char *lpszDirName = NULL;
     char *lpszUniqueName = NULL;
-    Zimbra::Util::ScopedInterface<IStream> pStream;
+    Zmail::Util::ScopedInterface<IStream> pStream;
     ULONG nBytesWritten = 0;
     ULONG nTotalBytesWritten = 0;
     HRESULT hr = S_OK;
@@ -2832,7 +2832,7 @@ LPWSTR WriteUnicodeToFile(LPTSTR pBody)
 
     string strFQFileName = lpszDirName;
 
-    WtoA((LPWSTR)Zimbra::MAPI::Util::GetUniqueName().c_str(), lpszUniqueName);
+    WtoA((LPWSTR)Zmail::MAPI::Util::GetUniqueName().c_str(), lpszUniqueName);
     strFQFileName += "\\";
     strFQFileName += lpszUniqueName;
     SafeDelete(lpszDirName);
@@ -2862,14 +2862,14 @@ LPWSTR WriteUnicodeToFile(LPTSTR pBody)
     return lpwstrFQFileName;
 }
 
-bool Zimbra::MAPI::Util::DumpContentsToFile(LPTSTR pBody, string strFilePath,bool isAscii)
+bool Zmail::MAPI::Util::DumpContentsToFile(LPTSTR pBody, string strFilePath,bool isAscii)
 {
 	LPSTR pTemp = NULL;
     int nBytesToBeWritten;
 
-    pTemp = (isAscii) ? (LPSTR)pBody : Zimbra::Util::UnicodeToAnsii(pBody);
+    pTemp = (isAscii) ? (LPSTR)pBody : Zmail::Util::UnicodeToAnsii(pBody);
     nBytesToBeWritten = (int)strlen(pTemp);
-	Zimbra::Util::ScopedInterface<IStream> pStream;
+	Zmail::Util::ScopedInterface<IStream> pStream;
     ULONG nBytesWritten = 0;
     ULONG nTotalBytesWritten = 0;
     HRESULT hr = S_OK;
@@ -2900,18 +2900,18 @@ LPWSTR WriteContentsToFile(LPTSTR pBody, bool isAscii)
 {
     LPSTR pTemp = NULL;
     int nBytesToBeWritten;
-    pTemp = (isAscii) ? (LPSTR)pBody : Zimbra::Util::UnicodeToAnsii(pBody);
+    pTemp = (isAscii) ? (LPSTR)pBody : Zmail::Util::UnicodeToAnsii(pBody);
     nBytesToBeWritten = (int)strlen(pTemp);
    
     wstring wstrTempAppDirPath;
-    if (!Zimbra::MAPI::Util::GetAppTemporaryDirectory(wstrTempAppDirPath))
+    if (!Zmail::MAPI::Util::GetAppTemporaryDirectory(wstrTempAppDirPath))
     {
 	return L"";
     }
 
     char *lpszDirName = NULL;
     char *lpszUniqueName = NULL;
-    Zimbra::Util::ScopedInterface<IStream> pStream;
+    Zmail::Util::ScopedInterface<IStream> pStream;
     ULONG nBytesWritten = 0;
     ULONG nTotalBytesWritten = 0;
     HRESULT hr = S_OK;
@@ -2920,7 +2920,7 @@ LPWSTR WriteContentsToFile(LPTSTR pBody, bool isAscii)
 
     string strFQFileName = lpszDirName;
 
-    WtoA((LPWSTR)Zimbra::MAPI::Util::GetUniqueName().c_str(), lpszUniqueName);
+    WtoA((LPWSTR)Zmail::MAPI::Util::GetUniqueName().c_str(), lpszUniqueName);
     strFQFileName += "\\";
     strFQFileName += lpszUniqueName;
     SafeDelete(lpszDirName);
@@ -2950,7 +2950,7 @@ LPWSTR WriteContentsToFile(LPTSTR pBody, bool isAscii)
     return lpwstrFQFileName;
 }
 
-wstring Zimbra::MAPI::Util::SetPlainText(LPMESSAGE pMessage, LPSPropValue lpv)
+wstring Zmail::MAPI::Util::SetPlainText(LPMESSAGE pMessage, LPSPropValue lpv)
 {
     wstring retval = L"";
     LPTSTR pBody = NULL;
@@ -2966,7 +2966,7 @@ wstring Zimbra::MAPI::Util::SetPlainText(LPMESSAGE pMessage, LPSPropValue lpv)
     return retval;
 }
 
-wstring Zimbra::MAPI::Util::SetHtml(LPMESSAGE pMessage, LPSPropValue lpv)
+wstring Zmail::MAPI::Util::SetHtml(LPMESSAGE pMessage, LPSPropValue lpv)
 {
     wstring retval = L"";
     LPVOID pBody = NULL;
@@ -2995,7 +2995,7 @@ wstring Zimbra::MAPI::Util::SetHtml(LPMESSAGE pMessage, LPSPropValue lpv)
     return retval;
 }
 
-wstring Zimbra::MAPI::Util::CommonDateString(FILETIME ft)
+wstring Zmail::MAPI::Util::CommonDateString(FILETIME ft)
 {
     wstring retval = L"";
     SYSTEMTIME st;      // convert the filetime to a system time.
@@ -3026,7 +3026,7 @@ wstring Zimbra::MAPI::Util::CommonDateString(FILETIME ft)
     return retval;
 }
 
-LPWSTR Zimbra::MAPI::Util::EscapeCategoryName(LPCWSTR pwszOrigCategoryName)
+LPWSTR Zmail::MAPI::Util::EscapeCategoryName(LPCWSTR pwszOrigCategoryName)
 {
     // replace all colons with spaces
     // replace all double quotes with single quotes
@@ -3117,7 +3117,7 @@ LPWSTR Zimbra::MAPI::Util::EscapeCategoryName(LPCWSTR pwszOrigCategoryName)
     return pwszNoLeadTrailSpace;
 }
 
-CString Zimbra::MAPI::Util::GetGUID()
+CString Zmail::MAPI::Util::GetGUID()
 {
 	GUID guid;
 	HRESULT hr=CoCreateGuid(&guid);
@@ -3139,7 +3139,7 @@ CString Zimbra::MAPI::Util::GetGUID()
 	return unique;
 }
 
-void Zimbra::MAPI::Util::GetContentTypeFromExtension(LPSTR pExt, LPSTR &pContentType)
+void Zmail::MAPI::Util::GetContentTypeFromExtension(LPSTR pExt, LPSTR &pContentType)
 {
     pContentType = NULL;
     if (pExt == NULL)
@@ -3190,7 +3190,7 @@ CString ConvertToLDAPDN(CString dn)
     return out;
 }
 
-HRESULT Zimbra::MAPI::Util::GetSMTPFromAD(Zimbra::MAPI::MAPISession &session, RECIP_INFO &recipInfo,
+HRESULT Zmail::MAPI::Util::GetSMTPFromAD(Zmail::MAPI::MAPISession &session, RECIP_INFO &recipInfo,
     wstring strUser, wstring strPsw, tstring &strSmtpAddress)
 {
 	UNREFERENCED_PARAMETER(session);

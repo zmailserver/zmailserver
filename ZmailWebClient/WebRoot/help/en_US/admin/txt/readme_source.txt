@@ -9,7 +9,7 @@ ways:
 
     (b) developer install that is amenable to incremental builds
 
-At this time, inside Zimbra, we build on RedHat Enterprise Linux 4 and
+At this time, inside Zmail, we build on RedHat Enterprise Linux 4 and
 Fedora Core 3.  If you want to build on other distributions, please be
 aware that our build does use pre-compiled (by us) versions postfix,
 openldap, etc. - on other distributions, you might run into shared
@@ -41,7 +41,7 @@ Building (a) binary release is simple:
        $ mkdir ~/zcs-src
        $ cd ~/zcs-src
        $ tar xvfz /path/to/your/downloads/zcs-src.tgz
-       $ cd ZimbraBuild
+       $ cd ZmailBuild
        $ make allclean
        $ make
        $ ls -l zcs/
@@ -54,12 +54,12 @@ You must not perform a developer install on a system that has had a
 binary release installed on it earlier - otherwise you might trample
 files that are under RPM's ownership/control.  One of the primary
 differences between (a) binary release and (b) developer install is
-that (a) runs all software as the Linux user 'zimbra', while (b) is
+that (a) runs all software as the Linux user 'zmail', while (b) is
 designed to run as you.  At this time, re-purposing a system which has
 the binary release into a developer install is not recommend as it is
 not fully tested, but this works for us (see also bug 3791):
 
-       # /opt/zimbra/bin/zmiptables -u
+       # /opt/zmail/bin/zmiptables -u
        # /path/to/your/binary/release/install.sh -u
 
 Similarly, when re-purposing a developer install for installing a
@@ -77,12 +77,12 @@ In a developer install we like to make these steps explicit so you are
 aware what exact changes are made to your development machine - which
 is important if said machine is also your desktop!
 
-- Make yourself a fresh zimbra directory (substitute 'john' with your
+- Make yourself a fresh zmail directory (substitute 'john' with your
   login name).  You need to run these commands as root.
 
-       # mv /opt/zimbra /opt/zimbra.old          # in case it's there
-       # mkdir /opt/zimbra
-       # chown john:john /opt/zimbra
+       # mv /opt/zmail /opt/zmail.old          # in case it's there
+       # mkdir /opt/zmail
+       # chown john:john /opt/zmail
       
 - Unpack the source tgz file.  Note that '$' to indicate you run these
   as yourself.
@@ -102,11 +102,11 @@ is important if said machine is also your desktop!
        lrwxrwxrwx  1 root root 21 Aug 29 09:22 /usr/local/java -> /usr/java/jdk1.5.0_04
 
 - Go into the build directory, and make the dev-install target so your
-  /opt/zimbra directory is populated with the software for the first
+  /opt/zmail directory is populated with the software for the first
   time.  You need to do this step whenever you blow away your
-  /opt/zimbra directory.
+  /opt/zmail directory.
 
-       $ cd ~/zcs-src/ZimbraBuild
+       $ cd ~/zcs-src/ZmailBuild
        $ make dev-install
 
 - Your /etc/hosts file should identify 127.0.0.1 as 'localhost' or
@@ -119,10 +119,10 @@ is important if said machine is also your desktop!
 
 - Add these directories to your /etc/ld.so.conf file:
 
-       /opt/zimbra/lib
-       /opt/zimbra/sleepycat/lib
-       /opt/zimbra/openldap/lib
-       /opt/zimbra/cyrus-sasl/lib
+       /opt/zmail/lib
+       /opt/zmail/sleepycat/lib
+       /opt/zmail/openldap/lib
+       /opt/zmail/cyrus-sasl/lib
 
   Run the program 'ldconfig' so the change to /etc/ld.so.conf goes
   into effect.
@@ -132,9 +132,9 @@ is important if said machine is also your desktop!
 - As root, edit your /etc/sudoers files to add these three lines
   (substitute 'john' with your login name):
 
-       john   ALL=NOPASSWD:/opt/zimbra/openldap/libexec/slapd
-       john   ALL=NOPASSWD:/opt/zimbra/postfix/sbin/postfix
-       john   ALL=NOPASSWD:/opt/zimbra/postfix/sbin/postalias
+       john   ALL=NOPASSWD:/opt/zmail/openldap/libexec/slapd
+       john   ALL=NOPASSWD:/opt/zmail/postfix/sbin/postfix
+       john   ALL=NOPASSWD:/opt/zmail/postfix/sbin/postalias
 
   This is mostly because you need to start postfix and ldap, and they
   need to bind to ports < 1024 which requires root privileges.
@@ -143,25 +143,25 @@ is important if said machine is also your desktop!
 
        # groupadd postdrop
        # groupadd postfix
-       # useradd -d /opt/zimbra/postfix -g postfix postfix
-       # /opt/zimbra/postfix/sbin/postfix set-permissions
-       # chmod 775 /opt/zimbra/postfix/conf
+       # useradd -d /opt/zmail/postfix -g postfix postfix
+       # /opt/zmail/postfix/sbin/postfix set-permissions
+       # chmod 775 /opt/zmail/postfix/conf
 
 - Run the following commands as yourself to initialize mysql, ldap,
-  and Zimbra's postfix configurator.
+  and Zmail's postfix configurator.
 
-       $ /opt/zimbra/bin/zmmyinit 
-       $ /opt/zimbra/bin/zmldapinit
-       $ /opt/zimbra/bin/zmmtainit localhost
-       $ /opt/zimbra/bin/zmmtaconfig mta
+       $ /opt/zmail/bin/zmmyinit 
+       $ /opt/zmail/bin/zmldapinit
+       $ /opt/zmail/bin/zmmtainit localhost
+       $ /opt/zmail/bin/zmmtaconfig mta
 
 - Change the ldap and mysql password to values hardcoded inside
   developer build.
 
-       $ /opt/zimbra/bin/zmldappasswd zimbra
-       $ /opt/zimbra/bin/zmldappasswd --root zimbra
-       $ /opt/zimbra/bin/zmmypasswd zimbra
-       $ /opt/zimbra/bin/zmmypasswd --root zimbra
+       $ /opt/zmail/bin/zmldappasswd zmail
+       $ /opt/zmail/bin/zmldappasswd --root zmail
+       $ /opt/zmail/bin/zmmypasswd zmail
+       $ /opt/zmail/bin/zmmypasswd --root zmail
 
 You have successfully initialized ZCS.  You are now ready for
 incremental change, build, test cycles:
@@ -171,35 +171,35 @@ incremental change, build, test cycles:
   start mysql or postfix. So make sure you do this step manually
   at least once after a system reboot:
 
-       $ /opt/zimbra/bin/postfix stop
-       $ /opt/zimbra/bin/postfix start
-       $ /opt/zimbra/bin/mysql.server stop
-       $ /opt/zimbra/bin/mysql.server start
+       $ /opt/zmail/bin/postfix stop
+       $ /opt/zmail/bin/postfix start
+       $ /opt/zmail/bin/mysql.server stop
+       $ /opt/zmail/bin/mysql.server start
 
 - In order to blow away all mailboxes, and create some new ones (think
   of it as make clean), you can perform these steps:
 
-       $ cd ~/zcs-src/ZimbraServer
+       $ cd ~/zcs-src/ZmailServer
        $ ant reset-the-world
-       $ cd ~/zcs-src/ZimbraWebClient
+       $ cd ~/zcs-src/ZmailWebClient
        $ ant deploy
 
-- If you have made a change to the server code inside the ZimbraServer
+- If you have made a change to the server code inside the ZmailServer
   directory, but wish to install these changes without destroying any
   existing mailboxes and data:
 
-       $ cd ~/zcs-src/ZimbraServer
+       $ cd ~/zcs-src/ZmailServer
        $ ant service-deploy
 
-- If you have made changes to the Ajax/ or ZimbraWebClient/, you have
+- If you have made changes to the Ajax/ or ZmailWebClient/, you have
   to do:
 
-       $ cd ~/zcs-src/ZimbraWebClient
+       $ cd ~/zcs-src/ZmailWebClient
        $ ant deploy
 
 - When using the developer install, the URL for the application is:
 
-       http://localhost:7070/zimbra/mail
+       http://localhost:7070/zmail/mail
 
   No trailing slash, please.  This is because tomcat does not bind to
   port 80 in the developer install.  Build creates the account 'user1'
@@ -209,12 +209,12 @@ incremental change, build, test cycles:
 - In order to shutdown the developer install, you must shutdown these
   four services:
 
-       $ /opt/zimbra/bin/tomcat stop
-       $ /opt/zimbra/bin/mysql.server stop
-       $ /opt/zimbra/bin/ldap stop
-       $ /opt/zimbra/bin/postfix stop
+       $ /opt/zmail/bin/tomcat stop
+       $ /opt/zmail/bin/mysql.server stop
+       $ /opt/zmail/bin/ldap stop
+       $ /opt/zmail/bin/postfix stop
 
-ZimbraServer and ZimbraClient directories contain '.project' files
+ZmailServer and ZmailClient directories contain '.project' files
 which make these directories usable with Eclipse 3.0 or higher
 (http://www.eclipse.org/).  You can import these directories as
 projects inside Eclipse.  You will have to change the Eclipse

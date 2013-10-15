@@ -38,7 +38,7 @@ ZmPreferencesPage = function(parent, section, controller, id) {
 
 	this.setScrollStyle(DwtControl.SCROLL);
 
-	this._title = [ZmMsg.zimbraTitle, controller.getApp().getDisplayName(), section.title].join(": ");
+	this._title = [ZmMsg.zmailTitle, controller.getApp().getDisplayName(), section.title].join(": ");
 
 	this._dwtObjects = {};
 	this._tabGroup = new DwtTabGroup(section.id);
@@ -1118,14 +1118,14 @@ function(folderId, status, aid) {
 		// send the import request w/ the att Id to the server per import setting
 		if (settingId == ZmSetting.IMPORT)
 		{
-			var soapDoc = AjxSoapDoc.create("ImportContactsRequest", "urn:zimbraMail");
+			var soapDoc = AjxSoapDoc.create("ImportContactsRequest", "urn:zmailMail");
 			var method = soapDoc.getMethod();
 			method.setAttribute("ct", "csv"); // always "csv" for now
 			method.setAttribute("l", folderId);
 			var content = soapDoc.set("content", "");
 			content.setAttribute("aid", aid);
 		} else {
-			var soapDoc = AjxSoapDoc.create("ImportAppointmentsRequest", "urn:zimbraMail");
+			var soapDoc = AjxSoapDoc.create("ImportAppointmentsRequest", "urn:zmailMail");
 			var method = soapDoc.getMethod();
 			method.setAttribute("ct", "ics");
 			method.setAttribute("l", folderId);
@@ -1188,7 +1188,7 @@ function(dialog, format, subFormat, folder) {
 			location.protocol, "//", location.hostname, portPrefix, "/service/home/",
 			username, "/", folderName,
 			"?auth=co&fmt=", format,
-			subFormat ? "&"+format+"fmt="+subFormat : "" // e.g. csvfmt=zimbra-csv
+			subFormat ? "&"+format+"fmt="+subFormat : "" // e.g. csvfmt=zmail-csv
 		].join("");
 		window.open(uri, "_blank");
 

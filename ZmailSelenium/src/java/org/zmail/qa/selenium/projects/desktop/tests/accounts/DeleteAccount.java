@@ -14,15 +14,15 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.accounts;
+package org.zmail.qa.selenium.projects.desktop.tests.accounts;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.PageLogin;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.PageLogin;
 
 public class DeleteAccount extends AjaxCommonTest {
    public DeleteAccount() {
@@ -53,7 +53,7 @@ public class DeleteAccount extends AjaxCommonTest {
       String welcomeMessage = app.zPageLogin.zGetWelcomeMessage();
 
       ZAssert.assertStringContains(welcomeMessage,
-            "Zimbra Desktop allows you to access email while you are disconnected from the internet.",
+            "Zmail Desktop allows you to access email while you are disconnected from the internet.",
             "Verify welcome message is displayed");
 
       ZAssert.assertEquals(false,
@@ -74,7 +74,7 @@ public class DeleteAccount extends AjaxCommonTest {
       String welcomeMessage = app.zPageLogin.zGetWelcomeMessage();
 
       ZAssert.assertStringContains(welcomeMessage,
-            "Zimbra Desktop allows you to access email while you are disconnected from the internet.",
+            "Zmail Desktop allows you to access email while you are disconnected from the internet.",
             "Verify welcome message is displayed");
 
       ZAssert.assertEquals(false,
@@ -82,9 +82,9 @@ public class DeleteAccount extends AjaxCommonTest {
             "Added account message is displayed");
    }
 
-   @Test(description="Delete the Zimbra account from ZD Client through clicking Delete Button", groups = { "smoke" })
-   public void deleteZimbraAccountThruClick() throws HarnessException {
-      app.zPageAddNewAccount.zAddZimbraAccountThruUI();
+   @Test(description="Delete the Zmail account from ZD Client through clicking Delete Button", groups = { "smoke" })
+   public void deleteZmailAccountThruClick() throws HarnessException {
+      app.zPageAddNewAccount.zAddZmailAccountThruUI();
 
       String confirmationMessage = app.zPageLogin.zRemoveAccountThroughClick();
 
@@ -95,7 +95,7 @@ public class DeleteAccount extends AjaxCommonTest {
       String welcomeMessage = app.zPageLogin.zGetWelcomeMessage();
 
       ZAssert.assertStringContains(welcomeMessage,
-            "Zimbra Desktop allows you to access email while you are disconnected from the internet.",
+            "Zmail Desktop allows you to access email while you are disconnected from the internet.",
             "Verify welcome message is displayed");
 
       ZAssert.assertEquals(false,
@@ -107,7 +107,7 @@ public class DeleteAccount extends AjaxCommonTest {
    public void deleteYahooAccountThruHttpPost() throws HarnessException {
       app.zPageAddNewAccount.zAddYahooAccountThruUI();
 
-      app.zPageLogin.zLogin(new ZimbraAccount(yahooUserName, yahooPassword));
+      app.zPageLogin.zLogin(new ZmailAccount(yahooUserName, yahooPassword));
       app.zPageLogin.zNavigateTo();
       
       app.zPageLogin.zRemoveAccount();
@@ -115,7 +115,7 @@ public class DeleteAccount extends AjaxCommonTest {
       String welcomeMessage = app.zPageLogin.zGetWelcomeMessage();
 
       ZAssert.assertStringContains(welcomeMessage,
-            "Zimbra Desktop allows you to access email while you are disconnected from the internet.",
+            "Zmail Desktop allows you to access email while you are disconnected from the internet.",
             "Verify welcome message is displayed");
 
       ZAssert.assertEquals(false,
@@ -127,7 +127,7 @@ public class DeleteAccount extends AjaxCommonTest {
    public void deleteGmailAccountThruHttpPost() throws HarnessException {
       app.zPageAddNewAccount.zAddGmailAccountThruUI();
 
-      app.zPageLogin.zLogin(new ZimbraAccount(gmailUserName, gmailPassword));
+      app.zPageLogin.zLogin(new ZmailAccount(gmailUserName, gmailPassword));
       app.zPageLogin.zNavigateTo();
 
       app.zPageLogin.zRemoveAccount();
@@ -135,7 +135,7 @@ public class DeleteAccount extends AjaxCommonTest {
       String welcomeMessage = app.zPageLogin.zGetWelcomeMessage();
 
       ZAssert.assertStringContains(welcomeMessage,
-            "Zimbra Desktop allows you to access email while you are disconnected from the internet.",
+            "Zmail Desktop allows you to access email while you are disconnected from the internet.",
             "Verify welcome message is displayed");
 
       ZAssert.assertEquals(false,
@@ -143,11 +143,11 @@ public class DeleteAccount extends AjaxCommonTest {
             "Added account message is displayed");
    }
 
-   @Test(description="Delete the Zimbra account from ZD Client through HTTP Post", groups = { "functional" })
-   public void deleteZimbraAccountThruHttpPost() throws HarnessException {
-      app.zPageAddNewAccount.zAddZimbraAccountThruUI();
+   @Test(description="Delete the Zmail account from ZD Client through HTTP Post", groups = { "functional" })
+   public void deleteZmailAccountThruHttpPost() throws HarnessException {
+      app.zPageAddNewAccount.zAddZmailAccountThruUI();
 
-      app.zPageLogin.zLogin(ZimbraAccount.AccountZDC());
+      app.zPageLogin.zLogin(ZmailAccount.AccountZDC());
       app.zPageLogin.zNavigateTo();
 
       app.zPageLogin.zRemoveAccount();
@@ -155,7 +155,7 @@ public class DeleteAccount extends AjaxCommonTest {
       String welcomeMessage = app.zPageLogin.zGetWelcomeMessage();
 
       ZAssert.assertStringContains(welcomeMessage,
-            "Zimbra Desktop allows you to access email while you are disconnected from the internet.",
+            "Zmail Desktop allows you to access email while you are disconnected from the internet.",
             "Verify welcome message is displayed");
 
       ZAssert.assertEquals(false,

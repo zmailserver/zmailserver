@@ -12,24 +12,24 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.mailbox.Color;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.UUIDUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.offline.OfflineProvisioning;
-import com.zimbra.cs.db.DbOfflineMailbox;
-import com.zimbra.cs.db.DbPool.DbConnection;
-import com.zimbra.cs.mailbox.ChangeTrackingMailbox.TracelessContext;
-import com.zimbra.cs.mailbox.MailServiceException.NoSuchItemException;
-import com.zimbra.cs.redolog.op.CreateFolder;
-import com.zimbra.cs.redolog.op.DeleteMailbox;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.mailbox.Color;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.UUIDUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.offline.OfflineProvisioning;
+import org.zmail.cs.db.DbOfflineMailbox;
+import org.zmail.cs.db.DbPool.DbConnection;
+import org.zmail.cs.mailbox.ChangeTrackingMailbox.TracelessContext;
+import org.zmail.cs.mailbox.MailServiceException.NoSuchItemException;
+import org.zmail.cs.redolog.op.CreateFolder;
+import org.zmail.cs.redolog.op.DeleteMailbox;
 
 public class LocalMailbox extends DesktopMailbox {
     public LocalMailbox(MailboxData data) {
@@ -114,7 +114,7 @@ public class LocalMailbox extends DesktopMailbox {
             try {
                 // remove all the relevant entries from the database
                 DbConnection conn = getOperationConnection();
-                ZimbraLog.mailbox.info("attempting to remove the zimbra.mailbox row for id "+mbox.getId());
+                ZmailLog.mailbox.info("attempting to remove the zmail.mailbox row for id "+mbox.getId());
                 DbOfflineMailbox.forceDeleteMailbox(conn, mbox.getId());
                 success = true;
             } finally {

@@ -12,9 +12,9 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.tag;
+package org.zmail.cs.taglib.tag;
 
-import com.zimbra.cs.taglib.ZJspSession;
+import org.zmail.cs.taglib.ZJspSession;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspContext;
@@ -23,9 +23,9 @@ import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.SkipPageException;
 import java.io.IOException;
 
-public class AdminRedirectTag extends ZimbraSimpleTag {
+public class AdminRedirectTag extends ZmailSimpleTag {
 
-    String mDefaultPath = "/zimbraAdmin";
+    String mDefaultPath = "/zmailAdmin";
 
     public void doTag() throws JspException, IOException {
         JspContext jctxt = getJspContext();

@@ -29,7 +29,7 @@ ZaRequestMgr.invoke = function (csfeParams, params) {
 	}
 	
 	try {
-		ZaZimbraAdmin.getInstance().cancelNoOp();
+		ZaZmailAdmin.getInstance().cancelNoOp();
 		csfeParams.noAuthToken = true;
 		var response = command.invoke(csfeParams) ;
 		if (!csfeParams.asyncMode && controller) {
@@ -37,7 +37,7 @@ ZaRequestMgr.invoke = function (csfeParams, params) {
 			controller._shell.setBusy(false, id, false); //remove the busy overlay
 		}
 		if (! csfeParams.asyncMode)	{
-			ZaZimbraAdmin.getInstance().scheduleNoOp();
+			ZaZmailAdmin.getInstance().scheduleNoOp();
 			return 	response;
 		}	
 	}catch (ex) {
@@ -46,7 +46,7 @@ ZaRequestMgr.invoke = function (csfeParams, params) {
 				ex.code == ZmCsfeException.NO_AUTH_TOKEN ||
                                 ex.code == ZmCsfeException.AUTH_TOKEN_CHANGED
 			 )) {
-			ZaZimbraAdmin.getInstance().scheduleNoOp();
+			ZaZmailAdmin.getInstance().scheduleNoOp();
 		}
 		if (!csfeParams.asyncMode && controller  || (params.showBusy && controller)) {
 			controller._shell.setBusy(false, id); //remove the busy overlay

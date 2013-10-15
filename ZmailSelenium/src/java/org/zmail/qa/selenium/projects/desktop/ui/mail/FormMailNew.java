@@ -14,27 +14,27 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.ui.mail;
+package org.zmail.qa.selenium.projects.desktop.ui.mail;
 
 import java.util.List;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.items.RecipientItem.RecipientType;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.framework.util.GeneralUtility.WAIT_FOR_OPERAND;
-import com.zimbra.qa.selenium.framework.util.staf.Stafpostqueue;
-import com.zimbra.qa.selenium.projects.desktop.ui.*;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.items.RecipientItem.RecipientType;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.GeneralUtility.WAIT_FOR_OPERAND;
+import org.zmail.qa.selenium.framework.util.staf.Stafpostqueue;
+import org.zmail.qa.selenium.projects.desktop.ui.*;
 
 /**
  * The <code>FormMailNew<code> object defines a compose new message view
- * in the Zimbra Ajax client.
+ * in the Zmail Ajax client.
  * <p>
  * This class can be used to compose a new message.
  * <p>
  * 
  * @author Matt Rhoades
- * @see http://wiki.zimbra.com/wiki/Testing:_Selenium:_ZimbraSelenium_Overview#Mail_Page
+ * @see http://wiki.zmail.com/wiki/Testing:_Selenium:_ZmailSelenium_Overview#Mail_Page
  */
 public class FormMailNew extends AbsForm {
 	
@@ -531,7 +531,7 @@ public class FormMailNew extends AbsForm {
 	}
 
 	public void zFill(IItem item, String... textToWait) throws HarnessException {
-		logger.info(myPageName() + ".zFill(ZimbraItem)");
+		logger.info(myPageName() + ".zFill(ZmailItem)");
 		logger.info(item.prettyPrint());
 
 		// Make sure the item is a MailItem

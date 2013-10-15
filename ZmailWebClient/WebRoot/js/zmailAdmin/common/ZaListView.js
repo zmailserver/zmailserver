@@ -186,7 +186,7 @@ function(hasMore) {
 ZaListView._getSearchKeyWord =
 function(query) {
 	var keyword = "";
-	var sw = "zimbraDomainName=*";
+	var sw = "zmailDomainName=*";
         var domflag = "@";
 	var ew = "*";
 	if(!query) return keyword;
@@ -314,11 +314,11 @@ function(preParams, paramsArr) {
 	}
 
 	cnt = paramList.length;
-	soapDoc = AjxSoapDoc.create("BatchRequest", "urn:zimbra");
+	soapDoc = AjxSoapDoc.create("BatchRequest", "urn:zmail");
 	soapDoc.setMethodAttribute("onerror", "continue");
 
 	for(var i = 0; i < cnt; i++) {
-		var getSearchDirDoc = soapDoc.set("SearchDirectoryRequest", null, null, ZaZimbraAdmin.URN);
+		var getSearchDirDoc = soapDoc.set("SearchDirectoryRequest", null, null, ZaZmailAdmin.URN);
 		var squery = soapDoc.set("query", paramList[i].query, getSearchDirDoc);
 
                 sortBy = (paramList[i].sortBy != undefined)? paramList[i].sortBy: ZaAccount.A_name;
@@ -409,7 +409,7 @@ function(preParams, paramsArr) {
 				searchTotal +=  (resp.searchTotal ? resp.searchTotal : 0);
                 hasmore= resp.more|hasmore;
 			}
-		        if(ZaZimbraAdmin.currentAdminAccount.attrs[ZaAccount.A_zimbraIsAdminAccount] != 'TRUE') {
+		        if(ZaZmailAdmin.currentAdminAccount.attrs[ZaAccount.A_zmailIsAdminAccount] != 'TRUE') {
 		                var act = new AjxTimedAction(this._list, ZaItemList.prototype.loadEffectiveRights, null);
 		                AjxTimedAction.scheduleAction(act, 150)
 		        }
@@ -509,7 +509,7 @@ function(params, resp) {
                 } else {
                     tempResultList = tempList;
                 }
-				if(ZaZimbraAdmin.currentAdminAccount.attrs[ZaAccount.A_zimbraIsAdminAccount] != 'TRUE') {
+				if(ZaZmailAdmin.currentAdminAccount.attrs[ZaAccount.A_zmailIsAdminAccount] != 'TRUE') {
 					var act = new AjxTimedAction(this._list, ZaItemList.prototype.loadEffectiveRights, null);
 					AjxTimedAction.scheduleAction(act, 150)
 				}

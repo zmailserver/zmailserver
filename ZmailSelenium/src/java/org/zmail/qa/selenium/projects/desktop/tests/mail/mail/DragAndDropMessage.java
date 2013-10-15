@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.mail.mail;
+package org.zmail.qa.selenium.projects.desktop.tests.mail.mail;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,14 +24,14 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount.SOAP_DESTINATION_HOST_TYPE;
-import com.zimbra.qa.selenium.projects.desktop.ui.Toaster;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.ZmailAccount.SOAP_DESTINATION_HOST_TYPE;
+import org.zmail.qa.selenium.projects.desktop.ui.Toaster;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
 
 public class DragAndDropMessage extends AjaxCommonTest {
 
@@ -47,7 +47,7 @@ public class DragAndDropMessage extends AjaxCommonTest {
 
 		// Make sure we are using an account with message view
 		super.startingAccountPreferences = new HashMap<String, String>() {{
-				    put("zimbraPrefGroupMailBy", "message");
+				    put("zmailPrefGroupMailBy", "message");
 		}};
 
 	}
@@ -62,15 +62,15 @@ public class DragAndDropMessage extends AjaxCommonTest {
 			groups = { "smoke" })
 	public void DragAndDropMessage_01() throws HarnessException {
 
-		String subject = "subject"+ ZimbraSeleniumProperties.getUniqueString();
-		String foldername = "folder"+ ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject"+ ZmailSeleniumProperties.getUniqueString();
+		String foldername = "folder"+ ZmailSeleniumProperties.getUniqueString();
 
 		// Create a subfolder to move the message into
 		// i.e. Inbox/subfolder
 		//
 		FolderItem inbox = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Inbox);
 		app.zGetActiveAccount().soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+					"<CreateFolderRequest xmlns='urn:zmailMail'>" +
 						"<folder name='" + foldername +"' l='"+ inbox.getId() +"'/>" +
 					"</CreateFolderRequest>");
 
@@ -88,13 +88,13 @@ public class DragAndDropMessage extends AjaxCommonTest {
 		_folders.add(subfolder);
 
 		// Send a message to the account
-		ZimbraAccount.AccountA().soapSend(
-					"<SendMsgRequest xmlns='urn:zimbraMail'>" +
+		ZmailAccount.AccountA().soapSend(
+					"<SendMsgRequest xmlns='urn:zmailMail'>" +
 						"<m>" +
 							"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 							"<su>"+ subject +"</su>" +
 							"<mp ct='text/plain'>" +
-								"<content>content"+ ZimbraSeleniumProperties.getUniqueString() +"</content>" +
+								"<content>content"+ ZmailSeleniumProperties.getUniqueString() +"</content>" +
 							"</mp>" +
 						"</m>" +
 					"</SendMsgRequest>");
@@ -124,7 +124,7 @@ public class DragAndDropMessage extends AjaxCommonTest {
 
 		// Get the message, make sure it is in the correct folder
 		app.zGetActiveAccount().soapSend(
-				"<GetMsgRequest xmlns='urn:zimbraMail'>" +
+				"<GetMsgRequest xmlns='urn:zmailMail'>" +
 					"<m id='" + mail.getId() +"'/>" +
 				"</GetMsgRequest>",
 				SOAP_DESTINATION_HOST_TYPE.CLIENT,
@@ -136,7 +136,7 @@ public class DragAndDropMessage extends AjaxCommonTest {
 
 		// Also verify in ZCS server
 		app.zGetActiveAccount().soapSend(
-            "<GetMsgRequest xmlns='urn:zimbraMail'>" +
+            "<GetMsgRequest xmlns='urn:zmailMail'>" +
                "<m id='" + mail.getId() +"'/>" +
             "</GetMsgRequest>");
 
@@ -150,21 +150,21 @@ public class DragAndDropMessage extends AjaxCommonTest {
 
 	@Test(  description = "Drag and Drop a message from ZCS Inbox to local mail folder",
          groups = { "smoke" })
-	public void DndMessageFromZimbraAccountToLocalMailFolder() throws HarnessException {
+	public void DndMessageFromZmailAccountToLocalMailFolder() throws HarnessException {
 
-      String subject = "subject"+ ZimbraSeleniumProperties.getUniqueString();
-      String foldername = "folder"+ ZimbraSeleniumProperties.getUniqueString();
+      String subject = "subject"+ ZmailSeleniumProperties.getUniqueString();
+      String foldername = "folder"+ ZmailSeleniumProperties.getUniqueString();
 
       // Create a folder under local to move the message into
       //
       FolderItem rootLocalFolder = FolderItem.importFromSOAP(app.zGetActiveAccount(),
-            SystemFolder.UserRoot, SOAP_DESTINATION_HOST_TYPE.CLIENT, ZimbraAccount.clientAccountName);
+            SystemFolder.UserRoot, SOAP_DESTINATION_HOST_TYPE.CLIENT, ZmailAccount.clientAccountName);
       app.zGetActiveAccount().soapSend(
-               "<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+               "<CreateFolderRequest xmlns='urn:zmailMail'>" +
                   "<folder name='" + foldername +"' l='"+ rootLocalFolder.getId() +"'/>" +
                "</CreateFolderRequest>",
                SOAP_DESTINATION_HOST_TYPE.CLIENT,
-               ZimbraAccount.clientAccountName);
+               ZmailAccount.clientAccountName);
 
       GeneralUtility.syncDesktopToZcsWithSoap(app.zGetActiveAccount());
       app.zPageMail.zWaitForDesktopLoadingSpinner(5000);
@@ -172,18 +172,18 @@ public class DragAndDropMessage extends AjaxCommonTest {
       FolderItem localFolder = FolderItem.importFromSOAP(app.zGetActiveAccount(),
             foldername,
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
       _localFolders = new ArrayList<FolderItem>();
       _localFolders.add(localFolder);
 
       // Send a message to the account
-      ZimbraAccount.AccountA().soapSend(
-               "<SendMsgRequest xmlns='urn:zimbraMail'>" +
+      ZmailAccount.AccountA().soapSend(
+               "<SendMsgRequest xmlns='urn:zmailMail'>" +
                   "<m>" +
                      "<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
                      "<su>"+ subject +"</su>" +
                      "<mp ct='text/plain'>" +
-                        "<content>content"+ ZimbraSeleniumProperties.getUniqueString() +"</content>" +
+                        "<content>content"+ ZmailSeleniumProperties.getUniqueString() +"</content>" +
                      "</mp>" +
                   "</m>" +
                "</SendMsgRequest>");
@@ -200,7 +200,7 @@ public class DragAndDropMessage extends AjaxCommonTest {
       // Select the item
       app.zPageMail.zDragAndDrop(
             "css=td[id$='"+ mail.getId() +"__su']",
-            app.zTreeMail.zGetTreeFolderLocator(localFolder, ZimbraAccount.clientAccountName)); 
+            app.zTreeMail.zGetTreeFolderLocator(localFolder, ZmailAccount.clientAccountName)); 
 
       Toaster toast = app.zPageMain.zGetToaster();
       String toastMsg = toast.zGetToastMessage();
@@ -211,7 +211,7 @@ public class DragAndDropMessage extends AjaxCommonTest {
       MailItem.importFromSOAP(app.zGetActiveAccount(),
             "subject:("+ subject +")",
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
 
       String folderId = app.zGetActiveAccount().soapSelectValue("//mail:m", "l");
 
@@ -230,23 +230,23 @@ public class DragAndDropMessage extends AjaxCommonTest {
 
 	@Test(  description = "Drag and Drop a message from ZCS Inbox to local mail subfolder",
 	groups = { "functional" })
-	public void DndMessageFromZimbraAccountToLocalMailSubfolder() throws HarnessException {
+	public void DndMessageFromZmailAccountToLocalMailSubfolder() throws HarnessException {
 
-	   String subject = "subject"+ ZimbraSeleniumProperties.getUniqueString();
-	   String foldername = "folder"+ ZimbraSeleniumProperties.getUniqueString();
-	   String subfoldername = "subfolder"+ ZimbraSeleniumProperties.getUniqueString();
+	   String subject = "subject"+ ZmailSeleniumProperties.getUniqueString();
+	   String foldername = "folder"+ ZmailSeleniumProperties.getUniqueString();
+	   String subfoldername = "subfolder"+ ZmailSeleniumProperties.getUniqueString();
 
 	   // Create a folder under local to move the message into
 	   //
 	   FolderItem rootLocalFolder = FolderItem.importFromSOAP(app.zGetActiveAccount(),
-	         SystemFolder.UserRoot, SOAP_DESTINATION_HOST_TYPE.CLIENT, ZimbraAccount.clientAccountName);
+	         SystemFolder.UserRoot, SOAP_DESTINATION_HOST_TYPE.CLIENT, ZmailAccount.clientAccountName);
 
 	   app.zGetActiveAccount().soapSend(
-	         "<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+	         "<CreateFolderRequest xmlns='urn:zmailMail'>" +
 	         "<folder name='" + foldername +"' l='"+ rootLocalFolder.getId() +"'/>" +
 	         "</CreateFolderRequest>",
 	         SOAP_DESTINATION_HOST_TYPE.CLIENT,
-	         ZimbraAccount.clientAccountName);
+	         ZmailAccount.clientAccountName);
 
 	   GeneralUtility.syncDesktopToZcsWithSoap(app.zGetActiveAccount());
       app.zPageMail.zWaitForDesktopLoadingSpinner(5000);
@@ -254,18 +254,18 @@ public class DragAndDropMessage extends AjaxCommonTest {
       FolderItem localFolder = FolderItem.importFromSOAP(app.zGetActiveAccount(),
 	         foldername,
 	         SOAP_DESTINATION_HOST_TYPE.CLIENT,
-	         ZimbraAccount.clientAccountName);
+	         ZmailAccount.clientAccountName);
 
       _localFolders = new ArrayList<FolderItem>();
       _localFolders.add(localFolder);
 
       // Create local sub folder
 	   app.zGetActiveAccount().soapSend(
-	         "<CreateFolderRequest xmlns='urn:zimbraMail'>" +
+	         "<CreateFolderRequest xmlns='urn:zmailMail'>" +
 	         "<folder name='" + subfoldername +"' l='"+ localFolder.getId() +"'/>" +
 	         "</CreateFolderRequest>",
 	         SOAP_DESTINATION_HOST_TYPE.CLIENT,
-	         ZimbraAccount.clientAccountName);
+	         ZmailAccount.clientAccountName);
 
       GeneralUtility.syncDesktopToZcsWithSoap(app.zGetActiveAccount());
       app.zPageMail.zWaitForDesktopLoadingSpinner(5000);
@@ -273,18 +273,18 @@ public class DragAndDropMessage extends AjaxCommonTest {
       FolderItem localSubfolder = FolderItem.importFromSOAP(app.zGetActiveAccount(),
             subfoldername,
             SOAP_DESTINATION_HOST_TYPE.CLIENT,
-            ZimbraAccount.clientAccountName);
+            ZmailAccount.clientAccountName);
 
       _localFolders.add(localSubfolder);
 
       // Send a message to the account
-	   ZimbraAccount.AccountA().soapSend(
-	         "<SendMsgRequest xmlns='urn:zimbraMail'>" +
+	   ZmailAccount.AccountA().soapSend(
+	         "<SendMsgRequest xmlns='urn:zmailMail'>" +
 	         "<m>" +
 	         "<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
 	         "<su>"+ subject +"</su>" +
 	         "<mp ct='text/plain'>" +
-	         "<content>content"+ ZimbraSeleniumProperties.getUniqueString() +"</content>" +
+	         "<content>content"+ ZmailSeleniumProperties.getUniqueString() +"</content>" +
 	         "</mp>" +
 	         "</m>" +
 	         "</SendMsgRequest>");
@@ -301,7 +301,7 @@ public class DragAndDropMessage extends AjaxCommonTest {
 	   // Select the item
 	   app.zPageMail.zDragAndDrop(
 	         "css=td[id$='"+ mail.getId() +"__su']",
-	         app.zTreeMail.zGetTreeFolderLocator(localSubfolder, ZimbraAccount.clientAccountName)); 
+	         app.zTreeMail.zGetTreeFolderLocator(localSubfolder, ZmailAccount.clientAccountName)); 
 
 	   Toaster toast = app.zPageMain.zGetToaster();
 	   String toastMsg = toast.zGetToastMessage();
@@ -312,7 +312,7 @@ public class DragAndDropMessage extends AjaxCommonTest {
 	   MailItem.importFromSOAP(app.zGetActiveAccount(),
 	         "subject:("+ subject +")",
 	         SOAP_DESTINATION_HOST_TYPE.CLIENT,
-	         ZimbraAccount.clientAccountName);
+	         ZmailAccount.clientAccountName);
 
 	   String folderId = app.zGetActiveAccount().soapSelectValue("//mail:m", "l");
 
@@ -345,7 +345,7 @@ public class DragAndDropMessage extends AjaxCommonTest {
 	               app.zGetActiveAccount(),
 	               ((FolderItem)_localFolders.get(i)).getName(),
 	               SOAP_DESTINATION_HOST_TYPE.CLIENT,
-	               ZimbraAccount.clientAccountName);
+	               ZmailAccount.clientAccountName);
 	      }
 	   }
 	}

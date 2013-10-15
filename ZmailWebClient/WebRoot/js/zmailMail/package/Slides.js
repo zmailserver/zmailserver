@@ -19,12 +19,12 @@
  *
  */
 
-AjxPackage.require("zimbraMail.slides.view.ZmSlideThemeManager");
-AjxPackage.require("zimbraMail.slides.view.ZmSlideComponentEditor");
-AjxPackage.require("zimbraMail.slides.view.DwtAnimate");
-AjxPackage.require("zimbraMail.slides.view.ZmSlideEditView");
-AjxPackage.require("zimbraMail.briefcase.model.ZmDocletMgr");
-AjxPackage.require("zimbraMail.share.view.dialog.ZmUploadDialog");
-AjxPackage.require("zimbraMail.share.view.dialog.ZmUploadConflictDialog");
+AjxPackage.require("zmailMail.slides.view.ZmSlideThemeManager");
+AjxPackage.require("zmailMail.slides.view.ZmSlideComponentEditor");
+AjxPackage.require("zmailMail.slides.view.DwtAnimate");
+AjxPackage.require("zmailMail.slides.view.ZmSlideEditView");
+AjxPackage.require("zmailMail.briefcase.model.ZmDocletMgr");
+AjxPackage.require("zmailMail.share.view.dialog.ZmUploadDialog");
+AjxPackage.require("zmailMail.share.view.dialog.ZmUploadConflictDialog");
 
-AjxPackage.require("zimbraMail.slides.controller.ZmSlideEditController");
+AjxPackage.require("zmailMail.slides.controller.ZmSlideEditController");

@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.performance;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.performance;
 
 import java.io.File;
 import java.util.HashMap;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.framework.util.performance.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.PageLogin.Locators;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.performance.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.PageLogin.Locators;
 
 
 
@@ -38,8 +38,8 @@ public class ZmMailApp extends AjaxCommonTest {
 		super.startingAccountPreferences = new HashMap<String, String>() {
 			private static final long serialVersionUID = 7525760124523255182L;
 		{
-			put("zimbraPrefGroupMailBy", "message");
-			put("zimbraPrefMessageViewHtmlPreferred", "TRUE");
+			put("zmailPrefGroupMailBy", "message");
+			put("zmailPrefMessageViewHtmlPreferred", "TRUE");
 		}};
 		
 	}
@@ -49,8 +49,8 @@ public class ZmMailApp extends AjaxCommonTest {
 	public void ZmMailApp_01() throws HarnessException {
 		
 		// Fill out the login page
-		app.zPageLogin.zSetLoginName(ZimbraAccount.AccountZWC().EmailAddress);
-		app.zPageLogin.zSetLoginPassword(ZimbraAccount.AccountZWC().Password);
+		app.zPageLogin.zSetLoginName(ZmailAccount.AccountZWC().EmailAddress);
+		app.zPageLogin.zSetLoginPassword(ZmailAccount.AccountZWC().Password);
 
 		PerfToken token = PerfMetrics.startTimestamp(PerfKey.ZmMailApp, "Load the mail app, message view, initial load");
 
@@ -69,12 +69,12 @@ public class ZmMailApp extends AjaxCommonTest {
 			groups = { "performance" })
 	public void ZmMailApp_02() throws HarnessException {
 		
-		String mime = ZimbraSeleniumProperties.getBaseDirectory() + "/data/public/mime/email02/mime01.txt";
-		LmtpInject.injectFile(ZimbraAccount.AccountZWC().EmailAddress, new File(mime));
+		String mime = ZmailSeleniumProperties.getBaseDirectory() + "/data/public/mime/email02/mime01.txt";
+		LmtpInject.injectFile(ZmailAccount.AccountZWC().EmailAddress, new File(mime));
 
 		// Fill out the login page
-		app.zPageLogin.zSetLoginName(ZimbraAccount.AccountZWC().EmailAddress);
-		app.zPageLogin.zSetLoginPassword(ZimbraAccount.AccountZWC().Password);
+		app.zPageLogin.zSetLoginName(ZmailAccount.AccountZWC().EmailAddress);
+		app.zPageLogin.zSetLoginPassword(ZmailAccount.AccountZWC().Password);
 
 		PerfToken token = PerfMetrics.startTimestamp(PerfKey.ZmMailApp, "Load the mail app, message view, 1 message");
 
@@ -93,12 +93,12 @@ public class ZmMailApp extends AjaxCommonTest {
 			groups = { "performance" })
 	public void ZmMailApp_03() throws HarnessException {
 		
-		String mime = ZimbraSeleniumProperties.getBaseDirectory() + "/data/public/mime/email03";
-		LmtpInject.injectFile(ZimbraAccount.AccountZWC().EmailAddress, new File(mime));
+		String mime = ZmailSeleniumProperties.getBaseDirectory() + "/data/public/mime/email03";
+		LmtpInject.injectFile(ZmailAccount.AccountZWC().EmailAddress, new File(mime));
 
 		// Fill out the login page
-		app.zPageLogin.zSetLoginName(ZimbraAccount.AccountZWC().EmailAddress);
-		app.zPageLogin.zSetLoginPassword(ZimbraAccount.AccountZWC().Password);
+		app.zPageLogin.zSetLoginName(ZmailAccount.AccountZWC().EmailAddress);
+		app.zPageLogin.zSetLoginPassword(ZmailAccount.AccountZWC().Password);
 
 		PerfToken token = PerfMetrics.startTimestamp(PerfKey.ZmMailApp, "Load the mail app, message view, 100 messages");
 

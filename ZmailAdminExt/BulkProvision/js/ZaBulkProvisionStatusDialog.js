@@ -33,7 +33,7 @@ ZaBulkProvisionStatusDialog = function(parent) {
 
     w = "420px" ;
     h = "320px"
-    ZaXDialog.call(this, parent,null, com_zimbra_bulkprovision.title_provision, w, h);
+    ZaXDialog.call(this, parent,null, org_zmail_bulkprovision.title_provision, w, h);
 	this._containedObject = [];
 	this.initForm(ZaBulkProvisionStatusDialog.myXModel,this.getMyXForm());
 }
@@ -86,7 +86,7 @@ function() {
     var i = 0;
     sourceHeaderList[i++] = new ZaListHeaderItem(ZaBulkProvision.A2_accountName, ZaMsg.ALV_Name_col,
                                                                         null, 250, null, null, true, true);
-    sourceHeaderList[i++] = new ZaListHeaderItem(ZaBulkProvision.A2_status, com_zimbra_bulkprovision.ALV_Stauts_col,
+    sourceHeaderList[i++] = new ZaListHeaderItem(ZaBulkProvision.A2_status, org_zmail_bulkprovision.ALV_Stauts_col,
                                                                         null, null, null, null, true, true);
 
     //idPrefix, label, iconInfo, width, sortable, sortField, resizeable, visible

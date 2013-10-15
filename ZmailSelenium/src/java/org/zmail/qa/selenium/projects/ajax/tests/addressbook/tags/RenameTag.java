@@ -14,16 +14,16 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.addressbook.tags;
+package org.zmail.qa.selenium.projects.ajax.tests.addressbook.tags;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.items.TagItem;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.*;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.items.TagItem;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.*;
 
 
 public class RenameTag extends PrefGroupMailByMessageTest {
@@ -42,11 +42,11 @@ public class RenameTag extends PrefGroupMailByMessageTest {
 	public void RenameTag_01() throws HarnessException {
 		
 		// Create the tag to rename
-		String name1 = "tag" + ZimbraSeleniumProperties.getUniqueString();
-		String name2 = "tag" + ZimbraSeleniumProperties.getUniqueString();
+		String name1 = "tag" + ZmailSeleniumProperties.getUniqueString();
+		String name2 = "tag" + ZmailSeleniumProperties.getUniqueString();
 		
 		app.zGetActiveAccount().soapSend(
-				"<CreateTagRequest xmlns='urn:zimbraMail'>" +
+				"<CreateTagRequest xmlns='urn:zmailMail'>" +
                 	"<tag name='"+ name1 +"' color='1' />" +
                 "</CreateTagRequest>");
 
@@ -67,7 +67,7 @@ public class RenameTag extends PrefGroupMailByMessageTest {
 
 		
 		// Verify the tag is no longer found
-		app.zGetActiveAccount().soapSend("<GetTagRequest xmlns='urn:zimbraMail'/>");
+		app.zGetActiveAccount().soapSend("<GetTagRequest xmlns='urn:zmailMail'/>");
 		
 		Element[] eTag1 = app.zGetActiveAccount().soapSelectNodes("//mail:tag[@name='"+ name1 +"']");
 		ZAssert.assertEquals(eTag1.length, 0, "Verify the old tag name no longer exists");

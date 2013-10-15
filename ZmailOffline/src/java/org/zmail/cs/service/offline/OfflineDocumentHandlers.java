@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.offline;
+package org.zmail.cs.service.offline;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,58 +27,58 @@ import org.apache.commons.httpclient.HttpVersion;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.params.HttpMethodParams;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.httpclient.HttpClientUtil;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.BufferStreamRequestEntity;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.ZimbraHttpConnectionManager;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.ZimbraAuthTokenEncoded;
-import com.zimbra.cs.account.offline.OfflineProvisioning;
-import com.zimbra.cs.offline.common.OfflineConstants;
-import com.zimbra.cs.service.FileUploadServlet;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.account.Key;
+import org.zmail.common.httpclient.HttpClientUtil;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.BufferStreamRequestEntity;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.ZmailHttpConnectionManager;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.ZmailAuthTokenEncoded;
+import org.zmail.cs.account.offline.OfflineProvisioning;
+import org.zmail.cs.offline.common.OfflineConstants;
+import org.zmail.cs.service.FileUploadServlet;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.soap.ZmailSoapContext;
 
 public class OfflineDocumentHandlers {
     static Pattern pattern = Pattern.compile("\\w{8}-\\w{4}-\\w{4}-\\w{4}-\\w{12}:\\w{8}-\\w{4}-\\w{4}-\\w{4}-\\w{12}");
 
-    static Account getTargetAccount(ZimbraSoapContext zsc)
+    static Account getTargetAccount(ZmailSoapContext zsc)
         throws ServiceException {
         String acctId = zsc.getRequestedAccountId();
         Provisioning prov = Provisioning.getInstance();
         return prov.get(Key.AccountBy.id, acctId);
     }
 
-    static class DiffDocument extends com.zimbra.cs.service.doc.DiffDocument {
+    static class DiffDocument extends org.zmail.cs.service.doc.DiffDocument {
         @Override
-        protected String getAuthor(ZimbraSoapContext zsc) throws ServiceException {
+        protected String getAuthor(ZmailSoapContext zsc) throws ServiceException {
             return getTargetAccount(zsc).getName();
         }
     }
 
     static class ListDocumentRevisions extends
-        com.zimbra.cs.service.doc.ListDocumentRevisions {
+        org.zmail.cs.service.doc.ListDocumentRevisions {
         @Override
-        protected String getAuthor(ZimbraSoapContext zsc) throws ServiceException {
+        protected String getAuthor(ZmailSoapContext zsc) throws ServiceException {
             return getTargetAccount(zsc).getName();
         }
     }
 
-    static class SaveDocument extends com.zimbra.cs.service.doc.SaveDocument {
+    static class SaveDocument extends org.zmail.cs.service.doc.SaveDocument {
         @Override
-        protected String getAuthor(ZimbraSoapContext zsc) throws ServiceException {
+        protected String getAuthor(ZmailSoapContext zsc) throws ServiceException {
             return getTargetAccount(zsc).getName();
         }
     }
 
     public static String uploadOfflineDocument(String id, String acctId) throws ServiceException {
-        HttpClient client = ZimbraHttpConnectionManager.getInternalHttpConnMgr().getDefaultHttpClient();
+        HttpClient client = ZmailHttpConnectionManager.getInternalHttpConnMgr().getDefaultHttpClient();
         boolean ka = LC.httpclient_soaphttptransport_keepalive_connections.booleanValue();
         FileUploadServlet.Upload upload = FileUploadServlet.fetchUpload(
             OfflineConstants.LOCAL_ACCOUNT_ID, id, null);
@@ -90,7 +90,7 @@ public class OfflineDocumentHandlers {
                 OfflineProvisioning.A_offlineMountpointProxyAccountId));
         String url = account.getAttr(OfflineConstants.A_offlineRemoteServerUri);
         if (url == null)
-            throw ServiceException.FAILURE("not a zimbra account: " + account.getName(), null);
+            throw ServiceException.FAILURE("not a zmail account: " + account.getName(), null);
         url += "/service/upload";
         
         String authToken = prov.getProxyAuthToken(acctId, null);
@@ -104,7 +104,7 @@ public class OfflineDocumentHandlers {
                 upload.getContentType() + "; name=\"" + upload.getName() + "\"",
                 upload.getSize(), 512 * 1024);
             post.setRequestEntity(bsre);
-            (new ZimbraAuthTokenEncoded(authToken)).encode(state, false, post.getURI().getHost());
+            (new ZmailAuthTokenEncoded(authToken)).encode(state, false, post.getURI().getHost());
             client.setState(state);
             post.getParams().setParameter(HttpMethodParams.RETRY_HANDLER,
                 new DefaultHttpMethodRetryHandler(LC.httpclient_soaphttptransport_retry_count.intValue() - 1, true));

@@ -17,7 +17,7 @@
 -->
 <indexdata>
 <key name="riquadro di navigazione" >
-  <topic name="Navigazione in Zimbra Web Client" url="zwc_help_files/1_setting_up/navigating_the_zimbra_web_client.htm" />
+  <topic name="Navigazione in Zmail Web Client" url="zwc_help_files/1_setting_up/navigating_the_zmail_web_client.htm" />
 </key>
 <key name="risposte via email" >
   <topic name="Impostazione delle Preferenze per le risposte email" url="zwc_help_files/3_compose/set_preferences_for_email_replies.htm" />
@@ -125,7 +125,7 @@
   <topic name="Visualizzazione della attività dell'agenda in un elenco" url="zwc_help_files/7_calendars/viewing_calendar_activities_in_a_list.htm" />
 </key>
 <key name="vista schermo" >
-  <topic name="Navigazione in Zimbra Web Client" url="zwc_help_files/1_setting_up/navigating_the_zimbra_web_client.htm" />
+  <topic name="Navigazione in Zmail Web Client" url="zwc_help_files/1_setting_up/navigating_the_zmail_web_client.htm" />
 </key>
 <key name="vista settimana lavorativa" >
   <topic name="Utilizzo delle agende" url="zwc_help_files/7_calendars/working_with_calendars.htm" />

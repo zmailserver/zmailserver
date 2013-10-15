@@ -14,12 +14,12 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.admin.tests.downloads;
+package org.zmail.qa.selenium.projects.admin.tests.downloads;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.admin.core.AdminCommonTest;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.admin.core.AdminCommonTest;
 
 
 public class DownloadsIndex extends AdminCommonTest {
@@ -42,7 +42,7 @@ public class DownloadsIndex extends AdminCommonTest {
 
 		try {
 			
-			// Open a new window pointing at http://server.com/zimbra/downloads/index.html
+			// Open a new window pointing at http://server.org/zmail/downloads/index.html
 			app.zPageDownloads.zOpenIndexHTML();
 		
 			// This method throws an exception if the page doesn't open
@@ -66,7 +66,7 @@ public class DownloadsIndex extends AdminCommonTest {
 			groups = { "functional" })
 	public void DownloadsTab_02() throws HarnessException {
 
-		throw new HarnessException("implement me.  See http://bugzilla.zimbra.com/show_bug.cgi?id=58973");
+		throw new HarnessException("implement me.  See http://bugzilla.zmail.com/show_bug.cgi?id=58973");
 
 	}
 
@@ -74,7 +74,7 @@ public class DownloadsIndex extends AdminCommonTest {
 			groups = { "functional" })
 	public void DownloadsTab_03() throws HarnessException {
 
-		throw new HarnessException("implement me.  See http://bugzilla.zimbra.com/show_bug.cgi?id=58973");
+		throw new HarnessException("implement me.  See http://bugzilla.zmail.com/show_bug.cgi?id=58973");
 
 	}
 

@@ -89,7 +89,7 @@ function ForceOnline()
 ForceOnline.prototype = {
   classDescription: "ForceOnline",
   classID: Components.ID("{1a63c05f-caba-4b26-8d2e-f70d4ccc1e97}"),
-  contractID: "@zimbra.com/force-online;1",
+  contractID: "@zmail.com/force-online;1",
   
   QueryInterface: XPCOMUtils.generateQI([Ci.nsIObserver, Ci.nsIDOMEventTarget, Ci.nsIProtocolProxyFilter, Ci.nsIClassInfo, Ci.nsISecurityCheckedComponent]),
 
@@ -97,7 +97,7 @@ ForceOnline.prototype = {
 
   _xpcom_categories: [
     { category: "app-startup", service: true },
-    { category: "JavaScript global constructor", entry: "ZimbraNetworkChecker" }
+    { category: "JavaScript global constructor", entry: "ZmailNetworkChecker" }
   ],
   
   // nsIClassInfo

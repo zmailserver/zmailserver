@@ -14,11 +14,11 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_octopus" version="7.0"
+<zimlet name="org_zmail_octopus" version="7.0"
 	label="${msg.label}"
 	description="${msg.description}"
 	extension="true">
-    <include>com_zimbra_octopus.js</include>
+    <include>org_zmail_octopus.js</include>
     <include>OctopusDeviceListView.js</include>
     <include>ViewMail.js</include>
     <disableUIUndeploy>FALSE</disableUIUndeploy>

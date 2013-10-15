@@ -14,5 +14,5 @@
 # ***** END LICENSE BLOCK *****
 # 
 
-chown -R zimbra:zimbra /opt/zimbra/qa
-chmod a+x /opt/zimbra/qa/scripts/*
+chown -R zmail:zmail /opt/zmail/qa
+chmod a+x /opt/zmail/qa/scripts/*

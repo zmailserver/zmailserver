@@ -25,7 +25,7 @@ ZmDocsEditApp = function(){
 };
 
 ZmDocsEditApp.prototype.constructor = ZmDocsEditApp;
-ZmDocsEditApp.APP_ZIMBRA_DOC = "application/x-zimbra-doc";
+ZmDocsEditApp.APP_ZIMBRA_DOC = "application/x-zmail-doc";
 ZmDocsEditApp._controller = null;
 
 ZmDocsEditApp.prototype.toString = function(){

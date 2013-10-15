@@ -2,26 +2,26 @@
 # __SPELL
 
 spell: CUR_DEST_ROOT := $(SPELL_DEST_ROOT)
-spell: CUR_PACKAGE_SPEC := $(BUILD_ROOT)/zimbra-spell.spec
-spell: CUR_PACKAGE_NAME := zimbra-spell
+spell: CUR_PACKAGE_SPEC := $(BUILD_ROOT)/zmail-spell.spec
+spell: CUR_PACKAGE_NAME := zmail-spell
 spell: $(PACKAGE_DIR) spell_stage spell_pkg_spec_$(PACKAGE_EXT)
 	(cd $(CUR_DEST_ROOT); \
 		$(PACKAGING_COMMAND) $(PACKAGING_OPTIONS) )
 
 spell_pkg_spec_ccs:
 
-spell_pkg_spec_pkg: $(BUILD_ROOT)/resources/zimbra-spell $(BUILD_ROOT)/zimbra-spell.Info.plist $(BUILD_ROOT)/zimbra-spell.Description.plist
+spell_pkg_spec_pkg: $(BUILD_ROOT)/resources/zmail-spell $(BUILD_ROOT)/zmail-spell.Info.plist $(BUILD_ROOT)/zmail-spell.Description.plist
 
-$(BUILD_ROOT)/zimbra-spell.Description.plist:
-	cat $(PACKAGE_CONF_DIR)/Spec/zimbra-spell.Description.plist | \
+$(BUILD_ROOT)/zmail-spell.Description.plist:
+	cat $(PACKAGE_CONF_DIR)/Spec/zmail-spell.Description.plist | \
 	sed -e 's/@@VERSION@@/$(VERSION_TAG)/' \
 	-e 's/@@RELEASE@@/$(RELEASE)/' \
 	-e 's/@@MAJOR@@/$(MAJOR)/' \
 	-e 's/@@MICRO@@/$(MICRO)/' \
 	-e 's/@@MINOR@@/$(MINOR)/' > $@
 
-$(BUILD_ROOT)/zimbra-spell.Info.plist:
-	cat $(PACKAGE_CONF_DIR)/Spec/zimbra-spell.Info.plist | \
+$(BUILD_ROOT)/zmail-spell.Info.plist:
+	cat $(PACKAGE_CONF_DIR)/Spec/zmail-spell.Info.plist | \
 	sed -e 's/@@VERSION@@/$(VERSION_TAG)/' \
 	-e 's/@@RELEASE@@/$(RELEASE)/' \
 	-e 's/@@MAJOR@@/$(MAJOR)/' \
@@ -29,52 +29,52 @@ $(BUILD_ROOT)/zimbra-spell.Info.plist:
 	-e 's/@@BUILDNUM@@/$(BUILDNUM)/' \
 	-e 's/@@MINOR@@/$(MINOR)/' > $@
 
-$(BUILD_ROOT)/resources/zimbra-spell:
+$(BUILD_ROOT)/resources/zmail-spell:
 	mkdir -p $@
-	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zimbra-spell.postinstall $@/postinstall
+	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zmail-spell.postinstall $@/postinstall
 	chmod 755 $@/postinstall
-	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zimbra-spell.postupgrade $@/postupgrade
+	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zmail-spell.postupgrade $@/postupgrade
 	chmod 755 $@/postupgrade
 
 spell_pkg_spec_deb: $(SPELL_DEST_ROOT)/DEBIAN/control
 
 $(SPELL_DEST_ROOT)/DEBIAN: force
 	mkdir -p $@
-	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zimbra-spell.pre $@/preinst
-	cat $(PACKAGE_CONF_DIR)/Spec/Scripts/zimbra-spell.post >> $@/postinst
+	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zmail-spell.pre $@/preinst
+	cat $(PACKAGE_CONF_DIR)/Spec/Scripts/zmail-spell.post >> $@/postinst
 	chmod 555 $@/*
 
 $(SPELL_DEST_ROOT)/DEBIAN/control: $(SPELL_DEST_ROOT)/DEBIAN force
-	cat $(PACKAGE_CONF_DIR)/Spec/zimbra-spell.deb | \
+	cat $(PACKAGE_CONF_DIR)/Spec/zmail-spell.deb | \
 	sed -e 's/@@VERSION@@/$(VERSION_TAG)/' \
 	-e 's/@@RELEASE@@/$(RELEASE)/' \
 	-e 's/@@ARCH@@/$(ARCH)/' > $@
 
-spell_pkg_spec_rpm: $(BUILD_ROOT)/zimbra-spell.spec
+spell_pkg_spec_rpm: $(BUILD_ROOT)/zmail-spell.spec
 
-$(BUILD_ROOT)/zimbra-spell.spec:
-	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zimbra-spell.pre $(BUILD_ROOT)
-	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zimbra-spell.post $(BUILD_ROOT)
-	cat $(PACKAGE_CONF_DIR)/Spec/zimbra-spell.spec | \
+$(BUILD_ROOT)/zmail-spell.spec:
+	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zmail-spell.pre $(BUILD_ROOT)
+	cp $(PACKAGE_CONF_DIR)/Spec/Scripts/zmail-spell.post $(BUILD_ROOT)
+	cat $(PACKAGE_CONF_DIR)/Spec/zmail-spell.spec | \
 		sed -e 's/@@VERSION@@/$(VERSION_TAG)/' \
 		-e 's/@@RELEASE@@/$(RELEASE)/' \
 		-e 's/^Copyright:/$(RPMCOPYRIGHTSTR):/' \
-		-e '/^%pre$$/ r zimbra-spell.pre' \
-		-e '/^%post$$/ r zimbra-spell.post' > $(BUILD_ROOT)/zimbra-spell.spec
-	rm -f zimbra-spell.pre
-	rm -f zimbra-spell.post
-	echo "%attr(-, zimbra, zimbra) /opt/zimbra/$(APACHE_DIR)/htdocs" >> \
-		$(BUILD_ROOT)/zimbra-spell.spec
-	echo "%attr(-, zimbra, zimbra) /opt/zimbra/$(SPELL_DIR)" >> \
-		$(BUILD_ROOT)/zimbra-spell.spec
-	echo "" >> $(BUILD_ROOT)/zimbra-spell.spec
-	echo "%clean" >> $(BUILD_ROOT)/zimbra-spell.spec
+		-e '/^%pre$$/ r zmail-spell.pre' \
+		-e '/^%post$$/ r zmail-spell.post' > $(BUILD_ROOT)/zmail-spell.spec
+	rm -f zmail-spell.pre
+	rm -f zmail-spell.post
+	echo "%attr(-, zmail, zmail) /opt/zmail/$(APACHE_DIR)/htdocs" >> \
+		$(BUILD_ROOT)/zmail-spell.spec
+	echo "%attr(-, zmail, zmail) /opt/zmail/$(SPELL_DIR)" >> \
+		$(BUILD_ROOT)/zmail-spell.spec
+	echo "" >> $(BUILD_ROOT)/zmail-spell.spec
+	echo "%clean" >> $(BUILD_ROOT)/zmail-spell.spec
 
 spell_stage: $(SPELL_COMPONENTS)
 
-$(SPELL_DEST_DIR)/spell_zimbra_dictionary:
-	rm -f $(SPELL_DEST_DIR)/$(SPELL_DIR)/lib/aspell-0.60/zimbra.rws
-	echo -e "Zimbra\nzimlet\nzimlets\nComcast\nVMware" | DYLD_LIBRARY_PATH=$(SPELL_DEST_DIR)/$(SPELL_DIR)/lib LD_LIBRARY_PATH=$(SPELL_DEST_DIR)/$(SPELL_DIR)/lib $(SPELL_DEST_DIR)/$(SPELL_DIR)/bin/aspell create master --lang=en $(SPELL_DEST_DIR)/$(SPELL_DIR)/lib/aspell-0.60/zimbra.rws
+$(SPELL_DEST_DIR)/spell_zmail_dictionary:
+	rm -f $(SPELL_DEST_DIR)/$(SPELL_DIR)/lib/aspell-0.60/zmail.rws
+	echo -e "Zmail\nzimlet\nzimlets\nComcast\nVMware" | DYLD_LIBRARY_PATH=$(SPELL_DEST_DIR)/$(SPELL_DIR)/lib LD_LIBRARY_PATH=$(SPELL_DEST_DIR)/$(SPELL_DIR)/lib $(SPELL_DEST_DIR)/$(SPELL_DIR)/bin/aspell create master --lang=en $(SPELL_DEST_DIR)/$(SPELL_DIR)/lib/aspell-0.60/zmail.rws
 
 $(SPELL_DEST_DIR):
 	mkdir -p $@

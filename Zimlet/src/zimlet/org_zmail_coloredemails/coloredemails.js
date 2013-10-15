@@ -14,13 +14,13 @@
  *@Author Raja Rao DV
  */
 
-function com_zimbra_coloredemails() {
+function org_zmail_coloredemails() {
 }
 
-com_zimbra_coloredemails.prototype = new ZmZimletBase();
-com_zimbra_coloredemails.prototype.constructor = com_zimbra_coloredemails;
+org_zmail_coloredemails.prototype = new ZmZimletBase();
+org_zmail_coloredemails.prototype.constructor = org_zmail_coloredemails;
 
-com_zimbra_coloredemails.prototype.init =
+org_zmail_coloredemails.prototype.init =
 function() {
 	this.turnColoredEmailsZimletON = this.getUserProperty("turnColoredEmailsZimletON") == "true";
 	this._areVariablesInitialized = false;
@@ -32,7 +32,7 @@ function() {
 	this._resetView();
 };
 
-com_zimbra_coloredemails.prototype._initializeVariables =
+org_zmail_coloredemails.prototype._initializeVariables =
 function() {
 	this._defaultEmail = "joe@sender.com";
 	this._cEmail_manualAddedEmailsArray = [];
@@ -53,7 +53,7 @@ function() {
 	this._areVariablesInitialized = true;
 };
 
-com_zimbra_coloredemails.prototype._saveAutoAddedEmails =
+org_zmail_coloredemails.prototype._saveAutoAddedEmails =
 function() {
 	if (this.uprop_cEmail_autoAddedEmails.split(",").length >= 25) {
 		var tmp = this.uprop_cEmail_autoAddedEmails.split(",");
@@ -68,7 +68,7 @@ function() {
 	this.setUserProperty("cEmail_autoAddedEmails", str, true);
 };
 
-com_zimbra_coloredemails.prototype._setEmails =
+org_zmail_coloredemails.prototype._setEmails =
 function(storeArray, userProp) {
 	var arry = userProp.split(",");
 	for (var i = 0; i < arry.length; i++) {
@@ -93,7 +93,7 @@ function(storeArray, userProp) {
 };
 
 
-com_zimbra_coloredemails.prototype._autoAddEmail =
+org_zmail_coloredemails.prototype._autoAddEmail =
 function(eml) {
 	var colors = [ "#FF0000","#CC6600","#006600","#6600CC","#660000","#009900","#666666","#330000","#663333","#000099","#330033","#CC33CC","#6666CC","#CC9933","#CC0000","#006600"];
 	var randomnumber = Math.floor(Math.random() * colors.length);
@@ -109,7 +109,7 @@ function(eml) {
 };
 
 
-com_zimbra_coloredemails.prototype.onTagAction =
+org_zmail_coloredemails.prototype.onTagAction =
 function(items, tag, doTag) {//basically refreshes the view to reflect new colors
 	if (!this.turnColoredEmailsZimletON)
 		return;
@@ -127,7 +127,7 @@ function(items, tag, doTag) {//basically refreshes the view to reflect new color
 };
 
 
-com_zimbra_coloredemails.prototype._resetView =
+org_zmail_coloredemails.prototype._resetView =
 function() {
 	try {
 		var q = appCtxt.getSearchController().currentSearch.query;
@@ -137,7 +137,7 @@ function() {
 };
 
 
-com_zimbra_coloredemails.prototype.getMailCellStyle =
+org_zmail_coloredemails.prototype.getMailCellStyle =
 function(item, field) {
 	if (!this.turnColoredEmailsZimletON)
 		return null;
@@ -198,15 +198,15 @@ function(item, field) {
 };
 
 
-com_zimbra_coloredemails.prototype.doubleClicked = function() {
+org_zmail_coloredemails.prototype.doubleClicked = function() {
 	this.singleClicked();
 };
 
-com_zimbra_coloredemails.prototype.singleClicked = function() {
+org_zmail_coloredemails.prototype.singleClicked = function() {
 	this._showPreferenceDlg();
 };
 
-com_zimbra_coloredemails.prototype.doDrop =
+org_zmail_coloredemails.prototype.doDrop =
 function(msg) {
 	if(msg instanceof Array)
 		msg = msg[0];
@@ -236,7 +236,7 @@ function(msg) {
 	}
 };
 
-com_zimbra_coloredemails.prototype._showPreferenceDlg = function() {
+org_zmail_coloredemails.prototype._showPreferenceDlg = function() {
 	//if zimlet dialog already exists...
 	if (this._preferenceDialog) {
 		//this._setZimletCurrentPreferences();
@@ -286,7 +286,7 @@ com_zimbra_coloredemails.prototype._showPreferenceDlg = function() {
 };
 
 
-com_zimbra_coloredemails.prototype._createPrefView =
+org_zmail_coloredemails.prototype._createPrefView =
 function() {
 	var html = new Array();
 	var i = 0;
@@ -342,7 +342,7 @@ function() {
 	return html.join("");
 };
 
-com_zimbra_coloredemails.prototype._showHideDetails =
+org_zmail_coloredemails.prototype._showHideDetails =
 function() {
 	var doc = document.getElementById("cEmail_showHideDiv");
 	if (doc.style.display == "none") {
@@ -356,7 +356,7 @@ function() {
 	}
 };
 
-com_zimbra_coloredemails.prototype._addButtonListener =
+org_zmail_coloredemails.prototype._addButtonListener =
 function(showInfoMsg) {
 	var email = document.getElementById("cEmail_emailField").value;
 
@@ -391,7 +391,7 @@ function(showInfoMsg) {
 	}
 };
 
-com_zimbra_coloredemails.prototype._emailAndColorBtnListener =
+org_zmail_coloredemails.prototype._emailAndColorBtnListener =
 function(ev) {
 	document.getElementById("cEmail_exampleEmailTableID").style.color = this._fontColorButton.getColor();
 	document.getElementById("cEmail_exampleEmailTableID").style.backgroundColor = this._fontBackgroundButton.getColor();
@@ -405,7 +405,7 @@ function(ev) {
 	document.getElementById("cEmail_exampleEmailNameTD").innerHTML = email;
 };
 
-com_zimbra_coloredemails.prototype._setZimletCurrentPreferences =
+org_zmail_coloredemails.prototype._setZimletCurrentPreferences =
 function(ev) {
 
 	if (!this._areVariablesInitialized) {
@@ -432,7 +432,7 @@ function(ev) {
 	this._emailAndColorBtnListener();
 };
 
-com_zimbra_coloredemails.prototype._okPreferenceBtnListener =
+org_zmail_coloredemails.prototype._okPreferenceBtnListener =
 function() {
 	this._addButtonListener(false);//people might forget to press Add button, so try to add them
 	this._reloadRequired = false;
@@ -490,9 +490,9 @@ function() {
 	}
 };
 
-com_zimbra_coloredemails.prototype._reloadBrowser =
+org_zmail_coloredemails.prototype._reloadBrowser =
 function() {
 	window.onbeforeunload = null;
 	var url = AjxUtil.formatUrl({});
-	ZmZimbraMail.sendRedirect(url);
+	ZmZmailMail.sendRedirect(url);
 };

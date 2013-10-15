@@ -13,14 +13,14 @@
  * ***** END LICENSE BLOCK *****
 --%>
 <%@ tag body-content="empty" %>
-<%@ attribute name="folder" rtexprvalue="true" required="true" type="com.zimbra.cs.taglib.bean.ZFolderBean" %>
+<%@ attribute name="folder" rtexprvalue="true" required="true" type="org.zmail.cs.taglib.bean.ZFolderBean" %>
 <%@ attribute name="base" rtexprvalue="true" required="false" %>
 <%@ attribute name="types" rtexprvalue="true" required="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>                                                
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
-<%@ taglib prefix="mo" uri="com.zimbra.mobileclient" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
+<%@ taglib prefix="mo" uri="org.zmail.mobileclient" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
 <c:set var="label" value="${zm:getFolderPath(pageContext, folder.id)}"/>
 <c:set var="truncatedLabel" value="${zm:getTruncatedFolderPath(pageContext, folder.id, 20, true)}"/>
 <c:choose>

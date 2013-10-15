@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.backup;
+package org.zmail.cs.offline.backup;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,13 +21,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.offline.OfflineProvisioning;
-import com.zimbra.cs.offline.OfflineLC;
-import com.zimbra.cs.offline.OfflineLog;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.offline.OfflineProvisioning;
+import org.zmail.cs.offline.OfflineLC;
+import org.zmail.cs.offline.OfflineLog;
 
 public class BackupPropertyManager {
     
@@ -55,7 +55,7 @@ public class BackupPropertyManager {
      * @throws ServiceException
      */
     public long getInterval() throws ServiceException {
-        return getLongAttr(OfflineProvisioning.A_zimbraPrefOfflineBackupInterval);
+        return getLongAttr(OfflineProvisioning.A_zmailPrefOfflineBackupInterval);
     }
 
     /**
@@ -83,7 +83,7 @@ public class BackupPropertyManager {
      * @throws ServiceException
      */
     public String[] getBackupAccounts() throws ServiceException {
-        String[] acctAttr = OfflineProvisioning.getOfflineInstance().getLocalAccount().getMultiAttr(OfflineProvisioning.A_zimbraPrefOfflineBackupAccountId);
+        String[] acctAttr = OfflineProvisioning.getOfflineInstance().getLocalAccount().getMultiAttr(OfflineProvisioning.A_zmailPrefOfflineBackupAccountId);
         if (acctAttr.length == 1) {
             return acctAttr[0].split(",");
         } else {
@@ -97,9 +97,9 @@ public class BackupPropertyManager {
      */
     public String getBackupPath() throws ServiceException {
         Account localAccount = OfflineProvisioning.getOfflineInstance().getLocalAccount();
-        String path = localAccount.getAttr(OfflineProvisioning.A_zimbraPrefOfflineBackupPath);
+        String path = localAccount.getAttr(OfflineProvisioning.A_zmailPrefOfflineBackupPath);
         if (path == null || path.length() < 1) {
-            throw ServiceException.FAILURE("Account backup output path not set; please configure "+OfflineProvisioning.A_zimbraPrefOfflineBackupPath, null);
+            throw ServiceException.FAILURE("Account backup output path not set; please configure "+OfflineProvisioning.A_zmailPrefOfflineBackupPath, null);
         } else {
             return path;
         }
@@ -112,7 +112,7 @@ public class BackupPropertyManager {
      */
     public int getBackupsToKeep() throws ServiceException {
         Account localAccount = OfflineProvisioning.getOfflineInstance().getLocalAccount();
-        String keepStr = localAccount.getAttr(OfflineProvisioning.A_zimbraPrefOfflineBackupKeep);
+        String keepStr = localAccount.getAttr(OfflineProvisioning.A_zmailPrefOfflineBackupKeep);
         int val = 1;
         if (keepStr != null && keepStr.length() > 0) {
             val = Integer.parseInt(keepStr);
@@ -133,23 +133,23 @@ public class BackupPropertyManager {
     public void testAndSetDefaultBackupPath() throws ServiceException {
         OfflineProvisioning prov = OfflineProvisioning.getOfflineInstance();
         Account localAccount = prov.getLocalAccount();
-        String backupPath = localAccount.getAttr(OfflineProvisioning.A_zimbraPrefOfflineBackupPath);
+        String backupPath = localAccount.getAttr(OfflineProvisioning.A_zmailPrefOfflineBackupPath);
         if (backupPath == null) {
-            prov.setAccountAttribute(localAccount, OfflineProvisioning.A_zimbraPrefOfflineBackupPath, getDefaultBackupPath());
+            prov.setAccountAttribute(localAccount, OfflineProvisioning.A_zmailPrefOfflineBackupPath, getDefaultBackupPath());
         } else {
             try {
                 validateBackupPath(backupPath);
             } catch (ServiceException se) {
                 OfflineLog.offline.warn("Current backup path is invalid; setting to default", se);
-                prov.setAccountAttribute(localAccount, OfflineProvisioning.A_zimbraPrefOfflineBackupPath, getDefaultBackupPath());
+                prov.setAccountAttribute(localAccount, OfflineProvisioning.A_zmailPrefOfflineBackupPath, getDefaultBackupPath());
             }
         }
     }
     
     public void validateBackupPath(String backupPath) throws ServiceException {
         File testDir = new File((String) backupPath);
-        if (testDir.getPath().indexOf(LC.zimbra_home.value()) == 0) {
-            throw ServiceException.INVALID_REQUEST("Backups path "+testDir+" may not be placed under Zimbra Desktop data dir "+LC.zimbra_home.value(), null);
+        if (testDir.getPath().indexOf(LC.zmail_home.value()) == 0) {
+            throw ServiceException.INVALID_REQUEST("Backups path "+testDir+" may not be placed under Zmail Desktop data dir "+LC.zmail_home.value(), null);
         }
         if (!testDir.exists()) {
             if (!testDir.mkdirs()) {

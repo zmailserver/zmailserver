@@ -13,21 +13,21 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.datasource.offline;
+package org.zmail.cs.datasource.offline;
 
-import com.zimbra.soap.admin.type.DataSourceType;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.DataSource.DataImport;
-import com.zimbra.cs.account.offline.OfflineDataSource;
-import com.zimbra.cs.datasource.DataSourceManager;
-import com.zimbra.cs.mailbox.Flag;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.offline.GMailImport;
-import com.zimbra.cs.offline.OfflineImport;
-import com.zimbra.cs.offline.YMailImport;
-import com.zimbra.cs.offline.ab.yc.YContactImport;
+import org.zmail.soap.admin.type.DataSourceType;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.DataSource.DataImport;
+import org.zmail.cs.account.offline.OfflineDataSource;
+import org.zmail.cs.datasource.DataSourceManager;
+import org.zmail.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.offline.GMailImport;
+import org.zmail.cs.offline.OfflineImport;
+import org.zmail.cs.offline.YMailImport;
+import org.zmail.cs.offline.ab.yc.YContactImport;
 
 
 public class OfflineDataSourceManager extends DataSourceManager {

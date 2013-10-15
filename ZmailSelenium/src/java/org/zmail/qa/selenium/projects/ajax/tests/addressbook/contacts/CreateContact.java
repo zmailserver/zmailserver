@@ -14,20 +14,20 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.addressbook.contacts;
+package org.zmail.qa.selenium.projects.ajax.tests.addressbook.contacts;
 
 import java.util.*;
 import java.util.Map.Entry;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.ContactItem;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.addressbook.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.addressbook.FormContactNew.Field;
+import org.zmail.qa.selenium.framework.items.ContactItem;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.*;
+import org.zmail.qa.selenium.projects.ajax.ui.addressbook.*;
+import org.zmail.qa.selenium.projects.ajax.ui.addressbook.FormContactNew.Field;
 
 
 //TODO: add more in ContactItem.java
@@ -54,9 +54,9 @@ public class CreateContact extends AjaxCommonTest  {
 		
 		//-- DATA
 		
-		String contactFirst = "First" + ZimbraSeleniumProperties.getUniqueString();
-		String contactLast = "Last"+ ZimbraSeleniumProperties.getUniqueString();
-		String contactEmail = "email"+ ZimbraSeleniumProperties.getUniqueString() + "@domain.com";
+		String contactFirst = "First" + ZmailSeleniumProperties.getUniqueString();
+		String contactLast = "Last"+ ZmailSeleniumProperties.getUniqueString();
+		String contactEmail = "email"+ ZmailSeleniumProperties.getUniqueString() + "@domain.com";
 		
 		
 		
@@ -76,7 +76,7 @@ public class CreateContact extends AjaxCommonTest  {
 		//-- Data Verification
 		
 		app.zGetActiveAccount().soapSend(
-					"<SearchRequest xmlns='urn:zimbraMail' types='contact'>"
+					"<SearchRequest xmlns='urn:zmailMail' types='contact'>"
 				+		"<query>#firstname:"+ contactFirst +"</query>"
 				+	"</SearchRequest>");
 		String contactId = app.zGetActiveAccount().soapSelectValue("//mail:cn", "id");
@@ -84,7 +84,7 @@ public class CreateContact extends AjaxCommonTest  {
 		ZAssert.assertNotNull(contactId, "Verify the contact is returned in the search");
 		
 		app.zGetActiveAccount().soapSend(
-				"<GetContactsRequest xmlns='urn:zimbraMail'>"
+				"<GetContactsRequest xmlns='urn:zmailMail'>"
 			+		"<cn id='"+ contactId +"'/>"
 			+	"</GetContactsRequest>");
 	
@@ -105,9 +105,9 @@ public class CreateContact extends AjaxCommonTest  {
 		
 		//-- DATA
 		ContactItem contact = new ContactItem();
-		contact.firstName = "First" + ZimbraSeleniumProperties.getUniqueString();
-		contact.lastName = "Last"+ ZimbraSeleniumProperties.getUniqueString();
-		contact.email = "email"+ ZimbraSeleniumProperties.getUniqueString() + "@domain.com";
+		contact.firstName = "First" + ZmailSeleniumProperties.getUniqueString();
+		contact.lastName = "Last"+ ZmailSeleniumProperties.getUniqueString();
+		contact.email = "email"+ ZmailSeleniumProperties.getUniqueString() + "@domain.com";
 		
 		
 		
@@ -142,9 +142,9 @@ public class CreateContact extends AjaxCommonTest  {
 		//-- DATA
 
 		ContactItem contact = new ContactItem();
-		contact.firstName = "First" + ZimbraSeleniumProperties.getUniqueString();
-		contact.lastName = "Last"+ ZimbraSeleniumProperties.getUniqueString();
-		contact.email = "email"+ ZimbraSeleniumProperties.getUniqueString() + "@domain.com";
+		contact.firstName = "First" + ZmailSeleniumProperties.getUniqueString();
+		contact.lastName = "Last"+ ZmailSeleniumProperties.getUniqueString();
+		contact.email = "email"+ ZmailSeleniumProperties.getUniqueString() + "@domain.com";
 
 		
 		//-- GUI action
@@ -185,9 +185,9 @@ public class CreateContact extends AjaxCommonTest  {
 		//-- DATA
 
 		ContactItem contact = new ContactItem();
-		contact.firstName = "First" + ZimbraSeleniumProperties.getUniqueString();
-		contact.lastName = "Last"+ ZimbraSeleniumProperties.getUniqueString();
-		contact.email = "email"+ ZimbraSeleniumProperties.getUniqueString() + "@domain.com";
+		contact.firstName = "First" + ZmailSeleniumProperties.getUniqueString();
+		contact.lastName = "Last"+ ZmailSeleniumProperties.getUniqueString();
+		contact.email = "email"+ ZmailSeleniumProperties.getUniqueString() + "@domain.com";
 
 		
 		//-- GUI action
@@ -219,9 +219,9 @@ public class CreateContact extends AjaxCommonTest  {
 		//-- DATA
 
 		ContactItem contact = new ContactItem();
-		contact.firstName = "First" + ZimbraSeleniumProperties.getUniqueString();
-		contact.lastName = "Last"+ ZimbraSeleniumProperties.getUniqueString();
-		contact.email = "email"+ ZimbraSeleniumProperties.getUniqueString() + "@domain.com";
+		contact.firstName = "First" + ZmailSeleniumProperties.getUniqueString();
+		contact.lastName = "Last"+ ZmailSeleniumProperties.getUniqueString();
+		contact.email = "email"+ ZmailSeleniumProperties.getUniqueString() + "@domain.com";
 
 		
 		//-- GUI action
@@ -260,30 +260,30 @@ public class CreateContact extends AjaxCommonTest  {
 		
 		//-- Data
 		
-		String firstname = "first" + ZimbraSeleniumProperties.getUniqueString();
+		String firstname = "first" + ZmailSeleniumProperties.getUniqueString();
 
 		// Create a contact Item
 		HashMap<String, String> attributes = new HashMap<String, String>();
 		attributes.put("firstName", firstname);
-		attributes.put("lastName", "lastname" + ZimbraSeleniumProperties.getUniqueString());
-		attributes.put("email", "email" + ZimbraSeleniumProperties.getUniqueString() + "@zimbra.com");
-		attributes.put("company", "company" + ZimbraSeleniumProperties.getUniqueString());
-		attributes.put("middleName", "middleName" + ZimbraSeleniumProperties.getUniqueString());
-		attributes.put("nickname", "nickname" + ZimbraSeleniumProperties.getUniqueString());
+		attributes.put("lastName", "lastname" + ZmailSeleniumProperties.getUniqueString());
+		attributes.put("email", "email" + ZmailSeleniumProperties.getUniqueString() + "@zmail.com");
+		attributes.put("company", "company" + ZmailSeleniumProperties.getUniqueString());
+		attributes.put("middleName", "middleName" + ZmailSeleniumProperties.getUniqueString());
+		attributes.put("nickname", "nickname" + ZmailSeleniumProperties.getUniqueString());
 		attributes.put("nameSuffix", "Sr");
 		attributes.put("namePrefix", "Mr");
-		attributes.put("department", "department" + ZimbraSeleniumProperties.getUniqueString());
-		attributes.put("jobTitle", "jobTitle" + ZimbraSeleniumProperties.getUniqueString());
+		attributes.put("department", "department" + ZmailSeleniumProperties.getUniqueString());
+		attributes.put("jobTitle", "jobTitle" + ZmailSeleniumProperties.getUniqueString());
 		attributes.put("homeStreet", "123 Main St.");
 		attributes.put("homeCity", "Anytown");
 		attributes.put("homeCountry", "USA");
 		attributes.put("homePostalCode", "95124");
 		attributes.put("birthday", "1985-05-24");
-		attributes.put("notes", "notes" + ZimbraSeleniumProperties.getUniqueString());
-		attributes.put("maidenName", "maidenName" + ZimbraSeleniumProperties.getUniqueString());
+		attributes.put("notes", "notes" + ZmailSeleniumProperties.getUniqueString());
+		attributes.put("maidenName", "maidenName" + ZmailSeleniumProperties.getUniqueString());
 //		attributes.put("mobilePhone", "1-408-555-1212");
 		attributes.put("imAddress1", "free2rhyme@yahoo.com");
-		attributes.put("homeURL", "http://www.zimbra.com");
+		attributes.put("homeURL", "http://www.zmail.com");
 		
 		
 

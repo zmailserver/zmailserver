@@ -19,8 +19,8 @@ displayLicense() {
   echo ""
   if [ -f ${MYDIR}/docs/zcl.txt ]; then
     cat $MYDIR/docs/zcl.txt
-  elif [ -f ${MYDIR}/docs/zimbra_network_eula.txt ]; then
-    cat ${MYDIR}/docs/zimbra_network_eula.txt
+  elif [ -f ${MYDIR}/docs/zmail_network_eula.txt ]; then
+    cat ${MYDIR}/docs/zmail_network_eula.txt
   fi
   echo ""
   echo ""
@@ -262,23 +262,23 @@ checkUser() {
 }
 
 checkMySQLConfig() {
-  isInstalled zimbra-store
+  isInstalled zmail-store
   if [ x$PKGINSTALLED != "x" ]; then
-    if [ -f "/opt/zimbra/conf/my.cnf" ]; then
-      BIND_ADDR=`awk '{ if ( $1 ~ /^bind-address$/ ) { print $3 } }' /opt/zimbra/conf/my.cnf`
+    if [ -f "/opt/zmail/conf/my.cnf" ]; then
+      BIND_ADDR=`awk '{ if ( $1 ~ /^bind-address$/ ) { print $3 } }' /opt/zmail/conf/my.cnf`
       while [ "${BIND_ADDR}x" != "127.0.0.1x" -a "${BIND_ADDR}x" != "localhostx" ]; do
         echo "The MySQL bind address is currently not set to \"localhost\" or \"127.0.0.1\".  Due to a"
         echo "MySQL bug (#61713), the MySQL bind address must be set to \"127.0.0.1\".  Please correct"
-        echo "the bind-address entry in the \"/opt/zimbra/conf/my.cnf\" file to proceed with the upgrade."
+        echo "the bind-address entry in the \"/opt/zmail/conf/my.cnf\" file to proceed with the upgrade."
         askYN "Retry validation? (Y/N)?" "Y"
         if [ $response = "no" ]; then
           break
         fi
-        BIND_ADDR=`awk '{ if ( $1 ~ /^bind-address$/ ) { print $3 } }' /opt/zimbra/conf/my.cnf`
+        BIND_ADDR=`awk '{ if ( $1 ~ /^bind-address$/ ) { print $3 } }' /opt/zmail/conf/my.cnf`
       done
       if [ "${BIND_ADDR}x" != "127.0.0.1x" -a "${BIND_ADDR}x" != "localhostx" ]; then
         echo ""
-        echo "It is recommended that the bind-address setting in the /opt/zimbra/conf/my.cnf file be set"
+        echo "It is recommended that the bind-address setting in the /opt/zmail/conf/my.cnf file be set"
         echo "to \"127.0.0.1\".  The current setting of \"${BIND_ADDR}\" is not supported within"
         echo "ZCS and may cause the installation to fail."
         askYN "Proceed with installation? (Y/N)?" "N"
@@ -299,9 +299,9 @@ checkDatabaseIntegrity() {
     return
   fi
 
-	isInstalled zimbra-store
+	isInstalled zmail-store
 	if [ x$PKGINSTALLED != "x" ]; then
-		if [ -x "bin/zmdbintegrityreport" -a -x "/opt/zimbra/bin/mysqladmin" ]; then
+		if [ -x "bin/zmdbintegrityreport" -a -x "/opt/zmail/bin/mysqladmin" ]; then
 			while :; do
 				if [ x$DEFAULTFILE = "x" ]; then
 					askYN "Do you want to verify message store database integrity?" "Y"
@@ -312,11 +312,11 @@ checkDatabaseIntegrity() {
 					break
 				fi
 				echo "Verifying integrity of message store databases.  This may take a while."
-				su - zimbra -c "/opt/zimbra/bin/mysqladmin -s ping" 2>/dev/null
+				su - zmail -c "/opt/zmail/bin/mysqladmin -s ping" 2>/dev/null
 				if [ $? != 0 ]; then
-					su - zimbra -c "/opt/zimbra/bin/mysql.server start" 2> /dev/null
+					su - zmail -c "/opt/zmail/bin/mysql.server start" 2> /dev/null
 					for ((i = 0; i < 60; i++)) do
-						su - zimbra -c "/opt/zimbra/bin/mysqladmin -s ping" 2>/dev/null
+						su - zmail -c "/opt/zmail/bin/mysqladmin -s ping" 2>/dev/null
 						if [ $? = 0 ]; then
 							SQLSTARTED=1
 							break
@@ -324,14 +324,14 @@ checkDatabaseIntegrity() {
 						sleep 2
 					done
 				fi
-				perl -I/opt/zimbra/zimbramon/lib bin/zmdbintegrityreport -v -r
+				perl -I/opt/zmail/zmailmon/lib bin/zmdbintegrityreport -v -r
 				MAILBOXDBINTEGRITYSTATUS=$?
 				if [ x"$SQLSTARTED" != "x" ]; then
-					su - zimbra -c "/opt/zimbra/bin/mysqladmin -s ping" 2>/dev/null
+					su - zmail -c "/opt/zmail/bin/mysqladmin -s ping" 2>/dev/null
 					if [ $? = 0 ]; then
-						su - zimbra -c "/opt/zimbra/bin/mysql.server stop" 2> /dev/null
+						su - zmail -c "/opt/zmail/bin/mysql.server stop" 2> /dev/null
 						for ((i = 0; i < 60; i++)) do
-							su - zimbra -c "/opt/zimbra/bin/mysqladmin -s ping" 2>/dev/null
+							su - zmail -c "/opt/zmail/bin/mysqladmin -s ping" 2>/dev/null
 							if [ $? != 0 ]; then
 								break
 							fi
@@ -354,7 +354,7 @@ checkRecentBackup() {
     return
   fi
 
-  isInstalled zimbra-store
+  isInstalled zmail-store
   if [ x$PKGINSTALLED != "x" ]; then
     if [ -x "bin/checkValidBackup" ]; then
       echo "Checking for a recent backup"
@@ -464,7 +464,7 @@ checkRequired() {
 
   127.0.0.1 localhost.localdomain localhost
 
-  Zimbra install grants mysql permissions only to localhost and
+  Zmail install grants mysql permissions only to localhost and
   localhost.localdomain users.  But Fedora/RH installs leave lines such
   as these in /etc/hosts:
 
@@ -589,7 +589,7 @@ EOF
     echo "###WARNING###"
     echo ""
     echo "The suggested version of one or more packages is not installed."
-    echo "This could cause problems with the operation of Zimbra."
+    echo "This could cause problems with the operation of Zmail."
     while :; do
      askYN "Do you wish to continue?" "N"
      if [ $response = "no" ]; then
@@ -620,16 +620,16 @@ EOF
 
 
   # limitation of ext3
-  if [ -d "/opt/zimbra/db/data" ]; then
+  if [ -d "/opt/zmail/db/data" ]; then
     echo "Checking current number of databases..."
-    FS_TYPE=`df -T /opt/zimbra/db/data | awk '{ if (NR == 2) { print $2 } }'`
+    FS_TYPE=`df -T /opt/zmail/db/data | awk '{ if (NR == 2) { print $2 } }'`
     if [ "${FS_TYPE}"x = "ext3"x ]; then
-      DBCOUNT=`find /opt/zimbra/db/data -type d | wc -l | awk '{if ($NF-1 >= 31998) print $NF-1}'`
+      DBCOUNT=`find /opt/zmail/db/data -type d | wc -l | awk '{if ($NF-1 >= 31998) print $NF-1}'`
       if [ x"$DBCOUNT" != "x" ]; then
         echo "You have $DBCOUNT databases on an ext3 FileSystem, which is at"
         echo "or over the limit of 31998 databases. You will need to delete at"
         echo "least one database prior to upgrading or your upgrade will fail."
-        echo "/opt/zimbra/db/data/test is a good candidate for removal."
+        echo "/opt/zmail/db/data/test is a good candidate for removal."
         exit 1
       fi
     fi
@@ -646,8 +646,8 @@ EOF
 
 checkRequiredSpace() {
   # /tmp must have 100MB
-  # /opt/zimbra must have 5GB
-  echo "Checking required space for zimbra-core"
+  # /opt/zmail must have 5GB
+  echo "Checking required space for zmail-core"
   TMPKB=`df -Pk /tmp | tail -1 | awk '{print $4}'`
   AVAIL=$(($TMPKB / 1024))
   if [ $AVAIL -lt  100 ]; then
@@ -656,14 +656,14 @@ checkRequiredSpace() {
     GOOD=no
   fi
  
-  isInstalled zimbra-store
-  isToBeInstalled zimbra-store
+  isInstalled zmail-store
+  isToBeInstalled zmail-store
   if [ "x$PKGINSTALLED" != "x" -o "x$PKGTOBEINSTALLED" != "x" ]; then
-    echo "Checking space for zimbra-store"
-    ZIMBRA=`df -Pk /opt/zimbra | tail -1 | awk '{print $4}'`
+    echo "Checking space for zmail-store"
+    ZIMBRA=`df -Pk /opt/zmail | tail -1 | awk '{print $4}'`
     AVAIL=$(($ZIMBRA / 1048576))
     if [ $AVAIL -lt 5 ]; then
-      echo "/opt/zimbra requires at least 5GB of space to install."
+      echo "/opt/zmail requires at least 5GB of space to install."
       echo "${AVAIL}GB is not enough space to install."
       GOOD=no
     fi
@@ -686,8 +686,8 @@ checkExistingInstall() {
 
   echo $PLATFORM | egrep -q "UBUNTU|DEBIAN"
   if [ $? = 0 ]; then
-    if [ -L /opt -o -L /opt/zimbra ]; then
-      echo "Installation cannot continue if either /opt or /opt/zimbra are symbolic links."
+    if [ -L /opt -o -L /opt/zmail ]; then
+      echo "Installation cannot continue if either /opt or /opt/zmail are symbolic links."
       exit 1
     fi
   fi
@@ -708,10 +708,10 @@ checkExistingInstall() {
       INSTALLED="yes"
       INSTALLED_PACKAGES="$INSTALLED_PACKAGES $i"
     else
-      if [ x$i = "xzimbra-archiving" ]; then
-        if [ -f "/opt/zimbra/lib/ext/zimbra_xmbxsearch/zimbra_xmbxsearch.jar" -a -f "/opt/zimbra/zimlets-network/zimbra_xmbxsearch.zip" ]; then
-          echo "FOUND zimbra-cms"
-          INSTALLED_PACKAGES="$INSTALLED_PACKAGES zimbra-archiving"
+      if [ x$i = "xzmail-archiving" ]; then
+        if [ -f "/opt/zmail/lib/ext/zmail_xmbxsearch/zmail_xmbxsearch.jar" -a -f "/opt/zmail/zimlets-network/zmail_xmbxsearch.zip" ]; then
+          echo "FOUND zmail-cms"
+          INSTALLED_PACKAGES="$INSTALLED_PACKAGES zmail-archiving"
         else 
           echo "NOT FOUND"
         fi
@@ -734,10 +734,10 @@ checkExistingInstall() {
 
 determineVersionType() {
 
-  isInstalled zimbra-core
+  isInstalled zmail-core
   if [ x"$PKGINSTALLED" != "x" ]; then
-    export ZMVERSION_CURRENT=`echo $PKGVERSION | sed s/^zimbra-core-//`
-    if [ -f "/opt/zimbra/bin/zmbackupquery" ]; then
+    export ZMVERSION_CURRENT=`echo $PKGVERSION | sed s/^zmail-core-//`
+    if [ -f "/opt/zmail/bin/zmbackupquery" ]; then
       ZMTYPE_CURRENT="NETWORK"
     else 
       ZMTYPE_CURRENT="FOSS"
@@ -754,23 +754,23 @@ determineVersionType() {
 
   # need way to determine type for other package types
   if [ "x$PACKAGEEXT" = "xrpm" ]; then
-    if [ x"`rpm --qf '%{description}' -qp ./packages/zimbra-core* | grep Network`" = "x" ]; then
+    if [ x"`rpm --qf '%{description}' -qp ./packages/zmail-core* | grep Network`" = "x" ]; then
       ZMTYPE_INSTALLABLE="FOSS"
     else 
       ZMTYPE_INSTALLABLE="NETWORK"
     fi
   elif [ "x$PACKAGEEXT" = "xdeb" ]; then
-    if [ x"`dpkg -f ./packages/zimbra-core* Description | grep Network`" = "x" ]; then
+    if [ x"`dpkg -f ./packages/zmail-core* Description | grep Network`" = "x" ]; then
       ZMTYPE_INSTALLABLE="FOSS"
     else 
       ZMTYPE_INSTALLABLE="NETWORK"
     fi
   fi
-  ZM_INST_MAJOR=$(perl -e '$v=glob("packages/zimbra-core*"); $v =~ s/^packages\/zimbra-core[-_]//; $v =~ s/^(\d+\.\d+\.[^_]*_[^_]+_[^.]+).*/\1/; ($maj,$min,$mic) = $v =~ m/^(\d+)\.(\d+)\.(\d+)/; print "$maj\n"') 
-  ZM_INST_MINOR=$(perl -e '$v=glob("packages/zimbra-core*"); $v =~ s/^packages\/zimbra-core[-_]//; $v =~ s/^(\d+\.\d+\.[^_]*_[^_]+_[^.]+).*/\1/; ($maj,$min,$mic) = $v =~ m/^(\d+)\.(\d+)\.(\d+)/; print "$min\n"') 
-  ZM_INST_MICRO=$(perl -e '$v=glob("packages/zimbra-core*"); $v =~ s/^packages\/zimbra-core[-_]//; $v =~ s/^(\d+\.\d+\.[^_]*_[^_]+_[^.]+).*/\1/; ($maj,$min,$mic) = $v =~ m/^(\d+)\.(\d+)\.(\d+)/; print "$mic\n"') 
-  ZM_INST_RTYPE=$(perl -e '$v=glob("packages/zimbra-core*"); $v =~ s/^packages\/zimbra-core[-_]//; $v =~ s/^(\d+\.\d+\.[^_]*_[^_]+_[^.]+).*/\1/; ($maj,$min,$mic,$rtype,$build) = $v =~ m/^(\d+)\.(\d+)\.(\d+)\.(\w+)\.(\d+)/; ($maj,$min,$mic,$rtype,$build) = $v =~ m/(\d+)\.(\d+)\.(\d+)_(\w+[^_])_(\d+)/ if ($rtype eq ""); print "$rtype\n";')
-  ZM_INST_BUILD=$(perl -e '$v=glob("packages/zimbra-core*"); $v =~ s/^packages\/zimbra-core[-_]//; $v =~ s/^(\d+\.\d+\.[^_]*_[^_]+_[^.]+).*/\1/; ($maj,$min,$mic,$rtype,$build) = $v =~ m/^(\d+)\.(\d+)\.(\d+)\.(\w+)\.(\d+)/; ($maj,$min,$mic,$rtype,$build) = $v =~ m/(\d+)\.(\d+)\.(\d+)_(\w+[^_])_(\d+)/ if ($rtype eq ""); print "$build\n";')
+  ZM_INST_MAJOR=$(perl -e '$v=glob("packages/zmail-core*"); $v =~ s/^packages\/zmail-core[-_]//; $v =~ s/^(\d+\.\d+\.[^_]*_[^_]+_[^.]+).*/\1/; ($maj,$min,$mic) = $v =~ m/^(\d+)\.(\d+)\.(\d+)/; print "$maj\n"') 
+  ZM_INST_MINOR=$(perl -e '$v=glob("packages/zmail-core*"); $v =~ s/^packages\/zmail-core[-_]//; $v =~ s/^(\d+\.\d+\.[^_]*_[^_]+_[^.]+).*/\1/; ($maj,$min,$mic) = $v =~ m/^(\d+)\.(\d+)\.(\d+)/; print "$min\n"') 
+  ZM_INST_MICRO=$(perl -e '$v=glob("packages/zmail-core*"); $v =~ s/^packages\/zmail-core[-_]//; $v =~ s/^(\d+\.\d+\.[^_]*_[^_]+_[^.]+).*/\1/; ($maj,$min,$mic) = $v =~ m/^(\d+)\.(\d+)\.(\d+)/; print "$mic\n"') 
+  ZM_INST_RTYPE=$(perl -e '$v=glob("packages/zmail-core*"); $v =~ s/^packages\/zmail-core[-_]//; $v =~ s/^(\d+\.\d+\.[^_]*_[^_]+_[^.]+).*/\1/; ($maj,$min,$mic,$rtype,$build) = $v =~ m/^(\d+)\.(\d+)\.(\d+)\.(\w+)\.(\d+)/; ($maj,$min,$mic,$rtype,$build) = $v =~ m/(\d+)\.(\d+)\.(\d+)_(\w+[^_])_(\d+)/ if ($rtype eq ""); print "$rtype\n";')
+  ZM_INST_BUILD=$(perl -e '$v=glob("packages/zmail-core*"); $v =~ s/^packages\/zmail-core[-_]//; $v =~ s/^(\d+\.\d+\.[^_]*_[^_]+_[^.]+).*/\1/; ($maj,$min,$mic,$rtype,$build) = $v =~ m/^(\d+)\.(\d+)\.(\d+)\.(\w+)\.(\d+)/; ($maj,$min,$mic,$rtype,$build) = $v =~ m/(\d+)\.(\d+)\.(\d+)_(\w+[^_])_(\d+)/ if ($rtype eq ""); print "$build\n";')
 
   if [ x"$AUTOINSTALL" = "xyes" ]; then
     return
@@ -784,8 +784,8 @@ determineVersionType() {
   if [ x"$ZMTYPE_CURRENT" = "xNETWORK" ] && [ x"$ZMTYPE_INSTALLABLE" = "xFOSS" ]; then
     echo "Warning: You are about to upgrade from the Network Edition to the"
     echo "Open Source Edition.  This will remove all Network features, including" 
-    echo "Attachment Searching, Zimbra Mobile, Backup/Restore, and support for the "
-    echo "Zimbra Connector for Outlook."
+    echo "Attachment Searching, Zmail Mobile, Backup/Restore, and support for the "
+    echo "Zmail Connector for Outlook."
     while :; do
      askYN "Do you wish to continue?" "N"
      if [ $response = "no" ]; then
@@ -809,7 +809,7 @@ determineVersionType() {
           echo "Upgrades from $ZMVERSION_CURRENT are not supported."
           exit 1
         else
-          echo "Support for developer versions of ZCS maybe limited to bugzilla and Zimbra forums."
+          echo "Support for developer versions of ZCS maybe limited to bugzilla and Zmail forums."
           #echo "Installing non-GA versions in production is not recommended."
           while :; do
             askYN "Do you wish to continue?" "N"
@@ -841,7 +841,7 @@ verifyLicenseActivationServer() {
   fi
 
   # make sure this is an upgrade
-  isInstalled zimbra-store
+  isInstalled zmail-store
   if [ x$PKGINSTALLED = "x" ]; then
     return
   fi
@@ -853,33 +853,33 @@ verifyLicenseActivationServer() {
 
   # if we specify an activation presume its valid
   if [ x"$ACTIVATION" != "x" ] && [ -e $ACTIVATION ]; then
-    if [ ! -d "/opt/zimbra/conf" ]; then
-      mkdir -p /opt/zimbra/conf
+    if [ ! -d "/opt/zmail/conf" ]; then
+      mkdir -p /opt/zmail/conf
     fi
-    cp -f $ACTIVATION /opt/zimbra/conf/ZCSLicense-activated.xml
-    chown zimbra:zimbra /opt/zimbra/conf/ZCSLicense-activated.xml
-    chmod 444 /opt/zimbra/conf/ZCSLicense-activated.xml
+    cp -f $ACTIVATION /opt/zmail/conf/ZCSLicense-activated.xml
+    chown zmail:zmail /opt/zmail/conf/ZCSLicense-activated.xml
+    chmod 444 /opt/zmail/conf/ZCSLicense-activated.xml
     return
   fi
 
   # if all else fails make sure we can contact the activation server for automated activation
   if [ ${ZM_CUR_MAJOR} -ge "7" ]; then
     if [ ${ZM_CUR_MAJOR} -eq "7" -a ${ZM_CUR_MINOR} -ge "1" ]; then
-      /opt/zimbra/bin/zmlicense --ping > /dev/null 2>&1
+      /opt/zmail/bin/zmlicense --ping > /dev/null 2>&1
     elif [ ${ZM_CUR_MAJOR} -gt "7" ]; then
-      /opt/zimbra/bin/zmlicense --ping > /dev/null 2>&1
+      /opt/zmail/bin/zmlicense --ping > /dev/null 2>&1
     else 
-      /opt/zimbra/java/bin/java -XX:ErrorFile=/opt/zimbra/log -client -Xmx256m -Dzimbra.home=/opt/zimbra -Djava.library.path=/opt/zimbra/lib -Djava.ext.dirs=/opt/zimbra/java/jre/lib/ext:/opt/zimbra/lib/jars -classpath ./lib/jars/zimbra-license-tools.jar com.zimbra.cs.license.LicenseCLI --ping > /dev/null 2>&1
+      /opt/zmail/java/bin/java -XX:ErrorFile=/opt/zmail/log -client -Xmx256m -Dzmail.home=/opt/zmail -Djava.library.path=/opt/zmail/lib -Djava.ext.dirs=/opt/zmail/java/jre/lib/ext:/opt/zmail/lib/jars -classpath ./lib/jars/zmail-license-tools.jar org.zmail.cs.license.LicenseCLI --ping > /dev/null 2>&1
     fi
     if [ $? != 0 ]; then
       activationWarning
     fi
   else
-    echo $HOSTNAME | egrep -qe 'vmware.com$|zimbra.com$' > /dev/null 2>&1
+    echo $HOSTNAME | egrep -qe 'vmware.com$|zmail.com$' > /dev/null 2>&1
     if [ $? = 0 ]; then
-      url='https://zimbra-stage-license-vip.vmware.com/zimbraLicensePortal/public/activation?action=test'
+      url='https://zmail-stage-license-vip.vmware.org/zmailLicensePortal/public/activation?action=test'
     else 
-      url='https://license.zimbra.com/zimbraLicensePortal/public/activation?action=test'
+      url='https://license.zmail.org/zmailLicensePortal/public/activation?action=test'
     fi
       
     cmd=$(which curl 2>/dev/null)
@@ -916,7 +916,7 @@ verifyLicenseActivationServer() {
 }
 
 activationWarning() {
-  echo "ERROR: Unable to reach the Zimbra License Activation Server."
+  echo "ERROR: Unable to reach the Zmail License Activation Server."
   echo ""
   echo "License Activation is required when upgrading to ZCS 7 or later."
   echo ""
@@ -927,7 +927,7 @@ activationWarning() {
   echo "by specifying the -a activation.xml option."
   echo ""
   echo "A manual license activation key can be obtained by either visiting"
-  echo "the Zimbra support portal or contacting Zimbra support or sales."
+  echo "the Zmail support portal or contacting Zmail support or sales."
   echo ""
   exit 1;
 }
@@ -935,30 +935,30 @@ activationWarning() {
 verifyLicenseAvailable() {
 
   if [ x"$LICENSE" != "x" ] && [ -e $LICENSE ]; then
-    if [ ! -d "/opt/zimbra/conf" ]; then
-      mkdir -p /opt/zimbra/conf
+    if [ ! -d "/opt/zmail/conf" ]; then
+      mkdir -p /opt/zmail/conf
     fi
-    cp -f $LICENSE /opt/zimbra/conf/ZCSLicense.xml
-    chown zimbra:zimbra /opt/zimbra/conf/ZCSLicense.xml 2> /dev/null
-    chmod 444 /opt/zimbra/conf/ZCSLicense.xml
+    cp -f $LICENSE /opt/zmail/conf/ZCSLicense.xml
+    chown zmail:zmail /opt/zmail/conf/ZCSLicense.xml 2> /dev/null
+    chmod 444 /opt/zmail/conf/ZCSLicense.xml
   fi
 
   if [ x"$AUTOINSTALL" = "xyes" ] || [ x"$UNINSTALL" = "xyes" ] || [ x"$SOFTWAREONLY" = "yes" ]; then
     return
   fi
 
-  isInstalled zimbra-store
+  isInstalled zmail-store
   if [ x$PKGINSTALLED = "x" ]; then
     return
   fi
 
   # need to finish for other native packagers
   if [ "x$PACKAGEEXT" = "xrpm" ]; then
-    if [ x"`rpm --qf '%{description}' -qp ./packages/zimbra-core* | grep Network`" = "x" ]; then
+    if [ x"`rpm --qf '%{description}' -qp ./packages/zmail-core* | grep Network`" = "x" ]; then
      return
     fi
   elif [ "x$PACKAGEEXT" = "xdeb" ]; then
-    if [ x"`dpkg -f ./packages/zimbra-core* Description | grep Network`" = "x" ]; then
+    if [ x"`dpkg -f ./packages/zmail-core* Description | grep Network`" = "x" ]; then
       return
     fi
   else 
@@ -969,40 +969,40 @@ verifyLicenseAvailable() {
 
 
   # use the tool if it exists
-  if [ -f "/opt/zimbra/bin/zmlicense" ]; then
-    licenseCheck=`su - zimbra -c "zmlicense -c" 2> /dev/null`
-    licensedUsers=`su - zimbra -c "zmlicense -p | grep ^AccountsLimit | sed -e 's/AccountsLimit=//'" 2> /dev/null`
-    licenseValidUntil=`su - zimbra -c "zmlicense -p | grep ^ValidUntil= | sed -e 's/ValidUntil=//'" 2> /dev/null`
-    licenseType=`su - zimbra -c "zmlicense -p | grep ^InstallType= | sed -e 's/InstallType=//'" 2> /dev/null`
+  if [ -f "/opt/zmail/bin/zmlicense" ]; then
+    licenseCheck=`su - zmail -c "zmlicense -c" 2> /dev/null`
+    licensedUsers=`su - zmail -c "zmlicense -p | grep ^AccountsLimit | sed -e 's/AccountsLimit=//'" 2> /dev/null`
+    licenseValidUntil=`su - zmail -c "zmlicense -p | grep ^ValidUntil= | sed -e 's/ValidUntil=//'" 2> /dev/null`
+    licenseType=`su - zmail -c "zmlicense -p | grep ^InstallType= | sed -e 's/InstallType=//'" 2> /dev/null`
   fi
 
   # parse files if license tool wasn't there or didn't return a valid license
   if [ x"$licenseCheck" = "xlicense not installed" -o x"$licenseCheck" = "x" ]; then
-    if [ -f "/opt/zimbra/conf/ZCSLicense.xml" ]; then
+    if [ -f "/opt/zmail/conf/ZCSLicense.xml" ]; then
       licenseCheck="license is OK"
-      licensedUsers=`cat /opt/zimbra/conf/ZCSLicense.xml | grep AccountsLimit | head -1  | awk '{print $3}' | awk -F= '{print $2}' | awk -F\" '{print $2}'`
-      licenseValidUntil=`cat /opt/zimbra/conf/ZCSLicense.xml | awk -F\" '{ if ($2 ~ /^ValidUntil$/) {print $4 } }'`
-      licenseType=`cat /opt/zimbra/conf/ZCSLicense.xml | awk -F\" '{ if ($2 ~ /^InstallType$/) {print $4 } }'`
-    elif [ -f "/opt/zimbra/conf/ZCSLicense-Trial.xml" ]; then
+      licensedUsers=`cat /opt/zmail/conf/ZCSLicense.xml | grep AccountsLimit | head -1  | awk '{print $3}' | awk -F= '{print $2}' | awk -F\" '{print $2}'`
+      licenseValidUntil=`cat /opt/zmail/conf/ZCSLicense.xml | awk -F\" '{ if ($2 ~ /^ValidUntil$/) {print $4 } }'`
+      licenseType=`cat /opt/zmail/conf/ZCSLicense.xml | awk -F\" '{ if ($2 ~ /^InstallType$/) {print $4 } }'`
+    elif [ -f "/opt/zmail/conf/ZCSLicense-Trial.xml" ]; then
       licenseCheck="license is OK"
-      licensedUsers=`cat /opt/zimbra/conf/ZCSLicense-Trial.xml | grep AccountsLimit | head -1  | awk '{print $3}' | awk -F= '{print $2}' | awk -F\" '{print $2}'`
-      licenseValidUntil=`cat /opt/zimbra/conf/ZCSLicense-Trial.xml | awk -F\" '{ if ($2 ~ /^ValidUntil$/) {print $4 } }'`
-      licenseType=`cat /opt/zimbra/conf/ZCSLicense-Trial.xml | awk -F\" '{ if ($2 ~ /^InstallType$/) {print $4 } }'`
+      licensedUsers=`cat /opt/zmail/conf/ZCSLicense-Trial.xml | grep AccountsLimit | head -1  | awk '{print $3}' | awk -F= '{print $2}' | awk -F\" '{print $2}'`
+      licenseValidUntil=`cat /opt/zmail/conf/ZCSLicense-Trial.xml | awk -F\" '{ if ($2 ~ /^ValidUntil$/) {print $4 } }'`
+      licenseType=`cat /opt/zmail/conf/ZCSLicense-Trial.xml | awk -F\" '{ if ($2 ~ /^InstallType$/) {print $4 } }'`
     elif [ x"$CLUSTERTYPE" = "xstandby" ]; then
       echo "Not checking for license on cluster stand-by node."
       return
     else
       echo "ERROR: The ZCS Network upgrade requires a license to be located in"
-      echo "/opt/zimbra/conf/ZCSLicense.xml or a license previously installed."
+      echo "/opt/zmail/conf/ZCSLicense.xml or a license previously installed."
       echo "The upgrade will not continue without a license."
       echo ""
       echo "Your system has not been modified."
       echo ""
       echo "New customers wanting to purchase or obtain a trial license"
-      echo "should contact Zimbra sales.  Contact information for Zimbra is"
-      echo "located at http://www.zimbra.com/about/contact_us.html"
+      echo "should contact Zmail sales.  Contact information for Zmail is"
+      echo "located at http://www.zmail.com/about/contact_us.html"
       echo "Existing customers can obtain an updated license file via the"
-      echo "Zimbra Support page located at http://www.zimbra.com/support."
+      echo "Zmail Support page located at http://www.zmail.com/support."
       echo ""
       exit 1;
     fi
@@ -1013,7 +1013,7 @@ verifyLicenseAvailable() {
     if [ x"$licenseType" == x"perpetual" ]; then
       echo ""
       echo "ERROR: The ZCS Network upgrade requires a previously installed license"
-      echo "or the license file located in /opt/zimbra/conf/ZCSLicense.xml to be"
+      echo "or the license file located in /opt/zmail/conf/ZCSLicense.xml to be"
       echo "valid and not expired."
       echo ""
       echo "The upgrade cannot occur with an expired perpetual license.  In order"
@@ -1026,7 +1026,7 @@ verifyLicenseAvailable() {
     else
       echo ""
       echo "WARNING: The ZCS Network upgrade requires a previously installed license"
-      echo "or the license file located in /opt/zimbra/conf/ZCSLicense.xml to be"
+      echo "or the license file located in /opt/zmail/conf/ZCSLicense.xml to be"
       echo "valid and not expired."
       echo ""
       echo "The upgrade can continue, but there will be some loss of functionality."
@@ -1072,10 +1072,10 @@ verifyLicenseAvailable() {
 
   # Make sure zmprov is responsive and able to talk to LDAP before we do anything for real
   zmprovTest="zmprov -l gac 2> /dev/null > /dev/null"
-  su - zimbra -c "$zmprovTest"
+  su - zmail -c "$zmprovTest"
   zmprovTestRC=$?
   if [ $zmprovTestRC -eq 0 ]; then
-    su - zimbra -c "$zmprovTest"
+    su - zmail -c "$zmprovTest"
     zmprovTestRC=$?
   fi
   if [ $zmprovTestRC -ne 0 ]; then
@@ -1088,10 +1088,10 @@ verifyLicenseAvailable() {
   # Passed check to make sure zmprov and LDAP are working.  Now let's get a real count.
   numCurrentUsers=-1;
   if [ $zmprovTestRC -eq 0 ]; then
-    numCurrentUsers=`su - zimbra -c "$userProvCommand"`;
+    numCurrentUsers=`su - zmail -c "$userProvCommand"`;
     numUsersRC=$?
     if [ $numUsersRC -ne 0 ]; then
-      numCurrentUsers=`su - zimbra -c "$userProvCommand"`;
+      numCurrentUsers=`su - zmail -c "$userProvCommand"`;
       numUsersRC=$?
     fi
   fi
@@ -1121,7 +1121,7 @@ verifyLicenseAvailable() {
      if [ $response = "no" ]; then
       askYN "Exit?" "N"
       if [ $response = "yes" ]; then
-        echo "Exiting - place a valid license file in /opt/zimbra/conf/ZCSLicense.xml and rerun."
+        echo "Exiting - place a valid license file in /opt/zmail/conf/ZCSLicense.xml and rerun."
         exit 1
       fi
      else
@@ -1140,7 +1140,7 @@ verifyLicenseAvailable() {
      if [ $response = "no" ]; then
       askYN "Exit?" "N"
       if [ $response = "yes" ]; then
-        echo "Exiting - place a valid license file in /opt/zimbra/conf/ZCSLicense.xml and rerun."
+        echo "Exiting - place a valid license file in /opt/zmail/conf/ZCSLicense.xml and rerun."
         exit 1
       fi
      else
@@ -1155,54 +1155,54 @@ verifyLicenseAvailable() {
 }
 
 checkUserInfo() {
-  #Verify that the zimbra user either:
+  #Verify that the zmail user either:
   #  Doesn't exist OR
   #  Exists with:
-  #     home: /opt/zimbra
+  #     home: /opt/zmail
   #     shell: bash
-  id zimbra > /dev/null 2>&1
+  id zmail > /dev/null 2>&1
   if [ $? -ne 0 ]; then
     return
   fi
   if [ -x /usr/bin/getent ]
   then
-    ZH=`getent passwd zimbra | awk -F: '{ print $6 }'`
-    ZS=`getent passwd zimbra | awk -F: '{ print $7 }' | sed -e s'|.*/||'`
+    ZH=`getent passwd zmail | awk -F: '{ print $6 }'`
+    ZS=`getent passwd zmail | awk -F: '{ print $7 }' | sed -e s'|.*/||'`
   else
-    ZH=`awk -F: '/^zimbra:/ {print $6}' /etc/passwd`
-    ZS=`awk -F: '/^zimbra:/ {print $7}' /etc/passwd | sed -e s'|.*/||'`
+    ZH=`awk -F: '/^zmail:/ {print $6}' /etc/passwd`
+    ZS=`awk -F: '/^zmail:/ {print $7}' /etc/passwd | sed -e s'|.*/||'`
   fi
-  if [ x$ZH != "x/opt/zimbra" ]; then
-    echo "Error - zimbra user exists with incorrect home directory: $ZH"
+  if [ x$ZH != "x/opt/zmail" ]; then
+    echo "Error - zmail user exists with incorrect home directory: $ZH"
     echo "Exiting"
     exit 1
   fi
   if [ x$ZS != "xbash" ]; then
-    echo "Error - zimbra user exists with incorrect shell: $ZS"
+    echo "Error - zmail user exists with incorrect shell: $ZS"
     echo "Exiting"
     exit 1
   fi
 }
 
-runAsZimbra() {
-  # echo "Running as zimbra: $1"
+runAsZmail() {
+  # echo "Running as zmail: $1"
   echo "COMMAND: $1" >> $LOGFILE 2>&1
-  su - zimbra -c "$1" >> $LOGFILE 2>&1
+  su - zmail -c "$1" >> $LOGFILE 2>&1
 }
 
 shutDownSystem() {
-  runAsZimbra "zmcontrol shutdown"
-  # stop all zimbra process that may have been orphaned
+  runAsZmail "zmcontrol shutdown"
+  # stop all zmail process that may have been orphaned
   local OS=$(uname -s | tr A-Z a-z)
   if [ x"$OS" = "xlinux" ]; then
     if [ -x /bin/ps -a -x  /usr/bin/awk -a -x /usr/bin/xargs ]; then
-      /bin/ps -eFw | /usr/bin/awk '{ if ($1 == "zimbra" && $3 == "1") print $2 }' | /usr/bin/xargs kill -9 > /dev/null 2>&1
+      /bin/ps -eFw | /usr/bin/awk '{ if ($1 == "zmail" && $3 == "1") print $2 }' | /usr/bin/xargs kill -9 > /dev/null 2>&1
     fi
   fi
 }
 
 getRunningSchemaVersion() {
-  RUNNINGSCHEMAVERSION=`su - zimbra -c "echo \"select value from config where name='db.version';\" | mysql zimbra --skip-column-names"`
+  RUNNINGSCHEMAVERSION=`su - zmail -c "echo \"select value from config where name='db.version';\" | mysql zmail --skip-column-names"`
   if [ "x$RUNNINGSCHEMAVERSION" = "x" ]; then
     RUNNINGSCHEMAVERSION=0
   fi
@@ -1213,7 +1213,7 @@ getPackageSchemaVersion() {
 }
 
 getRunningIndexVersion() {
-  RUNNINGINDEXVERSION=`su - zimbra -c "echo \"select value from config where name='index.version';\" | mysql zimbra --skip-column-names"`
+  RUNNINGINDEXVERSION=`su - zmail -c "echo \"select value from config where name='index.version';\" | mysql zmail --skip-column-names"`
   if [ "x$RUNNINGINDEXVERSION" = "x" ]; then
     RUNNINGINDEXVERSION=0
   fi
@@ -1251,7 +1251,7 @@ setRemove() {
     checkVersionMatches
 
     echo ""
-    echo "The Zimbra Collaboration Server appears already to be installed."
+    echo "The Zmail Collaboration Server appears already to be installed."
     if [ $VERSIONMATCH = "yes" ]; then
       echo "It can be upgraded with no effect on existing accounts,"
       echo "or the current installation can be completely removed prior"
@@ -1288,11 +1288,11 @@ setRemove() {
           exit 1;
         fi
         echo ""
-        echo $INSTALLED_PACKAGES | grep zimbra-ldap > /dev/null 2>&1
+        echo $INSTALLED_PACKAGES | grep zmail-ldap > /dev/null 2>&1
         if [ $? = 0 ]; then
           echo "*** WARNING - you are about to delete all existing users and mail"
         else
-          echo $INSTALLED_PACKAGES | grep zimbra-store > /dev/null 2>&1
+          echo $INSTALLED_PACKAGES | grep zmail-store > /dev/null 2>&1
           if [ $? = 0 ]; then
             echo "*** WARNING - you are about to delete users and mail hosted on this server"
           else
@@ -1309,9 +1309,9 @@ setRemove() {
         fi
       else
         # Check for a history file - create it if it's not there
-        isInstalled "zimbra-core"
-        if [ ! -f "/opt/zimbra/.install_history" ]; then
-          cat > /opt/zimbra/.install_history << EOF
+        isInstalled "zmail-core"
+        if [ ! -f "/opt/zmail/.install_history" ]; then
+          cat > /opt/zmail/.install_history << EOF
 0000000000: INSTALL SESSION START
 0000000000: INSTALLED $PKGVERSION
 0000000000: INSTALL SESSION COMPLETE
@@ -1325,18 +1325,18 @@ EOF
       fi
     done
   else 
-    # REMOVE = yes for non installed systems, to clean up /opt/zimbra
+    # REMOVE = yes for non installed systems, to clean up /opt/zmail
     DETECTDIRS="db bin/zmcontrol redolog index store conf/localconfig.xml data"
     for i in $DETECTDIRS; do
-      if [ -e "/opt/zimbra/$i" ]; then
+      if [ -e "/opt/zmail/$i" ]; then
         INSTALLED="yes"
       fi
     done
     if [ x$INSTALLED = "xyes" ]; then
       echo ""
-      echo "The Zimbra Collaboration Server does not appear to be installed,"
-      echo "yet there appears to be a ZCS directory structure in /opt/zimbra."
-      askYN "Would you like to delete /opt/zimbra before installing?" "N"
+      echo "The Zmail Collaboration Server does not appear to be installed,"
+      echo "yet there appears to be a ZCS directory structure in /opt/zmail."
+      askYN "Would you like to delete /opt/zmail before installing?" "N"
       REMOVE="$response"
     elif [ x$CLUSTERTYPE != "x" ]; then
       REMOVE="no"
@@ -1356,7 +1356,7 @@ setDefaultsFromExistingConfig() {
   echo "Setting defaults from saved config in $SAVEDIR/config.save"
   source $SAVEDIR/config.save
 
-  HOSTNAME=${zimbra_server_hostname}
+  HOSTNAME=${zmail_server_hostname}
   LDAPHOST=${ldap_host}
   LDAPPORT=${ldap_port}
   SNMPTRAPHOST=${snmp_trap_host:-$SNMPTRAPHOST}
@@ -1365,13 +1365,13 @@ setDefaultsFromExistingConfig() {
   SNMPNOTIFY=${snmp_notify:-0}
   SMTPNOTIFY=${smtp_notify:-0}
   LDAPROOTPW=${ldap_root_password}
-  LDAPZIMBRAPW=${zimbra_ldap_password}
+  LDAPZIMBRAPW=${zmail_ldap_password}
   LDAPPOSTPW=${ldap_postfix_password}
   LDAPREPPW=${ldap_replication_password}
   LDAPAMAVISPW=${ldap_amavis_password}
   LDAPNGINXPW=${ldap_nginx_password}
 
-  echo "   HOSTNAME=${zimbra_server_hostname}"
+  echo "   HOSTNAME=${zmail_server_hostname}"
   echo "   LDAPHOST=${ldap_host}"
   echo "   LDAPPORT=${ldap_port}"
   echo "   SNMPTRAPHOST=${snmp_trap_host}"
@@ -1380,7 +1380,7 @@ setDefaultsFromExistingConfig() {
   echo "   SNMPNOTIFY=${snmp_notify:-0}"
   echo "   SMTPNOTIFY=${smtp_notify:-0}"
   echo "   LDAPROOTPW=${ldap_root_password}"
-  echo "   LDAPZIMBRAPW=${zimbra_ldap_password}"
+  echo "   LDAPZIMBRAPW=${zmail_ldap_password}"
   echo "   LDAPPOSTPW=${ldap_postfix_password}"
   echo "   LDAPREPPW=${ldap_replication_password}"
   echo "   LDAPAMAVISPW=${ldap_amavis_password}"
@@ -1396,74 +1396,74 @@ restoreExistingConfig() {
     echo -n "Restoring existing configuration file from $RF..."
     #while read i; do
       # echo "Setting $i"
-      #runAsZimbra "zmlocalconfig -f -e $i"
+      #runAsZmail "zmlocalconfig -f -e $i"
     #done < $RF
     #if [ -f $RESTORECONFIG/backup.save ]; then
     #  echo -n "Restoring backup schedule..."
-    #  runAsZimbra "cat $RESTORECONFIG/backup.save | xargs zmschedulebackup -R"
+    #  runAsZmail "cat $RESTORECONFIG/backup.save | xargs zmschedulebackup -R"
     #fi
-    cp -f $RF /opt/zimbra/conf/localconfig.xml
+    cp -f $RF /opt/zmail/conf/localconfig.xml
     echo "done"
   fi
 }
 
-# deprecated by the move of zimlets to /opt/zimbra/zimlets-deployed which isn't removed on upgrade
+# deprecated by the move of zimlets to /opt/zmail/zimlets-deployed which isn't removed on upgrade
 restoreZimlets() {
-  if [ -d $SAVEDIR/zimlet -a -d /opt/zimbra/mailboxd/webapps/service ]; then
-    cp -rf $SAVEDIR/zimlet /opt/zimbra/mailboxd/webapps/service/
-    chown -R zimbra:zimbra /opt/zimbra/mailboxd/webapps/service/zimlet
-    chmod 775 /opt/zimbra/mailboxd/webapps/service/zimlet
+  if [ -d $SAVEDIR/zimlet -a -d /opt/zmail/mailboxd/webapps/service ]; then
+    cp -rf $SAVEDIR/zimlet /opt/zmail/mailboxd/webapps/service/
+    chown -R zmail:zmail /opt/zmail/mailboxd/webapps/service/zimlet
+    chmod 775 /opt/zmail/mailboxd/webapps/service/zimlet
   fi
 }
 
 restoreCerts() {
   if [ -f "$SAVEDIR/cacerts" ]; then
-    cp $SAVEDIR/cacerts /opt/zimbra/java/jre/lib/security/cacerts
-    chown zimbra:zimbra /opt/zimbra/java/jre/lib/security/cacerts
+    cp $SAVEDIR/cacerts /opt/zmail/java/jre/lib/security/cacerts
+    chown zmail:zmail /opt/zmail/java/jre/lib/security/cacerts
   fi
-  if [ -f "$SAVEDIR/keystore" -a -d "/opt/zimbra/jetty/etc" ]; then
-    cp $SAVEDIR/keystore /opt/zimbra/jetty/etc/keystore
-    chown zimbra:zimbra /opt/zimbra/jetty/etc/keystore
-  elif [ -f "$SAVEDIR/keystore" -a -d "/opt/zimbra/tomcat/conf" ]; then
-    cp $SAVEDIR/keystore /opt/zimbra/tomcat/conf/keystore
-    chown zimbra:zimbra /opt/zimbra/tomcat/conf/keystore
-  elif [ -f "$SAVEDIR/keystore" -a -d "/opt/zimbra/conf" ]; then
-    cp $SAVEDIR/keystore /opt/zimbra/conf/keystore
-    chown zimbra:zimbra /opt/zimbra/conf/keystore
+  if [ -f "$SAVEDIR/keystore" -a -d "/opt/zmail/jetty/etc" ]; then
+    cp $SAVEDIR/keystore /opt/zmail/jetty/etc/keystore
+    chown zmail:zmail /opt/zmail/jetty/etc/keystore
+  elif [ -f "$SAVEDIR/keystore" -a -d "/opt/zmail/tomcat/conf" ]; then
+    cp $SAVEDIR/keystore /opt/zmail/tomcat/conf/keystore
+    chown zmail:zmail /opt/zmail/tomcat/conf/keystore
+  elif [ -f "$SAVEDIR/keystore" -a -d "/opt/zmail/conf" ]; then
+    cp $SAVEDIR/keystore /opt/zmail/conf/keystore
+    chown zmail:zmail /opt/zmail/conf/keystore
   fi
   if [ -f "$SAVEDIR/smtpd.key" ]; then
-    cp $SAVEDIR/smtpd.key /opt/zimbra/conf/smtpd.key 
-    chown zimbra:zimbra /opt/zimbra/conf/smtpd.key
+    cp $SAVEDIR/smtpd.key /opt/zmail/conf/smtpd.key 
+    chown zmail:zmail /opt/zmail/conf/smtpd.key
   fi
   if [ -f "$SAVEDIR/smtpd.crt" ]; then
-    cp $SAVEDIR/smtpd.crt /opt/zimbra/conf/smtpd.crt 
-    chown zimbra:zimbra /opt/zimbra/conf/smtpd.crt
+    cp $SAVEDIR/smtpd.crt /opt/zmail/conf/smtpd.crt 
+    chown zmail:zmail /opt/zmail/conf/smtpd.crt
   fi
   if [ -f "$SAVEDIR/slapd.crt" ]; then
-    cp $SAVEDIR/slapd.crt /opt/zimbra/conf/slapd.crt 
-    chown zimbra:zimbra /opt/zimbra/conf/slapd.crt
+    cp $SAVEDIR/slapd.crt /opt/zmail/conf/slapd.crt 
+    chown zmail:zmail /opt/zmail/conf/slapd.crt
   fi
   if [ -f "$SAVEDIR/nginx.key" ]; then
-    cp $SAVEDIR/nginx.key /opt/zimbra/conf/nginx.key
-    chown zimbra:zimbra /opt/zimbra/conf/nginx.key
+    cp $SAVEDIR/nginx.key /opt/zmail/conf/nginx.key
+    chown zmail:zmail /opt/zmail/conf/nginx.key
   fi
   if [ -f "$SAVEDIR/nginx.crt" ]; then
-    cp $SAVEDIR/nginx.crt /opt/zimbra/conf/nginx.crt
-    chown zimbra:zimbra /opt/zimbra/conf/nginx.crt
+    cp $SAVEDIR/nginx.crt /opt/zmail/conf/nginx.crt
+    chown zmail:zmail /opt/zmail/conf/nginx.crt
   fi
-  mkdir -p /opt/zimbra/conf/ca
+  mkdir -p /opt/zmail/conf/ca
   if [ -f "$SAVEDIR/ca.key" ]; then
-    cp $SAVEDIR/ca.key /opt/zimbra/conf/ca/ca.key 
-    chown zimbra:zimbra /opt/zimbra/conf/ca/ca.key
+    cp $SAVEDIR/ca.key /opt/zmail/conf/ca/ca.key 
+    chown zmail:zmail /opt/zmail/conf/ca/ca.key
   fi
   if [ -f "$SAVEDIR/ca.pem" ]; then
-    cp $SAVEDIR/ca.pem /opt/zimbra/conf/ca/ca.pem 
-    chown zimbra:zimbra /opt/zimbra/conf/ca/ca.pem
+    cp $SAVEDIR/ca.pem /opt/zmail/conf/ca/ca.pem 
+    chown zmail:zmail /opt/zmail/conf/ca/ca.pem
   fi
-  if [ -f "/opt/zimbra/jetty/etc/keystore" ]; then
-    chown zimbra:zimbra /opt/zimbra/jetty/etc/keystore
-  elif [ -f "/opt/zimbra/tomcat/conf/keystore" ]; then
-    chown zimbra:zimbra /opt/zimbra/tomcat/conf/keystore
+  if [ -f "/opt/zmail/jetty/etc/keystore" ]; then
+    chown zmail:zmail /opt/zmail/jetty/etc/keystore
+  elif [ -f "/opt/zmail/tomcat/conf/keystore" ]; then
+    chown zmail:zmail /opt/zmail/tomcat/conf/keystore
   fi
 }
 
@@ -1486,75 +1486,75 @@ saveExistingConfig() {
     fi
   done
   # yes, it needs massaging to be fed back in...
-  if [ -x "/opt/zimbra/bin/zmlocalconfig" ]; then
-    runAsZimbra "zmlocalconfig -s | sed -e \"s/ = \(.*\)/=\'\1\'/\" > $SAVEDIR/config.save"
+  if [ -x "/opt/zmail/bin/zmlocalconfig" ]; then
+    runAsZmail "zmlocalconfig -s | sed -e \"s/ = \(.*\)/=\'\1\'/\" > $SAVEDIR/config.save"
   fi
-  if [ -f "/opt/zimbra/conf/localconfig.xml" ]; then
-    cp -f /opt/zimbra/conf/localconfig.xml $SAVEDIR/localconfig.xml
+  if [ -f "/opt/zmail/conf/localconfig.xml" ]; then
+    cp -f /opt/zmail/conf/localconfig.xml $SAVEDIR/localconfig.xml
   fi
-  if [ -f "/opt/zimbra/java/jre/lib/security/cacerts" ]; then
-    cp -f /opt/zimbra/java/jre/lib/security/cacerts $SAVEDIR
+  if [ -f "/opt/zmail/java/jre/lib/security/cacerts" ]; then
+    cp -f /opt/zmail/java/jre/lib/security/cacerts $SAVEDIR
   fi
-  if [ -f "/opt/zimbra/jetty/etc/keystore" ]; then
-    cp -f /opt/zimbra/jetty/etc/keystore $SAVEDIR
-  elif [ -f "/opt/zimbra/tomcat/conf/keystore" ]; then
-    cp -f /opt/zimbra/tomcat/conf/keystore $SAVEDIR
+  if [ -f "/opt/zmail/jetty/etc/keystore" ]; then
+    cp -f /opt/zmail/jetty/etc/keystore $SAVEDIR
+  elif [ -f "/opt/zmail/tomcat/conf/keystore" ]; then
+    cp -f /opt/zmail/tomcat/conf/keystore $SAVEDIR
   fi
-  if [ -f "/opt/zimbra/conf/smtpd.key" ]; then
-    cp -f /opt/zimbra/conf/smtpd.key $SAVEDIR
+  if [ -f "/opt/zmail/conf/smtpd.key" ]; then
+    cp -f /opt/zmail/conf/smtpd.key $SAVEDIR
   fi
-  if [ -f "/opt/zimbra/conf/smtpd.crt" ]; then
-    cp -f /opt/zimbra/conf/smtpd.crt $SAVEDIR
+  if [ -f "/opt/zmail/conf/smtpd.crt" ]; then
+    cp -f /opt/zmail/conf/smtpd.crt $SAVEDIR
   fi
-  if [ -f "/opt/zimbra/conf/slapd.key" ]; then
-    cp -f /opt/zimbra/conf/slapd.key $SAVEDIR
+  if [ -f "/opt/zmail/conf/slapd.key" ]; then
+    cp -f /opt/zmail/conf/slapd.key $SAVEDIR
   fi
-  if [ -f "/opt/zimbra/conf/slapd.crt" ]; then
-    cp -f /opt/zimbra/conf/slapd.crt $SAVEDIR
+  if [ -f "/opt/zmail/conf/slapd.crt" ]; then
+    cp -f /opt/zmail/conf/slapd.crt $SAVEDIR
   fi
-  if [ -f "/opt/zimbra/conf/nginx.key" ]; then
-    cp -f /opt/zimbra/conf/nginx.key $SAVEDIR
+  if [ -f "/opt/zmail/conf/nginx.key" ]; then
+    cp -f /opt/zmail/conf/nginx.key $SAVEDIR
   fi
-  if [ -f "/opt/zimbra/conf/nginx.crt" ]; then
-    cp -f /opt/zimbra/conf/nginx.crt $SAVEDIR
+  if [ -f "/opt/zmail/conf/nginx.crt" ]; then
+    cp -f /opt/zmail/conf/nginx.crt $SAVEDIR
   fi
-  if [ -f "/opt/zimbra/conf/ca/ca.key" ]; then
-    cp -f /opt/zimbra/conf/ca/ca.key $SAVEDIR
+  if [ -f "/opt/zmail/conf/ca/ca.key" ]; then
+    cp -f /opt/zmail/conf/ca/ca.key $SAVEDIR
   fi
-  if [ -f "/opt/zimbra/conf/ca/ca.pem" ]; then
-    cp -f /opt/zimbra/conf/ca/ca.pem $SAVEDIR
+  if [ -f "/opt/zmail/conf/ca/ca.pem" ]; then
+    cp -f /opt/zmail/conf/ca/ca.pem $SAVEDIR
   fi
-  if [ -d "/opt/zimbra/tomcat/webapps/service/zimlet" ]; then
-    cp -rf /opt/zimbra/tomcat/webapps/service/zimlet $SAVEDIR
-  elif [ -d "/opt/zimbra/mailboxd/webapps/service/zimlet" ]; then
-    cp -rf /opt/zimbra/mailboxd/webapps/service/zimlet $SAVEDIR
+  if [ -d "/opt/zmail/tomcat/webapps/service/zimlet" ]; then
+    cp -rf /opt/zmail/tomcat/webapps/service/zimlet $SAVEDIR
+  elif [ -d "/opt/zmail/mailboxd/webapps/service/zimlet" ]; then
+    cp -rf /opt/zmail/mailboxd/webapps/service/zimlet $SAVEDIR
   fi
-  if [ -x /opt/zimbra/bin/zmschedulebackup ]; then
-    runAsZimbra "zmschedulebackup -s > $SAVEDIR/backup.save"
+  if [ -x /opt/zmail/bin/zmschedulebackup ]; then
+    runAsZmail "zmschedulebackup -s > $SAVEDIR/backup.save"
   fi
-  if [ -d /opt/zimbra/wiki ]; then
-    cp -rf /opt/zimbra/wiki $SAVEDIR
+  if [ -d /opt/zmail/wiki ]; then
+    cp -rf /opt/zmail/wiki $SAVEDIR
   fi
 
-  if [ -f "/opt/zimbra/.enable_replica" ]; then
-    rm -f /opt/zimbra/.enable_replica
+  if [ -f "/opt/zmail/.enable_replica" ]; then
+    rm -f /opt/zmail/.enable_replica
   fi 
 
-  if [ -f /opt/zimbra/conf/slapd.conf ]; then
-    egrep -q '^overlay syncprov' /opt/zimbra/conf/slapd.conf > /dev/null
+  if [ -f /opt/zmail/conf/slapd.conf ]; then
+    egrep -q '^overlay syncprov' /opt/zmail/conf/slapd.conf > /dev/null
     if [ $? = 0 ]; then
-      touch /opt/zimbra/.enable_replica
+      touch /opt/zmail/.enable_replica
     else
-      egrep -q 'type=refreshAndPersist' /opt/zimbra/conf/slapd.conf > /dev/null
+      egrep -q 'type=refreshAndPersist' /opt/zmail/conf/slapd.conf > /dev/null
       if [ $? = 0 ]; then
-        touch /opt/zimbra/.enable_replica
+        touch /opt/zmail/.enable_replica
       fi
     fi
   fi
 
-  if [ -f /opt/zimbra/data/ldap/config/cn\=config.ldif ]; then
-    if [ -f /opt/zimbra/data/ldap/config/cn\=config/olcDatabase\=\{2\}mdb/olcOverlay\=*syncprov.ldif ]; then
-      touch /opt/zimbra/.enable_replica
+  if [ -f /opt/zmail/data/ldap/config/cn\=config.ldif ]; then
+    if [ -f /opt/zmail/data/ldap/config/cn\=config/olcDatabase\=\{2\}mdb/olcOverlay\=*syncprov.ldif ]; then
+      touch /opt/zmail/.enable_replica
     fi
   fi
 }
@@ -1562,45 +1562,45 @@ saveExistingConfig() {
 removeExistingInstall() {
   if [ $INSTALLED = "yes" ]; then
     echo ""
-    echo "Shutting down zimbra mail"
+    echo "Shutting down zmail mail"
     shutDownSystem
-    if [ -f "/opt/zimbra/bin/zmiptables" ]; then
-      /opt/zimbra/bin/zmiptables -u
+    if [ -f "/opt/zmail/bin/zmiptables" ]; then
+      /opt/zmail/bin/zmiptables -u
     fi
 
-    isInstalled "zimbra-ldap"
+    isInstalled "zmail-ldap"
     if [ x$PKGINSTALLED != "x" ]; then
       if [ x"$LD_LIBRARY_PATH" != "x" ]; then
         OLD_LDR_PATH=$LD_LIBRARY_PATH
-        LD_LIBRARY_PATH=/opt/zimbra/bdb/lib:/opt/zimbra/openssl/lib:/opt/zimbra/cyrus-sasl/lib:/opt/zimbra/libtool/lib:/opt/zimbra/openldap/lib:/opt/zimbra/mysql/lib:$LD_LIBRARY_PATH
+        LD_LIBRARY_PATH=/opt/zmail/bdb/lib:/opt/zmail/openssl/lib:/opt/zmail/cyrus-sasl/lib:/opt/zmail/libtool/lib:/opt/zmail/openldap/lib:/opt/zmail/mysql/lib:$LD_LIBRARY_PATH
       fi
-      if [ -f "/opt/zimbra/openldap/sbin/slapcat" -a x"$UNINSTALL" != "xyes" -a x"$REMOVE" != "xyes" ]; then
-        if [ -f "/opt/zimbra/conf/slapd.conf" -o -d "/opt/zimbra/data/ldap/config" ]; then
+      if [ -f "/opt/zmail/openldap/sbin/slapcat" -a x"$UNINSTALL" != "xyes" -a x"$REMOVE" != "xyes" ]; then
+        if [ -f "/opt/zmail/conf/slapd.conf" -o -d "/opt/zmail/data/ldap/config" ]; then
           echo ""
           echo -n "Backing up the ldap database..."
           tmpfile=`mktemp -t slapcat.XXXXXX 2> /dev/null` || (echo "Failed to create tmpfile" && exit 1)
-          mkdir -p /opt/zimbra/data/ldap
-          chown -R zimbra:zimbra /opt/zimbra/data/ldap
-          runAsZimbra "/opt/zimbra/libexec/zmslapcat /opt/zimbra/data/ldap"
+          mkdir -p /opt/zmail/data/ldap
+          chown -R zmail:zmail /opt/zmail/data/ldap
+          runAsZmail "/opt/zmail/libexec/zmslapcat /opt/zmail/data/ldap"
           if [ $? != 0 ]; then
             echo "failed."
             exit
           else
             echo "done."
           fi
-          chmod 640 /opt/zimbra/data/ldap/ldap.bak
-          if [ -x /opt/zimbra/libexec/zmslapadd ]; then
-            if [ -f /opt/zimbra/data/ldap/config/cn\=config/olcDatabase\=\{3\}mdb.ldif -o -f /opt/zimbra/data/ldap/config/cn\=config/olcDatabase\=\{3\}hdb.ldif ]; then
+          chmod 640 /opt/zmail/data/ldap/ldap.bak
+          if [ -x /opt/zmail/libexec/zmslapadd ]; then
+            if [ -f /opt/zmail/data/ldap/config/cn\=config/olcDatabase\=\{3\}mdb.ldif -o -f /opt/zmail/data/ldap/config/cn\=config/olcDatabase\=\{3\}hdb.ldif ]; then
               echo ""
               echo -n "Backing up the ldap accesslog database..."
-              runAsZimbra "/opt/zimbra/libexec/zmslapcat -a /opt/zimbra/data/ldap"
+              runAsZmail "/opt/zmail/libexec/zmslapcat -a /opt/zmail/data/ldap"
               if [ $? != 0 ]; then
                 echo "failed."
                 exit
               else
                 echo "done."
               fi
-              chmod 640 /opt/zimbra/data/ldap/ldap-accesslog.bak
+              chmod 640 /opt/zmail/data/ldap/ldap-accesslog.bak
             fi
           fi
         fi
@@ -1615,27 +1615,27 @@ removeExistingInstall() {
     echo ""
 
     for p in $INSTALLED_PACKAGES; do
-      if [ $p = "zimbra-core" ]; then
-        MOREPACKAGES="$MOREPACKAGES zimbra-core"
+      if [ $p = "zmail-core" ]; then
+        MOREPACKAGES="$MOREPACKAGES zmail-core"
         continue
       fi
-      if [ $p = "zimbra-apache" ]; then
-        MOREPACKAGES="zimbra-apache $MOREPACKAGES"
+      if [ $p = "zmail-apache" ]; then
+        MOREPACKAGES="zmail-apache $MOREPACKAGES"
         continue
       fi
-      if [ $p = "zimbra-store" -a ${ZM_CUR_MAJOR} -lt 6 ]; then
-        isInstalled "zimbra-convertd"
+      if [ $p = "zmail-store" -a ${ZM_CUR_MAJOR} -lt 6 ]; then
+        isInstalled "zmail-convertd"
         if [ x$PKGINSTALLED != "x" ]; then
-          echo -n "   zimbra-convertd..."
-          $PACKAGERM zimbra-convertd >/dev/null 2>&1
+          echo -n "   zmail-convertd..."
+          $PACKAGERM zmail-convertd >/dev/null 2>&1
           echo "done"
         fi
       fi
-      if [ $p = "zimbra-store" ]; then
-        isInstalled "zimbra-archiving"
+      if [ $p = "zmail-store" ]; then
+        isInstalled "zmail-archiving"
         if [ x$PKGINSTALLED != "x" ]; then
-          echo -n "   zimbra-archiving..."
-          $PACKAGERM zimbra-archiving >/dev/null 2>&1
+          echo -n "   zmail-archiving..."
+          $PACKAGERM zmail-archiving >/dev/null 2>&1
           echo "done"
         fi
       fi
@@ -1656,74 +1656,74 @@ removeExistingInstall() {
       fi
     done
 
-    rm -f /etc/ld.so.conf.d/zimbra.ld.conf
+    rm -f /etc/ld.so.conf.d/zmail.ld.conf
     if [ -f "/etc/sudoers" ]; then
       SUDOMODE=`perl -e 'my $mode=(stat("/etc/sudoers"))[2];printf("%04o\n",$mode & 07777);'`
-      cat /etc/sudoers | grep -v "^\%zimbra[[:space:]]" > /tmp/sudoers
+      cat /etc/sudoers | grep -v "^\%zmail[[:space:]]" > /tmp/sudoers
       cat /tmp/sudoers > /etc/sudoers
       chmod $SUDOMODE /etc/sudoers
       rm -f /tmp/sudoers
     fi
     echo ""
     echo "Removing deployed webapp directories"
-    if [ -d "/opt/zimbra/tomcat/webapps/" ]; then
-      /bin/rm -rf /opt/zimbra/tomcat/webapps/zimbra
-      /bin/rm -rf /opt/zimbra/tomcat/webapps/zimbra.war
-      /bin/rm -rf /opt/zimbra/tomcat/webapps/zimbraAdmin
-      /bin/rm -rf /opt/zimbra/tomcat/webapps/zimbraAdmin.war
-      /bin/rm -rf /opt/zimbra/tomcat/webapps/service
-      /bin/rm -rf /opt/zimbra/tomcat/webapps/service.war
-      /bin/rm -rf /opt/zimbra/tomcat/work
-    elif [ -d "/opt/zimbra/jetty/webapps" ]; then
-      /bin/rm -rf /opt/zimbra/jetty/webapps/zimbra
-      /bin/rm -rf /opt/zimbra/jetty/webapps/zimbra.war
-      /bin/rm -rf /opt/zimbra/jetty/webapps/zimbraAdmin
-      /bin/rm -rf /opt/zimbra/jetty/webapps/zimbraAdmin.war
-      /bin/rm -rf /opt/zimbra/jetty/webapps/service
-      /bin/rm -rf /opt/zimbra/jetty/webapps/service.war
-      /bin/rm -rf /opt/zimbra/jetty/work
+    if [ -d "/opt/zmail/tomcat/webapps/" ]; then
+      /bin/rm -rf /opt/zmail/tomcat/webapps/zmail
+      /bin/rm -rf /opt/zmail/tomcat/webapps/zmail.war
+      /bin/rm -rf /opt/zmail/tomcat/webapps/zmailAdmin
+      /bin/rm -rf /opt/zmail/tomcat/webapps/zmailAdmin.war
+      /bin/rm -rf /opt/zmail/tomcat/webapps/service
+      /bin/rm -rf /opt/zmail/tomcat/webapps/service.war
+      /bin/rm -rf /opt/zmail/tomcat/work
+    elif [ -d "/opt/zmail/jetty/webapps" ]; then
+      /bin/rm -rf /opt/zmail/jetty/webapps/zmail
+      /bin/rm -rf /opt/zmail/jetty/webapps/zmail.war
+      /bin/rm -rf /opt/zmail/jetty/webapps/zmailAdmin
+      /bin/rm -rf /opt/zmail/jetty/webapps/zmailAdmin.war
+      /bin/rm -rf /opt/zmail/jetty/webapps/service
+      /bin/rm -rf /opt/zmail/jetty/webapps/service.war
+      /bin/rm -rf /opt/zmail/jetty/work
     fi
   fi
 
   if [ $REMOVE = "yes" ]; then
-    if [ ! -L "/opt/zimbra" ]; then
+    if [ ! -L "/opt/zmail" ]; then
       echo ""
-      echo "Removing /opt/zimbra"
-      umount /opt/zimbra/amavisd/tmp > /dev/null 2>&1
-      MOUNTPOINTS=`mount | awk '{print $3}' | grep /opt/zimbra/`
+      echo "Removing /opt/zmail"
+      umount /opt/zmail/amavisd/tmp > /dev/null 2>&1
+      MOUNTPOINTS=`mount | awk '{print $3}' | grep /opt/zmail/`
       for mp in $MOUNTPOINTS; do
-        if [ x$mp != "x/opt/zimbra" ]; then
+        if [ x$mp != "x/opt/zmail" ]; then
           /bin/rm -rf ${mp}/*
           umount -f ${mp}
         fi
       done
   
-      /bin/rm -rf /opt/zimbra/*
+      /bin/rm -rf /opt/zmail/*
 
-      if [ -e "/opt/zimbra/.enable_replica" ]; then
-        /bin/rm -f /opt/zimbra/.enable_replica
+      if [ -e "/opt/zmail/.enable_replica" ]; then
+        /bin/rm -f /opt/zmail/.enable_replica
       fi
 
       if [ -x /usr/bin/crontab ]; then
-        echo -n "Removing zimbra crontab entry..."
-        /usr/bin/crontab -u zimbra -r 2> /dev/null
+        echo -n "Removing zmail crontab entry..."
+        /usr/bin/crontab -u zmail -r 2> /dev/null
         echo "done."
       fi
      
       if [ -e /usr/sbin/sendmail ]; then
         if [ -x /bin/readlink ]; then
           SMPATH=$(/bin/readlink /usr/sbin/sendmail)
-          if [ x$SMPATH = x"/opt/zimbra/postfix/sbin/sendmail" ]; then
+          if [ x$SMPATH = x"/opt/zmail/postfix/sbin/sendmail" ]; then
             /bin/rm -f /usr/sbin/sendmail
           fi
         fi
       fi 
 
       if [ -f /etc/syslog-ng/syslog-ng.conf ]; then
-        egrep -q 'zimbra' /etc/syslog-ng/syslog-ng.conf
+        egrep -q 'zmail' /etc/syslog-ng/syslog-ng.conf
         if [ $? = 0 ]; then
           echo -n "Cleaning up /etc/syslog-ng/syslog-ng.conf..."
-          sed -i -e '/zimbra/d' /etc/syslog-ng/syslog-ng.conf
+          sed -i -e '/zmail/d' /etc/syslog-ng/syslog-ng.conf
           sed -i -e 's/filter f_messages   { not facility(news, mail) and not filter(f_iptables) and/filter f_messages   { not facility(news, mail) and not filter(f_iptables); };/' /etc/syslog-ng/syslog-ng.conf
           sed -i -e 's/^                               local4, local5, local6, local7) and not/                               local4, local5, local6, local7); };/' /etc/syslog-ng/syslog-ng.conf
           if [ -x /sbin/rcsyslog ]; then
@@ -1735,9 +1735,9 @@ removeExistingInstall() {
         fi
       elif [ -f /etc/rsyslog.conf ]; then
         if [ -d /etc/rsyslog.d ]; then
-          if [ -f /etc/rsyslog.d/60-zimbra.conf ]; then
+          if [ -f /etc/rsyslog.d/60-zmail.conf ]; then
             echo -n "Cleaning up /etc/rsyslog.d..."
-            rm -f /etc/rsyslog.d/60-zimbra.conf
+            rm -f /etc/rsyslog.d/60-zmail.conf
             if [ -x /usr/bin/service ]; then
               /usr/sbin/service rsyslog restart >/dev/null 2>&1
               echo "done."
@@ -1748,10 +1748,10 @@ removeExistingInstall() {
               echo "Unable to restart rsyslog service. Please do it manually."
             fi
           else
-            egrep -q 'zimbra' /etc/rsyslog.conf
+            egrep -q 'zmail' /etc/rsyslog.conf
             if [ $? = 0 ]; then
               echo -n "Cleaning up /etc/rsyslog.conf..."
-              sed -i -e '/zimbra/d' /etc/rsyslog.conf
+              sed -i -e '/zmail/d' /etc/rsyslog.conf
               if [ $PLATFORM = "RHEL6_64" -o $PLATFORM = "CentOS6_64" ]; then
                 sed -i -e 's/^*.info;local0.none;local1.none;mail.none;auth.none/*.info/' /etc/rsyslog.conf
                 sed -i -e 's/^*.info;local0.none;local1.none;auth.none/*.info/' /etc/rsyslog.conf
@@ -1767,24 +1767,24 @@ removeExistingInstall() {
         fi
       fi
 
-      echo -n "Cleaning up zimbra init scripts..."
+      echo -n "Cleaning up zmail init scripts..."
       if [ -x /sbin/chkconfig ]; then
-        /sbin/chkconfig zimbra off 2> /dev/null
-        /sbin/chkconfig --del zimbra 2> /dev/null
+        /sbin/chkconfig zmail off 2> /dev/null
+        /sbin/chkconfig --del zmail 2> /dev/null
       else 
-        /bin/rm -f /etc/rc*.d/S99zimbra 2> /dev/null
-        /bin/rm -f /etc/rc*.d/K01zimbra 2> /dev/null
+        /bin/rm -f /etc/rc*.d/S99zmail 2> /dev/null
+        /bin/rm -f /etc/rc*.d/K01zmail 2> /dev/null
       fi
-      if [ -f /etc/init.d/zimbra ]; then
-        /bin/rm -f /etc/init.d/zimbra
+      if [ -f /etc/init.d/zmail ]; then
+        /bin/rm -f /etc/init.d/zmail
       fi
       echo "done."
 
       if [ -f /etc/ld.so.conf ]; then
         echo -n "Cleaning up /etc/ld.so.conf..."
-        egrep -q '/opt/zimbra' /etc/ld.so.conf
+        egrep -q '/opt/zmail' /etc/ld.so.conf
         if [ $? = 0 ]; then
-          sed -i -e '/\/opt\/zimbra/d' /etc/ld.so.conf
+          sed -i -e '/\/opt\/zmail/d' /etc/ld.so.conf
           if [ -x /sbin/ldconfig ]; then
            /sbin/ldconfig
           fi
@@ -1794,43 +1794,43 @@ removeExistingInstall() {
 
       if [ -f /etc/prelink.conf ]; then
         echo -n "Cleaning up /etc/prelink.conf..."
-        egrep -q 'zimbra' /etc/prelink.conf
+        egrep -q 'zmail' /etc/prelink.conf
         if [ $? = 0 ]; then
-          sed -i -e '/zimbra/d' -e '/Zimbra/d' /etc/prelink.conf
+          sed -i -e '/zmail/d' -e '/Zmail/d' /etc/prelink.conf
         fi
         echo "done."
       fi
 
-      if [ -f /etc/logrotate.d/zimbra ]; then
-        echo -n "Cleaning up /etc/logrotate.d/zimbra..."
-        /bin/rm -f /etc/logrotate.d/zimbra 2> /dev/null
+      if [ -f /etc/logrotate.d/zmail ]; then
+        echo -n "Cleaning up /etc/logrotate.d/zmail..."
+        /bin/rm -f /etc/logrotate.d/zmail 2> /dev/null
         echo "done."
       fi
 
       if [ -f /etc/security/limits.conf ]; then
         echo -n "Cleaning up /etc/security/limits.conf..."
-        egrep -q '^zimbra|^liquid' /etc/security/limits.conf
+        egrep -q '^zmail|^liquid' /etc/security/limits.conf
         if [ $? = 0 ]; then
-          sed -i -e '/^zimbra/d' -e '/^liquid/d' /etc/security/limits.conf
+          sed -i -e '/^zmail/d' -e '/^liquid/d' /etc/security/limits.conf
         fi
         echo "done."
       fi
 
-      if [ -f /etc/security/limits.d/80-zimbra.conf ]; then
-        echo -n "Cleaning up /etc/security/limits.d/80-zimbra.conf..."
-        rm -f /etc/security/limits.d/80-zimbra.conf
+      if [ -f /etc/security/limits.d/80-zmail.conf ]; then
+        echo -n "Cleaning up /etc/security/limits.d/80-zmail.conf..."
+        rm -f /etc/security/limits.d/80-zmail.conf
         echo "done."
       fi
   
       for mp in $MOUNTPOINTS; do
-        if [ x$mp != "x/opt/zimbra" ]; then
+        if [ x$mp != "x/opt/zmail" ]; then
           mkdir -p ${mp}
           mount ${mp}
         fi
       done
   
       echo ""
-      echo "Finished removing Zimbra Collaboration Server."
+      echo "Finished removing Zmail Collaboration Server."
       echo ""
     fi
   fi
@@ -1939,9 +1939,9 @@ checkConflicts() {
 
 cleanUp() {
   # Dump all the config data to a file
-  runAsZimbra "zmlocalconfig -s > .localconfig.save.$$"
-  runAsZimbra "zmprov gs $HOSTNAME > .zmprov.$HOSTNAME.save.$$"
-  runAsZimbra "zmprov gacf $HOSTNAME > .zmprov.gacf.save.$$"
+  runAsZmail "zmlocalconfig -s > .localconfig.save.$$"
+  runAsZmail "zmprov gs $HOSTNAME > .zmprov.$HOSTNAME.save.$$"
+  runAsZmail "zmprov gacf $HOSTNAME > .zmprov.gacf.save.$$"
 }
 
 verifyLdapServer() {
@@ -1954,7 +1954,7 @@ verifyLdapServer() {
   echo ""
   echo -n  "Contacting ldap server $LDAPHOST on $LDAPPORT..."
 
-  $MYLDAPSEARCH -x -h $LDAPHOST -p $LDAPPORT -w $LDAPZIMBRAPW -D "uid=zimbra,cn=admins,cn=zimbra" > /dev/null 2>&1
+  $MYLDAPSEARCH -x -h $LDAPHOST -p $LDAPPORT -w $LDAPZIMBRAPW -D "uid=zmail,cn=admins,cn=zmail" > /dev/null 2>&1
   LDAPRESULT=$?
 
   if [ $LDAPRESULT != 0 ]; then
@@ -1971,7 +1971,7 @@ getInstallPackages() {
   echo ""
   echo "Select the packages to install"
   if [ $UPGRADE = "yes" ]; then
-    echo "    Upgrading zimbra-core"
+    echo "    Upgrading zmail-core"
   fi
 
   APACHE_SELECTED="no"
@@ -1989,10 +1989,10 @@ getInstallPackages() {
       echo $INSTALLED_PACKAGES | grep $i > /dev/null 2>&1
       if [ $? = 0 ]; then
         echo "    Upgrading $i"
-        if [ $i = "zimbra-core" ]; then
+        if [ $i = "zmail-core" ]; then
           continue
         fi
-        if [ $i = "zimbra-mta" ]; then
+        if [ $i = "zmail-mta" ]; then
           CONFLICTS="no"
           for j in $CONFLICT_PACKAGES; do
             conflictInstalled $j
@@ -2014,13 +2014,13 @@ getInstallPackages() {
           fi
         fi
         INSTALL_PACKAGES="$INSTALL_PACKAGES $i"
-        if [ $i = "zimbra-apache" ]; then
+        if [ $i = "zmail-apache" ]; then
           APACHE_SELECTED="yes"
-        elif [ $i = "zimbra-logger" ]; then
+        elif [ $i = "zmail-logger" ]; then
           LOGGER_SELECTED="yes"
-        elif [ $i = "zimbra-store" ]; then
+        elif [ $i = "zmail-store" ]; then
           STORE_SELECTED="yes"
-        elif [ $i = "zimbra-cluster" ]; then
+        elif [ $i = "zmail-cluster" ]; then
           CLUSTER_SELECTED="yes"
         fi
         continue
@@ -2029,38 +2029,38 @@ getInstallPackages() {
 
     # Only prompt for cluster on supported platforms
     echo $PLATFORM | egrep -q "RHEL|CentOS"
-    if [ $? != 0 -a $i = "zimbra-cluster" ]; then
+    if [ $? != 0 -a $i = "zmail-cluster" ]; then
       continue
     fi
 
     # Cluster is only available clustertype is defined 
-    if [ x"$CLUSTERTYPE" = "x" -a "$i" = "zimbra-cluster" ]; then
+    if [ x"$CLUSTERTYPE" = "x" -a "$i" = "zmail-cluster" ]; then
       continue
     fi
 
     if [ $UPGRADE = "yes" ]; then
-      if [ ${ZM_CUR_MAJOR} -eq 5 -a $i = "zimbra-convertd" ]; then
-        echo $INSTALLED_PACKAGES | grep "zimbra-store" > /dev/null 2>&1
+      if [ ${ZM_CUR_MAJOR} -eq 5 -a $i = "zmail-convertd" ]; then
+        echo $INSTALLED_PACKAGES | grep "zmail-store" > /dev/null 2>&1
         if [ $? = 0 ]; then
-          echo $INSTALLED_PACKAGES | grep "zimbra-convertd" > /dev/null 2>&1
+          echo $INSTALLED_PACKAGES | grep "zmail-convertd" > /dev/null 2>&1
           if [ $? != 0 ]; then
-            echo $INSTALLED_PACKAGES | grep "zimbra-apache" > /dev/null 2>&1
+            echo $INSTALLED_PACKAGES | grep "zmail-apache" > /dev/null 2>&1
             if [ $? != 0 ]; then
-              INSTALL_PACKAGES="$INSTALL_PACKAGES zimbra-apache $i"
+              INSTALL_PACKAGES="$INSTALL_PACKAGES zmail-apache $i"
             else
               INSTALL_PACKAGES="$INSTALL_PACKAGES $i"
             fi
             continue
           fi
         fi
-      elif [ ${ZM_CUR_MAJOR} -eq 5 -a $i = "zimbra-memcached" ]; then
-        echo $INSTALLED_PACKAGES | grep "zimbra-proxy" > /dev/null 2>&1
+      elif [ ${ZM_CUR_MAJOR} -eq 5 -a $i = "zmail-memcached" ]; then
+        echo $INSTALLED_PACKAGES | grep "zmail-proxy" > /dev/null 2>&1
         if [ $? = 0 ]; then
           askYN "Install $i" "Y"
         else
           askYN "Install $i" "N"
         fi
-      elif [ $i = "zimbra-archiving" ]; then
+      elif [ $i = "zmail-archiving" ]; then
         if [ $STORE_SELECTED = "yes" ]; then
           askYN "Install $i" "N"
         fi
@@ -2068,22 +2068,22 @@ getInstallPackages() {
         askYN "Install $i" "N"
       fi
     else
-      if [ $i = "zimbra-memcached" ]; then
+      if [ $i = "zmail-memcached" ]; then
          askYN "Install $i" "N"
-      elif [ $i = "zimbra-proxy" ]; then
+      elif [ $i = "zmail-proxy" ]; then
          askYN "Install $i" "N"
-      elif [ $i = "zimbra-archiving" ]; then
-        # only prompt to install archiving if zimbra-store is selected
+      elif [ $i = "zmail-archiving" ]; then
+        # only prompt to install archiving if zmail-store is selected
         if [ $STORE_SELECTED = "yes" ]; then
           askYN "Install $i" "N"
         fi
-      elif [ $i = "zimbra-convertd" ]; then
+      elif [ $i = "zmail-convertd" ]; then
         if [ $STORE_SELECTED = "yes" ]; then
           askYN "Install $i" "Y"
         else
           askYN "Install $i" "N"
         fi
-      elif [ $i = "zimbra-cluster" -a "x$CLUSTERTYPE" = "x" ]; then
+      elif [ $i = "zmail-cluster" -a "x$CLUSTERTYPE" = "x" ]; then
         askYN "Install $i" "N"
       else
         askYN "Install $i" "Y"
@@ -2091,17 +2091,17 @@ getInstallPackages() {
     fi
 
     if [ $response = "yes" ]; then
-      if [ $i = "zimbra-logger" ]; then
+      if [ $i = "zmail-logger" ]; then
         LOGGER_SELECTED="yes"
-      elif [ $i = "zimbra-store" ]; then
+      elif [ $i = "zmail-store" ]; then
         STORE_SELECTED="yes"
-      elif [ $i = "zimbra-apache" ]; then
+      elif [ $i = "zmail-apache" ]; then
         APACHE_SELECTED="yes"
-      elif [ $i = "zimbra-cluster" ]; then
+      elif [ $i = "zmail-cluster" ]; then
         CLUSTER_SELECTED="yes"
       fi
 
-      if [ $i = "zimbra-mta" ]; then
+      if [ $i = "zmail-mta" ]; then
         CONFLICTS="no"
         for j in $CONFLICT_PACKAGES; do
           conflictInstalled $j
@@ -2122,25 +2122,25 @@ getInstallPackages() {
           exit 1
         fi
       fi
-      if [ $i = "zimbra-spell" -a $APACHE_SELECTED = "no" ]; then
+      if [ $i = "zmail-spell" -a $APACHE_SELECTED = "no" ]; then
         APACHE_SELECTED="yes"
-        INSTALL_PACKAGES="$INSTALL_PACKAGES zimbra-apache"
+        INSTALL_PACKAGES="$INSTALL_PACKAGES zmail-apache"
       fi
       
-      if [ $i = "zimbra-convertd" -a $APACHE_SELECTED = "no" ]; then
+      if [ $i = "zmail-convertd" -a $APACHE_SELECTED = "no" ]; then
         APACHE_SELECTED="yes"
-        INSTALL_PACKAGES="$INSTALL_PACKAGES zimbra-apache"
+        INSTALL_PACKAGES="$INSTALL_PACKAGES zmail-apache"
       fi
 
       # don't force logger to be installed especially on N+M clusters
-      #if [ $i = "zimbra-store" -a $LOGGER_SELECTED = "no" -a $CLUSTER_SELECTED = "yes" ]; then
+      #if [ $i = "zmail-store" -a $LOGGER_SELECTED = "no" -a $CLUSTER_SELECTED = "yes" ]; then
       #  LOGGER_SELECTED="yes"
-      #  INSTALL_PACKAGES="$INSTALL_PACKAGES zimbra-logger"
+      #  INSTALL_PACKAGES="$INSTALL_PACKAGES zmail-logger"
       #fi
 
-      #if [ $i = "zimbra-cluster" -a $STORE_SELECTED = "yes" -a $LOGGER_SELECTED = "no" ]; then
+      #if [ $i = "zmail-cluster" -a $STORE_SELECTED = "yes" -a $LOGGER_SELECTED = "no" ]; then
       #  LOGGER_SELECTED="yes"
-      #  INSTALL_PACKAGES="$INSTALL_PACKAGES zimbra-logger"
+      #  INSTALL_PACKAGES="$INSTALL_PACKAGES zmail-logger"
       #fi
 
       INSTALL_PACKAGES="$INSTALL_PACKAGES $i"
@@ -2182,10 +2182,10 @@ setHereFlags() {
   LOGGER_HERE="no"
 
   for i in $INSTALL_PACKAGES; do
-    if [ $i = "zimbra-store" ]; then
+    if [ $i = "zmail-store" ]; then
       STORE_HERE="yes"
     fi
-    if [ $i = "zimbra-mta" ]; then
+    if [ $i = "zmail-mta" ]; then
       POSTFIX_HERE="yes"
       # Don't change it if we read in a value from an existing config.
       if [ "x$RUNAV" = "x" ]; then
@@ -2195,13 +2195,13 @@ setHereFlags() {
         RUNSA="yes"
       fi
     fi
-    if [ $i = "zimbra-ldap" ]; then
+    if [ $i = "zmail-ldap" ]; then
       LDAP_HERE="yes"
     fi
-    if [ $i = "zimbra-snmp" ]; then
+    if [ $i = "zmail-snmp" ]; then
       SNMP_HERE="yes"
     fi
-    if [ $i = "zimbra-logger" ]; then
+    if [ $i = "zmail-logger" ]; then
       LOGGER_HERE="yes"
     fi
   done
@@ -2209,8 +2209,8 @@ setHereFlags() {
 
 startServers() {
   echo -n "Starting servers..."
-  runAsZimbra "zmcontrol startup"
-  su - zimbra -c "zmcontrol status"
+  runAsZmail "zmcontrol startup"
+  su - zmail -c "zmcontrol status"
   echo "done"
 }
 
@@ -2231,33 +2231,33 @@ verifyExecute() {
 }
 
 setupCrontab() {
-  crontab -u zimbra -l > /tmp/crontab.zimbra.orig
-  grep ZIMBRASTART /tmp/crontab.zimbra.orig > /dev/null 2>&1
+  crontab -u zmail -l > /tmp/crontab.zmail.orig
+  grep ZIMBRASTART /tmp/crontab.zmail.orig > /dev/null 2>&1
   if [ $? != 0 ]; then
-    cat /dev/null > /tmp/crontab.zimbra.orig
+    cat /dev/null > /tmp/crontab.zmail.orig
   fi
-  grep ZIMBRAEND /tmp/crontab.zimbra.orig > /dev/null 2>&1
+  grep ZIMBRAEND /tmp/crontab.zmail.orig > /dev/null 2>&1
   if [ $? != 0 ]; then
-    cat /dev/null > /tmp/crontab.zimbra.orig
+    cat /dev/null > /tmp/crontab.zmail.orig
   fi
-  cat /tmp/crontab.zimbra.orig | sed -e '/# ZIMBRASTART/,/# ZIMBRAEND/d' > \
-    /tmp/crontab.zimbra.proc
-  cp -f /opt/zimbra/zimbramon/crontabs/crontab /tmp/crontab.zimbra
+  cat /tmp/crontab.zmail.orig | sed -e '/# ZIMBRASTART/,/# ZIMBRAEND/d' > \
+    /tmp/crontab.zmail.proc
+  cp -f /opt/zmail/zmailmon/crontabs/crontab /tmp/crontab.zmail
 
-  isInstalled zimbra-store
+  isInstalled zmail-store
   if [ x$PKGINSTALLED != "x" ]; then
-    cat /opt/zimbra/zimbramon/crontabs/crontab.store >> /tmp/crontab.zimbra
+    cat /opt/zmail/zmailmon/crontabs/crontab.store >> /tmp/crontab.zmail
   fi
 
-  isInstalled zimbra-logger
+  isInstalled zmail-logger
   if [ x$PKGINSTALLED != "x" ]; then
-    cat /opt/zimbra/zimbramon/crontabs/crontab.logger >> /tmp/crontab.zimbra
+    cat /opt/zmail/zmailmon/crontabs/crontab.logger >> /tmp/crontab.zmail
   fi
 
-  echo "# ZIMBRAEND -- DO NOT EDIT ANYTHING BETWEEN THIS LINE AND ZIMBRASTART" >> /tmp/crontab.zimbra
-  cat /tmp/crontab.zimbra.proc >> /tmp/crontab.zimbra
+  echo "# ZIMBRAEND -- DO NOT EDIT ANYTHING BETWEEN THIS LINE AND ZIMBRASTART" >> /tmp/crontab.zmail
+  cat /tmp/crontab.zmail.proc >> /tmp/crontab.zmail
 
-  crontab -u zimbra /tmp/crontab.zimbra
+  crontab -u zmail /tmp/crontab.zmail
 }
 
 isToBeInstalled() {
@@ -2311,7 +2311,7 @@ conflictInstalled() {
     isInstalled $QF
     if [ x$PKGINSTALLED != "x" ]; then
       CONFLICTINSTALLED=$QF
-      if [ x$CONFLICTINSTALLED = "xzimbra-mta" ]; then
+      if [ x$CONFLICTINSTALLED = "xzmail-mta" ]; then
         CONFLICTINSTALLED=""
       fi
     fi

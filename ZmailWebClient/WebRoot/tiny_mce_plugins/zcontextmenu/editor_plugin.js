@@ -51,8 +51,8 @@
 		getInfo : function() {
 			return {
 				longname : 'ZContextMenu plugin which has custom shortcuts for trigerring',
-				author : 'Zimbra Inc.,',
-				authorurl : 'http://www.zimbra.com',
+				author : 'Zmail Inc.,',
+				authorurl : 'http://www.zmail.com',
 				version : tinymce.majorVersion + "." + tinymce.minorVersion
 			};
 		},

@@ -12,11 +12,11 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.bp;
+package org.zmail.bp;
 
-import com.zimbra.common.soap.AdminExtConstants;
-import com.zimbra.soap.DocumentService;
-import com.zimbra.soap.DocumentDispatcher;
+import org.zmail.common.soap.AdminExtConstants;
+import org.zmail.soap.DocumentService;
+import org.zmail.soap.DocumentDispatcher;
 
 /**
  * Created by IntelliJ IDEA.
@@ -24,7 +24,7 @@ import com.zimbra.soap.DocumentDispatcher;
  * Date: Sep 11, 2008
  * Time: 10:59:29 AM
  */
-public class ZimbraBulkProvisionService  implements DocumentService {
+public class ZmailBulkProvisionService  implements DocumentService {
 
     public void registerHandlers(DocumentDispatcher dispatcher) {
         dispatcher.registerHandler(AdminExtConstants.BULK_IMPORT_ACCOUNTS_REQUEST, new BulkImportAccounts());

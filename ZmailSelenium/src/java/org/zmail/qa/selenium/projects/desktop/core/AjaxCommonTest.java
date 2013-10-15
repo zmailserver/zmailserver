@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.core;
+package org.zmail.qa.selenium.projects.desktop.core;
 
 import java.io.*;
 import java.lang.reflect.Method;
@@ -28,19 +28,19 @@ import org.testng.annotations.*;
 import org.xml.sax.SAXException;
 
 import com.thoughtworks.selenium.*;
-import com.zimbra.qa.selenium.framework.core.ClientSessionFactory;
-import com.zimbra.qa.selenium.framework.core.Repository;
-import com.zimbra.qa.selenium.framework.ui.AbsTab;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.framework.util.BuildUtility.*;
-import com.zimbra.qa.selenium.framework.util.GeneralUtility.WAIT_FOR_OPERAND;
-import com.zimbra.qa.selenium.framework.util.OperatingSystem.OsType;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount.SOAP_DESTINATION_HOST_TYPE;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties.AppType;
-import com.zimbra.qa.selenium.framework.util.staf.StafServicePROCESS;
-import com.zimbra.qa.selenium.framework.util.staf.Stafzmtlsctl;
-import com.zimbra.qa.selenium.framework.util.staf.Stafzmtlsctl.SERVER_ACCESS;
-import com.zimbra.qa.selenium.projects.desktop.ui.*;
+import org.zmail.qa.selenium.framework.core.ClientSessionFactory;
+import org.zmail.qa.selenium.framework.core.Repository;
+import org.zmail.qa.selenium.framework.ui.AbsTab;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.BuildUtility.*;
+import org.zmail.qa.selenium.framework.util.GeneralUtility.WAIT_FOR_OPERAND;
+import org.zmail.qa.selenium.framework.util.OperatingSystem.OsType;
+import org.zmail.qa.selenium.framework.util.ZmailAccount.SOAP_DESTINATION_HOST_TYPE;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties.AppType;
+import org.zmail.qa.selenium.framework.util.staf.StafServicePROCESS;
+import org.zmail.qa.selenium.framework.util.staf.Stafzmtlsctl;
+import org.zmail.qa.selenium.framework.util.staf.Stafzmtlsctl.SERVER_ACCESS;
+import org.zmail.qa.selenium.projects.desktop.ui.*;
 
 /**
  * The <code>AjaxCommonTest</code> class is the base test case class
@@ -50,7 +50,7 @@ import com.zimbra.qa.selenium.projects.desktop.ui.*;
  * <ol>
  * <li>{@link AbsTab} {@link #startingPage} - navigate to this
  * page before each test case method</li>
- * <li>{@link ZimbraAccount} {@link #startingAccountPreferences} - ensure this
+ * <li>{@link ZmailAccount} {@link #startingAccountPreferences} - ensure this
  * account is authenticated before each test case method</li>
  * </ol>
  * <p>
@@ -74,7 +74,7 @@ import com.zimbra.qa.selenium.projects.desktop.ui.*;
  *         super.startingPage = app.zPageMail;
  *         
  *         // Create a new account to log into
- *         ZimbraAccount account = new ZimbraAccount();
+ *         ZmailAccount account = new ZmailAccount();
  *         super.startingAccount = account;
  *         
  *         // ...
@@ -92,8 +92,8 @@ import com.zimbra.qa.selenium.projects.desktop.ui.*;
  */
 public class AjaxCommonTest {
 	protected static Logger logger = LogManager.getLogger(AjaxCommonTest.class);
-	public final boolean isRunningDesktopTest = ZimbraSeleniumProperties.getStringProperty(
-			ZimbraSeleniumProperties.getLocalHost() + ".desktop.test", "false").toLowerCase().equals("true") ? true : false;
+	public final boolean isRunningDesktopTest = ZmailSeleniumProperties.getStringProperty(
+			ZmailSeleniumProperties.getLocalHost() + ".desktop.test", "false").toLowerCase().equals("true") ? true : false;
 
 
 	/**
@@ -104,18 +104,18 @@ public class AjaxCommonTest {
 	private String _downloadFilePath = null;
 	private String[] _executableFilePath = null;
 	private String [] _params = null;
-	public final static String accountFlavor = "Zimbra";
-	public final static String defaultAccountName = ZimbraSeleniumProperties.getUniqueString();
-	public final static String yahooUserName = ZimbraSeleniumProperties.getStringProperty(
-	      ZimbraSeleniumProperties.getLocalHost() + ".desktop.yahoo.login");
-	public final static String yahooPassword = ZimbraSeleniumProperties.getStringProperty(
-	      ZimbraSeleniumProperties.getLocalHost() + ".desktop.yahoo.password");
-	public final static String gmailUserName = ZimbraSeleniumProperties.getStringProperty("desktop.gmail.login");
-	public final static String gmailPassword = ZimbraSeleniumProperties.getStringProperty("desktop.gmail.password");
-	public final static String hotmailUserName = ZimbraSeleniumProperties.getStringProperty("desktop.hotmail.login");
-	public final static String hotmailPassword = ZimbraSeleniumProperties.getStringProperty("desktop.hotmail.password");
-	public final static String hotmailUserName2 = ZimbraSeleniumProperties.getStringProperty("desktop.hotmail2.login");
-	public final static String hotmailPassword2 = ZimbraSeleniumProperties.getStringProperty("desktop.hotmail2.password");
+	public final static String accountFlavor = "Zmail";
+	public final static String defaultAccountName = ZmailSeleniumProperties.getUniqueString();
+	public final static String yahooUserName = ZmailSeleniumProperties.getStringProperty(
+	      ZmailSeleniumProperties.getLocalHost() + ".desktop.yahoo.login");
+	public final static String yahooPassword = ZmailSeleniumProperties.getStringProperty(
+	      ZmailSeleniumProperties.getLocalHost() + ".desktop.yahoo.password");
+	public final static String gmailUserName = ZmailSeleniumProperties.getStringProperty("desktop.gmail.login");
+	public final static String gmailPassword = ZmailSeleniumProperties.getStringProperty("desktop.gmail.password");
+	public final static String hotmailUserName = ZmailSeleniumProperties.getStringProperty("desktop.hotmail.login");
+	public final static String hotmailPassword = ZmailSeleniumProperties.getStringProperty("desktop.hotmail.password");
+	public final static String hotmailUserName2 = ZmailSeleniumProperties.getStringProperty("desktop.hotmail2.login");
+	public final static String hotmailPassword2 = ZmailSeleniumProperties.getStringProperty("desktop.hotmail2.password");
 	public final static String gmailImapReceivingServer = "imap.gmail.com";
 	public final static String gmailImapSmtpServer = "smtp.gmail.com";
 	public final static String hotmailPopReceivingServer = "pop3.live.com";
@@ -126,7 +126,7 @@ public class AjaxCommonTest {
 	// existing ones. For desktop purpose, this cannot use app.zGetActiveAccount
 	// because the implementation is different where in Ajax client, active account
 	// is set in login and logout, while in desktop, it is only set in addDefaultAccount
-	private static ZimbraAccount _currentAccount = null;
+	private static ZmailAccount _currentAccount = null;
 
 	// Configurable from config file or input parameters
 	private PRODUCT_NAME _productName = PRODUCT_NAME.ZDESKTOP;
@@ -181,42 +181,42 @@ public class AjaxCommonTest {
       stafzmtlsctl.setServerAccess(SERVER_ACCESS.BOTH);
       StafServicePROCESS stafServiceProcess = new StafServicePROCESS();
 
-      // Disable the zimbraMtaTlsAuthOnly if it is true
-      stafServiceProcess.execute("zmprov gs `zmhostname` zimbraMtaTlsAuthOnly");
-      String mode = stafServiceProcess.getStafResponse().split("zimbraMtaTlsAuthOnly:")[1].trim();
+      // Disable the zmailMtaTlsAuthOnly if it is true
+      stafServiceProcess.execute("zmprov gs `zmhostname` zmailMtaTlsAuthOnly");
+      String mode = stafServiceProcess.getStafResponse().split("zmailMtaTlsAuthOnly:")[1].trim();
 
-      logger.debug("==================> Current zimbraMtaTlsAuthOnly: " + mode);
+      logger.debug("==================> Current zmailMtaTlsAuthOnly: " + mode);
 
       if (mode.contains("TRUE")) {
-         logger.debug("Setting zimbraMtaTlsAuthOnly to false");
-         String serverName = ZimbraSeleniumProperties.getStringProperty("server.host", "localhost");
-         stafServiceProcess.execute("zmprov ms " + serverName + " zimbraMtaTlsAuthOnly FALSE");
+         logger.debug("Setting zmailMtaTlsAuthOnly to false");
+         String serverName = ZmailSeleniumProperties.getStringProperty("server.host", "localhost");
+         stafServiceProcess.execute("zmprov ms " + serverName + " zmailMtaTlsAuthOnly FALSE");
          logger.debug("Restarting zmmtactl...");
          stafServiceProcess.execute("zmmtactl restart");
       }
 
       //Racetrack
-      String DbHostURL = ZimbraSeleniumProperties.getStringProperty("racetrack.dbUrl",
+      String DbHostURL = ZmailSeleniumProperties.getStringProperty("racetrack.dbUrl",
             "racetrack.eng.vmware.com");
-      String buildNumber = ZimbraSeleniumProperties.getStringProperty("racetrack.buildNumber",
+      String buildNumber = ZmailSeleniumProperties.getStringProperty("racetrack.buildNumber",
             "000000");
-      String userName = ZimbraSeleniumProperties.getStringProperty("racetrack.username",
+      String userName = ZmailSeleniumProperties.getStringProperty("racetrack.username",
             "anonymous");
-      String product = ZimbraSeleniumProperties.getStringProperty("racetrack.product",
+      String product = ZmailSeleniumProperties.getStringProperty("racetrack.product",
             "zdesktop");
-      String description = ZimbraSeleniumProperties.getStringProperty("racetrack.description",
+      String description = ZmailSeleniumProperties.getStringProperty("racetrack.description",
             "zdesktop description");
-      String branch = ZimbraSeleniumProperties.getStringProperty("racetrack.branch",
+      String branch = ZmailSeleniumProperties.getStringProperty("racetrack.branch",
             "ZDESKTOP_7_1_2");
-      String buildType = ZimbraSeleniumProperties.getStringProperty("racetrack.buildType",
+      String buildType = ZmailSeleniumProperties.getStringProperty("racetrack.buildType",
             "beta");
-      String testType = ZimbraSeleniumProperties.getStringProperty("racetrack.testType",
+      String testType = ZmailSeleniumProperties.getStringProperty("racetrack.testType",
             "functional");
-      String recordToRacetrack = ZimbraSeleniumProperties.getStringProperty("racetrack.recordToRacetrack",
+      String recordToRacetrack = ZmailSeleniumProperties.getStringProperty("racetrack.recordToRacetrack",
             "false");
-      String appendToExisting = ZimbraSeleniumProperties.getStringProperty("racetrack.appendToExisting",
+      String appendToExisting = ZmailSeleniumProperties.getStringProperty("racetrack.appendToExisting",
             "false");
-      String resultId = ZimbraSeleniumProperties.getStringProperty("racetrack.resultId",
+      String resultId = ZmailSeleniumProperties.getStringProperty("racetrack.resultId",
             "");
 
       _repository.connectingToRacetrack(DbHostURL);
@@ -233,7 +233,7 @@ public class AjaxCommonTest {
             resultId);
 
       // Make sure there is a new default account
-      ZimbraAccount.ResetAccountZDC();
+      ZmailAccount.ResetAccountZDC();
 
 		osType = OperatingSystem.getOSType();
 
@@ -253,13 +253,13 @@ public class AjaxCommonTest {
 			}
 
 			if (isRunningDesktopTest) {
-				ZimbraSeleniumProperties.setAppType(ZimbraSeleniumProperties.AppType.DESKTOP);
+				ZmailSeleniumProperties.setAppType(ZmailSeleniumProperties.AppType.DESKTOP);
 
 
-				_forceInstall = ZimbraSeleniumProperties.getStringProperty("desktop.forceInstall", "true").toLowerCase().equals("true") ? true : false;
-				_uninstallAppAfterTest = ZimbraSeleniumProperties.getStringProperty("desktop.uninstallAfterTest", "false").toLowerCase().equals("true") ? true : false;
+				_forceInstall = ZmailSeleniumProperties.getStringProperty("desktop.forceInstall", "true").toLowerCase().equals("true") ? true : false;
+				_uninstallAppAfterTest = ZmailSeleniumProperties.getStringProperty("desktop.uninstallAfterTest", "false").toLowerCase().equals("true") ? true : false;
 
-				String productName = ZimbraSeleniumProperties.getStringProperty("desktop.productName", "ZDESKTOP").toUpperCase();
+				String productName = ZmailSeleniumProperties.getStringProperty("desktop.productName", "ZDESKTOP").toUpperCase();
 				try {
 					logger.info("productName: " + productName);
 					_productName = PRODUCT_NAME.valueOf(productName);
@@ -267,7 +267,7 @@ public class AjaxCommonTest {
 					_productName = PRODUCT_NAME.ZDESKTOP;
 				}
 
-				String productBranch = ZimbraSeleniumProperties.getStringProperty("desktop.productBranch", "HELIX").toUpperCase();
+				String productBranch = ZmailSeleniumProperties.getStringProperty("desktop.productBranch", "HELIX").toUpperCase();
 				try {
 					logger.info("productBranch: " + productBranch);
 					_branchName = BRANCH.valueOf(productBranch);
@@ -283,7 +283,7 @@ public class AjaxCommonTest {
 
 				switch (osType){
 				case WINDOWS: case WINDOWS_XP:
-					_downloadFilePath = "C:\\download-zimbra-qa-test\\";
+					_downloadFilePath = "C:\\download-zmail-qa-test\\";
 					_arch = ARCH.WINDOWS;
 
 					String filePath = "C:\\Program Files (x86)";
@@ -291,20 +291,20 @@ public class AjaxCommonTest {
 					File root = new File(filePath); 
 					if (root.exists()) {
 						// 64 bit
-						_executableFilePath = new String[] {"C:\\WINDOWS\\SysWOW64\\cscript.exe", "C:\\Program Files (x86)\\Zimbra\\Zimbra Desktop\\win32\\zdrun.vbs"};
+						_executableFilePath = new String[] {"C:\\WINDOWS\\SysWOW64\\cscript.exe", "C:\\Program Files (x86)\\Zmail\\Zmail Desktop\\win32\\zdrun.vbs"};
 					} else {
 						// 32 bit
-						_executableFilePath = new String[] {"C:\\WINDOWS\\system32\\cscript.exe", "C:\\Program Files\\Zimbra\\Zimbra Desktop\\win32\\zdrun.vbs"};
+						_executableFilePath = new String[] {"C:\\WINDOWS\\system32\\cscript.exe", "C:\\Program Files\\Zmail\\Zmail Desktop\\win32\\zdrun.vbs"};
 					}
 
 					break;
 
 				case LINUX:
 
-					_downloadFilePath = "/download-zimbra-qa-test/";
+					_downloadFilePath = "/download-zmail-qa-test/";
 					_arch = ARCH.RHEL4;
-					String username = ZimbraDesktopProperties.getInstance().getUserName();
-					String command = "/opt/zimbra/zdesktop/linux/prism/zdclient -webapp /home/<USER_NAME>/zdesktop/zdesktop.webapp -override /home/<USER_NAME>/zdesktop/zdesktop.webapp/override.ini -profile /home/<USER_NAME>/zdesktop/profile";
+					String username = ZmailDesktopProperties.getInstance().getUserName();
+					String command = "/opt/zmail/zdesktop/linux/prism/zdclient -webapp /home/<USER_NAME>/zdesktop/zdesktop.webapp -override /home/<USER_NAME>/zdesktop/zdesktop.webapp/override.ini -profile /home/<USER_NAME>/zdesktop/profile";
 					command = command.replaceAll("<USER_NAME>", username);
 
 					_executableFilePath = new String[] {"su", "-", username, "-c", command}; 
@@ -312,10 +312,10 @@ public class AjaxCommonTest {
 					break;
 
 				case MAC:
-					_downloadFilePath = "/download-zimbra-qa-test/";
+					_downloadFilePath = "/download-zmail-qa-test/";
 					_arch = ARCH.MACOSX_X86_10_6;
-					username = ZimbraDesktopProperties.getInstance().getUserName();
-					command = "/Applications/Zimbra\\ Desktop/Zimbra\\ Desktop.app/Contents/MacOS/zdrun";
+					username = ZmailDesktopProperties.getInstance().getUserName();
+					command = "/Applications/Zmail\\ Desktop/Zmail\\ Desktop.app/Contents/MacOS/zdrun";
 
 					_executableFilePath = new String[] {"su", "-", username, "-c", command};
 					_params = null;
@@ -327,7 +327,7 @@ public class AjaxCommonTest {
 					DesktopInstallUtil.forceInstallLatestBuild(_productName, _branchName, _arch, _downloadFilePath);
 				} else {
 					if (!DesktopInstallUtil.isDesktopAppInstalled()) {
-						String buildUrl = ZimbraSeleniumProperties.getStringProperty("desktop.buildUrl", ""); 
+						String buildUrl = ZmailSeleniumProperties.getStringProperty("desktop.buildUrl", ""); 
 						String downloadPath = null;
 
 						if (buildUrl.equals("")) {
@@ -354,12 +354,12 @@ public class AjaxCommonTest {
 				}
 
 
-				GeneralUtility.waitFor(null, ZimbraAccount.AccountZDC(), false,
+				GeneralUtility.waitFor(null, ZmailAccount.AccountZDC(), false,
 						"authenticateToMailClientHost", null, WAIT_FOR_OPERAND.NEQ, null, 60000, 3000);
 
 			} else {
 				// AJAX test
-				ZimbraSeleniumProperties.setAppType(ZimbraSeleniumProperties.AppType.AJAX);
+				ZmailSeleniumProperties.setAppType(ZmailSeleniumProperties.AppType.AJAX);
 			}
 
 			// For non Mac OS, selenium start is done after the installation and app initialization.
@@ -381,7 +381,7 @@ public class AjaxCommonTest {
 				{
 					logger.info("Retry #" + retry);
 					retry ++;
-					_selenium.open(ZimbraSeleniumProperties.getBaseURL());
+					_selenium.open(ZmailSeleniumProperties.getBaseURL());
 					appIsReady = true;
 				} catch (SeleniumException e) {
 					if (retry == maxRetry) {
@@ -450,23 +450,23 @@ public class AjaxCommonTest {
 	 */
 	public void addDefaultAccount() throws HarnessException {
 		logger.info("Creating new account...");
-		String serverScheme = ZimbraSeleniumProperties.getStringProperty("server.scheme", "http");
-		String serverName = ZimbraSeleniumProperties.getStringProperty("desktop.server.host", "localhost");
-		ZimbraDesktopProperties zdp = ZimbraDesktopProperties.getInstance();
+		String serverScheme = ZmailSeleniumProperties.getStringProperty("server.scheme", "http");
+		String serverName = ZmailSeleniumProperties.getStringProperty("desktop.server.host", "localhost");
+		ZmailDesktopProperties zdp = ZmailDesktopProperties.getInstance();
 		String connectionPort = zdp.getConnectionPort();
 
-		String emailServerName = ZimbraSeleniumProperties.getStringProperty("adminName", "admin@localhost").split("@")[1];
-		String emailServerPort = ZimbraSeleniumProperties.getStringProperty("server.port", "80");
+		String emailServerName = ZmailSeleniumProperties.getStringProperty("adminName", "admin@localhost").split("@")[1];
+		String emailServerPort = ZmailSeleniumProperties.getStringProperty("server.port", "80");
 		String securityType = serverScheme.equals("http") ? "&security=cleartext" : "";
 		String accountSetupUrl = new StringBuilder(serverScheme).append("://")
 		.append(serverName). append(":")
 		.append(connectionPort).append("/")
-		.append("zimbra/desktop/accsetup.jsp?at=")
+		.append("zmail/desktop/accsetup.jsp?at=")
 		.append(zdp.getSerialNumber()).append("&accountId=&verb=add&accountFlavor=")
 		.append(accountFlavor).append("&accountName=")
 		.append(defaultAccountName).append("&email=")
-		.append(ZimbraAccount.AccountZDC().EmailAddress).append("&password=")
-		.append(ZimbraAccount.AccountZDC().Password).append("&host=") 
+		.append(ZmailAccount.AccountZDC().EmailAddress).append("&password=")
+		.append(ZmailAccount.AccountZDC().Password).append("&host=") 
 		.append(emailServerName).append("&port=")
 		.append(emailServerPort).append("&syncFreqSecs=900&debugTraceEnabled=on")
 		.append(securityType)
@@ -532,7 +532,7 @@ public class AjaxCommonTest {
 		Repository.testCaseBegin(methodName, packageName, testDescription);
 
 		SOAP_DESTINATION_HOST_TYPE destType = null;
-		AppType appType = ZimbraSeleniumProperties.getAppType(); 
+		AppType appType = ZmailSeleniumProperties.getAppType(); 
 		switch (appType) {
 		case AJAX:
 			destType = SOAP_DESTINATION_HOST_TYPE.SERVER;
@@ -541,7 +541,7 @@ public class AjaxCommonTest {
 		case DESKTOP:
 			destType = SOAP_DESTINATION_HOST_TYPE.CLIENT;
 
-			if (_currentAccount != ZimbraAccount.AccountZDC()) {
+			if (_currentAccount != ZmailAccount.AccountZDC()) {
 				app.zPageLogin.zNavigateTo();
 
 				if  (app.zPageLogin.sIsElementPresent(PageLogin.Locators.zBtnLoginDesktop)) {
@@ -553,7 +553,7 @@ public class AjaxCommonTest {
 					// If this is the first time checking, then cleaning up all the pre-existing user
 					// Otherwise, only cleans the non-default users, which is second user and so on...
 					// Second user is located in row 3.
-					if (_currentAccount != ZimbraAccount.AccountZDC()) {
+					if (_currentAccount != ZmailAccount.AccountZDC()) {
 						deleteButtonLocator = PageLogin.Locators.zDeleteButton;
 					} else {
 						String[] temp = PageLogin.Locators.zDeleteButton.trim().split(" ");
@@ -600,13 +600,13 @@ public class AjaxCommonTest {
 				}
 				if (startingPage != app.zPageAddNewAccount) {
 					addDefaultAccount();
-					_currentAccount = ZimbraAccount.AccountZDC();               
+					_currentAccount = ZmailAccount.AccountZDC();               
 				}
 			}
 
 			if (startingPage != app.zPageAddNewAccount) {
-			   ZimbraAdminAccount.GlobalAdmin().authenticateToMailClientHost();
-				ZimbraAccount.AccountZDC().authenticateToMailClientHost();
+			   ZmailAdminAccount.GlobalAdmin().authenticateToMailClientHost();
+				ZmailAccount.AccountZDC().authenticateToMailClientHost();
 			}
 
 			break;
@@ -620,21 +620,21 @@ public class AjaxCommonTest {
 		//
 		if ( (startingAccountPreferences != null) && (!startingAccountPreferences.isEmpty()) ) {
 			logger.debug("commonTestBeforeMethod: startingAccountPreferences are defined");
-         ZimbraAccount.AccountZDC().modifyPreferences(startingAccountPreferences, destType);
+         ZmailAccount.AccountZDC().modifyPreferences(startingAccountPreferences, destType);
 
          /**StringBuilder settings = new StringBuilder();
 			for (Map.Entry<String, String> entry : startingAccountPreferences.entrySet()) {
 				settings.append(String.format("<a n='%s'>%s</a>", entry.getKey(), entry.getValue()));
 			}
-			ZimbraAdminAccount.GlobalAdmin().soapSend(
-					"<ModifyAccountRequest xmlns='urn:zimbraAdmin'>"
-					+		"<id>"+ ZimbraAccount.AccountZWC().ZimbraId +"</id>"
+			ZmailAdminAccount.GlobalAdmin().soapSend(
+					"<ModifyAccountRequest xmlns='urn:zmailAdmin'>"
+					+		"<id>"+ ZmailAccount.AccountZWC().ZmailId +"</id>"
 					+		settings.toString()
 					+	"</ModifyAccountRequest>", destType);
 
 */
 			// Set the flag so the account is reset for the next test
-			ZimbraAccount.AccountZDC().accountIsDirty = true;
+			ZmailAccount.AccountZDC().accountIsDirty = true;
 		}
 
 		// If test account zimlet preferences are defined, then make sure the test account
@@ -642,7 +642,7 @@ public class AjaxCommonTest {
 		//
 		if ( (startingAccountZimletPreferences != null) && (!startingAccountZimletPreferences.isEmpty()) ) {
 			logger.debug("commonTestBeforeMethod: startingAccountPreferences are defined");
-			ZimbraAccount.AccountZDC().modifyZimletPreferences(startingAccountZimletPreferences,
+			ZmailAccount.AccountZDC().modifyZimletPreferences(startingAccountZimletPreferences,
 					destType);
 		}
 
@@ -660,7 +660,7 @@ public class AjaxCommonTest {
 				throw new HarnessException("Unable to navigate to "+ startingPage.myPageName());
 			}
 
-			if (ZimbraSeleniumProperties.getAppType() == AppType.DESKTOP &&
+			if (ZmailSeleniumProperties.getAppType() == AppType.DESKTOP &&
 					startingPage != app.zPageLogin &&
 					startingPage != app.zPageAddNewAccount) {
 				if (desktopZimlets == null) {
@@ -739,7 +739,7 @@ public class AjaxCommonTest {
 		// For Ajax, if account is considered dirty (modified),
 		// then recreate a new account, but for desktop, the zimlet
 		// preferences has to be reset to default, all core zimlets are enabled
-		ZimbraAccount currentAccount = app.zGetActiveAccount();
+		ZmailAccount currentAccount = app.zGetActiveAccount();
 
 		if (currentAccount != null) {
 			if (startingPage != app.zPageLogin &&

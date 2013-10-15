@@ -93,7 +93,7 @@ function(/* arg1 ... argN */) {
  *      // and data is "some data"
  *   };
  *
- * [this is one of the most useful functions I ever wrote :D  -mihai@zimbra.com]
+ * [this is one of the most useful functions I ever wrote :D  -mihai@zmail.com]
  */
 ZMTB_AjxCallback.simpleClosure = function(func, obj) {
 	var args = [];

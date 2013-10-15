@@ -239,7 +239,7 @@ function(force, callback) {
 	// fetch from server:
 	DBG.println(AjxDebug.DBG3, "FILTER RULES: load rules");
 	var params = {
-		soapDoc: AjxSoapDoc.create(this._outgoing ? "GetOutgoingFilterRulesRequest" : "GetFilterRulesRequest", "urn:zimbraMail"),
+		soapDoc: AjxSoapDoc.create(this._outgoing ? "GetOutgoingFilterRulesRequest" : "GetFilterRulesRequest", "urn:zmailMail"),
 		asyncMode: true,
 		callback: (new AjxCallback(this, this._handleResponseLoadRules, [callback])),
 		accountName:this._accountName
@@ -301,7 +301,7 @@ ZmFilterRules.prototype._saveRules =
 function(index, notify, callback) {
 	var requestKey = this._outgoing ? "ModifyOutgoingFilterRulesRequest" : "ModifyFilterRulesRequest";
 	var jsonObj = {};
-	jsonObj[requestKey] = {_jsns:"urn:zimbraMail"};
+	jsonObj[requestKey] = {_jsns:"urn:zmailMail"};
 
 	var request = jsonObj[requestKey];
 

@@ -14,20 +14,20 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.addressbook.contacts;
+package org.zmail.qa.selenium.projects.ajax.tests.addressbook.contacts;
 
 
 
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.items.ContactItem;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew.Field;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.items.ContactItem;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.*;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew.Field;
 
 
 public class ForwardContact extends AjaxCommonTest  {
@@ -53,7 +53,7 @@ public class ForwardContact extends AjaxCommonTest  {
 		ContactItem contact = ContactItem.createContactItem(app.zGetActiveAccount());
 
 		// Mail subject
-		String subject = "subject"+ ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject"+ ZmailSeleniumProperties.getUniqueString();
 		
 		
 		//-- GUI
@@ -73,18 +73,18 @@ public class ForwardContact extends AjaxCommonTest  {
         // since the contact.fileAs length probably large, it is usually trim in the middle and replace with ...
         ZAssert.assertTrue( formMail.zHasAttachment("vcf"), "Verify the VCF attachment is there");
 
-        formMail.zFillField(Field.To, ZimbraAccount.AccountA().EmailAddress);
+        formMail.zFillField(Field.To, ZmailAccount.AccountA().EmailAddress);
         formMail.zFillField(Field.Subject, subject);
         formMail.zSubmit();
         
         
         
         // Verification
-        ZimbraAccount.AccountA().soapSend(
-				"<SearchRequest xmlns='urn:zimbraMail' types='message'>"
+        ZmailAccount.AccountA().soapSend(
+				"<SearchRequest xmlns='urn:zmailMail' types='message'>"
 			+		"<query>subject:("+ subject +")</query>"
 			+	"</SearchRequest>");
-        String id = ZimbraAccount.AccountA().soapSelectValue("//mail:m", "id");
+        String id = ZmailAccount.AccountA().soapSelectValue("//mail:m", "id");
         
         
         /*
@@ -96,20 +96,20 @@ public class ForwardContact extends AjaxCommonTest  {
         </mp>
          */
 
-        ZimbraAccount.AccountA().soapSend(
-				"<GetMsgRequest xmlns='urn:zimbraMail'>"
+        ZmailAccount.AccountA().soapSend(
+				"<GetMsgRequest xmlns='urn:zmailMail'>"
 			+		"<m id='"+ id +"'/>"
 			+	"</GetMsgRequest>");
         
         // Make sure we have a "mixed" content
-        ZimbraAccount.AccountA().soapSelectNode("//mail:mp[@ct='multipart/mixed']", 1);
+        ZmailAccount.AccountA().soapSelectNode("//mail:mp[@ct='multipart/mixed']", 1);
         
         // Make sure ct = text/directory 
-        String ct = ZimbraAccount.AccountA().soapSelectValue("//mail:mp[@cd='attachment']", "ct");
+        String ct = ZmailAccount.AccountA().soapSelectValue("//mail:mp[@cd='attachment']", "ct");
         ZAssert.assertEquals(ct, "text/directory", "Make sure ct = text/directory");
         
         // Make sure filename contains .vcf
-        String filename = ZimbraAccount.AccountA().soapSelectValue("//mail:mp[@cd='attachment']", "filename");
+        String filename = ZmailAccount.AccountA().soapSelectValue("//mail:mp[@cd='attachment']", "filename");
         ZAssert.assertStringContains(filename, ".vcf", "Make sure filename contains .vcf");
 
    	}
@@ -125,7 +125,7 @@ public class ForwardContact extends AjaxCommonTest  {
 		ContactItem contact = ContactItem.createContactItem(app.zGetActiveAccount());
 
 		// Mail subject
-		String subject = "subject"+ ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject"+ ZmailSeleniumProperties.getUniqueString();
 		
 		
 		//-- GUI
@@ -148,18 +148,18 @@ public class ForwardContact extends AjaxCommonTest  {
         // since the contact.fileAs length probably large, it is usually trim in the middle and replace with ...
         ZAssert.assertTrue( formMail.zHasAttachment("vcf"), "Verify the VCF attachment is there");
 
-        formMail.zFillField(Field.To, ZimbraAccount.AccountA().EmailAddress);
+        formMail.zFillField(Field.To, ZmailAccount.AccountA().EmailAddress);
         formMail.zFillField(Field.Subject, subject);
         formMail.zSubmit();
         
         
         
         // Verification
-        ZimbraAccount.AccountA().soapSend(
-				"<SearchRequest xmlns='urn:zimbraMail' types='message'>"
+        ZmailAccount.AccountA().soapSend(
+				"<SearchRequest xmlns='urn:zmailMail' types='message'>"
 			+		"<query>subject:("+ subject +")</query>"
 			+	"</SearchRequest>");
-        String id = ZimbraAccount.AccountA().soapSelectValue("//mail:m", "id");
+        String id = ZmailAccount.AccountA().soapSelectValue("//mail:m", "id");
         
         
         /*
@@ -171,20 +171,20 @@ public class ForwardContact extends AjaxCommonTest  {
         </mp>
          */
 
-        ZimbraAccount.AccountA().soapSend(
-				"<GetMsgRequest xmlns='urn:zimbraMail'>"
+        ZmailAccount.AccountA().soapSend(
+				"<GetMsgRequest xmlns='urn:zmailMail'>"
 			+		"<m id='"+ id +"'/>"
 			+	"</GetMsgRequest>");
         
         // Make sure we have a "mixed" content
-        ZimbraAccount.AccountA().soapSelectNode("//mail:mp[@ct='multipart/mixed']", 1);
+        ZmailAccount.AccountA().soapSelectNode("//mail:mp[@ct='multipart/mixed']", 1);
         
         // Make sure ct = text/directory 
-        String ct = ZimbraAccount.AccountA().soapSelectValue("//mail:mp[@cd='attachment']", "ct");
+        String ct = ZmailAccount.AccountA().soapSelectValue("//mail:mp[@cd='attachment']", "ct");
         ZAssert.assertEquals(ct, "text/directory", "Make sure ct = text/directory");
         
         // Make sure filename contains .vcf
-        String filename = ZimbraAccount.AccountA().soapSelectValue("//mail:mp[@cd='attachment']", "filename");
+        String filename = ZmailAccount.AccountA().soapSelectValue("//mail:mp[@cd='attachment']", "filename");
         ZAssert.assertStringContains(filename, ".vcf", "Make sure filename contains .vcf");
 
 			
@@ -201,7 +201,7 @@ public class ForwardContact extends AjaxCommonTest  {
 		ContactItem contact = ContactItem.createContactItem(app.zGetActiveAccount());
 
 		// Mail subject
-		String subject = "subject"+ ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject"+ ZmailSeleniumProperties.getUniqueString();
 		
 		
 		//-- GUI
@@ -218,18 +218,18 @@ public class ForwardContact extends AjaxCommonTest  {
         // since the contact.fileAs length probably large, it is usually trim in the middle and replace with ...
         ZAssert.assertTrue( formMail.zHasAttachment("vcf"), "Verify the VCF attachment is there");
 
-        formMail.zFillField(Field.To, ZimbraAccount.AccountA().EmailAddress);
+        formMail.zFillField(Field.To, ZmailAccount.AccountA().EmailAddress);
         formMail.zFillField(Field.Subject, subject);
         formMail.zSubmit();
         
         
         
         // Verification
-        ZimbraAccount.AccountA().soapSend(
-				"<SearchRequest xmlns='urn:zimbraMail' types='message'>"
+        ZmailAccount.AccountA().soapSend(
+				"<SearchRequest xmlns='urn:zmailMail' types='message'>"
 			+		"<query>subject:("+ subject +")</query>"
 			+	"</SearchRequest>");
-        String id = ZimbraAccount.AccountA().soapSelectValue("//mail:m", "id");
+        String id = ZmailAccount.AccountA().soapSelectValue("//mail:m", "id");
         
         
         /*
@@ -241,20 +241,20 @@ public class ForwardContact extends AjaxCommonTest  {
         </mp>
          */
 
-        ZimbraAccount.AccountA().soapSend(
-				"<GetMsgRequest xmlns='urn:zimbraMail'>"
+        ZmailAccount.AccountA().soapSend(
+				"<GetMsgRequest xmlns='urn:zmailMail'>"
 			+		"<m id='"+ id +"'/>"
 			+	"</GetMsgRequest>");
         
         // Make sure we have a "mixed" content
-        ZimbraAccount.AccountA().soapSelectNode("//mail:mp[@ct='multipart/mixed']", 1);
+        ZmailAccount.AccountA().soapSelectNode("//mail:mp[@ct='multipart/mixed']", 1);
         
         // Make sure ct = text/directory 
-        String ct = ZimbraAccount.AccountA().soapSelectValue("//mail:mp[@cd='attachment']", "ct");
+        String ct = ZmailAccount.AccountA().soapSelectValue("//mail:mp[@cd='attachment']", "ct");
         ZAssert.assertEquals(ct, "text/directory", "Make sure ct = text/directory");
         
         // Make sure filename contains .vcf
-        String filename = ZimbraAccount.AccountA().soapSelectValue("//mail:mp[@cd='attachment']", "filename");
+        String filename = ZmailAccount.AccountA().soapSelectValue("//mail:mp[@cd='attachment']", "filename");
         ZAssert.assertStringContains(filename, ".vcf", "Make sure filename contains .vcf");
 
 	}

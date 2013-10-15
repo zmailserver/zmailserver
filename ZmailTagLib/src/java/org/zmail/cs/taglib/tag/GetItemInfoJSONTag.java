@@ -12,17 +12,17 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.tag;
+package org.zmail.cs.taglib.tag;
 
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.SoapTransport;
-import com.zimbra.cs.taglib.ZJspSession;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.common.zclient.ZClientException;
-import com.zimbra.cs.taglib.tag.TagUtil.JsonDebugListener;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.SoapTransport;
+import org.zmail.cs.taglib.ZJspSession;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.common.zclient.ZClientException;
+import org.zmail.cs.taglib.tag.TagUtil.JsonDebugListener;
 
 import javax.servlet.jsp.JspContext;
 import javax.servlet.jsp.JspException;
@@ -31,7 +31,7 @@ import javax.servlet.jsp.PageContext;
 import java.io.IOException;
 import java.util.regex.Pattern;
 
-public class GetItemInfoJSONTag extends ZimbraSimpleTag {
+public class GetItemInfoJSONTag extends ZmailSimpleTag {
 
     private static final Pattern sSCRIPT = Pattern.compile("</script>", Pattern.CASE_INSENSITIVE);
 

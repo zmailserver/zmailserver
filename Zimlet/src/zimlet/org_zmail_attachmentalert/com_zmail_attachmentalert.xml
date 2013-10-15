@@ -14,14 +14,14 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_attachmentalert"
+<zimlet name="org_zmail_attachmentalert"
         version="1.6"
         label="${msg.label}"
         description="${msg.description}"
         target="main compose-window">
     <include>attachmentalert.js</include>
     <includeCSS>attachmentalert.css</includeCSS>
-    <handlerObject>com_zimbra_attachalert_HandlerObject</handlerObject>
+    <handlerObject>org_zmail_attachalert_HandlerObject</handlerObject>
 
     <zimletPanelItem label="${msg.AttachmentAlert_panel_label}" icon="Attachment">
         <toolTipText>${msg.AttachmentAlert_panel_tooltip}</toolTipText>

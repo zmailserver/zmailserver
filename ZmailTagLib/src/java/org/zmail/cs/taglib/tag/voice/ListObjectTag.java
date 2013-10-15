@@ -16,13 +16,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.zimbra.cs.taglib.tag.voice;
+package org.zmail.cs.taglib.tag.voice;
 
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.Iterator;
-import com.zimbra.cs.taglib.tag.ZimbraSimpleTag;
-import com.zimbra.common.service.ServiceException;
+import org.zmail.cs.taglib.tag.ZmailSimpleTag;
+import org.zmail.common.service.ServiceException;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
@@ -32,7 +32,7 @@ import java.io.IOException;
  *
  * @author lars
  */
-public class ListObjectTag extends ZimbraSimpleTag {
+public class ListObjectTag extends ZmailSimpleTag {
 
   /**
    * @param args the command line arguments

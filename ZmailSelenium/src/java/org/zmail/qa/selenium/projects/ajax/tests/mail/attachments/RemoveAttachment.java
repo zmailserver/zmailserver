@@ -14,20 +14,20 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.attachments;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.attachments;
 
 import java.io.File;
 import java.util.List;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.DisplayMail;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.*;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.DisplayMail;
 
 
 public class RemoveAttachment extends PrefGroupMailByMessageTest {
@@ -45,23 +45,23 @@ public class RemoveAttachment extends PrefGroupMailByMessageTest {
 
 		//-- Data Setup
 		
-		final String mimeFile = ZimbraSeleniumProperties.getBaseDirectory() + "/data/public/mime/email05/mime01.txt";
+		final String mimeFile = ZmailSeleniumProperties.getBaseDirectory() + "/data/public/mime/email05/mime01.txt";
 		final String subject = "subject151615738";
 		final String attachmentname = "file.txt";
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 		
 		// Inject the message
 		LmtpInject.injectFile(app.zGetActiveAccount().EmailAddress, new File(mimeFile));
 
 		// Double check that there is an attachment
 		account.soapSend(
-				"<SearchRequest xmlns='urn:zimbraMail' types='message'>"
+				"<SearchRequest xmlns='urn:zmailMail' types='message'>"
 			+		"<query>subject:("+ subject +")</query>"
 			+	"</SearchRequest>");
 		String id = account.soapSelectValue("//mail:m", "id");
 		
 		account.soapSend(
-				"<GetMsgRequest xmlns='urn:zimbraMail' >"
+				"<GetMsgRequest xmlns='urn:zmailMail' >"
 			+		"<m id='"+ id +"'/>"
 			+	"</GetMsgRequest>");
 		Element[] nodes = account.soapSelectNodes("//mail:mp[@cd='attachment']");
@@ -95,7 +95,7 @@ public class RemoveAttachment extends PrefGroupMailByMessageTest {
 
 		// Verify the message no longer has an attachment
 		account.soapSend(
-				"<SearchRequest xmlns='urn:zimbraMail' types='message'>"
+				"<SearchRequest xmlns='urn:zmailMail' types='message'>"
 			+		"<query>subject:("+ subject +")</query>"
 			+	"</SearchRequest>");
 		id = account.soapSelectValue("//mail:m", "id");
@@ -108,7 +108,7 @@ public class RemoveAttachment extends PrefGroupMailByMessageTest {
 				SleepUtil.sleepSmall();
 
 		    	account.soapSend(
-		    			  "<GetMsgRequest xmlns='urn:zimbraMail' >"
+		    			  "<GetMsgRequest xmlns='urn:zmailMail' >"
 		    			+   "<m id='"+ id +"'/>"
 		    			+ "</GetMsgRequest>");
 		    	nodes = account.soapSelectNodes("//mail:mp[@cd='attachment']");

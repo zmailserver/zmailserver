@@ -14,15 +14,15 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.ui.addressbook;
+package org.zmail.qa.selenium.projects.ajax.ui.addressbook;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.*;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.ui.*;
 
 
 public class FormContactGroupNew extends AbsForm {
@@ -271,7 +271,7 @@ public class FormContactGroupNew extends AbsForm {
 
 			this.zWaitForBusyOverlay();
 
-			// See: https://bugzilla.zimbra.com/show_bug.cgi?id=77791
+			// See: https://bugzilla.zmail.com/show_bug.cgi?id=77791
 			optionLocator = "css=div#"+ this.getSearchPulldownID();
 			
 
@@ -335,7 +335,7 @@ public class FormContactGroupNew extends AbsForm {
 			// There seems to be an issue with changing the value during edit
 			
 			// workaround
-			if(ZimbraSeleniumProperties.isWebDriver()){
+			if(ZmailSeleniumProperties.isWebDriver()){
 				
 				clearField(locator);
 				sType(locator, value);
@@ -570,7 +570,7 @@ public class FormContactGroupNew extends AbsForm {
 	 * Determine the z-shell <div/> that contains the Search Contacts, GAL, Personal and Shared
 	 * menu.
 	 * 
-	 * See https://bugzilla.zimbra.com/show_bug.cgi?id=77791
+	 * See https://bugzilla.zmail.com/show_bug.cgi?id=77791
 	 * @return The z_shell Child ID
 	 * @throws HarnessException 
 	 */
@@ -601,7 +601,7 @@ public class FormContactGroupNew extends AbsForm {
 	 * Determine the z-shell <div/> that contains the Search Contacts, GAL, Personal and Shared
 	 * menu.
 	 * 
-	 * See https://bugzilla.zimbra.com/show_bug.cgi?id=77791
+	 * See https://bugzilla.zmail.com/show_bug.cgi?id=77791
 	 * @return The z_shell Child ID
 	 * @throws HarnessException 
 	 */

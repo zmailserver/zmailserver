@@ -31,7 +31,7 @@
  */
 
 // Original is from example in OAuth Java library(http://oauth.googlecode.com/svn/code/java/)
-// and modified for integratin with Zimbra
+// and modified for integratin with Zmail
 
 // Original's copyright and license terms
 /*
@@ -52,11 +52,11 @@
 
 package sample.oauth.provider;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.extension.ExtensionHttpHandler;
-import com.zimbra.cs.extension.ZimbraExtension;
-import com.zimbra.cs.servlet.ZimbraServlet;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.extension.ExtensionHttpHandler;
+import org.zmail.cs.extension.ZmailExtension;
+import org.zmail.cs.servlet.ZmailServlet;
 import net.oauth.OAuth;
 import net.oauth.OAuthAccessor;
 import net.oauth.OAuthMessage;
@@ -71,7 +71,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * Autherization request handler for zimbra extension.
+ * Autherization request handler for zmail extension.
  *
  * @author Yutaka Obuchi
  */
@@ -79,7 +79,7 @@ import java.io.PrintWriter;
 public class AuthorizationHandler extends ExtensionHttpHandler {    
     
 	
-	public void init(ZimbraExtension ext) throws ServiceException {
+	public void init(ZmailExtension ext) throws ServiceException {
         super.init(ext);
     }
     
@@ -89,7 +89,7 @@ public class AuthorizationHandler extends ExtensionHttpHandler {
     
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
-    	ZimbraLog.extensions.debug("Authorization Hndler doGet requested!");
+    	ZmailLog.extensions.debug("Authorization Hndler doGet requested!");
         
         try{
             OAuthMessage oAuthMessage = OAuthServlet.getMessage(request, null);
@@ -112,7 +112,7 @@ public class AuthorizationHandler extends ExtensionHttpHandler {
     @Override 
     public void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws IOException, ServletException{
-    	ZimbraLog.extensions.debug("Authorization Hndler doPost requested!");
+    	ZmailLog.extensions.debug("Authorization Hndler doPost requested!");
         
         try{
             OAuthMessage requestMessage = OAuthServlet.getMessage(request, null);
@@ -122,7 +122,7 @@ public class AuthorizationHandler extends ExtensionHttpHandler {
             String username = request.getParameter("username");
             String zmtoken = (String)request.getAttribute("ZM_AUTH_TOKEN");
             
-            ZimbraLog.extensions.debug("[AuthorizationHandlerInput]username:"+username+",oauth_token:"+request.getParameter("oauth_token")+",ZM_AUTH_TOKEN:"+zmtoken);
+            ZmailLog.extensions.debug("[AuthorizationHandlerInput]username:"+username+",oauth_token:"+request.getParameter("oauth_token")+",ZM_AUTH_TOKEN:"+zmtoken);
 
             if(zmtoken == null){
                 sendToAuthorizePage(request, response, accessor);
@@ -133,7 +133,7 @@ public class AuthorizationHandler extends ExtensionHttpHandler {
             	returnToConsumer(request, response, accessor);
             }
         } catch (Exception e){
-            ZimbraLog.extensions.debug("AuthorizationHandler exception", e);
+            ZmailLog.extensions.debug("AuthorizationHandler exception", e);
             SampleZmOAuthProvider.handleException(e, request, response, true);
         }
     }
@@ -143,13 +143,13 @@ public class AuthorizationHandler extends ExtensionHttpHandler {
     throws IOException, ServletException{
         
         String consumer_description = (String)accessor.consumer.getProperty("description");
-        ZimbraLog.extensions.debug("[AuthorizationHandlerOutputToAuthorizePage]reuest token:"+accessor.requestToken+",description:"+consumer_description);
+        ZmailLog.extensions.debug("[AuthorizationHandlerOutputToAuthorizePage]reuest token:"+accessor.requestToken+",description:"+consumer_description);
         request.setAttribute("CONS_DESC", consumer_description);
         request.setAttribute("TOKEN", accessor.requestToken);
         
         
-        HttpServlet servlet = ZimbraServlet.getServlet("ExtensionDispatcherServlet");
-        servlet.getServletContext().getContext("/zimbra").getRequestDispatcher //
+        HttpServlet servlet = ZmailServlet.getServlet("ExtensionDispatcherServlet");
+        servlet.getServletContext().getContext("/zmail").getRequestDispatcher //
         	("/public/authorize.jsp").forward(request,response);
         
         
@@ -182,7 +182,7 @@ public class AuthorizationHandler extends ExtensionHttpHandler {
                 								OAuth.OAUTH_VERIFIER,verifier);
             }
             
-            ZimbraLog.extensions.debug("[AuthorizationHandlerRedirectURL]"+callback);
+            ZmailLog.extensions.debug("[AuthorizationHandlerRedirectURL]"+callback);
             
             response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
             response.setHeader("Location", callback);

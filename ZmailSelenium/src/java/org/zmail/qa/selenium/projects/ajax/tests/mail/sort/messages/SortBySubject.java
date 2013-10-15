@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.sort.messages;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.sort.messages;
 
 import java.util.List;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
 
 
 public class SortBySubject extends PrefGroupMailByMessageTest {
@@ -33,7 +33,7 @@ public class SortBySubject extends PrefGroupMailByMessageTest {
 	public SortBySubject() {
 		logger.info("New "+ SortBySubject.class.getCanonicalName());
 		
-		super.startingAccountPreferences.put("zimbraPrefReadingPaneLocation", "bottom");
+		super.startingAccountPreferences.put("zmailPrefReadingPaneLocation", "bottom");
 
 	}
 	
@@ -43,11 +43,11 @@ public class SortBySubject extends PrefGroupMailByMessageTest {
 		
 		// Create the message data
 		FolderItem inbox = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Inbox);
-		String subjectA = "subjectA" + ZimbraSeleniumProperties.getUniqueString(); 
-		String subjectB = "subjectB" + ZimbraSeleniumProperties.getUniqueString(); 
+		String subjectA = "subjectA" + ZmailSeleniumProperties.getUniqueString(); 
+		String subjectB = "subjectB" + ZmailSeleniumProperties.getUniqueString(); 
 		
 		app.zGetActiveAccount().soapSend(
-				"<AddMsgRequest xmlns='urn:zimbraMail'>"
+				"<AddMsgRequest xmlns='urn:zmailMail'>"
     		+		"<m l='"+ inbox.getId() +"' f='f'>"
         	+			"<content>From: foo@foo.com\n"
         	+				"To: foo@foo.com \n"
@@ -63,7 +63,7 @@ public class SortBySubject extends PrefGroupMailByMessageTest {
 
 	
 		app.zGetActiveAccount().soapSend(
-				"<AddMsgRequest xmlns='urn:zimbraMail'>"
+				"<AddMsgRequest xmlns='urn:zmailMail'>"
     		+		"<m l='"+ inbox.getId() +"' >"
         	+			"<content>From: foo@foo.com\n"
         	+				"To: foo@foo.com \n"
@@ -94,8 +94,8 @@ public class SortBySubject extends PrefGroupMailByMessageTest {
 				
 		// Get all the messages in the inbox
 		app.zGetActiveAccount().soapSend(
-				"<GetPrefsRequest xmlns='urn:zimbraAccount'>"
-    		+		"<pref name='zimbraPrefSortOrder'/>"
+				"<GetPrefsRequest xmlns='urn:zmailAccount'>"
+    		+		"<pref name='zmailPrefSortOrder'/>"
 			+	"</GetPrefsRequest>");
 	
 		
@@ -124,11 +124,11 @@ public class SortBySubject extends PrefGroupMailByMessageTest {
 		
 		// Create the message data
 		FolderItem inbox = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Inbox);
-		String subjectA = "subjectA" + ZimbraSeleniumProperties.getUniqueString(); 
-		String subjectB = "subjectB" + ZimbraSeleniumProperties.getUniqueString(); 
+		String subjectA = "subjectA" + ZmailSeleniumProperties.getUniqueString(); 
+		String subjectB = "subjectB" + ZmailSeleniumProperties.getUniqueString(); 
 		
 		app.zGetActiveAccount().soapSend(
-				"<AddMsgRequest xmlns='urn:zimbraMail'>"
+				"<AddMsgRequest xmlns='urn:zmailMail'>"
     		+		"<m l='"+ inbox.getId() +"' f='f'>"
         	+			"<content>From: foo@foo.com\n"
         	+				"To: foo@foo.com \n"
@@ -144,7 +144,7 @@ public class SortBySubject extends PrefGroupMailByMessageTest {
 
 	
 		app.zGetActiveAccount().soapSend(
-				"<AddMsgRequest xmlns='urn:zimbraMail'>"
+				"<AddMsgRequest xmlns='urn:zmailMail'>"
     		+		"<m l='"+ inbox.getId() +"' >"
         	+			"<content>From: foo@foo.com\n"
         	+				"To: foo@foo.com \n"
@@ -178,8 +178,8 @@ public class SortBySubject extends PrefGroupMailByMessageTest {
 				
 		// Get all the messages in the inbox
 		app.zGetActiveAccount().soapSend(
-				"<GetPrefsRequest xmlns='urn:zimbraAccount'>"
-    		+		"<pref name='zimbraPrefSortOrder'/>"
+				"<GetPrefsRequest xmlns='urn:zmailAccount'>"
+    		+		"<pref name='zmailPrefSortOrder'/>"
 			+	"</GetPrefsRequest>");
 	
 		

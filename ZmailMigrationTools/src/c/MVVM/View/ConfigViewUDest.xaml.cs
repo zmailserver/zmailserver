@@ -17,7 +17,7 @@ public partial class ConfigViewUDest
     }
     private void pb_PasswordChanged(object sender, RoutedEventArgs e)
     {
-        ViewModel.ZimbraUserPasswd = passwordBox1.Password;
+        ViewModel.ZmailUserPasswd = passwordBox1.Password;
     }
 }
 }

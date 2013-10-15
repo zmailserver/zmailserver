@@ -14,7 +14,7 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimletConfig name="com_zimbra_pto" version="0.1">
+<zimletConfig name="org_zmail_pto" version="0.1">
     <global>
         <property name="ZmPtoZimletPayRollEmail">payroll@vmware.com</property>
     </global>

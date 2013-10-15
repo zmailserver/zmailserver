@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.io.IOException;
 
@@ -20,14 +20,14 @@ import javax.mail.Address;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.offline.OfflineLog;
-import com.zimbra.cs.service.FileUploadServlet;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.util.AccountUtil;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.offline.OfflineLog;
+import org.zmail.cs.service.FileUploadServlet;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.util.AccountUtil;
 
 public class OfflineMailSender extends MailSender {
 
@@ -64,7 +64,7 @@ public class OfflineMailSender extends MailSender {
             if (getIdentity() == null)
                 setIdentity(Provisioning.getInstance().getDefaultIdentity(authuser));
             String identityId = getIdentity() == null ? null :
-                getIdentity().getAttr(Provisioning.A_zimbraPrefIdentityId);
+                getIdentity().getAttr(Provisioning.A_zmailPrefIdentityId);
             int draftId = mbox.saveDraft(octxt, pm, Mailbox.ID_AUTO_INCREMENT,
                 (getOriginalMessageId() != null ? getOriginalMessageId().toString(acct) : null), getReplyType(),
                 identityId, acct.getId(), 0).getId();

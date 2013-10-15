@@ -103,7 +103,7 @@
 		F5B6446812D2E822007ABCFF /* ZmprovController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C4E5AC12B87C5C0081ABDF /* ZmprovController.m */; };
 		F5B6446912D2E822007ABCFF /* AccountStatusController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C4E6B412B89BC70081ABDF /* AccountStatusController.m */; };
 		F5B6446A12D2E822007ABCFF /* AccountViewControllerExt.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C4E95A12BA6A5D0081ABDF /* AccountViewControllerExt.m */; };
-		F5B6446B12D2E822007ABCFF /* ZimbraAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C4EBC412BB25900081ABDF /* ZimbraAppDelegate.m */; };
+		F5B6446B12D2E822007ABCFF /* ZmailAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C4EBC412BB25900081ABDF /* ZmailAppDelegate.m */; };
 		F5B6446C12D2E822007ABCFF /* SecurityController.m in Sources */ = {isa = PBXBuildFile; fileRef = F549F1B512BF422D00BFEDA0 /* SecurityController.m */; };
 		F5B6446D12D2E822007ABCFF /* StatisticsController.m in Sources */ = {isa = PBXBuildFile; fileRef = F520972E12C0C07E006DD3F1 /* StatisticsController.m */; };
 		F5B6446E12D2E822007ABCFF /* ZimGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = F520973112C0C09D006DD3F1 /* ZimGraphView.m */; };
@@ -129,7 +129,7 @@
 		F5C4E79012B914180081ABDF /* account_red.png in Resources */ = {isa = PBXBuildFile; fileRef = F5C4E78F12B914180081ABDF /* account_red.png */; };
 		F5C4E95B12BA6A5D0081ABDF /* AccountViewControllerExt.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C4E95A12BA6A5D0081ABDF /* AccountViewControllerExt.m */; };
 		F5C4EBBD12BB23170081ABDF /* account_black.png in Resources */ = {isa = PBXBuildFile; fileRef = F5C4EBBC12BB23170081ABDF /* account_black.png */; };
-		F5C4EBC512BB25900081ABDF /* ZimbraAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C4EBC412BB25900081ABDF /* ZimbraAppDelegate.m */; };
+		F5C4EBC512BB25900081ABDF /* ZmailAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C4EBC412BB25900081ABDF /* ZmailAppDelegate.m */; };
 		F5C4EDA812BBB0FA0081ABDF /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = F5C4EDA712BBB0FA0081ABDF /* add.png */; };
 		F5C4EDAA12BBB1030081ABDF /* edit.png in Resources */ = {isa = PBXBuildFile; fileRef = F5C4EDA912BBB1030081ABDF /* edit.png */; };
 		F5C4EDC212BBB4D60081ABDF /* password.png in Resources */ = {isa = PBXBuildFile; fileRef = F5C4EDC112BBB4D60081ABDF /* password.png */; };
@@ -144,7 +144,7 @@
 /* Begin PBXFileReference section */
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623EB0D0F72F000981E51 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		1D6058910D05DD3D006BFB54 /* Zimbra.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Zimbra.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D6058910D05DD3D006BFB54 /* Zmail.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Zmail.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -180,7 +180,7 @@
 		F53A135912B3CF5300BC6D41 /* BoxMaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxMaker.m; sourceTree = "<group>"; };
 		F53A13E612B3DA2E00BC6D41 /* BrightnessController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrightnessController.h; sourceTree = "<group>"; };
 		F53A13E712B3DA2E00BC6D41 /* BrightnessController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrightnessController.m; sourceTree = "<group>"; };
-		F53A144212B3E0AA00BC6D41 /* Zimbra_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Zimbra_Prefix.pch; sourceTree = "<group>"; };
+		F53A144212B3E0AA00BC6D41 /* Zmail_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Zmail_Prefix.pch; sourceTree = "<group>"; };
 		F53A144712B3E27D00BC6D41 /* ServerListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerListViewController.h; sourceTree = "<group>"; };
 		F53A144812B3E27D00BC6D41 /* ServerListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerListViewController.m; sourceTree = "<group>"; };
 		F53A152412B48AF100BC6D41 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
@@ -192,7 +192,7 @@
 		F549F1B512BF422D00BFEDA0 /* SecurityController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecurityController.m; sourceTree = "<group>"; };
 		F54A920D12C30848003643E0 /* RotatingTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RotatingTabBarController.h; sourceTree = "<group>"; };
 		F54A920E12C30848003643E0 /* RotatingTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RotatingTabBarController.m; sourceTree = "<group>"; };
-		F5B6447812D2E822007ABCFF /* Zimbra.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Zimbra.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F5B6447812D2E822007ABCFF /* Zmail.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Zmail.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5B6447A12D2E822007ABCFF /* Info copy.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info copy.plist"; sourceTree = "<group>"; };
 		F5C4E04312B66A5B0081ABDF /* PutController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PutController.h; sourceTree = "<group>"; };
 		F5C4E04412B66A5B0081ABDF /* PutController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PutController.m; sourceTree = "<group>"; };
@@ -221,8 +221,8 @@
 		F5C4E95912BA6A5D0081ABDF /* AccountViewControllerExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountViewControllerExt.h; sourceTree = "<group>"; };
 		F5C4E95A12BA6A5D0081ABDF /* AccountViewControllerExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountViewControllerExt.m; sourceTree = "<group>"; };
 		F5C4EBBC12BB23170081ABDF /* account_black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = account_black.png; sourceTree = "<group>"; };
-		F5C4EBC312BB25900081ABDF /* ZimbraAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZimbraAppDelegate.h; sourceTree = "<group>"; };
-		F5C4EBC412BB25900081ABDF /* ZimbraAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZimbraAppDelegate.m; sourceTree = "<group>"; };
+		F5C4EBC312BB25900081ABDF /* ZmailAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZmailAppDelegate.h; sourceTree = "<group>"; };
+		F5C4EBC412BB25900081ABDF /* ZmailAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZmailAppDelegate.m; sourceTree = "<group>"; };
 		F5C4EDA712BBB0FA0081ABDF /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
 		F5C4EDA912BBB1030081ABDF /* edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = edit.png; sourceTree = "<group>"; };
 		F5C4EDC112BBB4D60081ABDF /* password.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = password.png; sourceTree = "<group>"; };
@@ -278,8 +278,8 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D6058910D05DD3D006BFB54 /* Zimbra.app */,
-				F5B6447812D2E822007ABCFF /* Zimbra.app */,
+				1D6058910D05DD3D006BFB54 /* Zmail.app */,
+				F5B6447812D2E822007ABCFF /* Zmail.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -299,7 +299,7 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
-				F53A144212B3E0AA00BC6D41 /* Zimbra_Prefix.pch */,
+				F53A144212B3E0AA00BC6D41 /* Zmail_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
 				F53A12EC12B3BCE300BC6D41 /* StatusViewController.h */,
 				F53A12ED12B3BCE300BC6D41 /* StatusViewController.m */,
@@ -335,8 +335,8 @@
 				F5C4E6B412B89BC70081ABDF /* AccountStatusController.m */,
 				F5C4E95912BA6A5D0081ABDF /* AccountViewControllerExt.h */,
 				F5C4E95A12BA6A5D0081ABDF /* AccountViewControllerExt.m */,
-				F5C4EBC312BB25900081ABDF /* ZimbraAppDelegate.h */,
-				F5C4EBC412BB25900081ABDF /* ZimbraAppDelegate.m */,
+				F5C4EBC312BB25900081ABDF /* ZmailAppDelegate.h */,
+				F5C4EBC412BB25900081ABDF /* ZmailAppDelegate.m */,
 				F549F1B412BF422D00BFEDA0 /* SecurityController.h */,
 				F549F1B512BF422D00BFEDA0 /* SecurityController.m */,
 				F520972D12C0C07E006DD3F1 /* StatisticsController.h */,
@@ -414,9 +414,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1D6058900D05DD3D006BFB54 /* Zimbra */ = {
+		1D6058900D05DD3D006BFB54 /* Zmail */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Zimbra" */;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Zmail" */;
 			buildPhases = (
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
@@ -426,14 +426,14 @@
 			);
 			dependencies = (
 			);
-			name = Zimbra;
+			name = Zmail;
 			productName = HelloWorld;
-			productReference = 1D6058910D05DD3D006BFB54 /* Zimbra.app */;
+			productReference = 1D6058910D05DD3D006BFB54 /* Zmail.app */;
 			productType = "com.apple.product-type.application";
 		};
-		F5B6443F12D2E822007ABCFF /* ZimbraSimulator */ = {
+		F5B6443F12D2E822007ABCFF /* ZmailSimulator */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F5B6447512D2E822007ABCFF /* Build configuration list for PBXNativeTarget "ZimbraSimulator" */;
+			buildConfigurationList = F5B6447512D2E822007ABCFF /* Build configuration list for PBXNativeTarget "ZmailSimulator" */;
 			buildPhases = (
 				F5B6444012D2E822007ABCFF /* Resources */,
 				F5B6445812D2E822007ABCFF /* Sources */,
@@ -443,9 +443,9 @@
 			);
 			dependencies = (
 			);
-			name = ZimbraSimulator;
+			name = ZmailSimulator;
 			productName = HelloWorld;
-			productReference = F5B6447812D2E822007ABCFF /* Zimbra.app */;
+			productReference = F5B6447812D2E822007ABCFF /* Zmail.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -453,7 +453,7 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
-			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Zimbra" */;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Zmail" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
@@ -467,8 +467,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1D6058900D05DD3D006BFB54 /* Zimbra */,
-				F5B6443F12D2E822007ABCFF /* ZimbraSimulator */,
+				1D6058900D05DD3D006BFB54 /* Zmail */,
+				F5B6443F12D2E822007ABCFF /* ZmailSimulator */,
 			);
 		};
 /* End PBXProject section */
@@ -567,7 +567,7 @@
 				F5C4E5AD12B87C5C0081ABDF /* ZmprovController.m in Sources */,
 				F5C4E6B512B89BC70081ABDF /* AccountStatusController.m in Sources */,
 				F5C4E95B12BA6A5D0081ABDF /* AccountViewControllerExt.m in Sources */,
-				F5C4EBC512BB25900081ABDF /* ZimbraAppDelegate.m in Sources */,
+				F5C4EBC512BB25900081ABDF /* ZmailAppDelegate.m in Sources */,
 				F549F1B612BF422D00BFEDA0 /* SecurityController.m in Sources */,
 				F520972F12C0C07E006DD3F1 /* StatisticsController.m in Sources */,
 				F520973212C0C09D006DD3F1 /* ZimGraphView.m in Sources */,
@@ -602,7 +602,7 @@
 				F5B6446812D2E822007ABCFF /* ZmprovController.m in Sources */,
 				F5B6446912D2E822007ABCFF /* AccountStatusController.m in Sources */,
 				F5B6446A12D2E822007ABCFF /* AccountViewControllerExt.m in Sources */,
-				F5B6446B12D2E822007ABCFF /* ZimbraAppDelegate.m in Sources */,
+				F5B6446B12D2E822007ABCFF /* ZmailAppDelegate.m in Sources */,
 				F5B6446C12D2E822007ABCFF /* SecurityController.m in Sources */,
 				F5B6446D12D2E822007ABCFF /* StatisticsController.m in Sources */,
 				F5B6446E12D2E822007ABCFF /* ZimGraphView.m in Sources */,
@@ -630,10 +630,10 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Zimbra_Prefix.pch;
+				GCC_PREFIX_HEADER = Zmail_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				PREBINDING = NO;
-				PRODUCT_NAME = Zimbra;
+				PRODUCT_NAME = Zmail;
 				PROVISIONING_PROFILE = "E968C65F-C46F-4185-9DCA-A3A486BFB887";
 				"PROVISIONING_PROFILE[sdk=aspen*]" = "E968C65F-C46F-4185-9DCA-A3A486BFB887";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E968C65F-C46F-4185-9DCA-A3A486BFB887";
@@ -704,10 +704,10 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Zimbra_Prefix.pch;
+				GCC_PREFIX_HEADER = Zmail_Prefix.pch;
 				INFOPLIST_FILE = "Info copy.plist";
 				PREBINDING = NO;
-				PRODUCT_NAME = Zimbra;
+				PRODUCT_NAME = Zmail;
 				PROVISIONING_PROFILE = "E968C65F-C46F-4185-9DCA-A3A486BFB887";
 				"PROVISIONING_PROFILE[sdk=aspen*]" = "E968C65F-C46F-4185-9DCA-A3A486BFB887";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E968C65F-C46F-4185-9DCA-A3A486BFB887";
@@ -740,7 +740,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Zimbra" */ = {
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Zmail" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
@@ -749,7 +749,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Zimbra" */ = {
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Zmail" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
@@ -758,7 +758,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F5B6447512D2E822007ABCFF /* Build configuration list for PBXNativeTarget "ZimbraSimulator" */ = {
+		F5B6447512D2E822007ABCFF /* Build configuration list for PBXNativeTarget "ZmailSimulator" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F5B6447612D2E822007ABCFF /* Debug */,

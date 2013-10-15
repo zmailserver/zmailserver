@@ -14,29 +14,29 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.tasks;
+package org.zmail.qa.selenium.projects.ajax.tests.tasks;
 
 import java.util.*;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.core.ClientSessionFactory;
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.tasks.DisplayTask;
-import com.zimbra.qa.selenium.projects.ajax.ui.tasks.FormTaskNew;
-import com.zimbra.qa.selenium.projects.ajax.ui.tasks.DisplayTask.Field;
-//import com.zimbra.qa.selenium.projects.ajax.ui.tasks.FormTaskNew.Field;;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.core.ClientSessionFactory;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.tasks.DisplayTask;
+import org.zmail.qa.selenium.projects.ajax.ui.tasks.FormTaskNew;
+import org.zmail.qa.selenium.projects.ajax.ui.tasks.DisplayTask.Field;
+//import org.zmail.qa.selenium.projects.ajax.ui.tasks.FormTaskNew.Field;;
 
 public class GetTask extends AjaxCommonTest {
 
 	/**
 	 * Example SOAP:
-	 * <CreateTaskRequest xmlns="urn:zimbraMail">
+	 * <CreateTaskRequest xmlns="urn:zmailMail">
 	 * 	<m l="15">
 	 * 		<inv>
 	 * 			<comp priority="1" status="INPR" percentComplete="50" allDay="1" name="subject" loc="location">
@@ -67,9 +67,9 @@ public class GetTask extends AjaxCommonTest {
 		super.startingPage = app.zPageTasks;
 
 		super.startingAccountPreferences = new HashMap<String , String>() {{
-			put("zimbraPrefShowSelectionCheckbox", "TRUE");
-			put("zimbraPrefTasksReadingPaneLocation", "bottom");
-			put("zimbraPrefComposeFormat", "text");
+			put("zmailPrefShowSelectionCheckbox", "TRUE");
+			put("zmailPrefTasksReadingPaneLocation", "bottom");
+			put("zmailPrefComposeFormat", "text");
 		}};
 
 
@@ -82,10 +82,10 @@ public class GetTask extends AjaxCommonTest {
 		FolderItem taskFolder = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Tasks);
 		
 		// Create a basic task to delete
-		String subject = "task"+ ZimbraSeleniumProperties.getUniqueString();
+		String subject = "task"+ ZmailSeleniumProperties.getUniqueString();
 				
 		app.zGetActiveAccount().soapSend(
-				"<CreateTaskRequest xmlns='urn:zimbraMail'>" +
+				"<CreateTaskRequest xmlns='urn:zmailMail'>" +
 					"<m >" +
 			        	"<inv>" +
 			        		"<comp name='"+ subject +"'>" +
@@ -94,7 +94,7 @@ public class GetTask extends AjaxCommonTest {
 			        	"</inv>" +
 			        	"<su>"+ subject +"</su>" +
 			        	"<mp ct='text/plain'>" +
-			        		"<content>content"+ ZimbraSeleniumProperties.getUniqueString() +"</content>" +
+			        		"<content>content"+ ZmailSeleniumProperties.getUniqueString() +"</content>" +
 			        	"</mp>" +
 					"</m>" +
 				"</CreateTaskRequest>");
@@ -130,11 +130,11 @@ public class GetTask extends AjaxCommonTest {
 		FolderItem taskFolder = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Tasks);
 		
 		// Create a basic task to delete
-		String subject = "task"+ ZimbraSeleniumProperties.getUniqueString();
-		String content = "content"+ ZimbraSeleniumProperties.getUniqueString();
+		String subject = "task"+ ZmailSeleniumProperties.getUniqueString();
+		String content = "content"+ ZmailSeleniumProperties.getUniqueString();
 				
 		app.zGetActiveAccount().soapSend(
-				"<CreateTaskRequest xmlns='urn:zimbraMail'>" +
+				"<CreateTaskRequest xmlns='urn:zmailMail'>" +
 					"<m >" +
 			        	"<inv>" +
 			        		"<comp name='"+ subject +"'>" +
@@ -177,9 +177,9 @@ public class GetTask extends AjaxCommonTest {
 		
 
 		// Create the message data to be sent
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String bodyText = "text" + ZimbraSeleniumProperties.getUniqueString();
-		String bodyHTML = "text<strong>bold"+ ZimbraSeleniumProperties.getUniqueString() +"</strong>text";
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String bodyText = "text" + ZmailSeleniumProperties.getUniqueString();
+		String bodyHTML = "text<strong>bold"+ ZmailSeleniumProperties.getUniqueString() +"</strong>text";
 		String contentHTML = XmlStringUtil.escapeXml(
 				"<html>" +
 				"<head></head>" +
@@ -187,7 +187,7 @@ public class GetTask extends AjaxCommonTest {
 		"</html>");
 
 		app.zGetActiveAccount().soapSend(
-				"<CreateTaskRequest xmlns='urn:zimbraMail'>" +
+				"<CreateTaskRequest xmlns='urn:zmailMail'>" +
 				"<m >" +
 				"<inv>" +
 				"<comp name='"+ subject +"'>" +
@@ -244,15 +244,15 @@ public class GetTask extends AjaxCommonTest {
 		FolderItem taskFolder = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Tasks);
 		
 		// Create a basic task to delete
-		String subject = "task"+ ZimbraSeleniumProperties.getUniqueString();
-		String location = "location"+ ZimbraSeleniumProperties.getUniqueString();
+		String subject = "task"+ ZmailSeleniumProperties.getUniqueString();
+		String location = "location"+ ZmailSeleniumProperties.getUniqueString();
 		ZDate startDate    = new ZDate(2015, 1, 15, 12, 0, 0);
 		ZDate dueDate      = new ZDate(2015, 1, 17, 12, 0, 0);
 		ZDate reminderDate = new ZDate(2015, 1, 16, 12, 0, 0);
-		String content = "content"+ ZimbraSeleniumProperties.getUniqueString();
+		String content = "content"+ ZmailSeleniumProperties.getUniqueString();
 				
 		app.zGetActiveAccount().soapSend(
-				"<CreateTaskRequest xmlns='urn:zimbraMail'>" +
+				"<CreateTaskRequest xmlns='urn:zmailMail'>" +
 					"<m >" +
 			        	"<inv>" +
 			        		"<comp priority='1' status='INPR' percentComplete='50' allDay='1' name='"+ subject +"' loc='"+ location +"'>" +
@@ -310,11 +310,11 @@ public class GetTask extends AjaxCommonTest {
 		FolderItem taskFolder = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Tasks);
 		
 		// Create a basic task to delete
-		String subject = "task"+ ZimbraSeleniumProperties.getUniqueString();
-		String content = "content"+ ZimbraSeleniumProperties.getUniqueString();
+		String subject = "task"+ ZmailSeleniumProperties.getUniqueString();
+		String content = "content"+ ZmailSeleniumProperties.getUniqueString();
 				
 		app.zGetActiveAccount().soapSend(
-				"<CreateTaskRequest xmlns='urn:zimbraMail'>" +
+				"<CreateTaskRequest xmlns='urn:zmailMail'>" +
 					"<m >" +
 			        	"<inv>" +
 			        		"<comp name='"+ subject +"'>" +
@@ -370,14 +370,14 @@ public class GetTask extends AjaxCommonTest {
 		FolderItem taskFolder = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Tasks);
 		
 		
-		String subject = "task"+ ZimbraSeleniumProperties.getUniqueString();
-		String content = "content"+ ZimbraSeleniumProperties.getUniqueString();
-		String newsubject = "newtask"+ ZimbraSeleniumProperties.getUniqueString();
-		String newcontent = "content"+ ZimbraSeleniumProperties.getUniqueString();
+		String subject = "task"+ ZmailSeleniumProperties.getUniqueString();
+		String content = "content"+ ZmailSeleniumProperties.getUniqueString();
+		String newsubject = "newtask"+ ZmailSeleniumProperties.getUniqueString();
+		String newcontent = "content"+ ZmailSeleniumProperties.getUniqueString();
 		
 				
 		app.zGetActiveAccount().soapSend(
-				"<CreateTaskRequest xmlns='urn:zimbraMail'>" +
+				"<CreateTaskRequest xmlns='urn:zmailMail'>" +
 					"<m >" +
 			        	"<inv>" +
 			        		"<comp name='"+ subject +"'>" +
@@ -420,8 +420,8 @@ public class GetTask extends AjaxCommonTest {
 			SleepUtil.sleepMedium();
 		}
 		// Fill out the resulting form
-		taskNew.zFillField(com.zimbra.qa.selenium.projects.ajax.ui.tasks.FormTaskNew.Field.Subject, newsubject);
-		taskNew.zFillField(com.zimbra.qa.selenium.projects.ajax.ui.tasks.FormTaskNew.Field.Body, newcontent);
+		taskNew.zFillField(org.zmail.qa.selenium.projects.ajax.ui.tasks.FormTaskNew.Field.Subject, newsubject);
+		taskNew.zFillField(org.zmail.qa.selenium.projects.ajax.ui.tasks.FormTaskNew.Field.Body, newcontent);
 				
 		/**
 		 * Purposefully  add this locator for this test case only
@@ -462,12 +462,12 @@ public class GetTask extends AjaxCommonTest {
 		FolderItem taskFolder = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Tasks);
 		
 		
-		String subject = "atask"+ ZimbraSeleniumProperties.getUniqueString();
-		String content = "content"+ ZimbraSeleniumProperties.getUniqueString();
+		String subject = "atask"+ ZmailSeleniumProperties.getUniqueString();
+		String content = "content"+ ZmailSeleniumProperties.getUniqueString();
 		ZDate dueDate  = new ZDate(2015, 1, 17, 12, 0, 0);
 						
 		app.zGetActiveAccount().soapSend(
-				"<CreateTaskRequest xmlns='urn:zimbraMail'>" +
+				"<CreateTaskRequest xmlns='urn:zmailMail'>" +
 					"<m >" +
 			        	"<inv>" +
 			        		"<comp name='"+ subject +"'>" +
@@ -528,8 +528,8 @@ public class GetTask extends AjaxCommonTest {
 	public void GetTask_08() throws HarnessException {
 		
 		FolderItem taskFolder = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Tasks);
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String bodyHTML = "text<strong>bold"+ ZimbraSeleniumProperties.getUniqueString() +"</strong>text";
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String bodyHTML = "text<strong>bold"+ ZmailSeleniumProperties.getUniqueString() +"</strong>text";
 		String contentHTML = XmlStringUtil.escapeXml(
 				"<html>" +
 				"<head></head>" +
@@ -537,7 +537,7 @@ public class GetTask extends AjaxCommonTest {
 		"</html>");
 				
 		app.zGetActiveAccount().soapSend(
-				"<CreateTaskRequest xmlns='urn:zimbraMail'>" +
+				"<CreateTaskRequest xmlns='urn:zmailMail'>" +
 					"<m >" +
 			        	"<inv>" +
 			        		"<comp name='"+ subject +"'>" +

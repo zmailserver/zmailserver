@@ -14,8 +14,8 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_clientuploader" version="8.0.0" label="${msg.label}" description="${msg.description}" extension="true">
-    <include>com_zimbra_clientuploader.js</include>
+<zimlet name="org_zmail_clientuploader" version="8.0.0" label="${msg.label}" description="${msg.description}" extension="true">
+    <include>org_zmail_clientuploader.js</include>
     <include>ZaClientUploadViewController.js</include>
     <include>ZaClientUploadXFormView.js</include>
     <disableUIUndeploy>FALSE</disableUIUndeploy>

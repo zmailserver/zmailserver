@@ -18,7 +18,7 @@
 
 #include <mime/mimepp/mimepp.h>
 
-namespace Zimbra
+namespace Zmail
 {
 namespace MAPI
 {

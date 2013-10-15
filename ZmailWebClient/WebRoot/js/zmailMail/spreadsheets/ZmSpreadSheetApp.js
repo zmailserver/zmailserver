@@ -26,7 +26,7 @@ ZmSpreadSheetApp = function(){
 
 ZmSpreadSheetApp.prototype.constructor = ZmSpreadSheetApp;
 
-ZmSpreadSheetApp.APP_ZIMBRA_XLS = "application/x-zimbra-xls";
+ZmSpreadSheetApp.APP_ZIMBRA_XLS = "application/x-zmail-xls";
 
 
 ZmSpreadSheetApp.prototype.toString = function(){

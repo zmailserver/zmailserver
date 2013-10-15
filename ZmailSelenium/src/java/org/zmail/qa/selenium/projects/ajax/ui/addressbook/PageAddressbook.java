@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package  com.zimbra.qa.selenium.projects.ajax.ui.addressbook;
+package  org.zmail.qa.selenium.projects.ajax.ui.addressbook;
 
 
 import java.awt.event.KeyEvent;
@@ -22,12 +22,12 @@ import java.util.*;
 
 import org.apache.log4j.LogManager;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties.AppType;
-import com.zimbra.qa.selenium.projects.ajax.ui.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties.AppType;
+import org.zmail.qa.selenium.projects.ajax.ui.*;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew;
 
 public class PageAddressbook extends AbsTab {
 
@@ -172,7 +172,7 @@ public class PageAddressbook extends AbsTab {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.zimbra.qa.selenium.framework.ui.AbsTab#zRefresh()
+	 * @see org.zmail.qa.selenium.framework.ui.AbsTab#zRefresh()
 	 */
 	public void zRefresh() throws HarnessException {
 		
@@ -182,7 +182,7 @@ public class PageAddressbook extends AbsTab {
 	}
 	
 	//get subFolders
-	public List<FolderItem> zListGetFolders(ZimbraAccount account, FolderItem parentFolder) throws HarnessException {
+	public List<FolderItem> zListGetFolders(ZmailAccount account, FolderItem parentFolder) throws HarnessException {
 		List <FolderItem> list = new ArrayList<FolderItem>();
 		String folderId = "zti" + ((parentFolder.getName().equals("USER_ROOT"))?"h":"") + "__main_Contacts__" + ((parentFolder.getName().equals("USER_ROOT"))?"ADDRBOOK":parentFolder.getId()) +"_div";
 	
@@ -585,7 +585,7 @@ public class PageAddressbook extends AbsTab {
 		   if ( option == Button.O_NEW_CONTACT ) {
 
 			    // TODO: Bug 58365 for Desktop
-			    if (ZimbraSeleniumProperties.getAppType() == AppType.DESKTOP) {
+			    if (ZmailSeleniumProperties.getAppType() == AppType.DESKTOP) {
                    optionLocator="css=div[class='ActionMenu ZHasIcon'] div[class*='ZMenuItem ZWidget ZHasLeftIcon ZHasText'] table[class*='ZWidgetTable ZMenuItemTable']:contains('Contact')";                
 			    } else {
                   optionLocator="css=div#zb__NEW_MENU_NEW_CONTACT";
@@ -595,7 +595,7 @@ public class PageAddressbook extends AbsTab {
 		   else if ( option == Button.O_NEW_CONTACTGROUP) {
 			   
 			    // TODO: Bug 58365 for Desktop
-			    if (ZimbraSeleniumProperties.getAppType() == AppType.DESKTOP) {
+			    if (ZmailSeleniumProperties.getAppType() == AppType.DESKTOP) {
 			       optionLocator="css=div[class='ActionMenu ZHasIcon'] div[class*='ZMenuItem ZWidget ZHasLeftIcon ZHasText'] table[class*='ZWidgetTable ZMenuItemTable']:contains('Contact Group')";
 			    } else {
 			       optionLocator="css=div#zb__NEW_MENU_NEW_GROUP";
@@ -1421,7 +1421,7 @@ public class PageAddressbook extends AbsTab {
 	
 	
 	/* (non-Javadoc)
-	 * @see com.zimbra.qa.selenium.framework.ui.AbsTab#zListItem(com.zimbra.qa.selenium.framework.ui.Action, java.lang.String)
+	 * @see org.zmail.qa.selenium.framework.ui.AbsTab#zListItem(org.zmail.qa.selenium.framework.ui.Action, java.lang.String)
 	 */
 	@Override
 	public AbsPage zListItem(Action action, String contact) throws HarnessException {

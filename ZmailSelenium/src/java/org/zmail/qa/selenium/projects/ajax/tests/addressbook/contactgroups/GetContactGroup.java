@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.addressbook.contactgroups;
+package org.zmail.qa.selenium.projects.ajax.tests.addressbook.contactgroups;
 
 
 
@@ -25,11 +25,11 @@ import java.util.Map.Entry;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.addressbook.PageAddressbook;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.addressbook.PageAddressbook;
 
 
 
@@ -60,13 +60,13 @@ public class GetContactGroup extends AjaxCommonTest  {
 
 		
 		//-- Data
-		String member = "email" + ZimbraSeleniumProperties.getUniqueString() + "@example.com";
+		String member = "email" + ZmailSeleniumProperties.getUniqueString() + "@example.com";
 		
 		// Create three contact groups
 
-		groupname = "Bp" + ZimbraSeleniumProperties.getUniqueString();
+		groupname = "Bp" + ZmailSeleniumProperties.getUniqueString();
    		app.zGetActiveAccount().soapSend(
-   	            "<CreateContactRequest xmlns='urn:zimbraMail'>" +
+   	            "<CreateContactRequest xmlns='urn:zmailMail'>" +
    	            		"<cn >" +
    	            			"<a n='type'>group</a>" +
    	            			"<a n='nickname'>" + groupname +"</a>" +
@@ -77,9 +77,9 @@ public class GetContactGroup extends AjaxCommonTest  {
    		ContactGroupItem group1 = ContactGroupItem.importFromSOAP(app.zGetActiveAccount(), groupname);
    		
 
-		groupname = "5" + ZimbraSeleniumProperties.getUniqueString();
+		groupname = "5" + ZmailSeleniumProperties.getUniqueString();
    		app.zGetActiveAccount().soapSend(
-   	            "<CreateContactRequest xmlns='urn:zimbraMail'>" +
+   	            "<CreateContactRequest xmlns='urn:zmailMail'>" +
    	            		"<cn >" +
    	            			"<a n='type'>group</a>" +
    	            			"<a n='nickname'>" + groupname +"</a>" +
@@ -90,9 +90,9 @@ public class GetContactGroup extends AjaxCommonTest  {
    		ContactGroupItem group2 = ContactGroupItem.importFromSOAP(app.zGetActiveAccount(), groupname);
    		
 
-		groupname = "b" + ZimbraSeleniumProperties.getUniqueString();
+		groupname = "b" + ZmailSeleniumProperties.getUniqueString();
    		app.zGetActiveAccount().soapSend(
-   	            "<CreateContactRequest xmlns='urn:zimbraMail'>" +
+   	            "<CreateContactRequest xmlns='urn:zmailMail'>" +
    	            		"<cn >" +
    	            			"<a n='type'>group</a>" +
    	            			"<a n='nickname'>" + groupname +"</a>" +
@@ -149,13 +149,13 @@ public class GetContactGroup extends AjaxCommonTest  {
 
 		
 		//-- Data
-		String member = "email" + ZimbraSeleniumProperties.getUniqueString() + "@example.com";
+		String member = "email" + ZmailSeleniumProperties.getUniqueString() + "@example.com";
 		
 		// Create three contact groups
 
-		groupname = "Bp" + ZimbraSeleniumProperties.getUniqueString();
+		groupname = "Bp" + ZmailSeleniumProperties.getUniqueString();
    		app.zGetActiveAccount().soapSend(
-   	            "<CreateContactRequest xmlns='urn:zimbraMail'>" +
+   	            "<CreateContactRequest xmlns='urn:zmailMail'>" +
    	            		"<cn >" +
    	            			"<a n='type'>group</a>" +
    	            			"<a n='nickname'>" + groupname +"</a>" +
@@ -166,9 +166,9 @@ public class GetContactGroup extends AjaxCommonTest  {
    		ContactGroupItem group1 = ContactGroupItem.importFromSOAP(app.zGetActiveAccount(), groupname);
    		
 
-		groupname = "5" + ZimbraSeleniumProperties.getUniqueString();
+		groupname = "5" + ZmailSeleniumProperties.getUniqueString();
    		app.zGetActiveAccount().soapSend(
-   	            "<CreateContactRequest xmlns='urn:zimbraMail'>" +
+   	            "<CreateContactRequest xmlns='urn:zmailMail'>" +
    	            		"<cn >" +
    	            			"<a n='type'>group</a>" +
    	            			"<a n='nickname'>" + groupname +"</a>" +
@@ -179,9 +179,9 @@ public class GetContactGroup extends AjaxCommonTest  {
    		ContactGroupItem group2 = ContactGroupItem.importFromSOAP(app.zGetActiveAccount(), groupname);
    		
 
-		groupname = "b" + ZimbraSeleniumProperties.getUniqueString();
+		groupname = "b" + ZmailSeleniumProperties.getUniqueString();
    		app.zGetActiveAccount().soapSend(
-   	            "<CreateContactRequest xmlns='urn:zimbraMail'>" +
+   	            "<CreateContactRequest xmlns='urn:zmailMail'>" +
    	            		"<cn >" +
    	            			"<a n='type'>group</a>" +
    	            			"<a n='nickname'>" + groupname +"</a>" +
@@ -239,13 +239,13 @@ public class GetContactGroup extends AjaxCommonTest  {
 
 		
 		//-- Data
-		String member = "email" + ZimbraSeleniumProperties.getUniqueString() + "@example.com";
+		String member = "email" + ZmailSeleniumProperties.getUniqueString() + "@example.com";
 		
 		// Create three contact groups
 
-		groupname = "Bp" + ZimbraSeleniumProperties.getUniqueString();
+		groupname = "Bp" + ZmailSeleniumProperties.getUniqueString();
    		app.zGetActiveAccount().soapSend(
-   	            "<CreateContactRequest xmlns='urn:zimbraMail'>" +
+   	            "<CreateContactRequest xmlns='urn:zmailMail'>" +
    	            		"<cn >" +
    	            			"<a n='type'>group</a>" +
    	            			"<a n='nickname'>" + groupname +"</a>" +
@@ -256,9 +256,9 @@ public class GetContactGroup extends AjaxCommonTest  {
    		ContactGroupItem group1 = ContactGroupItem.importFromSOAP(app.zGetActiveAccount(), groupname);
    		
 
-		groupname = "5" + ZimbraSeleniumProperties.getUniqueString();
+		groupname = "5" + ZmailSeleniumProperties.getUniqueString();
    		app.zGetActiveAccount().soapSend(
-   	            "<CreateContactRequest xmlns='urn:zimbraMail'>" +
+   	            "<CreateContactRequest xmlns='urn:zmailMail'>" +
    	            		"<cn >" +
    	            			"<a n='type'>group</a>" +
    	            			"<a n='nickname'>" + groupname +"</a>" +
@@ -269,9 +269,9 @@ public class GetContactGroup extends AjaxCommonTest  {
    		ContactGroupItem group2 = ContactGroupItem.importFromSOAP(app.zGetActiveAccount(), groupname);
    		
 
-		groupname = "b" + ZimbraSeleniumProperties.getUniqueString();
+		groupname = "b" + ZmailSeleniumProperties.getUniqueString();
    		app.zGetActiveAccount().soapSend(
-   	            "<CreateContactRequest xmlns='urn:zimbraMail'>" +
+   	            "<CreateContactRequest xmlns='urn:zmailMail'>" +
    	            		"<cn >" +
    	            			"<a n='type'>group</a>" +
    	            			"<a n='nickname'>" + groupname +"</a>" +
@@ -340,14 +340,14 @@ public class GetContactGroup extends AjaxCommonTest  {
 			Button b = entry.getValue();
 
 			
-			String groupname = c + ZimbraSeleniumProperties.getUniqueString();
+			String groupname = c + ZmailSeleniumProperties.getUniqueString();
 	   		app.zGetActiveAccount().soapSend(
-	   	            "<CreateContactRequest xmlns='urn:zimbraMail'>" +
+	   	            "<CreateContactRequest xmlns='urn:zmailMail'>" +
 	   	            		"<cn >" +
 	   	            			"<a n='type'>group</a>" +
 	   	            			"<a n='nickname'>" + groupname +"</a>" +
 	   	            			"<a n='fileAs'>8:" + groupname +"</a>" +
-	   	            			"<m type='I' value='email" + ZimbraSeleniumProperties.getUniqueString() + "@example.com' />" +
+	   	            			"<m type='I' value='email" + ZmailSeleniumProperties.getUniqueString() + "@example.com' />" +
 	   	            		"</cn>" +
 	   	            "</CreateContactRequest>");
 	   		ContactGroupItem group = ContactGroupItem.importFromSOAP(app.zGetActiveAccount(), groupname);

@@ -12,18 +12,18 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.bean;
+package org.zmail.cs.taglib.bean;
 
-import com.zimbra.common.soap.VoiceConstants;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.client.ZFolder;
-import com.zimbra.client.ZFolder.Color;
-import com.zimbra.client.ZFolder.View;
-import com.zimbra.client.ZGrant;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZMountpoint;
-import com.zimbra.client.ZSearchFolder;
+import org.zmail.common.soap.VoiceConstants;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.service.ServiceException;
+import org.zmail.client.ZFolder;
+import org.zmail.client.ZFolder.Color;
+import org.zmail.client.ZFolder.View;
+import org.zmail.client.ZGrant;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZMountpoint;
+import org.zmail.client.ZSearchFolder;
 
 import java.util.List;
 

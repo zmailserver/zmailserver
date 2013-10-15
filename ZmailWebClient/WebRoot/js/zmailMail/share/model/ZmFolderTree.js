@@ -61,7 +61,7 @@ function() {
  * 
  * @param	{Object}		rootObj		the root object
  * @param	{String}		elementType		the element type
- * @param	{ZmZimbraAccount}		account		the account
+ * @param	{ZmZmailAccount}		account		the account
  */
 ZmFolderTree.prototype.loadFromJs =
 function(rootObj, elementType, account) {
@@ -79,7 +79,7 @@ function(rootObj, elementType, account) {
  * @param {ZmFolderTree}	tree			the containing tree
  * @param {String}	elementType		the type of containing JSON element
  * @param {Array}	path			the list of path elements
- * @param {ZmZimbraAccount}	account		the account this folder belongs to
+ * @param {ZmZmailAccount}	account		the account this folder belongs to
  */
 ZmFolderTree.createFromJs =
 function(parent, obj, tree, elementType, path, account) {
@@ -225,7 +225,7 @@ function(folder, obj, tree, path, elementType, account) {
  * @param {ZmFolderTree}	tree			the containing tree
  * @param {Array}	path			the list of path elements
  * @param {String}	elementType		the type of containing JSON element
- * @param {ZmZimbraAccount}	account		the account this folder belongs to
+ * @param {ZmZmailAccount}	account		the account this folder belongs to
  */
 ZmFolderTree.createFolder =
 function(type, parent, obj, tree, path, elementType, account) {
@@ -388,12 +388,12 @@ function(params) {
 
 	// build batch request to get all permissions at once
 	if (needPerms.length > 0) {
-		var soapDoc = AjxSoapDoc.create("BatchRequest", "urn:zimbra");
+		var soapDoc = AjxSoapDoc.create("BatchRequest", "urn:zmail");
 		soapDoc.setMethodAttribute("onerror", "continue");
 
 		var doc = soapDoc.getDoc();
 		for (var j = 0; j < needPerms.length; j++) {
-			var folderRequest = soapDoc.set("GetFolderRequest", null, null, "urn:zimbraMail");
+			var folderRequest = soapDoc.set("GetFolderRequest", null, null, "urn:zmailMail");
 			var folderNode = doc.createElement("folder");
 			folderNode.setAttribute("l", needPerms[j]);
 			folderRequest.appendChild(folderNode);

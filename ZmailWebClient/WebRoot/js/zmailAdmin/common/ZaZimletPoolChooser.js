@@ -41,7 +41,7 @@ function() {
 	html[idx++] = "<table cellspacing=0 cellpadding=0 border=0 width=100%>";
 	html[idx++] = "<colgroup><col width='40%'/><col width='20%'/><col width='40%'/> </colgroup>";
 	html[idx++] = "<tbody>";
-	html[idx++] = "<tr><td style='text-align:center' class='xform_label'>" + ZaMsg.NAD_zimbraInstalledZimlets + "</td><td>&nbsp;</td><td style='text-align:center'  class='xform_label'>" + ZaMsg.NAD_zimbraAvailableZimlets + "</td</tr>"
+	html[idx++] = "<tr><td style='text-align:center' class='xform_label'>" + ZaMsg.NAD_zmailInstalledZimlets + "</td><td>&nbsp;</td><td style='text-align:center'  class='xform_label'>" + ZaMsg.NAD_zmailAvailableZimlets + "</td</tr>"
 	html[idx++] = "<tr>";
 
 	// source list

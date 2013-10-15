@@ -12,11 +12,11 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.tag;
+package org.zmail.cs.taglib.tag;
 
-import com.zimbra.common.calendar.TZIDMapper;
-import com.zimbra.common.calendar.TZIDMapper.TZ;
-import com.zimbra.cs.taglib.bean.ZTimeZoneBean;
+import org.zmail.common.calendar.TZIDMapper;
+import org.zmail.common.calendar.TZIDMapper.TZ;
+import org.zmail.cs.taglib.bean.ZTimeZoneBean;
 
 import javax.servlet.jsp.JspContext;
 import javax.servlet.jsp.JspException;
@@ -24,7 +24,7 @@ import javax.servlet.jsp.tagext.JspFragment;
 import java.io.IOException;
 import java.util.Iterator;
 
-public class ForEachTimeZoneTag extends ZimbraSimpleTag {
+public class ForEachTimeZoneTag extends ZmailSimpleTag {
 
     private String mVar;
 

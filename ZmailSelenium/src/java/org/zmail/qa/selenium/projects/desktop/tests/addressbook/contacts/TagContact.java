@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.addressbook.contacts;
+package org.zmail.qa.selenium.projects.desktop.tests.addressbook.contacts;
 
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount.SOAP_DESTINATION_HOST_TYPE;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.*;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.ZmailAccount.SOAP_DESTINATION_HOST_TYPE;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.*;
 
 public class TagContact extends AjaxCommonTest  {
 	public TagContact() {
@@ -41,14 +41,14 @@ public class TagContact extends AjaxCommonTest  {
 			groups = { "smoke" })
 	public void TagContact_01() throws HarnessException {
 
-		String firstName = "first" + ZimbraSeleniumProperties.getUniqueString();		
-		String lastName = "last" + ZimbraSeleniumProperties.getUniqueString();
-	    String email = "email" +  ZimbraSeleniumProperties.getUniqueString() + "@zimbra.com";
+		String firstName = "first" + ZmailSeleniumProperties.getUniqueString();		
+		String lastName = "last" + ZmailSeleniumProperties.getUniqueString();
+	    String email = "email" +  ZmailSeleniumProperties.getUniqueString() + "@zmail.com";
 		//default value for file as is last, first
 		String fileAs = lastName + ", " + firstName;
 	
         app.zGetActiveAccount().soapSend(
-                "<CreateContactRequest xmlns='urn:zimbraMail'>" +
+                "<CreateContactRequest xmlns='urn:zmailMail'>" +
                 "<cn fileAsStr='" + fileAs + "' >" +
                 "<a n='firstName'>" + firstName +"</a>" +
                 "<a n='lastName'>" + lastName +"</a>" +
@@ -67,7 +67,7 @@ public class TagContact extends AjaxCommonTest  {
         // Select the item
         app.zPageAddressbook.zListItem(Action.A_LEFTCLICK, contactItem.fileAs); // contactItem.fileAs);
 
-	    String tagName = "tag"+ ZimbraSeleniumProperties.getUniqueString();
+	    String tagName = "tag"+ ZmailSeleniumProperties.getUniqueString();
 		
 		// Click new tag
 		DialogTag dialogTag = (DialogTag) app.zPageAddressbook.zToolbarPressPulldown(Button.B_TAG, Button.O_TAG_NEWTAG);
@@ -76,12 +76,12 @@ public class TagContact extends AjaxCommonTest  {
 				
 	
 		// Make sure the tag was created on the server (get the tag ID)
-		app.zGetActiveAccount().soapSend("<GetTagRequest xmlns='urn:zimbraMail'/>");;
+		app.zGetActiveAccount().soapSend("<GetTagRequest xmlns='urn:zmailMail'/>");;
 		String tagID = app.zGetActiveAccount().soapSelectValue("//mail:GetTagResponse//mail:tag[@name='"+ tagName +"']", "id");
 
 		// Make sure the tag was applied to the contact
 		app.zGetActiveAccount().soapSend(
-					"<GetContactsRequest xmlns='urn:zimbraMail'>" +
+					"<GetContactsRequest xmlns='urn:zmailMail'>" +
 						"<cn id='"+ contactItem.getId() +"'/>" +
 					"</GetContactsRequest>");
 		
@@ -101,14 +101,14 @@ public class TagContact extends AjaxCommonTest  {
 	      groups = { "smoke" })
 	public void TagLocalContact() throws HarnessException {
 
-	   String firstName = "first" + ZimbraSeleniumProperties.getUniqueString();      
-	   String lastName = "last" + ZimbraSeleniumProperties.getUniqueString();
-	   String email = "email" +  ZimbraSeleniumProperties.getUniqueString() + "@zimbra.com";
+	   String firstName = "first" + ZmailSeleniumProperties.getUniqueString();      
+	   String lastName = "last" + ZmailSeleniumProperties.getUniqueString();
+	   String email = "email" +  ZmailSeleniumProperties.getUniqueString() + "@zmail.com";
 	   //default value for file as is last, first
 	   String fileAs = lastName + ", " + firstName;
 
 	   app.zGetActiveAccount().soapSend(
-	         "<CreateContactRequest xmlns='urn:zimbraMail'>" +
+	         "<CreateContactRequest xmlns='urn:zmailMail'>" +
 	         "<cn fileAsStr='" + fileAs + "' >" +
 	         "<a n='firstName'>" + firstName +"</a>" +
 	         "<a n='lastName'>" + lastName +"</a>" +
@@ -116,28 +116,28 @@ public class TagContact extends AjaxCommonTest  {
 	         "</cn>" +            
 	         "</CreateContactRequest>",
 	         SOAP_DESTINATION_HOST_TYPE.CLIENT,
-	         ZimbraAccount.clientAccountName);
+	         ZmailAccount.clientAccountName);
 
 	        
 	   ContactItem contactItem = ContactItem.importFromSOAP(
 	         app.zGetActiveAccount(),
 	         "FIELD[lastname]:" + lastName + "",
 	         SOAP_DESTINATION_HOST_TYPE.CLIENT,
-	         ZimbraAccount.clientAccountName);
+	         ZmailAccount.clientAccountName);
 
 	   // Refresh the view, to pick up the new contact
 	   FolderItem contactFolder = FolderItem.importFromSOAP(
 	         app.zGetActiveAccount(),
 	         "Contacts",
 	         SOAP_DESTINATION_HOST_TYPE.CLIENT,
-	         ZimbraAccount.clientAccountName);
+	         ZmailAccount.clientAccountName);
 
 	   app.zTreeContacts.zTreeItem(Action.A_LEFTCLICK, contactFolder);
 
 	   // Select the item
 	   app.zPageAddressbook.zListItem(Action.A_LEFTCLICK, contactItem.fileAs); // contactItem.fileAs);
 
-	   String tagName = "tag"+ ZimbraSeleniumProperties.getUniqueString();
+	   String tagName = "tag"+ ZmailSeleniumProperties.getUniqueString();
 
 	   // Click new tag
 	   DialogTag dialogTag = (DialogTag) app.zPageAddressbook.zToolbarPressPulldown(
@@ -153,17 +153,17 @@ public class TagContact extends AjaxCommonTest  {
             "Verify toast message '" + "1 contact tagged \"" + tagName + "\"'" );
 
       // Make sure the tag was created on the server (get the tag ID)
-	   app.zGetActiveAccount().soapSend("<GetTagRequest xmlns='urn:zimbraMail'/>",
-	         SOAP_DESTINATION_HOST_TYPE.CLIENT, ZimbraAccount.clientAccountName);
+	   app.zGetActiveAccount().soapSend("<GetTagRequest xmlns='urn:zmailMail'/>",
+	         SOAP_DESTINATION_HOST_TYPE.CLIENT, ZmailAccount.clientAccountName);
 	   String tagID = app.zGetActiveAccount().soapSelectValue("//mail:GetTagResponse//mail:tag[@name='"+ tagName +"']", "id");
 
 	   // Make sure the tag was applied to the contact
 	   app.zGetActiveAccount().soapSend(
-	         "<GetContactsRequest xmlns='urn:zimbraMail'>" +
+	         "<GetContactsRequest xmlns='urn:zmailMail'>" +
 	         "<cn id='"+ contactItem.getId() +"'/>" +
 	         "</GetContactsRequest>",
 	         SOAP_DESTINATION_HOST_TYPE.CLIENT,
-	         ZimbraAccount.clientAccountName);
+	         ZmailAccount.clientAccountName);
 
 	   String contactTags = app.zGetActiveAccount().soapSelectValue(
 	         "//mail:GetContactsResponse//mail:cn",

@@ -54,10 +54,10 @@ function () {
 
 ZaDLXFormView.prototype.handleXFormChange = function (ev) {
 	if(ev && this._localXForm.hasErrors()) { 
-        ZaZimbraAdmin.getInstance().getCurrentAppBar().enableButton(ZaOperation.SAVE, false);
+        ZaZmailAdmin.getInstance().getCurrentAppBar().enableButton(ZaOperation.SAVE, false);
 
 	} else {
-        ZaZimbraAdmin.getInstance().getCurrentAppBar().enableButton(ZaOperation.SAVE, true);
+        ZaZmailAdmin.getInstance().getCurrentAppBar().enableButton(ZaOperation.SAVE, true);
 	}
 }
 
@@ -745,7 +745,7 @@ function (entry) {
 		this._containedObject[ZaModel.currentTab] = entry[ZaModel.currentTab];
 
 	if(!entry.id) {
-		if(ZaItem.hasWritePermission(ZaAccount.A_zimbraIsDelegatedAdminAccount,entry)) {
+		if(ZaItem.hasWritePermission(ZaAccount.A_zmailIsDelegatedAdminAccount,entry)) {
 			this._containedObject.attrs[ZaDistributionList.A_mailStatus] = "enabled";
 		}
 	}
@@ -835,10 +835,10 @@ function ( address ) {
 	}
 
 	return (	"(!(mail=" + address + "))" +
-		"(!(zimbraMailAddress=" + address + "))" +
-		"(!(zimbraMailDeliveryAddress=" + address + "))" +
-		"(!(zimbraMailForwardingAddress=" + address + "))" +
-		"(!(zimbraMemberOf=" + address + "))"
+		"(!(zmailMailAddress=" + address + "))" +
+		"(!(zmailMailDeliveryAddress=" + address + "))" +
+		"(!(zmailMailForwardingAddress=" + address + "))" +
+		"(!(zmailMemberOf=" + address + "))"
 	);
 }
 
@@ -881,8 +881,8 @@ ZaDLXFormView.deleteAliasButtonListener = function () {
 	var instance = this.getInstance();
 	if(instance[ZaDistributionList.A2_alias_selection_cache] != null) {
 		var cnt = instance[ZaDistributionList.A2_alias_selection_cache].length;
-		if(cnt && instance.attrs[ZaAccount.A_zimbraMailAlias]) {
-			var aliasArr = instance.attrs[ZaAccount.A_zimbraMailAlias];
+		if(cnt && instance.attrs[ZaAccount.A_zmailMailAlias]) {
+			var aliasArr = instance.attrs[ZaAccount.A_zmailMailAlias];
 			for(var i=0;i<cnt;i++) {
 				var cnt2 = aliasArr.length-1;				
 				for(var k=cnt2;k>=0;k--) {
@@ -892,7 +892,7 @@ ZaDLXFormView.deleteAliasButtonListener = function () {
 					}
 				}
 			}
-			this.getModel().setInstanceValue(instance, ZaAccount.A_zimbraMailAlias, aliasArr);	
+			this.getModel().setInstanceValue(instance, ZaAccount.A_zmailMailAlias, aliasArr);	
 		}
 	}
 	this.getModel().setInstanceValue(instance, ZaDistributionList.A2_alias_selection_cache, []);
@@ -910,9 +910,9 @@ function () {
 		}
 		var obj = {};
 		obj[ZaAccount.A_name] = instance[ZaDistributionList.A2_alias_selection_cache][0];
-		var cnt = instance.attrs[ZaAccount.A_zimbraMailAlias].length;
+		var cnt = instance.attrs[ZaAccount.A_zmailMailAlias].length;
 		for(var i=0;i<cnt;i++) {
-			if(instance[ZaDistributionList.A2_alias_selection_cache][0]==instance.attrs[ZaAccount.A_zimbraMailAlias][i]) {
+			if(instance[ZaDistributionList.A2_alias_selection_cache][0]==instance.attrs[ZaAccount.A_zmailMailAlias][i]) {
 				obj[ZaAlias.A_index] = i;
 				break;		
 			}
@@ -928,10 +928,10 @@ ZaDLXFormView.updateAlias = function () {
 		this.parent.editAliasDlg.popdown();
 		var obj = this.parent.editAliasDlg.getObject();
 		var instance = this.getInstance();
-		var arr = instance.attrs[ZaAccount.A_zimbraMailAlias];
+		var arr = instance.attrs[ZaAccount.A_zmailMailAlias];
 		if(obj[ZaAlias.A_index] >=0 && arr[obj[ZaAlias.A_index]] != obj[ZaAccount.A_name] ) {			
 			arr[obj[ZaAlias.A_index]] = obj[ZaAccount.A_name];
-			this.getModel().setInstanceValue(this.getInstance(),ZaAccount.A_zimbraMailAlias, arr); 
+			this.getModel().setInstanceValue(this.getInstance(),ZaAccount.A_zmailMailAlias, arr); 
 			this.getModel().setInstanceValue(this.getInstance(),ZaDistributionList.A2_alias_selection_cache, new Array());
 			this.parent.setDirty(true);	
 		}
@@ -960,9 +960,9 @@ ZaDLXFormView.addAlias  = function () {
 		var obj = this.parent.addAliasDlg.getObject();
 		if(obj[ZaAccount.A_name] && obj[ZaAccount.A_name].length>1) {
 			var instance = this.getInstance();
-			var arr = instance.attrs[ZaAccount.A_zimbraMailAlias]; 
+			var arr = instance.attrs[ZaAccount.A_zmailMailAlias]; 
 			arr.push(obj[ZaAccount.A_name]);
-			this.getModel().setInstanceValue(this.getInstance(),ZaAccount.A_zimbraMailAlias, arr);
+			this.getModel().setInstanceValue(this.getInstance(),ZaAccount.A_zmailMailAlias, arr);
 			this.getModel().setInstanceValue(this.getInstance(),ZaDistributionList.A2_alias_selection_cache, new Array());
 			this.parent.setDirty(true);
 		}
@@ -1118,7 +1118,7 @@ ZaDLXFormView.isNotDynamicDL = function () {
 }
 
 ZaDLXFormView.isNotACLGroup = function () {
-    return this.getInstanceValue(ZaDistributionList.A_zimbraIsACLGroup ) === "FALSE";
+    return this.getInstanceValue(ZaDistributionList.A_zmailIsACLGroup ) === "FALSE";
 }
 
 ZaDLXFormView.isACLGroup = function () {
@@ -1131,14 +1131,14 @@ ZaDLXFormView.NOTES_TAB_RIGHTS = [];
 ZaDLXFormView.MEMBEROF_TAB_ATTRS = [];
 ZaDLXFormView.MEMBEROF_TAB_RIGHTS = [ZaDistributionList.GET_DL_MEMBERSHIP_RIGHT];
 
-ZaDLXFormView.ALIASES_TAB_ATTRS = [ZaAccount.A_zimbraMailAlias];
+ZaDLXFormView.ALIASES_TAB_ATTRS = [ZaAccount.A_zmailMailAlias];
 ZaDLXFormView.ALIASES_TAB_RIGHTS = [ZaDistributionList.ADD_DL_ALIAS_RIGHT,ZaDistributionList.REMOVE_DL_ALIAS_RIGHT];
 
 ZaDLXFormView.OWNER_TAB_ATTRS = [];
 ZaDLXFormView.OWNER_TAB_RIGHTS = [];
 
-ZaDLXFormView.PREF_TAB_ATTRS = [ZaDistributionList.A_zimbraPrefReplyToEnabled, ZaDistributionList.A_zimbraPrefReplyToDisplay,
-    ZaDistributionList.A_zimbraPrefReplyToAddress];
+ZaDLXFormView.PREF_TAB_ATTRS = [ZaDistributionList.A_zmailPrefReplyToEnabled, ZaDistributionList.A_zmailPrefReplyToDisplay,
+    ZaDistributionList.A_zmailPrefReplyToAddress];
 ZaDLXFormView.PREF_TAB_RIGHTS = [];
 
 ZaDLXFormView.myXFormModifier = function(xFormObject, entry) {	
@@ -1711,7 +1711,7 @@ ZaDLXFormView.myXFormModifier = function(xFormObject, entry) {
 						}
 						,
 						{
-							ref : ZaDistributionList.A_zimbraIsACLGroup,
+							ref : ZaDistributionList.A_zmailIsACLGroup,
 							type : _WIZ_CHECKBOX_,
 							trueValue : "TRUE",
 							falseValue : "FALSE",
@@ -1725,22 +1725,22 @@ ZaDLXFormView.myXFormModifier = function(xFormObject, entry) {
 						}
 						,
 						{
-							ref : ZaAccount.A_zimbraHideInGal,
+							ref : ZaAccount.A_zmailHideInGal,
 							type : _CHECKBOX_,
 							trueValue : "TRUE",
 							falseValue : "FALSE",
-							label : ZaMsg.LBL_zimbraHideInGal,
+							label : ZaMsg.LBL_zmailHideInGal,
 							labelLocation : _LEFT_,
 							labelCssClass : "xform_label",
 							labelWrap : true,
 							align : _LEFT_,
 							nowrap : false,
-							msgName : ZaMsg.LBL_zimbraHideInGal,
+							msgName : ZaMsg.LBL_zmailHideInGal,
 							cssStyle : "padding-left:0px"
 						}
 						,
 						{
-							ref : "zimbraMailStatus",
+							ref : "zmailMailStatus",
 							type : _CHECKBOX_,
 							trueValue : "enabled",
 							falseValue : "disabled",
@@ -1761,47 +1761,47 @@ ZaDLXFormView.myXFormModifier = function(xFormObject, entry) {
 							labelLocation:_LEFT_,
 							items :
 								[{
-									ref:ZaDistributionList.A_zimbraDistributionListSubscriptionPolicy,
+									ref:ZaDistributionList.A_zmailDistributionListSubscriptionPolicy,
 									type:_RADIO_,
 									groupname:"subscription_settings",
 									msgName:ZaMsg.DLXV_SubscriptionPolicyAccept,
 									label:ZaMsg.DLXV_SubscriptionPolicyAccept,
 									onChange:ZaTabView.onFormFieldChanged,
 									updateElement:function () {
-										this.getElement().checked = (this.getInstanceValue(ZaDistributionList.A_zimbraDistributionListSubscriptionPolicy) == ZaDistributionList.A2_zimbraDLSubscriptionPolicyAccept);
+										this.getElement().checked = (this.getInstanceValue(ZaDistributionList.A_zmailDistributionListSubscriptionPolicy) == ZaDistributionList.A2_zmailDLSubscriptionPolicyAccept);
 									},
 									elementChanged: function(elementValue,instanceValue, event) {
-										this.getForm().itemChanged(this, ZaDistributionList.A2_zimbraDLSubscriptionPolicyAccept, event);
+										this.getForm().itemChanged(this, ZaDistributionList.A2_zmailDLSubscriptionPolicyAccept, event);
 									}
 								}
 								,
 								{
-									ref:ZaDistributionList.A_zimbraDistributionListSubscriptionPolicy,
+									ref:ZaDistributionList.A_zmailDistributionListSubscriptionPolicy,
 									type:_RADIO_,
 									groupname:"subscription_settings",
 									msgName:ZaMsg.DLXV_SubscriptionPolicyApproval,
 									label:ZaMsg.DLXV_SubscriptionPolicyApproval,
 									onChange:ZaTabView.onFormFieldChanged,
 									updateElement:function () {
-										this.getElement().checked = (this.getInstanceValue(ZaDistributionList.A_zimbraDistributionListSubscriptionPolicy) == ZaDistributionList.A2_zimbraDLSubscriptionPolicyApproval);
+										this.getElement().checked = (this.getInstanceValue(ZaDistributionList.A_zmailDistributionListSubscriptionPolicy) == ZaDistributionList.A2_zmailDLSubscriptionPolicyApproval);
 									},
 									elementChanged: function(elementValue,instanceValue, event) {
-										this.getForm().itemChanged(this, ZaDistributionList.A2_zimbraDLSubscriptionPolicyApproval, event);
+										this.getForm().itemChanged(this, ZaDistributionList.A2_zmailDLSubscriptionPolicyApproval, event);
 									}
 								}
 								,
 								{
-									ref:ZaDistributionList.A_zimbraDistributionListSubscriptionPolicy,
+									ref:ZaDistributionList.A_zmailDistributionListSubscriptionPolicy,
 									type:_RADIO_,
 									groupname:"subscription_settings",
 									msgName:ZaMsg.DLXV_SubscriptionPolicyReject,
 									label:ZaMsg.DLXV_SubscriptionPolicyReject,
 									onChange:ZaTabView.onFormFieldChanged,
 									updateElement:function () {
-										this.getElement().checked = (this.getInstanceValue(ZaDistributionList.A_zimbraDistributionListSubscriptionPolicy) == ZaDistributionList.A2_zimbraDLSubscriptionPolicyReject);
+										this.getElement().checked = (this.getInstanceValue(ZaDistributionList.A_zmailDistributionListSubscriptionPolicy) == ZaDistributionList.A2_zmailDLSubscriptionPolicyReject);
 									},
 									elementChanged: function(elementValue,instanceValue, event) {
-										this.getForm().itemChanged(this, ZaDistributionList.A2_zimbraDLSubscriptionPolicyReject, event);
+										this.getForm().itemChanged(this, ZaDistributionList.A2_zmailDLSubscriptionPolicyReject, event);
 									}
 								}]
 						},
@@ -1812,47 +1812,47 @@ ZaDLXFormView.myXFormModifier = function(xFormObject, entry) {
 							labelLocation:_LEFT_,
 							items :
 								[{
-									ref:ZaDistributionList.A_zimbraDistributionListUnsubscriptionPolicy,
+									ref:ZaDistributionList.A_zmailDistributionListUnsubscriptionPolicy,
 									type:_RADIO_,
 									groupname:"unsubscription_settings",
 									msgName:ZaMsg.DLXV_SubscriptionPolicyAccept,
 									label:ZaMsg.DLXV_SubscriptionPolicyAccept,
 									onChange:ZaTabView.onFormFieldChanged,
 									updateElement:function () {
-										this.getElement().checked = (this.getInstanceValue(ZaDistributionList.A_zimbraDistributionListUnsubscriptionPolicy) == ZaDistributionList.A2_zimbraDLSubscriptionPolicyAccept);
+										this.getElement().checked = (this.getInstanceValue(ZaDistributionList.A_zmailDistributionListUnsubscriptionPolicy) == ZaDistributionList.A2_zmailDLSubscriptionPolicyAccept);
 									},
 									elementChanged: function(elementValue,instanceValue, event) {
-										this.getForm().itemChanged(this, ZaDistributionList.A2_zimbraDLSubscriptionPolicyAccept, event);
+										this.getForm().itemChanged(this, ZaDistributionList.A2_zmailDLSubscriptionPolicyAccept, event);
 									}
 								}
 									,
 									{
-										ref:ZaDistributionList.A_zimbraDistributionListUnsubscriptionPolicy,
+										ref:ZaDistributionList.A_zmailDistributionListUnsubscriptionPolicy,
 										type:_RADIO_,
 										groupname:"unsubscription_settings",
 										msgName:ZaMsg.DLXV_SubscriptionPolicyApproval,
 										label:ZaMsg.DLXV_SubscriptionPolicyApproval,
 										onChange:ZaTabView.onFormFieldChanged,
 										updateElement:function () {
-											this.getElement().checked = (this.getInstanceValue(ZaDistributionList.A_zimbraDistributionListUnsubscriptionPolicy) == ZaDistributionList.A2_zimbraDLSubscriptionPolicyApproval);
+											this.getElement().checked = (this.getInstanceValue(ZaDistributionList.A_zmailDistributionListUnsubscriptionPolicy) == ZaDistributionList.A2_zmailDLSubscriptionPolicyApproval);
 										},
 										elementChanged: function(elementValue,instanceValue, event) {
-											this.getForm().itemChanged(this, ZaDistributionList.A2_zimbraDLSubscriptionPolicyApproval, event);
+											this.getForm().itemChanged(this, ZaDistributionList.A2_zmailDLSubscriptionPolicyApproval, event);
 										}
 									}
 									,
 									{
-										ref:ZaDistributionList.A_zimbraDistributionListUnsubscriptionPolicy,
+										ref:ZaDistributionList.A_zmailDistributionListUnsubscriptionPolicy,
 										type:_RADIO_,
 										groupname:"unsubscription_settings",
 										msgName:ZaMsg.DLXV_SubscriptionPolicyReject,
 										label:ZaMsg.DLXV_SubscriptionPolicyReject,
 										onChange:ZaTabView.onFormFieldChanged,
 										updateElement:function () {
-											this.getElement().checked = (this.getInstanceValue(ZaDistributionList.A_zimbraDistributionListUnsubscriptionPolicy) == ZaDistributionList.A2_zimbraDLSubscriptionPolicyReject);
+											this.getElement().checked = (this.getInstanceValue(ZaDistributionList.A_zmailDistributionListUnsubscriptionPolicy) == ZaDistributionList.A2_zmailDLSubscriptionPolicyReject);
 										},
 										elementChanged: function(elementValue,instanceValue, event) {
-											this.getForm().itemChanged(this, ZaDistributionList.A2_zimbraDLSubscriptionPolicyReject, event);
+											this.getForm().itemChanged(this, ZaDistributionList.A2_zmailDLSubscriptionPolicyReject, event);
 										}
 									}]
 						}
@@ -2047,7 +2047,7 @@ ZaDLXFormView.myXFormModifier = function(xFormObject, entry) {
 		if(entry.id) { 
 			addAliasButton.enableDisableChecks = [[XFormItem.prototype.hasRight,ZaDistributionList.ADD_DL_ALIAS_RIGHT]];
 		} else {
-			addAliasButton.enableDisableChecks = [[ZaItem.hasWritePermission, ZaAccount.A_zimbraMailAlias]];
+			addAliasButton.enableDisableChecks = [[ZaItem.hasWritePermission, ZaAccount.A_zmailMailAlias]];
 		}
 		
 		var editAliasButton = {type:_DWT_BUTTON_, label:ZaMsg.TBB_Edit,width:"100px",
@@ -2057,7 +2057,7 @@ ZaDLXFormView.myXFormModifier = function(xFormObject, entry) {
 		if(entry.id) {
 			editAliasButton.enableDisableChecks = [ZaDLXFormView.isEditAliasEnabled,[XFormItem.prototype.hasRight,ZaDistributionList.REMOVE_DL_ALIAS_RIGHT],[XFormItem.prototype.hasRight,ZaAccount.ADD_DL_ALIAS_RIGHT]];	
 		} else {
-			editAliasButton.enableDisableChecks = [ZaDLXFormView.isEditAliasEnabled,[ZaItem.hasWritePermission, ZaAccount.A_zimbraMailAlias]];
+			editAliasButton.enableDisableChecks = [ZaDLXFormView.isEditAliasEnabled,[ZaItem.hasWritePermission, ZaAccount.A_zmailMailAlias]];
 		}
 		
 		var deleteAliasButton = {type:_DWT_BUTTON_, label:ZaMsg.TBB_Delete,width:"100px",
@@ -2068,7 +2068,7 @@ ZaDLXFormView.myXFormModifier = function(xFormObject, entry) {
 		if(entry.id) {
 			deleteAliasButton.enableDisableChecks=[ZaDLXFormView.isDeleteAliasEnabled,[XFormItem.prototype.hasRight,ZaDistributionList.REMOVE_DL_ALIAS_RIGHT]];
 		} else {
-			deleteAliasButton.enableDisableChecks=[ZaDLXFormView.isDeleteAliasEnabled,[ZaItem.hasWritePermission, ZaAccount.A_zimbraMailAlias]];
+			deleteAliasButton.enableDisableChecks=[ZaDLXFormView.isDeleteAliasEnabled,[ZaItem.hasWritePermission, ZaAccount.A_zmailMailAlias]];
 		}
 		var case4 = {type:_ZATABCASE_, width:"100%", numCols:1, colSizes:["auto"],caseKey:_tab4,
 		items: [
@@ -2077,7 +2077,7 @@ ZaDLXFormView.myXFormModifier = function(xFormObject, entry) {
 				width:"100%", numCols:1,colSizes:["auto"],
 				label:ZaMsg.NAD_EditDLAliasesGroup,
 				items :[
-					{ref:ZaAccount.A_zimbraMailAlias, type:_DWT_LIST_, height:"200", width:"350px", 
+					{ref:ZaAccount.A_zmailMailAlias, type:_DWT_LIST_, height:"200", width:"350px", 
 						forceUpdate: true, preserveSelection:false, multiselect:true,cssClass: "DLSource", 
 						headerList:null,onSelection:ZaDLXFormView.aliasSelectionListener
 					},
@@ -2151,36 +2151,36 @@ ZaDLXFormView.myXFormModifier = function(xFormObject, entry) {
                 {type:_ZA_TOP_GROUPER_, label:ZaMsg.NAD_MailOptionsReceiving, id:"dl_pref_replyto_group",
                     colSpan: "*", numCols: 2, colSizes:[275, "*"],
                     visibilityChecks:[[ZATopGrouper_XFormItem.isGroupVisible,[
-                            ZaDistributionList.A_zimbraPrefReplyToEnabled,
-                            ZaDistributionList.A_zimbraPrefReplyToDisplay,
-                            ZaDistributionList.A_zimbraPrefReplyToAddress
+                            ZaDistributionList.A_zmailPrefReplyToEnabled,
+                            ZaDistributionList.A_zmailPrefReplyToDisplay,
+                            ZaDistributionList.A_zmailPrefReplyToAddress
                     ]]],
                     visibilityChangeEventSources:[],
                     items: [
-                        {ref:ZaDistributionList.A_zimbraPrefReplyToEnabled, type:_CHECKBOX_,
-                            visibilityChecks:[[ZaItem.hasReadPermission, ZaDistributionList.A_zimbraPrefReplyToEnabled]],
+                        {ref:ZaDistributionList.A_zmailPrefReplyToEnabled, type:_CHECKBOX_,
+                            visibilityChecks:[[ZaItem.hasReadPermission, ZaDistributionList.A_zmailPrefReplyToEnabled]],
                             label:ZaMsg.DLXV_ReplayToEnabled, trueValue:"TRUE", falseValue:"FALSE"
                         },
-                        {ref:ZaDistributionList.A_zimbraPrefReplyToDisplay, type:_TEXTFIELD_,
+                        {ref:ZaDistributionList.A_zmailPrefReplyToDisplay, type:_TEXTFIELD_,
                             label:ZaMsg.DLXV_ReplayToAddrDisplay, labelLocation:_LEFT_, containerCssStyle:"padding-left:3px;",
                             emptyText: ZaMsg.DLXV_ReplayToAddrEmptyText,
-                            visibilityChecks:[[ZaItem.hasReadPermission, ZaDistributionList.A_zimbraPrefReplyToDisplay]],
-                            enableDisableChecks:[[XForm.checkInstanceValue,ZaDistributionList.A_zimbraPrefReplyToEnabled,"TRUE"],
-                            [ZaItem.hasWritePermission,ZaDistributionList.A_zimbraPrefReplyToAddress]],
-                            enableDisableChangeEventSources:[ZaDistributionList.A_zimbraPrefReplyToEnabled],width:"15em"
+                            visibilityChecks:[[ZaItem.hasReadPermission, ZaDistributionList.A_zmailPrefReplyToDisplay]],
+                            enableDisableChecks:[[XForm.checkInstanceValue,ZaDistributionList.A_zmailPrefReplyToEnabled,"TRUE"],
+                            [ZaItem.hasWritePermission,ZaDistributionList.A_zmailPrefReplyToAddress]],
+                            enableDisableChangeEventSources:[ZaDistributionList.A_zmailPrefReplyToEnabled],width:"15em"
                         },
-                        {type:_DYNSELECT_, ref:ZaDistributionList.A_zimbraPrefReplyToAddress, dataFetcherClass:ZaSearch,
+                        {type:_DYNSELECT_, ref:ZaDistributionList.A_zmailPrefReplyToAddress, dataFetcherClass:ZaSearch,
                             dataFetcherMethod:ZaSearch.prototype.dynSelectSearch,
                             dataFetcherTypes:[ZaSearch.ACCOUNTS, ZaSearch.RESOURCES, ZaSearch.DLS],
-                            dataFetcherAttrs:[ZaItem.A_zimbraId, ZaItem.A_cn, ZaAccount.A_name, ZaAccount.A_displayname, ZaAccount.A_mail],
+                            dataFetcherAttrs:[ZaItem.A_zmailId, ZaItem.A_cn, ZaAccount.A_name, ZaAccount.A_displayname, ZaAccount.A_mail],
                             label:ZaMsg.DLXV_ReplayToAddr,labelLocation:_LEFT_,
                             emptyText: ZaMsg.DLXV_ReplayToAddrEmptyText,
                             width:"24em", inputWidth:"32em", editable:true, forceUpdate:true,
                             choices:new XFormChoices([], XFormChoices.OBJECT_LIST, "name", "name"),
-                            visibilityChecks:[[ZaItem.hasReadPermission, ZaDistributionList.A_zimbraPrefReplyToAddress]],
-                            enableDisableChangeEventSources:[ZaDistributionList.A_zimbraPrefReplyToEnabled],
-                            enableDisableChecks:[[XForm.checkInstanceValue,ZaDistributionList.A_zimbraPrefReplyToEnabled,"TRUE"],
-                            [ZaItem.hasWritePermission,ZaDistributionList.A_zimbraPrefReplyToAddress]],
+                            visibilityChecks:[[ZaItem.hasReadPermission, ZaDistributionList.A_zmailPrefReplyToAddress]],
+                            enableDisableChangeEventSources:[ZaDistributionList.A_zmailPrefReplyToEnabled],
+                            enableDisableChecks:[[XForm.checkInstanceValue,ZaDistributionList.A_zmailPrefReplyToEnabled,"TRUE"],
+                            [ZaItem.hasWritePermission,ZaDistributionList.A_zmailPrefReplyToAddress]],
                             onChange: function(value, event, form){
                                 if (value instanceof ZaItem ) {
                                     this.setInstanceValue(value.name);
@@ -2200,12 +2200,12 @@ ZaDLXFormView.myXFormModifier = function(xFormObject, entry) {
 						{type:_OUTPUT_, ref:"name", label:null,cssClass:"AdminTitle", height:"auto", width:350, rowSpan:3, cssStyle:"word-wrap:break-word;overflow:hidden"}
 						] ;
 
-    if (ZaItem.hasReadPermission (ZaItem.A_zimbraId, entry)) 
-        headerItems.push (  {type:_OUTPUT_, ref:ZaItem.A_zimbraId, label:ZaMsg.NAD_ZimbraID}) ;
+    if (ZaItem.hasReadPermission (ZaItem.A_zmailId, entry)) 
+        headerItems.push (  {type:_OUTPUT_, ref:ZaItem.A_zmailId, label:ZaMsg.NAD_ZmailID}) ;
 
-    if (ZaItem.hasReadPermission (ZaItem.A_zimbraCreateTimestamp, entry))
-        headerItems.push({type:_OUTPUT_, ref:ZaItem.A_zimbraCreateTimestamp,
-							label:ZaMsg.LBL_zimbraCreateTimestamp, labelLocation:_LEFT_,
+    if (ZaItem.hasReadPermission (ZaItem.A_zmailCreateTimestamp, entry))
+        headerItems.push({type:_OUTPUT_, ref:ZaItem.A_zmailCreateTimestamp,
+							label:ZaMsg.LBL_zmailCreateTimestamp, labelLocation:_LEFT_,
 							getDisplayValue:function() {
 								var val = ZaItem.formatServerTime(this.getInstanceValue());
 								if(!val)

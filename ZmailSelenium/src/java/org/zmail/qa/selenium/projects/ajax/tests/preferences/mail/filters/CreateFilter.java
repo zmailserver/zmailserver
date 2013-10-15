@@ -14,21 +14,21 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.preferences.mail.filters;
+package org.zmail.qa.selenium.projects.ajax.tests.preferences.mail.filters;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.preferences.DialogEditFilter;
-import com.zimbra.qa.selenium.projects.ajax.ui.preferences.DialogEditFilter.ConditionConstraint;
-import com.zimbra.qa.selenium.projects.ajax.ui.preferences.DialogEditFilter.ConditionType;
-import com.zimbra.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.preferences.DialogEditFilter;
+import org.zmail.qa.selenium.projects.ajax.ui.preferences.DialogEditFilter.ConditionConstraint;
+import org.zmail.qa.selenium.projects.ajax.ui.preferences.DialogEditFilter.ConditionType;
+import org.zmail.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
 
 
 public class CreateFilter extends AjaxCommonTest {
@@ -47,14 +47,14 @@ public class CreateFilter extends AjaxCommonTest {
 			)
 	public void CreateFilter_01() throws HarnessException {
 
-		String filterName = "filter"+ ZimbraSeleniumProperties.getUniqueString();
-		String conditionValue = "contains"+ ZimbraSeleniumProperties.getUniqueString();
+		String filterName = "filter"+ ZmailSeleniumProperties.getUniqueString();
+		String conditionValue = "contains"+ ZmailSeleniumProperties.getUniqueString();
 
 		
 		// Navigate to preferences -> mail -> composing
 		app.zTreePreferences.zTreeItem(Action.A_LEFTCLICK, TreeItem.MailFilters);
 
-		// See https://bugzilla.zimbra.com/show_bug.cgi?id=62323
+		// See https://bugzilla.zmail.com/show_bug.cgi?id=62323
 		// **
 		
 		// Click "Add New"
@@ -76,7 +76,7 @@ public class CreateFilter extends AjaxCommonTest {
 		
 		// Verify the filter is created
 		app.zGetActiveAccount().soapSend(
-						"<GetFilterRulesRequest xmlns='urn:zimbraMail'/>");
+						"<GetFilterRulesRequest xmlns='urn:zmailMail'/>");
 		
 		Element[] rules = app.zGetActiveAccount().soapSelectNodes("//mail:GetFilterRulesResponse//mail:filterRule[@name='" + filterName +"']");
 		ZAssert.assertEquals(rules.length, 1, "Verify the rule exists in the server");

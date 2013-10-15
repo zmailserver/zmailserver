@@ -12,24 +12,24 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.offline;
+package org.zmail.cs.service.offline;
 
 import java.util.Map;
 
-import com.zimbra.common.mailbox.Color;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.cs.account.offline.OfflineProvisioning;
-import com.zimbra.cs.mailbox.ChangeTrackingMailbox.TracelessContext;
-import com.zimbra.cs.mailbox.Flag;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.OfflineServiceException;
-import com.zimbra.cs.mailbox.ZcsMailbox;
-import com.zimbra.cs.redolog.op.CreateMountpoint;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.mailbox.Color;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.cs.account.offline.OfflineProvisioning;
+import org.zmail.cs.mailbox.ChangeTrackingMailbox.TracelessContext;
+import org.zmail.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.OfflineServiceException;
+import org.zmail.cs.mailbox.ZcsMailbox;
+import org.zmail.cs.redolog.op.CreateMountpoint;
+import org.zmail.soap.ZmailSoapContext;
 
 public class OfflineCreateMountpoint extends OfflineServiceProxy {
 
@@ -39,7 +39,7 @@ public class OfflineCreateMountpoint extends OfflineServiceProxy {
 
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext ctxt = getZimbraSoapContext(context);
+        ZmailSoapContext ctxt = getZmailSoapContext(context);
         Mailbox mbox = getRequestedMailbox(ctxt);
         if (!(mbox instanceof ZcsMailbox)) {
             throw OfflineServiceException.MISCONFIGURED("incorrect mailbox class: " + mbox.getClass().getSimpleName());

@@ -12,17 +12,17 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.offline;
+package org.zmail.cs.account.offline;
 
 import java.util.Map;
 
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Identity;
-import com.zimbra.cs.account.Provisioning;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Identity;
+import org.zmail.cs.account.Provisioning;
 
 class OfflineIdentity extends Identity {
     OfflineIdentity(Account acct, String name, Map<String,Object> attrs, Provisioning prov) {
-        super(acct, name, (String) attrs.get(Provisioning.A_zimbraPrefIdentityId), attrs, prov);
+        super(acct, name, (String) attrs.get(Provisioning.A_zmailPrefIdentityId), attrs, prov);
     }
 
     void setName(String name) {

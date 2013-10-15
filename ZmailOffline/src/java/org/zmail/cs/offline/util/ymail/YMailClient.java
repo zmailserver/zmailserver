@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.util.ymail;
+package org.zmail.cs.offline.util.ymail;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -46,21 +46,21 @@ import org.apache.commons.httpclient.methods.multipart.PartSource;
 import org.dom4j.Namespace;
 import org.dom4j.QName;
 
-import com.zimbra.common.httpclient.HttpClientUtil;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.Element.ContainerException;
-import com.zimbra.common.soap.SoapFaultException;
-import com.zimbra.common.soap.SoapHttpTransport;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.common.soap.SoapTransport;
-import com.zimbra.common.util.DateUtil;
-import com.zimbra.common.util.Log;
-import com.zimbra.cs.mime.Mime;
-import com.zimbra.cs.offline.OfflineLC;
-import com.zimbra.cs.offline.OfflineLog;
-import com.zimbra.cs.util.yauth.Auth;
+import org.zmail.common.httpclient.HttpClientUtil;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.Element.ContainerException;
+import org.zmail.common.soap.SoapFaultException;
+import org.zmail.common.soap.SoapHttpTransport;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.common.soap.SoapTransport;
+import org.zmail.common.util.DateUtil;
+import org.zmail.common.util.Log;
+import org.zmail.cs.mime.Mime;
+import org.zmail.cs.offline.OfflineLC;
+import org.zmail.cs.offline.OfflineLog;
+import org.zmail.cs.util.yauth.Auth;
 
 public class YMailClient {
     private final Auth auth;

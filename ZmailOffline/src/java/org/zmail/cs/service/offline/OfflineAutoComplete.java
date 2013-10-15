@@ -12,37 +12,37 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.offline;
+package org.zmail.cs.service.offline;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.google.common.base.Objects;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.Element.XMLElement;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.offline.OfflineAccount;
-import com.zimbra.cs.account.offline.OfflineGal;
-import com.zimbra.cs.account.offline.OfflineProvisioning;
-import com.zimbra.cs.mailbox.ContactAutoComplete;
-import com.zimbra.cs.mailbox.ContactAutoComplete.AutoCompleteResult;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.ZcsMailbox;
-import com.zimbra.cs.service.mail.AutoComplete;
-import com.zimbra.soap.ZimbraSoapContext;
-import com.zimbra.soap.type.GalSearchType;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.Element.XMLElement;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.offline.OfflineAccount;
+import org.zmail.cs.account.offline.OfflineGal;
+import org.zmail.cs.account.offline.OfflineProvisioning;
+import org.zmail.cs.mailbox.ContactAutoComplete;
+import org.zmail.cs.mailbox.ContactAutoComplete.AutoCompleteResult;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.ZcsMailbox;
+import org.zmail.cs.service.mail.AutoComplete;
+import org.zmail.soap.ZmailSoapContext;
+import org.zmail.soap.type.GalSearchType;
 
 public class OfflineAutoComplete extends AutoComplete {
 
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
-        OfflineAccount reqAccount = (OfflineAccount) getRequestedAccount(getZimbraSoapContext(context));
+        ZmailSoapContext zsc = getZmailSoapContext(context);
+        OfflineAccount reqAccount = (OfflineAccount) getRequestedAccount(getZmailSoapContext(context));
         Mailbox reqMbox = getRequestedMailbox(zsc);
         OperationContext octxt = getOperationContext(zsc, context);
 
@@ -51,7 +51,7 @@ public class OfflineAutoComplete extends AutoComplete {
         GalSearchType stype = GalSearchType.fromString(typeStr);
         final int limit = reqAccount.getContactAutoCompleteMaxResults();
         int floatingLimit = 0;
-        // if GAL sync feature is diabled (A_zimbraFeatureGalEnabled is false), it will enter "proxy mode"
+        // if GAL sync feature is diabled (A_zmailFeatureGalEnabled is false), it will enter "proxy mode"
         boolean isAccountGalActive = (reqAccount instanceof OfflineAccount) && (reqMbox instanceof ZcsMailbox)
                 && reqAccount.isFeatureGalEnabled() && reqAccount.isFeatureGalAutoCompleteEnabled();
         // search contact
@@ -108,7 +108,7 @@ public class OfflineAutoComplete extends AutoComplete {
     }
 
     // search local account, zcs accounts, data source accounts in order
-    private void autoCompleteFromOtherAccountsContacts(Element request, ZimbraSoapContext ctxt, OfflineAccount reqAcct,
+    private void autoCompleteFromOtherAccountsContacts(Element request, ZmailSoapContext ctxt, OfflineAccount reqAcct,
             String name, final int limit, GalSearchType stype, AutoCompleteResult result,
             OperationContext octxt, String typeStr) throws ServiceException {
         OfflineProvisioning prov = OfflineProvisioning.getOfflineInstance();
@@ -122,7 +122,7 @@ public class OfflineAutoComplete extends AutoComplete {
             List<Account> zcsAccounts = prov.getAllZcsAccounts();
             for (Account zcsAccount : zcsAccounts) {
                 if (Objects.equal(zcsAccount, reqAcct)
-                        || !zcsAccount.getBooleanAttr(OfflineProvisioning.A_zimbraPrefShareContactsInAutoComplete,
+                        || !zcsAccount.getBooleanAttr(OfflineProvisioning.A_zmailPrefShareContactsInAutoComplete,
                                 false)) {
                     continue;
                 }
@@ -136,7 +136,7 @@ public class OfflineAutoComplete extends AutoComplete {
         if (floatingLimit > 0) {
             List<Account> dsAccounts = prov.getAllDataSourceAccounts();
             for (Account dsAccount : dsAccounts) {
-                if (!dsAccount.getBooleanAttr(OfflineProvisioning.A_zimbraPrefShareContactsInAutoComplete, false)) {
+                if (!dsAccount.getBooleanAttr(OfflineProvisioning.A_zmailPrefShareContactsInAutoComplete, false)) {
                     continue;
                 }
                 res = query(request, ctxt, dsAccount, true, name, floatingLimit, stype, true, octxt);
@@ -148,7 +148,7 @@ public class OfflineAutoComplete extends AutoComplete {
         }
     }
 
-    private void autoCompleteFromOtherAccountsGal(Element request, ZimbraSoapContext ctxt, Account reqAcct,
+    private void autoCompleteFromOtherAccountsGal(Element request, ZmailSoapContext ctxt, Account reqAcct,
             String name, final int limit, GalSearchType stype, AutoCompleteResult result,
             OperationContext octxt, String typeStr) throws ServiceException {
         OfflineProvisioning prov = OfflineProvisioning.getOfflineInstance();

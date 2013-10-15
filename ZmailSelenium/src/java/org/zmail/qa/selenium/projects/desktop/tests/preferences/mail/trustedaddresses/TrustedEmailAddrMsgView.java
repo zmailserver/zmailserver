@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.preferences.mail.trustedaddresses;
+package org.zmail.qa.selenium.projects.desktop.tests.preferences.mail.trustedaddresses;
 
 import java.io.File;
 import java.util.HashMap;
@@ -22,17 +22,17 @@ import java.util.Map;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
-import com.zimbra.qa.selenium.framework.items.MailItem;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.GeneralUtility;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.LmtpInject;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.preferences.trustedaddresses.DisplayTrustedAddress;
+import org.zmail.qa.selenium.framework.items.MailItem;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.GeneralUtility;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.LmtpInject;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.preferences.trustedaddresses.DisplayTrustedAddress;
 
 public class TrustedEmailAddrMsgView extends AjaxCommonTest {
 
@@ -43,19 +43,19 @@ public class TrustedEmailAddrMsgView extends AjaxCommonTest {
       // Make sure we are using an account with message view
       super.startingAccountPreferences = new HashMap<String, String>() {
          {
-            put("zimbraPrefGroupMailBy", "message");
-            put("zimbraPrefMessageViewHtmlPreferred", "TRUE");
+            put("zmailPrefGroupMailBy", "message");
+            put("zmailPrefMessageViewHtmlPreferred", "TRUE");
          }
       };
    }
 
    @SuppressWarnings("serial")
-   private void _setUserLevelPreference(ZimbraAccount account) throws HarnessException {
+   private void _setUserLevelPreference(ZmailAccount account) throws HarnessException {
       // This is necessary for ZDesktop because the other preferences are set on desktop client,
       // while this preference has to be set on the user level
       Map<String, String> userLevelPreferences = new HashMap<String, String>() {
          {
-            put("zimbraPrefMailTrustedSenderList", "admintest@testdoamin.com");
+            put("zmailPrefMailTrustedSenderList", "admintest@testdoamin.com");
          }
       };
 
@@ -87,12 +87,12 @@ public class TrustedEmailAddrMsgView extends AjaxCommonTest {
       final String subject = "TestTrustedAddress";
       final String from = "admintest@testdoamin.com";
       final String to = "admin@testdoamin.com";
-      final String mimeFolder = ZimbraSeleniumProperties.getBaseDirectory()
+      final String mimeFolder = ZmailSeleniumProperties.getBaseDirectory()
       + "/data/public/mime/ExternalImg.txt";
 
       // Verify Email id through soap GetPrefsRequest
       String PrefMailTrustedAddr = app.zGetActiveAccount().getPreference(
-            "zimbraPrefMailTrustedSenderList");
+            "zmailPrefMailTrustedSenderList");
       ZAssert.assertTrue(PrefMailTrustedAddr
             .equals("admintest@testdoamin.com"),
             "Verify Email address is present /Pref/TrustedAddr: " + PrefMailTrustedAddr);
@@ -124,6 +124,6 @@ public class TrustedEmailAddrMsgView extends AjaxCommonTest {
 
    @AfterMethod(alwaysRun=true)
    public void cleanUp() {
-      ZimbraAccount.ResetAccountZDC();
+      ZmailAccount.ResetAccountZDC();
    }
 }

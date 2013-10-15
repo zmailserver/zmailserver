@@ -17,14 +17,14 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.framework.util;
+package org.zmail.qa.selenium.framework.util;
 
 import java.net.*;
 import java.util.regex.*;
 
 import org.apache.log4j.*;
 
-import com.zimbra.common.soap.Element;
+import org.zmail.common.soap.Element;
 
 /**
  * Represents an 'external' account
@@ -32,15 +32,15 @@ import com.zimbra.common.soap.Element;
  * @author Matt Rhoades
  *
  */
-public class ZimbraExternalAccount extends ZimbraAccount {
-	private static Logger logger = LogManager.getLogger(ZimbraExternalAccount.class);
+public class ZmailExternalAccount extends ZmailAccount {
+	private static Logger logger = LogManager.getLogger(ZmailExternalAccount.class);
 
 	protected URI UrlRegistration = null;
 	protected URI UrlLogin = null;
 	
 	
-	public ZimbraExternalAccount() {
-		logger.info("new "+ ZimbraExternalAccount.class.getCanonicalName());
+	public ZmailExternalAccount() {
+		logger.info("new "+ ZmailExternalAccount.class.getCanonicalName());
 	}
 	
 	public void setEmailAddress(String address) {
@@ -179,14 +179,14 @@ public class ZimbraExternalAccount extends ZimbraAccount {
 
 	/**
 	 * Get the external account for config.properties -> external.yahoo.account
-	 * @return the ZimbraExternalAccount
+	 * @return the ZmailExternalAccount
 	 */
-	public static synchronized ZimbraExternalAccount ExternalA() {
+	public static synchronized ZmailExternalAccount ExternalA() {
 		if ( _ExternalA == null ) {
-			_ExternalA = new ZimbraExternalAccount();
+			_ExternalA = new ZmailExternalAccount();
 		}
 		return (_ExternalA);
 	}
-	private static ZimbraExternalAccount _ExternalA = null;
+	private static ZmailExternalAccount _ExternalA = null;
 
 }

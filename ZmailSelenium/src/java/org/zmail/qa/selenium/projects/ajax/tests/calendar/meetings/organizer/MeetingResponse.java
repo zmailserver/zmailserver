@@ -14,16 +14,16 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.calendar.meetings.organizer;
+package org.zmail.qa.selenium.projects.ajax.tests.calendar.meetings.organizer;
 
 import java.util.*;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.DisplayMail;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.*;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.DisplayMail;
 
 public class MeetingResponse extends PrefGroupMailByMessageTest {
 
@@ -39,7 +39,7 @@ public class MeetingResponse extends PrefGroupMailByMessageTest {
 		
 		// Create the appointment on the server
 		// Create the message data to be sent
-		String subject = "appointment" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "appointment" + ZmailSeleniumProperties.getUniqueString();
 		
 		
 		// Absolute dates in UTC zone
@@ -52,18 +52,18 @@ public class MeetingResponse extends PrefGroupMailByMessageTest {
 
 		// Create an appointment with AccountA
 		app.zGetActiveAccount().soapSend(
-					"<CreateAppointmentRequest xmlns='urn:zimbraMail'>"
+					"<CreateAppointmentRequest xmlns='urn:zmailMail'>"
 				+		"<m>"
 				+			"<inv>"
 				+				"<comp status='CONF' fb='B' class='PUB' transp='O' allDay='0' name='"+ subject +"' >"
 				+					"<s d='"+ startUTC.toTimeZone(tz).toYYYYMMDDTHHMMSS() +"' tz='"+ tz +"'/>"
 				+					"<e d='"+ endUTC.toTimeZone(tz).toYYYYMMDDTHHMMSS() +"' tz='"+ tz +"'/>"
 				+					"<or a='"+ app.zGetActiveAccount().EmailAddress + "'/>"
-				+					"<at role='REQ' ptst='NE' rsvp='1' a='" + ZimbraAccount.AccountA().EmailAddress + "'/>"
+				+					"<at role='REQ' ptst='NE' rsvp='1' a='" + ZmailAccount.AccountA().EmailAddress + "'/>"
 				+				"</comp>"
 				+			"</inv>"
 				+			"<su>"+ subject + "</su>"
-				+			"<e a='"+ ZimbraAccount.AccountA().EmailAddress +"' t='t'/>"
+				+			"<e a='"+ ZmailAccount.AccountA().EmailAddress +"' t='t'/>"
 				+			"<mp ct='text/plain'>"
 				+				"<content>content</content>"
 				+			"</mp>"
@@ -71,17 +71,17 @@ public class MeetingResponse extends PrefGroupMailByMessageTest {
 				+	"</CreateAppointmentRequest>");
 		
 		// AccountA gets the invitation
-		ZimbraAccount.AccountA().soapSend(
-					"<SearchRequest xmlns='urn:zimbraMail' types='message'>"
+		ZmailAccount.AccountA().soapSend(
+					"<SearchRequest xmlns='urn:zmailMail' types='message'>"
 				+		"<query>subject:(" + subject +")</query>"
 				+	"</SearchRequest>");
 		
-		String inviteId = ZimbraAccount.AccountA().soapSelectValue("//mail:m", "id");
-		String inviteCompNum = ZimbraAccount.AccountA().soapSelectValue("//mail:comp", "compNum");
+		String inviteId = ZmailAccount.AccountA().soapSelectValue("//mail:m", "id");
+		String inviteCompNum = ZmailAccount.AccountA().soapSelectValue("//mail:comp", "compNum");
 		
 		// AccountA accepts
-		ZimbraAccount.AccountA().soapSend(
-					"<SendInviteReplyRequest xmlns='urn:zimbraMail' id='"+ inviteId +"' compNum='"+ inviteCompNum +"' verb='ACCEPT' updateOrganizer='TRUE'>"
+		ZmailAccount.AccountA().soapSend(
+					"<SendInviteReplyRequest xmlns='urn:zmailMail' id='"+ inviteId +"' compNum='"+ inviteCompNum +"' verb='ACCEPT' updateOrganizer='TRUE'>"
 			+			"<m >"
 			+				"<e a='"+ app.zGetActiveAccount().EmailAddress +"' t='t'/>"
 			+				"<su>Accept: "+ subject +"</su>"

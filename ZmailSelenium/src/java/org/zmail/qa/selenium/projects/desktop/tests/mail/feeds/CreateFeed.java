@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.mail.feeds;
+package org.zmail.qa.selenium.projects.desktop.tests.mail.feeds;
 
 import java.net.*;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.mail.DialogCreateFolder;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.mail.DialogCreateFolder;
 
 public class CreateFeed extends AjaxCommonTest {
 
@@ -41,7 +41,7 @@ public class CreateFeed extends AjaxCommonTest {
 			groups = { "functional" })
 			public void CreateFeed_01() throws HarnessException, MalformedURLException {
 
-		String foldername = "folder" + ZimbraSeleniumProperties.getUniqueString();
+		String foldername = "folder" + ZmailSeleniumProperties.getUniqueString();
 		URL feed = new URL("http", "rss.news.yahoo.com", 80, "/rss/topstories");
 
 		// Click on the "new folder" button

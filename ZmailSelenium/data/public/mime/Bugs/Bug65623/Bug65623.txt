@@ -5,7 +5,7 @@ Subject: subject13189485723753
 Content-Type: multipart/mixed;
  boundary="=_9838f3f9-dea8-4b54-ba14-652d55621b34"
 MIME-Version: 1.0
-X-Mailer: Zimbra 7.1.3_GA_3346 (ZimbraWebClient - FF3.0 (Win)/7.1.3_GA_3346)
+X-Mailer: Zmail 7.1.3_GA_3346 (ZmailWebClient - FF3.0 (Win)/7.1.3_GA_3346)
 
 --=_9838f3f9-dea8-4b54-ba14-652d55621b34
 Content-Type: multipart/alternative;

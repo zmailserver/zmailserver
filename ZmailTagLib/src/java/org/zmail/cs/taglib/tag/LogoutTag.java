@@ -12,9 +12,9 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.tag;
+package org.zmail.cs.taglib.tag;
 
-import com.zimbra.cs.taglib.ZJspSession;
+import org.zmail.cs.taglib.ZJspSession;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -23,9 +23,9 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 import java.io.IOException;
 
-import com.zimbra.common.auth.ZAuthToken;
+import org.zmail.common.auth.ZAuthToken;
 
-public class LogoutTag extends ZimbraSimpleTag {
+public class LogoutTag extends ZmailSimpleTag {
     
     public void doTag() throws JspException, IOException {
         JspContext jctxt = getJspContext();

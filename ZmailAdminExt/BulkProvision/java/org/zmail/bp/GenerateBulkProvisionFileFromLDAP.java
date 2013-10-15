@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.bp;
+package org.zmail.bp;
 
 import java.io.File;
 
@@ -32,32 +32,32 @@ import org.dom4j.io.XMLWriter;
 
 import au.com.bytecode.opencsv.CSVWriter;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.mailbox.ContactConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminExtConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.EmailUtil;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.GalContact;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Provisioning.SearchGalResult;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.cs.account.gal.GalOp;
-import com.zimbra.cs.account.gal.GalParams;
-import com.zimbra.cs.account.ldap.LdapGalMapRules;
-import com.zimbra.cs.account.ldap.LdapGalSearch;
-import com.zimbra.cs.ldap.LdapException;
-import com.zimbra.cs.service.admin.AdminDocumentHandler;
-import com.zimbra.cs.service.admin.AdminService;
-import com.zimbra.soap.ZimbraSoapContext;
-import com.zimbra.cs.service.admin.AdminFileDownload;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.mailbox.ContactConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminExtConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.EmailUtil;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.GalContact;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Provisioning.SearchGalResult;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.cs.account.gal.GalOp;
+import org.zmail.cs.account.gal.GalParams;
+import org.zmail.cs.account.ldap.LdapGalMapRules;
+import org.zmail.cs.account.ldap.LdapGalSearch;
+import org.zmail.cs.ldap.LdapException;
+import org.zmail.cs.service.admin.AdminDocumentHandler;
+import org.zmail.cs.service.admin.AdminService;
+import org.zmail.soap.ZmailSoapContext;
+import org.zmail.cs.service.admin.AdminFileDownload;
 public class GenerateBulkProvisionFileFromLDAP extends AdminDocumentHandler {
 
     private static final String E_Options = "Options";
-    private static final String E_ZimbraServer = "ZimbraServer";
+    private static final String E_ZmailServer = "ZmailServer";
     private static final String E_profile = "profile";
     private static final String E_server = "server";
     private static final String E_UserProvision = "UserProvision";
@@ -69,7 +69,7 @@ public class GenerateBulkProvisionFileFromLDAP extends AdminDocumentHandler {
     private static final int DEFAULT_PWD_LENGTH = 8;
 
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-	ZimbraSoapContext zsc = getZimbraSoapContext(context);
+	ZmailSoapContext zsc = getZmailSoapContext(context);
 	Map<String,Object> attrs = AdminService.getAttrs(request, true);
 	String password = null;
 	Element elPassword = request
@@ -138,7 +138,7 @@ public class GenerateBulkProvisionFileFromLDAP extends AdminDocumentHandler {
 
 	                    if(!domainList.contains(parts[1])) {
                     		totalDomains++;
-                    		//Check if this domain is in Zimbra
+                    		//Check if this domain is in Zmail
                     		Domain domain = Provisioning.getInstance().getDomainByName(parts[1]);
                     		if(domain != null) {
                     		    totalExistingDomains++;
@@ -159,7 +159,7 @@ public class GenerateBulkProvisionFileFromLDAP extends AdminDocumentHandler {
 	                response.addElement(AdminExtConstants.E_SMTPPort).setText(SMTPPort);	                
 	                return response;
             	} else if(AdminFileDownload.FILE_FORMAT_BULK_CSV.equalsIgnoreCase(fileFormat)) {
-            		outFileName = String.format("%s%s_bulk_%s_%s.csv", LC.zimbra_tmp_directory.value(),File.separator,zsc.getAuthtokenAccountId(),fileToken);
+            		outFileName = String.format("%s%s_bulk_%s_%s.csv", LC.zmail_tmp_directory.value(),File.separator,zsc.getAuthtokenAccountId(),fileToken);
             		FileOutputStream out = null;
             		CSVWriter writer = null;	            	
             		try {
@@ -200,7 +200,7 @@ public class GenerateBulkProvisionFileFromLDAP extends AdminDocumentHandler {
 		        		}
 		        	}
                 } else if (AdminFileDownload.FILE_FORMAT_BULK_XML.equalsIgnoreCase(fileFormat)) {
-                	outFileName = String.format("%s%s_bulk_%s_%s.xml", LC.zimbra_tmp_directory.value(),File.separator,zsc.getAuthtokenAccountId(),fileToken);
+                	outFileName = String.format("%s%s_bulk_%s_%s.xml", LC.zmail_tmp_directory.value(),File.separator,zsc.getAuthtokenAccountId(),fileToken);
                 	FileWriter fileWriter = null;
                 	XMLWriter xw = null;
                 	try {
@@ -252,7 +252,7 @@ public class GenerateBulkProvisionFileFromLDAP extends AdminDocumentHandler {
 		                	}   
 		                	eUser.add(ePassword);
 		                	
-		                	org.dom4j.Element elMustChangePassword = DocumentHelper.createElement(Provisioning.A_zimbraPasswordMustChange);
+		                	org.dom4j.Element elMustChangePassword = DocumentHelper.createElement(Provisioning.A_zmailPasswordMustChange);
 		                	elMustChangePassword.setText(mustChangePassword);
 		                	eUser.add(elMustChangePassword);
 		                	
@@ -275,7 +275,7 @@ public class GenerateBulkProvisionFileFromLDAP extends AdminDocumentHandler {
 		        		}
 		        	}
                 } else if(AdminFileDownload.FILE_FORMAT_MIGRATION_XML.equalsIgnoreCase(fileFormat)) {
-                	outFileName = String.format("%s%s_migration_%s_%s.xml", LC.zimbra_tmp_directory.value(),File.separator,zsc.getAuthtokenAccountId(),fileToken);
+                	outFileName = String.format("%s%s_migration_%s_%s.xml", LC.zmail_tmp_directory.value(),File.separator,zsc.getAuthtokenAccountId(),fileToken);
                 	FileWriter fileWriter = null;
                 	XMLWriter xw = null;
                 	try {
@@ -364,26 +364,26 @@ public class GenerateBulkProvisionFileFromLDAP extends AdminDocumentHandler {
 	                    mapiProfileEl.add(logonUserDNEl); 
 	                    
 	                    /**
-	                     * set ZimbraServer section
+	                     * set ZmailServer section
 	                     */
-	                    org.dom4j.Element zimbraSererEl = DocumentHelper.createElement(E_ZimbraServer);
-	                    rootEl.add(zimbraSererEl);                    
+	                    org.dom4j.Element zmailSererEl = DocumentHelper.createElement(E_ZmailServer);
+	                    rootEl.add(zmailSererEl);                    
 	                   
 	                    org.dom4j.Element serverNameEl = DocumentHelper.createElement(AdminExtConstants.E_serverName);
 	                    serverNameEl.setText(Provisioning.getInstance().getLocalServer().getName());
-	                    zimbraSererEl.add(serverNameEl); 
+	                    zmailSererEl.add(serverNameEl); 
 	                    
 	                    org.dom4j.Element adminUserNameEl = DocumentHelper.createElement(AdminExtConstants.E_adminUserName);
-	                    adminUserNameEl.setText(request.getElement(AdminExtConstants.E_ZimbraAdminLogin).getTextTrim());
-	                    zimbraSererEl.add(adminUserNameEl);                     
+	                    adminUserNameEl.setText(request.getElement(AdminExtConstants.E_ZmailAdminLogin).getTextTrim());
+	                    zmailSererEl.add(adminUserNameEl);                     
 	                    
 	                    org.dom4j.Element adminUserPasswordEl = DocumentHelper.createElement(E_password);
-	                    adminUserPasswordEl.setText(request.getElement(AdminExtConstants.E_ZimbraAdminPassword).getTextTrim());
-	                    zimbraSererEl.add(adminUserPasswordEl);                                         
+	                    adminUserPasswordEl.setText(request.getElement(AdminExtConstants.E_ZmailAdminPassword).getTextTrim());
+	                    zmailSererEl.add(adminUserPasswordEl);                                         
 	
 	                    org.dom4j.Element domaindEl = DocumentHelper.createElement(E_domain);
 	                    domaindEl.setText(request.getElement(AdminExtConstants.E_TargetDomainName).getTextTrim());
-	                    zimbraSererEl.add(domaindEl); 
+	                    zmailSererEl.add(domaindEl); 
 	                    
 	                    /**
 	                     * set UserProvision section
@@ -421,7 +421,7 @@ public class GenerateBulkProvisionFileFromLDAP extends AdminDocumentHandler {
 		                    	ePassword.setText(String.valueOf(BulkImportAccounts.generateStrongPassword(genPwdLength)));
 		                	}   
 		                	eUser.add(ePassword);                        
-		                	org.dom4j.Element elMustChangePassword = DocumentHelper.createElement(Provisioning.A_zimbraPasswordMustChange);
+		                	org.dom4j.Element elMustChangePassword = DocumentHelper.createElement(Provisioning.A_zmailPasswordMustChange);
 		                	elMustChangePassword.setText(mustChangePassword);
 		                	eUser.add(elMustChangePassword);                  
 		                	usersEl.add(eUser);

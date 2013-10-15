@@ -12,36 +12,36 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.offline;
+package org.zmail.cs.account.offline;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.mail.Session;
 
-import com.zimbra.common.account.ProvisioningConstants;
-import com.zimbra.soap.admin.type.DataSourceType;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.DataSourceConfig;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.datasource.DataSourceManager;
-import com.zimbra.cs.datasource.imap.ImapSync;
-import com.zimbra.cs.mailbox.DataSourceMailbox;
-import com.zimbra.cs.mailbox.DesktopMailbox;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.LocalJMSession;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.SyncExceptionHandler;
-import com.zimbra.cs.mailclient.CommandFailedException;
-import com.zimbra.cs.offline.OfflineLC;
-import com.zimbra.cs.offline.OfflineLog;
-import com.zimbra.cs.offline.common.OfflineConstants;
-import com.zimbra.cs.offline.util.OfflineYAuth;
-import com.zimbra.cs.offline.util.ymail.YMailClient;
+import org.zmail.common.account.ProvisioningConstants;
+import org.zmail.soap.admin.type.DataSourceType;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.DataSourceConfig;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.datasource.DataSourceManager;
+import org.zmail.cs.datasource.imap.ImapSync;
+import org.zmail.cs.mailbox.DataSourceMailbox;
+import org.zmail.cs.mailbox.DesktopMailbox;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.LocalJMSession;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.SyncExceptionHandler;
+import org.zmail.cs.mailclient.CommandFailedException;
+import org.zmail.cs.offline.OfflineLC;
+import org.zmail.cs.offline.OfflineLog;
+import org.zmail.cs.offline.common.OfflineConstants;
+import org.zmail.cs.offline.util.OfflineYAuth;
+import org.zmail.cs.offline.util.ymail.YMailClient;
 
 public class OfflineDataSource extends DataSource {
     private OfflineDataSource contactSyncDataSource;
@@ -49,7 +49,7 @@ public class OfflineDataSource extends DataSource {
 
     OfflineDataSource(Account acct, DataSourceType type, String name, String id, Map<String,Object> attrs, Provisioning prov) {
         super(acct, type, name, id, attrs, prov);
-        setServiceName(getAttr(Provisioning.A_zimbraDataSourceDomain));
+        setServiceName(getAttr(Provisioning.A_zmailDataSourceDomain));
     }
 
     void setName(String name) {
@@ -83,7 +83,7 @@ public class OfflineDataSource extends DataSource {
         String suffix = "-" + type.name();
         Map<String, Object> attrs = new HashMap<String, Object>(getRawAttrs());
         String id = getId() + suffix;
-        attrs.put(Provisioning.A_zimbraDataSourcePassword, encryptData(id, pass));
+        attrs.put(Provisioning.A_zmailDataSourcePassword, encryptData(id, pass));
         return new OfflineDataSource(
             getAccount(), type, getName() + suffix, id, attrs, getProvisioning());
     }
@@ -102,12 +102,12 @@ public class OfflineDataSource extends DataSource {
         DataSourceConfig.Folder kf = getKnownFolderByLocalPath(localPath);
         if (kf != null) return kf.isSync();
         return DataSourceManager.getConfig().isSyncAllFolders() ||
-            getBooleanAttr(OfflineConstants.A_zimbraDataSourceSyncAllServerFolders, false);
+            getBooleanAttr(OfflineConstants.A_zmailDataSourceSyncAllServerFolders, false);
     }
 
     @Override
     public boolean isSyncInboxOnly() {
-        return !getBooleanAttr(OfflineConstants.A_zimbraDataSourceSyncAllServerFolders, false);
+        return !getBooleanAttr(OfflineConstants.A_zmailDataSourceSyncAllServerFolders, false);
     }
 
     @Override
@@ -176,7 +176,7 @@ public class OfflineDataSource extends DataSource {
 
     @Override
     public long getSyncFrequency() {
-        return getTimeInterval(OfflineProvisioning.A_zimbraDataSourceSyncFreq,
+        return getTimeInterval(OfflineProvisioning.A_zmailDataSourceSyncFreq,
             OfflineConstants.DEFAULT_SYNC_FREQ);
     }
 
@@ -193,7 +193,7 @@ public class OfflineDataSource extends DataSource {
     }
     
     public boolean isSmtpEnabled() {
-        return getBooleanAttr(OfflineProvisioning.A_zimbraDataSourceSmtpEnabled, false);
+        return getBooleanAttr(OfflineProvisioning.A_zmailDataSourceSmtpEnabled, false);
     }
 
     public boolean needsSmtpAuth() {
@@ -201,24 +201,24 @@ public class OfflineDataSource extends DataSource {
     }
 
     public boolean isCalendarSyncEnabled() {
-        return getBooleanAttr(OfflineProvisioning.A_zimbraDataSourceCalendarSyncEnabled, false);
+        return getBooleanAttr(OfflineProvisioning.A_zmailDataSourceCalendarSyncEnabled, false);
     }
 
     public boolean isContactSyncEnabled() {
-        return getBooleanAttr(OfflineProvisioning.A_zimbraDataSourceContactSyncEnabled, false);
+        return getBooleanAttr(OfflineProvisioning.A_zmailDataSourceContactSyncEnabled, false);
     }
 
     public void setContactSyncEnabled(boolean enabled) throws ServiceException {
         OfflineProvisioning op = (OfflineProvisioning) Provisioning.getInstance();
         op.setDataSourceAttribute(
-            this, OfflineProvisioning.A_zimbraDataSourceContactSyncEnabled,
+            this, OfflineProvisioning.A_zmailDataSourceContactSyncEnabled,
             enabled ? ProvisioningConstants.TRUE : ProvisioningConstants.FALSE);
     }
 
     public void setCalendarSyncEnabled(boolean enabled) throws ServiceException {
         OfflineProvisioning op = (OfflineProvisioning) Provisioning.getInstance();
         op.setDataSourceAttribute(
-            this, OfflineProvisioning.A_zimbraDataSourceCalendarSyncEnabled,
+            this, OfflineProvisioning.A_zmailDataSourceCalendarSyncEnabled,
             enabled ? ProvisioningConstants.TRUE : ProvisioningConstants.FALSE);
     }
     

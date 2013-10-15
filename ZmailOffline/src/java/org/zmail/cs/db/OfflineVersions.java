@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.db;
+package org.zmail.cs.db;
 
 public class OfflineVersions {
 	public static final int OFFLINE_DB_VERSION = 5;

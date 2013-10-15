@@ -1,14 +1,14 @@
-<project name="ZimbraAdminExt" default="deploy-all">
+<project name="ZmailAdminExt" default="deploy-all">
 
-    <import file="../ZimbraCustomerServices/hosted/YahooSmb/ZimbraAdminExt/build.xml" optional="true" />
+    <import file="../ZmailCustomerServices/hosted/YahooSmb/ZmailAdminExt/build.xml" optional="true" />
     <property file="build.properties"/>
     <property environment="env"/>
 	
-	<!-- set up dependency on ZimbraServer -->
-	<condition property="zimbraServer.dir" value="${env.ZIMBRASERVER_DIR}">
+	<!-- set up dependency on ZmailServer -->
+	<condition property="zmailServer.dir" value="${env.ZIMBRASERVER_DIR}">
 	    <isset property="env.ZIMBRASERVER_DIR" />
 	</condition>	
-	<condition property="zimbraServer.dir" value="../ZimbraServer">
+	<condition property="zmailServer.dir" value="../ZmailServer">
 	    <not><isset property="env.ZIMBRASERVER_DIR"/></not>
 	</condition>
 	<condition property="is-windows"><os family="windows"/></condition>
@@ -21,12 +21,12 @@
 	
 	<!-- src -->
 	<property name="build.dir" location="build" />
-	<property name="network.dir" location="../ZimbraNetwork/ZimbraServer" />
+	<property name="network.dir" location="../ZmailNetwork/ZmailServer" />
 	<property name="network.classes.dir" location="${network.dir}/build/classes" />	
-	<property name="common.dir" location="../ZimbraCommon" />
+	<property name="common.dir" location="../ZmailCommon" />
 	<property name="common.classes.dir" location="${common.dir}/build/classes" />
 	<property name="common.jars.dir" location="${common.dir}/jars" />
-	<property name="client.dir" location="../ZimbraClient" />
+	<property name="client.dir" location="../ZmailClient" />
 	<property name="client.classes.dir" location="${client.dir}/build/classes" />
 
 	<!-- build -->
@@ -38,11 +38,11 @@
 	<property name="dist.lib.dir" location="${dist.dir}/lib"/>
 	<property name="dist.lib.ext.dir" location="${dist.lib.dir}/ext"/>
 	<property name="zimlet.dist.dir" location="${dist.dir}/zimlets"/>
-	<property name="zimbrasoap.dir" location="../ZimbraSoap" />
+	<property name="zmailsoap.dir" location="../ZmailSoap" />
 	
 
 	<!-- deploy -->
-	<property name="zimbra.home.dir" location="/opt/zimbra" />	
+	<property name="zmail.home.dir" location="/opt/zmail" />	
 
 	<target name="build-init">
 	   	<mkdir dir="${build.zimlet.dir}" /> 
@@ -71,8 +71,8 @@
 		<pathelement location="${common.classes.dir}" />
 		<pathelement location="${network.classes.dir}" />		
 		<pathelement location="${build.classes.dir}" />
-		<pathelement location="${zimbraServer.dir}/build/classes"/>
-        <pathelement location="${zimbrasoap.dir}/build/classes" />
+		<pathelement location="${zmailServer.dir}/build/classes"/>
+        <pathelement location="${zmailsoap.dir}/build/classes" />
 		<fileset dir="${common.dir}/jars">
 			<include name="**/*.jar"/>
 		</fileset>
@@ -89,7 +89,7 @@
 	
 	<target name="undeploy-zimlet" description="undeploy zimlet">
 		<echo>Undeploying zimlet: ${ext.name} </echo>
-		<java classname="com.zimbra.cs.zimlet.ZimletUtil" fork="true" classpathref="class.path" failonerror="true">
+		<java classname="org.zmail.cs.zimlet.ZimletUtil" fork="true" classpathref="class.path" failonerror="true">
 			<arg line="undeploy ${ext.name}" />
 		</java>
 	</target>	
@@ -97,7 +97,7 @@
 	<target name="deploy-zimlet" depends='package-zimlet' description="install UI files, deploy zimlet to LDAP">
 		<echo>Deploying zimlet: ${ext.name}</echo>
 		<mkdir dir="${build.zimlet.dir}" />
-		<java classname="com.zimbra.cs.zimlet.ZimletUtil" fork="true" classpathref="class.path" failonerror="true">
+		<java classname="org.zmail.cs.zimlet.ZimletUtil" fork="true" classpathref="class.path" failonerror="true">
 			<arg line="-q" />
 			<arg line="deploy" />
 			<arg file="${build.zimlet.dir}/${ext.name}.zip" />
@@ -120,11 +120,11 @@
 	</target>	
 	
 	<target name="deploy-server-extension" depends="jar">
-		<ant dir="${zimbraServer.dir}" target="stop-webserver" inheritAll="false"/>
-		<copy todir="${zimbra.home.dir}/lib/ext/${ext.name}">
+		<ant dir="${zmailServer.dir}" target="stop-webserver" inheritAll="false"/>
+		<copy todir="${zmail.home.dir}/lib/ext/${ext.name}">
 			<fileset dir="${build.dir}" includes="${ext.name}.jar" />
 		</copy>
-		<ant dir="${zimbraServer.dir}" target="start-webserver" inheritAll="false"/>
+		<ant dir="${zmailServer.dir}" target="start-webserver" inheritAll="false"/>
 	 </target>
 
     <target name="scp" description="Copy the zip file to the deploy machine">
@@ -154,32 +154,32 @@
 		<!-- Copy the jar file -->
 		<antcall target="scp">
 	    	<param name="scp_src" value="${build.dir}/${ext.name}.jar"/>
-			<param name="scp_dest" value="root@${dev_machine}:/opt/zimbra/lib/ext/${ext.name}/${ext.name}.jar" />
+			<param name="scp_dest" value="root@${dev_machine}:/opt/zmail/lib/ext/${ext.name}/${ext.name}.jar" />
 	  	</antcall>
 
 	  	<!-- Copy the zmrcd & zmcertmgr: may need to run dos2unix for zmrcd   -->
 	  	<!--
 	  	<antcall target="scp">
-	    	<param name="scp_src" value="${zimbraServer.dir}/src/libexec/zmrcd"/>
-			<param name="scp_dest" value="root@${dev_machine}:/opt/zimbra/libexec/zmrcd" />
+	    	<param name="scp_src" value="${zmailServer.dir}/src/libexec/zmrcd"/>
+			<param name="scp_dest" value="root@${dev_machine}:/opt/zmail/libexec/zmrcd" />
 	  	</antcall>
          -->
 		<antcall target="scp">
-	    	<param name="scp_src" value="${zimbraServer.dir}/src/bin/zmcertmgr"/>
-			<param name="scp_dest" value="root@${dev_machine}:/opt/zimbra/bin/zmcertmgr" />
+	    	<param name="scp_src" value="${zmailServer.dir}/src/bin/zmcertmgr"/>
+			<param name="scp_dest" value="root@${dev_machine}:/opt/zmail/bin/zmcertmgr" />
 	  	</antcall>
 
           <!-- Copy the zimlet zip file -->
 		<antcall target="scp">
 	    	<param name="scp_src" value="${build.zimlet.dir}/${ext.name}.zip"/>
-			<param name="scp_dest" value="zimbra@${dev_machine}:/opt/zimbra/zimlets-admin-extra" />
+			<param name="scp_dest" value="zmail@${dev_machine}:/opt/zmail/zimlets-admin-extra" />
 	  	</antcall>
 
-	  	<!-- May need to copy the zimbraAdmin: generate the productioin zimbraAdmin.war - ant admin-war
+	  	<!-- May need to copy the zmailAdmin: generate the productioin zmailAdmin.war - ant admin-war
 
 	  	<antcall target="scp">
-	    	<param name="scp_src" value="../ZimbraWebClient/build/dist/jetty/webapps/zimbraAdmin.war"/>
-			<param name="scp_dest" value="zimbra@${dev_machine}:/opt/zimbra/jetty/webapps" />
+	    	<param name="scp_src" value="../ZmailWebClient/build/dist/jetty/webapps/zmailAdmin.war"/>
+			<param name="scp_dest" value="zmail@${dev_machine}:/opt/zmail/jetty/webapps" />
 
 	  	</antcall>
 	  	-->
@@ -194,46 +194,46 @@
 	<target name="deploy-proxyconfig" description="deploy proxy configuration admin extension" >
 		<antcall target="deploy-zimlet">
 			<param name="ext.dir" value="ProxyConfig" />
-			<param name="ext.name" value="com_zimbra_proxy_config" />
+			<param name="ext.name" value="org_zmail_proxy_config" />
 		</antcall>
 	</target>
 	
 	<target name="deploy-certmgr" description="deploy certificate manager">
 		<antcall target="deploy">
 			<param name="ext.dir" value="CertificateMgr"/>
-			<param name="ext.name" value="com_zimbra_cert_manager"/>
+			<param name="ext.name" value="org_zmail_cert_manager"/>
 		</antcall>
 	</target>
 
 	<target name="deploy-helptooltip" description="deploy help tooltip admin extension">
 		<antcall target="deploy-zimlet">
 			<param name="ext.dir" value="HelpTooltip"/>
-			<param name="ext.name" value="com_zimbra_tooltip"/>
+			<param name="ext.name" value="org_zmail_tooltip"/>
 		</antcall>
 	</target>
 	
 	<target name="deploy-bulkprovision" description="deploy Bulk Provision">
 		<antcall target="deploy">
 			<param name="ext.dir" value="BulkProvision"/>
-			<param name="ext.name" value="com_zimbra_bulkprovision" />
+			<param name="ext.name" value="org_zmail_bulkprovision" />
 		</antcall>
 	</target>
 
 	<target name="deploy-clientuploader">
 		<antcall target="deploy">
 			<param name="ext.dir" value="ClientUploader"/>
-			<param name="ext.name" value="com_zimbra_clientuploader" />
+			<param name="ext.name" value="org_zmail_clientuploader" />
 		</antcall>
 	</target>
 	
 	<target name="deploy-viewmail" description="deploy view mail extension">
 		<antcall target="deploy-zimlet">
-			<param name="ext.dir" value="com_zimbra_viewmail"/>
-			<param name="ext.name" value="com_zimbra_viewmail"/>
+			<param name="ext.dir" value="org_zmail_viewmail"/>
+			<param name="ext.name" value="org_zmail_viewmail"/>
 		</antcall>
 	</target>
 
-	<target name="deploy-all" description="deploy all the admin extensions in ZimbraAdminExt">
+	<target name="deploy-all" description="deploy all the admin extensions in ZmailAdminExt">
 		<antcall target="deploy-bulkprovision" />
 		<antcall target="deploy-helptooltip" />
 		<antcall target="deploy-certmgr" />
@@ -245,11 +245,11 @@
     <target name="package-clientuploader" description="package clientuploader extension">
         <antcall target="package-zimlet">
             <param name="ext.dir" value="ClientUploader"/>
-            <param name="ext.name" value="com_zimbra_clientuploader" />
+            <param name="ext.name" value="org_zmail_clientuploader" />
         </antcall>
         <antcall target="jar">
             <param name="ext.dir" value="ClientUploader"/>
-            <param name="ext.name" value="com_zimbra_clientuploader" />
+            <param name="ext.name" value="org_zmail_clientuploader" />
         </antcall>
     </target>
 	

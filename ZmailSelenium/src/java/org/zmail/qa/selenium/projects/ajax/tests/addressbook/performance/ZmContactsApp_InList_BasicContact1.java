@@ -14,21 +14,21 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.addressbook.performance;
+package org.zmail.qa.selenium.projects.ajax.tests.addressbook.performance;
 
 import java.io.File;
 
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.ContactItem;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.RestUtil;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.framework.util.performance.PerfKey;
-import com.zimbra.qa.selenium.framework.util.performance.PerfMetrics;
-import com.zimbra.qa.selenium.framework.util.performance.PerfToken;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.framework.items.ContactItem;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.RestUtil;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.framework.util.performance.PerfKey;
+import org.zmail.qa.selenium.framework.util.performance.PerfMetrics;
+import org.zmail.qa.selenium.framework.util.performance.PerfToken;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
 
 public class ZmContactsApp_InList_BasicContact1 extends AjaxCommonTest {
 
@@ -69,7 +69,7 @@ public class ZmContactsApp_InList_BasicContact1 extends AjaxCommonTest {
    public void ZmContactsApp_02() throws HarnessException {
 
       // Loading csv file that has information for 100 contacts to speed up the setup
-      String filename = ZimbraSeleniumProperties.getBaseDirectory() + "/data/public/csv/100contacts.csv";
+      String filename = ZmailSeleniumProperties.getBaseDirectory() + "/data/public/csv/100contacts.csv";
 
       RestUtil rest = new RestUtil();
       rest.setAuthentication(app.zGetActiveAccount());

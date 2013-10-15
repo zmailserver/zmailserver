@@ -2,9 +2,9 @@
 <classpath>
   <classpathentry kind="src" path="src/java"/>
   <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-  <classpathentry kind="src" path="/ZimbraServer"/>
-  <classpathentry kind="lib" path="/ZimbraCommon/jars/commons-logging.jar"/>
-  <classpathentry combineaccessrules="false" kind="src" path="/ZimbraCommon"/>
-  <classpathentry kind="lib" path="/ZimbraCommon/jars/lucene-core-3.5.0.jar"/>
+  <classpathentry kind="src" path="/ZmailServer"/>
+  <classpathentry kind="lib" path="/ZmailCommon/jars/commons-logging.jar"/>
+  <classpathentry combineaccessrules="false" kind="src" path="/ZmailCommon"/>
+  <classpathentry kind="lib" path="/ZmailCommon/jars/lucene-core-3.5.0.jar"/>
   <classpathentry kind="output" path="build/classes"/>
 </classpath>

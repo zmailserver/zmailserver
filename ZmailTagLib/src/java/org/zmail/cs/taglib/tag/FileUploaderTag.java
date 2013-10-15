@@ -13,10 +13,10 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.taglib.tag;
+package org.zmail.cs.taglib.tag;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.taglib.bean.ZFileUploaderBean;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.taglib.bean.ZFileUploaderBean;
 
 import javax.servlet.jsp.JspContext;
 import javax.servlet.jsp.JspException;
@@ -24,7 +24,7 @@ import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 import java.io.IOException;
 
-public class FileUploaderTag extends ZimbraSimpleTag {
+public class FileUploaderTag extends ZmailSimpleTag {
 
     private String mVar;
 

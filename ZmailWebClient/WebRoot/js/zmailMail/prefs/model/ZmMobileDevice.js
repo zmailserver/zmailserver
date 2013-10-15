@@ -155,7 +155,7 @@ function(id, callback) {
 	}
 
 	if (request) {
-		var soapDoc = AjxSoapDoc.create(request, "urn:zimbraSync");
+		var soapDoc = AjxSoapDoc.create(request, "urn:zmailSync");
 		var node = soapDoc.set("device");
 		node.setAttribute("id", this.id);
 

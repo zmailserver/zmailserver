@@ -18,17 +18,17 @@
  * 
  * @author Raja Rao DV
  */
-function com_zimbra_emaildownloader_HandlerObject() {
+function org_zmail_emaildownloader_HandlerObject() {
 }
 
-com_zimbra_emaildownloader_HandlerObject.prototype = new ZmZimletBase();
-com_zimbra_emaildownloader_HandlerObject.prototype.constructor = com_zimbra_emaildownloader_HandlerObject;
+org_zmail_emaildownloader_HandlerObject.prototype = new ZmZimletBase();
+org_zmail_emaildownloader_HandlerObject.prototype.constructor = org_zmail_emaildownloader_HandlerObject;
 
 /**
  * Simplify handler object
  *
  */
-var EmailDownloaderZimlet = com_zimbra_emaildownloader_HandlerObject;
+var EmailDownloaderZimlet = org_zmail_emaildownloader_HandlerObject;
 
 /**
  * Called by the framework on an droppedItem drop.
@@ -86,7 +86,7 @@ function(droppedItem) {
 	url[i++] = fmt;
 	url[i++] = "&list=";
 	url[i++] = ids.join(",");
-	url[i++] = "&filename=ZimbraItems";
+	url[i++] = "&filename=ZmailItems";
 	
 	var getUrl = url.join(""); 
 	window.open(getUrl, "_blank");

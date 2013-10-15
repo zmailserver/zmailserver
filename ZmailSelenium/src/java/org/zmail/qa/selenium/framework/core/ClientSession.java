@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.core;
+package org.zmail.qa.selenium.framework.core;
 
 import java.net.URL;
 import static org.openqa.selenium.firefox.FirefoxDriver.PROFILE;
@@ -29,14 +29,14 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
 
 
 /**
  * A <code>ClientSession</code> object contains all session information for the test methods.
  * <p>
- * The Zimbra Selenium harness is designed to  
+ * The Zmail Selenium harness is designed to  
  * execute test cases concurrently at the class level.
  * 
  * The {@link ClientSession} objects maintain all session information on 
@@ -57,13 +57,13 @@ public class ClientSession {
 	
 	private String name;	// A unique string identifying this session
 	
-	private ZimbraSelenium selenium = null;
+	private ZmailSelenium selenium = null;
 	private WebDriver webDriver = null;
 	private WebDriverBackedSelenium webDriverBackedSelenium = null;
 	
-	private String applicationURL = ZimbraSeleniumProperties.getStringProperty("server.scheme", "http") 
-	+ "://" + ZimbraSeleniumProperties.getStringProperty("server.host", "localhost"); 
-	private ZimbraAccount currentAccount = null;
+	private String applicationURL = ZmailSeleniumProperties.getStringProperty("server.scheme", "http") 
+	+ "://" + ZmailSeleniumProperties.getStringProperty("server.host", "localhost"); 
+	private ZmailAccount currentAccount = null;
 
 	protected ClientSession() {
 		logger.info("New ClientSession");
@@ -73,13 +73,13 @@ public class ClientSession {
 	}
 	
 	/**
-	 * Get the current ZimbraSelenium (DefaultSelenium) object
+	 * Get the current ZmailSelenium (DefaultSelenium) object
 	 * <p>
 	 * @return
 	 */
-	public ZimbraSelenium selenium() {
+	public ZmailSelenium selenium() {
 		if ( selenium == null ) {
-			selenium = new ZimbraSelenium(
+			selenium = new ZmailSelenium(
 							SeleniumService.getInstance().getSeleniumServer(), 
 							SeleniumService.getInstance().getSeleniumPort(),
 							SeleniumService.getInstance().getSeleniumBrowser(), 
@@ -96,7 +96,7 @@ public class ClientSession {
 	 */
 	public WebDriverBackedSelenium webDriverBackedSelenium() {
 		if (webDriverBackedSelenium == null) {
-			if(ZimbraSeleniumProperties.getStringProperty("browser").contains("googlechrome")){
+			if(ZmailSeleniumProperties.getStringProperty("browser").contains("googlechrome")){
 				webDriverBackedSelenium = new WebDriverBackedSelenium(new ChromeDriver(), applicationURL);
 			}else{
 				FirefoxProfile profile = new FirefoxProfile();
@@ -115,13 +115,13 @@ public class ClientSession {
 	 */
 	public WebDriver webDriver() {
 		if (webDriver == null) {			
-			if(ZimbraSeleniumProperties.getStringProperty("browser").contains("iexplore")){	
+			if(ZmailSeleniumProperties.getStringProperty("browser").contains("iexplore")){	
 				DesiredCapabilities desiredCapabilities = DesiredCapabilities.internetExplorer();
 				//desiredCapabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
 				desiredCapabilities.setCapability("ignoreProtectedModeSettings", true);
 				webDriver = new InternetExplorerDriver(desiredCapabilities);	
 			}
-			else if(ZimbraSeleniumProperties.getStringProperty("browser").contains("googlechrome")){
+			else if(ZmailSeleniumProperties.getStringProperty("browser").contains("googlechrome")){
 				//DesiredCapabilities caps = DesiredCapabilities.chrome();
 				//caps.setJavascriptEnabled(true);
 				//caps.setCapability("chrome.binary", "path/to/chrome.exe");
@@ -130,12 +130,12 @@ public class ClientSession {
 				
 				ChromeOptions options = new ChromeOptions();
 				String chromedriverPath = null;
-				if((chromedriverPath = ZimbraSeleniumProperties.getStringProperty("chromedriver.path"))!=null){
+				if((chromedriverPath = ZmailSeleniumProperties.getStringProperty("chromedriver.path"))!=null){
 					System.setProperty("webdriver.chrome.driver",chromedriverPath);
 				}
 				webDriver = new ChromeDriver(options);
 				//webDriver = new ChromeDriver();
-			} else if (ZimbraSeleniumProperties.getStringProperty("browser").contains("firefox")){
+			} else if (ZmailSeleniumProperties.getStringProperty("browser").contains("firefox")){
 				FirefoxProfile profile = new FirefoxProfile();
 				//Proxy proxy = new Proxy();
 				//proxy.setHttpProxy("proxy.vmware.com:3128");
@@ -144,7 +144,7 @@ public class ClientSession {
 				profile.setEnableNativeEvents(false);
 				webDriver = new FirefoxDriver(profile);
 				//webDriver = new FirefoxDriver();					
-			} else if(ZimbraSeleniumProperties.getStringProperty("browser").contains("remoteff")){
+			} else if(ZmailSeleniumProperties.getStringProperty("browser").contains("remoteff")){
 				try {
 					DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
 					desiredCapabilities.setBrowserName(DesiredCapabilities.firefox().getBrowserName());
@@ -156,7 +156,7 @@ public class ClientSession {
 				} catch (Exception ex) {
 					logger.error(ex);
 				}
-			}else if(ZimbraSeleniumProperties.getStringProperty("browser").contains("remotechrome")){
+			}else if(ZmailSeleniumProperties.getStringProperty("browser").contains("remotechrome")){
 				try {
 					DesiredCapabilities desiredCapabilities = DesiredCapabilities.chrome();
 					desiredCapabilities.setJavascriptEnabled(true);
@@ -164,7 +164,7 @@ public class ClientSession {
 				} catch (Exception ex) {
 						logger.error(ex);					
 				}					
-			}else if(ZimbraSeleniumProperties.getStringProperty("browser").contains("remoteie")){
+			}else if(ZmailSeleniumProperties.getStringProperty("browser").contains("remoteie")){
 				try {
 					DesiredCapabilities desiredCapabilities = DesiredCapabilities.internetExplorer();
 					desiredCapabilities.setJavascriptEnabled(true);
@@ -217,7 +217,7 @@ public class ClientSession {
 	 * @param account
 	 * @return
 	 */
-	public String setCurrentUser(ZimbraAccount account) {
+	public String setCurrentUser(ZmailAccount account) {
 		currentAccount = account;
 		return (currentUserName());
 	}

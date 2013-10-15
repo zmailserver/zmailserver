@@ -14,11 +14,11 @@
  */
 using System;
 using System.Xml;
-using Zimbra.Client.Util;
-using Zimbra.Client.Soap;
+using Zmail.Client.Util;
+using Zmail.Client.Soap;
 
 
-namespace Zimbra.Client.Soap
+namespace Zmail.Client.Soap
 {
 
 	public class SoapFault : Response 
@@ -55,8 +55,8 @@ namespace Zimbra.Client.Soap
 		{
 			String code  = XmlUtil.GetNodeText( responseNode, 
 						SoapService.NS_PREFIX	+ ":" + SoapService.E_DETAIL + 
-						"/" +	ZimbraService.NS_PREFIX + ":" + SoapService.E_ERROR  + 
-						"/" +	ZimbraService.NS_PREFIX + ":" + ZimbraService.E_CODE );
+						"/" +	ZmailService.NS_PREFIX + ":" + SoapService.E_ERROR  + 
+						"/" +	ZmailService.NS_PREFIX + ":" + ZmailService.E_CODE );
 
 			String descr = XmlUtil.GetNodeText( responseNode, 
 				SoapService.NS_PREFIX + ":" + SoapService.E_REASON + 
@@ -70,20 +70,20 @@ namespace Zimbra.Client.Soap
 }
 
 
-namespace Zimbra.Client
+namespace Zmail.Client
 {
-	public class ZimbraException : Exception
+	public class ZmailException : Exception
 	{
 		private RequestEnvelope req;
 		private ResponseEnvelope fault;
 
-		public ZimbraException( ResponseEnvelope sf, RequestEnvelope req )
+		public ZmailException( ResponseEnvelope sf, RequestEnvelope req )
 		{
 			fault = sf;
 			this.req = req;
 		}
 
-		public ZimbraException( String msg, ResponseEnvelope sf, RequestEnvelope req ) : base(msg)
+		public ZmailException( String msg, ResponseEnvelope sf, RequestEnvelope req ) : base(msg)
 		{
 			fault = sf;
 			this.req = req;

@@ -70,7 +70,7 @@ COMPILING A TEMPLATE
 In order to use a template, it needs to be compiled to JavaScript.
 This allows the template to be used repeatedly with the greatest
 possible performance. The compilation is done by an Ant task as
-implemented by the com.zimbra.kabuki.tools.templates.TemplateTask
+implemented by the org.zmail.kabuki.tools.templates.TemplateTask
 class. This task supports the following attributes and child
 elements:
 

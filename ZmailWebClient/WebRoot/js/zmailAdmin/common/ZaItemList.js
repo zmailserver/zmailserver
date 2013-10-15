@@ -229,7 +229,7 @@ ZaItemList.prototype.loadEffectiveRights = function() {
 	var cnt = arr.length;
 	var soapDoc, params, resp;
 	//batch the rest of the requests
-	soapDoc = AjxSoapDoc.create("BatchRequest", "urn:zimbra");
+	soapDoc = AjxSoapDoc.create("BatchRequest", "urn:zmail");
 	soapDoc.setMethodAttribute("onerror", "continue");	
 	
 	for(var i=0; i < cnt; i++) {
@@ -237,18 +237,18 @@ ZaItemList.prototype.loadEffectiveRights = function() {
 			(arr[i].type == ZaItem.ACCOUNT || arr[i].type == ZaItem.DL || arr[i].type == ZaItem.RESOURCE
 			|| arr[i].type == ZaItem.DOMAIN || arr[i].type == ZaItem.COS || arr[i].type == ZaItem.ZIMLET
 			|| arr[i].type == ZaItem.SERVER)) {
-			var getEffRightsDoc = soapDoc.set("GetEffectiveRightsRequest", null, null, ZaZimbraAdmin.URN);
+			var getEffRightsDoc = soapDoc.set("GetEffectiveRightsRequest", null, null, ZaZmailAdmin.URN);
 			var elTarget = soapDoc.set("target", arr[i].id, getEffRightsDoc);
 			elTarget.setAttribute("by","id");
 			elTarget.setAttribute("type", arr[i].type);
-			var elGrantee = soapDoc.set("grantee", ZaZimbraAdmin.currentUserId, getEffRightsDoc);
+			var elGrantee = soapDoc.set("grantee", ZaZmailAdmin.currentUserId, getEffRightsDoc);
 			elGrantee.setAttribute("by","id");			
 		} else if (arr[i].type == ZaItem.ALIAS && arr[i].attrs[ZaAlias.A_AliasTargetId]) {
-			var getEffRightsDoc = soapDoc.set("GetEffectiveRightsRequest", null, null, ZaZimbraAdmin.URN);
+			var getEffRightsDoc = soapDoc.set("GetEffectiveRightsRequest", null, null, ZaZmailAdmin.URN);
 			var elTarget = soapDoc.set("target", arr[i].attrs[ZaAlias.A_AliasTargetId], getEffRightsDoc);
 			elTarget.setAttribute("by","id");
 			elTarget.setAttribute("type", arr[i].attrs[ZaAlias.A_targetType]);
-			var elGrantee = soapDoc.set("grantee", ZaZimbraAdmin.currentUserId, getEffRightsDoc);
+			var elGrantee = soapDoc.set("grantee", ZaZmailAdmin.currentUserId, getEffRightsDoc);
 			elGrantee.setAttribute("by","id");						
 		}
 	}

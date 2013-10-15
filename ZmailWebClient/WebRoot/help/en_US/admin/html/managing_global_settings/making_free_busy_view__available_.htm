@@ -100,7 +100,7 @@ function onSetStartPage()
 
 <h1>Making Free/Busy Schedule Available</h1>
 <p>The Free/Busy feature allows users to view each other’s calendars for efficiently scheduling meetings. You can set up free/busy scheduling across ZCS and Microsoft Exchange servers.</p>
-<p>ZCS can query the free/busy schedules of users on Microsoft Exchange 2003/2007/2010 servers and also can propagate the free/busy schedules of Zimbra users to the Exchange server.</p>
+<p>ZCS can query the free/busy schedules of users on Microsoft Exchange 2003/2007/2010 servers and also can propagate the free/busy schedules of Zmail users to the Exchange server.</p>
 <p>To set free/busy interoperability, the Exchange systems must be set up as correctly. See the ZCS administration guide, Managing ZCS Configuration chapter for Exchange setup requirements.</p>
 <p>In addition, the ZCS global config, Domain, COS and Account settings must be configured.</p>
 <p style="font-weight: bold;">Procedure</p>
@@ -152,7 +152,7 @@ function onSetStartPage()
 <p>In the <span style="font-weight: bold;">Microsoft Exchange User Name</span> and <span style="font-weight: bold;">User Password</span>. text boxes, type the name of the account in Active Directory and password that has access to the public folders.</p>
 </li>
 <li>
-<p>In the &#160;<span style="font-weight: bold;">O and OU used in legacyExchangeDN attribute text box</span> enter the O and OU values that are in the legacyExchangeDN attribute for Exchange. These values correspond to the domain attribute <span style="font-weight: bold;">zimbraFreebusyExchangeUserOrg</span>. When set at the global level, this applies to all accounts talking to Exchange.</p>
+<p>In the &#160;<span style="font-weight: bold;">O and OU used in legacyExchangeDN attribute text box</span> enter the O and OU values that are in the legacyExchangeDN attribute for Exchange. These values correspond to the domain attribute <span style="font-weight: bold;">zmailFreebusyExchangeUserOrg</span>. When set at the global level, this applies to all accounts talking to Exchange.</p>
 </li>
 </ol>
 <p style="margin-left: 40px;">To find these values on the Exchange server, you can run the Exchange ADSI Edit tool and search the legacyExchangeDN attribute for o= , ou= , and cn= values.</p>

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.db;
+package org.zmail.cs.db;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,14 +23,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.offline.OfflineProvisioning;
-import com.zimbra.cs.account.offline.OfflineProvisioning.EntryType;
-import com.zimbra.cs.db.DbPool.DbConnection;
-import com.zimbra.cs.offline.OfflineLog;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.offline.OfflineProvisioning;
+import org.zmail.cs.account.offline.OfflineProvisioning.EntryType;
+import org.zmail.cs.db.DbPool.DbConnection;
+import org.zmail.cs.offline.OfflineLog;
 
 public class DbOfflineDirectory {
     static final Object lock = new Object();
@@ -56,7 +56,7 @@ public class DbOfflineDirectory {
 
     public static void createDirectoryEntry(EntryType etype, String name, Map<String,Object> attrs,
         boolean markChanged) throws ServiceException {
-        String zimbraId = (String) attrs.get(Provisioning.A_zimbraId);
+        String zmailId = (String) attrs.get(Provisioning.A_zmailId);
 
         DbConnection conn = null;
         PreparedStatement stmt = null;
@@ -65,11 +65,11 @@ public class DbOfflineDirectory {
         try {
             conn = OfflineDbPool.getInstance().getConnection();
 
-            stmt = conn.prepareStatement("INSERT INTO directory (entry_type, entry_name, zimbra_id, modified)" +
+            stmt = conn.prepareStatement("INSERT INTO directory (entry_type, entry_name, zmail_id, modified)" +
                     " VALUES (?, ?, ?, ?)");
             stmt.setString(1, etype.toString());
             stmt.setString(2, name);
-            stmt.setString(3, zimbraId);
+            stmt.setString(3, zmailId);
             stmt.setBoolean(4, markChanged);
             synchronized (lock) {
                 stmt.executeUpdate();
@@ -90,9 +90,9 @@ public class DbOfflineDirectory {
             }
         } catch (SQLException e) {
             if (Db.errorMatches(e, Db.Error.DUPLICATE_ROW))
-                throw AccountServiceException.ACCOUNT_EXISTS(zimbraId);
+                throw AccountServiceException.ACCOUNT_EXISTS(zmailId);
             else
-                throw ServiceException.FAILURE("inserting new " + etype + ": " + zimbraId, e);
+                throw ServiceException.FAILURE("inserting new " + etype + ": " + zmailId, e);
         } finally {
             OfflineDbPool.getInstance().closeStatement(stmt);
             OfflineDbPool.getInstance().quietClose(conn);
@@ -160,7 +160,7 @@ public class DbOfflineDirectory {
 
             int parentId = getIdForParent(conn, parent);
 
-            stmt = conn.prepareStatement("INSERT INTO directory_leaf (parent_id, entry_type, entry_name, zimbra_id)" +
+            stmt = conn.prepareStatement("INSERT INTO directory_leaf (parent_id, entry_type, entry_name, zmail_id)" +
                     " VALUES (?, ?, ?, ?)");
             stmt.setInt(1, parentId);
             stmt.setString(2, etype.toString());
@@ -259,7 +259,7 @@ public class DbOfflineDirectory {
         try {
             conn = OfflineDbPool.getInstance().getConnection();
 
-            int entryId = getIdForEntry(conn, etype, Provisioning.A_zimbraId, entry.getId());
+            int entryId = getIdForEntry(conn, etype, Provisioning.A_zmailId, entry.getId());
             if (entryId <= 0)
                 return;
 
@@ -293,7 +293,7 @@ public class DbOfflineDirectory {
         try {
             conn = OfflineDbPool.getInstance().getConnection();
 
-            stmt = conn.prepareStatement("SELECT zimbra_id FROM directory WHERE entry_type = ? AND modified > 0");
+            stmt = conn.prepareStatement("SELECT zmail_id FROM directory WHERE entry_type = ? AND modified > 0");
             stmt.setString(1, etype.toString());
             rs = stmt.executeQuery();
             List<String> ids = new ArrayList<String>();
@@ -316,7 +316,7 @@ public class DbOfflineDirectory {
         try {
             conn = OfflineDbPool.getInstance().getConnection();
 
-            stmt = conn.prepareStatement("SELECT zimbra_id FROM directory WHERE entry_type = ?");
+            stmt = conn.prepareStatement("SELECT zmail_id FROM directory WHERE entry_type = ?");
             stmt.setString(1, etype.toString());
             rs = stmt.executeQuery();
             List<String> ids = new ArrayList<String>();
@@ -370,14 +370,14 @@ public class DbOfflineDirectory {
             conn = OfflineDbPool.getInstance().getConnection();
 
             int pos = 1;
-            if (lookupKey.equalsIgnoreCase(Provisioning.A_zimbraId)) {
-                stmt = conn.prepareStatement("SELECT zimbra_id FROM directory" +
-                        " WHERE " + Db.likeSTRING("zimbra_id") + " AND entry_type = ?");
+            if (lookupKey.equalsIgnoreCase(Provisioning.A_zmailId)) {
+                stmt = conn.prepareStatement("SELECT zmail_id FROM directory" +
+                        " WHERE " + Db.likeSTRING("zmail_id") + " AND entry_type = ?");
             } else if (lookupKey.equalsIgnoreCase(OfflineProvisioning.A_offlineDn)) {
-                stmt = conn.prepareStatement("SELECT zimbra_id FROM directory" +
+                stmt = conn.prepareStatement("SELECT zmail_id FROM directory" +
                         " WHERE " + Db.likeSTRING("entry_name") + " AND entry_type = ?");
             } else {
-                stmt = conn.prepareStatement("SELECT zimbra_id FROM directory d, directory_attrs da" +
+                stmt = conn.prepareStatement("SELECT zmail_id FROM directory d, directory_attrs da" +
                         " WHERE " + Db.equalsSTRING("name") + " AND " + Db.likeSTRING("value") +
                         " AND d.entry_id = da.entry_id AND entry_type = ?");
                 stmt.setString(pos++, lookupKey);
@@ -576,9 +576,9 @@ public class DbOfflineDirectory {
         PreparedStatement stmt = null;
         ResultSet rs = null;
         try {
-            if (lookupKey.equalsIgnoreCase(Provisioning.A_zimbraId)) {
+            if (lookupKey.equalsIgnoreCase(Provisioning.A_zmailId)) {
                 stmt = conn.prepareStatement("SELECT entry_id FROM directory" +
-                        " WHERE " + Db.equalsSTRING("zimbra_id") + " AND entry_type = ?");
+                        " WHERE " + Db.equalsSTRING("zmail_id") + " AND entry_type = ?");
                 stmt.setString(1, lookupValue);
                 stmt.setString(2, etype.toString());
             } else if (lookupKey.equalsIgnoreCase(OfflineProvisioning.A_offlineDn)) {
@@ -608,7 +608,7 @@ public class DbOfflineDirectory {
     }
 
     private static int getIdForParent(DbConnection conn, NamedEntry parent) throws ServiceException {
-        int parentId = getIdForEntry(conn, EntryType.typeForEntry(parent), Provisioning.A_zimbraId, parent.getAttr(Provisioning.A_zimbraId));
+        int parentId = getIdForEntry(conn, EntryType.typeForEntry(parent), Provisioning.A_zmailId, parent.getAttr(Provisioning.A_zmailId));
         if (parentId <= 0)
             throw AccountServiceException.NO_SUCH_ACCOUNT(parent.getName());
         return parentId;
@@ -618,9 +618,9 @@ public class DbOfflineDirectory {
         PreparedStatement stmt = null;
         ResultSet rs = null;
         try {
-            if (lookupKey.equals(Provisioning.A_zimbraId)) {
+            if (lookupKey.equals(Provisioning.A_zmailId)) {
                 stmt = conn.prepareStatement("SELECT entry_id FROM directory_leaf" +
-                        " WHERE parent_id = ? AND entry_type = ? AND " + Db.equalsSTRING("zimbra_id"));
+                        " WHERE parent_id = ? AND entry_type = ? AND " + Db.equalsSTRING("zmail_id"));
                 stmt.setInt(1, getIdForParent(conn, parent));
                 stmt.setString(2, etype.toString());
                 stmt.setString(3, lookupValue);
@@ -652,22 +652,22 @@ public class DbOfflineDirectory {
         }
     }
 
-    public static void deleteDirectoryEntry(EntryType etype, String zimbraId) throws ServiceException {
+    public static void deleteDirectoryEntry(EntryType etype, String zmailId) throws ServiceException {
         DbConnection conn = null;
         PreparedStatement stmt = null;
         try {
             conn = OfflineDbPool.getInstance().getConnection();
 
             stmt = conn.prepareStatement("DELETE FROM directory" +
-                    " WHERE entry_type = ? AND " + Db.equalsSTRING("zimbra_id"));
+                    " WHERE entry_type = ? AND " + Db.equalsSTRING("zmail_id"));
             stmt.setString(1, etype.toString());
-            stmt.setString(2, zimbraId);
+            stmt.setString(2, zmailId);
             synchronized(lock) {
                 stmt.executeUpdate();
                 conn.commit();
             }
         } catch (SQLException e) {
-            throw ServiceException.FAILURE("deleting " + etype + ": " + zimbraId, e);
+            throw ServiceException.FAILURE("deleting " + etype + ": " + zmailId, e);
         } finally {
             OfflineDbPool.getInstance().closeStatement(stmt);
             OfflineDbPool.getInstance().quietClose(conn);
@@ -702,7 +702,7 @@ public class DbOfflineDirectory {
             int parentId = getIdForParent(conn, parent);
             OfflineLog.offline.debug("Deleting directory leaf parent:%d type:%s entryId:%s",parentId, etype, id);
             stmt = conn.prepareStatement("DELETE FROM directory_leaf" +
-                    " WHERE parent_id = ? AND entry_type = ? AND " + Db.equalsSTRING("zimbra_id"));
+                    " WHERE parent_id = ? AND entry_type = ? AND " + Db.equalsSTRING("zmail_id"));
             stmt.setInt(1, parentId);
             stmt.setString(2, etype.toString());
             stmt.setString(3, id);

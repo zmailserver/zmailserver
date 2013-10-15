@@ -119,10 +119,10 @@ function() {
 
     setting.setValue(checked);
 
-    var soapDoc = AjxSoapDoc.create("BatchRequest", "urn:zimbra", null);
+    var soapDoc = AjxSoapDoc.create("BatchRequest", "urn:zmail", null);
     soapDoc.setMethodAttribute("onerror", "continue");
     for (var k=0; k<checked.length; k++) {
-        var requestNode = soapDoc.set("AccountBackupRequest",null,null,"urn:zimbraOffline");
+        var requestNode = soapDoc.set("AccountBackupRequest",null,null,"urn:zmailOffline");
         requestNode.setAttribute("id", checked[k]);
     }
 
@@ -148,7 +148,7 @@ ZmBackupPage.prototype._handleBackupNowLink =
 function(id) {
 
     try{
-        var soapDoc = AjxSoapDoc.create("AccountBackupRequest", "urn:zimbraOffline");
+        var soapDoc = AjxSoapDoc.create("AccountBackupRequest", "urn:zmailOffline");
         var method = soapDoc.getMethod();
         method.setAttribute("id", id);
         var respCallback = new AjxCallback(this, this._handleBackupAcctStarted , id);
@@ -195,7 +195,7 @@ function() {
         return;
     }
 
-    var soapDoc = AjxSoapDoc.create("AccountRestoreRequest", "urn:zimbraOffline");
+    var soapDoc = AjxSoapDoc.create("AccountRestoreRequest", "urn:zmailOffline");
     var method = soapDoc.getMethod();
     method.setAttribute("id", sel[0].acct);
     method.setAttribute("time", sel[0].timestamp);
@@ -221,7 +221,7 @@ function(id, resp) {
 ZmBackupPage.prototype.addCommand  =
 function(batchCommand) {
 
-    var soapDoc = AjxSoapDoc.create("ModifyPrefsRequest", "urn:zimbraAccount");
+    var soapDoc = AjxSoapDoc.create("ModifyPrefsRequest", "urn:zmailAccount");
     var accts = this.getAccounts()._vector.getArray();
 
     var settingsObj = appCtxt.getSettings();
@@ -234,7 +234,7 @@ function(batchCommand) {
         }
     }
     var node = soapDoc.set("pref", checked.join(","));
-    node.setAttribute("name", "zimbraPrefOfflineBackupAccountId");
+    node.setAttribute("name", "zmailPrefOfflineBackupAccountId");
     setting.setValue(checked.join(", "));
     batchCommand.addNewRequestParams(soapDoc);
 };
@@ -518,7 +518,7 @@ function(force) {
 ZmBackupPage._getBackups =
 function(evt) {
 
-    var soapDoc = AjxSoapDoc.create("AccountBackupEnumerationRequest", "urn:zimbraOffline");
+    var soapDoc = AjxSoapDoc.create("AccountBackupEnumerationRequest", "urn:zmailOffline");
     var result = appCtxt.getAppController().sendRequest({soapDoc:soapDoc, asyncMode:false});
 
     var _restoreAccts = result.AccountBackupEnumerationResponse.account;

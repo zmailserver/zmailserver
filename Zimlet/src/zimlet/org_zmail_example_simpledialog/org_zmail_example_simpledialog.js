@@ -13,15 +13,15 @@
  * ***** END LICENSE BLOCK *****
  */
 
-com_zimbra_example_simpledialog_HandlerObject = function() {
+org_zmail_example_simpledialog_HandlerObject = function() {
 };
-com_zimbra_example_simpledialog_HandlerObject.prototype = new ZmZimletBase;
-com_zimbra_example_simpledialog_HandlerObject.prototype.constructor = com_zimbra_example_simpledialog_HandlerObject;
+org_zmail_example_simpledialog_HandlerObject.prototype = new ZmZimletBase;
+org_zmail_example_simpledialog_HandlerObject.prototype.constructor = org_zmail_example_simpledialog_HandlerObject;
 
 /**
  * Double clicked.
  */
-com_zimbra_example_simpledialog_HandlerObject.prototype.doubleClicked =
+org_zmail_example_simpledialog_HandlerObject.prototype.doubleClicked =
 function() {
 	this.singleClicked();
 };
@@ -29,7 +29,7 @@ function() {
 /**
  * Single clicked.
  */
-com_zimbra_example_simpledialog_HandlerObject.prototype.singleClicked =
+org_zmail_example_simpledialog_HandlerObject.prototype.singleClicked =
 function() {
 	this._displayDialog();
 };
@@ -38,7 +38,7 @@ function() {
  * Displays the dialog.
  * 
  */
-com_zimbra_example_simpledialog_HandlerObject.prototype._displayDialog = 
+org_zmail_example_simpledialog_HandlerObject.prototype._displayDialog = 
 function() {
 	if (this.pbDialog) { //if zimlet dialog already exists...
 		this.pbDialog.popup(); //simply popup the dialog
@@ -67,7 +67,7 @@ function() {
  * Creates the dialog view.
  * 
  */
-com_zimbra_example_simpledialog_HandlerObject.prototype._createDialogView =
+org_zmail_example_simpledialog_HandlerObject.prototype._createDialogView =
 	function() {
 		var html = new Array();
 		var i = 0;
@@ -102,7 +102,7 @@ com_zimbra_example_simpledialog_HandlerObject.prototype._createDialogView =
  * The "OK" button listener.
  * 
  */
-	com_zimbra_example_simpledialog_HandlerObject.prototype._okBtnListener =
+	org_zmail_example_simpledialog_HandlerObject.prototype._okBtnListener =
 function() {
 		this.pbDialog.popdown(); // hide the dialog
 	};

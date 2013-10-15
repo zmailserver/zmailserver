@@ -14,12 +14,12 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_blog" version="1.1" label="Blog" description="Drag-and-drop items to post to a blog.">
+<zimlet name="org_zmail_blog" version="1.1" label="Blog" description="Drag-and-drop items to post to a blog.">
 	<include>wordpress.js</include>
 	<include>typepad.js</include>
 	<include>blog.js</include>
     <includeCSS>blog.css</includeCSS>
-	<handlerObject>Com_Zimbra_Blog</handlerObject>
+	<handlerObject>Com_Zmail_Blog</handlerObject>
 	<zimletPanelItem label="Blog" icon="Blog-panelIcon">
 		<toolTipText>Drag-and-drop items to post to a blog.</toolTipText>
 		<dragSource type="ZmContact" />

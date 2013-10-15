@@ -64,8 +64,8 @@ function() {
 
 ZmApptAssistantView.ATTRS = {};
 ZmApptAssistantView.ATTRS[ZmCalBaseItem.LOCATION] =
-	["fullName", "email", "zimbraCalResLocationDisplayName",
-	 "zimbraCalResCapacity", "zimbraCalResContactEmail", "description", "zimbraCalResType"];
+	["fullName", "email", "zmailCalResLocationDisplayName",
+	 "zmailCalResCapacity", "zmailCalResContactEmail", "description", "zmailCalResType"];
 
 ZmApptAssistantView.prototype.initialize =
 function() {
@@ -186,7 +186,7 @@ function(callback, sortBy) {
 	var currAcct = this._apptView.getCalendarAccount();
 	var value = (this.type == ZmCalBaseItem.LOCATION) ? "Location" : "Equipment";
 
-    var conds = [{attr: "zimbraCalResType", op: "eq", value: value}];
+    var conds = [{attr: "zmailCalResType", op: "eq", value: value}];
     if(this._prefDialog) {
         for (var i = 0; i < ZmTimeSuggestionPrefDialog.PREF_FIELDS.length; i++) {
             var sf = ZmTimeSuggestionPrefDialog.PREF_FIELDS[i];

@@ -49,8 +49,8 @@ function(list) {
 
 ZaPosixGroupListController.initToolbarMethod =
 function () {
-   	this._toolbarOperations[ZaOperation.NEW] = new ZaOperation(ZaOperation.NEW, zimbra_posixaccount.TBB_NewPosixGrp, zimbra_posixaccount.TBB_NewPosixGrp_tt, "NewCOS", "NewCOSDis", new AjxListener(this, this._newButtonListener));    		
-   	this._toolbarOperations[ZaOperation.EDIT] = new ZaOperation(ZaOperation.EDIT, zimbra_posixaccount.TBB_EditPosixGrp, zimbra_posixaccount.TBB_EditPosixGrp_tt, "Properties", "PropertiesDis", new AjxListener(this, this._editButtonListener));    	
+   	this._toolbarOperations[ZaOperation.NEW] = new ZaOperation(ZaOperation.NEW, zmail_posixaccount.TBB_NewPosixGrp, zmail_posixaccount.TBB_NewPosixGrp_tt, "NewCOS", "NewCOSDis", new AjxListener(this, this._newButtonListener));    		
+   	this._toolbarOperations[ZaOperation.EDIT] = new ZaOperation(ZaOperation.EDIT, zmail_posixaccount.TBB_EditPosixGrp, zmail_posixaccount.TBB_EditPosixGrp_tt, "Properties", "PropertiesDis", new AjxListener(this, this._editButtonListener));    	
     this._toolbarOperations[ZaOperation.DELETE] = new ZaOperation(ZaOperation.DELETE, ZaMsg.TBB_Delete, ZaMsg.SERTBB_Delete_tt, "Delete", "DeleteDis", new AjxListener(this, this._deleteButtonListener));    	    	
 	this._toolbarOperations[ZaOperation.NONE] = new ZaOperation(ZaOperation.NONE);
 	this._toolbarOperations[ZaOperation.HELP] = new ZaOperation(ZaOperation.HELP, ZaMsg.TBB_Help, ZaMsg.TBB_Help_tt, "Help", "Help", new AjxListener(this, this._helpButtonListener));
@@ -240,7 +240,7 @@ function(ev) {
 		}
 	}
 	if(this._removeList.length) {
-		dlgMsg = zimbra_posixaccount.DeleteGroupsQuestion;
+		dlgMsg = zmail_posixaccount.DeleteGroupsQuestion;
 		dlgMsg +=  "<br><ul>";
 		var i=0;
 		for(var key in this._removeList) {

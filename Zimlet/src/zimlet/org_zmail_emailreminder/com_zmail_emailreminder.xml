@@ -14,13 +14,13 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_emailreminder"
+<zimlet name="org_zmail_emailreminder"
         version="0.92"
         label="${msg.label}"
         description="${msg.description}" >
     <include>emailreminder.js</include>
 	<includeCSS>emailreminder.css</includeCSS>
-	<handlerObject>com_zimbra_emailreminder_HandlerObject</handlerObject>
+	<handlerObject>org_zmail_emailreminder_HandlerObject</handlerObject>
 	<zimletPanelItem label="${msg.EmailReminder_panel_label}" icon="emailreminder-panelIcon">
 		<toolTipText>${msg.EmailReminder_panel_tooltip}</toolTipText>
 		<dragSource type="ZmConv" />

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.util.yc;
+package org.zmail.cs.offline.util.yc;
 
 import java.io.StringReader;
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.InputSource;
 
-import com.zimbra.cs.offline.util.Xml;
+import org.zmail.cs.offline.util.Xml;
 
 public class SyncResponse extends Response {
 
@@ -57,7 +57,7 @@ public class SyncResponse extends Response {
         List<Contact> contacts = new ArrayList<Contact>();
         for (Element e : children) {
             if (Contact.TAG_NAME.equals(e.getNodeName())) {
-                com.zimbra.cs.offline.util.yc.Contact contact = new com.zimbra.cs.offline.util.yc.Contact();
+                org.zmail.cs.offline.util.yc.Contact contact = new org.zmail.cs.offline.util.yc.Contact();
                 contact.extractFromXml(e);
                 contacts.add(contact);
             }

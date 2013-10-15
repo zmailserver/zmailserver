@@ -14,20 +14,20 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.util;
+package org.zmail.qa.selenium.framework.util;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import com.zimbra.common.soap.Element;
+import org.zmail.common.soap.Element;
 
 
 
 
 
 
-public class ZimbraDomain {
-	private static Logger logger = LogManager.getLogger(ZimbraDomain.class);
+public class ZmailDomain {
+	private static Logger logger = LogManager.getLogger(ZmailDomain.class);
 
 	
 	// Domain information
@@ -44,7 +44,7 @@ public class ZimbraDomain {
 	 * 
 	 * @param name
 	 */
-	public ZimbraDomain(String name) {
+	public ZmailDomain(String name) {
 		DomainName = name;
 	}
 	
@@ -57,12 +57,12 @@ public class ZimbraDomain {
 	public boolean exists() throws HarnessException {
 		
 		// Check if the domain exists
-		ZimbraAdminAccount.GlobalAdmin().soapSend(
-					"<GetDomainRequest xmlns='urn:zimbraAdmin'>"
+		ZmailAdminAccount.GlobalAdmin().soapSend(
+					"<GetDomainRequest xmlns='urn:zmailAdmin'>"
 				+		"<domain by='name'>"+ DomainName +"</domain>"
 				+	"</GetDomainRequest>");
 		
-		Element response = ZimbraAdminAccount.GlobalAdmin().soapSelectNode("//admin:GetDomainResponse",  1);
+		Element response = ZmailAdminAccount.GlobalAdmin().soapSelectNode("//admin:GetDomainResponse",  1);
 		
 		// If the domain exists, there will be an id
 		if ( response == null ) {
@@ -70,16 +70,16 @@ public class ZimbraDomain {
 		}
 		
 		// If there was a response, make sure we have the up to date information
-		DomainGalSyncAccountID = ZimbraAdminAccount.GlobalAdmin().soapSelectValue("//admin:GetDomainResponse//admin:a[@n='zimbraGalAccountId']", null);
+		DomainGalSyncAccountID = ZmailAdminAccount.GlobalAdmin().soapSelectValue("//admin:GetDomainResponse//admin:a[@n='zmailGalAccountId']", null);
 		logger.info("DomainGalSyncAccountID="+DomainGalSyncAccountID);
 		
 		
-		ZimbraAdminAccount.GlobalAdmin().soapSend(
-				"<GetDataSourcesRequest xmlns='urn:zimbraAdmin'>"
+		ZmailAdminAccount.GlobalAdmin().soapSend(
+				"<GetDataSourcesRequest xmlns='urn:zmailAdmin'>"
 			+		"<id>"+ DomainGalSyncAccountID +"</id>"
 			+	"</GetDataSourcesRequest>");
 
-		DomainGalSyncDatasourceID = ZimbraAdminAccount.GlobalAdmin().soapSelectValue("//admin:GetDataSourcesResponse//admin:dataSource", "id");	
+		DomainGalSyncDatasourceID = ZmailAdminAccount.GlobalAdmin().soapSelectValue("//admin:GetDataSourcesResponse//admin:dataSource", "id");	
 		logger.info("DomainGalSyncDatasourceID="+DomainGalSyncDatasourceID);
 
 		return (true);
@@ -99,11 +99,11 @@ public class ZimbraDomain {
 		}
 		
 		// If the domain does not exist, create it
-		ZimbraAdminAccount.GlobalAdmin().soapSend(
-					"<CreateDomainRequest xmlns='urn:zimbraAdmin'>"
+		ZmailAdminAccount.GlobalAdmin().soapSend(
+					"<CreateDomainRequest xmlns='urn:zmailAdmin'>"
 				+		"<name>"+ DomainName +"</name>"
-				+		"<a n='zimbraGalMode'>zimbra</a>"
-				+		"<a n='zimbraGalMaxResults'>15</a>"
+				+		"<a n='zmailGalMode'>zmail</a>"
+				+		"<a n='zmailGalMaxResults'>15</a>"
 				+	"</CreateDomainRequest>");
 		
 		
@@ -121,26 +121,26 @@ public class ZimbraDomain {
 	public void createGalSyncAccount() throws HarnessException {
 		
 		// Create the Sync GAL Account
-		String galaccount = "galaccount"+ ZimbraSeleniumProperties.getUniqueString() + "@"+ DomainName;
-		String datasourcename = "datasource" + ZimbraSeleniumProperties.getUniqueString();
+		String galaccount = "galaccount"+ ZmailSeleniumProperties.getUniqueString() + "@"+ DomainName;
+		String datasourcename = "datasource" + ZmailSeleniumProperties.getUniqueString();
 		
 		
-		ZimbraAdminAccount.GlobalAdmin().soapSend(
-					"<CreateGalSyncAccountRequest xmlns='urn:zimbraAdmin' name='"+ datasourcename + "' type='zimbra' domain='"+ DomainName +"' >"
+		ZmailAdminAccount.GlobalAdmin().soapSend(
+					"<CreateGalSyncAccountRequest xmlns='urn:zmailAdmin' name='"+ datasourcename + "' type='zmail' domain='"+ DomainName +"' >"
 				+		"<account by='name'>"+ galaccount +"</account>"
-				+		"<password>"+ ZimbraSeleniumProperties.getStringProperty("adminPwd", "test123") +"</password>"
+				+		"<password>"+ ZmailSeleniumProperties.getStringProperty("adminPwd", "test123") +"</password>"
 				+	"</CreateGalSyncAccountRequest>");
 		
-		DomainGalSyncAccountID = ZimbraAdminAccount.GlobalAdmin().soapSelectValue("//admin:CreateGalSyncAccountResponse/admin:account", "id");
+		DomainGalSyncAccountID = ZmailAdminAccount.GlobalAdmin().soapSelectValue("//admin:CreateGalSyncAccountResponse/admin:account", "id");
 		logger.info("DomainGalSyncAccountID="+ DomainGalSyncAccountID);
 		
 		
-		ZimbraAdminAccount.GlobalAdmin().soapSend(
-				"<GetDataSourcesRequest xmlns='urn:zimbraAdmin'>"
+		ZmailAdminAccount.GlobalAdmin().soapSend(
+				"<GetDataSourcesRequest xmlns='urn:zmailAdmin'>"
 			+		"<id>"+ DomainGalSyncAccountID +"</id>"
 			+	"</GetDataSourcesRequest>");
 
-		DomainGalSyncDatasourceID = ZimbraAdminAccount.GlobalAdmin().soapSelectValue("//admin:GetDataSourcesResponse//admin:dataSource", "id");
+		DomainGalSyncDatasourceID = ZmailAdminAccount.GlobalAdmin().soapSelectValue("//admin:GetDataSourcesResponse//admin:dataSource", "id");
 		logger.info("DomainGalSyncDatasourceID="+ DomainGalSyncDatasourceID);
 
 	}
@@ -152,13 +152,13 @@ public class ZimbraDomain {
 	public void syncGalAccount() throws HarnessException {
 		
 		// Sync the GAL Account
-		ZimbraAdminAccount.GlobalAdmin().soapSend(
-					"<SyncGalAccountRequest xmlns='urn:zimbraAdmin'>"
+		ZmailAdminAccount.GlobalAdmin().soapSend(
+					"<SyncGalAccountRequest xmlns='urn:zmailAdmin'>"
 				+		"<account id='"+ DomainGalSyncAccountID +"'>"
 				+			"<datasource by='id' fullSync='true' reset='true'>"+ DomainGalSyncDatasourceID +"</datasource>"
 				+		"</account>"
 				+	"</SyncGalAccountRequest>");
-		String response = ZimbraAdminAccount.GlobalAdmin().soapSelectValue("//admin:SyncGalAccountResponse", null);
+		String response = ZmailAdminAccount.GlobalAdmin().soapSelectValue("//admin:SyncGalAccountResponse", null);
 		
 		if ( response == null) {
 			throw new HarnessException("Unable to sync GAL account");

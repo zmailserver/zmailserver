@@ -7,7 +7,7 @@
 	<property name="build.dir" location="build" />
     <property name="build.jars.dir" location="${build.dir}/jars" />
 	<property name="build.classes.dir" location="${build.dir}/classes" />
-	<property name="common.dir" location="../ZimbraCommon" />
+	<property name="common.dir" location="../ZmailCommon" />
 	<property name="common.classes.dir" location="${common.dir}/build/classes" />
 
 	<path id="all.java.path">
@@ -22,18 +22,18 @@
 
 	<property environment="env"/>
 	
-	<!-- set up dependency on ZimbraServer -->
-	<condition property="zimbraServer.dir" value="${env.ZIMBRASERVER_DIR}">
+	<!-- set up dependency on ZmailServer -->
+	<condition property="zmailServer.dir" value="${env.ZIMBRASERVER_DIR}">
 	    <isset property="env.ZIMBRASERVER_DIR" />
 	</condition>	
-	<condition property="zimbraServer.dir" value="../ZimbraServer">
+	<condition property="zmailServer.dir" value="../ZmailServer">
 	    <not><isset property="env.ZIMBRASERVER_DIR"/></not>
 	</condition>	
 
 	<path id="class.path">
 		<pathelement location="${common.classes.dir}" />
 		<pathelement location="${build.classes.dir}" />
-		<pathelement location="${zimbraServer.dir}/build/classes"/>
+		<pathelement location="${zmailServer.dir}/build/classes"/>
                 <pathelement location="${client.classes.dir}" />
 		<fileset dir="${common.dir}/jars">
 			<include name="**/*.jar"/>

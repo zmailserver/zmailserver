@@ -17,8 +17,8 @@
  * Defines the Zimlet handler class.
  *   
  */
-function com_zimbra_example_dynamictab_HandlerObject() {
-	this._tabManager = new com_zimbra_example_dynamictab_TabManager(this);
+function org_zmail_example_dynamictab_HandlerObject() {
+	this._tabManager = new org_zmail_example_dynamictab_TabManager(this);
 	this._tabs = new Array();
 };
 
@@ -26,18 +26,18 @@ function com_zimbra_example_dynamictab_HandlerObject() {
  * Makes the Zimlet class a subclass of ZmZimletBase.
  *
  */
-com_zimbra_example_dynamictab_HandlerObject.prototype = new ZmZimletBase();
-com_zimbra_example_dynamictab_HandlerObject.prototype.constructor = com_zimbra_example_dynamictab_HandlerObject;
+org_zmail_example_dynamictab_HandlerObject.prototype = new ZmZimletBase();
+org_zmail_example_dynamictab_HandlerObject.prototype.constructor = org_zmail_example_dynamictab_HandlerObject;
 
-com_zimbra_example_dynamictab_HandlerObject.WIDGETID_CONFIGURE_LINK = "com_zimbra_dynamictab_widgetid_configure_link";
-com_zimbra_example_dynamictab_HandlerObject.WIDGETID_SAVE_LINK = "com_zimbra_dynamictab_widgetid_save_link";
-com_zimbra_example_dynamictab_HandlerObject.WIDGETID_CANCEL_LINK = "com_zimbra_dynamictab_widgetid_cancel_link";
+org_zmail_example_dynamictab_HandlerObject.WIDGETID_CONFIGURE_LINK = "org_zmail_dynamictab_widgetid_configure_link";
+org_zmail_example_dynamictab_HandlerObject.WIDGETID_SAVE_LINK = "org_zmail_dynamictab_widgetid_save_link";
+org_zmail_example_dynamictab_HandlerObject.WIDGETID_CANCEL_LINK = "org_zmail_dynamictab_widgetid_cancel_link";
 
 /**
  * This method gets called by the Zimlet framework when the zimlet loads.
  *  
  */
-com_zimbra_example_dynamictab_HandlerObject.prototype.init =
+org_zmail_example_dynamictab_HandlerObject.prototype.init =
 function() {
 	
 	// init all tabs
@@ -69,9 +69,9 @@ function() {
 /**
  * Gets the tab manager.
  * 
- * @return	{com_zimbra_dynamictab_TabManager}		the tab manager
+ * @return	{org_zmail_dynamictab_TabManager}		the tab manager
  */
-com_zimbra_example_dynamictab_HandlerObject.prototype.getTabManager = 
+org_zmail_example_dynamictab_HandlerObject.prototype.getTabManager = 
 function() {
 	return	this._tabManager;
 };
@@ -82,7 +82,7 @@ function() {
  * @param	{String}	appName		the application name
  * @param	{Boolean}	active		if true, the application status is open; otherwise, false
  */
-com_zimbra_example_dynamictab_HandlerObject.prototype.appActive =
+org_zmail_example_dynamictab_HandlerObject.prototype.appActive =
 function(appName, active) {
 
 	var tabObject = this._getTabObject(appName);
@@ -99,7 +99,7 @@ function(appName, active) {
  *  
  * @param	{String}	appName		the application name		
  */
-com_zimbra_example_dynamictab_HandlerObject.prototype.appLaunch =
+org_zmail_example_dynamictab_HandlerObject.prototype.appLaunch =
 function(appName) {
 	// do nothing
 };
@@ -109,13 +109,13 @@ function(appName) {
  * 
  * @param	{Hash}	tabObject		the tab object
  */
-com_zimbra_example_dynamictab_HandlerObject.prototype._createTabApplication =
+org_zmail_example_dynamictab_HandlerObject.prototype._createTabApplication =
 function(tabObject) {
 
-	var escapedLabel = com_zimbra_example_dynamictab_Util.escapeHTML(tabObject.tabLabel);
-	var escapedToolTip = com_zimbra_example_dynamictab_Util.escapeHTML(tabObject.tabToolTip);
+	var escapedLabel = org_zmail_example_dynamictab_Util.escapeHTML(tabObject.tabLabel);
+	var escapedToolTip = org_zmail_example_dynamictab_Util.escapeHTML(tabObject.tabToolTip);
 
-	var tabAppName = this.createApp(escapedLabel, "zimbraIcon", escapedToolTip);
+	var tabAppName = this.createApp(escapedLabel, "zmailIcon", escapedToolTip);
 
 	var newTabObject = {
 			tabId: tabObject.tabId,
@@ -135,7 +135,7 @@ function(tabObject) {
  * @param	{String}	appName		the app name
  * @return	the tab object or <code>null</code> if the app is not a tab
  */
-com_zimbra_example_dynamictab_HandlerObject.prototype._getTabObject =
+org_zmail_example_dynamictab_HandlerObject.prototype._getTabObject =
 function(appName) {
 	
 	var i=0;
@@ -152,7 +152,7 @@ function(appName) {
  * 
  * @param	{Hash}	tabObject		the tab object
  */
-com_zimbra_example_dynamictab_HandlerObject.prototype._configureLinkListener =
+org_zmail_example_dynamictab_HandlerObject.prototype._configureLinkListener =
 function(tabObject) {
 
 	var elementId_tabUrl_input = "tabUrl_input_" + tabObject.tabId;
@@ -170,7 +170,7 @@ function(tabObject) {
 	var app = appCtxt.getApp(tabObject.tabAppName);
 	var toolbar = app.getToolbar();
 
-	var htmlContent = AjxTemplate.expand("com_zimbra_example_dynamictab.templates.Dialogs#Tab-Toolbar-Edit", subs);
+	var htmlContent = AjxTemplate.expand("org_zmail_example_dynamictab.templates.Dialogs#Tab-Toolbar-Edit", subs);
 	toolbar.setContent(htmlContent);
 
 	// set save link callback
@@ -194,7 +194,7 @@ function(tabObject) {
  * 
  * @param	{Hash}	tabObject		the tab object
  */
-com_zimbra_example_dynamictab_HandlerObject.prototype._saveLinkListener =
+org_zmail_example_dynamictab_HandlerObject.prototype._saveLinkListener =
 function(tabObject) {
 
 	var elementId_tabUrl_input = "tabUrl_input_" + tabObject.tabId;
@@ -219,7 +219,7 @@ function(tabObject) {
  * 
  * @param	{Hash}	tabObject		the tab object
  */
-com_zimbra_example_dynamictab_HandlerObject.prototype._cancelLinkListener =
+org_zmail_example_dynamictab_HandlerObject.prototype._cancelLinkListener =
 function(tabObject) {
 
 	var app = appCtxt.getApp(tabObject.tabAppName);
@@ -229,7 +229,7 @@ function(tabObject) {
  * This method is called when the zimlet is double-clicked.
  * 
  */
-com_zimbra_example_dynamictab_HandlerObject.prototype.doubleClicked =
+org_zmail_example_dynamictab_HandlerObject.prototype.doubleClicked =
 function() {
 	this.singleClicked();
 };
@@ -238,7 +238,7 @@ function() {
  * This method is called when the zimlet is single-clicked.
  * 
  */
-com_zimbra_example_dynamictab_HandlerObject.prototype.singleClicked =
+org_zmail_example_dynamictab_HandlerObject.prototype.singleClicked =
 function() {
 	this._launchEditTabsDialog();
 };
@@ -247,9 +247,9 @@ function() {
  * Launches the edit tabs dialog.
  * 
  */
-com_zimbra_example_dynamictab_HandlerObject.prototype._launchEditTabsDialog =
+org_zmail_example_dynamictab_HandlerObject.prototype._launchEditTabsDialog =
 function() {
-	this._editTabsDialog = new com_zimbra_example_dynamictab_EditTabsDialog(this.getShell(), this);
+	this._editTabsDialog = new org_zmail_example_dynamictab_EditTabsDialog(this.getShell(), this);
 
 	this._editTabsDialog.popup(); //show the dialog
 };
@@ -260,17 +260,17 @@ function() {
  * @param	{Hash}	tabObject		the tab object
  * @return {String}		the HTML content
  */
-com_zimbra_example_dynamictab_HandlerObject.prototype._getTabMainContent =
+org_zmail_example_dynamictab_HandlerObject.prototype._getTabMainContent =
 function(tabObject) {
 	var tabUrl = tabObject.tabUrl;
 
-	var url = com_zimbra_example_dynamictab_Util.cleanUrl(tabUrl);
+	var url = org_zmail_example_dynamictab_Util.cleanUrl(tabUrl);
 	
 	var subs = {
 			iframeSrcUrl: url
 	};
 	
-	return	AjxTemplate.expand("com_zimbra_example_dynamictab.templates.Dialogs#Tab-Main", subs);
+	return	AjxTemplate.expand("org_zmail_example_dynamictab.templates.Dialogs#Tab-Main", subs);
 };
 
 /**
@@ -279,7 +279,7 @@ function(tabObject) {
  * @param	{Hash}	tabObject		the tab object
  * @return {String}		the HTML content
  */
-com_zimbra_example_dynamictab_HandlerObject.prototype._getTabToolbarContent =
+org_zmail_example_dynamictab_HandlerObject.prototype._getTabToolbarContent =
 function(tabObject) {
 	var tabUrl = tabObject.tabUrl;
 	
@@ -290,14 +290,14 @@ function(tabObject) {
 			configure_link: configureLink
 	};
 	
-	return	AjxTemplate.expand("com_zimbra_example_dynamictab.templates.Dialogs#Tab-Toolbar", subs);
+	return	AjxTemplate.expand("org_zmail_example_dynamictab.templates.Dialogs#Tab-Toolbar", subs);
 };
 
 /**
  * Checks the user properties on save.
  * 
  */
-com_zimbra_example_dynamictab_HandlerObject.prototype.checkProperties = 
+org_zmail_example_dynamictab_HandlerObject.prototype.checkProperties = 
 function(props) {
 
 	var tabIds = this._tabManager.getTabIdsArrayFromProps(props);
@@ -308,7 +308,7 @@ function(props) {
 		var tabId = this._tabManager.getTabIdFromProperty(props[i].name);
 
 		if (tabId != null) {
-			var save = com_zimbra_example_dynamictab_Util.arrayContains(tabIds,tabId);
+			var save = org_zmail_example_dynamictab_Util.arrayContains(tabIds,tabId);
 			if (save == false) {
 				props.splice(i,1);
 				i--;
@@ -385,8 +385,8 @@ function(props) {
 		tabObject.tabLabel = newTabLabel;
 		tabObject.tabToolTip = newTabToolTip;
 		
-		var escapedLabel = com_zimbra_example_dynamictab_Util.escapeHTML(tabObject.tabLabel);
-		var escapedToolTip = com_zimbra_example_dynamictab_Util.escapeHTML(tabObject.tabToolTip);
+		var escapedLabel = org_zmail_example_dynamictab_Util.escapeHTML(tabObject.tabLabel);
+		var escapedToolTip = org_zmail_example_dynamictab_Util.escapeHTML(tabObject.tabToolTip);
 
 		appButton.setText(escapedLabel);
 		appButton.setToolTipContent(escapedToolTip);
@@ -409,7 +409,7 @@ function(props) {
  * @param	{ZmApp}	app			the application
  * @param	{Boolean}	loadMain	<code>true</code> to load the toolbar content only
  */
-com_zimbra_example_dynamictab_HandlerObject.prototype._loadContent =
+org_zmail_example_dynamictab_HandlerObject.prototype._loadContent =
 function(tabObject,app,loadMain) {
 	
 	var htmlContent = null;
@@ -439,9 +439,9 @@ function(tabObject,app,loadMain) {
  * @param	{Hash}	tabObject	the tab object
  * @return	{String}	the configure link
  */
-com_zimbra_example_dynamictab_HandlerObject.prototype._getConfigureLink =
+org_zmail_example_dynamictab_HandlerObject.prototype._getConfigureLink =
 function(tabObject) {
-	return	com_zimbra_example_dynamictab_HandlerObject.WIDGETID_CONFIGURE_LINK + tabObject.tabId;
+	return	org_zmail_example_dynamictab_HandlerObject.WIDGETID_CONFIGURE_LINK + tabObject.tabId;
 };
 
 /**
@@ -450,9 +450,9 @@ function(tabObject) {
  * @param	{Hash}	tabObject	the tab object
  * @return	{String}	the save link
  */
-com_zimbra_example_dynamictab_HandlerObject.prototype._getSaveLink =
+org_zmail_example_dynamictab_HandlerObject.prototype._getSaveLink =
 function(tabObject) {
-	return	com_zimbra_example_dynamictab_HandlerObject.WIDGETID_SAVE_LINK + tabObject.tabId;
+	return	org_zmail_example_dynamictab_HandlerObject.WIDGETID_SAVE_LINK + tabObject.tabId;
 };
 
 /**
@@ -461,7 +461,7 @@ function(tabObject) {
  * @param	{Hash}	tabObject	the tab object
  * @return	{String}	the cancel link
  */
-com_zimbra_example_dynamictab_HandlerObject.prototype._getCancelLink =
+org_zmail_example_dynamictab_HandlerObject.prototype._getCancelLink =
 function(tabObject) {
-	return	com_zimbra_example_dynamictab_HandlerObject.WIDGETID_CANCEL_LINK + tabObject.tabId;
+	return	org_zmail_example_dynamictab_HandlerObject.WIDGETID_CANCEL_LINK + tabObject.tabId;
 };

@@ -14,34 +14,34 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.octopus.tests.sharing;
+package org.zmail.qa.selenium.projects.octopus.tests.sharing;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.OctopusAccount;
-import com.zimbra.qa.selenium.framework.util.SleepUtil;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.octopus.core.OctopusCommonTest;
-import com.zimbra.qa.selenium.projects.octopus.ui.DialogFolderShare;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.OctopusAccount;
+import org.zmail.qa.selenium.framework.util.SleepUtil;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.octopus.core.OctopusCommonTest;
+import org.zmail.qa.selenium.projects.octopus.ui.DialogFolderShare;
 
 public class CreateShare extends OctopusCommonTest {
 
-	private ZimbraAccount granteeAccount = null;
+	private ZmailAccount granteeAccount = null;
 	private boolean _folderIsCreated = false;
 	private String _folderName = null;
 	private boolean _fileAttached = false;
 	private String _fileId = null;
-	private ZimbraAccount owner = null;
+	private ZmailAccount owner = null;
 
 	@BeforeMethod(groups = { "always" })
 	public void testReset() {
@@ -64,7 +64,7 @@ public class CreateShare extends OctopusCommonTest {
 
 	@Test(description = "Create share using SOAP - verify view permissions in Share info using SOAP", groups = { "functional" })
 	public void CreateShare_01() throws HarnessException {
-		ZimbraAccount currentOwnerAccount = app.zGetActiveAccount();
+		ZmailAccount currentOwnerAccount = app.zGetActiveAccount();
 
 		FolderItem ownerBriefcaseRootFolder = FolderItem.importFromSOAP(
 				currentOwnerAccount, SystemFolder.Briefcase);
@@ -74,7 +74,7 @@ public class CreateShare extends OctopusCommonTest {
 
 		// Owner creates a folder, shares it with current user
 		String ownerFoldername = "ownerFolder"
-				+ ZimbraSeleniumProperties.getUniqueString();
+				+ ZmailSeleniumProperties.getUniqueString();
 
 		// Verify the folder exists on the server
 		FolderItem ownerFolderItem = createFolderViaSoap(currentOwnerAccount, ownerFoldername,ownerBriefcaseRootFolder);
@@ -87,7 +87,7 @@ public class CreateShare extends OctopusCommonTest {
 		shareFolderViaSoap(currentOwnerAccount, granteeAccount, ownerFolderItem, SHARE_AS_READ);
 
 		// grantee verifies notification message
-		String getShareNotifcationRequest = "<GetShareNotificationsRequest xmlns='urn:zimbraMail'/>";
+		String getShareNotifcationRequest = "<GetShareNotificationsRequest xmlns='urn:zmailMail'/>";
 
 		app.zPageOctopus.waitForResponse(granteeAccount, getShareNotifcationRequest, ownerFoldername, 5);
 
@@ -107,7 +107,7 @@ public class CreateShare extends OctopusCommonTest {
 
 	@Test(description = "Create share using Context Menu - verify Message text using GUI", groups = { "smoke" })
 	public void CreateShare_02() throws HarnessException {
-		ZimbraAccount currentOwnerAccount = app.zGetActiveAccount();
+		ZmailAccount currentOwnerAccount = app.zGetActiveAccount();
 
 		FolderItem ownerBriefcaseRootFolder = FolderItem.importFromSOAP(
 				currentOwnerAccount, SystemFolder.Briefcase);
@@ -117,7 +117,7 @@ public class CreateShare extends OctopusCommonTest {
 
 		// Owner creates a folder, shares it with current user
 		String ownerFoldername = "ownerFolder"
-				+ ZimbraSeleniumProperties.getUniqueString();
+				+ ZmailSeleniumProperties.getUniqueString();
 
 		// Verify the folder exists on the server
 		FolderItem ownerFolderItem =createFolderViaSoap(currentOwnerAccount, ownerFoldername,ownerBriefcaseRootFolder);
@@ -169,7 +169,7 @@ public class CreateShare extends OctopusCommonTest {
 
 	@Test(description = "Create share using Context Menu - verify Share title using GUI", groups = { "functional" })
 	public void CreateShare_03() throws HarnessException {
-		ZimbraAccount currentOwnerAccount = app.zGetActiveAccount();
+		ZmailAccount currentOwnerAccount = app.zGetActiveAccount();
 
 		FolderItem ownerBriefcaseRootFolder = FolderItem.importFromSOAP(
 				currentOwnerAccount, SystemFolder.Briefcase);
@@ -179,7 +179,7 @@ public class CreateShare extends OctopusCommonTest {
 
 		// Owner creates a folder, shares it with current user
 		String ownerFoldername = "ownerFolder"
-				+ ZimbraSeleniumProperties.getUniqueString();
+				+ ZmailSeleniumProperties.getUniqueString();
 
 		// Verify the folder exists on the server
 		FolderItem ownerFolderItem = createFolderViaSoap(currentOwnerAccount, ownerFoldername,ownerBriefcaseRootFolder);
@@ -222,7 +222,7 @@ public class CreateShare extends OctopusCommonTest {
 
 	@Test(description = "Create share using Context Menu - verify grantee name using GUI", groups = { "functional" })
 	public void CreateShare_04() throws HarnessException {
-		ZimbraAccount currentOwnerAccount = app.zGetActiveAccount();
+		ZmailAccount currentOwnerAccount = app.zGetActiveAccount();
 
 		FolderItem ownerBriefcaseRootFolder = FolderItem.importFromSOAP(
 				currentOwnerAccount, SystemFolder.Briefcase);
@@ -232,7 +232,7 @@ public class CreateShare extends OctopusCommonTest {
 
 		// Owner creates a folder, shares it with current user
 		String ownerFoldername = "ownerFolder"
-				+ ZimbraSeleniumProperties.getUniqueString();
+				+ ZmailSeleniumProperties.getUniqueString();
 
 		// Verify the folder exists on the server
 		FolderItem ownerFolderItem = createFolderViaSoap(currentOwnerAccount, ownerFoldername,ownerBriefcaseRootFolder);
@@ -295,7 +295,7 @@ public class CreateShare extends OctopusCommonTest {
 
 	@Test(description = "Create share using SOAP - verify view and edit permissions message using SOAP", groups = { "functional" })
 	public void CreateShare_05() throws HarnessException {
-		ZimbraAccount currentOwnerAccount = app.zGetActiveAccount();
+		ZmailAccount currentOwnerAccount = app.zGetActiveAccount();
 
 		FolderItem ownerBriefcaseRootFolder = FolderItem.importFromSOAP(
 				currentOwnerAccount, SystemFolder.Briefcase);
@@ -305,7 +305,7 @@ public class CreateShare extends OctopusCommonTest {
 
 		// Owner creates a folder, shares it with current user
 		String ownerFoldername = "ownerFolder"
-				+ ZimbraSeleniumProperties.getUniqueString();
+				+ ZmailSeleniumProperties.getUniqueString();
 
 		// Verify the folder exists on the server
 		FolderItem ownerFolderItem = createFolderViaSoap(currentOwnerAccount, ownerFoldername,ownerBriefcaseRootFolder);
@@ -318,7 +318,7 @@ public class CreateShare extends OctopusCommonTest {
 		shareFolderViaSoap(currentOwnerAccount, granteeAccount, ownerFolderItem, SHARE_AS_READWRITE);
 
 		// grantee verifies view and edit permissions in the notification message
-		String getShareNotifcationRequest = "<GetShareNotificationsRequest xmlns='urn:zimbraMail'/>";
+		String getShareNotifcationRequest = "<GetShareNotificationsRequest xmlns='urn:zmailMail'/>";
 
 		app.zPageOctopus.waitForResponse(granteeAccount, getShareNotifcationRequest, ownerFoldername, 5);
 
@@ -337,7 +337,7 @@ public class CreateShare extends OctopusCommonTest {
 
 	@Test(description = "Create share using SOAP - verify view, edit and share permissions message using SOAP", groups = { "functional" })
 	public void CreateShare_06() throws HarnessException {
-		ZimbraAccount currentOwnerAccount = app.zGetActiveAccount();
+		ZmailAccount currentOwnerAccount = app.zGetActiveAccount();
 
 		FolderItem ownerBriefcaseRootFolder = FolderItem.importFromSOAP(
 				currentOwnerAccount, SystemFolder.Briefcase);
@@ -347,7 +347,7 @@ public class CreateShare extends OctopusCommonTest {
 
 		// Owner creates a folder, shares it with another user
 		String ownerFoldername = "ownerFolder"
-				+ ZimbraSeleniumProperties.getUniqueString();
+				+ ZmailSeleniumProperties.getUniqueString();
 
 		// Verify the folder exists on the server
 		FolderItem ownerFolderItem = createFolderViaSoap(currentOwnerAccount, ownerFoldername,ownerBriefcaseRootFolder);
@@ -362,7 +362,7 @@ public class CreateShare extends OctopusCommonTest {
 		SleepUtil.sleepSmall();
 
 		// grantee verifies view, edit and share permissions
-		String getShareNotifcationRequest = "<GetShareNotificationsRequest xmlns='urn:zimbraMail'/>";
+		String getShareNotifcationRequest = "<GetShareNotificationsRequest xmlns='urn:zmailMail'/>";
 
 		app.zPageOctopus.waitForResponse(granteeAccount, getShareNotifcationRequest, ownerFoldername, 5);
 
@@ -382,7 +382,7 @@ public class CreateShare extends OctopusCommonTest {
 	@Bugs(ids = "71149")
 	@Test(description = "History shows 'undefined' if user has specified wrong email address while sharing folder", groups = { "functional" })
 	public void CreateShareWithInvalidEmailFormat() throws HarnessException {
-		ZimbraAccount currentOwnerAccount = app.zGetActiveAccount();
+		ZmailAccount currentOwnerAccount = app.zGetActiveAccount();
 
 		FolderItem ownerBriefcaseRootFolder = FolderItem.importFromSOAP(
 				currentOwnerAccount, SystemFolder.Briefcase);
@@ -392,7 +392,7 @@ public class CreateShare extends OctopusCommonTest {
 
 		// Owner creates a folder, shares it with current user
 		String ownerFoldername = "ownerFolder"
-				+ ZimbraSeleniumProperties.getUniqueString();
+				+ ZmailSeleniumProperties.getUniqueString();
 
 		// Verify the folder exists on the server
 		FolderItem ownerFolderItem = createFolderViaSoap(currentOwnerAccount, ownerFoldername,ownerBriefcaseRootFolder);
@@ -432,7 +432,7 @@ public class CreateShare extends OctopusCommonTest {
 
 	@Test(description = "Check share dialog", groups = { "smoke" })
 	public void CheckShareDialog() throws HarnessException {
-		ZimbraAccount currentOwnerAccount = app.zGetActiveAccount();
+		ZmailAccount currentOwnerAccount = app.zGetActiveAccount();
 
 		FolderItem ownerBriefcaseRootFolder = FolderItem.importFromSOAP(
 				currentOwnerAccount, SystemFolder.Briefcase);
@@ -442,7 +442,7 @@ public class CreateShare extends OctopusCommonTest {
 
 		// Owner creates a folder, shares it with current user
 		String ownerFoldername = "ownerFolder"
-				+ ZimbraSeleniumProperties.getUniqueString();
+				+ ZmailSeleniumProperties.getUniqueString();
 
 		createFolderViaSoap(currentOwnerAccount, ownerFoldername,ownerBriefcaseRootFolder);
 
@@ -485,7 +485,7 @@ public class CreateShare extends OctopusCommonTest {
 	public void CheckViewPermissionOfFolder() throws HarnessException
 	{
 		//Create folder using Soap
-		String ownerFolderName = "ownerFolder"+ ZimbraSeleniumProperties.getUniqueString();
+		String ownerFolderName = "ownerFolder"+ ZmailSeleniumProperties.getUniqueString();
 		CreateFolder(ownerFolderName,PPT_FILE);
 
 		_folderIsCreated = true;
@@ -522,7 +522,7 @@ public class CreateShare extends OctopusCommonTest {
 	public void CheckViewEditPermissionOfFolder() throws HarnessException
 	{
 		//Create folder using Soap
-		String ownerFolderName = "ownerFolder"+ ZimbraSeleniumProperties.getUniqueString();
+		String ownerFolderName = "ownerFolder"+ ZmailSeleniumProperties.getUniqueString();
 		CreateFolder(ownerFolderName,PPT_FILE);
 
 		_folderIsCreated = true;
@@ -561,7 +561,7 @@ public class CreateShare extends OctopusCommonTest {
 	public void CheckAdminPermissionOfFolder() throws HarnessException
 	{
 		//Create folder using Soap
-		String ownerFolderName = "ownerFolder"+ ZimbraSeleniumProperties.getUniqueString();
+		String ownerFolderName = "ownerFolder"+ ZmailSeleniumProperties.getUniqueString();
 		CreateFolder(ownerFolderName,PPT_FILE);
 
 		_folderIsCreated = true;
@@ -598,7 +598,7 @@ public class CreateShare extends OctopusCommonTest {
 
 		//Create folder Using SOAP under Owner root folder.
 		owner.soapSend(
-				"<CreateFolderRequest xmlns='urn:zimbraMail'>"
+				"<CreateFolderRequest xmlns='urn:zmailMail'>"
 						+"<folder name='" + ownerFolderName + "' l='" + ownerBriefcase.getId() + "' view='document'/>"
 						+"</CreateFolderRequest>");
 	}
@@ -631,14 +631,14 @@ public class CreateShare extends OctopusCommonTest {
 		}
 		try {
 			// Refresh view
-			// ZimbraAccount account = app.zGetActiveAccount();
+			// ZmailAccount account = app.zGetActiveAccount();
 			// FolderItem item =
 			// FolderItem.importFromSOAP(account,SystemFolder.Briefcase);
-			// account.soapSend("<GetFolderRequest xmlns='urn:zimbraMail'><folder l='1' recursive='0'/>"
+			// account.soapSend("<GetFolderRequest xmlns='urn:zmailMail'><folder l='1' recursive='0'/>"
 			// + "</GetFolderRequest>");
-			// account.soapSend("<GetFolderRequest xmlns='urn:zimbraMail' requestId='folders' depth='1' tr='true' view='document'><folder l='"
+			// account.soapSend("<GetFolderRequest xmlns='urn:zmailMail' requestId='folders' depth='1' tr='true' view='document'><folder l='"
 			// + item.getId() + "'/></GetFolderRequest>");
-			// account.soapSend("<GetActivityStreamRequest xmlns='urn:zimbraMail' id='16'/>");
+			// account.soapSend("<GetActivityStreamRequest xmlns='urn:zmailMail' id='16'/>");
 			// app.zGetActiveAccount().accountIsDirty = true;
 			// app.zPageOctopus.sRefresh();
 

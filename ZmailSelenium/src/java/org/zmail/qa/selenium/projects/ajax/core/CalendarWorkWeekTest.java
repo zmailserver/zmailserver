@@ -14,14 +14,14 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.core;
+package org.zmail.qa.selenium.projects.ajax.core;
 
 import java.util.*;
 
 /**
  * A base class that sets
  *  1) the starting page to be the calendar app
- *  2) sets zimbraPrefCalendarInitialView=WorkWeek (default)
+ *  2) sets zmailPrefCalendarInitialView=WorkWeek (default)
  *  3) sets weekDayUTC ... a Calendar object, on current week day
  *  
  * @author Matt Rhoades
@@ -38,7 +38,7 @@ public class CalendarWorkWeekTest extends AjaxCommonTest {
 		super.startingAccountPreferences = new HashMap<String, String>() {
 			private static final long serialVersionUID = -109947857488617841L;
 		{
-		    put("zimbraPrefCalendarInitialView", "workWeek");
+		    put("zmailPrefCalendarInitialView", "workWeek");
 		}};
 		
 		calendarWeekDayUTC = Calendar.getInstance();

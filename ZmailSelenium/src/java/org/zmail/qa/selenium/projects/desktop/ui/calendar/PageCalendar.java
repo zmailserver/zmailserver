@@ -14,12 +14,12 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.ui.calendar;
+package org.zmail.qa.selenium.projects.desktop.ui.calendar;
 
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties.AppType;
-import com.zimbra.qa.selenium.projects.desktop.ui.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties.AppType;
+import org.zmail.qa.selenium.projects.desktop.ui.*;
 
 public class PageCalendar extends AbsTab {
 
@@ -93,7 +93,7 @@ public class PageCalendar extends AbsTab {
 		// If the app is busy, wait for it to become active
 		this.zWaitForBusyOverlay();
 
-		if (ZimbraSeleniumProperties.getAppType() == AppType.DESKTOP &&
+		if (ZmailSeleniumProperties.getAppType() == AppType.DESKTOP &&
 				button == Button.B_GETMAIL) {
 
 

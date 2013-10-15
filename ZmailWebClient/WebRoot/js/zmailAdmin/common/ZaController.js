@@ -14,7 +14,7 @@
  */
 
 /**
-* @class Base class for all Controller classes in ZimbraAdmin UI
+* @class Base class for all Controller classes in ZmailAdmin UI
 * @author Greg Solovyev
 * @constructor 
 * @see ZaAccountListController
@@ -44,7 +44,7 @@ ZaController = function(appCtxt, container,iKeyName) {
     
     this.objType = ZaEvent.S_ACCOUNT;
     this._helpURL = ZaController.helpURL;
-    this._helpButtonText = ZabMsg.zimbraHomePage;
+    this._helpButtonText = ZabMsg.zmailHomePage;
    	this._popupOperations = new Array();
     this._popupOrder = new Array();
     this._appbarOperation = new Array();
@@ -178,7 +178,7 @@ function(msg, ex, style)  {
     }
 
 	if (this._errorDialog) {
-        this._errorDialog.setMessage(msg, detailStr, style, ZabMsg.zimbraAdminTitle);
+        this._errorDialog.setMessage(msg, detailStr, style, ZabMsg.zmailAdminTitle);
 
 	
         if (!this._errorDialog.isPoppedUp()) {
@@ -194,7 +194,7 @@ function(msg, noExecReset)  {
 		this._execFrame = {func: null, args: null, restartOnError: false};
 	
 	// popup alert
-	this._msgDialog.setMessage(msg, DwtMessageDialog.INFO_STYLE, ZabMsg.zimbraAdminTitle);
+	this._msgDialog.setMessage(msg, DwtMessageDialog.INFO_STYLE, ZabMsg.zmailAdminTitle);
 	if (!this._msgDialog.isPoppedUp()) {
 		this._msgDialog.popup();
 	}
@@ -207,7 +207,7 @@ function(msg, noExecReset)  {
 		this._execFrame = {func: null, args: null, restartOnError: false};
 	
 	// popup alert
-	this._msgDialog.setMessage(msg, DwtMessageDialog.WARNING_STYLE, ZabMsg.zimbraAdminTitle);
+	this._msgDialog.setMessage(msg, DwtMessageDialog.WARNING_STYLE, ZabMsg.zmailAdminTitle);
 	if (!this._msgDialog.isPoppedUp()) {
 		this._msgDialog.popup();
 	}
@@ -310,7 +310,7 @@ function() {
 **/
 ZaController.prototype._showLoginDialog =
 function() {
-	ZaZimbraAdmin._killSplash();
+	ZaZmailAdmin._killSplash();
 	this._authenticating = true;
 	this._loginDialog.setVisible(true, false);
 	try {
@@ -318,7 +318,7 @@ function() {
 		this._loginDialog.setFocus(uname);
 	} catch (ex) {
 		// something is out of whack... just make the user relogin
-		ZaZimbraAdmin.logOff();
+		ZaZmailAdmin.logOff();
 	}
 }
 
@@ -350,7 +350,7 @@ function(ex, method, params, restartOnError, obj) {
  				 * But in the process of login, we use this exception to popup login dialog if user doesn't 
  				 * login. We shouldn't disable the username field in the first soap request if an exception is thrown.
  				 */
-			if ((!ZaZimbraAdmin.isFirstRequest &&  
+			if ((!ZaZmailAdmin.isFirstRequest &&  
 				  (ex.code == ZmCsfeException.NO_AUTH_TOKEN ||
 				   ex.code == ZmCsfeException.SVC_AUTH_REQUIRED ||
 				   ex.code == ZmCsfeException.SVC_AUTH_EXPIRED	
@@ -447,7 +447,7 @@ function(username, password) {
 		//hide login dialog
 		this._hideLoginDialog();
 		//show splash screen
-		ZaZimbraAdmin.showSplash(this._shell);
+		ZaZmailAdmin.showSplash(this._shell);
 		var callback = new AjxCallback(this, this.authCallback);	
 		this.auth = new ZaAuthenticate(this._appCtxt);
 		this.auth.execute(username, password,callback);
@@ -583,7 +583,7 @@ function(uname, oldPass, newPass, conPass) {
 		return;
 	}
 
-    var soapDoc = AjxSoapDoc.create("ChangePasswordRequest", "urn:zimbraAccount");
+    var soapDoc = AjxSoapDoc.create("ChangePasswordRequest", "urn:zmailAccount");
     var el = soapDoc.set("account", uname);
     el.setAttribute("by", "name");
     soapDoc.set("oldPassword", oldPass);
@@ -601,7 +601,7 @@ function(uname, oldPass, newPass, conPass) {
  			this._loginDialog.enableUnameField();
 			this._loginDialog.enablePasswordField();
         	this._loginDialog.hideNewPasswordFields();
-			ZaZimbraAdmin.showSplash(this._shell);
+			ZaZmailAdmin.showSplash(this._shell);
 			var callback = new AjxCallback(this, this.authCallback);	
 			this.auth = new ZaAuthenticate(this._appCtxt);
 			this.auth.execute(uname, newPass,callback);
@@ -921,7 +921,7 @@ function () {
     } else {
         isCurrentController = true;
     }
-    var settingMenu = ZaZimbraAdmin.getInstance().getSettingMenu();
+    var settingMenu = ZaZmailAdmin.getInstance().getSettingMenu();
     if (isCurrentController && this._popupOperations && settingMenu) {
         for(var i in this._popupOperations) {
             if(this._popupOperations[i] instanceof ZaOperation && !AjxUtil.isEmpty(settingMenu.getMenuItem(this._popupOperations[i].id))) {
@@ -948,20 +948,20 @@ ZaController.prototype._showAccountsView = function (defaultType, ev, filterQuer
 
 	var viewId = null;  
 	if(defaultType == ZaItem.DL) {
-		viewId=ZaZimbraAdmin._DISTRIBUTION_LISTS_LIST_VIEW;
+		viewId=ZaZmailAdmin._DISTRIBUTION_LISTS_LIST_VIEW;
 	} else if (defaultType == ZaItem.RESOURCE){
-		viewId=ZaZimbraAdmin._RESOURCE_LIST_VIEW;
+		viewId=ZaZmailAdmin._RESOURCE_LIST_VIEW;
 	} else if(defaultType == ZaItem.ALIAS) {
-		viewId=ZaZimbraAdmin._ALIASES_LIST_VIEW;
+		viewId=ZaZmailAdmin._ALIASES_LIST_VIEW;
 	} else {
-		viewId=ZaZimbraAdmin._ACCOUNTS_LIST_VIEW;
+		viewId=ZaZmailAdmin._ACCOUNTS_LIST_VIEW;
 	}	
 	var acctListController = ZaApp.getInstance().getAccountListController(viewId);
 	
 	var query = "";
 
     if (defaultType != ZaItem.ALIAS)  { //alias uid has no domain name, we shouldn't add a domain name filter. See bug 46626, 44799 & 4704 
-    	if(!ZaSettings.HAVE_MORE_DOMAINS && ZaZimbraAdmin.currentAdminAccount.attrs[ZaAccount.A_zimbraIsAdminAccount] != 'TRUE') {
+    	if(!ZaSettings.HAVE_MORE_DOMAINS && ZaZmailAdmin.currentAdminAccount.attrs[ZaAccount.A_zmailIsAdminAccount] != 'TRUE') {
 		var queryChunks = [];
 		var domainList = ZaApp.getInstance().getDomainList().getArray();
 		//var domainList = [];
@@ -971,10 +971,10 @@ ZaController.prototype._showAccountsView = function (defaultType, ev, filterQuer
 		}
 		
 		for(var i = 0; i < cnt; i++) {
-			queryChunks.push("(zimbraMailDeliveryAddress=*@");
+			queryChunks.push("(zmailMailDeliveryAddress=*@");
 			queryChunks.push(domainList[i].name);
 			queryChunks.push(")");
-			queryChunks.push("(zimbraMailAlias=*@");
+			queryChunks.push("(zmailMailAlias=*@");
 			queryChunks.push(domainList[i].name);
 			queryChunks.push(")");
 		}

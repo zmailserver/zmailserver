@@ -12,19 +12,19 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline;
+package org.zmail.cs.offline;
 
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.DataSource.DataImport;
-import com.zimbra.cs.account.offline.OfflineDataSource;
-import com.zimbra.cs.datasource.imap.ImapSync;
-import com.zimbra.cs.offline.ab.gab.GabImport;
-import com.zimbra.cs.offline.ab.yab.YabImport;
-import com.zimbra.cs.offline.ab.yc.YContactImport;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.DataSource.DataImport;
+import org.zmail.cs.account.offline.OfflineDataSource;
+import org.zmail.cs.datasource.imap.ImapSync;
+import org.zmail.cs.offline.ab.gab.GabImport;
+import org.zmail.cs.offline.ab.yab.YabImport;
+import org.zmail.cs.offline.ab.yc.YContactImport;
 
 public class OfflineImport implements DataImport {
     private final OfflineDataSource ds;

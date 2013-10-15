@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System;
 
-namespace ZimbraMigrationConsole
+namespace ZmailMigrationConsole
 {
 class Migration
 {

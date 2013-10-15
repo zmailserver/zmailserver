@@ -26,7 +26,7 @@ Sub LogMsg(sMsg, iLevel)
         WScript.StdOut.WriteLine(sMsg)
     End If
     If iLevel <= iLogLevel Then
-        oShell.LogEvent iLevel, "Zimbra Desktop: " & sMsg
+        oShell.LogEvent iLevel, "Zmail Desktop: " & sMsg
     End If
 End Sub
 
@@ -78,8 +78,8 @@ End Sub
 Sub LaunchPrism()
     Dim sCmd, iRet 
 
-    iRet = oReg.CreateKey(HKEY_CURRENT_USER, "Software\Zimbra\Zimbra Desktop\Prism")
-    oReg.SetStringValue HKEY_CURRENT_USER, "Software\Zimbra\Zimbra Desktop\Prism", "OverridePath", sOverridePath
+    iRet = oReg.CreateKey(HKEY_CURRENT_USER, "Software\Zmail\Zmail Desktop\Prism")
+    oReg.SetStringValue HKEY_CURRENT_USER, "Software\Zmail\Zmail Desktop\Prism", "OverridePath", sOverridePath
 
     sCmd = Chr(34) & sAppRoot & "\win32\prism\zdclient.exe" & Chr(34)
     oShell.Run sCmd, 1, false 
@@ -98,7 +98,7 @@ End Sub
 
 Sub BackupFailed(sMsg)
     If Not IsNull(sMsg) Then
-        oShell.Popup sMsg, 0, "Zimbra Desktop", 48
+        oShell.Popup sMsg, 0, "Zmail Desktop", 48
     End If
     oFso.MoveFolder sTmpDir, sRestoreDir
     WScript.Quit
@@ -141,7 +141,7 @@ Sub BackupData()
         Else
             sMsg = "Unable to delete folder: " & sDataRoot & ". " & _
                 "Please close any open files in this folder and its sub-folders."
-            iButton = oShell.Popup(sMsg, 0, "Zimbra Desktop", 5 + 48)
+            iButton = oShell.Popup(sMsg, 0, "Zmail Desktop", 5 + 48)
         End If
         Err.Clear
     Loop While iButton = 4 ' Retry
@@ -216,9 +216,9 @@ Sub BuildPath(ByVal Path)
 End Sub
 
 Function GetDataRoot()
-    oReg.GetStringValue HKEY_CURRENT_USER, "Software\Zimbra\Zimbra Desktop", "DataRoot", GetDataRoot
+    oReg.GetStringValue HKEY_CURRENT_USER, "Software\Zmail\Zmail Desktop", "DataRoot", GetDataRoot
     If IsNull(GetDataRoot) Then
-        GetDataRoot = sLocalAppDir & "\Zimbra\Zimbra Desktop"
+        GetDataRoot = sLocalAppDir & "\Zmail\Zmail Desktop"
     Else
         If Not oFso.FolderExists(GetDataRoot) Then
             BuildPath(GetDataRoot)
@@ -287,7 +287,7 @@ sMsg = "Initializing, please wait..."
 If (InStr(Wscript.FullName,"cscript") > 0) Then
     WScript.Echo sMsg
 End If
-oShell.Popup sMsg, 5, "Zimbra Desktop", 64
+oShell.Popup sMsg, 5, "Zmail Desktop", 64
 
 StopProcesses
 
@@ -296,11 +296,11 @@ If bIsUpgrade Then
 End If
 
 ' copy data files
-If Not oFso.FolderExists(sLocalAppDir & "\Zimbra") Then
-    oFso.CreateFolder sLocalAppDir & "\Zimbra"
+If Not oFso.FolderExists(sLocalAppDir & "\Zmail") Then
+    oFso.CreateFolder sLocalAppDir & "\Zmail"
 End If
-If Not oFso.FolderExists(sLocalAppDir & "\Zimbra\Zimbra Desktop") Then
-    oFso.CreateFolder sLocalAppDir & "\Zimbra\Zimbra Desktop"
+If Not oFso.FolderExists(sLocalAppDir & "\Zmail\Zmail Desktop") Then
+    oFso.CreateFolder sLocalAppDir & "\Zmail\Zmail Desktop"
 End If
 oFso.CopyFolder sAppRoot & "\data\*", sDataRoot & "\", true
 WriteVersion
@@ -344,7 +344,7 @@ If bIsUpgrade Then
     RestoreData sTmpDir
 End If
 
-oReg.CreateKey HKEY_CURRENT_USER, "Software\Zimbra\Zimbra Desktop"
-oReg.SetStringValue HKEY_CURRENT_USER, "Software\Zimbra\Zimbra Desktop", "DataRoot", sDataRoot
+oReg.CreateKey HKEY_CURRENT_USER, "Software\Zmail\Zmail Desktop"
+oReg.SetStringValue HKEY_CURRENT_USER, "Software\Zmail\Zmail Desktop", "DataRoot", sDataRoot
 
 LaunchPrism

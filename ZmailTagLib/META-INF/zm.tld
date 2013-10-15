@@ -4,20 +4,20 @@
         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
         version="2.0">
 
-    <description>Contains tags and functions for interacting with the Zimbra Collaboration Suite.</description>
+    <description>Contains tags and functions for interacting with the Zmail Collaboration Suite.</description>
     <tlib-version>1.0</tlib-version>
 
     <short-name>zm</short-name>
-    <uri>com.zimbra.zm</uri>
+    <uri>org.zmail.zm</uri>
 
     <tag>
         <description>sends a message</description>
         <name>sendMessage</name>
-        <tag-class>com.zimbra.cs.taglib.tag.SendMessageTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.SendMessageTag</tag-class>
         <body-content>empty</body-content>        
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.client.ZMailbox.ZSendMessageResponse</variable-class>
+            <variable-class>org.zmail.client.ZMailbox.ZSendMessageResponse</variable-class>
             <scope>AT_END</scope>
         </variable>
         <attribute>
@@ -34,7 +34,7 @@
              <name>compose</name>
              <required>false</required>
              <rtexprvalue>true</rtexprvalue>
-             <type>com.zimbra.cs.taglib.bean.ZMessageComposeBean</type>
+             <type>org.zmail.cs.taglib.bean.ZMessageComposeBean</type>
          </attribute>
         <attribute>
             <description>
@@ -126,7 +126,7 @@
         </attribute>
         <attribute>
             <description>
-                Zimbra message id of message we are replying/forwarding to
+                Zmail message id of message we are replying/forwarding to
             </description>
             <name>messageid</name>
             <rtexprvalue>true</rtexprvalue>
@@ -154,11 +154,11 @@
     <tag>
         <description>sends an invite reply</description>
         <name>sendInviteReply</name>
-        <tag-class>com.zimbra.cs.taglib.tag.SendInviteReplyTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.SendInviteReplyTag</tag-class>
         <body-content>empty</body-content>
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.client.ZMailbox.ZSendInviteReplyResult</variable-class>
+            <variable-class>org.zmail.client.ZMailbox.ZSendInviteReplyResult</variable-class>
             <scope>AT_END</scope>
         </variable>
         <attribute>
@@ -175,18 +175,18 @@
              <name>compose</name>
              <required>false</required>
              <rtexprvalue>true</rtexprvalue>
-             <type>com.zimbra.cs.taglib.bean.ZMessageComposeBean</type>
+             <type>org.zmail.cs.taglib.bean.ZMessageComposeBean</type>
         </attribute>
     </tag>
 
     <tag>
         <description>save a draft message</description>
         <name>saveDraft</name>
-        <tag-class>com.zimbra.cs.taglib.tag.SaveDraftTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.SaveDraftTag</tag-class>
         <body-content>empty</body-content>
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.client.ZMessage</variable-class>
+            <variable-class>org.zmail.client.ZMessage</variable-class>
             <scope>AT_END</scope>
         </variable>
         <attribute>
@@ -203,7 +203,7 @@
              <name>compose</name>
              <required>false</required>
              <rtexprvalue>true</rtexprvalue>
-             <type>com.zimbra.cs.taglib.bean.ZMessageComposeBean</type>
+             <type>org.zmail.cs.taglib.bean.ZMessageComposeBean</type>
          </attribute>        
         <attribute>
             <description>
@@ -304,7 +304,7 @@
         </attribute>
         <attribute>
             <description>
-                Zimbra message id of message we are replying/forwarding to
+                Zmail message id of message we are replying/forwarding to
             </description>
             <name>messageid</name>
             <rtexprvalue>true</rtexprvalue>
@@ -348,11 +348,11 @@
     <tag>
          <description>compute data need to reply-to/forward a message</description>
          <name>messageCompose</name>
-         <tag-class>com.zimbra.cs.taglib.tag.MessageComposeTag</tag-class>
+         <tag-class>org.zmail.cs.taglib.tag.MessageComposeTag</tag-class>
          <body-content>empty</body-content>
          <variable>
              <name-from-attribute>var</name-from-attribute>
-             <variable-class>com.zimbra.cs.taglib.bean.ZMessageComposeBean</variable-class>
+             <variable-class>org.zmail.cs.taglib.bean.ZMessageComposeBean</variable-class>
              <scope>AT_END</scope>
          </variable>
          <attribute>
@@ -369,7 +369,7 @@
              <name>message</name>
              <required>true</required>
              <rtexprvalue>true</rtexprvalue>
-             <type>com.zimbra.cs.taglib.bean.ZMessageBean</type>
+             <type>org.zmail.cs.taglib.bean.ZMessageBean</type>
          </attribute>
         <attribute>
              <description>
@@ -465,7 +465,7 @@
 
 		<name>checkSpelling</name>
 
-		<tag-class>com.zimbra.cs.taglib.tag.CheckSpellingTag</tag-class>
+		<tag-class>org.zmail.cs.taglib.tag.CheckSpellingTag</tag-class>
 
 		<body-content>empty</body-content>
 
@@ -480,7 +480,7 @@
     <tag>
          <description>use uploaded form data with message containing attachments to fix up the compose object</description>
          <name>fixupMessageCompose</name>
-         <tag-class>com.zimbra.cs.taglib.tag.FixupMessageComposeTag</tag-class>
+         <tag-class>org.zmail.cs.taglib.tag.FixupMessageComposeTag</tag-class>
          <body-content>empty</body-content>
          <attribute>
              <description>
@@ -489,7 +489,7 @@
              <name>message</name>
              <required>true</required>
              <rtexprvalue>true</rtexprvalue>
-             <type>com.zimbra.cs.taglib.bean.ZMessageBean</type>
+             <type>org.zmail.cs.taglib.bean.ZMessageBean</type>
          </attribute>
          <attribute>
              <description>
@@ -498,7 +498,7 @@
              <name>compose</name>
              <required>true</required>
              <rtexprvalue>true</rtexprvalue>
-             <type>com.zimbra.cs.taglib.bean.ZMessageComposeBean</type>
+             <type>org.zmail.cs.taglib.bean.ZMessageComposeBean</type>
          </attribute>
          <attribute>
              <description>
@@ -514,11 +514,11 @@
     <tag>
         <description>compute data need to reply-to/forward a message</description>
         <name>composeUploader</name>
-        <tag-class>com.zimbra.cs.taglib.tag.ComposeUploaderTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.ComposeUploaderTag</tag-class>
         <body-content>empty</body-content>
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZComposeUploaderBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZComposeUploaderBean</variable-class>
             <scope>AT_END</scope>
         </variable>
         <attribute>
@@ -533,11 +533,11 @@
     <tag>
         <description>construct a file uploader bean</description>
         <name>fileUploader</name>
-        <tag-class>com.zimbra.cs.taglib.tag.FileUploaderTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.FileUploaderTag</tag-class>
         <body-content>empty</body-content>
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZFileUploaderBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZFileUploaderBean</variable-class>
             <scope>AT_END</scope>
         </variable>
         <attribute>
@@ -554,11 +554,11 @@
             Iterates over all mailbox tags.
         </description>
         <name>forEachTag</name>
-        <tag-class>com.zimbra.cs.taglib.tag.ForEachTagTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.ForEachTagTag</tag-class>
         <body-content>scriptless</body-content>
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZTagBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZTagBean</variable-class>
             <scope>NESTED</scope>
         </variable>
         <attribute>
@@ -577,11 +577,11 @@
             Iterates over all signatures.
         </description>
         <name>forEachSignature</name>
-        <tag-class>com.zimbra.cs.taglib.tag.signature.ForEachSignatureTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.signature.ForEachSignatureTag</tag-class>
         <body-content>scriptless</body-content>
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.client.ZSignature</variable-class>
+            <variable-class>org.zmail.client.ZSignature</variable-class>
             <scope>NESTED</scope>
         </variable>
         <attribute>
@@ -608,7 +608,7 @@
 
         <name>createSiganture</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.signature.CreateSignatureTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.signature.CreateSignatureTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -655,7 +655,7 @@
 
         <name>modifySiganture</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.signature.ModifySignatureTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.signature.ModifySignatureTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -697,7 +697,7 @@
 
         <name>deleteSiganture</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.signature.DeleteSignatureTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.signature.DeleteSignatureTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -716,11 +716,11 @@
             Iterates over all time zones.
         </description>
         <name>forEachTimeZone</name>
-        <tag-class>com.zimbra.cs.taglib.tag.ForEachTimeZoneTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.ForEachTimeZoneTag</tag-class>
         <body-content>scriptless</body-content>
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZTimeZoneBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZTimeZoneBean</variable-class>
             <scope>NESTED</scope>
         </variable>
         <attribute>
@@ -739,11 +739,11 @@
             Iterates over all mailbox folders
         </description>
         <name>forEachFolder</name>
-        <tag-class>com.zimbra.cs.taglib.tag.ForEachFolderTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.ForEachFolderTag</tag-class>
         <body-content>scriptless</body-content>
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZFolderBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZFolderBean</variable-class>
             <scope>NESTED</scope>
         </variable>
         <attribute>
@@ -771,7 +771,7 @@
             <name>parentfolder</name>
             <required>false</required>
             <rtexprvalue>true</rtexprvalue>
-            <type>com.zimbra.cs.taglib.bean.ZFolderBean</type>
+            <type>org.zmail.cs.taglib.bean.ZFolderBean</type>
         </attribute>
         <attribute>
             <description>
@@ -825,11 +825,11 @@
             Iterates over all voice accounts
         </description>
         <name>forEachPhoneAccount</name>
-        <tag-class>com.zimbra.cs.taglib.tag.voice.ForEachPhoneAccountTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.voice.ForEachPhoneAccountTag</tag-class>
         <body-content>scriptless</body-content>
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZPhoneAccountBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZPhoneAccountBean</variable-class>
             <scope>NESTED</scope>
         </variable>
         <attribute>
@@ -848,11 +848,11 @@
             Searches.
         </description>
         <name>search</name>
-        <tag-class>com.zimbra.cs.taglib.tag.SearchTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.SearchTag</tag-class>
         <body-content>empty</body-content>
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZSearchResultBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZSearchResultBean</variable-class>
             <scope>AT_END</scope>
         </variable>
         <attribute>
@@ -964,7 +964,7 @@
 
         <name>clearSearchCache</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.ClearSearchCacheTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.ClearSearchCacheTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -984,11 +984,11 @@
             Search Gal.
         </description>
         <name>searchGal</name>
-        <tag-class>com.zimbra.cs.taglib.tag.SearchGalTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.SearchGalTag</tag-class>
         <body-content>empty</body-content>
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZSearchGalResultBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZSearchGalResultBean</variable-class>
             <scope>AT_END</scope>
         </variable>
         <attribute>
@@ -1031,7 +1031,7 @@
             Throw a ZTagLibException
         </description>
         <name>tagLibException</name>
-        <tag-class>com.zimbra.cs.taglib.tag.TagLibExceptionTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.TagLibExceptionTag</tag-class>
         <body-content>empty</body-content>
         <attribute>
             <description>
@@ -1055,7 +1055,7 @@
             authtoken must be specified.
         </description>
         <name>login</name>
-        <tag-class>com.zimbra.cs.taglib.tag.LoginTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.LoginTag</tag-class>
         <body-content>empty</body-content>
         <variable>
             <name-from-attribute>varRedirectUrl</name-from-attribute>
@@ -1064,7 +1064,7 @@
         </variable>
         <variable>
             <name-from-attribute>varAuthResult</name-from-attribute>
-            <variable-class>com.zimbra.client.ZAuthResult</variable-class>
+            <variable-class>org.zmail.client.ZAuthResult</variable-class>
             <scope>AT_END</scope>
         </variable>
         <attribute>
@@ -1186,7 +1186,7 @@
             check to see if we need to redirect to admin app.
         </description>
         <name>adminRedirect</name>
-        <tag-class>com.zimbra.cs.taglib.tag.AdminRedirectTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.AdminRedirectTag</tag-class>
         <body-content>empty</body-content>
     </tag>
 
@@ -1195,7 +1195,7 @@
             Changes a password.
         </description>
         <name>changePassword</name>
-        <tag-class>com.zimbra.cs.taglib.tag.ChangePasswordTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.ChangePasswordTag</tag-class>
         <body-content>empty</body-content>
         <attribute>
             <description>
@@ -1252,7 +1252,7 @@
             Compares passed in crumb to crumb returned in GetInfoResponse.
         </description>
         <name>checkCrumb</name>
-        <tag-class>com.zimbra.cs.taglib.tag.CheckCrumbTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.CheckCrumbTag</tag-class>
         <body-content>empty</body-content>
         <attribute>
             <description>
@@ -1269,7 +1269,7 @@
             logout. clears cookie and JSP session.
         </description>
         <name>logout</name>
-        <tag-class>com.zimbra.cs.taglib.tag.LogoutTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.LogoutTag</tag-class>
         <body-content>empty</body-content>
     </tag>
 
@@ -1280,13 +1280,13 @@
 
         <name>getMessage</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.msg.GetMessageTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.msg.GetMessageTag</tag-class>
 
         <body-content>empty</body-content>
 
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZMessageBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZMessageBean</variable-class>
             <scope>AT_END</scope>
         </variable>
 
@@ -1303,7 +1303,7 @@
             <name>box</name>
             <required>false</required>
             <rtexprvalue>true</rtexprvalue>
-            <type>com.zimbra.cs.taglib.bean.ZMailboxBean</type>
+            <type>org.zmail.cs.taglib.bean.ZMailboxBean</type>
         </attribute>
 
         <attribute>
@@ -1364,13 +1364,13 @@
 
         <name>getConversation</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.conv.GetConversationTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.conv.GetConversationTag</tag-class>
 
         <body-content>empty</body-content>
 
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZConversationBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZConversationBean</variable-class>
             <scope>AT_END</scope>
         </variable>
 
@@ -1408,13 +1408,13 @@
 
         <name>deleteConversation</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.conv.DeleteConversationTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.conv.DeleteConversationTag</tag-class>
 
         <body-content>empty</body-content>
 
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZActionResultBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZActionResultBean</variable-class>
             <scope>AT_END</scope>
         </variable>
 
@@ -1458,13 +1458,13 @@
 
         <name>trashConversation</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.conv.TrashConversationTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.conv.TrashConversationTag</tag-class>
 
         <body-content>empty</body-content>
 
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZActionResultBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZActionResultBean</variable-class>
             <scope>AT_END</scope>
         </variable>
 
@@ -1508,13 +1508,13 @@
 
         <name>markConversationRead</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.conv.MarkConversationReadTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.conv.MarkConversationReadTag</tag-class>
 
         <body-content>empty</body-content>
 
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZActionResultBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZActionResultBean</variable-class>
             <scope>AT_END</scope>
         </variable>
 
@@ -1567,13 +1567,13 @@
 
         <name>flagConversation</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.conv.FlagConversationTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.conv.FlagConversationTag</tag-class>
 
         <body-content>empty</body-content>
 
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZActionResultBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZActionResultBean</variable-class>
             <scope>AT_END</scope>
         </variable>
 
@@ -1624,13 +1624,13 @@
 
         <name>moveConversation</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.conv.MoveConversationTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.conv.MoveConversationTag</tag-class>
 
         <body-content>empty</body-content>
 
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZActionResultBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZActionResultBean</variable-class>
             <scope>AT_END</scope>
         </variable>
 
@@ -1680,13 +1680,13 @@
 
         <name>tagConversation</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.conv.TagConversationTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.conv.TagConversationTag</tag-class>
 
         <body-content>empty</body-content>
 
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZActionResultBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZActionResultBean</variable-class>
             <scope>AT_END</scope>
         </variable>
 
@@ -1743,13 +1743,13 @@
 
         <name>markConversationSpam</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.conv.MarkConversationSpamTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.conv.MarkConversationSpamTag</tag-class>
 
         <body-content>empty</body-content>
 
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZActionResultBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZActionResultBean</variable-class>
             <scope>AT_END</scope>
         </variable>
 
@@ -1806,13 +1806,13 @@
 
         <name>deleteMessage</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.msg.DeleteMessageTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.msg.DeleteMessageTag</tag-class>
 
         <body-content>empty</body-content>
 
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZActionResultBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZActionResultBean</variable-class>
             <scope>AT_END</scope>
         </variable>
 
@@ -1839,13 +1839,13 @@
 
         <name>trashMessage</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.msg.TrashMessageTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.msg.TrashMessageTag</tag-class>
 
         <body-content>empty</body-content>
 
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZActionResultBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZActionResultBean</variable-class>
             <scope>AT_END</scope>
         </variable>
 
@@ -1872,13 +1872,13 @@
 
         <name>markMessageRead</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.msg.MarkMessageReadTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.msg.MarkMessageReadTag</tag-class>
 
         <body-content>empty</body-content>
 
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZActionResultBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZActionResultBean</variable-class>
             <scope>AT_END</scope>
         </variable>
 
@@ -1914,13 +1914,13 @@
 
         <name>flagMessage</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.msg.FlagMessageTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.msg.FlagMessageTag</tag-class>
 
         <body-content>empty</body-content>
 
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZActionResultBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZActionResultBean</variable-class>
             <scope>AT_END</scope>
         </variable>
 
@@ -1954,13 +1954,13 @@
 
         <name>moveMessage</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.msg.MoveMessageTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.msg.MoveMessageTag</tag-class>
 
         <body-content>empty</body-content>
 
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZActionResultBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZActionResultBean</variable-class>
             <scope>AT_END</scope>
         </variable>
 
@@ -1994,13 +1994,13 @@
 
         <name>tagMessage</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.msg.TagMessageTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.msg.TagMessageTag</tag-class>
 
         <body-content>empty</body-content>
 
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZActionResultBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZActionResultBean</variable-class>
             <scope>AT_END</scope>
         </variable>
 
@@ -2041,13 +2041,13 @@
 
         <name>markMessageSpam</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.msg.MarkMessageSpamTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.msg.MarkMessageSpamTag</tag-class>
 
         <body-content>empty</body-content>
 
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZActionResultBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZActionResultBean</variable-class>
             <scope>AT_END</scope>
         </variable>
 
@@ -2088,13 +2088,13 @@
 
         <name>getContact</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.contact.GetContactTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.contact.GetContactTag</tag-class>
 
         <body-content>empty</body-content>
 
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZContactBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZContactBean</variable-class>
             <scope>AT_END</scope>
         </variable>
 
@@ -2128,7 +2128,7 @@
 
         <name>contactAutoComplete</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.contact.ContactAutoCompleteTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.contact.ContactAutoCompleteTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -2161,7 +2161,7 @@
 
         <name>getGroupContacts</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.contact.GetGroupContactsTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.contact.GetGroupContactsTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -2187,13 +2187,13 @@
 
         <name>deleteContact</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.contact.DeleteContactTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.contact.DeleteContactTag</tag-class>
 
         <body-content>empty</body-content>
 
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZActionResultBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZActionResultBean</variable-class>
             <scope>AT_END</scope>
         </variable>
 
@@ -2220,13 +2220,13 @@
 
         <name>trashContact</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.contact.TrashContactTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.contact.TrashContactTag</tag-class>
 
         <body-content>empty</body-content>
 
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZActionResultBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZActionResultBean</variable-class>
             <scope>AT_END</scope>
         </variable>
 
@@ -2253,13 +2253,13 @@
 
         <name>flagContact</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.contact.FlagContactTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.contact.FlagContactTag</tag-class>
 
         <body-content>empty</body-content>
 
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZActionResultBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZActionResultBean</variable-class>
             <scope>AT_END</scope>
         </variable>
 
@@ -2293,7 +2293,7 @@
 
         <name>createContact</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.contact.CreateContactTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.contact.CreateContactTag</tag-class>
 
         <body-content>scriptless</body-content>
 
@@ -2340,7 +2340,7 @@
 
         <name>modifyContact</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.contact.ModifyContactTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.contact.ModifyContactTag</tag-class>
 
         <body-content>scriptless</body-content>
 
@@ -2402,7 +2402,7 @@
 
         <name>field</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.contact.FieldTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.contact.FieldTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -2431,7 +2431,7 @@
 
         <name>member</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.contact.MemberTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.contact.MemberTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -2460,13 +2460,13 @@
 
         <name>moveContact</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.contact.MoveContactTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.contact.MoveContactTag</tag-class>
 
         <body-content>empty</body-content>
 
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZActionResultBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZActionResultBean</variable-class>
             <scope>AT_END</scope>
         </variable>
 
@@ -2500,13 +2500,13 @@
 
         <name>tagContact</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.contact.TagContactTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.contact.TagContactTag</tag-class>
 
         <body-content>empty</body-content>
 
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZActionResultBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZActionResultBean</variable-class>
             <scope>AT_END</scope>
         </variable>
 
@@ -2547,13 +2547,13 @@
 
         <name>getException</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.GetExceptionTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.GetExceptionTag</tag-class>
 
         <body-content>empty</body-content>
 
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZExceptionBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZExceptionBean</variable-class>
             <scope>AT_END</scope>
         </variable>
 
@@ -2580,12 +2580,12 @@
 
         <name>getMailbox</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.GetMailboxTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.GetMailboxTag</tag-class>
 
         <body-content>empty</body-content>
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZMailboxBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZMailboxBean</variable-class>
             <scope>AT_END</scope>
         </variable>
 
@@ -2639,7 +2639,7 @@
 
         <name>getInfoJSON</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.GetInfoJSONTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.GetInfoJSONTag</tag-class>
 
         <body-content>empty</body-content>
         <variable>
@@ -2718,7 +2718,7 @@
 
         <name>calSearchJSON</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.CalSearchJSONTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.CalSearchJSONTag</tag-class>
 
         <body-content>empty</body-content>
         <variable>
@@ -2779,7 +2779,7 @@
 
         <name>getItemInfoJSON</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.GetItemInfoJSONTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.GetItemInfoJSONTag</tag-class>
 
         <body-content>empty</body-content>
         <variable>
@@ -2825,12 +2825,12 @@
 
         <name>getUserAgent</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.GetUserAgentTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.GetUserAgentTag</tag-class>
 
         <body-content>empty</body-content>
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZUserAgentBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZUserAgentBean</variable-class>
             <scope>AT_END</scope>
         </variable>
 
@@ -2855,7 +2855,7 @@
         <tag>
 		<description>Retrieve the favicon set on the domain or local config.</description>
 		<name>getFavIcon</name>
-		<tag-class>com.zimbra.cs.taglib.tag.GetFavIconTag</tag-class>
+		<tag-class>org.zmail.cs.taglib.tag.GetFavIconTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<description>Variable to place fav icon URL.</description>
@@ -2879,12 +2879,12 @@
 
         <name>getDomainInfo</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.GetDomainInfoTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.GetDomainInfoTag</tag-class>
 
         <body-content>empty</body-content>
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.account.Domain</variable-class>
+            <variable-class>org.zmail.cs.account.Domain</variable-class>
             <scope>AT_END</scope>
         </variable>
 
@@ -2920,7 +2920,7 @@
 
         <name>requirePost</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.RequirePostTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.RequirePostTag</tag-class>
 
         <body-content>empty</body-content>
     </tag>
@@ -2930,11 +2930,11 @@
             look at the query strings and compute SearchContext
         </description>
         <name>computeSearchContext</name>
-        <tag-class>com.zimbra.cs.taglib.tag.ComputeSearchContextTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.ComputeSearchContextTag</tag-class>
         <body-content>empty</body-content>
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.tag.SearchContext</variable-class>
+            <variable-class>org.zmail.cs.taglib.tag.SearchContext</variable-class>
             <scope>AT_END</scope>
         </variable>
 
@@ -2977,11 +2977,11 @@
             call saerch conv
         </description>
         <name>searchConv</name>
-        <tag-class>com.zimbra.cs.taglib.tag.conv.SearchConvTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.conv.SearchConvTag</tag-class>
         <body-content>empty</body-content>
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZSearchResultBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZSearchResultBean</variable-class>
             <scope>AT_END</scope>
         </variable>
 
@@ -2999,7 +2999,7 @@
             <name>context</name>
            <required>true</required>
             <rtexprvalue>true</rtexprvalue>
-            <type>com.zimbra.cs.taglib.tag.SearchContext</type>
+            <type>org.zmail.cs.taglib.tag.SearchContext</type>
         </attribute>
         <attribute>
             <description>
@@ -3055,11 +3055,11 @@
             compute next/prev item offset/index based on current context plus index
         </description>
         <name>computeNextPrevItem</name>
-        <tag-class>com.zimbra.cs.taglib.tag.ComputeNextPrevItemTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.ComputeNextPrevItemTag</tag-class>
         <body-content>empty</body-content>
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.NextPrevItemBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.NextPrevItemBean</variable-class>
             <scope>AT_END</scope>
         </variable>
 
@@ -3077,7 +3077,7 @@
             <name>searchResult</name>
            <required>true</required>
             <rtexprvalue>true</rtexprvalue>
-            <type>com.zimbra.cs.taglib.bean.ZSearchResultBean</type>
+            <type>org.zmail.cs.taglib.bean.ZSearchResultBean</type>
         </attribute>
         <attribute>
             <description>
@@ -3097,7 +3097,7 @@
 
         <name>createTag</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.tag.CreateTagTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.tag.CreateTagTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -3137,7 +3137,7 @@
 
         <name>updateTag</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.tag.UpdateTagTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.tag.UpdateTagTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -3173,7 +3173,7 @@
 
         <name>modifyTagColor</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.tag.ModifyTagColorTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.tag.ModifyTagColorTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -3202,7 +3202,7 @@
 
         <name>renameTag</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.tag.RenameTagTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.tag.RenameTagTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -3231,7 +3231,7 @@
 
         <name>deleteTag</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.tag.DeleteTagTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.tag.DeleteTagTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -3253,7 +3253,7 @@
 
         <name>markTagRead</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.tag.MarkTagReadTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.tag.MarkTagReadTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -3275,13 +3275,13 @@
 
         <name>createFolder</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.folder.CreateFolderTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.folder.CreateFolderTag</tag-class>
 
         <body-content>empty</body-content>
 
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZFolderBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZFolderBean</variable-class>
             <scope>AT_BEGIN</scope>
         </variable>
 
@@ -3343,13 +3343,13 @@
 
         <name>createMountpoint</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.folder.CreateMountpointTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.folder.CreateMountpointTag</tag-class>
 
         <body-content>empty</body-content>
 
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZFolderBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZFolderBean</variable-class>
             <scope>AT_BEGIN</scope>
         </variable>
 
@@ -3403,7 +3403,7 @@
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>owner value, either a name (email addresss), or Zimbra account id </description>
+            <description>owner value, either a name (email addresss), or Zmail account id </description>
             <name>owner</name>
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
@@ -3417,7 +3417,7 @@
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>shareditem value, either a path, or Zimbra mail item id </description>
+            <description>shareditem value, either a path, or Zmail mail item id </description>
             <name>shareditem</name>
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
@@ -3432,7 +3432,7 @@
 
         <name>renameFolder</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.folder.RenameFolderTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.folder.RenameFolderTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -3461,7 +3461,7 @@
 
         <name>modifyFolderColor</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.folder.ModifyFolderColorTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.folder.ModifyFolderColorTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -3490,7 +3490,7 @@
 
         <name>modifyFolderUrl</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.folder.ModifyFolderURLTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.folder.ModifyFolderURLTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -3519,7 +3519,7 @@
 
         <name>updateFolder</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.folder.UpdateFolderTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.folder.UpdateFolderTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -3576,7 +3576,7 @@
 
         <name>updateFolderGrant</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.folder.UpdateFolderGrantTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.folder.UpdateFolderGrantTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -3647,7 +3647,7 @@
 
         <name>modifyFolderFreeBusy</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.folder.ModifyFolderFreeBusyTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.folder.ModifyFolderFreeBusyTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -3676,7 +3676,7 @@
 
         <name>moveFolder</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.folder.MoveFolderTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.folder.MoveFolderTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -3705,7 +3705,7 @@
 
         <name>deleteFolder</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.folder.DeleteFolderTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.folder.DeleteFolderTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -3729,7 +3729,7 @@
 
         <name>trashFolder</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.folder.TrashFolderTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.folder.TrashFolderTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -3751,7 +3751,7 @@
 
         <name>markFolderRead</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.folder.MarkFolderReadTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.folder.MarkFolderReadTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -3773,7 +3773,7 @@
 
         <name>checkFolder</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.folder.CheckFolderTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.folder.CheckFolderTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -3804,7 +3804,7 @@
 
         <name>emptyFolder</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.folder.EmptyFolderTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.folder.EmptyFolderTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -3826,7 +3826,7 @@
 
         <name>syncFolder</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.folder.SyncFolderTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.folder.SyncFolderTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -3848,13 +3848,13 @@
 
         <name>createSearchFolder</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.folder.CreateSearchFolderTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.folder.CreateSearchFolderTag</tag-class>
 
         <body-content>empty</body-content>
 
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZFolderBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZFolderBean</variable-class>
             <scope>AT_BEGIN</scope>
         </variable>
 
@@ -3916,7 +3916,7 @@
 
         <name>modifyPrefs</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.ModifyPrefsTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.ModifyPrefsTag</tag-class>
 
         <body-content>scriptless</body-content>
 
@@ -3944,7 +3944,7 @@
 
          <name>pref</name>
 
-         <tag-class>com.zimbra.cs.taglib.tag.PrefTag</tag-class>
+         <tag-class>org.zmail.cs.taglib.tag.PrefTag</tag-class>
 
          <body-content>empty</body-content>
 
@@ -3973,7 +3973,7 @@
 
          <name>redirect</name>
 
-         <tag-class>com.zimbra.cs.taglib.tag.RedirectTag</tag-class>
+         <tag-class>org.zmail.cs.taglib.tag.RedirectTag</tag-class>
 
          <body-content>empty</body-content>
 
@@ -3994,13 +3994,13 @@
 
         <name>filterRule</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.filter.FilterRuleTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.filter.FilterRuleTag</tag-class>
 
         <body-content>scriptless</body-content>
 
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.client.ZFilterRule</variable-class>
+            <variable-class>org.zmail.client.ZFilterRule</variable-class>
             <scope>AT_END</scope>
         </variable>
 
@@ -4043,7 +4043,7 @@
 
         <name>addressBookCondition</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.filter.AddressBookConditionTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.filter.AddressBookConditionTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -4074,7 +4074,7 @@
 
         <name>attachmentExistsCondition</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.filter.AttachmentExistsConditionTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.filter.AttachmentExistsConditionTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -4096,7 +4096,7 @@
 
         <name>bodyCondition</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.filter.BodyConditionTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.filter.BodyConditionTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -4127,7 +4127,7 @@
 
         <name>dateCondition</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.filter.DateConditionTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.filter.DateConditionTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -4158,7 +4158,7 @@
 
         <name>headerCondition</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.filter.HeaderConditionTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.filter.HeaderConditionTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -4199,7 +4199,7 @@
 
         <name>headerExistsCondition</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.filter.HeaderExistsConditionTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.filter.HeaderExistsConditionTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -4231,7 +4231,7 @@
 
         <name>addressCondition</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.filter.AddressConditionTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.filter.AddressConditionTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -4280,7 +4280,7 @@
 
         <name>sizeCondition</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.filter.SizeConditionTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.filter.SizeConditionTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -4311,7 +4311,7 @@
 
         <name>keepAction</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.filter.KeepActionTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.filter.KeepActionTag</tag-class>
         <body-content>empty</body-content>
     </tag>
 
@@ -4322,7 +4322,7 @@
 
         <name>stopAction</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.filter.StopActionTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.filter.StopActionTag</tag-class>
         <body-content>empty</body-content>
     </tag>
 
@@ -4333,7 +4333,7 @@
 
         <name>discardAction</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.filter.DiscardActionTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.filter.DiscardActionTag</tag-class>
         <body-content>empty</body-content>
     </tag>
 
@@ -4344,7 +4344,7 @@
 
         <name>tagAction</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.filter.TagActionTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.filter.TagActionTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -4366,7 +4366,7 @@
 
         <name>fileIntoAction</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.filter.FileIntoActionTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.filter.FileIntoActionTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -4388,7 +4388,7 @@
 
         <name>markAction</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.filter.MarkActionTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.filter.MarkActionTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -4410,7 +4410,7 @@
 
         <name>redirectAction</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.filter.RedirectActionTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.filter.RedirectActionTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -4432,7 +4432,7 @@
 
         <name>createFilterRule</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.filter.CreateFilterRuleTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.filter.CreateFilterRuleTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -4443,7 +4443,7 @@
             <name>rule</name>
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
-            <type>com.zimbra.client.ZFilterRule</type>
+            <type>org.zmail.client.ZFilterRule</type>
         </attribute>
     </tag>
 
@@ -4454,7 +4454,7 @@
 
         <name>modifyFilterRule</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.filter.ModifyFilterRuleTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.filter.ModifyFilterRuleTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -4465,7 +4465,7 @@
             <name>rule</name>
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
-            <type>com.zimbra.client.ZFilterRule</type>
+            <type>org.zmail.client.ZFilterRule</type>
         </attribute>
 
         <attribute>
@@ -4486,7 +4486,7 @@
 
         <name>deleteFilterRule</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.filter.DeleteFilterRuleTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.filter.DeleteFilterRuleTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -4508,7 +4508,7 @@
 
         <name>moveFilterRule</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.filter.MoveFilterRuleTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.filter.MoveFilterRuleTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -4541,7 +4541,7 @@
 
         <name>getValidFolderIds</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.calendar.GetValidFolderIdsTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.calendar.GetValidFolderIdsTag</tag-class>
 
         <body-content>scriptless</body-content>
 
@@ -4553,7 +4553,7 @@
 
         <variable>
             <name-from-attribute>varexception</name-from-attribute>
-            <variable-class>com.zimbra.common.service.ServiceException</variable-class>
+            <variable-class>org.zmail.common.service.ServiceException</variable-class>
             <scope>AT_END</scope>
         </variable>
 
@@ -4562,7 +4562,7 @@
             <name>box</name>
             <required>false</required>
             <rtexprvalue>true</rtexprvalue>
-            <type>com.zimbra.cs.taglib.bean.ZMailboxBean</type>
+            <type>org.zmail.cs.taglib.bean.ZMailboxBean</type>
         </attribute>
 
         <attribute>
@@ -4603,19 +4603,19 @@
 
         <name>getAppointmentSummaries</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.calendar.GetAppointmentSummariesTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.calendar.GetAppointmentSummariesTag</tag-class>
 
         <body-content>scriptless</body-content>
 
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZApptSummariesBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZApptSummariesBean</variable-class>
             <scope>AT_END</scope>
         </variable>
 
         <variable>
             <name-from-attribute>varexception</name-from-attribute>
-            <variable-class>com.zimbra.common.service.ServiceException</variable-class>
+            <variable-class>org.zmail.common.service.ServiceException</variable-class>
             <scope>AT_END</scope>
         </variable>
 
@@ -4666,7 +4666,7 @@
             <name>box</name>
             <required>false</required>
             <rtexprvalue>true</rtexprvalue>
-            <type>com.zimbra.cs.taglib.bean.ZMailboxBean</type>
+            <type>org.zmail.cs.taglib.bean.ZMailboxBean</type>
         </attribute>
 
         <attribute>
@@ -4698,19 +4698,19 @@
 
         <name>getMiniCal</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.calendar.GetMiniCalTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.calendar.GetMiniCalTag</tag-class>
 
         <body-content>scriptless</body-content>
 
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZMiniCalBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZMiniCalBean</variable-class>
             <scope>AT_END</scope>
         </variable>
 
         <variable>
             <name-from-attribute>varexception</name-from-attribute>
-            <variable-class>com.zimbra.common.service.ServiceException</variable-class>
+            <variable-class>org.zmail.common.service.ServiceException</variable-class>
             <scope>AT_END</scope>
         </variable>
 
@@ -4753,7 +4753,7 @@
             <name>box</name>
             <required>false</required>
             <rtexprvalue>true</rtexprvalue>
-            <type>com.zimbra.cs.taglib.bean.ZMailboxBean</type>
+            <type>org.zmail.cs.taglib.bean.ZMailboxBean</type>
         </attribute>
 
         <attribute>
@@ -4775,19 +4775,19 @@
 
         <name>getFreeBusyAppointments</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.calendar.GetFreeBusyAppointmentsTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.calendar.GetFreeBusyAppointmentsTag</tag-class>
 
         <body-content>scriptless</body-content>
 
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZApptSummariesBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZApptSummariesBean</variable-class>
             <scope>AT_END</scope>
         </variable>
 
         <variable>
             <name-from-attribute>varexception</name-from-attribute>
-            <variable-class>com.zimbra.common.service.ServiceException</variable-class>
+            <variable-class>org.zmail.common.service.ServiceException</variable-class>
             <scope>AT_END</scope>
         </variable>
 
@@ -4846,7 +4846,7 @@
             <name>box</name>
             <required>false</required>
             <rtexprvalue>true</rtexprvalue>
-            <type>com.zimbra.cs.taglib.bean.ZMailboxBean</type>
+            <type>org.zmail.cs.taglib.bean.ZMailboxBean</type>
         </attribute>
     </tag>
 
@@ -4856,11 +4856,11 @@
             only return appointments within that range.  
         </description>
         <name>forEachAppoinment</name>
-        <tag-class>com.zimbra.cs.taglib.tag.calendar.ForEachAppointmentTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.calendar.ForEachAppointmentTag</tag-class>
         <body-content>scriptless</body-content>
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.client.ZAppointmentHit</variable-class>
+            <variable-class>org.zmail.client.ZAppointmentHit</variable-class>
             <scope>NESTED</scope>
         </variable>
         <attribute>
@@ -4879,7 +4879,7 @@
             <name>appointments</name>
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
-            <type>com.zimbra.cs.taglib.bean.ZApptSummariesBean</type>
+            <type>org.zmail.cs.taglib.bean.ZApptSummariesBean</type>
         </attribute>
 
         <attribute>
@@ -4904,11 +4904,11 @@
             only return appointments within that range.
         </description>
         <name>apptMultiDayLayout</name>
-        <tag-class>com.zimbra.cs.taglib.tag.calendar.ApptMultiDayLayoutTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.calendar.ApptMultiDayLayoutTag</tag-class>
         <body-content>empty</body-content>
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZApptMultiDayLayoutBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZApptMultiDayLayoutBean</variable-class>
             <scope>AT_END</scope>
         </variable>
         <attribute>
@@ -4927,7 +4927,7 @@
             <name>appointments</name>
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
-            <type>com.zimbra.cs.taglib.bean.ZApptSummariesBean</type>
+            <type>org.zmail.cs.taglib.bean.ZApptSummariesBean</type>
         </attribute>
 
         <attribute>
@@ -5027,7 +5027,7 @@
 
         <name>clearApptSummaryCache</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.ClearApptSummaryCacheTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.ClearApptSummaryCacheTag</tag-class>
 
         <body-content>empty</body-content>
     </tag>
@@ -5035,11 +5035,11 @@
     <tag>
          <description>create/modify an appointment</description>
          <name>saveAppointment</name>
-         <tag-class>com.zimbra.cs.taglib.tag.calendar.SaveAppointmentTag</tag-class>
+         <tag-class>org.zmail.cs.taglib.tag.calendar.SaveAppointmentTag</tag-class>
          <body-content>empty</body-content>
          <variable>
              <name-from-attribute>var</name-from-attribute>
-             <variable-class>com.zimbra.client.ZMailbox.ZAppointmentResult</variable-class>
+             <variable-class>org.zmail.client.ZMailbox.ZAppointmentResult</variable-class>
              <scope>AT_END</scope>
          </variable>
          <attribute>
@@ -5056,7 +5056,7 @@
               <name>compose</name>
               <required>false</required>
               <rtexprvalue>true</rtexprvalue>
-              <type>com.zimbra.cs.taglib.bean.ZMessageComposeBean</type>
+              <type>org.zmail.cs.taglib.bean.ZMessageComposeBean</type>
           </attribute>
         <attribute>
              <description>
@@ -5065,14 +5065,14 @@
              <name>message</name>
              <required>false</required>
              <rtexprvalue>true</rtexprvalue>
-             <type>com.zimbra.cs.taglib.bean.ZMessageBean</type>
+             <type>org.zmail.cs.taglib.bean.ZMessageBean</type>
          </attribute>
      </tag>
 
     <tag>
         <description>cancel an appointment</description>
         <name>cancelAppointment</name>
-        <tag-class>com.zimbra.cs.taglib.tag.calendar.CancelAppointmentTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.calendar.CancelAppointmentTag</tag-class>
         <body-content>empty</body-content>
         <attribute>
             <description>
@@ -5081,7 +5081,7 @@
             <name>compose</name>
             <required>false</required>
             <rtexprvalue>true</rtexprvalue>
-            <type>com.zimbra.cs.taglib.bean.ZMessageComposeBean</type>
+            <type>org.zmail.cs.taglib.bean.ZMessageComposeBean</type>
         </attribute>
         <attribute>
             <description>
@@ -5090,7 +5090,7 @@
             <name>message</name>
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
-            <type>com.zimbra.cs.taglib.bean.ZMessageBean</type>
+            <type>org.zmail.cs.taglib.bean.ZMessageBean</type>
         </attribute>
         <attribute>
             <description>
@@ -5109,11 +5109,11 @@
             Retrieves an array of the tasks for a given task list (folder)
         </description>
         <name>retrieveTasks</name>
-        <tag-class>com.zimbra.cs.taglib.tag.RetrieveTasksTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.RetrieveTasksTag</tag-class>
         <body-content>empty</body-content>
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.tag.SearchContext</variable-class>
+            <variable-class>org.zmail.cs.taglib.tag.SearchContext</variable-class>
             <scope>AT_END</scope>
         </variable>
         <attribute>
@@ -5130,7 +5130,7 @@
             <name>tasklist</name>
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
-            <type>com.zimbra.cs.taglib.bean.ZFolderBean</type>
+            <type>org.zmail.cs.taglib.bean.ZFolderBean</type>
         </attribute>
     </tag>
 
@@ -5139,11 +5139,11 @@
     <tag>
          <description>create/modify a task</description>
          <name>saveTask</name>
-         <tag-class>com.zimbra.cs.taglib.tag.task.SaveTaskTag</tag-class>
+         <tag-class>org.zmail.cs.taglib.tag.task.SaveTaskTag</tag-class>
          <body-content>empty</body-content>
          <variable>
              <name-from-attribute>var</name-from-attribute>
-             <variable-class>com.zimbra.client.ZMailbox.ZAppointmentResult</variable-class>
+             <variable-class>org.zmail.client.ZMailbox.ZAppointmentResult</variable-class>
              <scope>AT_END</scope>
          </variable>
          <attribute>
@@ -5160,7 +5160,7 @@
               <name>compose</name>
               <required>false</required>
               <rtexprvalue>true</rtexprvalue>
-              <type>com.zimbra.cs.taglib.bean.ZMessageComposeBean</type>
+              <type>org.zmail.cs.taglib.bean.ZMessageComposeBean</type>
           </attribute>
         <attribute>
              <description>
@@ -5169,14 +5169,14 @@
              <name>message</name>
              <required>false</required>
              <rtexprvalue>true</rtexprvalue>
-             <type>com.zimbra.cs.taglib.bean.ZMessageBean</type>
+             <type>org.zmail.cs.taglib.bean.ZMessageBean</type>
          </attribute>
      </tag>
 
     <tag>
         <description>cancel a task</description>
         <name>cancelTask</name>
-        <tag-class>com.zimbra.cs.taglib.tag.task.CancelTaskTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.task.CancelTaskTag</tag-class>
         <body-content>empty</body-content>
         <attribute>
             <description>
@@ -5185,7 +5185,7 @@
             <name>compose</name>
             <required>false</required>
             <rtexprvalue>true</rtexprvalue>
-            <type>com.zimbra.cs.taglib.bean.ZMessageComposeBean</type>
+            <type>org.zmail.cs.taglib.bean.ZMessageComposeBean</type>
         </attribute>
         <attribute>
             <description>
@@ -5194,7 +5194,7 @@
             <name>message</name>
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
-            <type>com.zimbra.cs.taglib.bean.ZMessageBean</type>
+            <type>org.zmail.cs.taglib.bean.ZMessageBean</type>
         </attribute>
         <attribute>
             <description>
@@ -5209,7 +5209,7 @@
     <tag>
         <description>create a briefcase</description>
         <name>saveBriefcase</name>
-        <tag-class>com.zimbra.cs.taglib.tag.briefcase.SaveBriefcaseTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.briefcase.SaveBriefcaseTag</tag-class>
         <body-content>empty</body-content>
         <variable>
             <name-from-attribute>var</name-from-attribute>
@@ -5230,7 +5230,7 @@
               <name>compose</name>
               <required>false</required>
               <rtexprvalue>true</rtexprvalue>
-              <type>com.zimbra.cs.taglib.bean.ZMessageComposeBean</type>
+              <type>org.zmail.cs.taglib.bean.ZMessageComposeBean</type>
         </attribute>
         <attribute>
              <description>destination folder id</description>
@@ -5246,13 +5246,13 @@
 
         <name>deleteBriefcase</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.briefcase.DeleteBriefcaseTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.briefcase.DeleteBriefcaseTag</tag-class>
 
         <body-content>empty</body-content>
 
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZActionResultBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZActionResultBean</variable-class>
             <scope>AT_END</scope>
         </variable>
 
@@ -5275,16 +5275,16 @@
     <tag>
         <description>get briefcase info</description>
         <name>getBriefcase</name>
-        <tag-class>com.zimbra.cs.taglib.tag.briefcase.GetBriefcaseTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.briefcase.GetBriefcaseTag</tag-class>
         <body-content>empty</body-content>
         <variable>
             <name-from-attribute>varSearch</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZSearchResultBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZSearchResultBean</variable-class>
             <scope>AT_END</scope>
         </variable>
         <variable>
             <name-from-attribute>varFolder</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZFolderBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZFolderBean</variable-class>
             <scope>AT_END</scope>
         </variable>
         <attribute>
@@ -5292,7 +5292,7 @@
             <name>box</name>
             <required>false</required>
             <rtexprvalue>true</rtexprvalue>
-            <type>com.zimbra.cs.taglib.bean.ZMailboxBean</type>
+            <type>org.zmail.cs.taglib.bean.ZMailboxBean</type>
         </attribute>
         <attribute>
             <description>
@@ -5334,11 +5334,11 @@
     <tag>
         <description>get document info</description>
         <name>getDocument</name>
-        <tag-class>com.zimbra.cs.taglib.tag.briefcase.GetDocumentTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.briefcase.GetDocumentTag</tag-class>
         <body-content>empty</body-content>
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZDocumentBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZDocumentBean</variable-class>
             <scope>AT_END</scope>
         </variable>
         <attribute>
@@ -5346,7 +5346,7 @@
             <name>box</name>
             <required>false</required>
             <rtexprvalue>true</rtexprvalue>
-            <type>com.zimbra.cs.taglib.bean.ZMailboxBean</type>
+            <type>org.zmail.cs.taglib.bean.ZMailboxBean</type>
         </attribute>
         <attribute>
         <description>
@@ -5366,7 +5366,7 @@
     <tag>
         <description>get document content</description>
         <name>getDocumentContent</name>
-        <tag-class>com.zimbra.cs.taglib.tag.briefcase.GetDocumentContentTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.briefcase.GetDocumentContentTag</tag-class>
         <body-content>empty</body-content>
         <variable>
             <name-from-attribute>var</name-from-attribute>
@@ -5378,7 +5378,7 @@
             <name>box</name>
             <required>false</required>
             <rtexprvalue>true</rtexprvalue>
-            <type>com.zimbra.cs.taglib.bean.ZMailboxBean</type>
+            <type>org.zmail.cs.taglib.bean.ZMailboxBean</type>
         </attribute>
         <attribute>
             <description>
@@ -5404,7 +5404,7 @@
     <tag>
         <description>Save attachments as documents to a briefcase folder</description>
         <name>saveAttachmentsToBriefcase</name>
-        <tag-class>com.zimbra.cs.taglib.tag.msg.SaveAttachmentsToBriefcaseTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.msg.SaveAttachmentsToBriefcaseTag</tag-class>
         <body-content>empty</body-content>
         <attribute>
              <description>
@@ -5442,13 +5442,13 @@
 
         <name>moveItem</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.item.MoveItemTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.item.MoveItemTag</tag-class>
 
         <body-content>empty</body-content>
 
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZActionResultBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZActionResultBean</variable-class>
             <scope>AT_END</scope>
         </variable>
 
@@ -5494,11 +5494,11 @@
     <tag>
          <description>import contacts</description>
          <name>importContacts</name>
-         <tag-class>com.zimbra.cs.taglib.tag.contact.ImportContactsTag</tag-class>
+         <tag-class>org.zmail.cs.taglib.tag.contact.ImportContactsTag</tag-class>
          <body-content>empty</body-content>
          <variable>
              <name-from-attribute>var</name-from-attribute>
-             <variable-class>com.zimbra.client.ZMailbox.ZImportContactsResult</variable-class>
+             <variable-class>org.zmail.client.ZMailbox.ZImportContactsResult</variable-class>
              <scope>AT_END</scope>
          </variable>
          <attribute>
@@ -5515,7 +5515,7 @@
               <name>uploader</name>
               <required>true</required>
               <rtexprvalue>true</rtexprvalue>
-              <type>com.zimbra.cs.taglib.bean.ZFileUploaderBean</type>
+              <type>org.zmail.cs.taglib.bean.ZFileUploaderBean</type>
           </attribute>
         <attribute>
              <description>
@@ -5540,11 +5540,11 @@
     <tag>
          <description>import appointments</description>
          <name>importAppointments</name>
-         <tag-class>com.zimbra.cs.taglib.tag.calendar.ImportAppointmentsTag</tag-class>
+         <tag-class>org.zmail.cs.taglib.tag.calendar.ImportAppointmentsTag</tag-class>
          <body-content>empty</body-content>
          <variable>
              <name-from-attribute>var</name-from-attribute>
-             <variable-class>com.zimbra.client.ZMailbox.ZImportAppointmentsResult</variable-class>
+             <variable-class>org.zmail.client.ZMailbox.ZImportAppointmentsResult</variable-class>
              <scope>AT_END</scope>
          </variable>
          <attribute>
@@ -5561,7 +5561,7 @@
               <name>uploader</name>
               <required>true</required>
               <rtexprvalue>true</rtexprvalue>
-              <type>com.zimbra.cs.taglib.bean.ZFileUploaderBean</type>
+              <type>org.zmail.cs.taglib.bean.ZFileUploaderBean</type>
           </attribute>
         <attribute>
              <description>
@@ -5590,13 +5590,13 @@
 
         <name>flagItem</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.item.FlagItemTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.item.FlagItemTag</tag-class>
 
         <body-content>empty</body-content>
 
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZActionResultBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZActionResultBean</variable-class>
             <scope>AT_END</scope>
         </variable>
 
@@ -5647,13 +5647,13 @@
 
         <name>tagItem</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.item.TagItemTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.item.TagItemTag</tag-class>
 
         <body-content>empty</body-content>
 
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZActionResultBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZActionResultBean</variable-class>
             <scope>AT_END</scope>
         </variable>
 
@@ -5710,7 +5710,7 @@
 
         <name>bindKey</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.BindKeyTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.BindKeyTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -5779,7 +5779,7 @@
 
 		<name>checkVoiceStatus</name>
 
-		<tag-class>com.zimbra.cs.taglib.tag.voice.CheckVoiceStatusTag</tag-class>
+		<tag-class>org.zmail.cs.taglib.tag.voice.CheckVoiceStatusTag</tag-class>
 
 		<body-content>empty</body-content>
 
@@ -5805,13 +5805,13 @@
 
 		<name>trashVoiceMail</name>
 
-		<tag-class>com.zimbra.cs.taglib.tag.voice.TrashVoiceMailTag</tag-class>
+		<tag-class>org.zmail.cs.taglib.tag.voice.TrashVoiceMailTag</tag-class>
 
 		<body-content>empty</body-content>
 
 		<variable>
 			<name-from-attribute>var</name-from-attribute>
-			<variable-class>com.zimbra.cs.taglib.bean.ZActionResultBean</variable-class>
+			<variable-class>org.zmail.cs.taglib.bean.ZActionResultBean</variable-class>
 			<scope>AT_END</scope>
 		</variable>
 
@@ -5850,13 +5850,13 @@
 
 		<name>untrashVoiceMail</name>
 
-		<tag-class>com.zimbra.cs.taglib.tag.voice.UntrashVoiceMailTag</tag-class>
+		<tag-class>org.zmail.cs.taglib.tag.voice.UntrashVoiceMailTag</tag-class>
 
 		<body-content>empty</body-content>
 
 		<variable>
 			<name-from-attribute>var</name-from-attribute>
-			<variable-class>com.zimbra.cs.taglib.bean.ZActionResultBean</variable-class>
+			<variable-class>org.zmail.cs.taglib.bean.ZActionResultBean</variable-class>
 			<scope>AT_END</scope>
 		</variable>
 
@@ -5895,13 +5895,13 @@
 
         <name>emptyVoiceMailTrash</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.voice.EmptyVoiceMailTrashTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.voice.EmptyVoiceMailTrashTag</tag-class>
 
         <body-content>empty</body-content>
 
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZActionResultBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZActionResultBean</variable-class>
             <scope>AT_END</scope>
         </variable>
 
@@ -5940,13 +5940,13 @@
 
         <name>markVoiceMailHeard</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.voice.MarkVoiceMailHeardTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.voice.MarkVoiceMailHeardTag</tag-class>
 
         <body-content>empty</body-content>
 
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZActionResultBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZActionResultBean</variable-class>
             <scope>AT_END</scope>
         </variable>
 
@@ -5994,7 +5994,7 @@
 
         <name>uploadVoiceMail</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.voice.UploadVoiceMailTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.voice.UploadVoiceMailTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -6039,13 +6039,13 @@
 
         <name>createCallFeatures</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.voice.CreateCallFeaturesTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.voice.CreateCallFeaturesTag</tag-class>
 
         <body-content>empty</body-content>
 
         <variable>
             <name-from-attribute>var</name-from-attribute>
-            <variable-class>com.zimbra.cs.taglib.bean.ZCallFeaturesBean</variable-class>
+            <variable-class>org.zmail.cs.taglib.bean.ZCallFeaturesBean</variable-class>
             <scope>AT_END</scope>
         </variable>
 
@@ -6146,7 +6146,7 @@
 
         <name>phone</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.voice.PhoneTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.voice.PhoneTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -6202,7 +6202,7 @@
 
         <name>modifyCallFeatures</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.voice.ModifyCallFeaturesTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.voice.ModifyCallFeaturesTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -6468,7 +6468,7 @@
 
         <name>addToRejectFeature</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.voice.AddToRejectFeatureTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.voice.AddToRejectFeatureTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -6536,7 +6536,7 @@
 
         <name>addToForwardFeature</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.voice.AddToForwardFeatureTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.voice.AddToForwardFeatureTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -6606,7 +6606,7 @@
 
         <name>listObject</name>
 
-        <tag-class>com.zimbra.cs.taglib.tag.voice.ListObjectTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.voice.ListObjectTag</tag-class>
 
         <body-content>empty</body-content>
 
@@ -6712,7 +6712,7 @@
             Determines if a given locale tag is a valid available locale
         </description>
         <name>getValidLocale</name>
-        <tag-class>com.zimbra.cs.taglib.tag.i18n.GetValidLocaleTag</tag-class>
+        <tag-class>org.zmail.cs.taglib.tag.i18n.GetValidLocaleTag</tag-class>
         <body-content>empty</body-content>
         <attribute>
             <description>
@@ -6748,7 +6748,7 @@
 		  the bundle configuration variable
 	  </description>
 	  <name>setBundle</name>
-	  <tag-class>com.zimbra.cs.taglib.tag.i18n.SetBundleTag</tag-class>
+	  <tag-class>org.zmail.cs.taglib.tag.i18n.SetBundleTag</tag-class>
 	  <body-content>empty</body-content>
 	  <attribute>
 		  <description>
@@ -6789,7 +6789,7 @@
 		  Stores the given locale in the locale configuration variable
 	  </description>
 	  <name>setLocale</name>
-	  <tag-class>com.zimbra.cs.taglib.tag.i18n.SetLocaleTag</tag-class>
+	  <tag-class>org.zmail.cs.taglib.tag.i18n.SetLocaleTag</tag-class>
 	  <body-content>empty</body-content>
 	  <attribute>
 		  <description>
@@ -6831,7 +6831,7 @@
 		  Maps key to localized message and performs parametric replacement
 	  </description>
 	  <name>message</name>
-	  <tag-class>com.zimbra.cs.taglib.tag.i18n.MessageTag</tag-class>
+	  <tag-class>org.zmail.cs.taglib.tag.i18n.MessageTag</tag-class>
 	  <body-content>JSP</body-content>
 	  <attribute>
 		  <description>
@@ -6874,7 +6874,7 @@
 		  &lt;message&gt; tag
 	  </description>
 	  <name>param</name>
-	  <tag-class>com.zimbra.cs.taglib.tag.i18n.ParamTag</tag-class>
+	  <tag-class>org.zmail.cs.taglib.tag.i18n.ParamTag</tag-class>
 	  <body-content>JSP</body-content>
 	  <attribute>
 		  <description>
@@ -6920,15 +6920,15 @@
     <function>
         <description>Fetch the group member, given the id of the contact</description>
         <name>groupMemberById</name>
-        <function-class>com.zimbra.cs.taglib.bean.ZContactBean</function-class>
-        <function-signature>com.zimbra.cs.taglib.bean.ZContactBean getGroupMemberById(com.zimbra.cs.taglib.bean.ZContactBean, java.lang.String)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.ZContactBean</function-class>
+        <function-signature>org.zmail.cs.taglib.bean.ZContactBean getGroupMemberById(org.zmail.cs.taglib.bean.ZContactBean, java.lang.String)</function-signature>
     </function>
 
     <function>
         <description>Used to determine if any of the specified fields are set in a contact</description>
         <name>anySet</name>
-        <function-class>com.zimbra.cs.taglib.bean.ZContactBean</function-class>
-        <function-signature>boolean anySet(com.zimbra.cs.taglib.bean.ZContactBean,java.lang.String)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.ZContactBean</function-class>
+        <function-signature>boolean anySet(org.zmail.cs.taglib.bean.ZContactBean,java.lang.String)</function-signature>
         <example>
                         <![CDATA[ ]]>
 
@@ -6945,92 +6945,92 @@
 
     <function>
         <name>equalsIgnoreCase</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>boolean equalsIgnoreCase(java.lang.String,java.lang.String)</function-signature>
     </function>
 
     <function>
         <name>truncate</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.lang.String truncate(java.lang.String,int,boolean)</function-signature>
     </function>
 
     <function>
         <name>truncateFixed</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.lang.String truncateFixed(java.lang.String,int,boolean)</function-signature>
     </function>
 
     <function>
         <name>joinLines</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.lang.String joinLines(java.lang.String,java.lang.String)</function-signature>
     </function>
 
     <function>
         <name>displaySize</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.lang.String displaySize(javax.servlet.jsp.PageContext, long)</function-signature>
     </function>
 
     <function>
         <name>displaySizeFractions</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.lang.String displaySize(javax.servlet.jsp.PageContext, long, int)</function-signature>
     </function>
 
     <function>
         <name>displaySizePercentage</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.lang.String displaySizePercent(long, long)</function-signature>
     </function>
 
     <function>
         <name>displayDuration</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.lang.String
             displayDuration(javax.servlet.jsp.PageContext,long)</function-signature>
     </function>
 
     <function>
         <name>displayMsgDate</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.lang.String
             displayMsgDate(javax.servlet.jsp.PageContext,java.util.Date)</function-signature>
     </function>
 
     <function>
         <name>displayVoiceDate</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.lang.String
             displayVoiceDate(javax.servlet.jsp.PageContext,java.util.Date)</function-signature>
     </function>
 
     <function>
         <name>displayDate</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.lang.String
             displayDate(javax.servlet.jsp.PageContext,java.util.Date)</function-signature>
     </function>
 
     <function>
         <name>getTags</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>java.util.List&lt;com.zimbra.cs.taglib.bean.ZTagBean&gt;
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>java.util.List&lt;org.zmail.cs.taglib.bean.ZTagBean&gt;
             getTags(javax.servlet.jsp.PageContext,java.lang.String)</function-signature>
     </function>
 
     <function>
         <name>getAvailableTags</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>java.util.List&lt;com.zimbra.cs.taglib.bean.ZTagBean&gt;
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>java.util.List&lt;org.zmail.cs.taglib.bean.ZTagBean&gt;
             getAvailableTags(javax.servlet.jsp.PageContext,java.lang.String,boolean)
         </function-signature>
     </function>
 
     <function>
         <name>getDateFormatSymbols</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.text.DateFormatSymbols
             getDateFormatSymbols(java.util.Locale,javax.servlet.jsp.PageContext)
         </function-signature>
@@ -7038,7 +7038,7 @@
 
     <function>
         <name>getTagNames</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.lang.String
             getTagNames(javax.servlet.jsp.PageContext,java.lang.String)</function-signature>
     </function>
@@ -7046,818 +7046,818 @@
 
     <function>
         <name>getTagName</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.lang.String
             getTagName(javax.servlet.jsp.PageContext,java.lang.String)</function-signature>
     </function>
 
     <function>
         <name>getTag</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>com.zimbra.cs.taglib.bean.ZTagBean getTag(javax.servlet.jsp.PageContext,java.lang.String)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>org.zmail.cs.taglib.bean.ZTagBean getTag(javax.servlet.jsp.PageContext,java.lang.String)</function-signature>
     </function>
 
     <function>
         <name>getTruncatedFolderName</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.lang.String
             getTruncatedFolderName(javax.servlet.jsp.PageContext,java.lang.String,int,boolean)</function-signature>
     </function>
 
     <function>
         <name>getFolderName</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.lang.String
             getFolderName(javax.servlet.jsp.PageContext,java.lang.String)</function-signature>
     </function>
 
     <function>
         <name>getUncookedFolderName</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.lang.String
             getUncookedFolderName(javax.servlet.jsp.PageContext,java.lang.String)</function-signature>
     </function>
 
     <function>
         <name>getFolderPath</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.lang.String
             getFolderPath(javax.servlet.jsp.PageContext,java.lang.String)</function-signature>
     </function>
 
     <function>
         <name>getTruncatedFolderPath</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.lang.String
             getTruncatedFolderPath(javax.servlet.jsp.PageContext,java.lang.String,int,boolean)</function-signature>
     </function>
 
     <function>
         <name>getFolder</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>
-            com.zimbra.cs.taglib.bean.ZFolderBean getFolder(javax.servlet.jsp.PageContext,java.lang.String)
+            org.zmail.cs.taglib.bean.ZFolderBean getFolder(javax.servlet.jsp.PageContext,java.lang.String)
         </function-signature>
     </function>
 
     <function>
         <name>repeatString</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.lang.String repeatString(java.lang.String, int)</function-signature>
     </function>
 
     <function>
         <name>encodeHtmlAttr</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.lang.String encodeHtmlAttr(java.lang.String)</function-signature>
     </function>
 
     <function>
         <name>getEnvString</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.lang.String getEnvString(java.lang.String, java.lang.String)</function-signature>
     </function>
 
     <function>
         <name>getUrlRand</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.lang.String getUrlRand()</function-signature>
     </function>
 
     <function>
         <name>getPreLoginRedirectUrl</name>
-        <function-class>com.zimbra.cs.taglib.ZJspSession</function-class>
+        <function-class>org.zmail.cs.taglib.ZJspSession</function-class>
         <function-signature>java.lang.String getPreLoginRedirectUrl(javax.servlet.jsp.PageContext, java.lang.String)</function-signature>
     </function>
 
     <function>
         <name>getChangePasswordUrl</name>
-        <function-class>com.zimbra.cs.taglib.ZJspSession</function-class>
+        <function-class>org.zmail.cs.taglib.ZJspSession</function-class>
         <function-signature>java.lang.String getChangePasswordUrl(javax.servlet.jsp.PageContext,java.lang.String)</function-signature>
     </function>
 
     <function>
         <name>isAddressBookCondition</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>boolean isAddressBook(com.zimbra.client.ZFilterCondition)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>boolean isAddressBook(org.zmail.client.ZFilterCondition)</function-signature>
     </function>
 
 	<function>
 		<name>isProvOrAttr</name>
-		<function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+		<function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>boolean isProvOrAttr(javax.servlet.jsp.PageContext, java.lang.String)</function-signature>
 	</function>
 
     <function>
         <name>getAddressBook</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>com.zimbra.client.ZFilterCondition.ZAddressBookCondition getAddressBook(com.zimbra.client.ZFilterCondition)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>org.zmail.client.ZFilterCondition.ZAddressBookCondition getAddressBook(org.zmail.client.ZFilterCondition)</function-signature>
     </function>
 
     <function>
         <name>isAddressCondition</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>boolean isAddress(com.zimbra.client.ZFilterCondition)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>boolean isAddress(org.zmail.client.ZFilterCondition)</function-signature>
     </function>
 
     <function>
         <name>getAddress</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>com.zimbra.client.ZFilterCondition.ZAddressCondition getAddress(com.zimbra.client.ZFilterCondition)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>org.zmail.client.ZFilterCondition.ZAddressCondition getAddress(org.zmail.client.ZFilterCondition)</function-signature>
     </function>
 
     <function>
         <name>isBodyCondition</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>boolean isBody(com.zimbra.client.ZFilterCondition)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>boolean isBody(org.zmail.client.ZFilterCondition)</function-signature>
     </function>
 
     <function>
         <name>getBody</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>com.zimbra.client.ZFilterCondition.ZBodyCondition getBody(com.zimbra.client.ZFilterCondition)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>org.zmail.client.ZFilterCondition.ZBodyCondition getBody(org.zmail.client.ZFilterCondition)</function-signature>
     </function>
 
     <function>
         <name>isSizeCondition</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>boolean isSize(com.zimbra.client.ZFilterCondition)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>boolean isSize(org.zmail.client.ZFilterCondition)</function-signature>
     </function>
 
     <function>
         <name>getSize</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>com.zimbra.client.ZFilterCondition.ZSizeCondition getSize(com.zimbra.client.ZFilterCondition)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>org.zmail.client.ZFilterCondition.ZSizeCondition getSize(org.zmail.client.ZFilterCondition)</function-signature>
     </function>
 
     <function>
         <name>isDateCondition</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>boolean isDate(com.zimbra.client.ZFilterCondition)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>boolean isDate(org.zmail.client.ZFilterCondition)</function-signature>
     </function>
 
     <function>
         <name>getDate</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>com.zimbra.client.ZFilterCondition.ZDateCondition getDate(com.zimbra.client.ZFilterCondition)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>org.zmail.client.ZFilterCondition.ZDateCondition getDate(org.zmail.client.ZFilterCondition)</function-signature>
     </function>
 
     <function>
         <name>isHeaderCondition</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>boolean isHeader(com.zimbra.client.ZFilterCondition)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>boolean isHeader(org.zmail.client.ZFilterCondition)</function-signature>
     </function>
 
     <function>
         <name>getHeader</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>com.zimbra.client.ZFilterCondition.ZHeaderCondition getHeader(com.zimbra.client.ZFilterCondition)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>org.zmail.client.ZFilterCondition.ZHeaderCondition getHeader(org.zmail.client.ZFilterCondition)</function-signature>
     </function>
 
     <function>
         <name>isHeaderExistsCondition</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>boolean isHeaderExists(com.zimbra.client.ZFilterCondition)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>boolean isHeaderExists(org.zmail.client.ZFilterCondition)</function-signature>
     </function>
 
     <function>
         <name>getHeaderExists</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>com.zimbra.client.ZFilterCondition.ZHeaderExistsCondition getHeaderExists(com.zimbra.client.ZFilterCondition)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>org.zmail.client.ZFilterCondition.ZHeaderExistsCondition getHeaderExists(org.zmail.client.ZFilterCondition)</function-signature>
     </function>
 
     <function>
         <name>isAttachmentExistsCondition</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>boolean isAttachmentExists(com.zimbra.client.ZFilterCondition)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>boolean isAttachmentExists(org.zmail.client.ZFilterCondition)</function-signature>
     </function>
 
     <function>
         <name>getAttachmentExists</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>com.zimbra.client.ZFilterCondition.ZAttachmentExistsCondition getAttachmentExists(com.zimbra.client.ZFilterCondition)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>org.zmail.client.ZFilterCondition.ZAttachmentExistsCondition getAttachmentExists(org.zmail.client.ZFilterCondition)</function-signature>
     </function>
 
     <function>
         <name>isCollection</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>boolean isCollection(java.lang.Object)</function-signature>
     </function>
 
     <function>
         <name>isKeepAction</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>boolean isKeep(com.zimbra.client.ZFilterAction)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>boolean isKeep(org.zmail.client.ZFilterAction)</function-signature>
     </function>
 
     <function>
         <name>isStopAction</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>boolean isStop(com.zimbra.client.ZFilterAction)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>boolean isStop(org.zmail.client.ZFilterAction)</function-signature>
     </function>
 
     <function>
         <name>isDiscardAction</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>boolean isDiscard(com.zimbra.client.ZFilterAction)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>boolean isDiscard(org.zmail.client.ZFilterAction)</function-signature>
     </function>
 
     <function>
         <name>isFileIntoAction</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>boolean isFileInto(com.zimbra.client.ZFilterAction)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>boolean isFileInto(org.zmail.client.ZFilterAction)</function-signature>
     </function>
 
     <function>
         <name>isTagAction</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>boolean isTag(com.zimbra.client.ZFilterAction)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>boolean isTag(org.zmail.client.ZFilterAction)</function-signature>
     </function>
 
     <function>
         <name>isFlagAction</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>boolean isFlag(com.zimbra.client.ZFilterAction)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>boolean isFlag(org.zmail.client.ZFilterAction)</function-signature>
     </function>
 
     <function>
         <name>isRedirectAction</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>boolean isRedirect(com.zimbra.client.ZFilterAction)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>boolean isRedirect(org.zmail.client.ZFilterAction)</function-signature>
     </function>
 
     <function>
         <name>isDiscardActionFilter</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>boolean isDiscardFilter(com.zimbra.client.ZFilterRule)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>boolean isDiscardFilter(org.zmail.client.ZFilterRule)</function-signature>
     </function>
 
     <function>
         <name>getTagAction</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>com.zimbra.client.ZFilterAction.ZTagAction getTag(com.zimbra.client.ZFilterAction)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>org.zmail.client.ZFilterAction.ZTagAction getTag(org.zmail.client.ZFilterAction)</function-signature>
     </function>
 
     <function>
         <name>getFlagAction</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>com.zimbra.client.ZFilterAction.ZMarkAction getFlag(com.zimbra.client.ZFilterAction)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>org.zmail.client.ZFilterAction.ZMarkAction getFlag(org.zmail.client.ZFilterAction)</function-signature>
     </function>
 
     <function>
         <name>getRedirectAction</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>com.zimbra.client.ZFilterAction.ZRedirectAction getRedirect(com.zimbra.client.ZFilterAction)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>org.zmail.client.ZFilterAction.ZRedirectAction getRedirect(org.zmail.client.ZFilterAction)</function-signature>
     </function>
 
     <function>
         <name>getFileIntoAction</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>com.zimbra.client.ZFilterAction.ZFileIntoAction getFileInto(com.zimbra.client.ZFilterAction)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>org.zmail.client.ZFilterAction.ZFileIntoAction getFileInto(org.zmail.client.ZFilterAction)</function-signature>
     </function>
 
     <function>
         <name>getFirstDayOfMonthView</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.util.Calendar getFirstDayOfMonthView(java.util.Calendar,long)</function-signature>
     </function>
 
     <function>
         <name>getFirstDayOfMultiDayView</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.util.Calendar getFirstDayOfMultiDayView(java.util.Calendar,long,java.lang.String)</function-signature>
     </function>
 
     <function>
         <name>getStartOfMultiDayView</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.util.Calendar getStartOfMultiDayView(java.util.Calendar,long,java.lang.String)</function-signature>
     </function>
 
     <function>
         <name>getCurrentDay</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.util.Calendar getCurrentDay(java.util.Calendar)</function-signature>
     </function>
 
     <function>
         <name>getNextDay</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>void getNextDay(java.util.Calendar)</function-signature>
     </function>
 
     <function>
         <name>addDay</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.util.Calendar addDay(java.util.Calendar,int)</function-signature>
     </function>
 
     <function>
         <name>addMonth</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.util.Calendar addMonth(java.util.Calendar,int)</function-signature>
     </function>
 
     <function>
         <name>addYear</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.util.Calendar addYear(java.util.Calendar,int)</function-signature>
     </function>
 
     <function>
         <name>getCalendar</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.util.Calendar getCalendar(long, java.util.TimeZone)</function-signature>
     </function>
 
     <function>
         <name>getCalendarMidnight</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.util.Calendar getCalendarMidnight(long, java.util.TimeZone)</function-signature>
     </function>
 
     <function>
         <name>getToday</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.util.Calendar getToday(java.util.TimeZone)</function-signature>
     </function>
 
     <function>
         <name>getTodayHour</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.util.Calendar getTodayHour(int, java.util.TimeZone)</function-signature>
     </function>
 
     <function>
         <name>getCurrentTime</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.util.Calendar getCurrentTime(java.util.TimeZone)</function-signature>
     </function>
 
     <function>
         <name>isSameDate</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>boolean isSameDate(java.util.Calendar,java.util.Calendar)</function-signature>
     </function>
 
     <function>
         <name>isSameMonth</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>boolean isSameMonth(java.util.Calendar,java.util.Calendar)</function-signature>
     </function>
 
     <function>
         <name>getNumDays</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>int getNumDays(java.util.Calendar,java.util.Calendar)</function-signature>
     </function>
 
     <function>
         <name>getYear</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>int getYear(java.util.Calendar)</function-signature>
     </function>
 
     <function>
         <name>getMonth</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>int getMonth(java.util.Calendar)</function-signature>
     </function>
 
     <function>
         <name>getDay</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>int getDay(java.util.Calendar)</function-signature>
     </function>
 
     <function>
         <name>getDayOfWeek</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>int getDayOfWeek(java.util.Calendar)</function-signature>
     </function>
 
     <function>
         <name>relativeDay</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.util.Calendar relativeDay(java.util.Calendar,int)</function-signature>
     </function>
 
     <function>
         <name>getCheckedCalendarFolderIds</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>java.lang.String getCheckedCalendarFolderIds(com.zimbra.cs.taglib.bean.ZMailboxBean)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>java.lang.String getCheckedCalendarFolderIds(org.zmail.cs.taglib.bean.ZMailboxBean)</function-signature>
     </function>
 
     <function>
         <name>getCanonicalFolderIds</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>java.lang.String getCanonicalFolderIds(com.zimbra.cs.taglib.bean.ZMailboxBean, java.lang.String)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>java.lang.String getCanonicalFolderIds(org.zmail.cs.taglib.bean.ZMailboxBean, java.lang.String)</function-signature>
     </function>
 
     <function>
         <name>getWorkDays</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.util.List&lt;java.lang.Boolean&gt; getWorkDays(java.lang.String)</function-signature>
     </function>
 
     <function>
         <name>generateWorkWeek</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.lang.String generateWorkWeek(java.lang.String, java.lang.String)</function-signature>
     </function>
 
     <function>
         <name>convertCalWorkHours</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.lang.String convertCalWorkHours(java.lang.String)</function-signature>
     </function>
 
     <function>
         <name>hasAnyAppointments</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>boolean hasAnyAppointments(com.zimbra.cs.taglib.bean.ZApptSummariesBean,long,long)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>boolean hasAnyAppointments(org.zmail.cs.taglib.bean.ZApptSummariesBean,long,long)</function-signature>
     </function>
 
     <function>
         <name>MSECS_PER_MINUTE</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>long MSECS_PER_MINUTE()</function-signature>
     </function>
 
     <function>
         <name>MSECS_PER_HOUR</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>long MSECS_PER_HOUR()</function-signature>
     </function>
 
     <function>
 		<name>getCanonicalId</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
 		<function-signature>java.lang.String getCanonicalId(java.util.TimeZone)</function-signature>
 	</function>
 
     <function>
         <name>getFolderStyleColor</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.lang.String getFolderStyleColor(java.lang.String,java.lang.String)</function-signature>
     </function>
 
     <function>
         <name>getFolderRgbColor</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.lang.String getFolderRgbColor(java.lang.String,java.lang.String)</function-signature>
     </function>
 
     <function>
             <name>getFolderRgbColorMsg</name>
-            <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+            <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
             <function-signature>java.lang.String getFolderRgbColorMsg(java.lang.String,java.lang.String)</function-signature>
     </function>
 
     <function>
         <name>stripHtmlComments</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.lang.String stripHtmlComments(java.lang.String)</function-signature>
     </function>
 
     <function>
         <name>getPartHtmlContent</name>
-        <function-class>com.zimbra.cs.taglib.bean.ZMessageBean</function-class>
-        <function-signature>java.lang.String getHtmlContent(com.zimbra.cs.taglib.bean.ZMimePartBean,com.zimbra.cs.taglib.bean.ZMessageBean)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.ZMessageBean</function-class>
+        <function-signature>java.lang.String getHtmlContent(org.zmail.cs.taglib.bean.ZMimePartBean,org.zmail.cs.taglib.bean.ZMessageBean)</function-signature>
     </function>
 
     <function>
         <name>getAdditionalBodies</name>
-        <function-class>com.zimbra.cs.taglib.bean.ZMessageBean</function-class>
-        <function-signature>java.util.List&lt;com.zimbra.cs.taglib.bean.ZMimePartBean&gt; getAdditionalBodies(com.zimbra.cs.taglib.bean.ZMimePartBean,com.zimbra.cs.taglib.bean.ZMessageBean)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.ZMessageBean</function-class>
+        <function-signature>java.util.List&lt;org.zmail.cs.taglib.bean.ZMimePartBean&gt; getAdditionalBodies(org.zmail.cs.taglib.bean.ZMimePartBean,org.zmail.cs.taglib.bean.ZMessageBean)</function-signature>
     </function>
 
     <function>
         <name>getPart</name>
-        <function-class>com.zimbra.cs.taglib.bean.ZMessageBean</function-class>
-        <function-signature>com.zimbra.cs.taglib.bean.ZMimePartBean getPart(com.zimbra.cs.taglib.bean.ZMessageBean,java.lang.String)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.ZMessageBean</function-class>
+        <function-signature>org.zmail.cs.taglib.bean.ZMimePartBean getPart(org.zmail.cs.taglib.bean.ZMessageBean,java.lang.String)</function-signature>
     </function>
 
     <function>
         <name>actionSet</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>boolean actionSet(java.util.Map,java.lang.String)</function-signature>
     </function>
 
     <function>
         <name>isSameTimeZone</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>boolean isSameTimeZone(java.lang.String,java.lang.String)</function-signature>
     </function>
 
     <function>
         <name>getTimeZone</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.util.TimeZone getTimeZone(java.lang.String)</function-signature>
     </function>
 
     <function>
         <name>setDayOfWeek</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>void setDayOfWeek(java.util.Calendar,int)</function-signature>
     </function>
 
     <function>
         <name>setMonth</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>void setMonth(java.util.Calendar,int)</function-signature>
     </function>
 
     <function>
         <name>getRepeatBlurb</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>java.lang.String getRepeatBlurb(com.zimbra.client.ZSimpleRecurrence,javax.servlet.jsp.PageContext,java.util.TimeZone,java.util.Date)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>java.lang.String getRepeatBlurb(org.zmail.client.ZSimpleRecurrence,javax.servlet.jsp.PageContext,java.util.TimeZone,java.util.Date)</function-signature>
     </function>
 
     <function>
         <name>getApptDateBlurb</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.lang.String getApptDateBlurb(javax.servlet.jsp.PageContext,java.util.TimeZone,long,long,boolean)</function-signature>
     </function>
 
     <function>
         <name>getMyAttendee</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>com.zimbra.client.ZInvite.ZAttendee getMyAttendee(com.zimbra.client.ZInvite,com.zimbra.cs.taglib.bean.ZMailboxBean)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>org.zmail.client.ZInvite.ZAttendee getMyAttendee(org.zmail.client.ZInvite,org.zmail.cs.taglib.bean.ZMailboxBean)</function-signature>
     </function>
 
     <function>
         <name>clearMessageCache</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>void clearMessageCache(com.zimbra.cs.taglib.bean.ZMailboxBean)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>void clearMessageCache(org.zmail.cs.taglib.bean.ZMailboxBean)</function-signature>
     </function>
 
     <function>
         <name>clearContactCache</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>void clearContactCache(com.zimbra.cs.taglib.bean.ZMailboxBean)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>void clearContactCache(org.zmail.cs.taglib.bean.ZMailboxBean)</function-signature>
     </function>
 
      <function>
         <name>clearApptSummaryCache</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>void clearApptSummaryCache(com.zimbra.cs.taglib.bean.ZMailboxBean)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>void clearApptSummaryCache(org.zmail.cs.taglib.bean.ZMailboxBean)</function-signature>
     </function>
 
     <function>
         <name>refreshPrefs</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>void refreshPrefs(com.zimbra.cs.taglib.bean.ZMailboxBean)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>void refreshPrefs(org.zmail.cs.taglib.bean.ZMailboxBean)</function-signature>
     </function>
 
     <function>
         <name>hasShareMountPoint</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>boolean hasShareMountPoint(com.zimbra.cs.taglib.bean.ZMailboxBean,com.zimbra.cs.taglib.bean.ZMessageBean)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>boolean hasShareMountPoint(org.zmail.cs.taglib.bean.ZMailboxBean,org.zmail.cs.taglib.bean.ZMessageBean)</function-signature>
     </function>
 
     <function>
         <name>jsEncode</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.lang.String jsEncode(java.lang.String)</function-signature>
     </function>
 
     <function>
         <name>getVoiceFolderQuery</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>java.lang.String getVoiceFolderQuery(com.zimbra.cs.taglib.bean.ZFolderBean)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>java.lang.String getVoiceFolderQuery(org.zmail.cs.taglib.bean.ZFolderBean)</function-signature>
     </function>
 
     <function>
         <name>getVoiceFolderType</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>java.lang.String getVoiceFolderType(com.zimbra.cs.taglib.bean.ZFolderBean)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>java.lang.String getVoiceFolderType(org.zmail.cs.taglib.bean.ZFolderBean)</function-signature>
     </function>
 
     <function>
         <name>getVoiceFolderName</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>java.lang.String getVoiceFolderName(javax.servlet.jsp.PageContext,com.zimbra.cs.taglib.bean.ZFolderBean)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>java.lang.String getVoiceFolderName(javax.servlet.jsp.PageContext,org.zmail.cs.taglib.bean.ZFolderBean)</function-signature>
     </function>
 
     <function>
         <name>getPhoneFromVoiceQuery</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.lang.String getPhoneFromVoiceQuery(java.lang.String)</function-signature>
     </function>
 
     <function>
         <name>getPhoneDisplay</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.lang.String getPhoneDisplay(java.lang.String)</function-signature>
     </function>
 
     <function>
         <name>deserializeVoiceMailItemHit</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>com.zimbra.cs.taglib.bean.ZVoiceMailItemHitBean
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>org.zmail.cs.taglib.bean.ZVoiceMailItemHitBean
             deserializeVoiceMailItemHit(java.lang.String,java.lang.String)
         </function-signature>
     </function>
 
     <function>
         <name>deserializeVoiceMailItemHits</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>com.zimbra.cs.taglib.bean.ZVoiceMailItemHitBean[]
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>org.zmail.cs.taglib.bean.ZVoiceMailItemHitBean[]
             deserializeVoiceMailItemHits(java.lang.String[],java.lang.String)
         </function-signature>
     </function>
 
     <function>
         <name>deserializeVoiceMailItemIds</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.lang.String deserializeVoiceMailItemIds(java.lang.String[],java.lang.String)</function-signature>
     </function>
 
     <function>
         <name>getFirstPhoneAccount</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>com.zimbra.cs.taglib.bean.ZPhoneAccountBean getFirstPhoneAccount(javax.servlet.jsp.PageContext)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>org.zmail.cs.taglib.bean.ZPhoneAccountBean getFirstPhoneAccount(javax.servlet.jsp.PageContext)</function-signature>
     </function>
 
     <function>
         <name>getPhoneAccount</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>com.zimbra.cs.taglib.bean.ZPhoneAccountBean getPhoneAccount(javax.servlet.jsp.PageContext, java.lang.String)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>org.zmail.cs.taglib.bean.ZPhoneAccountBean getPhoneAccount(javax.servlet.jsp.PageContext, java.lang.String)</function-signature>
     </function>
 
     <function>
         <name>getDisplayCaller</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>java.lang.String getDisplayCaller(javax.servlet.jsp.PageContext, com.zimbra.client.ZPhone)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>java.lang.String getDisplayCaller(javax.servlet.jsp.PageContext, org.zmail.client.ZPhone)</function-signature>
     </function>
 
     <function>
         <name>isValidPhoneNumber</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>boolean isValidPhoneNumber(java.lang.String)</function-signature>
     </function>
 
     <function>
         <name>isValidEmailAddress</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>boolean isValidEmailAddress(java.lang.String)</function-signature>
     </function>
 
     <function>
         <name>isValidEmailAddresses</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>boolean isValidEmailAddresses(java.lang.String)</function-signature>
     </function>
 
     <function>
         <name>isFileAsExplicit</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>boolean isFileAsExplicit(java.lang.String)</function-signature>
     </function>
 
     <function>
         <name>getServerName</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.lang.String getServerName(javax.servlet.jsp.PageContext)</function-signature>
     </function>
 
 	<function>
 		<name>getIsMyCard</name>
-		<function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+		<function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
 		<function-signature>boolean getIsMyCard(javax.servlet.jsp.PageContext,java.lang.String)</function-signature>
 	</function>
 
     <function>
         <name>getYFirstDayOfMonthView</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.util.Calendar getYFirstDayOfMonthView(java.util.Calendar,long)</function-signature>
     </function>
 
 	<function>
         <name>getNumberOfWeeksOfMonth</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>int getNumberOfWeeksOfMonth(java.util.Calendar)</function-signature>
     </function>
 
 	<function>
         <name>getImagePath</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.lang.String getImagePath(javax.servlet.jsp.PageContext, java.lang.String)</function-signature>
     </function>
 
 	<function>
         <name>cook</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.lang.String cook(java.lang.String)</function-signature>
     </function>
 
     <function>
             <name>textToHtml</name>
-            <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+            <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
             <function-signature>java.lang.String textToHtml(java.lang.String)</function-signature>
     </function>
 
     <function>
         <name>unCook</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.lang.String unCook(java.lang.String)</function-signature>
     </function>
 
 	<function>
         <name>cookInt</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>int cookInt(java.lang.String, int)</function-signature>
     </function>
 
     <function>
         <name>getFolderRestURL</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>java.lang.String getFolderRestURL(com.zimbra.cs.taglib.bean.ZMailboxBean,com.zimbra.cs.taglib.bean.ZFolderBean)</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>java.lang.String getFolderRestURL(org.zmail.cs.taglib.bean.ZMailboxBean,org.zmail.cs.taglib.bean.ZFolderBean)</function-signature>
     </function>
 
 	<function>
 		<name>contains</name>
-		<function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+		<function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
 		<function-signature>boolean contains(java.lang.Object,java.lang.Object)</function-signature>
 	</function>
 
     <function>
 		<name>maskRemoteItemId</name>
-		<function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-		<function-signature>java.lang.String maskRemoteItemId(com.zimbra.cs.taglib.bean.ZMailboxBean,java.lang.String,java.lang.String)</function-signature>
+		<function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+		<function-signature>java.lang.String maskRemoteItemId(org.zmail.cs.taglib.bean.ZMailboxBean,java.lang.String,java.lang.String)</function-signature>
 	</function>
 
     <function>
 		<name>unmaskRemoteItemId</name>
-		<function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-		<function-signature>java.lang.String unmaskRemoteItemId(com.zimbra.cs.taglib.bean.ZMailboxBean,java.lang.String)</function-signature>
+		<function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+		<function-signature>java.lang.String unmaskRemoteItemId(org.zmail.cs.taglib.bean.ZMailboxBean,java.lang.String)</function-signature>
 	</function>
 
 	<function>
 		<name>javaLocaleId</name>
-		<function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+		<function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
 		<function-signature>java.lang.String javaLocaleId(java.util.Locale)</function-signature>
 	</function>
 
 	<function>
 		<name>browserLocaleId</name>
-		<function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+		<function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
 		<function-signature>java.lang.String browserLocaleId(java.util.Locale)</function-signature>
 	</function>
 
     <function>
 		<name>yuiCompress</name>
-		<function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+		<function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
 		<function-signature>java.lang.String yuiCompress(java.lang.String,java.lang.String)</function-signature>
 	</function>
 
     <function>
 		<name>replaceAll</name>
-		<function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+		<function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
 		<function-signature>java.lang.String replaceAll(java.lang.String, java.lang.String,java.lang.String)</function-signature>
 	</function>
 
     <function>
         <name>isAllowedUA</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>boolean isAllowedUA(com.zimbra.cs.taglib.bean.ZUserAgentBean, java.lang.String[])</function-signature>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>boolean isAllowedUA(org.zmail.cs.taglib.bean.ZUserAgentBean, java.lang.String[])</function-signature>
     </function>
 
     <function>
         <name>lightenColor</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.lang.String lightenColor(java.lang.String)</function-signature>
     </function>
 
     <function>
         <name>capitalize</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.lang.String capitalize(java.lang.String)</function-signature>
     </function>
 
     <function>
         <name>htmlRubyEncode</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.lang.String htmlRubyEncode(java.lang.String, java.lang.String)</function-signature>
     </function>
 
     <function>
         <name>htmlNewlineEncode</name>
-        <function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+        <function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.lang.String htmlNewlineEncode(java.lang.String)</function-signature>
     </function>
 
     <function>
 		<name>getMailURL</name>
-		<function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
+		<function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
         <function-signature>java.lang.String getMailURL(javax.servlet.jsp.PageContext)</function-signature>
 	</function>
 
     <function>
 		<name>isMailEnabled</name>
-		<function-class>com.zimbra.cs.taglib.bean.BeanUtils</function-class>
-        <function-signature>boolean isMailEnabled(com.zimbra.cs.taglib.bean.ZMailboxBean)</function-signature>
+		<function-class>org.zmail.cs.taglib.bean.BeanUtils</function-class>
+        <function-signature>boolean isMailEnabled(org.zmail.cs.taglib.bean.ZMailboxBean)</function-signature>
 	</function>
 
 </taglib>

@@ -14,7 +14,7 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_mojibake"
+<zimlet name="org_zmail_mojibake"
         version="1.0"
         label="${msg.label}"
         description="${msg.description}">

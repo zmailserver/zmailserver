@@ -30,8 +30,8 @@ UtAjxStringUtil.urlDecode = function() {
 	var invalidURI = AjxStringUtil.urlDecode("%u65E5%u7523");
 	UT.equal(invalidURI, "", "%u65E5%u7523 is not a valid URI return ''");
 	
-	var validURI = AjxStringUtil.urlDecode("http://google.com?q=Zimbra%208");
-	UT.equal(validURI, "http://google.com?q=Zimbra 8");
+	var validURI = AjxStringUtil.urlDecode("http://google.com?q=Zmail%208");
+	UT.equal(validURI, "http://google.com?q=Zmail 8");
 	
 };
 

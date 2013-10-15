@@ -16,7 +16,7 @@ using System;
 using System.Xml;
 
 
-namespace Zimbra.Client.Util
+namespace Zmail.Client.Util
 {
 	public class XmlUtil
 	{

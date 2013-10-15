@@ -320,7 +320,7 @@ UT.test("Group View: Verify contacts query uses is:local", {},
 UT.test("Create Group: Verify group is in alphabet bar", {
 	setup: function(){
 		this._allContact = new ZmMockContact();
-		this._allContact.fileAs = "User, Zimbra";
+		this._allContact.fileAs = "User, Zmail";
 
 		this._AContact = new ZmMockContact();
 		this._AContact.fileAs = "Anderson, Derek";
@@ -424,8 +424,8 @@ UT.test("dedupe contact group", {
 	},
 
 	setup: function() {
-		this._inlineUser1 = {type: ZmContact.GROUP_INLINE_REF, value: "test1@zimbra.com"};
-		this._inlineUser2 = {type: ZmContact.GROUP_INLINE_REF, value: "test2@zimbra.com"};
+		this._inlineUser1 = {type: ZmContact.GROUP_INLINE_REF, value: "test1@zmail.com"};
+		this._inlineUser2 = {type: ZmContact.GROUP_INLINE_REF, value: "test2@zmail.com"};
 	}},
 
 	function() {
@@ -510,11 +510,11 @@ UT.test("ZmContactListController getGroupMembers",
 		
 		var contactB = new ZmMockContact();
 		contactB.id = "302";
-		contactB.ref = "uid=user1,ou=zimbra,ou=com";
+		contactB.ref = "uid=user1,ou=zmail,ou=com";
 		contactB.isGal = true;
 		
 		var contactC = new ZmMockContact();
-		contactC.value = "test@example.zimbra.com";
+		contactC.value = "test@example.zmail.com";
 		contactC.type = "I";
 			
 		var group = new ZmMockContact();
@@ -533,7 +533,7 @@ UT.test("ZmContactListController getGroupMembers",
 		groupC.id = "303";
 		groupC.isGal = "true";
 		groupC.type = "group";
-		groupC.ref = "uid=server-team,ou=zimbra,ou=com";
+		groupC.ref = "uid=server-team,ou=zmail,ou=com";
 		
 		//case 1
 		var returnArr = clc._getGroupMembers([contactA]);
@@ -546,13 +546,13 @@ UT.test("ZmContactListController getGroupMembers",
 		UT.equal(returnArr[0].value, "1:200", "Group members should have value 1:200");
 		UT.equal(returnArr[0].type, "C", "Group members should have type C");
 		UT.notEqual(returnArr[0].op, "+", "Group member should not have an op");
-		UT.equal(returnArr[1].value, "test@example.zimbra.com", "Group member should have value test@example.zimbra.com");
+		UT.equal(returnArr[1].value, "test@example.zmail.com", "Group member should have value test@example.zmail.com");
 		UT.equal(returnArr[1].type, "I", "Group member should be type I");
 		UT.notEqual(returnArr[1].op, "+", "Group member should not have an op");
 		
 		//case 3
 		returnArr = clc._getGroupMembers([contactB], group);
-		UT.equal(returnArr[0].value, "uid=user1,ou=zimbra,ou=com", "Group member should add contactB");
+		UT.equal(returnArr[0].value, "uid=user1,ou=zmail,ou=com", "Group member should add contactB");
 		UT.equal(returnArr[0].type, "G", "Group member contactB should be type G");
 		UT.equal(returnArr[0].op , "+", "Group memeber contactB should have op +");
 		
@@ -562,13 +562,13 @@ UT.test("ZmContactListController getGroupMembers",
 		UT.equal(returnArr[0].value, "1:200", "Group members should have value 1:200");
 		UT.equal(returnArr[0].type, "C", "Group members should have type C");
 		UT.equal(returnArr[0].op, "+", "Group member should have an op +");
-		UT.equal(returnArr[1].value, "test@example.zimbra.com", "Group member should have value test@example.zimbra.com");
+		UT.equal(returnArr[1].value, "test@example.zmail.com", "Group member should have value test@example.zmail.com");
 		UT.equal(returnArr[1].type, "I", "Group member should be type I");
 		UT.equal(returnArr[1].op, "+", "Group member should have an op +");
 		
 		//case 5
 		returnArr = clc._getGroupMembers([groupC]);
-		UT.equal(returnArr[0].value, "uid=server-team,ou=zimbra,ou=com", "Group member should add groupC");
+		UT.equal(returnArr[0].value, "uid=server-team,ou=zmail,ou=com", "Group member should add groupC");
 		UT.equal(returnArr[0].type, "G", "Group members should have type G");
 		UT.notEqual(returnArr[0].op, "+", "Group member should not have an op");
 		

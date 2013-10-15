@@ -12,20 +12,20 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.UUIDUtil;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.offline.OfflineAccount;
-import com.zimbra.cs.db.DbMailbox;
-import com.zimbra.cs.mailbox.ChangeTrackingMailbox.TracelessContext;
-import com.zimbra.cs.offline.OfflineLC;
-import com.zimbra.cs.offline.OfflineLog;
-import com.zimbra.cs.redolog.op.CreateFolder;
-import com.zimbra.cs.redolog.op.RedoableOp;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.UUIDUtil;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.offline.OfflineAccount;
+import org.zmail.cs.db.DbMailbox;
+import org.zmail.cs.mailbox.ChangeTrackingMailbox.TracelessContext;
+import org.zmail.cs.offline.OfflineLC;
+import org.zmail.cs.offline.OfflineLog;
+import org.zmail.cs.redolog.op.CreateFolder;
+import org.zmail.cs.redolog.op.RedoableOp;
 
 public abstract class DesktopMailbox extends Mailbox {
 

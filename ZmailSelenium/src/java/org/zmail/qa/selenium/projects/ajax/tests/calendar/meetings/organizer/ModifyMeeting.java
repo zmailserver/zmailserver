@@ -14,19 +14,19 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.calendar.meetings.organizer;
+package org.zmail.qa.selenium.projects.ajax.tests.calendar.meetings.organizer;
 
 import java.util.Calendar;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.items.AppointmentItem;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.CalendarWorkWeekTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.calendar.FormApptNew;
-import com.zimbra.qa.selenium.projects.ajax.ui.calendar.FormApptNew.Field;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.items.AppointmentItem;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.CalendarWorkWeekTest;
+import org.zmail.qa.selenium.projects.ajax.ui.calendar.FormApptNew;
+import org.zmail.qa.selenium.projects.ajax.ui.calendar.FormApptNew.Field;
 
 
 @SuppressWarnings("unused")
@@ -46,12 +46,12 @@ public class ModifyMeeting extends CalendarWorkWeekTest {
 		AppointmentItem appt = new AppointmentItem();
 		String tz, apptSubject, apptBody, apptAttendee1, editApptSubject, editApptBody, editApptAttendee1;
 		tz = ZTimeZone.TimeZoneEST.getID();
-		apptSubject = ZimbraSeleniumProperties.getUniqueString();
-		apptBody = ZimbraSeleniumProperties.getUniqueString();
-		apptAttendee1 = ZimbraAccount.AccountA().EmailAddress;
-		editApptSubject = ZimbraSeleniumProperties.getUniqueString();
-        editApptBody = ZimbraSeleniumProperties.getUniqueString();
-        editApptAttendee1 = ZimbraAccount.AccountB().EmailAddress;
+		apptSubject = ZmailSeleniumProperties.getUniqueString();
+		apptBody = ZmailSeleniumProperties.getUniqueString();
+		apptAttendee1 = ZmailAccount.AccountA().EmailAddress;
+		editApptSubject = ZmailSeleniumProperties.getUniqueString();
+        editApptBody = ZmailSeleniumProperties.getUniqueString();
+        editApptAttendee1 = ZmailAccount.AccountB().EmailAddress;
         
 		// Absolute dates in UTC zone
 		Calendar now = this.calendarWeekDayUTC;
@@ -59,7 +59,7 @@ public class ModifyMeeting extends CalendarWorkWeekTest {
 		ZDate endUTC   = new ZDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH) + 1, now.get(Calendar.DAY_OF_MONTH), 14, 0, 0);
 		
 		app.zGetActiveAccount().soapSend(
-                "<CreateAppointmentRequest xmlns='urn:zimbraMail'>" +
+                "<CreateAppointmentRequest xmlns='urn:zmailMail'>" +
                      "<m>"+
                      "<inv method='REQUEST' type='event' status='CONF' draft='0' class='PUB' fb='B' transp='O' allDay='0' name='"+ apptSubject +"'>"+
                      "<s d='"+ startUTC.toTimeZone(tz).toYYYYMMDDTHHMMSS() +"' tz='"+ tz +"'/>" +
@@ -89,7 +89,7 @@ public class ModifyMeeting extends CalendarWorkWeekTest {
         SleepUtil.sleepLong(); //importFromSOAP fails due to fast execution
         
         // Use GetAppointmentRequest to verify the changes are saved
-        AppointmentItem modifyAppt = AppointmentItem.importFromSOAP(ZimbraAccount.AccountA(), "subject:("+ editApptSubject +")");
+        AppointmentItem modifyAppt = AppointmentItem.importFromSOAP(ZmailAccount.AccountA(), "subject:("+ editApptSubject +")");
         ZAssert.assertNotNull(modifyAppt, "Verify the modified appointment appears on the server");
         
         ZAssert.assertEquals(modifyAppt.getSubject(), editApptSubject, "Subject: Verify modified appointment subject");

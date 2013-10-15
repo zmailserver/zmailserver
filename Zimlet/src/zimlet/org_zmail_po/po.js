@@ -13,28 +13,28 @@
  * ***** END LICENSE BLOCK *****
  */
 
-function Com_Zimbra_Po() {
+function Com_Zmail_Po() {
 }
 
-Com_Zimbra_Po.prototype = new ZmZimletBase();
-Com_Zimbra_Po.prototype.constructor = Com_Zimbra_Po;
+Com_Zmail_Po.prototype = new ZmZimletBase();
+Com_Zmail_Po.prototype.constructor = Com_Zmail_Po;
 
-Com_Zimbra_Po.prototype.init =
+Com_Zmail_Po.prototype.init =
 function() {
 };
 
-Com_Zimbra_Po.NEITHER = 0;
-Com_Zimbra_Po.APPROVED = 1;
-Com_Zimbra_Po.REJECTED = 2;
+Com_Zmail_Po.NEITHER = 0;
+Com_Zmail_Po.APPROVED = 1;
+Com_Zmail_Po.REJECTED = 2;
 
-Com_Zimbra_Po.PO_DATA = {
-	"GR9328B2-3X499": { req: "Steve Patterson", desc: "Cisco Catalyst 2912MF XL 12-port Switch", total: "$25,437.38", state: Com_Zimbra_Po.REJECTED },
-	"GR9328X2-3Y847": { req: "Jeanine Martin", desc: "Software for Graphics Artists in Marketing", total: "$1,298.00", state: Com_Zimbra_Po.APPROVED },
-	"GR738B64-8774Q": { req: "Arlene Johnson", desc: "Telecom Hardware for new office building", total: "$12,736.17", state: Com_Zimbra_Po.NEITHER },
-	"GR733454-8788Q": { req: "Chris Smith", desc: "Performance Test Server", total: "$5,723.17", state: Com_Zimbra_Po.NEITHER }
+Com_Zmail_Po.PO_DATA = {
+	"GR9328B2-3X499": { req: "Steve Patterson", desc: "Cisco Catalyst 2912MF XL 12-port Switch", total: "$25,437.38", state: Com_Zmail_Po.REJECTED },
+	"GR9328X2-3Y847": { req: "Jeanine Martin", desc: "Software for Graphics Artists in Marketing", total: "$1,298.00", state: Com_Zmail_Po.APPROVED },
+	"GR738B64-8774Q": { req: "Arlene Johnson", desc: "Telecom Hardware for new office building", total: "$12,736.17", state: Com_Zmail_Po.NEITHER },
+	"GR733454-8788Q": { req: "Chris Smith", desc: "Performance Test Server", total: "$5,723.17", state: Com_Zmail_Po.NEITHER }
 };
 
-Com_Zimbra_Po.prototype.toolTipPoppedUp =
+Com_Zmail_Po.prototype.toolTipPoppedUp =
 function(spanElement, obj, context, canvas) {
 	var po = this._getPOData(obj);
 	var html = new Array(20);
@@ -60,7 +60,7 @@ function(spanElement, obj, context, canvas) {
 	canvas.innerHTML = html.join("");
 };
 
-Com_Zimbra_Po.prototype.menuItemSelected = function(itemId) {
+Com_Zmail_Po.prototype.menuItemSelected = function(itemId) {
 	switch (itemId) {
 		case "APPROVE_ITEM":
 			this._approveListener()
@@ -71,15 +71,15 @@ Com_Zimbra_Po.prototype.menuItemSelected = function(itemId) {
 	}
 };
 
-Com_Zimbra_Po.prototype._getPOData =
+Com_Zmail_Po.prototype._getPOData =
 function(obj) {
-	var po = Com_Zimbra_Po.PO_DATA[obj];
+	var po = Com_Zmail_Po.PO_DATA[obj];
 	if (po == null)
-		po = Com_Zimbra_Po.PO_DATA["GR9328B2-3X499"];
+		po = Com_Zmail_Po.PO_DATA["GR9328B2-3X499"];
 	return po;
 };
 
-Com_Zimbra_Po.prototype._addEntryRow =
+Com_Zmail_Po.prototype._addEntryRow =
 function(field, data, html, idx) {
 	html[idx++] = "<tr valign='top'><td align='right' style='padding-right: 5px;'><b>";
 	html[idx++] = AjxStringUtil.htmlEncode(field) + ":";
@@ -89,29 +89,29 @@ function(field, data, html, idx) {
 	return idx;
 };
 
-Com_Zimbra_Po.prototype._getStyle =
+Com_Zmail_Po.prototype._getStyle =
 function(obj) {
 	var po = this._getPOData(obj);
 	switch (po.state) {
-		case Com_Zimbra_Po.APPROVED: return "green";
-		case Com_Zimbra_Po.REJECTED: return "red";
+		case Com_Zmail_Po.APPROVED: return "green";
+		case Com_Zmail_Po.REJECTED: return "red";
 		default: return "blue";
 	}
 };
 
-Com_Zimbra_Po.prototype._approveListener =
+Com_Zmail_Po.prototype._approveListener =
 function() {
 	var obj = this._actionObject;
 	var po = this._getPOData(obj);
-	po.state = Com_Zimbra_Po.APPROVED;
+	po.state = Com_Zmail_Po.APPROVED;
 	this._actionSpan.style.color = this._getStyle(obj);
 };
 
-Com_Zimbra_Po.prototype._rejectListener =
+Com_Zmail_Po.prototype._rejectListener =
 function() {
 	var obj = this._actionObject;
 	var po = this._getPOData(obj);
 
-	po.state = Com_Zimbra_Po.REJECTED;
+	po.state = Com_Zmail_Po.REJECTED;
 	this._actionSpan.style.color = this._getStyle(obj);
 };

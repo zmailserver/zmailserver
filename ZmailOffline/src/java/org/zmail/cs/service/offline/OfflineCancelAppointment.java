@@ -12,13 +12,13 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.offline;
+package org.zmail.cs.service.offline;
 
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.offline.OfflineProvisioning;
-import com.zimbra.cs.service.mail.CancelAppointment;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.offline.OfflineProvisioning;
+import org.zmail.cs.service.mail.CancelAppointment;
 
 
 public class OfflineCancelAppointment extends CancelAppointment {

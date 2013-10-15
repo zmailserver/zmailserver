@@ -17,16 +17,16 @@
 /**
  *
  */
-package com.zimbra.qa.selenium.projects.ajax.ui.mail;
+package org.zmail.qa.selenium.projects.ajax.ui.mail;
 
 import java.util.*;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogTag;
-//import com.zimbra.qa.selenium.projects.ajax.ui.preferences.trustedaddresses.DisplayTrustedAddress.Locators;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.ui.*;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogTag;
+//import org.zmail.qa.selenium.projects.ajax.ui.preferences.trustedaddresses.DisplayTrustedAddress.Locators;
 
 
 
@@ -79,7 +79,7 @@ public class PageMail extends AbsTab {
 		
 		
 		public static class CONTEXT_MENU {
-			// TODO: Until https://bugzilla.zimbra.com/show_bug.cgi?id=56273 is fixed, ContextMenuItem will be defined using the text content
+			// TODO: Until https://bugzilla.zmail.com/show_bug.cgi?id=56273 is fixed, ContextMenuItem will be defined using the text content
 			public static String stringToReplace = "<ITEM_NAME>";
 			public static final String zDesktopContextMenuItems = new StringBuffer("css=table[class$='MenuTable'] td[id$='_title']:contains(")
 			.append(stringToReplace).append(")").toString();
@@ -121,7 +121,7 @@ public class PageMail extends AbsTab {
 
 
 		/**
-		 * http://bugzilla.zimbra.com/show_bug.cgi?id=70068 ... new menu is same for all apps
+		 * http://bugzilla.zmail.com/show_bug.cgi?id=70068 ... new menu is same for all apps
 		 * Instead of the new menu, key off the conv/msg view pulldown
 		 * <div id="zb__CLV-main__VIEW_MENU" .../>
 		 * <div id="zb__TV-main__VIEW_MENU" .../>
@@ -228,7 +228,7 @@ public class PageMail extends AbsTab {
 			page = new SeparateWindowFormMailNew(this.MyApplication);
 
 			// Don't fall through - the new window may need additional information from the test case
-			// such as "Zimbra: Compose" or "Zimbra: Reply" to determine if the window is open
+			// such as "Zmail: Compose" or "Zmail: Reply" to determine if the window is open
 			
 			this.zClickAt(locator,"0,0");
 			
@@ -360,7 +360,7 @@ public class PageMail extends AbsTab {
 
 		} else if ( button == Button.B_NEWWINDOW ) {
 
-			// 8.0: http://bugzilla.zimbra.com/show_bug.cgi?id=73721
+			// 8.0: http://bugzilla.zmail.com/show_bug.cgi?id=73721
 			//
 //			page = null;
 //			if ( zGetPropMailView() == PageMailView.BY_MESSAGE ) {
@@ -558,7 +558,7 @@ public class PageMail extends AbsTab {
 				// 8.0, 4/25/2012: separate window moved from Actions menu to Toolbar
 				//
 				
-				// 8.0: http://bugzilla.zimbra.com/show_bug.cgi?id=73721
+				// 8.0: http://bugzilla.zmail.com/show_bug.cgi?id=73721
 				// 				return (this.zToolbarPressButton(Button.B_NEWWINDOW));
 				
 				optionLocator += " div[id^='DETACH'] td[id$='_title']";
@@ -1679,7 +1679,7 @@ public class PageMail extends AbsTab {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.zimbra.qa.selenium.framework.ui.AbsPage#zHoverOver(com.zimbra.qa.selenium.framework.ui.Button)
+	 * @see org.zmail.qa.selenium.framework.ui.AbsPage#zHoverOver(org.zmail.qa.selenium.framework.ui.Button)
 	 */
 	public AbsTooltip zHoverOver(Button button) throws HarnessException {
 		logger.info(myPageName() + " zHoverOverButton("+ button +")");

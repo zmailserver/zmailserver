@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
 -->
 <%@ page import="java.io.*" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
 
 <%!
 	static final String BASENAME = "/messages/test/i18n/message";

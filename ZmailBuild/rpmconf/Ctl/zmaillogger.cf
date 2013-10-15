@@ -1,13 +1,13 @@
-SERVICE logger "Zimbra Mail Console" logmysql,logswatch
+SERVICE logger "Zmail Mail Console" logmysql,logswatch
 
 APPLICATION logmysql test_server "9999" normal "mysql server"
 
-CONTROL_SYNTAX zimbrasyntax logmysql_start "/opt/zimbra/bin/logmysql.server start"
-CONTROL_SYNTAX zimbrasyntax logmysql_stop "/opt/zimbra/bin/logmysql.server stop"
-CONTROL_SYNTAX zimbrasyntax logmysql_status "/opt/zimbra/bin/logmysqladmin status"
+CONTROL_SYNTAX zmailsyntax logmysql_start "/opt/zmail/bin/logmysql.server start"
+CONTROL_SYNTAX zmailsyntax logmysql_stop "/opt/zmail/bin/logmysql.server stop"
+CONTROL_SYNTAX zmailsyntax logmysql_status "/opt/zmail/bin/logmysqladmin status"
 
 APPLICATION logswatch test_server "9999" normal "logger swatch daemon"
 
-CONTROL_SYNTAX zimbrasyntax logswatch_start "/opt/zimbra/bin/zmlogswatchctl start"
-CONTROL_SYNTAX zimbrasyntax logswatch_stop "/opt/zimbra/bin/zmlogswatchctl stop"
-CONTROL_SYNTAX zimbrasyntax logswatch_status "/opt/zimbra/bin/zmlogswatchctl status"
+CONTROL_SYNTAX zmailsyntax logswatch_start "/opt/zmail/bin/zmlogswatchctl start"
+CONTROL_SYNTAX zmailsyntax logswatch_stop "/opt/zmail/bin/zmlogswatchctl stop"
+CONTROL_SYNTAX zmailsyntax logswatch_status "/opt/zmail/bin/zmlogswatchctl status"

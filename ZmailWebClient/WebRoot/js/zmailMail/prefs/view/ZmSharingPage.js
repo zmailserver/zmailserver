@@ -42,7 +42,7 @@ ZmSharingPage.prototype.toString = function () { return "ZmSharingPage"; };
 ZmSharingPage.prototype.getShares =
 function(type, owner, callback) {
 
-	var jsonObj = {GetShareInfoRequest:{_jsns:"urn:zimbraAccount"}};
+	var jsonObj = {GetShareInfoRequest:{_jsns:"urn:zmailAccount"}};
 	var request = jsonObj.GetShareInfoRequest;
 	if (type && type != ZmShare.TYPE_ALL) {
 		request.grantee = {type:type};
@@ -197,11 +197,11 @@ function() {
 
 	var owners = AjxUtil.keys(ownerHash);
 	if (owners.length > 0) {
-		var jsonObj = {BatchRequest:{_jsns:"urn:zimbra", onerror:"continue"}};
+		var jsonObj = {BatchRequest:{_jsns:"urn:zmail", onerror:"continue"}};
 		var br = jsonObj.BatchRequest;
 		var requests = br.GetShareInfoRequest = [];
 		for (var i = 0; i < owners.length; i++) {
-			var req = {_jsns: "urn:zimbraAccount"};
+			var req = {_jsns: "urn:zmailAccount"};
 			req.owner = {by:"name", _content:owners[i]};
 			requests.push(req);
 		}

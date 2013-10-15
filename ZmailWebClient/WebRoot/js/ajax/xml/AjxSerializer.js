@@ -31,7 +31,7 @@ AjxSerializer.prototype.serialize = function(node) { throw "NOT IMPLEMENTED"; };
 
 /**
  * This class attempts to serialize a DOM document in the same format
- * as the Zimbra Server.
+ * as the Zmail Server.
  * @class
  * @constructor
  * @private

@@ -1,24 +1,24 @@
 ﻿PERSONALIZZAZIONE DEGLI ARGOMENTI DELLA GUIDA DI ZWC – COME MODIFICARE LE VARIABILI 
 
-La Guida di Zimbra Web Client può essere personalizzata per sostituire i riferimenti a Zimbra e al nome di prodotto Zimbra con i nomi dei propri prodotti e della propria società.
+La Guida di Zmail Web Client può essere personalizzata per sostituire i riferimenti a Zmail e al nome di prodotto Zmail con i nomi dei propri prodotti e della propria società.
 
 Le variabili predefinite nel file ZbMsg.properties sono le seguenti:
 
-"nome lungo del client Web" - ClientNameLong = Zimbra Web Client
+"nome lungo del client Web" - ClientNameLong = Zmail Web Client
 "nome breve del client Web" - ClientNameShort = ZWC
-"nome della società" - CompanyName = Zimbra
-"Questa variabile non è rilevante.  Non modificarla" - DesktopName = Zimbra Desktop
-"nome completo del prodotto" - CollaborationProductFullName = Zimbra Collaboration Suite
+"nome della società" - CompanyName = Zmail
+"Questa variabile non è rilevante.  Non modificarla" - DesktopName = Zmail Desktop
+"nome completo del prodotto" - CollaborationProductFullName = Zmail Collaboration Suite
 "nome breve del prodotto" - CollaborationProductShortName = ZCS
 
 Per modificare le variabili
 
-1. Accedere al server Zimbra
+1. Accedere al server Zmail
 
 2. Passare alla directory seguente:
-/opt/zimbra/jetty/webapps/zimbra/WEB-INF/classes/messages/
+/opt/zmail/jetty/webapps/zmail/WEB-INF/classes/messages/
 
-3. Per cambiare i valori, modificare ZbMsg.properties.  Sostituire il nome Zimbra con quello della società desiderata. NON MODIFICARE O RIMUOVERE IL DESCRITTORE DELLA VARIABILE.
+3. Per cambiare i valori, modificare ZbMsg.properties.  Sostituire il nome Zmail con quello della società desiderata. NON MODIFICARE O RIMUOVERE IL DESCRITTORE DELLA VARIABILE.
 
 4. Riavviare il server.  Digitare zmcontrol restart.
 

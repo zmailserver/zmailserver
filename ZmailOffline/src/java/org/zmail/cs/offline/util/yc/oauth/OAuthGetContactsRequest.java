@@ -12,10 +12,10 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.util.yc.oauth;
+package org.zmail.cs.offline.util.yc.oauth;
 
 import com.google.gdata.client.authn.oauth.OAuthUtil;
-import com.zimbra.cs.offline.OfflineLog;
+import org.zmail.cs.offline.OfflineLog;
 
 public class OAuthGetContactsRequest extends OAuthRequest {
 

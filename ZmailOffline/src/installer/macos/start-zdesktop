@@ -14,6 +14,6 @@
 # ***** END LICENSE BLOCK *****
 # 
 
-# Run this script to start zimbra desktop service
+# Run this script to start zmail desktop service
 
-launchctl start com.zimbra.desktop
+launchctl start org.zmail.desktop

@@ -12,22 +12,22 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.jsp;
+package org.zmail.cs.offline.jsp;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import com.zimbra.common.account.ProvisioningConstants;
-import com.zimbra.soap.admin.type.DataSourceType;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.SoapFaultException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.offline.OfflineProvisioning;
-import com.zimbra.cs.offline.common.OfflineConstants;
-import com.zimbra.client.ZFolder;
-import com.zimbra.soap.type.DataSource.ConnectionType;
+import org.zmail.common.account.ProvisioningConstants;
+import org.zmail.soap.admin.type.DataSourceType;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.SoapFaultException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.offline.OfflineProvisioning;
+import org.zmail.cs.offline.common.OfflineConstants;
+import org.zmail.client.ZFolder;
+import org.zmail.soap.type.DataSource.ConnectionType;
 
 public class XmailBean extends MailBean {
     public XmailBean() {
@@ -84,7 +84,7 @@ public class XmailBean extends MailBean {
         accountFlavor = account.getAttr(OfflineConstants.A_offlineAccountFlavor);
         if (accountFlavor == null)
             accountFlavor = ds.getAttr(OfflineConstants.A_offlineAccountFlavor);
-        accountName = account.getAttr(Provisioning.A_zimbraPrefLabel);
+        accountName = account.getAttr(Provisioning.A_zmailPrefLabel);
         if (accountName == null)
             accountName = ds.getName();
         username = ds.getUsername();
@@ -98,26 +98,26 @@ public class XmailBean extends MailBean {
         port = ds.getPort().toString();
         connectionType = ds.getConnectionType();
         isDebugTraceEnabled = ds.isDebugTraceEnabled();
-        calendarSyncEnabled = ds.getBooleanAttr(OfflineConstants.A_zimbraDataSourceCalendarSyncEnabled, false);
-        contactSyncEnabled = ds.getBooleanAttr(OfflineConstants.A_zimbraDataSourceContactSyncEnabled, false);
-        domain = ds.getAttr(Provisioning.A_zimbraDataSourceDomain, null);
-        smtpEnabled = ds.getBooleanAttr(OfflineConstants.A_zimbraDataSourceSmtpEnabled, true);
-        smtpHost = ds.getAttr(OfflineConstants.A_zimbraDataSourceSmtpHost, null);
-        smtpPort = ds.getAttr(OfflineConstants.A_zimbraDataSourceSmtpPort, null);
-        isSmtpSsl = "ssl".equals(ds.getAttr(OfflineConstants.A_zimbraDataSourceSmtpConnectionType));
-        isSmtpAuth = ds.getBooleanAttr(OfflineConstants.A_zimbraDataSourceSmtpAuthRequired, false);
+        calendarSyncEnabled = ds.getBooleanAttr(OfflineConstants.A_zmailDataSourceCalendarSyncEnabled, false);
+        contactSyncEnabled = ds.getBooleanAttr(OfflineConstants.A_zmailDataSourceContactSyncEnabled, false);
+        domain = ds.getAttr(Provisioning.A_zmailDataSourceDomain, null);
+        smtpEnabled = ds.getBooleanAttr(OfflineConstants.A_zmailDataSourceSmtpEnabled, true);
+        smtpHost = ds.getAttr(OfflineConstants.A_zmailDataSourceSmtpHost, null);
+        smtpPort = ds.getAttr(OfflineConstants.A_zmailDataSourceSmtpPort, null);
+        isSmtpSsl = "ssl".equals(ds.getAttr(OfflineConstants.A_zmailDataSourceSmtpConnectionType));
+        isSmtpAuth = ds.getBooleanAttr(OfflineConstants.A_zmailDataSourceSmtpAuthRequired, false);
         if (isSmtpAuth) {
-            smtpUsername = ds.getAttr(OfflineConstants.A_zimbraDataSourceSmtpAuthUsername, null);
-            smtpPassword = isEmpty(ds.getAttr(OfflineConstants.A_zimbraDataSourceSmtpAuthPassword, null)) ? null
+            smtpUsername = ds.getAttr(OfflineConstants.A_zmailDataSourceSmtpAuthUsername, null);
+            smtpPassword = isEmpty(ds.getAttr(OfflineConstants.A_zmailDataSourceSmtpAuthPassword, null)) ? null
                     : JspConstants.MASKED_PASSWORD;
         } else {
             smtpUsername = "";
             smtpPassword = "";
         }
-        syncFreqSecs = ds.getTimeIntervalSecs(OfflineConstants.A_zimbraDataSourceSyncFreq,
+        syncFreqSecs = ds.getTimeIntervalSecs(OfflineConstants.A_zmailDataSourceSyncFreq,
                 OfflineConstants.DEFAULT_SYNC_FREQ / 1000);
-        syncAllServerFolders = ds.getBooleanAttr(OfflineConstants.A_zimbraDataSourceSyncAllServerFolders, false);
-        leaveOnServer = ds.getBooleanAttr(Provisioning.A_zimbraDataSourceLeaveOnServer, false);
+        syncAllServerFolders = ds.getBooleanAttr(OfflineConstants.A_zmailDataSourceSyncAllServerFolders, false);
+        leaveOnServer = ds.getBooleanAttr(Provisioning.A_zmailDataSourceLeaveOnServer, false);
         isYcontactTokenSaved = ds.getBooleanAttr(OfflineConstants.A_offlineYContactTokenReady, false); //TODO: technically should be in YmailBean. Need to pass ds to some stub method
     }
 
@@ -167,83 +167,83 @@ public class XmailBean extends MailBean {
                 }
                 if (isAllOK()) {
                     dsAttrs.put(OfflineConstants.A_offlineAccountFlavor, accountFlavor);
-                    dsAttrs.put(OfflineConstants.A_zimbraDataSourceAccountSetup, ProvisioningConstants.TRUE);
-                    dsAttrs.put(Provisioning.A_zimbraDataSourceEnabled, ProvisioningConstants.TRUE);
-                    dsAttrs.put(Provisioning.A_zimbraDataSourceUsername, username);
+                    dsAttrs.put(OfflineConstants.A_zmailDataSourceAccountSetup, ProvisioningConstants.TRUE);
+                    dsAttrs.put(Provisioning.A_zmailDataSourceEnabled, ProvisioningConstants.TRUE);
+                    dsAttrs.put(Provisioning.A_zmailDataSourceUsername, username);
                     if (!password.equals(JspConstants.MASKED_PASSWORD))
-                        dsAttrs.put(Provisioning.A_zimbraDataSourcePassword, password);
-                    dsAttrs.put(Provisioning.A_zimbraDataSourceEmailAddress, email);
-                    dsAttrs.put(Provisioning.A_zimbraPrefFromDisplay, fromDisplay);
-                    dsAttrs.put(Provisioning.A_zimbraPrefReplyToAddress, replyTo);
-                    dsAttrs.put(Provisioning.A_zimbraPrefReplyToDisplay, replyToDisplay);
-                    dsAttrs.put(Provisioning.A_zimbraDataSourceHost, host);
-                    dsAttrs.put(Provisioning.A_zimbraDataSourcePort, port);
-                    dsAttrs.put(Provisioning.A_zimbraDataSourceConnectionType, connectionType.toString());
-                    dsAttrs.put(Provisioning.A_zimbraDataSourceEnableTrace, isDebugTraceEnabled ? ProvisioningConstants.TRUE
+                        dsAttrs.put(Provisioning.A_zmailDataSourcePassword, password);
+                    dsAttrs.put(Provisioning.A_zmailDataSourceEmailAddress, email);
+                    dsAttrs.put(Provisioning.A_zmailPrefFromDisplay, fromDisplay);
+                    dsAttrs.put(Provisioning.A_zmailPrefReplyToAddress, replyTo);
+                    dsAttrs.put(Provisioning.A_zmailPrefReplyToDisplay, replyToDisplay);
+                    dsAttrs.put(Provisioning.A_zmailDataSourceHost, host);
+                    dsAttrs.put(Provisioning.A_zmailDataSourcePort, port);
+                    dsAttrs.put(Provisioning.A_zmailDataSourceConnectionType, connectionType.toString());
+                    dsAttrs.put(Provisioning.A_zmailDataSourceEnableTrace, isDebugTraceEnabled ? ProvisioningConstants.TRUE
                             : ProvisioningConstants.FALSE);
                     if (isCalendarSyncSupported()) {
-                        dsAttrs.put(OfflineConstants.A_zimbraDataSourceCalendarSyncEnabled,
+                        dsAttrs.put(OfflineConstants.A_zmailDataSourceCalendarSyncEnabled,
                                 calendarSyncEnabled ? ProvisioningConstants.TRUE : ProvisioningConstants.FALSE);
                     }
                     if (isContactSyncSupported()) {
-                        dsAttrs.put(OfflineConstants.A_zimbraDataSourceContactSyncEnabled,
+                        dsAttrs.put(OfflineConstants.A_zmailDataSourceContactSyncEnabled,
                                 contactSyncEnabled ? ProvisioningConstants.TRUE : ProvisioningConstants.FALSE);
                     }
-                    dsAttrs.put(Provisioning.A_zimbraDataSourceDomain, domain);
-                    dsAttrs.put(OfflineConstants.A_zimbraDataSourceSmtpEnabled, smtpEnabled ? ProvisioningConstants.TRUE
+                    dsAttrs.put(Provisioning.A_zmailDataSourceDomain, domain);
+                    dsAttrs.put(OfflineConstants.A_zmailDataSourceSmtpEnabled, smtpEnabled ? ProvisioningConstants.TRUE
                             : ProvisioningConstants.FALSE);
-                    dsAttrs.put(OfflineConstants.A_zimbraDataSourceSmtpHost, smtpHost);
-                    dsAttrs.put(OfflineConstants.A_zimbraDataSourceSmtpPort, smtpPort);
-                    dsAttrs.put(OfflineConstants.A_zimbraDataSourceSmtpConnectionType, (isSmtpSsl ? ConnectionType.ssl
+                    dsAttrs.put(OfflineConstants.A_zmailDataSourceSmtpHost, smtpHost);
+                    dsAttrs.put(OfflineConstants.A_zmailDataSourceSmtpPort, smtpPort);
+                    dsAttrs.put(OfflineConstants.A_zmailDataSourceSmtpConnectionType, (isSmtpSsl ? ConnectionType.ssl
                             : ConnectionType.cleartext).toString());
-                    dsAttrs.put(OfflineConstants.A_zimbraDataSourceSmtpAuthRequired, isSmtpAuth ? ProvisioningConstants.TRUE
+                    dsAttrs.put(OfflineConstants.A_zmailDataSourceSmtpAuthRequired, isSmtpAuth ? ProvisioningConstants.TRUE
                             : ProvisioningConstants.FALSE);
                     if (isSmtpAuth) {
-                        dsAttrs.put(OfflineConstants.A_zimbraDataSourceSmtpAuthUsername, smtpUsername);
+                        dsAttrs.put(OfflineConstants.A_zmailDataSourceSmtpAuthUsername, smtpUsername);
                         if (!smtpPassword.equals(JspConstants.MASKED_PASSWORD))
-                            dsAttrs.put(OfflineConstants.A_zimbraDataSourceSmtpAuthPassword, smtpPassword);
+                            dsAttrs.put(OfflineConstants.A_zmailDataSourceSmtpAuthPassword, smtpPassword);
                     }
-                    dsAttrs.put(OfflineConstants.A_zimbraDataSourceSyncFreq, Long.toString(syncFreqSecs));
+                    dsAttrs.put(OfflineConstants.A_zmailDataSourceSyncFreq, Long.toString(syncFreqSecs));
                     if (isFolderSyncSupported())
-                        dsAttrs.put(OfflineConstants.A_zimbraDataSourceSyncAllServerFolders, ProvisioningConstants.TRUE);
+                        dsAttrs.put(OfflineConstants.A_zmailDataSourceSyncAllServerFolders, ProvisioningConstants.TRUE);
                     if (dsType == DataSourceType.pop3) {
-                        dsAttrs.put(Provisioning.A_zimbraDataSourceLeaveOnServer, Boolean.toString(leaveOnServer)
+                        dsAttrs.put(Provisioning.A_zmailDataSourceLeaveOnServer, Boolean.toString(leaveOnServer)
                                 .toUpperCase());
-                        dsAttrs.put(Provisioning.A_zimbraDataSourceFolderId, ZFolder.ID_INBOX);
+                        dsAttrs.put(Provisioning.A_zmailDataSourceFolderId, ZFolder.ID_INBOX);
                     } else {
                         assert dsType == DataSourceType.imap;
-                        dsAttrs.put(Provisioning.A_zimbraDataSourceFolderId, ZFolder.ID_USER_ROOT);
+                        dsAttrs.put(Provisioning.A_zmailDataSourceFolderId, ZFolder.ID_USER_ROOT);
                     }
                     if (sslCertAlias != null && sslCertAlias.length() > 0)
-                        dsAttrs.put(OfflineConstants.A_zimbraDataSourceSslCertAlias, sslCertAlias);
+                        dsAttrs.put(OfflineConstants.A_zmailDataSourceSslCertAlias, sslCertAlias);
                 }
             }
             if (verb.isAdd()) {
                 if (email.endsWith('@' + ydomain) || email.endsWith('@' + yjpdomain) || email.endsWith('@' + ymdomain)
                         || email.endsWith('@' + yrmdomain)) {
                     if (dsType == DataSourceType.imap) {
-                        dsAttrs.put(Provisioning.A_zimbraDataSourceDomain, ydomain);
+                        dsAttrs.put(Provisioning.A_zmailDataSourceDomain, ydomain);
                     } else {
                         addInvalid("type");
                         setError(getMessage("YMPMustUseImap"));
                     }
                 } else if (email.endsWith('@' + gdomain)) {
                     if (dsType == DataSourceType.imap) {
-                        dsAttrs.put(Provisioning.A_zimbraDataSourceDomain, gdomain);
+                        dsAttrs.put(Provisioning.A_zmailDataSourceDomain, gdomain);
                     } else {
                         addInvalid("type");
                         setError(getMessage("GmailMustUseImap"));
                     }
                 } else if (email.endsWith('@' + adomain)) {
                     if (dsType == DataSourceType.imap) {
-                        dsAttrs.put(Provisioning.A_zimbraDataSourceDomain, adomain);
+                        dsAttrs.put(Provisioning.A_zmailDataSourceDomain, adomain);
                     } else {
                         addInvalid("type");
                         setError(getMessage("AOLMustUseImap"));
                     }
                 }
                 if (isCalendarSyncSupported()) {
-                    dsAttrs.put(OfflineConstants.A_zimbraDataSourceCalendarFolderId, ZFolder.ID_CALENDAR);
+                    dsAttrs.put(OfflineConstants.A_zmailDataSourceCalendarFolderId, ZFolder.ID_CALENDAR);
                 }
             }
             // for yahoo contact oauth

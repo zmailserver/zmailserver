@@ -1,9 +1,9 @@
 <%@ page buffer="8kb" session="false" autoFlush="true" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
 <%@ page import="java.util.Locale" %>
-<%@ page import="com.zimbra.cs.taglib.bean.BeanUtils" %>
+<%@ page import="org.zmail.cs.taglib.bean.BeanUtils" %>
 <!--
 ***** BEGIN LICENSE BLOCK *****
 Zimbra Collaboration Suite Web Client
@@ -74,7 +74,7 @@ basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
     }
 
     final String SKIN_COOKIE_NAME = "ZM_SKIN";
-    String skin = application.getInitParameter("zimbraDefaultSkin");
+    String skin = application.getInitParameter("zmailDefaultSkin");
     Cookie[] cookies = request.getCookies();
     String requestSkin = request.getParameter("skin");
     if (requestSkin != null) {

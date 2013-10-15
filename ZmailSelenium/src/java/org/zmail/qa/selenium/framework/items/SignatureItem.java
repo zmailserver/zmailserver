@@ -14,14 +14,14 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.items;
+package org.zmail.qa.selenium.framework.items;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
 
 public class SignatureItem implements IItem {
 	protected static Logger logger = LogManager.getLogger(IItem.class);
@@ -84,10 +84,10 @@ public class SignatureItem implements IItem {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see framework.items.IItem#CreateSOAP(framework.util.ZimbraAccount)
+	 * @see framework.items.IItem#CreateSOAP(framework.util.ZmailAccount)
 	 */
 	@Override
-	public void createUsingSOAP(ZimbraAccount account) throws HarnessException {
+	public void createUsingSOAP(ZmailAccount account) throws HarnessException {
 		throw new HarnessException("implement me");
 	}
 
@@ -101,7 +101,7 @@ public class SignatureItem implements IItem {
 		try {
 
 			// Make sure we only have the <tag/> part
-			Element t = ZimbraAccount.SoapClient.selectNode(sig,
+			Element t = ZmailAccount.SoapClient.selectNode(sig,
 					"//acct:signature");
 			if (t == null)
 				throw new HarnessException(
@@ -115,8 +115,8 @@ public class SignatureItem implements IItem {
 			// Set tag name
 			item.setName(t.getAttribute("name", null));
 			
-			Element contentBodyHtml = ZimbraAccount.SoapClient.selectNode(sig, "//acct:content[@type='text/html']");
-			Element contentBodyText = ZimbraAccount.SoapClient.selectNode(sig, "//acct:content[@type='text/plain']");
+			Element contentBodyHtml = ZmailAccount.SoapClient.selectNode(sig, "//acct:content[@type='text/html']");
+			Element contentBodyText = ZmailAccount.SoapClient.selectNode(sig, "//acct:content[@type='text/plain']");
 			if ( contentBodyHtml != null ) {
 				item.dBodyHtmlText = contentBodyHtml.getText().trim();
 			}else if ( contentBodyText != null ) {
@@ -136,7 +136,7 @@ public class SignatureItem implements IItem {
 
 	}
 
-	public static SignatureItem importFromSOAP(ZimbraAccount account,
+	public static SignatureItem importFromSOAP(ZmailAccount account,
 			String name) throws HarnessException {
 
 		if (account == null)
@@ -148,7 +148,7 @@ public class SignatureItem implements IItem {
 
 		try {
 			account
-					.soapSend("<GetSignaturesRequest xmlns='urn:zimbraAccount'/>");
+					.soapSend("<GetSignaturesRequest xmlns='urn:zmailAccount'/>");
 			Element[] results = account
 					.soapSelectNodes("//acct:signature[@name='" + name + "']");
 			return (importFromSOAP(results[0]));

@@ -14,16 +14,16 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.readreceipt;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.readreceipt;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.DisplayMail.Field;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.*;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.DisplayMail.Field;
 
 
 public class ReceiveReadReceipt extends PrefGroupMailByMessageTest {
@@ -33,7 +33,7 @@ public class ReceiveReadReceipt extends PrefGroupMailByMessageTest {
 		
 		
 		
-		super.startingAccountPreferences.put("zimbraPrefComposeFormat", "text");
+		super.startingAccountPreferences.put("zmailPrefComposeFormat", "text");
 		
 	}
 	
@@ -44,25 +44,25 @@ public class ReceiveReadReceipt extends PrefGroupMailByMessageTest {
 		// Data setup
 		
 		// Send a message requesting a read receipt
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
 		app.zGetActiveAccount().soapSend(
-					"<SendMsgRequest xmlns='urn:zimbraMail'>" 
+					"<SendMsgRequest xmlns='urn:zmailMail'>" 
 			+			"<m>"
-			+				"<e t='t' a='"+ ZimbraAccount.AccountA().EmailAddress +"'/>"
+			+				"<e t='t' a='"+ ZmailAccount.AccountA().EmailAddress +"'/>"
 			+				"<e t='f' a='"+ app.zGetActiveAccount().EmailAddress +"'/>"
 			+				"<e t='n' a='"+ app.zGetActiveAccount().EmailAddress +"'/>"
 			+				"<su>"+ subject +"</su>"
 			+				"<mp ct='text/plain'>"
-			+					"<content>content" + ZimbraSeleniumProperties.getUniqueString() +"</content>" 
+			+					"<content>content" + ZmailSeleniumProperties.getUniqueString() +"</content>" 
 			+				"</mp>"
 			+			"</m>" 
 			+		"</SendMsgRequest>");
 
 		
-		MailItem received = MailItem.importFromSOAP(ZimbraAccount.AccountA(), "subject:("+ subject +")");
+		MailItem received = MailItem.importFromSOAP(ZmailAccount.AccountA(), "subject:("+ subject +")");
 		
 		// Send the read receipt
-		ZimbraAccount.AccountA().soapSend("<SendDeliveryReportRequest xmlns='urn:zimbraMail' mid='"+ received.getId() +"'/>");
+		ZmailAccount.AccountA().soapSend("<SendDeliveryReportRequest xmlns='urn:zmailMail' mid='"+ received.getId() +"'/>");
 		
 		
 		
@@ -75,7 +75,7 @@ public class ReceiveReadReceipt extends PrefGroupMailByMessageTest {
 		DisplayMail actual = (DisplayMail) app.zPageMail.zListItem(Action.A_LEFTCLICK, subject);
 
 		ZAssert.assertEquals(			actual.zGetMailProperty(Field.To),		app.zGetActiveAccount().EmailAddress, "Verify the message is to the test account");
-		ZAssert.assertEquals(			actual.zGetMailProperty(Field.From),	ZimbraAccount.AccountA().EmailAddress, "Verify the message is from the destination");
+		ZAssert.assertEquals(			actual.zGetMailProperty(Field.From),	ZmailAccount.AccountA().EmailAddress, "Verify the message is from the destination");
 		ZAssert.assertStringContains(	actual.zGetMailProperty(Field.Subject), "Read-Receipt", "Verify the message subject contains the correct value");	// TODO: I18N
 		ZAssert.assertStringContains(	actual.zGetMailProperty(Field.Body), 	"The message sent on", "Verify the message subject contains the correct value");	// TODO: I18N
 		ZAssert.assertStringContains(	actual.zGetMailProperty(Field.Body), 	subject, "Verify the message subject contains the correct value");	// TODO: I18N

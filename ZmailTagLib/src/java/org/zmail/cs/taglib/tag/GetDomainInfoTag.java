@@ -12,17 +12,17 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.tag;
+package org.zmail.cs.taglib.tag;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.DomainBy;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.net.SocketFactories;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.util.DateUtil;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.soap.SoapProvisioning;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.DomainBy;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.net.SocketFactories;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.util.DateUtil;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.soap.SoapProvisioning;
 
 import javax.servlet.jsp.JspContext;
 import javax.servlet.jsp.JspException;
@@ -32,8 +32,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GetDomainInfoTag extends ZimbraSimpleTag {
-    private static final String CONFIG_ZIMBRA_DOMAININFO_TTL = "zimbra.domaininfo.ttl";
+public class GetDomainInfoTag extends ZmailSimpleTag {
+    private static final String CONFIG_ZIMBRA_DOMAININFO_TTL = "zmail.domaininfo.ttl";
 
     static {
         SocketFactories.registerProtocols();
@@ -80,9 +80,9 @@ public class GetDomainInfoTag extends ZimbraSimpleTag {
 
     private Domain getInfo() {
         SoapProvisioning sp = new SoapProvisioning();
-        String mServer = LC.zimbra_zmprov_default_soap_server.value();
-        int mPort = LC.zimbra_admin_service_port.intValue();
-        sp.soapSetURI(LC.zimbra_admin_service_scheme.value()+mServer+":"+mPort+ AdminConstants.ADMIN_SERVICE_URI);
+        String mServer = LC.zmail_zmprov_default_soap_server.value();
+        int mPort = LC.zmail_admin_service_port.intValue();
+        sp.soapSetURI(LC.zmail_admin_service_scheme.value()+mServer+":"+mPort+ AdminConstants.ADMIN_SERVICE_URI);
         try {
             return sp.getDomainInfo(mBy, mValue);
         } catch (ServiceException e) {

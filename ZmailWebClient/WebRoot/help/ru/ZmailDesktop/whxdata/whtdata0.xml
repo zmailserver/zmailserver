@@ -17,22 +17,22 @@
 -->
 <tocdata>
 <book name="Начало работы" >
-  <item name="О программе Zimbra Desktop" url="Getting_Started/Zimbra_User_Help.htm" />
-  <item name="Обзор функций Zimbra Desktop" url="Zdesktop/Overview_of_Zimbra_Desktop_Features.htm" />
+  <item name="О программе Zmail Desktop" url="Getting_Started/Zmail_User_Help.htm" />
+  <item name="Обзор функций Zmail Desktop" url="Zdesktop/Overview_of_Zmail_Desktop_Features.htm" />
   <item name="Работа в автономном режиме" url="Zdesktop/z-Working_Offline.htm" />
   <item name="Горячие клавиши" url="Navigation_folders_and_tips/Keyboard_Shortcut_Keys.htm" />
 </book>
-<book name="Настройка программы Zimbra Desktop" >
-  <item name="Настройка учетной записи веб-клиента Zimbra" url="Zdesktop/Z-Setting_up_your_Zimbra_Web_Client_account.htm" />
+<book name="Настройка программы Zmail Desktop" >
+  <item name="Настройка учетной записи веб-клиента Zmail" url="Zdesktop/Z-Setting_up_your_Zmail_Web_Client_account.htm" />
   <item name="Настройка учетных записей Yahoo! Mail и Gmail" url="Zdesktop/z-Setting_up_Yahoo!_Mail_Plus,_Gmail,_AOL_account_setup.htm" />
   <item name="Настройка учетных записей POP/IMAP" url="Zdesktop/z-Setting_up_POP_IMAP_accounts.htm" />
-  <item name="Синхронизация учетных записей" url="Zdesktop/Synchronize_your_account_to_Zimbra_Desktop.htm" />
+  <item name="Синхронизация учетных записей" url="Zdesktop/Synchronize_your_account_to_Zmail_Desktop.htm" />
   <item name="Выключение автоматической синхронизации" url="Zdesktop/Turning_Off_Automatic_Sync.htm" />
-  <item name="Организация вида Zimbra Desktop" url="Zdesktop/z-Changing_account_order_on_Desktop.htm" />
-  <item name="Удаление учетной записи из Zimbra Desktop" url="Zdesktop/z-Deleting_an_account_from_Desktop.htm" />
+  <item name="Организация вида Zmail Desktop" url="Zdesktop/z-Changing_account_order_on_Desktop.htm" />
+  <item name="Удаление учетной записи из Zmail Desktop" url="Zdesktop/z-Deleting_an_account_from_Desktop.htm" />
 </book>
-<book name="Навигация в почтовом ящике Zimbra Desktop" >
-  <item name="Перемещение в Zimbra Desktop" url="Navigation_folders_and_tips/z-Navigating_Zimbra_Desktop.htm" />
+<book name="Навигация в почтовом ящике Zmail Desktop" >
+  <item name="Перемещение в Zmail Desktop" url="Navigation_folders_and_tips/z-Navigating_Zmail_Desktop.htm" />
   <item name="Функции и горячие клавиши пользовательского интерфейса" url="Getting_Started/user_interface_features_and_shortcuts.htm" />
   <item name="Меню, открываемые правой кнопкой мыши" url="Navigation_folders_and_tips/right-click_menus.htm" />
   <item name="Системные папки" url="Navigation_folders_and_tips/inbox_folder.htm" />
@@ -40,7 +40,7 @@
 </book>
 <book name="Управление почтовым ящиком" >
   <item name="Управление видом сообщений" url="conversations/conversation_list_view.htm" />
-  <item name="Настройка поведения Zimbra Desktop для получения почты" url="Zdesktop/z_Setting_Desktop_behavior_for_getting_mail.htm" />
+  <item name="Настройка поведения Zmail Desktop для получения почты" url="Zdesktop/z_Setting_Desktop_behavior_for_getting_mail.htm" />
   <item name="Просмотр сообщений" url="Navigation_folders_and_tips/Traditional_View.htm" />
   <item name="Как работает функция «Разговоры»" url="conversations/conversations_can_span_folders.htm" />
   <item name="Систематизация почтовых сообщений" url="Navigation_folders_and_tips/categorizing_your_mail_messages.htm" />
@@ -119,11 +119,11 @@
   <item name="Использование * (звездочки) в качестве подстановочного знака в профиле поиска" url="Search/Using_Wildcard_in_Search.htm" />
 </book>
 <book name="Установка настроек пользователя" >
-  <item name="Установка настроек Zimbra Desktop" url="Userspecific/z-Setting_your_Desktop_Preferences.htm" />
+  <item name="Установка настроек Zmail Desktop" url="Userspecific/z-Setting_your_Desktop_Preferences.htm" />
   <item name="Настройка уведомлений" url="Userspecific/Setting_up_desktop_alerts.htm" />
   <item name="Уведомление о приходе почты на другой адрес" url="Userspecific/New_mail_notifications.htm" />
   <item name="Сообщение об отсутствии" url="Userspecific/vacation_message.htm" />
-  <item name="Установка Zimbra Desktop почтовой программой по умолчанию" url="managing_your_account/Making_Zimbra_Desktop_Default_Mail_Client.htm" />
+  <item name="Установка Zmail Desktop почтовой программой по умолчанию" url="managing_your_account/Making_Zmail_Desktop_Default_Mail_Client.htm" />
 </book>
 <book name="Систематизация учетных записей" >
   <item name="Систематизация почтовых сообщений" url="Navigation_folders_and_tips/categorizing_your_mail_messages.htm#bc-1" />
@@ -144,8 +144,8 @@
   <item name="Перемещение задач" url="Tasks/Moving_tasks.htm" />
   <item name="Сортировка задач" url="Tasks/Sorting_tasks_.htm" />
 </book>
-<book name="Общий доступ к папкам (только для учетных записей Zimbra)" >
-<chunk name="Общий доступ к папкам (только для учетных записей Zimbra)" ref="whtdata1.xml" />
+<book name="Общий доступ к папкам (только для учетных записей Zmail)" >
+<chunk name="Общий доступ к папкам (только для учетных записей Zmail)" ref="whtdata1.xml" />
 </book>
 <book name="Использование портфеля" >
 <chunk name="Использование портфеля" ref="whtdata2.xml" />

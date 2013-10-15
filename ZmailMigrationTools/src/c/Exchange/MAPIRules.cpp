@@ -415,7 +415,7 @@ BOOL ConditionInfoToDetails(const RuleConditionInfo &ruleConditionInfo,
 }
 
 // CRuleProcessor class
-CRuleProcessor::CRuleProcessor(Zimbra::MAPI::MAPISession* session, Zimbra::MAPI::MAPIStore* store, std::wstring account) : m_session(session), m_userStore(store), m_account(account) {}
+CRuleProcessor::CRuleProcessor(Zmail::MAPI::MAPISession* session, Zmail::MAPI::MAPIStore* store, std::wstring account) : m_session(session), m_userStore(store), m_account(account) {}
 
 CRuleProcessor::~CRuleProcessor() {}
 
@@ -450,7 +450,7 @@ CString CRuleProcessor::MakeFolderPath(LPMAPIFOLDER pFolder, std::vector<CString
      * // the target store and compare entry ids.  Much safer.
      */
 
-    Zimbra::Util::ScopedBuffer<SPropValue> spIPMSubtreeEntryId;
+    Zmail::Util::ScopedBuffer<SPropValue> spIPMSubtreeEntryId;
 
     hr = HrGetOneProp(m_userStore->GetInternalMAPIStore(), PR_IPM_SUBTREE_ENTRYID,
         spIPMSubtreeEntryId.getptr());
@@ -1072,7 +1072,7 @@ bool CRuleProcessor::ProcessActions(CRule &rule, LPACTIONS pActions)
             {
                 for (j = 0; j < action.lpadrlist->cEntries; j++)
                 {
-                    Zimbra::Util::ScopedBuffer<SPropValue> pPropVals;
+                    Zmail::Util::ScopedBuffer<SPropValue> pPropVals;
 
                     SizedSPropTagArray(2, propTags) = {
                         2, { PR_DISPLAY_NAME_W, PR_EMAIL_ADDRESS_W }
@@ -1082,7 +1082,7 @@ bool CRuleProcessor::ProcessActions(CRule &rule, LPACTIONS pActions)
                     ADRENTRY lpEntry = action.lpadrlist->aEntries[j];
                     ULONG cbEID = lpEntry.rgPropVals->Value.bin.cb;
                     LPENTRYID lpEID = (LPENTRYID)lpEntry.rgPropVals->Value.bin.lpb;
-                    Zimbra::Util::ScopedInterface<IMAPIProp> spUnk;
+                    Zmail::Util::ScopedInterface<IMAPIProp> spUnk;
 
                     hr = m_session->OpenEntry(cbEID, lpEID, NULL, MAPI_BEST_ACCESS,
                         &objtype, (LPUNKNOWN *)spUnk.getptr());

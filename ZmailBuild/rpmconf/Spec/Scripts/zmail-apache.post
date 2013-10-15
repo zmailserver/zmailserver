@@ -14,11 +14,11 @@
 # ***** END LICENSE BLOCK *****
 # 
 
-if [ -x "/opt/zimbra/libexec/zmfixperms" ]; then
-  /opt/zimbra/libexec/zmfixperms
+if [ -x "/opt/zmail/libexec/zmfixperms" ]; then
+  /opt/zmail/libexec/zmfixperms
 fi
 
-if [ -L "/opt/zimbra/httpd" ]; then
-  rm -f /opt/zimbra/httpd
+if [ -L "/opt/zmail/httpd" ]; then
+  rm -f /opt/zmail/httpd
 fi
-ln -s /opt/zimbra/httpd-2.4.4 /opt/zimbra/httpd
+ln -s /opt/zmail/httpd-2.4.4 /opt/zmail/httpd

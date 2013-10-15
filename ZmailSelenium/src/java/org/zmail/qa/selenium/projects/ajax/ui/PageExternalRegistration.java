@@ -14,13 +14,13 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.ui;
+package org.zmail.qa.selenium.projects.ajax.ui;
 
 import java.net.URI;
 
-import com.zimbra.qa.selenium.framework.ui.AbsApplication;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.framework.util.performance.PerfMetrics;
+import org.zmail.qa.selenium.framework.ui.AbsApplication;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.performance.PerfMetrics;
 
 
 /**
@@ -36,7 +36,7 @@ public class PageExternalRegistration extends PageLogin {
 	 * The URL to register at.
 	 * example, https://zqa-062.eng.vmware.com/service/extuserprov/?p=0_46059ce585e90f5d2d5...12e636f6d3b
 	 */
-	protected ZimbraURI MyUrl = null;
+	protected ZmailURI MyUrl = null;
 	
 	
 
@@ -72,7 +72,7 @@ public class PageExternalRegistration extends PageLogin {
 	public void zSetURL(URI uri) throws HarnessException {
 		
 		// Add the code coverage and perf metrics to the URI
-		this.MyUrl = new ZimbraURI(uri);
+		this.MyUrl = new ZmailURI(uri);
 		
 		if ( CodeCoverage.getInstance().isEnabled() ) {
 			this.MyUrl.addQuery(CodeCoverage.getInstance().getQueryMap());
@@ -113,8 +113,8 @@ public class PageExternalRegistration extends PageLogin {
 	 * @param account
 	 * @throws HarnessException
 	 */
-	public void zLogin(ZimbraAccount account) throws HarnessException {
-		logger.debug("zLogin(ZimbraAccount account)" + account.EmailAddress);
+	public void zLogin(ZmailAccount account) throws HarnessException {
+		logger.debug("zLogin(ZmailAccount account)" + account.EmailAddress);
 
 		tracer.trace("Login to the "+ MyApplication.myApplicationName() +" using user/password "+ account.EmailAddress +"/"+ account.Password);
 

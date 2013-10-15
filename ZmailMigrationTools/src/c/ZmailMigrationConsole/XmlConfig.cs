@@ -2,7 +2,7 @@
 using System.IO;
 using System;
 
-namespace ZimbraMigrationConsole
+namespace ZmailMigrationConsole
 {
 class XmlConfig
 {
@@ -96,7 +96,7 @@ class XmlConfig
             }
             else
             {
-                Console.WriteLine("There is no UserMap file");  // "Zimbra Migration", MessageBoxButton.OK, MessageBoxImage.Error);
+                Console.WriteLine("There is no UserMap file");  // "Zmail Migration", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         catch (Exception e)

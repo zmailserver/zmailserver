@@ -33,7 +33,7 @@
  * @param {String}	params.color	the color
  * @param {String}	params.url		the URL for this organizer's feed
  * @param {String}	params.owner	the owner
- * @param {String}	params.zid		the Zimbra id of owner, if remote share
+ * @param {String}	params.zid		the Zmail id of owner, if remote share
  * @param {String}	params.rid		the remote id of organizer, if remote share
  * @param {String}	params.restUrl	[the REST URL of this organizer.
  * 

@@ -14,24 +14,24 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.briefcase.document;
+package org.zmail.qa.selenium.projects.ajax.tests.briefcase.document;
 
 import org.testng.annotations.Test;
-import com.zimbra.qa.selenium.framework.items.DocumentItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.ui.Shortcut;
-import com.zimbra.qa.selenium.framework.util.GeneralUtility;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.SleepUtil;
-import com.zimbra.qa.selenium.framework.util.XmlStringUtil;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.ajax.core.FeatureBriefcaseTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.briefcase.DialogConfirm;
+import org.zmail.qa.selenium.framework.items.DocumentItem;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.ui.Shortcut;
+import org.zmail.qa.selenium.framework.util.GeneralUtility;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.SleepUtil;
+import org.zmail.qa.selenium.framework.util.XmlStringUtil;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.ajax.core.FeatureBriefcaseTest;
+import org.zmail.qa.selenium.projects.ajax.ui.briefcase.DialogConfirm;
 
 public class DeleteDocument extends FeatureBriefcaseTest {
 
@@ -40,13 +40,13 @@ public class DeleteDocument extends FeatureBriefcaseTest {
 
 		super.startingPage = app.zPageBriefcase;
 		
-		super.startingAccountPreferences.put("zimbraPrefBriefcaseReadingPaneLocation", "bottom");
-		super.startingAccountPreferences.put("zimbraPrefShowSelectionCheckbox","TRUE");
+		super.startingAccountPreferences.put("zmailPrefBriefcaseReadingPaneLocation", "bottom");
+		super.startingAccountPreferences.put("zmailPrefShowSelectionCheckbox","TRUE");
 	}
 
 	@Test(description = "Create document through SOAP - delete & check trash", groups = { "smoke" })
 	public void DeleteDocument_01() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
@@ -65,12 +65,12 @@ public class DeleteDocument extends FeatureBriefcaseTest {
 				+ docText + "</body>" + "</html>");
 
 		account
-				.soapSend("<SaveDocumentRequest requestId='0' xmlns='urn:zimbraMail'>"
+				.soapSend("<SaveDocumentRequest requestId='0' xmlns='urn:zmailMail'>"
 						+ "<doc name='"
 						+ docName
 						+ "' l='"
 						+ briefcaseFolder.getId()
-						+ "' ct='application/x-zimbra-doc'>"
+						+ "' ct='application/x-zmail-doc'>"
 						+ "<content>"
 						+ contentHTML
 						+ "</content>"
@@ -110,7 +110,7 @@ public class DeleteDocument extends FeatureBriefcaseTest {
 
 		// Verify document moved to Trash
 		account
-				.soapSend("<SearchRequest xmlns='urn:zimbraMail' types='document'>"
+				.soapSend("<SearchRequest xmlns='urn:zmailMail' types='document'>"
 						+ "<query>in:"
 						+ trashFolder.getName()
 						+ " "
@@ -129,7 +129,7 @@ public class DeleteDocument extends FeatureBriefcaseTest {
 
 	@Test(description = "Create document through SOAP - delete using Delete Key & verify through GUI", groups = { "functional" })
 	public void DeleteDocument_02() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
@@ -147,12 +147,12 @@ public class DeleteDocument extends FeatureBriefcaseTest {
 				+ docText + "</body>" + "</html>");
 
 		account
-				.soapSend("<SaveDocumentRequest requestId='0' xmlns='urn:zimbraMail'>"
+				.soapSend("<SaveDocumentRequest requestId='0' xmlns='urn:zmailMail'>"
 						+ "<doc name='"
 						+ docName
 						+ "' l='"
 						+ briefcaseFolder.getId()
-						+ "' ct='application/x-zimbra-doc'>"
+						+ "' ct='application/x-zmail-doc'>"
 						+ "<content>"
 						+ contentHTML
 						+ "</content>"
@@ -169,7 +169,7 @@ public class DeleteDocument extends FeatureBriefcaseTest {
 		app.zPageBriefcase.zListItem(Action.A_LEFTCLICK, docItem);
 
 		// Click the Delete keyboard shortcut
-		// app.zPageBriefcase.zSelectWindow("Zimbra: Briefcase");
+		// app.zPageBriefcase.zSelectWindow("Zmail: Briefcase");
 		DialogConfirm deleteConfirm = (DialogConfirm) app.zPageBriefcase
 				.zKeyboardShortcut(shortcut);
 
@@ -191,7 +191,7 @@ public class DeleteDocument extends FeatureBriefcaseTest {
 
 	@Test(description = "Create document through SOAP - delete using Backspace Key & verify through GUI", groups = { "functional" })
 	public void DeleteDocument_03() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
@@ -209,12 +209,12 @@ public class DeleteDocument extends FeatureBriefcaseTest {
 				+ docText + "</body>" + "</html>");
 
 		account
-				.soapSend("<SaveDocumentRequest requestId='0' xmlns='urn:zimbraMail'>"
+				.soapSend("<SaveDocumentRequest requestId='0' xmlns='urn:zmailMail'>"
 						+ "<doc name='"
 						+ docName
 						+ "' l='"
 						+ briefcaseFolder.getId()
-						+ "' ct='application/x-zimbra-doc'>"
+						+ "' ct='application/x-zmail-doc'>"
 						+ "<content>"
 						+ contentHTML
 						+ "</content>"
@@ -231,7 +231,7 @@ public class DeleteDocument extends FeatureBriefcaseTest {
 		app.zPageBriefcase.zListItem(Action.A_LEFTCLICK, docItem);
 
 		// Delete Document using Backspace keyboard shortcut
-		// app.zPageBriefcase.zSelectWindow("Zimbra: Briefcase");
+		// app.zPageBriefcase.zSelectWindow("Zmail: Briefcase");
 		DialogConfirm deleteConfirm = (DialogConfirm) app.zPageBriefcase
 				.zKeyboardShortcut(shortcut);
 
@@ -253,7 +253,7 @@ public class DeleteDocument extends FeatureBriefcaseTest {
 
 	@Test(description = "Create document through SOAP - delete using Right Click context menu & verify through GUI", groups = { "functional" })
 	public void DeleteDocument_04() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
@@ -269,12 +269,12 @@ public class DeleteDocument extends FeatureBriefcaseTest {
 				+ docText + "</body>" + "</html>");
 
 		account
-				.soapSend("<SaveDocumentRequest requestId='0' xmlns='urn:zimbraMail'>"
+				.soapSend("<SaveDocumentRequest requestId='0' xmlns='urn:zmailMail'>"
 						+ "<doc name='"
 						+ docName
 						+ "' l='"
 						+ briefcaseFolder.getId()
-						+ "' ct='application/x-zimbra-doc'>"
+						+ "' ct='application/x-zmail-doc'>"
 						+ "<content>"
 						+ contentHTML
 						+ "</content>"
@@ -310,7 +310,7 @@ public class DeleteDocument extends FeatureBriefcaseTest {
 
 	@Test(description = "Delete multiple documents(3) by selecting check box and delete using toolbar", groups = { "functional" })
 	public void DeleteDocument_05() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
@@ -321,24 +321,24 @@ public class DeleteDocument extends FeatureBriefcaseTest {
 		// Create documents using SOAP
 		DocumentItem[] docItems = {
 				new DocumentItem("docName1"
-						+ ZimbraSeleniumProperties.getUniqueString()),
+						+ ZmailSeleniumProperties.getUniqueString()),
 				new DocumentItem("docName2"
-						+ ZimbraSeleniumProperties.getUniqueString()),
+						+ ZmailSeleniumProperties.getUniqueString()),
 				new DocumentItem("docName3"
-						+ ZimbraSeleniumProperties.getUniqueString()) };
+						+ ZmailSeleniumProperties.getUniqueString()) };
 
 		String contentHTML = XmlStringUtil.escapeXml("<html>" + "<body>"
-				+ ZimbraSeleniumProperties.getUniqueString() + "</body>"
+				+ ZmailSeleniumProperties.getUniqueString() + "</body>"
 				+ "</html>");
 
 		for (int i = 0; i < docItems.length; i++) {
 			account
-					.soapSend("<SaveDocumentRequest requestId='0' xmlns='urn:zimbraMail'>"
+					.soapSend("<SaveDocumentRequest requestId='0' xmlns='urn:zmailMail'>"
 							+ "<doc name='"
 							+ docItems[i].getName()
 							+ "' l='"
 							+ briefcaseFolder.getId()
-							+ "' ct='application/x-zimbra-doc'>"
+							+ "' ct='application/x-zmail-doc'>"
 							+ "<content>"
 							+ contentHTML
 							+ "</content>"
@@ -384,7 +384,7 @@ public class DeleteDocument extends FeatureBriefcaseTest {
 
 			// Verify document moved to Trash
 			account
-					.soapSend("<SearchRequest xmlns='urn:zimbraMail' types='document'>"
+					.soapSend("<SearchRequest xmlns='urn:zmailMail' types='document'>"
 							+ "<query>in:"
 							+ trashFolder.getName()
 							+ " "

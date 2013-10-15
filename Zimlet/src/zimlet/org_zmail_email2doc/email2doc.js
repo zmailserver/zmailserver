@@ -18,17 +18,17 @@
  * 
  * @author Raja Rao DV
  */
-function com_zimbra_email2doc_HandlerObject() {
+function org_zmail_email2doc_HandlerObject() {
 }
 
-com_zimbra_email2doc_HandlerObject.prototype = new ZmZimletBase();
-com_zimbra_email2doc_HandlerObject.prototype.constructor = com_zimbra_email2doc_HandlerObject;
+org_zmail_email2doc_HandlerObject.prototype = new ZmZimletBase();
+org_zmail_email2doc_HandlerObject.prototype.constructor = org_zmail_email2doc_HandlerObject;
 
 /**
  * Simplify handler object
  *
  */
-var Email2DocZimlet = com_zimbra_email2doc_HandlerObject;
+var Email2DocZimlet = org_zmail_email2doc_HandlerObject;
 
 /**
  * Handles an object drop action.
@@ -153,7 +153,7 @@ function(msg, attachment, fldr) {
 	if (msgId.indexOf(acctId) == 0) {
 		msgId = msgId.substr(msgId.indexOf(":") + 1);
 	}
-	var soapDoc = AjxSoapDoc.create("SaveDocumentRequest", "urn:zimbraMail");
+	var soapDoc = AjxSoapDoc.create("SaveDocumentRequest", "urn:zmailMail");
 	var doc = soapDoc.set("doc");
 	doc.setAttribute("l", folderId);
 	var mnode = soapDoc.set("m", null, doc);

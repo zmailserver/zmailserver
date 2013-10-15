@@ -14,18 +14,18 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.ui.briefcase;
+package org.zmail.qa.selenium.projects.ajax.ui.briefcase;
 
 import org.openqa.selenium.WebElement;
 
-import com.zimbra.qa.selenium.framework.items.DocumentItem;
-import com.zimbra.qa.selenium.framework.items.IItem;
-import com.zimbra.qa.selenium.framework.ui.AbsApplication;
-import com.zimbra.qa.selenium.framework.ui.AbsForm;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.ajax.ui.AppAjaxClient;
-import com.zimbra.qa.selenium.projects.ajax.ui.briefcase.DocumentBriefcaseNew.Field;
+import org.zmail.qa.selenium.framework.items.DocumentItem;
+import org.zmail.qa.selenium.framework.items.IItem;
+import org.zmail.qa.selenium.framework.ui.AbsApplication;
+import org.zmail.qa.selenium.framework.ui.AbsForm;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.ajax.ui.AppAjaxClient;
+import org.zmail.qa.selenium.projects.ajax.ui.briefcase.DocumentBriefcaseNew.Field;
 
 public class DocumentBriefcaseEdit extends AbsForm {
 
@@ -98,7 +98,7 @@ public class DocumentBriefcaseEdit extends AbsForm {
 			this.sFocus(nameFieldLocator);
 			this.zClickAt(nameFieldLocator, "0,0");
 			
-			if (ZimbraSeleniumProperties.isWebDriver()) {
+			if (ZmailSeleniumProperties.isWebDriver()) {
 				this.clearField(nameFieldLocator);
 			}
 			
@@ -114,7 +114,7 @@ public class DocumentBriefcaseEdit extends AbsForm {
 			if (!this.sIsElementPresent(iframeLocator))
 				throw new HarnessException("Locator is not present: "
 						+ iframeLocator);
-			if (ZimbraSeleniumProperties.isWebDriver()) {
+			if (ZmailSeleniumProperties.isWebDriver()) {
 				// String locator = Locators.zBodyField;
 				// sSelectFrame(Locators.zFrame);
 				// this.sType(locator, value);

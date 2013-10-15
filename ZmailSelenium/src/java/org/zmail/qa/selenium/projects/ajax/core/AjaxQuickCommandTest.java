@@ -14,16 +14,16 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.core;
+package org.zmail.qa.selenium.projects.ajax.core;
 
 import java.util.ArrayList;
 
 import org.apache.log4j.*;
 
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.items.QuickCommand.*;
-import com.zimbra.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.items.QuickCommand.*;
+import org.zmail.qa.selenium.framework.util.*;
 
 /**
  * A base class that creates some basic Quick Command shortcuts in the mailbox.  This
@@ -68,23 +68,23 @@ public class AjaxQuickCommandTest extends AjaxCommonTest {
 		
 		
 		// Create a tag
-		String tagname = "tag" + ZimbraSeleniumProperties.getUniqueString();
-		ZimbraAccount.AccountZWC().soapSend(
-					"<CreateTagRequest xmlns='urn:zimbraMail'>"
+		String tagname = "tag" + ZmailSeleniumProperties.getUniqueString();
+		ZmailAccount.AccountZWC().soapSend(
+					"<CreateTagRequest xmlns='urn:zmailMail'>"
 				+		"<tag name='"+ tagname +"' color='1' />"
 				+	"</CreateTagRequest>");
 
-		TagItem tag = TagItem.importFromSOAP(ZimbraAccount.AccountZWC(), tagname);
+		TagItem tag = TagItem.importFromSOAP(ZmailAccount.AccountZWC(), tagname);
 		ZAssert.assertNotNull(tag, "Verify the tag was created");
 
 		// Create a subfolder
-		String foldername = "folder" + ZimbraSeleniumProperties.getUniqueString();
-		ZimbraAccount.AccountZWC().soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>"
+		String foldername = "folder" + ZmailSeleniumProperties.getUniqueString();
+		ZmailAccount.AccountZWC().soapSend(
+					"<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+		"<folder name='"+ foldername +"' l='1' view='message'/>"
 				+	"</CreateFolderRequest>");
 
-		FolderItem folder = FolderItem.importFromSOAP(ZimbraAccount.AccountZWC(), foldername);
+		FolderItem folder = FolderItem.importFromSOAP(ZmailAccount.AccountZWC(), foldername);
 		ZAssert.assertNotNull(folder, "Verify the subfolder is available");
 
 		// Create the list of actions
@@ -95,8 +95,8 @@ public class AjaxQuickCommandTest extends AjaxCommonTest {
 		actions.add(new QuickCommandAction(QuickCommandAction.TypeId.actionFileInto, folder.getId(), true));
 
 
-		String name = "name" + ZimbraSeleniumProperties.getUniqueString();
-		String description = "description" + ZimbraSeleniumProperties.getUniqueString();
+		String name = "name" + ZmailSeleniumProperties.getUniqueString();
+		String description = "description" + ZmailSeleniumProperties.getUniqueString();
 		
 		command1 = new QuickCommand(name, description, ItemTypeId.MSG, true);
 		command1.addActions(actions);
@@ -121,23 +121,23 @@ public class AjaxQuickCommandTest extends AjaxCommonTest {
 		
 		
 		// Create a tag
-		String tagname = "tag" + ZimbraSeleniumProperties.getUniqueString();
-		ZimbraAccount.AccountZWC().soapSend(
-					"<CreateTagRequest xmlns='urn:zimbraMail'>"
+		String tagname = "tag" + ZmailSeleniumProperties.getUniqueString();
+		ZmailAccount.AccountZWC().soapSend(
+					"<CreateTagRequest xmlns='urn:zmailMail'>"
 				+		"<tag name='"+ tagname +"' color='1' />"
 				+	"</CreateTagRequest>");
 
-		TagItem tag = TagItem.importFromSOAP(ZimbraAccount.AccountZWC(), tagname);
+		TagItem tag = TagItem.importFromSOAP(ZmailAccount.AccountZWC(), tagname);
 		ZAssert.assertNotNull(tag, "Verify the tag was created");
 
 		// Create a subfolder
-		String foldername = "folder" + ZimbraSeleniumProperties.getUniqueString();
-		ZimbraAccount.AccountZWC().soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>"
+		String foldername = "folder" + ZmailSeleniumProperties.getUniqueString();
+		ZmailAccount.AccountZWC().soapSend(
+					"<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+		"<folder name='"+ foldername +"' l='1' view='contact'/>"
 				+	"</CreateFolderRequest>");
 
-		FolderItem folder = FolderItem.importFromSOAP(ZimbraAccount.AccountZWC(), foldername);
+		FolderItem folder = FolderItem.importFromSOAP(ZmailAccount.AccountZWC(), foldername);
 		ZAssert.assertNotNull(folder, "Verify the subfolder is available");
 
 		// Create the list of actions
@@ -146,8 +146,8 @@ public class AjaxQuickCommandTest extends AjaxCommonTest {
 		actions.add(new QuickCommandAction(QuickCommandAction.TypeId.actionFileInto, folder.getId(), true));
 
 
-		String name = "name" + ZimbraSeleniumProperties.getUniqueString();
-		String description = "description" + ZimbraSeleniumProperties.getUniqueString();
+		String name = "name" + ZmailSeleniumProperties.getUniqueString();
+		String description = "description" + ZmailSeleniumProperties.getUniqueString();
 		
 		command2 = new QuickCommand(name, description, ItemTypeId.CONTACT, true);
 		command2.addActions(actions);
@@ -173,23 +173,23 @@ public class AjaxQuickCommandTest extends AjaxCommonTest {
 		
 		
 		// Create a tag
-		String tagname = "tag" + ZimbraSeleniumProperties.getUniqueString();
-		ZimbraAccount.AccountZWC().soapSend(
-					"<CreateTagRequest xmlns='urn:zimbraMail'>"
+		String tagname = "tag" + ZmailSeleniumProperties.getUniqueString();
+		ZmailAccount.AccountZWC().soapSend(
+					"<CreateTagRequest xmlns='urn:zmailMail'>"
 				+		"<tag name='"+ tagname +"' color='1' />"
 				+	"</CreateTagRequest>");
 
-		TagItem tag = TagItem.importFromSOAP(ZimbraAccount.AccountZWC(), tagname);
+		TagItem tag = TagItem.importFromSOAP(ZmailAccount.AccountZWC(), tagname);
 		ZAssert.assertNotNull(tag, "Verify the tag was created");
 
 		// Create a subfolder
-		String foldername = "folder" + ZimbraSeleniumProperties.getUniqueString();
-		ZimbraAccount.AccountZWC().soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>"
+		String foldername = "folder" + ZmailSeleniumProperties.getUniqueString();
+		ZmailAccount.AccountZWC().soapSend(
+					"<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+		"<folder name='"+ foldername +"' l='1' view='appointment'/>"
 				+	"</CreateFolderRequest>");
 
-		FolderItem folder = FolderItem.importFromSOAP(ZimbraAccount.AccountZWC(), foldername);
+		FolderItem folder = FolderItem.importFromSOAP(ZmailAccount.AccountZWC(), foldername);
 		ZAssert.assertNotNull(folder, "Verify the subfolder is available");
 
 		// Create the list of actions
@@ -200,8 +200,8 @@ public class AjaxQuickCommandTest extends AjaxCommonTest {
 		actions.add(new QuickCommandAction(QuickCommandAction.TypeId.actionFileInto, folder.getId(), true));
 
 
-		String name = "name" + ZimbraSeleniumProperties.getUniqueString();
-		String description = "description" + ZimbraSeleniumProperties.getUniqueString();
+		String name = "name" + ZmailSeleniumProperties.getUniqueString();
+		String description = "description" + ZmailSeleniumProperties.getUniqueString();
 		
 		command3 = new QuickCommand(name, description, ItemTypeId.APPT, true);
 		command3.addActions(actions);
@@ -221,11 +221,11 @@ public class AjaxQuickCommandTest extends AjaxCommonTest {
 		
 
 		// Create a quick command in the user preferences
-		ZimbraAccount.AccountZWC().soapSend(
-				"<ModifyPrefsRequest xmlns='urn:zimbraAccount'>"
-				+		"<pref name='zimbraPrefQuickCommand'>"+ this.getQuickCommand01().toString() +"</pref>"
-				+		"<pref name='zimbraPrefQuickCommand'>"+ this.getQuickCommand02().toString() +"</pref>"
-				+		"<pref name='zimbraPrefQuickCommand'>"+ this.getQuickCommand03().toString() +"</pref>"
+		ZmailAccount.AccountZWC().soapSend(
+				"<ModifyPrefsRequest xmlns='urn:zmailAccount'>"
+				+		"<pref name='zmailPrefQuickCommand'>"+ this.getQuickCommand01().toString() +"</pref>"
+				+		"<pref name='zmailPrefQuickCommand'>"+ this.getQuickCommand02().toString() +"</pref>"
+				+		"<pref name='zmailPrefQuickCommand'>"+ this.getQuickCommand03().toString() +"</pref>"
 				+	"</ModifyPrefsRequest>");
 
 		

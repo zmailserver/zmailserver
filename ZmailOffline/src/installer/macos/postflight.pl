@@ -54,7 +54,7 @@ my $prism_app = "$app_root/macos/prism/Prism.app";
 
 system("mv \"${prism_app}_noreloc\" \"$prism_app\"");
 system("mv \"${updater_app}_noreloc\" \"$updater_app\"");
-system("mv \"$app_root/macos/Zimbra Desktop.app_noreloc\" \"$app_root/Zimbra Desktop.app\"");
+system("mv \"$app_root/macos/Zmail Desktop.app_noreloc\" \"$app_root/Zmail Desktop.app\"");
 system("chown -R root:admin \"$app_root\"");
 
 # set current user as the owner of update dirs so that auto-update can work
@@ -72,11 +72,11 @@ my $tokens = {
     '@INSTALL.APP.ROOT@' => $app_root,
     '@INSTALL.APP.TIMESTAMP@' => time()
 };
-find_and_replace("$app_root/Zimbra Desktop.app/Contents/MacOS/zdrun", $tokens);
+find_and_replace("$app_root/Zmail Desktop.app/Contents/MacOS/zdrun", $tokens);
 
 # open zd app in finder
 # system("open \"$app_root\"");
 
 # launch zd
-system("open \"$app_root/Zimbra Desktop.app\"");
+system("open \"$app_root/Zmail Desktop.app\"");
 

@@ -155,14 +155,14 @@ ZaMTA.prototype.QCountsCallback = function (resp) {
 * @return {ZaItemList} a list of ZaMTA objects {@link ZaItemList}
 **/
 ZaMTA.getAll = function () {
-	var soapDoc = AjxSoapDoc.create("GetAllServersRequest", ZaZimbraAdmin.URN, null);	
+	var soapDoc = AjxSoapDoc.create("GetAllServersRequest", ZaZmailAdmin.URN, null);	
 	soapDoc.getMethod().setAttribute("service", "mta");
 	soapDoc.getMethod().setAttribute("applyConfig", "false");
 	//var command = new ZmCsfeCommand();
 	var params = new Object();
 	params.asyncMode=false;
 	params.soapDoc = soapDoc;
-	soapDoc.setMethodAttribute("attrs", [ZaServer.A_ServiceHostname, ZaServer.A_description, ZaServer.A_zimbraServiceEnabled, ZaServer.A_zimbraServiceInstalled, ZaItem.A_zimbraId].join(","));	
+	soapDoc.setMethodAttribute("attrs", [ZaServer.A_ServiceHostname, ZaServer.A_description, ZaServer.A_zmailServiceEnabled, ZaServer.A_zmailServiceInstalled, ZaItem.A_zmailId].join(","));	
 	var reqMgrParams = {
 		controller : ZaApp.getInstance().getCurrentController(),
 		busyMsg : ZaMsg.BUSY_GET_ALL_SERVER
@@ -294,7 +294,7 @@ ZaMTA.prototype.initFromJS = function (obj, summary) {
 **/
 ZaMTA.loadMethod = 
 function(by, val) {
-	var soapDoc = AjxSoapDoc.create("GetMailQueueInfoRequest", ZaZimbraAdmin.URN, null);
+	var soapDoc = AjxSoapDoc.create("GetMailQueueInfoRequest", ZaZmailAdmin.URN, null);
 	var attr = soapDoc.set("server", "");
 	attr.setAttribute("name", this.name);		
 	var command = new ZmCsfeCommand();
@@ -323,7 +323,7 @@ ZaMTA.prototype.getMailQStatus = function (qName,query,offset,limit,force) {
 	offset = (offset != null) ? offset: "0";
 	//query = (query != null) ? query: "";	
 	
-	var soapDoc = AjxSoapDoc.create("GetMailQueueRequest", ZaZimbraAdmin.URN, null);
+	var soapDoc = AjxSoapDoc.create("GetMailQueueRequest", ZaZmailAdmin.URN, null);
 
 	var serverEl = soapDoc.set("server", "");
 	serverEl.setAttribute("name", this.name);		
@@ -423,7 +423,7 @@ ZaMTA.prototype.mailQStatusCallback = function (arg,resp) {
 }
 
 ZaMTA.prototype.mailQueueAction = function (qName, action, by, val) {
-	var soapDoc = AjxSoapDoc.create("MailQueueActionRequest", ZaZimbraAdmin.URN, null);
+	var soapDoc = AjxSoapDoc.create("MailQueueActionRequest", ZaZmailAdmin.URN, null);
 	var serverEl = soapDoc.set("server", "");
 	serverEl.setAttribute("name", this.name);		
 	var qEl = soapDoc.getDoc().createElement("queue");
@@ -499,7 +499,7 @@ ZaMTA.prototype.mailQueueActionClbck = function (qName, resp) {
 }
 
 ZaMTA.prototype.flushQueues = function () {
-	var soapDoc = AjxSoapDoc.create("MailQueueFlushRequest", ZaZimbraAdmin.URN, null);
+	var soapDoc = AjxSoapDoc.create("MailQueueFlushRequest", ZaZmailAdmin.URN, null);
 	var serverEl = soapDoc.set("server", "");
 	serverEl.setAttribute("name", this.name);		
 
@@ -518,7 +518,7 @@ ZaMTA.initMethod = function () {
 	this.attrs = new Object();
 	this.id = "";
 	this.name="";
-	this[ZaItem.A_zimbraId] = "000"
+	this[ZaItem.A_zmailId] = "000"
 	this[ZaMTA.A_DeferredQ] = {n:ZaMsg.PQ_Loading};
 	this[ZaMTA.A_IncomingQ] = {n:ZaMsg.PQ_Loading};
 	this[ZaMTA.A_ActiveQ] = {n:ZaMsg.PQ_Loading};	

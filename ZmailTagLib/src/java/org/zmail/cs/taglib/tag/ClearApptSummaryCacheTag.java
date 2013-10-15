@@ -13,14 +13,14 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.taglib.tag;
+package org.zmail.cs.taglib.tag;
 
-import com.zimbra.client.ZMailbox;
+import org.zmail.client.ZMailbox;
 
 import javax.servlet.jsp.JspException;
 import java.io.IOException;
 
-public class ClearApptSummaryCacheTag extends ZimbraSimpleTag {
+public class ClearApptSummaryCacheTag extends ZmailSimpleTag {
 
     public void doTag() throws JspException, IOException {
         ZMailbox mbox = getMailbox();

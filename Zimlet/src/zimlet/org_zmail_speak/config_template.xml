@@ -14,7 +14,7 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimletConfig name="com_zimbra_speak" version="1.0">
+<zimletConfig name="org_zmail_speak" version="1.0">
     <global>
     </global>
 </zimletConfig>

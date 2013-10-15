@@ -26,9 +26,9 @@ XFormItemFactory.createItemType("_SIGNATURE_", "signature", Signature_XFormItem,
 Signature_XFormItem.prototype.numCols = 1;
 Signature_XFormItem.prototype.nowrap = true;
 
-Signature_XFormItem.A_zimbraSigatureName = "name";
-Signature_XFormItem.A_zimbraSigatureContent = "content";
-Signature_XFormItem.A_zimbraSigatureType = "type";
+Signature_XFormItem.A_zmailSigatureName = "name";
+Signature_XFormItem.A_zmailSigatureContent = "content";
+Signature_XFormItem.A_zmailSigatureType = "type";
 
 Signature_XFormItem.prototype.visibilityChecks = [ZaItem.hasReadPermission];
 Signature_XFormItem.prototype.enableDisableChecks = [ZaItem.hasWritePermission];

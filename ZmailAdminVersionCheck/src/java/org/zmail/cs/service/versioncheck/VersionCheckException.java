@@ -14,9 +14,9 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.versioncheck;
+package org.zmail.cs.service.versioncheck;
 
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
 
 public class VersionCheckException extends ServiceException {

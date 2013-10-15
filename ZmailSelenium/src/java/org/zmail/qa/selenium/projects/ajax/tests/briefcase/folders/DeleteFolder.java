@@ -14,15 +14,15 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.briefcase.folders;
+package org.zmail.qa.selenium.projects.ajax.tests.briefcase.folders;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.FeatureBriefcaseTest;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.FeatureBriefcaseTest;
 
 public class DeleteFolder extends FeatureBriefcaseTest {
 
@@ -35,7 +35,7 @@ public class DeleteFolder extends FeatureBriefcaseTest {
 
 	@Test(description = "Delete a briefcase sub-folder - Right click, Delete", groups = { "smoke" })
 	public void DeleteFolder_01() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseRootFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
@@ -49,9 +49,9 @@ public class DeleteFolder extends FeatureBriefcaseTest {
 
 		// Create the sub-folder
 		String briefcaseSubFolderName = "folder"
-				+ ZimbraSeleniumProperties.getUniqueString();
+				+ ZmailSeleniumProperties.getUniqueString();
 
-		account.soapSend("<CreateFolderRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+ "<folder name='" + briefcaseSubFolderName + "' l='"
 				+ briefcaseRootFolder.getId() + "'/>"
 				+ "</CreateFolderRequest>");
@@ -80,7 +80,7 @@ public class DeleteFolder extends FeatureBriefcaseTest {
 
 	@Test(description = "Delete a a top level briefcase folder - Right click, Delete", groups = { "smoke" })
 	public void DeleteFolder_02() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseRootFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
@@ -97,9 +97,9 @@ public class DeleteFolder extends FeatureBriefcaseTest {
 
 		// Create a top level briefcase folder
 		String briefcaseTopLevelFolderName = "folder"
-				+ ZimbraSeleniumProperties.getUniqueString();
+				+ ZmailSeleniumProperties.getUniqueString();
 
-		account.soapSend("<CreateFolderRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+ "<folder name='" + briefcaseTopLevelFolderName + "' l='"
 				+ userRootFolder.getId() + "' view='document'/>"
 				+ "</CreateFolderRequest>");

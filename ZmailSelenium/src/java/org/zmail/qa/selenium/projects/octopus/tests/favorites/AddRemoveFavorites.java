@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.octopus.tests.favorites;
+package org.zmail.qa.selenium.projects.octopus.tests.favorites;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,18 +23,18 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.FileItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.SleepUtil;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.octopus.core.OctopusCommonTest;
-import com.zimbra.qa.selenium.projects.octopus.ui.DisplayFilePreview;
-import com.zimbra.qa.selenium.projects.octopus.ui.PageOctopus;
+import org.zmail.qa.selenium.framework.items.FileItem;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.SleepUtil;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.octopus.core.OctopusCommonTest;
+import org.zmail.qa.selenium.projects.octopus.ui.DisplayFilePreview;
+import org.zmail.qa.selenium.projects.octopus.ui.PageOctopus;
 
 
 public class AddRemoveFavorites extends OctopusCommonTest {
@@ -64,7 +64,7 @@ public class AddRemoveFavorites extends OctopusCommonTest {
 
 	@Test(description = "Mark file as Favorite through SOAP - verify file was added to Favorites using SOAP", groups = { "functional" })
 	public void AddRemoveFavorites_01() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseRootFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
@@ -72,7 +72,7 @@ public class AddRemoveFavorites extends OctopusCommonTest {
 		FolderItem subFolderItem=createFolderViaSoap(account, briefcaseRootFolder);
 
 		// Create file item
-		String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+		String filePath = ZmailSeleniumProperties.getBaseDirectory()
 		+ "/data/public/other/testsoundfile.wav";
 
 		// Upload file to server through RestUtil
@@ -92,7 +92,7 @@ public class AddRemoveFavorites extends OctopusCommonTest {
 		SleepUtil.sleepSmall();
 
 		// Verify the file was added to the Favorites using SOAP
-		account.soapSend("<GetWatchingItemsRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<GetWatchingItemsRequest xmlns='urn:zmailMail'>"
 				+ "</GetWatchingItemsRequest>");
 
 		ZAssert.assertTrue(account.soapMatch(
@@ -102,13 +102,13 @@ public class AddRemoveFavorites extends OctopusCommonTest {
 
 	@Test(description = "Mark file as Favorite using Context menu - verify file appears in the Favorites tab", groups = { "smoke" })
 	public void AddRemoveFavorites_02() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseRootFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
 
 		// Create file item
-		String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+		String filePath = ZmailSeleniumProperties.getBaseDirectory()
 		+ "/data/public/other/testtextfile.txt";
 
 		FileItem file = new FileItem(filePath);
@@ -155,13 +155,13 @@ public class AddRemoveFavorites extends OctopusCommonTest {
 
 	@Test(description = "Mark file as Not Favorite using Context menu - verify favorite file dissapears from the Favorites tab", groups = { "functional1" })
 	public void AddRemoveFavorites_03() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseRootFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
 
 		// Create first file item
-		String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+		String filePath = ZmailSeleniumProperties.getBaseDirectory()
 		+ "/data/public/other/structure.jpg";
 
 		FileItem file = new FileItem(filePath);
@@ -188,7 +188,7 @@ public class AddRemoveFavorites extends OctopusCommonTest {
 		SleepUtil.sleepSmall();
 
 		// Verify the file was added to the Favorites using SOAP
-		account.soapSend("<GetWatchingItemsRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<GetWatchingItemsRequest xmlns='urn:zmailMail'>"
 				+ "</GetWatchingItemsRequest>");
 
 		ZAssert.assertTrue(account.soapMatch(
@@ -257,7 +257,7 @@ public class AddRemoveFavorites extends OctopusCommonTest {
 		 */
 
 		// Verify the file was removed from the Favorites using SOAP
-		account.soapSend("<GetWatchingItemsRequest xmlns='urn:zimbraMail'>"
+		account.soapSend("<GetWatchingItemsRequest xmlns='urn:zmailMail'>"
 				+ "</GetWatchingItemsRequest>");
 
 		ZAssert.assertFalse(account.soapMatch(
@@ -296,11 +296,11 @@ public class AddRemoveFavorites extends OctopusCommonTest {
 		}
 		try {
 			// Refresh view
-			//ZimbraAccount account = app.zGetActiveAccount();
+			//ZmailAccount account = app.zGetActiveAccount();
 			//FolderItem item = FolderItem.importFromSOAP(account,SystemFolder.Briefcase);
-			//account.soapSend("<GetFolderRequest xmlns='urn:zimbraMail'><folder l='1' recursive='0'/>" + "</GetFolderRequest>");
-			//account.soapSend("<GetFolderRequest xmlns='urn:zimbraMail' requestId='folders' depth='1' tr='true' view='document'><folder l='" + item.getId() + "'/></GetFolderRequest>");
-			//account.soapSend("<GetActivityStreamRequest xmlns='urn:zimbraMail' id='16'/>");
+			//account.soapSend("<GetFolderRequest xmlns='urn:zmailMail'><folder l='1' recursive='0'/>" + "</GetFolderRequest>");
+			//account.soapSend("<GetFolderRequest xmlns='urn:zmailMail' requestId='folders' depth='1' tr='true' view='document'><folder l='" + item.getId() + "'/></GetFolderRequest>");
+			//account.soapSend("<GetActivityStreamRequest xmlns='urn:zmailMail' id='16'/>");
 			//app.zGetActiveAccount().accountIsDirty = true;
 			//app.zPageOctopus.sRefresh();
 

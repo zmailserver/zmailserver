@@ -22,8 +22,8 @@ basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
     <title>DwtCalTest</title>
     <style type="text/css">
       <!--
-        @import url(/zimbra/img/imgs.css);
-        @import url(/zimbra/js/zimbraMail/config/style/zm.css);
+        @import url(/zmail/img/imgs.css);
+        @import url(/zmail/js/zmailMail/config/style/zm.css);
       -->
     </style>
     <jsp:include page="../../public/Messages.jsp"/>

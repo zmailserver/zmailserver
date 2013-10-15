@@ -21,8 +21,8 @@
 **/
 ZaSearchBuilderController = function(appCtxt, container) {
 	ZaController.call(this, appCtxt, container,"ZaSearchBuilderController");
-	this._helpURL = location.pathname + ZaUtil.HELP_URL + "managing_servers/monitoring_zimbra_collaboration_suite.htm?locid="+AjxEnv.DEFAULT_LOCALE;
-	this._helpButtonText = ZaMsg.zimbraHelpCenter;
+	this._helpURL = location.pathname + ZaUtil.HELP_URL + "managing_servers/monitoring_zmail_collaboration_suite.htm?locid="+AjxEnv.DEFAULT_LOCALE;
+	this._helpButtonText = ZaMsg.zmailHelpCenter;
    	this._option_views = [];
 	this._searchBuildPanel = null;
 	this._searchBuildTBPanel = null ;
@@ -421,7 +421,7 @@ function () {
 				}
 				if (key == ZaSearchOption.A_accountLastLoginTime_From) {
 					if (instance[ZaSearchOption.A_enableAccountLastLoginTime_From] == "TRUE") {
-						key = ZaAccount.A_zimbraLastLogonTimestamp ;
+						key = ZaAccount.A_zmailLastLogonTimestamp ;
 						op = ">=" ;
 					}else{
 						continue ;
@@ -430,7 +430,7 @@ function () {
 				
 				if (key == ZaSearchOption.A_accountLastLoginTime_To) {
 					if (instance[ZaSearchOption.A_enableAccountLastLoginTime_To] == "TRUE") {
-						key = ZaAccount.A_zimbraLastLogonTimestamp ;
+						key = ZaAccount.A_zmailLastLogonTimestamp ;
 						op = "<=" ;
 					}else{
 						continue ;
@@ -514,11 +514,11 @@ function (filter, key, value, op) {
 		if (value.size () > 0) {
 			entry = ZaSearchBuilderController.getCosFilter4ListArray(value.getArray());
 		}
-    }else if (key == ZaAccount.A_zimbraLastLogonTimestamp){
+    }else if (key == ZaAccount.A_zmailLastLogonTimestamp){
 		entry = "("	+ key + op + value + ")";
-	}else if (key == ZaSearchOption.A_zimbraMailForwardingAddress ){
+	}else if (key == ZaSearchOption.A_zmailMailForwardingAddress ){
 		entry = "(" + key + "=*" + value + "*)" ;
-                entry += "(" + ZaSearchOption.A_zimbraPrefMailForwardingAddress + "=*" + value + "*)" ;
+                entry += "(" + ZaSearchOption.A_zmailPrefMailForwardingAddress + "=*" + value + "*)" ;
                 entry = "(|" + entry + ")";
     } else if (searchListController.searchResultFilter.indexOf(key) >= 0) {
         if(!searchListController._filterObj || !(searchListController._filterObj instanceof Object))
@@ -607,7 +607,7 @@ function (arr, key) {
 	//special cases for the Never Logged In Accounts
 	if (key == ZaSearchOption.ADVANCED_ID){ //for the advanced attribute tab
 		if (this._includeNeverLoggedInAccts) {
-			query += "(!(" + ZaAccount.A_zimbraLastLogonTimestamp + "=*))" ;
+			query += "(!(" + ZaAccount.A_zmailLastLogonTimestamp + "=*))" ;
 			numberOfFilters ++ ;
 		}
 	}
@@ -642,7 +642,7 @@ function (arr, optionId) {
 	for (var i =0; i < arr.length; i ++ ) {
 		if (optionId == ZaSearchOption.DOMAIN_ID) {
 			query += "(" + ZaAccount.A_mailDeliveryAddress + "=*@" + arr[i] + ")"
-				   + "(" + ZaAccount.A_zimbraMailAlias+ "=*@" + arr[i] + ")";
+				   + "(" + ZaAccount.A_zmailMailAlias+ "=*@" + arr[i] + ")";
 		}else if (optionId == ZaSearchOption.SERVER_ID){
 			query += "(" + ZaAccount.A_mailHost + "=" + arr[i] + ")";
 		}
@@ -925,7 +925,7 @@ function (dialog) {
 		    }
 		    if (key == ZaSearchOption.A_accountLastLoginTime_From) {
 			    if (instance[ZaSearchOption.A_enableAccountLastLoginTime_From] == "TRUE") {
-				    key = ZaAccount.A_zimbraLastLogonTimestamp ;
+				    key = ZaAccount.A_zmailLastLogonTimestamp ;
 				    op = ">=" ;
 			    }else{
 				    continue ;
@@ -933,7 +933,7 @@ function (dialog) {
 		    }
             if (key == ZaSearchOption.A_accountLastLoginTime_To) {
 			    if (instance[ZaSearchOption.A_enableAccountLastLoginTime_To] == "TRUE") {
-				    key = ZaAccount.A_zimbraLastLogonTimestamp ;
+				    key = ZaAccount.A_zmailLastLogonTimestamp ;
 					    op = "<=" ;
 			    }else{
 				    continue ;
@@ -1045,11 +1045,11 @@ function (filter, key, value, op) {
 		if (value.length > 0) {
 			entry = ZaSearchBuilderController.newGetOrFilter4ListArray(value, ZaSearchOption.STATUS_FILTER_ID);
 		}
-    }else if (key == ZaAccount.A_zimbraLastLogonTimestamp){
+    }else if (key == ZaAccount.A_zmailLastLogonTimestamp){
 		entry = "("	+ key + op + value + ")";
-	}else if (key == ZaSearchOption.A_zimbraMailForwardingAddress ){
+	}else if (key == ZaSearchOption.A_zmailMailForwardingAddress ){
 		entry = "(" + key + "=*" + value + "*)" ;
-        entry += "(" + ZaSearchOption.A_zimbraPrefMailForwardingAddress + "=*" + value + "*)" ;
+        entry += "(" + ZaSearchOption.A_zmailPrefMailForwardingAddress + "=*" + value + "*)" ;
         entry = "(|" + entry + ")";
     } else {
         entry = "(" + key + "=*" + value + "*)" ;
@@ -1088,7 +1088,7 @@ function (arr, key) {
 	//special cases for the Never Logged In Accounts
 	if (key == ZaSearchOption.LASTER_LOGIN_TIME_FILTER_ID){ //for the advanced attribute tab
 		if (this._includeNeverLoggedInAccts) {
-			query += "(!(" + ZaAccount.A_zimbraLastLogonTimestamp + "=*))" ;
+			query += "(!(" + ZaAccount.A_zmailLastLogonTimestamp + "=*))" ;
 			numberOfFilters ++ ;
 		}
 	}
@@ -1120,7 +1120,7 @@ function (arr, optionId) {
 	for (var i =0; i < arr.length; i ++ ) {
 		if (optionId == ZaSearchOption.DOMAIN_FILTER_ID) {
 			query += "(" + ZaAccount.A_mailDeliveryAddress + "=*@" + arr[i] + ")"
-				   + "(" + ZaAccount.A_zimbraMailAlias+ "=*@" + arr[i] + ")";
+				   + "(" + ZaAccount.A_zmailMailAlias+ "=*@" + arr[i] + ")";
 		}else if (optionId == ZaSearchOption.SERVER_FILTER_ID){
 			query += "(" + ZaAccount.A_mailHost + "=" + arr[i] + ")";
 		}else if (optionId == ZaSearchOption.STATUS_FILTER_ID){

@@ -17,14 +17,14 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.ajax.ui.preferences;
+package org.zmail.qa.selenium.projects.ajax.ui.preferences;
 
-import com.zimbra.qa.selenium.framework.ui.AbsApplication;
-import com.zimbra.qa.selenium.framework.ui.AbsDialog;
-import com.zimbra.qa.selenium.framework.ui.AbsPage;
-import com.zimbra.qa.selenium.framework.ui.AbsTab;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.ui.AbsApplication;
+import org.zmail.qa.selenium.framework.ui.AbsDialog;
+import org.zmail.qa.selenium.framework.ui.AbsPage;
+import org.zmail.qa.selenium.framework.ui.AbsTab;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
 
 
 
@@ -173,7 +173,7 @@ public class DialogEditFilter extends AbsDialog {
 		this.zClick(locator);
 		this.zWaitForBusyOverlay();
 		
-		throw new HarnessException("see https://bugzilla.zimbra.com/show_bug.cgi?id=63823");
+		throw new HarnessException("see https://bugzilla.zmail.com/show_bug.cgi?id=63823");
 	}
 	
 	

@@ -14,15 +14,15 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.staf;
+package org.zmail.qa.selenium.staf;
 
 import java.io.*;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.staf.*;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.staf.*;
 
 public class StafDevProperties {
     private static Logger logger = Logger.getLogger(StafDevProperties.class);

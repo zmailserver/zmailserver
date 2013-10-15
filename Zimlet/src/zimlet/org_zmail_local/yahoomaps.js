@@ -30,7 +30,7 @@ YahooMaps.prototype = new DwtComposite;
 YahooMaps.prototype.constructor = new YahooMaps;
 
 // Constants
-YahooMaps.APPID					= "ZimbraMail";
+YahooMaps.APPID					= "ZmailMail";
 YahooMaps.VERSION				= "3.7";
 YahooMaps.DEFAULT_ZOOMLEVEL		= 5;
 YahooMaps.QUERY_RESULTS			= 10;
@@ -185,13 +185,13 @@ function(result) {
 	html[idx++] = result.URL;
 	html[idx++] = "'});\"'>+Contact</a>";
 
-	if (appCtxt.getZimletMgr().zimletExists("com_zimbra_asterisk")) {
+	if (appCtxt.getZimletMgr().zimletExists("org_zmail_asterisk")) {
 		html[idx++] = "&nbsp;|&nbsp;<a href='javascript:void(0)' onclick=\"YahooMaps._phoneCall('";
 		html[idx++] = result.PHONE;
 		html[idx++] = "');\">Call</a>'";
 	}
 
-	if (appCtxt.getZimletMgr().zimletExists("com_zimbra_sms")) {
+	if (appCtxt.getZimletMgr().zimletExists("org_zmail_sms")) {
 		//html[idx++] = "&nbsp;|&nbsp;<a href='javascript:void(0)' onclick=\"YahooMaps._sendSMS('"+result.PHONE+"');\">SMS</a>";
 		html[idx++] = "&nbsp;|&nbsp;<a href='javascript:void(0)' onclick=\"YahooMaps._sendSMS({";
 		html[idx++] = " title:'";
@@ -269,7 +269,7 @@ function(params) {
 YahooMaps._sendSMS =
 function(params) {
 	var zimlets = appCtxt.getZimletMgr().getZimletsHash();
-	var smsZimlet = zimlets ? zimlets["com_zimbra_sms"] : null;
+	var smsZimlet = zimlets ? zimlets["org_zmail_sms"] : null;
 	if (smsZimlet) {
 		var addrFormat = [
 			params.title, "\n",
@@ -288,7 +288,7 @@ function(params) {
 YahooMaps._phoneCall =
 function(phone) {
 	var zimlets = appCtxt.getZimletMgr().getZimletsHash();
-	var astrZimlet = zimlets ? zimlets["com_zimbra_asterisk"] : null;
+	var astrZimlet = zimlets ? zimlets["org_zmail_asterisk"] : null;
 	if (astrZimlet) {
 		astrZimlet.callHandler("setupCall", [phone]);
 	}

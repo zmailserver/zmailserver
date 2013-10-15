@@ -148,9 +148,9 @@ AjxEnv.isOpera;
 AjxEnv.useTransparentPNGs;
 
 
-/** Zimbra Desktop. */
+/** Zmail Desktop. */
 AjxEnv.isDesktop;
-/** Zimbra Desktop version 2 (or higher). */
+/** Zmail Desktop version 2 (or higher). */
 AjxEnv.isDesktop2up;
 /** Screen size is less then 800x600. */
 AjxEnv.is800x600orLower;

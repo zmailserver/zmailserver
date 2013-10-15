@@ -1,22 +1,22 @@
-Return-Path: <davidson@example.zimbra.com>
-Received: from kenny.example.zimbra.com ([unix socket]) by kenny.example.zimbra.com
+Return-Path: <davidson@example.zmail.com>
+Received: from kenny.example.zmail.com ([unix socket]) by kenny.example.zmail.com
 	(Cyrus v2.1.16) with LMTP; Sat, 27 Mar 2004 14:42:19 -0800
 X-Sieve: CMU Sieve 2.2
-Received: from churchill (unknown [10.10.130.116]) by kenny.example.zimbra.com
-	(Postfix) with ESMTP id B586640040E for <smith@example.zimbra.com>; Sat, 27
+Received: from churchill (unknown [10.10.130.116]) by kenny.example.zmail.com
+	(Postfix) with ESMTP id B586640040E for <smith@example.zmail.com>; Sat, 27
 	Mar 2004 14:42:18 -0800 (PST)
-From: "Ross Davidson, Ph.D." <davidson@example.zimbra.com>
-To: <smith@example.zimbra.com>
+From: "Ross Davidson, Ph.D." <davidson@example.zmail.com>
+To: <smith@example.zmail.com>
 Subject: Linux Desktop Info
 Date: Sat, 27 Mar 2004 14:46:48 -0800
-X-Zimbra-Received: Sat, 27 Mar 2004 14:46:48 -0800
-Organization: Zimbra, Inc.
+X-Zmail-Received: Sat, 27 Mar 2004 14:46:48 -0800
+Organization: Zmail, Inc.
 MIME-Version: 1.0
 Content-Type: multipart/mixed; boundary="----=_NextPart_000_0009_01C4140A.552DA620"
 X-Mailer: Microsoft Office Outlook, Build 11.0.5510
 Thread-Index: AcQUTWKWR13/y1jhS3K+NxyUk8vuwA==
 X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2800.1165
-Message-Id: <20040327224218.B586640040E@kenny.example.zimbra.com>
+Message-Id: <20040327224218.B586640040E@kenny.example.zmail.com>
 X-Evolution-Source: imap://smith@10.10.130.30/
 X-Evolution: 0000000e-0130
 
@@ -472,9 +472,9 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
 
 ------=_NextPart_000_0009_01C4140A.552DA620
-Content-Type: application/vnd.ms-powerpoint; name="Zimbra Desktop.ppt"
+Content-Type: application/vnd.ms-powerpoint; name="Zmail Desktop.ppt"
 Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="Zimbra Desktop.ppt"
+Content-Disposition: attachment; filename="Zmail Desktop.ppt"
 
 0M8R4KGxGuEAAAAAAAAAAAAAAAAAAAAAPgADAP7/CQAGAAAAAAAAAAAAAAABAAAAXwAAAAAAAAAA
 EAAAYQAAAAEAAAD+////AAAAAGAAAAD/////////////////////////////////////////////

@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.staf;
+package org.zmail.qa.selenium.staf;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -36,9 +36,9 @@ import com.ibm.staf.STAFUtil;
 import com.ibm.staf.service.STAFCommandParseResult;
 import com.ibm.staf.service.STAFCommandParser;
 import com.ibm.staf.service.STAFServiceInterfaceLevel30;
-import com.zimbra.qa.selenium.framework.core.ExecuteHarnessMain;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties.AppType;
+import org.zmail.qa.selenium.framework.core.ExecuteHarnessMain;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties.AppType;
 
 
 public class StafIntegration implements STAFServiceInterfaceLevel30 {
@@ -167,7 +167,7 @@ public class StafIntegration implements STAFServiceInterfaceLevel30 {
         //
         
         // Set the base folder name
-        ZimbraSeleniumProperties.setBaseDirectory(valueRoot);
+        ZmailSeleniumProperties.setBaseDirectory(valueRoot);
         
         
         if ( (valueConfig != null) && (valueConfig.trim().length() > 0) ) { 
@@ -196,7 +196,7 @@ public class StafIntegration implements STAFServiceInterfaceLevel30 {
 				String filename = configProperties.save(valueLog);
 				
 				// Tell the harness to load the temp file
-		        ZimbraSeleniumProperties.setConfigProperties(filename);
+		        ZmailSeleniumProperties.setConfigProperties(filename);
 	        
 	        
             } catch (HarnessException e) {
@@ -233,7 +233,7 @@ public class StafIntegration implements STAFServiceInterfaceLevel30 {
     			String filename = configProperties.save(valueLog);
     			
     			// Tell the harness to load the temp file
-    	        ZimbraSeleniumProperties.setConfigProperties(filename);
+    	        ZmailSeleniumProperties.setConfigProperties(filename);
     	        
     		} catch (FileNotFoundException e) {
             	return (new STAFResult(STAFResult.JavaError, getStackTrace(e)));
@@ -249,7 +249,7 @@ public class StafIntegration implements STAFServiceInterfaceLevel30 {
         for (AppType t : AppType.values()) {
         	// Look for ".type." (e.g. ".ajax.") in the pattern
         	if ( valuePattern.contains(t.toString().toLowerCase()) ) {
-        		ZimbraSeleniumProperties.setAppType(t);
+        		ZmailSeleniumProperties.setAppType(t);
             	break;
         	}
         }
@@ -435,7 +435,7 @@ public class StafIntegration implements STAFServiceInterfaceLevel30 {
     	// TODO: Need to convert the help command into the variables, aEXECUTE, aHELP, etc.
         return new STAFResult(STAFResult.Ok,
          "StafTest Service Help\n\n" + 
-         "EXECUTE SERVER <servername|IP address> ROOT <ZimbraSelenium path> JARFILE <path> PATTERN <projects.ajax.tests> [ GROUP <always|sanity|smoke|functional> ]* [ CONFIG <path> [ HOST <host> ] ] [ URL <desktop installer folder> ] [ LOG <folder> ] [ LOG4J <properties file> ]\n\n" +
+         "EXECUTE SERVER <servername|IP address> ROOT <ZmailSelenium path> JARFILE <path> PATTERN <projects.ajax.tests> [ GROUP <always|sanity|smoke|functional> ]* [ CONFIG <path> [ HOST <host> ] ] [ URL <desktop installer folder> ] [ LOG <folder> ] [ LOG4J <properties file> ]\n\n" +
          "QUERY -- TBD: should return statistics on active jobs \n\n" +
          "HALT <TBD> -- TBD: should stop any executing tests\n\n" +
          "HELP\n\n");
@@ -445,8 +445,8 @@ public class StafIntegration implements STAFServiceInterfaceLevel30 {
 	 * Reset any static refrences between executions
 	 **/
 	protected void reset() {
-		ZimbraAdminAccount.reset();
-		ZimbraAccount.reset();
+		ZmailAdminAccount.reset();
+		ZmailAccount.reset();
 	}
 	
 	private void createBundles(String jarfilename) {

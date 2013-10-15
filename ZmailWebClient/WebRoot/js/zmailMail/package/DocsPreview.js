@@ -9,4 +9,4 @@ AjxPackage.require("ajax.util.AjxTimezone");
 AjxPackage.require("ajax.net.AjxRpcRequest");
 AjxPackage.require("ajax.net.AjxRpc");
 
-AjxPackage.require("zimbraMail.docs.view.ZmDocsPreview");
+AjxPackage.require("zmailMail.docs.view.ZmDocsPreview");

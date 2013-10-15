@@ -18,12 +18,12 @@
 <%@ attribute name="skipsystem" rtexprvalue="true" required="true" %>
 <%@ attribute name="skiptopsearch" rtexprvalue="true" required="false" %>
 <%@ attribute name="skiptrash" rtexprvalue="true" required="false" %>
-<%@ attribute name="parentfolder" rtexprvalue="true" required="false" type="com.zimbra.cs.taglib.bean.ZFolderBean"%>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
-<%@ taglib prefix="app" uri="com.zimbra.htmlclient" %>
+<%@ attribute name="parentfolder" rtexprvalue="true" required="false" type="org.zmail.cs.taglib.bean.ZFolderBean"%>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
+<%@ taglib prefix="app" uri="org.zmail.htmlclient" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
 
 <app:handleError>
     <zm:getMailbox var="mailbox"/>

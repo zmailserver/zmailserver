@@ -14,21 +14,21 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.octopus.tests.search;
+package org.zmail.qa.selenium.projects.octopus.tests.search;
 
 import java.util.List;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.IOctListViewItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.octopus.core.OctopusCommonTest;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.IOctListViewItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.octopus.core.OctopusCommonTest;
 
 public class MarkAsNotFavorite extends OctopusCommonTest {
 
@@ -46,8 +46,8 @@ public class MarkAsNotFavorite extends OctopusCommonTest {
 			groups = { "smoke" })
 	public void MarkAsNotFavorite_01() throws HarnessException {
 
-		String filename = "filename"+ ZimbraSeleniumProperties.getUniqueString() +".txt";
-		String filePath = ZimbraSeleniumProperties.getBaseDirectory()
+		String filename = "filename"+ ZmailSeleniumProperties.getUniqueString() +".txt";
+		String filePath = ZmailSeleniumProperties.getBaseDirectory()
 				+ "/data/public/documents/doc01/plaintext.txt";
 	
 		
@@ -59,7 +59,7 @@ public class MarkAsNotFavorite extends OctopusCommonTest {
 		FolderItem briefcaseRootFolder = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Briefcase);
 
 		app.zGetActiveAccount().soapSend(
-					"<SaveDocumentRequest xmlns='urn:zimbraMail'>"
+					"<SaveDocumentRequest xmlns='urn:zmailMail'>"
 				+		"<doc name='"+ filename +"' l='" + briefcaseRootFolder.getId() + "'>"
 				+			"<upload id='" + attachmentId + "'/>"
 				+		"</doc>"
@@ -69,7 +69,7 @@ public class MarkAsNotFavorite extends OctopusCommonTest {
 
 		// Mark it a favorite
 		app.zGetActiveAccount().soapSend(
-				"<DocumentActionRequest xmlns='urn:zimbraMail'>"
+				"<DocumentActionRequest xmlns='urn:zmailMail'>"
 			+		"<action op='watch' id='" + documentId + "'/>"
 			+	"</DocumentActionRequest>");
 
@@ -104,7 +104,7 @@ public class MarkAsNotFavorite extends OctopusCommonTest {
 		
 		// Verify the document is shared
 		app.zGetActiveAccount().soapSend(
-				"<GetWatchingItemsRequest xmlns='urn:zimbraMail'/>");
+				"<GetWatchingItemsRequest xmlns='urn:zmailMail'/>");
 
 		Element[] nodes = app.zGetActiveAccount().soapSelectNodes("//mail:target[@email='"+ app.zGetActiveAccount().EmailAddress +"']//mail:item[@id='"+ documentId + "']");
 		ZAssert.assertEquals(nodes.length, 0, "Verify the item does not appear in the watch list");		

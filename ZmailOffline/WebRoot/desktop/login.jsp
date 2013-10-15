@@ -16,12 +16,12 @@
 <%@ page session="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="zd" tagdir="/WEB-INF/tags/desktop" %>
-<%@ taglib prefix="zdf" uri="com.zimbra.cs.offline.jsp" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
+<%@ taglib prefix="zdf" uri="org.zmail.cs.offline.jsp" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
 
-<jsp:useBean id="bean" class="com.zimbra.cs.offline.jsp.PageBean"/>
+<jsp:useBean id="bean" class="org.zmail.cs.offline.jsp.PageBean"/>
 <jsp:setProperty name="bean" property="locale" value="${pageContext.request.locale}"/>
-<jsp:useBean id="eventBean" class="com.zimbra.cs.offline.jsp.ClientEventBean"/>
+<jsp:useBean id="eventBean" class="org.zmail.cs.offline.jsp.ClientEventBean"/>
 
 <zd:auth/>
 
@@ -31,8 +31,8 @@ ${zdf:onLogin(eventBean)}
     <c:redirect url="${zdf:addAuthToken('/desktop/console.jsp', pageContext.request)}"/>
 </c:if>
 
-<c:set var="attrsToFetch" value="zimbraFeatureMailEnabled,zimbraFeatureCalendarEnabled,zimbraFeatureContactsEnabled,zimbraFeatureIMEnabled,zimbraFeatureNotebookEnabled,zimbraFeatureOptionsEnabled,zimbraFeatureTasksEnabled,zimbraFeatureBriefcasesEnabled"/>
-<c:set var="prefsToFetch" value="zimbraPrefSkin,zimbraPrefClientType,zimbraPrefLocale"/>
+<c:set var="attrsToFetch" value="zmailFeatureMailEnabled,zmailFeatureCalendarEnabled,zmailFeatureContactsEnabled,zmailFeatureIMEnabled,zmailFeatureNotebookEnabled,zmailFeatureOptionsEnabled,zmailFeatureTasksEnabled,zmailFeatureBriefcasesEnabled"/>
+<c:set var="prefsToFetch" value="zmailPrefSkin,zmailPrefClientType,zmailPrefLocale"/>
 
 <c:catch var="loginException">
     <zm:login username="${empty param.username ? bean.loginUsername : param.username}" password="${zdf:getLocalConfig('zdesktop_installation_key')}"

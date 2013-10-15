@@ -12,19 +12,19 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib;
+package org.zmail.cs.taglib;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.zimlet.ZimletUtil;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.zimlet.ZimletUtil;
 
-public class ZimletConfig extends ZimbraTag {
+public class ZimletConfig extends ZmailTag {
 
     private String mZimlet;
     private String mAction;
@@ -72,15 +72,15 @@ public class ZimletConfig extends ZimbraTag {
         return mScope;
     }
 
-    public String doListConfig(Account acct, OperationContext octxt) throws ZimbraTagException, ServiceException {
+    public String doListConfig(Account acct, OperationContext octxt) throws ZmailTagException, ServiceException {
         if (mVar == null) {
-            throw ZimbraTagException.MISSING_ATTR("var");
+            throw ZmailTagException.MISSING_ATTR("var");
         }
         Map<String,Map> m = new HashMap<String,Map>();
     	HttpServletRequest req = (HttpServletRequest)pageContext.getRequest();
     	req.setAttribute(mVar, m);
 
-    	com.zimbra.cs.zimlet.ZimletConfig config = ZimletUtil.getZimletConfig(mZimlet);
+    	org.zmail.cs.zimlet.ZimletConfig config = ZimletUtil.getZimletConfig(mZimlet);
 
     	Map gc, sc, lc;
     	
@@ -99,11 +99,11 @@ public class ZimletConfig extends ZimbraTag {
     	return "";
     }
     
-    public String doGetConfig(Account acct, OperationContext octxt) throws ZimbraTagException, ServiceException {
+    public String doGetConfig(Account acct, OperationContext octxt) throws ZmailTagException, ServiceException {
         if (mName == null) {
-            throw ZimbraTagException.MISSING_ATTR("name");
+            throw ZmailTagException.MISSING_ATTR("name");
         }
-        com.zimbra.cs.zimlet.ZimletConfig config = ZimletUtil.getZimletConfig(mZimlet);
+        org.zmail.cs.zimlet.ZimletConfig config = ZimletUtil.getZimletConfig(mZimlet);
         String val;
 
         if (config == null) {
@@ -119,9 +119,9 @@ public class ZimletConfig extends ZimbraTag {
         return val;
     }
     
-    public String getContentStart(Account acct, OperationContext octxt) throws ZimbraTagException, ServiceException {
+    public String getContentStart(Account acct, OperationContext octxt) throws ZmailTagException, ServiceException {
         if (mZimlet == null) {
-            throw ZimbraTagException.MISSING_ATTR("zimlet");
+            throw ZmailTagException.MISSING_ATTR("zimlet");
         }
         if (mAction != null && mAction.equals("list")) {
         	return doListConfig(acct, octxt);

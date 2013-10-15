@@ -40,7 +40,7 @@ MAPISessionException::MAPISessionException(HRESULT hrErrCode, LPCWSTR lpszDescri
 
 MAPISession::MAPISession(): m_Session(NULL)
 {
-    Zimbra::Util::AutoCriticalSection autocriticalsection(cs);
+    Zmail::Util::AutoCriticalSection autocriticalsection(cs);
 
     MAPIINIT_0 MAPIInit;
    MAPIInit.ulFlags = MAPI_NO_COINIT | 0;
@@ -48,13 +48,13 @@ MAPISession::MAPISession(): m_Session(NULL)
    HRESULT hr= MAPIInitialize(&MAPIInit);
        
     UNREFERENCED_PARAMETER(hr);
-    Zimbra::Mapi::Memory::SetMemAllocRoutines(NULL, MAPIAllocateBuffer, MAPIAllocateMore,
+    Zmail::Mapi::Memory::SetMemAllocRoutines(NULL, MAPIAllocateBuffer, MAPIAllocateMore,
         MAPIFreeBuffer);
 }
 
 MAPISession::~MAPISession()
 {
-    Zimbra::Util::AutoCriticalSection autocriticalsection(cs);
+    Zmail::Util::AutoCriticalSection autocriticalsection(cs);
 
     if (m_Session != NULL)
     {
@@ -67,7 +67,7 @@ MAPISession::~MAPISession()
 
 HRESULT MAPISession::_mapiLogon(LPWSTR strProfile, DWORD dwFlags, LPMAPISESSION &session)
 {
-    Zimbra::Util::AutoCriticalSection autocriticalsection(cs);
+    Zmail::Util::AutoCriticalSection autocriticalsection(cs);
     HRESULT hr = S_OK;
 
     if (FAILED(hr = MAPILogonEx(0, strProfile, NULL, dwFlags, &session)))
@@ -97,7 +97,7 @@ HRESULT MAPISession::Logon(bool bDefaultProfile)
 
 HRESULT MAPISession::OpenDefaultStore(MAPIStore &Store)
 {
-    Zimbra::Util::AutoCriticalSection autocriticalsection(cs);
+    Zmail::Util::AutoCriticalSection autocriticalsection(cs);
     HRESULT hr = E_FAIL;
     SBinary defMsgStoreEID;
     LPMDB pDefaultMDB = NULL;
@@ -105,13 +105,13 @@ HRESULT MAPISession::OpenDefaultStore(MAPIStore &Store)
     if (m_Session == NULL)
         throw MAPISessionException(hr, L"OpenDefaultStore(): m_mapiSession is NULL.", 
 		ERR_STORE_ERR, __LINE__, __FILE__);
-    if (FAILED(hr = Zimbra::MAPI::Util::HrMAPIFindDefaultMsgStore(m_Session, defMsgStoreEID)))
+    if (FAILED(hr = Zmail::MAPI::Util::HrMAPIFindDefaultMsgStore(m_Session, defMsgStoreEID)))
     {
         throw MAPISessionException(hr, L"OpenDefaultStore(): HrMAPIFindDefaultMsgStore Failed.",
             ERR_STORE_ERR, __LINE__, __FILE__);
     }
 
-    Zimbra::Util::ScopedBuffer<BYTE> autoDeletePtr(defMsgStoreEID.lpb);
+    Zmail::Util::ScopedBuffer<BYTE> autoDeletePtr(defMsgStoreEID.lpb);
 
     hr = m_Session->OpenMsgStore(NULL, defMsgStoreEID.cb, (LPENTRYID)defMsgStoreEID.lpb, NULL,
         MDB_ONLINE | MAPI_BEST_ACCESS | MDB_NO_MAIL | MDB_TEMPORARY | MDB_NO_DIALOG,
@@ -136,7 +136,7 @@ HRESULT MAPISession::OpenDefaultStore(MAPIStore &Store)
 HRESULT MAPISession::OpenOtherStore(LPMDB OpenedStore, LPWSTR pServerDn, LPWSTR pUserDn,
     MAPIStore &OtherStore)
 {
-    Zimbra::Util::AutoCriticalSection autocriticalsection(cs);
+    Zmail::Util::AutoCriticalSection autocriticalsection(cs);
     HRESULT hr = E_FAIL;
 
     if (m_Session == NULL)
@@ -152,7 +152,7 @@ HRESULT MAPISession::OpenOtherStore(LPMDB OpenedStore, LPWSTR pServerDn, LPWSTR 
 
     LPMDB pMdb = NULL;
 
-    hr = Zimbra::MAPI::Util::MailboxLogon(m_Session, OpenedStore, pszStoreDN, pUserDn, &pMdb);
+    hr = Zmail::MAPI::Util::MailboxLogon(m_Session, OpenedStore, pszStoreDN, pUserDn, &pMdb);
     delete[] pszStoreDN;
     if (FAILED(hr))
         throw MAPISessionException(hr, L"OpenDefaultStore(): MailboxLogon Failed.", 
@@ -164,7 +164,7 @@ HRESULT MAPISession::OpenOtherStore(LPMDB OpenedStore, LPWSTR pServerDn, LPWSTR 
 
 HRESULT MAPISession::OpenAddressBook(LPADRBOOK *ppAddrBook)
 {
-    Zimbra::Util::AutoCriticalSection autocriticalsection(cs);
+    Zmail::Util::AutoCriticalSection autocriticalsection(cs);
     HRESULT hr = E_FAIL;
 
     if (m_Session)
@@ -175,7 +175,7 @@ HRESULT MAPISession::OpenAddressBook(LPADRBOOK *ppAddrBook)
 HRESULT MAPISession::OpenEntry(ULONG cbEntryID, LPENTRYID lpEntryID, LPCIID lpInterface, ULONG
     ulFlags, ULONG FAR *lpulObjType, LPUNKNOWN FAR *lppUnk)
 {
-    Zimbra::Util::AutoCriticalSection autocriticalsection(cs);
+    Zmail::Util::AutoCriticalSection autocriticalsection(cs);
 
     return m_Session->OpenEntry(cbEntryID, lpEntryID, lpInterface, ulFlags, lpulObjType,
         lppUnk);
@@ -183,7 +183,7 @@ HRESULT MAPISession::OpenEntry(ULONG cbEntryID, LPENTRYID lpEntryID, LPCIID lpIn
 
 HRESULT MAPISession::CompareEntryIDs(SBinary *pBin1, SBinary *pBin2, ULONG &lpulResult)
 {
-    Zimbra::Util::AutoCriticalSection autocriticalsection(cs);
+    Zmail::Util::AutoCriticalSection autocriticalsection(cs);
     HRESULT hr = S_OK;
 
     hr = m_Session->CompareEntryIDs(pBin1->cb, (LPENTRYID)(pBin1->lpb), pBin2->cb,

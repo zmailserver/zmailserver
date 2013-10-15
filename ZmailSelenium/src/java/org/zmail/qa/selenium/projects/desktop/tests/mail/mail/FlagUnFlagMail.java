@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.mail.mail;
+package org.zmail.qa.selenium.projects.desktop.tests.mail.mail;
 
 import java.util.*;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
 
 
 
@@ -39,8 +39,8 @@ public class FlagUnFlagMail extends AjaxCommonTest {
 
 		// Make sure we are using an account with message view
 		super.startingAccountPreferences = new HashMap<String, String>() {{
-				    put("zimbraPrefGroupMailBy", "message");
-				    put("zimbraPrefReadingPaneLocation", "bottom");
+				    put("zmailPrefGroupMailBy", "message");
+				    put("zmailPrefReadingPaneLocation", "bottom");
 				}};
 
 	}
@@ -51,11 +51,11 @@ public class FlagUnFlagMail extends AjaxCommonTest {
 	public void UnFlagMail_01() throws HarnessException {
 		
 		// Create the message data to be sent
-		String subject = "subject"+ ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject"+ ZmailSeleniumProperties.getUniqueString();
 		
 		FolderItem inboxFolder = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Inbox);
 		app.zGetActiveAccount().soapSend(
-					"<AddMsgRequest xmlns='urn:zimbraMail'>" +
+					"<AddMsgRequest xmlns='urn:zmailMail'>" +
                 		"<m l='"+ inboxFolder.getId() +"' f='f'>" +
                     		"<content>From: foo@foo.com\n" +
 "To: foo@foo.com \n" +
@@ -114,11 +114,11 @@ public class FlagUnFlagMail extends AjaxCommonTest {
 	public void UnFlagMail_02() throws HarnessException {
 		
 		// Create the message data to be sent
-		String subject = "subject"+ ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject"+ ZmailSeleniumProperties.getUniqueString();
 		
 		FolderItem inboxFolder = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Inbox);
 		app.zGetActiveAccount().soapSend(
-					"<AddMsgRequest xmlns='urn:zimbraMail'>" +
+					"<AddMsgRequest xmlns='urn:zmailMail'>" +
                 		"<m l='"+ inboxFolder.getId() +"' f='f'>" +
                     		"<content>From: foo@foo.com\n" +
 "To: foo@foo.com \n" +

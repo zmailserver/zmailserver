@@ -14,7 +14,7 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_photo"
+<zimlet name="org_zmail_photo"
         version="1.0"
         description="Display a photo over names in email messages.">
 	<include>photo.js</include>
@@ -24,7 +24,7 @@
  	<resource>medeski.jpg</resource>
  	<resource>monk.jpg</resource>
  	<resource>ray_charles.jpg</resource>
- 	<handlerObject>Com_Zimbra_Photo</handlerObject>
+ 	<handlerObject>Com_Zmail_Photo</handlerObject>
 
 	<contentObject type="photo">
 		<toolTip>

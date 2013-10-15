@@ -58,7 +58,7 @@ ZmSlideEditView.TYPE_DRAG_PROXY_DIV = 10;
 ZmSlideEditView.TYPE_PREVIEW = 11;
 ZmSlideEditView.DRAG_THRESHOLD = 4;
 
-ZmSlideEditView.APP_ZIMBRA_PPT = "application/x-zimbra-slides";
+ZmSlideEditView.APP_ZIMBRA_PPT = "application/x-zmail-slides";
 
 
 ZmSlideEditView.SLIDE_OBJECTS = ["slide_object_notes", "slide_object_title", "slide_object_img", "slide_object_graph"];
@@ -409,7 +409,7 @@ function(el)  {
 
 ZmSlideEditView.prototype.getTitle =
 function() {
-    return "Zimbra Presentation : Edit Slide";
+    return "Zmail Presentation : Edit Slide";
 };
 
 ZmSlideEditView.prototype.getController =

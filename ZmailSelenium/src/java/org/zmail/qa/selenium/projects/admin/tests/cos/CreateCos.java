@@ -14,18 +14,18 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.admin.tests.cos;
+package org.zmail.qa.selenium.projects.admin.tests.cos;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAdminAccount;
-import com.zimbra.qa.selenium.projects.admin.core.AdminCommonTest;
-import com.zimbra.qa.selenium.projects.admin.items.CosItem;
-import com.zimbra.qa.selenium.projects.admin.ui.WizardCreateCos;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAdminAccount;
+import org.zmail.qa.selenium.projects.admin.core.AdminCommonTest;
+import org.zmail.qa.selenium.projects.admin.items.CosItem;
+import org.zmail.qa.selenium.projects.admin.ui.WizardCreateCos;
 
 
 public class CreateCos extends AdminCommonTest {
@@ -59,11 +59,11 @@ public class CreateCos extends AdminCommonTest {
 		cosDialog.zCompleteWizard(cos);
 		
 		// Verify the cos exists in the ZCS
-		ZimbraAdminAccount.AdminConsoleAdmin().soapSend(
-		"<GetCosRequest xmlns='urn:zimbraAdmin'>" +
+		ZmailAdminAccount.AdminConsoleAdmin().soapSend(
+		"<GetCosRequest xmlns='urn:zmailAdmin'>" +
 		                     "<cos by='name'>"+cos.getName()+"</cos>"+
 		                   "</GetCosRequest>");
-		Element response = ZimbraAdminAccount.AdminConsoleAdmin().soapSelectNode("//admin:GetCosResponse/admin:cos", 1);
+		Element response = ZmailAdminAccount.AdminConsoleAdmin().soapSelectNode("//admin:GetCosResponse/admin:cos", 1);
 		ZAssert.assertNotNull(response, "Verify the cos is created successfully");
 	}
 

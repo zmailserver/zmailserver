@@ -38,7 +38,7 @@ function() {
 /**
  * Pops up this dialog
  *
- * @param selectedAccount	{ZmZimbraAccount}	Optional. The account to have initially "selected". Otherwise, the active account is selected.
+ * @param selectedAccount	{ZmZmailAccount}	Optional. The account to have initially "selected". Otherwise, the active account is selected.
  * @param accountType		{String}			Optional. Only offer accounts of this type. Otherwise, all visible accounts are offered.
  * @param chooserMessage	{String}			Optional. The message to prompt user with. A default message is used if none provided.
  * @param title				{String}			Optional. Dialog title.

@@ -12,16 +12,16 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.session;
+package org.zmail.cs.session;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.ZimbraNamespace;
-import com.zimbra.cs.account.Server;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.ZmailNamespace;
+import org.zmail.cs.account.Server;
+import org.zmail.soap.ZmailSoapContext;
 
 public class OfflineRemoteSoapSession extends OfflineSoapSession {
 
-    public OfflineRemoteSoapSession(ZimbraSoapContext zsc) {
+    public OfflineRemoteSoapSession(ZmailSoapContext zsc) {
         super(zsc);
     }
 
@@ -36,13 +36,13 @@ public class OfflineRemoteSoapSession extends OfflineSoapSession {
     }
 
     @Override
-    public void putRefresh(Element ctxt, ZimbraSoapContext zsc) {
-        ctxt.addUniqueElement(ZimbraNamespace.E_REFRESH);
+    public void putRefresh(Element ctxt, ZmailSoapContext zsc) {
+        ctxt.addUniqueElement(ZmailNamespace.E_REFRESH);
         return;
     }
 
     @Override
-    public Element putNotifications(Element ctxt, ZimbraSoapContext zsc, int lastSequence) {
+    public Element putNotifications(Element ctxt, ZmailSoapContext zsc, int lastSequence) {
         if (ctxt == null) {
             return null;
         }

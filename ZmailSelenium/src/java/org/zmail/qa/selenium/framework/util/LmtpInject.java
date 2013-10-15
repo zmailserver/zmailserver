@@ -14,18 +14,18 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.util;
+package org.zmail.qa.selenium.framework.util;
 
 import java.io.*;
 import java.util.*;
 
 import org.apache.log4j.*;
 
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.lmtp.LmtpClient;
-import com.zimbra.common.lmtp.LmtpProtocolException;
-import com.zimbra.qa.selenium.framework.core.ExecuteHarnessMain;
-import com.zimbra.qa.selenium.framework.util.staf.Stafpostqueue;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.lmtp.LmtpClient;
+import org.zmail.common.lmtp.LmtpProtocolException;
+import org.zmail.qa.selenium.framework.core.ExecuteHarnessMain;
+import org.zmail.qa.selenium.framework.util.staf.Stafpostqueue;
 
 /**
  * @author Matt Rhoades
@@ -142,7 +142,7 @@ public class LmtpInject {
 		try {
 
 			lmtp = new LmtpClient( 
-					ZimbraSeleniumProperties.getStringProperty("server.host"),
+					ZmailSeleniumProperties.getStringProperty("server.host"),
 					7025);
 
 			lmtp.sendMessage(new FileInputStream(mime), recipients.toArray(new String[recipients.size()]), sender, "Selenium", length);

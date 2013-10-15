@@ -15,7 +15,7 @@
 
 /**
  * @overview
- * This file defines the Zimbra error dialog.
+ * This file defines the Zmail error dialog.
  *
  */
 
@@ -71,14 +71,14 @@ function() {
 
 ZmErrorDialog.REPORT_BUTTON = "Report";
 ZmErrorDialog.DETAIL_BUTTON = "Detail";
-ZmErrorDialog.DEFAULT_REPORT_URL = "//www.zimbra.com/e/";
+ZmErrorDialog.DEFAULT_REPORT_URL = "//www.zmail.com/e/";
 
 //
 // Data
 //
 
 ZmErrorDialog.prototype._detailsVisible = false;
-ZmErrorDialog.prototype.CONTROLS_TEMPLATE = "zimbra.Widgets#ZmErrorDialogControls";
+ZmErrorDialog.prototype.CONTROLS_TEMPLATE = "zmail.Widgets#ZmErrorDialogControls";
 
 //
 // Public methods
@@ -140,7 +140,7 @@ function() {
 		detail: this._detailStr,
 		showDetails: this._detailsVisible
 	};
-	var html = AjxTemplate.expand("zimbra.Widgets#ZmErrorDialogContent", data);
+	var html = AjxTemplate.expand("zmail.Widgets#ZmErrorDialogContent", data);
 	this.setSize(Dwt.CLEAR, this._detailsVisible ? "300" : Dwt.CLEAR);
 	DwtMessageDialog.prototype.setMessage.call(this, html, this._msgStyle, this._msgTitle);
 };

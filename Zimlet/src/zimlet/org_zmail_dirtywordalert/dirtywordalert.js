@@ -15,21 +15,21 @@
 
 //////////////////////////////////////////////////////////////////////////////
 // Zimlet that checks for dirty words and alerts
-// @author Zimlet author: Raja Rao DV(rrao@zimbra.com)
+// @author Zimlet author: Raja Rao DV(rrao@zmail.com)
 //////////////////////////////////////////////////////////////////////////////
 
-function com_zimbra_dirtywordalert() {
+function org_zmail_dirtywordalert() {
 }
 
-com_zimbra_dirtywordalert.prototype = new ZmZimletBase();
-com_zimbra_dirtywordalert.prototype.constructor = com_zimbra_dirtywordalert;
+org_zmail_dirtywordalert.prototype = new ZmZimletBase();
+org_zmail_dirtywordalert.prototype.constructor = org_zmail_dirtywordalert;
 
-com_zimbra_dirtywordalert.prototype.init =
+org_zmail_dirtywordalert.prototype.init =
 function() {
 	this.turnONdirtywordalertZimletNew = this.getUserProperty("turnONdirtywordalertZimletNew") == "true";
 };
 
-com_zimbra_dirtywordalert.prototype.initializeRegEx =
+org_zmail_dirtywordalert.prototype.initializeRegEx =
 function() {
 	if (this._dWordsRegEx)
 		return;
@@ -41,7 +41,7 @@ function() {
 	}
 };
 
-com_zimbra_dirtywordalert.prototype.emailErrorCheck =
+org_zmail_dirtywordalert.prototype.emailErrorCheck =
 function(mail, boolAndErrorMsgArray) {
 	if (!this.turnONdirtywordalertZimletNew)
 		return;
@@ -82,11 +82,11 @@ function(mail, boolAndErrorMsgArray) {
 		return null;
 
 	//there is  some dirtyword in new mail (but not necessarily in old-mail)
-	return boolAndErrorMsgArray.push({hasError:true, errorMsg:"You are perhaps upset or unknowingly using <b>'" + dWordsThatExists + "'</b> <a href=\"http://en.wikipedia.org/wiki/Seven_dirty_words\" target=\"_blank\"> dirty word(s)</a> in the mail. You are better off not using these words.<BR> Still, send anyway?", zimletName:"com_zimbra_dirtywordalert"});
+	return boolAndErrorMsgArray.push({hasError:true, errorMsg:"You are perhaps upset or unknowingly using <b>'" + dWordsThatExists + "'</b> <a href=\"http://en.wikipedia.org/wiki/Seven_dirty_words\" target=\"_blank\"> dirty word(s)</a> in the mail. You are better off not using these words.<BR> Still, send anyway?", zimletName:"org_zmail_dirtywordalert"});
 };
 
 
-com_zimbra_dirtywordalert.prototype._createIgnoreList =
+org_zmail_dirtywordalert.prototype._createIgnoreList =
 function(origMail) {
 	var bodyContent = origMail.getBodyContent();
 	for (var k = 0; k < this._dWordsRegEx.length; k++) {
@@ -99,15 +99,15 @@ function(origMail) {
 	}
 };
 
-com_zimbra_dirtywordalert.prototype.doubleClicked = function() {
+org_zmail_dirtywordalert.prototype.doubleClicked = function() {
 	this.singleClicked();
 };
 
-com_zimbra_dirtywordalert.prototype.singleClicked = function() {
+org_zmail_dirtywordalert.prototype.singleClicked = function() {
 	this.showPrefDialog();
 };
 
-com_zimbra_dirtywordalert.prototype.showPrefDialog =
+org_zmail_dirtywordalert.prototype.showPrefDialog =
 function() {
 	//if zimlet dialog already exists...
 	if (this.pbDialog) {
@@ -125,7 +125,7 @@ function() {
 	this.pbDialog.popup();
 };
 
-com_zimbra_dirtywordalert.prototype.createPrefView =
+org_zmail_dirtywordalert.prototype.createPrefView =
 function() {
 	var html = new Array();
 	var i = 0;
@@ -135,7 +135,7 @@ function() {
 	return html.join("");
 };
 
-com_zimbra_dirtywordalert.prototype._okBtnListner =
+org_zmail_dirtywordalert.prototype._okBtnListner =
 function() {
 	this._reloadRequired = false;
 	if (document.getElementById("turnONdirtywordalertZimletNew_chkbx").checked) {
@@ -153,6 +153,6 @@ function() {
 	if (this._reloadRequired) {
 		window.onbeforeunload = null;
 		var url = AjxUtil.formatUrl({});
-		ZmZimbraMail.sendRedirect(url);
+		ZmZmailMail.sendRedirect(url);
 	}
 };

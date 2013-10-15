@@ -18,41 +18,41 @@
 //  @author Rajesh Segu                                     //
 //////////////////////////////////////////////////////////////
 
-function Com_Zimbra_Video() {
+function Com_Zmail_Video() {
 }
-Com_Zimbra_Video.prototype = new ZmZimletBase();
-Com_Zimbra_Video.prototype.constructor = Com_Zimbra_Video;
+Com_Zmail_Video.prototype = new ZmZimletBase();
+Com_Zmail_Video.prototype.constructor = Com_Zmail_Video;
 
 
-Com_Zimbra_Video.WIDTH = 155;
-Com_Zimbra_Video.HEIGHT = 135;
+Com_Zmail_Video.WIDTH = 155;
+Com_Zmail_Video.HEIGHT = 135;
 
 //Get GSEARCH API Key from http://www.google.com/uds/solutions/videosearch/index.html
-//Com_Zimbra_Video.GSEARCH_API="ABQIAAAAkNWUSwZ-uNWZyDl7ZB5yWRRrb41JoWUZrahluOk81y-6F6GuWhRX6cnm3kCGqCYTz8xq-MLsN76TPA";
+//Com_Zmail_Video.GSEARCH_API="ABQIAAAAkNWUSwZ-uNWZyDl7ZB5yWRRrb41JoWUZrahluOk81y-6F6GuWhRX6cnm3kCGqCYTz8xq-MLsN76TPA";
 
-Com_Zimbra_Video.GSEARCH_APIKEY = null;
-Com_Zimbra_Video.GSEARCH_APIURL = "http://code.google.com/apis/ajaxsearch/signup.html";
+Com_Zmail_Video.GSEARCH_APIKEY = null;
+Com_Zmail_Video.GSEARCH_APIURL = "http://code.google.com/apis/ajaxsearch/signup.html";
 
-Com_Zimbra_Video.prototype.RECENTLY_PLAYED = [];
+Com_Zmail_Video.prototype.RECENTLY_PLAYED = [];
 
-Com_Zimbra_Video.prototype.init = function(){
+Com_Zmail_Video.prototype.init = function(){
 
 	this._videoDialog = false;
     
-    this.WIDTH = Com_Zimbra_Video.WIDTH;
-    this.HEIGHT = Com_Zimbra_Video.HEIGHT;
+    this.WIDTH = Com_Zmail_Video.WIDTH;
+    this.HEIGHT = Com_Zmail_Video.HEIGHT;
     
     if(AjxEnv.isIE){
     	this.WIDTH += 5;
     	
     }
     
-    Com_Zimbra_Video.GSEARCH_APIKEY = this.getConfig("googleAPI");
+    Com_Zmail_Video.GSEARCH_APIKEY = this.getConfig("googleAPI");
     
     this._loadGoogleSearchIncludes();
 };
 
-Com_Zimbra_Video.prototype.menuItemSelected = function(itemId) {
+Com_Zmail_Video.prototype.menuItemSelected = function(itemId) {
 	
     switch (itemId) {
     	
@@ -70,7 +70,7 @@ Com_Zimbra_Video.prototype.menuItemSelected = function(itemId) {
     }
 };
 
-Com_Zimbra_Video.prototype.doDrop = 
+Com_Zmail_Video.prototype.doDrop = 
 function(obj) {
 	switch (obj.TYPE) {
 	    case "ZmMailMsg":
@@ -83,20 +83,20 @@ function(obj) {
 	}
 };
 
-Com_Zimbra_Video.prototype.doubleClicked = function() {
+Com_Zmail_Video.prototype.doubleClicked = function() {
     this.singleClicked();
 };
 
-Com_Zimbra_Video.prototype.singleClicked = function() {
+Com_Zmail_Video.prototype.singleClicked = function() {
     this.switchVideo();
 };
 
-Com_Zimbra_Video.prototype.switchVideo = function(){
+Com_Zmail_Video.prototype.switchVideo = function(){
     this._videoActive ? this.stopVideo() : this.playVideo();
 };
 
 //Video: PlayURL
-Com_Zimbra_Video.prototype.playVideo = function(url,forceAsk){
+Com_Zmail_Video.prototype.playVideo = function(url,forceAsk){
     url = url || this.getRecentlyPlayedVideo();
     if(!url || forceAsk){
         var callback = new AjxCallback(this,this.playVideo);
@@ -126,7 +126,7 @@ Com_Zimbra_Video.prototype.playVideo = function(url,forceAsk){
     this._addVideo(url); 
 };
 
-Com_Zimbra_Video.prototype.stopVideo = function(){
+Com_Zmail_Video.prototype.stopVideo = function(){
 	var minicalDIV = document.getElementById("skin_container_tree_footer");
 	minicalDIV.innerHTML = "";
     if(this._miniCal) {
@@ -135,7 +135,7 @@ Com_Zimbra_Video.prototype.stopVideo = function(){
     this._videoActive = false;
 };
 
-Com_Zimbra_Video.prototype.playURLDialog = function(callback){
+Com_Zmail_Video.prototype.playURLDialog = function(callback){
 	
 	var view = new DwtComposite(this.getShell());
 	var container = document.createElement("DIV");
@@ -177,11 +177,11 @@ Com_Zimbra_Video.prototype.playURLDialog = function(callback){
     dlg.popup();
 };
 
-Com_Zimbra_Video.prototype.sampleVideoURL = [
+Com_Zmail_Video.prototype.sampleVideoURL = [
           "http://youtube.com/watch?v=hS5UfTswufE",
           "http://video.google.com/videoplay?docid=4007016107763801953"
         ];
-Com_Zimbra_Video.prototype._populateSampleVideos = function(){
+Com_Zmail_Video.prototype._populateSampleVideos = function(){
     var samples = document.getElementById("sampleURL");
     samples.innerHTML = ["Eg:",
                          "&nbsp;","<a target='_blank' href='"+this.sampleVideoURL[0]+"'>",this.sampleVideoURL[0],"</a>","<br>",
@@ -189,7 +189,7 @@ Com_Zimbra_Video.prototype._populateSampleVideos = function(){
                         ].join("");
 };
 
-Com_Zimbra_Video.prototype._addVideo = function(videoURL){
+Com_Zmail_Video.prototype._addVideo = function(videoURL){
 	
 	if(videoURL.indexOf("youtube.com/watch?v=") != -1){
 		var youtubeID = videoURL.substring(videoURL.indexOf("?v=")+3,videoURL.length);
@@ -249,7 +249,7 @@ Com_Zimbra_Video.prototype._addVideo = function(videoURL){
 
 //Method: Recently Played Videos
 
-Com_Zimbra_Video.prototype._recentlyPlayedVideos = function(){
+Com_Zmail_Video.prototype._recentlyPlayedVideos = function(){
 	
 	if(this.RECENTLY_PLAYED.length == 0){
 		this.displayErrorMessage("Recently played videos is empty");
@@ -259,7 +259,7 @@ Com_Zimbra_Video.prototype._recentlyPlayedVideos = function(){
 	this._createVideoLinksHtml(this.RECENTLY_PLAYED);
 };
 
-Com_Zimbra_Video.prototype.addToRencentlyPlayedVideos = function(videoURL){
+Com_Zmail_Video.prototype.addToRencentlyPlayedVideos = function(videoURL){
 	var recent = this.RECENTLY_PLAYED.join(",");
 	if(recent.indexOf(videoURL) == -1){
 		if(this.RECENTLY_PLAYED.length > 10 ){
@@ -269,13 +269,13 @@ Com_Zimbra_Video.prototype.addToRencentlyPlayedVideos = function(videoURL){
 	}
 };
 
-Com_Zimbra_Video.prototype.getRecentlyPlayedVideo = function(){
+Com_Zmail_Video.prototype.getRecentlyPlayedVideo = function(){
     return this.RECENTLY_PLAYED[0];
 };
 
 //Video: Handle Msg Drop
 
-Com_Zimbra_Video.prototype._parseMessageForVideo = function(zmObject){
+Com_Zmail_Video.prototype._parseMessageForVideo = function(zmObject){
 
 	if(!zmObject.body){
 		this.displayErrorMessage("Message body is empty!!")
@@ -292,7 +292,7 @@ Com_Zimbra_Video.prototype._parseMessageForVideo = function(zmObject){
 	this._createVideoLinksHtml(videoLinks);
 };
 
-Com_Zimbra_Video.prototype._createVideoLinksHtml = function(videoLinks){
+Com_Zmail_Video.prototype._createVideoLinksHtml = function(videoLinks){
 
 	var view = new DwtComposite(this.getShell());
 
@@ -366,24 +366,24 @@ function selectYouTubeURL(){
 //Method: Search functionality
 //Reference: http://www.google.com/uds/solutions/videosearch/index.html
 
-Com_Zimbra_Video.prototype._loadGoogleSearchIncludes = function(){
+Com_Zmail_Video.prototype._loadGoogleSearchIncludes = function(){
 
-	if(!Com_Zimbra_Video.GSEARCH_APIKEY){
+	if(!Com_Zmail_Video.GSEARCH_APIKEY){
 		return;
 	}
 
 	window._uds_vsw_donotrepair = true;
-	this._loadSearchAPI("http://www.google.com/uds/api?file=uds.js&v=1.0&key="+Com_Zimbra_Video.GSEARCH_APIKEY);
+	this._loadSearchAPI("http://www.google.com/uds/api?file=uds.js&v=1.0&key="+Com_Zmail_Video.GSEARCH_APIKEY);
 	this._loadObject("http://www.google.com/uds/css/gsearch.css");
 	this._loadObject("http://www.google.com/uds/solutions/videosearch/gsvideosearch.js?mode=new");
 	this._loadObject("http://www.google.com/uds/solutions/videosearch/gsvideosearch.css");
 
 };
 
-Com_Zimbra_Video.prototype.search = function(){
+Com_Zmail_Video.prototype.search = function(){
 
-	if(!Com_Zimbra_Video.GSEARCH_APIKEY){
-		this.displayErrorMessage("Google Search API Key is not available.<br> Contact your administrator to signup for a key @ <br>"+Com_Zimbra_Video.GSEARCH_APIURL);
+	if(!Com_Zmail_Video.GSEARCH_APIKEY){
+		this.displayErrorMessage("Google Search API Key is not available.<br> Contact your administrator to signup for a key @ <br>"+Com_Zmail_Video.GSEARCH_APIURL);
 		return;
 	}
 
@@ -454,7 +454,7 @@ Com_Zimbra_Video.prototype.search = function(){
 	}
 };
 
-Com_Zimbra_Video.prototype._handleSideBarTargetLink = function(dlg){
+Com_Zmail_Video.prototype._handleSideBarTargetLink = function(dlg){
 
 
 	var videoSearchControl = this.getVideoSearchControl();
@@ -485,7 +485,7 @@ Com_Zimbra_Video.prototype._handleSideBarTargetLink = function(dlg){
 
 };
 
-Com_Zimbra_Video.prototype.getVideoSearchControl = function(){
+Com_Zmail_Video.prototype.getVideoSearchControl = function(){
 
 	if(!this._videoSearchControl){
 
@@ -503,7 +503,7 @@ Com_Zimbra_Video.prototype.getVideoSearchControl = function(){
 };
 
 
-Com_Zimbra_Video.prototype._getSearchDiv = function(){
+Com_Zmail_Video.prototype._getSearchDiv = function(){
 	if(!this._searchDiv){
 		var searchDiv = document.createElement("div");
 		searchDiv.id = 'videoSearch';
@@ -517,7 +517,7 @@ Com_Zimbra_Video.prototype._getSearchDiv = function(){
 
 //Video: Utilities
 
-Com_Zimbra_Video.prototype.isValidVideoURL = function(videoURL){
+Com_Zmail_Video.prototype.isValidVideoURL = function(videoURL){
 	if(!videoURL) return false;
 	var isVideoLink = videoURL.match(/(\b(((http | https)\:\/\/)?(www\.)?((youtube\.com\/watch\?v=)|(video\.google\.com\/videoplay\?docid=)|(video\.google\.com\/googleplayer\.swf\?docId=)|(youtube\.com\/v\/))((-)?[0-9a-zA-Z_]+)?(&\w+=\w+)*)\b)/gi);
 	return (isVideoLink == null)?false:true;
@@ -525,19 +525,19 @@ Com_Zimbra_Video.prototype.isValidVideoURL = function(videoURL){
 //	videoURL.match(/(\b(((http | https)\:\/\/)?(www\.)?((youtube\.com\/watch\?v=)|(video\.google\.com\/videoplay\?docid=)|(video\.google\.com\/googleplayer\.swf\?docId=)|(youtube\.com\/v\/))(-)?[0-9a-zA-Z]+)\b)/gi);
 };
 
-Com_Zimbra_Video.prototype.getValidVideoLinksFromText = function(text){
+Com_Zmail_Video.prototype.getValidVideoLinksFromText = function(text){
 	
 	//var videoLinks = text.match(/(\b(((http | https)\:\/\/)?(www\.)?((youtube\.com\/watch\?v=)|(video\.google\.com\/videoplay\?docid=))(-)?[0-9a-zA-Z]+)\b)/gi);
 	return text.match(/(\b(((http | https)\:\/\/)?(www\.)?((youtube\.com\/watch\?v=)|(video\.google\.com\/videoplay\?docid=)|(video\.google\.com\/googleplayer\.swf\?docId=)|(youtube\.com\/v\/))((-)?[0-9a-zA-Z_]+)?(&\w+=\w+)*)\b)/gi);
 };
 
-Com_Zimbra_Video.prototype._loadSearchAPI = function(file){
+Com_Zmail_Video.prototype._loadSearchAPI = function(file){
     var callback = new AjxCallback(this,this._postLoadSearchAPI);
     var serverURL = ZmZimletBase.PROXY + AjxStringUtil.urlComponentEncode(file);
     AjxRpc.invoke(null,serverURL,null,callback,true);
 };
 
-Com_Zimbra_Video.prototype._postLoadSearchAPI = function(result){
+Com_Zmail_Video.prototype._postLoadSearchAPI = function(result){
 
     var js = result.text;
     js = js.replace(/.compiled.js\"/i,".compiled.js\",true");
@@ -548,7 +548,7 @@ Com_Zimbra_Video.prototype._postLoadSearchAPI = function(result){
     }
 };
 
-Com_Zimbra_Video.prototype._loadObject = function(file){
+Com_Zmail_Video.prototype._loadObject = function(file){
 	var fileref;
 	if (file.indexOf(".js")!=-1){ //If object is a js file
 		fileref=document.createElement('script');

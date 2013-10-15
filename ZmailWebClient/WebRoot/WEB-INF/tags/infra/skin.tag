@@ -12,11 +12,11 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
 --%>
-<%@ tag import="com.zimbra.cs.account.Domain" %>
-<%@ attribute name="mailbox" rtexprvalue="true" required="false" type="com.zimbra.cs.taglib.bean.ZMailboxBean" %>
+<%@ tag import="org.zmail.cs.account.Domain" %>
+<%@ attribute name="mailbox" rtexprvalue="true" required="false" type="org.zmail.cs.taglib.bean.ZMailboxBean" %>
 <%@ attribute name="defaultSkin" rtexprvalue="true" required="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
 <c:catch>
 	<%-- NOTE: We have to check the session scope this way because it
 	           will throw an exception if page is not participating in
@@ -27,7 +27,7 @@
 <%-- set default values --%>
 <c:set var="skin" value="${param.skin}" />
 <c:set var="availableSkins" value="" />
-<c:set var="defaultSkin" value="${initParam.zimbraDefaultSkin}" />
+<c:set var="defaultSkin" value="${initParam.zmailDefaultSkin}" />
 <%-- use current session skin value --%>
 <c:if test="${empty skin}">
 	<c:set var="skin" value="${sessionScope_skin}" />

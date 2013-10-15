@@ -13,23 +13,23 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.analyzersample;
+package org.zmail.analyzersample;
 
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
 
-import com.zimbra.cs.extension.ZimbraExtension;
-import com.zimbra.cs.index.ZimbraAnalyzer;
-import com.zimbra.common.service.ServiceException;
+import org.zmail.cs.extension.ZmailExtension;
+import org.zmail.cs.index.ZmailAnalyzer;
+import org.zmail.common.service.ServiceException;
 
 /**
- * A sample Zimbra Extension which provides a custom Lucene analyzer.
+ * A sample Zmail Extension which provides a custom Lucene analyzer.
  * <p>
- * The extension must call {@link ZimbraAnalyzer#registerAnalyzer(String, org.apache.lucene.analysis.Analyzer)})
+ * The extension must call {@link ZmailAnalyzer#registerAnalyzer(String, org.apache.lucene.analysis.Analyzer)})
  * on startup to register itself with the system. The custom analyzer is invoked based on the COS or Account setting
- * {@code zimbraTextAnalyzer}.
+ * {@code zmailTextAnalyzer}.
  */
-public class SampleAnalyzerExtension implements ZimbraExtension {
+public class SampleAnalyzerExtension implements ZmailExtension {
     private static final Log LOG = LogFactory.getLog(SampleAnalyzerExtension.class);
 
     @Override
@@ -37,7 +37,7 @@ public class SampleAnalyzerExtension implements ZimbraExtension {
         LOG.info("Initializing %s", getName());
         try {
             // The extension can provide any name, however that name must be unique or else the registration will fail.
-            ZimbraAnalyzer.registerAnalyzer(getName(), new SampleAnalyzer());
+            ZmailAnalyzer.registerAnalyzer(getName(), new SampleAnalyzer());
         } catch (ServiceException e) {
             LOG.error("Error while registering extension %s", getName(), e);
         }
@@ -46,7 +46,7 @@ public class SampleAnalyzerExtension implements ZimbraExtension {
     @Override
     public synchronized void destroy() {
         LOG.info("Destroying %s", getName());
-        ZimbraAnalyzer.unregisterAnalyzer(getName());
+        ZmailAnalyzer.unregisterAnalyzer(getName());
     }
 
     @Override

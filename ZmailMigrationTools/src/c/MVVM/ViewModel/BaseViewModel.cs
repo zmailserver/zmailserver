@@ -151,14 +151,14 @@ public class BaseViewModel: INotifyPropertyChanged
             m_config.SourceServer.AdminID = serverSourceModel.MailServerAdminID;
             m_config.SourceServer.AdminPwd = serverSourceModel.MailServerAdminPwd;
             m_config.SourceServer.UseProfile = serverSourceModel.Isprofile;
-	    m_config.ZimbraServer.Hostname = serverDestModel.ZimbraServerHostName;
-	    m_config.ZimbraServer.Port           = serverDestModel.ZimbraPort;
-	    m_config.ZimbraServer.AdminID  = serverDestModel.ZimbraAdmin;
-	    m_config.ZimbraServer.AdminPwd = serverDestModel.ZimbraAdminPasswd;
-            m_config.ZimbraServer.UseSSL = serverDestModel.ZimbraSSL;
+	    m_config.ZmailServer.Hostname = serverDestModel.ZmailServerHostName;
+	    m_config.ZmailServer.Port           = serverDestModel.ZmailPort;
+	    m_config.ZmailServer.AdminID  = serverDestModel.ZmailAdmin;
+	    m_config.ZmailServer.AdminPwd = serverDestModel.ZmailAdminPasswd;
+            m_config.ZmailServer.UseSSL = serverDestModel.ZmailSSL;
 
             // FBS bug 73500 -- 5/18/12
-            if (usersModel.ZimbraDomain.Length == 0)
+            if (usersModel.ZmailDomain.Length == 0)
             {
                 if (usersModel.DomainsFilledIn)
                 {
@@ -175,7 +175,7 @@ public class BaseViewModel: INotifyPropertyChanged
             }
             else
             {
-                m_config.UserProvision.DestinationDomain = usersModel.ZimbraDomain;
+                m_config.UserProvision.DestinationDomain = usersModel.ZmailDomain;
             }
             //
 	}
@@ -191,10 +191,10 @@ public class BaseViewModel: INotifyPropertyChanged
             }
             m_config.SourceServer.DataFile = userSourceModel.PSTFile;
             m_config.SourceServer.UseProfile = userSourceModel.Isprofile;
-	    m_config.ZimbraServer.Hostname = userDestModel.ZimbraServerHostName;
-	    m_config.ZimbraServer.Port           = userDestModel.ZimbraPort;
-	    m_config.ZimbraServer.UserAccount    = userDestModel.ZimbraUser;
-	    m_config.ZimbraServer.UserPassword   = userDestModel.ZimbraUserPasswd;
+	    m_config.ZmailServer.Hostname = userDestModel.ZmailServerHostName;
+	    m_config.ZmailServer.Port           = userDestModel.ZmailPort;
+	    m_config.ZmailServer.UserAccount    = userDestModel.ZmailUser;
+	    m_config.ZmailServer.UserPassword   = userDestModel.ZmailUserPasswd;
 	}
         m_config.GeneralOptions.LogLevel = optionsModel.LogLevel;
         m_config.GeneralOptions.Verbose     = optionsModel.LoggingVerbose;
@@ -293,7 +293,7 @@ public class BaseViewModel: INotifyPropertyChanged
     protected void DisplayLoadError(Exception e)
     {
         string temp = string.Format("Load error: config file could be out of date.\n{0}", e.Message);
-        MessageBox.Show(temp, "Zimbra Migration", MessageBoxButton.OK, MessageBoxImage.Error);
+        MessageBox.Show(temp, "Zmail Migration", MessageBoxButton.OK, MessageBoxImage.Error);
     }
 }
 }

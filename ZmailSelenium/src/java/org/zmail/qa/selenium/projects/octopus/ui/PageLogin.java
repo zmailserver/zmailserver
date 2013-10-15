@@ -14,10 +14,10 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.octopus.ui;
+package org.zmail.qa.selenium.projects.octopus.ui;
 
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
 
 public class PageLogin extends AbsTab {
 
@@ -99,8 +99,8 @@ public class PageLogin extends AbsTab {
 	 * @param account
 	 * @throws HarnessException
 	 */
-	public void zLogin(ZimbraAccount account) throws HarnessException {
-		logger.debug("login(ZimbraAccount account)" + account.EmailAddress);
+	public void zLogin(ZmailAccount account) throws HarnessException {
+		logger.debug("login(ZmailAccount account)" + account.EmailAddress);
 
 		tracer.trace("Login to the "+ MyApplication.myApplicationName() +" using user/password "+ account.EmailAddress +"/"+ account.Password);
 
@@ -110,9 +110,9 @@ public class PageLogin extends AbsTab {
 							
 			////
 			// Workaround for
-			// https://bugzilla.zimbra.com/show_bug.cgi?id=70060
+			// https://bugzilla.zmail.com/show_bug.cgi?id=70060
 			////
-			this.sOpen(ZimbraSeleniumProperties.getBaseURL());
+			this.sOpen(ZmailSeleniumProperties.getBaseURL());
 			this.sWaitForPageToLoad();
 				
 			

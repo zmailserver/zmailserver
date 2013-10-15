@@ -14,18 +14,18 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.preferences.sharing;
+package org.zmail.qa.selenium.projects.ajax.tests.preferences.sharing;
 
 import java.util.List;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.preferences.PagePreferences.ShareItem;
-import com.zimbra.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.preferences.PagePreferences.ShareItem;
+import org.zmail.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
 
 
 public class ShowMyShares extends AjaxCommonTest {
@@ -48,18 +48,18 @@ public class ShowMyShares extends AjaxCommonTest {
 	public void ShowMyShares_01() throws HarnessException {
 
 		//*** Test Data
-		ZimbraAccount delegate = new ZimbraAccount();
+		ZmailAccount delegate = new ZmailAccount();
 		delegate.provision();
 		delegate.authenticate();
 
 		
-		String foldername = "folder"+ ZimbraSeleniumProperties.getUniqueString();
+		String foldername = "folder"+ ZmailSeleniumProperties.getUniqueString();
 		
 		FolderItem inbox = FolderItem.importFromSOAP(app.zGetActiveAccount(), FolderItem.SystemFolder.Inbox);
 		ZAssert.assertNotNull(inbox, "Verify the new owner folder exists");
 
 		app.zGetActiveAccount().soapSend(
-					"<CreateFolderRequest xmlns='urn:zimbraMail'>"
+					"<CreateFolderRequest xmlns='urn:zmailMail'>"
 				+		"<folder name='" + foldername +"' l='" + inbox.getId() +"'/>"
 				+	"</CreateFolderRequest>");
 		
@@ -67,7 +67,7 @@ public class ShowMyShares extends AjaxCommonTest {
 		ZAssert.assertNotNull(folder, "Verify the new owner folder exists");
 		
 		app.zGetActiveAccount().soapSend(
-					"<FolderActionRequest xmlns='urn:zimbraMail'>"
+					"<FolderActionRequest xmlns='urn:zmailMail'>"
 				+		"<action id='"+ folder.getId() +"' op='grant'>"
 				+			"<grant d='" + delegate.EmailAddress + "' gt='usr' perm='r'/>"
 				+		"</action>"

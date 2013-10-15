@@ -1,7 +1,7 @@
 <?php
 require_once("zd-versions.php");
 
-// update url  : https://www.zimbra.com/aus/zdesktop2/update.php
+// update url  : https://www.zmail.com/aus/zdesktop2/update.php
 
 $buildid = 0;
 

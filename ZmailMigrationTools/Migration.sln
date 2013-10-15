@@ -1,11 +1,11 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZimbraMigration", "src\c\ZimbraMigration\ZimbraMigration.csproj", "{39B1DC79-CA1E-4595-94A1-BE5CF4203CF3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZmailMigration", "src\c\ZmailMigration\ZmailMigration.csproj", "{39B1DC79-CA1E-4595-94A1-BE5CF4203CF3}"
 	ProjectSection(ProjectDependencies) = postProject
 		{72F90E77-CF7F-40A5-884C-1E7B1D9A9AAC} = {72F90E77-CF7F-40A5-884C-1E7B1D9A9AAC}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZimbraMigrationXBAP", "src\c\ZimbraMigrationXBAP\ZimbraMigrationXBAP.csproj", "{7DAD7C85-C622-4FA4-8E78-87CC470A7E7C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZmailMigrationXBAP", "src\c\ZmailMigrationXBAP\ZmailMigrationXBAP.csproj", "{7DAD7C85-C622-4FA4-8E78-87CC470A7E7C}"
 	ProjectSection(ProjectDependencies) = postProject
 		{72F90E77-CF7F-40A5-884C-1E7B1D9A9AAC} = {72F90E77-CF7F-40A5-884C-1E7B1D9A9AAC}
 	EndProjectSection
@@ -32,11 +32,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PSTMigration", "src\c\PSTMi
 		{A541A6A1-5677-4504-8D2D-1FB7F3F85585} = {A541A6A1-5677-4504-8D2D-1FB7F3F85585}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Util", "..\ZimbraMAPI\vcproj\Util.vcxproj", "{AD950B89-E346-4095-98BE-E91944C716AD}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Util", "..\ZmailMAPI\vcproj\Util.vcxproj", "{AD950B89-E346-4095-98BE-E91944C716AD}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ZimbraMime", "..\ZimbraMAPI\vcproj\ZimbraMime.vcxproj", "{A541A6A1-5677-4504-8D2D-1FB7F3F85585}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ZmailMime", "..\ZmailMAPI\vcproj\ZmailMime.vcxproj", "{A541A6A1-5677-4504-8D2D-1FB7F3F85585}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Zimbra", "..\ZimbraMAPI\vcproj\ZimbraRpc.vcxproj", "{3391699B-1204-4098-8697-2E43800AABE4}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Zmail", "..\ZmailMAPI\vcproj\ZmailRpc.vcxproj", "{3391699B-1204-4098-8697-2E43800AABE4}"
 	ProjectSection(ProjectDependencies) = postProject
 		{0BA08DC3-4B25-491D-91DD-CE07979332CE} = {0BA08DC3-4B25-491D-91DD-CE07979332CE}
 	EndProjectSection
@@ -54,11 +54,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CssLib", "src\c\CssLib\CssL
 		{76F01C7C-953B-4A0F-92D4-F3FBF50C6D71} = {76F01C7C-953B-4A0F-92D4-F3FBF50C6D71}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZimbraMigrationConsole", "src\c\ZimbraMigrationConsole\ZimbraMigrationConsole.csproj", "{DEBF5F38-2B24-4958-9895-A201E3C133BC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZmailMigrationConsole", "src\c\ZmailMigrationConsole\ZmailMigrationConsole.csproj", "{DEBF5F38-2B24-4958-9895-A201E3C133BC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GroupWise", "src\c\GroupWise\GroupWise.csproj", "{1E39385E-ED50-4230-CBF8-49AE7E224FFA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "libicalvcard", "..\ZimbraMAPI\vcproj\libicalvcard.vcxproj", "{0BA08DC3-4B25-491D-91DD-CE07979332CE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "libicalvcard", "..\ZmailMAPI\vcproj\libicalvcard.vcxproj", "{0BA08DC3-4B25-491D-91DD-CE07979332CE}"
 	ProjectSection(ProjectDependencies) = postProject
 		{A541A6A1-5677-4504-8D2D-1FB7F3F85585} = {A541A6A1-5677-4504-8D2D-1FB7F3F85585}
 	EndProjectSection
@@ -69,20 +69,20 @@ Global
 		SccProjectUniqueName0 = src\\c\\PSTMigration\\PSTMigration.vcxproj
 		SccLocalPath0 = .
 		SccProjectFilePathRelativizedFromConnection0 = src\\c\\PSTMigration\\
-		SccProjectUniqueName1 = ..\\ZimbraMAPI\\vcproj\\Util.vcxproj
-		SccLocalPath1 = ..\\ZimbraMAPI
+		SccProjectUniqueName1 = ..\\ZmailMAPI\\vcproj\\Util.vcxproj
+		SccLocalPath1 = ..\\ZmailMAPI
 		SccProjectFilePathRelativizedFromConnection1 = vcproj\\
-		SccProjectUniqueName2 = ..\\ZimbraMAPI\\vcproj\\ZimbraMime.vcxproj
-		SccLocalPath2 = ..\\ZimbraMAPI
+		SccProjectUniqueName2 = ..\\ZmailMAPI\\vcproj\\ZmailMime.vcxproj
+		SccLocalPath2 = ..\\ZmailMAPI
 		SccProjectFilePathRelativizedFromConnection2 = vcproj\\
-		SccProjectUniqueName3 = ..\\ZimbraMAPI\\vcproj\\ZimbraRpc.vcxproj
-		SccLocalPath3 = ..\\ZimbraMAPI
+		SccProjectUniqueName3 = ..\\ZmailMAPI\\vcproj\\ZmailRpc.vcxproj
+		SccLocalPath3 = ..\\ZmailMAPI
 		SccProjectFilePathRelativizedFromConnection3 = vcproj\\
 		SccLocalPath4 = .
-		SccProjectUniqueName5 = src\\c\\ZimbraMigration\\ZimbraMigration.csproj
-		SccLocalPath5 = src\\c\\ZimbraMigration
-		SccProjectUniqueName6 = src\\c\\ZimbraMigrationXBAP\\ZimbraMigrationXBAP.csproj
-		SccLocalPath6 = src\\c\\ZimbraMigrationXBAP
+		SccProjectUniqueName5 = src\\c\\ZmailMigration\\ZmailMigration.csproj
+		SccLocalPath5 = src\\c\\ZmailMigration
+		SccProjectUniqueName6 = src\\c\\ZmailMigrationXBAP\\ZmailMigrationXBAP.csproj
+		SccLocalPath6 = src\\c\\ZmailMigrationXBAP
 		SccProjectUniqueName7 = src\\c\\MVVM\\MVVM.csproj
 		SccLocalPath7 = src\\c\\MVVM
 		SccProjectUniqueName8 = src\\c\\Misc\\Misc.csproj
@@ -94,8 +94,8 @@ Global
 		SccProjectFilePathRelativizedFromConnection10 = src\\c\\Exchange\\
 		SccProjectUniqueName11 = src\\c\\CssLib\\CssLib.csproj
 		SccLocalPath11 = src\\c\\CssLib
-		SccProjectUniqueName12 = src\\c\\ZimbraMigrationConsole\\ZimbraMigrationConsole.csproj
-		SccLocalPath12 = src\\c\\ZimbraMigrationConsole
+		SccProjectUniqueName12 = src\\c\\ZmailMigrationConsole\\ZmailMigrationConsole.csproj
+		SccLocalPath12 = src\\c\\ZmailMigrationConsole
 		SccProjectUniqueName13 = src\\c\\GroupWise\\GroupWise.csproj
 		SccLocalPath13 = src\\c\\GroupWise
 	EndGlobalSection

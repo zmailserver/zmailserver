@@ -1,6 +1,6 @@
 
 -----------------------------
- urn:zimbraAdmin
+ urn:zmailAdmin
 -----------------------------
 
 Attributes for all commands can have multiple values:
@@ -18,8 +18,8 @@ Attributes for all commands can have multiple values:
 ---------------------------------------------------
 
 
-<GetLDAPEntriesRequest [limit="..."] [sortBy="{sort-by}"] [sortAscending="{sort-ascending}"] [offset="..."] xmlns="urn:zimbraAdmin">
-<ldapSearchBase>[LDAP search base, i.e.: dc=gregzimbra1,dc=zimbra,dc=com]</ldapSearchBase>
+<GetLDAPEntriesRequest [limit="..."] [sortBy="{sort-by}"] [sortAscending="{sort-ascending}"] [offset="..."] xmlns="urn:zmailAdmin">
+<ldapSearchBase>[LDAP search base, i.e.: dc=gregzmail1,dc=zmail,dc=com]</ldapSearchBase>
 <query>[LDAP query, i.e.: ou=groups]</query>
 </GetLDAPEntriesRequest>
 

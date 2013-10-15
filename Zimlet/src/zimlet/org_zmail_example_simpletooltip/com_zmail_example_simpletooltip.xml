@@ -14,7 +14,7 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_example_simpletooltip"
+<zimlet name="org_zmail_example_simpletooltip"
         version="1.0"
         description="Simple Tool Tip Example: Hello World!">
     <contentObject>

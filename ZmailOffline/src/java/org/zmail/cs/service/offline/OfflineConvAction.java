@@ -12,27 +12,27 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.offline;
+package org.zmail.cs.service.offline;
 
 import java.util.Map;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.ZcsMailbox;
-import com.zimbra.cs.mailbox.OfflineServiceException;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.service.mail.ConvAction;
-import com.zimbra.cs.service.mail.ItemAction;
-import com.zimbra.cs.account.offline.OfflineProvisioning;
-import com.zimbra.cs.account.offline.OfflineAccount;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.account.Key;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.ZcsMailbox;
+import org.zmail.cs.mailbox.OfflineServiceException;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.service.mail.ConvAction;
+import org.zmail.cs.service.mail.ItemAction;
+import org.zmail.cs.account.offline.OfflineProvisioning;
+import org.zmail.cs.account.offline.OfflineAccount;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.soap.ZmailSoapContext;
 
 public class OfflineConvAction extends ConvAction {
     
@@ -73,7 +73,7 @@ public class OfflineConvAction extends ConvAction {
         ZcsMailbox ombx = (ZcsMailbox)mbox;
         context.put(OFFLINECONV_MBOX, ombx);
         
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         OperationContext octxt = getOperationContext(zsc, context);
         Folder folder = ombx.getFolderById(octxt, folderId);
         if (ombx.pushNewFolder(octxt, folderId, false, zsc)) {

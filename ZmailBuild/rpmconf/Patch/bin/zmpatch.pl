@@ -15,8 +15,8 @@
 #  
 
 use strict;
-use lib qw(/opt/zimbra/zimbramon/lib lib corebuild/opt/zimbra/zimbramon/lib);
-use Zimbra::Util::Common;
+use lib qw(/opt/zmail/zmailmon/lib lib corebuild/opt/zmail/zmailmon/lib);
+use Zmail::Util::Common;
 use XML::SAX;
 use XML::Simple;
 use Data::Dumper;
@@ -54,14 +54,14 @@ GetOptions ("config=s"  => \$options{config},
 
 my $progName = "zmpatch";
 my $patchBuildNumber;
-my $zimbra_home = "/opt/zimbra";
+my $zmail_home = "/opt/zmail";
 my %versionInfo;
 my ($platform, $zmtype, $config);
 $options{verbose} = 0 unless $options{verbose};
 
 if ($options{build}) {
   usage() unless ($options{build_source} && $options{build_version});
-  $options{build_target}="$options{build_source}/ZimbraBuild/zcs-patch-$options{build_version}" unless $options{build_target};
+  $options{build_target}="$options{build_source}/ZmailBuild/zcs-patch-$options{build_version}" unless $options{build_target};
 }
 
 my $logfile;
@@ -81,8 +81,8 @@ if($options{build_source}) {
 }
 
 if ($options{build}) {
-  if (-f "$options{build_source}/ZimbraBuild/RE/BUILD") {
-    open(BUILD, "$options{build_source}/ZimbraBuild/RE/BUILD");
+  if (-f "$options{build_source}/ZmailBuild/RE/BUILD") {
+    open(BUILD, "$options{build_source}/ZmailBuild/RE/BUILD");
   } else {
     progress("Unable to determine build number.\n", 0, 0);
     exit 1;
@@ -90,11 +90,11 @@ if ($options{build}) {
 } else {
   $zmtype=getInstalledType();
   debugLog("Install type: $zmtype\n");
-  unless (-x "${zimbra_home}/libexec/get_plat_tag.sh") {
+  unless (-x "${zmail_home}/libexec/get_plat_tag.sh") {
     print "ZCS Install not found.\n";
     exit 1;
   }
-  $platform = `${zimbra_home}/libexec/get_plat_tag.sh`;
+  $platform = `${zmail_home}/libexec/get_plat_tag.sh`;
   chomp($platform);
   if (-f "source/build") {
     open(BUILD, "source/build");
@@ -140,9 +140,9 @@ sub initPatchDir() {
   make_path($bin_dir);
   make_path($conf_dir);
   make_path($src_dir);
-  copy("$options{build_source}/ZimbraBuild/rpmconf/Patch/bin/zmpatch.pl", $bin_dir);
-  copy("$options{build_source}/ZimbraBuild/rpmconf/Patch/conf/zmpatch.xml", $conf_dir);
-  copy("$options{build_source}/ZimbraBuild/rpmconf/Patch/installPatch.sh", $options{build_target});
+  copy("$options{build_source}/ZmailBuild/rpmconf/Patch/bin/zmpatch.pl", $bin_dir);
+  copy("$options{build_source}/ZmailBuild/rpmconf/Patch/conf/zmpatch.xml", $conf_dir);
+  copy("$options{build_source}/ZmailBuild/rpmconf/Patch/installPatch.sh", $options{build_target});
   system("chmod 755 $options{build_target}/installPatch.sh");
   open(B, ">${src_dir}/build");
   print B "$patchBuildNumber\n";
@@ -267,8 +267,8 @@ sub deployPatch($) {
   # log an install session start
   logSession("INSTALL SESSION START");
   # force this so the build number is always updated
-  # not all patches will have zimbra-core components
-  logSession("UPGRADED zimbra-core-${currentRelease}_${patchBuildNumber}");
+  # not all patches will have zmail-core components
+  logSession("UPGRADED zmail-core-${currentRelease}_${patchBuildNumber}");
 
   # do preinstall tasks 
 
@@ -297,10 +297,10 @@ sub deployPatch($) {
         if (lc($zref->{deploy}) eq "true") {
           my $rc;
           progress("undeployed...",0,1)
-            unless (runAsZimbra("zmzimletctl -l undeploy $zimletname"));
+            unless (runAsZmail("zmzimletctl -l undeploy $zimletname"));
           progress("deployed...",0,1) 
-            unless (runAsZimbra("zmzimletctl -l deploy $dstfile"));
-          runAsZimbra("zmprov flushcache zimlet") 
+            unless (runAsZmail("zmzimletctl -l deploy $dstfile"));
+          runAsZmail("zmprov flushcache zimlet") 
            if (lc($zref->{flushcache}) eq "true");
         }
       }
@@ -345,17 +345,17 @@ sub deployPatch($) {
       }
     }
     # update the installed version of package
-    if ($package eq "zimbra-store") {
+    if ($package eq "zmail-store") {
       &doIncrementJSVersion();
     }
     logSession("UPGRADED $package-${currentRelease}_${patchBuildNumber}")
-      unless ($package eq "zimbra-core");
+      unless ($package eq "zmail-core");
   }
 
   # do postinstall tasks
   foreach my $task (@{$patch->{postinstall}}) {
     progress("Running $task...",1,0);
-    if (runAsZimbra($task)) {
+    if (runAsZmail($task)) {
       progress("failed.\n",1,0);
     } else {
       progress("done.\n",1,0);
@@ -378,20 +378,20 @@ sub logSession($) {
   return if $options{dryrun};
   my $date = `date +%s`;
   chomp($date);
-  open(SESS, ">>${zimbra_home}/.install_history");
+  open(SESS, ">>${zmail_home}/.install_history");
   print SESS "$date: $msg\n";
   close(SESS);
 }
 
-sub runAsZimbra {
+sub runAsZmail {
   my $cmd = shift;
   my $SU;
   if ($platform =~ /MACOSXx86_10/) {
-    $SU = "su - zimbra -c -l ";
+    $SU = "su - zmail -c -l ";
   } else {
-    $SU = "su - zimbra -c ";
+    $SU = "su - zmail -c ";
   }
-  detail ( "*** Running as zimbra user: $cmd\n" );
+  detail ( "*** Running as zmail user: $cmd\n" );
   my $rc;
   $rc = 0xffff & system("$SU \"$cmd\" >> $logfile 2>&1");
   return $rc;
@@ -466,7 +466,7 @@ sub getDateStamp() {
 sub getInstalledVersion() {
   my %configStatus;
   my %installStatus;
-  if (open H, "${zimbra_home}/.install_history") {
+  if (open H, "${zmail_home}/.install_history") {
 
     my @history = <H>;
     close H;
@@ -486,9 +486,9 @@ sub getInstalledVersion() {
       if ($op eq "INSTALLED" || $op eq "UPGRADED") {
         my $v = $stage;
         $stage =~ s/[-_]\d.*//;
-        if ($stage eq "zimbra-core") {
+        if ($stage eq "zmail-core") {
           $v =~ s/_HEAD.*//;
-          $v =~ s/^zimbra-core[-_]//;
+          $v =~ s/^zmail-core[-_]//;
           if ($v =~ /\.deb$/) {
             my $orig_v=$v;
             $v =~ s/^(\d+\.\d+\.\d+\.\w+\.\w+)\..*/$1/;
@@ -520,7 +520,7 @@ sub getInstalledVersion() {
 }
 
 sub getInstalledType() {
-  return ((-f "${zimbra_home}/bin/zmbackupquery") ? "NETWORK" : "FOSS");
+  return ((-f "${zmail_home}/bin/zmbackupquery") ? "NETWORK" : "FOSS");
 }
 
 sub getReleaseString($) {
@@ -553,8 +553,8 @@ sub isInstalled {
   if ($platform =~ /^DEBIAN/ || $platform =~ /^UBUNTU/) {
     $pkgQuery = "dpkg -s $pkg";
   } elsif ($platform eq "MACOSXx86_10.6" || $platform eq "MACOSXx86_10.7") {
-    $pkg =~ s/zimbra-//;
-    $pkgQuery = "pkgutil --pkg-info com.zimbra.zcs.${pkg}";
+    $pkg =~ s/zmail-//;
+    $pkgQuery = "pkgutil --pkg-info org.zmail.zcs.${pkg}";
   } elsif ($platform =~ /MACOSX/) {
     my @l = sort glob ("/Library/Receipts/${pkg}*");
     if ( $#l < 0 ) { return 0; }
@@ -579,8 +579,8 @@ sub isInstalled {
 }
 
 sub doIncrementJSVersion() {
-  my $infile="$zimbra_home/jetty/etc/zimbra.web.xml.in";
-  my $outfile="$zimbra_home/data/tmp/zimbra.web.xml.in.new";
+  my $infile="$zmail_home/jetty/etc/zmail.web.xml.in";
+  my $outfile="$zmail_home/data/tmp/zmail.web.xml.in.new";
   unlink("$outfile") if (-e "$outfile");
   open (IN, "<$infile");
   open (OUT, ">$outfile");
@@ -604,8 +604,8 @@ sub doIncrementJSVersion() {
   close(IN);
   close(OUT);
   copy($outfile, $infile);
-  $infile="$zimbra_home/jetty/etc/zimbraAdmin.web.xml.in";
-  $outfile="$zimbra_home/data/tmp/zimbraAdmin.web.xml.in.new";
+  $infile="$zmail_home/jetty/etc/zmailAdmin.web.xml.in";
+  $outfile="$zmail_home/data/tmp/zmailAdmin.web.xml.in.new";
   unlink("$outfile") if (-e "$outfile");
   open (IN, "<$infile");
   open (OUT, ">$outfile");

@@ -12,19 +12,19 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.offline.util.yc.oauth;
+package org.zmail.cs.offline.util.yc.oauth;
 
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.Metadata;
-import com.zimbra.cs.offline.OfflineLog;
-import com.zimbra.cs.offline.util.yc.YContactException;
-import com.zimbra.cs.util.Zimbra;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.Metadata;
+import org.zmail.cs.offline.OfflineLog;
+import org.zmail.cs.offline.util.yc.YContactException;
+import org.zmail.cs.util.Zmail;
 
 /**
  * every yahoo mailbox should have one corresponding OAuthCredential
@@ -48,7 +48,7 @@ public class OAuthManager {
             return cred;
         }
         OAuthCredential credential = this.mboxOAuthCredentials.get(accountId);
-        if (Zimbra.started() && credential.authToken.isNew()) {
+        if (Zmail.started() && credential.authToken.isNew()) {
             try {
                 credential.load();
             } catch (YContactException e) {

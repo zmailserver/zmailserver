@@ -17,13 +17,13 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.ajax.ui.preferences;
+package org.zmail.qa.selenium.projects.ajax.ui.preferences;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.projects.ajax.ui.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.projects.ajax.ui.*;
 
 
 
@@ -251,17 +251,17 @@ public class DialogEditQuickCommand extends AbsDialog {
 
 			pulldownLocator = null;
 			optionLocator = null;
-			// See https://bugzilla.zimbra.com/show_bug.cgi?id=65620
+			// See https://bugzilla.zmail.com/show_bug.cgi?id=65620
 
 		} else if ( type.equals(QuickCommandType.Contact) ) {
 
 			optionLocator = null;
-			throw new HarnessException("See https://bugzilla.zimbra.com/show_bug.cgi?id=65620");
+			throw new HarnessException("See https://bugzilla.zmail.com/show_bug.cgi?id=65620");
 
 		} else if ( type.equals(QuickCommandType.Appointment) ) {
 
 			optionLocator = null;
-			throw new HarnessException("See https://bugzilla.zimbra.com/show_bug.cgi?id=65620");
+			throw new HarnessException("See https://bugzilla.zmail.com/show_bug.cgi?id=65620");
 
 		} else {
 			throw new HarnessException("invalid type: "+ type.toString());
@@ -340,19 +340,19 @@ public class DialogEditQuickCommand extends AbsDialog {
 		
 		if ( operation.equals(QuickCommandOperation.MarkAs) ) {
 			
-			optionLocator = "See http://bugzilla.zimbra.com/show_bug.cgi?id=65658";
+			optionLocator = "See http://bugzilla.zmail.com/show_bug.cgi?id=65658";
 
 			// FALL THROUGH
 			
 		} else if ( operation.equals(QuickCommandOperation.MoveToFolder) ) {
 			
-			optionLocator = "See http://bugzilla.zimbra.com/show_bug.cgi?id=65658";
+			optionLocator = "See http://bugzilla.zmail.com/show_bug.cgi?id=65658";
 
 			// FALL THROUGH
 			
 		} else if ( operation.equals(QuickCommandOperation.TagWith) ) {
 			
-			optionLocator = "See http://bugzilla.zimbra.com/show_bug.cgi?id=65658";
+			optionLocator = "See http://bugzilla.zmail.com/show_bug.cgi?id=65658";
 
 			// FALL THROUGH
 			
@@ -447,19 +447,19 @@ public class DialogEditQuickCommand extends AbsDialog {
 			
 		} else if ( target.equals(QuickCommandTarget.MarkAsFlagged)) {
 			
-			optionLocator = "See http://bugzilla.zimbra.com/show_bug.cgi?id=65668";
+			optionLocator = "See http://bugzilla.zmail.com/show_bug.cgi?id=65668";
 			
 		} else if ( target.equals(QuickCommandTarget.MarkAsUnFlagged)) {
 			
-			optionLocator = "See http://bugzilla.zimbra.com/show_bug.cgi?id=65668";
+			optionLocator = "See http://bugzilla.zmail.com/show_bug.cgi?id=65668";
 			
 		} else if ( target.equals(QuickCommandTarget.MarkAsRead)) {
 			
-			optionLocator = "See http://bugzilla.zimbra.com/show_bug.cgi?id=65668";
+			optionLocator = "See http://bugzilla.zmail.com/show_bug.cgi?id=65668";
 			
 		} else if ( target.equals(QuickCommandTarget.MarkAsUnRead)) {
 			
-			optionLocator = "See http://bugzilla.zimbra.com/show_bug.cgi?id=65668";
+			optionLocator = "See http://bugzilla.zmail.com/show_bug.cgi?id=65668";
 			
 		} else {
 			throw new HarnessException("target "+ target +" not implemented");

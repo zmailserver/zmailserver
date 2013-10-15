@@ -14,12 +14,12 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.admin.items;
+package org.zmail.qa.selenium.projects.admin.items;
 
-import com.zimbra.qa.selenium.framework.items.IItem;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
+import org.zmail.qa.selenium.framework.items.IItem;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
 
 public class ResourceItem implements IItem {
 	protected String resourceLocalName;
@@ -29,13 +29,13 @@ public class ResourceItem implements IItem {
 	public ResourceItem() {
 		super();
 
-		resourceLocalName = "resource" + ZimbraSeleniumProperties.getUniqueString();
-		resourceDomainName = ZimbraSeleniumProperties.getStringProperty("testdomain");
+		resourceLocalName = "resource" + ZmailSeleniumProperties.getUniqueString();
+		resourceDomainName = ZmailSeleniumProperties.getStringProperty("testdomain");
 		resourceId = null;	
 	}
 
 	@Override
-	public void createUsingSOAP(ZimbraAccount account) throws HarnessException {
+	public void createUsingSOAP(ZmailAccount account) throws HarnessException {
 		// TODO Auto-generated method stub
 
 	}

@@ -47,7 +47,7 @@ function(callback, batchCmd) {
     this._keepPolicies  = new Array();
     this._purgePolicies = new Array();
 
-    var jsonObj = {GetSystemRetentionPolicyRequest:{_jsns:"urn:zimbraMail"}};
+    var jsonObj = {GetSystemRetentionPolicyRequest:{_jsns:"urn:zmailMail"}};
     var request = jsonObj.GetSystemRetentionPolicyRequest;
     var respCallback = this._handleResponseGetPolicies.bind(this, callback);
     if (batchCmd) {

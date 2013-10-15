@@ -41,7 +41,7 @@ MAPITaskException::MAPITaskException(HRESULT hrErrCode, LPCWSTR lpszDescription,
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 //bool MAPITask::m_bNamedPropsInitialized = false;
 
-MAPITask::MAPITask(Zimbra::MAPI::MAPISession &session, Zimbra::MAPI::MAPIMessage &mMessage)
+MAPITask::MAPITask(Zmail::MAPI::MAPISession &session, Zmail::MAPI::MAPIMessage &mMessage)
                   : MAPIRfc2445 (session, mMessage)
 {
     //if (MAPITask::m_bNamedPropsInitialized == false)
@@ -109,7 +109,7 @@ HRESULT MAPITask::InitNamedPropsForTask()
     nameIdsC[5] = 0x8506;
 
     HRESULT hr = S_OK;
-    Zimbra::Util::ScopedBuffer<SPropValue> pPropValMsgClass;
+    Zmail::Util::ScopedBuffer<SPropValue> pPropValMsgClass;
 
     if (FAILED(hr = HrGetOneProp(m_pMessage, PR_MESSAGE_CLASS, pPropValMsgClass.getptr())))
         throw MAPITaskException(hr, L"InitNamedPropsForTask(): HrGetOneProp Failed.", 
@@ -292,7 +292,7 @@ HRESULT MAPITask::SetMAPITaskValues()
 
 void MAPITask::SetRecurValues()
 {
-    Zimbra::Util::ScopedInterface<IStream> pRecurrenceStream;
+    Zmail::Util::ScopedInterface<IStream> pRecurrenceStream;
     HRESULT hResult = m_pMessage->OpenProperty(pr_recurstreamt, &IID_IStream, 0, 0,
 						(LPUNKNOWN *)pRecurrenceStream.getptr());
     if (FAILED(hResult))
@@ -300,8 +300,8 @@ void MAPITask::SetRecurValues()
 	return;
     }
     LPSTREAM pStream = pRecurrenceStream.get();
-    Zimbra::Mapi::Task OlkTask(m_pMessage, NULL);
-    Zimbra::Mapi::COutlookRecurrencePattern &recur = OlkTask.GetRecurrencePattern();
+    Zmail::Mapi::Task OlkTask(m_pMessage, NULL);
+    Zmail::Mapi::COutlookRecurrencePattern &recur = OlkTask.GetRecurrencePattern();
     hResult = recur.ReadRecurrenceStream(pStream);
     if (FAILED(hResult))
     {
@@ -312,7 +312,7 @@ void MAPITask::SetRecurValues()
     // Set Timezone info
     SYSTEMTIME stdTime;
     SYSTEMTIME dsTime;
-    const Zimbra::Mail::TimeZone &tzone = recur.GetTimeZone();
+    const Zmail::Mail::TimeZone &tzone = recur.GetTimeZone();
     m_timezone.id = m_pTimezoneId;  // don't use m_timezone.id = tzone.GetId()
     IntToWstring(tzone.GetStandardOffset(), m_timezone.standardOffset);
     IntToWstring(tzone.GetDaylightOffset(), m_timezone.daylightOffset);
@@ -413,9 +413,9 @@ void MAPITask::SetRecurValues()
     }
 
     ULONG ulRecurrenceEndType = recur.GetEndType();
-    Zimbra::Mapi::CRecurrenceTime rtEndDate = recur.GetEndDate();
-    Zimbra::Mapi::CFileTime ft = (FILETIME)rtEndDate;
-    m_pTaskFilterDate = Zimbra::MAPI::Util::CommonDateString(ft);
+    Zmail::Mapi::CRecurrenceTime rtEndDate = recur.GetEndDate();
+    Zmail::Mapi::CFileTime ft = (FILETIME)rtEndDate;
+    m_pTaskFilterDate = Zmail::MAPI::Util::CommonDateString(ft);
     if (ulRecurrenceEndType == oetEndAfterN)
     {
 	IntToWstring(recur.GetOccurrences(), m_pRecurCount);
@@ -425,7 +425,7 @@ void MAPITask::SetRecurValues()
     {
 	SYSTEMTIME st;
 	FileTimeToSystemTime(&ft, &st);
-	wstring temp = Zimbra::Util::FormatSystemTime(st, TRUE, TRUE);
+	wstring temp = Zmail::Util::FormatSystemTime(st, TRUE, TRUE);
 	m_pRecurEndDate = temp.substr(0, 8);
     }
 }
@@ -472,8 +472,8 @@ void MAPITask::SetTaskStart(FILETIME ft)
     SYSTEMTIME st;
 
     FileTimeToSystemTime(&ft, &st);
-    m_pTaskStart = Zimbra::Util::FormatSystemTime(st, FALSE, FALSE);
-    m_pTaskFilterDate = Zimbra::MAPI::Util::CommonDateString(m_pPropVals[T_TASKDUE].Value.ft);
+    m_pTaskStart = Zmail::Util::FormatSystemTime(st, FALSE, FALSE);
+    m_pTaskFilterDate = Zmail::MAPI::Util::CommonDateString(m_pPropVals[T_TASKDUE].Value.ft);
 }
 
 void MAPITask::SetTaskDue(FILETIME ft)
@@ -481,7 +481,7 @@ void MAPITask::SetTaskDue(FILETIME ft)
     SYSTEMTIME st;
 
     FileTimeToSystemTime(&ft, &st);
-    m_pTaskDue = Zimbra::Util::FormatSystemTime(st, FALSE, FALSE);
+    m_pTaskDue = Zmail::Util::FormatSystemTime(st, FALSE, FALSE);
 }
 
 void MAPITask::SetTotalWork(long totalwork)
@@ -518,7 +518,7 @@ void MAPITask::SetTaskFlagDueBy(FILETIME ft)
     SYSTEMTIME st;
 
     FileTimeToSystemTime(&ft, &st);
-    m_pTaskFlagDueBy = (st.wYear == 1601) ? L"" : Zimbra::Util::FormatSystemTime(st, TRUE, TRUE);
+    m_pTaskFlagDueBy = (st.wYear == 1601) ? L"" : Zmail::Util::FormatSystemTime(st, TRUE, TRUE);
 }
 
 void MAPITask::SetPrivate(unsigned short usPrivate)
@@ -528,12 +528,12 @@ void MAPITask::SetPrivate(unsigned short usPrivate)
 
 void MAPITask::SetPlainTextFileAndContent()
 {
-    m_pPlainTextFile = Zimbra::MAPI::Util::SetPlainText(m_pMessage, &m_pPropVals[T_BODY]);
+    m_pPlainTextFile = Zmail::MAPI::Util::SetPlainText(m_pMessage, &m_pPropVals[T_BODY]);
 }
 
 void MAPITask::SetHtmlFileAndContent()
 {
-    m_pHtmlFile = Zimbra::MAPI::Util::SetHtml(m_pMessage, &m_pPropVals[T_HTMLBODY]);
+    m_pHtmlFile = Zmail::MAPI::Util::SetHtml(m_pMessage, &m_pPropVals[T_HTMLBODY]);
 }
 
 bool    MAPITask::IsTaskReminderSet() {return m_bIsTaskReminderSet; }

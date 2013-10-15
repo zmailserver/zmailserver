@@ -93,7 +93,7 @@ function() {
 		step7: this.zimlet.getMessage("step7"),
 		stepNotes: stepNotes
 	};
-	return AjxTemplate.expand("com_zimbra_social.templates.OAuth#OAuthDialogView", subs);
+	return AjxTemplate.expand("org_zmail_social.templates.OAuth#OAuthDialogView", subs);
 };
 
 SocialOAuth.prototype._okgetPinBtnListener =

@@ -14,12 +14,12 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.admin.tests.topmenu.logo;
+package org.zmail.qa.selenium.projects.admin.tests.topmenu.logo;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.projects.admin.core.AdminCommonTest;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.projects.admin.core.AdminCommonTest;
 
 
 public class BasicLogo extends AdminCommonTest {

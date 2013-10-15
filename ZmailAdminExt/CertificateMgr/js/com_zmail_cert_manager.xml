@@ -14,7 +14,7 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_cert_manager" version="6.0.6"
+<zimlet name="org_zmail_cert_manager" version="6.0.6"
 	label="${msg.label}"
 	description="${msg.description}" 
 	extension="true">
@@ -27,6 +27,6 @@
     <include>ZaCertsServerListController.js</include>
     <include>ZaDomainCertUpload.js</include>
     <include>ZaProxyCAUpload.js</include>
-    <include>zimbra_cert.js</include>
+    <include>zmail_cert.js</include>
     <disableUIUndeploy>TRUE</disableUIUndeploy>
 </zimlet>

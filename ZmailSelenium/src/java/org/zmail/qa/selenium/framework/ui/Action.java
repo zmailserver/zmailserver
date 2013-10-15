@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.ui;
+package org.zmail.qa.selenium.framework.ui;
 
 
 
@@ -25,7 +25,7 @@ package com.zimbra.qa.selenium.framework.ui;
  * This class defines constants for
  * <ol>
  * <li>Mouse actions, such as click or ctrl-click</li>
- * <li>Zimbra object actions, such as check a checkbox or flag a mail</li>
+ * <li>Zmail object actions, such as check a checkbox or flag a mail</li>
  * </ol>
  * <p>
  * Action constant names start with "A_" and take the general format

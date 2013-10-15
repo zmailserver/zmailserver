@@ -18,31 +18,31 @@
 // @author Zimlet author: Parag Shah.
 //////////////////////////////////////////////////////////////////////////////
 
-function Com_Zimbra_Usagetracker() {
+function Com_Zmail_Usagetracker() {
 };
 
-Com_Zimbra_Usagetracker.prototype = new ZmZimletBase();
-Com_Zimbra_Usagetracker.prototype.constructor = Com_Zimbra_Usagetracker;
+Com_Zmail_Usagetracker.prototype = new ZmZimletBase();
+Com_Zmail_Usagetracker.prototype.constructor = Com_Zmail_Usagetracker;
 
 
 // Public methods
 
-Com_Zimbra_Usagetracker.prototype.toString =
+Com_Zmail_Usagetracker.prototype.toString =
 function() {
-	return "Com_Zimbra_Usagetracker";
+	return "Com_Zmail_Usagetracker";
 };
 
-Com_Zimbra_Usagetracker.prototype.init =
+Com_Zmail_Usagetracker.prototype.init =
 function() {
 	this._ganalytics = new GoogleAnalytics();
 };
 
-Com_Zimbra_Usagetracker.prototype.doubleClicked =
+Com_Zmail_Usagetracker.prototype.doubleClicked =
 function(canvas) {
 	// do nothing
 };
 
-Com_Zimbra_Usagetracker.prototype.onShowView =
+Com_Zmail_Usagetracker.prototype.onShowView =
 function(viewId, isNewView) {
 	this._ganalytics.handleShow(viewId, isNewView);
 };
@@ -55,7 +55,7 @@ function(viewId, isNewView) {
  * @param currentViewId		[Integer]	The current view user is on when the action happened
  * @param lastViewId		[Integer]	The last view the user was on when the action happened
  */
-Com_Zimbra_Usagetracker.prototype.onAction =
+Com_Zmail_Usagetracker.prototype.onAction =
 function(type, action, currentViewId, lastViewId) {
 	this._ganalytics.handleAction(type, action, currentViewId, lastViewId);
 };

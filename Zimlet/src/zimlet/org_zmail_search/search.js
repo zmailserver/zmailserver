@@ -13,21 +13,21 @@
  * ***** END LICENSE BLOCK *****
  */
 
-function Com_Zimbra_Search() {
+function Com_Zmail_Search() {
 	this._divID = Dwt.getNextId();
 };
 
-Com_Zimbra_Search.prototype = new ZmZimletBase;
-Com_Zimbra_Search.prototype.constructor = Com_Zimbra_Search;
+Com_Zmail_Search.prototype = new ZmZimletBase;
+Com_Zmail_Search.prototype.constructor = Com_Zmail_Search;
 
-Com_Zimbra_Search.HANDLERS = [];
+Com_Zmail_Search.HANDLERS = [];
 
-Com_Zimbra_Search.registerHandler = function(ctor) {
-	Com_Zimbra_Search.HANDLERS.push(ctor);
+Com_Zmail_Search.registerHandler = function(ctor) {
+	Com_Zmail_Search.HANDLERS.push(ctor);
 };
 
-Com_Zimbra_Search.prototype.init = function() {
-	var a = Com_Zimbra_Search.HANDLERS;
+Com_Zmail_Search.prototype.init = function() {
+	var a = Com_Zmail_Search.HANDLERS;
 	for (var i = 0; i < a.length; ++i) {
 		var ctor = a[i];
 		var h = a[i] = new ctor(this);
@@ -36,7 +36,7 @@ Com_Zimbra_Search.prototype.init = function() {
 	}
 };
 
-Com_Zimbra_Search.prototype.selectListener = function(handler) {
+Com_Zmail_Search.prototype.selectListener = function(handler) {
 	var query = AjxStringUtil.trim(this.getSearchQuery(), true);
 	if (query != "") {
 		var code = handler.getSearchFormHTML(query);
@@ -66,7 +66,7 @@ Com_Zimbra_Search.prototype.selectListener = function(handler) {
 	}
 };
 
-Com_Zimbra_Search.prototype._windowOpen = function(form) {
+Com_Zmail_Search.prototype._windowOpen = function(form) {
 	var fields = form.elements;
 	var url = form.action;
 	var args = [];

@@ -16,8 +16,8 @@
  */
 package sample.oauth.provider.soap;
 
-import com.zimbra.soap.DocumentDispatcher;
-import com.zimbra.soap.DocumentService;
+import org.zmail.soap.DocumentDispatcher;
+import org.zmail.soap.DocumentService;
 
 /**
  */

@@ -14,11 +14,11 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimlet name="com_zimbra_travelagent"
+<zimlet name="org_zmail_travelagent"
         version="2.05"
         label="Travel Agent"
         description="Search travel reservations.">
-    <include>com_zimbra_travelagent.js</include>
+    <include>org_zmail_travelagent.js</include>
     <include>TravelAgentFlightFindView.js</include>
     <include>TravelAgentCarFindView.js</include>
     <include>TravelAgentHotelFindView.js</include>
@@ -30,8 +30,8 @@
     <resource>hotwire.gif</resource>
     <resource>travelocity.gif</resource>
     <resource>kayak.gif</resource>
-    <includeCSS>com_zimbra_travelagent.css</includeCSS>
-    <handlerObject>Com_Zimbra_TravelAgent</handlerObject>
+    <includeCSS>org_zmail_travelagent.css</includeCSS>
+    <handlerObject>Com_Zmail_TravelAgent</handlerObject>
     <zimletPanelItem label="Travel Agent" icon="Globe">
         <toolTipText>Search travel reservations.</toolTipText>
         <dragSource type="ZmContact" />

@@ -12,16 +12,16 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib.tag;
+package org.zmail.cs.taglib.tag;
 
 import com.google.common.collect.MapMaker;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.taglib.bean.ZSearchResultBean;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZMailbox.Fetch;
-import com.zimbra.client.ZSearchParams;
-import com.zimbra.client.ZSearchResult;
-import com.zimbra.soap.type.SearchSortBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.taglib.bean.ZSearchResultBean;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZMailbox.Fetch;
+import org.zmail.client.ZSearchParams;
+import org.zmail.client.ZSearchResult;
+import org.zmail.soap.type.SearchSortBy;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
@@ -31,7 +31,7 @@ import java.util.Map;
 import java.util.TimeZone;
 import java.util.concurrent.atomic.AtomicLong;
 
-public final class SearchTag extends ZimbraSimpleTag {
+public final class SearchTag extends ZmailSimpleTag {
 
     private static final AtomicLong ID_GEN = new AtomicLong(1L);
     private static final int DEFAULT_SEARCH_LIMIT = 25;

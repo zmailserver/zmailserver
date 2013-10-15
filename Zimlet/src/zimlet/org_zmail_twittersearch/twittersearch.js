@@ -14,17 +14,17 @@
  */
 
 /*
-* @author Raja Rao DV (rrao@zimbra.com)
+* @author Raja Rao DV (rrao@zmail.com)
 */
 
 
-function com_zimbra_twittersearch_handlerObject() {
+function org_zmail_twittersearch_handlerObject() {
 };
 
-com_zimbra_twittersearch_handlerObject.prototype = new ZmZimletBase();
-com_zimbra_twittersearch_handlerObject.prototype.constructor = com_zimbra_twittersearch_handlerObject;
+org_zmail_twittersearch_handlerObject.prototype = new ZmZimletBase();
+org_zmail_twittersearch_handlerObject.prototype.constructor = org_zmail_twittersearch_handlerObject;
 
-var TwitterSearchTooltipZimlet = com_zimbra_twittersearch_handlerObject;
+var TwitterSearchTooltipZimlet = org_zmail_twittersearch_handlerObject;
 
 /**
  * This method is called by Email Zimlet notifying this Zimlet(TwitterSearch) to add TwitterSearch slide to the tooltip
@@ -131,7 +131,7 @@ function(tweetItem) {
 		fromUser: tweetItem.from_user,
 		tweet: tweetItem.text
 	};
-	return AjxTemplate.expand("com_zimbra_twittersearch.templates.TwitterSearch#RowItem", subs);
+	return AjxTemplate.expand("org_zmail_twittersearch.templates.TwitterSearch#RowItem", subs);
 };
 
 TwitterSearchTooltipZimlet.prototype._setSearchFieldValue =
@@ -146,7 +146,7 @@ function() {
 
 TwitterSearchTooltipZimlet.prototype._getTooltipBGHtml =
 function() {
-	return AjxTemplate.expand("com_zimbra_twittersearch.templates.TwitterSearch#Frame");
+	return AjxTemplate.expand("org_zmail_twittersearch.templates.TwitterSearch#Frame");
 };
 
 TwitterSearchTooltipZimlet.prototype._setTooltipSticky =

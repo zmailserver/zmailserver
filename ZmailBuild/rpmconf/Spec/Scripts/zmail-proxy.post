@@ -15,17 +15,17 @@
 # 
 
 # Symlinks
-if [ -L "/opt/zimbra/nginx" ]; then
-  rm -rf /opt/zimbra/nginx
+if [ -L "/opt/zmail/nginx" ]; then
+  rm -rf /opt/zmail/nginx
 fi
-ln -s /opt/zimbra/nginx-1.2.0-zimbra /opt/zimbra/nginx
+ln -s /opt/zmail/nginx-1.2.0-zmail /opt/zmail/nginx
 
 SUDOMODE=`perl -e 'my $mode=(stat("/etc/sudoers"))[2];printf("%04o\n",$mode & 07777);'`
-egrep -v '^%zimbra.*nginx' /etc/sudoers > /tmp/sudoers
-echo "%zimbra ALL=NOPASSWD:/opt/zimbra/nginx/sbin/nginx" >> /tmp/sudoers
+egrep -v '^%zmail.*nginx' /etc/sudoers > /tmp/sudoers
+echo "%zmail ALL=NOPASSWD:/opt/zmail/nginx/sbin/nginx" >> /tmp/sudoers
 mv -f /tmp/sudoers /etc/sudoers
 chmod $SUDOMODE /etc/sudoers
 
-if [ -x "/opt/zimbra/libexec/zmfixperms" ]; then
-  /opt/zimbra/libexec/zmfixperms
+if [ -x "/opt/zmail/libexec/zmfixperms" ]; then
+  /opt/zmail/libexec/zmfixperms
 fi

@@ -14,20 +14,20 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.items;
+package org.zmail.qa.selenium.framework.items;
 
 import java.util.*;
 import java.util.Map.Entry;
 
 import org.apache.log4j.*;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.AppAjaxClient;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.ui.AppAjaxClient;
 
 /**
- * The <code>DistributionListItem</code> defines a Zimbra dl item
+ * The <code>DistributionListItem</code> defines a Zmail dl item
  */
 public class DistributionListItem extends ContactItem implements IItem {
 	protected static Logger logger = LogManager.getLogger(IItem.class);
@@ -38,7 +38,7 @@ public class DistributionListItem extends ContactItem implements IItem {
 	 */
 	private String email = null;
 	
-	private ZimbraAccount owner=null;
+	private ZmailAccount owner=null;
 	
 	/**
 	 * The list of emails belong to this list
@@ -88,24 +88,24 @@ public class DistributionListItem extends ContactItem implements IItem {
 		emailList = new ArrayList<String>();
 	}
 	
-	public static DistributionListItem createDistributionListItem(ZimbraAccount owner) throws HarnessException {
+	public static DistributionListItem createDistributionListItem(ZmailAccount owner) throws HarnessException {
 		
 		// Set the name
-		String unique = ZimbraSeleniumProperties.getUniqueString(); // group name is max 20 chars
-		String listname = "dlist"+ unique.substring(unique.length() - 10) + "@" + ZimbraSeleniumProperties.getStringProperty("testdomain", "testdomain.com");
+		String unique = ZmailSeleniumProperties.getUniqueString(); // group name is max 20 chars
+		String listname = "dlist"+ unique.substring(unique.length() - 10) + "@" + ZmailSeleniumProperties.getStringProperty("testdomain", "testdomain.com");
 
 		// Create the new list
-		ZimbraAdminAccount.GlobalAdmin().soapSend(
-				"<CreateDistributionListRequest xmlns='urn:zimbraAdmin'>" +
+		ZmailAdminAccount.GlobalAdmin().soapSend(
+				"<CreateDistributionListRequest xmlns='urn:zmailAdmin'>" +
 						"<name>" + listname +"</name>" +
-						"<a n='zimbraMailStatus'>enabled</a>" +
+						"<a n='zmailMailStatus'>enabled</a>" +
 						"<a n='displayName'>" +  listname +"</a>" +
 				"</CreateDistributionListRequest>");
-		String id = ZimbraAdminAccount.GlobalAdmin().soapSelectValue("//admin:CreateDistributionListResponse/admin:dl", "id");
+		String id = ZmailAdminAccount.GlobalAdmin().soapSelectValue("//admin:CreateDistributionListResponse/admin:dl", "id");
 
 		// Set the owner
-		ZimbraAdminAccount.GlobalAdmin().soapSend(
-				"<DistributionListActionRequest xmlns='urn:zimbraAccount'>" +
+		ZmailAdminAccount.GlobalAdmin().soapSend(
+				"<DistributionListActionRequest xmlns='urn:zmailAccount'>" +
 						"<dl by='id'>"+ id +"</dl>" +
 						"<action op='addOwners'>" +
 							"<owner by='name' type='usr'>"+ owner.EmailAddress +"</owner>" +
@@ -113,11 +113,11 @@ public class DistributionListItem extends ContactItem implements IItem {
 				"</DistributionListActionRequest>");
 
 		// Add two accounts
-		ZimbraAdminAccount.GlobalAdmin().soapSend(
-				"<AddDistributionListMemberRequest xmlns='urn:zimbraAdmin'>" +
+		ZmailAdminAccount.GlobalAdmin().soapSend(
+				"<AddDistributionListMemberRequest xmlns='urn:zmailAdmin'>" +
 						"<id>"+ id +"</id>" +
-						"<dlm>" + ZimbraAccount.AccountA().EmailAddress + "</dlm>" +
-						"<dlm>" + ZimbraAccount.AccountB().EmailAddress + "</dlm>" +
+						"<dlm>" + ZmailAccount.AccountA().EmailAddress + "</dlm>" +
+						"<dlm>" + ZmailAccount.AccountB().EmailAddress + "</dlm>" +
 				"</AddDistributionListMemberRequest>");
 
 		return (DistributionListItem.importFromSOAP("id", id));
@@ -172,15 +172,15 @@ public class DistributionListItem extends ContactItem implements IItem {
 	
 	
 
-	public static void grantRightRequest(ZimbraAccount account)throws HarnessException {
+	public static void grantRightRequest(ZmailAccount account)throws HarnessException {
 
 	    String accountName   = account.EmailAddress.split("@")[0];
 	    String accountDomain = account.EmailAddress.split("@")[1];
 
 		// grant dlist creation request
 		
-		ZimbraAdminAccount.GlobalAdmin().soapSend(
-	     "<GrantRightRequest xmlns='urn:zimbraAdmin'>" 
+		ZmailAdminAccount.GlobalAdmin().soapSend(
+	     "<GrantRightRequest xmlns='urn:zmailAdmin'>" 
 			+	"<target xmlns='' by='name' type='domain'>" + accountDomain + "</target>"
 			+	"<grantee xmlns='' by='name' type='usr'>" + account.EmailAddress + "</grantee>" 
 			+	"<right xmlns=''>createDistList</right>" 
@@ -188,10 +188,10 @@ public class DistributionListItem extends ContactItem implements IItem {
 		
 		
 		//TODO: verification
-		//Element response = ZimbraAdminAccount.GlobalAdmin().soapSelectNode("//admin:GrantRightResponse/?????", 1);
+		//Element response = ZmailAdminAccount.GlobalAdmin().soapSelectNode("//admin:GrantRightResponse/?????", 1);
 	}
 	
-	public static DistributionListItem createUsingSOAP(ZimbraAccount owner, AppAjaxClient app, ZimbraAccount ... memberList) throws HarnessException {
+	public static DistributionListItem createUsingSOAP(ZmailAccount owner, AppAjaxClient app, ZmailAccount ... memberList) throws HarnessException {
 				    
 	        // Create a dlist
 			DistributionListItem dlist = null; 
@@ -200,11 +200,11 @@ public class DistributionListItem extends ContactItem implements IItem {
 		    
 		    String soapStr = "";
 		    
-		    for (ZimbraAccount member:memberList) {
+		    for (ZmailAccount member:memberList) {
 		    	soapStr += 	"<a n='mail'>" + member.EmailAddress + "</a> ";
 		    }
 	        owner.soapSend(
-	        		"<CreateDistributionListRequest xmlns='urn:zimbraAccount'>" +
+	        		"<CreateDistributionListRequest xmlns='urn:zmailAccount'>" +
 	                "<name>" + name + memberList[0].EmailAddress + "</name>" +
 	                soapStr +
 	              	"</CreateDistributionListRequest>"
@@ -213,7 +213,7 @@ public class DistributionListItem extends ContactItem implements IItem {
 	    	//TODO: check CreateDistribution
 	    	dlist = new DistributionListItem(name);
 			dlist.owner = owner;
-			for (ZimbraAccount member:memberList) {			    
+			for (ZmailAccount member:memberList) {			    
 				dlist.addDListMember(member.EmailAddress);
 			}
 			
@@ -231,20 +231,20 @@ public class DistributionListItem extends ContactItem implements IItem {
 			throw new HarnessException("GetDistributionListResponse cannot be null");
 		
 		/**
-		 *     <GetDistributionListResponse total="2" more="0" xmlns="urn:zimbraAdmin">
+		 *     <GetDistributionListResponse total="2" more="0" xmlns="urn:zmailAdmin">
 		 *           <dl id="bdd639dd-81db-44ba-b7ee-06beb9e8b762" dynamic="0" name="dlist9873588964@testdomain.com">
 		 *             <a n="uid">dlist9873588964</a>
 		 *             <a n="mail">dlist9873588964@testdomain.com</a>
-		 *             <a n="zimbraMailStatus">enabled</a>
+		 *             <a n="zmailMailStatus">enabled</a>
 		 *             <a n="cn">dlist9873588964@testdomain.com</a>
-		 *             <a n="zimbraMailHost">zqa-062.eng.vmware.com</a>
-		 *             <a n="zimbraId">bdd639dd-81db-44ba-b7ee-06beb9e8b762</a>
-		 *             <a n="zimbraCreateTimestamp">20121011201749Z</a>
-		 *             <a n="objectClass">zimbraDistributionList</a>
-		 *     		   <a n="objectClass">zimbraMailRecipient</a>
+		 *             <a n="zmailMailHost">zqa-062.eng.vmware.com</a>
+		 *             <a n="zmailId">bdd639dd-81db-44ba-b7ee-06beb9e8b762</a>
+		 *             <a n="zmailCreateTimestamp">20121011201749Z</a>
+		 *             <a n="objectClass">zmailDistributionList</a>
+		 *     		   <a n="objectClass">zmailMailRecipient</a>
  		 *             <a n="displayName">dlist9873588964@testdomain.com</a>
-		 *             <a n="zimbraACE">672d7f71-3629-4bab-9318-35f35f949e4a usr ownDistList</a>
-		 *             <a n="zimbraMailAlias">dlist9873588964@testdomain.com</a>
+		 *             <a n="zmailACE">672d7f71-3629-4bab-9318-35f35f949e4a usr ownDistList</a>
+		 *             <a n="zmailMailAlias">dlist9873588964@testdomain.com</a>
 		 *             <owners>
 		 *               <owner id="672d7f71-3629-4bab-9318-35f35f949e4a" name="enus13499873466623@testdomain.com" type="usr"/>
 		 *             </owners>
@@ -259,11 +259,11 @@ public class DistributionListItem extends ContactItem implements IItem {
 		try {
 
 			// Make sure we only have the GetMsgResponse part
-			Element getDistributionListResponse = ZimbraAccount.SoapClient.selectNode(GetDistributionListResponse, "//admin:GetDistributionListResponse");
+			Element getDistributionListResponse = ZmailAccount.SoapClient.selectNode(GetDistributionListResponse, "//admin:GetDistributionListResponse");
 			if ( getDistributionListResponse == null )
 				throw new HarnessException("Element does not contain GetDistributionListResponse: " + GetDistributionListResponse.prettyPrint());
 
-			Element dl = ZimbraAccount.SoapClient.selectNode(getDistributionListResponse, "//admin:dl");
+			Element dl = ZmailAccount.SoapClient.selectNode(getDistributionListResponse, "//admin:dl");
 			if ( dl == null )
 				throw new HarnessException("Element does not contain a dl element: "+ getDistributionListResponse.prettyPrint());
 
@@ -275,7 +275,7 @@ public class DistributionListItem extends ContactItem implements IItem {
 			dlist.name = dl.getAttribute("name", null);
 			
 			// Iterate the owners
-			Element[] owners = ZimbraAccount.SoapClient.selectNodes(dl, "//admin:owner");
+			Element[] owners = ZmailAccount.SoapClient.selectNodes(dl, "//admin:owner");
 			for (Element owner : owners) {
 				String id = owner.getAttribute("id", null);
 				String name = owner.getAttribute("name", null);
@@ -286,7 +286,7 @@ public class DistributionListItem extends ContactItem implements IItem {
 			}
 
 			// Iterate the members
-			Element[] members = ZimbraAccount.SoapClient.selectNodes(dl, "//admin:dlm");
+			Element[] members = ZmailAccount.SoapClient.selectNodes(dl, "//admin:dlm");
 			for (Element dlm : members) {
 				String name = dlm.getText();
 				
@@ -295,7 +295,7 @@ public class DistributionListItem extends ContactItem implements IItem {
 			}
 
 			// Iterate the attributes
-			Element[] attributes = ZimbraAccount.SoapClient.selectNodes(dl, "//admin:a");
+			Element[] attributes = ZmailAccount.SoapClient.selectNodes(dl, "//admin:a");
 			for (Element a : attributes) {
 				String key = a.getAttribute("n", "foo");
 				String value = a.getText();
@@ -313,8 +313,8 @@ public class DistributionListItem extends ContactItem implements IItem {
 
 	public static DistributionListItem importFromSOAP(String by, String value) throws HarnessException {
 
-		Element response = ZimbraAdminAccount.GlobalAdmin().soapSend(
-				"<GetDistributionListRequest xmlns='urn:zimbraAdmin'>" +
+		Element response = ZmailAdminAccount.GlobalAdmin().soapSend(
+				"<GetDistributionListRequest xmlns='urn:zmailAdmin'>" +
 						"<dl by='"+ by +"'>" + value +"</dl>" +
 				"</GetDistributionListRequest>");
 		
@@ -322,11 +322,11 @@ public class DistributionListItem extends ContactItem implements IItem {
 	}
 
 	
-	public static String getId(ZimbraAccount account) {
+	public static String getId(ZmailAccount account) {
 		return account.soapSelectValue("//mail:CreateContactResponse/mail:cn", "id");
 	}
 	
-	public static String[] getDList(ZimbraAccount account) {
+	public static String[] getDList(ZmailAccount account) {
 		String[] dlist = null; //account.so .soapSelectNodes("//mail:CreateContactResponse/mail:cn/mail:m");    
 		return dlist;
 	}

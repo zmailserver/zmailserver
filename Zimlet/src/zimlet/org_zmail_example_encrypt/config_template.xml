@@ -14,7 +14,7 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimletConfig name="com_zimbra_example_encrypt" version="0.1">
+<zimletConfig name="org_zmail_example_encrypt" version="0.1">
     <global>
         <!-- Add header name is "X-Encrypt" and its value is "YES"-->
         <property name="X-Encrypt">YES</property>

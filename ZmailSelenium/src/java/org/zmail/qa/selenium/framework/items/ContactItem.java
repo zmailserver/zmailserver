@@ -14,18 +14,18 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.framework.items;
+package org.zmail.qa.selenium.framework.items;
 
 import java.util.HashMap;
 
 import org.apache.log4j.*;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount.SOAP_DESTINATION_HOST_TYPE;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.ZmailAccount.SOAP_DESTINATION_HOST_TYPE;
 
 /**
- * Used to define a Zimbra Contact
+ * Used to define a Zmail Contact
  *
  * @author Matt Rhoades
  *
@@ -98,7 +98,7 @@ public class ContactItem implements IItem {
 	}
 
 
-	// TODO: eventually, replace this with the com.zimbra.soap.types.Contact method
+	// TODO: eventually, replace this with the org.zmail.soap.types.Contact method
 	private String myId;
 	public String getId() {
 		return (myId);
@@ -183,13 +183,13 @@ public class ContactItem implements IItem {
 	 * @return
 	 * @throws HarnessException
 	 */
-	public static ContactItem createContactItem(ZimbraAccount account) throws HarnessException {
+	public static ContactItem createContactItem(ZmailAccount account) throws HarnessException {
 		
 		// Create a contact item
-		String firstName = "first" + ZimbraSeleniumProperties.getUniqueString();
-		String lastName = "last" + ZimbraSeleniumProperties.getUniqueString();
-		String email = "email" +  ZimbraSeleniumProperties.getUniqueString() + "@zimbra.com";
-		String company = "company" + ZimbraSeleniumProperties.getUniqueString();
+		String firstName = "first" + ZmailSeleniumProperties.getUniqueString();
+		String lastName = "last" + ZmailSeleniumProperties.getUniqueString();
+		String email = "email" +  ZmailSeleniumProperties.getUniqueString() + "@zmail.com";
+		String company = "company" + ZmailSeleniumProperties.getUniqueString();
 
 		StringBuilder attrs = new StringBuilder();
 		
@@ -200,7 +200,7 @@ public class ContactItem implements IItem {
 		
 				
 		account.soapSend(
-				"<CreateContactRequest xmlns='urn:zimbraMail'>" +
+				"<CreateContactRequest xmlns='urn:zmailMail'>" +
 						"<cn >" +
 							attrs.toString() +
 						"</cn>" +
@@ -220,11 +220,11 @@ public class ContactItem implements IItem {
 		try {
 
 			// Make sure we only have the GetMsgResponse part
-			Element getContactsResponse = ZimbraAccount.SoapClient.selectNode(GetContactsResponse, "//mail:GetContactsResponse");
+			Element getContactsResponse = ZmailAccount.SoapClient.selectNode(GetContactsResponse, "//mail:GetContactsResponse");
 			if ( getContactsResponse == null )
 				throw new HarnessException("Element does not contain GetContactsResponse: " + GetContactsResponse.prettyPrint());
 
-			Element cn = ZimbraAccount.SoapClient.selectNode(getContactsResponse, "//mail:cn");
+			Element cn = ZmailAccount.SoapClient.selectNode(getContactsResponse, "//mail:cn");
 			if ( cn == null )
 				throw new HarnessException("Element does not contain a cn element: "+ getContactsResponse.prettyPrint());
 
@@ -238,7 +238,7 @@ public class ContactItem implements IItem {
 
 
 			// Iterate the attributes
-			Element[] attributes = ZimbraAccount.SoapClient.selectNodes(cn, "//mail:a");
+			Element[] attributes = ZmailAccount.SoapClient.selectNodes(cn, "//mail:a");
 			for (Element a : attributes) {
 				String key = a.getAttribute("n", "foo");
 				String value = a.getText();
@@ -253,11 +253,11 @@ public class ContactItem implements IItem {
 
 	}
 
-	public void createUsingSOAP(ZimbraAccount account) throws HarnessException {
+	public void createUsingSOAP(ZmailAccount account) throws HarnessException {
 		throw new HarnessException("implement me");
 	}
 
-	public static ContactItem importFromSOAP(ZimbraAccount account, String query)
+	public static ContactItem importFromSOAP(ZmailAccount account, String query)
 			throws HarnessException {
 		return importFromSOAP(
 				account,
@@ -266,14 +266,14 @@ public class ContactItem implements IItem {
 				null);
 	}
 
-	public static ContactItem importFromSOAP(ZimbraAccount account,
+	public static ContactItem importFromSOAP(ZmailAccount account,
 			String query, SOAP_DESTINATION_HOST_TYPE destType, String accountName) throws HarnessException {
 
 		try
 		{
 
 			account.soapSend(
-					"<SearchRequest xmlns='urn:zimbraMail' types='contact'>" +
+					"<SearchRequest xmlns='urn:zmailMail' types='contact'>" +
 							"<query>"+ query +"</query>" +
 							"</SearchRequest>",
 							destType,
@@ -289,7 +289,7 @@ public class ContactItem implements IItem {
 			String id = account.soapSelectValue("//mail:SearchResponse/mail:cn", "id");
 
 			account.soapSend(
-					"<GetContactsRequest xmlns='urn:zimbraMail' >" +
+					"<GetContactsRequest xmlns='urn:zmailMail' >" +
 							"<cn id='"+ id +"'/>" +
 							"</GetContactsRequest>",
 							destType,

@@ -139,7 +139,7 @@ JETTY_INSTALL_TRACE_FILE="start.jar"
 ##################################################
 if [ -z "$ZIMBRA_HOME" ]
 then
-  ZIMBRA_HOME="/opt/zimbra/zdesktop dev"
+  ZIMBRA_HOME="/opt/zmail/zdesktop dev"
 fi
 
 if [ -z "$JETTY_HOME" ] 
@@ -167,9 +167,9 @@ then
 fi
 
 #########################################################################
-# Zimbra tweak, because we want to keep jetty.conf under $JETTY_HOME/etc
+# Zmail tweak, because we want to keep jetty.conf under $JETTY_HOME/etc
 #########################################################################
-JAVA_OPTIONS="-DSTART='${JETTY_HOME}/etc/start.config' -Dzimbra.home='${ZIMBRA_HOME}' -Dzimbra.config='${ZIMBRA_HOME}/conf/localconfig.xml' -Djava.library.path='${JETTY_HOME}/../lib' -Djava.awt.headless=true -Djava.io.tmpdir='${ZIMBRA_HOME}/data/tmp/java' -Djava.net.useSystemProxies=true -Dsun.net.inetaddr.ttl=10 -XX:HeapDumpPath='${ZIMBRA_HOME}/heapdump/' -XX:+HeapDumpOnOutOfMemoryError"
+JAVA_OPTIONS="-DSTART='${JETTY_HOME}/etc/start.config' -Dzmail.home='${ZIMBRA_HOME}' -Dzmail.config='${ZIMBRA_HOME}/conf/localconfig.xml' -Djava.library.path='${JETTY_HOME}/../lib' -Djava.awt.headless=true -Djava.io.tmpdir='${ZIMBRA_HOME}/data/tmp/java' -Djava.net.useSystemProxies=true -Dsun.net.inetaddr.ttl=10 -XX:HeapDumpPath='${ZIMBRA_HOME}/heapdump/' -XX:+HeapDumpOnOutOfMemoryError"
 JETTY_CONSOLE="${ZIMBRA_HOME}/log/zdesktop.out"
 JETTY_RUN="${ZIMBRA_HOME}/log"
 JETTY_PID="$JETTY_RUN/zdesktop.pid"
@@ -277,7 +277,7 @@ fi
 #####################################################
 # Add jetty properties to Java VM options.
 #####################################################
-#MAILBOXD_JAVA_OPTIONS=`/opt/zimbra/bin/zmlocalconfig -m nokey mailboxd_java_options`
+#MAILBOXD_JAVA_OPTIONS=`/opt/zmail/bin/zmlocalconfig -m nokey mailboxd_java_options`
 MAILBOXD_JAVA_OPTIONS="-client -d32 -Djava.awt.headless=true $JAVA_HEAP -Xss150k -XX:MinHeapFreeRatio=20 -XX:MaxHeapFreeRatio=40 -XX:NewRatio=4 -XX:TargetSurvivorRatio=70 -XX:+UseConcMarkSweepGC"
 JAVA_OPTIONS="$MAILBOXD_JAVA_OPTIONS $JAVA_OPTIONS -Djetty.home='$JETTY_HOME'"
 

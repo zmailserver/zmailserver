@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.mail.readreceipt;
+package org.zmail.qa.selenium.projects.ajax.tests.mail.readreceipt;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.framework.util.staf.Stafpostqueue;
-import com.zimbra.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.DisplayMail;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.DisplayMail.Field;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.staf.Stafpostqueue;
+import org.zmail.qa.selenium.projects.ajax.core.PrefGroupMailByMessageTest;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.DisplayMail;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.DisplayMail.Field;
 
 
 public class SendReadReceiptsAlways extends PrefGroupMailByMessageTest {
@@ -33,31 +33,31 @@ public class SendReadReceiptsAlways extends PrefGroupMailByMessageTest {
 		logger.info("New "+ SendReadReceiptsAlways.class.getCanonicalName());
 		
 		
-		super.startingAccountPreferences.put("zimbraPrefMailSendReadReceipts", "always");
+		super.startingAccountPreferences.put("zmailPrefMailSendReadReceipts", "always");
 
 
 	}
 	
-	@Test(	description = "zimbraPrefMailSendReadReceipts=always - verify read receipt is sent",
+	@Test(	description = "zmailPrefMailSendReadReceipts=always - verify read receipt is sent",
 			groups = { "functional" })
 	public void SendReadReceiptsAlways_01() throws HarnessException {
 		
 		// Create a source account
-		ZimbraAccount sender = new ZimbraAccount();
+		ZmailAccount sender = new ZmailAccount();
 		sender.provision().authenticate();
 		
 		// Create the message data to be sent
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
 		
 		// Send the message from AccountA to the ZWC user
 		sender.soapSend(
-					"<SendMsgRequest xmlns='urn:zimbraMail'>"
+					"<SendMsgRequest xmlns='urn:zmailMail'>"
 				+		"<m>"
 				+			"<e t='t' a='"+ app.zGetActiveAccount().EmailAddress +"'/>"
 				+			"<e t='n' a='"+ sender.EmailAddress +"'/>"
 				+			"<su>"+ subject +"</su>"
 				+			"<mp ct='text/plain'>"
-				+				"<content>"+ "body" + ZimbraSeleniumProperties.getUniqueString() +"</content>"
+				+				"<content>"+ "body" + ZmailSeleniumProperties.getUniqueString() +"</content>"
 				+			"</mp>"
 				+		"</m>"
 				+	"</SendMsgRequest>");
@@ -79,7 +79,7 @@ public class SendReadReceiptsAlways extends PrefGroupMailByMessageTest {
 		
 		// Verify the sender receives the read receipt
 		sender.soapSend(
-					"<SearchRequest xmlns='urn:zimbraMail' types='message'>"
+					"<SearchRequest xmlns='urn:zmailMail' types='message'>"
 				+		"<query>subject:(Read-Receipt) subject:("+ subject +")</query>"
 				+	"</SearchRequest>");
 		Element[] nodes = sender.soapSelectNodes("//mail:m");

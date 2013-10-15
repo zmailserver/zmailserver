@@ -14,21 +14,21 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.calendar.appointments.assistant;
+package org.zmail.qa.selenium.projects.ajax.tests.calendar.appointments.assistant;
 
 import java.util.Calendar;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.ui.Shortcut;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogAssistant;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.ui.Shortcut;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogAssistant;
 
 
 public class CreateAppointment extends AjaxCommonTest {
@@ -45,7 +45,7 @@ public class CreateAppointment extends AjaxCommonTest {
 
 	}
 	
-	@Test(	description = "Create a basic appointment using the Zimbra Assistant",
+	@Test(	description = "Create a basic appointment using the Zmail Assistant",
 			groups = { "deprecated" })
 	public void CreateAppointment_01() throws HarnessException {
 
@@ -56,9 +56,9 @@ public class CreateAppointment extends AjaxCommonTest {
 		
 		
 		// Create the message data to be sent
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String location = "location" + ZimbraSeleniumProperties.getUniqueString();
-		String notes = "notes" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String location = "location" + ZmailSeleniumProperties.getUniqueString();
+		String notes = "notes" + ZmailSeleniumProperties.getUniqueString();
 		String command = "appointment \"" + subject + "\" ["+ location +"] ("+ notes +")";
 
 		// Click Get Mail button
@@ -69,7 +69,7 @@ public class CreateAppointment extends AjaxCommonTest {
 		assistant.zClickButton(Button.B_OK);
 		
 		app.zGetActiveAccount().soapSend(
-						"<SearchRequest xmlns='urn:zimbraMail' types='appointment' calExpandInstStart='"+ start.getTimeInMillis() +"' calExpandInstEnd='"+ finish.getTimeInMillis() +"'>"
+						"<SearchRequest xmlns='urn:zmailMail' types='appointment' calExpandInstStart='"+ start.getTimeInMillis() +"' calExpandInstEnd='"+ finish.getTimeInMillis() +"'>"
 					+		"<query>subject:("+ subject +")</query>"
 					+	"</SearchRequest>");
 		
@@ -96,9 +96,9 @@ public class CreateAppointment extends AjaxCommonTest {
 		
 		
 		// Create the message data to be sent
-		String subject = "subject" + ZimbraSeleniumProperties.getUniqueString();
-		String location = "location" + ZimbraSeleniumProperties.getUniqueString();
-		String notes = "notes" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "subject" + ZmailSeleniumProperties.getUniqueString();
+		String location = "location" + ZmailSeleniumProperties.getUniqueString();
+		String notes = "notes" + ZmailSeleniumProperties.getUniqueString();
 		String command = "appointment \"" + subject + "\" ["+ location +"] ("+ notes +")";
 
 		// Click Get Mail button
@@ -109,7 +109,7 @@ public class CreateAppointment extends AjaxCommonTest {
 		assistant.zClickButton(Button.B_OK);
 		
 		app.zGetActiveAccount().soapSend(
-						"<SearchRequest xmlns='urn:zimbraMail' types='appointment' calExpandInstStart='"+ start.getTimeInMillis() +"' calExpandInstEnd='"+ finish.getTimeInMillis() +"'>"
+						"<SearchRequest xmlns='urn:zmailMail' types='appointment' calExpandInstStart='"+ start.getTimeInMillis() +"' calExpandInstEnd='"+ finish.getTimeInMillis() +"'>"
 					+		"<query>subject:("+ subject +")</query>"
 					+	"</SearchRequest>");
 		

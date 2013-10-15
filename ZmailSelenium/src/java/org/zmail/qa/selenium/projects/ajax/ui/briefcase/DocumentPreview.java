@@ -14,14 +14,14 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.ui.briefcase;
+package org.zmail.qa.selenium.projects.ajax.ui.briefcase;
 
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.HarnessException;
 
 /**
  * The <code>PreviewDocument<code> object defines a read-only view of a document
- * in the Zimbra Ajax client.
+ * in the Zmail Ajax client.
  * <p>
  * This class can be used to extract data from the document, such as Name,
  * message body. 
@@ -40,7 +40,7 @@ public class DocumentPreview extends AbsDisplay {
 		Name, Time, Date, Body
 	}
 	
-	public final String pageTitle = "Zimbra: Briefcase";
+	public final String pageTitle = "Zmail: Briefcase";
 
 	/**
 	 * Protected constuctor for this object. Only classes within this package

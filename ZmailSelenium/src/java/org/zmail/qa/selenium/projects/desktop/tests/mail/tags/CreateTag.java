@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.desktop.tests.mail.tags;
+package org.zmail.qa.selenium.projects.desktop.tests.mail.tags;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-//import com.zimbra.qa.selenium.projects.ajax.ui.mail.*;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.DialogTag;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+//import org.zmail.qa.selenium.projects.ajax.ui.mail.*;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.DialogTag;
 
 public class CreateTag extends AjaxCommonTest {
 
@@ -44,7 +44,7 @@ public class CreateTag extends AjaxCommonTest {
 		Shortcut shortcut = Shortcut.S_NEWTAG;
 
 		// Set the new tag name
-		String name = "tag" + ZimbraSeleniumProperties.getUniqueString();
+		String name = "tag" + ZmailSeleniumProperties.getUniqueString();
 		
 		DialogTag dialog = (DialogTag)app.zPageMail.zKeyboardShortcut(shortcut);
 		ZAssert.assertNotNull(dialog, "Verify the new dialog opened");
@@ -69,12 +69,12 @@ public class CreateTag extends AjaxCommonTest {
 		
 		FolderItem inboxFolder = FolderItem.importFromSOAP(app.zGetActiveAccount(), SystemFolder.Inbox);
 		// Set the new tag name
-		String name1 = "tag" + ZimbraSeleniumProperties.getUniqueString();
-		String name2 = "tag" + ZimbraSeleniumProperties.getUniqueString();
+		String name1 = "tag" + ZmailSeleniumProperties.getUniqueString();
+		String name2 = "tag" + ZmailSeleniumProperties.getUniqueString();
 		
 		// Create a tag to right click on
 		app.zGetActiveAccount().soapSend(
-				"<CreateTagRequest xmlns='urn:zimbraMail'>" +
+				"<CreateTagRequest xmlns='urn:zmailMail'>" +
             		"<tag name='"+ name2 +"' color='1' />" +
             	"</CreateTagRequest>");
 
@@ -110,7 +110,7 @@ public class CreateTag extends AjaxCommonTest {
 		
 		
 		// Set the new folder name
-		String name = "tag" + ZimbraSeleniumProperties.getUniqueString();
+		String name = "tag" + ZmailSeleniumProperties.getUniqueString();
 				
 		// Create a new folder in the inbox
 		// using the context menu + New Folder

@@ -14,17 +14,17 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.calendar.appointments.views.week.allday;
+package org.zmail.qa.selenium.projects.ajax.tests.calendar.appointments.views.week.allday;
 
 import java.util.*;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.items.AppointmentItem;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.CalendarWorkWeekTest;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.items.AppointmentItem;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.CalendarWorkWeekTest;
 
 public class GetAppointment extends CalendarWorkWeekTest {
 
@@ -38,7 +38,7 @@ public class GetAppointment extends CalendarWorkWeekTest {
 		super.startingAccountPreferences = new HashMap<String, String>() {
 			private static final long serialVersionUID = -2913827779459595178L;
 		{
-		    put("zimbraPrefCalendarInitialView", "week");
+		    put("zmailPrefCalendarInitialView", "week");
 		}};
 		
 	}
@@ -49,9 +49,9 @@ public class GetAppointment extends CalendarWorkWeekTest {
 	public void GetAllDayAppointment_01() throws HarnessException {
 		
 		// Create the appointment on the server
-		String apptSubject = "appointment" + ZimbraSeleniumProperties.getUniqueString();
-		String apptLocation = "location" + ZimbraSeleniumProperties.getUniqueString();
-		String apptBody = "content" + ZimbraSeleniumProperties.getUniqueString();
+		String apptSubject = "appointment" + ZmailSeleniumProperties.getUniqueString();
+		String apptLocation = "location" + ZmailSeleniumProperties.getUniqueString();
+		String apptBody = "content" + ZmailSeleniumProperties.getUniqueString();
 		
 		// Absolute dates in UTC zone
 		Calendar now = this.calendarWeekDayUTC;
@@ -62,15 +62,15 @@ public class GetAppointment extends CalendarWorkWeekTest {
 		String tz = ZTimeZone.TimeZoneEST.getID();
 
 		// Create a meeting request from AccountA to the test account
-		ZimbraAccount.AccountA().soapSend(
-					"<CreateAppointmentRequest xmlns='urn:zimbraMail'>" +
+		ZmailAccount.AccountA().soapSend(
+					"<CreateAppointmentRequest xmlns='urn:zmailMail'>" +
 						"<m>" +
 							"<inv>" +
 								"<comp status='CONF' fb='B' class='PUB' transp='O' allDay='1' name='"+ apptSubject +"' loc='"+ apptLocation +"'>" +
 									"<s d='"+ startUTC.toTimeZone(tz).toYYYYMMDDTHHMMSS() +"' tz='"+ tz +"'/>" +
 									"<e d='"+ endUTC.toTimeZone(tz).toYYYYMMDDTHHMMSS() +"' tz='"+ tz +"'/>" +
 									"<at role='REQ' ptst='NE' rsvp='1' a='"+ app.zGetActiveAccount().EmailAddress +"'/>" +
-									"<or a='"+ ZimbraAccount.AccountA().EmailAddress + "'/>" +
+									"<or a='"+ ZmailAccount.AccountA().EmailAddress + "'/>" +
 								"</comp>" +
 							"</inv>" +
 							"<e a='"+ app.zGetActiveAccount().EmailAddress +"' t='t'/>" +

@@ -26,7 +26,7 @@
     <!--
   <filter>
     <filter-name>ZimletFilter</filter-name>
-    <filter-class>com.zimbra.cs.zimlet.ZimletFilter</filter-class>
+    <filter-class>org.zmail.cs.zimlet.ZimletFilter</filter-class>
     <init-param>
       <param-name>allowed.ports</param-name>
       <param-value>80, 443, 7070, 7443, 7071</param-value>
@@ -40,7 +40,7 @@
 
   <servlet>
     <servlet-name>ProxyServlet</servlet-name>
-    <servlet-class>com.zimbra.cs.zimlet.ProxyServlet</servlet-class>
+    <servlet-class>org.zmail.cs.zimlet.ProxyServlet</servlet-class>
     <init-param>
       <param-name>allowed.ports</param-name>
       <param-value>80, 443, 7070</param-value>
@@ -50,7 +50,7 @@
 
   <servlet>
     <servlet-name>ZimletResources</servlet-name>
-    <servlet-class>com.zimbra.cs.zimlet.ZimletResources</servlet-class>
+    <servlet-class>org.zmail.cs.zimlet.ZimletResources</servlet-class>
     <init-param>
       <param-name>allowed.ports</param-name>
       <param-value>80, 443, 7070, 7443, 7071</param-value>

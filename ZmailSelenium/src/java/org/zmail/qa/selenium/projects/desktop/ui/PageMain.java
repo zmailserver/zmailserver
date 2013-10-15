@@ -17,11 +17,11 @@
 /**
  *
  */
-package com.zimbra.qa.selenium.projects.desktop.ui;
+package org.zmail.qa.selenium.projects.desktop.ui;
 
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.desktop.ui.DialogError.DialogErrorID;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.desktop.ui.DialogError.DialogErrorID;
 
 
 /**
@@ -57,8 +57,8 @@ public class PageMain extends AbsTab {
 		return (new Toaster(this.MyApplication));
 	}
 
-	public DialogError zGetErrorDialog(DialogErrorID zimbra) {
-		return (new DialogError(zimbra, this.MyApplication, this));
+	public DialogError zGetErrorDialog(DialogErrorID zmail) {
+		return (new DialogError(zmail, this.MyApplication, this));
 	}
 
 
@@ -120,7 +120,7 @@ public class PageMain extends AbsTab {
 		if ( !((AppAjaxClient)MyApplication).zPageLogin.zIsActive() ) {
 			((AppAjaxClient)MyApplication).zPageLogin.zNavigateTo();
 		}
-		((AppAjaxClient)MyApplication).zPageLogin.zLogin(ZimbraAccount.AccountZDC());
+		((AppAjaxClient)MyApplication).zPageLogin.zLogin(ZmailAccount.AccountZDC());
 		zWaitForActive();
 
 	}

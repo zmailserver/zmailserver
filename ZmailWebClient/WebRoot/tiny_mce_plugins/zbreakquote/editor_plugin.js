@@ -100,8 +100,8 @@
         getInfo : function() {
             return {
                 longname : 'ZBreakQuote to break up blockquotes when newline is entered',
-                author : 'Zimbra Inc.,',
-                authorurl : 'http://www.zimbra.com',
+                author : 'Zmail Inc.,',
+                authorurl : 'http://www.zmail.com',
                 version : tinymce.majorVersion + "." + tinymce.minorVersion
             };
         }

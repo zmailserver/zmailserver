@@ -14,9 +14,9 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.bp;
+package org.zmail.bp;
 
-import com.zimbra.cs.account.Account;
+import org.zmail.cs.account.Account;
 
 public class ExternalIMAPAccount {
     private String userEmail;

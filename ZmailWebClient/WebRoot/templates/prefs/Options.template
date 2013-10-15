@@ -188,13 +188,13 @@
 		<colgroup><col width=20><col width=60><col width='50%'><col width='50%'></colgroup>
 		<tr><td class='ZLabelCell' colspan=2><$= ZmMsg.sendFrom $></td>
 			<td><input id='${id}_sendFromName' style='width:100%'></td>
-			<td><select id='${id}_sendFromAddress' style='width:90%'><option>bob@zimbra.com</option></select></td>
+			<td><select id='${id}_sendFromAddress' style='width:90%'><option>bob@zmail.com</option></select></td>
 		</tr>
 
 		<tr><td class='ZCheckboxCell'><input id='${id}_setReplyToCheckbox' type='checkbox'></td>
 			<td class='ZCheckboxLabelCell'><nobr><label for='${id}_setReplyToCheckbox'><$= ZmMsg.setReplyTo $></label></nobr></td>
 			<td><input id='${id}_setReplyToName' style='width:100%'></td>
-			<td><select id='${id}_setReplyToAddress' style='width:90%'><option>bob@zimbra.com</option></select></td>
+			<td><select id='${id}_setReplyToAddress' style='width:90%'><option>bob@zmail.com</option></select></td>
 		</tr>
 	</table>
 </fieldset>

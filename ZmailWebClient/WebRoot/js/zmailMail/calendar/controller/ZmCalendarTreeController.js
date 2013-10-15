@@ -160,7 +160,7 @@ function(actionMenu, type, id) {
             var isShareVisible = (!calendar.link || calendar.isAdmin()) && nId != ZmFolder.ID_TRASH;
             if (appCtxt.isOffline) {
                 var acct = calendar.getAccount();
-                isShareVisible = !acct.isMain && acct.isZimbraAccount;
+                isShareVisible = !acct.isMain && acct.isZmailAccount;
             }
 			actionMenu.enable(ZmOperation.SHARE_CALENDAR, isShareVisible);
 			actionMenu.enable(ZmOperation.SYNC, calendar.isFeed());
@@ -193,7 +193,7 @@ function(actionMenu, type, id) {
 
 		// we always enable sharing in case we're in multi-mbox mode
 		this._resetButtonPerSetting(actionMenu, ZmOperation.SHARE_CALENDAR, appCtxt.get(ZmSetting.SHARING_ENABLED));
-		this._resetButtonPerSetting(actionMenu, ZmOperation.FREE_BUSY_LINK, appCtxt.getActiveAccount().isZimbraAccount);
+		this._resetButtonPerSetting(actionMenu, ZmOperation.FREE_BUSY_LINK, appCtxt.getActiveAccount().isZmailAccount);
 
         var fbLinkMenuItem = actionMenu.getMenuItem(ZmOperation.FREE_BUSY_LINK);
         if(fbLinkMenuItem){
@@ -671,7 +671,7 @@ function(overviewId, account) {
  * Pops up the appropriate "New ..." dialog.
  *
  * @param {DwtUiEvent}	ev		the UI event
- * @param {ZmZimbraAccount}	account	used by multi-account mailbox (optional)
+ * @param {ZmZmailAccount}	account	used by multi-account mailbox (optional)
  *
  * @private
  */
@@ -732,7 +732,7 @@ function(response) {
     if(sourceId) {
         jsonObj = {
             ImportDataRequest : {
-                _jsns : "urn:zimbraMail",
+                _jsns : "urn:zmailMail",
                 caldav : {
                     id : sourceId
                 }
@@ -790,7 +790,7 @@ function(organizer, errorCallback) {
 
     jsonObj = {
         CreateDataSourceRequest : {
-            _jsns : "urn:zimbraMail",
+            _jsns : "urn:zmailMail",
             caldav : {
                 name : organizer.name,
                 pollingInterval : ZmCalendarTreeController.POLLING_INTERVAL,
@@ -802,7 +802,7 @@ function(organizer, errorCallback) {
                 username : calDav.userName,
                 password : calDav.password,
                 a : {
-                    n : "zimbraDataSourceAttribute",
+                    n : "zmailDataSourceAttribute",
                     _content : dsa
                 }
             }

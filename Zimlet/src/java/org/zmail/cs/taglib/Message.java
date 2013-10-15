@@ -12,19 +12,19 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.taglib;
+package org.zmail.cs.taglib;
 
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mime.Mime;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mime.Mime;
 
-public class Message extends ZimbraTag {
+public class Message extends ZmailTag {
     private static final long serialVersionUID = -6527940306669140648L;
 
     String mId;
@@ -46,7 +46,7 @@ public class Message extends ZimbraTag {
         return mField;
     }
 
-    String getAddressHeader(com.zimbra.cs.mailbox.Message msg, String hdr) throws ServiceException {
+    String getAddressHeader(org.zmail.cs.mailbox.Message msg, String hdr) throws ServiceException {
         MimeMessage mm = msg.getMimeMessage();
         InternetAddress[] addrs = Mime.parseAddressHeader(mm, hdr);
         StringBuffer buf = new StringBuffer();
@@ -68,7 +68,7 @@ public class Message extends ZimbraTag {
         return buf.toString();
     }
     
-    String getMessageContent(com.zimbra.cs.mailbox.Message msg) throws ServiceException {
+    String getMessageContent(org.zmail.cs.mailbox.Message msg) throws ServiceException {
         if (mField.equals("subject")) {
         	return msg.getSubject();
         } else if (mField.equals("from") ||
@@ -83,12 +83,12 @@ public class Message extends ZimbraTag {
         return "unknown";
     }
     
-    public String getContentStart(Account acct, OperationContext octxt) throws ZimbraTagException, ServiceException {
+    public String getContentStart(Account acct, OperationContext octxt) throws ZmailTagException, ServiceException {
         if (mId == null) {
-            throw ZimbraTagException.MISSING_ATTR("id");
+            throw ZmailTagException.MISSING_ATTR("id");
         }
         if (mField == null) {
-            throw ZimbraTagException.MISSING_ATTR("field");
+            throw ZmailTagException.MISSING_ATTR("field");
         }
         int mid = Integer.parseInt(mId);
         Mailbox mbox = MailboxManager.getInstance().getMailboxByAccountId(acct.getId());

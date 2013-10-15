@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.versioncheck;
+package org.zmail.cs.service.versioncheck;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,39 +24,39 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.XmlParseException;
-import com.zimbra.common.util.DateUtil;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.cs.service.AuthProvider;
-import com.zimbra.cs.service.admin.AdminDocumentHandler;
-import com.zimbra.cs.util.AccountUtil;
-import com.zimbra.cs.util.BuildInfo;
-import com.zimbra.client.ZEmailAddress;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZMailbox.Options;
-import com.zimbra.client.ZMailbox.ZOutgoingMessage;
-import com.zimbra.client.ZMailbox.ZOutgoingMessage.MessagePart;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.XmlParseException;
+import org.zmail.common.util.DateUtil;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.cs.service.AuthProvider;
+import org.zmail.cs.service.admin.AdminDocumentHandler;
+import org.zmail.cs.util.AccountUtil;
+import org.zmail.cs.util.BuildInfo;
+import org.zmail.client.ZEmailAddress;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZMailbox.Options;
+import org.zmail.client.ZMailbox.ZOutgoingMessage;
+import org.zmail.client.ZMailbox.ZOutgoingMessage.MessagePart;
+import org.zmail.soap.ZmailSoapContext;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.URIException;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.util.URIUtil;
-import com.zimbra.cs.httpclient.URLUtil;
+import org.zmail.cs.httpclient.URLUtil;
 /**
  * @author Greg Solovyev
  */
@@ -66,7 +66,7 @@ public class VersionCheck extends AdminDocumentHandler {
 	
 	@Override
 	public Element handle(Element request, Map<String, Object> context)	throws ServiceException {
-        ZimbraSoapContext zc = getZimbraSoapContext(context);
+        ZmailSoapContext zc = getZmailSoapContext(context);
     	Provisioning prov = Provisioning.getInstance();        
         Config config = prov.getConfig();
     	checkRight(zc, context, null, Admin.R_checkSoftwareUpdates);      
@@ -74,7 +74,7 @@ public class VersionCheck extends AdminDocumentHandler {
     	Element response = zc.createElement(AdminConstants.VC_RESPONSE);
         if(action.equalsIgnoreCase(AdminConstants.VERSION_CHECK_CHECK)) {
         	//check if we need to proxy to the updater server
-        	String updaterServerId = config.getAttr(Provisioning.A_zimbraVersionCheckServer);
+        	String updaterServerId = config.getAttr(Provisioning.A_zmailVersionCheckServer);
 
             if (updaterServerId != null) {
                 Server server = prov.get(Key.ServerBy.id, updaterServerId);
@@ -84,7 +84,7 @@ public class VersionCheck extends AdminDocumentHandler {
             
         	//perform the version check
         	String lastAttempt = checkVersion();
-        	String resp = config.getAttr(Provisioning.A_zimbraVersionCheckLastResponse);
+        	String resp = config.getAttr(Provisioning.A_zmailVersionCheckLastResponse);
         	if(resp == null) {
         		throw VersionCheckException.EMPTY_VC_RESPONSE(null);
         	}
@@ -95,28 +95,28 @@ public class VersionCheck extends AdminDocumentHandler {
 				throw VersionCheckException.INVALID_VC_RESPONSE(resp, ex);
 			}
 			if(respDoc == null) {
-				throw ServiceException.FAILURE("error parsing  zimbraVersionCheckLastResponse config attribute. Attribute value is empty",null);
+				throw ServiceException.FAILURE("error parsing  zmailVersionCheckLastResponse config attribute. Attribute value is empty",null);
 			}
 			Map<String, String> attrs = new HashMap<String, String>();
 			if(resp !=null && resp.length()>0) {
-				attrs.put(Provisioning.A_zimbraVersionCheckLastSuccess, lastAttempt);
+				attrs.put(Provisioning.A_zmailVersionCheckLastSuccess, lastAttempt);
 			}
 			prov.modifyAttrs(config, attrs, true);
 			
 			// check if there are any emails to notify of a new version
 			boolean sendNotification = false;
 
-			String emails = config.getAttr(Provisioning.A_zimbraVersionCheckNotificationEmail);
-			if (emails != null && emails.length() > 0 && config.getBooleanAttr(Provisioning.A_zimbraVersionCheckSendNotifications, false)) {
+			String emails = config.getAttr(Provisioning.A_zmailVersionCheckNotificationEmail);
+			if (emails != null && emails.length() > 0 && config.getBooleanAttr(Provisioning.A_zmailVersionCheckSendNotifications, false)) {
 				sendNotification = true;
 			}
 			if (sendNotification) {
-				String fromEmail = config.getAttr(Provisioning.A_zimbraVersionCheckNotificationEmailFrom);
+				String fromEmail = config.getAttr(Provisioning.A_zmailVersionCheckNotificationEmailFrom);
 				boolean hasUpdates = respDoc.getAttributeBool(AdminConstants.A_VERSION_CHECK_STATUS, false);
 				if (hasUpdates) {
 					boolean hasCritical = false;
-					String msgTemplate = config.getAttr(Provisioning.A_zimbraVersionCheckNotificationBody);
-					String subjTemplate = config.getAttr(Provisioning.A_zimbraVersionCheckNotificationSubject);
+					String msgTemplate = config.getAttr(Provisioning.A_zmailVersionCheckNotificationBody);
+					String subjTemplate = config.getAttr(Provisioning.A_zmailVersionCheckNotificationSubject);
 					if(msgTemplate!=null && subjTemplate!=null) {
 						String msg = "";
 						String criticalStr = "";
@@ -207,7 +207,7 @@ public class VersionCheck extends AdminDocumentHandler {
 							zmbox.sendMessage(m, null, false);
 							
 						} catch (Exception e) {
-							ZimbraLog.extensions.error("Version check extension failed to send notifications.",	this, e);
+							ZmailLog.extensions.error("Version check extension failed to send notifications.",	this, e);
 						}
 					}
 				}
@@ -216,7 +216,7 @@ public class VersionCheck extends AdminDocumentHandler {
         } else if(action.equalsIgnoreCase(AdminConstants.VERSION_CHECK_STATUS)) {
 			try {
 
-	        	String resp = config.getAttr(Provisioning.A_zimbraVersionCheckLastResponse);
+	        	String resp = config.getAttr(Provisioning.A_zmailVersionCheckLastResponse);
 	        	boolean hasUpdates = false;
 	        	if(resp != null) {
 		        	Element respDoc = Element.parseXML(resp);
@@ -253,7 +253,7 @@ public class VersionCheck extends AdminDocumentHandler {
 					}
 	        	}
 			} catch (XmlParseException e) {
-				throw ServiceException.FAILURE("error parsing  zimbraVersionCheckLastResponse config attribute", e);
+				throw ServiceException.FAILURE("error parsing  zmailVersionCheckLastResponse config attribute", e);
 			}
             
         }
@@ -265,7 +265,7 @@ public class VersionCheck extends AdminDocumentHandler {
 		String lastAttempt = DateUtil.toGeneralizedTime(new Date());
 		Provisioning prov = Provisioning.getInstance();
 		Config config = prov.getConfig();
-		String url = config.getAttr(Provisioning.A_zimbraVersionCheckURL);
+		String url = config.getAttr(Provisioning.A_zmailVersionCheckURL);
 		GetMethod method = new GetMethod(url);
 		HttpClient client = new HttpClient( );
 		boolean checkSuccess=false;
@@ -281,7 +281,7 @@ public class VersionCheck extends AdminDocumentHandler {
 				);
 		
 		try {
-			ZimbraLog.extensions.debug("Sending version check query %s", query);
+			ZmailLog.extensions.debug("Sending version check query %s", query);
 			method.setQueryString(URIUtil.encodeQuery(query));
 			client.executeMethod( method );
 			resp = method.getResponseBodyAsString();
@@ -309,9 +309,9 @@ public class VersionCheck extends AdminDocumentHandler {
 			throw ServiceException.FAILURE("Failed to send HTTP request to version check script.",e);
 		}  finally {
 			Map<String, String> attrs = new HashMap<String, String>();
-			attrs.put(Provisioning.A_zimbraVersionCheckLastAttempt, lastAttempt);
+			attrs.put(Provisioning.A_zmailVersionCheckLastAttempt, lastAttempt);
 			if(checkSuccess) {
-				attrs.put(Provisioning.A_zimbraVersionCheckLastResponse, resp);
+				attrs.put(Provisioning.A_zmailVersionCheckLastResponse, resp);
 			}
 			prov.modifyAttrs(config, attrs, true);
 			

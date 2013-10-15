@@ -14,23 +14,23 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.calendar.meetings.organizer;
+package org.zmail.qa.selenium.projects.ajax.tests.calendar.meetings.organizer;
 
 import java.awt.event.KeyEvent;
 import java.util.Calendar;
 
 import org.testng.annotations.*;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.CalendarWorkWeekTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.*;
-import com.zimbra.qa.selenium.projects.ajax.ui.calendar.DialogConfirmDeleteOrganizer;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew.Field;
+import org.zmail.common.soap.Element;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.CalendarWorkWeekTest;
+import org.zmail.qa.selenium.projects.ajax.ui.*;
+import org.zmail.qa.selenium.projects.ajax.ui.calendar.DialogConfirmDeleteOrganizer;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew.Field;
 
 @SuppressWarnings("unused")
 public class CancelMeeting extends CalendarWorkWeekTest {	
@@ -55,9 +55,9 @@ public class CancelMeeting extends CalendarWorkWeekTest {
 		// Creating object for meeting data
 		String tz, apptSubject, apptBody, apptAttendee1;
 		tz = ZTimeZone.TimeZoneEST.getID();
-		apptSubject = "app" + ZimbraSeleniumProperties.getUniqueString();
-		apptBody = "body" + ZimbraSeleniumProperties.getUniqueString();
-		apptAttendee1 = ZimbraAccount.AccountA().EmailAddress;
+		apptSubject = "app" + ZmailSeleniumProperties.getUniqueString();
+		apptBody = "body" + ZmailSeleniumProperties.getUniqueString();
+		apptAttendee1 = ZmailAccount.AccountA().EmailAddress;
 		
 		// Absolute dates in UTC zone
 		Calendar now = this.calendarWeekDayUTC;
@@ -65,7 +65,7 @@ public class CancelMeeting extends CalendarWorkWeekTest {
 		ZDate endUTC   = new ZDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH) + 1, now.get(Calendar.DAY_OF_MONTH), 14, 0, 0);
 		
 		app.zGetActiveAccount().soapSend(
-                "<CreateAppointmentRequest xmlns='urn:zimbraMail'>" +
+                "<CreateAppointmentRequest xmlns='urn:zmailMail'>" +
                      "<m>"+
                      "<inv method='REQUEST' type='event' status='CONF' draft='0' class='PUB' fb='B' transp='O' allDay='0' name='"+ apptSubject +"'>"+
                      "<s d='"+ startUTC.toTimeZone(tz).toYYYYMMDDTHHMMSS() +"' tz='"+ tz +"'/>" +
@@ -108,8 +108,8 @@ public class CancelMeeting extends CalendarWorkWeekTest {
 		ZAssert.assertEquals(app.zPageCalendar.sIsElementPresent(app.zPageCalendar.zGetApptLocator(apptSubject)), false, "Verify meeting is deleted from organizer's calendar");
 		
 		// Verify meeting is deleted from attendee's calendar
-//		AppointmentItem canceledAppt = AppointmentItem.importFromSOAP(ZimbraAccount.AccountA(), "subject:("+ apptSubject +")", startUTC, endUTC);
-		AppointmentItem canceledAppt = AppointmentItem.importFromSOAP(ZimbraAccount.AccountA(), "subject:("+ apptSubject +")");
+//		AppointmentItem canceledAppt = AppointmentItem.importFromSOAP(ZmailAccount.AccountA(), "subject:("+ apptSubject +")", startUTC, endUTC);
+		AppointmentItem canceledAppt = AppointmentItem.importFromSOAP(ZmailAccount.AccountA(), "subject:("+ apptSubject +")");
 		ZAssert.assertNull(canceledAppt, "Verify meeting is deleted from attendee's calendar");
 		
 	}
@@ -126,9 +126,9 @@ public class CancelMeeting extends CalendarWorkWeekTest {
 		// Creating object for meeting data
 		String tz, apptSubject, apptBody, apptAttendee1;
 		tz = ZTimeZone.TimeZoneEST.getID();
-		apptSubject = ZimbraSeleniumProperties.getUniqueString();
-		apptBody = ZimbraSeleniumProperties.getUniqueString();
-		apptAttendee1 = ZimbraAccount.AccountA().EmailAddress;
+		apptSubject = ZmailSeleniumProperties.getUniqueString();
+		apptBody = ZmailSeleniumProperties.getUniqueString();
+		apptAttendee1 = ZmailAccount.AccountA().EmailAddress;
 		
 		// Absolute dates in UTC zone
 		Calendar now = this.calendarWeekDayUTC;
@@ -136,7 +136,7 @@ public class CancelMeeting extends CalendarWorkWeekTest {
 		ZDate endUTC   = new ZDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH) + 1, now.get(Calendar.DAY_OF_MONTH), 14, 0, 0);
 		
 		app.zGetActiveAccount().soapSend(
-                "<CreateAppointmentRequest xmlns='urn:zimbraMail'>" +
+                "<CreateAppointmentRequest xmlns='urn:zmailMail'>" +
                      "<m>"+
                      "<inv method='REQUEST' type='event' status='CONF' draft='0' class='PUB' fb='B' transp='O' allDay='0' name='"+ apptSubject +"'>"+
                      "<s d='"+ startUTC.toTimeZone(tz).toYYYYMMDDTHHMMSS() +"' tz='"+ tz +"'/>" +
@@ -179,8 +179,8 @@ public class CancelMeeting extends CalendarWorkWeekTest {
 		ZAssert.assertEquals(app.zPageCalendar.sIsElementPresent(app.zPageCalendar.zGetApptLocator(apptSubject)), false, "Verify meeting is deleted from organizer's calendar");
 		
 		// Verify meeting is deleted from attendee's calendar
-		//		AppointmentItem canceledAppt = AppointmentItem.importFromSOAP(ZimbraAccount.AccountA(), "subject:("+ apptSubject +")", startUTC, endUTC);
-		AppointmentItem canceledAppt = AppointmentItem.importFromSOAP(ZimbraAccount.AccountA(), "subject:("+ apptSubject +")");
+		//		AppointmentItem canceledAppt = AppointmentItem.importFromSOAP(ZmailAccount.AccountA(), "subject:("+ apptSubject +")", startUTC, endUTC);
+		AppointmentItem canceledAppt = AppointmentItem.importFromSOAP(ZmailAccount.AccountA(), "subject:("+ apptSubject +")");
 		ZAssert.assertNull(canceledAppt, "Verify meeting is deleted from attendee's calendar");
 	}
 	
@@ -204,9 +204,9 @@ public class CancelMeeting extends CalendarWorkWeekTest {
 		// Creating object for meeting data
 		String tz, apptSubject, apptBody, apptAttendee1;
 		tz = ZTimeZone.TimeZoneEST.getID();
-		apptSubject = ZimbraSeleniumProperties.getUniqueString();
-		apptBody = ZimbraSeleniumProperties.getUniqueString();
-		apptAttendee1 = ZimbraAccount.AccountA().EmailAddress;
+		apptSubject = ZmailSeleniumProperties.getUniqueString();
+		apptBody = ZmailSeleniumProperties.getUniqueString();
+		apptAttendee1 = ZmailAccount.AccountA().EmailAddress;
 		
 		// Absolute dates in UTC zone
 		Calendar now = this.calendarWeekDayUTC;
@@ -214,7 +214,7 @@ public class CancelMeeting extends CalendarWorkWeekTest {
 		ZDate endUTC   = new ZDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH) + 1, now.get(Calendar.DAY_OF_MONTH), 14, 0, 0);
 		
 		app.zGetActiveAccount().soapSend(
-                "<CreateAppointmentRequest xmlns='urn:zimbraMail'>" +
+                "<CreateAppointmentRequest xmlns='urn:zmailMail'>" +
                      "<m>"+
                      "<inv method='REQUEST' type='event' status='CONF' draft='0' class='PUB' fb='B' transp='O' allDay='0' name='"+ apptSubject +"'>"+
                      "<s d='"+ startUTC.toTimeZone(tz).toYYYYMMDDTHHMMSS() +"' tz='"+ tz +"'/>" +
@@ -254,15 +254,15 @@ public class CancelMeeting extends CalendarWorkWeekTest {
 		
 		// Verify the meeting disappears from the organizer's calendar
 		app.zGetActiveAccount().soapSend(
-				"<SearchRequest xmlns='urn:zimbraMail' types='appointment' calExpandInstStart='"+ startUTC.addDays(-7).toMillis() +"' calExpandInstEnd='"+ startUTC.addDays(7).toMillis() +"'>"
+				"<SearchRequest xmlns='urn:zmailMail' types='appointment' calExpandInstStart='"+ startUTC.addDays(-7).toMillis() +"' calExpandInstEnd='"+ startUTC.addDays(7).toMillis() +"'>"
 			+	"<query>subject:("+ apptSubject +")</query>"
 			+	"</SearchRequest>");
 		Element[] nodes = app.zGetActiveAccount().soapSelectNodes("//mail:appt");
 		ZAssert.assertEquals(nodes.length, 0, "Verify meeting is deleted from organizer's calendar");
 		
 		// Verify meeting is deleted from attendee's calendar
-//		AppointmentItem canceledAppt = AppointmentItem.importFromSOAP(ZimbraAccount.AccountA(), "subject:("+ apptSubject +")", startUTC, endUTC);
-		AppointmentItem canceledAppt = AppointmentItem.importFromSOAP(ZimbraAccount.AccountA(), "subject:("+ apptSubject +")");
+//		AppointmentItem canceledAppt = AppointmentItem.importFromSOAP(ZmailAccount.AccountA(), "subject:("+ apptSubject +")", startUTC, endUTC);
+		AppointmentItem canceledAppt = AppointmentItem.importFromSOAP(ZmailAccount.AccountA(), "subject:("+ apptSubject +")");
 		ZAssert.assertNull(canceledAppt, "Verify meeting is deleted from attendee's calendar");
 		
 	}
@@ -276,9 +276,9 @@ public class CancelMeeting extends CalendarWorkWeekTest {
 		// Creating object for meeting data
 		String tz, apptSubject, apptBody, apptAttendee1;
 		tz = ZTimeZone.TimeZoneEST.getID();
-		apptSubject = "appt" + ZimbraSeleniumProperties.getUniqueString();
-		apptBody = ZimbraSeleniumProperties.getUniqueString();
-		apptAttendee1 = ZimbraAccount.AccountA().EmailAddress;
+		apptSubject = "appt" + ZmailSeleniumProperties.getUniqueString();
+		apptBody = ZmailSeleniumProperties.getUniqueString();
+		apptAttendee1 = ZmailAccount.AccountA().EmailAddress;
 		
 		// Absolute dates in UTC zone
 		Calendar now = this.calendarWeekDayUTC;
@@ -286,7 +286,7 @@ public class CancelMeeting extends CalendarWorkWeekTest {
 		ZDate endUTC   = new ZDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH) + 1, now.get(Calendar.DAY_OF_MONTH), 14, 0, 0);
 		
 		app.zGetActiveAccount().soapSend(
-                "<CreateAppointmentRequest xmlns='urn:zimbraMail'>" +
+                "<CreateAppointmentRequest xmlns='urn:zmailMail'>" +
                      "<m>"+
                      "<inv method='REQUEST' type='event' status='CONF' draft='0' class='PUB' fb='B' transp='O' allDay='0' name='"+ apptSubject +"'>"+
                      "<s d='"+ startUTC.toTimeZone(tz).toYYYYMMDDTHHMMSS() +"' tz='"+ tz +"'/>" +
@@ -327,8 +327,8 @@ public class CancelMeeting extends CalendarWorkWeekTest {
 		ZAssert.assertTrue(app.zPageCalendar.sIsElementPresent(app.zPageCalendar.zGetApptLocator(apptSubject)), "Verify meeting is not deleted from organizer's calendar");
 		
 		// Verify meeting is not deleted from attendee's calendar
-//		AppointmentItem canceledAppt = AppointmentItem.importFromSOAP(ZimbraAccount.AccountA(), "subject:("+ apptSubject +")", startUTC, endUTC);
-		AppointmentItem canceledAppt = AppointmentItem.importFromSOAP(ZimbraAccount.AccountA(), "subject:("+ apptSubject +")");
+//		AppointmentItem canceledAppt = AppointmentItem.importFromSOAP(ZmailAccount.AccountA(), "subject:("+ apptSubject +")", startUTC, endUTC);
+		AppointmentItem canceledAppt = AppointmentItem.importFromSOAP(ZmailAccount.AccountA(), "subject:("+ apptSubject +")");
 		ZAssert.assertNotNull(canceledAppt, "Verify meeting is NOT deleted from attendee's calendar");
 		
 	}
@@ -346,9 +346,9 @@ public class CancelMeeting extends CalendarWorkWeekTest {
 		// Creating object for meeting data
 		String tz, apptSubject, apptBody, apptAttendee1;
 		tz = ZTimeZone.TimeZoneEST.getID();
-		apptSubject = ZimbraSeleniumProperties.getUniqueString();
-		apptBody = ZimbraSeleniumProperties.getUniqueString();
-		apptAttendee1 = ZimbraAccount.AccountA().EmailAddress;
+		apptSubject = ZmailSeleniumProperties.getUniqueString();
+		apptBody = ZmailSeleniumProperties.getUniqueString();
+		apptAttendee1 = ZmailAccount.AccountA().EmailAddress;
 		
 		// Absolute dates in UTC zone
 		Calendar now = this.calendarWeekDayUTC;
@@ -356,7 +356,7 @@ public class CancelMeeting extends CalendarWorkWeekTest {
 		ZDate endUTC   = new ZDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH) + 1, now.get(Calendar.DAY_OF_MONTH), 14, 0, 0);
 		
 		app.zGetActiveAccount().soapSend(
-                "<CreateAppointmentRequest xmlns='urn:zimbraMail'>" +
+                "<CreateAppointmentRequest xmlns='urn:zmailMail'>" +
                      "<m>"+
                      "<inv method='REQUEST' type='event' status='CONF' draft='0' class='PUB' fb='B' transp='O' allDay='0' name='"+ apptSubject +"'>"+
                      "<s d='"+ startUTC.toTimeZone(tz).toYYYYMMDDTHHMMSS() +"' tz='"+ tz +"'/>" +
@@ -407,11 +407,11 @@ public class CancelMeeting extends CalendarWorkWeekTest {
 		
 		// Verify meeting is deleted from attendee's calendar && receive meeting cancellation message
 		SleepUtil.sleepLong(); //importSOAP gives wrong response without sleep
-		MailItem canceledApptMail = MailItem.importFromSOAP(ZimbraAccount.AccountA(), "subject:(" + (char)34 + "Cancelled " + apptSubject + (char)34 + ")");
+		MailItem canceledApptMail = MailItem.importFromSOAP(ZmailAccount.AccountA(), "subject:(" + (char)34 + "Cancelled " + apptSubject + (char)34 + ")");
 		ZAssert.assertNotNull(canceledApptMail, "Verify meeting cancellation message received to attendee");
 		
-//		AppointmentItem canceledAppt = AppointmentItem.importFromSOAP(ZimbraAccount.AccountA(), "subject:("+ apptSubject +")", startUTC, endUTC);
-		AppointmentItem canceledAppt = AppointmentItem.importFromSOAP(ZimbraAccount.AccountA(), "subject:("+ apptSubject +")");
+//		AppointmentItem canceledAppt = AppointmentItem.importFromSOAP(ZmailAccount.AccountA(), "subject:("+ apptSubject +")", startUTC, endUTC);
+		AppointmentItem canceledAppt = AppointmentItem.importFromSOAP(ZmailAccount.AccountA(), "subject:("+ apptSubject +")");
 		ZAssert.assertNull(canceledAppt, "Verify meeting is deleted from attendee's calendar");
 		
 	}
@@ -428,10 +428,10 @@ public class CancelMeeting extends CalendarWorkWeekTest {
 		// Creating object for meeting data
 		String tz, apptSubject, apptBody, apptAttendee1, modifyApptBody;
 		tz = ZTimeZone.TimeZoneEST.getID();
-		apptSubject = "appt" + ZimbraSeleniumProperties.getUniqueString();
-		apptBody = ZimbraSeleniumProperties.getUniqueString();
-		apptAttendee1 = ZimbraAccount.AccountA().EmailAddress;
-		modifyApptBody = "Modified" + ZimbraSeleniumProperties.getUniqueString();
+		apptSubject = "appt" + ZmailSeleniumProperties.getUniqueString();
+		apptBody = ZmailSeleniumProperties.getUniqueString();
+		apptAttendee1 = ZmailAccount.AccountA().EmailAddress;
+		modifyApptBody = "Modified" + ZmailSeleniumProperties.getUniqueString();
 		
 		// Absolute dates in UTC zone
 		Calendar now = this.calendarWeekDayUTC;
@@ -439,7 +439,7 @@ public class CancelMeeting extends CalendarWorkWeekTest {
 		ZDate endUTC   = new ZDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH) + 1, now.get(Calendar.DAY_OF_MONTH), 14, 0, 0);
 		
 		app.zGetActiveAccount().soapSend(
-                "<CreateAppointmentRequest xmlns='urn:zimbraMail'>" +
+                "<CreateAppointmentRequest xmlns='urn:zmailMail'>" +
                      "<m>"+
                      "<inv method='REQUEST' type='event' status='CONF' draft='0' class='PUB' fb='B' transp='O' allDay='0' name='"+ apptSubject +"'>"+
                      "<s d='"+ startUTC.toTimeZone(tz).toYYYYMMDDTHHMMSS() +"' tz='"+ tz +"'/>" +
@@ -490,15 +490,15 @@ public class CancelMeeting extends CalendarWorkWeekTest {
 		
 
 		// Verify the meeting no longer appears in the attendee's calendar
-		MailItem canceledApptMail = MailItem.importFromSOAP(ZimbraAccount.AccountA(), "in:inbox subject:(Cancelled) subject:("+ apptSubject +")"); // TODO: I18N
+		MailItem canceledApptMail = MailItem.importFromSOAP(ZmailAccount.AccountA(), "in:inbox subject:(Cancelled) subject:("+ apptSubject +")"); // TODO: I18N
 		
 		// Verify meeting cancellation message with exact body content
 		ZAssert.assertNotNull(canceledApptMail, "Verify meeting cancellation message received to attendee");
 		ZAssert.assertStringContains(canceledApptMail.dBodyText, modifyApptBody, "Verify the body field value is correct");
 		
 		// Verify meeting is deleted from attendee's calendar
-//		AppointmentItem canceledAppt = AppointmentItem.importFromSOAP(ZimbraAccount.AccountA(), "subject:("+ apptSubject +")", startUTC, endUTC);
-		AppointmentItem canceledAppt = AppointmentItem.importFromSOAP(ZimbraAccount.AccountA(), "subject:("+ apptSubject +")");
+//		AppointmentItem canceledAppt = AppointmentItem.importFromSOAP(ZmailAccount.AccountA(), "subject:("+ apptSubject +")", startUTC, endUTC);
+		AppointmentItem canceledAppt = AppointmentItem.importFromSOAP(ZmailAccount.AccountA(), "subject:("+ apptSubject +")");
 		ZAssert.assertNull(canceledAppt, "Verify meeting is deleted from attendee's calendar");
 	}
 }

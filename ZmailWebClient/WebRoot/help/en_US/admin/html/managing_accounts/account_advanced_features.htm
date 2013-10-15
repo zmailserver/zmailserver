@@ -247,7 +247,7 @@ function onSetStartPage()
 		 allowed duration for any polling interval</p></td>
 		<td style="width: 68.093%; padding-right: 10px; padding-left: 10px; 
 			 border-top-style: Solid; border-bottom-style: Solid; border-top-width: 1px; 
-			 border-bottom-width: 1px;"><p>Default in new Zimbra Collaboration Server 
+			 border-bottom-width: 1px;"><p>Default in new Zmail Collaboration Server 
 		 installations is 1 minute.</p></td>
 	</tr>
 	<tr style="vertical-align: top; height: 21px;">
@@ -257,7 +257,7 @@ function onSetStartPage()
 		 polling interval</p></td>
 		<td style="width: 68.093%; padding-right: 10px; padding-left: 10px; 
 			 border-top-style: Solid; border-bottom-style: Solid; border-top-width: 1px; 
-			 border-bottom-width: 1px;"><p>Default in new Zimbra Collaboration Server 
+			 border-bottom-width: 1px;"><p>Default in new Zmail Collaboration Server 
 		 installations is 1 day.</p></td>
 	</tr>
 	<tr style="vertical-align: top; height: 21px;">
@@ -267,7 +267,7 @@ function onSetStartPage()
 		 polling interval</p></td>
 		<td style="width: 68.093%; padding-right: 10px; padding-left: 10px; 
 			 border-top-style: Solid; border-bottom-style: Solid; border-top-width: 1px; 
-			 border-bottom-width: 1px;"><p>Default in new Zimbra Collaboration Server 
+			 border-bottom-width: 1px;"><p>Default in new Zmail Collaboration Server 
 		 installations is 1 day.</p></td>
 	</tr>
 	<tr style="vertical-align: top; height: 21px;">
@@ -277,7 +277,7 @@ function onSetStartPage()
 		 polling interval</p></td>
 		<td style="width: 68.093%; padding-right: 10px; padding-left: 10px; 
 			 border-top-style: Solid; border-bottom-style: Solid; border-top-width: 1px; 
-			 border-bottom-width: 1px;"><p>Default in new Zimbra Collaboration Server 
+			 border-bottom-width: 1px;"><p>Default in new Zmail Collaboration Server 
 		 installations is 12 hours.</p></td>
 	</tr>
 	<tr style="vertical-align: top; height: 21px;">
@@ -287,7 +287,7 @@ function onSetStartPage()
 		 polling interval</p></td>
 		<td style="width: 68.093%; padding-right: 10px; padding-left: 10px; 
 			 border-top-style: Solid; border-bottom-style: Solid; border-top-width: 1px; 
-			 border-bottom-width: 1px;"><p>Default in new Zimbra Collaboration Server 
+			 border-bottom-width: 1px;"><p>Default in new Zmail Collaboration Server 
 		 installations is 12 hours.</p></td>
 	</tr>
 	<tr style="vertical-align: top; height: 21px;">
@@ -297,7 +297,7 @@ function onSetStartPage()
 		 polling interval</p></td>
 		<td style="width: 68.093%; padding-right: 10px; padding-left: 10px; 
 			 border-top-style: Solid; border-bottom-style: Solid; border-top-width: 1px; 
-			 border-bottom-width: 1px;"><p>Default in new Zimbra Collaboration Server 
+			 border-bottom-width: 1px;"><p>Default in new Zmail Collaboration Server 
 		 installations is 1 day.</p></td>
 	</tr>
 	<tr style="vertical-align: top; height: 39px;">
@@ -312,7 +312,7 @@ function onSetStartPage()
 			 border-top-style: Solid; border-bottom-style: Solid; border-top-width: 1px; 
 			 border-bottom-width: 1px;"><p>The Proxy Allowed Domains section 
 		 is configured to allow access to external domains that are accessed 
-		 through a Zimlet. &#160;For the Zimlets that are included in Zimbra Collaboration Server, 
+		 through a Zimlet. &#160;For the Zimlets that are included in Zmail Collaboration Server, 
 		 the following proxy allowed domains are configured. &#160;If you 
 		 download and deploy other Zimlets, you can add additional proxy 
 		 domain names.</p>
@@ -440,7 +440,7 @@ function onSetStartPage()
 			 border-bottom-width: 1px;" bgcolor="#DBDBDB"><p style="font-weight: bold;">Setting 
 		 Email Retention Policy</p>
 		<p style="font-weight: bold;">T<span style="font-weight: normal;">o 
-		 enable the Email Retention Policy on the account, zimbraMailPurgeSleepInterval 
+		 enable the Email Retention Policy on the account, zmailMailPurgeSleepInterval 
 		 should be enabled in either the server or global config</span></p></td>
 		
 	</tr>
@@ -493,19 +493,19 @@ function onSetStartPage()
 		 when ZCS 
 		 is installed is 1 second. </p>
 		<p>When <span 
-		 style="font-weight: bold;">zimbraMailPurgeSleepInterval</span> 
+		 style="font-weight: bold;">zmailMailPurgeSleepInterval</span> 
 		 is set to a non-zero value, a purge thread runs continuously, 
 		 purging messages from mailboxes that have reached the lifetime 
 		 threshold. When you configure this attribute, you set the sleep 
 		 time interval for the purge function. This is the wait time between 
 		 every two (subsequent) mailboxes before the next purge starts.</p>
-		<p>For example, when zimbraMailPurgeSleepInterval 
+		<p>For example, when zmailMailPurgeSleepInterval 
 		 is set to 1 second, after mailbox1 is purged of messages that 
 		 meet the message lifetime setting, the server waits 1 second before 
 		 beginning to purge mailbox2.</p>
 		<ul>
 			<li class="p-note"><p class="note">If 
-			 zimbraMailPurgeSleepInterval 
+			 zmailMailPurgeSleepInterval 
 			 is disabled in either the server or global configuration, 
 			 these settings are not enforced.</p></li>
 		</ul></td>
@@ -640,7 +640,7 @@ function onSetStartPage()
 		<td style="width: 68.093%; padding-right: 10px; padding-left: 10px; 
 			 border-top-style: Solid; border-bottom-style: Solid; border-top-width: 1px; 
 			 border-bottom-width: 1px;"><p>You can make users <a href="../managing_global_settings/making_free_busy_view__available_.htm">free/busy 
-		 schedule</a> visible across a mix of Zimbraservers 
+		 schedule</a> visible across a mix of Zmailservers 
 		 and third party email servers. Here, this setting is used to set 
 		 the O and OU used in legacyExchangeDN attribute.</p></td>
 	</tr>
@@ -658,7 +658,7 @@ function onSetStartPage()
 		<td style="width: 68.093%; padding-right: 10px; padding-left: 10px; 
 			 border-top-style: Solid; border-bottom-style: Solid; border-top-width: 1px; 
 			 border-bottom-width: 1px;"><p>This setting should be &quot;protocol&quot;, 
-		 server&quot;, &quot;port&quot;. &#160;For example, smtp:smtp.zimbrasmtpserver.com:25</p></td>
+		 server&quot;, &quot;port&quot;. &#160;For example, smtp:smtp.zmailsmtpserver.com:25</p></td>
 	</tr>
 </table>
 <p>&#160;</p>

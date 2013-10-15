@@ -16,7 +16,7 @@
             <RowDefinition MaxHeight="40"></RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" HorizontalAlignment="Left" Margin="15,20,30,0" Name="usersTitle" Text="Migrate" TextWrapping="Wrap" FontWeight="Bold" VerticalAlignment="Top" />
-        <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" Margin="15,5,30,0" Name="migrateText" Text="Migrate the displayed users into Zimbra.  Unprovisioned users will be provisioned.  You can migrate now or schedule the migration for a later time." TextWrapping="Wrap" VerticalAlignment="Top" />
+        <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" Margin="15,5,30,0" Name="migrateText" Text="Migrate the displayed users into Zmail.  Unprovisioned users will be provisioned.  You can migrate now or schedule the migration for a later time." TextWrapping="Wrap" VerticalAlignment="Top" />
         <Grid Name="UsersAndSchedulingInfo" Grid.Row="2" Margin="0,15,0,0" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition MaxWidth="200" Width="Auto"></ColumnDefinition>

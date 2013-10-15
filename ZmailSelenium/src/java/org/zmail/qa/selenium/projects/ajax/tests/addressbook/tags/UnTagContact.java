@@ -14,15 +14,15 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.addressbook.tags;
+package org.zmail.qa.selenium.projects.ajax.tests.addressbook.tags;
 
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
 
 
 public class UnTagContact extends AjaxCommonTest  {
@@ -52,7 +52,7 @@ public class UnTagContact extends AjaxCommonTest  {
 
 		// Tag the contact
 		app.zGetActiveAccount().soapSend(
-				"<ContactActionRequest xmlns='urn:zimbraMail'>" +
+				"<ContactActionRequest xmlns='urn:zmailMail'>" +
 					"<action id='"+ contact.getId() +"' op='tag' tag='"+ tagItem.getId() +"'/>" +
 				"</ContactActionRequest>");
 
@@ -73,7 +73,7 @@ public class UnTagContact extends AjaxCommonTest  {
 		//-- Verification
 		
 		app.zGetActiveAccount().soapSend(
-				"<GetContactsRequest xmlns='urn:zimbraMail' >" +
+				"<GetContactsRequest xmlns='urn:zmailMail' >" +
 						"<cn id='"+ contact.getId() +"'/>" +
 				"</GetContactsRequest>");
 		
@@ -99,7 +99,7 @@ public class UnTagContact extends AjaxCommonTest  {
 
 		// Tag the contact
 		app.zGetActiveAccount().soapSend(
-				"<ContactActionRequest xmlns='urn:zimbraMail'>" +
+				"<ContactActionRequest xmlns='urn:zmailMail'>" +
 					"<action id='"+ contact.getId() +"' op='tag' tag='"+ tagItem.getId() +"'/>" +
 				"</ContactActionRequest>");
 
@@ -117,7 +117,7 @@ public class UnTagContact extends AjaxCommonTest  {
 		//-- Verification
 		
 		app.zGetActiveAccount().soapSend(
-				"<GetContactsRequest xmlns='urn:zimbraMail' >" +
+				"<GetContactsRequest xmlns='urn:zmailMail' >" +
 						"<cn id='"+ contact.getId() +"'/>" +
 				"</GetContactsRequest>");
 		

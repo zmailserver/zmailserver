@@ -17,7 +17,7 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.framework.core;
+package org.zmail.qa.selenium.framework.core;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -37,17 +37,17 @@ import org.apache.log4j.*;
 import org.testng.*;
 import org.testng.xml.*;
 
-import com.zimbra.qa.selenium.framework.ui.AbsSeleniumObject;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties.AppType;
-import com.zimbra.qa.selenium.framework.util.performance.PerfMetrics;
+import org.zmail.qa.selenium.framework.ui.AbsSeleniumObject;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties.AppType;
+import org.zmail.qa.selenium.framework.util.performance.PerfMetrics;
 
 
 
 
 /**
  * The <code>ExecuteHarnessMain</code> class is the main execution class for the
- * Zimbra Selenium Harness.
+ * Zmail Selenium Harness.
  * <p>
  * Typical usage:<p>
  * <pre>
@@ -95,7 +95,7 @@ public class ExecuteHarnessMain {
 	 * This token must appear in the class package name.
 	 * The next subpackage after the token is the TestNG test name
 	 * All subsequent packages are assumed to be tests
-	 * Ex: com.zimbra.qa.seleneium.projects.zcs.tests.addressbook.CreateContact.java
+	 * Ex: org.zmail.qa.seleneium.projects.zcs.tests.addressbook.CreateContact.java
 	 * addressbook will be the test name
 	 * CreateContact.java should contain TestNG test methods
 	 */
@@ -138,7 +138,7 @@ public class ExecuteHarnessMain {
 	protected String testoutputfoldername = null;
 	public void setTestOutputFolderName(String path) {
 		
-		System.setProperty("zimbraSelenium.output", path);
+		System.setProperty("zmailSelenium.output", path);
 		
 		// The Code Coverage report should exist at the root
 		File coverage = new File(path + "/coverage");
@@ -149,10 +149,10 @@ public class ExecuteHarnessMain {
 
 		// Append the app, browser, locale
 		path += "/"
-			+ ZimbraSeleniumProperties.getAppType()
+			+ ZmailSeleniumProperties.getAppType()
 			+ "/"
-			+ ZimbraSeleniumProperties.getCalculatedBrowser()						
-			+ "/" + ZimbraSeleniumProperties.getStringProperty("locale");
+			+ ZmailSeleniumProperties.getCalculatedBrowser()						
+			+ "/" + ZmailSeleniumProperties.getStringProperty("locale");
 		
 		// Make sure the path exists
 		File output = new File(path);
@@ -277,7 +277,7 @@ public class ExecuteHarnessMain {
 		return result;
 	}
 	/**
-	 * Get the testname for a given class, per Zimbra standard formatting
+	 * Get the testname for a given class, per Zmail standard formatting
 	 * The test name is the package part after .tests.
 	 */
 	private static String getTestName(String classname) throws HarnessException {
@@ -338,7 +338,7 @@ public class ExecuteHarnessMain {
 	protected List<XmlSuite> getXmlSuiteList() throws HarnessException {
 
 		// Add network or foss based on the server version
-		if ( ZimbraSeleniumProperties.zimbraGetVersionString().toLowerCase().contains("network") ) {
+		if ( ZmailSeleniumProperties.zmailGetVersionString().toLowerCase().contains("network") ) {
 			excludeGroups.add("foss");
 		} else {
 			excludeGroups.add("network");
@@ -347,9 +347,9 @@ public class ExecuteHarnessMain {
 		// If groups contains "performance", then enable performance metrics gathering
 		PerfMetrics.getInstance().Enabled = groups.contains("performance");
 
-		// Only one suite per run in the zimbra process (subject to change)
+		// Only one suite per run in the zmail process (subject to change)
 		XmlSuite suite = new XmlSuite();
-		suite.setName("zimbra");
+		suite.setName("zmail");
 		suite.setVerbose(verbosity);
 		suite.setThreadCount(4);
 		suite.setParallel(XmlSuite.PARALLEL_NONE);
@@ -409,7 +409,7 @@ public class ExecuteHarnessMain {
 		// calculate how long the tests took
 		long duration = finish.getTime() - start.getTime();
 		result.append("Duration: ").append(duration / 1000).append(" seconds\n");
-		result.append("Browser: ").append(ZimbraSeleniumProperties.getCalculatedBrowser()).append('\n');
+		result.append("Browser: ").append(ZmailSeleniumProperties.getCalculatedBrowser()).append('\n');
 		
 		return (result.toString());
 
@@ -488,12 +488,12 @@ public class ExecuteHarnessMain {
 			TestNG ng = new TestNG();
 			
 			for (String st : configMap.keySet()) {
-				ZimbraSeleniumProperties.setStringProperty(st,configMap.get(st));
+				ZmailSeleniumProperties.setStringProperty(st,configMap.get(st));
 			}
 			
 			
 			// keep checking for server down
-			while (ZimbraSeleniumProperties.zimbraGetVersionString().indexOf("unknown") != -1) {
+			while (ZmailSeleniumProperties.zmailGetVersionString().indexOf("unknown") != -1) {
 				SleepUtil.sleep(100000);
 			}
 			
@@ -602,7 +602,7 @@ public class ExecuteHarnessMain {
 	}
 
 	/**
-	 * This class checks for the Zimbra error dialog after each test
+	 * This class checks for the Zmail error dialog after each test
 	 * method.  If present, it marks the test case as failed, then
 	 * logs out of the application.
 	 * 
@@ -615,8 +615,8 @@ public class ExecuteHarnessMain {
 		public void afterInvocation(IInvokedMethod method, ITestResult result) {
 			logger.debug("ErrorDialogListener:afterInvocation ...");
 
-			boolean check = "true".equals(ZimbraSeleniumProperties.getStringProperty("dialog.error.aftertest.check", "true"));
-			boolean dismiss = "true".equals(ZimbraSeleniumProperties.getStringProperty("dialog.error.aftertest.dismiss", "true"));
+			boolean check = "true".equals(ZmailSeleniumProperties.getStringProperty("dialog.error.aftertest.check", "true"));
+			boolean dismiss = "true".equals(ZmailSeleniumProperties.getStringProperty("dialog.error.aftertest.dismiss", "true"));
 			if ( !check ) {
 				return;
 			}
@@ -685,9 +685,9 @@ public class ExecuteHarnessMain {
 		
 		
 		private static final String OpenQABasePackage = "org.openqa";
-		private static final String ZimbraQABasePackage = "com.zimbra.qa.selenium";
+		private static final String ZmailQABasePackage = "org.zmail.qa.selenium";
 		private static final Logger openqaLogger = LogManager.getLogger(OpenQABasePackage);
-		private static final Logger zimbraqaLogger = LogManager.getLogger(ZimbraQABasePackage);
+		private static final Logger zmailqaLogger = LogManager.getLogger(ZmailQABasePackage);
 		
 		private final Map<String, Appender> appenders = new HashMap<String, Appender>();
 		private static final Layout layout = new PatternLayout("%-4r [%t] %-5p %c %x - %m%n");
@@ -704,10 +704,10 @@ public class ExecuteHarnessMain {
 		
 		protected String getFilename(Method method) {
 			// Change the class name in two ways to build the file path:
-			// 1. Remove com.zimbra.qa.selenium (for brevity)
+			// 1. Remove org.zmail.qa.selenium (for brevity)
 			// 2. Change package names to directory names, by changing "." to "/"
 			//
-			String c = method.getDeclaringClass().getCanonicalName().replace(ZimbraQABasePackage, "").replace('.', '/');
+			String c = method.getDeclaringClass().getCanonicalName().replace(ZmailQABasePackage, "").replace('.', '/');
 			String m = method.getName();
 			return (String.format("%s/debug/%s/%s.txt", outputFolder, c, m));
 		}
@@ -733,7 +733,7 @@ public class ExecuteHarnessMain {
 						Appender a = new FileAppender(layout, filename, false);
 						appenders.put(key, a);
 						openqaLogger.addAppender(a);
-						zimbraqaLogger.addAppender(a);
+						zmailqaLogger.addAppender(a);
 					}
 					logger.info("MethodListener: START: " + getTestCaseID(method.getTestMethod().getMethod()));
 					
@@ -787,7 +787,7 @@ public class ExecuteHarnessMain {
 				}
 				if ( a != null ) {
 					openqaLogger.removeAppender(a);
-					zimbraqaLogger.removeAppender(a);
+					zmailqaLogger.removeAppender(a);
 					a.close();
 					a = null;
 				}
@@ -803,7 +803,7 @@ public class ExecuteHarnessMain {
 	 */
 	public static class ResultListener extends TestListenerAdapter {
 
-		private static final String ZimbraQABasePackage = "com.zimbra.qa.selenium";
+		private static final String ZmailQABasePackage = "org.zmail.qa.selenium";
 		
 		private int testsTotal = 0;
 		private int testsPass = 0;
@@ -855,7 +855,7 @@ public class ExecuteHarnessMain {
 		 * @return
 		 */
 		public static String getScreenCaptureFilename(Method method) {
-			String c = method.getDeclaringClass().getCanonicalName().replace(ZimbraQABasePackage, "").replace('.', '/');
+			String c = method.getDeclaringClass().getCanonicalName().replace(ZmailQABasePackage, "").replace('.', '/');
 			String m = method.getName();
 			return (String.format("%s/debug/%s/%sss%d.png", outputFolder, c, m, ++screenshotcount));
 		}
@@ -868,7 +868,7 @@ public class ExecuteHarnessMain {
 		public static void getScreenCapture(ITestResult result) {
 			String filename = getScreenCaptureFilename(result.getMethod().getMethod());
 			logger.warn("Creating screenshot: "+ filename);
-			if (ZimbraSeleniumProperties.isWebDriver()||ZimbraSeleniumProperties.isWebDriverBackedSelenium()){
+			if (ZmailSeleniumProperties.isWebDriver()||ZmailSeleniumProperties.isWebDriverBackedSelenium()){
 				try {
 					//File scrFile = ((TakesScreenshot)ClientSessionFactory.session().webDriver()).getScreenshotAs(OutputType.FILE);
 					//FileUtils.copyFile(scrFile, new File(filename));
@@ -903,7 +903,7 @@ public class ExecuteHarnessMain {
 		public void onTestFailure(ITestResult result) {
 			testsFailed++;
 			String fullname = result.getMethod().getMethod().getDeclaringClass().getName() +"."+ result.getMethod().getMethod().getName();
-			failedTests.add(fullname.replace("com.zimbra.qa.selenium.projects.", "IM.projects."));
+			failedTests.add(fullname.replace("org.zmail.qa.selenium.projects.", "IM.projects."));
 			getScreenCapture(result);
 		}
 
@@ -914,7 +914,7 @@ public class ExecuteHarnessMain {
 		public void onTestSkipped(ITestResult result) {
 			testsSkipped++;	
 			String fullname = result.getMethod().getMethod().getDeclaringClass().getName() +"."+ result.getMethod().getMethod().getName();
-			skippedTests.add(fullname.replace("com.zimbra.qa.selenium.projects.", "main.projects."));
+			skippedTests.add(fullname.replace("org.zmail.qa.selenium.projects.", "main.projects."));
 		}
 
 		/**
@@ -1013,7 +1013,7 @@ public class ExecuteHarnessMain {
 	        		 String[] confItem= confItems[j].split("=");
 		        	   
 	        		 //check  form config=value and if a valid config name
-	        	     if ((confItem.length >1) && (ZimbraSeleniumProperties.getStringProperty(confItem[0]) != null)) {
+	        	     if ((confItem.length >1) && (ZmailSeleniumProperties.getStringProperty(confItem[0]) != null)) {
 	        			configMap.put(confItem[0], confItem[1]);
 	        		   
 	        	     }
@@ -1029,7 +1029,7 @@ public class ExecuteHarnessMain {
 	            for (AppType t : AppType.values()) {
 	            	// Look for ".type." (e.g. ".ajax.") in the pattern
 	            	if ( this.classfilter.contains(t.toString().toLowerCase()) ) {
-	            		ZimbraSeleniumProperties.setAppType(t);
+	            		ZmailSeleniumProperties.setAppType(t);
 	                	break;
 	            	}
 	            }
@@ -1046,8 +1046,8 @@ public class ExecuteHarnessMain {
 	        	this.setTestOutputFolderName(cmd.getOptionValue('o'));
 	        } else {
 	        	this.setTestOutputFolderName( 
-	        			ZimbraSeleniumProperties.getStringProperty("ZimbraLogRoot") +"/"+
-	        			ZimbraSeleniumProperties.zimbraGetVersionString()
+	        			ZmailSeleniumProperties.getStringProperty("ZmailLogRoot") +"/"+
+	        			ZmailSeleniumProperties.zmailGetVersionString()
 				    ); 
 	        }
 	        
@@ -1107,8 +1107,8 @@ public class ExecuteHarnessMain {
 		try {
 			
 			// Set the working conditions
-			ZimbraSeleniumProperties.setBaseDirectory(".");
-			ZimbraSeleniumProperties.setConfigProperties("conf/config.properties");
+			ZmailSeleniumProperties.setBaseDirectory(".");
+			ZmailSeleniumProperties.setConfigProperties("conf/config.properties");
 
 			// Create the harness object and execute it
 			ExecuteHarnessMain harness = new ExecuteHarnessMain();

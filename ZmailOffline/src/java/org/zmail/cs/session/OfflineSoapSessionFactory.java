@@ -12,15 +12,15 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.session;
+package org.zmail.cs.session;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.soap.SoapSessionFactory;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.soap.SoapSessionFactory;
+import org.zmail.soap.ZmailSoapContext;
 
 public class OfflineSoapSessionFactory extends SoapSessionFactory {
     @Override
-    public SoapSession getSoapSession(ZimbraSoapContext zsc) throws ServiceException {
+    public SoapSession getSoapSession(ZmailSoapContext zsc) throws ServiceException {
         if (zsc.isAuthUserOnLocalhost()) {
             return new OfflineSoapSession(zsc);
         } else {

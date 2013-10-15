@@ -14,21 +14,21 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.offline;
+package org.zmail.cs.account.offline;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.SystemUtil;
-import com.zimbra.common.util.Version;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.AttributeCallback;
-import com.zimbra.cs.account.AttributeCardinality;
-import com.zimbra.cs.account.AttributeClass;
-import com.zimbra.cs.account.AttributeFlag;
-import com.zimbra.cs.account.AttributeInfo;
-import com.zimbra.cs.account.AttributeOrder;
-import com.zimbra.cs.account.AttributeServerType;
-import com.zimbra.cs.account.AttributeType;
-import com.zimbra.cs.offline.OfflineLog;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.SystemUtil;
+import org.zmail.common.util.Version;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.AttributeCallback;
+import org.zmail.cs.account.AttributeCardinality;
+import org.zmail.cs.account.AttributeClass;
+import org.zmail.cs.account.AttributeFlag;
+import org.zmail.cs.account.AttributeInfo;
+import org.zmail.cs.account.AttributeOrder;
+import org.zmail.cs.account.AttributeServerType;
+import org.zmail.cs.account.AttributeType;
+import org.zmail.cs.offline.OfflineLog;
 
 import java.util.List;
 import java.util.Map;

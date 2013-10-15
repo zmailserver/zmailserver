@@ -18,9 +18,9 @@
 #include "Exchange.h"
 #include "MAPIMessage.h"
 #include "Logger.h"
-#include "Zimbra\MimeConverter.h"
+#include "Zmail\MimeConverter.h"
 
-MAPIRfc2445::MAPIRfc2445(Zimbra::MAPI::MAPISession &session, Zimbra::MAPI::MAPIMessage &mMessage) :
+MAPIRfc2445::MAPIRfc2445(Zmail::MAPI::MAPISession &session, Zmail::MAPI::MAPIMessage &mMessage) :
     m_session(&session), m_mapiMessage(&mMessage)
 {
     m_pMessage = m_mapiMessage->InternalMessageObject();
@@ -61,7 +61,7 @@ HRESULT ConvertIt(LPMESSAGE pMsg, IStream** ppszMimeMsg, UINT& mimeLength )
 {
     HRESULT hr = S_OK;
 
-    Zimbra::Util::ScopedInterface<IConverterSession> pConvSess;
+    Zmail::Util::ScopedInterface<IConverterSession> pConvSess;
     hr = CreateConverterSession( pConvSess.getptr() );
     if( FAILED(hr))
     {
@@ -70,7 +70,7 @@ HRESULT ConvertIt(LPMESSAGE pMsg, IStream** ppszMimeMsg, UINT& mimeLength )
 
     pConvSess->SetSaveFormat( SAVE_RFC1521 );
     IStream * iStream = NULL;				
-    hr = OpenStreamOnFile(Zimbra::Mapi::Memory::AllocateBuffer, Zimbra::Mapi::Memory::FreeBuffer, 
+    hr = OpenStreamOnFile(Zmail::Mapi::Memory::AllocateBuffer, Zmail::Mapi::Memory::FreeBuffer, 
                           STGM_READWRITE | STGM_CREATE | SOF_UNIQUEFILENAME | STGM_DELETEONRELEASE,										  
                           NULL,  (LPWSTR)L"mig", &iStream);
     if( FAILED(hr))
@@ -79,7 +79,7 @@ HRESULT ConvertIt(LPMESSAGE pMsg, IStream** ppszMimeMsg, UINT& mimeLength )
     }
 
     HGLOBAL hGlobal = GlobalAlloc(GMEM_FIXED, 0 );
-    Zimbra::Util::ScopedInterface<IStream> pStream;
+    Zmail::Util::ScopedInterface<IStream> pStream;
     CreateStreamOnHGlobal( hGlobal, TRUE, pStream.getptr() );
 
     UINT uFlags = CCSF_NO_MSGID |  CCSF_SMTP | CCSF_NOHEADERS ;
@@ -117,9 +117,9 @@ int MAPIRfc2445::GetNumHiddenAttachments()
     int retval = 0;
     HRESULT hr = S_OK;
     LPCWSTR errMsg;
-    Zimbra::Util::ScopedInterface<IStream> pSrcStream;
-    Zimbra::Util::ScopedRowSet pAttachRows;
-    Zimbra::Util::ScopedInterface<IMAPITable> pAttachTable;
+    Zmail::Util::ScopedInterface<IStream> pSrcStream;
+    Zmail::Util::ScopedRowSet pAttachRows;
+    Zmail::Util::ScopedInterface<IMAPITable> pAttachTable;
 
     SizedSPropTagArray(1, attachProps) = {
         1, { PR_ATTACHMENT_HIDDEN }
@@ -178,7 +178,7 @@ HRESULT MAPIRfc2445::ExtractAttachments()
     // may need to break this up so we can call for exceptions, cancel exceptions
 
     LPCWSTR errMsg;
-    Zimbra::Util::ScopedInterface<IStream> pIStream;
+    Zmail::Util::ScopedInterface<IStream> pIStream;
     UINT mimeLen = 0;
     HRESULT hr = ConvertIt( m_pMessage, pIStream.getptr(), mimeLen );
     if (FAILED(hr))
@@ -189,7 +189,7 @@ HRESULT MAPIRfc2445::ExtractAttachments()
     }
 
     mimepp::Message mimeMsg;
-    Zimbra::Util::ScopedBuffer<CHAR> pszMimeMsg;
+    Zmail::Util::ScopedBuffer<CHAR> pszMimeMsg;
 
     // go to the beginning of the stream
     LARGE_INTEGER li = { 0 };
@@ -203,7 +203,7 @@ HRESULT MAPIRfc2445::ExtractAttachments()
     }
 
     // +1 for NULL terminator
-    Zimbra::Mapi::Memory::AllocateBuffer(mimeLen + 1, (LPVOID *)pszMimeMsg.getptr());
+    Zmail::Mapi::Memory::AllocateBuffer(mimeLen + 1, (LPVOID *)pszMimeMsg.getptr());
     if (!pszMimeMsg.get())
     {
         errMsg = FormatExceptionInfo(S_OK, L"Mime msg Memory alloc failed", __FILE__, __LINE__);
@@ -326,7 +326,7 @@ HRESULT MAPIRfc2445::ExtractAttachments()
                 size = (UINT)theContent.size();
             }
 
-	    // Save stream to temp file in temp dir.  We'll delete in ZimbraAPI //
+	    // Save stream to temp file in temp dir.  We'll delete in ZmailAPI //
             LPCWSTR errMsg;
             HRESULT hr = S_OK;
 
@@ -334,9 +334,9 @@ HRESULT MAPIRfc2445::ExtractAttachments()
             LPSTR lpszFQFileName = new char[256];
             LPSTR lpszDirName = NULL;
             LPSTR lpszUniqueName = NULL;
-            Zimbra::Util::ScopedInterface<IStream> pStream;
+            Zmail::Util::ScopedInterface<IStream> pStream;
 
-            if (!Zimbra::MAPI::Util::GetAppTemporaryDirectory(wstrTempAppDirPath))
+            if (!Zmail::MAPI::Util::GetAppTemporaryDirectory(wstrTempAppDirPath))
             {
                 errMsg = FormatExceptionInfo(S_OK, L"GetAppTemporaryDirectory Failed", __FILE__, __LINE__);
                 dloge("MAPIRfc2445 -- exception");
@@ -344,7 +344,7 @@ HRESULT MAPIRfc2445::ExtractAttachments()
                 return E_FAIL;
             }
             WtoA((LPWSTR)wstrTempAppDirPath.c_str(), lpszDirName);
-            WtoA((LPWSTR)Zimbra::MAPI::Util::GetUniqueName().c_str(), lpszUniqueName);
+            WtoA((LPWSTR)Zmail::MAPI::Util::GetUniqueName().c_str(), lpszUniqueName);
             strcpy(lpszFQFileName, lpszDirName);
             strcat(lpszFQFileName, "\\");
             strcat(lpszFQFileName, lpszUniqueName);
@@ -402,7 +402,7 @@ void MAPIRfc2445::GenerateContentDisposition(LPSTR *ppszCD, LPSTR pszFilename)
     theCD.append("\"");
 
     const char *pFinal = theCD.c_str();
-    Zimbra::Util::CopyString(*ppszCD, (LPSTR)pFinal);
+    Zmail::Util::CopyString(*ppszCD, (LPSTR)pFinal);
 }
 
 void MAPIRfc2445::GetContentType(mimepp::Headers& headers, LPSTR *ppStr)
@@ -417,5 +417,5 @@ void MAPIRfc2445::GetContentType(mimepp::Headers& headers, LPSTR *ppStr)
     finalContentType.append(contentSubType);
 
     const char *pType = finalContentType.c_str();
-    Zimbra::Util::CopyString(*ppStr, (LPSTR)pType);
+    Zmail::Util::CopyString(*ppStr, (LPSTR)pType);
 }

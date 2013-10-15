@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.datasource;
+package org.zmail.cs.datasource;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,10 +20,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.db.DbDataSource.DataSourceItem;
-import com.zimbra.cs.mailbox.Mailbox;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.db.DbDataSource.DataSourceItem;
+import org.zmail.cs.mailbox.Mailbox;
 
 public class MockDataSourceDbMapping extends DataSourceDbMapping {
 

@@ -755,7 +755,7 @@ ZmChatWidget.prototype._handleOnclickErrorDetails = function(msg) {
 	].join("");
 	var dialog = appCtxt.getMsgDialog();
 	dialog.reset();
-	dialog.setMessage(msgStr, DwtMessageDialog.CRITICAL_STYLE, ZmMsg.zimbraTitle);
+	dialog.setMessage(msgStr, DwtMessageDialog.CRITICAL_STYLE, ZmMsg.zmailTitle);
 	dialog.popup();
 };
 

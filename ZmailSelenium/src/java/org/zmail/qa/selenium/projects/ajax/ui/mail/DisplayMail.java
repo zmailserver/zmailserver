@@ -14,22 +14,22 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.ui.mail;
+package org.zmail.qa.selenium.projects.ajax.ui.mail;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 
-import com.zimbra.qa.selenium.framework.items.AttachmentItem;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.framework.util.staf.Stafpostqueue;
-import com.zimbra.qa.selenium.projects.ajax.ui.*;
+import org.zmail.qa.selenium.framework.items.AttachmentItem;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.framework.util.staf.Stafpostqueue;
+import org.zmail.qa.selenium.projects.ajax.ui.*;
 
 /**
  * The <code>DisplayMail<code> object defines a read-only view of a message
- * in the Zimbra Ajax client.
+ * in the Zmail Ajax client.
  * <p>
  * This class can be used to extract data from the message, such as To,
  * From, Subject, Received Date, message body.  Additionally, it can
@@ -39,8 +39,8 @@ import com.zimbra.qa.selenium.projects.ajax.ui.*;
  * Hover over objects, such as email or URL hover over, are encapsulated.
  * <p>
  * 
- * @author zimbra
- * @see http://wiki.zimbra.com/wiki/Testing:_Selenium:_ZimbraSelenium_Overview#Mail_Page
+ * @author zmail
+ * @see http://wiki.zmail.com/wiki/Testing:_Selenium:_ZmailSelenium_Overview#Mail_Page
  */
 public class DisplayMail extends AbsDisplay {
 
@@ -732,7 +732,7 @@ public class DisplayMail extends AbsDisplay {
 
 		} else if ( field == Field.Cc ) {
 			
-			locator = this.ContainerLocator + " tr[id$='_cc'] td[class~='LabelColValue'] span[id$='_com_zimbra_email'] span span";
+			locator = this.ContainerLocator + " tr[id$='_cc'] td[class~='LabelColValue'] span[id$='_org_zmail_email'] span span";
 			if ( !sIsElementPresent(locator) ) {
 				// no email zimlet case
 				locator = this.ContainerLocator + " tr[id$='_cc'] td[class~='LabelColValue']";
@@ -740,7 +740,7 @@ public class DisplayMail extends AbsDisplay {
 			
 		} else if ( field == Field.From ) {
 			
-			locator = this.ContainerLocator + " td[id$='_from'] span[id$='_com_zimbra_email'] span span";
+			locator = this.ContainerLocator + " td[id$='_from'] span[id$='_org_zmail_email'] span span";
 			if ( !sIsElementPresent(locator) ) {
 				// no email zimlet case
 				locator = this.ContainerLocator + " td[id$='_from']";
@@ -748,7 +748,7 @@ public class DisplayMail extends AbsDisplay {
 
 		} else if ( field == Field.OnBehalfOf ) {
 			
-			locator = this.ContainerLocator + " td[id$='_obo'] span[id$='_com_zimbra_email'] span span";
+			locator = this.ContainerLocator + " td[id$='_obo'] span[id$='_org_zmail_email'] span span";
 			if ( !sIsElementPresent(locator) ) {
 				// no email zimlet case
 				locator = this.ContainerLocator + " td[id$='_obo']";
@@ -756,7 +756,7 @@ public class DisplayMail extends AbsDisplay {
 
 		} else if ( field == Field.ResentFrom ) {
 			
-			locator = this.ContainerLocator + " td[id$='_bwo'] span[id$='_com_zimbra_email'] span";
+			locator = this.ContainerLocator + " td[id$='_bwo'] span[id$='_org_zmail_email'] span";
 			if ( !sIsElementPresent(locator) ) {
 				// no email zimlet case
 				locator = this.ContainerLocator + " td[id$='_bwo']";
@@ -768,7 +768,7 @@ public class DisplayMail extends AbsDisplay {
 
 		} else if ( field == Field.ReplyTo ) {
 			
-			locator = this.ContainerLocator + " tr[id$='_reply to'] td.LabelColValue span[id$='_com_zimbra_email'] span span";
+			locator = this.ContainerLocator + " tr[id$='_reply to'] td.LabelColValue span[id$='_org_zmail_email'] span span";
 			if ( !sIsElementPresent(locator) ) {
 				// no email zimlet case
 				locator = this.ContainerLocator + " tr[id$='_reply to'] td.LabelColValue";
@@ -802,7 +802,7 @@ public class DisplayMail extends AbsDisplay {
 
 		} else if ( field == Field.To ) {
 			
-			locator = this.ContainerLocator + " tr[id$='_to'] td[class='LabelColValue'] span[id$='_com_zimbra_email'] span span";
+			locator = this.ContainerLocator + " tr[id$='_to'] td[class='LabelColValue'] span[id$='_org_zmail_email'] span span";
 			if ( !sIsElementPresent(locator) ) {
 				// no email zimlet case
 				locator = this.ContainerLocator + " tr[id$='_to'] td[class='LabelColValue'] ";
@@ -846,7 +846,7 @@ public class DisplayMail extends AbsDisplay {
 		
 		if ( field == Field.From ) {
 			
-			locator = this.ContainerLocator + " td[id$='_from'] span[id$='_com_zimbra_email'] span";
+			locator = this.ContainerLocator + " td[id$='_from'] span[id$='_org_zmail_email'] span";
 
 		} else {
 			throw new HarnessException("Logic not defined for field="+ field);

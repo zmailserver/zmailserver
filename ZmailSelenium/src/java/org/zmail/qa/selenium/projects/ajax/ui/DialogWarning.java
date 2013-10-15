@@ -14,15 +14,15 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.ui;
+package org.zmail.qa.selenium.projects.ajax.ui;
 
-import com.zimbra.qa.selenium.framework.ui.AbsApplication;
-import com.zimbra.qa.selenium.framework.ui.AbsDialog;
-import com.zimbra.qa.selenium.framework.ui.AbsPage;
-import com.zimbra.qa.selenium.framework.ui.AbsTab;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.projects.ajax.ui.mail.FormMailNew;
+import org.zmail.qa.selenium.framework.ui.AbsApplication;
+import org.zmail.qa.selenium.framework.ui.AbsDialog;
+import org.zmail.qa.selenium.framework.ui.AbsPage;
+import org.zmail.qa.selenium.framework.ui.AbsTab;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.projects.ajax.ui.mail.FormMailNew;
 
 
 /**
@@ -53,10 +53,10 @@ public class DialogWarning extends AbsDialog {
 		
 		public static final DialogWarningID DeleteAppointment = new DialogWarningID("YesNo");
 
-		// See bug: http://bugzilla.zimbra.com/show_bug.cgi?id=63353
+		// See bug: http://bugzilla.zmail.com/show_bug.cgi?id=63353
 		public static final DialogWarningID SelectedTimeIsInPast = new DialogWarningID("ShowDelayPastDialog");
 		
-		// See http://bugzilla.zimbra.com/show_bug.cgi?id=64081
+		// See http://bugzilla.zmail.com/show_bug.cgi?id=64081
 		public static final DialogWarningID SendReadReceipt = new DialogWarningID("YesNoMsgDialog");;
 
 		public static final DialogWarningID QuickCommandConfirmDelete = new DialogWarningID("ZmQuickCommandConfirmation1");
@@ -119,7 +119,7 @@ public class DialogWarning extends AbsDialog {
 		String locator = null;
 		AbsPage page = null; 		// Does this ever result in a page being returned?
 
-		// See http://bugzilla.zimbra.com/show_bug.cgi?id=54560
+		// See http://bugzilla.zmail.com/show_bug.cgi?id=54560
 		// Need unique id's for the buttons
 		String buttonsTableLocator = "css=div[id='"+ MyDivId +"'] div[id$='_buttons']";
 

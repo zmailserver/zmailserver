@@ -17,11 +17,11 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.mobile.ui;
+package org.zmail.qa.selenium.projects.mobile.ui;
 
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
 
 
 /**
@@ -82,7 +82,7 @@ public class AppMobileClient extends AbsApplication {
 		return ("Mobile Client");
 	}
 
-	protected ZimbraAccount zSetActiveAcount(ZimbraAccount account) throws HarnessException {
+	protected ZmailAccount zSetActiveAcount(ZmailAccount account) throws HarnessException {
 		return (super.zSetActiveAcount(account));
 	}
 

@@ -14,18 +14,18 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.calendar.appointments.views.month.singleday;
+package org.zmail.qa.selenium.projects.ajax.tests.calendar.appointments.views.month.singleday;
 
 import java.util.*;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.core.Bugs;
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.*;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.calendar.*;
+import org.zmail.qa.selenium.framework.core.Bugs;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.*;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.calendar.*;
 
 
 public class DeleteAppointment extends AjaxCommonTest {
@@ -40,7 +40,7 @@ public class DeleteAppointment extends AjaxCommonTest {
 
 		// Make sure we are using an account with message view
 		super.startingAccountPreferences = new HashMap<String, String>() {{
-		    put("zimbraPrefCalendarInitialView", "month");
+		    put("zmailPrefCalendarInitialView", "month");
 		}};
 
 
@@ -53,7 +53,7 @@ public class DeleteAppointment extends AjaxCommonTest {
 		
 		// Create the appointment on the server
 		// Create the message data to be sent
-		String subject = "appointment" + ZimbraSeleniumProperties.getUniqueString();
+		String subject = "appointment" + ZmailSeleniumProperties.getUniqueString();
 		
 		AppointmentItem.createAppointmentSingleDay(
 				app.zGetActiveAccount(),
@@ -61,8 +61,8 @@ public class DeleteAppointment extends AjaxCommonTest {
 				120,
 				null,
 				subject,
-				"content" + ZimbraSeleniumProperties.getUniqueString(),
-				"location" + ZimbraSeleniumProperties.getUniqueString(),
+				"content" + ZmailSeleniumProperties.getUniqueString(),
+				"location" + ZmailSeleniumProperties.getUniqueString(),
 				null);
 
 		

@@ -174,7 +174,7 @@ UINT __stdcall ZShutdown(MSIHANDLE hInstall) {
 	ExitOnFailure(hr, "Failed to initialize");
 	WcaLog(LOGMSG_STANDARD, "Initialized.");
 
-	const char *subkey = "Software\\Zimbra\\Zimbra Desktop";
+	const char *subkey = "Software\\Zmail\\Zmail Desktop";
 	HKEY hKey;
 	char data_root[512];
 	char *zdctl_path = NULL;

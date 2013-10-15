@@ -107,15 +107,15 @@ function(account, now, isDragProxy) {
 			html[idx++] = "<td id=\"" + rowId + "_data_type_" + dwtId + "\" width=" + this._headerList[i]._width + ">";
 			switch(account.type) {
 				case ZaItem.ACCOUNT:
-					if(account.attrs[ZaAccount.A_zimbraIsAdminAccount]=="TRUE" ) {
+					if(account.attrs[ZaAccount.A_zmailIsAdminAccount]=="TRUE" ) {
 						html[idx++] = AjxImg.getImageHtml("AdminUser");
-					} else if (account.attrs[ZaAccount.A_zimbraIsDelegatedAdminAccount] == "TRUE") {
+					} else if (account.attrs[ZaAccount.A_zmailIsDelegatedAdminAccount] == "TRUE") {
 						html[idx++] = AjxImg.getImageHtml("DomainAdminUser");
-					} else if (account.attrs[ZaAccount.A_zimbraIsSystemAccount] == "TRUE") {
+					} else if (account.attrs[ZaAccount.A_zmailIsSystemAccount] == "TRUE") {
 						html[idx++] = AjxImg.getImageHtml("SpecialAccount");
-					} else if (account.attrs[ZaAccount.A_zimbraIsSystemResource] == "TRUE") {
+					} else if (account.attrs[ZaAccount.A_zmailIsSystemResource] == "TRUE") {
 						html[idx++] = AjxImg.getImageHtml("SystemResource");
-                    } else if (account.attrs[ZaAccount.A_zimbraIsExternalVirtualAccount] == "TRUE") {
+                    } else if (account.attrs[ZaAccount.A_zmailIsExternalVirtualAccount] == "TRUE") {
 						html[idx++] = AjxImg.getImageHtml("AccountExternalVirtual");
 					} else {
 						html[idx++] = AjxImg.getImageHtml("Account");
@@ -132,7 +132,7 @@ function(account, now, isDragProxy) {
 					html[idx++] = AjxImg.getImageHtml("AccountAlias");				
 				break;	
 				case ZaItem.RESOURCE:
-					if (account.attrs[ZaResource.A_zimbraCalResType] == ZaResource.RESOURCE_TYPE_LOCATION){
+					if (account.attrs[ZaResource.A_zmailCalResType] == ZaResource.RESOURCE_TYPE_LOCATION){
 						html[idx++] = AjxImg.getImageHtml("Location");
 					}else {//equipment or other resource types
 						html[idx++] = AjxImg.getImageHtml("Resource");
@@ -177,14 +177,14 @@ function(account, now, isDragProxy) {
 			}else if ( account.type == ZaItem.RESOURCE) {
 				status = ZaResource.getAccountStatusLabel(account.attrs[ZaAccount.A_accountStatus]);
 			}else if (account.type == ZaItem.DOMAIN) {
-				status =  ZaDomain._domainStatus(account.attrs[ZaDomain.A_zimbraDomainStatus]);
+				status =  ZaDomain._domainStatus(account.attrs[ZaDomain.A_zmailDomainStatus]);
 			}
 			html[idx++] = status;
 			html[idx++] = "</nobr></td>";		
-		}else if (field == ZaAccount.A_zimbraLastLogonTimestamp) {
+		}else if (field == ZaAccount.A_zmailLastLogonTimestamp) {
 			// display last login time for accounts only
 			html[idx++] = "<td id=\"" + rowId + "_data_lastlogontime_" + dwtId + "\" width=" + (AjxEnv.isIE ? IEWidth : this._headerList[i]._width) + "><nobr>";
-			html[idx++] = AjxStringUtil.htmlEncode(ZaAccount.getLastLoginTime(account.attrs[ZaAccount.A_zimbraLastLogonTimestamp]));
+			html[idx++] = AjxStringUtil.htmlEncode(ZaAccount.getLastLoginTime(account.attrs[ZaAccount.A_zmailLastLogonTimestamp]));
 			html[idx++] = "</nobr></td>";	
 		} else if (field == ZaAccount.A_description) {		
 			// description
@@ -214,7 +214,7 @@ function() {
 	headerList[i++] = new ZaListHeaderItem(ZaAccount.A_displayname, ZaMsg.ALV_DspName_col, null, "220px",  null, null, true, true);
 	
 	headerList[i++] = new ZaListHeaderItem(ZaAccount.A_accountStatus, ZaMsg.ALV_Status_col, null, "120px",  null, null, true, true);
-	headerList[i++] = new ZaListHeaderItem(ZaAccount.A_zimbraLastLogonTimestamp, ZaMsg.ALV_Last_Login, null, Dwt_Button_XFormItem.estimateMyWidth(ZaMsg.ALV_Last_Login, false, 0), null, null, true, true);
+	headerList[i++] = new ZaListHeaderItem(ZaAccount.A_zmailLastLogonTimestamp, ZaMsg.ALV_Last_Login, null, Dwt_Button_XFormItem.estimateMyWidth(ZaMsg.ALV_Last_Login, false, 0), null, null, true, true);
 	headerList[i++] = new ZaListHeaderItem(ZaAccount.A_description, ZaMsg.ALV_Description_col, null, "auto", null, null,true, true );
 	
 	return headerList;

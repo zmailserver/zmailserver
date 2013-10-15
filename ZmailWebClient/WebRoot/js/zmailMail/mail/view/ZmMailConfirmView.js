@@ -91,7 +91,7 @@ function() {
 
 ZmMailConfirmView.prototype.getTitle =
 function() {
-	return [ZmMsg.zimbraTitle, ZmMsg.messageSent].join(": ");
+	return [ZmMsg.zmailTitle, ZmMsg.messageSent].join(": ");
 };
 
 ZmMailConfirmView.prototype.getTabGroupMember = function() {

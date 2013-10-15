@@ -12,19 +12,19 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.offline;
+package org.zmail.cs.service.offline;
 
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.ZcsMailbox;
-import com.zimbra.cs.mailbox.OfflineMailboxManager;
-import com.zimbra.cs.mailbox.OfflineServiceException;
-import com.zimbra.cs.service.mail.ImportData;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.ZcsMailbox;
+import org.zmail.cs.mailbox.OfflineMailboxManager;
+import org.zmail.cs.mailbox.OfflineServiceException;
+import org.zmail.cs.service.mail.ImportData;
+import org.zmail.soap.ZmailSoapContext;
 
 public class OfflineImportData extends ImportData {
 
@@ -34,7 +34,7 @@ public class OfflineImportData extends ImportData {
         if (!(mmgr instanceof OfflineMailboxManager))
             return super.handle(request, context);
 
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Mailbox mbox = getRequestedMailbox(zsc);
         if (!(mbox instanceof ZcsMailbox))
             throw OfflineServiceException.MISCONFIGURED("incorrect mailbox class: " + mbox.getClass().getSimpleName());

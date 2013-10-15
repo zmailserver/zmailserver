@@ -14,7 +14,7 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimletConfig name="com_zimbra_photohelper" version="0.1">
+<zimletConfig name="org_zmail_photohelper" version="0.1">
     <global>
         <!-- photoLocatorURI Enter absolute url to the photo's url and replace string that points to photo name with "{photoFileName}".
             For example: http://www.mycompany.com/people?name=rrao to
@@ -24,7 +24,7 @@
          -->
         <property name="photoLocatorURI"></property>
 
-        <!--  Set this to true, if the photo url should use Zimbra's proxy servlet -->
+        <!--  Set this to true, if the photo url should use Zmail's proxy servlet -->
         <property name="useProxy">false</property>
     </global>
 </zimletConfig>

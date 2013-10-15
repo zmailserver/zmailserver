@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.briefcase.document;
+package org.zmail.qa.selenium.projects.ajax.tests.briefcase.document;
 
 import java.util.EnumMap;
 import java.util.HashMap;
@@ -22,25 +22,25 @@ import java.util.List;
 import java.util.regex.Pattern;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
-import com.zimbra.qa.selenium.framework.util.HtmlElement;
-import com.zimbra.qa.selenium.framework.items.DocumentItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem;
-import com.zimbra.qa.selenium.framework.items.FolderItem.SystemFolder;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.ui.Shortcut;
-import com.zimbra.qa.selenium.framework.util.GeneralUtility;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.SleepUtil;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraAccount;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.ajax.core.FeatureBriefcaseTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.DialogTag;
-import com.zimbra.qa.selenium.projects.ajax.ui.briefcase.DocumentBriefcaseNew;
-import com.zimbra.qa.selenium.projects.ajax.ui.briefcase.DocumentBriefcaseOpen;
-import com.zimbra.qa.selenium.projects.ajax.ui.briefcase.PageBriefcase;
-import com.zimbra.qa.selenium.projects.ajax.ui.briefcase.TreeBriefcase;
+import org.zmail.qa.selenium.framework.util.HtmlElement;
+import org.zmail.qa.selenium.framework.items.DocumentItem;
+import org.zmail.qa.selenium.framework.items.FolderItem;
+import org.zmail.qa.selenium.framework.items.FolderItem.SystemFolder;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.ui.Shortcut;
+import org.zmail.qa.selenium.framework.util.GeneralUtility;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.SleepUtil;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailAccount;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.ajax.core.FeatureBriefcaseTest;
+import org.zmail.qa.selenium.projects.ajax.ui.DialogTag;
+import org.zmail.qa.selenium.projects.ajax.ui.briefcase.DocumentBriefcaseNew;
+import org.zmail.qa.selenium.projects.ajax.ui.briefcase.DocumentBriefcaseOpen;
+import org.zmail.qa.selenium.projects.ajax.ui.briefcase.PageBriefcase;
+import org.zmail.qa.selenium.projects.ajax.ui.briefcase.TreeBriefcase;
 
 public class CreateDocument extends FeatureBriefcaseTest {
 
@@ -49,12 +49,12 @@ public class CreateDocument extends FeatureBriefcaseTest {
 
 		super.startingPage = app.zPageBriefcase;
 
-		super.startingAccountPreferences.put("zimbraPrefBriefcaseReadingPaneLocation", "bottom");				
+		super.startingAccountPreferences.put("zmailPrefBriefcaseReadingPaneLocation", "bottom");				
 	}
 	
 	@Test(description = "Create document through GUI - verify through GUI", groups = { "sanity" })
 	public void CreateDocument_01() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
@@ -97,7 +97,7 @@ public class CreateDocument extends FeatureBriefcaseTest {
 		// Click on open in a separate window icon in toolbar
 		DocumentBriefcaseOpen documentBriefcaseOpen;
 
-		if (ZimbraSeleniumProperties.zimbraGetVersionString().contains("7.1."))
+		if (ZmailSeleniumProperties.zmailGetVersionString().contains("7.1."))
 			documentBriefcaseOpen = (DocumentBriefcaseOpen) app.zPageBriefcase
 					.zToolbarPressButton(Button.B_OPEN_IN_SEPARATE_WINDOW,
 							docItem);
@@ -135,7 +135,7 @@ public class CreateDocument extends FeatureBriefcaseTest {
 
 	@Test(description = "Create document using New menu pulldown menu - verify through SOAP & RestUtil", groups = { "functional" })
 	public void CreateDocument_02() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
@@ -191,7 +191,7 @@ public class CreateDocument extends FeatureBriefcaseTest {
 
 		// Search for created document
 		account
-				.soapSend("<SearchRequest xmlns='urn:zimbraMail' types='document'>"
+				.soapSend("<SearchRequest xmlns='urn:zmailMail' types='document'>"
 						+ "<query>" + docName + "</query>" + "</SearchRequest>");
 
 		String name = account.soapSelectValue("//mail:doc", "name");
@@ -217,7 +217,7 @@ public class CreateDocument extends FeatureBriefcaseTest {
 
 	@Test(description = "Create document using keyboard shortcut - verify through SOAP & RestUtil", groups = { "functional" })
 	public void CreateDocument_03() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
@@ -269,7 +269,7 @@ public class CreateDocument extends FeatureBriefcaseTest {
 
 		// Search for created document
 		account
-				.soapSend("<SearchRequest xmlns='urn:zimbraMail' types='document'>"
+				.soapSend("<SearchRequest xmlns='urn:zmailMail' types='document'>"
 						+ "<query>" + docName + "</query>" + "</SearchRequest>");
 
 		String name = account.soapSelectValue(
@@ -296,7 +296,7 @@ public class CreateDocument extends FeatureBriefcaseTest {
 
 	@Test(description = "Create document through GUI - verify through GUI", groups = { "webdriver" })
 	public void CreateDocument_04() throws HarnessException {
-		ZimbraAccount account = app.zGetActiveAccount();
+		ZmailAccount account = app.zGetActiveAccount();
 
 		FolderItem briefcaseFolder = FolderItem.importFromSOAP(account,
 				SystemFolder.Briefcase);
@@ -325,7 +325,7 @@ public class CreateDocument extends FeatureBriefcaseTest {
 		//ZAssert.assertStringContains("ccc", "vvv","Testing failure");	 
 		//app.zPageBriefcase.fireEvent(TreeBriefcase.Locators.briefcaseTreeView+"16]", "focus");
 		
-		String tagName = "tag" + ZimbraSeleniumProperties.getUniqueString();
+		String tagName = "tag" + ZmailSeleniumProperties.getUniqueString();
 		Shortcut shortcut = Shortcut.S_NEWTAG;
 		
 		app.zPageBriefcase.zSelectWindow(PageBriefcase.pageTitle);
@@ -386,7 +386,7 @@ public class CreateDocument extends FeatureBriefcaseTest {
 		docText = "";
 		docItem.setDocText(docText);
 		
-		if (ZimbraSeleniumProperties.zimbraGetVersionString().contains("8."))
+		if (ZmailSeleniumProperties.zmailGetVersionString().contains("8."))
 			documentBriefcaseOpen = (DocumentBriefcaseOpen) app.zPageBriefcase
 					.zToolbarPressPulldown(Button.B_ACTIONS,
 							Button.B_LAUNCH_IN_SEPARATE_WINDOW, docItem);
@@ -431,7 +431,7 @@ public class CreateDocument extends FeatureBriefcaseTest {
 
 		// Check if the window is still open
 		List<String> windows = app.zPageBriefcase.sGetAllWindowNames();
-		if (!(ZimbraSeleniumProperties.isWebDriver()||ZimbraSeleniumProperties.isWebDriverBackedSelenium())){
+		if (!(ZmailSeleniumProperties.isWebDriver()||ZmailSeleniumProperties.isWebDriverBackedSelenium())){
 			for (String window : windows) {
 				if (!window.isEmpty() && !window.contains("null")
 					&& !window.contains(PageBriefcase.pageTitle)

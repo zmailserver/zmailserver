@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.kabuki.tools.tz;
+package org.zmail.kabuki.tools.tz;
 
 import java.io.*;
 import java.util.*;

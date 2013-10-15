@@ -48,7 +48,7 @@ public class WebServiceClient
         HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(this.Url);
 
         webRequest.ContentType = "application/soap+xml; charset=\"utf-8\"";
-        webRequest.UserAgent = "ZimbraMigration" + "/" + ZimbraValues.GetZimbraValues().ClientVersion; 
+        webRequest.UserAgent = "ZmailMigration" + "/" + ZmailValues.GetZmailValues().ClientVersion; 
         webRequest.Method = "POST";
         webRequest.Proxy = null;
         return webRequest;
@@ -122,7 +122,7 @@ public class WebServiceClient
         HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(this.Url);
 
         webRequest.CookieContainer = cookieContainer;
-        webRequest.UserAgent = "ZimbraMigration" + "/" + ZimbraValues.GetZimbraValues().ClientVersion;
+        webRequest.UserAgent = "ZmailMigration" + "/" + ZmailValues.GetZmailValues().ClientVersion;
         webRequest.Method = "POST";
         webRequest.Proxy = null;
         return webRequest;
@@ -185,7 +185,7 @@ public class WebServiceClient
         string contentTransfer = "Content-Transfer-Encoding: binary" + Environment.NewLine +
             Environment.NewLine;
 
-        if (mode == ZimbraAPI.STRING_MODE)      // easier -- all text in the request
+        if (mode == ZmailAPI.STRING_MODE)      // easier -- all text in the request
         {
             try
             {

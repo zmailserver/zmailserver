@@ -15,7 +15,7 @@
  * ***** END LICENSE BLOCK *****
  */
 #include "common.h"
-#include "Zimbra/Zimbra.h"
+#include "Zmail/Zmail.h"
 
 int main(int argc, TCHAR *argv[])
 {

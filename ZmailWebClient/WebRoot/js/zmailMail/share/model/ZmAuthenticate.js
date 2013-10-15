@@ -57,11 +57,11 @@ function(uname, pword, callback) {
 	var command = new ZmCsfeCommand();
 	var soapDoc;
 	if (!ZmAuthenticate._isAdmin) {
-		soapDoc = AjxSoapDoc.create("AuthRequest", "urn:zimbraAccount");
+		soapDoc = AjxSoapDoc.create("AuthRequest", "urn:zmailAccount");
 		var el = soapDoc.set("account", uname);
 		el.setAttribute("by", "name");
 	} else {
-		soapDoc = AjxSoapDoc.create("AuthRequest", "urn:zimbraAdmin", null);
+		soapDoc = AjxSoapDoc.create("AuthRequest", "urn:zmailAdmin", null);
 		soapDoc.set("name", uname);
 	}
 	soapDoc.set("virtualHost", location.hostname);	

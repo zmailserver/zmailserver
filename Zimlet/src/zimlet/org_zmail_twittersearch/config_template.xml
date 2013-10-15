@@ -14,7 +14,7 @@
  *
  * ***** END LICENSE BLOCK *****
 -->
-<zimletConfig name="com_zimbra_twittersearch" version="0.2">
+<zimletConfig name="org_zmail_twittersearch" version="0.2">
     <global>
         <property name="allowedDomains">*.twitter.com,twitter.com</property>
     </global>

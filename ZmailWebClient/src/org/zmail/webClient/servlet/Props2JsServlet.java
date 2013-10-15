@@ -13,16 +13,16 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.webClient.servlet;
+package org.zmail.webClient.servlet;
 
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.util.ZmailLog;
 
 import java.io.*;
 import java.util.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
-public class Props2JsServlet extends com.zimbra.kabuki.servlets.Props2JsServlet {
+public class Props2JsServlet extends org.zmail.kabuki.servlets.Props2JsServlet {
 
 	//
 	// Constants
@@ -47,7 +47,7 @@ public class Props2JsServlet extends com.zimbra.kabuki.servlets.Props2JsServlet 
 	}
 
 	//
-	// com.zimbra.kabuki.servlets.Props2JsServlet methods
+	// org.zmail.kabuki.servlets.Props2JsServlet methods
 	//
 
 	protected String getRequestURI(HttpServletRequest req) {
@@ -63,27 +63,27 @@ public class Props2JsServlet extends com.zimbra.kabuki.servlets.Props2JsServlet 
 	};
 
 	//
-	// com.zimbra.kabuki.servlets.Props2JsServlet methods
+	// org.zmail.kabuki.servlets.Props2JsServlet methods
 	//
 
 	protected boolean isWarnEnabled() {
-		return ZimbraLog.webclient.isWarnEnabled();
+		return ZmailLog.webclient.isWarnEnabled();
 	}
 	protected boolean isErrorEnabled() {
-		return ZimbraLog.webclient.isErrorEnabled();
+		return ZmailLog.webclient.isErrorEnabled();
 	}
 	protected boolean isDebugEnabled() {
-		return ZimbraLog.webclient.isDebugEnabled();
+		return ZmailLog.webclient.isDebugEnabled();
 	}
 
 	protected void warn(String message) {
-		ZimbraLog.webclient.warn(message);
+		ZmailLog.webclient.warn(message);
 	}
 	protected void error(String message) {
-		ZimbraLog.webclient.error(message);
+		ZmailLog.webclient.error(message);
 	}
 	protected void debug(String message) {
-		ZimbraLog.webclient.debug(message);
+		ZmailLog.webclient.debug(message);
 	}
 
 } // class Props2JsServlet

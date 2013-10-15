@@ -17,25 +17,25 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.desktop.ui.mail;
+package org.zmail.qa.selenium.projects.desktop.ui.mail;
 
 import java.util.*;
 
-import com.zimbra.qa.selenium.framework.items.*;
-import com.zimbra.qa.selenium.framework.items.ContextMenuItem.CONTEXT_MENU_ITEM_NAME;
-import com.zimbra.qa.selenium.framework.ui.*;
-import com.zimbra.qa.selenium.framework.util.GeneralUtility;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.framework.util.GeneralUtility.WAIT_FOR_OPERAND;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties.AppType;
-import com.zimbra.qa.selenium.framework.util.staf.Stafpostqueue;
-import com.zimbra.qa.selenium.projects.desktop.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.desktop.ui.AppAjaxClient;
-import com.zimbra.qa.selenium.projects.desktop.ui.ContextMenu;
-import com.zimbra.qa.selenium.projects.desktop.ui.DialogMove;
-import com.zimbra.qa.selenium.projects.desktop.ui.DialogTag;
-import com.zimbra.qa.selenium.projects.desktop.ui.PageMain;
+import org.zmail.qa.selenium.framework.items.*;
+import org.zmail.qa.selenium.framework.items.ContextMenuItem.CONTEXT_MENU_ITEM_NAME;
+import org.zmail.qa.selenium.framework.ui.*;
+import org.zmail.qa.selenium.framework.util.GeneralUtility;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.framework.util.GeneralUtility.WAIT_FOR_OPERAND;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties.AppType;
+import org.zmail.qa.selenium.framework.util.staf.Stafpostqueue;
+import org.zmail.qa.selenium.projects.desktop.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.desktop.ui.AppAjaxClient;
+import org.zmail.qa.selenium.projects.desktop.ui.ContextMenu;
+import org.zmail.qa.selenium.projects.desktop.ui.DialogMove;
+import org.zmail.qa.selenium.projects.desktop.ui.DialogTag;
+import org.zmail.qa.selenium.projects.desktop.ui.PageMain;
 
 /**
  * @author Matt Rhoades
@@ -184,7 +184,7 @@ public class PageMail extends AbsTab {
 		public static final String zTVRows			= "zl__TV-main__rows";
 
 		public static class CONTEXT_MENU {
-			// TODO: Until https://bugzilla.zimbra.com/show_bug.cgi?id=56273 is fixed, ContextMenuItem will be defined using the text content
+			// TODO: Until https://bugzilla.zmail.com/show_bug.cgi?id=56273 is fixed, ContextMenuItem will be defined using the text content
 			public static String stringToReplace = "<ITEM_NAME>";
 			public static final String zDesktopContextMenuItems = new StringBuffer("css=table[class$='MenuTable'] td[id$='_title']:contains(")
 			.append(stringToReplace).append(")").toString();
@@ -464,7 +464,7 @@ public class PageMail extends AbsTab {
 		// If the app is busy, wait for it to become active
 		this.zWaitForBusyOverlay();
 
-		if (ZimbraSeleniumProperties.getAppType() == AppType.DESKTOP &&
+		if (ZmailSeleniumProperties.getAppType() == AppType.DESKTOP &&
 				button == Button.B_GETMAIL) {
 
 			Stafpostqueue sp = new Stafpostqueue();
@@ -910,7 +910,7 @@ public class PageMail extends AbsTab {
 
 	/**
 	 * This method is meant for synching and waiting for new email especially for
-	 * non-Zimbra account since there is no control/indicator of when the new email will
+	 * non-Zmail account since there is no control/indicator of when the new email will
 	 * arrive
 	 * @param subject Subject of email to be searched for
 	 * @throws HarnessException
@@ -1171,7 +1171,7 @@ public class PageMail extends AbsTab {
 			}
 		} else if (action == Action.A_LEFTCLICK) {
 			if (option == Button.B_TREE_NEWFOLDER) {
-				if (ZimbraSeleniumProperties.getAppType() == AppType.AJAX) {
+				if (ZmailSeleniumProperties.getAppType() == AppType.AJAX) {
 					if (((AppAjaxClient)MyApplication).zTreeMail.isCollapsed()) {
 						// Expand it
 						((AppAjaxClient)MyApplication).zTreeMail.zClick(
@@ -1308,7 +1308,7 @@ public class PageMail extends AbsTab {
 			} else if (option == Button.B_TREE_NEWFOLDER) {
 
 				String treeItemLocator = null;
-				if (ZimbraSeleniumProperties.getAppType() == AppType.DESKTOP) {
+				if (ZmailSeleniumProperties.getAppType() == AppType.DESKTOP) {
 					treeItemLocator = TreeMail.Locators.zTreeItems.replace(TreeMail.stringToReplace,
 							AjaxCommonTest.defaultAccountName);
 				} else {

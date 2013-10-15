@@ -13,7 +13,7 @@
 # basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
 # ***** END LICENSE BLOCK *****
 
-package Zimbra::Util::LDAP; 
+package Zmail::Util::LDAP; 
 use strict;
 use Net::LDAP;
 
@@ -25,7 +25,7 @@ sub doLdap() {
   my $rc=0;
   my $real_master=0;
   my ($dn,$ldap_key);
-  my $ldap = Net::LDAP->new('ldapi://%2fopt%2fzimbra%2fopenldap%2fvar%2frun%2fldapi/') or die "$@";
+  my $ldap = Net::LDAP->new('ldapi://%2fopt%2fzmail%2fopenldap%2fvar%2frun%2fldapi/') or die "$@";
   my $mesg = $ldap->bind("cn=config", password=>"$pw");
   if($mesg->code) {
     main::logMsg(2,"LDAP: Failed to bind");

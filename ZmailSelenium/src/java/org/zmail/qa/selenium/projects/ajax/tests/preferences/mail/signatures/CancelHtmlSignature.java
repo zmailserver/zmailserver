@@ -14,21 +14,21 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.selenium.projects.ajax.tests.preferences.mail.signatures;
+package org.zmail.qa.selenium.projects.ajax.tests.preferences.mail.signatures;
 
 import org.testng.annotations.Test;
 
-import com.zimbra.qa.selenium.framework.ui.AbsDialog;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.ZAssert;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.projects.ajax.core.AjaxCommonTest;
-import com.zimbra.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
-import com.zimbra.qa.selenium.projects.ajax.ui.preferences.signature.FormSignatureNew;
-import com.zimbra.qa.selenium.projects.ajax.ui.preferences.signature.PageSignature;
-import com.zimbra.qa.selenium.projects.ajax.ui.preferences.signature.FormSignatureNew.Field;
+import org.zmail.qa.selenium.framework.ui.AbsDialog;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.ZAssert;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.projects.ajax.core.AjaxCommonTest;
+import org.zmail.qa.selenium.projects.ajax.ui.preferences.TreePreferences.TreeItem;
+import org.zmail.qa.selenium.projects.ajax.ui.preferences.signature.FormSignatureNew;
+import org.zmail.qa.selenium.projects.ajax.ui.preferences.signature.PageSignature;
+import org.zmail.qa.selenium.projects.ajax.ui.preferences.signature.FormSignatureNew.Field;
 
 public class CancelHtmlSignature extends AjaxCommonTest{
 	public CancelHtmlSignature() throws HarnessException {
@@ -39,8 +39,8 @@ public class CancelHtmlSignature extends AjaxCommonTest{
 	@Test(description = "Cancel text signature through GUI", groups = { "smoke" })
 	public void CancelHtmlSignature_01() throws HarnessException {
 
-		String sigName = "signame" + ZimbraSeleniumProperties.getUniqueString();
-		String sigBody = "sigbody" + ZimbraSeleniumProperties.getUniqueString();
+		String sigName = "signame" + ZmailSeleniumProperties.getUniqueString();
+		String sigBody = "sigbody" + ZmailSeleniumProperties.getUniqueString();
 
 		//Click on signature from left pane
 		app.zTreePreferences.zTreeItem(Action.A_LEFTCLICK,TreeItem.MailSignatures);

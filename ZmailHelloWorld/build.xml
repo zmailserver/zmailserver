@@ -1,8 +1,8 @@
-<project name="ZimbraHelloWorldExtension" default="deploy">
+<project name="ZmailHelloWorldExtension" default="deploy">
     <import file="../ant-global.xml" />
     
-	<property name="jar.file" value="zimbrahelloworld.jar" />
-	<property name="extension.deploy.dir" location="${zimbra.home.dir}/lib/ext/zimbrahelloworld"/>
+	<property name="jar.file" value="zmailhelloworld.jar" />
+	<property name="extension.deploy.dir" location="${zmail.home.dir}/lib/ext/zmailhelloworld"/>
 	
 	<path id="all.java.path">
 		<pathelement location="${src.java.dir}" />
@@ -15,18 +15,18 @@
 
 	<property environment="env"/>
 	
-	<!-- set up dependency on ZimbraServer -->
-	<condition property="zimbraServer.dir" value="${env.ZIMBRASERVER_DIR}">
+	<!-- set up dependency on ZmailServer -->
+	<condition property="zmailServer.dir" value="${env.ZIMBRASERVER_DIR}">
 	    <isset property="env.ZIMBRASERVER_DIR" />
 	</condition>	
-	<condition property="zimbraServer.dir" value="../ZimbraServer">
+	<condition property="zmailServer.dir" value="../ZmailServer">
 	    <not><isset property="env.ZIMBRASERVER_DIR"/></not>
 	</condition>	
 
 	<path id="class.path">
 		<pathelement location="${common.classes.dir}" />
 		<pathelement location="${build.classes.dir}" />
-		<pathelement location="${zimbraServer.dir}/build/classes"/>
+		<pathelement location="${zmailServer.dir}/build/classes"/>
 		<fileset dir="${common.dir}/jars">
 			<include name="**/*.jar"/>
 		</fileset>
@@ -40,19 +40,19 @@
 	</target>
 
     <target name="jar" depends="compile" description="Creates the jar file">
-        <antcall target="zimbra-jar">
-            <param name="implementation.title" value="Hello World Zimbra server extension"/>
-            <param name="zimbra.extension.class" value="com.zimbra.extension.ZimbraHelloWorldExtension"/>
+        <antcall target="zmail-jar">
+            <param name="implementation.title" value="Hello World Zmail server extension"/>
+            <param name="zmail.extension.class" value="org.zmail.extension.ZmailHelloWorldExtension"/>
         </antcall>
     </target>
 
 	<!-- deploy the extension -->
 	<target name="deploy" depends="jar" description="Deploy the extension">
-		<ant dir="${zimbraServer.dir}" target="stop-jetty" inheritAll="false"/>
+		<ant dir="${zmailServer.dir}" target="stop-jetty" inheritAll="false"/>
 		<copy todir="${extension.deploy.dir}">
 			<fileset dir="${build.dir}" includes="${jar.file}" />
 		</copy>
-		<ant dir="${zimbraServer.dir}" target="start-jetty" inheritAll="false"/>
+		<ant dir="${zmailServer.dir}" target="start-jetty" inheritAll="false"/>
 	</target>
 	
 	<target name="clean" description="Removes any temporary files">

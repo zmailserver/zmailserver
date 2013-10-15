@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.db;
+package org.zmail.cs.db;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,11 +24,11 @@ import org.apache.commons.dbcp.PoolableConnectionFactory;
 import org.apache.commons.dbcp.PoolingDataSource;
 import org.apache.commons.pool.impl.GenericObjectPool;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.db.Db.Capability;
-import com.zimbra.cs.db.DbPool.DbConnection;
-import com.zimbra.cs.db.DbPool.PoolConfig;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.db.Db.Capability;
+import org.zmail.cs.db.DbPool.DbConnection;
+import org.zmail.cs.db.DbPool.PoolConfig;
 
 
 /**
@@ -69,7 +69,7 @@ public class OfflineDbPool {
                     dbconn.close();
                 }
             } catch (SQLException e2) {
-                ZimbraLog.sqltrace.warn("DB connection close caught exception", e);
+                ZmailLog.sqltrace.warn("DB connection close caught exception", e);
             }
             throw ServiceException.FAILURE("getting database connection", e);
         }
@@ -80,9 +80,9 @@ public class OfflineDbPool {
         PoolConfig pconfig = Db.getInstance().getPoolConfig();
         int poolSize = Db.supports(Capability.ROW_LEVEL_LOCKING) ? pconfig.mPoolSize : 1;
         //if no row lock, we need serial access to the underlying db file
-        //still need external synchronization for now since other connections to zimbra.db can occur through DbPool
+        //still need external synchronization for now since other connections to zmail.db can occur through DbPool
         mConnectionPool = new GenericObjectPool(null, poolSize, GenericObjectPool.WHEN_EXHAUSTED_BLOCK, -1, poolSize);
-        ConnectionFactory cfac = ZimbraConnectionFactory.getConnectionFactory(pconfig);
+        ConnectionFactory cfac = ZmailConnectionFactory.getConnectionFactory(pconfig);
         boolean defAutoCommit = false, defReadOnly = false;
         new PoolableConnectionFactory(cfac, mConnectionPool, null, null, defReadOnly, defAutoCommit);
         try {
@@ -91,7 +91,7 @@ public class OfflineDbPool {
             Db.getInstance().startup(pds, pconfig.mPoolSize);
             mDataSource = pds;
         } catch (SQLException e) {
-            ZimbraLog.system.error("failed to initialize offline db pool", e);
+            ZmailLog.system.error("failed to initialize offline db pool", e);
         }
     }
 

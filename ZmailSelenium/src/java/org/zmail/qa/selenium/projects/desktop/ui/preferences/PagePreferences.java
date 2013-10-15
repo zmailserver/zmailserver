@@ -17,19 +17,19 @@
 /**
  * 
  */
-package com.zimbra.qa.selenium.projects.desktop.ui.preferences;
+package org.zmail.qa.selenium.projects.desktop.ui.preferences;
 
-import com.zimbra.qa.selenium.framework.ui.AbsApplication;
-import com.zimbra.qa.selenium.framework.ui.AbsPage;
-import com.zimbra.qa.selenium.framework.ui.AbsTab;
-import com.zimbra.qa.selenium.framework.ui.Action;
-import com.zimbra.qa.selenium.framework.ui.Button;
-import com.zimbra.qa.selenium.framework.util.HarnessException;
-import com.zimbra.qa.selenium.framework.util.SleepUtil;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties;
-import com.zimbra.qa.selenium.framework.util.ZimbraSeleniumProperties.AppType;
-import com.zimbra.qa.selenium.projects.desktop.ui.AppAjaxClient;
-import com.zimbra.qa.selenium.projects.desktop.ui.PageMain;
+import org.zmail.qa.selenium.framework.ui.AbsApplication;
+import org.zmail.qa.selenium.framework.ui.AbsPage;
+import org.zmail.qa.selenium.framework.ui.AbsTab;
+import org.zmail.qa.selenium.framework.ui.Action;
+import org.zmail.qa.selenium.framework.ui.Button;
+import org.zmail.qa.selenium.framework.util.HarnessException;
+import org.zmail.qa.selenium.framework.util.SleepUtil;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties;
+import org.zmail.qa.selenium.framework.util.ZmailSeleniumProperties.AppType;
+import org.zmail.qa.selenium.projects.desktop.ui.AppAjaxClient;
+import org.zmail.qa.selenium.projects.desktop.ui.PageMain;
 
 
 /**
@@ -85,7 +85,7 @@ public class PagePreferences extends AbsTab {
 		
 		// If the "folders" tree is visible, then mail is active
 		String locator = null;
-		if (ZimbraSeleniumProperties.getAppType() == AppType.DESKTOP) {
+		if (ZmailSeleniumProperties.getAppType() == AppType.DESKTOP) {
 		   locator = "css=div[id='zov__local@host.local:main_Options']";
 		} else {
 		   locator = "xpath=//div[@id='zov__main_Options']";
@@ -201,15 +201,15 @@ public class PagePreferences extends AbsTab {
 
 		String locator = null;
 		
-		if ( preference.equals("zimbraPrefIncludeSpamInSearch")) {
+		if ( preference.equals("zmailPrefIncludeSpamInSearch")) {
 			
 			locator = "//input[contains(@id,'_SEARCH_INCLUDES_SPAM')]";
 
-		} else if (preference.equals("zimbraPrefIncludeTrashInSearch")) {
+		} else if (preference.equals("zmailPrefIncludeTrashInSearch")) {
 			
 			locator = "//input[contains(@id,'_SEARCH_INCLUDES_TRASH')]";
 
-		} else if (preference.equals("zimbraPrefShowSearchString")) {
+		} else if (preference.equals("zmailPrefShowSearchString")) {
 
 			locator = "//input[contains(@id,'_SHOW_SEARCH_STRING')]";
 

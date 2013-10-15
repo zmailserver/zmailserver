@@ -44,7 +44,7 @@ LinkedInZimletOAuth.prototype.showOAuthDialog = function() {
 	this._oauthAccessTokenResponse = [];
 	this._oauthRequestResponse = [];
 	if (this._getPinDialog) {
-		document.getElementById("com_zimbra_linkedin_pin_field").value = "";
+		document.getElementById("org_zmail_linkedin_pin_field").value = "";
 		this._getPinDialog.popup();
 		return;
 	}
@@ -74,13 +74,13 @@ function() {
 		step7: this.zimlet.getMessage("step7"),
 		stepNotes: this.zimlet.getMessage("stepNotes")
 	};
-	return AjxTemplate.expand("com_zimbra_linkedin.templates.LinkedIn#OAuthDialogView", subs);
+	return AjxTemplate.expand("org_zmail_linkedin.templates.LinkedIn#OAuthDialogView", subs);
 };
 
 LinkedInZimletOAuth.prototype._okgetPinBtnListener =
 function() {
 
-	var pin = document.getElementById("com_zimbra_linkedin_pin_field").value;
+	var pin = document.getElementById("org_zmail_linkedin_pin_field").value;
 	pin = AjxStringUtil.trim(pin);
 	if (pin == "" || pin.length > 7) {
 		var transitions = [ ZmToast.FADE_IN, ZmToast.PAUSE, ZmToast.PAUSE,  ZmToast.FADE_OUT ];

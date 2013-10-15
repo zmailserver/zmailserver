@@ -15,13 +15,13 @@
 <%@ tag body-content="empty" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="com.zimbra.i18n" %>
-<%@ taglib prefix="rest" uri="com.zimbra.restclient" %>
-<%@ taglib prefix="app" uri="com.zimbra.htmlclient" %>
-<%@ taglib prefix="zm" uri="com.zimbra.zm" %>
+<%@ taglib prefix="fmt" uri="org.zmail.i18n" %>
+<%@ taglib prefix="rest" uri="org.zmail.restclient" %>
+<%@ taglib prefix="app" uri="org.zmail.htmlclient" %>
+<%@ taglib prefix="zm" uri="org.zmail.zm" %>
 
 <rest:handleError>
-    <zm:getItemInfoJSON var="fileInfoJSON" authtoken="${requestScope.zimbra_authToken}" id="${requestScope.zimbra_target_account_id}:${requestScope.zimbra_target_item_id}"/>
+    <zm:getItemInfoJSON var="fileInfoJSON" authtoken="${requestScope.zmail_authToken}" id="${requestScope.zmail_target_account_id}:${requestScope.zmail_target_item_id}"/>
 <c:if test="${not empty param.dev and param.dev eq '1'}">
     <c:set var="mode" value="mjsf" scope="request"/>
     <c:set var="gzip" value="false" scope="request"/>
@@ -62,14 +62,14 @@
     </c:otherwise>
 </c:choose>
 <fmt:getLocale var="locale"/>
-<c:set var="localeId" value="${not empty param.localeId ? param.localeId : (not empty requestScope.zimbra_target_account_prefLocale ? requestScope.zimbra_target_account_prefLocale : locale)}"/>    
+<c:set var="localeId" value="${not empty param.localeId ? param.localeId : (not empty requestScope.zmail_target_account_prefLocale ? requestScope.zmail_target_account_prefLocale : locale)}"/>    
 </rest:handleError>
 <head>
 <c:set value="/img" var="iconPath" scope="request"/>
 <c:url var='cssurl' value='/css/images,common,dwt,msgview,login,zm,spellcheck,skin,presentation,slides.css'>
     <c:param name="client"	value="standard" />
     <c:param name="skin"	value="${skin}" />
-    <c:param name="v"		value="${initParam.zimbraCacheBusterVersion}" />
+    <c:param name="v"		value="${initParam.zmailCacheBusterVersion}" />
 </c:url>
 <link rel="stylesheet" type="text/css" href="${cssurl}" />
 
@@ -86,7 +86,7 @@
 <script type="text/javascript">
     AjxPackage.setBasePath("${pageContext.request.contextPath}/js");
     AjxPackage.setExtension("_all.js");
-    AjxPackage.setQueryString("v=${initParam.zimbraCacheBusterVersion}");
+    AjxPackage.setQueryString("v=${initParam.zmailCacheBusterVersion}");
 
     AjxTemplate.setBasePath("${pageContext.request.contextPath}/templates");
     AjxTemplate.setExtension(".template.js");
@@ -177,7 +177,7 @@
 
         window.onresize = _resize;
 
-        window.fileInfo = {name: 'Untitled', folderId: ZmOrganizer.ID_BRIEFCASE, contentType: 'application/x-zimbra-slides'};
+        window.fileInfo = {name: 'Untitled', folderId: ZmOrganizer.ID_BRIEFCASE, contentType: 'application/x-zmail-slides'};
 
         var itemInfo = ${fileInfoJSON};
         itemInfo = itemInfo.Body && itemInfo.Body.GetItemResponse;

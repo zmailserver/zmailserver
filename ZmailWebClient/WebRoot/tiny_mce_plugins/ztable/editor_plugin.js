@@ -230,8 +230,8 @@
 		getInfo : function() {
 			return {
 				longname : 'Ztable plugin for table controls',
-				author : 'Zimbra Inc.,',
-				authorurl : 'http://www.zimbra.com',
+				author : 'Zmail Inc.,',
+				authorurl : 'http://www.zmail.com',
 				version : tinymce.majorVersion + "." + tinymce.minorVersion
 			};
 		}
