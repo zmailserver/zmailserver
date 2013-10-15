@@ -2,12 +2,12 @@
  * ***** BEGIN LICENSE BLOCK *****
  * Zimbra Collaboration Suite Server
  * Copyright (C) 2008, 2009, 2010, 2011, 2012 VMware, Inc.
- * 
+ *
  * The contents of this file are subject to the Zimbra Public License
  * Version 1.3 ("License"); you may not use this file except in
  * compliance with the License.  You may obtain a copy of the License at
  * http://www.zimbra.com/license.
- * 
+ *
  * Software distributed under the License is distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
@@ -239,10 +239,10 @@ public class FullInstanceData extends InstanceData {
         int seq = (int) meta.getLong(FN_SEQUENCE);
         long dtStamp = meta.getLong(FN_DTSTAMP);
 
-        ZOrganizer org = null;
+        ZOrganizer orga = null;
         Metadata metaOrg = meta.getMap(FN_ORGANIZER, true);
         if (metaOrg != null)
-            org = new ZOrganizer(metaOrg);
+            orga = new ZOrganizer(metaOrg);
         Boolean isOrg = null;
         if (meta.containsKey(FN_IS_ORGANIZER))
             isOrg = new Boolean(meta.getBool(FN_IS_ORGANIZER));
@@ -307,7 +307,7 @@ public class FullInstanceData extends InstanceData {
         if (metaGeo != null)
             geo = org.zmail.cs.mailbox.calendar.Util.decodeGeoFromMetadata(metaGeo);
 
-        init(invId, compNum, recurId, seq, dtStamp, org, isOrg, attendees, hasAlarm, hasAttachment, draft, neverSent,
+        init(invId, compNum, recurId, seq, dtStamp, orga, isOrg, attendees, hasAlarm, hasAttachment, draft, neverSent,
              summary, location, fragment, descInMeta, desc, descHtml,
              isAllDay, status, priority, classProp, fb, transp, categories, geo);
     }

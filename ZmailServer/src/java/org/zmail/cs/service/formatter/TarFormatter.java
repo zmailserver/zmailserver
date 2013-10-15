@@ -2,12 +2,12 @@
  * ***** BEGIN LICENSE BLOCK *****
  * Zimbra Collaboration Suite Server
  * Copyright (C) 2008, 2009, 2010, 2011, 2012 VMware, Inc.
- * 
+ *
  * The contents of this file are subject to the Zimbra Public License
  * Version 1.3 ("License"); you may not use this file except in
  * compliance with the License.  You may obtain a copy of the License at
  * http://www.zimbra.com/license.
- * 
+ *
  * Software distributed under the License is distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
@@ -19,9 +19,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import org.zmail.common.service.ServiceException;
-import org.zmail.common.util.tar.TarEntry;
-import org.zmail.common.util.tar.TarInputStream;
-import org.zmail.common.util.tar.TarOutputStream;
+import com.zimbra.common.util.tar.TarEntry;
+import com.zimbra.common.util.tar.TarInputStream;
+import com.zimbra.common.util.tar.TarOutputStream;
 import org.zmail.cs.service.UserServletContext;
 import org.zmail.cs.service.UserServletException;
 import org.zmail.cs.service.formatter.FormatterFactory.FormatType;
@@ -40,25 +40,25 @@ public class TarFormatter extends ArchiveFormatter {
             public int getType() { return entry.getMajorDeviceId(); }
             public boolean isUnread() { return (entry.getMode() & 0200) == 0; }
         }
-        
+
         private TarInputStream is;
-        
+
         public TarArchiveInputStream(InputStream is, String cset) {
             this.is = new TarInputStream(is, cset);
         }
-        
+
         public void close() throws IOException { is.close(); }
         public InputStream getInputStream() { return is; }
         public ArchiveInputEntry getNextEntry() throws IOException {
             TarArchiveInputEntry taie = new TarArchiveInputEntry(is);
-            
+
             return taie.entry == null ? null : taie;
         }
         public int read(byte[] buf, int offset, int len) throws IOException {
             return is.read(buf, offset, len);
         }
     }
-    
+
     public class TarArchiveOutputStream implements ArchiveOutputStream {
         public class TarArchiveOutputEntry implements ArchiveOutputEntry {
             private TarEntry entry;
@@ -70,13 +70,13 @@ public class TarFormatter extends ArchiveFormatter {
                 entry.setMajorDeviceId(type);
                 entry.setModTime(date);
             }
-            
+
             public void setUnread() { entry.setMode(entry.getMode() & ~0200); }
             public void setSize(long size) { entry.setSize(size); }
         }
-        
+
         private TarOutputStream os;
-        
+
         public TarArchiveOutputStream(OutputStream os, String cset) throws
             IOException {
             this.os = new TarOutputStream(os, cset);
@@ -99,16 +99,16 @@ public class TarFormatter extends ArchiveFormatter {
         }
     }
 
-    @Override 
+    @Override
     public String[] getDefaultMimeTypes() {
         return new String[] { "application/x-tar" };
     }
 
-    @Override 
-    public FormatType getType() { 
+    @Override
+    public FormatType getType() {
         return FormatType.TAR;
      }
-    
+
     protected ArchiveInputStream getInputStream(UserServletContext context,
         String charset) throws IOException, ServiceException, UserServletException {
 

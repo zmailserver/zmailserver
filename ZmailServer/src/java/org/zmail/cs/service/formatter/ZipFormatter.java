@@ -2,12 +2,12 @@
  * ***** BEGIN LICENSE BLOCK *****
  * Zimbra Collaboration Suite Server
  * Copyright (C) 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012 VMware, Inc.
- * 
+ *
  * The contents of this file are subject to the Zimbra Public License
  * Version 1.3 ("License"); you may not use this file except in
  * compliance with the License.  You may obtain a copy of the License at
  * http://www.zimbra.com/license.
- * 
+ *
  * Software distributed under the License is distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
@@ -21,7 +21,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import org.zmail.common.service.ServiceException;
-import org.zmail.common.util.zip.ZipOutputStream;
+import com.zimbra.common.util.zip.ZipOutputStream;
 import org.zmail.cs.service.UserServlet;
 import org.zmail.cs.service.UserServletContext;
 import org.zmail.cs.service.UserServletException;
@@ -44,32 +44,32 @@ public class ZipFormatter extends ArchiveFormatter {
                     entry.getComment().endsWith("-unread");
             }
         }
-        
+
         private ZipInputStream is;
-        
+
         public ZipArchiveInputStream(InputStream is, String cset) {
             this.is = new ZipInputStream(is);
         }
-        
+
         public void close() throws IOException { is.close(); }
         public InputStream getInputStream() { return is; }
         public ArchiveInputEntry getNextEntry() throws IOException {
             ZipArchiveInputEntry zaie = new ZipArchiveInputEntry(is);
-            
+
             return zaie.entry == null ? null : zaie;
         }
         public int read(byte[] buf, int offset, int len) throws IOException {
             return is.read(buf, offset, len);
         }
     }
-    
+
     public class ZipArchiveOutputStream implements ArchiveOutputStream {
         public class ZipArchiveOutputEntry implements ArchiveOutputEntry {
-            private org.zmail.common.util.zip.ZipEntry entry;
+            private com.zimbra.common.util.zip.ZipEntry entry;
 
             public ZipArchiveOutputEntry(String path, String name, int type, long
                 date) {
-                entry = new org.zmail.common.util.zip.ZipEntry(path);
+                entry = new com.zimbra.common.util.zip.ZipEntry(path);
                 entry.setComment(name);
                 entry.setTime(date);
                 entry.setUnixMode(0660);
@@ -80,9 +80,9 @@ public class ZipFormatter extends ArchiveFormatter {
             }
             public void setSize(long size) { entry.setSize(size); }
         }
-        
+
         private ZipOutputStream os;
-        
+
         public ZipArchiveOutputStream(OutputStream os, String cset, int lvl)
             throws IOException {
             this.os = new ZipOutputStream(os);
@@ -111,13 +111,13 @@ public class ZipFormatter extends ArchiveFormatter {
         return new String[] { "application/zip", "application/x-zip-compressed" };
     }
 
-    @Override 
-    public FormatType getType() { 
-        return FormatType.ZIP; 
+    @Override
+    public FormatType getType() {
+        return FormatType.ZIP;
     }
 
     @Override protected boolean getDefaultMeta() { return false; }
-    
+
     protected ArchiveInputStream getInputStream(UserServletContext context,
         String charset) throws IOException, ServiceException, UserServletException {
         return new ZipArchiveInputStream(context.getRequestInputStream(-1),
@@ -129,7 +129,7 @@ public class ZipFormatter extends ArchiveFormatter {
         OutputStream os = context.resp.getOutputStream();
         String zlv = context.params.get(UserServlet.QP_ZLV);
         int lvl = -1;
-        
+
         if (zlv != null && zlv.length() > 0) {
             try {
                 lvl = Integer.parseInt(zlv);
