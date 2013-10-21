@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.net;
+package org.zmail.common.net;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -28,7 +28,7 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
 import javax.net.ssl.X509TrustManager;
 
-import com.zimbra.common.localconfig.LC;
+import org.zmail.common.localconfig.LC;
 
 /**
  * Default cacerts backed trust manager

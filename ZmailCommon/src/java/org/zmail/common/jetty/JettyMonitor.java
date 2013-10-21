@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.jetty;
+package org.zmail.common.jetty;
 
 import org.eclipse.jetty.util.thread.ThreadPool;
 

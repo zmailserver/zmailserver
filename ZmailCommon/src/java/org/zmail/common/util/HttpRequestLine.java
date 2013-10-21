@@ -16,7 +16,7 @@
  * HttpRequestLine.java
  */
 
-package com.zimbra.common.util;
+package org.zmail.common.util;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;

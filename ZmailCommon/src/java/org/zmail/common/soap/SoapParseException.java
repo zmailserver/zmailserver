@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.soap;
+package org.zmail.common.soap;
 
 /**
  * An IOException that SoapTransport.invoke throws if it is unable to

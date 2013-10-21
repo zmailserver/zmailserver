@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.soap;
+package org.zmail.common.soap;
 
 import org.dom4j.Namespace;
 import org.dom4j.QName;

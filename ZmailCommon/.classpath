@@ -5,7 +5,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="jars/ant-contrib-1.0b1.jar"/>
 	<classpathentry kind="lib" path="jars/bcprov-jdk15-146.jar"/>
-	<classpathentry kind="lib" path="jars/commons-codec-1.6.jar" sourcepath="/ZimbraCommon/jars-src/commons-codec-1.6-src.zip"/>
+	<classpathentry kind="lib" path="jars/commons-codec-1.6.jar" sourcepath="/ZmailCommon/jars-src/commons-codec-1.6-src.zip"/>
 	<classpathentry kind="lib" path="jars/commons-dbcp-1.4.jar" sourcepath="/ThirdParty/commons-dbcp/src">
 		<attributes>
 			<attribute name="javadoc_location" value="http://commons.apache.org/dbcp/api-1.2.2/"/>
@@ -13,12 +13,12 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="jars/commons-fileupload-1.2.2.jar" sourcepath="jars-src/commons-fileupload-1.2.2-src.zip">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:platform:/resource/ZimbraCommon/jars-javadoc/commons-fileupload-1.2.2-javadoc.zip!/"/>
+			<attribute name="javadoc_location" value="jar:platform:/resource/ZmailCommon/jars-javadoc/commons-fileupload-1.2.2-javadoc.zip!/"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="jars/commons-httpclient-3.1.jar" sourcepath="jars-src/commons-httpclient-3.1-src.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:platform:/resource/ZimbraCommon/jars-javadoc/commons-httpclient-3.1-javadoc.zip!/"/>
+			<attribute name="javadoc_location" value="jar:platform:/resource/ZmailCommon/jars-javadoc/commons-httpclient-3.1-javadoc.zip!/"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="jars/commons-logging.jar" sourcepath="/ThirdParty/commons-logging-1.0.3/src">
@@ -40,23 +40,23 @@
 	<classpathentry kind="lib" path="jars/ical4j-0.9.16-patched.jar"/>
 	<classpathentry kind="lib" path="jars/junit-4.8.2.jar" sourcepath="jars-src/junit-4.8.2-src.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:platform:/resource/ZimbraCommon/jars-javadoc/junit-4.8.2-javadoc.zip!/"/>
+			<attribute name="javadoc_location" value="jar:platform:/resource/ZmailCommon/jars-javadoc/junit-4.8.2-javadoc.zip!/"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="jars/jzlib-1.0.7.jar"/>
 	<classpathentry kind="lib" path="jars/log4j-1.2.16.jar" sourcepath="jars-src/log4j-1.2.16-sources.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:platform:/resource/ZimbraCommon/jars-javadoc/log4j-1.2.16-javadoc.jar!/"/>
+			<attribute name="javadoc_location" value="jar:platform:/resource/ZmailCommon/jars-javadoc/log4j-1.2.16-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="jars/apache-log4j-extras-1.0.jar" sourcepath="jars-src/apache-log4j-extras-1.0-sources.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:platform:/resource/ZimbraCommon/jars-javadoc/apache-log4j-extras-1.0-javadoc.jar!/"/>
+			<attribute name="javadoc_location" value="jar:platform:/resource/ZmailCommon/jars-javadoc/apache-log4j-extras-1.0-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="jars/javamail-1.4.5.jar" sourcepath="jars-src/javamail-1.4.5-src.zip">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:platform:/resource/ZimbraCommon/jars-javadoc/javamail-1.4.5-javadoc.zip!/"/>
+			<attribute name="javadoc_location" value="jar:platform:/resource/ZmailCommon/jars-javadoc/javamail-1.4.5-javadoc.zip!/"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="jars/mysql-connector-java-5.1.18-bin.jar" sourcepath="/ThirdParty/connector-j/mysql-connector-java-5.1.18/src"/>
@@ -68,35 +68,35 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="jars/tnef-1.6.0.jar" sourcepath="jars-src/tnef-1.6.0-src.zip">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:platform:/resource/ZimbraCommon/jars-javadoc/tnef-1.6.0-javadoc.zip!/"/>
+			<attribute name="javadoc_location" value="jar:platform:/resource/ZmailCommon/jars-javadoc/tnef-1.6.0-javadoc.zip!/"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="jars/xercesImpl-2.9.1.jar" sourcepath="/ThirdParty/xerces-2_9_1-src/src"/>
-	<classpathentry kind="lib" path="jars/zimbra-charset.jar"/>
-	<classpathentry kind="lib" path="jars/zimbra-native.jar" sourcepath="/ZimbraNative/src/java"/>
+	<classpathentry kind="lib" path="jars/zmail-charset.jar"/>
+	<classpathentry kind="lib" path="jars/zmail-native.jar" sourcepath="/ZmailNative/src/java"/>
 	<classpathentry kind="lib" path="jars/jfreechart-1.0.14.jar"/>
 	<classpathentry kind="lib" path="jars/jcommon-1.0.16.jar"/>
 	<classpathentry kind="lib" path="jars/json.jar" sourcepath="/ThirdParty/json/src/java"/>
 	<classpathentry kind="lib" path="jars/ant-1.7.0-ziputil-patched.jar"/>
 	<classpathentry kind="lib" path="jars/memcached-2.6.jar" sourcepath="jars-src/memcached-2.6-sources.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:platform:/resource/ZimbraCommon/jars-javadoc/memcached-2.6-javadoc.jar!/"/>
+			<attribute name="javadoc_location" value="jar:platform:/resource/ZmailCommon/jars-javadoc/memcached-2.6-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="jars/apache-jsieve-0.4-zimbra.jar" sourcepath="jars-src/apache-jsieve-0.4-sources.jar">
+	<classpathentry kind="lib" path="jars/apache-jsieve-0.4-zmail.jar" sourcepath="jars-src/apache-jsieve-0.4-sources.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:platform:/resource/ZimbraCommon/jars-javadoc/apache-jsieve-0.4-javadoc.jar!/"/>
+			<attribute name="javadoc_location" value="jar:platform:/resource/ZmailCommon/jars-javadoc/apache-jsieve-0.4-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="jars/jython-2.5.2.jar"/>
 	<classpathentry kind="lib" path="jars/guava-10.0.1.jar" sourcepath="jars-src/guava-10.0.1-sources.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:platform:/resource/ZimbraCommon/jars-javadoc/guava-10.0.1-javadoc.jar!/"/>
+			<attribute name="javadoc_location" value="jar:platform:/resource/ZmailCommon/jars-javadoc/guava-10.0.1-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="jars/commons-cli-1.2.jar" sourcepath="jars-src/commons-cli-1.2-src.zip">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:platform:/resource/ZimbraCommon/jars-javadoc/commons-cli-1.2-javadoc.zip!/"/>
+			<attribute name="javadoc_location" value="jar:platform:/resource/ZmailCommon/jars-javadoc/commons-cli-1.2-javadoc.zip!/"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="jars/jetty-util-7.6.10.z5.jar"/>

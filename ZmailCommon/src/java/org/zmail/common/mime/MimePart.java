@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.mime;
+package org.zmail.common.mime;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -28,7 +28,7 @@ import java.util.Properties;
 
 import javax.activation.DataSource;
 
-import com.zimbra.common.util.ByteUtil;
+import org.zmail.common.util.ByteUtil;
 
 public abstract class MimePart implements Cloneable {
     /** The property specifying the default charset to use for both parsing

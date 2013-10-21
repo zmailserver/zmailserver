@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.util;
+package org.zmail.common.util;
 
 import java.io.ByteArrayInputStream;
 import java.io.EOFException;
@@ -27,7 +27,7 @@ import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 
-import com.zimbra.common.localconfig.LC;
+import org.zmail.common.localconfig.LC;
 
 public class BufferStream extends OutputStream {
     private byte buf[] = null;
@@ -252,7 +252,7 @@ public class BufferStream extends OutputStream {
         } else if (file == null) {
             try {
                 file = File.createTempFile("cstrm", null, new File(
-                    LC.zimbra_tmp_directory.value()));
+                    LC.zmail_tmp_directory.value()));
                 fos = new FileOutputStream(file);
                 if (!sequenced) {
                     fos.write(buf);

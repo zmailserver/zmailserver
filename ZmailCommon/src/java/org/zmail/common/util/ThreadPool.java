@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.util;
+package org.zmail.common.util;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -22,8 +22,8 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
 
 /**
  */

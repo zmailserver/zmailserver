@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.util;
+package org.zmail.common.util;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -35,7 +35,7 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.zimbra.common.localconfig.LC;
+import org.zmail.common.localconfig.LC;
 
 public class L10nUtil {
 
@@ -176,7 +176,7 @@ public class L10nUtil {
         // read-receipt notification body
         readReceiptNotification,
 
-        // ZimbraSync client invitation text
+        // ZmailSync client invitation text
         zsApptNew,
         zsApptModified,
         zsApptInstanceModified,
@@ -258,7 +258,7 @@ public class L10nUtil {
     //	public static final String P_FALLBACK_LOCALE_ID = "javax.servlet.jsp.jstl.fmt.fallbackLocale";
 
     // class loader that loads ZsMsg.properties files from
-    // /opt/zimbra/conf/msgs directory
+    // /opt/zmail/conf/msgs directory
     private static ClassLoader sMsgClassLoader = getClassLoader(LC.localized_msgs_directory.value());
 
     private static Map<String, Locale> sLocaleMap = new HashMap<String, Locale>();
@@ -270,7 +270,7 @@ public class L10nUtil {
             classLoader = new URLClassLoader(urls);
         } catch (MalformedURLException e) {
             try {
-                ZimbraLog.system.fatal("Unable to initialize localization", e);
+                ZmailLog.system.fatal("Unable to initialize localization", e);
             } finally {
                 Runtime.getRuntime().halt(1);
             }
@@ -337,7 +337,7 @@ public class L10nUtil {
                 return fmt;
             }
         } catch (MissingResourceException e) {
-            ZimbraLog.misc.warn("no resource bundle for base name " + basename + " can be found, " +
+            ZmailLog.misc.warn("no resource bundle for base name " + basename + " can be found, " +
                     "(locale=" + key + ")", e);
             return null;
         }
@@ -382,10 +382,10 @@ public class L10nUtil {
         String msgsDir = LC.localized_msgs_directory.value();
         File dir = new File(msgsDir);
         if (!dir.exists()) {
-            ZimbraLog.misc.info("message directory does not exist: " + msgsDir);
+            ZmailLog.misc.info("message directory does not exist: " + msgsDir);
             return Collections.emptySet();
         } else if (!dir.isDirectory()) {
-            ZimbraLog.misc.info("message directory is not a directory: " + msgsDir);
+            ZmailLog.misc.info("message directory is not a directory: " + msgsDir);
             return Collections.emptySet();
         }
 
@@ -435,17 +435,17 @@ public class L10nUtil {
         String[] localeParts = file.getName().split("\\.")[0].split("_");
         if (localeParts.length == 2) {
             if (debug) {
-                ZimbraLog.misc.debug("        found locale: " + localeParts[1]);
+                ZmailLog.misc.debug("        found locale: " + localeParts[1]);
             }
             return new Locale(localeParts[1]);
         } else if (localeParts.length == 3) {
             if (debug) {
-                ZimbraLog.misc.debug("        found locale: " + localeParts[1] + " " + localeParts[2]);
+                ZmailLog.misc.debug("        found locale: " + localeParts[1] + " " + localeParts[2]);
             }
             return new Locale(localeParts[1], localeParts[2]);
         } else if (localeParts.length == 4) {
             if (debug) {
-                ZimbraLog.misc.debug("        found locale: " + localeParts[1] + " " + localeParts[2] + " " + localeParts[3]);
+                ZmailLog.misc.debug("        found locale: " + localeParts[1] + " " + localeParts[2] + " " + localeParts[3]);
             }
             return new Locale(localeParts[1], localeParts[2], localeParts[3]);
         }
@@ -514,8 +514,8 @@ public class L10nUtil {
     }
 
     public static void flushLocaleCache() {
-        if (ZimbraLog.misc.isDebugEnabled()) {
-            ZimbraLog.misc.debug("L10nUtil: flushing locale cache");
+        if (ZmailLog.misc.isDebugEnabled()) {
+            ZmailLog.misc.debug("L10nUtil: flushing locale cache");
         }
         LocalizedClientLocales.flushCache();
     }
@@ -554,7 +554,7 @@ public class L10nUtil {
                              * found a resource for the locale, a locale is considered "installed" as long as
                              * any of its resource (the list in ClientResource) is present
                              */
-                            ZimbraLog.misc.info("Adding locale " + locale.toString());
+                            ZmailLog.misc.info("Adding locale " + locale.toString());
                             locales.add(locale);
                             break;
                         }
@@ -570,19 +570,19 @@ public class L10nUtil {
         private static void loadBundlesByDiskScan(Set<Locale> locales, String msgsDir) {
             File dir = new File(msgsDir);
             if (!dir.exists()) {
-                ZimbraLog.misc.info("message directory does not exist:" + msgsDir);
+                ZmailLog.misc.info("message directory does not exist:" + msgsDir);
                 return;
             }
             if (!dir.isDirectory()) {
-                ZimbraLog.misc.info("message directory is not a directory:" + msgsDir);
+                ZmailLog.misc.info("message directory is not a directory:" + msgsDir);
                 return;
             }
 
             for (File file : dir.listFiles(new MatchingPropertiesFilter(ClientResource.values()))) {
-                ZimbraLog.misc.debug("loadBundlesByDiskScan processing file: " + file.getName());
+                ZmailLog.misc.debug("loadBundlesByDiskScan processing file: " + file.getName());
                 Locale locale = getLocaleForPropertiesFile(file, true);
                 if (locale != null && !locales.contains(locale)) {
-                    ZimbraLog.misc.info("Adding locale " + locale);
+                    ZmailLog.misc.info("Adding locale " + locale);
                     locales.add(locale);
                 }
             }
@@ -591,12 +591,12 @@ public class L10nUtil {
         private static void loadBundles() {
             sLocalizedLocales = new HashSet<Locale>();
 
-            // String msgsDir = "/opt/zimbra/jetty/webapps/zimbra/WEB-INF/classes/messages";
+            // String msgsDir = "/opt/zmail/jetty/webapps/zmail/WEB-INF/classes/messages";
             String msgsDir = LC.localized_client_msgs_directory.value();
-            ZimbraLog.misc.info("Scanning installed locales from " + msgsDir);
+            ZmailLog.misc.info("Scanning installed locales from " + msgsDir);
 
             // the en_US locale is always available
-            ZimbraLog.misc.info("Adding locale " + Locale.US.toString() + " (always added)");
+            ZmailLog.misc.info("Adding locale " + Locale.US.toString() + " (always added)");
             sLocalizedLocales.add(Locale.US);
 
             // loadBundlesByJavaLocal(sLocalizedLocales, msgsDir);
@@ -626,7 +626,7 @@ public class L10nUtil {
                 String language = lc.getLanguage();
                 Locale lcLang = new Locale(language);
                 if (!sLocalizedLocales.contains(lcLang) && !pseudoLocales.contains(lcLang)) {
-                    ZimbraLog.misc.info("Adding locale " + lcLang.toString() + " (pseudo)");
+                    ZmailLog.misc.info("Adding locale " + lcLang.toString() + " (pseudo)");
                     pseudoLocales.add(lcLang);
                 }
             }

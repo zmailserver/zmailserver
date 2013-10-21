@@ -16,12 +16,12 @@
 /*
  * Created on May 26, 2004
  */
-package com.zimbra.common.soap;
+package org.zmail.common.soap;
 
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.CliUtil;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.CliUtil;
 
 import org.apache.commons.cli.*;
 import org.dom4j.Namespace;
@@ -40,7 +40,7 @@ import java.util.regex.Pattern;
 
 public class SoapTestHarness {
 
-    public static final String NAMESPACE_STR = "urn:zimbraTestHarness";
+    public static final String NAMESPACE_STR = "urn:zmailTestHarness";
     public static final Namespace NAMESPACE = Namespace.get("test", NAMESPACE_STR);
     public static final QName E_TESTS = QName.get("tests", NAMESPACE);
     public static final QName E_TEST = QName.get("test", NAMESPACE);
@@ -457,21 +457,21 @@ public class SoapTestHarness {
     private static Map<String, String> getURIs(SoapProtocol proto) {
         if (mURIs == null) {
             mURIs = new HashMap<String, String>();
-            mURIs.put("zimbra", "urn:zimbra");
-            mURIs.put("acct", "urn:zimbraAccount");
-            mURIs.put("mail", "urn:zimbraMail");
-            mURIs.put("admin", "urn:zimbraAdmin");
+            mURIs.put("zmail", "urn:zmail");
+            mURIs.put("acct", "urn:zmailAccount");
+            mURIs.put("mail", "urn:zmailMail");
+            mURIs.put("admin", "urn:zmailAdmin");
             mURIs.put("soap", "http://www.w3.org/2003/05/soap-envelope");
             mURIs.put("soap12", "http://www.w3.org/2003/05/soap-envelope");            
             mURIs.put("soap11", "http://schemas.xmlsoap.org/soap/envelope/");
 
             mJSURIs = new HashMap<String, String>();
-            mJSURIs.put("zimbra", "urn:zimbra");
-            mJSURIs.put("acct", "urn:zimbraAccount");
-            mJSURIs.put("mail", "urn:zimbraMail");
-            mJSURIs.put("admin", "urn:zimbraAdmin");
-            mJSURIs.put("soap", "urn:zimbraSoap");
-            mJSURIs.put("soapJS", "urn:zimbraSoap");            
+            mJSURIs.put("zmail", "urn:zmail");
+            mJSURIs.put("acct", "urn:zmailAccount");
+            mJSURIs.put("mail", "urn:zmailMail");
+            mJSURIs.put("admin", "urn:zmailAdmin");
+            mJSURIs.put("soap", "urn:zmailSoap");
+            mJSURIs.put("soapJS", "urn:zmailSoap");            
         }
         return proto == SoapProtocol.SoapJS ? mJSURIs : mURIs;
     }
@@ -479,7 +479,7 @@ public class SoapTestHarness {
     /*
     XPath xpath = response.createXPath(path);
     Map uris = new HashMap();
-    uris.put("acct", "urn:zimbraAccount");
+    uris.put("acct", "urn:zmailAccount");
     xpath.setNamespaceURIs(uris);
     xpath.selectSingleNode(response);
     System.out.println(xpath.selectSingleNode(response));

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.zmime;
+package org.zmail.common.zmime;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
@@ -33,9 +33,9 @@ import javax.mail.internet.SharedInputStream;
 import javax.mail.util.SharedByteArrayInputStream;
 
 import com.sun.mail.util.ASCIIUtility;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.CharsetUtil;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.CharsetUtil;
 
 class ZMimeParser {
     private static final Charset DEFAULT_CHARSET = CharsetUtil.normalizeCharset(CharsetUtil.ISO_8859_1);

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.zmime;
+package org.zmail.common.zmime;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
@@ -26,8 +26,8 @@ import java.util.TreeMap;
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.net.URLCodec;
 
-import com.zimbra.common.util.CharsetUtil;
-import com.zimbra.common.zmime.ZMimeUtility.ByteBuilder;
+import org.zmail.common.util.CharsetUtil;
+import org.zmail.common.zmime.ZMimeUtility.ByteBuilder;
 
 public class ZCompoundHeader extends ZInternetHeader {
     private boolean use2231Encoding;

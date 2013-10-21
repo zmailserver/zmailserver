@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.perf.chart;
+package org.zmail.perf.chart;
 
 public interface SummaryConstants {
     
@@ -35,7 +35,7 @@ public interface SummaryConstants {
    //    server  MEM gc time
     public final static String GC_IN = "gc.csv";
     
-    public static final String SERVER_IN = "zimbrastats.csv";
+    public static final String SERVER_IN = "zmailstats.csv";
     
     public final static String CPU_IN = "proc.csv";
     

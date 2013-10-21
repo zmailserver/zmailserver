@@ -1,1 +1,1 @@
-Zimbra-Extension-Class: com.zimbra.qa.unittest.UnitTestInitializer
+Zmail-Extension-Class: org.zmail.qa.unittest.UnitTestInitializer

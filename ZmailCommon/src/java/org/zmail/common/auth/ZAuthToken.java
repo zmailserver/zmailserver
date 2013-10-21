@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.auth;
+package org.zmail.common.auth;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -26,14 +26,14 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.HeaderConstants;
-import com.zimbra.common.soap.SoapHttpTransport;
-import com.zimbra.common.soap.Element.XMLElement;
-import com.zimbra.common.util.ZimbraCookie;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.HeaderConstants;
+import org.zmail.common.soap.SoapHttpTransport;
+import org.zmail.common.soap.Element.XMLElement;
+import org.zmail.common.util.ZmailCookie;
 
 public class ZAuthToken {
     
@@ -71,7 +71,7 @@ public class ZAuthToken {
      * @param isAdmin
      * @throws ServiceException
      */
-    public ZAuthToken(com.zimbra.common.soap.Element eAuthToken, boolean isAdmin) throws ServiceException {
+    public ZAuthToken(org.zmail.common.soap.Element eAuthToken, boolean isAdmin) throws ServiceException {
         fromSoap(eAuthToken, isAdmin);
     }
     
@@ -189,7 +189,7 @@ public class ZAuthToken {
     
     public Map<String, String> cookieMap(boolean isAdmin) {
         if (mType == null)
-            return toZimbraCookieMap(isAdmin);
+            return toZmailCookieMap(isAdmin);
         else if (mType.equals(YAHOO_CALENDAR_AUTHTOKEN_TYPE) ||
                  mType.equals(YAHOO_MAIL_AUTHTOKEN_TYPE))
             return toYahooCookieMap(isAdmin);
@@ -203,14 +203,14 @@ public class ZAuthToken {
      * @param response
      */
     public static void clearCookies(HttpServletResponse response) {
-        ZimbraCookie.clearCookie(response, ZimbraCookie.COOKIE_ZM_AUTH_TOKEN);
-        ZimbraCookie.clearCookie(response, AUTHTOKEN_TYPE_COOKIE);
-        ZimbraCookie.clearCookie(response, YAHOO_T_COOKIE);
-        ZimbraCookie.clearCookie(response, YAHOO_Y_COOKIE);
-        ZimbraCookie.clearCookie(response, YAHOO_ADMIN_COOKIE);
+        ZmailCookie.clearCookie(response, ZmailCookie.COOKIE_ZM_AUTH_TOKEN);
+        ZmailCookie.clearCookie(response, AUTHTOKEN_TYPE_COOKIE);
+        ZmailCookie.clearCookie(response, YAHOO_T_COOKIE);
+        ZmailCookie.clearCookie(response, YAHOO_Y_COOKIE);
+        ZmailCookie.clearCookie(response, YAHOO_ADMIN_COOKIE);
     }
     
-    private void fromSoap(com.zimbra.common.soap.Element eAuthToken, boolean isAdmin) throws ServiceException {
+    private void fromSoap(org.zmail.common.soap.Element eAuthToken, boolean isAdmin) throws ServiceException {
         mType = eAuthToken.getAttribute(isAdmin?AdminConstants.A_TYPE:AccountConstants.A_TYPE, null);
         
         mValue = eAuthToken.getText();
@@ -254,29 +254,29 @@ public class ZAuthToken {
             }
         }
         
-        // look for zimbra cookie first
-        if (fromZimbraCookies(cookieMap, isAdmin))
+        // look for zmail cookie first
+        if (fromZmailCookies(cookieMap, isAdmin))
             return;
         
-        // no Zimbra cookies, look for Yahoo cookies
+        // no Zmail cookies, look for Yahoo cookies
         if (fromYahooCookies(request, cookieMap, isAdmin))
             return;
         
         // fall thru, leave the ZAuthToken empty
     } 
    
-    private Map<String, String> toZimbraCookieMap(boolean isAdmin) {
+    private Map<String, String> toZmailCookieMap(boolean isAdmin) {
         Map<String, String> cookieMap = null;
         if (mValue != null || mProxyAuthToken != null) {
-            String cookieName = ZimbraCookie.authTokenCookieName(isAdmin);
+            String cookieName = ZmailCookie.authTokenCookieName(isAdmin);
             cookieMap = new HashMap<String, String>();
             cookieMap.put(cookieName, mProxyAuthToken !=null ? mProxyAuthToken : mValue);
         }
         return cookieMap;  
     }
     
-    private boolean fromZimbraCookies(Map<String, String> cookieMap, boolean isAdmin) {
-        String cookieName = ZimbraCookie.authTokenCookieName(isAdmin);
+    private boolean fromZmailCookies(Map<String, String> cookieMap, boolean isAdmin) {
+        String cookieName = ZmailCookie.authTokenCookieName(isAdmin);
         String cookieValue = cookieMap.get(cookieName);
             
         if (cookieValue != null) {

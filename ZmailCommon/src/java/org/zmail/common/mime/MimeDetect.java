@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.mime;
+package org.zmail.common.mime;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -34,9 +34,9 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.UnrecognizedOptionException;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.ZmailLog;
 
 public class MimeDetect {
     private TreeMap<Glob, String> globs = new TreeMap<Glob, String>();
@@ -50,7 +50,7 @@ public class MimeDetect {
             mimeDetect.parse(LC.shared_mime_info_globs.value(),
                 LC.shared_mime_info_magic.value());
         } catch (Exception e) {
-            ZimbraLog.system.warn("shared-mime-info file error " + e);
+            ZmailLog.system.warn("shared-mime-info file error " + e);
         }
     }
 
@@ -415,7 +415,7 @@ public class MimeDetect {
         ArrayList<String> files = new ArrayList<String>();
         for (String file : fileList.split(":")) {
             files.add(file);
-            files.add(file + ".zimbra");
+            files.add(file + ".zmail");
         }
         for (String file : files) {
             BufferedInputStream is = null;
@@ -437,7 +437,7 @@ public class MimeDetect {
                         globs.put(new Glob(tokens[2],
                             Integer.parseInt(tokens[0])), tokens[1]);
                     else
-                        ZimbraLog.system.warn("invalid glob syntax " + line);
+                        ZmailLog.system.warn("invalid glob syntax " + line);
                 }
             }
         }
@@ -453,7 +453,7 @@ public class MimeDetect {
         ArrayList<String> files = new ArrayList<String>();
         for (String file : fileList.split(":")) {
             files.add(file);
-            files.add(file + ".zimbra");
+            files.add(file + ".zmail");
         }
         for (String file : files) {
             InputStream is = null;
@@ -465,11 +465,11 @@ public class MimeDetect {
             String line = readLine(is);
             
             if (line == null || !line.equals(MAGIC_MAGIC)) {
-                ZimbraLog.system.warn("invalid magic file %s", file);
+                ZmailLog.system.warn("invalid magic file %s", file);
                 continue;
             }
             if (is.read() != '[') {
-                ZimbraLog.system.warn("invalid magic section in %s", file);
+                ZmailLog.system.warn("invalid magic section in %s", file);
                 continue;
             }
             while (is.available() > 0) {

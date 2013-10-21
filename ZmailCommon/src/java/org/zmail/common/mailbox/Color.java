@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.mailbox;
+package org.zmail.common.mailbox;
 
 public class Color {
     private static final int  ORANGE = 9;

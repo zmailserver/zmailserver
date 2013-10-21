@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.util;
+package org.zmail.common.util;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -20,7 +20,7 @@ import org.easymock.EasyMock;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.zimbra.common.util.HttpUtil.Browser;
+import org.zmail.common.util.HttpUtil.Browser;
 
 /**
  * Unit test for {@link HttpUtil}.

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.soap;
+package org.zmail.common.soap;
 
 import org.dom4j.Namespace;
 import org.dom4j.QName;
@@ -21,7 +21,7 @@ public final class AdminConstants {
 
     public static final String ADMIN_SERVICE_URI = "/service/admin/soap/";
 
-    public static final String NAMESPACE_STR = "urn:zimbraAdmin";
+    public static final String NAMESPACE_STR = "urn:zmailAdmin";
     public static final Namespace NAMESPACE = Namespace.get(NAMESPACE_STR);
 
     public static final String E_PING_REQUEST = "PingRequest";
@@ -1360,7 +1360,7 @@ public final class AdminConstants {
     public static final String A_PLATFORM = "platform";
     public static final String A_BUILDTYPE = "buildtype";
 
-    // ZimbraLicenseExtenstion LicenseService and LicenseAdminService
+    // ZmailLicenseExtenstion LicenseService and LicenseAdminService
     public static final String E_CONTENT = "content";
     public static final String A_ATTACHMENT_ID = "aid";
     public static final String E_LICENSE = "license";

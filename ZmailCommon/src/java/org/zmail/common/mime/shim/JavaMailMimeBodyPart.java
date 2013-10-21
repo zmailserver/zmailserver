@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.mime.shim;
+package org.zmail.common.mime.shim;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
@@ -37,37 +37,37 @@ import javax.mail.util.ByteArrayDataSource;
 
 import com.sun.mail.util.ASCIIUtility;
 import com.sun.mail.util.PropUtil;
-import com.zimbra.common.util.ByteUtil;
+import org.zmail.common.util.ByteUtil;
 
 public class JavaMailMimeBodyPart extends MimeBodyPart implements JavaMailShim {
     private static final boolean ZPARSER = JavaMailMimeMessage.ZPARSER;
 
-    private com.zimbra.common.mime.MimePart zpart;
+    private org.zmail.common.mime.MimePart zpart;
     private JavaMailMimeMultipart jmparent;
     private Object jmcontent; // JavaMailMimeMultipart or JavaMailMimeMessage or null
 
-    JavaMailMimeBodyPart(com.zimbra.common.mime.MimePart mp) {
+    JavaMailMimeBodyPart(org.zmail.common.mime.MimePart mp) {
         this(mp, null);
     }
 
-    JavaMailMimeBodyPart(com.zimbra.common.mime.MimePart mp, JavaMailMimeMultipart parent) {
+    JavaMailMimeBodyPart(org.zmail.common.mime.MimePart mp, JavaMailMimeMultipart parent) {
         this.zpart = mp;
         this.jmparent = parent;
     }
 
     public JavaMailMimeBodyPart() {
         super();
-        this.zpart = new com.zimbra.common.mime.MimeBodyPart(null);
+        this.zpart = new org.zmail.common.mime.MimeBodyPart(null);
     }
 
     public JavaMailMimeBodyPart(InputStream is) throws MessagingException {
         super();
         if (ZPARSER) {
             try {
-                com.zimbra.common.mime.MimePart.InputStreamSource iss = null;
+                org.zmail.common.mime.MimePart.InputStreamSource iss = null;
                 byte[] bcontent = null;
-                if (is instanceof com.zimbra.common.mime.MimePart.InputStreamSource) {
-                    iss = (com.zimbra.common.mime.MimePart.InputStreamSource) is;
+                if (is instanceof org.zmail.common.mime.MimePart.InputStreamSource) {
+                    iss = (org.zmail.common.mime.MimePart.InputStreamSource) is;
                 } else if (is instanceof SharedInputStream) {
                     iss = new SharedInputStreamSource((SharedInputStream) is);
                 } else {
@@ -75,7 +75,7 @@ public class JavaMailMimeBodyPart extends MimeBodyPart implements JavaMailShim {
                     is = new ByteArrayInputStream(bcontent);
                 }
 
-                com.zimbra.common.mime.MimeParserInputStream mpis = new com.zimbra.common.mime.MimeParserInputStream(is);
+                org.zmail.common.mime.MimeParserInputStream mpis = new org.zmail.common.mime.MimeParserInputStream(is);
                 if (bcontent != null) {
                     mpis.setSource(bcontent);
                 } else {
@@ -114,16 +114,16 @@ public class JavaMailMimeBodyPart extends MimeBodyPart implements JavaMailShim {
     public JavaMailMimeBodyPart(InternetHeaders headers, byte[] content) throws MessagingException {
         super();
         if (ZPARSER) {
-            com.zimbra.common.mime.MimeHeaderBlock hblock;
+            org.zmail.common.mime.MimeHeaderBlock hblock;
             if (headers instanceof JavaMailInternetHeaders) {
-                hblock = ((JavaMailInternetHeaders) headers).getZimbraMimeHeaderBlock();
+                hblock = ((JavaMailInternetHeaders) headers).getZmailMimeHeaderBlock();
             } else {
-                hblock = new JavaMailInternetHeaders(headers).getZimbraMimeHeaderBlock();
+                hblock = new JavaMailInternetHeaders(headers).getZmailMimeHeaderBlock();
             }
 
             try {
                 InputStream is = new ByteArrayInputStream(content);
-                com.zimbra.common.mime.MimeParserInputStream mpis = new com.zimbra.common.mime.MimeParserInputStream(is, hblock);
+                org.zmail.common.mime.MimeParserInputStream mpis = new org.zmail.common.mime.MimeParserInputStream(is, hblock);
                 JavaMailMimeBodyPart.writeTo(mpis.setSource(content), null);
                 this.zpart = mpis.getPart();
             } catch (IOException ioe) {
@@ -135,7 +135,7 @@ public class JavaMailMimeBodyPart extends MimeBodyPart implements JavaMailShim {
         }
     }
 
-    static class SharedInputStreamSource extends FilterInputStream implements com.zimbra.common.mime.MimePart.InputStreamSource {
+    static class SharedInputStreamSource extends FilterInputStream implements org.zmail.common.mime.MimePart.InputStreamSource {
         private SharedInputStream stream;
         private long size;
 
@@ -161,7 +161,7 @@ public class JavaMailMimeBodyPart extends MimeBodyPart implements JavaMailShim {
         }
     }
 
-    com.zimbra.common.mime.MimePart getZimbraMimePart() {
+    org.zmail.common.mime.MimePart getZmailMimePart() {
         return zpart;
     }
 
@@ -242,8 +242,8 @@ public class JavaMailMimeBodyPart extends MimeBodyPart implements JavaMailShim {
         if (ZPARSER) {
             if (zpart.getRawMimeHeader("Content-Transfer-Encoding") == null) {
                 return null;
-            } else if (zpart instanceof com.zimbra.common.mime.MimeBodyPart) {
-                return ((com.zimbra.common.mime.MimeBodyPart) zpart).getTransferEncoding().toString();
+            } else if (zpart instanceof org.zmail.common.mime.MimeBodyPart) {
+                return ((org.zmail.common.mime.MimeBodyPart) zpart).getTransferEncoding().toString();
             } else {
                 return zpart.getMimeHeader("Content-Transfer-Encoding").trim().toLowerCase();
             }
@@ -351,7 +351,7 @@ public class JavaMailMimeBodyPart extends MimeBodyPart implements JavaMailShim {
         if (ZPARSER) {
             String filename = zpart.getFilename();
             if (filename != null && !decodeFileName) {
-                filename = com.zimbra.common.mime.MimeHeader.escape(filename, null, false);
+                filename = org.zmail.common.mime.MimeHeader.escape(filename, null, false);
             }
             return filename;
         } else {
@@ -409,7 +409,7 @@ public class JavaMailMimeBodyPart extends MimeBodyPart implements JavaMailShim {
 
         @Override
         public InputStream getInputStream() throws IOException {
-            return jmpart.getZimbraMimePart().getContentStream();
+            return jmpart.getZmailMimePart().getContentStream();
         }
 
         @Override
@@ -419,7 +419,7 @@ public class JavaMailMimeBodyPart extends MimeBodyPart implements JavaMailShim {
 
         @Override
         public String getContentType() {
-            return jmpart.getZimbraMimePart().getContentType().toString();
+            return jmpart.getZmailMimePart().getContentType().toString();
         }
 
         @Override
@@ -451,10 +451,10 @@ public class JavaMailMimeBodyPart extends MimeBodyPart implements JavaMailShim {
         if (ZPARSER) {
             if (jmcontent != null) {
                 return jmcontent;
-            } else if (zpart instanceof com.zimbra.common.mime.MimeMessage) {
-                return this.jmcontent = new JavaMailMimeMessage((com.zimbra.common.mime.MimeMessage) zpart);
-            } else if (zpart instanceof com.zimbra.common.mime.MimeMultipart) {
-                return this.jmcontent = new JavaMailMimeMultipart((com.zimbra.common.mime.MimeMultipart) zpart, this);
+            } else if (zpart instanceof org.zmail.common.mime.MimeMessage) {
+                return this.jmcontent = new JavaMailMimeMessage((org.zmail.common.mime.MimeMessage) zpart);
+            } else if (zpart instanceof org.zmail.common.mime.MimeMultipart) {
+                return this.jmcontent = new JavaMailMimeMultipart((org.zmail.common.mime.MimeMultipart) zpart, this);
             } else {
                 return getDataHandler().getContent();
             }
@@ -465,16 +465,16 @@ public class JavaMailMimeBodyPart extends MimeBodyPart implements JavaMailShim {
 
     private static final String[] NON_TRANSFERRED = new String[] { "Content-Type", "Content-Transfer-Encoding" };
 
-    static void transferHeaders(com.zimbra.common.mime.MimePart from, com.zimbra.common.mime.MimePart to) {
+    static void transferHeaders(org.zmail.common.mime.MimePart from, org.zmail.common.mime.MimePart to) {
         if (from == null || to == null) {
             return;
         }
-        for (com.zimbra.common.mime.MimeHeader header : new com.zimbra.common.mime.MimeHeaderBlock(from.getMimeHeaderBlock(), NON_TRANSFERRED)) {
+        for (org.zmail.common.mime.MimeHeader header : new org.zmail.common.mime.MimeHeaderBlock(from.getMimeHeaderBlock(), NON_TRANSFERRED)) {
             to.addMimeHeader(header);
         }
     }
 
-    private com.zimbra.common.mime.MimePart replaceInParent(com.zimbra.common.mime.MimePart mp) throws MessagingException {
+    private org.zmail.common.mime.MimePart replaceInParent(org.zmail.common.mime.MimePart mp) throws MessagingException {
         if (zpart == mp) {
             return zpart;
         }
@@ -498,12 +498,12 @@ public class JavaMailMimeBodyPart extends MimeBodyPart implements JavaMailShim {
         return mp;
     }
 
-    static com.zimbra.common.mime.MimePart parsePart(DataSource ds) throws MessagingException {
-        com.zimbra.common.mime.ContentType ctype = new com.zimbra.common.mime.ContentType(ds.getContentType());
-        com.zimbra.common.mime.MimeHeaderBlock zheaders = new com.zimbra.common.mime.MimeHeaderBlock(ctype);
-        com.zimbra.common.mime.MimeParserInputStream mpis = null;
+    static org.zmail.common.mime.MimePart parsePart(DataSource ds) throws MessagingException {
+        org.zmail.common.mime.ContentType ctype = new org.zmail.common.mime.ContentType(ds.getContentType());
+        org.zmail.common.mime.MimeHeaderBlock zheaders = new org.zmail.common.mime.MimeHeaderBlock(ctype);
+        org.zmail.common.mime.MimeParserInputStream mpis = null;
         try {
-            mpis = new com.zimbra.common.mime.MimeParserInputStream(ds.getInputStream(), zheaders);
+            mpis = new org.zmail.common.mime.MimeParserInputStream(ds.getInputStream(), zheaders);
             writeTo(mpis.setSource(ds), null);
             return mpis.getPart();
         } catch (IOException ioe) {
@@ -530,12 +530,12 @@ public class JavaMailMimeBodyPart extends MimeBodyPart implements JavaMailShim {
     @Override
     public void setContent(Object o, String type) throws MessagingException {
         if (ZPARSER) {
-            com.zimbra.common.mime.ContentType ctype = new com.zimbra.common.mime.ContentType(type);
+            org.zmail.common.mime.ContentType ctype = new org.zmail.common.mime.ContentType(type);
             if (o instanceof JavaMailMimeMultipart) {
                 setContent((Multipart) o);
                 setHeader("Content-Type", type);
             } else if (o instanceof JavaMailMimeMessage) {
-                replaceInParent(((JavaMailMimeMessage) o).getZimbraMimeMessage());
+                replaceInParent(((JavaMailMimeMessage) o).getZmailMimeMessage());
                 setHeader("Content-Type", type);
                 this.jmcontent = o;
             } else if (o instanceof String) {
@@ -561,7 +561,7 @@ public class JavaMailMimeBodyPart extends MimeBodyPart implements JavaMailShim {
     public void setContent(Multipart mp) throws MessagingException {
         if (ZPARSER) {
             if (mp instanceof JavaMailMimeMultipart) {
-                replaceInParent(((JavaMailMimeMultipart) mp).getZimbraMimeMultipart());
+                replaceInParent(((JavaMailMimeMultipart) mp).getZmailMimeMultipart());
                 this.jmcontent = mp;
             } else {
                 // treat it as any other content
@@ -593,12 +593,12 @@ public class JavaMailMimeBodyPart extends MimeBodyPart implements JavaMailShim {
     @Override
     public void setText(String text, String charset, String subtype) throws MessagingException {
         if (ZPARSER) {
-            if (!(zpart instanceof com.zimbra.common.mime.MimeBodyPart)) {
+            if (!(zpart instanceof org.zmail.common.mime.MimeBodyPart)) {
                 // need to switch from multipart or message to body part in enclosing part
-                replaceInParent(new com.zimbra.common.mime.MimeBodyPart(null));
+                replaceInParent(new org.zmail.common.mime.MimeBodyPart(null));
             }
             try {
-                ((com.zimbra.common.mime.MimeBodyPart) zpart).setText(text, charset, subtype, null);
+                ((org.zmail.common.mime.MimeBodyPart) zpart).setText(text, charset, subtype, null);
             } catch (IOException ioe) {
                 throw new MessagingException("error encoding text with charset", ioe);
             }
@@ -610,8 +610,8 @@ public class JavaMailMimeBodyPart extends MimeBodyPart implements JavaMailShim {
     @Override
     public void attachFile(File file) throws IOException, MessagingException {
         if (ZPARSER) {
-            com.zimbra.common.mime.ContentType ctype = new com.zimbra.common.mime.ContentType("application/octet-stream");
-            com.zimbra.common.mime.MimeBodyPart mp = new com.zimbra.common.mime.MimeBodyPart(ctype);
+            org.zmail.common.mime.ContentType ctype = new org.zmail.common.mime.ContentType("application/octet-stream");
+            org.zmail.common.mime.MimeBodyPart mp = new org.zmail.common.mime.MimeBodyPart(ctype);
             replaceInParent(mp.setContent(file).setFilename(file.getName()));
         } else {
             super.attachFile(file);
@@ -770,9 +770,9 @@ public class JavaMailMimeBodyPart extends MimeBodyPart implements JavaMailShim {
     @Override
     protected void updateHeaders() throws MessagingException {
         if (ZPARSER) {
-            if (zpart instanceof com.zimbra.common.mime.MimeMultipart) {
+            if (zpart instanceof org.zmail.common.mime.MimeMultipart) {
                 if (jmcontent == null) {
-                    jmcontent = new JavaMailMimeMultipart((com.zimbra.common.mime.MimeMultipart) zpart);
+                    jmcontent = new JavaMailMimeMultipart((org.zmail.common.mime.MimeMultipart) zpart);
                 }
                 ((JavaMailMimeMultipart) jmcontent).updateHeaders();
             }

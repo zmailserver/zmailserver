@@ -13,9 +13,9 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.localconfig;
+package org.zmail.common.localconfig;
 
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.util.ZmailLog;
 
 /*
  * Log4j is expensive for command line invocation
@@ -28,10 +28,10 @@ public class Logging {
         sQuietMode = value;
     }
 
-    private static boolean sUseZimbraLog = true;
+    private static boolean sUseZmailLog = true;
 
-    public static void setUseZimbraLog(boolean value) {
-        sUseZimbraLog = value;
+    public static void setUseZmailLog(boolean value) {
+        sUseZmailLog = value;
     }
 
     public static void warn(String message) {
@@ -42,8 +42,8 @@ public class Logging {
         if (sQuietMode) {
             return;
         }
-        if (sUseZimbraLog) {
-            ZimbraLog.misc.warn(message, e);
+        if (sUseZmailLog) {
+            ZmailLog.misc.warn(message, e);
         } else {
             System.err.println("Warning: " + message);
             if (e != null) {
@@ -62,8 +62,8 @@ public class Logging {
         if (sQuietMode) {
             return;
         }
-        if (sUseZimbraLog) {
-            ZimbraLog.misc.warn(message, e);
+        if (sUseZmailLog) {
+            ZmailLog.misc.warn(message, e);
         } else {
             System.err.println("Error: " + message);
             if (e != null) {

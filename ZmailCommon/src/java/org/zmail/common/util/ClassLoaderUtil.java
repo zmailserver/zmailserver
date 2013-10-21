@@ -12,13 +12,13 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.util;
+package org.zmail.common.util;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.util.ZmailLog;
 
 public class ClassLoaderUtil {
     
@@ -34,7 +34,7 @@ public class ClassLoaderUtil {
             urls[0] = new URL("file://" + dir);
             classLoader = new URLClassLoader(urls);
         } catch (MalformedURLException e) {
-            ZimbraLog.system.error("unable to get ClassLoader for " + directory, e);
+            ZmailLog.system.error("unable to get ClassLoader for " + directory, e);
             return null;
         }
         

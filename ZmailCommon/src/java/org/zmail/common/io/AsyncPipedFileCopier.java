@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.io;
+package org.zmail.common.io;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -26,10 +26,10 @@ import java.nio.ByteOrder;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.FileUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.znative.IO;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.FileUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.znative.IO;
 
 class AsyncPipedFileCopier extends AbstractAsyncFileCopier implements FileCopier {
 
@@ -51,7 +51,7 @@ class AsyncPipedFileCopier extends AbstractAsyncFileCopier implements FileCopier
             int pipeBufSize) {
         super(queueCapacity);
 
-        ZimbraLog.io.debug(
+        ZmailLog.io.debug(
                 "Creating AsyncPipedFileCopier: " +
                 "useNIO = " + useNIO +
                 ", copyBufSizeOIO = " + copyBufSizeOIO +
@@ -65,7 +65,7 @@ class AsyncPipedFileCopier extends AbstractAsyncFileCopier implements FileCopier
 
         mCopyBufSizeOIO = copyBufSizeOIO > 0 ? copyBufSizeOIO : FileCopierOptions.DEFAULT_OIO_COPY_BUFFER_SIZE;
         if (mCopyBufSizeOIO > MAX_COPY_BUFSIZE) {
-            ZimbraLog.io.warn(
+            ZmailLog.io.warn(
                     "OIO copy buffer size " + mCopyBufSizeOIO +
                     " is too big; limiting to " + MAX_COPY_BUFSIZE);
             mCopyBufSizeOIO = MAX_COPY_BUFSIZE;
@@ -74,7 +74,7 @@ class AsyncPipedFileCopier extends AbstractAsyncFileCopier implements FileCopier
         numPipes = numPipes > 0
             ? numPipes : FileCopierOptions.DEFAULT_CONCURRENCY;
         if (numPipes > MAX_PIPES) {
-            ZimbraLog.io.warn(
+            ZmailLog.io.warn(
                     numPipes + " pipes are too many; limiting to " +
                     MAX_PIPES);
             numPipes = MAX_PIPES;
@@ -83,21 +83,21 @@ class AsyncPipedFileCopier extends AbstractAsyncFileCopier implements FileCopier
 
         int maxReadersPerPipe = MAX_TOTAL_READER_THREADS / numPipes;
         if (numReadersPerPipe > maxReadersPerPipe) {
-            ZimbraLog.io.warn(
+            ZmailLog.io.warn(
                     numReadersPerPipe + " readers/pipe are too many; limiting to " +
                     maxReadersPerPipe);
             numReadersPerPipe = maxReadersPerPipe;
         }
         int maxWritersPerPipe = MAX_TOTAL_WRITER_THREADS / numPipes;
         if (numWritersPerPipe > maxWritersPerPipe) {
-            ZimbraLog.io.warn(
+            ZmailLog.io.warn(
                     numWritersPerPipe + " readers/pipe are too many; limiting to " +
                     maxWritersPerPipe);
             numWritersPerPipe = maxWritersPerPipe;
         }
         int maxPipeBufSize = ((MAX_TOTAL_PIPE_BUFSIZE / numPipes) >> 12) << 12;
         if (pipeBufSize > maxPipeBufSize) {
-            ZimbraLog.io.warn(
+            ZmailLog.io.warn(
                     "Pipe buffer size " + pipeBufSize +
                     " is too big; limiting to " + maxPipeBufSize);
             pipeBufSize = maxPipeBufSize;
@@ -109,7 +109,7 @@ class AsyncPipedFileCopier extends AbstractAsyncFileCopier implements FileCopier
     }
 
     public void start() {
-        ZimbraLog.io.info("AsyncPipedFileCopier is starting");
+        ZmailLog.io.info("AsyncPipedFileCopier is starting");
         for (PipedCopier pipe : mPipes)
             pipe.start();
     }
@@ -130,7 +130,7 @@ class AsyncPipedFileCopier extends AbstractAsyncFileCopier implements FileCopier
 
         for (PipedCopier pipe : mPipes)
             pipe.shutdown();
-        ZimbraLog.io.info("AsyncPipedFileCopier is shut down");
+        ZmailLog.io.info("AsyncPipedFileCopier is shut down");
     }
 
     private class PipedCopier {
@@ -283,7 +283,7 @@ class AsyncPipedFileCopier extends AbstractAsyncFileCopier implements FileCopier
                         }
                     } catch (OutOfMemoryError e) {
                         try {
-                            ZimbraLog.system.fatal("out of memory", e);
+                            ZmailLog.system.fatal("out of memory", e);
                         } finally {
                             Runtime.getRuntime().halt(1);
                         }
@@ -353,7 +353,7 @@ class AsyncPipedFileCopier extends AbstractAsyncFileCopier implements FileCopier
                     }
                 } catch (OutOfMemoryError e) {
                     try {
-                        ZimbraLog.system.fatal("out of memory", e);
+                        ZmailLog.system.fatal("out of memory", e);
                     } finally {
                         Runtime.getRuntime().halt(1);
                     }
@@ -445,7 +445,7 @@ class AsyncPipedFileCopier extends AbstractAsyncFileCopier implements FileCopier
                                     receiveFile(readOnly);
                                 } catch (OutOfMemoryError e) {
                                     try {
-                                        ZimbraLog.system.fatal("out of memory", e);
+                                        ZmailLog.system.fatal("out of memory", e);
                                     } finally {
                                         Runtime.getRuntime().halt(1);
                                     }
@@ -467,7 +467,7 @@ class AsyncPipedFileCopier extends AbstractAsyncFileCopier implements FileCopier
                     ioe.printStackTrace(System.err);
                 } catch (OutOfMemoryError e) {
                     try {
-                        ZimbraLog.system.fatal("out of memory", e);
+                        ZmailLog.system.fatal("out of memory", e);
                     } finally {
                         Runtime.getRuntime().halt(1);
                     }

@@ -12,10 +12,10 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.net;
+package org.zmail.common.net;
 
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.ZmailLog;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -29,7 +29,7 @@ import java.net.URISyntaxException;
 class ProxySelectorSocket extends SocketWrapper {
     private final ProxySelector proxySelector;
 
-    private static final Log LOG = ZimbraLog.io;
+    private static final Log LOG = ZmailLog.io;
 
     public ProxySelectorSocket(ProxySelector ps) {
         if (ps == null) {

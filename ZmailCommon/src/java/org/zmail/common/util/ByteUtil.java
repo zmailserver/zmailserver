@@ -16,7 +16,7 @@
 /*
  * Created on Apr 18, 2004
  */
-package com.zimbra.common.util;
+package org.zmail.common.util;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -236,7 +236,7 @@ public class ByteUtil {
                 try {
                     reader.close();
                 } catch (IOException e) {
-                    ZimbraLog.misc.warn("Unable to close Reader", e);
+                    ZmailLog.misc.warn("Unable to close Reader", e);
                 }
             }
         }
@@ -280,14 +280,14 @@ public class ByteUtil {
             try {
                 drain(is, false);
             } catch (Exception e) {
-                ZimbraLog.misc.debug("ignoring exception while draining PipedInputStream", e);
+                ZmailLog.misc.debug("ignoring exception while draining PipedInputStream", e);
             }
         }
 
         try {
             is.close();
         } catch (Exception e) {
-            ZimbraLog.misc.debug("ignoring exception while closing input stream", e);
+            ZmailLog.misc.debug("ignoring exception while closing input stream", e);
         }
     }
 
@@ -298,7 +298,7 @@ public class ByteUtil {
         try {
             os.close();
         } catch (Exception e) {
-            ZimbraLog.misc.debug("ignoring exception while closing output stream", e);
+            ZmailLog.misc.debug("ignoring exception while closing output stream", e);
         }
     }
 
@@ -313,7 +313,7 @@ public class ByteUtil {
         try {
             r.close();
         } catch (IOException e) {
-            ZimbraLog.misc.debug("ignoring exception while closing reader", e);
+            ZmailLog.misc.debug("ignoring exception while closing reader", e);
         }
     }
 
@@ -328,7 +328,7 @@ public class ByteUtil {
         try {
             w.close();
         } catch (IOException e) {
-            ZimbraLog.misc.debug("ignoring exception while closing writer", e);
+            ZmailLog.misc.debug("ignoring exception while closing writer", e);
         }
     }
 

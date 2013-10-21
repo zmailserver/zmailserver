@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.lmtp;
+package org.zmail.common.lmtp;
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -25,8 +25,8 @@ import java.net.Socket;
 import java.util.List;
 
 import com.google.common.collect.Lists;
-import com.zimbra.common.io.TcpServerInputStream;
-import com.zimbra.common.localconfig.LC;
+import org.zmail.common.io.TcpServerInputStream;
+import org.zmail.common.localconfig.LC;
 
 public class LmtpClient {
 
@@ -46,7 +46,7 @@ public class LmtpClient {
             mProtocol = proto;
         else
             mProtocol = Protocol.LMTP;
-        mGreetname = LC.zimbra_server_hostname.value();
+        mGreetname = LC.zmail_server_hostname.value();
 
         mConnection = new Socket(host, port);
         mOut = new BufferedOutputStream(mConnection.getOutputStream());

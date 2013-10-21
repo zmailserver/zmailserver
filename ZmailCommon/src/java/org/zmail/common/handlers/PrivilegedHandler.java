@@ -12,10 +12,10 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.handlers;
+package org.zmail.common.handlers;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.util.NetUtil;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.util.NetUtil;
 
 import java.util.Map;
 
@@ -28,24 +28,24 @@ import java.util.Map;
  */
 public class PrivilegedHandler {
 	
-    private static final String A_zimbraLmtpBindPort = "zimbraLmtpBindPort";
-    private static final String A_zimbraLmtpBindAddress = "zimbraLmtpBindAddress";
-    private static final String A_zimbraImapBindPort = "zimbraImapBindPort";
-    private static final String A_zimbraImapBindAddress = "zimbraImapBindAddress";
-    private static final String A_zimbraImapServerEnabled = "zimbraImapServerEnabled";
-    private static final String A_zimbraImapSSLBindPort = "zimbraImapSSLBindPort";
-    private static final String A_zimbraImapSSLBindAddress = "zimbraImapSSLBindAddress";
-    private static final String A_zimbraImapSSLServerEnabled = "zimbraImapSSLServerEnabled";
-    private static final String A_zimbraLmtpServerEnabled = "zimbraLmtpServerEnabled";
+    private static final String A_zmailLmtpBindPort = "zmailLmtpBindPort";
+    private static final String A_zmailLmtpBindAddress = "zmailLmtpBindAddress";
+    private static final String A_zmailImapBindPort = "zmailImapBindPort";
+    private static final String A_zmailImapBindAddress = "zmailImapBindAddress";
+    private static final String A_zmailImapServerEnabled = "zmailImapServerEnabled";
+    private static final String A_zmailImapSSLBindPort = "zmailImapSSLBindPort";
+    private static final String A_zmailImapSSLBindAddress = "zmailImapSSLBindAddress";
+    private static final String A_zmailImapSSLServerEnabled = "zmailImapSSLServerEnabled";
+    private static final String A_zmailLmtpServerEnabled = "zmailLmtpServerEnabled";
     
-    private static final String A_zimbraPop3BindPort = "zimbraPop3BindPort";
-    private static final String A_zimbraPop3BindAddress = "zimbraPop3BindAddress";
-    private static final String A_zimbraPop3ServerEnabled = "zimbraPop3ServerEnabled";
-    private static final String A_zimbraPop3SSLBindPort = "zimbraPop3SSLBindPort";
-    private static final String A_zimbraPop3SSLBindAddress = "zimbraPop3SSLBindAddress";
-    private static final String A_zimbraPop3SSLServerEnabled = "zimbraPop3SSLServerEnabled";
+    private static final String A_zmailPop3BindPort = "zmailPop3BindPort";
+    private static final String A_zmailPop3BindAddress = "zmailPop3BindAddress";
+    private static final String A_zmailPop3ServerEnabled = "zmailPop3ServerEnabled";
+    private static final String A_zmailPop3SSLBindPort = "zmailPop3SSLBindPort";
+    private static final String A_zmailPop3SSLBindAddress = "zmailPop3SSLBindAddress";
+    private static final String A_zmailPop3SSLServerEnabled = "zmailPop3SSLServerEnabled";
     
-    private static final String A_zimbraSSLExcludeCipherSuites = "zimbraSSLExcludeCipherSuites";
+    private static final String A_zmailSSLExcludeCipherSuites = "zmailSSLExcludeCipherSuites";
     
     private static final String mailboxd_keystore = "mailboxd_keystore";
     private static final String mailboxd_keystore_password = "mailboxd_keystore_password";
@@ -63,15 +63,15 @@ public class PrivilegedHandler {
         String[] excludeCiphers;
         try {
         	
-        	if (LC.zimbra_ssl_enabled.booleanValue()) { //default is true
+        	if (LC.zmail_ssl_enabled.booleanValue()) { //default is true
         		System.setProperty("javax.net.ssl.keyStore", getAttr(attributes, mailboxd_keystore));
         		System.setProperty("javax.net.ssl.keyStorePassword", getAttr(attributes, mailboxd_keystore_password));
         		System.setProperty("javax.net.ssl.trustStorePassword", getAttr(attributes, mailboxd_truststore_password));
         	}
             
-            if (getBooleanAttr(attributes, A_zimbraPop3ServerEnabled, false)) {
-                port = getIntAttr(attributes, A_zimbraPop3BindPort, D_POP3_BIND_PORT);
-                address = getAttr(attributes, A_zimbraPop3BindAddress, null);
+            if (getBooleanAttr(attributes, A_zmailPop3ServerEnabled, false)) {
+                port = getIntAttr(attributes, A_zmailPop3BindPort, D_POP3_BIND_PORT);
+                address = getAttr(attributes, A_zmailPop3BindAddress, null);
                 if (LC.nio_pop3_enabled.booleanValue()) {
                     NetUtil.bindNioServerSocket(address, port);
                 } else {
@@ -79,9 +79,9 @@ public class PrivilegedHandler {
                 }
             }
 
-            if (getBooleanAttr(attributes, A_zimbraPop3SSLServerEnabled, false)) {
-                port = getIntAttr(attributes, A_zimbraPop3SSLBindPort, D_POP3_SSL_BIND_PORT);
-                address = getAttr(attributes, A_zimbraPop3SSLBindAddress, null);
+            if (getBooleanAttr(attributes, A_zmailPop3SSLServerEnabled, false)) {
+                port = getIntAttr(attributes, A_zmailPop3SSLBindPort, D_POP3_SSL_BIND_PORT);
+                address = getAttr(attributes, A_zmailPop3SSLBindAddress, null);
                 if (LC.nio_pop3_enabled.booleanValue()) {
                     NetUtil.bindNioServerSocket(address, port);
                 } else {
@@ -90,9 +90,9 @@ public class PrivilegedHandler {
                 }
             }
 
-            if (getBooleanAttr(attributes, A_zimbraImapServerEnabled, false)) {
-            	port = getIntAttr(attributes, A_zimbraImapBindPort, D_IMAP_BIND_PORT);
-            	address = getAttr(attributes, A_zimbraImapBindAddress, null);
+            if (getBooleanAttr(attributes, A_zmailImapServerEnabled, false)) {
+            	port = getIntAttr(attributes, A_zmailImapBindPort, D_IMAP_BIND_PORT);
+            	address = getAttr(attributes, A_zmailImapBindAddress, null);
                 if (LC.nio_imap_enabled.booleanValue()) {
                     NetUtil.bindNioServerSocket(address, port);
                 } else {
@@ -100,9 +100,9 @@ public class PrivilegedHandler {
                 }
             }
 
-            if (getBooleanAttr(attributes, A_zimbraImapSSLServerEnabled, false)) {
-            	port = getIntAttr(attributes, A_zimbraImapSSLBindPort, D_IMAP_SSL_BIND_PORT);
-            	address = getAttr(attributes, A_zimbraImapSSLBindAddress, null);
+            if (getBooleanAttr(attributes, A_zmailImapSSLServerEnabled, false)) {
+            	port = getIntAttr(attributes, A_zmailImapSSLBindPort, D_IMAP_SSL_BIND_PORT);
+            	address = getAttr(attributes, A_zmailImapSSLBindAddress, null);
             	if (LC.nio_imap_enabled.booleanValue()) {
                     NetUtil.bindNioServerSocket(address, port);
                 } else {
@@ -111,9 +111,9 @@ public class PrivilegedHandler {
                 }
             }
 
-            if (getBooleanAttr(attributes, A_zimbraLmtpServerEnabled, false)) {
-            	port = getIntAttr(attributes, A_zimbraLmtpBindPort, D_LMTP_BIND_PORT);
-            	address = getAttr(attributes, A_zimbraLmtpBindAddress, null);
+            if (getBooleanAttr(attributes, A_zmailLmtpServerEnabled, false)) {
+            	port = getIntAttr(attributes, A_zmailLmtpBindPort, D_LMTP_BIND_PORT);
+            	address = getAttr(attributes, A_zmailLmtpBindAddress, null);
             	NetUtil.bindTcpServerSocket(address, port);
             }
         } catch (Throwable t) {        	
@@ -152,7 +152,7 @@ public class PrivilegedHandler {
 	}
 	
 	private static String[] getExcludeCiphers(Map<String, Object> attributes) {
-	String ec = getAttr(attributes, A_zimbraSSLExcludeCipherSuites, null);
+	String ec = getAttr(attributes, A_zmailSSLExcludeCipherSuites, null);
 	if (ec != null)
 	    return ec.split(" ");
 	else

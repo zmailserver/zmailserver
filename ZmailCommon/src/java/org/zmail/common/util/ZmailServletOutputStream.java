@@ -12,13 +12,13 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.util;
+package org.zmail.common.util;
 
 import java.io.IOException;
 
 import javax.servlet.ServletOutputStream;
 
-import com.zimbra.common.localconfig.LC;
+import org.zmail.common.localconfig.LC;
 
 
 /**
@@ -57,15 +57,15 @@ import com.zimbra.common.localconfig.LC;
  * and we don't interfere with jetty's process in deciding on the transfer encoding(problem of doing 2).
  */
 
-public class ZimbraServletOutputStream implements Appendable {
+public class ZmailServletOutputStream implements Appendable {
 
-    private static final int BUFFER_SIZE = LC.zimbra_servlet_output_stream_buffer_size.intValueWithinRange(512, 20480);
+    private static final int BUFFER_SIZE = LC.zmail_servlet_output_stream_buffer_size.intValueWithinRange(512, 20480);
     ServletOutputStream mOut;
     
     // buffer to avoid frequent toString().getBytes()
     StringBuilder mBuffer = new StringBuilder(BUFFER_SIZE);
     
-    public ZimbraServletOutputStream(ServletOutputStream out) {
+    public ZmailServletOutputStream(ServletOutputStream out) {
         mOut = out;
     }
     

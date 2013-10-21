@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.mime.shim;
+package org.zmail.common.mime.shim;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,19 +27,19 @@ import javax.mail.MessagingException;
 import javax.mail.internet.InternetHeaders;
 
 import com.google.common.collect.ImmutableSet;
-import com.zimbra.common.util.Pair;
+import org.zmail.common.util.Pair;
 
 public class JavaMailInternetHeaders extends InternetHeaders implements JavaMailShim {
     private static final boolean ZPARSER = JavaMailMimeMessage.ZPARSER;
 
-    com.zimbra.common.mime.MimeHeaderBlock zheaders;
+    org.zmail.common.mime.MimeHeaderBlock zheaders;
     private String defaultCharset;
 
-    JavaMailInternetHeaders(com.zimbra.common.mime.MimeHeaderBlock headers) {
+    JavaMailInternetHeaders(org.zmail.common.mime.MimeHeaderBlock headers) {
         this(headers, null);
     }
 
-    JavaMailInternetHeaders(com.zimbra.common.mime.MimeHeaderBlock headers, String charset) {
+    JavaMailInternetHeaders(org.zmail.common.mime.MimeHeaderBlock headers, String charset) {
         zheaders = headers;
         defaultCharset = charset;
     }
@@ -47,7 +47,7 @@ public class JavaMailInternetHeaders extends InternetHeaders implements JavaMail
     public JavaMailInternetHeaders() {
         super();
         if (ZPARSER) {
-            zheaders = new com.zimbra.common.mime.MimeHeaderBlock(false);
+            zheaders = new org.zmail.common.mime.MimeHeaderBlock(false);
         }
     }
 
@@ -55,7 +55,7 @@ public class JavaMailInternetHeaders extends InternetHeaders implements JavaMail
         super();
         if (ZPARSER) {
             try {
-                zheaders = new com.zimbra.common.mime.MimeHeaderBlock(is);
+                zheaders = new org.zmail.common.mime.MimeHeaderBlock(is);
             } catch (IOException ioe) {
                 throw new MessagingException("error reading InternetHeaders", ioe);
             }
@@ -75,7 +75,7 @@ public class JavaMailInternetHeaders extends InternetHeaders implements JavaMail
     }
 
 
-    com.zimbra.common.mime.MimeHeaderBlock getZimbraMimeHeaderBlock() {
+    org.zmail.common.mime.MimeHeaderBlock getZmailMimeHeaderBlock() {
         return zheaders;
     }
 
@@ -83,7 +83,7 @@ public class JavaMailInternetHeaders extends InternetHeaders implements JavaMail
     public void load(InputStream is) throws MessagingException {
         if (ZPARSER) {
             try {
-                zheaders.appendAll(new com.zimbra.common.mime.MimeHeaderBlock(is));
+                zheaders.appendAll(new org.zmail.common.mime.MimeHeaderBlock(is));
             } catch (IOException ioe) {
                 throw new MessagingException("error reading header block", ioe);
             }
@@ -95,13 +95,13 @@ public class JavaMailInternetHeaders extends InternetHeaders implements JavaMail
     @Override
     public String[] getHeader(String name) {
         if (ZPARSER) {
-            List<com.zimbra.common.mime.MimeHeader> matches = zheaders.getAll(name);
+            List<org.zmail.common.mime.MimeHeader> matches = zheaders.getAll(name);
             if (matches == null || matches.isEmpty()) {
                 return null;
             } else {
                 int i = 0;
                 String[] values = new String[matches.size()];
-                for (com.zimbra.common.mime.MimeHeader header : matches) {
+                for (org.zmail.common.mime.MimeHeader header : matches) {
                     values[i++] = header.getEncodedValue(defaultCharset);
                 }
                 return values;
@@ -175,7 +175,7 @@ public class JavaMailInternetHeaders extends InternetHeaders implements JavaMail
             names = NO_HEADERS;
         }
         List<InternetHeader> jmheaders = new ArrayList<InternetHeader>();
-        for (com.zimbra.common.mime.MimeHeader header : zheaders) {
+        for (org.zmail.common.mime.MimeHeader header : zheaders) {
             int i = 0;
             for ( ; i < names.length; i++) {
                 if (header.getName().equalsIgnoreCase(names[i])) {
@@ -273,7 +273,7 @@ public class JavaMailInternetHeaders extends InternetHeaders implements JavaMail
 
     private Enumeration<String> enumerateHeaderLines(boolean match, String[] names) {
         List<String> jmheaders = new ArrayList<String>();
-        for (com.zimbra.common.mime.MimeHeader header : zheaders) {
+        for (org.zmail.common.mime.MimeHeader header : zheaders) {
             int i = 0;
             for ( ; i < names.length; i++) {
                 if (header.getName().equalsIgnoreCase(names[i])) {

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.iochannel;
+package org.zmail.common.iochannel;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -27,8 +27,8 @@ import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
 
 /**
  * iochannel is a framework to send and receive data in a cluster

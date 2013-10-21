@@ -31,7 +31,7 @@
 ]>
 
 <soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
-    <soap:Header><context xmlns="urn:zimbra"><nosession></nosession></context></soap:Header>
-    <soap:Body><DocumentActionRequest xmlns="urn:zimbraMail"><action id="280"><op>&MASSIVE;</op></action></DocumentActionRequest>
+    <soap:Header><context xmlns="urn:zmail"><nosession></nosession></context></soap:Header>
+    <soap:Body><DocumentActionRequest xmlns="urn:zmailMail"><action id="280"><op>&MASSIVE;</op></action></DocumentActionRequest>
 </soap:Body>
 </soap:Envelope>

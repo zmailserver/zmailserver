@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.iochannel;
+package org.zmail.common.iochannel;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -28,9 +28,9 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import com.zimbra.common.iochannel.Config.ServerConfig;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
+import org.zmail.common.iochannel.Config.ServerConfig;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
 
 /**
  * Client manages the outbound packets in iochannel framework.

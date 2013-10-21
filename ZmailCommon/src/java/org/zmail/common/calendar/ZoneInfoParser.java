@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.calendar;
+package org.zmail.common.calendar;
 
 import java.io.File;
 import java.io.FileReader;

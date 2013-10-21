@@ -13,14 +13,14 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.soap;
+package org.zmail.common.soap;
 
 import org.dom4j.QName;
 import org.dom4j.Namespace;
 
 public class VoiceConstants {
 
-    public static final String NAMESPACE_STR = "urn:zimbraVoice";
+    public static final String NAMESPACE_STR = "urn:zmailVoice";
     public static final Namespace NAMESPACE = Namespace.get(NAMESPACE_STR);
 
     public static final String E_GET_UC_INFO_REQUEST = "GetUCInfoRequest";
@@ -193,7 +193,7 @@ public class VoiceConstants {
     public static final String A_vmPrefGreetingType            = "vmPrefGreetingType";
     public static final String A_vmPrefEmailNotifStatus        = "vmPrefEmailNotifStatus";
     public static final String A_vmPrefPlayTutorial            = "vmPrefPlayTutorial";
-    public static final String A_zimbraPrefVoiceItemsPerPage   = "zimbraPrefVoiceItemsPerPage";	
+    public static final String A_zmailPrefVoiceItemsPerPage   = "zmailPrefVoiceItemsPerPage";	
 
     public static final String A_vmPrefEmailNotifTrans         = "vmPrefEmailNotifTrans";
     public static final String A_vmPrefEmailNotifAttach        = "vmPrefEmailNotifAttach";

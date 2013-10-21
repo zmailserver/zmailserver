@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.httpclient;
+package org.zmail.common.httpclient;
 
 import java.io.IOException;
 

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.mime;
+package org.zmail.common.mime;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
@@ -25,9 +25,9 @@ import java.io.UnsupportedEncodingException;
 
 import javax.activation.DataSource;
 
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.CharsetUtil;
-import com.zimbra.common.util.StringUtil;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.CharsetUtil;
+import org.zmail.common.util.StringUtil;
 
 public class MimeBodyPart extends MimePart {
 

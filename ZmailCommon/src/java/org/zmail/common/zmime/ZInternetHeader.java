@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.zmime;
+package org.zmail.common.zmime;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -25,11 +25,11 @@ import java.util.Map;
 
 import com.ibm.icu.text.CharsetDetector;
 import com.ibm.icu.text.CharsetMatch;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.CharsetUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.zmime.ZMimeUtility.ByteBuilder;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.CharsetUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.zmime.ZMimeUtility.ByteBuilder;
 
 public class ZInternetHeader {
     final HeaderInfo hinfo;
@@ -430,7 +430,7 @@ public class ZInternetHeader {
                 content = value.getBytes(charset);
             } catch (OutOfMemoryError e) {
                 try {
-                    ZimbraLog.system.fatal("out of memory", e);
+                    ZmailLog.system.fatal("out of memory", e);
                 } finally {
                     Runtime.getRuntime().halt(1);
                     content = new byte[0];  // never reachable, but averts compiler warnings

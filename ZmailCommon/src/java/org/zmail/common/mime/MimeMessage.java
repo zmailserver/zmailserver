@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.mime;
+package org.zmail.common.mime;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -28,9 +28,9 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.UUID;
 
-import com.zimbra.common.mime.MimeAddressHeader;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.DateUtil;
+import org.zmail.common.mime.MimeAddressHeader;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.DateUtil;
 
 public class MimeMessage extends MimePart {
     private static String sHostname = null;
@@ -376,7 +376,7 @@ public class MimeMessage extends MimePart {
         dumpParts(mm);
         ByteUtil.copy(mm.getRawContentStream(new String[] { "x-originalArrivalTime" }), true, System.out, false);
         ByteUtil.copy(mm.getRawContentStream(new String[] { "foo" }), true, System.out, false);
-        mm.setHeader("X-Mailer", "Zimbra 5.0 RC2");
+        mm.setHeader("X-Mailer", "Zmail 5.0 RC2");
         dumpParts(mm);
         ((MimeBodyPart) mm.getSubpart("1.1")).setTransferEncoding(ContentTransferEncoding.BASE64);
         dumpParts(mm);
@@ -449,7 +449,7 @@ public class MimeMessage extends MimePart {
         mm = new MimeMessage(new File(args[0] + File.separator + "partial-multipart-5775"));
 //        dumpParts(mm);
 
-        mm = new MimeMessage(new File(args[0] + File.separator + "zimbra-accent"));
+        mm = new MimeMessage(new File(args[0] + File.separator + "zmail-accent"));
 //        dumpParts(mm);
         ((MimeBodyPart) mm.getSubpart("1")).setContentType(new ContentType("text/plain; format=flowed; charset=iso-8859-2"));
         ((MimeBodyPart) mm.getSubpart("1")).setTransferEncoding(ContentTransferEncoding.BASE64);

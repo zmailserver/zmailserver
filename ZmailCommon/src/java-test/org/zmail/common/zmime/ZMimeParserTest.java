@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.zmime;
+package org.zmail.common.zmime;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -27,9 +27,9 @@ import javax.mail.util.SharedByteArrayInputStream;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.util.CharsetUtil;
-import com.zimbra.common.zmime.ZMimeUtility.ByteBuilder;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.util.CharsetUtil;
+import org.zmail.common.zmime.ZMimeUtility.ByteBuilder;
 
 public class ZMimeParserTest {
     private static String BOUNDARY1 = "-=_sample1";
@@ -244,18 +244,18 @@ public class ZMimeParserTest {
 //        }
 //        if (charset != null) {
 //            props.put("mail.mime.charset", charset);
-//            props.put(com.zimbra.common.mime.MimePart.PROP_CHARSET_DEFAULT, charset);
+//            props.put(org.zmail.common.mime.MimePart.PROP_CHARSET_DEFAULT, charset);
 //        }
 //
 //        Session s = Session.getInstance(props);
 //        MimeMessage zmm = new ZMimeMessage(s, new java.io.FileInputStream(file));
-//        MimeMessage jmmm = new com.zimbra.common.mime.shim.JavaMailMimeMessage(s, new javax.mail.util.SharedFileInputStream(file));
+//        MimeMessage jmmm = new org.zmail.common.mime.shim.JavaMailMimeMessage(s, new javax.mail.util.SharedFileInputStream(file));
 //        MimeMessage mm = new MimeMessage(s, new java.io.FileInputStream(file));
 //
 //        System.out.println("checking file: " + file.getName() + " [zmm/mm]");
-//        com.zimbra.common.mime.shim.JavaMailMimeTester.compareStructure(zmm, mm);
+//        org.zmail.common.mime.shim.JavaMailMimeTester.compareStructure(zmm, mm);
 //        System.out.println("checking file: " + file.getName() + " [jmmm/zmm]");
-//        com.zimbra.common.mime.shim.JavaMailMimeTester.compareStructure(jmmm, zmm);
+//        org.zmail.common.mime.shim.JavaMailMimeTester.compareStructure(jmmm, zmm);
 //    }
 //
 //    @Test

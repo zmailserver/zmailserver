@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.zmime;
+package org.zmail.common.zmime;
 
 import java.io.ByteArrayInputStream;
 import java.util.Properties;
@@ -24,9 +24,9 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.zmime.ZMimeUtility.ByteBuilder;
-import com.zimbra.common.zmime.ZTransferEncoding.Base64EncoderStream;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.zmime.ZMimeUtility.ByteBuilder;
+import org.zmail.common.zmime.ZTransferEncoding.Base64EncoderStream;
 
 public class ZMimeMultipartTest {
     @BeforeClass

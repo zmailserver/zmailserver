@@ -12,15 +12,15 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.soap;
+package org.zmail.common.soap;
 
 import java.io.IOException;
 import java.util.LinkedList;
 
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element.JSONElement;
-import com.zimbra.common.soap.Element.XMLElement;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element.JSONElement;
+import org.zmail.common.soap.Element.XMLElement;
 
 /**
  * Abstract class for sending a soap message.
@@ -116,13 +116,13 @@ public abstract class SoapTransport {
     }
 
     /**
-     * @return Zimbra context (&lt;context xmlns="urn:zimbra"&gt;) from last invoke, if there was one present.
+     * @return Zmail context (&lt;context xmlns="urn:zmail"&gt;) from last invoke, if there was one present.
      */
-    public Element getZimbraContext() {
+    public Element getZmailContext() {
         return mContext;
     }
 
-    public void clearZimbraContext() {
+    public void clearZmailContext() {
         mContext = null;
     }
 
@@ -234,8 +234,8 @@ public abstract class SoapTransport {
     }
 
     /**
-     * Return true if Zimbra-specific context header should be added
-     * @see com.zimbra.cs.offline.util.ymail.YMailClient
+     * Return true if Zmail-specific context header should be added
+     * @see org.zmail.cs.offline.util.ymail.YMailClient
      */
     public boolean generateContextHeader() {
         return true;

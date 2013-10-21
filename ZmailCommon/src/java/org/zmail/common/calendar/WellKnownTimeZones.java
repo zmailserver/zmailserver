@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.calendar;
+package org.zmail.common.calendar;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -24,14 +24,14 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 
-import com.zimbra.common.calendar.ICalTimeZone.SimpleOnset;
-import com.zimbra.common.calendar.TZIDMapper.TZ;
-import com.zimbra.common.calendar.ZCalendar.ICalTok;
-import com.zimbra.common.calendar.ZCalendar.ZComponent;
-import com.zimbra.common.calendar.ZCalendar.ZVCalendar;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.mime.MimeConstants;
+import org.zmail.common.calendar.ICalTimeZone.SimpleOnset;
+import org.zmail.common.calendar.TZIDMapper.TZ;
+import org.zmail.common.calendar.ZCalendar.ICalTok;
+import org.zmail.common.calendar.ZCalendar.ZComponent;
+import org.zmail.common.calendar.ZCalendar.ZVCalendar;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.mime.MimeConstants;
 
 public class WellKnownTimeZones {
 

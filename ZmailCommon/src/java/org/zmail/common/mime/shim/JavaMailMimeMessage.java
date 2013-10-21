@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.mime.shim;
+package org.zmail.common.mime.shim;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -41,20 +41,20 @@ import javax.mail.internet.SharedInputStream;
 import javax.mail.util.ByteArrayDataSource;
 import javax.mail.util.SharedByteArrayInputStream;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.util.Pair;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.util.Pair;
 
 public class JavaMailMimeMessage extends MimeMessage implements JavaMailShim {
     static final boolean ZPARSER = LC.javamail_zparser.booleanValue();
 
-    public static boolean usingZimbraParser() {
+    public static boolean usingZmailParser() {
         return ZPARSER;
     }
 
-    private com.zimbra.common.mime.MimeMessage zmessage;
+    private org.zmail.common.mime.MimeMessage zmessage;
     private Object jmcontent; // JavaMailMimeMultipart or JavaMailMimeMessage or null
 
-    public JavaMailMimeMessage(com.zimbra.common.mime.MimeMessage mm) {
+    public JavaMailMimeMessage(org.zmail.common.mime.MimeMessage mm) {
         super(Session.getInstance(mm.getProperties() == null ? new Properties() : mm.getProperties()));
         zmessage = mm;
     }
@@ -63,18 +63,18 @@ public class JavaMailMimeMessage extends MimeMessage implements JavaMailShim {
         super(session);
         if (ZPARSER) {
             Properties props = session == null ? null : session.getProperties();
-            zmessage = new com.zimbra.common.mime.MimeMessage(props);
+            zmessage = new org.zmail.common.mime.MimeMessage(props);
         }
     }
 
     public JavaMailMimeMessage(Session session, InputStream is) throws MessagingException {
         super(session);
         if (ZPARSER) {
-            if (is instanceof SharedInputStream && !(is instanceof com.zimbra.common.mime.MimePart.InputStreamSource)) {
+            if (is instanceof SharedInputStream && !(is instanceof org.zmail.common.mime.MimePart.InputStreamSource)) {
                 is = new JavaMailMimeBodyPart.SharedInputStreamSource((SharedInputStream) is);
             }
             try {
-                zmessage = new com.zimbra.common.mime.MimeMessage(is, session == null ? null : session.getProperties());
+                zmessage = new org.zmail.common.mime.MimeMessage(is, session == null ? null : session.getProperties());
             } catch (IOException ioe) {
                 throw new MessagingException("error instantiating MimeMessage", ioe);
             }
@@ -90,9 +90,9 @@ public class JavaMailMimeMessage extends MimeMessage implements JavaMailShim {
         super(mm instanceof JavaMailMimeMessage ? ((JavaMailMimeMessage) mm).getSession() : Session.getInstance(new Properties()));
         if (ZPARSER) {
             if (mm instanceof JavaMailMimeMessage) {
-                zmessage = new com.zimbra.common.mime.MimeMessage(((JavaMailMimeMessage) mm).getZimbraMimeMessage());
+                zmessage = new org.zmail.common.mime.MimeMessage(((JavaMailMimeMessage) mm).getZmailMimeMessage());
             } else {
-                zmessage = new com.zimbra.common.mime.MimeMessage(asByteArray(mm), session.getProperties());
+                zmessage = new org.zmail.common.mime.MimeMessage(asByteArray(mm), session.getProperties());
             }
         } else {
             modified = false;
@@ -122,7 +122,7 @@ public class JavaMailMimeMessage extends MimeMessage implements JavaMailShim {
         }
     }
 
-    com.zimbra.common.mime.MimeMessage getZimbraMimeMessage() {
+    org.zmail.common.mime.MimeMessage getZmailMimeMessage() {
         return zmessage;
     }
 
@@ -177,23 +177,23 @@ public class JavaMailMimeMessage extends MimeMessage implements JavaMailShim {
         }
     }
 
-    private List<com.zimbra.common.mime.InternetAddress> getZimbraAddressList(String name) throws MessagingException {
-        return com.zimbra.common.mime.InternetAddress.parseHeader(getHeader(name, ", "));
+    private List<org.zmail.common.mime.InternetAddress> getZmailAddressList(String name) throws MessagingException {
+        return org.zmail.common.mime.InternetAddress.parseHeader(getHeader(name, ", "));
     }
 
     private Address[] getAddressList(String name) throws MessagingException {
-        return JavaMailInternetAddress.asJavaMailInternetAddresses(getZimbraAddressList(name));
+        return JavaMailInternetAddress.asJavaMailInternetAddresses(getZmailAddressList(name));
     }
 
     private void addAddressList(String name, Address[] addresses) throws MessagingException {
         if (addresses != null && addresses.length > 0) {
-            List<com.zimbra.common.mime.InternetAddress> existing = getZimbraAddressList(name);
+            List<org.zmail.common.mime.InternetAddress> existing = getZmailAddressList(name);
             setAddressList(name, addresses, existing);
         }
     }
 
     private void setAddress(String name, Address address) {
-        com.zimbra.common.mime.InternetAddress iaddr = JavaMailInternetAddress.asZimbraInternetAddress(address);
+        org.zmail.common.mime.InternetAddress iaddr = JavaMailInternetAddress.asZmailInternetAddress(address);
         zmessage.setAddressHeader(name, iaddr);
     }
 
@@ -201,13 +201,13 @@ public class JavaMailMimeMessage extends MimeMessage implements JavaMailShim {
         setAddressList(name, addresses, null);
     }
 
-    private void setAddressList(String name, Address[] addresses, List<com.zimbra.common.mime.InternetAddress> iaddrs) {
+    private void setAddressList(String name, Address[] addresses, List<org.zmail.common.mime.InternetAddress> iaddrs) {
         if (addresses != null) {
             if (iaddrs == null) {
-                iaddrs = new ArrayList<com.zimbra.common.mime.InternetAddress>(addresses.length);
+                iaddrs = new ArrayList<org.zmail.common.mime.InternetAddress>(addresses.length);
             }
             for (Address addr : addresses) {
-                iaddrs.add(JavaMailInternetAddress.asZimbraInternetAddress(addr));
+                iaddrs.add(JavaMailInternetAddress.asZmailInternetAddress(addr));
             }
         }
         zmessage.setAddressHeader(name, iaddrs);
@@ -269,7 +269,7 @@ public class JavaMailMimeMessage extends MimeMessage implements JavaMailShim {
         }
     }
 
-    private static String asZimbraAddressType(Message.RecipientType type) {
+    private static String asZmailAddressType(Message.RecipientType type) {
         if (type == Message.RecipientType.TO) {
             return "To";
         } else if (type == Message.RecipientType.CC) {
@@ -286,7 +286,7 @@ public class JavaMailMimeMessage extends MimeMessage implements JavaMailShim {
     @Override
     public Address[] getRecipients(Message.RecipientType type) throws MessagingException {
         if (ZPARSER) {
-            return getAddressList(asZimbraAddressType(type));
+            return getAddressList(asZmailAddressType(type));
         } else {
             return super.getRecipients(type);
         }
@@ -298,9 +298,9 @@ public class JavaMailMimeMessage extends MimeMessage implements JavaMailShim {
     public Address[] getAllRecipients() throws MessagingException {
         if (ZPARSER) {
             boolean foundAny = false;
-            List<com.zimbra.common.mime.InternetAddress> iaddrs = new ArrayList<com.zimbra.common.mime.InternetAddress>();
+            List<org.zmail.common.mime.InternetAddress> iaddrs = new ArrayList<org.zmail.common.mime.InternetAddress>();
             for (String name : RECIPIENT_HEADERS) {
-                List<com.zimbra.common.mime.InternetAddress> subaddrs = getZimbraAddressList(name);
+                List<org.zmail.common.mime.InternetAddress> subaddrs = getZmailAddressList(name);
                 if (subaddrs != null) {
                     iaddrs.addAll(subaddrs);
                     foundAny = true;
@@ -315,7 +315,7 @@ public class JavaMailMimeMessage extends MimeMessage implements JavaMailShim {
     @Override
     public void setRecipient(Message.RecipientType type, Address address) throws MessagingException {
         if (ZPARSER) {
-            setAddress(asZimbraAddressType(type), address);
+            setAddress(asZmailAddressType(type), address);
         } else {
             super.setRecipient(type, address);
         }
@@ -324,7 +324,7 @@ public class JavaMailMimeMessage extends MimeMessage implements JavaMailShim {
     @Override
     public void setRecipients(Message.RecipientType type, Address[] addresses) throws MessagingException {
         if (ZPARSER) {
-            setAddressList(asZimbraAddressType(type), addresses);
+            setAddressList(asZmailAddressType(type), addresses);
         } else {
             super.setRecipients(type, addresses);
         }
@@ -333,8 +333,8 @@ public class JavaMailMimeMessage extends MimeMessage implements JavaMailShim {
     @Override
     public void setRecipients(Message.RecipientType type, String addresses) throws MessagingException {
         if (ZPARSER) {
-            String name = asZimbraAddressType(type);
-            zmessage.setAddressHeader(name, com.zimbra.common.mime.InternetAddress.parseHeader(addresses));
+            String name = asZmailAddressType(type);
+            zmessage.setAddressHeader(name, org.zmail.common.mime.InternetAddress.parseHeader(addresses));
         } else {
             super.setRecipients(type, addresses);
         }
@@ -352,7 +352,7 @@ public class JavaMailMimeMessage extends MimeMessage implements JavaMailShim {
     @Override
     public void addRecipients(Message.RecipientType type, Address[] addresses) throws MessagingException {
         if (ZPARSER) {
-            addAddressList(asZimbraAddressType(type), addresses);
+            addAddressList(asZmailAddressType(type), addresses);
         } else {
             super.addRecipients(type, addresses);
         }
@@ -361,12 +361,12 @@ public class JavaMailMimeMessage extends MimeMessage implements JavaMailShim {
     @Override
     public void addRecipients(Message.RecipientType type, String addresses) throws MessagingException {
         if (ZPARSER) {
-            String name = asZimbraAddressType(type);
-            List<com.zimbra.common.mime.InternetAddress> iaddrs = zmessage.getAddressHeader(name);
+            String name = asZmailAddressType(type);
+            List<org.zmail.common.mime.InternetAddress> iaddrs = zmessage.getAddressHeader(name);
             if (iaddrs == null) {
-                iaddrs = new ArrayList<com.zimbra.common.mime.InternetAddress>(5);
+                iaddrs = new ArrayList<org.zmail.common.mime.InternetAddress>(5);
             }
-            iaddrs.addAll(com.zimbra.common.mime.InternetAddress.parseHeader(addresses));
+            iaddrs.addAll(org.zmail.common.mime.InternetAddress.parseHeader(addresses));
             zmessage.setAddressHeader(name, iaddrs);
         } else {
             super.addRecipients(type, addresses);
@@ -671,13 +671,13 @@ public class JavaMailMimeMessage extends MimeMessage implements JavaMailShim {
     @Override
     public Object getContent() throws IOException, MessagingException {
         if (ZPARSER) {
-            com.zimbra.common.mime.MimePart body = zmessage.getBodyPart();
+            org.zmail.common.mime.MimePart body = zmessage.getBodyPart();
             if (jmcontent != null) {
                 return jmcontent;
-            } else if (body instanceof com.zimbra.common.mime.MimeMessage) {
-                return jmcontent = new JavaMailMimeMessage((com.zimbra.common.mime.MimeMessage) body);
-            } else if (body instanceof com.zimbra.common.mime.MimeMultipart) {
-                return jmcontent = new JavaMailMimeMultipart((com.zimbra.common.mime.MimeMultipart) body, this);
+            } else if (body instanceof org.zmail.common.mime.MimeMessage) {
+                return jmcontent = new JavaMailMimeMessage((org.zmail.common.mime.MimeMessage) body);
+            } else if (body instanceof org.zmail.common.mime.MimeMultipart) {
+                return jmcontent = new JavaMailMimeMultipart((org.zmail.common.mime.MimeMultipart) body, this);
             } else {
                 return getDataHandler().getContent();
             }
@@ -687,9 +687,9 @@ public class JavaMailMimeMessage extends MimeMessage implements JavaMailShim {
     }
 
     private void setDataSource(DataSource ds) throws MessagingException {
-        com.zimbra.common.mime.MimePart body = JavaMailMimeBodyPart.parsePart(ds);
+        org.zmail.common.mime.MimePart body = JavaMailMimeBodyPart.parsePart(ds);
         zmessage.setBodyPart(body);
-        if (!(body instanceof com.zimbra.common.mime.MimeMultipart) && ds.getName() != null && !ds.getName().trim().isEmpty()) {
+        if (!(body instanceof org.zmail.common.mime.MimeMultipart) && ds.getName() != null && !ds.getName().trim().isEmpty()) {
             body.setFilename(ds.getName());
         }
         jmcontent = null;
@@ -707,12 +707,12 @@ public class JavaMailMimeMessage extends MimeMessage implements JavaMailShim {
     @Override
     public void setContent(Object o, String type) throws MessagingException {
         if (ZPARSER) {
-            com.zimbra.common.mime.ContentType ctype = new com.zimbra.common.mime.ContentType(type);
+            org.zmail.common.mime.ContentType ctype = new org.zmail.common.mime.ContentType(type);
             if (o instanceof JavaMailMimeMultipart) {
                 setContent((Multipart) o);
                 setHeader("Content-Type", type);
             } else if (o instanceof JavaMailMimeMessage) {
-                zmessage.setBodyPart(((JavaMailMimeMessage) o).getZimbraMimeMessage());
+                zmessage.setBodyPart(((JavaMailMimeMessage) o).getZmailMimeMessage());
                 setHeader("Content-Type", type);
                 jmcontent = o;
             } else if (o instanceof String) {
@@ -738,7 +738,7 @@ public class JavaMailMimeMessage extends MimeMessage implements JavaMailShim {
     public void setContent(Multipart mp) throws MessagingException {
         if (ZPARSER) {
             if (mp instanceof JavaMailMimeMultipart) {
-                zmessage.setBodyPart(((JavaMailMimeMultipart) mp).getZimbraMimeMultipart());
+                zmessage.setBodyPart(((JavaMailMimeMultipart) mp).getZmailMimeMultipart());
                 mp.setParent(this);
                 jmcontent = mp;
             } else {
@@ -771,12 +771,12 @@ public class JavaMailMimeMessage extends MimeMessage implements JavaMailShim {
     @Override
     public void setText(String text, String charset, String subtype) throws MessagingException {
         if (ZPARSER) {
-            com.zimbra.common.mime.MimePart mp = zmessage.getBodyPart();
-            if (!(mp instanceof com.zimbra.common.mime.MimeBodyPart)) {
-                zmessage.setBodyPart(mp = new com.zimbra.common.mime.MimeBodyPart(null));
+            org.zmail.common.mime.MimePart mp = zmessage.getBodyPart();
+            if (!(mp instanceof org.zmail.common.mime.MimeBodyPart)) {
+                zmessage.setBodyPart(mp = new org.zmail.common.mime.MimeBodyPart(null));
             }
             try {
-                ((com.zimbra.common.mime.MimeBodyPart) mp).setText(text, charset, subtype, null);
+                ((org.zmail.common.mime.MimeBodyPart) mp).setText(text, charset, subtype, null);
                 jmcontent = null;
             } catch (IOException ioe) {
                 throw new MessagingException("error encoding text with charset", ioe);
@@ -894,9 +894,9 @@ public class JavaMailMimeMessage extends MimeMessage implements JavaMailShim {
             // need to handle the case where we're switching to or from multipart
             Pair<String, byte[]> parsed = JavaMailInternetHeaders.parseHeaderLine(line);
             if (parsed != null && "Content-Type".equalsIgnoreCase(parsed.getFirst())) {
-                com.zimbra.common.mime.ContentType ctype = new com.zimbra.common.mime.ContentType(new String(parsed.getSecond()));
+                org.zmail.common.mime.ContentType ctype = new org.zmail.common.mime.ContentType(new String(parsed.getSecond()));
                 if (ctype.getPrimaryType().equals("multipart")) {
-                    com.zimbra.common.mime.MimeMultipart mmp = new com.zimbra.common.mime.MimeMultipart(ctype.getSubType());
+                    org.zmail.common.mime.MimeMultipart mmp = new org.zmail.common.mime.MimeMultipart(ctype.getSubType());
                     zmessage.setBodyPart(mmp);
                     mmp.setMimeHeader(parsed.getFirst(), ctype);
                     return;
@@ -978,10 +978,10 @@ public class JavaMailMimeMessage extends MimeMessage implements JavaMailShim {
     protected void updateHeaders() throws MessagingException {
         if (ZPARSER) {
             // would love to delegate this to the superclass, but that involves a lot of unused internals
-            com.zimbra.common.mime.MimePart mp = zmessage.getBodyPart();
-            if (mp instanceof com.zimbra.common.mime.MimeMultipart) {
+            org.zmail.common.mime.MimePart mp = zmessage.getBodyPart();
+            if (mp instanceof org.zmail.common.mime.MimeMultipart) {
                 if (jmcontent == null) {
-                    jmcontent = new JavaMailMimeMultipart((com.zimbra.common.mime.MimeMultipart) mp);
+                    jmcontent = new JavaMailMimeMultipart((org.zmail.common.mime.MimeMultipart) mp);
                 }
                 ((JavaMailMimeMultipart) jmcontent).updateHeaders();
             }

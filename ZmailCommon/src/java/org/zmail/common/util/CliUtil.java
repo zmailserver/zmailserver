@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.util;
+package org.zmail.common.util;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -25,8 +25,8 @@ import jline.ConsoleReader;
 import jline.ConsoleReaderInputStream;
 import jline.History;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.net.SocketFactories;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.net.SocketFactories;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Option;
 
@@ -40,7 +40,7 @@ public class CliUtil {
     }
 
     public static void toolSetup(String defaultLogLevel, String logFile, boolean showThreads) {
-        ZimbraLog.toolSetupLog4j(defaultLogLevel, logFile, showThreads);
+        ZmailLog.toolSetupLog4j(defaultLogLevel, logFile, showThreads);
         SocketFactories.registerProtocols();
         
         // Bug: 47051

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.lmtp;
+package org.zmail.common.lmtp;
 
 public class LmtpProtocolException extends Exception {
 	public LmtpProtocolException(String msg) {

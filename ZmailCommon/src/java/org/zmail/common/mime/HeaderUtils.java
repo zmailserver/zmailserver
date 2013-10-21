@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.mime;
+package org.zmail.common.mime;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -21,8 +21,8 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.CharsetUtil;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.CharsetUtil;
 
 public class HeaderUtils {
 

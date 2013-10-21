@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.account;
+package org.zmail.common.account;
 
 public class ProvisioningConstants {
 

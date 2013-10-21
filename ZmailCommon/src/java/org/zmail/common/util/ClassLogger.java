@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.util;
+package org.zmail.common.util;
 
 /**
  * Inherit from this logging helper class and implement the getInstanceInfo()

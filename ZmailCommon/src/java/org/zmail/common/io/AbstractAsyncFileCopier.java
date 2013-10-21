@@ -13,14 +13,14 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.io;
+package org.zmail.common.io;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.util.ZmailLog;
 
 abstract class AbstractAsyncFileCopier implements FileCopier {
 
@@ -34,7 +34,7 @@ abstract class AbstractAsyncFileCopier implements FileCopier {
             ? queueCapacity
             : FileCopierOptions.DEFAULT_ASYNC_QUEUE_CAPACITY;
         if (qsize > MAX_QUEUE_SIZE) {
-            ZimbraLog.io.warn(
+            ZmailLog.io.warn(
                     "Async queue size " + qsize +
                     " is too big; limiting to " + MAX_QUEUE_SIZE);
             qsize = MAX_QUEUE_SIZE;

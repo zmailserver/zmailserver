@@ -13,16 +13,16 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.calendar;
+package org.zmail.common.calendar;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import com.zimbra.common.calendar.ZCalendar.ZParameter;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
+import org.zmail.common.calendar.ZCalendar.ZParameter;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
 
 /**
  * Common calendar utilities.
@@ -43,7 +43,7 @@ public class CalendarUtil {
     }
 
     /**
-     * Use JAXB e.g. {@link com.zimbra.soap.mail.type.XParam} where possible
+     * Use JAXB e.g. {@link org.zmail.soap.mail.type.XParam} where possible
      * instead of using this
      */
     public static void encodeXParams(Element parent, Iterator<ZParameter> xparamsIterator) {

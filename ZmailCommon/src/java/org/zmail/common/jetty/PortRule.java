@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.jetty;
+package org.zmail.common.jetty;
 
 import java.io.IOException;
 import java.util.regex.Matcher;
@@ -24,8 +24,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.eclipse.jetty.rewrite.handler.Rule;
 
-import com.zimbra.common.util.L10nUtil;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.util.L10nUtil;
+import org.zmail.common.util.ZmailLog;
 
 public class PortRule extends Rule {
 
@@ -110,7 +110,7 @@ public class PortRule extends Rule {
                 L10nUtil.MsgKey reasonKey = L10nUtil.MsgKey.valueOf(_httpErrorReasonRegexNotMatched);
                 reason = L10nUtil.getMessage(reasonKey);
             } catch (IllegalArgumentException e) {
-                ZimbraLog.misc.debug("invalid msg key: " + _httpErrorReasonRegexNotMatched);
+                ZmailLog.misc.debug("invalid msg key: " + _httpErrorReasonRegexNotMatched);
             }
         }
         

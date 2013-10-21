@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.util;
+package org.zmail.common.util;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,7 +24,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
-import com.zimbra.common.localconfig.LC;
+import org.zmail.common.localconfig.LC;
 
 /**
  * Factory that creates and manages instances of {@link Log}.
@@ -39,18 +39,18 @@ public final class LogFactory {
     }
 
     public synchronized static void init() {
-        PropertyConfigurator.configure(LC.zimbra_log4j_properties.value());
+        PropertyConfigurator.configure(LC.zmail_log4j_properties.value());
     }
 
     public synchronized static void reset() {
-        ZimbraLog.misc.info("Resetting all loggers");
+        ZmailLog.misc.info("Resetting all loggers");
         // LogManager.resetConfiguration() will set all logger's level to null. We don't want to leave account loggers
         // with that state.
         for (Log log : getAllLoggers()) {
             log.removeAccountLoggers();
         }
         LogManager.resetConfiguration();
-        PropertyConfigurator.configure(LC.zimbra_log4j_properties.value());
+        PropertyConfigurator.configure(LC.zmail_log4j_properties.value());
     }
 
     public static Log getLog(Class<?> clazz) {

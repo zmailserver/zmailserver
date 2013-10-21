@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.util;
+package org.zmail.common.util;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -22,7 +22,7 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static com.zimbra.common.util.StringUtil.isNullOrEmpty;
+import static org.zmail.common.util.StringUtil.isNullOrEmpty;
 
 public final class TaskUtil {
     private static Timer timer;

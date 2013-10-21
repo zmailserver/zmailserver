@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.mime;
+package org.zmail.common.mime;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PushbackInputStream;
 
-import com.zimbra.common.util.ByteUtil;
+import org.zmail.common.util.ByteUtil;
 
 public enum ContentTransferEncoding {
     QUOTED_PRINTABLE("quoted-printable"), BASE64("base64"), SEVEN_BIT("7bit"), EIGHT_BIT("8bit"), BINARY("binary");

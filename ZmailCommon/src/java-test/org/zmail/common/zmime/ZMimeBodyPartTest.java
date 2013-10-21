@@ -12,13 +12,13 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.zmime;
+package org.zmail.common.zmime;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.common.util.ByteUtil;
+import org.zmail.common.util.ByteUtil;
 
 public class ZMimeBodyPartTest {
     @BeforeClass
@@ -44,7 +44,7 @@ public class ZMimeBodyPartTest {
         mbp.setText(content, "utf-8");
         Assert.assertArrayEquals(content.getBytes("utf-8"), ByteUtil.getContent(mbp.getInputStream(), -1));
 
-        mbp.setHeader("Content-Type", "xml/x-zimbra-share");
+        mbp.setHeader("Content-Type", "xml/x-zmail-share");
         Assert.assertArrayEquals(content.getBytes(), ByteUtil.getContent(mbp.getInputStream(), -1));
 
         mbp.writeTo(System.out);

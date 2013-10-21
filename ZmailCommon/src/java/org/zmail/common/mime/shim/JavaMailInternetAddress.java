@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.mime.shim;
+package org.zmail.common.mime.shim;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Collection;
@@ -26,16 +26,16 @@ public class JavaMailInternetAddress extends InternetAddress implements JavaMail
     private static final long serialVersionUID = -8715292468770012173L;
     private static final boolean ZPARSER = JavaMailMimeMessage.ZPARSER;
 
-    private com.zimbra.common.mime.InternetAddress mAddress;
+    private org.zmail.common.mime.InternetAddress mAddress;
 
-    JavaMailInternetAddress(com.zimbra.common.mime.InternetAddress addr, boolean parsed) {
+    JavaMailInternetAddress(org.zmail.common.mime.InternetAddress addr, boolean parsed) {
         mAddress = parsed ? reverseIfNecessary(addr) : addr;
     }
 
     public JavaMailInternetAddress() {
         super();
         if (ZPARSER) {
-            mAddress = new com.zimbra.common.mime.InternetAddress();
+            mAddress = new org.zmail.common.mime.InternetAddress();
         }
     }
 
@@ -43,7 +43,7 @@ public class JavaMailInternetAddress extends InternetAddress implements JavaMail
         // use the superclass constructor since its members aren't readable by the subclass
         super(ZPARSER ? "a@b.com" : address);
         if (ZPARSER) {
-            List<com.zimbra.common.mime.InternetAddress> addrs = com.zimbra.common.mime.InternetAddress.parseHeader(address);
+            List<org.zmail.common.mime.InternetAddress> addrs = org.zmail.common.mime.InternetAddress.parseHeader(address);
             if (addrs.size() != 1) {
                 throw new AddressException("Illegal address", address);
             }
@@ -67,46 +67,46 @@ public class JavaMailInternetAddress extends InternetAddress implements JavaMail
     throws UnsupportedEncodingException {
         super();
         if (ZPARSER) {
-            mAddress = new com.zimbra.common.mime.InternetAddress(personal, address).setCharset(charset);
+            mAddress = new org.zmail.common.mime.InternetAddress(personal, address).setCharset(charset);
         } else {
             setAddress(address);
             setPersonal(personal, charset);
         }
     }
 
-    com.zimbra.common.mime.InternetAddress reverseIfNecessary(com.zimbra.common.mime.InternetAddress iaddr) {
+    org.zmail.common.mime.InternetAddress reverseIfNecessary(org.zmail.common.mime.InternetAddress iaddr) {
         if (iaddr != null && iaddr.getAddress() == null && iaddr.getPersonal() != null) {
-            return new com.zimbra.common.mime.InternetAddress(iaddr.getAddress(), iaddr.getPersonal()).setCharset(iaddr.getCharset());
+            return new org.zmail.common.mime.InternetAddress(iaddr.getAddress(), iaddr.getPersonal()).setCharset(iaddr.getCharset());
         } else {
             return iaddr;
         }
     }
 
-    com.zimbra.common.mime.InternetAddress getZimbraInternetAddress() {
+    org.zmail.common.mime.InternetAddress getZmailInternetAddress() {
         return mAddress;
     }
 
-    static com.zimbra.common.mime.InternetAddress asZimbraInternetAddress(Address address) {
+    static org.zmail.common.mime.InternetAddress asZmailInternetAddress(Address address) {
         if (address == null) {
             return null;
         } else if (address instanceof JavaMailInternetAddress) {
-            return ((JavaMailInternetAddress) address).getZimbraInternetAddress();
+            return ((JavaMailInternetAddress) address).getZmailInternetAddress();
         } else if (address instanceof InternetAddress) {
             InternetAddress addr = (InternetAddress) address;
-            return new com.zimbra.common.mime.InternetAddress(addr.getPersonal(), addr.getAddress());
+            return new org.zmail.common.mime.InternetAddress(addr.getPersonal(), addr.getAddress());
         } else {
-            return new com.zimbra.common.mime.InternetAddress(address.toString());
+            return new org.zmail.common.mime.InternetAddress(address.toString());
         }
     }
 
-    static Address[] asJavaMailInternetAddresses(Collection<com.zimbra.common.mime.InternetAddress> iaddrs) {
+    static Address[] asJavaMailInternetAddresses(Collection<org.zmail.common.mime.InternetAddress> iaddrs) {
         if (iaddrs == null) {
             return null;
         }
 
         InternetAddress[] addresses = new InternetAddress[iaddrs.size()];
         int i = 0;
-        for (com.zimbra.common.mime.InternetAddress addr : iaddrs) {
+        for (org.zmail.common.mime.InternetAddress addr : iaddrs) {
             addresses[i++] = new JavaMailInternetAddress(addr, true);
         }
         return addresses;
@@ -130,7 +130,7 @@ public class JavaMailInternetAddress extends InternetAddress implements JavaMail
 
     public static InternetAddress[] parseHeader(String addresslist, boolean strict) throws AddressException {
         if (ZPARSER) {
-            List<com.zimbra.common.mime.InternetAddress> addrs = com.zimbra.common.mime.InternetAddress.parseHeader(addresslist);
+            List<org.zmail.common.mime.InternetAddress> addrs = org.zmail.common.mime.InternetAddress.parseHeader(addresslist);
             InternetAddress[] jmaddrs = new InternetAddress[addrs.size()];
             for (int i = 0; i < addrs.size(); i++) {
                 InternetAddress jmaddr = new JavaMailInternetAddress(addrs.get(i), true);
@@ -147,7 +147,7 @@ public class JavaMailInternetAddress extends InternetAddress implements JavaMail
 
     @Override public InternetAddress clone() {
         if (ZPARSER) {
-            return new JavaMailInternetAddress(new com.zimbra.common.mime.InternetAddress(mAddress), false);
+            return new JavaMailInternetAddress(new org.zmail.common.mime.InternetAddress(mAddress), false);
         } else {
             return (InternetAddress) super.clone();
         }
@@ -216,10 +216,10 @@ public class JavaMailInternetAddress extends InternetAddress implements JavaMail
     @Override public boolean equals(Object a) {
         if (ZPARSER) {
             if (a instanceof JavaMailInternetAddress) {
-                return mAddress.equals(((JavaMailInternetAddress) a).getZimbraInternetAddress());
+                return mAddress.equals(((JavaMailInternetAddress) a).getZmailInternetAddress());
             } else if (a instanceof InternetAddress) {
                 InternetAddress addr = (InternetAddress) a;
-                return mAddress.equals(new com.zimbra.common.mime.InternetAddress(addr.getPersonal(), addr.getAddress()));
+                return mAddress.equals(new org.zmail.common.mime.InternetAddress(addr.getPersonal(), addr.getAddress()));
             } else {
                 return false;
             }
@@ -249,7 +249,7 @@ public class JavaMailInternetAddress extends InternetAddress implements JavaMail
 
     @Override public boolean isGroup() {
         if (ZPARSER) {
-            return mAddress instanceof com.zimbra.common.mime.InternetAddress.Group;
+            return mAddress instanceof org.zmail.common.mime.InternetAddress.Group;
         } else {
             return super.isGroup();
         }
@@ -260,8 +260,8 @@ public class JavaMailInternetAddress extends InternetAddress implements JavaMail
             if (!isGroup()) {
                 return null;
             }
-            com.zimbra.common.mime.InternetAddress.Group group = (com.zimbra.common.mime.InternetAddress.Group) mAddress;
-            List<com.zimbra.common.mime.InternetAddress> members = group.getMembers();
+            org.zmail.common.mime.InternetAddress.Group group = (org.zmail.common.mime.InternetAddress.Group) mAddress;
+            List<org.zmail.common.mime.InternetAddress> members = group.getMembers();
             InternetAddress[] addresses = new InternetAddress[members.size()];
             for (int i = 0; i < members.size(); i++) {
                 addresses[i] = new JavaMailInternetAddress(members.get(i), true);

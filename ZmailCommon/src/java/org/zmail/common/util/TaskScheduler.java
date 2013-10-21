@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.util;
+package org.zmail.common.util;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,8 +24,8 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import static com.zimbra.common.util.StringUtil.isNullOrEmpty;
-import static com.zimbra.common.util.TaskUtil.newDaemonThreadFactory;
+import static org.zmail.common.util.StringUtil.isNullOrEmpty;
+import static org.zmail.common.util.TaskUtil.newDaemonThreadFactory;
 
 /**
  * Runs a <tt>Callable</tt> task either once or at a given interval.  Subsequent
@@ -63,9 +63,9 @@ public class TaskScheduler<V> {
 
         public V2 call() throws Exception {
             try {
-                ZimbraLog.scheduler.debug("Executing task %s", mId);
+                ZmailLog.scheduler.debug("Executing task %s", mId);
                 mLastResult = mTask.call();
-                ZimbraLog.scheduler.debug("Task returned result %s", mLastResult);
+                ZmailLog.scheduler.debug("Task returned result %s", mLastResult);
 
                 if (mCallbacks != null) {
                     for (ScheduledTaskCallback<V2> callback : mCallbacks) {
@@ -74,10 +74,10 @@ public class TaskScheduler<V> {
                 }
             } catch (Throwable t) {
                 if (t instanceof OutOfMemoryError) {
-                    ZimbraLog.scheduler.fatal("Shutting down", t);
+                    ZmailLog.scheduler.fatal("Shutting down", t);
                     System.exit(1);
                 }
-                ZimbraLog.scheduler.warn("Exception during execution of task %s", mId, t);
+                ZmailLog.scheduler.warn("Exception during execution of task %s", mId, t);
                 mLastResult = null;
             }
             
@@ -89,10 +89,10 @@ public class TaskScheduler<V> {
             
             // Reschedule if this is a recurring task
             if (mRecurs && !cancelled) {
-                ZimbraLog.scheduler.debug("Rescheduling task %s", mId);
+                ZmailLog.scheduler.debug("Rescheduling task %s", mId);
                 mSchedule = mThreadPool.schedule(this, mIntervalMillis, TimeUnit.MILLISECONDS);
             } else {
-                ZimbraLog.scheduler.debug("Not rescheduling task %s.  mRecurs=%b", mId, mRecurs);
+                ZmailLog.scheduler.debug("Not rescheduling task %s.  mRecurs=%b", mId, mRecurs);
             }
             return mLastResult;
         }
@@ -141,7 +141,7 @@ public class TaskScheduler<V> {
      * @param delayMillis number of milliseconds to wait before the first execution
      */
     public void schedule(Object taskId, Callable<V> task, boolean recurs, long intervalMillis, long delayMillis) {
-        ZimbraLog.scheduler.debug("Scheduling task %s", taskId);
+        ZmailLog.scheduler.debug("Scheduling task %s", taskId);
         
         TaskRunner<V> runner = new TaskRunner<V>(taskId, task, recurs, intervalMillis, mCallbacks);
         runner.mSchedule = mThreadPool.schedule(runner, delayMillis, TimeUnit.MILLISECONDS);
@@ -186,7 +186,7 @@ public class TaskScheduler<V> {
         if (runner == null) {
             return null;
         }
-        ZimbraLog.scheduler.debug("Cancelling task %s", taskId);
+        ZmailLog.scheduler.debug("Cancelling task %s", taskId);
         runner.mSchedule.cancel(mayInterruptIfRunning);
         return runner.getTask();
     }

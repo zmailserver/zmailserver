@@ -12,12 +12,12 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.soap;
+package org.zmail.common.soap;
 
 import org.dom4j.QName;
 
 public final class HeaderConstants {
-    public static final QName CONTEXT = QName.get("context", ZimbraNamespace.ZIMBRA);
+    public static final QName CONTEXT = QName.get("context", ZmailNamespace.ZIMBRA);
     public static final String E_A          = "a";
     public static final String E_FORMAT     = "format";
     public static final String A_TYPE       = "type";

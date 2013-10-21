@@ -17,9 +17,9 @@
  * Created on Jun 1, 2004
  *
  */
-package com.zimbra.common.zclient;
+package org.zmail.common.zclient;
 
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
 /**
  * @author schemers

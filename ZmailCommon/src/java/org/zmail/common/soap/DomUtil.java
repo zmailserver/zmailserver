@@ -19,7 +19,7 @@
  * TODO To change the template for this generated file go to
  * Window - Preferences - Java - Code Generation - Code and Comments
  */
-package com.zimbra.common.soap;
+package org.zmail.common.soap;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -29,7 +29,7 @@ import org.dom4j.QName;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.XMLWriter;
 
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
 /**
  * @author schemers

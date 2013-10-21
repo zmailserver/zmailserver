@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.soap;
+package org.zmail.common.soap;
 
 import java.util.List;
 import java.util.UUID;
@@ -22,8 +22,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.service.ServiceException.Argument;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.service.ServiceException.Argument;
 
 public class SoapFaultExceptionTest {
 

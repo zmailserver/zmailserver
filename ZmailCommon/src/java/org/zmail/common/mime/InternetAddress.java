@@ -12,15 +12,15 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.mime;
+package org.zmail.common.mime;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.zimbra.common.mime.MimeAddressHeader;
-import com.zimbra.common.util.CharsetUtil;
+import org.zmail.common.mime.MimeAddressHeader;
+import org.zmail.common.util.CharsetUtil;
 
 public class InternetAddress implements Cloneable {
     private String display;

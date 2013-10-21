@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.net;
+package org.zmail.common.net;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -25,10 +25,10 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.znative.ProxyInfo;
-import com.zimbra.znative.Util;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.znative.ProxyInfo;
+import org.zmail.znative.Util;
 
 /**
  * Factory class for various ProxySelector types.
@@ -47,14 +47,14 @@ public final class ProxySelectors {
             nativeProxySelector = null;
             defaultProxySelector = new CustomProxySelector(systemProxySelector);
         }
-        String className = LC.zimbra_class_customproxyselector.value();
+        String className = LC.zmail_class_customproxyselector.value();
         if (className != null && !className.equals("")) {
             try {
                 CustomProxySelector selector = (CustomProxySelector) Class.forName(className).newInstance();
                 selector.setDefaultProxySelector(defaultProxySelector);
                 defaultProxySelector = selector;
             } catch (Exception e) {
-                ZimbraLog.net.error("could not instantiate ConditionalProxySelector interface of class '" + className + "'; defaulting to system proxy settings", e);
+                ZmailLog.net.error("could not instantiate ConditionalProxySelector interface of class '" + className + "'; defaulting to system proxy settings", e);
             }
         }
     }

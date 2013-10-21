@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.share;
+package org.zmail.common.share;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,9 +20,9 @@ import java.io.InputStream;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimePart;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants.ShareConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants.ShareConstants;
 
 public class ShareNotification {
 

@@ -13,12 +13,12 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.filter;
+package org.zmail.common.filter;
 
 import java.util.Arrays;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.DateParser;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.DateParser;
 
 /**
  * Container class for Sieve constants, enums, and operations.

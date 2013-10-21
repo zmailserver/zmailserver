@@ -12,13 +12,13 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.calendar;
+package org.zmail.common.calendar;
 
-import com.zimbra.common.calendar.ZCalendar.ICalTok;
-import com.zimbra.common.calendar.ZCalendar.ZParameter;
-import com.zimbra.common.calendar.ZCalendar.ZProperty;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
+import org.zmail.common.calendar.ZCalendar.ICalTok;
+import org.zmail.common.calendar.ZCalendar.ZParameter;
+import org.zmail.common.calendar.ZCalendar.ZProperty;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
 
 /**
  * iCalendar ATTACH property

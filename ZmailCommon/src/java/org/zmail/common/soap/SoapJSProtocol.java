@@ -16,22 +16,22 @@
 /*
  * Created on Mar 29, 2005
  */
-package com.zimbra.common.soap;
+package org.zmail.common.soap;
 
 import org.dom4j.Namespace;
 import org.dom4j.QName;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.ZimbraNamespace;
-import com.zimbra.common.util.ExceptionToString;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.ZmailNamespace;
+import org.zmail.common.util.ExceptionToString;
 
 /**
  * @author dkarp
  */
 public class SoapJSProtocol extends SoapProtocol {
 
-    private static final String NS_STR = "urn:zimbraSoap";
+    private static final String NS_STR = "urn:zmailSoap";
     private static final Namespace NS = Namespace.get(NS_PREFIX, NS_STR);
     private static final QName CODE = QName.get("Code", NS);
     private static final QName REASON = QName.get("Reason", NS);
@@ -78,18 +78,18 @@ public class SoapJSProtocol extends SoapProtocol {
         // FIXME: should really be a qualified "attribute"
         eFault.addUniqueElement(REASON).addAttribute(TEXT, reason);
         // FIXME: should really be a qualified "attribute"
-        Element eError = eFault.addUniqueElement(DETAIL).addUniqueElement(ZimbraNamespace.E_ERROR);
-        eError.addAttribute(ZimbraNamespace.E_CODE.getName(), e.getCode());
+        Element eError = eFault.addUniqueElement(DETAIL).addUniqueElement(ZmailNamespace.E_ERROR);
+        eError.addAttribute(ZmailNamespace.E_CODE.getName(), e.getCode());
         if (LC.soap_fault_include_stack_trace.booleanValue())
-            eError.addAttribute(ZimbraNamespace.E_TRACE.getName(), ExceptionToString.ToString(e));
+            eError.addAttribute(ZmailNamespace.E_TRACE.getName(), ExceptionToString.ToString(e));
         else
-            eError.addAttribute(ZimbraNamespace.E_TRACE.getName(), e.getId());
+            eError.addAttribute(ZmailNamespace.E_TRACE.getName(), e.getId());
 
         for (ServiceException.Argument arg : e.getArgs()) {
             if (arg.externalVisible()) {
-                Element val = eError.addElement(ZimbraNamespace.E_ARGUMENT);
-                val.addAttribute(ZimbraNamespace.A_ARG_NAME, arg.name);
-                val.addAttribute(ZimbraNamespace.A_ARG_TYPE, arg.type.toString());
+                Element val = eError.addElement(ZmailNamespace.E_ARGUMENT);
+                val.addAttribute(ZmailNamespace.A_ARG_NAME, arg.name);
+                val.addAttribute(ZmailNamespace.A_ARG_TYPE, arg.type.toString());
                 val.setText(arg.value);
             }
         }

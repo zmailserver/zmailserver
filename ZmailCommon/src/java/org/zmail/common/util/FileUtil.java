@@ -19,7 +19,7 @@
  * TODO To change the template for this generated file go to
  * Window - Preferences - Java - Code Generation - Code and Comments
  */
-package com.zimbra.common.util;
+package org.zmail.common.util;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -39,15 +39,15 @@ import java.util.List;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
-import com.zimbra.common.localconfig.LC;
+import org.zmail.common.localconfig.LC;
 
 /**
  * @author jhahm
  */
 public class FileUtil {
 
-	private static final int COPYBUFLEN = Math.max(LC.zimbra_store_copy_buffer_size_kb.intValue(), 1) * 1024;
-	private static final long NIO_COPY_CHUNK_SIZE = Math.max(LC.zimbra_nio_file_copy_chunk_size_kb.longValue(), 1) * 1024;
+	private static final int COPYBUFLEN = Math.max(LC.zmail_store_copy_buffer_size_kb.intValue(), 1) * 1024;
+	private static final long NIO_COPY_CHUNK_SIZE = Math.max(LC.zmail_nio_file_copy_chunk_size_kb.longValue(), 1) * 1024;
 
 	public static void copy(String src, String dest) throws IOException {
 		copy(new File(src), new File(dest));
@@ -82,14 +82,14 @@ public class FileUtil {
                 try {
                     fin.close();
                 } catch (IOException ioe) {
-                    ZimbraLog.misc.warn("FileUtil.compress(" + src + "," + dest + "): ignoring exception while closing input channel", ioe);
+                    ZmailLog.misc.warn("FileUtil.compress(" + src + "," + dest + "): ignoring exception while closing input channel", ioe);
                 }
             }
             if (fout != null) {
                 try {
                     fout.close();
                 } catch (IOException ioe) {
-                    ZimbraLog.misc.warn("FileUtil.compress(" + src + "," + dest + "): ignoring exception while closing output channel", ioe);
+                    ZmailLog.misc.warn("FileUtil.compress(" + src + "," + dest + "): ignoring exception while closing output channel", ioe);
                 }
             }
             if (!isComplete) {
@@ -182,14 +182,14 @@ public class FileUtil {
                 try {
                     fin.close();
                 } catch (IOException ioe) {
-                    ZimbraLog.misc.warn("FileUtil.copy(" + from + "," + to + "): ignoring exception while closing input channel", ioe);
+                    ZmailLog.misc.warn("FileUtil.copy(" + from + "," + to + "): ignoring exception while closing input channel", ioe);
                 }
             }
             if (fout != null) {
                 try {
                     fout.close();
                 } catch (IOException ioe) {
-                    ZimbraLog.misc.warn("FileUtil.copy(" + from + "," + to + "): ignoring exception while closing output channel", ioe);
+                    ZmailLog.misc.warn("FileUtil.copy(" + from + "," + to + "): ignoring exception while closing output channel", ioe);
                 }
             }
             if (!isComplete) {

@@ -17,7 +17,7 @@
  * Created on Jun 1, 2004
  *
  */
-package com.zimbra.common.service;
+package org.zmail.common.service;
 
 import java.security.SecureRandom;
 import java.util.Arrays;
@@ -28,7 +28,7 @@ import org.apache.commons.codec.binary.Hex;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
-import com.zimbra.common.util.HttpUtil;
+import org.zmail.common.util.HttpUtil;
 
 @SuppressWarnings("serial")
 public class ServiceException extends Exception {

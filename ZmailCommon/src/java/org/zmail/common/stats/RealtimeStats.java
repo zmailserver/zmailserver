@@ -13,16 +13,16 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.stats;
+package org.zmail.common.stats;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.util.ArrayUtil;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.util.ArrayUtil;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
 
 /**
  * This implementation of <code>Accumulator</code> is used to retrieve
@@ -75,7 +75,7 @@ public class RealtimeStats implements Accumulator {
             data.add(callbackResults.remove(name));
         }
         if (callbackResults.size() > 0) {
-            ZimbraLog.perf.warn("Detected unexpected realtime stats: " +
+            ZmailLog.perf.warn("Detected unexpected realtime stats: " +
                 StringUtil.join(", ", callbackResults.keySet()));
             
         }

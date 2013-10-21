@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.stats;
+package org.zmail.common.stats;
 
 import java.util.Collection;
 
@@ -21,7 +21,7 @@ public interface StatsDumperDataSource {
     /**
      * Returns the name of the file that stats are written to.  This is a
      * simple filename with no directory path.  All stats files are currently
-     * written to /opt/zimbra/zmstat.
+     * written to /opt/zmail/zmstat.
      */
     public String getFilename();
     

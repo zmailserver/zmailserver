@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.soap;
+package org.zmail.common.soap;
 
 import org.dom4j.Namespace;
 import org.dom4j.QName;
@@ -28,7 +28,7 @@ public class AppBlastConstants {
 
     public static final String USER_SERVICE_URI  = "/service/soap/";
 
-    public static final String NAMESPACE_STR = "urn:zimbraAppblast";
+    public static final String NAMESPACE_STR = "urn:zmailAppblast";
     public static final Namespace NAMESPACE = Namespace.get(NAMESPACE_STR);
 
     // Edit Documents

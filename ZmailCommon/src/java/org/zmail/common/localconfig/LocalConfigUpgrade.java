@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.localconfig;
+package org.zmail.common.localconfig;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -27,9 +27,9 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.dom4j.DocumentException;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.CliUtil;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.CliUtil;
+import org.zmail.common.util.ZmailLog;
 
 public abstract class LocalConfigUpgrade {
     private static String O_HELP = "h";
@@ -50,7 +50,7 @@ public abstract class LocalConfigUpgrade {
     }
     
     private static String getCommandUsage() {
-        return "com.zimbra.common.localconfig.LocalConfigUpgrade <options>";
+        return "org.zmail.common.localconfig.LocalConfigUpgrade <options>";
     }
     
     static void usage(String error) {
@@ -307,20 +307,20 @@ public abstract class LocalConfigUpgrade {
             lc = new LocalConfig(cl.getOptionValue("c"));
             lc.backup(cl.getOptionValue("t"));
         } catch (DocumentException de) {
-            ZimbraLog.misc.error("failed reading config file", de);
+            ZmailLog.misc.error("failed reading config file", de);
             System.exit(1);
         } catch (ConfigException ce) {
-            ZimbraLog.misc.error("failed reading config file" , ce);
+            ZmailLog.misc.error("failed reading config file" , ce);
             System.exit(2);
         } catch (IOException ioe) {
-            ZimbraLog.misc.error("failed to backup config file" , ioe);
+            ZmailLog.misc.error("failed to backup config file" , ioe);
             System.exit(3);
 	}
 
         String[] bugs = cl.getOptionValues(O_BUG);
         for (String bug : bugs) {
             if (!sUpgrades.containsKey(bug)) {
-        	ZimbraLog.misc.warn("local config upgrade can't handle bug " + bug);
+        	ZmailLog.misc.warn("local config upgrade can't handle bug " + bug);
         	continue;
             }
             
@@ -338,10 +338,10 @@ public abstract class LocalConfigUpgrade {
         try {
             lc.save();
         } catch (IOException ioe) {
-            ZimbraLog.misc.error("failed writing config file", ioe);
+            ZmailLog.misc.error("failed writing config file", ioe);
             System.exit(1);
         } catch (ConfigException ce) {
-            ZimbraLog.misc.error("failed writing config file", ce);
+            ZmailLog.misc.error("failed writing config file", ce);
             System.exit(1);
         }
     }

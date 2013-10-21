@@ -13,9 +13,9 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.util.memcached;
+package org.zmail.common.util.memcached;
 
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
 /**
  * Serializes an object of type V to byte array, and deserializes a byte array to a V object.

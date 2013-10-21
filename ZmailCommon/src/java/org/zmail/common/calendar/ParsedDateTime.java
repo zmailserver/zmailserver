@@ -16,7 +16,7 @@
 /**
  * 
  */
-package com.zimbra.common.calendar;
+package org.zmail.common.calendar;
 
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -26,12 +26,12 @@ import java.util.GregorianCalendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.zimbra.common.calendar.ZCalendar.ICalTok;
-import com.zimbra.common.calendar.ZCalendar.ZParameter;
-import com.zimbra.common.calendar.ZCalendar.ZProperty;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.StringUtil;
+import org.zmail.common.calendar.ZCalendar.ICalTok;
+import org.zmail.common.calendar.ZCalendar.ZParameter;
+import org.zmail.common.calendar.ZCalendar.ZProperty;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.StringUtil;
 
 public final class ParsedDateTime {
     

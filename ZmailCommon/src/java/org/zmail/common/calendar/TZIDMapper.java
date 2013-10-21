@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.calendar;
+package org.zmail.common.calendar;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -26,8 +26,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.util.ZmailLog;
 
 /**
  * Mapping of time zone IDs among Olson database, Java and Windows.  Also
@@ -121,7 +121,7 @@ public class TZIDMapper {
             File tzFile = new File(tzFilePath);
             TZIDMapper.loadFromFile(tzFile);
         } catch (Throwable t) {
-            ZimbraLog.calendar.fatal("Unable to load timezones from " + tzFilePath, t);
+            ZmailLog.calendar.fatal("Unable to load timezones from " + tzFilePath, t);
             Runtime.getRuntime().halt(1);
         }
     }

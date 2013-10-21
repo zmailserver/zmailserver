@@ -13,9 +13,9 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.account;
+package org.zmail.common.account;
 
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
 /**
  * Keys used to look up Provisioning objects.

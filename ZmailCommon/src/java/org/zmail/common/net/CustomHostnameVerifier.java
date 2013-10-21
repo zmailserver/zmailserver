@@ -12,10 +12,10 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.net;
+package org.zmail.common.net;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.util.ZmailLog;
 import sun.security.util.HostnameChecker;
 
 import javax.net.ssl.HostnameVerifier;
@@ -74,7 +74,7 @@ public class CustomHostnameVerifier implements HostnameVerifier {
         try {
             verifyHostname(hostname, session);
         } catch (IOException e) {
-            ZimbraLog.security.debug(
+            ZmailLog.security.debug(
                 "Hostname verification failed: hostname = " + hostname, e);
             return false;
         }

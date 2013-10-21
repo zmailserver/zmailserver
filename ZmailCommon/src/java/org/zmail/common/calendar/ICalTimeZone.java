@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.calendar;
+package org.zmail.common.calendar;
 
 import java.util.Calendar;
 import java.util.Formatter;
@@ -24,11 +24,11 @@ import java.util.Map;
 import java.util.SimpleTimeZone;
 import java.util.StringTokenizer;
 
-import com.zimbra.common.calendar.ZCalendar.ICalTok;
-import com.zimbra.common.calendar.ZCalendar.ZComponent;
-import com.zimbra.common.calendar.ZCalendar.ZProperty;
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.calendar.ZCalendar.ICalTok;
+import org.zmail.common.calendar.ZCalendar.ZComponent;
+import org.zmail.common.calendar.ZCalendar.ZProperty;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.common.service.ServiceException;
 
 /**
  * Time zone class that combines java.util.SimpleTimeZone and iCalendar

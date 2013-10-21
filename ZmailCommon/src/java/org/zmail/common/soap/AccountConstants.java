@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.soap;
+package org.zmail.common.soap;
 
 import org.dom4j.Namespace;
 import org.dom4j.QName;
@@ -22,7 +22,7 @@ public class AccountConstants {
 
     public static final String USER_SERVICE_URI  = "/service/soap/";
 
-    public static final String NAMESPACE_STR = "urn:zimbraAccount";
+    public static final String NAMESPACE_STR = "urn:zmailAccount";
     public static final Namespace NAMESPACE = Namespace.get(NAMESPACE_STR);
 
     // auth
@@ -124,7 +124,7 @@ public class AccountConstants {
     public static final String E_GET_SMIME_PUBLIC_CERTS_REQUEST = "GetSMIMEPublicCertsRequest";
     public static final String E_GET_SMIME_PUBLIC_CERTS_RESPONSE = "GetSMIMEPublicCertsResponse";
 
-    // ZimbraLicenseExtension - LicenseService
+    // ZmailLicenseExtension - LicenseService
     public static final String E_CHECK_LICENSE_REQUEST = "CheckLicenseRequest";
     public static final String E_CHECK_LICENSE_RESPONSE = "CheckLicenseResponse";
 
@@ -228,7 +228,7 @@ public class AccountConstants {
     public static final QName GET_SMIME_PUBLIC_CERTS_REQUEST = QName.get(E_GET_SMIME_PUBLIC_CERTS_REQUEST, NAMESPACE);
     public static final QName GET_SMIME_PUBLIC_CERTS_RESPONSE = QName.get(E_GET_SMIME_PUBLIC_CERTS_RESPONSE, NAMESPACE);
 
-    // ZimbraLicenseExtension - LicenseService
+    // ZmailLicenseExtension - LicenseService
     public static final QName CHECK_LICENSE_REQUEST = QName.get(E_CHECK_LICENSE_REQUEST, NAMESPACE);
     public static final QName CHECK_LICENSE_RESPONSE = QName.get(E_CHECK_LICENSE_RESPONSE, NAMESPACE);
 

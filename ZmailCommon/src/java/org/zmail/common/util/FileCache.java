@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.util;
+package org.zmail.common.util;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -41,7 +41,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
-import com.zimbra.common.util.BEncoding.BEncodingException;
+import org.zmail.common.util.BEncoding.BEncodingException;
 
 /**
  * A thread-safe file cache.  Files are stored in the filesystem.  The cache
@@ -224,7 +224,7 @@ public class FileCache<K> {
      */
     private synchronized FileCache<K> startup()
     throws IOException {
-        ZimbraLog.store.info("Starting up FileCache at %s.  maxFiles=%d, maxBytes=%d.", cacheDir, maxFiles, maxBytes);
+        ZmailLog.store.info("Starting up FileCache at %s.  maxFiles=%d, maxBytes=%d.", cacheDir, maxFiles, maxBytes);
 
         // Create directories if necessary.
         dataDir = new File(cacheDir, "data");

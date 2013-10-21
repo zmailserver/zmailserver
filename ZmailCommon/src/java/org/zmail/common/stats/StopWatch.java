@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.stats;
+package org.zmail.common.stats;
 
 /**
  * A <code>Counter</code> that supports <code>start()</code>

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.util;
+package org.zmail.common.util;
 
 import org.apache.log4j.helpers.FormattingInfo;
 import org.apache.log4j.helpers.PatternConverter;
@@ -21,36 +21,36 @@ import org.apache.log4j.spi.LoggingEvent;
 
 /**
  * Formats the <tt>%z</tt> pattern as all the keys and values passed
- * to {@link ZimbraLog#addToContext}.
+ * to {@link ZmailLog#addToContext}.
  *  
  * @author bburtin
  */
-public class ZimbraPatternParser
+public class ZmailPatternParser
 extends PatternParser {
 
-    ZimbraPatternLayout mLayout;
+    ZmailPatternLayout mLayout;
     
-    ZimbraPatternParser(String pattern, ZimbraPatternLayout layout) {
+    ZmailPatternParser(String pattern, ZmailPatternLayout layout) {
         super(pattern);
         mLayout = layout;
     }
       
     public void finalizeConverter(char c) {
         if (c == 'z') {
-            addConverter(new ZimbraPatternConverter(formattingInfo));
+            addConverter(new ZmailPatternConverter(formattingInfo));
             currentLiteral.setLength(0);
         } else {
             super.finalizeConverter(c);
         }
     }
 
-    private class ZimbraPatternConverter extends PatternConverter {
-        ZimbraPatternConverter(FormattingInfo formattingInfo) {
+    private class ZmailPatternConverter extends PatternConverter {
+        ZmailPatternConverter(FormattingInfo formattingInfo) {
             super(formattingInfo);
         }
 
         public String convert(LoggingEvent event) {
-            return ZimbraLog.getContextString();
+            return ZmailLog.getContextString();
         }
     }  
 }

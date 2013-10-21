@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.localconfig;
+package org.zmail.common.localconfig;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -34,8 +34,8 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
-import com.zimbra.common.util.FileUtil;
-import com.zimbra.common.util.L10nUtil;
+import org.zmail.common.util.FileUtil;
+import org.zmail.common.util.L10nUtil;
 
 public class LocalConfig {
 
@@ -47,12 +47,12 @@ public class LocalConfig {
     private String mConfigFile;
 
     private String defaultConfigFile() {
-        String zimbra_config = System.getProperty("zimbra.config");
-        if (zimbra_config == null) {
+        String zmail_config = System.getProperty("zmail.config");
+        if (zmail_config == null) {
             final String FS = File.separator;
-            zimbra_config = FS + "opt" + FS + "zimbra" + FS + "conf" + FS + "localconfig.xml";
+            zmail_config = FS + "opt" + FS + "zmail" + FS + "conf" + FS + "localconfig.xml";
         }
-        return zimbra_config;
+        return zmail_config;
     }
 
     public String getConfigFile() {
@@ -351,7 +351,7 @@ public class LocalConfig {
     // Expand and cache all keys
     //
     private void expandAll() throws ConfigException {
-        String minimize = mConfiguredKeys.get(LC.zimbra_minimize_resources.key());
+        String minimize = mConfiguredKeys.get(LC.zmail_minimize_resources.key());
 
         KnownKey.expandAll(this);
         for (String key : mConfiguredKeys.keySet()) {

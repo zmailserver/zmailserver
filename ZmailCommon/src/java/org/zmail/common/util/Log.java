@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.util;
+package org.zmail.common.util;
 
 import java.util.ArrayList;
 import java.util.EnumMap;
@@ -54,7 +54,7 @@ public class Log {
         .build();
 
     public enum Level {
-        // Keep in sync with com.zimbra.soap.type.LoggingLevel
+        // Keep in sync with org.zmail.soap.type.LoggingLevel
         error, warn, info, debug, trace;
     };
 
@@ -446,7 +446,7 @@ public class Log {
         if (mAccountLoggers.size() == 0) {
             return mLogger;
         }
-        for (String accountName : ZimbraLog.getAccountNamesFromContext()) {
+        for (String accountName : ZmailLog.getAccountNamesFromContext()) {
             Logger logger = mAccountLoggers.get(accountName);
             if (logger != null) {
                 return logger;

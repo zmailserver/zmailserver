@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.net;
+package org.zmail.common.net;
 
 import javax.net.ssl.SSLSocketFactory;
 import java.io.IOException;

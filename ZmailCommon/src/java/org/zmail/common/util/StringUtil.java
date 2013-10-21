@@ -16,7 +16,7 @@
 /*
  * Created on Oct 4, 2004
  */
-package com.zimbra.common.util;
+package org.zmail.common.util;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -37,7 +37,7 @@ import java.util.regex.Pattern;
 import com.google.common.base.Strings;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
 /**
  * @author schemers
@@ -641,7 +641,7 @@ public class StringUtil {
             String key = matcher.group(2);
             Object value = vars.get(key);
             if (value == null) {
-                ZimbraLog.misc.error("fillTemplate(): could not find key '" + key + "'");
+                ZmailLog.misc.error("fillTemplate(): could not find key '" + key + "'");
                 value = "";
             }
             line = matcher.group(1) + value + matcher.group(3);

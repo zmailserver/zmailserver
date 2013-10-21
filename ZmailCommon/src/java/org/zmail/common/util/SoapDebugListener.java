@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.util;
+package org.zmail.common.util;
 
 import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.Header;
@@ -23,8 +23,8 @@ import org.apache.commons.httpclient.URI;
 import org.apache.commons.httpclient.URIException;
 import org.apache.commons.httpclient.methods.PostMethod;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.SoapHttpTransport.HttpDebugListener;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.SoapHttpTransport.HttpDebugListener;
 
 public class SoapDebugListener implements HttpDebugListener {
     

@@ -17,15 +17,15 @@
  * Soap11Protocol.java
  */
 
-package com.zimbra.common.soap;
+package org.zmail.common.soap;
 
 import org.dom4j.Namespace;
 import org.dom4j.QName;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.ZimbraNamespace;
-import com.zimbra.common.util.ExceptionToString;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.ZmailNamespace;
+import org.zmail.common.util.ExceptionToString;
 
 /**
  * Interface to Soap 1.1 Protocol
@@ -63,7 +63,7 @@ class Soap11Protocol extends SoapProtocol {
     }
     
     /* (non-Javadoc)
-     * @see com.zimbra.soap.shared.SoapProtocol#soapFault(org.dom4j.Element)
+     * @see org.zmail.soap.shared.SoapProtocol#soapFault(org.dom4j.Element)
      */
     public SoapFaultException soapFault(Element fault) {
         if (!isFault(fault))
@@ -85,7 +85,7 @@ class Soap11Protocol extends SoapProtocol {
     }
 
     /* (non-Javadoc)
-     * @see com.zimbra.common.soap.SoapProtocol#soapFault(com.zimbra.cs.service.ServiceException)
+     * @see org.zmail.common.soap.SoapProtocol#soapFault(org.zmail.cs.service.ServiceException)
      */
     public Element soapFault(ServiceException e) {
         String reason = e.getMessage();
@@ -98,19 +98,19 @@ class Soap11Protocol extends SoapProtocol {
         eFault.addUniqueElement(FAULTCODE).setText(code.getQualifiedName());
         eFault.addUniqueElement(FAULTSTRING).setText(reason);
         Element eDetail = eFault.addUniqueElement(DETAIL);
-        Element error = eDetail.addUniqueElement(ZimbraNamespace.E_ERROR);
+        Element error = eDetail.addUniqueElement(ZmailNamespace.E_ERROR);
         // FIXME: should really be a qualified "attribute"
-        error.addUniqueElement(ZimbraNamespace.E_CODE).setText(e.getCode());
+        error.addUniqueElement(ZmailNamespace.E_CODE).setText(e.getCode());
         if (LC.soap_fault_include_stack_trace.booleanValue())
-            error.addUniqueElement(ZimbraNamespace.E_TRACE).setText(ExceptionToString.ToString(e));
+            error.addUniqueElement(ZmailNamespace.E_TRACE).setText(ExceptionToString.ToString(e));
         else
-            error.addUniqueElement(ZimbraNamespace.E_TRACE).setText(e.getId());
+            error.addUniqueElement(ZmailNamespace.E_TRACE).setText(e.getId());
         
         for (ServiceException.Argument arg : e.getArgs()) {
             if (arg.externalVisible()) {
-                Element val = error.addElement(ZimbraNamespace.E_ARGUMENT);
-                val.addAttribute(ZimbraNamespace.A_ARG_NAME, arg.name);
-                val.addAttribute(ZimbraNamespace.A_ARG_TYPE, arg.type.toString());
+                Element val = error.addElement(ZmailNamespace.E_ARGUMENT);
+                val.addAttribute(ZmailNamespace.A_ARG_NAME, arg.name);
+                val.addAttribute(ZmailNamespace.A_ARG_TYPE, arg.type.toString());
                 val.setText(arg.value);
             }
         }

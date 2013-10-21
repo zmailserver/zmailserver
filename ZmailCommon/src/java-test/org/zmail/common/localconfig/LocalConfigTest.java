@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.localconfig;
+package org.zmail.common.localconfig;
 
 import org.junit.Assert;
 import org.junit.Rule;

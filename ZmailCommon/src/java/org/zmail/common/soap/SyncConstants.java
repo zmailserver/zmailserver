@@ -12,13 +12,13 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.soap;
+package org.zmail.common.soap;
 
 import org.dom4j.Namespace;
 import org.dom4j.QName;
 
 public final class SyncConstants {
-    public static final String NAMESPACE_STR = "urn:zimbraSync";
+    public static final String NAMESPACE_STR = "urn:zmailSync";
     public static final Namespace NAMESPACE = Namespace.get(NAMESPACE_STR);
 
     public static final String E_GET_DEVICE_STATUS_REQUEST = "GetDeviceStatusRequest";

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.mime;
+package org.zmail.common.mime;
 
 import java.io.File;
 import java.io.FilterInputStream;
@@ -22,7 +22,7 @@ import java.util.Properties;
 
 import javax.activation.DataSource;
 
-import com.zimbra.common.mime.MimePart.PartSource;
+import org.zmail.common.mime.MimePart.PartSource;
 
 public class MimeParserInputStream extends FilterInputStream {
     private MimeParser parser;

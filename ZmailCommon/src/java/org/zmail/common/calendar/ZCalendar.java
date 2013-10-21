@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.calendar;
+package org.zmail.common.calendar;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
@@ -28,10 +28,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.mime.MimeConstants;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.mime.MimeConstants;
 
 import net.fortuna.ical4j.data.CalendarParser;
 import net.fortuna.ical4j.data.CalendarParserImpl;
@@ -40,7 +40,7 @@ import net.fortuna.ical4j.data.ParserException;
 
 public class ZCalendar {
     
-    public static final String sZimbraProdID = "Zimbra-Calendar-Provider";
+    public static final String sZmailProdID = "Zmail-Calendar-Provider";
     public static final String sIcalVersion = "2.0";
     public static final String sObsoleteVcalVersion = "1.0";
     
@@ -142,7 +142,7 @@ public class ZCalendar {
         }
 
         public void addVersionAndProdId() {
-            addProperty(new ZProperty(ICalTok.PRODID, sZimbraProdID));
+            addProperty(new ZProperty(ICalTok.PRODID, sZmailProdID));
             addProperty(new ZProperty(ICalTok.VERSION, sIcalVersion));
         }
 
@@ -870,7 +870,7 @@ public class ZCalendar {
             if (mCurProperty != null) {
                 mCurProperty.mParameters.add(param);
             } else {
-                ZimbraLog.calendar.debug("ERROR: got parameter " + name + "," + value + " outside of Property");
+                ZmailLog.calendar.debug("ERROR: got parameter " + name + "," + value + " outside of Property");
             }
         }
     }
@@ -899,7 +899,7 @@ public class ZCalendar {
             if (len == 1) {
                 return list.get(0);
             } else if (len > 1) {
-                ZimbraLog.calendar.warn(
+                ZmailLog.calendar.warn(
                         "Returning only the first ZCALENDAR after parsing " +
                         len);
                 return list.get(0);
@@ -961,10 +961,10 @@ public class ZCalendar {
                     throw se;
                 } else {
                     // Found garbage after END:ZCALENDAR.  Log warning and move on.
-                    if (ZimbraLog.calendar.isDebugEnabled())
-                        ZimbraLog.calendar.warn("Ignoring bad data at the end of text/calendar part: " + s.toString() , e);
+                    if (ZmailLog.calendar.isDebugEnabled())
+                        ZmailLog.calendar.warn("Ignoring bad data at the end of text/calendar part: " + s.toString() , e);
                     else
-                        ZimbraLog.calendar.warn("Ignoring bad data at the end of text/calendar part: " + e.getMessage());
+                        ZmailLog.calendar.warn("Ignoring bad data at the end of text/calendar part: " + e.getMessage());
                 }
             }
         }

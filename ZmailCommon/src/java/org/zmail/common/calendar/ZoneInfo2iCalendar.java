@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.calendar;
+package org.zmail.common.calendar;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -44,15 +44,15 @@ import org.apache.commons.cli.GnuParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 
-import com.zimbra.common.calendar.ZoneInfoParser.Day;
-import com.zimbra.common.calendar.ZoneInfoParser.Rule;
-import com.zimbra.common.calendar.ZoneInfoParser.RuleLine;
-import com.zimbra.common.calendar.ZoneInfoParser.Time;
-import com.zimbra.common.calendar.ZoneInfoParser.Until;
-import com.zimbra.common.calendar.ZoneInfoParser.Weekday;
-import com.zimbra.common.calendar.ZoneInfoParser.Zone;
-import com.zimbra.common.calendar.ZoneInfoParser.ZoneLine;
-import com.zimbra.common.calendar.ZoneInfoParser.Day.DayType;
+import org.zmail.common.calendar.ZoneInfoParser.Day;
+import org.zmail.common.calendar.ZoneInfoParser.Rule;
+import org.zmail.common.calendar.ZoneInfoParser.RuleLine;
+import org.zmail.common.calendar.ZoneInfoParser.Time;
+import org.zmail.common.calendar.ZoneInfoParser.Until;
+import org.zmail.common.calendar.ZoneInfoParser.Weekday;
+import org.zmail.common.calendar.ZoneInfoParser.Zone;
+import org.zmail.common.calendar.ZoneInfoParser.ZoneLine;
+import org.zmail.common.calendar.ZoneInfoParser.Day.DayType;
 
 public class ZoneInfo2iCalendar {
 
@@ -770,7 +770,7 @@ public class ZoneInfo2iCalendar {
         try {
             StringBuilder hdr = new StringBuilder("BEGIN:VCALENDAR");
             hdr.append(CRLF);
-            hdr.append("PRODID:Zimbra-Calendar-Provider").append(CRLF);
+            hdr.append("PRODID:Zmail-Calendar-Provider").append(CRLF);
             hdr.append("VERSION:2.0").append(CRLF);
             hdr.append("METHOD:PUBLISH").append(CRLF);
             out.write(hdr.toString());

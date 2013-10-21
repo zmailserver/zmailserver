@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.perf.chart;
+package org.zmail.perf.chart;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -60,10 +60,10 @@ import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.XYDataset;
 
-import com.zimbra.common.util.CsvReader;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.perf.chart.ChartSettings.ImageType;
+import org.zmail.common.util.CsvReader;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.StringUtil;
+import org.zmail.perf.chart.ChartSettings.ImageType;
 
 public class ChartUtil {
 

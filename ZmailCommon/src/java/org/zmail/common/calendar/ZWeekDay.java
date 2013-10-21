@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.calendar;
+package org.zmail.common.calendar;
 
 import java.util.Calendar;
 

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.perf.chart;
+package org.zmail.perf.chart;
 
 import java.io.File;
 import java.io.FileReader;
@@ -25,7 +25,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.util.CsvReader;
+import org.zmail.common.util.CsvReader;
 
 
 public class SummaryAnalyzer {

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.stats;
+package org.zmail.common.stats;
 
 import java.util.List;
 

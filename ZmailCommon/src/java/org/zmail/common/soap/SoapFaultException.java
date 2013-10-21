@@ -13,13 +13,13 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.soap;
+package org.zmail.common.soap;
 
 import java.util.Collections;
 import java.util.List;
 
 import com.google.common.collect.Lists;
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
 public class SoapFaultException extends ServiceException {
 
@@ -54,9 +54,9 @@ public class SoapFaultException extends ServiceException {
         mDetail = detail;
         mFault = fault;
         if (detail != null) {
-            Element error = detail.getOptionalElement(ZimbraNamespace.E_ERROR);
+            Element error = detail.getOptionalElement(ZmailNamespace.E_ERROR);
             if (error != null) {
-                String traceId = error.getAttribute(ZimbraNamespace.E_TRACE.getName(), null);
+                String traceId = error.getAttribute(ZmailNamespace.E_TRACE.getName(), null);
                 if (traceId != null) setId(traceId);
             }
         }
@@ -77,9 +77,9 @@ public class SoapFaultException extends ServiceException {
 
     private static String getCode(Element detail) {
         if (detail != null) {
-            Element error = detail.getOptionalElement(ZimbraNamespace.E_ERROR);
+            Element error = detail.getOptionalElement(ZmailNamespace.E_ERROR);
             if (error != null)
-                return error.getAttribute(ZimbraNamespace.E_CODE.getName(), UNKNOWN);
+                return error.getAttribute(ZmailNamespace.E_CODE.getName(), UNKNOWN);
         }
         return UNKNOWN;
     }
@@ -166,15 +166,15 @@ public class SoapFaultException extends ServiceException {
         if (detail == null) {
             return Collections.emptyList();
         }
-        Element errorEl = detail.getOptionalElement(ZimbraNamespace.E_ERROR);
+        Element errorEl = detail.getOptionalElement(ZmailNamespace.E_ERROR);
         if (errorEl == null) {
             return Collections.emptyList();
         }
 
         List<ServiceException.Argument> args = Lists.newArrayList();
-        for (Element argEl : errorEl.listElements(ZimbraNamespace.E_ARGUMENT.getName())) {
-            String name = argEl.getAttribute(ZimbraNamespace.A_ARG_NAME, null);
-            String typeString = argEl.getAttribute(ZimbraNamespace.A_ARG_TYPE, null);
+        for (Element argEl : errorEl.listElements(ZmailNamespace.E_ARGUMENT.getName())) {
+            String name = argEl.getAttribute(ZmailNamespace.A_ARG_NAME, null);
+            String typeString = argEl.getAttribute(ZmailNamespace.A_ARG_TYPE, null);
             ServiceException.Argument.Type type = (typeString == null ? null : ServiceException.Argument.Type.valueOf(typeString));
             String value = argEl.getText();
             args.add(new ServiceException.Argument(name, value, type));

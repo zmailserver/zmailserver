@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.stats;
+package org.zmail.common.stats;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -22,9 +22,9 @@ import java.util.Collection;
 import java.util.UUID;
 import java.util.concurrent.Callable;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.util.FileUtil;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.util.FileUtil;
+import org.zmail.common.util.ZmailLog;
 
 /**
  * Writes data to a file at a scheduled interval.  Data and headers are retrieved
@@ -35,7 +35,7 @@ implements Callable<Void> {
     
     public final static int SYSLOG_ELIDING_THRESHOLD = 800;
     private static final File STATS_DIR = new File(LC.zmstat_log_directory.value());
-    private static final ThreadGroup statsGroup = new ThreadGroup("ZimbraPerf Stats");
+    private static final ThreadGroup statsGroup = new ThreadGroup("ZmailPerf Stats");
 
     private StatsDumperDataSource mDataSource;
     private Calendar mLastRollover = Calendar.getInstance();
@@ -79,14 +79,14 @@ implements Callable<Void> {
                             dumper.call();
                         }
                         catch (Exception e) {
-                            ZimbraLog.perf.warn("Exception in stats thread: %s", dataSource.getFilename(), e);
+                            ZmailLog.perf.warn("Exception in stats thread: %s", dataSource.getFilename(), e);
                         }
                     }
                     catch (InterruptedException e) {
-                        ZimbraLog.perf.info("Stats thread interrupted: %s", dataSource.getFilename(), e);
+                        ZmailLog.perf.info("Stats thread interrupted: %s", dataSource.getFilename(), e);
                     }
                     if (Thread.currentThread().isInterrupted())
-                        ZimbraLog.perf.info("Stats thread was interrupted: %s", dataSource.getFilename());
+                        ZmailLog.perf.info("Stats thread was interrupted: %s", dataSource.getFilename());
                 }
             }
         };
@@ -153,7 +153,7 @@ implements Callable<Void> {
                     (mDataSource.hasTimestampColumn() ? "timestamp," : "") +
                     header + ":: " + timestamp + "," + line;
             if (logLine.length() <= SYSLOG_ELIDING_THRESHOLD) {
-                ZimbraLog.slogger.info(logLine);
+                ZmailLog.slogger.info(logLine);
             } else {
                 StringBuilder b = new StringBuilder(logLine);
                 String lastUuid = null;
@@ -164,9 +164,9 @@ implements Callable<Void> {
                         sub = ":::" + lastUuid + ":::" + sub;
                     }
                     lastUuid = UUID.randomUUID().toString();
-                    ZimbraLog.slogger.info(sub + ":::" + lastUuid + ":::");
+                    ZmailLog.slogger.info(sub + ":::" + lastUuid + ":::");
                 } while (b.length() > SYSLOG_ELIDING_THRESHOLD);
-                ZimbraLog.slogger.info(":::" + lastUuid + ":::" + b.toString());
+                ZmailLog.slogger.info(":::" + lastUuid + ":::" + b.toString());
             }
         }
         return null;

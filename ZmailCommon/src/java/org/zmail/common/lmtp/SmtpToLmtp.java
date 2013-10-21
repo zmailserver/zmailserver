@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.lmtp;
+package org.zmail.common.lmtp;
 
 import java.io.EOFException;
 import java.io.File;
@@ -33,9 +33,9 @@ import java.util.regex.Pattern;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.CliUtil;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.CliUtil;
+import org.zmail.common.util.ZmailLog;
 
 public class SmtpToLmtp {
     
@@ -115,7 +115,7 @@ public class SmtpToLmtp {
                     thread.start();
                 }
             } catch (IOException e) {
-                ZimbraLog.smtp.error("", e);
+                ZmailLog.smtp.error("", e);
             }
         }
     }
@@ -185,7 +185,7 @@ public class SmtpToLmtp {
                     }
                 }
             } catch (Throwable t) {
-                ZimbraLog.smtp.info("", t);
+                ZmailLog.smtp.info("", t);
             } finally {
                 ByteUtil.closeStream(smtpIn);
                 ByteUtil.closeWriter(smtpOut);
@@ -236,7 +236,7 @@ public class SmtpToLmtp {
                     in = new FileInputStream(data.file);
                     client.sendMessage(in, data.recipients, data.sender, SmtpToLmtp.class.getSimpleName(), data.file.length());
                 } catch (Throwable e) {
-                    ZimbraLog.smtp.warn("Error occurred", e);
+                    ZmailLog.smtp.warn("Error occurred", e);
                 } finally {
                     if (client != null) {
                         client.close();
@@ -248,7 +248,7 @@ public class SmtpToLmtp {
         }
         
         private void send(PrintWriter out, String response) {
-            ZimbraLog.smtp.trace("S: %s", response);
+            ZmailLog.smtp.trace("S: %s", response);
             out.print(response + "\r\n");
             out.flush();
         }
@@ -269,7 +269,7 @@ public class SmtpToLmtp {
             if (c < 0) {
                 throw new EOFException("Client disconnected");
             }
-            ZimbraLog.smtp.trace("C: %s", buf);
+            ZmailLog.smtp.trace("C: %s", buf);
             return buf.toString();
         }
     }

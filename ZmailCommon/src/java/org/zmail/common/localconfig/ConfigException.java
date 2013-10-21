@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.localconfig;
+package org.zmail.common.localconfig;
 
 public class ConfigException extends Exception {
     public ConfigException(String key) {

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.util;
+package org.zmail.common.util;
 
 import org.apache.log4j.Category;
 import org.apache.log4j.ConsoleAppender;
@@ -22,17 +22,17 @@ import org.apache.log4j.helpers.PatternParser;
 
 /**
  * Subclasses Log4J's <tt>PatternLayout</tt> class to add additional support for
- * the <tt>%z</tt> option, which prints the value returned by {@link ZimbraLog#getContextString()}.
+ * the <tt>%z</tt> option, which prints the value returned by {@link ZmailLog#getContextString()}.
  *   
  * @author bburtin
  */
-public class ZimbraPatternLayout extends PatternLayout {
+public class ZmailPatternLayout extends PatternLayout {
 
-    public ZimbraPatternLayout() {
+    public ZmailPatternLayout() {
         this(DEFAULT_CONVERSION_PATTERN);
     }
 
-    public ZimbraPatternLayout(String pattern) {
+    public ZmailPatternLayout(String pattern) {
         super(pattern);
     }
 
@@ -40,18 +40,18 @@ public class ZimbraPatternLayout extends PatternLayout {
         if (pattern == null) {
             pattern = DEFAULT_CONVERSION_PATTERN;
         }
-        return new ZimbraPatternParser(pattern, this);
+        return new ZmailPatternParser(pattern, this);
     }
     
     public static void main(String[] args) {
-        Layout layout = new ZimbraPatternLayout("[%z] - %m%n");
+        Layout layout = new ZmailPatternLayout("[%z] - %m%n");
         Category cat = Category.getInstance("some.cat");
         cat.addAppender(new ConsoleAppender(layout, ConsoleAppender.SYSTEM_OUT));
-        ZimbraLog.addAccountNameToContext("my@account.com");
-        ZimbraLog.addMboxToContext(99);
+        ZmailLog.addAccountNameToContext("my@account.com");
+        ZmailLog.addMboxToContext(99);
         cat.debug("Hello, log");
         cat.info("Hello again...");
-        ZimbraLog.clearContext();
+        ZmailLog.clearContext();
         cat.info("No more context");
     }
 }

@@ -13,14 +13,14 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.io;
+package org.zmail.common.io;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import com.zimbra.common.util.FileUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.znative.IO;
+import org.zmail.common.util.FileUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.znative.IO;
 
 class SerialFileCopier implements FileCopier {
 
@@ -31,7 +31,7 @@ class SerialFileCopier implements FileCopier {
     private boolean mIgnoreMissingSource;
 
     SerialFileCopier(boolean useNIO, int copyBufSizeOIO) {
-        ZimbraLog.io.debug(
+        ZmailLog.io.debug(
                 "Creating SerialFileCopier: " +
                 "useNIO = " + useNIO +
                 ", copyBufSizeOIO = " + copyBufSizeOIO);
@@ -40,7 +40,7 @@ class SerialFileCopier implements FileCopier {
         mCopyBufSizeOIO = copyBufSizeOIO > 0
             ? copyBufSizeOIO : FileCopierOptions.DEFAULT_OIO_COPY_BUFFER_SIZE;
         if (mCopyBufSizeOIO > MAX_COPY_BUFSIZE) {
-            ZimbraLog.io.warn(
+            ZmailLog.io.warn(
                     "OIO copy buffer size " + mCopyBufSizeOIO +
                     " is too big; limiting to " + MAX_COPY_BUFSIZE);
             mCopyBufSizeOIO = MAX_COPY_BUFSIZE;
@@ -52,12 +52,12 @@ class SerialFileCopier implements FileCopier {
     }
 
     public void start() {
-        ZimbraLog.io.info("SerialFileCopier is starting");
+        ZmailLog.io.info("SerialFileCopier is starting");
         // do nothing
     }
 
     public void shutdown() {
-        ZimbraLog.io.info("SerialFileCopier is shut down");
+        ZmailLog.io.info("SerialFileCopier is shut down");
         // do nothing
     }
 

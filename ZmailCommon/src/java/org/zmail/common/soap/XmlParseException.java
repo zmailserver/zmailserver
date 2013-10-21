@@ -13,9 +13,9 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.soap;
+package org.zmail.common.soap;
 
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
 public class XmlParseException
 extends ServiceException {

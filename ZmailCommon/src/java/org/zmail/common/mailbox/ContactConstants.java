@@ -13,11 +13,11 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.mailbox;
+package org.zmail.common.mailbox;
 
 import java.util.Arrays;
 
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
 public final class ContactConstants {
     private ContactConstants() {
@@ -119,7 +119,7 @@ public final class ContactConstants {
     public static final String A_imAddress1 = Attr.imAddress1.name();
     public static final String A_imAddress2 = Attr.imAddress2.name();
     public static final String A_imAddress3 = Attr.imAddress3.name();
-    public static final String A_zimbraId = Attr.zimbraId.name();
+    public static final String A_zmailId = Attr.zmailId.name();
 
     // Comcast specific fields
     public static final String A_homeAddress = Attr.homeAddress.name();
@@ -151,7 +151,7 @@ public final class ContactConstants {
 
     public static final String TYPE_GROUP = "group";
     
-    // move to ZimbraSoap?
+    // move to ZmailSoap?
     public static final String GROUP_MEMBER_TYPE_CONTACT_REF = "C";
     public static final String GROUP_MEMBER_TYPE_GAL_REF = "G";
     public static final String GROUP_MEMBER_TYPE_INLINE = "I";
@@ -251,7 +251,7 @@ public final class ContactConstants {
         otherCustom4,
         vCardUID,
         vCardXProps,
-        zimbraId;
+        zmailId;
 
         public static Attr fromString(String s) throws ServiceException {
             try {

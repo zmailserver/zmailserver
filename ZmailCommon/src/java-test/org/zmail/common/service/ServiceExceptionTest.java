@@ -13,12 +13,12 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.service;
+package org.zmail.common.service;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.zimbra.common.service.ServiceException.Argument;
+import org.zmail.common.service.ServiceException.Argument;
 
 public class ServiceExceptionTest {
 

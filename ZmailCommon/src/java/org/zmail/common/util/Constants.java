@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.util;
+package org.zmail.common.util;
 
 /**
  * A place to keep commonly-used constants.

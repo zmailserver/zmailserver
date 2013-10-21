@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.localconfig;
+package org.zmail.common.localconfig;
 
 
 /**
@@ -130,7 +130,7 @@ public final class DebugConfig {
      * can't deal with).
      */
     public static final int numMailboxGroups = disableMailboxGroups ?
-            Integer.MAX_VALUE : Math.max(LC.zimbra_mailbox_groups.intValue(), 1);
+            Integer.MAX_VALUE : Math.max(LC.zmail_mailbox_groups.intValue(), 1);
 
     /** If true, more than one server may be sharing the same store and
      *  database install.  In that case, the server must perform extra checks

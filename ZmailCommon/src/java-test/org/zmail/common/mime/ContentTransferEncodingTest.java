@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.mime;
+package org.zmail.common.mime;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -21,7 +21,7 @@ import java.io.InputStream;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.zimbra.common.util.ByteUtil;
+import org.zmail.common.util.ByteUtil;
 
 public class ContentTransferEncodingTest {
 

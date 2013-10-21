@@ -12,12 +12,12 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.util;
+package org.zmail.common.util;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 
-import com.zimbra.common.mime.MimeConstants;
+import org.zmail.common.mime.MimeConstants;
 
 public class CharsetUtil {
 

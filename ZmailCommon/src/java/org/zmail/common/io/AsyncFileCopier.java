@@ -13,14 +13,14 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.io;
+package org.zmail.common.io;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import com.zimbra.common.util.FileUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.znative.IO;
+import org.zmail.common.util.FileUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.znative.IO;
 
 class AsyncFileCopier extends AbstractAsyncFileCopier implements FileCopier {
 
@@ -35,7 +35,7 @@ class AsyncFileCopier extends AbstractAsyncFileCopier implements FileCopier {
                     int queueCapacity, int numWorkers) {
         super(queueCapacity);
 
-        ZimbraLog.io.debug(
+        ZmailLog.io.debug(
                 "Creating AsyncFileCopier: " +
                 "useNIO = " + useNIO +
                 ", copyBufSizeOIO = " + copyBufSizeOIO +
@@ -47,7 +47,7 @@ class AsyncFileCopier extends AbstractAsyncFileCopier implements FileCopier {
         mCopyBufSizeOIO = copyBufSizeOIO > 0
             ? copyBufSizeOIO : FileCopierOptions.DEFAULT_OIO_COPY_BUFFER_SIZE;
         if (mCopyBufSizeOIO > MAX_COPY_BUFSIZE) {
-            ZimbraLog.io.warn(
+            ZmailLog.io.warn(
                     "OIO copy buffer size " + mCopyBufSizeOIO +
                     " is too big; limiting to " + MAX_COPY_BUFSIZE);
             mCopyBufSizeOIO = MAX_COPY_BUFSIZE;
@@ -56,7 +56,7 @@ class AsyncFileCopier extends AbstractAsyncFileCopier implements FileCopier {
         numWorkers = numWorkers > 0
             ? numWorkers : FileCopierOptions.DEFAULT_CONCURRENCY;
         if (numWorkers > MAX_WORKER_THREADS) {
-            ZimbraLog.io.warn(
+            ZmailLog.io.warn(
                     numWorkers + " worker threads are too many; limiting to " +
                     MAX_WORKER_THREADS);
             numWorkers = MAX_WORKER_THREADS;
@@ -68,7 +68,7 @@ class AsyncFileCopier extends AbstractAsyncFileCopier implements FileCopier {
     }
 
     public void start() {
-        ZimbraLog.io.info("AsyncFileCopier is starting");
+        ZmailLog.io.info("AsyncFileCopier is starting");
         for (WorkerThread worker : mWorkers) {
             worker.start();
         }
@@ -87,7 +87,7 @@ class AsyncFileCopier extends AbstractAsyncFileCopier implements FileCopier {
                 worker.join();
             } catch (InterruptedException e) {}
         }
-        ZimbraLog.io.info("AsyncFileCopier is shut down");
+        ZmailLog.io.info("AsyncFileCopier is shut down");
     }
 
     private class WorkerThread extends Thread {
@@ -132,7 +132,7 @@ class AsyncFileCopier extends AbstractAsyncFileCopier implements FileCopier {
                     }
                 } catch (OutOfMemoryError e) {
                     try {
-                        ZimbraLog.system.fatal("out of memory", e);
+                        ZmailLog.system.fatal("out of memory", e);
                     } finally {
                         Runtime.getRuntime().halt(1);
                     }
@@ -153,8 +153,8 @@ class AsyncFileCopier extends AbstractAsyncFileCopier implements FileCopier {
                     FileUtil.copy(src, dest);
                 else
                     FileUtil.copyOIO(src, dest, mCopyBuffer);
-                if (ZimbraLog.io.isDebugEnabled())
-                    ZimbraLog.io.debug("Copied " + src.getAbsolutePath() + " to " + dest.getAbsolutePath());
+                if (ZmailLog.io.isDebugEnabled())
+                    ZmailLog.io.debug("Copied " + src.getAbsolutePath() + " to " + dest.getAbsolutePath());
             } catch (FileNotFoundException e) {
                 if (!ignoreMissingSource())
                     throw e;
@@ -171,8 +171,8 @@ class AsyncFileCopier extends AbstractAsyncFileCopier implements FileCopier {
             FileUtil.ensureDirExists(link.getParentFile());
             try {
                 IO.link(file.getAbsolutePath(), link.getAbsolutePath());
-                if (ZimbraLog.io.isDebugEnabled())
-                    ZimbraLog.io.debug("Created link " + link.getAbsolutePath() + " to file " + file.getAbsolutePath());
+                if (ZmailLog.io.isDebugEnabled())
+                    ZmailLog.io.debug("Created link " + link.getAbsolutePath() + " to file " + file.getAbsolutePath());
             } catch (FileNotFoundException e) {
                 if (!ignoreMissingSource())
                     throw e;
@@ -183,22 +183,22 @@ class AsyncFileCopier extends AbstractAsyncFileCopier implements FileCopier {
             FileUtil.ensureDirExists(newPath.getParentFile());
             boolean moved = oldPath.renameTo(newPath);
             if (moved) {
-                if (ZimbraLog.io.isDebugEnabled())
-                    ZimbraLog.io.debug("Moved " + oldPath.getAbsolutePath() + " to " + newPath.getAbsolutePath());
+                if (ZmailLog.io.isDebugEnabled())
+                    ZmailLog.io.debug("Moved " + oldPath.getAbsolutePath() + " to " + newPath.getAbsolutePath());
             } else {
-                if (ZimbraLog.io.isDebugEnabled())
-                    ZimbraLog.io.debug("Failed to move " + oldPath.getAbsolutePath() + " to " + newPath.getAbsolutePath());
+                if (ZmailLog.io.isDebugEnabled())
+                    ZmailLog.io.debug("Failed to move " + oldPath.getAbsolutePath() + " to " + newPath.getAbsolutePath());
             }
         }
 
         private void delete(File file) {
             boolean deleted = file.delete();
             if (deleted) {
-                if (ZimbraLog.io.isDebugEnabled())
-                    ZimbraLog.io.debug("Deleted " + file.getAbsolutePath());
+                if (ZmailLog.io.isDebugEnabled())
+                    ZmailLog.io.debug("Deleted " + file.getAbsolutePath());
             } else {
-                if (ZimbraLog.io.isDebugEnabled())
-                    ZimbraLog.io.debug("Failed to delete " + file.getAbsolutePath());
+                if (ZmailLog.io.isDebugEnabled())
+                    ZmailLog.io.debug("Failed to delete " + file.getAbsolutePath());
             }
         }
     }

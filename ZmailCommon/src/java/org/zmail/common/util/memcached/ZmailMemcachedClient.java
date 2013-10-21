@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.util.memcached;
+package org.zmail.common.util.memcached;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -33,10 +33,10 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.zip.CRC32;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.BEncoding;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.util.BEncoding.BEncodingException;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.BEncoding;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.util.BEncoding.BEncodingException;
 
 import net.spy.memcached.BinaryConnectionFactory;
 import net.spy.memcached.CachedData;
@@ -47,16 +47,16 @@ import net.spy.memcached.HashAlgorithm;
 import net.spy.memcached.MemcachedClient;
 import net.spy.memcached.transcoders.Transcoder;
 
-public class ZimbraMemcachedClient {
+public class ZmailMemcachedClient {
 
     private static class ConnObserver implements ConnectionObserver {
         public void connectionEstablished(SocketAddress sa, int reconnectCount) {
             if (sa instanceof InetSocketAddress) {
                 InetSocketAddress isa = (InetSocketAddress) sa;
                 String hostPort = isa.getHostName() + ":" + isa.getPort();
-                ZimbraLog.misc.info("Reconnected to memcached at " + hostPort);
+                ZmailLog.misc.info("Reconnected to memcached at " + hostPort);
             } else {
-                ZimbraLog.misc.info("Reconnected to memcached at " + sa.toString());
+                ZmailLog.misc.info("Reconnected to memcached at " + sa.toString());
             }
         }
 
@@ -64,9 +64,9 @@ public class ZimbraMemcachedClient {
             if (sa instanceof InetSocketAddress) {
                 InetSocketAddress isa = (InetSocketAddress) sa;
                 String hostPort = isa.getHostName() + ":" + isa.getPort();
-                ZimbraLog.misc.warn("Lost connection to memcached at " + hostPort);
+                ZmailLog.misc.warn("Lost connection to memcached at " + hostPort);
             } else {
-                ZimbraLog.misc.warn("Lost connection to memcached at " + sa.toString());
+                ZmailLog.misc.warn("Lost connection to memcached at " + sa.toString());
             }
         }        
     }
@@ -84,7 +84,7 @@ public class ZimbraMemcachedClient {
     /**
      * Constructs a memcached client.  Call connect() before using this.
      */
-    public ZimbraMemcachedClient() {
+    public ZmailMemcachedClient() {
         mMCDClient = null;
         mDefaultExpiry = 86400;
         mDefaultTimeout = 10000;
@@ -151,7 +151,7 @@ public class ZimbraMemcachedClient {
                 client = new MemcachedClient(cf, serverAddrs);
                 boolean added = client.addObserver(new ConnObserver());
                 if (!added)
-                    ZimbraLog.misc.error("Unable to add connection observer to memcached client");
+                    ZmailLog.misc.error("Unable to add connection observer to memcached client");
             } catch (IOException e) {
                 throw ServiceException.FAILURE("Unable to initialize memcached client", e);
             }
@@ -193,10 +193,10 @@ public class ZimbraMemcachedClient {
     private void disconnect(MemcachedClient client, long timeout) {
         boolean drained = client.waitForQueues(timeout, TimeUnit.MILLISECONDS);
         if (!drained)
-            ZimbraLog.misc.warn("Memcached client did not drain queue in " + timeout + "ms");
+            ZmailLog.misc.warn("Memcached client did not drain queue in " + timeout + "ms");
         boolean success = client.shutdown(timeout, TimeUnit.MILLISECONDS);
         if (!success) {
-            ZimbraLog.misc.warn("Memcached client did not shutdown gracefully in " + timeout +
+            ZmailLog.misc.warn("Memcached client did not shutdown gracefully in " + timeout +
                                 "ms; forcing immediate shutdowb");
             client.shutdown();
         }
@@ -227,17 +227,17 @@ public class ZimbraMemcachedClient {
                         try {
                             port = Integer.parseInt(parts[1]);
                         } catch (NumberFormatException e) {
-                            ZimbraLog.misc.warn("Invalid server " + server);
+                            ZmailLog.misc.warn("Invalid server " + server);
                             continue;
                         }
                     } else {
-                        ZimbraLog.misc.warn("Invalid server " + server);
+                        ZmailLog.misc.warn("Invalid server " + server);
                         continue;
                     }
                     InetSocketAddress addr = new InetSocketAddress(host, port);
                     addrs.add(addr);
                 } else {
-                    ZimbraLog.misc.warn("Invalid server " + server);
+                    ZmailLog.misc.warn("Invalid server " + server);
                     continue;
                 }
             }
@@ -278,12 +278,12 @@ public class ZimbraMemcachedClient {
         try {
             value = future.get(timeout, TimeUnit.MILLISECONDS);
         } catch (TimeoutException e) {
-            ZimbraLog.misc.warn("memcached asyncGet timed out after " + timeout + "ms", e);
+            ZmailLog.misc.warn("memcached asyncGet timed out after " + timeout + "ms", e);
             future.cancel(false);
         } catch (InterruptedException e) {
-            ZimbraLog.misc.warn("InterruptedException during memcached asyncGet operation", e);
+            ZmailLog.misc.warn("InterruptedException during memcached asyncGet operation", e);
         } catch (ExecutionException e) {
-            ZimbraLog.misc.warn("ExecutionException during memcached asyncGet operation", e);
+            ZmailLog.misc.warn("ExecutionException during memcached asyncGet operation", e);
         }
         return value;
     }
@@ -323,12 +323,12 @@ public class ZimbraMemcachedClient {
             try {
                 value = future.get(timeout, TimeUnit.MILLISECONDS);
             } catch (TimeoutException e) {
-                ZimbraLog.misc.warn("memcached asyncGetBulk timed out after " + timeout + "ms", e);
+                ZmailLog.misc.warn("memcached asyncGetBulk timed out after " + timeout + "ms", e);
                 future.cancel(false);
             } catch (InterruptedException e) {
-                ZimbraLog.misc.warn("InterruptedException during memcached asyncGetBulk operation", e);
+                ZmailLog.misc.warn("InterruptedException during memcached asyncGetBulk operation", e);
             } catch (ExecutionException e) {
-                ZimbraLog.misc.warn("ExecutionException during memcached asyncGetBulk operation", e);
+                ZmailLog.misc.warn("ExecutionException during memcached asyncGetBulk operation", e);
             }
         }
         // Make sure the returned map contains an entry for every key passed in.  Add null value
@@ -381,12 +381,12 @@ public class ZimbraMemcachedClient {
             try {
                 success = future.get(timeout, TimeUnit.MILLISECONDS);
             } catch (TimeoutException e) {
-                ZimbraLog.misc.warn("memcached set timed out after " + timeout + "ms", e);
+                ZmailLog.misc.warn("memcached set timed out after " + timeout + "ms", e);
                 future.cancel(false);
             } catch (InterruptedException e) {
-                ZimbraLog.misc.warn("InterruptedException during memcached set operation", e);
+                ZmailLog.misc.warn("InterruptedException during memcached set operation", e);
             } catch (ExecutionException e) {
-                ZimbraLog.misc.warn("ExecutionException during memcached set operation", e);
+                ZmailLog.misc.warn("ExecutionException during memcached set operation", e);
             }
             return success != null && success.booleanValue();
         } else {
@@ -428,12 +428,12 @@ public class ZimbraMemcachedClient {
             try {
                 success = future.get(timeout, TimeUnit.MILLISECONDS);
             } catch (TimeoutException e) {
-                ZimbraLog.misc.warn("memcached delete timed out after " + timeout + "ms", e);
+                ZmailLog.misc.warn("memcached delete timed out after " + timeout + "ms", e);
                 future.cancel(false);
             } catch (InterruptedException e) {
-                ZimbraLog.misc.warn("InterruptedException during memcached delete operation", e);
+                ZmailLog.misc.warn("InterruptedException during memcached delete operation", e);
             } catch (ExecutionException e) {
-                ZimbraLog.misc.warn("ExecutionException during memcached delete operation", e);
+                ZmailLog.misc.warn("ExecutionException during memcached delete operation", e);
             }
             return success != null && success.booleanValue();
         } else {
@@ -734,7 +734,7 @@ public class ZimbraMemcachedClient {
             try {
                 chunks = new ByteArrayChunks(value);
             } catch (ServiceException e) {
-                ZimbraLog.misc.warn("Unable to split byte array into chunks", e);
+                ZmailLog.misc.warn("Unable to split byte array into chunks", e);
                 return false;
             }
             ByteArrayChunksTOC toc = chunks.makeTOC();
@@ -751,12 +751,12 @@ public class ZimbraMemcachedClient {
                     try {
                         success = future.get(timeout, TimeUnit.MILLISECONDS);
                     } catch (TimeoutException e) {
-                        ZimbraLog.misc.warn("memcached set timed out after " + timeout + "ms", e);
+                        ZmailLog.misc.warn("memcached set timed out after " + timeout + "ms", e);
                         future.cancel(false);
                     } catch (InterruptedException e) {
-                        ZimbraLog.misc.warn("InterruptedException during memcached set operation", e);
+                        ZmailLog.misc.warn("InterruptedException during memcached set operation", e);
                     } catch (ExecutionException e) {
-                        ZimbraLog.misc.warn("ExecutionException during memcached set operation", e);
+                        ZmailLog.misc.warn("ExecutionException during memcached set operation", e);
                     }
                     if (success == null || !success.booleanValue())
                         return false;
@@ -769,7 +769,7 @@ public class ZimbraMemcachedClient {
             try {
                 tocBytes = toc.encode().getBytes("utf-8");
             } catch (UnsupportedEncodingException e) {
-                ZimbraLog.misc.warn("Unable to get bytes for BBA table of contents", e);
+                ZmailLog.misc.warn("Unable to get bytes for BBA table of contents", e);
                 return false;
             }
             byte[] prefixed = new byte[tocBytes.length + 1];
@@ -785,12 +785,12 @@ public class ZimbraMemcachedClient {
             try {
                 success = future.get(timeout, TimeUnit.MILLISECONDS);
             } catch (TimeoutException e) {
-                ZimbraLog.misc.warn("memcached set timed out after " + timeout + "ms", e);
+                ZmailLog.misc.warn("memcached set timed out after " + timeout + "ms", e);
                 future.cancel(false);
             } catch (InterruptedException e) {
-                ZimbraLog.misc.warn("InterruptedException during memcached set operation", e);
+                ZmailLog.misc.warn("InterruptedException during memcached set operation", e);
             } catch (ExecutionException e) {
-                ZimbraLog.misc.warn("ExecutionException during memcached set operation", e);
+                ZmailLog.misc.warn("ExecutionException during memcached set operation", e);
             }
             return success != null && success.booleanValue();
         } else {
@@ -832,12 +832,12 @@ public class ZimbraMemcachedClient {
         try {
             mainValue = future.get(timeout, TimeUnit.MILLISECONDS);
         } catch (TimeoutException e) {
-            ZimbraLog.misc.warn("memcached asyncGetBulk timed out after " + timeout + "ms", e);
+            ZmailLog.misc.warn("memcached asyncGetBulk timed out after " + timeout + "ms", e);
             future.cancel(false);
         } catch (InterruptedException e) {
-            ZimbraLog.misc.warn("InterruptedException during memcached asyncGetBulk operation", e);
+            ZmailLog.misc.warn("InterruptedException during memcached asyncGetBulk operation", e);
         } catch (ExecutionException e) {
-            ZimbraLog.misc.warn("ExecutionException during memcached asyncGetBulk operation", e);
+            ZmailLog.misc.warn("ExecutionException during memcached asyncGetBulk operation", e);
         }
         if (mainValue == null)
             return null;
@@ -859,16 +859,16 @@ public class ZimbraMemcachedClient {
             tocEncoded = new String(value, "utf-8");
             toc = new ByteArrayChunksTOC(tocEncoded);
         } catch (UnsupportedEncodingException e) {
-            ZimbraLog.misc.warn("Unable to decode BBA table of contents", e);
+            ZmailLog.misc.warn("Unable to decode BBA table of contents", e);
             return null;
         } catch (ServiceException e) {
-            ZimbraLog.misc.warn("Invalid big byte array TOC: " + tocEncoded);
+            ZmailLog.misc.warn("Invalid big byte array TOC: " + tocEncoded);
             return null;
         }
         int numChunks = toc.getNumChunks();
         if (numChunks <= 0) {
             // This should never happen.  Just a sanity check.
-            ZimbraLog.misc.warn("Big byte array TOC has numChunks=0");
+            ZmailLog.misc.warn("Big byte array TOC has numChunks=0");
             return null;
         }
         List<String> chunkKeys = new ArrayList<String>(numChunks);
@@ -883,12 +883,12 @@ public class ZimbraMemcachedClient {
         try {
             vals = futureChunks.get(timeout, TimeUnit.MILLISECONDS);
         } catch (TimeoutException e) {
-            ZimbraLog.misc.warn("memcached asyncGetBulk timed out after " + timeout + "ms", e);
+            ZmailLog.misc.warn("memcached asyncGetBulk timed out after " + timeout + "ms", e);
             futureChunks.cancel(false);
         } catch (InterruptedException e) {
-            ZimbraLog.misc.warn("InterruptedException during memcached asyncGetBulk operation", e);
+            ZmailLog.misc.warn("InterruptedException during memcached asyncGetBulk operation", e);
         } catch (ExecutionException e) {
-            ZimbraLog.misc.warn("ExecutionException during memcached asyncGetBulk operation", e);
+            ZmailLog.misc.warn("ExecutionException during memcached asyncGetBulk operation", e);
         }
         // Make sure all chunks are there.  If not, just return null.
         if (vals == null) return null;
@@ -906,7 +906,7 @@ public class ZimbraMemcachedClient {
         try {
             data = ByteArrayChunks.combine(byteArrays, toc);
         } catch (ServiceException e) {
-            ZimbraLog.misc.warn("Unable to reassemble byte array from chunks", e);
+            ZmailLog.misc.warn("Unable to reassemble byte array from chunks", e);
         }
         return data;
     }
@@ -923,7 +923,7 @@ public class ZimbraMemcachedClient {
         public Test() {}
 
         public void test() throws Exception {
-            ZimbraMemcachedClient client = new ZimbraMemcachedClient();
+            ZmailMemcachedClient client = new ZmailMemcachedClient();
             String servers[] = { "localhost:11211" };
             client.connect(servers, false, null, 3600, 5000);
             try {
@@ -977,7 +977,7 @@ public class ZimbraMemcachedClient {
             public Integer deserialize(Object obj) throws ServiceException { return (Integer) obj; }
         }
 
-        private boolean testInteger(ZimbraMemcachedClient client, int reps) throws Exception {
+        private boolean testInteger(ZmailMemcachedClient client, int reps) throws Exception {
             MemcachedMap<TestKey, Integer> map =
                 new MemcachedMap<TestKey, Integer>(client, new IntegerSerializer());
             TestKey foo = new TestKey("fooInt");
@@ -1005,7 +1005,7 @@ public class ZimbraMemcachedClient {
             public String deserialize(Object obj) throws ServiceException { return (String) obj; }
         }
 
-        private boolean testString(ZimbraMemcachedClient client, String testName, int dataLen, int reps)
+        private boolean testString(ZmailMemcachedClient client, String testName, int dataLen, int reps)
         throws Exception {
             MemcachedMap<TestKey, String> map =
                 new MemcachedMap<TestKey, String>(client, new StringSerializer());
@@ -1042,7 +1042,7 @@ public class ZimbraMemcachedClient {
             }
         }
 
-        private boolean testBBA(ZimbraMemcachedClient client, String testName, int dataLen, int reps)
+        private boolean testBBA(ZmailMemcachedClient client, String testName, int dataLen, int reps)
         throws Exception {
             BigByteArrayMemcachedMap<TestKey, ByteArray> map =
                 new BigByteArrayMemcachedMap<TestKey, ByteArray>(client, new BBASerializer());

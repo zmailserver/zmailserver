@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.util;
+package org.zmail.common.util;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -26,7 +26,7 @@ import java.util.regex.Pattern;
  * Current implementation is not bullet-proof, but should be close enough.
  * Splits on commas, possibly surrounded by spaces and quotes.
  * Doesn't currently handle escaped quotes ("") or quoted strings that contain
- * commas (e.g. 1,"Zimbra, Inc.",2).
+ * commas (e.g. 1,"Zmail, Inc.",2).
  * 
  * @author bburtin
  */

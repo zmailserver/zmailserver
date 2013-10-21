@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.net;
+package org.zmail.common.net;
 
 import java.net.Authenticator;
 import java.net.PasswordAuthentication;
@@ -20,7 +20,7 @@ import java.net.Proxy;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.util.ZmailLog;
 
 /**
  * Authenticator implementation for HTTP/SOCKS proxy username password
@@ -58,7 +58,7 @@ public class ProxyAuthenticator extends Authenticator {
             UsernamePassword uPass = getUsernamePassword();
             return new PasswordAuthentication(uPass.getUsername(), uPass.getPassword().toCharArray());
         } else {
-            ZimbraLog.net.warn("Non-proxy authentication type %s requested, unable to fulfil", getRequestorType());
+            ZmailLog.net.warn("Non-proxy authentication type %s requested, unable to fulfil", getRequestorType());
             return null;
         }
     }

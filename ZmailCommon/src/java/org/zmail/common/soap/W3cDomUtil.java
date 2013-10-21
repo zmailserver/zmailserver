@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.soap;
+package org.zmail.common.soap;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -44,13 +44,13 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
 import com.google.common.base.Strings;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element.ElementFactory;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element.ElementFactory;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.ZmailLog;
 
 public class W3cDomUtil {
-    private static final Log LOG = ZimbraLog.misc;
+    private static final Log LOG = ZmailLog.misc;
 
     private W3cDomUtil() {}
 
@@ -75,7 +75,7 @@ public class W3cDomUtil {
                     }
                     return dbf.newDocumentBuilder();
                 } catch (javax.xml.parsers.ParserConfigurationException pce) {
-                    ZimbraLog.misc.error("Problem setting up w3c DOM builder", pce);
+                    ZmailLog.misc.error("Problem setting up w3c DOM builder", pce);
                     return null;
                 }
             }
@@ -258,7 +258,7 @@ public class W3cDomUtil {
                     return toHierarchy(node, factory);
                 }
             default:
-                ZimbraLog.misc.debug("Unexpected nodeType %s in convertW3cDOM", Integer.toString(nodeType));
+                ZmailLog.misc.debug("Unexpected nodeType %s in convertW3cDOM", Integer.toString(nodeType));
                 return null;
         }
     }
@@ -362,7 +362,7 @@ public class W3cDomUtil {
 
         @Override
         public void warning(SAXParseException spe) throws SAXException {
-            ZimbraLog.misc.warn(getParseExceptionInfo("Warning", spe));
+            ZmailLog.misc.warn(getParseExceptionInfo("Warning", spe));
         }
 
         @Override

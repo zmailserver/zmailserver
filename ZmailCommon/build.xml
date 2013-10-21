@@ -1,10 +1,10 @@
-<project name="ZimbraCommon" default="jar">
+<project name="ZmailCommon" default="jar">
 
   <import file="../ant-global.xml"/>    
 
   <!-- Properties -->
 
-  <property name="jar.file" value="zimbracommon.jar" />
+  <property name="jar.file" value="zmailcommon.jar" />
 
   <path id="class.path">
     <pathelement location="${build.classes.dir}" />
@@ -18,8 +18,8 @@
 
   <!-- Targets -->
   <target name="jar" depends="compile" description="Creates the jar file">
-      <antcall target="zimbra-jar">
-          <param name="implementation.title" value="Zimbra Common"/>
+      <antcall target="zmail-jar">
+          <param name="implementation.title" value="Zmail Common"/>
       </antcall>
   </target>
 </project>

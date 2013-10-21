@@ -16,16 +16,16 @@
 /**
  * 
  */
-package com.zimbra.common.calendar;
+package org.zmail.common.calendar;
 
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.Element;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.Element;
 
 public final class ParsedDuration
 {

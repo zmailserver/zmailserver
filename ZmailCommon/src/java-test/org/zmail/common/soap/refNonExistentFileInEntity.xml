@@ -18,13 +18,13 @@
 <!ENTITY readNonExist SYSTEM "file:///tmp/not/there/non-existent.xml" >]>
 <soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
 <soap:Header>
-<context xmlns="urn:zimbra">
+<context xmlns="urn:zmail">
   <authToken>deleted</authToken>
 <nosession></nosession>
 </context>
 </soap:Header>
 <soap:Body>
-<GetFolderRequest xmlns="urn:zimbraMail">
+<GetFolderRequest xmlns="urn:zmailMail">
     <folder><path>Fun[&readNonExist;]Here</path></folder>
 </GetFolderRequest>
 </soap:Body>

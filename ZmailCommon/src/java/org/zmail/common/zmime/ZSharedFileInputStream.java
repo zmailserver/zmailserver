@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.zmime;
+package org.zmail.common.zmime;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -22,8 +22,8 @@ import java.io.IOException;
 import javax.mail.internet.SharedInputStream;
 
 import com.google.common.annotations.VisibleForTesting;
-import com.zimbra.common.util.ByteUtil.PositionInputStream;
-import com.zimbra.common.util.ByteUtil.SegmentInputStream;
+import org.zmail.common.util.ByteUtil.PositionInputStream;
+import org.zmail.common.util.ByteUtil.SegmentInputStream;
 
 public class ZSharedFileInputStream extends PositionInputStream implements SharedInputStream {
     private final File file;

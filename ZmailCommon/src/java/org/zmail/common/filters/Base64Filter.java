@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.filters;
+package org.zmail.common.filters;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -62,7 +62,7 @@ public class Base64Filter implements Filter {
     }
 
     public static boolean isEncodeable(HttpServletRequest request) {
-        String ae = request.getHeader("x-zimbra-encoding");
+        String ae = request.getHeader("x-zmail-encoding");
         return ae != null && (ae.trim().equals("base64") || ae.trim().equals("x-base64"));
     }
 
@@ -75,7 +75,7 @@ public class Base64Filter implements Filter {
         public Base64ResponseWrapper(HttpServletResponse resp) {
             super(resp);
             response = resp;
-            response.setHeader("X-Zimbra-Encoding", "x-base64");
+            response.setHeader("X-Zmail-Encoding", "x-base64");
         }
 
         void finishResponse() throws IOException {

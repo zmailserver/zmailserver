@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.calendar;
+package org.zmail.common.calendar;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -20,8 +20,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.common.util.ZmailLog;
 
 public class TimeZoneMap implements Cloneable {
 
@@ -162,7 +162,7 @@ public class TimeZoneMap implements Cloneable {
             if (zone != null)
                 add(zone);
             else {
-                ZimbraLog.calendar.warn(
+                ZmailLog.calendar.warn(
                         "Encountered time zone with no definition: TZID=" +
                         tzId);
             }

@@ -12,16 +12,16 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.mime;
+package org.zmail.common.mime;
 
 import java.nio.charset.Charset;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.zimbra.common.mime.HeaderUtils.ByteBuilder;
-import com.zimbra.common.util.CharsetUtil;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.mime.HeaderUtils.ByteBuilder;
+import org.zmail.common.util.CharsetUtil;
+import org.zmail.common.util.ZmailLog;
 
 public class MimeHeader implements Cloneable {
     final HeaderInfo hinfo;
@@ -375,7 +375,7 @@ public class MimeHeader implements Cloneable {
                 content = value.getBytes(charset);
             } catch (OutOfMemoryError e) {
                 try {
-                    ZimbraLog.system.fatal("out of memory", e);
+                    ZmailLog.system.fatal("out of memory", e);
                 } finally {
                     Runtime.getRuntime().halt(1);
                     content = new byte[0];  // never reachable, but averts compiler warnings

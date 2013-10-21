@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.iochannel;
+package org.zmail.common.iochannel;
 
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
@@ -29,9 +29,9 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.zimbra.common.iochannel.Server.NotifyCallback;
-import com.zimbra.common.util.Log.Level;
-import com.zimbra.common.util.LogFactory;
+import org.zmail.common.iochannel.Server.NotifyCallback;
+import org.zmail.common.util.Log.Level;
+import org.zmail.common.util.LogFactory;
 
 @Ignore("re-enable when bug 74392 is resolved")
 public class ServerTest {

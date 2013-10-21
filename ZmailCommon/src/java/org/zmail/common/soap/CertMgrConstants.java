@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.soap;
+package org.zmail.common.soap;
 
 import org.dom4j.Namespace;
 import org.dom4j.QName;
@@ -21,7 +21,7 @@ public final class CertMgrConstants {
     public static final String NAMESPACE_STR = AdminConstants.NAMESPACE_STR;
     public static final Namespace NAMESPACE = Namespace.get(NAMESPACE_STR);
 
-    // ZimbraCertMgrService
+    // ZmailCertMgrService
     public static final String E_INSTALL_CERT_REQUEST = "InstallCertRequest";
     public static final String E_INSTALL_CERT_RESPONSE = "InstallCertResponse";
     public static final String E_GET_CERT_REQUEST = "GetCertRequest";

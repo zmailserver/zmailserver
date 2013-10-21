@@ -13,15 +13,15 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.account;
+package org.zmail.common.account;
 
 import com.google.common.collect.ImmutableBiMap;
 
 public class SignatureUtil {
 
     public static final ImmutableBiMap<String, String> ATTR_TYPE_MAP = ImmutableBiMap.of(
-        ZAttrProvisioning.A_zimbraPrefMailSignature, "text/plain",
-        ZAttrProvisioning.A_zimbraPrefMailSignatureHTML, "text/html");
+        ZAttrProvisioning.A_zmailPrefMailSignature, "text/plain",
+        ZAttrProvisioning.A_zmailPrefMailSignatureHTML, "text/html");
         
     public static String mimeTypeToAttrName(String mimeType) {
         return ATTR_TYPE_MAP.inverse().get(mimeType);

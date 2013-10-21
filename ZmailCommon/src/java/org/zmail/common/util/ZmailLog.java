@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.util;
+package org.zmail.common.util;
 
 import java.io.File;
 import java.util.Collections;
@@ -31,7 +31,7 @@ import org.apache.log4j.PropertyConfigurator;
  *
  * @author schemers
  */
-public final class ZimbraLog {
+public final class ZmailLog {
 
     /**
      * "ip" key for context. IP of request
@@ -110,312 +110,312 @@ public final class ZimbraLog {
     private static final String C_PORT = "port";
 
     /**
-     * the "zimbra.misc" logger. For all events that don't have a specific-catagory.
+     * the "zmail.misc" logger. For all events that don't have a specific-catagory.
      */
-    public static final Log misc = LogFactory.getLog("zimbra.misc");
+    public static final Log misc = LogFactory.getLog("zmail.misc");
 
     /**
-     * the "zimbra.net" logger. For logging of network activities
+     * the "zmail.net" logger. For logging of network activities
      */
-    public static final Log net = LogFactory.getLog("zimbra.net");
+    public static final Log net = LogFactory.getLog("zmail.net");
 
     /**
-     * the "zimbra.index" logger. For indexing.
+     * the "zmail.index" logger. For indexing.
      */
-    public static final Log index = LogFactory.getLog("zimbra.index");
+    public static final Log index = LogFactory.getLog("zmail.index");
 
     /**
-     * the "zimbra.search" logger. For search.
+     * the "zmail.search" logger. For search.
      */
-    public static final Log search = LogFactory.getLog("zimbra.search");
+    public static final Log search = LogFactory.getLog("zmail.search");
 
     /**
-     * the "zimbra.searchstat" logger. For search statistics.
+     * the "zmail.searchstat" logger. For search statistics.
      */
-    public static final Log searchstat = LogFactory.getLog("zimbra.searchstat");
+    public static final Log searchstat = LogFactory.getLog("zmail.searchstat");
 
     /**
-     * Fhe "zimbra.searchstat" logger.  For logging statistics about what kinds of searches are run
+     * Fhe "zmail.searchstat" logger.  For logging statistics about what kinds of searches are run
      */
-    public static final Log searchstats = LogFactory.getLog("zimbra.searchstats");
+    public static final Log searchstats = LogFactory.getLog("zmail.searchstats");
 
     /**
-     * the "zimbra.redolog" logger. For redolog-releated events.
+     * the "zmail.redolog" logger. For redolog-releated events.
      */
-    public static final Log redolog = LogFactory.getLog("zimbra.redolog");
+    public static final Log redolog = LogFactory.getLog("zmail.redolog");
 
     /**
-     * the "zimbra.lmtp" logger. For LMTP-related events.
+     * the "zmail.lmtp" logger. For LMTP-related events.
      */
-    public static final Log lmtp = LogFactory.getLog("zimbra.lmtp");
+    public static final Log lmtp = LogFactory.getLog("zmail.lmtp");
 
     /**
-     * the "zimbra.smtp" logger. For SMTP-related events.
+     * the "zmail.smtp" logger. For SMTP-related events.
      */
-    public static final Log smtp = LogFactory.getLog("zimbra.smtp");
+    public static final Log smtp = LogFactory.getLog("zmail.smtp");
 
     /**
-     * the "zimbra.nio" logger. For NIO-related events.
+     * the "zmail.nio" logger. For NIO-related events.
      */
-    public static final Log nio = LogFactory.getLog("zimbra.nio");
+    public static final Log nio = LogFactory.getLog("zmail.nio");
 
     /**
-     * the "zimbra.imap.client" logger. For IMAP client related events.
+     * the "zmail.imap.client" logger. For IMAP client related events.
      */
-    public static final Log imap_client = LogFactory.getLog("zimbra.imap-client");
+    public static final Log imap_client = LogFactory.getLog("zmail.imap-client");
 
     /**
-     * the "zimbra.imap" logger. For IMAP server related events.
+     * the "zmail.imap" logger. For IMAP server related events.
      */
-    public static final Log imap = LogFactory.getLog("zimbra.imap");
+    public static final Log imap = LogFactory.getLog("zmail.imap");
 
     /**
-     * the "zimbra.pop.client" logger. For POP3 client related events.
+     * the "zmail.pop.client" logger. For POP3 client related events.
      */
-    public static final Log pop_client = LogFactory.getLog("zimbra.pop-client");
+    public static final Log pop_client = LogFactory.getLog("zmail.pop-client");
 
     /**
-     * the "zimbra.pop" logger. For POP3 server related events.
+     * the "zmail.pop" logger. For POP3 server related events.
      */
-    public static final Log pop = LogFactory.getLog("zimbra.pop");
+    public static final Log pop = LogFactory.getLog("zmail.pop");
 
     /**
-     * the "zimbra.milter" logger. For MILTER-related events
+     * the "zmail.milter" logger. For MILTER-related events
      */
-    public static final Log milter = LogFactory.getLog("zimbra.milter");
+    public static final Log milter = LogFactory.getLog("zmail.milter");
 
     /**
-     * the "zimbra.mailbox" logger. For mailbox-related events.
+     * the "zmail.mailbox" logger. For mailbox-related events.
      */
-    public static final Log mailbox = LogFactory.getLog("zimbra.mailbox");
+    public static final Log mailbox = LogFactory.getLog("zmail.mailbox");
 
     /**
-     * the "zimbra.calendar" logger. For calendar-related events.
+     * the "zmail.calendar" logger. For calendar-related events.
      */
-    public static final Log calendar = LogFactory.getLog("zimbra.calendar");
+    public static final Log calendar = LogFactory.getLog("zmail.calendar");
 
     /**
-     * the "zimbra.im" logger. For instant messaging-related events.
+     * the "zmail.im" logger. For instant messaging-related events.
      */
-    public static final Log im = LogFactory.getLog("zimbra.im");
+    public static final Log im = LogFactory.getLog("zmail.im");
 
     /**
-     * the "zimbra.im.intercept" logger. The IM packet interceptor (IM protocol logger)
+     * the "zmail.im.intercept" logger. The IM packet interceptor (IM protocol logger)
      */
-    public static final Log im_intercept= LogFactory.getLog("zimbra.im.intercept");
+    public static final Log im_intercept= LogFactory.getLog("zmail.im.intercept");
 
     /**
-     * the "zimbra.account" logger. For account-related events.
+     * the "zmail.account" logger. For account-related events.
      */
-    public static final Log account = LogFactory.getLog("zimbra.account");
+    public static final Log account = LogFactory.getLog("zmail.account");
 
     /**
-     * the "zimbra.autoprov" logger. For account auto provision related events.
+     * the "zmail.autoprov" logger. For account auto provision related events.
      */
-    public static final Log autoprov = LogFactory.getLog("zimbra.autoprov");
+    public static final Log autoprov = LogFactory.getLog("zmail.autoprov");
 
     /**
-     * the "zimbra.gal" logger. For gal-related events.
+     * the "zmail.gal" logger. For gal-related events.
      */
-    public static final Log gal = LogFactory.getLog("zimbra.gal");
+    public static final Log gal = LogFactory.getLog("zmail.gal");
 
     /**
-     * the "zimbra.gal.concurrency" logger. For gal concurrency events.
+     * the "zmail.gal.concurrency" logger. For gal concurrency events.
      */
-    public static final Log galconcurrency = LogFactory.getLog("zimbra.gal.concurrency");
+    public static final Log galconcurrency = LogFactory.getLog("zmail.gal.concurrency");
 
     /**
-     * the "zimbra.ldap" logger. For ldap-related events.
+     * the "zmail.ldap" logger. For ldap-related events.
      */
-    public static final Log ldap = LogFactory.getLog("zimbra.ldap");
+    public static final Log ldap = LogFactory.getLog("zmail.ldap");
 
     /**
-     * the "zimbra.acl" logger. For acl-related events.
+     * the "zmail.acl" logger. For acl-related events.
      */
-    public static final Log acl = LogFactory.getLog("zimbra.acl");
+    public static final Log acl = LogFactory.getLog("zmail.acl");
 
     /**
-     * the "zimbra.security" logger. For security-related events
+     * the "zmail.security" logger. For security-related events
      */
-    public static final Log security = LogFactory.getLog("zimbra.security");
+    public static final Log security = LogFactory.getLog("zmail.security");
 
     /**
-     * the "zimbra.soap" logger. For soap-related events
+     * the "zmail.soap" logger. For soap-related events
      */
-    public static final Log soap = LogFactory.getLog("zimbra.soap");
+    public static final Log soap = LogFactory.getLog("zmail.soap");
 
     /**
-     * the "zimbra.test" logger. For testing-related events
+     * the "zmail.test" logger. For testing-related events
      */
-    public static final Log test = LogFactory.getLog("zimbra.test");
+    public static final Log test = LogFactory.getLog("zmail.test");
 
     /**
-     * the "zimbra.sqltrace" logger. For tracing SQL statements sent to the database
+     * the "zmail.sqltrace" logger. For tracing SQL statements sent to the database
      */
-    public static final Log sqltrace = LogFactory.getLog("zimbra.sqltrace");
+    public static final Log sqltrace = LogFactory.getLog("zmail.sqltrace");
 
     /**
-     * the "zimbra.dbconn" logger. For tracing database connections
+     * the "zmail.dbconn" logger. For tracing database connections
      */
-    public static final Log dbconn = LogFactory.getLog("zimbra.dbconn");
+    public static final Log dbconn = LogFactory.getLog("zmail.dbconn");
 
     /**
-     * the "zimbra.perf" logger. For logging performance statistics
+     * the "zmail.perf" logger. For logging performance statistics
      */
-    public static final Log perf = LogFactory.getLog("zimbra.perf");
+    public static final Log perf = LogFactory.getLog("zmail.perf");
 
     /**
-     * the "zimbra.cache" logger. For tracing object cache activity
+     * the "zmail.cache" logger. For tracing object cache activity
      */
-    public static final Log cache = LogFactory.getLog("zimbra.cache");
+    public static final Log cache = LogFactory.getLog("zmail.cache");
 
     /**
-     * the "zimbra.filter" logger. For filter-related logs.
+     * the "zmail.filter" logger. For filter-related logs.
      */
-    public static final Log filter = LogFactory.getLog("zimbra.filter");
+    public static final Log filter = LogFactory.getLog("zmail.filter");
 
     /**
-     * the "zimbra.session" logger. For session- and notification-related logs.
+     * the "zmail.session" logger. For session- and notification-related logs.
      */
-    public static final Log session = LogFactory.getLog("zimbra.session");
+    public static final Log session = LogFactory.getLog("zmail.session");
 
     /**
-     * the "zimbra.backup" logger. For backup/restore-related logs.
+     * the "zmail.backup" logger. For backup/restore-related logs.
      */
-    public static final Log backup = LogFactory.getLog("zimbra.backup");
+    public static final Log backup = LogFactory.getLog("zmail.backup");
 
     /**
-     * the "zimbra.system" logger. For startup/shutdown and other related logs.
+     * the "zmail.system" logger. For startup/shutdown and other related logs.
      */
-    public static final Log system = LogFactory.getLog("zimbra.system");
+    public static final Log system = LogFactory.getLog("zmail.system");
 
     /**
-     * the "zimbra.sync" logger. For sync client interface logs.
+     * the "zmail.sync" logger. For sync client interface logs.
      */
-    public static final Log sync = LogFactory.getLog("zimbra.sync");
+    public static final Log sync = LogFactory.getLog("zmail.sync");
 
     /**
-     * the "zimbra.synctrace" logger. For sync client interface logs.
+     * the "zmail.synctrace" logger. For sync client interface logs.
      */
-    public static final Log synctrace = LogFactory.getLog("zimbra.synctrace");
+    public static final Log synctrace = LogFactory.getLog("zmail.synctrace");
 
     /**
-     * the "zimbra.syncstate" logger. For sync client interface logs.
+     * the "zmail.syncstate" logger. For sync client interface logs.
      */
-    public static final Log syncstate = LogFactory.getLog("zimbra.syncstate");
+    public static final Log syncstate = LogFactory.getLog("zmail.syncstate");
 
     /**
-     * the "zimbra.wbxml" logger. For wbxml client interface logs.
+     * the "zmail.wbxml" logger. For wbxml client interface logs.
      */
-    public static final Log wbxml = LogFactory.getLog("zimbra.wbxml");
+    public static final Log wbxml = LogFactory.getLog("zmail.wbxml");
 
     /**
-     * the "zimbra.xsync" logger. For xsync client interface logs.
+     * the "zmail.xsync" logger. For xsync client interface logs.
      */
-    public static final Log xsync = LogFactory.getLog("zimbra.xsync");
+    public static final Log xsync = LogFactory.getLog("zmail.xsync");
 
     /**
-     * the "zimbra.extensions" logger. For logging extension loading related info.
+     * the "zmail.extensions" logger. For logging extension loading related info.
      */
-    public static final Log extensions = LogFactory.getLog("zimbra.extensions");
+    public static final Log extensions = LogFactory.getLog("zmail.extensions");
 
     /**
-     * the "zimbra.zimlet" logger. For logging zimlet related info.
+     * the "zmail.zimlet" logger. For logging zimlet related info.
      */
-    public static final Log zimlet = LogFactory.getLog("zimbra.zimlet");
+    public static final Log zimlet = LogFactory.getLog("zmail.zimlet");
 
     /**
-     * the "zimbra.doc" logger. For document sharing.
+     * the "zmail.doc" logger. For document sharing.
      */
-    public static final Log doc = LogFactory.getLog("zimbra.doc");
+    public static final Log doc = LogFactory.getLog("zmail.doc");
 
     /**
-     * the "zimbra.op" logger. Logs server operations
+     * the "zmail.op" logger. Logs server operations
      */
-    public static final Log op = LogFactory.getLog("zimbra.op");
+    public static final Log op = LogFactory.getLog("zmail.op");
 
     /**
-     * the "zimbra.dav" logger. Logs dav operations
+     * the "zmail.dav" logger. Logs dav operations
      */
-    public static final Log dav = LogFactory.getLog("zimbra.dav");
+    public static final Log dav = LogFactory.getLog("zmail.dav");
 
     /**
-     * the "zimbra.io" logger.  Logs file IO operations.
+     * the "zmail.io" logger.  Logs file IO operations.
      */
-    public static final Log io = LogFactory.getLog("zimbra.io");
+    public static final Log io = LogFactory.getLog("zmail.io");
 
     /**
-     * the "zimbra.datasource" logger.  Logs data source operations.
+     * the "zmail.datasource" logger.  Logs data source operations.
      */
-    public static final Log datasource = LogFactory.getLog("zimbra.datasource");
+    public static final Log datasource = LogFactory.getLog("zmail.datasource");
 
     /**
      * remote management.
      */
-    public static final Log rmgmt = LogFactory.getLog("zimbra.rmgmt");
+    public static final Log rmgmt = LogFactory.getLog("zmail.rmgmt");
 
     /**
-     * the "zimbra.webclient" logger. Logs ZimbraWebClient servlet and jsp operations.
+     * the "zmail.webclient" logger. Logs ZmailWebClient servlet and jsp operations.
      */
-    public static final Log webclient = LogFactory.getLog("zimbra.webclient");
+    public static final Log webclient = LogFactory.getLog("zmail.webclient");
 
     /**
-     * the "zimbra.scheduler" logger.  Logs scheduled task operations.
+     * the "zmail.scheduler" logger.  Logs scheduled task operations.
      */
-    public static final Log scheduler = LogFactory.getLog("zimbra.scheduler");
+    public static final Log scheduler = LogFactory.getLog("zmail.scheduler");
 
     /**
-     * the "zimbra.store" logger.  Logs filesystem storage operations.
+     * the "zmail.store" logger.  Logs filesystem storage operations.
      */
-    public static final Log store = LogFactory.getLog("zimbra.store");
+    public static final Log store = LogFactory.getLog("zmail.store");
 
     /**
-     * the "zimbra.fb" logger.  Logs free/busy operations.
+     * the "zmail.fb" logger.  Logs free/busy operations.
      */
-    public static final Log fb = LogFactory.getLog("zimbra.fb");
+    public static final Log fb = LogFactory.getLog("zmail.fb");
 
     /**
-     * the "zimbra.purge" logger.  Logs mailbox purge operations.
+     * the "zmail.purge" logger.  Logs mailbox purge operations.
      */
-    public static final Log purge = LogFactory.getLog("zimbra.purge");
+    public static final Log purge = LogFactory.getLog("zmail.purge");
 
     /**
-     * the "zimbra.mailop" logger.  Logs changes to items in the mailbox.
+     * the "zmail.mailop" logger.  Logs changes to items in the mailbox.
      */
-    public static final Log mailop = LogFactory.getLog("zimbra.mailop");
+    public static final Log mailop = LogFactory.getLog("zmail.mailop");
 
     /**
-     * "zimbra.slogger" logger.  Used for "logger service", publishes stats events to syslog
+     * "zmail.slogger" logger.  Used for "logger service", publishes stats events to syslog
      */
-    public static final Log slogger = LogFactory.getLog("zimbra.slogger");
+    public static final Log slogger = LogFactory.getLog("zmail.slogger");
 
     /**
-     * the "zimbra.mbxmgr" logger is used to track mailbox loading/maintenance mode
+     * the "zmail.mbxmgr" logger is used to track mailbox loading/maintenance mode
      */
-    public static final Log mbxmgr = LogFactory.getLog("zimbra.mbxmgr");
+    public static final Log mbxmgr = LogFactory.getLog("zmail.mbxmgr");
 
     /**
-     * "zimbra.tnef" logger.  Logs TNEF conversion operations.
+     * "zmail.tnef" logger.  Logs TNEF conversion operations.
      */
-    public static final Log tnef = LogFactory.getLog("zimbra.tnef");
+    public static final Log tnef = LogFactory.getLog("zmail.tnef");
 
 
-    public static final Log nginxlookup = LogFactory.getLog("zimbra.nginxlookup");
+    public static final Log nginxlookup = LogFactory.getLog("zmail.nginxlookup");
 
     /**
-     * the "zimbra.contact" logger.  Logs contact operations.
+     * the "zmail.contact" logger.  Logs contact operations.
      */
-    public static final Log contact = LogFactory.getLog("zimbra.contact");
+    public static final Log contact = LogFactory.getLog("zmail.contact");
 
     /**
-     * the "zimbra.share" logger.  Logs share operations.
+     * the "zmail.share" logger.  Logs share operations.
      */
-    public static final Log share = LogFactory.getLog("zimbra.share");
+    public static final Log share = LogFactory.getLog("zmail.share");
 
     /**
-     * the "zimbra.activity" logger. For ACTIVITY-related events
+     * the "zmail.activity" logger. For ACTIVITY-related events
      */
-    public static final Log activity = LogFactory.getLog("zimbra.activity");
+    public static final Log activity = LogFactory.getLog("zmail.activity");
 
 
     /**
@@ -423,7 +423,7 @@ public final class ZimbraLog {
      */
     public static final Map<String, String> CATEGORY_DESCRIPTIONS;
 
-    private ZimbraLog() {
+    private ZmailLog() {
     }
 
     /**
@@ -618,7 +618,7 @@ public final class ZimbraLog {
      * Adds account name to the current thread's logging context.
      */
     public static void addAccountNameToContext(String accountName) {
-        ZimbraLog.addToContext(C_NAME, accountName);
+        ZmailLog.addToContext(C_NAME, accountName);
     }
 
     /**
@@ -638,21 +638,21 @@ public final class ZimbraLog {
      * Adds ip to the current thread's logging context.
      */
     public static void addIpToContext(String ipAddress) {
-        ZimbraLog.addToContext(C_IP, ipAddress);
+        ZmailLog.addToContext(C_IP, ipAddress);
     }
 
     /**
      * Adds oip (originating IP) to the current thread's logging context.
      */
     public static void addOrigIpToContext(String ipAddress) {
-        ZimbraLog.addToContext(C_OIP, ipAddress);
+        ZmailLog.addToContext(C_OIP, ipAddress);
     }
 
     /**
      * Adds connection id to the current thread's logging context.
      */
     public static void addConnectionIdToContext(String connectionId) {
-        ZimbraLog.addToContext(C_CONNECTIONID, connectionId);
+        ZmailLog.addToContext(C_CONNECTIONID, connectionId);
     }
 
     /**
@@ -694,14 +694,14 @@ public final class ZimbraLog {
      * Adds port to the current thread's logging context.
      */
     public static void addPortToContext(int port) {
-        ZimbraLog.addToContext(C_PORT, Integer.toString(port));
+        ZmailLog.addToContext(C_PORT, Integer.toString(port));
     }
 
     /**
      * Adds user agent to the current thread's logging context.
      */
     public static void addUserAgentToContext(String ua) {
-        ZimbraLog.addToContext(C_USER_AGENT, ua);
+        ZmailLog.addToContext(C_USER_AGENT, ua);
     }
 
     /**
@@ -710,7 +710,7 @@ public final class ZimbraLog {
      * @param value
      */
     public static void addViaToContext(String value) {
-        ZimbraLog.addToContext(C_VIA, value);
+        ZmailLog.addToContext(C_VIA, value);
     }
 
     /**
@@ -750,11 +750,11 @@ public final class ZimbraLog {
     /**
      * Setup log4j for our command line tools.
      *
-     * If System.getProperty(zimbra.log4j.level) is set then log at that level.
+     * If System.getProperty(zmail.log4j.level) is set then log at that level.
      * Else log at the specified defaultLevel.
      */
     public static void toolSetupLog4j(String defaultLevel, String logFile, boolean showThreads) {
-        String level = System.getProperty("zimbra.log4j.level");
+        String level = System.getProperty("zmail.log4j.level");
         if (level == null) {
             level = defaultLevel;
         }
@@ -777,7 +777,7 @@ public final class ZimbraLog {
     }
 
     public static void toolSetupLog4jConsole(String defaultLevel, boolean stderr, boolean showThreads) {
-        String level = System.getProperty("zimbra.log4j.level");
+        String level = System.getProperty("zmail.log4j.level");
         if (level == null) {
             level = defaultLevel;
         }
@@ -799,7 +799,7 @@ public final class ZimbraLog {
 
     /**
      * Setup log4j for command line tool using specified log4j.properties file.
-     * If file doesn't exist System.getProperty(zimbra.home)/conf/log4j.properties
+     * If file doesn't exist System.getProperty(zmail.home)/conf/log4j.properties
      * file will be used.
      * @param defaultLevel
      * @param propsFile full path to log4j.properties file

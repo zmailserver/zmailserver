@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.util;
+package org.zmail.common.util;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -20,11 +20,11 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.zimbra.common.localconfig.LC;
+import org.zmail.common.localconfig.LC;
 
 public class RemoteIP {
     
-    public static final String X_ORIGINATING_IP_HEADER = LC.zimbra_http_originating_ip_header.value();
+    public static final String X_ORIGINATING_IP_HEADER = LC.zmail_http_originating_ip_header.value();
 
     
     /**
@@ -42,7 +42,7 @@ public class RemoteIP {
     /** 
      *  It can be the IP of the http client, or in the presence of a 
      *  real origin IP address http header(header specified in the LC 
-     *  key zimbra_http_originating_ip_header) the IP of the real 
+     *  key zmail_http_originating_ip_header) the IP of the real 
      *  origin client if the http client is in a trusted network.
      *  
      *  Should be always present.
@@ -71,11 +71,11 @@ public class RemoteIP {
     
     public void addToLoggingContext() {
         if (mOrigIP != null)
-            ZimbraLog.addOrigIpToContext(mOrigIP);
+            ZmailLog.addOrigIpToContext(mOrigIP);
         
         // don't log ip if oip is present and ip is localhost
         if (!TrustedIPs.isLocalhost(mClientIP) || mOrigIP == null)
-            ZimbraLog.addIpToContext(mClientIP);
+            ZmailLog.addIpToContext(mClientIP);
     }
     
     public static class TrustedIPs {

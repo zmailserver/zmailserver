@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.perf.chart;
+package org.zmail.perf.chart;
 
 import java.io.File;
 import java.io.IOException;
@@ -165,7 +165,7 @@ public class XMLChartConfig {
     public static List<ChartSettings> load(File xmlFile)
             throws IOException, DocumentException {
         List<ChartSettings> charts = new ArrayList<ChartSettings>();
-        SAXReader reader = com.zimbra.common.soap.Element.getSAXReader();
+        SAXReader reader = org.zmail.common.soap.Element.getSAXReader();
         Document document = reader.read(xmlFile);
         Element chartsElem = document.getRootElement();
         if (!chartsElem.getName().equals(E_CHARTS))

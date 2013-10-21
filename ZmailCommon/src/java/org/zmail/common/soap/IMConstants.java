@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.soap;
+package org.zmail.common.soap;
 
 import org.dom4j.Namespace;
 import org.dom4j.QName;
 
 public class IMConstants {
 
-    public static final String NAMESPACE_STR = "urn:zimbraIM";
+    public static final String NAMESPACE_STR = "urn:zmailIM";
     public static final Namespace NAMESPACE = Namespace.get(NAMESPACE_STR);
 
     public static final QName IM_GET_ROSTER_REQUEST    = QName.get("IMGetRosterRequest", NAMESPACE);

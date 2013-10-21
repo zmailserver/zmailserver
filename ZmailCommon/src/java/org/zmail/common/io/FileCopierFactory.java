@@ -13,10 +13,10 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.io;
+package org.zmail.common.io;
 
-import com.zimbra.common.io.FileCopierOptions.IOType;
-import com.zimbra.common.io.FileCopierOptions.Method;
+import org.zmail.common.io.FileCopierOptions.IOType;
+import org.zmail.common.io.FileCopierOptions.Method;
 
 public class FileCopierFactory {
 

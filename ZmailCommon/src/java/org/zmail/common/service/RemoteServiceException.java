@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.service;
+package org.zmail.common.service;
 
 import java.net.ConnectException;
 import java.net.NoRouteToHostException;

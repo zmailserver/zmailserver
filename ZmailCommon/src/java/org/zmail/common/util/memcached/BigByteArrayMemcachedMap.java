@@ -13,11 +13,11 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.util.memcached;
+package org.zmail.common.util.memcached;
 
 import java.util.Collection;
 
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
 /**
  * A key/value lookup map backed by memcached, with support for values larger than 1MB.
@@ -38,7 +38,7 @@ import com.zimbra.common.service.ServiceException;
  *         public MyValue deserialize(byte[] data) { deserialize from byte array }
  *     }
  * 
- *     ZimbraMemcachedClient mcdClient = new ZimbraMemcachedClient(...);
+ *     ZmailMemcachedClient mcdClient = new ZmailMemcachedClient(...);
  *     MySerializer serializer = new MySerializer();
  *     BigByteArrayMemcachedMap<MyKey, MyValue> mcdMap = new BigByteArrayMemcachedMap(mcdClient, serializer);
  * 
@@ -53,7 +53,7 @@ import com.zimbra.common.service.ServiceException;
  */
 public class BigByteArrayMemcachedMap<K extends MemcachedKey, V> {
 
-    private ZimbraMemcachedClient mClient;
+    private ZmailMemcachedClient mClient;
     private ByteArraySerializer<V> mSerializer;
     private boolean mAckWrites;
 
@@ -64,13 +64,13 @@ public class BigByteArrayMemcachedMap<K extends MemcachedKey, V> {
      * @param ackWrites if false, put and remove operations return immediately, without waiting for an ack
      *                  if true, put and remove operations block until ack or timeout
      */
-    public BigByteArrayMemcachedMap(ZimbraMemcachedClient client, ByteArraySerializer<V> serializer, boolean ackWrites) {
+    public BigByteArrayMemcachedMap(ZmailMemcachedClient client, ByteArraySerializer<V> serializer, boolean ackWrites) {
         mClient = client;
         mSerializer = serializer;
         mAckWrites = ackWrites;
     }
 
-    public BigByteArrayMemcachedMap(ZimbraMemcachedClient client, ByteArraySerializer<V> serializer) {
+    public BigByteArrayMemcachedMap(ZmailMemcachedClient client, ByteArraySerializer<V> serializer) {
         this(client, serializer, true);
     }
 

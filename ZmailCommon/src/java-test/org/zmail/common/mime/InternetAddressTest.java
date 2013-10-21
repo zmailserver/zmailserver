@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.mime;
+package org.zmail.common.mime;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,11 +53,11 @@ public class InternetAddressTest {
                 "Bob the Builder <>",
                 "Bob the Builder", "");
         test("cruft '/' before terminating angle bracket",
-                "<bug-54513-14@http.bugzilla.zimbra.com/>",
-                null, "bug-54513-14@http.bugzilla.zimbra.com");
+                "<bug-54513-14@http.bugzilla.zmail.com/>",
+                null, "bug-54513-14@http.bugzilla.zmail.com");
         test("cruft '\\' before terminating angle bracket",
-                "<bug-54513-14@http.bugzilla.zimbra.com \\>",
-                null, "bug-54513-14@http.bugzilla.zimbra.com");
+                "<bug-54513-14@http.bugzilla.zmail.com \\>",
+                null, "bug-54513-14@http.bugzilla.zmail.com");
     }
 
     @Test

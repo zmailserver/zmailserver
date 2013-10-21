@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.mime;
+package org.zmail.common.mime;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -46,8 +46,8 @@ public class MimeCompoundHeaderTest {
                 "application/x-stuff;\n\ttitle*=us-ascii'en-us'This%20is%20%2A%2A%2Afun%2A%2A%2A",
                 "application/x-stuff", new String[] { "title", "This is ***fun***" });
         test(true, "missing quotes around param value",
-                "application/pdf;\n    x-unix-mode=0644;\n    name=Zimbra on Mac OS X success story.pdf",
-                "application/pdf", new String[] { "x-unix-mode", "0644", "name", "Zimbra" });
+                "application/pdf;\n    x-unix-mode=0644;\n    name=Zmail on Mac OS X success story.pdf",
+                "application/pdf", new String[] { "x-unix-mode", "0644", "name", "Zmail" });
         test(true, "invalid value",
                 "c; name=TriplePlay_Converged_Network_v5.pdf;\n x-mac-creator=70727677; x-mac-type=50444620",
                 "application/octet-stream", new String[] { "name", "TriplePlay_Converged_Network_v5.pdf", "x-mac-creator", "70727677", "x-mac-type", "50444620" });

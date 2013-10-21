@@ -16,7 +16,7 @@
 /*
  * Created on May 1, 2008
  */
-package com.zimbra.common.util;
+package org.zmail.common.util;
 
 import java.io.CharConversionException;
 import static java.lang.Character.isDigit;

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.perf.chart;
+package org.zmail.perf.chart;
 
 import java.util.Arrays;
 import java.util.HashSet;

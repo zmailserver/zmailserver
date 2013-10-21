@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.httpclient;
+package org.zmail.common.httpclient;
 
 import java.net.InetSocketAddress;
 import java.net.Proxy;
@@ -24,12 +24,12 @@ import java.util.List;
 
 import org.apache.commons.httpclient.HostConfiguration;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.net.AuthProxy;
-import com.zimbra.common.net.ProxyHostConfiguration;
-import com.zimbra.common.net.ProxySelectors;
-import com.zimbra.common.util.HttpUtil;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.net.AuthProxy;
+import org.zmail.common.net.ProxyHostConfiguration;
+import org.zmail.common.net.ProxySelectors;
+import org.zmail.common.util.HttpUtil;
+import org.zmail.common.util.ZmailLog;
 
 public class HttpProxyConfig {
     
@@ -41,7 +41,7 @@ public class HttpProxyConfig {
         try {
             uri = new URI(uriStr);
         } catch (URISyntaxException x) {
-            ZimbraLog.net.info(uriStr, x);
+            ZmailLog.net.info(uriStr, x);
             return null;
         }
 
@@ -54,8 +54,8 @@ public class HttpProxyConfig {
                 return null;
             case HTTP:
                 InetSocketAddress addr = (InetSocketAddress)proxy.address();
-                if (ZimbraLog.net.isDebugEnabled()) {
-                    ZimbraLog.net.debug("URI %s to use HTTP proxy %s", safePrint(uri), addr.toString());
+                if (ZmailLog.net.isDebugEnabled()) {
+                    ZmailLog.net.debug("URI %s to use HTTP proxy %s", safePrint(uri), addr.toString());
                 }
                 ProxyHostConfiguration nhc = new ProxyHostConfiguration(hc);
                 nhc.setProxy(addr.getHostName(), addr.getPort());

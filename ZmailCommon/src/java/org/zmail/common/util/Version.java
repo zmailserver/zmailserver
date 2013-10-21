@@ -12,16 +12,16 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.util;
+package org.zmail.common.util;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.google.common.base.Strings;
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
 /**
- * Zimbra component version.
+ * Zmail component version.
  * <p>
  * {@code <major number>.<minor number>.<patch number>_<release><release number>_<buildnumber>}
  * <p>

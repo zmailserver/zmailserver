@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.zmime;
+package org.zmail.common.zmime;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -27,7 +27,7 @@ import javax.mail.internet.SharedInputStream;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.zimbra.common.util.ByteUtil;
+import org.zmail.common.util.ByteUtil;
 
 public class ZSharedFileInputStreamTest {
     private void checkStream(ZSharedFileInputStream is, String expected) throws Exception {

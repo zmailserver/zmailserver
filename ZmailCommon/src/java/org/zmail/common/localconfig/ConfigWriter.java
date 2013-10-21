@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.localconfig;
+package org.zmail.common.localconfig;
 
 import java.io.IOException;
 import java.io.PrintWriter;

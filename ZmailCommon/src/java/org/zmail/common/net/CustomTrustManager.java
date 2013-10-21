@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.net;
+package org.zmail.common.net;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -33,8 +33,8 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
 import javax.net.ssl.X509TrustManager;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.util.ZmailLog;
 
 /**
  * Custom keystore backed trust manager
@@ -53,7 +53,7 @@ public class CustomTrustManager implements X509TrustManager {
             keyStore = loadKeyStore();
             resetKeyStoreTrustManager();
         } catch (GeneralSecurityException e) {
-            ZimbraLog.security.error("trust manager init error", e);
+            ZmailLog.security.error("trust manager init error", e);
             throw e;
         }
     }
@@ -67,10 +67,10 @@ public class CustomTrustManager implements X509TrustManager {
     }
 
     public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
-        if (ZimbraLog.security.isDebugEnabled()) {
-            ZimbraLog.security.debug("Server certificate chain:");
+        if (ZmailLog.security.isDebugEnabled()) {
+            ZmailLog.security.debug("Server certificate chain:");
             for (int i = 0; i < chain.length; ++i) {
-                ZimbraLog.security.debug("X509Certificate[" + i + "]=" + chain[i]);
+                ZmailLog.security.debug("X509Certificate[" + i + "]=" + chain[i]);
             }
         }
 
@@ -129,10 +129,10 @@ public class CustomTrustManager implements X509TrustManager {
                 resetKeyStoreTrustManager();
                 pendingCerts.remove(alias);
             } catch (KeyStoreException x) {
-                ZimbraLog.security.warn("failed to accept certificates of %s", alias);
+                ZmailLog.security.warn("failed to accept certificates of %s", alias);
             }
         } else {
-            ZimbraLog.security.warn("Alias %s not found in cache; no certificates accepted.", alias);
+            ZmailLog.security.warn("Alias %s not found in cache; no certificates accepted.", alias);
         }
     }
 
@@ -148,7 +148,7 @@ public class CustomTrustManager implements X509TrustManager {
                 }
             }
         }catch (KeyStoreException x) {
-            ZimbraLog.security.warn(x);
+            ZmailLog.security.warn(x);
         }
         return false;
     }
@@ -191,18 +191,18 @@ public class CustomTrustManager implements X509TrustManager {
                 keyStore.load(in, LC.mailboxd_keystore_password.value().toCharArray());
                 isKeyStoreInitialized = true;
             } catch (CertificateException x) {
-                ZimbraLog.security.warn("failed to load certificates", x);
+                ZmailLog.security.warn("failed to load certificates", x);
             } catch (IOException x) {
-                ZimbraLog.security.warn("failed to read keystore file", x);
+                ZmailLog.security.warn("failed to read keystore file", x);
             }
         } catch (FileNotFoundException x) {
-            ZimbraLog.security.info("keystore not present");
+            ZmailLog.security.info("keystore not present");
         } finally {
             if (in != null)
                 try {
                     in.close();
                 } catch (IOException x) {
-                    ZimbraLog.security.warn("keystore file can't be closed after reading", x);
+                    ZmailLog.security.warn("keystore file can't be closed after reading", x);
                 }
         }
 
@@ -213,18 +213,18 @@ public class CustomTrustManager implements X509TrustManager {
                     keyStore.load(in, LC.mailboxd_keystore_base_password.value().toCharArray());
                     isKeyStoreInitialized = true;
                 } catch (CertificateException x) {
-                    ZimbraLog.security.warn("failed to load backup certificates", x);
+                    ZmailLog.security.warn("failed to load backup certificates", x);
                 } catch (IOException x) {
-                    ZimbraLog.security.warn("failed to read backup keystore file", x);
+                    ZmailLog.security.warn("failed to read backup keystore file", x);
                 }
             } catch (FileNotFoundException x) {
-                ZimbraLog.security.warn("backup keystore not found");
+                ZmailLog.security.warn("backup keystore not found");
             } finally {
                 if (in != null)
                     try {
                         in.close();
                     } catch (IOException x) {
-                        ZimbraLog.security.warn("backup keystore file can't be closed after reading", x);
+                        ZmailLog.security.warn("backup keystore file can't be closed after reading", x);
                     }
             }
         }

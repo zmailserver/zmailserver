@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.util;
+package org.zmail.common.util;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -111,7 +111,7 @@ public final class BlobMetaData {
                     try {
                         entry.setValue(decodeRecursive(value));
                     } catch (BlobMetaDataEncodingException e) {
-                        ZimbraLog.mailbox.warn("Unable to decode BlobMetaData value [%s] due to exception", value, e);
+                        ZmailLog.mailbox.warn("Unable to decode BlobMetaData value [%s] due to exception", value, e);
                     }
                 }
             }

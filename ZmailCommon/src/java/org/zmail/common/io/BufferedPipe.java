@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.io;
+package org.zmail.common.io;
 import java.io.Closeable;
 import java.io.IOException;
 import java.nio.ByteBuffer;

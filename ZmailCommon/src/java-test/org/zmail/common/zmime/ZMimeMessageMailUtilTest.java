@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.zmime;
+package org.zmail.common.zmime;
 
 import java.util.Enumeration;
 import java.util.Properties;
@@ -26,8 +26,8 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
-import com.zimbra.common.mime.shim.JavaMailInternetAddress;
-import com.zimbra.common.util.MailUtil;
+import org.zmail.common.mime.shim.JavaMailInternetAddress;
+import org.zmail.common.util.MailUtil;
 
 public class ZMimeMessageMailUtilTest {
     private class MimeMessageWithId extends ZMimeMessage {

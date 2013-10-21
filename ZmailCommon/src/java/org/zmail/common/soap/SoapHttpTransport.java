@@ -17,7 +17,7 @@
  * SoapHttpTransport.java
  */
 
-package com.zimbra.common.soap;
+package org.zmail.common.soap;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -44,17 +44,17 @@ import org.dom4j.DocumentException;
 import org.dom4j.ElementHandler;
 import org.dom4j.io.SAXReader;
 
-import com.zimbra.common.httpclient.HttpClientUtil;
-import com.zimbra.common.httpclient.HttpProxyConfig;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.net.ProxyHostConfiguration;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.RemoteIP;
-import com.zimbra.common.util.ZimbraHttpConnectionManager;
+import org.zmail.common.httpclient.HttpClientUtil;
+import org.zmail.common.httpclient.HttpProxyConfig;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.net.ProxyHostConfiguration;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.RemoteIP;
+import org.zmail.common.util.ZmailHttpConnectionManager;
 
 public class SoapHttpTransport extends SoapTransport {
-    private HttpClient mClient = ZimbraHttpConnectionManager.getInternalHttpConnMgr().getDefaultHttpClient();
+    private HttpClient mClient = ZmailHttpConnectionManager.getInternalHttpConnMgr().getDefaultHttpClient();
     private Map<String, String> mCustomHeaders;
     private ProxyHostConfiguration mHostConfig = null;
     private HttpDebugListener mHttpDebugListener;
@@ -98,7 +98,7 @@ public class SoapHttpTransport extends SoapTransport {
      * Frees any resources such as connection pool held by this transport.
      */
     public void shutdown() {
-        if (mClient != null && mClient != ZimbraHttpConnectionManager.getInternalHttpConnMgr().getDefaultHttpClient()) {
+        if (mClient != null && mClient != ZmailHttpConnectionManager.getInternalHttpConnMgr().getDefaultHttpClient()) {
             mClient.getHttpConnectionManager().closeIdleConnections(0);
             mClient = null;
             mHostConfig = null;
@@ -318,7 +318,7 @@ public class SoapHttpTransport extends SoapTransport {
 
         @Override
         public void process(Reader src) throws ServiceException {
-            SAXReader reader = com.zimbra.common.soap.Element.getSAXReader();
+            SAXReader reader = org.zmail.common.soap.Element.getSAXReader();
             for(Map.Entry<String, ElementHandler> entry : handlers.entrySet()) {
                 reader.addHandler(entry.getKey(), entry.getValue());
             }

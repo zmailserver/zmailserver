@@ -12,9 +12,9 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.zmime;
+package org.zmail.common.zmime;
 
-import com.zimbra.common.util.StringUtil;
+import org.zmail.common.util.StringUtil;
 
 public class ZContentType extends ZCompoundHeader {
     private String primaryType, subType;

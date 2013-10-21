@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.soap;
+package org.zmail.common.soap;
 
 import org.dom4j.Namespace;
 import org.dom4j.QName;
@@ -20,7 +20,7 @@ import org.dom4j.QName;
 public final class MailConstants {
 
     public static final class ShareConstants {
-        public static final String NAMESPACE_STR = "urn:zimbraShare";
+        public static final String NAMESPACE_STR = "urn:zmailShare";
         public static final String VERSION = "0.2";
 
         public static final String E_SHARE = "share";
@@ -50,7 +50,7 @@ public final class MailConstants {
     private MailConstants() {
     }
 
-    public static final String NAMESPACE_STR = "urn:zimbraMail";
+    public static final String NAMESPACE_STR = "urn:zmailMail";
     public static final Namespace NAMESPACE = Namespace.get(NAMESPACE_STR);
 
     public static final String E_NO_OP_REQUEST = "NoOpRequest";

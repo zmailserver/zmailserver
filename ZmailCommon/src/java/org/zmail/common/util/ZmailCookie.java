@@ -12,15 +12,15 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.util;
+package org.zmail.common.util;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.zimbra.common.localconfig.LC;
+import org.zmail.common.localconfig.LC;
 
-public class ZimbraCookie {
+public class ZmailCookie {
 
     public static final String COOKIE_ZM_AUTH_TOKEN       = "ZM_AUTH_TOKEN";
     public static final String COOKIE_ZM_ADMIN_AUTH_TOKEN = "ZM_ADMIN_AUTH_TOKEN";
@@ -40,8 +40,8 @@ public class ZimbraCookie {
      * @param path
      */
     public static void setAuthTokenCookieDomainPath(Cookie cookie, String path) {
-        if (LC.zimbra_authtoken_cookie_domain.value().length() > 0) {
-            cookie.setDomain(LC.zimbra_authtoken_cookie_domain.value());
+        if (LC.zmail_authtoken_cookie_domain.value().length() > 0) {
+            cookie.setDomain(LC.zmail_authtoken_cookie_domain.value());
         }
         
         cookie.setPath(path);
@@ -65,14 +65,14 @@ public class ZimbraCookie {
             // Expires directive, not the Max-Age directive.
             cookie.setMaxAge(maxAge.intValue());
         }
-        ZimbraCookie.setAuthTokenCookieDomainPath(cookie, ZimbraCookie.PATH_ROOT);
+        ZmailCookie.setAuthTokenCookieDomainPath(cookie, ZmailCookie.PATH_ROOT);
 
         cookie.setSecure(secure);
         
         if (httpOnly) {
             /*
              * jetty specific workaround before Servlet-3.0 is supported in jetty.
-             * see https://bugzilla.zimbra.com/show_bug.cgi?id=67078#c2
+             * see https://bugzilla.zmail.com/show_bug.cgi?id=67078#c2
              * 
              * When we upgrade to jetty-8 and Servlet-3.0 is supporte in jettyd, 
              * change the following line to:

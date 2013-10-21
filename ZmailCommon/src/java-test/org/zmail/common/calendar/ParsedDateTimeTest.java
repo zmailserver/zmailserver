@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.calendar;
+package org.zmail.common.calendar;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -22,7 +22,7 @@ import java.io.FileWriter;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.zimbra.common.localconfig.LC;
+import org.zmail.common.localconfig.LC;
 
 public class ParsedDateTimeTest {
     

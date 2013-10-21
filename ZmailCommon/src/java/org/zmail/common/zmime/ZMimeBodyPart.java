@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.zmime;
+package org.zmail.common.zmime;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FilterInputStream;
@@ -32,8 +32,8 @@ import javax.mail.internet.SharedInputStream;
 
 import com.google.common.collect.ImmutableSet;
 import com.sun.mail.util.PropUtil;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.ZmailLog;
 
 public class ZMimeBodyPart extends MimeBodyPart implements ZMimePart {
     private static final boolean ZPARSER = ZMimeMessage.ZPARSER;
@@ -94,7 +94,7 @@ public class ZMimeBodyPart extends MimeBodyPart implements ZMimePart {
                 }
                 copied = true;
             } catch (Exception e) {
-                ZimbraLog.misc.warn("failed cloning " + source.getClass().getSimpleName(), e);
+                ZmailLog.misc.warn("failed cloning " + source.getClass().getSimpleName(), e);
             }
         }
 

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.mime;
+package org.zmail.common.mime;
 
 import com.google.common.collect.ImmutableSet;
 
@@ -39,9 +39,9 @@ public class MimeConstants {
     public static final String CT_APPLICATION_SMIME = "application/pkcs7-mime";
     public static final String CT_APPLICATION_TNEF = "application/ms-tnef";
     public static final String CT_APPLICATION_XHTML = "application/xhtml+xml";
-    public static final String CT_APPLICATION_ZIMBRA_DOC = "application/x-zimbra-doc";
-    public static final String CT_APPLICATION_ZIMBRA_SLIDES = "application/x-zimbra-slides";
-    public static final String CT_APPLICATION_ZIMBRA_SPREADSHEET = "application/x-zimbra-xls";
+    public static final String CT_APPLICATION_ZIMBRA_DOC = "application/x-zmail-doc";
+    public static final String CT_APPLICATION_ZIMBRA_SLIDES = "application/x-zmail-slides";
+    public static final String CT_APPLICATION_ZIMBRA_SPREADSHEET = "application/x-zmail-xls";
     public static final String CT_MULTIPART_ALTERNATIVE = "multipart/alternative";
     public static final String CT_MULTIPART_DIGEST = "multipart/digest";
     public static final String CT_MULTIPART_ENCRYPTED = "multipart/encrypted";
@@ -50,8 +50,8 @@ public class MimeConstants {
     public static final String CT_MULTIPART_RELATED = "multipart/related";
     public static final String CT_MULTIPART_SIGNED = "multipart/signed";
     public static final String CT_MULTIPART_APPLEDOUBLE = "multipart/appledouble";
-    public static final String CT_XML_ZIMBRA_SHARE = "xml/x-zimbra-share";
-    public static final String CT_XML_ZIMBRA_DL_SUBSCRIPTION = "xml/x-zimbra-dl-subscription";
+    public static final String CT_XML_ZIMBRA_SHARE = "xml/x-zmail-share";
+    public static final String CT_XML_ZIMBRA_DL_SUBSCRIPTION = "xml/x-zmail-dl-subscription";
     public static final String CT_MULTIPART_PREFIX = "multipart/";
     public static final String CT_TEXT_PREFIX = "text/";
     public static final String CT_MESSAGE_PREFIX = "message/";
@@ -96,7 +96,7 @@ public class MimeConstants {
             CT_APPLICATION_ZIMBRA_DOC, CT_APPLICATION_ZIMBRA_SLIDES, CT_APPLICATION_ZIMBRA_SPREADSHEET
     );
 
-    public static boolean isZimbraDocument(String contentType) {
+    public static boolean isZmailDocument(String contentType) {
         return ZIMBRA_DOC_CT_SET.contains(contentType);
     }
 }

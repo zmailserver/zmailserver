@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.util.memcached;
+package org.zmail.common.util.memcached;
 
 /**
  * Memcached key that supports optional prefix

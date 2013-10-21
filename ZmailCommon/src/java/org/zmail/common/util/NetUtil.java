@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.util;
+package org.zmail.common.util;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -30,7 +30,7 @@ import java.util.Map;
 
 import javax.net.ssl.SSLServerSocketFactory;
 
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
 public class NetUtil {
 
@@ -158,7 +158,7 @@ public class NetUtil {
         // Don't use log4j - when this code is called, log4j might not have been initialized
         // and we do not want to initialize log4j at this time because we are likely still
         // running as root.
-        System.err.println("Zimbra server reserving server socket port=" + port + " bindaddr=" + address + " ssl=" + ssl);
+        System.err.println("Zmail server reserving server socket port=" + port + " bindaddr=" + address + " ssl=" + ssl);
         String key = makeKey(address, port, ssl, useChannels);
         ServerSocket serverSocket = NetUtil.newBoundServerSocket(address, port, ssl, useChannels, excludeCiphers);
         //System.err.println("put table=" + mBoundSockets.hashCode() + " key=" + key + " sock=" + serverSocket);

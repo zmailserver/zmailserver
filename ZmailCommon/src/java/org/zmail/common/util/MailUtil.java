@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.util;
+package org.zmail.common.util;
 
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
@@ -30,8 +30,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import com.sun.mail.smtp.SMTPTransport;
-import com.zimbra.common.mime.shim.JavaMailInternetAddress;
-import com.zimbra.common.service.ServiceException.Argument;
+import org.zmail.common.mime.shim.JavaMailInternetAddress;
+import org.zmail.common.service.ServiceException.Argument;
 
 public class MailUtil {
     public static void populateFailureDeliveryMessageFields(MimeMessage failedDeliverymm, String subject, String to, List<Argument> addressArgs, InternetAddress iAddr) throws MessagingException, UnsupportedEncodingException {		

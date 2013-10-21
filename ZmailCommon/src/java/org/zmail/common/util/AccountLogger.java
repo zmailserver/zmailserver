@@ -15,9 +15,9 @@
 /**
  * 
  */
-package com.zimbra.common.util;
+package org.zmail.common.util;
 
-import com.zimbra.common.util.Log.Level;
+import org.zmail.common.util.Log.Level;
 
 public class AccountLogger {
     private String mAccountName;

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.util;
+package org.zmail.common.util;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpConnectionManager;
@@ -21,9 +21,9 @@ import org.apache.commons.httpclient.params.HttpClientParams;
 import org.apache.commons.httpclient.params.HttpConnectionManagerParams;
 import org.apache.commons.httpclient.util.IdleConnectionTimeoutThread;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
 
 /**
  * A wrapper class for HttpConnectionManagerParams.
@@ -37,20 +37,20 @@ import com.zimbra.common.util.LogFactory;
  * 2. HttpClient debug logging can be turned on/off on account level.
  *
  */
-public class ZimbraHttpConnectionManager {
+public class ZmailHttpConnectionManager {
     
-    // connection manager for Zimbra internal connections
-    private static final ZimbraHttpConnectionManager INTERNAL_CONN_MGR = 
-        new ZimbraHttpConnectionManager("Internal http client connection manager", new InternalConnMgrParams());
+    // connection manager for Zmail internal connections
+    private static final ZmailHttpConnectionManager INTERNAL_CONN_MGR = 
+        new ZmailHttpConnectionManager("Internal http client connection manager", new InternalConnMgrParams());
     
     // connection manager for all external connections
-    private static final ZimbraHttpConnectionManager EXTERNAL_CONN_MGR =
-        new ZimbraHttpConnectionManager("External http client connection manager", new ExternalConnMgrParams());
+    private static final ZmailHttpConnectionManager EXTERNAL_CONN_MGR =
+        new ZmailHttpConnectionManager("External http client connection manager", new ExternalConnMgrParams());
     
     // logger
-    private static final Log sLog = LogFactory.getLog(ZimbraHttpConnectionManager.class);
+    private static final Log sLog = LogFactory.getLog(ZmailHttpConnectionManager.class);
     
-    private static abstract class ZimbraConnMgrParams {
+    private static abstract class ZmailConnMgrParams {
         
         // HttpConnectionManagerParams
         HttpConnectionManagerParams connMgrParams = new HttpConnectionManagerParams();
@@ -65,7 +65,7 @@ public class ZimbraHttpConnectionManager {
         abstract long getReaperConnectionTimeout();
     }
     
-    private static class InternalConnMgrParams extends ZimbraConnMgrParams {
+    private static class InternalConnMgrParams extends ZmailConnMgrParams {
         
         private InternalConnMgrParams() {
 
@@ -176,7 +176,7 @@ public class ZimbraHttpConnectionManager {
         }
     }    
         
-    private static class ExternalConnMgrParams extends ZimbraConnMgrParams {
+    private static class ExternalConnMgrParams extends ZmailConnMgrParams {
         
         private ExternalConnMgrParams() {
             /* ------------------------------------------------------------------------
@@ -217,11 +217,11 @@ public class ZimbraHttpConnectionManager {
         EXTERNAL_CONN_MGR.idleReaper.shutdownReaperThread();
     }
     
-    public static ZimbraHttpConnectionManager getInternalHttpConnMgr() {
+    public static ZmailHttpConnectionManager getInternalHttpConnMgr() {
         return INTERNAL_CONN_MGR;
     }
     
-    public static ZimbraHttpConnectionManager getExternalHttpConnMgr() {
+    public static ZmailHttpConnectionManager getExternalHttpConnMgr() {
         return EXTERNAL_CONN_MGR;
     }
     
@@ -229,21 +229,21 @@ public class ZimbraHttpConnectionManager {
     // instance fields and methods
     // ================
     private String name;
-    private ZimbraConnMgrParams zimbraConnMgrParams;
+    private ZmailConnMgrParams zmailConnMgrParams;
     private IdleReaper idleReaper;
     private HttpConnectionManager httpConnMgr;
     private HttpClient defaultHttpClient;
     
-    private ZimbraHttpConnectionManager(String name, ZimbraConnMgrParams zimbraConnMgrParams) {
+    private ZmailHttpConnectionManager(String name, ZmailConnMgrParams zmailConnMgrParams) {
         this.name = name;
-        this.zimbraConnMgrParams = zimbraConnMgrParams;
+        this.zmailConnMgrParams = zmailConnMgrParams;
         
         this.httpConnMgr = new MultiThreadedHttpConnectionManager();
-        this.httpConnMgr.setParams(this.zimbraConnMgrParams.getConnMgrParams());
+        this.httpConnMgr.setParams(this.zmailConnMgrParams.getConnMgrParams());
         this.defaultHttpClient = createHttpClient();
         
         // Instantiate the reaper object.  
-        // Note: Reaper thread is not started until ZimbraHttpConnectionManager.startReaperThread 
+        // Note: Reaper thread is not started until ZmailHttpConnectionManager.startReaperThread 
         // is called.
         this.idleReaper = new IdleReaper(this);
     }
@@ -252,8 +252,8 @@ public class ZimbraHttpConnectionManager {
         return name;
     }
     
-    private ZimbraConnMgrParams getParams() {
-        return zimbraConnMgrParams;
+    private ZmailConnMgrParams getParams() {
+        return zmailConnMgrParams;
     }
     
     private HttpClientParams createHttpClientParams() {
@@ -280,8 +280,8 @@ public class ZimbraHttpConnectionManager {
     /**
      * ==========================================================
      * Important notes on using HttpClient returned by 
-     * ZimbraHttpConnectionManager.getDefaultHttpClient() and 
-     * ZimbraHttpConnectionManager.newHttpClient()
+     * ZmailHttpConnectionManager.getDefaultHttpClient() and 
+     * ZmailHttpConnectionManager.newHttpClient()
      * ========================================================== 
      * 
      * 1. Callsites should never call HttpClient.setConnectionTimeout(...)
@@ -308,12 +308,12 @@ public class ZimbraHttpConnectionManager {
      *
      * 2. Callsites should not call HttpClient.setHttpConnectionManager(...) 
      *        No point associating the HttpClient with another connection 
-     *        manager if it uses ZimbraHttpConnectionManager to obtain the 
+     *        manager if it uses ZmailHttpConnectionManager to obtain the 
      *        HttpClient.  
      *       
      * 3. About calling HttpClient.getHttpConnectionManager()     
      *        It is OK to call getHttpConnectionManager, which return the connection
-     *        manager instance wrapped in the ZimbraHttpConnectionManager.
+     *        manager instance wrapped in the ZmailHttpConnectionManager.
      *        However, no one should be altering any states on the connection 
      *        manager instance, as that is shared by all threads/callsites on the 
      *        system.
@@ -400,12 +400,12 @@ public class ZimbraHttpConnectionManager {
      * owned by our connection manager.
      */
     private static class IdleReaper {
-        // the ZimbraHttpConnectionManager instance this IdleReaper is for.
-        private ZimbraHttpConnectionManager connMgr;
+        // the ZmailHttpConnectionManager instance this IdleReaper is for.
+        private ZmailHttpConnectionManager connMgr;
         
         private IdleConnectionTimeoutThread reaperThread;
         
-        private IdleReaper(ZimbraHttpConnectionManager connMgr) {
+        private IdleReaper(ZmailHttpConnectionManager connMgr) {
             this.connMgr = connMgr;
         }
         
@@ -506,14 +506,14 @@ public class ZimbraHttpConnectionManager {
         // dump httpclient package defaults
         System.out.println(dumpParams("httpclient package defaults", new HttpConnectionManagerParams(), new HttpClientParams()));
         
-        System.out.println(dumpParams("Internal ZimbraHttpConnectionManager", ZimbraHttpConnectionManager.getInternalHttpConnMgr().getParams().getConnMgrParams(),
-                ZimbraHttpConnectionManager.getInternalHttpConnMgr().getDefaultHttpClient().getParams()));
+        System.out.println(dumpParams("Internal ZmailHttpConnectionManager", ZmailHttpConnectionManager.getInternalHttpConnMgr().getParams().getConnMgrParams(),
+                ZmailHttpConnectionManager.getInternalHttpConnMgr().getDefaultHttpClient().getParams()));
         
-        System.out.println(dumpParams("External ZimbraHttpConnectionManager", ZimbraHttpConnectionManager.getExternalHttpConnMgr().getParams().getConnMgrParams(),
-                ZimbraHttpConnectionManager.getExternalHttpConnMgr().getDefaultHttpClient().getParams()));
+        System.out.println(dumpParams("External ZmailHttpConnectionManager", ZmailHttpConnectionManager.getExternalHttpConnMgr().getParams().getConnMgrParams(),
+                ZmailHttpConnectionManager.getExternalHttpConnMgr().getDefaultHttpClient().getParams()));
         
         
-        HttpClient httpClient = ZimbraHttpConnectionManager.getInternalHttpConnMgr().getDefaultHttpClient();
+        HttpClient httpClient = ZmailHttpConnectionManager.getInternalHttpConnMgr().getDefaultHttpClient();
         String connMgrName = httpClient.getHttpConnectionManager().getClass().getSimpleName();
         long connMgrTimeout = httpClient.getParams().getConnectionManagerTimeout(); 
         System.out.println("HttpConnectionManager for the HttpClient instance is: " + connMgrName);

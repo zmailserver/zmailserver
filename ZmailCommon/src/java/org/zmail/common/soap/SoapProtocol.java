@@ -17,14 +17,14 @@
  * SoapProtocol.java
  */
 
-package com.zimbra.common.soap;
+package org.zmail.common.soap;
 
 import java.util.Iterator;
 
 import org.dom4j.Namespace;
 import org.dom4j.QName;
 
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
 /**
  * Interface to Soap Protocol

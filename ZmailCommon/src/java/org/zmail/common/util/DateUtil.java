@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.util;
+package org.zmail.common.util;
 
 import java.text.DateFormat;
 import java.text.DateFormatSymbols;
@@ -28,7 +28,7 @@ import java.util.regex.Pattern;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
 public final class DateUtil {
 

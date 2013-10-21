@@ -12,12 +12,12 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.soap;
+package org.zmail.common.soap;
 
 import java.util.Arrays;
 
 import com.google.common.base.Strings;
-import com.zimbra.common.auth.ZAuthToken;
+import org.zmail.common.auth.ZAuthToken;
 
 public final class SoapUtil {
 
@@ -25,7 +25,7 @@ public final class SoapUtil {
     }
 
     /**
-     * Creates a SOAP request {@code <context>} {@link com.zimbra.common.soap.Element}.
+     * Creates a SOAP request {@code <context>} {@link org.zmail.common.soap.Element}.
      * <p>
      * All requests except Auth and a few others must specify an auth token. You
      * must also call {@link #addSessionToCtxt(Element, String)} if you want
@@ -43,7 +43,7 @@ public final class SoapUtil {
     }
 
     /**
-     * Creates a SOAP request {@code <context>} {@link com.zimbra.common.soap.Element}
+     * Creates a SOAP request {@code <context>} {@link org.zmail.common.soap.Element}
      * with notification requested.
      * <p>
      * All requests except Auth and a few others must specify an auth token.
@@ -52,7 +52,7 @@ public final class SoapUtil {
      * @param authToken The serialized authorization token for the user
      * @param sessionId The ID of the session to add to the {@code context}
      * @return A new {@code context} Element in the appropriate markup
-     * @see #toCtxt(com.zimbra.common.soap.SoapProtocol, String, boolean)
+     * @see #toCtxt(org.zmail.common.soap.SoapProtocol, String, boolean)
      */
     public static Element toCtxt(SoapProtocol protocol, ZAuthToken authToken, String sessionId, int sequence) {
         Element ctxt = toCtxt(protocol, authToken);
@@ -70,7 +70,7 @@ public final class SoapUtil {
     }
 
     /**
-     * Adds session information to a {@code <context>} {@link com.zimbra.common.soap.Element}
+     * Adds session information to a {@code <context>} {@link org.zmail.common.soap.Element}
      * created by a call to {@link #toCtxt(SoapProtocol, ZAuthToken)}.
      * <p>
      * By default, the server creates a session for the client unless a valid
@@ -116,7 +116,7 @@ public final class SoapUtil {
     }
 
     /**
-     * Adds user agent information to a {@code <context>} {@link com.zimbra.common.soap.Element}
+     * Adds user agent information to a {@code <context>} {@link org.zmail.common.soap.Element}
      * created by a call to {@link #toCtxt}.
      *
      * @param ctxt A {@code <context>} Element as created by toCtxt
@@ -141,7 +141,7 @@ public final class SoapUtil {
     }
 
     /**
-     * Adds change token to {@code <context>} {@link com.zimbra.common.soap.Element}.
+     * Adds change token to {@code <context>} {@link org.zmail.common.soap.Element}.
      *
      * @param ctxt A {@code <context>} Element as created by toCtxt
      * @param token Change number to check for modify conflict

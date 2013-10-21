@@ -14,7 +14,7 @@
  *
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.soap;
+package org.zmail.common.soap;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -36,9 +36,9 @@ import org.junit.rules.TestName;
 import org.python.google.common.base.Joiner;
 import org.xml.sax.SAXException;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element.ElementFactory;
-import com.zimbra.common.soap.Element.XMLElement;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element.ElementFactory;
+import org.zmail.common.soap.Element.XMLElement;
 
 /**
  */
@@ -99,13 +99,13 @@ public class ElementTest {
     @Test
     public void jsonNamespace() throws Exception {
         Element json = Element.parseJSON("{ \"purge\": [{}] }");
-        Assert.assertEquals("default toplevel namespace", "urn:zimbraSoap", json.getNamespaceURI(""));
+        Assert.assertEquals("default toplevel namespace", "urn:zmailSoap", json.getNamespaceURI(""));
 
-        json = Element.parseJSON("{ \"purge\": [{}], \"_jsns\": \"urn:zimbraMail\" }");
-        Assert.assertEquals("explicit toplevel namespace", "urn:zimbraMail", json.getNamespaceURI(""));
+        json = Element.parseJSON("{ \"purge\": [{}], \"_jsns\": \"urn:zmailMail\" }");
+        Assert.assertEquals("explicit toplevel namespace", "urn:zmailMail", json.getNamespaceURI(""));
 
-        json = Element.parseJSON("{ \"purge\": [{}], foo: { a: 1, \"_jsns\": \"urn:zimbraMail\" } }");
-        Assert.assertEquals("explicit child namespace", "urn:zimbraMail", json.getElement("foo").getNamespaceURI(""));
+        json = Element.parseJSON("{ \"purge\": [{}], foo: { a: 1, \"_jsns\": \"urn:zmailMail\" } }");
+        Assert.assertEquals("explicit child namespace", "urn:zmailMail", json.getElement("foo").getNamespaceURI(""));
     }
 
     @Test
@@ -151,7 +151,7 @@ public class ElementTest {
     }
 
     private static final String testXml =
-            "<xml xmlns=\"urn:zimbra\">\n<a fred=\"woof y&lt;6\"></a>\n<b/><b/>\n<text>R &amp; B</text></xml>";
+            "<xml xmlns=\"urn:zmail\">\n<a fred=\"woof y&lt;6\"></a>\n<b/><b/>\n<text>R &amp; B</text></xml>";
     @Test
     public void parseTestXml() throws Exception {
         ByteArrayInputStream bais = new ByteArrayInputStream(testXml.getBytes());
@@ -163,7 +163,7 @@ public class ElementTest {
     }
 
     private static final String nsTestXml =
-            "<xml xmlns=\"urn:zimbra\" xmlns:admin=\"urn:zimbraAdmin\"><e attr=\"aVal\">text</e><admin:b/></xml>";
+            "<xml xmlns=\"urn:zmail\" xmlns:admin=\"urn:zmailAdmin\"><e attr=\"aVal\">text</e><admin:b/></xml>";
     @Test
     public void parseNamespaceTestXml() throws Exception {
         ByteArrayInputStream bais = new ByteArrayInputStream(nsTestXml.getBytes());
@@ -175,7 +175,7 @@ public class ElementTest {
     }
 
     private static final String nsUnusedTestXml =
-            "<xml xmlns=\"urn:zimbra\" xmlns:admin=\"urn:zimbraAdmin\"><e attr=\"aVal\">text</e></xml>";
+            "<xml xmlns=\"urn:zmail\" xmlns:admin=\"urn:zmailAdmin\"><e attr=\"aVal\">text</e></xml>";
     @Test
     public void parseUnusedNamespaceTestXml() throws Exception {
         ByteArrayInputStream bais = new ByteArrayInputStream(nsUnusedTestXml.getBytes());
@@ -189,7 +189,7 @@ public class ElementTest {
 
     private static final String[] getAcctReqXml = {
                 "<ns7:GetAccountRequest",
-                "   xmlns:ns7=\"urn:zimbraAdmin\"",
+                "   xmlns:ns7=\"urn:zmailAdmin\"",
                 "   xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"",
                 "   xsi:type=\"ns7:getAccountRequest\"",
                 "   applyCos=\"false\">",
@@ -197,18 +197,18 @@ public class ElementTest {
                 "</ns7:GetAccountRequest>"} ;
 
     private static final String parsedGetAcctReq = "<ns7:GetAccountRequest xsi:type=\"ns7:getAccountRequest\" " +
-        "applyCos=\"false\" xmlns:ns7=\"urn:zimbraAdmin\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">" +
+        "applyCos=\"false\" xmlns:ns7=\"urn:zmailAdmin\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">" +
         "<ns7:account by=\"name\">user1@coco.local</ns7:account></ns7:GetAccountRequest>";
     /**
      * Bug 81490 xmlns:xsi namespace getting lost, resulting in parse problems if "Element" based XML is re-parsed.
      */
     @Test
-    public void nonZimbraAttributeNamespaceHandling() throws Exception {
+    public void nonZmailAttributeNamespaceHandling() throws Exception {
         String xmlString = Joiner.on("\n").join(getAcctReqXml);
         ByteArrayInputStream bais = new ByteArrayInputStream(xmlString.getBytes());
         Element legacyElem = parseXMLusingDom4j(bais, Element.XMLElement.mFactory);
         // Note: this is missing : xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance and is therefore corrupted.
-        //       <ns7:GetAccountRequest applyCos="false" xsi:type="ns7:getAccountRequest" xmlns:ns7="urn:zimbraAdmin">
+        //       <ns7:GetAccountRequest applyCos="false" xsi:type="ns7:getAccountRequest" xmlns:ns7="urn:zmailAdmin">
         //                <ns7:account by="name">user1@coco.local</ns7:account></ns7:GetAccountRequest>
         logInfo("Parsed to legacy element\n%s", legacyElem.toString());
         Element elem = Element.parseXML(xmlString);
@@ -224,7 +224,7 @@ public class ElementTest {
         "               xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"",
         "               xmlns:fun=\"urn:fun\">",
         "    <soap:Body>",
-        "        <ns7:GetAccountRequest xmlns:ns7=\"urn:zimbraAdmin\"",
+        "        <ns7:GetAccountRequest xmlns:ns7=\"urn:zmailAdmin\"",
         "                               xsi:type=\"ns7:getAccountRequest\" applyCos=\"false\">",
         "            <ns7:account by=\"name\">acct.that.exists@my.dom.loc</ns7:account>",
         "            <fun:invented/>",
@@ -247,7 +247,7 @@ public class ElementTest {
         Element.parseXML(envelope.toString());  // Testing that re-parse succeeds
     }
 
-    private static final String brokenXml = "<xml xmlns=\"urn:zimbra\">\n<a fred=\"woof\"></a>\n<b/>\n</xmlbroken>";
+    private static final String brokenXml = "<xml xmlns=\"urn:zmail\">\n<a fred=\"woof\"></a>\n<b/>\n</xmlbroken>";
     @Test
     public void parseBrokenXmlUsingJAXP() {
         ByteArrayInputStream bais = new ByteArrayInputStream(brokenXml.getBytes());

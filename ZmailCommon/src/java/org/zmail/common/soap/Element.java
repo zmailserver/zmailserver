@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.soap;
+package org.zmail.common.soap;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,9 +41,9 @@ import org.xml.sax.XMLReader;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
 
 /**
  * @since Mar 16, 2005
@@ -504,7 +504,7 @@ public abstract class Element implements Cloneable {
 
     private org.w3c.dom.Node toW3cDom(org.w3c.dom.Document doc, org.w3c.dom.Element parent) {
         String uri = getNamespaceURI(mPrefix);
-        if ((uri != null) && uri.equals("urn:zimbraSoap")) {
+        if ((uri != null) && uri.equals("urn:zmailSoap")) {
             uri = null;
         }
         org.w3c.dom.Element elem;
@@ -590,7 +590,7 @@ public abstract class Element implements Cloneable {
      */
     public static Element parseJSON(InputStream is, ElementFactory factory) throws SoapParseException {
         try {
-            return parseJSON(new String(com.zimbra.common.util.ByteUtil.getContent(is, -1), "utf-8"), factory);
+            return parseJSON(new String(org.zmail.common.util.ByteUtil.getContent(is, -1), "utf-8"), factory);
         } catch (SoapParseException e) {
             throw e;
         } catch (Exception e) {
@@ -1395,7 +1395,7 @@ public abstract class Element implements Cloneable {
                 marshal(sb, -1, false);
             } catch (IOException e) {
                 // should really not happen with the StringBuilder impl of Appendable, just log it
-                ZimbraLog.soap.error("Caught IOException: ", e);
+                ZmailLog.soap.error("Caught IOException: ", e);
             }
             return sb.toString();
         }
@@ -1417,7 +1417,7 @@ public abstract class Element implements Cloneable {
                 marshal(sb, 0, safe);
             } catch (IOException e) {
                 // should really not happen with the StringBuilder impl of Appendable, just log it
-                ZimbraLog.soap.error("Caught IOException: ", e);
+                ZmailLog.soap.error("Caught IOException: ", e);
             }
             return sb.toString();
         }
@@ -1862,7 +1862,7 @@ public abstract class Element implements Cloneable {
                 marshal(sb, -1, false);
             } catch (IOException e) {
                 // should really not happen with the StringBuilder impl of Appendable, just log it
-                ZimbraLog.soap.error("Caught IOException: ", e);
+                ZmailLog.soap.error("Caught IOException: ", e);
             }
             return sb.toString();
         }
@@ -1884,7 +1884,7 @@ public abstract class Element implements Cloneable {
                 marshal(sb, 0, safe);
             } catch (IOException e) {
                 // should really not happen with the StringBuilder impl of Appendable, just log it
-                ZimbraLog.soap.error("Caught IOException: ", e);
+                ZmailLog.soap.error("Caught IOException: ", e);
             }
             return sb.toString();
         }
@@ -1957,7 +1957,7 @@ public abstract class Element implements Cloneable {
 
     private static boolean isSensitiveElement(Element element) {
         // - elements having name that ends with "password" or "Password"
-        // - elements like: <a n='zimbraGalLdapBindPassword'>...</a>
+        // - elements like: <a n='zmailGalLdapBindPassword'>...</a>
         // - elements like: <a n='hostPwd'>...</a>
         // - elements like (zimlet specific case): <a n='webexZimlet_pwd1'>...</a>
         // - elements like: <prop name='passwd'>...</prop>
@@ -1995,8 +1995,8 @@ public abstract class Element implements Cloneable {
 
         @Override
         public void destroy() {
-            if (ZimbraLog.misc.isDebugEnabled()) {
-                ZimbraLog.misc.debug("FileBackedElement destroy - rm %s", backedFile);
+            if (ZmailLog.misc.isDebugEnabled()) {
+                ZmailLog.misc.debug("FileBackedElement destroy - rm %s", backedFile);
             }
             backedFile.delete();
         }
@@ -2145,7 +2145,7 @@ public abstract class Element implements Cloneable {
             System.out.println("  found: id=" + elt.getAttribute("ID", null));
         testKeyValuePairs(e);
 
-//        System.out.println(com.zimbra.common.soap.SoapProtocol.toString(e.toXML(), true));
+//        System.out.println(org.zmail.common.soap.SoapProtocol.toString(e.toXML(), true));
         System.out.println(new XMLElement("test").setText("  this\t    is\nthe\rway ").getTextTrim() + "|");
         System.out.println(Element.parseJSON("{part:\"TEXT\",t:null,h:true,i:\"false\",\"ct\":\"\\x25multipart\\u0025\\/mixed\",\\u0073:3718}").toString());
         try {

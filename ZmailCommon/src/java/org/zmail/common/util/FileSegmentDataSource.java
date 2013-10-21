@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.util;
+package org.zmail.common.util;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,7 +22,7 @@ import java.io.OutputStream;
 
 import javax.activation.DataSource;
 
-import com.zimbra.common.zmime.ZSharedFileInputStream;
+import org.zmail.common.zmime.ZSharedFileInputStream;
 
 /**
  * <tt>DataSource</tt> implementation that returns a stream to a section of a file.

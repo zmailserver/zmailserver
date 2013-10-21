@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.mime;
+package org.zmail.common.mime;
 
 import java.nio.charset.Charset;
 import java.util.List;
@@ -20,7 +20,7 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.zimbra.common.util.CharsetUtil;
+import org.zmail.common.util.CharsetUtil;
 
 public class MimeHeaderTest {
 

@@ -13,14 +13,14 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.localconfig;
+package org.zmail.common.localconfig;
 
 import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
 
 import com.google.common.base.Strings;
-import com.zimbra.common.util.L10nUtil;
+import org.zmail.common.util.L10nUtil;
 
 public final class KnownKey {
 

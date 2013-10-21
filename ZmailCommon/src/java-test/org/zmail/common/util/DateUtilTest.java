@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.util;
+package org.zmail.common.util;
 
 import org.junit.Assert;
 
@@ -23,7 +23,7 @@ import java.util.TimeZone;
 
 import org.junit.Test;
 
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
 public final class DateUtilTest {
 

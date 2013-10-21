@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.zmime;
+package org.zmail.common.zmime;
 
 import java.io.InputStream;
 import java.nio.charset.Charset;
@@ -28,7 +28,7 @@ import javax.mail.internet.InternetHeaders;
 import javax.mail.internet.MimePart;
 
 import com.google.common.collect.ImmutableSet;
-import com.zimbra.common.zmime.ZMimeUtility.ByteBuilder;
+import org.zmail.common.zmime.ZMimeUtility.ByteBuilder;
 
 public class ZInternetHeaders extends InternetHeaders {
     private static final boolean ZPARSER = ZMimeMessage.ZPARSER;

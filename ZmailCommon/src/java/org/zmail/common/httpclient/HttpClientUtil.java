@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.httpclient;
+package org.zmail.common.httpclient;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -31,14 +31,14 @@ import org.apache.commons.httpclient.methods.EntityEnclosingMethod;
 import org.apache.commons.httpclient.methods.InputStreamRequestEntity;
 import org.apache.commons.httpclient.params.HttpMethodParams;
 
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.net.ProxyHostConfiguration;
-import com.zimbra.common.util.ZimbraHttpConnectionManager;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.net.ProxyHostConfiguration;
+import org.zmail.common.util.ZmailHttpConnectionManager;
 
 public class HttpClientUtil {
 
     public static int executeMethod(HttpMethod method) throws HttpException, IOException {
-        return executeMethod(ZimbraHttpConnectionManager.getInternalHttpConnMgr().getDefaultHttpClient(), method, null);
+        return executeMethod(ZmailHttpConnectionManager.getInternalHttpConnMgr().getDefaultHttpClient(), method, null);
     }
     public static int executeMethod(HttpClient client, HttpMethod method) throws HttpException, IOException {
         return executeMethod(client, method, null);

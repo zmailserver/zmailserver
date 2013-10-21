@@ -12,13 +12,13 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.common.soap;
+package org.zmail.common.soap;
 
 import org.dom4j.Namespace;
 import org.dom4j.QName;
 
 public final class AdminExtConstants {
-    public static final String NAMESPACE_STR = "urn:zimbraAdminExt";
+    public static final String NAMESPACE_STR = "urn:zmailAdminExt";
     public static final Namespace NAMESPACE = Namespace.get(NAMESPACE_STR);
 
     public static final String E_BULK_IMPORT_ACCOUNTS_REQUEST = "BulkImportAccountsRequest";
@@ -109,8 +109,8 @@ public final class AdminExtConstants {
     public static final String E_fileToken = "fileToken";
     public static final String E_MapiProfile = "MapiProfile";
     public static final String E_TargetDomainName = "TargetDomainName";
-    public static final String E_ZimbraAdminLogin = "ZimbraAdminLogin";
-    public static final String E_ZimbraAdminPassword = "ZimbraAdminPassword";
+    public static final String E_ZmailAdminLogin = "ZmailAdminLogin";
+    public static final String E_ZmailAdminPassword = "ZmailAdminPassword";
     public static final String E_provisionUsers = "provisionUsers";
     public static final String E_MapiServer = "MapiServer";
     public static final String E_MapiLogonUserDN = "MapiLogonUserDN";

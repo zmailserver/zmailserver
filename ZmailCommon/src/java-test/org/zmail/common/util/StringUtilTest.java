@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.common.util;
+package org.zmail.common.util;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -45,15 +45,15 @@ public class StringUtilTest {
             "${NEWLINE}Sender: ${SENDER_ADDRESS}${NEWLINE}Subject: ${SUBJECT}";
 
         Map<String, String> vars = new HashMap<String, String>();
-        vars.put("SENDER_ADDRESS", "sender@example.zimbra.com");
-        vars.put("RECIPIENT_ADDRESS", "recipient@example.zimbra.com");
-        vars.put("RECIPIENT_DOMAIN", "example.zimbra.com");
-        vars.put("NOTIFICATION_ADDRESS", "notify@example.zimbra.com");
+        vars.put("SENDER_ADDRESS", "sender@example.zmail.com");
+        vars.put("RECIPIENT_ADDRESS", "recipient@example.zmail.com");
+        vars.put("RECIPIENT_DOMAIN", "example.zmail.com");
+        vars.put("NOTIFICATION_ADDRESS", "notify@example.zmail.com");
         vars.put("SUBJECT", "Cool stuff");
         vars.put("NEWLINE", "\n");
 
-        String expected = "New message received at recipient@example.zimbra.com." +
-        "\nSender: sender@example.zimbra.com\nSubject: Cool stuff";
+        String expected = "New message received at recipient@example.zmail.com." +
+        "\nSender: sender@example.zmail.com\nSubject: Cool stuff";
         String actual = StringUtil.fillTemplate(template, vars);
         Assert.assertEquals("expected: '" + expected + "', actual: '" + actual + "'",
                 expected, actual);
