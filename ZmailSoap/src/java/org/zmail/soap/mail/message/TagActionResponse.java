@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.message;
+package org.zmail.soap.mail.message;
 
 import com.google.common.base.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -21,9 +21,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.mail.type.TagActionInfo;
-import com.zimbra.soap.json.jackson.annotate.ZimbraUniqueElement;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.mail.type.TagActionInfo;
+import org.zmail.soap.json.jackson.annotate.ZmailUniqueElement;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name=MailConstants.E_TAG_ACTION_RESPONSE)
@@ -33,7 +33,7 @@ public class TagActionResponse {
      * @zm-api-field-description The <b>&lt;action></b> element contains information about the tags affected by
      * the operation if and only if the operation was successful
      */
-    @ZimbraUniqueElement
+    @ZmailUniqueElement
     @XmlElement(name=MailConstants.E_ACTION /* action */, required=true)
     private TagActionInfo action;
 

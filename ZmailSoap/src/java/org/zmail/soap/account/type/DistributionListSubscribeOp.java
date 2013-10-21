@@ -12,11 +12,11 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.account.type;
+package org.zmail.soap.account.type;
 
 import javax.xml.bind.annotation.XmlEnum;
 
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
 @XmlEnum
 public enum DistributionListSubscribeOp {

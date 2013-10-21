@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.account.type;
+package org.zmail.soap.account.type;
 
 import java.util.List;
 
@@ -25,8 +25,8 @@ import javax.xml.bind.annotation.XmlEnum;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class DistributionListAction extends AccountKeyValuePairs {

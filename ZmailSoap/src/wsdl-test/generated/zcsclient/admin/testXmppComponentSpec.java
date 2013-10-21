@@ -32,10 +32,10 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="xmppComponentSpec">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraAdmin}adminAttrsImpl">
+ *     &lt;extension base="{urn:zmailAdmin}adminAttrsImpl">
  *       &lt;sequence>
- *         &lt;element name="domain" type="{urn:zimbraAdmin}domainSelector"/>
- *         &lt;element name="server" type="{urn:zimbraAdmin}serverSelector"/>
+ *         &lt;element name="domain" type="{urn:zmailAdmin}domainSelector"/>
+ *         &lt;element name="server" type="{urn:zmailAdmin}serverSelector"/>
  *       &lt;/sequence>
  *       &lt;attribute name="name" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/extension>

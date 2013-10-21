@@ -13,14 +13,14 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.account.message;
+package org.zmail.soap.account.message;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.soap.json.jackson.annotate.ZimbraJsonAttribute;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.soap.json.jackson.annotate.ZmailJsonAttribute;
 
 /**
 <ChangePasswordResponse>
@@ -42,7 +42,7 @@ public class ChangePasswordResponse {
     /**
      * @zm-api-field-description Life time associated with <b>{new-auth-token}</b>
      */
-    @ZimbraJsonAttribute
+    @ZmailJsonAttribute
     @XmlElement(name=AccountConstants.E_LIFETIME /* lifetime */, required=true)
     private long lifetime;
 

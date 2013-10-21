@@ -13,22 +13,22 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.type;
+package org.zmail.soap.admin.type;
 
 import java.util.Collection;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.soap.type.ZmBoolean;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.soap.type.ZmBoolean;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class AccountInfo extends AdminObjectInfo {
 
     /**
      * @zm-api-field-tag is-external
-     * @zm-api-field-description Whether the account's <b>zimbraMailTranport</b> points to the designated
+     * @zm-api-field-description Whether the account's <b>zmailMailTranport</b> points to the designated
      * protocol(lmtp) and server(home server of the account).
      */
     @XmlAttribute(name=AccountConstants.A_IS_EXTERNAL, required=false)

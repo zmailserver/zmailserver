@@ -13,11 +13,11 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.message;
+package org.zmail.soap.mail.message;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.MailConstants;
+import org.zmail.common.soap.MailConstants;
 
 @XmlRootElement(name=MailConstants.E_BOUNCE_MSG_RESPONSE)
 public class BounceMsgResponse {

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.admin;
+package org.zmail.soap.admin;
 
 import javax.xml.ws.soap.SOAPFaultException;
 
@@ -30,7 +30,7 @@ import generated.zcsclient.admin.testDelegateAuthRequest;
 import generated.zcsclient.admin.testDelegateAuthResponse;
 import generated.zcsclient.ws.service.ZcsAdminPortType;
 
-import com.zimbra.soap.Utility;
+import org.zmail.soap.Utility;
 
 public class WSDLAdminAuthRequestTest {
 

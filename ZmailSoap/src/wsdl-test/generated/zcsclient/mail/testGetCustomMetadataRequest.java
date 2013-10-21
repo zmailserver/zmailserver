@@ -34,7 +34,7 @@ import generated.zcsclient.zm.testSectionAttr;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="meta" type="{urn:zimbra}sectionAttr" minOccurs="0"/>
+ *         &lt;element name="meta" type="{urn:zmail}sectionAttr" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="id" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>

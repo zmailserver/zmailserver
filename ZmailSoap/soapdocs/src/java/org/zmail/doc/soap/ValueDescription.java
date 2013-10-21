@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.doc.soap;
+package org.zmail.doc.soap;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlEnumValue;
 import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
-import com.zimbra.soap.type.ZmBoolean;
+import org.zmail.soap.type.ZmBoolean;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 public class ValueDescription {

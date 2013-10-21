@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="doc" type="{urn:zimbraMail}diffDocumentVersionSpec" minOccurs="0"/>
+ *         &lt;element name="doc" type="{urn:zmailMail}diffDocumentVersionSpec" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>

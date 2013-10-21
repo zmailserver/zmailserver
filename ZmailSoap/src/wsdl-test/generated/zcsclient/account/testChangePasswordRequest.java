@@ -34,7 +34,7 @@ import generated.zcsclient.zm.testAccountSelector;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;all>
- *         &lt;element name="account" type="{urn:zimbra}accountSelector"/>
+ *         &lt;element name="account" type="{urn:zmail}accountSelector"/>
  *         &lt;element name="oldPassword" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="password" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="virtualHost" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>

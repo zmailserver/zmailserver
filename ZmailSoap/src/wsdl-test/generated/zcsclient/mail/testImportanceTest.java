@@ -31,10 +31,10 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="importanceTest">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraMail}filterTest">
+ *     &lt;extension base="{urn:zmailMail}filterTest">
  *       &lt;sequence>
  *       &lt;/sequence>
- *       &lt;attribute name="imp" use="required" type="{urn:zimbraMail}importance" />
+ *       &lt;attribute name="imp" use="required" type="{urn:zmailMail}importance" />
  *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.message;
+package org.zmail.soap.mail.message;
 
 import com.google.common.base.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.MailConstants;
+import org.zmail.common.soap.MailConstants;
 
 /**
  * @zm-api-command-auth-required false - Working hours information considered public if available
@@ -52,8 +52,8 @@ public class GetWorkingHoursRequest {
     private final long endTime;
 
     /**
-     * @zm-api-field-tag comma-sep-zimbra-ids
-     * @zm-api-field-description Comma-separated list of Zimbra IDs
+     * @zm-api-field-tag comma-sep-zmail-ids
+     * @zm-api-field-description Comma-separated list of Zmail IDs
      */
     @XmlAttribute(name=MailConstants.A_ID /* id */, required=false)
     private String id;

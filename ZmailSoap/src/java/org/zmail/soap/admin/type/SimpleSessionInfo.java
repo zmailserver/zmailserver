@@ -13,13 +13,13 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.type;
+package org.zmail.soap.admin.type;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 
-import com.zimbra.common.soap.AdminConstants;
+import org.zmail.common.soap.AdminConstants;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class SimpleSessionInfo {
@@ -29,7 +29,7 @@ public class SimpleSessionInfo {
      * @zm-api-field-description Account ID
      */
     @XmlAttribute(name=AdminConstants.A_ZIMBRA_ID /* zid */, required=true)
-    private final String zimbraId;
+    private final String zmailId;
 
     /**
      * @zm-api-field-tag account-name
@@ -67,16 +67,16 @@ public class SimpleSessionInfo {
         this((String) null, (String) null, (String) null, -1L, -1L);
     }
 
-    public SimpleSessionInfo(String zimbraId, String name, String sessionId,
+    public SimpleSessionInfo(String zmailId, String name, String sessionId,
                     long createdDate, long lastAccessedDate) {
-        this.zimbraId = zimbraId;
+        this.zmailId = zmailId;
         this.name = name;
         this.sessionId = sessionId;
         this.createdDate = createdDate;
         this.lastAccessedDate = lastAccessedDate;
     }
 
-    public String getZimbraId() { return zimbraId; }
+    public String getZmailId() { return zmailId; }
     public String getName() { return name; }
     public String getSessionId() { return sessionId; }
     public long getCreatedDate() { return createdDate; }

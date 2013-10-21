@@ -31,7 +31,7 @@ import generated.zcsclient.zm.testId;
  * <pre>
  * &lt;complexType name="imapDataSourceId">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbra}id">
+ *     &lt;extension base="{urn:zmail}id">
  *       &lt;sequence>
  *       &lt;/sequence>
  *     &lt;/extension>

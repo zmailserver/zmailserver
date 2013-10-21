@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="backup" type="{urn:zimbraAdmin}backupQueryInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="backup" type="{urn:zmailAdmin}backupQueryInfo" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="totalSpace" use="required" type="{http://www.w3.org/2001/XMLSchema}long" />
  *       &lt;attribute name="freeSpace" use="required" type="{http://www.w3.org/2001/XMLSchema}long" />

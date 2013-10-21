@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="volume" type="{urn:zimbraAdmin}volumeInfo" maxOccurs="unbounded"/>
+ *         &lt;element name="volume" type="{urn:zmailAdmin}volumeInfo" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>

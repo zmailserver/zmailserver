@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.jaxb;
+package org.zmail.soap.jaxb;
 
 import java.util.List;
 
@@ -21,19 +21,19 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.soap.json.jackson.annotate.ZimbraKeyValuePairs;
-import com.zimbra.soap.type.KeyValuePair;
+import org.zmail.common.soap.Element;
+import org.zmail.soap.json.jackson.annotate.ZmailKeyValuePairs;
+import org.zmail.soap.type.KeyValuePair;
 
 /**
- * Test {@link ZimbraKeyValuePairs} annotation
+ * Test {@link ZmailKeyValuePairs} annotation
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name="key-value-pairs-tester")
 public class KeyValuePairsTester {
     // Note: Can use a different name BUT won't be able to round trip back to JAXB from JSON if you do
     @XmlElement(name=Element.XMLElement.E_ATTRIBUTE /* a */)
-    @ZimbraKeyValuePairs
+    @ZmailKeyValuePairs
     private List<KeyValuePair> attrList;
 
     public KeyValuePairsTester() { }

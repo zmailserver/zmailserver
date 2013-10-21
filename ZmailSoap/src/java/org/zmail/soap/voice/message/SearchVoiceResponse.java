@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.voice.message;
+package org.zmail.soap.voice.message;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -29,13 +29,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.VoiceConstants;
-import com.zimbra.soap.type.ZmBoolean;
-import com.zimbra.soap.voice.type.CallLogItem;
-import com.zimbra.soap.voice.type.VoiceCallItem;
-import com.zimbra.soap.voice.type.VoiceFolderSummary;
-import com.zimbra.soap.voice.type.VoiceMailItem;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.VoiceConstants;
+import org.zmail.soap.type.ZmBoolean;
+import org.zmail.soap.voice.type.CallLogItem;
+import org.zmail.soap.voice.type.VoiceCallItem;
+import org.zmail.soap.voice.type.VoiceFolderSummary;
+import org.zmail.soap.voice.type.VoiceMailItem;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name=VoiceConstants.E_SEARCH_VOICE_RESPONSE)

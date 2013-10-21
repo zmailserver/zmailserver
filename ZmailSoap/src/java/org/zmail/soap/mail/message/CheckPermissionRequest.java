@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.message;
+package org.zmail.soap.mail.message;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -27,15 +27,15 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.mail.type.TargetSpec;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.mail.type.TargetSpec;
 
 
 /*
  * Delete this class in bug 66989
  */
 /**
- * @zm-api-command-deprecation-info Note: to be deprecated in Zimbra 9.  Use zimbraAccount CheckRights instead.
+ * @zm-api-command-deprecation-info Note: to be deprecated in Zmail 9.  Use zmailAccount CheckRights instead.
  * @zm-api-command-auth-required true
  * @zm-api-command-admin-auth-required false
  * @zm-api-command-description Check if the authed user has the specified right(s) on a target.

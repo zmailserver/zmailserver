@@ -13,15 +13,15 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.voice.type;
+package org.zmail.soap.voice.type;
 
 import com.google.common.base.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 
-import com.zimbra.common.soap.VoiceConstants;
-import com.zimbra.soap.type.TrueOrFalse;
+import org.zmail.common.soap.VoiceConstants;
+import org.zmail.soap.type.TrueOrFalse;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public abstract class CallFeatureInfo {

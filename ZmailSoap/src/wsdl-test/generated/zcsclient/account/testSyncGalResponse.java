@@ -39,8 +39,8 @@ import generated.zcsclient.zm.testId;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;choice maxOccurs="unbounded" minOccurs="0">
- *           &lt;element name="cn" type="{urn:zimbraAccount}contactInfo"/>
- *           &lt;element name="deleted" type="{urn:zimbra}id"/>
+ *           &lt;element name="cn" type="{urn:zmailAccount}contactInfo"/>
+ *           &lt;element name="deleted" type="{urn:zmail}id"/>
  *         &lt;/choice>
  *       &lt;/sequence>
  *       &lt;attribute name="more" type="{http://www.w3.org/2001/XMLSchema}boolean" />

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.type;
+package org.zmail.soap.admin.type;
 
 import java.util.List;
 
@@ -26,9 +26,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.base.ContactGroupMemberInterface;
-import com.zimbra.soap.base.ContactInterface;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.base.ContactGroupMemberInterface;
+import org.zmail.soap.base.ContactInterface;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class ContactGroupMember
@@ -53,7 +53,7 @@ implements ContactGroupMemberInterface {
      * <table>
      * <tr> <td> <b>type="C"</b> </td> 
      *      <td> Item ID of another contact.  If the referenced contact is in a shared folder, the item ID must be
-     *           qualified by zimbraId of the owner.  e.g. {zimbraId}:{itemId} </td> </tr>
+     *           qualified by zmailId of the owner.  e.g. {zmailId}:{itemId} </td> </tr>
      * <tr> <td> <b>type="G"</b> </td> <td> GAL entry reference (returned in SearchGalResponse) </td> </tr>
      * <tr> <td> <b>type="I"</b> </td>
      *      <td> name and email address in the form of: <b>"{name}" &lt;{email}></b> </td> </tr>

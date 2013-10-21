@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="noteActionSelector">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraMail}actionSelector">
+ *     &lt;extension base="{urn:zmailMail}actionSelector">
  *       &lt;sequence>
  *       &lt;/sequence>
  *       &lt;attribute name="content" type="{http://www.w3.org/2001/XMLSchema}string" />

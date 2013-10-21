@@ -38,10 +38,10 @@ import generated.zcsclient.zm.testTargetType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="right" type="{urn:zimbraAccount}checkRightsRightInfo" maxOccurs="unbounded"/>
+ *         &lt;element name="right" type="{urn:zmailAccount}checkRightsRightInfo" maxOccurs="unbounded"/>
  *       &lt;/sequence>
- *       &lt;attribute name="type" use="required" type="{urn:zimbra}targetType" />
- *       &lt;attribute name="by" use="required" type="{urn:zimbra}targetBy" />
+ *       &lt;attribute name="type" use="required" type="{urn:zmail}targetType" />
+ *       &lt;attribute name="by" use="required" type="{urn:zmail}targetBy" />
  *       &lt;attribute name="key" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="allow" use="required" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *     &lt;/restriction>

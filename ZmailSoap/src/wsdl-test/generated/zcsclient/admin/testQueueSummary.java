@@ -36,7 +36,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="qsi" type="{urn:zimbraAdmin}queueSummaryItem" maxOccurs="unbounded"/>
+ *         &lt;element name="qsi" type="{urn:zmailAdmin}queueSummaryItem" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *       &lt;attribute name="type" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>

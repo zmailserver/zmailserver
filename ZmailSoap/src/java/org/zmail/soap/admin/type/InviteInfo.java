@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.type;
+package org.zmail.soap.admin.type;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -29,12 +29,12 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlType;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.base.CalTZInfoInterface;
-import com.zimbra.soap.base.CalendarReplyInterface;
-import com.zimbra.soap.base.InviteComponentInterface;
-import com.zimbra.soap.base.InviteInfoInterface;
-import com.zimbra.soap.json.jackson.annotate.ZimbraJsonArrayForWrapper;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.base.CalTZInfoInterface;
+import org.zmail.soap.base.CalendarReplyInterface;
+import org.zmail.soap.base.InviteComponentInterface;
+import org.zmail.soap.base.InviteInfoInterface;
+import org.zmail.soap.json.jackson.annotate.ZmailJsonArrayForWrapper;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(propOrder = {"timezones", "inviteComponent", "calendarReplies"})
@@ -64,7 +64,7 @@ implements InviteInfoInterface {
     /**
      * @zm-api-field-description List of replies received from attendees.
      */
-    @ZimbraJsonArrayForWrapper
+    @ZmailJsonArrayForWrapper
     @XmlElementWrapper(name=MailConstants.E_CAL_REPLIES /* replies */, required=false)
     @XmlElement(name=MailConstants.E_CAL_REPLY /* reply */, required=false)
     private List<CalendarReply> calendarReplies = Lists.newArrayList();

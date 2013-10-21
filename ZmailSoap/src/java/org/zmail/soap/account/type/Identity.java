@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.account.type;
+package org.zmail.soap.account.type;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 
-import com.zimbra.common.soap.AccountConstants;
+import org.zmail.common.soap.AccountConstants;
 
 /*
      <identity name={identity-name} id="...">

@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *       &lt;/sequence>
  *       &lt;attribute name="n" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="type" use="required" type="{urn:zimbraAdmin}rightType" />
+ *       &lt;attribute name="type" use="required" type="{urn:zmailAdmin}rightType" />
  *       &lt;attribute name="targetType" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>
  *   &lt;/complexContent>

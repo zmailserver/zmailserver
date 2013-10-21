@@ -34,8 +34,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="user" type="{urn:zimbraMail}idEmailName" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="comment" type="{urn:zimbraMail}commentInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="user" type="{urn:zmailMail}idEmailName" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="comment" type="{urn:zmailMail}commentInfo" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>

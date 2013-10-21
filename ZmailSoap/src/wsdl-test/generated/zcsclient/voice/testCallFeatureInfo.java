@@ -36,8 +36,8 @@ import generated.zcsclient.zm.testTrueOrFalse;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *       &lt;/sequence>
- *       &lt;attribute name="s" use="required" type="{urn:zimbra}trueOrFalse" />
- *       &lt;attribute name="a" use="required" type="{urn:zimbra}trueOrFalse" />
+ *       &lt;attribute name="s" use="required" type="{urn:zmail}trueOrFalse" />
+ *       &lt;attribute name="a" use="required" type="{urn:zmail}trueOrFalse" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>

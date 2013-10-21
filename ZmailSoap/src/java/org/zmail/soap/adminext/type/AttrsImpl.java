@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.adminext.type;
+package org.zmail.soap.adminext.type;
 
 import java.util.List;
 import java.util.Collection;
@@ -29,9 +29,9 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.util.StringUtil;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.util.StringUtil;
 
 @XmlAccessorType(XmlAccessType.NONE)
 abstract public class AttrsImpl implements Attrs {

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.account;
+package org.zmail.soap.account;
 
 import java.util.Collection;
 import java.util.List;
@@ -24,10 +24,10 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.soap.JaxbUtil;
-import com.zimbra.soap.account.message.GetInfoResponse;
-import com.zimbra.soap.account.type.Identity;
+import org.zmail.common.soap.Element;
+import org.zmail.soap.JaxbUtil;
+import org.zmail.soap.account.message.GetInfoResponse;
+import org.zmail.soap.account.type.Identity;
 
 /**
  * Unit test for {@link GetInfoResponse}.
@@ -48,22 +48,22 @@ public class GetInfoResponseTest {
         List<Identity> identities =  result.getIdentities();
         Assert.assertEquals(1, identities.size());
         Assert.assertEquals("Identity{a=[" +
-                "Attr{name=zimbraPrefIdentityId, value=91e6d036-5d5e-4788-9bc2-5b65e8c2480c}, " +
-                "Attr{name=zimbraPrefSaveToSent, value=TRUE}, " +
-                "Attr{name=zimbraPrefForwardReplyPrefixChar, value=>}, " +
-                "Attr{name=zimbraPrefSentMailFolder, value=sent}, " +
-                "Attr{name=zimbraPrefFromDisplay, value=Demo User One}, " +
-                "Attr{name=zimbraPrefForwardIncludeOriginalText, value=includeBody}, " +
-                "Attr{name=zimbraPrefForwardReplyFormat, value=same}, " +
-                "Attr{name=zimbraPrefMailSignatureStyle, value=outlook}, " +
-                "Attr{name=zimbraPrefIdentityName, value=DEFAULT}, " +
-                "Attr{name=zimbraCreateTimestamp, value=20120528071949Z}, " +
-                "Attr{name=zimbraPrefReplyIncludeOriginalText, value=includeBody}, " +
-                "Attr{name=zimbraPrefFromAddress, value=user1@tarka.local}, " +
-                "Attr{name=zimbraPrefDefaultSignatureId, value=28fa4fec-a5fb-4dc8-acf9-df930bb13546}], " +
+                "Attr{name=zmailPrefIdentityId, value=91e6d036-5d5e-4788-9bc2-5b65e8c2480c}, " +
+                "Attr{name=zmailPrefSaveToSent, value=TRUE}, " +
+                "Attr{name=zmailPrefForwardReplyPrefixChar, value=>}, " +
+                "Attr{name=zmailPrefSentMailFolder, value=sent}, " +
+                "Attr{name=zmailPrefFromDisplay, value=Demo User One}, " +
+                "Attr{name=zmailPrefForwardIncludeOriginalText, value=includeBody}, " +
+                "Attr{name=zmailPrefForwardReplyFormat, value=same}, " +
+                "Attr{name=zmailPrefMailSignatureStyle, value=outlook}, " +
+                "Attr{name=zmailPrefIdentityName, value=DEFAULT}, " +
+                "Attr{name=zmailCreateTimestamp, value=20120528071949Z}, " +
+                "Attr{name=zmailPrefReplyIncludeOriginalText, value=includeBody}, " +
+                "Attr{name=zmailPrefFromAddress, value=user1@tarka.local}, " +
+                "Attr{name=zmailPrefDefaultSignatureId, value=28fa4fec-a5fb-4dc8-acf9-df930bb13546}], " +
                 "name=DEFAULT, id=91e6d036-5d5e-4788-9bc2-5b65e8c2480c}",
                 identities.get(0).toString());
-        Collection<String> sigHtml = result.getPrefsMultimap().get("zimbraPrefMailSignatureHTML");
+        Collection<String> sigHtml = result.getPrefsMultimap().get("zmailPrefMailSignatureHTML");
         Assert.assertNotNull(sigHtml);
         // Full comparison failing on Jenkins system due to environmental charset issues
         String sig = sigHtml.iterator().next();

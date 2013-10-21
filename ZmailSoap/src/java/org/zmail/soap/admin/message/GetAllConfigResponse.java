@@ -13,12 +13,12 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.soap.admin.type.AdminAttrsImpl;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.soap.admin.type.AdminAttrsImpl;
 
 @XmlRootElement(name=AdminConstants.E_GET_ALL_CONFIG_RESPONSE)
 public class GetAllConfigResponse extends AdminAttrsImpl {

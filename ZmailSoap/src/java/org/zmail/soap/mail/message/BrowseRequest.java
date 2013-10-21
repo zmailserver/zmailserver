@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.message;
+package org.zmail.soap.mail.message;
 
 import com.google.common.base.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.MailConstants;
+import org.zmail.common.soap.MailConstants;
 
 /**
  * @zm-api-command-auth-required true
@@ -30,12 +30,12 @@ import com.zimbra.common.soap.MailConstants;
  * <br />
  * EXAMPLE:
  * <pre>
- *     &lt;mail:BrowseRequest xmlns:mail="urn:zimbraMail">
+ *     &lt;mail:BrowseRequest xmlns:mail="urn:zmailMail">
  *        &lt;query>from:roland&lt;/query>
  *        &lt;browseBy>attachments&lt;/browseBy>
  *     &lt;/mail:BrowseRequest>
  *
- *     &lt;mail:BrowseResponse xmlns:mail="urn:zimbraMail">
+ *     &lt;mail:BrowseResponse xmlns:mail="urn:zmailMail">
  *       &lt;bd freq="3">application/pdf&lt;/bd>
  *       &lt;bd freq="1">application/msword&lt;/bd>
  *       &lt;bd freq="1">application/vnd.ms-powerpoint&lt;/bd>

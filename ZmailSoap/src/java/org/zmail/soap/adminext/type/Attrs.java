@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.adminext.type;
+package org.zmail.soap.adminext.type;
 
 import java.util.List;
 import java.util.Collection;
@@ -21,7 +21,7 @@ import java.util.Map;
 
 import com.google.common.collect.Multimap;
 
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
 public interface Attrs {
     public Attrs setAttrs(Iterable<Attr> attrs);

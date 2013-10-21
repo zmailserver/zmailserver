@@ -37,7 +37,7 @@ import generated.zcsclient.zm.testGalSearchType;
  *       &lt;/sequence>
  *       &lt;attribute name="needExp" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *       &lt;attribute name="name" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="type" type="{urn:zimbra}galSearchType" />
+ *       &lt;attribute name="type" type="{urn:zmail}galSearchType" />
  *       &lt;attribute name="galAcctId" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="limit" type="{http://www.w3.org/2001/XMLSchema}int" />
  *     &lt;/restriction>

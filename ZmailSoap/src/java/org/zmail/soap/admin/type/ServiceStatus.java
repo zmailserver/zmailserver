@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.type;
+package org.zmail.soap.admin.type;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,9 +30,9 @@ import javax.xml.bind.annotation.XmlValue;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.util.CsvReader;
-import com.zimbra.soap.type.ZeroOrOne;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.util.CsvReader;
+import org.zmail.soap.type.ZeroOrOne;
 
 /**
  * Used by {@CountAccountResponse}

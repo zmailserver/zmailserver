@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.message;
+package org.zmail.soap.mail.message;
 
 import com.google.common.base.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -21,9 +21,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.mail.type.TagActionSelector;
-import com.zimbra.soap.json.jackson.annotate.ZimbraUniqueElement;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.mail.type.TagActionSelector;
+import org.zmail.soap.json.jackson.annotate.ZmailUniqueElement;
 
 /**
  * @zm-api-command-auth-required true
@@ -43,7 +43,7 @@ public class TagActionRequest {
      * <br />
      * If op="update", the caller can specify "name" and/or "color"
      */
-    @ZimbraUniqueElement
+    @ZmailUniqueElement
     @XmlElement(name=MailConstants.E_ACTION /* action */, required=true)
     private final TagActionSelector action;
 

@@ -37,21 +37,21 @@ import generated.zcsclient.zm.testUrlAndValue;
  * <pre>
  * &lt;complexType name="msgWithGroupInfo">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraMail}messageCommon">
+ *     &lt;extension base="{urn:zmailMail}messageCommon">
  *       &lt;sequence>
  *         &lt;element name="fr" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="e" type="{urn:zimbraMail}emailInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="e" type="{urn:zmailMail}emailInfo" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="su" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="mid" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="irt" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="inv" type="{urn:zimbraMail}inviteWithGroupInfo" minOccurs="0"/>
- *         &lt;element name="header" type="{urn:zimbra}keyValuePair" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="inv" type="{urn:zmailMail}inviteWithGroupInfo" minOccurs="0"/>
+ *         &lt;element name="header" type="{urn:zmail}keyValuePair" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;choice maxOccurs="unbounded" minOccurs="0">
- *           &lt;element name="mp" type="{urn:zimbraMail}partInfo"/>
- *           &lt;element name="shr" type="{urn:zimbraMail}shareNotification"/>
- *           &lt;element name="dlSubs" type="{urn:zimbraMail}dlSubscriptionNotification"/>
+ *           &lt;element name="mp" type="{urn:zmailMail}partInfo"/>
+ *           &lt;element name="shr" type="{urn:zmailMail}shareNotification"/>
+ *           &lt;element name="dlSubs" type="{urn:zmailMail}dlSubscriptionNotification"/>
  *         &lt;/choice>
- *         &lt;element name="content" type="{urn:zimbra}urlAndValue" minOccurs="0"/>
+ *         &lt;element name="content" type="{urn:zmail}urlAndValue" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="cif" type="{http://www.w3.org/2001/XMLSchema}string" />

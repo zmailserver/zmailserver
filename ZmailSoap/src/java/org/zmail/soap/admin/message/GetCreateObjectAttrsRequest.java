@@ -13,17 +13,17 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.soap.admin.type.CosSelector;
-import com.zimbra.soap.admin.type.DomainSelector;
-import com.zimbra.soap.admin.type.TargetWithType;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.soap.admin.type.CosSelector;
+import org.zmail.soap.admin.type.DomainSelector;
+import org.zmail.soap.admin.type.TargetWithType;
 
 // see soap-right.txt
 /**
@@ -50,7 +50,7 @@ import com.zimbra.soap.admin.type.TargetWithType;
  * 
  * &lt;GetCreateObjectAttrsResponse>
  *     &lt;setAttrs>
- *           &lt;a n="zimbraMailQuota"/>
+ *           &lt;a n="zmailMailQuota"/>
  *               &lt;constraint>
  *                   &lt;min>1&lt;/min>
  *                   &lt;max>3&lt;/max>
@@ -58,8 +58,8 @@ import com.zimbra.soap.admin.type.TargetWithType;
  *               &lt;default>
  *                   &lt;v>2&lt;/v>
  *               &lt;/default>
- *           &lt;a n="zimbraMailStatus"/>
- *           &lt;a n="zimbraFeatureCalendarEnabled"/>
+ *           &lt;a n="zmailMailStatus"/>
+ *           &lt;a n="zmailFeatureCalendarEnabled"/>
  *           ...
  *     &lt;/setAttrs>
  * &lt;/GetCreateObjectAttrsResponse>
@@ -74,9 +74,9 @@ import com.zimbra.soap.admin.type.TargetWithType;
  * &lt;GetCreateObjectAttrsResponse>
  *     &lt;target type="server"/>
  *     &lt;setAttrs>
- *           &lt;a n="zimbraLmtpExposeVersionOnBanner"/>
- *           &lt;a n="zimbraXMPPServerDialbackKey"/>
- *           &lt;a n="zimbraReverseProxyImapEnabledCapability"/>
+ *           &lt;a n="zmailLmtpExposeVersionOnBanner"/>
+ *           &lt;a n="zmailXMPPServerDialbackKey"/>
+ *           &lt;a n="zmailReverseProxyImapEnabledCapability"/>
  *               &lt;constraint>
  *                   &lt;values>
  *                       &lt;v>IMAP4rev1&lt;/v>

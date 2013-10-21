@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.util;
+package org.zmail.soap.util;
 
 public interface JaxbNodeInfo {
     public String getName();

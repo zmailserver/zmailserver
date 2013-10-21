@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.type;
+package org.zmail.soap.admin.type;
 
 import com.google.common.collect.Lists;
 
@@ -27,9 +27,9 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
 
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.soap.type.SearchFilterCondition;
-import com.zimbra.soap.type.ZmBoolean;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.soap.type.SearchFilterCondition;
+import org.zmail.soap.type.ZmBoolean;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class EntrySearchFilterMultiCond implements SearchFilterCondition {

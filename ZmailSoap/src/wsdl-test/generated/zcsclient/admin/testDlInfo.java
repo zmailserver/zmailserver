@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="dlInfo">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraAdmin}adminObjectInfo">
+ *     &lt;extension base="{urn:zmailAdmin}adminObjectInfo">
  *       &lt;all>
  *       &lt;/all>
  *       &lt;attribute name="dynamic" type="{http://www.w3.org/2001/XMLSchema}boolean" />

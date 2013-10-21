@@ -38,15 +38,15 @@ import generated.zcsclient.zm.testWildcardExpansionQueryInfo;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="m" type="{urn:zimbraMail}messageHitInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="m" type="{urn:zmailMail}messageHitInfo" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="info" minOccurs="0">
  *           &lt;complexType>
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence>
  *                   &lt;choice maxOccurs="unbounded" minOccurs="0">
- *                     &lt;element name="suggest" type="{urn:zimbraMail}suggestedQueryString"/>
- *                     &lt;element name="wildcard" type="{urn:zimbra}wildcardExpansionQueryInfo"/>
+ *                     &lt;element name="suggest" type="{urn:zmailMail}suggestedQueryString"/>
+ *                     &lt;element name="wildcard" type="{urn:zmail}wildcardExpansionQueryInfo"/>
  *                   &lt;/choice>
  *                 &lt;/sequence>
  *               &lt;/restriction>
@@ -298,8 +298,8 @@ public class testNestedSearchConversation {
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
      *         &lt;choice maxOccurs="unbounded" minOccurs="0">
-     *           &lt;element name="suggest" type="{urn:zimbraMail}suggestedQueryString"/>
-     *           &lt;element name="wildcard" type="{urn:zimbra}wildcardExpansionQueryInfo"/>
+     *           &lt;element name="suggest" type="{urn:zmailMail}suggestedQueryString"/>
+     *           &lt;element name="wildcard" type="{urn:zmail}wildcardExpansionQueryInfo"/>
      *         &lt;/choice>
      *       &lt;/sequence>
      *     &lt;/restriction>

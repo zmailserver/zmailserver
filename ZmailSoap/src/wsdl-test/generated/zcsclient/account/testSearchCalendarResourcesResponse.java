@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="calresource" type="{urn:zimbraAccount}calendarResourceInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="calresource" type="{urn:zmailAccount}calendarResourceInfo" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="sortBy" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="offset" type="{http://www.w3.org/2001/XMLSchema}int" />

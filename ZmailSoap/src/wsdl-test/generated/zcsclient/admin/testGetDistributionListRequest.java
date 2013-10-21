@@ -31,9 +31,9 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="getDistributionListRequest">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraAdmin}adminAttrsImpl">
+ *     &lt;extension base="{urn:zmailAdmin}adminAttrsImpl">
  *       &lt;sequence>
- *         &lt;element name="dl" type="{urn:zimbraAdmin}distributionListSelector" minOccurs="0"/>
+ *         &lt;element name="dl" type="{urn:zmailAdmin}distributionListSelector" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="limit" type="{http://www.w3.org/2001/XMLSchema}int" />
  *       &lt;attribute name="offset" type="{http://www.w3.org/2001/XMLSchema}int" />

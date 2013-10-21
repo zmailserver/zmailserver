@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.type;
+package org.zmail.soap.mail.type;
 
 import java.util.List;
 
@@ -25,8 +25,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.base.XNameRuleInterface;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.base.XNameRuleInterface;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class XNameRule

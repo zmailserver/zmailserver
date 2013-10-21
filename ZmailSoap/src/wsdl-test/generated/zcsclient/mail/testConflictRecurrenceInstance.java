@@ -32,9 +32,9 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="conflictRecurrenceInstance">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraMail}expandedRecurrenceInstance">
+ *     &lt;extension base="{urn:zmailMail}expandedRecurrenceInstance">
  *       &lt;sequence>
- *         &lt;element name="usr" type="{urn:zimbraMail}freeBusyUserStatus" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="usr" type="{urn:zmailMail}freeBusyUserStatus" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/extension>
  *   &lt;/complexContent>

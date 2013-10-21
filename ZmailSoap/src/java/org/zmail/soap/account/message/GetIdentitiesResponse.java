@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.account.message;
+package org.zmail.soap.account.message;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,8 +24,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 import com.google.common.collect.Iterables;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.soap.account.type.Identity;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.soap.account.type.Identity;
 
 @XmlRootElement(name=AccountConstants.E_GET_IDENTITIES_RESPONSE)
 @XmlType(propOrder = {})

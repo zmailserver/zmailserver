@@ -33,21 +33,21 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="folderActionSelector">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraMail}actionSelector">
+ *     &lt;extension base="{urn:zmailMail}actionSelector">
  *       &lt;sequence>
- *         &lt;element name="grant" type="{urn:zimbraMail}actionGrantSelector" minOccurs="0"/>
+ *         &lt;element name="grant" type="{urn:zmailMail}actionGrantSelector" minOccurs="0"/>
  *         &lt;element name="acl" minOccurs="0">
  *           &lt;complexType>
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence>
- *                   &lt;element name="grant" type="{urn:zimbraMail}actionGrantSelector" maxOccurs="unbounded" minOccurs="0"/>
+ *                   &lt;element name="grant" type="{urn:zmailMail}actionGrantSelector" maxOccurs="unbounded" minOccurs="0"/>
  *                 &lt;/sequence>
  *               &lt;/restriction>
  *             &lt;/complexContent>
  *           &lt;/complexType>
  *         &lt;/element>
- *         &lt;element ref="{urn:zimbraMail}retentionPolicy" minOccurs="0"/>
+ *         &lt;element ref="{urn:zmailMail}retentionPolicy" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="recursive" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *       &lt;attribute name="url" type="{http://www.w3.org/2001/XMLSchema}string" />
@@ -315,7 +315,7 @@ public class testFolderActionSelector
      *   &lt;complexContent>
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
-     *         &lt;element name="grant" type="{urn:zimbraMail}actionGrantSelector" maxOccurs="unbounded" minOccurs="0"/>
+     *         &lt;element name="grant" type="{urn:zmailMail}actionGrantSelector" maxOccurs="unbounded" minOccurs="0"/>
      *       &lt;/sequence>
      *     &lt;/restriction>
      *   &lt;/complexContent>

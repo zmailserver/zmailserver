@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import java.util.Collections;
 import java.util.List;
@@ -28,10 +28,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.soap.admin.message.AutoProvTaskControlRequest.Action;
-import com.zimbra.soap.admin.type.IntIdAttr;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.soap.admin.message.AutoProvTaskControlRequest.Action;
+import org.zmail.soap.admin.type.IntIdAttr;
 
 /**
  * @zm-api-command-auth-required true

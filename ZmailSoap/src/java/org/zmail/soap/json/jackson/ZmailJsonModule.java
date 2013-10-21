@@ -12,25 +12,25 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.json.jackson;
+package org.zmail.soap.json.jackson;
 
 import org.codehaus.jackson.Version;
 import org.codehaus.jackson.map.module.SimpleModule;
 
 /**
  * Module that augments basic module to handle differences between
- * Zimbra-style JSON and standard Jackson-style JSON.
+ * Zmail-style JSON and standard Jackson-style JSON.
  */
-public class ZimbraJsonModule extends SimpleModule {
+public class ZmailJsonModule extends SimpleModule {
     private final static Version VERSION = new Version(0, 1, 0, null);
 
-    public ZimbraJsonModule() {
-        super("ZimbraJsonModule", VERSION);
+    public ZmailJsonModule() {
+        super("ZmailJsonModule", VERSION);
     }
 
     @Override
     public void setupModule(SetupContext context) {
         // Need to modify BeanSerializer that is used
-        context.addBeanSerializerModifier(new ZimbraBeanSerializerModifier());
+        context.addBeanSerializerModifier(new ZmailBeanSerializerModifier());
     }
 }

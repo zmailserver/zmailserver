@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.type;
+package org.zmail.soap.mail.type;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -27,9 +27,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.json.jackson.annotate.ZimbraJsonAttribute;
-import com.zimbra.soap.json.jackson.annotate.ZimbraUniqueElement;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.json.jackson.annotate.ZmailJsonAttribute;
+import org.zmail.soap.json.jackson.annotate.ZmailUniqueElement;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(propOrder = {"organizer", "categories", "geo",
@@ -45,7 +45,7 @@ implements CalendaringDataInterface {
     /**
      * @zm-api-field-description Organizer
      */
-    @ZimbraUniqueElement
+    @ZmailUniqueElement
     @XmlElement(name=MailConstants.E_CAL_ORGANIZER /* or */, required=false)
     private CalOrganizer organizer;
 
@@ -66,7 +66,7 @@ implements CalendaringDataInterface {
      * @zm-api-field-tag fragment
      * @zm-api-field-description First few bytes of the message (probably between 40 and 100 bytes)
      */
-    @ZimbraJsonAttribute
+    @ZmailJsonAttribute
     @XmlElement(name=MailConstants.E_FRAG /* fr */, required=false)
     private String fragment;
 

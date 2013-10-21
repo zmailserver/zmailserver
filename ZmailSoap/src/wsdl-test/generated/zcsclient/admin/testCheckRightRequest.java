@@ -31,11 +31,11 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="checkRightRequest">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraAdmin}adminAttrsImpl">
+ *     &lt;extension base="{urn:zmailAdmin}adminAttrsImpl">
  *       &lt;sequence>
- *         &lt;element name="target" type="{urn:zimbraAdmin}effectiveRightsTargetSelector"/>
- *         &lt;element name="grantee" type="{urn:zimbraAdmin}granteeSelector"/>
- *         &lt;element name="right" type="{urn:zimbraAdmin}checkedRight"/>
+ *         &lt;element name="target" type="{urn:zmailAdmin}effectiveRightsTargetSelector"/>
+ *         &lt;element name="grantee" type="{urn:zmailAdmin}granteeSelector"/>
+ *         &lt;element name="right" type="{urn:zmailAdmin}checkedRight"/>
  *       &lt;/sequence>
  *     &lt;/extension>
  *   &lt;/complexContent>

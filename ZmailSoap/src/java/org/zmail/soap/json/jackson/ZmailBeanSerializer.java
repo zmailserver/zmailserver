@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.json.jackson;
+package org.zmail.soap.json.jackson;
 
 import java.io.IOException;
 
@@ -21,18 +21,18 @@ import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.map.SerializerProvider;
 import org.codehaus.jackson.map.ser.BeanSerializer;
 
-import com.zimbra.common.soap.Element;
+import org.zmail.common.soap.Element;
 
 /**
- * Zimbra specific BeanSerializer
+ * Zmail specific BeanSerializer
  */
-public class ZimbraBeanSerializer extends BeanSerializer {
-    public ZimbraBeanSerializer(BeanSerializer src) {
+public class ZmailBeanSerializer extends BeanSerializer {
+    public ZmailBeanSerializer(BeanSerializer src) {
         super(src);
     }
 
     /**
-     * Based on {@code BeanSerializer.serialize} but allows the addition of Zimbra's namespace property "_jsns"
+     * Based on {@code BeanSerializer.serialize} but allows the addition of Zmail's namespace property "_jsns"
      * to the list of properties serialized.
      */
     public final void serializeWithNamespace(Object bean, JsonGenerator jgen, SerializerProvider provider,

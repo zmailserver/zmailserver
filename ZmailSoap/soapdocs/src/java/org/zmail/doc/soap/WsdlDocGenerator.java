@@ -13,26 +13,26 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.doc.soap;
+package org.zmail.doc.soap;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.AdminExtConstants;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.ReplicationConstants;
-import com.zimbra.common.soap.SyncConstants;
-import com.zimbra.common.soap.VoiceConstants;
-import com.zimbra.soap.JaxbUtil;
-import com.zimbra.soap.util.JaxbInfo;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.AdminExtConstants;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.ReplicationConstants;
+import org.zmail.common.soap.SyncConstants;
+import org.zmail.common.soap.VoiceConstants;
+import org.zmail.soap.JaxbUtil;
+import org.zmail.soap.util.JaxbInfo;
 import javax.xml.bind.annotation.XmlSchema;
 
 /**
- * Helper class for ZmApiDoclet intended to facilitate the generation of documentation for the Zimbra SOAP API.
+ * Helper class for ZmApiDoclet intended to facilitate the generation of documentation for the Zmail SOAP API.
  */
 public class WsdlDocGenerator {
 
@@ -40,12 +40,12 @@ public class WsdlDocGenerator {
     static {
         serviceDescriptions = Maps.newHashMap();
         serviceDescriptions.put(AccountConstants.NAMESPACE_STR, "The Account Service includes commands for retrieving, storing and managing user account information.");
-        serviceDescriptions.put(AdminConstants.NAMESPACE_STR, "The Admin Service includes commands for administering Zimbra.");
-        serviceDescriptions.put(AdminExtConstants.NAMESPACE_STR, "The Admin Extension Service includes additional commands for administering Zimbra.");
+        serviceDescriptions.put(AdminConstants.NAMESPACE_STR, "The Admin Service includes commands for administering Zmail.");
+        serviceDescriptions.put(AdminExtConstants.NAMESPACE_STR, "The Admin Extension Service includes additional commands for administering Zmail.");
         serviceDescriptions.put(MailConstants.NAMESPACE_STR, "The Mail Service includes commands for managing mail and calendar information.");
-        serviceDescriptions.put(ReplicationConstants.NAMESPACE_STR, "The zimbraRepl Service includes commands for managing Zimbra Server replication.");
-        serviceDescriptions.put(SyncConstants.NAMESPACE_STR, "The zimbraSync Service includes commands for managing devices using Synchronization.");
-        serviceDescriptions.put(VoiceConstants.NAMESPACE_STR, "The zimbraVoice Service includes commands related to Unified Communications.");
+        serviceDescriptions.put(ReplicationConstants.NAMESPACE_STR, "The zmailRepl Service includes commands for managing Zmail Server replication.");
+        serviceDescriptions.put(SyncConstants.NAMESPACE_STR, "The zmailSync Service includes commands for managing devices using Synchronization.");
+        serviceDescriptions.put(VoiceConstants.NAMESPACE_STR, "The zmailVoice Service includes commands related to Unified Communications.");
     }
 
     private static String getNamespace(Class<?> jaxbClass, Map<Package,String> pkgToNamespace) {
@@ -117,7 +117,7 @@ public class WsdlDocGenerator {
             XmlElementDescription elem = (XmlElementDescription) node;
             Class<?> jaxbClass = elem.getJaxbClass();
             // Loop over class and superclasses to ensure we get all documentation
-            while ((jaxbClass != null) && (jaxbClass.getName().startsWith("com.zimbra"))) {
+            while ((jaxbClass != null) && (jaxbClass.getName().startsWith("org.zmail"))) {
                 ApiClassDocumentation doc = (jaxbClass != null) ? javadocInfo.get(jaxbClass.getName()) : null;
                 updateElementDescriptionWithApiClassDocumentation(elem, doc);
                 jaxbClass = jaxbClass.getSuperclass();

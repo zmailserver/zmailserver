@@ -13,23 +13,23 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.VoiceAdminConstants;
-import com.zimbra.soap.admin.type.AdminAttrsImpl;
-import com.zimbra.soap.admin.type.UCServiceSelector;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.VoiceAdminConstants;
+import org.zmail.soap.admin.type.AdminAttrsImpl;
+import org.zmail.soap.admin.type.UCServiceSelector;
 
 /**
  * @zm-api-command-auth-required true
  * @zm-api-command-admin-auth-required true
  * @zm-api-command-description Generate a new Cisco Presence server session ID and persist 
- * the newly generated session id in zimbraUCCiscoPresenceSessionId attribute for the 
+ * the newly generated session id in zmailUCCiscoPresenceSessionId attribute for the 
  * specified UC service.
  */
 @XmlAccessorType(XmlAccessType.NONE)

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.type;
+package org.zmail.soap.mail.type;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -28,9 +28,9 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.type.ZmBoolean;
-import com.zimbra.soap.json.jackson.annotate.ZimbraUniqueElement;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.type.ZmBoolean;
+import org.zmail.soap.json.jackson.annotate.ZmailUniqueElement;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class FolderActionSelector extends ActionSelector {
@@ -59,11 +59,11 @@ public class FolderActionSelector extends ActionSelector {
     private ZmBoolean excludeFreebusy;
 
     /**
-     * @zm-api-field-tag grantee-zimbra-id
-     * @zm-api-field-description Grantee Zimbra ID
+     * @zm-api-field-tag grantee-zmail-id
+     * @zm-api-field-description Grantee Zmail ID
      */
     @XmlAttribute(name=MailConstants.A_ZIMBRA_ID /* zid */, required=false)
-    private String zimbraId;
+    private String zmailId;
 
     /**
      * @zm-api-field-tag grantee-type
@@ -83,7 +83,7 @@ public class FolderActionSelector extends ActionSelector {
      * @zm-api-field-tag
      * @zm-api-field-description
      */
-    @ZimbraUniqueElement
+    @ZmailUniqueElement
     @XmlElement(name=MailConstants.E_GRANT /* grant */, required=false)
     private ActionGrantSelector grant;
 
@@ -113,7 +113,7 @@ public class FolderActionSelector extends ActionSelector {
     public void setExcludeFreebusy(Boolean excludeFreebusy) {
         this.excludeFreebusy = ZmBoolean.fromBool(excludeFreebusy);
     }
-    public void setZimbraId(String zimbraId) { this.zimbraId = zimbraId; }
+    public void setZmailId(String zmailId) { this.zmailId = zmailId; }
     public void setGrantType(String grantType) { this.grantType = grantType; }
     public void setGrant(ActionGrantSelector grant) { this.grant = grant; }
     public void setGrants(Iterable <ActionGrantSelector> grants) {
@@ -134,7 +134,7 @@ public class FolderActionSelector extends ActionSelector {
     public Boolean getRecursive() { return ZmBoolean.toBool(recursive); }
     public String getUrl() { return url; }
     public Boolean getExcludeFreebusy() { return ZmBoolean.toBool(excludeFreebusy); }
-    public String getZimbraId() { return zimbraId; }
+    public String getZmailId() { return zmailId; }
     public String getGrantType() { return grantType; }
     public String getView() { return view; }
     public ActionGrantSelector getGrant() { return grant; }
@@ -149,7 +149,7 @@ public class FolderActionSelector extends ActionSelector {
             .add("recursive", recursive)
             .add("url", url)
             .add("excludeFreebusy", excludeFreebusy)
-            .add("zimbraId", zimbraId)
+            .add("zmailId", zmailId)
             .add("grantType", grantType)
             .add("view", view)
             .add("grant", grant)

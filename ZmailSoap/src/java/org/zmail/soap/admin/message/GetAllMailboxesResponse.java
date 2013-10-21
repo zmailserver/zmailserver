@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -28,9 +28,9 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.google.common.collect.Lists;
 
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.soap.admin.type.MailboxInfo;
-import com.zimbra.soap.type.ZmBoolean;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.soap.admin.type.MailboxInfo;
+import org.zmail.soap.type.ZmBoolean;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name=AdminConstants.E_GET_ALL_MAILBOXES_RESPONSE)

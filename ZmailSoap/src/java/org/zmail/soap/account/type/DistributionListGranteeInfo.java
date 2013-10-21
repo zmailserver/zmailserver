@@ -12,15 +12,15 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.account.type;
+package org.zmail.soap.account.type;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.soap.base.DistributionListGranteeInfoInterface;
-import com.zimbra.soap.type.GranteeType;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.soap.base.DistributionListGranteeInfoInterface;
+import org.zmail.soap.type.GranteeType;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class DistributionListGranteeInfo implements DistributionListGranteeInfoInterface {
@@ -30,10 +30,10 @@ public class DistributionListGranteeInfo implements DistributionListGranteeInfoI
      * @zm-api-field-description Grantee Type.
      * <br />
      * <table>
-     * <tr><td> <b>usr</b> </td> <td> a Zimbra internal user </td> </tr>
-     * <tr><td> <b>grp</b> </td> <td> a Zimbra internal group </td> </tr>
+     * <tr><td> <b>usr</b> </td> <td> a Zmail internal user </td> </tr>
+     * <tr><td> <b>grp</b> </td> <td> a Zmail internal group </td> </tr>
      * <tr><td> <b>egp</b> </td> <td> an external AD group </td> </tr>
-     * <tr><td> <b>all</b> </td> <td> all Zimbra users (id and name will not be present) </td> </tr>
+     * <tr><td> <b>all</b> </td> <td> all Zmail users (id and name will not be present) </td> </tr>
      * </table>
      */
     @XmlAttribute(name=AccountConstants.A_TYPE, required=true)

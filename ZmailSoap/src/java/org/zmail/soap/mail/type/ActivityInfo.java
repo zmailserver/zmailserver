@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.type;
+package org.zmail.soap.mail.type;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -28,13 +28,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.type.NamedValue;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.type.NamedValue;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class ActivityInfo {
 
-    // Values from enum com.zimbra.cs.mailbox.MailboxOperation
+    // Values from enum org.zmail.cs.mailbox.MailboxOperation
     /**
      * @zm-api-field-tag operation
      * @zm-api-field-description Operation

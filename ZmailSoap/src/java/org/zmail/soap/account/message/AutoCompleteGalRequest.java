@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.account.message;
+package org.zmail.soap.account.message;
 
 import com.google.common.base.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -21,17 +21,17 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.type.GalSearchType;
-import com.zimbra.soap.type.ZmBoolean;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.type.GalSearchType;
+import org.zmail.soap.type.ZmBoolean;
 
 /**
  * @zm-api-command-auth-required true
  * @zm-api-command-admin-auth-required false
  * @zm-api-command-description Perform an autocomplete for a name against the Global Address List
  * <p>
- * The number of entries in the response is limited by Account/COS attribute zimbraContactAutoCompleteMaxResults with
+ * The number of entries in the response is limited by Account/COS attribute zmailContactAutoCompleteMaxResults with
  * default value of 20.
  * </p>
  */

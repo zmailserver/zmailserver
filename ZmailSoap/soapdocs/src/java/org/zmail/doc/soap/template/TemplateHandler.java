@@ -13,13 +13,13 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.doc.soap.template;
+package org.zmail.doc.soap.template;
 
 import java.io.*;
 import java.util.*;
 
 import com.google.common.collect.Maps;
-import com.zimbra.doc.soap.*;
+import org.zmail.doc.soap.*;
 import freemarker.template.*;
 
 /**

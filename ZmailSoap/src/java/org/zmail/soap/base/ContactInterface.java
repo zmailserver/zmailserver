@@ -13,15 +13,15 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.base;
+package org.zmail.soap.base;
 
 import java.util.List;
 
-import com.zimbra.soap.type.ContactAttr;
+import org.zmail.soap.type.ContactAttr;
 
 /**
  * 
- * See {@link com.zimbra.cs.service.mail.ToXML} encodeContact, encodeGalContact
+ * See {@link org.zmail.cs.service.mail.ToXML} encodeContact, encodeGalContact
  * Note that encodeContactAttachment forces KeyValuePairs to be represented by list of ContactAttr
  */
 public interface ContactInterface {
@@ -48,7 +48,7 @@ public interface ContactInterface {
     public void setMetadataInterfaces(Iterable <CustomMetadataInterface> metadatas);
     public void addMetadataInterfaces(CustomMetadataInterface metadata);
     // ContactAttr extends KeyValuePair.
-    // com.zimbra.cs.service.mail.ToXML.encodeContactAttachment decorates KeyValuePairs with additional attributes
+    // org.zmail.cs.service.mail.ToXML.encodeContactAttachment decorates KeyValuePairs with additional attributes
     public void setAttrs(Iterable <ContactAttr> attrs);
     public void addAttr(ContactAttr attr);
     public void setContactGroupMemberInterfaces(Iterable <ContactGroupMemberInterface> contactGroupMembers);

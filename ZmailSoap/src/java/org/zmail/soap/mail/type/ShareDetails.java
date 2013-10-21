@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.mail.type;
+package org.zmail.soap.mail.type;
 
 import java.util.Collections;
 import java.util.List;
@@ -27,8 +27,8 @@ import javax.xml.bind.annotation.XmlElement;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.type.Id;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.type.Id;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class ShareDetails {

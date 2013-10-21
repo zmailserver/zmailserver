@@ -13,14 +13,14 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.base;
+package org.zmail.soap.base;
 
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 
-import com.zimbra.soap.type.KeyValuePair;
+import org.zmail.soap.type.KeyValuePair;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public interface MessageInfoInterface

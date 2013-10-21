@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -28,9 +28,9 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.BackupConstants;
-import com.zimbra.soap.admin.type.Name;
-import com.zimbra.soap.type.ZmBoolean;
+import org.zmail.common.soap.BackupConstants;
+import org.zmail.soap.admin.type.Name;
+import org.zmail.soap.type.ZmBoolean;
 
 /**
  * @zm-api-command-network-edition

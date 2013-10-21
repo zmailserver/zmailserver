@@ -34,8 +34,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;all>
- *         &lt;element name="standard" type="{urn:zimbraAdmin}tzFixupRuleMatchDate"/>
- *         &lt;element name="daylight" type="{urn:zimbraAdmin}tzFixupRuleMatchDate"/>
+ *         &lt;element name="standard" type="{urn:zmailAdmin}tzFixupRuleMatchDate"/>
+ *         &lt;element name="daylight" type="{urn:zmailAdmin}tzFixupRuleMatchDate"/>
  *       &lt;/all>
  *       &lt;attribute name="stdoff" use="required" type="{http://www.w3.org/2001/XMLSchema}long" />
  *       &lt;attribute name="dayoff" use="required" type="{http://www.w3.org/2001/XMLSchema}long" />

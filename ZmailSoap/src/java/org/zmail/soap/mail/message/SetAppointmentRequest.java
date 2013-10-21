@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.message;
+package org.zmail.soap.mail.message;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -29,11 +29,11 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.mail.type.CalReply;
-import com.zimbra.soap.mail.type.SetCalendarItemInfo;
-import com.zimbra.soap.type.ZmBoolean;
-import com.zimbra.soap.json.jackson.annotate.ZimbraUniqueElement;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.mail.type.CalReply;
+import org.zmail.soap.mail.type.SetCalendarItemInfo;
+import org.zmail.soap.type.ZmBoolean;
+import org.zmail.soap.json.jackson.annotate.ZmailUniqueElement;
 
 //   TODO: need way to link message to appointment after the fact
 /**
@@ -106,7 +106,7 @@ public class SetAppointmentRequest {
     /**
      * @zm-api-field-description Default calendar item information
      */
-    @ZimbraUniqueElement
+    @ZmailUniqueElement
     @XmlElement(name=MailConstants.A_DEFAULT /* default */, required=false)
     private SetCalendarItemInfo defaultId;
 

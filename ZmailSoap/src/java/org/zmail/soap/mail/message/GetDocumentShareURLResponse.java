@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.mail.message;
+package org.zmail.soap.mail.message;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlValue;
 
-import com.zimbra.common.soap.OctopusXmlConstants;
+import org.zmail.common.soap.OctopusXmlConstants;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name=OctopusXmlConstants.E_GET_DOCUMENT_SHARE_URL_RESPONSE)

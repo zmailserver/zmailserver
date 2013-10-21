@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -21,8 +21,8 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.soap.admin.type.ServerSelector;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.soap.admin.type.ServerSelector;
 
 /**
  * @zm-api-command-auth-required true
@@ -31,7 +31,7 @@ import com.zimbra.soap.admin.type.ServerSelector;
  * <br />
  * Get server's network interfaces. Returns IP  addresses and net masks
  * <br />
- * This call will use zmrcd to call /opt/zimbra/libexec/zmserverips
+ * This call will use zmrcd to call /opt/zmail/libexec/zmserverips
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name=AdminConstants.E_GET_SERVER_NIFS_REQUEST)

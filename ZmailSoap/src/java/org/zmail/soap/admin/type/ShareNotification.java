@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.admin.type;
+package org.zmail.soap.admin.type;
 
 public class ShareNotification extends Notification {
 

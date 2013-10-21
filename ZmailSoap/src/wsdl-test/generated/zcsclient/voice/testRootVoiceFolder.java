@@ -32,9 +32,9 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="rootVoiceFolder">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraVoice}voiceFolder">
+ *     &lt;extension base="{urn:zmailVoice}voiceFolder">
  *       &lt;sequence>
- *         &lt;element name="folder" type="{urn:zimbraVoice}voiceFolder" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="folder" type="{urn:zmailVoice}voiceFolder" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/extension>
  *   &lt;/complexContent>

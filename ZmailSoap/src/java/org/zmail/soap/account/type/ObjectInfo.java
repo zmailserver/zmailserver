@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.account.type;
+package org.zmail.soap.account.type;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -26,9 +26,9 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.soap.type.KeyValuePair;
-import com.zimbra.soap.json.jackson.annotate.ZimbraKeyValuePairs;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.soap.type.KeyValuePair;
+import org.zmail.soap.json.jackson.annotate.ZmailKeyValuePairs;
 
 /**
  * Information for an Object - attributes are encoded as Key/Value pairs in JSON - i.e. using "_attrs"
@@ -54,7 +54,7 @@ public class ObjectInfo {
     /**
      * @zm-api-field-description Attributes
      */
-    @ZimbraKeyValuePairs
+    @ZmailKeyValuePairs
     @XmlElement(name=AccountConstants.E_A /* a */, required=false)
     private final List<KeyValuePair> attrList;
 

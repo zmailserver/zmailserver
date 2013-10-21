@@ -31,10 +31,10 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="dataSourceSpecifier">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraAdmin}adminAttrsImpl">
+ *     &lt;extension base="{urn:zmailAdmin}adminAttrsImpl">
  *       &lt;sequence>
  *       &lt;/sequence>
- *       &lt;attribute name="type" use="required" type="{urn:zimbraAdmin}dataSourceType" />
+ *       &lt;attribute name="type" use="required" type="{urn:zmailAdmin}dataSourceType" />
  *       &lt;attribute name="name" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/extension>
  *   &lt;/complexContent>

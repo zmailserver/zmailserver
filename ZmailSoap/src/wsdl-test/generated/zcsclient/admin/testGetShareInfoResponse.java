@@ -35,7 +35,7 @@ import generated.zcsclient.zm.testShareInfo;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="share" type="{urn:zimbra}shareInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="share" type="{urn:zmail}shareInfo" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>

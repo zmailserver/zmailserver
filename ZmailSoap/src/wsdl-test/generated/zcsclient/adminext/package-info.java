@@ -14,5 +14,5 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-@javax.xml.bind.annotation.XmlSchema(namespace = "urn:zimbraAdminExt", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+@javax.xml.bind.annotation.XmlSchema(namespace = "urn:zmailAdminExt", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
 package generated.zcsclient.adminext;

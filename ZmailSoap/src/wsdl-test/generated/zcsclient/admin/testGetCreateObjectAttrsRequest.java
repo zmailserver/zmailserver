@@ -33,9 +33,9 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="target" type="{urn:zimbraAdmin}targetWithType"/>
- *         &lt;element name="domain" type="{urn:zimbraAdmin}domainSelector" minOccurs="0"/>
- *         &lt;element name="cos" type="{urn:zimbraAdmin}cosSelector" minOccurs="0"/>
+ *         &lt;element name="target" type="{urn:zmailAdmin}targetWithType"/>
+ *         &lt;element name="domain" type="{urn:zmailAdmin}domainSelector" minOccurs="0"/>
+ *         &lt;element name="cos" type="{urn:zmailAdmin}cosSelector" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>

@@ -35,14 +35,14 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="package" type="{urn:zimbraAdmin}packageRightsInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="package" type="{urn:zmailAdmin}packageRightsInfo" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="notUsed" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="domainAdmin-copypaste-to-zimbra-rights-domainadmin-xml-template">
+ *         &lt;element name="domainAdmin-copypaste-to-zmail-rights-domainadmin-xml-template">
  *           &lt;complexType>
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence>
- *                   &lt;element name="right" type="{urn:zimbraAdmin}domainAdminRight" maxOccurs="unbounded" minOccurs="0"/>
+ *                   &lt;element name="right" type="{urn:zmailAdmin}domainAdminRight" maxOccurs="unbounded" minOccurs="0"/>
  *                 &lt;/sequence>
  *               &lt;/restriction>
  *             &lt;/complexContent>
@@ -60,15 +60,15 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "getRightsDocResponse", propOrder = {
     "_package",
     "notUsed",
-    "domainAdminCopypasteToZimbraRightsDomainadminXmlTemplate"
+    "domainAdminCopypasteToZmailRightsDomainadminXmlTemplate"
 })
 public class testGetRightsDocResponse {
 
     @XmlElement(name = "package")
     protected List<testPackageRightsInfo> _package;
     protected List<String> notUsed;
-    @XmlElement(name = "domainAdmin-copypaste-to-zimbra-rights-domainadmin-xml-template", required = true)
-    protected testGetRightsDocResponse.DomainAdminCopypasteToZimbraRightsDomainadminXmlTemplate domainAdminCopypasteToZimbraRightsDomainadminXmlTemplate;
+    @XmlElement(name = "domainAdmin-copypaste-to-zmail-rights-domainadmin-xml-template", required = true)
+    protected testGetRightsDocResponse.DomainAdminCopypasteToZmailRightsDomainadminXmlTemplate domainAdminCopypasteToZmailRightsDomainadminXmlTemplate;
 
     /**
      * Gets the value of the package property.
@@ -129,27 +129,27 @@ public class testGetRightsDocResponse {
     }
 
     /**
-     * Gets the value of the domainAdminCopypasteToZimbraRightsDomainadminXmlTemplate property.
+     * Gets the value of the domainAdminCopypasteToZmailRightsDomainadminXmlTemplate property.
      * 
      * @return
      *     possible object is
-     *     {@link testGetRightsDocResponse.DomainAdminCopypasteToZimbraRightsDomainadminXmlTemplate }
+     *     {@link testGetRightsDocResponse.DomainAdminCopypasteToZmailRightsDomainadminXmlTemplate }
      *     
      */
-    public testGetRightsDocResponse.DomainAdminCopypasteToZimbraRightsDomainadminXmlTemplate getDomainAdminCopypasteToZimbraRightsDomainadminXmlTemplate() {
-        return domainAdminCopypasteToZimbraRightsDomainadminXmlTemplate;
+    public testGetRightsDocResponse.DomainAdminCopypasteToZmailRightsDomainadminXmlTemplate getDomainAdminCopypasteToZmailRightsDomainadminXmlTemplate() {
+        return domainAdminCopypasteToZmailRightsDomainadminXmlTemplate;
     }
 
     /**
-     * Sets the value of the domainAdminCopypasteToZimbraRightsDomainadminXmlTemplate property.
+     * Sets the value of the domainAdminCopypasteToZmailRightsDomainadminXmlTemplate property.
      * 
      * @param value
      *     allowed object is
-     *     {@link testGetRightsDocResponse.DomainAdminCopypasteToZimbraRightsDomainadminXmlTemplate }
+     *     {@link testGetRightsDocResponse.DomainAdminCopypasteToZmailRightsDomainadminXmlTemplate }
      *     
      */
-    public void setDomainAdminCopypasteToZimbraRightsDomainadminXmlTemplate(testGetRightsDocResponse.DomainAdminCopypasteToZimbraRightsDomainadminXmlTemplate value) {
-        this.domainAdminCopypasteToZimbraRightsDomainadminXmlTemplate = value;
+    public void setDomainAdminCopypasteToZmailRightsDomainadminXmlTemplate(testGetRightsDocResponse.DomainAdminCopypasteToZmailRightsDomainadminXmlTemplate value) {
+        this.domainAdminCopypasteToZmailRightsDomainadminXmlTemplate = value;
     }
 
 
@@ -163,7 +163,7 @@ public class testGetRightsDocResponse {
      *   &lt;complexContent>
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
-     *         &lt;element name="right" type="{urn:zimbraAdmin}domainAdminRight" maxOccurs="unbounded" minOccurs="0"/>
+     *         &lt;element name="right" type="{urn:zmailAdmin}domainAdminRight" maxOccurs="unbounded" minOccurs="0"/>
      *       &lt;/sequence>
      *     &lt;/restriction>
      *   &lt;/complexContent>
@@ -176,7 +176,7 @@ public class testGetRightsDocResponse {
     @XmlType(name = "", propOrder = {
         "right"
     })
-    public static class DomainAdminCopypasteToZimbraRightsDomainadminXmlTemplate {
+    public static class DomainAdminCopypasteToZmailRightsDomainadminXmlTemplate {
 
         protected List<testDomainAdminRight> right;
 

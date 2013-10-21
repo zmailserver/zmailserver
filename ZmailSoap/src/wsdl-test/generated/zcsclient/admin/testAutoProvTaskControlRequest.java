@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *       &lt;/sequence>
- *       &lt;attribute name="action" use="required" type="{urn:zimbraAdmin}action" />
+ *       &lt;attribute name="action" use="required" type="{urn:zmailAdmin}action" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>

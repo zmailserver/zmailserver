@@ -13,9 +13,9 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.type;
+package org.zmail.soap.mail.type;
 
-import com.zimbra.soap.base.CancelRuleInfoInterface;
+import org.zmail.soap.base.CancelRuleInfoInterface;
 
 public class CancelRuleInfo
 extends RecurIdInfo

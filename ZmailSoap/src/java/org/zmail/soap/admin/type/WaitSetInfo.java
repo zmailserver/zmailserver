@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.type;
+package org.zmail.soap.admin.type;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -28,10 +28,10 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlType;
 
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.type.IdAndType;
-import com.zimbra.soap.json.jackson.annotate.ZimbraJsonArrayForWrapper;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.type.IdAndType;
+import org.zmail.soap.json.jackson.annotate.ZmailJsonArrayForWrapper;
 
 // soap-waitset.txt implies a lot of these attributes are directly unser QueryWaitSetResponse.  They aren't.
 @XmlAccessorType(XmlAccessType.NONE)
@@ -82,7 +82,7 @@ public class WaitSetInfo {
     /**
      * @zm-api-field-description Error information
      */
-    @ZimbraJsonArrayForWrapper
+    @ZmailJsonArrayForWrapper
     @XmlElementWrapper(name=AdminConstants.E_ERRORS /* errors */, required=false)
     @XmlElement(name=MailConstants.E_ERROR /* error */, required=false)
     private List<IdAndType> errors = Lists.newArrayList();
@@ -118,7 +118,7 @@ public class WaitSetInfo {
     /**
      * @zm-api-field-description Buffered commit information
      */
-    @ZimbraJsonArrayForWrapper
+    @ZmailJsonArrayForWrapper
     @XmlElementWrapper(name="buffered", required=false)
     @XmlElement(name="commit", required=false)
     private List<BufferedCommitInfo> bufferedCommits = Lists.newArrayList();

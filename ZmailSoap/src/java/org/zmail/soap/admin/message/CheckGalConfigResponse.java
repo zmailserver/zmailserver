@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import com.google.common.collect.Lists;
 
@@ -27,9 +27,9 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.admin.type.GalContactInfo;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.admin.type.GalContactInfo;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name=AdminConstants.E_CHECK_GAL_CONFIG_RESPONSE)

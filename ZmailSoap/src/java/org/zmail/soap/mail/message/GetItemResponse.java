@@ -13,25 +13,25 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.message;
+package org.zmail.soap.mail.message;
 
 import com.google.common.base.Objects;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.mail.type.CalendarItemInfo;
-import com.zimbra.soap.mail.type.ChatSummary;
-import com.zimbra.soap.mail.type.CommonDocumentInfo;
-import com.zimbra.soap.mail.type.ContactInfo;
-import com.zimbra.soap.mail.type.ConversationSummary;
-import com.zimbra.soap.mail.type.DocumentInfo;
-import com.zimbra.soap.mail.type.Folder;
-import com.zimbra.soap.mail.type.MessageSummary;
-import com.zimbra.soap.mail.type.NoteInfo;
-import com.zimbra.soap.mail.type.TagInfo;
-import com.zimbra.soap.mail.type.TaskItemInfo;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.mail.type.CalendarItemInfo;
+import org.zmail.soap.mail.type.ChatSummary;
+import org.zmail.soap.mail.type.CommonDocumentInfo;
+import org.zmail.soap.mail.type.ContactInfo;
+import org.zmail.soap.mail.type.ConversationSummary;
+import org.zmail.soap.mail.type.DocumentInfo;
+import org.zmail.soap.mail.type.Folder;
+import org.zmail.soap.mail.type.MessageSummary;
+import org.zmail.soap.mail.type.NoteInfo;
+import org.zmail.soap.mail.type.TagInfo;
+import org.zmail.soap.mail.type.TaskItemInfo;
 
 @XmlRootElement(name=MailConstants.E_GET_ITEM_RESPONSE)
 public class GetItemResponse {

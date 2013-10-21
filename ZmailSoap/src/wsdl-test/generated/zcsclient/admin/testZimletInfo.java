@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="zimletInfo">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraAdmin}adminObjectInfo">
+ *     &lt;extension base="{urn:zmailAdmin}adminObjectInfo">
  *       &lt;sequence>
  *       &lt;/sequence>
  *       &lt;attribute name="hasKeyword" type="{http://www.w3.org/2001/XMLSchema}string" />

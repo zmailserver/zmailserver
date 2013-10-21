@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.account.type;
+package org.zmail.soap.account.type;
 
 import java.util.List;
 
@@ -22,10 +22,10 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
 import com.google.common.collect.Lists;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.soap.type.TargetBy;
-import com.zimbra.soap.type.TargetType;
-import com.zimbra.soap.type.ZmBoolean;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.soap.type.TargetBy;
+import org.zmail.soap.type.TargetType;
+import org.zmail.soap.type.ZmBoolean;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class CheckRightsTargetInfo {
@@ -48,7 +48,7 @@ public class CheckRightsTargetInfo {
      * @zm-api-field-tag target-key
      * @zm-api-field-description Key for target.
      * <br />
-     * If <b>{target-by}</b> is <b>id</b> this key is the zimbraId of the target entry
+     * If <b>{target-by}</b> is <b>id</b> this key is the zmailId of the target entry
      * <br />
      * If <b>{target-by}</b> is <b>name</b> this key is the name of the target entry
      */

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.admin;
+package org.zmail.soap.admin;
 
 import java.util.List;
 
@@ -40,7 +40,7 @@ import generated.zcsclient.admin.testSearchCalendarResourcesRequest;
 import generated.zcsclient.admin.testSearchCalendarResourcesResponse;
 import generated.zcsclient.ws.service.ZcsAdminPortType;
 
-import com.zimbra.soap.Utility;
+import org.zmail.soap.Utility;
 
 import org.junit.Assert;
 import org.junit.After;
@@ -94,9 +94,9 @@ public class WSDLCalResourceTest {
         createReq.setPassword("test123");
         createReq.getA().add(Utility.mkAttr("displayName",
                 "WSDL Test Cal Resource"));
-        createReq.getA().add(Utility.mkAttr("zimbraCalResType", "Location"));
+        createReq.getA().add(Utility.mkAttr("zmailCalResType", "Location"));
         createReq.getA().add(Utility.mkAttr(
-                "zimbraCalResLocationDisplayName", "Harare"));
+                "zmailCalResLocationDisplayName", "Harare"));
         Utility.addSoapAdminAuthHeader((WSBindingProvider)eif);
         testCreateCalendarResourceResponse resp =
                 eif.createCalendarResourceRequest(createReq);
@@ -215,7 +215,7 @@ public class WSDLCalResourceTest {
                 testCalRes, testCalResDisplayName);
         testSearchCalendarResourcesRequest req = new testSearchCalendarResourcesRequest();
         req.setApplyCos(false);
-        req.setAttrs("displayName,zimbraId");
+        req.setAttrs("displayName,zmailId");
         req.setDomain(testCalResDomain);
         req.setLimit(200);
         req.setSortAscending(true);

@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="logger" type="{urn:zimbraAdmin}loggerInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="logger" type="{urn:zmailAdmin}loggerInfo" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>

@@ -39,10 +39,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{urn:zimbraAdmin}query" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element ref="{urn:zmailAdmin}query" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
- *       &lt;attribute name="op" use="required" type="{urn:zimbraAdmin}queueAction" />
- *       &lt;attribute name="by" use="required" type="{urn:zimbraAdmin}queueActionBy" />
+ *       &lt;attribute name="op" use="required" type="{urn:zmailAdmin}queueAction" />
+ *       &lt;attribute name="by" use="required" type="{urn:zmailAdmin}queueActionBy" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -56,7 +56,7 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class testMailQueueAction {
 
-    @XmlElementRef(name = "query", namespace = "urn:zimbraAdmin", type = JAXBElement.class)
+    @XmlElementRef(name = "query", namespace = "urn:zmailAdmin", type = JAXBElement.class)
     @XmlMixed
     protected List<Serializable> content;
     @XmlAttribute(name = "op", required = true)

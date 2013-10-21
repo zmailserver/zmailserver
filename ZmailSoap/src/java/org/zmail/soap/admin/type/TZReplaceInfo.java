@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.type;
+package org.zmail.soap.admin.type;
 
 import com.google.common.base.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -21,18 +21,18 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.type.Id;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.type.Id;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(propOrder = {})
 public class TZReplaceInfo {
 
-    // TZID from /opt/zimbra/conf/timezones.ics
+    // TZID from /opt/zmail/conf/timezones.ics
     /**
      * @zm-api-field-tag well-known-tzid
-     * @zm-api-field-description TZID from /opt/zimbra/conf/timezones.ics
+     * @zm-api-field-description TZID from /opt/zmail/conf/timezones.ics
      */
     @XmlElement(name=AdminConstants.E_WELL_KNOWN_TZ /* wellKnownTz */, required=false)
     private Id wellKnownTz;

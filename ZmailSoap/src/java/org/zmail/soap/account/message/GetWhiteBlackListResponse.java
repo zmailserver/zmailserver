@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.account.message;
+package org.zmail.soap.account.message;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -29,8 +29,8 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.soap.json.jackson.annotate.ZimbraJsonArrayForWrapper;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.soap.json.jackson.annotate.ZmailJsonArrayForWrapper;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name=AccountConstants.E_GET_WHITE_BLACK_LIST_RESPONSE)
@@ -40,7 +40,7 @@ public class GetWhiteBlackListResponse {
     /**
      * @zm-api-field-description White list
      */
-    @ZimbraJsonArrayForWrapper
+    @ZmailJsonArrayForWrapper
     @XmlElementWrapper(name=AccountConstants.E_WHITE_LIST, required=true)
     @XmlElement(name=AccountConstants.E_ADDR, required=false)
     private List<String> whiteListEntries = Lists.newArrayList();
@@ -48,7 +48,7 @@ public class GetWhiteBlackListResponse {
     /**
      * @zm-api-field-description Black list
      */
-    @ZimbraJsonArrayForWrapper
+    @ZmailJsonArrayForWrapper
     @XmlElementWrapper(name=AccountConstants.E_BLACK_LIST, required=true)
     @XmlElement(name=AccountConstants.E_ADDR, required=false)
     private List<String> blackListEntries = Lists.newArrayList();

@@ -13,14 +13,14 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.doc.soap.doclet;
+package org.zmail.doc.soap.doclet;
 
 import java.util.Map;
 
 import com.google.common.collect.Maps;
 
-import com.zimbra.doc.soap.ApiClassDocumentation;
-import com.zimbra.doc.soap.ZmApiTags;
+import org.zmail.doc.soap.ApiClassDocumentation;
+import org.zmail.doc.soap.ZmApiTags;
 import com.sun.javadoc.ClassDoc;
 import com.sun.javadoc.FieldDoc;
 import com.sun.javadoc.MethodDoc;

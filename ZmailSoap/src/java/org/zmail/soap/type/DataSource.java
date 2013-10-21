@@ -13,12 +13,12 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.type;
+package org.zmail.soap.type;
 
 import java.util.Arrays;
 import java.util.List;
 
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
 public interface DataSource {
 

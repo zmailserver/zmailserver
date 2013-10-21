@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.type;
+package org.zmail.soap.type;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,10 +28,10 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.zclient.ZClientException;
-import com.zimbra.soap.base.KeyAndValue;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.zclient.ZClientException;
+import org.zmail.soap.base.KeyAndValue;
 
 /**
  *  e.g. For element name "a":

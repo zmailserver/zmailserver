@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.type;
+package org.zmail.soap.admin.type;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -26,8 +26,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.soap.admin.type.UCServiceAttribute;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.soap.admin.type.UCServiceAttribute;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class VoiceProviderInfo {

@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="getAllCalendarResourcesRequest">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraAdmin}getAllAccountsRequest">
+ *     &lt;extension base="{urn:zmailAdmin}getAllAccountsRequest">
  *       &lt;sequence>
  *       &lt;/sequence>
  *     &lt;/extension>

@@ -40,34 +40,34 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _VoiceMsgActionRequest_QNAME = new QName("urn:zimbraVoice", "VoiceMsgActionRequest");
-    private final static QName _ChangeUCPasswordResponse_QNAME = new QName("urn:zimbraVoice", "ChangeUCPasswordResponse");
-    private final static QName _UploadVoiceMailResponse_QNAME = new QName("urn:zimbraVoice", "UploadVoiceMailResponse");
-    private final static QName _UploadVoiceMailRequest_QNAME = new QName("urn:zimbraVoice", "UploadVoiceMailRequest");
-    private final static QName _ModifyFromNumResponse_QNAME = new QName("urn:zimbraVoice", "ModifyFromNumResponse");
-    private final static QName _ModifyVoiceMailPinResponse_QNAME = new QName("urn:zimbraVoice", "ModifyVoiceMailPinResponse");
-    private final static QName _GetVoiceFolderResponse_QNAME = new QName("urn:zimbraVoice", "GetVoiceFolderResponse");
-    private final static QName _GetVoiceFeaturesRequest_QNAME = new QName("urn:zimbraVoice", "GetVoiceFeaturesRequest");
-    private final static QName _GetUCInfoRequest_QNAME = new QName("urn:zimbraVoice", "GetUCInfoRequest");
-    private final static QName _ModifyVoiceFeaturesResponse_QNAME = new QName("urn:zimbraVoice", "ModifyVoiceFeaturesResponse");
-    private final static QName _ModifyVoiceMailPrefsRequest_QNAME = new QName("urn:zimbraVoice", "ModifyVoiceMailPrefsRequest");
-    private final static QName _ChangeUCPasswordRequest_QNAME = new QName("urn:zimbraVoice", "ChangeUCPasswordRequest");
-    private final static QName _SearchVoiceRequest_QNAME = new QName("urn:zimbraVoice", "SearchVoiceRequest");
-    private final static QName _SearchVoiceResponse_QNAME = new QName("urn:zimbraVoice", "SearchVoiceResponse");
-    private final static QName _ModifyVoiceMailPrefsResponse_QNAME = new QName("urn:zimbraVoice", "ModifyVoiceMailPrefsResponse");
-    private final static QName _ResetVoiceFeaturesResponse_QNAME = new QName("urn:zimbraVoice", "ResetVoiceFeaturesResponse");
-    private final static QName _ResetVoiceFeaturesRequest_QNAME = new QName("urn:zimbraVoice", "ResetVoiceFeaturesRequest");
-    private final static QName _ModifyFromNumRequest_QNAME = new QName("urn:zimbraVoice", "ModifyFromNumRequest");
-    private final static QName _ModifyVoiceFeaturesRequest_QNAME = new QName("urn:zimbraVoice", "ModifyVoiceFeaturesRequest");
-    private final static QName _VoiceMsgActionResponse_QNAME = new QName("urn:zimbraVoice", "VoiceMsgActionResponse");
-    private final static QName _GetVoiceMailPrefsResponse_QNAME = new QName("urn:zimbraVoice", "GetVoiceMailPrefsResponse");
-    private final static QName _GetVoiceFeaturesResponse_QNAME = new QName("urn:zimbraVoice", "GetVoiceFeaturesResponse");
-    private final static QName _GetVoiceFolderRequest_QNAME = new QName("urn:zimbraVoice", "GetVoiceFolderRequest");
-    private final static QName _GetVoiceInfoRequest_QNAME = new QName("urn:zimbraVoice", "GetVoiceInfoRequest");
-    private final static QName _ModifyVoiceMailPinRequest_QNAME = new QName("urn:zimbraVoice", "ModifyVoiceMailPinRequest");
-    private final static QName _GetVoiceMailPrefsRequest_QNAME = new QName("urn:zimbraVoice", "GetVoiceMailPrefsRequest");
-    private final static QName _GetVoiceInfoResponse_QNAME = new QName("urn:zimbraVoice", "GetVoiceInfoResponse");
-    private final static QName _GetUCInfoResponse_QNAME = new QName("urn:zimbraVoice", "GetUCInfoResponse");
+    private final static QName _VoiceMsgActionRequest_QNAME = new QName("urn:zmailVoice", "VoiceMsgActionRequest");
+    private final static QName _ChangeUCPasswordResponse_QNAME = new QName("urn:zmailVoice", "ChangeUCPasswordResponse");
+    private final static QName _UploadVoiceMailResponse_QNAME = new QName("urn:zmailVoice", "UploadVoiceMailResponse");
+    private final static QName _UploadVoiceMailRequest_QNAME = new QName("urn:zmailVoice", "UploadVoiceMailRequest");
+    private final static QName _ModifyFromNumResponse_QNAME = new QName("urn:zmailVoice", "ModifyFromNumResponse");
+    private final static QName _ModifyVoiceMailPinResponse_QNAME = new QName("urn:zmailVoice", "ModifyVoiceMailPinResponse");
+    private final static QName _GetVoiceFolderResponse_QNAME = new QName("urn:zmailVoice", "GetVoiceFolderResponse");
+    private final static QName _GetVoiceFeaturesRequest_QNAME = new QName("urn:zmailVoice", "GetVoiceFeaturesRequest");
+    private final static QName _GetUCInfoRequest_QNAME = new QName("urn:zmailVoice", "GetUCInfoRequest");
+    private final static QName _ModifyVoiceFeaturesResponse_QNAME = new QName("urn:zmailVoice", "ModifyVoiceFeaturesResponse");
+    private final static QName _ModifyVoiceMailPrefsRequest_QNAME = new QName("urn:zmailVoice", "ModifyVoiceMailPrefsRequest");
+    private final static QName _ChangeUCPasswordRequest_QNAME = new QName("urn:zmailVoice", "ChangeUCPasswordRequest");
+    private final static QName _SearchVoiceRequest_QNAME = new QName("urn:zmailVoice", "SearchVoiceRequest");
+    private final static QName _SearchVoiceResponse_QNAME = new QName("urn:zmailVoice", "SearchVoiceResponse");
+    private final static QName _ModifyVoiceMailPrefsResponse_QNAME = new QName("urn:zmailVoice", "ModifyVoiceMailPrefsResponse");
+    private final static QName _ResetVoiceFeaturesResponse_QNAME = new QName("urn:zmailVoice", "ResetVoiceFeaturesResponse");
+    private final static QName _ResetVoiceFeaturesRequest_QNAME = new QName("urn:zmailVoice", "ResetVoiceFeaturesRequest");
+    private final static QName _ModifyFromNumRequest_QNAME = new QName("urn:zmailVoice", "ModifyFromNumRequest");
+    private final static QName _ModifyVoiceFeaturesRequest_QNAME = new QName("urn:zmailVoice", "ModifyVoiceFeaturesRequest");
+    private final static QName _VoiceMsgActionResponse_QNAME = new QName("urn:zmailVoice", "VoiceMsgActionResponse");
+    private final static QName _GetVoiceMailPrefsResponse_QNAME = new QName("urn:zmailVoice", "GetVoiceMailPrefsResponse");
+    private final static QName _GetVoiceFeaturesResponse_QNAME = new QName("urn:zmailVoice", "GetVoiceFeaturesResponse");
+    private final static QName _GetVoiceFolderRequest_QNAME = new QName("urn:zmailVoice", "GetVoiceFolderRequest");
+    private final static QName _GetVoiceInfoRequest_QNAME = new QName("urn:zmailVoice", "GetVoiceInfoRequest");
+    private final static QName _ModifyVoiceMailPinRequest_QNAME = new QName("urn:zmailVoice", "ModifyVoiceMailPinRequest");
+    private final static QName _GetVoiceMailPrefsRequest_QNAME = new QName("urn:zmailVoice", "GetVoiceMailPrefsRequest");
+    private final static QName _GetVoiceInfoResponse_QNAME = new QName("urn:zmailVoice", "GetVoiceInfoResponse");
+    private final static QName _GetUCInfoResponse_QNAME = new QName("urn:zmailVoice", "GetUCInfoResponse");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: generated.zcsclient.voice
@@ -736,7 +736,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testVoiceMsgActionRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraVoice", name = "VoiceMsgActionRequest")
+    @XmlElementDecl(namespace = "urn:zmailVoice", name = "VoiceMsgActionRequest")
     public JAXBElement<testVoiceMsgActionRequest> createVoiceMsgActionRequest(testVoiceMsgActionRequest value) {
         return new JAXBElement<testVoiceMsgActionRequest>(_VoiceMsgActionRequest_QNAME, testVoiceMsgActionRequest.class, null, value);
     }
@@ -745,7 +745,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testChangeUCPasswordResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraVoice", name = "ChangeUCPasswordResponse")
+    @XmlElementDecl(namespace = "urn:zmailVoice", name = "ChangeUCPasswordResponse")
     public JAXBElement<testChangeUCPasswordResponse> createChangeUCPasswordResponse(testChangeUCPasswordResponse value) {
         return new JAXBElement<testChangeUCPasswordResponse>(_ChangeUCPasswordResponse_QNAME, testChangeUCPasswordResponse.class, null, value);
     }
@@ -754,7 +754,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testUploadVoiceMailResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraVoice", name = "UploadVoiceMailResponse")
+    @XmlElementDecl(namespace = "urn:zmailVoice", name = "UploadVoiceMailResponse")
     public JAXBElement<testUploadVoiceMailResponse> createUploadVoiceMailResponse(testUploadVoiceMailResponse value) {
         return new JAXBElement<testUploadVoiceMailResponse>(_UploadVoiceMailResponse_QNAME, testUploadVoiceMailResponse.class, null, value);
     }
@@ -763,7 +763,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testUploadVoiceMailRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraVoice", name = "UploadVoiceMailRequest")
+    @XmlElementDecl(namespace = "urn:zmailVoice", name = "UploadVoiceMailRequest")
     public JAXBElement<testUploadVoiceMailRequest> createUploadVoiceMailRequest(testUploadVoiceMailRequest value) {
         return new JAXBElement<testUploadVoiceMailRequest>(_UploadVoiceMailRequest_QNAME, testUploadVoiceMailRequest.class, null, value);
     }
@@ -772,7 +772,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testModifyFromNumResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraVoice", name = "ModifyFromNumResponse")
+    @XmlElementDecl(namespace = "urn:zmailVoice", name = "ModifyFromNumResponse")
     public JAXBElement<testModifyFromNumResponse> createModifyFromNumResponse(testModifyFromNumResponse value) {
         return new JAXBElement<testModifyFromNumResponse>(_ModifyFromNumResponse_QNAME, testModifyFromNumResponse.class, null, value);
     }
@@ -781,7 +781,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testModifyVoiceMailPinResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraVoice", name = "ModifyVoiceMailPinResponse")
+    @XmlElementDecl(namespace = "urn:zmailVoice", name = "ModifyVoiceMailPinResponse")
     public JAXBElement<testModifyVoiceMailPinResponse> createModifyVoiceMailPinResponse(testModifyVoiceMailPinResponse value) {
         return new JAXBElement<testModifyVoiceMailPinResponse>(_ModifyVoiceMailPinResponse_QNAME, testModifyVoiceMailPinResponse.class, null, value);
     }
@@ -790,7 +790,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetVoiceFolderResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraVoice", name = "GetVoiceFolderResponse")
+    @XmlElementDecl(namespace = "urn:zmailVoice", name = "GetVoiceFolderResponse")
     public JAXBElement<testGetVoiceFolderResponse> createGetVoiceFolderResponse(testGetVoiceFolderResponse value) {
         return new JAXBElement<testGetVoiceFolderResponse>(_GetVoiceFolderResponse_QNAME, testGetVoiceFolderResponse.class, null, value);
     }
@@ -799,7 +799,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetVoiceFeaturesRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraVoice", name = "GetVoiceFeaturesRequest")
+    @XmlElementDecl(namespace = "urn:zmailVoice", name = "GetVoiceFeaturesRequest")
     public JAXBElement<testGetVoiceFeaturesRequest> createGetVoiceFeaturesRequest(testGetVoiceFeaturesRequest value) {
         return new JAXBElement<testGetVoiceFeaturesRequest>(_GetVoiceFeaturesRequest_QNAME, testGetVoiceFeaturesRequest.class, null, value);
     }
@@ -808,7 +808,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetUCInfoRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraVoice", name = "GetUCInfoRequest")
+    @XmlElementDecl(namespace = "urn:zmailVoice", name = "GetUCInfoRequest")
     public JAXBElement<testGetUCInfoRequest> createGetUCInfoRequest(testGetUCInfoRequest value) {
         return new JAXBElement<testGetUCInfoRequest>(_GetUCInfoRequest_QNAME, testGetUCInfoRequest.class, null, value);
     }
@@ -817,7 +817,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testModifyVoiceFeaturesResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraVoice", name = "ModifyVoiceFeaturesResponse")
+    @XmlElementDecl(namespace = "urn:zmailVoice", name = "ModifyVoiceFeaturesResponse")
     public JAXBElement<testModifyVoiceFeaturesResponse> createModifyVoiceFeaturesResponse(testModifyVoiceFeaturesResponse value) {
         return new JAXBElement<testModifyVoiceFeaturesResponse>(_ModifyVoiceFeaturesResponse_QNAME, testModifyVoiceFeaturesResponse.class, null, value);
     }
@@ -826,7 +826,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testModifyVoiceMailPrefsRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraVoice", name = "ModifyVoiceMailPrefsRequest")
+    @XmlElementDecl(namespace = "urn:zmailVoice", name = "ModifyVoiceMailPrefsRequest")
     public JAXBElement<testModifyVoiceMailPrefsRequest> createModifyVoiceMailPrefsRequest(testModifyVoiceMailPrefsRequest value) {
         return new JAXBElement<testModifyVoiceMailPrefsRequest>(_ModifyVoiceMailPrefsRequest_QNAME, testModifyVoiceMailPrefsRequest.class, null, value);
     }
@@ -835,7 +835,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testChangeUCPasswordRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraVoice", name = "ChangeUCPasswordRequest")
+    @XmlElementDecl(namespace = "urn:zmailVoice", name = "ChangeUCPasswordRequest")
     public JAXBElement<testChangeUCPasswordRequest> createChangeUCPasswordRequest(testChangeUCPasswordRequest value) {
         return new JAXBElement<testChangeUCPasswordRequest>(_ChangeUCPasswordRequest_QNAME, testChangeUCPasswordRequest.class, null, value);
     }
@@ -844,7 +844,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testSearchVoiceRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraVoice", name = "SearchVoiceRequest")
+    @XmlElementDecl(namespace = "urn:zmailVoice", name = "SearchVoiceRequest")
     public JAXBElement<testSearchVoiceRequest> createSearchVoiceRequest(testSearchVoiceRequest value) {
         return new JAXBElement<testSearchVoiceRequest>(_SearchVoiceRequest_QNAME, testSearchVoiceRequest.class, null, value);
     }
@@ -853,7 +853,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testSearchVoiceResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraVoice", name = "SearchVoiceResponse")
+    @XmlElementDecl(namespace = "urn:zmailVoice", name = "SearchVoiceResponse")
     public JAXBElement<testSearchVoiceResponse> createSearchVoiceResponse(testSearchVoiceResponse value) {
         return new JAXBElement<testSearchVoiceResponse>(_SearchVoiceResponse_QNAME, testSearchVoiceResponse.class, null, value);
     }
@@ -862,7 +862,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testModifyVoiceMailPrefsResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraVoice", name = "ModifyVoiceMailPrefsResponse")
+    @XmlElementDecl(namespace = "urn:zmailVoice", name = "ModifyVoiceMailPrefsResponse")
     public JAXBElement<testModifyVoiceMailPrefsResponse> createModifyVoiceMailPrefsResponse(testModifyVoiceMailPrefsResponse value) {
         return new JAXBElement<testModifyVoiceMailPrefsResponse>(_ModifyVoiceMailPrefsResponse_QNAME, testModifyVoiceMailPrefsResponse.class, null, value);
     }
@@ -871,7 +871,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testResetVoiceFeaturesResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraVoice", name = "ResetVoiceFeaturesResponse")
+    @XmlElementDecl(namespace = "urn:zmailVoice", name = "ResetVoiceFeaturesResponse")
     public JAXBElement<testResetVoiceFeaturesResponse> createResetVoiceFeaturesResponse(testResetVoiceFeaturesResponse value) {
         return new JAXBElement<testResetVoiceFeaturesResponse>(_ResetVoiceFeaturesResponse_QNAME, testResetVoiceFeaturesResponse.class, null, value);
     }
@@ -880,7 +880,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testResetVoiceFeaturesRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraVoice", name = "ResetVoiceFeaturesRequest")
+    @XmlElementDecl(namespace = "urn:zmailVoice", name = "ResetVoiceFeaturesRequest")
     public JAXBElement<testResetVoiceFeaturesRequest> createResetVoiceFeaturesRequest(testResetVoiceFeaturesRequest value) {
         return new JAXBElement<testResetVoiceFeaturesRequest>(_ResetVoiceFeaturesRequest_QNAME, testResetVoiceFeaturesRequest.class, null, value);
     }
@@ -889,7 +889,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testModifyFromNumRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraVoice", name = "ModifyFromNumRequest")
+    @XmlElementDecl(namespace = "urn:zmailVoice", name = "ModifyFromNumRequest")
     public JAXBElement<testModifyFromNumRequest> createModifyFromNumRequest(testModifyFromNumRequest value) {
         return new JAXBElement<testModifyFromNumRequest>(_ModifyFromNumRequest_QNAME, testModifyFromNumRequest.class, null, value);
     }
@@ -898,7 +898,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testModifyVoiceFeaturesRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraVoice", name = "ModifyVoiceFeaturesRequest")
+    @XmlElementDecl(namespace = "urn:zmailVoice", name = "ModifyVoiceFeaturesRequest")
     public JAXBElement<testModifyVoiceFeaturesRequest> createModifyVoiceFeaturesRequest(testModifyVoiceFeaturesRequest value) {
         return new JAXBElement<testModifyVoiceFeaturesRequest>(_ModifyVoiceFeaturesRequest_QNAME, testModifyVoiceFeaturesRequest.class, null, value);
     }
@@ -907,7 +907,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testVoiceMsgActionResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraVoice", name = "VoiceMsgActionResponse")
+    @XmlElementDecl(namespace = "urn:zmailVoice", name = "VoiceMsgActionResponse")
     public JAXBElement<testVoiceMsgActionResponse> createVoiceMsgActionResponse(testVoiceMsgActionResponse value) {
         return new JAXBElement<testVoiceMsgActionResponse>(_VoiceMsgActionResponse_QNAME, testVoiceMsgActionResponse.class, null, value);
     }
@@ -916,7 +916,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetVoiceMailPrefsResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraVoice", name = "GetVoiceMailPrefsResponse")
+    @XmlElementDecl(namespace = "urn:zmailVoice", name = "GetVoiceMailPrefsResponse")
     public JAXBElement<testGetVoiceMailPrefsResponse> createGetVoiceMailPrefsResponse(testGetVoiceMailPrefsResponse value) {
         return new JAXBElement<testGetVoiceMailPrefsResponse>(_GetVoiceMailPrefsResponse_QNAME, testGetVoiceMailPrefsResponse.class, null, value);
     }
@@ -925,7 +925,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetVoiceFeaturesResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraVoice", name = "GetVoiceFeaturesResponse")
+    @XmlElementDecl(namespace = "urn:zmailVoice", name = "GetVoiceFeaturesResponse")
     public JAXBElement<testGetVoiceFeaturesResponse> createGetVoiceFeaturesResponse(testGetVoiceFeaturesResponse value) {
         return new JAXBElement<testGetVoiceFeaturesResponse>(_GetVoiceFeaturesResponse_QNAME, testGetVoiceFeaturesResponse.class, null, value);
     }
@@ -934,7 +934,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetVoiceFolderRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraVoice", name = "GetVoiceFolderRequest")
+    @XmlElementDecl(namespace = "urn:zmailVoice", name = "GetVoiceFolderRequest")
     public JAXBElement<testGetVoiceFolderRequest> createGetVoiceFolderRequest(testGetVoiceFolderRequest value) {
         return new JAXBElement<testGetVoiceFolderRequest>(_GetVoiceFolderRequest_QNAME, testGetVoiceFolderRequest.class, null, value);
     }
@@ -943,7 +943,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetVoiceInfoRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraVoice", name = "GetVoiceInfoRequest")
+    @XmlElementDecl(namespace = "urn:zmailVoice", name = "GetVoiceInfoRequest")
     public JAXBElement<testGetVoiceInfoRequest> createGetVoiceInfoRequest(testGetVoiceInfoRequest value) {
         return new JAXBElement<testGetVoiceInfoRequest>(_GetVoiceInfoRequest_QNAME, testGetVoiceInfoRequest.class, null, value);
     }
@@ -952,7 +952,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testModifyVoiceMailPinRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraVoice", name = "ModifyVoiceMailPinRequest")
+    @XmlElementDecl(namespace = "urn:zmailVoice", name = "ModifyVoiceMailPinRequest")
     public JAXBElement<testModifyVoiceMailPinRequest> createModifyVoiceMailPinRequest(testModifyVoiceMailPinRequest value) {
         return new JAXBElement<testModifyVoiceMailPinRequest>(_ModifyVoiceMailPinRequest_QNAME, testModifyVoiceMailPinRequest.class, null, value);
     }
@@ -961,7 +961,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetVoiceMailPrefsRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraVoice", name = "GetVoiceMailPrefsRequest")
+    @XmlElementDecl(namespace = "urn:zmailVoice", name = "GetVoiceMailPrefsRequest")
     public JAXBElement<testGetVoiceMailPrefsRequest> createGetVoiceMailPrefsRequest(testGetVoiceMailPrefsRequest value) {
         return new JAXBElement<testGetVoiceMailPrefsRequest>(_GetVoiceMailPrefsRequest_QNAME, testGetVoiceMailPrefsRequest.class, null, value);
     }
@@ -970,7 +970,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetVoiceInfoResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraVoice", name = "GetVoiceInfoResponse")
+    @XmlElementDecl(namespace = "urn:zmailVoice", name = "GetVoiceInfoResponse")
     public JAXBElement<testGetVoiceInfoResponse> createGetVoiceInfoResponse(testGetVoiceInfoResponse value) {
         return new JAXBElement<testGetVoiceInfoResponse>(_GetVoiceInfoResponse_QNAME, testGetVoiceInfoResponse.class, null, value);
     }
@@ -979,7 +979,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetUCInfoResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraVoice", name = "GetUCInfoResponse")
+    @XmlElementDecl(namespace = "urn:zmailVoice", name = "GetUCInfoResponse")
     public JAXBElement<testGetUCInfoResponse> createGetUCInfoResponse(testGetUCInfoResponse value) {
         return new JAXBElement<testGetUCInfoResponse>(_GetUCInfoResponse_QNAME, testGetUCInfoResponse.class, null, value);
     }

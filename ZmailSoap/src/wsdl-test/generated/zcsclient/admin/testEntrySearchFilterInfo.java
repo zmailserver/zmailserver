@@ -33,8 +33,8 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;choice minOccurs="0">
- *           &lt;element name="conds" type="{urn:zimbraAdmin}entrySearchFilterMultiCond"/>
- *           &lt;element name="cond" type="{urn:zimbraAdmin}entrySearchFilterSingleCond"/>
+ *           &lt;element name="conds" type="{urn:zmailAdmin}entrySearchFilterMultiCond"/>
+ *           &lt;element name="cond" type="{urn:zmailAdmin}entrySearchFilterSingleCond"/>
  *         &lt;/choice>
  *       &lt;/sequence>
  *     &lt;/restriction>

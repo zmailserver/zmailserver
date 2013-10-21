@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.type;
+package org.zmail.soap.mail.type;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -28,14 +28,14 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
 
-import com.zimbra.common.soap.MailConstants;
+import org.zmail.common.soap.MailConstants;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class FreeBusyUserInfo {
 
     /**
      * @zm-api-field-tag account-email
-     * @zm-api-field-description "id" is always account email; it is not zimbraId as the attribute name may suggest
+     * @zm-api-field-description "id" is always account email; it is not zmailId as the attribute name may suggest
      */
     @XmlAttribute(name=MailConstants.A_ID /* id */, required=true)
     private final String id;

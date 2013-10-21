@@ -36,9 +36,9 @@ import generated.zcsclient.zm.testNamedElement;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="op" type="{urn:zimbra}namedElement" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="user" type="{urn:zimbraMail}idEmailName" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="a" type="{urn:zimbraMail}activityInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="op" type="{urn:zmail}namedElement" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="user" type="{urn:zmailMail}idEmailName" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="a" type="{urn:zmailMail}activityInfo" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="session" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="count" type="{http://www.w3.org/2001/XMLSchema}string" />

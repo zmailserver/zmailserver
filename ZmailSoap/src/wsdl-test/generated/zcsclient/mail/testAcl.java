@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="grant" type="{urn:zimbraMail}grant" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="grant" type="{urn:zmailMail}grant" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="internalGrantExpiry" type="{http://www.w3.org/2001/XMLSchema}long" />
  *       &lt;attribute name="guestGrantExpiry" type="{http://www.w3.org/2001/XMLSchema}long" />

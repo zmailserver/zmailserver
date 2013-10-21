@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -27,9 +27,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 import com.google.common.collect.Lists;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.soap.admin.type.LocaleInfo;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.soap.admin.type.LocaleInfo;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name=AdminConstants.E_GET_ALL_LOCALES_RESPONSE)

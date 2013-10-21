@@ -13,9 +13,9 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.type;
+package org.zmail.soap.mail.type;
 
-import com.zimbra.soap.base.AddRecurrenceInfoInterface;
+import org.zmail.soap.base.AddRecurrenceInfoInterface;
 
 public class AddRecurrenceInfo
 extends RecurrenceInfo

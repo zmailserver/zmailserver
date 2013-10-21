@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="alarm" type="{urn:zimbraMail}alarmInfo" minOccurs="0"/>
+ *         &lt;element name="alarm" type="{urn:zmailMail}alarmInfo" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="nextAlarm" type="{http://www.w3.org/2001/XMLSchema}long" />
  *       &lt;attribute name="alarmInstStart" type="{http://www.w3.org/2001/XMLSchema}long" />

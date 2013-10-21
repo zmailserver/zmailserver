@@ -35,8 +35,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="a" type="{urn:zimbraMail}modifyContactAttr" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="m" type="{urn:zimbraMail}modifyContactGroupMember" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="a" type="{urn:zmailMail}modifyContactAttr" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="m" type="{urn:zmailMail}modifyContactGroupMember" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}int" />
  *       &lt;attribute name="tn" type="{http://www.w3.org/2001/XMLSchema}string" />

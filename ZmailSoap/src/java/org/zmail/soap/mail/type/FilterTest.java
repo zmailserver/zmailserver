@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.type;
+package org.zmail.soap.mail.type;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -31,9 +31,9 @@ import javax.xml.bind.annotation.XmlEnum;
 
 import org.codehaus.jackson.annotate.JsonPropertyOrder;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.type.ZmBoolean;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.type.ZmBoolean;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class FilterTest {

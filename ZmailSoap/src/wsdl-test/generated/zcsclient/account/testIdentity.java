@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="identity">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraAccount}attrsImpl">
+ *     &lt;extension base="{urn:zmailAccount}attrsImpl">
  *       &lt;sequence>
  *       &lt;/sequence>
  *       &lt;attribute name="name" type="{http://www.w3.org/2001/XMLSchema}string" />

@@ -32,9 +32,9 @@ import generated.zcsclient.zm.testAttributeSelectorImpl;
  * <pre>
  * &lt;complexType name="searchCalendarResourcesRequest">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbra}attributeSelectorImpl">
+ *     &lt;extension base="{urn:zmail}attributeSelectorImpl">
  *       &lt;sequence>
- *         &lt;element name="searchFilter" type="{urn:zimbraAdmin}entrySearchFilterInfo" minOccurs="0"/>
+ *         &lt;element name="searchFilter" type="{urn:zmailAdmin}entrySearchFilterInfo" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="limit" type="{http://www.w3.org/2001/XMLSchema}int" />
  *       &lt;attribute name="offset" type="{http://www.w3.org/2001/XMLSchema}int" />

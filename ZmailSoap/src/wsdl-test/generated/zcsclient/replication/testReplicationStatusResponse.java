@@ -33,8 +33,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="masterStatus" type="{urn:zimbraRepl}replicationMasterStatus" minOccurs="0"/>
- *         &lt;element name="slaveStatus" type="{urn:zimbraRepl}replicationSlaveStatus" minOccurs="0"/>
+ *         &lt;element name="masterStatus" type="{urn:zmailRepl}replicationMasterStatus" minOccurs="0"/>
+ *         &lt;element name="slaveStatus" type="{urn:zmailRepl}replicationSlaveStatus" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="replicationEnabled" use="required" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *       &lt;attribute name="currentRole" type="{http://www.w3.org/2001/XMLSchema}string" />

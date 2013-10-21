@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.admin;
+package org.zmail.soap.admin;
 
 import javax.xml.ws.soap.SOAPFaultException;
 
@@ -21,7 +21,7 @@ import com.sun.xml.ws.developer.WSBindingProvider;
 import generated.zcsclient.admin.*;
 import generated.zcsclient.ws.service.ZcsAdminPortType;
 
-import com.zimbra.soap.Utility;
+import org.zmail.soap.Utility;
 
 import org.junit.Assert;
 import org.junit.After;
@@ -72,13 +72,13 @@ public class WSDLCheckAuthConfigTest {
         req.setName(testAcct);
         req.setPassword("test123");
         testAttr attr;
-        attr = new testAttr(); attr.setN("zimbraAuthMech");
+        attr = new testAttr(); attr.setN("zmailAuthMech");
         attr.setValue("ldap");
         req.getA().add(attr);
-        attr = new testAttr(); attr.setN("zimbraAuthLdapURL");
+        attr = new testAttr(); attr.setN("zmailAuthLdapURL");
         attr.setValue("ldaps://localhost:3269");
         req.getA().add(attr);
-        attr = new testAttr(); attr.setN("zimbraAuthLdapBindDn");
+        attr = new testAttr(); attr.setN("zmailAuthLdapBindDn");
         attr.setValue("%u@example.test");
         req.getA().add(attr);
         try {

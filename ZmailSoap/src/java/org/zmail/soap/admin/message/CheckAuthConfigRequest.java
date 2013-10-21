@@ -13,15 +13,15 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.soap.admin.type.AdminAttrsImpl;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.soap.admin.type.AdminAttrsImpl;
 
 /**
  * @zm-api-command-auth-required true
@@ -32,13 +32,13 @@ import com.zimbra.soap.admin.type.AdminAttrsImpl;
  * <br />
  * <pre>
  * &lt;CheckAuthConfigRequest>
- *     &lt;a n='zimbraAuthMech'>ldap&lt&lt;/a>
- *     &lt;a n='zimbraAuthLdapURL'>...&lt;/a>
- *     &lt;a n='zimbraAuthLdapBindDn'>...&lt;/a>
- *     &lt;a n='zimbraAuthLdapSearchFilter'>...&lt;/a>
- *     &lt;a n='zimbraAuthLdapSearchBase'>...&lt;/a>
- *     &lt;a n='zimbraAuthLdapSearchBindDn'>...&lt;/a>
- *     &lt;a n='zimbraAuthLdapSearchBindPassword'>...&lt;/a>
+ *     &lt;a n='zmailAuthMech'>ldap&lt&lt;/a>
+ *     &lt;a n='zmailAuthLdapURL'>...&lt;/a>
+ *     &lt;a n='zmailAuthLdapBindDn'>...&lt;/a>
+ *     &lt;a n='zmailAuthLdapSearchFilter'>...&lt;/a>
+ *     &lt;a n='zmailAuthLdapSearchBase'>...&lt;/a>
+ *     &lt;a n='zmailAuthLdapSearchBindDn'>...&lt;/a>
+ *     &lt;a n='zmailAuthLdapSearchBindPassword'>...&lt;/a>
  *     &lt;name>...&lt;/name>
  *     &lt;password>...&lt;/password>
  * &lt;/CheckAuthConfigRequest>
@@ -51,14 +51,14 @@ import com.zimbra.soap.admin.type.AdminAttrsImpl;
  * </pre>
  * notes:
  * <ul>
- * <li> zimbraAuthMech must be set to ldap/ad. There is no reason to check zimbra.
- * <li> zimbraAuthLdapURL must be set
- * <li> either zimbraAuthLdapBindDn or zimbraAuthLdapSearchFilter must be set
+ * <li> zmailAuthMech must be set to ldap/ad. There is no reason to check zmail.
+ * <li> zmailAuthLdapURL must be set
+ * <li> either zmailAuthLdapBindDn or zmailAuthLdapSearchFilter must be set
  * </ul>
- * The following are optional, and only looked at if zimbraAuthLdapSearchFilter is set:
+ * The following are optional, and only looked at if zmailAuthLdapSearchFilter is set:
  * <ul>
- * <li> zimbraAuthLdapSearchBase is optional and defaults to ""
- * <li> zimbraAuthLdapSearchBind{Dn,Password} are both optional
+ * <li> zmailAuthLdapSearchBase is optional and defaults to ""
+ * <li> zmailAuthLdapSearchBind{Dn,Password} are both optional
  * </ul>
  */
 @XmlAccessorType(XmlAccessType.NONE)

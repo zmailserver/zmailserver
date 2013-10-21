@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="socialcastTest">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraMail}filterTest">
+ *     &lt;extension base="{urn:zmailMail}filterTest">
  *       &lt;sequence>
  *       &lt;/sequence>
  *     &lt;/extension>

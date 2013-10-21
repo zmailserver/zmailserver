@@ -13,15 +13,15 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.account.type;
+package org.zmail.soap.account.type;
 
 import com.google.common.base.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.soap.base.LocaleInterface;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.soap.base.LocaleInterface;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class LocaleInfo

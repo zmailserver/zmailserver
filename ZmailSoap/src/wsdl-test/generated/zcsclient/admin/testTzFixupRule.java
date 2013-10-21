@@ -33,9 +33,9 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;all>
- *         &lt;element name="match" type="{urn:zimbraAdmin}tzFixupRuleMatch"/>
- *         &lt;element name="touch" type="{urn:zimbraAdmin}simpleElement" minOccurs="0"/>
- *         &lt;element name="replace" type="{urn:zimbraAdmin}tzReplaceInfo" minOccurs="0"/>
+ *         &lt;element name="match" type="{urn:zmailAdmin}tzFixupRuleMatch"/>
+ *         &lt;element name="touch" type="{urn:zmailAdmin}simpleElement" minOccurs="0"/>
+ *         &lt;element name="replace" type="{urn:zmailAdmin}tzReplaceInfo" minOccurs="0"/>
  *       &lt;/all>
  *     &lt;/restriction>
  *   &lt;/complexContent>

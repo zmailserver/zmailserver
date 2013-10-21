@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.account.message;
+package org.zmail.soap.account.message;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -27,8 +27,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.soap.type.ShareInfo;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.soap.type.ShareInfo;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name=AccountConstants.E_GET_SHARE_INFO_RESPONSE)

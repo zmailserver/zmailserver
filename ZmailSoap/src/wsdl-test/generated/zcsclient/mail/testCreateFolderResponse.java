@@ -33,9 +33,9 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;choice minOccurs="0">
- *           &lt;element ref="{urn:zimbraMail}folder"/>
- *           &lt;element ref="{urn:zimbraMail}link"/>
- *           &lt;element ref="{urn:zimbraMail}search"/>
+ *           &lt;element ref="{urn:zmailMail}folder"/>
+ *           &lt;element ref="{urn:zmailMail}link"/>
+ *           &lt;element ref="{urn:zmailMail}search"/>
  *         &lt;/choice>
  *       &lt;/sequence>
  *     &lt;/restriction>

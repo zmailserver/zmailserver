@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.type;
+package org.zmail.soap.mail.type;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -27,18 +27,18 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.base.AlarmInfoInterface;
-import com.zimbra.soap.base.CalOrganizerInterface;
-import com.zimbra.soap.base.CalendarAttendeeInterface;
-import com.zimbra.soap.base.DtTimeInfoInterface;
-import com.zimbra.soap.base.DurationInfoInterface;
-import com.zimbra.soap.base.ExceptionRecurIdInfoInterface;
-import com.zimbra.soap.base.GeoInfoInterface;
-import com.zimbra.soap.base.InviteComponentInterface;
-import com.zimbra.soap.base.RecurrenceInfoInterface;
-import com.zimbra.soap.base.XPropInterface;
-import com.zimbra.soap.json.jackson.annotate.ZimbraJsonAttribute;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.base.AlarmInfoInterface;
+import org.zmail.soap.base.CalOrganizerInterface;
+import org.zmail.soap.base.CalendarAttendeeInterface;
+import org.zmail.soap.base.DtTimeInfoInterface;
+import org.zmail.soap.base.DurationInfoInterface;
+import org.zmail.soap.base.ExceptionRecurIdInfoInterface;
+import org.zmail.soap.base.GeoInfoInterface;
+import org.zmail.soap.base.InviteComponentInterface;
+import org.zmail.soap.base.RecurrenceInfoInterface;
+import org.zmail.soap.base.XPropInterface;
+import org.zmail.soap.json.jackson.annotate.ZmailJsonAttribute;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(propOrder = { "categories", "comments", "contacts", "geo",
@@ -101,7 +101,7 @@ implements InviteComponentInterface
      * @zm-api-field-tag invite-comp-fragment
      * @zm-api-field-description First few bytes of the message (probably between 40 and 100 bytes)
      */
-    @ZimbraJsonAttribute
+    @ZmailJsonAttribute
     @XmlElement(name=MailConstants.E_FRAG /* fr */, required=false)
     private String fragment;
 

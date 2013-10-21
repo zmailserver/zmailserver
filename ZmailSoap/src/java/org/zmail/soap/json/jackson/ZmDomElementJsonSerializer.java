@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.json.jackson;
+package org.zmail.soap.json.jackson;
 
 import java.io.IOException;
 import java.util.List;
@@ -34,7 +34,7 @@ import org.w3c.dom.NodeList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
-import com.zimbra.common.soap.Element.JSONElement;
+import org.zmail.common.soap.Element.JSONElement;
 
 public class ZmDomElementJsonSerializer
 extends SerializerBase<Element>
@@ -60,7 +60,7 @@ extends SerializerBase<Element>
             for (int i = 0; i < attributes.getLength(); i++) {
                 Attr attribute = (Attr) attributes.item(i);
                 if ("xmlns".equals(attribute.getName())) {
-                    if (!attribute.getValue().startsWith("urn:zimbra")) {
+                    if (!attribute.getValue().startsWith("urn:zmail")) {
                         jgen.writeStringField(attribute.getName(), attribute.getValue());
                     }
                 } else {
@@ -106,7 +106,7 @@ extends SerializerBase<Element>
         }
 
         if ((namespaceURI != null) && (!namespaceURI.equals(parentNs))) {
-            if (!namespaceURI.startsWith("urn:zimbra")) {
+            if (!namespaceURI.startsWith("urn:zmail")) {
                 jgen.writeStringField(JSONElement.A_NAMESPACE, namespaceURI);
             }
         }

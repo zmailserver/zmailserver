@@ -13,10 +13,10 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.base;
+package org.zmail.soap.base;
 
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.soap.type.SearchFilterCondition;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.soap.type.SearchFilterCondition;
 
 public interface EntrySearchFilterInterface {
     public void setCondition(SearchFilterCondition condition);

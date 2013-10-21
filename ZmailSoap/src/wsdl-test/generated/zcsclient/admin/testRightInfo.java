@@ -35,13 +35,13 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="desc" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="attrs" type="{urn:zimbraAdmin}rightsAttrs" minOccurs="0"/>
- *         &lt;element name="rights" type="{urn:zimbraAdmin}comboRights" minOccurs="0"/>
+ *         &lt;element name="attrs" type="{urn:zmailAdmin}rightsAttrs" minOccurs="0"/>
+ *         &lt;element name="rights" type="{urn:zmailAdmin}comboRights" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="name" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="type" use="required" type="{urn:zimbraAdmin}rightType" />
+ *       &lt;attribute name="type" use="required" type="{urn:zmailAdmin}rightType" />
  *       &lt;attribute name="targetType" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="rightClass" use="required" type="{urn:zimbraAdmin}rightClass" />
+ *       &lt;attribute name="rightClass" use="required" type="{urn:zmailAdmin}rightClass" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>

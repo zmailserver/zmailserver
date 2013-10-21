@@ -32,10 +32,10 @@ import generated.zcsclient.zm.testDistributionListSelector;
  * <pre>
  * &lt;complexType name="distributionListActionRequest">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraAccount}attrsImpl">
+ *     &lt;extension base="{urn:zmailAccount}attrsImpl">
  *       &lt;sequence>
- *         &lt;element name="dl" type="{urn:zimbra}distributionListSelector"/>
- *         &lt;element name="action" type="{urn:zimbraAccount}distributionListAction"/>
+ *         &lt;element name="dl" type="{urn:zmail}distributionListSelector"/>
+ *         &lt;element name="action" type="{urn:zmailAccount}distributionListAction"/>
  *       &lt;/sequence>
  *     &lt;/extension>
  *   &lt;/complexContent>

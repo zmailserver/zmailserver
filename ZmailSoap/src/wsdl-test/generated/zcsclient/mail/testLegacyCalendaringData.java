@@ -33,14 +33,14 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="legacyCalendaringData">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraMail}commonCalendaringData">
+ *     &lt;extension base="{urn:zmailMail}commonCalendaringData">
  *       &lt;sequence>
- *         &lt;element name="or" type="{urn:zimbraMail}calOrganizer" minOccurs="0"/>
+ *         &lt;element name="or" type="{urn:zmailMail}calOrganizer" minOccurs="0"/>
  *         &lt;element name="category" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="geo" type="{urn:zimbraMail}geoInfo" minOccurs="0"/>
+ *         &lt;element name="geo" type="{urn:zmailMail}geoInfo" minOccurs="0"/>
  *         &lt;element name="fr" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="inst" type="{urn:zimbraMail}legacyInstanceDataInfo" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="alarmData" type="{urn:zimbraMail}alarmDataInfo" minOccurs="0"/>
+ *         &lt;element name="inst" type="{urn:zmailMail}legacyInstanceDataInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="alarmData" type="{urn:zmailMail}alarmDataInfo" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/extension>
  *   &lt;/complexContent>

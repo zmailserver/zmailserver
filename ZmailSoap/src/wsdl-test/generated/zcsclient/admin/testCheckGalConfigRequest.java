@@ -30,9 +30,9 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="checkGalConfigRequest">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraAdmin}adminAttrsImpl">
+ *     &lt;extension base="{urn:zmailAdmin}adminAttrsImpl">
  *       &lt;sequence>
- *         &lt;element name="query" type="{urn:zimbraAdmin}limitedQuery" minOccurs="0"/>
+ *         &lt;element name="query" type="{urn:zmailAdmin}limitedQuery" minOccurs="0"/>
  *         &lt;element name="action" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/extension>

@@ -13,11 +13,11 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.account.type;
+package org.zmail.soap.account.type;
 
 import javax.xml.bind.annotation.XmlType;
 
-import com.zimbra.soap.type.CalDataSource;
+import org.zmail.soap.type.CalDataSource;
 
 @XmlType(propOrder = {})
 public class AccountCalDataSource

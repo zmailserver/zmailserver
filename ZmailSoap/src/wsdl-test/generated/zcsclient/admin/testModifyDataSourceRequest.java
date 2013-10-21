@@ -33,9 +33,9 @@ import generated.zcsclient.zm.testId;
  * <pre>
  * &lt;complexType name="modifyDataSourceRequest">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraAdmin}adminAttrsImpl">
+ *     &lt;extension base="{urn:zmailAdmin}adminAttrsImpl">
  *       &lt;sequence>
- *         &lt;element name="dataSource" type="{urn:zimbra}id"/>
+ *         &lt;element name="dataSource" type="{urn:zmail}id"/>
  *       &lt;/sequence>
  *       &lt;attribute name="id" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/extension>

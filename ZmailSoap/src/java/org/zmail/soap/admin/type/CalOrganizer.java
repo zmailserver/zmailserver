@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.type;
+package org.zmail.soap.admin.type;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -27,9 +27,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.base.CalOrganizerInterface;
-import com.zimbra.soap.base.XParamInterface;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.base.CalOrganizerInterface;
+import org.zmail.soap.base.XParamInterface;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class CalOrganizer implements CalOrganizerInterface {

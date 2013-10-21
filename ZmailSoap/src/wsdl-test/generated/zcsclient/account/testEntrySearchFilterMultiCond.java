@@ -38,8 +38,8 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;choice maxOccurs="unbounded" minOccurs="0">
- *           &lt;element name="conds" type="{urn:zimbraAccount}entrySearchFilterMultiCond"/>
- *           &lt;element name="cond" type="{urn:zimbraAccount}entrySearchFilterSingleCond"/>
+ *           &lt;element name="conds" type="{urn:zmailAccount}entrySearchFilterMultiCond"/>
+ *           &lt;element name="cond" type="{urn:zmailAccount}entrySearchFilterSingleCond"/>
  *         &lt;/choice>
  *       &lt;/sequence>
  *       &lt;attribute name="not" type="{http://www.w3.org/2001/XMLSchema}boolean" />

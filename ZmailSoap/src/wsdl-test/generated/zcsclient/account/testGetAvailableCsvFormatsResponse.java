@@ -35,7 +35,7 @@ import generated.zcsclient.zm.testNamedElement;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="csv" type="{urn:zimbra}namedElement" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="csv" type="{urn:zmail}namedElement" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>

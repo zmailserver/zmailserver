@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlValue;
  * &lt;complexType name="ucServiceSelector">
  *   &lt;simpleContent>
  *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
- *       &lt;attribute name="by" type="{urn:zimbraAdmin}ucServiceBy" />
+ *       &lt;attribute name="by" type="{urn:zmailAdmin}ucServiceBy" />
  *     &lt;/extension>
  *   &lt;/simpleContent>
  * &lt;/complexType>

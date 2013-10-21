@@ -34,7 +34,7 @@ import generated.zcsclient.zm.testAutoProvPrincipalBy;
  * &lt;complexType name="principalSelector">
  *   &lt;simpleContent>
  *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
- *       &lt;attribute name="by" use="required" type="{urn:zimbra}autoProvPrincipalBy" />
+ *       &lt;attribute name="by" use="required" type="{urn:zmail}autoProvPrincipalBy" />
  *     &lt;/extension>
  *   &lt;/simpleContent>
  * &lt;/complexType>

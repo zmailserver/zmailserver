@@ -33,7 +33,7 @@ import generated.zcsclient.zm.testNamedElement;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="provider" type="{urn:zimbra}namedElement" minOccurs="0"/>
+ *         &lt;element name="provider" type="{urn:zmail}namedElement" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>

@@ -40,24 +40,24 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _BringDownServiceIPResponse_QNAME = new QName("urn:zimbraRepl", "BringDownServiceIPResponse");
-    private final static QName _StartFailoverClientResponse_QNAME = new QName("urn:zimbraRepl", "StartFailoverClientResponse");
-    private final static QName _BringUpServiceIPResponse_QNAME = new QName("urn:zimbraRepl", "BringUpServiceIPResponse");
-    private final static QName _StopFailoverClientRequest_QNAME = new QName("urn:zimbraRepl", "StopFailoverClientRequest");
-    private final static QName _BecomeMasterResponse_QNAME = new QName("urn:zimbraRepl", "BecomeMasterResponse");
-    private final static QName _StopFailoverDaemonRequest_QNAME = new QName("urn:zimbraRepl", "StopFailoverDaemonRequest");
-    private final static QName _StartFailoverDaemonRequest_QNAME = new QName("urn:zimbraRepl", "StartFailoverDaemonRequest");
-    private final static QName _BringDownServiceIPRequest_QNAME = new QName("urn:zimbraRepl", "BringDownServiceIPRequest");
-    private final static QName _ReplicationStatusResponse_QNAME = new QName("urn:zimbraRepl", "ReplicationStatusResponse");
-    private final static QName _BecomeMasterRequest_QNAME = new QName("urn:zimbraRepl", "BecomeMasterRequest");
-    private final static QName _StartCatchupRequest_QNAME = new QName("urn:zimbraRepl", "StartCatchupRequest");
-    private final static QName _StartFailoverDaemonResponse_QNAME = new QName("urn:zimbraRepl", "StartFailoverDaemonResponse");
-    private final static QName _ReplicationStatusRequest_QNAME = new QName("urn:zimbraRepl", "ReplicationStatusRequest");
-    private final static QName _StartCatchupResponse_QNAME = new QName("urn:zimbraRepl", "StartCatchupResponse");
-    private final static QName _StopFailoverClientResponse_QNAME = new QName("urn:zimbraRepl", "StopFailoverClientResponse");
-    private final static QName _StartFailoverClientRequest_QNAME = new QName("urn:zimbraRepl", "StartFailoverClientRequest");
-    private final static QName _BringUpServiceIPRequest_QNAME = new QName("urn:zimbraRepl", "BringUpServiceIPRequest");
-    private final static QName _StopFailoverDaemonResponse_QNAME = new QName("urn:zimbraRepl", "StopFailoverDaemonResponse");
+    private final static QName _BringDownServiceIPResponse_QNAME = new QName("urn:zmailRepl", "BringDownServiceIPResponse");
+    private final static QName _StartFailoverClientResponse_QNAME = new QName("urn:zmailRepl", "StartFailoverClientResponse");
+    private final static QName _BringUpServiceIPResponse_QNAME = new QName("urn:zmailRepl", "BringUpServiceIPResponse");
+    private final static QName _StopFailoverClientRequest_QNAME = new QName("urn:zmailRepl", "StopFailoverClientRequest");
+    private final static QName _BecomeMasterResponse_QNAME = new QName("urn:zmailRepl", "BecomeMasterResponse");
+    private final static QName _StopFailoverDaemonRequest_QNAME = new QName("urn:zmailRepl", "StopFailoverDaemonRequest");
+    private final static QName _StartFailoverDaemonRequest_QNAME = new QName("urn:zmailRepl", "StartFailoverDaemonRequest");
+    private final static QName _BringDownServiceIPRequest_QNAME = new QName("urn:zmailRepl", "BringDownServiceIPRequest");
+    private final static QName _ReplicationStatusResponse_QNAME = new QName("urn:zmailRepl", "ReplicationStatusResponse");
+    private final static QName _BecomeMasterRequest_QNAME = new QName("urn:zmailRepl", "BecomeMasterRequest");
+    private final static QName _StartCatchupRequest_QNAME = new QName("urn:zmailRepl", "StartCatchupRequest");
+    private final static QName _StartFailoverDaemonResponse_QNAME = new QName("urn:zmailRepl", "StartFailoverDaemonResponse");
+    private final static QName _ReplicationStatusRequest_QNAME = new QName("urn:zmailRepl", "ReplicationStatusRequest");
+    private final static QName _StartCatchupResponse_QNAME = new QName("urn:zmailRepl", "StartCatchupResponse");
+    private final static QName _StopFailoverClientResponse_QNAME = new QName("urn:zmailRepl", "StopFailoverClientResponse");
+    private final static QName _StartFailoverClientRequest_QNAME = new QName("urn:zmailRepl", "StartFailoverClientRequest");
+    private final static QName _BringUpServiceIPRequest_QNAME = new QName("urn:zmailRepl", "BringUpServiceIPRequest");
+    private final static QName _StopFailoverDaemonResponse_QNAME = new QName("urn:zmailRepl", "StopFailoverDaemonResponse");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: generated.zcsclient.replication
@@ -246,7 +246,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testBringDownServiceIPResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraRepl", name = "BringDownServiceIPResponse")
+    @XmlElementDecl(namespace = "urn:zmailRepl", name = "BringDownServiceIPResponse")
     public JAXBElement<testBringDownServiceIPResponse> createBringDownServiceIPResponse(testBringDownServiceIPResponse value) {
         return new JAXBElement<testBringDownServiceIPResponse>(_BringDownServiceIPResponse_QNAME, testBringDownServiceIPResponse.class, null, value);
     }
@@ -255,7 +255,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testStartFailoverClientResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraRepl", name = "StartFailoverClientResponse")
+    @XmlElementDecl(namespace = "urn:zmailRepl", name = "StartFailoverClientResponse")
     public JAXBElement<testStartFailoverClientResponse> createStartFailoverClientResponse(testStartFailoverClientResponse value) {
         return new JAXBElement<testStartFailoverClientResponse>(_StartFailoverClientResponse_QNAME, testStartFailoverClientResponse.class, null, value);
     }
@@ -264,7 +264,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testBringUpServiceIPResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraRepl", name = "BringUpServiceIPResponse")
+    @XmlElementDecl(namespace = "urn:zmailRepl", name = "BringUpServiceIPResponse")
     public JAXBElement<testBringUpServiceIPResponse> createBringUpServiceIPResponse(testBringUpServiceIPResponse value) {
         return new JAXBElement<testBringUpServiceIPResponse>(_BringUpServiceIPResponse_QNAME, testBringUpServiceIPResponse.class, null, value);
     }
@@ -273,7 +273,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testStopFailoverClientRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraRepl", name = "StopFailoverClientRequest")
+    @XmlElementDecl(namespace = "urn:zmailRepl", name = "StopFailoverClientRequest")
     public JAXBElement<testStopFailoverClientRequest> createStopFailoverClientRequest(testStopFailoverClientRequest value) {
         return new JAXBElement<testStopFailoverClientRequest>(_StopFailoverClientRequest_QNAME, testStopFailoverClientRequest.class, null, value);
     }
@@ -282,7 +282,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testBecomeMasterResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraRepl", name = "BecomeMasterResponse")
+    @XmlElementDecl(namespace = "urn:zmailRepl", name = "BecomeMasterResponse")
     public JAXBElement<testBecomeMasterResponse> createBecomeMasterResponse(testBecomeMasterResponse value) {
         return new JAXBElement<testBecomeMasterResponse>(_BecomeMasterResponse_QNAME, testBecomeMasterResponse.class, null, value);
     }
@@ -291,7 +291,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testStopFailoverDaemonRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraRepl", name = "StopFailoverDaemonRequest")
+    @XmlElementDecl(namespace = "urn:zmailRepl", name = "StopFailoverDaemonRequest")
     public JAXBElement<testStopFailoverDaemonRequest> createStopFailoverDaemonRequest(testStopFailoverDaemonRequest value) {
         return new JAXBElement<testStopFailoverDaemonRequest>(_StopFailoverDaemonRequest_QNAME, testStopFailoverDaemonRequest.class, null, value);
     }
@@ -300,7 +300,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testStartFailoverDaemonRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraRepl", name = "StartFailoverDaemonRequest")
+    @XmlElementDecl(namespace = "urn:zmailRepl", name = "StartFailoverDaemonRequest")
     public JAXBElement<testStartFailoverDaemonRequest> createStartFailoverDaemonRequest(testStartFailoverDaemonRequest value) {
         return new JAXBElement<testStartFailoverDaemonRequest>(_StartFailoverDaemonRequest_QNAME, testStartFailoverDaemonRequest.class, null, value);
     }
@@ -309,7 +309,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testBringDownServiceIPRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraRepl", name = "BringDownServiceIPRequest")
+    @XmlElementDecl(namespace = "urn:zmailRepl", name = "BringDownServiceIPRequest")
     public JAXBElement<testBringDownServiceIPRequest> createBringDownServiceIPRequest(testBringDownServiceIPRequest value) {
         return new JAXBElement<testBringDownServiceIPRequest>(_BringDownServiceIPRequest_QNAME, testBringDownServiceIPRequest.class, null, value);
     }
@@ -318,7 +318,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testReplicationStatusResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraRepl", name = "ReplicationStatusResponse")
+    @XmlElementDecl(namespace = "urn:zmailRepl", name = "ReplicationStatusResponse")
     public JAXBElement<testReplicationStatusResponse> createReplicationStatusResponse(testReplicationStatusResponse value) {
         return new JAXBElement<testReplicationStatusResponse>(_ReplicationStatusResponse_QNAME, testReplicationStatusResponse.class, null, value);
     }
@@ -327,7 +327,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testBecomeMasterRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraRepl", name = "BecomeMasterRequest")
+    @XmlElementDecl(namespace = "urn:zmailRepl", name = "BecomeMasterRequest")
     public JAXBElement<testBecomeMasterRequest> createBecomeMasterRequest(testBecomeMasterRequest value) {
         return new JAXBElement<testBecomeMasterRequest>(_BecomeMasterRequest_QNAME, testBecomeMasterRequest.class, null, value);
     }
@@ -336,7 +336,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testStartCatchupRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraRepl", name = "StartCatchupRequest")
+    @XmlElementDecl(namespace = "urn:zmailRepl", name = "StartCatchupRequest")
     public JAXBElement<testStartCatchupRequest> createStartCatchupRequest(testStartCatchupRequest value) {
         return new JAXBElement<testStartCatchupRequest>(_StartCatchupRequest_QNAME, testStartCatchupRequest.class, null, value);
     }
@@ -345,7 +345,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testStartFailoverDaemonResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraRepl", name = "StartFailoverDaemonResponse")
+    @XmlElementDecl(namespace = "urn:zmailRepl", name = "StartFailoverDaemonResponse")
     public JAXBElement<testStartFailoverDaemonResponse> createStartFailoverDaemonResponse(testStartFailoverDaemonResponse value) {
         return new JAXBElement<testStartFailoverDaemonResponse>(_StartFailoverDaemonResponse_QNAME, testStartFailoverDaemonResponse.class, null, value);
     }
@@ -354,7 +354,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testReplicationStatusRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraRepl", name = "ReplicationStatusRequest")
+    @XmlElementDecl(namespace = "urn:zmailRepl", name = "ReplicationStatusRequest")
     public JAXBElement<testReplicationStatusRequest> createReplicationStatusRequest(testReplicationStatusRequest value) {
         return new JAXBElement<testReplicationStatusRequest>(_ReplicationStatusRequest_QNAME, testReplicationStatusRequest.class, null, value);
     }
@@ -363,7 +363,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testStartCatchupResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraRepl", name = "StartCatchupResponse")
+    @XmlElementDecl(namespace = "urn:zmailRepl", name = "StartCatchupResponse")
     public JAXBElement<testStartCatchupResponse> createStartCatchupResponse(testStartCatchupResponse value) {
         return new JAXBElement<testStartCatchupResponse>(_StartCatchupResponse_QNAME, testStartCatchupResponse.class, null, value);
     }
@@ -372,7 +372,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testStopFailoverClientResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraRepl", name = "StopFailoverClientResponse")
+    @XmlElementDecl(namespace = "urn:zmailRepl", name = "StopFailoverClientResponse")
     public JAXBElement<testStopFailoverClientResponse> createStopFailoverClientResponse(testStopFailoverClientResponse value) {
         return new JAXBElement<testStopFailoverClientResponse>(_StopFailoverClientResponse_QNAME, testStopFailoverClientResponse.class, null, value);
     }
@@ -381,7 +381,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testStartFailoverClientRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraRepl", name = "StartFailoverClientRequest")
+    @XmlElementDecl(namespace = "urn:zmailRepl", name = "StartFailoverClientRequest")
     public JAXBElement<testStartFailoverClientRequest> createStartFailoverClientRequest(testStartFailoverClientRequest value) {
         return new JAXBElement<testStartFailoverClientRequest>(_StartFailoverClientRequest_QNAME, testStartFailoverClientRequest.class, null, value);
     }
@@ -390,7 +390,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testBringUpServiceIPRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraRepl", name = "BringUpServiceIPRequest")
+    @XmlElementDecl(namespace = "urn:zmailRepl", name = "BringUpServiceIPRequest")
     public JAXBElement<testBringUpServiceIPRequest> createBringUpServiceIPRequest(testBringUpServiceIPRequest value) {
         return new JAXBElement<testBringUpServiceIPRequest>(_BringUpServiceIPRequest_QNAME, testBringUpServiceIPRequest.class, null, value);
     }
@@ -399,7 +399,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testStopFailoverDaemonResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraRepl", name = "StopFailoverDaemonResponse")
+    @XmlElementDecl(namespace = "urn:zmailRepl", name = "StopFailoverDaemonResponse")
     public JAXBElement<testStopFailoverDaemonResponse> createStopFailoverDaemonResponse(testStopFailoverDaemonResponse value) {
         return new JAXBElement<testStopFailoverDaemonResponse>(_StopFailoverDaemonResponse_QNAME, testStopFailoverDaemonResponse.class, null, value);
     }

@@ -12,13 +12,13 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.account;
+package org.zmail.soap.account;
 import com.sun.xml.ws.developer.WSBindingProvider;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.soap.Utility;
+import org.zmail.soap.Utility;
 import generated.zcsclient.account.testEndSessionRequest;
 import generated.zcsclient.account.testEndSessionResponse;
 import generated.zcsclient.ws.service.ZcsPortType;

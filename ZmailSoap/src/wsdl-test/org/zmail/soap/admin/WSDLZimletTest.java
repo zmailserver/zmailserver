@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.admin;
+package org.zmail.soap.admin;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ import generated.zcsclient.admin.testGetAdminExtensionZimletsResponse.Zimlets;
 import generated.zcsclient.ws.service.ZcsAdminPortType;
 import generated.zcsclient.zm.testNamedElement;
 
-import com.zimbra.soap.Utility;
+import org.zmail.soap.Utility;
 
 import org.junit.Assert;
 import org.junit.After;
@@ -100,7 +100,7 @@ public class WSDLZimletTest {
         Utility.addSoapAdminAuthHeader((WSBindingProvider)eif);
         testGetZimletRequest req = new testGetZimletRequest();
         testNamedElement ne = new testNamedElement();
-        ne.setName("com_zimbra_url");
+        ne.setName("org_zmail_url");
         req.setZimlet(ne);
         testGetZimletResponse resp = eif.getZimletRequest(req);
         Assert.assertNotNull("GetZimletResponse object", resp);
@@ -137,8 +137,8 @@ public class WSDLZimletTest {
                     zimlet.getPriority() >= 0);
             Assert.assertEquals(zTag + " status", testZimletStatusSetting.ENABLED,
                     zimlet.getStatus());
-            // ZimbraServer deployed zimlets happen to have false for all
-            // zimlets but ZimbraNetwork has some extensions.
+            // ZmailServer deployed zimlets happen to have false for all
+            // zimlets but ZmailNetwork has some extensions.
             // Changed test to just be for existence of "isExtension" method.
             zimlet.isExtension();
         }
@@ -165,8 +165,8 @@ public class WSDLZimletTest {
         }
     }
 
-    //  ZimbraNetwork's "ant dev-deploy-all" installs some Admin extensions
-    //  (ZimbraServer does not)
+    //  ZmailNetwork's "ant dev-deploy-all" installs some Admin extensions
+    //  (ZmailServer does not)
     @Test
     public void getAdminExtensionZimletsTest() throws Exception {
         ZcsAdminPortType nvEif = Utility.getNonValidatingAdminSvcEIF();

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.type;
+package org.zmail.soap.mail.type;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -29,12 +29,12 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlType;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.base.EmailInfoInterface;
-import com.zimbra.soap.base.InviteInfoInterface;
-import com.zimbra.soap.base.MessageInfoInterface;
-import com.zimbra.soap.type.KeyValuePair;
-import com.zimbra.soap.json.jackson.annotate.ZimbraJsonAttribute;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.base.EmailInfoInterface;
+import org.zmail.soap.base.InviteInfoInterface;
+import org.zmail.soap.base.MessageInfoInterface;
+import org.zmail.soap.type.KeyValuePair;
+import org.zmail.soap.json.jackson.annotate.ZmailJsonAttribute;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(propOrder = { "fragment", "emails", "subject",
@@ -51,8 +51,8 @@ implements MessageInfoInterface {
     private String id;
 
     /**
-     * @zm-api-field-tag X-Zimbra-Calendar-Intended-For
-     * @zm-api-field-description X-Zimbra-Calendar-Intended-For header
+     * @zm-api-field-tag X-Zmail-Calendar-Intended-For
+     * @zm-api-field-description X-Zmail-Calendar-Intended-For header
      */
     @XmlAttribute(name=MailConstants.A_CAL_INTENDED_FOR /* cif */, required=false)
     private String calendarIntendedFor;
@@ -118,7 +118,7 @@ implements MessageInfoInterface {
      * @zm-api-field-tag msg-fragment
      * @zm-api-field-description First few bytes of the message (probably between 40 and 100 bytes)
      */
-    @ZimbraJsonAttribute
+    @ZmailJsonAttribute
     @XmlElement(name=MailConstants.E_FRAG /* fr */, required=false)
     private String fragment;
 
@@ -132,7 +132,7 @@ implements MessageInfoInterface {
      * @zm-api-field-tag msg-subject
      * @zm-api-field-description Subject
      */
-    @ZimbraJsonAttribute
+    @ZmailJsonAttribute
     @XmlElement(name=MailConstants.E_SUBJECT /* su */, required=false)
     private String subject;
 
@@ -140,7 +140,7 @@ implements MessageInfoInterface {
      * @zm-api-field-tag message-id
      * @zm-api-field-description Message ID
      */
-    @ZimbraJsonAttribute
+    @ZmailJsonAttribute
     @XmlElement(name=MailConstants.E_MSG_ID_HDR /* mid */, required=false)
     private String messageIdHeader;
 
@@ -148,7 +148,7 @@ implements MessageInfoInterface {
      * @zm-api-field-tag in-reply-to-msg-id
      * @zm-api-field-description Message-ID header for message being replied to
      */
-    @ZimbraJsonAttribute
+    @ZmailJsonAttribute
     @XmlElement(name=MailConstants.E_IN_REPLY_TO /* irt */, required=false)
     private String inReplyTo;
 

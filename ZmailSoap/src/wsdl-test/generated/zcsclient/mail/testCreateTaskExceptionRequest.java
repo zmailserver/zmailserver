@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="createTaskExceptionRequest">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraMail}createAppointmentExceptionRequest">
+ *     &lt;extension base="{urn:zmailMail}createAppointmentExceptionRequest">
  *       &lt;sequence>
  *       &lt;/sequence>
  *     &lt;/extension>

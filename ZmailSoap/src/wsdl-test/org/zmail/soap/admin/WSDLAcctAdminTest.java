@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.admin;
+package org.zmail.soap.admin;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ import generated.zcsclient.admin.*;
 import generated.zcsclient.ws.service.ZcsAdminPortType;
 import generated.zcsclient.zm.*;
 
-import com.zimbra.soap.Utility;
+import org.zmail.soap.Utility;
 
 import org.junit.Assert;
 import org.junit.After;
@@ -91,7 +91,7 @@ public class WSDLAcctAdminTest {
         acct.setBy(testAccountBy.NAME);
         acct.setValue("user1");
         req.setAccount(acct);
-        req.setAttrs("zimbraForeignPrincipal");
+        req.setAttrs("zmailForeignPrincipal");
         Utility.addSoapAdminAuthHeader((WSBindingProvider)eif);
         testGetAccountResponse resp = eif.getAccountRequest(req);
         Assert.assertNotNull("GetAccountResponse object", resp);
@@ -106,7 +106,7 @@ public class WSDLAcctAdminTest {
         len = attrs.size();
         Assert.assertTrue("<account> has " + len +
                 " <a> children - should have only 1", len == 1);
-        Assert.assertEquals("'n' attribute of <a> -", "zimbraForeignPrincipal",
+        Assert.assertEquals("'n' attribute of <a> -", "zmailForeignPrincipal",
                 attrs.get(0).getN());
     }
 
@@ -286,7 +286,7 @@ public class WSDLAcctAdminTest {
         accountSel.setBy(testAccountBy.ID);
         accountSel.setValue(testAccountId);
         getReq.setAccount(accountSel);
-        getReq.setAttrs("zimbraMailStatus,zimbraMailHost");
+        getReq.setAttrs("zmailMailStatus,zmailMailHost");
         testGetAccountResponse getResp = eif.getAccountRequest(getReq);
         Assert.assertNotNull(getResp);
         testAccountInfo accountInfo = getResp.getAccount();
@@ -346,7 +346,7 @@ public class WSDLAcctAdminTest {
         testModifyAccountRequest modReq = new testModifyAccountRequest();
         modReq.setId(testAccountId);
         testAttr modAttr = new testAttr();
-        modAttr.setN("zimbraCOSId");
+        modAttr.setN("zmailCOSId");
         modAttr.setValue(testCosId);
         modReq.getA().add(modAttr);
         testModifyAccountResponse modResp = eif.modifyAccountRequest(modReq);
@@ -488,14 +488,14 @@ public class WSDLAcctAdminTest {
     @Test
     public void addAccountLoggerTest() throws Exception {
         String testAccountId = Utility.ensureMailboxExistsForAccount(testAcct);
-        addAcctLogger(testAccountId, "zimbra.account", testLoggingLevel.INFO);
-        addAcctLogger(testAccountId, "zimbra.lmtp", testLoggingLevel.INFO);
+        addAcctLogger(testAccountId, "zmail.account", testLoggingLevel.INFO);
+        addAcctLogger(testAccountId, "zmail.lmtp", testLoggingLevel.INFO);
     }
 
     @Test
     public void getAllAccountLoggersTest() throws Exception {
         String testAccountId = Utility.ensureMailboxExistsForAccount(testAcct);
-        addAcctLogger(testAccountId, "zimbra.ldap", testLoggingLevel.ERROR);
+        addAcctLogger(testAccountId, "zmail.ldap", testLoggingLevel.ERROR);
         Utility.addSoapAdminAuthHeader((WSBindingProvider)eif);
         testGetAllAccountLoggersRequest req = new testGetAllAccountLoggersRequest();
         testGetAllAccountLoggersResponse resp = eif.getAllAccountLoggersRequest(req);
@@ -516,7 +516,7 @@ public class WSDLAcctAdminTest {
     @Test
     public void getAccountLoggersTest() throws Exception {
         String testAccountId = Utility.ensureMailboxExistsForAccount(testAcct);
-        addAcctLogger(testAccountId, "zimbra.xsync", testLoggingLevel.DEBUG);
+        addAcctLogger(testAccountId, "zmail.xsync", testLoggingLevel.DEBUG);
         Utility.addSoapAdminAuthHeader((WSBindingProvider)eif);
         testGetAccountLoggersRequest req = new testGetAccountLoggersRequest();
         testAccountSelector acct = new testAccountSelector();
@@ -538,21 +538,21 @@ public class WSDLAcctAdminTest {
     @Test
     public void removeAccountLoggerTest() throws Exception {
         String testAccountId = Utility.ensureMailboxExistsForAccount(testAcct);
-        addAcctLogger(testAccountId, "zimbra.misc", testLoggingLevel.INFO);
-        addAcctLogger(testAccountId, "zimbra.im", testLoggingLevel.INFO);
-        removeAcctLogger(testAccountId, "zimbra.im");
+        addAcctLogger(testAccountId, "zmail.misc", testLoggingLevel.INFO);
+        addAcctLogger(testAccountId, "zmail.im", testLoggingLevel.INFO);
+        removeAcctLogger(testAccountId, "zmail.im");
         removeAcctLogger(testAccountId, null);
         // Adding an AccountLogger with a null account is disallowed,
         // so, how would such a logger get created?  No exception thrown
         // for this though and ok response received... 
-        removeAcctLogger(null, "zimbra.tnef");
+        removeAcctLogger(null, "zmail.tnef");
     }
 
     @Test
     public void getAccountLoggersByIdTest() throws Exception {
         Utility.addSoapAdminAuthHeader((WSBindingProvider)eif);
         String testAccountId = Utility.ensureMailboxExistsForAccount(testAcct);
-        addAcctLogger(testAccountId, "zimbra.misc", testLoggingLevel.DEBUG);
+        addAcctLogger(testAccountId, "zmail.misc", testLoggingLevel.DEBUG);
         testGetAccountLoggersRequest req = new testGetAccountLoggersRequest();
         req.setId(testAccountId);
         testGetAccountLoggersResponse resp = eif.getAccountLoggersRequest(req);

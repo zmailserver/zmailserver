@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.doc.soap;
+package org.zmail.doc.soap;
 
 public class ZmApiTags {
 
@@ -30,12 +30,12 @@ public class ZmApiTags {
      */
     public static final String TAG_COMMAND_NETWORK_ONLY = "@zm-api-command-network-edition";
     /**
-     * Information on whether standard Zimbra Authorization is required - true|false|maybe
+     * Information on whether standard Zmail Authorization is required - true|false|maybe
      * If the first token is "maybe", the rest explains why
      */
     public static final String TAG_COMMAND_AUTH_REQUIRED = "@zm-api-command-auth-required";
     /**
-     * Information on whether Zimbra Administration Authorization is required - true|false|maybe
+     * Information on whether Zmail Administration Authorization is required - true|false|maybe
      * If the first token is "maybe", the rest explains why
      */
     public static final String TAG_COMMAND_ADMIN_AUTH_REQUIRED = "@zm-api-command-admin-auth-required";

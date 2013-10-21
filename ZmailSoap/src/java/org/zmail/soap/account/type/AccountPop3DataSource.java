@@ -13,14 +13,14 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.account.type;
+package org.zmail.soap.account.type;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.type.Pop3DataSource;
-import com.zimbra.soap.type.ZmBoolean;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.type.Pop3DataSource;
+import org.zmail.soap.type.ZmBoolean;
 
 @XmlType(propOrder = {})
 public class AccountPop3DataSource

@@ -40,7 +40,7 @@ import generated.zcsclient.zm.testOpValue;
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence>
- *                   &lt;element name="addr" type="{urn:zimbra}opValue" maxOccurs="unbounded" minOccurs="0"/>
+ *                   &lt;element name="addr" type="{urn:zmail}opValue" maxOccurs="unbounded" minOccurs="0"/>
  *                 &lt;/sequence>
  *               &lt;/restriction>
  *             &lt;/complexContent>
@@ -51,7 +51,7 @@ import generated.zcsclient.zm.testOpValue;
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence>
- *                   &lt;element name="addr" type="{urn:zimbra}opValue" maxOccurs="unbounded" minOccurs="0"/>
+ *                   &lt;element name="addr" type="{urn:zmail}opValue" maxOccurs="unbounded" minOccurs="0"/>
  *                 &lt;/sequence>
  *               &lt;/restriction>
  *             &lt;/complexContent>
@@ -134,7 +134,7 @@ public class testModifyWhiteBlackListRequest {
      *   &lt;complexContent>
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
-     *         &lt;element name="addr" type="{urn:zimbra}opValue" maxOccurs="unbounded" minOccurs="0"/>
+     *         &lt;element name="addr" type="{urn:zmail}opValue" maxOccurs="unbounded" minOccurs="0"/>
      *       &lt;/sequence>
      *     &lt;/restriction>
      *   &lt;/complexContent>
@@ -193,7 +193,7 @@ public class testModifyWhiteBlackListRequest {
      *   &lt;complexContent>
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
-     *         &lt;element name="addr" type="{urn:zimbra}opValue" maxOccurs="unbounded" minOccurs="0"/>
+     *         &lt;element name="addr" type="{urn:zmail}opValue" maxOccurs="unbounded" minOccurs="0"/>
      *       &lt;/sequence>
      *     &lt;/restriction>
      *   &lt;/complexContent>

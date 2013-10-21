@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap;
+package org.zmail.soap;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -116,8 +116,8 @@ public class Utility {
                 String authToken)
     throws Exception {
         // Note that am not using JAXB generated HeaderContext here
-        JAXBRIContext jaxb = (JAXBRIContext) JAXBRIContext.newInstance(com.zimbra.soap.header.HeaderContext.class);
-        com.zimbra.soap.header.HeaderContext hdrCtx = new com.zimbra.soap.header.HeaderContext();
+        JAXBRIContext jaxb = (JAXBRIContext) JAXBRIContext.newInstance(org.zmail.soap.header.HeaderContext.class);
+        org.zmail.soap.header.HeaderContext hdrCtx = new org.zmail.soap.header.HeaderContext();
         hdrCtx.setAuthToken(authToken);
         Header soapHdr = Headers.create(jaxb,hdrCtx);
         List <Header> soapHdrs = new ArrayList <Header>();
@@ -227,8 +227,8 @@ public class Utility {
     public static void addSoapAdminAuthHeader(WSBindingProvider bp) throws Exception {
         Utility.getAdminServiceAuthToken();
         // Note that am not using JAXB generated HeaderContext here
-        JAXBRIContext jaxb = (JAXBRIContext) JAXBRIContext.newInstance(com.zimbra.soap.header.HeaderContext.class);
-        com.zimbra.soap.header.HeaderContext hdrCtx = new com.zimbra.soap.header.HeaderContext();
+        JAXBRIContext jaxb = (JAXBRIContext) JAXBRIContext.newInstance(org.zmail.soap.header.HeaderContext.class);
+        org.zmail.soap.header.HeaderContext hdrCtx = new org.zmail.soap.header.HeaderContext();
         hdrCtx.setAuthToken(adminAuthToken);
         Header soapHdr = Headers.create(jaxb,hdrCtx);
         List <Header> soapHdrs = new ArrayList <Header>();
@@ -564,8 +564,8 @@ public class Utility {
             createAcctReq.setName(calResourceName);
             createAcctReq.setPassword(DEFAULT_PASS);
             createAcctReq.getA().add(Utility.mkAttr("displayName", displayName));
-            createAcctReq.getA().add(Utility.mkAttr("zimbraCalResType", "Location"));
-            createAcctReq.getA().add(Utility.mkAttr("zimbraCalResLocationDisplayName", "Harare"));
+            createAcctReq.getA().add(Utility.mkAttr("zmailCalResType", "Location"));
+            createAcctReq.getA().add(Utility.mkAttr("zmailCalResLocationDisplayName", "Harare"));
             Utility.addSoapAdminAuthHeader((WSBindingProvider)adminSvcEIF);
             testCreateCalendarResourceResponse resp = adminSvcEIF.createCalendarResourceRequest(createAcctReq);
             Assert.assertNotNull(resp);

@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="action" type="{urn:zimbraMail}rankingActionSpec"/>
+ *         &lt;element name="action" type="{urn:zmailMail}rankingActionSpec"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>

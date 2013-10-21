@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="unknownDataSourceNameOrId">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraMail}dataSourceNameOrId">
+ *     &lt;extension base="{urn:zmailMail}dataSourceNameOrId">
  *       &lt;sequence>
  *       &lt;/sequence>
  *     &lt;/extension>

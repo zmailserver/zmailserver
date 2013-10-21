@@ -31,10 +31,10 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="voiceMailItem">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraVoice}voiceCallItem">
+ *     &lt;extension base="{urn:zmailVoice}voiceCallItem">
  *       &lt;sequence>
- *         &lt;element name="cp" type="{urn:zimbraVoice}voiceMailCallParty" minOccurs="0"/>
- *         &lt;element name="content" type="{urn:zimbraVoice}voiceMailContent" minOccurs="0"/>
+ *         &lt;element name="cp" type="{urn:zmailVoice}voiceMailCallParty" minOccurs="0"/>
+ *         &lt;element name="content" type="{urn:zmailVoice}voiceMailContent" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="id" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="f" type="{http://www.w3.org/2001/XMLSchema}string" />

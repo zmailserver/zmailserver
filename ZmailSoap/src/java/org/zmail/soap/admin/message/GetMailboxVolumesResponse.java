@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import com.google.common.base.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -22,8 +22,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.zimbra.common.soap.BackupConstants;
-import com.zimbra.soap.admin.type.MailboxVolumesInfo;
+import org.zmail.common.soap.BackupConstants;
+import org.zmail.soap.admin.type.MailboxVolumesInfo;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name=BackupConstants.E_GET_MAILBOX_VOLUMES_RESPONSE)

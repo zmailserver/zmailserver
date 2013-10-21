@@ -38,11 +38,11 @@ import generated.zcsclient.zm.testId;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;choice maxOccurs="unbounded" minOccurs="0">
- *           &lt;element name="any" type="{urn:zimbraAdmin}simpleElement"/>
- *           &lt;element name="tzid" type="{urn:zimbra}id"/>
- *           &lt;element name="nonDst" type="{urn:zimbraAdmin}offset"/>
- *           &lt;element name="rules" type="{urn:zimbraAdmin}tzFixupRuleMatchRules"/>
- *           &lt;element name="dates" type="{urn:zimbraAdmin}tzFixupRuleMatchDates"/>
+ *           &lt;element name="any" type="{urn:zmailAdmin}simpleElement"/>
+ *           &lt;element name="tzid" type="{urn:zmail}id"/>
+ *           &lt;element name="nonDst" type="{urn:zmailAdmin}offset"/>
+ *           &lt;element name="rules" type="{urn:zmailAdmin}tzFixupRuleMatchRules"/>
+ *           &lt;element name="dates" type="{urn:zmailAdmin}tzFixupRuleMatchDates"/>
  *         &lt;/choice>
  *       &lt;/sequence>
  *     &lt;/restriction>

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.type;
+package org.zmail.soap.admin.type;
 
 import java.util.Arrays;
 
@@ -22,9 +22,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlEnum;
 
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
-import com.zimbra.common.soap.AdminConstants;
+import org.zmail.common.soap.AdminConstants;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class ExchangeAuthSpec {

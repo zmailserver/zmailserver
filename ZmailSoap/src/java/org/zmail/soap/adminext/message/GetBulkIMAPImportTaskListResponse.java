@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.adminext.message;
+package org.zmail.soap.adminext.message;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -27,8 +27,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.AdminExtConstants;
-import com.zimbra.soap.adminext.type.BulkIMAPImportTaskInfo;
+import org.zmail.common.soap.AdminExtConstants;
+import org.zmail.soap.adminext.type.BulkIMAPImportTaskInfo;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name=AdminExtConstants.E_GET_BULK_IMAP_IMPORT_TASKLIST_RESPONSE)

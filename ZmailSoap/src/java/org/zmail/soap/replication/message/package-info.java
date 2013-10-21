@@ -15,14 +15,14 @@
 
 @XmlSchema(
     xmlns = {
-        @XmlNs(prefix="repl", namespaceURI = "urn:zimbraRepl")
+        @XmlNs(prefix="repl", namespaceURI = "urn:zmailRepl")
     },
-    namespace = "urn:zimbraRepl",
+    namespace = "urn:zmailRepl",
     elementFormDefault = XmlNsForm.QUALIFIED
 )
 @XmlAccessorType(XmlAccessType.NONE)
 
-package com.zimbra.soap.replication.message;
+package org.zmail.soap.replication.message;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

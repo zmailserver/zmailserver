@@ -13,17 +13,17 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import java.util.Collection;
 import java.util.Map;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.soap.admin.type.Attr;
-import com.zimbra.soap.admin.type.AdminAttrsImpl;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.soap.admin.type.Attr;
+import org.zmail.soap.admin.type.AdminAttrsImpl;
 
 /**
  * @zm-api-command-auth-required true
@@ -34,7 +34,7 @@ import com.zimbra.soap.admin.type.AdminAttrsImpl;
  * <ul>
  * <li> accounts without passwords can't be logged into
  * <li> name must include domain (uid@name), and domain specified in name must exist
- * <li> default value for <b>zimbraAccountStatus</b> is "active"
+ * <li> default value for <b>zmailAccountStatus</b> is "active"
  * </ul>
  * <b>Access</b>: domain admin sufficient
  */

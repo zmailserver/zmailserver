@@ -36,19 +36,19 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="inv" type="{urn:zimbraMail}invitation" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="inv" type="{urn:zmailMail}invitation" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="replies" minOccurs="0">
  *           &lt;complexType>
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence>
- *                   &lt;element name="reply" type="{urn:zimbraMail}calendarReply" maxOccurs="unbounded" minOccurs="0"/>
+ *                   &lt;element name="reply" type="{urn:zmailMail}calendarReply" maxOccurs="unbounded" minOccurs="0"/>
  *                 &lt;/sequence>
  *               &lt;/restriction>
  *             &lt;/complexContent>
  *           &lt;/complexType>
  *         &lt;/element>
- *         &lt;element ref="{urn:zimbraMail}meta" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element ref="{urn:zmailMail}meta" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="f" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="t" type="{http://www.w3.org/2001/XMLSchema}string" />
@@ -516,7 +516,7 @@ public class testCalendarItemInfo {
      *   &lt;complexContent>
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
-     *         &lt;element name="reply" type="{urn:zimbraMail}calendarReply" maxOccurs="unbounded" minOccurs="0"/>
+     *         &lt;element name="reply" type="{urn:zmailMail}calendarReply" maxOccurs="unbounded" minOccurs="0"/>
      *       &lt;/sequence>
      *     &lt;/restriction>
      *   &lt;/complexContent>

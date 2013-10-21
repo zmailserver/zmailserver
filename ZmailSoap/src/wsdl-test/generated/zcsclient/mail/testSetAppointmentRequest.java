@@ -37,15 +37,15 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="default" type="{urn:zimbraMail}setCalendarItemInfo" minOccurs="0"/>
- *         &lt;element name="except" type="{urn:zimbraMail}setCalendarItemInfo" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="cancel" type="{urn:zimbraMail}setCalendarItemInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="default" type="{urn:zmailMail}setCalendarItemInfo" minOccurs="0"/>
+ *         &lt;element name="except" type="{urn:zmailMail}setCalendarItemInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="cancel" type="{urn:zmailMail}setCalendarItemInfo" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="replies" minOccurs="0">
  *           &lt;complexType>
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence>
- *                   &lt;element name="reply" type="{urn:zimbraMail}calReply" maxOccurs="unbounded" minOccurs="0"/>
+ *                   &lt;element name="reply" type="{urn:zmailMail}calReply" maxOccurs="unbounded" minOccurs="0"/>
  *                 &lt;/sequence>
  *               &lt;/restriction>
  *             &lt;/complexContent>
@@ -356,7 +356,7 @@ public class testSetAppointmentRequest {
      *   &lt;complexContent>
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
-     *         &lt;element name="reply" type="{urn:zimbraMail}calReply" maxOccurs="unbounded" minOccurs="0"/>
+     *         &lt;element name="reply" type="{urn:zmailMail}calReply" maxOccurs="unbounded" minOccurs="0"/>
      *       &lt;/sequence>
      *     &lt;/restriction>
      *   &lt;/complexContent>

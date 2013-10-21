@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="excludeRecurrenceInfo">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraAdmin}recurrenceInfo">
+ *     &lt;extension base="{urn:zmailAdmin}recurrenceInfo">
  *       &lt;sequence>
  *       &lt;/sequence>
  *     &lt;/extension>

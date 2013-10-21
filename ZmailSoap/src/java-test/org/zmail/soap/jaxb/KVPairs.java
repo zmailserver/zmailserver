@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.jaxb;
+package org.zmail.soap.jaxb;
 
 import java.util.List;
 import java.util.Map;
@@ -25,24 +25,24 @@ import javax.xml.bind.annotation.XmlRootElement;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.StringUtil;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.StringUtil;
 
-import com.zimbra.soap.json.jackson.annotate.ZimbraKeyValuePairs;
-import com.zimbra.soap.type.KeyValuePair;
-import com.zimbra.soap.type.KeyValuePairs;
+import org.zmail.soap.json.jackson.annotate.ZmailKeyValuePairs;
+import org.zmail.soap.type.KeyValuePair;
+import org.zmail.soap.type.KeyValuePairs;
 
 /**
  * Test JAXB class which implements KeyValuePairs
- * Also tests {@link ZimbraKeyValuePairs} annotation
+ * Also tests {@link ZmailKeyValuePairs} annotation
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name="key-value-pairs")
 public class KVPairs implements KeyValuePairs {
     // Note: Can use a different name BUT won't be able to round trip back to JAXB from JSON if you do
     @XmlElement(name=Element.XMLElement.E_ATTRIBUTE /* a */)
-    @ZimbraKeyValuePairs
+    @ZmailKeyValuePairs
     private List<KeyValuePair> keyValuePairs;
 
     public KVPairs() {}

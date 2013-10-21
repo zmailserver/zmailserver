@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.type;
+package org.zmail.soap.mail.type;
 
 import java.util.Collections;
 import java.util.List;
@@ -27,10 +27,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.json.jackson.annotate.ZimbraJsonArrayForWrapper;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.json.jackson.annotate.ZmailJsonArrayForWrapper;
 
 @XmlRootElement(name=MailConstants.E_RETENTION_POLICY, namespace=MailConstants.NAMESPACE_STR)
 @XmlAccessorType(XmlAccessType.NONE)
@@ -39,7 +39,7 @@ public class RetentionPolicy {
     /**
      * @zm-api-field-description "Keep" retention policies
      */
-    @ZimbraJsonArrayForWrapper
+    @ZmailJsonArrayForWrapper
     @XmlElementWrapper(name=MailConstants.E_KEEP, required=false)
     @XmlElement(name=MailConstants.E_POLICY, required=false)
     private List<Policy> keep = Lists.newArrayList();
@@ -47,7 +47,7 @@ public class RetentionPolicy {
     /**
      * @zm-api-field-description "Purge" retention policies
      */
-    @ZimbraJsonArrayForWrapper
+    @ZmailJsonArrayForWrapper
     @XmlElementWrapper(name=MailConstants.E_PURGE, required=false)
     @XmlElement(name=MailConstants.E_POLICY, required=false)
     private List<Policy> purge = Lists.newArrayList();

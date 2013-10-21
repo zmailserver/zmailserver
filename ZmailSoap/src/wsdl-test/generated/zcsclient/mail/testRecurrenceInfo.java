@@ -38,12 +38,12 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;choice maxOccurs="unbounded" minOccurs="0">
- *           &lt;element name="add" type="{urn:zimbraMail}addRecurrenceInfo"/>
- *           &lt;element name="exclude" type="{urn:zimbraMail}excludeRecurrenceInfo"/>
- *           &lt;element name="except" type="{urn:zimbraMail}exceptionRuleInfo"/>
- *           &lt;element name="cancel" type="{urn:zimbraMail}cancelRuleInfo"/>
- *           &lt;element name="dates" type="{urn:zimbraMail}singleDates"/>
- *           &lt;element name="rule" type="{urn:zimbraMail}simpleRepeatingRule"/>
+ *           &lt;element name="add" type="{urn:zmailMail}addRecurrenceInfo"/>
+ *           &lt;element name="exclude" type="{urn:zmailMail}excludeRecurrenceInfo"/>
+ *           &lt;element name="except" type="{urn:zmailMail}exceptionRuleInfo"/>
+ *           &lt;element name="cancel" type="{urn:zmailMail}cancelRuleInfo"/>
+ *           &lt;element name="dates" type="{urn:zmailMail}singleDates"/>
+ *           &lt;element name="rule" type="{urn:zmailMail}simpleRepeatingRule"/>
  *         &lt;/choice>
  *       &lt;/sequence>
  *     &lt;/restriction>

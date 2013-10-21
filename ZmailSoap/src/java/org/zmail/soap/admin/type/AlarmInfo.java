@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.type;
+package org.zmail.soap.admin.type;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -27,13 +27,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.base.AlarmInfoInterface;
-import com.zimbra.soap.base.AlarmTriggerInfoInterface;
-import com.zimbra.soap.base.CalendarAttachInterface;
-import com.zimbra.soap.base.CalendarAttendeeInterface;
-import com.zimbra.soap.base.DurationInfoInterface;
-import com.zimbra.soap.base.XPropInterface;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.base.AlarmInfoInterface;
+import org.zmail.soap.base.AlarmTriggerInfoInterface;
+import org.zmail.soap.base.CalendarAttachInterface;
+import org.zmail.soap.base.CalendarAttendeeInterface;
+import org.zmail.soap.base.DurationInfoInterface;
+import org.zmail.soap.base.XPropInterface;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class AlarmInfo implements AlarmInfoInterface {

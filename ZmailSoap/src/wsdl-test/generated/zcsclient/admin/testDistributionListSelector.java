@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlValue;
  * &lt;complexType name="distributionListSelector">
  *   &lt;simpleContent>
  *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
- *       &lt;attribute name="by" type="{urn:zimbraAdmin}distributionListBy" />
+ *       &lt;attribute name="by" type="{urn:zmailAdmin}distributionListBy" />
  *     &lt;/extension>
  *   &lt;/simpleContent>
  * &lt;/complexType>

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.type;
+package org.zmail.soap.admin.type;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -29,9 +29,9 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlType;
 
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.soap.type.ZmBoolean;
-import com.zimbra.soap.json.jackson.annotate.ZimbraJsonArrayForWrapper;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.soap.type.ZmBoolean;
+import org.zmail.soap.json.jackson.annotate.ZmailJsonArrayForWrapper;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(propOrder = {})
@@ -47,7 +47,7 @@ public class VersionCheckInfo {
     /**
      * @zm-api-field-description Version check update information
      */
-    @ZimbraJsonArrayForWrapper
+    @ZmailJsonArrayForWrapper
     @XmlElementWrapper(name=AdminConstants.E_UPDATES /* updates */, required=false)
     @XmlElement(name=AdminConstants.E_UPDATE /* update */, required=false)
     private List<VersionCheckUpdateInfo> updates = Lists.newArrayList();

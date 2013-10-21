@@ -13,11 +13,11 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.HsmConstants;
+import org.zmail.common.soap.HsmConstants;
 
 /**
  * @zm-api-command-network-edition
@@ -25,7 +25,7 @@ import com.zimbra.common.soap.HsmConstants;
  * @zm-api-command-admin-auth-required true
  * @zm-api-command-description Starts the HSM process, which moves blobs for older messages to the current secondary
  * message volume.  This request is asynchronous.  The progress of the last HSM process can be monitored with
- * <b>GetHsmStatusRequest</b>.  The HSM policy is read from the zimbraHsmPolicy LDAP attribute.
+ * <b>GetHsmStatusRequest</b>.  The HSM policy is read from the zmailHsmPolicy LDAP attribute.
  */
 @XmlRootElement(name=HsmConstants.E_HSM_REQUEST)
 public class HsmRequest {

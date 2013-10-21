@@ -35,7 +35,7 @@ import generated.zcsclient.zm.testNamedValue;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="search" type="{urn:zimbra}namedValue" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="search" type="{urn:zmail}namedValue" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>

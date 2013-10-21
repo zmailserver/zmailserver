@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -21,10 +21,10 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.soap.admin.type.AdminAttrsImpl;
-import com.zimbra.soap.type.AccountSelector;
-import com.zimbra.soap.admin.type.GalMode;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.soap.admin.type.AdminAttrsImpl;
+import org.zmail.soap.type.AccountSelector;
+import org.zmail.soap.admin.type.GalMode;
 
 /**
  * @zm-api-command-auth-required true
@@ -40,9 +40,9 @@ import com.zimbra.soap.admin.type.GalMode;
  * <li> passed in attrs in &lt;a/> are used to initialize the gal data source.
  * <li> server is a required parameter and specifies the mailhost on which this account resides.
  * </ul>
- * Example for creating gal sync account for Zimbra LDAP server.
+ * Example for creating gal sync account for Zmail LDAP server.
  * <pre>
-    &lt;CreateGalSyncAccountRequest name="zimbra" domain="mydomain.com" type="zimbra" server="mailhost.mydomain.com">
+    &lt;CreateGalSyncAccountRequest name="zmail" domain="mydomain.com" type="zmail" server="mailhost.mydomain.com">
       &lt;account by="name">gal@mydomain.com&lt;/account>
     &lt;/CreateGalSyncAccountRequest>
  * </pre>
@@ -50,16 +50,16 @@ import com.zimbra.soap.admin.type.GalMode;
  * <pre>
     &lt;CreateGalSyncAccountRequest name="mydomain" domain="mydomain.com" type="ldap" server="mailhost.mydomain.com">
       &lt;account by="name">gal@mydomain.com&lt;/account>
-      &lt;a n="zimbraGalSyncLdapURL">ldap://ldap.mydomain.com&lt;/a>
-      &lt;a n="zimbraGalSyncLdapStartTlsEnabled">TRUE&lt;/a>
-      &lt;a n="zimbraGalSyncLdapSearchBase">cn=users&lt;/a>
-      &lt;a n="zimbraGalSyncLdapAuthMech">simple&lt;/a>
-      &lt;a n="zimbraGalSyncLdapBindDn">uid=admin,cn=users&lt;/a>
-      &lt;a n="zimbraGalSyncLdapBindPassword">password&lt;/a>
-      &lt;a n="zimbraGalSyncLdapFilter">(&amp;(mail=*)(objectClass=user))&lt;/a>
-      &lt;a n="zimbraGalLdapAttrMap">whenChanged,modifyTimeStamp=modifyTimeStamp&lt;/a>
-      &lt;a n="zimbraGalLdapAttrMap">whenCreated,createTimeStamp=createTimeStamp&lt;/a>
-      &lt;a n="zimbraGalLdapAttrMap">zimbraMailDeliveryAddress,zimbraMailAlias,mail=email,email2,email3,email4,email5,email6,email7,email8,email9,email10,email11,email12,email13,email14,email15,email16&lt;/a>
+      &lt;a n="zmailGalSyncLdapURL">ldap://ldap.mydomain.com&lt;/a>
+      &lt;a n="zmailGalSyncLdapStartTlsEnabled">TRUE&lt;/a>
+      &lt;a n="zmailGalSyncLdapSearchBase">cn=users&lt;/a>
+      &lt;a n="zmailGalSyncLdapAuthMech">simple&lt;/a>
+      &lt;a n="zmailGalSyncLdapBindDn">uid=admin,cn=users&lt;/a>
+      &lt;a n="zmailGalSyncLdapBindPassword">password&lt;/a>
+      &lt;a n="zmailGalSyncLdapFilter">(&amp;(mail=*)(objectClass=user))&lt;/a>
+      &lt;a n="zmailGalLdapAttrMap">whenChanged,modifyTimeStamp=modifyTimeStamp&lt;/a>
+      &lt;a n="zmailGalLdapAttrMap">whenCreated,createTimeStamp=createTimeStamp&lt;/a>
+      &lt;a n="zmailGalLdapAttrMap">zmailMailDeliveryAddress,zmailMailAlias,mail=email,email2,email3,email4,email5,email6,email7,email8,email9,email10,email11,email12,email13,email14,email15,email16&lt;/a>
     &lt;/CreateGalSyncAccountRequest>
  * </pre>
  * <b>Access</b>: domain admin sufficient

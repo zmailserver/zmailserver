@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -27,9 +27,9 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.type.IdAndType;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.type.IdAndType;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name=AdminConstants.E_ADMIN_CREATE_WAIT_SET_RESPONSE)

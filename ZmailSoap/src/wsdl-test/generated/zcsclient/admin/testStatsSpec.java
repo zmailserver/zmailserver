@@ -39,7 +39,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{urn:zimbraAdmin}values" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element ref="{urn:zmailAdmin}values" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="limit" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="name" type="{http://www.w3.org/2001/XMLSchema}string" />
@@ -56,7 +56,7 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class testStatsSpec {
 
-    @XmlElementRef(name = "values", namespace = "urn:zimbraAdmin", type = JAXBElement.class)
+    @XmlElementRef(name = "values", namespace = "urn:zmailAdmin", type = JAXBElement.class)
     @XmlMixed
     protected List<Serializable> content;
     @XmlAttribute(name = "limit")

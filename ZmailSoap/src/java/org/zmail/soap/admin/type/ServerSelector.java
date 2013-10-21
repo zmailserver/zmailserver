@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.type;
+package org.zmail.soap.admin.type;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -21,12 +21,12 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlValue;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class ServerSelector {
-    // TODO: Change com.zimbra.cs.account.Provisioning.ServerBy to use this
+    // TODO: Change org.zmail.cs.account.Provisioning.ServerBy to use this
     @XmlEnum
     public enum ServerBy {
         // case must match protocol
@@ -45,10 +45,10 @@ public class ServerSelector {
      * @zm-api-field-tag server-key
      * @zm-api-field-description Key for choosing server
      * <table>
-     * <tr> <td> <b>{server-by}="id"</b> </td> <td> Use server's zimbraId as the Key </td> </tr>
+     * <tr> <td> <b>{server-by}="id"</b> </td> <td> Use server's zmailId as the Key </td> </tr>
      * <tr> <td> <b>{server-by}="name"</b> </td> <td> Use name of the server as the Key </td> </tr>
      * <tr> <td> <b>{server-by}="serviceHostname"</b> </td>
-     *               <td> Use server's value for attr <b>zimbraServiceHostname</b> as the Key </td> </tr>
+     *               <td> Use server's value for attr <b>zmailServiceHostname</b> as the Key </td> </tr>
      * </table>
      */
     @XmlValue private final String key;

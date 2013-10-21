@@ -13,12 +13,12 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.type;
+package org.zmail.soap.type;
 
 import java.util.Arrays;
 import javax.xml.bind.annotation.XmlEnum;
 
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
 @XmlEnum
 public enum AccountBy {
@@ -35,8 +35,8 @@ public enum AccountBy {
         }
     }
 
-    public com.zimbra.common.account.Key.AccountBy toKeyDomainBy()
+    public org.zmail.common.account.Key.AccountBy toKeyDomainBy()
     throws ServiceException {
-        return com.zimbra.common.account.Key.AccountBy.fromString(this.name());
+        return org.zmail.common.account.Key.AccountBy.fromString(this.name());
     }
 }

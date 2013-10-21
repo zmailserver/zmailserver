@@ -13,11 +13,11 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
-import com.zimbra.common.soap.AdminConstants;
+import org.zmail.common.soap.AdminConstants;
 
 /**
  * @zm-api-command-auth-required true
@@ -28,8 +28,8 @@ import com.zimbra.common.soap.AdminConstants;
 public class DeleteDomainRequest {
 
     /**
-     * @zm-api-field-tag value-of-zimbra-id
-     * @zm-api-field-description Zimbra ID for domain
+     * @zm-api-field-tag value-of-zmail-id
+     * @zm-api-field-description Zmail ID for domain
      */
     @XmlAttribute(name=AdminConstants.E_ID, required=true)
     private final String id;

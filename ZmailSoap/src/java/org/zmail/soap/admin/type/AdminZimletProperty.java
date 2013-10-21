@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.type;
+package org.zmail.soap.admin.type;
 
 import java.util.List;
 
@@ -26,8 +26,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlValue;
 
-import com.zimbra.common.soap.ZimletConstants;
-import com.zimbra.soap.base.ZimletProperty;
+import org.zmail.common.soap.ZimletConstants;
+import org.zmail.soap.base.ZimletProperty;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class AdminZimletProperty

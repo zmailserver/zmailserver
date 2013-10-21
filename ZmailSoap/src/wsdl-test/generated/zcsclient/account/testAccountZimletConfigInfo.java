@@ -33,8 +33,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;all>
- *         &lt;element name="global" type="{urn:zimbraAccount}accountZimletGlobalConfigInfo" minOccurs="0"/>
- *         &lt;element name="host" type="{urn:zimbraAccount}accountZimletHostConfigInfo" minOccurs="0"/>
+ *         &lt;element name="global" type="{urn:zmailAccount}accountZimletGlobalConfigInfo" minOccurs="0"/>
+ *         &lt;element name="host" type="{urn:zmailAccount}accountZimletHostConfigInfo" minOccurs="0"/>
  *       &lt;/all>
  *       &lt;attribute name="name" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="version" type="{http://www.w3.org/2001/XMLSchema}string" />

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -27,14 +27,14 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.soap.type.TargetType;
-import com.zimbra.soap.type.NamedElement;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.soap.type.TargetType;
+import org.zmail.soap.type.NamedElement;
 
 /**
  * @zm-api-command-auth-required true
  * @zm-api-command-admin-auth-required true
- * @zm-api-command-description Get constraints (zimbraConstraint) for delegated admin on global config or a COS
+ * @zm-api-command-description Get constraints (zmailConstraint) for delegated admin on global config or a COS
  * <br />
  * none or several attributes can be specified for which constraints are to be returned.
  * <br />
@@ -47,11 +47,11 @@ import com.zimbra.soap.type.NamedElement;
  * e.g.
  * <pre>
  *     &lt;GetDelegatedAdminConstraintsRequest type="cos" name="cos1">
- *       &lt;a name="zimbraMailQuota">
+ *       &lt;a name="zmailMailQuota">
  *     &lt;/GetDelegatedAdminConstraintsRequest>
  *
  *     &lt;GetDelegatedAdminConstraintsResponse type="cos" id="e00428a1-0c00-11d9-836a-000d93afea2a" name="cos1">
- *       &lt;a n="zimbraMailQuota">
+ *       &lt;a n="zmailMailQuota">
  *         &lt;constraint>
  *           &lt;max>524288000&lt;/max>
  *           &lt;min>20971520&lt;/min>

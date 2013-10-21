@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.admin;
+package org.zmail.soap.admin;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -34,10 +34,10 @@ import org.junit.Test;
 import org.w3c.dom.Element;
 
 import com.google.common.collect.Lists;
-import com.zimbra.soap.admin.message.DumpSessionsResponse;
-import com.zimbra.soap.admin.type.AccountSessionInfo;
-import com.zimbra.soap.admin.type.InfoForSessionType;
-import com.zimbra.soap.admin.type.SessionInfo;
+import org.zmail.soap.admin.message.DumpSessionsResponse;
+import org.zmail.soap.admin.type.AccountSessionInfo;
+import org.zmail.soap.admin.type.InfoForSessionType;
+import org.zmail.soap.admin.type.SessionInfo;
 
 /**
  * Unit test for {@link DumpSessionsResponse}.
@@ -70,10 +70,10 @@ public class DumpSessionsTest {
         Assert.assertEquals("Last Access Date", 1300295279212L, session.getLastAccessedDate());
         if (nameAndIdPresent) {
             Assert.assertEquals("Session Name", "user1@gren-elliots-macbook-pro.local", session.getName());
-            Assert.assertEquals("Session Zimbra Id", "006584ae-cba0-400a-8414-f764ba3c7418", session.getZimbraId());
+            Assert.assertEquals("Session Zmail Id", "006584ae-cba0-400a-8414-f764ba3c7418", session.getZmailId());
         } else {
             Assert.assertNull("Session Name", session.getName());
-            Assert.assertNull("Session Zimbra Id", session.getZimbraId());
+            Assert.assertNull("Session Zmail Id", session.getZmailId());
         }
         Assert.assertEquals("Session Id", "223", session.getSessionId());
         Map<QName, Object> extraAttribs = session.getExtraAttributes();
@@ -141,7 +141,7 @@ public class DumpSessionsTest {
                 "006584ae-cba0-400a-8414-f764ba3c7418");
         SessionInfo session = new SessionInfo(null, null, "223", 1300295279211L, 1300295279212L);
         org.w3c.dom.Document doc = w3DomBuilder.newDocument();
-        org.w3c.dom.Element extraElement = doc.createElementNS("urn:zimbraAdmin", "imap");
+        org.w3c.dom.Element extraElement = doc.createElementNS("urn:zmailAdmin", "imap");
         extraElement.setAttribute("folder", "INBOX");
         extraElement.setAttribute("expunged", "0");
         extraElement.setAttribute("writable", "1");

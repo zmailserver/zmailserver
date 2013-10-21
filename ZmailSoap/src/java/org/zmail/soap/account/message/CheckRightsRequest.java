@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.account.message;
+package org.zmail.soap.account.message;
 
 import java.util.List;
 
@@ -20,9 +20,9 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.google.common.collect.Lists;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.account.type.CheckRightsTargetSpec;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.account.type.CheckRightsTargetSpec;
 
 /**
  * @zm-api-command-auth-required true

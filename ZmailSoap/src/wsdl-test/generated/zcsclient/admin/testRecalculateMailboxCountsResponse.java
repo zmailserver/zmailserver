@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{urn:zimbraAdmin}mbox"/>
+ *         &lt;element ref="{urn:zmailAdmin}mbox"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>

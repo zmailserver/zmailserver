@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import com.google.common.base.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -21,8 +21,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.soap.json.jackson.annotate.ZimbraJsonAttribute;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.soap.json.jackson.annotate.ZmailJsonAttribute;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name=AdminConstants.E_AUTH_RESPONSE)
@@ -39,7 +39,7 @@ public class AuthResponse {
      * @zm-api-field-tag auth-lifetime
      * @zm-api-field-description Life time for the authorization
      */
-    @ZimbraJsonAttribute
+    @ZmailJsonAttribute
     @XmlElement(name=AdminConstants.E_LIFETIME /* lifetime */, required=true)
     private long lifetime;
 

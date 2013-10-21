@@ -33,8 +33,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="domain" type="{urn:zimbraAdmin}domainSelector"/>
- *         &lt;element name="principal" type="{urn:zimbraAdmin}principalSelector"/>
+ *         &lt;element name="domain" type="{urn:zmailAdmin}domainSelector"/>
+ *         &lt;element name="principal" type="{urn:zmailAdmin}principalSelector"/>
  *         &lt;element name="password" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>

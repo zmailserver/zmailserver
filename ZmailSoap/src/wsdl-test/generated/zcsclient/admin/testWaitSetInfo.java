@@ -36,25 +36,25 @@ import generated.zcsclient.zm.testIdAndType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="session" type="{urn:zimbraAdmin}sessionForWaitSet" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="session" type="{urn:zmailAdmin}sessionForWaitSet" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="errors" minOccurs="0">
  *           &lt;complexType>
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence>
- *                   &lt;element name="error" type="{urn:zimbra}idAndType" maxOccurs="unbounded" minOccurs="0"/>
+ *                   &lt;element name="error" type="{urn:zmail}idAndType" maxOccurs="unbounded" minOccurs="0"/>
  *                 &lt;/sequence>
  *               &lt;/restriction>
  *             &lt;/complexContent>
  *           &lt;/complexType>
  *         &lt;/element>
- *         &lt;element name="ready" type="{urn:zimbraAdmin}accountsAttrib" minOccurs="0"/>
+ *         &lt;element name="ready" type="{urn:zmailAdmin}accountsAttrib" minOccurs="0"/>
  *         &lt;element name="buffered" minOccurs="0">
  *           &lt;complexType>
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence>
- *                   &lt;element name="commit" type="{urn:zimbraAdmin}bufferedCommitInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *                   &lt;element name="commit" type="{urn:zmailAdmin}bufferedCommitInfo" maxOccurs="unbounded" minOccurs="0"/>
  *                 &lt;/sequence>
  *               &lt;/restriction>
  *             &lt;/complexContent>
@@ -375,7 +375,7 @@ public class testWaitSetInfo {
      *   &lt;complexContent>
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
-     *         &lt;element name="commit" type="{urn:zimbraAdmin}bufferedCommitInfo" maxOccurs="unbounded" minOccurs="0"/>
+     *         &lt;element name="commit" type="{urn:zmailAdmin}bufferedCommitInfo" maxOccurs="unbounded" minOccurs="0"/>
      *       &lt;/sequence>
      *     &lt;/restriction>
      *   &lt;/complexContent>
@@ -434,7 +434,7 @@ public class testWaitSetInfo {
      *   &lt;complexContent>
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
-     *         &lt;element name="error" type="{urn:zimbra}idAndType" maxOccurs="unbounded" minOccurs="0"/>
+     *         &lt;element name="error" type="{urn:zmail}idAndType" maxOccurs="unbounded" minOccurs="0"/>
      *       &lt;/sequence>
      *     &lt;/restriction>
      *   &lt;/complexContent>

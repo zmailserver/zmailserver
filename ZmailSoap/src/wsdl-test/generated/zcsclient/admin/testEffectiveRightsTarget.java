@@ -36,11 +36,11 @@ import generated.zcsclient.zm.testTargetType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="all" type="{urn:zimbraAdmin}effectiveRightsInfo" minOccurs="0"/>
- *         &lt;element name="inDomains" type="{urn:zimbraAdmin}inDomainInfo" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="entries" type="{urn:zimbraAdmin}rightsEntriesInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="all" type="{urn:zmailAdmin}effectiveRightsInfo" minOccurs="0"/>
+ *         &lt;element name="inDomains" type="{urn:zmailAdmin}inDomainInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="entries" type="{urn:zmailAdmin}rightsEntriesInfo" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
- *       &lt;attribute name="type" use="required" type="{urn:zimbra}targetType" />
+ *       &lt;attribute name="type" use="required" type="{urn:zmail}targetType" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>

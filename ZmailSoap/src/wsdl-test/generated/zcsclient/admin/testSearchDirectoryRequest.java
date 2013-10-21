@@ -32,7 +32,7 @@ import generated.zcsclient.zm.testAttributeSelectorImpl;
  * <pre>
  * &lt;complexType name="searchDirectoryRequest">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbra}attributeSelectorImpl">
+ *     &lt;extension base="{urn:zmail}attributeSelectorImpl">
  *       &lt;sequence>
  *       &lt;/sequence>
  *       &lt;attribute name="query" type="{http://www.w3.org/2001/XMLSchema}string" />

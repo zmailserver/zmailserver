@@ -36,17 +36,17 @@ import generated.zcsclient.zm.testAccountSelector;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;all>
- *         &lt;element name="account" type="{urn:zimbra}accountSelector" minOccurs="0"/>
+ *         &lt;element name="account" type="{urn:zmail}accountSelector" minOccurs="0"/>
  *         &lt;element name="password" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="preauth" type="{urn:zimbraAccount}preAuth" minOccurs="0"/>
- *         &lt;element name="authToken" type="{urn:zimbraAccount}authToken" minOccurs="0"/>
+ *         &lt;element name="preauth" type="{urn:zmailAccount}preAuth" minOccurs="0"/>
+ *         &lt;element name="authToken" type="{urn:zmailAccount}authToken" minOccurs="0"/>
  *         &lt;element name="virtualHost" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="prefs" minOccurs="0">
  *           &lt;complexType>
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence>
- *                   &lt;element name="pref" type="{urn:zimbraAccount}pref" maxOccurs="unbounded" minOccurs="0"/>
+ *                   &lt;element name="pref" type="{urn:zmailAccount}pref" maxOccurs="unbounded" minOccurs="0"/>
  *                 &lt;/sequence>
  *               &lt;/restriction>
  *             &lt;/complexContent>
@@ -57,7 +57,7 @@ import generated.zcsclient.zm.testAccountSelector;
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence>
- *                   &lt;element name="attr" type="{urn:zimbraAccount}attr" maxOccurs="unbounded" minOccurs="0"/>
+ *                   &lt;element name="attr" type="{urn:zmailAccount}attr" maxOccurs="unbounded" minOccurs="0"/>
  *                 &lt;/sequence>
  *               &lt;/restriction>
  *             &lt;/complexContent>
@@ -317,7 +317,7 @@ public class testAuthRequest {
      *   &lt;complexContent>
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
-     *         &lt;element name="attr" type="{urn:zimbraAccount}attr" maxOccurs="unbounded" minOccurs="0"/>
+     *         &lt;element name="attr" type="{urn:zmailAccount}attr" maxOccurs="unbounded" minOccurs="0"/>
      *       &lt;/sequence>
      *     &lt;/restriction>
      *   &lt;/complexContent>
@@ -376,7 +376,7 @@ public class testAuthRequest {
      *   &lt;complexContent>
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
-     *         &lt;element name="pref" type="{urn:zimbraAccount}pref" maxOccurs="unbounded" minOccurs="0"/>
+     *         &lt;element name="pref" type="{urn:zmailAccount}pref" maxOccurs="unbounded" minOccurs="0"/>
      *       &lt;/sequence>
      *     &lt;/restriction>
      *   &lt;/complexContent>

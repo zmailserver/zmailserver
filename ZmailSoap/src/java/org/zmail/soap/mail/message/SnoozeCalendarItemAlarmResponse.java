@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.message;
+package org.zmail.soap.mail.message;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -28,10 +28,10 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.mail.type.UpdatedAlarmInfo;
-import com.zimbra.soap.mail.type.UpdatedAppointmentAlarmInfo;
-import com.zimbra.soap.mail.type.UpdatedTaskAlarmInfo;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.mail.type.UpdatedAlarmInfo;
+import org.zmail.soap.mail.type.UpdatedAppointmentAlarmInfo;
+import org.zmail.soap.mail.type.UpdatedTaskAlarmInfo;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name="SnoozeCalendarItemAlarmResponse")

@@ -34,7 +34,7 @@ import generated.zcsclient.zm.testSmimeStoreType;
  * &lt;complexType name="smimePublicCertInfo">
  *   &lt;simpleContent>
  *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
- *       &lt;attribute name="store" use="required" type="{urn:zimbra}smimeStoreType" />
+ *       &lt;attribute name="store" use="required" type="{urn:zmail}smimeStoreType" />
  *       &lt;attribute name="field" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/extension>
  *   &lt;/simpleContent>

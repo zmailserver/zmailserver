@@ -40,18 +40,18 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _RemoteWipeRequest_QNAME = new QName("urn:zimbraSync", "RemoteWipeRequest");
-    private final static QName _SuspendDeviceRequest_QNAME = new QName("urn:zimbraSync", "SuspendDeviceRequest");
-    private final static QName _RemoveDeviceRequest_QNAME = new QName("urn:zimbraSync", "RemoveDeviceRequest");
-    private final static QName _ResumeDeviceRequest_QNAME = new QName("urn:zimbraSync", "ResumeDeviceRequest");
-    private final static QName _CancelPendingRemoteWipeRequest_QNAME = new QName("urn:zimbraSync", "CancelPendingRemoteWipeRequest");
-    private final static QName _ResumeDeviceResponse_QNAME = new QName("urn:zimbraSync", "ResumeDeviceResponse");
-    private final static QName _RemoveDeviceResponse_QNAME = new QName("urn:zimbraSync", "RemoveDeviceResponse");
-    private final static QName _CancelPendingRemoteWipeResponse_QNAME = new QName("urn:zimbraSync", "CancelPendingRemoteWipeResponse");
-    private final static QName _GetDeviceStatusRequest_QNAME = new QName("urn:zimbraSync", "GetDeviceStatusRequest");
-    private final static QName _GetDeviceStatusResponse_QNAME = new QName("urn:zimbraSync", "GetDeviceStatusResponse");
-    private final static QName _RemoteWipeResponse_QNAME = new QName("urn:zimbraSync", "RemoteWipeResponse");
-    private final static QName _SuspendDeviceResponse_QNAME = new QName("urn:zimbraSync", "SuspendDeviceResponse");
+    private final static QName _RemoteWipeRequest_QNAME = new QName("urn:zmailSync", "RemoteWipeRequest");
+    private final static QName _SuspendDeviceRequest_QNAME = new QName("urn:zmailSync", "SuspendDeviceRequest");
+    private final static QName _RemoveDeviceRequest_QNAME = new QName("urn:zmailSync", "RemoveDeviceRequest");
+    private final static QName _ResumeDeviceRequest_QNAME = new QName("urn:zmailSync", "ResumeDeviceRequest");
+    private final static QName _CancelPendingRemoteWipeRequest_QNAME = new QName("urn:zmailSync", "CancelPendingRemoteWipeRequest");
+    private final static QName _ResumeDeviceResponse_QNAME = new QName("urn:zmailSync", "ResumeDeviceResponse");
+    private final static QName _RemoveDeviceResponse_QNAME = new QName("urn:zmailSync", "RemoveDeviceResponse");
+    private final static QName _CancelPendingRemoteWipeResponse_QNAME = new QName("urn:zmailSync", "CancelPendingRemoteWipeResponse");
+    private final static QName _GetDeviceStatusRequest_QNAME = new QName("urn:zmailSync", "GetDeviceStatusRequest");
+    private final static QName _GetDeviceStatusResponse_QNAME = new QName("urn:zmailSync", "GetDeviceStatusResponse");
+    private final static QName _RemoteWipeResponse_QNAME = new QName("urn:zmailSync", "RemoteWipeResponse");
+    private final static QName _SuspendDeviceResponse_QNAME = new QName("urn:zmailSync", "SuspendDeviceResponse");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: generated.zcsclient.sync
@@ -176,7 +176,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testRemoteWipeRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraSync", name = "RemoteWipeRequest")
+    @XmlElementDecl(namespace = "urn:zmailSync", name = "RemoteWipeRequest")
     public JAXBElement<testRemoteWipeRequest> createRemoteWipeRequest(testRemoteWipeRequest value) {
         return new JAXBElement<testRemoteWipeRequest>(_RemoteWipeRequest_QNAME, testRemoteWipeRequest.class, null, value);
     }
@@ -185,7 +185,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testSuspendDeviceRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraSync", name = "SuspendDeviceRequest")
+    @XmlElementDecl(namespace = "urn:zmailSync", name = "SuspendDeviceRequest")
     public JAXBElement<testSuspendDeviceRequest> createSuspendDeviceRequest(testSuspendDeviceRequest value) {
         return new JAXBElement<testSuspendDeviceRequest>(_SuspendDeviceRequest_QNAME, testSuspendDeviceRequest.class, null, value);
     }
@@ -194,7 +194,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testRemoveDeviceRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraSync", name = "RemoveDeviceRequest")
+    @XmlElementDecl(namespace = "urn:zmailSync", name = "RemoveDeviceRequest")
     public JAXBElement<testRemoveDeviceRequest> createRemoveDeviceRequest(testRemoveDeviceRequest value) {
         return new JAXBElement<testRemoveDeviceRequest>(_RemoveDeviceRequest_QNAME, testRemoveDeviceRequest.class, null, value);
     }
@@ -203,7 +203,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testResumeDeviceRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraSync", name = "ResumeDeviceRequest")
+    @XmlElementDecl(namespace = "urn:zmailSync", name = "ResumeDeviceRequest")
     public JAXBElement<testResumeDeviceRequest> createResumeDeviceRequest(testResumeDeviceRequest value) {
         return new JAXBElement<testResumeDeviceRequest>(_ResumeDeviceRequest_QNAME, testResumeDeviceRequest.class, null, value);
     }
@@ -212,7 +212,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testCancelPendingRemoteWipeRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraSync", name = "CancelPendingRemoteWipeRequest")
+    @XmlElementDecl(namespace = "urn:zmailSync", name = "CancelPendingRemoteWipeRequest")
     public JAXBElement<testCancelPendingRemoteWipeRequest> createCancelPendingRemoteWipeRequest(testCancelPendingRemoteWipeRequest value) {
         return new JAXBElement<testCancelPendingRemoteWipeRequest>(_CancelPendingRemoteWipeRequest_QNAME, testCancelPendingRemoteWipeRequest.class, null, value);
     }
@@ -221,7 +221,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testResumeDeviceResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraSync", name = "ResumeDeviceResponse")
+    @XmlElementDecl(namespace = "urn:zmailSync", name = "ResumeDeviceResponse")
     public JAXBElement<testResumeDeviceResponse> createResumeDeviceResponse(testResumeDeviceResponse value) {
         return new JAXBElement<testResumeDeviceResponse>(_ResumeDeviceResponse_QNAME, testResumeDeviceResponse.class, null, value);
     }
@@ -230,7 +230,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testRemoveDeviceResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraSync", name = "RemoveDeviceResponse")
+    @XmlElementDecl(namespace = "urn:zmailSync", name = "RemoveDeviceResponse")
     public JAXBElement<testRemoveDeviceResponse> createRemoveDeviceResponse(testRemoveDeviceResponse value) {
         return new JAXBElement<testRemoveDeviceResponse>(_RemoveDeviceResponse_QNAME, testRemoveDeviceResponse.class, null, value);
     }
@@ -239,7 +239,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testCancelPendingRemoteWipeResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraSync", name = "CancelPendingRemoteWipeResponse")
+    @XmlElementDecl(namespace = "urn:zmailSync", name = "CancelPendingRemoteWipeResponse")
     public JAXBElement<testCancelPendingRemoteWipeResponse> createCancelPendingRemoteWipeResponse(testCancelPendingRemoteWipeResponse value) {
         return new JAXBElement<testCancelPendingRemoteWipeResponse>(_CancelPendingRemoteWipeResponse_QNAME, testCancelPendingRemoteWipeResponse.class, null, value);
     }
@@ -248,7 +248,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetDeviceStatusRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraSync", name = "GetDeviceStatusRequest")
+    @XmlElementDecl(namespace = "urn:zmailSync", name = "GetDeviceStatusRequest")
     public JAXBElement<testGetDeviceStatusRequest> createGetDeviceStatusRequest(testGetDeviceStatusRequest value) {
         return new JAXBElement<testGetDeviceStatusRequest>(_GetDeviceStatusRequest_QNAME, testGetDeviceStatusRequest.class, null, value);
     }
@@ -257,7 +257,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetDeviceStatusResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraSync", name = "GetDeviceStatusResponse")
+    @XmlElementDecl(namespace = "urn:zmailSync", name = "GetDeviceStatusResponse")
     public JAXBElement<testGetDeviceStatusResponse> createGetDeviceStatusResponse(testGetDeviceStatusResponse value) {
         return new JAXBElement<testGetDeviceStatusResponse>(_GetDeviceStatusResponse_QNAME, testGetDeviceStatusResponse.class, null, value);
     }
@@ -266,7 +266,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testRemoteWipeResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraSync", name = "RemoteWipeResponse")
+    @XmlElementDecl(namespace = "urn:zmailSync", name = "RemoteWipeResponse")
     public JAXBElement<testRemoteWipeResponse> createRemoteWipeResponse(testRemoteWipeResponse value) {
         return new JAXBElement<testRemoteWipeResponse>(_RemoteWipeResponse_QNAME, testRemoteWipeResponse.class, null, value);
     }
@@ -275,7 +275,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testSuspendDeviceResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraSync", name = "SuspendDeviceResponse")
+    @XmlElementDecl(namespace = "urn:zmailSync", name = "SuspendDeviceResponse")
     public JAXBElement<testSuspendDeviceResponse> createSuspendDeviceResponse(testSuspendDeviceResponse value) {
         return new JAXBElement<testSuspendDeviceResponse>(_SuspendDeviceResponse_QNAME, testSuspendDeviceResponse.class, null, value);
     }

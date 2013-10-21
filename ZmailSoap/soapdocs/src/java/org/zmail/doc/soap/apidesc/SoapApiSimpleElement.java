@@ -12,10 +12,10 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.doc.soap.apidesc;
+package org.zmail.doc.soap.apidesc;
 
-import com.zimbra.doc.soap.XmlElementDescription;
-import com.zimbra.soap.util.JaxbInfo;
+import org.zmail.doc.soap.XmlElementDescription;
+import org.zmail.soap.util.JaxbInfo;
 
 public class SoapApiSimpleElement
 implements SoapApiNamedElement {

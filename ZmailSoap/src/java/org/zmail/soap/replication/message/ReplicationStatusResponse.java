@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.replication.message;
+package org.zmail.soap.replication.message;
 
 import com.google.common.base.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -22,11 +22,11 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.ReplicationConstants;
-import com.zimbra.soap.replication.type.ReplicationMasterStatus;
-import com.zimbra.soap.replication.type.ReplicationSlaveStatus;
-import com.zimbra.soap.type.ZmBoolean;
-import com.zimbra.soap.json.jackson.annotate.ZimbraUniqueElement;
+import org.zmail.common.soap.ReplicationConstants;
+import org.zmail.soap.replication.type.ReplicationMasterStatus;
+import org.zmail.soap.replication.type.ReplicationSlaveStatus;
+import org.zmail.soap.type.ZmBoolean;
+import org.zmail.soap.json.jackson.annotate.ZmailUniqueElement;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name=ReplicationConstants.E_REPLICATION_STATUS_RESPONSE)
@@ -58,14 +58,14 @@ public class ReplicationStatusResponse {
     /**
      * @zm-api-field-description Master replication status.  Only one of masterStatus and slaveStatus can be present
      */
-    @ZimbraUniqueElement
+    @ZmailUniqueElement
     @XmlElement(name=ReplicationConstants.E_MASTER_STATUS /* masterStatus */, required=false)
     private ReplicationMasterStatus masterStatus;
 
     /**
      * @zm-api-field-description Slave replication status
      */
-    @ZimbraUniqueElement
+    @ZmailUniqueElement
     @XmlElement(name=ReplicationConstants.E_SLAVE_STATUS /* slaveStatus */, required=false)
     private ReplicationSlaveStatus slaveStatus;
 

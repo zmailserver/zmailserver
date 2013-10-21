@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.message;
+package org.zmail.soap.mail.message;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -28,10 +28,10 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.type.AttributeName;
-import com.zimbra.soap.type.Id;
-import com.zimbra.soap.type.ZmBoolean;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.type.AttributeName;
+import org.zmail.soap.type.Id;
+import org.zmail.soap.type.ZmBoolean;
 
 /**
  * @zm-api-command-auth-required true
@@ -57,18 +57,18 @@ import com.zimbra.soap.type.ZmBoolean;
  * <br />
  * For example:
  * <pre>
- * &lt;GetContactsResponse xmlns="urn:zimbraMail">
+ * &lt;GetContactsResponse xmlns="urn:zmailMail">
  *   &lt;cn id="680" fileAsStr="group1" d="1308612784000" rev="900" l="7">
  *     &lt;a n="nickname">group one&lt;/a>
  *     &lt;a n="type">group&lt;/a>
  *     &lt;a n="fileAs">8:group1&lt;/a>
- *     &lt;m value="user@zimbra.com" type="I"/>
+ *     &lt;m value="user@zmail.com" type="I"/>
  *     &lt;m value="282" type="C">
  *       &lt;cn id="282" fileAsStr="Smith, John" d="1308547353000" rev="27" l="7">
  *         &lt;a n="lastName">Smith&lt;/a>
- *         &lt;a n="email">jsmith@example.zimbra.com&lt;/a>
- *         &lt;a n="workURL">http://www.example.zimbra.com&lt;/a>
- *         &lt;a n="company">Zimbra&lt;/a>
+ *         &lt;a n="email">jsmith@example.zmail.com&lt;/a>
+ *         &lt;a n="workURL">http://www.example.zmail.com&lt;/a>
+ *         &lt;a n="company">Zmail&lt;/a>
  *         &lt;a n="workCountry">US&lt;/a>
  *         &lt;a n="workState">CA&lt;/a>
  *         &lt;a n="workPhone">(408) 123-4567&lt;/a>
@@ -80,9 +80,9 @@ import com.zimbra.soap.type.ZmBoolean;
  *         &lt;a n="createTimeStamp">20110620052132Z&lt;/a>
  *         &lt;a n="lastName">user1&lt;/a>
  *         &lt;a n="email">user1@phoebe.mbp&lt;/a>
- *         &lt;a n="zimbraId">b4bf7953-c10f-449e-b7fe-3df48eea36f8&lt;/a>
+ *         &lt;a n="zmailId">b4bf7953-c10f-449e-b7fe-3df48eea36f8&lt;/a>
  *         &lt;a n="objectClass">inetOrgPerson&lt;/a>
- *         &lt;a n="objectClass">zimbraAccount&lt;/a>
+ *         &lt;a n="objectClass">zmailAccount&lt;/a>
  *         &lt;a n="objectClass">amavisAccount&lt;/a>
  *         &lt;a n="fullName">Demo User One&lt;/a>
  *         &lt;a n="dn">uid=user1,ou=people,dc=phoebe,dc=mbp&lt;/a>
@@ -113,7 +113,7 @@ public class GetContactsRequest {
     @XmlAttribute(name=MailConstants.A_FOLDER /* l */, required=false)
     private String folderId;
 
-    // Valid values are case insensitive "names" from enum com.zimbra.cs.index.SortBy
+    // Valid values are case insensitive "names" from enum org.zmail.cs.index.SortBy
     /**
      * @zm-api-field-tag sort-by
      * @zm-api-field-description Sort by
@@ -138,7 +138,7 @@ public class GetContactsRequest {
 
     /**
      * @zm-api-field-tag return-hidden-attrs
-     * @zm-api-field-description Whether to return contact hidden attrs defined in <b>zimbraContactHiddenAttributes</b>
+     * @zm-api-field-description Whether to return contact hidden attrs defined in <b>zmailContactHiddenAttributes</b>
      * <br />
      * ignored if <b>&lt;a></b> is present.
      */

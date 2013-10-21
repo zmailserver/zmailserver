@@ -13,15 +13,15 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.util;
+package org.zmail.soap.util;
 
 import java.lang.reflect.Type;
 import javax.xml.bind.annotation.XmlAttribute;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.ZmailLog;
 
 public class JaxbAttributeInfo {
-    private static final Log LOG = ZimbraLog.soap;
+    private static final Log LOG = ZmailLog.soap;
     private String name;
     private boolean required;
     private String fieldName;

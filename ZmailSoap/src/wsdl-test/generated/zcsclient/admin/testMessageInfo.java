@@ -36,19 +36,19 @@ import generated.zcsclient.zm.testKeyValuePair;
  * <pre>
  * &lt;complexType name="messageInfo">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraAdmin}messageCommon">
+ *     &lt;extension base="{urn:zmailAdmin}messageCommon">
  *       &lt;sequence>
  *         &lt;element name="fr" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="e" type="{urn:zimbraAdmin}emailInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="e" type="{urn:zmailAdmin}emailInfo" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="su" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="mid" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="irt" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="inv" type="{urn:zimbraAdmin}inviteInfo" minOccurs="0"/>
- *         &lt;element name="header" type="{urn:zimbra}keyValuePair" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="inv" type="{urn:zmailAdmin}inviteInfo" minOccurs="0"/>
+ *         &lt;element name="header" type="{urn:zmail}keyValuePair" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;choice maxOccurs="unbounded" minOccurs="0">
- *           &lt;element name="mp" type="{urn:zimbraAdmin}partInfo"/>
- *           &lt;element name="shr" type="{urn:zimbraAdmin}shareNotification"/>
- *           &lt;element name="dlSubs" type="{urn:zimbraAdmin}dlSubscriptionNotification"/>
+ *           &lt;element name="mp" type="{urn:zmailAdmin}partInfo"/>
+ *           &lt;element name="shr" type="{urn:zmailAdmin}shareNotification"/>
+ *           &lt;element name="dlSubs" type="{urn:zmailAdmin}dlSubscriptionNotification"/>
  *         &lt;/choice>
  *       &lt;/sequence>
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}string" />

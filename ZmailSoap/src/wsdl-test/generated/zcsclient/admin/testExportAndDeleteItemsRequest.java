@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="mbox" type="{urn:zimbraAdmin}mailboxIdAndItems"/>
+ *         &lt;element name="mbox" type="{urn:zmailAdmin}mailboxIdAndItems"/>
  *       &lt;/sequence>
  *       &lt;attribute name="exportDir" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="exportFilenamePrefix" type="{http://www.w3.org/2001/XMLSchema}string" />

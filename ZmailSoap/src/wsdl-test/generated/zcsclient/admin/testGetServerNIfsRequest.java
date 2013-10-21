@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="server" type="{urn:zimbraAdmin}serverSelector"/>
+ *         &lt;element name="server" type="{urn:zmailAdmin}serverSelector"/>
  *       &lt;/sequence>
  *       &lt;attribute name="type" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>

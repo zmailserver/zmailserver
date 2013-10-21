@@ -38,13 +38,13 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{urn:zimbraMail}meta" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="acl" type="{urn:zimbraMail}acl" minOccurs="0"/>
- *         &lt;element ref="{urn:zimbraMail}retentionPolicy" minOccurs="0"/>
+ *         &lt;element ref="{urn:zmailMail}meta" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="acl" type="{urn:zmailMail}acl" minOccurs="0"/>
+ *         &lt;element ref="{urn:zmailMail}retentionPolicy" minOccurs="0"/>
  *         &lt;choice maxOccurs="unbounded" minOccurs="0">
- *           &lt;element ref="{urn:zimbraMail}folder"/>
- *           &lt;element ref="{urn:zimbraMail}link"/>
- *           &lt;element ref="{urn:zimbraMail}search"/>
+ *           &lt;element ref="{urn:zmailMail}folder"/>
+ *           &lt;element ref="{urn:zmailMail}link"/>
+ *           &lt;element ref="{urn:zmailMail}search"/>
  *         &lt;/choice>
  *       &lt;/sequence>
  *       &lt;attribute name="id" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
@@ -57,7 +57,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;attribute name="rgb" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="u" type="{http://www.w3.org/2001/XMLSchema}int" />
  *       &lt;attribute name="i4u" type="{http://www.w3.org/2001/XMLSchema}int" />
- *       &lt;attribute name="view" type="{urn:zimbraMail}view" />
+ *       &lt;attribute name="view" type="{urn:zmailMail}view" />
  *       &lt;attribute name="rev" type="{http://www.w3.org/2001/XMLSchema}int" />
  *       &lt;attribute name="ms" type="{http://www.w3.org/2001/XMLSchema}int" />
  *       &lt;attribute name="md" type="{http://www.w3.org/2001/XMLSchema}long" />

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.util;
+package org.zmail.soap.util;
 
 import java.util.List;
 
@@ -26,9 +26,9 @@ import org.dom4j.Namespace;
  */
 public class WsdlInfoForNamespace {
 
-    private String xsdNamespaceString; // e.g. urn:zimbraAccount
+    private String xsdNamespaceString; // e.g. urn:zmailAccount
     private Namespace xsdNamespace;
-    private String xsdPrefix;          // e.g. zimbraAdmin
+    private String xsdPrefix;          // e.g. zmailAdmin
     private String tag;                // e.g. Admin
     private WsdlServiceInfo svcInfo;
     private List <String> requests;
@@ -38,7 +38,7 @@ public class WsdlInfoForNamespace {
         this.svcInfo = svcInfo;
         this.requests = Lists.newArrayList(requests);
         this.xsdPrefix = xsdNs.replaceFirst("urn:", "");
-        this.tag = xsdPrefix.replaceFirst("zimbra", "");
+        this.tag = xsdPrefix.replaceFirst("zmail", "");
         this.xsdNamespace = new Namespace(getXsdPrefix(), this.getXsdNamespaceString());
     }
 

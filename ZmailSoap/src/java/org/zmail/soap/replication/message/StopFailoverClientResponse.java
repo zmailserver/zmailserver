@@ -13,11 +13,11 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.replication.message;
+package org.zmail.soap.replication.message;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.ReplicationConstants;
+import org.zmail.common.soap.ReplicationConstants;
 
 @XmlRootElement(name=ReplicationConstants.E_STOP_HA_CLIENT_RESPONSE)
 public class StopFailoverClientResponse {

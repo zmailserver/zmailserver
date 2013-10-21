@@ -40,8 +40,8 @@ import generated.zcsclient.zm.testTargetType;
  *       &lt;sequence>
  *         &lt;element name="right" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded"/>
  *       &lt;/sequence>
- *       &lt;attribute name="type" use="required" type="{urn:zimbra}targetType" />
- *       &lt;attribute name="by" use="required" type="{urn:zimbra}targetBy" />
+ *       &lt;attribute name="type" use="required" type="{urn:zmail}targetType" />
+ *       &lt;attribute name="by" use="required" type="{urn:zmail}targetBy" />
  *       &lt;attribute name="key" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>
  *   &lt;/complexContent>

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.account.type;
+package org.zmail.soap.account.type;
 
 import java.util.List;
 
@@ -26,9 +26,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.base.ContactGroupMemberInterface;
-import com.zimbra.soap.base.ContactInterface;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.base.ContactGroupMemberInterface;
+import org.zmail.soap.base.ContactInterface;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class ContactGroupMember

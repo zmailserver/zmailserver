@@ -13,14 +13,14 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.type;
+package org.zmail.soap.mail.type;
 
 import com.google.common.base.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 
-import com.zimbra.common.soap.MailConstants;
+import org.zmail.common.soap.MailConstants;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class ActionGrantSelector {
@@ -32,8 +32,8 @@ public class ActionGrantSelector {
     @XmlAttribute(name=MailConstants.A_RIGHTS /* perm */, required=true)
     private final String rights;
 
-    // FolderActionRequest/action/grant/gt - FolderAction uses com.zimbra.cs.mailbox.ACL.stringToType
-    // CreateFolder uses FolderAction.parseACL which uses com.zimbra.cs.mailbox.ACL.stringToType
+    // FolderActionRequest/action/grant/gt - FolderAction uses org.zmail.cs.mailbox.ACL.stringToType
+    // CreateFolder uses FolderAction.parseACL which uses org.zmail.cs.mailbox.ACL.stringToType
     /**
      * @zm-api-field-tag grantee-type
      * @zm-api-field-description Grantee Type - usr | grp | cos | dom | all | pub | guest | key
@@ -42,11 +42,11 @@ public class ActionGrantSelector {
     private final String grantType;
 
     /**
-     * @zm-api-field-tag zimbra-id
-     * @zm-api-field-description Zimbra ID
+     * @zm-api-field-tag zmail-id
+     * @zm-api-field-description Zmail ID
      */
     @XmlAttribute(name=MailConstants.A_ZIMBRA_ID /* zid */, required=false)
-    private String zimbraId;
+    private String zmailId;
 
     /**
      * @zm-api-field-tag grantee-name
@@ -91,14 +91,14 @@ public class ActionGrantSelector {
         this.grantType = grantType;
     }
 
-    public void setZimbraId(String zimbraId) { this.zimbraId = zimbraId; }
+    public void setZmailId(String zmailId) { this.zmailId = zmailId; }
     public void setDisplayName(String displayName) { this.displayName = displayName; }
     public void setArgs(String args) { this.args = args; }
     public void setPassword(String password) { this.password = password; }
     public void setAccessKey(String accessKey) { this.accessKey = accessKey; }
     public String getRights() { return rights; }
     public String getGrantType() { return grantType; }
-    public String getZimbraId() { return zimbraId; }
+    public String getZmailId() { return zmailId; }
     public String getDisplayName() { return displayName; }
     public String getArgs() { return args; }
     public String getPassword() { return password; }
@@ -108,7 +108,7 @@ public class ActionGrantSelector {
         return helper
             .add("rights", rights)
             .add("grantType", grantType)
-            .add("zimbraId", zimbraId)
+            .add("zmailId", zmailId)
             .add("displayName", displayName)
             .add("args", args)
             .add("password", password)

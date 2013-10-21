@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.account.type;
+package org.zmail.soap.account.type;
 
 import java.util.List;
 import java.util.Collection;
@@ -28,11 +28,11 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.soap.base.DistributionListGranteeInfoInterface;
-import com.zimbra.soap.type.KeyValuePair;
-import com.zimbra.soap.type.ZmBoolean;
-import com.zimbra.soap.json.jackson.annotate.ZimbraJsonArrayForWrapper;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.soap.base.DistributionListGranteeInfoInterface;
+import org.zmail.soap.type.KeyValuePair;
+import org.zmail.soap.type.ZmBoolean;
+import org.zmail.soap.json.jackson.annotate.ZmailJsonArrayForWrapper;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name=AccountConstants.E_DL)
@@ -71,7 +71,7 @@ public class DistributionListInfo extends ObjectInfo {
     /**
      * @zm-api-field-description Group owners
      */
-    @ZimbraJsonArrayForWrapper
+    @ZmailJsonArrayForWrapper
     @XmlElementWrapper(name=AccountConstants.E_DL_OWNERS /* owners */, required=false)
     @XmlElement(name=AccountConstants.E_DL_OWNER /* owner */, required=false)
     private List<DistributionListGranteeInfo> owners;
@@ -79,7 +79,7 @@ public class DistributionListInfo extends ObjectInfo {
     /**
      * @zm-api-field-description Rights
      */
-    @ZimbraJsonArrayForWrapper
+    @ZmailJsonArrayForWrapper
     @XmlElementWrapper(name=AccountConstants.E_RIGHTS, required=false)
     @XmlElement(name=AccountConstants.E_RIGHT, required=false)
     private List<DistributionListRightInfo> rights;

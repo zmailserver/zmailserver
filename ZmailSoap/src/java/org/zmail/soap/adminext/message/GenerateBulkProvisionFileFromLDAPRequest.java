@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.adminext.message;
+package org.zmail.soap.adminext.message;
 
 import com.google.common.base.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -21,8 +21,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.AdminExtConstants;
-import com.zimbra.soap.adminext.type.AttrsImpl;
+import org.zmail.common.soap.AdminExtConstants;
+import org.zmail.soap.adminext.type.AttrsImpl;
 
 /**
  * @zm-api-command-network-edition
@@ -169,18 +169,18 @@ public class GenerateBulkProvisionFileFromLDAPRequest extends AttrsImpl {
     private String mapiLogonUserDN;
 
     /**
-     * @zm-api-field-tag zimbra-admin-login
-     * @zm-api-field-description Zimbra Admin login
+     * @zm-api-field-tag zmail-admin-login
+     * @zm-api-field-description Zmail Admin login
      */
-    @XmlElement(name=AdminExtConstants.E_ZimbraAdminLogin /* ZimbraAdminLogin */, required=false)
-    private String zimbraAdminLogin;
+    @XmlElement(name=AdminExtConstants.E_ZmailAdminLogin /* ZmailAdminLogin */, required=false)
+    private String zmailAdminLogin;
 
     /**
-     * @zm-api-field-tag zimbra-admin-password
-     * @zm-api-field-description Zimbra Admin password
+     * @zm-api-field-tag zmail-admin-password
+     * @zm-api-field-description Zmail Admin password
      */
-    @XmlElement(name=AdminExtConstants.E_ZimbraAdminPassword /* ZimbraAdminPassword */, required=false)
-    private String zimbraAdminPassword;
+    @XmlElement(name=AdminExtConstants.E_ZmailAdminPassword /* ZmailAdminPassword */, required=false)
+    private String zmailAdminPassword;
 
     /**
      * @zm-api-field-tag target-domain-name
@@ -220,8 +220,8 @@ public class GenerateBulkProvisionFileFromLDAPRequest extends AttrsImpl {
     public void setMapiProfile(String mapiProfile) { this.mapiProfile = mapiProfile; }
     public void setMapiServer(String mapiServer) { this.mapiServer = mapiServer; }
     public void setMapiLogonUserDN(String mapiLogonUserDN) { this.mapiLogonUserDN = mapiLogonUserDN; }
-    public void setZimbraAdminLogin(String zimbraAdminLogin) { this.zimbraAdminLogin = zimbraAdminLogin; }
-    public void setZimbraAdminPassword(String zimbraAdminPassword) { this.zimbraAdminPassword = zimbraAdminPassword; }
+    public void setZmailAdminLogin(String zmailAdminLogin) { this.zmailAdminLogin = zmailAdminLogin; }
+    public void setZmailAdminPassword(String zmailAdminPassword) { this.zmailAdminPassword = zmailAdminPassword; }
     public void setTargetDomainName(String targetDomainName) { this.targetDomainName = targetDomainName; }
     public void setProvisionUsers(String provisionUsers) { this.provisionUsers = provisionUsers; }
     public String getPassword() { return password; }
@@ -243,8 +243,8 @@ public class GenerateBulkProvisionFileFromLDAPRequest extends AttrsImpl {
     public String getMapiProfile() { return mapiProfile; }
     public String getMapiServer() { return mapiServer; }
     public String getMapiLogonUserDN() { return mapiLogonUserDN; }
-    public String getZimbraAdminLogin() { return zimbraAdminLogin; }
-    public String getZimbraAdminPassword() { return zimbraAdminPassword; }
+    public String getZmailAdminLogin() { return zmailAdminLogin; }
+    public String getZmailAdminPassword() { return zmailAdminPassword; }
     public String getTargetDomainName() { return targetDomainName; }
     public String getProvisionUsers() { return provisionUsers; }
 
@@ -270,8 +270,8 @@ public class GenerateBulkProvisionFileFromLDAPRequest extends AttrsImpl {
             .add("mapiProfile", mapiProfile)
             .add("mapiServer", mapiServer)
             .add("mapiLogonUserDN", mapiLogonUserDN)
-            .add("zimbraAdminLogin", zimbraAdminLogin)
-            .add("zimbraAdminPassword", zimbraAdminPassword)
+            .add("zmailAdminLogin", zmailAdminLogin)
+            .add("zmailAdminPassword", zmailAdminPassword)
             .add("targetDomainName", targetDomainName)
             .add("provisionUsers", provisionUsers);
     }

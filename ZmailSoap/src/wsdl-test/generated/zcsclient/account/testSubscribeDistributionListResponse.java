@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *       &lt;/sequence>
- *       &lt;attribute name="status" use="required" type="{urn:zimbraAccount}distributionListSubscribeStatus" />
+ *       &lt;attribute name="status" use="required" type="{urn:zmailAccount}distributionListSubscribeStatus" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>

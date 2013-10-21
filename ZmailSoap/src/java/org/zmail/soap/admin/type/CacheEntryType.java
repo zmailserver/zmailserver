@@ -13,15 +13,15 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.type;
+package org.zmail.soap.admin.type;
 
 import javax.xml.bind.annotation.XmlEnum;
 
 import com.google.common.base.Joiner;
 
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
-// TODO: Use this in ZimbraServer code instead of Provisioning.CacheEntryType
+// TODO: Use this in ZmailServer code instead of Provisioning.CacheEntryType
 @XmlEnum
 public enum CacheEntryType {
     // non ldap entries

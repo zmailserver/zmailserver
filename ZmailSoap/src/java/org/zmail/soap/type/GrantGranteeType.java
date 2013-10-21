@@ -13,18 +13,18 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.type;
+package org.zmail.soap.type;
 
 import java.util.Arrays;
 
 import javax.xml.bind.annotation.XmlEnum;
 
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
 @XmlEnum
 public enum GrantGranteeType {
-    // case must match protocol - keep in sync with com.zimbra.client.ZGrant.GranteeType
-    //     (which differs slightly from com.zimbra.cs.account.accesscontrol.GranteeType)
+    // case must match protocol - keep in sync with org.zmail.client.ZGrant.GranteeType
+    //     (which differs slightly from org.zmail.cs.account.accesscontrol.GranteeType)
         /**
          * access is granted to an authenticated user
          */
@@ -50,11 +50,11 @@ public enum GrantGranteeType {
          */
         dom,
         /**
-         * access is granted to a non-Zimbra email address and a password
+         * access is granted to a non-Zmail email address and a password
          */
         guest,
         /**
-         * access is granted to a non-Zimbra email address and an accesskey
+         * access is granted to a non-Zmail email address and an accesskey
          */
         key;
 

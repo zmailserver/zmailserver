@@ -13,21 +13,21 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.type;
+package org.zmail.soap.mail.type;
 
 import com.google.common.base.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 
-import com.zimbra.common.soap.MailConstants;
+import org.zmail.common.soap.MailConstants;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class Grantor {
 
     /**
-     * @zm-api-field-tag grantor-zimbra-id
-     * @zm-api-field-description Zimbra ID
+     * @zm-api-field-tag grantor-zmail-id
+     * @zm-api-field-description Zmail ID
      */
     @XmlAttribute(name=MailConstants.A_ID /* id */, required=true)
     private final String id;

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.base;
+package org.zmail.soap.base;
 
 public interface ZimletServerExtensionInterface {
     public void setHasKeyword(String hasKeyword);

@@ -35,14 +35,14 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="tz" type="{urn:zimbraMail}calTZInfo" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="comp" type="{urn:zimbraMail}inviteComponentWithGroupInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="tz" type="{urn:zmailMail}calTZInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="comp" type="{urn:zmailMail}inviteComponentWithGroupInfo" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="replies" minOccurs="0">
  *           &lt;complexType>
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence>
- *                   &lt;element name="reply" type="{urn:zimbraMail}calendarReply" maxOccurs="unbounded" minOccurs="0"/>
+ *                   &lt;element name="reply" type="{urn:zmailMail}calendarReply" maxOccurs="unbounded" minOccurs="0"/>
  *                 &lt;/sequence>
  *               &lt;/restriction>
  *             &lt;/complexContent>
@@ -188,7 +188,7 @@ public class testInviteWithGroupInfo {
      *   &lt;complexContent>
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
-     *         &lt;element name="reply" type="{urn:zimbraMail}calendarReply" maxOccurs="unbounded" minOccurs="0"/>
+     *         &lt;element name="reply" type="{urn:zmailMail}calendarReply" maxOccurs="unbounded" minOccurs="0"/>
      *       &lt;/sequence>
      *     &lt;/restriction>
      *   &lt;/complexContent>

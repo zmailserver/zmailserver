@@ -13,16 +13,16 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.type;
+package org.zmail.soap.mail.type;
 
 import com.google.common.base.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.base.ExceptionRuleInfoInterface;
-import com.zimbra.soap.base.RecurrenceInfoInterface;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.base.ExceptionRuleInfoInterface;
+import org.zmail.soap.base.RecurrenceInfoInterface;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class ExceptionRuleInfo

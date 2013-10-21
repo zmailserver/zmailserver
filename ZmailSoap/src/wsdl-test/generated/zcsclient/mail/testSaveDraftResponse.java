@@ -33,8 +33,8 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;choice minOccurs="0">
- *           &lt;element name="chat" type="{urn:zimbraMail}chatMessageInfo"/>
- *           &lt;element name="m" type="{urn:zimbraMail}messageInfo"/>
+ *           &lt;element name="chat" type="{urn:zmailMail}chatMessageInfo"/>
+ *           &lt;element name="m" type="{urn:zmailMail}messageInfo"/>
  *         &lt;/choice>
  *       &lt;/sequence>
  *     &lt;/restriction>

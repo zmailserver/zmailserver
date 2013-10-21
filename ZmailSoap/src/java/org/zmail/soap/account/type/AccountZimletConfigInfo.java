@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.account.type;
+package org.zmail.soap.account.type;
 
 import com.google.common.base.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -22,10 +22,10 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.zimbra.common.soap.ZimletConstants;
-import com.zimbra.soap.base.ZimletConfigInfo;
-import com.zimbra.soap.base.ZimletGlobalConfigInfo;
-import com.zimbra.soap.base.ZimletHostConfigInfo;
+import org.zmail.common.soap.ZimletConstants;
+import org.zmail.soap.base.ZimletConfigInfo;
+import org.zmail.soap.base.ZimletGlobalConfigInfo;
+import org.zmail.soap.base.ZimletHostConfigInfo;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(propOrder = {})

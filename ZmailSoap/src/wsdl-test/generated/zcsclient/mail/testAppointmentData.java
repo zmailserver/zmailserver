@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="appointmentData">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraMail}calendaringData">
+ *     &lt;extension base="{urn:zmailMail}calendaringData">
  *       &lt;sequence>
  *       &lt;/sequence>
  *     &lt;/extension>

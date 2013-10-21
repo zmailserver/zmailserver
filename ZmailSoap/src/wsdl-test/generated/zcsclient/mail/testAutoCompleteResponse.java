@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="match" type="{urn:zimbraMail}autoCompleteMatch" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="match" type="{urn:zmailMail}autoCompleteMatch" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="canBeCached" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *     &lt;/restriction>

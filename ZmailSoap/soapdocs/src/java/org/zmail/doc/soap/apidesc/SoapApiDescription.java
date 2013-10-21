@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.doc.soap.apidesc;
+package org.zmail.doc.soap.apidesc;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -33,12 +33,12 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.zimbra.doc.soap.Command;
-import com.zimbra.doc.soap.Root;
-import com.zimbra.doc.soap.ValueDescription;
-import com.zimbra.doc.soap.XmlAttributeDescription;
-import com.zimbra.doc.soap.XmlElementDescription;
-import com.zimbra.soap.JaxbUtil;
+import org.zmail.doc.soap.Command;
+import org.zmail.doc.soap.Root;
+import org.zmail.doc.soap.ValueDescription;
+import org.zmail.doc.soap.XmlAttributeDescription;
+import org.zmail.doc.soap.XmlElementDescription;
+import org.zmail.soap.JaxbUtil;
 
 public class SoapApiDescription {
     private String buildVersion;

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.type;
+package org.zmail.soap.mail.type;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -32,9 +32,9 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.type.ZmBoolean;
-import com.zimbra.soap.json.jackson.annotate.ZimbraUniqueElement;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.type.ZmBoolean;
+import org.zmail.soap.json.jackson.annotate.ZmailUniqueElement;
 
 // Root element name needed to differentiate between types of folder
 @XmlRootElement(name=MailConstants.E_FOLDER /* folder */)
@@ -274,7 +274,7 @@ public class Folder {
     /**
      * @zm-api-field-description ACL for sharing
      */
-    @ZimbraUniqueElement
+    @ZmailUniqueElement
     @XmlElement(name=MailConstants.E_ACL /* acl */, required=false)
     private Acl acl;
 

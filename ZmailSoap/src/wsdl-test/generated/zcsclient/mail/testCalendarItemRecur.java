@@ -33,11 +33,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="exceptId" type="{urn:zimbraMail}exceptionRecurIdInfo" minOccurs="0"/>
- *         &lt;element name="s" type="{urn:zimbraMail}dtTimeInfo" minOccurs="0"/>
- *         &lt;element name="e" type="{urn:zimbraMail}dtTimeInfo" minOccurs="0"/>
- *         &lt;element name="dur" type="{urn:zimbraMail}durationInfo" minOccurs="0"/>
- *         &lt;element name="recur" type="{urn:zimbraMail}recurrenceInfo" minOccurs="0"/>
+ *         &lt;element name="exceptId" type="{urn:zmailMail}exceptionRecurIdInfo" minOccurs="0"/>
+ *         &lt;element name="s" type="{urn:zmailMail}dtTimeInfo" minOccurs="0"/>
+ *         &lt;element name="e" type="{urn:zmailMail}dtTimeInfo" minOccurs="0"/>
+ *         &lt;element name="dur" type="{urn:zmailMail}durationInfo" minOccurs="0"/>
+ *         &lt;element name="recur" type="{urn:zmailMail}recurrenceInfo" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>

@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="generateBulkProvisionFileFromLDAPRequest">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraAdminExt}attrsImpl">
+ *     &lt;extension base="{urn:zmailAdminExt}attrsImpl">
  *       &lt;sequence>
  *         &lt;element name="password" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="generatePassword" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
@@ -52,8 +52,8 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="MapiProfile" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="MapiServer" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="MapiLogonUserDN" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="ZimbraAdminLogin" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="ZimbraAdminPassword" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="ZmailAdminLogin" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="ZmailAdminPassword" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="TargetDomainName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="provisionUsers" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
@@ -85,8 +85,8 @@ import javax.xml.bind.annotation.XmlType;
     "mapiProfile",
     "mapiServer",
     "mapiLogonUserDN",
-    "zimbraAdminLogin",
-    "zimbraAdminPassword",
+    "zmailAdminLogin",
+    "zmailAdminPassword",
     "targetDomainName",
     "provisionUsers"
 })
@@ -120,10 +120,10 @@ public class testGenerateBulkProvisionFileFromLDAPRequest
     protected String mapiServer;
     @XmlElement(name = "MapiLogonUserDN")
     protected String mapiLogonUserDN;
-    @XmlElement(name = "ZimbraAdminLogin")
-    protected String zimbraAdminLogin;
-    @XmlElement(name = "ZimbraAdminPassword")
-    protected String zimbraAdminPassword;
+    @XmlElement(name = "ZmailAdminLogin")
+    protected String zmailAdminLogin;
+    @XmlElement(name = "ZmailAdminPassword")
+    protected String zmailAdminPassword;
     @XmlElement(name = "TargetDomainName")
     protected String targetDomainName;
     protected String provisionUsers;
@@ -585,51 +585,51 @@ public class testGenerateBulkProvisionFileFromLDAPRequest
     }
 
     /**
-     * Gets the value of the zimbraAdminLogin property.
+     * Gets the value of the zmailAdminLogin property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getZimbraAdminLogin() {
-        return zimbraAdminLogin;
+    public String getZmailAdminLogin() {
+        return zmailAdminLogin;
     }
 
     /**
-     * Sets the value of the zimbraAdminLogin property.
+     * Sets the value of the zmailAdminLogin property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setZimbraAdminLogin(String value) {
-        this.zimbraAdminLogin = value;
+    public void setZmailAdminLogin(String value) {
+        this.zmailAdminLogin = value;
     }
 
     /**
-     * Gets the value of the zimbraAdminPassword property.
+     * Gets the value of the zmailAdminPassword property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getZimbraAdminPassword() {
-        return zimbraAdminPassword;
+    public String getZmailAdminPassword() {
+        return zmailAdminPassword;
     }
 
     /**
-     * Sets the value of the zimbraAdminPassword property.
+     * Sets the value of the zmailAdminPassword property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setZimbraAdminPassword(String value) {
-        this.zimbraAdminPassword = value;
+    public void setZmailAdminPassword(String value) {
+        this.zmailAdminPassword = value;
     }
 
     /**

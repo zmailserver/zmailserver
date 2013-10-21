@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.message;
+package org.zmail.soap.mail.message;
 
 import java.util.Collections;
 import java.util.List;
@@ -28,11 +28,11 @@ import javax.xml.bind.annotation.XmlType;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.OctopusXmlConstants;
-import com.zimbra.soap.mail.type.ActivityInfo;
-import com.zimbra.soap.mail.type.IdEmailName;
-import com.zimbra.soap.type.NamedElement;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.OctopusXmlConstants;
+import org.zmail.soap.mail.type.ActivityInfo;
+import org.zmail.soap.mail.type.IdEmailName;
+import org.zmail.soap.type.NamedElement;
 
 /**
  * @zm-api-response-description the response contains activities

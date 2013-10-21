@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.doc.soap.changelog;
+package org.zmail.doc.soap.changelog;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -32,8 +32,8 @@ import org.codehaus.jackson.map.JsonMappingException;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.zimbra.doc.soap.apidesc.SoapApiCommand;
-import com.zimbra.doc.soap.apidesc.SoapApiDescription;
+import org.zmail.doc.soap.apidesc.SoapApiCommand;
+import org.zmail.doc.soap.apidesc.SoapApiDescription;
 
 import freemarker.ext.beans.BeansWrapper;
 import freemarker.template.Configuration;
@@ -41,7 +41,7 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
 /**
- * Create an HTML Changelog for the Zimbra SOAP API
+ * Create an HTML Changelog for the Zmail SOAP API
  * @author gren
  */
 public class SoapApiChangeLog {

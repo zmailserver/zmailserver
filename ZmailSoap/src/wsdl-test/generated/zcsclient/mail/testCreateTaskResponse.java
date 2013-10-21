@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="createTaskResponse">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraMail}createCalendarItemResponse">
+ *     &lt;extension base="{urn:zmailMail}createCalendarItemResponse">
  *       &lt;sequence>
  *       &lt;/sequence>
  *     &lt;/extension>

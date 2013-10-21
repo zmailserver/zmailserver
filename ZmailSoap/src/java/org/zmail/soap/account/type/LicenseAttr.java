@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.account.type;
+package org.zmail.soap.account.type;
 
 import com.google.common.base.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -21,10 +21,10 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlValue;
 
-import com.zimbra.common.soap.AccountConstants;
+import org.zmail.common.soap.AccountConstants;
 
 /*
- * Used in GetInfoResponse if ZimbraLicenseExtension is installed
+ * Used in GetInfoResponse if ZmailLicenseExtension is installed
  */
 @XmlAccessorType(XmlAccessType.NONE)
 public class LicenseAttr {

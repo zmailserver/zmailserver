@@ -40,286 +40,286 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _Content_QNAME = new QName("urn:zimbraMail", "content");
-    private final static QName _BrowseRequest_QNAME = new QName("urn:zimbraMail", "BrowseRequest");
-    private final static QName _CreateDataSourceResponse_QNAME = new QName("urn:zimbraMail", "CreateDataSourceResponse");
-    private final static QName _GetWorkingHoursRequest_QNAME = new QName("urn:zimbraMail", "GetWorkingHoursRequest");
-    private final static QName _TestDataSourceResponse_QNAME = new QName("urn:zimbraMail", "TestDataSourceResponse");
-    private final static QName _Doc_QNAME = new QName("urn:zimbraMail", "doc");
-    private final static QName _GetTaskRequest_QNAME = new QName("urn:zimbraMail", "GetTaskRequest");
-    private final static QName _RankingActionResponse_QNAME = new QName("urn:zimbraMail", "RankingActionResponse");
-    private final static QName _ForwardAppointmentInviteRequest_QNAME = new QName("urn:zimbraMail", "ForwardAppointmentInviteRequest");
-    private final static QName _AnnounceOrganizerChangeResponse_QNAME = new QName("urn:zimbraMail", "AnnounceOrganizerChangeResponse");
-    private final static QName _CreateTaskRequest_QNAME = new QName("urn:zimbraMail", "CreateTaskRequest");
-    private final static QName _GrantPermissionResponse_QNAME = new QName("urn:zimbraMail", "GrantPermissionResponse");
-    private final static QName _GetFreeBusyResponse_QNAME = new QName("urn:zimbraMail", "GetFreeBusyResponse");
-    private final static QName _ListDocumentRevisionsRequest_QNAME = new QName("urn:zimbraMail", "ListDocumentRevisionsRequest");
-    private final static QName _GetAllDevicesRequest_QNAME = new QName("urn:zimbraMail", "GetAllDevicesRequest");
-    private final static QName _AutoCompleteRequest_QNAME = new QName("urn:zimbraMail", "AutoCompleteRequest");
-    private final static QName _SendInviteReplyRequest_QNAME = new QName("urn:zimbraMail", "SendInviteReplyRequest");
-    private final static QName _GetFolderResponse_QNAME = new QName("urn:zimbraMail", "GetFolderResponse");
-    private final static QName _GetSystemRetentionPolicyRequest_QNAME = new QName("urn:zimbraMail", "GetSystemRetentionPolicyRequest");
-    private final static QName _BounceMsgRequest_QNAME = new QName("urn:zimbraMail", "BounceMsgRequest");
-    private final static QName _CreateNoteRequest_QNAME = new QName("urn:zimbraMail", "CreateNoteRequest");
-    private final static QName _InvalidateReminderDeviceRequest_QNAME = new QName("urn:zimbraMail", "InvalidateReminderDeviceRequest");
-    private final static QName _ForwardAppointmentRequest_QNAME = new QName("urn:zimbraMail", "ForwardAppointmentRequest");
-    private final static QName _ModifySearchFolderResponse_QNAME = new QName("urn:zimbraMail", "ModifySearchFolderResponse");
-    private final static QName _ExportContactsResponse_QNAME = new QName("urn:zimbraMail", "ExportContactsResponse");
-    private final static QName _CreateDataSourceRequest_QNAME = new QName("urn:zimbraMail", "CreateDataSourceRequest");
-    private final static QName _AddAppointmentInviteResponse_QNAME = new QName("urn:zimbraMail", "AddAppointmentInviteResponse");
-    private final static QName _GetSystemRetentionPolicyResponse_QNAME = new QName("urn:zimbraMail", "GetSystemRetentionPolicyResponse");
-    private final static QName _SnoozeCalendarItemAlarmRequest_QNAME = new QName("urn:zimbraMail", "SnoozeCalendarItemAlarmRequest");
-    private final static QName _GetWatchersResponse_QNAME = new QName("urn:zimbraMail", "GetWatchersResponse");
-    private final static QName _ModifyTaskRequest_QNAME = new QName("urn:zimbraMail", "ModifyTaskRequest");
-    private final static QName _GetItemRequest_QNAME = new QName("urn:zimbraMail", "GetItemRequest");
-    private final static QName _GetMiniCalRequest_QNAME = new QName("urn:zimbraMail", "GetMiniCalRequest");
-    private final static QName _SetMailboxMetadataRequest_QNAME = new QName("urn:zimbraMail", "SetMailboxMetadataRequest");
-    private final static QName _ModifyAppointmentRequest_QNAME = new QName("urn:zimbraMail", "ModifyAppointmentRequest");
-    private final static QName _RankingActionRequest_QNAME = new QName("urn:zimbraMail", "RankingActionRequest");
-    private final static QName _ImportAppointmentsRequest_QNAME = new QName("urn:zimbraMail", "ImportAppointmentsRequest");
-    private final static QName _GetDataSourcesRequest_QNAME = new QName("urn:zimbraMail", "GetDataSourcesRequest");
-    private final static QName _GetNoteResponse_QNAME = new QName("urn:zimbraMail", "GetNoteResponse");
-    private final static QName _EmptyDumpsterResponse_QNAME = new QName("urn:zimbraMail", "EmptyDumpsterResponse");
-    private final static QName _CancelTaskResponse_QNAME = new QName("urn:zimbraMail", "CancelTaskResponse");
-    private final static QName _SyncResponse_QNAME = new QName("urn:zimbraMail", "SyncResponse");
-    private final static QName _CompleteTaskInstanceResponse_QNAME = new QName("urn:zimbraMail", "CompleteTaskInstanceResponse");
-    private final static QName _GetNoteRequest_QNAME = new QName("urn:zimbraMail", "GetNoteRequest");
-    private final static QName _RevokePermissionResponse_QNAME = new QName("urn:zimbraMail", "RevokePermissionResponse");
-    private final static QName _WaitSetResponse_QNAME = new QName("urn:zimbraMail", "WaitSetResponse");
-    private final static QName _SearchConvRequest_QNAME = new QName("urn:zimbraMail", "SearchConvRequest");
-    private final static QName _DestroyWaitSetResponse_QNAME = new QName("urn:zimbraMail", "DestroyWaitSetResponse");
-    private final static QName _CreateTagResponse_QNAME = new QName("urn:zimbraMail", "CreateTagResponse");
-    private final static QName _ExportContactsRequest_QNAME = new QName("urn:zimbraMail", "ExportContactsRequest");
-    private final static QName _ItemActionResponse_QNAME = new QName("urn:zimbraMail", "ItemActionResponse");
-    private final static QName _GetItemResponse_QNAME = new QName("urn:zimbraMail", "GetItemResponse");
-    private final static QName _SetTaskRequest_QNAME = new QName("urn:zimbraMail", "SetTaskRequest");
-    private final static QName _GetRecurResponse_QNAME = new QName("urn:zimbraMail", "GetRecurResponse");
-    private final static QName _GetConvRequest_QNAME = new QName("urn:zimbraMail", "GetConvRequest");
-    private final static QName _NoteActionRequest_QNAME = new QName("urn:zimbraMail", "NoteActionRequest");
-    private final static QName _GetFilterRulesRequest_QNAME = new QName("urn:zimbraMail", "GetFilterRulesRequest");
-    private final static QName _TestDataSourceRequest_QNAME = new QName("urn:zimbraMail", "TestDataSourceRequest");
-    private final static QName _GetWatchersRequest_QNAME = new QName("urn:zimbraMail", "GetWatchersRequest");
-    private final static QName _GetSpellDictionariesRequest_QNAME = new QName("urn:zimbraMail", "GetSpellDictionariesRequest");
-    private final static QName _CreateAppointmentRequest_QNAME = new QName("urn:zimbraMail", "CreateAppointmentRequest");
-    private final static QName _SetAppointmentResponse_QNAME = new QName("urn:zimbraMail", "SetAppointmentResponse");
-    private final static QName _Search_QNAME = new QName("urn:zimbraMail", "search");
-    private final static QName _CreateFolderRequest_QNAME = new QName("urn:zimbraMail", "CreateFolderRequest");
-    private final static QName _AnnounceOrganizerChangeRequest_QNAME = new QName("urn:zimbraMail", "AnnounceOrganizerChangeRequest");
-    private final static QName _DeclineCounterAppointmentRequest_QNAME = new QName("urn:zimbraMail", "DeclineCounterAppointmentRequest");
-    private final static QName _SearchRequest_QNAME = new QName("urn:zimbraMail", "SearchRequest");
-    private final static QName _ICalReplyRequest_QNAME = new QName("urn:zimbraMail", "ICalReplyRequest");
-    private final static QName _GetWorkingHoursResponse_QNAME = new QName("urn:zimbraMail", "GetWorkingHoursResponse");
-    private final static QName _GetMailboxMetadataRequest_QNAME = new QName("urn:zimbraMail", "GetMailboxMetadataRequest");
-    private final static QName _GetActivityStreamResponse_QNAME = new QName("urn:zimbraMail", "GetActivityStreamResponse");
-    private final static QName _AutoCompleteResponse_QNAME = new QName("urn:zimbraMail", "AutoCompleteResponse");
-    private final static QName _CreateTaskResponse_QNAME = new QName("urn:zimbraMail", "CreateTaskResponse");
-    private final static QName _SendVerificationCodeResponse_QNAME = new QName("urn:zimbraMail", "SendVerificationCodeResponse");
-    private final static QName _Cn_QNAME = new QName("urn:zimbraMail", "cn");
-    private final static QName _GetMiniCalResponse_QNAME = new QName("urn:zimbraMail", "GetMiniCalResponse");
-    private final static QName _ModifyAppointmentResponse_QNAME = new QName("urn:zimbraMail", "ModifyAppointmentResponse");
-    private final static QName _ItemActionRequest_QNAME = new QName("urn:zimbraMail", "ItemActionRequest");
-    private final static QName _ImportContactsResponse_QNAME = new QName("urn:zimbraMail", "ImportContactsResponse");
-    private final static QName _GrantPermissionRequest_QNAME = new QName("urn:zimbraMail", "GrantPermissionRequest");
-    private final static QName _CheckPermissionRequest_QNAME = new QName("urn:zimbraMail", "CheckPermissionRequest");
-    private final static QName _GetMailboxMetadataResponse_QNAME = new QName("urn:zimbraMail", "GetMailboxMetadataResponse");
-    private final static QName _GenerateUUIDRequest_QNAME = new QName("urn:zimbraMail", "GenerateUUIDRequest");
-    private final static QName _SendDeliveryReportRequest_QNAME = new QName("urn:zimbraMail", "SendDeliveryReportRequest");
-    private final static QName _GetFilterRulesResponse_QNAME = new QName("urn:zimbraMail", "GetFilterRulesResponse");
-    private final static QName _GetOutgoingFilterRulesResponse_QNAME = new QName("urn:zimbraMail", "GetOutgoingFilterRulesResponse");
-    private final static QName _CreateContactRequest_QNAME = new QName("urn:zimbraMail", "CreateContactRequest");
-    private final static QName _SetMailboxMetadataResponse_QNAME = new QName("urn:zimbraMail", "SetMailboxMetadataResponse");
-    private final static QName _ExpandRecurRequest_QNAME = new QName("urn:zimbraMail", "ExpandRecurRequest");
-    private final static QName _SetCustomMetadataRequest_QNAME = new QName("urn:zimbraMail", "SetCustomMetadataRequest");
-    private final static QName _GetApptSummariesResponse_QNAME = new QName("urn:zimbraMail", "GetApptSummariesResponse");
-    private final static QName _GetImportStatusRequest_QNAME = new QName("urn:zimbraMail", "GetImportStatusRequest");
-    private final static QName _GetWatchingItemsRequest_QNAME = new QName("urn:zimbraMail", "GetWatchingItemsRequest");
-    private final static QName _EnableSharedReminderRequest_QNAME = new QName("urn:zimbraMail", "EnableSharedReminderRequest");
-    private final static QName _GetSearchFolderRequest_QNAME = new QName("urn:zimbraMail", "GetSearchFolderRequest");
-    private final static QName _SaveDocumentRequest_QNAME = new QName("urn:zimbraMail", "SaveDocumentRequest");
-    private final static QName _ForwardAppointmentResponse_QNAME = new QName("urn:zimbraMail", "ForwardAppointmentResponse");
-    private final static QName _VerifyCodeResponse_QNAME = new QName("urn:zimbraMail", "VerifyCodeResponse");
-    private final static QName _GetContactsResponse_QNAME = new QName("urn:zimbraMail", "GetContactsResponse");
-    private final static QName _NoOpRequest_QNAME = new QName("urn:zimbraMail", "NoOpRequest");
-    private final static QName _GetApptSummariesRequest_QNAME = new QName("urn:zimbraMail", "GetApptSummariesRequest");
-    private final static QName _ApplyOutgoingFilterRulesRequest_QNAME = new QName("urn:zimbraMail", "ApplyOutgoingFilterRulesRequest");
-    private final static QName _GetContactsRequest_QNAME = new QName("urn:zimbraMail", "GetContactsRequest");
-    private final static QName _CounterAppointmentResponse_QNAME = new QName("urn:zimbraMail", "CounterAppointmentResponse");
-    private final static QName _SendInviteReplyResponse_QNAME = new QName("urn:zimbraMail", "SendInviteReplyResponse");
-    private final static QName _ApplyOutgoingFilterRulesResponse_QNAME = new QName("urn:zimbraMail", "ApplyOutgoingFilterRulesResponse");
-    private final static QName _RegisterDeviceResponse_QNAME = new QName("urn:zimbraMail", "RegisterDeviceResponse");
-    private final static QName _ModifyTaskResponse_QNAME = new QName("urn:zimbraMail", "ModifyTaskResponse");
-    private final static QName _SaveDraftRequest_QNAME = new QName("urn:zimbraMail", "SaveDraftRequest");
-    private final static QName _CreateNoteResponse_QNAME = new QName("urn:zimbraMail", "CreateNoteResponse");
-    private final static QName _Mp_QNAME = new QName("urn:zimbraMail", "mp");
-    private final static QName _ImportDataRequest_QNAME = new QName("urn:zimbraMail", "ImportDataRequest");
-    private final static QName _CheckRecurConflictsRequest_QNAME = new QName("urn:zimbraMail", "CheckRecurConflictsRequest");
-    private final static QName _AddTaskInviteResponse_QNAME = new QName("urn:zimbraMail", "AddTaskInviteResponse");
-    private final static QName _GetICalResponse_QNAME = new QName("urn:zimbraMail", "GetICalResponse");
-    private final static QName _GetConvResponse_QNAME = new QName("urn:zimbraMail", "GetConvResponse");
-    private final static QName _ExpandRecurResponse_QNAME = new QName("urn:zimbraMail", "ExpandRecurResponse");
-    private final static QName _ConvActionResponse_QNAME = new QName("urn:zimbraMail", "ConvActionResponse");
-    private final static QName _ApplyFilterRulesRequest_QNAME = new QName("urn:zimbraMail", "ApplyFilterRulesRequest");
-    private final static QName _CheckDeviceStatusResponse_QNAME = new QName("urn:zimbraMail", "CheckDeviceStatusResponse");
-    private final static QName _SnoozeCalendarItemAlarmResponse_QNAME = new QName("urn:zimbraMail", "SnoozeCalendarItemAlarmResponse");
-    private final static QName _GetFolderRequest_QNAME = new QName("urn:zimbraMail", "GetFolderRequest");
-    private final static QName _CreateSearchFolderResponse_QNAME = new QName("urn:zimbraMail", "CreateSearchFolderResponse");
-    private final static QName _ImportAppointmentsResponse_QNAME = new QName("urn:zimbraMail", "ImportAppointmentsResponse");
-    private final static QName _DismissCalendarItemAlarmResponse_QNAME = new QName("urn:zimbraMail", "DismissCalendarItemAlarmResponse");
-    private final static QName _GetAppointmentRequest_QNAME = new QName("urn:zimbraMail", "GetAppointmentRequest");
-    private final static QName _CancelAppointmentResponse_QNAME = new QName("urn:zimbraMail", "CancelAppointmentResponse");
-    private final static QName _CreateMountpointResponse_QNAME = new QName("urn:zimbraMail", "CreateMountpointResponse");
-    private final static QName _DeclineCounterAppointmentResponse_QNAME = new QName("urn:zimbraMail", "DeclineCounterAppointmentResponse");
-    private final static QName _ModifyDataSourceResponse_QNAME = new QName("urn:zimbraMail", "ModifyDataSourceResponse");
-    private final static QName _SendDeliveryReportResponse_QNAME = new QName("urn:zimbraMail", "SendDeliveryReportResponse");
-    private final static QName _DiffDocumentResponse_QNAME = new QName("urn:zimbraMail", "DiffDocumentResponse");
-    private final static QName _GetCommentsResponse_QNAME = new QName("urn:zimbraMail", "GetCommentsResponse");
-    private final static QName _DocumentActionRequest_QNAME = new QName("urn:zimbraMail", "DocumentActionRequest");
-    private final static QName _DeleteDataSourceRequest_QNAME = new QName("urn:zimbraMail", "DeleteDataSourceRequest");
-    private final static QName _GetDocumentShareURLRequest_QNAME = new QName("urn:zimbraMail", "GetDocumentShareURLRequest");
-    private final static QName _FolderActionRequest_QNAME = new QName("urn:zimbraMail", "FolderActionRequest");
-    private final static QName _AddAppointmentInviteRequest_QNAME = new QName("urn:zimbraMail", "AddAppointmentInviteRequest");
-    private final static QName _GetShareNotificationsResponse_QNAME = new QName("urn:zimbraMail", "GetShareNotificationsResponse");
-    private final static QName _GetMsgMetadataResponse_QNAME = new QName("urn:zimbraMail", "GetMsgMetadataResponse");
-    private final static QName _GetSpellDictionariesResponse_QNAME = new QName("urn:zimbraMail", "GetSpellDictionariesResponse");
-    private final static QName _ForwardAppointmentInviteResponse_QNAME = new QName("urn:zimbraMail", "ForwardAppointmentInviteResponse");
-    private final static QName _Meta_QNAME = new QName("urn:zimbraMail", "meta");
-    private final static QName _GetFreeBusyRequest_QNAME = new QName("urn:zimbraMail", "GetFreeBusyRequest");
-    private final static QName _WaitSetRequest_QNAME = new QName("urn:zimbraMail", "WaitSetRequest");
-    private final static QName _UpdateDeviceStatusRequest_QNAME = new QName("urn:zimbraMail", "UpdateDeviceStatusRequest");
-    private final static QName _CreateAppointmentExceptionRequest_QNAME = new QName("urn:zimbraMail", "CreateAppointmentExceptionRequest");
-    private final static QName _SearchConvResponse_QNAME = new QName("urn:zimbraMail", "SearchConvResponse");
-    private final static QName _ModifyContactRequest_QNAME = new QName("urn:zimbraMail", "ModifyContactRequest");
-    private final static QName _CompleteTaskInstanceRequest_QNAME = new QName("urn:zimbraMail", "CompleteTaskInstanceRequest");
-    private final static QName _DeleteDeviceRequest_QNAME = new QName("urn:zimbraMail", "DeleteDeviceRequest");
-    private final static QName _SendShareNotificationResponse_QNAME = new QName("urn:zimbraMail", "SendShareNotificationResponse");
-    private final static QName _DismissCalendarItemAlarmRequest_QNAME = new QName("urn:zimbraMail", "DismissCalendarItemAlarmRequest");
-    private final static QName _ModifySearchFolderRequest_QNAME = new QName("urn:zimbraMail", "ModifySearchFolderRequest");
-    private final static QName _RemoveAttachmentsRequest_QNAME = new QName("urn:zimbraMail", "RemoveAttachmentsRequest");
-    private final static QName _GetTagRequest_QNAME = new QName("urn:zimbraMail", "GetTagRequest");
-    private final static QName _SendShareNotificationRequest_QNAME = new QName("urn:zimbraMail", "SendShareNotificationRequest");
-    private final static QName _BrowseResponse_QNAME = new QName("urn:zimbraMail", "BrowseResponse");
-    private final static QName _GetEffectiveFolderPermsRequest_QNAME = new QName("urn:zimbraMail", "GetEffectiveFolderPermsRequest");
-    private final static QName _SearchResponse_QNAME = new QName("urn:zimbraMail", "SearchResponse");
-    private final static QName _EnableSharedReminderResponse_QNAME = new QName("urn:zimbraMail", "EnableSharedReminderResponse");
-    private final static QName _TagActionRequest_QNAME = new QName("urn:zimbraMail", "TagActionRequest");
-    private final static QName _RetentionPolicy_QNAME = new QName("urn:zimbraMail", "retentionPolicy");
-    private final static QName _GenerateUUIDResponse_QNAME = new QName("urn:zimbraMail", "GenerateUUIDResponse");
-    private final static QName _DocumentActionResponse_QNAME = new QName("urn:zimbraMail", "DocumentActionResponse");
-    private final static QName _SaveDocumentResponse_QNAME = new QName("urn:zimbraMail", "SaveDocumentResponse");
-    private final static QName _EmptyDumpsterRequest_QNAME = new QName("urn:zimbraMail", "EmptyDumpsterRequest");
-    private final static QName _BounceMsgResponse_QNAME = new QName("urn:zimbraMail", "BounceMsgResponse");
-    private final static QName _VerifyCodeRequest_QNAME = new QName("urn:zimbraMail", "VerifyCodeRequest");
-    private final static QName _ModifyOutgoingFilterRulesResponse_QNAME = new QName("urn:zimbraMail", "ModifyOutgoingFilterRulesResponse");
-    private final static QName _InvalidateReminderDeviceResponse_QNAME = new QName("urn:zimbraMail", "InvalidateReminderDeviceResponse");
-    private final static QName _ModifyFilterRulesRequest_QNAME = new QName("urn:zimbraMail", "ModifyFilterRulesRequest");
-    private final static QName _CreateTagRequest_QNAME = new QName("urn:zimbraMail", "CreateTagRequest");
-    private final static QName _Link_QNAME = new QName("urn:zimbraMail", "link");
-    private final static QName _GetTaskResponse_QNAME = new QName("urn:zimbraMail", "GetTaskResponse");
-    private final static QName _GetShareNotificationsRequest_QNAME = new QName("urn:zimbraMail", "GetShareNotificationsRequest");
-    private final static QName _GetOutgoingFilterRulesRequest_QNAME = new QName("urn:zimbraMail", "GetOutgoingFilterRulesRequest");
-    private final static QName _CreateWaitSetRequest_QNAME = new QName("urn:zimbraMail", "CreateWaitSetRequest");
-    private final static QName _AddMsgRequest_QNAME = new QName("urn:zimbraMail", "AddMsgRequest");
-    private final static QName _CancelAppointmentRequest_QNAME = new QName("urn:zimbraMail", "CancelAppointmentRequest");
-    private final static QName _Folder_QNAME = new QName("urn:zimbraMail", "folder");
-    private final static QName _ContactActionResponse_QNAME = new QName("urn:zimbraMail", "ContactActionResponse");
-    private final static QName _CheckSpellingRequest_QNAME = new QName("urn:zimbraMail", "CheckSpellingRequest");
-    private final static QName _NoOpResponse_QNAME = new QName("urn:zimbraMail", "NoOpResponse");
-    private final static QName _GetCustomMetadataResponse_QNAME = new QName("urn:zimbraMail", "GetCustomMetadataResponse");
-    private final static QName _GetMsgRequest_QNAME = new QName("urn:zimbraMail", "GetMsgRequest");
-    private final static QName _SaveDraftResponse_QNAME = new QName("urn:zimbraMail", "SaveDraftResponse");
-    private final static QName _SyncRequest_QNAME = new QName("urn:zimbraMail", "SyncRequest");
-    private final static QName _GetAllDevicesResponse_QNAME = new QName("urn:zimbraMail", "GetAllDevicesResponse");
-    private final static QName _Policy_QNAME = new QName("urn:zimbraMail", "policy");
-    private final static QName _DestroyWaitSetRequest_QNAME = new QName("urn:zimbraMail", "DestroyWaitSetRequest");
-    private final static QName _CheckPermissionResponse_QNAME = new QName("urn:zimbraMail", "CheckPermissionResponse");
-    private final static QName _GetYahooAuthTokenResponse_QNAME = new QName("urn:zimbraMail", "GetYahooAuthTokenResponse");
-    private final static QName _ModifyFilterRulesResponse_QNAME = new QName("urn:zimbraMail", "ModifyFilterRulesResponse");
-    private final static QName _GetCalendarItemSummariesRequest_QNAME = new QName("urn:zimbraMail", "GetCalendarItemSummariesRequest");
-    private final static QName _GetTagResponse_QNAME = new QName("urn:zimbraMail", "GetTagResponse");
-    private final static QName _CreateFolderResponse_QNAME = new QName("urn:zimbraMail", "CreateFolderResponse");
-    private final static QName _DiffDocumentRequest_QNAME = new QName("urn:zimbraMail", "DiffDocumentRequest");
-    private final static QName _ICalReplyResponse_QNAME = new QName("urn:zimbraMail", "ICalReplyResponse");
-    private final static QName _MsgActionRequest_QNAME = new QName("urn:zimbraMail", "MsgActionRequest");
-    private final static QName _ModifyMailboxMetadataRequest_QNAME = new QName("urn:zimbraMail", "ModifyMailboxMetadataRequest");
-    private final static QName _ModifyMailboxMetadataResponse_QNAME = new QName("urn:zimbraMail", "ModifyMailboxMetadataResponse");
-    private final static QName _GetNotificationsRequest_QNAME = new QName("urn:zimbraMail", "GetNotificationsRequest");
-    private final static QName _ImportContactsRequest_QNAME = new QName("urn:zimbraMail", "ImportContactsRequest");
-    private final static QName _SetTaskResponse_QNAME = new QName("urn:zimbraMail", "SetTaskResponse");
-    private final static QName _GetMsgMetadataRequest_QNAME = new QName("urn:zimbraMail", "GetMsgMetadataRequest");
-    private final static QName _RegisterDeviceRequest_QNAME = new QName("urn:zimbraMail", "RegisterDeviceRequest");
-    private final static QName _MsgActionResponse_QNAME = new QName("urn:zimbraMail", "MsgActionResponse");
-    private final static QName _CheckRecurConflictsResponse_QNAME = new QName("urn:zimbraMail", "CheckRecurConflictsResponse");
-    private final static QName _SendMsgRequest_QNAME = new QName("urn:zimbraMail", "SendMsgRequest");
-    private final static QName _CounterAppointmentRequest_QNAME = new QName("urn:zimbraMail", "CounterAppointmentRequest");
-    private final static QName _ListDocumentRevisionsResponse_QNAME = new QName("urn:zimbraMail", "ListDocumentRevisionsResponse");
-    private final static QName _CreateTaskExceptionRequest_QNAME = new QName("urn:zimbraMail", "CreateTaskExceptionRequest");
-    private final static QName _CreateWaitSetResponse_QNAME = new QName("urn:zimbraMail", "CreateWaitSetResponse");
-    private final static QName _GetDocumentShareURLResponse_QNAME = new QName("urn:zimbraMail", "GetDocumentShareURLResponse");
-    private final static QName _RevokePermissionRequest_QNAME = new QName("urn:zimbraMail", "RevokePermissionRequest");
-    private final static QName _CreateMountpointRequest_QNAME = new QName("urn:zimbraMail", "CreateMountpointRequest");
-    private final static QName _GetRecurRequest_QNAME = new QName("urn:zimbraMail", "GetRecurRequest");
-    private final static QName _CreateAppointmentExceptionResponse_QNAME = new QName("urn:zimbraMail", "CreateAppointmentExceptionResponse");
-    private final static QName _GetImportStatusResponse_QNAME = new QName("urn:zimbraMail", "GetImportStatusResponse");
-    private final static QName _GetYahooCookieRequest_QNAME = new QName("urn:zimbraMail", "GetYahooCookieRequest");
-    private final static QName _SendVerificationCodeRequest_QNAME = new QName("urn:zimbraMail", "SendVerificationCodeRequest");
-    private final static QName _PurgeRevisionRequest_QNAME = new QName("urn:zimbraMail", "PurgeRevisionRequest");
-    private final static QName _M_QNAME = new QName("urn:zimbraMail", "m");
-    private final static QName _GetAppointmentResponse_QNAME = new QName("urn:zimbraMail", "GetAppointmentResponse");
-    private final static QName _GetYahooAuthTokenRequest_QNAME = new QName("urn:zimbraMail", "GetYahooAuthTokenRequest");
-    private final static QName _GetMsgResponse_QNAME = new QName("urn:zimbraMail", "GetMsgResponse");
-    private final static QName _GetShareDetailsRequest_QNAME = new QName("urn:zimbraMail", "GetShareDetailsRequest");
-    private final static QName _ConvActionRequest_QNAME = new QName("urn:zimbraMail", "ConvActionRequest");
-    private final static QName _ModifyDataSourceRequest_QNAME = new QName("urn:zimbraMail", "ModifyDataSourceRequest");
-    private final static QName _ModifyContactResponse_QNAME = new QName("urn:zimbraMail", "ModifyContactResponse");
-    private final static QName _GetActivityStreamRequest_QNAME = new QName("urn:zimbraMail", "GetActivityStreamRequest");
-    private final static QName _UpdateDeviceStatusResponse_QNAME = new QName("urn:zimbraMail", "UpdateDeviceStatusResponse");
-    private final static QName _GetICalRequest_QNAME = new QName("urn:zimbraMail", "GetICalRequest");
-    private final static QName _DeleteDataSourceResponse_QNAME = new QName("urn:zimbraMail", "DeleteDataSourceResponse");
-    private final static QName _GetCommentsRequest_QNAME = new QName("urn:zimbraMail", "GetCommentsRequest");
-    private final static QName _ImportDataResponse_QNAME = new QName("urn:zimbraMail", "ImportDataResponse");
-    private final static QName _NoteActionResponse_QNAME = new QName("urn:zimbraMail", "NoteActionResponse");
-    private final static QName _CreateTaskExceptionResponse_QNAME = new QName("urn:zimbraMail", "CreateTaskExceptionResponse");
-    private final static QName _CreateContactResponse_QNAME = new QName("urn:zimbraMail", "CreateContactResponse");
-    private final static QName _AddTaskInviteRequest_QNAME = new QName("urn:zimbraMail", "AddTaskInviteRequest");
-    private final static QName _CheckDeviceStatusRequest_QNAME = new QName("urn:zimbraMail", "CheckDeviceStatusRequest");
-    private final static QName _GetCalendarItemSummariesResponse_QNAME = new QName("urn:zimbraMail", "GetCalendarItemSummariesResponse");
-    private final static QName _RemoveAttachmentsResponse_QNAME = new QName("urn:zimbraMail", "RemoveAttachmentsResponse");
-    private final static QName _GetEffectiveFolderPermsResponse_QNAME = new QName("urn:zimbraMail", "GetEffectiveFolderPermsResponse");
-    private final static QName _GetCustomMetadataRequest_QNAME = new QName("urn:zimbraMail", "GetCustomMetadataRequest");
-    private final static QName _AddMsgResponse_QNAME = new QName("urn:zimbraMail", "AddMsgResponse");
-    private final static QName _CancelTaskRequest_QNAME = new QName("urn:zimbraMail", "CancelTaskRequest");
-    private final static QName _CheckSpellingResponse_QNAME = new QName("urn:zimbraMail", "CheckSpellingResponse");
-    private final static QName _GetDataSourcesResponse_QNAME = new QName("urn:zimbraMail", "GetDataSourcesResponse");
-    private final static QName _ModifyOutgoingFilterRulesRequest_QNAME = new QName("urn:zimbraMail", "ModifyOutgoingFilterRulesRequest");
-    private final static QName _GetTaskSummariesRequest_QNAME = new QName("urn:zimbraMail", "GetTaskSummariesRequest");
-    private final static QName _GetNotificationsResponse_QNAME = new QName("urn:zimbraMail", "GetNotificationsResponse");
-    private final static QName _AddCommentRequest_QNAME = new QName("urn:zimbraMail", "AddCommentRequest");
-    private final static QName _ContactActionRequest_QNAME = new QName("urn:zimbraMail", "ContactActionRequest");
-    private final static QName _GetShareDetailsResponse_QNAME = new QName("urn:zimbraMail", "GetShareDetailsResponse");
-    private final static QName _CreateAppointmentResponse_QNAME = new QName("urn:zimbraMail", "CreateAppointmentResponse");
-    private final static QName _CreateSearchFolderRequest_QNAME = new QName("urn:zimbraMail", "CreateSearchFolderRequest");
-    private final static QName _ApplyFilterRulesResponse_QNAME = new QName("urn:zimbraMail", "ApplyFilterRulesResponse");
-    private final static QName _SendMsgResponse_QNAME = new QName("urn:zimbraMail", "SendMsgResponse");
-    private final static QName _AddCommentResponse_QNAME = new QName("urn:zimbraMail", "AddCommentResponse");
-    private final static QName _PurgeRevisionResponse_QNAME = new QName("urn:zimbraMail", "PurgeRevisionResponse");
-    private final static QName _TagActionResponse_QNAME = new QName("urn:zimbraMail", "TagActionResponse");
-    private final static QName _SetAppointmentRequest_QNAME = new QName("urn:zimbraMail", "SetAppointmentRequest");
-    private final static QName _FolderActionResponse_QNAME = new QName("urn:zimbraMail", "FolderActionResponse");
-    private final static QName _DeleteDeviceResponse_QNAME = new QName("urn:zimbraMail", "DeleteDeviceResponse");
-    private final static QName _SetCustomMetadataResponse_QNAME = new QName("urn:zimbraMail", "SetCustomMetadataResponse");
-    private final static QName _GetSearchFolderResponse_QNAME = new QName("urn:zimbraMail", "GetSearchFolderResponse");
-    private final static QName _GetPermissionResponse_QNAME = new QName("urn:zimbraMail", "GetPermissionResponse");
-    private final static QName _GetWatchingItemsResponse_QNAME = new QName("urn:zimbraMail", "GetWatchingItemsResponse");
-    private final static QName _GetTaskSummariesResponse_QNAME = new QName("urn:zimbraMail", "GetTaskSummariesResponse");
-    private final static QName _GetPermissionRequest_QNAME = new QName("urn:zimbraMail", "GetPermissionRequest");
-    private final static QName _GetYahooCookieResponse_QNAME = new QName("urn:zimbraMail", "GetYahooCookieResponse");
-    private final static QName _testSyncDeletedInfoAppt_QNAME = new QName("urn:zimbraMail", "appt");
-    private final static QName _testSyncDeletedInfoW_QNAME = new QName("urn:zimbraMail", "w");
-    private final static QName _testSyncDeletedInfoNotes_QNAME = new QName("urn:zimbraMail", "notes");
-    private final static QName _testSyncDeletedInfoTask_QNAME = new QName("urn:zimbraMail", "task");
-    private final static QName _testSyncDeletedInfoTag_QNAME = new QName("urn:zimbraMail", "tag");
-    private final static QName _testSyncDeletedInfoC_QNAME = new QName("urn:zimbraMail", "c");
-    private final static QName _testSyncDeletedInfoChat_QNAME = new QName("urn:zimbraMail", "chat");
+    private final static QName _Content_QNAME = new QName("urn:zmailMail", "content");
+    private final static QName _BrowseRequest_QNAME = new QName("urn:zmailMail", "BrowseRequest");
+    private final static QName _CreateDataSourceResponse_QNAME = new QName("urn:zmailMail", "CreateDataSourceResponse");
+    private final static QName _GetWorkingHoursRequest_QNAME = new QName("urn:zmailMail", "GetWorkingHoursRequest");
+    private final static QName _TestDataSourceResponse_QNAME = new QName("urn:zmailMail", "TestDataSourceResponse");
+    private final static QName _Doc_QNAME = new QName("urn:zmailMail", "doc");
+    private final static QName _GetTaskRequest_QNAME = new QName("urn:zmailMail", "GetTaskRequest");
+    private final static QName _RankingActionResponse_QNAME = new QName("urn:zmailMail", "RankingActionResponse");
+    private final static QName _ForwardAppointmentInviteRequest_QNAME = new QName("urn:zmailMail", "ForwardAppointmentInviteRequest");
+    private final static QName _AnnounceOrganizerChangeResponse_QNAME = new QName("urn:zmailMail", "AnnounceOrganizerChangeResponse");
+    private final static QName _CreateTaskRequest_QNAME = new QName("urn:zmailMail", "CreateTaskRequest");
+    private final static QName _GrantPermissionResponse_QNAME = new QName("urn:zmailMail", "GrantPermissionResponse");
+    private final static QName _GetFreeBusyResponse_QNAME = new QName("urn:zmailMail", "GetFreeBusyResponse");
+    private final static QName _ListDocumentRevisionsRequest_QNAME = new QName("urn:zmailMail", "ListDocumentRevisionsRequest");
+    private final static QName _GetAllDevicesRequest_QNAME = new QName("urn:zmailMail", "GetAllDevicesRequest");
+    private final static QName _AutoCompleteRequest_QNAME = new QName("urn:zmailMail", "AutoCompleteRequest");
+    private final static QName _SendInviteReplyRequest_QNAME = new QName("urn:zmailMail", "SendInviteReplyRequest");
+    private final static QName _GetFolderResponse_QNAME = new QName("urn:zmailMail", "GetFolderResponse");
+    private final static QName _GetSystemRetentionPolicyRequest_QNAME = new QName("urn:zmailMail", "GetSystemRetentionPolicyRequest");
+    private final static QName _BounceMsgRequest_QNAME = new QName("urn:zmailMail", "BounceMsgRequest");
+    private final static QName _CreateNoteRequest_QNAME = new QName("urn:zmailMail", "CreateNoteRequest");
+    private final static QName _InvalidateReminderDeviceRequest_QNAME = new QName("urn:zmailMail", "InvalidateReminderDeviceRequest");
+    private final static QName _ForwardAppointmentRequest_QNAME = new QName("urn:zmailMail", "ForwardAppointmentRequest");
+    private final static QName _ModifySearchFolderResponse_QNAME = new QName("urn:zmailMail", "ModifySearchFolderResponse");
+    private final static QName _ExportContactsResponse_QNAME = new QName("urn:zmailMail", "ExportContactsResponse");
+    private final static QName _CreateDataSourceRequest_QNAME = new QName("urn:zmailMail", "CreateDataSourceRequest");
+    private final static QName _AddAppointmentInviteResponse_QNAME = new QName("urn:zmailMail", "AddAppointmentInviteResponse");
+    private final static QName _GetSystemRetentionPolicyResponse_QNAME = new QName("urn:zmailMail", "GetSystemRetentionPolicyResponse");
+    private final static QName _SnoozeCalendarItemAlarmRequest_QNAME = new QName("urn:zmailMail", "SnoozeCalendarItemAlarmRequest");
+    private final static QName _GetWatchersResponse_QNAME = new QName("urn:zmailMail", "GetWatchersResponse");
+    private final static QName _ModifyTaskRequest_QNAME = new QName("urn:zmailMail", "ModifyTaskRequest");
+    private final static QName _GetItemRequest_QNAME = new QName("urn:zmailMail", "GetItemRequest");
+    private final static QName _GetMiniCalRequest_QNAME = new QName("urn:zmailMail", "GetMiniCalRequest");
+    private final static QName _SetMailboxMetadataRequest_QNAME = new QName("urn:zmailMail", "SetMailboxMetadataRequest");
+    private final static QName _ModifyAppointmentRequest_QNAME = new QName("urn:zmailMail", "ModifyAppointmentRequest");
+    private final static QName _RankingActionRequest_QNAME = new QName("urn:zmailMail", "RankingActionRequest");
+    private final static QName _ImportAppointmentsRequest_QNAME = new QName("urn:zmailMail", "ImportAppointmentsRequest");
+    private final static QName _GetDataSourcesRequest_QNAME = new QName("urn:zmailMail", "GetDataSourcesRequest");
+    private final static QName _GetNoteResponse_QNAME = new QName("urn:zmailMail", "GetNoteResponse");
+    private final static QName _EmptyDumpsterResponse_QNAME = new QName("urn:zmailMail", "EmptyDumpsterResponse");
+    private final static QName _CancelTaskResponse_QNAME = new QName("urn:zmailMail", "CancelTaskResponse");
+    private final static QName _SyncResponse_QNAME = new QName("urn:zmailMail", "SyncResponse");
+    private final static QName _CompleteTaskInstanceResponse_QNAME = new QName("urn:zmailMail", "CompleteTaskInstanceResponse");
+    private final static QName _GetNoteRequest_QNAME = new QName("urn:zmailMail", "GetNoteRequest");
+    private final static QName _RevokePermissionResponse_QNAME = new QName("urn:zmailMail", "RevokePermissionResponse");
+    private final static QName _WaitSetResponse_QNAME = new QName("urn:zmailMail", "WaitSetResponse");
+    private final static QName _SearchConvRequest_QNAME = new QName("urn:zmailMail", "SearchConvRequest");
+    private final static QName _DestroyWaitSetResponse_QNAME = new QName("urn:zmailMail", "DestroyWaitSetResponse");
+    private final static QName _CreateTagResponse_QNAME = new QName("urn:zmailMail", "CreateTagResponse");
+    private final static QName _ExportContactsRequest_QNAME = new QName("urn:zmailMail", "ExportContactsRequest");
+    private final static QName _ItemActionResponse_QNAME = new QName("urn:zmailMail", "ItemActionResponse");
+    private final static QName _GetItemResponse_QNAME = new QName("urn:zmailMail", "GetItemResponse");
+    private final static QName _SetTaskRequest_QNAME = new QName("urn:zmailMail", "SetTaskRequest");
+    private final static QName _GetRecurResponse_QNAME = new QName("urn:zmailMail", "GetRecurResponse");
+    private final static QName _GetConvRequest_QNAME = new QName("urn:zmailMail", "GetConvRequest");
+    private final static QName _NoteActionRequest_QNAME = new QName("urn:zmailMail", "NoteActionRequest");
+    private final static QName _GetFilterRulesRequest_QNAME = new QName("urn:zmailMail", "GetFilterRulesRequest");
+    private final static QName _TestDataSourceRequest_QNAME = new QName("urn:zmailMail", "TestDataSourceRequest");
+    private final static QName _GetWatchersRequest_QNAME = new QName("urn:zmailMail", "GetWatchersRequest");
+    private final static QName _GetSpellDictionariesRequest_QNAME = new QName("urn:zmailMail", "GetSpellDictionariesRequest");
+    private final static QName _CreateAppointmentRequest_QNAME = new QName("urn:zmailMail", "CreateAppointmentRequest");
+    private final static QName _SetAppointmentResponse_QNAME = new QName("urn:zmailMail", "SetAppointmentResponse");
+    private final static QName _Search_QNAME = new QName("urn:zmailMail", "search");
+    private final static QName _CreateFolderRequest_QNAME = new QName("urn:zmailMail", "CreateFolderRequest");
+    private final static QName _AnnounceOrganizerChangeRequest_QNAME = new QName("urn:zmailMail", "AnnounceOrganizerChangeRequest");
+    private final static QName _DeclineCounterAppointmentRequest_QNAME = new QName("urn:zmailMail", "DeclineCounterAppointmentRequest");
+    private final static QName _SearchRequest_QNAME = new QName("urn:zmailMail", "SearchRequest");
+    private final static QName _ICalReplyRequest_QNAME = new QName("urn:zmailMail", "ICalReplyRequest");
+    private final static QName _GetWorkingHoursResponse_QNAME = new QName("urn:zmailMail", "GetWorkingHoursResponse");
+    private final static QName _GetMailboxMetadataRequest_QNAME = new QName("urn:zmailMail", "GetMailboxMetadataRequest");
+    private final static QName _GetActivityStreamResponse_QNAME = new QName("urn:zmailMail", "GetActivityStreamResponse");
+    private final static QName _AutoCompleteResponse_QNAME = new QName("urn:zmailMail", "AutoCompleteResponse");
+    private final static QName _CreateTaskResponse_QNAME = new QName("urn:zmailMail", "CreateTaskResponse");
+    private final static QName _SendVerificationCodeResponse_QNAME = new QName("urn:zmailMail", "SendVerificationCodeResponse");
+    private final static QName _Cn_QNAME = new QName("urn:zmailMail", "cn");
+    private final static QName _GetMiniCalResponse_QNAME = new QName("urn:zmailMail", "GetMiniCalResponse");
+    private final static QName _ModifyAppointmentResponse_QNAME = new QName("urn:zmailMail", "ModifyAppointmentResponse");
+    private final static QName _ItemActionRequest_QNAME = new QName("urn:zmailMail", "ItemActionRequest");
+    private final static QName _ImportContactsResponse_QNAME = new QName("urn:zmailMail", "ImportContactsResponse");
+    private final static QName _GrantPermissionRequest_QNAME = new QName("urn:zmailMail", "GrantPermissionRequest");
+    private final static QName _CheckPermissionRequest_QNAME = new QName("urn:zmailMail", "CheckPermissionRequest");
+    private final static QName _GetMailboxMetadataResponse_QNAME = new QName("urn:zmailMail", "GetMailboxMetadataResponse");
+    private final static QName _GenerateUUIDRequest_QNAME = new QName("urn:zmailMail", "GenerateUUIDRequest");
+    private final static QName _SendDeliveryReportRequest_QNAME = new QName("urn:zmailMail", "SendDeliveryReportRequest");
+    private final static QName _GetFilterRulesResponse_QNAME = new QName("urn:zmailMail", "GetFilterRulesResponse");
+    private final static QName _GetOutgoingFilterRulesResponse_QNAME = new QName("urn:zmailMail", "GetOutgoingFilterRulesResponse");
+    private final static QName _CreateContactRequest_QNAME = new QName("urn:zmailMail", "CreateContactRequest");
+    private final static QName _SetMailboxMetadataResponse_QNAME = new QName("urn:zmailMail", "SetMailboxMetadataResponse");
+    private final static QName _ExpandRecurRequest_QNAME = new QName("urn:zmailMail", "ExpandRecurRequest");
+    private final static QName _SetCustomMetadataRequest_QNAME = new QName("urn:zmailMail", "SetCustomMetadataRequest");
+    private final static QName _GetApptSummariesResponse_QNAME = new QName("urn:zmailMail", "GetApptSummariesResponse");
+    private final static QName _GetImportStatusRequest_QNAME = new QName("urn:zmailMail", "GetImportStatusRequest");
+    private final static QName _GetWatchingItemsRequest_QNAME = new QName("urn:zmailMail", "GetWatchingItemsRequest");
+    private final static QName _EnableSharedReminderRequest_QNAME = new QName("urn:zmailMail", "EnableSharedReminderRequest");
+    private final static QName _GetSearchFolderRequest_QNAME = new QName("urn:zmailMail", "GetSearchFolderRequest");
+    private final static QName _SaveDocumentRequest_QNAME = new QName("urn:zmailMail", "SaveDocumentRequest");
+    private final static QName _ForwardAppointmentResponse_QNAME = new QName("urn:zmailMail", "ForwardAppointmentResponse");
+    private final static QName _VerifyCodeResponse_QNAME = new QName("urn:zmailMail", "VerifyCodeResponse");
+    private final static QName _GetContactsResponse_QNAME = new QName("urn:zmailMail", "GetContactsResponse");
+    private final static QName _NoOpRequest_QNAME = new QName("urn:zmailMail", "NoOpRequest");
+    private final static QName _GetApptSummariesRequest_QNAME = new QName("urn:zmailMail", "GetApptSummariesRequest");
+    private final static QName _ApplyOutgoingFilterRulesRequest_QNAME = new QName("urn:zmailMail", "ApplyOutgoingFilterRulesRequest");
+    private final static QName _GetContactsRequest_QNAME = new QName("urn:zmailMail", "GetContactsRequest");
+    private final static QName _CounterAppointmentResponse_QNAME = new QName("urn:zmailMail", "CounterAppointmentResponse");
+    private final static QName _SendInviteReplyResponse_QNAME = new QName("urn:zmailMail", "SendInviteReplyResponse");
+    private final static QName _ApplyOutgoingFilterRulesResponse_QNAME = new QName("urn:zmailMail", "ApplyOutgoingFilterRulesResponse");
+    private final static QName _RegisterDeviceResponse_QNAME = new QName("urn:zmailMail", "RegisterDeviceResponse");
+    private final static QName _ModifyTaskResponse_QNAME = new QName("urn:zmailMail", "ModifyTaskResponse");
+    private final static QName _SaveDraftRequest_QNAME = new QName("urn:zmailMail", "SaveDraftRequest");
+    private final static QName _CreateNoteResponse_QNAME = new QName("urn:zmailMail", "CreateNoteResponse");
+    private final static QName _Mp_QNAME = new QName("urn:zmailMail", "mp");
+    private final static QName _ImportDataRequest_QNAME = new QName("urn:zmailMail", "ImportDataRequest");
+    private final static QName _CheckRecurConflictsRequest_QNAME = new QName("urn:zmailMail", "CheckRecurConflictsRequest");
+    private final static QName _AddTaskInviteResponse_QNAME = new QName("urn:zmailMail", "AddTaskInviteResponse");
+    private final static QName _GetICalResponse_QNAME = new QName("urn:zmailMail", "GetICalResponse");
+    private final static QName _GetConvResponse_QNAME = new QName("urn:zmailMail", "GetConvResponse");
+    private final static QName _ExpandRecurResponse_QNAME = new QName("urn:zmailMail", "ExpandRecurResponse");
+    private final static QName _ConvActionResponse_QNAME = new QName("urn:zmailMail", "ConvActionResponse");
+    private final static QName _ApplyFilterRulesRequest_QNAME = new QName("urn:zmailMail", "ApplyFilterRulesRequest");
+    private final static QName _CheckDeviceStatusResponse_QNAME = new QName("urn:zmailMail", "CheckDeviceStatusResponse");
+    private final static QName _SnoozeCalendarItemAlarmResponse_QNAME = new QName("urn:zmailMail", "SnoozeCalendarItemAlarmResponse");
+    private final static QName _GetFolderRequest_QNAME = new QName("urn:zmailMail", "GetFolderRequest");
+    private final static QName _CreateSearchFolderResponse_QNAME = new QName("urn:zmailMail", "CreateSearchFolderResponse");
+    private final static QName _ImportAppointmentsResponse_QNAME = new QName("urn:zmailMail", "ImportAppointmentsResponse");
+    private final static QName _DismissCalendarItemAlarmResponse_QNAME = new QName("urn:zmailMail", "DismissCalendarItemAlarmResponse");
+    private final static QName _GetAppointmentRequest_QNAME = new QName("urn:zmailMail", "GetAppointmentRequest");
+    private final static QName _CancelAppointmentResponse_QNAME = new QName("urn:zmailMail", "CancelAppointmentResponse");
+    private final static QName _CreateMountpointResponse_QNAME = new QName("urn:zmailMail", "CreateMountpointResponse");
+    private final static QName _DeclineCounterAppointmentResponse_QNAME = new QName("urn:zmailMail", "DeclineCounterAppointmentResponse");
+    private final static QName _ModifyDataSourceResponse_QNAME = new QName("urn:zmailMail", "ModifyDataSourceResponse");
+    private final static QName _SendDeliveryReportResponse_QNAME = new QName("urn:zmailMail", "SendDeliveryReportResponse");
+    private final static QName _DiffDocumentResponse_QNAME = new QName("urn:zmailMail", "DiffDocumentResponse");
+    private final static QName _GetCommentsResponse_QNAME = new QName("urn:zmailMail", "GetCommentsResponse");
+    private final static QName _DocumentActionRequest_QNAME = new QName("urn:zmailMail", "DocumentActionRequest");
+    private final static QName _DeleteDataSourceRequest_QNAME = new QName("urn:zmailMail", "DeleteDataSourceRequest");
+    private final static QName _GetDocumentShareURLRequest_QNAME = new QName("urn:zmailMail", "GetDocumentShareURLRequest");
+    private final static QName _FolderActionRequest_QNAME = new QName("urn:zmailMail", "FolderActionRequest");
+    private final static QName _AddAppointmentInviteRequest_QNAME = new QName("urn:zmailMail", "AddAppointmentInviteRequest");
+    private final static QName _GetShareNotificationsResponse_QNAME = new QName("urn:zmailMail", "GetShareNotificationsResponse");
+    private final static QName _GetMsgMetadataResponse_QNAME = new QName("urn:zmailMail", "GetMsgMetadataResponse");
+    private final static QName _GetSpellDictionariesResponse_QNAME = new QName("urn:zmailMail", "GetSpellDictionariesResponse");
+    private final static QName _ForwardAppointmentInviteResponse_QNAME = new QName("urn:zmailMail", "ForwardAppointmentInviteResponse");
+    private final static QName _Meta_QNAME = new QName("urn:zmailMail", "meta");
+    private final static QName _GetFreeBusyRequest_QNAME = new QName("urn:zmailMail", "GetFreeBusyRequest");
+    private final static QName _WaitSetRequest_QNAME = new QName("urn:zmailMail", "WaitSetRequest");
+    private final static QName _UpdateDeviceStatusRequest_QNAME = new QName("urn:zmailMail", "UpdateDeviceStatusRequest");
+    private final static QName _CreateAppointmentExceptionRequest_QNAME = new QName("urn:zmailMail", "CreateAppointmentExceptionRequest");
+    private final static QName _SearchConvResponse_QNAME = new QName("urn:zmailMail", "SearchConvResponse");
+    private final static QName _ModifyContactRequest_QNAME = new QName("urn:zmailMail", "ModifyContactRequest");
+    private final static QName _CompleteTaskInstanceRequest_QNAME = new QName("urn:zmailMail", "CompleteTaskInstanceRequest");
+    private final static QName _DeleteDeviceRequest_QNAME = new QName("urn:zmailMail", "DeleteDeviceRequest");
+    private final static QName _SendShareNotificationResponse_QNAME = new QName("urn:zmailMail", "SendShareNotificationResponse");
+    private final static QName _DismissCalendarItemAlarmRequest_QNAME = new QName("urn:zmailMail", "DismissCalendarItemAlarmRequest");
+    private final static QName _ModifySearchFolderRequest_QNAME = new QName("urn:zmailMail", "ModifySearchFolderRequest");
+    private final static QName _RemoveAttachmentsRequest_QNAME = new QName("urn:zmailMail", "RemoveAttachmentsRequest");
+    private final static QName _GetTagRequest_QNAME = new QName("urn:zmailMail", "GetTagRequest");
+    private final static QName _SendShareNotificationRequest_QNAME = new QName("urn:zmailMail", "SendShareNotificationRequest");
+    private final static QName _BrowseResponse_QNAME = new QName("urn:zmailMail", "BrowseResponse");
+    private final static QName _GetEffectiveFolderPermsRequest_QNAME = new QName("urn:zmailMail", "GetEffectiveFolderPermsRequest");
+    private final static QName _SearchResponse_QNAME = new QName("urn:zmailMail", "SearchResponse");
+    private final static QName _EnableSharedReminderResponse_QNAME = new QName("urn:zmailMail", "EnableSharedReminderResponse");
+    private final static QName _TagActionRequest_QNAME = new QName("urn:zmailMail", "TagActionRequest");
+    private final static QName _RetentionPolicy_QNAME = new QName("urn:zmailMail", "retentionPolicy");
+    private final static QName _GenerateUUIDResponse_QNAME = new QName("urn:zmailMail", "GenerateUUIDResponse");
+    private final static QName _DocumentActionResponse_QNAME = new QName("urn:zmailMail", "DocumentActionResponse");
+    private final static QName _SaveDocumentResponse_QNAME = new QName("urn:zmailMail", "SaveDocumentResponse");
+    private final static QName _EmptyDumpsterRequest_QNAME = new QName("urn:zmailMail", "EmptyDumpsterRequest");
+    private final static QName _BounceMsgResponse_QNAME = new QName("urn:zmailMail", "BounceMsgResponse");
+    private final static QName _VerifyCodeRequest_QNAME = new QName("urn:zmailMail", "VerifyCodeRequest");
+    private final static QName _ModifyOutgoingFilterRulesResponse_QNAME = new QName("urn:zmailMail", "ModifyOutgoingFilterRulesResponse");
+    private final static QName _InvalidateReminderDeviceResponse_QNAME = new QName("urn:zmailMail", "InvalidateReminderDeviceResponse");
+    private final static QName _ModifyFilterRulesRequest_QNAME = new QName("urn:zmailMail", "ModifyFilterRulesRequest");
+    private final static QName _CreateTagRequest_QNAME = new QName("urn:zmailMail", "CreateTagRequest");
+    private final static QName _Link_QNAME = new QName("urn:zmailMail", "link");
+    private final static QName _GetTaskResponse_QNAME = new QName("urn:zmailMail", "GetTaskResponse");
+    private final static QName _GetShareNotificationsRequest_QNAME = new QName("urn:zmailMail", "GetShareNotificationsRequest");
+    private final static QName _GetOutgoingFilterRulesRequest_QNAME = new QName("urn:zmailMail", "GetOutgoingFilterRulesRequest");
+    private final static QName _CreateWaitSetRequest_QNAME = new QName("urn:zmailMail", "CreateWaitSetRequest");
+    private final static QName _AddMsgRequest_QNAME = new QName("urn:zmailMail", "AddMsgRequest");
+    private final static QName _CancelAppointmentRequest_QNAME = new QName("urn:zmailMail", "CancelAppointmentRequest");
+    private final static QName _Folder_QNAME = new QName("urn:zmailMail", "folder");
+    private final static QName _ContactActionResponse_QNAME = new QName("urn:zmailMail", "ContactActionResponse");
+    private final static QName _CheckSpellingRequest_QNAME = new QName("urn:zmailMail", "CheckSpellingRequest");
+    private final static QName _NoOpResponse_QNAME = new QName("urn:zmailMail", "NoOpResponse");
+    private final static QName _GetCustomMetadataResponse_QNAME = new QName("urn:zmailMail", "GetCustomMetadataResponse");
+    private final static QName _GetMsgRequest_QNAME = new QName("urn:zmailMail", "GetMsgRequest");
+    private final static QName _SaveDraftResponse_QNAME = new QName("urn:zmailMail", "SaveDraftResponse");
+    private final static QName _SyncRequest_QNAME = new QName("urn:zmailMail", "SyncRequest");
+    private final static QName _GetAllDevicesResponse_QNAME = new QName("urn:zmailMail", "GetAllDevicesResponse");
+    private final static QName _Policy_QNAME = new QName("urn:zmailMail", "policy");
+    private final static QName _DestroyWaitSetRequest_QNAME = new QName("urn:zmailMail", "DestroyWaitSetRequest");
+    private final static QName _CheckPermissionResponse_QNAME = new QName("urn:zmailMail", "CheckPermissionResponse");
+    private final static QName _GetYahooAuthTokenResponse_QNAME = new QName("urn:zmailMail", "GetYahooAuthTokenResponse");
+    private final static QName _ModifyFilterRulesResponse_QNAME = new QName("urn:zmailMail", "ModifyFilterRulesResponse");
+    private final static QName _GetCalendarItemSummariesRequest_QNAME = new QName("urn:zmailMail", "GetCalendarItemSummariesRequest");
+    private final static QName _GetTagResponse_QNAME = new QName("urn:zmailMail", "GetTagResponse");
+    private final static QName _CreateFolderResponse_QNAME = new QName("urn:zmailMail", "CreateFolderResponse");
+    private final static QName _DiffDocumentRequest_QNAME = new QName("urn:zmailMail", "DiffDocumentRequest");
+    private final static QName _ICalReplyResponse_QNAME = new QName("urn:zmailMail", "ICalReplyResponse");
+    private final static QName _MsgActionRequest_QNAME = new QName("urn:zmailMail", "MsgActionRequest");
+    private final static QName _ModifyMailboxMetadataRequest_QNAME = new QName("urn:zmailMail", "ModifyMailboxMetadataRequest");
+    private final static QName _ModifyMailboxMetadataResponse_QNAME = new QName("urn:zmailMail", "ModifyMailboxMetadataResponse");
+    private final static QName _GetNotificationsRequest_QNAME = new QName("urn:zmailMail", "GetNotificationsRequest");
+    private final static QName _ImportContactsRequest_QNAME = new QName("urn:zmailMail", "ImportContactsRequest");
+    private final static QName _SetTaskResponse_QNAME = new QName("urn:zmailMail", "SetTaskResponse");
+    private final static QName _GetMsgMetadataRequest_QNAME = new QName("urn:zmailMail", "GetMsgMetadataRequest");
+    private final static QName _RegisterDeviceRequest_QNAME = new QName("urn:zmailMail", "RegisterDeviceRequest");
+    private final static QName _MsgActionResponse_QNAME = new QName("urn:zmailMail", "MsgActionResponse");
+    private final static QName _CheckRecurConflictsResponse_QNAME = new QName("urn:zmailMail", "CheckRecurConflictsResponse");
+    private final static QName _SendMsgRequest_QNAME = new QName("urn:zmailMail", "SendMsgRequest");
+    private final static QName _CounterAppointmentRequest_QNAME = new QName("urn:zmailMail", "CounterAppointmentRequest");
+    private final static QName _ListDocumentRevisionsResponse_QNAME = new QName("urn:zmailMail", "ListDocumentRevisionsResponse");
+    private final static QName _CreateTaskExceptionRequest_QNAME = new QName("urn:zmailMail", "CreateTaskExceptionRequest");
+    private final static QName _CreateWaitSetResponse_QNAME = new QName("urn:zmailMail", "CreateWaitSetResponse");
+    private final static QName _GetDocumentShareURLResponse_QNAME = new QName("urn:zmailMail", "GetDocumentShareURLResponse");
+    private final static QName _RevokePermissionRequest_QNAME = new QName("urn:zmailMail", "RevokePermissionRequest");
+    private final static QName _CreateMountpointRequest_QNAME = new QName("urn:zmailMail", "CreateMountpointRequest");
+    private final static QName _GetRecurRequest_QNAME = new QName("urn:zmailMail", "GetRecurRequest");
+    private final static QName _CreateAppointmentExceptionResponse_QNAME = new QName("urn:zmailMail", "CreateAppointmentExceptionResponse");
+    private final static QName _GetImportStatusResponse_QNAME = new QName("urn:zmailMail", "GetImportStatusResponse");
+    private final static QName _GetYahooCookieRequest_QNAME = new QName("urn:zmailMail", "GetYahooCookieRequest");
+    private final static QName _SendVerificationCodeRequest_QNAME = new QName("urn:zmailMail", "SendVerificationCodeRequest");
+    private final static QName _PurgeRevisionRequest_QNAME = new QName("urn:zmailMail", "PurgeRevisionRequest");
+    private final static QName _M_QNAME = new QName("urn:zmailMail", "m");
+    private final static QName _GetAppointmentResponse_QNAME = new QName("urn:zmailMail", "GetAppointmentResponse");
+    private final static QName _GetYahooAuthTokenRequest_QNAME = new QName("urn:zmailMail", "GetYahooAuthTokenRequest");
+    private final static QName _GetMsgResponse_QNAME = new QName("urn:zmailMail", "GetMsgResponse");
+    private final static QName _GetShareDetailsRequest_QNAME = new QName("urn:zmailMail", "GetShareDetailsRequest");
+    private final static QName _ConvActionRequest_QNAME = new QName("urn:zmailMail", "ConvActionRequest");
+    private final static QName _ModifyDataSourceRequest_QNAME = new QName("urn:zmailMail", "ModifyDataSourceRequest");
+    private final static QName _ModifyContactResponse_QNAME = new QName("urn:zmailMail", "ModifyContactResponse");
+    private final static QName _GetActivityStreamRequest_QNAME = new QName("urn:zmailMail", "GetActivityStreamRequest");
+    private final static QName _UpdateDeviceStatusResponse_QNAME = new QName("urn:zmailMail", "UpdateDeviceStatusResponse");
+    private final static QName _GetICalRequest_QNAME = new QName("urn:zmailMail", "GetICalRequest");
+    private final static QName _DeleteDataSourceResponse_QNAME = new QName("urn:zmailMail", "DeleteDataSourceResponse");
+    private final static QName _GetCommentsRequest_QNAME = new QName("urn:zmailMail", "GetCommentsRequest");
+    private final static QName _ImportDataResponse_QNAME = new QName("urn:zmailMail", "ImportDataResponse");
+    private final static QName _NoteActionResponse_QNAME = new QName("urn:zmailMail", "NoteActionResponse");
+    private final static QName _CreateTaskExceptionResponse_QNAME = new QName("urn:zmailMail", "CreateTaskExceptionResponse");
+    private final static QName _CreateContactResponse_QNAME = new QName("urn:zmailMail", "CreateContactResponse");
+    private final static QName _AddTaskInviteRequest_QNAME = new QName("urn:zmailMail", "AddTaskInviteRequest");
+    private final static QName _CheckDeviceStatusRequest_QNAME = new QName("urn:zmailMail", "CheckDeviceStatusRequest");
+    private final static QName _GetCalendarItemSummariesResponse_QNAME = new QName("urn:zmailMail", "GetCalendarItemSummariesResponse");
+    private final static QName _RemoveAttachmentsResponse_QNAME = new QName("urn:zmailMail", "RemoveAttachmentsResponse");
+    private final static QName _GetEffectiveFolderPermsResponse_QNAME = new QName("urn:zmailMail", "GetEffectiveFolderPermsResponse");
+    private final static QName _GetCustomMetadataRequest_QNAME = new QName("urn:zmailMail", "GetCustomMetadataRequest");
+    private final static QName _AddMsgResponse_QNAME = new QName("urn:zmailMail", "AddMsgResponse");
+    private final static QName _CancelTaskRequest_QNAME = new QName("urn:zmailMail", "CancelTaskRequest");
+    private final static QName _CheckSpellingResponse_QNAME = new QName("urn:zmailMail", "CheckSpellingResponse");
+    private final static QName _GetDataSourcesResponse_QNAME = new QName("urn:zmailMail", "GetDataSourcesResponse");
+    private final static QName _ModifyOutgoingFilterRulesRequest_QNAME = new QName("urn:zmailMail", "ModifyOutgoingFilterRulesRequest");
+    private final static QName _GetTaskSummariesRequest_QNAME = new QName("urn:zmailMail", "GetTaskSummariesRequest");
+    private final static QName _GetNotificationsResponse_QNAME = new QName("urn:zmailMail", "GetNotificationsResponse");
+    private final static QName _AddCommentRequest_QNAME = new QName("urn:zmailMail", "AddCommentRequest");
+    private final static QName _ContactActionRequest_QNAME = new QName("urn:zmailMail", "ContactActionRequest");
+    private final static QName _GetShareDetailsResponse_QNAME = new QName("urn:zmailMail", "GetShareDetailsResponse");
+    private final static QName _CreateAppointmentResponse_QNAME = new QName("urn:zmailMail", "CreateAppointmentResponse");
+    private final static QName _CreateSearchFolderRequest_QNAME = new QName("urn:zmailMail", "CreateSearchFolderRequest");
+    private final static QName _ApplyFilterRulesResponse_QNAME = new QName("urn:zmailMail", "ApplyFilterRulesResponse");
+    private final static QName _SendMsgResponse_QNAME = new QName("urn:zmailMail", "SendMsgResponse");
+    private final static QName _AddCommentResponse_QNAME = new QName("urn:zmailMail", "AddCommentResponse");
+    private final static QName _PurgeRevisionResponse_QNAME = new QName("urn:zmailMail", "PurgeRevisionResponse");
+    private final static QName _TagActionResponse_QNAME = new QName("urn:zmailMail", "TagActionResponse");
+    private final static QName _SetAppointmentRequest_QNAME = new QName("urn:zmailMail", "SetAppointmentRequest");
+    private final static QName _FolderActionResponse_QNAME = new QName("urn:zmailMail", "FolderActionResponse");
+    private final static QName _DeleteDeviceResponse_QNAME = new QName("urn:zmailMail", "DeleteDeviceResponse");
+    private final static QName _SetCustomMetadataResponse_QNAME = new QName("urn:zmailMail", "SetCustomMetadataResponse");
+    private final static QName _GetSearchFolderResponse_QNAME = new QName("urn:zmailMail", "GetSearchFolderResponse");
+    private final static QName _GetPermissionResponse_QNAME = new QName("urn:zmailMail", "GetPermissionResponse");
+    private final static QName _GetWatchingItemsResponse_QNAME = new QName("urn:zmailMail", "GetWatchingItemsResponse");
+    private final static QName _GetTaskSummariesResponse_QNAME = new QName("urn:zmailMail", "GetTaskSummariesResponse");
+    private final static QName _GetPermissionRequest_QNAME = new QName("urn:zmailMail", "GetPermissionRequest");
+    private final static QName _GetYahooCookieResponse_QNAME = new QName("urn:zmailMail", "GetYahooCookieResponse");
+    private final static QName _testSyncDeletedInfoAppt_QNAME = new QName("urn:zmailMail", "appt");
+    private final static QName _testSyncDeletedInfoW_QNAME = new QName("urn:zmailMail", "w");
+    private final static QName _testSyncDeletedInfoNotes_QNAME = new QName("urn:zmailMail", "notes");
+    private final static QName _testSyncDeletedInfoTask_QNAME = new QName("urn:zmailMail", "task");
+    private final static QName _testSyncDeletedInfoTag_QNAME = new QName("urn:zmailMail", "tag");
+    private final static QName _testSyncDeletedInfoC_QNAME = new QName("urn:zmailMail", "c");
+    private final static QName _testSyncDeletedInfoChat_QNAME = new QName("urn:zmailMail", "chat");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: generated.zcsclient.mail
@@ -4948,7 +4948,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testContent }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "content")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "content")
     public JAXBElement<testContent> createContent(testContent value) {
         return new JAXBElement<testContent>(_Content_QNAME, testContent.class, null, value);
     }
@@ -4957,7 +4957,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testBrowseRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "BrowseRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "BrowseRequest")
     public JAXBElement<testBrowseRequest> createBrowseRequest(testBrowseRequest value) {
         return new JAXBElement<testBrowseRequest>(_BrowseRequest_QNAME, testBrowseRequest.class, null, value);
     }
@@ -4966,7 +4966,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testCreateDataSourceResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "CreateDataSourceResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "CreateDataSourceResponse")
     public JAXBElement<testCreateDataSourceResponse> createCreateDataSourceResponse(testCreateDataSourceResponse value) {
         return new JAXBElement<testCreateDataSourceResponse>(_CreateDataSourceResponse_QNAME, testCreateDataSourceResponse.class, null, value);
     }
@@ -4975,7 +4975,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetWorkingHoursRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetWorkingHoursRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetWorkingHoursRequest")
     public JAXBElement<testGetWorkingHoursRequest> createGetWorkingHoursRequest(testGetWorkingHoursRequest value) {
         return new JAXBElement<testGetWorkingHoursRequest>(_GetWorkingHoursRequest_QNAME, testGetWorkingHoursRequest.class, null, value);
     }
@@ -4984,7 +4984,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testTestDataSourceResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "TestDataSourceResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "TestDataSourceResponse")
     public JAXBElement<testTestDataSourceResponse> createTestDataSourceResponse(testTestDataSourceResponse value) {
         return new JAXBElement<testTestDataSourceResponse>(_TestDataSourceResponse_QNAME, testTestDataSourceResponse.class, null, value);
     }
@@ -4993,7 +4993,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testDocAttachSpec }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "doc")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "doc")
     public JAXBElement<testDocAttachSpec> createDoc(testDocAttachSpec value) {
         return new JAXBElement<testDocAttachSpec>(_Doc_QNAME, testDocAttachSpec.class, null, value);
     }
@@ -5002,7 +5002,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetTaskRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetTaskRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetTaskRequest")
     public JAXBElement<testGetTaskRequest> createGetTaskRequest(testGetTaskRequest value) {
         return new JAXBElement<testGetTaskRequest>(_GetTaskRequest_QNAME, testGetTaskRequest.class, null, value);
     }
@@ -5011,7 +5011,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testRankingActionResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "RankingActionResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "RankingActionResponse")
     public JAXBElement<testRankingActionResponse> createRankingActionResponse(testRankingActionResponse value) {
         return new JAXBElement<testRankingActionResponse>(_RankingActionResponse_QNAME, testRankingActionResponse.class, null, value);
     }
@@ -5020,7 +5020,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testForwardAppointmentInviteRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "ForwardAppointmentInviteRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "ForwardAppointmentInviteRequest")
     public JAXBElement<testForwardAppointmentInviteRequest> createForwardAppointmentInviteRequest(testForwardAppointmentInviteRequest value) {
         return new JAXBElement<testForwardAppointmentInviteRequest>(_ForwardAppointmentInviteRequest_QNAME, testForwardAppointmentInviteRequest.class, null, value);
     }
@@ -5029,7 +5029,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testAnnounceOrganizerChangeResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "AnnounceOrganizerChangeResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "AnnounceOrganizerChangeResponse")
     public JAXBElement<testAnnounceOrganizerChangeResponse> createAnnounceOrganizerChangeResponse(testAnnounceOrganizerChangeResponse value) {
         return new JAXBElement<testAnnounceOrganizerChangeResponse>(_AnnounceOrganizerChangeResponse_QNAME, testAnnounceOrganizerChangeResponse.class, null, value);
     }
@@ -5038,7 +5038,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testCreateTaskRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "CreateTaskRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "CreateTaskRequest")
     public JAXBElement<testCreateTaskRequest> createCreateTaskRequest(testCreateTaskRequest value) {
         return new JAXBElement<testCreateTaskRequest>(_CreateTaskRequest_QNAME, testCreateTaskRequest.class, null, value);
     }
@@ -5047,7 +5047,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGrantPermissionResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GrantPermissionResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GrantPermissionResponse")
     public JAXBElement<testGrantPermissionResponse> createGrantPermissionResponse(testGrantPermissionResponse value) {
         return new JAXBElement<testGrantPermissionResponse>(_GrantPermissionResponse_QNAME, testGrantPermissionResponse.class, null, value);
     }
@@ -5056,7 +5056,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetFreeBusyResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetFreeBusyResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetFreeBusyResponse")
     public JAXBElement<testGetFreeBusyResponse> createGetFreeBusyResponse(testGetFreeBusyResponse value) {
         return new JAXBElement<testGetFreeBusyResponse>(_GetFreeBusyResponse_QNAME, testGetFreeBusyResponse.class, null, value);
     }
@@ -5065,7 +5065,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testListDocumentRevisionsRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "ListDocumentRevisionsRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "ListDocumentRevisionsRequest")
     public JAXBElement<testListDocumentRevisionsRequest> createListDocumentRevisionsRequest(testListDocumentRevisionsRequest value) {
         return new JAXBElement<testListDocumentRevisionsRequest>(_ListDocumentRevisionsRequest_QNAME, testListDocumentRevisionsRequest.class, null, value);
     }
@@ -5074,7 +5074,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetAllDevicesRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetAllDevicesRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetAllDevicesRequest")
     public JAXBElement<testGetAllDevicesRequest> createGetAllDevicesRequest(testGetAllDevicesRequest value) {
         return new JAXBElement<testGetAllDevicesRequest>(_GetAllDevicesRequest_QNAME, testGetAllDevicesRequest.class, null, value);
     }
@@ -5083,7 +5083,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testAutoCompleteRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "AutoCompleteRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "AutoCompleteRequest")
     public JAXBElement<testAutoCompleteRequest> createAutoCompleteRequest(testAutoCompleteRequest value) {
         return new JAXBElement<testAutoCompleteRequest>(_AutoCompleteRequest_QNAME, testAutoCompleteRequest.class, null, value);
     }
@@ -5092,7 +5092,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testSendInviteReplyRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "SendInviteReplyRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "SendInviteReplyRequest")
     public JAXBElement<testSendInviteReplyRequest> createSendInviteReplyRequest(testSendInviteReplyRequest value) {
         return new JAXBElement<testSendInviteReplyRequest>(_SendInviteReplyRequest_QNAME, testSendInviteReplyRequest.class, null, value);
     }
@@ -5101,7 +5101,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetFolderResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetFolderResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetFolderResponse")
     public JAXBElement<testGetFolderResponse> createGetFolderResponse(testGetFolderResponse value) {
         return new JAXBElement<testGetFolderResponse>(_GetFolderResponse_QNAME, testGetFolderResponse.class, null, value);
     }
@@ -5110,7 +5110,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetSystemRetentionPolicyRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetSystemRetentionPolicyRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetSystemRetentionPolicyRequest")
     public JAXBElement<testGetSystemRetentionPolicyRequest> createGetSystemRetentionPolicyRequest(testGetSystemRetentionPolicyRequest value) {
         return new JAXBElement<testGetSystemRetentionPolicyRequest>(_GetSystemRetentionPolicyRequest_QNAME, testGetSystemRetentionPolicyRequest.class, null, value);
     }
@@ -5119,7 +5119,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testBounceMsgRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "BounceMsgRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "BounceMsgRequest")
     public JAXBElement<testBounceMsgRequest> createBounceMsgRequest(testBounceMsgRequest value) {
         return new JAXBElement<testBounceMsgRequest>(_BounceMsgRequest_QNAME, testBounceMsgRequest.class, null, value);
     }
@@ -5128,7 +5128,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testCreateNoteRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "CreateNoteRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "CreateNoteRequest")
     public JAXBElement<testCreateNoteRequest> createCreateNoteRequest(testCreateNoteRequest value) {
         return new JAXBElement<testCreateNoteRequest>(_CreateNoteRequest_QNAME, testCreateNoteRequest.class, null, value);
     }
@@ -5137,7 +5137,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testInvalidateReminderDeviceRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "InvalidateReminderDeviceRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "InvalidateReminderDeviceRequest")
     public JAXBElement<testInvalidateReminderDeviceRequest> createInvalidateReminderDeviceRequest(testInvalidateReminderDeviceRequest value) {
         return new JAXBElement<testInvalidateReminderDeviceRequest>(_InvalidateReminderDeviceRequest_QNAME, testInvalidateReminderDeviceRequest.class, null, value);
     }
@@ -5146,7 +5146,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testForwardAppointmentRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "ForwardAppointmentRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "ForwardAppointmentRequest")
     public JAXBElement<testForwardAppointmentRequest> createForwardAppointmentRequest(testForwardAppointmentRequest value) {
         return new JAXBElement<testForwardAppointmentRequest>(_ForwardAppointmentRequest_QNAME, testForwardAppointmentRequest.class, null, value);
     }
@@ -5155,7 +5155,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testModifySearchFolderResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "ModifySearchFolderResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "ModifySearchFolderResponse")
     public JAXBElement<testModifySearchFolderResponse> createModifySearchFolderResponse(testModifySearchFolderResponse value) {
         return new JAXBElement<testModifySearchFolderResponse>(_ModifySearchFolderResponse_QNAME, testModifySearchFolderResponse.class, null, value);
     }
@@ -5164,7 +5164,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testExportContactsResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "ExportContactsResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "ExportContactsResponse")
     public JAXBElement<testExportContactsResponse> createExportContactsResponse(testExportContactsResponse value) {
         return new JAXBElement<testExportContactsResponse>(_ExportContactsResponse_QNAME, testExportContactsResponse.class, null, value);
     }
@@ -5173,7 +5173,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testCreateDataSourceRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "CreateDataSourceRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "CreateDataSourceRequest")
     public JAXBElement<testCreateDataSourceRequest> createCreateDataSourceRequest(testCreateDataSourceRequest value) {
         return new JAXBElement<testCreateDataSourceRequest>(_CreateDataSourceRequest_QNAME, testCreateDataSourceRequest.class, null, value);
     }
@@ -5182,7 +5182,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testAddAppointmentInviteResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "AddAppointmentInviteResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "AddAppointmentInviteResponse")
     public JAXBElement<testAddAppointmentInviteResponse> createAddAppointmentInviteResponse(testAddAppointmentInviteResponse value) {
         return new JAXBElement<testAddAppointmentInviteResponse>(_AddAppointmentInviteResponse_QNAME, testAddAppointmentInviteResponse.class, null, value);
     }
@@ -5191,7 +5191,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetSystemRetentionPolicyResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetSystemRetentionPolicyResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetSystemRetentionPolicyResponse")
     public JAXBElement<testGetSystemRetentionPolicyResponse> createGetSystemRetentionPolicyResponse(testGetSystemRetentionPolicyResponse value) {
         return new JAXBElement<testGetSystemRetentionPolicyResponse>(_GetSystemRetentionPolicyResponse_QNAME, testGetSystemRetentionPolicyResponse.class, null, value);
     }
@@ -5200,7 +5200,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testSnoozeCalendarItemAlarmRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "SnoozeCalendarItemAlarmRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "SnoozeCalendarItemAlarmRequest")
     public JAXBElement<testSnoozeCalendarItemAlarmRequest> createSnoozeCalendarItemAlarmRequest(testSnoozeCalendarItemAlarmRequest value) {
         return new JAXBElement<testSnoozeCalendarItemAlarmRequest>(_SnoozeCalendarItemAlarmRequest_QNAME, testSnoozeCalendarItemAlarmRequest.class, null, value);
     }
@@ -5209,7 +5209,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetWatchersResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetWatchersResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetWatchersResponse")
     public JAXBElement<testGetWatchersResponse> createGetWatchersResponse(testGetWatchersResponse value) {
         return new JAXBElement<testGetWatchersResponse>(_GetWatchersResponse_QNAME, testGetWatchersResponse.class, null, value);
     }
@@ -5218,7 +5218,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testModifyTaskRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "ModifyTaskRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "ModifyTaskRequest")
     public JAXBElement<testModifyTaskRequest> createModifyTaskRequest(testModifyTaskRequest value) {
         return new JAXBElement<testModifyTaskRequest>(_ModifyTaskRequest_QNAME, testModifyTaskRequest.class, null, value);
     }
@@ -5227,7 +5227,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetItemRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetItemRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetItemRequest")
     public JAXBElement<testGetItemRequest> createGetItemRequest(testGetItemRequest value) {
         return new JAXBElement<testGetItemRequest>(_GetItemRequest_QNAME, testGetItemRequest.class, null, value);
     }
@@ -5236,7 +5236,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetMiniCalRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetMiniCalRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetMiniCalRequest")
     public JAXBElement<testGetMiniCalRequest> createGetMiniCalRequest(testGetMiniCalRequest value) {
         return new JAXBElement<testGetMiniCalRequest>(_GetMiniCalRequest_QNAME, testGetMiniCalRequest.class, null, value);
     }
@@ -5245,7 +5245,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testSetMailboxMetadataRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "SetMailboxMetadataRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "SetMailboxMetadataRequest")
     public JAXBElement<testSetMailboxMetadataRequest> createSetMailboxMetadataRequest(testSetMailboxMetadataRequest value) {
         return new JAXBElement<testSetMailboxMetadataRequest>(_SetMailboxMetadataRequest_QNAME, testSetMailboxMetadataRequest.class, null, value);
     }
@@ -5254,7 +5254,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testModifyAppointmentRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "ModifyAppointmentRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "ModifyAppointmentRequest")
     public JAXBElement<testModifyAppointmentRequest> createModifyAppointmentRequest(testModifyAppointmentRequest value) {
         return new JAXBElement<testModifyAppointmentRequest>(_ModifyAppointmentRequest_QNAME, testModifyAppointmentRequest.class, null, value);
     }
@@ -5263,7 +5263,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testRankingActionRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "RankingActionRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "RankingActionRequest")
     public JAXBElement<testRankingActionRequest> createRankingActionRequest(testRankingActionRequest value) {
         return new JAXBElement<testRankingActionRequest>(_RankingActionRequest_QNAME, testRankingActionRequest.class, null, value);
     }
@@ -5272,7 +5272,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testImportAppointmentsRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "ImportAppointmentsRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "ImportAppointmentsRequest")
     public JAXBElement<testImportAppointmentsRequest> createImportAppointmentsRequest(testImportAppointmentsRequest value) {
         return new JAXBElement<testImportAppointmentsRequest>(_ImportAppointmentsRequest_QNAME, testImportAppointmentsRequest.class, null, value);
     }
@@ -5281,7 +5281,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetDataSourcesRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetDataSourcesRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetDataSourcesRequest")
     public JAXBElement<testGetDataSourcesRequest> createGetDataSourcesRequest(testGetDataSourcesRequest value) {
         return new JAXBElement<testGetDataSourcesRequest>(_GetDataSourcesRequest_QNAME, testGetDataSourcesRequest.class, null, value);
     }
@@ -5290,7 +5290,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetNoteResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetNoteResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetNoteResponse")
     public JAXBElement<testGetNoteResponse> createGetNoteResponse(testGetNoteResponse value) {
         return new JAXBElement<testGetNoteResponse>(_GetNoteResponse_QNAME, testGetNoteResponse.class, null, value);
     }
@@ -5299,7 +5299,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testEmptyDumpsterResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "EmptyDumpsterResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "EmptyDumpsterResponse")
     public JAXBElement<testEmptyDumpsterResponse> createEmptyDumpsterResponse(testEmptyDumpsterResponse value) {
         return new JAXBElement<testEmptyDumpsterResponse>(_EmptyDumpsterResponse_QNAME, testEmptyDumpsterResponse.class, null, value);
     }
@@ -5308,7 +5308,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testCancelTaskResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "CancelTaskResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "CancelTaskResponse")
     public JAXBElement<testCancelTaskResponse> createCancelTaskResponse(testCancelTaskResponse value) {
         return new JAXBElement<testCancelTaskResponse>(_CancelTaskResponse_QNAME, testCancelTaskResponse.class, null, value);
     }
@@ -5317,7 +5317,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testSyncResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "SyncResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "SyncResponse")
     public JAXBElement<testSyncResponse> createSyncResponse(testSyncResponse value) {
         return new JAXBElement<testSyncResponse>(_SyncResponse_QNAME, testSyncResponse.class, null, value);
     }
@@ -5326,7 +5326,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testCompleteTaskInstanceResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "CompleteTaskInstanceResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "CompleteTaskInstanceResponse")
     public JAXBElement<testCompleteTaskInstanceResponse> createCompleteTaskInstanceResponse(testCompleteTaskInstanceResponse value) {
         return new JAXBElement<testCompleteTaskInstanceResponse>(_CompleteTaskInstanceResponse_QNAME, testCompleteTaskInstanceResponse.class, null, value);
     }
@@ -5335,7 +5335,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetNoteRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetNoteRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetNoteRequest")
     public JAXBElement<testGetNoteRequest> createGetNoteRequest(testGetNoteRequest value) {
         return new JAXBElement<testGetNoteRequest>(_GetNoteRequest_QNAME, testGetNoteRequest.class, null, value);
     }
@@ -5344,7 +5344,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testRevokePermissionResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "RevokePermissionResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "RevokePermissionResponse")
     public JAXBElement<testRevokePermissionResponse> createRevokePermissionResponse(testRevokePermissionResponse value) {
         return new JAXBElement<testRevokePermissionResponse>(_RevokePermissionResponse_QNAME, testRevokePermissionResponse.class, null, value);
     }
@@ -5353,7 +5353,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testWaitSetResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "WaitSetResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "WaitSetResponse")
     public JAXBElement<testWaitSetResponse> createWaitSetResponse(testWaitSetResponse value) {
         return new JAXBElement<testWaitSetResponse>(_WaitSetResponse_QNAME, testWaitSetResponse.class, null, value);
     }
@@ -5362,7 +5362,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testSearchConvRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "SearchConvRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "SearchConvRequest")
     public JAXBElement<testSearchConvRequest> createSearchConvRequest(testSearchConvRequest value) {
         return new JAXBElement<testSearchConvRequest>(_SearchConvRequest_QNAME, testSearchConvRequest.class, null, value);
     }
@@ -5371,7 +5371,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testDestroyWaitSetResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "DestroyWaitSetResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "DestroyWaitSetResponse")
     public JAXBElement<testDestroyWaitSetResponse> createDestroyWaitSetResponse(testDestroyWaitSetResponse value) {
         return new JAXBElement<testDestroyWaitSetResponse>(_DestroyWaitSetResponse_QNAME, testDestroyWaitSetResponse.class, null, value);
     }
@@ -5380,7 +5380,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testCreateTagResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "CreateTagResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "CreateTagResponse")
     public JAXBElement<testCreateTagResponse> createCreateTagResponse(testCreateTagResponse value) {
         return new JAXBElement<testCreateTagResponse>(_CreateTagResponse_QNAME, testCreateTagResponse.class, null, value);
     }
@@ -5389,7 +5389,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testExportContactsRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "ExportContactsRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "ExportContactsRequest")
     public JAXBElement<testExportContactsRequest> createExportContactsRequest(testExportContactsRequest value) {
         return new JAXBElement<testExportContactsRequest>(_ExportContactsRequest_QNAME, testExportContactsRequest.class, null, value);
     }
@@ -5398,7 +5398,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testItemActionResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "ItemActionResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "ItemActionResponse")
     public JAXBElement<testItemActionResponse> createItemActionResponse(testItemActionResponse value) {
         return new JAXBElement<testItemActionResponse>(_ItemActionResponse_QNAME, testItemActionResponse.class, null, value);
     }
@@ -5407,7 +5407,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetItemResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetItemResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetItemResponse")
     public JAXBElement<testGetItemResponse> createGetItemResponse(testGetItemResponse value) {
         return new JAXBElement<testGetItemResponse>(_GetItemResponse_QNAME, testGetItemResponse.class, null, value);
     }
@@ -5416,7 +5416,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testSetTaskRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "SetTaskRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "SetTaskRequest")
     public JAXBElement<testSetTaskRequest> createSetTaskRequest(testSetTaskRequest value) {
         return new JAXBElement<testSetTaskRequest>(_SetTaskRequest_QNAME, testSetTaskRequest.class, null, value);
     }
@@ -5425,7 +5425,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetRecurResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetRecurResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetRecurResponse")
     public JAXBElement<testGetRecurResponse> createGetRecurResponse(testGetRecurResponse value) {
         return new JAXBElement<testGetRecurResponse>(_GetRecurResponse_QNAME, testGetRecurResponse.class, null, value);
     }
@@ -5434,7 +5434,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetConvRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetConvRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetConvRequest")
     public JAXBElement<testGetConvRequest> createGetConvRequest(testGetConvRequest value) {
         return new JAXBElement<testGetConvRequest>(_GetConvRequest_QNAME, testGetConvRequest.class, null, value);
     }
@@ -5443,7 +5443,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testNoteActionRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "NoteActionRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "NoteActionRequest")
     public JAXBElement<testNoteActionRequest> createNoteActionRequest(testNoteActionRequest value) {
         return new JAXBElement<testNoteActionRequest>(_NoteActionRequest_QNAME, testNoteActionRequest.class, null, value);
     }
@@ -5452,7 +5452,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetFilterRulesRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetFilterRulesRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetFilterRulesRequest")
     public JAXBElement<testGetFilterRulesRequest> createGetFilterRulesRequest(testGetFilterRulesRequest value) {
         return new JAXBElement<testGetFilterRulesRequest>(_GetFilterRulesRequest_QNAME, testGetFilterRulesRequest.class, null, value);
     }
@@ -5461,7 +5461,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testTestDataSourceRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "TestDataSourceRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "TestDataSourceRequest")
     public JAXBElement<testTestDataSourceRequest> createTestDataSourceRequest(testTestDataSourceRequest value) {
         return new JAXBElement<testTestDataSourceRequest>(_TestDataSourceRequest_QNAME, testTestDataSourceRequest.class, null, value);
     }
@@ -5470,7 +5470,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetWatchersRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetWatchersRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetWatchersRequest")
     public JAXBElement<testGetWatchersRequest> createGetWatchersRequest(testGetWatchersRequest value) {
         return new JAXBElement<testGetWatchersRequest>(_GetWatchersRequest_QNAME, testGetWatchersRequest.class, null, value);
     }
@@ -5479,7 +5479,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetSpellDictionariesRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetSpellDictionariesRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetSpellDictionariesRequest")
     public JAXBElement<testGetSpellDictionariesRequest> createGetSpellDictionariesRequest(testGetSpellDictionariesRequest value) {
         return new JAXBElement<testGetSpellDictionariesRequest>(_GetSpellDictionariesRequest_QNAME, testGetSpellDictionariesRequest.class, null, value);
     }
@@ -5488,7 +5488,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testCreateAppointmentRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "CreateAppointmentRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "CreateAppointmentRequest")
     public JAXBElement<testCreateAppointmentRequest> createCreateAppointmentRequest(testCreateAppointmentRequest value) {
         return new JAXBElement<testCreateAppointmentRequest>(_CreateAppointmentRequest_QNAME, testCreateAppointmentRequest.class, null, value);
     }
@@ -5497,7 +5497,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testSetAppointmentResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "SetAppointmentResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "SetAppointmentResponse")
     public JAXBElement<testSetAppointmentResponse> createSetAppointmentResponse(testSetAppointmentResponse value) {
         return new JAXBElement<testSetAppointmentResponse>(_SetAppointmentResponse_QNAME, testSetAppointmentResponse.class, null, value);
     }
@@ -5506,7 +5506,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testSearchFolder }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "search")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "search")
     public JAXBElement<testSearchFolder> createSearch(testSearchFolder value) {
         return new JAXBElement<testSearchFolder>(_Search_QNAME, testSearchFolder.class, null, value);
     }
@@ -5515,7 +5515,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testCreateFolderRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "CreateFolderRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "CreateFolderRequest")
     public JAXBElement<testCreateFolderRequest> createCreateFolderRequest(testCreateFolderRequest value) {
         return new JAXBElement<testCreateFolderRequest>(_CreateFolderRequest_QNAME, testCreateFolderRequest.class, null, value);
     }
@@ -5524,7 +5524,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testAnnounceOrganizerChangeRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "AnnounceOrganizerChangeRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "AnnounceOrganizerChangeRequest")
     public JAXBElement<testAnnounceOrganizerChangeRequest> createAnnounceOrganizerChangeRequest(testAnnounceOrganizerChangeRequest value) {
         return new JAXBElement<testAnnounceOrganizerChangeRequest>(_AnnounceOrganizerChangeRequest_QNAME, testAnnounceOrganizerChangeRequest.class, null, value);
     }
@@ -5533,7 +5533,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testDeclineCounterAppointmentRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "DeclineCounterAppointmentRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "DeclineCounterAppointmentRequest")
     public JAXBElement<testDeclineCounterAppointmentRequest> createDeclineCounterAppointmentRequest(testDeclineCounterAppointmentRequest value) {
         return new JAXBElement<testDeclineCounterAppointmentRequest>(_DeclineCounterAppointmentRequest_QNAME, testDeclineCounterAppointmentRequest.class, null, value);
     }
@@ -5542,7 +5542,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testSearchRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "SearchRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "SearchRequest")
     public JAXBElement<testSearchRequest> createSearchRequest(testSearchRequest value) {
         return new JAXBElement<testSearchRequest>(_SearchRequest_QNAME, testSearchRequest.class, null, value);
     }
@@ -5551,7 +5551,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testICalReplyRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "ICalReplyRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "ICalReplyRequest")
     public JAXBElement<testICalReplyRequest> createICalReplyRequest(testICalReplyRequest value) {
         return new JAXBElement<testICalReplyRequest>(_ICalReplyRequest_QNAME, testICalReplyRequest.class, null, value);
     }
@@ -5560,7 +5560,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetWorkingHoursResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetWorkingHoursResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetWorkingHoursResponse")
     public JAXBElement<testGetWorkingHoursResponse> createGetWorkingHoursResponse(testGetWorkingHoursResponse value) {
         return new JAXBElement<testGetWorkingHoursResponse>(_GetWorkingHoursResponse_QNAME, testGetWorkingHoursResponse.class, null, value);
     }
@@ -5569,7 +5569,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetMailboxMetadataRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetMailboxMetadataRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetMailboxMetadataRequest")
     public JAXBElement<testGetMailboxMetadataRequest> createGetMailboxMetadataRequest(testGetMailboxMetadataRequest value) {
         return new JAXBElement<testGetMailboxMetadataRequest>(_GetMailboxMetadataRequest_QNAME, testGetMailboxMetadataRequest.class, null, value);
     }
@@ -5578,7 +5578,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetActivityStreamResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetActivityStreamResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetActivityStreamResponse")
     public JAXBElement<testGetActivityStreamResponse> createGetActivityStreamResponse(testGetActivityStreamResponse value) {
         return new JAXBElement<testGetActivityStreamResponse>(_GetActivityStreamResponse_QNAME, testGetActivityStreamResponse.class, null, value);
     }
@@ -5587,7 +5587,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testAutoCompleteResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "AutoCompleteResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "AutoCompleteResponse")
     public JAXBElement<testAutoCompleteResponse> createAutoCompleteResponse(testAutoCompleteResponse value) {
         return new JAXBElement<testAutoCompleteResponse>(_AutoCompleteResponse_QNAME, testAutoCompleteResponse.class, null, value);
     }
@@ -5596,7 +5596,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testCreateTaskResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "CreateTaskResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "CreateTaskResponse")
     public JAXBElement<testCreateTaskResponse> createCreateTaskResponse(testCreateTaskResponse value) {
         return new JAXBElement<testCreateTaskResponse>(_CreateTaskResponse_QNAME, testCreateTaskResponse.class, null, value);
     }
@@ -5605,7 +5605,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testSendVerificationCodeResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "SendVerificationCodeResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "SendVerificationCodeResponse")
     public JAXBElement<testSendVerificationCodeResponse> createSendVerificationCodeResponse(testSendVerificationCodeResponse value) {
         return new JAXBElement<testSendVerificationCodeResponse>(_SendVerificationCodeResponse_QNAME, testSendVerificationCodeResponse.class, null, value);
     }
@@ -5614,7 +5614,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testContactAttachSpec }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "cn")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "cn")
     public JAXBElement<testContactAttachSpec> createCn(testContactAttachSpec value) {
         return new JAXBElement<testContactAttachSpec>(_Cn_QNAME, testContactAttachSpec.class, null, value);
     }
@@ -5623,7 +5623,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetMiniCalResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetMiniCalResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetMiniCalResponse")
     public JAXBElement<testGetMiniCalResponse> createGetMiniCalResponse(testGetMiniCalResponse value) {
         return new JAXBElement<testGetMiniCalResponse>(_GetMiniCalResponse_QNAME, testGetMiniCalResponse.class, null, value);
     }
@@ -5632,7 +5632,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testModifyAppointmentResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "ModifyAppointmentResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "ModifyAppointmentResponse")
     public JAXBElement<testModifyAppointmentResponse> createModifyAppointmentResponse(testModifyAppointmentResponse value) {
         return new JAXBElement<testModifyAppointmentResponse>(_ModifyAppointmentResponse_QNAME, testModifyAppointmentResponse.class, null, value);
     }
@@ -5641,7 +5641,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testItemActionRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "ItemActionRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "ItemActionRequest")
     public JAXBElement<testItemActionRequest> createItemActionRequest(testItemActionRequest value) {
         return new JAXBElement<testItemActionRequest>(_ItemActionRequest_QNAME, testItemActionRequest.class, null, value);
     }
@@ -5650,7 +5650,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testImportContactsResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "ImportContactsResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "ImportContactsResponse")
     public JAXBElement<testImportContactsResponse> createImportContactsResponse(testImportContactsResponse value) {
         return new JAXBElement<testImportContactsResponse>(_ImportContactsResponse_QNAME, testImportContactsResponse.class, null, value);
     }
@@ -5659,7 +5659,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGrantPermissionRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GrantPermissionRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GrantPermissionRequest")
     public JAXBElement<testGrantPermissionRequest> createGrantPermissionRequest(testGrantPermissionRequest value) {
         return new JAXBElement<testGrantPermissionRequest>(_GrantPermissionRequest_QNAME, testGrantPermissionRequest.class, null, value);
     }
@@ -5668,7 +5668,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testCheckPermissionRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "CheckPermissionRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "CheckPermissionRequest")
     public JAXBElement<testCheckPermissionRequest> createCheckPermissionRequest(testCheckPermissionRequest value) {
         return new JAXBElement<testCheckPermissionRequest>(_CheckPermissionRequest_QNAME, testCheckPermissionRequest.class, null, value);
     }
@@ -5677,7 +5677,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetMailboxMetadataResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetMailboxMetadataResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetMailboxMetadataResponse")
     public JAXBElement<testGetMailboxMetadataResponse> createGetMailboxMetadataResponse(testGetMailboxMetadataResponse value) {
         return new JAXBElement<testGetMailboxMetadataResponse>(_GetMailboxMetadataResponse_QNAME, testGetMailboxMetadataResponse.class, null, value);
     }
@@ -5686,7 +5686,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGenerateUUIDRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GenerateUUIDRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GenerateUUIDRequest")
     public JAXBElement<testGenerateUUIDRequest> createGenerateUUIDRequest(testGenerateUUIDRequest value) {
         return new JAXBElement<testGenerateUUIDRequest>(_GenerateUUIDRequest_QNAME, testGenerateUUIDRequest.class, null, value);
     }
@@ -5695,7 +5695,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testSendDeliveryReportRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "SendDeliveryReportRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "SendDeliveryReportRequest")
     public JAXBElement<testSendDeliveryReportRequest> createSendDeliveryReportRequest(testSendDeliveryReportRequest value) {
         return new JAXBElement<testSendDeliveryReportRequest>(_SendDeliveryReportRequest_QNAME, testSendDeliveryReportRequest.class, null, value);
     }
@@ -5704,7 +5704,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetFilterRulesResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetFilterRulesResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetFilterRulesResponse")
     public JAXBElement<testGetFilterRulesResponse> createGetFilterRulesResponse(testGetFilterRulesResponse value) {
         return new JAXBElement<testGetFilterRulesResponse>(_GetFilterRulesResponse_QNAME, testGetFilterRulesResponse.class, null, value);
     }
@@ -5713,7 +5713,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetOutgoingFilterRulesResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetOutgoingFilterRulesResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetOutgoingFilterRulesResponse")
     public JAXBElement<testGetOutgoingFilterRulesResponse> createGetOutgoingFilterRulesResponse(testGetOutgoingFilterRulesResponse value) {
         return new JAXBElement<testGetOutgoingFilterRulesResponse>(_GetOutgoingFilterRulesResponse_QNAME, testGetOutgoingFilterRulesResponse.class, null, value);
     }
@@ -5722,7 +5722,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testCreateContactRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "CreateContactRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "CreateContactRequest")
     public JAXBElement<testCreateContactRequest> createCreateContactRequest(testCreateContactRequest value) {
         return new JAXBElement<testCreateContactRequest>(_CreateContactRequest_QNAME, testCreateContactRequest.class, null, value);
     }
@@ -5731,7 +5731,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testSetMailboxMetadataResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "SetMailboxMetadataResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "SetMailboxMetadataResponse")
     public JAXBElement<testSetMailboxMetadataResponse> createSetMailboxMetadataResponse(testSetMailboxMetadataResponse value) {
         return new JAXBElement<testSetMailboxMetadataResponse>(_SetMailboxMetadataResponse_QNAME, testSetMailboxMetadataResponse.class, null, value);
     }
@@ -5740,7 +5740,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testExpandRecurRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "ExpandRecurRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "ExpandRecurRequest")
     public JAXBElement<testExpandRecurRequest> createExpandRecurRequest(testExpandRecurRequest value) {
         return new JAXBElement<testExpandRecurRequest>(_ExpandRecurRequest_QNAME, testExpandRecurRequest.class, null, value);
     }
@@ -5749,7 +5749,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testSetCustomMetadataRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "SetCustomMetadataRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "SetCustomMetadataRequest")
     public JAXBElement<testSetCustomMetadataRequest> createSetCustomMetadataRequest(testSetCustomMetadataRequest value) {
         return new JAXBElement<testSetCustomMetadataRequest>(_SetCustomMetadataRequest_QNAME, testSetCustomMetadataRequest.class, null, value);
     }
@@ -5758,7 +5758,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetApptSummariesResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetApptSummariesResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetApptSummariesResponse")
     public JAXBElement<testGetApptSummariesResponse> createGetApptSummariesResponse(testGetApptSummariesResponse value) {
         return new JAXBElement<testGetApptSummariesResponse>(_GetApptSummariesResponse_QNAME, testGetApptSummariesResponse.class, null, value);
     }
@@ -5767,7 +5767,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetImportStatusRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetImportStatusRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetImportStatusRequest")
     public JAXBElement<testGetImportStatusRequest> createGetImportStatusRequest(testGetImportStatusRequest value) {
         return new JAXBElement<testGetImportStatusRequest>(_GetImportStatusRequest_QNAME, testGetImportStatusRequest.class, null, value);
     }
@@ -5776,7 +5776,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetWatchingItemsRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetWatchingItemsRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetWatchingItemsRequest")
     public JAXBElement<testGetWatchingItemsRequest> createGetWatchingItemsRequest(testGetWatchingItemsRequest value) {
         return new JAXBElement<testGetWatchingItemsRequest>(_GetWatchingItemsRequest_QNAME, testGetWatchingItemsRequest.class, null, value);
     }
@@ -5785,7 +5785,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testEnableSharedReminderRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "EnableSharedReminderRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "EnableSharedReminderRequest")
     public JAXBElement<testEnableSharedReminderRequest> createEnableSharedReminderRequest(testEnableSharedReminderRequest value) {
         return new JAXBElement<testEnableSharedReminderRequest>(_EnableSharedReminderRequest_QNAME, testEnableSharedReminderRequest.class, null, value);
     }
@@ -5794,7 +5794,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetSearchFolderRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetSearchFolderRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetSearchFolderRequest")
     public JAXBElement<testGetSearchFolderRequest> createGetSearchFolderRequest(testGetSearchFolderRequest value) {
         return new JAXBElement<testGetSearchFolderRequest>(_GetSearchFolderRequest_QNAME, testGetSearchFolderRequest.class, null, value);
     }
@@ -5803,7 +5803,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testSaveDocumentRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "SaveDocumentRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "SaveDocumentRequest")
     public JAXBElement<testSaveDocumentRequest> createSaveDocumentRequest(testSaveDocumentRequest value) {
         return new JAXBElement<testSaveDocumentRequest>(_SaveDocumentRequest_QNAME, testSaveDocumentRequest.class, null, value);
     }
@@ -5812,7 +5812,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testForwardAppointmentResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "ForwardAppointmentResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "ForwardAppointmentResponse")
     public JAXBElement<testForwardAppointmentResponse> createForwardAppointmentResponse(testForwardAppointmentResponse value) {
         return new JAXBElement<testForwardAppointmentResponse>(_ForwardAppointmentResponse_QNAME, testForwardAppointmentResponse.class, null, value);
     }
@@ -5821,7 +5821,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testVerifyCodeResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "VerifyCodeResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "VerifyCodeResponse")
     public JAXBElement<testVerifyCodeResponse> createVerifyCodeResponse(testVerifyCodeResponse value) {
         return new JAXBElement<testVerifyCodeResponse>(_VerifyCodeResponse_QNAME, testVerifyCodeResponse.class, null, value);
     }
@@ -5830,7 +5830,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetContactsResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetContactsResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetContactsResponse")
     public JAXBElement<testGetContactsResponse> createGetContactsResponse(testGetContactsResponse value) {
         return new JAXBElement<testGetContactsResponse>(_GetContactsResponse_QNAME, testGetContactsResponse.class, null, value);
     }
@@ -5839,7 +5839,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testNoOpRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "NoOpRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "NoOpRequest")
     public JAXBElement<testNoOpRequest> createNoOpRequest(testNoOpRequest value) {
         return new JAXBElement<testNoOpRequest>(_NoOpRequest_QNAME, testNoOpRequest.class, null, value);
     }
@@ -5848,7 +5848,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetApptSummariesRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetApptSummariesRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetApptSummariesRequest")
     public JAXBElement<testGetApptSummariesRequest> createGetApptSummariesRequest(testGetApptSummariesRequest value) {
         return new JAXBElement<testGetApptSummariesRequest>(_GetApptSummariesRequest_QNAME, testGetApptSummariesRequest.class, null, value);
     }
@@ -5857,7 +5857,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testApplyOutgoingFilterRulesRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "ApplyOutgoingFilterRulesRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "ApplyOutgoingFilterRulesRequest")
     public JAXBElement<testApplyOutgoingFilterRulesRequest> createApplyOutgoingFilterRulesRequest(testApplyOutgoingFilterRulesRequest value) {
         return new JAXBElement<testApplyOutgoingFilterRulesRequest>(_ApplyOutgoingFilterRulesRequest_QNAME, testApplyOutgoingFilterRulesRequest.class, null, value);
     }
@@ -5866,7 +5866,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetContactsRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetContactsRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetContactsRequest")
     public JAXBElement<testGetContactsRequest> createGetContactsRequest(testGetContactsRequest value) {
         return new JAXBElement<testGetContactsRequest>(_GetContactsRequest_QNAME, testGetContactsRequest.class, null, value);
     }
@@ -5875,7 +5875,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testCounterAppointmentResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "CounterAppointmentResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "CounterAppointmentResponse")
     public JAXBElement<testCounterAppointmentResponse> createCounterAppointmentResponse(testCounterAppointmentResponse value) {
         return new JAXBElement<testCounterAppointmentResponse>(_CounterAppointmentResponse_QNAME, testCounterAppointmentResponse.class, null, value);
     }
@@ -5884,7 +5884,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testSendInviteReplyResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "SendInviteReplyResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "SendInviteReplyResponse")
     public JAXBElement<testSendInviteReplyResponse> createSendInviteReplyResponse(testSendInviteReplyResponse value) {
         return new JAXBElement<testSendInviteReplyResponse>(_SendInviteReplyResponse_QNAME, testSendInviteReplyResponse.class, null, value);
     }
@@ -5893,7 +5893,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testApplyOutgoingFilterRulesResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "ApplyOutgoingFilterRulesResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "ApplyOutgoingFilterRulesResponse")
     public JAXBElement<testApplyOutgoingFilterRulesResponse> createApplyOutgoingFilterRulesResponse(testApplyOutgoingFilterRulesResponse value) {
         return new JAXBElement<testApplyOutgoingFilterRulesResponse>(_ApplyOutgoingFilterRulesResponse_QNAME, testApplyOutgoingFilterRulesResponse.class, null, value);
     }
@@ -5902,7 +5902,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testRegisterDeviceResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "RegisterDeviceResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "RegisterDeviceResponse")
     public JAXBElement<testRegisterDeviceResponse> createRegisterDeviceResponse(testRegisterDeviceResponse value) {
         return new JAXBElement<testRegisterDeviceResponse>(_RegisterDeviceResponse_QNAME, testRegisterDeviceResponse.class, null, value);
     }
@@ -5911,7 +5911,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testModifyTaskResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "ModifyTaskResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "ModifyTaskResponse")
     public JAXBElement<testModifyTaskResponse> createModifyTaskResponse(testModifyTaskResponse value) {
         return new JAXBElement<testModifyTaskResponse>(_ModifyTaskResponse_QNAME, testModifyTaskResponse.class, null, value);
     }
@@ -5920,7 +5920,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testSaveDraftRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "SaveDraftRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "SaveDraftRequest")
     public JAXBElement<testSaveDraftRequest> createSaveDraftRequest(testSaveDraftRequest value) {
         return new JAXBElement<testSaveDraftRequest>(_SaveDraftRequest_QNAME, testSaveDraftRequest.class, null, value);
     }
@@ -5929,7 +5929,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testCreateNoteResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "CreateNoteResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "CreateNoteResponse")
     public JAXBElement<testCreateNoteResponse> createCreateNoteResponse(testCreateNoteResponse value) {
         return new JAXBElement<testCreateNoteResponse>(_CreateNoteResponse_QNAME, testCreateNoteResponse.class, null, value);
     }
@@ -5938,7 +5938,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testMimePartAttachSpec }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "mp")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "mp")
     public JAXBElement<testMimePartAttachSpec> createMp(testMimePartAttachSpec value) {
         return new JAXBElement<testMimePartAttachSpec>(_Mp_QNAME, testMimePartAttachSpec.class, null, value);
     }
@@ -5947,7 +5947,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testImportDataRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "ImportDataRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "ImportDataRequest")
     public JAXBElement<testImportDataRequest> createImportDataRequest(testImportDataRequest value) {
         return new JAXBElement<testImportDataRequest>(_ImportDataRequest_QNAME, testImportDataRequest.class, null, value);
     }
@@ -5956,7 +5956,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testCheckRecurConflictsRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "CheckRecurConflictsRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "CheckRecurConflictsRequest")
     public JAXBElement<testCheckRecurConflictsRequest> createCheckRecurConflictsRequest(testCheckRecurConflictsRequest value) {
         return new JAXBElement<testCheckRecurConflictsRequest>(_CheckRecurConflictsRequest_QNAME, testCheckRecurConflictsRequest.class, null, value);
     }
@@ -5965,7 +5965,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testAddTaskInviteResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "AddTaskInviteResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "AddTaskInviteResponse")
     public JAXBElement<testAddTaskInviteResponse> createAddTaskInviteResponse(testAddTaskInviteResponse value) {
         return new JAXBElement<testAddTaskInviteResponse>(_AddTaskInviteResponse_QNAME, testAddTaskInviteResponse.class, null, value);
     }
@@ -5974,7 +5974,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetICalResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetICalResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetICalResponse")
     public JAXBElement<testGetICalResponse> createGetICalResponse(testGetICalResponse value) {
         return new JAXBElement<testGetICalResponse>(_GetICalResponse_QNAME, testGetICalResponse.class, null, value);
     }
@@ -5983,7 +5983,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetConvResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetConvResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetConvResponse")
     public JAXBElement<testGetConvResponse> createGetConvResponse(testGetConvResponse value) {
         return new JAXBElement<testGetConvResponse>(_GetConvResponse_QNAME, testGetConvResponse.class, null, value);
     }
@@ -5992,7 +5992,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testExpandRecurResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "ExpandRecurResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "ExpandRecurResponse")
     public JAXBElement<testExpandRecurResponse> createExpandRecurResponse(testExpandRecurResponse value) {
         return new JAXBElement<testExpandRecurResponse>(_ExpandRecurResponse_QNAME, testExpandRecurResponse.class, null, value);
     }
@@ -6001,7 +6001,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testConvActionResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "ConvActionResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "ConvActionResponse")
     public JAXBElement<testConvActionResponse> createConvActionResponse(testConvActionResponse value) {
         return new JAXBElement<testConvActionResponse>(_ConvActionResponse_QNAME, testConvActionResponse.class, null, value);
     }
@@ -6010,7 +6010,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testApplyFilterRulesRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "ApplyFilterRulesRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "ApplyFilterRulesRequest")
     public JAXBElement<testApplyFilterRulesRequest> createApplyFilterRulesRequest(testApplyFilterRulesRequest value) {
         return new JAXBElement<testApplyFilterRulesRequest>(_ApplyFilterRulesRequest_QNAME, testApplyFilterRulesRequest.class, null, value);
     }
@@ -6019,7 +6019,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testCheckDeviceStatusResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "CheckDeviceStatusResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "CheckDeviceStatusResponse")
     public JAXBElement<testCheckDeviceStatusResponse> createCheckDeviceStatusResponse(testCheckDeviceStatusResponse value) {
         return new JAXBElement<testCheckDeviceStatusResponse>(_CheckDeviceStatusResponse_QNAME, testCheckDeviceStatusResponse.class, null, value);
     }
@@ -6028,7 +6028,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testSnoozeCalendarItemAlarmResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "SnoozeCalendarItemAlarmResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "SnoozeCalendarItemAlarmResponse")
     public JAXBElement<testSnoozeCalendarItemAlarmResponse> createSnoozeCalendarItemAlarmResponse(testSnoozeCalendarItemAlarmResponse value) {
         return new JAXBElement<testSnoozeCalendarItemAlarmResponse>(_SnoozeCalendarItemAlarmResponse_QNAME, testSnoozeCalendarItemAlarmResponse.class, null, value);
     }
@@ -6037,7 +6037,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetFolderRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetFolderRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetFolderRequest")
     public JAXBElement<testGetFolderRequest> createGetFolderRequest(testGetFolderRequest value) {
         return new JAXBElement<testGetFolderRequest>(_GetFolderRequest_QNAME, testGetFolderRequest.class, null, value);
     }
@@ -6046,7 +6046,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testCreateSearchFolderResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "CreateSearchFolderResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "CreateSearchFolderResponse")
     public JAXBElement<testCreateSearchFolderResponse> createCreateSearchFolderResponse(testCreateSearchFolderResponse value) {
         return new JAXBElement<testCreateSearchFolderResponse>(_CreateSearchFolderResponse_QNAME, testCreateSearchFolderResponse.class, null, value);
     }
@@ -6055,7 +6055,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testImportAppointmentsResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "ImportAppointmentsResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "ImportAppointmentsResponse")
     public JAXBElement<testImportAppointmentsResponse> createImportAppointmentsResponse(testImportAppointmentsResponse value) {
         return new JAXBElement<testImportAppointmentsResponse>(_ImportAppointmentsResponse_QNAME, testImportAppointmentsResponse.class, null, value);
     }
@@ -6064,7 +6064,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testDismissCalendarItemAlarmResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "DismissCalendarItemAlarmResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "DismissCalendarItemAlarmResponse")
     public JAXBElement<testDismissCalendarItemAlarmResponse> createDismissCalendarItemAlarmResponse(testDismissCalendarItemAlarmResponse value) {
         return new JAXBElement<testDismissCalendarItemAlarmResponse>(_DismissCalendarItemAlarmResponse_QNAME, testDismissCalendarItemAlarmResponse.class, null, value);
     }
@@ -6073,7 +6073,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetAppointmentRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetAppointmentRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetAppointmentRequest")
     public JAXBElement<testGetAppointmentRequest> createGetAppointmentRequest(testGetAppointmentRequest value) {
         return new JAXBElement<testGetAppointmentRequest>(_GetAppointmentRequest_QNAME, testGetAppointmentRequest.class, null, value);
     }
@@ -6082,7 +6082,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testCancelAppointmentResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "CancelAppointmentResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "CancelAppointmentResponse")
     public JAXBElement<testCancelAppointmentResponse> createCancelAppointmentResponse(testCancelAppointmentResponse value) {
         return new JAXBElement<testCancelAppointmentResponse>(_CancelAppointmentResponse_QNAME, testCancelAppointmentResponse.class, null, value);
     }
@@ -6091,7 +6091,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testCreateMountpointResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "CreateMountpointResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "CreateMountpointResponse")
     public JAXBElement<testCreateMountpointResponse> createCreateMountpointResponse(testCreateMountpointResponse value) {
         return new JAXBElement<testCreateMountpointResponse>(_CreateMountpointResponse_QNAME, testCreateMountpointResponse.class, null, value);
     }
@@ -6100,7 +6100,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testDeclineCounterAppointmentResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "DeclineCounterAppointmentResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "DeclineCounterAppointmentResponse")
     public JAXBElement<testDeclineCounterAppointmentResponse> createDeclineCounterAppointmentResponse(testDeclineCounterAppointmentResponse value) {
         return new JAXBElement<testDeclineCounterAppointmentResponse>(_DeclineCounterAppointmentResponse_QNAME, testDeclineCounterAppointmentResponse.class, null, value);
     }
@@ -6109,7 +6109,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testModifyDataSourceResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "ModifyDataSourceResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "ModifyDataSourceResponse")
     public JAXBElement<testModifyDataSourceResponse> createModifyDataSourceResponse(testModifyDataSourceResponse value) {
         return new JAXBElement<testModifyDataSourceResponse>(_ModifyDataSourceResponse_QNAME, testModifyDataSourceResponse.class, null, value);
     }
@@ -6118,7 +6118,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testSendDeliveryReportResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "SendDeliveryReportResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "SendDeliveryReportResponse")
     public JAXBElement<testSendDeliveryReportResponse> createSendDeliveryReportResponse(testSendDeliveryReportResponse value) {
         return new JAXBElement<testSendDeliveryReportResponse>(_SendDeliveryReportResponse_QNAME, testSendDeliveryReportResponse.class, null, value);
     }
@@ -6127,7 +6127,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testDiffDocumentResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "DiffDocumentResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "DiffDocumentResponse")
     public JAXBElement<testDiffDocumentResponse> createDiffDocumentResponse(testDiffDocumentResponse value) {
         return new JAXBElement<testDiffDocumentResponse>(_DiffDocumentResponse_QNAME, testDiffDocumentResponse.class, null, value);
     }
@@ -6136,7 +6136,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetCommentsResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetCommentsResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetCommentsResponse")
     public JAXBElement<testGetCommentsResponse> createGetCommentsResponse(testGetCommentsResponse value) {
         return new JAXBElement<testGetCommentsResponse>(_GetCommentsResponse_QNAME, testGetCommentsResponse.class, null, value);
     }
@@ -6145,7 +6145,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testDocumentActionRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "DocumentActionRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "DocumentActionRequest")
     public JAXBElement<testDocumentActionRequest> createDocumentActionRequest(testDocumentActionRequest value) {
         return new JAXBElement<testDocumentActionRequest>(_DocumentActionRequest_QNAME, testDocumentActionRequest.class, null, value);
     }
@@ -6154,7 +6154,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testDeleteDataSourceRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "DeleteDataSourceRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "DeleteDataSourceRequest")
     public JAXBElement<testDeleteDataSourceRequest> createDeleteDataSourceRequest(testDeleteDataSourceRequest value) {
         return new JAXBElement<testDeleteDataSourceRequest>(_DeleteDataSourceRequest_QNAME, testDeleteDataSourceRequest.class, null, value);
     }
@@ -6163,7 +6163,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetDocumentShareURLRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetDocumentShareURLRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetDocumentShareURLRequest")
     public JAXBElement<testGetDocumentShareURLRequest> createGetDocumentShareURLRequest(testGetDocumentShareURLRequest value) {
         return new JAXBElement<testGetDocumentShareURLRequest>(_GetDocumentShareURLRequest_QNAME, testGetDocumentShareURLRequest.class, null, value);
     }
@@ -6172,7 +6172,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testFolderActionRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "FolderActionRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "FolderActionRequest")
     public JAXBElement<testFolderActionRequest> createFolderActionRequest(testFolderActionRequest value) {
         return new JAXBElement<testFolderActionRequest>(_FolderActionRequest_QNAME, testFolderActionRequest.class, null, value);
     }
@@ -6181,7 +6181,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testAddAppointmentInviteRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "AddAppointmentInviteRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "AddAppointmentInviteRequest")
     public JAXBElement<testAddAppointmentInviteRequest> createAddAppointmentInviteRequest(testAddAppointmentInviteRequest value) {
         return new JAXBElement<testAddAppointmentInviteRequest>(_AddAppointmentInviteRequest_QNAME, testAddAppointmentInviteRequest.class, null, value);
     }
@@ -6190,7 +6190,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetShareNotificationsResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetShareNotificationsResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetShareNotificationsResponse")
     public JAXBElement<testGetShareNotificationsResponse> createGetShareNotificationsResponse(testGetShareNotificationsResponse value) {
         return new JAXBElement<testGetShareNotificationsResponse>(_GetShareNotificationsResponse_QNAME, testGetShareNotificationsResponse.class, null, value);
     }
@@ -6199,7 +6199,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetMsgMetadataResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetMsgMetadataResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetMsgMetadataResponse")
     public JAXBElement<testGetMsgMetadataResponse> createGetMsgMetadataResponse(testGetMsgMetadataResponse value) {
         return new JAXBElement<testGetMsgMetadataResponse>(_GetMsgMetadataResponse_QNAME, testGetMsgMetadataResponse.class, null, value);
     }
@@ -6208,7 +6208,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetSpellDictionariesResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetSpellDictionariesResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetSpellDictionariesResponse")
     public JAXBElement<testGetSpellDictionariesResponse> createGetSpellDictionariesResponse(testGetSpellDictionariesResponse value) {
         return new JAXBElement<testGetSpellDictionariesResponse>(_GetSpellDictionariesResponse_QNAME, testGetSpellDictionariesResponse.class, null, value);
     }
@@ -6217,7 +6217,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testForwardAppointmentInviteResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "ForwardAppointmentInviteResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "ForwardAppointmentInviteResponse")
     public JAXBElement<testForwardAppointmentInviteResponse> createForwardAppointmentInviteResponse(testForwardAppointmentInviteResponse value) {
         return new JAXBElement<testForwardAppointmentInviteResponse>(_ForwardAppointmentInviteResponse_QNAME, testForwardAppointmentInviteResponse.class, null, value);
     }
@@ -6226,7 +6226,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testMailCustomMetadata }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "meta")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "meta")
     public JAXBElement<testMailCustomMetadata> createMeta(testMailCustomMetadata value) {
         return new JAXBElement<testMailCustomMetadata>(_Meta_QNAME, testMailCustomMetadata.class, null, value);
     }
@@ -6235,7 +6235,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetFreeBusyRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetFreeBusyRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetFreeBusyRequest")
     public JAXBElement<testGetFreeBusyRequest> createGetFreeBusyRequest(testGetFreeBusyRequest value) {
         return new JAXBElement<testGetFreeBusyRequest>(_GetFreeBusyRequest_QNAME, testGetFreeBusyRequest.class, null, value);
     }
@@ -6244,7 +6244,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testWaitSetRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "WaitSetRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "WaitSetRequest")
     public JAXBElement<testWaitSetRequest> createWaitSetRequest(testWaitSetRequest value) {
         return new JAXBElement<testWaitSetRequest>(_WaitSetRequest_QNAME, testWaitSetRequest.class, null, value);
     }
@@ -6253,7 +6253,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testUpdateDeviceStatusRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "UpdateDeviceStatusRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "UpdateDeviceStatusRequest")
     public JAXBElement<testUpdateDeviceStatusRequest> createUpdateDeviceStatusRequest(testUpdateDeviceStatusRequest value) {
         return new JAXBElement<testUpdateDeviceStatusRequest>(_UpdateDeviceStatusRequest_QNAME, testUpdateDeviceStatusRequest.class, null, value);
     }
@@ -6262,7 +6262,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testCreateAppointmentExceptionRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "CreateAppointmentExceptionRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "CreateAppointmentExceptionRequest")
     public JAXBElement<testCreateAppointmentExceptionRequest> createCreateAppointmentExceptionRequest(testCreateAppointmentExceptionRequest value) {
         return new JAXBElement<testCreateAppointmentExceptionRequest>(_CreateAppointmentExceptionRequest_QNAME, testCreateAppointmentExceptionRequest.class, null, value);
     }
@@ -6271,7 +6271,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testSearchConvResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "SearchConvResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "SearchConvResponse")
     public JAXBElement<testSearchConvResponse> createSearchConvResponse(testSearchConvResponse value) {
         return new JAXBElement<testSearchConvResponse>(_SearchConvResponse_QNAME, testSearchConvResponse.class, null, value);
     }
@@ -6280,7 +6280,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testModifyContactRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "ModifyContactRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "ModifyContactRequest")
     public JAXBElement<testModifyContactRequest> createModifyContactRequest(testModifyContactRequest value) {
         return new JAXBElement<testModifyContactRequest>(_ModifyContactRequest_QNAME, testModifyContactRequest.class, null, value);
     }
@@ -6289,7 +6289,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testCompleteTaskInstanceRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "CompleteTaskInstanceRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "CompleteTaskInstanceRequest")
     public JAXBElement<testCompleteTaskInstanceRequest> createCompleteTaskInstanceRequest(testCompleteTaskInstanceRequest value) {
         return new JAXBElement<testCompleteTaskInstanceRequest>(_CompleteTaskInstanceRequest_QNAME, testCompleteTaskInstanceRequest.class, null, value);
     }
@@ -6298,7 +6298,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testDeleteDeviceRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "DeleteDeviceRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "DeleteDeviceRequest")
     public JAXBElement<testDeleteDeviceRequest> createDeleteDeviceRequest(testDeleteDeviceRequest value) {
         return new JAXBElement<testDeleteDeviceRequest>(_DeleteDeviceRequest_QNAME, testDeleteDeviceRequest.class, null, value);
     }
@@ -6307,7 +6307,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testSendShareNotificationResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "SendShareNotificationResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "SendShareNotificationResponse")
     public JAXBElement<testSendShareNotificationResponse> createSendShareNotificationResponse(testSendShareNotificationResponse value) {
         return new JAXBElement<testSendShareNotificationResponse>(_SendShareNotificationResponse_QNAME, testSendShareNotificationResponse.class, null, value);
     }
@@ -6316,7 +6316,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testDismissCalendarItemAlarmRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "DismissCalendarItemAlarmRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "DismissCalendarItemAlarmRequest")
     public JAXBElement<testDismissCalendarItemAlarmRequest> createDismissCalendarItemAlarmRequest(testDismissCalendarItemAlarmRequest value) {
         return new JAXBElement<testDismissCalendarItemAlarmRequest>(_DismissCalendarItemAlarmRequest_QNAME, testDismissCalendarItemAlarmRequest.class, null, value);
     }
@@ -6325,7 +6325,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testModifySearchFolderRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "ModifySearchFolderRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "ModifySearchFolderRequest")
     public JAXBElement<testModifySearchFolderRequest> createModifySearchFolderRequest(testModifySearchFolderRequest value) {
         return new JAXBElement<testModifySearchFolderRequest>(_ModifySearchFolderRequest_QNAME, testModifySearchFolderRequest.class, null, value);
     }
@@ -6334,7 +6334,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testRemoveAttachmentsRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "RemoveAttachmentsRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "RemoveAttachmentsRequest")
     public JAXBElement<testRemoveAttachmentsRequest> createRemoveAttachmentsRequest(testRemoveAttachmentsRequest value) {
         return new JAXBElement<testRemoveAttachmentsRequest>(_RemoveAttachmentsRequest_QNAME, testRemoveAttachmentsRequest.class, null, value);
     }
@@ -6343,7 +6343,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetTagRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetTagRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetTagRequest")
     public JAXBElement<testGetTagRequest> createGetTagRequest(testGetTagRequest value) {
         return new JAXBElement<testGetTagRequest>(_GetTagRequest_QNAME, testGetTagRequest.class, null, value);
     }
@@ -6352,7 +6352,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testSendShareNotificationRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "SendShareNotificationRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "SendShareNotificationRequest")
     public JAXBElement<testSendShareNotificationRequest> createSendShareNotificationRequest(testSendShareNotificationRequest value) {
         return new JAXBElement<testSendShareNotificationRequest>(_SendShareNotificationRequest_QNAME, testSendShareNotificationRequest.class, null, value);
     }
@@ -6361,7 +6361,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testBrowseResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "BrowseResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "BrowseResponse")
     public JAXBElement<testBrowseResponse> createBrowseResponse(testBrowseResponse value) {
         return new JAXBElement<testBrowseResponse>(_BrowseResponse_QNAME, testBrowseResponse.class, null, value);
     }
@@ -6370,7 +6370,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetEffectiveFolderPermsRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetEffectiveFolderPermsRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetEffectiveFolderPermsRequest")
     public JAXBElement<testGetEffectiveFolderPermsRequest> createGetEffectiveFolderPermsRequest(testGetEffectiveFolderPermsRequest value) {
         return new JAXBElement<testGetEffectiveFolderPermsRequest>(_GetEffectiveFolderPermsRequest_QNAME, testGetEffectiveFolderPermsRequest.class, null, value);
     }
@@ -6379,7 +6379,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testSearchResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "SearchResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "SearchResponse")
     public JAXBElement<testSearchResponse> createSearchResponse(testSearchResponse value) {
         return new JAXBElement<testSearchResponse>(_SearchResponse_QNAME, testSearchResponse.class, null, value);
     }
@@ -6388,7 +6388,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testEnableSharedReminderResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "EnableSharedReminderResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "EnableSharedReminderResponse")
     public JAXBElement<testEnableSharedReminderResponse> createEnableSharedReminderResponse(testEnableSharedReminderResponse value) {
         return new JAXBElement<testEnableSharedReminderResponse>(_EnableSharedReminderResponse_QNAME, testEnableSharedReminderResponse.class, null, value);
     }
@@ -6397,7 +6397,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testTagActionRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "TagActionRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "TagActionRequest")
     public JAXBElement<testTagActionRequest> createTagActionRequest(testTagActionRequest value) {
         return new JAXBElement<testTagActionRequest>(_TagActionRequest_QNAME, testTagActionRequest.class, null, value);
     }
@@ -6406,7 +6406,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testRetentionPolicy }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "retentionPolicy")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "retentionPolicy")
     public JAXBElement<testRetentionPolicy> createRetentionPolicy(testRetentionPolicy value) {
         return new JAXBElement<testRetentionPolicy>(_RetentionPolicy_QNAME, testRetentionPolicy.class, null, value);
     }
@@ -6415,7 +6415,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GenerateUUIDResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GenerateUUIDResponse")
     public JAXBElement<String> createGenerateUUIDResponse(String value) {
         return new JAXBElement<String>(_GenerateUUIDResponse_QNAME, String.class, null, value);
     }
@@ -6424,7 +6424,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testDocumentActionResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "DocumentActionResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "DocumentActionResponse")
     public JAXBElement<testDocumentActionResponse> createDocumentActionResponse(testDocumentActionResponse value) {
         return new JAXBElement<testDocumentActionResponse>(_DocumentActionResponse_QNAME, testDocumentActionResponse.class, null, value);
     }
@@ -6433,7 +6433,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testSaveDocumentResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "SaveDocumentResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "SaveDocumentResponse")
     public JAXBElement<testSaveDocumentResponse> createSaveDocumentResponse(testSaveDocumentResponse value) {
         return new JAXBElement<testSaveDocumentResponse>(_SaveDocumentResponse_QNAME, testSaveDocumentResponse.class, null, value);
     }
@@ -6442,7 +6442,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testEmptyDumpsterRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "EmptyDumpsterRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "EmptyDumpsterRequest")
     public JAXBElement<testEmptyDumpsterRequest> createEmptyDumpsterRequest(testEmptyDumpsterRequest value) {
         return new JAXBElement<testEmptyDumpsterRequest>(_EmptyDumpsterRequest_QNAME, testEmptyDumpsterRequest.class, null, value);
     }
@@ -6451,7 +6451,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testBounceMsgResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "BounceMsgResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "BounceMsgResponse")
     public JAXBElement<testBounceMsgResponse> createBounceMsgResponse(testBounceMsgResponse value) {
         return new JAXBElement<testBounceMsgResponse>(_BounceMsgResponse_QNAME, testBounceMsgResponse.class, null, value);
     }
@@ -6460,7 +6460,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testVerifyCodeRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "VerifyCodeRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "VerifyCodeRequest")
     public JAXBElement<testVerifyCodeRequest> createVerifyCodeRequest(testVerifyCodeRequest value) {
         return new JAXBElement<testVerifyCodeRequest>(_VerifyCodeRequest_QNAME, testVerifyCodeRequest.class, null, value);
     }
@@ -6469,7 +6469,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testModifyOutgoingFilterRulesResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "ModifyOutgoingFilterRulesResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "ModifyOutgoingFilterRulesResponse")
     public JAXBElement<testModifyOutgoingFilterRulesResponse> createModifyOutgoingFilterRulesResponse(testModifyOutgoingFilterRulesResponse value) {
         return new JAXBElement<testModifyOutgoingFilterRulesResponse>(_ModifyOutgoingFilterRulesResponse_QNAME, testModifyOutgoingFilterRulesResponse.class, null, value);
     }
@@ -6478,7 +6478,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testInvalidateReminderDeviceResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "InvalidateReminderDeviceResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "InvalidateReminderDeviceResponse")
     public JAXBElement<testInvalidateReminderDeviceResponse> createInvalidateReminderDeviceResponse(testInvalidateReminderDeviceResponse value) {
         return new JAXBElement<testInvalidateReminderDeviceResponse>(_InvalidateReminderDeviceResponse_QNAME, testInvalidateReminderDeviceResponse.class, null, value);
     }
@@ -6487,7 +6487,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testModifyFilterRulesRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "ModifyFilterRulesRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "ModifyFilterRulesRequest")
     public JAXBElement<testModifyFilterRulesRequest> createModifyFilterRulesRequest(testModifyFilterRulesRequest value) {
         return new JAXBElement<testModifyFilterRulesRequest>(_ModifyFilterRulesRequest_QNAME, testModifyFilterRulesRequest.class, null, value);
     }
@@ -6496,7 +6496,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testCreateTagRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "CreateTagRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "CreateTagRequest")
     public JAXBElement<testCreateTagRequest> createCreateTagRequest(testCreateTagRequest value) {
         return new JAXBElement<testCreateTagRequest>(_CreateTagRequest_QNAME, testCreateTagRequest.class, null, value);
     }
@@ -6505,7 +6505,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testMountpoint }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "link")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "link")
     public JAXBElement<testMountpoint> createLink(testMountpoint value) {
         return new JAXBElement<testMountpoint>(_Link_QNAME, testMountpoint.class, null, value);
     }
@@ -6514,7 +6514,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetTaskResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetTaskResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetTaskResponse")
     public JAXBElement<testGetTaskResponse> createGetTaskResponse(testGetTaskResponse value) {
         return new JAXBElement<testGetTaskResponse>(_GetTaskResponse_QNAME, testGetTaskResponse.class, null, value);
     }
@@ -6523,7 +6523,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetShareNotificationsRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetShareNotificationsRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetShareNotificationsRequest")
     public JAXBElement<testGetShareNotificationsRequest> createGetShareNotificationsRequest(testGetShareNotificationsRequest value) {
         return new JAXBElement<testGetShareNotificationsRequest>(_GetShareNotificationsRequest_QNAME, testGetShareNotificationsRequest.class, null, value);
     }
@@ -6532,7 +6532,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetOutgoingFilterRulesRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetOutgoingFilterRulesRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetOutgoingFilterRulesRequest")
     public JAXBElement<testGetOutgoingFilterRulesRequest> createGetOutgoingFilterRulesRequest(testGetOutgoingFilterRulesRequest value) {
         return new JAXBElement<testGetOutgoingFilterRulesRequest>(_GetOutgoingFilterRulesRequest_QNAME, testGetOutgoingFilterRulesRequest.class, null, value);
     }
@@ -6541,7 +6541,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testCreateWaitSetRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "CreateWaitSetRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "CreateWaitSetRequest")
     public JAXBElement<testCreateWaitSetRequest> createCreateWaitSetRequest(testCreateWaitSetRequest value) {
         return new JAXBElement<testCreateWaitSetRequest>(_CreateWaitSetRequest_QNAME, testCreateWaitSetRequest.class, null, value);
     }
@@ -6550,7 +6550,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testAddMsgRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "AddMsgRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "AddMsgRequest")
     public JAXBElement<testAddMsgRequest> createAddMsgRequest(testAddMsgRequest value) {
         return new JAXBElement<testAddMsgRequest>(_AddMsgRequest_QNAME, testAddMsgRequest.class, null, value);
     }
@@ -6559,7 +6559,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testCancelAppointmentRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "CancelAppointmentRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "CancelAppointmentRequest")
     public JAXBElement<testCancelAppointmentRequest> createCancelAppointmentRequest(testCancelAppointmentRequest value) {
         return new JAXBElement<testCancelAppointmentRequest>(_CancelAppointmentRequest_QNAME, testCancelAppointmentRequest.class, null, value);
     }
@@ -6568,7 +6568,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testFolder }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "folder")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "folder")
     public JAXBElement<testFolder> createFolder(testFolder value) {
         return new JAXBElement<testFolder>(_Folder_QNAME, testFolder.class, null, value);
     }
@@ -6577,7 +6577,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testContactActionResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "ContactActionResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "ContactActionResponse")
     public JAXBElement<testContactActionResponse> createContactActionResponse(testContactActionResponse value) {
         return new JAXBElement<testContactActionResponse>(_ContactActionResponse_QNAME, testContactActionResponse.class, null, value);
     }
@@ -6586,7 +6586,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testCheckSpellingRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "CheckSpellingRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "CheckSpellingRequest")
     public JAXBElement<testCheckSpellingRequest> createCheckSpellingRequest(testCheckSpellingRequest value) {
         return new JAXBElement<testCheckSpellingRequest>(_CheckSpellingRequest_QNAME, testCheckSpellingRequest.class, null, value);
     }
@@ -6595,7 +6595,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testNoOpResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "NoOpResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "NoOpResponse")
     public JAXBElement<testNoOpResponse> createNoOpResponse(testNoOpResponse value) {
         return new JAXBElement<testNoOpResponse>(_NoOpResponse_QNAME, testNoOpResponse.class, null, value);
     }
@@ -6604,7 +6604,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetCustomMetadataResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetCustomMetadataResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetCustomMetadataResponse")
     public JAXBElement<testGetCustomMetadataResponse> createGetCustomMetadataResponse(testGetCustomMetadataResponse value) {
         return new JAXBElement<testGetCustomMetadataResponse>(_GetCustomMetadataResponse_QNAME, testGetCustomMetadataResponse.class, null, value);
     }
@@ -6613,7 +6613,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetMsgRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetMsgRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetMsgRequest")
     public JAXBElement<testGetMsgRequest> createGetMsgRequest(testGetMsgRequest value) {
         return new JAXBElement<testGetMsgRequest>(_GetMsgRequest_QNAME, testGetMsgRequest.class, null, value);
     }
@@ -6622,7 +6622,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testSaveDraftResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "SaveDraftResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "SaveDraftResponse")
     public JAXBElement<testSaveDraftResponse> createSaveDraftResponse(testSaveDraftResponse value) {
         return new JAXBElement<testSaveDraftResponse>(_SaveDraftResponse_QNAME, testSaveDraftResponse.class, null, value);
     }
@@ -6631,7 +6631,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testSyncRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "SyncRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "SyncRequest")
     public JAXBElement<testSyncRequest> createSyncRequest(testSyncRequest value) {
         return new JAXBElement<testSyncRequest>(_SyncRequest_QNAME, testSyncRequest.class, null, value);
     }
@@ -6640,7 +6640,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetAllDevicesResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetAllDevicesResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetAllDevicesResponse")
     public JAXBElement<testGetAllDevicesResponse> createGetAllDevicesResponse(testGetAllDevicesResponse value) {
         return new JAXBElement<testGetAllDevicesResponse>(_GetAllDevicesResponse_QNAME, testGetAllDevicesResponse.class, null, value);
     }
@@ -6649,7 +6649,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testPolicy }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "policy")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "policy")
     public JAXBElement<testPolicy> createPolicy(testPolicy value) {
         return new JAXBElement<testPolicy>(_Policy_QNAME, testPolicy.class, null, value);
     }
@@ -6658,7 +6658,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testDestroyWaitSetRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "DestroyWaitSetRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "DestroyWaitSetRequest")
     public JAXBElement<testDestroyWaitSetRequest> createDestroyWaitSetRequest(testDestroyWaitSetRequest value) {
         return new JAXBElement<testDestroyWaitSetRequest>(_DestroyWaitSetRequest_QNAME, testDestroyWaitSetRequest.class, null, value);
     }
@@ -6667,7 +6667,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testCheckPermissionResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "CheckPermissionResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "CheckPermissionResponse")
     public JAXBElement<testCheckPermissionResponse> createCheckPermissionResponse(testCheckPermissionResponse value) {
         return new JAXBElement<testCheckPermissionResponse>(_CheckPermissionResponse_QNAME, testCheckPermissionResponse.class, null, value);
     }
@@ -6676,7 +6676,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetYahooAuthTokenResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetYahooAuthTokenResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetYahooAuthTokenResponse")
     public JAXBElement<testGetYahooAuthTokenResponse> createGetYahooAuthTokenResponse(testGetYahooAuthTokenResponse value) {
         return new JAXBElement<testGetYahooAuthTokenResponse>(_GetYahooAuthTokenResponse_QNAME, testGetYahooAuthTokenResponse.class, null, value);
     }
@@ -6685,7 +6685,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testModifyFilterRulesResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "ModifyFilterRulesResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "ModifyFilterRulesResponse")
     public JAXBElement<testModifyFilterRulesResponse> createModifyFilterRulesResponse(testModifyFilterRulesResponse value) {
         return new JAXBElement<testModifyFilterRulesResponse>(_ModifyFilterRulesResponse_QNAME, testModifyFilterRulesResponse.class, null, value);
     }
@@ -6694,7 +6694,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetCalendarItemSummariesRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetCalendarItemSummariesRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetCalendarItemSummariesRequest")
     public JAXBElement<testGetCalendarItemSummariesRequest> createGetCalendarItemSummariesRequest(testGetCalendarItemSummariesRequest value) {
         return new JAXBElement<testGetCalendarItemSummariesRequest>(_GetCalendarItemSummariesRequest_QNAME, testGetCalendarItemSummariesRequest.class, null, value);
     }
@@ -6703,7 +6703,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetTagResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetTagResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetTagResponse")
     public JAXBElement<testGetTagResponse> createGetTagResponse(testGetTagResponse value) {
         return new JAXBElement<testGetTagResponse>(_GetTagResponse_QNAME, testGetTagResponse.class, null, value);
     }
@@ -6712,7 +6712,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testCreateFolderResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "CreateFolderResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "CreateFolderResponse")
     public JAXBElement<testCreateFolderResponse> createCreateFolderResponse(testCreateFolderResponse value) {
         return new JAXBElement<testCreateFolderResponse>(_CreateFolderResponse_QNAME, testCreateFolderResponse.class, null, value);
     }
@@ -6721,7 +6721,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testDiffDocumentRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "DiffDocumentRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "DiffDocumentRequest")
     public JAXBElement<testDiffDocumentRequest> createDiffDocumentRequest(testDiffDocumentRequest value) {
         return new JAXBElement<testDiffDocumentRequest>(_DiffDocumentRequest_QNAME, testDiffDocumentRequest.class, null, value);
     }
@@ -6730,7 +6730,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testICalReplyResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "ICalReplyResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "ICalReplyResponse")
     public JAXBElement<testICalReplyResponse> createICalReplyResponse(testICalReplyResponse value) {
         return new JAXBElement<testICalReplyResponse>(_ICalReplyResponse_QNAME, testICalReplyResponse.class, null, value);
     }
@@ -6739,7 +6739,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testMsgActionRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "MsgActionRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "MsgActionRequest")
     public JAXBElement<testMsgActionRequest> createMsgActionRequest(testMsgActionRequest value) {
         return new JAXBElement<testMsgActionRequest>(_MsgActionRequest_QNAME, testMsgActionRequest.class, null, value);
     }
@@ -6748,7 +6748,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testModifyMailboxMetadataRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "ModifyMailboxMetadataRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "ModifyMailboxMetadataRequest")
     public JAXBElement<testModifyMailboxMetadataRequest> createModifyMailboxMetadataRequest(testModifyMailboxMetadataRequest value) {
         return new JAXBElement<testModifyMailboxMetadataRequest>(_ModifyMailboxMetadataRequest_QNAME, testModifyMailboxMetadataRequest.class, null, value);
     }
@@ -6757,7 +6757,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testModifyMailboxMetadataResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "ModifyMailboxMetadataResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "ModifyMailboxMetadataResponse")
     public JAXBElement<testModifyMailboxMetadataResponse> createModifyMailboxMetadataResponse(testModifyMailboxMetadataResponse value) {
         return new JAXBElement<testModifyMailboxMetadataResponse>(_ModifyMailboxMetadataResponse_QNAME, testModifyMailboxMetadataResponse.class, null, value);
     }
@@ -6766,7 +6766,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetNotificationsRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetNotificationsRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetNotificationsRequest")
     public JAXBElement<testGetNotificationsRequest> createGetNotificationsRequest(testGetNotificationsRequest value) {
         return new JAXBElement<testGetNotificationsRequest>(_GetNotificationsRequest_QNAME, testGetNotificationsRequest.class, null, value);
     }
@@ -6775,7 +6775,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testImportContactsRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "ImportContactsRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "ImportContactsRequest")
     public JAXBElement<testImportContactsRequest> createImportContactsRequest(testImportContactsRequest value) {
         return new JAXBElement<testImportContactsRequest>(_ImportContactsRequest_QNAME, testImportContactsRequest.class, null, value);
     }
@@ -6784,7 +6784,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testSetTaskResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "SetTaskResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "SetTaskResponse")
     public JAXBElement<testSetTaskResponse> createSetTaskResponse(testSetTaskResponse value) {
         return new JAXBElement<testSetTaskResponse>(_SetTaskResponse_QNAME, testSetTaskResponse.class, null, value);
     }
@@ -6793,7 +6793,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetMsgMetadataRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetMsgMetadataRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetMsgMetadataRequest")
     public JAXBElement<testGetMsgMetadataRequest> createGetMsgMetadataRequest(testGetMsgMetadataRequest value) {
         return new JAXBElement<testGetMsgMetadataRequest>(_GetMsgMetadataRequest_QNAME, testGetMsgMetadataRequest.class, null, value);
     }
@@ -6802,7 +6802,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testRegisterDeviceRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "RegisterDeviceRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "RegisterDeviceRequest")
     public JAXBElement<testRegisterDeviceRequest> createRegisterDeviceRequest(testRegisterDeviceRequest value) {
         return new JAXBElement<testRegisterDeviceRequest>(_RegisterDeviceRequest_QNAME, testRegisterDeviceRequest.class, null, value);
     }
@@ -6811,7 +6811,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testMsgActionResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "MsgActionResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "MsgActionResponse")
     public JAXBElement<testMsgActionResponse> createMsgActionResponse(testMsgActionResponse value) {
         return new JAXBElement<testMsgActionResponse>(_MsgActionResponse_QNAME, testMsgActionResponse.class, null, value);
     }
@@ -6820,7 +6820,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testCheckRecurConflictsResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "CheckRecurConflictsResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "CheckRecurConflictsResponse")
     public JAXBElement<testCheckRecurConflictsResponse> createCheckRecurConflictsResponse(testCheckRecurConflictsResponse value) {
         return new JAXBElement<testCheckRecurConflictsResponse>(_CheckRecurConflictsResponse_QNAME, testCheckRecurConflictsResponse.class, null, value);
     }
@@ -6829,7 +6829,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testSendMsgRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "SendMsgRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "SendMsgRequest")
     public JAXBElement<testSendMsgRequest> createSendMsgRequest(testSendMsgRequest value) {
         return new JAXBElement<testSendMsgRequest>(_SendMsgRequest_QNAME, testSendMsgRequest.class, null, value);
     }
@@ -6838,7 +6838,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testCounterAppointmentRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "CounterAppointmentRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "CounterAppointmentRequest")
     public JAXBElement<testCounterAppointmentRequest> createCounterAppointmentRequest(testCounterAppointmentRequest value) {
         return new JAXBElement<testCounterAppointmentRequest>(_CounterAppointmentRequest_QNAME, testCounterAppointmentRequest.class, null, value);
     }
@@ -6847,7 +6847,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testListDocumentRevisionsResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "ListDocumentRevisionsResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "ListDocumentRevisionsResponse")
     public JAXBElement<testListDocumentRevisionsResponse> createListDocumentRevisionsResponse(testListDocumentRevisionsResponse value) {
         return new JAXBElement<testListDocumentRevisionsResponse>(_ListDocumentRevisionsResponse_QNAME, testListDocumentRevisionsResponse.class, null, value);
     }
@@ -6856,7 +6856,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testCreateTaskExceptionRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "CreateTaskExceptionRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "CreateTaskExceptionRequest")
     public JAXBElement<testCreateTaskExceptionRequest> createCreateTaskExceptionRequest(testCreateTaskExceptionRequest value) {
         return new JAXBElement<testCreateTaskExceptionRequest>(_CreateTaskExceptionRequest_QNAME, testCreateTaskExceptionRequest.class, null, value);
     }
@@ -6865,7 +6865,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testCreateWaitSetResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "CreateWaitSetResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "CreateWaitSetResponse")
     public JAXBElement<testCreateWaitSetResponse> createCreateWaitSetResponse(testCreateWaitSetResponse value) {
         return new JAXBElement<testCreateWaitSetResponse>(_CreateWaitSetResponse_QNAME, testCreateWaitSetResponse.class, null, value);
     }
@@ -6874,7 +6874,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetDocumentShareURLResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetDocumentShareURLResponse")
     public JAXBElement<String> createGetDocumentShareURLResponse(String value) {
         return new JAXBElement<String>(_GetDocumentShareURLResponse_QNAME, String.class, null, value);
     }
@@ -6883,7 +6883,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testRevokePermissionRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "RevokePermissionRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "RevokePermissionRequest")
     public JAXBElement<testRevokePermissionRequest> createRevokePermissionRequest(testRevokePermissionRequest value) {
         return new JAXBElement<testRevokePermissionRequest>(_RevokePermissionRequest_QNAME, testRevokePermissionRequest.class, null, value);
     }
@@ -6892,7 +6892,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testCreateMountpointRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "CreateMountpointRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "CreateMountpointRequest")
     public JAXBElement<testCreateMountpointRequest> createCreateMountpointRequest(testCreateMountpointRequest value) {
         return new JAXBElement<testCreateMountpointRequest>(_CreateMountpointRequest_QNAME, testCreateMountpointRequest.class, null, value);
     }
@@ -6901,7 +6901,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetRecurRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetRecurRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetRecurRequest")
     public JAXBElement<testGetRecurRequest> createGetRecurRequest(testGetRecurRequest value) {
         return new JAXBElement<testGetRecurRequest>(_GetRecurRequest_QNAME, testGetRecurRequest.class, null, value);
     }
@@ -6910,7 +6910,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testCreateAppointmentExceptionResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "CreateAppointmentExceptionResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "CreateAppointmentExceptionResponse")
     public JAXBElement<testCreateAppointmentExceptionResponse> createCreateAppointmentExceptionResponse(testCreateAppointmentExceptionResponse value) {
         return new JAXBElement<testCreateAppointmentExceptionResponse>(_CreateAppointmentExceptionResponse_QNAME, testCreateAppointmentExceptionResponse.class, null, value);
     }
@@ -6919,7 +6919,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetImportStatusResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetImportStatusResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetImportStatusResponse")
     public JAXBElement<testGetImportStatusResponse> createGetImportStatusResponse(testGetImportStatusResponse value) {
         return new JAXBElement<testGetImportStatusResponse>(_GetImportStatusResponse_QNAME, testGetImportStatusResponse.class, null, value);
     }
@@ -6928,7 +6928,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetYahooCookieRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetYahooCookieRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetYahooCookieRequest")
     public JAXBElement<testGetYahooCookieRequest> createGetYahooCookieRequest(testGetYahooCookieRequest value) {
         return new JAXBElement<testGetYahooCookieRequest>(_GetYahooCookieRequest_QNAME, testGetYahooCookieRequest.class, null, value);
     }
@@ -6937,7 +6937,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testSendVerificationCodeRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "SendVerificationCodeRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "SendVerificationCodeRequest")
     public JAXBElement<testSendVerificationCodeRequest> createSendVerificationCodeRequest(testSendVerificationCodeRequest value) {
         return new JAXBElement<testSendVerificationCodeRequest>(_SendVerificationCodeRequest_QNAME, testSendVerificationCodeRequest.class, null, value);
     }
@@ -6946,7 +6946,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testPurgeRevisionRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "PurgeRevisionRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "PurgeRevisionRequest")
     public JAXBElement<testPurgeRevisionRequest> createPurgeRevisionRequest(testPurgeRevisionRequest value) {
         return new JAXBElement<testPurgeRevisionRequest>(_PurgeRevisionRequest_QNAME, testPurgeRevisionRequest.class, null, value);
     }
@@ -6955,7 +6955,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testMsgAttachSpec }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "m")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "m")
     public JAXBElement<testMsgAttachSpec> createM(testMsgAttachSpec value) {
         return new JAXBElement<testMsgAttachSpec>(_M_QNAME, testMsgAttachSpec.class, null, value);
     }
@@ -6964,7 +6964,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetAppointmentResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetAppointmentResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetAppointmentResponse")
     public JAXBElement<testGetAppointmentResponse> createGetAppointmentResponse(testGetAppointmentResponse value) {
         return new JAXBElement<testGetAppointmentResponse>(_GetAppointmentResponse_QNAME, testGetAppointmentResponse.class, null, value);
     }
@@ -6973,7 +6973,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetYahooAuthTokenRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetYahooAuthTokenRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetYahooAuthTokenRequest")
     public JAXBElement<testGetYahooAuthTokenRequest> createGetYahooAuthTokenRequest(testGetYahooAuthTokenRequest value) {
         return new JAXBElement<testGetYahooAuthTokenRequest>(_GetYahooAuthTokenRequest_QNAME, testGetYahooAuthTokenRequest.class, null, value);
     }
@@ -6982,7 +6982,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetMsgResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetMsgResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetMsgResponse")
     public JAXBElement<testGetMsgResponse> createGetMsgResponse(testGetMsgResponse value) {
         return new JAXBElement<testGetMsgResponse>(_GetMsgResponse_QNAME, testGetMsgResponse.class, null, value);
     }
@@ -6991,7 +6991,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetShareDetailsRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetShareDetailsRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetShareDetailsRequest")
     public JAXBElement<testGetShareDetailsRequest> createGetShareDetailsRequest(testGetShareDetailsRequest value) {
         return new JAXBElement<testGetShareDetailsRequest>(_GetShareDetailsRequest_QNAME, testGetShareDetailsRequest.class, null, value);
     }
@@ -7000,7 +7000,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testConvActionRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "ConvActionRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "ConvActionRequest")
     public JAXBElement<testConvActionRequest> createConvActionRequest(testConvActionRequest value) {
         return new JAXBElement<testConvActionRequest>(_ConvActionRequest_QNAME, testConvActionRequest.class, null, value);
     }
@@ -7009,7 +7009,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testModifyDataSourceRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "ModifyDataSourceRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "ModifyDataSourceRequest")
     public JAXBElement<testModifyDataSourceRequest> createModifyDataSourceRequest(testModifyDataSourceRequest value) {
         return new JAXBElement<testModifyDataSourceRequest>(_ModifyDataSourceRequest_QNAME, testModifyDataSourceRequest.class, null, value);
     }
@@ -7018,7 +7018,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testModifyContactResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "ModifyContactResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "ModifyContactResponse")
     public JAXBElement<testModifyContactResponse> createModifyContactResponse(testModifyContactResponse value) {
         return new JAXBElement<testModifyContactResponse>(_ModifyContactResponse_QNAME, testModifyContactResponse.class, null, value);
     }
@@ -7027,7 +7027,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetActivityStreamRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetActivityStreamRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetActivityStreamRequest")
     public JAXBElement<testGetActivityStreamRequest> createGetActivityStreamRequest(testGetActivityStreamRequest value) {
         return new JAXBElement<testGetActivityStreamRequest>(_GetActivityStreamRequest_QNAME, testGetActivityStreamRequest.class, null, value);
     }
@@ -7036,7 +7036,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testUpdateDeviceStatusResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "UpdateDeviceStatusResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "UpdateDeviceStatusResponse")
     public JAXBElement<testUpdateDeviceStatusResponse> createUpdateDeviceStatusResponse(testUpdateDeviceStatusResponse value) {
         return new JAXBElement<testUpdateDeviceStatusResponse>(_UpdateDeviceStatusResponse_QNAME, testUpdateDeviceStatusResponse.class, null, value);
     }
@@ -7045,7 +7045,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetICalRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetICalRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetICalRequest")
     public JAXBElement<testGetICalRequest> createGetICalRequest(testGetICalRequest value) {
         return new JAXBElement<testGetICalRequest>(_GetICalRequest_QNAME, testGetICalRequest.class, null, value);
     }
@@ -7054,7 +7054,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testDeleteDataSourceResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "DeleteDataSourceResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "DeleteDataSourceResponse")
     public JAXBElement<testDeleteDataSourceResponse> createDeleteDataSourceResponse(testDeleteDataSourceResponse value) {
         return new JAXBElement<testDeleteDataSourceResponse>(_DeleteDataSourceResponse_QNAME, testDeleteDataSourceResponse.class, null, value);
     }
@@ -7063,7 +7063,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetCommentsRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetCommentsRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetCommentsRequest")
     public JAXBElement<testGetCommentsRequest> createGetCommentsRequest(testGetCommentsRequest value) {
         return new JAXBElement<testGetCommentsRequest>(_GetCommentsRequest_QNAME, testGetCommentsRequest.class, null, value);
     }
@@ -7072,7 +7072,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testImportDataResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "ImportDataResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "ImportDataResponse")
     public JAXBElement<testImportDataResponse> createImportDataResponse(testImportDataResponse value) {
         return new JAXBElement<testImportDataResponse>(_ImportDataResponse_QNAME, testImportDataResponse.class, null, value);
     }
@@ -7081,7 +7081,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testNoteActionResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "NoteActionResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "NoteActionResponse")
     public JAXBElement<testNoteActionResponse> createNoteActionResponse(testNoteActionResponse value) {
         return new JAXBElement<testNoteActionResponse>(_NoteActionResponse_QNAME, testNoteActionResponse.class, null, value);
     }
@@ -7090,7 +7090,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testCreateTaskExceptionResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "CreateTaskExceptionResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "CreateTaskExceptionResponse")
     public JAXBElement<testCreateTaskExceptionResponse> createCreateTaskExceptionResponse(testCreateTaskExceptionResponse value) {
         return new JAXBElement<testCreateTaskExceptionResponse>(_CreateTaskExceptionResponse_QNAME, testCreateTaskExceptionResponse.class, null, value);
     }
@@ -7099,7 +7099,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testCreateContactResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "CreateContactResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "CreateContactResponse")
     public JAXBElement<testCreateContactResponse> createCreateContactResponse(testCreateContactResponse value) {
         return new JAXBElement<testCreateContactResponse>(_CreateContactResponse_QNAME, testCreateContactResponse.class, null, value);
     }
@@ -7108,7 +7108,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testAddTaskInviteRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "AddTaskInviteRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "AddTaskInviteRequest")
     public JAXBElement<testAddTaskInviteRequest> createAddTaskInviteRequest(testAddTaskInviteRequest value) {
         return new JAXBElement<testAddTaskInviteRequest>(_AddTaskInviteRequest_QNAME, testAddTaskInviteRequest.class, null, value);
     }
@@ -7117,7 +7117,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testCheckDeviceStatusRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "CheckDeviceStatusRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "CheckDeviceStatusRequest")
     public JAXBElement<testCheckDeviceStatusRequest> createCheckDeviceStatusRequest(testCheckDeviceStatusRequest value) {
         return new JAXBElement<testCheckDeviceStatusRequest>(_CheckDeviceStatusRequest_QNAME, testCheckDeviceStatusRequest.class, null, value);
     }
@@ -7126,7 +7126,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetCalendarItemSummariesResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetCalendarItemSummariesResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetCalendarItemSummariesResponse")
     public JAXBElement<testGetCalendarItemSummariesResponse> createGetCalendarItemSummariesResponse(testGetCalendarItemSummariesResponse value) {
         return new JAXBElement<testGetCalendarItemSummariesResponse>(_GetCalendarItemSummariesResponse_QNAME, testGetCalendarItemSummariesResponse.class, null, value);
     }
@@ -7135,7 +7135,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testRemoveAttachmentsResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "RemoveAttachmentsResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "RemoveAttachmentsResponse")
     public JAXBElement<testRemoveAttachmentsResponse> createRemoveAttachmentsResponse(testRemoveAttachmentsResponse value) {
         return new JAXBElement<testRemoveAttachmentsResponse>(_RemoveAttachmentsResponse_QNAME, testRemoveAttachmentsResponse.class, null, value);
     }
@@ -7144,7 +7144,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetEffectiveFolderPermsResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetEffectiveFolderPermsResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetEffectiveFolderPermsResponse")
     public JAXBElement<testGetEffectiveFolderPermsResponse> createGetEffectiveFolderPermsResponse(testGetEffectiveFolderPermsResponse value) {
         return new JAXBElement<testGetEffectiveFolderPermsResponse>(_GetEffectiveFolderPermsResponse_QNAME, testGetEffectiveFolderPermsResponse.class, null, value);
     }
@@ -7153,7 +7153,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetCustomMetadataRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetCustomMetadataRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetCustomMetadataRequest")
     public JAXBElement<testGetCustomMetadataRequest> createGetCustomMetadataRequest(testGetCustomMetadataRequest value) {
         return new JAXBElement<testGetCustomMetadataRequest>(_GetCustomMetadataRequest_QNAME, testGetCustomMetadataRequest.class, null, value);
     }
@@ -7162,7 +7162,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testAddMsgResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "AddMsgResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "AddMsgResponse")
     public JAXBElement<testAddMsgResponse> createAddMsgResponse(testAddMsgResponse value) {
         return new JAXBElement<testAddMsgResponse>(_AddMsgResponse_QNAME, testAddMsgResponse.class, null, value);
     }
@@ -7171,7 +7171,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testCancelTaskRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "CancelTaskRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "CancelTaskRequest")
     public JAXBElement<testCancelTaskRequest> createCancelTaskRequest(testCancelTaskRequest value) {
         return new JAXBElement<testCancelTaskRequest>(_CancelTaskRequest_QNAME, testCancelTaskRequest.class, null, value);
     }
@@ -7180,7 +7180,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testCheckSpellingResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "CheckSpellingResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "CheckSpellingResponse")
     public JAXBElement<testCheckSpellingResponse> createCheckSpellingResponse(testCheckSpellingResponse value) {
         return new JAXBElement<testCheckSpellingResponse>(_CheckSpellingResponse_QNAME, testCheckSpellingResponse.class, null, value);
     }
@@ -7189,7 +7189,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetDataSourcesResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetDataSourcesResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetDataSourcesResponse")
     public JAXBElement<testGetDataSourcesResponse> createGetDataSourcesResponse(testGetDataSourcesResponse value) {
         return new JAXBElement<testGetDataSourcesResponse>(_GetDataSourcesResponse_QNAME, testGetDataSourcesResponse.class, null, value);
     }
@@ -7198,7 +7198,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testModifyOutgoingFilterRulesRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "ModifyOutgoingFilterRulesRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "ModifyOutgoingFilterRulesRequest")
     public JAXBElement<testModifyOutgoingFilterRulesRequest> createModifyOutgoingFilterRulesRequest(testModifyOutgoingFilterRulesRequest value) {
         return new JAXBElement<testModifyOutgoingFilterRulesRequest>(_ModifyOutgoingFilterRulesRequest_QNAME, testModifyOutgoingFilterRulesRequest.class, null, value);
     }
@@ -7207,7 +7207,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetTaskSummariesRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetTaskSummariesRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetTaskSummariesRequest")
     public JAXBElement<testGetTaskSummariesRequest> createGetTaskSummariesRequest(testGetTaskSummariesRequest value) {
         return new JAXBElement<testGetTaskSummariesRequest>(_GetTaskSummariesRequest_QNAME, testGetTaskSummariesRequest.class, null, value);
     }
@@ -7216,7 +7216,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetNotificationsResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetNotificationsResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetNotificationsResponse")
     public JAXBElement<testGetNotificationsResponse> createGetNotificationsResponse(testGetNotificationsResponse value) {
         return new JAXBElement<testGetNotificationsResponse>(_GetNotificationsResponse_QNAME, testGetNotificationsResponse.class, null, value);
     }
@@ -7225,7 +7225,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testAddCommentRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "AddCommentRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "AddCommentRequest")
     public JAXBElement<testAddCommentRequest> createAddCommentRequest(testAddCommentRequest value) {
         return new JAXBElement<testAddCommentRequest>(_AddCommentRequest_QNAME, testAddCommentRequest.class, null, value);
     }
@@ -7234,7 +7234,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testContactActionRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "ContactActionRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "ContactActionRequest")
     public JAXBElement<testContactActionRequest> createContactActionRequest(testContactActionRequest value) {
         return new JAXBElement<testContactActionRequest>(_ContactActionRequest_QNAME, testContactActionRequest.class, null, value);
     }
@@ -7243,7 +7243,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetShareDetailsResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetShareDetailsResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetShareDetailsResponse")
     public JAXBElement<testGetShareDetailsResponse> createGetShareDetailsResponse(testGetShareDetailsResponse value) {
         return new JAXBElement<testGetShareDetailsResponse>(_GetShareDetailsResponse_QNAME, testGetShareDetailsResponse.class, null, value);
     }
@@ -7252,7 +7252,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testCreateAppointmentResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "CreateAppointmentResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "CreateAppointmentResponse")
     public JAXBElement<testCreateAppointmentResponse> createCreateAppointmentResponse(testCreateAppointmentResponse value) {
         return new JAXBElement<testCreateAppointmentResponse>(_CreateAppointmentResponse_QNAME, testCreateAppointmentResponse.class, null, value);
     }
@@ -7261,7 +7261,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testCreateSearchFolderRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "CreateSearchFolderRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "CreateSearchFolderRequest")
     public JAXBElement<testCreateSearchFolderRequest> createCreateSearchFolderRequest(testCreateSearchFolderRequest value) {
         return new JAXBElement<testCreateSearchFolderRequest>(_CreateSearchFolderRequest_QNAME, testCreateSearchFolderRequest.class, null, value);
     }
@@ -7270,7 +7270,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testApplyFilterRulesResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "ApplyFilterRulesResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "ApplyFilterRulesResponse")
     public JAXBElement<testApplyFilterRulesResponse> createApplyFilterRulesResponse(testApplyFilterRulesResponse value) {
         return new JAXBElement<testApplyFilterRulesResponse>(_ApplyFilterRulesResponse_QNAME, testApplyFilterRulesResponse.class, null, value);
     }
@@ -7279,7 +7279,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testSendMsgResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "SendMsgResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "SendMsgResponse")
     public JAXBElement<testSendMsgResponse> createSendMsgResponse(testSendMsgResponse value) {
         return new JAXBElement<testSendMsgResponse>(_SendMsgResponse_QNAME, testSendMsgResponse.class, null, value);
     }
@@ -7288,7 +7288,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testAddCommentResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "AddCommentResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "AddCommentResponse")
     public JAXBElement<testAddCommentResponse> createAddCommentResponse(testAddCommentResponse value) {
         return new JAXBElement<testAddCommentResponse>(_AddCommentResponse_QNAME, testAddCommentResponse.class, null, value);
     }
@@ -7297,7 +7297,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testPurgeRevisionResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "PurgeRevisionResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "PurgeRevisionResponse")
     public JAXBElement<testPurgeRevisionResponse> createPurgeRevisionResponse(testPurgeRevisionResponse value) {
         return new JAXBElement<testPurgeRevisionResponse>(_PurgeRevisionResponse_QNAME, testPurgeRevisionResponse.class, null, value);
     }
@@ -7306,7 +7306,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testTagActionResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "TagActionResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "TagActionResponse")
     public JAXBElement<testTagActionResponse> createTagActionResponse(testTagActionResponse value) {
         return new JAXBElement<testTagActionResponse>(_TagActionResponse_QNAME, testTagActionResponse.class, null, value);
     }
@@ -7315,7 +7315,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testSetAppointmentRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "SetAppointmentRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "SetAppointmentRequest")
     public JAXBElement<testSetAppointmentRequest> createSetAppointmentRequest(testSetAppointmentRequest value) {
         return new JAXBElement<testSetAppointmentRequest>(_SetAppointmentRequest_QNAME, testSetAppointmentRequest.class, null, value);
     }
@@ -7324,7 +7324,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testFolderActionResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "FolderActionResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "FolderActionResponse")
     public JAXBElement<testFolderActionResponse> createFolderActionResponse(testFolderActionResponse value) {
         return new JAXBElement<testFolderActionResponse>(_FolderActionResponse_QNAME, testFolderActionResponse.class, null, value);
     }
@@ -7333,7 +7333,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testDeleteDeviceResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "DeleteDeviceResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "DeleteDeviceResponse")
     public JAXBElement<testDeleteDeviceResponse> createDeleteDeviceResponse(testDeleteDeviceResponse value) {
         return new JAXBElement<testDeleteDeviceResponse>(_DeleteDeviceResponse_QNAME, testDeleteDeviceResponse.class, null, value);
     }
@@ -7342,7 +7342,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testSetCustomMetadataResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "SetCustomMetadataResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "SetCustomMetadataResponse")
     public JAXBElement<testSetCustomMetadataResponse> createSetCustomMetadataResponse(testSetCustomMetadataResponse value) {
         return new JAXBElement<testSetCustomMetadataResponse>(_SetCustomMetadataResponse_QNAME, testSetCustomMetadataResponse.class, null, value);
     }
@@ -7351,7 +7351,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetSearchFolderResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetSearchFolderResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetSearchFolderResponse")
     public JAXBElement<testGetSearchFolderResponse> createGetSearchFolderResponse(testGetSearchFolderResponse value) {
         return new JAXBElement<testGetSearchFolderResponse>(_GetSearchFolderResponse_QNAME, testGetSearchFolderResponse.class, null, value);
     }
@@ -7360,7 +7360,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetPermissionResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetPermissionResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetPermissionResponse")
     public JAXBElement<testGetPermissionResponse> createGetPermissionResponse(testGetPermissionResponse value) {
         return new JAXBElement<testGetPermissionResponse>(_GetPermissionResponse_QNAME, testGetPermissionResponse.class, null, value);
     }
@@ -7369,7 +7369,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetWatchingItemsResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetWatchingItemsResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetWatchingItemsResponse")
     public JAXBElement<testGetWatchingItemsResponse> createGetWatchingItemsResponse(testGetWatchingItemsResponse value) {
         return new JAXBElement<testGetWatchingItemsResponse>(_GetWatchingItemsResponse_QNAME, testGetWatchingItemsResponse.class, null, value);
     }
@@ -7378,7 +7378,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetTaskSummariesResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetTaskSummariesResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetTaskSummariesResponse")
     public JAXBElement<testGetTaskSummariesResponse> createGetTaskSummariesResponse(testGetTaskSummariesResponse value) {
         return new JAXBElement<testGetTaskSummariesResponse>(_GetTaskSummariesResponse_QNAME, testGetTaskSummariesResponse.class, null, value);
     }
@@ -7387,7 +7387,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetPermissionRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetPermissionRequest")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetPermissionRequest")
     public JAXBElement<testGetPermissionRequest> createGetPermissionRequest(testGetPermissionRequest value) {
         return new JAXBElement<testGetPermissionRequest>(_GetPermissionRequest_QNAME, testGetPermissionRequest.class, null, value);
     }
@@ -7396,7 +7396,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetYahooCookieResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "GetYahooCookieResponse")
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "GetYahooCookieResponse")
     public JAXBElement<testGetYahooCookieResponse> createGetYahooCookieResponse(testGetYahooCookieResponse value) {
         return new JAXBElement<testGetYahooCookieResponse>(_GetYahooCookieResponse_QNAME, testGetYahooCookieResponse.class, null, value);
     }
@@ -7405,7 +7405,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testIdsAttr }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "appt", scope = testSyncDeletedInfo.class)
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "appt", scope = testSyncDeletedInfo.class)
     public JAXBElement<testIdsAttr> createtestSyncDeletedInfoAppt(testIdsAttr value) {
         return new JAXBElement<testIdsAttr>(_testSyncDeletedInfoAppt_QNAME, testIdsAttr.class, testSyncDeletedInfo.class, value);
     }
@@ -7414,7 +7414,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testIdsAttr }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "cn", scope = testSyncDeletedInfo.class)
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "cn", scope = testSyncDeletedInfo.class)
     public JAXBElement<testIdsAttr> createtestSyncDeletedInfoCn(testIdsAttr value) {
         return new JAXBElement<testIdsAttr>(_Cn_QNAME, testIdsAttr.class, testSyncDeletedInfo.class, value);
     }
@@ -7423,7 +7423,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testIdsAttr }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "search", scope = testSyncDeletedInfo.class)
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "search", scope = testSyncDeletedInfo.class)
     public JAXBElement<testIdsAttr> createtestSyncDeletedInfoSearch(testIdsAttr value) {
         return new JAXBElement<testIdsAttr>(_Search_QNAME, testIdsAttr.class, testSyncDeletedInfo.class, value);
     }
@@ -7432,7 +7432,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testIdsAttr }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "folder", scope = testSyncDeletedInfo.class)
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "folder", scope = testSyncDeletedInfo.class)
     public JAXBElement<testIdsAttr> createtestSyncDeletedInfoFolder(testIdsAttr value) {
         return new JAXBElement<testIdsAttr>(_Folder_QNAME, testIdsAttr.class, testSyncDeletedInfo.class, value);
     }
@@ -7441,7 +7441,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testIdsAttr }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "w", scope = testSyncDeletedInfo.class)
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "w", scope = testSyncDeletedInfo.class)
     public JAXBElement<testIdsAttr> createtestSyncDeletedInfoW(testIdsAttr value) {
         return new JAXBElement<testIdsAttr>(_testSyncDeletedInfoW_QNAME, testIdsAttr.class, testSyncDeletedInfo.class, value);
     }
@@ -7450,7 +7450,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testIdsAttr }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "notes", scope = testSyncDeletedInfo.class)
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "notes", scope = testSyncDeletedInfo.class)
     public JAXBElement<testIdsAttr> createtestSyncDeletedInfoNotes(testIdsAttr value) {
         return new JAXBElement<testIdsAttr>(_testSyncDeletedInfoNotes_QNAME, testIdsAttr.class, testSyncDeletedInfo.class, value);
     }
@@ -7459,7 +7459,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testIdsAttr }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "doc", scope = testSyncDeletedInfo.class)
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "doc", scope = testSyncDeletedInfo.class)
     public JAXBElement<testIdsAttr> createtestSyncDeletedInfoDoc(testIdsAttr value) {
         return new JAXBElement<testIdsAttr>(_Doc_QNAME, testIdsAttr.class, testSyncDeletedInfo.class, value);
     }
@@ -7468,7 +7468,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testIdsAttr }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "link", scope = testSyncDeletedInfo.class)
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "link", scope = testSyncDeletedInfo.class)
     public JAXBElement<testIdsAttr> createtestSyncDeletedInfoLink(testIdsAttr value) {
         return new JAXBElement<testIdsAttr>(_Link_QNAME, testIdsAttr.class, testSyncDeletedInfo.class, value);
     }
@@ -7477,7 +7477,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testIdsAttr }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "task", scope = testSyncDeletedInfo.class)
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "task", scope = testSyncDeletedInfo.class)
     public JAXBElement<testIdsAttr> createtestSyncDeletedInfoTask(testIdsAttr value) {
         return new JAXBElement<testIdsAttr>(_testSyncDeletedInfoTask_QNAME, testIdsAttr.class, testSyncDeletedInfo.class, value);
     }
@@ -7486,7 +7486,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testIdsAttr }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "tag", scope = testSyncDeletedInfo.class)
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "tag", scope = testSyncDeletedInfo.class)
     public JAXBElement<testIdsAttr> createtestSyncDeletedInfoTag(testIdsAttr value) {
         return new JAXBElement<testIdsAttr>(_testSyncDeletedInfoTag_QNAME, testIdsAttr.class, testSyncDeletedInfo.class, value);
     }
@@ -7495,7 +7495,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testIdsAttr }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "c", scope = testSyncDeletedInfo.class)
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "c", scope = testSyncDeletedInfo.class)
     public JAXBElement<testIdsAttr> createtestSyncDeletedInfoC(testIdsAttr value) {
         return new JAXBElement<testIdsAttr>(_testSyncDeletedInfoC_QNAME, testIdsAttr.class, testSyncDeletedInfo.class, value);
     }
@@ -7504,7 +7504,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testIdsAttr }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "chat", scope = testSyncDeletedInfo.class)
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "chat", scope = testSyncDeletedInfo.class)
     public JAXBElement<testIdsAttr> createtestSyncDeletedInfoChat(testIdsAttr value) {
         return new JAXBElement<testIdsAttr>(_testSyncDeletedInfoChat_QNAME, testIdsAttr.class, testSyncDeletedInfo.class, value);
     }
@@ -7513,7 +7513,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testIdsAttr }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraMail", name = "m", scope = testSyncDeletedInfo.class)
+    @XmlElementDecl(namespace = "urn:zmailMail", name = "m", scope = testSyncDeletedInfo.class)
     public JAXBElement<testIdsAttr> createtestSyncDeletedInfoM(testIdsAttr value) {
         return new JAXBElement<testIdsAttr>(_M_QNAME, testIdsAttr.class, testSyncDeletedInfo.class, value);
     }

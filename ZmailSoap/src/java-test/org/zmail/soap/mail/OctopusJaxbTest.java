@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.mail;
+package org.zmail.soap.mail;
 
 import java.util.List;
 import java.util.Map;
@@ -22,16 +22,16 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.google.common.collect.Maps;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.Element.JSONElement;
-import com.zimbra.common.soap.Element.XMLElement;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.soap.JaxbUtil;
-import com.zimbra.soap.mail.message.CheckDeviceStatusResponse;
-import com.zimbra.soap.mail.type.ActivityInfo;
-import com.zimbra.soap.mail.type.IdStatus;
-import com.zimbra.soap.type.NamedValue;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.Element.JSONElement;
+import org.zmail.common.soap.Element.XMLElement;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.soap.JaxbUtil;
+import org.zmail.soap.mail.message.CheckDeviceStatusResponse;
+import org.zmail.soap.mail.type.ActivityInfo;
+import org.zmail.soap.mail.type.IdStatus;
+import org.zmail.soap.type.NamedValue;
 
 /**
  * Unit test for {@link GetFolderRequest}.

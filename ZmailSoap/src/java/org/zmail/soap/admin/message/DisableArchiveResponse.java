@@ -13,11 +13,11 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.ArchiveConstants;
+import org.zmail.common.soap.ArchiveConstants;
 
 @XmlRootElement(name=ArchiveConstants.E_DISABLE_ARCHIVE_RESPONSE)
 public class DisableArchiveResponse {

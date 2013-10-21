@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.doc.soap.apidesc;
+package org.zmail.doc.soap.apidesc;
 
 import java.util.List;
 
 import com.google.common.collect.Lists;
-import com.zimbra.doc.soap.ChoiceNode;
-import com.zimbra.doc.soap.DescriptionNode;
-import com.zimbra.doc.soap.XmlElementDescription;
+import org.zmail.doc.soap.ChoiceNode;
+import org.zmail.doc.soap.DescriptionNode;
+import org.zmail.doc.soap.XmlElementDescription;
 
 public class SoapApiElementChoiceInfo
 implements SoapApiElementArtifact {

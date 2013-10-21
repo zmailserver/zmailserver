@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -22,9 +22,9 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.zimbra.common.soap.AdminConstants;
+import org.zmail.common.soap.AdminConstants;
 
-import com.zimbra.soap.type.AccountSelector;
+import org.zmail.soap.type.AccountSelector;
 
 /**
  * @zm-api-command-auth-required true
@@ -47,7 +47,7 @@ public class DelegateAuthRequest {
     /**
      * @zm-api-field-tag lifetime-in-seconds
      * @zm-api-field-description Lifetime in seconds of the newly-created authtoken. defaults to 1 hour. Can't be
-     * longer then <b>zimbraAuthTokenLifetime</b>.
+     * longer then <b>zmailAuthTokenLifetime</b>.
      */
     @XmlAttribute(name=AdminConstants.A_DURATION, required=false)
     private long duration;

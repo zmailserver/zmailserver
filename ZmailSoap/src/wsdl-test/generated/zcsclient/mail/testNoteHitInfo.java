@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="noteHitInfo">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraMail}noteInfo">
+ *     &lt;extension base="{urn:zmailMail}noteInfo">
  *       &lt;sequence>
  *       &lt;/sequence>
  *       &lt;attribute name="sf" type="{http://www.w3.org/2001/XMLSchema}string" />

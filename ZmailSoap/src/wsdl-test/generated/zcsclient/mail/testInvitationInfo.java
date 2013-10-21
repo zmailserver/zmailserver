@@ -33,13 +33,13 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="invitationInfo">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraMail}inviteComponent">
+ *     &lt;extension base="{urn:zmailMail}inviteComponent">
  *       &lt;sequence>
- *         &lt;element name="content" type="{urn:zimbraMail}rawInvite" minOccurs="0"/>
- *         &lt;element name="comp" type="{urn:zimbraMail}inviteComponent" minOccurs="0"/>
- *         &lt;element name="tz" type="{urn:zimbraMail}calTZInfo" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="mp" type="{urn:zimbraMail}mimePartInfo" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="attach" type="{urn:zimbraMail}attachmentsInfo" minOccurs="0"/>
+ *         &lt;element name="content" type="{urn:zmailMail}rawInvite" minOccurs="0"/>
+ *         &lt;element name="comp" type="{urn:zmailMail}inviteComponent" minOccurs="0"/>
+ *         &lt;element name="tz" type="{urn:zmailMail}calTZInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="mp" type="{urn:zmailMail}mimePartInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="attach" type="{urn:zmailMail}attachmentsInfo" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="ct" type="{http://www.w3.org/2001/XMLSchema}string" />

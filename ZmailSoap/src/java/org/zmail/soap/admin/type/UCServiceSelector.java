@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.type;
+package org.zmail.soap.admin.type;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -21,12 +21,12 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlValue;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class UCServiceSelector {
-    // TODO: Change com.zimbra.cs.account.Provisioning.UCServiceBy to use this
+    // TODO: Change org.zmail.cs.account.Provisioning.UCServiceBy to use this
     @XmlEnum
     public enum UCServiceBy {
         // case must match protocol
@@ -45,7 +45,7 @@ public class UCServiceSelector {
      * @zm-api-field-tag ucservice-key
      * @zm-api-field-description Key for choosing ucservice
      * <table>
-     * <tr> <td> <b>{ucservice-by}="id"</b> </td> <td> Use ucservice's zimbraId as the Key </td> </tr>
+     * <tr> <td> <b>{ucservice-by}="id"</b> </td> <td> Use ucservice's zmailId as the Key </td> </tr>
      * <tr> <td> <b>{ucservice-by}="name"</b> </td> <td> Use name of the ucservice as the Key </td> </tr>
      * </table>
      */

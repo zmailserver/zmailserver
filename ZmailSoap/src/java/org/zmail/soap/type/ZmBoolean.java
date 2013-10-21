@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.type;
+package org.zmail.soap.type;
 
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
@@ -21,11 +21,11 @@ import javax.xml.bind.annotation.XmlType;
 
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
-import com.zimbra.soap.json.jackson.ZmBooleanSerializer;
+import org.zmail.soap.json.jackson.ZmBooleanSerializer;
 
 /**
- * Zimbra SOAP uses the string "1" to represent true and the string "0" to represent false in XML
- * BUT Zimbra SOAP uses "true" and "false" in JSON.  "0" and "1" are acceptable in XML
+ * Zmail SOAP uses the string "1" to represent true and the string "0" to represent false in XML
+ * BUT Zmail SOAP uses "true" and "false" in JSON.  "0" and "1" are acceptable in XML
  *
  * See this extract from XML Schema Part 2 at http://www.w3.org/TR/xmlschema-2/#boolean
  *  3.2.2 boolean

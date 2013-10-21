@@ -13,16 +13,16 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.type;
+package org.zmail.soap.mail.type;
 
 import com.google.common.base.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.type.GranteeType;
-import com.zimbra.soap.type.ZmBoolean;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.type.GranteeType;
+import org.zmail.soap.type.ZmBoolean;
 
 /*
  * Delete this class in bug 66989
@@ -32,20 +32,20 @@ import com.zimbra.soap.type.ZmBoolean;
 public class AccountACEinfo {
 
     /**
-     * @zm-api-field-tag grantee-zimbra-id
-     * @zm-api-field-description Zimbra ID of the grantee
+     * @zm-api-field-tag grantee-zmail-id
+     * @zm-api-field-description Zmail ID of the grantee
      */
     @XmlAttribute(name=MailConstants.A_ZIMBRA_ID /* zid */, required=false)
-    private String zimbraId;
+    private String zmailId;
 
     /**
      * @zm-api-field-tag grantee-type
      * @zm-api-field-description Grantee type
      * <table>
-     * <tr> <td> <b>usr</b> </td> <td> Zimbra User </td> </tr>
-     * <tr> <td> <b>grp</b> </td> <td> Zimbra Group (distribution list) </td> </tr>
+     * <tr> <td> <b>usr</b> </td> <td> Zmail User </td> </tr>
+     * <tr> <td> <b>grp</b> </td> <td> Zmail Group (distribution list) </td> </tr>
      * <tr> <td> <b>all</b> </td> <td> all authenticated users </td> </tr>
-     * <tr> <td> <b>gst</b> </td> <td> non-Zimbra email address and password (not yet supported) </td> </tr>
+     * <tr> <td> <b>gst</b> </td> <td> non-Zmail email address and password (not yet supported) </td> </tr>
      * <tr> <td> <b>key</b> </td> <td> external user with accesskey </td> </tr>
      * <tr> <td> <b>pub</b> </td> <td> public authenticated and unauthenticated access </td> </tr>
      * </table>
@@ -102,14 +102,14 @@ public class AccountACEinfo {
         this.right = right;
     }
 
-    public void setZimbraId(String zimbraId) { this.zimbraId = zimbraId; }
+    public void setZmailId(String zmailId) { this.zmailId = zmailId; }
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
     }
     public void setAccessKey(String accessKey) { this.accessKey = accessKey; }
     public void setPassword(String password) { this.password = password; }
     public void setDeny(Boolean deny) { this.deny = ZmBoolean.fromBool(deny); }
-    public String getZimbraId() { return zimbraId; }
+    public String getZmailId() { return zmailId; }
     public GranteeType getGranteeType() { return granteeType; }
     public String getRight() { return right; }
     public String getDisplayName() { return displayName; }
@@ -119,7 +119,7 @@ public class AccountACEinfo {
 
     public Objects.ToStringHelper addToStringInfo(Objects.ToStringHelper helper) {
         return helper
-            .add("zimbraId", zimbraId)
+            .add("zmailId", zmailId)
             .add("granteeType", granteeType)
             .add("right", right)
             .add("displayName", displayName)

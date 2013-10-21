@@ -13,17 +13,17 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.type;
+package org.zmail.soap.admin.type;
 
 import java.util.Arrays;
 import javax.xml.bind.annotation.XmlEnum;
 
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
 @XmlEnum
 public enum GalMode {
     // case must match protocol
-    both, ldap, zimbra;
+    both, ldap, zmail;
 
     public static GalMode fromString(String s) throws ServiceException {
         try {
@@ -36,5 +36,5 @@ public enum GalMode {
     }
     public boolean isBoth() { return this == both;}
     public boolean isLdap() { return this == ldap;}
-    public boolean isZimbra() { return this == zimbra;}
+    public boolean isZmail() { return this == zmail;}
 }

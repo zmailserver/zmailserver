@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.account.type;
+package org.zmail.soap.account.type;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -30,10 +30,10 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.soap.json.jackson.annotate.ZimbraKeyValuePairs;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.util.StringUtil;
+import org.zmail.soap.json.jackson.annotate.ZmailKeyValuePairs;
 
 @XmlAccessorType(XmlAccessType.NONE)
 abstract public class AttrsImpl implements Attrs {
@@ -41,7 +41,7 @@ abstract public class AttrsImpl implements Attrs {
     /**
      * @zm-api-field-description Attributes
      */
-    @ZimbraKeyValuePairs
+    @ZmailKeyValuePairs
     @XmlElement(name=AdminConstants.E_A)
     private List<Attr> attrs = Lists.newArrayList();
 

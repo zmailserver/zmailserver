@@ -32,8 +32,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="storeprincipal" type="{urn:zimbraVoice}storePrincipalSpec" minOccurs="0"/>
- *         &lt;element name="phone" type="{urn:zimbraVoice}modifyVoiceMailPinSpec" minOccurs="0"/>
+ *         &lt;element name="storeprincipal" type="{urn:zmailVoice}storePrincipalSpec" minOccurs="0"/>
+ *         &lt;element name="phone" type="{urn:zmailVoice}modifyVoiceMailPinSpec" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>

@@ -38,8 +38,8 @@ import generated.zcsclient.zm.testId;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="default" type="{urn:zimbra}id" minOccurs="0"/>
- *         &lt;element name="except" type="{urn:zimbraMail}exceptIdInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="default" type="{urn:zmail}id" minOccurs="0"/>
+ *         &lt;element name="except" type="{urn:zmailMail}exceptIdInfo" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="calItemId" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="apptId" type="{http://www.w3.org/2001/XMLSchema}string" />

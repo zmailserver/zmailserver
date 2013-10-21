@@ -14,14 +14,14 @@
  */
 @XmlSchema(
     xmlns = {
-        @XmlNs(prefix="account", namespaceURI = "urn:zimbraAccount")
+        @XmlNs(prefix="account", namespaceURI = "urn:zmailAccount")
     },
-    namespace = "urn:zimbraAccount",
+    namespace = "urn:zmailAccount",
     elementFormDefault = XmlNsForm.QUALIFIED
 )
 @XmlAccessorType(XmlAccessType.NONE)
 
-package com.zimbra.soap.account.type;
+package org.zmail.soap.account.type;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

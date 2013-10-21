@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -22,8 +22,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.soap.admin.type.AdminAttrsImpl;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.soap.admin.type.AdminAttrsImpl;
 
 /**
  * @zm-api-command-auth-required true
@@ -42,8 +42,8 @@ import com.zimbra.soap.admin.type.AdminAttrsImpl;
 public class ModifyServerRequest extends AdminAttrsImpl {
 
     /**
-     * @zm-api-field-tag value-of-zimbra-id
-     * @zm-api-field-description Zimbra ID
+     * @zm-api-field-tag value-of-zmail-id
+     * @zm-api-field-description Zmail ID
      */
     @XmlAttribute(name=AdminConstants.E_ID, required=true)
     private String id;

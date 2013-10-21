@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.voice.type;
+package org.zmail.soap.voice.type;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,10 +29,10 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.zclient.ZClientException;
-import com.zimbra.soap.base.KeyAndValue;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.zclient.ZClientException;
+import org.zmail.soap.base.KeyAndValue;
 
 /**
  * e.g. For element named "attr":

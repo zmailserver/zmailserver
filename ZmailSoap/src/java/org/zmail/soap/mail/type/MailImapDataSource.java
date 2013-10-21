@@ -13,9 +13,9 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.type;
+package org.zmail.soap.mail.type;
 
-import com.zimbra.soap.type.ImapDataSource;
+import org.zmail.soap.type.ImapDataSource;
 
 public class MailImapDataSource
 extends MailDataSource

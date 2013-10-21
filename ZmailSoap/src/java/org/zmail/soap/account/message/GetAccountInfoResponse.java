@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.account.message;
+package org.zmail.soap.account.message;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -27,10 +27,10 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.soap.json.jackson.annotate.ZimbraJsonAttribute;
-import com.zimbra.soap.json.jackson.annotate.ZimbraKeyValuePairs;
-import com.zimbra.soap.type.NamedValue;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.soap.json.jackson.annotate.ZmailJsonAttribute;
+import org.zmail.soap.json.jackson.annotate.ZmailKeyValuePairs;
+import org.zmail.soap.type.NamedValue;
 
 /**
  * @zm-api-response-description Provides a limited amount of information about the requested account.
@@ -46,19 +46,19 @@ public class GetAccountInfoResponse {
      * @zm-api-field-tag account-email-address
      * @zm-api-field-description Account name - an email address (user@domain)
      */
-    @ZimbraJsonAttribute
+    @ZmailJsonAttribute
     @XmlElement(name=AccountConstants.A_NAME /* name */, required=true)
     private final String name;
 
     /**
      * @zm-api-field-description Account attributes.  Currently only these attributes are returned:
      * <table>
-     * <tr><td> <b>zimbraId</b>       </td><td> the unique UUID of the zimbra account </td></tr>
-     * <tr><td> <b>zimbraMailHost</b> </td><td> the server on which this user's mail resides </td></tr>
+     * <tr><td> <b>zmailId</b>       </td><td> the unique UUID of the zmail account </td></tr>
+     * <tr><td> <b>zmailMailHost</b> </td><td> the server on which this user's mail resides </td></tr>
      * <tr><td> <b>displayName</b>    </td><td> display name for the account </td></tr>
      * </table>
      */
-    @ZimbraKeyValuePairs
+    @ZmailKeyValuePairs
     @XmlElement(name=AccountConstants.E_ATTR /* attr */, required=true)
     private List<NamedValue> attrs = Lists.newArrayList();
 
@@ -70,7 +70,7 @@ public class GetAccountInfoResponse {
      * <p>If both http and https (SSL) are enabled, the https URL will be returned.</p>
      */
     @XmlElement(name=AccountConstants.E_SOAP_URL /* soapURL */, required=false)
-    @ZimbraJsonAttribute
+    @ZmailJsonAttribute
     private String soapURL;
 
     /**
@@ -78,16 +78,16 @@ public class GetAccountInfoResponse {
      * @zm-api-field-description Base public URL for the requested account
      */
     @XmlElement(name=AccountConstants.E_PUBLIC_URL /* publicURL */, required=false)
-    @ZimbraJsonAttribute
+    @ZmailJsonAttribute
     private String publicURL;
 
     /**
      * @zm-api-field-tag change-password-url
      * @zm-api-field-description URL to talk to in order to change a password.  Not returned if not configured
-     * via domain attribute <b>zimbraChangePasswordURL</b>
+     * via domain attribute <b>zmailChangePasswordURL</b>
      */
     @XmlElement(name=AccountConstants.E_CHANGE_PASSWORD_URL /* changePasswordURL */, required=false)
-    @ZimbraJsonAttribute
+    @ZmailJsonAttribute
     private String changePasswordURL;
 
     /**

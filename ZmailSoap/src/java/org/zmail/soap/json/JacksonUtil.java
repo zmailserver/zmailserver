@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.json;
+package org.zmail.soap.json;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -24,21 +24,21 @@ import org.codehaus.jackson.map.AnnotationIntrospector;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.SerializationConfig;
 import com.google.common.base.Strings;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.Element.JSONElement;
-import com.zimbra.common.soap.SoapParseException;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.soap.json.jackson.ZimbraJsonModule;
-import com.zimbra.soap.json.jackson.ZmPairAnnotationIntrospector;
-import com.zimbra.soap.util.JaxbInfo;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.Element.JSONElement;
+import org.zmail.common.soap.SoapParseException;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.soap.json.jackson.ZmailJsonModule;
+import org.zmail.soap.json.jackson.ZmPairAnnotationIntrospector;
+import org.zmail.soap.util.JaxbInfo;
 
 public final class JacksonUtil {
     /* Prevent accidental construction */
     private JacksonUtil() { }
 
-    private static final Log LOG = ZimbraLog.soap;
+    private static final Log LOG = ZmailLog.soap;
     /**
      *  e.g.
      *      calData = new AppointmentData(uid, uid);
@@ -159,18 +159,18 @@ public final class JacksonUtil {
      * We use our own annotation introspector which is based on a pair of annotation introspectors so that we can
      * handle both JAXB annotations and some Jackson annotations
      */
-    private static AnnotationIntrospector getZimbraIntrospector() {
+    private static AnnotationIntrospector getZmailIntrospector() {
         return new ZmPairAnnotationIntrospector();
     }
 
     public static ObjectMapper getObjectMapper() {
         ObjectMapper mapper = new ObjectMapper();
-        mapper.setAnnotationIntrospector(getZimbraIntrospector());
+        mapper.setAnnotationIntrospector(getZmailIntrospector());
         mapper.enable(SerializationConfig.Feature.INDENT_OUTPUT);
-        ZimbraJsonModule zimbraModule = new ZimbraJsonModule();
-        // Doesn't appear to work. ZimbraBeanPropertyWriter uses this directly instead.
-        // zimbraModule.addSerializer(org.w3c.dom.Element.class, new ZmDomElementJsonSerializer());
-        mapper.registerModule(zimbraModule);
+        ZmailJsonModule zmailModule = new ZmailJsonModule();
+        // Doesn't appear to work. ZmailBeanPropertyWriter uses this directly instead.
+        // zmailModule.addSerializer(org.w3c.dom.Element.class, new ZmDomElementJsonSerializer());
+        mapper.registerModule(zmailModule);
         return mapper;
     }
 

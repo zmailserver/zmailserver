@@ -13,12 +13,12 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.soap.type.AccountSelector;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.soap.type.AccountSelector;
 
 /**
  * @zm-api-command-auth-required true
@@ -27,8 +27,8 @@ import com.zimbra.soap.type.AccountSelector;
  * <br />
  * Currently only 2 attrs are returned:
  * <table>
- * <tr> <td> <b>zimbraId</b> </td> <td> the unique UUID of the zimbra account </td> </tr>
- * <tr> <td> <b>zimbraMailHost</b> </td> <td> the server on which this user's mail resides </td> </tr>
+ * <tr> <td> <b>zmailId</b> </td> <td> the unique UUID of the zmail account </td> </tr>
+ * <tr> <td> <b>zmailMailHost</b> </td> <td> the server on which this user's mail resides </td> </tr>
  * </table>
  * <b>Access</b>: domain admin sufficient
  */

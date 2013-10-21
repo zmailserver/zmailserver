@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="contactAttr">
  *   &lt;simpleContent>
- *     &lt;extension base="&lt;urn:zimbra>keyValuePair">
+ *     &lt;extension base="&lt;urn:zmail>keyValuePair">
  *       &lt;attribute name="part" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="ct" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="s" type="{http://www.w3.org/2001/XMLSchema}int" />

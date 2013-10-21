@@ -35,9 +35,9 @@ import generated.zcsclient.zm.testDistributionListSelector;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="dl" type="{urn:zimbra}distributionListSelector"/>
+ *         &lt;element name="dl" type="{urn:zmail}distributionListSelector"/>
  *       &lt;/sequence>
- *       &lt;attribute name="op" use="required" type="{urn:zimbraAccount}distributionListSubscribeOp" />
+ *       &lt;attribute name="op" use="required" type="{urn:zmailAccount}distributionListSubscribeOp" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>

@@ -13,52 +13,52 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.account.type;
+package org.zmail.soap.account.type;
 
 import com.google.common.base.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.soap.type.GranteeType;
-import com.zimbra.soap.type.ZmBoolean;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.soap.type.GranteeType;
+import org.zmail.soap.type.ZmBoolean;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class AccountACEInfo {
 
     /**
-     * @zm-api-field-tag zimbra-id
-     * @zm-api-field-description Zimbra ID of the grantee
+     * @zm-api-field-tag zmail-id
+     * @zm-api-field-description Zmail ID of the grantee
      */
     @XmlAttribute(name=AccountConstants.A_ZIMBRA_ID /* zid */, required=false)
-    private String zimbraId;
+    private String zmailId;
 
     /**
      * @zm-api-field-tag grantee-type
      * @zm-api-field-description The type of grantee:
      * <ul>
-     * <li> <b>usr</b> - Zimbra user
-     * <li> <b>grp</b> - Zimbra group(distribution list)
+     * <li> <b>usr</b> - Zmail user
+     * <li> <b>grp</b> - Zmail group(distribution list)
      * <li> <b>all</b> - all authenticated users
-     * <li> <b>gst</b> - non-Zimbra email address and password (not yet supported)
+     * <li> <b>gst</b> - non-Zmail email address and password (not yet supported)
      * <li> <b>key</b> - external user with an accesskey
      * <li> <b>pub</b> - public authenticated and unauthenticated access
      * </ul>
      *
      * If the value is:
      * <ul>
-     * <li> <b>usr</b> - either <b>{zimbra-id}</b> or <b>{grantee-name}</b> is required
-     * <li> <b>grp</b> - either <b>{zimbra-id}</b> or <b>{grantee-name}</b> is required
-     * <li> <b>all</b> - <b>{zimbra-id}</b>, <b>{grantee-name}</b> and <b>{password}</b> are ignored
-     * <li> <b>gst</b> - <b>{zimbra-id}</b> is ignored, <b>{grantee-name}</b> is required, <b>{password}</b> is optional
-     * <li> <b>key</b> - <b>{zimbra-id}</b> is ignored, <b>{grantee-name}</b> is required
-     * <li> <b>pub</b> - <b>{zimbra-id}</b>, <b>{grantee-name}</b> and <b>{password}</b> are ignored
+     * <li> <b>usr</b> - either <b>{zmail-id}</b> or <b>{grantee-name}</b> is required
+     * <li> <b>grp</b> - either <b>{zmail-id}</b> or <b>{grantee-name}</b> is required
+     * <li> <b>all</b> - <b>{zmail-id}</b>, <b>{grantee-name}</b> and <b>{password}</b> are ignored
+     * <li> <b>gst</b> - <b>{zmail-id}</b> is ignored, <b>{grantee-name}</b> is required, <b>{password}</b> is optional
+     * <li> <b>key</b> - <b>{zmail-id}</b> is ignored, <b>{grantee-name}</b> is required
+     * <li> <b>pub</b> - <b>{zmail-id}</b>, <b>{grantee-name}</b> and <b>{password}</b> are ignored
      * </ul>
      * For <b>usr</b> and <b>grp</b>:
      * <ul>
-     * <li> if <b>{zimbra-id}</b> is provided, server will lookup the entry by <b>{zimbra-id}</b> and
-     * <li> if <b>{zimbra-id}</b> is not provided, server will lookup the grantee by <b>{grantee-type}</b> and
+     * <li> if <b>{zmail-id}</b> is provided, server will lookup the entry by <b>{zmail-id}</b> and
+     * <li> if <b>{zmail-id}</b> is not provided, server will lookup the grantee by <b>{grantee-type}</b> and
      *      <b>{grantee-name}</b>
      * <li>if the lookup fails, NO_SUCH_ACCOUNT/NO_SUCH_DISTRIBUTION_LIST will be thrown.
      * </ul>
@@ -128,7 +128,7 @@ public class AccountACEInfo {
         this.right = right;
     }
 
-    public void setZimbraId(String zimbraId) { this.zimbraId = zimbraId; }
+    public void setZmailId(String zmailId) { this.zmailId = zmailId; }
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
     }
@@ -136,7 +136,7 @@ public class AccountACEInfo {
     public void setPassword(String password) { this.password = password; }
     public void setDeny(Boolean deny) { this.deny = ZmBoolean.fromBool(deny); }
     public void setCheckGranteeType(Boolean chkgt) { this.checkGranteeType = ZmBoolean.fromBool(chkgt); }
-    public String getZimbraId() { return zimbraId; }
+    public String getZmailId() { return zmailId; }
     public GranteeType getGranteeType() { return granteeType; }
     public String getRight() { return right; }
     public String getDisplayName() { return displayName; }
@@ -148,7 +148,7 @@ public class AccountACEInfo {
     public Objects.ToStringHelper addToStringInfo(
                 Objects.ToStringHelper helper) {
         return helper
-            .add("zimbraId", zimbraId)
+            .add("zmailId", zmailId)
             .add("granteeType", granteeType)
             .add("right", right)
             .add("displayName", displayName)

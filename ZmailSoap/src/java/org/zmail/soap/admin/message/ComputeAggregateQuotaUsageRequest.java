@@ -13,9 +13,9 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
-import com.zimbra.common.soap.AdminConstants;
+import org.zmail.common.soap.AdminConstants;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * The request handler issues <b>GetAggregateQuotaUsageOnServerRequest</b> to all mailbox servers and computes the
  * aggregate quota used by each domain.
  * <br />
- * The request handler updates the <b>zimbraAggregateQuotaLastUsage</b> domain attribute and sends out warning
+ * The request handler updates the <b>zmailAggregateQuotaLastUsage</b> domain attribute and sends out warning
  * messages for each domain having quota usage greater than a defined percentage threshold.
  */
 @XmlRootElement(name=AdminConstants.E_COMPUTE_AGGR_QUOTA_USAGE_REQUEST)

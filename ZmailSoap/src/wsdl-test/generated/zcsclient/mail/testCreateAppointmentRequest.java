@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="createAppointmentRequest">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraMail}calItemRequestBase">
+ *     &lt;extension base="{urn:zmailMail}calItemRequestBase">
  *       &lt;sequence>
  *       &lt;/sequence>
  *     &lt;/extension>

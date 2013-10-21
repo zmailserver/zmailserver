@@ -13,12 +13,12 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.account.type;
+package org.zmail.soap.account.type;
 
 import javax.xml.bind.annotation.XmlType;
 
-import com.zimbra.soap.type.DataSource;
-import com.zimbra.soap.type.ImapDataSource;
+import org.zmail.soap.type.DataSource;
+import org.zmail.soap.type.ImapDataSource;
 
 @XmlType(propOrder= {})
 public class AccountImapDataSource

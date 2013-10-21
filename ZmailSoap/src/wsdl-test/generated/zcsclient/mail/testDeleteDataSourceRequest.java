@@ -37,14 +37,14 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;choice maxOccurs="unbounded" minOccurs="0">
- *           &lt;element name="imap" type="{urn:zimbraMail}imapDataSourceNameOrId"/>
- *           &lt;element name="pop3" type="{urn:zimbraMail}pop3DataSourceNameOrId"/>
- *           &lt;element name="caldav" type="{urn:zimbraMail}caldavDataSourceNameOrId"/>
- *           &lt;element name="yab" type="{urn:zimbraMail}yabDataSourceNameOrId"/>
- *           &lt;element name="rss" type="{urn:zimbraMail}rssDataSourceNameOrId"/>
- *           &lt;element name="gal" type="{urn:zimbraMail}galDataSourceNameOrId"/>
- *           &lt;element name="cal" type="{urn:zimbraMail}calDataSourceNameOrId"/>
- *           &lt;element name="unknown" type="{urn:zimbraMail}unknownDataSourceNameOrId"/>
+ *           &lt;element name="imap" type="{urn:zmailMail}imapDataSourceNameOrId"/>
+ *           &lt;element name="pop3" type="{urn:zmailMail}pop3DataSourceNameOrId"/>
+ *           &lt;element name="caldav" type="{urn:zmailMail}caldavDataSourceNameOrId"/>
+ *           &lt;element name="yab" type="{urn:zmailMail}yabDataSourceNameOrId"/>
+ *           &lt;element name="rss" type="{urn:zmailMail}rssDataSourceNameOrId"/>
+ *           &lt;element name="gal" type="{urn:zmailMail}galDataSourceNameOrId"/>
+ *           &lt;element name="cal" type="{urn:zmailMail}calDataSourceNameOrId"/>
+ *           &lt;element name="unknown" type="{urn:zmailMail}unknownDataSourceNameOrId"/>
  *         &lt;/choice>
  *       &lt;/sequence>
  *     &lt;/restriction>

@@ -12,16 +12,16 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.AdminConstants;
+import org.zmail.common.soap.AdminConstants;
 
 /**
  * @zm-api-command-auth-required true
  * @zm-api-command-admin-auth-required true
- * @zm-api-command-description Removes all account loggers and reloads /opt/zimbra/conf/log4j.properties.
+ * @zm-api-command-description Removes all account loggers and reloads /opt/zmail/conf/log4j.properties.
  */
 @XmlRootElement(name=AdminConstants.E_RESET_ALL_LOGGERS_REQUEST)
 public final class ResetAllLoggersRequest {

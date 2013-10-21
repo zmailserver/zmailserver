@@ -39,19 +39,19 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;choice maxOccurs="unbounded" minOccurs="0">
- *           &lt;element name="folder" type="{urn:zimbraMail}idsAttr"/>
- *           &lt;element name="search" type="{urn:zimbraMail}idsAttr"/>
- *           &lt;element name="link" type="{urn:zimbraMail}idsAttr"/>
- *           &lt;element name="tag" type="{urn:zimbraMail}idsAttr"/>
- *           &lt;element name="c" type="{urn:zimbraMail}idsAttr"/>
- *           &lt;element name="chat" type="{urn:zimbraMail}idsAttr"/>
- *           &lt;element name="m" type="{urn:zimbraMail}idsAttr"/>
- *           &lt;element name="cn" type="{urn:zimbraMail}idsAttr"/>
- *           &lt;element name="appt" type="{urn:zimbraMail}idsAttr"/>
- *           &lt;element name="task" type="{urn:zimbraMail}idsAttr"/>
- *           &lt;element name="notes" type="{urn:zimbraMail}idsAttr"/>
- *           &lt;element name="w" type="{urn:zimbraMail}idsAttr"/>
- *           &lt;element name="doc" type="{urn:zimbraMail}idsAttr"/>
+ *           &lt;element name="folder" type="{urn:zmailMail}idsAttr"/>
+ *           &lt;element name="search" type="{urn:zmailMail}idsAttr"/>
+ *           &lt;element name="link" type="{urn:zmailMail}idsAttr"/>
+ *           &lt;element name="tag" type="{urn:zmailMail}idsAttr"/>
+ *           &lt;element name="c" type="{urn:zmailMail}idsAttr"/>
+ *           &lt;element name="chat" type="{urn:zmailMail}idsAttr"/>
+ *           &lt;element name="m" type="{urn:zmailMail}idsAttr"/>
+ *           &lt;element name="cn" type="{urn:zmailMail}idsAttr"/>
+ *           &lt;element name="appt" type="{urn:zmailMail}idsAttr"/>
+ *           &lt;element name="task" type="{urn:zmailMail}idsAttr"/>
+ *           &lt;element name="notes" type="{urn:zmailMail}idsAttr"/>
+ *           &lt;element name="w" type="{urn:zmailMail}idsAttr"/>
+ *           &lt;element name="doc" type="{urn:zmailMail}idsAttr"/>
  *         &lt;/choice>
  *       &lt;/sequence>
  *       &lt;attribute name="ids" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
@@ -69,19 +69,19 @@ import javax.xml.bind.annotation.XmlType;
 public class testSyncDeletedInfo {
 
     @XmlElementRefs({
-        @XmlElementRef(name = "c", namespace = "urn:zimbraMail", type = JAXBElement.class),
-        @XmlElementRef(name = "folder", namespace = "urn:zimbraMail", type = JAXBElement.class),
-        @XmlElementRef(name = "cn", namespace = "urn:zimbraMail", type = JAXBElement.class),
-        @XmlElementRef(name = "w", namespace = "urn:zimbraMail", type = JAXBElement.class),
-        @XmlElementRef(name = "chat", namespace = "urn:zimbraMail", type = JAXBElement.class),
-        @XmlElementRef(name = "task", namespace = "urn:zimbraMail", type = JAXBElement.class),
-        @XmlElementRef(name = "m", namespace = "urn:zimbraMail", type = JAXBElement.class),
-        @XmlElementRef(name = "notes", namespace = "urn:zimbraMail", type = JAXBElement.class),
-        @XmlElementRef(name = "link", namespace = "urn:zimbraMail", type = JAXBElement.class),
-        @XmlElementRef(name = "appt", namespace = "urn:zimbraMail", type = JAXBElement.class),
-        @XmlElementRef(name = "search", namespace = "urn:zimbraMail", type = JAXBElement.class),
-        @XmlElementRef(name = "doc", namespace = "urn:zimbraMail", type = JAXBElement.class),
-        @XmlElementRef(name = "tag", namespace = "urn:zimbraMail", type = JAXBElement.class)
+        @XmlElementRef(name = "c", namespace = "urn:zmailMail", type = JAXBElement.class),
+        @XmlElementRef(name = "folder", namespace = "urn:zmailMail", type = JAXBElement.class),
+        @XmlElementRef(name = "cn", namespace = "urn:zmailMail", type = JAXBElement.class),
+        @XmlElementRef(name = "w", namespace = "urn:zmailMail", type = JAXBElement.class),
+        @XmlElementRef(name = "chat", namespace = "urn:zmailMail", type = JAXBElement.class),
+        @XmlElementRef(name = "task", namespace = "urn:zmailMail", type = JAXBElement.class),
+        @XmlElementRef(name = "m", namespace = "urn:zmailMail", type = JAXBElement.class),
+        @XmlElementRef(name = "notes", namespace = "urn:zmailMail", type = JAXBElement.class),
+        @XmlElementRef(name = "link", namespace = "urn:zmailMail", type = JAXBElement.class),
+        @XmlElementRef(name = "appt", namespace = "urn:zmailMail", type = JAXBElement.class),
+        @XmlElementRef(name = "search", namespace = "urn:zmailMail", type = JAXBElement.class),
+        @XmlElementRef(name = "doc", namespace = "urn:zmailMail", type = JAXBElement.class),
+        @XmlElementRef(name = "tag", namespace = "urn:zmailMail", type = JAXBElement.class)
     })
     protected List<JAXBElement<testIdsAttr>> folderOrSearchOrLink;
     @XmlAttribute(name = "ids", required = true)

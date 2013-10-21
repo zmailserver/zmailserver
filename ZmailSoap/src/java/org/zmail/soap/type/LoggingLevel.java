@@ -13,21 +13,21 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.type;
+package org.zmail.soap.type;
 
 import java.util.Arrays;
 import java.util.Locale;
 
 import javax.xml.bind.annotation.XmlEnum;
 
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
 /**
  * relates to Logging levels.
  */
 @XmlEnum
 public enum LoggingLevel {
-    // keep in sync with com.zimbra.common.util.Log.Level
+    // keep in sync with org.zmail.common.util.Log.Level
     error, warn, info, debug, trace;
 
     public static LoggingLevel fromString(String s) throws ServiceException {

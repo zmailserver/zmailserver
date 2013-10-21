@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="mimeHeaderTest">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraMail}filterTest">
+ *     &lt;extension base="{urn:zmailMail}filterTest">
  *       &lt;sequence>
  *       &lt;/sequence>
  *       &lt;attribute name="header" type="{http://www.w3.org/2001/XMLSchema}string" />

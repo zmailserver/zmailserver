@@ -40,17 +40,17 @@ import generated.zcsclient.zm.testWildcardExpansionQueryInfo;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;choice maxOccurs="unbounded" minOccurs="0">
- *           &lt;element name="hit" type="{urn:zimbra}simpleSearchHit"/>
- *           &lt;element name="c" type="{urn:zimbraMail}conversationHitInfo"/>
- *           &lt;element name="m" type="{urn:zimbraMail}messageHitInfo"/>
- *           &lt;element name="chat" type="{urn:zimbraMail}chatHitInfo"/>
- *           &lt;element name="mp" type="{urn:zimbraMail}messagePartHitInfo"/>
- *           &lt;element name="cn" type="{urn:zimbraMail}contactInfo"/>
- *           &lt;element name="note" type="{urn:zimbraMail}noteHitInfo"/>
- *           &lt;element name="doc" type="{urn:zimbraMail}documentHitInfo"/>
- *           &lt;element name="w" type="{urn:zimbraMail}wikiHitInfo"/>
- *           &lt;element name="appt" type="{urn:zimbraMail}appointmentHitInfo"/>
- *           &lt;element name="task" type="{urn:zimbraMail}taskHitInfo"/>
+ *           &lt;element name="hit" type="{urn:zmail}simpleSearchHit"/>
+ *           &lt;element name="c" type="{urn:zmailMail}conversationHitInfo"/>
+ *           &lt;element name="m" type="{urn:zmailMail}messageHitInfo"/>
+ *           &lt;element name="chat" type="{urn:zmailMail}chatHitInfo"/>
+ *           &lt;element name="mp" type="{urn:zmailMail}messagePartHitInfo"/>
+ *           &lt;element name="cn" type="{urn:zmailMail}contactInfo"/>
+ *           &lt;element name="note" type="{urn:zmailMail}noteHitInfo"/>
+ *           &lt;element name="doc" type="{urn:zmailMail}documentHitInfo"/>
+ *           &lt;element name="w" type="{urn:zmailMail}wikiHitInfo"/>
+ *           &lt;element name="appt" type="{urn:zmailMail}appointmentHitInfo"/>
+ *           &lt;element name="task" type="{urn:zmailMail}taskHitInfo"/>
  *         &lt;/choice>
  *         &lt;element name="info" minOccurs="0">
  *           &lt;complexType>
@@ -58,8 +58,8 @@ import generated.zcsclient.zm.testWildcardExpansionQueryInfo;
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence>
  *                   &lt;choice maxOccurs="unbounded" minOccurs="0">
- *                     &lt;element name="suggest" type="{urn:zimbraMail}suggestedQueryString"/>
- *                     &lt;element name="wildcard" type="{urn:zimbra}wildcardExpansionQueryInfo"/>
+ *                     &lt;element name="suggest" type="{urn:zmailMail}suggestedQueryString"/>
+ *                     &lt;element name="wildcard" type="{urn:zmail}wildcardExpansionQueryInfo"/>
  *                   &lt;/choice>
  *                 &lt;/sequence>
  *               &lt;/restriction>
@@ -280,8 +280,8 @@ public class testSearchResponse {
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
      *         &lt;choice maxOccurs="unbounded" minOccurs="0">
-     *           &lt;element name="suggest" type="{urn:zimbraMail}suggestedQueryString"/>
-     *           &lt;element name="wildcard" type="{urn:zimbra}wildcardExpansionQueryInfo"/>
+     *           &lt;element name="suggest" type="{urn:zmailMail}suggestedQueryString"/>
+     *           &lt;element name="wildcard" type="{urn:zmail}wildcardExpansionQueryInfo"/>
      *         &lt;/choice>
      *       &lt;/sequence>
      *     &lt;/restriction>

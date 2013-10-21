@@ -13,11 +13,11 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.message;
+package org.zmail.soap.mail.message;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.soap.mail.type.CreateCalendarItemResponse;
+import org.zmail.soap.mail.type.CreateCalendarItemResponse;
 
 @XmlRootElement(name="CreateAppointmentResponse")
 public class CreateAppointmentResponse extends CreateCalendarItemResponse {

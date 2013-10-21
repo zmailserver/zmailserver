@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.message;
+package org.zmail.soap.mail.message;
 
 import com.google.common.base.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.MailConstants;
+import org.zmail.common.soap.MailConstants;
 
 /**
  * @zm-api-command-auth-required true
@@ -50,7 +50,7 @@ public class ExportContactsRequest {
     /**
      * @zm-api-field-tag csv-format
      * @zm-api-field-description Optional csv format for exported contacts.  the supported formats are defined in
-     * <b>$ZIMBRA_HOME/conf/zimbra-contact-fields.xml</b>
+     * <b>$ZIMBRA_HOME/conf/zmail-contact-fields.xml</b>
      */
     @XmlAttribute(name=MailConstants.A_CSVFORMAT /* csvfmt */, required=false)
     private String csvFormat;

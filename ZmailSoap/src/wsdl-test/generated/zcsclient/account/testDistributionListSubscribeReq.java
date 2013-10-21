@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlValue;
  * &lt;complexType name="distributionListSubscribeReq">
  *   &lt;simpleContent>
  *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
- *       &lt;attribute name="op" use="required" type="{urn:zimbraAccount}distributionListSubscribeOp" />
+ *       &lt;attribute name="op" use="required" type="{urn:zmailAccount}distributionListSubscribeOp" />
  *       &lt;attribute name="bccOwners" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *     &lt;/extension>
  *   &lt;/simpleContent>

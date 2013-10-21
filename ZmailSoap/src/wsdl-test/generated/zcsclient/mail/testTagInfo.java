@@ -35,8 +35,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{urn:zimbraMail}meta" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element ref="{urn:zimbraMail}retentionPolicy" minOccurs="0"/>
+ *         &lt;element ref="{urn:zmailMail}meta" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element ref="{urn:zmailMail}retentionPolicy" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="id" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="name" type="{http://www.w3.org/2001/XMLSchema}string" />

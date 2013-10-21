@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.doc.soap.doclet;
+package org.zmail.doc.soap.doclet;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,16 +21,16 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.sun.javadoc.RootDoc;
-import com.zimbra.doc.soap.ApiClassDocumentation;
-import com.zimbra.doc.soap.Root;
-import com.zimbra.doc.soap.SoapDocException;
-import com.zimbra.doc.soap.WsdlDocGenerator;
-import com.zimbra.doc.soap.apidesc.SoapApiDescription;
-import com.zimbra.doc.soap.template.ApiReferenceTemplateHandler;
-import com.zimbra.doc.soap.template.TemplateHandler;
+import org.zmail.doc.soap.ApiClassDocumentation;
+import org.zmail.doc.soap.Root;
+import org.zmail.doc.soap.SoapDocException;
+import org.zmail.doc.soap.WsdlDocGenerator;
+import org.zmail.doc.soap.apidesc.SoapApiDescription;
+import org.zmail.doc.soap.template.ApiReferenceTemplateHandler;
+import org.zmail.doc.soap.template.TemplateHandler;
 
 /**
- * Special purpose doclet used to create documentation for the Zimbra SOAP API
+ * Special purpose doclet used to create documentation for the Zmail SOAP API
  */
 public class ZmApiDoclet {
 

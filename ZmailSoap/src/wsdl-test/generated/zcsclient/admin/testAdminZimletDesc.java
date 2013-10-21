@@ -41,10 +41,10 @@ import org.w3c.dom.Element;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;choice maxOccurs="unbounded" minOccurs="0">
- *           &lt;element ref="{urn:zimbraAdmin}serverExtension"/>
- *           &lt;element ref="{urn:zimbraAdmin}include"/>
- *           &lt;element ref="{urn:zimbraAdmin}includeCSS"/>
- *           &lt;element ref="{urn:zimbraAdmin}target"/>
+ *           &lt;element ref="{urn:zmailAdmin}serverExtension"/>
+ *           &lt;element ref="{urn:zmailAdmin}include"/>
+ *           &lt;element ref="{urn:zmailAdmin}includeCSS"/>
+ *           &lt;element ref="{urn:zmailAdmin}target"/>
  *           &lt;any processContents='skip' namespace='##other'/>
  *         &lt;/choice>
  *       &lt;/sequence>
@@ -68,10 +68,10 @@ import org.w3c.dom.Element;
 public class testAdminZimletDesc {
 
     @XmlElementRefs({
-        @XmlElementRef(name = "target", namespace = "urn:zimbraAdmin", type = JAXBElement.class),
-        @XmlElementRef(name = "serverExtension", namespace = "urn:zimbraAdmin", type = JAXBElement.class),
-        @XmlElementRef(name = "includeCSS", namespace = "urn:zimbraAdmin", type = JAXBElement.class),
-        @XmlElementRef(name = "include", namespace = "urn:zimbraAdmin", type = JAXBElement.class)
+        @XmlElementRef(name = "target", namespace = "urn:zmailAdmin", type = JAXBElement.class),
+        @XmlElementRef(name = "serverExtension", namespace = "urn:zmailAdmin", type = JAXBElement.class),
+        @XmlElementRef(name = "includeCSS", namespace = "urn:zmailAdmin", type = JAXBElement.class),
+        @XmlElementRef(name = "include", namespace = "urn:zmailAdmin", type = JAXBElement.class)
     })
     @XmlAnyElement
     protected List<Object> serverExtensionOrIncludeOrIncludeCSS;

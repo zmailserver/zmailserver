@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.account.type;
+package org.zmail.soap.account.type;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -32,8 +32,8 @@ import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlType;
 
-import com.zimbra.common.soap.ZimletConstants;
-import com.zimbra.soap.base.ZimletDesc;
+import org.zmail.common.soap.ZimletConstants;
+import org.zmail.soap.base.ZimletDesc;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(propOrder = {})
@@ -87,7 +87,7 @@ public class AccountZimletDesc implements ZimletDesc {
     @XmlAttribute(name=ZimletConstants.ZIMLET_TAG_LABEL /* label */, required=false)
     private String label;
 
-    // See wiki.zimbra.com/wiki/Basic_Zimlet_Definition_Tags
+    // See wiki.zmail.com/wiki/Basic_Zimlet_Definition_Tags
 
     // ZimletConstants.ZIMLET_TAG_CONTENT_OBJECT will map to org.w3c.dom.Element
     // ZimletConstants.ZIMLET_TAG_PANEL_ITEM will map to org.w3c.dom.Element

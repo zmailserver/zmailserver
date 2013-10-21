@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import com.google.common.collect.Lists;
 
@@ -27,10 +27,10 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.soap.admin.type.PackageRightsInfo;
-import com.zimbra.soap.admin.type.DomainAdminRight;
-import com.zimbra.soap.json.jackson.annotate.ZimbraJsonArrayForWrapper;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.soap.admin.type.PackageRightsInfo;
+import org.zmail.soap.admin.type.DomainAdminRight;
+import org.zmail.soap.json.jackson.annotate.ZmailJsonArrayForWrapper;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name=AdminConstants.E_GET_RIGHTS_DOC_RESPONSE)
@@ -51,8 +51,8 @@ public class GetRightsDocResponse {
     /**
      * @zm-api-field-description Domain admin rights
      */
-    @ZimbraJsonArrayForWrapper
-    @XmlElementWrapper(name="domainAdmin-copypaste-to-zimbra-rights-domainadmin-xml-template", required=true)
+    @ZmailJsonArrayForWrapper
+    @XmlElementWrapper(name="domainAdmin-copypaste-to-zmail-rights-domainadmin-xml-template", required=true)
     @XmlElement(name=AdminConstants.E_RIGHT /* right */, required=false)
     private List <DomainAdminRight> rights = Lists.newArrayList();
 

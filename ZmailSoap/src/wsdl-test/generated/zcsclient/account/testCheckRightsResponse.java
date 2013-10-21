@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="target" type="{urn:zimbraAccount}checkRightsTargetInfo" maxOccurs="unbounded"/>
+ *         &lt;element name="target" type="{urn:zmailAccount}checkRightsTargetInfo" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>

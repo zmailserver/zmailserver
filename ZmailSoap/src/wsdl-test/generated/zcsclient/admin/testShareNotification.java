@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="shareNotification">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraAdmin}notification">
+ *     &lt;extension base="{urn:zmailAdmin}notification">
  *       &lt;sequence>
  *       &lt;/sequence>
  *     &lt;/extension>

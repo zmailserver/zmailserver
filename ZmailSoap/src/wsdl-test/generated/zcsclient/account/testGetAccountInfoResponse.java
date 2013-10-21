@@ -37,7 +37,7 @@ import generated.zcsclient.zm.testNamedValue;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="attr" type="{urn:zimbra}namedValue" maxOccurs="unbounded"/>
+ *         &lt;element name="attr" type="{urn:zmail}namedValue" maxOccurs="unbounded"/>
  *         &lt;element name="soapURL" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="publicURL" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="changePasswordURL" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>

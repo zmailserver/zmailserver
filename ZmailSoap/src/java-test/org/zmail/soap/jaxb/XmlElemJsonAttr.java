@@ -12,20 +12,20 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.jaxb;
+package org.zmail.soap.jaxb;
 
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.soap.json.jackson.annotate.ZimbraJsonAttribute;
+import org.zmail.soap.json.jackson.annotate.ZmailJsonAttribute;
 
-/** Test JAXB class to demonstrate affect of {@link ZimbraJsonAttribute} annotation */
+/** Test JAXB class to demonstrate affect of {@link ZmailJsonAttribute} annotation */
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name="XmlElemJsonAttr")
 public class XmlElemJsonAttr {
-    @ZimbraJsonAttribute
+    @ZmailJsonAttribute
     @XmlElement(name="xml-elem-json-attr", required=false)
     private String xmlElemJsonAttr;
 

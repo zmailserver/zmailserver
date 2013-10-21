@@ -13,16 +13,16 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.soap.admin.type.DomainSelector;
-import com.zimbra.soap.admin.type.SMIMEConfigModifications;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.soap.admin.type.DomainSelector;
+import org.zmail.soap.admin.type.SMIMEConfigModifications;
 
 /**
  * @zm-api-command-network-edition
@@ -37,27 +37,27 @@ import com.zimbra.soap.admin.type.SMIMEConfigModifications;
  * <br />
  * Attributes:
  * <table>
- * <tr> <td> <b> zimbraSMIMELdapURL * </b> </td>
+ * <tr> <td> <b> zmailSMIMELdapURL * </b> </td>
  *      <td> required </td>
  *      <td> LDAL URL - Multiple space-separated URLs can be specified for fallback purpose </td>
  * </tr>
- * <tr> <td> <b> zimbraSMIMELdapStartTlsEnabled * </b> </td>
+ * <tr> <td> <b> zmailSMIMELdapStartTlsEnabled * </b> </td>
  *      <td> optional - TRUE/FALSE [default] </td>
  *      <td> Whether startTLS is enabled for the LDAP connection </td>
  * </tr>
- * <tr> <td> <b> zimbraSMIMELdapBindDn </b> </td>
+ * <tr> <td> <b> zmailSMIMELdapBindDn </b> </td>
  *      <td> optional - default value is empty </td>
  *      <td> Bind DN.  ZCS will do anonymous bind if this attribute is not set </td>
  * </tr>
- * <tr> <td> <b> zimbraSMIMELdapBindPassword </b> </td>
+ * <tr> <td> <b> zmailSMIMELdapBindPassword </b> </td>
  *      <td> optional - default value is empty </td>
- *      <td> Bind password. Ignored if zimbraSMIMELdapBindDn is not set </td>
+ *      <td> Bind password. Ignored if zmailSMIMELdapBindDn is not set </td>
  * </tr>
- * <tr> <td> <b> zimbraSMIMELdapSearchBase * </b> </td>
+ * <tr> <td> <b> zmailSMIMELdapSearchBase * </b> </td>
  *      <td> optional - default is LDAP DIT root </td>
  *      <td> LDAP search base DN </td>
  * </tr>
- * <tr> <td> <b> zimbraSMIMELdapFilter </b> </td>
+ * <tr> <td> <b> zmailSMIMELdapFilter </b> </td>
  *      <td> required </td>
  *      <td> LDAP search filter template
  *           <br />
@@ -71,7 +71,7 @@ import com.zimbra.soap.admin.type.SMIMEConfigModifications;
  *           e.g. (mail=%n)
  *      </td>
  * </tr>
- * <tr> <td> <b>zimbraSMIMELdapAttribute</b> </td>
+ * <tr> <td> <b>zmailSMIMELdapAttribute</b> </td>
  *      <td> required </td>
  *      <td> LDAP attributes for SMIME certificates </td>
  * </tr>

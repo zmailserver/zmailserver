@@ -39,12 +39,12 @@ import org.w3c.dom.Element;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="content" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="header" type="{urn:zimbraMail}header" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="mp" type="{urn:zimbraMail}mimePartInfo" minOccurs="0"/>
- *         &lt;element name="attach" type="{urn:zimbraMail}attachmentsInfo" minOccurs="0"/>
- *         &lt;element name="inv" type="{urn:zimbraMail}invitationInfo" minOccurs="0"/>
- *         &lt;element name="e" type="{urn:zimbraMail}emailAddrInfo" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="tz" type="{urn:zimbraMail}calTZInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="header" type="{urn:zmailMail}header" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="mp" type="{urn:zmailMail}mimePartInfo" minOccurs="0"/>
+ *         &lt;element name="attach" type="{urn:zmailMail}attachmentsInfo" minOccurs="0"/>
+ *         &lt;element name="inv" type="{urn:zmailMail}invitationInfo" minOccurs="0"/>
+ *         &lt;element name="e" type="{urn:zmailMail}emailAddrInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="tz" type="{urn:zmailMail}calTZInfo" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="fr" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;any processContents='skip' namespace='##other' maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>

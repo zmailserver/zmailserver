@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="selectiveCallAcceptanceFeature">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraVoice}featureWithCallerList">
+ *     &lt;extension base="{urn:zmailVoice}featureWithCallerList">
  *       &lt;sequence>
  *       &lt;/sequence>
  *     &lt;/extension>

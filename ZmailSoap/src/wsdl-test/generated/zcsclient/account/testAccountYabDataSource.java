@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="accountYabDataSource">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraAccount}accountDataSource">
+ *     &lt;extension base="{urn:zmailAccount}accountDataSource">
  *       &lt;sequence>
  *       &lt;/sequence>
  *     &lt;/extension>

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.doc.soap;
+package org.zmail.doc.soap;
 
 public class SoapDocException extends Exception {
     public SoapDocException(Throwable th) {

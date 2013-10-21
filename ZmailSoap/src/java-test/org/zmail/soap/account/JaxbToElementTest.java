@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.account;
+package org.zmail.soap.account;
 
 import com.google.common.base.Charsets;
 import com.google.common.base.Predicates;
@@ -43,52 +43,52 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.Level;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import com.zimbra.soap.JaxbUtil;
-import com.zimbra.soap.account.message.AuthRequest;
-import com.zimbra.soap.account.message.CreateIdentityRequest;
-import com.zimbra.soap.account.message.GetInfoResponse;
-import com.zimbra.soap.account.type.Pref;
-import com.zimbra.soap.account.type.Session;
-import com.zimbra.soap.admin.message.CreateAccountRequest;
-import com.zimbra.soap.admin.message.CreateXMbxSearchRequest;
-import com.zimbra.soap.admin.message.MailQueueActionRequest;
-import com.zimbra.soap.admin.message.SearchAutoProvDirectoryResponse;
-import com.zimbra.soap.admin.type.Attr;
-import com.zimbra.soap.admin.type.AutoProvDirectoryEntry;
-import com.zimbra.soap.admin.type.MailQueueAction;
-import com.zimbra.soap.admin.type.MailQueueWithAction;
-import com.zimbra.soap.admin.type.QueueQuery;
-import com.zimbra.soap.admin.type.QueueQueryField;
-import com.zimbra.soap.admin.type.ServerWithQueueAction;
-import com.zimbra.soap.admin.type.ValueAttrib;
-import com.zimbra.soap.mail.message.ConvActionRequest;
-import com.zimbra.soap.mail.message.DeleteDataSourceRequest;
-import com.zimbra.soap.mail.message.GetContactsRequest;
-import com.zimbra.soap.mail.message.ImportContactsRequest;
-import com.zimbra.soap.mail.message.WaitSetRequest;
-import com.zimbra.soap.mail.type.ActionSelector;
-import com.zimbra.soap.mail.type.ContactActionSelector;
-import com.zimbra.soap.mail.type.FolderActionSelector;
-import com.zimbra.soap.mail.type.ImapDataSourceNameOrId;
-import com.zimbra.soap.mail.type.ModifyGroupMemberOperation;
-import com.zimbra.soap.mail.type.NoteActionSelector;
-import com.zimbra.soap.mail.type.Pop3DataSourceNameOrId;
-import com.zimbra.soap.mail.type.RetentionPolicy;
-import com.zimbra.soap.type.KeyValuePair;
-import com.zimbra.soap.type.WaitSetAddSpec;
-import com.zimbra.soap.util.JaxbElementInfo;
-import com.zimbra.soap.util.JaxbInfo;
-import com.zimbra.soap.util.JaxbNodeInfo;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.Element.JSONElement;
-import com.zimbra.common.soap.Element.XMLElement;
-import com.zimbra.common.soap.HeaderConstants;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.W3cDomUtil;
-import com.zimbra.common.util.StringUtil;
+import org.zmail.soap.JaxbUtil;
+import org.zmail.soap.account.message.AuthRequest;
+import org.zmail.soap.account.message.CreateIdentityRequest;
+import org.zmail.soap.account.message.GetInfoResponse;
+import org.zmail.soap.account.type.Pref;
+import org.zmail.soap.account.type.Session;
+import org.zmail.soap.admin.message.CreateAccountRequest;
+import org.zmail.soap.admin.message.CreateXMbxSearchRequest;
+import org.zmail.soap.admin.message.MailQueueActionRequest;
+import org.zmail.soap.admin.message.SearchAutoProvDirectoryResponse;
+import org.zmail.soap.admin.type.Attr;
+import org.zmail.soap.admin.type.AutoProvDirectoryEntry;
+import org.zmail.soap.admin.type.MailQueueAction;
+import org.zmail.soap.admin.type.MailQueueWithAction;
+import org.zmail.soap.admin.type.QueueQuery;
+import org.zmail.soap.admin.type.QueueQueryField;
+import org.zmail.soap.admin.type.ServerWithQueueAction;
+import org.zmail.soap.admin.type.ValueAttrib;
+import org.zmail.soap.mail.message.ConvActionRequest;
+import org.zmail.soap.mail.message.DeleteDataSourceRequest;
+import org.zmail.soap.mail.message.GetContactsRequest;
+import org.zmail.soap.mail.message.ImportContactsRequest;
+import org.zmail.soap.mail.message.WaitSetRequest;
+import org.zmail.soap.mail.type.ActionSelector;
+import org.zmail.soap.mail.type.ContactActionSelector;
+import org.zmail.soap.mail.type.FolderActionSelector;
+import org.zmail.soap.mail.type.ImapDataSourceNameOrId;
+import org.zmail.soap.mail.type.ModifyGroupMemberOperation;
+import org.zmail.soap.mail.type.NoteActionSelector;
+import org.zmail.soap.mail.type.Pop3DataSourceNameOrId;
+import org.zmail.soap.mail.type.RetentionPolicy;
+import org.zmail.soap.type.KeyValuePair;
+import org.zmail.soap.type.WaitSetAddSpec;
+import org.zmail.soap.util.JaxbElementInfo;
+import org.zmail.soap.util.JaxbInfo;
+import org.zmail.soap.util.JaxbNodeInfo;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.Element.JSONElement;
+import org.zmail.common.soap.Element.XMLElement;
+import org.zmail.common.soap.HeaderConstants;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.W3cDomUtil;
+import org.zmail.common.util.StringUtil;
 
 /**
  * Unit test for {@link GetInfoResponse} which exercises
@@ -235,13 +235,13 @@ public class JaxbToElementTest {
     /**
      * Using Dom4j seems problematic - hence why elementToJaxbUsingDom4j is deprecated.  e.g. Seen this from 
      * Jenkins, so now disabling the test - the underlying method is deprecated anyway.
-     * com.zimbra.common.service.ServiceException: system failure: Unable to unmarshal response for GetInfoResponse
+     * org.zmail.common.service.ServiceException: system failure: Unable to unmarshal response for GetInfoResponse
      * <pre>
 ExceptionId:main:1337887540849:9bb07215a97a1378
 Code:service.FAILURE
-    at com.zimbra.common.service.ServiceException.FAILURE(ServiceException.java:258)
-    at com.zimbra.soap.JaxbUtil.elementToJaxbUsingDom4j(JaxbUtil.java:1153)
-    at com.zimbra.soap.account.JaxbToElementTest.elementToJaxbUsingDom4jTest(JaxbToElementTest.java:244)
+    at org.zmail.common.service.ServiceException.FAILURE(ServiceException.java:258)
+    at org.zmail.soap.JaxbUtil.elementToJaxbUsingDom4j(JaxbUtil.java:1153)
+    at org.zmail.soap.account.JaxbToElementTest.elementToJaxbUsingDom4jTest(JaxbToElementTest.java:244)
 Caused by: javax.xml.bind.UnmarshalException: Namespace URIs and local names to the unmarshaller needs to be interned.
     at com.sun.xml.bind.v2.runtime.unmarshaller.UnmarshallingContext.handleEvent(UnmarshallingContext.java:662)
     at com.sun.xml.bind.v2.runtime.unmarshaller.Loader.reportError(Loader.java:258)
@@ -260,7 +260,7 @@ Caused by: javax.xml.bind.UnmarshalException: Namespace URIs and local names to 
     at com.sun.xml.bind.v2.runtime.unmarshaller.UnmarshallerImpl.unmarshal(UnmarshallerImpl.java:190)
     at javax.xml.bind.helpers.AbstractUnmarshallerImpl.unmarshal(AbstractUnmarshallerImpl.java:120)
     at javax.xml.bind.helpers.AbstractUnmarshallerImpl.unmarshal(AbstractUnmarshallerImpl.java:103)
-    at com.zimbra.soap.JaxbUtil.elementToJaxbUsingDom4j(JaxbUtil.java:1151)
+    at org.zmail.soap.JaxbUtil.elementToJaxbUsingDom4j(JaxbUtil.java:1151)
      * </pre>
      */
     @SuppressWarnings("deprecation")
@@ -650,8 +650,8 @@ Caused by: javax.xml.bind.UnmarshalException: Namespace URIs and local names to 
 
     @Test
     public void IdentityToStringTest () throws Exception {
-        com.zimbra.soap.account.type.Identity id =
-                new com.zimbra.soap.account.type.Identity("hello", null);
+        org.zmail.soap.account.type.Identity id =
+                new org.zmail.soap.account.type.Identity("hello", null);
         Map<String, String> attrs = Maps.newHashMap();
         attrs.put("key1", "value1");
         attrs.put("key2", "value2 wonderful");
@@ -739,13 +739,13 @@ Caused by: javax.xml.bind.UnmarshalException: Namespace URIs and local names to 
     public void bug62571_zmsoapRequestPrefsSupport() throws Exception {
         HashMap<String, Object> prefs;
         final String zmsoapRequest = "{ \"pref\": [" +
-                "{ \"_content\": \"TRUE\", \"name\": \"zimbraPrefSharedAddrBookAutoCompleteEnabled\" }," +
-                "{ \"_content\": \"carbon\", \"name\": \"zimbraPrefSkin\" }" +
-                "], \"_jsns\": \"urn:zimbraAccount\" }";
+                "{ \"_content\": \"TRUE\", \"name\": \"zmailPrefSharedAddrBookAutoCompleteEnabled\" }," +
+                "{ \"_content\": \"carbon\", \"name\": \"zmailPrefSkin\" }" +
+                "], \"_jsns\": \"urn:zmailAccount\" }";
         final String idealRequest = "{ \"_attrs\": { " +
-                "\"zimbraPrefSharedAddrBookAutoCompleteEnabled\": \"TRUE\"," +
-                "\"zimbraPrefSkin\": \"carbon\"" +
-                "}, \"_jsns\": \"urn:zimbraAccount\" }";
+                "\"zmailPrefSharedAddrBookAutoCompleteEnabled\": \"TRUE\"," +
+                "\"zmailPrefSkin\": \"carbon\"" +
+                "}, \"_jsns\": \"urn:zmailAccount\" }";
         // SoapEngine uses this to parse the Whole soapMessage for a request where "in" is a ByteArrayInputStream
         //        document = Element.parseJSON(in);
         // That parseJSON seems to extract the string from the stream and end up calling something similar to this...
@@ -791,7 +791,7 @@ Caused by: javax.xml.bind.UnmarshalException: Namespace URIs and local names to 
         LOG.info("encodeAttrsWithDenied xml\n" + identExml.toString());
         // {"_attrs":{"keyAllowed":"valueAllowed","keyDenied":{"_content":"","pd":true}}}
         LOG.info("encodeAttrsWithDenied json\n" + identEjson.toString());
-        com.zimbra.soap.account.type.Attr deniedAttr = com.zimbra.soap.account.type.Attr.forNameWithPermDenied("keyDenied");
+        org.zmail.soap.account.type.Attr deniedAttr = org.zmail.soap.account.type.Attr.forNameWithPermDenied("keyDenied");
         Element elem2 = JaxbUtil.jaxbToNamedElement(AccountConstants.E_A, AccountConstants.NAMESPACE_STR,
                 deniedAttr, XMLElement.mFactory);
         String eXml2 = elem2.toString();

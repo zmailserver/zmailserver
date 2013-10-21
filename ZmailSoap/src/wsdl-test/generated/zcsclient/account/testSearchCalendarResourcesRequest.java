@@ -33,12 +33,12 @@ import generated.zcsclient.zm.testCursorInfo;
  * <pre>
  * &lt;complexType name="searchCalendarResourcesRequest">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbra}attributeSelectorImpl">
+ *     &lt;extension base="{urn:zmail}attributeSelectorImpl">
  *       &lt;sequence>
  *         &lt;element name="locale" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="cursor" type="{urn:zimbra}cursorInfo" minOccurs="0"/>
+ *         &lt;element name="cursor" type="{urn:zmail}cursorInfo" minOccurs="0"/>
  *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="searchFilter" type="{urn:zimbraAccount}entrySearchFilterInfo" minOccurs="0"/>
+ *         &lt;element name="searchFilter" type="{urn:zmailAccount}entrySearchFilterInfo" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="quick" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *       &lt;attribute name="sortBy" type="{http://www.w3.org/2001/XMLSchema}string" />

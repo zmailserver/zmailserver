@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="search" type="{urn:zimbraMail}newSearchFolderSpec"/>
+ *         &lt;element name="search" type="{urn:zmailMail}newSearchFolderSpec"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>

@@ -32,9 +32,9 @@ import generated.zcsclient.zm.testAttributeSelectorImpl;
  * <pre>
  * &lt;complexType name="getXMPPComponentRequest">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbra}attributeSelectorImpl">
+ *     &lt;extension base="{urn:zmail}attributeSelectorImpl">
  *       &lt;sequence>
- *         &lt;element name="xmppcomponent" type="{urn:zimbraAdmin}xmppComponentSelector"/>
+ *         &lt;element name="xmppcomponent" type="{urn:zmailAdmin}xmppComponentSelector"/>
  *       &lt;/sequence>
  *     &lt;/extension>
  *   &lt;/complexContent>

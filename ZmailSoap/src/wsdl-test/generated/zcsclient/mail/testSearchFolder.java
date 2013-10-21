@@ -32,11 +32,11 @@ import generated.zcsclient.zm.testSearchSortBy;
  * <pre>
  * &lt;complexType name="searchFolder">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraMail}folder">
+ *     &lt;extension base="{urn:zmailMail}folder">
  *       &lt;sequence>
  *       &lt;/sequence>
  *       &lt;attribute name="query" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="sortBy" type="{urn:zimbra}searchSortBy" />
+ *       &lt;attribute name="sortBy" type="{urn:zmail}searchSortBy" />
  *       &lt;attribute name="types" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/extension>
  *   &lt;/complexContent>

@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="stats" type="{urn:zimbraAdmin}statsInfo" minOccurs="0"/>
+ *         &lt;element name="stats" type="{urn:zmailAdmin}statsInfo" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="hn" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>

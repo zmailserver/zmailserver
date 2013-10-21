@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="callForwardNoAnswerFeature">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraVoice}callFeatureInfo">
+ *     &lt;extension base="{urn:zmailVoice}callFeatureInfo">
  *       &lt;sequence>
  *       &lt;/sequence>
  *       &lt;attribute name="ft" type="{http://www.w3.org/2001/XMLSchema}string" />

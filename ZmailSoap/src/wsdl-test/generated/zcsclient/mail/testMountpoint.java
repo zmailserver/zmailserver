@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="mountpoint">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraMail}folder">
+ *     &lt;extension base="{urn:zmailMail}folder">
  *       &lt;sequence>
  *       &lt;/sequence>
  *       &lt;attribute name="owner" type="{http://www.w3.org/2001/XMLSchema}string" />

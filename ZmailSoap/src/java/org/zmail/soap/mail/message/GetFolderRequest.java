@@ -12,15 +12,15 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.mail.message;
+package org.zmail.soap.mail.message;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.mail.type.GetFolderSpec;
-import com.zimbra.soap.type.ZmBoolean;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.mail.type.GetFolderSpec;
+import org.zmail.soap.type.ZmBoolean;
 
 /*
 <GetFolderRequest [visible="0|1"] [needGranteeName="0|1"] [view="{folder-view-constraint}"] [depth="{subfolder-levels}"]>

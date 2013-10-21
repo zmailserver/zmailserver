@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -26,8 +26,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.soap.admin.type.DistributionListMembershipInfo;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.soap.admin.type.DistributionListMembershipInfo;
 
 /**
  * Response which provides a list of DLs that a particular DL is a member of

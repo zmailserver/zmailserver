@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.admin;
+package org.zmail.soap.admin;
 
 import java.util.List;
 
@@ -23,14 +23,14 @@ import com.sun.xml.ws.developer.WSBindingProvider;
 import generated.zcsclient.admin.*;
 import generated.zcsclient.admin.testDomainAdminRight.Rights;
 import generated.zcsclient.admin.testEffectiveAttrInfo.Default;
-import generated.zcsclient.admin.testGetRightsDocResponse.DomainAdminCopypasteToZimbraRightsDomainadminXmlTemplate;
+import generated.zcsclient.admin.testGetRightsDocResponse.DomainAdminCopypasteToZmailRightsDomainadminXmlTemplate;
 import generated.zcsclient.ws.service.ZcsAdminPortType;
 import generated.zcsclient.zm.testGranteeType;
 import generated.zcsclient.zm.testNamedElement;
 import generated.zcsclient.zm.testTargetBy;
 import generated.zcsclient.zm.testTargetType;
 
-import com.zimbra.soap.Utility;
+import org.zmail.soap.Utility;
 
 import org.junit.Assert;
 import org.junit.After;
@@ -170,7 +170,7 @@ public class WSDLAdminTest {
         Assert.assertEquals("CheckHostnameResolveResponse start of message",
                 "java.net.UnknownHostException",
                 resp.getMessage().substring(0, 29));
-        req.setHostname("www.zimbra.com");
+        req.setHostname("www.zmail.com");
         resp = eif.checkHostnameResolveRequest(req);
         Assert.assertNotNull("CheckHostnameResolveResponse object", resp);
         Assert.assertEquals("CheckHostnameResolveResponse code",
@@ -189,9 +189,9 @@ public class WSDLAdminTest {
         query.setLimit(12L);
         query.setValue("cn=*");
         Attr attr;
-        attr = new Attr(); attr.setN("zimbraGalMode"); attr.setValue("ldap");
+        attr = new Attr(); attr.setN("zmailGalMode"); attr.setValue("ldap");
         req.getA().add(attr);
-        attr = new Attr(); attr.setN("zimbraAuthMech"); attr.setValue("ldap");
+        attr = new Attr(); attr.setN("zmailAuthMech"); attr.setValue("ldap");
         req.getA().add(attr);
         CheckGalConfigResponse resp = eif.checkGalConfigRequest(req);
         resp.getCode();
@@ -202,12 +202,12 @@ public class WSDLAdminTest {
 
     @Test
     public void checkDomainMXRecordTest() throws Exception {
-        Utility.ensureDomainExists("zimbra.com");
+        Utility.ensureDomainExists("zmail.com");
         Utility.addSoapAdminAuthHeader((WSBindingProvider)eif);
         testCheckDomainMXRecordRequest req = new testCheckDomainMXRecordRequest();
         testDomainSelector domainSel = new testDomainSelector();
         domainSel.setBy(testDomainBy.NAME);
-        domainSel.setValue("zimbra.com");
+        domainSel.setValue("zmail.com");
         req.setDomain(domainSel);
         testCheckDomainMXRecordResponse resp = eif.checkDomainMXRecordRequest(req);
         Assert.assertNotNull("CheckDomainMXRecordResponse object", resp);
@@ -273,7 +273,7 @@ public class WSDLAdminTest {
         Utility.addSoapAdminAuthHeader((WSBindingProvider)eif);
         testGetConfigRequest req = new testGetConfigRequest();
         testAttr attr = new testAttr();
-        attr.setN("zimbraSpamHeader");
+        attr.setN("zmailSpamHeader");
         req.setA(attr);
         testGetConfigResponse resp = eif.getConfigRequest(req);
         Assert.assertNotNull("GetConfigResponse object", resp);
@@ -283,9 +283,9 @@ public class WSDLAdminTest {
         Assert.assertEquals("Number of GetConfigResponse <a> children" , 1, len);
         testAttr respAttr =attrs.get(0);
         Assert.assertEquals("GetConfigResponse <a> 'n' attribute",
-                "zimbraSpamHeader", respAttr.getN());
+                "zmailSpamHeader", respAttr.getN());
         Assert.assertEquals("GetConfigResponse <a> 'n' attribute",
-                "zimbraSpamHeader", respAttr.getN());
+                "zmailSpamHeader", respAttr.getN());
         Assert.assertEquals("GetConfigResponse <a> 'n' attribute",
                 "X-Spam-Flag", respAttr.getValue());
     }
@@ -295,7 +295,7 @@ public class WSDLAdminTest {
         Utility.addSoapAdminAuthHeader((WSBindingProvider)eif);
         testModifyConfigRequest req = new testModifyConfigRequest();
         testAttr attr = new testAttr();
-        attr.setN("zimbraSpamHeader");
+        attr.setN("zmailSpamHeader");
         attr.setValue("X-NewSpam-Flag");
         req.getA().add(attr);
         testModifyConfigResponse resp = eif.modifyConfigRequest(req);
@@ -501,10 +501,10 @@ public class WSDLAdminTest {
         }
 
         Assert.assertNotNull("notUsed list", resp.getNotUsed());
-        DomainAdminCopypasteToZimbraRightsDomainadminXmlTemplate domRights =
-            resp.getDomainAdminCopypasteToZimbraRightsDomainadminXmlTemplate();
+        DomainAdminCopypasteToZmailRightsDomainadminXmlTemplate domRights =
+            resp.getDomainAdminCopypasteToZmailRightsDomainadminXmlTemplate();
         String tag =
-            "domainAdmin-copypaste-to-zimbra-rights-domainadmin-xml-template";
+            "domainAdmin-copypaste-to-zmail-rights-domainadmin-xml-template";
         List<testDomainAdminRight> rights = domRights.getRight();
         Assert.assertNotNull(tag + " rights list", rights);
         int domNum = 0;
@@ -739,7 +739,7 @@ public class WSDLAdminTest {
         //     testCheckedRight checkedRight = new testCheckedRight();
         //     checkedRight.setValue("renameAccount");
         //     req.setRight(checkedRight);
-        // from /opt/zimbra/conf/rights/zimbra-rights.xml
+        // from /opt/zmail/conf/rights/zmail-rights.xml
         req.setRight("renameAccount");
         testCheckRightResponse resp = eif.checkRightRequest(req);
         Assert.assertNotNull("CheckRightResponse object", resp);
@@ -792,7 +792,7 @@ public class WSDLAdminTest {
         len = domainInfo.getA().size();
         // September 2011.  Started seeing:
         //    <domain id="globalconfig-dummy-id" name="globalconfig">
-        //    <a n="zimbraZimletDataSensitiveInMixedModeDisabled">TRUE</a>
+        //    <a n="zmailZimletDataSensitiveInMixedModeDisabled">TRUE</a>
         //    </domain>
         // Used to be no <a> children.  Might be a mistake and this would go back to zero?
         Assert.assertTrue( "number of <a> children of GetDomainInfoResponse <domain> =" + len +
@@ -832,7 +832,7 @@ public class WSDLAdminTest {
         testModifyDomainRequest modReq = new testModifyDomainRequest();
         modReq.setId(testDomainId);
         testAttr modAttr = new testAttr();
-        modAttr.setN("zimbraGalMaxResults");
+        modAttr.setN("zmailGalMaxResults");
         modAttr.setValue("99");
         modReq.getA().add(modAttr);
         testModifyDomainResponse modResp = eif.modifyDomainRequest(modReq);
@@ -854,7 +854,7 @@ public class WSDLAdminTest {
         domainSel.setBy(testDomainBy.ID);
         domainSel.setValue(testDomainId);
         getReq.setDomain(domainSel);
-        getReq.setAttrs("zimbraMailStatus,zimbraBasicAuthRealm");
+        getReq.setAttrs("zmailMailStatus,zmailBasicAuthRealm");
         testGetDomainResponse getResp = eif.getDomainRequest(getReq);
         Assert.assertNotNull(getResp);
         domainInfo = getResp.getDomain();
@@ -948,7 +948,7 @@ public class WSDLAdminTest {
         testModifyServerRequest modReq = new testModifyServerRequest();
         modReq.setId(testServerId);
         testAttr modAttr = new testAttr();
-        modAttr.setN("zimbraImapNumThreads");
+        modAttr.setN("zmailImapNumThreads");
         modAttr.setValue("199");
         modReq.getA().add(modAttr);
         testModifyServerResponse modResp = eif.modifyServerRequest(modReq);
@@ -969,7 +969,7 @@ public class WSDLAdminTest {
         serverSel.setBy(testServerBy.ID);
         serverSel.setValue(testServerId);
         getReq.setServer(serverSel);
-        getReq.setAttrs("zimbraImapNumThreads,zimbraServiceHostname");
+        getReq.setAttrs("zmailImapNumThreads,zmailServiceHostname");
         testGetServerResponse getResp = eif.getServerRequest(getReq);
         Assert.assertNotNull(getResp);
         serverInfo = getResp.getServer();
@@ -1007,12 +1007,12 @@ public class WSDLAdminTest {
     }
 
     // Getting system failure: server coco.local
-    //     zimbraRemoteManagementPrivateKeyPath 
-    //     (/opt/zimbra/.ssh/zimbra_identity) does not exist
+    //     zmailRemoteManagementPrivateKeyPath 
+    //     (/opt/zmail/.ssh/zmail_identity) does not exist
     //     Got further with :
-    //         zmlocalconfig -e zimbra_user=$USER
-    //         /opt/zimbra/bin/zmsshkeygen
-    //         cat /opt/zimbra/.ssh/zimbra_identity.pub>>$HOME/.ssh/authorized_keys
+    //         zmlocalconfig -e zmail_user=$USER
+    //         /opt/zmail/bin/zmsshkeygen
+    //         cat /opt/zmail/.ssh/zmail_identity.pub>>$HOME/.ssh/authorized_keys
     //     However, still get :
     //     Caused by: java.io.IOException: There was a problem while 
     //                connecting to wsdl.server.example.test:22
@@ -1096,7 +1096,7 @@ public class WSDLAdminTest {
         testModifyCosRequest modReq = new testModifyCosRequest();
         modReq.setId(testCosId);
         testAttr modAttr = new testAttr();
-        modAttr.setN("zimbraMailForwardingAddressMaxNumAddrs");
+        modAttr.setN("zmailMailForwardingAddressMaxNumAddrs");
         modAttr.setValue("99");
         modReq.getA().add(modAttr);
         testModifyCosResponse modResp = eif.modifyCosRequest(modReq);
@@ -1116,7 +1116,7 @@ public class WSDLAdminTest {
         cosSel.setBy(testCosBy.ID);
         cosSel.setValue(testCosId);
         getReq.setCos(cosSel);
-        getReq.setAttrs("zimbraMailForwardingAddressMaxNumAddrs");
+        getReq.setAttrs("zmailMailForwardingAddressMaxNumAddrs");
         testGetCosResponse getResp = eif.getCosRequest(getReq);
         Assert.assertNotNull(getResp);
         cosInfo = getResp.getCos();
@@ -1130,10 +1130,10 @@ public class WSDLAdminTest {
         testCosInfoAttr maxFwdingAddrs = cosInfo.getA().get(0);
         Assert.assertNotNull(maxFwdingAddrs);
         Assert.assertEquals("getCosResponse <cos> <a> 'n' attribute",
-                "zimbraMailForwardingAddressMaxNumAddrs", maxFwdingAddrs.getN());
-        Assert.assertEquals("getCosResponse <cos> <a n=zimbraMailForwardingAddressMaxNumAddrs> value",
+                "zmailMailForwardingAddressMaxNumAddrs", maxFwdingAddrs.getN());
+        Assert.assertEquals("getCosResponse <cos> <a n=zmailMailForwardingAddressMaxNumAddrs> value",
                 "99", maxFwdingAddrs.getValue());
-        Assert.assertNull("getCosResponse <cos> <a n=zimbraMailForwardingAddressMaxNumAddrs> 'c' attribute", maxFwdingAddrs.isC());
+        Assert.assertNull("getCosResponse <cos> <a n=zmailMailForwardingAddressMaxNumAddrs> 'c' attribute", maxFwdingAddrs.isC());
     }
 
     @Test
@@ -1245,13 +1245,13 @@ public class WSDLAdminTest {
         testCheckDirectoryRequest req = new testCheckDirectoryRequest();
         Utility.addSoapAdminAuthHeader((WSBindingProvider)eif);
         testCheckDirSelector dirSel = new testCheckDirSelector();
-        dirSel.setPath("/opt/zimbra/log");
+        dirSel.setPath("/opt/zmail/log");
         req.getDirectory().add(dirSel);
         dirSel = new testCheckDirSelector();
-        dirSel.setPath("/opt/zimbra/wsdlNonExistent");
+        dirSel.setPath("/opt/zmail/wsdlNonExistent");
         req.getDirectory().add(dirSel);
         dirSel = new testCheckDirSelector();
-        dirSel.setPath("/opt/zimbra/wsdlToBeCreated");
+        dirSel.setPath("/opt/zmail/wsdlToBeCreated");
         dirSel.setCreate(true);
         req.getDirectory().add(dirSel);
         testCheckDirectoryResponse resp = eif.checkDirectoryRequest(req);
@@ -1262,7 +1262,7 @@ public class WSDLAdminTest {
         Assert.assertEquals("Number of paths", 3, len);
         for (testDirPathInfo pathInfo : dirPaths) {
             String path = pathInfo.getPath();
-            if (path.equals("/opt/zimbra/log")) {
+            if (path.equals("/opt/zmail/log")) {
                 Assert.assertEquals("isExists" + " for path=" + path, 
                         true, pathInfo.isExists());
                 Assert.assertEquals("isDirectory" + " for path=" + path, 
@@ -1271,7 +1271,7 @@ public class WSDLAdminTest {
                         true, pathInfo.isReadable());
                 Assert.assertEquals("isWritable" + " for path=" + path, 
                         true, pathInfo.isWritable());
-            } else if (path.equals("/opt/zimbra/wsdlNonExistent")) {
+            } else if (path.equals("/opt/zmail/wsdlNonExistent")) {
                 Assert.assertEquals("isExists" + " for path=" + path, 
                         false, pathInfo.isExists());
                 Assert.assertEquals("isDirectory" + " for path=" + path, 
@@ -1280,7 +1280,7 @@ public class WSDLAdminTest {
                         false, pathInfo.isReadable());
                 Assert.assertEquals("isWritable" + " for path=" + path, 
                         false, pathInfo.isWritable());
-            } else if (path.equals("/opt/zimbra/wsdlToBeCreated")) {
+            } else if (path.equals("/opt/zmail/wsdlToBeCreated")) {
                 Assert.assertEquals("isExists" + " for path=" + path, 
                         true, pathInfo.isExists());
                 Assert.assertEquals("isDirectory" + " for path=" + path, 

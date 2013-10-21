@@ -13,21 +13,21 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.soap.type.AccountSelector;
-import com.zimbra.soap.admin.type.DistributionListSelector;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.soap.type.AccountSelector;
+import org.zmail.soap.admin.type.DistributionListSelector;
 
 /**
  * @zm-api-command-auth-required true
  * @zm-api-command-admin-auth-required true
- * @zm-api-command-description Returns the union of the <b>zimbraAdminConsoleUIComponents</b> values on the
+ * @zm-api-command-description Returns the union of the <b>zmailAdminConsoleUIComponents</b> values on the
  * specified account/dl entry and that on all admin groups the entry belongs to.
  * <br />
  * Note: if neither <b>&lt;account></b> nor <b>&lt;dl></b> is specified, the authed admin account will be used as

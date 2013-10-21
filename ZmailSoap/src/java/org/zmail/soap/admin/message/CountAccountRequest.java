@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -21,15 +21,15 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.soap.admin.type.DomainSelector;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.soap.admin.type.DomainSelector;
 
 /**
  * @zm-api-command-auth-required true
  * @zm-api-command-admin-auth-required true
  * @zm-api-command-description Count number of accounts by cos in a domain,
  * <br />
- * Note, it doesn't include any account with zimbraIsSystemResource=TRUE, nor does it include any calendar resources.
+ * Note, it doesn't include any account with zmailIsSystemResource=TRUE, nor does it include any calendar resources.
  * <br />
  * e.g.
  * <pre>

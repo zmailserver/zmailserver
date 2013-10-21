@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.jaxb;
+package org.zmail.soap.jaxb;
 
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -22,11 +22,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /** Test JAXB class with a String XmlAttribute and a String XmlElement */
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlRootElement(name="string-attr-string-elem", namespace="urn:ZimbraTest2")
+@XmlRootElement(name="string-attr-string-elem", namespace="urn:ZmailTest2")
 public class StringAttrStringElem {
     @XmlAttribute(name="attribute-1", required=true)
     private String attr1;
-    @XmlElement(name="element1", namespace="urn:ZimbraTest3", required=true)
+    @XmlElement(name="element1", namespace="urn:ZmailTest3", required=true)
     private String elem1;
     public StringAttrStringElem() { }
     public String getAttr1() { return attr1; }

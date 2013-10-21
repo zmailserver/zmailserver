@@ -13,12 +13,12 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.AdminConstants;
+import org.zmail.common.soap.AdminConstants;
 
 /**
  * @zm-api-command-auth-required true
@@ -29,8 +29,8 @@ import com.zimbra.common.soap.AdminConstants;
 public class DeleteCosRequest {
 
     /**
-     * @zm-api-field-tag value-of-zimbra-id
-     * @zm-api-field-description Zimbra ID
+     * @zm-api-field-tag value-of-zmail-id
+     * @zm-api-field-description Zmail ID
      */
     @XmlElement(name=AdminConstants.A_ID, required=true)
     private final String id;

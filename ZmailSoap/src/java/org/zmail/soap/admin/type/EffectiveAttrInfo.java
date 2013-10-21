@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.type;
+package org.zmail.soap.admin.type;
 
 import com.google.common.collect.Lists;
 
@@ -27,9 +27,9 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.soap.admin.type.ConstraintInfo;
-import com.zimbra.soap.json.jackson.annotate.ZimbraJsonArrayForWrapper;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.soap.admin.type.ConstraintInfo;
+import org.zmail.soap.json.jackson.annotate.ZmailJsonArrayForWrapper;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class EffectiveAttrInfo {
@@ -50,7 +50,7 @@ public class EffectiveAttrInfo {
     /**
      * @zm-api-field-description Inherited default value(or values if the attribute is multi-valued)
      */
-    @ZimbraJsonArrayForWrapper
+    @ZmailJsonArrayForWrapper
     @XmlElementWrapper(name=AdminConstants.E_DEFAULT /* default */, required=false)
     @XmlElement(name=AdminConstants.E_VALUE /* v */, required=false)
     private List <String> values = Lists.newArrayList();

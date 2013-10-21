@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.type;
+package org.zmail.soap.admin.type;
 
 import com.google.common.collect.Lists;
 
@@ -26,9 +26,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.soap.admin.type.EffectiveAttrInfo;
-import com.zimbra.soap.type.ZmBoolean;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.soap.admin.type.EffectiveAttrInfo;
+import org.zmail.soap.type.ZmBoolean;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class EffectiveAttrsInfo {

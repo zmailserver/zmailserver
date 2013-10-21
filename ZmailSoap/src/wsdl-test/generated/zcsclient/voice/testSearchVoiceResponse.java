@@ -37,10 +37,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="vfi" type="{urn:zimbraVoice}voiceFolderSummary" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="vfi" type="{urn:zmailVoice}voiceFolderSummary" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;choice maxOccurs="unbounded" minOccurs="0">
- *           &lt;element name="vm" type="{urn:zimbraVoice}voiceMailItem"/>
- *           &lt;element name="cl" type="{urn:zimbraVoice}callLogItem"/>
+ *           &lt;element name="vm" type="{urn:zmailVoice}voiceMailItem"/>
+ *           &lt;element name="cl" type="{urn:zmailVoice}callLogItem"/>
  *         &lt;/choice>
  *       &lt;/sequence>
  *       &lt;attribute name="sortBy" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />

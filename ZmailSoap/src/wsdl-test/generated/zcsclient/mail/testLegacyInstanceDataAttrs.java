@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="legacyInstanceDataAttrs">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraMail}commonInstanceDataAttrs">
+ *     &lt;extension base="{urn:zmailMail}commonInstanceDataAttrs">
  *       &lt;sequence>
  *       &lt;/sequence>
  *       &lt;attribute name="d" type="{http://www.w3.org/2001/XMLSchema}long" />

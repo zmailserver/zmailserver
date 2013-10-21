@@ -3,70 +3,70 @@
   "buildDate" : "19990131-2359",
   "commands" : [ {
     "name" : "a",
-    "namespace" : "urn:zimbraAdmin",
+    "namespace" : "urn:zmailAdmin",
     "description" : "",
     "networkEditionOnly" : false,
     "request" : {
-      "@class" : "com.zimbra.doc.soap.apidesc.SoapApiElement",
+      "@class" : "org.zmail.doc.soap.apidesc.SoapApiElement",
       "name" : "aRequest",
-      "namespace" : "urn:zimbraAdmin",
+      "namespace" : "urn:zmailAdmin",
       "required" : true,
       "list" : false,
-      "jaxb" : "com.zimbra.doc.soap.ChangelogTest$aRequest"
+      "jaxb" : "org.zmail.doc.soap.ChangelogTest$aRequest"
     },
     "response" : {
-      "@class" : "com.zimbra.doc.soap.apidesc.SoapApiElement",
+      "@class" : "org.zmail.doc.soap.apidesc.SoapApiElement",
       "name" : "aResponse",
-      "namespace" : "urn:zimbraAdmin",
+      "namespace" : "urn:zmailAdmin",
       "required" : true,
       "list" : false,
-      "jaxb" : "com.zimbra.doc.soap.ChangelogTest$aResponse"
+      "jaxb" : "org.zmail.doc.soap.ChangelogTest$aResponse"
     }
   }, {
     "name" : "d",
-    "namespace" : "urn:zimbraAdmin",
+    "namespace" : "urn:zmailAdmin",
     "description" : "",
     "networkEditionOnly" : false,
     "request" : {
-      "@class" : "com.zimbra.doc.soap.apidesc.SoapApiElement",
+      "@class" : "org.zmail.doc.soap.apidesc.SoapApiElement",
       "name" : "dRequest",
-      "namespace" : "urn:zimbraAdmin",
+      "namespace" : "urn:zmailAdmin",
       "required" : true,
       "list" : false,
-      "jaxb" : "com.zimbra.doc.soap.ChangelogTest$dRequest"
+      "jaxb" : "org.zmail.doc.soap.ChangelogTest$dRequest"
     },
     "response" : {
-      "@class" : "com.zimbra.doc.soap.apidesc.SoapApiElement",
+      "@class" : "org.zmail.doc.soap.apidesc.SoapApiElement",
       "name" : "dResponse",
-      "namespace" : "urn:zimbraAdmin",
+      "namespace" : "urn:zmailAdmin",
       "required" : true,
       "list" : false,
-      "jaxb" : "com.zimbra.doc.soap.ChangelogTest$dResponse"
+      "jaxb" : "org.zmail.doc.soap.ChangelogTest$dResponse"
     }
   }, {
     "name" : "c",
-    "namespace" : "urn:zimbraAdmin",
+    "namespace" : "urn:zmailAdmin",
     "description" : "",
     "networkEditionOnly" : false,
     "request" : {
-      "@class" : "com.zimbra.doc.soap.apidesc.SoapApiElement",
+      "@class" : "org.zmail.doc.soap.apidesc.SoapApiElement",
       "name" : "cRequest",
-      "namespace" : "urn:zimbraAdmin",
+      "namespace" : "urn:zmailAdmin",
       "required" : true,
       "list" : false,
-      "jaxb" : "com.zimbra.doc.soap.ChangelogTest$cRequest"
+      "jaxb" : "org.zmail.doc.soap.ChangelogTest$cRequest"
     },
     "response" : {
-      "@class" : "com.zimbra.doc.soap.apidesc.SoapApiElement",
+      "@class" : "org.zmail.doc.soap.apidesc.SoapApiElement",
       "name" : "cResponse",
-      "namespace" : "urn:zimbraAdmin",
+      "namespace" : "urn:zmailAdmin",
       "required" : true,
       "list" : false,
-      "jaxb" : "com.zimbra.doc.soap.ChangelogTest$cResponse"
+      "jaxb" : "org.zmail.doc.soap.ChangelogTest$cResponse"
     }
   } ],
   "types" : [ {
-    "className" : "com.zimbra.doc.soap.ChangelogTest$aElem",
+    "className" : "org.zmail.doc.soap.ChangelogTest$aElem",
     "attributes" : [ {
       "name" : "long-attribute-old-name",
       "required" : false,
@@ -89,19 +89,19 @@
     },
     "valueFieldDescription" : ""
   }, {
-    "className" : "com.zimbra.doc.soap.ChangelogTest$aRequest",
+    "className" : "org.zmail.doc.soap.ChangelogTest$aRequest",
     "subElements" : [ {
-      "@class" : "com.zimbra.doc.soap.apidesc.SoapApiElement",
+      "@class" : "org.zmail.doc.soap.apidesc.SoapApiElement",
       "name" : "element-to-delete",
       "required" : true,
       "list" : false,
-      "jaxb" : "com.zimbra.doc.soap.ChangelogTest$aElem"
+      "jaxb" : "org.zmail.doc.soap.ChangelogTest$aElem"
       }, {
-      "@class" : "com.zimbra.doc.soap.apidesc.SoapApiElement",
+      "@class" : "org.zmail.doc.soap.apidesc.SoapApiElement",
       "name" : "element",
       "required" : true,
       "list" : false,
-      "jaxb" : "com.zimbra.doc.soap.ChangelogTest$aElem"
+      "jaxb" : "org.zmail.doc.soap.ChangelogTest$aElem"
     } ],
     "attributes" : [ {
       "name" : "attribute1",
@@ -119,14 +119,14 @@
       }
     } ]
   }, {
-    "className" : "com.zimbra.doc.soap.ChangelogTest$aResponse"
+    "className" : "org.zmail.doc.soap.ChangelogTest$aResponse"
   }, {
-    "className" : "com.zimbra.doc.soap.ChangelogTest$dRequest"
+    "className" : "org.zmail.doc.soap.ChangelogTest$dRequest"
   }, {
-    "className" : "com.zimbra.doc.soap.ChangelogTest$dResponse"
+    "className" : "org.zmail.doc.soap.ChangelogTest$dResponse"
   }, {
-    "className" : "com.zimbra.doc.soap.ChangelogTest$cRequest"
+    "className" : "org.zmail.doc.soap.ChangelogTest$cRequest"
   }, {
-    "className" : "com.zimbra.doc.soap.ChangelogTest$cResponse"
+    "className" : "org.zmail.doc.soap.ChangelogTest$cResponse"
   } ]
 }

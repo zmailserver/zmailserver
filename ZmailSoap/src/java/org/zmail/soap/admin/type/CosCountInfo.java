@@ -13,14 +13,14 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.type;
+package org.zmail.soap.admin.type;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlValue;
 
-import com.zimbra.common.soap.AdminConstants;
+import org.zmail.common.soap.AdminConstants;
 
 /**
  * Used by {@CountAccountResponse}
@@ -45,7 +45,7 @@ public class CosCountInfo {
     /**
      * @zm-api-field-tag account-count
      * @zm-api-field-description Account count.  Note, it doesn't include any account with
-     * <b>zimbraIsSystemResource=TRUE</b>, nor does it include any calendar resources.
+     * <b>zmailIsSystemResource=TRUE</b>, nor does it include any calendar resources.
      */
     @XmlValue
     private final long value;

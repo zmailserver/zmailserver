@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="callLogCallParty">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraVoice}voiceMailCallParty">
+ *     &lt;extension base="{urn:zmailVoice}voiceMailCallParty">
  *       &lt;sequence>
  *       &lt;/sequence>
  *       &lt;attribute name="ci" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />

@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="cancelRuleInfo">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraMail}recurIdInfo">
+ *     &lt;extension base="{urn:zmailMail}recurIdInfo">
  *       &lt;sequence>
  *       &lt;/sequence>
  *     &lt;/extension>

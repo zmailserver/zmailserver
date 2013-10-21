@@ -38,16 +38,16 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;choice maxOccurs="unbounded" minOccurs="0">
- *           &lt;element name="voicemailprefs" type="{urn:zimbraVoice}voiceMailPrefsReq"/>
- *           &lt;element name="anoncallrejection" type="{urn:zimbraVoice}anonCallRejectionReq"/>
- *           &lt;element name="calleridblocking" type="{urn:zimbraVoice}callerIdBlockingReq"/>
- *           &lt;element name="callforward" type="{urn:zimbraVoice}callForwardReq"/>
- *           &lt;element name="callforwardbusyline" type="{urn:zimbraVoice}callForwardBusyLineReq"/>
- *           &lt;element name="callforwardnoanswer" type="{urn:zimbraVoice}callForwardNoAnswerReq"/>
- *           &lt;element name="callwaiting" type="{urn:zimbraVoice}callWaitingReq"/>
- *           &lt;element name="selectivecallforward" type="{urn:zimbraVoice}selectiveCallForwardReq"/>
- *           &lt;element name="selectivecallacceptance" type="{urn:zimbraVoice}selectiveCallAcceptanceReq"/>
- *           &lt;element name="selectivecallrejection" type="{urn:zimbraVoice}selectiveCallRejectionReq"/>
+ *           &lt;element name="voicemailprefs" type="{urn:zmailVoice}voiceMailPrefsReq"/>
+ *           &lt;element name="anoncallrejection" type="{urn:zmailVoice}anonCallRejectionReq"/>
+ *           &lt;element name="calleridblocking" type="{urn:zmailVoice}callerIdBlockingReq"/>
+ *           &lt;element name="callforward" type="{urn:zmailVoice}callForwardReq"/>
+ *           &lt;element name="callforwardbusyline" type="{urn:zmailVoice}callForwardBusyLineReq"/>
+ *           &lt;element name="callforwardnoanswer" type="{urn:zmailVoice}callForwardNoAnswerReq"/>
+ *           &lt;element name="callwaiting" type="{urn:zmailVoice}callWaitingReq"/>
+ *           &lt;element name="selectivecallforward" type="{urn:zmailVoice}selectiveCallForwardReq"/>
+ *           &lt;element name="selectivecallacceptance" type="{urn:zmailVoice}selectiveCallAcceptanceReq"/>
+ *           &lt;element name="selectivecallrejection" type="{urn:zmailVoice}selectiveCallRejectionReq"/>
  *         &lt;/choice>
  *       &lt;/sequence>
  *       &lt;attribute name="name" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />

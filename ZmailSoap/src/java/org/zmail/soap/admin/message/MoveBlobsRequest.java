@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import com.google.common.base.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -22,15 +22,15 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.HsmConstants;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.HsmConstants;
 
 /**
  * @zm-api-command-network-edition
  * @zm-api-command-auth-required true
  * @zm-api-command-admin-auth-required true
  * @zm-api-command-description Moves blobs between volumes.  Unlike <b>HsmRequest</b>, this request is synchronous,
- * and reads parameters from the request attributes instead of <b>zimbraHsmPolicy</b>.
+ * and reads parameters from the request attributes instead of <b>zmailHsmPolicy</b>.
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name=HsmConstants.E_MOVE_BLOBS_REQUEST)

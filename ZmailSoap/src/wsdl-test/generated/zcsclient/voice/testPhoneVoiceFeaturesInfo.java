@@ -38,16 +38,16 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;choice maxOccurs="unbounded" minOccurs="0">
- *           &lt;element name="voicemailprefs" type="{urn:zimbraVoice}voiceMailPrefsFeature"/>
- *           &lt;element name="anoncallrejection" type="{urn:zimbraVoice}anonCallRejectionFeature"/>
- *           &lt;element name="calleridblocking" type="{urn:zimbraVoice}callerIdBlockingFeature"/>
- *           &lt;element name="callforward" type="{urn:zimbraVoice}callForwardFeature"/>
- *           &lt;element name="callforwardbusyline" type="{urn:zimbraVoice}callForwardBusyLineFeature"/>
- *           &lt;element name="callforwardnoanswer" type="{urn:zimbraVoice}callForwardNoAnswerFeature"/>
- *           &lt;element name="callwaiting" type="{urn:zimbraVoice}callWaitingFeature"/>
- *           &lt;element name="selectivecallforward" type="{urn:zimbraVoice}selectiveCallForwardFeature"/>
- *           &lt;element name="selectivecallacceptance" type="{urn:zimbraVoice}selectiveCallAcceptanceFeature"/>
- *           &lt;element name="selectivecallrejection" type="{urn:zimbraVoice}selectiveCallRejectionFeature"/>
+ *           &lt;element name="voicemailprefs" type="{urn:zmailVoice}voiceMailPrefsFeature"/>
+ *           &lt;element name="anoncallrejection" type="{urn:zmailVoice}anonCallRejectionFeature"/>
+ *           &lt;element name="calleridblocking" type="{urn:zmailVoice}callerIdBlockingFeature"/>
+ *           &lt;element name="callforward" type="{urn:zmailVoice}callForwardFeature"/>
+ *           &lt;element name="callforwardbusyline" type="{urn:zmailVoice}callForwardBusyLineFeature"/>
+ *           &lt;element name="callforwardnoanswer" type="{urn:zmailVoice}callForwardNoAnswerFeature"/>
+ *           &lt;element name="callwaiting" type="{urn:zmailVoice}callWaitingFeature"/>
+ *           &lt;element name="selectivecallforward" type="{urn:zmailVoice}selectiveCallForwardFeature"/>
+ *           &lt;element name="selectivecallacceptance" type="{urn:zmailVoice}selectiveCallAcceptanceFeature"/>
+ *           &lt;element name="selectivecallrejection" type="{urn:zmailVoice}selectiveCallRejectionFeature"/>
  *         &lt;/choice>
  *       &lt;/sequence>
  *       &lt;attribute name="name" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />

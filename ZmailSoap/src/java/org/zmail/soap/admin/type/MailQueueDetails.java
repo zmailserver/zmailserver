@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.type;
+package org.zmail.soap.admin.type;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -26,9 +26,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
-import com.zimbra.soap.type.ZmBoolean;
+import org.zmail.soap.type.ZmBoolean;
 
-import com.zimbra.common.soap.AdminConstants;
+import org.zmail.common.soap.AdminConstants;
 
 // soap-admin.txt implies there is a "stale" attribute (See GetMailQueueResponse/server/queue) but SOAP
 // handler does not add this

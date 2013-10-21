@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="modifyLDAPEntryRequest">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraAdmin}adminAttrsImpl">
+ *     &lt;extension base="{urn:zmailAdmin}adminAttrsImpl">
  *       &lt;sequence>
  *       &lt;/sequence>
  *       &lt;attribute name="dn" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />

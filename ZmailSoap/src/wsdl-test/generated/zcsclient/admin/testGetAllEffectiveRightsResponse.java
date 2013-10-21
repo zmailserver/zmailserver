@@ -34,8 +34,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="grantee" type="{urn:zimbraAdmin}granteeInfo" minOccurs="0"/>
- *         &lt;element name="target" type="{urn:zimbraAdmin}effectiveRightsTarget" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="grantee" type="{urn:zmailAdmin}granteeInfo" minOccurs="0"/>
+ *         &lt;element name="target" type="{urn:zmailAdmin}effectiveRightsTarget" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>

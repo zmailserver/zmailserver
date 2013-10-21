@@ -37,7 +37,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;attribute name="url" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="user" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="pass" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="scheme" use="required" type="{urn:zimbraAdmin}authScheme" />
+ *       &lt;attribute name="scheme" use="required" type="{urn:zmailAdmin}authScheme" />
  *       &lt;attribute name="type" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>
  *   &lt;/complexContent>

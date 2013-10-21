@@ -40,10 +40,10 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _FinishEditDocumentRequest_QNAME = new QName("urn:zimbraAppblast", "FinishEditDocumentRequest");
-    private final static QName _EditDocumentResponse_QNAME = new QName("urn:zimbraAppblast", "EditDocumentResponse");
-    private final static QName _EditDocumentRequest_QNAME = new QName("urn:zimbraAppblast", "EditDocumentRequest");
-    private final static QName _FinishEditDocumentResponse_QNAME = new QName("urn:zimbraAppblast", "FinishEditDocumentResponse");
+    private final static QName _FinishEditDocumentRequest_QNAME = new QName("urn:zmailAppblast", "FinishEditDocumentRequest");
+    private final static QName _EditDocumentResponse_QNAME = new QName("urn:zmailAppblast", "EditDocumentResponse");
+    private final static QName _EditDocumentRequest_QNAME = new QName("urn:zmailAppblast", "EditDocumentRequest");
+    private final static QName _FinishEditDocumentResponse_QNAME = new QName("urn:zmailAppblast", "FinishEditDocumentResponse");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: generated.zcsclient.appblast
@@ -88,7 +88,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testFinishEditDocumentRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraAppblast", name = "FinishEditDocumentRequest")
+    @XmlElementDecl(namespace = "urn:zmailAppblast", name = "FinishEditDocumentRequest")
     public JAXBElement<testFinishEditDocumentRequest> createFinishEditDocumentRequest(testFinishEditDocumentRequest value) {
         return new JAXBElement<testFinishEditDocumentRequest>(_FinishEditDocumentRequest_QNAME, testFinishEditDocumentRequest.class, null, value);
     }
@@ -97,7 +97,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testEditDocumentResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraAppblast", name = "EditDocumentResponse")
+    @XmlElementDecl(namespace = "urn:zmailAppblast", name = "EditDocumentResponse")
     public JAXBElement<testEditDocumentResponse> createEditDocumentResponse(testEditDocumentResponse value) {
         return new JAXBElement<testEditDocumentResponse>(_EditDocumentResponse_QNAME, testEditDocumentResponse.class, null, value);
     }
@@ -106,7 +106,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testEditDocumentRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraAppblast", name = "EditDocumentRequest")
+    @XmlElementDecl(namespace = "urn:zmailAppblast", name = "EditDocumentRequest")
     public JAXBElement<testEditDocumentRequest> createEditDocumentRequest(testEditDocumentRequest value) {
         return new JAXBElement<testEditDocumentRequest>(_EditDocumentRequest_QNAME, testEditDocumentRequest.class, null, value);
     }
@@ -115,7 +115,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testFinishEditDocumentResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraAppblast", name = "FinishEditDocumentResponse")
+    @XmlElementDecl(namespace = "urn:zmailAppblast", name = "FinishEditDocumentResponse")
     public JAXBElement<testFinishEditDocumentResponse> createFinishEditDocumentResponse(testFinishEditDocumentResponse value) {
         return new JAXBElement<testFinishEditDocumentResponse>(_FinishEditDocumentResponse_QNAME, testFinishEditDocumentResponse.class, null, value);
     }

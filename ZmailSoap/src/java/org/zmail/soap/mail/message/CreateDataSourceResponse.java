@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.message;
+package org.zmail.soap.mail.message;
 
 import com.google.common.base.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -23,16 +23,16 @@ import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.mail.type.CalDataSourceId;
-import com.zimbra.soap.mail.type.CaldavDataSourceId;
-import com.zimbra.soap.mail.type.GalDataSourceId;
-import com.zimbra.soap.mail.type.ImapDataSourceId;
-import com.zimbra.soap.mail.type.Pop3DataSourceId;
-import com.zimbra.soap.mail.type.RssDataSourceId;
-import com.zimbra.soap.mail.type.UnknownDataSourceId;
-import com.zimbra.soap.mail.type.YabDataSourceId;
-import com.zimbra.soap.type.Id;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.mail.type.CalDataSourceId;
+import org.zmail.soap.mail.type.CaldavDataSourceId;
+import org.zmail.soap.mail.type.GalDataSourceId;
+import org.zmail.soap.mail.type.ImapDataSourceId;
+import org.zmail.soap.mail.type.Pop3DataSourceId;
+import org.zmail.soap.mail.type.RssDataSourceId;
+import org.zmail.soap.mail.type.UnknownDataSourceId;
+import org.zmail.soap.mail.type.YabDataSourceId;
+import org.zmail.soap.type.Id;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name=MailConstants.E_CREATE_DATA_SOURCE_RESPONSE)

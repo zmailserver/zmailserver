@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="freeBusyBUSYslot">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraMail}freeBusySlot">
+ *     &lt;extension base="{urn:zmailMail}freeBusySlot">
  *       &lt;sequence>
  *       &lt;/sequence>
  *     &lt;/extension>

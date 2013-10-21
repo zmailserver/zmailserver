@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.adminext.message;
+package org.zmail.soap.adminext.message;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -27,10 +27,10 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.AdminExtConstants;
-import com.zimbra.soap.adminext.type.NameId;
-import com.zimbra.soap.json.jackson.annotate.ZimbraJsonArrayForWrapper;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.AdminExtConstants;
+import org.zmail.soap.adminext.type.NameId;
+import org.zmail.soap.json.jackson.annotate.ZmailJsonArrayForWrapper;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name=AdminExtConstants.E_BULK_IMAP_DATA_IMPORT_RESPONSE)
@@ -39,7 +39,7 @@ public class BulkIMAPDataImportResponse {
     /**
      * @zm-api-field-description Running accounts
      */
-    @ZimbraJsonArrayForWrapper
+    @ZmailJsonArrayForWrapper
     @XmlElementWrapper(name=AdminExtConstants.E_runningAccounts /* runningAccounts */, required=false)
     @XmlElement(name=AdminConstants.E_ACCOUNT /* account */, required=false)
     private List<NameId> runningAccounts = Lists.newArrayList();

@@ -34,7 +34,7 @@ import generated.zcsclient.mail.testRetentionPolicy;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{urn:zimbraMail}retentionPolicy" minOccurs="0"/>
+ *         &lt;element ref="{urn:zmailMail}retentionPolicy" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -49,7 +49,7 @@ import generated.zcsclient.mail.testRetentionPolicy;
 })
 public class testGetSystemRetentionPolicyResponse {
 
-    @XmlElement(namespace = "urn:zimbraMail")
+    @XmlElement(namespace = "urn:zmailMail")
     protected testRetentionPolicy retentionPolicy;
 
     /**

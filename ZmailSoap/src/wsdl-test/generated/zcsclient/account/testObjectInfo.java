@@ -37,7 +37,7 @@ import generated.zcsclient.zm.testKeyValuePair;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="a" type="{urn:zimbra}keyValuePair" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="a" type="{urn:zmail}keyValuePair" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="name" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="id" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />

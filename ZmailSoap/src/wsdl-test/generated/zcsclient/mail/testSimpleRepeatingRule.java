@@ -36,20 +36,20 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="until" type="{urn:zimbraMail}dateTimeStringAttr" minOccurs="0"/>
- *         &lt;element name="count" type="{urn:zimbraMail}numAttr" minOccurs="0"/>
- *         &lt;element name="interval" type="{urn:zimbraMail}intervalRule" minOccurs="0"/>
- *         &lt;element name="bysecond" type="{urn:zimbraMail}bySecondRule" minOccurs="0"/>
- *         &lt;element name="byminute" type="{urn:zimbraMail}byMinuteRule" minOccurs="0"/>
- *         &lt;element name="byhour" type="{urn:zimbraMail}byHourRule" minOccurs="0"/>
- *         &lt;element name="byday" type="{urn:zimbraMail}byDayRule" minOccurs="0"/>
- *         &lt;element name="bymonthday" type="{urn:zimbraMail}byMonthDayRule" minOccurs="0"/>
- *         &lt;element name="byyearday" type="{urn:zimbraMail}byYearDayRule" minOccurs="0"/>
- *         &lt;element name="byweekno" type="{urn:zimbraMail}byWeekNoRule" minOccurs="0"/>
- *         &lt;element name="bymonth" type="{urn:zimbraMail}byMonthRule" minOccurs="0"/>
- *         &lt;element name="bysetpos" type="{urn:zimbraMail}bySetPosRule" minOccurs="0"/>
- *         &lt;element name="wkst" type="{urn:zimbraMail}wkstRule" minOccurs="0"/>
- *         &lt;element name="rule-x-name" type="{urn:zimbraMail}xNameRule" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="until" type="{urn:zmailMail}dateTimeStringAttr" minOccurs="0"/>
+ *         &lt;element name="count" type="{urn:zmailMail}numAttr" minOccurs="0"/>
+ *         &lt;element name="interval" type="{urn:zmailMail}intervalRule" minOccurs="0"/>
+ *         &lt;element name="bysecond" type="{urn:zmailMail}bySecondRule" minOccurs="0"/>
+ *         &lt;element name="byminute" type="{urn:zmailMail}byMinuteRule" minOccurs="0"/>
+ *         &lt;element name="byhour" type="{urn:zmailMail}byHourRule" minOccurs="0"/>
+ *         &lt;element name="byday" type="{urn:zmailMail}byDayRule" minOccurs="0"/>
+ *         &lt;element name="bymonthday" type="{urn:zmailMail}byMonthDayRule" minOccurs="0"/>
+ *         &lt;element name="byyearday" type="{urn:zmailMail}byYearDayRule" minOccurs="0"/>
+ *         &lt;element name="byweekno" type="{urn:zmailMail}byWeekNoRule" minOccurs="0"/>
+ *         &lt;element name="bymonth" type="{urn:zmailMail}byMonthRule" minOccurs="0"/>
+ *         &lt;element name="bysetpos" type="{urn:zmailMail}bySetPosRule" minOccurs="0"/>
+ *         &lt;element name="wkst" type="{urn:zmailMail}wkstRule" minOccurs="0"/>
+ *         &lt;element name="rule-x-name" type="{urn:zmailMail}xNameRule" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="freq" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>

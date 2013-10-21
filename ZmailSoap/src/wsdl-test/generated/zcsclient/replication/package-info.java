@@ -14,5 +14,5 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-@javax.xml.bind.annotation.XmlSchema(namespace = "urn:zimbraRepl", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+@javax.xml.bind.annotation.XmlSchema(namespace = "urn:zmailRepl", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
 package generated.zcsclient.replication;

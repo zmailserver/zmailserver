@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.type;
+package org.zmail.soap.admin.type;
 
 import java.util.List;
 import java.util.Collections;
@@ -27,9 +27,9 @@ import javax.xml.bind.annotation.XmlType;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.soap.json.jackson.annotate.ZimbraKeyValuePairs;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.soap.json.jackson.annotate.ZmailKeyValuePairs;
 
 /**
  * Note: Any subclasses that have fields for elements MUST either omit {@link XmlType} or specify a propOrder in it
@@ -46,7 +46,7 @@ public class AdminAttrsImpl implements AdminAttrs {
     /**
      * @zm-api-field-description Attributes
      */
-    @ZimbraKeyValuePairs
+    @ZmailKeyValuePairs
     @XmlElement(name=AdminConstants.E_A /* a */, required=false)
     private List<Attr> attrs = Lists.newArrayList();
 

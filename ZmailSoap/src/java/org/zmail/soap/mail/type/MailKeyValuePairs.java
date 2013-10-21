@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.type;
+package org.zmail.soap.mail.type;
 
 import java.util.Collections;
 import java.util.List;
@@ -27,12 +27,12 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.soap.type.KeyValuePair;
-import com.zimbra.soap.type.KeyValuePairs;
-import com.zimbra.soap.json.jackson.annotate.ZimbraKeyValuePairs;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.StringUtil;
+import org.zmail.soap.type.KeyValuePair;
+import org.zmail.soap.type.KeyValuePairs;
+import org.zmail.soap.json.jackson.annotate.ZmailKeyValuePairs;
 
 /*
  * Used for JAXB objects representing elements which have child node(s) of form:
@@ -44,7 +44,7 @@ public class MailKeyValuePairs implements KeyValuePairs {
     /**
      * @zm-api-field-description Key value pairs
      */
-    @ZimbraKeyValuePairs
+    @ZmailKeyValuePairs
     @XmlElement(name=MailConstants.E_A)
     private List<KeyValuePair> keyValuePairs;
 

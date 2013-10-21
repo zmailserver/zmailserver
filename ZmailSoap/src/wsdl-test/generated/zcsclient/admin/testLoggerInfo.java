@@ -36,7 +36,7 @@ import generated.zcsclient.zm.testLoggingLevel;
  *       &lt;sequence>
  *       &lt;/sequence>
  *       &lt;attribute name="category" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="level" type="{urn:zimbra}loggingLevel" />
+ *       &lt;attribute name="level" type="{urn:zmail}loggingLevel" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>

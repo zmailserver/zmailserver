@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.jaxb;
+package org.zmail.soap.jaxb;
 
 import java.util.List;
 
@@ -43,7 +43,7 @@ import com.google.common.collect.Lists;
  *      # Unknown content that is not be bound to a JAXB mapped class is inserted as Element. (Assumes property
  *        annotated with {@link XmlAnyElement})
  *
- * Current usage of XmlMixed in ZimbraSoap JAXB classes:
+ * Current usage of XmlMixed in ZmailSoap JAXB classes:
  *    CommentInfo - List of objects - String maps to the subject text.  MailCustomMetadata maps to &lt;meta>
  *    MailQueueAction - List of objects - String maps to list of ids as text.  QueueQuery maps to &lt;query>
  *    StatsSpec - List of objects - String maps to the subject text.  StatsValueWrapper maps to &lt;values>

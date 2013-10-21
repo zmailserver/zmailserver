@@ -35,8 +35,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="timezone" type="{urn:zimbraAdmin}timeZoneInfo"/>
- *         &lt;element name="status" type="{urn:zimbraAdmin}serviceStatus" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="timezone" type="{urn:zmailAdmin}timeZoneInfo"/>
+ *         &lt;element name="status" type="{urn:zmailAdmin}serviceStatus" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>

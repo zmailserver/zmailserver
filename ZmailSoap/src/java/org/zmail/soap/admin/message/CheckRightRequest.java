@@ -13,18 +13,18 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.soap.admin.type.AdminAttrsImpl;
-import com.zimbra.soap.admin.type.EffectiveRightsTargetSelector;
-import com.zimbra.soap.admin.type.GranteeSelector;
-import com.zimbra.soap.admin.type.CheckedRight;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.soap.admin.type.AdminAttrsImpl;
+import org.zmail.soap.admin.type.EffectiveRightsTargetSelector;
+import org.zmail.soap.admin.type.GranteeSelector;
+import org.zmail.soap.admin.type.CheckedRight;
 
 /**
  * @zm-api-command-auth-required true
@@ -71,8 +71,8 @@ import com.zimbra.soap.admin.type.CheckedRight;
  *           &lt;grantee by="name">admin@D&lt;/grantee>
  *           &lt;right>configureQuota&lt;/right>
  *           &lt;attrs>
- *               &lt;a n="zimbraMailQuota">100000&lt;/a>
- *               &lt;a n="zimbraQuotaWarnPercent">80&lt;/a>
+ *               &lt;a n="zmailMailQuota">100000&lt;/a>
+ *               &lt;a n="zmailQuotaWarnPercent">80&lt;/a>
  *           &lt;attrs>
  *       &lt;/CheckRightRequest>
  *

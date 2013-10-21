@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *       &lt;/sequence>
  *       &lt;attribute name="type" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="sortBy" type="{urn:zimbraAdmin}getSessionsSortBy" />
+ *       &lt;attribute name="sortBy" type="{urn:zmailAdmin}getSessionsSortBy" />
  *       &lt;attribute name="offset" type="{http://www.w3.org/2001/XMLSchema}long" />
  *       &lt;attribute name="limit" type="{http://www.w3.org/2001/XMLSchema}long" />
  *       &lt;attribute name="refresh" type="{http://www.w3.org/2001/XMLSchema}boolean" />

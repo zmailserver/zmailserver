@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.type;
+package org.zmail.soap.admin.type;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -28,8 +28,8 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.soap.json.jackson.annotate.ZimbraJsonArrayForWrapper;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.soap.json.jackson.annotate.ZmailJsonArrayForWrapper;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class MailboxBlobConsistency {
@@ -44,7 +44,7 @@ public class MailboxBlobConsistency {
     /**
      * @zm-api-field-description Information about missing blobs
      */
-    @ZimbraJsonArrayForWrapper
+    @ZmailJsonArrayForWrapper
     @XmlElementWrapper(name=AdminConstants.E_MISSING_BLOBS /* missingBlobs */, required=true)
     @XmlElement(name=AdminConstants.E_ITEM /* item */, required=false)
     private List<MissingBlobInfo> missingBlobs = Lists.newArrayList();
@@ -52,7 +52,7 @@ public class MailboxBlobConsistency {
     /**
      * @zm-api-field-description Information about items with incorrect sizes
      */
-    @ZimbraJsonArrayForWrapper
+    @ZmailJsonArrayForWrapper
     @XmlElementWrapper(name=AdminConstants.E_INCORRECT_SIZE /* incorrectSize */, required=true)
     @XmlElement(name=AdminConstants.E_ITEM /* item */, required=false)
     private List<IncorrectBlobSizeInfo> incorrectSizes = Lists.newArrayList();
@@ -60,7 +60,7 @@ public class MailboxBlobConsistency {
     /**
      * @zm-api-field-description Information about unexpected blobs
      */
-    @ZimbraJsonArrayForWrapper
+    @ZmailJsonArrayForWrapper
     @XmlElementWrapper(name=AdminConstants.E_UNEXPECTED_BLOBS /* unexpectedBlobs */, required=true)
     @XmlElement(name=AdminConstants.E_BLOB /* blob */, required=false)
     private List<UnexpectedBlobInfo> unexpectedBlobs = Lists.newArrayList();
@@ -68,7 +68,7 @@ public class MailboxBlobConsistency {
     /**
      * @zm-api-field-description Information about items with incorrect revisions
      */
-    @ZimbraJsonArrayForWrapper
+    @ZmailJsonArrayForWrapper
     @XmlElementWrapper(name=AdminConstants.E_INCORRECT_REVISION /* incorrectRevision */, required=true)
     @XmlElement(name=AdminConstants.E_ITEM /* item */, required=false)
     private List<IncorrectBlobRevisionInfo> incorrectRevisions = Lists.newArrayList();
@@ -76,7 +76,7 @@ public class MailboxBlobConsistency {
     /**
      * @zm-api-field-description Information about used Blobs
       */
-    @ZimbraJsonArrayForWrapper
+    @ZmailJsonArrayForWrapper
     @XmlElementWrapper(name=AdminConstants.E_USED_BLOBS /* usedBlobs */, required=true)
     @XmlElement(name=AdminConstants.E_ITEM /* item */, required=false)
     private List<UsedBlobInfo> usedBlobs = Lists.newArrayList();

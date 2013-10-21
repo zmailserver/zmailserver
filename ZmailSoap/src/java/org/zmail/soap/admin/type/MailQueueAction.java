@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.type;
+package org.zmail.soap.admin.type;
 
 import com.google.common.collect.Lists;
 
@@ -27,8 +27,8 @@ import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlMixed;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class MailQueueAction {
@@ -90,7 +90,7 @@ public class MailQueueAction {
     // Note: QueueQuery needs an @XmlRootElement annotation in order
     // to avoid schemagen error:
     //  error: Invalid @XmlElementRef :
-    //      Type "com.zimbra.soap.admin.type.QueueQuery"
+    //      Type "org.zmail.soap.admin.type.QueueQuery"
     //      or any of its subclasses are not known to this context.
 
     /**

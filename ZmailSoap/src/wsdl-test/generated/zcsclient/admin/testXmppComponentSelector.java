@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlValue;
  * &lt;complexType name="xmppComponentSelector">
  *   &lt;simpleContent>
  *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
- *       &lt;attribute name="by" use="required" type="{urn:zimbraAdmin}xmppComponentBy" />
+ *       &lt;attribute name="by" use="required" type="{urn:zmailAdmin}xmppComponentBy" />
  *     &lt;/extension>
  *   &lt;/simpleContent>
  * &lt;/complexType>

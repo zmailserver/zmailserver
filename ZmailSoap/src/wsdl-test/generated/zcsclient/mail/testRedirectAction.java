@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="redirectAction">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraMail}filterAction">
+ *     &lt;extension base="{urn:zmailMail}filterAction">
  *       &lt;sequence>
  *       &lt;/sequence>
  *       &lt;attribute name="a" type="{http://www.w3.org/2001/XMLSchema}string" />

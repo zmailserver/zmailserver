@@ -32,9 +32,9 @@ import generated.zcsclient.zm.testAttributeSelectorImpl;
  * <pre>
  * &lt;complexType name="getCalendarResourceRequest">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbra}attributeSelectorImpl">
+ *     &lt;extension base="{urn:zmail}attributeSelectorImpl">
  *       &lt;sequence>
- *         &lt;element name="calresource" type="{urn:zimbraAdmin}calendarResourceSelector" minOccurs="0"/>
+ *         &lt;element name="calresource" type="{urn:zmailAdmin}calendarResourceSelector" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="applyCos" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *     &lt;/extension>

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.account.message;
+package org.zmail.soap.account.message;
 
 import com.google.common.base.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -21,8 +21,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.AdminConstants;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.AdminConstants;
 
 /**
  * @zm-api-command-network-edition
@@ -38,11 +38,11 @@ public class CheckLicenseRequest {
     /**
      * @zm-api-field-description The licensable feature.  These are the valid values (which are case-insensitive):
      * <ul>
-     * <li> <b>MAPI</b> - Zimbra Connector For Outlook
+     * <li> <b>MAPI</b> - Zmail Connector For Outlook
      * <li> <b>MobileSync</b> - ActiveSync
      * <li> <b>iSync</b> - Apple iSync
-     * <li> <b>SMIME</b> - Zimbra SMIME
-     * <li> <b>BES</b> - Zimbra Connector for BlackBerry Enterprise Server
+     * <li> <b>SMIME</b> - Zmail SMIME
+     * <li> <b>BES</b> - Zmail Connector for BlackBerry Enterprise Server
      * </ul>
      */
     @XmlAttribute(name=AdminConstants.A_FEATURE /* feature */, required=true)

@@ -32,9 +32,9 @@ import generated.zcsclient.zm.testAttributeSelectorImpl;
  * <pre>
  * &lt;complexType name="getServerRequest">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbra}attributeSelectorImpl">
+ *     &lt;extension base="{urn:zmail}attributeSelectorImpl">
  *       &lt;sequence>
- *         &lt;element name="server" type="{urn:zimbraAdmin}serverSelector" minOccurs="0"/>
+ *         &lt;element name="server" type="{urn:zmailAdmin}serverSelector" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="applyConfig" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *     &lt;/extension>

@@ -33,8 +33,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;all>
- *         &lt;element name="grantee" type="{urn:zimbraAdmin}granteeInfo"/>
- *         &lt;element name="target" type="{urn:zimbraAdmin}effectiveRightsTargetInfo"/>
+ *         &lt;element name="grantee" type="{urn:zmailAdmin}granteeInfo"/>
+ *         &lt;element name="target" type="{urn:zmailAdmin}effectiveRightsTargetInfo"/>
  *       &lt;/all>
  *     &lt;/restriction>
  *   &lt;/complexContent>

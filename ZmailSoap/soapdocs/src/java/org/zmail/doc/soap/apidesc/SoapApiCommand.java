@@ -12,12 +12,12 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.doc.soap.apidesc;
+package org.zmail.doc.soap.apidesc;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 import com.google.common.base.Strings;
-import com.zimbra.doc.soap.Command;
+import org.zmail.doc.soap.Command;
 
 public class SoapApiCommand
 implements Comparable<SoapApiCommand> {

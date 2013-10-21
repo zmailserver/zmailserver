@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.admin;
+package org.zmail.soap.admin;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ import com.sun.xml.ws.developer.WSBindingProvider;
 import generated.zcsclient.admin.*;
 import generated.zcsclient.ws.service.ZcsAdminPortType;
 
-import com.zimbra.soap.Utility;
+import org.zmail.soap.Utility;
 
 import org.junit.Assert;
 import org.junit.After;

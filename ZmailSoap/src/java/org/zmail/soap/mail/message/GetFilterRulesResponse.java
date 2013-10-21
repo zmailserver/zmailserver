@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.message;
+package org.zmail.soap.mail.message;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
@@ -28,9 +28,9 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.json.jackson.annotate.ZimbraJsonArrayForWrapper;
-import com.zimbra.soap.mail.type.FilterRule;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.json.jackson.annotate.ZmailJsonArrayForWrapper;
+import org.zmail.soap.mail.type.FilterRule;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name=MailConstants.E_GET_FILTER_RULES_RESPONSE)
@@ -39,7 +39,7 @@ public final class GetFilterRulesResponse {
     /**
      * @zm-api-field-description Filter rules
      */
-    @ZimbraJsonArrayForWrapper
+    @ZmailJsonArrayForWrapper
     @XmlElementWrapper(name=MailConstants.E_FILTER_RULES /* filterRules */, required=true)
     @XmlElement(name=MailConstants.E_FILTER_RULE /* filterRule */, required=false)
     private final List<FilterRule> rules = Lists.newArrayList();

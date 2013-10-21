@@ -37,9 +37,9 @@ import generated.zcsclient.zm.testId;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="a" type="{urn:zimbra}attributeName" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="ma" type="{urn:zimbra}attributeName" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="cn" type="{urn:zimbra}id" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="a" type="{urn:zmail}attributeName" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="ma" type="{urn:zmail}attributeName" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="cn" type="{urn:zmail}id" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="sync" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *       &lt;attribute name="l" type="{http://www.w3.org/2001/XMLSchema}string" />

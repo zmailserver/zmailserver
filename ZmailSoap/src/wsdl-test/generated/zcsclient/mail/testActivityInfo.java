@@ -36,7 +36,7 @@ import generated.zcsclient.zm.testNamedValue;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="arg" type="{urn:zimbra}namedValue" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="arg" type="{urn:zmail}namedValue" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="op" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="ts" use="required" type="{http://www.w3.org/2001/XMLSchema}long" />

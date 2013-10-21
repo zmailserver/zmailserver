@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.message;
+package org.zmail.soap.mail.message;
 
 import com.google.common.base.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -21,9 +21,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.mail.type.DocumentSpec;
-import com.zimbra.soap.json.jackson.annotate.ZimbraUniqueElement;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.mail.type.DocumentSpec;
+import org.zmail.soap.json.jackson.annotate.ZmailUniqueElement;
 
 /**
  * @zm-api-command-auth-required true
@@ -67,25 +67,25 @@ import com.zimbra.soap.json.jackson.annotate.ZimbraUniqueElement;
  * <br />
  * Saving a new document:
  * <pre>
- *     &lt;SaveDocumentRequest xmlns:ns0="urn:zimbraMail">
+ *     &lt;SaveDocumentRequest xmlns:ns0="urn:zmailMail">
  *       &lt;doc>
  *         &lt;upload id="18baa043-394f-42ae-be8a-110b279cb696:cc2f2fdf-7957-4412-aa83-6433662ce5d0"/>
  *       &lt;/doc>
  *     &lt;/SaveDocumentRequest>
  *
- *     &lt;SaveDocumentResponse xmlns:ns0="urn:zimbraMail">
+ *     &lt;SaveDocumentResponse xmlns:ns0="urn:zmailMail">
  *       &lt;doc ver="1" id="574" name="PICT0370.JPG"/>
  *     &lt;/SaveDocumentResponse>
  * </pre>
  * Updating an existing document
  * <pre>
- *     &lt;SaveDocumentRequest xmlns:ns0="urn:zimbraMail">
+ *     &lt;SaveDocumentRequest xmlns:ns0="urn:zmailMail">
  *       &lt;doc ver="1" id="574" desc="rev 2.0">
  *         &lt;upload id="18baa043-394f-42ae-be8a-110b279cb696:fcb572ce-2a81-4ad3-b55b-cb998c47b416"/>
  *       &lt;/doc>
  *     &lt;/SaveDocumentRequest>
  *
- *     &lt;SaveDocumentResponse xmlns:ns0="urn:zimbraMail">
+ *     &lt;SaveDocumentResponse xmlns:ns0="urn:zmailMail">
  *       &lt;doc ver="2" id="574" name="PICT0370.JPG"/>
  *     &lt;/SaveDocumentResponse>
  * </pre>
@@ -97,7 +97,7 @@ public class SaveDocumentRequest {
     /**
      * @zm-api-field-description Document specification
      */
-    @ZimbraUniqueElement
+    @ZmailUniqueElement
     @XmlElement(name=MailConstants.E_DOC /* doc */, required=true)
     private DocumentSpec doc;
 

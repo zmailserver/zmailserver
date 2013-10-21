@@ -32,9 +32,9 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="callLogItem">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraVoice}voiceCallItem">
+ *     &lt;extension base="{urn:zmailVoice}voiceCallItem">
  *       &lt;sequence>
- *         &lt;element name="cp" type="{urn:zimbraVoice}callLogCallParty" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="cp" type="{urn:zmailVoice}callLogCallParty" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/extension>
  *   &lt;/complexContent>

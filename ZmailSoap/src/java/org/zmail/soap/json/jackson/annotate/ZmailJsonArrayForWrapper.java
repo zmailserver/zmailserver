@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.json.jackson.annotate;
+package org.zmail.soap.json.jackson.annotate;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -23,15 +23,15 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import org.codehaus.jackson.annotate.JacksonAnnotation;
 
 /**
- * <p>Marker annotation used in Zimbra JAXB classes to affect how they are serialized to Zimbra style JSON.</p>
+ * <p>Marker annotation used in Zmail JAXB classes to affect how they are serialized to Zmail style JSON.</p>
  * Used in conjunction with {@link XmlElementWrapper} to indicate that the property for the wrapper should be treated
- * as an array.  {@link ZimbraJsonArrayForWrapper} should only be used in JAXB for legacy API compatibility where
+ * as an array.  {@link ZmailJsonArrayForWrapper} should only be used in JAXB for legacy API compatibility where
  * wrapper elements were added with {@code addElement} instead of {@code addUniqueElement}.
  */
 @Target({ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 @JacksonAnnotation
-public @interface ZimbraJsonArrayForWrapper
+public @interface ZmailJsonArrayForWrapper
 {
     /**
      * Optional argument that defines whether this annotation is active or not. The only use for value 'false' is

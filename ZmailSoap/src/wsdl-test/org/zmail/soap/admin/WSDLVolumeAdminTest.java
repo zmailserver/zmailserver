@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.admin;
+package org.zmail.soap.admin;
 
 import java.io.File;
 import java.util.List;
@@ -22,7 +22,7 @@ import com.sun.xml.ws.developer.WSBindingProvider;
 import generated.zcsclient.admin.*;
 import generated.zcsclient.ws.service.ZcsAdminPortType;
 
-import com.zimbra.soap.Utility;
+import org.zmail.soap.Utility;
 
 import org.junit.Assert;
 import org.junit.After;
@@ -34,7 +34,7 @@ import org.junit.Test;
 public class WSDLVolumeAdminTest {
 
     private final static String testVolume = "wsdlTestVolume";
-    private final static String testVolumePath = "/opt/zimbra/wsdlTestVolume";
+    private final static String testVolumePath = "/opt/zmail/wsdlTestVolume";
     private static ZcsAdminPortType eif = null;
 
     @BeforeClass

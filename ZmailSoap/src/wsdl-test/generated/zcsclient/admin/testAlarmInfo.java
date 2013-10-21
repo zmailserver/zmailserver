@@ -35,13 +35,13 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="trigger" type="{urn:zimbraAdmin}alarmTriggerInfo" minOccurs="0"/>
- *         &lt;element name="repeat" type="{urn:zimbraAdmin}durationInfo" minOccurs="0"/>
+ *         &lt;element name="trigger" type="{urn:zmailAdmin}alarmTriggerInfo" minOccurs="0"/>
+ *         &lt;element name="repeat" type="{urn:zmailAdmin}durationInfo" minOccurs="0"/>
  *         &lt;element name="desc" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="attach" type="{urn:zimbraAdmin}calendarAttach" minOccurs="0"/>
+ *         &lt;element name="attach" type="{urn:zmailAdmin}calendarAttach" minOccurs="0"/>
  *         &lt;element name="summary" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="at" type="{urn:zimbraAdmin}calendarAttendee" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="xprop" type="{urn:zimbraAdmin}xProp" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="at" type="{urn:zmailAdmin}calendarAttendee" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="xprop" type="{urn:zmailAdmin}xProp" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="action" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>

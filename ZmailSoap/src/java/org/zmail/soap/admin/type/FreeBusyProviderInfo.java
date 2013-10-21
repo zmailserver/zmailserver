@@ -13,14 +13,14 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.type;
+package org.zmail.soap.admin.type;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.soap.type.ZmBoolean;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.soap.type.ZmBoolean;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class FreeBusyProviderInfo {
@@ -61,8 +61,8 @@ public class FreeBusyProviderInfo {
     private final String queue;
 
     /**
-     * @zm-api-field-tag prefix-used-in-zimbra-ForeignPrincipal
-     * @zm-api-field-description Prefix used in Zimbra ForeignPrincipal
+     * @zm-api-field-tag prefix-used-in-zmail-ForeignPrincipal
+     * @zm-api-field-description Prefix used in Zmail ForeignPrincipal
      */
     @XmlAttribute(name=AdminConstants.A_PREFIX /* prefix */, required=true)
     private final String prefix;

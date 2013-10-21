@@ -34,7 +34,7 @@ import generated.zcsclient.zm.testId;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="device" type="{urn:zimbra}id"/>
+ *         &lt;element name="device" type="{urn:zmail}id"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>

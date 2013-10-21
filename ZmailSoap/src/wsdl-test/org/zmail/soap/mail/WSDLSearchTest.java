@@ -12,12 +12,12 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.mail;
+package org.zmail.soap.mail;
 
 import java.util.List;
 
 import com.sun.xml.ws.developer.WSBindingProvider;
-import com.zimbra.soap.Utility;
+import org.zmail.soap.Utility;
 import generated.zcsclient.mail.testAppointmentHitInfo;
 import generated.zcsclient.mail.testCalOrganizer;
 import generated.zcsclient.mail.testSearchRequest;
@@ -77,7 +77,7 @@ public class WSDLSearchTest {
         //       created on the server and did NOT match the prop order in LegacyCalendaringData
         //       With validation turned on, this test currently fails complaining:
         //          cvc-complex-type.2.4.a: Invalid content was found starting with element &apos;fr&apos;.
-        //          One of &apos;{&quot;urn:zimbraMail&quot;:inv, &quot;urn:zimbraMail&quot;:replies}&apos; is expected.
+        //          One of &apos;{&quot;urn:zmailMail&quot;:inv, &quot;urn:zmailMail&quot;:replies}&apos; is expected.
         //       Fortunately, non-validating accepts this.
         ZcsPortType myMailSvcEIF = mailSvcEIF;
         Utility.addSoapAcctAuthHeaderForAcct((WSBindingProvider)myMailSvcEIF, "user1");
@@ -94,8 +94,8 @@ public class WSDLSearchTest {
             testAppointmentHitInfo ahi = (testAppointmentHitInfo) o;
             testCalOrganizer org = ahi.getOr();
             Assert.assertNotNull("SearchResponse/appt/or object", org);
-            Assert.assertEquals("SearchResponse/appt/or @a", "tom@example.zimbra.com", org.getA());
-            Assert.assertEquals("SearchResponse/appt/or @url", "tom@example.zimbra.com", org.getUrl());
+            Assert.assertEquals("SearchResponse/appt/or @a", "tom@example.zmail.com", org.getA());
+            Assert.assertEquals("SearchResponse/appt/or @url", "tom@example.zmail.com", org.getUrl());
             Assert.assertEquals("SearchResponse/appt/or @d", "Tom", org.getD());
         } else {
             Assert.fail("SearchResponse hit is NOT an AppointmentHitInfo");

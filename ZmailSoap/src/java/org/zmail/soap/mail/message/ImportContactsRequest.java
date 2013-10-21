@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.message;
+package org.zmail.soap.mail.message;
 
 import com.google.common.base.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -22,8 +22,8 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.mail.type.Content;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.mail.type.Content;
 
 // TODO: should have an option on import that matches email addresses to existing contacts, and updates/ignores them.
 /**
@@ -51,8 +51,8 @@ public class ImportContactsRequest {
 
     /**
      * @zm-api-field-tag csv-format
-     * @zm-api-field-description The format of csv being imported.  when it's not defined, Zimbra format is
-     * assumed.  the supported formats are defined in <b>$ZIMBRA_HOME/conf/zimbra-contact-fields.xml</b>
+     * @zm-api-field-description The format of csv being imported.  when it's not defined, Zmail format is
+     * assumed.  the supported formats are defined in <b>$ZIMBRA_HOME/conf/zmail-contact-fields.xml</b>
      */
     @XmlAttribute(name=MailConstants.A_CSVFORMAT /* csvfmt */, required=false)
     private String csvFormat;

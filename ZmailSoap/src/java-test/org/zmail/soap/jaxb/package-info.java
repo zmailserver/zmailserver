@@ -16,14 +16,14 @@
  */
 @XmlSchema(
     xmlns = {
-        @XmlNs(prefix="zmTest", namespaceURI = "urn:zimbraTest")
+        @XmlNs(prefix="zmTest", namespaceURI = "urn:zmailTest")
     },
-    namespace = "urn:zimbraTest",
+    namespace = "urn:zmailTest",
     elementFormDefault = XmlNsForm.QUALIFIED
 )
 @XmlAccessorType(XmlAccessType.NONE)
 
-package com.zimbra.soap.jaxb;
+package org.zmail.soap.jaxb;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

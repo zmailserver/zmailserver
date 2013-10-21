@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.adminext.message;
+package org.zmail.soap.adminext.message;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -29,9 +29,9 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.AdminExtConstants;
-import com.zimbra.soap.adminext.type.Name;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.AdminExtConstants;
+import org.zmail.soap.adminext.type.Name;
 
 /**
  * @zm-api-command-network-edition
@@ -46,7 +46,7 @@ import com.zimbra.soap.adminext.type.Name;
     "indexBatchSize", "useAdminLogin", "IMAPAdminLogin", "IMAPAdminPassword"})
 public class BulkIMAPDataImportRequest {
 
-    // Other operations exist but aren't used (yet?) - see ZimbraBulkProvisionExt
+    // Other operations exist but aren't used (yet?) - see ZmailBulkProvisionExt
     /**
      * @zm-api-field-tag operation
      * @zm-api-field-description Operation - <b>preview|startImport|dismissImport</b>
@@ -56,7 +56,7 @@ public class BulkIMAPDataImportRequest {
 
     /**
      * @zm-api-field-tag source-type
-     * @zm-api-field-description Source type - <b>bulkxml|zimbra</b>
+     * @zm-api-field-description Source type - <b>bulkxml|zmail</b>
      */
     @XmlElement(name=AdminExtConstants.A_sourceType /* sourceType */, required=false)
     private String sourceType;

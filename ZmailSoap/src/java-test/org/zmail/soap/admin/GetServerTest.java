@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.admin;
+package org.zmail.soap.admin;
 
 import java.io.ByteArrayOutputStream;
 import java.util.List;
@@ -25,8 +25,8 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.soap.admin.message.GetServerRequest;
-import com.zimbra.soap.admin.type.ServerSelector;
+import org.zmail.soap.admin.message.GetServerRequest;
+import org.zmail.soap.admin.type.ServerSelector;
 
 /**
  * Unit test for {@link GetServerRequest}.

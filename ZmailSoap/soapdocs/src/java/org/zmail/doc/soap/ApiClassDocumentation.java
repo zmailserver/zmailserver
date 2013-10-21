@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.doc.soap;
+package org.zmail.doc.soap;
 
 import java.util.Map;
 import java.util.Map.Entry;

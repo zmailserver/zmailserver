@@ -33,9 +33,9 @@ import generated.zcsclient.zm.testDistributionListSelector;
  * <pre>
  * &lt;complexType name="getDistributionListRequest">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraAccount}attrsImpl">
+ *     &lt;extension base="{urn:zmailAccount}attrsImpl">
  *       &lt;sequence>
- *         &lt;element name="dl" type="{urn:zimbra}distributionListSelector"/>
+ *         &lt;element name="dl" type="{urn:zmail}distributionListSelector"/>
  *       &lt;/sequence>
  *       &lt;attribute name="needOwners" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *       &lt;attribute name="needRights" type="{http://www.w3.org/2001/XMLSchema}string" />

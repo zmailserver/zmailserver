@@ -35,8 +35,8 @@ import generated.zcsclient.zm.testGranteeType;
  * &lt;complexType name="distributionListGranteeSelector">
  *   &lt;simpleContent>
  *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
- *       &lt;attribute name="type" use="required" type="{urn:zimbra}granteeType" />
- *       &lt;attribute name="by" use="required" type="{urn:zimbra}distributionListGranteeBy" />
+ *       &lt;attribute name="type" use="required" type="{urn:zmail}granteeType" />
+ *       &lt;attribute name="by" use="required" type="{urn:zmail}distributionListGranteeBy" />
  *     &lt;/extension>
  *   &lt;/simpleContent>
  * &lt;/complexType>

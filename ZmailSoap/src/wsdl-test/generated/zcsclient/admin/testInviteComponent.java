@@ -32,24 +32,24 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="inviteComponent">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraAdmin}inviteComponentCommon">
+ *     &lt;extension base="{urn:zmailAdmin}inviteComponentCommon">
  *       &lt;sequence>
  *         &lt;element name="category" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="comment" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="contact" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="geo" type="{urn:zimbraAdmin}geoInfo" minOccurs="0"/>
- *         &lt;element name="at" type="{urn:zimbraAdmin}calendarAttendee" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="alarm" type="{urn:zimbraAdmin}alarmInfo" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="xprop" type="{urn:zimbraAdmin}xProp" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="geo" type="{urn:zmailAdmin}geoInfo" minOccurs="0"/>
+ *         &lt;element name="at" type="{urn:zmailAdmin}calendarAttendee" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="alarm" type="{urn:zmailAdmin}alarmInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="xprop" type="{urn:zmailAdmin}xProp" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="fr" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="desc" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="descHtml" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="or" type="{urn:zimbraAdmin}calOrganizer" minOccurs="0"/>
- *         &lt;element name="recur" type="{urn:zimbraAdmin}recurrenceInfo" minOccurs="0"/>
- *         &lt;element name="exceptId" type="{urn:zimbraAdmin}exceptionRecurIdInfo" minOccurs="0"/>
- *         &lt;element name="s" type="{urn:zimbraAdmin}dtTimeInfo" minOccurs="0"/>
- *         &lt;element name="e" type="{urn:zimbraAdmin}dtTimeInfo" minOccurs="0"/>
- *         &lt;element name="dur" type="{urn:zimbraAdmin}durationInfo" minOccurs="0"/>
+ *         &lt;element name="or" type="{urn:zmailAdmin}calOrganizer" minOccurs="0"/>
+ *         &lt;element name="recur" type="{urn:zmailAdmin}recurrenceInfo" minOccurs="0"/>
+ *         &lt;element name="exceptId" type="{urn:zmailAdmin}exceptionRecurIdInfo" minOccurs="0"/>
+ *         &lt;element name="s" type="{urn:zmailAdmin}dtTimeInfo" minOccurs="0"/>
+ *         &lt;element name="e" type="{urn:zmailAdmin}dtTimeInfo" minOccurs="0"/>
+ *         &lt;element name="dur" type="{urn:zmailAdmin}durationInfo" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/extension>
  *   &lt;/complexContent>

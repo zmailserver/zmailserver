@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.message;
+package org.zmail.soap.mail.message;
 
 import com.google.common.base.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -21,8 +21,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.mail.type.DiffDocumentVersionSpec;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.mail.type.DiffDocumentVersionSpec;
 
 /**
  * @zm-api-command-auth-required true
@@ -45,11 +45,11 @@ import com.zimbra.soap.mail.type.DiffDocumentVersionSpec;
  *     line 4
  *     line 5
  *
- *     &lt;DiffDocumentRequest xmlns:ns0="urn:zimbraMail">
+ *     &lt;DiffDocumentRequest xmlns:ns0="urn:zmailMail">
  *       &lt;doc v1="3" v2="4" id="641"/>
  *     &lt;/DiffDocumentRequest>
  *
- *     &lt;DiffDocumentResponse xmlns:ns0="urn:zimbraMail">
+ *     &lt;DiffDocumentResponse xmlns:ns0="urn:zmailMail">
  *       &lt;chunk disp="common">line 1
  *     line 2&lt;/chunk>
  *       &lt;chunk disp="first">line 3&lt;/chunk>

@@ -34,8 +34,8 @@ import generated.zcsclient.zm.testGranteeType;
  * &lt;complexType name="granteeSelector">
  *   &lt;simpleContent>
  *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
- *       &lt;attribute name="type" type="{urn:zimbra}granteeType" />
- *       &lt;attribute name="by" type="{urn:zimbraAdmin}granteeBy" />
+ *       &lt;attribute name="type" type="{urn:zmail}granteeType" />
+ *       &lt;attribute name="by" type="{urn:zmailAdmin}granteeBy" />
  *       &lt;attribute name="secret" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="all" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *     &lt;/extension>

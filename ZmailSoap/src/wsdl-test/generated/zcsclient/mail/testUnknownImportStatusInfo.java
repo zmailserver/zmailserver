@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="unknownImportStatusInfo">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraMail}importStatusInfo">
+ *     &lt;extension base="{urn:zmailMail}importStatusInfo">
  *       &lt;sequence>
  *       &lt;/sequence>
  *     &lt;/extension>

@@ -13,9 +13,9 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.type;
+package org.zmail.soap.admin.type;
 
-import com.zimbra.soap.admin.type.AdminAttrsImpl;
+import org.zmail.soap.admin.type.AdminAttrsImpl;
 
 public class NetworkInformation extends AdminAttrsImpl {
 

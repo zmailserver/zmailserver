@@ -31,10 +31,10 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="archiveSpec">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraAdmin}adminAttrsImpl">
+ *     &lt;extension base="{urn:zmailAdmin}adminAttrsImpl">
  *       &lt;sequence>
  *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="cos" type="{urn:zimbraAdmin}cosSelector" minOccurs="0"/>
+ *         &lt;element name="cos" type="{urn:zmailAdmin}cosSelector" minOccurs="0"/>
  *         &lt;element name="password" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="create" type="{http://www.w3.org/2001/XMLSchema}boolean" />

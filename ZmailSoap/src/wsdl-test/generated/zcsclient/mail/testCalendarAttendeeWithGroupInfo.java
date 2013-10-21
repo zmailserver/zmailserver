@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="calendarAttendeeWithGroupInfo">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraMail}calendarAttendee">
+ *     &lt;extension base="{urn:zmailMail}calendarAttendee">
  *       &lt;sequence>
  *       &lt;/sequence>
  *       &lt;attribute name="isGroup" type="{http://www.w3.org/2001/XMLSchema}boolean" />

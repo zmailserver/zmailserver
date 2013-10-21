@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.message;
+package org.zmail.soap.mail.message;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -28,9 +28,9 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.mail.type.DocumentInfo;
-import com.zimbra.soap.mail.type.IdEmailName;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.mail.type.DocumentInfo;
+import org.zmail.soap.mail.type.IdEmailName;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name=MailConstants.E_LIST_DOCUMENT_REVISIONS_RESPONSE)

@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="ucServiceInfo">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraAdmin}adminObjectInfo">
+ *     &lt;extension base="{urn:zmailAdmin}adminObjectInfo">
  *       &lt;all>
  *       &lt;/all>
  *     &lt;/extension>

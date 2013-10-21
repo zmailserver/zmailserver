@@ -37,8 +37,8 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;choice maxOccurs="unbounded" minOccurs="0">
- *           &lt;element name="appt" type="{urn:zimbraMail}updatedAppointmentAlarmInfo"/>
- *           &lt;element name="task" type="{urn:zimbraMail}updatedTaskAlarmInfo"/>
+ *           &lt;element name="appt" type="{urn:zmailMail}updatedAppointmentAlarmInfo"/>
+ *           &lt;element name="task" type="{urn:zmailMail}updatedTaskAlarmInfo"/>
  *         &lt;/choice>
  *       &lt;/sequence>
  *     &lt;/restriction>

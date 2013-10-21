@@ -48,13 +48,13 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="prevSession" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/>
  *         &lt;element name="accessed" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/>
  *         &lt;element name="recent" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
- *         &lt;element name="cos" type="{urn:zimbraAccount}cos" minOccurs="0"/>
+ *         &lt;element name="cos" type="{urn:zmailAccount}cos" minOccurs="0"/>
  *         &lt;element name="prefs" minOccurs="0">
  *           &lt;complexType>
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence>
- *                   &lt;element name="pref" type="{urn:zimbraAccount}pref" maxOccurs="unbounded" minOccurs="0"/>
+ *                   &lt;element name="pref" type="{urn:zmailAccount}pref" maxOccurs="unbounded" minOccurs="0"/>
  *                 &lt;/sequence>
  *               &lt;/restriction>
  *             &lt;/complexContent>
@@ -65,7 +65,7 @@ import javax.xml.bind.annotation.XmlType;
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence>
- *                   &lt;element name="attr" type="{urn:zimbraAccount}attr" maxOccurs="unbounded" minOccurs="0"/>
+ *                   &lt;element name="attr" type="{urn:zmailAccount}attr" maxOccurs="unbounded" minOccurs="0"/>
  *                 &lt;/sequence>
  *               &lt;/restriction>
  *             &lt;/complexContent>
@@ -76,7 +76,7 @@ import javax.xml.bind.annotation.XmlType;
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence>
- *                   &lt;element name="zimlet" type="{urn:zimbraAccount}accountZimletInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *                   &lt;element name="zimlet" type="{urn:zmailAccount}accountZimletInfo" maxOccurs="unbounded" minOccurs="0"/>
  *                 &lt;/sequence>
  *               &lt;/restriction>
  *             &lt;/complexContent>
@@ -87,7 +87,7 @@ import javax.xml.bind.annotation.XmlType;
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence>
- *                   &lt;element name="prop" type="{urn:zimbraAccount}prop" maxOccurs="unbounded" minOccurs="0"/>
+ *                   &lt;element name="prop" type="{urn:zmailAccount}prop" maxOccurs="unbounded" minOccurs="0"/>
  *                 &lt;/sequence>
  *               &lt;/restriction>
  *             &lt;/complexContent>
@@ -98,7 +98,7 @@ import javax.xml.bind.annotation.XmlType;
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence>
- *                   &lt;element name="identity" type="{urn:zimbraAccount}identity" maxOccurs="unbounded" minOccurs="0"/>
+ *                   &lt;element name="identity" type="{urn:zmailAccount}identity" maxOccurs="unbounded" minOccurs="0"/>
  *                 &lt;/sequence>
  *               &lt;/restriction>
  *             &lt;/complexContent>
@@ -109,7 +109,7 @@ import javax.xml.bind.annotation.XmlType;
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence>
- *                   &lt;element ref="{urn:zimbraAccount}signature" maxOccurs="unbounded" minOccurs="0"/>
+ *                   &lt;element ref="{urn:zmailAccount}signature" maxOccurs="unbounded" minOccurs="0"/>
  *                 &lt;/sequence>
  *               &lt;/restriction>
  *             &lt;/complexContent>
@@ -121,14 +121,14 @@ import javax.xml.bind.annotation.XmlType;
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence>
  *                   &lt;choice maxOccurs="unbounded" minOccurs="0">
- *                     &lt;element name="imap" type="{urn:zimbraAccount}accountImapDataSource"/>
- *                     &lt;element name="pop3" type="{urn:zimbraAccount}accountPop3DataSource"/>
- *                     &lt;element name="caldav" type="{urn:zimbraAccount}accountCaldavDataSource"/>
- *                     &lt;element name="yab" type="{urn:zimbraAccount}accountYabDataSource"/>
- *                     &lt;element name="rss" type="{urn:zimbraAccount}accountRssDataSource"/>
- *                     &lt;element name="gal" type="{urn:zimbraAccount}accountGalDataSource"/>
- *                     &lt;element name="cal" type="{urn:zimbraAccount}accountCalDataSource"/>
- *                     &lt;element name="unknown" type="{urn:zimbraAccount}accountUnknownDataSource"/>
+ *                     &lt;element name="imap" type="{urn:zmailAccount}accountImapDataSource"/>
+ *                     &lt;element name="pop3" type="{urn:zmailAccount}accountPop3DataSource"/>
+ *                     &lt;element name="caldav" type="{urn:zmailAccount}accountCaldavDataSource"/>
+ *                     &lt;element name="yab" type="{urn:zmailAccount}accountYabDataSource"/>
+ *                     &lt;element name="rss" type="{urn:zmailAccount}accountRssDataSource"/>
+ *                     &lt;element name="gal" type="{urn:zmailAccount}accountGalDataSource"/>
+ *                     &lt;element name="cal" type="{urn:zmailAccount}accountCalDataSource"/>
+ *                     &lt;element name="unknown" type="{urn:zmailAccount}accountUnknownDataSource"/>
  *                   &lt;/choice>
  *                 &lt;/sequence>
  *               &lt;/restriction>
@@ -140,7 +140,7 @@ import javax.xml.bind.annotation.XmlType;
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence>
- *                   &lt;element name="childAccount" type="{urn:zimbraAccount}childAccount" maxOccurs="unbounded" minOccurs="0"/>
+ *                   &lt;element name="childAccount" type="{urn:zmailAccount}childAccount" maxOccurs="unbounded" minOccurs="0"/>
  *                 &lt;/sequence>
  *               &lt;/restriction>
  *             &lt;/complexContent>
@@ -151,7 +151,7 @@ import javax.xml.bind.annotation.XmlType;
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence>
- *                   &lt;element name="targets" type="{urn:zimbraAccount}discoverRightsInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *                   &lt;element name="targets" type="{urn:zmailAccount}discoverRightsInfo" maxOccurs="unbounded" minOccurs="0"/>
  *                 &lt;/sequence>
  *               &lt;/restriction>
  *             &lt;/complexContent>
@@ -160,7 +160,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="soapURL" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="publicURL" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="changePasswordURL" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="license" type="{urn:zimbraAccount}licenseInfo" minOccurs="0"/>
+ *         &lt;element name="license" type="{urn:zmailAccount}licenseInfo" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="attSizeLimit" type="{http://www.w3.org/2001/XMLSchema}long" />
  *       &lt;attribute name="docSizeLimit" type="{http://www.w3.org/2001/XMLSchema}long" />
@@ -885,7 +885,7 @@ public class testGetInfoResponse {
      *   &lt;complexContent>
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
-     *         &lt;element name="attr" type="{urn:zimbraAccount}attr" maxOccurs="unbounded" minOccurs="0"/>
+     *         &lt;element name="attr" type="{urn:zmailAccount}attr" maxOccurs="unbounded" minOccurs="0"/>
      *       &lt;/sequence>
      *     &lt;/restriction>
      *   &lt;/complexContent>
@@ -944,7 +944,7 @@ public class testGetInfoResponse {
      *   &lt;complexContent>
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
-     *         &lt;element name="childAccount" type="{urn:zimbraAccount}childAccount" maxOccurs="unbounded" minOccurs="0"/>
+     *         &lt;element name="childAccount" type="{urn:zmailAccount}childAccount" maxOccurs="unbounded" minOccurs="0"/>
      *       &lt;/sequence>
      *     &lt;/restriction>
      *   &lt;/complexContent>
@@ -1004,14 +1004,14 @@ public class testGetInfoResponse {
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
      *         &lt;choice maxOccurs="unbounded" minOccurs="0">
-     *           &lt;element name="imap" type="{urn:zimbraAccount}accountImapDataSource"/>
-     *           &lt;element name="pop3" type="{urn:zimbraAccount}accountPop3DataSource"/>
-     *           &lt;element name="caldav" type="{urn:zimbraAccount}accountCaldavDataSource"/>
-     *           &lt;element name="yab" type="{urn:zimbraAccount}accountYabDataSource"/>
-     *           &lt;element name="rss" type="{urn:zimbraAccount}accountRssDataSource"/>
-     *           &lt;element name="gal" type="{urn:zimbraAccount}accountGalDataSource"/>
-     *           &lt;element name="cal" type="{urn:zimbraAccount}accountCalDataSource"/>
-     *           &lt;element name="unknown" type="{urn:zimbraAccount}accountUnknownDataSource"/>
+     *           &lt;element name="imap" type="{urn:zmailAccount}accountImapDataSource"/>
+     *           &lt;element name="pop3" type="{urn:zmailAccount}accountPop3DataSource"/>
+     *           &lt;element name="caldav" type="{urn:zmailAccount}accountCaldavDataSource"/>
+     *           &lt;element name="yab" type="{urn:zmailAccount}accountYabDataSource"/>
+     *           &lt;element name="rss" type="{urn:zmailAccount}accountRssDataSource"/>
+     *           &lt;element name="gal" type="{urn:zmailAccount}accountGalDataSource"/>
+     *           &lt;element name="cal" type="{urn:zmailAccount}accountCalDataSource"/>
+     *           &lt;element name="unknown" type="{urn:zmailAccount}accountUnknownDataSource"/>
      *         &lt;/choice>
      *       &lt;/sequence>
      *     &lt;/restriction>
@@ -1088,7 +1088,7 @@ public class testGetInfoResponse {
      *   &lt;complexContent>
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
-     *         &lt;element name="identity" type="{urn:zimbraAccount}identity" maxOccurs="unbounded" minOccurs="0"/>
+     *         &lt;element name="identity" type="{urn:zmailAccount}identity" maxOccurs="unbounded" minOccurs="0"/>
      *       &lt;/sequence>
      *     &lt;/restriction>
      *   &lt;/complexContent>
@@ -1147,7 +1147,7 @@ public class testGetInfoResponse {
      *   &lt;complexContent>
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
-     *         &lt;element name="pref" type="{urn:zimbraAccount}pref" maxOccurs="unbounded" minOccurs="0"/>
+     *         &lt;element name="pref" type="{urn:zmailAccount}pref" maxOccurs="unbounded" minOccurs="0"/>
      *       &lt;/sequence>
      *     &lt;/restriction>
      *   &lt;/complexContent>
@@ -1206,7 +1206,7 @@ public class testGetInfoResponse {
      *   &lt;complexContent>
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
-     *         &lt;element name="prop" type="{urn:zimbraAccount}prop" maxOccurs="unbounded" minOccurs="0"/>
+     *         &lt;element name="prop" type="{urn:zmailAccount}prop" maxOccurs="unbounded" minOccurs="0"/>
      *       &lt;/sequence>
      *     &lt;/restriction>
      *   &lt;/complexContent>
@@ -1265,7 +1265,7 @@ public class testGetInfoResponse {
      *   &lt;complexContent>
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
-     *         &lt;element name="targets" type="{urn:zimbraAccount}discoverRightsInfo" maxOccurs="unbounded" minOccurs="0"/>
+     *         &lt;element name="targets" type="{urn:zmailAccount}discoverRightsInfo" maxOccurs="unbounded" minOccurs="0"/>
      *       &lt;/sequence>
      *     &lt;/restriction>
      *   &lt;/complexContent>
@@ -1324,7 +1324,7 @@ public class testGetInfoResponse {
      *   &lt;complexContent>
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
-     *         &lt;element ref="{urn:zimbraAccount}signature" maxOccurs="unbounded" minOccurs="0"/>
+     *         &lt;element ref="{urn:zmailAccount}signature" maxOccurs="unbounded" minOccurs="0"/>
      *       &lt;/sequence>
      *     &lt;/restriction>
      *   &lt;/complexContent>
@@ -1383,7 +1383,7 @@ public class testGetInfoResponse {
      *   &lt;complexContent>
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
-     *         &lt;element name="zimlet" type="{urn:zimbraAccount}accountZimletInfo" maxOccurs="unbounded" minOccurs="0"/>
+     *         &lt;element name="zimlet" type="{urn:zmailAccount}accountZimletInfo" maxOccurs="unbounded" minOccurs="0"/>
      *       &lt;/sequence>
      *     &lt;/restriction>
      *   &lt;/complexContent>

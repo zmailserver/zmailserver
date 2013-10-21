@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.type;
+package org.zmail.soap.mail.type;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -27,14 +27,14 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.base.ContactGroupMemberInterface;
-import com.zimbra.soap.base.ContactInterface;
-import com.zimbra.soap.base.CustomMetadataInterface;
-import com.zimbra.soap.type.ContactAttr;
-import com.zimbra.soap.type.SearchHit;
-import com.zimbra.soap.type.ZmBoolean;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.base.ContactGroupMemberInterface;
+import org.zmail.soap.base.ContactInterface;
+import org.zmail.soap.base.CustomMetadataInterface;
+import org.zmail.soap.type.ContactAttr;
+import org.zmail.soap.type.SearchHit;
+import org.zmail.soap.type.ZmBoolean;
 
 /**
  * {@link SearchHit} is used in {@link SearchResponse} as the element type for a List

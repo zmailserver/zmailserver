@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import java.util.Collection;
 
@@ -22,10 +22,10 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.soap.admin.type.AdminAttrsImpl;
-import com.zimbra.soap.admin.type.Attr;
-import com.zimbra.soap.type.ZmBoolean;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.soap.admin.type.AdminAttrsImpl;
+import org.zmail.soap.admin.type.Attr;
+import org.zmail.soap.type.ZmBoolean;
 
 /**
  * @zm-api-command-auth-required true
@@ -35,7 +35,7 @@ import com.zimbra.soap.type.ZmBoolean;
  * Notes:
  * <ul>
  * <li> dynamic - create a dynamic distribution list
- * <li> Extra attrs: <b>description</b>, <b>zimbraNotes</b>
+ * <li> Extra attrs: <b>description</b>, <b>zmailNotes</b>
  * </ul>
  * <b>Access</b>: domain admin sufficient
  */

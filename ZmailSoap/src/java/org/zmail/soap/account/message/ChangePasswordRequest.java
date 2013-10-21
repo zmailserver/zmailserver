@@ -13,14 +13,14 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.account.message;
+package org.zmail.soap.account.message;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.soap.type.AccountSelector;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.soap.type.AccountSelector;
 
 /**
  <ChangePasswordRequest>
@@ -55,7 +55,7 @@ public class ChangePasswordRequest {
     /**
      * @zm-api-field-tag virtual-host
      * @zm-api-field-description if specified virtual-host is used to determine the domain of the account name,
-     * if it does not include a domain component. For example, if the domain foo.com has a zimbraVirtualHostname of
+     * if it does not include a domain component. For example, if the domain foo.com has a zmailVirtualHostname of
      * "mail.foo.com", and an auth request comes in for "joe" with a virtualHost of "mail.foo.com", then the request
      * will be equivalent to logging in with "joe@foo.com".
      */

@@ -36,15 +36,15 @@ import generated.zcsclient.zm.testGalSearchType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="locale" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="cursor" type="{urn:zimbra}cursorInfo" minOccurs="0"/>
- *         &lt;element name="searchFilter" type="{urn:zimbraAccount}entrySearchFilterInfo" minOccurs="0"/>
+ *         &lt;element name="cursor" type="{urn:zmail}cursorInfo" minOccurs="0"/>
+ *         &lt;element name="searchFilter" type="{urn:zmailAccount}entrySearchFilterInfo" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="ref" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="name" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="type" type="{urn:zimbra}galSearchType" />
+ *       &lt;attribute name="type" type="{urn:zmail}galSearchType" />
  *       &lt;attribute name="needExp" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *       &lt;attribute name="needIsOwner" type="{http://www.w3.org/2001/XMLSchema}boolean" />
- *       &lt;attribute name="needIsMember" type="{urn:zimbraAccount}memberOfSelector" />
+ *       &lt;attribute name="needIsMember" type="{urn:zmailAccount}memberOfSelector" />
  *       &lt;attribute name="needSMIMECerts" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *       &lt;attribute name="galAcctId" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="quick" type="{http://www.w3.org/2001/XMLSchema}boolean" />

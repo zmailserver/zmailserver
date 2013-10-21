@@ -36,9 +36,9 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="right" type="{urn:zimbraAdmin}rightWithName" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="setAttrs" type="{urn:zimbraAdmin}effectiveAttrsInfo"/>
- *         &lt;element name="getAttrs" type="{urn:zimbraAdmin}effectiveAttrsInfo"/>
+ *         &lt;element name="right" type="{urn:zmailAdmin}rightWithName" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="setAttrs" type="{urn:zmailAdmin}effectiveAttrsInfo"/>
+ *         &lt;element name="getAttrs" type="{urn:zmailAdmin}effectiveAttrsInfo"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>

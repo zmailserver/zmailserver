@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.message;
+package org.zmail.soap.mail.message;
 
 import com.google.common.base.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -21,9 +21,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.mail.type.FolderActionSelector;
-import com.zimbra.soap.json.jackson.annotate.ZimbraUniqueElement;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.mail.type.FolderActionSelector;
+import org.zmail.soap.json.jackson.annotate.ZmailUniqueElement;
 
 /**
  * @zm-api-command-auth-required true
@@ -60,12 +60,12 @@ import com.zimbra.soap.json.jackson.annotate.ZimbraUniqueElement;
  *   &lt;/action>
  *     - add the &lt;grant> object to the folder
  *
- *   &lt;action op="!grant" id="{list}" zid="{grantee-zimbra-id}"/>
- *     - revoke access from {grantee-zimbra-id}
+ *   &lt;action op="!grant" id="{list}" zid="{grantee-zmail-id}"/>
+ *     - revoke access from {grantee-zmail-id}
  *         (you can use "00000000-0000-0000-0000-000000000000" to revoke acces granted to "all"
  *         or use "99999999-9999-9999-9999-999999999999" to revoke acces granted to "pub" )
  *
- *   &lt;action op="revokeorphangrants" id="{folder-id}" zid="{grantee-zimbra-id}" gt="{grantee-type}"/>
+ *   &lt;action op="revokeorphangrants" id="{folder-id}" zid="{grantee-zmail-id}" gt="{grantee-type}"/>
  *     - revoke orphan grants on the folder hierarchy granted to the grantee specified by zid and gt
  *       "orphan grant" is a grant whose grantee object is deleted/non-existing.  Server will throw
  *       INVALID_REQUEST if zid points to an existing object,
@@ -111,7 +111,7 @@ import com.zimbra.soap.json.jackson.annotate.ZimbraUniqueElement;
  *              list may only have 1 element for actions empty, sync, fb, check, !check, url, import, grant,
  *              !grant, revokeorphangrants, !flag, !tag, syncon, !syncon, retentionpolicy
  *
- * output of "grant" action includes the zimbra id the rights were granted on
+ * output of "grant" action includes the zmail id the rights were granted on
  *
  * note that "delete", "empty", "rename", "move", "color", "update" can be used on search folders as well as standard
  * folders
@@ -124,7 +124,7 @@ public class FolderActionRequest {
     /**
      * @zm-api-field-description Select action to perform on folder
      */
-    @ZimbraUniqueElement
+    @ZmailUniqueElement
     @XmlElement(name=MailConstants.E_ACTION /* action */, required=true)
     private final FolderActionSelector action;
 

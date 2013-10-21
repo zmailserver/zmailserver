@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.account.type;
+package org.zmail.soap.account.type;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlElement;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.zimbra.common.soap.AccountConstants;
+import org.zmail.common.soap.AccountConstants;
 
 public class DistributionListRightInfo {
 

@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="selectiveCallForwardFeature">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraVoice}featureWithCallerList">
+ *     &lt;extension base="{urn:zmailVoice}featureWithCallerList">
  *       &lt;sequence>
  *       &lt;/sequence>
  *       &lt;attribute name="ft" type="{http://www.w3.org/2001/XMLSchema}string" />

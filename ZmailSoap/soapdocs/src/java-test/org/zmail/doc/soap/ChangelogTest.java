@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.doc.soap;
+package org.zmail.doc.soap;
 
 import java.io.File;
 import java.io.InputStream;
@@ -34,15 +34,15 @@ import javax.xml.bind.annotation.XmlValue;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.zimbra.doc.soap.apidesc.SoapApiCommand;
-import com.zimbra.doc.soap.apidesc.SoapApiDescription;
-import com.zimbra.doc.soap.changelog.AttributeChanges;
-import com.zimbra.doc.soap.changelog.CommandChanges;
-import com.zimbra.doc.soap.changelog.CommandChanges.NamedAttr;
-import com.zimbra.doc.soap.changelog.CommandChanges.NamedElem;
-import com.zimbra.doc.soap.changelog.ElementChanges;
-import com.zimbra.doc.soap.changelog.SoapApiChangeLog;
-import com.zimbra.soap.type.ZmBoolean;
+import org.zmail.doc.soap.apidesc.SoapApiCommand;
+import org.zmail.doc.soap.apidesc.SoapApiDescription;
+import org.zmail.doc.soap.changelog.AttributeChanges;
+import org.zmail.doc.soap.changelog.CommandChanges;
+import org.zmail.doc.soap.changelog.CommandChanges.NamedAttr;
+import org.zmail.doc.soap.changelog.CommandChanges.NamedElem;
+import org.zmail.doc.soap.changelog.ElementChanges;
+import org.zmail.doc.soap.changelog.SoapApiChangeLog;
+import org.zmail.soap.type.ZmBoolean;
 
 public class ChangelogTest {
 

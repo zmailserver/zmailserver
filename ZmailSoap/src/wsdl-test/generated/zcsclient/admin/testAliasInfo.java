@@ -32,11 +32,11 @@ import generated.zcsclient.zm.testTargetType;
  * <pre>
  * &lt;complexType name="aliasInfo">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraAdmin}adminObjectInfo">
+ *     &lt;extension base="{urn:zmailAdmin}adminObjectInfo">
  *       &lt;sequence>
  *       &lt;/sequence>
  *       &lt;attribute name="targetName" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="type" type="{urn:zimbra}targetType" />
+ *       &lt;attribute name="type" type="{urn:zmail}targetType" />
  *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>

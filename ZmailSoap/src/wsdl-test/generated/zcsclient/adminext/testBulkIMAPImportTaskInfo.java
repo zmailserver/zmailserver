@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="bulkIMAPImportTaskInfo">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraAdminExt}attrsImpl">
+ *     &lt;extension base="{urn:zmailAdminExt}attrsImpl">
  *       &lt;sequence>
  *       &lt;/sequence>
  *     &lt;/extension>

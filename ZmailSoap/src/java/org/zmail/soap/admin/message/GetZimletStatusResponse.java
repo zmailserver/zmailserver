@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -27,10 +27,10 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.soap.admin.type.ZimletStatusCos;
-import com.zimbra.soap.admin.type.ZimletStatusParent;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.soap.admin.type.ZimletStatusCos;
+import org.zmail.soap.admin.type.ZimletStatusParent;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name=AdminConstants.E_GET_ZIMLET_STATUS_RESPONSE)

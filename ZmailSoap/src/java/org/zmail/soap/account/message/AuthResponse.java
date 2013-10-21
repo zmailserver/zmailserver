@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.account.message;
+package org.zmail.soap.account.message;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -26,14 +26,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 import com.google.common.collect.Multimap;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.HeaderConstants;
-import com.zimbra.soap.account.type.Attr;
-import com.zimbra.soap.account.type.Pref;
-import com.zimbra.soap.account.type.Session;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.HeaderConstants;
+import org.zmail.soap.account.type.Attr;
+import org.zmail.soap.account.type.Pref;
+import org.zmail.soap.account.type.Session;
 
-import com.zimbra.soap.json.jackson.annotate.ZimbraJsonAttribute;
-import com.zimbra.soap.json.jackson.annotate.ZimbraKeyValuePairs;
+import org.zmail.soap.json.jackson.annotate.ZmailJsonAttribute;
+import org.zmail.soap.json.jackson.annotate.ZmailKeyValuePairs;
 
 
 /*
@@ -61,7 +61,7 @@ public class AuthResponse {
     /**
      * @zm-api-field-description Life time for the authorization
      */
-    @ZimbraJsonAttribute
+    @ZmailJsonAttribute
     @XmlElement(name=AccountConstants.E_LIFETIME /* lifetime */, required=true)
     private long lifetime;
     /**
@@ -73,7 +73,7 @@ public class AuthResponse {
      * @zm-api-field-description host additional SOAP requests should be directed to.
      * Always returned, might be same as original host request was sent to.
      */
-    @ZimbraJsonAttribute
+    @ZmailJsonAttribute
     @XmlElement(name=AccountConstants.E_REFERRAL /* refer */, required=false)
     private String refer;
     /**
@@ -86,7 +86,7 @@ public class AuthResponse {
     /**
      * @zm-api-field-description Requested preference settings.
      */
-    @ZimbraKeyValuePairs
+    @ZmailKeyValuePairs
     @XmlElementWrapper(name=AccountConstants.E_PREFS /* prefs */)
     @XmlElement(name=AccountConstants.E_PREF /* pref */)
     private List<Pref> prefs = new ArrayList<Pref>();
@@ -95,7 +95,7 @@ public class AuthResponse {
      * @zm-api-field-description Requested attribute settings.  Only attributes that are allowed to be returned by
      * GetInfo will be returned by this call
      */
-    @ZimbraKeyValuePairs
+    @ZmailKeyValuePairs
     @XmlElementWrapper(name=AccountConstants.E_ATTRS /* attrs */)
     @XmlElement(name=AccountConstants.E_ATTR /* attr */)
     private List<Attr> attrs = new ArrayList<Attr>();

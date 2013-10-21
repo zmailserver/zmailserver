@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.message;
+package org.zmail.soap.mail.message;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -29,12 +29,12 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.mail.type.CalTZInfo;
-import com.zimbra.soap.mail.type.ExpandedRecurrenceCancel;
-import com.zimbra.soap.mail.type.ExpandedRecurrenceComponent;
-import com.zimbra.soap.mail.type.ExpandedRecurrenceException;
-import com.zimbra.soap.mail.type.ExpandedRecurrenceInvite;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.mail.type.CalTZInfo;
+import org.zmail.soap.mail.type.ExpandedRecurrenceCancel;
+import org.zmail.soap.mail.type.ExpandedRecurrenceComponent;
+import org.zmail.soap.mail.type.ExpandedRecurrenceException;
+import org.zmail.soap.mail.type.ExpandedRecurrenceInvite;
 
 /**
  * @zm-api-command-auth-required true

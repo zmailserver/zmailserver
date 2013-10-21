@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.account.message;
+package org.zmail.soap.account.message;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -34,35 +34,35 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.account.type.AccountCalDataSource;
-import com.zimbra.soap.account.type.AccountCaldavDataSource;
-import com.zimbra.soap.account.type.AccountDataSource;
-import com.zimbra.soap.account.type.AccountGalDataSource;
-import com.zimbra.soap.account.type.AccountImapDataSource;
-import com.zimbra.soap.account.type.AccountPop3DataSource;
-import com.zimbra.soap.account.type.AccountRssDataSource;
-import com.zimbra.soap.account.type.AccountUnknownDataSource;
-import com.zimbra.soap.account.type.AccountYabDataSource;
-import com.zimbra.soap.account.type.AccountZimletInfo;
-import com.zimbra.soap.account.type.Attr;
-import com.zimbra.soap.account.type.ChildAccount;
-import com.zimbra.soap.account.type.Cos;
-import com.zimbra.soap.account.type.DiscoverRightsInfo;
-import com.zimbra.soap.account.type.Identity;
-import com.zimbra.soap.account.type.LicenseInfo;
-import com.zimbra.soap.account.type.Pref;
-import com.zimbra.soap.account.type.Prop;
-import com.zimbra.soap.account.type.Signature;
-import com.zimbra.soap.type.ZmBoolean;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.account.type.AccountCalDataSource;
+import org.zmail.soap.account.type.AccountCaldavDataSource;
+import org.zmail.soap.account.type.AccountDataSource;
+import org.zmail.soap.account.type.AccountGalDataSource;
+import org.zmail.soap.account.type.AccountImapDataSource;
+import org.zmail.soap.account.type.AccountPop3DataSource;
+import org.zmail.soap.account.type.AccountRssDataSource;
+import org.zmail.soap.account.type.AccountUnknownDataSource;
+import org.zmail.soap.account.type.AccountYabDataSource;
+import org.zmail.soap.account.type.AccountZimletInfo;
+import org.zmail.soap.account.type.Attr;
+import org.zmail.soap.account.type.ChildAccount;
+import org.zmail.soap.account.type.Cos;
+import org.zmail.soap.account.type.DiscoverRightsInfo;
+import org.zmail.soap.account.type.Identity;
+import org.zmail.soap.account.type.LicenseInfo;
+import org.zmail.soap.account.type.Pref;
+import org.zmail.soap.account.type.Prop;
+import org.zmail.soap.account.type.Signature;
+import org.zmail.soap.type.ZmBoolean;
 
-import com.zimbra.soap.json.jackson.annotate.ZimbraJsonAttribute;
-import com.zimbra.soap.json.jackson.annotate.ZimbraKeyValuePairs;
-import com.zimbra.soap.json.jackson.annotate.ZimbraUniqueElement;
+import org.zmail.soap.json.jackson.annotate.ZmailJsonAttribute;
+import org.zmail.soap.json.jackson.annotate.ZmailKeyValuePairs;
+import org.zmail.soap.json.jackson.annotate.ZmailUniqueElement;
 /**
  * Note that LicenseAdminService and LicenseService both register a handler (the same one) which
- * extends com.zimbra.cs.service.account.GetInfo - this adds the "license" element
+ * extends org.zmail.cs.service.account.GetInfo - this adds the "license" element
  *
  * @zm-api-response-description The response to a request for account information
  */
@@ -96,7 +96,7 @@ public final class GetInfoResponse {
      *     &lt;major>[.&lt;minor>[.&lt;maintenance>]][build] &lt;release> &lt;date>[&lt;type>]
      */
     @XmlElement(name=AccountConstants.E_VERSION /* version */, required=true)
-    @ZimbraJsonAttribute
+    @ZmailJsonAttribute
     private String version;
 
     /**
@@ -104,7 +104,7 @@ public final class GetInfoResponse {
      * @zm-api-field-description Account ID
      */
     @XmlElement(name=AccountConstants.E_ID /* id */, required=true)
-    @ZimbraJsonAttribute
+    @ZmailJsonAttribute
     private String accountId;
 
     /**
@@ -112,14 +112,14 @@ public final class GetInfoResponse {
      * @zm-api-field-description Email address (user@domain)
      */
     @XmlElement(name=AccountConstants.E_NAME /* name */, required=true)
-    @ZimbraJsonAttribute
+    @ZmailJsonAttribute
     private String accountName;
 
     /**
      * @zm-api-field-description Crumb
      */
     @XmlElement(name=AccountConstants.E_CRUMB /* crumb */, required=false)
-    @ZimbraJsonAttribute
+    @ZmailJsonAttribute
     private String crumb;
 
     /**
@@ -127,7 +127,7 @@ public final class GetInfoResponse {
      * @zm-api-field-description Number of milliseconds until auth token expires
      */
     @XmlElement(name=AccountConstants.E_LIFETIME /* lifetime */, required=true)
-    @ZimbraJsonAttribute
+    @ZmailJsonAttribute
     private long lifetime;
 
     /**
@@ -135,7 +135,7 @@ public final class GetInfoResponse {
      * @zm-api-field-description 1 (true) if the auth token is a delegated auth token issued to an admin account
      */
     @XmlElement(name=AccountConstants.E_ADMIN_DELEGATED /* adminDelegated */, required=false)
-    @ZimbraJsonAttribute
+    @ZmailJsonAttribute
     private ZmBoolean adminDelegated;
 
     /**
@@ -143,7 +143,7 @@ public final class GetInfoResponse {
      * @zm-api-field-description Base REST URL for the requested account
      */
     @XmlElement(name=AccountConstants.E_REST /* rest */, required=false)
-    @ZimbraJsonAttribute
+    @ZmailJsonAttribute
     private String restUrl;
 
     /**
@@ -152,7 +152,7 @@ public final class GetInfoResponse {
      * <br />Returned only if the command successfully executes on the target user's home mail server
      */
     @XmlElement(name=AccountConstants.E_QUOTA_USED /* used */, required=false)
-    @ZimbraJsonAttribute
+    @ZmailJsonAttribute
     private Long quotaUsed;
 
     /**
@@ -162,7 +162,7 @@ public final class GetInfoResponse {
      * <br />Returned only if the command successfully executes on the target user's home mail server
      */
     @XmlElement(name=AccountConstants.E_PREVIOUS_SESSION /* prevSession */, required=false)
-    @ZimbraJsonAttribute
+    @ZmailJsonAttribute
     private Long previousSessionTime;
 
     /**
@@ -172,7 +172,7 @@ public final class GetInfoResponse {
      * <br />Returned only if the command successfully executes on the target user's home mail server
      */
     @XmlElement(name=AccountConstants.E_LAST_ACCESS /* accessed */, required=false)
-    @ZimbraJsonAttribute
+    @ZmailJsonAttribute
     private Long lastWriteAccessTime;
 
     /**
@@ -182,29 +182,29 @@ public final class GetInfoResponse {
      * <br />Returned only if the command successfully executes on the target user's home mail server
      */
     @XmlElement(name=AccountConstants.E_RECENT_MSGS /* recent */, required=false)
-    @ZimbraJsonAttribute
+    @ZmailJsonAttribute
     private Integer recentMessageCount;
 
     /**
      * @zm-api-field-description Class of service
      */
-    @ZimbraUniqueElement
+    @ZmailUniqueElement
     @XmlElement(name=AccountConstants.E_COS /* cos */, required=false)
     private Cos cos;
 
     /**
      * @zm-api-field-description User-settable preferences
      */
-    @ZimbraKeyValuePairs
+    @ZmailKeyValuePairs
     @XmlElementWrapper(name=AccountConstants.E_PREFS /* prefs */, required=false)
     @XmlElement(name=AccountConstants.E_PREF /* pref */, required=false)
     private List<Pref> prefs = Lists.newArrayList();
 
     /**
      * @zm-api-field-description Account attributes that aren't user-settable, but the front-end needs.
-     * Only attributes listed in <b>zimbraAccountClientAttrs</b> will be returned.
+     * Only attributes listed in <b>zmailAccountClientAttrs</b> will be returned.
      */
-    @ZimbraKeyValuePairs
+    @ZmailKeyValuePairs
     @XmlElementWrapper(name=AccountConstants.E_ATTRS /* attrs */, required=false)
     @XmlElement(name=AccountConstants.E_ATTR /* attr */, required=false)
     private List<Attr> attrs = Lists.newArrayList();
@@ -275,7 +275,7 @@ public final class GetInfoResponse {
      * <p>If both http and https (SSL) are enabled, the https URL will be returned.</p>
      */
     @XmlElement(name=AccountConstants.E_SOAP_URL /* soapURL */, required=false)
-    @ZimbraJsonAttribute
+    @ZmailJsonAttribute
     private String soapURL;
 
     /**
@@ -283,22 +283,22 @@ public final class GetInfoResponse {
      * @zm-api-field-description Base public URL for the requested account
      */
     @XmlElement(name=AccountConstants.E_PUBLIC_URL /* publicURL */, required=false)
-    @ZimbraJsonAttribute
+    @ZmailJsonAttribute
     private String publicURL;
 
     /**
      * @zm-api-field-tag change-password-url
      * @zm-api-field-description URL to talk to in order to change a password.  Not returned if not configured
-     * via domain attribute <b>zimbraChangePasswordURL</b>
+     * via domain attribute <b>zmailChangePasswordURL</b>
      */
     @XmlElement(name=AccountConstants.E_CHANGE_PASSWORD_URL /* changePasswordURL */, required=false)
-    @ZimbraJsonAttribute
+    @ZmailJsonAttribute
     private String changePasswordURL;
 
     /**
      * @zm-api-field-description License information.  Only present for Network Edition
      */
-    @ZimbraUniqueElement
+    @ZmailUniqueElement
     @XmlElement(name=AccountConstants.E_LICENSE /* license */, required=false)
     private LicenseInfo license;
 

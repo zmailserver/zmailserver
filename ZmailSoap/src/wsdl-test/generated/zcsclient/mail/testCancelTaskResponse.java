@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="cancelTaskResponse">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraMail}cancelAppointmentResponse">
+ *     &lt;extension base="{urn:zmailMail}cancelAppointmentResponse">
  *       &lt;sequence>
  *       &lt;/sequence>
  *     &lt;/extension>

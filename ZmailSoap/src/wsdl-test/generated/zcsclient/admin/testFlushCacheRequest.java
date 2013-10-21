@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="cache" type="{urn:zimbraAdmin}cacheSelector" minOccurs="0"/>
+ *         &lt;element name="cache" type="{urn:zmailAdmin}cacheSelector" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>

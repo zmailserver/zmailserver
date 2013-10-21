@@ -37,7 +37,7 @@ import generated.zcsclient.zm.testMailboxMoveType;
  *       &lt;/sequence>
  *       &lt;attribute name="name" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="start" use="required" type="{http://www.w3.org/2001/XMLSchema}long" />
- *       &lt;attribute name="type" use="required" type="{urn:zimbra}mailboxMoveType" />
+ *       &lt;attribute name="type" use="required" type="{urn:zmail}mailboxMoveType" />
  *       &lt;attribute name="src" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="dest" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="noPeer" type="{http://www.w3.org/2001/XMLSchema}boolean" />

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.json.jackson.annotate;
+package org.zmail.soap.json.jackson.annotate;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -21,12 +21,12 @@ import java.lang.annotation.Target;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementRef;
 
-import com.zimbra.common.soap.Element.JSONElement;
+import org.zmail.common.soap.Element.JSONElement;
 
 import org.codehaus.jackson.annotate.JacksonAnnotation;
 
 /**
- * <p>Marker annotation used in Zimbra JAXB classes to affect how they are serialized to Zimbra style JSON.</p>
+ * <p>Marker annotation used in Zmail JAXB classes to affect how they are serialized to Zmail style JSON.</p>
  * <h1>Notes on {@link JSONElement}:</h1>
  * A JSON element added via {@code addElement} is always serialized as an array, because there could be
  * further {@code addElement} calls with the same element name.  On the other hand, a JSON element added via
@@ -39,7 +39,7 @@ import org.codehaus.jackson.annotate.JacksonAnnotation;
  * <pre>
  *    "str-elem": [{ "_content": "element ONE" }]
  * </pre>
- * If the field also has this {@link ZimbraUniqueElement} annotation, it is serialized similarly to this instead:
+ * If the field also has this {@link ZmailUniqueElement} annotation, it is serialized similarly to this instead:
  * <pre>
  *    "str-elem": { "_content": "element ONE" }
  * </pre>
@@ -47,7 +47,7 @@ import org.codehaus.jackson.annotate.JacksonAnnotation;
 @Target({ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 @JacksonAnnotation
-public @interface ZimbraUniqueElement
+public @interface ZmailUniqueElement
 {
     /**
      * Optional argument that defines whether this annotation is active or not. The only use for value 'false' is

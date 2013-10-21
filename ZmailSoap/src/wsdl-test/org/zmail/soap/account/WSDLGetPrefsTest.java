@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.account;
+package org.zmail.soap.account;
 import java.util.List;
 
 import com.sun.xml.ws.developer.WSBindingProvider;
@@ -20,7 +20,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.soap.Utility;
+import org.zmail.soap.Utility;
 import generated.zcsclient.account.testGetPrefsRequest;
 import generated.zcsclient.account.testGetPrefsResponse;
 import generated.zcsclient.account.testPref;
@@ -53,12 +53,12 @@ public class WSDLGetPrefsTest {
        testGetPrefsRequest req = new testGetPrefsRequest();
        Utility.addSoapAcctAuthHeader((WSBindingProvider)acctSvcEIF);
        testPref calUserQAddPref = new testPref();
-       calUserQAddPref.setName("zimbraPrefCalendarUseQuickAdd");
-       testPref zimbraPrefShowSearchString = new testPref();
-       zimbraPrefShowSearchString.setName("zimbraPrefShowSearchString");
+       calUserQAddPref.setName("zmailPrefCalendarUseQuickAdd");
+       testPref zmailPrefShowSearchString = new testPref();
+       zmailPrefShowSearchString.setName("zmailPrefShowSearchString");
 
        req.getPref().add(calUserQAddPref);
-       req.getPref().add(zimbraPrefShowSearchString);
+       req.getPref().add(zmailPrefShowSearchString);
        testGetPrefsResponse response = acctSvcEIF.getPrefsRequest(req);
        Assert.assertNotNull(response);
        List <testPref> respPrefs = response.getPref();

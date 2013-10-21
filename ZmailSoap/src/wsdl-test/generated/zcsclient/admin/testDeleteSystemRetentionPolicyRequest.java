@@ -34,8 +34,8 @@ import generated.zcsclient.mail.testPolicy;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="cos" type="{urn:zimbraAdmin}cosSelector" minOccurs="0"/>
- *         &lt;element ref="{urn:zimbraMail}policy"/>
+ *         &lt;element name="cos" type="{urn:zmailAdmin}cosSelector" minOccurs="0"/>
+ *         &lt;element ref="{urn:zmailMail}policy"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -52,7 +52,7 @@ import generated.zcsclient.mail.testPolicy;
 public class testDeleteSystemRetentionPolicyRequest {
 
     protected testCosSelector cos;
-    @XmlElement(namespace = "urn:zimbraMail", required = true)
+    @XmlElement(namespace = "urn:zmailMail", required = true)
     protected testPolicy policy;
 
     /**

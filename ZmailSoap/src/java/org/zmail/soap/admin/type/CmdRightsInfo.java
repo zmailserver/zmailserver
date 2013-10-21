@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.type;
+package org.zmail.soap.admin.type;
 
 import com.google.common.collect.Lists;
 
@@ -27,9 +27,9 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.soap.json.jackson.annotate.ZimbraJsonArrayForWrapper;
-import com.zimbra.soap.type.NamedElement;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.soap.json.jackson.annotate.ZmailJsonArrayForWrapper;
+import org.zmail.soap.type.NamedElement;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class CmdRightsInfo {
@@ -44,7 +44,7 @@ public class CmdRightsInfo {
     /**
      * @zm-api-field-description Rights
      */
-    @ZimbraJsonArrayForWrapper
+    @ZmailJsonArrayForWrapper
     @XmlElementWrapper(name=AdminConstants.E_RIGHTS /* rights */, required=true)
     @XmlElement(name=AdminConstants.E_RIGHT /* right */, required=false)
     private List <NamedElement> rights = Lists.newArrayList();
@@ -52,7 +52,7 @@ public class CmdRightsInfo {
     /**
      * @zm-api-field-description Notes
      */
-    @ZimbraJsonArrayForWrapper
+    @ZmailJsonArrayForWrapper
     @XmlElementWrapper(name=AdminConstants.E_DESC /* desc */, required=true)
     @XmlElement(name=AdminConstants.E_NOTE /* note */, required=false)
     private List <String> notes = Lists.newArrayList();

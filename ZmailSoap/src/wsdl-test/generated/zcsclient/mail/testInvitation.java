@@ -37,12 +37,12 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="tz" type="{urn:zimbraMail}calTZInfo" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="comp" type="{urn:zimbraMail}inviteComponent" minOccurs="0"/>
+ *         &lt;element name="tz" type="{urn:zmailMail}calTZInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="comp" type="{urn:zmailMail}inviteComponent" minOccurs="0"/>
  *         &lt;choice maxOccurs="unbounded" minOccurs="0">
- *           &lt;element name="mp" type="{urn:zimbraMail}partInfo"/>
- *           &lt;element name="shr" type="{urn:zimbraMail}shareNotification"/>
- *           &lt;element name="dlSubs" type="{urn:zimbraMail}dlSubscriptionNotification"/>
+ *           &lt;element name="mp" type="{urn:zmailMail}partInfo"/>
+ *           &lt;element name="shr" type="{urn:zmailMail}shareNotification"/>
+ *           &lt;element name="dlSubs" type="{urn:zmailMail}dlSubscriptionNotification"/>
  *         &lt;/choice>
  *       &lt;/sequence>
  *       &lt;attribute name="type" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />

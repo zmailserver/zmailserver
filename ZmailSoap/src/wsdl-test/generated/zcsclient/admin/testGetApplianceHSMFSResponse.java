@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="fs" type="{urn:zimbraAdmin}hsmFileSystemInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="fs" type="{urn:zmailAdmin}hsmFileSystemInfo" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>

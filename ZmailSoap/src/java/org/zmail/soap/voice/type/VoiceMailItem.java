@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.voice.type;
+package org.zmail.soap.voice.type;
 
 import com.google.common.base.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -21,8 +21,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.VoiceConstants;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.VoiceConstants;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class VoiceMailItem extends VoiceCallItem {

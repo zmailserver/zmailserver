@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.type;
+package org.zmail.soap.admin.type;
 
 import com.google.common.collect.Lists;
 
@@ -27,12 +27,12 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlEnum;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.soap.admin.type.EffectiveRightsInfo;
-import com.zimbra.soap.admin.type.RightsEntriesInfo;
-import com.zimbra.soap.admin.type.InDomainInfo;
-import com.zimbra.soap.type.TargetType;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.soap.admin.type.EffectiveRightsInfo;
+import org.zmail.soap.admin.type.RightsEntriesInfo;
+import org.zmail.soap.admin.type.InDomainInfo;
+import org.zmail.soap.type.TargetType;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class EffectiveRightsTarget {

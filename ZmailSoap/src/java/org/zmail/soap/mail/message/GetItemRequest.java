@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.message;
+package org.zmail.soap.mail.message;
 
 import com.google.common.base.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -21,10 +21,10 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.mail.type.ItemSpec;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.mail.type.ItemSpec;
 
-import com.zimbra.soap.json.jackson.annotate.ZimbraUniqueElement;
+import org.zmail.soap.json.jackson.annotate.ZmailUniqueElement;
 /**
  * @zm-api-command-auth-required true
  * @zm-api-command-admin-auth-required false
@@ -46,7 +46,7 @@ public class GetItemRequest {
     /**
      * @zm-api-field-description Item specification
      */
-    @ZimbraUniqueElement
+    @ZmailUniqueElement
     @XmlElement(name=MailConstants.E_ITEM /* item */, required=false)
     private ItemSpec item;
 

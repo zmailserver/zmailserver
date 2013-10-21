@@ -36,9 +36,9 @@ import generated.zcsclient.zm.testContactAttr;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{urn:zimbraAdmin}meta" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="a" type="{urn:zimbra}contactAttr" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="m" type="{urn:zimbraAdmin}contactGroupMember" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element ref="{urn:zmailAdmin}meta" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="a" type="{urn:zmail}contactAttr" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="m" type="{urn:zmailAdmin}contactGroupMember" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="sf" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="exp" type="{http://www.w3.org/2001/XMLSchema}boolean" />

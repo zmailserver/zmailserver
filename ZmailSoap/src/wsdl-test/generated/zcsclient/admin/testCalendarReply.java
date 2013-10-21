@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="calendarReply">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraAdmin}recurIdInfo">
+ *     &lt;extension base="{urn:zmailAdmin}recurIdInfo">
  *       &lt;sequence>
  *       &lt;/sequence>
  *       &lt;attribute name="seq" use="required" type="{http://www.w3.org/2001/XMLSchema}int" />

@@ -13,17 +13,17 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.account.type;
+package org.zmail.soap.account.type;
 
 import com.google.common.base.Objects;
-import com.zimbra.common.soap.HeaderConstants;
+import org.zmail.common.soap.HeaderConstants;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlValue;
 
- // See ZimbraSoapContext.encodeSession:
+ // See ZmailSoapContext.encodeSession:
  // eSession.addAttribute(HeaderConstants.A_TYPE, typeStr).addAttribute(HeaderConstants.A_ID, sessionId).setText(sessionId);
 
 @XmlAccessorType(XmlAccessType.NONE)

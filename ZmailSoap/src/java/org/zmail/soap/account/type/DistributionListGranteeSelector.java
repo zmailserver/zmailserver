@@ -13,16 +13,16 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.account.type;
+package org.zmail.soap.account.type;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlValue;
 
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.soap.type.DistributionListGranteeBy;
-import com.zimbra.soap.type.GranteeType;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.soap.type.DistributionListGranteeBy;
+import org.zmail.soap.type.GranteeType;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class DistributionListGranteeSelector {

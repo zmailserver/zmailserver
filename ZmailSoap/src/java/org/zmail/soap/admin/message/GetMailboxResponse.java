@@ -13,12 +13,12 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.soap.admin.type.MailboxWithMailboxId;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.soap.admin.type.MailboxWithMailboxId;
 
 @XmlRootElement(name=AdminConstants.E_GET_MAILBOX_RESPONSE)
 public class GetMailboxResponse {

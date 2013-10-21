@@ -12,12 +12,12 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.mail;
+package org.zmail.soap.mail;
 
 import javax.xml.ws.soap.SOAPFaultException;
 
 import com.sun.xml.ws.developer.WSBindingProvider;
-import com.zimbra.soap.Utility;
+import org.zmail.soap.Utility;
 
 import generated.zcsclient.mail.testInvalidateReminderDeviceRequest;
 import generated.zcsclient.mail.testInvalidateReminderDeviceResponse;
@@ -105,7 +105,7 @@ public class WSDLReminderCodesTest {
         } catch (SOAPFaultException ex) {
             String exMsg = ex.getMessage();
             int ndx = exMsg.indexOf(
-                    "is not same as the zimbraCalendarReminderDeviceEmail");
+                    "is not same as the zmailCalendarReminderDeviceEmail");
             Assert.assertTrue("Expected SOAP fault not thrown", ndx > 0 );
         }
     }

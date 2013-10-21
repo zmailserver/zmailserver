@@ -12,13 +12,13 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.account.message;
+package org.zmail.soap.account.message;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.soap.account.type.DistributionListSubscribeStatus;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.soap.account.type.DistributionListSubscribeStatus;
 
 @XmlRootElement(name=AccountConstants.E_SUBSCRIBE_DISTRIBUTION_LIST_RESPONSE)
 public class SubscribeDistributionListResponse {

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.util;
+package org.zmail.soap.util;
 
 import java.lang.reflect.Type;
 import java.util.List;

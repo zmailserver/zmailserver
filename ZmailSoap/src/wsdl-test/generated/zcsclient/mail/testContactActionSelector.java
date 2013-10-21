@@ -32,9 +32,9 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="contactActionSelector">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraMail}actionSelector">
+ *     &lt;extension base="{urn:zmailMail}actionSelector">
  *       &lt;sequence>
- *         &lt;element name="a" type="{urn:zimbraMail}newContactAttr" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="a" type="{urn:zmailMail}newContactAttr" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/extension>
  *   &lt;/complexContent>

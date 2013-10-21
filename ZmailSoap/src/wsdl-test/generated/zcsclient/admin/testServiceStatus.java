@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlValue;
  * <pre>
  * &lt;complexType name="serviceStatus">
  *   &lt;simpleContent>
- *     &lt;extension base="&lt;urn:zimbra>zeroOrOne">
+ *     &lt;extension base="&lt;urn:zmail>zeroOrOne">
  *       &lt;attribute name="server" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="service" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="t" use="required" type="{http://www.w3.org/2001/XMLSchema}long" />

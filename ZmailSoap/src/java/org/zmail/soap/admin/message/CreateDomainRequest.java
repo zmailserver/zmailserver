@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import java.util.Collection;
 import java.util.Map;
@@ -21,10 +21,10 @@ import java.util.Map;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.soap.admin.type.AdminAttrsImpl;
-import com.zimbra.soap.admin.type.Attr;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.soap.admin.type.AdminAttrsImpl;
+import org.zmail.soap.admin.type.Attr;
 
 /**
  * @zm-api-command-auth-required true
@@ -33,7 +33,7 @@ import com.zimbra.soap.admin.type.Attr;
  * <br />
  * Notes:
  * <br />
- * Extra attrs: <b>description</b>, <b>zimbraNotes</b>
+ * Extra attrs: <b>description</b>, <b>zmailNotes</b>
  */
 @XmlRootElement(name=AdminConstants.E_CREATE_DOMAIN_REQUEST)
 public class CreateDomainRequest extends AdminAttrsImpl {

@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="dlInfo">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraAccount}objectInfo">
+ *     &lt;extension base="{urn:zmailAccount}objectInfo">
  *       &lt;all>
  *       &lt;/all>
  *       &lt;attribute name="ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />

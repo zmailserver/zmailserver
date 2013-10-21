@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="hostname" type="{urn:zimbraAdmin}hostStats" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="hostname" type="{urn:zmailAdmin}hostStats" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="note" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>

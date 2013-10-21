@@ -12,11 +12,11 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.doc.soap.apidesc;
+package org.zmail.doc.soap.apidesc;
 
-import com.zimbra.doc.soap.ValueDescription;
-import com.zimbra.doc.soap.XmlAttributeDescription;
-import com.zimbra.soap.JaxbUtil;
+import org.zmail.doc.soap.ValueDescription;
+import org.zmail.doc.soap.XmlAttributeDescription;
+import org.zmail.soap.JaxbUtil;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 

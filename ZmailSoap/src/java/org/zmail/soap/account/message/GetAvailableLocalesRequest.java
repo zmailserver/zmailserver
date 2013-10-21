@@ -13,17 +13,17 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.account.message;
+package org.zmail.soap.account.message;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.AccountConstants;
+import org.zmail.common.soap.AccountConstants;
 
 /**
  * @zm-api-command-auth-required true
  * @zm-api-command-admin-auth-required false
  * @zm-api-command-description Get the intersection of all translated locales installed on the server and the list
- * specified in zimbraAvailableLocale.  The locale list in the response is sorted by display name (name attribute).
+ * specified in zmailAvailableLocale.  The locale list in the response is sorted by display name (name attribute).
  */
 @XmlRootElement(name=AccountConstants.E_GET_AVAILABLE_LOCALES_REQUEST)
 public class GetAvailableLocalesRequest {

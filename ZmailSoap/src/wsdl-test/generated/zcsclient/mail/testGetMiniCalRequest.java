@@ -36,8 +36,8 @@ import generated.zcsclient.zm.testId;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="folder" type="{urn:zimbra}id" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="tz" type="{urn:zimbraMail}calTZInfo" minOccurs="0"/>
+ *         &lt;element name="folder" type="{urn:zmail}id" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="tz" type="{urn:zmailMail}calTZInfo" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="s" use="required" type="{http://www.w3.org/2001/XMLSchema}long" />
  *       &lt;attribute name="e" use="required" type="{http://www.w3.org/2001/XMLSchema}long" />

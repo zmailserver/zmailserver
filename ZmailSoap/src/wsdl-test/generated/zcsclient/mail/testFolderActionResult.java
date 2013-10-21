@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="folderActionResult">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraMail}idAndOperation">
+ *     &lt;extension base="{urn:zmailMail}idAndOperation">
  *       &lt;sequence>
  *       &lt;/sequence>
  *       &lt;attribute name="zid" type="{http://www.w3.org/2001/XMLSchema}string" />

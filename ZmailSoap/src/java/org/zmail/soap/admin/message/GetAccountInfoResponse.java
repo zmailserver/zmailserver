@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -26,9 +26,9 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.soap.admin.type.Attr;
-import com.zimbra.soap.admin.type.CosInfo;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.soap.admin.type.Attr;
+import org.zmail.soap.admin.type.CosInfo;
 
 /**
  * @zm-api-response-description Provides a limited amount of information about the requested account.
@@ -50,8 +50,8 @@ public class GetAccountInfoResponse {
     /**
      * @zm-api-field-description Account attributes.  Currently only these attributes are returned:
      * <table>
-     * <tr><td> <b>zimbraId</b>       </td><td> the unique UUID of the zimbra account </td></tr>
-     * <tr><td> <b>zimbraMailHost</b> </td><td> the server on which this user's mail resides </td></tr>
+     * <tr><td> <b>zmailId</b>       </td><td> the unique UUID of the zmail account </td></tr>
+     * <tr><td> <b>zmailMailHost</b> </td><td> the server on which this user's mail resides </td></tr>
      * </table>
      */
     @XmlElement(name=AdminConstants.E_A)

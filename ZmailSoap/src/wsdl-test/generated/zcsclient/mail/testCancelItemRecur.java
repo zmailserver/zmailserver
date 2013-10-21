@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="cancelItemRecur">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraMail}calendarItemRecur">
+ *     &lt;extension base="{urn:zmailMail}calendarItemRecur">
  *       &lt;sequence>
  *       &lt;/sequence>
  *     &lt;/extension>

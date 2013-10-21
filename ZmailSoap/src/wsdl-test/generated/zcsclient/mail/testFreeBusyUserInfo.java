@@ -38,11 +38,11 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;choice maxOccurs="unbounded" minOccurs="0">
- *           &lt;element name="f" type="{urn:zimbraMail}freeBusyFREEslot"/>
- *           &lt;element name="b" type="{urn:zimbraMail}freeBusyBUSYslot"/>
- *           &lt;element name="t" type="{urn:zimbraMail}freeBusyBUSYTENTATIVEslot"/>
- *           &lt;element name="u" type="{urn:zimbraMail}freeBusyBUSYUNAVAILABLEslot"/>
- *           &lt;element name="n" type="{urn:zimbraMail}freeBusyNODATAslot"/>
+ *           &lt;element name="f" type="{urn:zmailMail}freeBusyFREEslot"/>
+ *           &lt;element name="b" type="{urn:zmailMail}freeBusyBUSYslot"/>
+ *           &lt;element name="t" type="{urn:zmailMail}freeBusyBUSYTENTATIVEslot"/>
+ *           &lt;element name="u" type="{urn:zmailMail}freeBusyBUSYUNAVAILABLEslot"/>
+ *           &lt;element name="n" type="{urn:zmailMail}freeBusyNODATAslot"/>
  *         &lt;/choice>
  *       &lt;/sequence>
  *       &lt;attribute name="id" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />

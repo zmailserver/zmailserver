@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -27,9 +27,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import com.google.common.collect.Lists;
 
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.soap.admin.type.ServiceStatus;
-import com.zimbra.soap.admin.type.TimeZoneInfo;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.soap.admin.type.ServiceStatus;
+import org.zmail.soap.admin.type.TimeZoneInfo;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name=AdminConstants.E_GET_SERVICE_STATUS_RESPONSE)

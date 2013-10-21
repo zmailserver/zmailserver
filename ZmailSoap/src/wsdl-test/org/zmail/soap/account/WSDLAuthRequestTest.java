@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.account;
+package org.zmail.soap.account;
 
 import javax.xml.ws.soap.SOAPFaultException;
 
@@ -20,7 +20,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.soap.Utility;
+import org.zmail.soap.Utility;
 import generated.zcsclient.account.testAuthRequest;
 import generated.zcsclient.account.testAuthResponse;
 import generated.zcsclient.ws.service.ZcsPortType;

@@ -13,11 +13,11 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.message;
+package org.zmail.soap.mail.message;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.OctopusXmlConstants;
+import org.zmail.common.soap.OctopusXmlConstants;
 
 @XmlRootElement(name=OctopusXmlConstants.E_UPDATE_DEVICE_STATUS_RESPONSE)
 public class UpdateDeviceStatusResponse {

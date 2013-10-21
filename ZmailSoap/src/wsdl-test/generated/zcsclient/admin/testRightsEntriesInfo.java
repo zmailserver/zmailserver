@@ -36,8 +36,8 @@ import generated.zcsclient.zm.testNamedElement;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="entry" type="{urn:zimbra}namedElement" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="rights" type="{urn:zimbraAdmin}effectiveRightsInfo"/>
+ *         &lt;element name="entry" type="{urn:zmail}namedElement" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="rights" type="{urn:zmailAdmin}effectiveRightsInfo"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>

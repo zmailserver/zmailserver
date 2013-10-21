@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.account.message;
+package org.zmail.soap.account.message;
 
 import com.google.common.base.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -22,10 +22,10 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.soap.type.AccountSelector;
-import com.zimbra.soap.type.GranteeChooser;
-import com.zimbra.soap.type.ZmBoolean;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.soap.type.AccountSelector;
+import org.zmail.soap.type.GranteeChooser;
+import org.zmail.soap.type.ZmBoolean;
 
 /**
  * @zm-api-command-auth-required true
@@ -35,7 +35,7 @@ import com.zimbra.soap.type.ZmBoolean;
  * Notes:
  * <ul>
  * <li> if <b>&lt;owner></b> is *not* specified the server will search the LDAP directory for published shares
- *      (<b>zimbraSharedItem</b> account attribute) accessible to the authed user.
+ *      (<b>zmailSharedItem</b> account attribute) accessible to the authed user.
  * <li> if <b>&lt;owner></b> *is* specified, the server will iterate through the owner's mailbox to discover all
  *      shares applicable to the authed user, instead of looking at any of the published share info.
  * <li> All applicable shares will be returned, including any shares that are:
@@ -44,7 +44,7 @@ import com.zimbra.soap.type.ZmBoolean;
  *     <tr> <td>shared with any group(and parent groups) the account belongs.</td> <td>(*is* supported)</td></tr>
  *     <tr> <td>shared with the cos assigned to the account. </td>                 <td>(*is* supported)</td></tr>
  *     <tr> <td>shared with the domain this account is in. </td>                   <td>(*is* supported)</td></tr>
- *     <tr> <td>shared with all authed users (i.e. all Zimbra users) </td>         <td>(*is* supported)</td></tr>
+ *     <tr> <td>shared with all authed users (i.e. all Zmail users) </td>         <td>(*is* supported)</td></tr>
  *     <tr> <td>shared with the public </td>                                       <td>(*is* supported)</td></tr>
  *     </table>
  * </ul>

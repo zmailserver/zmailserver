@@ -13,12 +13,12 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.SyncAdminConstants;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.SyncAdminConstants;
 
 /**
  * @zm-api-command-network-edition

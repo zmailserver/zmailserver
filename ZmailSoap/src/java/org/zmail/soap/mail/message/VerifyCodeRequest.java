@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.message;
+package org.zmail.soap.mail.message;
 
 import com.google.common.base.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -21,13 +21,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.MailConstants;
+import org.zmail.common.soap.MailConstants;
 
 /**
  * @zm-api-command-auth-required true
  * @zm-api-command-admin-auth-required false
  * @zm-api-command-description Validate the verification code sent to a device. After successful validation the
- * server sets the device email address as the value of zimbraCalendarReminderDeviceEmail account attribute.
+ * server sets the device email address as the value of zmailCalendarReminderDeviceEmail account attribute.
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name=MailConstants.E_VERIFY_CODE_REQUEST)

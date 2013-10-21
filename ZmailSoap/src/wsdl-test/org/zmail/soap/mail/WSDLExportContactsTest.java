@@ -12,10 +12,10 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.mail;
+package org.zmail.soap.mail;
 
 import com.sun.xml.ws.developer.WSBindingProvider;
-import com.zimbra.soap.Utility;
+import org.zmail.soap.Utility;
 import generated.zcsclient.mail.testExportContactsRequest;
 import generated.zcsclient.mail.testExportContactsResponse;
 import generated.zcsclient.ws.service.ZcsPortType;
@@ -47,7 +47,7 @@ public class WSDLExportContactsTest {
      * Current assumption : user1 exists with password test123
      */
     @Test
-    public void defaultZimbraFmt() throws Exception {
+    public void defaultZmailFmt() throws Exception {
        testExportContactsRequest req = new testExportContactsRequest();
        req.setCt("csv");
        Utility.addSoapAcctAuthHeader((WSBindingProvider)mailSvcEIF);

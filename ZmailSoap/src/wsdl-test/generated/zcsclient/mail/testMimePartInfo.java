@@ -35,8 +35,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="mp" type="{urn:zimbraMail}mimePartInfo" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="attach" type="{urn:zimbraMail}attachmentsInfo" minOccurs="0"/>
+ *         &lt;element name="mp" type="{urn:zmailMail}mimePartInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="attach" type="{urn:zmailMail}attachmentsInfo" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="ct" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="content" type="{http://www.w3.org/2001/XMLSchema}string" />

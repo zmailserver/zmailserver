@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.mail;
+package org.zmail.soap.mail;
 
 import java.util.List;
 
@@ -27,12 +27,12 @@ import org.junit.Test;
 import org.junit.rules.TestName;
 
 import com.google.common.collect.ImmutableList;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.JaxbUtil;
-import com.zimbra.soap.mail.message.SendMsgRequest;
-import com.zimbra.soap.mail.type.Msg;
-import com.zimbra.soap.mail.type.MsgToSend;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.JaxbUtil;
+import org.zmail.soap.mail.message.SendMsgRequest;
+import org.zmail.soap.mail.type.Msg;
+import org.zmail.soap.mail.type.MsgToSend;
 
 /**
  * Unit test for {@link SendMsgRequest}.

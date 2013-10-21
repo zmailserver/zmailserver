@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="callerIdBlockingFeature">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraVoice}callFeatureInfo">
+ *     &lt;extension base="{urn:zmailVoice}callFeatureInfo">
  *       &lt;sequence>
  *       &lt;/sequence>
  *     &lt;/extension>

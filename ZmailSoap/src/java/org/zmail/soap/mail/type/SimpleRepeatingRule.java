@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.type;
+package org.zmail.soap.mail.type;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -27,22 +27,22 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.base.ByDayRuleInterface;
-import com.zimbra.soap.base.ByHourRuleInterface;
-import com.zimbra.soap.base.ByMinuteRuleInterface;
-import com.zimbra.soap.base.ByMonthDayRuleInterface;
-import com.zimbra.soap.base.ByMonthRuleInterface;
-import com.zimbra.soap.base.BySecondRuleInterface;
-import com.zimbra.soap.base.BySetPosRuleInterface;
-import com.zimbra.soap.base.ByWeekNoRuleInterface;
-import com.zimbra.soap.base.ByYearDayRuleInterface;
-import com.zimbra.soap.base.DateTimeStringAttrInterface;
-import com.zimbra.soap.base.IntervalRuleInterface;
-import com.zimbra.soap.base.NumAttrInterface;
-import com.zimbra.soap.base.SimpleRepeatingRuleInterface;
-import com.zimbra.soap.base.WkstRuleInterface;
-import com.zimbra.soap.base.XNameRuleInterface;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.base.ByDayRuleInterface;
+import org.zmail.soap.base.ByHourRuleInterface;
+import org.zmail.soap.base.ByMinuteRuleInterface;
+import org.zmail.soap.base.ByMonthDayRuleInterface;
+import org.zmail.soap.base.ByMonthRuleInterface;
+import org.zmail.soap.base.BySecondRuleInterface;
+import org.zmail.soap.base.BySetPosRuleInterface;
+import org.zmail.soap.base.ByWeekNoRuleInterface;
+import org.zmail.soap.base.ByYearDayRuleInterface;
+import org.zmail.soap.base.DateTimeStringAttrInterface;
+import org.zmail.soap.base.IntervalRuleInterface;
+import org.zmail.soap.base.NumAttrInterface;
+import org.zmail.soap.base.SimpleRepeatingRuleInterface;
+import org.zmail.soap.base.WkstRuleInterface;
+import org.zmail.soap.base.XNameRuleInterface;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class SimpleRepeatingRule

@@ -40,7 +40,7 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _Context_QNAME = new QName("urn:zimbra", "context");
+    private final static QName _Context_QNAME = new QName("urn:zmail", "context");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: generated.zcsclient.zm
@@ -221,7 +221,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testHeaderContext }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbra", name = "context")
+    @XmlElementDecl(namespace = "urn:zmail", name = "context")
     public JAXBElement<testHeaderContext> createContext(testHeaderContext value) {
         return new JAXBElement<testHeaderContext>(_Context_QNAME, testHeaderContext.class, null, value);
     }

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.type;
+package org.zmail.soap.admin.type;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -21,8 +21,8 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlValue;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class DomainSelector {
@@ -39,9 +39,9 @@ public class DomainSelector {
             }
         }
 
-        public com.zimbra.common.account.Key.DomainBy toKeyDomainBy()
+        public org.zmail.common.account.Key.DomainBy toKeyDomainBy()
         throws ServiceException {
-            return com.zimbra.common.account.Key.DomainBy.fromString(this.name());
+            return org.zmail.common.account.Key.DomainBy.fromString(this.name());
         }
     }
 

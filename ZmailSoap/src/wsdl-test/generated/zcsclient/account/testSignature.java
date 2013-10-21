@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="content" type="{urn:zimbraAccount}signatureContent" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="content" type="{urn:zmailAccount}signatureContent" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="cid" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}string" />

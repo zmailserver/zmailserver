@@ -33,9 +33,9 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="featureWithCallerList">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraVoice}callFeatureInfo">
+ *     &lt;extension base="{urn:zmailVoice}callFeatureInfo">
  *       &lt;sequence>
- *         &lt;element name="phone" type="{urn:zimbraVoice}callerListEntry" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="phone" type="{urn:zmailVoice}callerListEntry" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/extension>
  *   &lt;/complexContent>

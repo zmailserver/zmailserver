@@ -433,7 +433,7 @@ import generated.zcsclient.voice.testVoiceMsgActionResponse;
  * Generated source version: 2.1
  * 
  */
-@WebService(name = "zcsPortType", targetNamespace = "http://www.zimbra.com/wsdl/ZimbraService.wsdl")
+@WebService(name = "zcsPortType", targetNamespace = "http://www.zmail.com/wsdl/ZmailService.wsdl")
 @SOAPBinding(parameterStyle = SOAPBinding.ParameterStyle.BARE)
 @XmlSeeAlso({
     generated.zcsclient.mail.ObjectFactory.class,
@@ -454,10 +454,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.account.testAuthResponse
      */
-    @WebMethod(action = "urn:zimbraAccount/Auth")
-    @WebResult(name = "AuthResponse", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+    @WebMethod(action = "urn:zmailAccount/Auth")
+    @WebResult(name = "AuthResponse", targetNamespace = "urn:zmailAccount", partName = "parameters")
     public testAuthResponse authRequest(
-        @WebParam(name = "AuthRequest", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+        @WebParam(name = "AuthRequest", targetNamespace = "urn:zmailAccount", partName = "parameters")
         testAuthRequest parameters);
 
     /**
@@ -466,10 +466,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.account.testAutoCompleteGalResponse
      */
-    @WebMethod(action = "urn:zimbraAccount/AutoCompleteGal")
-    @WebResult(name = "AutoCompleteGalResponse", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+    @WebMethod(action = "urn:zmailAccount/AutoCompleteGal")
+    @WebResult(name = "AutoCompleteGalResponse", targetNamespace = "urn:zmailAccount", partName = "parameters")
     public testAutoCompleteGalResponse autoCompleteGalRequest(
-        @WebParam(name = "AutoCompleteGalRequest", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+        @WebParam(name = "AutoCompleteGalRequest", targetNamespace = "urn:zmailAccount", partName = "parameters")
         testAutoCompleteGalRequest parameters);
 
     /**
@@ -478,10 +478,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.account.testChangePasswordResponse
      */
-    @WebMethod(action = "urn:zimbraAccount/ChangePassword")
-    @WebResult(name = "ChangePasswordResponse", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+    @WebMethod(action = "urn:zmailAccount/ChangePassword")
+    @WebResult(name = "ChangePasswordResponse", targetNamespace = "urn:zmailAccount", partName = "parameters")
     public testChangePasswordResponse changePasswordRequest(
-        @WebParam(name = "ChangePasswordRequest", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+        @WebParam(name = "ChangePasswordRequest", targetNamespace = "urn:zmailAccount", partName = "parameters")
         testChangePasswordRequest parameters);
 
     /**
@@ -490,10 +490,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.account.testCheckLicenseResponse
      */
-    @WebMethod(action = "urn:zimbraAccount/CheckLicense")
-    @WebResult(name = "CheckLicenseResponse", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+    @WebMethod(action = "urn:zmailAccount/CheckLicense")
+    @WebResult(name = "CheckLicenseResponse", targetNamespace = "urn:zmailAccount", partName = "parameters")
     public testCheckLicenseResponse checkLicenseRequest(
-        @WebParam(name = "CheckLicenseRequest", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+        @WebParam(name = "CheckLicenseRequest", targetNamespace = "urn:zmailAccount", partName = "parameters")
         testCheckLicenseRequest parameters);
 
     /**
@@ -502,10 +502,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.account.testCheckRightsResponse
      */
-    @WebMethod(action = "urn:zimbraAccount/CheckRights")
-    @WebResult(name = "CheckRightsResponse", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+    @WebMethod(action = "urn:zmailAccount/CheckRights")
+    @WebResult(name = "CheckRightsResponse", targetNamespace = "urn:zmailAccount", partName = "parameters")
     public testCheckRightsResponse checkRightsRequest(
-        @WebParam(name = "CheckRightsRequest", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+        @WebParam(name = "CheckRightsRequest", targetNamespace = "urn:zmailAccount", partName = "parameters")
         testCheckRightsRequest parameters);
 
     /**
@@ -514,10 +514,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.account.testCreateDistributionListResponse
      */
-    @WebMethod(action = "urn:zimbraAccount/CreateDistributionList")
-    @WebResult(name = "CreateDistributionListResponse", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+    @WebMethod(action = "urn:zmailAccount/CreateDistributionList")
+    @WebResult(name = "CreateDistributionListResponse", targetNamespace = "urn:zmailAccount", partName = "parameters")
     public testCreateDistributionListResponse createDistributionListRequest(
-        @WebParam(name = "CreateDistributionListRequest", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+        @WebParam(name = "CreateDistributionListRequest", targetNamespace = "urn:zmailAccount", partName = "parameters")
         testCreateDistributionListRequest parameters);
 
     /**
@@ -526,10 +526,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.account.testCreateIdentityResponse
      */
-    @WebMethod(action = "urn:zimbraAccount/CreateIdentity")
-    @WebResult(name = "CreateIdentityResponse", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+    @WebMethod(action = "urn:zmailAccount/CreateIdentity")
+    @WebResult(name = "CreateIdentityResponse", targetNamespace = "urn:zmailAccount", partName = "parameters")
     public testCreateIdentityResponse createIdentityRequest(
-        @WebParam(name = "CreateIdentityRequest", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+        @WebParam(name = "CreateIdentityRequest", targetNamespace = "urn:zmailAccount", partName = "parameters")
         testCreateIdentityRequest parameters);
 
     /**
@@ -538,10 +538,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.account.testCreateSignatureResponse
      */
-    @WebMethod(action = "urn:zimbraAccount/CreateSignature")
-    @WebResult(name = "CreateSignatureResponse", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+    @WebMethod(action = "urn:zmailAccount/CreateSignature")
+    @WebResult(name = "CreateSignatureResponse", targetNamespace = "urn:zmailAccount", partName = "parameters")
     public testCreateSignatureResponse createSignatureRequest(
-        @WebParam(name = "CreateSignatureRequest", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+        @WebParam(name = "CreateSignatureRequest", targetNamespace = "urn:zmailAccount", partName = "parameters")
         testCreateSignatureRequest parameters);
 
     /**
@@ -550,10 +550,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.account.testDeleteIdentityResponse
      */
-    @WebMethod(action = "urn:zimbraAccount/DeleteIdentity")
-    @WebResult(name = "DeleteIdentityResponse", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+    @WebMethod(action = "urn:zmailAccount/DeleteIdentity")
+    @WebResult(name = "DeleteIdentityResponse", targetNamespace = "urn:zmailAccount", partName = "parameters")
     public testDeleteIdentityResponse deleteIdentityRequest(
-        @WebParam(name = "DeleteIdentityRequest", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+        @WebParam(name = "DeleteIdentityRequest", targetNamespace = "urn:zmailAccount", partName = "parameters")
         testDeleteIdentityRequest parameters);
 
     /**
@@ -562,10 +562,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.account.testDeleteSignatureResponse
      */
-    @WebMethod(action = "urn:zimbraAccount/DeleteSignature")
-    @WebResult(name = "DeleteSignatureResponse", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+    @WebMethod(action = "urn:zmailAccount/DeleteSignature")
+    @WebResult(name = "DeleteSignatureResponse", targetNamespace = "urn:zmailAccount", partName = "parameters")
     public testDeleteSignatureResponse deleteSignatureRequest(
-        @WebParam(name = "DeleteSignatureRequest", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+        @WebParam(name = "DeleteSignatureRequest", targetNamespace = "urn:zmailAccount", partName = "parameters")
         testDeleteSignatureRequest parameters);
 
     /**
@@ -574,10 +574,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.account.testDiscoverRightsResponse
      */
-    @WebMethod(action = "urn:zimbraAccount/DiscoverRights")
-    @WebResult(name = "DiscoverRightsResponse", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+    @WebMethod(action = "urn:zmailAccount/DiscoverRights")
+    @WebResult(name = "DiscoverRightsResponse", targetNamespace = "urn:zmailAccount", partName = "parameters")
     public testDiscoverRightsResponse discoverRightsRequest(
-        @WebParam(name = "DiscoverRightsRequest", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+        @WebParam(name = "DiscoverRightsRequest", targetNamespace = "urn:zmailAccount", partName = "parameters")
         testDiscoverRightsRequest parameters);
 
     /**
@@ -586,10 +586,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.account.testDistributionListActionResponse
      */
-    @WebMethod(action = "urn:zimbraAccount/DistributionListAction")
-    @WebResult(name = "DistributionListActionResponse", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+    @WebMethod(action = "urn:zmailAccount/DistributionListAction")
+    @WebResult(name = "DistributionListActionResponse", targetNamespace = "urn:zmailAccount", partName = "parameters")
     public testDistributionListActionResponse distributionListActionRequest(
-        @WebParam(name = "DistributionListActionRequest", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+        @WebParam(name = "DistributionListActionRequest", targetNamespace = "urn:zmailAccount", partName = "parameters")
         testDistributionListActionRequest parameters);
 
     /**
@@ -598,10 +598,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.account.testEndSessionResponse
      */
-    @WebMethod(action = "urn:zimbraAccount/EndSession")
-    @WebResult(name = "EndSessionResponse", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+    @WebMethod(action = "urn:zmailAccount/EndSession")
+    @WebResult(name = "EndSessionResponse", targetNamespace = "urn:zmailAccount", partName = "parameters")
     public testEndSessionResponse endSessionRequest(
-        @WebParam(name = "EndSessionRequest", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+        @WebParam(name = "EndSessionRequest", targetNamespace = "urn:zmailAccount", partName = "parameters")
         testEndSessionRequest parameters);
 
     /**
@@ -610,10 +610,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.account.testGetAccountDistributionListsResponse
      */
-    @WebMethod(action = "urn:zimbraAccount/GetAccountDistributionLists")
-    @WebResult(name = "GetAccountDistributionListsResponse", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+    @WebMethod(action = "urn:zmailAccount/GetAccountDistributionLists")
+    @WebResult(name = "GetAccountDistributionListsResponse", targetNamespace = "urn:zmailAccount", partName = "parameters")
     public testGetAccountDistributionListsResponse getAccountDistributionListsRequest(
-        @WebParam(name = "GetAccountDistributionListsRequest", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+        @WebParam(name = "GetAccountDistributionListsRequest", targetNamespace = "urn:zmailAccount", partName = "parameters")
         testGetAccountDistributionListsRequest parameters);
 
     /**
@@ -622,10 +622,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.account.testGetAccountInfoResponse
      */
-    @WebMethod(action = "urn:zimbraAccount/GetAccountInfo")
-    @WebResult(name = "GetAccountInfoResponse", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+    @WebMethod(action = "urn:zmailAccount/GetAccountInfo")
+    @WebResult(name = "GetAccountInfoResponse", targetNamespace = "urn:zmailAccount", partName = "parameters")
     public testGetAccountInfoResponse getAccountInfoRequest(
-        @WebParam(name = "GetAccountInfoRequest", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+        @WebParam(name = "GetAccountInfoRequest", targetNamespace = "urn:zmailAccount", partName = "parameters")
         testGetAccountInfoRequest parameters);
 
     /**
@@ -634,10 +634,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.account.testGetAllLocalesResponse
      */
-    @WebMethod(action = "urn:zimbraAccount/GetAllLocales")
-    @WebResult(name = "GetAllLocalesResponse", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+    @WebMethod(action = "urn:zmailAccount/GetAllLocales")
+    @WebResult(name = "GetAllLocalesResponse", targetNamespace = "urn:zmailAccount", partName = "parameters")
     public testGetAllLocalesResponse getAllLocalesRequest(
-        @WebParam(name = "GetAllLocalesRequest", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+        @WebParam(name = "GetAllLocalesRequest", targetNamespace = "urn:zmailAccount", partName = "parameters")
         testGetAllLocalesRequest parameters);
 
     /**
@@ -646,10 +646,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.account.testGetAvailableCsvFormatsResponse
      */
-    @WebMethod(action = "urn:zimbraAccount/GetAvailableCsvFormats")
-    @WebResult(name = "GetAvailableCsvFormatsResponse", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+    @WebMethod(action = "urn:zmailAccount/GetAvailableCsvFormats")
+    @WebResult(name = "GetAvailableCsvFormatsResponse", targetNamespace = "urn:zmailAccount", partName = "parameters")
     public testGetAvailableCsvFormatsResponse getAvailableCsvFormatsRequest(
-        @WebParam(name = "GetAvailableCsvFormatsRequest", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+        @WebParam(name = "GetAvailableCsvFormatsRequest", targetNamespace = "urn:zmailAccount", partName = "parameters")
         testGetAvailableCsvFormatsRequest parameters);
 
     /**
@@ -658,10 +658,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.account.testGetAvailableLocalesResponse
      */
-    @WebMethod(action = "urn:zimbraAccount/GetAvailableLocales")
-    @WebResult(name = "GetAvailableLocalesResponse", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+    @WebMethod(action = "urn:zmailAccount/GetAvailableLocales")
+    @WebResult(name = "GetAvailableLocalesResponse", targetNamespace = "urn:zmailAccount", partName = "parameters")
     public testGetAvailableLocalesResponse getAvailableLocalesRequest(
-        @WebParam(name = "GetAvailableLocalesRequest", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+        @WebParam(name = "GetAvailableLocalesRequest", targetNamespace = "urn:zmailAccount", partName = "parameters")
         testGetAvailableLocalesRequest parameters);
 
     /**
@@ -670,10 +670,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.account.testGetAvailableSkinsResponse
      */
-    @WebMethod(action = "urn:zimbraAccount/GetAvailableSkins")
-    @WebResult(name = "GetAvailableSkinsResponse", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+    @WebMethod(action = "urn:zmailAccount/GetAvailableSkins")
+    @WebResult(name = "GetAvailableSkinsResponse", targetNamespace = "urn:zmailAccount", partName = "parameters")
     public testGetAvailableSkinsResponse getAvailableSkinsRequest(
-        @WebParam(name = "GetAvailableSkinsRequest", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+        @WebParam(name = "GetAvailableSkinsRequest", targetNamespace = "urn:zmailAccount", partName = "parameters")
         testGetAvailableSkinsRequest parameters);
 
     /**
@@ -682,10 +682,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.account.testGetDistributionListMembersResponse
      */
-    @WebMethod(action = "urn:zimbraAccount/GetDistributionListMembers")
-    @WebResult(name = "GetDistributionListMembersResponse", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+    @WebMethod(action = "urn:zmailAccount/GetDistributionListMembers")
+    @WebResult(name = "GetDistributionListMembersResponse", targetNamespace = "urn:zmailAccount", partName = "parameters")
     public testGetDistributionListMembersResponse getDistributionListMembersRequest(
-        @WebParam(name = "GetDistributionListMembersRequest", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+        @WebParam(name = "GetDistributionListMembersRequest", targetNamespace = "urn:zmailAccount", partName = "parameters")
         testGetDistributionListMembersRequest parameters);
 
     /**
@@ -694,10 +694,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.account.testGetDistributionListResponse
      */
-    @WebMethod(action = "urn:zimbraAccount/GetDistributionList")
-    @WebResult(name = "GetDistributionListResponse", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+    @WebMethod(action = "urn:zmailAccount/GetDistributionList")
+    @WebResult(name = "GetDistributionListResponse", targetNamespace = "urn:zmailAccount", partName = "parameters")
     public testGetDistributionListResponse getDistributionListRequest(
-        @WebParam(name = "GetDistributionListRequest", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+        @WebParam(name = "GetDistributionListRequest", targetNamespace = "urn:zmailAccount", partName = "parameters")
         testGetDistributionListRequest parameters);
 
     /**
@@ -706,10 +706,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.account.testGetIdentitiesResponse
      */
-    @WebMethod(action = "urn:zimbraAccount/GetIdentities")
-    @WebResult(name = "GetIdentitiesResponse", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+    @WebMethod(action = "urn:zmailAccount/GetIdentities")
+    @WebResult(name = "GetIdentitiesResponse", targetNamespace = "urn:zmailAccount", partName = "parameters")
     public testGetIdentitiesResponse getIdentitiesRequest(
-        @WebParam(name = "GetIdentitiesRequest", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+        @WebParam(name = "GetIdentitiesRequest", targetNamespace = "urn:zmailAccount", partName = "parameters")
         testGetIdentitiesRequest parameters);
 
     /**
@@ -718,10 +718,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.account.testGetInfoResponse
      */
-    @WebMethod(action = "urn:zimbraAccount/GetInfo")
-    @WebResult(name = "GetInfoResponse", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+    @WebMethod(action = "urn:zmailAccount/GetInfo")
+    @WebResult(name = "GetInfoResponse", targetNamespace = "urn:zmailAccount", partName = "parameters")
     public testGetInfoResponse getInfoRequest(
-        @WebParam(name = "GetInfoRequest", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+        @WebParam(name = "GetInfoRequest", targetNamespace = "urn:zmailAccount", partName = "parameters")
         testGetInfoRequest parameters);
 
     /**
@@ -730,10 +730,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.account.testGetPrefsResponse
      */
-    @WebMethod(action = "urn:zimbraAccount/GetPrefs")
-    @WebResult(name = "GetPrefsResponse", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+    @WebMethod(action = "urn:zmailAccount/GetPrefs")
+    @WebResult(name = "GetPrefsResponse", targetNamespace = "urn:zmailAccount", partName = "parameters")
     public testGetPrefsResponse getPrefsRequest(
-        @WebParam(name = "GetPrefsRequest", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+        @WebParam(name = "GetPrefsRequest", targetNamespace = "urn:zmailAccount", partName = "parameters")
         testGetPrefsRequest parameters);
 
     /**
@@ -742,10 +742,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.account.testGetRightsResponse
      */
-    @WebMethod(action = "urn:zimbraAccount/GetRights")
-    @WebResult(name = "GetRightsResponse", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+    @WebMethod(action = "urn:zmailAccount/GetRights")
+    @WebResult(name = "GetRightsResponse", targetNamespace = "urn:zmailAccount", partName = "parameters")
     public testGetRightsResponse getRightsRequest(
-        @WebParam(name = "GetRightsRequest", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+        @WebParam(name = "GetRightsRequest", targetNamespace = "urn:zmailAccount", partName = "parameters")
         testGetRightsRequest parameters);
 
     /**
@@ -754,10 +754,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.account.testGetSMIMEPublicCertsResponse
      */
-    @WebMethod(action = "urn:zimbraAccount/GetSMIMEPublicCerts")
-    @WebResult(name = "GetSMIMEPublicCertsResponse", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+    @WebMethod(action = "urn:zmailAccount/GetSMIMEPublicCerts")
+    @WebResult(name = "GetSMIMEPublicCertsResponse", targetNamespace = "urn:zmailAccount", partName = "parameters")
     public testGetSMIMEPublicCertsResponse getSMIMEPublicCertsRequest(
-        @WebParam(name = "GetSMIMEPublicCertsRequest", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+        @WebParam(name = "GetSMIMEPublicCertsRequest", targetNamespace = "urn:zmailAccount", partName = "parameters")
         testGetSMIMEPublicCertsRequest parameters);
 
     /**
@@ -766,10 +766,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.account.testGetShareInfoResponse
      */
-    @WebMethod(action = "urn:zimbraAccount/GetShareInfo")
-    @WebResult(name = "GetShareInfoResponse", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+    @WebMethod(action = "urn:zmailAccount/GetShareInfo")
+    @WebResult(name = "GetShareInfoResponse", targetNamespace = "urn:zmailAccount", partName = "parameters")
     public testGetShareInfoResponse getShareInfoRequest(
-        @WebParam(name = "GetShareInfoRequest", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+        @WebParam(name = "GetShareInfoRequest", targetNamespace = "urn:zmailAccount", partName = "parameters")
         testGetShareInfoRequest parameters);
 
     /**
@@ -778,10 +778,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.account.testGetSignaturesResponse
      */
-    @WebMethod(action = "urn:zimbraAccount/GetSignatures")
-    @WebResult(name = "GetSignaturesResponse", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+    @WebMethod(action = "urn:zmailAccount/GetSignatures")
+    @WebResult(name = "GetSignaturesResponse", targetNamespace = "urn:zmailAccount", partName = "parameters")
     public testGetSignaturesResponse getSignaturesRequest(
-        @WebParam(name = "GetSignaturesRequest", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+        @WebParam(name = "GetSignaturesRequest", targetNamespace = "urn:zmailAccount", partName = "parameters")
         testGetSignaturesRequest parameters);
 
     /**
@@ -790,10 +790,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.account.testGetVersionInfoResponse
      */
-    @WebMethod(action = "urn:zimbraAccount/GetVersionInfo")
-    @WebResult(name = "GetVersionInfoResponse", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+    @WebMethod(action = "urn:zmailAccount/GetVersionInfo")
+    @WebResult(name = "GetVersionInfoResponse", targetNamespace = "urn:zmailAccount", partName = "parameters")
     public testGetVersionInfoResponse getVersionInfoRequest(
-        @WebParam(name = "GetVersionInfoRequest", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+        @WebParam(name = "GetVersionInfoRequest", targetNamespace = "urn:zmailAccount", partName = "parameters")
         testGetVersionInfoRequest parameters);
 
     /**
@@ -802,10 +802,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.account.testGetWhiteBlackListResponse
      */
-    @WebMethod(action = "urn:zimbraAccount/GetWhiteBlackList")
-    @WebResult(name = "GetWhiteBlackListResponse", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+    @WebMethod(action = "urn:zmailAccount/GetWhiteBlackList")
+    @WebResult(name = "GetWhiteBlackListResponse", targetNamespace = "urn:zmailAccount", partName = "parameters")
     public testGetWhiteBlackListResponse getWhiteBlackListRequest(
-        @WebParam(name = "GetWhiteBlackListRequest", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+        @WebParam(name = "GetWhiteBlackListRequest", targetNamespace = "urn:zmailAccount", partName = "parameters")
         testGetWhiteBlackListRequest parameters);
 
     /**
@@ -814,10 +814,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.account.testGrantRightsResponse
      */
-    @WebMethod(action = "urn:zimbraAccount/GrantRights")
-    @WebResult(name = "GrantRightsResponse", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+    @WebMethod(action = "urn:zmailAccount/GrantRights")
+    @WebResult(name = "GrantRightsResponse", targetNamespace = "urn:zmailAccount", partName = "parameters")
     public testGrantRightsResponse grantRightsRequest(
-        @WebParam(name = "GrantRightsRequest", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+        @WebParam(name = "GrantRightsRequest", targetNamespace = "urn:zmailAccount", partName = "parameters")
         testGrantRightsRequest parameters);
 
     /**
@@ -826,10 +826,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.account.testModifyIdentityResponse
      */
-    @WebMethod(action = "urn:zimbraAccount/ModifyIdentity")
-    @WebResult(name = "ModifyIdentityResponse", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+    @WebMethod(action = "urn:zmailAccount/ModifyIdentity")
+    @WebResult(name = "ModifyIdentityResponse", targetNamespace = "urn:zmailAccount", partName = "parameters")
     public testModifyIdentityResponse modifyIdentityRequest(
-        @WebParam(name = "ModifyIdentityRequest", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+        @WebParam(name = "ModifyIdentityRequest", targetNamespace = "urn:zmailAccount", partName = "parameters")
         testModifyIdentityRequest parameters);
 
     /**
@@ -838,10 +838,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.account.testModifyPrefsResponse
      */
-    @WebMethod(action = "urn:zimbraAccount/ModifyPrefs")
-    @WebResult(name = "ModifyPrefsResponse", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+    @WebMethod(action = "urn:zmailAccount/ModifyPrefs")
+    @WebResult(name = "ModifyPrefsResponse", targetNamespace = "urn:zmailAccount", partName = "parameters")
     public testModifyPrefsResponse modifyPrefsRequest(
-        @WebParam(name = "ModifyPrefsRequest", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+        @WebParam(name = "ModifyPrefsRequest", targetNamespace = "urn:zmailAccount", partName = "parameters")
         testModifyPrefsRequest parameters);
 
     /**
@@ -850,10 +850,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.account.testModifyPropertiesResponse
      */
-    @WebMethod(action = "urn:zimbraAccount/ModifyProperties")
-    @WebResult(name = "ModifyPropertiesResponse", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+    @WebMethod(action = "urn:zmailAccount/ModifyProperties")
+    @WebResult(name = "ModifyPropertiesResponse", targetNamespace = "urn:zmailAccount", partName = "parameters")
     public testModifyPropertiesResponse modifyPropertiesRequest(
-        @WebParam(name = "ModifyPropertiesRequest", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+        @WebParam(name = "ModifyPropertiesRequest", targetNamespace = "urn:zmailAccount", partName = "parameters")
         testModifyPropertiesRequest parameters);
 
     /**
@@ -862,10 +862,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.account.testModifySignatureResponse
      */
-    @WebMethod(action = "urn:zimbraAccount/ModifySignature")
-    @WebResult(name = "ModifySignatureResponse", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+    @WebMethod(action = "urn:zmailAccount/ModifySignature")
+    @WebResult(name = "ModifySignatureResponse", targetNamespace = "urn:zmailAccount", partName = "parameters")
     public testModifySignatureResponse modifySignatureRequest(
-        @WebParam(name = "ModifySignatureRequest", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+        @WebParam(name = "ModifySignatureRequest", targetNamespace = "urn:zmailAccount", partName = "parameters")
         testModifySignatureRequest parameters);
 
     /**
@@ -874,10 +874,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.account.testModifyWhiteBlackListResponse
      */
-    @WebMethod(action = "urn:zimbraAccount/ModifyWhiteBlackList")
-    @WebResult(name = "ModifyWhiteBlackListResponse", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+    @WebMethod(action = "urn:zmailAccount/ModifyWhiteBlackList")
+    @WebResult(name = "ModifyWhiteBlackListResponse", targetNamespace = "urn:zmailAccount", partName = "parameters")
     public testModifyWhiteBlackListResponse modifyWhiteBlackListRequest(
-        @WebParam(name = "ModifyWhiteBlackListRequest", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+        @WebParam(name = "ModifyWhiteBlackListRequest", targetNamespace = "urn:zmailAccount", partName = "parameters")
         testModifyWhiteBlackListRequest parameters);
 
     /**
@@ -886,10 +886,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.account.testModifyZimletPrefsResponse
      */
-    @WebMethod(action = "urn:zimbraAccount/ModifyZimletPrefs")
-    @WebResult(name = "ModifyZimletPrefsResponse", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+    @WebMethod(action = "urn:zmailAccount/ModifyZimletPrefs")
+    @WebResult(name = "ModifyZimletPrefsResponse", targetNamespace = "urn:zmailAccount", partName = "parameters")
     public testModifyZimletPrefsResponse modifyZimletPrefsRequest(
-        @WebParam(name = "ModifyZimletPrefsRequest", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+        @WebParam(name = "ModifyZimletPrefsRequest", targetNamespace = "urn:zmailAccount", partName = "parameters")
         testModifyZimletPrefsRequest parameters);
 
     /**
@@ -898,10 +898,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.account.testRevokeRightsResponse
      */
-    @WebMethod(action = "urn:zimbraAccount/RevokeRights")
-    @WebResult(name = "RevokeRightsResponse", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+    @WebMethod(action = "urn:zmailAccount/RevokeRights")
+    @WebResult(name = "RevokeRightsResponse", targetNamespace = "urn:zmailAccount", partName = "parameters")
     public testRevokeRightsResponse revokeRightsRequest(
-        @WebParam(name = "RevokeRightsRequest", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+        @WebParam(name = "RevokeRightsRequest", targetNamespace = "urn:zmailAccount", partName = "parameters")
         testRevokeRightsRequest parameters);
 
     /**
@@ -910,10 +910,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.account.testSearchCalendarResourcesResponse
      */
-    @WebMethod(action = "urn:zimbraAccount/SearchCalendarResources")
-    @WebResult(name = "SearchCalendarResourcesResponse", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+    @WebMethod(action = "urn:zmailAccount/SearchCalendarResources")
+    @WebResult(name = "SearchCalendarResourcesResponse", targetNamespace = "urn:zmailAccount", partName = "parameters")
     public testSearchCalendarResourcesResponse searchCalendarResourcesRequest(
-        @WebParam(name = "SearchCalendarResourcesRequest", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+        @WebParam(name = "SearchCalendarResourcesRequest", targetNamespace = "urn:zmailAccount", partName = "parameters")
         testSearchCalendarResourcesRequest parameters);
 
     /**
@@ -922,10 +922,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.account.testSearchGalResponse
      */
-    @WebMethod(action = "urn:zimbraAccount/SearchGal")
-    @WebResult(name = "SearchGalResponse", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+    @WebMethod(action = "urn:zmailAccount/SearchGal")
+    @WebResult(name = "SearchGalResponse", targetNamespace = "urn:zmailAccount", partName = "parameters")
     public testSearchGalResponse searchGalRequest(
-        @WebParam(name = "SearchGalRequest", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+        @WebParam(name = "SearchGalRequest", targetNamespace = "urn:zmailAccount", partName = "parameters")
         testSearchGalRequest parameters);
 
     /**
@@ -934,10 +934,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.account.testSubscribeDistributionListResponse
      */
-    @WebMethod(action = "urn:zimbraAccount/SubscribeDistributionList")
-    @WebResult(name = "SubscribeDistributionListResponse", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+    @WebMethod(action = "urn:zmailAccount/SubscribeDistributionList")
+    @WebResult(name = "SubscribeDistributionListResponse", targetNamespace = "urn:zmailAccount", partName = "parameters")
     public testSubscribeDistributionListResponse subscribeDistributionListRequest(
-        @WebParam(name = "SubscribeDistributionListRequest", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+        @WebParam(name = "SubscribeDistributionListRequest", targetNamespace = "urn:zmailAccount", partName = "parameters")
         testSubscribeDistributionListRequest parameters);
 
     /**
@@ -946,10 +946,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.account.testSyncGalResponse
      */
-    @WebMethod(action = "urn:zimbraAccount/SyncGal")
-    @WebResult(name = "SyncGalResponse", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+    @WebMethod(action = "urn:zmailAccount/SyncGal")
+    @WebResult(name = "SyncGalResponse", targetNamespace = "urn:zmailAccount", partName = "parameters")
     public testSyncGalResponse syncGalRequest(
-        @WebParam(name = "SyncGalRequest", targetNamespace = "urn:zimbraAccount", partName = "parameters")
+        @WebParam(name = "SyncGalRequest", targetNamespace = "urn:zmailAccount", partName = "parameters")
         testSyncGalRequest parameters);
 
     /**
@@ -958,10 +958,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testAddAppointmentInviteResponse
      */
-    @WebMethod(action = "urn:zimbraMail/AddAppointmentInvite")
-    @WebResult(name = "AddAppointmentInviteResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/AddAppointmentInvite")
+    @WebResult(name = "AddAppointmentInviteResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testAddAppointmentInviteResponse addAppointmentInviteRequest(
-        @WebParam(name = "AddAppointmentInviteRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "AddAppointmentInviteRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testAddAppointmentInviteRequest parameters);
 
     /**
@@ -970,10 +970,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testAddCommentResponse
      */
-    @WebMethod(action = "urn:zimbraMail/AddComment")
-    @WebResult(name = "AddCommentResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/AddComment")
+    @WebResult(name = "AddCommentResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testAddCommentResponse addCommentRequest(
-        @WebParam(name = "AddCommentRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "AddCommentRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testAddCommentRequest parameters);
 
     /**
@@ -982,10 +982,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testAddMsgResponse
      */
-    @WebMethod(action = "urn:zimbraMail/AddMsg")
-    @WebResult(name = "AddMsgResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/AddMsg")
+    @WebResult(name = "AddMsgResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testAddMsgResponse addMsgRequest(
-        @WebParam(name = "AddMsgRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "AddMsgRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testAddMsgRequest parameters);
 
     /**
@@ -994,10 +994,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testAddTaskInviteResponse
      */
-    @WebMethod(action = "urn:zimbraMail/AddTaskInvite")
-    @WebResult(name = "AddTaskInviteResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/AddTaskInvite")
+    @WebResult(name = "AddTaskInviteResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testAddTaskInviteResponse addTaskInviteRequest(
-        @WebParam(name = "AddTaskInviteRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "AddTaskInviteRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testAddTaskInviteRequest parameters);
 
     /**
@@ -1006,10 +1006,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testAnnounceOrganizerChangeResponse
      */
-    @WebMethod(action = "urn:zimbraMail/AnnounceOrganizerChange")
-    @WebResult(name = "AnnounceOrganizerChangeResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/AnnounceOrganizerChange")
+    @WebResult(name = "AnnounceOrganizerChangeResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testAnnounceOrganizerChangeResponse announceOrganizerChangeRequest(
-        @WebParam(name = "AnnounceOrganizerChangeRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "AnnounceOrganizerChangeRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testAnnounceOrganizerChangeRequest parameters);
 
     /**
@@ -1018,10 +1018,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testApplyFilterRulesResponse
      */
-    @WebMethod(action = "urn:zimbraMail/ApplyFilterRules")
-    @WebResult(name = "ApplyFilterRulesResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/ApplyFilterRules")
+    @WebResult(name = "ApplyFilterRulesResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testApplyFilterRulesResponse applyFilterRulesRequest(
-        @WebParam(name = "ApplyFilterRulesRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "ApplyFilterRulesRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testApplyFilterRulesRequest parameters);
 
     /**
@@ -1030,10 +1030,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testApplyOutgoingFilterRulesResponse
      */
-    @WebMethod(action = "urn:zimbraMail/ApplyOutgoingFilterRules")
-    @WebResult(name = "ApplyOutgoingFilterRulesResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/ApplyOutgoingFilterRules")
+    @WebResult(name = "ApplyOutgoingFilterRulesResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testApplyOutgoingFilterRulesResponse applyOutgoingFilterRulesRequest(
-        @WebParam(name = "ApplyOutgoingFilterRulesRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "ApplyOutgoingFilterRulesRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testApplyOutgoingFilterRulesRequest parameters);
 
     /**
@@ -1042,10 +1042,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testAutoCompleteResponse
      */
-    @WebMethod(action = "urn:zimbraMail/AutoComplete")
-    @WebResult(name = "AutoCompleteResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/AutoComplete")
+    @WebResult(name = "AutoCompleteResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testAutoCompleteResponse autoCompleteRequest(
-        @WebParam(name = "AutoCompleteRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "AutoCompleteRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testAutoCompleteRequest parameters);
 
     /**
@@ -1054,10 +1054,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testBounceMsgResponse
      */
-    @WebMethod(action = "urn:zimbraMail/BounceMsg")
-    @WebResult(name = "BounceMsgResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/BounceMsg")
+    @WebResult(name = "BounceMsgResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testBounceMsgResponse bounceMsgRequest(
-        @WebParam(name = "BounceMsgRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "BounceMsgRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testBounceMsgRequest parameters);
 
     /**
@@ -1066,10 +1066,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testBrowseResponse
      */
-    @WebMethod(action = "urn:zimbraMail/Browse")
-    @WebResult(name = "BrowseResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/Browse")
+    @WebResult(name = "BrowseResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testBrowseResponse browseRequest(
-        @WebParam(name = "BrowseRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "BrowseRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testBrowseRequest parameters);
 
     /**
@@ -1078,10 +1078,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testCancelAppointmentResponse
      */
-    @WebMethod(action = "urn:zimbraMail/CancelAppointment")
-    @WebResult(name = "CancelAppointmentResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/CancelAppointment")
+    @WebResult(name = "CancelAppointmentResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testCancelAppointmentResponse cancelAppointmentRequest(
-        @WebParam(name = "CancelAppointmentRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "CancelAppointmentRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testCancelAppointmentRequest parameters);
 
     /**
@@ -1090,10 +1090,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testCancelTaskResponse
      */
-    @WebMethod(action = "urn:zimbraMail/CancelTask")
-    @WebResult(name = "CancelTaskResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/CancelTask")
+    @WebResult(name = "CancelTaskResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testCancelTaskResponse cancelTaskRequest(
-        @WebParam(name = "CancelTaskRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "CancelTaskRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testCancelTaskRequest parameters);
 
     /**
@@ -1102,10 +1102,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testCheckDeviceStatusResponse
      */
-    @WebMethod(action = "urn:zimbraMail/CheckDeviceStatus")
-    @WebResult(name = "CheckDeviceStatusResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/CheckDeviceStatus")
+    @WebResult(name = "CheckDeviceStatusResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testCheckDeviceStatusResponse checkDeviceStatusRequest(
-        @WebParam(name = "CheckDeviceStatusRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "CheckDeviceStatusRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testCheckDeviceStatusRequest parameters);
 
     /**
@@ -1114,10 +1114,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testCheckPermissionResponse
      */
-    @WebMethod(action = "urn:zimbraMail/CheckPermission")
-    @WebResult(name = "CheckPermissionResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/CheckPermission")
+    @WebResult(name = "CheckPermissionResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testCheckPermissionResponse checkPermissionRequest(
-        @WebParam(name = "CheckPermissionRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "CheckPermissionRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testCheckPermissionRequest parameters);
 
     /**
@@ -1126,10 +1126,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testCheckRecurConflictsResponse
      */
-    @WebMethod(action = "urn:zimbraMail/CheckRecurConflicts")
-    @WebResult(name = "CheckRecurConflictsResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/CheckRecurConflicts")
+    @WebResult(name = "CheckRecurConflictsResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testCheckRecurConflictsResponse checkRecurConflictsRequest(
-        @WebParam(name = "CheckRecurConflictsRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "CheckRecurConflictsRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testCheckRecurConflictsRequest parameters);
 
     /**
@@ -1138,10 +1138,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testCheckSpellingResponse
      */
-    @WebMethod(action = "urn:zimbraMail/CheckSpelling")
-    @WebResult(name = "CheckSpellingResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/CheckSpelling")
+    @WebResult(name = "CheckSpellingResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testCheckSpellingResponse checkSpellingRequest(
-        @WebParam(name = "CheckSpellingRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "CheckSpellingRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testCheckSpellingRequest parameters);
 
     /**
@@ -1150,10 +1150,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testCompleteTaskInstanceResponse
      */
-    @WebMethod(action = "urn:zimbraMail/CompleteTaskInstance")
-    @WebResult(name = "CompleteTaskInstanceResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/CompleteTaskInstance")
+    @WebResult(name = "CompleteTaskInstanceResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testCompleteTaskInstanceResponse completeTaskInstanceRequest(
-        @WebParam(name = "CompleteTaskInstanceRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "CompleteTaskInstanceRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testCompleteTaskInstanceRequest parameters);
 
     /**
@@ -1162,10 +1162,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testContactActionResponse
      */
-    @WebMethod(action = "urn:zimbraMail/ContactAction")
-    @WebResult(name = "ContactActionResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/ContactAction")
+    @WebResult(name = "ContactActionResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testContactActionResponse contactActionRequest(
-        @WebParam(name = "ContactActionRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "ContactActionRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testContactActionRequest parameters);
 
     /**
@@ -1174,10 +1174,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testConvActionResponse
      */
-    @WebMethod(action = "urn:zimbraMail/ConvAction")
-    @WebResult(name = "ConvActionResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/ConvAction")
+    @WebResult(name = "ConvActionResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testConvActionResponse convActionRequest(
-        @WebParam(name = "ConvActionRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "ConvActionRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testConvActionRequest parameters);
 
     /**
@@ -1186,10 +1186,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testCounterAppointmentResponse
      */
-    @WebMethod(action = "urn:zimbraMail/CounterAppointment")
-    @WebResult(name = "CounterAppointmentResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/CounterAppointment")
+    @WebResult(name = "CounterAppointmentResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testCounterAppointmentResponse counterAppointmentRequest(
-        @WebParam(name = "CounterAppointmentRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "CounterAppointmentRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testCounterAppointmentRequest parameters);
 
     /**
@@ -1198,10 +1198,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testCreateAppointmentExceptionResponse
      */
-    @WebMethod(action = "urn:zimbraMail/CreateAppointmentException")
-    @WebResult(name = "CreateAppointmentExceptionResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/CreateAppointmentException")
+    @WebResult(name = "CreateAppointmentExceptionResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testCreateAppointmentExceptionResponse createAppointmentExceptionRequest(
-        @WebParam(name = "CreateAppointmentExceptionRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "CreateAppointmentExceptionRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testCreateAppointmentExceptionRequest parameters);
 
     /**
@@ -1210,10 +1210,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testCreateAppointmentResponse
      */
-    @WebMethod(action = "urn:zimbraMail/CreateAppointment")
-    @WebResult(name = "CreateAppointmentResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/CreateAppointment")
+    @WebResult(name = "CreateAppointmentResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testCreateAppointmentResponse createAppointmentRequest(
-        @WebParam(name = "CreateAppointmentRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "CreateAppointmentRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testCreateAppointmentRequest parameters);
 
     /**
@@ -1222,10 +1222,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testCreateContactResponse
      */
-    @WebMethod(action = "urn:zimbraMail/CreateContact")
-    @WebResult(name = "CreateContactResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/CreateContact")
+    @WebResult(name = "CreateContactResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testCreateContactResponse createContactRequest(
-        @WebParam(name = "CreateContactRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "CreateContactRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testCreateContactRequest parameters);
 
     /**
@@ -1234,10 +1234,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testCreateDataSourceResponse
      */
-    @WebMethod(action = "urn:zimbraMail/CreateDataSource")
-    @WebResult(name = "CreateDataSourceResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/CreateDataSource")
+    @WebResult(name = "CreateDataSourceResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testCreateDataSourceResponse createDataSourceRequest(
-        @WebParam(name = "CreateDataSourceRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "CreateDataSourceRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testCreateDataSourceRequest parameters);
 
     /**
@@ -1246,10 +1246,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testCreateFolderResponse
      */
-    @WebMethod(action = "urn:zimbraMail/CreateFolder")
-    @WebResult(name = "CreateFolderResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/CreateFolder")
+    @WebResult(name = "CreateFolderResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testCreateFolderResponse createFolderRequest(
-        @WebParam(name = "CreateFolderRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "CreateFolderRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testCreateFolderRequest parameters);
 
     /**
@@ -1258,10 +1258,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testCreateMountpointResponse
      */
-    @WebMethod(action = "urn:zimbraMail/CreateMountpoint")
-    @WebResult(name = "CreateMountpointResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/CreateMountpoint")
+    @WebResult(name = "CreateMountpointResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testCreateMountpointResponse createMountpointRequest(
-        @WebParam(name = "CreateMountpointRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "CreateMountpointRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testCreateMountpointRequest parameters);
 
     /**
@@ -1270,10 +1270,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testCreateNoteResponse
      */
-    @WebMethod(action = "urn:zimbraMail/CreateNote")
-    @WebResult(name = "CreateNoteResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/CreateNote")
+    @WebResult(name = "CreateNoteResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testCreateNoteResponse createNoteRequest(
-        @WebParam(name = "CreateNoteRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "CreateNoteRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testCreateNoteRequest parameters);
 
     /**
@@ -1282,10 +1282,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testCreateSearchFolderResponse
      */
-    @WebMethod(action = "urn:zimbraMail/CreateSearchFolder")
-    @WebResult(name = "CreateSearchFolderResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/CreateSearchFolder")
+    @WebResult(name = "CreateSearchFolderResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testCreateSearchFolderResponse createSearchFolderRequest(
-        @WebParam(name = "CreateSearchFolderRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "CreateSearchFolderRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testCreateSearchFolderRequest parameters);
 
     /**
@@ -1294,10 +1294,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testCreateTagResponse
      */
-    @WebMethod(action = "urn:zimbraMail/CreateTag")
-    @WebResult(name = "CreateTagResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/CreateTag")
+    @WebResult(name = "CreateTagResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testCreateTagResponse createTagRequest(
-        @WebParam(name = "CreateTagRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "CreateTagRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testCreateTagRequest parameters);
 
     /**
@@ -1306,10 +1306,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testCreateTaskExceptionResponse
      */
-    @WebMethod(action = "urn:zimbraMail/CreateTaskException")
-    @WebResult(name = "CreateTaskExceptionResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/CreateTaskException")
+    @WebResult(name = "CreateTaskExceptionResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testCreateTaskExceptionResponse createTaskExceptionRequest(
-        @WebParam(name = "CreateTaskExceptionRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "CreateTaskExceptionRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testCreateTaskExceptionRequest parameters);
 
     /**
@@ -1318,10 +1318,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testCreateTaskResponse
      */
-    @WebMethod(action = "urn:zimbraMail/CreateTask")
-    @WebResult(name = "CreateTaskResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/CreateTask")
+    @WebResult(name = "CreateTaskResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testCreateTaskResponse createTaskRequest(
-        @WebParam(name = "CreateTaskRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "CreateTaskRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testCreateTaskRequest parameters);
 
     /**
@@ -1330,10 +1330,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testCreateWaitSetResponse
      */
-    @WebMethod(action = "urn:zimbraMail/CreateWaitSet")
-    @WebResult(name = "CreateWaitSetResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/CreateWaitSet")
+    @WebResult(name = "CreateWaitSetResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testCreateWaitSetResponse createWaitSetRequest(
-        @WebParam(name = "CreateWaitSetRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "CreateWaitSetRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testCreateWaitSetRequest parameters);
 
     /**
@@ -1342,10 +1342,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testDeclineCounterAppointmentResponse
      */
-    @WebMethod(action = "urn:zimbraMail/DeclineCounterAppointment")
-    @WebResult(name = "DeclineCounterAppointmentResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/DeclineCounterAppointment")
+    @WebResult(name = "DeclineCounterAppointmentResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testDeclineCounterAppointmentResponse declineCounterAppointmentRequest(
-        @WebParam(name = "DeclineCounterAppointmentRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "DeclineCounterAppointmentRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testDeclineCounterAppointmentRequest parameters);
 
     /**
@@ -1354,10 +1354,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testDeleteDataSourceResponse
      */
-    @WebMethod(action = "urn:zimbraMail/DeleteDataSource")
-    @WebResult(name = "DeleteDataSourceResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/DeleteDataSource")
+    @WebResult(name = "DeleteDataSourceResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testDeleteDataSourceResponse deleteDataSourceRequest(
-        @WebParam(name = "DeleteDataSourceRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "DeleteDataSourceRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testDeleteDataSourceRequest parameters);
 
     /**
@@ -1366,10 +1366,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testDeleteDeviceResponse
      */
-    @WebMethod(action = "urn:zimbraMail/DeleteDevice")
-    @WebResult(name = "DeleteDeviceResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/DeleteDevice")
+    @WebResult(name = "DeleteDeviceResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testDeleteDeviceResponse deleteDeviceRequest(
-        @WebParam(name = "DeleteDeviceRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "DeleteDeviceRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testDeleteDeviceRequest parameters);
 
     /**
@@ -1378,10 +1378,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testDestroyWaitSetResponse
      */
-    @WebMethod(action = "urn:zimbraMail/DestroyWaitSet")
-    @WebResult(name = "DestroyWaitSetResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/DestroyWaitSet")
+    @WebResult(name = "DestroyWaitSetResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testDestroyWaitSetResponse destroyWaitSetRequest(
-        @WebParam(name = "DestroyWaitSetRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "DestroyWaitSetRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testDestroyWaitSetRequest parameters);
 
     /**
@@ -1390,10 +1390,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testDiffDocumentResponse
      */
-    @WebMethod(action = "urn:zimbraMail/DiffDocument")
-    @WebResult(name = "DiffDocumentResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/DiffDocument")
+    @WebResult(name = "DiffDocumentResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testDiffDocumentResponse diffDocumentRequest(
-        @WebParam(name = "DiffDocumentRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "DiffDocumentRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testDiffDocumentRequest parameters);
 
     /**
@@ -1402,10 +1402,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testDismissCalendarItemAlarmResponse
      */
-    @WebMethod(action = "urn:zimbraMail/DismissCalendarItemAlarm")
-    @WebResult(name = "DismissCalendarItemAlarmResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/DismissCalendarItemAlarm")
+    @WebResult(name = "DismissCalendarItemAlarmResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testDismissCalendarItemAlarmResponse dismissCalendarItemAlarmRequest(
-        @WebParam(name = "DismissCalendarItemAlarmRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "DismissCalendarItemAlarmRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testDismissCalendarItemAlarmRequest parameters);
 
     /**
@@ -1414,10 +1414,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testDocumentActionResponse
      */
-    @WebMethod(action = "urn:zimbraMail/DocumentAction")
-    @WebResult(name = "DocumentActionResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/DocumentAction")
+    @WebResult(name = "DocumentActionResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testDocumentActionResponse documentActionRequest(
-        @WebParam(name = "DocumentActionRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "DocumentActionRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testDocumentActionRequest parameters);
 
     /**
@@ -1426,10 +1426,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testEmptyDumpsterResponse
      */
-    @WebMethod(action = "urn:zimbraMail/EmptyDumpster")
-    @WebResult(name = "EmptyDumpsterResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/EmptyDumpster")
+    @WebResult(name = "EmptyDumpsterResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testEmptyDumpsterResponse emptyDumpsterRequest(
-        @WebParam(name = "EmptyDumpsterRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "EmptyDumpsterRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testEmptyDumpsterRequest parameters);
 
     /**
@@ -1438,10 +1438,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testEnableSharedReminderResponse
      */
-    @WebMethod(action = "urn:zimbraMail/EnableSharedReminder")
-    @WebResult(name = "EnableSharedReminderResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/EnableSharedReminder")
+    @WebResult(name = "EnableSharedReminderResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testEnableSharedReminderResponse enableSharedReminderRequest(
-        @WebParam(name = "EnableSharedReminderRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "EnableSharedReminderRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testEnableSharedReminderRequest parameters);
 
     /**
@@ -1450,10 +1450,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testExpandRecurResponse
      */
-    @WebMethod(action = "urn:zimbraMail/ExpandRecur")
-    @WebResult(name = "ExpandRecurResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/ExpandRecur")
+    @WebResult(name = "ExpandRecurResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testExpandRecurResponse expandRecurRequest(
-        @WebParam(name = "ExpandRecurRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "ExpandRecurRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testExpandRecurRequest parameters);
 
     /**
@@ -1462,10 +1462,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testExportContactsResponse
      */
-    @WebMethod(action = "urn:zimbraMail/ExportContacts")
-    @WebResult(name = "ExportContactsResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/ExportContacts")
+    @WebResult(name = "ExportContactsResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testExportContactsResponse exportContactsRequest(
-        @WebParam(name = "ExportContactsRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "ExportContactsRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testExportContactsRequest parameters);
 
     /**
@@ -1474,10 +1474,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testFolderActionResponse
      */
-    @WebMethod(action = "urn:zimbraMail/FolderAction")
-    @WebResult(name = "FolderActionResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/FolderAction")
+    @WebResult(name = "FolderActionResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testFolderActionResponse folderActionRequest(
-        @WebParam(name = "FolderActionRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "FolderActionRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testFolderActionRequest parameters);
 
     /**
@@ -1486,10 +1486,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testForwardAppointmentInviteResponse
      */
-    @WebMethod(action = "urn:zimbraMail/ForwardAppointmentInvite")
-    @WebResult(name = "ForwardAppointmentInviteResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/ForwardAppointmentInvite")
+    @WebResult(name = "ForwardAppointmentInviteResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testForwardAppointmentInviteResponse forwardAppointmentInviteRequest(
-        @WebParam(name = "ForwardAppointmentInviteRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "ForwardAppointmentInviteRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testForwardAppointmentInviteRequest parameters);
 
     /**
@@ -1498,10 +1498,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testForwardAppointmentResponse
      */
-    @WebMethod(action = "urn:zimbraMail/ForwardAppointment")
-    @WebResult(name = "ForwardAppointmentResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/ForwardAppointment")
+    @WebResult(name = "ForwardAppointmentResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testForwardAppointmentResponse forwardAppointmentRequest(
-        @WebParam(name = "ForwardAppointmentRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "ForwardAppointmentRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testForwardAppointmentRequest parameters);
 
     /**
@@ -1510,10 +1510,10 @@ public interface ZcsPortType {
      * @return
      *     returns java.lang.String
      */
-    @WebMethod(action = "urn:zimbraMail/GenerateUUID")
-    @WebResult(name = "GenerateUUIDResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/GenerateUUID")
+    @WebResult(name = "GenerateUUIDResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public String generateUUIDRequest(
-        @WebParam(name = "GenerateUUIDRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "GenerateUUIDRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testGenerateUUIDRequest parameters);
 
     /**
@@ -1522,10 +1522,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testGetActivityStreamResponse
      */
-    @WebMethod(action = "urn:zimbraMail/GetActivityStream")
-    @WebResult(name = "GetActivityStreamResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/GetActivityStream")
+    @WebResult(name = "GetActivityStreamResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testGetActivityStreamResponse getActivityStreamRequest(
-        @WebParam(name = "GetActivityStreamRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "GetActivityStreamRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testGetActivityStreamRequest parameters);
 
     /**
@@ -1534,10 +1534,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testGetAllDevicesResponse
      */
-    @WebMethod(action = "urn:zimbraMail/GetAllDevices")
-    @WebResult(name = "GetAllDevicesResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/GetAllDevices")
+    @WebResult(name = "GetAllDevicesResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testGetAllDevicesResponse getAllDevicesRequest(
-        @WebParam(name = "GetAllDevicesRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "GetAllDevicesRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testGetAllDevicesRequest parameters);
 
     /**
@@ -1546,10 +1546,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testGetAppointmentResponse
      */
-    @WebMethod(action = "urn:zimbraMail/GetAppointment")
-    @WebResult(name = "GetAppointmentResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/GetAppointment")
+    @WebResult(name = "GetAppointmentResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testGetAppointmentResponse getAppointmentRequest(
-        @WebParam(name = "GetAppointmentRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "GetAppointmentRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testGetAppointmentRequest parameters);
 
     /**
@@ -1558,10 +1558,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testGetApptSummariesResponse
      */
-    @WebMethod(action = "urn:zimbraMail/GetApptSummaries")
-    @WebResult(name = "GetApptSummariesResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/GetApptSummaries")
+    @WebResult(name = "GetApptSummariesResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testGetApptSummariesResponse getApptSummariesRequest(
-        @WebParam(name = "GetApptSummariesRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "GetApptSummariesRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testGetApptSummariesRequest parameters);
 
     /**
@@ -1570,10 +1570,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testGetCalendarItemSummariesResponse
      */
-    @WebMethod(action = "urn:zimbraMail/GetCalendarItemSummaries")
-    @WebResult(name = "GetCalendarItemSummariesResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/GetCalendarItemSummaries")
+    @WebResult(name = "GetCalendarItemSummariesResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testGetCalendarItemSummariesResponse getCalendarItemSummariesRequest(
-        @WebParam(name = "GetCalendarItemSummariesRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "GetCalendarItemSummariesRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testGetCalendarItemSummariesRequest parameters);
 
     /**
@@ -1582,10 +1582,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testGetCommentsResponse
      */
-    @WebMethod(action = "urn:zimbraMail/GetComments")
-    @WebResult(name = "GetCommentsResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/GetComments")
+    @WebResult(name = "GetCommentsResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testGetCommentsResponse getCommentsRequest(
-        @WebParam(name = "GetCommentsRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "GetCommentsRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testGetCommentsRequest parameters);
 
     /**
@@ -1594,10 +1594,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testGetContactsResponse
      */
-    @WebMethod(action = "urn:zimbraMail/GetContacts")
-    @WebResult(name = "GetContactsResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/GetContacts")
+    @WebResult(name = "GetContactsResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testGetContactsResponse getContactsRequest(
-        @WebParam(name = "GetContactsRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "GetContactsRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testGetContactsRequest parameters);
 
     /**
@@ -1606,10 +1606,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testGetConvResponse
      */
-    @WebMethod(action = "urn:zimbraMail/GetConv")
-    @WebResult(name = "GetConvResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/GetConv")
+    @WebResult(name = "GetConvResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testGetConvResponse getConvRequest(
-        @WebParam(name = "GetConvRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "GetConvRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testGetConvRequest parameters);
 
     /**
@@ -1618,10 +1618,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testGetCustomMetadataResponse
      */
-    @WebMethod(action = "urn:zimbraMail/GetCustomMetadata")
-    @WebResult(name = "GetCustomMetadataResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/GetCustomMetadata")
+    @WebResult(name = "GetCustomMetadataResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testGetCustomMetadataResponse getCustomMetadataRequest(
-        @WebParam(name = "GetCustomMetadataRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "GetCustomMetadataRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testGetCustomMetadataRequest parameters);
 
     /**
@@ -1630,10 +1630,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testGetDataSourcesResponse
      */
-    @WebMethod(action = "urn:zimbraMail/GetDataSources")
-    @WebResult(name = "GetDataSourcesResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/GetDataSources")
+    @WebResult(name = "GetDataSourcesResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testGetDataSourcesResponse getDataSourcesRequest(
-        @WebParam(name = "GetDataSourcesRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "GetDataSourcesRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testGetDataSourcesRequest parameters);
 
     /**
@@ -1642,10 +1642,10 @@ public interface ZcsPortType {
      * @return
      *     returns java.lang.String
      */
-    @WebMethod(action = "urn:zimbraMail/GetDocumentShareURL")
-    @WebResult(name = "GetDocumentShareURLResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/GetDocumentShareURL")
+    @WebResult(name = "GetDocumentShareURLResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public String getDocumentShareURLRequest(
-        @WebParam(name = "GetDocumentShareURLRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "GetDocumentShareURLRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testGetDocumentShareURLRequest parameters);
 
     /**
@@ -1654,10 +1654,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testGetEffectiveFolderPermsResponse
      */
-    @WebMethod(action = "urn:zimbraMail/GetEffectiveFolderPerms")
-    @WebResult(name = "GetEffectiveFolderPermsResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/GetEffectiveFolderPerms")
+    @WebResult(name = "GetEffectiveFolderPermsResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testGetEffectiveFolderPermsResponse getEffectiveFolderPermsRequest(
-        @WebParam(name = "GetEffectiveFolderPermsRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "GetEffectiveFolderPermsRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testGetEffectiveFolderPermsRequest parameters);
 
     /**
@@ -1666,10 +1666,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testGetFilterRulesResponse
      */
-    @WebMethod(action = "urn:zimbraMail/GetFilterRules")
-    @WebResult(name = "GetFilterRulesResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/GetFilterRules")
+    @WebResult(name = "GetFilterRulesResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testGetFilterRulesResponse getFilterRulesRequest(
-        @WebParam(name = "GetFilterRulesRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "GetFilterRulesRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testGetFilterRulesRequest parameters);
 
     /**
@@ -1678,10 +1678,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testGetFolderResponse
      */
-    @WebMethod(action = "urn:zimbraMail/GetFolder")
-    @WebResult(name = "GetFolderResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/GetFolder")
+    @WebResult(name = "GetFolderResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testGetFolderResponse getFolderRequest(
-        @WebParam(name = "GetFolderRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "GetFolderRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testGetFolderRequest parameters);
 
     /**
@@ -1690,10 +1690,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testGetFreeBusyResponse
      */
-    @WebMethod(action = "urn:zimbraMail/GetFreeBusy")
-    @WebResult(name = "GetFreeBusyResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/GetFreeBusy")
+    @WebResult(name = "GetFreeBusyResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testGetFreeBusyResponse getFreeBusyRequest(
-        @WebParam(name = "GetFreeBusyRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "GetFreeBusyRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testGetFreeBusyRequest parameters);
 
     /**
@@ -1702,10 +1702,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testGetICalResponse
      */
-    @WebMethod(action = "urn:zimbraMail/GetICal")
-    @WebResult(name = "GetICalResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/GetICal")
+    @WebResult(name = "GetICalResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testGetICalResponse getICalRequest(
-        @WebParam(name = "GetICalRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "GetICalRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testGetICalRequest parameters);
 
     /**
@@ -1714,10 +1714,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testGetImportStatusResponse
      */
-    @WebMethod(action = "urn:zimbraMail/GetImportStatus")
-    @WebResult(name = "GetImportStatusResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/GetImportStatus")
+    @WebResult(name = "GetImportStatusResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testGetImportStatusResponse getImportStatusRequest(
-        @WebParam(name = "GetImportStatusRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "GetImportStatusRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testGetImportStatusRequest parameters);
 
     /**
@@ -1726,10 +1726,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testGetItemResponse
      */
-    @WebMethod(action = "urn:zimbraMail/GetItem")
-    @WebResult(name = "GetItemResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/GetItem")
+    @WebResult(name = "GetItemResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testGetItemResponse getItemRequest(
-        @WebParam(name = "GetItemRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "GetItemRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testGetItemRequest parameters);
 
     /**
@@ -1738,10 +1738,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testGetMailboxMetadataResponse
      */
-    @WebMethod(action = "urn:zimbraMail/GetMailboxMetadata")
-    @WebResult(name = "GetMailboxMetadataResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/GetMailboxMetadata")
+    @WebResult(name = "GetMailboxMetadataResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testGetMailboxMetadataResponse getMailboxMetadataRequest(
-        @WebParam(name = "GetMailboxMetadataRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "GetMailboxMetadataRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testGetMailboxMetadataRequest parameters);
 
     /**
@@ -1750,10 +1750,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testGetMiniCalResponse
      */
-    @WebMethod(action = "urn:zimbraMail/GetMiniCal")
-    @WebResult(name = "GetMiniCalResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/GetMiniCal")
+    @WebResult(name = "GetMiniCalResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testGetMiniCalResponse getMiniCalRequest(
-        @WebParam(name = "GetMiniCalRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "GetMiniCalRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testGetMiniCalRequest parameters);
 
     /**
@@ -1762,10 +1762,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testGetMsgMetadataResponse
      */
-    @WebMethod(action = "urn:zimbraMail/GetMsgMetadata")
-    @WebResult(name = "GetMsgMetadataResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/GetMsgMetadata")
+    @WebResult(name = "GetMsgMetadataResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testGetMsgMetadataResponse getMsgMetadataRequest(
-        @WebParam(name = "GetMsgMetadataRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "GetMsgMetadataRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testGetMsgMetadataRequest parameters);
 
     /**
@@ -1774,10 +1774,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testGetMsgResponse
      */
-    @WebMethod(action = "urn:zimbraMail/GetMsg")
-    @WebResult(name = "GetMsgResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/GetMsg")
+    @WebResult(name = "GetMsgResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testGetMsgResponse getMsgRequest(
-        @WebParam(name = "GetMsgRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "GetMsgRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testGetMsgRequest parameters);
 
     /**
@@ -1786,10 +1786,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testGetNoteResponse
      */
-    @WebMethod(action = "urn:zimbraMail/GetNote")
-    @WebResult(name = "GetNoteResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/GetNote")
+    @WebResult(name = "GetNoteResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testGetNoteResponse getNoteRequest(
-        @WebParam(name = "GetNoteRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "GetNoteRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testGetNoteRequest parameters);
 
     /**
@@ -1798,10 +1798,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testGetNotificationsResponse
      */
-    @WebMethod(action = "urn:zimbraMail/GetNotifications")
-    @WebResult(name = "GetNotificationsResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/GetNotifications")
+    @WebResult(name = "GetNotificationsResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testGetNotificationsResponse getNotificationsRequest(
-        @WebParam(name = "GetNotificationsRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "GetNotificationsRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testGetNotificationsRequest parameters);
 
     /**
@@ -1810,10 +1810,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testGetOutgoingFilterRulesResponse
      */
-    @WebMethod(action = "urn:zimbraMail/GetOutgoingFilterRules")
-    @WebResult(name = "GetOutgoingFilterRulesResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/GetOutgoingFilterRules")
+    @WebResult(name = "GetOutgoingFilterRulesResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testGetOutgoingFilterRulesResponse getOutgoingFilterRulesRequest(
-        @WebParam(name = "GetOutgoingFilterRulesRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "GetOutgoingFilterRulesRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testGetOutgoingFilterRulesRequest parameters);
 
     /**
@@ -1822,10 +1822,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testGetPermissionResponse
      */
-    @WebMethod(action = "urn:zimbraMail/GetPermission")
-    @WebResult(name = "GetPermissionResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/GetPermission")
+    @WebResult(name = "GetPermissionResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testGetPermissionResponse getPermissionRequest(
-        @WebParam(name = "GetPermissionRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "GetPermissionRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testGetPermissionRequest parameters);
 
     /**
@@ -1834,10 +1834,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testGetRecurResponse
      */
-    @WebMethod(action = "urn:zimbraMail/GetRecur")
-    @WebResult(name = "GetRecurResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/GetRecur")
+    @WebResult(name = "GetRecurResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testGetRecurResponse getRecurRequest(
-        @WebParam(name = "GetRecurRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "GetRecurRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testGetRecurRequest parameters);
 
     /**
@@ -1846,10 +1846,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testGetSearchFolderResponse
      */
-    @WebMethod(action = "urn:zimbraMail/GetSearchFolder")
-    @WebResult(name = "GetSearchFolderResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/GetSearchFolder")
+    @WebResult(name = "GetSearchFolderResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testGetSearchFolderResponse getSearchFolderRequest(
-        @WebParam(name = "GetSearchFolderRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "GetSearchFolderRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testGetSearchFolderRequest parameters);
 
     /**
@@ -1858,10 +1858,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testGetShareDetailsResponse
      */
-    @WebMethod(action = "urn:zimbraMail/GetShareDetails")
-    @WebResult(name = "GetShareDetailsResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/GetShareDetails")
+    @WebResult(name = "GetShareDetailsResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testGetShareDetailsResponse getShareDetailsRequest(
-        @WebParam(name = "GetShareDetailsRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "GetShareDetailsRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testGetShareDetailsRequest parameters);
 
     /**
@@ -1870,10 +1870,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testGetShareNotificationsResponse
      */
-    @WebMethod(action = "urn:zimbraMail/GetShareNotifications")
-    @WebResult(name = "GetShareNotificationsResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/GetShareNotifications")
+    @WebResult(name = "GetShareNotificationsResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testGetShareNotificationsResponse getShareNotificationsRequest(
-        @WebParam(name = "GetShareNotificationsRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "GetShareNotificationsRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testGetShareNotificationsRequest parameters);
 
     /**
@@ -1882,10 +1882,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testGetSpellDictionariesResponse
      */
-    @WebMethod(action = "urn:zimbraMail/GetSpellDictionaries")
-    @WebResult(name = "GetSpellDictionariesResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/GetSpellDictionaries")
+    @WebResult(name = "GetSpellDictionariesResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testGetSpellDictionariesResponse getSpellDictionariesRequest(
-        @WebParam(name = "GetSpellDictionariesRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "GetSpellDictionariesRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testGetSpellDictionariesRequest parameters);
 
     /**
@@ -1894,10 +1894,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testGetSystemRetentionPolicyResponse
      */
-    @WebMethod(action = "urn:zimbraMail/GetSystemRetentionPolicy")
-    @WebResult(name = "GetSystemRetentionPolicyResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/GetSystemRetentionPolicy")
+    @WebResult(name = "GetSystemRetentionPolicyResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testGetSystemRetentionPolicyResponse getSystemRetentionPolicyRequest(
-        @WebParam(name = "GetSystemRetentionPolicyRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "GetSystemRetentionPolicyRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testGetSystemRetentionPolicyRequest parameters);
 
     /**
@@ -1906,10 +1906,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testGetTagResponse
      */
-    @WebMethod(action = "urn:zimbraMail/GetTag")
-    @WebResult(name = "GetTagResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/GetTag")
+    @WebResult(name = "GetTagResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testGetTagResponse getTagRequest(
-        @WebParam(name = "GetTagRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "GetTagRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testGetTagRequest parameters);
 
     /**
@@ -1918,10 +1918,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testGetTaskResponse
      */
-    @WebMethod(action = "urn:zimbraMail/GetTask")
-    @WebResult(name = "GetTaskResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/GetTask")
+    @WebResult(name = "GetTaskResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testGetTaskResponse getTaskRequest(
-        @WebParam(name = "GetTaskRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "GetTaskRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testGetTaskRequest parameters);
 
     /**
@@ -1930,10 +1930,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testGetTaskSummariesResponse
      */
-    @WebMethod(action = "urn:zimbraMail/GetTaskSummaries")
-    @WebResult(name = "GetTaskSummariesResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/GetTaskSummaries")
+    @WebResult(name = "GetTaskSummariesResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testGetTaskSummariesResponse getTaskSummariesRequest(
-        @WebParam(name = "GetTaskSummariesRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "GetTaskSummariesRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testGetTaskSummariesRequest parameters);
 
     /**
@@ -1942,10 +1942,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testGetWatchersResponse
      */
-    @WebMethod(action = "urn:zimbraMail/GetWatchers")
-    @WebResult(name = "GetWatchersResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/GetWatchers")
+    @WebResult(name = "GetWatchersResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testGetWatchersResponse getWatchersRequest(
-        @WebParam(name = "GetWatchersRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "GetWatchersRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testGetWatchersRequest parameters);
 
     /**
@@ -1954,10 +1954,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testGetWatchingItemsResponse
      */
-    @WebMethod(action = "urn:zimbraMail/GetWatchingItems")
-    @WebResult(name = "GetWatchingItemsResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/GetWatchingItems")
+    @WebResult(name = "GetWatchingItemsResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testGetWatchingItemsResponse getWatchingItemsRequest(
-        @WebParam(name = "GetWatchingItemsRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "GetWatchingItemsRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testGetWatchingItemsRequest parameters);
 
     /**
@@ -1966,10 +1966,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testGetWorkingHoursResponse
      */
-    @WebMethod(action = "urn:zimbraMail/GetWorkingHours")
-    @WebResult(name = "GetWorkingHoursResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/GetWorkingHours")
+    @WebResult(name = "GetWorkingHoursResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testGetWorkingHoursResponse getWorkingHoursRequest(
-        @WebParam(name = "GetWorkingHoursRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "GetWorkingHoursRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testGetWorkingHoursRequest parameters);
 
     /**
@@ -1978,10 +1978,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testGetYahooAuthTokenResponse
      */
-    @WebMethod(action = "urn:zimbraMail/GetYahooAuthToken")
-    @WebResult(name = "GetYahooAuthTokenResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/GetYahooAuthToken")
+    @WebResult(name = "GetYahooAuthTokenResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testGetYahooAuthTokenResponse getYahooAuthTokenRequest(
-        @WebParam(name = "GetYahooAuthTokenRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "GetYahooAuthTokenRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testGetYahooAuthTokenRequest parameters);
 
     /**
@@ -1990,10 +1990,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testGetYahooCookieResponse
      */
-    @WebMethod(action = "urn:zimbraMail/GetYahooCookie")
-    @WebResult(name = "GetYahooCookieResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/GetYahooCookie")
+    @WebResult(name = "GetYahooCookieResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testGetYahooCookieResponse getYahooCookieRequest(
-        @WebParam(name = "GetYahooCookieRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "GetYahooCookieRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testGetYahooCookieRequest parameters);
 
     /**
@@ -2002,10 +2002,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testGrantPermissionResponse
      */
-    @WebMethod(action = "urn:zimbraMail/GrantPermission")
-    @WebResult(name = "GrantPermissionResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/GrantPermission")
+    @WebResult(name = "GrantPermissionResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testGrantPermissionResponse grantPermissionRequest(
-        @WebParam(name = "GrantPermissionRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "GrantPermissionRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testGrantPermissionRequest parameters);
 
     /**
@@ -2014,10 +2014,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testICalReplyResponse
      */
-    @WebMethod(action = "urn:zimbraMail/ICalReply")
-    @WebResult(name = "ICalReplyResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/ICalReply")
+    @WebResult(name = "ICalReplyResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testICalReplyResponse iCalReplyRequest(
-        @WebParam(name = "ICalReplyRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "ICalReplyRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testICalReplyRequest parameters);
 
     /**
@@ -2026,10 +2026,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testImportAppointmentsResponse
      */
-    @WebMethod(action = "urn:zimbraMail/ImportAppointments")
-    @WebResult(name = "ImportAppointmentsResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/ImportAppointments")
+    @WebResult(name = "ImportAppointmentsResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testImportAppointmentsResponse importAppointmentsRequest(
-        @WebParam(name = "ImportAppointmentsRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "ImportAppointmentsRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testImportAppointmentsRequest parameters);
 
     /**
@@ -2038,10 +2038,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testImportContactsResponse
      */
-    @WebMethod(action = "urn:zimbraMail/ImportContacts")
-    @WebResult(name = "ImportContactsResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/ImportContacts")
+    @WebResult(name = "ImportContactsResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testImportContactsResponse importContactsRequest(
-        @WebParam(name = "ImportContactsRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "ImportContactsRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testImportContactsRequest parameters);
 
     /**
@@ -2050,10 +2050,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testImportDataResponse
      */
-    @WebMethod(action = "urn:zimbraMail/ImportData")
-    @WebResult(name = "ImportDataResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/ImportData")
+    @WebResult(name = "ImportDataResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testImportDataResponse importDataRequest(
-        @WebParam(name = "ImportDataRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "ImportDataRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testImportDataRequest parameters);
 
     /**
@@ -2062,10 +2062,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testInvalidateReminderDeviceResponse
      */
-    @WebMethod(action = "urn:zimbraMail/InvalidateReminderDevice")
-    @WebResult(name = "InvalidateReminderDeviceResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/InvalidateReminderDevice")
+    @WebResult(name = "InvalidateReminderDeviceResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testInvalidateReminderDeviceResponse invalidateReminderDeviceRequest(
-        @WebParam(name = "InvalidateReminderDeviceRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "InvalidateReminderDeviceRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testInvalidateReminderDeviceRequest parameters);
 
     /**
@@ -2074,10 +2074,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testItemActionResponse
      */
-    @WebMethod(action = "urn:zimbraMail/ItemAction")
-    @WebResult(name = "ItemActionResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/ItemAction")
+    @WebResult(name = "ItemActionResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testItemActionResponse itemActionRequest(
-        @WebParam(name = "ItemActionRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "ItemActionRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testItemActionRequest parameters);
 
     /**
@@ -2086,10 +2086,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testListDocumentRevisionsResponse
      */
-    @WebMethod(action = "urn:zimbraMail/ListDocumentRevisions")
-    @WebResult(name = "ListDocumentRevisionsResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/ListDocumentRevisions")
+    @WebResult(name = "ListDocumentRevisionsResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testListDocumentRevisionsResponse listDocumentRevisionsRequest(
-        @WebParam(name = "ListDocumentRevisionsRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "ListDocumentRevisionsRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testListDocumentRevisionsRequest parameters);
 
     /**
@@ -2098,10 +2098,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testModifyAppointmentResponse
      */
-    @WebMethod(action = "urn:zimbraMail/ModifyAppointment")
-    @WebResult(name = "ModifyAppointmentResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/ModifyAppointment")
+    @WebResult(name = "ModifyAppointmentResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testModifyAppointmentResponse modifyAppointmentRequest(
-        @WebParam(name = "ModifyAppointmentRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "ModifyAppointmentRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testModifyAppointmentRequest parameters);
 
     /**
@@ -2110,10 +2110,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testModifyContactResponse
      */
-    @WebMethod(action = "urn:zimbraMail/ModifyContact")
-    @WebResult(name = "ModifyContactResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/ModifyContact")
+    @WebResult(name = "ModifyContactResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testModifyContactResponse modifyContactRequest(
-        @WebParam(name = "ModifyContactRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "ModifyContactRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testModifyContactRequest parameters);
 
     /**
@@ -2122,10 +2122,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testModifyDataSourceResponse
      */
-    @WebMethod(action = "urn:zimbraMail/ModifyDataSource")
-    @WebResult(name = "ModifyDataSourceResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/ModifyDataSource")
+    @WebResult(name = "ModifyDataSourceResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testModifyDataSourceResponse modifyDataSourceRequest(
-        @WebParam(name = "ModifyDataSourceRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "ModifyDataSourceRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testModifyDataSourceRequest parameters);
 
     /**
@@ -2134,10 +2134,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testModifyFilterRulesResponse
      */
-    @WebMethod(action = "urn:zimbraMail/ModifyFilterRules")
-    @WebResult(name = "ModifyFilterRulesResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/ModifyFilterRules")
+    @WebResult(name = "ModifyFilterRulesResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testModifyFilterRulesResponse modifyFilterRulesRequest(
-        @WebParam(name = "ModifyFilterRulesRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "ModifyFilterRulesRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testModifyFilterRulesRequest parameters);
 
     /**
@@ -2146,10 +2146,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testModifyMailboxMetadataResponse
      */
-    @WebMethod(action = "urn:zimbraMail/ModifyMailboxMetadata")
-    @WebResult(name = "ModifyMailboxMetadataResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/ModifyMailboxMetadata")
+    @WebResult(name = "ModifyMailboxMetadataResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testModifyMailboxMetadataResponse modifyMailboxMetadataRequest(
-        @WebParam(name = "ModifyMailboxMetadataRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "ModifyMailboxMetadataRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testModifyMailboxMetadataRequest parameters);
 
     /**
@@ -2158,10 +2158,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testModifyOutgoingFilterRulesResponse
      */
-    @WebMethod(action = "urn:zimbraMail/ModifyOutgoingFilterRules")
-    @WebResult(name = "ModifyOutgoingFilterRulesResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/ModifyOutgoingFilterRules")
+    @WebResult(name = "ModifyOutgoingFilterRulesResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testModifyOutgoingFilterRulesResponse modifyOutgoingFilterRulesRequest(
-        @WebParam(name = "ModifyOutgoingFilterRulesRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "ModifyOutgoingFilterRulesRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testModifyOutgoingFilterRulesRequest parameters);
 
     /**
@@ -2170,10 +2170,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testModifySearchFolderResponse
      */
-    @WebMethod(action = "urn:zimbraMail/ModifySearchFolder")
-    @WebResult(name = "ModifySearchFolderResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/ModifySearchFolder")
+    @WebResult(name = "ModifySearchFolderResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testModifySearchFolderResponse modifySearchFolderRequest(
-        @WebParam(name = "ModifySearchFolderRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "ModifySearchFolderRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testModifySearchFolderRequest parameters);
 
     /**
@@ -2182,10 +2182,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testModifyTaskResponse
      */
-    @WebMethod(action = "urn:zimbraMail/ModifyTask")
-    @WebResult(name = "ModifyTaskResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/ModifyTask")
+    @WebResult(name = "ModifyTaskResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testModifyTaskResponse modifyTaskRequest(
-        @WebParam(name = "ModifyTaskRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "ModifyTaskRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testModifyTaskRequest parameters);
 
     /**
@@ -2194,10 +2194,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testMsgActionResponse
      */
-    @WebMethod(action = "urn:zimbraMail/MsgAction")
-    @WebResult(name = "MsgActionResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/MsgAction")
+    @WebResult(name = "MsgActionResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testMsgActionResponse msgActionRequest(
-        @WebParam(name = "MsgActionRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "MsgActionRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testMsgActionRequest parameters);
 
     /**
@@ -2206,10 +2206,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testNoOpResponse
      */
-    @WebMethod(action = "urn:zimbraMail/NoOp")
-    @WebResult(name = "NoOpResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/NoOp")
+    @WebResult(name = "NoOpResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testNoOpResponse noOpRequest(
-        @WebParam(name = "NoOpRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "NoOpRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testNoOpRequest parameters);
 
     /**
@@ -2218,10 +2218,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testNoteActionResponse
      */
-    @WebMethod(action = "urn:zimbraMail/NoteAction")
-    @WebResult(name = "NoteActionResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/NoteAction")
+    @WebResult(name = "NoteActionResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testNoteActionResponse noteActionRequest(
-        @WebParam(name = "NoteActionRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "NoteActionRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testNoteActionRequest parameters);
 
     /**
@@ -2230,10 +2230,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testPurgeRevisionResponse
      */
-    @WebMethod(action = "urn:zimbraMail/PurgeRevision")
-    @WebResult(name = "PurgeRevisionResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/PurgeRevision")
+    @WebResult(name = "PurgeRevisionResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testPurgeRevisionResponse purgeRevisionRequest(
-        @WebParam(name = "PurgeRevisionRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "PurgeRevisionRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testPurgeRevisionRequest parameters);
 
     /**
@@ -2242,10 +2242,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testRankingActionResponse
      */
-    @WebMethod(action = "urn:zimbraMail/RankingAction")
-    @WebResult(name = "RankingActionResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/RankingAction")
+    @WebResult(name = "RankingActionResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testRankingActionResponse rankingActionRequest(
-        @WebParam(name = "RankingActionRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "RankingActionRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testRankingActionRequest parameters);
 
     /**
@@ -2254,10 +2254,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testRegisterDeviceResponse
      */
-    @WebMethod(action = "urn:zimbraMail/RegisterDevice")
-    @WebResult(name = "RegisterDeviceResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/RegisterDevice")
+    @WebResult(name = "RegisterDeviceResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testRegisterDeviceResponse registerDeviceRequest(
-        @WebParam(name = "RegisterDeviceRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "RegisterDeviceRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testRegisterDeviceRequest parameters);
 
     /**
@@ -2266,10 +2266,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testRemoveAttachmentsResponse
      */
-    @WebMethod(action = "urn:zimbraMail/RemoveAttachments")
-    @WebResult(name = "RemoveAttachmentsResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/RemoveAttachments")
+    @WebResult(name = "RemoveAttachmentsResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testRemoveAttachmentsResponse removeAttachmentsRequest(
-        @WebParam(name = "RemoveAttachmentsRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "RemoveAttachmentsRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testRemoveAttachmentsRequest parameters);
 
     /**
@@ -2278,10 +2278,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testRevokePermissionResponse
      */
-    @WebMethod(action = "urn:zimbraMail/RevokePermission")
-    @WebResult(name = "RevokePermissionResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/RevokePermission")
+    @WebResult(name = "RevokePermissionResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testRevokePermissionResponse revokePermissionRequest(
-        @WebParam(name = "RevokePermissionRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "RevokePermissionRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testRevokePermissionRequest parameters);
 
     /**
@@ -2290,10 +2290,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testSaveDocumentResponse
      */
-    @WebMethod(action = "urn:zimbraMail/SaveDocument")
-    @WebResult(name = "SaveDocumentResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/SaveDocument")
+    @WebResult(name = "SaveDocumentResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testSaveDocumentResponse saveDocumentRequest(
-        @WebParam(name = "SaveDocumentRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "SaveDocumentRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testSaveDocumentRequest parameters);
 
     /**
@@ -2302,10 +2302,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testSaveDraftResponse
      */
-    @WebMethod(action = "urn:zimbraMail/SaveDraft")
-    @WebResult(name = "SaveDraftResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/SaveDraft")
+    @WebResult(name = "SaveDraftResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testSaveDraftResponse saveDraftRequest(
-        @WebParam(name = "SaveDraftRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "SaveDraftRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testSaveDraftRequest parameters);
 
     /**
@@ -2314,10 +2314,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testSearchConvResponse
      */
-    @WebMethod(action = "urn:zimbraMail/SearchConv")
-    @WebResult(name = "SearchConvResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/SearchConv")
+    @WebResult(name = "SearchConvResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testSearchConvResponse searchConvRequest(
-        @WebParam(name = "SearchConvRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "SearchConvRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testSearchConvRequest parameters);
 
     /**
@@ -2326,10 +2326,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testSearchResponse
      */
-    @WebMethod(action = "urn:zimbraMail/Search")
-    @WebResult(name = "SearchResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/Search")
+    @WebResult(name = "SearchResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testSearchResponse searchRequest(
-        @WebParam(name = "SearchRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "SearchRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testSearchRequest parameters);
 
     /**
@@ -2338,10 +2338,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testSendDeliveryReportResponse
      */
-    @WebMethod(action = "urn:zimbraMail/SendDeliveryReport")
-    @WebResult(name = "SendDeliveryReportResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/SendDeliveryReport")
+    @WebResult(name = "SendDeliveryReportResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testSendDeliveryReportResponse sendDeliveryReportRequest(
-        @WebParam(name = "SendDeliveryReportRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "SendDeliveryReportRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testSendDeliveryReportRequest parameters);
 
     /**
@@ -2350,10 +2350,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testSendInviteReplyResponse
      */
-    @WebMethod(action = "urn:zimbraMail/SendInviteReply")
-    @WebResult(name = "SendInviteReplyResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/SendInviteReply")
+    @WebResult(name = "SendInviteReplyResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testSendInviteReplyResponse sendInviteReplyRequest(
-        @WebParam(name = "SendInviteReplyRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "SendInviteReplyRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testSendInviteReplyRequest parameters);
 
     /**
@@ -2362,10 +2362,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testSendMsgResponse
      */
-    @WebMethod(action = "urn:zimbraMail/SendMsg")
-    @WebResult(name = "SendMsgResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/SendMsg")
+    @WebResult(name = "SendMsgResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testSendMsgResponse sendMsgRequest(
-        @WebParam(name = "SendMsgRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "SendMsgRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testSendMsgRequest parameters);
 
     /**
@@ -2374,10 +2374,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testSendShareNotificationResponse
      */
-    @WebMethod(action = "urn:zimbraMail/SendShareNotification")
-    @WebResult(name = "SendShareNotificationResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/SendShareNotification")
+    @WebResult(name = "SendShareNotificationResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testSendShareNotificationResponse sendShareNotificationRequest(
-        @WebParam(name = "SendShareNotificationRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "SendShareNotificationRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testSendShareNotificationRequest parameters);
 
     /**
@@ -2386,10 +2386,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testSendVerificationCodeResponse
      */
-    @WebMethod(action = "urn:zimbraMail/SendVerificationCode")
-    @WebResult(name = "SendVerificationCodeResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/SendVerificationCode")
+    @WebResult(name = "SendVerificationCodeResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testSendVerificationCodeResponse sendVerificationCodeRequest(
-        @WebParam(name = "SendVerificationCodeRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "SendVerificationCodeRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testSendVerificationCodeRequest parameters);
 
     /**
@@ -2398,10 +2398,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testSetAppointmentResponse
      */
-    @WebMethod(action = "urn:zimbraMail/SetAppointment")
-    @WebResult(name = "SetAppointmentResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/SetAppointment")
+    @WebResult(name = "SetAppointmentResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testSetAppointmentResponse setAppointmentRequest(
-        @WebParam(name = "SetAppointmentRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "SetAppointmentRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testSetAppointmentRequest parameters);
 
     /**
@@ -2410,10 +2410,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testSetCustomMetadataResponse
      */
-    @WebMethod(action = "urn:zimbraMail/SetCustomMetadata")
-    @WebResult(name = "SetCustomMetadataResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/SetCustomMetadata")
+    @WebResult(name = "SetCustomMetadataResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testSetCustomMetadataResponse setCustomMetadataRequest(
-        @WebParam(name = "SetCustomMetadataRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "SetCustomMetadataRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testSetCustomMetadataRequest parameters);
 
     /**
@@ -2422,10 +2422,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testSetMailboxMetadataResponse
      */
-    @WebMethod(action = "urn:zimbraMail/SetMailboxMetadata")
-    @WebResult(name = "SetMailboxMetadataResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/SetMailboxMetadata")
+    @WebResult(name = "SetMailboxMetadataResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testSetMailboxMetadataResponse setMailboxMetadataRequest(
-        @WebParam(name = "SetMailboxMetadataRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "SetMailboxMetadataRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testSetMailboxMetadataRequest parameters);
 
     /**
@@ -2434,10 +2434,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testSetTaskResponse
      */
-    @WebMethod(action = "urn:zimbraMail/SetTask")
-    @WebResult(name = "SetTaskResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/SetTask")
+    @WebResult(name = "SetTaskResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testSetTaskResponse setTaskRequest(
-        @WebParam(name = "SetTaskRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "SetTaskRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testSetTaskRequest parameters);
 
     /**
@@ -2446,10 +2446,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testSnoozeCalendarItemAlarmResponse
      */
-    @WebMethod(action = "urn:zimbraMail/SnoozeCalendarItemAlarm")
-    @WebResult(name = "SnoozeCalendarItemAlarmResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/SnoozeCalendarItemAlarm")
+    @WebResult(name = "SnoozeCalendarItemAlarmResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testSnoozeCalendarItemAlarmResponse snoozeCalendarItemAlarmRequest(
-        @WebParam(name = "SnoozeCalendarItemAlarmRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "SnoozeCalendarItemAlarmRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testSnoozeCalendarItemAlarmRequest parameters);
 
     /**
@@ -2458,10 +2458,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testSyncResponse
      */
-    @WebMethod(action = "urn:zimbraMail/Sync")
-    @WebResult(name = "SyncResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/Sync")
+    @WebResult(name = "SyncResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testSyncResponse syncRequest(
-        @WebParam(name = "SyncRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "SyncRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testSyncRequest parameters);
 
     /**
@@ -2470,10 +2470,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testTagActionResponse
      */
-    @WebMethod(action = "urn:zimbraMail/TagAction")
-    @WebResult(name = "TagActionResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/TagAction")
+    @WebResult(name = "TagActionResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testTagActionResponse tagActionRequest(
-        @WebParam(name = "TagActionRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "TagActionRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testTagActionRequest parameters);
 
     /**
@@ -2482,10 +2482,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testTestDataSourceResponse
      */
-    @WebMethod(action = "urn:zimbraMail/TestDataSource")
-    @WebResult(name = "TestDataSourceResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/TestDataSource")
+    @WebResult(name = "TestDataSourceResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testTestDataSourceResponse testDataSourceRequest(
-        @WebParam(name = "TestDataSourceRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "TestDataSourceRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testTestDataSourceRequest parameters);
 
     /**
@@ -2494,10 +2494,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testUpdateDeviceStatusResponse
      */
-    @WebMethod(action = "urn:zimbraMail/UpdateDeviceStatus")
-    @WebResult(name = "UpdateDeviceStatusResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/UpdateDeviceStatus")
+    @WebResult(name = "UpdateDeviceStatusResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testUpdateDeviceStatusResponse updateDeviceStatusRequest(
-        @WebParam(name = "UpdateDeviceStatusRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "UpdateDeviceStatusRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testUpdateDeviceStatusRequest parameters);
 
     /**
@@ -2506,10 +2506,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testVerifyCodeResponse
      */
-    @WebMethod(action = "urn:zimbraMail/VerifyCode")
-    @WebResult(name = "VerifyCodeResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/VerifyCode")
+    @WebResult(name = "VerifyCodeResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testVerifyCodeResponse verifyCodeRequest(
-        @WebParam(name = "VerifyCodeRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "VerifyCodeRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testVerifyCodeRequest parameters);
 
     /**
@@ -2518,10 +2518,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.mail.testWaitSetResponse
      */
-    @WebMethod(action = "urn:zimbraMail/WaitSet")
-    @WebResult(name = "WaitSetResponse", targetNamespace = "urn:zimbraMail", partName = "parameters")
+    @WebMethod(action = "urn:zmailMail/WaitSet")
+    @WebResult(name = "WaitSetResponse", targetNamespace = "urn:zmailMail", partName = "parameters")
     public testWaitSetResponse waitSetRequest(
-        @WebParam(name = "WaitSetRequest", targetNamespace = "urn:zimbraMail", partName = "parameters")
+        @WebParam(name = "WaitSetRequest", targetNamespace = "urn:zmailMail", partName = "parameters")
         testWaitSetRequest parameters);
 
     /**
@@ -2530,10 +2530,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.replication.testBecomeMasterResponse
      */
-    @WebMethod(action = "urn:zimbraRepl/BecomeMaster")
-    @WebResult(name = "BecomeMasterResponse", targetNamespace = "urn:zimbraRepl", partName = "parameters")
+    @WebMethod(action = "urn:zmailRepl/BecomeMaster")
+    @WebResult(name = "BecomeMasterResponse", targetNamespace = "urn:zmailRepl", partName = "parameters")
     public testBecomeMasterResponse becomeMasterRequest(
-        @WebParam(name = "BecomeMasterRequest", targetNamespace = "urn:zimbraRepl", partName = "parameters")
+        @WebParam(name = "BecomeMasterRequest", targetNamespace = "urn:zmailRepl", partName = "parameters")
         testBecomeMasterRequest parameters);
 
     /**
@@ -2542,10 +2542,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.replication.testBringDownServiceIPResponse
      */
-    @WebMethod(action = "urn:zimbraRepl/BringDownServiceIP")
-    @WebResult(name = "BringDownServiceIPResponse", targetNamespace = "urn:zimbraRepl", partName = "parameters")
+    @WebMethod(action = "urn:zmailRepl/BringDownServiceIP")
+    @WebResult(name = "BringDownServiceIPResponse", targetNamespace = "urn:zmailRepl", partName = "parameters")
     public testBringDownServiceIPResponse bringDownServiceIPRequest(
-        @WebParam(name = "BringDownServiceIPRequest", targetNamespace = "urn:zimbraRepl", partName = "parameters")
+        @WebParam(name = "BringDownServiceIPRequest", targetNamespace = "urn:zmailRepl", partName = "parameters")
         testBringDownServiceIPRequest parameters);
 
     /**
@@ -2554,10 +2554,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.replication.testBringUpServiceIPResponse
      */
-    @WebMethod(action = "urn:zimbraRepl/BringUpServiceIP")
-    @WebResult(name = "BringUpServiceIPResponse", targetNamespace = "urn:zimbraRepl", partName = "parameters")
+    @WebMethod(action = "urn:zmailRepl/BringUpServiceIP")
+    @WebResult(name = "BringUpServiceIPResponse", targetNamespace = "urn:zmailRepl", partName = "parameters")
     public testBringUpServiceIPResponse bringUpServiceIPRequest(
-        @WebParam(name = "BringUpServiceIPRequest", targetNamespace = "urn:zimbraRepl", partName = "parameters")
+        @WebParam(name = "BringUpServiceIPRequest", targetNamespace = "urn:zmailRepl", partName = "parameters")
         testBringUpServiceIPRequest parameters);
 
     /**
@@ -2566,10 +2566,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.replication.testReplicationStatusResponse
      */
-    @WebMethod(action = "urn:zimbraRepl/ReplicationStatus")
-    @WebResult(name = "ReplicationStatusResponse", targetNamespace = "urn:zimbraRepl", partName = "parameters")
+    @WebMethod(action = "urn:zmailRepl/ReplicationStatus")
+    @WebResult(name = "ReplicationStatusResponse", targetNamespace = "urn:zmailRepl", partName = "parameters")
     public testReplicationStatusResponse replicationStatusRequest(
-        @WebParam(name = "ReplicationStatusRequest", targetNamespace = "urn:zimbraRepl", partName = "parameters")
+        @WebParam(name = "ReplicationStatusRequest", targetNamespace = "urn:zmailRepl", partName = "parameters")
         testReplicationStatusRequest parameters);
 
     /**
@@ -2578,10 +2578,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.replication.testStartCatchupResponse
      */
-    @WebMethod(action = "urn:zimbraRepl/StartCatchup")
-    @WebResult(name = "StartCatchupResponse", targetNamespace = "urn:zimbraRepl", partName = "parameters")
+    @WebMethod(action = "urn:zmailRepl/StartCatchup")
+    @WebResult(name = "StartCatchupResponse", targetNamespace = "urn:zmailRepl", partName = "parameters")
     public testStartCatchupResponse startCatchupRequest(
-        @WebParam(name = "StartCatchupRequest", targetNamespace = "urn:zimbraRepl", partName = "parameters")
+        @WebParam(name = "StartCatchupRequest", targetNamespace = "urn:zmailRepl", partName = "parameters")
         testStartCatchupRequest parameters);
 
     /**
@@ -2590,10 +2590,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.replication.testStartFailoverClientResponse
      */
-    @WebMethod(action = "urn:zimbraRepl/StartFailoverClient")
-    @WebResult(name = "StartFailoverClientResponse", targetNamespace = "urn:zimbraRepl", partName = "parameters")
+    @WebMethod(action = "urn:zmailRepl/StartFailoverClient")
+    @WebResult(name = "StartFailoverClientResponse", targetNamespace = "urn:zmailRepl", partName = "parameters")
     public testStartFailoverClientResponse startFailoverClientRequest(
-        @WebParam(name = "StartFailoverClientRequest", targetNamespace = "urn:zimbraRepl", partName = "parameters")
+        @WebParam(name = "StartFailoverClientRequest", targetNamespace = "urn:zmailRepl", partName = "parameters")
         testStartFailoverClientRequest parameters);
 
     /**
@@ -2602,10 +2602,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.replication.testStartFailoverDaemonResponse
      */
-    @WebMethod(action = "urn:zimbraRepl/StartFailoverDaemon")
-    @WebResult(name = "StartFailoverDaemonResponse", targetNamespace = "urn:zimbraRepl", partName = "parameters")
+    @WebMethod(action = "urn:zmailRepl/StartFailoverDaemon")
+    @WebResult(name = "StartFailoverDaemonResponse", targetNamespace = "urn:zmailRepl", partName = "parameters")
     public testStartFailoverDaemonResponse startFailoverDaemonRequest(
-        @WebParam(name = "StartFailoverDaemonRequest", targetNamespace = "urn:zimbraRepl", partName = "parameters")
+        @WebParam(name = "StartFailoverDaemonRequest", targetNamespace = "urn:zmailRepl", partName = "parameters")
         testStartFailoverDaemonRequest parameters);
 
     /**
@@ -2614,10 +2614,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.replication.testStopFailoverClientResponse
      */
-    @WebMethod(action = "urn:zimbraRepl/StopFailoverClient")
-    @WebResult(name = "StopFailoverClientResponse", targetNamespace = "urn:zimbraRepl", partName = "parameters")
+    @WebMethod(action = "urn:zmailRepl/StopFailoverClient")
+    @WebResult(name = "StopFailoverClientResponse", targetNamespace = "urn:zmailRepl", partName = "parameters")
     public testStopFailoverClientResponse stopFailoverClientRequest(
-        @WebParam(name = "StopFailoverClientRequest", targetNamespace = "urn:zimbraRepl", partName = "parameters")
+        @WebParam(name = "StopFailoverClientRequest", targetNamespace = "urn:zmailRepl", partName = "parameters")
         testStopFailoverClientRequest parameters);
 
     /**
@@ -2626,10 +2626,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.replication.testStopFailoverDaemonResponse
      */
-    @WebMethod(action = "urn:zimbraRepl/StopFailoverDaemon")
-    @WebResult(name = "StopFailoverDaemonResponse", targetNamespace = "urn:zimbraRepl", partName = "parameters")
+    @WebMethod(action = "urn:zmailRepl/StopFailoverDaemon")
+    @WebResult(name = "StopFailoverDaemonResponse", targetNamespace = "urn:zmailRepl", partName = "parameters")
     public testStopFailoverDaemonResponse stopFailoverDaemonRequest(
-        @WebParam(name = "StopFailoverDaemonRequest", targetNamespace = "urn:zimbraRepl", partName = "parameters")
+        @WebParam(name = "StopFailoverDaemonRequest", targetNamespace = "urn:zmailRepl", partName = "parameters")
         testStopFailoverDaemonRequest parameters);
 
     /**
@@ -2638,10 +2638,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.sync.testCancelPendingRemoteWipeResponse
      */
-    @WebMethod(action = "urn:zimbraSync/CancelPendingRemoteWipe")
-    @WebResult(name = "CancelPendingRemoteWipeResponse", targetNamespace = "urn:zimbraSync", partName = "parameters")
+    @WebMethod(action = "urn:zmailSync/CancelPendingRemoteWipe")
+    @WebResult(name = "CancelPendingRemoteWipeResponse", targetNamespace = "urn:zmailSync", partName = "parameters")
     public testCancelPendingRemoteWipeResponse cancelPendingRemoteWipeRequest(
-        @WebParam(name = "CancelPendingRemoteWipeRequest", targetNamespace = "urn:zimbraSync", partName = "parameters")
+        @WebParam(name = "CancelPendingRemoteWipeRequest", targetNamespace = "urn:zmailSync", partName = "parameters")
         testCancelPendingRemoteWipeRequest parameters);
 
     /**
@@ -2650,10 +2650,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.sync.testGetDeviceStatusResponse
      */
-    @WebMethod(action = "urn:zimbraSync/GetDeviceStatus")
-    @WebResult(name = "GetDeviceStatusResponse", targetNamespace = "urn:zimbraSync", partName = "parameters")
+    @WebMethod(action = "urn:zmailSync/GetDeviceStatus")
+    @WebResult(name = "GetDeviceStatusResponse", targetNamespace = "urn:zmailSync", partName = "parameters")
     public testGetDeviceStatusResponse getDeviceStatusRequest(
-        @WebParam(name = "GetDeviceStatusRequest", targetNamespace = "urn:zimbraSync", partName = "parameters")
+        @WebParam(name = "GetDeviceStatusRequest", targetNamespace = "urn:zmailSync", partName = "parameters")
         testGetDeviceStatusRequest parameters);
 
     /**
@@ -2662,10 +2662,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.sync.testRemoteWipeResponse
      */
-    @WebMethod(action = "urn:zimbraSync/RemoteWipe")
-    @WebResult(name = "RemoteWipeResponse", targetNamespace = "urn:zimbraSync", partName = "parameters")
+    @WebMethod(action = "urn:zmailSync/RemoteWipe")
+    @WebResult(name = "RemoteWipeResponse", targetNamespace = "urn:zmailSync", partName = "parameters")
     public testRemoteWipeResponse remoteWipeRequest(
-        @WebParam(name = "RemoteWipeRequest", targetNamespace = "urn:zimbraSync", partName = "parameters")
+        @WebParam(name = "RemoteWipeRequest", targetNamespace = "urn:zmailSync", partName = "parameters")
         testRemoteWipeRequest parameters);
 
     /**
@@ -2674,10 +2674,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.sync.testRemoveDeviceResponse
      */
-    @WebMethod(action = "urn:zimbraSync/RemoveDevice")
-    @WebResult(name = "RemoveDeviceResponse", targetNamespace = "urn:zimbraSync", partName = "parameters")
+    @WebMethod(action = "urn:zmailSync/RemoveDevice")
+    @WebResult(name = "RemoveDeviceResponse", targetNamespace = "urn:zmailSync", partName = "parameters")
     public testRemoveDeviceResponse removeDeviceRequest(
-        @WebParam(name = "RemoveDeviceRequest", targetNamespace = "urn:zimbraSync", partName = "parameters")
+        @WebParam(name = "RemoveDeviceRequest", targetNamespace = "urn:zmailSync", partName = "parameters")
         testRemoveDeviceRequest parameters);
 
     /**
@@ -2686,10 +2686,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.sync.testResumeDeviceResponse
      */
-    @WebMethod(action = "urn:zimbraSync/ResumeDevice")
-    @WebResult(name = "ResumeDeviceResponse", targetNamespace = "urn:zimbraSync", partName = "parameters")
+    @WebMethod(action = "urn:zmailSync/ResumeDevice")
+    @WebResult(name = "ResumeDeviceResponse", targetNamespace = "urn:zmailSync", partName = "parameters")
     public testResumeDeviceResponse resumeDeviceRequest(
-        @WebParam(name = "ResumeDeviceRequest", targetNamespace = "urn:zimbraSync", partName = "parameters")
+        @WebParam(name = "ResumeDeviceRequest", targetNamespace = "urn:zmailSync", partName = "parameters")
         testResumeDeviceRequest parameters);
 
     /**
@@ -2698,10 +2698,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.sync.testSuspendDeviceResponse
      */
-    @WebMethod(action = "urn:zimbraSync/SuspendDevice")
-    @WebResult(name = "SuspendDeviceResponse", targetNamespace = "urn:zimbraSync", partName = "parameters")
+    @WebMethod(action = "urn:zmailSync/SuspendDevice")
+    @WebResult(name = "SuspendDeviceResponse", targetNamespace = "urn:zmailSync", partName = "parameters")
     public testSuspendDeviceResponse suspendDeviceRequest(
-        @WebParam(name = "SuspendDeviceRequest", targetNamespace = "urn:zimbraSync", partName = "parameters")
+        @WebParam(name = "SuspendDeviceRequest", targetNamespace = "urn:zmailSync", partName = "parameters")
         testSuspendDeviceRequest parameters);
 
     /**
@@ -2710,10 +2710,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.voice.testChangeUCPasswordResponse
      */
-    @WebMethod(action = "urn:zimbraVoice/ChangeUCPassword")
-    @WebResult(name = "ChangeUCPasswordResponse", targetNamespace = "urn:zimbraVoice", partName = "parameters")
+    @WebMethod(action = "urn:zmailVoice/ChangeUCPassword")
+    @WebResult(name = "ChangeUCPasswordResponse", targetNamespace = "urn:zmailVoice", partName = "parameters")
     public testChangeUCPasswordResponse changeUCPasswordRequest(
-        @WebParam(name = "ChangeUCPasswordRequest", targetNamespace = "urn:zimbraVoice", partName = "parameters")
+        @WebParam(name = "ChangeUCPasswordRequest", targetNamespace = "urn:zmailVoice", partName = "parameters")
         testChangeUCPasswordRequest parameters);
 
     /**
@@ -2722,10 +2722,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.voice.testGetUCInfoResponse
      */
-    @WebMethod(action = "urn:zimbraVoice/GetUCInfo")
-    @WebResult(name = "GetUCInfoResponse", targetNamespace = "urn:zimbraVoice", partName = "parameters")
+    @WebMethod(action = "urn:zmailVoice/GetUCInfo")
+    @WebResult(name = "GetUCInfoResponse", targetNamespace = "urn:zmailVoice", partName = "parameters")
     public testGetUCInfoResponse getUCInfoRequest(
-        @WebParam(name = "GetUCInfoRequest", targetNamespace = "urn:zimbraVoice", partName = "parameters")
+        @WebParam(name = "GetUCInfoRequest", targetNamespace = "urn:zmailVoice", partName = "parameters")
         testGetUCInfoRequest parameters);
 
     /**
@@ -2734,10 +2734,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.voice.testGetVoiceFeaturesResponse
      */
-    @WebMethod(action = "urn:zimbraVoice/GetVoiceFeatures")
-    @WebResult(name = "GetVoiceFeaturesResponse", targetNamespace = "urn:zimbraVoice", partName = "parameters")
+    @WebMethod(action = "urn:zmailVoice/GetVoiceFeatures")
+    @WebResult(name = "GetVoiceFeaturesResponse", targetNamespace = "urn:zmailVoice", partName = "parameters")
     public testGetVoiceFeaturesResponse getVoiceFeaturesRequest(
-        @WebParam(name = "GetVoiceFeaturesRequest", targetNamespace = "urn:zimbraVoice", partName = "parameters")
+        @WebParam(name = "GetVoiceFeaturesRequest", targetNamespace = "urn:zmailVoice", partName = "parameters")
         testGetVoiceFeaturesRequest parameters);
 
     /**
@@ -2746,10 +2746,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.voice.testGetVoiceFolderResponse
      */
-    @WebMethod(action = "urn:zimbraVoice/GetVoiceFolder")
-    @WebResult(name = "GetVoiceFolderResponse", targetNamespace = "urn:zimbraVoice", partName = "parameters")
+    @WebMethod(action = "urn:zmailVoice/GetVoiceFolder")
+    @WebResult(name = "GetVoiceFolderResponse", targetNamespace = "urn:zmailVoice", partName = "parameters")
     public testGetVoiceFolderResponse getVoiceFolderRequest(
-        @WebParam(name = "GetVoiceFolderRequest", targetNamespace = "urn:zimbraVoice", partName = "parameters")
+        @WebParam(name = "GetVoiceFolderRequest", targetNamespace = "urn:zmailVoice", partName = "parameters")
         testGetVoiceFolderRequest parameters);
 
     /**
@@ -2758,10 +2758,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.voice.testGetVoiceInfoResponse
      */
-    @WebMethod(action = "urn:zimbraVoice/GetVoiceInfo")
-    @WebResult(name = "GetVoiceInfoResponse", targetNamespace = "urn:zimbraVoice", partName = "parameters")
+    @WebMethod(action = "urn:zmailVoice/GetVoiceInfo")
+    @WebResult(name = "GetVoiceInfoResponse", targetNamespace = "urn:zmailVoice", partName = "parameters")
     public testGetVoiceInfoResponse getVoiceInfoRequest(
-        @WebParam(name = "GetVoiceInfoRequest", targetNamespace = "urn:zimbraVoice", partName = "parameters")
+        @WebParam(name = "GetVoiceInfoRequest", targetNamespace = "urn:zmailVoice", partName = "parameters")
         testGetVoiceInfoRequest parameters);
 
     /**
@@ -2770,10 +2770,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.voice.testGetVoiceMailPrefsResponse
      */
-    @WebMethod(action = "urn:zimbraVoice/GetVoiceMailPrefs")
-    @WebResult(name = "GetVoiceMailPrefsResponse", targetNamespace = "urn:zimbraVoice", partName = "parameters")
+    @WebMethod(action = "urn:zmailVoice/GetVoiceMailPrefs")
+    @WebResult(name = "GetVoiceMailPrefsResponse", targetNamespace = "urn:zmailVoice", partName = "parameters")
     public testGetVoiceMailPrefsResponse getVoiceMailPrefsRequest(
-        @WebParam(name = "GetVoiceMailPrefsRequest", targetNamespace = "urn:zimbraVoice", partName = "parameters")
+        @WebParam(name = "GetVoiceMailPrefsRequest", targetNamespace = "urn:zmailVoice", partName = "parameters")
         testGetVoiceMailPrefsRequest parameters);
 
     /**
@@ -2782,10 +2782,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.voice.testModifyFromNumResponse
      */
-    @WebMethod(action = "urn:zimbraVoice/ModifyFromNum")
-    @WebResult(name = "ModifyFromNumResponse", targetNamespace = "urn:zimbraVoice", partName = "parameters")
+    @WebMethod(action = "urn:zmailVoice/ModifyFromNum")
+    @WebResult(name = "ModifyFromNumResponse", targetNamespace = "urn:zmailVoice", partName = "parameters")
     public testModifyFromNumResponse modifyFromNumRequest(
-        @WebParam(name = "ModifyFromNumRequest", targetNamespace = "urn:zimbraVoice", partName = "parameters")
+        @WebParam(name = "ModifyFromNumRequest", targetNamespace = "urn:zmailVoice", partName = "parameters")
         testModifyFromNumRequest parameters);
 
     /**
@@ -2794,10 +2794,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.voice.testModifyVoiceFeaturesResponse
      */
-    @WebMethod(action = "urn:zimbraVoice/ModifyVoiceFeatures")
-    @WebResult(name = "ModifyVoiceFeaturesResponse", targetNamespace = "urn:zimbraVoice", partName = "parameters")
+    @WebMethod(action = "urn:zmailVoice/ModifyVoiceFeatures")
+    @WebResult(name = "ModifyVoiceFeaturesResponse", targetNamespace = "urn:zmailVoice", partName = "parameters")
     public testModifyVoiceFeaturesResponse modifyVoiceFeaturesRequest(
-        @WebParam(name = "ModifyVoiceFeaturesRequest", targetNamespace = "urn:zimbraVoice", partName = "parameters")
+        @WebParam(name = "ModifyVoiceFeaturesRequest", targetNamespace = "urn:zmailVoice", partName = "parameters")
         testModifyVoiceFeaturesRequest parameters);
 
     /**
@@ -2806,10 +2806,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.voice.testModifyVoiceMailPinResponse
      */
-    @WebMethod(action = "urn:zimbraVoice/ModifyVoiceMailPin")
-    @WebResult(name = "ModifyVoiceMailPinResponse", targetNamespace = "urn:zimbraVoice", partName = "parameters")
+    @WebMethod(action = "urn:zmailVoice/ModifyVoiceMailPin")
+    @WebResult(name = "ModifyVoiceMailPinResponse", targetNamespace = "urn:zmailVoice", partName = "parameters")
     public testModifyVoiceMailPinResponse modifyVoiceMailPinRequest(
-        @WebParam(name = "ModifyVoiceMailPinRequest", targetNamespace = "urn:zimbraVoice", partName = "parameters")
+        @WebParam(name = "ModifyVoiceMailPinRequest", targetNamespace = "urn:zmailVoice", partName = "parameters")
         testModifyVoiceMailPinRequest parameters);
 
     /**
@@ -2818,10 +2818,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.voice.testModifyVoiceMailPrefsResponse
      */
-    @WebMethod(action = "urn:zimbraVoice/ModifyVoiceMailPrefs")
-    @WebResult(name = "ModifyVoiceMailPrefsResponse", targetNamespace = "urn:zimbraVoice", partName = "parameters")
+    @WebMethod(action = "urn:zmailVoice/ModifyVoiceMailPrefs")
+    @WebResult(name = "ModifyVoiceMailPrefsResponse", targetNamespace = "urn:zmailVoice", partName = "parameters")
     public testModifyVoiceMailPrefsResponse modifyVoiceMailPrefsRequest(
-        @WebParam(name = "ModifyVoiceMailPrefsRequest", targetNamespace = "urn:zimbraVoice", partName = "parameters")
+        @WebParam(name = "ModifyVoiceMailPrefsRequest", targetNamespace = "urn:zmailVoice", partName = "parameters")
         testModifyVoiceMailPrefsRequest parameters);
 
     /**
@@ -2830,10 +2830,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.voice.testResetVoiceFeaturesResponse
      */
-    @WebMethod(action = "urn:zimbraVoice/ResetVoiceFeatures")
-    @WebResult(name = "ResetVoiceFeaturesResponse", targetNamespace = "urn:zimbraVoice", partName = "parameters")
+    @WebMethod(action = "urn:zmailVoice/ResetVoiceFeatures")
+    @WebResult(name = "ResetVoiceFeaturesResponse", targetNamespace = "urn:zmailVoice", partName = "parameters")
     public testResetVoiceFeaturesResponse resetVoiceFeaturesRequest(
-        @WebParam(name = "ResetVoiceFeaturesRequest", targetNamespace = "urn:zimbraVoice", partName = "parameters")
+        @WebParam(name = "ResetVoiceFeaturesRequest", targetNamespace = "urn:zmailVoice", partName = "parameters")
         testResetVoiceFeaturesRequest parameters);
 
     /**
@@ -2842,10 +2842,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.voice.testSearchVoiceResponse
      */
-    @WebMethod(action = "urn:zimbraVoice/SearchVoice")
-    @WebResult(name = "SearchVoiceResponse", targetNamespace = "urn:zimbraVoice", partName = "parameters")
+    @WebMethod(action = "urn:zmailVoice/SearchVoice")
+    @WebResult(name = "SearchVoiceResponse", targetNamespace = "urn:zmailVoice", partName = "parameters")
     public testSearchVoiceResponse searchVoiceRequest(
-        @WebParam(name = "SearchVoiceRequest", targetNamespace = "urn:zimbraVoice", partName = "parameters")
+        @WebParam(name = "SearchVoiceRequest", targetNamespace = "urn:zmailVoice", partName = "parameters")
         testSearchVoiceRequest parameters);
 
     /**
@@ -2854,10 +2854,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.voice.testUploadVoiceMailResponse
      */
-    @WebMethod(action = "urn:zimbraVoice/UploadVoiceMail")
-    @WebResult(name = "UploadVoiceMailResponse", targetNamespace = "urn:zimbraVoice", partName = "parameters")
+    @WebMethod(action = "urn:zmailVoice/UploadVoiceMail")
+    @WebResult(name = "UploadVoiceMailResponse", targetNamespace = "urn:zmailVoice", partName = "parameters")
     public testUploadVoiceMailResponse uploadVoiceMailRequest(
-        @WebParam(name = "UploadVoiceMailRequest", targetNamespace = "urn:zimbraVoice", partName = "parameters")
+        @WebParam(name = "UploadVoiceMailRequest", targetNamespace = "urn:zmailVoice", partName = "parameters")
         testUploadVoiceMailRequest parameters);
 
     /**
@@ -2866,10 +2866,10 @@ public interface ZcsPortType {
      * @return
      *     returns generated.zcsclient.voice.testVoiceMsgActionResponse
      */
-    @WebMethod(action = "urn:zimbraVoice/VoiceMsgAction")
-    @WebResult(name = "VoiceMsgActionResponse", targetNamespace = "urn:zimbraVoice", partName = "parameters")
+    @WebMethod(action = "urn:zmailVoice/VoiceMsgAction")
+    @WebResult(name = "VoiceMsgActionResponse", targetNamespace = "urn:zmailVoice", partName = "parameters")
     public testVoiceMsgActionResponse voiceMsgActionRequest(
-        @WebParam(name = "VoiceMsgActionRequest", targetNamespace = "urn:zimbraVoice", partName = "parameters")
+        @WebParam(name = "VoiceMsgActionRequest", targetNamespace = "urn:zmailVoice", partName = "parameters")
         testVoiceMsgActionRequest parameters);
 
 }

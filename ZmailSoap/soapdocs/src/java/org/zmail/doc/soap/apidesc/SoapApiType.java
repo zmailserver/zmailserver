@@ -13,17 +13,17 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.doc.soap.apidesc;
+package org.zmail.doc.soap.apidesc;
 
 import java.util.List;
 
 import com.google.common.collect.Lists;
-import com.zimbra.doc.soap.ChoiceNode;
-import com.zimbra.doc.soap.DescriptionNode;
-import com.zimbra.doc.soap.ValueDescription;
-import com.zimbra.doc.soap.XmlAttributeDescription;
-import com.zimbra.doc.soap.XmlElementDescription;
-import com.zimbra.soap.JaxbUtil;
+import org.zmail.doc.soap.ChoiceNode;
+import org.zmail.doc.soap.DescriptionNode;
+import org.zmail.doc.soap.ValueDescription;
+import org.zmail.doc.soap.XmlAttributeDescription;
+import org.zmail.doc.soap.XmlElementDescription;
+import org.zmail.soap.JaxbUtil;
 
 /**
  * Information about a "type".

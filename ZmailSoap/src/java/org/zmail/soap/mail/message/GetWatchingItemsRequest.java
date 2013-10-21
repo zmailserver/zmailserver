@@ -13,11 +13,11 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.message;
+package org.zmail.soap.mail.message;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.OctopusXmlConstants;
+import org.zmail.common.soap.OctopusXmlConstants;
 
 /**
  * @zm-api-command-auth-required true

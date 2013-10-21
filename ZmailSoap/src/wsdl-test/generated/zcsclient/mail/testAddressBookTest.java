@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="addressBookTest">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraMail}filterTest">
+ *     &lt;extension base="{urn:zmailMail}filterTest">
  *       &lt;sequence>
  *       &lt;/sequence>
  *       &lt;attribute name="header" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />

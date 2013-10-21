@@ -39,10 +39,10 @@ import generated.zcsclient.zm.testCursorInfo;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="query" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="header" type="{urn:zimbra}attributeName" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="tz" type="{urn:zimbraMail}calTZInfo" minOccurs="0"/>
+ *         &lt;element name="header" type="{urn:zmail}attributeName" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="tz" type="{urn:zmailMail}calTZInfo" minOccurs="0"/>
  *         &lt;element name="locale" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="cursor" type="{urn:zimbra}cursorInfo" minOccurs="0"/>
+ *         &lt;element name="cursor" type="{urn:zmail}cursorInfo" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="includeTagDeleted" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *       &lt;attribute name="includeTagMuted" type="{http://www.w3.org/2001/XMLSchema}boolean" />

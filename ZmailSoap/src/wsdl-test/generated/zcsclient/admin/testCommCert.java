@@ -34,9 +34,9 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="cert" type="{urn:zimbraAdmin}aidAndFilename" minOccurs="0"/>
- *         &lt;element name="rootCA" type="{urn:zimbraAdmin}aidAndFilename" minOccurs="0"/>
- *         &lt;element name="intermediateCA" type="{urn:zimbraAdmin}aidAndFilename" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="cert" type="{urn:zmailAdmin}aidAndFilename" minOccurs="0"/>
+ *         &lt;element name="rootCA" type="{urn:zmailAdmin}aidAndFilename" minOccurs="0"/>
+ *         &lt;element name="intermediateCA" type="{urn:zmailAdmin}aidAndFilename" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>

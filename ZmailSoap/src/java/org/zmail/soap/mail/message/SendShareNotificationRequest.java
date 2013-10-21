@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.message;
+package org.zmail.soap.mail.message;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -30,10 +30,10 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.mail.type.EmailAddrInfo;
-import com.zimbra.soap.type.Id;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.mail.type.EmailAddrInfo;
+import org.zmail.soap.type.Id;
 
 /**
  * @zm-api-command-auth-required true

@@ -34,9 +34,9 @@ import generated.zcsclient.zm.testId;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="upload" type="{urn:zimbra}id" minOccurs="0"/>
- *         &lt;element name="m" type="{urn:zimbraMail}messagePartSpec" minOccurs="0"/>
- *         &lt;element name="doc" type="{urn:zimbraMail}idVersion" minOccurs="0"/>
+ *         &lt;element name="upload" type="{urn:zmail}id" minOccurs="0"/>
+ *         &lt;element name="m" type="{urn:zmailMail}messagePartSpec" minOccurs="0"/>
+ *         &lt;element name="doc" type="{urn:zmailMail}idVersion" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="name" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="ct" type="{http://www.w3.org/2001/XMLSchema}string" />

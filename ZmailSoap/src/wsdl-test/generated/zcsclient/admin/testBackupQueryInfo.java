@@ -35,15 +35,15 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="currentAccounts" type="{urn:zimbraAdmin}currentAccounts" minOccurs="0"/>
- *         &lt;element name="accounts" type="{urn:zimbraAdmin}backupQueryAccounts" minOccurs="0"/>
- *         &lt;element name="error" type="{urn:zimbraAdmin}backupQueryError" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="currentAccounts" type="{urn:zmailAdmin}currentAccounts" minOccurs="0"/>
+ *         &lt;element name="accounts" type="{urn:zmailAdmin}backupQueryAccounts" minOccurs="0"/>
+ *         &lt;element name="error" type="{urn:zmailAdmin}backupQueryError" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="stats" minOccurs="0">
  *           &lt;complexType>
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence>
- *                   &lt;element name="counter" type="{urn:zimbraAdmin}backupQueryCounter" maxOccurs="unbounded" minOccurs="0"/>
+ *                   &lt;element name="counter" type="{urn:zmailAdmin}backupQueryCounter" maxOccurs="unbounded" minOccurs="0"/>
  *                 &lt;/sequence>
  *               &lt;/restriction>
  *             &lt;/complexContent>
@@ -399,7 +399,7 @@ public class testBackupQueryInfo {
      *   &lt;complexContent>
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
-     *         &lt;element name="counter" type="{urn:zimbraAdmin}backupQueryCounter" maxOccurs="unbounded" minOccurs="0"/>
+     *         &lt;element name="counter" type="{urn:zmailAdmin}backupQueryCounter" maxOccurs="unbounded" minOccurs="0"/>
      *       &lt;/sequence>
      *     &lt;/restriction>
      *   &lt;/complexContent>

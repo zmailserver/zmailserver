@@ -13,22 +13,22 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.type;
+package org.zmail.soap.mail.type;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 
 import com.google.common.base.Objects;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.type.GrantGranteeType;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.type.GrantGranteeType;
 
 /*
  * Delete this class in bug 66989
  */
 
 /*
-<grant perm="{rights}" gt="{grantee-type}" zid="{zimbra-id}" [expiry="{millis-since-epoch}"] [d="{grantee-name}"] [pw="{password-for-guest}"] [key=="{access-key}"]/>*
+<grant perm="{rights}" gt="{grantee-type}" zid="{zmail-id}" [expiry="{millis-since-epoch}"] [d="{grantee-name}"] [pw="{password-for-guest}"] [key=="{access-key}"]/>*
  */
 @XmlAccessorType(XmlAccessType.NONE)
 public class Grant {
@@ -50,8 +50,8 @@ public class Grant {
      *     "dom" (domain),
      *     "cos",
      *     "all" (all authenticated users), "pub" (public authenticated and unauthenticated access),
-     *     "guest" (non-Zimbra email address and password),
-     *     "key" (non-Zimbra email address and access key)
+     *     "guest" (non-Zmail email address and password),
+     *     "key" (non-Zmail email address and access key)
      * </pre>
      */
     @XmlAttribute(name=MailConstants.A_GRANT_TYPE /* gt */, required=true)

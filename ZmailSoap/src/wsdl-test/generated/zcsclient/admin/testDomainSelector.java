@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlValue;
  * &lt;complexType name="domainSelector">
  *   &lt;simpleContent>
  *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
- *       &lt;attribute name="by" type="{urn:zimbraAdmin}domainBy" />
+ *       &lt;attribute name="by" type="{urn:zmailAdmin}domainBy" />
  *     &lt;/extension>
  *   &lt;/simpleContent>
  * &lt;/complexType>

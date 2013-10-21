@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.message;
+package org.zmail.soap.mail.message;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -28,8 +28,8 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.mail.type.FreeBusyUserSpec;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.mail.type.FreeBusyUserSpec;
 
 /**
  * @zm-api-command-auth-required false - Freebusy information considered public if available
@@ -59,8 +59,8 @@ public class GetFreeBusyRequest {
     private final long endTime;
 
     /**
-     * @zm-api-field-tag comma-sep-zimbraId-or-email
-     * @zm-api-field-description <b>DEPRECATED</b>.  Comma-separated list of Zimbra IDs or emails.  Each value can be
+     * @zm-api-field-tag comma-sep-zmailId-or-email
+     * @zm-api-field-description <b>DEPRECATED</b>.  Comma-separated list of Zmail IDs or emails.  Each value can be
      * a Ziimbra ID or an email.
      */
     @Deprecated
@@ -69,7 +69,7 @@ public class GetFreeBusyRequest {
 
     /**
      * @zm-api-field-tag comma-sep-id
-     * @zm-api-field-description Comma separated list of Zimbra IDs
+     * @zm-api-field-description Comma separated list of Zmail IDs
      */
     @XmlAttribute(name=MailConstants.A_ID /* id */, required=false)
     private String id;

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.account.type;
+package org.zmail.soap.account.type;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,8 +27,8 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 
 import com.google.common.collect.Iterables;
 
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.soap.type.ZmBoolean;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.soap.type.ZmBoolean;
 
 /*
      <childAccount name="{child-account-name}" visible="0|1" id="{child-account-id}">

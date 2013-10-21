@@ -13,9 +13,9 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.base;
+package org.zmail.soap.base;
 
-import com.zimbra.soap.type.KeyValuePairs;
+import org.zmail.soap.type.KeyValuePairs;
 
 public interface CustomMetadataInterface extends KeyValuePairs {
     public void setSection(String section);

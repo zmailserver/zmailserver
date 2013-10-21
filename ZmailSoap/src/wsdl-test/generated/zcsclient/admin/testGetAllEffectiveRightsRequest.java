@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="grantee" type="{urn:zimbraAdmin}granteeSelector" minOccurs="0"/>
+ *         &lt;element name="grantee" type="{urn:zmailAdmin}granteeSelector" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="expandAllAttrs" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>

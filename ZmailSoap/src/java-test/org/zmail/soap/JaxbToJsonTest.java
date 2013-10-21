@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap;
+package org.zmail.soap;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -47,63 +47,63 @@ import org.junit.rules.TestName;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.zimbra.soap.JaxbUtil;
-import com.zimbra.soap.account.JaxbToElementTest;
-import com.zimbra.soap.account.message.CreateDistributionListResponse;
-import com.zimbra.soap.account.message.GetDistributionListResponse;
-import com.zimbra.soap.account.message.GetInfoResponse;
-import com.zimbra.soap.admin.message.AuthResponse;
-import com.zimbra.soap.admin.message.CreateXMbxSearchRequest;
-import com.zimbra.soap.admin.message.VerifyIndexResponse;
-import com.zimbra.soap.account.message.GetDistributionListMembersResponse;
-import com.zimbra.soap.account.type.DistributionListGranteeInfo;
-import com.zimbra.soap.account.type.DistributionListInfo;
-import com.zimbra.soap.account.type.DLInfo;
-import com.zimbra.soap.jaxb.AnyAttrTester;
-import com.zimbra.soap.jaxb.AnyTester;
-import com.zimbra.soap.jaxb.ElementRefTester;
-import com.zimbra.soap.jaxb.ElementRefsTester;
-import com.zimbra.soap.jaxb.EnumAttribEnumElem;
-import com.zimbra.soap.jaxb.EnumAttribs;
-import com.zimbra.soap.jaxb.EnumElemList;
-import com.zimbra.soap.jaxb.KVPairs;
-import com.zimbra.soap.jaxb.KeyValuePairsTester;
-import com.zimbra.soap.jaxb.MixedAnyTester;
-import com.zimbra.soap.jaxb.MixedTester;
-import com.zimbra.soap.jaxb.NamespaceDeltaElem;
-import com.zimbra.soap.jaxb.StringAttrStringElem;
-import com.zimbra.soap.jaxb.StringAttribIntValue;
-import com.zimbra.soap.jaxb.TransientTester;
-import com.zimbra.soap.jaxb.UniqueTester;
-import com.zimbra.soap.jaxb.ViewEnum;
-import com.zimbra.soap.jaxb.WrappedEnumElemList;
-import com.zimbra.soap.jaxb.WrappedKeyValuePairsTester;
-import com.zimbra.soap.jaxb.WrappedRequired;
-import com.zimbra.soap.jaxb.XmlElemJsonAttr;
-import com.zimbra.soap.json.JacksonUtil;
-import com.zimbra.soap.json.jackson.annotate.ZimbraJsonAttribute;
-import com.zimbra.soap.json.jackson.annotate.ZimbraKeyValuePairs;
-import com.zimbra.soap.mail.message.DiffDocumentResponse;
-import com.zimbra.soap.mail.message.GetFilterRulesResponse;
-import com.zimbra.soap.mail.message.NoOpResponse;
-import com.zimbra.soap.mail.type.AppointmentData;
-import com.zimbra.soap.mail.type.CalendaringDataInterface;
-import com.zimbra.soap.mail.type.DispositionAndText;
-import com.zimbra.soap.mail.type.FilterAction;
-import com.zimbra.soap.mail.type.FilterRule;
-import com.zimbra.soap.mail.type.FilterTest;
-import com.zimbra.soap.mail.type.FilterTests;
-import com.zimbra.soap.mail.type.InstanceDataInfo;
-import com.zimbra.soap.type.GranteeType;
-import com.zimbra.soap.type.KeyValuePair;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.Element.JSONElement;
-import com.zimbra.common.soap.Element.XMLElement;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.XMbxSearchConstants;
+import org.zmail.soap.JaxbUtil;
+import org.zmail.soap.account.JaxbToElementTest;
+import org.zmail.soap.account.message.CreateDistributionListResponse;
+import org.zmail.soap.account.message.GetDistributionListResponse;
+import org.zmail.soap.account.message.GetInfoResponse;
+import org.zmail.soap.admin.message.AuthResponse;
+import org.zmail.soap.admin.message.CreateXMbxSearchRequest;
+import org.zmail.soap.admin.message.VerifyIndexResponse;
+import org.zmail.soap.account.message.GetDistributionListMembersResponse;
+import org.zmail.soap.account.type.DistributionListGranteeInfo;
+import org.zmail.soap.account.type.DistributionListInfo;
+import org.zmail.soap.account.type.DLInfo;
+import org.zmail.soap.jaxb.AnyAttrTester;
+import org.zmail.soap.jaxb.AnyTester;
+import org.zmail.soap.jaxb.ElementRefTester;
+import org.zmail.soap.jaxb.ElementRefsTester;
+import org.zmail.soap.jaxb.EnumAttribEnumElem;
+import org.zmail.soap.jaxb.EnumAttribs;
+import org.zmail.soap.jaxb.EnumElemList;
+import org.zmail.soap.jaxb.KVPairs;
+import org.zmail.soap.jaxb.KeyValuePairsTester;
+import org.zmail.soap.jaxb.MixedAnyTester;
+import org.zmail.soap.jaxb.MixedTester;
+import org.zmail.soap.jaxb.NamespaceDeltaElem;
+import org.zmail.soap.jaxb.StringAttrStringElem;
+import org.zmail.soap.jaxb.StringAttribIntValue;
+import org.zmail.soap.jaxb.TransientTester;
+import org.zmail.soap.jaxb.UniqueTester;
+import org.zmail.soap.jaxb.ViewEnum;
+import org.zmail.soap.jaxb.WrappedEnumElemList;
+import org.zmail.soap.jaxb.WrappedKeyValuePairsTester;
+import org.zmail.soap.jaxb.WrappedRequired;
+import org.zmail.soap.jaxb.XmlElemJsonAttr;
+import org.zmail.soap.json.JacksonUtil;
+import org.zmail.soap.json.jackson.annotate.ZmailJsonAttribute;
+import org.zmail.soap.json.jackson.annotate.ZmailKeyValuePairs;
+import org.zmail.soap.mail.message.DiffDocumentResponse;
+import org.zmail.soap.mail.message.GetFilterRulesResponse;
+import org.zmail.soap.mail.message.NoOpResponse;
+import org.zmail.soap.mail.type.AppointmentData;
+import org.zmail.soap.mail.type.CalendaringDataInterface;
+import org.zmail.soap.mail.type.DispositionAndText;
+import org.zmail.soap.mail.type.FilterAction;
+import org.zmail.soap.mail.type.FilterRule;
+import org.zmail.soap.mail.type.FilterTest;
+import org.zmail.soap.mail.type.FilterTests;
+import org.zmail.soap.mail.type.InstanceDataInfo;
+import org.zmail.soap.type.GranteeType;
+import org.zmail.soap.type.KeyValuePair;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.Element.JSONElement;
+import org.zmail.common.soap.Element.XMLElement;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.XMbxSearchConstants;
 
 public class JaxbToJsonTest {
     @Rule public TestName testName = new TestName();
@@ -161,10 +161,10 @@ public class JaxbToJsonTest {
         final String name = "name Attribute";
 
         // From stacktrace of where the SOAP response gets assembled:
-        //     at com.zimbra.common.soap.Element.output(Element.java:432)
-        //     at com.zimbra.soap.SoapServlet.sendResponse(SoapServlet.java:349)
-        //     at com.zimbra.soap.SoapServlet.doWork(SoapServlet.java:307)
-        //     at com.zimbra.soap.SoapServlet.doPost(SoapServlet.java:206)
+        //     at org.zmail.common.soap.Element.output(Element.java:432)
+        //     at org.zmail.soap.SoapServlet.sendResponse(SoapServlet.java:349)
+        //     at org.zmail.soap.SoapServlet.doWork(SoapServlet.java:307)
+        //     at org.zmail.soap.SoapServlet.doPost(SoapServlet.java:206)
 
         // Bug 61264 is about issues with code that used JAXB which replaced code in GetCalendarItemSummaries
         // which started with an element created using:
@@ -287,7 +287,7 @@ public class JaxbToJsonTest {
      *    "message": [{
      *        "_content": "ver ndx message"
      *      }],
-     *    "_jsns": "urn:zimbraAdmin"
+     *    "_jsns": "urn:zmailAdmin"
      *  }
      */
     @Test
@@ -361,19 +361,19 @@ public class JaxbToJsonTest {
      *       "value2-a",
      *       "value2-b"]
      *   },
-     *   "_jsns": "urn:zimbraTest"
+     *   "_jsns": "urn:zmailTest"
      * }
      */
     @Test
     public void keyValuePairs() throws Exception {
-        Element jsonElem = JSONElement.mFactory.createElement(QName.get("key-value-pairs", "urn:zimbraTest"));
+        Element jsonElem = JSONElement.mFactory.createElement(QName.get("key-value-pairs", "urn:zmailTest"));
         jsonElem.addKeyValuePair("key1", "value1");
         jsonElem.addKeyValuePair("key2", "value2-a");
         jsonElem.addKeyValuePair("key2", "value2-b");
         // TODO: Update if this changes
         // Currently KVPairs has this field definition:
         //    @XmlElement(name=Element.XMLElement.E_ATTRIBUTE /* a */)
-        //    @ZimbraKeyValuePairs
+        //    @ZmailKeyValuePairs
         //    private List<KeyValuePair> keyValuePairs;
         KVPairs kvPairs = new KVPairs();
         kvPairs.addKeyValuePair(new KeyValuePair("key1", "value1"));
@@ -383,7 +383,7 @@ public class JaxbToJsonTest {
         KVPairs roundtripped = JaxbUtil.elementToJaxb(jsonJaxbElem, KVPairs.class);
         logInfo("JSONElement (for comparison) ---> prettyPrint\n%1$s", jsonElem.prettyPrint());
         logInfo("JSONElement from JAXB ---> prettyPrint\n%1$s", jsonJaxbElem.prettyPrint());
-        List<com.zimbra.common.soap.Element.KeyValuePair> elemKVPs = jsonJaxbElem.listKeyValuePairs();
+        List<org.zmail.common.soap.Element.KeyValuePair> elemKVPs = jsonJaxbElem.listKeyValuePairs();
         Assert.assertEquals("elemKVP num", 3, elemKVPs.size());
         List<KeyValuePair> kvps = roundtripped.getKeyValuePairs();
         Assert.assertEquals("roundtripped kvps num", 3, kvps.size());
@@ -396,8 +396,8 @@ public class JaxbToJsonTest {
      * Desired JSON :
      */
     @Test
-    public void zimbraKeyValuePairsAnnotation() throws Exception {
-        Element jsonElem = JSONElement.mFactory.createElement(QName.get("key-value-pairs", "urn:zimbraTest"));
+    public void zmailKeyValuePairsAnnotation() throws Exception {
+        Element jsonElem = JSONElement.mFactory.createElement(QName.get("key-value-pairs", "urn:zmailTest"));
         jsonElem.addKeyValuePair("key1", "value1");
         jsonElem.addKeyValuePair("key2", "value2-a");
         jsonElem.addKeyValuePair("key2", "value2-b");
@@ -410,7 +410,7 @@ public class JaxbToJsonTest {
         logInfo("JSONElement (for comparison) ---> prettyPrint\n%1$s", jsonElem.prettyPrint());
         logInfo("JSONElement from JAXB ---> prettyPrint\n%1$s", jsonJaxbElem.prettyPrint());
         KeyValuePairsTester roundtripped = JaxbUtil.elementToJaxb(jsonJaxbElem, KeyValuePairsTester.class);
-        List<com.zimbra.common.soap.Element.KeyValuePair> elemKVPs = jsonJaxbElem.listKeyValuePairs();
+        List<org.zmail.common.soap.Element.KeyValuePair> elemKVPs = jsonJaxbElem.listKeyValuePairs();
         Assert.assertEquals("elemKVP num", 3, elemKVPs.size());
         Assert.assertEquals("prettyPrint", jsonElem.prettyPrint(), jsonJaxbElem.prettyPrint());
         List<KeyValuePair> kvps = roundtripped.getAttrList();
@@ -426,12 +426,12 @@ public class JaxbToJsonTest {
      *       "key2": "value2"
      *     }
      *   },
-     *   "_jsns": "urn:zimbraTest"
+     *   "_jsns": "urn:zmailTest"
      * }
      */
     @Test
-    public void wrappedZimbraKeyValuePairsAnnotation() throws Exception {
-        Element jsonElem = JSONElement.mFactory.createElement(QName.get("key-value-pairs", "urn:zimbraTest"));
+    public void wrappedZmailKeyValuePairsAnnotation() throws Exception {
+        Element jsonElem = JSONElement.mFactory.createElement(QName.get("key-value-pairs", "urn:zmailTest"));
         Element wrapperElem = jsonElem.addUniqueElement("wrapper");
         wrapperElem.addKeyValuePair("key1", "value1");
         wrapperElem.addKeyValuePair("key2", "value2");
@@ -444,7 +444,7 @@ public class JaxbToJsonTest {
         logInfo("JSONElement from JAXB ---> prettyPrint\n%1$s", jsonJaxbElem.prettyPrint());
         Assert.assertEquals("prettyPrint", jsonElem.prettyPrint(), jsonJaxbElem.prettyPrint());
         WrappedKeyValuePairsTester roundtripped = JaxbUtil.elementToJaxb(jsonJaxbElem, WrappedKeyValuePairsTester.class);
-        List<com.zimbra.common.soap.Element.KeyValuePair> elemKVPs = jsonJaxbElem.getElement("wrapper").listKeyValuePairs();
+        List<org.zmail.common.soap.Element.KeyValuePair> elemKVPs = jsonJaxbElem.getElement("wrapper").listKeyValuePairs();
         Assert.assertEquals("elemKVP num", 2, elemKVPs.size());
         List<KeyValuePair> kvps = roundtripped.getAttrList();
         Assert.assertEquals("roundtripped kvps num", 2, kvps.size());
@@ -452,15 +452,15 @@ public class JaxbToJsonTest {
 
     /*
 # zmsoap -z -t account -m user1 GetDistributionListRequest/dl=grendl@coco.local @by=name
-<GetDistributionListResponse xmlns="urn:zimbraAccount">
+<GetDistributionListResponse xmlns="urn:zmailAccount">
   <dl id="7a3e8ec5-4892-4b17-9225-cf17e8b3acc9" dynamic="1" name="grendl@coco.local" isOwner="1" isMember="1">
     <a n="mail">grendl@coco.local</a>
-    <a n="zimbraMailStatus">enabled</a>
-    <a n="zimbraMailAlias">grendl@coco.local</a>
+    <a n="zmailMailStatus">enabled</a>
+    <a n="zmailMailAlias">grendl@coco.local</a>
     <a n="description">Wonder at that</a>
     <a n="displayName">Gren DLfun</a>
-    <a n="zimbraDistributionListSubscriptionPolicy">ACCEPT</a>
-    <a n="zimbraDistributionListUnsubscriptionPolicy">ACCEPT</a>
+    <a n="zmailDistributionListSubscriptionPolicy">ACCEPT</a>
+    <a n="zmailDistributionListUnsubscriptionPolicy">ACCEPT</a>
   </dl>
 </GetDistributionListResponse>
 # zmsoap --json -z -t account -m user1 GetDistributionListRequest/dl=grendl@coco.local @by=name
@@ -473,15 +473,15 @@ public class JaxbToJsonTest {
       "isOwner": true,
       "_attrs": {
         "mail": "grendl@coco.local",
-        "zimbraMailStatus": "enabled",
-        "zimbraMailAlias": "grendl@coco.local",
+        "zmailMailStatus": "enabled",
+        "zmailMailAlias": "grendl@coco.local",
         "description": "Wonder at that",
         "displayName": "Gren DLfun",
-        "zimbraDistributionListSubscriptionPolicy": "ACCEPT",
-        "zimbraDistributionListUnsubscriptionPolicy": "ACCEPT"
+        "zmailDistributionListSubscriptionPolicy": "ACCEPT",
+        "zmailDistributionListUnsubscriptionPolicy": "ACCEPT"
       }
     }],
-  "_jsns": "urn:zimbraAccount"
+  "_jsns": "urn:zmailAccount"
 }
 
 Extract from mailbox.log for creation of this DL by ZWC - demonstrating the different handling of attrs - See Bug 74371
@@ -494,7 +494,7 @@ Extract from mailbox.log for creation of this DL by ZWC - demonstrating the diff
               "a": [
                 {
                   "n": "memberURL",
-                  "_content": "ldap:///??sub?(|(zimbraMemberOf=7a3e8ec5-4892-4b17-9225-cf17e8b3acc9)(zimbraId=de47828e-94dd-45c3-9770-4dbd255564ca))"
+                  "_content": "ldap:///??sub?(|(zmailMemberOf=7a3e8ec5-4892-4b17-9225-cf17e8b3acc9)(zmailId=de47828e-94dd-45c3-9770-4dbd255564ca))"
                 },
                 {
                   "n": "mail",
@@ -528,7 +528,7 @@ Extract from mailbox.log for creation of this DL by ZWC - demonstrating the diff
         Element eDL = jsonJaxbElem.getElement(AdminConstants.E_DL);
         List<? extends KeyValuePair> kvps = roundtripped.getAttrList();
         Assert.assertEquals("roundtripped kvps num", 2, kvps.size());
-        List<com.zimbra.common.soap.Element.KeyValuePair> elemKVPs = eDL.getElement("a").listKeyValuePairs();
+        List<org.zmail.common.soap.Element.KeyValuePair> elemKVPs = eDL.getElement("a").listKeyValuePairs();
         Assert.assertEquals("elemKVP num", 2, elemKVPs.size());
         Assert.assertEquals("prettyPrint", jsonElem.prettyPrint(), jsonJaxbElem.prettyPrint());
     }
@@ -542,10 +542,10 @@ Extract from mailbox.log for creation of this DL by ZWC - demonstrating the diff
      *       "dynamic": true,
      *       "_attrs": {
      *         "mail": "fun@example.test",
-     *         "zimbraMailStatus": "enabled"
+     *         "zmailMailStatus": "enabled"
      *       }
      *     }],
-     *   "_jsns": "urn:zimbraAccount"
+     *   "_jsns": "urn:zmailAccount"
      * }
      */
     @Test
@@ -559,12 +559,12 @@ Extract from mailbox.log for creation of this DL by ZWC - demonstrating the diff
         logInfo("XmlElement (for comparison) ---> prettyPrint\n%1$s", xmlElem.prettyPrint());
         logInfo("JSONElement (for comparison) ---> prettyPrint\n%1$s", jsonElem.prettyPrint());
         // ObjectInfo declares this field:
-        //     @ZimbraKeyValuePairs
+        //     @ZmailKeyValuePairs
         //     @XmlElement(name=AccountConstants.E_A /* a */, required=false)
         //     private final List<KeyValuePair> attrList;
         List<KeyValuePair> attrs = Lists.newArrayList();
         attrs.add(new KeyValuePair("mail", "fun@example.test"));
-        attrs.add(new KeyValuePair("zimbraMailStatus", "enabled"));
+        attrs.add(new KeyValuePair("zmailMailStatus", "enabled"));
         DistributionListInfo dl = new DistributionListInfo("myId", "my name",  null, attrs);
         dl.setDynamic(true);
         GetDistributionListResponse jaxb = new GetDistributionListResponse(dl);
@@ -598,7 +598,7 @@ Extract from mailbox.log for creation of this DL by ZWC - demonstrating the diff
         logInfo("JSONElement (for comparison) ---> prettyPrint\n%1$s", jsonElem.prettyPrint());
         List<KeyValuePair> attrs = Lists.newArrayList();
         attrs.add(new KeyValuePair("mail", "fun@example.test"));
-        attrs.add(new KeyValuePair("zimbraMailStatus", "enabled"));
+        attrs.add(new KeyValuePair("zmailMailStatus", "enabled"));
         DistributionListInfo dl = new DistributionListInfo("myId", "my name",  null, attrs);
         dl.setDynamic(true);
         DistributionListGranteeInfo grantee = new DistributionListGranteeInfo(GranteeType.usr, "ownerId", "ownerName");
@@ -617,7 +617,7 @@ Extract from mailbox.log for creation of this DL by ZWC - demonstrating the diff
     }
 
     /**
-     * CreateXMbxSearchRequest currently extends AdminKeyValuePairs which uses the {@link ZimbraKeyValuePairs}
+     * CreateXMbxSearchRequest currently extends AdminKeyValuePairs which uses the {@link ZmailKeyValuePairs}
      * annotation.
      * 
      * Want JSON for KeyValuePairs to look something like :
@@ -636,9 +636,9 @@ Extract from mailbox.log for creation of this DL by ZWC - demonstrating the diff
         legacyElem.addKeyValuePair("limit", "0");
         legacyElem.addKeyValuePair("notificationMessage", notifMsg);
         logInfo("CreateXmbxSearchRequest JSONElement ---> prettyPrint\n%1$s", legacyElem.prettyPrint());
-        // CreateXMbxSearchRequest extends AdminKeyValuePairs which uses ZimbraKeyValuePairs annotation to flag need
+        // CreateXMbxSearchRequest extends AdminKeyValuePairs which uses ZmailKeyValuePairs annotation to flag need
         // for special handling required  when serializing to JSON:
-        //     @ZimbraKeyValuePairs
+        //     @ZmailKeyValuePairs
         //     @XmlElement(name=AdminConstants.E_A /* a */, required=false)
         //     private List<KeyValuePair> keyValuePairs;
         CreateXMbxSearchRequest jaxb = new CreateXMbxSearchRequest();
@@ -648,21 +648,21 @@ Extract from mailbox.log for creation of this DL by ZWC - demonstrating the diff
         jaxb.addKeyValuePair(new KeyValuePair("notificationMessage", notifMsg));
         Element elem = JacksonUtil.jaxbToJSONElement(jaxb, XMbxSearchConstants.CREATE_XMBX_SEARCH_REQUEST);
         logInfo("CreateXmbxSearchRequest JSONElement from JAXB ---> prettyPrint\n%1$s", elem.prettyPrint());
-        List<com.zimbra.common.soap.Element.KeyValuePair> kvps = elem.listKeyValuePairs();
+        List<org.zmail.common.soap.Element.KeyValuePair> kvps = elem.listKeyValuePairs();
         Assert.assertEquals("Number of keyValuePairs ", 4, kvps.size());
-        com.zimbra.common.soap.Element.KeyValuePair kvp4 = kvps.get(3);
+        org.zmail.common.soap.Element.KeyValuePair kvp4 = kvps.get(3);
         Assert.assertEquals("KeyValuePair notificationMessage key", "notificationMessage", kvp4.getKey());
         Assert.assertEquals("KeyValuePair notificationMessage value", notifMsg, kvp4.getValue());
     }
 
-    // Cut down version of com.zimbra.cs.service.admin.ToXML.encodeAttr
+    // Cut down version of org.zmail.cs.service.admin.ToXML.encodeAttr
     private void encodeAttr(Element parent, String key, String value, String eltname, String attrname) {
         Element e = parent.addElement(eltname);
         e.addAttribute(attrname, key);
         e.setText(value);
     }
 
-    // Cut down version of com.zimbra.cs.service.admin.ToXML.encodeAttrs
+    // Cut down version of org.zmail.cs.service.admin.ToXML.encodeAttrs
     // TODO: test with String[] values
     private void encodeAttrs(Element e, Map<String,Object> attrs, String key) {
         for (Iterator<Entry<String, Object>> iter = attrs.entrySet().iterator(); iter.hasNext(); ) {
@@ -699,7 +699,7 @@ Extract from mailbox.log for creation of this DL by ZWC - demonstrating the diff
         eDL.addAttribute(AdminConstants.A_ID, "myId");
         eDL.addAttribute(AdminConstants.A_DYNAMIC, true);
         eDL.addKeyValuePair("mail", "fun@example.test", AccountConstants.E_A, AccountConstants.A_N);
-        eDL.addKeyValuePair("zimbraMailStatus", "enabled", AccountConstants.E_A, AccountConstants.A_N);
+        eDL.addKeyValuePair("zmailMailStatus", "enabled", AccountConstants.E_A, AccountConstants.A_N);
     }
 
     /**
@@ -718,7 +718,7 @@ Extract from mailbox.log for creation of this DL by ZWC - demonstrating the diff
      *     {
      *       "_content": "dlmember3@no.where"
      *     }],
-     *   "_jsns": "urn:zimbraAccount"
+     *   "_jsns": "urn:zmailAccount"
      * }
      */
     @Test
@@ -752,7 +752,7 @@ Extract from mailbox.log for creation of this DL by ZWC - demonstrating the diff
 
     /**
      * By default JAXB renders true and false in XML as "true" and "false"
-     * For Zimbra SOAP the XML flavor uses "1" and "0"
+     * For Zmail SOAP the XML flavor uses "1" and "0"
      * The JSON flavor uses "true" and "false"
      * @throws Exception
      */
@@ -806,7 +806,7 @@ Extract from mailbox.log for creation of this DL by ZWC - demonstrating the diff
 
     /*
      * 
-<GetFilterRulesResponse xmlns="urn:zimbraMail">
+<GetFilterRulesResponse xmlns="urn:zmailMail">
   <filterRules>
     <filterRule name="filter1.1318830338466.3" active="0">
       <filterTests condition="anyof">
@@ -872,7 +872,7 @@ header="X-Spam-Score"/>
                   }]
               }]
           }],
-        "_jsns": "urn:zimbraMail"
+        "_jsns": "urn:zmailMail"
       }
      */
 
@@ -955,7 +955,7 @@ header="X-Spam-Score"/>
 
     /**
      * Tests a list of strings.  Was using a JSON Serializer called ContentListSerializer but the ObjectMapper we
-     * use for Zimbra JSON now handles lists of strings this way by default.  GetFilterRules uses JAXB rather than
+     * use for Zmail JSON now handles lists of strings this way by default.  GetFilterRules uses JAXB rather than
      * Element already.
      * Similar situation using Element based code for GetDistributionListMembers response used multiple calls to:
      *     parent.addElement(AccountConstants.E_DLM).setText(member);
@@ -975,7 +975,7 @@ header="X-Spam-Score"/>
                 "_content": "CANCEL"
               }]
           }],
-        "_jsns": "urn:zimbraMail"
+        "_jsns": "urn:zmailMail"
       }
     */
     @Test
@@ -1006,18 +1006,18 @@ header="X-Spam-Score"/>
      *       "fold2": [{
      *           "_content": ""
      *         }],
-     *       "_jsns": "urn:zimbraTest"
+     *       "_jsns": "urn:zmailTest"
      *     }
      */
     @Test
     public void xmlEnumValuesInAttrAndElem() throws Exception {
-        Element jsonElem = JSONElement.mFactory.createElement(QName.get("enum-tester", "urn:zimbraTest"));
+        Element jsonElem = JSONElement.mFactory.createElement(QName.get("enum-tester", "urn:zmailTest"));
         jsonElem.addAttribute("fold1", ViewEnum.VIRTUAL_CONVERSATION.toString());
         jsonElem.addElement("fold2").addText(ViewEnum.UNKNOWN.toString());
         EnumAttribEnumElem tstr = new EnumAttribEnumElem();
         tstr.setFold1(ViewEnum.VIRTUAL_CONVERSATION);
         tstr.setFold2(ViewEnum.UNKNOWN);
-        Element jsonJaxbElem = JacksonUtil.jaxbToJSONElement(tstr, QName.get("enum-tester", "urn:zimbraTest"));
+        Element jsonJaxbElem = JacksonUtil.jaxbToJSONElement(tstr, QName.get("enum-tester", "urn:zmailTest"));
         EnumAttribEnumElem roundtripped = JaxbUtil.elementToJaxb(jsonJaxbElem, EnumAttribEnumElem.class);
         logInfo("JSONElement (for comparison) ---> prettyPrint\n%1$s", jsonElem.prettyPrint());
         logInfo("JSONElement from JAXB ---> prettyPrint\n%1$s", jsonJaxbElem.prettyPrint());
@@ -1040,7 +1040,7 @@ header="X-Spam-Score"/>
      *     {
      *       "fold1": "virtual conversation",
      *       "fold2": "",
-     *       "_jsns": "urn:zimbraTest"
+     *       "_jsns": "urn:zmailTest"
      *     }
      */
     @Test
@@ -1048,7 +1048,7 @@ header="X-Spam-Score"/>
         EnumAttribs tstr = new EnumAttribs();
         tstr.setFold1(ViewEnum.VIRTUAL_CONVERSATION);
         tstr.setFold2(ViewEnum.UNKNOWN);
-        Element jsonJaxbElem = JacksonUtil.jaxbToJSONElement(tstr, QName.get("enum-tester", "urn:zimbraTest"));
+        Element jsonJaxbElem = JacksonUtil.jaxbToJSONElement(tstr, QName.get("enum-tester", "urn:zmailTest"));
         EnumAttribs roundtripped = JaxbUtil.elementToJaxb(jsonJaxbElem, EnumAttribs.class);
         logInfo("JSONElement from JAXB ---> prettyPrint\n%1$s", jsonJaxbElem.prettyPrint());
         // Want 'virtual conversation' not 'VIRTUAL_CONVERSATION'
@@ -1067,18 +1067,18 @@ header="X-Spam-Score"/>
      *        "attribute-1": "My attribute ONE",
      *        "element1": [{
      *            "_content": "My element ONE",
-     *            "_jsns": "urn:ZimbraTest3"
+     *            "_jsns": "urn:ZmailTest3"
      *          }],
-     *        "_jsns": "urn:ZimbraTest2"
+     *        "_jsns": "urn:ZmailTest2"
      *      }
      */
     @Test
     public void stringAttrAndElem() throws Exception {
         final String attr1Val = "My attribute ONE";
         final String elem1Val = "My element ONE";
-        Element jsonElem = JSONElement.mFactory.createElement(QName.get("string-tester", "urn:zimbraTest2"));
+        Element jsonElem = JSONElement.mFactory.createElement(QName.get("string-tester", "urn:zmailTest2"));
         jsonElem.addAttribute("attribute-1", attr1Val);
-        jsonElem.addElement(QName.get("element1", "urn:zimbraTest3")).addText(elem1Val);
+        jsonElem.addElement(QName.get("element1", "urn:zmailTest3")).addText(elem1Val);
         StringAttrStringElem tstr = new StringAttrStringElem();
         tstr.setAttr1(attr1Val);
         tstr.setElem1(elem1Val);
@@ -1104,21 +1104,21 @@ header="X-Spam-Score"/>
      *       "attribute-1": "My attribute ONE",
      *       "element1": [{
      *           "_content": "My element ONE",
-     *           "_jsns": "urn:ZimbraTest3"
+     *           "_jsns": "urn:ZmailTest3"
      *         }],
-     *       "_jsns": "urn:ZimbraTest5"
+     *       "_jsns": "urn:ZmailTest5"
      *     }],
-     *   "_jsns": "urn:ZimbraTest4"
+     *   "_jsns": "urn:ZmailTest4"
      * }
      */
     @Test
     public void elemsInDiffNamespace() throws Exception {
         final String attr1Val = "My attribute ONE";
         final String elem1Val = "My element ONE";
-        Element jsonElem = JSONElement.mFactory.createElement(QName.get("ns-delta", "urn:ZimbraTest4"));
-        Element saseElem = jsonElem.addElement(QName.get("strAttrStrElem", "urn:ZimbraTest5"));
+        Element jsonElem = JSONElement.mFactory.createElement(QName.get("ns-delta", "urn:ZmailTest4"));
+        Element saseElem = jsonElem.addElement(QName.get("strAttrStrElem", "urn:ZmailTest5"));
         saseElem.addAttribute("attribute-1", attr1Val);
-        saseElem.addElement(QName.get("element1", "urn:ZimbraTest3")).addText(elem1Val);
+        saseElem.addElement(QName.get("element1", "urn:ZmailTest3")).addText(elem1Val);
         logInfo("JSONElement (for comparison) ---> prettyPrint\n%1$s", jsonElem.prettyPrint());
         NamespaceDeltaElem tstr = new NamespaceDeltaElem();
         StringAttrStringElem tstrSase = new StringAttrStringElem();
@@ -1128,7 +1128,7 @@ header="X-Spam-Score"/>
         Element jsonJaxbElem = JacksonUtil.jaxbToJSONElement(tstr);
         logInfo("JSONElement from JAXB ---> prettyPrint\n%1$s", jsonJaxbElem.prettyPrint());
         NamespaceDeltaElem roundtripped = JaxbUtil.elementToJaxb(jsonJaxbElem, NamespaceDeltaElem.class);
-        Element saseJsonJaxbElem = jsonJaxbElem.getElement(QName.get("strAttrStrElem", "urn:ZimbraTest5"));
+        Element saseJsonJaxbElem = jsonJaxbElem.getElement(QName.get("strAttrStrElem", "urn:ZmailTest5"));
         Assert.assertEquals("JSONElement attr1", attr1Val, saseJsonJaxbElem.getAttribute("attribute-1"));
         Assert.assertEquals("JSONElement elem1", elem1Val, saseJsonJaxbElem.getElement("element1").getText());
         logInfo("roundtripped attr1=%1$s", roundtripped.getSase().getAttr1());
@@ -1145,11 +1145,11 @@ header="X-Spam-Score"/>
      *            "_content": "authenticationtoken"
      *          }],
      *        "lifetime": 3000,
-     *        "_jsns": "urn:zimbraAdmin"
+     *        "_jsns": "urn:zmailAdmin"
      *      }
      */
     @Test
-    public void stringElemAndZimbraJsonlongAttr() throws Exception {
+    public void stringElemAndZmailJsonlongAttr() throws Exception {
         final long lifetime = 3000;
         final String lifetimeStr = new Long(lifetime).toString();
         final String authToken = "authenticationtoken";
@@ -1175,7 +1175,7 @@ header="X-Spam-Score"/>
      *      {
      *        "attr1": "Attribute ONE",
      *        "_content": "3",
-     *        "_jsns": "urn:zimbraTest"
+     *        "_jsns": "urn:zmailTest"
      *      }
      */
     @Test
@@ -1183,7 +1183,7 @@ header="X-Spam-Score"/>
         final String attrib1 = "Attribute ONE";
         final int value = 3;
         final String valueStr = new Integer(value).toString();
-        Element jsonElem = JSONElement.mFactory.createElement(QName.get("string-attr-int-value", "urn:zimbraTest"));
+        Element jsonElem = JSONElement.mFactory.createElement(QName.get("string-attr-int-value", "urn:zmailTest"));
         jsonElem.addAttribute("attr1", attrib1);
         jsonElem.addText(valueStr);
         StringAttribIntValue tstr = new StringAttribIntValue(attrib1, value);
@@ -1206,17 +1206,17 @@ header="X-Spam-Score"/>
      * {
      *   "unique-str-elem": {
      *      "_content": "Unique element ONE",
-     *      "_jsns": "urn:zimbraTest1"
+     *      "_jsns": "urn:zmailTest1"
      *    },
      *    "non-unique-elem": [{
      *        "_content": "Unique element ONE",
-     *        "_jsns": "urn:zimbraTest1"
+     *        "_jsns": "urn:zmailTest1"
      *      }],
      *    "unique-complex-elem": {
      *      "attr1": "Attribute ONE",
      *      "_content": "3"
      *    },
-     *    "_jsns": "urn:zimbraTest"
+     *    "_jsns": "urn:zmailTest"
      * }
      */
     @Test
@@ -1225,9 +1225,9 @@ header="X-Spam-Score"/>
         final String attrib1 = "Attribute ONE";
         final int value = 3;
         final String valueStr = new Integer(value).toString();
-        Element jsonElem = JSONElement.mFactory.createElement(QName.get("unique-tester", "urn:zimbraTest"));
-        jsonElem.addUniqueElement(QName.get("unique-str-elem", "urn:zimbraTest1")).setText(elem1);
-        jsonElem.addElement(QName.get("non-unique-elem", "urn:zimbraTest1")).setText(elem1);
+        Element jsonElem = JSONElement.mFactory.createElement(QName.get("unique-tester", "urn:zmailTest"));
+        jsonElem.addUniqueElement(QName.get("unique-str-elem", "urn:zmailTest1")).setText(elem1);
+        jsonElem.addElement(QName.get("non-unique-elem", "urn:zmailTest1")).setText(elem1);
         jsonElem.addUniqueElement("unique-complex-elem").addAttribute("attr1", attrib1).setText(valueStr);
         logInfo("JSONElement (for comparison) ---> prettyPrint\n%1$s", jsonElem.prettyPrint());
         UniqueTester tstr = new UniqueTester();
@@ -1261,11 +1261,11 @@ header="X-Spam-Score"/>
      *          {
      *            "_content": "document"
      *          }],
-     *        "_jsns": "urn:zimbraTest"
+     *        "_jsns": "urn:zmailTest"
      */
     @Test
     public void enumElemList() throws Exception {
-        Element jsonElem = JSONElement.mFactory.createElement(QName.get("enum-elem-list", "urn:zimbraTest"));
+        Element jsonElem = JSONElement.mFactory.createElement(QName.get("enum-elem-list", "urn:zmailTest"));
         jsonElem.addElement("enum-entry").addText(ViewEnum.APPOINTMENT.toString());
         jsonElem.addElement("enum-entry").addText(ViewEnum.UNKNOWN.toString());
         jsonElem.addElement("enum-entry").addText(ViewEnum.DOCUMENT.toString());
@@ -1289,7 +1289,7 @@ header="X-Spam-Score"/>
     /**
      * Desired JSON :
      * {
-     *   "_jsns": "urn:zimbraTest"
+     *   "_jsns": "urn:zmailTest"
      * }
      */
     @Test
@@ -1320,12 +1320,12 @@ header="X-Spam-Score"/>
      *                "_content": "document"
      *              }]
      *          }],
-     *        "_jsns": "urn:zimbraTest"
+     *        "_jsns": "urn:zmailTest"
      *      }
      */
     @Test
     public void wrappedEnumElemList() throws Exception {
-        Element jsonElem = JSONElement.mFactory.createElement(QName.get("wrapped-enum-elem-list", "urn:zimbraTest"));
+        Element jsonElem = JSONElement.mFactory.createElement(QName.get("wrapped-enum-elem-list", "urn:zmailTest"));
         Element wrapElem = jsonElem.addElement("wrapper");
         wrapElem.addElement("enum-entry").addText(ViewEnum.APPOINTMENT.toString());
         wrapElem.addElement("enum-entry").addText(ViewEnum.DOCUMENT.toString());
@@ -1430,7 +1430,7 @@ header="X-Spam-Score"/>
      *       "attr1": "my string",
      *       "_content": 321
      *     }],
-     *   "_jsns": "urn:zimbraTest"
+     *   "_jsns": "urn:zmailTest"
      * }
      */
     @Test
@@ -1466,7 +1466,7 @@ header="X-Spam-Score"/>
      *       "fold1": "chat",
      *       "fold2": "remote folder"
      *     }],
-     *   "_jsns": "urn:zimbraTest"
+     *   "_jsns": "urn:zmailTest"
      * }
      */
     @Test
@@ -1576,7 +1576,7 @@ header="X-Spam-Score"/>
      *     },
      *     "_jsns": "urn:foreign"
      *   },
-     *   "_jsns": "urn:zimbraTest"
+     *   "_jsns": "urn:zmailTest"
      * }
      */
     @Test
@@ -1650,7 +1650,7 @@ header="X-Spam-Score"/>
         Assert.assertEquals("roundtrippedX num elems", 2, roundtrippedX.getElems().size());
         org.w3c.dom.Element w3ce = (org.w3c.dom.Element) roundtrippedX.getElems().get(0);
         Assert.assertEquals("roundtrippedX elem name", "alien", w3ce.getLocalName());
-        logInfo("STRING from JAXB ---> prettyPrint\n%1$s", getZimbraJsonJaxbString(jaxb));
+        logInfo("STRING from JAXB ---> prettyPrint\n%1$s", getZmailJsonJaxbString(jaxb));
         Element jsonJaxbElem = JacksonUtil.jaxbToJSONElement(jaxb);
         logInfo("JSONElement from JAXB ---> prettyPrint\n%1$s", jsonJaxbElem.prettyPrint());
         AnyTester roundtripped = JaxbUtil.elementToJaxb(jsonJaxbElem, AnyTester.class);
@@ -1672,7 +1672,7 @@ header="X-Spam-Score"/>
      *   "given": "Given information",
      *   "attr2": "222",
      *   "attr1": "First attr",
-     *   "_jsns": "urn:zimbraTest"
+     *   "_jsns": "urn:zmailTest"
      * }
      */
     @Test
@@ -1736,7 +1736,7 @@ header="X-Spam-Score"/>
      * {@link Element.Disposition.CONTENT} to force treating the attribute as an element in XML.</p>
      * Desired serialization to XML:
      * <pre>
-     *     &lt;multi-content-attrs xmlns="urn:zimbraTest">
+     *     &lt;multi-content-attrs xmlns="urn:zmailTest">
      *       &lt;soapURL>https://soap.example.test&lt;/soapURL>
      *     &lt;/multi-content-attrs>
      * </pre>
@@ -1744,7 +1744,7 @@ header="X-Spam-Score"/>
      * <pre>
      *     {
      *       "soapURL": "https://soap.example.test",
-     *       "_jsns": "urn:zimbraTest"
+     *       "_jsns": "urn:zmailTest"
      *     }
      * </pre>
      */
@@ -1752,8 +1752,8 @@ header="X-Spam-Score"/>
     public void multipleDispositionCONTENTAttributes() throws Exception {
         final String httpSoap = "http://soap.example.test";
         final String httpsSoap = "https://soap.example.test";
-        Element jsonElem = JSONElement.mFactory.createElement(QName.get("multi-content-attrs", "urn:zimbraTest"));
-        Element xmlElem = XMLElement.mFactory.createElement(QName.get("multi-content-attrs", "urn:zimbraTest"));
+        Element jsonElem = JSONElement.mFactory.createElement(QName.get("multi-content-attrs", "urn:zmailTest"));
+        Element xmlElem = XMLElement.mFactory.createElement(QName.get("multi-content-attrs", "urn:zmailTest"));
         jsonElem.addAttribute(AccountConstants.E_SOAP_URL, httpSoap, Element.Disposition.CONTENT);
         jsonElem.addAttribute(AccountConstants.E_SOAP_URL, httpsSoap, Element.Disposition.CONTENT);
         xmlElem.addAttribute(AccountConstants.E_SOAP_URL, httpSoap, Element.Disposition.CONTENT);
@@ -1769,14 +1769,14 @@ header="X-Spam-Score"/>
     }
 
     /**
-     * <p>Exercise annotation {@link ZimbraJsonAttribute} which is needed in JAXB in addition to {@link XmlElement} or
+     * <p>Exercise annotation {@link ZmailJsonAttribute} which is needed in JAXB in addition to {@link XmlElement} or
      * {@link XmlElementRef} annotations to provide a field which as an analog of something like:
      * <pre>
      *      jsonElem.addAttribute("xml-elem-json-attr", "XML elem but JSON attribute", Element.Disposition.CONTENT);
      * </pre>
      * Desired XML serialization:
      * <pre>
-     *     &lt;XmlElemJsonAttr xmlns="urn:zimbraTest">
+     *     &lt;XmlElemJsonAttr xmlns="urn:zmailTest">
      *       &lt;xml-elem-json-attr>XML elem but JSON attribute&lt;/xml-elem-json-attr>
      *       &lt;classic-elem>elem for both XML and JSON&lt;/classic-elem>
      *     &lt;/XmlElemJsonAttr>
@@ -1788,16 +1788,16 @@ header="X-Spam-Score"/>
      *       "classic-elem": [{
      *           "_content": "elem for both XML and JSON"
      *         }],
-     *       "_jsns": "urn:zimbraTest"
+     *       "_jsns": "urn:zmailTest"
      *     }
      * </pre>
      */
     @Test
-    public void exerciseZimbraJsonAttribute() throws Exception {
+    public void exerciseZmailJsonAttribute() throws Exception {
         final String str1 = "XML elem but JSON attribute";
         final String str2 = "elem for both XML and JSON";
-        Element jsonElem = JSONElement.mFactory.createElement(QName.get("XmlElemJsonAttr", "urn:zimbraTest"));
-        Element xmlElem = XMLElement.mFactory.createElement(QName.get("XmlElemJsonAttr", "urn:zimbraTest"));
+        Element jsonElem = JSONElement.mFactory.createElement(QName.get("XmlElemJsonAttr", "urn:zmailTest"));
+        Element xmlElem = XMLElement.mFactory.createElement(QName.get("XmlElemJsonAttr", "urn:zmailTest"));
         jsonElem.addAttribute("xml-elem-json-attr", str1, Element.Disposition.CONTENT);
         jsonElem.addElement("classic-elem").setText(str2);
         xmlElem.addAttribute("xml-elem-json-attr", str1, Element.Disposition.CONTENT);
@@ -1816,7 +1816,7 @@ header="X-Spam-Score"/>
         Assert.assertEquals("JSONElement num xml-elem-json-attr elements", 0, jsonElem.listElements("xml-elem-json-attr").size());
     }
 
-    public String getZimbraJsonJaxbString(Object obj) {
+    public String getZmailJsonJaxbString(Object obj) {
             try {
                 return JacksonUtil.jaxbToJsonString(JacksonUtil.getObjectMapper(), obj);
             } catch (ServiceException e) {
@@ -1824,7 +1824,7 @@ header="X-Spam-Score"/>
                 return null;
             }
     }
-    public String getNonZimbraJsonJaxbString(Object obj) {
+    public String getNonZmailJsonJaxbString(Object obj) {
             try {
                 return JacksonUtil.jaxbToJsonString(getSimpleJsonJaxbMapper(), obj);
             } catch (ServiceException e) {

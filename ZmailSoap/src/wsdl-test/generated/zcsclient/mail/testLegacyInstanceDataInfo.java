@@ -33,11 +33,11 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="legacyInstanceDataInfo">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraMail}legacyInstanceDataAttrs">
+ *     &lt;extension base="{urn:zmailMail}legacyInstanceDataAttrs">
  *       &lt;sequence>
- *         &lt;element name="or" type="{urn:zimbraMail}calOrganizer" minOccurs="0"/>
+ *         &lt;element name="or" type="{urn:zmailMail}calOrganizer" minOccurs="0"/>
  *         &lt;element name="category" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="geo" type="{urn:zimbraMail}geoInfo" minOccurs="0"/>
+ *         &lt;element name="geo" type="{urn:zmailMail}geoInfo" minOccurs="0"/>
  *         &lt;element name="fr" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="s" type="{http://www.w3.org/2001/XMLSchema}long" />

@@ -34,12 +34,12 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="messageSummary">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraMail}messageCommon">
+ *     &lt;extension base="{urn:zmailMail}messageCommon">
  *       &lt;sequence>
- *         &lt;element name="e" type="{urn:zimbraMail}emailInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="e" type="{urn:zmailMail}emailInfo" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="su" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="fr" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="inv" type="{urn:zimbraMail}inviteInfo" minOccurs="0"/>
+ *         &lt;element name="inv" type="{urn:zmailMail}inviteInfo" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="id" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="autoSendTime" type="{http://www.w3.org/2001/XMLSchema}long" />

@@ -37,11 +37,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="tz" type="{urn:zimbraMail}calTZInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="tz" type="{urn:zmailMail}calTZInfo" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;choice maxOccurs="unbounded" minOccurs="0">
- *           &lt;element name="comp" type="{urn:zimbraMail}expandedRecurrenceInvite"/>
- *           &lt;element name="except" type="{urn:zimbraMail}expandedRecurrenceException"/>
- *           &lt;element name="cancel" type="{urn:zimbraMail}expandedRecurrenceCancel"/>
+ *           &lt;element name="comp" type="{urn:zmailMail}expandedRecurrenceInvite"/>
+ *           &lt;element name="except" type="{urn:zmailMail}expandedRecurrenceException"/>
+ *           &lt;element name="cancel" type="{urn:zmailMail}expandedRecurrenceCancel"/>
  *         &lt;/choice>
  *       &lt;/sequence>
  *       &lt;attribute name="s" use="required" type="{http://www.w3.org/2001/XMLSchema}long" />

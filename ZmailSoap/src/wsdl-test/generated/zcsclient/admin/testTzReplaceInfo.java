@@ -33,8 +33,8 @@ import generated.zcsclient.zm.testId;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;all>
- *         &lt;element name="wellKnownTz" type="{urn:zimbra}id" minOccurs="0"/>
- *         &lt;element name="tz" type="{urn:zimbraAdmin}calTZInfo" minOccurs="0"/>
+ *         &lt;element name="wellKnownTz" type="{urn:zmail}id" minOccurs="0"/>
+ *         &lt;element name="tz" type="{urn:zmailAdmin}calTZInfo" minOccurs="0"/>
  *       &lt;/all>
  *     &lt;/restriction>
  *   &lt;/complexContent>

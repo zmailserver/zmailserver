@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.message;
+package org.zmail.soap.mail.message;
 
 import com.google.common.base.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -21,8 +21,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.type.ZmBoolean;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.type.ZmBoolean;
 
 /**
  * @zm-api-command-auth-required true
@@ -38,7 +38,7 @@ import com.zimbra.soap.type.ZmBoolean;
  * return.  If "delegate" is unset, delegate mailbox notifications will be ignored.  "delegate" is set by default.
  * <br />
  * Some clients (notably browsers) have a global-limit on the number of outstanding sockets...in situations with two
- * App Instances connected to one Zimbra Server, the browser app my appear to 'hang' if two app sessions attempt to do
+ * App Instances connected to one Zmail Server, the browser app my appear to 'hang' if two app sessions attempt to do
  * a blocking-NoOp simultaneously.  Since the apps are completely separate in the browser, it is impossible for the
  * apps to coordinate with each other -- therefore the 'limitToOneBlocked' setting is exposed by the server.  If
  * specified, the server will only allow a given user to have one single waiting-NoOp on the server at a time, it will
@@ -50,7 +50,7 @@ import com.zimbra.soap.type.ZmBoolean;
  * <br />
  * The client may specify a custom timeout-length for their request if they know something about the particular
  * underlying network.  The server may or may not honor this request (depending on server configured max/min values:
- * see LocalConfig variables <b>zimbra_noop_default_timeout, zimbra_noop_min_timeout and zimbra_noop_max_timeout</b>)
+ * see LocalConfig variables <b>zmail_noop_default_timeout, zmail_noop_min_timeout and zmail_noop_max_timeout</b>)
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name=MailConstants.E_NO_OP_REQUEST)
@@ -86,7 +86,7 @@ public class NoOpRequest {
      * @zm-api-field-description The client may specify a custom timeout-length for their request if they know
      * something about the particular underlying network.
      * The server may or may not honor this request (depending on server configured max/min values: see LocalConfig
-     * variables <b>zimbra_noop_default_timeout, zimbra_noop_min_timeout and zimbra_noop_max_timeout</b>)
+     * variables <b>zmail_noop_default_timeout, zmail_noop_min_timeout and zmail_noop_max_timeout</b>)
      */
     @XmlAttribute(name=MailConstants.A_TIMEOUT /* timeout */, required=false)
     private Long timeout;

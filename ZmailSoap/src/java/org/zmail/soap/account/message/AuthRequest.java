@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.account.message;
+package org.zmail.soap.account.message;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -26,17 +26,17 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.soap.account.type.Attr;
-import com.zimbra.soap.account.type.AuthToken;
-import com.zimbra.soap.account.type.PreAuth;
-import com.zimbra.soap.account.type.Pref;
-import com.zimbra.soap.type.AccountSelector;
-import com.zimbra.soap.type.ZmBoolean;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.soap.account.type.Attr;
+import org.zmail.soap.account.type.AuthToken;
+import org.zmail.soap.account.type.PreAuth;
+import org.zmail.soap.account.type.Pref;
+import org.zmail.soap.type.AccountSelector;
+import org.zmail.soap.type.ZmBoolean;
 
 
 /**
- <AuthRequest xmlns="urn:zimbraAccount">
+ <AuthRequest xmlns="urn:zmailAccount">
    [<account by="name|id|foreignPrincipal">...</account>]
    [<password>...</password>]
    [<preauth timestamp="{timestamp}" expires="{expires}">{computed-preauth-value}</preauth>]
@@ -105,7 +105,7 @@ public class AuthRequest {
      * @zm-api-field-tag virtual-host
      * @zm-api-field-description if specified (in conjunction with by="name"), virtual-host is used to determine
      * the domain of the account name, if it does not include a domain component. For example, if the domain
-     * foo.com has a zimbraVirtualHostname of "mail.foo.com", and an auth request comes in for "joe" with a
+     * foo.com has a zmailVirtualHostname of "mail.foo.com", and an auth request comes in for "joe" with a
      * virtualHost of "mail.foo.com", then the request will be equivalent to logging in with "joe@foo.com".
      */
     @XmlElement(name=AccountConstants.E_VIRTUAL_HOST /* virtualHost */, required=false)

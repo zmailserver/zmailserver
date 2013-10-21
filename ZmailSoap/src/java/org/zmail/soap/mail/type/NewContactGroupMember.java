@@ -13,14 +13,14 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.type;
+package org.zmail.soap.mail.type;
 
 import com.google.common.base.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 
-import com.zimbra.common.soap.MailConstants;
+import org.zmail.common.soap.MailConstants;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class NewContactGroupMember {
@@ -44,7 +44,7 @@ public class NewContactGroupMember {
      * <table>
      * <tr> <td> <b>type="C"</b> </td> 
      *      <td> Item ID of another contact.  If the referenced contact is in a shared folder, the item ID must be
-     *           qualified by zimbraId of the owner.  e.g. {zimbraId}:{itemId} </td> </tr>
+     *           qualified by zmailId of the owner.  e.g. {zmailId}:{itemId} </td> </tr>
      * <tr> <td> <b>type="G"</b> </td> <td> GAL entry reference (returned in SearchGalResponse) </td> </tr>
      * <tr> <td> <b>type="I"</b> </td>
      *      <td> name and email address in the form of: <b>"{name}" &lt;{email}></b> </td> </tr>

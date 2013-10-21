@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="createXMbxSearchRequest">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraAdmin}adminKeyValuePairs">
+ *     &lt;extension base="{urn:zmailAdmin}adminKeyValuePairs">
  *       &lt;sequence>
  *       &lt;/sequence>
  *     &lt;/extension>

@@ -33,15 +33,15 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="distributionListAction">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraAccount}accountKeyValuePairs">
+ *     &lt;extension base="{urn:zmailAccount}accountKeyValuePairs">
  *       &lt;sequence>
  *         &lt;element name="dlm" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="newName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="owner" type="{urn:zimbraAccount}distributionListGranteeSelector" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="right" type="{urn:zimbraAccount}distributionListRightSpec" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element ref="{urn:zimbraAccount}subsReq" minOccurs="0"/>
+ *         &lt;element name="owner" type="{urn:zmailAccount}distributionListGranteeSelector" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="right" type="{urn:zmailAccount}distributionListRightSpec" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element ref="{urn:zmailAccount}subsReq" minOccurs="0"/>
  *       &lt;/sequence>
- *       &lt;attribute name="op" use="required" type="{urn:zimbraAccount}operation" />
+ *       &lt;attribute name="op" use="required" type="{urn:zmailAccount}operation" />
  *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>

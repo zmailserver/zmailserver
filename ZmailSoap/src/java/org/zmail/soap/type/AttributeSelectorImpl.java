@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.type;
+package org.zmail.soap.type;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ import com.google.common.collect.Lists;
 import com.google.common.base.Joiner;
 import com.google.common.base.Objects;
 
-import com.zimbra.common.soap.AdminConstants;
+import org.zmail.common.soap.AdminConstants;
 
 @XmlAccessorType(XmlAccessType.NONE)
 abstract public class AttributeSelectorImpl implements AttributeSelector {

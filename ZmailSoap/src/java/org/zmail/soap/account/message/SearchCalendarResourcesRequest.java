@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.account.message;
+package org.zmail.soap.account.message;
 
 import com.google.common.base.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -22,12 +22,12 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.account.type.EntrySearchFilterInfo;
-import com.zimbra.soap.type.AttributeSelectorImpl;
-import com.zimbra.soap.type.CursorInfo;
-import com.zimbra.soap.type.ZmBoolean;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.account.type.EntrySearchFilterInfo;
+import org.zmail.soap.type.AttributeSelectorImpl;
+import org.zmail.soap.type.CursorInfo;
+import org.zmail.soap.type.ZmBoolean;
 
 // Removed following attributes which SearchParams.parse looks for as assuming they don't make sense for
 // Calendar resource search of GAL:
@@ -45,7 +45,7 @@ import com.zimbra.soap.type.ZmBoolean;
  * @zm-api-command-admin-auth-required false
  * @zm-api-command-description Search Global Address List (GAL) for calendar resources
  * <br />
- * "attrs" attribute - comma-separated list of attrs to return ("displayName", "zimbraId", "zimbraCalResType")
+ * "attrs" attribute - comma-separated list of attrs to return ("displayName", "zmailId", "zmailCalResType")
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name=AccountConstants.E_SEARCH_CALENDAR_RESOURCES_REQUEST)

@@ -13,10 +13,10 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.doc.soap;
+package org.zmail.doc.soap;
 
 import com.google.common.base.Strings;
-import com.zimbra.soap.util.JaxbAttributeInfo;
+import org.zmail.soap.util.JaxbAttributeInfo;
 
 public class XmlAttributeDescription
 implements XmlUnit {

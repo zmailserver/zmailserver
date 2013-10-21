@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.util;
+package org.zmail.soap.util;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.GenericArrayType;
@@ -43,14 +43,14 @@ import com.google.common.base.Strings;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.ZmailLog;
 
 /**
- * Zimbra SOAP interfaces are more flexible than Jaxb in what is acceptable.
+ * Zmail SOAP interfaces are more flexible than Jaxb in what is acceptable.
  * In particular, attributes can be represented as elements.
  * This class provides a limited amount of Jaxb information for a class to
- * aid transforming Zimbra acceptable Xml into Jaxb acceptable Xml.
+ * aid transforming Zmail acceptable Xml into Jaxb acceptable Xml.
  *
  * @author gren
  *
@@ -77,7 +77,7 @@ import com.zimbra.common.util.ZimbraLog;
 
 public final class JaxbInfo {
 
-    private static final Log LOG = ZimbraLog.soap;
+    private static final Log LOG = ZmailLog.soap;
     // Various annotation classes use this
     public static final String DEFAULT_MARKER = "##default";
 
@@ -536,7 +536,7 @@ public final class JaxbInfo {
             defKlass = (Class<?>) genericType;
             return Collection.class.isAssignableFrom(defKlass);
         } else if (genericType instanceof ParameterizedType) {
-            // e.g. java.util.List<com.zimbra.soap.type.AttributeName>
+            // e.g. java.util.List<org.zmail.soap.type.AttributeName>
             ParameterizedType pt = (ParameterizedType) genericType;
             Type rawType = pt.getRawType();
             if (rawType instanceof Class<?>) {

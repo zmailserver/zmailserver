@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="addTaskInviteRequest">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraMail}setCalendarItemInfo">
+ *     &lt;extension base="{urn:zmailMail}setCalendarItemInfo">
  *       &lt;sequence>
  *       &lt;/sequence>
  *     &lt;/extension>

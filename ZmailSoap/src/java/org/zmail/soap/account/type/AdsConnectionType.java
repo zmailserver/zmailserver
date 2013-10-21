@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.account.type;
+package org.zmail.soap.account.type;
 
 import java.util.Arrays;
 
@@ -21,9 +21,9 @@ import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
 
 import com.google.common.base.Function;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.soap.type.DataSource.ConnectionType;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.soap.type.DataSource.ConnectionType;
 
 @XmlEnum
 public enum AdsConnectionType {
@@ -54,7 +54,7 @@ public enum AdsConnectionType {
                 case tls: return tls;
                 case tls_if_available : return tls_if_available;
                 }
-                ZimbraLog.soap.warn("Unexpected connection type %s.  Returning %s.", from, cleartext);
+                ZmailLog.soap.warn("Unexpected connection type %s.  Returning %s.", from, cleartext);
                 return cleartext;
             }
     };
@@ -72,7 +72,7 @@ public enum AdsConnectionType {
                 case tls: return ConnectionType.tls;
                 case tls_if_available : return ConnectionType.tls_if_available;
                 }
-                ZimbraLog.soap.warn("Unexpected connection type %s.  Returning %s.", from, ConnectionType.cleartext);
+                ZmailLog.soap.warn("Unexpected connection type %s.  Returning %s.", from, ConnectionType.cleartext);
                 return ConnectionType.cleartext;
             }
     };

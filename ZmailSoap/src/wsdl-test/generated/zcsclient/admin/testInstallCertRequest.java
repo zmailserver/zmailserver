@@ -36,9 +36,9 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="comm_cert" type="{urn:zimbraAdmin}commCert" minOccurs="0"/>
+ *         &lt;element name="comm_cert" type="{urn:zmailAdmin}commCert" minOccurs="0"/>
  *         &lt;element name="validation_days" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="subject" type="{urn:zimbraAdmin}csrSubject" minOccurs="0"/>
+ *         &lt;element name="subject" type="{urn:zmailAdmin}csrSubject" minOccurs="0"/>
  *         &lt;element name="SubjectAltName" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="keysize" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>

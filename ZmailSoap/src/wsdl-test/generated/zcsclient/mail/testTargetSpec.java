@@ -35,8 +35,8 @@ import generated.zcsclient.zm.testTargetType;
  * &lt;complexType name="targetSpec">
  *   &lt;simpleContent>
  *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
- *       &lt;attribute name="type" use="required" type="{urn:zimbra}targetType" />
- *       &lt;attribute name="by" use="required" type="{urn:zimbra}accountBy" />
+ *       &lt;attribute name="type" use="required" type="{urn:zmail}targetType" />
+ *       &lt;attribute name="by" use="required" type="{urn:zmail}accountBy" />
  *     &lt;/extension>
  *   &lt;/simpleContent>
  * &lt;/complexType>

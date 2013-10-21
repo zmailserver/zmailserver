@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -27,14 +27,14 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.soap.admin.type.ConstraintAttr;
-import com.zimbra.soap.type.TargetType;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.soap.admin.type.ConstraintAttr;
+import org.zmail.soap.type.TargetType;
 
 /**
  * @zm-api-command-auth-required true
  * @zm-api-command-admin-auth-required true
- * @zm-api-command-description Modify constraint (zimbraConstraint) for delegated admin on global config or a COS
+ * @zm-api-command-description Modify constraint (zmailConstraint) for delegated admin on global config or a COS
  * <br />
  * If constraints for an attribute already exists, it will be replaced by the new constraints.
  * If <b>&lt;constraint></b> is an empty element, constraints for the attribute will be removed.

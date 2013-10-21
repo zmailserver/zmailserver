@@ -33,9 +33,9 @@ import generated.zcsclient.zm.testNamedElement;
  * <pre>
  * &lt;complexType name="getZimletRequest">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbra}attributeSelectorImpl">
+ *     &lt;extension base="{urn:zmail}attributeSelectorImpl">
  *       &lt;sequence>
- *         &lt;element name="zimlet" type="{urn:zimbra}namedElement"/>
+ *         &lt;element name="zimlet" type="{urn:zmail}namedElement"/>
  *       &lt;/sequence>
  *     &lt;/extension>
  *   &lt;/complexContent>

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.message;
+package org.zmail.soap.mail.message;
 
 import com.google.common.base.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -22,9 +22,9 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.OctopusXmlConstants;
-import com.zimbra.soap.mail.type.ActivityFilter;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.OctopusXmlConstants;
+import org.zmail.soap.mail.type.ActivityFilter;
 
 /**
  * @zm-api-command-auth-required true

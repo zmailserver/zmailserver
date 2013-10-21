@@ -13,14 +13,14 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.account.type;
+package org.zmail.soap.account.type;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlValue;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
-import com.zimbra.soap.base.KeyAndValue;
+import org.zmail.soap.base.KeyAndValue;
 
 /*
    <pref name="{name}" modified="{modified-time}">{value}</pref>

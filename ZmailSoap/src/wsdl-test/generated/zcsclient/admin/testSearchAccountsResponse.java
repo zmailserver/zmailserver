@@ -38,12 +38,12 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;choice maxOccurs="unbounded" minOccurs="0">
- *           &lt;element name="calresource" type="{urn:zimbraAdmin}calendarResourceInfo"/>
- *           &lt;element ref="{urn:zimbraAdmin}dl"/>
- *           &lt;element ref="{urn:zimbraAdmin}alias"/>
- *           &lt;element name="account" type="{urn:zimbraAdmin}accountInfo"/>
- *           &lt;element ref="{urn:zimbraAdmin}domain"/>
- *           &lt;element name="cos" type="{urn:zimbraAdmin}cosInfo"/>
+ *           &lt;element name="calresource" type="{urn:zmailAdmin}calendarResourceInfo"/>
+ *           &lt;element ref="{urn:zmailAdmin}dl"/>
+ *           &lt;element ref="{urn:zmailAdmin}alias"/>
+ *           &lt;element name="account" type="{urn:zmailAdmin}accountInfo"/>
+ *           &lt;element ref="{urn:zmailAdmin}domain"/>
+ *           &lt;element name="cos" type="{urn:zmailAdmin}cosInfo"/>
  *         &lt;/choice>
  *       &lt;/sequence>
  *       &lt;attribute name="more" use="required" type="{http://www.w3.org/2001/XMLSchema}boolean" />

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -27,11 +27,11 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.admin.type.MessageInfo;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.admin.type.MessageInfo;
 
-// soap-network-admin.txt implies that this is very similar to SearchResponse (presumably in urn:zimbraMail) but it looks
+// soap-network-admin.txt implies that this is very similar to SearchResponse (presumably in urn:zmailMail) but it looks
 // like a cut down version with just E_MSG children.  See CrossMailboxSearch.LocalTask.search(mbox, params, writer).
 // Also, there are no summary attributes which probably makes sense as we may not know all the results at the start
 // of writing the reply.

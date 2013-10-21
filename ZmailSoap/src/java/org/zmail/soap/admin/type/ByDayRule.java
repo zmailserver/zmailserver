@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.type;
+package org.zmail.soap.admin.type;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -26,9 +26,9 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.base.ByDayRuleInterface;
-import com.zimbra.soap.base.WkDayInterface;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.base.ByDayRuleInterface;
+import org.zmail.soap.base.WkDayInterface;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class ByDayRule implements ByDayRuleInterface {

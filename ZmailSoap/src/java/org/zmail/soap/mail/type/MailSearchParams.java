@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.type;
+package org.zmail.soap.mail.type;
 
 import java.util.Collections;
 import java.util.List;
@@ -26,13 +26,13 @@ import javax.xml.bind.annotation.XmlElement;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.base.CalTZInfoInterface;
-import com.zimbra.soap.base.SearchParameters;
-import com.zimbra.soap.json.jackson.annotate.ZimbraJsonAttribute;
-import com.zimbra.soap.type.AttributeName;
-import com.zimbra.soap.type.CursorInfo;
-import com.zimbra.soap.type.ZmBoolean;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.base.CalTZInfoInterface;
+import org.zmail.soap.base.SearchParameters;
+import org.zmail.soap.json.jackson.annotate.ZmailJsonAttribute;
+import org.zmail.soap.type.AttributeName;
+import org.zmail.soap.type.CursorInfo;
+import org.zmail.soap.type.ZmBoolean;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class MailSearchParams implements SearchParameters {
@@ -91,7 +91,7 @@ public class MailSearchParams implements SearchParameters {
      * @zm-api-field-tag query-string
      * @zm-api-field-description Query string
      */
-    @ZimbraJsonAttribute
+    @ZmailJsonAttribute
     @XmlElement(name=MailConstants.E_QUERY /* query */, required=false)
     private String query;
 

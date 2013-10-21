@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.message;
+package org.zmail.soap.mail.message;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
@@ -26,17 +26,17 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.mail.type.CalDataSourceNameOrId;
-import com.zimbra.soap.mail.type.CaldavDataSourceNameOrId;
-import com.zimbra.soap.mail.type.DataSourceNameOrId;
-import com.zimbra.soap.mail.type.GalDataSourceNameOrId;
-import com.zimbra.soap.mail.type.ImapDataSourceNameOrId;
-import com.zimbra.soap.mail.type.NameOrId;
-import com.zimbra.soap.mail.type.Pop3DataSourceNameOrId;
-import com.zimbra.soap.mail.type.RssDataSourceNameOrId;
-import com.zimbra.soap.mail.type.UnknownDataSourceNameOrId;
-import com.zimbra.soap.mail.type.YabDataSourceNameOrId;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.mail.type.CalDataSourceNameOrId;
+import org.zmail.soap.mail.type.CaldavDataSourceNameOrId;
+import org.zmail.soap.mail.type.DataSourceNameOrId;
+import org.zmail.soap.mail.type.GalDataSourceNameOrId;
+import org.zmail.soap.mail.type.ImapDataSourceNameOrId;
+import org.zmail.soap.mail.type.NameOrId;
+import org.zmail.soap.mail.type.Pop3DataSourceNameOrId;
+import org.zmail.soap.mail.type.RssDataSourceNameOrId;
+import org.zmail.soap.mail.type.UnknownDataSourceNameOrId;
+import org.zmail.soap.mail.type.YabDataSourceNameOrId;
 
 /**
  * @zm-api-command-auth-required true

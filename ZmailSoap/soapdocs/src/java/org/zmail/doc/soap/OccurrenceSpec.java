@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.doc.soap;
+package org.zmail.doc.soap;
 
 public enum OccurrenceSpec {
     REQUIRED, // one and only one 1:1 = ""

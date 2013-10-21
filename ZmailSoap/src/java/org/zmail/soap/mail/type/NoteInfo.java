@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.type;
+package org.zmail.soap.mail.type;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -28,8 +28,8 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.json.jackson.annotate.ZimbraJsonAttribute;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.json.jackson.annotate.ZmailJsonAttribute;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(propOrder = { "content", "metadatas" })
@@ -124,7 +124,7 @@ public class NoteInfo {
      * @zm-api-field-tag content
      * @zm-api-field-description Content
      */
-    @ZimbraJsonAttribute
+    @ZmailJsonAttribute
     @XmlElement(name=MailConstants.E_CONTENT /* content */, required=false)
     private String content;
 

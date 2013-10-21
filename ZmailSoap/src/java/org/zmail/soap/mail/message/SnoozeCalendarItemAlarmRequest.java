@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.message;
+package org.zmail.soap.mail.message;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -28,10 +28,10 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.mail.type.SnoozeAlarm;
-import com.zimbra.soap.mail.type.SnoozeAppointmentAlarm;
-import com.zimbra.soap.mail.type.SnoozeTaskAlarm;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.mail.type.SnoozeAlarm;
+import org.zmail.soap.mail.type.SnoozeAppointmentAlarm;
+import org.zmail.soap.mail.type.SnoozeTaskAlarm;
 
 /**
  * @zm-api-command-auth-required true

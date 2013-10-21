@@ -38,30 +38,30 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;choice maxOccurs="unbounded" minOccurs="0">
- *           &lt;element name="addressBookTest" type="{urn:zimbraMail}addressBookTest"/>
- *           &lt;element name="addressTest" type="{urn:zimbraMail}addressTest"/>
- *           &lt;element name="attachmentTest" type="{urn:zimbraMail}attachmentTest"/>
- *           &lt;element name="bodyTest" type="{urn:zimbraMail}bodyTest"/>
- *           &lt;element name="bulkTest" type="{urn:zimbraMail}bulkTest"/>
- *           &lt;element name="contactRankingTest" type="{urn:zimbraMail}contactRankingTest"/>
- *           &lt;element name="conversationTest" type="{urn:zimbraMail}conversationTest"/>
- *           &lt;element name="currentDayOfWeekTest" type="{urn:zimbraMail}currentDayOfWeekTest"/>
- *           &lt;element name="currentTimeTest" type="{urn:zimbraMail}currentTimeTest"/>
- *           &lt;element name="dateTest" type="{urn:zimbraMail}dateTest"/>
- *           &lt;element name="facebookTest" type="{urn:zimbraMail}facebookTest"/>
- *           &lt;element name="flaggedTest" type="{urn:zimbraMail}flaggedTest"/>
- *           &lt;element name="headerExistsTest" type="{urn:zimbraMail}headerExistsTest"/>
- *           &lt;element name="headerTest" type="{urn:zimbraMail}headerTest"/>
- *           &lt;element name="importanceTest" type="{urn:zimbraMail}importanceTest"/>
- *           &lt;element name="inviteTest" type="{urn:zimbraMail}inviteTest"/>
- *           &lt;element name="linkedinTest" type="{urn:zimbraMail}linkedInTest"/>
- *           &lt;element name="listTest" type="{urn:zimbraMail}listTest"/>
- *           &lt;element name="meTest" type="{urn:zimbraMail}meTest"/>
- *           &lt;element name="mimeHeaderTest" type="{urn:zimbraMail}mimeHeaderTest"/>
- *           &lt;element name="sizeTest" type="{urn:zimbraMail}sizeTest"/>
- *           &lt;element name="socialcastTest" type="{urn:zimbraMail}socialcastTest"/>
- *           &lt;element name="trueTest" type="{urn:zimbraMail}trueTest"/>
- *           &lt;element name="twitterTest" type="{urn:zimbraMail}twitterTest"/>
+ *           &lt;element name="addressBookTest" type="{urn:zmailMail}addressBookTest"/>
+ *           &lt;element name="addressTest" type="{urn:zmailMail}addressTest"/>
+ *           &lt;element name="attachmentTest" type="{urn:zmailMail}attachmentTest"/>
+ *           &lt;element name="bodyTest" type="{urn:zmailMail}bodyTest"/>
+ *           &lt;element name="bulkTest" type="{urn:zmailMail}bulkTest"/>
+ *           &lt;element name="contactRankingTest" type="{urn:zmailMail}contactRankingTest"/>
+ *           &lt;element name="conversationTest" type="{urn:zmailMail}conversationTest"/>
+ *           &lt;element name="currentDayOfWeekTest" type="{urn:zmailMail}currentDayOfWeekTest"/>
+ *           &lt;element name="currentTimeTest" type="{urn:zmailMail}currentTimeTest"/>
+ *           &lt;element name="dateTest" type="{urn:zmailMail}dateTest"/>
+ *           &lt;element name="facebookTest" type="{urn:zmailMail}facebookTest"/>
+ *           &lt;element name="flaggedTest" type="{urn:zmailMail}flaggedTest"/>
+ *           &lt;element name="headerExistsTest" type="{urn:zmailMail}headerExistsTest"/>
+ *           &lt;element name="headerTest" type="{urn:zmailMail}headerTest"/>
+ *           &lt;element name="importanceTest" type="{urn:zmailMail}importanceTest"/>
+ *           &lt;element name="inviteTest" type="{urn:zmailMail}inviteTest"/>
+ *           &lt;element name="linkedinTest" type="{urn:zmailMail}linkedInTest"/>
+ *           &lt;element name="listTest" type="{urn:zmailMail}listTest"/>
+ *           &lt;element name="meTest" type="{urn:zmailMail}meTest"/>
+ *           &lt;element name="mimeHeaderTest" type="{urn:zmailMail}mimeHeaderTest"/>
+ *           &lt;element name="sizeTest" type="{urn:zmailMail}sizeTest"/>
+ *           &lt;element name="socialcastTest" type="{urn:zmailMail}socialcastTest"/>
+ *           &lt;element name="trueTest" type="{urn:zmailMail}trueTest"/>
+ *           &lt;element name="twitterTest" type="{urn:zmailMail}twitterTest"/>
  *         &lt;/choice>
  *       &lt;/sequence>
  *       &lt;attribute name="condition" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -28,16 +28,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import com.google.common.collect.Lists;
 
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.soap.admin.type.AccountInfo;
-import com.zimbra.soap.admin.type.AdminObjectInterface;
-import com.zimbra.soap.admin.type.AliasInfo;
-import com.zimbra.soap.admin.type.CalendarResourceInfo;
-import com.zimbra.soap.admin.type.CosInfo;
-import com.zimbra.soap.admin.type.DomainInfo;
-import com.zimbra.soap.admin.type.DistributionListInfo;
-import com.zimbra.soap.type.ZmBoolean;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.soap.admin.type.AccountInfo;
+import org.zmail.soap.admin.type.AdminObjectInterface;
+import org.zmail.soap.admin.type.AliasInfo;
+import org.zmail.soap.admin.type.CalendarResourceInfo;
+import org.zmail.soap.admin.type.CosInfo;
+import org.zmail.soap.admin.type.DomainInfo;
+import org.zmail.soap.admin.type.DistributionListInfo;
+import org.zmail.soap.type.ZmBoolean;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name=AdminConstants.E_SEARCH_ACCOUNTS_RESPONSE)

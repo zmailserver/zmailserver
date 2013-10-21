@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.json.jackson;
+package org.zmail.soap.json.jackson;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,28 +32,28 @@ import org.codehaus.jackson.map.SerializerProvider;
 import org.codehaus.jackson.map.ser.BeanPropertyWriter;
 import org.codehaus.jackson.map.ser.impl.PropertySerializerMap;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.Element.JSONElement;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.soap.JaxbUtil;
-import com.zimbra.soap.base.KeyAndValue;
-import com.zimbra.soap.util.JaxbInfo;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.Element.JSONElement;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.soap.JaxbUtil;
+import org.zmail.soap.base.KeyAndValue;
+import org.zmail.soap.util.JaxbInfo;
 
 /**
- * Used by {@link ZimbraBeanSerializerModifier} to handle some Zimbra JSON specific ways of processing JAXB object
+ * Used by {@link ZmailBeanSerializerModifier} to handle some Zmail JSON specific ways of processing JAXB object
  * fields.
  *
  * {@link XmlElementWrapper} handling:
  *     Jackson with the JaxbAnnotationIntrospector does understand @XmlElementWrapper BUT treats
- *     it as a property name, discarding the wrapped element name.  For Zimbra JSON we retain
+ *     it as a property name, discarding the wrapped element name.  For Zmail JSON we retain
  *     the wrapper and use the wrapped element name as the property name for the wrapped property.
  *
  * Element values wrapped in arrays
  *     Jackson with the JaxbAnnotationIntrospector knows which fields are arrays and which are not and only
- *     uses arrays where necessary.  Zimbra JSON was originally designed as a serialization of a pure Element
+ *     uses arrays where necessary.  Zmail JSON was originally designed as a serialization of a pure Element
  *     structure - and it typically isn't possible to determine the difference between a list of elements with just
- *     one element and a singleton.  Hence, Zimbra JSON often treats fields as arrays even when they are not. 
+ *     one element and a singleton.  Hence, Zmail JSON often treats fields as arrays even when they are not. 
  *
  * {@link XmlElements} handling:
  * <pre>
@@ -64,22 +64,22 @@ import com.zimbra.soap.util.JaxbInfo;
  *     private List<Alt> alts = Lists.newArrayList();
  * </pre>
  *
- *     Jackson with the JaxbAnnotationIntrospector wraps this in an array field called "alts".  Zimbra JSON
+ *     Jackson with the JaxbAnnotationIntrospector wraps this in an array field called "alts".  Zmail JSON
  *     does not.
  *
- * Was some (non-functional) code here to handle Zimbra "Key Value pairs".  Ended up deciding that dedicated
+ * Was some (non-functional) code here to handle Zmail "Key Value pairs".  Ended up deciding that dedicated
  * serializers were more appropriate.
  */
-public class ZimbraBeanPropertyWriter
+public class ZmailBeanPropertyWriter
     extends BeanPropertyWriter
 {
-    private static final Log LOG = ZimbraLog.soap;
+    private static final Log LOG = ZmailLog.soap;
 
     protected final NameInfo nameInfo;
     protected QName wrapperName = null;
     protected QName wrappedName = null;
 
-    public ZimbraBeanPropertyWriter(BeanPropertyWriter wrapped, NameInfo nameInfo) {
+    public ZmailBeanPropertyWriter(BeanPropertyWriter wrapped, NameInfo nameInfo) {
         super(wrapped);
         this.nameInfo = nameInfo;
         // super-class SHOULD copy this, but just in case it didn't (as was the case with 1.8.0 and 1.8.1):
@@ -88,7 +88,7 @@ public class ZimbraBeanPropertyWriter
         }
     }
 
-    public ZimbraBeanPropertyWriter(BeanPropertyWriter wrapped, NameInfo nameInfo, JsonSerializer<Object> serializer) {
+    public ZmailBeanPropertyWriter(BeanPropertyWriter wrapped, NameInfo nameInfo, JsonSerializer<Object> serializer) {
         super(wrapped, serializer);
         this.nameInfo = nameInfo;
         // super-class SHOULD copy this, but just in case it didn't (as was the case with 1.8.0 and 1.8.1):
@@ -100,14 +100,14 @@ public class ZimbraBeanPropertyWriter
     @Override
     public BeanPropertyWriter withSerializer(JsonSerializer<Object> ser) {
         // sanity check to ensure sub-classes override...
-        if (getClass() != ZimbraBeanPropertyWriter.class) {
+        if (getClass() != ZmailBeanPropertyWriter.class) {
             throw new IllegalStateException("Sub-class does not override 'withSerializer()'; needs to!");
         }
-        return new ZimbraBeanPropertyWriter(this, nameInfo, ser);
+        return new ZmailBeanPropertyWriter(this, nameInfo, ser);
     }
 
     /**
-     * Perform various Zimbra specific changes to how a field gets serialized:
+     * Perform various Zmail specific changes to how a field gets serialized:
      */
     @Override
     public void serializeAsField(Object bean, JsonGenerator jgen, SerializerProvider prov)
@@ -156,7 +156,7 @@ public class ZimbraBeanPropertyWriter
             if ((nameMap != null) && (value instanceof ArrayList)) {
                 serializeXmlElementsArray((ArrayList<?>)value, jgen, prov, nameMap);
             } else if ((nameInfo.isKeyValuePairs()) && (value instanceof ArrayList)) {
-                serializeZimbraKeyValuePairs((ArrayList<?>) value, jgen, prov);
+                serializeZmailKeyValuePairs((ArrayList<?>) value, jgen, prov);
             } else if (nameInfo.isAnyAttributeAllowed() && java.util.Map.class.isAssignableFrom(value.getClass())) {
                 serializeXmlAnyAttributes((Map<?,?>) value, jgen, prov);
             } else {
@@ -186,7 +186,7 @@ public class ZimbraBeanPropertyWriter
     throws JsonGenerationException, IOException {
         if (wrapperName != null) {
             jgen.writeEndObject();
-            addZimbraJsonNamespaceField(jgen, wrapperName);
+            addZmailJsonNamespaceField(jgen, wrapperName);
             if (nameInfo.isWrapperIsArray()) {
                 jgen.writeEndArray();
             }
@@ -196,7 +196,7 @@ public class ZimbraBeanPropertyWriter
     /**
      * Serialize a field for which we have a specific wrappedName - typically associated with {@link XmlElement}
      * or {@link XmlElementRef}.
-     * Zimbra normally wraps values inside an array even if they are not in an array.
+     * Zmail normally wraps values inside an array even if they are not in an array.
      * Assumes that any wrapping info has already been handled.
      */
     public void serializeInnerField(Object value, JsonGenerator jgen, SerializerProvider prov,
@@ -214,8 +214,8 @@ public class ZimbraBeanPropertyWriter
                 if (!nameInfo.isTreatAsUniqueElement()) {
                     jgen.writeStartArray();
                 }
-                if (ser instanceof ZimbraBeanSerializer) {
-                    ZimbraBeanSerializer zser = (ZimbraBeanSerializer) ser;
+                if (ser instanceof ZmailBeanSerializer) {
+                    ZmailBeanSerializer zser = (ZmailBeanSerializer) ser;
                     zser.serializeWithNamespace(value, jgen, prov, namespace(wrappedName));
                 } else {
                     ser.serialize(value, jgen, prov);
@@ -236,7 +236,7 @@ public class ZimbraBeanPropertyWriter
     }
 
     /**
-     * Zimbra JSON represents the text content of an element thus:
+     * Zmail JSON represents the text content of an element thus:
      * [{
      *     "_content": "text content"
      * }]
@@ -252,7 +252,7 @@ public class ZimbraBeanPropertyWriter
         jgen.writeStartObject();
         jgen.writeFieldName(JSONElement.A_CONTENT /* "_content" */);
         ser.serialize(value, jgen, prov);
-        addZimbraJsonNamespaceField(jgen, wrappedName);
+        addZmailJsonNamespaceField(jgen, wrappedName);
         jgen.writeEndObject();
         if (!nameInfo.isTreatAsUniqueElement()) {
             jgen.writeEndArray();
@@ -281,7 +281,7 @@ public class ZimbraBeanPropertyWriter
             jgen.writeObject(value);
             jgen.writeEndObject();
         }
-        addZimbraJsonNamespaceField(jgen, wrappedName);
+        addZmailJsonNamespaceField(jgen, wrappedName);
         jgen.writeEndArray();
     }
 
@@ -289,7 +289,7 @@ public class ZimbraBeanPropertyWriter
      * Serialize Array associated with XmlElements or XmlElementRefs annotations
      * Different names for different objects.
      * For default Jackson Xml serialization, the name associated with the array is used as a wrapper but for
-     * Zimbra serialization, we don't use this wrapper.  There MAY be another wrapper but that will have been handled
+     * Zmail serialization, we don't use this wrapper.  There MAY be another wrapper but that will have been handled
      * by "wrapperName" already
      */
     private void serializeXmlElementsArray(ArrayList<?> al, JsonGenerator jgen, SerializerProvider prov,
@@ -322,7 +322,7 @@ public class ZimbraBeanPropertyWriter
         }
     }
 
-    private void serializeZimbraKeyValuePairs(List<?> pairs, JsonGenerator jgen, SerializerProvider prov)
+    private void serializeZmailKeyValuePairs(List<?> pairs, JsonGenerator jgen, SerializerProvider prov)
     throws JsonGenerationException, IOException {
         if (pairs == null) {
             return;
@@ -334,7 +334,7 @@ public class ZimbraBeanPropertyWriter
                 KeyAndValue pair = (KeyAndValue) obj;
                 jgen.writeStringField(pair.getKey(), pair.getValue());
             } else {
-                LOG.debug("Unexpected '" + objClass.getName() + "' object in @ZimbraKeyValuePairs array - ignored");
+                LOG.debug("Unexpected '" + objClass.getName() + "' object in @ZmailKeyValuePairs array - ignored");
             }
         }
         jgen.writeEndObject();
@@ -364,9 +364,9 @@ public class ZimbraBeanPropertyWriter
     }
 
     /**
-     * Add e.g. :  "_jsns": "urn:zimbraAdmin"
+     * Add e.g. :  "_jsns": "urn:zmailAdmin"
      */
-    private void addZimbraJsonNamespaceField(JsonGenerator jgen, QName qn)
+    private void addZmailJsonNamespaceField(JsonGenerator jgen, QName qn)
     throws JsonGenerationException, IOException {
         String ns = namespace(qn);
         if (ns != null) {

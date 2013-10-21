@@ -13,11 +13,11 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.sync.message;
+package org.zmail.soap.sync.message;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.SyncConstants;
+import org.zmail.common.soap.SyncConstants;
 
 @XmlRootElement(name=SyncConstants.E_REMOVE_DEVICE_RESPONSE)
 public class RemoveDeviceResponse {

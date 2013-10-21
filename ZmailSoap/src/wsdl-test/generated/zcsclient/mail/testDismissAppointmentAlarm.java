@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="dismissAppointmentAlarm">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraMail}dismissAlarm">
+ *     &lt;extension base="{urn:zmailMail}dismissAlarm">
  *       &lt;sequence>
  *       &lt;/sequence>
  *     &lt;/extension>

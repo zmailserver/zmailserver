@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.json.jackson;
+package org.zmail.soap.json.jackson;
 
 import java.util.Map;
 import java.util.Map.Entry;
@@ -33,17 +33,17 @@ import org.codehaus.jackson.map.AnnotationIntrospector;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.introspect.AnnotatedMember;
 import com.google.common.collect.Maps;
-import com.zimbra.soap.json.jackson.annotate.ZimbraJsonArrayForWrapper;
-import com.zimbra.soap.json.jackson.annotate.ZimbraJsonAttribute;
-import com.zimbra.soap.json.jackson.annotate.ZimbraKeyValuePairs;
-import com.zimbra.soap.json.jackson.annotate.ZimbraUniqueElement;
-import com.zimbra.soap.util.JaxbInfo;
+import org.zmail.soap.json.jackson.annotate.ZmailJsonArrayForWrapper;
+import org.zmail.soap.json.jackson.annotate.ZmailJsonAttribute;
+import org.zmail.soap.json.jackson.annotate.ZmailKeyValuePairs;
+import org.zmail.soap.json.jackson.annotate.ZmailUniqueElement;
+import org.zmail.soap.util.JaxbInfo;
 
 /**
- * Used to store field name information to be used in Zimbra-style JSON related to a JAXB object field.
+ * Used to store field name information to be used in Zmail-style JSON related to a JAXB object field.
  * A single field in a JAXB object may have a single field name e.g. from @XmlElement or several possible names
  * e.g. from @XmlElements
- * In addition, an @XmlElementWrapper annotation requires the resulting Zimbra-style JSON to add a wrapping
+ * In addition, an @XmlElementWrapper annotation requires the resulting Zmail-style JSON to add a wrapping
  * field
  */
 public class NameInfo {
@@ -79,20 +79,20 @@ public class NameInfo {
     }
 
     private void setWrappedInfo(AnnotationIntrospector ai, AnnotatedMember prop, String defaultWrappedName) {
-        ZimbraUniqueElement uniqueElemAnnot = prop.getAnnotation(ZimbraUniqueElement.class);
+        ZmailUniqueElement uniqueElemAnnot = prop.getAnnotation(ZmailUniqueElement.class);
         if (uniqueElemAnnot != null) {
             treatAsUniqueElement = uniqueElemAnnot.value();
         }
-        ZimbraJsonArrayForWrapper arrayForWrapperAnnot = prop.getAnnotation(ZimbraJsonArrayForWrapper.class);
+        ZmailJsonArrayForWrapper arrayForWrapperAnnot = prop.getAnnotation(ZmailJsonArrayForWrapper.class);
         if (arrayForWrapperAnnot != null) {
             wrapperIsArray = arrayForWrapperAnnot.value();
         }
-        ZimbraKeyValuePairs kvpAnnot = prop.getAnnotation(ZimbraKeyValuePairs.class);
+        ZmailKeyValuePairs kvpAnnot = prop.getAnnotation(ZmailKeyValuePairs.class);
         if (kvpAnnot != null) {
             keyValuePairs = kvpAnnot.value();
             return;
         }
-        ZimbraJsonAttribute jsonAttributeAnnot = prop.getAnnotation(ZimbraJsonAttribute.class);
+        ZmailJsonAttribute jsonAttributeAnnot = prop.getAnnotation(ZmailJsonAttribute.class);
         if (jsonAttributeAnnot != null) {
             treatAsAttribute = jsonAttributeAnnot.value();
         }

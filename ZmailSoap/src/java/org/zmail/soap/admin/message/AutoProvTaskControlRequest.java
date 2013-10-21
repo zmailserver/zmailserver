@@ -12,22 +12,22 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
 
 /**
  * @zm-api-command-auth-required true
  * @zm-api-command-admin-auth-required true
  * @zm-api-command-description Under normal situations, the EAGER auto provisioning 
  * task(thread) should be started/stopped automatically by the server when appropriate.  
- * The task should be running when zimbraAutoProvPollingInterval is not 0 and 
- * zimbraAutoProvScheduledDomains is not empty.  The task should be stopped otherwise.
+ * The task should be running when zmailAutoProvPollingInterval is not 0 and 
+ * zmailAutoProvScheduledDomains is not empty.  The task should be stopped otherwise.
  * This API is to manually force start/stop or query status of the EAGER auto provisioning task. 
  * It is only for diagnosis purpose and should not be used under normal situations.
  */

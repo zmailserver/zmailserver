@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
  *     &lt;enumeration value="both"/>
  *     &lt;enumeration value="ldap"/>
- *     &lt;enumeration value="zimbra"/>
+ *     &lt;enumeration value="zmail"/>
  *   &lt;/restriction>
  * &lt;/simpleType>
  * </pre>
@@ -46,8 +46,8 @@ public enum testGalMode {
     BOTH("both"),
     @XmlEnumValue("ldap")
     LDAP("ldap"),
-    @XmlEnumValue("zimbra")
-    ZIMBRA("zimbra");
+    @XmlEnumValue("zmail")
+    ZIMBRA("zmail");
     private final String value;
 
     testGalMode(String v) {

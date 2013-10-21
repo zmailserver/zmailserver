@@ -1,4 +1,4 @@
-package com.zimbra.soap.account.type;
+package org.zmail.soap.account.type;
 
 /*
  * ***** BEGIN LICENSE BLOCK *****

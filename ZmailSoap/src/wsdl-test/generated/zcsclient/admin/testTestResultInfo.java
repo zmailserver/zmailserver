@@ -34,8 +34,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="completed" type="{urn:zimbraAdmin}completedTestInfo" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="failure" type="{urn:zimbraAdmin}failedTestInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="completed" type="{urn:zmailAdmin}completedTestInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="failure" type="{urn:zmailAdmin}failedTestInfo" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>

@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="chatSummary">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraMail}messageSummary">
+ *     &lt;extension base="{urn:zmailMail}messageSummary">
  *       &lt;sequence>
  *       &lt;/sequence>
  *     &lt;/extension>

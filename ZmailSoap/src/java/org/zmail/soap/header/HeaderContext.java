@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.header;
+package org.zmail.soap.header;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,8 +24,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.namespace.QName;
 
-@XmlRootElement(namespace="urn:zimbra", name="context")
-@XmlType(namespace="urn:zimbra", name="HeaderContext", propOrder = {})
+@XmlRootElement(namespace="urn:zmail", name="context")
+@XmlType(namespace="urn:zmail", name="HeaderContext", propOrder = {})
 public class HeaderContext {
     @XmlElement(name="authToken", required=false) private String authToken;
     @XmlElement(name="sessionId", required=false) private String sessionId;

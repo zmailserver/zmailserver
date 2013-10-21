@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.type;
+package org.zmail.soap.mail.type;
 
 import com.google.common.base.Objects;
 
@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlValue;
 
-import com.zimbra.soap.type.BaseQueryInfo;
+import org.zmail.soap.type.BaseQueryInfo;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class SuggestedQueryString implements BaseQueryInfo {

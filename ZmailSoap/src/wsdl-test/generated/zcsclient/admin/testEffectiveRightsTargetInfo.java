@@ -32,10 +32,10 @@ import generated.zcsclient.zm.testTargetType;
  * <pre>
  * &lt;complexType name="effectiveRightsTargetInfo">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraAdmin}effectiveRightsInfo">
+ *     &lt;extension base="{urn:zmailAdmin}effectiveRightsInfo">
  *       &lt;sequence>
  *       &lt;/sequence>
- *       &lt;attribute name="type" use="required" type="{urn:zimbra}targetType" />
+ *       &lt;attribute name="type" use="required" type="{urn:zmail}targetType" />
  *       &lt;attribute name="id" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="name" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/extension>

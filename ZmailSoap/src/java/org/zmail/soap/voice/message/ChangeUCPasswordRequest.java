@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.voice.message;
+package org.zmail.soap.voice.message;
 
 import com.google.common.base.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -21,13 +21,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.VoiceConstants;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.VoiceConstants;
 
 /**
  * @zm-api-command-auth-required true
  * @zm-api-command-admin-auth-required false
- * @zm-api-command-description Update Zimbra's stored value of the password for unified communications
+ * @zm-api-command-description Update Zmail's stored value of the password for unified communications
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name=VoiceConstants.E_CHANGE_UC_PASSWORD_REQUEST)

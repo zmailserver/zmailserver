@@ -37,7 +37,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;all>
  *         &lt;element name="authToken" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="lifetime" type="{http://www.w3.org/2001/XMLSchema}long"/>
- *         &lt;element name="session" type="{urn:zimbraAccount}session" minOccurs="0"/>
+ *         &lt;element name="session" type="{urn:zmailAccount}session" minOccurs="0"/>
  *         &lt;element name="refer" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="skin" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="prefs" minOccurs="0">
@@ -45,7 +45,7 @@ import javax.xml.bind.annotation.XmlType;
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence>
- *                   &lt;element name="pref" type="{urn:zimbraAccount}pref" maxOccurs="unbounded" minOccurs="0"/>
+ *                   &lt;element name="pref" type="{urn:zmailAccount}pref" maxOccurs="unbounded" minOccurs="0"/>
  *                 &lt;/sequence>
  *               &lt;/restriction>
  *             &lt;/complexContent>
@@ -56,7 +56,7 @@ import javax.xml.bind.annotation.XmlType;
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence>
- *                   &lt;element name="attr" type="{urn:zimbraAccount}attr" maxOccurs="unbounded" minOccurs="0"/>
+ *                   &lt;element name="attr" type="{urn:zmailAccount}attr" maxOccurs="unbounded" minOccurs="0"/>
  *                 &lt;/sequence>
  *               &lt;/restriction>
  *             &lt;/complexContent>
@@ -256,7 +256,7 @@ public class testAuthResponse {
      *   &lt;complexContent>
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
-     *         &lt;element name="attr" type="{urn:zimbraAccount}attr" maxOccurs="unbounded" minOccurs="0"/>
+     *         &lt;element name="attr" type="{urn:zmailAccount}attr" maxOccurs="unbounded" minOccurs="0"/>
      *       &lt;/sequence>
      *     &lt;/restriction>
      *   &lt;/complexContent>
@@ -315,7 +315,7 @@ public class testAuthResponse {
      *   &lt;complexContent>
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
-     *         &lt;element name="pref" type="{urn:zimbraAccount}pref" maxOccurs="unbounded" minOccurs="0"/>
+     *         &lt;element name="pref" type="{urn:zmailAccount}pref" maxOccurs="unbounded" minOccurs="0"/>
      *       &lt;/sequence>
      *     &lt;/restriction>
      *   &lt;/complexContent>

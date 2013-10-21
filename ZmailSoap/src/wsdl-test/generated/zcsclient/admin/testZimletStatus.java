@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *       &lt;/sequence>
  *       &lt;attribute name="name" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="status" use="required" type="{urn:zimbraAdmin}zimletStatusSetting" />
+ *       &lt;attribute name="status" use="required" type="{urn:zmailAdmin}zimletStatusSetting" />
  *       &lt;attribute name="extension" use="required" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *       &lt;attribute name="priority" type="{http://www.w3.org/2001/XMLSchema}int" />
  *     &lt;/restriction>

@@ -31,9 +31,9 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="updatePresenceSessionIdRequest">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraAdmin}adminAttrsImpl">
+ *     &lt;extension base="{urn:zmailAdmin}adminAttrsImpl">
  *       &lt;sequence>
- *         &lt;element name="ucservice" type="{urn:zimbraAdmin}ucServiceSelector"/>
+ *         &lt;element name="ucservice" type="{urn:zmailAdmin}ucServiceSelector"/>
  *         &lt;element name="username" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="password" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>

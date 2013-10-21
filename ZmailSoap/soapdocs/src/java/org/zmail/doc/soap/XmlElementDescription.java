@@ -13,21 +13,21 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.doc.soap;
+package org.zmail.doc.soap;
 
 import java.util.List;
 import java.util.Map;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
-import com.zimbra.soap.JaxbUtil;
-import com.zimbra.soap.util.JaxbAttributeInfo;
-import com.zimbra.soap.util.JaxbElementInfo;
-import com.zimbra.soap.util.JaxbInfo;
-import com.zimbra.soap.util.JaxbNodeInfo;
-import com.zimbra.soap.util.JaxbPseudoNodeChoiceInfo;
-import com.zimbra.soap.util.JaxbValueInfo;
-import com.zimbra.soap.util.WrappedElementInfo;
+import org.zmail.soap.JaxbUtil;
+import org.zmail.soap.util.JaxbAttributeInfo;
+import org.zmail.soap.util.JaxbElementInfo;
+import org.zmail.soap.util.JaxbInfo;
+import org.zmail.soap.util.JaxbNodeInfo;
+import org.zmail.soap.util.JaxbPseudoNodeChoiceInfo;
+import org.zmail.soap.util.JaxbValueInfo;
+import org.zmail.soap.util.WrappedElementInfo;
 
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
@@ -386,7 +386,7 @@ implements DescriptionNode, XmlUnit {
      * @param primaryDescriptions Map of primary Description elements for nodes that have already been visited.
      */
     public void markupDuplicateElements(Map<Class<?>,XmlElementDescription> primaryDescriptions) {
-        if ((jaxbClass != null) && jaxbClass.getName().startsWith("com.zimbra.soap")) {
+        if ((jaxbClass != null) && jaxbClass.getName().startsWith("org.zmail.soap")) {
             masterDescriptionForThisJaxbClass = primaryDescriptions.get(jaxbClass);
             if (masterDescriptionForThisJaxbClass != null) {
                 masterDescriptionForThisJaxbClass.isMasterDescriptionForJaxbClass = true;

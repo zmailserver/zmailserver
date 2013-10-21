@@ -13,14 +13,14 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.type;
+package org.zmail.soap.type;
 
 import java.util.List;
 import java.util.Map;
 
 import com.google.common.collect.Multimap;
 
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
 /*
  * Used for JAXB objects representing elements which have child node(s) of form:

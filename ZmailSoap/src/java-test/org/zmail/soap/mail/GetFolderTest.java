@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.mail;
+package org.zmail.soap.mail;
 
 import java.util.EnumSet;
 import java.util.List;
@@ -20,17 +20,17 @@ import java.util.List;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 
-import com.zimbra.soap.mail.type.Acl;
+import org.zmail.soap.mail.type.Acl;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.soap.mail.message.GetFolderResponse;
-import com.zimbra.soap.mail.type.Folder;
-import com.zimbra.soap.mail.type.Grant;
-import com.zimbra.soap.type.GrantGranteeType;
-import com.zimbra.soap.mail.type.ItemType;
-import com.zimbra.soap.mail.type.SearchFolder;
+import org.zmail.soap.mail.message.GetFolderResponse;
+import org.zmail.soap.mail.type.Folder;
+import org.zmail.soap.mail.type.Grant;
+import org.zmail.soap.type.GrantGranteeType;
+import org.zmail.soap.mail.type.ItemType;
+import org.zmail.soap.mail.type.SearchFolder;
 
 /**
  * Unit test for {@link GetFolderRequest}.

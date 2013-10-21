@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.account.message;
+package org.zmail.soap.account.message;
 
 import com.google.common.base.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -22,13 +22,13 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.account.type.EntrySearchFilterInfo;
-import com.zimbra.soap.account.type.MemberOfSelector;
-import com.zimbra.soap.type.CursorInfo;
-import com.zimbra.soap.type.GalSearchType;
-import com.zimbra.soap.type.ZmBoolean;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.account.type.EntrySearchFilterInfo;
+import org.zmail.soap.account.type.MemberOfSelector;
+import org.zmail.soap.type.CursorInfo;
+import org.zmail.soap.type.GalSearchType;
+import org.zmail.soap.type.ZmBoolean;
 
 // MailConstants.A_SEARCH_TYPES (types) Used internally when calling SearchParams.parse, forced to be
 // MailItem.Type.CONTACT

@@ -37,22 +37,22 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="filterTests" type="{urn:zimbraMail}filterTests"/>
+ *         &lt;element name="filterTests" type="{urn:zmailMail}filterTests"/>
  *         &lt;element name="filterActions" minOccurs="0">
  *           &lt;complexType>
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence>
  *                   &lt;choice maxOccurs="unbounded" minOccurs="0">
- *                     &lt;element name="actionKeep" type="{urn:zimbraMail}keepAction"/>
- *                     &lt;element name="actionDiscard" type="{urn:zimbraMail}discardAction"/>
- *                     &lt;element name="actionFileInto" type="{urn:zimbraMail}fileIntoAction"/>
- *                     &lt;element name="actionFlag" type="{urn:zimbraMail}flagAction"/>
- *                     &lt;element name="actionTag" type="{urn:zimbraMail}tagAction"/>
- *                     &lt;element name="actionRedirect" type="{urn:zimbraMail}redirectAction"/>
- *                     &lt;element name="actionReply" type="{urn:zimbraMail}replyAction"/>
- *                     &lt;element name="actionNotify" type="{urn:zimbraMail}notifyAction"/>
- *                     &lt;element name="actionStop" type="{urn:zimbraMail}stopAction"/>
+ *                     &lt;element name="actionKeep" type="{urn:zmailMail}keepAction"/>
+ *                     &lt;element name="actionDiscard" type="{urn:zmailMail}discardAction"/>
+ *                     &lt;element name="actionFileInto" type="{urn:zmailMail}fileIntoAction"/>
+ *                     &lt;element name="actionFlag" type="{urn:zmailMail}flagAction"/>
+ *                     &lt;element name="actionTag" type="{urn:zmailMail}tagAction"/>
+ *                     &lt;element name="actionRedirect" type="{urn:zmailMail}redirectAction"/>
+ *                     &lt;element name="actionReply" type="{urn:zmailMail}replyAction"/>
+ *                     &lt;element name="actionNotify" type="{urn:zmailMail}notifyAction"/>
+ *                     &lt;element name="actionStop" type="{urn:zmailMail}stopAction"/>
  *                   &lt;/choice>
  *                 &lt;/sequence>
  *               &lt;/restriction>
@@ -184,15 +184,15 @@ public class testFilterRule {
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
      *         &lt;choice maxOccurs="unbounded" minOccurs="0">
-     *           &lt;element name="actionKeep" type="{urn:zimbraMail}keepAction"/>
-     *           &lt;element name="actionDiscard" type="{urn:zimbraMail}discardAction"/>
-     *           &lt;element name="actionFileInto" type="{urn:zimbraMail}fileIntoAction"/>
-     *           &lt;element name="actionFlag" type="{urn:zimbraMail}flagAction"/>
-     *           &lt;element name="actionTag" type="{urn:zimbraMail}tagAction"/>
-     *           &lt;element name="actionRedirect" type="{urn:zimbraMail}redirectAction"/>
-     *           &lt;element name="actionReply" type="{urn:zimbraMail}replyAction"/>
-     *           &lt;element name="actionNotify" type="{urn:zimbraMail}notifyAction"/>
-     *           &lt;element name="actionStop" type="{urn:zimbraMail}stopAction"/>
+     *           &lt;element name="actionKeep" type="{urn:zmailMail}keepAction"/>
+     *           &lt;element name="actionDiscard" type="{urn:zmailMail}discardAction"/>
+     *           &lt;element name="actionFileInto" type="{urn:zmailMail}fileIntoAction"/>
+     *           &lt;element name="actionFlag" type="{urn:zmailMail}flagAction"/>
+     *           &lt;element name="actionTag" type="{urn:zmailMail}tagAction"/>
+     *           &lt;element name="actionRedirect" type="{urn:zmailMail}redirectAction"/>
+     *           &lt;element name="actionReply" type="{urn:zmailMail}replyAction"/>
+     *           &lt;element name="actionNotify" type="{urn:zmailMail}notifyAction"/>
+     *           &lt;element name="actionStop" type="{urn:zmailMail}stopAction"/>
      *         &lt;/choice>
      *       &lt;/sequence>
      *     &lt;/restriction>

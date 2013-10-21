@@ -36,13 +36,13 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="folder" type="{urn:zimbraVoice}rootVoiceFolder"/>
+ *         &lt;element name="folder" type="{urn:zmailVoice}rootVoiceFolder"/>
  *         &lt;element name="callfeatures" minOccurs="0">
  *           &lt;complexType>
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence>
- *                   &lt;element name="callfeature" type="{urn:zimbraVoice}callFeature" maxOccurs="unbounded" minOccurs="0"/>
+ *                   &lt;element name="callfeature" type="{urn:zmailVoice}callFeature" maxOccurs="unbounded" minOccurs="0"/>
  *                 &lt;/sequence>
  *               &lt;/restriction>
  *             &lt;/complexContent>
@@ -372,7 +372,7 @@ public class testVoiceInfo {
      *   &lt;complexContent>
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
-     *         &lt;element name="callfeature" type="{urn:zimbraVoice}callFeature" maxOccurs="unbounded" minOccurs="0"/>
+     *         &lt;element name="callfeature" type="{urn:zmailVoice}callFeature" maxOccurs="unbounded" minOccurs="0"/>
      *       &lt;/sequence>
      *     &lt;/restriction>
      *   &lt;/complexContent>

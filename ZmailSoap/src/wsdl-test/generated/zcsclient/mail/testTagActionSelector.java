@@ -30,9 +30,9 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="tagActionSelector">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraMail}actionSelector">
+ *     &lt;extension base="{urn:zmailMail}actionSelector">
  *       &lt;sequence>
- *         &lt;element ref="{urn:zimbraMail}retentionPolicy" minOccurs="0"/>
+ *         &lt;element ref="{urn:zmailMail}retentionPolicy" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/extension>
  *   &lt;/complexContent>

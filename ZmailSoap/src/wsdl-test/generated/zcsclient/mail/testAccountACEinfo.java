@@ -36,7 +36,7 @@ import generated.zcsclient.zm.testGranteeType;
  *       &lt;sequence>
  *       &lt;/sequence>
  *       &lt;attribute name="zid" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="gt" use="required" type="{urn:zimbra}granteeType" />
+ *       &lt;attribute name="gt" use="required" type="{urn:zmail}granteeType" />
  *       &lt;attribute name="right" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="d" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="key" type="{http://www.w3.org/2001/XMLSchema}string" />

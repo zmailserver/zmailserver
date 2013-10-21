@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="dlSubscriptionNotification">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraMail}notification">
+ *     &lt;extension base="{urn:zmailMail}notification">
  *       &lt;sequence>
  *       &lt;/sequence>
  *     &lt;/extension>

@@ -32,9 +32,9 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="voiceMailPrefsFeature">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraVoice}callFeatureInfo">
+ *     &lt;extension base="{urn:zmailVoice}callFeatureInfo">
  *       &lt;sequence>
- *         &lt;element name="pref" type="{urn:zimbraVoice}prefInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="pref" type="{urn:zmailVoice}prefInfo" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/extension>
  *   &lt;/complexContent>

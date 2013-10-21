@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.account.type;
+package org.zmail.soap.account.type;
 
 import org.w3c.dom.Element;
 
@@ -24,12 +24,12 @@ import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.ZimletConstants;
-import com.zimbra.soap.base.ZimletConfigInfo;
-import com.zimbra.soap.base.ZimletContextInterface;
-import com.zimbra.soap.base.ZimletDesc;
-import com.zimbra.soap.base.ZimletInterface;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.ZimletConstants;
+import org.zmail.soap.base.ZimletConfigInfo;
+import org.zmail.soap.base.ZimletContextInterface;
+import org.zmail.soap.base.ZimletDesc;
+import org.zmail.soap.base.ZimletInterface;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(propOrder = {"zimletContext", "zimlet", "zimletConfig", "zimletHandlerConfig"})

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.message;
+package org.zmail.soap.mail.message;
 
 import com.google.common.base.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -21,10 +21,10 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.OctopusXmlConstants;
-import com.zimbra.soap.mail.type.IdAndOperation;
-import com.zimbra.soap.json.jackson.annotate.ZimbraUniqueElement;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.OctopusXmlConstants;
+import org.zmail.soap.mail.type.IdAndOperation;
+import org.zmail.soap.json.jackson.annotate.ZmailUniqueElement;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name=OctopusXmlConstants.E_DOCUMENT_ACTION_RESPONSE)
@@ -33,7 +33,7 @@ public class DocumentActionResponse {
     /**
      * @zm-api-field-description Details of action
      */
-    @ZimbraUniqueElement
+    @ZmailUniqueElement
     @XmlElement(name=MailConstants.E_ACTION /* action */, required=true)
     private IdAndOperation action;
 

@@ -13,14 +13,14 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.type;
+package org.zmail.soap.admin.type;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.soap.type.ZmBoolean;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.soap.type.ZmBoolean;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public final class VolumeInfo {
@@ -41,7 +41,7 @@ public final class VolumeInfo {
 
     /**
      * @zm-api-field-tag volume-root-path
-     * @zm-api-field-description Absolute path to root of volume, e.g. /opt/zimbra/store
+     * @zm-api-field-description Absolute path to root of volume, e.g. /opt/zmail/store
      */
     @XmlAttribute(name=AdminConstants.A_VOLUME_ROOTPATH /* rootpath */, required=false)
     private String rootPath;

@@ -40,7 +40,7 @@ import javax.xml.bind.annotation.XmlType;
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence>
- *                   &lt;element name="grant" type="{urn:zimbraMail}actionGrantSelector" maxOccurs="unbounded" minOccurs="0"/>
+ *                   &lt;element name="grant" type="{urn:zmailMail}actionGrantSelector" maxOccurs="unbounded" minOccurs="0"/>
  *                 &lt;/sequence>
  *               &lt;/restriction>
  *             &lt;/complexContent>
@@ -340,7 +340,7 @@ public class testNewFolderSpec {
      *   &lt;complexContent>
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
-     *         &lt;element name="grant" type="{urn:zimbraMail}actionGrantSelector" maxOccurs="unbounded" minOccurs="0"/>
+     *         &lt;element name="grant" type="{urn:zmailMail}actionGrantSelector" maxOccurs="unbounded" minOccurs="0"/>
      *       &lt;/sequence>
      *     &lt;/restriction>
      *   &lt;/complexContent>

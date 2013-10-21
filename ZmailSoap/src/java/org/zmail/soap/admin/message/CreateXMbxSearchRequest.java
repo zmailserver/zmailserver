@@ -13,16 +13,16 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.XMbxSearchConstants;
-import com.zimbra.soap.admin.type.AdminKeyValuePairs;
+import org.zmail.common.soap.XMbxSearchConstants;
+import org.zmail.soap.admin.type.AdminKeyValuePairs;
 
-// Note: ZimbraXMbxSearch/docs/soap.txt documented a non-existent <searchtask> sub-element.
+// Note: ZmailXMbxSearch/docs/soap.txt documented a non-existent <searchtask> sub-element.
 //       This is not used - the attributes are direct children of <CreateXMbxSearchRequest>
 /**
  * @zm-api-command-network-edition

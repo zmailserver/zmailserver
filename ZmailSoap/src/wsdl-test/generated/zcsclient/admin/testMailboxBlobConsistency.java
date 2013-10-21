@@ -41,7 +41,7 @@ import javax.xml.bind.annotation.XmlType;
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence>
- *                   &lt;element name="item" type="{urn:zimbraAdmin}missingBlobInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *                   &lt;element name="item" type="{urn:zmailAdmin}missingBlobInfo" maxOccurs="unbounded" minOccurs="0"/>
  *                 &lt;/sequence>
  *               &lt;/restriction>
  *             &lt;/complexContent>
@@ -52,7 +52,7 @@ import javax.xml.bind.annotation.XmlType;
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence>
- *                   &lt;element name="item" type="{urn:zimbraAdmin}incorrectBlobSizeInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *                   &lt;element name="item" type="{urn:zmailAdmin}incorrectBlobSizeInfo" maxOccurs="unbounded" minOccurs="0"/>
  *                 &lt;/sequence>
  *               &lt;/restriction>
  *             &lt;/complexContent>
@@ -63,7 +63,7 @@ import javax.xml.bind.annotation.XmlType;
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence>
- *                   &lt;element name="blob" type="{urn:zimbraAdmin}unexpectedBlobInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *                   &lt;element name="blob" type="{urn:zmailAdmin}unexpectedBlobInfo" maxOccurs="unbounded" minOccurs="0"/>
  *                 &lt;/sequence>
  *               &lt;/restriction>
  *             &lt;/complexContent>
@@ -74,7 +74,7 @@ import javax.xml.bind.annotation.XmlType;
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence>
- *                   &lt;element name="item" type="{urn:zimbraAdmin}incorrectBlobRevisionInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *                   &lt;element name="item" type="{urn:zmailAdmin}incorrectBlobRevisionInfo" maxOccurs="unbounded" minOccurs="0"/>
  *                 &lt;/sequence>
  *               &lt;/restriction>
  *             &lt;/complexContent>
@@ -229,7 +229,7 @@ public class testMailboxBlobConsistency {
      *   &lt;complexContent>
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
-     *         &lt;element name="item" type="{urn:zimbraAdmin}incorrectBlobRevisionInfo" maxOccurs="unbounded" minOccurs="0"/>
+     *         &lt;element name="item" type="{urn:zmailAdmin}incorrectBlobRevisionInfo" maxOccurs="unbounded" minOccurs="0"/>
      *       &lt;/sequence>
      *     &lt;/restriction>
      *   &lt;/complexContent>
@@ -288,7 +288,7 @@ public class testMailboxBlobConsistency {
      *   &lt;complexContent>
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
-     *         &lt;element name="item" type="{urn:zimbraAdmin}incorrectBlobSizeInfo" maxOccurs="unbounded" minOccurs="0"/>
+     *         &lt;element name="item" type="{urn:zmailAdmin}incorrectBlobSizeInfo" maxOccurs="unbounded" minOccurs="0"/>
      *       &lt;/sequence>
      *     &lt;/restriction>
      *   &lt;/complexContent>
@@ -347,7 +347,7 @@ public class testMailboxBlobConsistency {
      *   &lt;complexContent>
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
-     *         &lt;element name="item" type="{urn:zimbraAdmin}missingBlobInfo" maxOccurs="unbounded" minOccurs="0"/>
+     *         &lt;element name="item" type="{urn:zmailAdmin}missingBlobInfo" maxOccurs="unbounded" minOccurs="0"/>
      *       &lt;/sequence>
      *     &lt;/restriction>
      *   &lt;/complexContent>
@@ -406,7 +406,7 @@ public class testMailboxBlobConsistency {
      *   &lt;complexContent>
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
-     *         &lt;element name="blob" type="{urn:zimbraAdmin}unexpectedBlobInfo" maxOccurs="unbounded" minOccurs="0"/>
+     *         &lt;element name="blob" type="{urn:zmailAdmin}unexpectedBlobInfo" maxOccurs="unbounded" minOccurs="0"/>
      *       &lt;/sequence>
      *     &lt;/restriction>
      *   &lt;/complexContent>

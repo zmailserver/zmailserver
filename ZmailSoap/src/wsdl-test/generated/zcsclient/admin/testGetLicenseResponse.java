@@ -33,9 +33,9 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;all>
- *         &lt;element name="license" type="{urn:zimbraAdmin}adminAttrsImpl"/>
- *         &lt;element name="activation" type="{urn:zimbraAdmin}adminAttrsImpl" minOccurs="0"/>
- *         &lt;element name="info" type="{urn:zimbraAdmin}adminAttrsImpl"/>
+ *         &lt;element name="license" type="{urn:zmailAdmin}adminAttrsImpl"/>
+ *         &lt;element name="activation" type="{urn:zmailAdmin}adminAttrsImpl" minOccurs="0"/>
+ *         &lt;element name="info" type="{urn:zmailAdmin}adminAttrsImpl"/>
  *       &lt;/all>
  *     &lt;/restriction>
  *   &lt;/complexContent>

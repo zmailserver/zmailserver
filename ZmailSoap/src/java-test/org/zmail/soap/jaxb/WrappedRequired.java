@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.jaxb;
+package org.zmail.soap.jaxb;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.zimbra.soap.type.ZmBoolean;
+import org.zmail.soap.type.ZmBoolean;
 
 /** Test JAXB class with an XmlElement list of enums */
 @XmlAccessorType(XmlAccessType.NONE)

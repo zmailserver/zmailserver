@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *       &lt;/sequence>
  *       &lt;attribute name="ownerOf" type="{http://www.w3.org/2001/XMLSchema}boolean" />
- *       &lt;attribute name="memberOf" type="{urn:zimbraAccount}memberOfSelector" />
+ *       &lt;attribute name="memberOf" type="{urn:zmailAccount}memberOfSelector" />
  *       &lt;attribute name="attrs" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>
  *   &lt;/complexContent>

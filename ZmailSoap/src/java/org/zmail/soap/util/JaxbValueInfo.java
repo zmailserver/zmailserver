@@ -13,12 +13,12 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.util;
+package org.zmail.soap.util;
 
 import java.lang.reflect.Type;
 import javax.xml.bind.annotation.XmlValue;
 
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.util.ZmailLog;
 
 public class JaxbValueInfo {
     private String fieldName;
@@ -28,7 +28,7 @@ public class JaxbValueInfo {
         this.fieldName = fieldName;
         atomClass = JaxbInfo.classFromType(defaultGenericType);
         if (atomClass == null) {
-            ZimbraLog.soap.debug("Unable to determine class for value field %s with annotation '%s'", fieldName, annot);
+            ZmailLog.soap.debug("Unable to determine class for value field %s with annotation '%s'", fieldName, annot);
         }
     }
 

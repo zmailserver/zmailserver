@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -21,9 +21,9 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.VoiceAdminConstants;
-import com.zimbra.soap.type.KeyValuePair;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.VoiceAdminConstants;
+import org.zmail.soap.type.KeyValuePair;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name=VoiceAdminConstants.E_UPDATE_PRESENCE_SESSION_ID_RESPONSE)

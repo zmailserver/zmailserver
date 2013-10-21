@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.account;
+package org.zmail.soap.account;
 import java.util.List;
 
 import com.sun.xml.ws.developer.WSBindingProvider;
@@ -24,7 +24,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.soap.Utility;
+import org.zmail.soap.Utility;
 import generated.zcsclient.account.testAttr;
 import generated.zcsclient.account.testCreateIdentityRequest;
 import generated.zcsclient.account.testCreateIdentityResponse;
@@ -139,7 +139,7 @@ public class WSDLIdentitiesTest {
         testIdentity newIdentity = new testIdentity();
         newIdentity.setName(altId);
         testAttr prefFromAddr = new testAttr();
-        prefFromAddr.setName("zimbraPrefFromAddress");
+        prefFromAddr.setName("zmailPrefFromAddress");
         prefFromAddr.setValue(testAcctAltEmail);
         newIdentity.getA().add(prefFromAddr);
         req.setIdentity(newIdentity);
@@ -154,7 +154,7 @@ public class WSDLIdentitiesTest {
         testIdentity modIdentity = new testIdentity();
         modIdentity.setName(altId);
         testAttr prefAttr = new testAttr();
-        prefAttr.setName("zimbraPrefSaveToSent");
+        prefAttr.setName("zmailPrefSaveToSent");
         prefAttr.setValue("FALSE");
         modIdentity.getA().add(prefAttr);
         modReq.setIdentity(modIdentity);

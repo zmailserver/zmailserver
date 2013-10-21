@@ -13,11 +13,11 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.account.message;
+package org.zmail.soap.account.message;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.AccountConstants;
+import org.zmail.common.soap.AccountConstants;
 
 @XmlRootElement(name=AccountConstants.E_MODIFY_WHITE_BLACK_LIST_RESPONSE)
 public class ModifyWhiteBlackListResponse {

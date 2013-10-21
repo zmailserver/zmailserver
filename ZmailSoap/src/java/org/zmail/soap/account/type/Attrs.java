@@ -13,14 +13,14 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.account.type;
+package org.zmail.soap.account.type;
 
 import java.util.List;
 import java.util.Map;
 
 import com.google.common.collect.Multimap;
 
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
 public interface Attrs {
     public Attrs setAttrs(Iterable<? extends Attr> attrs);

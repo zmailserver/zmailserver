@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.replication.type;
+package org.zmail.soap.replication.type;
 
 import com.google.common.base.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -21,8 +21,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
-import com.zimbra.common.soap.ReplicationConstants;
-import com.zimbra.soap.json.jackson.annotate.ZimbraUniqueElement;
+import org.zmail.common.soap.ReplicationConstants;
+import org.zmail.soap.json.jackson.annotate.ZmailUniqueElement;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class ReplicationMasterStatus {
@@ -37,7 +37,7 @@ public class ReplicationMasterStatus {
     /**
      * @zm-api-field-description Catchup status
      */
-    @ZimbraUniqueElement
+    @ZmailUniqueElement
     @XmlElement(name=ReplicationConstants.E_CATCHUP_STATUS /* catchupStatus */, required=false)
     private ReplicationMasterCatchupStatus catchupStatus;
 

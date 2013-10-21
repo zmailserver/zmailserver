@@ -13,13 +13,13 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.type;
+package org.zmail.soap.mail.type;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.type.ZmBoolean;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.type.ZmBoolean;
 
 /*
             <link id="1" name="new-mount-point" l="1" n="6" u="1" f="u" owner="user1@example.com" zid="151bd192-e19a-40be-b8c9-259b21ffac48" rid="2" oname="user1folder">
@@ -38,8 +38,8 @@ extends Folder {
     private String ownerEmail;
 
     /**
-     * @zm-api-field-tag owner-zimbra-id
-     * @zm-api-field-description Zimbra ID (guid) of the owner of the linked-to resource
+     * @zm-api-field-tag owner-zmail-id
+     * @zm-api-field-description Zmail ID (guid) of the owner of the linked-to resource
      */
     @XmlAttribute(name=MailConstants.A_ZIMBRA_ID /* zid */, required=false)
     private String ownerAccountId;

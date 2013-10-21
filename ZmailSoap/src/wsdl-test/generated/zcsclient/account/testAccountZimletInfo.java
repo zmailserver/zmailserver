@@ -34,9 +34,9 @@ import org.w3c.dom.Element;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="zimletContext" type="{urn:zimbraAccount}accountZimletContext" minOccurs="0"/>
- *         &lt;element name="zimlet" type="{urn:zimbraAccount}accountZimletDesc" minOccurs="0"/>
- *         &lt;element name="zimletConfig" type="{urn:zimbraAccount}accountZimletConfigInfo" minOccurs="0"/>
+ *         &lt;element name="zimletContext" type="{urn:zmailAccount}accountZimletContext" minOccurs="0"/>
+ *         &lt;element name="zimlet" type="{urn:zmailAccount}accountZimletDesc" minOccurs="0"/>
+ *         &lt;element name="zimletConfig" type="{urn:zmailAccount}accountZimletConfigInfo" minOccurs="0"/>
  *         &lt;any processContents='skip' namespace='##other'/>
  *       &lt;/sequence>
  *     &lt;/restriction>

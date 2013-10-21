@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.message;
+package org.zmail.soap.mail.message;
 
 import com.google.common.base.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -22,16 +22,16 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.mail.type.MailCalDataSource;
-import com.zimbra.soap.mail.type.MailCaldavDataSource;
-import com.zimbra.soap.mail.type.MailGalDataSource;
-import com.zimbra.soap.mail.type.MailImapDataSource;
-import com.zimbra.soap.mail.type.MailPop3DataSource;
-import com.zimbra.soap.mail.type.MailRssDataSource;
-import com.zimbra.soap.mail.type.MailUnknownDataSource;
-import com.zimbra.soap.mail.type.MailYabDataSource;
-import com.zimbra.soap.type.DataSource;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.mail.type.MailCalDataSource;
+import org.zmail.soap.mail.type.MailCaldavDataSource;
+import org.zmail.soap.mail.type.MailGalDataSource;
+import org.zmail.soap.mail.type.MailImapDataSource;
+import org.zmail.soap.mail.type.MailPop3DataSource;
+import org.zmail.soap.mail.type.MailRssDataSource;
+import org.zmail.soap.mail.type.MailUnknownDataSource;
+import org.zmail.soap.mail.type.MailYabDataSource;
+import org.zmail.soap.type.DataSource;
 
 /**
  * @zm-api-command-auth-required true

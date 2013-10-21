@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.util;
+package org.zmail.soap.util;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -36,19 +36,19 @@ import org.dom4j.io.XMLWriter;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.AdminExtConstants;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.ReplicationConstants;
-import com.zimbra.common.soap.SyncConstants;
-import com.zimbra.common.soap.VoiceConstants;
-import com.zimbra.common.soap.ZimbraNamespace;
-import com.zimbra.soap.JaxbUtil;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.AdminExtConstants;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.ReplicationConstants;
+import org.zmail.common.soap.SyncConstants;
+import org.zmail.common.soap.VoiceConstants;
+import org.zmail.common.soap.ZmailNamespace;
+import org.zmail.soap.JaxbUtil;
 
 /**
  * This class represents a utility to generate the top level WSDL files for
- * Zimbra SOAP interfaces
+ * Zmail SOAP interfaces
  * 
  * @author gren
  *
@@ -62,8 +62,8 @@ public class WsdlGenerator {
     private static final Namespace nsSoap = new Namespace("soap", "http://schemas.xmlsoap.org/wsdl/soap/");
     private static final Namespace nsXsd = new Namespace( "xsd", "http://www.w3.org/2001/XMLSchema");
     private static final Namespace nsWsdl = new Namespace("wsdl", "http://schemas.xmlsoap.org/wsdl/");
-    private static final Namespace nsZimbra = new Namespace("zimbra", ZimbraNamespace.ZIMBRA_STR);
-    private static final String targetNsBase = "http://www.zimbra.com/wsdl/";
+    private static final Namespace nsZmail = new Namespace("zmail", ZmailNamespace.ZIMBRA_STR);
+    private static final String targetNsBase = "http://www.zmail.com/wsdl/";
     private static final QName xsdSchema = QName.get("schema", nsXsd);
     private static final QName xsdImport = QName.get("import", nsXsd);
     private static final QName soapBinding = QName.get("binding", nsSoap);
@@ -108,7 +108,7 @@ public class WsdlGenerator {
         for (WsdlInfoForNamespace wsdlNsInfo : nsInfos) {
             root.add(wsdlNsInfo.getXsdNamespace());
         }
-        root.add(nsZimbra);
+        root.add(nsZmail);
         root.add(nsSoap);
         root.add(nsXsd);
         root.add(nsWsdl);
@@ -182,9 +182,9 @@ public class WsdlGenerator {
         // wsdl:definitions/svc:types/xsd:schema
         Element schemaElem = typesElem.addElement(xsdSchema);
         // wsdl:definitions/svc:types/xsd:schema/xsd:import
-        Element importZimbraElem = schemaElem.addElement(xsdImport);
-        importZimbraElem.addAttribute("namespace", ZimbraNamespace.ZIMBRA_STR);
-        importZimbraElem.addAttribute("schemaLocation", "zimbra.xsd");
+        Element importZmailElem = schemaElem.addElement(xsdImport);
+        importZmailElem.addAttribute("namespace", ZmailNamespace.ZIMBRA_STR);
+        importZmailElem.addAttribute("schemaLocation", "zmail.xsd");
 
         for (WsdlInfoForNamespace nsInfo : nsInfos) {
             Element importTnsElem = schemaElem.addElement(xsdImport);
@@ -259,7 +259,7 @@ public class WsdlGenerator {
         // wsdl:definitions/wsdl:message/wsdl:part
         Element partElem = hdrCntxtMsgElem.addElement(part);
         partElem.addAttribute("name", "context");
-        partElem.addAttribute("element", "zimbra:context");
+        partElem.addAttribute("element", "zmail:context");
     }
 
     private static void addWsdlServiceElement(Element root, WsdlServiceInfo svcInfo) {
@@ -326,9 +326,9 @@ public class WsdlGenerator {
     }
 
     public enum WsdlDefinition {
-        ALL("ZimbraService.wsdl", "ZimbraService", targetNsBase + "ZimbraService.wsdl"),
-        ADMIN("ZimbraAdminService.wsdl", "ZimbraAdminService", targetNsBase + "ZimbraAdminService.wsdl"),
-        USER("ZimbraUserService.wsdl", "ZimbraUserService", targetNsBase + "ZimbraAdminService.wsdl");
+        ALL("ZmailService.wsdl", "ZmailService", targetNsBase + "ZmailService.wsdl"),
+        ADMIN("ZmailAdminService.wsdl", "ZmailAdminService", targetNsBase + "ZmailAdminService.wsdl"),
+        USER("ZmailUserService.wsdl", "ZmailUserService", targetNsBase + "ZmailAdminService.wsdl");
         
         private String fileName;
         private String serviceName;
@@ -346,19 +346,19 @@ public class WsdlGenerator {
     public static boolean handleRequestForWsdl(String fileName, OutputStream out, String soapUrl, String adminSoapUrl)
     throws IOException {
         if (WsdlDefinition.ALL.getFileName().equals(fileName)) {
-            createZimbraServiceWsdl(out, soapUrl, adminSoapUrl);
+            createZmailServiceWsdl(out, soapUrl, adminSoapUrl);
             return true;
         } else if (WsdlDefinition.ADMIN.getFileName().equals(fileName)) {
-            createZimbraAdminServiceWsdl(out, adminSoapUrl);
+            createZmailAdminServiceWsdl(out, adminSoapUrl);
             return true;
         } else if (WsdlDefinition.USER.getFileName().equals(fileName)) {
-            createZimbraUserServiceWsdl(out, soapUrl);
+            createZmailUserServiceWsdl(out, soapUrl);
             return true;
         }
         return false;
     }
 
-    public static void createZimbraServiceWsdl(OutputStream out, String soapUrl, String adminSoapUrl)
+    public static void createZmailServiceWsdl(OutputStream out, String soapUrl, String adminSoapUrl)
     throws IOException {
         List<WsdlInfoForNamespace> nsInfoList = Lists.newArrayList();
         Map<String,List<String>> packageToRequestListMap = getPackageToRequestListMap();
@@ -369,7 +369,7 @@ public class WsdlGenerator {
         writeWsdl(out, WsdlDefinition.ALL.getTargetNamespace(), WsdlDefinition.ALL.getServiceName(), nsInfoList);
     }
 
-    public static void createZimbraAdminServiceWsdl(OutputStream out, String adminSoapUrl)
+    public static void createZmailAdminServiceWsdl(OutputStream out, String adminSoapUrl)
     throws IOException {
         List<WsdlInfoForNamespace> nsInfoList = Lists.newArrayList();
         Map<String,List<String>> packageToRequestListMap = getPackageToRequestListMap();
@@ -378,7 +378,7 @@ public class WsdlGenerator {
         writeWsdl(out, WsdlDefinition.ALL.getTargetNamespace(), WsdlDefinition.ALL.getServiceName(), nsInfoList);
     }
 
-    public static void createZimbraUserServiceWsdl(OutputStream out, String soapUrl)
+    public static void createZmailUserServiceWsdl(OutputStream out, String soapUrl)
     throws IOException {
         List<WsdlInfoForNamespace> nsInfoList = Lists.newArrayList();
         Map<String,List<String>> packageToRequestListMap = getPackageToRequestListMap();
@@ -390,23 +390,23 @@ public class WsdlGenerator {
     private static void addAdminNamespaceInfo(List<WsdlInfoForNamespace> nsInfoList, WsdlServiceInfo zcsAdminService,
             Map<String,List<String>> packageToRequestListMap) {
         nsInfoList.add(WsdlInfoForNamespace.create(AdminConstants.NAMESPACE_STR, zcsAdminService,
-                packageToRequestListMap.get("com.zimbra.soap.admin.message")));
+                packageToRequestListMap.get("org.zmail.soap.admin.message")));
         nsInfoList.add(WsdlInfoForNamespace.create(AdminExtConstants.NAMESPACE_STR, zcsAdminService,
-                packageToRequestListMap.get("com.zimbra.soap.adminext.message")));
+                packageToRequestListMap.get("org.zmail.soap.adminext.message")));
     }
 
     private static void addUserNamespaceInfo(List<WsdlInfoForNamespace> nsInfoList, WsdlServiceInfo zcsService,
             Map<String,List<String>> packageToRequestListMap) {
         nsInfoList.add(WsdlInfoForNamespace.create(AccountConstants.NAMESPACE_STR, zcsService,
-                packageToRequestListMap.get("com.zimbra.soap.account.message")));
+                packageToRequestListMap.get("org.zmail.soap.account.message")));
         nsInfoList.add(WsdlInfoForNamespace.create(MailConstants.NAMESPACE_STR, zcsService,
-                packageToRequestListMap.get("com.zimbra.soap.mail.message")));
+                packageToRequestListMap.get("org.zmail.soap.mail.message")));
         nsInfoList.add(WsdlInfoForNamespace.create(ReplicationConstants.NAMESPACE_STR, zcsService,
-                packageToRequestListMap.get("com.zimbra.soap.replication.message")));
+                packageToRequestListMap.get("org.zmail.soap.replication.message")));
         nsInfoList.add(WsdlInfoForNamespace.create(SyncConstants.NAMESPACE_STR, zcsService,
-                packageToRequestListMap.get("com.zimbra.soap.sync.message")));
+                packageToRequestListMap.get("org.zmail.soap.sync.message")));
         nsInfoList.add(WsdlInfoForNamespace.create(VoiceConstants.NAMESPACE_STR, zcsService,
-                packageToRequestListMap.get("com.zimbra.soap.voice.message")));
+                packageToRequestListMap.get("org.zmail.soap.voice.message")));
     }
 
     /**
@@ -420,6 +420,6 @@ public class WsdlGenerator {
         Map<String,List<String>> packageToRequestListMap = getPackageToRequestListMap();
         addUserNamespaceInfo(nsInfoList, WsdlServiceInfo.zcsService, packageToRequestListMap);
         addAdminNamespaceInfo(nsInfoList, WsdlServiceInfo.zcsAdminService, packageToRequestListMap);
-        createWsdlFile("ZimbraService.wsdl", "ZimbraService", nsInfoList);
+        createWsdlFile("ZmailService.wsdl", "ZmailService", nsInfoList);
     }
 } // end WsdlGenerator class

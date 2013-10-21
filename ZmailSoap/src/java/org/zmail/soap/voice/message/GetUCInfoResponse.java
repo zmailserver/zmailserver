@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.voice.message;
+package org.zmail.soap.voice.message;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -27,10 +27,10 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.VoiceConstants;
-import com.zimbra.soap.json.jackson.annotate.ZimbraKeyValuePairs;
-import com.zimbra.soap.voice.type.Attr;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.VoiceConstants;
+import org.zmail.soap.json.jackson.annotate.ZmailKeyValuePairs;
+import org.zmail.soap.voice.type.Attr;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name=VoiceConstants.E_GET_UC_INFO_RESPONSE)
@@ -39,7 +39,7 @@ public class GetUCInfoResponse {
     /**
      * @zm-api-field-description Attributes
      */
-    @ZimbraKeyValuePairs
+    @ZmailKeyValuePairs
     @XmlElementWrapper(name=AccountConstants.E_ATTRS /* attrs */, required=false)
     @XmlElement(name=AccountConstants.E_ATTR /* attr */, required=false)
     private List<Attr> attrs = Lists.newArrayList();

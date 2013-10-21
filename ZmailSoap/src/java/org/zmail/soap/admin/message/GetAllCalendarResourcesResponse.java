@@ -14,7 +14,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import java.util.Collections;
 import java.util.List;
@@ -28,8 +28,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.soap.admin.type.CalendarResourceInfo;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.soap.admin.type.CalendarResourceInfo;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name=AdminConstants.E_GET_ALL_CALENDAR_RESOURCES_RESPONSE)

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap;
+package org.zmail.soap;
 
 import java.io.ByteArrayOutputStream;
 import javax.xml.bind.JAXBContext;

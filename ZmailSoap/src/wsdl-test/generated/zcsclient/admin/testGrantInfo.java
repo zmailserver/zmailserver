@@ -33,9 +33,9 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="target" type="{urn:zimbraAdmin}typeIdName"/>
- *         &lt;element name="grantee" type="{urn:zimbraAdmin}granteeInfo"/>
- *         &lt;element name="right" type="{urn:zimbraAdmin}rightModifierInfo"/>
+ *         &lt;element name="target" type="{urn:zmailAdmin}typeIdName"/>
+ *         &lt;element name="grantee" type="{urn:zmailAdmin}granteeInfo"/>
+ *         &lt;element name="right" type="{urn:zmailAdmin}rightModifierInfo"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>

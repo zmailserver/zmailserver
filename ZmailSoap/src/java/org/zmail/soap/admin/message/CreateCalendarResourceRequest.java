@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import com.google.common.collect.Lists;
 
@@ -27,9 +27,9 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.soap.admin.type.AdminAttrsImpl;
-import com.zimbra.soap.admin.type.Attr;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.soap.admin.type.AdminAttrsImpl;
+import org.zmail.soap.admin.type.Attr;
 
  /*
   * Note: soap-admin.txt said:
@@ -45,7 +45,7 @@ import com.zimbra.soap.admin.type.Attr;
  * <ul>
  * <li> A calendar resource is a special type of Account.  The Create, Delete, Modify, Rename, Get, GetAll, and Search
  *      operations are very similar to those of Account.
- * <li> Must specify the <b>displayName</b> and <b>zimbraCalResType</b> attributes
+ * <li> Must specify the <b>displayName</b> and <b>zmailCalResType</b> attributes
  * </ul>
  * <b>Access</b>: domain admin sufficient
  */

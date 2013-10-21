@@ -31,9 +31,9 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="documentActionSelector">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraMail}actionSelector">
+ *     &lt;extension base="{urn:zmailMail}actionSelector">
  *       &lt;sequence>
- *         &lt;element name="grant" type="{urn:zimbraMail}documentActionGrant" minOccurs="0"/>
+ *         &lt;element name="grant" type="{urn:zmailMail}documentActionGrant" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="zid" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/extension>

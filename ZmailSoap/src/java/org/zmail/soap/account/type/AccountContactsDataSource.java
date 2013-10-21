@@ -13,12 +13,12 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.account.type;
+package org.zmail.soap.account.type;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.zimbra.soap.type.ContactsDataSource;
+import org.zmail.soap.type.ContactsDataSource;
 
 @XmlRootElement(name="contacts")
 @XmlType(propOrder = {})

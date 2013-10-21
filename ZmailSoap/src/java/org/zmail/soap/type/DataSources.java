@@ -13,12 +13,12 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.type;
+package org.zmail.soap.type;
 
-import com.zimbra.soap.account.type.AccountCalDataSource;
-import com.zimbra.soap.account.type.AccountImapDataSource;
-import com.zimbra.soap.account.type.AccountPop3DataSource;
-import com.zimbra.soap.account.type.AccountRssDataSource;
+import org.zmail.soap.account.type.AccountCalDataSource;
+import org.zmail.soap.account.type.AccountImapDataSource;
+import org.zmail.soap.account.type.AccountPop3DataSource;
+import org.zmail.soap.account.type.AccountRssDataSource;
 
 public class DataSources {
 

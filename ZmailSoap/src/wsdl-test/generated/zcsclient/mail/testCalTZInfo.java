@@ -34,8 +34,8 @@ import generated.zcsclient.zm.testTzOnsetInfo;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="standard" type="{urn:zimbra}tzOnsetInfo" minOccurs="0"/>
- *         &lt;element name="daylight" type="{urn:zimbra}tzOnsetInfo" minOccurs="0"/>
+ *         &lt;element name="standard" type="{urn:zmail}tzOnsetInfo" minOccurs="0"/>
+ *         &lt;element name="daylight" type="{urn:zmail}tzOnsetInfo" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="id" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="stdoff" use="required" type="{http://www.w3.org/2001/XMLSchema}int" />

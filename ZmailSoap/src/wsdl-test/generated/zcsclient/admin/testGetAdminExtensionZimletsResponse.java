@@ -40,7 +40,7 @@ import javax.xml.bind.annotation.XmlType;
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence>
- *                   &lt;element name="zimlet" type="{urn:zimbraAdmin}adminZimletInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *                   &lt;element name="zimlet" type="{urn:zmailAdmin}adminZimletInfo" maxOccurs="unbounded" minOccurs="0"/>
  *                 &lt;/sequence>
  *               &lt;/restriction>
  *             &lt;/complexContent>
@@ -98,7 +98,7 @@ public class testGetAdminExtensionZimletsResponse {
      *   &lt;complexContent>
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
-     *         &lt;element name="zimlet" type="{urn:zimbraAdmin}adminZimletInfo" maxOccurs="unbounded" minOccurs="0"/>
+     *         &lt;element name="zimlet" type="{urn:zmailAdmin}adminZimletInfo" maxOccurs="unbounded" minOccurs="0"/>
      *       &lt;/sequence>
      *     &lt;/restriction>
      *   &lt;/complexContent>

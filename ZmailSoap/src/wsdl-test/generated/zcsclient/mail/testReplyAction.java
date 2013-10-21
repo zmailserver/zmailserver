@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="replyAction">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraMail}filterAction">
+ *     &lt;extension base="{urn:zmailMail}filterAction">
  *       &lt;sequence>
  *         &lt;element name="content" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>

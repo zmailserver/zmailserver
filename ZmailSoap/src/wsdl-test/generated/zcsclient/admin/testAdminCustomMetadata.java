@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="adminCustomMetadata">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraAdmin}adminKeyValuePairs">
+ *     &lt;extension base="{urn:zmailAdmin}adminKeyValuePairs">
  *       &lt;sequence>
  *       &lt;/sequence>
  *       &lt;attribute name="section" type="{http://www.w3.org/2001/XMLSchema}string" />

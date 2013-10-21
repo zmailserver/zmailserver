@@ -32,9 +32,9 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="s" type="{urn:zimbraAdmin}dtTimeInfo" minOccurs="0"/>
- *         &lt;element name="e" type="{urn:zimbraAdmin}dtTimeInfo" minOccurs="0"/>
- *         &lt;element name="dur" type="{urn:zimbraAdmin}durationInfo" minOccurs="0"/>
+ *         &lt;element name="s" type="{urn:zmailAdmin}dtTimeInfo" minOccurs="0"/>
+ *         &lt;element name="e" type="{urn:zmailAdmin}dtTimeInfo" minOccurs="0"/>
+ *         &lt;element name="dur" type="{urn:zmailAdmin}durationInfo" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>

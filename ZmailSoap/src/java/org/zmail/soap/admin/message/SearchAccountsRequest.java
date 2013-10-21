@@ -13,15 +13,15 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.soap.type.ZmBoolean;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.soap.type.ZmBoolean;
 
 /**
  * @zm-api-command-deprecation-info Note: <b>SearchAccountsRequest</b> is deprecated. See <b>SearchDirectoryRequest</b>.
@@ -70,8 +70,8 @@ public class SearchAccountsRequest {
 
     /**
      * @zm-api-field-tag attrs
-     * @zm-api-field-description Comma-seperated list of attrs to return ("displayName", "zimbraId",
-     * "zimbraAccountStatus")
+     * @zm-api-field-description Comma-seperated list of attrs to return ("displayName", "zmailId",
+     * "zmailAccountStatus")
      */
     @XmlAttribute(name=AdminConstants.A_ATTRS, required=false)
     private String attrs;

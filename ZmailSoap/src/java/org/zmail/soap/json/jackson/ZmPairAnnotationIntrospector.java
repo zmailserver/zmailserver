@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.json.jackson;
+package org.zmail.soap.json.jackson;
 
 import javax.xml.bind.annotation.XmlValue;
 
@@ -24,13 +24,13 @@ import org.codehaus.jackson.map.introspect.JacksonAnnotationIntrospector;
 
 import org.codehaus.jackson.xc.JaxbAnnotationIntrospector;
 
-import com.zimbra.common.soap.Element;
+import org.zmail.common.soap.Element;
 
     /**
-     * Zimbra specific annotation introspector.  Mostly based on a pair of annotation introspectors
+     * Zmail specific annotation introspector.  Mostly based on a pair of annotation introspectors
      * (JacksonAnnotationIntrospector/JaxbAnnotationIntrospector)
      * 
-     * @XmlValue handling - Zimbra uses the property name "_content" (JaxbAnnotationIntrospector uses "value")
+     * @XmlValue handling - Zmail uses the property name "_content" (JaxbAnnotationIntrospector uses "value")
      * 
      * Enum value handling - Use JaxbAnnotationIntrospector's handling in preference to JacksonAnnotationIntrospector's
      */

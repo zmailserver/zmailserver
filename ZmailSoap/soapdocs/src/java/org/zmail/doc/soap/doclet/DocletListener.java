@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.doc.soap.doclet;
+package org.zmail.doc.soap.doclet;
 
 import com.sun.javadoc.ClassDoc;
 import com.sun.javadoc.Tag;

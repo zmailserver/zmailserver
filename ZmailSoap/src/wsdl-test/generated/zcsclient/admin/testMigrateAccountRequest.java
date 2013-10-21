@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="migrate" type="{urn:zimbraAdmin}idAndAction"/>
+ *         &lt;element name="migrate" type="{urn:zmailAdmin}idAndAction"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>

@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="commonCalendaringData">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraMail}instanceDataAttrs">
+ *     &lt;extension base="{urn:zmailMail}instanceDataAttrs">
  *       &lt;sequence>
  *       &lt;/sequence>
  *       &lt;attribute name="x_uid" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />

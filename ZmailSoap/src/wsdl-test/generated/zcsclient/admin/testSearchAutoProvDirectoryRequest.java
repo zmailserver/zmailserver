@@ -33,9 +33,9 @@ import generated.zcsclient.zm.testAttributeSelectorImpl;
  * <pre>
  * &lt;complexType name="searchAutoProvDirectoryRequest">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbra}attributeSelectorImpl">
+ *     &lt;extension base="{urn:zmail}attributeSelectorImpl">
  *       &lt;sequence>
- *         &lt;element name="domain" type="{urn:zimbraAdmin}domainSelector"/>
+ *         &lt;element name="domain" type="{urn:zmailAdmin}domainSelector"/>
  *       &lt;/sequence>
  *       &lt;attribute name="keyAttr" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="query" type="{http://www.w3.org/2001/XMLSchema}string" />

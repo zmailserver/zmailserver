@@ -14,11 +14,11 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.admin.type;
+package org.zmail.soap.admin.type;
 
 import javax.xml.bind.annotation.XmlAttribute;
 
-import com.zimbra.common.soap.AdminConstants;
+import org.zmail.common.soap.AdminConstants;
 
 public class CookieSpec {
 

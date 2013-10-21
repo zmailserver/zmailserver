@@ -34,9 +34,9 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="messageHitInfo">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraMail}messageInfo">
+ *     &lt;extension base="{urn:zmailMail}messageInfo">
  *       &lt;sequence>
- *         &lt;element name="hp" type="{urn:zimbraMail}part" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="hp" type="{urn:zmailMail}part" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="sf" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="cm" type="{http://www.w3.org/2001/XMLSchema}boolean" />

@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="distributionListInfo">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraAdmin}adminObjectInfo">
+ *     &lt;extension base="{urn:zmailAdmin}adminObjectInfo">
  *       &lt;sequence>
  *         &lt;element name="dlm" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="owners" minOccurs="0">
@@ -41,7 +41,7 @@ import javax.xml.bind.annotation.XmlType;
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence>
- *                   &lt;element name="owner" type="{urn:zimbraAdmin}granteeInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *                   &lt;element name="owner" type="{urn:zmailAdmin}granteeInfo" maxOccurs="unbounded" minOccurs="0"/>
  *                 &lt;/sequence>
  *               &lt;/restriction>
  *             &lt;/complexContent>
@@ -158,7 +158,7 @@ public class testDistributionListInfo
      *   &lt;complexContent>
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
-     *         &lt;element name="owner" type="{urn:zimbraAdmin}granteeInfo" maxOccurs="unbounded" minOccurs="0"/>
+     *         &lt;element name="owner" type="{urn:zmailAdmin}granteeInfo" maxOccurs="unbounded" minOccurs="0"/>
      *       &lt;/sequence>
      *     &lt;/restriction>
      *   &lt;/complexContent>

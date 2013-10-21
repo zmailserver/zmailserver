@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.type;
+package org.zmail.soap.admin.type;
 
 import com.google.common.collect.Lists;
 
@@ -24,9 +24,9 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.soap.type.NamedElement;
-import com.zimbra.soap.admin.type.EffectiveRightsInfo;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.soap.type.NamedElement;
+import org.zmail.soap.admin.type.EffectiveRightsInfo;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class InDomainInfo {

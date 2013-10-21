@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="device" type="{urn:zimbraMail}nameId"/>
+ *         &lt;element name="device" type="{urn:zmailMail}nameId"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>

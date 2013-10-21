@@ -37,19 +37,19 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="deleted" type="{urn:zimbraMail}syncDeletedInfo" minOccurs="0"/>
+ *         &lt;element name="deleted" type="{urn:zmailMail}syncDeletedInfo" minOccurs="0"/>
  *         &lt;choice maxOccurs="unbounded" minOccurs="0">
- *           &lt;element ref="{urn:zimbraMail}folder"/>
- *           &lt;element name="tag" type="{urn:zimbraMail}tagInfo"/>
- *           &lt;element name="note" type="{urn:zimbraMail}noteInfo"/>
- *           &lt;element name="cn" type="{urn:zimbraMail}contactInfo"/>
- *           &lt;element name="appt" type="{urn:zimbraMail}calendarItemInfo"/>
- *           &lt;element name="task" type="{urn:zimbraMail}taskItemInfo"/>
- *           &lt;element name="c" type="{urn:zimbraMail}conversationSummary"/>
- *           &lt;element name="w" type="{urn:zimbraMail}commonDocumentInfo"/>
- *           &lt;element name="doc" type="{urn:zimbraMail}documentInfo"/>
- *           &lt;element name="m" type="{urn:zimbraMail}messageSummary"/>
- *           &lt;element name="chat" type="{urn:zimbraMail}chatSummary"/>
+ *           &lt;element ref="{urn:zmailMail}folder"/>
+ *           &lt;element name="tag" type="{urn:zmailMail}tagInfo"/>
+ *           &lt;element name="note" type="{urn:zmailMail}noteInfo"/>
+ *           &lt;element name="cn" type="{urn:zmailMail}contactInfo"/>
+ *           &lt;element name="appt" type="{urn:zmailMail}calendarItemInfo"/>
+ *           &lt;element name="task" type="{urn:zmailMail}taskItemInfo"/>
+ *           &lt;element name="c" type="{urn:zmailMail}conversationSummary"/>
+ *           &lt;element name="w" type="{urn:zmailMail}commonDocumentInfo"/>
+ *           &lt;element name="doc" type="{urn:zmailMail}documentInfo"/>
+ *           &lt;element name="m" type="{urn:zmailMail}messageSummary"/>
+ *           &lt;element name="chat" type="{urn:zmailMail}chatSummary"/>
  *         &lt;/choice>
  *       &lt;/sequence>
  *       &lt;attribute name="md" use="required" type="{http://www.w3.org/2001/XMLSchema}long" />

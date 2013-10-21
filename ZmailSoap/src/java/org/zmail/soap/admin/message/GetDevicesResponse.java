@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -28,9 +28,9 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.OctopusAdminConstants;
-import com.zimbra.soap.mail.type.DeviceInfo;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.OctopusAdminConstants;
+import org.zmail.soap.mail.type.DeviceInfo;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name=OctopusAdminConstants.E_GET_DEVICES_RESPONSE)

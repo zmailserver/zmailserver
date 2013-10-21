@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="m" type="{urn:zimbraMail}msgToSend" minOccurs="0"/>
+ *         &lt;element name="m" type="{urn:zmailMail}msgToSend" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="needCalendarSentByFixup" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *       &lt;attribute name="isCalendarForward" type="{http://www.w3.org/2001/XMLSchema}boolean" />

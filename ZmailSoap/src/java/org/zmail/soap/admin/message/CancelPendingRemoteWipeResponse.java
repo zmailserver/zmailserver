@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import java.util.Collections;
 import java.util.List;
@@ -27,9 +27,9 @@ import javax.xml.bind.annotation.XmlType;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.zimbra.common.soap.SyncAdminConstants;
-import com.zimbra.common.soap.SyncConstants;
-import com.zimbra.soap.admin.type.DeviceStatusInfo;
+import org.zmail.common.soap.SyncAdminConstants;
+import org.zmail.common.soap.SyncConstants;
+import org.zmail.soap.admin.type.DeviceStatusInfo;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name = SyncAdminConstants.E_CANCEL_PENDING_REMOTE_WIPE_RESPONSE)

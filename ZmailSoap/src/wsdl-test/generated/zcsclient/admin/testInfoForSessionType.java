@@ -35,8 +35,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="zid" type="{urn:zimbraAdmin}accountSessionInfo" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="s" type="{urn:zimbraAdmin}sessionInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="zid" type="{urn:zmailAdmin}accountSessionInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="s" type="{urn:zmailAdmin}sessionInfo" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="activeAccounts" type="{http://www.w3.org/2001/XMLSchema}int" />
  *       &lt;attribute name="activeSessions" use="required" type="{http://www.w3.org/2001/XMLSchema}int" />

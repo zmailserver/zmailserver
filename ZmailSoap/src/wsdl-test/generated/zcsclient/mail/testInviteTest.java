@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="inviteTest">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraMail}filterTest">
+ *     &lt;extension base="{urn:zmailMail}filterTest">
  *       &lt;sequence>
  *         &lt;element name="method" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>

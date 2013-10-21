@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.doc.soap.changelog;
+package org.zmail.doc.soap.changelog;
 
 import java.util.Map;
 
-import com.zimbra.doc.soap.ValueDescription;
-import com.zimbra.doc.soap.apidesc.SoapApiNamedElement;
-import com.zimbra.doc.soap.apidesc.SoapApiSimpleElement;
-import com.zimbra.doc.soap.apidesc.SoapApiType;
+import org.zmail.doc.soap.ValueDescription;
+import org.zmail.doc.soap.apidesc.SoapApiNamedElement;
+import org.zmail.doc.soap.apidesc.SoapApiSimpleElement;
+import org.zmail.doc.soap.apidesc.SoapApiType;
 
 /**
  * Encodes information about changes to the value of an element between a baseline revision and the current revision

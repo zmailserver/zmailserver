@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.voice.message;
+package org.zmail.soap.voice.message;
 
 import com.google.common.base.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -21,9 +21,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.VoiceConstants;
-import com.zimbra.soap.voice.type.PhoneInfo;
-import com.zimbra.soap.voice.type.StorePrincipalSpec;
+import org.zmail.common.soap.VoiceConstants;
+import org.zmail.soap.voice.type.PhoneInfo;
+import org.zmail.soap.voice.type.StorePrincipalSpec;
 
 /**
  * @zm-api-command-auth-required true

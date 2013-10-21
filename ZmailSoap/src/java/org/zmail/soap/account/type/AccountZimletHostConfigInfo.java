@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.account.type;
+package org.zmail.soap.account.type;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -28,9 +28,9 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.zimbra.common.soap.ZimletConstants;
-import com.zimbra.soap.base.ZimletHostConfigInfo;
-import com.zimbra.soap.base.ZimletProperty;
+import org.zmail.common.soap.ZimletConstants;
+import org.zmail.soap.base.ZimletHostConfigInfo;
+import org.zmail.soap.base.ZimletProperty;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(propOrder = {})
@@ -39,9 +39,9 @@ implements ZimletHostConfigInfo {
 
     /**
      * @zm-api-field-tag zimlet-host-name
-     * @zm-api-field-description Designates the zimbra host name for the properties.
+     * @zm-api-field-description Designates the zmail host name for the properties.
      * <br />
-     * Must be a valid Zimbra host name
+     * Must be a valid Zmail host name
      */
     @XmlAttribute(name=ZimletConstants.ZIMLET_ATTR_NAME /* name */, required=false)
     private String name;

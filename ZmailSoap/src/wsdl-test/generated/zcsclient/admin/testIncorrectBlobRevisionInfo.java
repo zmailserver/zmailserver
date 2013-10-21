@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="blob" type="{urn:zimbraAdmin}blobRevisionInfo"/>
+ *         &lt;element name="blob" type="{urn:zmailAdmin}blobRevisionInfo"/>
  *       &lt;/sequence>
  *       &lt;attribute name="id" use="required" type="{http://www.w3.org/2001/XMLSchema}int" />
  *       &lt;attribute name="rev" use="required" type="{http://www.w3.org/2001/XMLSchema}int" />

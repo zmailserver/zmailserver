@@ -13,20 +13,20 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.type;
+package org.zmail.soap.admin.type;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 
-import com.zimbra.common.soap.AdminConstants;
+import org.zmail.common.soap.AdminConstants;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class IdAndAction {
 
     /**
-     * @zm-api-field-tag zimbra-id-of-account
-     * @zm-api-field-description Zimbra ID of account
+     * @zm-api-field-tag zmail-id-of-account
+     * @zm-api-field-description Zmail ID of account
      */
     @XmlAttribute(name=AdminConstants.A_ID, required=true)
     private final String id;

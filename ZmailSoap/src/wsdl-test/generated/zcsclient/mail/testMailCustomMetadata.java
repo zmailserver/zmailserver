@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="mailCustomMetadata">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraMail}mailKeyValuePairs">
+ *     &lt;extension base="{urn:zmailMail}mailKeyValuePairs">
  *       &lt;sequence>
  *       &lt;/sequence>
  *       &lt;attribute name="section" type="{http://www.w3.org/2001/XMLSchema}string" />

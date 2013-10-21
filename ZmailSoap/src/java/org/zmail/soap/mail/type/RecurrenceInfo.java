@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.type;
+package org.zmail.soap.mail.type;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -27,9 +27,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.base.RecurRuleBaseInterface;
-import com.zimbra.soap.base.RecurrenceInfoInterface;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.base.RecurRuleBaseInterface;
+import org.zmail.soap.base.RecurrenceInfoInterface;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class RecurrenceInfo

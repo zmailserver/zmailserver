@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="expandedRecurrenceCancel">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraMail}expandedRecurrenceComponent">
+ *     &lt;extension base="{urn:zmailMail}expandedRecurrenceComponent">
  *       &lt;sequence>
  *       &lt;/sequence>
  *     &lt;/extension>

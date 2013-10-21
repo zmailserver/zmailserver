@@ -12,27 +12,27 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.jaxb;
+package org.zmail.soap.jaxb;
 
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.soap.json.jackson.annotate.ZimbraUniqueElement;
+import org.zmail.soap.json.jackson.annotate.ZmailUniqueElement;
 
 /** Test JAXB class with a variety of XmlElements which should be treated as unique or normally */
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name="unique-tester")
 public class UniqueTester {
-    @ZimbraUniqueElement
-    @XmlElement(name="unique-str-elem", namespace="urn:zimbraTest1", required=false)
+    @ZmailUniqueElement
+    @XmlElement(name="unique-str-elem", namespace="urn:zmailTest1", required=false)
     private String uniqueStrElem;
 
-    @XmlElement(name="non-unique-elem", namespace="urn:zimbraTest1", required=false)
+    @XmlElement(name="non-unique-elem", namespace="urn:zmailTest1", required=false)
     private String nonUniqueStrElem;
 
-    @ZimbraUniqueElement
+    @ZmailUniqueElement
     @XmlElement(name="unique-complex-elem", required=false)
     private StringAttribIntValue uniqueComplexElem;
 

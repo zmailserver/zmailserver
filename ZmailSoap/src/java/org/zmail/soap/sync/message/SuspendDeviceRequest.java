@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.sync.message;
+package org.zmail.soap.sync.message;
 
 import com.google.common.base.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -21,8 +21,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.SyncConstants;
-import com.zimbra.soap.sync.type.DeviceId;
+import org.zmail.common.soap.SyncConstants;
+import org.zmail.soap.sync.type.DeviceId;
 
 /**
  * @zm-api-command-network-edition

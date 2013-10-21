@@ -13,11 +13,11 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.BackupConstants;
+import org.zmail.common.soap.BackupConstants;
 
 @XmlRootElement(name=BackupConstants.E_ROLLOVER_REDOLOG_RESPONSE)
 public class RolloverRedoLogResponse {

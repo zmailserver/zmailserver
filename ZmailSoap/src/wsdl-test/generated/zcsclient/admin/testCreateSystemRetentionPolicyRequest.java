@@ -32,9 +32,9 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="cos" type="{urn:zimbraAdmin}cosSelector" minOccurs="0"/>
- *         &lt;element name="keep" type="{urn:zimbraAdmin}policyHolder" minOccurs="0"/>
- *         &lt;element name="purge" type="{urn:zimbraAdmin}policyHolder" minOccurs="0"/>
+ *         &lt;element name="cos" type="{urn:zmailAdmin}cosSelector" minOccurs="0"/>
+ *         &lt;element name="keep" type="{urn:zmailAdmin}policyHolder" minOccurs="0"/>
+ *         &lt;element name="purge" type="{urn:zmailAdmin}policyHolder" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>

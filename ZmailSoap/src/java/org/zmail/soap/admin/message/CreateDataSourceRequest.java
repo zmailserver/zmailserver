@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -21,9 +21,9 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.soap.admin.type.DataSourceSpecifier;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.soap.admin.type.DataSourceSpecifier;
 
 /**
  * @zm-api-command-auth-required true
@@ -41,13 +41,13 @@ import com.zimbra.soap.admin.type.DataSourceSpecifier;
  *     &lt;CreateDataSourceRequest/>
  *         &lt;id>{existing-account-id}&lt;/id>
  *         &lt;dataSource type="pop3" name="{data-source-name}">
- *             &lt;a n="zimbraDataSourceName">My POP3 Account&lt;/a>
- *             &lt;a n="zimbraDataSourceIsEnabled">TRUE&lt;/a>
- *             &lt;a n="zimbraDataSourceHost">pop.myisp.com&lt;/a>
- *             &lt;a n="zimbraDataSourcePort">110&lt;/a>
- *             &lt;a n="zimbraDataSourceUsername">mylogin&lt;/a>
- *             &lt;a n="zimbraDataSourcePassword">mypassword&lt;/a>
- *             &lt;a n="zimbraDataSourceFolderId">{folder-id}&lt;/a>
+ *             &lt;a n="zmailDataSourceName">My POP3 Account&lt;/a>
+ *             &lt;a n="zmailDataSourceIsEnabled">TRUE&lt;/a>
+ *             &lt;a n="zmailDataSourceHost">pop.myisp.com&lt;/a>
+ *             &lt;a n="zmailDataSourcePort">110&lt;/a>
+ *             &lt;a n="zmailDataSourceUsername">mylogin&lt;/a>
+ *             &lt;a n="zmailDataSourcePassword">mypassword&lt;/a>
+ *             &lt;a n="zmailDataSourceFolderId">{folder-id}&lt;/a>
  *        &lt;/dataSource>
  *     &lt;/CreateDataSourceRequest>
  * </pre>

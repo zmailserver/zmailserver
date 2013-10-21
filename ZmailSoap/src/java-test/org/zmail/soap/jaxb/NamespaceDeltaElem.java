@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.jaxb;
+package org.zmail.soap.jaxb;
 
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -21,9 +21,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /** Test JAXB class for exercising changes in namespace associated with elements */
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlRootElement(name="ns-delta", namespace="urn:ZimbraTest4")
+@XmlRootElement(name="ns-delta", namespace="urn:ZmailTest4")
 public class NamespaceDeltaElem {
-    @XmlElement(name="strAttrStrElem", namespace="urn:ZimbraTest5")
+    @XmlElement(name="strAttrStrElem", namespace="urn:ZmailTest5")
     private StringAttrStringElem sase;
     public NamespaceDeltaElem() { }
     public StringAttrStringElem getSase() { return sase; }

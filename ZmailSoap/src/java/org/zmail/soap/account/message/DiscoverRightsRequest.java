@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.account.message;
+package org.zmail.soap.account.message;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.zimbra.common.soap.AccountConstants;
+import org.zmail.common.soap.AccountConstants;
 
 /**
  * @zm-api-command-auth-required true
@@ -34,9 +34,9 @@ import com.zimbra.common.soap.AccountConstants;
  *      return grants granted on target types the rights can inherit from.
  * <li> For <b>sendAs</b>, <b>sendOnBehalfOf</b>, <b>sendAsDistList</b>, <b>sendOnBehalfOfDistList</b> rights,
  *      name attribute is not returned on <b>&lt;target></b> elements.  Instead, addresses in the target entry's
- *      <b>zimbraPrefAllowAddressForDelegatedSender</b> are returned in <b>&lt;e a="{email-address}"/></b> elements
+ *      <b>zmailPrefAllowAddressForDelegatedSender</b> are returned in <b>&lt;e a="{email-address}"/></b> elements
  *      under the <b>&lt;target></b> element.<br />
- *      If <b>zimbraPrefAllowAddressForDelegatedSender</b> is not set on the target entry, the entry's primary
+ *      If <b>zmailPrefAllowAddressForDelegatedSender</b> is not set on the target entry, the entry's primary
  *      email address will be return in the only <b>&lt;e a="{email-address}"/></b> element under the
  *      <b>&lt;target></b> element.
  * <li> For all other rights, <b>name</b> attribute is always returned on <b>&lt;target></b> elements, no 

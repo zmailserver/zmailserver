@@ -30,10 +30,10 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="exceptionRuleInfo">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraAdmin}recurIdInfo">
+ *     &lt;extension base="{urn:zmailAdmin}recurIdInfo">
  *       &lt;sequence>
- *         &lt;element name="add" type="{urn:zimbraAdmin}recurrenceInfo" minOccurs="0"/>
- *         &lt;element name="exclude" type="{urn:zimbraAdmin}recurrenceInfo" minOccurs="0"/>
+ *         &lt;element name="add" type="{urn:zmailAdmin}recurrenceInfo" minOccurs="0"/>
+ *         &lt;element name="exclude" type="{urn:zmailAdmin}recurrenceInfo" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/extension>
  *   &lt;/complexContent>

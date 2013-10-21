@@ -14,13 +14,13 @@
  */
 @XmlSchema(
     xmlns = {
-        @XmlNs(prefix="adminExt", namespaceURI = "urn:zimbraAdminExt")
+        @XmlNs(prefix="adminExt", namespaceURI = "urn:zmailAdminExt")
     },
-    namespace = "urn:zimbraAdminExt",
+    namespace = "urn:zmailAdminExt",
     elementFormDefault = XmlNsForm.QUALIFIED
 )
 @XmlAccessorType(XmlAccessType.NONE)
-package com.zimbra.soap.adminext.message;
+package org.zmail.soap.adminext.message;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

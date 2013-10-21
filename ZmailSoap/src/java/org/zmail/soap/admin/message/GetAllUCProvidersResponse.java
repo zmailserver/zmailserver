@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -26,8 +26,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.VoiceAdminConstants;
-import com.zimbra.soap.admin.type.VoiceProviderInfo;
+import org.zmail.common.soap.VoiceAdminConstants;
+import org.zmail.soap.admin.type.VoiceProviderInfo;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name=VoiceAdminConstants.E_GET_ALL_UC_PROVIDERS_RESPONSE)

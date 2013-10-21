@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="docAttachSpec">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraMail}attachSpec">
+ *     &lt;extension base="{urn:zmailMail}attachSpec">
  *       &lt;sequence>
  *       &lt;/sequence>
  *       &lt;attribute name="path" type="{http://www.w3.org/2001/XMLSchema}string" />

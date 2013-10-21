@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="LDAPEntry" type="{urn:zimbraAdmin}ldapEntryInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="LDAPEntry" type="{urn:zmailAdmin}ldapEntryInfo" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>

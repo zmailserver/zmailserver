@@ -35,8 +35,8 @@ import generated.zcsclient.zm.testGranteeChooser;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="grantee" type="{urn:zimbra}granteeChooser" minOccurs="0"/>
- *         &lt;element name="owner" type="{urn:zimbra}accountSelector"/>
+ *         &lt;element name="grantee" type="{urn:zmail}granteeChooser" minOccurs="0"/>
+ *         &lt;element name="owner" type="{urn:zmail}accountSelector"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>

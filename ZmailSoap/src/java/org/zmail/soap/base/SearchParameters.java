@@ -13,12 +13,12 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.base;
+package org.zmail.soap.base;
 
 import java.util.List;
 
-import com.zimbra.soap.type.AttributeName;
-import com.zimbra.soap.type.CursorInfo;
+import org.zmail.soap.type.AttributeName;
+import org.zmail.soap.type.CursorInfo;
 
 public interface SearchParameters {
 

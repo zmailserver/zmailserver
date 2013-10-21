@@ -13,9 +13,9 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.type;
+package org.zmail.soap.mail.type;
 
-import com.zimbra.soap.type.CalDataSource;
+import org.zmail.soap.type.CalDataSource;
 
 public class MailCalDataSource
 extends MailDataSource

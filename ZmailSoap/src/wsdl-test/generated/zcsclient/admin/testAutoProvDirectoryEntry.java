@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="autoProvDirectoryEntry">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraAdmin}adminKeyValuePairs">
+ *     &lt;extension base="{urn:zmailAdmin}adminKeyValuePairs">
  *       &lt;sequence>
  *         &lt;element name="key" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>

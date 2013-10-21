@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.type;
+package org.zmail.soap.mail.type;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -29,11 +29,11 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlType;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.base.CalTZInfoInterface;
-import com.zimbra.soap.base.CalendarReplyInterface;
-import com.zimbra.soap.base.InviteComponentInterface;
-import com.zimbra.soap.base.InviteInfoInterface;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.base.CalTZInfoInterface;
+import org.zmail.soap.base.CalendarReplyInterface;
+import org.zmail.soap.base.InviteComponentInterface;
+import org.zmail.soap.base.InviteInfoInterface;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(propOrder = {"timezones", "inviteComponent", "calendarReplies"})

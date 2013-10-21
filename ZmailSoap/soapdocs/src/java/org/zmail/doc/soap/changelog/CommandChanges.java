@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.doc.soap.changelog;
+package org.zmail.doc.soap.changelog;
 
 import java.util.Collection;
 import java.util.List;
@@ -23,15 +23,15 @@ import java.util.Set;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.zimbra.doc.soap.apidesc.SoapApiAttribute;
-import com.zimbra.doc.soap.apidesc.SoapApiCommand;
-import com.zimbra.doc.soap.apidesc.SoapApiElement;
-import com.zimbra.doc.soap.apidesc.SoapApiElementArtifact;
-import com.zimbra.doc.soap.apidesc.SoapApiElementChoiceInfo;
-import com.zimbra.doc.soap.apidesc.SoapApiNamedElement;
-import com.zimbra.doc.soap.apidesc.SoapApiSimpleElement;
-import com.zimbra.doc.soap.apidesc.SoapApiType;
-import com.zimbra.doc.soap.apidesc.SoapApiWrapperElement;
+import org.zmail.doc.soap.apidesc.SoapApiAttribute;
+import org.zmail.doc.soap.apidesc.SoapApiCommand;
+import org.zmail.doc.soap.apidesc.SoapApiElement;
+import org.zmail.doc.soap.apidesc.SoapApiElementArtifact;
+import org.zmail.doc.soap.apidesc.SoapApiElementChoiceInfo;
+import org.zmail.doc.soap.apidesc.SoapApiNamedElement;
+import org.zmail.doc.soap.apidesc.SoapApiSimpleElement;
+import org.zmail.doc.soap.apidesc.SoapApiType;
+import org.zmail.doc.soap.apidesc.SoapApiWrapperElement;
 
 /**
  * Encodes information about changes to a command between a baseline revision and the current revision

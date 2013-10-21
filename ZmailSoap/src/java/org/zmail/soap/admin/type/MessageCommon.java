@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.type;
+package org.zmail.soap.admin.type;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -28,9 +28,9 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.base.CustomMetadataInterface;
-import com.zimbra.soap.base.MessageCommonInterface;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.base.CustomMetadataInterface;
+import org.zmail.soap.base.MessageCommonInterface;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(propOrder = {"metadatas"})

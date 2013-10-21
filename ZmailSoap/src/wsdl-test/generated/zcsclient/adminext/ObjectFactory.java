@@ -40,16 +40,16 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _BulkImportAccountsResponse_QNAME = new QName("urn:zimbraAdminExt", "BulkImportAccountsResponse");
-    private final static QName _GenerateBulkProvisionFileFromLDAPResponse_QNAME = new QName("urn:zimbraAdminExt", "GenerateBulkProvisionFileFromLDAPResponse");
-    private final static QName _GenerateBulkProvisionFileFromLDAPRequest_QNAME = new QName("urn:zimbraAdminExt", "GenerateBulkProvisionFileFromLDAPRequest");
-    private final static QName _BulkIMAPDataImportRequest_QNAME = new QName("urn:zimbraAdminExt", "BulkIMAPDataImportRequest");
-    private final static QName _BulkImportAccountsRequest_QNAME = new QName("urn:zimbraAdminExt", "BulkImportAccountsRequest");
-    private final static QName _BulkIMAPDataImportResponse_QNAME = new QName("urn:zimbraAdminExt", "BulkIMAPDataImportResponse");
-    private final static QName _GetBulkIMAPImportTaskListResponse_QNAME = new QName("urn:zimbraAdminExt", "GetBulkIMAPImportTaskListResponse");
-    private final static QName _PurgeBulkIMAPImportTasksRequest_QNAME = new QName("urn:zimbraAdminExt", "PurgeBulkIMAPImportTasksRequest");
-    private final static QName _PurgeBulkIMAPImportTasksResponse_QNAME = new QName("urn:zimbraAdminExt", "PurgeBulkIMAPImportTasksResponse");
-    private final static QName _GetBulkIMAPImportTaskListRequest_QNAME = new QName("urn:zimbraAdminExt", "GetBulkIMAPImportTaskListRequest");
+    private final static QName _BulkImportAccountsResponse_QNAME = new QName("urn:zmailAdminExt", "BulkImportAccountsResponse");
+    private final static QName _GenerateBulkProvisionFileFromLDAPResponse_QNAME = new QName("urn:zmailAdminExt", "GenerateBulkProvisionFileFromLDAPResponse");
+    private final static QName _GenerateBulkProvisionFileFromLDAPRequest_QNAME = new QName("urn:zmailAdminExt", "GenerateBulkProvisionFileFromLDAPRequest");
+    private final static QName _BulkIMAPDataImportRequest_QNAME = new QName("urn:zmailAdminExt", "BulkIMAPDataImportRequest");
+    private final static QName _BulkImportAccountsRequest_QNAME = new QName("urn:zmailAdminExt", "BulkImportAccountsRequest");
+    private final static QName _BulkIMAPDataImportResponse_QNAME = new QName("urn:zmailAdminExt", "BulkIMAPDataImportResponse");
+    private final static QName _GetBulkIMAPImportTaskListResponse_QNAME = new QName("urn:zmailAdminExt", "GetBulkIMAPImportTaskListResponse");
+    private final static QName _PurgeBulkIMAPImportTasksRequest_QNAME = new QName("urn:zmailAdminExt", "PurgeBulkIMAPImportTasksRequest");
+    private final static QName _PurgeBulkIMAPImportTasksResponse_QNAME = new QName("urn:zmailAdminExt", "PurgeBulkIMAPImportTasksResponse");
+    private final static QName _GetBulkIMAPImportTaskListRequest_QNAME = new QName("urn:zmailAdminExt", "GetBulkIMAPImportTaskListRequest");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: generated.zcsclient.adminext
@@ -182,7 +182,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testBulkImportAccountsResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraAdminExt", name = "BulkImportAccountsResponse")
+    @XmlElementDecl(namespace = "urn:zmailAdminExt", name = "BulkImportAccountsResponse")
     public JAXBElement<testBulkImportAccountsResponse> createBulkImportAccountsResponse(testBulkImportAccountsResponse value) {
         return new JAXBElement<testBulkImportAccountsResponse>(_BulkImportAccountsResponse_QNAME, testBulkImportAccountsResponse.class, null, value);
     }
@@ -191,7 +191,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGenerateBulkProvisionFileFromLDAPResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraAdminExt", name = "GenerateBulkProvisionFileFromLDAPResponse")
+    @XmlElementDecl(namespace = "urn:zmailAdminExt", name = "GenerateBulkProvisionFileFromLDAPResponse")
     public JAXBElement<testGenerateBulkProvisionFileFromLDAPResponse> createGenerateBulkProvisionFileFromLDAPResponse(testGenerateBulkProvisionFileFromLDAPResponse value) {
         return new JAXBElement<testGenerateBulkProvisionFileFromLDAPResponse>(_GenerateBulkProvisionFileFromLDAPResponse_QNAME, testGenerateBulkProvisionFileFromLDAPResponse.class, null, value);
     }
@@ -200,7 +200,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGenerateBulkProvisionFileFromLDAPRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraAdminExt", name = "GenerateBulkProvisionFileFromLDAPRequest")
+    @XmlElementDecl(namespace = "urn:zmailAdminExt", name = "GenerateBulkProvisionFileFromLDAPRequest")
     public JAXBElement<testGenerateBulkProvisionFileFromLDAPRequest> createGenerateBulkProvisionFileFromLDAPRequest(testGenerateBulkProvisionFileFromLDAPRequest value) {
         return new JAXBElement<testGenerateBulkProvisionFileFromLDAPRequest>(_GenerateBulkProvisionFileFromLDAPRequest_QNAME, testGenerateBulkProvisionFileFromLDAPRequest.class, null, value);
     }
@@ -209,7 +209,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testBulkIMAPDataImportRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraAdminExt", name = "BulkIMAPDataImportRequest")
+    @XmlElementDecl(namespace = "urn:zmailAdminExt", name = "BulkIMAPDataImportRequest")
     public JAXBElement<testBulkIMAPDataImportRequest> createBulkIMAPDataImportRequest(testBulkIMAPDataImportRequest value) {
         return new JAXBElement<testBulkIMAPDataImportRequest>(_BulkIMAPDataImportRequest_QNAME, testBulkIMAPDataImportRequest.class, null, value);
     }
@@ -218,7 +218,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testBulkImportAccountsRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraAdminExt", name = "BulkImportAccountsRequest")
+    @XmlElementDecl(namespace = "urn:zmailAdminExt", name = "BulkImportAccountsRequest")
     public JAXBElement<testBulkImportAccountsRequest> createBulkImportAccountsRequest(testBulkImportAccountsRequest value) {
         return new JAXBElement<testBulkImportAccountsRequest>(_BulkImportAccountsRequest_QNAME, testBulkImportAccountsRequest.class, null, value);
     }
@@ -227,7 +227,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testBulkIMAPDataImportResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraAdminExt", name = "BulkIMAPDataImportResponse")
+    @XmlElementDecl(namespace = "urn:zmailAdminExt", name = "BulkIMAPDataImportResponse")
     public JAXBElement<testBulkIMAPDataImportResponse> createBulkIMAPDataImportResponse(testBulkIMAPDataImportResponse value) {
         return new JAXBElement<testBulkIMAPDataImportResponse>(_BulkIMAPDataImportResponse_QNAME, testBulkIMAPDataImportResponse.class, null, value);
     }
@@ -236,7 +236,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetBulkIMAPImportTaskListResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraAdminExt", name = "GetBulkIMAPImportTaskListResponse")
+    @XmlElementDecl(namespace = "urn:zmailAdminExt", name = "GetBulkIMAPImportTaskListResponse")
     public JAXBElement<testGetBulkIMAPImportTaskListResponse> createGetBulkIMAPImportTaskListResponse(testGetBulkIMAPImportTaskListResponse value) {
         return new JAXBElement<testGetBulkIMAPImportTaskListResponse>(_GetBulkIMAPImportTaskListResponse_QNAME, testGetBulkIMAPImportTaskListResponse.class, null, value);
     }
@@ -245,7 +245,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testPurgeBulkIMAPImportTasksRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraAdminExt", name = "PurgeBulkIMAPImportTasksRequest")
+    @XmlElementDecl(namespace = "urn:zmailAdminExt", name = "PurgeBulkIMAPImportTasksRequest")
     public JAXBElement<testPurgeBulkIMAPImportTasksRequest> createPurgeBulkIMAPImportTasksRequest(testPurgeBulkIMAPImportTasksRequest value) {
         return new JAXBElement<testPurgeBulkIMAPImportTasksRequest>(_PurgeBulkIMAPImportTasksRequest_QNAME, testPurgeBulkIMAPImportTasksRequest.class, null, value);
     }
@@ -254,7 +254,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testPurgeBulkIMAPImportTasksResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraAdminExt", name = "PurgeBulkIMAPImportTasksResponse")
+    @XmlElementDecl(namespace = "urn:zmailAdminExt", name = "PurgeBulkIMAPImportTasksResponse")
     public JAXBElement<testPurgeBulkIMAPImportTasksResponse> createPurgeBulkIMAPImportTasksResponse(testPurgeBulkIMAPImportTasksResponse value) {
         return new JAXBElement<testPurgeBulkIMAPImportTasksResponse>(_PurgeBulkIMAPImportTasksResponse_QNAME, testPurgeBulkIMAPImportTasksResponse.class, null, value);
     }
@@ -263,7 +263,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link testGetBulkIMAPImportTaskListRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "urn:zimbraAdminExt", name = "GetBulkIMAPImportTaskListRequest")
+    @XmlElementDecl(namespace = "urn:zmailAdminExt", name = "GetBulkIMAPImportTaskListRequest")
     public JAXBElement<testGetBulkIMAPImportTaskListRequest> createGetBulkIMAPImportTaskListRequest(testGetBulkIMAPImportTaskListRequest value) {
         return new JAXBElement<testGetBulkIMAPImportTaskListRequest>(_GetBulkIMAPImportTaskListRequest_QNAME, testGetBulkIMAPImportTaskListRequest.class, null, value);
     }

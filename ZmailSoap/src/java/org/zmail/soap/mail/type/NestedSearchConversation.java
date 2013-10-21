@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.type;
+package org.zmail.soap.mail.type;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -30,11 +30,11 @@ import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlType;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.mail.type.SuggestedQueryString;
-import com.zimbra.soap.type.BaseQueryInfo;
-import com.zimbra.soap.type.WildcardExpansionQueryInfo;
-import com.zimbra.soap.json.jackson.annotate.ZimbraJsonArrayForWrapper;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.mail.type.SuggestedQueryString;
+import org.zmail.soap.type.BaseQueryInfo;
+import org.zmail.soap.type.WildcardExpansionQueryInfo;
+import org.zmail.soap.json.jackson.annotate.ZmailJsonArrayForWrapper;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(propOrder = {"messages", "queryInfos"})
@@ -98,7 +98,7 @@ public class NestedSearchConversation {
      * unset then the wildcard was not specific enough and therefore no wildcard matches are included
      * (exact-match <b>is</b> included in results).
      */
-    @ZimbraJsonArrayForWrapper
+    @ZmailJsonArrayForWrapper
     @XmlElementWrapper(name=MailConstants.E_INFO /* info */, required=false)
     @XmlElements({
         @XmlElement(name=MailConstants.E_SUGEST, type=SuggestedQueryString.class),

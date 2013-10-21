@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="ace" type="{urn:zimbraAccount}accountACEInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="ace" type="{urn:zmailAccount}accountACEInfo" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>

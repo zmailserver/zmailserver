@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.json.jackson;
+package org.zmail.soap.json.jackson;
 
 import java.util.List;
 
@@ -27,10 +27,10 @@ import org.codehaus.jackson.map.JsonSerializer;
 
 /**
  * We need a {@link BeanSerializerModifier} to replace default <code>BeanSerializer</code>
- * with Zimbra-specific one; mostly to ensure that @XmlElementWrapper wrapped lists
- * are handled in the Zimbra way.
+ * with Zmail-specific one; mostly to ensure that @XmlElementWrapper wrapped lists
+ * are handled in the Zmail way.
  */
-public class ZimbraBeanSerializerModifier extends BeanSerializerModifier
+public class ZmailBeanSerializerModifier extends BeanSerializerModifier
 {
     /*
     /**********************************************************
@@ -54,7 +54,7 @@ public class ZimbraBeanSerializerModifier extends BeanSerializerModifier
             if (! nameInfo.needSpecialHandling()) {
                 continue;
             }
-            beanProperties.set(i, new ZimbraBeanPropertyWriter(bpw, nameInfo));
+            beanProperties.set(i, new ZmailBeanPropertyWriter(bpw, nameInfo));
         }
         return beanProperties;
     }
@@ -70,7 +70,7 @@ public class ZimbraBeanSerializerModifier extends BeanSerializerModifier
         if (!(serializer instanceof BeanSerializer)) {
             return serializer;
         }
-        return new ZimbraBeanSerializer((BeanSerializer) serializer);
+        return new ZmailBeanSerializer((BeanSerializer) serializer);
     }
 
 

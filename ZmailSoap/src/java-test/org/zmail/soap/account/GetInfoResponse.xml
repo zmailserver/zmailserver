@@ -1,4 +1,4 @@
-<GetInfoResponse attSizeLimit="10240000" docSizeLimit="10485760" xmlns="urn:zimbraAccount">
+<GetInfoResponse attSizeLimit="10240000" docSizeLimit="10485760" xmlns="urn:zmailAccount">
   <version>8.0.0_BETA1_1111 gren 20120528-0814</version>
   <id>91e6d036-5d5e-4788-9bc2-5b65e8c2480c</id>
   <name>user1@tarka.local</name>
@@ -12,315 +12,315 @@
   <recent>222</recent>
   <cos id="e00428a1-0c00-11d9-836a-000d93afea2a" name="default"/>
   <prefs>
-    <pref name="zimbraPrefMailFlashTitle">FALSE</pref>
-    <pref name="zimbraPrefCalendarReminderYMessenger">FALSE</pref>
-    <pref name="zimbraPrefDeleteInviteOnReply">TRUE</pref>
-    <pref name="zimbraPrefShortEmailAddress">TRUE</pref>
-    <pref name="zimbraPrefForwardIncludeOriginalText">includeBody</pref>
-    <pref name="zimbraPrefShowFragments">TRUE</pref>
-    <pref name="zimbraPrefHtmlEditorDefaultFontFamily">times new roman, new york, times, serif</pref>
-    <pref name="zimbraPrefComposeFormat">text</pref>
-    <pref name="zimbraPrefCalendarReminderSendEmail">FALSE</pref>
-    <pref name="zimbraPrefContactsInitialView">list</pref>
-    <pref name="zimbraPrefAutocompleteAddressBubblesEnabled">TRUE</pref>
-    <pref name="zimbraPrefCalendarReminderDuration1">-PT15M</pref>
-    <pref name="zimbraPrefIMReportIdle">TRUE</pref>
-    <pref name="zimbraPrefCalendarDefaultApptDuration">60m</pref>
-    <pref name="zimbraPrefWarnOnExit">TRUE</pref>
-    <pref name="zimbraPrefGetMailAction">default</pref>
-    <pref name="zimbraPrefOutOfOfficeCacheDuration">7d</pref>
-    <pref name="zimbraPrefConversationOrder">dateDesc</pref>
-    <pref name="zimbraPrefIMHideBlockedBuddies">FALSE</pref>
-    <pref name="zimbraPrefShowCalendarWeek">FALSE</pref>
-    <pref name="zimbraPrefAccountTreeOpen">TRUE</pref>
-    <pref name="zimbraPrefIncludeTrashInSearch">FALSE</pref>
-    <pref name="zimbraPrefGalSearchEnabled">TRUE</pref>
-    <pref name="zimbraPrefIMHideOfflineBuddies">FALSE</pref>
-    <pref name="zimbraPrefConvShowCalendar">FALSE</pref>
-    <pref name="zimbraPrefFolderTreeOpen">TRUE</pref>
-    <pref name="zimbraPrefCalendarDayHourStart">8</pref>
-    <pref name="zimbraPrefSaveToSent">TRUE</pref>
-    <pref name="zimbraPrefIMLogChatsEnabled">TRUE</pref>
-    <pref name="zimbraPrefCalendarNotifyDelegatedChanges">FALSE</pref>
-    <pref name="zimbraPrefMailSignatureStyle">outlook</pref>
-    <pref name="zimbraPrefMessageViewHtmlPreferred">TRUE</pref>
-    <pref name="zimbraPrefCalendarViewTimeInterval">1h</pref>
-    <pref name="zimbraPrefGroupMailBy">conversation</pref>
-    <pref name="zimbraPrefContactsExpandAppleContactGroups">FALSE</pref>
-    <pref name="zimbraPrefImapSearchFoldersEnabled">TRUE</pref>
-    <pref name="zimbraPrefContactsDisableAutocompleteOnContactGroupMembers">FALSE</pref>
-    <pref name="zimbraPrefVoiceItemsPerPage">25</pref>
-    <pref name="zimbraPrefIncludeSharedItemsInSearch">FALSE</pref>
-    <pref name="zimbraPrefIMNotifyPresence">TRUE</pref>
-    <pref name="zimbraPrefOpenMailInNewWindow">FALSE</pref>
-    <pref name="zimbraPrefHtmlEditorDefaultFontColor">#000000</pref>
-    <pref name="zimbraPrefTimeZoneId">America/Los_Angeles</pref>
-    <pref name="zimbraPrefReadingPaneLocation">right</pref>
-    <pref name="zimbraPrefStandardClientAccessibilityMode">FALSE</pref>
-    <pref name="zimbraPrefMailFlashIcon">FALSE</pref>
-    <pref name="zimbraPrefMailToasterEnabled">FALSE</pref>
-    <pref name="zimbraPrefTagTreeOpen">TRUE</pref>
-    <pref name="zimbraPrefMailSoundsEnabled">FALSE</pref>
-    <pref name="zimbraPrefBriefcaseReadingPaneLocation">right</pref>
-    <pref name="zimbraPrefMarkMsgRead">0</pref>
-    <pref name="zimbraPrefSkin">serenity</pref>
-    <pref name="zimbraPrefMessageIdDedupingEnabled">TRUE</pref>
-    <pref name="zimbraPrefIMNotifyStatus">TRUE</pref>
-    <pref name="zimbraPrefMailPollingInterval">12h</pref>
-    <pref name="zimbraPrefDisplayExternalImages">FALSE</pref>
-    <pref name="zimbraPrefShowComposeDirection">FALSE</pref>
-    <pref name="zimbraPrefCalendarWorkingHours">1:N:0800:1700,2:Y:0800:1700,3:Y:0800:1700,4:Y:0800:1700,5:Y:0800:1700,6:Y:0800:1700,7:N:0800:1700</pref>
-    <pref name="zimbraPrefTasksReadingPaneLocation">right</pref>
-    <pref name="zimbraPrefCalendarShowPastDueReminders">TRUE</pref>
-    <pref name="zimbraPrefIMFlashIcon">TRUE</pref>
-    <pref name="zimbraPrefMailSignatureHTML">&lt;strong>fóó utf8&lt;/strong> signature test</pref>
-    <pref name="zimbraPrefIMToasterEnabled">FALSE</pref>
-    <pref name="zimbraPrefCalendarApptAllowAtendeeEdit">TRUE</pref>
-    <pref name="zimbraPrefReadingPaneEnabled">TRUE</pref>
-    <pref name="zimbraPrefSharedAddrBookAutoCompleteEnabled">FALSE</pref>
-    <pref name="zimbraPrefAutoAddAddressEnabled">TRUE</pref>
-    <pref name="zimbraPrefIMFlashTitle">TRUE</pref>
-    <pref name="zimbraPrefAppleIcalDelegationEnabled">FALSE</pref>
-    <pref name="zimbraPrefOutOfOfficeStatusAlertOnLogin">TRUE</pref>
-    <pref name="zimbraPrefAutoSaveDraftInterval">30s</pref>
-    <pref name="zimbraPrefCalendarReminderFlashTitle">TRUE</pref>
-    <pref name="zimbraPrefCalendarAlwaysShowMiniCal">TRUE</pref>
-    <pref name="zimbraPrefSearchTreeOpen">TRUE</pref>
-    <pref name="zimbraPrefDefaultSignatureId">28fa4fec-a5fb-4dc8-acf9-df930bb13546</pref>
-    <pref name="zimbraPrefCalendarReminderMobile">FALSE</pref>
-    <pref name="zimbraPrefCalendarApptReminderWarningTime">5</pref>
-    <pref name="zimbraPrefContactsPerPage">25</pref>
-    <pref name="zimbraPrefIMInstantNotify">TRUE</pref>
-    <pref name="zimbraPrefPop3IncludeSpam">FALSE</pref>
-    <pref name="zimbraPrefIMIdleTimeout">10</pref>
-    <pref name="zimbraPrefPop3DeleteOption">delete</pref>
-    <pref name="zimbraPrefZimletTreeOpen">FALSE</pref>
-    <pref name="zimbraPrefComposeInNewWindow">FALSE</pref>
-    <pref name="zimbraPrefCalendarAllowPublishMethodInvite">FALSE</pref>
-    <pref name="zimbraPrefUseKeyboardShortcuts">TRUE</pref>
-    <pref name="zimbraPrefUseRfc2231">FALSE</pref>
-    <pref name="zimbraPrefMailSelectAfterDelete">next</pref>
-    <pref name="zimbraPrefDedupeMessagesSentToSelf">dedupeNone</pref>
-    <pref name="zimbraPrefCalendarShowDeclinedMeetings">TRUE</pref>
-    <pref name="zimbraPrefCalendarInitialView">workWeek</pref>
-    <pref name="zimbraPrefUseTimeZoneListInCalendar">FALSE</pref>
-    <pref name="zimbraPrefJunkLifetime">0</pref>
-    <pref name="zimbraPrefExternalSendersType">ALL</pref>
-    <pref name="zimbraPrefForwardReplyPrefixChar">></pref>
-    <pref name="zimbraPrefFolderColorEnabled">TRUE</pref>
-    <pref name="zimbraPrefAdminConsoleWarnOnExit">TRUE</pref>
-    <pref name="zimbraPrefCalendarSendInviteDeniedAutoReply">FALSE</pref>
-    <pref name="zimbraPrefConvReadingPaneLocation">bottom</pref>
-    <pref name="zimbraPrefItemsPerVirtualPage">50</pref>
-    <pref name="zimbraPrefShowSelectionCheckbox">TRUE</pref>
-    <pref name="zimbraPrefSentLifetime">0</pref>
-    <pref name="zimbraPrefGalAutoCompleteEnabled">TRUE</pref>
-    <pref name="zimbraPrefSentMailFolder">sent</pref>
-    <pref name="zimbraPrefSpellIgnoreAllCaps">TRUE</pref>
-    <pref name="zimbraPrefAdvancedClientEnforceMinDisplay">TRUE</pref>
-    <pref name="zimbraPrefIMLogChats">TRUE</pref>
-    <pref name="zimbraPrefCalendarAutoAddInvites">TRUE</pref>
-    <pref name="zimbraPrefInboxReadLifetime">0</pref>
-    <pref name="zimbraPrefShowSearchString">FALSE</pref>
-    <pref name="zimbraPrefForwardReplyInOriginalFormat">TRUE</pref>
-    <pref name="zimbraPrefDefaultPrintFontSize">12pt</pref>
-    <pref name="zimbraPrefClientType">advanced</pref>
-    <pref name="zimbraPrefMailRequestReadReceipts">FALSE</pref>
-    <pref name="zimbraPrefInboxUnreadLifetime">0</pref>
-    <pref name="zimbraPrefMailSendReadReceipts">never</pref>
-    <pref name="zimbraPrefAutoCompleteQuickCompletionOnComma">TRUE</pref>
-    <pref name="zimbraPrefHtmlEditorDefaultFontSize">12pt</pref>
-    <pref name="zimbraPrefCalendarAllowForwardedInvite">TRUE</pref>
-    <pref name="zimbraPrefIncludeSpamInSearch">FALSE</pref>
-    <pref name="zimbraPrefMailItemsPerPage">25</pref>
-    <pref name="zimbraPrefReplyIncludeOriginalText">includeBody</pref>
-    <pref name="zimbraPrefCalendarFirstDayOfWeek">0</pref>
-    <pref name="zimbraPrefMailInitialSearch">in:inbox</pref>
-    <pref name="zimbraPrefCalendarAllowCancelEmailToSelf">FALSE</pref>
-    <pref name="zimbraPrefCalendarReminderSoundsEnabled">TRUE</pref>
-    <pref name="zimbraPrefTrashLifetime">0</pref>
-    <pref name="zimbraPrefCalendarDayHourEnd">18</pref>
-    <pref name="zimbraPrefIMSoundsEnabled">TRUE</pref>
-    <pref name="zimbraPrefMandatorySpellCheckEnabled">FALSE</pref>
-    <pref name="zimbraPrefIMIdleStatus">away</pref>
-    <pref name="zimbraPrefIMAutoLogin">FALSE</pref>
-    <pref name="zimbraPrefFileSharingApplication">briefcase</pref>
-    <pref name="zimbraPrefCalendarToasterEnabled">FALSE</pref>
-    <pref name="zimbraPrefCalendarApptVisibility">public</pref>
-    <pref name="zimbraPrefCalendarUseQuickAdd">TRUE</pref>
+    <pref name="zmailPrefMailFlashTitle">FALSE</pref>
+    <pref name="zmailPrefCalendarReminderYMessenger">FALSE</pref>
+    <pref name="zmailPrefDeleteInviteOnReply">TRUE</pref>
+    <pref name="zmailPrefShortEmailAddress">TRUE</pref>
+    <pref name="zmailPrefForwardIncludeOriginalText">includeBody</pref>
+    <pref name="zmailPrefShowFragments">TRUE</pref>
+    <pref name="zmailPrefHtmlEditorDefaultFontFamily">times new roman, new york, times, serif</pref>
+    <pref name="zmailPrefComposeFormat">text</pref>
+    <pref name="zmailPrefCalendarReminderSendEmail">FALSE</pref>
+    <pref name="zmailPrefContactsInitialView">list</pref>
+    <pref name="zmailPrefAutocompleteAddressBubblesEnabled">TRUE</pref>
+    <pref name="zmailPrefCalendarReminderDuration1">-PT15M</pref>
+    <pref name="zmailPrefIMReportIdle">TRUE</pref>
+    <pref name="zmailPrefCalendarDefaultApptDuration">60m</pref>
+    <pref name="zmailPrefWarnOnExit">TRUE</pref>
+    <pref name="zmailPrefGetMailAction">default</pref>
+    <pref name="zmailPrefOutOfOfficeCacheDuration">7d</pref>
+    <pref name="zmailPrefConversationOrder">dateDesc</pref>
+    <pref name="zmailPrefIMHideBlockedBuddies">FALSE</pref>
+    <pref name="zmailPrefShowCalendarWeek">FALSE</pref>
+    <pref name="zmailPrefAccountTreeOpen">TRUE</pref>
+    <pref name="zmailPrefIncludeTrashInSearch">FALSE</pref>
+    <pref name="zmailPrefGalSearchEnabled">TRUE</pref>
+    <pref name="zmailPrefIMHideOfflineBuddies">FALSE</pref>
+    <pref name="zmailPrefConvShowCalendar">FALSE</pref>
+    <pref name="zmailPrefFolderTreeOpen">TRUE</pref>
+    <pref name="zmailPrefCalendarDayHourStart">8</pref>
+    <pref name="zmailPrefSaveToSent">TRUE</pref>
+    <pref name="zmailPrefIMLogChatsEnabled">TRUE</pref>
+    <pref name="zmailPrefCalendarNotifyDelegatedChanges">FALSE</pref>
+    <pref name="zmailPrefMailSignatureStyle">outlook</pref>
+    <pref name="zmailPrefMessageViewHtmlPreferred">TRUE</pref>
+    <pref name="zmailPrefCalendarViewTimeInterval">1h</pref>
+    <pref name="zmailPrefGroupMailBy">conversation</pref>
+    <pref name="zmailPrefContactsExpandAppleContactGroups">FALSE</pref>
+    <pref name="zmailPrefImapSearchFoldersEnabled">TRUE</pref>
+    <pref name="zmailPrefContactsDisableAutocompleteOnContactGroupMembers">FALSE</pref>
+    <pref name="zmailPrefVoiceItemsPerPage">25</pref>
+    <pref name="zmailPrefIncludeSharedItemsInSearch">FALSE</pref>
+    <pref name="zmailPrefIMNotifyPresence">TRUE</pref>
+    <pref name="zmailPrefOpenMailInNewWindow">FALSE</pref>
+    <pref name="zmailPrefHtmlEditorDefaultFontColor">#000000</pref>
+    <pref name="zmailPrefTimeZoneId">America/Los_Angeles</pref>
+    <pref name="zmailPrefReadingPaneLocation">right</pref>
+    <pref name="zmailPrefStandardClientAccessibilityMode">FALSE</pref>
+    <pref name="zmailPrefMailFlashIcon">FALSE</pref>
+    <pref name="zmailPrefMailToasterEnabled">FALSE</pref>
+    <pref name="zmailPrefTagTreeOpen">TRUE</pref>
+    <pref name="zmailPrefMailSoundsEnabled">FALSE</pref>
+    <pref name="zmailPrefBriefcaseReadingPaneLocation">right</pref>
+    <pref name="zmailPrefMarkMsgRead">0</pref>
+    <pref name="zmailPrefSkin">serenity</pref>
+    <pref name="zmailPrefMessageIdDedupingEnabled">TRUE</pref>
+    <pref name="zmailPrefIMNotifyStatus">TRUE</pref>
+    <pref name="zmailPrefMailPollingInterval">12h</pref>
+    <pref name="zmailPrefDisplayExternalImages">FALSE</pref>
+    <pref name="zmailPrefShowComposeDirection">FALSE</pref>
+    <pref name="zmailPrefCalendarWorkingHours">1:N:0800:1700,2:Y:0800:1700,3:Y:0800:1700,4:Y:0800:1700,5:Y:0800:1700,6:Y:0800:1700,7:N:0800:1700</pref>
+    <pref name="zmailPrefTasksReadingPaneLocation">right</pref>
+    <pref name="zmailPrefCalendarShowPastDueReminders">TRUE</pref>
+    <pref name="zmailPrefIMFlashIcon">TRUE</pref>
+    <pref name="zmailPrefMailSignatureHTML">&lt;strong>fóó utf8&lt;/strong> signature test</pref>
+    <pref name="zmailPrefIMToasterEnabled">FALSE</pref>
+    <pref name="zmailPrefCalendarApptAllowAtendeeEdit">TRUE</pref>
+    <pref name="zmailPrefReadingPaneEnabled">TRUE</pref>
+    <pref name="zmailPrefSharedAddrBookAutoCompleteEnabled">FALSE</pref>
+    <pref name="zmailPrefAutoAddAddressEnabled">TRUE</pref>
+    <pref name="zmailPrefIMFlashTitle">TRUE</pref>
+    <pref name="zmailPrefAppleIcalDelegationEnabled">FALSE</pref>
+    <pref name="zmailPrefOutOfOfficeStatusAlertOnLogin">TRUE</pref>
+    <pref name="zmailPrefAutoSaveDraftInterval">30s</pref>
+    <pref name="zmailPrefCalendarReminderFlashTitle">TRUE</pref>
+    <pref name="zmailPrefCalendarAlwaysShowMiniCal">TRUE</pref>
+    <pref name="zmailPrefSearchTreeOpen">TRUE</pref>
+    <pref name="zmailPrefDefaultSignatureId">28fa4fec-a5fb-4dc8-acf9-df930bb13546</pref>
+    <pref name="zmailPrefCalendarReminderMobile">FALSE</pref>
+    <pref name="zmailPrefCalendarApptReminderWarningTime">5</pref>
+    <pref name="zmailPrefContactsPerPage">25</pref>
+    <pref name="zmailPrefIMInstantNotify">TRUE</pref>
+    <pref name="zmailPrefPop3IncludeSpam">FALSE</pref>
+    <pref name="zmailPrefIMIdleTimeout">10</pref>
+    <pref name="zmailPrefPop3DeleteOption">delete</pref>
+    <pref name="zmailPrefZimletTreeOpen">FALSE</pref>
+    <pref name="zmailPrefComposeInNewWindow">FALSE</pref>
+    <pref name="zmailPrefCalendarAllowPublishMethodInvite">FALSE</pref>
+    <pref name="zmailPrefUseKeyboardShortcuts">TRUE</pref>
+    <pref name="zmailPrefUseRfc2231">FALSE</pref>
+    <pref name="zmailPrefMailSelectAfterDelete">next</pref>
+    <pref name="zmailPrefDedupeMessagesSentToSelf">dedupeNone</pref>
+    <pref name="zmailPrefCalendarShowDeclinedMeetings">TRUE</pref>
+    <pref name="zmailPrefCalendarInitialView">workWeek</pref>
+    <pref name="zmailPrefUseTimeZoneListInCalendar">FALSE</pref>
+    <pref name="zmailPrefJunkLifetime">0</pref>
+    <pref name="zmailPrefExternalSendersType">ALL</pref>
+    <pref name="zmailPrefForwardReplyPrefixChar">></pref>
+    <pref name="zmailPrefFolderColorEnabled">TRUE</pref>
+    <pref name="zmailPrefAdminConsoleWarnOnExit">TRUE</pref>
+    <pref name="zmailPrefCalendarSendInviteDeniedAutoReply">FALSE</pref>
+    <pref name="zmailPrefConvReadingPaneLocation">bottom</pref>
+    <pref name="zmailPrefItemsPerVirtualPage">50</pref>
+    <pref name="zmailPrefShowSelectionCheckbox">TRUE</pref>
+    <pref name="zmailPrefSentLifetime">0</pref>
+    <pref name="zmailPrefGalAutoCompleteEnabled">TRUE</pref>
+    <pref name="zmailPrefSentMailFolder">sent</pref>
+    <pref name="zmailPrefSpellIgnoreAllCaps">TRUE</pref>
+    <pref name="zmailPrefAdvancedClientEnforceMinDisplay">TRUE</pref>
+    <pref name="zmailPrefIMLogChats">TRUE</pref>
+    <pref name="zmailPrefCalendarAutoAddInvites">TRUE</pref>
+    <pref name="zmailPrefInboxReadLifetime">0</pref>
+    <pref name="zmailPrefShowSearchString">FALSE</pref>
+    <pref name="zmailPrefForwardReplyInOriginalFormat">TRUE</pref>
+    <pref name="zmailPrefDefaultPrintFontSize">12pt</pref>
+    <pref name="zmailPrefClientType">advanced</pref>
+    <pref name="zmailPrefMailRequestReadReceipts">FALSE</pref>
+    <pref name="zmailPrefInboxUnreadLifetime">0</pref>
+    <pref name="zmailPrefMailSendReadReceipts">never</pref>
+    <pref name="zmailPrefAutoCompleteQuickCompletionOnComma">TRUE</pref>
+    <pref name="zmailPrefHtmlEditorDefaultFontSize">12pt</pref>
+    <pref name="zmailPrefCalendarAllowForwardedInvite">TRUE</pref>
+    <pref name="zmailPrefIncludeSpamInSearch">FALSE</pref>
+    <pref name="zmailPrefMailItemsPerPage">25</pref>
+    <pref name="zmailPrefReplyIncludeOriginalText">includeBody</pref>
+    <pref name="zmailPrefCalendarFirstDayOfWeek">0</pref>
+    <pref name="zmailPrefMailInitialSearch">in:inbox</pref>
+    <pref name="zmailPrefCalendarAllowCancelEmailToSelf">FALSE</pref>
+    <pref name="zmailPrefCalendarReminderSoundsEnabled">TRUE</pref>
+    <pref name="zmailPrefTrashLifetime">0</pref>
+    <pref name="zmailPrefCalendarDayHourEnd">18</pref>
+    <pref name="zmailPrefIMSoundsEnabled">TRUE</pref>
+    <pref name="zmailPrefMandatorySpellCheckEnabled">FALSE</pref>
+    <pref name="zmailPrefIMIdleStatus">away</pref>
+    <pref name="zmailPrefIMAutoLogin">FALSE</pref>
+    <pref name="zmailPrefFileSharingApplication">briefcase</pref>
+    <pref name="zmailPrefCalendarToasterEnabled">FALSE</pref>
+    <pref name="zmailPrefCalendarApptVisibility">public</pref>
+    <pref name="zmailPrefCalendarUseQuickAdd">TRUE</pref>
   </prefs>
   <attrs>
-    <attr name="zimbraFeatureNotebookEnabled">FALSE</attr>
-    <attr name="zimbraFeatureSkinChangeEnabled">TRUE</attr>
-    <attr name="zimbraMailForwardingAddressMaxNumAddrs">100</attr>
-    <attr name="zimbraFeatureConversationsEnabled">TRUE</attr>
-    <attr name="zimbraZimletAvailableZimlets">+com_zimbra_url</attr>
-    <attr name="zimbraZimletAvailableZimlets">+com_zimbra_email</attr>
-    <attr name="zimbraZimletAvailableZimlets">+com_zimbra_date</attr>
-    <attr name="zimbraZimletAvailableZimlets">+com_zimbra_webex</attr>
-    <attr name="zimbraZimletAvailableZimlets">+com_zimbra_dnd</attr>
-    <attr name="zimbraZimletAvailableZimlets">+com_zimbra_ymemoticons</attr>
-    <attr name="zimbraZimletAvailableZimlets">+com_zimbra_srchhighlighter</attr>
-    <attr name="zimbraZimletAvailableZimlets">+com_zimbra_phone</attr>
-    <attr name="zimbraZimletAvailableZimlets">+com_zimbra_attachcontacts</attr>
-    <attr name="zimbraZimletAvailableZimlets">+com_zimbra_attachmail</attr>
-    <attr name="zimbraMailTrustedSenderListMaxNumEntries">500</attr>
-    <attr name="zimbraFeatureOutOfOfficeReplyEnabled">TRUE</attr>
-    <attr name="zimbraFeatureFlaggingEnabled">TRUE</attr>
-    <attr name="zimbraFeatureContactsDetailedSearchEnabled">FALSE</attr>
-    <attr name="zimbraFeatureMobilePolicyEnabled">FALSE</attr>
-    <attr name="zimbraPasswordMinUpperCaseChars">0</attr>
-    <attr name="zimbraAllowAnyFromAddress">FALSE</attr>
-    <attr name="zimbraFeatureDistributionListExpandMembersEnabled">TRUE</attr>
-    <attr name="zimbraFeatureBriefcasesEnabled">TRUE</attr>
-    <attr name="zimbraFeatureContactsEnabled">TRUE</attr>
-    <attr name="zimbraExternalSharingEnabled">TRUE</attr>
-    <attr name="zimbraPasswordMinLowerCaseChars">0</attr>
-    <attr name="zimbraMailMessageLifetime">0</attr>
-    <attr name="zimbraFeatureInitialSearchPreferenceEnabled">TRUE</attr>
-    <attr name="zimbraMailForwardingAddressMaxLength">4096</attr>
-    <attr name="zimbraPasswordMinAlphaChars">0</attr>
-    <attr name="zimbraLocale">en_US</attr>
-    <attr name="zimbraFileAndroidCrashReportingEnabled">TRUE</attr>
-    <attr name="zimbraFeatureAntispamEnabled">TRUE</attr>
-    <attr name="zimbraMailDumpsterLifetime">30d</attr>
-    <attr name="zimbraFeatureCrocodocEnabled">FALSE</attr>
-    <attr name="zimbraFeatureExternalFeedbackEnabled">FALSE</attr>
-    <attr name="zimbraFeatureMailForwardingEnabled">TRUE</attr>
-    <attr name="zimbraFeatureIMEnabled">FALSE</attr>
-    <attr name="zimbraFileExternalShareLifetime">90d</attr>
-    <attr name="zimbraFeatureVoiceEnabled">FALSE</attr>
-    <attr name="zimbraFeatureVoiceChangePinEnabled">TRUE</attr>
-    <attr name="zimbraFeatureReadReceiptsEnabled">TRUE</attr>
-    <attr name="zimbraSignatureMaxNumEntries">20</attr>
-    <attr name="zimbraMaxContactsPerPage">100</attr>
-    <attr name="zimbraStandardClientCustomPrefTabsEnabled">FALSE</attr>
-    <attr name="zimbraFeatureSignaturesEnabled">TRUE</attr>
-    <attr name="zimbraMailSpamLifetime">30d</attr>
-    <attr name="zimbraPasswordMinNumericChars">0</attr>
-    <attr name="zimbraMtaMaxMessageSize">10240000</attr>
-    <attr name="zimbraFeaturePeopleSearchEnabled">TRUE</attr>
-    <attr name="zimbraDeviceLockWhenInactive">FALSE</attr>
-    <attr name="zimbraDeviceFileOpenWithEnabled">TRUE</attr>
-    <attr name="zimbraFeatureMailPollingIntervalPreferenceEnabled">TRUE</attr>
-    <attr name="zimbraFeatureCalendarEnabled">TRUE</attr>
-    <attr name="zimbraContactAutoCompleteMaxResults">20</attr>
-    <attr name="zimbraFeatureTaggingEnabled">TRUE</attr>
-    <attr name="zimbraFeatureMailUpsellEnabled">FALSE</attr>
-    <attr name="zimbraMailHighlightObjectsMaxSize">70</attr>
-    <attr name="zimbraFeaturePortalEnabled">FALSE</attr>
-    <attr name="zimbraMailIdleSessionTimeout">0</attr>
-    <attr name="zimbraFileShareLifetime">0</attr>
-    <attr name="zimbraIdentityMaxNumEntries">20</attr>
-    <attr name="zimbraFeatureMobileSyncEnabled">TRUE</attr>
-    <attr name="zimbraFeaturePop3DataSourceEnabled">TRUE</attr>
-    <attr name="zimbraFeatureDiscardInFiltersEnabled">TRUE</attr>
-    <attr name="zimbraFeatureNewMailNotificationEnabled">TRUE</attr>
-    <attr name="zimbraPasswordMinDigitsOrPuncs">0</attr>
-    <attr name="zimbraExternalShareLifetime">0</attr>
-    <attr name="zimbraFeatureAdminMailEnabled">TRUE</attr>
-    <attr name="zimbraShareLifetime">0</attr>
-    <attr name="zimbraMaxVoiceItemsPerPage">100</attr>
-    <attr name="zimbraFeatureSocialFiltersEnabled">Facebook</attr>
-    <attr name="zimbraFeatureSocialFiltersEnabled">LinkedIn</attr>
-    <attr name="zimbraFeatureSocialFiltersEnabled">SocialCast</attr>
-    <attr name="zimbraFeatureSocialFiltersEnabled">Twitter</attr>
-    <attr name="zimbraMailBlacklistMaxNumEntries">100</attr>
-    <attr name="zimbraFeatureMailForwardingInFiltersEnabled">TRUE</attr>
-    <attr name="zimbraMailTrashLifetime">30d</attr>
+    <attr name="zmailFeatureNotebookEnabled">FALSE</attr>
+    <attr name="zmailFeatureSkinChangeEnabled">TRUE</attr>
+    <attr name="zmailMailForwardingAddressMaxNumAddrs">100</attr>
+    <attr name="zmailFeatureConversationsEnabled">TRUE</attr>
+    <attr name="zmailZimletAvailableZimlets">+org_zmail_url</attr>
+    <attr name="zmailZimletAvailableZimlets">+org_zmail_email</attr>
+    <attr name="zmailZimletAvailableZimlets">+org_zmail_date</attr>
+    <attr name="zmailZimletAvailableZimlets">+org_zmail_webex</attr>
+    <attr name="zmailZimletAvailableZimlets">+org_zmail_dnd</attr>
+    <attr name="zmailZimletAvailableZimlets">+org_zmail_ymemoticons</attr>
+    <attr name="zmailZimletAvailableZimlets">+org_zmail_srchhighlighter</attr>
+    <attr name="zmailZimletAvailableZimlets">+org_zmail_phone</attr>
+    <attr name="zmailZimletAvailableZimlets">+org_zmail_attachcontacts</attr>
+    <attr name="zmailZimletAvailableZimlets">+org_zmail_attachmail</attr>
+    <attr name="zmailMailTrustedSenderListMaxNumEntries">500</attr>
+    <attr name="zmailFeatureOutOfOfficeReplyEnabled">TRUE</attr>
+    <attr name="zmailFeatureFlaggingEnabled">TRUE</attr>
+    <attr name="zmailFeatureContactsDetailedSearchEnabled">FALSE</attr>
+    <attr name="zmailFeatureMobilePolicyEnabled">FALSE</attr>
+    <attr name="zmailPasswordMinUpperCaseChars">0</attr>
+    <attr name="zmailAllowAnyFromAddress">FALSE</attr>
+    <attr name="zmailFeatureDistributionListExpandMembersEnabled">TRUE</attr>
+    <attr name="zmailFeatureBriefcasesEnabled">TRUE</attr>
+    <attr name="zmailFeatureContactsEnabled">TRUE</attr>
+    <attr name="zmailExternalSharingEnabled">TRUE</attr>
+    <attr name="zmailPasswordMinLowerCaseChars">0</attr>
+    <attr name="zmailMailMessageLifetime">0</attr>
+    <attr name="zmailFeatureInitialSearchPreferenceEnabled">TRUE</attr>
+    <attr name="zmailMailForwardingAddressMaxLength">4096</attr>
+    <attr name="zmailPasswordMinAlphaChars">0</attr>
+    <attr name="zmailLocale">en_US</attr>
+    <attr name="zmailFileAndroidCrashReportingEnabled">TRUE</attr>
+    <attr name="zmailFeatureAntispamEnabled">TRUE</attr>
+    <attr name="zmailMailDumpsterLifetime">30d</attr>
+    <attr name="zmailFeatureCrocodocEnabled">FALSE</attr>
+    <attr name="zmailFeatureExternalFeedbackEnabled">FALSE</attr>
+    <attr name="zmailFeatureMailForwardingEnabled">TRUE</attr>
+    <attr name="zmailFeatureIMEnabled">FALSE</attr>
+    <attr name="zmailFileExternalShareLifetime">90d</attr>
+    <attr name="zmailFeatureVoiceEnabled">FALSE</attr>
+    <attr name="zmailFeatureVoiceChangePinEnabled">TRUE</attr>
+    <attr name="zmailFeatureReadReceiptsEnabled">TRUE</attr>
+    <attr name="zmailSignatureMaxNumEntries">20</attr>
+    <attr name="zmailMaxContactsPerPage">100</attr>
+    <attr name="zmailStandardClientCustomPrefTabsEnabled">FALSE</attr>
+    <attr name="zmailFeatureSignaturesEnabled">TRUE</attr>
+    <attr name="zmailMailSpamLifetime">30d</attr>
+    <attr name="zmailPasswordMinNumericChars">0</attr>
+    <attr name="zmailMtaMaxMessageSize">10240000</attr>
+    <attr name="zmailFeaturePeopleSearchEnabled">TRUE</attr>
+    <attr name="zmailDeviceLockWhenInactive">FALSE</attr>
+    <attr name="zmailDeviceFileOpenWithEnabled">TRUE</attr>
+    <attr name="zmailFeatureMailPollingIntervalPreferenceEnabled">TRUE</attr>
+    <attr name="zmailFeatureCalendarEnabled">TRUE</attr>
+    <attr name="zmailContactAutoCompleteMaxResults">20</attr>
+    <attr name="zmailFeatureTaggingEnabled">TRUE</attr>
+    <attr name="zmailFeatureMailUpsellEnabled">FALSE</attr>
+    <attr name="zmailMailHighlightObjectsMaxSize">70</attr>
+    <attr name="zmailFeaturePortalEnabled">FALSE</attr>
+    <attr name="zmailMailIdleSessionTimeout">0</attr>
+    <attr name="zmailFileShareLifetime">0</attr>
+    <attr name="zmailIdentityMaxNumEntries">20</attr>
+    <attr name="zmailFeatureMobileSyncEnabled">TRUE</attr>
+    <attr name="zmailFeaturePop3DataSourceEnabled">TRUE</attr>
+    <attr name="zmailFeatureDiscardInFiltersEnabled">TRUE</attr>
+    <attr name="zmailFeatureNewMailNotificationEnabled">TRUE</attr>
+    <attr name="zmailPasswordMinDigitsOrPuncs">0</attr>
+    <attr name="zmailExternalShareLifetime">0</attr>
+    <attr name="zmailFeatureAdminMailEnabled">TRUE</attr>
+    <attr name="zmailShareLifetime">0</attr>
+    <attr name="zmailMaxVoiceItemsPerPage">100</attr>
+    <attr name="zmailFeatureSocialFiltersEnabled">Facebook</attr>
+    <attr name="zmailFeatureSocialFiltersEnabled">LinkedIn</attr>
+    <attr name="zmailFeatureSocialFiltersEnabled">SocialCast</attr>
+    <attr name="zmailFeatureSocialFiltersEnabled">Twitter</attr>
+    <attr name="zmailMailBlacklistMaxNumEntries">100</attr>
+    <attr name="zmailFeatureMailForwardingInFiltersEnabled">TRUE</attr>
+    <attr name="zmailMailTrashLifetime">30d</attr>
     <attr name="uid">user1</attr>
-    <attr name="zimbraFeatureZimbraAssistantEnabled">TRUE</attr>
-    <attr name="zimbraFeatureSocialcastEnabled">FALSE</attr>
-    <attr name="zimbraMailWhitelistMaxNumEntries">100</attr>
-    <attr name="zimbraFeatureOptionsEnabled">TRUE</attr>
-    <attr name="zimbraFeatureExportFolderEnabled">TRUE</attr>
-    <attr name="zimbraFeatureConfirmationPageEnabled">FALSE</attr>
-    <attr name="zimbraPop3Enabled">TRUE</attr>
-    <attr name="zimbraId">91e6d036-5d5e-4788-9bc2-5b65e8c2480c</attr>
-    <attr name="zimbraDataSourceRssPollingInterval">12h</attr>
-    <attr name="zimbraFeatureGalSyncEnabled">TRUE</attr>
-    <attr name="zimbraFeatureSharingEnabled">TRUE</attr>
-    <attr name="zimbraWebClientShowOfflineLink">TRUE</attr>
-    <attr name="zimbraMailQuota">62914560</attr>
-    <attr name="zimbraFeatureTasksEnabled">TRUE</attr>
-    <attr name="zimbraFeatureCalendarReminderDeviceEmailEnabled">FALSE</attr>
-    <attr name="zimbraFeatureAdvancedSearchEnabled">TRUE</attr>
-    <attr name="zimbraFileUploadMaxSize">10485760</attr>
-    <attr name="zimbraPublicShareLifetime">0</attr>
-    <attr name="zimbraFeatureBriefcaseDocsEnabled">TRUE</attr>
-    <attr name="zimbraFeatureGalAutoCompleteEnabled">TRUE</attr>
-    <attr name="zimbraPasswordMaxLength">64</attr>
-    <attr name="zimbraFeatureShortcutAliasesEnabled">TRUE</attr>
-    <attr name="zimbraFeatureCalendarUpsellEnabled">FALSE</attr>
-    <attr name="zimbraFileIOSCrashReportingEnabled">TRUE</attr>
-    <attr name="zimbraFeatureGalEnabled">TRUE</attr>
-    <attr name="zimbraFeatureMailSendLaterEnabled">FALSE</attr>
-    <attr name="zimbraFilterBatchSize">10000</attr>
-    <attr name="zimbraFeatureInstantNotify">TRUE</attr>
-    <attr name="zimbraFeatureImapDataSourceEnabled">TRUE</attr>
-    <attr name="zimbraFeatureGroupCalendarEnabled">TRUE</attr>
-    <attr name="zimbraFeatureChangePasswordEnabled">TRUE</attr>
-    <attr name="zimbraMailSignatureMaxLength">10240</attr>
-    <attr name="zimbraFeatureMailEnabled">TRUE</attr>
-    <attr name="zimbraFeatureMailPriorityEnabled">TRUE</attr>
-    <attr name="zimbraDumpsterEnabled">FALSE</attr>
-    <attr name="zimbraFeatureViewInHtmlEnabled">FALSE</attr>
-    <attr name="zimbraPasswordMinPunctuationChars">0</attr>
-    <attr name="zimbraFeatureHtmlComposeEnabled">TRUE</attr>
+    <attr name="zmailFeatureZmailAssistantEnabled">TRUE</attr>
+    <attr name="zmailFeatureSocialcastEnabled">FALSE</attr>
+    <attr name="zmailMailWhitelistMaxNumEntries">100</attr>
+    <attr name="zmailFeatureOptionsEnabled">TRUE</attr>
+    <attr name="zmailFeatureExportFolderEnabled">TRUE</attr>
+    <attr name="zmailFeatureConfirmationPageEnabled">FALSE</attr>
+    <attr name="zmailPop3Enabled">TRUE</attr>
+    <attr name="zmailId">91e6d036-5d5e-4788-9bc2-5b65e8c2480c</attr>
+    <attr name="zmailDataSourceRssPollingInterval">12h</attr>
+    <attr name="zmailFeatureGalSyncEnabled">TRUE</attr>
+    <attr name="zmailFeatureSharingEnabled">TRUE</attr>
+    <attr name="zmailWebClientShowOfflineLink">TRUE</attr>
+    <attr name="zmailMailQuota">62914560</attr>
+    <attr name="zmailFeatureTasksEnabled">TRUE</attr>
+    <attr name="zmailFeatureCalendarReminderDeviceEmailEnabled">FALSE</attr>
+    <attr name="zmailFeatureAdvancedSearchEnabled">TRUE</attr>
+    <attr name="zmailFileUploadMaxSize">10485760</attr>
+    <attr name="zmailPublicShareLifetime">0</attr>
+    <attr name="zmailFeatureBriefcaseDocsEnabled">TRUE</attr>
+    <attr name="zmailFeatureGalAutoCompleteEnabled">TRUE</attr>
+    <attr name="zmailPasswordMaxLength">64</attr>
+    <attr name="zmailFeatureShortcutAliasesEnabled">TRUE</attr>
+    <attr name="zmailFeatureCalendarUpsellEnabled">FALSE</attr>
+    <attr name="zmailFileIOSCrashReportingEnabled">TRUE</attr>
+    <attr name="zmailFeatureGalEnabled">TRUE</attr>
+    <attr name="zmailFeatureMailSendLaterEnabled">FALSE</attr>
+    <attr name="zmailFilterBatchSize">10000</attr>
+    <attr name="zmailFeatureInstantNotify">TRUE</attr>
+    <attr name="zmailFeatureImapDataSourceEnabled">TRUE</attr>
+    <attr name="zmailFeatureGroupCalendarEnabled">TRUE</attr>
+    <attr name="zmailFeatureChangePasswordEnabled">TRUE</attr>
+    <attr name="zmailMailSignatureMaxLength">10240</attr>
+    <attr name="zmailFeatureMailEnabled">TRUE</attr>
+    <attr name="zmailFeatureMailPriorityEnabled">TRUE</attr>
+    <attr name="zmailDumpsterEnabled">FALSE</attr>
+    <attr name="zmailFeatureViewInHtmlEnabled">FALSE</attr>
+    <attr name="zmailPasswordMinPunctuationChars">0</attr>
+    <attr name="zmailFeatureHtmlComposeEnabled">TRUE</attr>
     <attr name="cn">Demo User One</attr>
-    <attr name="zimbraFilePublicShareLifetime">0</attr>
-    <attr name="zimbraFeatureImportFolderEnabled">TRUE</attr>
-    <attr name="zimbraDataSourceMaxNumEntries">20</attr>
-    <attr name="zimbraDeviceAllowedPasscodeLockoutDuration">10m</attr>
-    <attr name="zimbraDeviceAllowedPasscodeLockoutDuration">1m</attr>
-    <attr name="zimbraDeviceAllowedPasscodeLockoutDuration">2m</attr>
-    <attr name="zimbraDeviceAllowedPasscodeLockoutDuration">30m</attr>
-    <attr name="zimbraDeviceAllowedPasscodeLockoutDuration">5m</attr>
-    <attr name="zimbraDataSourceCalendarPollingInterval">12h</attr>
-    <attr name="zimbraDevicePasscodeEnabled">FALSE</attr>
-    <attr name="zimbraIMService">zimbra</attr>
-    <attr name="zimbraFeatureContactsUpsellEnabled">FALSE</attr>
-    <attr name="zimbraMailMinPollingInterval">2m</attr>
-    <attr name="zimbraFeaturePriorityInboxEnabled">TRUE</attr>
-    <attr name="zimbraFeatureVoiceUpsellEnabled">FALSE</attr>
-    <attr name="zimbraPortalName">example</attr>
-    <attr name="zimbraFeatureMAPIConnectorEnabled">TRUE</attr>
-    <attr name="zimbraDeviceOfflineCacheEnabled">FALSE</attr>
-    <attr name="zimbraSmtpRestrictEnvelopeFrom">TRUE</attr>
-    <attr name="zimbraFeatureImportExportFolderEnabled">TRUE</attr>
-    <attr name="zimbraAttachmentsBlocked">FALSE</attr>
-    <attr name="zimbraFeatureManageSMIMECertificateEnabled">FALSE</attr>
-    <attr name="zimbraFeatureSavedSearchesEnabled">TRUE</attr>
-    <attr name="zimbraCalendarResourceDoubleBookingAllowed">TRUE</attr>
-    <attr name="zimbraFeatureIdentitiesEnabled">TRUE</attr>
-    <attr name="zimbraFeatureFreeBusyViewEnabled">FALSE</attr>
-    <attr name="zimbraCalendarKeepExceptionsOnSeriesTimeChange">FALSE</attr>
-    <attr name="zimbraContactMaxNumEntries">10000</attr>
-    <attr name="zimbraFeatureOpenMailInNewWindowEnabled">TRUE</attr>
-    <attr name="zimbraCalendarShowResourceTabs">TRUE</attr>
-    <attr name="zimbraZimletLoadSynchronously">FALSE</attr>
-    <attr name="zimbraPublicSharingEnabled">TRUE</attr>
-    <attr name="zimbraFeatureBriefcaseSpreadsheetEnabled">FALSE</attr>
-    <attr name="zimbraDataSourceMinPollingInterval">1m</attr>
-    <attr name="zimbraFeatureFiltersEnabled">TRUE</attr>
-    <attr name="zimbraFeatureBriefcaseSlidesEnabled">FALSE</attr>
-    <attr name="zimbraFeatureWebSearchEnabled">TRUE</attr>
-    <attr name="zimbraMaxMailItemsPerPage">100</attr>
-    <attr name="zimbraSignatureMinNumEntries">1</attr>
-    <attr name="zimbraFeatureManageZimlets">TRUE</attr>
-    <attr name="zimbraFeatureNewAddrBookEnabled">TRUE</attr>
+    <attr name="zmailFilePublicShareLifetime">0</attr>
+    <attr name="zmailFeatureImportFolderEnabled">TRUE</attr>
+    <attr name="zmailDataSourceMaxNumEntries">20</attr>
+    <attr name="zmailDeviceAllowedPasscodeLockoutDuration">10m</attr>
+    <attr name="zmailDeviceAllowedPasscodeLockoutDuration">1m</attr>
+    <attr name="zmailDeviceAllowedPasscodeLockoutDuration">2m</attr>
+    <attr name="zmailDeviceAllowedPasscodeLockoutDuration">30m</attr>
+    <attr name="zmailDeviceAllowedPasscodeLockoutDuration">5m</attr>
+    <attr name="zmailDataSourceCalendarPollingInterval">12h</attr>
+    <attr name="zmailDevicePasscodeEnabled">FALSE</attr>
+    <attr name="zmailIMService">zmail</attr>
+    <attr name="zmailFeatureContactsUpsellEnabled">FALSE</attr>
+    <attr name="zmailMailMinPollingInterval">2m</attr>
+    <attr name="zmailFeaturePriorityInboxEnabled">TRUE</attr>
+    <attr name="zmailFeatureVoiceUpsellEnabled">FALSE</attr>
+    <attr name="zmailPortalName">example</attr>
+    <attr name="zmailFeatureMAPIConnectorEnabled">TRUE</attr>
+    <attr name="zmailDeviceOfflineCacheEnabled">FALSE</attr>
+    <attr name="zmailSmtpRestrictEnvelopeFrom">TRUE</attr>
+    <attr name="zmailFeatureImportExportFolderEnabled">TRUE</attr>
+    <attr name="zmailAttachmentsBlocked">FALSE</attr>
+    <attr name="zmailFeatureManageSMIMECertificateEnabled">FALSE</attr>
+    <attr name="zmailFeatureSavedSearchesEnabled">TRUE</attr>
+    <attr name="zmailCalendarResourceDoubleBookingAllowed">TRUE</attr>
+    <attr name="zmailFeatureIdentitiesEnabled">TRUE</attr>
+    <attr name="zmailFeatureFreeBusyViewEnabled">FALSE</attr>
+    <attr name="zmailCalendarKeepExceptionsOnSeriesTimeChange">FALSE</attr>
+    <attr name="zmailContactMaxNumEntries">10000</attr>
+    <attr name="zmailFeatureOpenMailInNewWindowEnabled">TRUE</attr>
+    <attr name="zmailCalendarShowResourceTabs">TRUE</attr>
+    <attr name="zmailZimletLoadSynchronously">FALSE</attr>
+    <attr name="zmailPublicSharingEnabled">TRUE</attr>
+    <attr name="zmailFeatureBriefcaseSpreadsheetEnabled">FALSE</attr>
+    <attr name="zmailDataSourceMinPollingInterval">1m</attr>
+    <attr name="zmailFeatureFiltersEnabled">TRUE</attr>
+    <attr name="zmailFeatureBriefcaseSlidesEnabled">FALSE</attr>
+    <attr name="zmailFeatureWebSearchEnabled">TRUE</attr>
+    <attr name="zmailMaxMailItemsPerPage">100</attr>
+    <attr name="zmailSignatureMinNumEntries">1</attr>
+    <attr name="zmailFeatureManageZimlets">TRUE</attr>
+    <attr name="zmailFeatureNewAddrBookEnabled">TRUE</attr>
     <attr name="displayName">Demo User One</attr>
-    <attr name="zimbraPasswordMinLength">6</attr>
-    <attr name="zimbraFeatureComposeInNewWindowEnabled">TRUE</attr>
+    <attr name="zmailPasswordMinLength">6</attr>
+    <attr name="zmailFeatureComposeInNewWindowEnabled">TRUE</attr>
   </attrs>
   <zimlets>
     <zimlet>
-      <zimletContext baseUrl="/service/zimlet/com_zimbra_phone/" presence="enabled" priority="0"/>
-      <zimlet description="${msg.description}" name="com_zimbra_phone" target="main view-window" label="${msg.label}" version="2.7_6.0.0.20120528.082808">
+      <zimletContext baseUrl="/service/zimlet/org_zmail_phone/" presence="enabled" priority="0"/>
+      <zimlet description="${msg.description}" name="org_zmail_phone" target="main view-window" label="${msg.label}" version="2.7_6.0.0.20120528.082808">
         <include>phone.js</include>
         <include>templates/Phone.template.js</include>
-        <handlerObject>Com_Zimbra_Phone</handlerObject>
-        <serverExtension extensionClass="com.zimbra.cs.zimlet.handler.NANPHandler" hasKeyword="phone"/>
+        <handlerObject>Com_Zmail_Phone</handlerObject>
+        <serverExtension extensionClass="org.zmail.cs.zimlet.handler.NANPHandler" hasKeyword="phone"/>
         <contentObject type="phone">
           <contextMenu>
             <menuItem id="SEARCH" icon="Search" label="${msg.search}"/>
@@ -332,20 +332,20 @@
           </matchOn>
         </contentObject>
       </zimlet>
-      <zimletConfig name="com_zimbra_phone" version="2.7">
+      <zimletConfig name="org_zmail_phone" version="2.7">
         <global>
           <property name="defaultContactField">companyPhone</property>
         </global>
       </zimletConfig>
     </zimlet>
     <zimlet>
-      <zimletContext baseUrl="/service/zimlet/com_zimbra_url/" presence="enabled" priority="1"/>
-      <zimlet description="${msg.description}" name="com_zimbra_url" target="main view-window" label="${msg.zimletLabel}" version="2.5_6.0.0.20120528.082808">
+      <zimletContext baseUrl="/service/zimlet/org_zmail_url/" presence="enabled" priority="1"/>
+      <zimlet description="${msg.description}" name="org_zmail_url" target="main view-window" label="${msg.zimletLabel}" version="2.5_6.0.0.20120528.082808">
         <include>url.js</include>
         <includeCSS>url.css</includeCSS>
         <resource>blank_pixel.gif</resource>
-        <handlerObject>Com_Zimbra_Url</handlerObject>
-        <serverExtension extensionClass="com.zimbra.cs.zimlet.handler.RegexHandler" hasKeyword="url"/>
+        <handlerObject>Com_Zmail_Url</handlerObject>
+        <serverExtension extensionClass="org.zmail.cs.zimlet.handler.RegexHandler" hasKeyword="url"/>
         <contentObject type="url">
           <matchOn>
             <regex attrs="ig">(((telnet|cid):)|((https?|mailto|notes|smb|ftp|gopher|news|tel|callto|webcal|feed|file):\/\/)|(www\.[\w\.\_\-]+))[^\s\xA0\&lt;\>\[\]\{\}\'\"]*</regex>
@@ -356,7 +356,7 @@
           </contextMenu>
         </contentObject>
       </zimlet>
-      <zimletConfig name="com_zimbra_url" version="2.5">
+      <zimletConfig name="org_zmail_url" version="2.5">
         <global>
           <property name="ZIMLET_CONFIG_REGEX_VALUE">(((telnet|cid):)|((https?|mailto|notes|smb|ftp|gopher|news|tel|callto|webcal|feed|file):\/\/)|(www\.[\w\.\_\-]+))[^\s\xA0\&lt;\>\[\]\{\}\'\"]*</property>
           <property name="ZIMLET_UNC_REGEX_VALUE">\s*\\\\[a-zA-Z0-9.-_]+.*\s*</property>
@@ -368,8 +368,8 @@
       </zimletConfig>
     </zimlet>
     <zimlet>
-      <zimletContext baseUrl="/service/zimlet/com_zimbra_email/" presence="enabled" priority="2"/>
-      <zimlet description="${msg.description}" name="com_zimbra_email" target="main view-window" label="${msg.zimletLabel}" version="11.9_6.0.0.20120528.082808">
+      <zimletContext baseUrl="/service/zimlet/org_zmail_email/" presence="enabled" priority="2"/>
+      <zimlet description="${msg.description}" name="org_zmail_email" target="main view-window" label="${msg.zimletLabel}" version="11.9_6.0.0.20120528.082808">
         <include>templates/Email1.template.js</include>
         <include>email.js</include>
         <include>EmailToolTipSlideShow.js</include>
@@ -378,7 +378,7 @@
         <include>SeriesAnimation.js</include>
         <include>UnknownPersonSlide.js</include>
         <includeCSS>email.css</includeCSS>
-        <handlerObject>com_zimbra_email_handlerObject</handlerObject>
+        <handlerObject>org_zmail_email_handlerObject</handlerObject>
         <contentObject type="email">
           <matchOn>
             <regex attrs="ig">\b(mailto:[ ]*)?([0-9a-zA-Z]+[.&amp;#!$%'*+-/=?^_`{}|~])*[0-9a-zA-Z_-]+@([-0-9a-zA-Z]+[.])+[a-zA-Z]{2,6}([\w/_\.]*(\?\S+)?)\b</regex>
@@ -395,11 +395,11 @@
       </zimlet>
     </zimlet>
     <zimlet>
-      <zimletContext baseUrl="/service/zimlet/com_zimbra_date/" presence="enabled" priority="3"/>
-      <zimlet description="${msg.description}" name="com_zimbra_date" target="main view-window" label="${msg.label}" version="2.7_6.0.0.20120528.082808">
+      <zimletContext baseUrl="/service/zimlet/org_zmail_date/" presence="enabled" priority="3"/>
+      <zimlet description="${msg.description}" name="org_zmail_date" target="main view-window" label="${msg.label}" version="2.7_6.0.0.20120528.082808">
         <include>date.js</include>
         <include>formats.js</include>
-        <handlerObject>Com_Zimbra_Date</handlerObject>
+        <handlerObject>Com_Zmail_Date</handlerObject>
         <contentObject type="date">
           <contextMenu>
             <menuItem id="DAYVIEW" icon="DayView" label="${msg.viewDay}"/>
@@ -411,13 +411,13 @@
       </zimlet>
     </zimlet>
     <zimlet>
-      <zimletContext baseUrl="/service/zimlet/com_zimbra_ymemoticons/" presence="enabled" priority="4"/>
-      <zimlet description="${msg.description}" name="com_zimbra_ymemoticons" target="main compose-window view-window" label="${msg.label}" version="2.9_6.0.0.20120528.082808">
+      <zimletContext baseUrl="/service/zimlet/org_zmail_ymemoticons/" presence="enabled" priority="4"/>
+      <zimlet description="${msg.description}" name="org_zmail_ymemoticons" target="main compose-window view-window" label="${msg.label}" version="2.9_6.0.0.20120528.082808">
         <include>ymemoticons.js</include>
         <include>smileys.js</include>
         <include>ymemoticonspicker.js</include>
         <includeCSS>yemoticons.css</includeCSS>
-        <handlerObject>Com_Zimbra_YMEmoticons</handlerObject>
+        <handlerObject>Com_Zmail_YMEmoticons</handlerObject>
         <zimletPanelItem icon="yemoticons-panelIcon" label="Emoticons">
           <toolTipText>${msg.yahooEmoticons}</toolTipText>
           <contextMenu>
@@ -431,17 +431,17 @@
       </zimlet>
     </zimlet>
     <zimlet>
-      <zimletContext baseUrl="/service/zimlet/com_zimbra_dnd/" presence="enabled" priority="5"/>
-      <zimlet description="${msg.description}" name="com_zimbra_dnd" target="main compose-window view-window" label="${msg.zimletLabel}" version="1.2_6.0.0.20120528.082808">
+      <zimletContext baseUrl="/service/zimlet/org_zmail_dnd/" presence="enabled" priority="5"/>
+      <zimlet description="${msg.description}" name="org_zmail_dnd" target="main compose-window view-window" label="${msg.zimletLabel}" version="1.2_6.0.0.20120528.082808">
         <include>dnd.js</include>
-        <handlerObject>Com_Zimbra_DnD</handlerObject>
+        <handlerObject>Com_Zmail_DnD</handlerObject>
       </zimlet>
-      <zimletConfig name="com_zimbra_dnd" version="1.2">
+      <zimletConfig name="org_zmail_dnd" version="1.2">
         <global>
           <property name="dnd-uploadform">
       &lt;form name='zdnd_form' id='zdnd_form' enctype='multipart/form-data' accept-charset='utf-8' method='POST' >
             &lt;input type="hidden" name="_charset_"/>
-            &lt;input type="button" name="zDnDBut" id="zDnDBut" onclick="Com_Zimbra_DnD.uploadDnDFiles();"/>
+            &lt;input type="button" name="zDnDBut" id="zDnDBut" onclick="Com_Zmail_DnD.uploadDnDFiles();"/>
             &lt;ul id='zdnd_ul'>
                 &lt;li>
                     &lt;input type='file' size='50' name='_attFile_'>
@@ -454,29 +454,29 @@
       </zimletConfig>
     </zimlet>
     <zimlet>
-      <zimletContext baseUrl="/service/zimlet/com_zimbra_attachmail/" presence="enabled" priority="6"/>
-      <zimlet description="${msg.description}" name="com_zimbra_attachmail" target="main compose-window view-window" label="${msg.label}" version="1.2_6.0.0.20120528.082808">
+      <zimletContext baseUrl="/service/zimlet/org_zmail_attachmail/" presence="enabled" priority="6"/>
+      <zimlet description="${msg.description}" name="org_zmail_attachmail" target="main compose-window view-window" label="${msg.label}" version="1.2_6.0.0.20120528.082808">
         <include>attachmail.js</include>
         <include>AMZimletNavToolBar.js</include>
         <includeCSS>attachmail.css</includeCSS>
-        <handlerObject>com_zimbra_attachmail_HandlerObject</handlerObject>
+        <handlerObject>org_zmail_attachmail_HandlerObject</handlerObject>
       </zimlet>
     </zimlet>
     <zimlet>
-      <zimletContext baseUrl="/service/zimlet/com_zimbra_attachcontacts/" presence="enabled" priority="7"/>
-      <zimlet description="${msg.description}" name="com_zimbra_attachcontacts" target="main compose-window view-window" label="${msg.label}" version="1.0_6.0.0.20120528.082808">
+      <zimletContext baseUrl="/service/zimlet/org_zmail_attachcontacts/" presence="enabled" priority="7"/>
+      <zimlet description="${msg.description}" name="org_zmail_attachcontacts" target="main compose-window view-window" label="${msg.label}" version="1.0_6.0.0.20120528.082808">
         <include>attachcontacts.js</include>
         <include>ACZimletNavToolBar.js</include>
         <include>AttachContactsTabView.js</include>
         <includeCSS>attachcontacts.css</includeCSS>
-        <handlerObject>com_zimbra_attachcontacts_HandlerObject</handlerObject>
+        <handlerObject>org_zmail_attachcontacts_HandlerObject</handlerObject>
       </zimlet>
     </zimlet>
     <zimlet>
-      <zimletContext baseUrl="/service/zimlet/com_zimbra_srchhighlighter/" presence="enabled" priority="8"/>
-      <zimlet description="${msg.description}" name="com_zimbra_srchhighlighter" label="${msg.label}" version="0.9_6.0.0.20120528.082808">
+      <zimletContext baseUrl="/service/zimlet/org_zmail_srchhighlighter/" presence="enabled" priority="8"/>
+      <zimlet description="${msg.description}" name="org_zmail_srchhighlighter" label="${msg.label}" version="0.9_6.0.0.20120528.082808">
         <include>searchhighlighter.js</include>
-        <handlerObject>com_zimbra_srchhltr_HandlerObject</handlerObject>
+        <handlerObject>org_zmail_srchhltr_HandlerObject</handlerObject>
         <contentObject>
           <matchOn>
             <regex/>
@@ -485,11 +485,11 @@
       </zimlet>
     </zimlet>
     <zimlet>
-      <zimletContext baseUrl="/service/zimlet/com_zimbra_webex/" presence="enabled" priority="9"/>
-      <zimlet description="${msg.description}" name="com_zimbra_webex" label="${msg.label}" version="3.3_6.0.0.20120528.082808">
+      <zimletContext baseUrl="/service/zimlet/org_zmail_webex/" presence="enabled" priority="9"/>
+      <zimlet description="${msg.description}" name="org_zmail_webex" label="${msg.label}" version="3.3_6.0.0.20120528.082808">
         <include>webex.js</include>
         <includeCSS>webex.css</includeCSS>
-        <handlerObject>com_zimbra_webex_HandlerObject</handlerObject>
+        <handlerObject>org_zmail_webex_HandlerObject</handlerObject>
         <zimletPanelItem icon="WEBEX-panelIcon" label="${msg.WebExZimlet_label}">
           <toolTipText>${msg.WebExZimlet_toolTip}</toolTipText>
           <dragSource type="ZmContact"/>
@@ -508,7 +508,7 @@
           <property name="webexZimlet_companyId" value="vmware" type="string"/>
         </userProperties>
       </zimlet>
-      <zimletConfig name="com_zimbra_webex" version="3.3">
+      <zimletConfig name="org_zmail_webex" version="3.3">
         <global>
           <property name="allowedDomains">*.webex.com</property>
           <property name="hasSensitiveData">true</property>
@@ -519,19 +519,19 @@
   <props/>
   <identities>
     <identity id="91e6d036-5d5e-4788-9bc2-5b65e8c2480c" name="DEFAULT">
-      <a name="zimbraPrefIdentityId">91e6d036-5d5e-4788-9bc2-5b65e8c2480c</a>
-      <a name="zimbraPrefSaveToSent">TRUE</a>
-      <a name="zimbraPrefForwardReplyPrefixChar">></a>
-      <a name="zimbraPrefSentMailFolder">sent</a>
-      <a name="zimbraPrefFromDisplay">Demo User One</a>
-      <a name="zimbraPrefForwardIncludeOriginalText">includeBody</a>
-      <a name="zimbraPrefForwardReplyFormat">same</a>
-      <a name="zimbraPrefMailSignatureStyle">outlook</a>
-      <a name="zimbraPrefIdentityName">DEFAULT</a>
-      <a name="zimbraCreateTimestamp">20120528071949Z</a>
-      <a name="zimbraPrefReplyIncludeOriginalText">includeBody</a>
-      <a name="zimbraPrefFromAddress">user1@tarka.local</a>
-      <a name="zimbraPrefDefaultSignatureId">28fa4fec-a5fb-4dc8-acf9-df930bb13546</a>
+      <a name="zmailPrefIdentityId">91e6d036-5d5e-4788-9bc2-5b65e8c2480c</a>
+      <a name="zmailPrefSaveToSent">TRUE</a>
+      <a name="zmailPrefForwardReplyPrefixChar">></a>
+      <a name="zmailPrefSentMailFolder">sent</a>
+      <a name="zmailPrefFromDisplay">Demo User One</a>
+      <a name="zmailPrefForwardIncludeOriginalText">includeBody</a>
+      <a name="zmailPrefForwardReplyFormat">same</a>
+      <a name="zmailPrefMailSignatureStyle">outlook</a>
+      <a name="zmailPrefIdentityName">DEFAULT</a>
+      <a name="zmailCreateTimestamp">20120528071949Z</a>
+      <a name="zmailPrefReplyIncludeOriginalText">includeBody</a>
+      <a name="zmailPrefFromAddress">user1@tarka.local</a>
+      <a name="zmailPrefDefaultSignatureId">28fa4fec-a5fb-4dc8-acf9-df930bb13546</a>
     </identity>
   </identities>
   <signatures>

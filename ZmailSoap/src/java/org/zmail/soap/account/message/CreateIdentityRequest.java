@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.account.message;
+package org.zmail.soap.account.message;
 
 import com.google.common.base.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -21,37 +21,37 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.soap.account.type.Identity;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.soap.account.type.Identity;
 
 /**
  * @zm-api-command-auth-required true
  * @zm-api-command-admin-auth-required false
  * @zm-api-command-description Create an Identity
  * <p>
- * Allowed attributes (see objectclass zimbraIdentity in zimbra.schema):
+ * Allowed attributes (see objectclass zmailIdentity in zmail.schema):
  * </p>
  * <ul>
- * <li> zimbraPrefBccAddress
- * <li> zimbraPrefForwardIncludeOriginalText
- * <li> zimbraPrefForwardReplyFormat
- * <li> zimbraPrefForwardReplyPrefixChar
- * <li> zimbraPrefFromAddress
- * <li> zimbraPrefFromDisplay
- * <li> zimbraPrefMailSignature
- * <li> zimbraPrefMailSignatureEnabled
- * <li> zimbraPrefMailSignatureStyle
- * <li> zimbraPrefReplyIncludeOriginalText
- * <li> zimbraPrefReplyToAddress
- * <li> zimbraPrefReplyToDisplay
- * <li> zimbraPrefReplyToEnabled
- * <li> zimbraPrefSaveToSent
- * <li> zimbraPrefSentMailFolder
- * <li> zimbraPrefUseDefaultIdentitySettings
- * <li> zimbraPrefWhenInFolderIds
- * <li> zimbraPrefWhenInFoldersEnabled
- * <li> zimbraPrefWhenSentToAddresses
- * <li> zimbraPrefWhenSentToEnabled
+ * <li> zmailPrefBccAddress
+ * <li> zmailPrefForwardIncludeOriginalText
+ * <li> zmailPrefForwardReplyFormat
+ * <li> zmailPrefForwardReplyPrefixChar
+ * <li> zmailPrefFromAddress
+ * <li> zmailPrefFromDisplay
+ * <li> zmailPrefMailSignature
+ * <li> zmailPrefMailSignatureEnabled
+ * <li> zmailPrefMailSignatureStyle
+ * <li> zmailPrefReplyIncludeOriginalText
+ * <li> zmailPrefReplyToAddress
+ * <li> zmailPrefReplyToDisplay
+ * <li> zmailPrefReplyToEnabled
+ * <li> zmailPrefSaveToSent
+ * <li> zmailPrefSentMailFolder
+ * <li> zmailPrefUseDefaultIdentitySettings
+ * <li> zmailPrefWhenInFolderIds
+ * <li> zmailPrefWhenInFoldersEnabled
+ * <li> zmailPrefWhenSentToAddresses
+ * <li> zmailPrefWhenSentToEnabled
  * </ul>
  */
 @XmlAccessorType(XmlAccessType.NONE)

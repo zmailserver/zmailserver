@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.account.type;
+package org.zmail.soap.account.type;
 
 import java.util.List;
 
@@ -27,9 +27,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlValue;
 
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.soap.type.SourceLookupOpt;
-import com.zimbra.soap.type.StoreLookupOpt;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.soap.type.SourceLookupOpt;
+import org.zmail.soap.type.StoreLookupOpt;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class SMIMEPublicCertsStoreSpec {

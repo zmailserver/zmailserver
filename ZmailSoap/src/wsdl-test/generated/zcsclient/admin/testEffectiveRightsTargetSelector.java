@@ -35,8 +35,8 @@ import generated.zcsclient.zm.testTargetType;
  * &lt;complexType name="effectiveRightsTargetSelector">
  *   &lt;simpleContent>
  *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
- *       &lt;attribute name="type" use="required" type="{urn:zimbra}targetType" />
- *       &lt;attribute name="by" type="{urn:zimbra}targetBy" />
+ *       &lt;attribute name="type" use="required" type="{urn:zmail}targetType" />
+ *       &lt;attribute name="by" type="{urn:zmail}targetBy" />
  *     &lt;/extension>
  *   &lt;/simpleContent>
  * &lt;/complexType>

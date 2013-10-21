@@ -13,24 +13,24 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.type;
+package org.zmail.soap.mail.type;
 
 import com.google.common.base.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 
-import com.zimbra.common.soap.MailConstants;
+import org.zmail.common.soap.MailConstants;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class FolderActionResult extends IdAndOperation {
 
     /**
-     * @zm-api-field-tag grantee-zimbra-id
-     * @zm-api-field-description Grantee Zimbra ID
+     * @zm-api-field-tag grantee-zmail-id
+     * @zm-api-field-description Grantee Zmail ID
      */
     @XmlAttribute(name=MailConstants.A_ZIMBRA_ID /* zid */, required=false)
-    private String zimbraId;
+    private String zmailId;
 
     /**
      * @zm-api-field-tag display-name
@@ -59,17 +59,17 @@ public class FolderActionResult extends IdAndOperation {
     }
 
 
-    public void setZimbraId(String zimbraId) { this.zimbraId = zimbraId; }
+    public void setZmailId(String zmailId) { this.zmailId = zmailId; }
     public void setDisplayName(String displayName) { this.displayName = displayName; }
     public void setAccessKey(String accessKey) { this.accessKey = accessKey; }
-    public String getZimbraId() { return zimbraId; }
+    public String getZmailId() { return zmailId; }
     public String getDisplayName() { return displayName; }
     public String getAccessKey() { return accessKey; }
 
     public Objects.ToStringHelper addToStringInfo(Objects.ToStringHelper helper) {
         helper = super.addToStringInfo(helper);
         return helper
-            .add("zimbraId", zimbraId)
+            .add("zmailId", zmailId)
             .add("displayName", displayName)
             .add("accessKey", accessKey);
     }

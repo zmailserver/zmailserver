@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.base;
+package org.zmail.soap.base;
 public interface ZimletInclude {
     public void setValue(String value);
     public String getValue();

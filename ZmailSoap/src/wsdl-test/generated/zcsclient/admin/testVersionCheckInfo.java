@@ -40,7 +40,7 @@ import javax.xml.bind.annotation.XmlType;
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence>
- *                   &lt;element name="update" type="{urn:zimbraAdmin}versionCheckUpdateInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *                   &lt;element name="update" type="{urn:zmailAdmin}versionCheckUpdateInfo" maxOccurs="unbounded" minOccurs="0"/>
  *                 &lt;/sequence>
  *               &lt;/restriction>
  *             &lt;/complexContent>
@@ -124,7 +124,7 @@ public class testVersionCheckInfo {
      *   &lt;complexContent>
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
-     *         &lt;element name="update" type="{urn:zimbraAdmin}versionCheckUpdateInfo" maxOccurs="unbounded" minOccurs="0"/>
+     *         &lt;element name="update" type="{urn:zmailAdmin}versionCheckUpdateInfo" maxOccurs="unbounded" minOccurs="0"/>
      *       &lt;/sequence>
      *     &lt;/restriction>
      *   &lt;/complexContent>

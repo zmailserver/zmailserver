@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.type;
+package org.zmail.soap.mail.type;
 
 import java.util.EnumSet;
 import java.util.Set;
@@ -24,8 +24,8 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.type.SearchSortBy;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.type.SearchSortBy;
 
 /*
   <search id="..." name="..." query="..." [types="..."] [sortBy="..."] l="{folder}"/>+

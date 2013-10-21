@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.admin;
+package org.zmail.soap.admin;
 
 import java.io.InputStream;
 import java.util.List;
@@ -27,12 +27,12 @@ import org.apache.log4j.Level;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import com.zimbra.soap.admin.message.GetAllConfigResponse;
-import com.zimbra.soap.admin.type.Attr;
+import org.zmail.soap.admin.message.GetAllConfigResponse;
+import org.zmail.soap.admin.type.Attr;
 
 /**
  * Unit test for {@link GetAllConfigResponse}.
- * com.zimbra.soap.admin.WSDLAdminTest.getAllConfigTest currently failing
+ * org.zmail.soap.admin.WSDLAdminTest.getAllConfigTest currently failing
  * due to what looks like metro issue : http://java.net/jira/browse/JAX_WS-807
  * This test uses a capture of the response which appeared to cause issues
  * to make sure that JAXB unmarshalling is ok.

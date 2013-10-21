@@ -34,8 +34,8 @@ import generated.zcsclient.zm.testAccountSelector;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="account" type="{urn:zimbra}accountSelector"/>
- *         &lt;element name="device" type="{urn:zimbraAdmin}deviceId" minOccurs="0"/>
+ *         &lt;element name="account" type="{urn:zmail}accountSelector"/>
+ *         &lt;element name="device" type="{urn:zmailAdmin}deviceId" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>

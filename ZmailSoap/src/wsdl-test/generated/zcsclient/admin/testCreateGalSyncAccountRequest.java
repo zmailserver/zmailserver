@@ -33,13 +33,13 @@ import generated.zcsclient.zm.testAccountSelector;
  * <pre>
  * &lt;complexType name="createGalSyncAccountRequest">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraAdmin}adminAttrsImpl">
+ *     &lt;extension base="{urn:zmailAdmin}adminAttrsImpl">
  *       &lt;sequence>
- *         &lt;element name="account" type="{urn:zimbra}accountSelector"/>
+ *         &lt;element name="account" type="{urn:zmail}accountSelector"/>
  *       &lt;/sequence>
  *       &lt;attribute name="name" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="domain" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="type" use="required" type="{urn:zimbraAdmin}galMode" />
+ *       &lt;attribute name="type" use="required" type="{urn:zmailAdmin}galMode" />
  *       &lt;attribute name="password" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="folder" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="server" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />

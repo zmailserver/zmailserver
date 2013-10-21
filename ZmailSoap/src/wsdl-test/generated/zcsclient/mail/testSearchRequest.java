@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="searchRequest">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraMail}mailSearchParams">
+ *     &lt;extension base="{urn:zmailMail}mailSearchParams">
  *       &lt;sequence>
  *       &lt;/sequence>
  *       &lt;attribute name="warmup" type="{http://www.w3.org/2001/XMLSchema}boolean" />

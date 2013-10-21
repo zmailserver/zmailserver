@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="cosInfoAttr">
  *   &lt;simpleContent>
- *     &lt;extension base="&lt;urn:zimbraAdmin>attr">
+ *     &lt;extension base="&lt;urn:zmailAdmin>attr">
  *       &lt;attribute name="c" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *       &lt;attribute name="pd" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *     &lt;/extension>

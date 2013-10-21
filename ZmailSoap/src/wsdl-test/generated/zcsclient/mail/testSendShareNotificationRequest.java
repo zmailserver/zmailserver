@@ -36,11 +36,11 @@ import generated.zcsclient.zm.testId;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="item" type="{urn:zimbra}id" minOccurs="0"/>
- *         &lt;element name="e" type="{urn:zimbraMail}emailAddrInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="item" type="{urn:zmail}id" minOccurs="0"/>
+ *         &lt;element name="e" type="{urn:zmailMail}emailAddrInfo" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="notes" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
- *       &lt;attribute name="action" type="{urn:zimbraMail}action" />
+ *       &lt;attribute name="action" type="{urn:zmailMail}action" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>

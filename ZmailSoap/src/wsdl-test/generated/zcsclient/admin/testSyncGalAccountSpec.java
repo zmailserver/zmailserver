@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="datasource" type="{urn:zimbraAdmin}syncGalAccountDataSourceSpec" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="datasource" type="{urn:zmailAdmin}syncGalAccountDataSourceSpec" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="id" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>

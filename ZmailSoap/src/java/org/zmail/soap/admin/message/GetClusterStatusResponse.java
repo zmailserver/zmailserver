@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -29,11 +29,11 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.zimbra.common.soap.ClusterConstants;
-import com.zimbra.soap.admin.type.ClusterServerInfo;
-import com.zimbra.soap.admin.type.ClusterServiceInfo;
+import org.zmail.common.soap.ClusterConstants;
+import org.zmail.soap.admin.type.ClusterServerInfo;
+import org.zmail.soap.admin.type.ClusterServiceInfo;
 
-import com.zimbra.soap.json.jackson.annotate.ZimbraJsonArrayForWrapper;
+import org.zmail.soap.json.jackson.annotate.ZmailJsonArrayForWrapper;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name=ClusterConstants.E_GET_CLUSTER_STATUS_RESPONSE)
@@ -49,7 +49,7 @@ public class GetClusterStatusResponse {
     /**
      * @zm-api-field-description Information on cluster servers
      */
-    @ZimbraJsonArrayForWrapper
+    @ZmailJsonArrayForWrapper
     @XmlElementWrapper(name=ClusterConstants.A_CLUSTER_SERVERS /* servers */, required=false)
     @XmlElement(name=ClusterConstants.A_CLUSTER_SERVER /* server */, required=false)
     private List<ClusterServerInfo> servers = Lists.newArrayList();
@@ -57,7 +57,7 @@ public class GetClusterStatusResponse {
     /**
      * @zm-api-field-description Information on cluster services
      */
-    @ZimbraJsonArrayForWrapper
+    @ZmailJsonArrayForWrapper
     @XmlElementWrapper(name=ClusterConstants.A_CLUSTER_SERVICES /* services */, required=false)
     @XmlElement(name=ClusterConstants.A_CLUSTER_SERVICE /* service */, required=false)
     private List<ClusterServiceInfo> services = Lists.newArrayList();

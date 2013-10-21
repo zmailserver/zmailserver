@@ -34,9 +34,9 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="exceptId" type="{urn:zimbraMail}instanceRecurIdInfo" minOccurs="0"/>
- *         &lt;element name="dur" type="{urn:zimbraMail}durationInfo" minOccurs="0"/>
- *         &lt;element name="recur" type="{urn:zimbraMail}recurrenceInfo" minOccurs="0"/>
+ *         &lt;element name="exceptId" type="{urn:zmailMail}instanceRecurIdInfo" minOccurs="0"/>
+ *         &lt;element name="dur" type="{urn:zmailMail}durationInfo" minOccurs="0"/>
+ *         &lt;element name="recur" type="{urn:zmailMail}recurrenceInfo" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="s" type="{http://www.w3.org/2001/XMLSchema}long" />
  *       &lt;attribute name="e" type="{http://www.w3.org/2001/XMLSchema}long" />

@@ -40,10 +40,10 @@ import org.w3c.dom.Element;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;choice maxOccurs="unbounded" minOccurs="0">
- *           &lt;element ref="{urn:zimbraMail}mp"/>
- *           &lt;element ref="{urn:zimbraMail}m"/>
- *           &lt;element ref="{urn:zimbraMail}cn"/>
- *           &lt;element ref="{urn:zimbraMail}doc"/>
+ *           &lt;element ref="{urn:zmailMail}mp"/>
+ *           &lt;element ref="{urn:zmailMail}m"/>
+ *           &lt;element ref="{urn:zmailMail}cn"/>
+ *           &lt;element ref="{urn:zmailMail}doc"/>
  *         &lt;/choice>
  *         &lt;any processContents='skip' namespace='##other' maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>

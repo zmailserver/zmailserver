@@ -33,7 +33,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.1
  * 
  */
-@WebServiceClient(name = "zcsAdminService", targetNamespace = "http://www.zimbra.com/wsdl/ZimbraService.wsdl", wsdlLocation = "file:/p4/coco/main/ZimbraSoap/build/classes/com/zimbra/soap/ZimbraService.wsdl")
+@WebServiceClient(name = "zcsAdminService", targetNamespace = "http://www.zmail.com/wsdl/ZmailService.wsdl", wsdlLocation = "file:/p4/coco/main/ZmailSoap/build/classes/org/zmail/soap/ZmailService.wsdl")
 public class ZcsAdminService
     extends Service
 {
@@ -46,9 +46,9 @@ public class ZcsAdminService
         try {
             URL baseUrl;
             baseUrl = generated.zcsclient.ws.service.ZcsAdminService.class.getResource(".");
-            url = new URL(baseUrl, "file:/p4/coco/main/ZimbraSoap/build/classes/com/zimbra/soap/ZimbraService.wsdl");
+            url = new URL(baseUrl, "file:/p4/coco/main/ZmailSoap/build/classes/org/zmail/soap/ZmailService.wsdl");
         } catch (MalformedURLException e) {
-            logger.warning("Failed to create URL for the wsdl Location: 'file:/p4/coco/main/ZimbraSoap/build/classes/com/zimbra/soap/ZimbraService.wsdl', retrying as a local file");
+            logger.warning("Failed to create URL for the wsdl Location: 'file:/p4/coco/main/ZmailSoap/build/classes/org/zmail/soap/ZmailService.wsdl', retrying as a local file");
             logger.warning(e.getMessage());
         }
         ZCSADMINSERVICE_WSDL_LOCATION = url;
@@ -59,7 +59,7 @@ public class ZcsAdminService
     }
 
     public ZcsAdminService() {
-        super(ZCSADMINSERVICE_WSDL_LOCATION, new QName("http://www.zimbra.com/wsdl/ZimbraService.wsdl", "zcsAdminService"));
+        super(ZCSADMINSERVICE_WSDL_LOCATION, new QName("http://www.zmail.com/wsdl/ZmailService.wsdl", "zcsAdminService"));
     }
 
     /**
@@ -69,7 +69,7 @@ public class ZcsAdminService
      */
     @WebEndpoint(name = "zcsAdminServicePort")
     public ZcsAdminPortType getZcsAdminServicePort() {
-        return super.getPort(new QName("http://www.zimbra.com/wsdl/ZimbraService.wsdl", "zcsAdminServicePort"), ZcsAdminPortType.class);
+        return super.getPort(new QName("http://www.zmail.com/wsdl/ZmailService.wsdl", "zcsAdminServicePort"), ZcsAdminPortType.class);
     }
 
     /**
@@ -81,7 +81,7 @@ public class ZcsAdminService
      */
     @WebEndpoint(name = "zcsAdminServicePort")
     public ZcsAdminPortType getZcsAdminServicePort(WebServiceFeature... features) {
-        return super.getPort(new QName("http://www.zimbra.com/wsdl/ZimbraService.wsdl", "zcsAdminServicePort"), ZcsAdminPortType.class, features);
+        return super.getPort(new QName("http://www.zmail.com/wsdl/ZmailService.wsdl", "zcsAdminServicePort"), ZcsAdminPortType.class, features);
     }
 
 }

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.message;
+package org.zmail.soap.mail.message;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -28,16 +28,16 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.soap.mail.type.CaldavImportStatusInfo;
-import com.zimbra.soap.mail.type.CalImportStatusInfo;
-import com.zimbra.soap.mail.type.GalImportStatusInfo;
-import com.zimbra.soap.mail.type.ImapImportStatusInfo;
-import com.zimbra.soap.mail.type.ImportStatusInfo;
-import com.zimbra.soap.mail.type.Pop3ImportStatusInfo;
-import com.zimbra.soap.mail.type.RssImportStatusInfo;
-import com.zimbra.soap.mail.type.UnknownImportStatusInfo;
-import com.zimbra.soap.mail.type.YabImportStatusInfo;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.soap.mail.type.CaldavImportStatusInfo;
+import org.zmail.soap.mail.type.CalImportStatusInfo;
+import org.zmail.soap.mail.type.GalImportStatusInfo;
+import org.zmail.soap.mail.type.ImapImportStatusInfo;
+import org.zmail.soap.mail.type.ImportStatusInfo;
+import org.zmail.soap.mail.type.Pop3ImportStatusInfo;
+import org.zmail.soap.mail.type.RssImportStatusInfo;
+import org.zmail.soap.mail.type.UnknownImportStatusInfo;
+import org.zmail.soap.mail.type.YabImportStatusInfo;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name=MailConstants.E_GET_IMPORT_STATUS_RESPONSE)

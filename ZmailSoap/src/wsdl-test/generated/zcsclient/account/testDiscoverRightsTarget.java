@@ -36,9 +36,9 @@ import generated.zcsclient.zm.testTargetType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="email" type="{urn:zimbraAccount}discoverRightsEmail" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="email" type="{urn:zmailAccount}discoverRightsEmail" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
- *       &lt;attribute name="type" use="required" type="{urn:zimbra}targetType" />
+ *       &lt;attribute name="type" use="required" type="{urn:zmail}targetType" />
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="name" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="d" type="{http://www.w3.org/2001/XMLSchema}string" />

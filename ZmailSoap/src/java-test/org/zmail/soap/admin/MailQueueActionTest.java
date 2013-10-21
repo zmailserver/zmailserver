@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.admin;
+package org.zmail.soap.admin;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -29,13 +29,13 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.soap.admin.message.MailQueueActionRequest;
-import com.zimbra.soap.admin.type.MailQueueAction;
-import com.zimbra.soap.admin.type.MailQueueWithAction;
-import com.zimbra.soap.admin.type.QueueQuery;
-import com.zimbra.soap.admin.type.QueueQueryField;
-import com.zimbra.soap.admin.type.ServerWithQueueAction;
-import com.zimbra.soap.admin.type.ValueAttrib;
+import org.zmail.soap.admin.message.MailQueueActionRequest;
+import org.zmail.soap.admin.type.MailQueueAction;
+import org.zmail.soap.admin.type.MailQueueWithAction;
+import org.zmail.soap.admin.type.QueueQuery;
+import org.zmail.soap.admin.type.QueueQueryField;
+import org.zmail.soap.admin.type.ServerWithQueueAction;
+import org.zmail.soap.admin.type.ValueAttrib;
 
 /**
  * Unit test for {@link MailQueueActionRequest}.

@@ -35,7 +35,7 @@ import generated.zcsclient.zm.testAccountSelector;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;all>
  *         &lt;element name="authToken" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="account" type="{urn:zimbra}accountSelector" minOccurs="0"/>
+ *         &lt;element name="account" type="{urn:zmail}accountSelector" minOccurs="0"/>
  *         &lt;element name="virtualHost" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/all>
  *       &lt;attribute name="persistAuthTokenCookie" type="{http://www.w3.org/2001/XMLSchema}boolean" />

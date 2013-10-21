@@ -32,10 +32,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="hostname" type="{urn:zimbraAdmin}hostName" minOccurs="0"/>
- *         &lt;element name="stats" type="{urn:zimbraAdmin}statsSpec" minOccurs="0"/>
- *         &lt;element name="startTime" type="{urn:zimbraAdmin}timeAttr" minOccurs="0"/>
- *         &lt;element name="endTime" type="{urn:zimbraAdmin}timeAttr" minOccurs="0"/>
+ *         &lt;element name="hostname" type="{urn:zmailAdmin}hostName" minOccurs="0"/>
+ *         &lt;element name="stats" type="{urn:zmailAdmin}statsSpec" minOccurs="0"/>
+ *         &lt;element name="startTime" type="{urn:zmailAdmin}timeAttr" minOccurs="0"/>
+ *         &lt;element name="endTime" type="{urn:zmailAdmin}timeAttr" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>

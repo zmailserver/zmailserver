@@ -46,7 +46,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;attribute name="importOnly" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *       &lt;attribute name="host" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="port" type="{http://www.w3.org/2001/XMLSchema}int" />
- *       &lt;attribute name="connectionType" type="{urn:zimbraMail}mdsConnectionType" />
+ *       &lt;attribute name="connectionType" type="{urn:zmailMail}mdsConnectionType" />
  *       &lt;attribute name="username" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="password" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="pollingInterval" type="{http://www.w3.org/2001/XMLSchema}string" />

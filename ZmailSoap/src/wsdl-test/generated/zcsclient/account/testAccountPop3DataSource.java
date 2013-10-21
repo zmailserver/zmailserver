@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="accountPop3DataSource">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraAccount}accountDataSource">
+ *     &lt;extension base="{urn:zmailAccount}accountDataSource">
  *       &lt;all>
  *       &lt;/all>
  *       &lt;attribute name="leaveOnServer" type="{http://www.w3.org/2001/XMLSchema}boolean" />

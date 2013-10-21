@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.message;
+package org.zmail.soap.admin.message;
 
 import java.util.List;
 
@@ -28,10 +28,10 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.soap.admin.type.EffectiveRightsTargetSelector;
-import com.zimbra.soap.admin.type.GranteeSelector;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.soap.admin.type.EffectiveRightsTargetSelector;
+import org.zmail.soap.admin.type.GranteeSelector;
 
 /**
  * @zm-api-command-auth-required true
@@ -62,9 +62,9 @@ import com.zimbra.soap.admin.type.GranteeSelector;
  *         &lt;right n="renameAccount"/>
  *         &lt;right n="deleteAccount"/>
  *         &lt;setAttrs>
- *           &lt;a n="zimbraMailQuota" min="100000000"/>
- *           &lt;a n="zimbraMailStatus"/>
- *           &lt;a n="zimbraFeatureMailEnabled" values="TRUE,FALSE"/>
+ *           &lt;a n="zmailMailQuota" min="100000000"/>
+ *           &lt;a n="zmailMailStatus"/>
+ *           &lt;a n="zmailFeatureMailEnabled" values="TRUE,FALSE"/>
  *           ...
  *         &lt;/setAttrs>
  *         &lt;getAttrs>

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.mail.message;
+package org.zmail.soap.mail.message;
 
 import com.google.common.base.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlValue;
 
-import com.zimbra.common.soap.MailConstants;
+import org.zmail.common.soap.MailConstants;
 
 /**
  * @zm-api-command-auth-required true
@@ -39,7 +39,7 @@ public class CheckSpellingRequest {
     /**
      * @zm-api-field-tag aspell-dictionary-name
      * @zm-api-field-description The optional name of the <b>aspell</b> dictionary that will be used to check spelling.
-     * If not specified, the the dictionary will be either <b>zimbraPrefSpellDictionary</b> or the one for the
+     * If not specified, the the dictionary will be either <b>zmailPrefSpellDictionary</b> or the one for the
      * account's locale, in that order.
      */
     @XmlAttribute(name=MailConstants.A_DICTIONARY /* dictionary */, required=false)
@@ -49,7 +49,7 @@ public class CheckSpellingRequest {
     /**
      * @zm-api-field-tag comma-sep-ignore-words
      * @zm-api-field-description Comma-separated list of words to ignore just for this request.  These words are added
-     * to the user's personal dictionary of ignore words stored as <b>zimbraPrefSpellIgnoreWord</b>.
+     * to the user's personal dictionary of ignore words stored as <b>zmailPrefSpellIgnoreWord</b>.
      */
     @XmlAttribute(name=MailConstants.A_IGNORE /* ignore */, required=false)
     private final String ignoreList;

@@ -13,11 +13,11 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.adminext.message;
+package org.zmail.soap.adminext.message;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.AdminExtConstants;
+import org.zmail.common.soap.AdminExtConstants;
 
 @XmlRootElement(name=AdminExtConstants.E_PURGE_BULK_IMAP_IMPORT_TASKS_RESPONSE)
 public class PurgeBulkIMAPImportTasksResponse {

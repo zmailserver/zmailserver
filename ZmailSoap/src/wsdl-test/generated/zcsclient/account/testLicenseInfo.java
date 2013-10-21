@@ -36,9 +36,9 @@ import generated.zcsclient.zm.testLicenseStatus;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="attr" type="{urn:zimbraAccount}licenseAttr" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="attr" type="{urn:zmailAccount}licenseAttr" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
- *       &lt;attribute name="status" use="required" type="{urn:zimbra}licenseStatus" />
+ *       &lt;attribute name="status" use="required" type="{urn:zmail}licenseStatus" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>

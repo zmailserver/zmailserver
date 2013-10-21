@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.voice.message;
+package org.zmail.soap.voice.message;
 
 import com.google.common.base.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -21,10 +21,10 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.VoiceConstants;
-import com.zimbra.soap.voice.type.VoiceMsgActionInfo;
-import com.zimbra.soap.json.jackson.annotate.ZimbraUniqueElement;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.VoiceConstants;
+import org.zmail.soap.voice.type.VoiceMsgActionInfo;
+import org.zmail.soap.json.jackson.annotate.ZmailUniqueElement;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name=VoiceConstants.E_VOICE_MSG_ACTION_RESPONSE)
@@ -34,7 +34,7 @@ public class VoiceMsgActionResponse {
      * @zm-api-field-description Information on action performed
      */
     @XmlElement(name=MailConstants.E_ACTION /* action */, required=true)
-    @ZimbraUniqueElement
+    @ZmailUniqueElement
     private VoiceMsgActionInfo action;
 
     public VoiceMsgActionResponse() {

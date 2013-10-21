@@ -37,11 +37,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{urn:zimbraMail}meta" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element ref="{urn:zmailMail}meta" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="su" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;choice maxOccurs="unbounded" minOccurs="0">
- *           &lt;element name="chat" type="{urn:zimbraMail}chatMessageInfo"/>
- *           &lt;element name="m" type="{urn:zimbraMail}messageInfo"/>
+ *           &lt;element name="chat" type="{urn:zmailMail}chatMessageInfo"/>
+ *           &lt;element name="m" type="{urn:zmailMail}messageInfo"/>
  *         &lt;/choice>
  *       &lt;/sequence>
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}string" />

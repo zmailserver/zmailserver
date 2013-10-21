@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap.admin.type;
+package org.zmail.soap.admin.type;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -26,8 +26,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.soap.type.NamedElement;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.soap.type.NamedElement;
 
 // XmlRootElement is needed for classes referenced via @XmlElementRef
 @XmlRootElement(name=AdminConstants.E_VALUES)

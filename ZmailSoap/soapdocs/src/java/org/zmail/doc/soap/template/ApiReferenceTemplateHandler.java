@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.doc.soap.template;
+package org.zmail.doc.soap.template;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,17 +23,17 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.google.common.collect.Maps;
-import com.zimbra.doc.soap.Root;
-import com.zimbra.doc.soap.Command;
-import com.zimbra.doc.soap.Service;
-import com.zimbra.doc.soap.SoapDocException;
+import org.zmail.doc.soap.Root;
+import org.zmail.doc.soap.Command;
+import org.zmail.doc.soap.Service;
+import org.zmail.doc.soap.SoapDocException;
 
 import freemarker.ext.beans.BeansWrapper;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 
 /**
- * This class represents a template handler for generating the Zimbra SOAP API Reference (in HTML).
+ * This class represents a template handler for generating the Zmail SOAP API Reference (in HTML).
  *
  */
 public class ApiReferenceTemplateHandler extends TemplateHandler {

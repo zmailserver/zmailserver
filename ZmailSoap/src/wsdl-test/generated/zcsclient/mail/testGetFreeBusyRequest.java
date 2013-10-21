@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="usr" type="{urn:zimbraMail}freeBusyUserSpec" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="usr" type="{urn:zmailMail}freeBusyUserSpec" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="s" use="required" type="{http://www.w3.org/2001/XMLSchema}long" />
  *       &lt;attribute name="e" use="required" type="{http://www.w3.org/2001/XMLSchema}long" />

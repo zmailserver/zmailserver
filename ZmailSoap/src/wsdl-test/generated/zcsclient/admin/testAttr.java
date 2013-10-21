@@ -32,7 +32,7 @@ import generated.zcsclient.zm.testKeyValuePair;
  * <pre>
  * &lt;complexType name="attr">
  *   &lt;simpleContent>
- *     &lt;extension base="&lt;urn:zimbra>keyValuePair">
+ *     &lt;extension base="&lt;urn:zmail>keyValuePair">
  *     &lt;/extension>
  *   &lt;/simpleContent>
  * &lt;/complexType>

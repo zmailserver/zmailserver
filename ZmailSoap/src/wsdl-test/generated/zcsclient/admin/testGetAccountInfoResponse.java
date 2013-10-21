@@ -36,8 +36,8 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element ref="{urn:zimbraAdmin}a" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="cos" type="{urn:zimbraAdmin}cosInfo" minOccurs="0"/>
+ *         &lt;element ref="{urn:zmailAdmin}a" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="cos" type="{urn:zmailAdmin}cosInfo" minOccurs="0"/>
  *         &lt;element name="soapURL" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="adminSoapURL" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="publicMailURL" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>

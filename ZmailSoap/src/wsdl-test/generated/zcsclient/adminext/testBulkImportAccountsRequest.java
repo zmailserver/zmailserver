@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="bulkImportAccountsRequest">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraAdminExt}attrsImpl">
+ *     &lt;extension base="{urn:zmailAdminExt}attrsImpl">
  *       &lt;sequence>
  *         &lt;element name="createDomains" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="SMTPHost" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>

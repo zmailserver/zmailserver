@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap.json.jackson.annotate;
+package org.zmail.soap.json.jackson.annotate;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -21,10 +21,10 @@ import java.lang.annotation.Target;
 import org.codehaus.jackson.annotate.JacksonAnnotation;
 
 /**
- * <p>Marker annotation used in Zimbra JAXB classes to affect how they are serialized to Zimbra style JSON.</p>
- * The {@code ZimbraKeyValuePairs} in the following code snippet:
+ * <p>Marker annotation used in Zmail JAXB classes to affect how they are serialized to Zmail style JSON.</p>
+ * The {@code ZmailKeyValuePairs} in the following code snippet:
  * <pre>
- *     @ZimbraKeyValuePairs
+ *     @ZmailKeyValuePairs
  *     @XmlElement(name=Element.XMLElement.E_ATTRIBUTE, required=false)
  *     private final List<KeyValuePair> attrList;
  * </pre>
@@ -32,7 +32,7 @@ import org.codehaus.jackson.annotate.JacksonAnnotation;
  * <pre>
  * "_attrs": {
  *         "mail": "fun@example.test",
- *         "zimbraMailStatus": "enabled"
+ *         "zmailMailStatus": "enabled"
  *       }
  * </pre>
  * instead of:
@@ -43,7 +43,7 @@ import org.codehaus.jackson.annotate.JacksonAnnotation;
  *            "_content": "fun@example.test"
  *          },
  *          {
- *            "n": "zimbraMailStatus",
+ *            "n": "zmailMailStatus",
  *            "_content": "enabled"
  *          }
  *      ]
@@ -52,7 +52,7 @@ import org.codehaus.jackson.annotate.JacksonAnnotation;
 @Target({ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 @JacksonAnnotation
-public @interface ZimbraKeyValuePairs
+public @interface ZmailKeyValuePairs
 {
     /**
      * Optional argument that defines whether this annotation is active or not. The only use for value 'false' is

@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="dataSourceNameOrId">
  *   &lt;complexContent>
- *     &lt;extension base="{urn:zimbraMail}nameOrId">
+ *     &lt;extension base="{urn:zmailMail}nameOrId">
  *       &lt;sequence>
  *       &lt;/sequence>
  *     &lt;/extension>
