@@ -325,12 +325,6 @@
             <exclude name="**/*.ftl"/>
         </fileset>
     </copy>
-    <java classname="org.zmail.doc.soap.changelog.SoapApiChangeLog" classpathref="soapdocs.class.path" fork="true" failonerror="true">
-        <arg line="--output-dir ${soapapi.changelog.output.dir}"/>
-        <arg line="--templates-dir ${soapdocs.templates.dir}"/>
-        <arg line="--baseline-apidesc ${soapdocs.apidesc.baseline.file}"/>
-        <arg line="--current-apidesc ${soapdocs.apidesc.file}"/>
-    </java>
   </target>
 
   <target name="package-soap-api-changelog" depends="generate-soap-api-changelog">

@@ -1334,12 +1334,7 @@ if (ext == null) ext = "";
 				<exclude name="**/*.ftl"/>
 			</fileset>
 		</copy>
-		<java classname="org.zmail.jsapi.JsChangeLogUtil" classpathref="class.path" fork="true" failonerror="true">
-			<arg line="-output ${build.jsapi-changelog.dir}"/>
-		    <arg line="-template ${jsdoctoolkit.dir}/templates/zmail-jsapi-changelog"/>
-		    <arg line="-baseline.inventory ${docs.dir}/jsapi/jsapi-inventory.zip"/>
-		    <arg line="-current.inventory ${jsapi-inventory.file}"/>
-		</java>
+
 	</target>
 		
 	<target name="package-jsapi-zmail-doc" depends="generate-jsapi-zmail-doc">
